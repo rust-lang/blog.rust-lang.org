@@ -5,7 +5,7 @@
 
     <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="description" content="{{ site.description }}">
-
+    <link rel="alternate" type="application/rss+xml" title="The Rust Programming Language Blog" href="http://blog.rust-lang.org/feed.xml" />
     <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 </head>
