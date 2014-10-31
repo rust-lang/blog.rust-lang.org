@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Stability as a Deliverable"
-author: Niko Matsakis and Aaron Turon
+author: Aaron Turon and Niko Matsakis
 ---
 
 The upcoming Rust 1.0 release means
@@ -74,7 +74,7 @@ to publish RFCs laying out the fine points. The rest of this post will
 cover some of the most important details and potential worries about
 this plan.
 
-#### What features will be stable for 1.0?
+### What features will be stable for 1.0?
 
 We've done an analysis of the current Rust ecosystem to determine the
 most used crates and the feature gates they depend on, and used this
@@ -115,7 +115,7 @@ authors to help them migrate away from syntax extensions prior to
 stabilizing syntax extensions as an immediate priority after the 1.0
 release.
 
-#### What parts of the standard library will be stable for 1.0?
+### What parts of the standard library will be stable for 1.0?
 
 We have been steadily stabilizing the standard library, and have a
 plan for nearly *all* of the modules it provides. The expectation is
@@ -123,7 +123,7 @@ that the vast majority of functionality in the standard library will
 be stable for 1.0. We have also been migrating more experimental APIs
 out of the standard library and into their own crates.
 
-#### What about stability attributes outside of the standard library?
+### What about stability attributes outside of the standard library?
 
 Library authors can continue to use stability attributes as they do
 today to mark their own stability promises. These attributes are not
@@ -137,7 +137,7 @@ Library authors should follow [semver](http://semver.org/); we will
 soon publish an RFC defining how library stability attributes and
 semver interact.
 
-#### Why not allow opting in to instability in the stable release?
+### Why not allow opting in to instability in the stable release?
 
 There are three problems with allowing unstable features on the
 stable release.
@@ -165,7 +165,7 @@ It's not realistic or necessary for the entire ecosystem to flawlessly
 deal with these problems. Instead, we will enforce that stable means
 stable: the stable channel provides only stable features.
 
-#### Won't this split the ecosystem? Will everyone use nightly at 1.0?
+### Won't this split the ecosystem? Will everyone use nightly at 1.0?
 
 It doesn't split the ecosystem: it creates a subset. Programmers
 working with the nightly release channel can freely use libraries that
@@ -178,7 +178,7 @@ existing ecosystem will fit into the "stable" category, and thus
 newcomers to Rust will immediately be able to use most libraries on
 the stable 1.0 release.
 
-#### What are the stability caveats?
+### What are the stability caveats?
 
 We reserve the right to fix compiler bugs, patch safety holes, and
 change type inference in ways that may occasionally require new type
@@ -188,7 +188,7 @@ headaches when upgrading Rust.
 The library API caveats will be laid out in a forthcoming RFC, but are
 similarly designed to minimize upgrade pain in practice.
 
-#### Will Rust and its ecosystem continue their rapid development?
+### Will Rust and its ecosystem continue their rapid development?
 
 Yes! Because new work can land on master at any time, the train model
 doesn't slow down the pace of development or introduce artificial
