@@ -8,4 +8,15 @@
     <link rel="alternate" type="application/rss+xml" title="The Rust Programming Language Blog" href="http://blog.rust-lang.org/feed.xml" />
     <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@{{ site.twitter_username }}" />
+    <meta name="twitter:title" content="{{ page.title }}" />
+    {% if page.description %}
+    <meta name="twitter:description" content="{{ page.description }}" />
+    {% else %}
+    <meta name="twitter:description" content="{{ site.description }}" />
+    {% endif %}
+    <meta name="twitter:url" content="{{ site.root }}{{ page.url }}">
+
 </head>
