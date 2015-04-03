@@ -57,12 +57,9 @@ stable -- with regular, frequent promotions from one channel to the
 next.
 
 New features and new APIs will be flagged as unstable via feature gates
-and
-[stability attributes](http://doc.rust-lang.org/reference.html#stability),
-respectively.
-Unstable features and standard library APIs will only be available on
-the nightly branch, and only if you explicitly "opt in" to the
-instability.
+and stability attributes respectively. Unstable features and standard
+library APIs will only be available on the nightly branch, and only if you
+explicitly "opt in" to the instability.
 
 The beta and stable releases, on the other hand, will only include
 features and APIs deemed *stable*, which represents a commitment to
