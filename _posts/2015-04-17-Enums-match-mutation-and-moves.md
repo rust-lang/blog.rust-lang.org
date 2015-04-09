@@ -65,6 +65,12 @@ pub enum PieceShape {
 }
 ```
 
+(In the above, the `cfg` line is how one denotes "conditional
+compilation" in Rust; it indicates that the `enum` definition beneath
+it should only be compiled if one passes `--cfg alternative` to the
+invocation of `rustc`; it is being used above as a quick-and-dirty way
+to avoid causing a compile-time error with a duplicate definition.)
+
 These enums, where each variant is just a name with an associated
 (implicitly- or explicitly-assigned) integer value, are known as
 "C-style enums" in Rust parlance, since the syntax largely matches
