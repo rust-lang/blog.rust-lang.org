@@ -8,7 +8,7 @@ description: "Rust's vision for concurrency"
 The Rust project was initiated to solve two thorny problems:
 
 * How do you do safe systems programming?
-* How do you do make concurrency painless?
+* How do you make concurrency painless?
 
 Initially these problems seemed orthogonal, but to our amazement, the
 solution turned out to be identical: **the same tools that make Rust
