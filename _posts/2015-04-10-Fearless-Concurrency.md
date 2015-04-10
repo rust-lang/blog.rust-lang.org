@@ -10,9 +10,9 @@ The Rust project was initiated to solve two thorny problems:
 * How do you do safe systems programming?
 * How do you do make concurrency painless?
 
-Initially these problems seemed orthogonal, but to our amazement, they
-turned out to really be the same: **the same tools that make Rust safe
-also help you tackle concurrency head-on**.
+Initially these problems seemed orthogonal, but to our amazement, the
+solution turned out to be identical: **the same tools that make Rust
+safe also help you tackle concurrency head-on**.
 
 Memory safety bugs and concurrency bugs often come down to code
 accessing data when it shouldn't. Rust's secret weapon is *ownership*,
@@ -25,15 +25,14 @@ your mistakes.
 
 For concurrency, this means you can choose from a wide variety of
 paradigms (message passing, shared state, lock-free, purely
-functional), and Rust's ownership will help you avoid the associated
-pitfalls.
+functional), and Rust will help you avoid common pitfalls.
 
 Here's a taste of concurrency in Rust:
 
 * A [channel][mpsc] transfers ownership of the messages sent along it,
   so you can send a pointer from one thread to another without fear of
-  the threads later racing for access through that pointer. **Channels
-  enforce thread isolation.**
+  the threads later racing for access through that pointer. **Rust's
+  channels enforce thread isolation.**
 
 * A [lock][mutex] knows what data it protects, and Rust guarantees
   that the data can only be accessed when the lock is held. State is
@@ -53,9 +52,9 @@ Here's a taste of concurrency in Rust:
 All of these benefits come out of Rust's ownership model, and in fact
 locks, channels, lock-fee data structures and so on are defined in
 libraries, not the core language. That means that Rust's approach to
-concurrency is *open ended*: new libraries can embrace new paradigms and
-catch new bugs, just by adding  APIs that take advantage of Rust's
-general ownership features.
+concurrency is *open ended*: new libraries can embrace new paradigms
+and catch new bugs, just by adding APIs that use Rust's ownership
+features.
 
 The goal of this post is to give you some idea of how that's done.
 
@@ -88,10 +87,10 @@ fn make_vec() {
 ```
 
 The scope that creates a value also initially owns it. In this case,
-the `make_vec` function's body (the part within `{` and `}`) is the
-owning scope for `vec`. The owner can do anything it likes with `vec`,
-including mutating it by pushing. At the end of the scope, `vec` is
-still owned, so it is automatically deallocated.
+the body of `make_vec` is the owning scope for `vec`. The owner can do
+anything it likes with `vec`, including mutating it by pushing. At the
+end of the scope, `vec` is still owned, so it is automatically
+deallocated.
 
 Things get more interesting if the vector is returned or passed around:
 
@@ -159,7 +158,7 @@ Disaster averted.
 
 ### Background: borrowing
 
-The story so far isn't very satisfying, because it's not our intent
+The story so far isn't totally satisfying, because it's not our intent
 for `print_vec` to destroy the vector it was given. What we really
 want is to grant `print_vec` *temporary* access to the vector, and
 then continue using the vector afterwards.
@@ -201,12 +200,12 @@ call to `print_vec` returns (and its lease on `vec` has expired).
 Each reference is valid for a limited scope, which the compiler will
 automatically determine. References come in two flavors:
 
-* Immutable references `&T`, which allow aliasing but not mutation.
+* Immutable references `&T`, which allow sharing but not mutation.
   There can be multiple `&T` references to the same value
   simultaneously, but the value cannot be mutated while those
   references are active.
 
-* Mutable references `&mut T`, which allow mutation but not aliasing.
+* Mutable references `&mut T`, which allow mutation but not sharing.
   If there is an `&mut T` reference to a value, there can be no other
   active references at that time, but the value can be mutated.
 
@@ -227,7 +226,7 @@ This function iterates over each element of one vector, pushing it
 onto another. The iterator keeps a pointer into the vector at the
 current and final positions, stepping one toward the other.
 
-Suppose we called this function with the same vector for both arguments:
+What if we called this function with the same vector for both arguments?
 
 ```rust
 push_all(&vec, &mut vec)
@@ -237,7 +236,7 @@ This would spell disaster! As we're pushing elements onto the vector,
 it will occasionally need to resize, allocating a new hunk of memory
 and copying its elements over to it. The iterator would be left with a
 dangling pointer into the old memory, leading to memory unsafety (with
-attendant segfaults and worse).
+attendant segfaults or worse).
 
 Fortunately, Rust ensures that **whenever a mutable borrow is active,
 no other borrows of the object are active**, producing the message:
@@ -318,14 +317,14 @@ disastrous results -- so easy that many eschew the style altogether.
 
 Rust's take is that:
 
-1. Shared-state concurrency is a fundamental programming style, needed
-for systems code, for maximal performance, and for implementing
-other styles of concurrency.
+1. Shared-state concurrency is nevertheless a fundamental programming
+style, needed for systems code, for maximal performance, and for
+implementing other styles of concurrency.
 
 2. The problem is really about *accidentally* shared state.
 
 Rust aims to give you the tools to conquer shared-state concurrency
-directly.
+directly, whether you're using locking or lock-free techniques.
 
 In Rust, threads are "isolated" from each other automatically, due to
 ownership. Writes can only happen when the thread has mutable access,
@@ -391,10 +390,10 @@ There are two key ingredients here:
 
 * The lock is only released when the `MutexGuard` is destroyed.
 
-The result is that **Rust will not let you access lock-protected data
-except when holding the lock**. Any attempt to do otherwise will
-generate a compiler error. For example, consider the following buggy
-"refactoring":
+The result is that **Rust enforces locking discipline: it will not let
+you access lock-protected data except when holding the lock**. Any
+attempt to do otherwise will generate a compiler error. For example,
+consider the following buggy "refactoring":
 
 ```rust
 fn use_lock(mutex: &Mutex<Vec<i32>>) {
@@ -438,15 +437,14 @@ reference counting:
 * `Arc<T>` provides reference counting via *atomic* operations. It is
   thread safe.
 
-The hardware atomic operations used by `Arc` are generally more
-expensive than the vanilla operations used by `Rc`, so it's
-advantageous to use `Rc` rather than `Arc` wherever possible. On the
-other hand, it's critical that an `Rc<T>` never migrate from one
-thread to another, because that could lead to race conditions that
-corrupt the count.
+The hardware atomic operations used by `Arc` are more expensive than
+the vanilla operations used by `Rc`, so it's advantageous to use `Rc`
+rather than `Arc`. On the other hand, it's critical that an `Rc<T>`
+never migrate from one thread to another, because that could lead to
+race conditions that corrupt the count.
 
 Usually, the only recourse is careful documentation; most languages
-make no *actual* distinction between thread-safe and thread-unsafe
+make no *semantic* distinction between thread-safe and thread-unsafe
 types.
 
 In Rust, the world is divided into two kinds of data types: those that
@@ -465,7 +463,7 @@ We already saw that the `Channel` and `Mutex` APIs work only with
 boundaries, they are also the point of enforcement for `Send`.
 
 Putting this all together, Rust programmers can reap the benefits of
-`Rc` and other thread-unsafe types with confidence, knowing that if
+`Rc` and other thread-*unsafe* types with confidence, knowing that if
 they ever do accidentally try to send one to another thread, the Rust
 compiler will say:
 
@@ -560,7 +558,7 @@ confident that the compiler will check for sufficient synchronization.
 ### Data races
 
 At this point, we've seen enough to venture a strong statement about
-Rust's approach to concurrency: the compiler prevents all *data races*.
+Rust's approach to concurrency: **the compiler prevents all *data races*.**
 
 > A data race is any unsynchronized, concurrent access to data
 > involving a write.
@@ -579,8 +577,13 @@ access to the relevant locations at the same time **guarantees
 atomicity of updates to them**, since no other thread could possibly
 have concurrent read access.
 
-In short, ownership and borrowing give rise to *two* key value
-propositions for Rust:
+It's worth pausing for a moment to think about this guarantee in the
+broader landscape of languages. Many languages provide memory safety
+through garbage collection. But garbage collection doesn't give you
+any help in preventing data races.
+
+Rust instead uses ownership and borrowing to provide its two key value
+propositions:
 
 * Memory safety without garbage collection.
 * Concurrency without data races.
