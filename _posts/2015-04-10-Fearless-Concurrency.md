@@ -341,7 +341,7 @@ Here is a simplified version (the [standard library's][mutex]
 is more ergonomic):
 
 ~~~~rust
-// create a new mutes
+// create a new mutex
 fn mutex<T: Send>(t: T) -> Mutex<T>;
 
 // acquire the lock
