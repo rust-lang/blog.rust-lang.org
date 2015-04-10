@@ -2,6 +2,7 @@
 layout: post
 title: "Fearless Concurrency with Rust"
 author: Aaron Turon
+description: "Rust's vision for concurrency"
 ---
 
 The Rust project was initiated to solve two thorny problems:
