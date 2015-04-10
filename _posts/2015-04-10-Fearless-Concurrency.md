@@ -4,39 +4,57 @@ title: "Fearless Concurrency with Rust"
 author: Aaron Turon
 ---
 
-Rust solves an apparent contradiction: safe systems programming.  Its
-secret weapon is *ownership*, a concept ubiquitous in systems
-programming that Rust's compiler statically checks for you.  The
-result: you can program without a garbage collector *and* without fear
-of segfaults, because Rust will catch your mistakes.
+The Rust project was initiated to solve two thorny problems:
 
-**The same tools that make Rust safe also help tackle concurrency
-head-on.** After all, use-after-free bugs and synchronization bugs
-both happen when code accesses data it shouldn't -- and as we'll
-see, ownership is all about access control.
+* How do you do safe systems programming?
+* How do you do make concurrency painless?
+
+Initially these problems seemed orthogonal, but to our amazement, they
+turned out to really be the same: **the same tools that make Rust safe
+also help you tackle concurrency head-on**.
+
+Memory safety bugs and concurrency bugs often come down to code
+accessing data when it shouldn't. Rust's secret weapon is *ownership*,
+a discipline for access control that systems programmers try to
+follow, but that Rust's compiler checks statically for you.
+
+For memory safety, this means you can program without a garbage
+collector *and* without fear of segfaults, because Rust will catch
+your mistakes.
+
+For concurrency, this means you can choose from a wide variety of
+paradigms (message passing, shared state, lock-free, purely
+functional), and Rust's ownership will help you avoid the associated
+pitfalls.
 
 Here's a taste of concurrency in Rust:
 
 * A [channel][mpsc] transfers ownership of the messages sent along it,
   so you can send a pointer from one thread to another without fear of
-  the threads later racing for access through that pointer.
+  the threads later racing for access through that pointer. **Channels
+  enforce thread isolation.**
 
 * A [lock][mutex] knows what data it protects, and Rust guarantees
-  that the data can only be accessed when the lock is held.
+  that the data can only be accessed when the lock is held. State is
+  never accidentally shared. **"Lock data, not code" is enforced in
+  Rust.**
 
 * Every data type knows whether it can safely be [sent][send] between
   or [accessed][sync] by multiple threads, and Rust enforces this safe
-  usage; there are no data races.
+  usage; there are no data races, even for lock-free data structures.
+  **Thread safety isn't just documentation; it's law.**
 
 * You can even [share stack frames][scoped] between threads, and Rust
   will statically ensure that the frames remain active while other
-  threads are using them.
+  threads are using them. **Even the most daring forms of sharing are
+  guaranteed safe in Rust**.
 
-None of the above benefits require any special knowledge to be built
-in to the compiler. Locks, channels, semaphores, atomic operations and
-so on are all *libraries* that take advantage of Rust's existing
-features to provide the static checking underlying these strong
-guarantees.
+All of these benefits come out of Rust's ownership model, and in fact
+locks, channels, lock-fee data structures and so on are defined in
+libraries, not the core language. That means that Rust's approach to
+concurrency is *open ended*: new libraries can embrace new paradigms and
+catch new bugs, just by adding  APIs that take advantage of Rust's
+general ownership features.
 
 The goal of this post is to give you some idea of how that's done.
 
