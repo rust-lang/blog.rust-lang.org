@@ -491,7 +491,7 @@ fn parent() {
 ~~~~
 
 The child thread take a reference to `vec`, which in turn resides in
-the stack frame of `parent`. When `parent` exists, the stack frame is
+the stack frame of `parent`. When `parent` exits, the stack frame is
 popped, but the child thread is none the wiser. Oops!
 
 To rule out such memory unsafety, Rust's basic thread spawning API
