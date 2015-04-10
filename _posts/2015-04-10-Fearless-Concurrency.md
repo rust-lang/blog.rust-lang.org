@@ -50,7 +50,7 @@ Here's a taste of concurrency in Rust:
   guaranteed safe in Rust**.
 
 All of these benefits come out of Rust's ownership model, and in fact
-locks, channels, lock-fee data structures and so on are defined in
+locks, channels, lock-free data structures and so on are defined in
 libraries, not the core language. That means that Rust's approach to
 concurrency is *open ended*: new libraries can embrace new paradigms
 and catch new bugs, just by adding APIs that use Rust's ownership
