@@ -547,7 +547,7 @@ fn parent() {
     // fill the vector
     let guard = thread::scoped(|| {
         print_vec(&vec)
-    })
+    });
     // guard destroyed here, implicitly joining
 }
 ~~~~
