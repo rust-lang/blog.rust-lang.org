@@ -77,14 +77,14 @@ destroyed at that point.
 Let's look at some simple examples. Suppose we create a vector and
 push some elements onto it:
 
-```rust
+~~~~rust
 fn make_vec() {
     let mut vec = Vec::new(); // owned by make_vec's scope
     vec.push(0);
     vec.push(1);
     // scope ends, `vec` is destroyed
 }
-```
+~~~~
 
 The scope that creates a value also initially owns it. In this case,
 the body of `make_vec` is the owning scope for `vec`. The owner can do
@@ -94,7 +94,7 @@ deallocated.
 
 Things get more interesting if the vector is returned or passed around:
 
-```rust
+~~~~rust
 fn make_vec() -> Vec<i32> {
     let mut vec = Vec::new();
     vec.push(0);
@@ -116,7 +116,7 @@ fn use_vec() {
     let vec = make_vec(); // take ownership of the vector
     print_vec(vec);       // pass ownership to `print_vec`
 }
-```
+~~~~
 
 Now, just before `make_vec`'s scope ends, `vec` is moved out by
 returning it; it is not destroyed. A caller like `use_vec` then
@@ -130,7 +130,7 @@ at the end of its scope the vector is destroyed.
 Once ownership has been given away, a value can no longer be used. For
 example, consider this variant of `use_vec`:
 
-```rust
+~~~~rust
 fn use_vec() {
     let vec = make_vec();  // take ownership of the vector
     print_vec(vec);        // pass ownership to `print_vec`
@@ -139,16 +139,16 @@ fn use_vec() {
         println!("{}", i * 2)
     }
 }
-```
+~~~~
 
 If you feed this version to the compiler, you'll get an  error:
 
-```
+~~~~
 error: use of moved value: `vec`
 
 for i in vec.iter() {
          ^~~
-```
+~~~~
 
 The compiler is saying `vec` is no longer available; ownership has
 been transferred elsewhere. And that's very good, because the vector
@@ -171,7 +171,7 @@ borrowed**.
 To borrow a value, you make a *reference* to it (a kind of pointer),
 using the `&` operator:
 
-```rust
+~~~~rust
 fn print_vec(vec: &Vec<i32>) {
     // the `vec` parameter is borrowed for this scope
 
@@ -190,7 +190,7 @@ fn use_vec() {
     }
     // vec is destroyed here
 }
-```
+~~~~
 
 Now `print_vec` takes a reference to a vector, and `use_vec` lends out
 the vector by writing `&vec`. Since borrows are temporary, `use_vec`
@@ -214,13 +214,13 @@ overhead.
 
 Why have two kinds of references? Consider a function like:
 
-```rust
+~~~~rust
 fn push_all(from: &Vec<i32>, to: &mut Vec<i32>) {
     for i in from.iter() {
         to.push(*i);
     }
 }
-```
+~~~~
 
 This function iterates over each element of one vector, pushing it
 onto another. The iterator keeps a pointer into the vector at the
@@ -228,9 +228,9 @@ current and final positions, stepping one toward the other.
 
 What if we called this function with the same vector for both arguments?
 
-```rust
+~~~~rust
 push_all(&vec, &mut vec)
-```
+~~~~
 
 This would spell disaster! As we're pushing elements onto the vector,
 it will occasionally need to resize, allocating a new hunk of memory
@@ -241,11 +241,11 @@ attendant segfaults or worse).
 Fortunately, Rust ensures that **whenever a mutable borrow is active,
 no other borrows of the object are active**, producing the message:
 
-```
+~~~~
 error: cannot borrow `vec` as mutable because it is also borrowed as immutable
 push_all(&vec, &mut vec);
                     ^~~
-```
+~~~~
 
 Disaster averted.
 
@@ -268,10 +268,10 @@ it ties together sharing and communication:
 compiler-checked rule**. Consider the following channel API
 ([channels in Rust's standard library][mpsc] are a bit different):
 
-```rust
+~~~~rust
 fn send<T: Send>(chan: &Channel<T>, t: T);
 fn recv<T: Send>(chan: &Channel<T>) -> T;
-```
+~~~~
 
 Channels are generic over the type of data they transmit (the `<T:
 Send>` part of the API). The `Send` part means that `T` must be
@@ -283,14 +283,14 @@ As always in Rust, passing in a `T` to the `send` function means
 transferring ownership of it. This fact has profound consequences: it
 means that code like the following will generate a compiler error.
 
-```rust
+~~~~rust
 // Suppose chan: Channel<Vec<i32>>
 
 let mut vec = Vec::new();
 // do some computation
 send(&chan, vec);
 print_vec(&vec);
-```
+~~~~
 
 Here, the thread creates a vector, sends it to another thread, and
 then continues using it. The thread receiving the vector could mutate
@@ -300,9 +300,9 @@ lead to race condition or, for that matter, a use-after-free bug.
 Instead, the Rust compiler will produce an error message on the call
 to `print_vec`:
 
-```
+~~~~
 Error: use of moved value `vec`
-```
+~~~~
 
 Disaster averted.
 
@@ -340,7 +340,7 @@ directly into Rust's ownership system.
 Here is a simplified version (the [standard library's][mutex]
 is more ergonomic):
 
-```rust
+~~~~rust
 // create a new mutes
 fn mutex<T: Send>(t: T) -> Mutex<T>;
 
@@ -349,7 +349,7 @@ fn lock<T: Send>(mutex: &Mutex<T>) -> MutexGuard<T>;
 
 // access the data protected by the lock
 fn access<T: Send>(guard: &mut MutexGuard<T>) -> &mut T;
-```
+~~~~
 
 This lock API is unusual in several respects.
 
@@ -367,7 +367,7 @@ The only way to access the lock is through the `access` function,
 which turns a mutable borrow of the guard into a mutable borrow of the
 data (with a shorter lease):
 
-```rust
+~~~~rust
 fn use_lock(mutex: &Mutex<Vec<i32>>) {
     // acquire the lock, taking ownership of a guard;
     // the lock is held for the rest of the scope
@@ -381,7 +381,7 @@ fn use_lock(mutex: &Mutex<Vec<i32>>) {
 
     // lock automatically released here, when `guard` is destroyed
 }
-```
+~~~~
 
 There are two key ingredients here:
 
@@ -395,7 +395,7 @@ you access lock-protected data except when holding the lock**. Any
 attempt to do otherwise will generate a compiler error. For example,
 consider the following buggy "refactoring":
 
-```rust
+~~~~rust
 fn use_lock(mutex: &Mutex<Vec<i32>>) {
     let vec = {
         // acquire the lock
@@ -410,15 +410,15 @@ fn use_lock(mutex: &Mutex<Vec<i32>>) {
     // attempt to access the data outside of the lock.
     vec.push(3);
 }
-```
+~~~~
 
 Rust will generate an error pinpointing the problem:
 
-```
+~~~~
 error: `guard` does not live long enough
 access(&mut guard)
             ^~~~~
-```
+~~~~
 
 Disaster averted.
 
@@ -467,9 +467,9 @@ Putting this all together, Rust programmers can reap the benefits of
 they ever do accidentally try to send one to another thread, the Rust
 compiler will say:
 
-```
+~~~~
 `Rc<Vec<i32>>` cannot be sent between threads safely
-```
+~~~~
 
 Disaster averted.
 
@@ -480,7 +480,7 @@ on the heap that get shared between threads. But what if we wanted to
 start some threads that make use of data living in our stack frame?
 That could be dangerous:
 
-```rust
+~~~~rust
 fn parent() {
     let mut vec = Vec::new();
     // fill the vector
@@ -488,7 +488,7 @@ fn parent() {
         print_vec(&vec)
     })
 }
-```
+~~~~
 
 The child thread take a reference to `vec`, which in turn resides in
 the stack frame of `parent`. When `parent` exists, the stack frame is
@@ -497,17 +497,17 @@ popped, but the child thread is none the wiser. Oops!
 To rule out such memory unsafety, Rust's basic thread spawning API
 looks a bit like this:
 
-```rust
+~~~~rust
 fn spawn<F>(f: F) where F: 'static, ...
-```
+~~~~
 
 The `'static` constraint is a way of saying, roughly, that no borrowed
 data is permitted in the closure.  It means that a function like
 `parent` above will generate an error:
 
-```
+~~~~
 error: `vec` does not live long enough
-```
+~~~~
 
 essentially catching the possibility of `parent`'s stack frame
 popping. Disaster averted.
@@ -518,9 +518,9 @@ pattern of *fork-join* programming, often used for divide-and-conquer
 parallel algorithms. Rust supports it by providing a
 ["scoped"][scoped] variant of thread spawning:
 
-```rust
+~~~~rust
 fn scoped<'a, F>(f: F) -> JoinGuard<'a> where F: 'a, ...
-```
+~~~~
 
 There are two key differences from the `spawn` API above:
 
@@ -541,7 +541,7 @@ finish before popping any stack frames the child might have access to.
 Thus by adjusting our previous example, we can fix the bug and satisfy
 the compiler:
 
-```rust
+~~~~rust
 fn parent() {
     let mut vec = Vec::new();
     // fill the vector
@@ -550,7 +550,7 @@ fn parent() {
     })
     // guard destroyed here, implicitly joining
 }
-```
+~~~~
 
 So in Rust, you can freely borrow stack data into child threads,
 confident that the compiler will check for sufficient synchronization.
