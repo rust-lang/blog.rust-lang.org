@@ -459,7 +459,7 @@ the necessary synchronization here."
 Naturally, `Arc` is `Send`, and `Rc` is not.
 
 We already saw that the `Channel` and `Mutex` APIs work only with
-`Send` data. since they are the point at which data crosses thread
+`Send` data. Since they are the point at which data crosses thread
 boundaries, they are also the point of enforcement for `Send`.
 
 Putting this all together, Rust programmers can reap the benefits of
