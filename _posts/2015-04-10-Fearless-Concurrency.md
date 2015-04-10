@@ -422,7 +422,7 @@ access(&mut guard)
 
 Disaster averted.
 
-### Thread safety and `Send`
+### Thread safety and "Send"
 
 It's typical to distinguish some data types as "thread safe" and
 others not. Thread safe data structures use enough internal
@@ -473,7 +473,7 @@ compiler will say:
 
 Disaster averted.
 
-### Sharing the stack: `scoped`
+### Sharing the stack: "scoped"
 
 So far, all the patterns we've seen involve creating data structures
 on the heap that get shared between threads. But what if we wanted to
