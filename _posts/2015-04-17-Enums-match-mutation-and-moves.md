@@ -1,572 +1,520 @@
 ---
 layout: post
-title: "Enums: match, mutation, and moves"
+title: "Mixing matching, mutation, and moves in Rust"
 author: Felix S. Klock II
-description: "A tour of enums in Rust."
+description: "A tour of matching and enums in Rust."
 ---
 
-In this post we explore one corner of the Rust language: defining a
-class of data via `enum`, and processing instances of such data via
-`match`.
+One of the primary goals of the Rust project is to enable safe systems
+programming. Systems programming usually implies imperative
+programming, which in turns often implies side-effects, reasoning
+about shared, aliasable state, et cetera.
 
-Most of the post will use a single running example: modeling a game of
-chess. At the end the post changes gears, shifting to a discussion of
-how affine-typing ensures that the demonstrated features do not
-introduce unsoundness.
+At the same time, to provide *safety*, Rust programs and data types
+must be structured in a way that allows static checking to ensure
+soundness. Rust has features and restrictions that operate in tandem
+to ease writing programs that can pass these checks and thus ensure
+safety. For example, Rust incorporates the notion of *ownership* deeply
+into the language.
 
-## Tutorial material
+Rust's `match` expression is a construct that offers an interesting
+combination of such features and restrictions. A `match` expression
+takes an input value, classifies it, and then jumps to code written to
+handle the identified class of data.
 
-The post takes the overall form of a tutorial.
+In this post we explore how Rust processes such data via `match`.
+The crucial elements that `match` and its counterpart `enum` tie
+together are:
 
-If you are already familiar with defining `enums` and simple uses of
-`match`, you may want to skip ahead to the [mutating enums] or
-[avoiding unsoundness] sections. This first section is meant to
-establish everything one would need to know about enums to understand
-the discussion in latter two sections.
+* Exhaustive case analysis, which ensures that no case is omitted
+  when processing an input.
 
-[mutating enums]: #mutating-enums
-[avoiding unsoundness]: #avoiding-unsoundness
+* `match` embraces both imperative and applicative styles of
+   programming.  The compiler's static analyses work hard to ensure
+   statement-oriented programming remains palatable, leaving the
+   question of whether expression-orientation is better to style
+   guides.
 
-### Defining simple enums
+* Destructuring bind of *L-values*: Rust encourages the developer to
+  think carefully about ownership and borrowing. To ensure that
+  processing data does not force one to give up ownership of a value
+  prematurely, `match` is designed with support for merely *borrowing*
+  substructure within its input (as opposed to always *moving* such
+  substructure).
 
-The pieces of chess can be classified as follows:
+We cover each of the items above in detail below, but first we
+establish a foundation for the discussion: What does `match` look
+like, and how does it work?
+
+### The Basics of `match`
+
+The `match` expression in Rust has this form:
 
 ```rust
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub enum PieceShape {
-    King, Queen, Rook, Bishop, Knight, Pawn,
+match INPUT_EXPRESSION {
+    PREDICATE_1 => RESULT_EXPRESSION_1,
+    PREDICATE_2 => RESULT_EXPRESSION_2,
+    ...
+    PREDICATE_n => RESULT_EXPRESSION_n
 }
 ```
 
-The `derive` line automatically generates support for three common
-operations: the `Copy, Clone` gives us the ability to freely copy or
-clone instances of `PieceShape`, the `Debug` provides support for
-printing each piece-rank into an output buffer, e.g. via
-`println!("piece: {:?}", piece)`, and `PartialEq, Eq` provides support
-for the `==` operator on instances of the enum.
+where each of the `PREDICATE_i` contains at least one *pattern*. A
+pattern describes a subset of the possible values to which
+`INPUT_EXPRESSION` could evaluate.
+The syntax `PREDICATE => RESULT_EXPRESSION` is called a "match arm",
+or simply "arm".
 
-### Enum discriminant values
+Patterns can match atomic values, like integers or characters; they
+can also match user-defined symbolic data, defined via `enum`.
 
-An enum like `PieceShape` above, where each variant is just a name, is
-represented using an integer value for each variant. The definition
-style above allows the Rust compiler to assign the values itself; it
-will start from 0 and count upwards.
+The below code demonstrates generating the next guess (poorly) in a number
+guessing game, given the answer from a previous guess.
 
-Alternatively, one can manually assign specific values to enum
-variants, interrupting the automatic value assignment performed by the
-compiler. Thus, we could instead have written the below, and get the
-same assignment of discriminant values:
+(Incidentally, nearly all the code in this post is directly
+executable; you can cut-and-paste the code snippets into a file
+`demo.rs`, compile the file with `--test`, and run the resulting
+binary to see the tests run.)
 
-```rust
-#[cfg(alternative)]
-#[derive(Copy, Clone, Debug)]
-pub enum PieceShape {
-    Pawn = 5, Rook = 2, Bishop, Knight, King = 0, Queen, 
+```rust,code
+enum Answer {
+    Higher,
+    Lower,
+    Bingo,
 }
-```
 
-(In the above, the `cfg` line is how one denotes "conditional
-compilation" in Rust; it indicates that the `enum` definition beneath
-it should only be compiled if one passes `--cfg alternative` to the
-invocation of `rustc`; it is being used above as a quick-and-dirty way
-to avoid causing a compile-time error with a duplicate definition.)
-
-These enums, where each variant is just a name with an associated
-(implicitly- or explicitly-assigned) integer value, are known as
-"C-style enums" in Rust parlance, since the syntax largely matches
-that used for the `enum` construct in the C language.
-
-(However, note that not every C enum immediately corresponds to an
-analogous enum in Rust; in particular, Rust enforces an invariant that
-each variant be distinct from all other variants in the enum, while C
-allows one to assign the same integer value to multiple enum
-variants.)
-
-### Constructing enum instances
-
-After defining an enum, one accesses the variants it defines via the
-path syntax `enum_name::variant_name`. So using these pieces is
-straight-forward enough:
-
-```rust
-#[test]
-fn demo_debug_format() {
-    let q = PieceShape::Queen;
-    let p = PieceShape::Pawn;
-    let k = PieceShape::King;
-    println!("q={:?} p={:?} k={:?}", q, p, k);
-}
-```
-
-Of course, it can be annoying to have to type the enum name
-repeatedly. To make the variants directly accessibly, import
-them via `use`.
-
-```rust
-#[test]
-fn demo_debug_format_2() {
-    use self::PieceShape::{Queen, Pawn, King};
-    let q = Queen;
-    let p = Pawn;
-    let k = King;
-    println!("q={:?} p={:?} k={:?}", q, p, k);
-}
-```
-
-or even more simply:
-
-```rust
-use self::PieceShape::*;
-```
-
-(Note that we have used `use self::...` here; the `use`-import syntax
-resolves paths relative to the crate-root by default, but the leading
-`self` changes the mode so that the resolution is relative to the
-containing module.)
-
-### Destructuring enums via `match`
-
-Once we have created enum instances, we can process them via `match`
-expressions. Here, we map each piece rank to a single letter code.
-
-```rust
-pub fn one_letter(r: PieceShape) -> char {
-    match r {
-        Pawn   => 'P',
-        Rook   => 'R',
-        Knight => 'N',
-        Bishop => 'B',
-        Queen  => 'Q',
-        King   => 'K',
+fn suggest_guess(prior_guess: u32, answer: Answer) {
+    match answer {
+        Answer::Higher => println!("maybe try {} next", prior_guess + 10),
+        Answer::Lower  => println!("maybe try {} next", prior_guess - 1),
+        Answer::Bingo  => println!("we won with {}!", prior_guess),
     }
 }
 
 #[test]
-fn demo_one_letter() {
-    assert_eq!(one_letter(Queen), 'Q');
+fn demo_suggest_guess() {
+	suggest_guess(10, Answer::Higher);
+	suggest_guess(20, Answer::Lower);
+	suggest_guess(19, Answer::Bingo);
 }
 ```
 
-Or as a more complex example, we can gather a sequence of shapes into a
-character string:
+Patterns can also match structured data (e.g. tuples, slices, user-defined
+data types) via corresponding patterns. In such patterns, one often
+binds substructure of the input to local variables (identifer patterns),
+for use either in the arm's predicate or in its result.
 
-```rust
-#[test]
-fn demo_one_letter_collect() {
-    let qpk = [Queen, Pawn, King];
-    let qpk: String = qpk.iter().map(|r|{one_letter(*r)}).collect();
-    assert_eq!(qpk, "QPK");
-}
-```
+The special `_` pattern matches any single value, and is often used as
+a catch-all; the special `..` pattern generalizes this by matching any
+*series* of values or name/value pairs.
 
-Encoding shapes via ASCII characters has worked fine since the 1960's,
-but since we live in a more modern age, it is tempting to find out
-whether we could encode our pieces with Unicode pictorial symbols.
+Also, one can collapse multiple patterns into one arm by separating the
+patterns by vertical bars (`|`); thus that arm matches either this pattern,
+or that pattern, et cetera.
 
-Indeed, reviewing the Unicode character charts, we discover that the
-chess pieces have dedicated characters, but we see that there are
-twelve such characters (starting from `U+2654`, "WHITE CHESS KING"),
-not six. This reveals an oversight in our data description thus far:
-We have represented shapes, but not the *color* of the piece.
+These features are illustrated in the following revision to the
+guessing-game answer generation strategy:
 
-### Enums with payloads
-
-Here is one way of many to add color to our pieces, via a new `enum`
-which represents one square of a chess board.
-
-```rust
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-enum Piece {
-    Black(PieceShape),
-    White(PieceShape),
-}
-```
-
-This demonstrates a twist on `enum` that Rust provides.
-Unlike an `enum` in C, which can only define a collection of names,
-each variant of a Rust enum can optionally carry a payload of data.
-
-### Matching tree-structured patterns
-
-With this in hand, we can render a piece in a manner similar to how we
-converted a shape to a letter in `one_letter` above.
-
-```rust
-fn render(p: Piece) -> char {
-    match p {
-        Piece::White(King)   => '\u{2654}',
-        Piece::White(Queen)  => '\u{2655}',
-        Piece::White(Rook)   => '\u{2656}',
-        Piece::White(Bishop) => '\u{2657}',
-        Piece::White(Knight) => '\u{2658}',
-        Piece::White(Pawn)   => '\u{2659}',
-
-        Piece::Black(King)   => '\u{265A}',
-        Piece::Black(Queen)  => '\u{265B}',
-        Piece::Black(Rook)   => '\u{265C}',
-        Piece::Black(Bishop) => '\u{265D}',
-        Piece::Black(Knight) => '\u{265E}',
-        Piece::Black(Pawn)   => '\u{265F}',
-    }
+```rust,code
+struct GuessState {
+    guess: u32,
+    answer: Answer,
+    low: u32,
+    high: u32,
 }
 
-#[test]
-fn demo_render() {
-    let row = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook];
-    let black_row: String = row.iter().map(|s| render(Piece::Black(*s))).collect();
-    let white_row: String = row.iter().map(|s| render(Piece::White(*s))).collect();
-    println!("black_row: {}", black_row);
-    println!("white_row: {}", white_row);
-}
-```
-
-The `demo_render` test prints:
-
-```
-black_row: ♜♞♝♛♚♝♞♜
-white_row: ♖♘♗♕♔♗♘♖
-```
-
-which is well on its way to a fully-rendered chess board.
-
-### Binding in match patterns
-
-Here is an alternative way to write the `render` function.
-
-```rust
-fn render_2(p: Piece) -> char {
-    use std::char;
-    let offset = match p {
-        Piece::White(shape) => shape as u32,
-        Piece::Black(shape) => shape as u32,
-    };
-    let king_unicode_value = match p {
-        Piece::White(_) => 0x2654,
-        Piece::Black(_) => 0x265A,
-    };
-    char::from_u32(king_unicode_value + offset).unwrap()
-}
-
-#[test]
-fn check_renders() {
-    for &r in &[King, Queen, Rook, Bishop, Knight, Pawn] {
-        assert_eq!(render(Piece::White(r)),
-                   render_2(Piece::White(r)));
-        assert_eq!(render(Piece::Black(r)),
-                   render_2(Piece::Black(r)));
-    }
-}
-```
-
-The above code illustrates a collection of features:
-
- * Rather than matching it as constant, one can bind the payload
-   attached to a enum-variant to an identifier.  Thus the patterns in
-   the first `match` expression are each binding `shape` to the
-   corrresponding shape-payload attached to the piece.
-
- * One can cast a C-style enum value to the integer value used to
-   represent it, via the syntax `enum_value as integer_type`.
-
- * One can use `_` to ignore substructure in a pattern.  This is used
-   in the second match expression, so that the shape held in `p` is
-   left in place. (This does not matter too much since `Shape`
-   implements `Copy`; it is often more important in cases where the
-   payload is not copyable, as further discussed below.)
-
-Thus, the `White` and `Black` `match`-clauses in the above code bind
-`shape` to the associated `PieceShape`, and then casts that shape to
-the appropriate integer offset from the king in the unicode codepoint
-assignment. (The integers in our original enum definition for
-`PieceShape` were selected so that they would match the sequence of
-piece ranks in the unicode codepoint assignment.)
-
-## Mutating enums
-
-One event that occurs in chess is that when a pawn reaches the eighth
-rank of the board, it is promoted to a another piece of the same color
-(usually a queen).
-
-It is easy to write such a promotion in a functional programming
-style:
-
-```rust
-fn promote_to_queen_functional(p: Piece) -> Piece {
-    match p {
-        Piece::Black(_) => Piece::Black(Queen),
-        Piece::White(_) => Piece::White(Queen),
-    }
-}
-
-#[test]
-fn demo_promote_functional() {
-    let p = Piece::White(Pawn);
-    assert_eq!(promote_to_queen_functional(p), Piece::White(Queen));
-}
-```
-
-Let us imagine, however, that we want to model an actual chess board,
-and we want to implement promotion as an *in-place* modification; that
-is, instead of constructing a whole new copy of the board, we want to
-instead use an imperative update to represent the promotion.
-
-### A first bumbling attempt
-
-Here is a first, admittedly bumbling, attempt to implement in-place
-promotion from a pawn to a queen: It just removes the `-> Piece`
-return type and shoehorns an assignment into the code, in the hopes
-that everything will work out.
-
-So, first try:
-
-```rust
-#[cfg(promote_attempt_1)]
-fn promote_to_queen_1(mut pawn: Piece) {
-    pawn = match pawn {
-        Piece::Black(_) => Piece::Black(Queen),
-        Piece::White(_) => Piece::White(Queen),
-    };
-}
-
-#[cfg(promote_attempt_1)]
-#[test]
-fn demo_promote_1() {
-    let p = Piece::White(Pawn);
-    assert_eq!(p, Piece::White(Pawn));
-    promote_to_queen_1(p);
-    assert_eq!(p, Piece::White(Queen));
-}
-```
-
-Compiling this (enabling it via `--cfg promote_attempt_1`) yields:
-
-```
-enums.rs:238:5: 238:9 warning: value assigned to `pawn` is never read, #[warn(unused_assignments)] on by default
-enums.rs:238     pawn = match pawn {
-                 ^~~~
-```
-
-So that's not a good sign. Then running it yields:
-
-```
-test demo_promote_1 ... FAILED
-
-failures:
-
----- demo_promote_1 stdout ----
-thread 'demo_promote_1' panicked at 'assertion failed: `(left == right)` (left: `White(Pawn)`, right: `White(Queen)`)', enums.rs:250
-```
-
-This demonstrates, among other things, that static analysis cannot
-stop someone who is determined to write buggy code. But the assertion
-failure message is fairly clear about what the problem is: We had
-hoped the piece `p` would be replaced with a queen, but it is in fact
-still a pawn.
-
-The crucial mistake being made here is that if you want to mutate a
-piece of state in place, then you need to have a mutable *reference*
-to that state. The `mut pawn` formal argument to `promote_to_queen` is
-indeed mutable, but those mutations are not visible from outside the
-function, because the argument has already been moved into the
-parameter's location. The invocation `promote_to_queen` is not passing
-a reference (mutable or otherwise) to `p`; it is creating a *copy* of
-the `Piece`.
-
-### A second stumble, caught at compile-time
-
-To make this really concrete, let us consider another kind of data in
-our chess board.  A chess board is made up of squares, usually
-arranged in an 8-by-8 grid. Each `Square` is either unoccupied
-(`Empty`) or is occupied by a single piece.
-
-```rust
-#[derive(Clone, Debug, PartialEq, Eq)]
-enum Square {
-    Empty,
-    Occupied(Piece),
-}
-```
-
-Note that we have left off the `Copy` derivation; the intention is
-that while `Rank` and `Piece` can be freely copied via assignment
-statements, the square on a chess board has its own identity, and
-should not be freely copied via assignment statements.
-
-With that in mind, let us try writing `promote_to_queen` again, but
-this time passing in a `Square`.
-
-(This example is also taking advantage of another feature of Rust's
-`match` syntax: one can combine multiple match arms that have
-identical code into one arm by writing all their patterns pairwise
-separated by a vertical bar (`|`)):
-
-
-```rust
-#[cfg(promote_attempt_2)]
-fn promote_to_queen_2(mut s: Square) {
+fn suggest_guess_smarter(s: GuessState) {
     match s {
-        Square::Empty => {}
-        Square::Occupied(Piece::White(mut shape)) |
-        Square::Occupied(Piece::Black(mut shape)) => {
-            shape = Queen
+        GuessState { answer: Answer::Bingo, guess: p, .. } => {
+            println!("we won with {}!", p);
+        }
+        GuessState { answer: Answer::Higher, guess: l, low: _, high: h  } |
+        GuessState { answer: Answer::Lower, guess: h, low: l, high: _ } => {
+            let mid = l + ((h - l) / 2);
+            println!("lets try {} next", mid);
         }
     }
 }
 
-#[cfg(promote_attempt_2)]
 #[test]
-fn demo_promote_2() {
-    let mut s = Square::Occupied(Piece::White(Pawn));
-    promote_to_queen_2(s);
-    assert_eq!(s, Square::Occupied(Piece::White(Queen)));
+fn demo_guess_state() {
+	suggest_guess_smarter(GuessState {
+		guess: 20, answer: Answer::Lower, low: 10, high: 1000
+	});
 }
 ```
 
-This second attempt has the same mistake that we made with
-`promote_to_queen_2`: we again have failed to take a mutable reference
-to the square, so no in-place update is possible. But *now* we get a
-compile-time error:
+That is `match` in a nutshell.
 
-```
-<std macros>:3:11: 3:23 error: use of moved value: `s`
-<std macros>:3 match ( & ( $ left ) , & ( $ right ) ) {
-                         ^~~~~~~~~~~~
-<std macros>:1:1: 9:39 note: in expansion of assert_eq!
-enums.rs:319:5: 319:58 note: expansion site
-enums.rs:318:24: 318:25 note: `s` moved here because it has type `Square`, which is non-copyable
-enums.rs:318     promote_to_queen_2(s);
-                                    ^
-```
+So, what is the interplay between this construct and Rust's approach to
+ownership and safety in general?
 
-The error message is telling us exactly what happened: the argument to
-`promote_to_queen_2` is moved when the function is called; thus the
-attempt to reference `s` in the `assert_eq!` invocation fails, because
-`s` has been moved.
+### Exhaustive case analysis
 
-(This illustrates why one might *not* add `derive(Copy)` to every data
-type where it would otherwise be legal; leaving out `derive(Copy)` can
-catch certain bugs.)
+One important method of analytical thinking is case analysis: Dividing
+a problem into some number of separate cases, and then analyzing each
+case individually.
 
-### Try, try again; taking a reference
+For this method of problem solving to work, the cases must be
+*collectively exhaustive*; otherwise, a case that was not covered
+would mean a potential problem instance for which no solution has been
+identified.
 
-So, here's a third try, where we take a reference to the `Square`.
+This brings us to one of the fundamental restrictions of Rust's
+`match` construct: the collection of provided cases must be exhautive.
+
+So, for example, the following code is rejected at compile-time.
 
 ```rust
-#[cfg(promote_attempt_3)]
-fn promote_to_queen_3(s: &mut Square) {
-    match s {
-        &mut Square::Empty => {}
-        &mut Square::Occupied(Piece::White(mut shape)) |
-        &mut Square::Occupied(Piece::Black(mut shape)) => {
-            shape = Queen
+fn suggest_guess_broken(prior_guess: u32, answer: Answer) {
+    let next_guess = match answer {
+        Answer::Higher => prior_guess + 10,
+        Answer::Lower  => prior_guess - 1,
+        // ERROR: non-exhaustive patterns: `Bingo` not covered
+    };
+    println!("maybe try {} next", next_guess);
+}
+```
+
+Many other languages offer a pattern matching construct (ML and
+various macro-based `match` implementations in Scheme both come to
+mind), but not all of them have this restriction.
+
+Rust has this restriction for two reasons:
+
+* First, as noted above, dividing a problem into cases only yields a
+general solution if the cases are exhaustive. Exhaustiveness-checking
+exposes logical errors.
+
+* Second, since `match` is an expression form, exhaustiveness ensures
+that such expressions always evaluates to a value of the correct type
+(or jump elsehwere in the program, as illustrated here):
+
+```rust,code
+fn suggest_guess_fixed(prior_guess: u32, answer: Answer) {
+    let next_guess = match answer {
+        Answer::Higher => prior_guess + 10,
+        Answer::Lower  => prior_guess - 1,
+        Answer::Bingo  => {
+            println!("we won!");
+            return;
+        }
+    };
+    println!("maybe try {} next", next_guess);
+}
+
+#[test]
+fn demo_guess_fixed() {
+	suggest_guess_fixed(10, Answer::Higher);
+	suggest_guess_fixed(20, Answer::Lower);
+	suggest_guess_fixed(19, Answer::Bingo);
+}
+```
+
+### Both expression- and statement-oriented
+
+Unlike many languages that offer pattern matching, Rust *embraces*
+both statement- and expression-oriented programming.
+
+Consider writing a function which maps a non-negative integer to a
+string rendering it as an ordinal ("1st", "2nd", "3rd", ...).
+
+The following code uses range patterns to simplify things, but also,
+it is written in a style similar to a `switch` in a statement-oriented
+language like C (or C++, Java, et cetera), where the arms of the
+`match` are executed for their side-effect alone:
+
+```rust,code
+fn num_to_ordinal(x: u32) -> String {
+    let suffix;
+    match (x % 10, x % 100) {
+        (1, 1) | (1, 21...91) => {
+            suffix = "st";
+        }
+        (2, 2) | (2, 22...92) => {
+            suffix = "nd";
+        }
+        (3, 3) | (3, 23...93) => {
+            suffix = "rd";
+        }
+        _                     => {
+            suffix = "th";
+        }
+    }
+    return format!("{}{}", x, suffix);
+}
+
+#[test]
+fn test_num_to_ordinal() {
+    assert_eq!(num_to_ordinal(   0),    "0th");
+    assert_eq!(num_to_ordinal(   1),    "1st");
+    assert_eq!(num_to_ordinal(  12),   "12th");
+    assert_eq!(num_to_ordinal(  22),   "22nd");
+    assert_eq!(num_to_ordinal(  43),   "43rd");
+    assert_eq!(num_to_ordinal(  67),   "67th");
+    assert_eq!(num_to_ordinal(1901), "1901st");
+}
+```
+
+The Rust compiler accepts the above program; this is notable because
+its static analysis is ensuring both that `suffix` is always
+initialized before we run the `format!` at the end *and* that `suffix`
+is assigned at most once during the function's execution (because if
+we could assign `suffix` multiple times, the compiler would force us
+to mark `suffix` as mutable).
+
+To be clear, the above program certainly *can* be written in an
+expression-oriented style. The point is that each of the styles has
+its use cases, and switching to a statement-oriented style does not
+sacrifice every other feature that Rust provides, such as ensuring
+that a non-`mut` binding is assigned at most once.
+
+An important case where this arises is when one wants to
+initialize some state and then borrow from it, but only on
+*some* control-flow branches.
+
+```rust,code
+fn sometimes_initialize(input: i32) {
+    let string;
+    let borrowed;
+    match input {
+        0...100 => {
+            string = format!("input prints as {}", input);
+            borrowed = &string[6..];
+        }
+        _ => {
+            borrowed = "expected between 0 and 100";
+        }
+    }
+    println!("borrowed: {}", borrowed);
+
+    // (Below would cause compile-time error if uncommented.)
+    // println!("string: {}", string);
+}
+
+#[test]
+fn demo_sometimes_initialize() {
+    sometimes_initialize(23);
+    sometimes_initialize(123);
+}
+```
+
+The interesting thing about the above code is that after the `match`,
+we are not allowed to directly access `string`, because the compiler
+requires that the variable be initialized on every path through the
+program. At the same time, we *can* access the data that is held
+*within* `string`, because a reference to that data is held by the
+`borrowed` variable, which we ensure is initialized on every program
+path. (The compiler ensures that no outstanding borrows of the
+`string` data could possible outlive `string` itself, and the
+generated code ensures that at the end of the scope of `string`, its
+data is deallocated if it was previously initialized.)
+
+In short, for soundness, the Rust language ensures that data is always
+initialized before it is referenced, but the designers have attempted
+to not require artifices like dummy-initializations inserted solely to
+placate such requirements.
+
+### Algebraic Data Types and Data Invariants
+
+An `enum` type allows one to define mutually-exclusive classes of
+values. The examples shown above used `enum` for simple symbolic tags,
+but in Rust, such definitions can define much richer classes of data.
+
+For example, a binary tree is either a leaf, or an internal node with
+references to two child trees. Here is one way to encode a tree of
+integers in Rust:
+
+```rust,code
+enum BinaryTree {
+    Leaf(i32),
+    Node(Box<BinaryTree>, i32, Box<BinaryTree>)
+}
+```
+
+(The `Box<V>` type describes an owning reference to a heap-allocated
+instance of `V`; if you own a `Box<V>`, then you also own the `V` it
+contains, and can mutate it, lend out references to it, et cetera, and
+when you finish with the box and let it fall out of scope, it will
+automatically clean up the resources associated with the
+heap-allocated `V`.)
+
+The above definition ensures that if we are given a `BinaryTree`, it
+will always fall into one of the above two cases. One will never
+encounter a `BinaryTree::Node` that does not have a left-hand child.
+There is no need to check for null.
+
+One *does* need to check whether a given `BinaryTree` is a `Leaf` or
+az a `Node`, but the compiler statically ensure such checks are done:
+you cannot accidentally interpret the data of a `Leaf` as if it were a
+`Node`, nor vice versa.
+
+```rust,code
+/// Sum of values in all the nodes and leaves of `t`.
+fn tree_weight_v1(t: BinaryTree) -> i32 {
+    match t {
+        BinaryTree::Leaf(payload) => payload,
+        BinaryTree::Node(left, payload, right) => {
+            tree_weight_v1(*left) + payload + tree_weight_v1(*right)
         }
     }
 }
 
-#[cfg(promote_attempt_3)]
+/// Looks like:
+///
+/// (4)
+///  |
+///  +--(2)
+///  |   |
+///  |   +--[1]
+///  |   |
+///  |   +--[3]
+///  |
+///  +--[5]
+///
+fn sample_tree() -> BinaryTree {
+    let l1 = Box::new(BinaryTree::Leaf(1));
+    let l3 = Box::new(BinaryTree::Leaf(3));
+    let n2 = Box::new(BinaryTree::Node(l1, 2, l3));
+    let l5 = Box::new(BinaryTree::Leaf(5));
+
+    BinaryTree::Node(n2, 4, l5)
+}
+
 #[test]
-fn demo_promote_3() {
-    let mut p = Square::Occupied(Piece::White(Pawn));
-    promote_to_queen_3(&mut p);
-    assert_eq!(p, Square::Occupied(Piece::White(Queen)));
+fn tree_demo_1() {
+    let tree = sample_tree();
+    assert_eq!(tree_weight_v1(tree), (1 + 2 + 3) + 4 + 5);
 }
 ```
 
-We again see the warning:
+### Matching L-values
 
+The previous section described a tree datatype, and showed a program
+that computed the sum of the integers in a tree instance.
+
+That version of `tree_weight` has one big downside, however: it takes
+its input tree by value. Once you pass a tree to `tree_weight_v1`, that
+tree is gone (as in, deallocated).
+
+```rust,code
+#[test]
+fn tree_demo_v1_fails() {
+    let tree = sample_tree();
+    assert_eq!(tree_weight_v1(tree), (1 + 2 + 3) + 4 + 5);
+
+    // If you uncomment this line below ...
+    
+    // assert_eq!(tree_weight_v1(tree), (1 + 2 + 3) + 4 + 5);
+
+    // ... you will get: error: use of moved value: `tree`
+}
 ```
-enums.rs:355:44: 355:49 warning: variable `shape` is assigned to, but never used, #[warn(unused_variables)] on by default
-enums.rs:355         &mut Square::Occupied(Piece::White(mut shape)) |
-                                                        ^~~~~~~~~
-enums.rs:357:13: 357:14 warning: value assigned to `shape` is never read, #[warn(unused_assignments)] on by default
-enums.rs:357             shape = Queen
-                         ^~~~~
-```
 
-This warning is again warranted, as the test fails:
-
-```
-test demo_promote_3 ... FAILED
-
-failures:
-
----- demo_promote_3 stdout ----
-thread 'demo_promote_3' panicked at 'assertion failed: `(left == right)` (left: `Occupied(White(Pawn))`, right: `Occupied(White(Queen))`)', enums.rs:367
-```
-
-### Keeping `ref`s into referenced data
-
-So, what happened here?
-
-The answer is: Even though we have ensured that `Square` is not
-accidentally copied, there is nothing stopping the *contents* of
-`Square` from being copied. So in a `match` arm like
-```
-&mut Square::Occupied(Piece::Black(mut shape)) => { ... }
-```
-if the discriminant value matches that arm, then it will put a
-copy of its shape into `shape`.
-
-This brings us to a very important point about how `match` works in
-Rust: it matches its inputs in-place, but normal bindings like the
-`mut shape` above will move (or copy) the matched substructure into
-fresh locations.
-
-If you want to capture a reference into the matched substructure,
-either to avoid extraneous copying, or to enable modification of the
-original input value, then you need to use a `ref`-pattern.
-
-With this knowledge in hand, let us try again.
-
-In addition, our fourth try simplifies the code slightly by
-dereferencing the argument `*s`.
+This is *not* a consequence, however, of using `match`; it is rather
+a consequence of the function signature that was chosen:
 
 ```rust
-fn promote_to_queen_4(s: &mut Square) {
-    match *s {
-        Square::Empty => {}
-        Square::Occupied(Piece::White(ref mut shape)) |
-        Square::Occupied(Piece::Black(ref mut shape)) => {
-            *shape = Queen
+fn tree_weight_v1(t: BinaryTree) -> i32 { 0 }
+//                   ^~~~~~~~~~ this means this function takes ownership of `t`
+```
+
+In fact, in Rust, `match` is designed to work quite well *without*
+taking ownership. In particular, the input to `match` is an L-value;
+this means that the input expression is evaluated to a *memory
+location*, and then match works by inspecting the data at that
+location.
+
+(If the input expression is a variable name or a field/pointer
+dereference, then the L-value is just the location of that variable or
+field/memory.  If the input expression is a function call or other
+operation that generates an unnamed temporary value, then it will be
+conceptually stored in a temporary area, and that is the memory
+location that `match` will inspect.)
+
+So, if we want a version of `tree_weight` that merely borrows a tree
+rather than taking ownership of it, then we will need to make use of
+this feature of Rust's `match`.
+
+```rust,code
+/// Sum of values in all the nodes and leaves of `t`.
+fn tree_weight_v2(t: &BinaryTree) -> i32 {
+    //               ^~~~~~~~~~~ The `&` means we are *borrowing* the tree
+    match *t {
+        BinaryTree::Leaf(payload) => payload,
+        BinaryTree::Node(ref left, payload, ref right) => {
+            tree_weight_v2(left) + payload + tree_weight_v2(right)
         }
     }
 }
 
 #[test]
-fn demo_promote_4() {
-    let mut p = Square::Occupied(Piece::White(Pawn));
-    promote_to_queen_4(&mut p);
-    assert_eq!(p, Square::Occupied(Piece::White(Queen)));
+fn tree_demo_2() {
+    let tree = sample_tree();
+    assert_eq!(tree_weight_v2(&tree), (1 + 2 + 3) + 4 + 5);
 }
 ```
 
-Compiling and running our code now yields:
+The function `tree_weight_v2` looks very much like `tree_weight_v1`.
+The only differences are: we take `t` as a borrowed reference (the `&`
+in its type), and, importantly, we use `ref`-bindings for `left` and
+`right` in the `Node` case.
 
+The `ref`-binding is a crucial part of how destructuring bind of
+L-values works.
+
+When matching a value of type `T`, an identifier pattern `I` will, on
+a successful match, *move* the value out of the original input and
+into `I`. Thus we can always conclude in such a case that `I` has type
+`T`, or "`I: T`". (For some types `T`, known as *copyable* `T` or "`T`
+implements `Copy`", the value will in fact be copied into `I` for such
+identifier patterns; but in general types are not copyable; either
+way, such bindings do mean that `I` has ownership of a value of type
+`T`.)
+
+Thus, the bindings of `payload` in `tree_weight_v2` both have type
+`i32`; the `i32` type implements `Copy`, so the weight is copied into
+`payload` in both arms.
+
+However, when matching a value of type `T`, a `ref`-pattern `ref I`
+will, on a successful match, merely *borrow* a reference into the
+matched data. In other words, a successful `ref I` match of a value of
+type `T` will imply that `I: &T`. Thus, in the `Node` arm of
+`tree_weight_v2`, `left` will be reference the left-hand box (which
+holds a tree), and `right` will reference the right-hand box (which
+also holds a tree). Then we can pass those borrowed references to
+trees into the recursive calls to `tree_weight_v2`.
+
+Likewise, a `ref mut`-pattern (`ref mut I`) will, on a successful
+match, take a borrow a *mutable reference* `&mut T`, (which allows
+mutation and ensures there are no other active references to that data
+at the same time). An important detail here is the destructuring
+binding forms like `match` allows one to take mutable references to
+disjoint parts of the data simultaneously.
+
+```rust,code
+/// Increment the values in all the nodes and leaves of `t`.
+fn tree_grow(t: &mut BinaryTree) {
+    //          ^~~~~~~~~~~~~~~ `&mut`: we have unaliased access to the tree
+	match *t {
+        BinaryTree::Leaf(ref mut payload) => *payload += 1,
+        BinaryTree::Node(ref mut left, ref mut payload, ref mut right) => {
+            tree_grow(left);
+			*payload += 1;
+			tree_grow(right);
+        }
+    }
+}
+
+#[test]
+fn tree_demo_3() {
+    let mut tree = sample_tree();
+	tree_grow(&mut tree);
+    assert_eq!(tree_weight_v2(&tree), (2 + 3 + 4) + 5 + 6);
+}
 ```
-running 7 tests
-test demo_debug_format ... ok
-test demo_one_letter_collect ... ok
-test demo_one_letter ... ok
-test demo_debug_format_2 ... ok
-test demo_promote_4 ... ok
-test check_renders ... ok
-test demo_promote_functional ... ok
 
-test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured
-```
-
-Huzzah, it works!
-
-The dereference `*s` works because `match` works on both "L-value" and
-"R-value" expressions; L-value expressions evaluate to memory
-locations, while R-value expressions evaluate to values that are then
-stored, if necessary, in temporary memory locations. It simplified our
-code because allowed us to sidestep writing `&mut` at the beginning of
-each of our patterns, which was not such a great burden for this tiny
-code snippet, but can be much more annoying when working with `match`
-expressions that have many more arms, amplifying the redundancy.
-
-## Avoiding unsoundness
+### Avoiding unsoundness
 
 (This section is adapted from the Rust demo we presented at the 2014
 ML workshop.)
@@ -579,7 +527,7 @@ overwrite state secretly, subverting the type-system?
 
 Consider the following code:
 
-```rust
+```rust,code
 #[test]
 fn sound_code() {
     enum E { A(fn (i8) -> i8), B(usize) }
@@ -625,7 +573,7 @@ location and try to interpret it as executable code.
 
 But watch:
 
-```rust
+```rust,code
 #[cfg(wont_compile)]
 #[test]
 fn unsound_code_1() {
@@ -653,8 +601,9 @@ fn unsound_code_1() {
 }
 ```
 
-As you might have inferred from the `cfg` annotation above, this
-will not compile. Attempting to compile it yields:
+This will not compile.  (The `cfg` annotation above actually stops the
+compiler from attempting to compile it.)  Removing the `cfg` line and
+attempting to compile it yields:
 
 ```
 enums.rs:569:30: 569:51 error: cannot assign to `*p1` because it is borrowed
@@ -679,7 +628,7 @@ compiling are not performing a local check of just the single function
 non-local attempts to subvert the type system by sneaking the
 overwrite past the static checks are foiled, as shown here:
 
-```rust
+```rust,code
 #[cfg(wont_compile)]
 #[test]
 fn unsound_code_2() {
@@ -730,11 +679,11 @@ This illustrates why Rust takes such pains to support affine typing of
 
 ## Conclusion
 
-Thus ends our tour of enums in Rust. For more information on details
-that were not covered here, such as binding via `ident @ pattern`, or
-the potentially subtle difference between `{ let id = expr; ... }`
-versus `match expr { id => { ... } }`, consult the Rust documentation,
-or quiz our awesome community (in `#rust` on IRC, or in the
-[user group]).
+Thus ends our tour of `match` and enums in Rust. For more information
+on details that were not covered here, such as binding via `ident @
+pattern`, or the potentially subtle difference between `{ let id =
+expr; ... }` versus `match expr { id => { ... } }`, consult the Rust
+documentation, or quiz our awesome community (in `#rust` on IRC, or in
+the [user group]).
 
 [user group]: http://users.rust-lang.org/
