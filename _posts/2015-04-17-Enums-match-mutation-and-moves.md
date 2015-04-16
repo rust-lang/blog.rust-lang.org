@@ -498,16 +498,19 @@ at the same time). An important detail here is the destructuring
 binding forms like `match` allows one to take mutable references to
 disjoint parts of the data simultaneously.
 
+This code demonstrates this concept by incrementing all of the
+values in a given tree.
+
 ```rust
 /// Increment the values in all the nodes and leaves of `t`.
 fn tree_grow(t: &mut BinaryTree) {
     //          ^~~~~~~~~~~~~~~ `&mut`: we have unaliased access to the tree
-	match *t {
+    match *t {
         BinaryTree::Leaf(ref mut payload) => *payload += 1,
         BinaryTree::Node(ref mut left, ref mut payload, ref mut right) => {
             tree_grow(left);
-			*payload += 1;
-			tree_grow(right);
+            *payload += 1;
+            tree_grow(right);
         }
     }
 }
@@ -515,10 +518,20 @@ fn tree_grow(t: &mut BinaryTree) {
 #[test]
 fn tree_demo_3() {
     let mut tree = sample_tree();
-	tree_grow(&mut tree);
+    tree_grow(&mut tree);
     assert_eq!(tree_weight_v2(&tree), (2 + 3 + 4) + 5 + 6);
 }
 ```
+
+Note that the code above now binds `payload` by a `ref mut`-pattern;
+if it did not use a `ref` pattern, then payload would be bound to a
+local copy of the integer, while we want to modify the actual integer
+*in the tree itself*. Thus we need a reference to that integer.
+
+Note also that the code is able to bind `left` and `right`
+simultaneously in the `Node` arm. The compiler knows that the two
+values cannot alias, and thus it allows both `&mut`-references to live
+simultaneously.
 
 ### Avoiding unsoundness
 
