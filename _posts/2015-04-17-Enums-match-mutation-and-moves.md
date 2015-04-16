@@ -76,7 +76,7 @@ executable; you can cut-and-paste the code snippets into a file
 `demo.rs`, compile the file with `--test`, and run the resulting
 binary to see the tests run.)
 
-```rust,code
+```rust
 enum Answer {
     Higher,
     Lower,
@@ -115,7 +115,7 @@ or that pattern, et cetera.
 These features are illustrated in the following revision to the
 guessing-game answer generation strategy:
 
-```rust,code
+```rust
 struct GuessState {
     guess: u32,
     answer: Answer,
@@ -190,7 +190,7 @@ exposes logical errors.
 that such expressions always evaluates to a value of the correct type
 (or jump elsehwere in the program, as illustrated here):
 
-```rust,code
+```rust
 fn suggest_guess_fixed(prior_guess: u32, answer: Answer) {
     let next_guess = match answer {
         Answer::Higher => prior_guess + 10,
@@ -224,7 +224,7 @@ it is written in a style similar to a `switch` in a statement-oriented
 language like C (or C++, Java, et cetera), where the arms of the
 `match` are executed for their side-effect alone:
 
-```rust,code
+```rust
 fn num_to_ordinal(x: u32) -> String {
     let suffix;
     match (x % 10, x % 100) {
@@ -273,7 +273,7 @@ An important case where this arises is when one wants to
 initialize some state and then borrow from it, but only on
 *some* control-flow branches.
 
-```rust,code
+```rust
 fn sometimes_initialize(input: i32) {
     let string;
     let borrowed;
@@ -325,7 +325,7 @@ For example, a binary tree is either a leaf, or an internal node with
 references to two child trees. Here is one way to encode a tree of
 integers in Rust:
 
-```rust,code
+```rust
 enum BinaryTree {
     Leaf(i32),
     Node(Box<BinaryTree>, i32, Box<BinaryTree>)
@@ -349,7 +349,7 @@ az a `Node`, but the compiler statically ensure such checks are done:
 you cannot accidentally interpret the data of a `Leaf` as if it were a
 `Node`, nor vice versa.
 
-```rust,code
+```rust
 /// Sum of values in all the nodes and leaves of `t`.
 fn tree_weight_v1(t: BinaryTree) -> i32 {
     match t {
@@ -397,7 +397,7 @@ That version of `tree_weight` has one big downside, however: it takes
 its input tree by value. Once you pass a tree to `tree_weight_v1`, that
 tree is gone (as in, deallocated).
 
-```rust,code
+```rust
 #[test]
 fn tree_demo_v1_fails() {
     let tree = sample_tree();
@@ -436,7 +436,7 @@ So, if we want a version of `tree_weight` that merely borrows a tree
 rather than taking ownership of it, then we will need to make use of
 this feature of Rust's `match`.
 
-```rust,code
+```rust
 /// Sum of values in all the nodes and leaves of `t`.
 fn tree_weight_v2(t: &BinaryTree) -> i32 {
     //               ^~~~~~~~~~~ The `&` means we are *borrowing* the tree
@@ -492,7 +492,7 @@ at the same time). An important detail here is the destructuring
 binding forms like `match` allows one to take mutable references to
 disjoint parts of the data simultaneously.
 
-```rust,code
+```rust
 /// Increment the values in all the nodes and leaves of `t`.
 fn tree_grow(t: &mut BinaryTree) {
     //          ^~~~~~~~~~~~~~~ `&mut`: we have unaliased access to the tree
@@ -527,7 +527,7 @@ overwrite state secretly, subverting the type-system?
 
 Consider the following code:
 
-```rust,code
+```rust
 #[test]
 fn sound_code() {
     enum E { A(fn (i8) -> i8), B(usize) }
@@ -573,7 +573,7 @@ location and try to interpret it as executable code.
 
 But watch:
 
-```rust,code
+```rust
 #[cfg(wont_compile)]
 #[test]
 fn unsound_code_1() {
@@ -628,7 +628,7 @@ compiling are not performing a local check of just the single function
 non-local attempts to subvert the type system by sneaking the
 overwrite past the static checks are foiled, as shown here:
 
-```rust,code
+```rust
 #[cfg(wont_compile)]
 #[test]
 fn unsound_code_2() {
