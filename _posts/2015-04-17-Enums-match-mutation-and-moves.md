@@ -469,29 +469,29 @@ in its type), and, importantly, we use `ref`-bindings for `left` and
 The `ref`-binding is a crucial part of how destructuring bind of
 L-values works.
 
-When matching a value of type `T`, an identifier pattern `I` will, on
+When matching a value of type `T`, an identifier pattern `i` will, on
 a successful match, *move* the value out of the original input and
-into `I`. Thus we can always conclude in such a case that `I` has type
-`T`, or "`I: T`". (For some types `T`, known as *copyable* `T` or "`T`
-implements `Copy`", the value will in fact be copied into `I` for such
+into `i`. Thus we can always conclude in such a case that `i` has type
+`T`, or "`i: T`". (For some types `T`, known as *copyable* `T` or "`T`
+implements `Copy`", the value will in fact be copied into `i` for such
 identifier patterns; but in general types are not copyable; either
-way, such bindings do mean that `I` has ownership of a value of type
+way, such bindings do mean that `i` has ownership of a value of type
 `T`.)
 
 Thus, the bindings of `payload` in `tree_weight_v2` both have type
 `i32`; the `i32` type implements `Copy`, so the weight is copied into
 `payload` in both arms.
 
-However, when matching a value of type `T`, a `ref`-pattern `ref I`
+However, when matching a value of type `T`, a `ref`-pattern `ref i`
 will, on a successful match, merely *borrow* a reference into the
-matched data. In other words, a successful `ref I` match of a value of
-type `T` will imply that `I: &T`. Thus, in the `Node` arm of
+matched data. In other words, a successful `ref i` match of a value of
+type `T` will imply that `i: &T`. Thus, in the `Node` arm of
 `tree_weight_v2`, `left` will be reference the left-hand box (which
 holds a tree), and `right` will reference the right-hand box (which
 also holds a tree). Then we can pass those borrowed references to
 trees into the recursive calls to `tree_weight_v2`.
 
-Likewise, a `ref mut`-pattern (`ref mut I`) will, on a successful
+Likewise, a `ref mut`-pattern (`ref mut i`) will, on a successful
 match, take a borrow a *mutable reference* `&mut T`, (which allows
 mutation and ensures there are no other active references to that data
 at the same time). An important detail here is the destructuring
