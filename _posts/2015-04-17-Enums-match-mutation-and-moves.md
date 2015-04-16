@@ -311,9 +311,11 @@ generated code ensures that at the end of the scope of `string`, its
 data is deallocated if it was previously initialized.)
 
 In short, for soundness, the Rust language ensures that data is always
-initialized before it is referenced, but the designers have attempted
-to not require artifices like dummy-initializations inserted solely to
-placate such requirements.
+initialized before it is referenced, but the designers have strived to
+avoid requiring artifical coding patterns inserted solely to placate
+Rust's static analyses (such as requiring one to initialize `string`
+above with some dummy data just so that it can be borrowed later).
+
 
 ### Algebraic Data Types and Data Invariants
 
