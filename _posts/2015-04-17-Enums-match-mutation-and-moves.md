@@ -475,7 +475,7 @@ fn tree_weight_v1(t: BinaryTree) -> i32 { 0 }
 ```
 
 In fact, in Rust, `match` is designed to work quite well *without*
-taking ownership. In particular, the input to `match` is an *L-value
+taking ownership. In particular, the input to `match` is an *[L-value][L_value]
 expression*; this means that the input expression is evaluated to a
 *memory location* where the value lives.
 `match` works by doing this evaluation and then
@@ -605,7 +605,9 @@ For more information
 on details that were not covered here, such as binding via `ident @
 pattern`, or the potentially subtle difference between `{ let id =
 expr; ... }` versus `match expr { id => { ... } }`, consult the Rust
-documentation, or quiz our awesome community (in `#rust` on IRC, or in
+[documentation][rust_docs], or quiz our awesome community (in `#rust` on IRC, or in
 the [user group]).
 
+[rust_docs]: https://doc.rust-lang.org/reference.html#match-expressions
 [user group]: http://users.rust-lang.org/
+[L_value]: https://doc.rust-lang.org/reference.html#lvalues,-rvalues-and-temporaries
