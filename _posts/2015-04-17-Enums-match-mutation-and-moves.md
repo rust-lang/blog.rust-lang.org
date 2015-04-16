@@ -33,7 +33,7 @@ together are:
 * Exhaustive case analysis, which ensures that no case is omitted
   when processing an input.
 
-* `match` embraces both imperative and applicative styles of
+* `match` embraces both imperative and functional styles of
   programming: The compiler's static analyses work hard to ensure
   statement-oriented programming remains palatable, rather than
   forcing everyone to adopt an expression-oriented mindset.
@@ -104,7 +104,7 @@ fn demo_suggest_guess() {
 
 Patterns can also match structured data (e.g. tuples, slices, user-defined
 data types) via corresponding patterns. In such patterns, one often
-binds substructure of the input to local variables (identifer patterns),
+binds substructure of the input to local variables (identifier patterns),
 for use either in the arm's predicate or in its result.
 
 The special `_` pattern matches any single value, and is often used as
@@ -132,7 +132,7 @@ fn suggest_guess_smarter(s: GuessState) {
             println!("we won with {}!", p);
         }
         GuessState { answer: Answer::Higher, guess: l, low: _, high: h  } |
-        GuessState { answer: Answer::Lower, guess: h, low: l, high: _ } => {
+        GuessState { answer: Answer::Lower,  guess: h, low: l, high: _ } => {
             let mid = l + ((h - l) / 2);
             println!("lets try {} next", mid);
         }
@@ -147,6 +147,10 @@ fn demo_guess_state() {
 }
 ```
 
+This ability to simultaneously perform case analysis *and* bind input
+substructure leads to powerful, clear, and concise code, focusing the
+reader's attention directly on the data relevant to the case at hand.
+
 That is `match` in a nutshell.
 
 So, what is the interplay between this construct and Rust's approach to
@@ -154,8 +158,12 @@ ownership and safety in general?
 
 ### Exhaustive case analysis
 
-One important method of analytical thinking is case analysis: Dividing
-a problem into some number of separate cases, and then analyzing each
+`match` enforces exhaustive case analysis, which helps catch bugs in
+program logic and ensures that the value of a match expression is
+well-defined.
+
+Case analysis is an important problem solving technique: Dividing a
+problem into some number of separate cases, and then analyzing each
 case individually.
 
 For this method of problem solving to work, the cases must be
@@ -164,7 +172,9 @@ would mean a potential problem instance for which no solution has been
 identified.
 
 This brings us to one of the fundamental restrictions of Rust's
-`match` construct: the collection of provided cases must be exhautive.
+`match` construct: the collection of cases must be exhaustive. In
+other words, every possible input value must be covered by the pattern
+for a least one arm in the match.
 
 So, for example, the following code is rejected at compile-time.
 
@@ -199,7 +209,7 @@ fn suggest_guess_fixed(prior_guess: u32, answer: Answer) {
         Answer::Higher => prior_guess + 10,
         Answer::Lower  => prior_guess - 1,
         Answer::Bingo  => {
-            println!("we won!");
+            println!("we won with {}!", prior_guess);
             return;
         }
     };
@@ -214,113 +224,10 @@ fn demo_guess_fixed() {
 }
 ```
 
-### Both expression- and statement-oriented
-
-Unlike many languages that offer pattern matching, Rust *embraces*
-both statement- and expression-oriented programming.
-
-Consider writing a function which maps a non-negative integer to a
-string rendering it as an ordinal ("1st", "2nd", "3rd", ...).
-
-The following code uses range patterns to simplify things, but also,
-it is written in a style similar to a `switch` in a statement-oriented
-language like C (or C++, Java, et cetera), where the arms of the
-`match` are executed for their side-effect alone:
-
-```rust
-fn num_to_ordinal(x: u32) -> String {
-    let suffix;
-    match (x % 10, x % 100) {
-        (1, 1) | (1, 21...91) => {
-            suffix = "st";
-        }
-        (2, 2) | (2, 22...92) => {
-            suffix = "nd";
-        }
-        (3, 3) | (3, 23...93) => {
-            suffix = "rd";
-        }
-        _                     => {
-            suffix = "th";
-        }
-    }
-    return format!("{}{}", x, suffix);
-}
-
-#[test]
-fn test_num_to_ordinal() {
-    assert_eq!(num_to_ordinal(   0),    "0th");
-    assert_eq!(num_to_ordinal(   1),    "1st");
-    assert_eq!(num_to_ordinal(  12),   "12th");
-    assert_eq!(num_to_ordinal(  22),   "22nd");
-    assert_eq!(num_to_ordinal(  43),   "43rd");
-    assert_eq!(num_to_ordinal(  67),   "67th");
-    assert_eq!(num_to_ordinal(1901), "1901st");
-}
-```
-
-The Rust compiler accepts the above program; this is notable because
-its static analysis is ensuring both that `suffix` is always
-initialized before we run the `format!` at the end *and* that `suffix`
-is assigned at most once during the function's execution (because if
-we could assign `suffix` multiple times, the compiler would force us
-to mark `suffix` as mutable).
-
-To be clear, the above program certainly *can* be written in an
-expression-oriented style. The point is that each of the styles has
-its use cases, and switching to a statement-oriented style does not
-sacrifice every other feature that Rust provides, such as ensuring
-that a non-`mut` binding is assigned at most once.
-
-An important case where this arises is when one wants to
-initialize some state and then borrow from it, but only on
-*some* control-flow branches.
-
-```rust
-fn sometimes_initialize(input: i32) {
-    let string;
-    let borrowed;
-    match input {
-        0...100 => {
-            string = format!("input prints as {}", input);
-            borrowed = &string[6..];
-        }
-        _ => {
-            borrowed = "expected between 0 and 100";
-        }
-    }
-    println!("borrowed: {}", borrowed);
-
-    // (Below would cause compile-time error if uncommented.)
-    // println!("string: {}", string);
-}
-
-#[test]
-fn demo_sometimes_initialize() {
-    sometimes_initialize(23);
-    sometimes_initialize(123);
-}
-```
-
-The interesting thing about the above code is that after the `match`,
-we are not allowed to directly access `string`, because the compiler
-requires that the variable be initialized on every path through the
-program. At the same time, we *can* access the data that is held
-*within* `string`, because a reference to that data is held by the
-`borrowed` variable, which we ensure is initialized on every program
-path. (The compiler ensures that no outstanding borrows of the
-`string` data could possible outlive `string` itself, and the
-generated code ensures that at the end of the scope of `string`, its
-data is deallocated if it was previously initialized.)
-
-In short, for soundness, the Rust language ensures that data is always
-initialized before it is referenced, but the designers have strived to
-avoid requiring artifical coding patterns inserted solely to placate
-Rust's static analyses (such as requiring one to initialize `string`
-above with some dummy data just so that it can be borrowed later).
-
-
 ### Algebraic Data Types and Data Invariants
+
+Algebraic data types succinctly describe classes of data and allow one
+to encode rich structural invariants.
 
 An `enum` type allows one to define mutually-exclusive classes of
 values. The examples shown above used `enum` for simple symbolic tags,
@@ -393,14 +300,157 @@ fn tree_demo_1() {
 }
 ```
 
+### Both expression- and statement-oriented
+
+Unlike many languages that offer pattern matching, Rust *embraces*
+both statement- and expression-oriented programming.
+
+Many functional languages that offer pattern matching encourage one to
+write in an "expression-oriented style", where the focus is always on
+the value returned by combining expressions and evaluating them, and
+side-effects are discouraged. This style contrasts with imperative
+languages, which encourage a statement-oriented style that focuses on
+sequences of commands executed solely for their side-effects.
+
+Consider writing a function which maps a non-negative integer to a
+string rendering it as an ordinal ("1st", "2nd", "3rd", ...).
+
+The following code uses range patterns to simplify things, but also,
+it is written in a style similar to a `switch` in a statement-oriented
+language like C (or C++, Java, et cetera), where the arms of the
+`match` are executed for their side-effect alone:
+
+```rust
+fn num_to_ordinal(x: u32) -> String {
+    let suffix;
+    match (x % 10, x % 100) {
+        (1, 1) | (1, 21...91) => {
+            suffix = "st";
+        }
+        (2, 2) | (2, 22...92) => {
+            suffix = "nd";
+        }
+        (3, 3) | (3, 23...93) => {
+            suffix = "rd";
+        }
+        _                     => {
+            suffix = "th";
+        }
+    }
+    return format!("{}{}", x, suffix);
+}
+
+#[test]
+fn test_num_to_ordinal() {
+    assert_eq!(num_to_ordinal(   0),    "0th");
+    assert_eq!(num_to_ordinal(   1),    "1st");
+    assert_eq!(num_to_ordinal(  12),   "12th");
+    assert_eq!(num_to_ordinal(  22),   "22nd");
+    assert_eq!(num_to_ordinal(  43),   "43rd");
+    assert_eq!(num_to_ordinal(  67),   "67th");
+    assert_eq!(num_to_ordinal(1901), "1901st");
+}
+```
+
+The Rust compiler accepts the above program; this is notable because
+its static analysis is ensuring both that `suffix` is always
+initialized before we run the `format!` at the end *and* that `suffix`
+is assigned at most once during the function's execution (because if
+we could assign `suffix` multiple times, the compiler would force us
+to mark `suffix` as mutable).
+
+To be clear, the above program certainly *can* be written in an
+expression-oriented style in Rust; for example, like so:
+
+```rust
+fn num_to_ordinal_expr(x: u32) -> String {
+    format!("{}{}", x, match (x % 10, x % 100) {
+        (1, 1) | (1, 21...91) => "st",
+        (2, 2) | (2, 22...92) => "nd",
+        (3, 3) | (3, 23...93) => "rd",
+        _                     => "th"
+    })
+}
+```
+
+Sometimes expression-oriented style can yield very succinct code;
+other times the style requires contortions that can be more readily
+side-stepped when writing in statement-oriented style.
+
+Each of the styles has its use cases. Crucially, switching to a
+statement-oriented style in Rust does not sacrifice every other
+feature that Rust provides, such as the guarantee that a non-`mut`
+binding is assigned at most once.
+
+An important case where this arises is when one wants to
+initialize some state and then borrow from it, but only on
+*some* control-flow branches.
+
+```rust
+fn sometimes_initialize(input: i32) {
+    let string: String; // a dynamically-constructed string value
+    let borrowed: &str; // a reference to string data
+    match input {
+        0...100 => {
+			// Construct a String on the fly...
+            string = format!("input prints as {}", input);
+			// ... and then borrow from inside it.
+            borrowed = &string[6..];
+        }
+        _ => {
+			// String literals are *already* borrowed references
+            borrowed = "expected between 0 and 100";
+        }
+    }
+    println!("borrowed: {}", borrowed);
+
+    // Below would cause compile-time error if uncommented...
+
+	// println!("string: {}", string);
+
+	// ...namely: error: use of possibly uninitialized variable: `string`
+}
+
+#[test]
+fn demo_sometimes_initialize() {
+    sometimes_initialize(23);  // this invocation will initialize `string`
+    sometimes_initialize(123); // this one will not
+}
+```
+
+The interesting thing about the above code is that after the `match`,
+we are not allowed to directly access `string`, because the compiler
+requires that the variable be initialized on every path through the
+program. At the same time, we *can*, via `borrowed`, access the data that
+is held *within* `string`, because a reference to that data is held by the
+`borrowed` variable when we go through the first match arm, and we
+ensure `borrowed` itself is initialized on every execution path
+through the program that reaches the `println!` that uses `borrowed`.
+
+(The compiler ensures that no outstanding borrows of the
+`string` data could possible outlive `string` itself, and the
+generated code ensures that at the end of the scope of `string`, its
+data is deallocated if it was previously initialized.)
+
+In short, for soundness, the Rust language ensures that data is always
+initialized before it is referenced, but the designers have strived to
+avoid requiring artificial coding patterns inserted solely to placate
+Rust's static analyses (such as requiring one to initialize `string`
+above with some dummy data just so that it can be borrowed later).
+
 ### Matching L-values
 
-The previous section described a tree datatype, and showed a program
-that computed the sum of the integers in a tree instance.
+Matching an input can *borrow* input substructure, without taking
+ownership; this is crucial for matching a reference (e.g. a value of
+type `&T`).
+
+The "Algebraic Data Types" section above described a tree datatype, and
+showed a program that computed the sum of the integers in a tree
+instance.
 
 That version of `tree_weight` has one big downside, however: it takes
 its input tree by value. Once you pass a tree to `tree_weight_v1`, that
-tree is gone (as in, deallocated).
+tree is *gone* (as in, deallocated).
 
 ```rust
 #[test]
@@ -427,9 +477,9 @@ fn tree_weight_v1(t: BinaryTree) -> i32 { 0 }
 In fact, in Rust, `match` is designed to work quite well *without*
 taking ownership. In particular, the input to `match` is an *L-value
 expression*; this means that the input expression is evaluated to a
-*memory location* where the value lives (as opposed to an R-value
-expression, which conceptually evaluates to the value itself). Then
-`match` works by inspecting the data at that location.
+*memory location* where the value lives.
+`match` works by doing this evaluation and then
+inspecting the data at that memory location.
 
 (If the input expression is a variable name or a field/pointer
 dereference, then the L-value is just the location of that variable or
@@ -463,10 +513,19 @@ fn tree_demo_2() {
 
 The function `tree_weight_v2` looks very much like `tree_weight_v1`.
 The only differences are: we take `t` as a borrowed reference (the `&`
-in its type), and, importantly, we use `ref`-bindings for `left` and
+in its type), we added a dereference `*t`, and,
+importantly, we use `ref`-bindings for `left` and
 `right` in the `Node` case.
 
-The `ref`-binding is a crucial part of how destructuring bind of
+The dereference `*t`, interpreted as an L-value expression, is just
+extracting the memory address where the `BinaryTree` is represented
+(since the `t: &BinaryTree` is just a *reference* to that data in
+memory). The `*t` here is not making a copy of the tree, nor moving it
+to a new temporary location, because `match` is treating it as an
+L-value.
+
+The only piece left is the `ref`-binding, which
+is a crucial part of how destructuring bind of
 L-values works.
 
 When matching a value of type `T`, an identifier pattern `i` will, on
@@ -524,7 +583,7 @@ fn tree_demo_3() {
 ```
 
 Note that the code above now binds `payload` by a `ref mut`-pattern;
-if it did not use a `ref` pattern, then payload would be bound to a
+if it did not use a `ref` pattern, then `payload` would be bound to a
 local copy of the integer, while we want to modify the actual integer
 *in the tree itself*. Thus we need a reference to that integer.
 
@@ -535,7 +594,14 @@ simultaneously.
 
 ## Conclusion
 
-Thus ends our tour of `match` and enums in Rust. For more information
+Rust takes the ideas of algebraic data types and pattern matching
+pioneered by the functional programming languages, and adapts them to
+imperative programming styles and Rust's own ownership and borrowing
+systems. The `enum` and `match` forms provide clean data definitions
+and expressive power, while static analysis ensures that the resulting
+programs are safe.
+
+For more information
 on details that were not covered here, such as binding via `ident @
 pattern`, or the potentially subtle difference between `{ let id =
 expr; ... }` versus `match expr { id => { ... } }`, consult the Rust
