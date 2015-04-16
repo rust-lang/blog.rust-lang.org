@@ -191,7 +191,7 @@ exposes logical errors.
 
 * Second, since `match` is an expression form, exhaustiveness ensures
 that such expressions always evaluates to a value of the correct type
-(or jump elsehwere in the program, as illustrated here):
+(or jump elsewhere in the program, as illustrated here):
 
 ```rust
 fn suggest_guess_fixed(prior_guess: u32, answer: Answer) {
