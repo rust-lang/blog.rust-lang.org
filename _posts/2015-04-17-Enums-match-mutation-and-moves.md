@@ -425,10 +425,11 @@ fn tree_weight_v1(t: BinaryTree) -> i32 { 0 }
 ```
 
 In fact, in Rust, `match` is designed to work quite well *without*
-taking ownership. In particular, the input to `match` is an L-value;
-this means that the input expression is evaluated to a *memory
-location*, and then match works by inspecting the data at that
-location.
+taking ownership. In particular, the input to `match` is an *L-value
+expression*; this means that the input expression is evaluated to a
+*memory location* where the value lives (as opposed to an R-value
+expression, which conceptually evaluates to the value itself). Then
+`match` works by inspecting the data at that location.
 
 (If the input expression is a variable name or a field/pointer
 dereference, then the L-value is just the location of that variable or
