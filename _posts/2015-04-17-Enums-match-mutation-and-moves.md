@@ -350,7 +350,7 @@ encounter a `BinaryTree::Node` that does not have a left-hand child.
 There is no need to check for null.
 
 One *does* need to check whether a given `BinaryTree` is a `Leaf` or
-az a `Node`, but the compiler statically ensure such checks are done:
+as a `Node`, but the compiler statically ensure such checks are done:
 you cannot accidentally interpret the data of a `Leaf` as if it were a
 `Node`, nor vice versa.
 
