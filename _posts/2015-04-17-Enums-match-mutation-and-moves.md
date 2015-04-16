@@ -31,9 +31,9 @@ together are:
 
 * `match` embraces both imperative and applicative styles of
    programming.  The compiler's static analyses work hard to ensure
-   statement-oriented programming remains palatable, leaving the
-   question of whether expression-orientation is better to style
-   guides.
+   statement-oriented programming remains palatable. At the same
+   time, the `match` construct enables ergonomic case analysis far
+   beyond what is provided by a C or Java style `switch` statement.
 
 * Destructuring bind of *L-values*: Rust encourages the developer to
   think carefully about ownership and borrowing. To ensure that
