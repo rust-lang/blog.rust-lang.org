@@ -26,14 +26,17 @@ In this post we explore how Rust processes such data via `match`.
 The crucial elements that `match` and its counterpart `enum` tie
 together are:
 
+* Structural pattern matching of algebraic data types: The `match`
+  construct enables case analysis with ergonomics that are vastly
+  improved over that provided by a C or Java style `switch` statement.
+
 * Exhaustive case analysis, which ensures that no case is omitted
   when processing an input.
 
 * `match` embraces both imperative and applicative styles of
-   programming.  The compiler's static analyses work hard to ensure
-   statement-oriented programming remains palatable. At the same
-   time, the `match` construct enables ergonomic case analysis far
-   beyond what is provided by a C or Java style `switch` statement.
+  programming: The compiler's static analyses work hard to ensure
+  statement-oriented programming remains palatable, rather than
+  forcing everyone to adopt an expression-oriented mindset.
 
 * Destructuring bind of *L-values*: Rust encourages the developer to
   think carefully about ownership and borrowing. To ensure that
