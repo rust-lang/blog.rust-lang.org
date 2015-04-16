@@ -374,8 +374,8 @@ fn num_to_ordinal_expr(x: u32) -> String {
 ```
 
 Sometimes expression-oriented style can yield very succinct code;
-other times the style requires contortions that can be more readily
-side-stepped when writing in statement-oriented style.
+other times the style requires contortions that can be
+avoided by writing in a statement-oriented style.
 
 Each of the styles has its use cases. Crucially, switching to a
 statement-oriented style in Rust does not sacrifice every other
