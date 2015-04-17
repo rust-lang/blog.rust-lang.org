@@ -552,11 +552,13 @@ L-values works.
 When matching a value of type `T`, an identifier pattern `i` will, on
 a successful match, *move* the value out of the original input and
 into `i`. Thus we can always conclude in such a case that `i` has type
-`T`, or "`i: T`". (For some types `T`, known as *copyable* `T` or "`T`
-implements `Copy`", the value will in fact be copied into `i` for such
-identifier patterns. But in general types are not copyable; either
-way, such bindings do mean that `i` has ownership of a value of type
-`T`.)
+`T`, or "`i: T`".
+
+For some types `T`, known as *copyable* `T` (also pronounced "`T`
+implements `Copy`"), the value will in fact be copied into `i` for such
+identifier patterns. In the general case, an arbitrary type `T` is not copyable.
+Either way, such identifier pattern bindings do mean that `i` has
+ownership of a value of type `T`.
 
 Thus, the bindings of `payload` in `tree_weight_v2` both have type
 `i32`; the `i32` type implements `Copy`, so the weight is copied into
