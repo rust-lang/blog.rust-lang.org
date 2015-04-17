@@ -224,6 +224,14 @@ fn demo_guess_fixed() {
 }
 ```
 
+The `suggest_guess_fixed` function illustrates that `match` can handle
+some cases early (and then immediately return from the function),
+while computing whatever values are needed from the remaining cases
+and letting them fall through to the remainder of the function
+body. We can add this special case handling via `match` without fear
+of overlooking a case, because `match` will enforce the case
+analysis to be exhaustive.
+
 ### Algebraic Data Types and Data Invariants
 
 Algebraic data types succinctly describe classes of data and allow one
@@ -246,12 +254,12 @@ enum BinaryTree {
 
 (The `Box<V>` type describes an owning reference to a heap-allocated
 instance of `V`; if you own a `Box<V>`, then you also own the `V` it
-contains, and can mutate it, lend out references to it, et cetera, and
-when you finish with the box and let it fall out of scope, it will
+contains, and can mutate it, lend out references to it, et cetera.
+When you finish with the box and let it fall out of scope, it will
 automatically clean up the resources associated with the
 heap-allocated `V`.)
 
-The above definition ensures that if we are given a `BinaryTree`, it
+The above `enum` definition ensures that if we are given a `BinaryTree`, it
 will always fall into one of the above two cases. One will never
 encounter a `BinaryTree::Node` that does not have a left-hand child.
 There is no need to check for null.
@@ -301,6 +309,11 @@ fn tree_demo_1() {
     assert_eq!(tree_weight_v1(tree), (1 + 2 + 3) + 4 + 5);
 }
 ```
+
+Algebraic data types establish structural invariants that are strictly
+enforced by the language. (Even richer representation invariants can
+be maintained via the use of modules and privacy; but let us not
+digress from the topic at hand.)
 
 ### Both expression- and statement-oriented
 
@@ -378,6 +391,8 @@ fn num_to_ordinal_expr(x: u32) -> String {
 Sometimes expression-oriented style can yield very succinct code;
 other times the style requires contortions that can be
 avoided by writing in a statement-oriented style.
+(The ability to return from one `match` arm in the
+`suggest_guess_fixed` function earlier was an example of this.)
 
 Each of the styles has its use cases. Crucially, switching to a
 statement-oriented style in Rust does not sacrifice every other
@@ -423,7 +438,8 @@ fn demo_sometimes_initialize() {
 The interesting thing about the above code is that after the `match`,
 we are not allowed to directly access `string`, because the compiler
 requires that the variable be initialized on every path through the
-program. At the same time, we *can*, via `borrowed`, access data that
+program before it can be accessed.
+At the same time, we *can*, via `borrowed`, access data that
 may held *within* `string`, because a reference to that data is held by the
 `borrowed` variable when we go through the first match arm, and we
 ensure `borrowed` itself is initialized on every execution path
@@ -436,9 +452,9 @@ data is deallocated if it was previously initialized.)
 
 In short, for soundness, the Rust language ensures that data is always
 initialized before it is referenced, but the designers have strived to
-avoid requiring artificial coding patterns inserted solely to placate
+avoid requiring artificial coding patterns adopted solely to placate
 Rust's static analyses (such as requiring one to initialize `string`
-above with some dummy data just so that it can be borrowed later).
+above with some dummy data, or requiring an expression-oriented style).
 
 ### Matching L-values
 
