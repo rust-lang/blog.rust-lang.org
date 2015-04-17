@@ -11,5 +11,7 @@ github_username:  rust-lang
 # Build settings
 highlighter: pygments
 markdown: redcarpet
+redcarpet:
+  extensions: ["with_toc_data"]
 
 root: http://blog.rust-lang.org
