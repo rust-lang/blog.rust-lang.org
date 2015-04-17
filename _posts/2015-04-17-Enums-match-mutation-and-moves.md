@@ -683,6 +683,8 @@ programs are safe.
 For more information
 on details that were not covered here, such as:
 
+* how to say `Higher` instead of `Answer::Higher` in a pattern,
+
 * defining new named constants,
 
 * binding via `ident @ pattern`, or
