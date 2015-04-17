@@ -8,7 +8,7 @@ description: "A tour of matching and enums in Rust."
 One of the primary goals of the Rust project is to enable safe systems
 programming. Systems programming usually implies imperative
 programming, which in turns often implies side-effects, reasoning
-about shared, aliasable state, et cetera.
+about shared state, et cetera.
 
 At the same time, to provide *safety*, Rust programs and data types
 must be structured in a way that allows static checking to ensure
@@ -66,7 +66,7 @@ pattern describes a subset of the possible values to which
 The syntax `PATTERNS => RESULT_EXPRESSION` is called a "match arm",
 or simply "arm".
 
-Patterns can match atomic values, like integers or characters; they
+Patterns can match simple values like integers or characters; they
 can also match user-defined symbolic data, defined via `enum`.
 
 The below code demonstrates generating the next guess (poorly) in a number
@@ -100,10 +100,10 @@ executable; you can cut-and-paste the code snippets into a file
 `demo.rs`, compile the file with `--test`, and run the resulting
 binary to see the tests run.)
 
-Patterns can also match structured data (e.g. tuples, slices, user-defined
+Patterns can also match [structured data] (e.g. tuples, slices, user-defined
 data types) via corresponding patterns. In such patterns, one often
-binds substructure of the input to local variables (identifier patterns),
-for use either in the arm's predicate or in its result.
+binds parts of the input to local variables;
+those variables can then be used in the result expression.
 
 The special `_` pattern matches any single value, and is often used as
 a catch-all; the special `..` pattern generalizes this by matching any
@@ -627,7 +627,7 @@ values in a given tree.
 
 ```rust
 fn tree_grow(t: &mut BinaryTree) {
-    //          ^~~~~~~~~~~~~~~ `&mut`: we have unaliased access to the tree
+    //          ^~~~~~~~~~~~~~~ `&mut`: we have exclusive access to the tree
     match *t {
         BinaryTree::Leaf(ref mut payload) => *payload += 1,
         BinaryTree::Node(ref mut left, ref mut payload, ref mut right) => {
@@ -673,6 +673,7 @@ expr; ... }` versus `match expr { id => { ... } }`, consult the Rust
 [documentation][rust_docs], or quiz our awesome community (in `#rust` on IRC, or in
 the [user group]).
 
+[structured data]: http://en.wikipedia.org/wiki/Record_%28computer_science%29
 [rust_docs]: https://doc.rust-lang.org/
 [user group]: http://users.rust-lang.org/
 [L_value]: https://doc.rust-lang.org/reference.html#lvalues,-rvalues-and-temporaries
