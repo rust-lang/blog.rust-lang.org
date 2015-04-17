@@ -624,8 +624,9 @@ and expressive power, while static analysis ensures that the resulting
 programs are safe.
 
 For more information
-on details that were not covered here, such as binding via `ident @
-pattern`, or the potentially subtle difference between `{ let id =
+on details that were not covered here, such as
+defining new named constants, binding via `ident @ pattern`,
+or the potentially subtle difference between `{ let id =
 expr; ... }` versus `match expr { id => { ... } }`, consult the Rust
 [documentation][rust_docs], or quiz our awesome community (in `#rust` on IRC, or in
 the [user group]).
