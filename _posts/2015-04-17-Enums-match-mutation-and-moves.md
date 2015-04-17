@@ -132,9 +132,9 @@ fn suggest_guess_smarter(s: GuessState) {
         GuessState { answer: Answer::Bingo, guess: p, .. } => {
      // ~~~~~~~~~~   ~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~  ~~
      //     |                 |                 |     |
-     //     |                 |                 |     ignore remaining fields
+     //     |                 |                 |     Ignore remaining fields
      //     |                 |                 |
-     //     |                 |      copy value of field `guess` into local variable `p`
+     //     |                 |      Copy value of field `guess` into local variable `p`
      //     |                 |
      //     |   Test that `answer field is equal to `Bingo`
      //     |
@@ -154,19 +154,19 @@ fn suggest_guess_smarter(s: GuessState) {
         GuessState { answer: Answer::Lower,  low: l, guess: h, high: _ } => {
      // ~~~~~~~~~~   ~~~~~~~~~~~~~~~~~~~~~   ~~~~~~  ~~~~~~~~  ~~~~~~~
      //     |                 |                 |        |        |
-     //     |                 |                 |        |    copy or ignore
+     //     |                 |                 |        |    Copy or ignore
      //     |                 |                 |        |    field `high`,
      //     |                 |                 |        |    as appropriate
      //     |                 |                 |        |
-     //     |                 |                 |  copy field `guess` into
+     //     |                 |                 |  Copy field `guess` into
      //     |                 |                 |  local variable `l` or `h`,
-     //     |                 |                 |   as appropriate
+     //     |                 |                 |  as appropriate
      //     |                 |                 |
-     //     |                 |    copy value of field `low` into local
+     //     |                 |    Copy value of field `low` into local
      //     |                 |    variable `l`, or ignore it, as appropriate
      //     |                 |
      //     |   Test that `answer field is equal
-     //     |    to `Higher` or `Lower`, as appropriate
+     //     |   to `Higher` or `Lower`, as appropriate
      //     |
      //  Match against an instance of the struct `GuessState`
 
