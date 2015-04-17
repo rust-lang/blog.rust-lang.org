@@ -673,6 +673,10 @@ expr; ... }` versus `match expr { id => { ... } }`, consult the Rust
 [documentation][rust_docs], or quiz our awesome community (in `#rust` on IRC, or in
 the [user group]).
 
+(Many thanks to those who helped review this post, especially Aaron Turon
+and Niko Matsakis, as well as
+`Mutabah`, `proc`, `libfud`, `asQuirrel`, and `annodomini` from `#rust`.)
+
 [structured data]: http://en.wikipedia.org/wiki/Record_%28computer_science%29
 [rust_docs]: https://doc.rust-lang.org/
 [user group]: http://users.rust-lang.org/
