@@ -279,9 +279,9 @@ We can add such special case handling via `match` without fear
 of overlooking a case, because `match` will force the case
 analysis to be exhaustive.
 
-### Algebraic Data Types and Data Invariants
+### Algebraic Data Types and Structural Invariants
 
-Algebraic data types succinctly describe classes of data and allow one
+[Algebraic data types] succinctly describe classes of data and allow one
 to encode rich structural invariants.
 
 An `enum` type allows one to define mutually-exclusive classes of
@@ -678,6 +678,7 @@ and Niko Matsakis, as well as
 `Mutabah`, `proc`, `libfud`, `asQuirrel`, and `annodomini` from `#rust`.)
 
 [structured data]: http://en.wikipedia.org/wiki/Record_%28computer_science%29
+[Algebraic data types]: http://en.wikipedia.org/wiki/Algebraic_data_type
 [rust_docs]: https://doc.rust-lang.org/
 [user group]: http://users.rust-lang.org/
 [L_value]: https://doc.rust-lang.org/reference.html#lvalues,-rvalues-and-temporaries
