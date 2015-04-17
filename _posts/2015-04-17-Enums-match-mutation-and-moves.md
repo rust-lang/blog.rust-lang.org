@@ -131,8 +131,8 @@ fn suggest_guess_smarter(s: GuessState) {
         GuessState { answer: Answer::Bingo, guess: p, .. } => {
             println!("we won with {}!", p);
         }
-        GuessState { answer: Answer::Higher, guess: l, low: _, high: h  } |
-        GuessState { answer: Answer::Lower,  guess: h, low: l, high: _ } => {
+        GuessState { answer: Answer::Higher, low: _, guess: l, high: h } |
+        GuessState { answer: Answer::Lower,  low: l, guess: h, high: _ } => {
             let mid = l + ((h - l) / 2);
             println!("lets try {} next", mid);
         }
