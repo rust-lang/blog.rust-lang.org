@@ -237,9 +237,18 @@ Rust has this restriction for two reasons:
 general solution if the cases are exhaustive. Exhaustiveness-checking
 exposes logical errors.
 
-* Second, since `match` is an expression form, exhaustiveness ensures
-that such expressions always evaluates to a value of the correct type
-(or jump elsewhere in the program, as illustrated here):
+* Second, exhaustiveness-checking can act as a refactoring aid.  During
+the development process, I often add new variants for a particular
+`enum` definition.  The exhaustiveness-check helps points out all of
+the `match` expressions were I only wrote the cases from the prior
+version of the `enum` type.
+
+* Third, since `match` is an expression form, exhaustiveness ensures
+that such expressions always evaluates to a value of the correct type,
+or jump elsewhere in the program.
+
+The following code is a fixed version of the `suggest_guess_broken`
+function we saw above; it directly illustrates "jumping elsewhere":
 
 ```rust
 fn suggest_guess_fixed(prior_guess: u32, answer: Answer) {
