@@ -286,7 +286,8 @@ analysis to be exhaustive.
 [adts]: #algebraic-data-types-and-structural-invariants
 
 [Algebraic data types] succinctly describe classes of data and allow one
-to encode rich structural invariants.
+to encode rich structural invariants. Rust uses `enum` and `struct`
+definitions for this purpose.
 
 An `enum` type allows one to define mutually-exclusive classes of
 values. The examples shown above used `enum` for simple symbolic tags,
