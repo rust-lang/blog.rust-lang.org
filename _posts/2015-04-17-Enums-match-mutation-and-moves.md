@@ -100,7 +100,7 @@ executable; you can cut-and-paste the code snippets into a file
 `demo.rs`, compile the file with `--test`, and run the resulting
 binary to see the tests run.)
 
-Patterns can also match [structured data] (e.g. tuples, slices, user-defined
+Patterns can also match [structured data][structured data] (e.g. tuples, slices, user-defined
 data types) via corresponding patterns. In such patterns, one often
 binds parts of the input to local variables;
 those variables can then be used in the result expression.
