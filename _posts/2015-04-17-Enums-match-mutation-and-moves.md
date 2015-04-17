@@ -554,7 +554,7 @@ a successful match, *move* the value out of the original input and
 into `i`. Thus we can always conclude in such a case that `i` has type
 `T`, or "`i: T`". (For some types `T`, known as *copyable* `T` or "`T`
 implements `Copy`", the value will in fact be copied into `i` for such
-identifier patterns; but in general types are not copyable; either
+identifier patterns. But in general types are not copyable; either
 way, such bindings do mean that `i` has ownership of a value of type
 `T`.)
 
