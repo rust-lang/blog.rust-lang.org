@@ -245,6 +245,9 @@ version of the `enum` type.
 that such expressions always either evaluate to a value of the correct type,
 *or* jump elsewhere in the program.
 
+#### Jumping out of a match
+[jumping]: #jumping-out-of-a-match
+
 The following code is a fixed version of the `suggest_guess_broken`
 function we saw above; it directly illustrates "jumping elsewhere":
 
@@ -439,7 +442,7 @@ Sometimes expression-oriented style can yield very succinct code;
 other times the style requires contortions that can be
 avoided by writing in a statement-oriented style.
 (The ability to return from one `match` arm in the
-`suggest_guess_fixed` function earlier was an example of this.)
+`suggest_guess_fixed` function [earlier][jumping] was an example of this.)
 
 Each of the styles has its use cases. Crucially, switching to a
 statement-oriented style in Rust does not sacrifice every other
