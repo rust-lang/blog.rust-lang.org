@@ -74,11 +74,6 @@ can also match user-defined symbolic data, defined via `enum`.
 The below code demonstrates generating the next guess (poorly) in a number
 guessing game, given the answer from a previous guess.
 
-(Incidentally, nearly all the code in this post is directly
-executable; you can cut-and-paste the code snippets into a file
-`demo.rs`, compile the file with `--test`, and run the resulting
-binary to see the tests run.)
-
 ```rust
 enum Answer {
     Higher,
@@ -101,6 +96,11 @@ fn demo_suggest_guess() {
 	suggest_guess(19, Answer::Bingo);
 }
 ```
+
+(Incidentally, nearly all the code in this post is directly
+executable; you can cut-and-paste the code snippets into a file
+`demo.rs`, compile the file with `--test`, and run the resulting
+binary to see the tests run.)
 
 Patterns can also match structured data (e.g. tuples, slices, user-defined
 data types) via corresponding patterns. In such patterns, one often
