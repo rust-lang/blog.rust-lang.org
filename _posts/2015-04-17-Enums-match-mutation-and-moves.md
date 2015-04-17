@@ -419,8 +419,10 @@ fn test_num_to_ordinal() {
 
 The Rust compiler accepts the above program. This is notable because
 its static analyses ensure both:
+
 * `suffix` is always initialized before we run the `format!` at the end
   of the function, and
+
 * `suffix` is assigned *at most once* during the function's execution (because if
   we could assign `suffix` multiple times, the compiler would force us
   to mark `suffix` as mutable).
