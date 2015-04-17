@@ -596,34 +596,39 @@ The only piece left is the `ref`-binding, which
 is a crucial part of how destructuring bind of
 L-values works.
 
-When matching a value of type `T`, an identifier pattern `i` will, on
-a successful match, *move* the value out of the original input and
-into `i`. Thus we can always conclude in such a case that `i` has type
-`T`, or "`i: T`".
+* When matching a value of type `T`, an identifier pattern `i` will, on
+  a successful match, *move* the value out of the original input and
+  into `i`. Thus we can always conclude in such a case that `i` has type
+  `T` (or more succinctly, "`i: T`").
 
-For some types `T`, known as *copyable* `T` (also pronounced "`T`
-implements `Copy`"), the value will in fact be copied into `i` for such
-identifier patterns. In the general case, an arbitrary type `T` is not copyable.
-Either way, such identifier pattern bindings do mean that `i` has
-ownership of a value of type `T`.
+  For some types `T`, known as *copyable* `T` (also pronounced "`T`
+  implements `Copy`"), the value will in fact be copied into `i` for such
+  identifier patterns. (Note that in general, an arbitrary type `T` is not copyable.)
+
+  Either way, such pattern bindings do mean that the variable `i` has
+  *ownership* of a value of type `T`.
 
 Thus, the bindings of `payload` in `tree_weight_v2` both have type
 `i32`; the `i32` type implements `Copy`, so the weight is copied into
 `payload` in both arms.
 
-However, when matching a value of type `T`, a `ref`-pattern `ref i`
-will, on a successful match, merely *borrow* a reference into the
-matched data. In other words, a successful `ref i` match of a value of
-type `T` will imply that `i: &T`. Thus, in the `Node` arm of
+* However, when matching a value of type `T`, a `ref`-pattern `ref i`
+  will, on a successful match, merely *borrow* a reference into the
+  matched data. In other words, a successful `ref i` match of a value of
+  type `T` will imply that `i` has the type of a *reference* to `T`
+  (or more succinctly, "`i: &T`").
+
+Thus, in the `Node` arm of
 `tree_weight_v2`, `left` will be a reference to the left-hand box (which
 holds a tree), and `right` will likewise reference the right-hand tree.
-Then we can pass those borrowed references to
-trees into the recursive calls to `tree_weight_v2`.
+
+We can pass these borrowed references to trees into the recursive calls to `tree_weight_v2`,
+as the code demonstrates.
 
 Likewise, a `ref mut`-pattern (`ref mut i`) will, on a successful
-match, borrow a *mutable reference* into the input, `i: &mut T`, (which allows
+match, borrow a *mutable reference* into the input: `i: &mut T`. This allows
 mutation and ensures there are no other active references to that data
-at the same time). A destructuring
+at the same time. A destructuring
 binding form like `match` allows one to take mutable references to
 disjoint parts of the data simultaneously.
 
