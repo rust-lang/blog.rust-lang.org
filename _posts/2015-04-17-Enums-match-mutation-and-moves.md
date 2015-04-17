@@ -158,6 +158,11 @@ ownership and safety in general?
 
 ### Exhaustive case analysis
 
+> ...when you have eliminated all which is impossible,
+> then whatever remains, however improbable, must be the truth.
+>
+> -- Sherlock Holmes (Arthur Conan Doyle, "The Blanched Soldier")
+
 `match` enforces exhaustive case analysis, which helps catch bugs in
 program logic and ensures that the value of a match expression is
 well-defined.
@@ -624,6 +629,6 @@ expr; ... }` versus `match expr { id => { ... } }`, consult the Rust
 [documentation][rust_docs], or quiz our awesome community (in `#rust` on IRC, or in
 the [user group]).
 
-[rust_docs]: https://doc.rust-lang.org/reference.html#match-expressions
+[rust_docs]: https://doc.rust-lang.org/
 [user group]: http://users.rust-lang.org/
 [L_value]: https://doc.rust-lang.org/reference.html#lvalues,-rvalues-and-temporaries
