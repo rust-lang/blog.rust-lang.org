@@ -130,6 +130,16 @@ fn suggest_guess_smarter(s: GuessState) {
     match s {
         // First arm only fires on Bingo; it binds `p` to last guess.
         GuessState { answer: Answer::Bingo, guess: p, .. } => {
+     // ~~~~~~~~~~   ~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~  ~~
+     //     |                 |                 |     |
+     //     |                 |                 |     ignore remaining fields
+     //     |                 |                 |
+     //     |                 |      copy value of field `guess` into local variable `p`
+     //     |                 |
+     //     |   Test that `answer field is equal to `Bingo`
+     //     |
+     //  Match against an instance of the struct `GuessState`
+     
             println!("we won with {}!", p);
         }
 
@@ -138,10 +148,28 @@ fn suggest_guess_smarter(s: GuessState) {
         //
         // - If it was too low, then we want something higher, so we
         //   bind the guess to `l` and use our last high guess as `h`.
-        GuessState { answer: Answer::Higher, low: _, guess: l, high: h } |
         // - If it was too high, then we want something lower; bind
         //   the guess to `h` and use our last low guess as `l`.
+        GuessState { answer: Answer::Higher, low: _, guess: l, high: h } |
         GuessState { answer: Answer::Lower,  low: l, guess: h, high: _ } => {
+     // ~~~~~~~~~~   ~~~~~~~~~~~~~~~~~~~~~   ~~~~~~  ~~~~~~~~  ~~~~~~~
+     //     |                 |                 |        |        |
+     //     |                 |                 |        |    copy or ignore
+     //     |                 |                 |        |    field `high`,
+     //     |                 |                 |        |    as appropriate
+     //     |                 |                 |        |
+     //     |                 |                 |  copy field `guess` into
+     //     |                 |                 |  local variable `l` or `h`,
+     //     |                 |                 |   as appropriate
+     //     |                 |                 |
+     //     |                 |    copy value of field `low` into local
+     //     |                 |    variable `l`, or ignore it, as appropriate
+     //     |                 |
+     //     |   Test that `answer field is equal
+     //     |    to `Higher` or `Lower`, as appropriate
+     //     |
+     //  Match against an instance of the struct `GuessState`
+
             let mid = l + ((h - l) / 2);
             println!("lets try {} next", mid);
         }
