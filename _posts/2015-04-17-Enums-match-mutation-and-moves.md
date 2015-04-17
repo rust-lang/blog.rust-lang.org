@@ -287,17 +287,13 @@ fn tree_weight_v1(t: BinaryTree) -> i32 {
     }
 }
 
-/// Looks like:
+/// Returns tree that Looks like:
 ///
-/// (4)
-///  |
-///  +--(2)
-///  |   |
-///  |   +--[1]
-///  |   |
-///  |   +--[3]
-///  |
-///  +--[5]
+///      +----(4)---+
+///      |          |
+///   +-(2)-+      [5]
+///   |     |   
+///  [1]   [3]
 ///
 fn sample_tree() -> BinaryTree {
     let l1 = Box::new(BinaryTree::Leaf(1));
