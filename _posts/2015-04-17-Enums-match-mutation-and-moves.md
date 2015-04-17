@@ -506,7 +506,8 @@ avoid requiring artificial coding patterns adopted solely to placate
 Rust's static analyses (such as requiring one to initialize `string`
 above with some dummy data, or requiring an expression-oriented style).
 
-### Matching L-values
+### Matching without moving
+[matching without moving]: #matching-without-moving
 
 Matching an input can *borrow* input substructure, without taking
 ownership; this is crucial for matching a reference (e.g. a value of
