@@ -280,6 +280,7 @@ of overlooking a case, because `match` will force the case
 analysis to be exhaustive.
 
 ### Algebraic Data Types and Structural Invariants
+[adts]: #algebraic-data-types-and-structural-invariants
 
 [Algebraic data types] succinctly describe classes of data and allow one
 to encode rich structural invariants.
@@ -508,7 +509,7 @@ Matching an input can *borrow* input substructure, without taking
 ownership; this is crucial for matching a reference (e.g. a value of
 type `&T`).
 
-The "Algebraic Data Types" section above described a tree datatype, and
+The ["Algebraic Data Types" section][adts] above described a tree datatype, and
 showed a program that computed the sum of the integers in a tree
 instance.
 
