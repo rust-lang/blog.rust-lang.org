@@ -321,7 +321,7 @@ is a `Node`, but the compiler statically ensures such checks are done:
 you cannot accidentally interpret the data of a `Leaf` as if it were a
 `Node`, nor vice versa.
 
-Here is a function that increments all of the integers in a tree
+Here is a function that sums all of the integers in a tree
 using `match`.
 
 ```rust
