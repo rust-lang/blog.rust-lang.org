@@ -323,10 +323,12 @@ both statement- and expression-oriented programming.
 
 Many functional languages that offer pattern matching encourage one to
 write in an "expression-oriented style", where the focus is always on
-the value returned by combining expressions and evaluating them, and
+the values returned by evaluating combinations of expressions, and
 side-effects are discouraged. This style contrasts with imperative
 languages, which encourage a statement-oriented style that focuses on
 sequences of commands executed solely for their side-effects.
+
+Rust excels in supporting both styles.
 
 Consider writing a function which maps a non-negative integer to a
 string rendering it as an ordinal ("1st", "2nd", "3rd", ...).
