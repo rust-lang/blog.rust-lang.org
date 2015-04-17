@@ -53,17 +53,17 @@ The `match` expression in Rust has this form:
 
 ```rust
 match INPUT_EXPRESSION {
-    PREDICATE_1 => RESULT_EXPRESSION_1,
-    PREDICATE_2 => RESULT_EXPRESSION_2,
+    PATTERNS_1 => RESULT_EXPRESSION_1,
+    PATTERNS_2 => RESULT_EXPRESSION_2,
     ...
-    PREDICATE_n => RESULT_EXPRESSION_n
+    PATTERNS_n => RESULT_EXPRESSION_n
 }
 ```
 
-where each of the `PREDICATE_i` contains at least one *pattern*. A
+where each of the `PATTERNS_i` contains at least one *pattern*. A
 pattern describes a subset of the possible values to which
 `INPUT_EXPRESSION` could evaluate.
-The syntax `PREDICATE => RESULT_EXPRESSION` is called a "match arm",
+The syntax `PATTERNS => RESULT_EXPRESSION` is called a "match arm",
 or simply "arm".
 
 Patterns can match atomic values, like integers or characters; they
