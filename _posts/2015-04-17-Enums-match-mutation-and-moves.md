@@ -291,7 +291,7 @@ definitions for this purpose.
 
 An `enum` type allows one to define mutually-exclusive classes of
 values. The examples shown above used `enum` for simple symbolic tags,
-but in Rust, such definitions can define much richer classes of data.
+but in Rust, enums can define much richer classes of data.
 
 For example, a binary tree is either a leaf, or an internal node with
 references to two child trees. Here is one way to encode a tree of
