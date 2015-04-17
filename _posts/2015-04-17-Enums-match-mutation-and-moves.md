@@ -200,23 +200,19 @@ ownership and safety in general?
 >
 > -- Sherlock Holmes (Arthur Conan Doyle, "The Blanched Soldier")
 
-`match` enforces exhaustive case analysis, which helps catch bugs in
-program logic and ensures that the value of a match expression is
-well-defined.
+One useful way to tackle a complex problem is to break it down
+into individual cases and analyze each case individually.
+For this method of problem solving to work, the breakdown must be
+*collectively exhaustive*; all of the cases you identified must
+actually cover all possible scenarios.
 
-Case analysis is an important problem solving technique: Dividing a
-problem into some number of separate cases, and then analyzing each
-case individually.
+Using `enum` and `match` in Rust can aid this process, because
+`match` enforces exhaustive case analysis:
+Every possible input value for a `match` must be covered by the pattern
+in a least one arm in the match.
 
-For this method of problem solving to work, the cases must be
-*collectively exhaustive*; otherwise, a case that was not covered
-would mean a potential problem instance for which no solution has been
-identified.
-
-This brings us to one of the fundamental restrictions of Rust's
-`match` construct: the collection of cases must be exhaustive. In
-other words, every possible input value must be covered by the pattern
-for a least one arm in the match.
+This helps catch bugs in program logic and ensures that the value of a
+`match` expression is well-defined.
 
 So, for example, the following code is rejected at compile-time.
 
