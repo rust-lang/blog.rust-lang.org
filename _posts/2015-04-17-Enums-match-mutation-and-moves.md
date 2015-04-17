@@ -229,7 +229,7 @@ Many other languages offer a pattern matching construct (ML and
 various macro-based `match` implementations in Scheme both come to
 mind), but not all of them have this restriction.
 
-Rust has this restriction for two reasons:
+Rust has this restriction for these reasons:
 
 * First, as noted above, dividing a problem into cases only yields a
 general solution if the cases are exhaustive. Exhaustiveness-checking
