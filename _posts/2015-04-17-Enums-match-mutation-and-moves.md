@@ -238,7 +238,7 @@ exposes logical errors.
 * Second, exhaustiveness-checking can act as a refactoring aid.  During
 the development process, I often add new variants for a particular
 `enum` definition.  The exhaustiveness-check helps points out all of
-the `match` expressions were I only wrote the cases from the prior
+the `match` expressions where I only wrote the cases from the prior
 version of the `enum` type.
 
 * Third, since `match` is an expression form, exhaustiveness ensures
