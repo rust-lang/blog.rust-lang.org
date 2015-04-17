@@ -261,8 +261,10 @@ is a `Node`, but the compiler statically ensure such checks are done:
 you cannot accidentally interpret the data of a `Leaf` as if it were a
 `Node`, nor vice versa.
 
+Here is a function that increments all of the integers in a tree
+using `match`.
+
 ```rust
-/// Sum of values in all the nodes and leaves of `t`.
 fn tree_weight_v1(t: BinaryTree) -> i32 {
     match t {
         BinaryTree::Leaf(payload) => payload,
@@ -421,14 +423,14 @@ fn demo_sometimes_initialize() {
 The interesting thing about the above code is that after the `match`,
 we are not allowed to directly access `string`, because the compiler
 requires that the variable be initialized on every path through the
-program. At the same time, we *can*, via `borrowed`, access the data that
-is held *within* `string`, because a reference to that data is held by the
+program. At the same time, we *can*, via `borrowed`, access data that
+may held *within* `string`, because a reference to that data is held by the
 `borrowed` variable when we go through the first match arm, and we
 ensure `borrowed` itself is initialized on every execution path
 through the program that reaches the `println!` that uses `borrowed`.
 
 (The compiler ensures that no outstanding borrows of the
-`string` data could possible outlive `string` itself, and the
+`string` data could possibly outlive `string` itself, and the
 generated code ensures that at the end of the scope of `string`, its
 data is deallocated if it was previously initialized.)
 
@@ -493,7 +495,6 @@ rather than taking ownership of it, then we will need to make use of
 this feature of Rust's `match`.
 
 ```rust
-/// Sum of values in all the nodes and leaves of `t`.
 fn tree_weight_v2(t: &BinaryTree) -> i32 {
     //               ^~~~~~~~~~~ The `&` means we are *borrowing* the tree
     match *t {
@@ -545,9 +546,9 @@ However, when matching a value of type `T`, a `ref`-pattern `ref i`
 will, on a successful match, merely *borrow* a reference into the
 matched data. In other words, a successful `ref i` match of a value of
 type `T` will imply that `i: &T`. Thus, in the `Node` arm of
-`tree_weight_v2`, `left` will be reference the left-hand box (which
-holds a tree), and `right` will reference the right-hand box (which
-also holds a tree). Then we can pass those borrowed references to
+`tree_weight_v2`, `left` will be a reference to the left-hand box (which
+holds a tree), and `right` will likewise reference the right-hand tree.
+Then we can pass those borrowed references to
 trees into the recursive calls to `tree_weight_v2`.
 
 Likewise, a `ref mut`-pattern (`ref mut i`) will, on a successful
@@ -561,7 +562,6 @@ This code demonstrates this concept by incrementing all of the
 values in a given tree.
 
 ```rust
-/// Increment the values in all the nodes and leaves of `t`.
 fn tree_grow(t: &mut BinaryTree) {
     //          ^~~~~~~~~~~~~~~ `&mut`: we have unaliased access to the tree
     match *t {
