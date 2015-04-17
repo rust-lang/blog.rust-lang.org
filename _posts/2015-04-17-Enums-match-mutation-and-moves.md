@@ -370,12 +370,12 @@ fn test_num_to_ordinal() {
 }
 ```
 
-The Rust compiler accepts the above program; this is notable because
-its static analysis is ensuring both that `suffix` is always
-initialized before we run the `format!` at the end *and* that `suffix`
-is assigned at most once during the function's execution (because if
-we could assign `suffix` multiple times, the compiler would force us
-to mark `suffix` as mutable).
+The Rust compiler accepts the above program. This is notable because
+its static analyses ensure both:
+* `suffix` is always initialized before we run the `format!` at the end
+* `suffix` is assigned *at most once* during the function's execution (because if
+  we could assign `suffix` multiple times, the compiler would force us
+  to mark `suffix` as mutable).
 
 To be clear, the above program certainly *can* be written in an
 expression-oriented style in Rust; for example, like so:
