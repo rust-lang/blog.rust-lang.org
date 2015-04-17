@@ -128,10 +128,19 @@ struct GuessState {
 
 fn suggest_guess_smarter(s: GuessState) {
     match s {
+        // First arm only fires on Bingo; it binds `p` to last guess.
         GuessState { answer: Answer::Bingo, guess: p, .. } => {
             println!("we won with {}!", p);
         }
+
+        // Second arm fires if answer was too low or too high.
+        // We want to find a new guess in the range (l..h), where:
+        //
+        // - If it was too low, then we want something higher, so we
+        //   bind the guess to `l` and use our last high guess as `h`.
         GuessState { answer: Answer::Higher, low: _, guess: l, high: h } |
+        // - If it was too high, then we want something lower; bind
+        //   the guess to `h` and use our last low guess as `l`.
         GuessState { answer: Answer::Lower,  low: l, guess: h, high: _ } => {
             let mid = l + ((h - l) / 2);
             println!("lets try {} next", mid);
