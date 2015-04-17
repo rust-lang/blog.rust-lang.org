@@ -576,7 +576,7 @@ trees into the recursive calls to `tree_weight_v2`.
 Likewise, a `ref mut`-pattern (`ref mut i`) will, on a successful
 match, borrow a *mutable reference* into the input, `i: &mut T`, (which allows
 mutation and ensures there are no other active references to that data
-at the same time). An important detail here is a destructuring
+at the same time). A destructuring
 binding form like `match` allows one to take mutable references to
 disjoint parts of the data simultaneously.
 
