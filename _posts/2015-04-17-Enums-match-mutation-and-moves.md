@@ -275,8 +275,10 @@ The `suggest_guess_fixed` function illustrates that `match` can handle
 some cases early (and then immediately return from the function),
 while computing whatever values are needed from the remaining cases
 and letting them fall through to the remainder of the function
-body. We can add this special case handling via `match` without fear
-of overlooking a case, because `match` will enforce the case
+body.
+
+We can add such special case handling via `match` without fear
+of overlooking a case, because `match` will force the case
 analysis to be exhaustive.
 
 ### Algebraic Data Types and Data Invariants
