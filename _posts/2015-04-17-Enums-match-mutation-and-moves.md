@@ -89,9 +89,9 @@ fn suggest_guess(prior_guess: u32, answer: Answer) {
 
 #[test]
 fn demo_suggest_guess() {
-	suggest_guess(10, Answer::Higher);
-	suggest_guess(20, Answer::Lower);
-	suggest_guess(19, Answer::Bingo);
+    suggest_guess(10, Answer::Higher);
+    suggest_guess(20, Answer::Lower);
+    suggest_guess(19, Answer::Bingo);
 }
 ```
 
@@ -176,9 +176,9 @@ fn suggest_guess_smarter(s: GuessState) {
 
 #[test]
 fn demo_guess_state() {
-	suggest_guess_smarter(GuessState {
-		guess: 20, answer: Answer::Lower, low: 10, high: 1000
-	});
+    suggest_guess_smarter(GuessState {
+        guess: 20, answer: Answer::Lower, low: 10, high: 1000
+    });
 }
 ```
 
@@ -266,9 +266,9 @@ fn suggest_guess_fixed(prior_guess: u32, answer: Answer) {
 
 #[test]
 fn demo_guess_fixed() {
-	suggest_guess_fixed(10, Answer::Higher);
-	suggest_guess_fixed(20, Answer::Lower);
-	suggest_guess_fixed(19, Answer::Bingo);
+    suggest_guess_fixed(10, Answer::Higher);
+    suggest_guess_fixed(20, Answer::Lower);
+    suggest_guess_fixed(19, Answer::Bingo);
 }
 ```
 
@@ -460,13 +460,13 @@ fn sometimes_initialize(input: i32) {
     let borrowed: &str; // a reference to string data
     match input {
         0...100 => {
-			// Construct a String on the fly...
+            // Construct a String on the fly...
             string = format!("input prints as {}", input);
-			// ... and then borrow from inside it.
+            // ... and then borrow from inside it.
             borrowed = &string[6..];
         }
         _ => {
-			// String literals are *already* borrowed references
+            // String literals are *already* borrowed references
             borrowed = "expected between 0 and 100";
         }
     }
@@ -474,9 +474,9 @@ fn sometimes_initialize(input: i32) {
 
     // Below would cause compile-time error if uncommented...
 
-	// println!("string: {}", string);
+    // println!("string: {}", string);
 
-	// ...namely: error: use of possibly uninitialized variable: `string`
+    // ...namely: error: use of possibly uninitialized variable: `string`
 }
 
 #[test]
