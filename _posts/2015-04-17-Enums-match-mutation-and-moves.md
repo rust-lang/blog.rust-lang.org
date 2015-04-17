@@ -596,6 +596,8 @@ The only piece left is the `ref`-binding, which
 is a crucial part of how destructuring bind of
 L-values works.
 
+First, let us carefully state the meaning of a *non-ref* binding:
+
 * When matching a value of type `T`, an identifier pattern `i` will, on
   a successful match, *move* the value out of the original input and
   into `i`. Thus we can always conclude in such a case that `i` has type
@@ -612,7 +614,9 @@ Thus, the bindings of `payload` in `tree_weight_v2` both have type
 `i32`; the `i32` type implements `Copy`, so the weight is copied into
 `payload` in both arms.
 
-* However, when matching a value of type `T`, a `ref`-pattern `ref i`
+Now we are ready to state what a ref-binding is:
+
+* When matching an L-value of type `T`, a `ref`-pattern `ref i`
   will, on a successful match, merely *borrow* a reference into the
   matched data. In other words, a successful `ref i` match of a value of
   type `T` will imply that `i` has the type of a *reference* to `T`
