@@ -242,8 +242,8 @@ the `match` expressions where I only wrote the cases from the prior
 version of the `enum` type.
 
 * Third, since `match` is an expression form, exhaustiveness ensures
-that such expressions always evaluates to a value of the correct type,
-or jump elsewhere in the program.
+that such expressions always either evaluate to a value of the correct type,
+*or* jump elsewhere in the program.
 
 The following code is a fixed version of the `suggest_guess_broken`
 function we saw above; it directly illustrates "jumping elsewhere":
