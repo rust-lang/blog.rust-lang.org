@@ -184,6 +184,7 @@ and [libsodium][sodiumoxide]. This list is also growing quite rapidly on
 [crates.io][crates-io], so your favorite C library may already be bound or will
 be bound soon!
 
+[blog post on ownership]: http://blog.skylight.io/rust-means-never-having-to-close-a-socket/
 [rust-openssl]: https://crates.io/crates/openssl
 [git2-rs]: https://crates.io/crates/git2
 [curl-rust]: https://crates.io/crates/curl
