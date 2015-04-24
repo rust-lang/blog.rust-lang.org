@@ -11,14 +11,14 @@ it talks to itself. For this reason, **Rust makes it easy to communicate with C
 APIs without overhead, and to leverage its ownership system to provide much
 stronger safety guarantees for those APIs at the same time**.
 
-In more detail, Rust's *foreign function interface* (FFI) is the way that it
-communicated with other languages. Following Rust's design principles, the FFI
-provides a **zero-cost abstraction** where function calls between Rust and C
-have identical performance to C function calls. FFI bindings can also leverage
-language features such as ownership and borrowing to provide a **safe
-interface** that enforces protocols around pointers and other resources. These
-protocols usually appear only in the documentation for C APIs -- at best -- but
-Rust makes them explicit.
+To communicate with other languages, Rust provides a *foreign function
+interface* (FFI). Following Rust's design principles, the FFI provides a
+**zero-cost abstraction** where function calls between Rust and C have identical
+performance to C function calls. FFI bindings can also leverage language
+features such as ownership and borrowing to provide a **safe interface** that
+enforces protocols around pointers and other resources. These protocols usually
+appear only in the documentation for C APIs -- at best -- but Rust makes them
+explicit.
 
 In this post we'll explore how to encapsulate unsafe FFI calls to C in safe,
 zero-cost abstractions. Working with C is, however, just an example; we'll also
@@ -157,16 +157,14 @@ impl Tarball {
 ```
 
 Here the `*mut tarball_t` pointer is *owned by* a `Tarball`, which is
-responsible for any destruction and cleanup.  So we already have rich knowledge
-about the lifetime of the resource: if you have access to a `Tarball`, you know
-that the pointer inside must still be valid. Additionally, the `file` method
+responsible for any destruction and cleanup, so we already have rich knowledge
+about the lifetime of the tarball's memory. Additionally, the `file` method
 returns a **borrowed slice** whose lifetime is implicitly connected to the
 lifetime of the source tarball itself (the `&self` argument). This is Rust's way
 of indicating that the returned slice can only be used within the lifetime of
-the tarball, which in turn means that the slice will always point to valid
-memory. Thus, Rust statically prevents dangling pointer bugs that are easy to
+the tarball, statically preventing dangling pointer bugs that are easy to
 make when working directly with C. (If you're not familiar with this kind of
-borrowing in Rust, have a look at Yehuda Katz's [blog post] on ownership.)
+borrowing in Rust, have a look at Yehuda Katz's [blog post on ownership].)
 
 [blog post]: http://blog.skylight.io/rust-means-never-having-to-close-a-socket/
 
