@@ -5,29 +5,31 @@ author: Alex Crichton
 description: "Zero-cost and safe FFI in Rust"
 ---
 
-
 Rust's quest for world domination was never destined to happen overnight, so
-Rust needs to be able to interoperate with the existing world just as easily
-as it talks to itself. To solve this problem, **Rust lets you communicate with C
-APIs at no extra cost while providing strong safety guarantees**.
+Rust needs to be able to interoperate with the existing world just as easily as
+it talks to itself. In particular, **Rust makes it easy to communicate with C
+APIs without overhead, and to leverage its ownership system to provide much
+stronger safety guarantees for those APIs at the same time**.
 
-This is also referred to as Rust's foreign function interface (FFI) and is the
-method by which Rust communicates with other programming languages. Following
-Rust's design principles, this is a **zero cost abstraction** where function
-calls between Rust and C have identical performance to C function calls. FFI
-bindings can also leverage language features such as ownership and borrowing to
-provide a **safe interface**.
+In more detail, Rust's *foreign function interface* (FFI) is the way that it
+communicated with other languages. Following Rust's design principles, the FFI
+provides a **zero cost abstraction** where function calls between Rust and C
+have identical performance to C function calls. FFI bindings can also leverage
+language features such as ownership and borrowing to provide a **safe
+interface** that enforces protocols around pointers and other resources. These
+protocols usually appear only in the documentation for C APIs -- at best -- but
+Rust makes them explicit.
 
 In this post we'll explore how to encapsulate unsafe FFI calls to C in safe,
-zero-cost abstractions by looking at some examples of interacting with C.
-Working with C is, however, just an example, as we'll also see how Rust can
-easily talk to languages like Python and Ruby just as seamlessly as C.
+zero-cost abstractions. Working with C is, however, just an example; we'll also
+see how Rust can easily talk to languages like Python and Ruby just as
+seamlessly as with C.
 
-### Talking to C
+### Rust talking to C
 
-First, let's start with an example of calling C code from Rust and then
-demonstrate that Rust imposes no additional overhead. Starting off simple,
-here's a C program which will simply double all the input it's given:
+Let's start with a simple example of calling C code from Rust and then
+demonstrate that Rust imposes no additional overhead. Here's a C program which
+will simply double all the input it's given:
 
 ```c
 int double_input(int input) {
@@ -35,7 +37,7 @@ int double_input(int input) {
 }
 ```
 
-To call this from Rust, one would write this program:
+To call this from Rust, you might write a program like this:
 
 ```rust
 extern crate libc;
@@ -51,18 +53,18 @@ fn main() {
 }
 ```
 
-And that's it! You can try this out for yourself by [checking out the code on
-GitHub][rust2c] and running `cargo run` from that directory. At the source level
-we can see that there's no burden in calling an external function, and we'll see
-soon that the generated code indeed has no overhead. There are, however, a few
-subtle aspects of this Rust program so let's cover each piece in detail.
+And that's it! You can try this out for yourself by
+[checking out the code on GitHub][rust2c] and running `cargo run` from that
+directory. **At the source level we can see that there's no burden in calling an
+external function beyond stating its signature, and we'll see soon that the
+generated code indeed has no overhead, either.** There are, however, a few
+subtle aspects of this Rust program, so let's cover each piece in detail.
 
 [rust2c]: https://github.com/alexcrichton/rust-ffi-examples/tree/master/rust-to-c
 
-First up we see `extern crate libc`. [This crate][libc] provides many useful
-type definitions for FFI bindings when talking with C, and it is necessary
-to ensure that both C and Rust agree on the types crossing the language
-boundary.
+First up we see `extern crate libc`. [The libc crate][libc] provides many useful
+type definitions for FFI bindings when talking with C, and it makes it easy to
+ensure that both C and Rust agree on the types crossing the language boundary.
 
 [libc]: https://crates.io/crates/libc
 
@@ -89,9 +91,12 @@ fn main() {
 
 We see one of the crucial aspects of FFI in Rust here, the `unsafe` block. The
 compiler knows nothing about the implementation of `double_input`, so it must
-assume that memory unsafety *could* happen in this scenario. This may seem
-limiting, but Rust has just the right set of tools to allow consumers to not
-worry about `unsafe` (more on this in a moment).
+assume that memory unsafety *could* happen whenever you call a foreign function.
+The `unsafe` block is how the programmer takes responsibility for ensuring
+safety -- you are promising that the actual call you make will not, in fact,
+violate memory safety, and thus that Rust's basic guarantees are upheld.  This
+may seem limiting, but Rust has just the right set of tools to allow consumers
+to not worry about `unsafe` (more on this in a moment).
 
 Now that we've seen how to call a C function from Rust, let's see if we can
 verify this claim of zero overhead. Almost all programming languages can call
@@ -111,11 +116,11 @@ exactly the same cost as it would be in C.
 
 ### Safe Abstractions
 
-One of Rust's core design principles is its emphasis on ownership, and FFI is no
-exception here. When binding a C library in Rust you not only have the benefit
-of 0 overhead, but you are also able to make it *safer* than C can! Bindings
-can leverage the ownership and borrowing principles in Rust to codify comments
-typically found in a C header about how its API should be used.
+Most features in Rust tie into its core concept of ownership, and the FFI is no
+exception. When binding a C library in Rust you not only have the benefit of zero
+overhead, but you are also able to make it *safer* than C can! **Bindings can
+leverage the ownership and borrowing principles in Rust to codify comments
+typically found in a C header about how its API should be used.**
 
 For example, consider a C library for parsing a tarball. This library will
 expose functions to read the contents of each file in the tarball, probably
@@ -151,25 +156,35 @@ impl Tarball {
 }
 ```
 
-Here the `*mut tarball_t` pointer is *owned by* a `Tarball`, so we already have
-rich knowledge about the lifetime of the resource. Additionally, the `file`
-method returns a **borrowed slice** whose lifetime is connected to the same
-lifetime as the source tarball itself. This is Rust's way of indicating that the
-returned data cannot outlive the tarball, statically preventing bugs that may be
-encountered when just using C.
+Here the `*mut tarball_t` pointer is *owned by* a `Tarball`, which is
+responsible for any destruction and cleanup.  So we already have rich knowledge
+about the lifetime of the resource: if you have access to a `Tarball`, you know
+that the pointer inside must still be valid. Additionally, the `file` method
+returns a **borrowed slice** whose lifetime is implicitly connected to the
+lifetime of the source tarball itself (the `&self` argument). This is Rust's way
+of indicating that the returned slice can only be used within the lifetime of
+the tarball, which in turn means that the slice will always point to valid
+memory. Thus, Rust statically prevents dangling pointer bugs that are easy to
+make when working directly with C. (If you're not familiar with this kind of
+borrowing in Rust, have a look at Yehuda Katz's [blog post] on ownership.)
 
-A key aspect of the Rust binding here is that it is a safe function! Although it
-has an `unsafe` implementation (due to calling an FFI function), this interface
-is safe to call and will not cause tough-to-track-down segfaults. And don't
-forget, all of this is coming at 0 cost as the raw types in C are representable
-in Rust with no extra allocations or overhead.
+[blog post]: http://blog.skylight.io/rust-means-never-having-to-close-a-socket/
 
-### Talking to Rust
+A key aspect of the Rust binding here is that it is a safe function, meaning
+that callers do not have to use `unsafe` blocks to invoke it! Although it has an
+`unsafe` *implementation* (due to calling an FFI function), the *interface* uses
+borrowing to guarantee that no memory unsafety can occur in any Rust code that
+uses it. That is, due to Rust's static checking, it's simply not possible to
+cause a segfault using the API on the Rust side. And don't forget, all of this
+is coming at zero cost: the raw types in C are representable in Rust with no
+extra allocations or overhead.
 
-A major feature of Rust is that it does not have a garbage collector or
-runtime, and one of the benefits of this is that Rust can be called from C with
-no setup at all. This means that the zero overhead FFI not only applies when
-Rust calls into C, but also when C calls into Rust!
+### C talking to Rust
+
+**Despite guaranteeing memory safety, Rust does not have a garbage collector or
+runtime, and one of the benefits of this is that Rust code can be called from C
+with no setup at all.** This means that the zero overhead FFI not only applies
+when Rust calls into C, but also when C calls into Rust!
 
 Let's take the example above, but reverse the roles of each language. As before,
 all the code below is [available on GitHub][c2rust]. First we'll start off with
@@ -185,10 +200,10 @@ pub extern fn double_input(input: i32) -> i32 {
 ```
 
 As with the Rust code before, there's not a whole lot here but there are some
-subtle aspects in play. First off we've got our function definition with a
+subtle aspects in play. First off, we've labeled our function definition with a
 `#[no_mangle]` attribute. This instructs the compiler to not mangle the symbol
 name for the function `double_input`. Rust employs name mangling similar to C++
-to ensure that libraries do not clash with one another, and this attributes
+to ensure that libraries do not clash with one another, and this attribute
 means that you don't have to guess a symbol name like
 `double_input::h485dee7f568bebafeaa` from C.
 
@@ -245,10 +260,13 @@ more languages.
 [rb2rust]: https://github.com/alexcrichton/rust-ffi-examples/tree/master/ruby-to-rust
 [js2rust]: https://github.com/alexcrichton/rust-ffi-examples/tree/master/node-to-rust
 
-A common desire for writing C code in these languages is to speed up some
-component of a library or application that's performance critical. With the
-features of Rust we've seen here, however, Rust is just as suitable for this
-sort of usage. One of Rust's first production users,
+When writing code in these languages, you sometimes want to speed up some
+component that's performance critical, but in the past this often required
+dropping all the way to C, and thereby giving up the memory safety, high-level
+abstractions, and ergonomics of these languages.
+
+The fact that Rust can talk to easily with C, however, means that it is also
+viable for this sort of usage. One of Rust's first production users,
 [Skylight](https://www.skylight.io), was able to improve the performance and
 memory usage of their data collection agent almost instantly by just using Rust,
 and the Rust code is all published as a Ruby gem.
@@ -256,8 +274,10 @@ and the Rust code is all published as a Ruby gem.
 Moving from a language like Python and Ruby down to C to optimize performance is
 often quite difficult as it's tough to ensure that the program won't crash in a
 difficult-to-debug way. Rust, however, not only brings zero cost FFI, but *also*
-the same safety guarantees the original source language, enabling this sort of
-optimization to happen even more frequently!
+makes it possible to retain the same safety guarantees as the original source
+language. In the long run, this should make it much easier for programmers in
+these languages to drop down and do some systems programming to squeeze out
+critical performance when they need it.
 
 FFI is just one of many tools in the toolbox of Rust, but it's a key component
 to Rust's adoption as it allows Rust to seamlessly integrate with existing code
