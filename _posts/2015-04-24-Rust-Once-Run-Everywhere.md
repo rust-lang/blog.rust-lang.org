@@ -268,7 +268,7 @@ behalf, making the transition that much cheaper.
 Up to now we've seen how FFI in Rust has zero overhead and how we can use Rust's
 concept of ownership to write safe bindings to C libraries. If you're not using
 C, however, you're still in luck! These features of Rust enable it to also be
-called from [Python][py2rust], [Ruby][rb2rust], [Javascript][js2rust], and many
+called from [Python][py2rust], [Ruby][rb2rust], [JavaScript][js2rust], and many
 more languages.
 
 [py2rust]: https://github.com/alexcrichton/rust-ffi-examples/tree/master/python-to-rust
