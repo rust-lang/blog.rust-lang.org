@@ -7,7 +7,7 @@ description: "Zero-cost and safe FFI in Rust"
 
 Rust's quest for world domination was never destined to happen overnight, so
 Rust needs to be able to interoperate with the existing world just as easily as
-it talks to itself. In particular, **Rust makes it easy to communicate with C
+it talks to itself. For this reason, **Rust makes it easy to communicate with C
 APIs without overhead, and to leverage its ownership system to provide much
 stronger safety guarantees for those APIs at the same time**.
 
@@ -182,7 +182,9 @@ extra allocations or overhead.
 Rust's amazing community has already built some substantial safe bindings around
 existing C libraries, including [OpenSSL][rust-openssl], [libgit2][git2-rs],
 [libdispatch][dispatch], [libcurl][curl-rust], [sdl2][sdl2], [Unix APIs][nix],
-and [libsodium][sodiumoxide].
+and [libsodium][sodiumoxide]. This list is also growing quite rapidly on
+[crates.io][crates-io], so your favorite C library may already be bound or will
+be bound soon!
 
 [rust-openssl]: https://crates.io/crates/openssl
 [git2-rs]: https://crates.io/crates/git2
@@ -191,6 +193,7 @@ and [libsodium][sodiumoxide].
 [sdl2]: https://crates.io/crates/sdl2
 [nix]: https://crates.io/crates/nix
 [sodiumoxide]: https://crates.io/crates/sodiumoxide
+[crates-io]: https://crates.io
 
 ### C talking to Rust
 
