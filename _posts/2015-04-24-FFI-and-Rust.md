@@ -179,6 +179,19 @@ cause a segfault using the API on the Rust side. And don't forget, all of this
 is coming at zero cost: the raw types in C are representable in Rust with no
 extra allocations or overhead.
 
+Rust's amazing community has already built some substantial safe bindings around
+existing C libraries, including [OpenSSL][rust-openssl], [libgit2][git2-rs],
+[libdispatch][dispatch], [libcurl][curl-rust], [sdl2][sdl2], [Unix APIs][nix],
+and [libsodium][sodiumoxide].
+
+[rust-openssl]: https://crates.io/crates/openssl
+[git2-rs]: https://crates.io/crates/git2
+[curl-rust]: https://crates.io/crates/curl
+[dispatch]: https://crates.io/crates/dispatch
+[sdl2]: https://crates.io/crates/sdl2
+[nix]: https://crates.io/crates/nix
+[sodiumoxide]: https://crates.io/crates/sodiumoxide
+
 ### C talking to Rust
 
 **Despite guaranteeing memory safety, Rust does not have a garbage collector or
