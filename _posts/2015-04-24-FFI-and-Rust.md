@@ -13,7 +13,7 @@ stronger safety guarantees for those APIs at the same time**.
 
 In more detail, Rust's *foreign function interface* (FFI) is the way that it
 communicated with other languages. Following Rust's design principles, the FFI
-provides a **zero cost abstraction** where function calls between Rust and C
+provides a **zero-cost abstraction** where function calls between Rust and C
 have identical performance to C function calls. FFI bindings can also leverage
 language features such as ownership and borrowing to provide a **safe
 interface** that enforces protocols around pointers and other resources. These
@@ -101,7 +101,7 @@ to not worry about `unsafe` (more on this in a moment).
 Now that we've seen how to call a C function from Rust, let's see if we can
 verify this claim of zero overhead. Almost all programming languages can call
 into C one way or another, but it often comes at a cost with runtime type
-conversions or perhaps some language runtime juggling. To get a handle on what
+conversions or perhaps some language-runtime juggling. To get a handle on what
 Rust is doing, let's go straight to the assembly code of the above `main`
 function's call to `double_input`:
 
