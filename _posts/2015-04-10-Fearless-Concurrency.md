@@ -475,6 +475,12 @@ Disaster averted.
 
 ### Sharing the stack: "scoped"
 
+_Note: The API mentioned here is an old one which has been moved out of
+the standard library. You can find equivalent functionality in
+[`crossbeam`][crossbeam-crate] ([documentation for `scope()`][crossbeam-doc])
+and [`scoped_threadpool`][scoped-threadpool-crate]
+([documentation for `scoped()`][scoped-threadpool-doc])_
+
 So far, all the patterns we've seen involve creating data structures
 on the heap that get shared between threads. But what if we wanted to
 start some threads that make use of data living in our stack frame?
@@ -611,3 +617,7 @@ months. Stay tuned!
 [scoped]: http://static.rust-lang.org/doc/master/std/thread/fn.scoped.html
 [syncbox]: https://github.com/carllerche/syncbox
 [simple_parallel]: https://github.com/huonw/simple_parallel
+[crossbeam-crate]: https://crates.io/crates/crossbeam
+[crossbeam-doc]: http://aturon.github.io/crossbeam-doc/crossbeam/fn.scope.html
+[scoped-threadpool-crate]: https://crates.io/crates/scoped_threadpool
+[scoped-threadpool-doc]: http://kimundi.github.io/scoped-threadpool-rs/scoped_threadpool/index.html#examples:
