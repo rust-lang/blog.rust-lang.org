@@ -10,7 +10,7 @@ the Rust programming language.
 
 In practice, this goal translates to being able to build a new browser engine
 like [Servo](https://github.com/servo/servo) out of 250 community-driven
-libraries&mdash;and counting. Cargo's build system is a thin wrapper around
+libraries&mdash;and counting. Servo's build system is a thin wrapper around
 Cargo, and after a fresh checkout, you're only one command away from seeing the
 whole dependency graph built:
 
