@@ -142,7 +142,7 @@ authors = ["Yehuda Katz <wycats@gmail.com>"]
 ```
 
 We don't want to build the date or time functionality from scratch, so let's
-edit the `Cargo.toml` and add the `time` crate from crates.io:
+edit the `Cargo.toml` and add the `time` crate from [crates.io](https://crates.io/):
 
 ```diff
   [package]
