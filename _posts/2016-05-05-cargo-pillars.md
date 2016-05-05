@@ -29,11 +29,11 @@ That concern is driven by a desire to answer questions like:
 predictability**. One solution to this problem, common in the systems space, is
 vendoring dependencies&mdash;forking them directly into an application's
 repository&mdash;and then managing them manually. But this comes at a
-substantial per-project cost, since there's more to manage. It also comes at an
-ecosystem-wide cost, since the work involved cannot easily be shared between
-libraries; it has to be redone instead for each application that brings a set of
-libraries together. And making sure you can answer all of the questions above, all
-of the time, is hard work.
+substantial per-project cost, since there's more to manage and configure. It
+also comes at an ecosystem-wide cost, since the work involved cannot easily be
+shared between libraries; it has to be redone instead for each application that
+brings a set of libraries together. And making sure you can answer all of the
+questions above, all of the time, is hard work indeed.
 
 Package managers for higher-level languages have shown that by turning
 dependency management over to a shared tool, you can have predictability, easy
@@ -187,11 +187,12 @@ dependency graph, including precise versions of all of the source code included
 in the build. In the case of a package from crates.io, Cargo stores the name and
 version of the dependency. This is enough information to uniquely identify
 source code from [crates.io](https://crates.io/), because the registry is
-**append only** (no changes to already-published packages are allowed).
+*append only* (no changes to already-published packages are allowed).
 
-In addition, the metadata for the registry is stored in a separate git
-repository, and includes checksum for the relevant package. Before Cargo ever
-unpacks a crate it downloads, it first validates the checksum.
+In addition, the metadata for the registry is stored in a
+[separate git repository](https://github.com/rust-lang/crates.io-index/), and
+includes checksum for the relevant package. Before Cargo ever unpacks a crate it
+downloads, it first validates the checksum.
 
 ### Collaborating
 
@@ -217,7 +218,7 @@ versions of all dependencies as before**. And if we wanted to start collaboratin
 with other developers on GitHub (or with other members of our team at work), we
 would continue to get the same level of predictability.
 
-### Common conventions: examples and tests
+### Common conventions: examples, tests, and docs
 
 Now that we've written our snazzy new `datetime` crate, we'd love to write an
 example to show other developers how it should be used. We create a new file
@@ -248,7 +249,12 @@ build your examples as well, which prevents them from getting out of sync with
 your code, and ensures they continue to compile as long as your tests are
 passing.
 
-These are just two examples of a general approach: **Cargo defines a common set of
+Similarly, the `cargo doc` command will automatically compile not just your
+code, but that of your dependencies as well. The upshot is that the API docs it
+automatically produces include the crates you depend on, so if your APIs mention
+types from those crates, your clients can follow those links.
+
+These are just a few examples of a general point: **Cargo defines a common set of
 conventions and workflows that operate precisely the same way across the entire
 Rust ecosystem**.
 
@@ -318,7 +324,7 @@ Since Cargo manages your dependencies for you, it can also make sure that it
 compiles all of your dependencies (whether you knew about them directly or not)
 appropriately for the task at hand.
 
-### Testing, Benchmarking, Docs, Oh My
+### Testing, Benchmarking, Releasing, Oh My
 
 Historically, people have shied away from the kinds of granular dependencies
 we've seen here because of the configuration needed for each new dependency.
@@ -371,11 +377,6 @@ bench` defaults to release mode, which uses maximum optimizations. `cargo build
 > feature allows you to customize the existing workflows and stay within Cargo's
 > flows.
 
-Similarly, the `cargo doc` command will automatically compile not just your
-code, but that of your dependencies as well. The upshot is that the API docs it
-automatically produces include the crates you depend on, so if your APIs mention
-types from those crates, your clients can follow those links.
-
 ### Platforms and Architectures
 
 Similarly, applications are often built for different architectures, operating
@@ -423,7 +424,7 @@ $ cargo build
 ```
 
 But if we look a little closer, we'll notice that `nix` has a dependency on
-`bitflags` **and** `libc`. It now **shares** the dependency on `libc` with the
+`bitflags` *and* `libc`. It now *shares* the dependency on `libc` with the
 `date` package.
 
 If my `datetime` crate gets `libc` types from `time` and hands them off to
@@ -431,7 +432,7 @@ If my `datetime` crate gets `libc` types from `time` and hands them off to
 wouldn't want it to!)
 
 Today, Cargo will automatically share dependencies between crates if they depend
-on the same **major version** (or minor version before 1.0), since Rust uses
+on the same *major* version (or minor version before 1.0), since Rust uses
 [semantic versioning](http://semver.org/). This means that if `nix` and `datetime`
 both depend on some version of `libc 0.2.x`, they will get the same version. In
 this case, they do, and the program compiles.
