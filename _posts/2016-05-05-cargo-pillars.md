@@ -29,11 +29,11 @@ whole dependency graph built:
 
 Why do these granular dependencies matter?
 
-Concretely, they mean that Servo's encoding library (and many components like
+Concretely, they mean that Servo's URL library (and many components like
 it) is not a deeply nested part of Servo's main tree, but rather an
-[external library](https://crates.io/crates/encoding) that anyone in the
+[external library](https://crates.io/crates/url) that anyone in the
 ecosystem can use. This makes it possible for other Rust libraries, like web
-frameworks, to easily use a browser-grade encoding library, sharing the costs
+frameworks, to easily use a browser-grade URL library, sharing the costs
 and benefits of maintenance. And it flows both ways: recently, a new
 [Rust-based text editor](https://github.com/google/xi-editor) was announced,
 and happened to provide a fast line-breaking library. Within days, that library
