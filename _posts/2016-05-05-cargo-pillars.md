@@ -10,24 +10,30 @@ the Rust programming language.
 
 That concern is driven by a desire to answer questions like:
 
-1. If I want to use `libgit2` in my project, how easy is it?
+1. How easy is it to use an external library, like `libgit2`, in my project?
+
 2. If I build my project on a different machine, for a different architecture,
    in CI or for release, am I building from the same source code?
+
 3. If I build my project for testing, will my indirect dependencies be compiled
    with debug symbols? If I build my project for release, will my indirect
    dependencies be compiled with maximum optimizations? How can I be sure?
+
 4. If someone published a new version of one of my dependencies after I commit,
    will my CI environment use the same source code? My production environment?
+
 5. If I add a new dependency (or upgrade one), can that break the build? Can it
    affect unrelated dependencies? Under what conditions?
 
 **All of these questions (and many more like them) have one thing in common:
 predictability**. One solution to this problem, common in the systems space, is
-vendoring dependencies -- forking them directly into an application's repository
--- and then managing them manually. But this comes at a substantial per-project
-cost, since there's more to manage. It also comes at an ecosystem-wide cost,
-since there's less sharing. Making sure you can answer all of the questions
-above, all of the time, is hard work.
+vendoring dependencies&mdash;forking them directly into an application's
+repository&mdash;and then managing them manually. But this comes at a
+substantial per-project cost, since there's more to manage. It also comes at an
+ecosystem-wide cost, since the work involved cannot easily be shared between
+libraries; it has to be redone instead for each application that brings a set of
+libraries together. And making sure you can answer all of the questions above, all
+of the time, is hard work.
 
 Package managers for higher-level languages have shown that by turning
 dependency management over to a shared tool, you can have predictability, easy
@@ -53,11 +59,13 @@ We'll look at each of these pillars in turn.
 
 ## Predictability
 
-Cargo's predictability goals start with a simple guarantee: **once a
-project successfully compiles, subsequent compiles will use exactly the same
-source code, across machines and environments**.
+Cargo's predictability goals start with a simple guarantee: **once a project
+successfully compiles on one machine, subsequent compiles across machines and
+environments will use exactly the same source code**.
 
-To achieve this guarantee, Cargo uses several strategies:
+This guarantee is accomplished without incorporating the source code for
+dependencies directly into a project repository. Instead, Cargo uses several
+strategies:
 
 1. The first time a build succeeds, Cargo emits a `Cargo.lock` file, which
    contains a manifest of precisely which source code was used in the
@@ -84,6 +92,7 @@ First, we'll use `cargo new` to start us out:
 
 ```
 $ cargo new datetime
+$ cd datetime
 $ ls
 Cargo.toml src
 $ cat Cargo.toml
@@ -98,7 +107,7 @@ authors = ["Yehuda Katz <wycats@gmail.com>"]
 We don't want to build the date or time functionality from scratch, so let's
 edit the `Cargo.toml` and add the `time` crate from crates.io:
 
-```
+```diff
   [package]
   name = "datetime"
   version = "0.1.0"
@@ -145,15 +154,14 @@ $ cargo build --verbose
        Fresh datetime v0.1.0 (file:///Users/ykatz/Code/datetime)
 ```
 
-Cargo isn't bothering to recompile packages that it knows are "fresh". If you've
-ever had to configure a `Makefile` before, this should be a breath of fresh air
-(no pun intended).
+Cargo isn't bothering to recompile packages that it knows are "fresh", like
+`make`, but without having to write the `Makefile`.
 
 But how does Cargo know that everything is fresh? When Cargo builds a crate, it
 emits a file called `Cargo.lock` that contains the precise versions of all of
 its resolved dependencies:
 
-```
+```toml
 [root]
 name = "datetime"
 version = "0.1.0"
@@ -178,18 +186,12 @@ The `Cargo.lock` contains a serialized version of the entire **resolved**
 dependency graph, including precise versions of all of the source code included
 in the build. In the case of a package from crates.io, Cargo stores the name and
 version of the dependency. This is enough information to uniquely identify
-source code from crates.io, because the registry is **append only** (no changes
-to already-published packages are ever allowed).
+source code from [crates.io](https://crates.io/), because the registry is
+**append only** (no changes to already-published packages are allowed).
 
 In addition, the metadata for the registry is stored in a separate git
 repository, and includes checksum for the relevant package. Before Cargo ever
 unpacks a crate it downloads, it first validates the checksum.
-
-Here's what the entry for `kernel32-sys 0.2.2` looks like:
-
-```
-{"name":"kernel32-sys","vers":"0.2.2","deps":[{"name":"winapi","req":"^0.2.5","features":[],"optional":false,"default_features":true,"target":null,"kind":"normal"},{"name":"winapi-build","req":"^0.1.1","features":[],"optional":false,"default_features":true,"target":null,"kind":"build"}],"cksum":"7507624b29483431c0ba2d82aece8ca6cdba9382bff4ddd0f7490560c056098d","features":{},"yanked":false}
-```
 
 ### Collaborating
 
@@ -255,7 +257,7 @@ Rust ecosystem**.
 All of this means that your application won't change if you don't make any
 changes to your dependencies, but what happens when you need to change them?
 
-Cargo adds another layer of protection with **conservative updates**. This means
+Cargo adds another layer of protection with *conservative updates*. This means
 that if you modify your `Cargo.toml`, Cargo attempts to minimize the changes
 made to the `Cargo.lock`. The intuition of conservative updates is: **if the
 change you made was unrelated to another dependency, it shouldn't change**.
@@ -288,7 +290,7 @@ $ cargo build
 ```
 
 Cargo downloaded `tz` (and its dependency `byteorder`) and compiled them, but it
-**didn't** touch the packages we were already using (`kernel32-sys`, `libc`,
+didn't touch the packages we were already using (`kernel32-sys`, `libc`,
 `time`, `winapi` and `winapi-build`). Even if one of those package authors
 published an update in the meantime, you can be sure that adding new crates
 won't mess with unrelated ones.
@@ -316,7 +318,7 @@ Since Cargo manages your dependencies for you, it can also make sure that it
 compiles all of your dependencies (whether you knew about them directly or not)
 appropriately for the task at hand.
 
-### Testing, Benchmarking, Releasing, Oh My
+### Testing, Benchmarking, Docs, Oh My
 
 Historically, people have shied away from the kinds of granular dependencies
 we've seen here because of the configuration needed for each new dependency.
@@ -368,6 +370,11 @@ bench` defaults to release mode, which uses maximum optimizations. `cargo build
 > custom workflow if something doesn't precisely meet your needs, the profiles
 > feature allows you to customize the existing workflows and stay within Cargo's
 > flows.
+
+Similarly, the `cargo doc` command will automatically compile not just your
+code, but that of your dependencies as well. The upshot is that the API docs it
+automatically produces include the crates you depend on, so if your APIs mention
+types from those crates, your clients can follow those links.
 
 ### Platforms and Architectures
 
@@ -463,7 +470,7 @@ on small, targeted crates, and each of those crates has some dependencies of its
 own.
 
 By defining shared, well-known workflows, like "build", "test", "bench", "run",
-and "docs", Cargo provides Rust programmers with a way to think about what
+and "doc", Cargo provides Rust programmers with a way to think about what
 they're trying to accomplish at a high level, and not have to worry about what
 each of those workflows mean for indirect dependencies.
 
@@ -482,8 +489,10 @@ Concretely, this means that Servo's encoding library (and many components like
 it) is not a deeply nested part of Servo's main tree, but rather an
 [external library](https://crates.io/crates/encoding) that anyone in the
 ecosystem can use. This makes it possible for other Rust libraries, like web
-frameworks, to easily use the same encoding library used by a web browser,
-sharing the costs and benefits of maintenance.
+frameworks, to easily use a browser-grade encoding library, sharing the costs
+and benefits of maintenance. And it flows both ways: recently, a fast
+line-breaking library that showed up for a Rust-based text editor
+[replaced Servo's old custom linebreaker](https://twitter.com/mbrubeck/status/726791246014877696).
 
 With a workflow tool that provides predictability, even in the face of many
 indirect dependencies, we can all build higher together.
