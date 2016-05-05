@@ -8,19 +8,54 @@ description: "Cargo makes dependency management in Rust easy and predictable"
 Cargo's goal is to make modern application package management a core value of
 the Rust programming language.
 
-That concern is driven by a desire to answer questions like:
+In practice, this goal translates to being able to build a new browser engine
+like [Servo](https://github.com/servo/servo) out of 250 community-driven
+libraryes&mdash;and counting. Cargo's build system is a thin wrapper around
+Cargo, and after a fresh checkout, you're only one command away from seeing the
+whole dependency graph built:
 
-1. How easy is it to use an external library, like `libgit2`, in my project?
+```
+...
+   Compiling num-complex v0.1.32
+   Compiling bitflags v0.6.0
+   Compiling angle v0.1.0 (https://github.com/emilio/angle?branch=servo#eefe3506)
+   Compiling backtrace v0.2.1
+   Compiling smallvec v0.1.5
+   Compiling browserhtml v0.1.4 (https://github.com/browserhtml/browserhtml?branch=gh-pages#0ca50842)
+   Compiling unicase v1.4.0
+   Compiling fnv v1.0.2
+   Compiling heapsize_plugin v0.1.4
+..
+```
 
-2. If I build my project on a different machine, for a different architecture,
+Why do these granular dependencies matter?
+
+Concretely, they mean that Servo's encoding library (and many components like
+it) is not a deeply nested part of Servo's main tree, but rather an
+[external library](https://crates.io/crates/encoding) that anyone in the
+ecosystem can use. This makes it possible for other Rust libraries, like web
+frameworks, to easily use a browser-grade encoding library, sharing the costs
+and benefits of maintenance. And it flows both ways: recently, a fast
+line-breaking library that showed up for a Rust-based text editor
+[replaced Servo's old custom linebreaker](https://twitter.com/mbrubeck/status/726791246014877696).
+
+## The core concerns of dependency management
+
+To make this all work at the scale of an app like Servo, you need a dependency
+management approach with good answers to a number of thorny questions:
+
+1. How easy is it to add a an external library, like a new linebreaker, to Servo?
+
+2. If I build Servo on a different machine, for a different architecture,
    in CI or for release, am I building from the same source code?
 
-3. If I build my project for testing, will my indirect dependencies be compiled
-   with debug symbols? If I build my project for release, will my indirect
+3. If I build Servo for testing, will its indirect dependencies be compiled
+   with debug symbols? If I build Servo for release, will its indirect
    dependencies be compiled with maximum optimizations? How can I be sure?
 
-4. If someone published a new version of one of my dependencies after I commit,
-   will my CI environment use the same source code? My production environment?
+4. If someone published a new version of one of Servo's dependencies after I
+   commit to Servo, will my CI environment use the same source code as my
+   machine? My production environment?
 
 5. If I add a new dependency (or upgrade one), can that break the build? Can it
    affect unrelated dependencies? Under what conditions?
@@ -479,21 +514,6 @@ This allows us to get closer to the holy grail of making those indirect
 dependency graphs "invisible", empowering individuals to do more on their hobby
 projects, small teams to do more on their products, and large teams to have a
 high degree of confidence in the output of their work.
-
-We're all very proud of the way that comes together in
-[Servo](https://github.com/servo/servo), the Rust-based web browser built using
-Cargo. The code that they have written as a small team is impressive, but even
-more impressive is how much of Servo is maintained and used by the wider Rust
-community.
-
-Concretely, this means that Servo's encoding library (and many components like
-it) is not a deeply nested part of Servo's main tree, but rather an
-[external library](https://crates.io/crates/encoding) that anyone in the
-ecosystem can use. This makes it possible for other Rust libraries, like web
-frameworks, to easily use a browser-grade encoding library, sharing the costs
-and benefits of maintenance. And it flows both ways: recently, a fast
-line-breaking library that showed up for a Rust-based text editor
-[replaced Servo's old custom linebreaker](https://twitter.com/mbrubeck/status/726791246014877696).
 
 With a workflow tool that provides predictability, even in the face of many
 indirect dependencies, we can all build higher together.
