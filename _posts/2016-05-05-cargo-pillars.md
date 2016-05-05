@@ -15,7 +15,6 @@ Cargo, and after a fresh checkout, you're only one command away from seeing the
 whole dependency graph built:
 
 ```
-...
    Compiling num-complex v0.1.32
    Compiling bitflags v0.6.0
    Compiling angle v0.1.0 (https://github.com/emilio/angle?branch=servo#eefe3506)
@@ -25,7 +24,7 @@ whole dependency graph built:
    Compiling unicase v1.4.0
    Compiling fnv v1.0.2
    Compiling heapsize_plugin v0.1.4
-..
+   ...
 ```
 
 Why do these granular dependencies matter?
