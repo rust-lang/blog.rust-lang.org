@@ -35,9 +35,12 @@ it) is not a deeply nested part of Servo's main tree, but rather an
 [external library](https://crates.io/crates/encoding) that anyone in the
 ecosystem can use. This makes it possible for other Rust libraries, like web
 frameworks, to easily use a browser-grade encoding library, sharing the costs
-and benefits of maintenance. And it flows both ways: recently, a fast
-line-breaking library that showed up for a Rust-based text editor
-[replaced Servo's old custom linebreaker](https://twitter.com/mbrubeck/status/726791246014877696).
+and benefits of maintenance. And it flows both ways: recently, a new
+[Rust-based text editor](https://github.com/google/xi-editor) came on the scene,
+and happened to provide a fast line-breaking library. Within days, that library
+[replaced Servo's old custom linebreaker](https://twitter.com/mbrubeck/status/726791246014877696),
+decreasing Servo's maintenance burden and increasing sharing in the Rust
+ecosystem.
 
 ## The core concerns of dependency management
 
