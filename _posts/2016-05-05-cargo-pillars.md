@@ -46,7 +46,7 @@ ecosystem.
 To make this all work at the scale of an app like Servo, you need a dependency
 management approach with good answers to a number of thorny questions:
 
-1. How easy is it to add a an external library, like a new linebreaker, to Servo?
+1. How easy is it to add an external library, like a new linebreaker, to Servo?
 
 2. If I build Servo on a different machine, for a different architecture,
    in CI or for release, am I building from the same source code?
