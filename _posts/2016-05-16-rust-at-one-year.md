@@ -94,13 +94,11 @@ Servo&mdash;and not just in test mode.
 [ff]: https://telemetry.mozilla.org/new-pipeline/dist.html#!cumulative=0&end_date=2016-04-07&keys=__none__!__none__!__none__&max_channel_version=release%252F45&measure=MEDIA_RUST_MP4PARSE_SUCCESS&min_channel_version=null&product=Firefox&sanitize=1&sort_keys=submissions&start_date=2016-03-03&table=0&trim=1&use_submission_date=0
 [groundwork for Rust integration]: http://wiki.mozilla.org/Oxidation
 
-In both of these cases, the people involved were hardened C++ devs who knew its
-downsides&mdash;and Rust's upsides&mdash;in their bones. But there's another
-kind of story we [hear a lot] from smaller shops putting Rust into production:
-that they would never dream of shipping C++ code, but that Rust provides the
-leverage to go head-to-head with larger organizations that *do* use C++, giving
-them competitive performance and much greater agility. Rust helps you punch
-above your weight.
+In both of these cases, the people involved were coming from the C++ world
+already. But there's another kind of story we [hear a lot] from smaller shops
+putting Rust into production: that traditional systems languages like C++ felt
+out of reach for their team, but that Rust gives many of the same benefits while
+being more approachable. Rust helps you punch above your weight.
 
 [hear a lot]: http://confreaks.tv/videos/rustcamp2015-using-rust-from-c-or-any-language
 
@@ -217,7 +215,7 @@ has been growing and polishing its ecosystem and tooling:
 
 - **Core language**. We've kept one list purposefully short this year: growth in
   the core language. While we have some important features in the pipeline (like
-  [improved error hanlding], [more flexible borrowing rules] and
+  [improved error handling], [more flexible borrowing rules] and
   [specialization]), [Rust users] by and large are happy with the core language
   and prefer the community to focus on the ecosystem and tooling.
 
