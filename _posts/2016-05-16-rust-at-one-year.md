@@ -20,6 +20,8 @@ having fun doing it.
 
 And yesterday, Rust turned one year old.
 
+![*Picture of Rust cupcakes*](http://rustcamp.com/images/after/cupcakes.jpg)
+
 ### Rust in numbers
 
 A lot has happened in the last 365 days:
