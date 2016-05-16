@@ -20,7 +20,7 @@ having fun doing it.
 
 And yesterday, Rust turned one year old.
 
-![*Picture of Rust cupcakes*](http://rustcamp.com/images/after/cupcakes.jpg)
+<img src="http://rustcamp.com/images/after/cupcakes.jpg" height="300px" width="300px">
 
 ### Rust in numbers
 
@@ -96,13 +96,12 @@ Servo&mdash;and not just in test mode.
 [ff]: https://telemetry.mozilla.org/new-pipeline/dist.html#!cumulative=0&end_date=2016-04-07&keys=__none__!__none__!__none__&max_channel_version=release%252F45&measure=MEDIA_RUST_MP4PARSE_SUCCESS&min_channel_version=null&product=Firefox&sanitize=1&sort_keys=submissions&start_date=2016-03-03&table=0&trim=1&use_submission_date=0
 [groundwork for Rust integration]: http://wiki.mozilla.org/Oxidation
 
-In both of these cases, the people involved were coming from the C++ world
-already. But there's another kind of story we [hear a lot] from smaller shops
-putting Rust into production: that traditional systems languages like C++ felt
-out of reach for their team, but that Rust gives many of the same benefits while
-being more approachable. Rust helps you punch above your weight.
+We're hearing [similar stories] from smaller shops that are putting Rust into
+production: Rust helps a team punch above its weight. It gives many of the same
+benefits as traditional systems languages while being more approachable, safer
+and often more productive.
 
-[hear a lot]: http://confreaks.tv/videos/rustcamp2015-using-rust-from-c-or-any-language
+[similar stories]: http://confreaks.tv/videos/rustcamp2015-using-rust-from-c-or-any-language
 
 These are just a few stories of Rust in production, but we'd love to [hear yours]!
 
