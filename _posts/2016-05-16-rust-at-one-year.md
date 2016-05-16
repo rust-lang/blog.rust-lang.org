@@ -96,10 +96,10 @@ Servo&mdash;and not just in test mode.
 [ff]: https://telemetry.mozilla.org/new-pipeline/dist.html#!cumulative=0&end_date=2016-04-07&keys=__none__!__none__!__none__&max_channel_version=release%252F45&measure=MEDIA_RUST_MP4PARSE_SUCCESS&min_channel_version=null&product=Firefox&sanitize=1&sort_keys=submissions&start_date=2016-03-03&table=0&trim=1&use_submission_date=0
 [groundwork for Rust integration]: http://wiki.mozilla.org/Oxidation
 
-We're hearing [similar stories] from smaller shops that are putting Rust into
-production: Rust helps a team punch above its weight. It gives many of the same
-benefits as traditional systems languages while being more approachable, safer
-and often more productive.
+We're hearing [similar stories] from a range of other shops that are putting
+Rust into production: Rust helps a team punch above its weight. It gives many of
+the same benefits as traditional systems languages while being more
+approachable, safer and often more productive.
 
 [similar stories]: http://confreaks.tv/videos/rustcamp2015-using-rust-from-c-or-any-language
 
@@ -204,8 +204,8 @@ has been growing and polishing its ecosystem and tooling:
   [custom intermediate representation][MIR], which has many other benefits as
   well. Another focus has been errors, including
   [detailed explanations of most errors][error index], and ongoing work to
-  [improve the clarity and focus of errors][error format]. Expect to hear more
-  on both fronts soon.
+  [improve the "at a glance" readability of errors][error format]. Expect to
+  hear more on both fronts soon.
 
 [across-the-board improvements]: http://blog.rust-lang.org/2015/06/25/Rust-1.1.html
 [parallel codegen]: http://blog.rust-lang.org/2015/08/06/Rust-1.2.html
@@ -249,10 +249,11 @@ with Rust is its [community]. It's hard to explain quite what it's like to be
 part of this group, but two things stand out. First, its sheer *energy*: so much
 happens in any given week that [This Week in Rust] is a vital resource for
 anyone hoping to keep up. Second, its *welcoming spirit*. Rust's core message is
-one of empowerment&mdash;you can write systems code even if you would never have
-dared write C++&mdash;and that's reflected in the community. We're all here to
-learn how to be better programmers, and support each other in doing so.
+one of empowerment&mdash;you can [fearlessly] write safe, low-level systems
+code&mdash;and that's reflected in the community. We're all here to learn how to
+be better programmers, and support each other in doing so.
 
+[fearlessly]: http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html
 [This Week in Rust]: https://this-week-in-rust.org/
 [community]: https://www.rust-lang.org/community.html
 
