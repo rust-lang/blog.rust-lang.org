@@ -35,8 +35,8 @@ published 53 brand new [crates]. Not a single day went by without at least one
 new Rust library hitting the central package manager. And Rust topped the
 "[most loved] language" in this year's StackOverflow survey.
 
-> Speaking of numbers: we recently launched a [survey] of our own, and want to
-> hear from you whether you are an old hat at Rust, or have never used it.
+Speaking of numbers: we recently launched a [survey] of our own, and want to
+hear from you whether you are an old hat at Rust, or have never used it.
 
 One place where our numbers are not where we want them to be: community
 diversity. We've had ongoing local outreach efforts, but the Rust community team
@@ -80,18 +80,18 @@ control over memory."
 
 Second, there's Mozilla. They've long been developing [Servo] as a research
 browser engine in Rust, but their first *production* Rust code shipped through a
-different vehicle: Firefox. In Firefox 45, without any fanfare, Rust code for
+different vehicle: *Firefox*. In Firefox 45, without any fanfare, Rust code for
 [mp4 metadata parsing] went out to OSX and 64-bit Linux users; it will hit
 Windows in version 48. The code is currently running in test mode, with its
 results compared against the legacy C++ library: 100% correctness on
-[1 billion reported executions]. But this code is just the tip of the iceberg:
+[1 *billion* reported executions][ff]. But this code is just the tip of the iceberg:
 after laying a lot of [groundwork for Rust integration], Firefox is poised to
 bring in significant amounts of new Rust code, including components from
 Servo&mdash;and not just in test mode.
 
 [Servo]: https://github.com/servo/servo/
 [mp4 metadata parsing]: https://github.com/mozilla/mp4parse-rust
-[1 billion reported executions]: https://telemetry.mozilla.org/new-pipeline/dist.html#!cumulative=0&end_date=2016-04-07&keys=__none__!__none__!__none__&max_channel_version=release%252F45&measure=MEDIA_RUST_MP4PARSE_SUCCESS&min_channel_version=null&product=Firefox&sanitize=1&sort_keys=submissions&start_date=2016-03-03&table=0&trim=1&use_submission_date=0
+[ff]: https://telemetry.mozilla.org/new-pipeline/dist.html#!cumulative=0&end_date=2016-04-07&keys=__none__!__none__!__none__&max_channel_version=release%252F45&measure=MEDIA_RUST_MP4PARSE_SUCCESS&min_channel_version=null&product=Firefox&sanitize=1&sort_keys=submissions&start_date=2016-03-03&table=0&trim=1&use_submission_date=0
 [groundwork for Rust integration]: http://wiki.mozilla.org/Oxidation
 
 In both of these cases, the people involved were hardened C++ devs who knew its
@@ -171,7 +171,7 @@ has been growing and polishing its ecosystem and tooling:
   usable with a wide range of existing tools; it works out of the box with
   [lldb], [gdb], [perf], [valgrind], [callgrind], and many, many more.  Our
   focus has been to [enrich the experience] for these tools by adding
-  [Rust-specific hooks][gdb] and [workflows][cargo profile]. Another major
+  [Rust-specific hooks][gdb hooks] and [workflows][cargo profile]. Another major
   priority is providing full IDE support, in part by providing daemonized
   services from the compiler; we made [good progress][IDEs] on that front this
   year, and thanks to the [Racer] project, [numerous IDE plugins] are already
@@ -187,7 +187,7 @@ has been growing and polishing its ecosystem and tooling:
 [valgrind]: http://valgrind.org/
 [callgrind]: https://kcachegrind.github.io/html/Home.html
 [enrich the experience]: https://michaelwoerister.github.io/2015/03/27/rust-xxdb.html
-[gdb]: https://sourceware.org/ml/gdb-patches/2016-04/msg00570.html
+[gdb hooks]: https://sourceware.org/ml/gdb-patches/2016-04/msg00570.html
 [cargo profile]: http://www.suchin.co/2016/05/11/Introducing-Cargo-Profiler/
 [IDEs]: https://www.rust-lang.org/ides.html
 [Racer]: https://github.com/phildawes/racer
@@ -217,11 +217,12 @@ has been growing and polishing its ecosystem and tooling:
 
 - **Core language**. We've kept one list purposefully short this year: growth in
   the core language. While we have some important features in the pipeline (like
-  [more flexible borrowing rules] and [specialization]), [Rust users] by and
-  large are happy with the core language and prefer the community to focus on
-  the ecosystem and tooling.
+  [improved error hanlding], [more flexible borrowing rules] and
+  [specialization]), [Rust users] by and large are happy with the core language
+  and prefer the community to focus on the ecosystem and tooling.
 
 [Rust users]: https://internals.rust-lang.org/t/production-user-research-summary/2530
+[improved error handling]: https://github.com/rust-lang/rfcs/pull/243
 [more flexible borrowing rules]: http://smallcultfollowing.com/babysteps/blog/2016/04/27/non-lexical-lifetimes-introduction/
 [specialization]: https://github.com/rust-lang/rfcs/pull/1210
 
@@ -230,9 +231,9 @@ world&mdash;over the coming months, we'll be using this blog to say it.
 
 ### Rust in community
 
-It turns out that people like to get together and talk Rust:
+It turns out that people like to get together and talk Rust. We had a sold out
+[RustCamp] last August, and several upcoming events in 2016:
 
-- August 2015: a sold-out [RustCamp];
 - September 9-10, 2016: the first [RustConf] in Portland, OR, USA;
 - September 17, 2016: [RustFest], the European community conference, in Berlin, Germany;
 - October 27-18, 2016: [Rust Belt Rust], a Rust conference in Pittsburgh, PA, USA;
