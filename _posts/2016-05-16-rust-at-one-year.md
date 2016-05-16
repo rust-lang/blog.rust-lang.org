@@ -142,10 +142,10 @@ has been growing and polishing its ecosystem and tooling:
 [lalrpop]: http://smallcultfollowing.com/babysteps/blog/2015/09/14/lalrpop/
 [html5ever]: https://kmcallister.github.io/talks/rust/2014-rust-macros/slides.html
 
-- **Platforms and targets**. Rust's footprint is not much bigger than C's, which
+- **Platforms and targets**. Rust's memory footprint is not much bigger than C's, which
   makes it ideal for using in all kinds of places. Over the last year, Rust
   gained the ability to work directly with the native [MSVC toolchain] on
-  Windows, to target [musl] (thereby creating a binary that can be used with
+  Windows, to target [musl][musl] (thereby creating a binary that can be used with
   zero dependencies on *any* variety of Linux), to target Android and ARM
   devices, and [many more platforms][platforms]. The new [rustup tool] makes it
   a breeze to manage and compile to these various targets. As of
