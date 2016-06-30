@@ -6,7 +6,7 @@ author: Jonathan Turner
 
 We recently wrapped up with a survey for the Rust community.  Little did we know that it would grow to be one of the largest language community surveys.  A *huge* thank you to the **3,086** people who responded!  We're humbled by the response, and we're thankful for all the great feedback.
 
-The goal of the survey was simple: we wanted to know how Rust was doing in its first year.  We asked a variety of questions to better understand how Rust was being used, how well the Rust tools worked, and what the challenges for people wanting to adopt Rust.
+The goal of the survey was simple: we wanted to know how Rust was doing in its first year.  We asked a variety of questions to better understand how Rust was being used, how well the Rust tools worked, and what the challenges are for people wanting to adopt Rust.
 
 We plan to run a similar survey each year to track how we're progressing and spot places we can improve.  With that, let's get started.
 
@@ -102,7 +102,7 @@ An important part of the survey was understanding what's getting in the way of p
 
 # Learning Curve
 
-Rust is a unique language, introducing new concepts, like ownership, that are not usually explicit in languages.  While these concepts are what make Rust so powerful, they can also prevent an obstacle when first getting to know the language.
+Rust is a unique language, introducing new concepts, like ownership, that are not usually explicit in languages.  While these concepts are what make Rust so powerful, they can also be an obstacle when first getting to know the language.
 
 In total, **1 in 4** people commented on the learning curve when talking about Rust's challenges.  Here are some of the comments:
 
