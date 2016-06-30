@@ -88,7 +88,7 @@ Equally encouraging is the growth we expect to see in Rust in the workplace, as 
 ![Using Rust at work in future][rust_at_work_future]
 </center>
 
-Of those not currently using Rust at work, more than 40% plan to being able to use Rust at work.  This will help carry Rust to more places and in more areas.  Speaking of carrying to more areas, we saw a wide variety of job domains represented in the survey:
+Of those not currently using Rust at work, more than 40% plan on being able to use Rust at work.  This will help carry Rust to more places and in more areas.  Speaking of carrying to more areas, we saw a wide variety of job domains represented in the survey:
 
 <center>
 ![Demographics of work areas][demo_areas]
@@ -143,7 +143,6 @@ Investing in IDE support not only helps new users but also helps enable teams mo
 > "Users/projects considering switching languages often are not willing to sacrifice tooling quality even for a better language."
 
 > "Proper IDE support (hard to get it accepted at work for that reason)"
-
 
 Other languages have had years to build up their tooling muscle, and for Rust to stand on even footing, we'll also have to build up our own muscle.  There are some early experiments here, namely [Racer](https://github.com/phildawes/racer) and [rustw](https://github.com/nrc/rustw), as well as a [number of IDE plugins](https://areweideyet.com/).
 
