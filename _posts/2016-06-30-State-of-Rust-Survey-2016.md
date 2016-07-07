@@ -14,17 +14,13 @@ We plan to run a similar survey each year to track how we're progressing and spo
 
 We wanted to make sure the survey was open to both users of Rust and to people who didn't use Rust.  Rust users give us a sense of how the current language and tools are working and where we need to improve.  Rust non-users shed light on missing use-cases and obstacles for Rust’s adoption.
 
-<center>
-![Do you use Rust][do-you-use-rust]
-</center>
+![Do you use Rust][do-you-use-rust]{:class="center"}
 
 We're happy to report that more than a third of the responses were from people not using Rust.  These respondents gave a lot of great feedback on adoption roadblocks, which we'll talk about later in this blog post.
 
 ## Growing numbers trying Rust
 
-<center>
-![Time using Rust][time-using-rust]
-</center>
+![Time using Rust][time-using-rust]{:class="center"}
 
 Almost 2,000 people responded saying they were Rust users.  Of these, almost 24% were new users.  This is encouraging to see.  The community is growing, with a healthy portion of newcomers playing with Rust now that could become long-term users.
 
@@ -34,29 +30,21 @@ Equally encouraging is seeing that once someone has become a Rust user, they ten
 
 We asked a number of questions trying to get a clear picture of what it's like to use Rust today.  The first questions focused on the Rust compiler.
 
-<center>
-![Versions of Rust you use][versions-of-rust]
-</center>
+![Versions of Rust you use][versions-of-rust]{:class="center"}
 
 In the above chart, you see the top five rustc version combinations for users writing Rust.  At the time of the survey, version 1.8 was the latest stable release.  This factors strongly in the results as the most popular version of Rust to use.  Perhaps surprisingly is how much the nightly also plays a key role in for many developers, with over 400 using it as their only Rust compiler version. Stabilizing features and APIs, and thereby encouraging transition to the stable channel, continues to be a priority for the team.
 
-<center>
-![Has an upgrade broken code][after_1_0_broke_code]
-</center>
+![Has an upgrade broken code][after_1_0_broke_code]{:class="center"}
 
 In the pre-1.0 days, Rust releases would regularly break user's code.  In reaching 1.0, we began releasing versions that maintained backwards compatibility with 1.0.  For stable Rust, 83.6% of users did not experience any breakage in their project as they upgraded to the next stable version.  Previous research based on automated testing against the ecosystem put this number [closer to 96%](https://internals.rust-lang.org/t/rust-regressions-2015-year-end-report/2993), which is more in line with expectations.
 
 Why the discrepancy? Looking at the data more closely, it seems people used this question as a catch-all for any kind of breakage, including packages in cargo, compiler plugins needing updates, and the changes to libc.  We'll be sure to word this question more clearly in the future. But we also plan to launch a forum discussion digging further into the details, to make sure that there’s not something missing from the test automation that runs against crates.io.
 
-<center>
-![Fixing broken code][easy_to_fix]
-</center>
+![Fixing broken code][easy_to_fix]{:class="center"}
 
 Luckily, regardless of what bucket the breakage fell into, they were largely easy to solve as people upgraded.
 
-<center>
-![Do you like Cargo][like_cargo]
-</center>
+![Do you like Cargo][like_cargo]{:class="center"}
 
 Another big piece of the Rust development experience is using the Cargo tool.  Here we saw overwhelming support for Cargo, with 94.1% of people saying they would rate it a 4 or 5.  This helps to emphasize that Cargo continues to be a core part of what it means to write Rust (and that people enjoy using it!)
 
@@ -64,35 +52,25 @@ Another big piece of the Rust development experience is using the Cargo tool.  H
 
 An important part of a programming language's success is that it's used for "real" work.  We asked a few questions to understand how Rust was doing in the workplace.  Were people using it in their day jobs?  How much was it being used?
 
-<center>
-![Using Rust at work][rust_at_work]
-</center>
+![Using Rust at work][rust_at_work]{:class="center"}
 
 We were pleasantly surprised to see that already, in Rust's first year, 16.1% of Rust users are using Rust at work part-time and 3.7% are using at work full-time.  Combined, **nearly 1/5th of Rust users are using Rust commercially**.  We're seeing this reflected in the growing number of [companies using Rust](https://www.rust-lang.org/friends.html).
 
 We also asked about the size of the codebases that Rust developers were building.
 
-<center>
-![Size of part-time codebases][part_time]
-</center>
+![Size of part-time codebases][part_time]{:class="center"}
 
-<center>
-![Size of full-time codebases][full_time]
-</center>
+![Size of full-time codebases][full_time]{:class="center"}
 
 We see strong numbers in project size as developers put more time into Rust at work.  Over half of the Rust users using Rust full-time at work have codebases that are tens or hundreds of thousands of lines of code.
 
 Equally encouraging is the growth we expect to see in Rust in the workplace, as we see in the next chart.
 
-<center>
-![Using Rust at work in future][rust_at_work_future]
-</center>
+![Using Rust at work in future][rust_at_work_future]{:class="center"}
 
 Of those not currently using Rust at work, more than 40% plan on being able to use Rust at work.  This will help carry Rust to more places and in more areas.  Speaking of carrying to more areas, we saw a wide variety of job domains represented in the survey:
 
-<center>
-![Demographics of work areas][demo_areas]
-</center>
+![Demographics of work areas][demo_areas]{:class="center"}
 
 It's encouraging to see people from so many different backgrounds interested in Rust.  It underscores Rust’s potential across a broad spectrum of programming tasks and the need for libraries to support these areas.
 
@@ -150,23 +128,17 @@ We've also been investing in other tooling muscles, including a [new installer w
 
 ## Survey Demographics
 
-<center>
-![Popular meetup locations][meetup_locations]
-</center>
+![Popular meetup locations][meetup_locations]{:class="center"}
 
 Today, Rust has a worldwide audience.  Rather than being lumped in one place, we see Rust users in Europe, Japan, Australia, with new meetups popping up everyday.  We also asked where people who responded lived, and over 1000 of the 3000 survey responses mentioned living in Europe (with USA following it up at 835).
 
-<center>
-![Demographics on programming language background][what_languages]
-</center>
+![Demographics on programming language background][what_languages]{:class="center"}
 
 The parents of most modern languages, C and C++, show strongly in terms of the programming languages that people are most comfortable with.  Close by are Java and JavaScript.  Perhaps one surprising point here is the large number of Python users attracted to Rust.
 
 For those who already have existing projects in other languages but want to use Rust, it's worth mentioning here the on-going efforts to aide in using Rust with other languages, including work to [integrate with Ruby](https://github.com/rustbridge/helix) and [integrate with JavaScript/Node.js](https://github.com/rustbridge/neon).
 
-<center>
-![Members of underrepresented groups][underrepresented]
-</center>
+![Members of underrepresented groups][underrepresented]{:class="center"}
 
 Rust strives to be a [warm, welcoming and inclusive community](https://www.rust-lang.org/conduct.html). The survey shows that, despite that spirit, we have a ways to go in terms of diversity. We have nascent efforts, like [RustBridge](https://github.com/rust-community/rustbridge), to more proactively reach out to underrepresented groups and make Rust more accessible, but there is a lot more work to be done.  We'll be watching the results of this part of the survey closely and continue to invest in outreach, mentoring, and leadership to foster inclusivity.
 
