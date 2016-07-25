@@ -36,10 +36,11 @@ connecting, either at one of the many workshops we are hosting or in the central
 meet-n-greet-n-hack area provided.
 
 Thanks to the many awesome sponsors, we are able to offer affordable tickets to
-go on sale this week, with an optional combo -- including both Viewsource and
-RustFest. Keep an eye on http://www.rustfest.eu/, get all the updates on the
-[blog](http://www.rustfest.eu/blog/) and don't forget to follow us on
-Twitter [@rustfest](https://twitter.com/rustfest)
+go on sale this week, with an optional combo—including both
+[Viewsource](https://viewsourceconf.org/berlin-2016/) and RustFest. Keep an eye
+on http://www.rustfest.eu/, get all the updates on the
+[blog](http://www.rustfest.eu/blog/) and don't forget to follow us on Twitter
+[@rustfest](https://twitter.com/rustfest)
 
 ### Oct 27-28: Rust Belt Rust
 
