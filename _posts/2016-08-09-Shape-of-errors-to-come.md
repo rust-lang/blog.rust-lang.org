@@ -7,9 +7,11 @@ author: Jonathan Turner
 There are changes afoot in the Rust world. If you've tried out the latest nightly, you'll notice
 something is *a little different*. For the past few months we've been working on new way of
 reporting errors that's easier to read and understand. This is part of an on-going compaign to
-improve Rust's usability across the board.
+improve Rust's usability across the board. We mentioned ways to help us
+[make the transition](http://www.jonathanturner.org/2016/08/helping-out-with-rust-errors.html)
+the new errors, and already many people have jumped in (and thank you to those volunteers!)
 
-Let's dive in and see what's changed!  We'll start with a simple example:
+Let's dive in and see what's changed.  We'll start with a simple example:
 
 ```rust
 fn borrow_same_field_twice_mut_mut() {
@@ -26,47 +28,53 @@ Sure enough, the error the previous compiler gave us says pretty much that:
 ![Picture of old error style][old_errors]
 
 The problem though is that it takes a few seconds to look at the message, orient yourself, and find
-the critical pieces. This time loss adds up. What if, instead, we cleared away everything slows
+the critical pieces. This time loss adds up. What if, instead, we cleared away everything that slows
 down how you read the error message?
 
 <img src="/images/2016-08-09-Errors/new_errors.png" width="500" />
 
-This is the new error format now available. It's designed to around the fundamental observation that
+This is the new error format. It's designed around the fundamental observation that
 errors should **focus on the code you wrote**. By doing so, you can much more easily see the context
 of what is going on.
 
 # Design
 
-As mentioned earlier, the key insight is putting your source code front and center.
-Everything else in the design builds your code. You'll notice that just focusing on your code can
-make a big difference in readability.
-
-Once we had that piece, we added labels for points of interest in the code. The most obvious place
-to label is where the error is occuring. It's the "what" of the error.
+The key insight is putting your source code front and center - everything you see in the output
+builds on _your_ code.
+By using the code you wrote as the context, we give you an easy way to know at a glance
+where the issue is occuring.
 
 ![Picture of new constant eval error][new_errors2]
 
 *Constant evaluation errors*
 
-By putting a label directly on what is wrong, your eyes can see both the area and read the label.
-Since this is the most important places to see first, we give them a bold red look with a
-characteristic `^^^` underline. You'll notice in the example above that the combination allows you
-to quickly spot the error and understand what's going wrong.
+Next, once we know the location, we need to explain what is going wrong. We do this by labeling
+points of interest in the code that helped explain
+the error.  The most obvious place to begin labeling is where the error is occured. It's the "what"
+of the error.
 
-The source of the error is not the only point of interest.  There are often other points of interest
-that help describe "why" an error is occuring. By reading these secondary labels,
-you can understand better what is going wrong.
+In this example, you can see how we use these primary labels. With them, your eyes can see both the
+problematic code, and a few words about the problem. Since this is the most important place to see
+first, we give them a bold red look with a
+characteristic `^^^` underline. You'll notice in the example that the combination allows you
+to quickly spot the error and understand what's going wrong.
 
 ![Picture of new trait mismatch][new_errors3]
 
 *Mismatch with trait requirement error*
+
+The source of the error is not the only point of interest.  There are often other points of interest
+that help describe "why" an error is occuring. By reading these secondary labels,
+you can understand better what is going wrong. These labels are shown in the same order they appear
+in your code, again, to ensure you're always able to, at a glance, understand where you are.
 
 In this example, secondary labels show the original requirement from the trait, so you
 can see it at the same time and compare the requirement and implementation for yourself.
 
 Primary and secondary labels work together to tell a story about what went wrong. With Rust's big
 focus on the borrow-checker and memory safety, users may see unfamiliar concepts when they
-encounter one of these errors. These labels help to walk them through how a borrow rule is violated.
+encounter one of these errors. These labels help to walk them through how even unfamiliar errors,
+like borrow errors, occur.
 
 ![Picture of new type name not found][new_errors4]
 
@@ -106,8 +114,8 @@ unsafe impl Bar for Foo { }
 This has been a great way to help bridge between an error and learning an unfamiliar concept in
 Rust.
 
-While this message is helpful, you'll notice that the example it gives is
-not related to your code.  Taking a page from the error message work, we'll be updating the explain
+While this message is helpful, it uses a general example that may not be related to your code.
+Taking a page from the error message work, we'll be updating the explain
 messages to focus on your code. For example, taking the borrow-checker error we
 started with, we might have an extended error message that looks like:
 
