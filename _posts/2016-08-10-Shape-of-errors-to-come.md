@@ -50,8 +50,8 @@ where the issue is occuring.
 
 Next, once we know the location, we need to explain what is going wrong. We do this by labeling
 points of interest in the code that helped explain
-the error.  The most obvious place to begin labeling is where the error is occured. It's the "what"
-of the error.
+the error.  The most obvious place to begin labeling is where the error has occured. It's the
+"what" of the error.
 
 In this example, you can see how we use these primary labels. With them, your eyes can see both the
 problematic code, and a few words about the problem. Since this is the most important place to see
