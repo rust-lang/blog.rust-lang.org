@@ -9,7 +9,7 @@ something is *a little different*. For the past few months we've been working on
 reporting errors that's easier to read and understand. This is part of an on-going compaign to
 improve Rust's usability across the board. We mentioned ways to help us
 [make the transition](http://www.jonathanturner.org/2016/08/helping-out-with-rust-errors.html)
-the new errors, and already many people have jumped in (and thank you to those volunteers!)
+to the new errors, and already many people have jumped in (and thank you to those volunteers!)
 
 Let's dive in and see what's changed.  We'll start with a simple example:
 
