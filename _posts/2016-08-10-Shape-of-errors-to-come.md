@@ -137,7 +137,7 @@ This is the first time `foo.bar1` is borrowed mutably.
 28 |     let bar1 = &mut foo.bar1;
    |                     --------
 
-And this is the second time `foo.bar1` is borrowed mutable. This is
+And this is the second time `foo.bar1` is borrowed mutably. This is
 where the error occurs.
 
 29 |     let _bar2 = &mut foo.bar1;
