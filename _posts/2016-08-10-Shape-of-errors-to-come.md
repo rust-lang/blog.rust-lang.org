@@ -6,7 +6,7 @@ author: Jonathan Turner
 
 There are changes afoot in the Rust world. If you've tried out the latest nightly, you'll notice
 something is *a little different*. For the past few months we've been working on new way of
-reporting errors that's easier to read and understand. This is part of an on-going compaign to
+reporting errors that's easier to read and understand. This is part of an on-going campaign to
 improve Rust's usability across the board. We mentioned ways to help us
 [make the transition](http://www.jonathanturner.org/2016/08/helping-out-with-rust-errors.html)
 to the new errors, and already many people have jumped in (and thank you to those volunteers!)
