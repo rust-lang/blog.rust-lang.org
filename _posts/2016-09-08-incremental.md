@@ -425,7 +425,7 @@ Future Plans
 ============
 The alpha version represents a minimal end-to-end implementation of incremental
 compilation for the Rust compiler, so there is lots of room for improvement. The
-section on the current status already laid out the two major axis along which
+section on the current status already laid out the two major axes along which
 we will pursue increased efficiency:
 
 - **Cache more** intermediate results, like MIR and type information, which will
