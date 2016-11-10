@@ -614,7 +614,7 @@ months. Stay tuned!
 [mutex]: http://static.rust-lang.org/doc/master/std/sync/struct.Mutex.html
 [send]: http://static.rust-lang.org/doc/master/std/marker/trait.Send.html
 [sync]: http://static.rust-lang.org/doc/master/std/marker/trait.Sync.html
-[scoped]: http://static.rust-lang.org/doc/master/std/thread/fn.scoped.html
+[scoped]: https://doc.rust-lang.org/1.0.0/std/thread/fn.scoped.html
 [syncbox]: https://github.com/carllerche/syncbox
 [simple_parallel]: https://github.com/huonw/simple_parallel
 [crossbeam-crate]: https://crates.io/crates/crossbeam
