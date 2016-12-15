@@ -21,4 +21,4 @@ Rust that hides a logic bug, or hide an exploit in
 Now's your chance!
 
 For more details, see the announcement of the project at
-[underhanded.rs](https://underhanded.rs/blog/2016/12/14/underhanded-rust.en-US.html).
+[underhanded.rs](https://underhanded.rs/blog/2016/12/15/underhanded-rust.en-US.html).
