@@ -9,8 +9,8 @@ first annual Underhanded Rust Contest, inspired by the [Underhanded
 C](http://www.underhanded-c.org/) and [Underhanded
 Crypto](https://underhandedcrypto.com/) contests. Our goal with
 [Rust](https://www.rust-lang.org/) is to make it easy to write trustworthy
-low-level software that is resistant to accidental security vulnerabilities,
-though less often challenged has been Rust's ability to protect against
+low-level software that is resistant to accidental security vulnerabilities.
+Less often challenged has been Rust's ability to protect against
 *deliberate* vulnerabilities in the face of scrutiny. This challenge is
 designed to put our language and [the broader Rust
 ecosystem](https://crates.io/) to the test, to help us learn where our blind
