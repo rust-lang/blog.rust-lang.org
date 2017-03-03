@@ -43,11 +43,11 @@ the current design and some streamlining we may want to consider this year.
 ### Implicit vs explicit
 
 **Information is implicit when it is *implied* but not *expressed*.** The
-potential ergonomic wins are pretty easy to see: information that's *implied* is
-easy to forget to write down, and writing it down feels like a distraction that
-adds unhelpful noise to code; leaving it implicit reduces that friction. Yet
-implicitness gets a bad rap, with Python going so far as to state "explicit is
-better than implicit" as a core design rule. Why?
+potential ergonomic wins are pretty easy to see: forcing you to write down
+information that's obvious (because it's already implied) is a pain, because it
+adds distracting noise and is easy to forget. Allowing you to leave it implicit
+reduces that friction. Yet implicitness gets a bad rap, with Python going so far
+as to state "explicit is better than implicit" as a core design rule. Why?
 
 Implicitness can be very powerful. After all, the compiler knows a *lot* about
 your code, and it's possible to leverage that to inject behavior in all kinds of
@@ -74,8 +74,8 @@ but relevant or surprising information is kept front and center.
 
 There are basically two dimensions of the reasoning footprint for implicitness:
 
-- **Where can you elide?**. In other words, how do you know when implicitness may be in play?
-- **How are the gaps filled in?**. In other words, how do you know what is being implied?
+- **Where can you elide?** In other words, how do you know when implicitness may be in play?
+- **How are the gaps filled in?** In other words, how do you know what is being implied?
 
 A well-designed feature will tailor both of these dimensions to match (or inform)
 the programmer's mental model, and to make the data you have to keep in your
@@ -143,7 +143,7 @@ particular:
 - Trade power/precision: type inference happens only for variable bindings; data
   types and functions must include complete, explicit signatures. This choice
   gives you the bulk of the ergonomic benefits, allowing for very powerful
-  inference, but insuring that the scope of the inference is kept local.
+  inference, but ensuring that the scope of the inference is kept local.
 
 - Limit context: similarly, because data types and functions are annotated, it's
   easy to determine the information that's influencing the outcome of
