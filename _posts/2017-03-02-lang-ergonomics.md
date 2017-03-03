@@ -248,7 +248,7 @@ tracking?
 
 - Context-dependence: in principle, you need to know how the method is resolved,
   and then its signature. In practice, the style of `self` borrowing is almost
-  always implied by the method name (e.g. `push` versus `len`). Notably, this
+  always implied by the method name (e.g. `push()` versus `len()`). Notably, this
   point does *not* apply to function arguments.
 
 **This design also aids learnability, by often just doing "the obvious thing"
@@ -340,7 +340,7 @@ through convention. But while this bit of implicitness helps, the module system
 still makes a number of fine distinctions that trip up newcomers and require
 redundancy that even old hands can forget.
 
-#### Idea: eliminate the need for `extern crate`, and maybe `mod` too
+### Idea: eliminate the need for `extern crate`, and maybe `mod` too
 
 The clearest-cut case is the `extern crate` declaration, which is used to bring
 an external crate into scope. The vast majority of Rust projects use Cargo for
