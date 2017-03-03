@@ -72,54 +72,45 @@ but relevant or surprising information is kept front and center.
 
 ### How to analyze and manage the reasoning footprint
 
-There are basically two dimensions of the reasoning footprint for implicitness:
+There are three dimensions of the reasoning footprint for implicitness:
 
-- **Where can you elide?** In other words, how do you know when implicitness may be in play?
-- **How are the gaps filled in?** In other words, how do you know what is being implied?
+- **Applicability**. Where are you allowed to elide implied information? Is
+  there any heads-up that this might be happening?
 
-A well-designed feature will tailor both of these dimensions to match (or inform)
-the programmer's mental model, and to make the data you have to keep in your
-head manageable. Again, that doesn't necessarily mean *minimizing* the
-dimensions. Often what's most important is *clarity*, so that you know what to
-expect, and how to easily find the information that can influence something
-implicit.
+- **Power**. What influence does the elided information have? Can it radically
+  change program behavior or its types?
 
-Perhaps the most important insight in breaking apart these two dimensions is
-that you can play one against the other:
+- **Context-dependence**. How much of do you have to know about the rest of the
+  code to know what is being implied, i.e. how elided details will be filled in?
+  Is there always a clear place to look?
 
-- **Guideline: Trade power against precision**. If the information being elided
-  is very well-known, or trivial, then it's fine to allow it to be inferred in a
-  wide range of contexts. On the other hand, if the elided information is
-  complex or embodies powerful behavior, you should be precise about where
-  elision is allowed: only in narrow, clear-cut, or explicitly marked contexts.
+**The basic thesis of this post is that implicit features should balance these
+three dimensions**. If a feature is large in one of the dimensions, it's best to
+strongly limit it in the other two.
 
 The [`?` operator](https://blog.rust-lang.org/2016/11/10/Rust-1.13.html) in Rust
-is a good example of this trade. It explicitly (but concisely) marks a point
-where you will bail out of the current context on an error, possibly doing an
-implicit conversion on the way. It's powerful, but marked, which is one way that
-error handling in Rust feels as ergonomic as working with exceptions while
-avoiding some of their well-known downsides.
+is a good example of this kind of tradeoff. It explicitly (but concisely) marks
+a point where you will bail out of the current context on an error, possibly
+doing an implicit conversion on the way. The fact that it's marked means the
+feature has strongly limited applicability: you'll never be surprised that it's
+coming into play. On the other hand, it's fairly powerful, and somewhat
+context-dependent, since the conversion can depend on the type where `?` is
+used, and the type expected in the scope it's jumping to. Altogether, this
+careful balance makes error handling in Rust feels as ergonomic as working with
+exceptions while avoiding some of their well-known downsides.
 
-When it comes to filling in the gaps left implicit, there are two typical
-options: context or convention.
+By contrast, a feature like unrestricted implicit conversion rightfully has a
+bad reputation, because it's universally applicable, quite powerful, *and*
+context-dependent. If we were to expand implicit conversions in Rust, we would
+likely limit their power (by, say, restricting them to `AsRef`-style coercions,
+which can do very little).
 
-- **Context**. The compiler infers something missing from what it already
-  knows. For example, inferring the type of a variable from the expression it's
-  bound to.
-
-- **Convention**. The compiler assumes a default unless told otherwise. For
-  example, the fact that `mod foo;` looks for `foo.rs` (or `foo/mod.rs`) by default.
-
-Both options come with techniques to manage the reasoning footprint:
-
-- **Guideline: Limit context**. When inferring from context, keep the context limited and
-  well-known, so that it's (1) easy to find the needed contextual information
-  and (2) more likely that it will already be in your mental cache.
-
-- **Guideline: Make defaults boring**. When providing defaults, strive to make them simple,
-  intuitive and nearly universal. That will cement them as part of the "usual
-  way of things" and hence something you hardly have to think about in the vast
-  majority of cases, once you've internalized the rules.
+One route for strongly limiting context-dependence is employing *conventions*,
+in which the compiler is simply assuming a default unless told otherwise. Often
+such conventions are universal and well-known, meaning that you don't need to
+know anything about the rest of the code to know what they are. A good example
+of this technique in Rust is the the fact that `mod foo;` looks for `foo.rs` (or
+`foo/mod.rs`) by default.
 
 One final point. "Implicitness" is often relative to where the language is
 today, something that seems radical at first—like type inference!—but then
@@ -137,17 +128,16 @@ inference*. In the days of yore, you'd have to annotate every local variable
 with its type, a practice that seems wildly verbose now—but at the time, type
 inference seemed wildly implicit.
 
-Rust's approach to type annotations follows the guidelines I laid out above. In
-particular:
+Type inference in Rust is quite powerful, but we limit the other two dimensions:
 
-- Trade power/precision: type inference happens only for variable bindings; data
-  types and functions must include complete, explicit signatures. This choice
-  gives you the bulk of the ergonomic benefits, allowing for very powerful
-  inference, but ensuring that the scope of the inference is kept local.
+- Applicability: type inference happens only for variable bindings; data
+  types and functions must include complete, explicit signatures.
 
-- Limit context: similarly, because data types and functions are annotated, it's
-  easy to determine the information that's influencing the outcome of
-  inference.
+- Context-dependence: because data types and functions are annotated, it's easy
+  to determine the information that's influencing the outcome of inference. You
+  only need to look *shallowly* at code outside of the current function. Another
+  way of saying this is that type inference is performed modularly, one function
+  body at a time.
 
 By and large, the amount of type inference we do in Rust seems to be a good
 match for what you can hold in your head.
@@ -157,20 +147,23 @@ ergonomics: [lifetime elision]. That feature allows you to leave off lifetimes
 from function signatures in the vast majority of cases (check out the RFC—we
 measured!). **Lifetime elision greatly aids learnability, because it allows you
 to work at an intuitive level with borrowing before you grapple with explicit
-lifetimes.** Again, the approach follows the rules above:
+lifetimes.**
 
-- Trade power/precision: currently, elision works solely in function signatures,
-  and only when there is an "obvious" choice of lifetimes. It's also *usually*
-  obvious when elision is coming into play. However, we overshot in one respect:
-  the fact that elision applies to types other than `&` and `&mut`, which means
-  that to even know whether reborrrowing is happening in a signature like `fn
-  lookup(&self) -> Ref<T>`, you need to know that `Ref` has a lifetime parameter
-  that's being left out. We've been considering pushing in the direction of a
-  small but explicit marker to say that a lifetime is being elided for `Ref`, a
-  strategy similar to the one for `?` mentioned earlier.
+- Applicability: lifetime elision applies to a broad class of locations—any
+  function signature—but is limited to those cases for which the lifetimes are
+  *strongly* implied.
 
-- Make defaults boring: the elision rules are very simple, and in most cases in
-  which they apply, there is really no choice about how to set up the lifetimes.
+- Power: limited; elision is just a shorthand for a use of lifetime parameters,
+  and if you get this wrong, the compiler will complain.
+
+- Context-dependence: here, we overshot. The fact that elision applies to types
+  other than `&` and `&mut`, means that to even know whether reborrrowing is
+  happening in a signature like `fn lookup(&self) -> Ref<T>`, you need to know
+  whether `Ref` has a lifetime parameter that's being left out. For something as
+  common as function signatures, this is too much context. We've been considering
+  pushing in the direction of a small but explicit marker to say that a lifetime
+  is being elided for `Ref`, a strategy similar to the one for `?` mentioned
+  earlier.
 
 There's also been some extensions to the original elision proposal, again
 carefully crafted to follow these rules, like the [lifetimes in statics] RFC.
@@ -220,16 +213,18 @@ you're applying to a type variable like `K`. So in particular, if you're trying
 to invoke `use_map`, you need to know that there are some unstated constraints
 on `K`.
 
-* Trade power/precision: this is a feature
-that allows for quite widespread elision. But in practice, what's being elided
-tends to be well-known, and even when it's not, it tends not to cause too much
-trouble. After all, when *using* a function like `use_map`, you're generally
-going to be passing in an existing `HashMap`, which by construction will ensure
-that the bounds already hold.
+- Applicability: very broad; applies to any use of generics.
 
-* Limit context: it's straightforward to discover how the bounds are being
-imposed by examining the type definitions, and the compiler can reliably produce
-an error pointing directly to the type(s) imposing unfulfilled bounds.
+- Power: very limited; the bounds will almost always be needed anyway, and in
+  any case adding bounds is not very risky.
+
+- Context-dependence: fairly limited; it draws from the bounds on all type
+  constructors that are applied to type variables (like `HashMap<K,
+  V>`). Usually you will be well aware of these bounds anyway, and when *using*
+  a function like `use_map`, you're generally going to be passing in an existing
+  `HashMap`, which by construction will ensure that the bounds already hold.
+  The compiler can reliably also produce an error pointing directly to the
+  type(s) imposing unfulfilled bounds.
 
 ## Example: ownership
 
@@ -240,26 +235,25 @@ look at the places where borrowing is explicit, and places where it's not:
 - Borrowing is implicit for the receiver when invoking a method.
 - Borrowing is explicit for normal function arguments and in other expressions.
 
-This design was arrived at after many iterations with alternatives, and it's
-turned out quite nicely. It's another example of the power/precision
-tradeoff. We provide powerful borrowing inference but only for a narrowly
-limited location.
+Ownership is important in Rust, and reasoning locally about it is vital. So why
+did we end up with this particular mix of implicit and explicit ownership
+tracking?
 
-Ownership is important in Rust, and reasoning locally about it is
-vital. However:
+- Applicability: common, but narrowly-described: it applies only to the receiver
+  of method calls.
 
-- The vast majority of methods borrow `self`, rather than taking it by value.
-- Usually the name of a method makes obvious whether the `self` borrow will be
-  mutable or not (e.g. `push` versus `len`).
-- The borrow checker will prevent any incorrect borrowing, though if borrowing
-  were too implicit, it could make debugging borrow check errors harder.
+- Power: moderately powerful, since it can determine whether the receiver can be
+  mutated (by mutably borrowing it). That's mitigated to some degree by borrow
+  checking, which will at least ensure that it's *permitted* to do such a borrow.
 
-Neither of the first two points apply as strongly to method/function
-arguments. So we ended up with a system that is neither fully explicit nor fully
-implicit, but rather one that balances good ergonomics with a compact reasoning
-footprint. **This design also aids learnability, by often just doing "the
-obvious thing" for borrowing, and thereby limiting the situations in which
-newcomers have to grapple with choices about it**.
+- Context-dependence: in principle, you need to know how the method is resolved,
+  and then its signature. In practice, the style of `self` borrowing is almost
+  always implied by the method name (e.g. `push` versus `len`). Notably, this
+  point does *not* apply to function arguments.
+
+**This design also aids learnability, by often just doing "the obvious thing"
+for borrowing, and thereby limiting the situations in which newcomers have to
+grapple with choices about it**.
 
 ### Ideas: implied borrows
 
@@ -288,8 +282,9 @@ buffer is destroyed at the end of the call to `read_config`). But it allows you
 to gloss over the unimportant detail that the callee happened to only need a
 borrow. And again, if you just forgot to borrow, and try to use `path`
 afterward, the compiler will catch it, just as it does today. This is an example
-of a not terribly powerful bit of inference that we'd allow to occur virtually
-everywhere (power/precision tradeoff).
+of a not terribly powerful bit of inference (it's only introducing a shared
+borrow for an object about to be dropped) that we'd allow to occur virtually
+everywhere.
 
 **Borrowing in match patterns**. One stumbling block when leaning Rust is the
 interaction between pattern matching and borrowing. In particular, when you're
@@ -320,6 +315,10 @@ doing*. Thus, we could consider inferring these markers from context:
   the ownership section, the borrowing system is designed to make that easy to
   do. And in any case, it's still quite *local* context. As usual, if you get
   this wrong, the borrow checker will catch it.
+
+In addition to that story for context-dependence, the feature would be only
+narrowly applicable (only to `match`) and only moderately powerful (since,
+again, the borrower checker will catch mistakes).
 
 Both of these changes would expand the reasoning footprint slightly, but in a
 very controlled way. They remove the need to write down annotations which are
@@ -357,7 +356,7 @@ the `Cargo.toml`, which becomes the sole source of truth for this
 concern. That's a pretty limited context: it's single place to look, and in many
 cases you already need some level of awareness of its contents, to know *which
 version* of the crate is being assumed. Inferring `extern crate` also fares well
-on the power/precision front: only root modules are affected, so it's easy to
+on the applicability front: only root modules are affected, so it's easy to
 know precisely when you need to consult `Cargo.toml`.
 
 Thinking along similar, but more radical lines, an argument could be made about
@@ -366,7 +365,7 @@ some_module` to tell Rust to pull in a file at a canonical location with the
 same name, we're being forced to duplicate information that was already readily
 available. You could instead imagine the filesystem hierarchy directly informing
 the module system hierarchy. The concerns about limited context and
-power/precision work out pretty much the same way as with `Cargo.toml`, and the
+applicability work out pretty much the same way as with `Cargo.toml`, and the
 learnability and ergonomic gains are significant.
 
 Now, both of these proposals assume your code follows the *typical* patterns,
