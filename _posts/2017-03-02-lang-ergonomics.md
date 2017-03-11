@@ -286,7 +286,7 @@ of a not terribly powerful bit of inference (it's only introducing a shared
 borrow for an object about to be dropped) that we'd allow to occur virtually
 everywhere.
 
-**Borrowing in match patterns**. One stumbling block when leaning Rust is the
+**Borrowing in match patterns**. One stumbling block when learning Rust is the
 interaction between pattern matching and borrowing. In particular, when you're
 pattern matching against borrowed data, you often have to do a little
 reborrowing dance:
