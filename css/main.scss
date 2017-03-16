@@ -51,3 +51,16 @@ $on-laptop:        800px;
 .highlight {
     background-color: #eef;
 }
+
+td, th {
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #eee;
+}
+
+th {
+    border-top: 1px solid #eee;
+}
+
+td:first-child, th:first-child {
+    border-left: 1px solid #eee;
+}
