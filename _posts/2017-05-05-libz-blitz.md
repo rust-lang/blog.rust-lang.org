@@ -151,7 +151,7 @@ further improving discoverability on crates.io, [please start a thread]!
 ### Rust standards of community
 
 We have some idea of what goes into publishing exceptional Rust crates, but the
-Rust library team is not the sole authority of Rust API design—the Rust crate
+Rust library team is not the sole authority of Rust API design — the Rust crate
 ecosystem is created by all of us together and there are many lessons yet to
 learn. In recognition of that, **the library team is architecting our efforts to
 be as welcoming and inclusive as we can**.
@@ -166,18 +166,19 @@ API design principles, substantial missing functionality, planned API refactors,
 incomplete documentation, or any number of unique circumstances.
 
 We'll have a small handful of such evaluations going on in parallel. Every two
-weeks, the library crate will take up one of the evaluations for discussion in
-our regular video conference, which will be recorded and made accessible on [Air
-Mozilla]. One goal of these meetings will be to plan out a roadmap for
-stabilizing the crate in question. The other goal will be to identify any
-lessons to be learned from the crate and distill those into broadly applicable
-API guidelines.
+weeks, the library team will take up one of the evaluations for discussion in
+our regular video conference, which will be recorded and made available on [Air
+Mozilla] and the [Rust YouTube channel]. One goal of these meetings will be to
+plan out a roadmap for stabilizing the crate in question. The other goal will be
+to identify any lessons to be learned from the crate and distill those into
+broadly applicable API guidelines.
 
 [Air Mozilla]: https://air.mozilla.org/
+[Rust YouTube channel]: https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA
 
 We will have a rotating band of guests (including the crate authors) at the
 video conferences by invitation, in order to strengthen the bonds between the
-Rust team and the authors of the Rust ecosystem and to foster shared values
+Rust team and the authors of the Rust ecosystem, and to foster shared values
 among the same.
 
 Based on the evaluations and library team review, we will file issues that we
@@ -188,13 +189,13 @@ contributions**.
 Here are the issues that arose from the very simple [`byteorder`]
 crate (all resolved now):
 
-- [x] [Add a supertrait to hide trait details](https://github.com/BurntSushi/byteorder/issues/69)
-- [x] [`ByteOrder::default` should `panic!` not `unreachable!`](https://github.com/BurntSushi/byteorder/issues/68)
-- [x] [Put panic and error docs in "Panics" and "Errors" sections](https://github.com/BurntSushi/byteorder/issues/72)
-- [x] [Make sure there are enough examples](https://github.com/BurntSushi/byteorder/issues/75)
-- [x] [Add CI badges to Cargo.toml](https://github.com/BurntSushi/byteorder/issues/74)
-- [x] [Add "categories" to Cargo.toml](https://github.com/BurntSushi/byteorder/issues/73)
-- [x] [Add `#[doc(html_root_url)]`](https://github.com/BurntSushi/byteorder/issues/77)
+- [Add a supertrait to hide trait details](https://github.com/BurntSushi/byteorder/issues/69)
+- [`ByteOrder::default` should `panic!` not `unreachable!`](https://github.com/BurntSushi/byteorder/issues/68)
+- [Put panic and error docs in "Panics" and "Errors" sections](https://github.com/BurntSushi/byteorder/issues/72)
+- [Make sure there are enough examples](https://github.com/BurntSushi/byteorder/issues/75)
+- [Add CI badges to Cargo.toml](https://github.com/BurntSushi/byteorder/issues/74)
+- [Add "categories" to Cargo.toml](https://github.com/BurntSushi/byteorder/issues/73)
+- [Add `#[doc(html_root_url)]`](https://github.com/BurntSushi/byteorder/issues/77)
 
 Beyond `byteorder` we've already worked this process for several other simple
 crates to get a feel for it: [`bitflags`], [`tempdir`], [`flate2`], and
@@ -202,10 +203,11 @@ crates to get a feel for it: [`bitflags`], [`tempdir`], [`flate2`], and
 but you can expect them to have "1.0" releases soon. As the crates under
 evaluation grow in scope, presumably the tasks that arise will grow as well.
 
-[`bitflags`]: https://github.com/rust-lang-nursery/bitflags
+[`byteorder`]: https://docs.rs/byteorder
+[`bitflags`]: https://doc.rust-lang.org/tempdir/tempdir/index.html
 [`tempdir`]: https://doc.rust-lang.org/tempdir/tempdir/index.html
-[`flate2`]: https://docs.rs/flate2
-[`lazy_static`]: https://docs.rs/lazy_static
+[`flate2`]: https://github.com/rust-lang-nursery/bitflags
+[`lazy_static`]: https://github.com/rust-lang-nursery/lazy-static.rs/issues/70
 
 
 ### What crates are we going to focus on?
@@ -273,7 +275,9 @@ Roles that need your help:
   effort. That entails starting up a thread, breaking up the evaluation work
   into small work items that can be taken on by others in the community, keeping
   the discussion moving in productive directions, making sure the evaluation is
-  completed on time, and finally, presenting the results at the libs team meeting.
+  completed on time, presenting the results at the libs team meeting, and,
+  finally, filing discrete, actionable issues on everything raised, and funneling
+  them to TWiR.
 
   *Anyone can be a crate lead, but it's a substantial commitment and is largely
   about organization, communication, and consensus, and requires presenting to
@@ -295,7 +299,8 @@ Roles that need your help:
   full quality is improving documentation, including writing up cookbook entries.
   There will be lots of opportunities for this kind of high value work.
 
-  *Everyone is welcome to participate in this way at any time. The crate lead will help create opportunities to jump in.*
+  *Everyone is welcome to participate in this way at any time. The
+   crate lead will help create opportunities to jump in.*
 
 - **Library hacker**. Somebody must do the programming work of resolving the
   issues on the roadmap to stability for each crate. We expect to produce many
@@ -349,12 +354,3 @@ Here's the plan:
 Come help us make this happen!
 
 [crate cookbook]: https://brson.github.io/rust-cookbook/
-
-[regex]: http://blog.burntsushi.net/ripgrep/
-[webrender]: https://air.mozilla.org/bay-area-rust-meetup-february-2016/
-[`memmap`]: https://github.com/danburkert/memmap-rs
-[`tempdir`]: https://doc.rust-lang.org/tempdir/tempdir/index.html
-[`fs2`]: https://github.com/danburkert/fs2-rs
-[`byteorder`]: https://docs.rs/byteorder
-[`iron`]: http://ironframework.io/doc/iron/
-[`diesel`]: https://diesel.rs/
