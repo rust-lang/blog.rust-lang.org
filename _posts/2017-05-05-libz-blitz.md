@@ -90,7 +90,7 @@ Rust APIs great: principles like "make performance characteristics clear" and
 "use ownership to encapsulate invariants"; consistent naming conventions like
 `mut`, `ref`, `as`, `into`, that let users intuit what they don't know
 from what they do; small details of presentation that add up, like consistently
-documentating possible error cases in a dedicated "Errors" section; and so many
+documenting possible error cases in a dedicated "Errors" section; and so many
 more factors to consider when publishing Rust crates.
 
 In 2017 we plan to apply the principles behind the design of `std` to an
@@ -156,7 +156,7 @@ further improving discoverability on crates.io, [please start a thread]!
 ### Rust standards of community
 
 We have some idea of what goes into publishing exceptional Rust crates, but the
-Rust library team is not the sole authority of Rust API design — the Rust crate
+Rust library team is not the sole authority of Rust API design—the Rust crate
 ecosystem is created by all of us together and there are many lessons yet to
 learn. In recognition of that, **the library team is architecting our efforts to
 be as welcoming and inclusive as we can**.
@@ -208,10 +208,10 @@ crates to get a feel for it: [`bitflags`], [`tempdir`], [`flate2`], and
 but you can expect them to have "1.0" releases soon. As the crates under
 evaluation grow in scope, presumably the tasks that arise will grow as well.
 
-[`byteorder`]: https://docs.rs/byteorder
-[`bitflags`]: https://doc.rust-lang.org/tempdir/tempdir/index.html
-[`tempdir`]: https://doc.rust-lang.org/tempdir/tempdir/index.html
-[`flate2`]: https://github.com/rust-lang-nursery/bitflags
+[`byteorder`]: https://github.com/BurntSushi/byteorder/issues/76
+[`bitflags`]: https://github.com/rust-lang-nursery/bitflags/issues/80
+[`tempdir`]: https://github.com/rust-lang-nursery/tempdir/issues/28
+[`flate2`]: https://github.com/alexcrichton/flate2-rs/issues/89
 [`lazy_static`]: https://github.com/rust-lang-nursery/lazy-static.rs/issues/70
 
 
