@@ -13,6 +13,10 @@ guided in part by what we learned in producing the Rust standard library, and
 will result in a "cookbook" chock full of ready-made examples for common tasks,
 drawing from a careful selection of Rust crates.
 
+(Also, ICYMI: please participate in the [State of Rust survey]; even if you don't use Rust, we'd love to hear from you!)
+
+[State of Rust survey]: https://blog.rust-lang.org/2017/05/03/survey.html
+
 [2017 vision for Rust]: https://blog.rust-lang.org/2017/02/06/roadmap.html
 
 ## Batteries included?
@@ -49,10 +53,11 @@ traditional systems programming tasks.
 
 Because of Cargo, we can "include batteries" without literally putting them into
 the standard library; pulling in other crates is nearly as easy as using the
-standard library (and will get even easier this year). But to capitalize on this
-ability to the fullest, we need to have excellent libraries. **Our mission for
-2017 is to ensure that crates are available for a wide swath of common tasks and
-that they are *discoverable*, *cohesive*, *featureful*, and *well-documented*.**
+standard library (and will likely get even easier this year). But to capitalize
+on this ability to the fullest, we need to have excellent libraries. **Our
+mission for 2017 is to ensure that crates are available for a wide swath of
+common tasks and that they are *discoverable*, *cohesive*, *featureful*, and
+*well-documented*.**
 
 ## The Rust Libz Blitz
 
@@ -258,7 +263,7 @@ feeling. The exact list is definitely up for debate, and we hope that the
 broader community will also apply this process completely independently to
 crates the libs team won't have time to discuss.
 
-### How to help
+### How can I help?
 
 We're glad you asked! Creating a solid core of libraries for a young
 language is not the work of a single person or team—it is the work of
