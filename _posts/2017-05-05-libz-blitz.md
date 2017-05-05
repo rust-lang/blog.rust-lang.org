@@ -272,7 +272,7 @@ on the Rust internals forum]. Read that thread for all the dirty
 details about what we're doing, and for ongoing opportunities to get
 involved.
 
-[thread on the Rust internals forum]: TODO
+[thread on the Rust internals forum]: https://internals.rust-lang.org/t/rust-libs-blitz/5184
 
 Roles that need your help:
 
