@@ -356,6 +356,10 @@ Here's the plan:
 - We will launch a self-sustaining process of library improvement that
   can by applied consistently across the entire ecosystem.
 
-Come help us make this happen!
-
 [crate cookbook]: https://brson.github.io/rust-cookbook/
+
+Thank you to everyone who has contributed thus far, including Alisha
+Aneja, Andrew Gallant, Brad Anderson, Charles Chamberlain, Dan
+Burkert, David Harris, Jan-Erik Rediger, Peter Atashian, Roman Frołow,
+Sean McArthur, Simon Sapin, Stephan Buys, Trent Spice.
+
