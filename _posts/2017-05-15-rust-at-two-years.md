@@ -78,6 +78,8 @@ new Rust library hitting the central package manager. And Rust topped the
 ### Rust in production
 
 npm
+gnome
+
 - number of companies added
 
 This year saw more companies [betting on Rust].
@@ -109,18 +111,33 @@ This year saw more companies [betting on Rust].
 
 ### Rust in community
 
-It turns out that people like to get together and talk Rust. We had a sold out
-[RustCamp] last August, and several upcoming events in 2016:
+We've had four Rust conferences in the last year:
 
-- September 9-10, 2016: the first [RustConf] in Portland, OR, USA;
-- September 17, 2016: [RustFest], the European community conference, in Berlin, Germany;
-- October 27-18, 2016: [Rust Belt Rust], a Rust conference in Pittsburgh, PA, USA;
-- 71 Rust-related [meetup] groups worldwide.
+- September 9-10, 2016: [RustConf 2016] in Portland, OR, USA;
+- September 17, 2016: [RustFest 2016] in Berlin, Germany;
+- October 27-28, 2016: [Rust Belt Rust 2016] in Pittsburgh, PA, USA;
+- April 29-30, 2017: [RustFest 2017] in Kyiv, Ukraine.
 
-[RustCamp]: http://rustcamp.com/
-[RustConf]: http://rustconf.com/
-[RustFest]: http://www.rustfest.eu/blog/happy-birthday-announcing-rustfest
-[Rust Belt Rust]: http://rust-belt-rust.com/
+[RustConf 2016]: TODO
+[RustFest 2016]: http://2016.rustfest.eu/
+[Rust Belt Rust 2016]: http://conf2016.rust-belt-rust.com/
+[Rustfest 2017]: http://2017.rustfest.eu/
+
+And we have at least three conferences coming up!
+
+- August 18-19, 2017: [RustConf 2017] in Portland, OR, USA;
+- September, 2017: [Another RustFest] in Zurich, Switzerland;
+- October 26-27, 2017: [Rust Belt Rust 2017] in Columbus, OH, USA;
+
+[Rust Belt Rust 2017]: http://conf2017.rust-belt-rust.com/
+[RustConf 2017]: http://rustconf.com/
+[Another RustFest]: https://rustfest.ch/
+
+And that's not even including the [103 meetups worldwide][meetup] about Rust!
+Will you be the one to run the fourth conference or start the 104th meetup?
+[Contact the community team] for help and support!
+
 [meetup]: http://rust.meetup.com/
+[Contact the community team]: https://community.rs/
 
 Happy birthday, Rust!
