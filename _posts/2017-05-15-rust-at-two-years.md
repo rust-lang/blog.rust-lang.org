@@ -5,6 +5,14 @@ author: Carol (Nichols || Goulding)
 description: "Rust, two years after 1.0"
 ---
 
+It's been two years since Rust 1.0 was released. Happy second birthday, Rust!
+
+![Group picture from RustFest Berlin][group-pic]{:class="center"}
+
+*Rustaceans at RustFest Berlin, September 2016. Picture by TODO*
+
+[group-pic]: /images/2017-05-Second-Birthday/rustfest-berlin.jpeg
+
 TODO:
 - intro
 - what rust is
@@ -46,8 +54,9 @@ crates:
 - 10,583 [commits] by 655 contributors added to the core repository;
 - 55 [RFCs] merged;
 - 9 major releases and 2 patch releases shipped;
-- 4,303 new crates published;
+- 4,303 new [crates] published;
 - 284 library stabilizations;
+- 3 babies born to people on [the Rust teams];
 - 2 years of [stability delivered].
 
 On an **average week** this year, the Rust community merged X RFCs and
@@ -55,24 +64,19 @@ published Y brand new [crates]. Not a single day went by without at least one
 new Rust library hitting the central package manager. And Rust topped the
 "[most loved] language" for the second year in a row in the StackOverflow survey.
 
-- stack overflow survey
 - our survey
 - https://thanks.rust-lang.org/
 - http://rustjobs.rs/
 - teams
 - stabilized features
-- babies (2)
 
 [Rust's first birthday]: https://blog.rust-lang.org/2016/05/16/rust-at-one-year.html
-
-
 [survey]: https://blog.rust-lang.org/2017/05/03/survey.html
-
 [most loved]: https://insights.stackoverflow.com/survey/2017#technology-most-loved-dreaded-and-wanted-languages
-
 [commits]: https://github.com/rust-lang/rust/commits/master
 [RFCs]: https://github.com/rust-lang/rfcs
 [stability delivered]: http://blog.rust-lang.org/2014/10/30/Stability.html
+[the Rust teams]: https://www.rust-lang.org/en-US/team.html
 [crates]: https://crates.io/
 
 ### Rust in production
