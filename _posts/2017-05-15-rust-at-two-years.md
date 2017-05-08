@@ -9,7 +9,7 @@ It's been two years since Rust 1.0 was released. Happy second birthday, Rust!
 
 ![Group picture from RustFest Berlin][group-pic]{:class="center"}
 
-*Rustaceans at RustFest Berlin, September 2016. Picture by TODO*
+*Rustaceans at RustFest Berlin, September 2016. Picture by Fiona Castiñeira*
 
 [group-pic]: /images/2017-05-Second-Birthday/rustfest-berlin.jpeg
 
