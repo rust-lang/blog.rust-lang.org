@@ -13,21 +13,22 @@ It's been two years since Rust 1.0 was released. Happy second birthday, Rust!
 
 [group-pic]: /images/2017-05-Second-Birthday/rustfest-berlin.jpeg
 
-TODO:
-- intro
-- what rust is
-- 2 years old
+Rust, a systems programming language focused on safety, speed, and concurrency,
+has now achieved stability without stagnation by maintaining backwards
+compatibility with version 1.0 for two years despite making many improvements.
+Conveniently, Rust's birthday is a bit under halfway through 2017, which makes
+this a great time to reflect not only on the progress in the last year but also
+on the progress of our [2017 Roadmap] goals.
 
+[2017 Roadmap]: https://blog.rust-lang.org/2017/02/06/roadmap.html
 
-* [Rust should have a lower learning curve](https://github.com/rust-lang/rust-roadmap/issues/3)
-* [Rust should have a pleasant edit-compile-debug cycle](https://github.com/rust-lang/rust-roadmap/issues/1)
-* [Rust should provide a solid, but basic IDE experience](https://github.com/rust-lang/rust-roadmap/issues/2)
-* [Rust should provide easy access to high quality crates](https://github.com/rust-lang/rust-roadmap/issues/9)
-* [Rust should be well-equipped for writing robust, high-scale servers](https://github.com/rust-lang/rust-roadmap/issues/10)
-* [Rust should have 1.0-level crates for essential tasks](https://github.com/rust-lang/rust-roadmap/issues/11)
-* [Rust should integrate easily into large build systems](https://github.com/rust-lang/rust-roadmap/issues/12)
-* [Rust's community should provide mentoring at all levels](https://github.com/rust-lang/rust-roadmap/issues/13)
+After reading this post, if you'd like to give us your feedback on how we're
+doing and where Rust should focus next, please fill out our [2017 State of Rust
+survey]!
 
+[2017 State of Rust survey]: https://blog.rust-lang.org/2017/05/03/survey.html
+
+But first, let's do the numbers!
 
 ### Rust in numbers
 
@@ -49,6 +50,9 @@ rfcs:
 
 crates:
 `select count(*) from crates where date(created_at) >= '2016-05-15';`
+
+friends:
+https://github.com/rust-lang/rust-www/compare/bb7f26b...master#diff-ee76f5da00d603d5e34d053a3dc63395
 -->
 
 - 10,583 [commits] by 655 contributors added to the core repository;
@@ -56,45 +60,62 @@ crates:
 - 9 major releases and 2 patch releases shipped;
 - 4,303 new [crates] published;
 - 284 library stabilizations;
+- 10 languages [rust-lang.org] has been translated into;
+- 48 new companies [running Rust in production][friends];
+- 2 new teams (Docs and Style);
+- 24 occasions of adding people to teams, 5 retirings of people from teams;
 - 3 babies born to people on [the Rust teams];
 - 2 years of [stability delivered].
 
-On an **average week** this year, the Rust community merged X RFCs and
-published Y brand new [crates]. Not a single day went by without at least one
-new Rust library hitting the central package manager. And Rust topped the
-"[most loved] language" for the second year in a row in the StackOverflow survey.
-
-- our survey
-- https://thanks.rust-lang.org/
-- http://rustjobs.rs/
-- teams
-- stabilized features
+On an **average week** this year, the Rust community merged 1 RFC and published
+83 brand new [crates]. Rust topped the "[most loved] language" for the second
+year in a row in the StackOverflow survey. Also new this year is
+[thanks.rust-lang.org], a site where you can browse contributors by release!
 
 [Rust's first birthday]: https://blog.rust-lang.org/2016/05/16/rust-at-one-year.html
 [survey]: https://blog.rust-lang.org/2017/05/03/survey.html
 [most loved]: https://insights.stackoverflow.com/survey/2017#technology-most-loved-dreaded-and-wanted-languages
 [commits]: https://github.com/rust-lang/rust/commits/master
 [RFCs]: https://github.com/rust-lang/rfcs
+[rust-lang.org]: https://www.rust-lang.org/
+[friends]: https://www.rust-lang.org/en-US/friends.html
 [stability delivered]: http://blog.rust-lang.org/2014/10/30/Stability.html
+[thanks.rust-lang.org]: https://thanks.rust-lang.org/
 [the Rust teams]: https://www.rust-lang.org/en-US/team.html
 [crates]: https://crates.io/
+
+### Rust 2017 Goals
+
+* [Rust should have a lower learning curve](https://github.com/rust-lang/rust-roadmap/issues/3)
+* [Rust should have a pleasant edit-compile-debug cycle](https://github.com/rust-lang/rust-roadmap/issues/1)
+* [Rust should provide a solid, but basic IDE experience](https://github.com/rust-lang/rust-roadmap/issues/2)
+* [Rust should provide easy access to high quality crates](https://github.com/rust-lang/rust-roadmap/issues/9)
+* [Rust should be well-equipped for writing robust, high-scale servers](https://github.com/rust-lang/rust-roadmap/issues/10)
+* [Rust should have 1.0-level crates for essential tasks](https://github.com/rust-lang/rust-roadmap/issues/11)
+* [Rust should integrate easily into large build systems](https://github.com/rust-lang/rust-roadmap/issues/12)
+* [Rust's community should provide mentoring at all levels](https://github.com/rust-lang/rust-roadmap/issues/13)
 
 ### Rust in production
 
 npm
 gnome
 
-- number of companies added
+Mozilla, Rust's main sponsor, has accelerated their use of Rust in production.
+Not only did [Servo start shipping nightly builds], [Firefox 48] marked the
+first Firefox release that included Rust code as part of the [Oxidation]
+project. [Project Quantum], announced in October 2016, is an effort to
+incrementally adopt proven parts of Servo into Firefox's rendering engine,
+Gecko.
 
-This year saw more companies [betting on Rust].
+[Servo start shipping nightly builds]: https://blog.servo.org/2016/06/30/servo-nightlies/
+[Firefox 48]: https://hacks.mozilla.org/2016/07/shipping-rust-in-firefox/
+[Oxidation]: https://wiki.mozilla.org/Oxidation
+[Project Quantum]: https://medium.com/mozilla-tech/a-quantum-leap-for-the-web-a3b7174b3c12
 
-[betting on Rust]: https://www.rust-lang.org/friends.html
-
-- oxidation
+- http://rustjobs.rs/
 
 ### Rust, improved
 
--
 - [Errors were updated to a new format](https://github.com/rust-lang/rust/issues/35233)
 - [The question mark operator was added](https://github.com/rust-lang/rust/pull/31954)
 - [Macros 1.1 enabled custom derive](https://github.com/rust-lang/rust/pull/35957)
@@ -114,7 +135,7 @@ in compile times, but in most cases it's a win. The helloworld crate saw a 110%
 increase in compile time, but it only equates to +0.1 second, which is probably
 a small fixed overhead that gets overwhelmed in any larger project.
 
-| Crate | 1.8.0 (time) | 1.8.0 ([rss]) | 1.17.0 (time) | 1.17.0 ([rss]) | % change (time) | % change ([rss]) |
+| Benchmark | 1.8.0 (time) | 1.8.0 ([rss]) | 1.17.0 (time) | 1.17.0 ([rss]) | % change (time) | % change ([rss]) |
 |-------|--------------|---------------|---------------|----------------|-----------------|------------------|
 | hyper 0.5.0 | 5.97s | 248MB | 5.44s | 234MB | -8.9% | -5.6 % |
 | html5ever 2016-08-25 | 5.16s | 234MB | 3.98s | 228MB | -22.9% | -2.6% |
@@ -133,6 +154,8 @@ for analyzing it!*
 [benchmarks]: https://github.com/rust-lang-nursery/rustc-benchmarks
 [rss]: https://en.wikipedia.org/wiki/Resident_set_size
 
+Incremental compilation: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
+
 ### Rust ecosystem, improved
 
 - [Rustup reached 1.0](https://github.com/rust-lang/rust/pull/31954)
@@ -142,7 +165,6 @@ for analyzing it!*
 - ripgrep
 
 - the book
-
 
 ### Rust in community
 
@@ -168,11 +190,11 @@ And we have at least three conferences coming up!
 [RustConf 2017]: http://rustconf.com/
 [Another RustFest]: https://rustfest.ch/
 
-And that's not even including the [103 meetups worldwide][meetup] about Rust!
-Will you be the one to run the fourth conference or start the 104th meetup?
-[Contact the community team] for help and support!
+That's not even including the [103 meetups worldwide][meetup] about Rust! Will
+you be the one to run the fourth conference or start the 104th meetup? [Contact
+the community team] for help and support!
 
 [meetup]: http://rust.meetup.com/
 [Contact the community team]: https://community.rs/
 
-Happy birthday, Rust!
+Happy birthday, Rust! Here's to many more! 🎉
