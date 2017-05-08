@@ -94,13 +94,44 @@ This year saw more companies [betting on Rust].
 
 ### Rust, improved
 
-- [MIR became the default](https://github.com/rust-lang/rust/pull/34096)
+-
 - [Errors were updated to a new format](https://github.com/rust-lang/rust/issues/35233)
 - [The question mark operator was added](https://github.com/rust-lang/rust/pull/31954)
 - [Macros 1.1 enabled custom derive](https://github.com/rust-lang/rust/pull/35957)
 - [Rustbuild now uses Rust to build Rust](https://github.com/rust-lang/rust/pull/37817)
 - [`cargo check` does a type check of a project without building it completely for faster feedback](https://github.com/rust-lang/cargo/pull/3296)
 
+Compiler improvements are ongoing. This year, [MIR became a default part of the
+compilation process](https://github.com/rust-lang/rust/pull/34096), which was a
+prerequisite to unlocking further improvements.
+
+Below is a table of [benchmarks] comparing the time it takes to compile a few
+crates and tests with Rust 1.8.0 (the stable release a year ago) to Rust 1.17.0
+(the stable release today). On average, compile times have improved by 5-10%,
+but some worst-case behavior has been fixed that results in >95% improvements
+in certain programs. A couple of crates did show a slight regression of 1-15%
+in compile times, but in most cases it's a win. The helloworld crate saw a 110%
+increase in compile time, but it only equates to +0.1 second, which is probably
+a small fixed overhead that gets overwhelmed in any larger project.
+
+| Crate | 1.8.0 (time) | 1.8.0 ([rss]) | 1.17.0 (time) | 1.17.0 ([rss]) | % change (time) | % change ([rss]) |
+|-------|--------------|---------------|---------------|----------------|-----------------|------------------|
+| hyper 0.5.0 | 5.97s | 248MB | 5.44s | 234MB | -8.9% | -5.6 % |
+| html5ever 2016-08-25 | 5.16s | 234MB | 3.98s | 228MB | -22.9% | -2.6% |
+| issue-32062 | 10.40s | 127MB | 0.26s | 89MB | -97.5% | -29.9% |
+| inflate 0.1.0 | 4.60s | 134MB | 4.06s | 141MB | -11.7% | 5.2% |
+| regex 0.1.30 | 2.49s | 169MB | 2.86s | 178MB | 14.9% | 5.3% |
+| helloworld | 0.09s | 78MB | 0.19s | 83MB | 111.1% | 6.4% |
+| jld-day15-parser | 42.38s | 204 MB | 1.38s | 111MB | -96.7% | -45.6% |
+| tuple-stress | 4.62s | 260MB | 4.67s | 363MB | 1.1% | 39.6% |
+| rust-encoding 0.3.0 | 2.21s | 239MB | 1.91s | 163MB | -13.6% | -31.8% |
+| issue-32278 | 2.22s | 213MB | 1.98s | 138MB | -10.8% | -35.2% |
+
+*Thanks to Mark Simulacrum for gathering this benchmark data and Simon Heath
+for analyzing it!*
+
+[benchmarks]: https://github.com/rust-lang-nursery/rustc-benchmarks
+[rss]: https://en.wikipedia.org/wiki/Resident_set_size
 
 ### Rust ecosystem, improved
 
