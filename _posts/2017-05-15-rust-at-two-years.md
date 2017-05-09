@@ -30,7 +30,7 @@ survey]!
 
 But first, let's do the numbers!
 
-### Rust in numbers
+## Rust in numbers
 
 A lot has happened since [Rust's first birthday]:
 
@@ -67,9 +67,9 @@ https://github.com/rust-lang/rust-www/compare/bb7f26b...master#diff-ee76f5da00d6
 - 3 babies born to people on [the Rust teams];
 - 2 years of [stability delivered].
 
-On an **average week** this year, the Rust community merged 1 RFC and published
-83 brand new [crates]. Rust topped the "[most loved] language" for the second
-year in a row in the StackOverflow survey. Also new this year is
+On an average week this year, the Rust community merged 1 RFC and published 83
+brand new [crates]. Rust topped the "[most loved] language" for the second year
+in a row in the StackOverflow survey. Also new this year is
 [thanks.rust-lang.org], a site where you can browse contributors by release!
 
 [Rust's first birthday]: https://blog.rust-lang.org/2016/05/16/rust-at-one-year.html
@@ -84,21 +84,13 @@ year in a row in the StackOverflow survey. Also new this year is
 [the Rust teams]: https://www.rust-lang.org/en-US/team.html
 [crates]: https://crates.io/
 
-### Rust 2017 Goals
+## Rust in production
 
-* [Rust should have a lower learning curve](https://github.com/rust-lang/rust-roadmap/issues/3)
-* [Rust should have a pleasant edit-compile-debug cycle](https://github.com/rust-lang/rust-roadmap/issues/1)
-* [Rust should provide a solid, but basic IDE experience](https://github.com/rust-lang/rust-roadmap/issues/2)
-* [Rust should provide easy access to high quality crates](https://github.com/rust-lang/rust-roadmap/issues/9)
-* [Rust should be well-equipped for writing robust, high-scale servers](https://github.com/rust-lang/rust-roadmap/issues/10)
-* [Rust should have 1.0-level crates for essential tasks](https://github.com/rust-lang/rust-roadmap/issues/11)
-* [Rust should integrate easily into large build systems](https://github.com/rust-lang/rust-roadmap/issues/12)
-* [Rust's community should provide mentoring at all levels](https://github.com/rust-lang/rust-roadmap/issues/13)
+In addition to the 48 new Rust friends, we now have a [Rust jobs website]! More
+and more companies are choosing Rust to solve problems involving performance,
+scaling, and safety. Let's check in on a few of them.
 
-### Rust in production
-
-npm
-gnome
+[Rust jobs website]: http://rustjobs.rs/
 
 Mozilla, Rust's main sponsor, has accelerated their use of Rust in production.
 Not only did [Servo start shipping nightly builds], [Firefox 48] marked the
@@ -112,14 +104,104 @@ Gecko.
 [Oxidation]: https://wiki.mozilla.org/Oxidation
 [Project Quantum]: https://medium.com/mozilla-tech/a-quantum-leap-for-the-web-a3b7174b3c12
 
-- http://rustjobs.rs/
+[GNOME], a free and open source desktop environment for Linux, went from
+experimenting with Rust in [librsvg] in October 2016 to a [hackfest] in March
+to work on the interoperability between GNOME and Rust to enable more GNOME
+components to be written in Rust. The hackfest participants made good progress,
+be sure to check out the reports at the bottom of the hackfest page for all the
+details. We're all excited about the possibilities of Rust and GNOME working
+together!
 
-### Rust, improved
+[GNOME]: https://www.gnome.org/
+[librsvg]: https://people.gnome.org/~federico/news-2016-10.html#25
+[hackfest]: https://wiki.gnome.org/Hackfests/Rust2017
 
-- [Errors were updated to a new format](https://github.com/rust-lang/rust/issues/35233)
-- [The question mark operator was added](https://github.com/rust-lang/rust/pull/31954)
-- [Macros 1.1 enabled custom derive](https://github.com/rust-lang/rust/pull/35957)
-- [Rustbuild now uses Rust to build Rust](https://github.com/rust-lang/rust/pull/37817)
+This year, [npm] started using Rust in production to serve JavaScript packages,
+using Rust to eliminate performance bottlenecks in their platform that serves
+around 350 million packages a day. [Ashley Williams recently gave a
+talk][ag_dubs] at RustFest in Ukraine about npm's experience with Rust in
+production; video is coming soon!
+
+[npm]: https://www.npmjs.com/
+[ag_dubs]: http://2017.rustfest.eu/talks/#how-i-convinced-the-world-s-largest-package-manager-to-use-rust-and-so-can-you
+
+## Rust in community
+
+Speaking of conferences, We've had four Rust conferences in the last year:
+
+- September 9-10, 2016: [RustConf 2016] in Portland, OR, USA;
+- September 17, 2016: [RustFest 2016] in Berlin, Germany;
+- October 27-28, 2016: [Rust Belt Rust 2016] in Pittsburgh, PA, USA;
+- April 29-30, 2017: [RustFest 2017] in Kyiv, Ukraine.
+
+[RustConf 2016]: TODO ATURON PROMISED
+[RustFest 2016]: http://2016.rustfest.eu/
+[Rust Belt Rust 2016]: http://conf2016.rust-belt-rust.com/
+[Rustfest 2017]: http://2017.rustfest.eu/
+
+And we have at least three conferences coming up!
+
+- August 18-19, 2017: [RustConf 2017] in Portland, OR, USA;
+- September, 2017: [Another RustFest] in Zurich, Switzerland;
+- October 26-27, 2017: [Rust Belt Rust 2017] in Columbus, OH, USA.
+
+[Rust Belt Rust 2017]: http://conf2017.rust-belt-rust.com/
+[RustConf 2017]: http://rustconf.com/
+[Another RustFest]: https://rustfest.ch/
+
+That's not even including the [103 meetups worldwide][meetup] about Rust! Will
+you be the one to run the fourth conference or start the 104th meetup? [Contact
+the community team] for help and support!
+
+[meetup]: http://rust.meetup.com/
+[Contact the community team]: https://community.rs/
+
+## Rust 2017 Goals
+
+The [2017 Roadmap] goals have been great for focusing community efforts towards
+the most pressing issues facing Rust today. Of course we'd love for every
+aspect of Rust to improve all the time, but we don't have an infinite number of
+contributors with an infinite amount of time available yet!
+
+Let's check in on some of the initiatives in each of the goals in the roadmap.
+Take a look at each goal's tracking issue for even more initiatives than we're
+mentioning here!
+
+### [Rust should have a lower learning curve](https://github.com/rust-lang/rust-roadmap/issues/3)
+
+The second edition of [The Rust Programming Language Book] is one chapter shy
+of having its initial content complete! There's lots more editing to be done to
+get the book ready for publication in October, though. The print version is
+currently available for [preorder from No Starch], and the online version of
+the second edition has boarded [the beta train] and will be an option in the
+documentation shipped with Rust 1.18.0. Steve and I have gotten feedback that
+[the ownership chapter] especially is much improved and has helped people
+understand ownership related concepts better!
+
+[The Rust Programming Language Book]: https://github.com/rust-lang/book
+[preorder from No Starch]: https://www.nostarch.com/rust
+[the beta train]: https://doc.rust-lang.org/beta/book/
+[the ownership chapter]: https://doc.rust-lang.org/nightly/book/second-edition/ch04-00-understanding-ownership.html
+
+The [Language Ergonomics Initiative] is another part of the lower learning
+curve goal that has [a number of improvements][lei-tracker] in its pipeline.
+The language team is eager to mentor people (another goal!) who are interested
+in getting involved with moving these ergonomic improvement ideas forward by
+writing RFCs and working with the community to flesh out the details of how
+these improvements would work. Comment on the [tracking issue][lei-tracker] if
+you'd like to jump in!
+
+[Language Ergonomics Initiative]: https://blog.rust-lang.org/2017/03/02/lang-ergonomics.html
+[lei-tracker]: https://github.com/rust-lang/rust-roadmap/issues/17
+
+Also check out:
+
+- [The Rust Cookbook](https://github.com/brson/rust-cookbook)
+- [The new error format rolled out in Rust 1.12.0](https://github.com/rust-lang/rust/issues/35233)
+- [The question mark operator stabilized in Rust 1.13.0](https://github.com/rust-lang/rust/pull/31954)
+
+### [Rust should have a pleasant edit-compile-debug cycle](https://github.com/rust-lang/rust-roadmap/issues/1)
+
 - [`cargo check` does a type check of a project without building it completely for faster feedback](https://github.com/rust-lang/cargo/pull/3296)
 
 Compiler improvements are ongoing. This year, [MIR became a default part of the
@@ -156,45 +238,39 @@ for analyzing it!*
 
 Incremental compilation: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
 
-### Rust ecosystem, improved
+### [Rust should provide a solid, but basic IDE experience](https://github.com/rust-lang/rust-roadmap/issues/2)
 
-- [Rustup reached 1.0](https://github.com/rust-lang/rust/pull/31954)
-- [Rust Language Server started](https://github.com/rust-lang-nursery/rls)
-- futures/tokio
-- ring
-- ripgrep
+[Rust Language Server]: https://github.com/rust-lang-nursery/rls
 
-- the book
+### [Rust should provide easy access to high quality crates](https://github.com/rust-lang/rust-roadmap/issues/9)
 
-### Rust in community
+Libz Blitz
+Categories
+Badges
+RFC 1824
 
-We've had four Rust conferences in the last year:
+### [Rust should be well-equipped for writing robust, high-scale servers](https://github.com/rust-lang/rust-roadmap/issues/10)
 
-- September 9-10, 2016: [RustConf 2016] in Portland, OR, USA;
-- September 17, 2016: [RustFest 2016] in Berlin, Germany;
-- October 27-28, 2016: [Rust Belt Rust 2016] in Pittsburgh, PA, USA;
-- April 29-30, 2017: [RustFest 2017] in Kyiv, Ukraine.
+- [Futures] and [tokio] enable zero-cost asynchronous programming
+[Futures]: https://crates.io/crates/futures
+[tokio]: https://tokio.rs/
 
-[RustConf 2016]: TODO
-[RustFest 2016]: http://2016.rustfest.eu/
-[Rust Belt Rust 2016]: http://conf2016.rust-belt-rust.com/
-[Rustfest 2017]: http://2017.rustfest.eu/
+### [Rust should have 1.0-level crates for essential tasks](https://github.com/rust-lang/rust-roadmap/issues/11)
 
-And we have at least three conferences coming up!
+### [Rust should integrate easily into large build systems](https://github.com/rust-lang/rust-roadmap/issues/12)
 
-- August 18-19, 2017: [RustConf 2017] in Portland, OR, USA;
-- September, 2017: [Another RustFest] in Zurich, Switzerland;
-- October 26-27, 2017: [Rust Belt Rust 2017] in Columbus, OH, USA;
+### [Rust's community should provide mentoring at all levels](https://github.com/rust-lang/rust-roadmap/issues/13)
 
-[Rust Belt Rust 2017]: http://conf2017.rust-belt-rust.com/
-[RustConf 2017]: http://rustconf.com/
-[Another RustFest]: https://rustfest.ch/
+### Etc?
 
-That's not even including the [103 meetups worldwide][meetup] about Rust! Will
-you be the one to run the fourth conference or start the 104th meetup? [Contact
-the community team] for help and support!
+- [Macros 1.1 enabled custom derive](https://github.com/rust-lang/rust/pull/35957)
+- [Rustbuild now uses Rust to build Rust](https://github.com/rust-lang/rust/pull/37817)
+- [Rustup reaching 1.0][rustup]
+- [ripgrep], a cross-platform GNU grep alternative with [best-in-class
+  performance]
 
-[meetup]: http://rust.meetup.com/
-[Contact the community team]: https://community.rs/
+[rustup]: https://github.com/rust-lang/rust/pull/31954
+[ripgrep]: https://crates.io/crates/ripgrep
+[best-in-class performance]: http://blog.burntsushi.net/ripgrep/
 
 Happy birthday, Rust! Here's to many more! 🎉
