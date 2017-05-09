@@ -242,7 +242,7 @@ Incremental compilation: https://internals.rust-lang.org/t/incremental-compilati
 
 [Rust Language Server]: https://github.com/rust-lang-nursery/rls
 
-### [Rust should provide easy access to high quality crates](https://github.com/rust-lang/rust-roadmap/issues/9)
+### [Rust should have 1.0-level crates for essential tasks](https://github.com/rust-lang/rust-roadmap/issues/11), and [Rust should provide easy access to high quality crates](https://github.com/rust-lang/rust-roadmap/issues/9)
 
 Libz Blitz
 Categories
@@ -252,14 +252,33 @@ RFC 1824
 ### [Rust should be well-equipped for writing robust, high-scale servers](https://github.com/rust-lang/rust-roadmap/issues/10)
 
 - [Futures] and [tokio] enable zero-cost asynchronous programming
+
 [Futures]: https://crates.io/crates/futures
 [tokio]: https://tokio.rs/
 
-### [Rust should have 1.0-level crates for essential tasks](https://github.com/rust-lang/rust-roadmap/issues/11)
-
 ### [Rust should integrate easily into large build systems](https://github.com/rust-lang/rust-roadmap/issues/12)
 
+This initiative is mostly in the ideas stage; there's lots of great discussion
+on the tracking issue that has resulted in a few Cargo issues:
+
+* [Support creating a build plan](https://github.com/rust-lang/cargo/issues/3815)
+* [Support declaring external dependencies](https://github.com/rust-lang/cargo/issues/3816)
+
+Keep an eye out for more improvement in this area soon!
+
 ### [Rust's community should provide mentoring at all levels](https://github.com/rust-lang/rust-roadmap/issues/13)
+
+There were [RustBridge] events before RustFest Berlin and Rust Belt Rust, and
+there's another planned for the day before RustConf coming up!
+
+[RustBridge]: https://github.com/rust-community/rustbridge
+
+There are many people who have started getting involved with various
+initiatives. I've worked with many people at many places in their Rust journey:
+helping out with the conferences, giving their first conference talks,
+providing feedback on the book, working on crates, contributing to Rust itself,
+and joining teams! While we haven't made as much formal, measurable progress on
+this front, everywhere I turn I see Rustaceans helping other Rustaceans.
 
 ### Etc?
 
