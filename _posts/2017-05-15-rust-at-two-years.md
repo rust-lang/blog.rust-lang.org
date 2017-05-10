@@ -249,9 +249,23 @@ Check out [perf.rust-lang.org] for monitoring Rust's performance day-to-day!
 TODO: [`cargo check`] does a type check of a project without building it completely
 for faster feedback.
 
-TODO: Incremental compilation: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
-
 [`cargo check`]: https://github.com/rust-lang/cargo/pull/3296
+
+The work on incremental compilation is proceeding well. Nightly builds
+currently offer ["beta" support][incrcomp], permitting the compiler to
+skip over code generation. We are in the midst of refactoring the
+compiler to support finer-grained incremental computation, allowing us
+to skip type-checking and other parts of compilation as well. This
+refactoring should also offer better support for the IDE work (see
+next section), since it enables the compiler to do things like compile
+a single function in isolation. We expect to see the next stage of
+incremental compilation becoming available over the next few
+months. If you're interested in getting involved, please check out the
+[roadmap issue #4][roadmap-4], which is updated periodically to
+reflect the current status, as well as places where help is needed.
+
+[incrcomp]: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
+[roadmap-4]: https://github.com/rust-lang/rust-roadmap/issues/4
 
 ### [Rust should provide a basic, but solid IDE experience](https://github.com/rust-lang/rust-roadmap/issues/2)
 
