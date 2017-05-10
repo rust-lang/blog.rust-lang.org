@@ -15,10 +15,10 @@ It's been two years since Rust 1.0 was released. Happy second birthday, Rust!
 
 Rust, a systems programming language focused on safety, speed, and concurrency,
 has now achieved stability without stagnation by maintaining backwards
-compatibility with version 1.0 for two years despite making many improvements.
-Conveniently, Rust's birthday is a bit under halfway through 2017, which makes
-this a great time to reflect not only on the progress in the last year but also
-on the progress of our [2017 Roadmap] goals.
+compatibility with version 1.0 for two years while also making many
+improvements. Conveniently, Rust's birthday is a bit under halfway through
+2017, which makes this a great time to reflect not only on the progress in the
+last year but also on the progress of our [2017 Roadmap] goals.
 
 [2017 Roadmap]: https://blog.rust-lang.org/2017/02/06/roadmap.html
 
@@ -68,9 +68,9 @@ https://github.com/rust-lang/rust-www/compare/bb7f26b...master#diff-ee76f5da00d6
 - 2 years of [stability delivered].
 
 On an average week this year, the Rust community merged 1 RFC and published 83
-brand new [crates]. Rust topped the "[most loved] language" for the second year
-in a row in the StackOverflow survey. Also new this year is
-[thanks.rust-lang.org], a site where you can browse contributors by release!
+new crates. Rust topped the "[most loved] language" for the second year in a
+row in the StackOverflow survey. Also new this year is [thanks.rust-lang.org],
+a site where you can browse contributors by release!
 
 [Rust's first birthday]: https://blog.rust-lang.org/2016/05/16/rust-at-one-year.html
 [survey]: https://blog.rust-lang.org/2017/05/03/survey.html
@@ -231,13 +231,17 @@ a small fixed overhead that gets overwhelmed in any larger project.
 *Thanks to Mark Simulacrum for gathering this benchmark data and Simon Heath
 for analyzing it!*
 
+Check out [perf.rust-lang.org] for monitoring Rust's performance day-to-day!
+
 [benchmarks]: https://github.com/rust-lang-nursery/rustc-benchmarks
 [rss]: https://en.wikipedia.org/wiki/Resident_set_size
+[perf.rust-lang.org]: http://perf.rust-lang.org/
 
-[`cargo check`] does a type check of a project without building it completely
+TODO: [`cargo check`] does a type check of a project without building it completely
 for faster feedback.
 
-Incremental compilation: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
+TODO: Incremental compilation: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
+
 [`cargo check`]: https://github.com/rust-lang/cargo/pull/3296
 
 ### [Rust should provide a basic, but solid IDE experience](https://github.com/rust-lang/rust-roadmap/issues/2)
@@ -281,7 +285,7 @@ choose the crates that fit your needs.
 
 ### [Rust should be well-equipped for writing robust, high-scale servers](https://github.com/rust-lang/rust-roadmap/issues/10)
 
-- [Futures] and [tokio] enable zero-cost asynchronous programming
+TODO: [Futures] and [tokio] enable zero-cost asynchronous programming
 
 [Futures]: https://crates.io/crates/futures
 [tokio]: https://tokio.rs/
