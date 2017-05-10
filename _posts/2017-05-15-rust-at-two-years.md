@@ -246,10 +246,13 @@ Check out [perf.rust-lang.org] for monitoring Rust's performance day-to-day!
 [rss]: https://en.wikipedia.org/wiki/Resident_set_size
 [perf.rust-lang.org]: http://perf.rust-lang.org/
 
-TODO: [`cargo check`] does a type check of a project without building it completely
-for faster feedback.
+[`cargo check`] stabilized in Rust 1.16.0 and does a type check of a project
+without building it completely. This gives consistently fast feedback from the
+compiler. Take a look at [the 1.16 announcement] to see how `cargo check` can
+be incorporated into your workflow.
 
 [`cargo check`]: https://github.com/rust-lang/cargo/pull/3296
+[the 1.16 announcement]: https://blog.rust-lang.org/2017/03/16/Rust-1.16.html
 
 The work on incremental compilation is proceeding well. Nightly builds
 currently offer ["beta" support][incrcomp], permitting the compiler to
