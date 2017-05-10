@@ -264,6 +264,8 @@ months. If you're interested in getting involved, please check out the
 [roadmap issue #4][roadmap-4], which is updated periodically to
 reflect the current status, as well as places where help is needed.
 
+*Thanks to Niko Matsakis for this incremental compilation summary!*
+
 [incrcomp]: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
 [roadmap-4]: https://github.com/rust-lang/rust-roadmap/issues/4
 
