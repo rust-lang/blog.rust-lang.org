@@ -235,6 +235,12 @@ a small fixed overhead that gets overwhelmed in any larger project.
 | hyper 0.5.0          | 5.97s        | 248MB         | 5.44s         | 234MB          | -8.9%           | -5.6 %           |
 | jld-day15-parser     | 42.38s       | 204MB         | 1.38s         | 111MB          | -96.7%          | -45.6%           |
 
+In graph form:
+
+![Bar graph showing compilation time data from the table][compilation-time]{:class="center"}
+
+[compilation-time]: /images/2017-05-Second-Birthday/compilation-time.png
+
 *Thanks to Mark Simulacrum for gathering this benchmark data and Simon Heath
 for analyzing it!*
 
