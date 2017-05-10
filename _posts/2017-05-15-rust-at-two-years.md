@@ -156,7 +156,7 @@ the community team] for help and support!
 [meetup]: http://rust.meetup.com/
 [Contact the community team]: https://community.rs/
 
-## Rust 2017 Goals
+## Rust in 2017
 
 The [2017 Roadmap] goals have been great for focusing community efforts towards
 the most pressing issues facing Rust today. Of course we'd love for every
@@ -202,8 +202,6 @@ Also check out:
 
 ### [Rust should have a pleasant edit-compile-debug cycle](https://github.com/rust-lang/rust-roadmap/issues/1)
 
-- [`cargo check` does a type check of a project without building it completely for faster feedback](https://github.com/rust-lang/cargo/pull/3296)
-
 Compiler improvements are ongoing. This year, [MIR became a default part of the
 compilation process](https://github.com/rust-lang/rust/pull/34096), which was a
 prerequisite to unlocking further improvements.
@@ -236,18 +234,50 @@ for analyzing it!*
 [benchmarks]: https://github.com/rust-lang-nursery/rustc-benchmarks
 [rss]: https://en.wikipedia.org/wiki/Resident_set_size
 
-Incremental compilation: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
+[`cargo check`] does a type check of a project without building it completely
+for faster feedback.
 
-### [Rust should provide a solid, but basic IDE experience](https://github.com/rust-lang/rust-roadmap/issues/2)
+Incremental compilation: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
+[`cargo check`]: https://github.com/rust-lang/cargo/pull/3296
+
+### [Rust should provide a basic, but solid IDE experience](https://github.com/rust-lang/rust-roadmap/issues/2)
+
+As part of our IDE initiative, we created the [Rust Language Server] project.
+Its goal is to create a single tool that makes it easy for any editor or IDE to
+have the full power of the Rust compiler for error checking, code navigation,
+and refactoring by using the standard [language server
+protocol](http://langserver.org/) created by Microsoft and Eclipse.
+
+While still early in its life, today the RLS is [available from rustup] for
+nightly users. It provides type information on hover, error messages as you
+type, and different kinds of code navigation. It even provides refactoring and
+formatting as unstable features! It works with projects as large as Cargo.
+We're excited to watch the RLS continue to grow and hope to see it make its way
+to stable Rust later this year.
 
 [Rust Language Server]: https://github.com/rust-lang-nursery/rls
+[available from rustup]: https://github.com/rust-lang-nursery/rls#setup
+
+*Thanks to Jonathan Turner for this RLS summary!*
 
 ### [Rust should have 1.0-level crates for essential tasks](https://github.com/rust-lang/rust-roadmap/issues/11), and [Rust should provide easy access to high quality crates](https://github.com/rust-lang/rust-roadmap/issues/9)
 
-Libz Blitz
-Categories
-Badges
-RFC 1824
+The [recent post on the Libz Blitz] details the Library Team's initiative to
+increase the quality of crates for common tasks; that post is excellent so I
+won't repeat it here! I will note that many of the issues that the Libs Team
+is going to create will be great starter issues. For the blitz to be the best
+it can be, the Libs Team is going to need help from the community-- that means
+YOU! :) They're willing to mentor people interested in contributing!
+
+In order to make awesome crates easier to find for particular purposes,
+crates.io now has [categories] for crate authors to better indicate the use
+case of their crate. Crates can also now have CI badges, and
+[more improvements to crates.io's interface] are coming that will help you
+choose the crates that fit your needs.
+
+[recent post on the Libz Blitz]: https://blog.rust-lang.org/2017/05/05/libz-blitz.html
+[categories]: https://crates.io/categories
+[more improvements to crates.io's interface]: https://github.com/rust-lang/rust/issues/41616
 
 ### [Rust should be well-equipped for writing robust, high-scale servers](https://github.com/rust-lang/rust-roadmap/issues/10)
 
@@ -280,16 +310,11 @@ providing feedback on the book, working on crates, contributing to Rust itself,
 and joining teams! While we haven't made as much formal, measurable progress on
 this front, everywhere I turn I see Rustaceans helping other Rustaceans.
 
-### Etc?
+## Rust in the future
 
-- [Macros 1.1 enabled custom derive](https://github.com/rust-lang/rust/pull/35957)
-- [Rustbuild now uses Rust to build Rust](https://github.com/rust-lang/rust/pull/37817)
-- [Rustup reaching 1.0][rustup]
-- [ripgrep], a cross-platform GNU grep alternative with [best-in-class
-  performance]
-
-[rustup]: https://github.com/rust-lang/rust/pull/31954
-[ripgrep]: https://crates.io/crates/ripgrep
-[best-in-class performance]: http://blog.burntsushi.net/ripgrep/
+While Rust is still just a toddler, it's still growing and still going strong.
+The libraries and the infrastructure are maturing, we're paving the on-ramp,
+and we're supporting each other. I'm optimistic about the direction Rust is
+taking!
 
 Happy birthday, Rust! Here's to many more! 🎉
