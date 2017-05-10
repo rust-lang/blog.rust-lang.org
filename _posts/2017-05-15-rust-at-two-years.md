@@ -228,14 +228,12 @@ a small fixed overhead that gets overwhelmed in any larger project.
 |-------|--------------|---------------|---------------|----------------|-----------------|------------------|
 | hyper 0.5.0 | 5.97s | 248MB | 5.44s | 234MB | -8.9% | -5.6 % |
 | html5ever 2016-08-25 | 5.16s | 234MB | 3.98s | 228MB | -22.9% | -2.6% |
-| issue-32062 | 10.40s | 127MB | 0.26s | 89MB | -97.5% | -29.9% |
 | inflate 0.1.0 | 4.60s | 134MB | 4.06s | 141MB | -11.7% | 5.2% |
 | regex 0.1.30 | 2.49s | 169MB | 2.86s | 178MB | 14.9% | 5.3% |
 | helloworld | 0.09s | 78MB | 0.19s | 83MB | 111.1% | 6.4% |
 | jld-day15-parser | 42.38s | 204 MB | 1.38s | 111MB | -96.7% | -45.6% |
 | tuple-stress | 4.62s | 260MB | 4.67s | 363MB | 1.1% | 39.6% |
 | rust-encoding 0.3.0 | 2.21s | 239MB | 1.91s | 163MB | -13.6% | -31.8% |
-| issue-32278 | 2.22s | 213MB | 1.98s | 138MB | -10.8% | -35.2% |
 
 *Thanks to Mark Simulacrum for gathering this benchmark data and Simon Heath
 for analyzing it!*
