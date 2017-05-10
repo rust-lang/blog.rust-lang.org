@@ -24,7 +24,7 @@ last year but also on the progress of our [2017 Roadmap] goals.
 
 After reading this post, if you'd like to give us your feedback on how we're
 doing and where Rust should focus next, please fill out our [2017 State of Rust
-survey]!
+survey].
 
 [2017 State of Rust survey]: https://blog.rust-lang.org/2017/05/03/survey.html
 
@@ -70,7 +70,7 @@ https://github.com/rust-lang/rust-www/compare/bb7f26b...master#diff-ee76f5da00d6
 On an average week this year, the Rust community merged 1 RFC and published 83
 new crates. Rust topped the "[most loved] language" for the second year in a
 row in the StackOverflow survey. Also new this year is [thanks.rust-lang.org],
-a site where you can browse contributors by release!
+a site where you can browse contributors by release.
 
 [Rust's first birthday]: https://blog.rust-lang.org/2016/05/16/rust-at-one-year.html
 [survey]: https://blog.rust-lang.org/2017/05/03/survey.html
@@ -94,7 +94,7 @@ scaling, and safety. Let's check in on a few of them.
 
 [Dropbox] is using Rust in multiple high-impact projects to manage exabytes of
 data where correctness and efficiency is critical. Rust is currently shipping
-in the desktop client on Windows running on hundreds of millions of machines!
+in the desktop client on Windows running on hundreds of millions of machines.
 Jamie Turner recently [spoke at the SF Rust Meetup] about the details on how
 Rust helps Dropbox use less RAM and get more throughput with less CPU.
 
@@ -119,7 +119,7 @@ to work on the interoperability between GNOME and Rust to enable more GNOME
 components to be written in Rust. The hackfest participants made good progress,
 be sure to check out the reports at the bottom of the hackfest page for all the
 details. We're all excited about the possibilities of Rust and GNOME working
-together!
+together.
 
 [GNOME]: https://www.gnome.org/
 [librsvg]: https://people.gnome.org/~federico/news-2016-10.html#25
@@ -129,7 +129,7 @@ This year, [npm] started using Rust in production to serve JavaScript packages,
 using Rust to eliminate performance bottlenecks in their platform that serves
 around 350 million packages a day. [Ashley Williams recently gave a
 talk][ag_dubs] at RustFest in Ukraine about npm's experience with Rust in
-production; video is coming soon!
+production; video is coming soon.
 
 [npm]: https://www.npmjs.com/
 [ag_dubs]: http://2017.rustfest.eu/talks/#how-i-convinced-the-world-s-largest-package-manager-to-use-rust-and-so-can-you
@@ -158,7 +158,7 @@ And we have at least three conferences coming up!
 [RustConf 2017]: http://rustconf.com/
 [Another RustFest]: https://rustfest.ch/
 
-That's not even including the [103 meetups worldwide][meetup] about Rust! Will
+That's not even including the [103 meetups worldwide][meetup] about Rust. Will
 you be the one to run the fourth conference or start the 104th meetup? [Contact
 the community team] for help and support!
 
@@ -174,12 +174,12 @@ contributors with an infinite amount of time available yet!
 
 Let's check in on some of the initiatives in each of the goals in the roadmap.
 Take a look at each goal's tracking issue for even more initiatives than we're
-mentioning here!
+mentioning here.
 
 ### [Rust should have a lower learning curve](https://github.com/rust-lang/rust-roadmap/issues/3)
 
 The second edition of [The Rust Programming Language Book] is one chapter shy
-of having its initial content complete! There's lots more editing to be done to
+of having its initial content complete. There's lots more editing to be done to
 get the book ready for publication in October, though. The print version is
 currently available for [preorder from No Starch], and the online version of
 the second edition has boarded [the beta train] and will be an option in the
@@ -198,7 +198,7 @@ The language team is eager to mentor people (another goal!) who are interested
 in getting involved with moving these ergonomic improvement ideas forward by
 writing RFCs and working with the community to flesh out the details of how
 these improvements would work. Comment on the [tracking issue][lei-tracker] if
-you'd like to jump in!
+you'd like to jump in.
 
 [Language Ergonomics Initiative]: https://blog.rust-lang.org/2017/03/02/lang-ergonomics.html
 [lei-tracker]: https://github.com/rust-lang/rust-roadmap/issues/17
@@ -244,7 +244,7 @@ In graph form:
 *Thanks to Mark Simulacrum for gathering this benchmark data and Simon Heath
 for analyzing it!*
 
-Check out [perf.rust-lang.org] for monitoring Rust's performance day-to-day!
+Check out [perf.rust-lang.org] for monitoring Rust's performance day-to-day.
 
 [benchmarks]: https://github.com/rust-lang-nursery/rustc-benchmarks
 [rss]: https://en.wikipedia.org/wiki/Resident_set_size
@@ -300,10 +300,10 @@ to stable Rust later this year.
 
 The [recent post on the Libz Blitz] details the Library Team's initiative to
 increase the quality of crates for common tasks; that post is excellent so I
-won't repeat it here! I will note that many of the issues that the Libs Team
+won't repeat it here. I will note that many of the issues that the Libs Team
 is going to create will be great starter issues. For the blitz to be the best
 it can be, the Libs Team is going to need help from the community-- that means
-YOU! :) They're willing to mentor people interested in contributing!
+YOU! :) They're willing to mentor people interested in contributing.
 
 In order to make awesome crates easier to find for particular purposes,
 crates.io now has [categories] for crate authors to better indicate the use
@@ -330,7 +330,7 @@ on the tracking issue that has resulted in a few Cargo issues:
 * [Support creating a build plan](https://github.com/rust-lang/cargo/issues/3815)
 * [Support declaring external dependencies](https://github.com/rust-lang/cargo/issues/3816)
 
-Keep an eye out for more improvement in this area soon!
+Keep an eye out for more improvement in this area soon.
 
 ### [Rust's community should provide mentoring at all levels](https://github.com/rust-lang/rust-roadmap/issues/13)
 
