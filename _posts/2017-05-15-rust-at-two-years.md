@@ -127,8 +127,8 @@ together.
 [librsvg]: https://people.gnome.org/~federico/news-2016-10.html#25
 [hackfest]: https://wiki.gnome.org/Hackfests/Rust2017
 
-This year, [npm] started using Rust in production to serve JavaScript packages,
-using Rust to eliminate performance bottlenecks in their platform that serves
+This year, [npm] started using Rust in production to serve JavaScript packages.
+The Rust pieces eliminate performance bottlenecks in their platform that serves
 around 350 million packages a day. [Ashley Williams recently gave a
 talk][ag_dubs] at RustFest in Ukraine about npm's experience with Rust in
 production; video is coming soon.
