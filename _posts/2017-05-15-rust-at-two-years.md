@@ -106,12 +106,14 @@ Not only did [Servo start shipping nightly builds], [Firefox 48] marked the
 first Firefox release that included Rust code as part of the [Oxidation]
 project. [Project Quantum], announced in October 2016, is an effort to
 incrementally adopt proven parts of Servo into Firefox's rendering engine,
-Gecko.
+Gecko. [Check out this blog series] that's just getting started for a detailed
+look at Project Quantum.
 
 [Servo start shipping nightly builds]: https://blog.servo.org/2016/06/30/servo-nightlies/
 [Firefox 48]: https://hacks.mozilla.org/2016/07/shipping-rust-in-firefox/
 [Oxidation]: https://wiki.mozilla.org/Oxidation
 [Project Quantum]: https://medium.com/mozilla-tech/a-quantum-leap-for-the-web-a3b7174b3c12
+[Check out this blog series]: https://hacks.mozilla.org/2017/05/quantum-up-close-what-is-a-browser-engine/
 
 [GNOME], a free and open source desktop environment for Linux, went from
 experimenting with Rust in [librsvg] in October 2016 to a [hackfest] in March
