@@ -62,7 +62,7 @@ https://github.com/rust-lang/rust-www/compare/bb7f26b...master#diff-ee76f5da00d6
 - 284 library stabilizations;
 - 10 languages [rust-lang.org] has been translated into;
 - 48 new companies [running Rust in production][friends];
-- 2 new teams (Docs and Style);
+- 4 new teams (Docs, Style, Infrastructure, and the Unsafe Guidelines strike team);
 - 24 occasions of adding people to teams, 5 retirings of people from teams;
 - 3 babies born to people on [the Rust teams];
 - 2 years of [stability delivered].
