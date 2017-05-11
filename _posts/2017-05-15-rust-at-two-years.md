@@ -237,10 +237,21 @@ over the next few months. If you're interested in getting involved, please
 check out the [roadmap issue #4][roadmap-4], which is updated periodically to
 reflect the current status, as well as places where help is needed.
 
+[The February post][incrcomp] on the "beta" support showed that recompiling in
+release mode will often be **five times as fast** with incremental compilation!
+This graph shows the improvements in compilation time when making changes to
+various parts of the regex crate and rebuilding in release mode:
+
+![Graph showing improved time with incremental compilation][incrcomp-svg]{:class="center"}
+
+Try out incremental compilation on nightly Rust with
+`CARGO_INCREMENTAL=1 cargo <command>`!
+
 *Thanks to Niko Matsakis for this incremental compilation summary!*
 
 [incrcomp]: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
 [roadmap-4]: https://github.com/rust-lang/rust-roadmap/issues/4
+[incrcomp-svg]: /images/2017-05-Second-Birthday/incremental-compilation.svg
 
 The progress that's happened in the last year on improving the time it takes to
 do a full compilation is mostly slow and steady, with a few pathological cases
