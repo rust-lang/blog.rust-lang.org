@@ -175,8 +175,7 @@ aspect of Rust to improve all the time, but we don't have an infinite number of
 contributors with an infinite amount of time available yet!
 
 Let's check in on some of the initiatives in each of the goals in the roadmap.
-Take a look at each goal's tracking issue for even more initiatives than we're
-mentioning here.
+The linked tracking issues give even more detail than the summaries here.
 
 ### [Rust should have a lower learning curve](https://github.com/rust-lang/rust-roadmap/issues/3)
 
@@ -213,18 +212,47 @@ Also check out:
 
 ### [Rust should have a pleasant edit-compile-debug cycle](https://github.com/rust-lang/rust-roadmap/issues/1)
 
-Compiler improvements are ongoing. This year, [MIR became a default part of the
-compilation process](https://github.com/rust-lang/rust/pull/34096), which was a
-prerequisite to unlocking further improvements.
+Waiting on the compiler is the biggest roadblock preventing the Rust
+development workflow from being described as "pleasant". So far, a lot of work
+has been done behind the scenes to make future improvements possible. Those
+improvements are starting to come to fruition, but rest assured that this
+initiative is far from being considered complete.
 
-Below is a table of [benchmarks] comparing the time it takes to compile a few
-crates and tests with Rust 1.8.0 (the stable release a year ago) to Rust 1.17.0
-(the stable release today). On average, compile times have improved by 5-10%,
-but some worst-case behavior has been fixed that results in >95% improvements
-in certain programs. A couple of crates did show a slight regression of 1-15%
-in compile times, but in most cases it's a win. The helloworld crate saw a 110%
-increase in compile time, but it only equates to +0.1 second, which is probably
-a small fixed overhead that gets overwhelmed in any larger project.
+One of the major prerequisites to improvements was adding [MIR] (Mid-level
+Intermediate Representation) to the compiler pipeline. This year, [MIR became a
+default part of the compilation process][mir-default].
+
+[MIR]: https://blog.rust-lang.org/2016/04/19/MIR.html
+[mir-default]: https://github.com/rust-lang/rust/pull/34096
+
+Because of MIR, we're now able to work on adding incremental compilation.
+Nightly builds currently offer ["beta" support][incrcomp] for it, permitting
+the compiler to skip over code generation. We are in the midst of refactoring
+the compiler to support finer-grained incremental computation, allowing us to
+skip type-checking and other parts of compilation as well. This refactoring
+should also offer better support for the IDE work (see next section), since it
+enables the compiler to do things like compile a single function in isolation.
+We expect to see the next stage of incremental compilation becoming available
+over the next few months. If you're interested in getting involved, please
+check out the [roadmap issue #4][roadmap-4], which is updated periodically to
+reflect the current status, as well as places where help is needed.
+
+*Thanks to Niko Matsakis for this incremental compilation summary!*
+
+[incrcomp]: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
+[roadmap-4]: https://github.com/rust-lang/rust-roadmap/issues/4
+
+The progress that's happened in the last year on improving the time it takes to
+do a full compilation is mostly slow and steady, with a few pathological cases
+greatly improved Below is a table of [benchmarks] comparing the time it takes
+to compile a few crates and tests with Rust 1.8.0 (the stable release a year
+ago) to Rust 1.17.0 (the stable release today). On average, compile times have
+improved by 5-10%, but some worst-case behavior has been fixed that results
+in >95% improvements in certain programs. A couple of crates did show a slight
+regression of 1-15% in compile times, but in most cases it's a win. The
+helloworld crate saw a 110% increase in compile time, but it only equates to
++0.1 second, which is probably a small fixed overhead that gets overwhelmed in
+any larger project.
 
 | Benchmark            | 1.8.0 (time) | 1.8.0 ([rss]) | 1.17.0 (time) | 1.17.0 ([rss]) | % change (time) | % change ([rss]) |
 |----------------------|--------------|---------------|---------------|----------------|-----------------|------------------|
@@ -247,36 +275,11 @@ In graph form:
 for analyzing it!*
 
 Check out [perf.rust-lang.org] for monitoring Rust's performance day-to-day.
+As you can see, we've still got more work to do!
 
 [benchmarks]: https://github.com/rust-lang-nursery/rustc-benchmarks
 [rss]: https://en.wikipedia.org/wiki/Resident_set_size
 [perf.rust-lang.org]: http://perf.rust-lang.org/
-
-[`cargo check`] stabilized in Rust 1.16.0 and does a type check of a project
-without building it completely. This gives consistently fast feedback from the
-compiler. Take a look at [the 1.16 announcement] to see how `cargo check` can
-be incorporated into your workflow.
-
-[`cargo check`]: https://github.com/rust-lang/cargo/pull/3296
-[the 1.16 announcement]: https://blog.rust-lang.org/2017/03/16/Rust-1.16.html
-
-The work on incremental compilation is proceeding well. Nightly builds
-currently offer ["beta" support][incrcomp], permitting the compiler to
-skip over code generation. We are in the midst of refactoring the
-compiler to support finer-grained incremental computation, allowing us
-to skip type-checking and other parts of compilation as well. This
-refactoring should also offer better support for the IDE work (see
-next section), since it enables the compiler to do things like compile
-a single function in isolation. We expect to see the next stage of
-incremental compilation becoming available over the next few
-months. If you're interested in getting involved, please check out the
-[roadmap issue #4][roadmap-4], which is updated periodically to
-reflect the current status, as well as places where help is needed.
-
-*Thanks to Niko Matsakis for this incremental compilation summary!*
-
-[incrcomp]: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
-[roadmap-4]: https://github.com/rust-lang/rust-roadmap/issues/4
 
 ### [Rust should provide a basic, but solid IDE experience](https://github.com/rust-lang/rust-roadmap/issues/2)
 
