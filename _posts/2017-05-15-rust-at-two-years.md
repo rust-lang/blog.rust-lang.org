@@ -340,27 +340,58 @@ TODO: [Futures] and [tokio] enable zero-cost asynchronous programming
 
 ### [Rust should integrate easily into large build systems](https://github.com/rust-lang/rust-roadmap/issues/12)
 
-This initiative is mostly in the ideas stage; there's lots of great discussion
-on the tracking issue that has resulted in a few Cargo issues:
+This initiative is mostly in the ideas stage; we've done a lot of work with
+stakeholders to understand the challenges in build system integration today,
+and we think we have a good overall vision for how to solve them. There's lots
+of great discussion on the tracking issue that has resulted in a few Cargo
+issues like these:
 
 * [Support creating a build plan](https://github.com/rust-lang/cargo/issues/3815)
 * [Support declaring external dependencies](https://github.com/rust-lang/cargo/issues/3816)
 
-Keep an eye out for more improvement in this area soon.
+There are a lot of details yet to be worked out; keep an eye out for more
+improvement in this area soon.
 
 ### [Rust's community should provide mentoring at all levels](https://github.com/rust-lang/rust-roadmap/issues/13)
 
-There were [RustBridge] events before RustFest Berlin and Rust Belt Rust, and
-there's another planned for the day before RustConf coming up!
+The "all levels" part of the roadmap item is important to us: it's about
+onboarding first-time contributors as well as adding folks all the way up at
+the core team level (like me, hi!)
+
+For people just getting started with Rust, we held [RustBridge] events before
+RustFest Berlin and Rust Belt Rust. There's another coming up, planned for the
+day before RustConf in Portland!
+
+The Mozilla Rust folks are going to have [Outreachy] and [GSoC] interns this
+summer working on a variety of projects.
+
+We've also had success involving contributors when there are low-committment,
+high impact tasks to be done. One of those efforts was [improving the format of
+error messages]-- check out the [82 participants on this issue]! The Libz Blitz
+mentioned in a previous section is set up specifically to be another source of
+mentoring opportunities.
+
+In January, the Language Team introduced [shepherds], which is partly about
+mentoring a set of folks around the Language Team. The shepherds have been
+quite helpful in keeping RFC discussions moving forward!
+
+We've also been working to grow both the number and size of subteams, to create
+more opportunities for people to step into leadership roles.
+
+There's also less formal ways that we've been helping people get involved with
+various initiatives. I've worked with many people at many places in their Rust
+journey: helping out with the conferences, giving their first conference talks,
+providing feedback on the book, working on crates, contributing to Rust itself,
+and joining teams! While it's hard to quantify scenarios like these, everywhere
+I turn, I see Rustaceans helping other Rustaceans and I'm grateful this is part
+of our culture.
 
 [RustBridge]: https://github.com/rust-community/rustbridge
-
-There are many people who have started getting involved with various
-initiatives. I've worked with many people at many places in their Rust journey:
-helping out with the conferences, giving their first conference talks,
-providing feedback on the book, working on crates, contributing to Rust itself,
-and joining teams! While we haven't made as much formal, measurable progress on
-this front, everywhere I turn I see Rustaceans helping other Rustaceans.
+[Outreachy]: https://wiki.mozilla.org/Outreachy
+[GSoC]: https://summerofcode.withgoogle.com/projects/#4730059156881408
+[shepherds]: https://internals.rust-lang.org/t/language-team-shepherds/4595
+[improving the format of error messages]: https://blog.rust-lang.org/2016/08/10/Shape-of-errors-to-come.html
+[82 participants on this issue]: https://github.com/rust-lang/rust/issues/35233
 
 ## Rust in the future
 
