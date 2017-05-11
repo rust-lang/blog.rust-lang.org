@@ -93,10 +93,10 @@ scaling, and safety. Let's check in on a few of them.
 [Rust jobs website]: http://rustjobs.rs/
 
 [Dropbox] is using Rust in multiple high-impact projects to manage exabytes of
-data where correctness and efficiency is critical. Rust is currently shipping
-in the desktop client on Windows running on hundreds of millions of machines.
-Jamie Turner recently [spoke at the SF Rust Meetup] about the details on how
-Rust helps Dropbox use less RAM and get more throughput with less CPU.
+data where correctness and efficiency is critical. Rust code is currently
+shipping in the desktop client on Windows running on **hundreds of millions** of
+machines. Jamie Turner recently [spoke at the SF Rust Meetup] about the details
+on how Rust helps Dropbox use less RAM and get more throughput with less CPU.
 
 [Dropbox]: https://www.dropbox.com/
 [spoke at the SF Rust Meetup]: https://air.mozilla.org/rust-meetup-may-2017/
