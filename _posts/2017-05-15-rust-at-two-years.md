@@ -82,7 +82,7 @@ a site where you can browse contributors by release.
 [RFCs]: https://github.com/rust-lang/rfcs
 [rust-lang.org]: https://www.rust-lang.org/
 [friends]: https://www.rust-lang.org/en-US/friends.html
-[stability delivered]: http://blog.rust-lang.org/2014/10/30/Stability.html
+[stability delivered]: https://blog.rust-lang.org/2014/10/30/Stability.html
 [thanks.rust-lang.org]: https://thanks.rust-lang.org/
 [the Rust teams]: https://www.rust-lang.org/en-US/team.html
 [crates]: https://crates.io/
@@ -93,7 +93,7 @@ In addition to the 48 new Rust friends, we now have a [Rust jobs website]! More
 and more companies are choosing Rust to solve problems involving performance,
 scaling, and safety. Let's check in on a few of them.
 
-[Rust jobs website]: http://rustjobs.rs/
+[Rust jobs website]: https://rustjobs.rs/
 
 [Dropbox] is using Rust in multiple high-impact projects to manage exabytes of
 data on the back end, where correctness and efficiency is critical. Rust code is
@@ -164,7 +164,7 @@ And we have at least three conferences coming up!
 - September, 2017: [Another RustFest] in Zurich, Switzerland;
 - October 26-27, 2017: [Rust Belt Rust 2017] in Columbus, OH, USA.
 
-[Rust Belt Rust 2017]: http://conf2017.rust-belt-rust.com/
+[Rust Belt Rust 2017]: https://rust-belt-rust.com/
 [RustConf 2017]: http://rustconf.com/
 [Another RustFest]: https://rustfest.ch/
 
@@ -172,7 +172,7 @@ That's not even including the [103 meetups worldwide][meetup] about Rust. Will
 you be the one to run the fourth conference or start the 104th meetup? [Contact
 the community team] for help and support!
 
-[meetup]: http://rust.meetup.com/
+[meetup]: https://rust.meetup.com/
 [Contact the community team]: https://community.rs/
 
 ## Rust in 2017
@@ -268,7 +268,7 @@ worst-case behavior has been fixed that results in >95% improvements in certain
 programs. Some very promising improvements are on the way for later this year;
 check out [perf.rust-lang.org] for monitoring Rust's performance day-to-day.
 
-[perf.rust-lang.org]: http://perf.rust-lang.org/
+[perf.rust-lang.org]: https://perf.rust-lang.org/
 
 ### [Rust should provide a basic, but solid IDE experience](https://github.com/rust-lang/rust-roadmap/issues/2)
 
@@ -323,10 +323,10 @@ event loop, and lots of tools for quickly implementing new protocols. A simple
 HTTP server using Tokio is among the fastest measured in the [TechEmpower]
 server benchmarks.
 
-[futures]: http://aturon.github.io/blog/2016/08/11/futures/
+[futures]: https://aturon.github.io/blog/2016/08/11/futures/
 [Tokio]: https://tokio.rs/
 [C++]: https://github.com/facebook/wangle
-[Scala]: http://finagle.github.io/
+[Scala]: https://finagle.github.io/
 [JavaScript]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [TechEmpower]: https://www.techempower.com/benchmarks/#section=data-r14&hw=ph&test=plaintext
 
@@ -342,7 +342,7 @@ performance or reliability.
 
 [Hyper]: https://hyper.rs/
 [Rocket]: https://rocket.rs/
-[Diesel]: http://diesel.rs/
+[Diesel]: https://diesel.rs/
 
 Over the rest of this year, we expect all of the above libraries to
 significantly mature; for a middleware ecosystem to sprout up; for the
