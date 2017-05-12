@@ -234,17 +234,17 @@ default part of the compilation process][mir-default].
 [mir-default]: https://github.com/rust-lang/rust/pull/34096
 
 Because of MIR, we're now able to work on adding incremental recompilation.
-Nightly builds currently offer ["beta" support][incrcomp] for it, permitting the
-compiler to skip over code generation for code that hasn't chaned. We are in the
-midst of refactoring the compiler to support finer-grained incremental
-computation, allowing us to skip type-checking and other parts of compilation as
-well. This refactoring should also offer better support for the IDE work (see
-next section), since it enables the compiler to do things like compile a single
-function in isolation.  We expect to see the next stage of incremental
-compilation becoming available over the next few months. If you're interested in
-getting involved, please check out the [roadmap issue #4][roadmap-4], which is
-updated periodically to reflect the current status, as well as places where help
-is needed.
+Nightly builds currently offer ["beta" support][incrcomp] for it, permitting
+the compiler to skip over code generation for code that hasn't changed. We are
+in the midst of refactoring the compiler to support finer-grained incremental
+computation, allowing us to skip type-checking and other parts of compilation
+as well. This refactoring should also offer better support for the IDE work
+(see next section), since it enables the compiler to do things like compile a
+single function in isolation. We expect to see the next stage of incremental
+compilation becoming available over the next few months. If you're interested
+in getting involved, please check out the [roadmap issue #4][roadmap-4], which
+is updated periodically to reflect the current status, as well as places where
+help is needed.
 
 [The February post][incrcomp] on the "beta" support showed that recompiling in
 release mode will often be **five times as fast** with incremental compilation!
@@ -333,21 +333,22 @@ server benchmarks.
 Speaking of protocols, Rust's full-blown HTTP story is solidifying, with
 [Hyper]'s master branch currently providing full Tokio support (and official
 release imminent). Work on HTTP/2 is well under way. And the web framework
-ecosystem is growing too, with [Rocket] coming out this year with the ergonomics
-and flexibility of a scripting framework and the performance and reliability of
-Rust. Together with supporting libraries like the [Diesel] ORM, this ecosystem
-is showing how Rust can provide slick, ergonomic developer experiences without
-sacrificing an ounce of performance or reliability.
+ecosystem is growing too. For example, [Rocket] came out this year: it's a
+framework that marries the ergonomics and flexibility of a scripting framework
+with the performance and reliability of Rust. Together with supporting
+libraries like the [Diesel] ORM, this ecosystem is showing how Rust can provide
+slick, ergonomic developer experiences without sacrificing an ounce of
+performance or reliability.
 
 [Hyper]: https://hyper.rs/
 [Rocket]: https://rocket.rs/
 [Diesel]: http://diesel.rs/
 
 Over the rest of this year, we expect all of the above libraries to
-significantly mature; for a middleware ecosystem to sprout up; for the selection
-of supported protocols and services to grow; and, quite possibly, to tie all
-this all together with an `async`/`await` notation that works natively with Rust's
-futures.
+significantly mature; for a middleware ecosystem to sprout up; for the
+selection of supported protocols and services to grow; and, quite possibly, to
+tie all this all together with an `async`/`await` notation that works natively
+with Rust's futures.
 
 *Thanks to Aaron Turon for this server-side summary!*
 
@@ -356,7 +357,8 @@ futures.
 Cargo, Rust's native package manager and build system, is often cited as one of
 people's favorite aspects of Rust. But of course, the world runs on many build
 systems, and when you want to bring a chunk of the Rust ecosystem into a large
-organization with its own, smooth integration is paramount.
+organization that has its own existing build system, smooth integration is
+paramount.
 
 This initiative is mostly in the ideas stage; we've done a lot of work with
 stakeholders to understand the challenges in build system integration today,
