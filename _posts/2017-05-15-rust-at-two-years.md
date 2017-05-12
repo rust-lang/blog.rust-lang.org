@@ -5,6 +5,10 @@ author: Carol (Nichols || Goulding)
 description: "Rust, two years after 1.0"
 ---
 
+Rust is a language for confident, productive systems programming. It aims to
+make systems programming accessible to a wider audience, and to raise the
+ambitions of dyed-in-the-wool systems hackers.
+
 It's been two years since Rust 1.0 was released. Happy second birthday, Rust!
 
 ![Group picture from RustFest Berlin][group-pic]{:class="center"}
@@ -13,12 +17,11 @@ It's been two years since Rust 1.0 was released. Happy second birthday, Rust!
 
 [group-pic]: /images/2017-05-Second-Birthday/rustfest-berlin.jpeg
 
-Rust, a language for confident, productive systems programming, has now
-achieved stability without stagnation by maintaining backwards compatibility
-with version 1.0 for two years while also making many improvements.
-Conveniently, Rust's birthday is a bit under halfway through 2017, which makes
-this a great time to reflect not only on the progress in the last year but also
-on the progress of our [2017 Roadmap] goals.
+Over these two years, we have demonstrated stability without stagnation,
+maintaining backwards compatibility with version 1.0 while also making many
+improvements.  Conveniently, Rust's birthday is a bit under halfway through
+2017, which makes this a great time to reflect not only on the progress in the
+last year but also on the progress of our [2017 Roadmap] goals.
 
 [2017 Roadmap]: https://blog.rust-lang.org/2017/02/06/roadmap.html
 
@@ -93,10 +96,11 @@ scaling, and safety. Let's check in on a few of them.
 [Rust jobs website]: http://rustjobs.rs/
 
 [Dropbox] is using Rust in multiple high-impact projects to manage exabytes of
-data where correctness and efficiency is critical. Rust code is currently
-shipping in the desktop client on Windows running on **hundreds of millions** of
-machines. Jamie Turner recently [spoke at the SF Rust Meetup] about the details
-on how Rust helps Dropbox use less RAM and get more throughput with less CPU.
+data on the back end, where correctness and efficiency is critical. Rust code is
+also currently shipping in the desktop client on Windows running on **hundreds
+of millions** of machines. Jamie Turner recently [spoke at the SF Rust Meetup]
+about the details on how Rust helps Dropbox use less RAM and get more throughput
+with less CPU.
 
 [Dropbox]: https://www.dropbox.com/
 [spoke at the SF Rust Meetup]: https://air.mozilla.org/rust-meetup-may-2017/
@@ -133,8 +137,12 @@ around 350 million packages a day. [Ashley Williams recently gave a
 talk][ag_dubs] at RustFest in Ukraine about npm's experience with Rust in
 production; video is coming soon.
 
+This is just a sampling of the success stories accumulating around Rust. If
+you're using Rust in production, we want to [hear yours too][new friend]!
+
 [npm]: https://www.npmjs.com/
 [ag_dubs]: http://2017.rustfest.eu/talks/#how-i-convinced-the-world-s-largest-package-manager-to-use-rust-and-so-can-you
+[new friend]: https://github.com/rust-lang/rust-www/issues/new?title=New+Website+Logo%3A+[insert+name]%0A&body=To+list+your+organization%27s+logo+on+the+Rust+website%2C+fill+out+the+following+information+and+click+%22submit+new+issue%22.+Alternately%2C+you+may+edit+_data%2Fusers.yml+as+described+therein+and+submit+a+pull+request.%0D%0A%0D%0A-+Organization+name%3A+%28as+you+want+it+displayed%29%0D%0A-+Homepage+url%3A+%28homepage%2Fprimary+entry+point+for+users%29%0D%0A-+Logo+url%3A+%28svg+if+possible%2C+pngs+over+400x200px+with+transparent+backgrounds+are+also+acceptable%29%0D%0A-+How+you+are+using+Rust%3A+%28one+sentence+describing+your+use+of+Rust%29%0D%0A-+Url+describing+Rust+usage%3A+%28optional+link+to+e.g.+blog+post+explaining+how+you+use+Rust%29%0D%0A-+Organization+contact%3A+%28name+and+email.+we+may+contact+you+when+updating+this+page.+alternately+you+may+email+this+information+to+user-logos%40rust-lang.org+and+it+will+be+kept+secret%29.%0D%0A
 
 ## Rust in community
 
@@ -145,7 +153,7 @@ Speaking of conferences, We've had four Rust conferences in the last year:
 - October 27-28, 2016: [Rust Belt Rust 2016] in Pittsburgh, PA, USA;
 - April 29-30, 2017: [RustFest 2017] in Kyiv, Ukraine.
 
-[RustConf 2016]: TODO ATURON PROMISED
+[RustConf 2016]: http://rustconf.com/2016/
 [RustFest 2016]: http://2016.rustfest.eu/
 [Rust Belt Rust 2016]: http://conf2016.rust-belt-rust.com/
 [Rustfest 2017]: http://2017.rustfest.eu/
@@ -225,17 +233,18 @@ default part of the compilation process][mir-default].
 [MIR]: https://blog.rust-lang.org/2016/04/19/MIR.html
 [mir-default]: https://github.com/rust-lang/rust/pull/34096
 
-Because of MIR, we're now able to work on adding incremental compilation.
-Nightly builds currently offer ["beta" support][incrcomp] for it, permitting
-the compiler to skip over code generation. We are in the midst of refactoring
-the compiler to support finer-grained incremental computation, allowing us to
-skip type-checking and other parts of compilation as well. This refactoring
-should also offer better support for the IDE work (see next section), since it
-enables the compiler to do things like compile a single function in isolation.
-We expect to see the next stage of incremental compilation becoming available
-over the next few months. If you're interested in getting involved, please
-check out the [roadmap issue #4][roadmap-4], which is updated periodically to
-reflect the current status, as well as places where help is needed.
+Because of MIR, we're now able to work on adding incremental recompilation.
+Nightly builds currently offer ["beta" support][incrcomp] for it, permitting the
+compiler to skip over code generation for code that hasn't chaned. We are in the
+midst of refactoring the compiler to support finer-grained incremental
+computation, allowing us to skip type-checking and other parts of compilation as
+well. This refactoring should also offer better support for the IDE work (see
+next section), since it enables the compiler to do things like compile a single
+function in isolation.  We expect to see the next stage of incremental
+compilation becoming available over the next few months. If you're interested in
+getting involved, please check out the [roadmap issue #4][roadmap-4], which is
+updated periodically to reflect the current status, as well as places where help
+is needed.
 
 [The February post][incrcomp] on the "beta" support showed that recompiling in
 release mode will often be **five times as fast** with incremental compilation!
@@ -302,12 +311,52 @@ choose the crates that fit your needs.
 
 ### [Rust should be well-equipped for writing robust, high-scale servers](https://github.com/rust-lang/rust-roadmap/issues/10)
 
-TODO: [Futures] and [tokio] enable zero-cost asynchronous programming
+One of the major events in Rust's ecosystem in the last year was the
+introduction of a zero-cost [futures] library, and a framework, [Tokio], for
+doing asynchronous I/O on top of it. These libraries are a boon for doing
+high-scale, high-reliability server programming, *productively*. Futures have
+been used with great success in [C++], [Scala], and of course [JavaScript]
+(under the guise of promises), and we're reaping similar benefits in
+Rust. However, the Rust library takes a new implementation approach that makes
+futures *allocation-free*. And Tokio builds on that to provide a futures-enabled
+event loop, and lots of tools for quickly implementing new protocols. A simple
+HTTP server using Tokio is among the fastest measured in the [TechEmpower]
+server benchmarks.
 
-[Futures]: https://crates.io/crates/futures
-[tokio]: https://tokio.rs/
+[futures]: http://aturon.github.io/blog/2016/08/11/futures/
+[Tokio]: https://tokio.rs/
+[C++]: https://github.com/facebook/wangle
+[Scala]: http://finagle.github.io/
+[JavaScript]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[TechEmpower]: https://www.techempower.com/benchmarks/#section=data-r14&hw=ph&test=plaintext
+
+Speaking of protocols, Rust's full-blown HTTP story is solidifying, with
+[Hyper]'s master branch currently providing full Tokio support (and official
+release imminent). Work on HTTP/2 is well under way. And the web framework
+ecosystem is growing too, with [Rocket] coming out this year as a highly
+ergonomic and flexible framework that offers quite good performance. Together
+with supporting libraries like the [Diesel] ORM, this ecosystem is showing how
+Rust can provide slick, ergonomic developer experiences without sacrificing an
+ounce of performance or reliability.
+
+[Hyper]: https://hyper.rs/
+[Rocket]: https://rocket.rs/
+[Diesel]: http://diesel.rs/
+
+Over the rest of this year, we expect all of the above libraries to
+significantly mature; for a middleware ecosystem to sprout up; for the selection
+of supported protocols and services to grow; and, quite possibly, to tie all
+this all together with an `async`/`await` notation that works natively with Rust's
+futures.
+
+*Thanks to Aaron Turon for this server-side summary!*
 
 ### [Rust should integrate easily into large build systems](https://github.com/rust-lang/rust-roadmap/issues/12)
+
+Cargo, Rust's native package manager and build system, is often cited as one of
+people's favorite aspects of Rust. But of course, the world runs on many build
+systems, and when you want to bring a chunk of the Rust ecosystem into a large
+organization with its own, smooth integration is paramount.
 
 This initiative is mostly in the ideas stage; we've done a lot of work with
 stakeholders to understand the challenges in build system integration today,
