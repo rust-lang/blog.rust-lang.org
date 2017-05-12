@@ -253,43 +253,12 @@ Try out incremental compilation on nightly Rust with
 [roadmap-4]: https://github.com/rust-lang/rust-roadmap/issues/4
 [incrcomp-svg]: /images/2017-05-Second-Birthday/incremental-compilation.svg
 
-The progress that's happened in the last year on improving the time it takes to
-do a full compilation is mostly slow and steady, with a few pathological cases
-greatly improved Below is a table of [benchmarks] comparing the time it takes
-to compile a few crates and tests with Rust 1.8.0 (the stable release a year
-ago) to Rust 1.17.0 (the stable release today). On average, compile times have
-improved by 5-10%, but some worst-case behavior has been fixed that results
-in >95% improvements in certain programs. A couple of crates did show a slight
-regression of 1-15% in compile times, but in most cases it's a win. The
-helloworld crate saw a 110% increase in compile time, but it only equates to
-+0.1 second, which is probably a small fixed overhead that gets overwhelmed in
-any larger project.
+We've also made some progress on the time it takes to do a full compilation. On
+average, compile times have improved by 5-10% in the last year, but some
+worst-case behavior has been fixed that results in >95% improvements in certain
+programs. Some very promising improvements are on the way for later this year;
+check out [perf.rust-lang.org] for monitoring Rust's performance day-to-day.
 
-| Benchmark            | 1.8.0 (time) | 1.8.0 ([rss]) | 1.17.0 (time) | 1.17.0 ([rss]) | % change (time) | % change ([rss]) |
-|----------------------|--------------|---------------|---------------|----------------|-----------------|------------------|
-| helloworld           | 0.09s        | 78MB          | 0.19s         | 83MB           | 111.1%          | 6.4%             |
-| rust-encoding 0.3.0  | 2.21s        | 239MB         | 1.91s         | 163MB          | -13.6%          | -31.8%           |
-| regex 0.1.30         | 2.49s        | 169MB         | 2.86s         | 178MB          | 14.9%           | 5.3%             |
-| inflate 0.1.0        | 4.60s        | 134MB         | 4.06s         | 141MB          | -11.7%          | 5.2%             |
-| tuple-stress         | 4.62s        | 260MB         | 4.67s         | 363MB          | 1.1%            | 39.6%            |
-| html5ever 2016-08-25 | 5.16s        | 234MB         | 3.98s         | 228MB          | -22.9%          | -2.6%            |
-| hyper 0.5.0          | 5.97s        | 248MB         | 5.44s         | 234MB          | -8.9%           | -5.6 %           |
-| jld-day15-parser     | 42.38s       | 204MB         | 1.38s         | 111MB          | -96.7%          | -45.6%           |
-
-In graph form:
-
-![Bar graph showing compilation time data from the table][compilation-time]{:class="center"}
-
-[compilation-time]: /images/2017-05-Second-Birthday/compilation-time.png
-
-*Thanks to Mark Simulacrum for gathering this benchmark data and Simon Heath
-for analyzing it!*
-
-Check out [perf.rust-lang.org] for monitoring Rust's performance day-to-day.
-As you can see, we've still got more work to do!
-
-[benchmarks]: https://github.com/rust-lang-nursery/rustc-benchmarks
-[rss]: https://en.wikipedia.org/wiki/Resident_set_size
 [perf.rust-lang.org]: http://perf.rust-lang.org/
 
 ### [Rust should provide a basic, but solid IDE experience](https://github.com/rust-lang/rust-roadmap/issues/2)
