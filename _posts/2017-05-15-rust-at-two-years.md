@@ -395,9 +395,9 @@ of our culture.
 
 ## Rust in the future
 
-While Rust is still just a toddler, it's still growing and still going strong.
-The libraries and the infrastructure are maturing, we're paving the on-ramp,
-and we're supporting each other. I'm optimistic about the direction Rust is
-taking!
+At two years old, Rust is finding its way into all corners of programming, from
+web development, to embedded systems, and even your desktop. The libraries and
+the infrastructure are maturing, we're paving the on-ramp, and we're supporting
+each other. I'm optimistic about the direction Rust is taking!
 
 Happy birthday, Rust! Here's to many more! 🎉
