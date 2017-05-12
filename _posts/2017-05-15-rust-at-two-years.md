@@ -333,11 +333,11 @@ server benchmarks.
 Speaking of protocols, Rust's full-blown HTTP story is solidifying, with
 [Hyper]'s master branch currently providing full Tokio support (and official
 release imminent). Work on HTTP/2 is well under way. And the web framework
-ecosystem is growing too, with [Rocket] coming out this year as a highly
-ergonomic and flexible framework that offers quite good performance. Together
-with supporting libraries like the [Diesel] ORM, this ecosystem is showing how
-Rust can provide slick, ergonomic developer experiences without sacrificing an
-ounce of performance or reliability.
+ecosystem is growing too, with [Rocket] coming out this year with the ergonomics
+and flexibility of a scripting framework and the performance and reliability of
+Rust. Together with supporting libraries like the [Diesel] ORM, this ecosystem
+is showing how Rust can provide slick, ergonomic developer experiences without
+sacrificing an ounce of performance or reliability.
 
 [Hyper]: https://hyper.rs/
 [Rocket]: https://rocket.rs/
