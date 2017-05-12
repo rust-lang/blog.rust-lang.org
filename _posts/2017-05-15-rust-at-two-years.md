@@ -13,12 +13,12 @@ It's been two years since Rust 1.0 was released. Happy second birthday, Rust!
 
 [group-pic]: /images/2017-05-Second-Birthday/rustfest-berlin.jpeg
 
-Rust, a systems programming language focused on safety, speed, and concurrency,
-has now achieved stability without stagnation by maintaining backwards
-compatibility with version 1.0 for two years while also making many
-improvements. Conveniently, Rust's birthday is a bit under halfway through
-2017, which makes this a great time to reflect not only on the progress in the
-last year but also on the progress of our [2017 Roadmap] goals.
+Rust, a language for confident, productive systems programming, has now
+achieved stability without stagnation by maintaining backwards compatibility
+with version 1.0 for two years while also making many improvements.
+Conveniently, Rust's birthday is a bit under halfway through 2017, which makes
+this a great time to reflect not only on the progress in the last year but also
+on the progress of our [2017 Roadmap] goals.
 
 [2017 Roadmap]: https://blog.rust-lang.org/2017/02/06/roadmap.html
 
