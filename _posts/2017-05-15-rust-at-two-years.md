@@ -41,7 +41,7 @@ A lot has happened since [Rust's first birthday]:
 - 56 [RFCs] merged;
 - 9 major releases and 2 patch releases shipped;
 - 4,405 new [crates] published;
-- 284 library stabilizations;
+- 284 standard library stabilizations;
 - 10 languages [rust-lang.org] has been translated into;
 - 48 new companies [running Rust in production][friends];
 - 4 new teams (Docs, Style, Infrastructure, and the Unsafe Guidelines strike team);
