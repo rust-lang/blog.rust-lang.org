@@ -37,31 +37,10 @@ But first, let's do the numbers!
 
 A lot has happened since [Rust's first birthday]:
 
-<!--
-Will rerun these just before publishing:
-
-commits:
-`git log --since=2016-05-15 --until=2017-05-15 --oneline | wc`
-
-contributors:
-`git log --since=2016-05-15 --until=2017-05-15 --oneline --format="%aN" | sort | uniq | wc`
-
-rfcs:
-`git ls-tree a4a22d7c5dd71724bb2cd0fe2db5026338d0b270 text/ | wc` => there were 255 RFCs a year ago
-`git ls-tree HEAD text/ | wc` => there are 310 RFCs now
-310 - 255 =  55
-
-crates:
-`select count(*) from crates where date(created_at) >= '2016-05-15';`
-
-friends:
-https://github.com/rust-lang/rust-www/compare/bb7f26b...master#diff-ee76f5da00d603d5e34d053a3dc63395
--->
-
-- 10,583 [commits] by 655 contributors added to the core repository;
-- 55 [RFCs] merged;
+- 10,800 [commits] by 663 contributors (438 of them new this year) added to the core repository;
+- 56 [RFCs] merged;
 - 9 major releases and 2 patch releases shipped;
-- 4,303 new [crates] published;
+- 4,405 new [crates] published;
 - 284 library stabilizations;
 - 10 languages [rust-lang.org] has been translated into;
 - 48 new companies [running Rust in production][friends];
