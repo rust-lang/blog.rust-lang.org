@@ -39,7 +39,7 @@ A lot has happened since [Rust's first birthday]:
 
 - 10,800 [commits] by 663 contributors (438 of them new this year) added to the core repository;
 - 56 [RFCs] merged;
-- 9 major releases and 2 patch releases shipped;
+- 9 minor releases and 2 patch releases shipped;
 - 4,405 new [crates] published;
 - 284 standard library stabilizations;
 - 10 languages [rust-lang.org] has been translated into;
