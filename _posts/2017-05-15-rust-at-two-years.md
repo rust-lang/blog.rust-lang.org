@@ -114,13 +114,14 @@ This year, [npm] started using Rust in production to serve JavaScript packages.
 The Rust pieces eliminate performance bottlenecks in their platform that serves
 around 350 million packages a day. [Ashley Williams recently gave a
 talk][ag_dubs] at RustFest in Ukraine about npm's experience with Rust in
-production; video is coming soon.
+production; check out the [video][ag_dubs-video].
 
 This is just a sampling of the success stories accumulating around Rust. If
 you're using Rust in production, we want to [hear yours too][new friend]!
 
 [npm]: https://www.npmjs.com/
 [ag_dubs]: http://2017.rustfest.eu/talks/#how-i-convinced-the-world-s-largest-package-manager-to-use-rust-and-so-can-you
+[ag_dubs-video]: https://www.youtube.com/watch?v=GCsxYAxw3JQ
 [new friend]: https://github.com/rust-lang/rust-www/issues/new?title=New+Website+Logo%3A+[insert+name]%0A&body=To+list+your+organization%27s+logo+on+the+Rust+website%2C+fill+out+the+following+information+and+click+%22submit+new+issue%22.+Alternately%2C+you+may+edit+_data%2Fusers.yml+as+described+therein+and+submit+a+pull+request.%0D%0A%0D%0A-+Organization+name%3A+%28as+you+want+it+displayed%29%0D%0A-+Homepage+url%3A+%28homepage%2Fprimary+entry+point+for+users%29%0D%0A-+Logo+url%3A+%28svg+if+possible%2C+pngs+over+400x200px+with+transparent+backgrounds+are+also+acceptable%29%0D%0A-+How+you+are+using+Rust%3A+%28one+sentence+describing+your+use+of+Rust%29%0D%0A-+Url+describing+Rust+usage%3A+%28optional+link+to+e.g.+blog+post+explaining+how+you+use+Rust%29%0D%0A-+Organization+contact%3A+%28name+and+email.+we+may+contact+you+when+updating+this+page.+alternately+you+may+email+this+information+to+user-logos%40rust-lang.org+and+it+will+be+kept+secret%29.%0D%0A
 
 ## Rust in community
