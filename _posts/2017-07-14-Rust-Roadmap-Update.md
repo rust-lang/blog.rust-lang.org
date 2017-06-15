@@ -40,10 +40,10 @@ you'd like to help out, there is still
 [preorder]: https://www.nostarch.com/rust
 [book]: https://doc.rust-lang.org/book/
 
-We've also been working on a number of languages changes aimed at
+We've also been working on a number of language changes aimed at
 improving [language ergonomics][ergo]. These range from long-standing
 proposals, like [non-lexical lifetimes][rr16] or [`impl Trait`], to
-newer ideas, like the recently approved RFCs on [trait aliases][] the
+newer ideas, like the recently approved RFCs on [trait aliases][] and
 [match ergonomics][]. On the [roadmap issue][rr17], you will find a
 large list of initiatives, organized by the part of the language that
 they target (e.g., ownwership/borrowing, the trait system, etc). We
@@ -79,18 +79,15 @@ work retooling the compiler to work in an incremental fashion.
 Earlier this year, we advertised
 [the "beta" release of incremental on nightly builds][icbeta].  While
 the beta version sometimes achieved quite large speedups, we also
-found that the dependency tracking not as robust or effective as we
-would like. Therefore, we are now adopting a revised approach to
-incremental compilation, which we call the "red-green algorithm" (I
-prefer "the salsa algorithm", but that has never caught on). We expect
-to be switching over to this new system in next month or two, which
-should mean that we will see much better incremental performance
-shortly thereafter. If you're interested in helping with the
-transition to the new system, check out
+found that the dependency tracking was not as robust or effective as
+we would like. Therefore, we are now adopting a new and improved
+approach to incremental compilation that we expect be ready in the
+next month or so. If you're interested in helping with the transition
+to the new system, check out
 [the incremental compilation roadmap issue][rr4] or
-[the tracking issue for the red-green algorithm itself][42293]; you
-can also follow [this internals thread][soyouwantic], where we
-regularly post links to bugs that include mentoring instructions.
+[the tracking issue for the new algorithm itself][42293]; you can also
+follow [this internals thread][soyouwantic], where we regularly post
+links to bugs that include mentoring instructions.
 
 Looking beyond incremental compilation, we've also been taking steps
 to optimize compilation time in other ways. Probably the most
@@ -122,10 +119,9 @@ Since it first debuted at RustConf last year, the Rust Language
 Service (RLS) has been growing rapidly ([roadmap issue][rr6]). It now
 offers support for most basic IDE operations, such as "jump to
 definition" or "find all uses", as well as offering code completion
-(via [the racer project](https://github.com/racer-rust/racer)) and
-some refactorings. At this point, the focus is primarily on polish:
-making the RLS easier to install and fixing bugs. For example, we
-recently made it possible to
+(via [the racer project](https://github.com/racer-rust/racer)). At
+this point, the focus is primarily on polish: making the RLS easier to
+install and fixing bugs. For example, we recently made it possible to
 [install the RLS directly through rustup][rlsinstall].
 
 If you'd like to give the RLS a spin, the easiest way is to use
@@ -175,16 +171,15 @@ making Rust well equipped for writing robust servers.  The [`futures`]
 crate and [Tokio] project continue to explore the asynchronous I/O
 ecosystem and have seen some heavy usage through crates like [Hyper]
 and production users like [linkerd-tcp]. Additionally we've seen
-projects like [Rocket] continue to tirelessly push on the ergonomics
-of Rust-on-the-server to new frontiers. A [recent discussion] of what
-the biggest blockers are today has highlighted that [async/await]
-notation, better Tokio/futures documentation, and a solid HTTP
-foundation for the ecosystem are some of the next highest
-priorities. We plan to enable async/await notation on the nightly Rust
-channel by the end of the year and position it for stabilization in
-early 2018. This in turn should help fuel a rewrite of
-Tokio's/`future`'s documentation and continue to grow community
-support for crates such as HTTP.
+projects like [Rocket] continue to tirelessly improve the ergonomics
+of Rust-on-the-server. A [recent discussion] of what the biggest
+blockers are today has highlighted that [async/await] notation, better
+Tokio/futures documentation, and a solid HTTP foundation for the
+ecosystem are some of the next highest priorities. We plan to enable
+async/await notation on the nightly Rust channel by the end of the
+year and position it for stabilization in early 2018. This in turn
+should help fuel a rewrite of Tokio's/`future`'s documentation and
+continue to grow community support for crates such as HTTP.
 
 [`futures`]: https://crates.io/crates/futures
 [Tokio]: https://tokio.rs
