@@ -270,14 +270,53 @@ the Rust project itself:
 [compiler]: https://internals.rust-lang.org/t/compiler-team-making-it-easer-to-contribute-to-rustc/5345
 [newteams]: https://internals.rust-lang.org/t/announcing-the-infrastructure-cargo-and-dev-tools-teams-disbanding-the-tools-team/5256
 
-### Other projects
+### Embedded Rust initiative
 
-Although they are not official Roadmap items, we also want to
-highlight a few major initiatives that have seen great progress
-lately. The [embedded Rust initiative][eri] is doing awesome stuff XXX
-FILL THIS IN.
+Although is it not an official Roadmap item, we also want to highlight
+the progress around the embedded Rust ecosystem, which continues to
+grow. A bare metal concurrency [framework] for Cortex-M
+microcontrollers geared towards [robotics] and [control] systems has
+been recently developed. And [Tock], an embedded OS that also targets
+Cortex-M microcontrollers, has been making progress towards pure
+[Rust userland applications][libtock] and continues growing
+[its driver support][tock-blog].
 
-[eri]: https://github.com/rust-embedded/
+[framework]: https://docs.rs/cortex-m-rtfm/0.1.1/cortex_m_rtfm/
+[robotics]: https://github.com/japaric/2wd
+[control]: https://mobile.twitter.com/japaricious/status/845697935572656128
+[Tock]: https://www.tockos.org/
+[libtock]: https://github.com/helena-project/libtock-rs
+[tock-blog]: https://www.tockos.org/blog/
+
+On the compiler side support for the MSP430 architecture has been improving
+thanks to [the community's effort][msp430], and
+[support for the AVR architecture][avr-rust] is also being worked on, out of
+tree, by the community.
+
+[msp430]: https://github.com/rust-embedded/rfcs/issues/20
+[avr-rust]: https://github.com/avr-rust/rust/issues
+
+On the community side efforts in standardizing the development workflow are on
+going with the creation and development of [guides], [project templates],
+[core crates] and [tooling]. Recently a [survey] to identify the current needs
+of embedded developers was performed and the corresponding [roadmap issue] was
+updated to reflect the results. In response to the survey results a community
+effort to create a Hardware Abstraction Layer, that will serve as a base for
+building the embedded crate ecosystem, has been [started] and the design
+[discussion] is currently on going. An "Are we embedded yet?" web site that will
+reflect the up to date state of the embedded ecosystem and track its progress is
+also [being worked on][site].
+
+[guides]: http://blog.japaric.io/quickstart/
+[project templates]: https://github.com/japaric/photon-quickstart
+[core crates]: https://github.com/japaric/cortex-m
+[crates]: https://github.com/japaric/cortex-m
+[tooling]: https://github.com/japaric/svd2rust
+[survey]: https://users.rust-lang.org/t/rust-for-embedded-development-where-we-are-and-whats-missing/10861
+[roadmap issue]: https://github.com/rust-lang/rust-roadmap/issues/15
+[started]: https://github.com/japaric/embedded-hal
+[discussion]: https://github.com/japaric/embedded-hal/issues
+[site]: https://github.com/rust-embedded/rfcs/issues/15
 
 ### Conclusion
 
