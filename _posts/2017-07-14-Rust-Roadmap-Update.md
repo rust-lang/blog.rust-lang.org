@@ -270,14 +270,19 @@ the Rust project itself:
 [compiler]: https://internals.rust-lang.org/t/compiler-team-making-it-easer-to-contribute-to-rustc/5345
 [newteams]: https://internals.rust-lang.org/t/announcing-the-infrastructure-cargo-and-dev-tools-teams-disbanding-the-tools-team/5256
 
-### Embedded Rust initiative
+### Areas of Exploration
 
-Although is it not an official Roadmap item, we also want to highlight
-the progress around the embedded Rust ecosystem, which continues to
-grow. A bare metal concurrency [framework] for Cortex-M
-microcontrollers geared towards [robotics] and [control] systems has
-been recently developed. And [Tock], an embedded OS that also targets
-Cortex-M microcontrollers, has been making progress towards pure
+In addition to the main roadmap items, the roadmap RFC called out two
+"areas of exploration". These are areas with strong potential for Rust
+that are still in a more exploratory phase.
+
+#### Embedded Rust initiative
+
+The embedded Rust ecosystem continues to grow. A bare metal
+concurrency [framework] for Cortex-M microcontrollers geared towards
+[robotics] and [control] systems has been recently developed. And
+[Tock], an embedded OS that also targets Cortex-M microcontrollers,
+has been making progress towards pure
 [Rust userland applications][libtock] and continues growing
 [its driver support][tock-blog].
 
@@ -317,6 +322,46 @@ also [being worked on][site].
 [started]: https://github.com/japaric/embedded-hal
 [discussion]: https://github.com/japaric/embedded-hal/issues
 [site]: https://github.com/rust-embedded/rfcs/issues/15
+
+(Thanks to [Jorge Aparicio][japaric] for this writeup.)
+
+[japaric]: https://github.com/japaric
+
+#### Integrating with Other Languages: `bindgen` Update
+
+[`bindgen`][bindgen-github] is the frontier for automating integration
+of C and C++ libraries into Rust code bases. `bindgen` takes header
+files as input, and outputs the appropriate foreign function and type
+declarations so that the C/C++ library can be used with minimal effort
+from Rust.
+
+`bindgen` has become a crucial infrastructure for the [Stylo project][stylo],
+which brings Servo's style system to Firefox. As the Stylo project nears
+shipping, we've been hammering `bindgen` into shape for production. This has
+manifested itself as tons of reliability and correctness work. Our test suite is
+ever expanding, we've been focusing on correctness of struct layout, size, and
+alignment for ABI corner cases such as bitfields, as well as test coverage and
+support across different versions of libclang.
+
+At the same time, we've been working to improve the [contribution
+experience][bindgen-contributing]. We've been documenting workflows, adding
+[visualizations of our internal representation][bindgen-graphviz] for debugging, and mentoring
+new contributors. Since the [creation of the Rust DevTools
+team][rust-dev-tools], we've also been talking with other toolsmiths about
+fostering contribution to common tools. Expect to hear more on this soon.
+
+Finally, we also introduced a [`bindgen` Users Guide][bindgen-users-guide] to
+help folks get up and running with `bindgen` in their project.
+
+(Thanks to [Nick Fitzgerald][fitzgen] for this writeup.)
+
+[bindgen-github]: https://github.com/servo/rust-bindgen
+[stylo]: https://wiki.mozilla.org/Stylo
+[bindgen-contributing]: https://github.com/servo/rust-bindgen/blob/master/CONTRIBUTING.md
+[bindgen-graphviz]:https://github.com/servo/rust-bindgen/blob/master/example-graphviz-ir.png
+[rust-dev-tools]: https://internals.rust-lang.org/t/announcing-the-infrastructure-cargo-and-dev-tools-teams-disbanding-the-tools-team/5256
+[bindgen-users-guide]: https://servo.github.io/rust-bindgen/
+[fitzgen]: https://github.com/fitzgen
 
 ### Conclusion
 
