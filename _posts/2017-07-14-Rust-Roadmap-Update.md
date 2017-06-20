@@ -189,32 +189,36 @@ continue to grow community support for crates such as HTTP.
 
 ### Rust should have 1.0-level crates for essential tasks
 
-We've started a systematic effort to identify the most broadly used
-crates in the Rust ecosystem and to ensure that they all meet a
-consistent level of completeness and quality. This effort is called
-the [Libz Blitz][blitzblog]. Every two weeks, the libs team holds a
-meeting focused on a particular, widely used crate, with the crate
-author(s) in attendance. In that meeting, the state of the API,
-documentation, and other details are reviewed, and a checklist of
-actions that are needed before a 1.0 release is drawn up. That
-checklist can then be used to drive community involvement and help
-push the crate over the finish line.  If you're interested in
-participating, take a look at the
-[introductory post on the internals thread][blitz], which highlights
-how you can get involved in the initial evaluations, or go and find a
-work item from one of the crates that has already been evaluated:
+The [Libz Blitz][blitzblog] proceeds apace! The Libz Blitz is a
+systematic effort to identify the most broadly used crates in the Rust
+ecosystem and to ensure that they all meet a consistent level of
+completeness and quality. This effortentails collaborating on the
+internals forum to review crates according to the [API guidelines],
+filing and fixing the issues that arise, and writing examples for a
+new ["cookbook" of Rust examples][cook].
 
-- [log]
-- [reqwest]
-- [walkdir]
-- [error-chain]
+The effort is structured to be highly amenable to contribution,
+particularly from new Rust developers, and so far has resolved 99
+crate issues across 10 crates, and created more than 30 examples for
+the cookbook, thanks to the efforts of 53 contributors.
 
-[log]: https://internals.rust-lang.org/t/crate-evaluation-for-2017-05-16-log/5185
-[reqwest]: https://internals.rust-lang.org/t/crate-evaluation-for-2017-05-30-reqwest/5248
-[walkdir]: https://internals.rust-lang.org/t/crate-evaluation-for-2017-06-13-walkdir/5306
-[error-chain]: https://internals.rust-lang.org/t/crate-evaluation-for-2017-06-27-error-chain/5362
+If you're interested in participating, take a look at the
+[introductory post on the internals thread][blitz].
+
+<!-- Thanks to Aaronepower, aergonaut, alisha17, AndyGauge, bjnyfv, brson, budziq,
+cetra3, cGuille, chrisvittal, cldershem, Cldfire, crazymerlyn,
+crypto-universe, DarkEld3r, derekdreery, dtolnay, Enet4, gsquire,
+imor, jaemk, jehiggs, jmcomets, kbknapp, koivunej, kper, little-dude,
+luisbg, MarkMcCaskey, Matt8898, Michael-F-Bryan, mikeastock, morrme,
+neosilky, nivkner, omh1280, opilar, pepyakin, Piripant, pwoolcoc,
+rap2hpoutre, robo9k, SamWhited, sb89, seanmonstar, SimonSapin,
+theduke, tmccombs, tomecki, tomprince, topecongiro, vedantrathore,
+xpayn, and everyone else who helps make Rust great. -->
+
 [blitzblog]: https://blog.rust-lang.org/2017/05/05/libz-blitz.html
 [blitz]: https://internals.rust-lang.org/t/rust-libz-blitz/5184
+[API guidelines]: https://github.com/brson/rust-api-guidelines
+[cook]: https://brson.github.io/rust-cookbook/
 
 ### Rust should integrate easily into large build systems 
 
