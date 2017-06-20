@@ -44,7 +44,7 @@ proposals, like [non-lexical lifetimes][rr16] or [`impl Trait`], to
 newer ideas, like the recently approved RFCs on [trait aliases][] and
 [match ergonomics][]. On the [roadmap issue][rr17], you will find a
 large list of initiatives, organized by the part of the language that
-they target (e.g., ownwership/borrowing, the trait system, etc). We
+they target (e.g., ownership/borrowing, the trait system, etc). We
 are actively looking for people to help with writing RFCs but also
 implementing the accepted RFCs -- if you're interested in helping out
 with something, look for the "mentoring" contacts listed in the
