@@ -5,14 +5,12 @@ author: Nicholas Matsakis
 ---
 
 In January of this year, we adopted the [2017 Rust Roadmap][rr], which
-laid out our plans for 2017. Now that 2017 is roughly half over, we
-thought we would check in on our progress in each of our roadmap areas
-thus far.  In addition to talking about what's been going on, we'll
-also include some notes on how you can get involved.
+laid out our plans for 2017. As part of the roadmap process, we plan
+to regularly release updates on the progress of each roadmap item.
 
 [rr]: https://github.com/rust-lang/rfcs/blob/master/text/1774-roadmap-2017.md
 
-### Tracking progress on the roadmap
+### Tracking progress via roadmap issues
 
 First, a meta note. If you'd like to follow along with the progress on
 a particular roadmap initiative, or to find out more about how you can
@@ -236,10 +234,15 @@ includes:
 ### Rust's community should provide mentoring at all levels
 
 When it comes to mentoring, we've been pursuing a few different
-efforts. The first, [RustBridge][], is focused on building teaching
-and workshop materials that target people completely new to Rust. The
-materials have already been through several iterations and continue to
-evolve and improve.
+efforts. The first, [RustBridge][], is specifically aimed at bringing
+underrepresented folks into tech; it also serves as a great curriculum
+for people completely new to Rust. The materials have already been
+through several iterations and continue to evolve and improve, and we
+are going to be
+[running a RustBridge workshop the day before RustConf][rbw].  We
+would like to see more RustBridge events.
+
+[rbw]: http://rustconf.com/training.html
 
 In addition, the various Rust teams have been pursuing a number of
 different initiatives trying to encourage people to get involved in
