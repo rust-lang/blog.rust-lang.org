@@ -4,12 +4,12 @@ title: "Increasing Rust’s Reach"
 author: Carol Nichols
 ---
 
-One of [Rust’s 2017 goals](https://blog.rust-lang.org/2017/02/06/roadmap.html) is that Rust should
-have a lower learning curve and be easier to become productive in. We want Rust to be accessible to
-as many people as possible because Rust is an enabling technology that can unlock systems
-programming for more people. But there’s a bit of a bootstrapping problem here: if we want to reach
-new people, we can’t do it by relying solely on the skills and perspectives of our existing
-community. So we’ve decided to do an experiment, and we need your help!
+One of [Rust's 2017 goals](https://blog.rust-lang.org/2017/02/06/roadmap.html) is to make it easier
+to become productive in Rust by reducing its learning curve. We want Rust to be accessible to as
+many people as possible because Rust is an enabling technology that can unlock systems programming
+for more people. But there’s a bit of a bootstrapping problem here: if we want to reach new people,
+we can’t do it by relying solely on the skills and perspectives of our existing community. So we’ve
+decided to do an experiment, and we need your help!
 
 We’re looking for people inside and outside Rust’s current community from groups and backgrounds
 that are underrepresented in the Rust world. We want to partner with you to make Rust a more
