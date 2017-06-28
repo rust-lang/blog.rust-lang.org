@@ -5,22 +5,23 @@ author: Carol Nichols
 ---
 
 One of [Rust's 2017 goals](https://blog.rust-lang.org/2017/02/06/roadmap.html) is to make it easier
-to become productive in Rust by reducing its learning curve. We want Rust to be accessible to as
-many people as possible because Rust is an enabling technology that can unlock systems programming
-for more people. But there’s a bit of a bootstrapping problem here: if we want to reach new people,
-we can’t do it by relying solely on the skills and perspectives of our existing community. So we’ve
-decided to do an experiment, and we need your help!
+to become productive in Rust by reducing its learning curve. We believe Rust has potential as an
+enabling technology, empowering a people who would not traditionally do system programming to take
+it on with confidence. But there’s a bit of a bootstrapping problem here: if we want to reach new
+people, we can’t do it by relying solely on the skills and perspectives of our existing community.
+So we’ve decided to do an experiment, and we need your help!
 
 We’re looking for people inside and outside Rust’s current community from groups and backgrounds
-that are underrepresented in the Rust world. We want to partner with you to make Rust a more
-inclusive, approachable and impactful project, while supporting your success on personal goals.
+that are underrepresented in the Rust world and the technology world more generally. We want to
+partner with you to make Rust a more inclusive, approachable and impactful project, while
+supporting your success on personal goals.
 
 We have a team of Rust community leaders to pair you with. This group isn’t particularly diverse;
 this is where the Rust community is right now. We acknowledge that we have lots of work to do, and
 this initiative is part of that work. We’re all committed to improving the diversity of the Rust
-community and including more kinds of people.
+community.
 
-Each Rust team leader has proposed a project in a variety of areas, such as improving Rust itself,
+The Rust team leaders have proposed projects in a variety of areas, such as improving Rust itself,
 working on Rust web tools, and improving usability. We’re looking for a variety of experiences and
 skill sets! We’re also open to project ideas of your own.
 
@@ -44,10 +45,11 @@ Rust team members involved in this initiative. We’re planning on highlighting 
 experiment and recognizing your contributions explicitly; we value these projects and your
 contributions to them highly!
 
-The groups that are underrepresented in technology and in the Rust community that we want insights
-from include women (cis & trans), nonbinary folks, people of color, non-native English speakers,
-people who learned programming later in life (older, or only in college, or at a bootcamp as part
-of a midlife career change), or people who have different learning styles.
+Some groups that are underrepresented in technology and in the Rust community that we would
+especially love insights from include women (cis & trans), nonbinary folks, people of color,
+non-native English speakers, people who learned programming later in life (older, or only in
+college, or at a bootcamp as part of a midlife career change), or people who have different
+learning styles.
 
 **[Apply via this form by July 18!](https://docs.google.com/forms/d/e/1FAIpQLSfbSGuoyZE9dctdEoC_XEZ7j2ox7jQT1zghAOF4iGds2PfBCA/viewform)** (when the day is over in all time zones)
 
