@@ -48,8 +48,8 @@ contributions to them highly!
 Some groups that are underrepresented in technology and in the Rust community that we would
 especially love insights from include women (cis & trans), nonbinary folks, people of color,
 non-native English speakers, people who learned programming later in life (older, or only in
-college, or at a bootcamp as part of a midlife career change), or people who have different
-learning styles.
+college, or at a bootcamp as part of a midlife career change), people with disabilities, or people
+who have different learning styles.
 
 **[Apply via this form by July 18!](https://docs.google.com/forms/d/e/1FAIpQLSfbSGuoyZE9dctdEoC_XEZ7j2ox7jQT1zghAOF4iGds2PfBCA/viewform)** (when the day is over in all time zones)
 
