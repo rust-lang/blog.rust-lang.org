@@ -4,6 +4,8 @@ title: "Increasing Rust’s Reach"
 author: Carol Nichols
 ---
 
+**EDIT: We've heard that Google Forms is not easily accessible in all countries; if that applies to you, please find the [application's questions in this text file](/images/2017-06-Increasing-Rusts-Reach/application.txt) and send the answers via email to carol.nichols@gmail.com.**
+
 One of [Rust's 2017 goals](https://blog.rust-lang.org/2017/02/06/roadmap.html) is to make it easier
 to become productive in Rust by reducing its learning curve. We believe Rust has potential as an
 enabling technology, empowering a people who would not traditionally do system programming to take
