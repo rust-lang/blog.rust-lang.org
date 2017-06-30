@@ -53,7 +53,7 @@ non-native English speakers, people who learned programming later in life (older
 college, or at a bootcamp as part of a midlife career change), people with disabilities, or people
 who have different learning styles.
 
-**[Apply via this form by July 18!](https://docs.google.com/forms/d/e/1FAIpQLSfbSGuoyZE9dctdEoC_XEZ7j2ox7jQT1zghAOF4iGds2PfBCA/viewform)** (when the day is over in all time zones)
+**[Apply via this form by July 18!](https://docs.google.com/forms/d/e/1FAIpQLSfbSGuoyZE9dctdEoC_XEZ7j2ox7jQT1zghAOF4iGds2PfBCA/viewform)** (when the day is over in all time zones). We will notify all applicants by Aug 1.
 
 Please contact Carol Nichols via email at carol.nichols@gmail.com or on Twitter at
 [@carols10cents](https://twitter.com/Carols10cents) with any questions.
@@ -301,7 +301,7 @@ and the standard library.*
 
 ----
 
-We're excited to get [your application](https://docs.google.com/forms/d/e/1FAIpQLSfbSGuoyZE9dctdEoC_XEZ7j2ox7jQT1zghAOF4iGds2PfBCA/viewform) before July 18!
+We're excited to get [your application](https://docs.google.com/forms/d/e/1FAIpQLSfbSGuoyZE9dctdEoC_XEZ7j2ox7jQT1zghAOF4iGds2PfBCA/viewform) before July 18! We will notify all applicants by Aug 1.
 
 [nrc]: /images/2017-06-Increasing-Rusts-Reach/nrc.jpg
 [steveklabnik]: /images/2017-06-Increasing-Rusts-Reach/steveklabnik.jpeg
