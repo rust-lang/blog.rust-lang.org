@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rust Roadmap Update"
+title: "Rust's 2017 roadmap, six months in"
 author: Nicholas Matsakis
 ---
 
