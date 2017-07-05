@@ -7,6 +7,7 @@ author: Nicholas Matsakis
 In January of this year, we adopted the [2017 Rust Roadmap][rr], which
 laid out our plans for 2017. As part of the roadmap process, we plan
 to regularly release updates on the progress of each roadmap item.
+This post marks the halfway point through the year.
 
 [rr]: https://github.com/rust-lang/rfcs/blob/master/text/1774-roadmap-2017.md
 
@@ -25,7 +26,7 @@ descriptions that follow.
 
 The most direct way to make Rust easier to learn is to improve the way
 that we teach it. To that end, we've been hard at work on a brand new
-edition of the "Rust" book ([roadmap issue][rr7]), and we now have a
+edition of the official "Rust" book ([roadmap issue][rr7]), and we now have a
 [complete draft available online][book]. This new edition puts
 ownership front and center and it also has expanded coverage of a
 number of other areas in Rust, such as error handling, testing,
@@ -41,8 +42,8 @@ you'd like to help out, there is still
 We've also been working on a number of language changes aimed at
 improving [language ergonomics][ergo]. These range from long-standing
 proposals, like [non-lexical lifetimes][rr16] or [`impl Trait`], to
-newer ideas, like the recently approved RFCs on [trait aliases][] and
-[match ergonomics][]. On the [roadmap issue][rr17], you will find a
+newer ideas, like the recently approved RFCs on [trait aliases] and
+[match ergonomics]. On the [roadmap issue][rr17], you will find a
 large list of initiatives, organized by the part of the language that
 they target (e.g., ownership/borrowing, the trait system, etc). We
 are actively looking for people to help with writing RFCs but also
@@ -65,8 +66,8 @@ We've been targeting the problem of improving compiler performance in
 a number of different ways. One of the simplest is the
 [`cargo check` command that we released in Rust 1.16][1.16]
 -- this command does a limited form of compilation which skips
-code-generation and simply looks for type-errors. Since code
-generation typically takes 50% of more of compilation time, this can
+code-generation and simply looks for errors. Since code
+generation typically takes 50% or more of compilation time, this can
 be really useful in the early stages when you are writing new code and
 trying to get it to compile, particularly if you have a multi-crate
 project. This command is also used by the RLS.
@@ -156,6 +157,9 @@ Once the RFC is completely implemented and people have had a chance to
 use the features for a while, we plan to ask the community for
 feedback and make adjustments.
 
+In addition, the effort on the ["cookbook"][cook] described below will
+also be a boon for discovering crates in a task-centric way.
+
 [categories]: https://crates.io/categories
 [a number of badges]: http://doc.crates.io/manifest.html#package-metadata
 
@@ -192,7 +196,7 @@ continue to grow community support for crates such as HTTP.
 The [Libz Blitz][blitzblog] proceeds apace! The Libz Blitz is a
 systematic effort to identify the most broadly used crates in the Rust
 ecosystem and to ensure that they all meet a consistent level of
-completeness and quality. This effortentails collaborating on the
+completeness and quality. This effort entails collaborating on the
 internals forum to review crates according to the [API guidelines],
 filing and fixing the issues that arise, and writing examples for a
 new ["cookbook" of Rust examples][cook].
@@ -222,23 +226,28 @@ xpayn, and everyone else who helps make Rust great. -->
 
 ### Rust should integrate easily into large build systems 
 
-There has been a lot of progress on more clearly identifying what the
-challenges are and developing concrete proposals that target them.  We
-now have a pretty decent idea of what improvements are needed to ease
-build system integration, with buy-in from stakeholders. That
-includes:
+Most work on build system integration has focused on more clearly 
+identifying what the challenges are and developing concrete proposals 
+that target them. Some of the current avenues for exploration are:
 
 - [Support for using Cargo to create a build plan but not execute it][3815]
 - [Support declaring external dependencies in a first-class way][3816]
   (rather than via arbitrary build scripts as we do today)
-  
+
 [3815]: https://github.com/rust-lang/cargo/issues/3815
 [3816]: https://github.com/rust-lang/cargo/issues/3816
+
+We are hoping to pick up the pace on this work in the second half of the 
+year, but could use help doing so. If either of the above Cargo improvements
+is of interest to you, or if you have insights on build system integration
+in general, please reach out on the [tracking issue][integration]!
+
+[integration]: https://github.com/rust-lang/rust-roadmap/issues/12
 
 ### Rust's community should provide mentoring at all levels
 
 When it comes to mentoring, we've been pursuing a few different
-efforts. The first, [RustBridge][], is specifically aimed at bringing
+efforts. The first, [RustBridge], is specifically aimed at bringing
 underrepresented folks into tech; it also serves as a great curriculum
 for people completely new to Rust. The materials have already been
 through several iterations and continue to evolve and improve, and we
@@ -247,6 +256,16 @@ are going to be
 would like to see more RustBridge events.
 
 [rbw]: http://rustconf.com/training.html
+[RustBridge]: https://github.com/rust-community/rustbridge/
+
+We also just launched [Increasing Rust's Reach], an initiative for hearing more
+from groups currently underrepresented in Rust (or technology more generally),
+and working together to make Rust accessible to a wider audience. While this
+isn't a mentorship program per se (in many cases, it's the *participants* who 
+are doing the teaching!), it is still geared toward lowering the on-ramp to
+Rust's community.
+
+[Increasing Rust's Reach]: https://blog.rust-lang.org/2017/06/27/Increasing-Rusts-Reach.html
 
 In addition, the various Rust teams have been pursuing a number of
 different initiatives trying to encourage people to get involved in
@@ -336,6 +355,8 @@ also [being worked on][site].
 
 #### Integrating with Other Languages: `bindgen` Update
 
+##### C and C++
+
 [`bindgen`][bindgen-github] is the frontier for automating integration
 of C and C++ libraries into Rust code bases. `bindgen` takes header
 files as input, and outputs the appropriate foreign function and type
@@ -369,6 +390,22 @@ help folks get up and running with `bindgen` in their project.
 [rust-dev-tools]: https://internals.rust-lang.org/t/announcing-the-infrastructure-cargo-and-dev-tools-teams-disbanding-the-tools-team/5256
 [bindgen-users-guide]: https://servo.github.io/rust-bindgen/
 [fitzgen]: https://github.com/fitzgen
+
+##### Other languages/environments
+
+Higher level languages come with their own integration challenges, often involving cooperation with an external runtime system (which possibly includes a garbage collector). Here's a quick rundown of some of the major projects on this front:
+
+- **Ruby**: the [Helix] project is geared toward writing Ruby extensions in Rust, and publicly launched a couple of months ago.
+- **Node.js**: the [Neon] project is similarly geared toward writing Node.js modules in Rust, and continues to see active development.
+- The **GNOME Object system**: after a sprint pairing up Rust and GNOME core developers, we have the basics of an [integration story](http://smallcultfollowing.com/babysteps/blog/2017/05/02/gnome-class-integrating-rust-and-the-gnome-object-system/) for Rust and the GObject system.
+- The [Rust FFI Omnibus] gives guidance for the basics of calling into Rust from a variety of languages.
+
+There are many less high-profile projects in this space as well; if you'd like yours to be tracked as part of the roadmap, please leave a comment on the [tracking issue][ffi-tracker]!
+
+[Helix]: http://usehelix.com/
+[Neon]: https://github.com/dherman/neon
+[Rust FFI Omnibus]: http://jakegoulding.com/rust-ffi-omnibus/
+[ffi-tracker]: https://github.com/rust-lang/rust-roadmap/issues/14
 
 ### Conclusion
 
