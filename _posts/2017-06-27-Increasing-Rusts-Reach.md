@@ -296,7 +296,7 @@ Who should apply for this project:
 ![Kamal Marhubi][kamalmarhubi]{:class="right-thumbnail"}
 
 *About Kamal Marhubi: I've been writing Rust for about a year and a half. I help maintain nix, a
-library that gives a Rusty interface to unix systems APIs. I've also contributed to rustmt, rustup,
+library that gives a Rusty interface to unix systems APIs. I've also contributed to rustfmt, rustup,
 and the standard library.*
 
 ----
