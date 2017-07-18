@@ -17,10 +17,10 @@ be a RustBridge workshop session for people from underrepresented groups in tech
 as well as a session on [Tock](https://www.tockos.org/), the secure embedded operating system.
 
 The second day is the main event, with [talks][rc-talks] at every
-level of expertise, with talks on both basic and advanced techniques, experience
-reports in various fields, and various interesting libraries.
+level of expertise, covering basic and advanced techniques, experience
+reports, guidance on teaching, and interesting libraries.
 
-[Tickets are still on sale!][rc-ticks] We offer [scholarship][rc-schol] for those
+[Tickets are still on sale!][rc-ticks] We offer a [scholarship][rc-schol] for those
 who would otherwise find it difficult to attend. Join us in lovely Portland and
 hear about the latest developments in the Rust world!
 
@@ -61,7 +61,7 @@ include Nell Shamrell, who works on Habitat at Chef, Emma Gospodinova,
 who is doing a GSoC project working on the Rust plugin for the
 KDevelop IDE, and Core Team members Aaron Turon, Niko Matsakis, and
 Carol Nichols. We’d love for YOU to be a speaker as well - our
-[CFP](http://cfp.rust-belt-rust.com/)  is open now until Aug 7. We
+[CFP](http://cfp.rust-belt-rust.com/) is open now until Aug 7. We
 hope to see you at the Rustiest conference in the eastern US! Follow
 us on Twitter [@rustbeltrust](https://twitter.com/rustbeltrust) for
 the latest news.
