@@ -28,7 +28,7 @@ Follow us on Twitter [@rustconf](https://twitter.com/rustconf).
 
  [rc-talks]: http://rustconf.com/program.html
  [rc-ticks]: http://rustconf.com/register.html
- [rc-schol]: (https://tilde.wufoo.com/forms/rustconf-scholarships/)
+ [rc-schol]: https://tilde.wufoo.com/forms/rustconf-scholarships/
 
 ### April 29-30th & Sept 30-01: Rust Fest
 
