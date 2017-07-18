@@ -45,7 +45,7 @@ area provided.
 
 Thanks to the many awesome sponsors, we are able to offer affordable
 tickets to go on sale in couple weeks! Keep an eye on
-[http://www.rustfest.eu/], get all the updates on the
+[rustfest.eu](http://www.rustfest.eu/), get all the updates on the
 [blog](http://blog.rustfest.eu/) and don’t forget to follow us on
 Twitter [@rustfest](https://twitter.com/rustfest). Want to get a
 glimpse into what it's like? Check out the videos from
