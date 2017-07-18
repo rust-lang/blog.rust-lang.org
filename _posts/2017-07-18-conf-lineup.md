@@ -35,7 +35,7 @@ Follow us on Twitter [@rustconf](https://twitter.com/rustconf).
 Hot off another successful event in Kyiv earlier this year, we invite
 you to join us at [RustFest](http://www.rustfest.eu/), the European
 Rust community conference series. Over the weekend of the 30th of
-September we’ll gather in Zürich to talk Rust, its ecosystem and
+September we’ll gather in **Zürich, Switzerland** to talk Rust, its ecosystem and
 community. All day Saturday will have talks with topics ranging from
 hardware and testing over concurrency and disassemblers, and all the
 way to important topics like community, learning and empathy. While
@@ -54,7 +54,7 @@ glimpse into what it's like? Check out the videos from
 ### Oct 26-27: Rust Belt Rust
 
 For [Rust Belt Rust](https://www.rust-belt-rust.com/)’s second year,
-we’ll be in Columbus, OH at the Columbus Athenaeum, and
+we’ll be in **Columbus, OH, USA** at the Columbus Athenaeum, and
 [tickets are on sale now][rbr-tick]! We will have a day of workshops
 on Thursday and a day of single track talks on Friday. Speakers
 include Nell Shamrell, who works on Habitat at Chef, Emma Gospodinova,
