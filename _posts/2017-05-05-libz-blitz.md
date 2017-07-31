@@ -133,7 +133,7 @@ Part of the work done in the Libz Blitz for each crate will be identifying the
 key problem statements the crate is trying to address, and adding strong
 examples for each to the cookbook.
 
-[Rust Cookbook]: https://github.com/brson/rust-cookbook
+[Rust Cookbook]: https://github.com/rust-lang-nursery/rust-cookbook
 
 ### Rust standards of discoverability
 
@@ -356,7 +356,7 @@ Here's the plan:
 - We will launch a self-sustaining process of library improvement that
   can by applied consistently across the entire ecosystem.
 
-[crate cookbook]: https://brson.github.io/rust-cookbook/
+[crate cookbook]: https://rust-lang-nursery.github.io/rust-cookbook/
 
 Thank you to everyone who has contributed thus far, including Alisha
 Aneja, Andrew Gallant, Brad Anderson, Charles Chamberlain, Dan

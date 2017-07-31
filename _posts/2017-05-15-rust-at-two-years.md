@@ -194,7 +194,7 @@ you'd like to jump in.
 
 Also check out:
 
-- [The Rust Cookbook](https://github.com/brson/rust-cookbook)
+- [The Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)
 - [The new error format rolled out in Rust 1.12.0](https://github.com/rust-lang/rust/issues/35233)
 - [The question mark operator stabilized in Rust 1.13.0](https://github.com/rust-lang/rust/pull/31954)
 
