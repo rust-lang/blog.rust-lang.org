@@ -222,7 +222,7 @@ xpayn, and everyone else who helps make Rust great. -->
 [blitzblog]: https://blog.rust-lang.org/2017/05/05/libz-blitz.html
 [blitz]: https://internals.rust-lang.org/t/rust-libz-blitz/5184
 [API guidelines]: https://github.com/brson/rust-api-guidelines
-[cook]: https://brson.github.io/rust-cookbook/
+[cook]: https://rust-lang-nursery.github.io/rust-cookbook/
 
 ### Rust should integrate easily into large build systems 
 
