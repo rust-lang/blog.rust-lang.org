@@ -5,6 +5,7 @@ addons:
     packages:
       - aspell
       - aspell-en
+      - ack-grep
       
 before_install:
   - chmod +x ci/spellcheck.sh
