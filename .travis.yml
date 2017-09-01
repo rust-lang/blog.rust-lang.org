@@ -1,0 +1,12 @@
+language: generic
+
+addons:
+  apt:
+    packages:
+      - aspell
+      - aspell-en
+      
+before_install:
+  - chmod +x spellcheck.sh
+      
+script: ./spellcheck.sh
