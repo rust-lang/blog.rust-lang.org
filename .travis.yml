@@ -10,3 +10,8 @@ before_install:
   - chmod +x ci/spellcheck.sh
       
 script: ./ci/spellcheck.sh
+
+branches: 
+  only:
+    - gh-pages 
+    - /.*/
