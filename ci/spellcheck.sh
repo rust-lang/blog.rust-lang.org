@@ -13,16 +13,16 @@ LIGHT_GREY='\033[0;37m'
 GREY='\033[0;90m'
 NC='\033[0m' # No Color
 
-if [ -n "$1" ]; then
-  MARKDOWN_FILES_CHANGED=`echo "${@:1}" |  tr " " "\n"`
-
-  echo -e "$BLUE>> Following markdown files are being checked:$NC"
-  echo -e "$MARKDOWN_FILES_CHANGED"
-elif [[ -z "$MARKDOWN_FILES_CHANGED" ]]; then
+if [[ -z "$MARKDOWN_FILES_CHANGED" ]]; then
   echo -e "$BLUE>> Checking all .md files $NC"
   MARKDOWN_FILES_CHANGED=`git ls-tree --full-tree --name-only  -r HEAD | grep .md`
 
   echo -e "$BLUE>> Following markdown files were changed in this pull request (commit range: $TRAVIS_COMMIT_RANGE):$NC"
+  echo -e "$MARKDOWN_FILES_CHANGED"
+elif [ -n "$1" ]; then
+  MARKDOWN_FILES_CHANGED=`echo "${@:1}" |  tr " " "\n"`
+
+  echo -e "$BLUE>> Following markdown files are being checked:$NC"
   echo -e "$MARKDOWN_FILES_CHANGED"
 else
   echo -e "$BLUE>> Checking all files modified between $MARKDOWN_FILES_CHANGED $NC"
