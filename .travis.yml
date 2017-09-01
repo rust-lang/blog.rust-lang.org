@@ -7,6 +7,6 @@ addons:
       - aspell-en
       
 before_install:
-  - chmod +x spellcheck.sh
+  - chmod +x ci/spellcheck.sh
       
-script: ./spellcheck.sh
+script: ./ci/spellcheck.sh
