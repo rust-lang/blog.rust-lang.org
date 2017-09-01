@@ -9,6 +9,7 @@ addons:
       
 before_install:
   - chmod +x ci/spellcheck.sh
+  - sudo ln -sf /usr/bin/ack-grep /usr/local/bin/ack
       
 script: ./ci/spellcheck.sh
 
