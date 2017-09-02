@@ -13,16 +13,16 @@ LIGHT_GREY='\033[0;37m'
 GREY='\033[0;90m'
 NC='\033[0m' # No Color
 
-if [[ -z "$MARKDOWN_FILES_CHANGED" ]]; then
+if [ -n "$1" ]; then
+  MARKDOWN_FILES_CHANGED=`echo "${@:1}" |  tr " " "\n"`
+
+  echo -e "$BLUE>> Following markdown files are being checked:$NC"
+  echo -e "$MARKDOWN_FILES_CHANGED"
+elif [ -n "$TRAVIS_COMMIT_RANGE" ]; then
   echo -e "$BLUE>> Checking all .md files $NC"
   MARKDOWN_FILES_CHANGED=`git ls-tree --full-tree --name-only  -r HEAD | grep .md`
 
   echo -e "$BLUE>> Following markdown files were changed in this pull request (commit range: $TRAVIS_COMMIT_RANGE):$NC"
-  echo -e "$MARKDOWN_FILES_CHANGED"
-elif [ -n "$1" ]; then
-  MARKDOWN_FILES_CHANGED=`echo "${@:1}" |  tr " " "\n"`
-
-  echo -e "$BLUE>> Following markdown files are being checked:$NC"
   echo -e "$MARKDOWN_FILES_CHANGED"
 else
   echo -e "$BLUE>> Checking all files modified between $MARKDOWN_FILES_CHANGED $NC"
@@ -56,6 +56,8 @@ while read -r file; do
   # cat all markdown files that changed
   TEXT_CONTENT_WITHOUT_METADATA=`sed -E ':a;N;$!ba;s/\n/ /g' $file`
 
+  echo $TEXT_CONTENT_WITHOUT_METADATA >> before
+
   # remove metadata tags
   TEXT_CONTENT_WITHOUT_METADATA=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | grep -v -E '^(layout:|permalink:|date:|date_gmt:|authors:|categories:|tags:|cover:)(.*)'`
 
@@ -70,6 +72,11 @@ while read -r file; do
 
   # remove links
   TEXT_CONTENT_WITHOUT_METADATA=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | sed -E 's/http(s)?:\/\/([^ ]+)//g'`
+
+  # remove what is probably a domain
+  TEXT_CONTENT_WITHOUT_METADATA=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | perl -pe 's/\W\w*\.\w{2,}//g'`
+
+  echo $TEXT_CONTENT_WITHOUT_METADATA >> after
 
   MISSPELLED=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | aspell --lang=en --encoding=utf-8 --personal=./.aspell.en.pws list | sort -u`
 
