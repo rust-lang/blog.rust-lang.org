@@ -20,7 +20,7 @@ if [ -n "$1" ]; then
   echo -e "$MARKDOWN_FILES_CHANGED"
 elif [ -n "$TRAVIS_COMMIT_RANGE" ]; then
   echo -e "$BLUE>> Checking all files modified between $MARKDOWN_FILES_CHANGED $NC"
-  MARKDOWN_FILES_CHANGED=`(git diff --name-only $MARKDOWN_FILES_CHANGED || true) | grep .md`
+  MARKDOWN_FILES_CHANGED=`(git diff --name-only $TRAVIS_COMMIT_RANGE || true) | grep .md`
 
   echo -e "$BLUE>> Following markdown files were changed in this pull request (commit range: $TRAVIS_COMMIT_RANGE):$NC"
   echo -e "$MARKDOWN_FILES_CHANGED"
