@@ -18,12 +18,12 @@ We'll talk more about Rust non-users later in this report, but first let's look 
 
 # Using Rust
 
-![Chart: 0.5% less than a day, 4.2% less than a week, 13.1% less than a month, 39.7% less than a year, 42.5% over a year](/images/2017-09-05-Rust-2017-Survey-Results/size_of_rust_projects.png "0.5% less than a day, 4.2% less than a week, 13.1% less than a month, 39.7% less than a year, 42.5% over a year")
+![Chart: 0.5% less than a day, 4.2% less than a week, 13.1% less than a month, 39.7% less than a year, 42.5% over a year](/images/2017-09-05-Rust-2017-Survey-Results/how_long_using_rust.png "0.5% less than a day, 4.2% less than a week, 13.1% less than a month, 39.7% less than a year, 42.5% over a year")
 *(hover for more info)*
 
 This year, we're seeing a growing amount of experienced users sticking with Rust, with the "more than a year" users growing to over 42% (up from 30% from last year).  The beginners are also an impressively large set, with the "less than a month" crowd at just about 18%, meaning we're currently attracting nearly a 1/5th of our user base size, even as it grows larger, every month.
 
-![Chart: 36.5% less 1000 lines, 46.3% 1000 to 10000 lines, 14.2% 10000 to 100000 lines, 2.1% over 100000, 0.9% don't know](/images/2017-09-05-Rust-2017-Survey-Results/how_long_using_rust.png "36.5% less 1000 lines, 46.3% 1000 to 10000 lines, 14.2% 10000 to 100000 lines, 2.1% over 100000, 0.9% don't know")
+![Chart: 36.5% less 1000 lines, 46.3% 1000 to 10000 lines, 14.2% 10000 to 100000 lines, 2.1% over 100000, 0.9% don't know](/images/2017-09-05-Rust-2017-Survey-Results/size_of_rust_projects.png "36.5% less 1000 lines, 46.3% 1000 to 10000 lines, 14.2% 10000 to 100000 lines, 2.1% over 100000, 0.9% don't know")
 *(hover for more info)*
 
 People are working ever-larger amounts of Rust, with medium- and large-scale lines of code totals both nearly doubling since last year as a percentage of the whole, now making up 16% of respondents (up from last year's 8.9%).  This shows a growing interest in using Rust in ever-larger projects, and a growing need for tools to support this growth.
@@ -90,7 +90,8 @@ The demographics of respondents stayed about the same year over year.  Diversity
 
 New this year, we separated out the people who had stopped using Rust from those who had never used Rust to better understand why they stopped.  Let's take a look first at when they stopped.
 
-![chart: 3.2% less than a day, 18.5% less than a week, 43.1% less than a month, 30.2% less than a year, 4.9% more than a year](/images/2017-09-05-Rust-2017-Survey-Results/stopped_using_rust.png)
+![chart: 3.2% less than a day, 18.5% less than a week, 43.1% less than a month, 30.2% less than a year, 4.9% more than a year](/images/2017-09-05-Rust-2017-Survey-Results/stopped_using_rust.png "3.2% less than a day, 18.5% less than a week, 43.1% less than a month, 30.2% less than a year, 4.9% more than a year")
+*(hover for more info)*
 
 The first surprise we had here was how long people gave Rust a try before they stopped.  Our initial hunch was that people would give us using Rust in the first day, or possibly the first week, if it didn't suit them or their project.  Instead, what we see is that people tried Rust for a much longer time on average than that.
 
