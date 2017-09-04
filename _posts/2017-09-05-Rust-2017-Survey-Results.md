@@ -19,10 +19,12 @@ We'll talk more about Rust non-users later in this report, but first let's look 
 # Using Rust
 
 ![Chart: 0.5% less than a day, 4.2% less than a week, 13.1% less than a month, 39.7% less than a year, 42.5% over a year](/images/2017-09-05-Rust-2017-Survey-Results/size_of_rust_projects.png "0.5% less than a day, 4.2% less than a week, 13.1% less than a month, 39.7% less than a year, 42.5% over a year")
+*(hover for more info)*
 
 This year, we're seeing a growing amount of experienced users sticking with Rust, with the "more than a year" users growing to over 42% (up from 30% from last year).  The beginners are also an impressively large set, with the "less than a month" crowd at just about 18%, meaning we're currently attracting nearly a 1/5th of our user base size, even as it grows larger, every month.
 
 ![Chart: 36.5% less 1000 lines, 46.3% 1000 to 10000 lines, 14.2% 10000 to 100000 lines, 2.1% over 100000, 0.9% don't know](/images/2017-09-05-Rust-2017-Survey-Results/how_long_using_rust.png "36.5% less 1000 lines, 46.3% 1000 to 10000 lines, 14.2% 10000 to 100000 lines, 2.1% over 100000, 0.9% don't know")
+*(hover for more info)*
 
 People are working ever-larger amounts of Rust, with medium- and large-scale lines of code totals both nearly doubling since last year as a percentage of the whole, now making up 16% of respondents (up from last year's 8.9%).  This shows a growing interest in using Rust in ever-larger projects, and a growing need for tools to support this growth.
 
@@ -44,6 +46,7 @@ Unfortunately, despite our efforts with procedural macros and helping move crate
 # How we use Rust
 
 ![Chart: 90.2% rustup, 18.9% linux distros, 5% homebrew, 4.7% official .msi, 3.1% official tarball, 1.4% official mac pkg](/images/2017-09-05-Rust-2017-Survey-Results/rustup.png "90.2% rustup, 18.9% linux distros, 5% homebrew, 4.7% official .msi, 3.1% official tarball, 1.4% official mac pkg")
+*(hover for more info)*
 
 One of the big success stories with Rust tooling was rustup, the Rust toolchain installer.  Last year, we saw a wide diversity in ways people were installing Rust.  This year, many of these have moved to using rustup as their main way of installing Rust, totalling now 3,205 of the responses, which moves it from last year's 52.8% to **90.2%**.
 
@@ -60,20 +63,22 @@ Next, we asked what platforms people were targeting with their Rust projects.  W
 Among editors, vim remains king, though we see healthy growth in VSCode adoption at 34.1% (up from last year's 3.8%).  This growth no doubt has been helped by VSCode being one of the first platforms to get support for the [Rust Language Server](https://github.com/rust-lang-nursery/rls).
 
 ![Chart: 4.4% full-time, 16.6% part-time, 2.9% no but company uses Rust, 57.6% no, 2.4% not sure, 16.1% not applicable](/images/2017-09-05-Rust-2017-Survey-Results/use_rust_at_work.png "4.4% full-time, 16.6% part-time, 2.9% no but company uses Rust, 57.6% no, 2.4% not sure, 16.1% not applicable")
+*(hover for more info)*
 
 Rust in the workplace has also continued to grow.  This year's **4.4% full-time** and **16.6% part-time** Rust workers show a tick up from last year's 3.7% full-time and 16.1% part-time.
 
 ![Two charts part-time: 2016: 29.6% less than 1000 lines, 55.3% 1000 to 10000 lines, 14.5% 10000 to 100000 lines, 0.6% 100000 lines. 2017: 18.9% less than 1000 lines, 56% 1000 to 10000 lines, 23.1% 10000 to 100000 lines, 2% more than 100000 lines](/images/2017-09-05-Rust-2017-Survey-Results/part_time.png)
 
-Users who use Rust part-time in their companies showed a growth in larger projects since last year, with the medium- and large-scale projects taking up more percentage of total projects this time around.
+Users who use Rust **part-time** in their companies showed a growth in larger projects since last year, with the medium- and large-scale projects taking up more percentage of total projects this time around.
 
 ![Two charts full-time: 2016: 4.4% less than 1000 lines, 42.6% 1000 to 10000 lines, 39.7% 10000 to 100000 lines, 13.2% more than 100000 lines. 2017: 1.9% less than 1000 lines, 27.9% 1000 to 10000 lines, 52.6% 10000 to 100000 lines, 17.5% more than 100000 lines](/images/2017-09-05-Rust-2017-Survey-Results/full_time.png)
 
-Likewise, full-time Rust commercial users saw medium- and large-scale projects grow to taking a larger part of the pie, with projects over 100,000 lines of code making up almost 18% of the all full-time commercial respondents, and a large shift in the 10,000-100,000 lines range from 39.7% up to **52.6%**.
+Likewise, **full-time** Rust commercial users saw medium- and large-scale projects grow to taking a larger part of the pie, with projects over 100,000 lines of code making up almost 18% of the all full-time commercial respondents, and a large shift in the 10,000-100,000 lines range from 39.7% up to **52.6%**.
 
 # Feeling Welcome
 
 ![chart: 75.1% feel welcome, 1.3% don't feel welcome, 23.6% don't know](/images/2017-09-05-Rust-2017-Survey-Results/feel_welcome.png "75.1% feel welcome, 1.3% don't feel welcome, 23.6% don't know")
+*(hover for more info)*
 
 An important piece of the Rust community is to be one that is welcoming to new users, whether they are current users or potential users in the future.  We're pleased to see that over 3/4th of all respondents said they feel welcome in the Rust community, with 23.6% not sure.
 
@@ -83,13 +88,13 @@ The demographics of respondents stayed about the same year over year.  Diversity
 
 # Stopped using Rust
 
-New this year, we separated out the people who had stopped using Rust from those who had never used Rust to better understand why they stopped.  Let's take a look first and when they stopped.
+New this year, we separated out the people who had stopped using Rust from those who had never used Rust to better understand why they stopped.  Let's take a look first at when they stopped.
 
 ![chart: 3.2% less than a day, 18.5% less than a week, 43.1% less than a month, 30.2% less than a year, 4.9% more than a year](/images/2017-09-05-Rust-2017-Survey-Results/stopped_using_rust.png)
 
 The first surprise we had here was how long people gave Rust a try before they stopped.  Our initial hunch was that people would give us using Rust in the first day, or possibly the first week, if it didn't suit them or their project.  Instead, what we see is that people tried Rust for a much longer time on average than that.
 
-Themes in people who stopped using Rust:
+Themes from people who stopped using Rust:
 
 * 23% responded that Rust is **too difficult to use**.
 * 20% responded that they **didn't have enough time** to learn and use Rust effectively.
@@ -101,7 +106,7 @@ Themes in people who stopped using Rust:
 
 ![chart: 666 company doesn't use Rust, 425 Rust is too imitadating hard to learn or too complicated, 295 Rust doesn't solve a problem for me, 255 Rust doesn't have good IDE support, 209 Rust doesn't have libraries I need, 161 Rust seems too risky for production, 89 Rust doesn't support platforms I need, 73 Rust doesn't have tools I need](/images/2017-09-05-Rust-2017-Survey-Results/dont_use_rust.png)
 
-While the learning curve and language complexity still played a role here, one aspect that resonated with many people were that there just simply aren't enough active commercial projects in Rust for people to be a part of.  For some, they could surmount the learning curve if there was strong incentive to do so.
+While the learning curve and language complexity still played a role in preventing people from picking up Rust, one aspect that resonated with many people is that there just simply aren't enough active commercial projects in Rust for people to be a part of.  For some, they could surmount the learning curve if there was strong incentive to do so.
 
 # Areas for Improvement
 
