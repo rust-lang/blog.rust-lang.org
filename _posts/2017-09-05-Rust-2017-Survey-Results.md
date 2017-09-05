@@ -105,7 +105,7 @@ Themes from people who stopped using Rust:
 
 # Not using Rust
 
-![chart: 666 company doesn't use Rust, 425 Rust is too imitadating hard to learn or too complicated, 295 Rust doesn't solve a problem for me, 255 Rust doesn't have good IDE support, 209 Rust doesn't have libraries I need, 161 Rust seems too risky for production, 89 Rust doesn't support platforms I need, 73 Rust doesn't have tools I need](/images/2017-09-05-Rust-2017-Survey-Results/dont_use_rust.png)
+![chart: 666 company doesn't use Rust, 425 Rust is too intimidating hard to learn or too complicated, 295 Rust doesn't solve a problem for me, 255 Rust doesn't have good IDE support, 209 Rust doesn't have libraries I need, 161 Rust seems too risky for production, 89 Rust doesn't support platforms I need, 73 Rust doesn't have tools I need](/images/2017-09-05-Rust-2017-Survey-Results/dont_use_rust.png)
 
 While the learning curve and language complexity still played a role in preventing people from picking up Rust, one aspect that resonated with many people is that there just simply aren't enough active commercial projects in Rust for people to be a part of.  For some, they could surmount the learning curve if there was strong incentive to do so.
 
