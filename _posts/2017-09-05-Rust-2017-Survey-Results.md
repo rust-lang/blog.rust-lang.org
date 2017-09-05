@@ -6,7 +6,7 @@ author: Jonathan Turner
 
 It's that time of the year, where we take a good look at how things are going by asking the community at large -- both Rust users and non-users.  And wow, did you respond!
 
-This year we had **5,368 responses**.  *That's more than 2,000 responses than we had last year*!
+This year we had **5,368 responses**.  *That's over 2,000 more responses than we had last year*!
 
 The scale of the feedback was both inspiring and humbling, and we've worked hard to read through all of your comments and suggestions.  There were so many helpful ideas and experiences that people shared, and we truly do appreciate it.  Without further ado, let's take a look.
 
@@ -36,7 +36,7 @@ Despite the rising amount of code developers are working with, we're seeing a sm
 
 ![Chart: 92.5% no, 7.5% yes](/images/2017-09-05-Rust-2017-Survey-Results/upgrade_stable.png "92.5% no, 7.5% yes")
 
-In the last year, we made big strides in breakages caused by releases of the compiler.  Last year, 16.2% respondents said that upgrading to a new stable Rust compiler broke their code.  This year, that number has **fallen to 7.5% of respondents**.  This is a huge improvement, and one we're proud of, though we'll continue working to push this down even further.
+In the last year, we made big strides in breakages caused by releases of the compiler.  Last year, 16.2% of respondents said that upgrading to a new stable Rust compiler broke their code.  This year, that number has **fallen to 7.5% of respondents**.  This is a huge improvement, and one we're proud of, though we'll continue working to push this down even further.
 
 ![Chart show strong support for nightly and current stable releases](/images/2017-09-05-Rust-2017-Survey-Results/which_version.png)
 
