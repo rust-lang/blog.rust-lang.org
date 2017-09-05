@@ -4,7 +4,7 @@ title: "Rust 2017 Survey Results"
 author: Jonathan Turner
 ---
 
-It's that time of the year, where we take a good look at how things are going by asking the community at large -- both Rust users and non-users -- how things are going.  And wow, did you respond!
+It's that time of the year, where we take a good look at how things are going by asking the community at large -- both Rust users and non-users.  And wow, did you respond!
 
 This year we had **5,368 responses**.  *That's more than 2,000 responses than we had last year*!
 
@@ -26,7 +26,7 @@ This year, we're seeing a growing amount of experienced users sticking with Rust
 ![Chart: 36.5% less 1000 lines, 46.3% 1000 to 10000 lines, 14.2% 10000 to 100000 lines, 2.1% over 100000, 0.9% don't know](/images/2017-09-05-Rust-2017-Survey-Results/size_of_rust_projects.png "36.5% less 1000 lines, 46.3% 1000 to 10000 lines, 14.2% 10000 to 100000 lines, 2.1% over 100000, 0.9% don't know")
 *(hover for more info)*
 
-People are working ever-larger amounts of Rust, with medium- and large-scale lines of code totals both nearly doubling since last year as a percentage of the whole, now making up 16% of respondents (up from last year's 8.9%).  This shows a growing interest in using Rust in ever-larger projects, and a growing need for tools to support this growth.
+People are working with ever-larger amounts of Rust, with medium- and large-scale lines of code totals both nearly doubling since last year as a percentage of the whole, now making up 16% of respondents (up from last year's 8.9%).  This shows a growing interest in using Rust in ever-larger projects, and a growing need for tools to support this growth.
 
 ![Chart: 17.5% daily, 43.3% weekly, 24.4% monthly, 14.9% rarely](/images/2017-09-05-Rust-2017-Survey-Results/how_often_use_rust.png "17.5% daily, 43.3% weekly, 24.4% monthly, 14.9% rarely")
 
@@ -93,7 +93,7 @@ New this year, we separated out the people who had stopped using Rust from those
 ![chart: 3.2% less than a day, 18.5% less than a week, 43.1% less than a month, 30.2% less than a year, 4.9% more than a year](/images/2017-09-05-Rust-2017-Survey-Results/stopped_using_rust.png "3.2% less than a day, 18.5% less than a week, 43.1% less than a month, 30.2% less than a year, 4.9% more than a year")
 *(hover for more info)*
 
-The first surprise we had here was how long people gave Rust a try before they stopped.  Our initial hunch was that people would give us using Rust in the first day, or possibly the first week, if it didn't suit them or their project.  Instead, what we see is that people tried Rust for a much longer time on average than that.
+The first surprise we had here was how long people gave Rust a try before they stopped.  Our initial hunch was that people would give up using Rust in the first day, or possibly the first week, if it didn't suit them or their project.  Instead, what we see is that people tried Rust for a much longer time on average than that.
 
 Themes from people who stopped using Rust:
 
@@ -113,7 +113,7 @@ While the learning curve and language complexity still played a role in preventi
 
 Finally, at the end of the survey we we provided a free-form area to talk about where Rust could improve.  Before we get to the themes we saw, we wanted to give a big "thank you!" to everyone who posted thoughtful comments.  There are many, many good ideas, which we will be making available to the respective sub-teams for future planning.  With that, let's look at the themes that were important this year:
 
-* 17% of responses underscored the need for **better ergonomics** in the language. People had many suggestions about how to improve Rust for day-to-day use, to allow for easier prototyping, to work with async programming more easily, and to be more flexible with more data structure types.  Just as before, the need for a much easier and smoother experience with borrow checker and how to work with lifetimes was a popular request.
+* 17% of responses underscored the need for **better ergonomics** in the language. People had many suggestions about how to improve Rust for day-to-day use, to allow for easier prototyping, to work with async programming more easily, and to be more flexible with more data structure types.  Just as before, the need for a much easier and smoother experience with the borrow checker and how to work with lifetimes was a popular request.
 * 16% of responses talk about the importance of creating **better documentation**.  These covered a topics from helping users transition from other languages, creating more examples and sample projects, helping people get started with various tasks or crates, and creating video resources to facilitate learning.
 * 15% of responses point out that **library support** needs to improve.  People mention the need for a strong support set of core libraries, of the difficulty finding high quality crates, the general maturity of the crates and the crate ecosystem, the need for libraries to cover a wide range of areas (eg web, GUIs, networking, databases, etc).  Additionally, people mentioned that libraries can be hard to get started with depending on their API design and amount of documentation.
 * 9% of the responses encouraged us to continue to build our **IDE support**. Again, this year underscored that there are a sizeable section of developers that need support for Rust in their IDEs and tools.  The Rust Language Server, the on-going effort to support IDEs broadly, was mentioned as one of the top items people are looking forward to this year, and comments pointed to these efforts needing to reach stable and grow support into other IDEs as well as continuing to grow the number of available features.
@@ -122,5 +122,5 @@ Finally, at the end of the survey we we provided a free-form area to talk about 
 
 # Conclusion
 
-We're blown away by the response this year.  Not only is a much larger number of responses than we had last year, but we're also seeing a growing diversity in what people are using Rust for.  Thank you so much for your thoughtful replies.  We look forward to using your feedback, your suggestions, and your experience to help us plan for next year.
+We're blown away by the response this year.  Not only is this a much larger number of responses than we had last year, but we're also seeing a growing diversity in what people are using Rust for.  Thank you so much for your thoughtful replies.  We look forward to using your feedback, your suggestions, and your experience to help us plan for next year.
 
