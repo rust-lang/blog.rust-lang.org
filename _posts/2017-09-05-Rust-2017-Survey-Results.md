@@ -41,7 +41,8 @@ In the last year, we made big strides in breakages caused by releases of the com
 ![Chart show strong support for nightly and current stable releases](/images/2017-09-05-Rust-2017-Survey-Results/which_version.png)
 
 Developers have largely opted to move to nightly or a recent stable (with some on beta), showing that developers are eager to upgrade and do so quickly.  This simplifies the support structure a bit from last year, where developers were on a wider range of versions.
-Unfortunately, despite our efforts with procedural macros and helping move crates like Serde to stable, we still have work to do to promote people moving away from the nightly Rust compiler.  This year shows an increase in nightly users, now at 1,852 votes it represents 51.6% of respondents using nightly, up from 48.8% of last year.
+
+Stable users now make up 77.9% of Rust users. Unfortunately, despite our efforts with procedural macros and helping move crates like Serde to stable, we still have work to do to promote people moving away from the nightly Rust compiler.  This year shows an increase in nightly users, now at 1,852 votes it represents 51.6% of respondents using nightly, up from 48.8% of last year.
 
 # How we use Rust
 
