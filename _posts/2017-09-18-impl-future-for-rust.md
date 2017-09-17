@@ -165,7 +165,7 @@ expected to arise over time.)
 <table>
 <tr>
     <td><b>WG-docs-rustdoc</b></td>
-    <td></td>
+    <td>Help make docs beautiful for everyone!</td>
     <td><a href="">Learn more</a></td>
     <td><a href="">Chat</a></td>
 </tr>
@@ -177,7 +177,7 @@ expected to arise over time.)
 </tr>
 <tr>
     <td><b>WG-docs-rbe</b></td>
-    <td></td>
+    <td>Teach others Rust in the browser.</td>
     <td><a href="">Learn more</a></td>
     <td><a href="">Chat</a></td>
 </tr>
@@ -224,7 +224,7 @@ expected to arise over time.)
 </tr>
 <tr>
     <td><b>WG-dev-tools-bindgen</b></td>
-    <td></td>
+    <td>Make FFI'ing to C and C++ easy, automatic, and robust!</td>
     <td><a href="">Learn more</a></td>
     <td><a href="">Chat</a></td>
 </tr>
@@ -264,25 +264,25 @@ expected to arise over time.)
 <table>
 <tr>
     <td><b>WG-infra-crates.io</b></td>
-    <td></td>
+    <td>Try your hand at a production Rust web app!</td>
     <td><a href="">Learn more</a></td>
     <td><a href="">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-infra-perf</b></td>
-    <td></td>
+    <td>Let's make sure Rust gets faster.</td>
     <td><a href="">Learn more</a></td>
     <td><a href="">Chat</a></td>
 </tr>
 <tr>
-    <td><b>WG-infra-crater2</b></td>
+    <td><b>WG-infra-crater</b></td>
     <td></td>
     <td><a href="">Learn more</a></td>
     <td><a href="">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-infra-secure</b></td>
-    <td></td>
+    <td>Help us implement best practices for Rust's infrastructure!</td>
     <td><a href="">Learn more</a></td>
     <td><a href="">Chat</a></td>
 </tr>
@@ -294,7 +294,7 @@ expected to arise over time.)
 </tr>
 <tr>
     <td><b>WG-infra-rustbuild</b></td>
-    <td></td>
+    <td>Streamline the compiler build process.</td>
     <td><a href="">Learn more</a></td>
     <td><a href="">Chat</a></td>
 </tr>
