@@ -219,7 +219,7 @@ expected to arise over time.)
 <tr>
     <td><b>WG-dev-tools-rustup</b></td>
     <td>Make Rust's first impression even better!</td>
-    <td><a href="">Learn more</a></td>
+    <td><a href="https://paper.dropbox.com/doc/rustup-mngGQUtX1UkBay3wgOGJi">Learn more</a></td>
     <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-rustup">Chat</a></td>
 </tr>
 <tr>
@@ -242,7 +242,7 @@ expected to arise over time.)
 <tr>
     <td><b>WG-cargo-native</b></td>
     <td>Let's make native dependencies as painless as we can.</td>
-    <td><a href="">Learn more</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Declarative-native-dependencies-iLRUq6Zt2tPtLWE9IyLqS">Learn more</a></td>
     <td><a href="https://gitter.im/rust-impl-period/WG-cargo-native">Chat</a></td>
 </tr>
 <tr>
@@ -254,7 +254,7 @@ expected to arise over time.)
 <tr>
     <td><b>WG-cargo-pub-deps</b></td>
     <td>Teach Cargo which of your dependencies may affect your users.</td>
-    <td><a href="">Learn more</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Cargo-pubpriv-dependencies-JDXpDtGRnz8CY3KYlcUBD">Learn more</a></td>
     <td><a href="https://gitter.im/rust-impl-period/WG-cargo-pub-deps">Chat</a></td>
 </tr>
 <tr>
