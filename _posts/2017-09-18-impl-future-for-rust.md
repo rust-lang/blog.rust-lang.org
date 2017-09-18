@@ -254,7 +254,7 @@ expected to arise over time.)
 </tr>
 <tr>
     <td><b>WG-cargo-pub-deps</b></td>
-    <td>Teach Cargo which of your dependencies may affect your users.</td>
+    <td>Teach Cargo which of your dependencies affects your users.</td>
     <td><a href="https://paper.dropbox.com/doc/Cargo-pubpriv-dependencies-JDXpDtGRnz8CY3KYlcUBD">Learn more</a></td>
     <td><a href="https://gitter.im/rust-impl-period/WG-cargo-pub-deps">Chat</a></td>
 </tr>
