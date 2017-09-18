@@ -260,7 +260,7 @@ expected to arise over time.)
 </tr>
 <tr>
     <td><b>WG-cargo-integration</b></td>
-    <td>How easy can we make it to use Cargo with your build system?</td>
+    <td>How easy can it be to use Cargo with your build system?</td>
     <td><a href="https://paper.dropbox.com/doc/Cargo-build-system-integration-1sqRG8uyCqxv9EfoS8cco">Learn more</a></td>
     <td><a href="https://gitter.im/rust-impl-period/WG-cargo-integration">Chat</a></td>
 </tr>
