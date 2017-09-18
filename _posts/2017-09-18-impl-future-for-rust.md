@@ -78,44 +78,44 @@ expected to arise over time.)
 <tr>
     <td><b>WG-compiler-errors</b></td>
     <td>Make Rust's error messages even friendlier.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Compiler-errors-FSZdfXAGo3uMQ1wuDcZcy">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-errors">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-compiler-front</b></td>
     <td>Dip your toes in with parsing and syntax sugar.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Parser-and-Name-Resolution-Front-end-b0SZiNroIE1HK3lHKm8k7">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-front">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-compiler-middle</b></td>
     <td>Implement features that involve typechecking.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Middle-Type-checker-XEPTHIWvzlvqkSC3cluTr">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-middle">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-compiler-traits</b></td>
     <td>Want generic associated types? You know what to do.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Trait-system-LCgNlSbM5cPOyEyWdoqzW">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-traits">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-compiler-incr</b></td>
     <td>Finish incremental compilation; receive undying love.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Incremental-Compilation-GtIsqsyiXfiyzOh99xp9R">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-incr">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-compiler-nll</b></td>
     <td>Delve into the bowels of borrowck to slay the beast: NLL!</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Non-Lexical-Lifetimes-u5uc6VxJic67K2ynmTiFV">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-nll">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-compiler-const</b></td>
     <td>Const generics. Enough said.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Const-system-hNGg3H7sqnHb6nf39zpwl">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-const">Chat</a></td>
 </tr>
 </table>
 
@@ -125,38 +125,38 @@ expected to arise over time.)
 <tr>
     <td><b>WG-libs-blitz</b></td>
     <td>Help finish off the Blitz before all the issues are gone!</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/libz-blitz-ymXpoWVNDwVDigdrJ5o49">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libs-blitz">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-libs-cookbook</b></td>
     <td>Work on bite-sized examples to get folks cooking with Rust.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Rust-cookbook-DFaopl45jyZGWKI6iFDwD">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libs-cookbook">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-libs-guidelines</b></td>
     <td>Take the wisdom from the Blitz and pass it on.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/API-Guidelines-bDAAOER4WHdxJ1XtEAFYs">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libs-guidelines">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-libs-simd</b></td>
-    <td>We want stable SIMD, and we need your help.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td>Provide access to hardware parallelism in Rust! </td>
+    <td><a href="https://paper.dropbox.com/doc/simd-9H0xb83w1TD8Tc1yEG75M">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libs-simd">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-libs-openssl</b></td>
     <td>Want better docs for openssl? So do we.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/OpenSSL-crate-FRMKrV0PjCVqFSBHfmNS5">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libs-openssl">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-libs-rand</b></td>
-    <td></td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td>Craft a stable, core crate for randomness.</td>
+    <td><a href="https://github.com/rust-lang/rfcs/pull/2152">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libs-rand">Chat</a></td>
 </tr>
 </table>
 
@@ -166,20 +166,20 @@ expected to arise over time.)
 <tr>
     <td><b>WG-docs-rustdoc</b></td>
     <td>Help make docs beautiful for everyone!</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Rustdoc-issue-roundup-ZSIIXNDGEPozTM9axn0BO">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-docs-rustdoc">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-docs-rustdoc2</b></td>
     <td>Get in on a bottom-up revamp of rustdoc!</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/WG-rustdoc2-3lxugWOmvpXC2eMaAQK04">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-docs-rustdoc2">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-docs-rbe</b></td>
     <td>Teach others Rust in the browser.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/WG-rbe-Tgd0wu70N6zSmACkNL3TI">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-docs-rbe">Chat</a></td>
 </tr>
 </table>
 
@@ -188,45 +188,51 @@ expected to arise over time.)
 <table>
 <tr>
     <td><b>WG-dev-tools-rls</b></td>
-    <td></td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td>Help make Rust's IDE experience first class.</td>
+    <td><a href="https://paper.dropbox.com/doc/Rust-Language-Server-RLS-XQbsngZNog9pkt0AfcMo7">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-rls">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-dev-tools-vscode</b></td>
-    <td></td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td>Improve Rust's IDE experience for VSCode.</td>
+    <td><a href="https://paper.dropbox.com/doc/Rust-support-in-Visual-Studio-Code-RZ34qWGwy04Xwc82NFi78">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-vscode">Chat</a></td>
 </tr>
 <tr>
-    <td><b>WG-dev-tools-rustfmt</b></td>
-    <td></td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><b>WG-dev-tools-clients</b></td>
+    <td>Implement new RLS clients: Atom, Sublime, Visual Studio...</td>
+    <td><a href="https://paper.dropbox.com/doc/New-RLS-clients-VrtQKnZR4r3uLD1VBypRI">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-clients">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-dev-tools-IntelliJ</b></td>
-    <td></td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td>Polish up an already-rich Rust IDE experience.</td>
+    <td><a href="https://paper.dropbox.com/doc/Intellij-Rust-IYJGtI7uAjdqr2igv4Y7r">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-IntelliJ">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-dev-tools-rustfmt</b></td>
+    <td>Make Rust's code the prettiest!</td>
+    <td><a href="https://paper.dropbox.com/doc/rustfmt-7yTxFPEHtV6jktqZ2pRj1">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-rustfmt">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-dev-tools-rustup</b></td>
-    <td></td>
+    <td>Make Rust's first impression even better!</td>
     <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-rustup">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-dev-tools-clippy</b></td>
-    <td></td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td>It looks like you're trying to write a linter. Want help?</td>
+    <td><a href="https://paper.dropbox.com/doc/Clippy-integration-and-improvements-gebwGlwNOoy6UGLspGO4T">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-clippy">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-dev-tools-bindgen</b></td>
     <td>Make FFI'ing to C and C++ easy, automatic, and robust!</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/bindgen-xTXplHlfqJpnDvPhMqmfW">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-bindgen">Chat</a></td>
 </tr>
 </table>
 
@@ -237,25 +243,25 @@ expected to arise over time.)
     <td><b>WG-cargo-native</b></td>
     <td>Let's make native dependencies as painless as we can.</td>
     <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-cargo-native">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-cargo-registries</b></td>
     <td>Going beyond crates.io to support custom registries.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Cargo-Multiple-Registries-IrW9bRuZ1rdc4o9UPdQM9">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-cargo-registries">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-cargo-pub-deps</b></td>
-    <td></td>
+    <td>Teach Cargo which of your dependencies may affect your users.</td>
     <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-cargo-pub-deps">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-cargo-integration</b></td>
     <td>How easy can we make it to use Cargo with your build system?</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Cargo-build-system-integration-1sqRG8uyCqxv9EfoS8cco">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-cargo-integration">Chat</a></td>
 </tr>
 </table>
 
@@ -265,38 +271,38 @@ expected to arise over time.)
 <tr>
     <td><b>WG-infra-crates.io</b></td>
     <td>Try your hand at a production Rust web app!</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Crates.io-g8NWnnNIeTq8DaqjGoZLr">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-infra-crates.io">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-infra-perf</b></td>
     <td>Let's make sure Rust gets faster.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Perf.rlo-dp5rp6tSg7bOMmQwLygp4">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-infra-perf">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-infra-crater</b></td>
-    <td></td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td>Regularly testing the compiler against the Rust ecosystem.</td>
+    <td><a href="https://paper.dropbox.com/doc/Crater-D7DpG48tMhhHhrUm8kyhY">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-infra-crater">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-infra-secure</b></td>
     <td>Help us implement best practices for Rust's infrastructure!</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Securing-Infrastructure-xq5FfLQs1hkxwgxDsHi2Z">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-infra-secure">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-infra-host</b></td>
-    <td></td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td>Managing the services that keep the Rust machine running.</td>
+    <td><a href="https://paper.dropbox.com/doc/Host-WiqosInW7SpUblFVGKeOo">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-infra-host">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-infra-rustbuild</b></td>
     <td>Streamline the compiler build process.</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/Rustbuild-Cz96pk6FBtP54JClTCDNd">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-infra-rustbuild">Chat</a></td>
 </tr>
 </table>
 
@@ -306,7 +312,7 @@ expected to arise over time.)
 <tr>
     <td><b>WG-core-site</b></td>
     <td>The web site is getting overhauled; help shape the new content!</td>
-    <td><a href="">Learn more</a></td>
-    <td><a href="">Chat</a></td>
+    <td><a href="https://paper.dropbox.com/doc/rust-lang.org-content-improvement-uGns2d39DFgT0X9FQg0yD">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-core-site">Chat</a></td>
 </tr>
 </table>
