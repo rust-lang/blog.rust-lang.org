@@ -37,7 +37,8 @@ involved. We are working hard to divvy up work items into many shapes and sizes,
 and to couple them with mentoring instructions and hands-on mentors. **So if
 you've always wanted to contribute to Rust but weren't sure how, this is the
 perfect opportunity for you.** Don't be shy—we want and need your help, and, as
-per our roadmap, our aim is mentoring at *all* levels of experience.
+per our roadmap, our aim is mentoring at *all* levels of experience. To get started,
+say hello in the chat rooms for any of the work groups you're interested in!
 
 ## A few points of order
 
@@ -72,6 +73,9 @@ expected to meet the highest standards of behavior.
 
 Without further ado, here's the initial lineup! (A few more working groups are
 expected to arise over time.)
+
+**If you find a group that interests you, please say hello in the corresponding
+chat room!**
 
 ### Compiler team
 
