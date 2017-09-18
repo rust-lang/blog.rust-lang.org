@@ -126,7 +126,7 @@ expected to arise over time.)
     <td><b>WG-libs-blitz</b></td>
     <td>Help finish off the Blitz before all the issues are gone!</td>
     <td><a href="https://paper.dropbox.com/doc/libz-blitz-ymXpoWVNDwVDigdrJ5o49">Learn more</a></td>
-    <td><a href="https://gitter.im/rust-impl-period/WG-libs-blitz">Chat</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libz-blitz">Chat</a></td>
 </tr>
 <tr>
     <td><b>WG-libs-cookbook</b></td>
