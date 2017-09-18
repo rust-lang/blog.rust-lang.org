@@ -52,8 +52,7 @@ There are a few online venues for keeping in the loop with working group activit
 - The brand-new [findwork](https://www.rustaceans.org/findwork) site, which
   provides an entry point to a number of open issues across the Rust project,
   including those managed by working groups (see the "impl period" tab). Thanks,
-  @nrc, for putting this together! **NOTE**: this page is currently down, but
-  will be brought back up ASAP; meanwhile, it's a good link to bookmark!
+  @nrc, for putting this together!
 
 We also plan two in-person events, paired with upcoming Rust conferences. Each
 of them is a two-day event populated in part by Rust core developers; come hang
