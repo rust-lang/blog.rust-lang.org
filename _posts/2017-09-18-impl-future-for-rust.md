@@ -48,6 +48,7 @@ There are a few online venues for keeping in the loop with working group activit
   with channels for each working group, as well as
   a [global channel](https://gitter.im/rust-impl-period/Lobby) for talking about
   the process as a whole, or getting help finding your way to a working group.
+  **For those who prefer IRC, a good [bridge](https://irc.gitter.im/) is available**!
 
 - The brand-new [findwork](https://www.rustaceans.org/findwork) site, which
   provides an entry point to a number of open issues across the Rust project,
