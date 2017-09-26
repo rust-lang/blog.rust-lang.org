@@ -186,6 +186,12 @@ chat room!**
     <td><a href="https://paper.dropbox.com/doc/WG-rbe-Tgd0wu70N6zSmACkNL3TI">Learn more</a></td>
     <td><a href="https://gitter.im/rust-impl-period/WG-docs-rbe">Chat</a></td>
 </tr>
+<tr>
+    <td><b>WG-docs-checklist</b></td>
+    <td>Help finish the standard library documentation!</td>
+    <td><a href="https://paper.dropbox.com/doc/Finish-the-docs-checklist-WG-docs-checklist-7CiH332jWblQUTqUOVXaZ">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-docs-checklist">Chat</a></td>
+</tr>
 </table>
 
 ### Dev tools team
