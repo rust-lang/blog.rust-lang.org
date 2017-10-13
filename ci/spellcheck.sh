@@ -78,7 +78,7 @@ while read -r file; do
 
   echo $TEXT_CONTENT_WITHOUT_METADATA >> after
 
-  MISSPELLED=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | aspell --lang=en --encoding=utf-8 --personal=./.aspell.en.pws list | sort -u`
+  MISSPELLED=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | aspell --lang=en --encoding=utf-8 --personal=./ci/.aspell.en.pws list | sort -u`
 
   OUTPUT=""
 
