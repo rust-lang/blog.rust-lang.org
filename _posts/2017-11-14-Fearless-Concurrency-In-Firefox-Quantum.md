@@ -91,15 +91,24 @@ A conversation amongst Firefox developers that stuck with me — one that was in
 Matthews’ [talk][talk-rbr] at Rust Belt Rust — was
 
 
-> <heycam> one of the best parts about stylo has been how much easier it has been to implement these style system optimizations that we need, because Rust
-> <heycam> can you imagine if we needed to implement this all in C++ in the timeframe we have
-> <heycam> yeah srsly
-> <bholley> heycam: it's so rare that we get fuzz bugs in rust code
-> <bholley> heycam: considering all the complex stuff we're doing
-> *heycam remembers getting a bunch of fuzzer bugs from all kinds of style system stuff in gecko
-> <bholley> heycam: think about how much time we could save if each one of those annoying compiler errors today was swapped for a fuzz bug tomorrow :-)
-> <heycam> heh
-> <njn> you guys sound like an ad for Rust
+> \<heycam\> one of the best parts about stylo has been how much easier it has been to implement these style system optimizations that we need, because Rust
+> 
+> \<heycam\> can you imagine if we needed to implement this all in C++ in the timeframe we have
+> 
+> \<heycam\> yeah srsly
+> 
+> \<bholley\> heycam: it's so rare that we get fuzz bugs in rust code
+> 
+> \<bholley\> heycam: considering all the complex stuff we're doing
+> 
+> \*heycam remembers getting a bunch of fuzzer bugs from all kinds of style system stuff in gecko
+> 
+> \<bholley\> heycam: think about how much time we could save if each one of those annoying compiler errors today was swapped for a fuzz bug tomorrow :-)
+> 
+> \<heycam\> heh
+> 
+> \<njn\> you guys sound like an ad for Rust
+> 
 
 
 # Wrapping up
