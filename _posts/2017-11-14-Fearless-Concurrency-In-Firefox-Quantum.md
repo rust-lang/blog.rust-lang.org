@@ -9,7 +9,7 @@ These days, Rust is used for [all kinds of things][friends]. But its founding ap
 
 Now, after years of effort, a major part of Servo is shipping in production: Mozilla is releasing [Firefox Quantum][quantum]!
 
-Rust code [began shipping in Firefox][hacks-rust] earlier this year, starting with relatively small
+Rust code [began shipping in Firefox][hacks-rust] last year, starting with relatively small
 pilot projects like an MP4 metadata parser to replace some uses of libstagefright. These components
 performed well and caused effectively no crashes, but browser development had yet to see large
 benefits from the full power Rust could offer. This changes today.
