@@ -41,9 +41,9 @@ Computed styles are grouped into “style structs” of related properties, e.g.
 font properties, one for all the background properties, and so on. Now, most of these are shared;
 for example, the font of a child element is usually the same as its parent, and often sibling
 elements share styles even if they don’t have the same style as the parent. Stylo uses Rust’s
-`Arc<T>` to share style structs between elements.  `Arc<T>` makes its contents immutable, so it’s
-thread safe — you can’t accidentally modify a style struct when there’s a chance it is being used by
-other elements.
+atomically reference counted [`Arc<T>`][arc] to share style structs between elements.  `Arc<T>`
+makes its contents immutable, so it’s thread safe — you can’t accidentally modify a style struct
+when there’s a chance it is being used by other elements.
 
 We supplement this immutable access with `Arc::make_mut()`;  for example, [this line][font-mutate]
 calls `.mutate_font()` (a thin wrapper around `Arc::make_mut()` for the font style struct) to set
@@ -147,4 +147,5 @@ Experience the benefits of Rust yourself — try out [Firefox Quantum][quantum]!
  [talk-rbr]: https://www.joshmatthews.net/rbr17
  [font-mutate]: https://github.com/servo/servo/blob/657b2339a1e68f3a9c4525f35db023d3f149ffac/components/style/values/computed/font.rs#L182
  [inherited-style]: https://github.com/servo/servo/blob/657b2339a1e68f3a9c4525f35db023d3f149ffac/components/style/properties/properties.mako.rs#L2623-L2627
+ [arc]: https://doc.rust-lang.org/std/sync/struct.Arc.html
 
