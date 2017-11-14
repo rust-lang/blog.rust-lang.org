@@ -4,9 +4,10 @@ title: "Fearless Concurrency in Firefox Quantum"
 author: "Manish Goregaokar"
 ---
 
-These days, Rust is used for [all kinds of things][friends]. But its original application was
-[Servo], an experimental browser engine. Now, after years of effort, a major part of Servo is
-shipping in a production browser: Mozilla is releasing [Firefox Quantum][quantum].
+These days, Rust is used for [all kinds of things][friends]. But its founding application was
+[Servo], an experimental browser engine. 
+
+Now, after years of effort, a major part of Servo is shipping in production: Mozilla is releasing [Firefox Quantum][quantum]!
 
 Rust code [began shipping in Firefox][hacks-rust] earlier this year, starting with relatively small
 pilot projects like an MP4 metadata parser to replace some uses of libstagefright. These components
