@@ -1,3 +1,7 @@
+---
+title: ! "New Year's Rust: A Call for Community Blogposts"
+---
+
 # New Year's Rust: A Call for Community Blogposts
 
 'Tis the season for people and communities to reflect and set goals- and the Rust team is
