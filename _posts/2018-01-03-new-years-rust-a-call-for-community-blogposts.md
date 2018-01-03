@@ -1,5 +1,5 @@
 ---
-title: ! "New Year's Rust: A Call for Community Blogposts"
+title: "New Year's Rust: A Call for Community Blogposts"
 ---
 
 # New Year's Rust: A Call for Community Blogposts
