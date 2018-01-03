@@ -47,9 +47,11 @@ A great example of what we're looking for is this post,
 ["Rust in 2017"](https://medium.com/@Hisako1337/rust-in-2017-8f2b57a67d9b)
 by [Anonyfox](https://github.com/Anonyfox).
 
-You can write up these posts and email them to community@rust-lang.org or tweet them with the
-hashtag `#Rust2018`. We'll aggregate any blog posts sent via email or with the hashtag in one
+You can write up these posts and email them to <a href="mailto:community@rust-lang.org">community@rust-lang.org</a>
+or tweet them with the hashtag [`#Rust2018`]. We'll aggregate any blog posts sent via email or with the hashtag in one
 big blog post here. 
+
+[`#Rust2018`]: https://twitter.com/search?q=%23Rust2018
 
 The Core team will be reading all of the submitted posts and using them to inform the initial
 roadmap RFC for 2018. Once the RFC is submitted, we'll open up the normal RFC process, though
