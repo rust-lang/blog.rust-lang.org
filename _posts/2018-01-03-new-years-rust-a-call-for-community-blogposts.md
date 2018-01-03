@@ -2,8 +2,6 @@
 title: "New Year's Rust: A Call for Community Blogposts"
 ---
 
-# New Year's Rust: A Call for Community Blogposts
-
 'Tis the season for people and communities to reflect and set goals- and the Rust team is
 no different. Last month, we published [a blogpost about our accomplishments in 2017],
 and the teams have already begun brainstorming goals for next year.
