@@ -12,3 +12,9 @@ github_username: rust-lang
 highlighter: rouge
 
 root: https://blog.rust-lang.org
+
+gems:
+  - jekyll-redirect-from
+
+whitelist:
+  - jekyll-redirect-from

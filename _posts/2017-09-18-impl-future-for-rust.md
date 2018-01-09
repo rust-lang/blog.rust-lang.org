@@ -3,6 +3,8 @@ layout: post
 title: "impl Future for Rust"
 author: Aaron Turon
 description: "The Rust community is going to finish out its 2017 roadmap with a bang—and we want your help!"
+redirect_from:
+  - /impl-days
 ---
 
 The Rust community has been hard at work on our [2017 roadmap], but as we come
