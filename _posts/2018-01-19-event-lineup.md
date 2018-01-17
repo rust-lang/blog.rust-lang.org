@@ -19,7 +19,7 @@ Find all information on [the Roadshow website][roadshow].
 
 ### February 3-4: FOSDEM - Rust Dev Room
 
-After a very successful Bird of Feathers session for Rust last year at FOSDEM,
+After a very successful [Birds of a Feather][bof] session for Rust last year at FOSDEM,
 this year will have the first edition of the [Rust Dev Room][fosdem-rust].
 Co-located with [FOSDEM 2018][fosdem], the annual conference about free and open source software,
 it will bring together the Rust community in **Brussel, Belgium**.
@@ -27,6 +27,7 @@ it will bring together the Rust community in **Brussel, Belgium**.
 A fully packed Sunday brings you 16 talks covering topics ranging from GUI programming, robotics and multimedia to idiomatic Rust, testing and memory management.
 Check out [the full devromm schedule][devroom-schedule].
 
+[bof]: https://en.wikipedia.org/wiki/Birds_of_a_feather_(computing)
 [fosdem]: https://fosdem.org/2018/
 [fosdem-rust]: https://rust-fosdem.github.io/
 [devroom-schedule]: https://fosdem.org/2018/schedule/track/rust/
