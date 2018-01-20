@@ -22,7 +22,7 @@ Find all information on [the Roadshow website][roadshow].
 After a very successful [Birds of a Feather][bof] session for Rust last year at FOSDEM,
 this year will have the first edition of the [Rust Dev Room][fosdem-rust].
 Co-located with [FOSDEM 2018][fosdem], the annual conference about free and open source software,
-it will bring together the Rust community in **Brussel, Belgium**.
+it will bring together the Rust community in **Brussels, Belgium**.
 
 A fully packed Sunday brings you 16 talks covering topics ranging from GUI programming, robotics and multimedia to idiomatic Rust, testing and memory management.
 Check out [the full devromm schedule][devroom-schedule].
