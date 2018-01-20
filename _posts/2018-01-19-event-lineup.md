@@ -73,7 +73,7 @@ Follow [@rustbeltrust] on Twitter for the latest news.
 
 As always, there are nearly a hundred [Rust User Groups][usergroups] worldwide.
 Take a look if there's one near you or look at upcoming events in the [Rust Community calendar][calendar].
-If you are running a Rust event email the [Rust Community Team][commteam] to add it.
+If you are running a Rust event or are interested in starting one email the [Rust Community Team][commteam] to add it.
 
 [usergroups]: https://www.rust-lang.org/en-US/user-groups.html
 [calendar]: https://calendar.google.com/calendar/embed?src=apd9vmbc22egenmtu5l6c5jbfc@group.calendar.google.com
