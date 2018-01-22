@@ -7,14 +7,17 @@ description: "Multitude of Rust event are happening this year; join us at one ne
 
 Every year there are multiple Rust events around the world, bringing together the community.
 
-### February 1-3: Mozilla Rust Roadshow Brasil 2018
+### February 1-4: Mozilla Rust Roadshow Brasil 2018
 
-The [Rust Roadshow][roadshow] is a series of workshops for Rust.
-Learn Rust with the community in several cities across Brazil.
+The Mozilla Rust Roadshow Brasil is a series of workshops that will happen
+throughout the country between February 1st and 4th to broaden the adoption of Rust in Brazil.
+The project is organized by developers and community leaders, contributing along with Mozilla Brasil community organizers.
 
-Several workshops are already scheduled for the beginning of February, with hopefully more to come.
-Find all information on [the Roadshow website][roadshow].
+Find more about who's leading and contributing to the Mozilla Rust Roadshow Brasil 2018 in [Adding Superheroes to the Rust Brazilian Community][heroes].
 
+Learn about the workshops and where they are happening on [the Roadshow website][roadshow].
+
+[heroes]: https://mozillabr.org/2018/01/adding-superheroes-to-the-rust-brazilian-community/
 [roadshow]: https://rust-br.github.io/2018-roadshow/
 
 ### February 3-4: FOSDEM - Rust Dev Room
