@@ -27,7 +27,7 @@ project operations. Nested within these are dozens of subteams and working
 groups focused on specific topics.
 
 Rust is now used in a huge variety of companies, including both newcomers and
-big names like Google, Facebook, Twitter, Dropbox, Microsoft, Redhat, npm and,
+big names like Google, Facebook, Twitter, Dropbox, Microsoft, Red Hat, npm and,
 of course, [Mozilla](https://blog.rust-lang.org/2017/11/14/Fearless-Concurrency-In-Firefox-Quantum.html);
 it’s also in the top 15 languages this year on GitHub. As a byproduct, **more and more
 developers are being paid to contribute back to Rust**, many of them full
