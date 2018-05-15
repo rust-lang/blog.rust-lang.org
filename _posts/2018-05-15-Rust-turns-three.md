@@ -105,6 +105,7 @@ testing. If you’re interested, you can dive into:
 - [The rustfix issue tracker](https://github.com/rust-lang-nursery/rustfix/issues/)
 - [Bugs in the lints that drive rustfix](https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AA-rust-2018-preview)
 - [The new “Edition Guide”, which will need lots of eyeballs on pull requests for its content](https://github.com/rust-lang-nursery/edition-guide)
+
 # The Postscript
 
 Rust’s growth continues to accelerate at a staggering rate. It has been voted
