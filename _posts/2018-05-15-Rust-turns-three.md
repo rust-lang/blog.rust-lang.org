@@ -83,10 +83,7 @@ and [async/await](https://github.com/rust-lang/rfcs/pull/2394) — should both
 reach feature complete status on nightly within weeks. Vital tools like the RLS and
 `rustfmt` are also being polished for the new edition, including RFCs for finalizing
 the [style](https://github.com/rust-lang/rfcs/pull/2436)
-and [stability](https://github.com/rust-lang/rfcs/pull/2437) stories. And of
-course the compiler is getting faster, with key benchmarks like Servo’s
-massive [script crate](https://github.com/servo/servo/tree/master/components/script/)
-now well under 30s for `cargo check` after a change.
+and [stability](https://github.com/rust-lang/rfcs/pull/2437) stories.
 
 To help tie all this work to real-world use-cases, we’ve also targeted four
 domains for which Rust provides a compelling end-to-end story that we want to
