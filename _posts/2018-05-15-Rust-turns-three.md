@@ -5,8 +5,6 @@ author: Aaron Turon
 description: "Three years ago today, the Rust community released Rust 1.0 to the world, with our initial vision of fearless systems programming."
 ---
 
-# Rust turns three
-
 Three years ago today, the Rust community released [Rust 1.0] to the world, with
 our initial vision of fearless systems programming. As per tradition, we’ll
 celebrate Rust’s birthday by taking stock of the people and the product, and
