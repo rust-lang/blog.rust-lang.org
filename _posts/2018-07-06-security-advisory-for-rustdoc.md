@@ -26,7 +26,7 @@ landing for each channel over the next week. The plugin infrastructure predates
 impact any Rust users.
 
 As Rust’s first official CVE, this is somewhat of a milestone for us. The fix
-will be out in 1.27.1 on Tuesday April 10th. Because there's no embargo, we are
+will be out in 1.27.1 on Tuesday July 10th. Because there's no embargo, we are
 filing for a CVE now, and will update this post with the number once we are
 assigned one.
 
