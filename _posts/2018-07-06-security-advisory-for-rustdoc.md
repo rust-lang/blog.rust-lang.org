@@ -47,3 +47,4 @@ a good demonstration of how Rust’s guarantees can’t prevent all bugs.
 
 Thank you to Red Hat for responsibly disclosing the problem and working with us
 to ensure that the fix we plan to ship is correct.
+
