@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Security Advisory for rustdoc"
-author: The Rust Core Team
+author: "The Rust Core Team"
 ---
 
 ## Quick overview
@@ -16,7 +16,7 @@ mailing list [here](https://groups.google.com/forum/#!topic/rustlang-security-an
 ## Announcement
 
 On Tuesday July 3rd, Red Hat reported a security vulnerability in `rustdoc` to
-us. The problem was in rustdoc’s obscure plugin functionality, consisting of
+us. The problem was in rustdocâ€™s obscure plugin functionality, consisting of
 its loading plugins by default from a path that is globally writable on most
 platforms, `/tmp/rustdoc/plugins`. This feature permitted a malicious actor to
 write a dynamic library into this path and have another user execute that code.
@@ -25,7 +25,7 @@ landing for each channel over the next week. The plugin infrastructure predates
 1.0 and is not usable on stable or nightly Rust today. Its removal should not
 impact any Rust users.
 
-As Rust’s first official CVE, this is somewhat of a milestone for us. The fix
+As Rustâ€™s first official CVE, this is somewhat of a milestone for us. The fix
 will be out in 1.27.1 on Tuesday April 10th. Because there's no embargo, we are
 filing for a CVE now, and will update this post with the number once we are
 assigned one.
@@ -39,11 +39,11 @@ of Rust, as the required library is not shipped to users. However, since the
 bug can potentially cause problems for users, we decided to include this in the
 1.27.1 stable release.
 
-It’s worth noting that while Rust does prevent a lot of issues in your code at
-compile time, they’re issues that result from memory unsafety. This bug is a
+Itâ€™s worth noting that while Rust does prevent a lot of issues in your code at
+compile time, theyâ€™re issues that result from memory unsafety. This bug is a
 logic error. Rust code is not inherently secure, or bug-free. Sometimes, people
 get enthusiastic and make overly-broad claims about Rust, and this incident is
-a good demonstration of how Rust’s guarantees can’t prevent all bugs.
+a good demonstration of how Rustâ€™s guarantees canâ€™t prevent all bugs.
 
 Thank you to Red Hat for responsibly disclosing the problem and working with us
 to ensure that the fix we plan to ship is correct.
