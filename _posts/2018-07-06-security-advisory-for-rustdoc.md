@@ -17,13 +17,14 @@ mailing list [here](https://groups.google.com/forum/#!topic/rustlang-security-an
 
 On Tuesday July 3rd, Red Hat reported a security vulnerability in `rustdoc` to
 us. The problem was in rustdoc’s obscure plugin functionality, consisting of
-its loading plugins by default from a path that is globally writable on most
-platforms, `/tmp/rustdoc/plugins`. This feature permitted a malicious actor to
-write a dynamic library into this path and have another user execute that code.
-This behavior will be removed from rustdoc in the near future, with patches
-landing for each channel over the next week. The plugin infrastructure predates
-1.0 and is not usable on stable or nightly Rust today. Its removal should not
-impact any Rust users.
+its loading plugins from a path that is globally writable on most platforms,
+`/tmp/rustdoc/plugins`. This feature permitted a malicious actor to write a
+dynamic library into this path and have another user execute that code.  The
+security issue only happens if you're actively using the feature, and so this
+behavior will be removed from rustdoc in the near future, with patches landing
+for each channel over the next week. The plugin infrastructure predates 1.0 and
+is not usable on stable or nightly Rust today. Its removal should not impact
+any Rust users.
 
 As Rust’s first official CVE, this is somewhat of a milestone for us. The fix
 will be out in 1.27.1 on Tuesday July 10th. Because there's no embargo, we are
