@@ -8,10 +8,12 @@ author: "The Rust Core Team"
 
 The Rust team was recently notified of a security vulnerability affecting
 rustdoc plugins. If you are not using rustdoc plugins, you are not affected.
-We're not aware of any usage of this feature.
+We're not aware of any usage of this feature. The associated CVE is [CVE-2018-1000622].
 
 You can find the full announcement on our `rustlang-security-announcements`
 mailing list [here](https://groups.google.com/forum/#!topic/rustlang-security-announcements/4ybxYLTtXuM).
+
+[CVE-2018-1000622]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=%20CVE-2018-1000622
 
 ## Announcement
 
