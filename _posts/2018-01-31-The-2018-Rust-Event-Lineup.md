@@ -80,7 +80,7 @@ The second day is the main event, with talks at every level of expertise, so don
 More details will be available on [rustconf.com][rustconf]. You can also follow [@rustconf] on Twitter for all announcements.
 
 [rustconf]: http://rustconf.com/
-[@rustconf]: https:/twitter.com/rustconf
+[@rustconf]: https://twitter.com/rustconf
 
 ### October: Rust Belt Rust
 
