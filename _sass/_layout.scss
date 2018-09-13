@@ -17,8 +17,9 @@
 }
 
 .site-title {
-    font-size: 150%;
-    line-height: 4rem;
+    font-size: 26px;
+    line-height: 56px;
+    letter-spacing: -1px;
     margin-bottom: 0;
     float: left;
 
@@ -30,7 +31,7 @@
 
 .site-nav {
     float: right;
-    line-height: 4rem;
+    line-height: 56px;
 
     .menu-icon {
         display: none;
@@ -38,6 +39,7 @@
 
     .page-link {
         color: $text-color;
+        line-height: $base-line-height;
 
         // Gaps between nav items, but not on the first one
         &:not(:first-child) {
@@ -208,7 +210,9 @@
 }
 
 .post-title {
-    font-size: 200%;
+    font-size: 42px;
+    letter-spacing: -1px;
+    line-height: 1;
 
     @include media-query($on-laptop) {
         font-size: 36px;
