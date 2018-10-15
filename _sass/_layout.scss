@@ -216,6 +216,10 @@
 }
 
 .post-content {
+    p {
+        line-height: 1.6em;
+    }
+
     margin-bottom: $spacing-unit;
 
     h2, h2 code {
