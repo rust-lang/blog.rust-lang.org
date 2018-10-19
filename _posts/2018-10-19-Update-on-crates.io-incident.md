@@ -5,7 +5,7 @@ author: The Crates.io Team
 ---
 
 On Monday, Oct 15, starting at approximately 20:00 UTC, crates.io sustained
-an operational incident. You can find the status page report [here][status], and our
+an operational incident. You can find the status page report [here][status] and our
 tweets about it [here][tweets].
 
 [status]: http://status.crates.io/incidents/cymjwvkrtjn3
@@ -14,7 +14,7 @@ tweets about it [here][tweets].
 ## Root Cause
 
 A user called `cratesio` was created on crates.io and proceeded to upload
-packages using common, short names. These packages contained nothing beyond a 
+packages using common, short names. These packages contained nothing beyond a
 `Cargo.toml` file and a `README.md` instructing users that if they wanted to use
 the name, they should open an issue on the crates.io issue tracker.
 
@@ -26,14 +26,14 @@ We decided to take action on this behavior because:
  - The contents of the uploaded packages appeared to be an attempt to impersonate
 the crates.io team (both through the username `cratesio`, as well as directing people
 to the crates-io issue tracker in the crates' `Readme` files)
-  - the rate of uploading impacted the stability of the service
+ - the rate of uploading impacted the stability of the service
 
 ## Action Taken
 
 The user's IP address was banned immediately. We then backdated the users' packages to remove
 their packages from the homepage. We also redirected the `cratesio` user's page to a 404.
 
-Finally, the `cratesio` user, and all crates they uploaded were deleted.
+Finally, the `cratesio` user and all crates they uploaded were deleted.
 The user was reported to GitHub, and has since been banned by them.
 
 ## Timeline of events
@@ -67,18 +67,18 @@ this policy in the coming weeks.
 
 While it is impossible to tell a user's intent, many, including the team, have
 speculated that this action was either associated with or directly related to the
-recent esclation in community frustration around crates.io policies, in particular,
+recent escalation in community frustration around crates.io policies, in particular,
 the squatting policy.
 
 Regardless of whether this incident had this intent, the cratesio team would like
 to reiterate that taking actions such as the one we experienced on Tuesday is not
-an appropriate way nor effective way to contribute to dialogue about crates.io policy.
+an appropriate nor effective way to contribute to dialogue about crates.io policy.
 We will be adding a policy making it clear that attempting to disrupt crates.io in order
-to make or further a point is not approrpriate and will be considered a malicous attack.
+to make or further a point is not appropriate and will be considered a malicious attack.
 We will be deciding on the exact wording of this policy in the coming weeks.
 
 If you feel that a policy is problematic, the correct place to propose a change is by
-creating an RFC or messaging the team at help@crates.io. 
+creating an RFC or messaging the team at help@crates.io.
 
 We also have seen a lot of frustration that the crates.io team is not listening to the concerns
 that are being raised on both official and unofficial Rust forums. We agree that we should
@@ -89,7 +89,7 @@ community.
 ## Background
 
 There has been a growing amount of discussion in the community around our
-squatting policy, and our decision not to have namespacing.
+squatting policy and our decision not to have namespacing.
 
 [The original squatting policy](https://internals.rust-lang.org/t/crates-io-package-policies/1041),
 published in 2014, contains a lot more information about the rationale behind
@@ -124,13 +124,13 @@ thread wanting to re-litigate what has already been discussed at length.
 
 ## Conclusion
 
-We wanted to share the details of what happened, and why the crates.io team chose to take action
+We wanted to share the details of what happened and why the crates.io team chose to take action
 as quickly as possible. The policy changes we've described will be discussed
 during the next several team meetings. Nothing is set in stone until the team
 has a chance to discuss them further, but we wanted to share the possible
 changes we're discussing to limit speculation on what future actions we're
 planning on taking.
 
-As a reminder, if you would like to report an incident regarding cratesio you
+As a reminder, if you would like to report an incident regarding cratesio, you
 can message the team at help@crates.io. You can view the status of the service
-at https://crates-io.statuspage.io/ or by following @cratesiostatus on Twitter.
+at https://crates-io.statuspage.io/ and/or by following @cratesiostatus on Twitter.
