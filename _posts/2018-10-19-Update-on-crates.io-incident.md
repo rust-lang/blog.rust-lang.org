@@ -4,7 +4,7 @@ title: "Update on the October 15, 2018 incident on crates.io"
 author: The Crates.io Team
 ---
 
-On Tuesday, Oct 15, starting at approximately 20:00 UTC, crates.io sustained
+On Monday, Oct 15, starting at approximately 20:00 UTC, crates.io sustained
 an operational incident. You can find the status page report [here][status], and our
 tweets about it [here][tweets].
 
