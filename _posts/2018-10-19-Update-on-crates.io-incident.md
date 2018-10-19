@@ -5,8 +5,11 @@ author: The Crates.io Team
 ---
 
 On Tuesday, Oct 15, starting at approximately 20:00 UTC, crates.io sustained
-an operational incident. You can find the status page report [here][1], and our
-tweets about it [here][].
+an operational incident. You can find the status page report [here][status], and our
+tweets about it [here][tweets].
+
+status: http://status.crates.io/incidents/cymjwvkrtjn3
+tweets: https://twitter.com/cratesiostatus/status/1051953125030940674
 
 ## Root Cause
 
