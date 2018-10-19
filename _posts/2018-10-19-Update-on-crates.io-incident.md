@@ -77,7 +77,7 @@ We will be deciding on the exact wording of this policy in the coming weeks.
 If you feel that a policy is problematic, the correct place to propose a change is by
 creating an RFC or messaging the team at help@crates.io. 
 
-We also have seen a lot of frustration that we are not listening to the concerns
+We also have seen a lot of frustration that the crates.io team is not listening to the concerns
 that are being raised on both official and unofficial Rust forums. We agree that we should
 improve our communication with the community and intend to develop more processes
 for folks to communicate with us, as well as for the team to communicate to the general
@@ -121,7 +121,7 @@ thread wanting to re-litigate what has already been discussed at length.
 
 ## Conclusion
 
-We wanted to share the details of what happened, and why we chose to take action
+We wanted to share the details of what happened, and why the crates.io team chose to take action
 as quickly as possible. The policy changes we've described will be discussed
 during the next several team meetings. Nothing is set in stone until the team
 has a chance to discuss them further, but we wanted to share the possible
