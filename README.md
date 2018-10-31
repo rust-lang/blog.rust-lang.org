@@ -22,4 +22,4 @@ request. When submitting changes, please consider the guidelines from the
 The Rust Programming Language Blog is primarily distributed under the terms of
 CC-BY 4.0.
 
-See LICENSE for details.
+See [LICENSE](LICENSE) for details.
