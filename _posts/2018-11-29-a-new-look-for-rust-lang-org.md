@@ -115,7 +115,7 @@ There’s still more work to do:
 - We need more polish and testing in a general sense.
 
 Please [file an
-issue](https://github.com/rust-lang/beta.rust-lang.org/issues/new) with any
+issue](https://github.com/rust-lang/beta.rust-lang.org/issues/new/choose) with any
 feedback you have! We’re also looking for people with abilities of all kinds
 to help maintain the site, and especially people with design, CSS, and
 marketing skills. If you’d like to get involved, please [email
