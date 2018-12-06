@@ -1,6 +1,7 @@
 use std::{
     error::Error,
     fs::{self, File},
+    io::Write,
     path::PathBuf,
 };
 
@@ -10,6 +11,8 @@ use handlebars::Handlebars;
 
 use serde_derive::{Deserialize, Serialize};
 use serde_json::json;
+
+use sass_rs::{compile_file, Options};
 
 struct Blog {
     handlebars: Handlebars,
@@ -83,7 +86,8 @@ impl Blog {
             let YamlHeader { author, title } = serde_yaml::from_str(yaml)?;
 
             // next, the contents. we add + to get rid of the final "---\n\n"
-            let contents = comrak::markdown_to_html(&contents[end_of_yaml + 5..], &ComrakOptions::default());
+            let contents =
+                comrak::markdown_to_html(&contents[end_of_yaml + 5..], &ComrakOptions::default());
 
             // finally, the url.
             let mut url = PathBuf::from(&*filename);
@@ -121,21 +125,48 @@ impl Blog {
         self.render_index()?;
 
         self.render_posts()?;
-        
+
+        self.compile_sass("app");
+        self.compile_sass("fonts");
+
+        self.concat_vendor_css(vec!["skeleton", "tachyons"]);
+
         self.copy_static_files()?;
 
         Ok(())
     }
 
+    fn compile_sass(&self, filename: &str) {
+        let scss_file = format!("./src/styles/{}.scss", filename);
+        let css_file = format!("./static/styles/{}.css", filename);
+
+        let css = compile_file(&scss_file, Options::default())
+            .expect(&format!("couldn't compile sass: {}", &scss_file));
+        let mut file =
+            File::create(&css_file).expect(&format!("couldn't make css file: {}", &css_file));
+        file.write_all(&css.into_bytes())
+            .expect(&format!("couldn't write css file: {}", &css_file));
+    }
+
+    fn concat_vendor_css(&self, files: Vec<&str>) {
+        let mut concatted = String::new();
+        for filestem in files {
+            let vendor_path = format!("./static/styles/{}.css", filestem);
+            let contents = fs::read_to_string(vendor_path).expect("couldn't read vendor css");
+            concatted.push_str(&contents);
+        }
+        fs::write("./static/styles/vendor.css", &concatted).expect("couldn't write vendor css");
+    }
+
     fn render_index(&self) -> Result<(), Box<Error>> {
         let data = json!({
-            "title": "The Rust Programming Language Blog",
+            "title": "Blog",
             "parent": "layout",
             "posts": self.posts,
         });
 
         self.render_template("index.html", "index", data)?;
-        
+
         Ok(())
     }
 
@@ -168,7 +199,7 @@ impl Blog {
 
     fn copy_static_files(&self) -> Result<(), Box<Error>> {
         use fs_extra::dir::{self, CopyOptions};
-        
+
         let mut options = CopyOptions::new();
         options.overwrite = true;
         options.copy_inside = true;
@@ -180,7 +211,12 @@ impl Blog {
         Ok(())
     }
 
-    fn render_template(&self, name: &str, template: &str, data: serde_json::Value) -> Result<(), Box<Error>> {
+    fn render_template(
+        &self,
+        name: &str,
+        template: &str,
+        data: serde_json::Value,
+    ) -> Result<(), Box<Error>> {
         let out_file = self.out_directory.join(name);
 
         let file = File::create(out_file)?;

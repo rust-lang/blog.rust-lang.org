@@ -1,0 +1,35 @@
+// Custom classes we use to extend Tachyons
+
+// Note that for *new* definitions we need to apply only at the smallest sizes,
+// we have to specify as much (rather than having them be the default), because
+// media queries do not increase specificity, and as such our classes will
+// *always* trump Tachyon's classes by way of being defined *after* them.
+@media screen and (max-width: 30em) {
+  .flex-20-s {
+    flex: 0 0 20%;
+  }
+}
+
+@media screen and (min-width: 30em) and (max-width: 60em) {
+  .max-width-half-m {
+    max-width: 50%;
+  }
+}
+
+@media screen and (min-width: 60em) {
+  .max-width-quarter-l {
+    max-width: 25%;
+  }
+
+  .mw-50-l {
+    max-width: 50%;
+  }
+
+  .mw-33-l {
+    max-width: 33%;
+  }
+
+  .mw-67-l {
+    max-width: 67%;
+  }
+}

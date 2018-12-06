@@ -1,10 +1,20 @@
 {{#*inline "page"}}
-<h1>{{ title }}</h1>
+<header class="mt3 mt0-ns mb6-ns">
+  <div class="container flex flex-column flex-row-l justify-between-l">
+    <div class="mw8-l">
+      <h1>{{ title }}</h1>
+    </div>
+  </div>
+</header>
 
-<ul>
-{{#each posts}}
-    <li><a href="{{url}}">{{title}}</a></li>
-{{/each}}
-</ul>
+<section id="posts" class="purple">
+   <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <ul>
+    {{#each posts}}
+      <li><h3><a href="{{url}}">{{title}}</a></h3></li>
+    {{/each}}
+    </ul>
+  </div>
+</section>
 {{/inline}}
 {{~> (parent)~}}
