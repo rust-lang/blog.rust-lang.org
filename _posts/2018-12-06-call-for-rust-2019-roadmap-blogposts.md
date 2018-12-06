@@ -59,7 +59,7 @@ As Rust matures, we need to start thinking of ever-longer horizons, and how
 our current plans fit into those eventual plans.
 
 If you're not sure what to write, check out all of the blog posts from last
-year [over at ReadRust](https://readrust.net/rust-2018/). They may give you
+year [over at Read Rust](https://readrust.net/rust-2018/). They may give you
 some inspiration!
 
 ## Please share these posts with us
