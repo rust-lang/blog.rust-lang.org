@@ -1,0 +1,191 @@
+@import 'tachyons-ext';
+
+$body-font: 'Fira Sans', Helvetica, Arial, sans-serif;
+$header-font: 'Alfa Slab One', serif;
+
+$gray: #454C52;
+$red: #C14566;
+$green: #398277;
+$purple: #403D58;
+$yellow: #FFD45E;
+
+body {
+  font-family: $body-font;
+  background-color: white;
+
+  /* Ensure the footer is always at the bottom of the screen */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  & > #main-content {
+      flex: 1;
+  }
+}
+
+code {
+  overflow: auto;
+}
+
+section {
+  padding: 30px 0 60px 0;
+
+  header {
+    padding: 30px 0 60px 0;
+    display: inline-block;
+
+    h2 {
+      font-size: 2.6em;
+      font-family: $header-font;
+      margin: 0;
+      padding: 0;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+header h1, section h2 {
+  z-index: 999999;
+  position: relative;
+}
+
+header h1 {
+  font-family: $header-font;
+  font-size: 10rem;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+section {
+  padding: 30px 0 60px 0;
+}
+
+section .container {
+  padding-top: 20px;
+}
+
+a.brand {
+  $v-top: 3px; // for getting the vertical rhythm just right
+
+  color: black;
+  font-family: $header-font;
+  font-size: 3rem;
+  text-decoration: none;
+  margin-top: $v-top;
+
+  img {
+    width: 80px;
+    margin-top: -$v-top;
+  }
+
+  span {
+    display: inline-block;
+    margin-left: -1rem;
+  }
+}
+
+.white {
+   color: black;
+  .highlight {
+    background-color: $yellow;
+  }
+  a {
+    color: $gray;
+    text-decoration: underline;
+  }
+  .button.button-secondary {
+    background-color: $yellow;
+    border: 1px solid $yellow;
+    color: $gray;
+    text-decoration: none;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:hover, &:focus {
+      border-color: $gray;
+    }
+  }
+  code {
+    color: black;
+    background-color: rgba($gray, 0.05);
+    border: 1px solid rgba($gray, 0.25);
+  }
+}
+
+.purple {
+  background-color: $purple;
+  color: white;
+  .highlight {
+    background-color: $red;
+  }
+  a {
+    color: white;
+    text-decoration: underline;
+  }
+  .button.button-secondary {
+    background-color: $red;
+    border: 1px solid $red;
+    color: white;
+    text-decoration: none;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:hover, &:focus {
+      border-color: white;
+    }
+  }
+  code {
+    color: white;
+    background-color: rgba(white, 0.15);
+    border: 1px solid rgba(white, 0.65);
+  }
+}
+
+footer {
+  padding: 30px 0;
+  background-color: black;
+  color: white;
+}
+
+footer a {
+  color: $yellow;
+}
+
+footer h4 {
+  font-size: 1.2em;
+  font-weight: 800;
+}
+
+footer img {
+  width: 40px;
+  padding: 0 10px;
+}
+
+footer .attribution {
+  text-align: center;
+  padding-top: 30px;
+}
+
+h3, .post h2, header h2 {
+  display: inline-block;
+  font-weight: 800; 
+  font-size: 1.8em;
+  letter-spacing: normal;
+}
+
+.post h2 {
+  font-size: 2em;
+}
+
+header h1 {
+  letter-spacing: 1px;
+}
+
+
+.highlight {
+  height: 30px;
+  position: relative;
+  top: -30px;
+  left: -10px;
+  width: 120%;
+  max-width: 90vw;
+}

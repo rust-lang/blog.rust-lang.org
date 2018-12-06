@@ -1,19 +1,7 @@
-language: generic
-
-addons:
-  apt:
-    packages:
-      - aspell
-      - aspell-en
-      - ack-grep
-      
-before_install:
-  - chmod +x ci/spellcheck.sh
-  - sudo ln -sf /usr/bin/ack-grep /usr/local/bin/ack
-      
-script: ./ci/spellcheck.sh
-
-branches: 
-  only:
-    - gh-pages 
-    - /.*/
+language: rust
+cache: cargo
+rust: nightly
+script:
+  - cargo run
+after_success:
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash deploy.sh
