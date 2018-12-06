@@ -112,7 +112,10 @@ impl Blog {
 
         // finally, sort the posts. oldest first.
 
-        // we're gonna cheat:
+        posts.sort_by_key(|post|
+            format!("{}-{}-{}", post.year, post.month, post.day)
+        );
+
         posts.reverse();
 
         Ok(posts)
