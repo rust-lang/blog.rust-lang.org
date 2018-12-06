@@ -70,7 +70,7 @@ $format-names: (
 @function urls($filename, $range, $extensions) {
   $urls: ();
   @each $extension in $extensions {
-    $url: url('/static/fonts/#{$extension}/#{$filename}.#{$range}.#{$extension}');
+    $url: url('/fonts/#{$extension}/#{$filename}.#{$range}.#{$extension}');
     $format: format(map-get($format-names, $extension));
 
     $urls: append($urls, $url $format, comma);
