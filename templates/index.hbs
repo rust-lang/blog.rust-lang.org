@@ -1,0 +1,10 @@
+{{#*inline "page"}}
+<h1>{{ title }}</h1>
+
+<ul>
+{{#each posts}}
+    <li><a href="{{url}}">{{title}}</a></li>
+{{/each}}
+</ul>
+{{/inline}}
+{{~> (parent)~}}
