@@ -1,4 +1,8 @@
-# A call for Rust 2019 Roadmap blog posts
+---
+layout: post
+title: "A call for Rust 2019 Roadmap blog posts"
+author: The Rust Core Team
+---
 
 It's almost 2019! As such, the Rust team needs to create a roadmap for Rust's
 development next year. At the highest level, Rust's development process looks
