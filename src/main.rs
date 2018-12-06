@@ -86,8 +86,13 @@ impl Blog {
             let YamlHeader { author, title } = serde_yaml::from_str(yaml)?;
 
             // next, the contents. we add + to get rid of the final "---\n\n"
+            let options = ComrakOptions {
+                ext_header_ids: Some(String::new()),
+                ..ComrakOptions::default()
+            };
+
             let contents =
-                comrak::markdown_to_html(&contents[end_of_yaml + 5..], &ComrakOptions::default());
+                comrak::markdown_to_html(&contents[end_of_yaml + 5..], &options);
 
             // finally, the url.
             let mut url = PathBuf::from(&*filename);
