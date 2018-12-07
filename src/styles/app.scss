@@ -140,6 +140,35 @@ a.brand {
   }
 }
 
+table.post-list {
+  border-collapse: collapse;
+  width: 100%;
+}
+table.post-list .post-entry {
+  font-size: 150%;
+}
+table.post-list td {
+  border: none;
+  padding: 10px 0;
+}
+table.post-list .post-year {
+  font-size: 2em;
+}
+table.post-list .post-link a {
+  text-decoration: none;
+}
+table.post-list .post-link a:hover {
+  text-decoration: underline;
+}
+table.post-list .post-date {
+  opacity: 0.6;
+  padding-right: 30px;
+  text-align: right;
+}
+table.post-list .post-year h3 {
+  margin: 2rem 0 0 0;
+}
+
 footer {
   padding: 30px 0;
   background-color: black;
