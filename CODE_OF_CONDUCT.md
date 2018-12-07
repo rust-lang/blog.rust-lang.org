@@ -1,6 +1,6 @@
 # The Rust Code of Conduct
 
-A version of this document [can be found online](https://www.rust-lang.org/conduct.html).
+A version of this document [can be found online](https://www.rust-lang.org/policies/code-of-conduct).
 
 ## Conduct
 

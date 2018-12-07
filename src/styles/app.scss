@@ -107,7 +107,11 @@ a.brand {
   code {
     color: black;
     background-color: rgba($gray, 0.05);
-    border: 1px solid rgba($gray, 0.25);
+    border: 1px solid rgba($gray, 0.25)
+  }
+  .publish_date {
+    font-style: italic;
+    color: grey;
   }
 }
 
@@ -119,7 +123,7 @@ a.brand {
   }
   a {
     color: white;
-    text-decoration: underline;
+    text-decoration: unset;
   }
   .button.button-secondary {
     background-color: $red;
@@ -137,6 +141,11 @@ a.brand {
     color: white;
     background-color: rgba(white, 0.15);
     border: 1px solid rgba(white, 0.65);
+  }
+  .publish_date {
+    font-style: italic;
+    font-size: 1.2em;
+    letter-spacing: normal;
   }
 }
 
@@ -167,7 +176,7 @@ footer .attribution {
 
 h3, .post h2, header h2 {
   display: inline-block;
-  font-weight: 800; 
+  font-weight: 800;
   font-size: 1.8em;
   letter-spacing: normal;
 }
