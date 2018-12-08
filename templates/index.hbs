@@ -10,11 +10,15 @@
 <section id="posts" class="purple">
    <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
 
-    <table class="post-list">
+    <table class="post-list collapse w-100 f2-l f2-m f3-s">
     {{#each posts}}
-      {{#if show_year}}<tr class="post-year"><td></td><td class="year"><h3>{{year}}</h3></td></tr>{{/if}}
-      <tr class="post-entry">
-          <td class="post-date">{{month_name month}} {{day}}</td><td class="post-link"><a href="{{url}}">{{title}}</a></td>
+      {{#if show_year}}<tr>
+        <td class="bn"></td>
+        <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">{{year}}</h3></td>
+      </tr>{{/if}}
+      <tr>
+        <td class="tr o-60 pr4 pr5-l bn">{{month_name month}}&nbsp;{{day}}</td>
+        <td class="bn"><a href="{{url}}">{{title}}</a></td>
       </tr>
     {{/each}}
     </table>
