@@ -5,6 +5,10 @@
     <link href="https://blog.rust-lang.org/" rel="alternate" type="text/html" />
     <title>Rust Blog</title>
     <subtitle>Empowering everyone to build reliable and efficient software.</subtitle>
+    <author>
+        <name>Maintained by the Rust Team.</name>
+        <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
+    </author>
 
     {{#each posts}}
     <entry>
@@ -13,6 +17,10 @@
         <published>{{year}}-{{month}}-{{day}}</published>
         <id>https://blog.rust-lang.org/{{url}}</id>
         <content type="html" xml:base="https://blog.rust-lang.org/{{url}}">{{contents}}</content>
+
+        <author>
+            <name>{{author}}</name>
+        </author>
     </entry>
     {{/each}}
 </feed>
