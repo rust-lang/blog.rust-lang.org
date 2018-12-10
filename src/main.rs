@@ -91,8 +91,7 @@ impl Blog {
                 ..ComrakOptions::default()
             };
 
-            let contents =
-                comrak::markdown_to_html(&contents[end_of_yaml + 5..], &options);
+            let contents = comrak::markdown_to_html(&contents[end_of_yaml + 5..], &options);
 
             // finally, the url.
             let mut url = PathBuf::from(&*filename);
@@ -117,9 +116,7 @@ impl Blog {
 
         // finally, sort the posts. oldest first.
 
-        posts.sort_by_key(|post|
-            format!("{}-{}-{}", post.year, post.month, post.day)
-        );
+        posts.sort_by_key(|post| format!("{}-{}-{}", post.year, post.month, post.day));
 
         posts.reverse();
 
@@ -133,6 +130,8 @@ impl Blog {
         self.render_index()?;
 
         self.render_posts()?;
+
+        self.render_feed()?;
 
         self.compile_sass("app");
         self.compile_sass("fonts");
@@ -202,6 +201,14 @@ impl Blog {
             self.render_template(path.join(filename).to_str().unwrap(), "post", data)?;
         }
 
+        Ok(())
+    }
+
+    fn render_feed(&self) -> Result<(), Box<Error>> {
+        let posts: Vec<_> = self.posts.iter().by_ref().take(10).collect();
+        let data = json!({ "posts": posts });
+
+        self.render_template("feed.xml", "feed", data)?;
         Ok(())
     }
 
