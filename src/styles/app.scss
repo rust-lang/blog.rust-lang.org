@@ -144,10 +144,21 @@ footer {
   padding: 30px 0;
   background-color: black;
   color: white;
-}
 
-footer a {
-  color: $yellow;
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  a {
+    color: $yellow;
+    text-decoration: none;
+
+    &:hover {
+      color: $yellow;
+      text-decoration: underline;
+    }
+  }
 }
 
 footer h4 {
