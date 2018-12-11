@@ -63,7 +63,7 @@ section .container {
   padding-top: 20px;
 }
 
-a.brand {
+div.brand {
   $v-top: 3px; // for getting the vertical rhythm just right
 
   color: black;
@@ -71,6 +71,11 @@ a.brand {
   font-size: 3rem;
   text-decoration: none;
   margin-top: $v-top;
+
+  & a {
+    color: black;
+    text-decoration: none;
+  }
 
   img {
     width: 80px;
