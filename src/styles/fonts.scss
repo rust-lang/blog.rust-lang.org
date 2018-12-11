@@ -79,17 +79,21 @@ $format-names: (
 }
 
 /// Declares a `@font-face` block for each combination of weight, style, and unicode range.
-@mixin declare-font-faces($family, $base-filename, $weights, $styles, $ranges, $formats) {
+@mixin declare-font-faces($family, $base-filename, $weights, $styles, $ranges, $formats, $font-weight-override) {
   @each $weight in $weights {
     @each $style in $styles {
       @each $range in $ranges {
         $font: font($family, $weight, $style);
         $filename: filename($base-filename, $weight, $style);
+        $font-weight: $weight;
+        @if ($font-weight-override != "") {
+          $font-weight: $font-weight-override;
+        }
 
         /* #{$font} - #{$range} */
         @font-face {
           font-family: $family;
-          font-weight: $weight;
+          font-weight: $font-weight;
           font-style: $style;
           unicode-range: map-get($unicode-ranges, $range);
           src: local($font),
@@ -106,6 +110,7 @@ $format-names: (
   $family: 'Alfa Slab One',
   $base-filename: 'AlfaSlabOne',
   $weights: 400,
+  $font-weight-override: 800,
   $styles: normal,
   $ranges: latin latin-ext vietnamese,
   $formats: woff2 woff,
@@ -115,6 +120,7 @@ $format-names: (
   $family: 'Fira Sans',
   $base-filename: 'FiraSans',
   $weights: 400 600 800,
+  $font-weight-override: '',
   $styles: normal italic,
   $ranges: map-keys($unicode-ranges),
   $formats: woff2 woff,
