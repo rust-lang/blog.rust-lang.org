@@ -7,7 +7,7 @@ use std::{
 
 use comrak::ComrakOptions;
 
-use handlebars::Handlebars;
+use handlebars::{Handlebars, Helper, Context, RenderContext, Output, HelperResult, RenderError};
 
 use serde_derive::{Deserialize, Serialize};
 use serde_json::json;
@@ -26,6 +26,7 @@ struct Post {
     title: String,
     author: String,
     year: String,
+    show_year: bool,
     month: String,
     day: String,
     contents: String,
@@ -38,6 +39,29 @@ struct YamlHeader {
     author: String,
 }
 
+fn hb_month_helper<'a>(h: &Helper, _b: &Handlebars, _ctx: &Context, _rc: &mut RenderContext,
+                      out: &mut Output) -> HelperResult {
+    let num: u32 = h.param(0).unwrap().value().as_str().unwrap().parse()
+        .or_else(|_| Err(RenderError::new("The value is not a number")))?;
+    let name = match num {
+        1  => "Jan.",
+        2  => "Feb.",
+        3  => "Mar.",
+        4  => "Apr.",
+        5  => "May",
+        6  => "June",
+        7  => "July",
+        8  => "Aug.",
+        9  => "Sept.",
+        10 => "Oct.",
+        11 => "Nov.",
+        12 => "Dec.",
+        _  => "Error!",
+    };
+    out.write(name)?;
+    Ok(())
+}
+
 impl Blog {
     fn new<T>(out_directory: T, posts_directory: T) -> Result<Blog, Box<Error>>
     where
@@ -48,6 +72,8 @@ impl Blog {
         handlebars.set_strict_mode(true);
 
         handlebars.register_templates_directory(".hbs", "templates")?;
+
+        handlebars.register_helper("month_name", Box::new(hb_month_helper));
 
         let posts = Blog::load_posts(posts_directory.into())?;
 
@@ -105,6 +131,7 @@ impl Blog {
                 title,
                 author,
                 year,
+                show_year: false,
                 month,
                 day,
                 contents,
@@ -119,6 +146,10 @@ impl Blog {
         posts.sort_by_key(|post| format!("{}-{}-{}", post.year, post.month, post.day));
 
         posts.reverse();
+
+        for i in 1 .. posts.len() {
+            posts[i].show_year = posts[i - 1].year != posts[i].year;
+        }
 
         Ok(posts)
     }
