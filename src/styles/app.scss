@@ -116,6 +116,13 @@ div.brand {
   }
 }
 
+ol, ul {
+  padding-left: 1.6rem;
+}
+ul {
+  list-style: circle;
+}
+
 .purple {
   background-color: $purple;
   color: white;
