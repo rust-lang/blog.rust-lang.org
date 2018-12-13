@@ -143,7 +143,7 @@ impl Blog {
 
         // finally, sort the posts. oldest first.
 
-        posts.sort_by_key(|post| format!("{}-{}-{}", post.year, post.month, post.day));
+        posts.sort_by_key(|post| post.url.clone());
 
         posts.reverse();
 
