@@ -9,6 +9,16 @@ $green: #398277;
 $purple: #403D58;
 $yellow: #FFD45E;
 
+html {
+  font-size: 62.5%
+}
+
+@media screen and (min-width: 30em) {
+  html {
+    font-size: 75%;
+  }
+}
+
 body {
   font-family: $body-font;
   background-color: white;
@@ -116,11 +126,9 @@ div.brand {
   }
 }
 
-ol, ul {
-  padding-left: 1.6rem;
-}
-ul {
-  list-style: circle;
+ul, ol {
+  list-style-position: outside;
+  padding-left: 1.2em;
 }
 
 .purple {
