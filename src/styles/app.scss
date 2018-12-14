@@ -114,6 +114,24 @@ div.brand {
     background-color: rgba($gray, 0.05);
     border: 1px solid rgba($gray, 0.25);
   }
+
+  a.anchor::before {
+    content: "§";
+    display: none;
+    position: absolute;
+    width: 1em;
+    margin-left: -1em;
+    text-decoration: none;
+    opacity: 0.7;
+    color: $gray;
+    font-weight: normal;
+  }
+  :hover > a.anchor::before {
+    display: block;
+  }
+  a.anchor:hover::before {
+    opacity: 1;
+  }
 }
 
 ol, ul {
