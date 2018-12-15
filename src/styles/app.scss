@@ -73,6 +73,15 @@ section .container {
   padding-top: 20px;
 }
 
+// TODO:  remove when switching to Tachyons -- these are overrides for Skeleton.
+ul.nav, ul.nav li {
+  margin-bottom: 0;
+}
+
+.nav a {
+  color: $gray;
+}
+
 div.brand {
   $v-top: 3px; // for getting the vertical rhythm just right
 
