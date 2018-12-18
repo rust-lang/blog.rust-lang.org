@@ -139,7 +139,9 @@ struct Foo {
 into
 
 ```rust
-#[derive(serde::Deserialize)]
+use serde::Deserialize;
+
+#[derive(Deserialize)]
 struct Foo {
     // ...
 }
