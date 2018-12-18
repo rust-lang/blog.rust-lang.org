@@ -349,7 +349,7 @@ empowering all kinds of lightweight additions and extensions to the language!
 [`TokenTree`]: https://doc.rust-lang.org/stable/proc_macro/enum.TokenTree.html
 [Rust 1.30]: https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html
 [syn]: https://crates.io/crates/syn
-[spm]: https://docs.rs/syn/0.15.21/syn/parse/index.html
+[spm]: https://docs.rs/syn/0.15/syn/parse/index.html
 [`quote`]: https://docs.rs/quote/0.6.10/quote/
 [`quote!` macro]: https://docs.rs/quote/0.6.10/quote/macro.quote.html
 [`Span`]: https://doc.rust-lang.org/proc_macro/struct.Span.html
