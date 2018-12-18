@@ -353,7 +353,7 @@ empowering all kinds of lightweight additions and extensions to the language!
 [`quote`]: https://docs.rs/quote/0.6/quote/
 [`quote!` macro]: https://docs.rs/quote/0.6.10/quote/macro.quote.html
 [`Span`]: https://doc.rust-lang.org/proc_macro/struct.Span.html
-[`proc-macro2`]: https://docs.rs/proc-macro2/0.4.24/proc_macro2/
+[`proc-macro2`]: https://docs.rs/proc-macro2/0.4/proc_macro2/
 [serde-attr]: https://serde.rs/attributes.html
 [wbg]: https://github.com/rustwasm/wasm-bindgen
 [gnome-class]: https://gitlab.gnome.org/federico/gnome-class
