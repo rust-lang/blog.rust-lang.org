@@ -351,7 +351,7 @@ empowering all kinds of lightweight additions and extensions to the language!
 [syn]: https://crates.io/crates/syn
 [spm]: https://docs.rs/syn/0.15/syn/parse/index.html
 [`quote`]: https://docs.rs/quote/0.6/quote/
-[`quote!` macro]: https://docs.rs/quote/0.6.10/quote/macro.quote.html
+[`quote!` macro]: https://docs.rs/quote/0.6/quote/macro.quote.html
 [`Span`]: https://doc.rust-lang.org/proc_macro/struct.Span.html
 [`proc-macro2`]: https://docs.rs/proc-macro2/0.4/proc_macro2/
 [serde-attr]: https://serde.rs/attributes.html
