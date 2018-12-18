@@ -323,9 +323,10 @@ capabilities! If you're interested, some projects to keep your eyes on are:
   lightweight annotation makes it easy to understand what's coming in and out,
   as well as removing lots of conversion boilerplate.
 
-* The [`gobject_gen!` macro][gnome-class] is an experimental IDL for defining
-  GObject objects safely in Rust, eschewing manually writing all the glue
-  necessary to talk to C and interface with other GObject instances in Rust.
+* The [`gobject_gen!` macro][gnome-class] is an experimental IDL for the GNOME
+  project to define GObject objects safely in Rust, eschewing manually writing
+  all the glue necessary to talk to C and interface with other GObject
+  instances in Rust.
 
 * The [Rocket framework][rocket] has recently switched over to procedural
   macros, and showcases some of nightly-only features of procedural macros like
