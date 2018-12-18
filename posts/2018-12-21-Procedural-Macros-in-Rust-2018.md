@@ -328,7 +328,7 @@ capabilities! If you're interested, some projects to keep your eyes on are:
 * The [Rocket framework][rocket] has recently switched over to procedural
   macros, and showcases some of nightly-only features of procedural macros like
   custom diagnostics, custom span creation, and more. Expect to see these
-  features stabilize in 2019 most likely!
+  features stabilize in 2019!
 
 That's just a *taste* of the power of procedural macros and some example usage
 throughout the ecosystem today. We're only 6 weeks out from the original release
