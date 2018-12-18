@@ -266,9 +266,9 @@ For example, a small macro like:
 
 ```rust
 #[proc_macro]
-pub fn gen_fn(expr: TokenStream) -> TokenStream {
+pub fn make_pub(item: TokenStream) -> TokenStream {
     let result = quote! {
-        fn the_function() -> u32 { #expr }
+        pub #item
     };
     result.into()
 }
@@ -277,7 +277,9 @@ pub fn gen_fn(expr: TokenStream) -> TokenStream {
 when invoked as:
 
 ```rust
-my_macro::gen_fn!("foo");
+my_macro::make_pub! {
+    static X: u32 = "foo";
+}
 ```
 
 is invalid because we're returning a string from a function that should return a
@@ -285,16 +287,16 @@ is invalid because we're returning a string from a function that should return a
 
 ```
 error[E0308]: mismatched types
- --> src/main.rs:1:19
+ --> src/main.rs:1:37
   |
-1 | my_macro::gen_fn!("foo");
-  | ------------------^^^^^--
-  | |                 |
-  | |                 expected u32, found reference
-  | expected `u32` because of return type
+1 | my_macro::make_pub!(static X: u32 = "foo");
+  |                                     ^^^^^ expected u32, found reference
   |
   = note: expected type `u32`
              found type `&'static str`
+
+error: aborting due to previous error
+
 ```
 
 And we can see here that although we're generating brand new syntax, the
