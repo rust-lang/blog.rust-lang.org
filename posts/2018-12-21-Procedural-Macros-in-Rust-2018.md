@@ -21,16 +21,16 @@ layman's terms, a function that takes a piece of syntax at compile time and
 produces a new bit of syntax. Procedural macros in Rust 2018 come in one of
 three flavors:
 
-* **Procedural `#[derive]` macros** have actually been stable since [Rust 1.15]
+* **`#[derive]` mode macros** have actually been stable since [Rust 1.15]
   and bring all the goodness and ease of use of `#[derive(Debug)]` to
   user-defined traits as well, such as [Serde]'s `#[derive(Deserialize)]`.
 
-* **Procedural bang macros** are new to the 2018 edition and allow defining
+* **Function-like macros** are new to the 2018 edition and allow defining
   macros like `env!("FOO")` or `format_args!("...")` in a crate.io-based
   library. You can think of these as sort of "`macro_rules!` macros" on
   steroids.
 
-* **Procedural attribute macros**, my favorite, are also new in the 2018 edition
+* **Attribute macros**, my favorite, are also new in the 2018 edition
   and allow you to provide lightweight annotations on Rust functions which
   perform syntactical transformations over the code at compile time.
 
