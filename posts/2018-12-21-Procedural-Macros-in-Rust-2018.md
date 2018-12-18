@@ -301,7 +301,7 @@ diagnostics about code that we've written.
 
 ### Procedural Macros in the Wild
 
-Ok up to this point we've got a pretty good idea about what proceduarl macros
+Ok up to this point we've got a pretty good idea about what procedural macros
 can do and the various capabilities they have in the 2018 edition. As such a
 long-awaited feature, the ecosystem is already making use of these new
 capabilities! If you're interested, some projects to keep your eyes on are:
