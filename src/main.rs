@@ -198,7 +198,7 @@ impl Blog {
 
     fn render_index(&self) -> Result<(), Box<Error>> {
         let data = json!({
-            "title": "Blog",
+            "title": "The Rust Programming Language Blog",
             "parent": "layout",
             "posts": self.posts,
         });
@@ -224,7 +224,7 @@ impl Blog {
             filename.set_extension("html");
 
             let data = json!({
-                "title": "The Rust Programming Language Blog",
+                "title": format!("{} | Rust Blog", post.title),
                 "parent": "layout",
                 "post": post,
             });
