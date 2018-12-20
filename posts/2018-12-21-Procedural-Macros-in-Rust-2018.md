@@ -153,7 +153,7 @@ and you don't even need to explicitly depend on `serde_derive` in `Cargo.toml`!
 
 This mysterious `TokenStream` type comes from the [compiler-provided
 `proc_macro` crate][pm]. When it was first added all you could do with a
-[`TokenStream`] was call `to_string()` or `parse()` one back from a string.
+[`TokenStream`] was call convert it to or from a string using `to_string()` or `parse()`.
 As of Rust 2018, the [`TokenStream`] type provides a much larger stable API.
 
 As its name might imply, a `TokenStream` can be thought of as a stream of
