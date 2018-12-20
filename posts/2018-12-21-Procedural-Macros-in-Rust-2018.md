@@ -25,10 +25,10 @@ three flavors:
   and bring all the goodness and ease of use of `#[derive(Debug)]` to
   user-defined traits as well, such as [Serde]'s `#[derive(Deserialize)]`.
 
-* **Function-like macros** are new to the 2018 edition and allow defining
-  macros like `env!("FOO")` or `format_args!("...")` in a crate.io-based
-  library. You can think of these as sort of "`macro_rules!` macros" on
-  steroids.
+* **Function-like macros** are newly stable to the 2018 edition and allow
+  defining macros like `env!("FOO")` or `format_args!("...")` in a
+  crate.io-based library. You can think of these as sort of "`macro_rules!`
+  macros" on steroids.
 
 * **Attribute macros**, my favorite, are also new in the 2018 edition
   and allow you to provide lightweight annotations on Rust functions which
@@ -87,7 +87,7 @@ Right off the bat we can see a few important properties of procedural macros:
 * We're *executing aribtrary code* at compile time, which means we can do just
   about anything!
 * Procedural macros are incorporated with the module system, meaning no more
-  janky `#[macro_use]`
+  they can be imported just like any other name.
 
 Before we take a look at implementing a procedural macro, let's first dive into
 some of these points.
@@ -148,6 +148,12 @@ struct Foo {
 ```
 
 and you don't even need to explicitly depend on `serde_derive` in `Cargo.toml`!
+All you need is:
+
+```toml
+[dependencies]
+serde = { version = '1.0.82', features = ['derive'] }
+```
 
 ### What's inside a `TokenStream`?
 
@@ -156,9 +162,9 @@ This mysterious `TokenStream` type comes from the [compiler-provided
 [`TokenStream`] was call convert it to or from a string using `to_string()` or `parse()`.
 As of Rust 2018, you can act on the tokens in a [`TokenStream`] directly.
 
-As its name might imply, a `TokenStream` can be thought of as a stream of
-tokens, or a list of tokens. Each token is called a [`TokenTree`] and represents
-one of four kinds of tokens:
+A [`TokenStream`] is effectively "just" an iterator over [`TokenTree`]. All
+syntax in Rust falls into one of these four categories, the four variants of
+[`TokenTree`]:
 
 * `Ident` is any identifier like `foo` or `bar`. This also contains keywords
   such as `self` and `super`.
@@ -172,9 +178,6 @@ one of four kinds of tokens:
 * `Group` is where the term "tree" is most relevant, as `Group` represents a
   delimited sub-token-stream. For example `(a, b)` is a `Group` with parentheses
   as delimiters, and the internal token stream is `a, b`.
-
-All syntax in Rust falls into one of the above four categories. A `TokenStream`
-is effectively "just" an iterator over `TokenTree`.
 
 While this is conceptually simple, this may sound like there's not much we can
 do with this! It's unclear, for example, how we might parse a function from a
@@ -251,11 +254,31 @@ together various pieces of syntax into one return value.
 ### Tokens and `Span`
 
 Perhaps the greatest feature of procedural macros in Rust 2018 is the ability to
-customize and use [`Span`] information on each token. A [`Span`] can be thought
-of as a pointer back into an original source file, typically saying something
-like "the `Ident` token` foo` came from file `bar.rs`, line 4, column 5, and was
-3 bytes long". This information is primarily used by the compiler's diagnostics
-with warnings and error messages.
+customize and use [`Span`] information on each token, giving us the ability for
+amazing syntactical error messages from procedural macros:
+
+```
+error: expected `fn`
+ --> src/main.rs:3:14
+  |
+3 | my_annotate!(not_fn foo() {});
+  |              ^^^^^^
+```
+
+as well as completely custom error messages:
+
+```
+error: imported methods must have at least one argument
+  --> invalid-imports.rs:12:5
+   |
+12 |     fn f1();
+   |     ^^^^^^^^
+```
+
+A [`Span`] can be thought of as a pointer back into an original source file,
+typically saying something like "the `Ident` token` foo` came from file
+`bar.rs`, line 4, column 5, and was 3 bytes long". This information is
+primarily used by the compiler's diagnostics with warnings and error messages.
 
 In Rust 2018 each [`TokenTree`] has a [`Span`] associated with it. This means that
 if you preserve the [`Span`] of all input tokens into the output then even
