@@ -184,7 +184,7 @@ means we could never change it. (imagine if we couldn't have added the `?`
 operator!)
 
 By using `TokenStream` to communicate with procedural macros, the compiler is
-able to add new syntactical language features while also being able to compile
+able to add new language syntax while also being able to compile
 and work with older procedural macros. Let's see now, though, how we can
 actually get useful information out of a `TokenStream`.
 
