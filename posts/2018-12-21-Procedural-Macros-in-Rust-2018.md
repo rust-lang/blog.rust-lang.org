@@ -84,7 +84,7 @@ Right off the bat we can see a few important properties of procedural macros:
 
 * The input/output is this fancy `TokenStream` type we'll talk about more in a
   bit
-* We're *executing aribtrary code* at compile time, which means we can do just
+* We're *executing arbitrary code* at compile time, which means we can do just
   about anything!
 * Procedural macros are incorporated with the module system, meaning no more
   they can be imported just like any other name.
