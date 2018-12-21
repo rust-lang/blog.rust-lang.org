@@ -31,6 +31,7 @@ struct Post {
     day: String,
     contents: String,
     url: String,
+    published: String,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -125,6 +126,25 @@ impl Blog {
 
             // this is fine
             let url = format!("{}/{}/{}/{}", year, month, day, url.to_str().unwrap());
+            
+            // build the published time. this is only approximate, which is fine.
+            // we do some unwraps because these need to be valid
+            let published = time::Tm {
+                tm_sec: 0,
+                tm_min: 0,
+                tm_hour: 0,
+                tm_mday: day.parse::<i32>().unwrap(),
+                tm_mon: month.parse::<i32>().unwrap() - 1, // 0-11 not 1-12
+                tm_year: year.parse::<i32>().unwrap() - 1900, // from the year 1900, not the actual year
+                // these next two fields are wrong but we never use them to generate our times
+                tm_wday: 1,
+                tm_yday: 1,
+                tm_isdst: 0,
+                tm_utcoff: 0,
+                tm_nsec: 0,
+            };
+
+            let published = published.rfc3339().to_string();
 
             let post = Post {
                 filename,
@@ -136,6 +156,7 @@ impl Blog {
                 day,
                 contents,
                 url,
+                published,
             };
 
             posts.push(post);

@@ -3,6 +3,7 @@
     <generator uri="https://blog.rust-lang.org/" version="0.1.0">Rust Blog</generator>
     <link href="https://blog.rust-lang.org/feed.xml" rel="self" type="application/atom+xml" />
     <link href="https://blog.rust-lang.org/" rel="alternate" type="text/html" />
+    <id>https://blog.rust-lang.org/</id>
     <title>Rust Blog</title>
     <subtitle>Empowering everyone to build reliable and efficient software.</subtitle>
     <author>
@@ -15,7 +16,8 @@
     <entry>
         <title>{{title}}</title>
         <link rel="alternate" href="https://blog.rust-lang.org/{{url}}" type="text/html" title="{{title}}" />
-        <published>{{year}}-{{month}}-{{day}}</published>
+        <published>{{ published }}</published>
+        <updated>{{ published }}</updated>
         <id>https://blog.rust-lang.org/{{url}}</id>
         <content type="html" xml:base="https://blog.rust-lang.org/{{url}}">{{contents}}</content>
 
