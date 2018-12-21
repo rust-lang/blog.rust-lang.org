@@ -37,13 +37,13 @@ three flavors:
 Each of these flavors of macros can be defined in a crate with `proc-macro =
 true` [specified in its manifest][manifest]. When used, a procedural macro is
 loaded by the Rust compiler and executed as the invocation is expanded. This
-means that Cargo's in control of versioning for procedural macros and you can
+means that Cargo is in control of versioning for procedural macros and you can
 use them with all same ease of use you'd expect from other Cargo dependencies!
 
 ### Defining a procedural macro
 
 Each of the three types of procedural macros are [defined in a slightly different
-fashion][proc-ref], and here we'll single out attribute macros. First we'll flag
+fashion][proc-ref], and here we'll single out attribute macros. First, we'll flag
 `Cargo.toml`:
 
 ```toml
