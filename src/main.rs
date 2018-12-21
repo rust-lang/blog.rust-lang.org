@@ -237,7 +237,7 @@ impl Blog {
 
     fn render_feed(&self) -> Result<(), Box<Error>> {
         let posts: Vec<_> = self.posts.iter().by_ref().take(10).collect();
-        let data = json!({ "posts": posts });
+        let data = json!({ "posts": posts, "feed_updated":  time::now_utc().rfc3339().to_string() });
 
         self.render_template("feed.xml", "feed", data)?;
         Ok(())
