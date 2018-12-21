@@ -27,7 +27,7 @@ three flavors:
 
 * **Function-like macros** are newly stable to the 2018 edition and allow
   defining macros like `env!("FOO")` or `format_args!("...")` in a
-  crate.io-based library. You can think of these as sort of "`macro_rules!`
+  crates.io-based library. You can think of these as sort of "`macro_rules!`
   macros" on steroids.
 
 * **Attribute macros**, my favorite, are also new in the 2018 edition
