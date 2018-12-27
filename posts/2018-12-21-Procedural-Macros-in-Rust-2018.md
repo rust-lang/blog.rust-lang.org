@@ -86,8 +86,8 @@ Right off the bat we can see a few important properties of procedural macros:
   bit
 * We're *executing arbitrary code* at compile time, which means we can do just
   about anything!
-* Procedural macros are incorporated with the module system, meaning no more
-  they can be imported just like any other name.
+* Procedural macros are incorporated with the module system, meaning they can
+  be imported just like any other name.
 
 Before we take a look at implementing a procedural macro, let's first dive into
 some of these points.
