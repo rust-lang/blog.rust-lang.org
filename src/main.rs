@@ -7,7 +7,7 @@ use std::{
 
 use comrak::ComrakOptions;
 
-use handlebars::{Handlebars, Helper, Context, RenderContext, Output, HelperResult, RenderError};
+use handlebars::{Context, Handlebars, Helper, HelperResult, Output, RenderContext, RenderError};
 
 use serde_derive::{Deserialize, Serialize};
 use serde_json::json;
@@ -20,7 +20,7 @@ struct Blog {
     out_directory: PathBuf,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 struct Post {
     filename: String,
     title: String,
@@ -32,32 +32,58 @@ struct Post {
     contents: String,
     url: String,
     published: String,
+    release: bool,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 struct YamlHeader {
     title: String,
     author: String,
+    #[serde(default)]
+    release: bool,
 }
 
-fn hb_month_helper<'a>(h: &Helper, _b: &Handlebars, _ctx: &Context, _rc: &mut RenderContext,
-                      out: &mut Output) -> HelperResult {
-    let num: u32 = h.param(0).unwrap().value().as_str().unwrap().parse()
+#[derive(Debug, Serialize)]
+struct Releases {
+    releases: Vec<ReleasePost>,
+    feed_updated: String,
+}
+
+#[derive(Debug, Serialize)]
+struct ReleasePost {
+    title: String,
+    url: String,
+}
+
+fn hb_month_helper<'a>(
+    h: &Helper,
+    _b: &Handlebars,
+    _ctx: &Context,
+    _rc: &mut RenderContext,
+    out: &mut Output,
+) -> HelperResult {
+    let num: u32 = h
+        .param(0)
+        .unwrap()
+        .value()
+        .as_str()
+        .unwrap()
+        .parse()
         .or_else(|_| Err(RenderError::new("The value is not a number")))?;
     let name = match num {
-        1  => "Jan.",
-        2  => "Feb.",
-        3  => "Mar.",
-        4  => "Apr.",
-        5  => "May",
-        6  => "June",
-        7  => "July",
-        8  => "Aug.",
-        9  => "Sept.",
+        1 => "Jan.",
+        2 => "Feb.",
+        3 => "Mar.",
+        4 => "Apr.",
+        5 => "May",
+        6 => "June",
+        7 => "July",
+        8 => "Aug.",
+        9 => "Sept.",
         10 => "Oct.",
         11 => "Nov.",
         12 => "Dec.",
-        _  => "Error!",
+        _ => "Error!",
     };
     out.write(name)?;
     Ok(())
@@ -109,9 +135,11 @@ impl Blog {
             // so we need to find the end. we need the fours to adjust for those first bytes
             let end_of_yaml = contents[4..].find("---").unwrap() + 4;
             let yaml = &contents[..end_of_yaml];
-
-            let YamlHeader { author, title } = serde_yaml::from_str(yaml)?;
-
+            let YamlHeader {
+                author,
+                title,
+                release,
+            } = serde_yaml::from_str(yaml)?;
             // next, the contents. we add + to get rid of the final "---\n\n"
             let options = ComrakOptions {
                 ext_header_ids: Some(String::new()),
@@ -126,7 +154,7 @@ impl Blog {
 
             // this is fine
             let url = format!("{}/{}/{}/{}", year, month, day, url.to_str().unwrap());
-            
+
             // build the published time. this is only approximate, which is fine.
             // we do some unwraps because these need to be valid
             let published = time::Tm {
@@ -157,6 +185,7 @@ impl Blog {
                 contents,
                 url,
                 published,
+                release,
             };
 
             posts.push(post);
@@ -168,7 +197,7 @@ impl Blog {
 
         posts.reverse();
 
-        for i in 1 .. posts.len() {
+        for i in 1..posts.len() {
             posts[i].show_year = posts[i - 1].year != posts[i].year;
         }
 
@@ -191,6 +220,8 @@ impl Blog {
         self.concat_vendor_css(vec!["skeleton", "tachyons"]);
 
         self.copy_static_files()?;
+
+        self.generate_releases_feed()?;
 
         Ok(())
     }
@@ -258,9 +289,31 @@ impl Blog {
 
     fn render_feed(&self) -> Result<(), Box<Error>> {
         let posts: Vec<_> = self.posts.iter().by_ref().take(10).collect();
-        let data = json!({ "posts": posts, "feed_updated":  time::now_utc().rfc3339().to_string() });
+        let data =
+            json!({ "posts": posts, "feed_updated":  time::now_utc().rfc3339().to_string() });
 
         self.render_template("feed.xml", "feed", data)?;
+        Ok(())
+    }
+
+    fn generate_releases_feed(&self) -> Result<(), Box<Error>> {
+        let posts = self.posts.clone();
+        let is_released: Vec<&Post> = posts.iter().filter(|post| post.release).collect();
+        let releases: Vec<ReleasePost> = is_released
+            .iter()
+            .map(|post| ReleasePost {
+                title: post.title.clone(),
+                url: post.url.clone(),
+            })
+            .collect();
+        let data = Releases {
+            releases: releases,
+            feed_updated: time::now_utc().rfc3339().to_string(),
+        };
+        fs::write(
+            self.out_directory.join("releases.json"),
+            serde_json::to_string(&data)?,
+        )?;
         Ok(())
     }
 
