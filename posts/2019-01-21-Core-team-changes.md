@@ -16,7 +16,7 @@ back from the core team:
   continue co-leading the Cargo team in his new position.
 - Aaron Turon [decided to step back from the core team][aturon] so
   that he could focus on engineering work and the language design
-  team. (He remains at Mozilla.)
+  team. (He remains on the Rust team at Mozilla.)
 
 [nrc]: https://www.ncameron.org/blog/leaving-mozilla-and-most-of-the-rust-project/
 [aturon]: https://internals.rust-lang.org/t/aturon-retires-from-the-core-team-but-not-from-rust/9392/3
