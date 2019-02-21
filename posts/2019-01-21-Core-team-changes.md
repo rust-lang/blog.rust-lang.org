@@ -22,11 +22,11 @@ back from the core team:
 [aturon]: https://internals.rust-lang.org/t/aturon-retires-from-the-core-team-but-not-from-rust/9392/3
 
 With Rust 2018 having shipped, this is a natural time of
-transition. While we’ll miss Nick and Aaron’s contributions to the core
-team, we we are very excited for them to be focusing on something new,
-and we’re very happy that they are still going to stay involved with
-Rust. We’re also looking into growing the core team to help with the
-work ahead.
+transition. While we’ll miss Nick and Aaron’s contributions to the
+core team, we are very excited for them to be focusing on something
+new, and we’re very happy that they are still going to stay involved
+with Rust. We’re also looking into growing the core team to help with
+the work ahead.
 
 Finally, two other members have changed their jobs, but plan to stay
 involved in the core team:
