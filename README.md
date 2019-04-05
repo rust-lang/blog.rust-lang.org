@@ -1,6 +1,6 @@
 # The Rust blog
 
-[![Build Status](https://travis-ci.org/rust-lang/blog.rust-lang.org.svg?branch=master)](https://travis-ci.org/rust-lang/blog.rust-lang.org)
+[![Build Status](https://travis-ci.com/rust-lang/blog.rust-lang.org.svg?branch=master)](https://travis-ci.com/rust-lang/blog.rust-lang.org)
 
 This is the blog of the Rust Programming Language.
 
