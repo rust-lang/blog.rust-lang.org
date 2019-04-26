@@ -14,7 +14,7 @@ This leaves the #rust and #rust-beginners channels on Mozilla’s IRC network, w
 
 We understand that not everyone wishes to switch to Discord for many reasons. For people who wish to continue using IRC, there is [an unofficial freenode channel][freenode] which you can hang out in, though we’d like to emphasize that this is not associated with the Rust teams and is not moderated by our Moderation team. You’re also free to create new channels on freenode [in accordance with the freenode rules][freenode-rules].
 
-There are still a couple months before irc.mozilla.org shuts down — we’ll work at making this transition as smooth as possible in this time. We’d like to thank everyone who made #rust and #rust-beginners on Mozilla IRC a great place to hang out and are sad to see it go.
+There are still a couple months before irc.mozilla.org shuts down — we’ll work at making this transition as smooth as possible in this time. Thanks to everyone who made #rust and #rust-beginners on Mozilla IRC a great place to hang out! We are sad to see it go. 😢
 
 
  [mhoye-post]: http://exple.tive.org/blarg/2019/04/26/synchronous-text/
