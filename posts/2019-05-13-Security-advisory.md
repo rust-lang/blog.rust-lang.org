@@ -94,7 +94,7 @@ resolve this in the standard library soon.
 Thanks to Sean McArthur, who found this bug and reported it to us in accordance
 with our [security policy][sec].
 
-[sec]: https://www.rust-lang.org/policies/security.
+[sec]: https://www.rust-lang.org/policies/security
 
 [1]: https://github.com/rust-lang/rust/pull/58048
 [2]: https://github.com/rust-lang/rust/issues/60784
