@@ -4,9 +4,11 @@ title: "Security advisory for the standard library"
 author: The Rust Core Team
 ---
 
-This is a cross-post of the official security advisory published at https://groups.google.com/forum/#!topic/rustlang-security-announcements/aZabeCMUv70
+This is a cross-post of the [official security advisory][official]
 
-That link contains a signed version with our PGP key, as well.
+[official]: https://groups.google.com/forum/#!topic/rustlang-security-announcements/aZabeCMUv70
+
+The official post contains a signed version with our PGP key, as well.
 
 ---
 
@@ -90,7 +92,9 @@ resolve this in the standard library soon.
 ## Acknowledgements
 
 Thanks to Sean McArthur, who found this bug and reported it to us in accordance
-with our security policy https://www.rust-lang.org/policies/security.
+with our [security policy][sec].
+
+[sec]: https://www.rust-lang.org/policies/security.
 
 [1]: https://github.com/rust-lang/rust/pull/58048
 [2]: https://github.com/rust-lang/rust/issues/60784
