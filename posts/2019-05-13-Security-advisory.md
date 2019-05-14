@@ -4,11 +4,13 @@ title: "Security advisory for the standard library"
 author: The Rust Core Team
 ---
 
-This is a cross-post of the [official security advisory][official]
+This is a cross-post of the [official security advisory][official]. The
+official post contains a signed version with our PGP key, as well.
+
+The CVE for this vulnerability is [CVE-2019-12083][cve].
 
 [official]: https://groups.google.com/forum/#!topic/rustlang-security-announcements/aZabeCMUv70
-
-The official post contains a signed version with our PGP key, as well.
+[cve]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-0803
 
 ---
 
@@ -16,10 +18,6 @@ The Rust team was recently notified of a security vulnerability affecting
 manual implementations of `Error::type_id` and their interaction with the
 `Error::downcast` family of functions in the standard library. If your code
 does not manually implement `Error::type_id` your code is not affected.
-
-We are applying for a CVE for this vulnerability, but since there is no
-embargo, we have not filed for one yet. Once a CVE is assigned, we'll make a
-second post to make mention of the CVE number.
 
 ## Overview
 
