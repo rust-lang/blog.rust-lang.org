@@ -10,7 +10,7 @@ official post contains a signed version with our PGP key, as well.
 The CVE for this vulnerability is [CVE-2019-12083][cve].
 
 [official]: https://groups.google.com/forum/#!topic/rustlang-security-announcements/aZabeCMUv70
-[cve]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-0803
+[cve]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12083
 
 ---
 
