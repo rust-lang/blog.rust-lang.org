@@ -10,7 +10,6 @@ It’s easy to look back on the pre-1.0 times and cherish them for being the wil
 
 Releasing Rust with stability guarantees also meant putting a stop to large visible changes. The face of Rust is still very similar to Rust 1.0. Even with the changes from last year’s 2018 Edition, Rust is still very recognizable as what it was in 2015. That steadiness hides that the time of Rust’s fastest development and growth is *now*. With the stability of the language and easy upgrades as a base, a ton of new features have been built. We’ve seen a bunch of achievements in the last year:
 
-
 - We have been StackOverflow’s [“Most loved programming language”][stackoverflow] 4 consecutive years in a row
 - We opened up a whole new area of development for stable Rust: [embedded development][rust-embedded]
 - [Rust+WASM][rust-wasm] went from an experiment to a usable product, making rustc the first compiler with focus on supporting WASM
