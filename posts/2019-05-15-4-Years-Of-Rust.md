@@ -14,7 +14,7 @@ Releasing Rust with stability guarantees also meant putting a stop to large visi
 - We have been StackOverflow’s [“Most loved programming language”][stackoverflow] 4 consecutive years in a row
 - We opened up a whole new area of development for stable Rust: [embedded development][rust-embedded]
 - [Rust+WASM][rust-wasm] went from an experiment to a usable product, making rustc the first compiler with focus on supporting WASM
-- We shipped a whole new language edition: [Rust 2018][rust-2018]
+- We shipped a new language edition: [Rust 2018][rust-2018]
 - [Crates.io][crates-io] passed a billion downloads and has over 25,000 crates available
 - There’s now over 100 meetups around the world, in 42 countries
 - 6(!) new conferences were spun up ([RustRush][rustrush], [RustCon Asia][rustcon-asia], [Oxidize][oxidize], [Rust LATAM][rust-latam], [Colorado Gold Rust][coloradogoldrust], [RustLab Italy][rustlab])
