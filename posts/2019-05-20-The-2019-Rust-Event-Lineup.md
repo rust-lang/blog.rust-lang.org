@@ -33,7 +33,7 @@ year's event.
 
 ### April 20-23, 2019: RustCon Asia
 
-[RustCon Asia][rustcon-asia] was the first Rust conference in Asia! The [talk videos][] are already
+[RustCon Asia][rustcon-asia] was the first Rust conference in Asia! The [talk videos][rustcon-yt] are already
 available on YouTube! [Follow @RustConAsia][rustcon-tw] on Twitter for future updates.
 
 [rustcon-asia]: https://rustcon.asia/
