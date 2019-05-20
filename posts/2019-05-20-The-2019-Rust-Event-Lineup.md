@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The 2019 Rust Event Lineup"
-author: Rust Community
+author: Rust Community Team
 description: "Lots of Rust events are happening this year; join us at one near you!"
 ---
 
