@@ -43,9 +43,10 @@ available on YouTube! [Follow @RustConAsia][rustcon-tw] on Twitter for future up
 ### April 26-29, 2019: Oxidize
 
 [Oxidize][oxidize] was a conference specifically about using Rust on embedded devices that took
-place in Berlin. Videos aren't out yet, but there'll probably be [tweets][oxidize-tw] when they are!
+place in Berlin. The videos are now [available on YouTube][oxidize-yt], and [follow @oxidizeconf][oxidize-tw] on Twitter for future updates.
 
 [oxidize]: https://oxidizeconf.com/
+[oxidize-yt]: https://www.youtube.com/playlist?list=PLXajQV_H-DxJPiJQK8gvou4SUZ8Zfvgm6
 [oxidize-tw]: https://twitter.com/OxidizeConf
 
 ### June 28-29, 2019: RustLab
