@@ -157,8 +157,8 @@ edit the `Cargo.toml` and add the `time` crate from [crates.io](https://crates.i
 Now that we've added the `time` crate, let's see what happens if we ask Cargo to
 build our package:
 
-```
-$ cargo build
+```console
+cargo build
    Compiling winapi v0.2.6
    Compiling libc v0.2.10
    Compiling winapi-build v0.1.1
@@ -173,16 +173,15 @@ up into smaller crates that do one thing and do it well**.
 
 Now that we successfully built our crate, what happens if we try to build it again?
 
-```
-$ cargo build
-
+```console
+cargo build
 ```
 
 Nothing happened at all. Why's that? We can always ask Cargo to give us more
 information through the `--verbose` flag, so let's do that:
 
-```
-$ cargo build --verbose
+```console
+cargo build --verbose
        Fresh libc v0.2.10
        Fresh winapi v0.2.6
        Fresh winapi-build v0.1.1
@@ -240,8 +239,8 @@ left off, with the exact same source code for all of our dependencies.
 To do this, we check in our `Cargo.lock` and clone the repository on our new
 machine. Then, we run `cargo build` again.
 
-```
-$ cargo build
+```console
+cargo build
    Compiling libc v0.2.10
    Compiling winapi v0.2.6
    Compiling winapi-build v0.1.1
@@ -271,8 +270,8 @@ fn main() {
 
 To run the example, we ask Cargo to build and run it:
 
-```
-$ cargo run --example date
+```console
+cargo run --example date
    Compiling datetime v0.1.0 (file:///Users/ykatz/Code/datetime)
      Running `target/debug/examples/date`
 26 Apr 2016 :: 05:03:38
@@ -322,8 +321,8 @@ to our package:
 
 After using the crate in our library, let's run `cargo build` again:
 
-```
-$ cargo build
+```console
+cargo build
     Updating registry `https://github.com/rust-lang/crates.io-index`
  Downloading tz v0.2.1
  Downloading byteorder v0.5.1
@@ -386,8 +385,8 @@ fn bench_date(b: &mut Bencher) {
 ```
 If we then run `cargo bench`:
 
-```
-$ cargo bench
+```console
+cargo bench
    Compiling winapi v0.2.6
    Compiling libc v0.2.10
    Compiling byteorder v0.5.1
@@ -450,8 +449,8 @@ library for Unix-specific functionality.
 
 As before, when I run `cargo build`, Cargo *conservatively* adds `nix` and its dependencies:
 
-```
-$ cargo build
+```console
+cargo build
     Updating registry `https://github.com/rust-lang/crates.io-index`
  Downloading nix v0.5.0
  Downloading bitflags v0.4.0
