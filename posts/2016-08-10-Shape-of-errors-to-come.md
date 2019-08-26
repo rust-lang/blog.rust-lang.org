@@ -94,8 +94,8 @@ explanations.
 Today, when you can call `--explain`, you pass an error code. The compiler then prints out
 an extended message that goes into more detail about how errors of that form occur:
 
-```
-> rustc --explain E0200
+```console
+rustc --explain E0200
 
 Unsafe traits must have unsafe implementations. This error occurs when an
 implementation for an unsafe trait isn't marked as unsafe. This may be resolved
