@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-    <generator uri="https://blog.rust-lang.org/" version="0.1.0">Rust Blog</generator>
-    <link href="https://blog.rust-lang.org/feed.xml" rel="self" type="application/atom+xml" />
-    <link href="https://blog.rust-lang.org/" rel="alternate" type="text/html" />
-    <id>https://blog.rust-lang.org/</id>
-    <title>Rust Blog</title>
-    <subtitle>Empowering everyone to build reliable and efficient software.</subtitle>
+    <generator uri="https://blog.rust-lang.org/{{blog.prefix}}" version="0.1.0">{{blog.title}}</generator>
+    <link href="https://blog.rust-lang.org/{{blog.prefix}}feed.xml" rel="self" type="application/atom+xml" />
+    <link href="https://blog.rust-lang.org/{{blog.prefix}}" rel="alternate" type="text/html" />
+    <id>https://blog.rust-lang.org/{{blog.prefix}}</id>
+    <title>{{blog.title}}</title>
+    <subtitle>{{blog.description}}</subtitle>
     <author>
-        <name>Maintained by the Rust Team.</name>
+        <name>Maintained by {{blog.maintained_by}}.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>{{ feed_updated }}</updated>
+    <updated>{{feed_updated}}</updated>
 
     {{#each posts}}
     <entry>
         <title>{{title}}</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/{{url}}" type="text/html" title="{{title}}" />
-        <published>{{ published }}</published>
-        <updated>{{ published }}</updated>
-        <id>https://blog.rust-lang.org/{{url}}</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/{{url}}">{{contents}}</content>
+        <link rel="alternate" href="https://blog.rust-lang.org/{{../blog.prefix}}{{url}}" type="text/html" title="{{title}}" />
+        <published>{{published}}</published>
+        <updated>{{published}}</updated>
+        <id>https://blog.rust-lang.org/{{../blog.prefix}}{{url}}</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/{{../blog.prefix}}{{url}}">{{contents}}</content>
 
         <author>
             <name>{{author}}</name>

@@ -1,18 +1,21 @@
+mod blogs;
 mod posts;
 
+use crate::blogs::Blog;
 use crate::posts::Post;
 use handlebars::{Context, Handlebars, Helper, HelperResult, Output, RenderContext, RenderError};
 use sass_rs::{compile_file, Options};
 use serde_derive::Serialize;
 use serde_json::json;
+use std::convert::AsRef;
 use std::error::Error;
 use std::fs::{self, File};
 use std::io::Write;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
-struct Blog {
+struct Generator {
     handlebars: Handlebars,
-    posts: Vec<Post>,
+    blogs: Vec<Blog>,
     out_directory: PathBuf,
 }
 
@@ -62,73 +65,34 @@ fn hb_month_helper<'a>(
     Ok(())
 }
 
-impl Blog {
-    fn new<T>(out_directory: T, posts_directory: T) -> Result<Blog, Box<dyn Error>>
-    where
-        T: Into<PathBuf>,
-    {
+impl Generator {
+    fn new(
+        out_directory: impl AsRef<Path>,
+        posts_directory: impl AsRef<Path>,
+    ) -> Result<Generator, Box<dyn Error>> {
         let mut handlebars = Handlebars::new();
-
         handlebars.set_strict_mode(true);
-
         handlebars.register_templates_directory(".hbs", "templates")?;
-
         handlebars.register_helper("month_name", Box::new(hb_month_helper));
 
-        let posts = Blog::load_posts(posts_directory.into())?;
-
-        Ok(Blog {
+        Ok(Generator {
             handlebars,
-            posts,
-            out_directory: out_directory.into(),
+            blogs: crate::blogs::load(posts_directory.as_ref())?,
+            out_directory: out_directory.as_ref().into(),
         })
-    }
-
-    fn load_posts(dir: PathBuf) -> Result<Vec<Post>, Box<dyn Error>> {
-        let mut posts = Vec::new();
-
-        for entry in fs::read_dir(dir)? {
-            let path = entry?.path();
-
-            // ignore vim temporary files
-            let filename = path.file_name().unwrap().to_str().unwrap();
-            if filename.starts_with(".") && filename.ends_with(".swp") {
-                continue;
-            }
-
-            posts.push(Post::open(&path)?);
-        }
-
-        // finally, sort the posts. oldest first.
-        posts.sort_by_key(|post| post.url.clone());
-        posts.reverse();
-
-        for i in 1..posts.len() {
-            posts[i].show_year = posts[i - 1].year != posts[i].year;
-        }
-
-        Ok(posts)
     }
 
     fn render(&self) -> Result<(), Box<dyn Error>> {
         // make sure our output directory exists
         fs::create_dir_all(&self.out_directory)?;
 
-        self.render_index()?;
-
-        self.render_posts()?;
-
-        self.render_feed()?;
-
+        for blog in &self.blogs {
+            self.render_blog(blog)?;
+        }
         self.compile_sass("app");
         self.compile_sass("fonts");
-
         self.concat_vendor_css(vec!["skeleton", "tachyons"]);
-
         self.copy_static_files()?;
-
-        self.generate_releases_feed()?;
-
         Ok(())
     }
 
@@ -154,62 +118,75 @@ impl Blog {
         fs::write("./static/styles/vendor.css", &concatted).expect("couldn't write vendor css");
     }
 
-    fn render_index(&self) -> Result<(), Box<dyn Error>> {
+    fn render_blog(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+        std::fs::create_dir_all(self.out_directory.join(blog.prefix()))?;
+
+        self.render_index(blog)?;
+        self.render_feed(blog)?;
+        self.render_releases_feed(blog)?;
+        for post in blog.posts() {
+            self.render_post(blog, post)?;
+        }
+        Ok(())
+    }
+
+    fn render_index(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
         let data = json!({
-            "title": "The Rust Programming Language Blog",
+            "title": blog.index_title(),
             "parent": "layout",
-            "posts": self.posts,
+            "blog": blog,
+        });
+        self.render_template(blog.prefix().join("index.html"), "index", data)?;
+        Ok(())
+    }
+
+    fn render_post(&self, blog: &Blog, post: &Post) -> Result<(), Box<dyn Error>> {
+        let path = blog
+            .prefix()
+            .join(&post.year)
+            .join(&post.month)
+            .join(&post.day);
+        fs::create_dir_all(self.out_directory.join(&path))?;
+
+        // then, we render the page in that path
+        let mut filename = PathBuf::from(&post.filename);
+        filename.set_extension("html");
+
+        let data = json!({
+            "title": format!("{} | {}", post.title, blog.title()),
+            "parent": "layout",
+            "blog": blog,
+            "post": post,
         });
 
-        self.render_template("index.html", "index", data)?;
-
+        self.render_template(path.join(filename), "post", data)?;
         Ok(())
     }
 
-    fn render_posts(&self) -> Result<(), Box<dyn Error>> {
-        for post in &self.posts {
-            // first, we create the path
-            //let path = PathBuf::from(&self.out_directory);
+    fn render_feed(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+        let posts: Vec<_> = blog.posts().iter().take(10).collect();
+        let data = json!({
+            "blog": blog,
+            "posts": posts,
+            "feed_updated": time::now_utc().rfc3339().to_string(),
+        });
 
-            let path = PathBuf::from(&post.year);
-            let path = path.join(&post.month);
-            let path = path.join(&post.day);
-
-            fs::create_dir_all(self.out_directory.join(&path))?;
-
-            // then, we render the page in that path
-            let mut filename = PathBuf::from(&post.filename);
-            filename.set_extension("html");
-
-            let data = json!({
-                "title": format!("{} | Rust Blog", post.title),
-                "parent": "layout",
-                "post": post,
-            });
-
-            self.render_template(path.join(filename).to_str().unwrap(), "post", data)?;
-        }
-
+        self.render_template(blog.prefix().join("feed.xml"), "feed", data)?;
         Ok(())
     }
 
-    fn render_feed(&self) -> Result<(), Box<dyn Error>> {
-        let posts: Vec<_> = self.posts.iter().by_ref().take(10).collect();
-        let data =
-            json!({ "posts": posts, "feed_updated":  time::now_utc().rfc3339().to_string() });
-
-        self.render_template("feed.xml", "feed", data)?;
-        Ok(())
-    }
-
-    fn generate_releases_feed(&self) -> Result<(), Box<dyn Error>> {
-        let posts = self.posts.clone();
+    fn render_releases_feed(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+        let posts = blog.posts().iter().cloned().collect::<Vec<_>>();
         let is_released: Vec<&Post> = posts.iter().filter(|post| post.release).collect();
         let releases: Vec<ReleasePost> = is_released
             .iter()
             .map(|post| ReleasePost {
                 title: post.title.clone(),
-                url: post.url.clone(),
+                url: blog
+                    .prefix()
+                    .join(post.url.clone())
+                    .to_string_lossy()
+                    .to_string(),
             })
             .collect();
         let data = Releases {
@@ -217,7 +194,9 @@ impl Blog {
             feed_updated: time::now_utc().rfc3339().to_string(),
         };
         fs::write(
-            self.out_directory.join("releases.json"),
+            self.out_directory
+                .join(blog.prefix())
+                .join("releases.json"),
             serde_json::to_string(&data)?,
         )?;
         Ok(())
@@ -239,22 +218,19 @@ impl Blog {
 
     fn render_template(
         &self,
-        name: &str,
+        name: impl AsRef<Path>,
         template: &str,
         data: serde_json::Value,
     ) -> Result<(), Box<dyn Error>> {
-        let out_file = self.out_directory.join(name);
-
+        let out_file = self.out_directory.join(name.as_ref());
         let file = File::create(out_file)?;
-
         self.handlebars.render_to_write(template, &data, file)?;
-
         Ok(())
     }
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let blog = Blog::new("site", "posts")?;
+    let blog = Generator::new("site", "posts")?;
 
     blog.render()?;
 

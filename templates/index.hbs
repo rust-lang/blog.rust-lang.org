@@ -11,14 +11,14 @@
    <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
 
     <table class="post-list collapse w-100 f2-l f2-m f3-s">
-    {{#each posts}}
+    {{#each blog.posts}}
       {{#if show_year}}<tr>
         <td class="bn"></td>
         <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">{{year}}</h3></td>
       </tr>{{/if}}
       <tr>
         <td class="tr o-60 pr4 pr5-l bn">{{month_name month}}&nbsp;{{day}}</td>
-        <td class="bn"><a href="{{url}}">{{title}}</a></td>
+        <td class="bn"><a href="/{{../blog.prefix}}{{url}}">{{title}}</a></td>
       </tr>
     {{/each}}
     </table>
