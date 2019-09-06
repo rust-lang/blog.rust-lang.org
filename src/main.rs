@@ -60,7 +60,7 @@ fn hb_month_helper<'a>(
     _b: &Handlebars,
     _ctx: &Context,
     _rc: &mut RenderContext,
-    out: &mut Output,
+    out: &mut dyn Output,
 ) -> HelperResult {
     let num: u32 = h
         .param(0)
@@ -90,7 +90,7 @@ fn hb_month_helper<'a>(
 }
 
 impl Blog {
-    fn new<T>(out_directory: T, posts_directory: T) -> Result<Blog, Box<Error>>
+    fn new<T>(out_directory: T, posts_directory: T) -> Result<Blog, Box<dyn Error>>
     where
         T: Into<PathBuf>,
     {
@@ -111,7 +111,7 @@ impl Blog {
         })
     }
 
-    fn load_posts(dir: PathBuf) -> Result<Vec<Post>, Box<Error>> {
+    fn load_posts(dir: PathBuf) -> Result<Vec<Post>, Box<dyn Error>> {
         let mut posts = Vec::new();
 
         for entry in fs::read_dir(dir)? {
@@ -209,7 +209,7 @@ impl Blog {
         Ok(posts)
     }
 
-    fn render(&self) -> Result<(), Box<Error>> {
+    fn render(&self) -> Result<(), Box<dyn Error>> {
         // make sure our output directory exists
         fs::create_dir_all(&self.out_directory)?;
 
@@ -253,7 +253,7 @@ impl Blog {
         fs::write("./static/styles/vendor.css", &concatted).expect("couldn't write vendor css");
     }
 
-    fn render_index(&self) -> Result<(), Box<Error>> {
+    fn render_index(&self) -> Result<(), Box<dyn Error>> {
         let data = json!({
             "title": "The Rust Programming Language Blog",
             "parent": "layout",
@@ -265,7 +265,7 @@ impl Blog {
         Ok(())
     }
 
-    fn render_posts(&self) -> Result<(), Box<Error>> {
+    fn render_posts(&self) -> Result<(), Box<dyn Error>> {
         for post in &self.posts {
             // first, we create the path
             //let path = PathBuf::from(&self.out_directory);
@@ -292,7 +292,7 @@ impl Blog {
         Ok(())
     }
 
-    fn render_feed(&self) -> Result<(), Box<Error>> {
+    fn render_feed(&self) -> Result<(), Box<dyn Error>> {
         let posts: Vec<_> = self.posts.iter().by_ref().take(10).collect();
         let data =
             json!({ "posts": posts, "feed_updated":  time::now_utc().rfc3339().to_string() });
@@ -301,7 +301,7 @@ impl Blog {
         Ok(())
     }
 
-    fn generate_releases_feed(&self) -> Result<(), Box<Error>> {
+    fn generate_releases_feed(&self) -> Result<(), Box<dyn Error>> {
         let posts = self.posts.clone();
         let is_released: Vec<&Post> = posts.iter().filter(|post| post.release).collect();
         let releases: Vec<ReleasePost> = is_released
@@ -322,7 +322,7 @@ impl Blog {
         Ok(())
     }
 
-    fn copy_static_files(&self) -> Result<(), Box<Error>> {
+    fn copy_static_files(&self) -> Result<(), Box<dyn Error>> {
         use fs_extra::dir::{self, CopyOptions};
 
         let mut options = CopyOptions::new();
@@ -341,7 +341,7 @@ impl Blog {
         name: &str,
         template: &str,
         data: serde_json::Value,
-    ) -> Result<(), Box<Error>> {
+    ) -> Result<(), Box<dyn Error>> {
         let out_file = self.out_directory.join(name);
 
         let file = File::create(out_file)?;
@@ -352,7 +352,7 @@ impl Blog {
     }
 }
 
-fn main() -> Result<(), Box<Error>> {
+fn main() -> Result<(), Box<dyn Error>> {
     let blog = Blog::new("site", "posts")?;
 
     blog.render()?;
