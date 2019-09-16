@@ -121,6 +121,11 @@ impl Blog {
             // yeah this might blow up, but it won't
             let filename = path.file_name().unwrap().to_str().unwrap();
 
+            // ignore vim temporary files
+            if filename.starts_with(".") && filename.ends_with(".swp") {
+                continue;
+            }
+
             // we need to get the metadata out of the url
             let mut split = filename.splitn(4, "-");
 
