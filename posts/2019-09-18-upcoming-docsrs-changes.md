@@ -17,18 +17,19 @@ build as many crates as possible. It's already used by [Crater], and we added
 all the dependencies previously installed in the legacy build environment.
 
 To ensure we can continue operating the service in the future and to increase
-its reliability we also improved the sandbox builds are executed into, adding
+its reliability we also improved the sandbox builds are executed in, adding
 new limits:
 
 * Each platform will now have **15 minutes** to build its dependencies and
   documentation.
 * **3 GB of RAM** will be available for the build.
-* Network access will be completly **disabled**.
+* Network access will be **disabled** (crates.io dependencies will still be
+  fetched).
 * Only the `target/` directory will be writable, and it will be purged after
   each build.
 
 Finally, docs.rs will now use the latest nightly available when building
-crates.
+crates, instead of using a manually updated pinned version of nightly.
 
 ## How to prepare for the changes
 
@@ -48,14 +49,14 @@ documentation:
 cargo doc --no-deps
 ```
 
-If a dependency is missing please [open an issue][crates-build-env-issue] on
-the Docker image's repository.
+If a dependency is missing, please [open an issue][crates-build-env-issue] on
+the Docker image's [repository][rustops/crates-build-env].
 
 If your crate fails to build because it took more than 15 minutes to generate
 its docs or it uses more than 3 GB of RAM please [open an issue][docsrs-issue]
-and we will increase the limits for your crate (when it's reasonable). We will
-**not** enable network access for your crate though: you'll need to change your
-crate not to require any external resource at build time.
+and we will consider reasonable limit increases for your crate. We will **not**
+enable network access for your crate though: you'll need to change your crate
+not to require any external resource at build time.
 
 ## Acknowledgements
 
