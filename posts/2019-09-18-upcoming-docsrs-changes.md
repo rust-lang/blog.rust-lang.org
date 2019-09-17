@@ -4,7 +4,7 @@ title: "Upcoming docs.rs changes"
 author: The Rust Infrastructure Team
 ---
 
-On September 30nd breaking changes will be deployed to the [docs.rs] build
+On September 30th breaking changes will be deployed to the [docs.rs] build
 environment. [docs.rs] is a free service building and hosting documentation for
 all the crates published on [crates.io]. It's [open source][docsrs-source] and
 maintained by the [Rustdoc team][rustdoc-team].
