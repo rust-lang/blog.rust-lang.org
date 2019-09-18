@@ -1,46 +1,22 @@
-use std::{
-    error::Error,
-    fs::{self, File},
-    io::Write,
-    path::PathBuf,
-};
+mod blogs;
+mod posts;
 
-use comrak::ComrakOptions;
-
+use crate::blogs::Blog;
+use crate::posts::Post;
 use handlebars::{Context, Handlebars, Helper, HelperResult, Output, RenderContext, RenderError};
-
-use serde_derive::{Deserialize, Serialize};
-use serde_json::json;
-
 use sass_rs::{compile_file, Options};
+use serde_derive::Serialize;
+use serde_json::json;
+use std::convert::AsRef;
+use std::error::Error;
+use std::fs::{self, File};
+use std::io::Write;
+use std::path::{Path, PathBuf};
 
-struct Blog {
+struct Generator {
     handlebars: Handlebars,
-    posts: Vec<Post>,
+    blogs: Vec<Blog>,
     out_directory: PathBuf,
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-struct Post {
-    filename: String,
-    title: String,
-    author: String,
-    year: String,
-    show_year: bool,
-    month: String,
-    day: String,
-    contents: String,
-    url: String,
-    published: String,
-    release: bool,
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
-struct YamlHeader {
-    title: String,
-    author: String,
-    #[serde(default)]
-    release: bool,
 }
 
 #[derive(Debug, Serialize)]
@@ -60,7 +36,7 @@ fn hb_month_helper<'a>(
     _b: &Handlebars,
     _ctx: &Context,
     _rc: &mut RenderContext,
-    out: &mut Output,
+    out: &mut dyn Output,
 ) -> HelperResult {
     let num: u32 = h
         .param(0)
@@ -89,145 +65,34 @@ fn hb_month_helper<'a>(
     Ok(())
 }
 
-impl Blog {
-    fn new<T>(out_directory: T, posts_directory: T) -> Result<Blog, Box<Error>>
-    where
-        T: Into<PathBuf>,
-    {
+impl Generator {
+    fn new(
+        out_directory: impl AsRef<Path>,
+        posts_directory: impl AsRef<Path>,
+    ) -> Result<Generator, Box<dyn Error>> {
         let mut handlebars = Handlebars::new();
-
         handlebars.set_strict_mode(true);
-
         handlebars.register_templates_directory(".hbs", "templates")?;
-
         handlebars.register_helper("month_name", Box::new(hb_month_helper));
 
-        let posts = Blog::load_posts(posts_directory.into())?;
-
-        Ok(Blog {
+        Ok(Generator {
             handlebars,
-            posts,
-            out_directory: out_directory.into(),
+            blogs: crate::blogs::load(posts_directory.as_ref())?,
+            out_directory: out_directory.as_ref().into(),
         })
     }
 
-    fn load_posts(dir: PathBuf) -> Result<Vec<Post>, Box<Error>> {
-        let mut posts = Vec::new();
-
-        for entry in fs::read_dir(dir)? {
-            let entry = entry?;
-            let path = entry.path();
-
-            // yeah this might blow up, but it won't
-            let filename = path.file_name().unwrap().to_str().unwrap();
-
-            // ignore vim temporary files
-            if filename.starts_with(".") && filename.ends_with(".swp") {
-                continue;
-            }
-
-            // we need to get the metadata out of the url
-            let mut split = filename.splitn(4, "-");
-
-            let year = split.next().unwrap().to_string();
-            let month = split.next().unwrap().to_string();
-            let day = split.next().unwrap().to_string();
-            let filename = split.next().unwrap().to_string();
-
-            let contents = fs::read_to_string(path)?;
-
-            // yaml headers.... we know the first four bytes of each file are "---\n"
-            // so we need to find the end. we need the fours to adjust for those first bytes
-            let end_of_yaml = contents[4..].find("---").unwrap() + 4;
-            let yaml = &contents[..end_of_yaml];
-            let YamlHeader {
-                author,
-                title,
-                release,
-            } = serde_yaml::from_str(yaml)?;
-            // next, the contents. we add + to get rid of the final "---\n\n"
-            let options = ComrakOptions {
-                ext_header_ids: Some(String::new()),
-                ..ComrakOptions::default()
-            };
-
-            let contents = comrak::markdown_to_html(&contents[end_of_yaml + 5..], &options);
-
-            // finally, the url.
-            let mut url = PathBuf::from(&*filename);
-            url.set_extension("html");
-
-            // this is fine
-            let url = format!("{}/{}/{}/{}", year, month, day, url.to_str().unwrap());
-
-            // build the published time. this is only approximate, which is fine.
-            // we do some unwraps because these need to be valid
-            let published = time::Tm {
-                tm_sec: 0,
-                tm_min: 0,
-                tm_hour: 0,
-                tm_mday: day.parse::<i32>().unwrap(),
-                tm_mon: month.parse::<i32>().unwrap() - 1, // 0-11 not 1-12
-                tm_year: year.parse::<i32>().unwrap() - 1900, // from the year 1900, not the actual year
-                // these next two fields are wrong but we never use them to generate our times
-                tm_wday: 1,
-                tm_yday: 1,
-                tm_isdst: 0,
-                tm_utcoff: 0,
-                tm_nsec: 0,
-            };
-
-            let published = published.rfc3339().to_string();
-
-            let post = Post {
-                filename,
-                title,
-                author,
-                year,
-                show_year: false,
-                month,
-                day,
-                contents,
-                url,
-                published,
-                release,
-            };
-
-            posts.push(post);
-        }
-
-        // finally, sort the posts. oldest first.
-
-        posts.sort_by_key(|post| post.url.clone());
-
-        posts.reverse();
-
-        for i in 1..posts.len() {
-            posts[i].show_year = posts[i - 1].year != posts[i].year;
-        }
-
-        Ok(posts)
-    }
-
-    fn render(&self) -> Result<(), Box<Error>> {
+    fn render(&self) -> Result<(), Box<dyn Error>> {
         // make sure our output directory exists
         fs::create_dir_all(&self.out_directory)?;
 
-        self.render_index()?;
-
-        self.render_posts()?;
-
-        self.render_feed()?;
-
+        for blog in &self.blogs {
+            self.render_blog(blog)?;
+        }
         self.compile_sass("app");
         self.compile_sass("fonts");
-
         self.concat_vendor_css(vec!["skeleton", "tachyons"]);
-
         self.copy_static_files()?;
-
-        self.generate_releases_feed()?;
-
         Ok(())
     }
 
@@ -253,62 +118,75 @@ impl Blog {
         fs::write("./static/styles/vendor.css", &concatted).expect("couldn't write vendor css");
     }
 
-    fn render_index(&self) -> Result<(), Box<Error>> {
+    fn render_blog(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+        std::fs::create_dir_all(self.out_directory.join(blog.prefix()))?;
+
+        self.render_index(blog)?;
+        self.render_feed(blog)?;
+        self.render_releases_feed(blog)?;
+        for post in blog.posts() {
+            self.render_post(blog, post)?;
+        }
+        Ok(())
+    }
+
+    fn render_index(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
         let data = json!({
-            "title": "The Rust Programming Language Blog",
+            "title": blog.index_title(),
             "parent": "layout",
-            "posts": self.posts,
+            "blog": blog,
+        });
+        self.render_template(blog.prefix().join("index.html"), "index", data)?;
+        Ok(())
+    }
+
+    fn render_post(&self, blog: &Blog, post: &Post) -> Result<(), Box<dyn Error>> {
+        let path = blog
+            .prefix()
+            .join(&post.year)
+            .join(&post.month)
+            .join(&post.day);
+        fs::create_dir_all(self.out_directory.join(&path))?;
+
+        // then, we render the page in that path
+        let mut filename = PathBuf::from(&post.filename);
+        filename.set_extension("html");
+
+        let data = json!({
+            "title": format!("{} | {}", post.title, blog.title()),
+            "parent": "layout",
+            "blog": blog,
+            "post": post,
         });
 
-        self.render_template("index.html", "index", data)?;
-
+        self.render_template(path.join(filename), "post", data)?;
         Ok(())
     }
 
-    fn render_posts(&self) -> Result<(), Box<Error>> {
-        for post in &self.posts {
-            // first, we create the path
-            //let path = PathBuf::from(&self.out_directory);
+    fn render_feed(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+        let posts: Vec<_> = blog.posts().iter().take(10).collect();
+        let data = json!({
+            "blog": blog,
+            "posts": posts,
+            "feed_updated": time::now_utc().rfc3339().to_string(),
+        });
 
-            let path = PathBuf::from(&post.year);
-            let path = path.join(&post.month);
-            let path = path.join(&post.day);
-
-            fs::create_dir_all(self.out_directory.join(&path))?;
-
-            // then, we render the page in that path
-            let mut filename = PathBuf::from(&post.filename);
-            filename.set_extension("html");
-
-            let data = json!({
-                "title": format!("{} | Rust Blog", post.title),
-                "parent": "layout",
-                "post": post,
-            });
-
-            self.render_template(path.join(filename).to_str().unwrap(), "post", data)?;
-        }
-
+        self.render_template(blog.prefix().join("feed.xml"), "feed", data)?;
         Ok(())
     }
 
-    fn render_feed(&self) -> Result<(), Box<Error>> {
-        let posts: Vec<_> = self.posts.iter().by_ref().take(10).collect();
-        let data =
-            json!({ "posts": posts, "feed_updated":  time::now_utc().rfc3339().to_string() });
-
-        self.render_template("feed.xml", "feed", data)?;
-        Ok(())
-    }
-
-    fn generate_releases_feed(&self) -> Result<(), Box<Error>> {
-        let posts = self.posts.clone();
+    fn render_releases_feed(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+        let posts = blog.posts().iter().cloned().collect::<Vec<_>>();
         let is_released: Vec<&Post> = posts.iter().filter(|post| post.release).collect();
         let releases: Vec<ReleasePost> = is_released
             .iter()
             .map(|post| ReleasePost {
                 title: post.title.clone(),
-                url: post.url.clone(),
+                url: blog
+                    .prefix()
+                    .join(post.url.clone())
+                    .to_string_lossy()
+                    .to_string(),
             })
             .collect();
         let data = Releases {
@@ -316,13 +194,15 @@ impl Blog {
             feed_updated: time::now_utc().rfc3339().to_string(),
         };
         fs::write(
-            self.out_directory.join("releases.json"),
+            self.out_directory
+                .join(blog.prefix())
+                .join("releases.json"),
             serde_json::to_string(&data)?,
         )?;
         Ok(())
     }
 
-    fn copy_static_files(&self) -> Result<(), Box<Error>> {
+    fn copy_static_files(&self) -> Result<(), Box<dyn Error>> {
         use fs_extra::dir::{self, CopyOptions};
 
         let mut options = CopyOptions::new();
@@ -338,22 +218,19 @@ impl Blog {
 
     fn render_template(
         &self,
-        name: &str,
+        name: impl AsRef<Path>,
         template: &str,
         data: serde_json::Value,
-    ) -> Result<(), Box<Error>> {
-        let out_file = self.out_directory.join(name);
-
+    ) -> Result<(), Box<dyn Error>> {
+        let out_file = self.out_directory.join(name.as_ref());
         let file = File::create(out_file)?;
-
         self.handlebars.render_to_write(template, &data, file)?;
-
         Ok(())
     }
 }
 
-fn main() -> Result<(), Box<Error>> {
-    let blog = Blog::new("site", "posts")?;
+fn main() -> Result<(), Box<dyn Error>> {
+    let blog = Generator::new("site", "posts")?;
 
     blog.render()?;
 
