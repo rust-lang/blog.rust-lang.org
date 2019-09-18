@@ -47,6 +47,7 @@ in the image), install Rust nightly, clone your crate's repository and then
 build the documentation:
 
 ```
+cargo fetch
 time cargo doc --no-deps
 ```
 
