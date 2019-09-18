@@ -6,8 +6,9 @@ author: The Rust Infrastructure Team
 
 On September 30th breaking changes will be deployed to the [docs.rs] build
 environment. [docs.rs] is a free service building and hosting documentation for
-all the crates published on [crates.io]. It's [open source][docsrs-source] and
-maintained by the [Rustdoc team][rustdoc-team].
+all the crates published on [crates.io]. It's [open source][docsrs-source],
+maintained by the [Rustdoc team][rustdoc-team] and operated by the
+[Infrastructure team][infra-team].
 
 ## What will change
 
@@ -17,7 +18,7 @@ build as many crates as possible. It's already used by [Crater], and we added
 all the dependencies previously installed in the legacy build environment.
 
 To ensure we can continue operating the service in the future and to increase
-its reliability we also improved the sandbox builds are executed in, adding
+its reliability we also improved the sandbox the builds are executed in, adding
 new limits:
 
 * Each platform will now have **15 minutes** to build its dependencies and
@@ -38,25 +39,33 @@ Docker image locally and execute a shell inside it:
 
 ```
 docker pull rustops/crates-build-env
-docker run --rm -it rustops/crates-build-env bash
+docker run --rm --memory 3221225472 -it rustops/crates-build-env bash
 ```
 
-Once you're in a shell you can install [rustup] (it's not installed in the
-image), install Rust nightly, clone your crate's repository and then build the
-documentation:
+Once you're in a shell you can install [rustup] (it's not installed by default
+in the image), install Rust nightly, clone your crate's repository and then
+build the documentation:
 
 ```
-cargo doc --no-deps
+time cargo doc --no-deps
 ```
 
-If a dependency is missing, please [open an issue][crates-build-env-issue] on
-the Docker image's [repository][rustops/crates-build-env].
+To aid your testing these commands will limit the available RAM to 3 GB and
+show the total execution time of `cargo doc`, but network access will not be
+blocked as you'll need to fetch dependencies.
+
+If your project needs a system dependency missing in the build environment,
+please [open an issue][crates-build-env-issue] on the Docker image's
+[repository][rustops/crates-build-env] and we'll consider adding it.
 
 If your crate fails to build because it took more than 15 minutes to generate
 its docs or it uses more than 3 GB of RAM please [open an issue][docsrs-issue]
 and we will consider reasonable limit increases for your crate. We will **not**
 enable network access for your crate though: you'll need to change your crate
 not to require any external resource at build time.
+
+We recommend using [Cargo features] to remove the parts of the code causing
+build failures, enabling those features with [docs.rs metadata].
 
 ## Acknowledgements
 
@@ -72,11 +81,14 @@ Rousskov][mark] reviewing the changes.
 [crates.io]: https://crates.io
 [docsrs-source]: https://github.com/rust-lang/docs.rs
 [rustdoc-team]: https://www.rust-lang.org/governance/teams/dev-tools#rustdoc
+[infra-team]: https://www.rust-lang.org/governance/teams/operations#infra
 [rustops/crates-build-env]: https://hub.docker.com/r/rustops/crates-build-env
 [Crater]: https://github.com/rust-lang/crater
 [rustup]: https://rustup.rs
 [crates-build-env-issue]: https://github.com/rust-lang/crates-build-env/issues
 [docsrs-issue]: https://github.com/rust-lang/crates-build-env/issues
+[Cargo features]: https://doc.rust-lang.org/cargo/reference/manifest.html#the-features-section
+[docs.rs metadata]: https://docs.rs/about
 [rustwide]: https://github.com/rust-lang/rustwide
 [Crater contributors]: https://github.com/rust-lang/crater/graphs/contributors
 [Rustwide contributors]: https://github.com/rust-lang/rustwide/graphs/contributors
