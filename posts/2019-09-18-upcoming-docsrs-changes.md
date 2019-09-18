@@ -86,7 +86,7 @@ Rousskov][mark] reviewing the changes.
 [Crater]: https://github.com/rust-lang/crater
 [rustup]: https://rustup.rs
 [crates-build-env-issue]: https://github.com/rust-lang/crates-build-env/issues
-[docsrs-issue]: https://github.com/rust-lang/crates-build-env/issues
+[docsrs-issue]: https://github.com/rust-lang/docs.rs/issues
 [Cargo features]: https://doc.rust-lang.org/cargo/reference/manifest.html#the-features-section
 [docs.rs metadata]: https://docs.rs/about
 [rustwide]: https://github.com/rust-lang/rustwide
