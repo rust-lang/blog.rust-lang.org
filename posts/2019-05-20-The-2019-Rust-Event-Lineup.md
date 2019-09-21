@@ -62,10 +62,11 @@ conference on Twitter][rustlab-tw] for the most up-to-date information.
 
 [The official RustConf][rustconf] will again be taking place in Portland, OR, USA. Thursday is a
 day of trainings and Friday is the main day of talks. See [Twitter][rustconf-tw] for the latest
-announcements!
+announcements! The videos are now [available on YouTube][rustconf-yt].
 
 [rustconf]: https://rustconf.com/
 [rustconf-tw]: https://twitter.com/rustconf
+[rustconf-yt]: https://www.youtube.com/playlist?list=PL85XCvVPmGQhDOUIZBe6u388GydeACbTt
 
 ### September 20-21: Colorado Gold Rust
 
@@ -83,6 +84,15 @@ flight! The CFP and ticket sales will open soon. Check [Twitter][rbr-tw] for ann
 
 [rbr]: https://www.rust-belt-rust.com/
 [rbr-tw]: https://twitter.com/rustbeltrust
+
+### October 26th, 2019: Rust.Tokyo
+
+[Rust.Tokyo][rtky] is a one-day conference for Rustaceans with 200+ attendees in Tokyo, Japan.
+The [ticket][tiket] sales are open now, and you can also [follow them on twitter][rttw]!
+
+[rtky]: https://rust.tokyo/
+[tiket]: https://ti.to/rust-tokyo/2019/en
+[rttw]: https://twitter.com/rustlang_tokyo
 
 ### November: RustFest Barcelona
 
