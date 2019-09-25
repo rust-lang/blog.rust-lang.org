@@ -1,6 +1,7 @@
 ---
 title: "New Year's Rust: A Call for Community Blogposts"
 author: "The Rust Core Team"
+layout: post
 ---
 
 'Tis the season for people and communities to reflect and set goals- and the Rust team is

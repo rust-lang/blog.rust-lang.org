@@ -6,7 +6,9 @@
       <div class="highlight"></div>
     </header>
 
-    <div class="publish-date-author">{{month_name post.month}} {{post.day}}, {{post.year}} &middot; {{post.author}}</div>
+    <div class="publish-date-author">{{month_name post.month}} {{post.day}}, {{post.year}} &middot; {{post.author}}
+    {{#if post.has_team}} on behalf of <a href="{{post.team_url}}">{{post.team}}</a> {{/if}}
+    </div>
 
     <div class="post">
       {{{ post.contents }}}

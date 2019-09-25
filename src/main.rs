@@ -159,7 +159,7 @@ impl Generator {
             "post": post,
         });
 
-        self.render_template(path.join(filename), "post", data)?;
+        self.render_template(path.join(filename), &post.layout, data)?;
         Ok(())
     }
 

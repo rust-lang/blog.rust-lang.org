@@ -8,11 +8,12 @@ static POSTS_EXT: &str = "md";
 
 #[derive(Deserialize)]
 #[serde(rename_all = "kebab-case", deny_unknown_fields)]
-struct Manifest {
-    title: String,
-    index_title: String,
-    description: String,
-    maintained_by: String,
+pub(crate) struct Manifest {
+    pub(crate) title: String,
+    pub(crate) index_title: String,
+    pub(crate) description: String,
+    pub(crate) maintained_by: String,
+    pub(crate) requires_team: bool,
 }
 
 #[derive(Serialize)]
@@ -36,7 +37,7 @@ impl Blog {
             let path = entry?.path();
             let ext = path.extension().and_then(|e| e.to_str());
             if path.metadata()?.file_type().is_file() && ext == Some(POSTS_EXT) {
-                posts.push(Post::open(&path)?);
+                posts.push(Post::open(&path, &manifest)?);
             }
         }
 
