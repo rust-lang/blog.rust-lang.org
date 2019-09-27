@@ -33,6 +33,7 @@ better:**
   start on the new async-await syntax;
 - using [wasm-bindgen-futures], you can even bridge Rust Futures with
   [JavaScript promises];
+- the [hyper library][hyper] has [migrated][hyper#1805] to adopt standard Rust futures;
 - finally, in addition to the core runtimes just mentioned,
   async-await support is starting to become available in higher-level
   [web frameworks][wf] as well.
@@ -46,6 +47,8 @@ better:**
 [recently announced]: https://async.rs/blog/announcing-async-std/
 [wf]: https://www.arewewebyet.org/topics/frameworks/
 [JavaScript promises]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+[hyper]: https://github.com/hyperium/hyper/
+[hyper#1805]: https://github.com/hyperium/hyper/issues/1805
 
 ### Restructuring Async I/O in the Rust org
 
