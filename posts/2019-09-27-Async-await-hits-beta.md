@@ -70,13 +70,13 @@ maintained independently.
 [rust-lang org]: https://github.com/rust-lang/
 [Async Foundations WG]: https://rust-lang.github.io/compiler-team/working-groups/async-await/
 [Async Ecosystem WG]: https://github.com/rustasync/team
-[Async Book]: https://github.com/rust-lang/async-book
+[async book]: https://github.com/rust-lang/async-book
 
 **The [Async Foundations WG], meanwhile, will continue, but with a
 shift in focus.** Now that async-await is en route to stabilization,
 the focus will be on polish, such as improving diagnostics, fixing
-smaller bugs, and improving documentation such as the [Async
-Book]. Once progress is made on that, we'll be considering what
+smaller bugs, and improving documentation such as the [async
+book]. Once progress is made on that, we'll be considering what
 features to implement next.
 
 (An aside: this is the first time that we've ever opted to spin *down*
@@ -143,10 +143,12 @@ nest of futures without incurring a per-future cost. As an end-user,
 though, the main thing you'll notice is that **futures feel "lazy"**:
 they don't do anything until you await them.
 
-If you'd like a closer look at how futures work under the hood,
-[withoutboats] gave a [great introduction in this talk][video] from
-[Rust LATAM 2019].
+If you'd like a closer look at how futures work under the hood, take a
+look at [the executor section] of the [async book], or watch the
+[excellent talk][video] that [withoutboats] gave at [Rust LATAM 2019]
+on the topic.
 
+[the executor section]: https://rust-lang.github.io/async-book/02_execution/04_executor.html
 [video]: https://www.youtube.com/watch?v=skos4B5x7qE
 [Rust LATAM 2019]: https://rustlatam.org/
 [withoutboats]: https://rustlatam.org/
