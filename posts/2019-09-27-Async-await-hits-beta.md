@@ -79,6 +79,14 @@ smaller bugs, and improving documentation such as the [Async
 Book]. Once progress is made on that, we'll be considering what
 features to implement next.
 
+(An aside: this is the first time that we've ever opted to spin *down*
+a working group before, and we realized that we don't have a formal
+policy for that. We've [created an issue][gov25] with the [governance
+working group][gov-wg] to look into that for the future.)
+
+[gov25]: https://github.com/rust-lang/wg-governance/issues/25
+[gov-wg]: https://github.com/rust-lang/wg-governance/
+
 ### Async await: a quick primer
 
 So, what is async await? Async-await is a way to write functions that
