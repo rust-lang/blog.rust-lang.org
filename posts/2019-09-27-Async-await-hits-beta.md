@@ -47,7 +47,7 @@ better:**
 [recently announced]: https://async.rs/blog/announcing-async-std/
 [wf]: https://www.arewewebyet.org/topics/frameworks/
 [JavaScript promises]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
-[hyper]: https://github.com/hyperium/hyper/
+[hyper]: https://hyper.rs
 [hyper#1805]: https://github.com/hyperium/hyper/issues/1805
 
 ### Restructuring Async I/O in the Rust org
