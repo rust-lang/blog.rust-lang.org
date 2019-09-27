@@ -139,7 +139,7 @@ some overhead for each future that is created.
 
 In contrast, in Rust, calling an async function does not do any
 scheduling in and of itself, which means that we can compose a complex
-nest of futures without incurring a "per-future cost". As an end-user,
+nest of futures without incurring a per-future cost. As an end-user,
 though, the main thing you'll notice is that **futures feel "lazy"**:
 they don't do anything until you await them.
 
