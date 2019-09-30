@@ -52,11 +52,11 @@ better:**
 
 ### Restructuring Async I/O in the Rust org
 
-Now that async-await is stable, we are taking the opportunity to make
-some changes to our Rust team structure. The current structure
-includes two working groups: the [Async Foundations WG], focused on
-building up core language support, and the [Async Ecosystem WG],
-focused on supporting the ecosystem develop. 
+Now that async-await is approaching stable, we are taking the
+opportunity to make some changes to our Rust team structure. The
+current structure includes two working groups: the [Async Foundations
+WG], focused on building up core language support, and the [Async
+Ecosystem WG], focused on supporting the ecosystem develop.
 
 **In light of all the activity going on in the ecosystem, however,
 there it not as much need for the [Async Ecosystem WG], and as such
