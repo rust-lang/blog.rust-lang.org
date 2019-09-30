@@ -2,7 +2,15 @@
 <header class="mt3 mt0-ns mb6-ns">
   <div class="container flex flex-column flex-row-l justify-between-l">
     <div class="mw8-l">
-      <h1>Blog</h1>
+      <h1>Posts</h1>
+    </div>
+  </div>
+  <div class="container flex flex-column flex-row-l justify-between-l">
+    <div class="mw8-l">
+      <b>See also:</b>
+      {{#each other_blogs}}
+              <a href="{{url}}">{{name}}</a>
+      {{/each}}
     </div>
   </div>
 </header>

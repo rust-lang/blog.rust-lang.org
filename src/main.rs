@@ -131,10 +131,18 @@ impl Generator {
     }
 
     fn render_index(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+        let other_blogs: Vec<_> = self.blogs.iter().filter(|b| b.index_title() != blog.index_title())
+            .map(|other_blog| json!({
+                "name": other_blog.index_title(),
+                "url": other_blog.prefix().join("index.html"),
+            }))
+            .collect();
+
         let data = json!({
             "title": blog.index_title(),
             "parent": "layout",
             "blog": blog,
+            "other_blogs": other_blogs,
         });
         self.render_template(blog.prefix().join("index.html"), "index", data)?;
         Ok(())
