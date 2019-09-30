@@ -158,7 +158,7 @@ on the topic.
 [the executor section]: https://rust-lang.github.io/async-book/02_execution/04_executor.html
 [video]: https://www.youtube.com/watch?v=skos4B5x7qE
 [Rust LATAM 2019]: https://rustlatam.org/
-[withoutboats]: https://rustlatam.org/
+[withoutboats]: https://github.com/withoutboats
 
 ### Summary
 
