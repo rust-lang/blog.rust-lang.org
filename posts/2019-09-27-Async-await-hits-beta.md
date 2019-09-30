@@ -34,10 +34,14 @@ better:**
 - using [wasm-bindgen-futures], you can even bridge Rust Futures with
   [JavaScript promises];
 - the [hyper library][hyper] has [migrated][hyper#1805] to adopt standard Rust futures;
-- finally, in addition to the core runtimes just mentioned,
-  async-await support is starting to become available in higher-level
+- the 0.3.0 version of the [futures-rs library][futures] will support
+  async-await and will be released by the time async-await hits stable
+  (you can use the [0.3.0-alpha][] releases now);
+- finally, async-await support is starting to become available in higher-level
   [web frameworks][wf] as well.
   
+[futures]: https://crates.io/crates/futures-preview
+[0.3.0-alpha]: https://rust-lang-nursery.github.io/futures-rs/blog/2018/07/19/futures-0.3.0-alpha.1.html
 [wasm-bindgen-futures]: https://docs.rs/crate/wasm-bindgen-futures/0.2.16
 [tokio]: https://tokio.rs/
 [actix]: https://actix.rs/
