@@ -28,7 +28,7 @@ async-await, you also need strong libraries and a vibrant ecosystem.
 better:** 
 
 - the async runtime [tokio], for example, recently announced an [alpha
-  release][] that supports async-await;
+  release][] based on async-await;
 - the [recently announced][] [async-std][] library was built from the
   start on the new async-await syntax;
 - using [wasm-bindgen-futures], you can even bridge Rust Futures with
@@ -39,7 +39,7 @@ better:**
   [web frameworks][wf] as well.
   
 [wasm-bindgen-futures]: https://docs.rs/crate/wasm-bindgen-futures/0.2.16
-[tokio]: https://actix.rs/
+[tokio]: https://tokio.rs/
 [actix]: https://actix.rs/
 [alpha release]: https://tokio.rs/blog/2019-08-alphas/
 [adding support]: https://github.com/actix/actix-web/issues/955#issuecomment-523266936
