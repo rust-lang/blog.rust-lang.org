@@ -13,6 +13,7 @@ pub(crate) struct Manifest {
     pub(crate) index_title: String,
     pub(crate) description: String,
     pub(crate) maintained_by: String,
+    pub(crate) index_html: String,
     pub(crate) requires_team: bool,
 }
 
@@ -22,6 +23,7 @@ pub(crate) struct Blog {
     index_title: String,
     description: String,
     maintained_by: String,
+    index_html: String,
     #[serde(serialize_with = "add_postfix_slash")]
     prefix: PathBuf,
     posts: Vec<Post>,
@@ -55,6 +57,7 @@ impl Blog {
             index_title: manifest.index_title,
             description: manifest.description,
             maintained_by: manifest.maintained_by,
+            index_html: manifest.index_html,
             prefix,
             posts,
         })

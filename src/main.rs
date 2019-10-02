@@ -134,7 +134,7 @@ impl Generator {
         let other_blogs: Vec<_> = self.blogs.iter().filter(|b| b.index_title() != blog.index_title())
             .map(|other_blog| json!({
                 "name": other_blog.index_title(),
-                "url": other_blog.prefix().join("index.html"),
+                "url": PathBuf::from("/").join(other_blog.prefix()).join("index.html"),
             }))
             .collect();
 
