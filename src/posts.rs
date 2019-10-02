@@ -102,7 +102,7 @@ impl Post {
 
         // Enforce extra conditions
         if manifest.requires_team && team_string.is_none() {
-            panic!("blog post at path `{}` lacks team/team_url metadata", path.display());
+            panic!("blog post at path `{}` lacks team metadata", path.display());
         }
 
         // If they supplied team, it should look like `team-text <team-url>`
