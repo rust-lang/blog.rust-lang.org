@@ -133,7 +133,7 @@ impl Generator {
     fn render_index(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
         let other_blogs: Vec<_> = self.blogs.iter().filter(|b| b.index_title() != blog.index_title())
             .map(|other_blog| json!({
-                "name": other_blog.index_title(),
+                "name": other_blog.title(),
                 "url": PathBuf::from("/").join(other_blog.prefix()).join("index.html"),
             }))
             .collect();
