@@ -15,6 +15,7 @@ pub(crate) struct Manifest {
     pub(crate) maintained_by: String,
     pub(crate) index_html: String,
     pub(crate) requires_team: bool,
+    pub(crate) link_text: String,
 }
 
 #[derive(Serialize)]
