@@ -9,12 +9,26 @@ static POSTS_EXT: &str = "md";
 #[derive(Deserialize)]
 #[serde(rename_all = "kebab-case", deny_unknown_fields)]
 pub(crate) struct Manifest {
+    /// Title to display in the "top row".
     pub(crate) title: String,
+
+    /// Title to use in the html header.
     pub(crate) index_title: String,
+
+    /// Description for metadata
     pub(crate) description: String,
+
+    /// Who maintains this blog? Appears in the rss feed.
     pub(crate) maintained_by: String,
+
+    /// Raw html describing the blog to insert into the index page.
     pub(crate) index_html: String,
+
+    /// If true, posts require a `team` in their metadata.
     pub(crate) requires_team: bool,
+
+    /// What text to use when linking to this blog in the "see also"
+    /// section from other blogs.
     pub(crate) link_text: String,
 }
 
@@ -22,6 +36,7 @@ pub(crate) struct Manifest {
 pub(crate) struct Blog {
     title: String,
     index_title: String,
+    link_text: String,
     description: String,
     maintained_by: String,
     index_html: String,
@@ -59,6 +74,7 @@ impl Blog {
             description: manifest.description,
             maintained_by: manifest.maintained_by,
             index_html: manifest.index_html,
+            link_text: manifest.link_text,
             prefix,
             posts,
         })
@@ -66,6 +82,10 @@ impl Blog {
 
     pub(crate) fn title(&self) -> &str {
         &self.title
+    }
+
+    pub(crate) fn link_text(&self) -> &str {
+        &self.link_text
     }
 
     pub(crate) fn index_title(&self) -> &str {
