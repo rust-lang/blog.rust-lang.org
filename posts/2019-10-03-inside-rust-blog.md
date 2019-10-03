@@ -2,7 +2,6 @@
 layout: post
 title: "Announcing the Inside Rust blog"
 author: Niko Matsakis
-release: true
 ---
 
 Today we're happy to announce that we're starting a second blog, the
