@@ -8,19 +8,38 @@ static POSTS_EXT: &str = "md";
 
 #[derive(Deserialize)]
 #[serde(rename_all = "kebab-case", deny_unknown_fields)]
-struct Manifest {
-    title: String,
-    index_title: String,
-    description: String,
-    maintained_by: String,
+pub(crate) struct Manifest {
+    /// Title to display in the "top row".
+    pub(crate) title: String,
+
+    /// Title to use in the html header.
+    pub(crate) index_title: String,
+
+    /// Description for metadata
+    pub(crate) description: String,
+
+    /// Who maintains this blog? Appears in the rss feed.
+    pub(crate) maintained_by: String,
+
+    /// Raw html describing the blog to insert into the index page.
+    pub(crate) index_html: String,
+
+    /// If true, posts require a `team` in their metadata.
+    pub(crate) requires_team: bool,
+
+    /// What text to use when linking to this blog in the "see also"
+    /// section from other blogs.
+    pub(crate) link_text: String,
 }
 
 #[derive(Serialize)]
 pub(crate) struct Blog {
     title: String,
     index_title: String,
+    link_text: String,
     description: String,
     maintained_by: String,
+    index_html: String,
     #[serde(serialize_with = "add_postfix_slash")]
     prefix: PathBuf,
     posts: Vec<Post>,
@@ -36,7 +55,7 @@ impl Blog {
             let path = entry?.path();
             let ext = path.extension().and_then(|e| e.to_str());
             if path.metadata()?.file_type().is_file() && ext == Some(POSTS_EXT) {
-                posts.push(Post::open(&path)?);
+                posts.push(Post::open(&path, &manifest)?);
             }
         }
 
@@ -54,6 +73,8 @@ impl Blog {
             index_title: manifest.index_title,
             description: manifest.description,
             maintained_by: manifest.maintained_by,
+            index_html: manifest.index_html,
+            link_text: manifest.link_text,
             prefix,
             posts,
         })
@@ -61,6 +82,10 @@ impl Blog {
 
     pub(crate) fn title(&self) -> &str {
         &self.title
+    }
+
+    pub(crate) fn link_text(&self) -> &str {
+        &self.link_text
     }
 
     pub(crate) fn index_title(&self) -> &str {

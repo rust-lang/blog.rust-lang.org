@@ -131,10 +131,18 @@ impl Generator {
     }
 
     fn render_index(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+        let other_blogs: Vec<_> = self.blogs.iter().filter(|b| b.index_title() != blog.index_title())
+            .map(|other_blog| json!({
+                "link_text": other_blog.link_text(),
+                "url": PathBuf::from("/").join(other_blog.prefix()).join("index.html"),
+            }))
+            .collect();
+
         let data = json!({
             "title": blog.index_title(),
             "parent": "layout",
             "blog": blog,
+            "other_blogs": other_blogs,
         });
         self.render_template(blog.prefix().join("index.html"), "index", data)?;
         Ok(())
@@ -159,7 +167,7 @@ impl Generator {
             "post": post,
         });
 
-        self.render_template(path.join(filename), "post", data)?;
+        self.render_template(path.join(filename), &post.layout, data)?;
         Ok(())
     }
 
