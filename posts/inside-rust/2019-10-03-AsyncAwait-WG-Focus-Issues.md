@@ -51,13 +51,14 @@ important than the rest.
 You can help in two ways:
 
 * **Fix bugs!** If you'd like to take a shot at fixing a bug, try to
-  come to the triage meeting or just show up in Zulip. Maybe we can
-  find something for you.
-* **Nominate bugs!** If you've got a bug that you think is really
+  come to the [triage meeting] or just show up in
+  [`#wg-async-foundations` on Zulip][z]. Maybe we can find something
+  for you.
+* **Nominate bugs!** If you've got a bug that is really
   annoying you, feel free to "nominate it" by [following the
   instructions here][nom]. This will help us to fix the things that
   are bothering people the most.
 
+[triage meeting]: https://rust-lang.github.io/compiler-team/working-groups/async-await/#triage-meeting
 [nom]: https://rust-lang.github.io/compiler-team/working-groups/async-await/#nominating-issues
-
-
+[z]: https://rust-lang.zulipchat.com/#narrow/stream/187312-wg-async-foundations
