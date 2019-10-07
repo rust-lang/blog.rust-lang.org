@@ -11,7 +11,7 @@ ambitions of dyed-in-the-wool systems hackers.
 
 It's been two years since Rust 1.0 was released. Happy second birthday, Rust!
 
-![Group picture from RustFest Berlin][group-pic]{:class="center"}
+![Group picture from RustFest Berlin][group-pic]
 
 *Rustaceans at RustFest Berlin, September 2016. Picture by Fiona Castiñeira*
 
@@ -231,7 +231,7 @@ release mode will often be **five times as fast** with incremental compilation!
 This graph shows the improvements in compilation time when making changes to
 various parts of the regex crate and rebuilding in release mode:
 
-![Graph showing improved time with incremental compilation][incrcomp-svg]{:class="center"}
+![Graph showing improved time with incremental compilation][incrcomp-svg]
 
 Try out incremental compilation on nightly Rust with
 `CARGO_INCREMENTAL=1 cargo <command>`!

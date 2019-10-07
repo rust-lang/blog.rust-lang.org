@@ -110,7 +110,7 @@ time with a different value for `a`. For the first time around, `a` will be
      /     /   \
     a=1   b=2  c=3
 -->
-![Initial Computation of a+b×c][algebra-initial]{:class="center"}
+![Initial Computation of a+b×c][algebra-initial]
 
 Assume that we "saved" the intermediate results at each step, that is, we
 remember somewhere that `b×c` is `6` and `a+b×c` is `7`. Now, in the second
@@ -129,7 +129,7 @@ entire, tedious multiplication.
     a=4   b=2  c=3
 -->
 
-![Updating the Computation][algebra-update]{:class="center"}
+![Updating the Computation][algebra-update]
 
 Let's see how this scheme translates to the compiler.
 
@@ -158,7 +158,7 @@ produce:
     >===========>===============>===========>===========>
         parse       analysis       codegen     linking
 -->
-![Compiler Phases and their By-Products][compiler-phases]{:class="center"}
+![Compiler Phases and their By-Products][compiler-phases]
 
 First the compiler will parse the source code into an abstract syntax tree
 (AST). The AST then goes through the analysis phase which produces type
@@ -214,7 +214,7 @@ practice:
      /    /   \
     a    b     c
 -->
-![Dependency Graph of a+b×c][algebra-dep-graph]{:class="center"}
+![Dependency Graph of a+b×c][algebra-dep-graph]
 
 As you can see, we have nodes for the inputs `a`, `b`, and `c`, and nodes for
 the intermediate results `b×c` and `a+b×c`. The edges should come as no
@@ -232,7 +232,7 @@ add another intermediate result `b×c+c` to our computation:
      /    /   \ /
     a    b     c
 -->
-![Example of a non-tree Dependency Graph][algebra-dep-graph-dag]{:class="center"}
+![Example of a non-tree Dependency Graph][algebra-dep-graph-dag]
 
 What makes this data structure really useful is that we can ask it questions
 of the form "if X has changed, is Y still up-to-date?". We just take the node
@@ -271,7 +271,7 @@ have all our data nicely linked up, mostly automatically:
         parse       analysis       codegen     linking
 -->
 
-![Dependency Graph of Compilation Data][compiler-dep-graph]{:class="center"}
+![Dependency Graph of Compilation Data][compiler-dep-graph]
 
 This dependency graph is then stored in the incremental compilation cache
 directory along with the cache entries it describes.
@@ -291,7 +291,7 @@ are not up-to-date anymore and just remove them from the cache:
     >===========>===============>===========>===========>
         parse       analysis       codegen     linking
 -->
-![Using the Dependency Graph to Validate the Incremental Compilation Cache][compiler-cache-purge]{:class="center"}
+![Using the Dependency Graph to Validate the Incremental Compilation Cache][compiler-cache-purge]
 
 Anything that has survived this cache validation phase can safely be re-used
 during the current compilation session.
@@ -355,7 +355,7 @@ much time is spent in each one on average:
 
 TIME:    5%            20%         **65%**       10%
 -->
-![Relative Cost of Compilation Phases][compiler-phases-cost]{:class="center"}
+![Relative Cost of Compilation Phases][compiler-phases-cost]
 
 As you can see, the Rust compiler spends most of its time in the optimization
 and codegen passes. Consequently, if this phase can be skipped at least for
@@ -384,7 +384,7 @@ of a crate's object files can be re-used. This might occur when changing one
 crate in a multi-crate project and downstream crates need to be rebuilt but
 are not really affected.
 
-![Normalized Incremental Compilation Build Times][performance-full-re-use]{:class="center"}
+![Normalized Incremental Compilation Build Times][performance-full-re-use]
 
 As you can see, compiling a crate for the first time in incremental mode can be
 slower than compiling it in non-incremental mode. This is because the dependency
@@ -409,7 +409,7 @@ scratch.
 The next graph shows which impact various changes made to the `regex` crate
 have on incremental rebuild times:
 
-![Build Times After Specific Changes][performance-changes]{:class="center"}
+![Build Times After Specific Changes][performance-changes]
 
 The numbers show that the effectiveness of incremental compilation indeed depends a
 lot on the type of change applied to the code. For changes with very local

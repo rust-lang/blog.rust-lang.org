@@ -36,7 +36,7 @@ teams, and just under half of the total number of people paid to work on
 Rust. (You can read detailed whitepapers about putting Rust into
 production [here](https://www.rust-lang.org/en-US/whitepapers.html).)
 
-![Graphs of Rust team growth][team]{:class="center"}
+![Graphs of Rust team growth][team]
 
 [team]: /images/2018-05-Third-Birthday/team.png
 
