@@ -24,7 +24,7 @@ any web server to check it out in your browser:
 
 ```console
 > cd site
-> python -m SimpleHTTPServer 
+> python3 -m http.server
 ```
 
 The site is now available at <0.0.0.0:8000>.
