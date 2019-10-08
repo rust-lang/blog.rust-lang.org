@@ -247,14 +247,24 @@ h3, .post h2, header h2 {
   letter-spacing: normal;
 }
 
-.post h2 {
-  font-size: 2em;
-}
+.post {
+  h2 {
+    font-size: 2em;
+  }
 
-.post img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .right-thumbnail {
+    float: right;
+    width: 150px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    clear: right;
+  }
 }
 
 header h1 {
