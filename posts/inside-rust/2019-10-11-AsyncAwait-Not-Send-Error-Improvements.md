@@ -121,9 +121,25 @@ async fn bar(x: &Mutex<u32>) {
 ```
 
 ```rust
-enum BarGenerator {
-    Unresumed { x: &Mutex<u32>, g: MutexGuard<'_, u32>, },
-    Suspend0 { x: &Mutex<u32>, g: MutexGuard<'_, u32>, }
+enum BarAsyncFnGenerator {
+    Unresumed {
+        // async fn params
+        x: &Mutex<u32>,
+    },
+
+    Suspend0 {
+        // future being polled: baz_fut = baz()
+        baz_fut: BazAsyncFnGenerator,
+
+        // locals that cross the await point
+        x: &Mutex<u32>,
+        g: MutexGuard<'_, u32>,
+    },
+
+    Return(
+        // value returned by the future
+        ()
+    )
 }
 ```
 
