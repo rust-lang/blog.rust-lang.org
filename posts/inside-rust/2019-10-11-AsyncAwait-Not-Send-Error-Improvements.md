@@ -166,7 +166,7 @@ async fn bar(x: &Mutex<u32>) {
 } // <- `g` is dropped here
 ```
 
-`bar` unlocks the mutex before `await`ing `baz`. `std::sync::MutexGuard<u32>` does not implement
+`bar` locks the mutex before `await`ing `baz`. `std::sync::MutexGuard<u32>` does not implement
 `Send` and lives across the `baz().await` point (because `g` is dropped at the end of the scope)
 which causes the entire future not to implement `Send`.
 
