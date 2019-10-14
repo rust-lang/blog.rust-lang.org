@@ -269,5 +269,5 @@ note: future does not implement `std::marker::Send` as this value is used across
 [send_doc]: https://doc.rust-lang.org/std/marker/trait.Send.html
 [compiler_team]: https://rust-lang.github.io/compiler-team
 [rustc_guide]: https://rust-lang.github.io/rustc-guide
-[pr64895]: https://github.com/rust-lang/rust/pulls/64895
+[pr64895]: https://github.com/rust-lang/rust/pull/64895
 [play]: https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=7e80a8bc151df8817e0983e55bf2667a
