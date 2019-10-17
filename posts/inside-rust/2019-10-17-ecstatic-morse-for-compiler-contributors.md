@@ -16,5 +16,5 @@ to validate the bodies of `const`s and `const fn`s
 Congratulations [@ecstatic-morse], and thanks!
 
 [@ecstatic-morse]: https://github.com/ecstatic-morse
-[compiler-contributors]: https://rust-lang.github.io/rfcs/2689-compiler-team-contributors.html
+[compiler contributors]: https://rust-lang.github.io/rfcs/2689-compiler-team-contributors.html
 [rust-lang/rust#64470]: https://github.com/rust-lang/rust/pull/64470
