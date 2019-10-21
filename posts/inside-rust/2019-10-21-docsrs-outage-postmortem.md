@@ -75,7 +75,7 @@ UTC.
 
 * Update the docs.rs source code to cleanup the offending directory
   automatically.
-* Add alerts when the available disk space on a server reaches 10%.
+* Add alerts when the available disk space on a server is below 10%.
 * Add alerts when most of the builds are failing.
 * Revisit the on-call rotation to make sure everyone on it has the
   permissions to either react to the incidents or escalate.
