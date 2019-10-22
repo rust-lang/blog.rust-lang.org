@@ -31,6 +31,8 @@ This group is a great fit for anyone who is familiar with LLVM and who would lik
 * reducing LLVM IR to minimal problem cases;
 * and so forth.
 
+(For that matter, feel freeo to join the group even if you're *not* all that familiar with LLVM -- no better way to learn!)
+
 ### What's with the name ICE-breaker anyway?
 
 An "ICE" is an "internal compiler error". It actually refers specifically to the case where the compiler panics (which tends to be an easy sort of bug to fix). In fact, very few LLVM bugs cause real ICEs, but the name was too good to pass up.
