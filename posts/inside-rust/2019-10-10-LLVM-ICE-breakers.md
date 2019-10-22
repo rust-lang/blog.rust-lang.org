@@ -22,6 +22,15 @@ There are a few other things associated with the group too, however. For example
 
 The goal is to identify "self-contained" bugs that are unlikely to require large-scale compiler refactorings or to get entangled in other big projects.
 
+### Who should join?
+
+This group is a great fit for anyone who is familiar with LLVM and who would like to learn more about Rust or to get more involved in the Rust project. Even if you don't have time to open PRs against rustc, there are many other ways to help:
+
+* identifying open LLVM bugs that we may be running into;
+* reducing Rust sources to minimal reducers;
+* reducing LLVM IR to minimal problem cases;
+* and so forth.
+
 ### What's with the name ICE-breaker anyway?
 
 An "ICE" is an "internal compiler error". It actually refers specifically to the case where the compiler panics (which tends to be an easy sort of bug to fix). In fact, very few LLVM bugs cause real ICEs, but the name was too good to pass up.
