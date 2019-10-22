@@ -10,7 +10,7 @@ Today I'm announcing a new experiment in the compiler team, the **LLVM ICE-break
 
 ### What is the LLVM ICE-breaker group?
 
-At its heart, the LLVM ICE-breaker group is just a list of people who would like to be notified when we come across LLVM bugs. You can add yourself to this list very easily -- just [open a PR]! Once you do so, you'll start to get pings when we come across suitable bugs. If you have some time, maybe you can fix one of them, or at least offer some words of wisdom to help somebody else figure out what's going on.
+At its heart, the LLVM ICE-breaker group is just a list of people who would like to be notified when we come across LLVM bugs. You can add yourself to this list very easily -- just [open a PR]! When we come across a suitable bug, we'll write a message that `@`-mentions every Github user on that list. If you have some time, maybe you can fix one of them, or at least offer some words of wisdom to help somebody else figure out what's going on.
 
 [open a PR]: https://rust-lang.github.io/rustc-guide/ice-breaker/about.html#join
 
