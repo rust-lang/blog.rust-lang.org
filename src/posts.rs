@@ -63,6 +63,7 @@ impl Post {
         // next, the contents. we add + to get rid of the final "---\n\n"
         let options = ComrakOptions {
             ext_header_ids: Some(String::new()),
+            unsafe_: true, // Allow rendering of raw HTML
             ..ComrakOptions::default()
         };
 
