@@ -65,6 +65,7 @@ UTC.
 - 02:06: [Mark-Simulacrum] joins into the operations channel
 - 08:19: [pietroalbini] added builds failed during the outage back into the
   queue
+- **19:27: builds of the crates failed during the outage finished**
 
 [ashleygwilliams]: https://github.com/ashleygwilliams
 [QuietMisdreavus]: https://github.com/QuietMisdreavus
