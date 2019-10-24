@@ -1,0 +1,46 @@
+---
+layout: post
+title: "Clippy is removing its plugin interface"
+author: Philipp Krones
+description: "Now that compiler plugins are deprecated, Clippy is also removing its plugin interface"
+team: the Dev tools team (Clippy) <https://www.rust-lang.org/governance/teams/dev-tools#clippy>
+---
+
+Today we're announcing, that Clippy will completely remove its plugin interface.
+Using the plugin interface is deprecated for about one and a half year now
+([rust-lang/rust-clippy#2712]) and emits an unsilenceable warning since then.
+Now that compiler plugins are officially deprecated ([rust-lang/rust#64675]),
+Clippy will remove its support for the plugin interface completely
+([rust-lang/rust-clippy#4714]).
+
+[rust-lang/rust-clippy#2712]: https://github.com/rust-lang/rust-clippy/pull/2712
+[rust-lang/rust#64675]: https://github.com/rust-lang/rust/pull/64675
+[rust-lang/rust-clippy#4714]: https://github.com/rust-lang/rust-clippy/pull/4714
+
+### How do I migrate from the plugin interface?
+
+Since some crates are still using the Clippy plugin interface, we want to
+provide a guide on how to migrate to `cargo clippy`.
+
+1. `Cargo.toml`: Remove every occurrence of the `clippy` dependency and the
+   `clippy` feature.
+2. Completely remove every occurrence of `feature(plugin)` and `plugin(clippy)`.
+3. Replace every occurrence of `feature = "clippy"` with `feature =
+   "cargo-clippy"`. The `cargo-clippy` feature is automatically enabled when
+   running `cargo clippy`.
+4. CI: You now have to install Clippy via rustup, with `rustup component add
+   clippy`. Once it is installed you can just run `cargo clippy` (for more usage
+   instructions, see the [Clippy `README`]). Note that Clippy is not included in
+   every nightly, but you can check its availability on the [rustup components
+   history] page.
+
+[Clippy `README`]: https://github.com/rust-lang/rust-clippy#usage
+[rustup components history]: https://rust-lang.github.io/rustup-components-history/index.html
+
+### Where should I go if I have more questions?
+
+If you need help with migrating from the plugin interface, you can contact us
+via [Discord] or open an issue on [GitHub].
+
+[Discord]: https://discord.gg/vNNtpyD
+[GitHub]: https://github.com/rust-lang/clippy/issues/new
