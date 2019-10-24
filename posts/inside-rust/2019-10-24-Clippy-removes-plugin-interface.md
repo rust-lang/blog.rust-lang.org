@@ -2,16 +2,16 @@
 layout: post
 title: "Clippy is removing its plugin interface"
 author: Philipp Krones
-description: "Now that compiler plugins are deprecated, Clippy is also removing its plugin interface"
+description: "Now that compiler plugins are deprecated, Clippy is removing its deprecated plugin interface"
 team: the Dev tools team (Clippy) <https://www.rust-lang.org/governance/teams/dev-tools#clippy>
 ---
 
-Today we're announcing, that Clippy will completely remove its plugin interface.
-Using the plugin interface is deprecated for about one and a half year now
-([rust-lang/rust-clippy#2712]) and emits an unsilenceable warning since then.
-Now that compiler plugins are officially deprecated ([rust-lang/rust#64675]),
-Clippy will remove its support for the plugin interface completely
-([rust-lang/rust-clippy#4714]).
+Today, we're announcing that Clippy will completely remove its plugin interface.
+Using the plugin interface has been deprecated for about one and a half year now
+([rust-lang/rust-clippy#2712]). Since then, unsilenceable warning have been
+emitted.  Now that compiler plugins are officially deprecated
+([rust-lang/rust#64675]), Clippy will remove its support for the plugin
+interface completely ([rust-lang/rust-clippy#4714]).
 
 [rust-lang/rust-clippy#2712]: https://github.com/rust-lang/rust-clippy/pull/2712
 [rust-lang/rust#64675]: https://github.com/rust-lang/rust/pull/64675
@@ -19,8 +19,8 @@ Clippy will remove its support for the plugin interface completely
 
 ### How do I migrate from the plugin interface?
 
-Since some crates are still using the Clippy plugin interface, we want to
-provide a guide on how to migrate to `cargo clippy`.
+If you are still using the Clippy plugin interface, here are some steps you can
+take to migrate to `cargo clippy`.
 
 1. `Cargo.toml`: Remove every occurrence of the `clippy` dependency and the
    `clippy` feature.
