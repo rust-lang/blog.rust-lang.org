@@ -11,7 +11,8 @@ Using the plugin interface has been deprecated for about one and a half year now
 ([rust-lang/rust-clippy#2712]). Since then, unsilenceable warning have been
 emitted.  Now that compiler plugins are officially deprecated
 ([rust-lang/rust#64675]), Clippy will remove its support for the plugin
-interface completely ([rust-lang/rust-clippy#4714]).
+interface completely ([rust-lang/rust-clippy#4714]). This change will hit stable
+with version 1.40.0.
 
 [rust-lang/rust-clippy#2712]: https://github.com/rust-lang/rust-clippy/pull/2712
 [rust-lang/rust#64675]: https://github.com/rust-lang/rust/pull/64675
@@ -29,7 +30,7 @@ take to migrate to `cargo clippy`.
    "cargo-clippy"`. The `cargo-clippy` feature is automatically enabled when
    running `cargo clippy`.
 4. CI: You now have to install Clippy via rustup, with `rustup component add
-   clippy`. Once it is installed you can just run `cargo clippy` (for more usage
+   clippy`. Once installed, you can run `cargo clippy` (for more usage
    instructions, see the [Clippy `README`]). Note that Clippy is not included in
    every nightly, but you can check its availability on the [rustup components
    history] page.
