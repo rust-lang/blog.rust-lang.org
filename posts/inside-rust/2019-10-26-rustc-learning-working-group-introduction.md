@@ -60,9 +60,8 @@ and new folks who want to contribute and learn.
 
 There is no bar to entry in the group. To join the group, you can
 drop a message in [`#t-compiler/wg-learning` on Zulip] introducing
-yourself and maybe if you have ideas on improvements to rustc-guide.
-We would love to hear from you. Hope you will reach out and help improve
-the documentation.
+yourself. We would love to hear from you and hope we all together
+can make the documentation better.
 
 ## Important  resources
 
