@@ -56,7 +56,12 @@ manage and some compiler team veterans are always there to help out!
 We are always in need of help from both existing compiler contributors
 and new folks who want to contribute and learn.
 
-There is no bar to entry. Hope you will reach out and help improve
+## Call for participation
+
+There is no bar to entry in the group. To join the group, you can
+drop a message in [`#t-compiler/wg-learning` on Zulip] introducing
+yourself and maybe if you have ideas on improvements to rustc-guide.
+We would love to hear from you. Hope you will reach out and help improve
 the documentation.
 
 ## Important  resources
@@ -80,3 +85,4 @@ the documentation.
 [Rust Youtube Videos]: https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA/playlists
 [rust-lang/rust]: https://github.com/rust-lang/rust
 [Zulip Stream: `#t-compiler/wg-learning` on Zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning
+[`#t-compiler/wg-learning` on Zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning
