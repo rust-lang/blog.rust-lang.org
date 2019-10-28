@@ -3,7 +3,7 @@ layout: post
 title: "The Rustc Learning Working Group - An Introduction"
 author: Amanjeev Sethi
 description: "introduction learning working group useful links"
-team: the learning working group <https://www.rust-lang.org/governance/teams/compiler#wg-learning>
+team: the rustc learning working group <https://www.rust-lang.org/governance/teams/compiler#wg-learning>
 ---
 
 The [Learning Working Group], formed in April 2019, is focused on making the
