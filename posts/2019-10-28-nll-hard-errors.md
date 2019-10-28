@@ -86,7 +86,7 @@ The most common crates that were affected are the following:
 
 * `url` version 1.7.0 -- you can upgrade to 1.7.2, though you'd be better off upgrading to 2.1.0
 * `nalgebra` version 0.16.13 -- you can upgrade to 0.16.14, though you'd be better off upgrading to 0.19.0
-* `rusttype` version 0.2.0 to 0.2.3 -- you can upgrade to 0.2.4, though you'd be better off looking at upgrading to 0.8.1
+* `rusttype` version 0.2.0 to 0.2.3 -- you can upgrade to 0.2.4, though you'd be better upgrading to 0.8.1
 
 You can find out which crates you rely upon using the [cargo-tree] command. If you find
 that you *do* rely (say) on `url` 1.7.0, you can upgrade to 1.7.2 by executing:
