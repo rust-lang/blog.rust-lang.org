@@ -92,7 +92,7 @@ You can find out which crates you rely upon using the [cargo-tree] command. If y
 that you *do* rely (say) on `url` 1.7.0, you can upgrade to 1.7.2 by executing:
 
 ```bash
-cargo update -p url --vers 1.7.2
+cargo update -p url --precise 1.7.2
 ```
 
 [cargo-tree]: https://crates.io/crates/cargo-tree
