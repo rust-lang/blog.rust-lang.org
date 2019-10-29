@@ -23,9 +23,9 @@ We are accepting ideas about almost anything having to do with Rust: language fe
 
 One big question for this year: will there be a Rust 2021 edition? If so, 2020 would be the year to do a lot of associated work and plan the details. What would the edition's theme be? 
 
-Rust 2015: Stability
-Rust 2018: Productivity
-Rust 2021: ?
+* Rust 2015: Stability
+* Rust 2018: Productivity
+* Rust 2021: ?
 
 Let us know what you think!
 
