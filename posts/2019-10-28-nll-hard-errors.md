@@ -29,8 +29,8 @@ improvement.
 What is perhaps less well understood is that the new borrow checker
 implementation *also* fixed a lot of bugs. In other words, the new
 borrow checker did not just accept more programs -- **it also rejected
-some programs that never should have been accepted in the first
-place!**
+some programs that were only accepted in the first place due to memory
+unsafety bugs in the old borrow checker!**
 
 [2018]: https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html
 [nll]: https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html#non-lexical-lifetimes
@@ -38,8 +38,10 @@ place!**
 
 ### Until recently, those fixed bugs produced warnings, not errors
 
-As part of our commitment to stability, whenever we find bugs that
-impact existing code in a major way, we try to "phase in" those
+Obviously, we don't want to accept programs that could undermine
+Rust's safety guarantees. At the same time, as part of our commitment
+to stability, we try to avoid making sudden bug fixes that will affect
+a lot of code. Whenever possible, we prefer to "phase in" those
 changes gradually. We usually begin with "Future Compatibility
 Warnings", for example, before moving those warnings to hard errors
 (sometimes a small bit at a time). Since the bug fixes to the borrow
