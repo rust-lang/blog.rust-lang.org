@@ -34,7 +34,7 @@ the new syntax:
 * the [tokio] runtime [recently announced a number of scheduler
   improvements][tokio-sched], and they are planning a stable release
   in November that supports async-await syntax;
-* the [async-std] runtime [has been putting out weekly releases for the past months][as-releases], and plans to make their
+* the [async-std] runtime [has been putting out weekly releases for the past few months][as-releases], and plans to make their
   1.0 release shortly after async-await hits stable;
 * using [wasm-bindgen-futures], you can even bridge Rust Futures with
   [JavaScript promises];
