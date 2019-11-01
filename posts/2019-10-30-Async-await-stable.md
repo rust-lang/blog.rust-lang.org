@@ -14,7 +14,7 @@ be an increasingly important part of Rust's story.
 
 While this first release of "async-await" is a momentous event, it's
 also only the beginning. The current support for async-await marks a
-kind of "Minimum Viable Product" (MVP), and we expect to be polishing,
+kind of "Minimum Viable Product" (MVP). We expect to be polishing,
 improving, and extending it for some time.
 
 Already, in the time since [async-await hit beta][aa-beta], we've made
