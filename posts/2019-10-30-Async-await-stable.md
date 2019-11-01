@@ -101,7 +101,7 @@ async fn another_function() {
 This example shows the first difference between Rust and other
 languages: we write `future.await` instead of `await future`. This
 syntax integrates better with Rust's `?` operator for propagating
-errors (which, after all, are very common in I/O). One can simply
+errors (which, after all, are very common in I/O). You can simply
 write `future.await?` to await the result of a future and propagate
 errors. It also has the advantage of making method chaining painless.
 
