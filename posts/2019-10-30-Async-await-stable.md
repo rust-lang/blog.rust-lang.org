@@ -19,7 +19,7 @@ improving, and extending it for some time.
 
 Already, in the time since [async-await hit beta][aa-beta], we've made
 a lot of great progress -- including making some [key diagnostic
-improvements][diag] that help to make async-await errors **far** more
+improvements][diag] that help to make async-await errors more
 approachable. If you'd like to get involved in that work, check out
 the [Async Foundations Working Group][wg] -- if nothing else, you can
 help us by filing bugs about polish issues or by [nominating those bugs
