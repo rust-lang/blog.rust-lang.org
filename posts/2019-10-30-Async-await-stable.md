@@ -61,7 +61,7 @@ the new syntax:
 [async-std]: https://async.rs/
 [wf]: https://www.arewewebyet.org/topics/frameworks/
 
-### Async await: a quick primer
+### Async-await: a quick primer
 
 *(This section and the next are reproduced from the ["Async-await hits
 beta!"][aa-beta] post.)*
