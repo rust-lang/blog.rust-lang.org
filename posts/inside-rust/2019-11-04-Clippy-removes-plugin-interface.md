@@ -1,7 +1,9 @@
 ---
 layout: post
 title: "Clippy is removing its plugin interface"
-author: Dev tools team (Clippy) <https://www.rust-lang.org/governance/teams/dev-tools#clippy>
+author: Philipp Krones
+description: "Now that compiler plugins are deprecated, Clippy is removing its deprecated plugin interface"
+team: the Dev tools team (Clippy) <https://www.rust-lang.org/governance/teams/dev-tools#clippy>
 ---
 
 ### Does this post affect me?
