@@ -4,6 +4,20 @@ title: "Clippy is removing its plugin interface"
 author: Dev tools team (Clippy) <https://www.rust-lang.org/governance/teams/dev-tools#clippy>
 ---
 
+### Does this post affect me?
+
+Most likely, no. This post only affects you, if you're still using Clippy
+through its plugin interface. If you do so, you get the warning
+
+```
+warning: the clippy plugin is being deprecated, please use cargo clippy or rls with the clippy feature
+```
+
+when compiling your crate. If you don't see this warning, nothing will change
+for you.
+
+### What is removed and why?
+
 Today, we're announcing that Clippy will completely remove its plugin interface.
 Using the plugin interface has been deprecated for about one and a half year now
 ([rust-lang/rust-clippy#2712]). Since then, unsilenceable warning have been
