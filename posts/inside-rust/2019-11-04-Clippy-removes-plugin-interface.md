@@ -6,6 +6,18 @@ description: "Now that compiler plugins are deprecated, Clippy is removing its d
 team: the Dev tools team (Clippy) <https://www.rust-lang.org/governance/teams/dev-tools#clippy>
 ---
 
+Today, we're announcing that Clippy will completely remove its plugin interface.
+Using the plugin interface has been deprecated for about one and a half year now
+([rust-lang/rust-clippy#2712]). Since then, an unsilenceable warning has been
+emitted. Now that compiler plugins are officially deprecated
+([rust-lang/rust#64675]), Clippy will remove its support for the plugin
+interface completely ([rust-lang/rust-clippy#4714]). This change will hit stable
+with version 1.40.0.
+
+[rust-lang/rust-clippy#2712]: https://github.com/rust-lang/rust-clippy/pull/2712
+[rust-lang/rust#64675]: https://github.com/rust-lang/rust/pull/64675
+[rust-lang/rust-clippy#4714]: https://github.com/rust-lang/rust-clippy/pull/4714
+
 ### Does this post affect me?
 
 Most likely, no. This post only affects you, if you're still using Clippy
@@ -17,20 +29,6 @@ warning: the clippy plugin is being deprecated, please use cargo clippy or rls w
 
 when compiling your crate. If you don't see this warning, nothing will change
 for you.
-
-### What is removed and why?
-
-Today, we're announcing that Clippy will completely remove its plugin interface.
-Using the plugin interface has been deprecated for about one and a half year now
-([rust-lang/rust-clippy#2712]). Since then, unsilenceable warning have been
-emitted.  Now that compiler plugins are officially deprecated
-([rust-lang/rust#64675]), Clippy will remove its support for the plugin
-interface completely ([rust-lang/rust-clippy#4714]). This change will hit stable
-with version 1.40.0.
-
-[rust-lang/rust-clippy#2712]: https://github.com/rust-lang/rust-clippy/pull/2712
-[rust-lang/rust#64675]: https://github.com/rust-lang/rust/pull/64675
-[rust-lang/rust-clippy#4714]: https://github.com/rust-lang/rust-clippy/pull/4714
 
 ### How do I migrate from the plugin interface?
 
