@@ -12,7 +12,7 @@ Using the plugin interface has been deprecated for about one and a half year now
 emitted. Now that compiler plugins are officially deprecated
 ([rust-lang/rust#64675]), Clippy will remove its support for the plugin
 interface completely ([rust-lang/rust-clippy#4714]). This change will hit stable
-with version 1.40.0.
+with version 1.41.0.
 
 [rust-lang/rust-clippy#2712]: https://github.com/rust-lang/rust-clippy/pull/2712
 [rust-lang/rust#64675]: https://github.com/rust-lang/rust/pull/64675
