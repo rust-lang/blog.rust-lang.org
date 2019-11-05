@@ -8,9 +8,9 @@ author: Niko Matsakis
 Rust, as part of the 1.39.0 release.** This work has been a long time
 in development -- the key ideas for zero-cost futures, for example,
 were [first proposed by Aaron Turon and Alex Crichton in
-2016][zcf-rust]!  -- and we are very proud of the end result! We
-believe that Async I/O -- and async-await in particular -- is going to
-be an increasingly important part of Rust's story.
+2016][zcf-rust]! -- and we are very proud of the end result. We believe
+that Async I/O is going to be an increasingly important part of Rust's
+story.
 
 While this first release of "async-await" is a momentous event, it's
 also only the beginning. The current support for async-await marks a
@@ -18,18 +18,19 @@ kind of "Minimum Viable Product" (MVP). We expect to be polishing,
 improving, and extending it for some time.
 
 Already, in the time since [async-await hit beta][aa-beta], we've made
-a lot of great progress -- including making some [key diagnostic
-improvements][diag] that help to make async-await errors more
+a lot of great progress, including making some [key diagnostic
+improvements][diag] that help to make async-await errors far more
 approachable. To get involved in that work, check out
-the [Async Foundations Working Group][wg] -- if nothing else, you can
-help us by filing bugs about polish issues or by [nominating those bugs
-that are bothering you the most][nom], to help direct our efforts.
+the [Async Foundations Working Group][wg]; if nothing else, you can
+help us by filing bugs about polish issues or by [nominating those
+bugs that are bothering you the most][nom], to help direct our
+efforts.
 
 # Major developments in the async ecosystem
 
 Now that async-await is approaching stabilization, all the major Async
-I/O runtimes are busily at work adding and extending their support for
-the new syntax:
+I/O runtimes are at work adding and extending their support for the
+new syntax:
 
 * the [tokio] runtime [recently announced a number of scheduler
   improvements][tokio-sched], and they are planning a stable release
@@ -81,10 +82,10 @@ To use async-await, you start by writing `async fn` instead of `fn`:
 async fn first_function() -> u32 { .. }
 ```
 
-Unlike a regular function, calling an `async fn` doesn't do anything
-to start -- instead, it returns a `Future`. This is a suspended
-computation that is waiting to be executed. To actually *execute*
-the future, you have to use the `.await` operator:
+Unlike a regular function, calling an `async fn` doesn't have any
+immediate effect. Instead, it returns a `Future`. This is a suspended
+computation that is waiting to be executed. To actually *execute* the
+future, use the `.await` operator:
 
 ```rust
 async fn another_function() {
@@ -111,8 +112,8 @@ The other difference between Rust futures and futures in other
 languages is that they are based on a "poll" model, which makes them
 **zero cost**. In other languages, invoking an async function
 immediately creates a future and schedules it for execution: awaiting
-the future isn't really necessary for it to execute. But this implies
-some overhead for each future that is created. 
+the future isn't necessary for it to execute. But this implies some
+overhead for each future that is created.
 
 In contrast, in Rust, calling an async function does not do any
 scheduling in and of itself, which means that we can compose a complex
