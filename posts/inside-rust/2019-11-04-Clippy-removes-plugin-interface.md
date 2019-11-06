@@ -56,4 +56,4 @@ If you need help with migrating from the plugin interface, you can contact us
 via [Discord] or open an issue on [GitHub].
 
 [Discord]: https://discord.gg/vNNtpyD
-[GitHub]: https://github.com/rust-lang/clippy/issues/new
+[GitHub]: https://github.com/rust-lang/rust-clippy/issues/new
