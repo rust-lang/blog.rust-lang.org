@@ -51,7 +51,7 @@ new syntax:
   [JavaScript promises];
 * the [hyper library][hyper] has [migrated][hyper#1805] to adopt standard Rust futures;
 * the newly released 0.3.0 version of the [futures-rs library][futures] includes support
-  async-await;
+  for async-await;
 * finally, async-await support is starting to become available in higher-level
   [web frameworks][wf] as well, as well as other interesting applications such
   as the [`futures_intrusive`](https://docs.rs/futures-intrusive/0.2.0/futures_intrusive/)
