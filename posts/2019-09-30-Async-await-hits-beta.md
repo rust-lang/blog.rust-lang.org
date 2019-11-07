@@ -167,7 +167,7 @@ a very exciting time! With async-await syntax hitting stable in
 November, it's going to be easier than ever to write futures (in
 particular, if you tried using the combinator-based futures in the
 past, you'll find [async-await integrates much better with Rust's
-borrowing system][bc]). Moreover, there are a now a number of great
+borrowing system][bc]). Moreover, there are now a number of great
 runtimes and other libraries available in the ecosystem to work with.
 So get out there and build stuff! 
 
