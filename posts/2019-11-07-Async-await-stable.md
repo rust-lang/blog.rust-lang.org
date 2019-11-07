@@ -26,12 +26,12 @@ help us by filing bugs about polish issues or by [nominating those
 bugs that are bothering you the most][nom], to help direct our
 efforts.
 
-Many thanks are due to the people who made async-await a reality.  The
+Many thanks are due to the people who made async-await a reality. The
 implementation and design would never have happened without the
 efforts of (in no particular order) cramertj, withoutboats, davidtwco,
-tmandry, gilescope, csmoe, aturon, alexcrichton, Zoxc, and of course
-the many community members who participated in RFC threads and
-discussions over the years.
+tmandry, gilescope, csmoe, aturon, alexcrichton, Zoxc, RalfJ,
+pythonesque, and of course the many community members who participated
+in RFC threads and discussions over the years.
 
 # Major developments in the async ecosystem
 
