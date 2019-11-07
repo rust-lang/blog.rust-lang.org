@@ -56,7 +56,7 @@ new syntax:
   as the [`futures_intrusive`](https://docs.rs/futures-intrusive/0.2.0/futures_intrusive/)
   crate.
 
-[futures]: https://crates.io/crates/futures-preview
+[futures]: https://crates.io/crates/futures
 [tokio]: https://tokio.rs/
 [zcf-rust]: https://aturon.github.io/blog/2016/08/11/futures/
 [wasm-bindgen-futures]: https://docs.rs/crate/wasm-bindgen-futures/0.2.16
