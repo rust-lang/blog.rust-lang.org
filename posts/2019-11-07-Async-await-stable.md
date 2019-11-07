@@ -28,10 +28,13 @@ efforts.
 
 Many thanks are due to the people who made async-await a reality. The
 implementation and design would never have happened without the
-efforts of (in no particular order) cramertj, withoutboats, davidtwco,
-tmandry, gilescope, csmoe, aturon, alexcrichton, Zoxc, RalfJ,
-pythonesque, and of course the many community members who participated
-in RFC threads and discussions over the years.
+leadership of cramertj and withoutboats, the polishing work of the
+[Async Foundations WG][wg] (davidtwco, tmandry, gilescope, csmoe), the
+implementation of generators that futures builds on (Zoxc), the
+foundational work on `Future` and the `Pin` APIs (aturon,
+alexcrichton, RalfJ, pythonesque), and of course the many community
+members who participated in RFC threads and discussions over the
+years.
 
 # Major developments in the async ecosystem
 
