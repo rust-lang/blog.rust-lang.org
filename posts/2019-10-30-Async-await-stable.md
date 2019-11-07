@@ -139,7 +139,7 @@ enabler for a lot of new and exciting developments in Rust. If you've
 tried Async I/O in Rust in the past and had problems -- particularly
 if you tried the combinator-based futures of the past -- you'll find
 [async-await integrates much better with Rust's borrowing
-system][bc]). Moreover, there are a now a number of great runtimes and
+system][bc]. Moreover, there are now a number of great runtimes and
 other libraries available in the ecosystem to work with.  So get out
 there and build stuff!
 
