@@ -24,10 +24,10 @@ the result as a RFC and then if merged provide a version on
 schedule people involved in Rust and other governance structures to come and
 talk about their experiences.
 
-For deciding what topics, we're going to rotate
-who takes the lead for each meeting. It's that person's responsibility to
-decide the topic and to prepare a blog post similar to this informing people of
-the topic and how they might best prepare.
+For deciding what topics, we're going to rotate who takes the lead for each
+meeting. It's that person's responsibility to decide the topic and to
+prepare a call for participation similar to this post informing people of
+the topic and how they might best prepare if they wish to join.
 
 We also hope that having a focused topic will reduce any barrier of expected
 knowledge in order to participate and contribute. With that said let's talk
@@ -37,8 +37,8 @@ about the topic for next meeting.
 
 Our first topic for new meeting is going to be to read [RFC 1068], the
 original Rust Governance RFC, review how accurate it is to today's structure,
-and see any if there are questions that we have that it doesn't answer. There's
-also some other RFCs that are also good to read that are listed below.
+and see any if there are questions that we have that it doesn't answer. Here
+are some other relevant RFCs for additional context:
 
 - ["North Star" RFC] lays out the Rust roadmap process.
 - [Compiler contributors RFC] details the process of contributing to the
@@ -46,16 +46,16 @@ also some other RFCs that are also good to read that are listed below.
 - [Compiler bug fix procedure] defines the best practices for making a bug fix
   to the compiler.
 
-Our next meeting is going to be at **22:00 on Tuesday, November 19th** and we'd
-like to encourage anyone who's interested, regardless of their previous
-experience to read those RFCs and come to the `#wg-governance` channel on
-discord to attend the meeting. (Our meetings are done over a video call with
-Zoom, but we use the discord channel to organise ourselves).
+Our next meeting is going to be at **22:00 UTC on Tuesday, November 19th**
+and we'd like to encourage anyone who's interested, regardless of their
+previous experience to read those RFCs and come to the `#wg-governance`
+channel on discord to attend the meeting. (Our meetings are done over a video
+call with Zoom, but we use the discord channel to organise ourselves).
 
 If some reason you know you won't be able to attend these meetings but would
-still like to participate. We're encouraging for people to post any questions
-they have about Rust's governance they have as [issues on our
-GitHub repository][gh-issues].
+still like to participate. Please feel free to post any questions about Rust's
+governance as [issues on our GitHub repository][gh-issues], even if you are 
+not available to attend the working group's meetings.
 
 [rfc 1068]: https://rust-lang.github.io/rfcs/1068-rust-governance.html
 ["north star" rfc]: https://github.com/rust-lang/rfcs/blob/26197104b7bb9a5a35db243d639aee6e46d35d75/text/1728-north-star.md
