@@ -13,19 +13,19 @@ the members also heavy contributors to the Rust project as a whole, and it can
 be can hard for some people to schedule time write an initial draft.
 
 To address this instead of triaging during the meeting and working on tasks in
-async, we're going to focused topic based meetings, and use the time between
+async, we're going to hold focused topic based meetings, and use the time between
 meetings, to publish posts like this and to research and prepare for the next
 topic. To help do this we're going to extend our current meeting duration from
 30 minutes to an hour. (The meeting will still be every two weeks.)
 
 The current goals are to documenting the de-facto governance structure, provide
 the result as a RFC and then if merged provide a version on
-<forge.rust-lang.org> so that it has greater visbility. We also want to try
+<forge.rust-lang.org> so that it has greater visbility. We also want to
 schedule people involved in Rust and other governance structures to come and
 talk about their experiences.
 
-For deciding what topics, we're going to have rotating person for each meeting
-who takes the lead for the next meeting. It's that person's responsibility to
+For deciding what topics, we're going to rotate
+who takes the lead for each meeting. It's that person's responsibility to
 decide the topic and to prepare a blog post similar to this informing people of
 the topic and how they might best prepare.
 
@@ -35,12 +35,12 @@ about the topic for next meeting.
 
 ## Reviewing & Examining Previous Governance RFCs
 
-Our first topic for new meeting is going to be to read [RFC 1068] aka the
+Our first topic for new meeting is going to be to read [RFC 1068], the
 original Rust Governance RFC, review how accurate it is to today's structure,
 and see any if there are questions that we have that it doesn't answer. There's
 also some other RFCs that are also good to read that are listed below.
 
-- ["North Star" RFC] from 2016 that layouts the Rust roadmap process.
+- ["North Star" RFC] lays out the Rust roadmap process.
 - [Compiler contributors RFC] details the process of contributing to the
   compiler and progression towards joining the compiler team.
 - [Compiler bug fix procedure] defines the best practices for making a bug fix
