@@ -26,3 +26,13 @@ builds even faster.
 
 Our plan is to start running GitHub Actions in parallel with Azure Pipelines in
 the next few weeks, and we’ll keep the community updated as we learn more.
+
+---
+
+**[Update]** Some members of the community asked why we're considering to
+switch away from Azure Pipelines so soon after migrating to it. We want to
+reaffirm that we're happy with Pipelines as a product, but both Microsoft and
+GitHub asked us to try GitHub Actions because it's more closely integrated into
+the GitHub workflow that we already use. After we used it for a while in other
+repositories we were satisfied enough to start evaluating a migration for
+rustc's CI.
