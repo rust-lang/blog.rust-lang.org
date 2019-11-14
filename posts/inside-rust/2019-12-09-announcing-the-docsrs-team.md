@@ -18,11 +18,12 @@ the new Docs.rs Team, leaving [@GuillaumeGomez] to lead the Rustdoc Team. The Do
 welcomes [@pietroalbini], who has been helping out a lot with maintaining the infrastructure and
 operations side of Docs.rs.
 
-To get involved with either team, join us [on Discord]! The Rustdoc Team hangs out in `#rustdoc`,
-and the Docs.rs Team hangs out in `#docs-rs`.
+To get involved with either team, join us on Discord! The Rustdoc Team hangs out in [`#rustdoc`],
+and the Docs.rs Team hangs out in [`#docs-rs`].
 
 [Docs.rs]: https://docs.rs/
 [@QuietMisdreavus]: https://github.com/QuietMisdreavus
 [@GuillaumeGomez]: https://github.com/GuillaumeGomez
 [@pietroalbini]: https://github.com/pietroalbini
-[on Discord]: https://discord.gg/rust-lang
+[`#rustdoc`]: https://discord.gg/4yEYPuT
+[`#docs-rs`]: https://discord.gg/2k5vVWn
