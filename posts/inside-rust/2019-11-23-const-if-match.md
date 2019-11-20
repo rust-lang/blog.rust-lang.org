@@ -78,6 +78,12 @@ be [feature-gated separately][52000], and the `?` operator, which calls
 This change will allow a great number of standard library functions to be made
 `const`. You can help with this process! To get started, here's a [list of
 numeric functions][const-int] that can be constified with little effort.
+Conversion to a `const fn` requires two steps. First, `const` is added to a
+function definition along with a `#[rustc_const_unstable]` attribute. This
+allows nightly users to call it in a const context. Then, after a period of
+experimentation, the attribute is removed and the constness of that function is
+stabilized. See [#61635] for an example of the first step and [#64028] for an
+example of the second.
 
 Personally, I've looked forward to this feature for a long time, and I can't
 wait to start playing with it. If you feel the same, I would greatly
@@ -87,6 +93,8 @@ stack with poorly implemented recursive functions (see `gcd` above), and let
 us know if something goes horribly wrong.
 
 [const-int]: https://github.com/rust-lang/rust/issues/53718
+[#61635]: https://github.com/rust-lang/rust/issues/61635
+[#64028]: https://github.com/rust-lang/rust/pull/64028
 
 ## What took you so long?
 
