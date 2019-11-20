@@ -5,7 +5,7 @@ author: Dylan MacKenzie
 team: WG const-eval <https://github.com/rust-lang/const-eval>
 ---
 
-**TLDR; `if` and `match` are now usable in constants on the latest nightly.** 
+**TLDR; `if` and `match` are now usable in constants on the latest nightly.**
 
 As a result, you can now write code like the following and have it execute at
 compile-time:
