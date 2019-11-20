@@ -145,8 +145,7 @@ want to be here.
 
 [`const-eval`]: https://github.com/rust-lang/const-eval
 [drop]: https://github.com/rust-lang/const-eval/blob/master/static.md#drop
-[interior-mut]:
-https://github.com/rust-lang/const-eval/blob/master/const.md#2-interior-mutability
+[interior-mut]: https://github.com/rust-lang/const-eval/blob/master/const.md#2-interior-mutability
 
 ## Acknowledgements
 
