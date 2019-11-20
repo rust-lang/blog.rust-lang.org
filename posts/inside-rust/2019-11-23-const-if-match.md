@@ -61,7 +61,7 @@ enabled. However, the other assert macros (e.g., `assert_eq`,
 `debug_assert_ne`) remain forbidden, since they need to call `Debug::fmt` on
 their arguments.
 
-Also forbidden are looping constructs, `while`, `for` and `loop`, which will
+Also forbidden are looping constructs, `while`, `for`, and `loop`, which will
 be [feature-gated separately][52000], and the `?` operator, which calls
 `From::from` on the value inside the `Err` variant. The design for
 `const` trait methods is still being discussed.
