@@ -75,12 +75,9 @@ be [feature-gated separately][52000], and the `?` operator, which calls
 
 ## What's next?
 
-This change will allow a great number of standard library functions to be
-made `const`. If you like, you can help with this process! There's a [list of
-numeric functions][const-int] that can be constified with little effort. Be
-aware that things move slowly in the standard library, and it's always best
-to have a concrete use case that demonstrates why this *particular* function
-needs to be callable in a const context.
+This change will allow a great number of standard library functions to be made
+`const`. You can help with this process! To get started, here's a [list of
+numeric functions][const-int] that can be constified with little effort.
 
 Personally, I've looked forward to this feature for a long time, and I can't
 wait to start playing with it. If you feel the same, I would greatly
