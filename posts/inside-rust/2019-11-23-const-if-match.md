@@ -30,7 +30,7 @@ const fn gcd(a: u32, b: u32) -> u32 {
     }
 }
 
-const _: () = assert!(std::mem::size_of::<usize>(), 8, "Only 64-bit platforms are supported");
+const _: () = assert!(std::mem::size_of::<usize>() == 8, "Only 64-bit platforms are supported");
 ```
 
 ## What exactly is going on here?
