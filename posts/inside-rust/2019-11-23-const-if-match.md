@@ -19,6 +19,12 @@ static PLATFORM: &str = if cfg!(unix) {
     "other"
 };
 
+const _: () = assert!(std::mem::size_of::<usize>() == 8, "Only 64-bit platforms are supported");
+```
+
+`if` and `match` can also be used in the body of a `const fn`:
+
+```rust
 const fn gcd(a: u32, b: u32) -> u32 {
     match (a, b) {
         (x, 0) | (0, x) => x,
@@ -30,8 +36,6 @@ const fn gcd(a: u32, b: u32) -> u32 {
         (x, y) => gcd((x-y)/2, y),
     }
 }
-
-const _: () = assert!(std::mem::size_of::<usize>() == 8, "Only 64-bit platforms are supported");
 ```
 
 ## What exactly is going on here?
