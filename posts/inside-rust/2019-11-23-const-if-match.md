@@ -105,14 +105,14 @@ us know if something goes horribly wrong.
 
 ## What took you so long?
 
-[Miri], which rust uses under the hood for compile-time function evaluation,
-has been capable of this for a while now. However, rust needs to statically
-guarantee certain properties about variables in a `const`, such as whether
-they allow for interior mutability or whether they have a `Drop`
-implementation that needs to be called. For example, we must reject the
+[The Miri engine][miri], which rust uses under the hood for compile-time
+function evaluation, has been capable of this for a while now. However, rust
+needs to statically guarantee certain properties about variables in a `const`,
+such as whether they allow for interior mutability or whether they have a
+`Drop` implementation that needs to be called. For example, we must reject the
 following code since it would result in a `const` being mutable at runtime!
 
-[Miri]: https://github.com/rust-lang/miri
+[miri]: https://rust-lang.github.io/rustc-guide/miri.html
 
 ```rust
 const CELL: &std::cell::Cell<i32> = &std::cell::Cell::new(42); // Not allowed...
