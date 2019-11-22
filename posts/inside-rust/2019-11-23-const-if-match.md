@@ -123,10 +123,10 @@ fn main() {
 }
 ```
 
-However, it is sometimes okay for a `const` to contain a *type* that allows
-interior mutability, as long as we can prove that the actual *value* of that
-type does not. This is particularly useful for `enum`s with a "unit variant"
-(e.g., `Option::None`).
+However, it is sometimes okay for a `const` to contain a reference to a *type*
+that may have interior mutability, as long as we can prove that the actual
+*value* of that type does not. This is particularly useful for `enum`s with a
+"unit variant" (e.g., `Option::None`).
 
 ```rust
 const NO_CELL: Option<&std::cell::Cell<i32>> = None; // OK
