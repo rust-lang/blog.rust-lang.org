@@ -20,17 +20,18 @@ on the compiler team's [meeting calendar]:
   compiler.
 * On Dec 13 ([calendar event][ce3]), we will discuss
   [rust-lang/compiler-team#222], which is a roadmap and strategy for
-  eventually merging rustc, rust-analyzer, and the RLS into one
+  eventually merging rustc, [rust-analyzer], and the RLS into one
   coherent set of projects.
 * On Dec 20 ([calendar event][ce4]), we will discuss
   [rust-lang/compiler-team#209], which is a proposal to create a
   "major changes process" for the compiler, to augment these design
   meetings.
 
+[rust-analyzer]: https://github.com/rust-analyzer/rust-analyzer/
 [ce1]: https://calendar.google.com/event?action=TEMPLATE&tmeid=MjM3aGsxdXY0dHBybXBxZ3ZxOGp1ZjdicjEgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com
 [ce2]: https://calendar.google.com/event?action=TEMPLATE&tmeid=MTByaTZsZG1pZGI1Y2RqdGZ1cHV2djNncTEgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com
 [ce3]: https://calendar.google.com/event?action=TEMPLATE&tmeid=MGxrb2p2cG9lNGFnYTIybWVtcGRoZzdjdmogNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com
-[ce4]: https://www.google.com/url?q=https://github.com/rust-lang/compiler-team/issues/209&sa=D&ust=1574870064787000&usg=AOvVaw1ep0jCGX9A8WsdRJwTLeTU
+[ce4]: https://calendar.google.com/event?action=TEMPLATE&tmeid=MW12ZWI4NW9zZ2s2dHRkbW5wbjdjMG43Zm8gNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com
 [rust-lang/compiler-team#213]: https://github.com/rust-lang/compiler-team/issues/213
 [rust-lang/compiler-team#175]: https://github.com/rust-lang/compiler-team/issues/175
 [rust-lang/compiler-team#222]: https://github.com/rust-lang/compiler-team/issues/222
