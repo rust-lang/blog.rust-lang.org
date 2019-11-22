@@ -67,7 +67,7 @@ enabled. However, the other assert macros (e.g., `assert_eq`,
 their arguments.
 
 The looping constructs, `while`, `for`, and `loop` are also forbidden and will
-be be [feature-gated separately][52000]. As you have see above, loops can be
+be [feature-gated separately][52000]. As you have seen above, loops can be
 emulated with recursion as a temporary measure. However, the non-recursive
 version will usually be more efficient since rust does not (to my knowledge)
 do tail call optimization.
