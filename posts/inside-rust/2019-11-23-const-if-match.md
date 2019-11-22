@@ -66,10 +66,17 @@ enabled. However, the other assert macros (e.g., `assert_eq`,
 `debug_assert_ne`) remain forbidden, since they need to call `Debug::fmt` on
 their arguments.
 
-Also forbidden are looping constructs, `while`, `for`, and `loop`, which will
-be [feature-gated separately][52000], and the `?` operator, which calls
-`From::from` on the value inside the `Err` variant. The design for
-`const` trait methods is still being discussed.
+The looping constructs, `while`, `for`, and `loop` are also forbidden and will
+be be [feature-gated separately][52000]. As you have see above, loops can be
+emulated with recursion as a temporary measure. However, the non-recursive
+version will usually be more efficient since rust does not (to my knowledge)
+do tail call optimization.
+
+Finally, the `?` operator remains forbidden in a const context, since its
+desugaring contains a call to `From::from`. The design for `const` trait
+methods is still being discussed, and both `?` and `for`, which desugars to a
+call to `IntoIterator::into_iter`, will not be usable until a final decision is
+reached.
 
 [52000]: https://github.com/rust-lang/rust/issues/52000
 
