@@ -155,8 +155,9 @@ Even though the `Vec` created by `Vec::new` will never actually be dropped
 inside the `const fn`, we don't detect that all fields of `tuple` have been moved
 out of, and thus conservatively assume that the drop impl for `tuple` will run.
 While this particular case is trivial, there are other, more complex ones that
-would require a more expensive solution. It is an open question how precise we
-want to be here.
+would require a more comprehensive solution. It is an open question how precise
+we want to be here, since more precision means longer compile times, even for
+users that have no need for more expressiveness.
 
 [`const-eval`]: https://github.com/rust-lang/const-eval
 [drop]: https://github.com/rust-lang/const-eval/blob/master/static.md#drop
