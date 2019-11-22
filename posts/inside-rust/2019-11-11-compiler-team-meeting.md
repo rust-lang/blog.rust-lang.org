@@ -10,7 +10,7 @@ The compiler team had our weekly triage meeting on 2019-11-07.
 You can find the [minutes](https://rust-lang.github.io/compiler-team/minutes/triage-meeting/2019-11-07/) on the [compiler-team](https://github.com/rust-lang/compiler-team) repository.
 Each week, we have general announcements from the team followed by check-ins from two of the compiler team working groups.
 
-## Announcments
+## Announcements
 
 - [@pnkfelix] is moving to the US and will be working in the Eastern timezone.
 
@@ -19,6 +19,8 @@ Each week, we have general announcements from the team followed by check-ins fro
 - Rust 1.39 has shipped with `async`/`await` support and other goodies.
 
 ## Working group sync
+
+<br/>
 
 ### [wg-polonius]
 

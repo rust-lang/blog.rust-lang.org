@@ -16,6 +16,8 @@ Each week, we have general announcements from the team followed by check-ins fro
 
 ## Working group sync
 
+<br/>
+
 ### [wg-nll](https://rust-lang.github.io/compiler-team/working-groups/nll/)
 
 - Rust 1.40 (current nightly) will be the first stable release without the HIR borrow checker.

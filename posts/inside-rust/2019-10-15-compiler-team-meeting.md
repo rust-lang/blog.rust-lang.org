@@ -26,6 +26,8 @@ Each week, we have general announcements from the team followed by check-ins fro
 
 ## Working group sync
 
+<br/>
+
 ### [wg-learning](https://rust-lang.github.io/compiler-team/working-groups/learning/)
 
 `wg-learning` aims to make the compiler easier to learn by ensuring that rustc-guide and api docs are “complete”.

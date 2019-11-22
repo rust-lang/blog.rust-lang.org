@@ -18,6 +18,8 @@ Rust 1.39 ships on Thursday!
 
 ## Working group sync
 
+<br/>
+
 ### [wg-pgo](https://rust-lang.github.io/compiler-team/working-groups/pgo/)
 
 - PGO is available in the stable compiler. Docs are in the rustc-guide and the rustc-book

@@ -27,6 +27,8 @@ Each week, we have general announcements from the team followed by check-ins fro
 
 ## Working group sync
 
+<br/>
+
 ### [wg-mir-opt](https://rust-lang.github.io/compiler-team/working-groups/mir-opt/)
 
 - [@wesleywiser] Moved promoted MIR out of `mir::Body` [#63580](https://github.com/rust-lang/rust/pull/63580)
