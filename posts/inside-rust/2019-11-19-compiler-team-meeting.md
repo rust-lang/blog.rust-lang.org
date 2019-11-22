@@ -14,7 +14,7 @@ Each week, we have general announcements from the team followed by check-ins fro
 
 - Request for assistance: "Rustc panics (NoSolution): could not prove Binder(projection soup)" [#65581](https://github.com/rust-lang/rust/issues/65581)
 
-- Request for assistance: "Rust 1.38 regressions weren't fully triaged" [#65577](https://github.com/rust-lang/rust/issues/655577)
+- Request for assistance: "Rust 1.38 regressions weren't fully triaged" [#65577](https://github.com/rust-lang/rust/issues/65577)
 
 - Request for assistance: "Miscompilation with target-cpu=znver1 (AMD Ryzen 1000/2000 series) on Windows + LLVM 9." [#63959](https://github.com/rust-lang/rust/issues/63959)
 
