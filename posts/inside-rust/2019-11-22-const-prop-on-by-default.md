@@ -103,7 +103,7 @@ let x = 26;
 ## Compiler performance
 
 As you might have guessed, reducing the amount of control flow processed by the Rust compiler has a positive effect on compile times.
-We're seeing [2-10% improvement][perf_times] on a variety of test cases in both debug and release mode.
+We're seeing 2-10% improvement on a variety of test cases in both debug and release mode.
 Even though LLVM has its own constant propagation pass, we see improvements because our pass operates on MIR while it is still generic.
 The more concrete instances of a generic function that are instantiated, the larger the payoff from this optimization.
 
@@ -113,5 +113,4 @@ If you'd like to get involved with the MIR Optimizations working group, stop by 
 
 [mir]: https://blog.rust-lang.org/2016/04/19/MIR.html
 [pr]: https://github.com/rust-lang/rust/pull/66074
-[perf_times]: https://perf.rust-lang.org/compare.html?start=0ccee30773050f6bf50fd6ceb9ac61e6d58aa4d8&end=d1da8023dafd3e277b5a4c5475aa2cb199a176b9&stat=wall-time
 [zulip]: https://rust-lang.zulipchat.com/#narrow/stream/189540-t-compiler.2Fwg-mir-opt
