@@ -18,10 +18,18 @@ The former is currently being shipped with the Rust distribution while the latte
 Unfortunately, these are actively developed in separation without much code-sharing between the two.
 We'd like to change that and to find out how we can unify these efforts.
 
+# Why 2 IDEs?
 The main benefits of rust-analyzer is greater performance (because of fully-lazy compilation model) and somewhat richer feature-set (due to more flexible analysis API).
 The main benefits of RLS is precision (it uses `rustc` under the hood).
 Additionally, RLS is the main consumer of save-analysis infrastructure, which is a good fit for tools which need a static view of the codebase, such as [cargo-src](https://github.com/rust-dev-tools/cargo-src) or [lsif](https://code.visualstudio.com/blogs/2019/02/19/lsif).
 
+# Save-analysis
+TODO(xanewok): Intro a bit what is it and how it allows us to be 'precise'
+
+# Query model
+TODO(xanewok): Intro a bit about laziness and how it can drastically reduce latency
+
+# Way forward
 Our current hypothesis is that it is possible to integrate both approaches without doubling the engineering effort.
 Specifically, we will add an option to rust-analyzer to use save-analysis for find-usages and rename functionality.
 Unlike RLS, however, rust-analyzer will not link to rustc and instead will rely on cargo for running the compiler and producing save-analysis data.
