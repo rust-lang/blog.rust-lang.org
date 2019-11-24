@@ -9,10 +9,14 @@ Meeting run by nikomatsakis. Minutes written by nikomatsakis.
 Attending: nikomatsakis, pnkfelix, Xanewok, matklad
 [Notes](https://hackmd.io/fAnj6pNqRRGIyDQ4el5tcQ)
 
+# The Rust IDE
 In the last compiler/IDE team meeting we've discussed the overall direction for IDE support in Rust.
 
-At the moment, we actively develop both RLS and rust-analyzer, without much code-sharing between the two projects.
-The goal is to find out how we can unify the efforts.
+At the moment, the two IDEs developed as part of the Rust project are Rust Language Server (RLS) and Rust Analyzer.
+The former is currently being shipped with the Rust distribution while the latter serves as a foundation for the "RLS 2.0" working group.
+
+Unfortunately, these are actively developed in separation without much code-sharing between the two.
+We'd like to change that and to find out how we can unify these efforts.
 
 The main benefits of rust-analyzer is greater performance (because of fully-lazy compilation model) and somewhat richer feature-set (due to more flexible analysis API).
 The main benefits of RLS is precision (it uses `rustc` under the hood).
