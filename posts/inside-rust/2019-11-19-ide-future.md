@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "2019-11-18 IDE team (?) meeting "
+title: "2019-11-18 IDE team (?) meeting"
 author: Aleksey Kladov, Igor Matuszewski
 team: the IDE team <https://www.rust-lang.org/governance/teams/dev-tools#ides>
 ---
@@ -18,7 +18,7 @@ The main benefits of rust-analyzer is greater performance (because of fully-lazy
 The main benefits of RLS is precision (it uses `rustc` under the hood).
 Additionally, RLS is the main consumer of save-analysis infrastructure, which is a good fit for tools which need a static view of the codebase, such as [cargo-src](https://github.com/rust-dev-tools/cargo-src) or [lsif](https://code.visualstudio.com/blogs/2019/02/19/lsif).
 
-Our current hypothesis is that it is possible to integrate both approaches without doubling the engendering effort.
+Our current hypothesis is that it is possible to integrate both approaches without doubling the engineering effort.
 Specifically, we will add an option to rust-analyzer to use save-analysis for find-usages and rename functionality.
 Unlike RLS, however, rust-analyzer will not link to rustc and instead will rely on cargo for running the compiler and producing save-analysis data.
 If this approach works, we will consider freezing RLS and focusing fully on rust-analyzer.
