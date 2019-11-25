@@ -146,7 +146,7 @@ compile, even when the feature gate is enabled.
 
 ```rust
 const fn imprecise() -> Vec<i32> {
-    let tuple: (Vec<i32>) = (Vec::new(),);
+    let tuple: (Vec<i32>,) = (Vec::new(),);
     tuple.0
 }
 ```
