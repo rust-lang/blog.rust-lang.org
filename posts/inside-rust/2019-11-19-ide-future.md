@@ -12,7 +12,7 @@ Attending: nikomatsakis, pnkfelix, Xanewok, matklad
 # The Rust IDE
 In the last compiler/IDE team meeting we've discussed the overall direction for IDE support in Rust.
 
-At the moment, the two IDEs developed as part of the Rust project are Rust Language Server (RLS) and Rust Analyzer.
+At the moment, the two IDEs developed as part of the Rust project are Rust Language Server (RLS) and rust-analyzer.
 The former is currently being shipped with the Rust distribution while the latter serves as a foundation for the "RLS 2.0" working group.
 
 Unfortunately, these are actively developed in separation without much code-sharing between the two.
@@ -26,8 +26,20 @@ Additionally, RLS is the main consumer of save-analysis infrastructure, which is
 # Save-analysis
 TODO(xanewok): Intro a bit what is it and how it allows us to be 'precise'
 
+What is "save-analysis"?
+It is a currently unstable format which rustc uses to record information about the compiled code.
+`env RUSTFLAGS="-Zunstable-options -Zsave-analysis" cargo check`
+
 # Query model
-TODO(xanewok): Intro a bit about laziness and how it can drastically reduce latency
+
+The fundamental problem with save-analysis is that it is computed for the whole crate at once.
+This is pretty slow for non-trivial crates, and is also wasteful.
+At any given moment in time, only a small fraction of analysis information is really required.
+rust-analyzer solves this by using [`salsa`](https://github.com/salsa-rs/salsa) queries for code analysis.
+The result is a compilation model which is fully lazy across the whole crate graph.
+This model is similar to what rustc is using internally, but is more lazy both "vertically" and "horizontally".
+Vertically, `rustc` starts to be incremental only after parsing and macro expansion; rust-analyzer is incremental on per-file basis.
+Horizontally, `rustc` compiles one crate at a time; rust-analyzer uses queries for the whole crate graph.
 
 # Way forward
 Our current hypothesis is that it is possible to integrate both approaches without doubling the engineering effort.
