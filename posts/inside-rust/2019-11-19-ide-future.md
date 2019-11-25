@@ -24,11 +24,13 @@ The main benefits of RLS is precision (it uses `rustc` under the hood).
 Additionally, RLS is the main consumer of save-analysis infrastructure, which is a good fit for tools which need a static view of the codebase, such as [cargo-src](https://github.com/rust-dev-tools/cargo-src) or [lsif](https://code.visualstudio.com/blogs/2019/02/19/lsif).
 
 # Save-analysis
-TODO(xanewok): Intro a bit what is it and how it allows us to be 'precise'
 
 What is "save-analysis"?
-It is a currently unstable format which rustc uses to record information about the compiled code.
-`env RUSTFLAGS="-Zunstable-options -Zsave-analysis" cargo check`
+It is an unstable format which rustc uses to record information about the compiled code.
+It contains a pretty high-level information.
+For example, for each identifier in the source-crate, save-analyzer will map this identifier to a definition and list of usages.
+`env RUSTFLAGS="-Zunstable-options -Zsave-analysis" cargo check` can be used to instruct `rustc` to produce save-analysis files (in JSON format).
+Because save-analysis is produced directly from rustc iternal data structures, it is guaranteed to be correct (modulo bugs in rustc itself).
 
 # Query model
 
