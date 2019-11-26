@@ -46,6 +46,7 @@ Horizontally, `rustc` compiles one crate at a time; rust-analyzer uses queries f
 # Way forward
 Our current hypothesis is that it is possible to integrate both approaches without doubling the engineering effort.
 Specifically, we will add an option to rust-analyzer to use save-analysis for find-usages and rename functionality.
+That way, we'll get precise results for most important queries, without slowing down completion.
 Unlike RLS, however, rust-analyzer will not link to rustc and instead will rely on cargo for running the compiler and producing save-analysis data.
 If this approach works, we will consider freezing RLS and focusing fully on rust-analyzer.
 Long term, the plan is to unify the save-analysis fallback path and the lazy analysis.
