@@ -33,7 +33,7 @@ If you have any questions, please see our [frequently asked questions] or email 
 Finally, we wanted to thank everyone who helped develop, polish, and test the survey. In particular we'd like to thank [Dr. Jasun Carr], for providing their expertise in communication processes with helping to create this year's survey, and all of the volunteers who worked to provide all of the translations available this year.
 
 [dr. jasun carr]: https://isu.edu/cmp/faculty-and-staff/facultyandstaff/d-jasun-carr.html
-[survey]: https://docs.google.com/forms/d/1iGnf8Mmf4JRggOJ3E7iZlBLsgeLxIYzaI1caiFHQ6OQ/
+[survey]: https://docs.google.com/forms/d/1iGnf8Mmf4JRggOJ3E7iZlBLsgeLxIYzaI1caiFHQ6OQ/viewform
 [blog.rust-lang.org]: https://blog.rust-lang.org
 [frequently asked questions]: https://forge.rust-lang.org/community/survey-faq.html
 [community-team@rust-lang.org]: mailto:community-team@rust-lang.org
