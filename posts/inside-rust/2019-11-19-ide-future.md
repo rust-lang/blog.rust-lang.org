@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "2019-11-18 IDE team (?) meeting"
+title: "2019-11-18 IDE team meeting"
 author: Aleksey Kladov, Igor Matuszewski
 team: the IDE team <https://www.rust-lang.org/governance/teams/dev-tools#ides>
 ---
@@ -54,6 +54,6 @@ Unlike RLS, however, rust-analyzer will not link to rustc and instead will rely 
 If this approach works, we will consider freezing RLS and focusing fully on rust-analyzer.
 Long term, the plan is to unify the save-analysis fallback path and the lazy analysis.
 
-In parallel to this RLS/rust-analyzer unification effort, we continue to pursue rustc library-ification, with a specific focus on traits solving (via chalk) and type inference. 
+In parallel to this RLS/rust-analyzer unification effort, we continue to pursue rustc library-ification, with a specific focus on traits solving (via chalk) and type inference.
 "Library-ification" is a term we've been using for the process of extracting code out of rustc into re-usable libaries which can be shared by both rustc and rust-analyzer.
 The goal is to use library-ification to gradually reduce the amount of duplicated code between rustc and rust-analyzer, with the goal of eventually either having a single code-base, or having the vast majority of the logic be shared.
