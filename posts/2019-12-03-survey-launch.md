@@ -44,7 +44,7 @@ Finally, we wanted to thank everyone who helped develop, polish, and test the su
 [japanese]: https://docs.google.com/forms/d/e/1FAIpQLSe-AakTxBDKSBZUk1zTqvZ749M-wAPHUU45Pnj12-0-Y_Qxaw/viewform?hl=jp
 [korean]: https://docs.google.com/forms/d/e/1FAIpQLScPqYek5LKDyLBnB3NM3X5YTLjLolIjc_j0SFewAzBgUZd5Wg/viewform?hl=ko
 [polish]: https://docs.google.com/forms/d/e/1FAIpQLSdyZ6Xg7d-VIJpRCdLaTocSYOWd1eDI6VryS954fl_ESJYx4Q/viewform?hl=pl
-[portuguese]: https://docs.google.com/forms/d/e/1FAIpQLSdRWKlvMzlXhM6x-4NN4jnJFvD2LjNrz3TyLivK0WpuRHW1Yg/viewform?hl=pt
+[portuguese]: https://docs.google.com/forms/d/e/1FAIpQLScIZI8qtS1BMBaOIIirwp_NngKWgr_GTnow6Fp32M8_IySaPw/viewform?hl=pt
 [russian]: https://docs.google.com/forms/d/e/1FAIpQLSd6nhdpmopSM_3xikVEDnHAem1yKq76ymQx0nINUFHqkqC-LA/viewform?hl=ru
 [simplified chinese]: https://wj.qq.com/s2/5080757/5237
 [spanish]: https://docs.google.com/forms/d/e/1FAIpQLSekNvJgid_RrixnHm2aOAqLf4sCFUVOVVakTh97ILLNyTsQSA/viewform?hl=es
