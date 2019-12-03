@@ -7,7 +7,7 @@ description: "Hearing from you about the fourth year of Rust"
 
 It's that time again! Time for us to take a look at how the Rust project is doing, and what we should plan for the future. The Rust Community Team is pleased to announce our [2019 State of Rust Survey][survey]! Whether or not you use Rust today, we want to know your opinions. Your responses will help the project understand its strengths and weaknesses and establish development priorities for the future.
 
-Completing this survey should take about 10–15 minutes and is anonymous unless you choose to give us your contact information. We will be accepting submissions until December 16th, and we will write up our findings a month or so afterwards to [blog.rust-lang.org]. You can also check out see [last year’s results][2018 survey].
+Completing this survey should take about 10–15 minutes and is anonymous unless you choose to give us your contact information. We will be accepting submissions until December 16th, and we will write up our findings a month or so afterwards to [blog.rust-lang.org]. You can also check out [last year’s results][2018 survey].
 
 - [English][survey]
 - [Simplified Chinese]
