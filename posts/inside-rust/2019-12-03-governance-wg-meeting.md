@@ -1,11 +1,13 @@
 ---
 layout: post
-title: "2019-11-29 Governance Working Group Meeting"
+title: "Governance Working Group Update"
 author: Nell Shamrell-Harrington
 team: The Governance WG <https://github.com/rust-lang/wg-governance>
 ---
 
-Hello everyone! Last week the governance working group met. Here are the large issues we discussed and information on our next meeting.
+Hello everyone! Two weeks ago the governance working group met. Here are the large issues we discussed and information on our next meeting.
+
+*Edit:* This post was prepared last week but was accidentally not merged. Apologies for the short notice about the topic of this week's meeting! --nikomatsakis 
 
 ## Large Issues Discussed
 
