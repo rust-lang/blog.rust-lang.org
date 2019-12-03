@@ -17,6 +17,9 @@ The former is currently being shipped with the Rust distribution while the latte
 
 Unfortunately, these are actively developed in separation without much code-sharing between the two.
 We'd like to change that and to find out how we can unify these efforts.
+Therefore, we've been having a series of talks with the aim of elaborating the design space and creating a proposal for how to improve the situation going forward.
+
+This blog post gives a short summary from our most recent meeting.
 
 # Why 2 IDEs?
 The main benefits of rust-analyzer is greater performance (because of fully-lazy compilation model) and somewhat richer feature-set (due to more flexible analysis API).
@@ -51,4 +54,6 @@ Unlike RLS, however, rust-analyzer will not link to rustc and instead will rely 
 If this approach works, we will consider freezing RLS and focusing fully on rust-analyzer.
 Long term, the plan is to unify the save-analysis fallback path and the lazy analysis.
 
-In parallel to this RLS/rust-analyzer unification effort, we continue to pursue rustc library-ification, with a specific focus on traits solving (via chalk) and type inference.
+In parallel to this RLS/rust-analyzer unification effort, we continue to pursue rustc library-ification, with a specific focus on traits solving (via chalk) and type inference. 
+"Library-ification" is a term we've been using for the process of extracting code out of rustc into re-usable libaries which can be shared by both rustc and rust-analyzer.
+The goal is to use library-ification to gradually reduce the amount of duplicated code between rustc and rust-analyzer, with the goal of eventually either having a single code-base, or having the vast majority of the logic be shared.
