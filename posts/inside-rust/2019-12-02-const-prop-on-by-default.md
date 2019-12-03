@@ -47,18 +47,18 @@ The constant propagation pass also handles propagating into control flow.
 For example:
 
 ```rust
-const Foo: Option<u8> = B(12);
+const Foo: Option<u8> = Some(12);
 
 let x = match Foo {
-   Bar::A => panic!("no value"),
-   Bar::B(v) => v,
+   None => panic!("no value"),
+   Some(v) => v,
 };
 ```
 
 becomes:
 
 ```rust
-const Foo: Option<u8> = B(12);
+const Foo: Option<u8> = Some(12);
 
 let x = 12;
 ```
