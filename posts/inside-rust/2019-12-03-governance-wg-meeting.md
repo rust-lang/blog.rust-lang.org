@@ -2,7 +2,7 @@
 layout: post
 title: "Governance Working Group Update"
 author: Nell Shamrell-Harrington
-team: The Governance WG <https://github.com/rust-lang/wg-governance>
+team: the Governance WG <https://github.com/rust-lang/wg-governance>
 ---
 
 Hello everyone! Two weeks ago the governance working group met. Here are the large issues we discussed and information on our next meeting.
