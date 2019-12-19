@@ -40,7 +40,7 @@ Specifically, the Learning WG decided that we wanted to pursue the following goa
 ### Overview chapter
 
 One of the challenges with big software systems is understanding how everything
-fits together. We seen this problem come up with the rustc-guide; the chapters
+fits together. We have seen this problem come up with the rustc-guide; the chapters
 tunnel down into a single part of the compiler, but it is hard to get a good
 view of all the things that happen to a piece of code between lexing and linking.
 
