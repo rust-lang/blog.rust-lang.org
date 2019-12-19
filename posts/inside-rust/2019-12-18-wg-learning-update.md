@@ -35,7 +35,7 @@ guide has some long-standing holes and shortcomings that we would like to addres
 
 Specifically, the Learning WG decided that we wanted to pursue the following goals next:
 - Write an overview chapter
-- Gather source matterial for chapters on monomorphization and LLVM
+- Gather source material for chapters on monomorphization and LLVM
 
 ### Overview chapter
 
