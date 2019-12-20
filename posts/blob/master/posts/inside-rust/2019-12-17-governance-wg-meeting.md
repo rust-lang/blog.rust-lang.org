@@ -21,7 +21,7 @@ as well as supporting better documentation of the design process.
 
 ## Next meeting
 
-Our next meeting will be Jan 14. The topic is to be determined, but it is planned to discuss that on January 7th informally. 
+Our next meeting will be Jan 14. The topic is to be determined, but it is planned to discuss that on January 7th on the Rust Discord in the `#wg-governance` channel.
 
 [wg-governance]: https://github.com/rust-lang/wg-governance/
 [detailed minutes]: https://github.com/rust-lang/wg-governance/blob/master/minutes/2019.12.17.md
