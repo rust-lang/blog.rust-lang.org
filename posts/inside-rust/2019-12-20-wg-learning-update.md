@@ -2,7 +2,7 @@
 layout: post
 title: "An Update from WG-Learning"
 author: mark-i-m
-team: The Learning Working group <https://www.rust-lang.org/governance/teams/compiler#wg-learning>
+team: the Learning Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-learning>
 ---
 
 # An update from WG-Learning
