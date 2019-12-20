@@ -6,7 +6,7 @@ team: The Governance WG <https://github.com/rust-lang/wg-governance>
 
 Hello everyone! 
 
-On Tuesday 17 December the working group met and built an outline of an RFC to introduce project groups.
+On Tuesday 17 December the working group met and built an outline of an RFC to introduce project groups. If you would like to watch, a recording is available on [YouTube].
 
 ## Project groups
 
