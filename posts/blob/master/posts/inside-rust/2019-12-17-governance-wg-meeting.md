@@ -25,5 +25,4 @@ Our next meeting will be Jan 14. The topic is to be determined, but it is planne
 
 [wg-governance]: https://github.com/rust-lang/wg-governance/
 [detailed minutes]: https://github.com/rust-lang/wg-governance/blob/master/minutes/2019.12.17.md
-[`rust-dev-tools`]: https://github.com/rust-dev-tools/
 [`youtube`]: https://www.youtube.com/watch?v=q6us8yhDDUU&feature=youtu.be
