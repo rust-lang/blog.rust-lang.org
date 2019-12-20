@@ -10,7 +10,7 @@ On Tuesday 17 December the working group met and built an outline of an RFC to i
 
 ## Project groups
 
-You can see the detailed minutes at the link above, but here is a quick summary of what we would like to do with the RFC: 
+You can see the [detailed minutes] on the [wg-governance] repository, but here is a quick summary of what we would like to do with the RFC: 
 
 * Introduce the project group concept, creation workflow, and lifecycle
 * Provide guidance for how project groups use RFCs
