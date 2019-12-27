@@ -50,7 +50,7 @@ git rebase -i 9b98af84c4aa66392236fff59c86da2130d46d46
 # and the `--exec` command specifies that after each commit lands, it will be formatted.
 # This command will fail if your PR has intermediary commits with syntax conflicts.
 git rebase -i a916ac22b9f7f1f0f7aba0a41a789b3ecd765018 \
-    --exec './x.py fmt && git add -u && git commit --amend` \
+    --exec './x.py fmt && git add -u && git commit --amend' \
     # This exec is optional, and won't work if your intermediate commits don't build,
     # but it helps make sure that the formatting resolution didn't introduce any errors.
     # It's recommended to run it afterwards before pushing at least.
