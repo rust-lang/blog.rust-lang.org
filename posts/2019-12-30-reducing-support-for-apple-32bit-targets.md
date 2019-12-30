@@ -10,7 +10,7 @@ Apple 32bit targets. Starting from Rust 1.42.0, those targets will be demoted
 to Tier 3.
 
 The decision was made on [RFC 2837], and was accepted by the compiler and
-release teams. This post explains what the change means, why we did it and how
+release teams. This post explains what the change means, why we did it, and how
 your project is affected.
 
 [RFC 2837]: https://github.com/rust-lang/rfcs/pull/2837
@@ -37,7 +37,7 @@ being formalized and revised in [RFC 2803]), explaining what we guarantee:
 - Tier 3 targets are not available for download through rustup, and are
   ignored during our automated builds. You can still build their standard
   library for cross-compiling (or the full compiler in some cases) from source
-  on your own, but you might encounter build errors, bugs or missing features.
+  on your own, but you might encounter build errors, bugs, or missing features.
 
 [platform-support]: https://forge.rust-lang.org/release/platform-support.html
 [RFC 2803]: https://github.com/rust-lang/rfcs/pull/2803
@@ -66,8 +66,8 @@ Apple dropped support for running 32bit binaries starting from [macOS
 developers from cross-compiling 32bit programs and apps starting from Xcode 10
 (the platform’s IDE, containing the SDKs).
 
-Due to those decisions from Apple, the targets are not much useful to our users
-anymore, and their choice to prevent cross-compiling makes it hard for the
+Due to those decisions from Apple, the targets are no longer useful to our users,
+and their choice to prevent cross-compiling makes it hard for the
 project to continue supporting the 32bit platform in the long term.
 
 [deprecate-macos]: https://support.apple.com/en-us/HT208436
