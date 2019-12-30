@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Reducing support for Apple 32bit targets"
+title: "Reducing support for 32-bit Apple targets"
 author: Pietro Albini
 ---
 
 The Rust team is sad to announce that Rust 1.41.0 (to be released on January
 30th, 2020) will be the last release with the current level of support for
-Apple 32bit targets. Starting from Rust 1.42.0, those targets will be demoted
+32-bit Apple targets. Starting from Rust 1.42.0, those targets will be demoted
 to Tier 3.
 
 The decision was made on [RFC 2837], and was accepted by the compiler and
@@ -44,12 +44,12 @@ being formalized and revised in [RFC 2803]), explaining what we guarantee:
 
 # Which targets are affected?
 
-The main target affected by this change is 32bit macOS (`i686-apple-darwin`),
+The main target affected by this change is 32-bit macOS (`i686-apple-darwin`),
 which will be demoted from Tier 1 to Tier 3. This will affect both using the
-compiler on 32bit Mac hardware, and cross-compiling 32bit macOS binaries from
+compiler on 32-bit Mac hardware, and cross-compiling 32-bit macOS binaries from
 any other platform.
 
-Additionally, the following 32bit iOS targets will be demoted from Tier 2 to
+Additionally, the following 32-bit iOS targets will be demoted from Tier 2 to
 Tier 3:
 
 * `armv7-apple-ios`
@@ -61,21 +61,21 @@ targets.
 
 # Why are those targets being demoted?
 
-Apple dropped support for running 32bit binaries starting from [macOS
+Apple dropped support for running 32-bit binaries starting from [macOS
 10.15][deprecate-macos] and [iOS 11][deprecate-ios]. They also prevented all
-developers from cross-compiling 32bit programs and apps starting from Xcode 10
+developers from cross-compiling 32-bit programs and apps starting from Xcode 10
 (the platform’s IDE, containing the SDKs).
 
 Due to those decisions from Apple, the targets are no longer useful to our users,
 and their choice to prevent cross-compiling makes it hard for the
-project to continue supporting the 32bit platform in the long term.
+project to continue supporting the 32-bit platform in the long term.
 
 [deprecate-macos]: https://support.apple.com/en-us/HT208436
 [deprecate-ios]: https://developer.apple.com/documentation/uikit/app_and_environment/updating_your_app_from_32-bit_to_64-bit_architecture
 
 # How will this affect my project?
 
-If you don’t build Apple 32bit binaries this change won’t affect you at all.
+If you don’t build 32-bit Apple binaries this change won’t affect you at all.
 
 If you still need to build them, you’ll be able to continue using Rust 1.41.0
 without issues. As usual the Rust project will provide critical bugfixes and
