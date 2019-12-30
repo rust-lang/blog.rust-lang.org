@@ -87,3 +87,24 @@ The code implementing the targets won’t be removed from the compiler codebase,
 so you’ll also be able to build future releases from source on your own
 (keeping in mind they might have bugs or be broken, as that code will be
 completly untested).
+
+# What about the nightly channel?
+
+We will demote the targets on the nightly channel soon, but we don't have an
+exact date for when that will happen. We recommend pinning a nightly version
+beforehand though, to prevent `rustup toolchain install` from failing once we
+apply the demotion.
+
+To pin a nightly version you need to use "nightly" followed by the day the
+nightly was released, as the toolchain name. For example, to install the nightly
+released on December 1st, 2019 and to use it you can run:
+
+```plain
+rustup toolchain install nightly-2019-12-01
+
+# Default to this nightly system-wide...
+rustup default nightly-2019-12-01
+
+# ...or use this nightly for a single build
+cargo +nightly-2019-12-01 build
+```
