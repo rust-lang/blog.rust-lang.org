@@ -59,7 +59,6 @@ else
 	for sha in $(cat /tmp/new.shas); do
 		git cherry-pick $sha -Xtheirs
 	done
-	git branch -f $branch HEAD
   # put yourself atop the format the world PR
   git rebase -Xtheirs a916ac22b9f7f1f0f7aba0a41a789b3ecd765018
 fi
