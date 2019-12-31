@@ -16,7 +16,7 @@ otherwise once per cycle (coinciding with the bootstrap bump, most likely).
 
 The second one which reformatted the majority of the codebase is [#67540].
 
-This change landed with the following rustfmt config. Note that this this configuration is subject
+This change landed with the following rustfmt config. Note that this configuration is subject
 to change (in particular, merge_derives may be removed in the future), but should be fairly stable.
 Your editor should automatically pick this configuration up inside the rust-lang/rust repository (it
 is located in the `rustfmt.toml` file in the root).
