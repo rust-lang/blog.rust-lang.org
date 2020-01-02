@@ -4,7 +4,7 @@ title: "Reducing support for 32-bit Apple targets"
 author: Pietro Albini
 ---
 
-The Rust team is sad to announce that Rust 1.41.0 (to be released on January
+The Rust team regrets to announce that Rust 1.41.0 (to be released on January
 30th, 2020) will be the last release with the current level of support for
 32-bit Apple targets. Starting from Rust 1.42.0, those targets will be demoted
 to Tier 3.
