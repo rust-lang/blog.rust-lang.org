@@ -31,8 +31,9 @@ being formalized and revised in [RFC 2803]), explaining what we guarantee:
 
 - Tier 2 targets can also be downloaded through rustup, but our
   automated builds don’t execute the test suite for them. While we guarantee a
-  compiler build will be available, we don’t ensure it will actually work
-  without bugs (or even work at all).
+  standard library build (and for some of them a full compiler build) will be
+  available, we don’t ensure it will actually work without bugs (or even work
+  at all).
 
 - Tier 3 targets are not available for download through rustup, and are
   ignored during our automated builds. You can still build their standard
