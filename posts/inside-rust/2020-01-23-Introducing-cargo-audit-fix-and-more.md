@@ -14,9 +14,7 @@ This post describes the new features in the 0.11 release of `cargo-audit`.
 
 One of our [most requested features](https://github.com/RustSec/cargo-audit/issues/23) (especially by fans of the similar [`npm audit fix`](https://docs.npmjs.com/cli/audit) command), the [new `cargo audit fix` subcommand](https://github.com/RustSec/cargo-audit#cargo-audit-fix-subcommand) will attempt to automatically update version requirements for vulnerable dependencies to non-vulnerable versions.
 
-Note that this is an experimental new feature which isn't enabled by default. To try it out, install `cargo-audit with the following.
-
-You can install `cargo-audit` and run it against your project with the following commands:
+Note that this is an experimental new feature which isn't enabled by default. To try it out, install `cargo-audit` with the following:
 
 ```
 $ cargo install cargo-audit --features=fix
