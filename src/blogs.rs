@@ -68,6 +68,16 @@ impl Blog {
             posts[i].show_year = posts[i - 1].year != posts[i].year;
         }
 
+        // Make the updated time is unique, by incrementing seconds for duplicates
+        let mut last_matching_updated = 0;
+        for i in 1..posts.len() {
+            if posts[i].updated == posts[last_matching_updated].updated {
+                posts[i].set_updated((i - last_matching_updated) as u32);
+            } else {
+                last_matching_updated = i;
+            }
+        }
+
         Ok(Blog {
             title: manifest.title,
             index_title: manifest.index_title,
