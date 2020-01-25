@@ -144,6 +144,10 @@ impl Post {
 }
 
 fn build_post_time(year: u32, month: u32, day: u32, seconds: u32) -> String {
+    let seconds = Duration::seconds(seconds as i64);
+    if seconds >= Duration::days(1) {
+        panic!("seconds must be less then a day")
+    };
     // build the time. this is only approximate, which is fine.
     let mut time = Tm {
         tm_sec: 0,
@@ -159,6 +163,6 @@ fn build_post_time(year: u32, month: u32, day: u32, seconds: u32) -> String {
         tm_utcoff: 0,
         tm_nsec: 0,
     };
-    time = time + Duration::seconds(seconds as i64);
+    time = time + seconds;
     time.rfc3339().to_string()
 }
