@@ -3,7 +3,7 @@ mod posts;
 
 use crate::blogs::Blog;
 use crate::posts::Post;
-use handlebars::{Context, Handlebars, Helper, HelperResult, Output, RenderContext, RenderError};
+use handlebars::{handlebars_helper, Handlebars};
 use sass_rs::{compile_file, Options};
 use serde_derive::Serialize;
 use serde_json::json;
@@ -30,40 +30,21 @@ struct ReleasePost {
     title: String,
     url: String,
 }
-
-fn hb_month_helper<'a>(
-    h: &Helper,
-    _b: &Handlebars,
-    _ctx: &Context,
-    _rc: &mut RenderContext,
-    out: &mut dyn Output,
-) -> HelperResult {
-    let num: u32 = h
-        .param(0)
-        .unwrap()
-        .value()
-        .as_str()
-        .unwrap()
-        .parse()
-        .or_else(|_| Err(RenderError::new("The value is not a number")))?;
-    let name = match num {
-        1 => "Jan.",
-        2 => "Feb.",
-        3 => "Mar.",
-        4 => "Apr.",
-        5 => "May",
-        6 => "June",
-        7 => "July",
-        8 => "Aug.",
-        9 => "Sept.",
-        10 => "Oct.",
-        11 => "Nov.",
-        12 => "Dec.",
-        _ => "Error!",
-    };
-    out.write(name)?;
-    Ok(())
-}
+handlebars_helper!(hb_month_name_helper: |month_num: u64| match month_num {
+    1 => "Jan.",
+    2 => "Feb.",
+    3 => "Mar.",
+    4 => "Apr.",
+    5 => "May",
+    6 => "June",
+    7 => "July",
+    8 => "Aug.",
+    9 => "Sept.",
+    10 => "Oct.",
+    11 => "Nov.",
+    12 => "Dec.",
+    _ => "Error!",
+});
 
 impl Generator {
     fn new(
@@ -73,7 +54,7 @@ impl Generator {
         let mut handlebars = Handlebars::new();
         handlebars.set_strict_mode(true);
         handlebars.register_templates_directory(".hbs", "templates")?;
-        handlebars.register_helper("month_name", Box::new(hb_month_helper));
+        handlebars.register_helper("month_name", Box::new(hb_month_name_helper));
 
         Ok(Generator {
             handlebars,
@@ -131,11 +112,16 @@ impl Generator {
     }
 
     fn render_index(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
-        let other_blogs: Vec<_> = self.blogs.iter().filter(|b| b.index_title() != blog.index_title())
-            .map(|other_blog| json!({
-                "link_text": other_blog.link_text(),
-                "url": PathBuf::from("/").join(other_blog.prefix()).join("index.html"),
-            }))
+        let other_blogs: Vec<_> = self
+            .blogs
+            .iter()
+            .filter(|b| b.index_title() != blog.index_title())
+            .map(|other_blog| {
+                json!({
+                    "link_text": other_blog.link_text(),
+                    "url": PathBuf::from("/").join(other_blog.prefix()).join("index.html"),
+                })
+            })
             .collect();
 
         let data = json!({
@@ -151,9 +137,9 @@ impl Generator {
     fn render_post(&self, blog: &Blog, post: &Post) -> Result<(), Box<dyn Error>> {
         let path = blog
             .prefix()
-            .join(&post.year)
-            .join(&post.month)
-            .join(&post.day);
+            .join(&post.year.to_string())
+            .join(&post.month.to_string())
+            .join(&post.day.to_string());
         fs::create_dir_all(self.out_directory.join(&path))?;
 
         // then, we render the page in that path
@@ -202,9 +188,7 @@ impl Generator {
             feed_updated: time::now_utc().rfc3339().to_string(),
         };
         fs::write(
-            self.out_directory
-                .join(blog.prefix())
-                .join("releases.json"),
+            self.out_directory.join(blog.prefix()).join("releases.json"),
             serde_json::to_string(&data)?,
         )?;
         Ok(())
