@@ -77,7 +77,7 @@ impl Post {
         url.set_extension("html");
 
         // this is fine
-        let url = format!("{}/{}/{}/{}", year, month, day, url.to_str().unwrap());
+        let url = format!("{:04}/{:02}/{:02}/{}", year, month, day, url.to_str().unwrap());
 
         let published = build_post_time(year, month, day, 0);
         let updated = published.clone();
