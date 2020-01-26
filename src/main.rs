@@ -137,9 +137,9 @@ impl Generator {
     fn render_post(&self, blog: &Blog, post: &Post) -> Result<(), Box<dyn Error>> {
         let path = blog
             .prefix()
-            .join(&post.year.to_string())
-            .join(&post.month.to_string())
-            .join(&post.day.to_string());
+            .join(format!("{:04}", &post.year))
+            .join(format!("{:02}", &post.month))
+            .join(format!("{:02}", &post.day));
         fs::create_dir_all(self.out_directory.join(&path))?;
 
         // then, we render the page in that path
