@@ -59,7 +59,12 @@ impl Blog {
             }
         }
 
-        posts.sort_by_key(|post| post.url.clone());
+        posts.sort_by_key(|post| {
+            format!(
+                "{}-{:02}-{:02}-{}",
+                post.year, post.month, post.day, post.title
+            )
+        });
         posts.reverse();
 
         // Decide which posts should show the year in the index.
