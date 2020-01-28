@@ -22,6 +22,19 @@ A new decade has started, and we are excited about the Rust conferences coming u
 
 ---
 
+**RustFest Netherlands**<br>Q2, 2020
+---
+
+The [RustFest Netherlands][nether-site] team are working hard behind the scenes on getting everything ready. We hope to tell you more soon so keep an eye on the [RustFest blog][nether-blog] and follow us on [Twitter][nether-twitter]!
+
+[nether-site]: https://netherlands.rustfest.eu/
+[nether-blog]: https://blog.rustfest.eu/
+[nether-twitter]: https://twitter.com/rustfest
+
+###### Located in *Netherlands*
+
+---
+
 **Rust+GNOME Hackfest**<br>April 29th to May 3rd, 2020
 ---
 
