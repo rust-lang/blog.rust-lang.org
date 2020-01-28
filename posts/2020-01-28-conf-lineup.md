@@ -6,14 +6,14 @@ description: "Welcome to 2020; We are excited about the Rust conferences coming 
 ---
 
 
-A new decade has started, and we are excited about the Rust conferences coming up. Each conference is an opportunity to learn about Rust, share your knowledge, and to have a good time with your fellow rustacians. Read on to learn more about the events we know about so far.
+A new decade has started, and we are excited about the Rust conferences coming up. Each conference is an opportunity to learn about Rust, share your knowledge, and to have a good time with your fellow Rustaceans. Read on to learn more about the events we know about so far.
 
 ---
 
 **FOSDEM** <br> February 2nd, 2020 
 ---
 
-[FOSDEM][fosdem site] stands for the Free and Open Source Developers European Meeting. At this event software developers around the world will meet up, share ideas and collaborate. FOSDOM will be hosting a [Rust devroom][fosdem agenda] workshop that aims to present the features and possibilities offered by Rust, as well as some of the many exciting tools and projects in its ecosystem.
+[FOSDEM][fosdem site] stands for the Free and Open Source Developers European Meeting. At this event software developers around the world will meet up, share ideas and collaborate. FOSDEM will be hosting a [Rust devroom][fosdem agenda] workshop that aims to present the features and possibilities offered by Rust, as well as some of the many exciting tools and projects in its ecosystem.
 
 [fosdem site]: https://fosdem.org/2020/
 [fosdem agenda]: https://fosdem.org/2020/schedule/track/rust/
@@ -38,12 +38,12 @@ Where Rust meets Latin America! [Rust Latam][latam-site] is Latin America's lead
 **RustConf**<br>August 20th-21st, 2020
 ---
 
-The official [RustConf][conf-site] will be taking place in Portland, Oregan, USA. Last years conference was amazing, and we are excited to see what happens next. See the [website][conf-site], and [Twitter][conf-twitter] for updates as the event date approaches!
+The official [RustConf][conf-site] will be taking place in Portland, Oregon, USA. Last years' conference was amazing, and we are excited to see what happens next. See the [website][conf-site], and [Twitter][conf-twitter] for updates as the event date approaches!
 
 [conf-site]: https://rustconf.com/
 [conf-twitter]: https://twitter.com/rustconf
 
-###### Located in *Oregan, USA*
+###### Located in *Oregon, USA*
 
 ---
 
