@@ -10,7 +10,7 @@ A new decade has started, and we are excited about the Rust conferences coming u
 
 ---
 
-**FOSDEM** <br> February 2nd, 2020 
+**FOSDEM**<br>February 2nd, 2020 
 ---
 
 [FOSDEM][fosdem site] stands for the Free and Open Source Developers European Meeting. At this event software developers around the world will meet up, share ideas and collaborate. FOSDEM will be hosting a [Rust devroom][fosdem agenda] workshop that aims to present the features and possibilities offered by Rust, as well as some of the many exciting tools and projects in its ecosystem.
@@ -20,6 +20,18 @@ A new decade has started, and we are excited about the Rust conferences coming u
 
 ###### Located in *Brussels, Belgium*
 
+---
+
+**Rust+GNOME Hackfest**<br>April 29th to May 3rd, 2020
+---
+
+The goal of the [Rust+GNOME hackfest][hackfest-site] is to improve the interactions between Rust and the GNOME libraries. During this hackfest, we will be improving the interoperability between Rust and GNOME, improving the support of [GNOME libraries][gnome-lib] in Rust, and exploring solutions to create [GObject][gnome-gobject] APIs from Rust.
+
+[hackfest-site]: https://wiki.gnome.org/Hackfests/Rust2020
+[gnome-lib]: https://developer.gnome.org/
+[gnome-gobject]: https://developer.gnome.org/gobject/stable/
+
+###### Located in *Montréal, Quebec*
 
 ---
 
