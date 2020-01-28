@@ -37,7 +37,6 @@ The goal of the [Rust+GNOME hackfest][hackfest-site] is to improve the interacti
 
 **Rust LATAM**<br>May 22nd-23rd, 2020
 ---
-### 
 
 Where Rust meets Latin America! [Rust Latam][latam-site] is Latin America's leading event for and by the Rust community. Two days of interactive sessions, hands-on activities and engaging talks to bring the community together. Schedule to be announced [at this link][latam-agenda].
 
@@ -45,6 +44,16 @@ Where Rust meets Latin America! [Rust Latam][latam-site] is Latin America's lead
 [latam-agenda]: https://rustlatam.org/#schedule
 
 ###### Located in *Mexico City, Mexico*
+---
+
+**Oxidize**<br>July, 2020
+---
+
+The [Oxidize conference][oxidize-site] is about learning, and improving your programming skills with embedded systems and IoT in Rust. The conference plans on having one day of guided workshops for developers looking to start or improve their Embedded Rust skills, one day of talks by community members, and a two day development session focused on Hardware and Embedded subjects in Rust. The starting date is to be announced at a later date.
+
+[oxidize-site]: https://oxidizeconf.com/
+
+###### Located in *Berlin, Germany*
 ---
 
 **RustConf**<br>August 20th-21st, 2020
