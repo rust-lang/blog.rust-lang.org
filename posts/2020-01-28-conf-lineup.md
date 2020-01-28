@@ -10,7 +10,7 @@ A new decade has started, and we are excited about the Rust conferences coming u
 
 ---
 
-**FOSDEM**<br>February 2nd, 2020 
+**FOSDEM**<br>February 2nd, 2020
 ---
 
 [FOSDEM][fosdem site] stands for the Free and Open Source Developers European Meeting. At this event software developers around the world will meet up, share ideas and collaborate. FOSDEM will be hosting a [Rust devroom][fosdem agenda] workshop that aims to present the features and possibilities offered by Rust, as well as some of the many exciting tools and projects in its ecosystem.
@@ -65,6 +65,18 @@ The official [RustConf][conf-site] will be taking place in Portland, Oregon, USA
 [conf-twitter]: https://twitter.com/rustconf
 
 ###### Located in *Oregon, USA*
+
+---
+
+**Rusty Days**<br>Fall, 2020
+---
+
+[Rusty Days][days-site] is a new conference located in Wroclaw, Poland. Rustaceans of all skill levels are welcome. The conference is still being planned. Check out the information on their [site][days-site], and [twitter][days-twitter] as we get closer to fall.
+
+[days-site]: https://rusty-days.org/
+[days-twitter]: https://twitter.com/rdconf
+
+###### Located in *Wroclaw, Poland*
 
 ---
 
