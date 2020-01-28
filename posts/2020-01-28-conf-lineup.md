@@ -69,7 +69,7 @@ The official [RustConf][conf-site] will be taking place in Portland, Oregon, USA
 ###### Located in *Florence, Italy*
 
 ---
-For the most up-to-date information on events, visit [timetill]. For meetups, and other events see the [calendar]. 
+For the most up-to-date information on events, visit [timetill.rs][timetill]. For meetups, and other events see the [calendar]. 
 
 [timetill]: https://timetill.rs/
 
