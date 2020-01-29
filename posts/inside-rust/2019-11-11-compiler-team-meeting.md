@@ -20,8 +20,6 @@ Each week, we have general announcements from the team followed by check-ins fro
 
 ## Working group sync
 
-<br/>
-
 ### [wg-polonius]
 
 We ran out of time this week to have a check-in from this working group.
