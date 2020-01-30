@@ -1,4 +1,5 @@
 mod blogs;
+mod markdown;
 mod posts;
 
 use crate::blogs::Blog;
