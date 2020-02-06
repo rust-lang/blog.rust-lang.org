@@ -20,11 +20,11 @@ The "Cleanup Crew" are focused on improving bug reports. Specifically,
 the goal is to try to ensure that every bug report has all the
 information that will be needed for someone to fix it:
 
-    - a minimal, standalone example that shows the problem
-    - links to duplicates or related bugs
-    - if the bug is a regression (something that used to work, but no
-      longer does), then a bisection to the PR or nightly that caused
-      the regression
+- a minimal, standalone example that shows the problem
+- links to duplicates or related bugs
+- if the bug is a regression (something that used to work, but no
+  longer does), then a bisection to the PR or nightly that caused
+  the regression
 
 This kind of cleanup is invaluable in getting bugs fixed.
 
