@@ -104,7 +104,7 @@ policy is:
 > stable.
 
 > A more case-by-case policy would be very hard to get right, and would almost
-> certainly result in bad mistakes and and regular controversies.
+> certainly result in bad mistakes and regular controversies.
 
 > Instead, we are going to stick to a first-come, first-served system. If someone
 > wants to take over a package, and the previous owner agrees, the existing

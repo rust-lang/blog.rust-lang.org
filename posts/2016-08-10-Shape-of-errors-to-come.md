@@ -42,7 +42,7 @@ of what is going on.
 The key insight is putting your source code front and center - everything you see in the output
 builds on _your_ code.
 By using the code you wrote as the context, we give you an easy way to know at a glance
-where the issue is occuring.
+where the issue is occurring.
 
 ![Picture of new constant eval error][new_errors2]
 
@@ -50,7 +50,7 @@ where the issue is occuring.
 
 Next, once we know the location, we need to explain what is going wrong. We do this by labeling
 points of interest in the code that helped explain
-the error.  The most obvious place to begin labeling is where the error has occured. It's the
+the error.  The most obvious place to begin labeling is where the error has occurred. It's the
 "what" of the error.
 
 In this example, you can see how we use these primary labels. With them, your eyes can see both the
@@ -64,7 +64,7 @@ to quickly spot the error and understand what's going wrong.
 *Mismatch with trait requirement error*
 
 The source of the error is not the only point of interest.  There are often other points of interest
-that help describe "why" an error is occuring. By reading these secondary labels,
+that help describe "why" an error is occurring. By reading these secondary labels,
 you can understand better what is going wrong. These labels are shown in the same order they appear
 in your code, again, to ensure you're always able to, at a glance, understand where you are.
 

@@ -25,7 +25,7 @@ Rust 1.31.0 [introduced a new feature of Cargo][1] where one of the optional key
 serde1 = { version = "1.0", features = ['derive'], package = "serde" }
 ```
 
-It's the addition of the `package` key that causes Cargo to compile the crate differently. This feature was [first implemented][3] in Rust 1.26.0, but it was unstable at the time. For Rust 1.25.0 and prior, however, Cargo would ignore the `package` key and and interpret the dependency line as if it were:
+It's the addition of the `package` key that causes Cargo to compile the crate differently. This feature was [first implemented][3] in Rust 1.26.0, but it was unstable at the time. For Rust 1.25.0 and prior, however, Cargo would ignore the `package` key and interpret the dependency line as if it were:
 
 ```toml
 serde1 = { version = "1.0", features = ['derive'] }
