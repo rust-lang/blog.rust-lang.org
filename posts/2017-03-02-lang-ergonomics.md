@@ -109,7 +109,7 @@ One route for strongly limiting context-dependence is employing *conventions*,
 in which the compiler is simply assuming a default unless told otherwise. Often
 such conventions are universal and well-known, meaning that you don't need to
 know anything about the rest of the code to know what they are. A good example
-of this technique in Rust is the the fact that `mod foo;` looks for `foo.rs` (or
+of this technique in Rust is the fact that `mod foo;` looks for `foo.rs` (or
 `foo/mod.rs`) by default.
 
 One final point. "Implicitness" is often relative to where the language is
