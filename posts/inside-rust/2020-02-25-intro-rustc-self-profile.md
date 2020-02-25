@@ -208,11 +208,10 @@ Which shows this `optimized_mir` query was processing the `regex::compile::{{imp
 
 By using the `RUSTFLAGS` environment variable, we can profile every `rustc` invocation, not just the final crate's.
 `crox` can then combine all of the profiles together into one output file.
-Since this will create a lot of files, we'll first create a folder to put all the traces in.
+Since this will create a lot of files, we'll tell `rustc` to create a folder to put all the traces in.
 
 ```sh
 $ rm regex-17088.* regex-23649.* # clean up the old trace files since we're done with them
-$ mkdir profiles
 $ cargo clean
 $ RUSTFLAGS="-Zself-profile=./profiles -Zself-profile-events=default,args" cargo build
 ```
@@ -221,7 +220,7 @@ This creates quite a few trace files in the working directory.
 Now, we'll tell `crox` to combine all of the trace files in the current directory together:
 
 ```sh
-$ crox --dir .
+$ crox --dir profiles
 ```
 
 Opening this file shows all of the crates compiled:
