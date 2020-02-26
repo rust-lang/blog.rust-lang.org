@@ -2,7 +2,7 @@
 layout: post
 title: "Announcing the first FFI-unwind project design meeting"
 author: Kyle Strand, Niko Matsakis, and Amanieu d'Antras
-description: "First design meeting for the FFI-unwind project, deciding whether to introduce a new ABI or allow unwinding through `"C"`"
+description: "First design meeting for the FFI-unwind project"
 team: the FFI-unwind project group <https://www.rust-lang.org/governance/teams/lang#wg-ffi-unwind>
 ---
 
