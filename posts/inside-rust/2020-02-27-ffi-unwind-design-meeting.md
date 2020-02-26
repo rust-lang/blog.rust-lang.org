@@ -17,7 +17,7 @@ upcoming meeting to help finalize our decision, which will be formalized and
 published as our first language-change RFC. This RFC will propose an "MVP"
 specification for well-defined cross-language unwinding.
 
-The meeting will be on [TODO - TBD](meeting-link).
+The meeting will be on [March 2nd](meeting-link).
 
 ## Background: what is unwinding?
 
@@ -264,5 +264,5 @@ always undefined behavior.
 </table>
 
 [rfc-announcement]: https://github.com/rust-lang/rfcs/pull/2797
-[meeting-link]: https://arewemeetingyet.com/UTC/XXX-TODO
+[meeting-link]: https://arewemeetingyet.com/UTC/2020-03-02/17:00/Lang%20Team%20Design%20Meeting:%20FFI-unwind#eyJ1cmwiOiJodHRwczovL21vemlsbGEuem9vbS51cy9qLzc2ODIzMTc2MCJ9
 [man-pthreads]: http://man7.org/linux/man-pages/man7/pthreads.7.html
