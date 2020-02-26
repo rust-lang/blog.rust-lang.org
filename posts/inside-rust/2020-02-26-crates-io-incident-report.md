@@ -5,7 +5,7 @@ author: Pietro Albini
 team: the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>
 ---
 
-On 2020-02-20 at 21:28 UTC we received a report from an user of crates.io that
+On 2020-02-20 at 21:28 UTC we received a report from a user of crates.io that
 their crate was not available on the index even after 10 minutes since the
 upload. This was a bug in the crates.io webapp exposed by a GitHub outage.
 
