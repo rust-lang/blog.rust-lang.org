@@ -174,7 +174,7 @@ If the `chrome_profiler.json` file gets too large, the normal Chromium performan
 One easy way to deal with this is to tell `crox` to remove events shorter than a chosen duration:
 
 ```sh
-$ crox --minumum-duration 2 regex-17088
+$ crox --minimum-duration 2 regex-17088
 ```
 
 Filtering out events less than 2 microseconds shrinks our `chrome_profiler.js` file from 27mb to 11mb.
