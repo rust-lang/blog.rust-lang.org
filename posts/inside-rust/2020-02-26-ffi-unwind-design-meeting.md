@@ -197,15 +197,68 @@ Note that unwinding through a frame that has destructors without running those
 destructors (e.g. because they have been optimized out by `panic=abort`) is
 always undefined behavior.
 
- |                                                        | `panic`-unwind                        | Forced unwind, no destructors | Forced unwind with destructors | Other foreign unwind |
- | ------------------------------------------------------ | ------------------------------------- | ----------------------------- | ------------------------------ | -------------------- |
- | Proposals 1 & 2, `"C"` boundary, `panic=unwind`        | abort                                 | unwind                        | UB                             | UB                   |
- | Proposals 1 & 2, `"C"` boundary, `panic=abort`         | `panic!` aborts (no unwinding occurs) | unwind                        | UB                             | UB                   |
- | Proposals 1 & 2, `"C unwind"` boundary, `panic=unwind` | unwind                                | unwind                        | unwind                         | unwind               |
- | Proposal 1, `"C unwind"` boundary, `panic=abort`       | `panic!` aborts                       | abort                         | abort                          | abort                |
- | Proposal 2, `"C unwind"` boundary, `panic=abort`       | `panic!` aborts                       | unwind                        | UB                             | abort                |
- | Proposal 3,  `"C"` boundary, `panic=unwind`            | unwind                                | unwind                        | unwind                         | unwind               |
- | Proposal 3, `"C"` boundary, `panic=abort`              | `panic!` aborts                       | unwind                        | UB                             | UB                   |
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>panic</code>-unwind</th>
+<th>Forced unwind, no destructors</th>
+<th>Forced unwind with destructors</th>
+<th>Other foreign unwind</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proposals 1 &amp; 2, <code>"C"</code> boundary, <code>panic=unwind</code></td>
+<td>abort</td>
+<td>unwind</td>
+<td>UB</td>
+<td>UB</td>
+</tr>
+<tr>
+<td>Proposals 1 &amp; 2, <code>"C"</code> boundary, <code>panic=abort</code></td>
+<td><code>panic!</code> aborts (no unwinding occurs)</td>
+<td>unwind</td>
+<td>UB</td>
+<td>UB</td>
+</tr>
+<tr>
+<td>Proposals 1 &amp; 2, <code>"C unwind"</code> boundary, <code>panic=unwind</code></td>
+<td>unwind</td>
+<td>unwind</td>
+<td>unwind</td>
+<td>unwind</td>
+</tr>
+<tr>
+<td>Proposal 1, <code>"C unwind"</code> boundary, <code>panic=abort</code></td>
+<td><code>panic!</code> aborts</td>
+<td>abort</td>
+<td>abort</td>
+<td>abort</td>
+</tr>
+<tr>
+<td>Proposal 2, <code>"C unwind"</code> boundary, <code>panic=abort</code></td>
+<td><code>panic!</code> aborts</td>
+<td>unwind</td>
+<td>UB</td>
+<td>abort</td>
+</tr>
+<tr>
+<td>Proposal 3,  <code>"C"</code> boundary, <code>panic=unwind</code></td>
+<td>unwind</td>
+<td>unwind</td>
+<td>unwind</td>
+<td>unwind</td>
+</tr>
+<tr>
+<td>Proposal 3, <code>"C"</code> boundary, <code>panic=abort</code></td>
+<td><code>panic!</code> aborts</td>
+<td>unwind</td>
+<td>UB</td>
+<td>UB</td>
+</tr>
+</tbody>
+</table>
 
 [rfc-announcement]: https://github.com/rust-lang/rfcs/pull/2797
 [meeting-link]: https://arewemeetingyet.com/UTC/XXX-TODO
