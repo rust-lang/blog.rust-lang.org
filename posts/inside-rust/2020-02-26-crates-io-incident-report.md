@@ -104,12 +104,20 @@ the fix.
 
 ## Action items
 
-- Add simple logging when we start the index publishing process
-- Add a periodic job that checks the index and the database for consistency,
-  paging the on-call person if there are any mismatches. The job will need to
-  account for the crates not yet published on the index but in the queue
-- Include the crate name in the HTTP log entry for the publish API call
-- Add in-depth logging for swirl background jobs, with information such as the
-  job name or the parameters
-- Investigate whether we want to implement a self-healing feature to
-  automatically synchronize the index in cases of mismatch
+- [#2226]: Add simple logging when we start the index publishing process.
+- [#2227]: Add a periodic job that checks the index and the database for
+  consistency, paging the on-call person if there are any mismatches. The job
+  will need to account for the crates not yet published on the index but in the
+  queue.
+- [#2228]: Include the crate name in the HTTP log entry for the publish API
+  call.
+- [#2229]: Add in-depth logging for swirl background jobs, with information
+  such as the job name or the parameters.
+- [#2230]: Investigate whether we want to implement a self-healing feature to
+  automatically synchronize the index in cases of mismatch.
+
+[#2226]: https://github.com/rust-lang/crates.io/issues/2226
+[#2227]: https://github.com/rust-lang/crates.io/issues/2227
+[#2228]: https://github.com/rust-lang/crates.io/issues/2228
+[#2229]: https://github.com/rust-lang/crates.io/issues/2229
+[#2230]: https://github.com/rust-lang/crates.io/issues/2230
