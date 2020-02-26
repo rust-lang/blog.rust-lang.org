@@ -188,10 +188,13 @@ with the other proposals.
 
 ## Comparison table for the proposed designs
 
-In this table, "UB" stands for "undefined behavior". Some instances of UB can
-be detected at runtime, but the code to do so would impose an undesirable
-code-size penalty; the group recommends generating such code only for debug
-builds. These cases are marked "UB (debug: abort)"
+In this table, "UB" stands for "undefined behavior". We believe that all of
+these instances of undefined behavior could be detected at runtime, but the
+code to do so would impose an undesirable code-size penalty, entirely negating
+the optimizations made possible by using `panic=unwind` or the non-unwinding
+`"C"` ABI. This code would therefore only be appropriate for debug builds.
+Additionally, the complexity of implementing such checks may outweight their
+benefits.
 
 Note that unwinding through a frame that has destructors without running those
 destructors (e.g. because they have been optimized out by `panic=abort`) is
