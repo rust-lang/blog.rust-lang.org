@@ -242,7 +242,7 @@ If you have questions or would like to get involved with the Self-Profile Workin
 [chrome profiler img3]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png
 [chrome profiler img4]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler4.png
 [Click here]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/rustc.svg
-[documentation for this feature]: https://doc.rust-lang.org/unstable-book/compiler-flags/self-profile.html
+[documentation for this feature]: https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/self-profile.html
 [flame graph]: http://www.brendangregg.com/flamegraphs.html
 [flame graph img]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png
 [measureme repository]: https://github.com/rust-lang/measureme
