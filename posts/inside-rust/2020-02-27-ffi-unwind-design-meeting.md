@@ -17,7 +17,7 @@ upcoming meeting to help finalize our decision, which will be formalized and
 published as our first language-change RFC. This RFC will propose an "MVP"
 specification for well-defined cross-language unwinding.
 
-The meeting will be on [March 2nd](meeting-link).
+The meeting will be on [March 2nd][meeting-link].
 
 ## Background: what is unwinding?
 
@@ -65,7 +65,7 @@ There are two common examples of forced unwinding:
 * On glibc Linux, `pthread_exit` and `pthread_cancel` are implemented as a forced unwind.
   * In fact, `pthread_cancel` can cause all manner of C functions to unwind,
     including common functions like `read` and `write`.  (For a complete list,
-    search for "cancellation points" in the [pthreads man page](man-pthreads).)
+    search for "cancellation points" in the [pthreads man page][man-pthreads].)
 
 ## Requirements for any cross-language unwinding specification
 
