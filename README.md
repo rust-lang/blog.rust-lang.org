@@ -27,7 +27,7 @@ any web server to check it out in your browser:
 > python3 -m http.server
 ```
 
-The site is now available at <0.0.0.0:8000>.
+The site is now available at <http://0.0.0.0:8000>.
 
 ## Contributing
 
