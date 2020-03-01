@@ -213,7 +213,7 @@ Since this will create a lot of files, we'll tell `rustc` to create a folder to 
 ```sh
 $ rm regex-17088.* regex-23649.* # clean up the old trace files since we're done with them
 $ cargo clean
-$ RUSTFLAGS="-Zself-profile=./profiles -Zself-profile-events=default,args" cargo build
+$ RUSTFLAGS="-Zself-profile=$(pwd)/profiles -Zself-profile-events=default,args" cargo build
 ```
 
 This creates quite a few trace files in the working directory.
