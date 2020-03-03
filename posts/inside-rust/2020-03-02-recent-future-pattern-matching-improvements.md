@@ -24,7 +24,7 @@ Pattern matching in Rust works by checking if a [*place*][ref_place] in memory (
 [recover_attrs_no_item]: https://doc.rust-lang.org/nightly/nightly-rustc/rustc_parse/parser/struct.Parser.html#method.recover_attrs_no_item
 [pr_subslice]: https://github.com/rust-lang/rust/pull/67712
 
-Lists, are one of the most basic and common data structures found in software. In Rust, lists are usually a contiguous sequence of elements in memory, or a *slice*.
+Lists are one of the most basic and common data structures found in software. In Rust, lists are usually a contiguous sequence of elements in memory, or a *slice*.
 
 Since slices are so commonplace, it is important that working with them is easy. To that end, we stabilized [*fixed-length slice patterns* in Rust 1.26.0][fixed_slice]. So now it is possible to e.g., write `let [a, b, c] = my_array;` to destructure an array of 3 elements. Oftentimes, however, we're working with a slice of unknown length, so given only fixed-length slice patterns, we have to provide a fallback `match` arm with e.g. `_` as the pattern.
 
