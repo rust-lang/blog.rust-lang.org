@@ -171,7 +171,7 @@ Our hope is that with providing this feature, we remove one surprising corner of
 
 ## Combining by-move and by-`ref` bindings
 
-[tracking_move_ref]: https://github.com/rust-lang/rust/pull/68376
+[tracking_move_ref]: https://github.com/rust-lang/rust/issues/68354
 
 For similar reasons as noted in the case of bindings after `@`, Rust does not currently allow you to combine normal by-move bindings with those that are by-`ref`. For example, should you write...:
 
@@ -223,9 +223,9 @@ fn main() {
 
 To recap, we have three unstable features, all improving pattern matching in different ways:
 
-- `#![feature(or_patterns)]`, which allows you to arbitrarily nest or-patterns e.g. `Some(Foo | Bar)`
-- `#![feature(bindings_after_at)]`, which allows e.g., `ref x @ Some(ref y)` 
-- `#![feature(move_ref_pattern)]`, which allows e.g., `(x, ref y)` where `x` is by-move and `y` is by-reference
+- [`#![feature(or_patterns)]`][tracking_or_pats], which allows you to arbitrarily nest or-patterns e.g. `Some(Foo | Bar)`
+- [`#![feature(bindings_after_at)]`][tracking_at], which allows e.g., `ref x @ Some(ref y)` 
+- [`#![feature(move_ref_pattern)]`][tracking_move_ref], which allows e.g., `(x, ref y)` where `x` is by-move and `y` is by-reference
 
 To help us transition these features over to stable Rust, we need your help to ensure that they meet the expected quality standards. To help out, consider:
 
