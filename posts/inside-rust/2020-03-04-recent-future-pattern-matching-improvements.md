@@ -124,7 +124,7 @@ fn should_explore(tcx: TyCtxt<'_>, hir_id: hir::HirId) -> bool {
 }
 ```
 
-Previously, when using `|` in a `match` expression, the `|` syntax was part of `match` itelf. With `or_patterns`, this is now part of patterns themselves, so you can nest OR-patterns arbitrarily, and use them in `let` statements too:
+Previously, when using `|` in a `match` expression, the `|` syntax was part of `match` itself. With `or_patterns`, this is now part of patterns themselves, so you can nest OR-patterns arbitrarily, and use them in `let` statements too:
 
 ```rust
 let Ok(x) | Err(x) = foo();
