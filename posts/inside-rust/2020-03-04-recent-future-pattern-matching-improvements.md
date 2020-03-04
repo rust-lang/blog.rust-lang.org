@@ -3,7 +3,7 @@ layout: post
 title: "Recent and future pattern matching improvements"
 author: Mazdak "Centril" Farrokhzad
 description: "Reviewing recent pattern matching improvements"
-team: the language <https://www.rust-lang.org/governance/teams/lang> and compiler <https://www.rust-lang.org/governance/teams/compiler> teams
+team: the language team <https://www.rust-lang.org/governance/teams/lang>
 ---
 
 [ch_6]: https://doc.rust-lang.org/book/ch06-00-enums.html
