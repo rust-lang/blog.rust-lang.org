@@ -43,7 +43,7 @@ on Rust, and there wasn't that much documentation.
 
 But documentation is a funny thing. It's really a cross-cutting concern. One
 team of folks writing docs for tons of other teams of folks doesn't really
-*work*, long-term. In the short term, it was an absolutely neccesary and good
+*work*, long-term. In the short term, it was an absolutely necessary and good
 strategy. Today, it doesn't make as much sense. Let's look again at those original
 resources:
 
