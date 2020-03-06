@@ -49,7 +49,7 @@ resources:
 
 * The standard library's documentation is pretty much filled out, and when new APIs
   are added, the libs team writes some initial docs.
-* The book is maintinaed by Steve and Carol.
+* The book is maintained by Steve and Carol.
 * Cargo's documentation is the responsibility of the Cargo team (and the docs
   team never really helped here. I always wanted to, but years later, it just
   hasn't worked out.)
