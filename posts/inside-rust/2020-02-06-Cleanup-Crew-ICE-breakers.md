@@ -37,7 +37,7 @@ bug, we'll write a message that `@`-mentions every Github user on that
 team. If you have some time, maybe you can provide some useful
 information.
 
-[instructions here]: https://rust-lang.github.io/rustc-guide/ice-breaker/about.html#join
+[instructions here]: https://rust-lang.github.io/rustc-dev-guide/ice-breaker/about.html#join
 
-You can find more information about the group on it's [rustc-guide
-section](https://rust-lang.github.io/rustc-guide/ice-breaker/cleanup-crew.html).
+You can find more information about the group on it's [rustc-dev-guide
+section](https://rust-lang.github.io/rustc-dev-guide/ice-breaker/cleanup-crew.html).

@@ -135,7 +135,7 @@ An OR-pattern covers the *union* of all the `|`-ed ("or-ed") patterns. To ensure
 ## Bindings after `@`
 
 [#16053]: https://github.com/rust-lang/rust/pull/16053
-[MIR]: https://rust-lang.github.io/rustc-guide/mir/index.html
+[MIR]: https://rust-lang.github.io/rustc-dev-guide/mir/index.html
 [rip_ast_borrowck]: https://github.com/rust-lang/rust/pull/64790
 [tracking_at]: https://github.com/rust-lang/rust/issues/65490
 

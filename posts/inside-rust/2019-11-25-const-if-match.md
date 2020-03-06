@@ -112,7 +112,7 @@ such as whether they allow for interior mutability or whether they have a
 `Drop` implementation that needs to be called. For example, we must reject the
 following code since it would result in a `const` being mutable at runtime!
 
-[miri]: https://rust-lang.github.io/rustc-guide/miri.html
+[miri]: https://rust-lang.github.io/rustc-dev-guide/miri.html
 
 ```rust
 const CELL: &std::cell::Cell<i32> = &std::cell::Cell::new(42); // Not allowed...

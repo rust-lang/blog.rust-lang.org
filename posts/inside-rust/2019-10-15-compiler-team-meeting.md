@@ -28,9 +28,9 @@ Each week, we have general announcements from the team followed by check-ins fro
 
 ### [wg-learning](https://rust-lang.github.io/compiler-team/working-groups/learning/)
 
-`wg-learning` aims to make the compiler easier to learn by ensuring that rustc-guide and api docs are “complete”.
+`wg-learning` aims to make the compiler easier to learn by ensuring that rustc-dev-guide and api docs are “complete”.
 
-- `wg-learning` has been working on transcribing videos from the [compiler lecture series](https://www.youtube.com/watch?v=elBxMRSNYr4&list=PL85XCvVPmGQhOL-J2Ng7qlPvDVOwYpGTN) into [rustc-guide](https://rust-lang.github.io/rustc-guide/) chapters.
+- `wg-learning` has been working on transcribing videos from the [compiler lecture series](https://www.youtube.com/watch?v=elBxMRSNYr4&list=PL85XCvVPmGQhOL-J2Ng7qlPvDVOwYpGTN) into [rustc-dev-guide](https://rust-lang.github.io/rustc-dev-guide/) chapters.
 
 - Originally, individuals were assigned one or lectures to complete but that hasn't worked very well.
 

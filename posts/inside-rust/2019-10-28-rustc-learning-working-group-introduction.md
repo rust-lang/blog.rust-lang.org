@@ -7,14 +7,14 @@ team: the rustc learning working group <https://www.rust-lang.org/governance/tea
 ---
 
 The [Learning Working Group], formed in April 2019, is focused on making the
-compiler easier to learn by ensuring that [rustc-guide] and API docs are
+compiler easier to learn by ensuring that [rustc-dev-guide] and API docs are
 "complete". It is one of the many efforts by the Rust Compiler team to
 decrease the barrier of contributing to the compiler. As noted on the WG’s
 homepage —
 
 *This working group aims to accomplish the following:*
 
-- *Ensure that major components of rustc are covered in rustc-guide*
+- *Ensure that major components of rustc are covered in rustc-dev-guide*
 - *Ensure that API doc coverage is at least 90%*
 
 The Learning Group is making entry to contribute easier by improving the
@@ -30,9 +30,9 @@ The Learning group, in general, is starting to document the
 “Compiler lecture series”, which are a list of Youtube video lectures
 given earlier by the more knowledgeable members of the compiler team.
 There is also the task of improving the documentation structure of
-[rustc-guide]. At first, each member used to pick a video lecture by
+[rustc-dev-guide]. At first, each member used to pick a video lecture by
 themselves and contribute via a Github pull request to the
-[rustc-guide Github repository]. This proved to be a bit difficult
+[rustc-dev-guide Github repository]. This proved to be a bit difficult
 for the following reasons —
 
 1. Not all members would get to watch and work on the lectures of
@@ -66,20 +66,20 @@ can make the documentation better.
 ## Important  resources
 
 - **[Learning Working Group]**
-- **[Rustc Guide Book]**
-- **[Rustc Guide Repository]**
+- **[Rustc Dev Guide Book]**
+- **[Rustc Dev Guide Repository]**
 - **[Github Project (Kanban)]**
 - **[Learning WG Meeting Minutes]**
 - **[Rust Youtube Videos]** 
 - **[Zulip Stream: `#t-compiler/wg-learning` on Zulip]**
 
 [Learning Working Group]: https://github.com/rust-lang/compiler-team/tree/master/content/working-groups/learning
-[rustc-guide]: https://rust-lang.github.io/rustc-guide/
-[Rustc Guide Book]: https://rust-lang.github.io/rustc-guide/
-[rustc-guide Github repository]: https://github.com/rust-lang/rustc-guide
-[Rustc Guide Repository]: https://github.com/rust-lang/rustc-guide
+[rustc-dev-guide]: https://rust-lang.github.io/rustc-dev-guide/
+[Rustc Dev Guide Book]: https://rust-lang.github.io/rustc-dev-guide/
+[rustc-dev-guide Github repository]: https://github.com/rust-lang/rustc-dev-guide
+[Rustc Dev Guide Repository]: https://github.com/rust-lang/rustc-dev-guide
 [Representing types in rustc]: https://www.youtube.com/watch?v=c01TsOsr3-c
-[Github Project (Kanban)]: https://github.com/rust-lang/rustc-guide/projects/2
+[Github Project (Kanban)]: https://github.com/rust-lang/rustc-dev-guide/projects/2
 [Learning WG Meeting Minutes]: https://github.com/rust-lang/compiler-team/tree/master/content/working-groups/learning/minutes
 [Rust Youtube Videos]: https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA/playlists
 [rust-lang/rust]: https://github.com/rust-lang/rust
