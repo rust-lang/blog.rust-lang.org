@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The rustc-guide is now rustc-dev-guide"
-author: @mark-i-m
+author: mark-i-m
 description: "the guide has been renamed"
 team: the rustc learning working group <https://www.rust-lang.org/governance/teams/compiler#wg-learning>
 ---
