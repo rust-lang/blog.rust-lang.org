@@ -72,12 +72,12 @@ Feel free to stop by and ping us.
 
 
 [oct]: https://blog.rust-lang.org/inside-rust/2019/10/28/rustc-learning-working-group-introduction.html
-[rg]: https://rust-lang.github.io/rustc-dev-guide/
+[rg]: https://rustc-dev-guide.rust-lang.org/
 [salsa]: https://crates.io/crates/salsa
-[salsach]: https://rust-lang.github.io/rustc-dev-guide/salsa.html
+[salsach]: https://rustc-dev-guide.rust-lang.org/salsa.html
 [ra]: https://github.com/rust-analyzer/rust-analyzer
 [ty]: https://doc.rust-lang.org/nightly/nightly-rustc/rustc/ty/type.Ty.html
 [typr]: https://github.com/rust-lang/rustc-dev-guide/pull/530
 [meeting]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning/topic/planning.20meeting
-[glos]: https://rust-lang.github.io/rustc-dev-guide/appendix/glossary.html
+[glos]: https://rustc-dev-guide.rust-lang.org/appendix/glossary.html
 [zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning

@@ -279,6 +279,6 @@ note: future does not implement `std::marker::Send` as this value is used across
 [tmandry_post]: https://tmandry.gitlab.io/blog/posts/optimizing-await-1/
 [send_doc]: https://doc.rust-lang.org/std/marker/trait.Send.html
 [compiler_team]: https://rust-lang.github.io/compiler-team
-[rustc_dev_guide]: https://rust-lang.github.io/rustc-dev-guide
+[rustc_dev_guide]: https://rustc-dev-guide.rust-lang.org
 [pr64895]: https://github.com/rust-lang/rust/pull/64895
 [play]: https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=7e80a8bc151df8817e0983e55bf2667a

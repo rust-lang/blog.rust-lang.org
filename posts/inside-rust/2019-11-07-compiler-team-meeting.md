@@ -20,7 +20,7 @@ Rust 1.39 ships on Thursday!
 
 ### [wg-pgo](https://rust-lang.github.io/compiler-team/working-groups/pgo/)
 
-- PGO is available in the stable compiler. Docs are in the [rustc-dev-guide](https://rust-lang.github.io/rustc-dev-guide/) and the [rustc-book](https://doc.rust-lang.org/rustc/index.html)
+- PGO is available in the stable compiler. Docs are in the [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) and the [rustc-book](https://doc.rust-lang.org/rustc/index.html)
 
 - Unfortunately we don't observe significant performance gains from applying it (except for tiny synthetic test cases).
 

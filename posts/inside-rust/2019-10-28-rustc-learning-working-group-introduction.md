@@ -74,8 +74,8 @@ can make the documentation better.
 - **[Zulip Stream: `#t-compiler/wg-learning` on Zulip]**
 
 [Learning Working Group]: https://github.com/rust-lang/compiler-team/tree/master/content/working-groups/learning
-[rustc-dev-guide]: https://rust-lang.github.io/rustc-dev-guide/
-[Rustc Dev Guide Book]: https://rust-lang.github.io/rustc-dev-guide/
+[rustc-dev-guide]: https://rustc-dev-guide.rust-lang.org/
+[Rustc Dev Guide Book]: https://rustc-dev-guide.rust-lang.org/
 [rustc-dev-guide Github repository]: https://github.com/rust-lang/rustc-dev-guide
 [Rustc Dev Guide Repository]: https://github.com/rust-lang/rustc-dev-guide
 [Representing types in rustc]: https://www.youtube.com/watch?v=c01TsOsr3-c

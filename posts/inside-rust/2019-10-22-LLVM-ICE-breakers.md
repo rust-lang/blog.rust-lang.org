@@ -12,11 +12,11 @@ Today I'm announcing a new experiment in the compiler team, the **LLVM ICE-break
 
 At its heart, the LLVM ICE-breaker group is just a list of people who would like to be notified when we come across LLVM bugs. You can add yourself to this list very easily -- just [open a PR]! When we come across a suitable bug, we'll write a message that `@`-mentions every Github user on that list. If you have some time, maybe you can fix one of them, or at least offer some words of wisdom to help somebody else figure out what's going on.
 
-[open a PR]: https://rust-lang.github.io/rustc-dev-guide/ice-breaker/about.html#join
+[open a PR]: https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html#join
 
 There are a few other things associated with the group too, however. For example, we've got a [guide] that offers some tips for how to fix LLVM-related bugs and may help you get started (particularly if you're not that familiar with rustc).
 
-[guide]: https://rust-lang.github.io/rustc-dev-guide/ice-breaker/llvm.html
+[guide]: https://rustc-dev-guide.rust-lang.org/ice-breaker/llvm.html
 
 ### What kind of bugs are we talking about?
 
