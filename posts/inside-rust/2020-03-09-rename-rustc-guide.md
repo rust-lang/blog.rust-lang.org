@@ -10,7 +10,7 @@ You may or may not be aware of two similarly named resources:
 - [The rustc book](https://doc.rust-lang.org/rustc/index.html)
 - [The rustc-guide](https://rust-lang.github.io/rustc-dev-guide/)
 
-What's difference? The "rustc book" is intended as a guide for _users_ of the
+What's the difference? The "rustc book" is intended as a guide for _users_ of the
 compiler. The "rustc-guide" is intended as a guide for _developers_ of the
 compiler. However, the names have always been confusingly similar.
 
