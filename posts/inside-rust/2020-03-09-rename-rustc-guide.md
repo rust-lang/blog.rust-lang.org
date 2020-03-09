@@ -21,6 +21,15 @@ We have put significant work into finding and updating links around the
 `rust-lang/*` repos. We have also put up a website in place of the former
 `rustc-guide` website that points to the book and rustc-dev-guide.
 
+To update your git clone of the (former) `rustc-guide` repo, you can do the following:
+
+```
+git remote set-url origin https://github.com/rust-lang/rustc-dev-guide.git
+```
+
+This will change where git thinks the `origin` remote repo is to
+`rust-lang/rustc-dev-guide`.
+
 You can find more information in [this issue][gh]. If you have any questions or
 concerns, please feel free to contact us either by opening an [issue on the
 rustc-dev-guide repo][repo] or on our [zulip channel][zulip].
