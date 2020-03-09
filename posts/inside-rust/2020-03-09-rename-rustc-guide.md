@@ -8,18 +8,20 @@ team: the rustc learning working group <https://www.rust-lang.org/governance/tea
 
 You may or may not be aware of two similarly named resources:
 - [The rustc book](https://doc.rust-lang.org/rustc/index.html)
-- [The rustc-guide](https://rust-lang.github.io/rustc-dev-guide/)
+- [The rustc-guide](https://rustc-dev-guide.rust-lang.org/)
 
 What's the difference? The "rustc book" is intended as a guide for _users_ of the
 compiler. The "rustc-guide" is intended as a guide for _developers_ of the
 compiler. However, the names have always been confusingly similar.
 
 **For that reason, we have decided to rename the `rustc-guide` to
-`rustc-dev-guide`.**
+`rustc-dev-guide`. You can now find it at [https://rustc-dev-guide.rust-lang.org/][guide].**
+
+[guide]: https://rustc-dev-guide.rust-lang.org/
 
 We have put significant work into finding and updating links around the
 `rust-lang/*` repos. We have also put up a website in place of the former
-`rustc-guide` website that points to the book and rustc-dev-guide.
+`rustc-guide` website that redirects to the new one.
 
 To update your git clone of the (former) `rustc-guide` repo, you can do the following:
 
