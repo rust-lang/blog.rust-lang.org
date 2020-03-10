@@ -37,7 +37,7 @@ There was additional off-agenda discussion after meeting about
     * Need a general intro as current info focused on main groups
     * Needs followup
 
-* Followup items not addressed on 12 March can be addressed in later meetings or async on Zulip, outcomes will be reported
+* Followup items not addressed on 12 March can be addressed in later meetings or async on Zulip, outcomes will be reported. [Zulip thread] links will be included in meeting summary blog posts in future. 
 
 ## Next meeting
 * Our next meeting will be 12 March 2020 via Zulip 18-19 CET / 1pm-2pm EST / 10-11am PST.
@@ -49,3 +49,4 @@ There was additional off-agenda discussion after meeting about
 
 [wg-governance]: https://github.com/rust-lang/wg-governance/
 [detailed minutes]: https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.02.27
+[Zulip thread]: https://rust-lang.zulipchat.com/#narrow/stream/223182-wg-governance/topic/meeting.202020-02-27
