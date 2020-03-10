@@ -40,9 +40,10 @@ will materialize in upstream LLVM that allows us to opt-out in the short term.
 
 However, having said that, side effect itself is likely improvable to at least
 avoid the excessive consecutive calls, as demonstrated by this [IR][IR-test]
-that occur after LLVM optimizations. It seems plausible that those improvements
-may also reduce the compile time hit that we see when enabling side effect on
-the rustc side. Having said that, how simple these improvements are is unclear.
+that occurs after LLVM optimizations. It seems plausible that those
+improvements may also reduce the compile time hit that we see when enabling
+side effect on the rustc side. Having said that, how simple these improvements
+are is unclear.
 
 We would love to hear feedback and suggestions on how to resolve this problem!
 Please leave feedback on this internals thread (link to be filled in right
