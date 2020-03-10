@@ -44,7 +44,7 @@ Finally, the Rust community continues to work on inclusivity, through outreach
 programs like [Rust Reach](https://blog.rust-lang.org/2018/04/02/Increasing-Rusts-Reach-2018.html) and
 [RustBridge](https://rustbridge.github.io/), as well as
 [structured mentoring](https://blog.rust-lang.org/2017/09/18/impl-future-for-rust.html) and
-investments in [documentation](https://rust-lang-nursery.github.io/rustc-guide/)
+investments in [documentation](https://rustc-dev-guide.rust-lang.org/)
 to ease contribution. For 2018, a major goal is to
 [connect and empower Rust’s *global* community](https://blog.rust-lang.org/2018/03/12/roadmap.html),
 which we’re doing both through conference launches in multiple new continents,

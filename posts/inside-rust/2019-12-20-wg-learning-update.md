@@ -13,7 +13,7 @@ have also held a meeting to decide what to work on next. So let's dig in...
 
 ## Work completed
 
-We mentioned before that we are in the process of producing [rustc-guide][rg]
+We mentioned before that we are in the process of producing [rustc-dev-guide][rg]
 chapters from the "Compiler Lecture Series" videos. The goal is to try to
 produce guide chapters that are approachable for beginners and give a good
 foundation for exploring and hacking on the compiler.
@@ -40,7 +40,7 @@ Specifically, the Learning WG decided that we wanted to pursue the following goa
 ### Overview chapter
 
 One of the challenges with big software systems is understanding how everything
-fits together. We have seen this problem come up with the rustc-guide; the chapters
+fits together. We have seen this problem come up with the rustc-dev-guide; the chapters
 tunnel down into a single part of the compiler, but it is hard to get a good
 view of all the things that happen to a piece of code between lexing and linking.
 
@@ -72,12 +72,12 @@ Feel free to stop by and ping us.
 
 
 [oct]: https://blog.rust-lang.org/inside-rust/2019/10/28/rustc-learning-working-group-introduction.html
-[rg]: https://rust-lang.github.io/rustc-guide/
+[rg]: https://rustc-dev-guide.rust-lang.org/
 [salsa]: https://crates.io/crates/salsa
-[salsach]: https://rust-lang.github.io/rustc-guide/salsa.html
+[salsach]: https://rustc-dev-guide.rust-lang.org/salsa.html
 [ra]: https://github.com/rust-analyzer/rust-analyzer
 [ty]: https://doc.rust-lang.org/nightly/nightly-rustc/rustc/ty/type.Ty.html
-[typr]: https://github.com/rust-lang/rustc-guide/pull/530
+[typr]: https://github.com/rust-lang/rustc-dev-guide/pull/530
 [meeting]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning/topic/planning.20meeting
-[glos]: https://rust-lang.github.io/rustc-guide/appendix/glossary.html
+[glos]: https://rustc-dev-guide.rust-lang.org/appendix/glossary.html
 [zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning
