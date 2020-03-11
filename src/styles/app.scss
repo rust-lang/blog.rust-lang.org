@@ -3,11 +3,11 @@
 $body-font: 'Fira Sans', Helvetica, Arial, sans-serif;
 $header-font: 'Alfa Slab One', serif;
 
-$gray: #454C52;
-$red: #C14566;
-$green: #398277;
-$purple: #403D58;
-$yellow: #FFD45E;
+$gray: #2a3439;
+$red: #a72145;
+$green: #0b7261;
+$purple: #2e2459;
+$yellow: #ffc832;
 
 html {
   font-size: 62.5%
@@ -163,8 +163,8 @@ ul, ol {
   padding-left: 1.2em;
 }
 
-.purple {
-  background-color: $purple;
+.posts {
+  background-color: $gray;
   color: white;
   .highlight {
     background-color: $red;
