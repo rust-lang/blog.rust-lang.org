@@ -33,11 +33,13 @@ This kind of cleanup is invaluable in getting bugs fixed.
 It can be done by anybody who knows Rust, without any particularly deep
 knowledge of the compiler.  If you want to be part of it and be notified
 about things to do, just [add yourself to the list][instructions here]! When we come across a suitable
-bug, we'll write a message that `@`-mentions every Github user on that
+bug, we'll [write a message][tag syntax] that `@`-mentions every Github user on that
 team. If you have some time, maybe you can provide some useful
 information.
 
 [instructions here]: https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html#join
+
+[tag syntax]: https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html#tagging-an-issue-for-an-ice-breaker-group
 
 You can find more information about the group on it's [rustc-dev-guide
 section](https://rustc-dev-guide.rust-lang.org/ice-breaker/cleanup-crew.html).

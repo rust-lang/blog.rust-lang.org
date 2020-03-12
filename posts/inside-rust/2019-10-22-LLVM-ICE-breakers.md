@@ -14,13 +14,18 @@ At its heart, the LLVM ICE-breaker group is just a list of people who would like
 
 [open a PR]: https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html#join
 
-There are a few other things associated with the group too, however. For example, we've got a [guide] that offers some tips for how to fix LLVM-related bugs and may help you get started (particularly if you're not that familiar with rustc).
+There are a few other things associated with the group too, however. For example, we've got a [guide][llvm guide] that offers some tips for how to fix LLVM-related bugs and may help you get started (particularly if you're not that familiar with rustc).
 
-[guide]: https://rustc-dev-guide.rust-lang.org/ice-breaker/llvm.html
+[llvm guide]: https://rustc-dev-guide.rust-lang.org/ice-breaker/llvm.html
 
 ### What kind of bugs are we talking about?
 
 The goal is to identify "self-contained" bugs that are unlikely to require large-scale compiler refactorings or to get entangled in other big projects.
+
+As Rust developers triage bugs and tag them for the ICE-breakers,
+they will [ping][tag syntax] the group on Github.
+
+[tag syntax]: https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html#tagging-an-issue-for-an-ice-breaker-group
 
 ### Who should join?
 
@@ -44,6 +49,11 @@ But of course we also hope that these ICE-breaker groups can help people to get 
 ### Will there be more ICE-breaker groups?
 
 I certainly hope so! As I mentioned before, this is an experiment, but presuming that it works out well we fully intend to create more ICE-breaker groups.
+
+The current list of ICE-breaker groups is documented in the
+[rustc development guide][rustc dev guide]
+
+[rustc dev guide]: https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html
 
 ### So how do I sign up again?
 
