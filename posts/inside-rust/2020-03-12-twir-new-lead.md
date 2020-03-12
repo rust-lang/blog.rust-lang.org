@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "This Week in Rust is looking for a new maintainer."
-author: <TBD>
+author: Erin Power
 team: the community team <https://www.rust-lang.org/governance/teams/community>
 ---
 
