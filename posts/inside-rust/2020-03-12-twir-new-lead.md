@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Vikrant (nasa42) is retiring from This Week in Rust. TWiR is looking for a new maintainer."
+title: "This Week in Rust is looking for a new maintainer."
 author: <TBD>
 team: the community team <https://www.rust-lang.org/governance/teams/community>
 ---
