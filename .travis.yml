@@ -1,7 +1,0 @@
-language: rust
-rust: 1.31.1
-cache: cargo
-script:
-  - cargo run
-after_success:
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash deploy.sh
