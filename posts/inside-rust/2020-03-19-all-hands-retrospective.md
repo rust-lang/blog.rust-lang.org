@@ -104,7 +104,7 @@ regardless. In a weird twist of fate, we were fortunate to cancel when we did.
 [covid-19]: https://en.wikipedia.org/wiki/2019–20_coronavirus_pandemic
 
 ## Lessons Learned
-**Bound uncertainty and and total cost.** — Promising to cover all travel with
+**Bound uncertainty and total cost.** — Promising to cover all travel with
 no kind of upper limit was unwise. It had worked in the past, perhaps, but the
 event was growing, and that was partly luck.
 
