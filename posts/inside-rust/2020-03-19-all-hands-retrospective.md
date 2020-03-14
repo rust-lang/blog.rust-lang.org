@@ -46,7 +46,7 @@ off in our calculations.
 Based on our estimated budget, it was clear that Mozilla was not going to be
 able to cover the costs alone. It seemed like a good opportunity to try and
 build relationships with some of the companies that have started to use Rust
-by approaching them for sponsorships. We weren't sure, though, how man
+by approaching them for sponsorships. We weren't sure, though, how many
 sponsorships we'd be able to get, and so we hit upon the idea of using
 paid tickets.
 
