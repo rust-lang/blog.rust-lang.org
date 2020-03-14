@@ -126,7 +126,7 @@ the Rust organisation in having sponsors participate.
 ## The Future
 
 Right now, we're currently organising reimbursing anyone who had purchased non
-refundable ticket. We're also going to take the time to step back an re
+refundable ticket. We're also going to take the time to step back and re-
 evaluate what kind of event is possible, and what kind of event our members
 want to attend.
 
