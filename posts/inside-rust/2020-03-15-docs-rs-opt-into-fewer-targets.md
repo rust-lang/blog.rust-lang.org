@@ -62,7 +62,7 @@ However, we do not want to break anyone's documentation, so in the meantime the 
 
 - For more details about targets and what it means to be a tier-one target,
 see [platform support].
-- For details about the change, see the [docs.rs#632](https://github.com/rust-lang/docs.rs/pull/632).
+- For details about the change, see the PR: [docs.rs#632](https://github.com/rust-lang/docs.rs/pull/632).
 - For details about the motivation, see [docs.rs#343](https://github.com/rust-lang/docs.rs/issues/343).
 - For future changes that this enables, see [docs.rs#563](https://github.com/rust-lang/docs.rs/issues/563#issuecomment-573321498).
 
