@@ -6,8 +6,7 @@ team: the docs.rs team <https://www.rust-lang.org/governance/teams/dev-tools#doc
 ---
 
 Recently, [docs.rs] added a feature that allows crates to opt-out of building on all targets.
-If you don't need to build on all targets, you can enable this feature
-to allow reduce your queue times and storage costs.
+If you don't need to build on all targets, you can enable this feature to allow reduce your queue times.
 
 ## What does the feature do?
 
