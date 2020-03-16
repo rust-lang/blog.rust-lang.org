@@ -42,7 +42,6 @@ See the [docs.rs documentation][metadata] for more details about how to opt-in.
 
 Building all crates from crates.io can take a long time!
 Building fewer targets will allow us to reduce wait times for every crate.
-This will avoid delaying every crate by hours when e.g. rusoto publishes a new release.
 Additionally, this will decrease our fixed storage costs,
 allowing docs.rs to be sustainable into the future.
 
