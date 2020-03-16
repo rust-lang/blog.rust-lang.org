@@ -116,12 +116,13 @@ other European
 cities.
 
 **Know your audience** — Some companies weren't interested in sponsoring
-because the event wasn't sufficiently high profile, or because the "ROI" didn't
-quite fit into the budgets and categories it would have to come from. We also
-had some uncertainty about how much "participation" to offer in exchange for
-sponsorship, since we didn't want to give the impression that one could just
-"buy your way" into the All Hands — at the same time, there is clear value to
-the Rust organisation in having sponsors participate.
+because the event wasn't sufficiently high profile, or because the "ROI"
+("Return On Investment") didn't quite fit into the budgets and categories it
+would have to come from. We also had some uncertainty about how much
+"participation" to offer in exchange for sponsorship, since we didn't want to
+give the impression that one could just "buy your way" into the All Hands — at
+the same time, there is clear value to the Rust organisation in having
+sponsors participate.
 
 ## The Future
 
