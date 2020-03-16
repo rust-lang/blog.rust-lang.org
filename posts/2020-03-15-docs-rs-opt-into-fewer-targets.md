@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "docs.rs requests your help in reducing build costs"
+title: "docs.rs now allows you to choose your build targets"
 author: Joshua Nelson
 team: the docs.rs team <https://www.rust-lang.org/governance/teams/dev-tools#docs-rs>
 ---
 
 Recently, [docs.rs] added a feature that allows crates to opt-out of building on all targets.
-If you don't need to build on all targets, we ask that you enable this feature
-to allow us to reduce queue times and storage costs.
+If you don't need to build on all targets, you can enable this feature
+to allow reduce your queue times and storage costs.
 
 ## What does the feature do?
 
@@ -38,35 +38,40 @@ targets = []
 
 See the [docs.rs documentation][metadata] for more details about how to opt-in.
 
+## How does this help my crate?
+
+Instead of building for every tier-one target, you can build for only a single target,
+reducing your documentation times by a factor of 6.
+This can especially help large crates or projects with many crates
+that take several hours to document.
+
 ## How does this help docs.rs?
 
 Building all crates from crates.io can take a long time!
 Building fewer targets will allow us to reduce wait times for every crate.
-Additionally, this will decrease our fixed storage costs,
-allowing docs.rs to be sustainable into the future.
+Additionally, this will decrease our fixed storage costs, allowing docs.rs to be sustainable into the future.
 
-## Why does docs.rs need my help?
-
-We have tried very hard to make sure that this change is backwards-compatible.
-In other words, if you do nothing, the behavior will stay exactly the same as before:
-documentation will be built for the default target (possibly taking into account `default-target` in the metadata),
-and additionally will be built for all other tier one targets.
-However, because of this, you need to opt-in in order for us to reduce our build costs.
+## Possible future changes
 
 We are considering turning this on by default in the future;
 i.e. only building for one target unless multiple targets are specifically requested.
 However, we do not want to break anyone's documentation, so in the meantime the feature is opt-in instead of opt-out.
 
+This change will also make it easier for docs.rs to build
+for targets that are not tier one, such as embedded targets.
+
 ## How can I learn more?
 
-For more details about targets and what it means to be a tier-one target,
-see [platform support].
-For details about the change, see the PR: [docs.rs#632](https://github.com/rust-lang/docs.rs/pull/632).
-For details about the motivation, see [docs.rs#343](https://github.com/rust-lang/docs.rs/issues/343).
-For future changes that this enables, see [docs.rs#563](https://github.com/rust-lang/docs.rs/issues/563#issuecomment-573321498).
+For more details about targets and what it means to be a tier-one target, see [platform support].
+For details about the change, see the PR: [docs.rs#632].
+For details about the motivation, see [docs.rs#343].
+For details about non-tier-one targets, see [docs.rs#563].
 
 [docs.rs]: https://docs.rs/
 [crates.io]: https://crates.io/
 [platform support]: https://forge.rust-lang.org/release/platform-support.html
 [metadata]: https://docs.rs/about#metadata
 [`winapi`]: https://docs.rs/winapi/
+[docs.rs#343]: https://github.com/rust-lang/docs.rs/issues/343
+[docs.rs#563]: https://github.com/rust-lang/docs.rs/issues/563#issuecomment-573321498
+[docs.rs#632]: https://github.com/rust-lang/docs.rs/pull/632
