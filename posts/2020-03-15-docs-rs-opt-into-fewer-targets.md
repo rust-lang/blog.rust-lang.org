@@ -48,7 +48,7 @@ that take several hours to document.
 
 Building all crates from crates.io can take a long time!
 Building fewer targets will allow us to reduce wait times for every crate.
-Additionally, this will decrease our fixed storage costs, allowing docs.rs to be sustainable into the future.
+Additionally, this will decrease the growth of our storage costs, improving the sustainability of the project.
 
 ## Possible future changes
 
