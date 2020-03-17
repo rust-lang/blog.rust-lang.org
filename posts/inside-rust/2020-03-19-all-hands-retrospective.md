@@ -7,7 +7,7 @@ team: The All Hands Organisers <https://www.rust-lang.org/governance/teams/core>
 
 If you're not already aware, the Rust All Hands event, originally scheduled for
 March 16th–20th in Thessaloníki, Greece was cancelled in January. The All Hands'
-is one of our member's favourite events of the year and we were quite
+is one of our members' favourite events of the year and we were quite
 disappointed that we weren't able to pull off the event this year. In the
 interest of being transparent, as well as documenting for future events, we
 have written a retrospective about what happened, what we learned, and the
@@ -16,7 +16,7 @@ future of the All Hands.
 ## Timeline
 
 ### Context
-Both of the previous All Hands' took place in Mozilla's Berlin office. Mozilla
+Both previous All Hands took place in Mozilla's Berlin office. Mozilla
 traditionally sponsored the event, providing the venue and catering, and also
 paying for the flights and accommodation of volunteers who didn't have a
 company or other person to pay for them. It was a good way to bring the entire
@@ -30,7 +30,7 @@ Berlin office didn't really have the space to accommodate us.
 ### Finding a space.
 As a group, our first step was to see if we could find other companies to
 sponsor a space. We followed a number of leads but ultimately never found
-anyone that had a space to offer in a suitable time frame. We started looking
+anyone that had a space to offer at a suitable time. We started looking
 at other options, like private hacker spaces and universities. The University
 of Macedonia in Thessaloniki, Greece made us a quite attractive offer, and
 they had the right time available, so we decided to go for that.
@@ -81,13 +81,13 @@ should have taken this moment ask whether we were really going to be able to
 pull this off.
 
 ### Realising it won't work.
-Finally, this all started to unravel in a about a month away from the event.
+This all started to unravel about a month before the event.
 In short, we encountered some logistical hurdles, which we won't go into, but
 which also prompted us to review the finances in more detail. This revealed
 that our estimates were off. Thus, we were faced with a tough decision:
 
 * If we continue with the event, there was the chance that the logistics would
-  just fail to come together. That would be a true disaster.
+  just fail to come together. That would leave attendees in Greece, out of pocket, and without an All Hands to attend.
 * Further, we might not be able to raise enough money to be able to pay for
   the entirety of people's travel and lodging as we had promised. This would be
   unfortunate, though perhaps something people could live with.
