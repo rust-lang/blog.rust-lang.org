@@ -53,9 +53,9 @@ Additionally, this will decrease the growth of our storage costs, improving the 
 
 ## Possible future changes
 
-We are considering turning this on by default in the future;
+We're considering turning this on by default in the future;
 i.e. only building for one target unless multiple targets are specifically requested.
-However, we do not want to break anyone's documentation, so we're making this feature opt-in  while we decide the migration strategy.
+However, we don't want to break anyone's documentation, so we're making this feature opt-in  while we decide the migration strategy.
 
 This change will also make it easier for docs.rs to build
 for targets that are not tier one, such as embedded targets.
