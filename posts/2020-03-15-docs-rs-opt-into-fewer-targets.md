@@ -31,8 +31,9 @@ If you only need a single target, it's even simpler:
 
 ```toml
 [package.metadata.docs.rs]
-# This builds only the default target (usually `x86_64-unknown-linux-gnu`)
-targets = []
+# This sets the default target to `x86_64-unknown-linux-gnu`
+# and only builds that target
+targets = ["x86_64-unknown-linux-gnu"]
 ```
 
 See the [docs.rs documentation][metadata] for more details about how to opt-in.
