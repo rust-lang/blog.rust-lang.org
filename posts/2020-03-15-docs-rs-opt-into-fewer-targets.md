@@ -11,7 +11,7 @@ If you don't need to build on all targets, you can enable this feature to reduce
 ## What does the feature do?
 
 By default, docs.rs builds all crates published to [crates.io] for [every tier one target][metadata].
-However, most crates have the same content on all target.
+However, most crates have the same content on all targets.
 Of the platform-dependent crates, almost all target a single platform,
 and do not need to be built on other targets.
 For example, [`winapi`] only has documentation on the `x86_64-pc-windows-msvc`
