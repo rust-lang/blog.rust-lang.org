@@ -61,10 +61,9 @@ for targets that are not tier one, such as embedded targets.
 
 ## How can I learn more?
 
-For more details about targets and what it means to be a tier-one target, see [platform support].
-For details about the change, see the PR: [docs.rs#632].
-For details about the motivation, see [docs.rs#343].
-For details about non-tier-one targets, see [docs.rs#563].
+You can learn more about the change in [the issue proposing it][docs.rs#343] and [the PR with the implementation][docs.rs#632]. Details on building non-tier-one targets are also available [in the issue requesting the feature][docs.rs#563].
+
+More information on targets and what it means to be a tier-one target is available in the [platform support] page.
 
 [docs.rs]: https://docs.rs/
 [crates.io]: https://crates.io/
