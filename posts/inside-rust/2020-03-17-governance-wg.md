@@ -23,7 +23,7 @@ You can find the [detailed minutes](https://github.com/rust-lang/wg-governance/b
 * Managing RFC discussions
 
 ## Next meeting
-* Our next meeting will be 26 March 2020 via Zulip 18-19 CET / 1pm-2pm EST / 10-11am PST.
+* Our next meeting will be 26 March 2020 via [Zulip](https://rust-lang.zulipchat.com/#narrow/stream/223182-wg-governance) 18-19 CET / 1pm-2pm EST / 10-11am PST.
 * In 2020 the agenda is always at https://hackmd.io/ATj1rZJaRimaIfIWfAOYfQ
 * Current plan is:
     1. Domain Working Group changes
