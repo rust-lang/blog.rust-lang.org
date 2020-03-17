@@ -41,7 +41,7 @@ See the [docs.rs documentation][metadata] for more details about how to opt-in.
 ## How does this help my crate?
 
 Instead of building for every tier-one target, you can build for only a single target,
-reducing your documentation times by a factor of 6.
+reducing your documentation build times by a factor of 6.
 This can especially help large crates or projects with many crates
 that take several hours to document.
 
