@@ -46,8 +46,8 @@ side effect on the rustc side. Having said that, how simple these improvements
 are is unclear.
 
 We would love to hear feedback and suggestions on how to resolve this problem!
-Please leave feedback on this internals thread (link to be filled in right
-before merging).
+Please leave feedback on [this internals
+thread](https://internals.rust-lang.org/t/resolving-rusts-forward-progress-guarantees/12003).
 
 [IR-test]: https://gist.github.com/nikic/7e521def71d106c345a255e464b18d3f
 [compile-time regressions]: https://perf.rust-lang.org/compare.html?start=66b0c97070f422cb82baaaafc79ee94cab4396c5&end=548b5e75afd6bad696920dfdb69c9812ce0488f1
