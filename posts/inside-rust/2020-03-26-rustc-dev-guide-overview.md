@@ -29,7 +29,7 @@ As we address these general areas, we will provide a synopsis that briefly cover
 
 ## Get Involved!
 
-Work is in progress on the Overview, and we need your help. A working draft of the document is available in [this branch](#TKTKTK) of the `rustc-dev-guide` GitHub repository.
+Work is in progress on the Overview, and we need your help. A working draft of the document is available in [this pull request](https://github.com/rust-lang/rustc-dev-guide/pull/633) on the `rustc-dev-guide` GitHub repository.
 
 If there is an area of `rustc` that you would like to understand better and it is appropriate for an overview document, please open an issue on our [issue tracker](https://github.com/rust-lang/rustc-dev-guide/issues) to let us know.
 
