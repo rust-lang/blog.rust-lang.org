@@ -2,7 +2,7 @@
 layout: post
 title: "Traits working group 2020 sprint 1 summary"
 author: Jack Huey
-team: The Traits WG <https://github.com/rust-lang/wg-traits>
+team: The Traits WG <https://rust-lang.github.io/wg-traits/>
 ---
 
 This Tuesday, the traits working group finished our first sprint of 2020, last 6 weeks from February 11th through March 24th. The last sprint was about a year ago, but we decided to resurrect the format in order to help push forward traits-related work in [Chalk] and rustc.
@@ -22,7 +22,7 @@ The overarching goal of the [traits working group][wg-traits] is to create a per
 
 As if that weren't enough, we'd like the implementaton to be **reusable**, too -- meaning that it can be used by rustc, yes, but also rust-analyzer and potentially other contexts as well. 
 
-One of the big, longer term goals for the compiler team is **library-ification**. This refers to the idea of breaking apart the compiler into independent libraries that can be learned, tested, and developed independently.
+This effort is part of one of the big, longer term goals for the compiler team: **library-ification**. This refers to the idea of breaking apart the compiler into independent libraries that can be learned, tested, and developed independently.
 
 In order to achieve these and future features, our work is split into two parts: 1) Improving rustc's existing trait solver. 2) Design and implement the [Chalk] trait solver, work towards integration into rustc. The Chalk trait solver, briefly, is a logic-based trait solver, designed to be independent of rustc internals. In addition to it being more powerful than the current rustc trait solving implementation, Chalk can be used as a library for compiler-related work, such as IDE integration (e.g. [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)).
 
