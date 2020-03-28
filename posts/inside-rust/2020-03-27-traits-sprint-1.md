@@ -22,7 +22,7 @@ The overarching goal of the [traits working group][wg-traits] is to create a per
 
 As if that weren't enough, we'd like the implementaton to be **reusable**, too -- meaning that it can be used by rustc, yes, but also rust-analyzer and potentially other contexts as well. 
 
-One of the big, longer term goals for the compiler team is **library-ification**. This refers to the idea of breaking apart the compiler into independent libraries that can be learned, tested, and developed independently. These independent libraries will not only make it easier to get involved in compiler development, since one can 
+One of the big, longer term goals for the compiler team is **library-ification**. This refers to the idea of breaking apart the compiler into independent libraries that can be learned, tested, and developed independently.
 
 In order to achieve these and future features, our work is split into two parts: 1) Improving rustc's existing trait solver. 2) Design and implement the [Chalk] trait solver, work towards integration into rustc. The Chalk trait solver, briefly, is a logic-based trait solver, designed to be independent of rustc internals. In addition to it being more powerful than the current rustc trait solving implementation, Chalk can be used as a library for compiler-related work, such as IDE integration (e.g. [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)).
 
@@ -168,7 +168,7 @@ Most of the work on Chalk has been focused on design, and *not much* has been do
 
 ### Improving the skill tree
 
-The skill tree has been a useful tool for helping us organize our work and track our status and overall plan. However, the current output is not exactly self explanatory, nor is it particularly attractive. The ultimate goal is to generate pictures similar to Lin's [hand drawn artwork][wasm]. There are also some missing features. If there is someone out there interested in taking a stab at improving the quality of the output, or adding features, that would be great! skill-tree lives in its own [github repo](https://github.com/nikomatsakis/skill-tree).
+The skill tree has been a useful tool for helping us organize our work and track our status and overall plan. However, the current output is not exactly self explanatory, nor is it particularly attractive. The ultimate goal is to generate pictures similar to Lin's [hand drawn artwork][wasm]. There are also some missing features. If there is someone out there interested in taking a stab at improving the quality of the output, or adding features, that would be great! skill-tree lives in its own [github repo](https://github.com/nikomatsakis/skill-tree), but just drop by the `#wg-traits` stream on Zulip to chat about it.
 
 [book]: http://rust-lang.github.io/chalk/book/
 [Chalk]: https://github.com/rust-lang/chalk
