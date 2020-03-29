@@ -13,7 +13,7 @@ This Tuesday, the traits working group finished our first sprint of 2020, last 6
 
 The overarching goal of the [traits working group][wg-traits] is to create a performant, extensible, and clean implementation of Rust's trait system. This implementation should scale not only to existing Rust features but also to new and upcoming features, such as:
 
-* Implied bounds ([RFC](https://rust-lang.github.io/rfcs/2089-implied-bounds.md))
+* Implied bounds ([RFC](https://rust-lang.github.io/rfcs/2089-implied-bounds.html))
 * Const generics ([RFC](https://rust-lang.github.io/rfcs/2000-const-generics.html))
 * Generic associated types (GATs) ([RFC](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html))
 * Inherent associated items ([tracking issue](https://github.com/rust-lang/rust/issues/8995))
