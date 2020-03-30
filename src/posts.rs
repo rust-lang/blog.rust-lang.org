@@ -4,7 +4,6 @@ use regex::Regex;
 use serde_derive::{Deserialize, Serialize};
 use std::error::Error;
 use std::path::{Path, PathBuf};
-use time::{Duration, Tm};
 
 #[derive(Debug, PartialEq, Deserialize)]
 struct YamlHeader {
@@ -22,7 +21,7 @@ pub(crate) struct Post {
     pub(crate) layout: String,
     pub(crate) title: String,
     pub(crate) author: String,
-    pub(crate) year: u32,
+    pub(crate) year: i32,
     pub(crate) show_year: bool,
     pub(crate) month: u32,
     pub(crate) day: u32,
@@ -45,7 +44,7 @@ impl Post {
         let mut split = filename.splitn(4, "-");
 
         // we do some unwraps because these need to be valid
-        let year = split.next().unwrap().parse::<u32>().unwrap();
+        let year = split.next().unwrap().parse::<i32>().unwrap();
         let month = split.next().unwrap().parse::<u32>().unwrap();
         let day = split.next().unwrap().parse::<u32>().unwrap();
         let filename = split.next().unwrap().to_string();
@@ -77,7 +76,13 @@ impl Post {
         url.set_extension("html");
 
         // this is fine
-        let url = format!("{:04}/{:02}/{:02}/{}", year, month, day, url.to_str().unwrap());
+        let url = format!(
+            "{:04}/{:02}/{:02}/{}",
+            year,
+            month,
+            day,
+            url.to_str().unwrap()
+        );
 
         let published = build_post_time(year, month, day, 0);
         let updated = published.clone();
@@ -138,31 +143,15 @@ impl Post {
         })
     }
 
-    pub fn set_updated(&mut self, hour: u32) {
-        self.updated = build_post_time(self.year, self.month, self.day, hour);
+    pub fn set_updated(&mut self, seconds: u32) {
+        self.updated = build_post_time(self.year, self.month, self.day, seconds);
     }
 }
 
-fn build_post_time(year: u32, month: u32, day: u32, seconds: u32) -> String {
-    let seconds = Duration::seconds(seconds as i64);
-    if seconds >= Duration::days(1) {
-        panic!("seconds must be less then a day")
-    };
-    // build the time. this is only approximate, which is fine.
-    let mut time = Tm {
-        tm_sec: 0,
-        tm_min: 0,
-        tm_hour: 0,
-        tm_mday: day as i32,
-        tm_mon: (month as i32) - 1,    // 0-11 not 1-12
-        tm_year: (year as i32) - 1900, // from the year 1900, not the actual year
-        // these next two fields are wrong but we never use them to generate our times
-        tm_wday: 1,
-        tm_yday: 1,
-        tm_isdst: 0,
-        tm_utcoff: 0,
-        tm_nsec: 0,
-    };
-    time = time + seconds;
-    time.rfc3339().to_string()
+fn build_post_time(year: i32, month: u32, day: u32, seconds: u32) -> String {
+    chrono::DateTime::<chrono::Utc>::from_utc(
+        chrono::NaiveDate::from_ymd(year, month, day).and_hms(0, 0, seconds),
+        chrono::Utc,
+    )
+    .to_rfc3339()
 }
