@@ -3,7 +3,7 @@ layout: post
 title: "The rustc-guide is now rustc-dev-guide"
 author: mark-i-m
 description: "the guide has been renamed"
-team: the rustc learning working group <https://www.rust-lang.org/governance/teams/compiler#wg-learning>
+team: the rustc rustc dev guide working group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>
 ---
 
 You may or may not be aware of two similarly named resources:
@@ -38,4 +38,4 @@ rustc-dev-guide repo][repo] or on our [zulip channel][zulip].
 
 [gh]: https://github.com/rust-lang/rustc-dev-guide/issues/602
 [repo]: https://github.com/rust-lang/rustc-dev-guide
-[zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning
+[zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide

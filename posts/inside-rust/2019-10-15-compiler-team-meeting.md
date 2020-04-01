@@ -26,11 +26,11 @@ Each week, we have general announcements from the team followed by check-ins fro
 
 ## Working group sync
 
-### [wg-learning](https://rust-lang.github.io/compiler-team/working-groups/learning/)
+### [wg-rustc-dev-guide](https://rust-lang.github.io/compiler-team/working-groups/learning/)
 
-`wg-learning` aims to make the compiler easier to learn by ensuring that [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) and api docs are “complete”.
+`wg-rustc-dev-guide` aims to make the compiler easier to learn by ensuring that [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) and api docs are “complete”.
 
-- `wg-learning` has been working on transcribing videos from the [compiler lecture series](https://www.youtube.com/watch?v=elBxMRSNYr4&list=PL85XCvVPmGQhOL-J2Ng7qlPvDVOwYpGTN) into [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) chapters.
+- `wg-rustc-dev-guide` has been working on transcribing videos from the [compiler lecture series](https://www.youtube.com/watch?v=elBxMRSNYr4&list=PL85XCvVPmGQhOL-J2Ng7qlPvDVOwYpGTN) into [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) chapters.
 
 - Originally, individuals were assigned one or lectures to complete but that hasn't worked very well.
 
