@@ -13,8 +13,8 @@ use std::fs::{self, File};
 use std::io::Write;
 use std::path::{Path, PathBuf};
 
-struct Generator {
-    handlebars: Handlebars,
+struct Generator<'a> {
+    handlebars: Handlebars<'a>,
     blogs: Vec<Blog>,
     out_directory: PathBuf,
 }
@@ -46,11 +46,11 @@ handlebars_helper!(hb_month_name_helper: |month_num: u64| match month_num {
     _ => "Error!",
 });
 
-impl Generator {
+impl<'a> Generator<'a> {
     fn new(
         out_directory: impl AsRef<Path>,
         posts_directory: impl AsRef<Path>,
-    ) -> Result<Generator, Box<dyn Error>> {
+    ) -> Result<Self, Box<dyn Error>> {
         let mut handlebars = Handlebars::new();
         handlebars.set_strict_mode(true);
         handlebars.register_templates_directory(".hbs", "templates")?;
@@ -162,7 +162,7 @@ impl Generator {
         let data = json!({
             "blog": blog,
             "posts": posts,
-            "feed_updated": time::now_utc().rfc3339().to_string(),
+            "feed_updated": chrono::Utc::now().to_rfc3339(),
         });
 
         self.render_template(blog.prefix().join("feed.xml"), "feed", data)?;
@@ -185,7 +185,7 @@ impl Generator {
             .collect();
         let data = Releases {
             releases: releases,
-            feed_updated: time::now_utc().rfc3339().to_string(),
+            feed_updated: chrono::Utc::now().to_rfc3339(),
         };
         fs::write(
             self.out_directory.join(blog.prefix()).join("releases.json"),
