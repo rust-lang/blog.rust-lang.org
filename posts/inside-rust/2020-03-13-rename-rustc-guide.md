@@ -3,7 +3,7 @@ layout: post
 title: "The rustc-guide is now rustc-dev-guide"
 author: mark-i-m
 description: "the guide has been renamed"
-team: the rustc rustc dev guide working group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>
+team: the rustc dev guide working group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>
 ---
 
 You may or may not be aware of two similarly named resources:
