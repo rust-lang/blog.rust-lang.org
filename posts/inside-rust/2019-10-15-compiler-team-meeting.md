@@ -26,7 +26,7 @@ Each week, we have general announcements from the team followed by check-ins fro
 
 ## Working group sync
 
-### [wg-rustc-dev-guide](https://rust-lang.github.io/compiler-team/working-groups/learning/)
+### [wg-rustc-dev-guide](https://rust-lang.github.io/compiler-team/working-groups/rustc-dev-guide/)
 
 `wg-rustc-dev-guide` aims to make the compiler easier to learn by ensuring that [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) and api docs are “complete”.
 
