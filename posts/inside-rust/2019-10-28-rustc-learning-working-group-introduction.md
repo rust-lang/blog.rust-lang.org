@@ -3,7 +3,7 @@ layout: post
 title: "The Rustc Dev Guide Working Group - An Introduction"
 author: Amanjeev Sethi
 description: "introduction rustc dev guide working group useful links"
-team: the rustc rustc dev guide working group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>
+team: the rustc dev guide working group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>
 ---
 
 The [Rustc Dev Guide Working Group], formed in April 2019, is focused on making the
