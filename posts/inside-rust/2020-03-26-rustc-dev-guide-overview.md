@@ -3,7 +3,7 @@ layout: post
 title: "rustc-dev-guide Overview"
 author: "Chris Simpkins"
 description: "2020-03-26 rustc-dev-guide Overview"
-team: the Learning Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-learning>
+team: the Rustc Dev Guide Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>
 ---
 
 The `rustc` compiler includes over 380,000 lines of source across more than 40 crates<sup>1</sup> to support the lexing through binary linking stages of the Rust compile process. It is daunting for newcomers, and we recognize that a high-level survey of the pipeline is warranted.
@@ -37,8 +37,8 @@ And if you know the compiler and want to pitch in on the rustc-dev-guide Overvie
 
 ## Interested in Learning (Working Group)?
 
-Are you interested in learning more about the `rustc` compiler and teaching others? Drop by our [Zulip stream](https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning) and say hello!
+Are you interested in learning more about the `rustc` compiler and teaching others? Drop by our [Zulip stream](https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide) and say hello!
 
 ---
 
-<sup>1</sup> These numbers account for lines in Rust files across all dependencies necessary to build `rustc`. Thanks to @LeSeulArtichaut for these calculations! See [the notes on Zulip](https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning/topic/The.20Rustc.20Overview.3A.20blog.20post/near/189441101) for additional details.
+<sup>1</sup> These numbers account for lines in Rust files across all dependencies necessary to build `rustc`. Thanks to @LeSeulArtichaut for these calculations! See [the notes on Zulip](https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide/topic/The.20Rustc.20Overview.3A.20blog.20post/near/189441101) for additional details.

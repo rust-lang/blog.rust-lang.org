@@ -2,7 +2,7 @@
 layout: post
 title: "An Update from WG-Learning"
 author: mark-i-m
-team: the Learning Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-learning>
+team: the Rustc Dev Guide Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>
 ---
 
 # An update from WG-Learning
@@ -67,7 +67,7 @@ topics.
 ## Getting involved
 
 Did any of this sound interesting to you? We would love for you to join us! You
-can the Learning WG on the [`t-compiler/wg-learning`][zulip] stream on Zulip.
+can the Learning WG on the [`t-compiler/wg-rustc-dev-guide`][zulip] stream on Zulip.
 Feel free to stop by and ping us.
 
 
@@ -78,6 +78,6 @@ Feel free to stop by and ping us.
 [ra]: https://github.com/rust-analyzer/rust-analyzer
 [ty]: https://doc.rust-lang.org/nightly/nightly-rustc/rustc/ty/type.Ty.html
 [typr]: https://github.com/rust-lang/rustc-dev-guide/pull/530
-[meeting]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning/topic/planning.20meeting
+[meeting]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide/topic/planning.20meeting
 [glos]: https://rustc-dev-guide.rust-lang.org/appendix/glossary.html
-[zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning
+[zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide

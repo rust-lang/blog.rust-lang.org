@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "The Rustc Learning Working Group - An Introduction"
+title: "The Rustc Dev Guide Working Group - An Introduction"
 author: Amanjeev Sethi
-description: "introduction learning working group useful links"
-team: the rustc learning working group <https://www.rust-lang.org/governance/teams/compiler#wg-learning>
+description: "introduction rustc dev guide working group useful links"
+team: the rustc dev guide working group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>
 ---
 
-The [Learning Working Group], formed in April 2019, is focused on making the
+The [Rustc Dev Guide Working Group], formed in April 2019, is focused on making the
 compiler easier to learn by ensuring that [rustc-dev-guide] and API docs are
 "complete". It is one of the many efforts by the Rust Compiler team to
 decrease the barrier of contributing to the compiler. As noted on the WG’s
@@ -59,21 +59,21 @@ and new folks who want to contribute and learn.
 ## Call for participation
 
 There is no bar to entry in the group. To join the group, you can
-drop a message in [`#t-compiler/wg-learning` on Zulip] introducing
+drop a message in [`#t-compiler/wg-rustc-dev-guide` on Zulip] introducing
 yourself. We would love to hear from you and hope we all together
 can make the documentation better.
 
 ## Important  resources
 
-- **[Learning Working Group]**
+- **[Rustc Dev Guide Working Group]**
 - **[Rustc Dev Guide Book]**
 - **[Rustc Dev Guide Repository]**
 - **[Github Project (Kanban)]**
 - **[Learning WG Meeting Minutes]**
 - **[Rust Youtube Videos]** 
-- **[Zulip Stream: `#t-compiler/wg-learning` on Zulip]**
+- **[Zulip Stream: `#t-compiler/wg-rustc-dev-guide` on Zulip]**
 
-[Learning Working Group]: https://github.com/rust-lang/compiler-team/tree/master/content/working-groups/learning
+[Rustc Dev Guide Working Group]: https://github.com/rust-lang/compiler-team/tree/master/content/working-groups/learning
 [rustc-dev-guide]: https://rustc-dev-guide.rust-lang.org/
 [Rustc Dev Guide Book]: https://rustc-dev-guide.rust-lang.org/
 [rustc-dev-guide Github repository]: https://github.com/rust-lang/rustc-dev-guide
@@ -83,5 +83,5 @@ can make the documentation better.
 [Learning WG Meeting Minutes]: https://github.com/rust-lang/compiler-team/tree/master/content/working-groups/learning/minutes
 [Rust Youtube Videos]: https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA/playlists
 [rust-lang/rust]: https://github.com/rust-lang/rust
-[Zulip Stream: `#t-compiler/wg-learning` on Zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning
-[`#t-compiler/wg-learning` on Zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-learning
+[Zulip Stream: `#t-compiler/wg-rustc-dev-guide` on Zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide
+[`#t-compiler/wg-rustc-dev-guide` on Zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide
