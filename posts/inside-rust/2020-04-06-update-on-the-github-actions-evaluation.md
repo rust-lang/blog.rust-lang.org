@@ -11,11 +11,11 @@ year][prev] of [GitHub Actions][gha] as the new CI platform for the
 
 On March 20th, 2020 we merged [PR #70190][70190], adding the GitHub Actions
 configuration to the compiler repository. We’re still gating merges on the
-existing Azure Pipelines setup, but running the two providers side by side is
-allowing us to find bugs in the GitHub Actions configuration without impacting
+existing Azure Pipelines setup, but running the two providers side by side
+allows us to find bugs in the GitHub Actions configuration without impacting
 the work of our contributors.
 
-Once [all outstanding issues][gha-issues] are be fixed, the Infrastructure Team
+Once [all outstanding issues][gha-issues] are fixed, the Infrastructure Team
 will make the decision to either switch to GitHub Actions or stay on Azure
 Pipelines. We expect the decision to happen in a couple of months.
 
