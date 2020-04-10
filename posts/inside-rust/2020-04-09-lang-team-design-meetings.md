@@ -20,7 +20,7 @@ Agenda:
   blocks](https://github.com/rust-lang/rust/issues/70941)
 * Discuss revisions to the `Try` trait required for stabilization.
 * Discuss syntax for early exit from a `try` with an error (`Err(e)?`): `fail`,
-  `throw`, `raise`, etc.
+  `throw`, `raise`, `yeet`, etc.
 * If we have time, talk some about possibilities for function-level `try`.
 
 # April 20 -- Edition planning
