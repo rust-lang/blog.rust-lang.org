@@ -9,7 +9,9 @@ team: the language team <https://www.rust-lang.org/governance/teams/lang>
 We've scheduled our **language team design meetings** for April. We have plans
 for three meetings:
 
-# April 13 -- Try blocks, try traits, functions that try, oh my!
+# try blocks, Try traits, functions that try, oh my!
+
+(Update: tentatively moved to May 4.)
 
 Clear the path to stabilizing `try` blocks and the `Try` trait, and identify
 some next steps for function-level try.
