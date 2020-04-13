@@ -25,5 +25,5 @@ jobs:
           curl -LsSf https://raw.githubusercontent.com/rust-lang/simpleinfra/master/setup-deploy-keys/src/deploy.rs | rustc - -o /tmp/deploy
           (cd site/ && /tmp/deploy)
         env:
-          GITHUB_DEPLOY_KEY: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_DEPLOY_KEY: ${{ secrets.GITHUB_DEPLOY_KEY }}
         if: github.ref == 'refs/heads/master'
