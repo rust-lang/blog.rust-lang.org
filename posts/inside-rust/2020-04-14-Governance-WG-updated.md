@@ -18,6 +18,7 @@ You can find the [detailed minutes](https://github.com/rust-lang/wg-governance/b
 * Follow up on the [Project Group RFC](https://github.com/rust-lang/rfcs/pull/2856)
 * Defined roles of "lead" and "liason" 
 * Pre-RFC process
+* We ran out of time before getting to the Domain Working Group retrospective, but look forward to covering it at the next meeting!
 
 ## Next meeting
 * Our next meeting will be 23 April 2020 via [Zulip](https://rust-lang.zulipchat.com/#narrow/stream/223182-wg-governance) 18-19 CET / 1pm-2pm EST / 10-11am PST.
