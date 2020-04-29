@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.8 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.8 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.8 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.8" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.8</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 14, 2016 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce the latest version of Rust, 1.8. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>As always, you can <a href="https://www.rust-lang.org/install.html">install Rust 1.8</a> from the appropriate page on our
+website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-180-2016-04-14">detailed release notes for 1.8</a> on GitHub.
+About 1400 patches were landed in this release.</p>
+<h3><a href="#whats-in-18-stable" aria-hidden="true" class="anchor" id="whats-in-18-stable"></a>What's in 1.8 stable</h3>
+<p>There are two new features in Rust 1.8, as well as good news for Windows users!
+Additionally, work is underway to replace our <code>make</code>-based build system with
+one based on Cargo.</p>
+<p>The first feature is that the various “operator equals” operators, such as <code>+=</code>
+and <code>-=</code>, are now overloadable via various traits. This change was accepted in
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/0953-op-assign.md">RFC 953</a>, and looks like this:</p>
+<pre><code class="language-rust">use std::ops::AddAssign;
+
+#[derive(Debug)]
+struct Count { 
+    value: i32,
+}
+    
+impl AddAssign for Count {
+    fn add_assign(&amp;mut self, other: Count) {
+        self.value += other.value;
+    }
+}   
+
+fn main() {
+    let mut c1 = Count { value: 1 };
+    let c2 = Count { value: 5 };
+
+    c1 += c2;
+
+    println!(&quot;{:?}&quot;, c1);
+}
+</code></pre>
+<p>This will print out <code>Count { value: 6 }</code>. Like the other operator traits, an
+associated type allows you to use different types on each side of the operator,
+as well. See the RFC for more details.</p>
+<p>The second feature is very small, and comes from <a href="https://github.com/rust-lang/rfcs/blob/master/text/0218-empty-struct-with-braces.md">RFC 218</a>. Before Rust 1.8, a
+<code>struct</code> with no fields did not have curly braces:</p>
+<pre><code class="language-rust">struct Foo; // works
+struct Bar { } // error
+</code></pre>
+<p>The second form is no longer an error. This was originally disallowed for
+consistency with other empty declarations, as well as a parsing ambiguity.
+However, that ambiguity is non-existent in post-1.0 Rust. Macro authors saw
+additional complexity due to needing a special-case, as well. Finally, users
+who do active development would sometimes switch between empty and non-empty
+versions of a struct, and the extra work and diffs involved was less than
+ideal.</p>
+<p>On the Windows front, 32-bit MSVC builds <a href="https://github.com/rust-lang/rust/pull/30448">now implement unwinding</a>. This moves
+<code>i686-pc-windows-msvc</code> to a Tier 1 platform.</p>
+<p>Finally, we have used <code>make</code> to build Rust for a very long time. However,
+we already have a wonderful tool for building Rust programs: Cargo. In Rust
+1.8, <a href="https://github.com/rust-lang/rust/pull/31123">initial support landed</a> for a new build system that’s written in Rust,
+and based on Cargo. It is not yet the default, and there is much more work to
+do. We will talk about this in release notes more once it’s completely done,
+for now, please read the GitHub issue for more details.</p>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
+<p>About 20 library functions and methods are now stable in 1.8. There are three
+major groups of changes: UTF-16 related string methods, various APIs related to
+time, and the various traits needed for operator overloading mentioned in the
+language section.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-180-2016-04-14">detailed release notes</a> for more.</p>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
+<p>There were a few updates to Cargo:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/cargo/pull/2081"><code>cargo init</code></a> can be used to
+start a Cargo project in your current working directory, rather than making a
+new subdirectory like <code>cargo new</code>.</li>
+<li><a href="https://github.com/rust-lang/cargo/pull/2196"><code>cargo metadata</code></a> is another
+new subcommand for fetching metadata about a project.</li>
+<li><code>.cargo/config</code> now has <a href="https://github.com/rust-lang/cargo/pull/2397">keys for <code>-v</code> and
+<code>--color</code></a></li>
+<li>Cargo’s ability to have target-specific dependencies <a href="https://github.com/rust-lang/cargo/pull/2328">was
+enhanced</a>.</li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-180-2016-04-14">detailed release notes</a> for more.</p>
+<h3><a href="#contributors-to-18" aria-hidden="true" class="anchor" id="contributors-to-18"></a>Contributors to 1.8</h3>
+<p>We had 126 individuals contribute to 1.8. Thank you so much!</p>
+<ul>
+<li>Aaron Turon</li>
+<li>Abhishek Chanda</li>
+<li>Adolfo Ochagavía</li>
+<li>Aidan Hobson Sayers</li>
+<li>Alan Somers</li>
+<li>Alejandro Wainzinger</li>
+<li>Aleksey Kladov</li>
+<li>Alex Burka</li>
+<li>Alex Crichton</li>
+<li>Amanieu d'Antras</li>
+<li>Andrea Canciani</li>
+<li>Andreas Linz</li>
+<li>Andrew Cantino</li>
+<li>Andrew Horton</li>
+<li>Andrew Paseltiner</li>
+<li>Andrey Cherkashin</li>
+<li>Angus Lees</li>
+<li>arcnmx</li>
+<li>Ariel Ben-Yehuda</li>
+<li>ashleysommer</li>
+<li>Benjamin Herr</li>
+<li>Валерий Лашманов</li>
+<li>Björn Steinbrink</li>
+<li>bors</li>
+<li>Brian Anderson</li>
+<li>Brian Bowman</li>
+<li>Christian Wesselhoeft</li>
+<li>Christopher Serr</li>
+<li>Corey Farwell</li>
+<li>Craig M. Brandenburg</li>
+<li>Cyryl Płotnicki-Chudyk</li>
+<li>Daniel J Rollins</li>
+<li>Dave Huseby</li>
+<li>David AO Lozano</li>
+<li>David Henningsson</li>
+<li>Devon Hollowood</li>
+<li>Dirk Gadsden</li>
+<li>Doug Goldstein</li>
+<li>Eduard Burtescu</li>
+<li>Eduard-Mihai Burtescu</li>
+<li>Eli Friedman</li>
+<li>Emanuel Czirai</li>
+<li>Erick Tryzelaar</li>
+<li>Evan</li>
+<li>Felix S. Klock II</li>
+<li>Florian Berger</li>
+<li>Geoff Catlin</li>
+<li>ggomez</li>
+<li>gohyda</li>
+<li>Gökhan Karabulut</li>
+<li>Guillaume Gomez</li>
+<li>ituxbag</li>
+<li>James Miller</li>
+<li>Jeffrey Seyfried</li>
+<li>John Talling</li>
+<li>Jonas Schievink</li>
+<li>Jonathan S</li>
+<li>Jorge Aparicio</li>
+<li>Joshua Holmer</li>
+<li>JP Sugarbroad</li>
+<li>Kai Noda</li>
+<li>Kamal Marhubi</li>
+<li>Katze</li>
+<li>Kevin Brothaler</li>
+<li>Kevin Butler</li>
+<li>Manish Goregaokar</li>
+<li>Markus Westerlind</li>
+<li>Marvin Löbel</li>
+<li>Masood Malekghassemi</li>
+<li>Matt Brubeck</li>
+<li>Michael Huynh</li>
+<li>Michael Neumann</li>
+<li>Michael Woerister</li>
+<li>mitaa</li>
+<li>Ms2ger</li>
+<li>Nathan Kleyn</li>
+<li>nicholasf</li>
+<li>Nick Cameron</li>
+<li>Niko Matsakis</li>
+<li>Noah</li>
+<li>NODA, Kai</li>
+<li>Novotnik, Petr</li>
+<li>Oliver Middleton</li>
+<li>Oliver Schneider</li>
+<li>petevine</li>
+<li>Philipp Oppermann</li>
+<li>pierzchalski</li>
+<li>Piotr Czarnecki</li>
+<li>pravic</li>
+<li>Pyfisch</li>
+<li>Richo Healey</li>
+<li>Ruud van Asseldonk</li>
+<li>Scott Olson</li>
+<li>Sean McArthur</li>
+<li>Sebastian Wicki</li>
+<li>Sébastien Marie</li>
+<li>Seo Sanghyeon</li>
+<li>Simonas Kazlauskas</li>
+<li>Simon Sapin</li>
+<li>srinivasreddy</li>
+<li>Steve Klabnik</li>
+<li>Steven Allen</li>
+<li>Steven Fackler</li>
+<li>Stu Black</li>
+<li>Tang Chenglong</li>
+<li>Ted Horst</li>
+<li>Ticki</li>
+<li>tiehuis</li>
+<li>Tim Montague</li>
+<li>Tim Neumann</li>
+<li>Timon Van Overveldt</li>
+<li>Tobias Bucher</li>
+<li>Tobias Müller</li>
+<li>Todd Lucas</li>
+<li>Tom Tromey</li>
+<li>Tshepang Lekhonkhobe</li>
+<li>ubsan</li>
+<li>Ulrik Sverdrup</li>
+<li>Vadim Petrochenkov</li>
+<li>vagrant</li>
+<li>Valentin Lorentz</li>
+<li>Varun Vats</li>
+<li>vegai</li>
+<li>vlastachu</li>
+<li>Wangshan Lu</li>
+<li>York Xiang</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

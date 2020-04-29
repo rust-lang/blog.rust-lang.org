@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>2019-11-05 Infrastructure Team Meeting | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="2019-11-05 Infrastructure Team Meeting | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="2019-11-05 Infrastructure Team Meeting | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="2019-11-05 Infrastructure Team Meeting" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>2019-11-05 Infrastructure Team Meeting</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 6, 2019 &middot; Pietro Albini
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/operations#infra">the infrastructure team</a> 
+    </div>
+
+    <div class="post">
+      <p>Meeting run by shepmaster. Minutes written by pietroalbini.<br />
+Attending: aidanhs, alexcrichton, kennytm, Mark-Simulacrum, pietroalbini, shepmaster<br />
+<a href="https://discordapp.com/channels/442252698964721669/443148319431065610/641335927721033732">Start of the conversation</a></p>
+<h2><a href="#removing-msys2-ca-certificates-workaround-p-high-issue" aria-hidden="true" class="anchor" id="removing-msys2-ca-certificates-workaround-p-high-issue"></a>Removing MSYS2 ca-certificates workaround (P-high issue)</h2>
+<p>A few weeks ago our CI broke due to a broken <code>ca-certificates</code> MSYS2 package,
+which caused all Windows builders to fail. The temporary patch was to install a
+vendored copy of that package, and since it’s not needed anymore pietroalbini
+landed a PR this week removing the hack from our CI configuration.</p>
+<p>The other part of the issue is figuring out whether to vendor MSYS2 and MinGW
+as a whole, but there is the issue of keeping the mirrors sort of up to date,
+and we don’t have a clear idea on how to fix that at the moment. We decided to
+downgrade the issue to P-medium and to talk about mirroring and vendoring at
+the All Hands 2020. In preparation of that meeting it will be useful to audit
+what we mirror at the moment and how old that is, but it’s not urgent and
+nobody has the time to work on it right now.</p>
+<h2><a href="#figuring-out-data-retention-on-azure-pipelines-p-medium-issue" aria-hidden="true" class="anchor" id="figuring-out-data-retention-on-azure-pipelines-p-medium-issue"></a>Figuring out data retention on Azure Pipelines (P-medium issue)</h2>
+<p>This is not yet an issue, as the current retention is configured to 2 years.
+We’re waiting on some talks with Microsoft to settle before starting to poke
+people about this again.</p>
+<h2><a href="#re-enable-llvmdebug-assertions-on-slow-builders-p-medium-issue" aria-hidden="true" class="anchor" id="re-enable-llvmdebug-assertions-on-slow-builders-p-medium-issue"></a>Re-enable LLVM/debug assertions on slow builders (P-medium issue)</h2>
+<p>We still don’t have the time budget to enable them back, but increasing the
+core count should allow us to do that.</p>
+<h2><a href="#new-server-for-perf" aria-hidden="true" class="anchor" id="new-server-for-perf"></a>New server for perf</h2>
+<p>alexcrichton ordered an
+<a href="https://www.hetzner.com/dedicated-rootserver/ax41-nvme">AX41-NVMe</a> bare metal
+server from Hetzner as a replacement benchmarking machine for perf, paid by
+Mozilla. We’re waiting on Hetzner to give us access to it before simulacrum can
+try it out and configure it. If we don’t get access in a few days alexcrichton
+is going to ping them.</p>
+<h2><a href="#lifecycle-policy-for-staticrust-langorg" aria-hidden="true" class="anchor" id="lifecycle-policy-for-staticrust-langorg"></a>Lifecycle policy for static.rust-lang.org</h2>
+<p>static.rust-lang.org is backed by a S3 bucket, and since 2016 versioning is
+enabled on the bucket to prevent issues with accidental file deletions. Some of
+the files in that bucket are overridden each day though (for example nightly
+compilers), keeping a bunch of past versions stored. Those past versions are
+useless as there isn’t an easy way to get them from the CDN, and the files are
+also stored separately in other places on that bucket. Everyone agreed we
+should enable lifecycle policy to delete those useless files, and we reached a
+consensus on deleting them after three months. This won’t be noticeable by end
+users, installing old nightlies by date will still work.</p>
+<h2><a href="#what-to-do-with-the-rust-lang-ci-s3-bucket" aria-hidden="true" class="anchor" id="what-to-do-with-the-rust-lang-ci-s3-bucket"></a>What to do with the rust-lang-ci S3 bucket</h2>
+<p><code>rust-lang-ci</code> is a really old and currently unused S3 bucket which was used to
+store CI artifacts before we migrated them to <code>rust-lang-ci2</code>. There are still
+some files in there, so we enabled bucket logging for a month to see how
+frequent files there were accessed.</p>
+<p>Turns out, we had a total of 86 successful requests in a month, split between:</p>
+<ul>
+<li>69 requests were accessing cargo builds of 1.14.0</li>
+<li>17 requests were accessing old CI mirrors</li>
+</ul>
+<p>Due to the low traffic we decided to remove those old CI mirrors, but for the
+cargo builds the question is more complicated. Due to a bug in the manifest
+generation back then, installing Rust 1.14.0 from rustup actually downloads
+Cargo from the bucket instead of the CDN, and removing those files would
+permanently break installing Rust 1.14.0. There was disagreement on whether to
+do that inside the team, and we reached the decision to wait until pietroalbini
+investigates whether redirects are feasible to configure in S3.</p>
+<h2><a href="#early-feedback-on-pietroalbinis-wip-ci-generate-branch" aria-hidden="true" class="anchor" id="early-feedback-on-pietroalbinis-wip-ci-generate-branch"></a>Early feedback on pietroalbini’s WIP ci-generate branch</h2>
+<p>pietroalbini is working on a branch that implements a generator for our CI
+configuration, from a simplified custom DSL
+(<a href="https://github.com/pietroalbini/rust/tree/ci-generate">branch</a> -
+<a href="https://github.com/pietroalbini/rust/tree/ci-generate/src/tools/generate-ci-config">documentation</a>).
+While the generator has a number of small benefits for us, the main driver
+between the creation of the branch is to work around some limitations in GitHub
+Actions’s configuration syntax, namely the lack of importable templates. There
+wasn’t time to properly discuss this so we deferred to next week.</p>
+<h2><a href="#revisiting-meeting-run-rotation" aria-hidden="true" class="anchor" id="revisiting-meeting-run-rotation"></a>Revisiting meeting run rotation</h2>
+<p>A month ago we started rotating who runs the meetings, intending to revisit the
+decision today. The team felt either neutral or positive about the idea, so
+we’ll keep doing that for a while. aidanhs is going to run the next meeting.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

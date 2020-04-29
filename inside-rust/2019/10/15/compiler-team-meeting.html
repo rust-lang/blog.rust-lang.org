@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>2019-10-10 Compiler Team Triage Meeting | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="2019-10-10 Compiler Team Triage Meeting | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="2019-10-10 Compiler Team Triage Meeting | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="2019-10-10 Compiler Team Triage Meeting" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>2019-10-10 Compiler Team Triage Meeting</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 15, 2019 &middot; Wesley Wiser
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">the compiler team</a> 
+    </div>
+
+    <div class="post">
+      <p>The compiler team had our weekly triage meeting on 2019-10-10.
+You can find the <a href="https://rust-lang.github.io/compiler-team/minutes/triage-meeting/2019-10-10/">minutes</a> on the <a href="https://github.com/rust-lang/compiler-team">compiler-team</a> repository.
+Each week, we have general announcements from the team followed by check-ins from two of the compiler team working groups.</p>
+<h2><a href="#announcements" aria-hidden="true" class="anchor" id="announcements"></a>Announcements</h2>
+<ul>
+<li>
+<p><a href="https://github.com/centril">@centril</a> is splitting <code>libsyntax</code> into data and logic parts which will decrease the amount of code <code>librustc</code> depends on.</p>
+</li>
+<li>
+<p><a href="https://github.com/nagisa">@nagisa</a> is working on a cross-platform version of stacker which will allow us to avoid stack overflows in rustc.</p>
+</li>
+<li>
+<p>There is a compiler team <a href="https://rust-lang.github.io/compiler-team/minutes/design-meeting/2019-10-11-DepGraph-persistence-PR62038/">design meeting</a> scheduled for tomorrow (2019-10-11) to discuss some of <a href="https://github.com/zoxc">@Zoxc</a>'s PRs.</p>
+</li>
+<li>
+<p><a href="https://github.com/pnkfelix">@pnkfelix</a> is revising the code that handles structural match checking.</p>
+</li>
+<li>
+<p><a href="https://github.com/nikomatsakis">@nikomatsakis</a> has a PR (<a href="https://github.com/rust-lang/rust/issues/65232">#65232</a>) up which helps us get closer to lazy normalization.</p>
+</li>
+<li>
+<p><code>wg-traits</code> is going to start holding a weekly &quot;office hours&quot; video call to help answer questions and teach people about trait system internals.</p>
+</li>
+</ul>
+<h2><a href="#working-group-sync" aria-hidden="true" class="anchor" id="working-group-sync"></a>Working group sync</h2>
+<h3><a href="#wg-rustc-dev-guide" aria-hidden="true" class="anchor" id="wg-rustc-dev-guide"></a><a href="https://rust-lang.github.io/compiler-team/working-groups/rustc-dev-guide/">wg-rustc-dev-guide</a></h3>
+<p><code>wg-rustc-dev-guide</code> aims to make the compiler easier to learn by ensuring that <a href="https://rustc-dev-guide.rust-lang.org/">rustc-dev-guide</a> and api docs are “complete”.</p>
+<ul>
+<li>
+<p><code>wg-rustc-dev-guide</code> has been working on transcribing videos from the <a href="https://www.youtube.com/watch?v=elBxMRSNYr4&list=PL85XCvVPmGQhOL-J2Ng7qlPvDVOwYpGTN">compiler lecture series</a> into <a href="https://rustc-dev-guide.rust-lang.org/">rustc-dev-guide</a> chapters.</p>
+</li>
+<li>
+<p>Originally, individuals were assigned one or lectures to complete but that hasn't worked very well.</p>
+</li>
+<li>
+<p>Recently, they're trying to work on one video at a time as a team with much better results.</p>
+</li>
+<li>
+<p>There's <a href="https://paper.dropbox.com/doc/Ty-lecture-summary--Almbjo_id6n8CKrOHlsTMG2dAg-4jFj9bVOLlW7uhIOWHITX">a PR</a> open for a new chapter based on the <code>ty</code> lecture.</p>
+</li>
+</ul>
+<p><a href="https://rust-lang.zulipchat.com/#narrow/stream/131828-t-compiler/topic/weekly.20meeting.202019-10-10.20.2354818/near/177816515">Link to full discussion</a></p>
+<h3><a href="#wg-llvm" aria-hidden="true" class="anchor" id="wg-llvm"></a><a href="https://rust-lang.github.io/compiler-team/working-groups/llvm/">wg-llvm</a></h3>
+<p><code>wg-llvm</code> encompasses work in LLVM upstream fixing the issues and implementing features that matter to Rust.</p>
+<ul>
+<li>rustc has upgraded to the LLVM 9 release;
+<ul>
+<li>Which allows us to replace some the emscripten stuff with LLVM’s toolchain.</li>
+<li>As part of these upgrades we will likely end up dropping support for the super old LLVM 6, which in turn allows us to stop building the unnecessary Go &amp; OCaml bindings to LLVM, which in turn helps rustc build times slightly.</li>
+</ul>
+</li>
+<li>People are also working on enabling use of the new pass manager, which might give us some tangible code quality improvements over the status quo.</li>
+</ul>
+<p><a href="https://rust-lang.zulipchat.com/#narrow/stream/131828-t-compiler/topic/weekly.20meeting.202019-10-10.20.2354818/near/177817116">Link to full discussion</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

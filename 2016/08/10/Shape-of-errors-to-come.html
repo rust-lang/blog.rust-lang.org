@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Shape of errors to come | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Shape of errors to come | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Shape of errors to come | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Shape of errors to come" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Shape of errors to come</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 10, 2016 &middot; Jonathan Turner
+    
+    </div>
+
+    <div class="post">
+      <p>There are changes afoot in the Rust world. If you've tried out the latest nightly, you'll notice
+something is <em>a little different</em>. For the past few months we've been working on new way of
+reporting errors that's easier to read and understand. This is part of an on-going campaign to
+improve Rust's usability across the board. We mentioned ways to help us
+<a href="http://www.jonathanturner.org/2016/08/helping-out-with-rust-errors.html">make the transition</a>
+to the new errors, and already many people have jumped in (and thank you to those volunteers!)</p>
+<p>Let's dive in and see what's changed.  We'll start with a simple example:</p>
+<pre><code class="language-rust">fn borrow_same_field_twice_mut_mut() {
+    let mut foo = make_foo();
+    let bar1 = &amp;mut foo.bar1;
+    let _bar2 = &amp;mut foo.bar1;
+    *bar1;
+}
+</code></pre>
+<p>Here we make the error of mutably borrowing the same value twice. This is a classic error in Rust.
+Sure enough, the error the previous compiler gave us says pretty much that:</p>
+<p><img src="/images/2016-08-09-Errors/old_errors.png" alt="Picture of old error style" /></p>
+<p>The problem though is that it takes a few seconds to look at the message, orient yourself, and find
+the critical pieces. This time loss adds up. What if, instead, we cleared away everything that slows
+down how you read the error message?</p>
+<img src="/images/2016-08-09-Errors/new_errors.png" width="500" />
+<p>This is the new error format. It's designed around the fundamental observation that
+errors should <strong>focus on the code you wrote</strong>. By doing so, you can much more easily see the context
+of what is going on.</p>
+<h1><a href="#design" aria-hidden="true" class="anchor" id="design"></a>Design</h1>
+<p>The key insight is putting your source code front and center - everything you see in the output
+builds on <em>your</em> code.
+By using the code you wrote as the context, we give you an easy way to know at a glance
+where the issue is occurring.</p>
+<p><img src="/images/2016-08-09-Errors/new_errors2.png" alt="Picture of new constant eval error" /></p>
+<p><em>Constant evaluation errors</em></p>
+<p>Next, once we know the location, we need to explain what is going wrong. We do this by labeling
+points of interest in the code that helped explain
+the error.  The most obvious place to begin labeling is where the error has occurred. It's the
+&quot;what&quot; of the error.</p>
+<p>In this example, you can see how we use these primary labels. With them, your eyes can see both the
+problematic code, and a few words about the problem. Since this is the most important place to see
+first, we give them a bold red look with a
+characteristic <code>^^^</code> underline. You'll notice in the example that the combination allows you
+to quickly spot the error and understand what's going wrong.</p>
+<p><img src="/images/2016-08-09-Errors/new_errors3.png" alt="Picture of new trait mismatch" /></p>
+<p><em>Mismatch with trait requirement error</em></p>
+<p>The source of the error is not the only point of interest.  There are often other points of interest
+that help describe &quot;why&quot; an error is occurring. By reading these secondary labels,
+you can understand better what is going wrong. These labels are shown in the same order they appear
+in your code, again, to ensure you're always able to, at a glance, understand where you are.</p>
+<p>In this example, secondary labels show the original requirement from the trait, so you
+can see it at the same time and compare the requirement and implementation for yourself.</p>
+<p>Primary and secondary labels work together to tell a story about what went wrong. With Rust's big
+focus on the borrow-checker and memory safety, users may see unfamiliar concepts when they
+encounter one of these errors. These labels help to walk them through how even unfamiliar errors,
+like borrow errors, occur.</p>
+<p><img src="/images/2016-08-09-Errors/new_errors4.png" alt="Picture of new type name not found" /></p>
+<p><em>Name not in scope, with suggestions</em></p>
+<p>Sometimes there's too much information to fit on a label, so the new format also supports attaching
+additional notes. Just like the previous error format, the new format supports warnings,
+suggestions, hints, and more.</p>
+<h1><a href="#extended-error-messages" aria-hidden="true" class="anchor" id="extended-error-messages"></a>Extended error messages</h1>
+<p>Once we updated the error message format, we looked for other areas we could apply the lessons we'd
+learned. The clear winner here were the <code>--explain</code> messages. As the name implies, the <code>--explain</code>
+feature allows developers to explore unfamiliar error messages with longer, more verbose,
+explanations.</p>
+<p>Today, when you can call <code>--explain</code>, you pass an error code. The compiler then prints out
+an extended message that goes into more detail about how errors of that form occur:</p>
+<pre><code class="language-console">rustc --explain E0200
+
+Unsafe traits must have unsafe implementations. This error occurs when an
+implementation for an unsafe trait isn't marked as unsafe. This may be resolved
+by marking the unsafe implementation as unsafe.
+
+struct Foo;
+
+unsafe trait Bar { }
+
+// this won't compile because Bar is unsafe and impl isn't unsafe
+impl Bar for Foo { }
+// this will compile
+unsafe impl Bar for Foo { }
+</code></pre>
+<p>This has been a great way to help bridge between an error and learning an unfamiliar concept in
+Rust.</p>
+<p>While this message is helpful, it uses a general example that may not be related to your code.
+Taking a page from the error message work, we'll be updating the explain
+messages to focus on your code. For example, taking the borrow-checker error we
+started with, we might have an extended error message that looks like:</p>
+<pre><code>error[E0499]: cannot borrow `foo.bar1` as mutable more than once at a time
+  --&gt; src/test/compile-fail/borrowck/borrowck-borrow-from-owned-ptr.rs:29:22
+
+The borrow checker detected that `foo.bar1` was borrowed multiple
+times as a mutable value. In Rust, this can not be done safely because
+there may be multiple owners of the value who may write to it at the
+same time. If this happens in parallel, the resulting value may be in
+an unknown state.
+
+Because this is unsafe, Rust disallows having multiple owners of the
+same mutable value.
+
+This is the first time `foo.bar1` is borrowed mutably.
+
+28 |     let bar1 = &amp;mut foo.bar1;
+   |                     --------
+
+And this is the second time `foo.bar1` is borrowed mutably. This is
+where the error occurs.
+
+29 |     let _bar2 = &amp;mut foo.bar1;
+   |                      ^^^^^^^^
+
+Note that the first borrow of `foo.bar1` continues until the borrow
+is released. During this time, no additional borrows can occur. This
+first borrow ends here:
+
+31 | }
+   | -
+
+After the first borrow has ended you are able to borrow it again. To
+fix this issue, if you need to borrow a value as mutable more than
+once, ensure that the span of time they are borrowed do not overlap.
+</code></pre>
+<p>In the above, you see a possible output from this new templated-style. Those of you familiar with
+the <a href="http://elm-lang.org/blog/compiler-errors-for-humans">Elm</a> style may recognize that the updated <code>--explain</code> messages draw heavy inspiration from
+the Elm approach.</p>
+<p>Currently, this format is still under design and development. If you'd like to help us shape what
+extended errors looks like, come jump into the #rust-cli channel on irc.mozilla.org.</p>
+<h1><a href="#i-want-to-help" aria-hidden="true" class="anchor" id="i-want-to-help"></a>I want to help!</h1>
+<p>Great!  We love the enthusiasm. There's
+<a href="https://github.com/rust-lang/rust/issues/35233">a lot to do</a>, and a
+<a href="http://www.jonathanturner.org/2016/08/helping-out-with-rust-errors.html">lot of skills</a> that could
+help us in different ways. Whether you're good at unit tests, writing docs,
+writing code, or working on designs, there are places to jump in.</p>
+<h1><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h1>
+<p>Improving Rust is an on-going activity. With the importance of addressing Rust's learning curve a
+<a href="https://blog.rust-lang.org/2016/06/30/State-of-Rust-Survey-2016.html">key theme in the Rust survey</a>
+we're as motivated as ever to find any confusing or distracting part of the Rust experience and
+give it a healthy amount of polish. Errors are one area where we're applying that polish helps us
+improve the learning curve bit by bit, and we're looking forward to seeing how far we can go.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

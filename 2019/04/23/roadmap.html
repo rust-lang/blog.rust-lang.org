@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust's 2019 roadmap | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust's 2019 roadmap | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust's 2019 roadmap | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust's 2019 roadmap" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust's 2019 roadmap</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 23, 2019 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>Each year the Rust community <a href="https://github.com/rust-lang/rfcs/pull/1728">comes together</a> to set out a
+roadmap. This year, in addition to the <a href="https://blog.rust-lang.org/2018/11/27/Rust-survey-2018.html">survey</a>, we put out a <a href="https://blog.rust-lang.org/2018/12/06/call-for-rust-2019-roadmap-blogposts.html">call for blog
+posts</a> in December, which resulted in <a href="https://readrust.net/rust-2019/">73 blog posts</a>
+written over the span of a few weeks. The end result is the recently-merged
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/2657-roadmap-2019.md">2019 roadmap RFC</a>. To get all of the details, please give it a read,
+but this post lays out some of the highlights.</p>
+<h1><a href="#the-theme-maturity" aria-hidden="true" class="anchor" id="the-theme-maturity"></a>The theme: Maturity</h1>
+<p>In short, 2019 will be a year of <em>rejuvenation</em> and <em>maturation</em> for the Rust
+project. We shipped a lot of stuff last year, and grew a lot. Now it's time to
+take a step back, take stock, and prepare for the future.</p>
+<p>The work we have planned for this year falls into three major categories:</p>
+<ul>
+<li>Governance: improving how the project is run</li>
+<li>Finish long-standing requests: closing out work we've started but never finished</li>
+<li>Polish: improving the overall quality of the language and tooling</li>
+</ul>
+<h2><a href="#governance" aria-hidden="true" class="anchor" id="governance"></a>Governance</h2>
+<p>Over the last three years, the Rust project has grown a lot. Rust used to have a core team of 8 members. When we added sub-teams in 2015, we grew to 23 members. We've now grown to over 100 — that's bigger than many companies! And of course, looking beyond the teams, the size of the Rust community as a whole has grown tremendously as well. As a result of this growth, we've found that the processes which served us well when we were a smaller project are starting to feel some strain.</p>
+<p>Many of the teams have announced plans to review and revamp their processes so as to scale better. Often this can be as simple as taking the time to write down things that previously were understood only informally — sometimes it means establishing new structures.</p>
+<p>Because of this widespread interest in governance, we've also created a new <a href="https://internals.rust-lang.org/t/governance-working-group-announcement/9637"><strong>Governance Working Group</strong></a>. This group is going to be devoted to working with each team to hone its governance structure and to help pass lessons and strategies between teams.</p>
+<p>Additionally, the RFC process has been a great boon for Rust, but as we've grown, there have been times where it didn't work so well too.
+We may look at revisions to the process this year.</p>
+<h2><a href="#long-standing-requests" aria-hidden="true" class="anchor" id="long-standing-requests"></a>Long-standing requests</h2>
+<p>There are a number of exciting initiatives that have been sitting in a limbo
+state — the majority of the design is done, but there are some lingering
+complications that we haven't had time to work out. This year we hope to take
+a fresh look at some of these problems and try hard to resolve those
+lingering problems.</p>
+<p>Examples include:</p>
+<ul>
+<li>The Cargo team and custom registries</li>
+<li>The Language team is taking a look at async/await, specialization, const generics, and generic associated types</li>
+<li>The Libs team wants to finish custom allocators</li>
+</ul>
+<h2><a href="#polish" aria-hidden="true" class="anchor" id="polish"></a>Polish</h2>
+<p>Finally, the last few years have also seen a lot of foundational work. The
+compiler, for example, was massively refactored to support incremental
+compilation and to be better prepared for IDEs. Now that we've got these
+pieces in place, we want to do the “polish” work that really makes for a
+great experience.</p>
+<p>Examples:</p>
+<ul>
+<li>Compile times and IDE support</li>
+<li>Polishing the specification of the language by improving <a href="https://doc.rust-lang.org/stable/reference/">the reference</a> and laying out <a href="https://github.com/rust-lang/unsafe-code-guidelines">the unsafe code guidelines</a></li>
+<li>The WebAssembly WG's work this year includes polishing our wasm support, for example, debugging</li>
+</ul>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>This post only covered a few examples of the plans we've been making. <a href="https://github.com/rust-lang/rfcs/blob/master/text/2657-roadmap-2019.md">If you'd like to see the full details, take a look at the RFC itself.</a></p>
+<p>Here's to a great 2019 for Rust!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

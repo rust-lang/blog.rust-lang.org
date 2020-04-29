@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust's 2017 roadmap | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust's 2017 roadmap | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust's 2017 roadmap | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust's 2017 roadmap" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust's 2017 roadmap</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 6, 2017 &middot; Aaron Turon
+    
+    </div>
+
+    <div class="post">
+      <p>Starting with 2017, Rust is following an <a href="https://github.com/rust-lang/rfcs/pull/1728">open roadmap process</a> for setting our
+aims for the year. The process is coordinated with <a href="https://blog.rust-lang.org/2016/06/30/State-of-Rust-Survey-2016.html">the survey</a> and
+<a href="https://internals.rust-lang.org/t/2016-rust-commercial-user-survey-results/4317">production user outreach</a>, to make sure our goals are aligned with the needs of
+Rust's users. It culminates in a <a href="https://internals.rust-lang.org/t/setting-our-vision-for-the-2017-cycle/3958?u=aturon">community-wide discussion</a> and ultimately
+<a href="https://github.com/rust-lang/rfcs/pull/1774">an RFC</a> laying out a vision.</p>
+<p><strong>This year, the overarching theme is <em>productivity</em>, especially for early-stage
+Rust users</strong>. From tooling to libraries to documentation to the core language,
+we want to make it easier to get things done with Rust.</p>
+<p>A focus on productivity might seem at odds with some of Rust's other
+goals. After all, Rust has focused on reliability and performance, and it's easy
+to imagine that achieving those aims forces compromises elsewhere—like the
+learning curve, or developer productivity. Is &quot;fighting with the borrow checker&quot;
+an inherent rite of passage for budding Rustaceans? Does removing papercuts and
+small complexities entail glossing over safety holes or performance cliffs?</p>
+<p>Our approach with Rust has always been to bend the curve around tradeoffs, as
+embodied in the various pillars we've talked about on this blog:</p>
+<ul>
+<li><a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Memory safety without garbage collection</a></li>
+<li><a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Concurrency without data races</a></li>
+<li><a href="http://blog.rust-lang.org/2015/05/11/traits.html">Abstraction without overhead</a></li>
+<li><a href="http://blog.rust-lang.org/2014/10/30/Stability.html">Stability without stagnation</a></li>
+</ul>
+<p>In the core language we've sometimes been able to leverage things like Rust's
+ownership model to make features easier to use. For example, <a href="http://huonw.github.io/blog/2015/05/finding-closure-in-rust/">closures in Rust</a>,
+unlike those in C++, do not require explicit &quot;capture clauses&quot;; Rust's ownership
+tracking means that we can automatically infer whether to move or borrow data
+into the closure, without sacrificing reliability or performance. We've also
+been working to make the language easier to learn by improving the
+<a href="https://blog.rust-lang.org/2016/08/10/Shape-of-errors-to-come.html">compiler's error messages</a>. And <a href="https://blog.rust-lang.org/2016/05/05/cargo-pillars.html">Cargo</a> is an example of early focus on
+productivity that has only enhanced the power of systems programming with Rust,
+allowing for <a href="http://os.phil-opp.com/">OS</a>
+<a href="https://intermezzos.github.io/">projects</a> to easily build and leverage an
+ecosystem of shared libraries. There's so much more we can do along these lines!</p>
+<p>In short, <strong>productivity should be a core value of Rust</strong>, and we should work
+creatively to improve it while retaining Rust's other core values. By the end of
+2017, we want to have earned the slogan:</p>
+<ul>
+<li>Rust: fast, reliable, productive—pick three.</li>
+</ul>
+<h2><a href="#the-roadmap" aria-hidden="true" class="anchor" id="the-roadmap"></a>The roadmap</h2>
+<p>With that framing in mind, here's Rust's vision for 2017 in a nutshell. Each
+statement links to a corresponding tracker with more details:</p>
+<ul>
+<li>
+<p><a href="https://github.com/rust-lang/rust-roadmap/issues/3"><strong>Rust should have a lower learning curve</strong></a>. Plans
+include a <a href="https://github.com/aturon/rust-roadmap/issues/7">new book</a>,
+collecting examples and patterns, improving errors,
+<a href="https://github.com/aturon/rust-roadmap/issues/17">improving the core language</a>,
+and <a href="https://github.com/rust-lang/rust-roadmap/issues/2">building IDEs</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust-roadmap/issues/1"><strong>Rust should have a pleasant edit-compile-debug cycle</strong></a>. Plans
+include
+<a href="https://blog.rust-lang.org/2016/09/08/incremental.html">incremental compilation</a> and
+a <a href="https://github.com/aturon/rust-roadmap/issues/8">trait system overhaul</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust-roadmap/issues/2"><strong>Rust should provide a solid, but basic IDE experience</strong></a>. Plans
+are focused on the
+<a href="https://github.com/aturon/rust-roadmap/issues/6">Rust language service</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust-roadmap/issues/9"><strong>Rust should provide easy access to high quality crates</strong></a>. Plans
+include
+<a href="https://www.reddit.com/r/rust/comments/5r72aj/cratesio_has_categories/">crate categories</a>,
+<a href="https://github.com/rust-lang/rfcs/pull/1824">crate ranking</a>, open-ended
+testing and benchmarking frameworks, new API and documentation guidelines, and
+<a href="https://github.com/rust-lang/rfcs/pull/1643">guidelines for unsafe code</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust-roadmap/issues/10"><strong>Rust should be well-equipped for writing robust, high-scale servers</strong></a>. Plans
+mostly focus on the <a href="http://tokio.rs/">Tokio project</a> for asynchronous I/O and
+potentially
+<a href="https://github.com/rust-lang/rfcs/pull/1823">async/await notation</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust-roadmap/issues/11"><strong>Rust should have 1.0-level crates for essential tasks</strong></a>. Plans
+are under way to focus the libs team and the community on a number of
+important existing crates, to help polish them to 1.0 quality by the end of
+the year.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust-roadmap/issues/12"><strong>Rust should integrate easily into large build systems</strong></a>. Plans
+include working with large companies incorporating Rust to understand how best
+to equip Cargo to smooth the process.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust-roadmap/issues/13"><strong>Rust's community should provide mentoring at all levels</strong></a>. Plans
+include the
+<a href="https://github.com/rust-community/rustbridge/">RustBridge project</a> and new
+<a href="https://internals.rust-lang.org/t/language-team-shepherds/4595">team shepherds</a>.</p>
+</li>
+</ul>
+<p>In addition to these primary goals, we have highlighted two areas we'd like to explore, but where the end point is less clear:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust-roadmap/issues/14">Integration with other languages, running the gamut from C to JavaScript</a>.</li>
+<li><a href="https://github.com/rust-lang/rust-roadmap/issues/15">Usage in resource-constrained environments</a>.</li>
+</ul>
+<p>The various Rust subteams are actively working on projects tied to these
+goals. You can track progress or jump in by watching and commenting on the
+<a href="https://github.com/rust-lang/rust-roadmap">roadmap tracker</a>. And a fully
+detailed rationale for the roadmap is in
+<a href="https://github.com/rust-lang/rfcs/pull/1774">the RFC</a>.</p>
+<p>As the year progresses, expect to see many more blog posts announcing
+roadmap-related initiatives and milestones. Around the end of the year, we'll
+publish a <strong>retrospective</strong> aggregating the progress of the year and providing a
+guide to the current state of Rust.</p>
+<p>In the meantime—please
+<a href="https://github.com/rust-lang/rust-roadmap">get involved</a>! We have ambitious
+goals for the year, and we need all the help we can get.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

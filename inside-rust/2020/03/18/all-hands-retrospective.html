@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>All Hands Retrospective | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="All Hands Retrospective | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="All Hands Retrospective | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="All Hands Retrospective" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>All Hands Retrospective</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 18, 2020 &middot; Erin Power
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/core">The All Hands Organisers</a> 
+    </div>
+
+    <div class="post">
+      <p>If you're not already aware, the Rust All Hands event, originally scheduled for
+March 16th–20th in Thessaloníki, Greece was cancelled in January. The All Hands'
+is one of our members' favourite events of the year and we were quite
+disappointed that we weren't able to pull off the event this year. In the
+interest of being transparent, as well as documenting for future events, we
+have written a retrospective about what happened, what we learned, and the
+future of the All Hands.</p>
+<h2><a href="#timeline" aria-hidden="true" class="anchor" id="timeline"></a>Timeline</h2>
+<h3><a href="#context" aria-hidden="true" class="anchor" id="context"></a>Context</h3>
+<p>Both previous All Hands took place in Mozilla's Berlin office. Mozilla
+traditionally sponsored the event, providing the venue and catering, and also
+paying for the flights and accommodation of volunteers who didn't have a
+company or other person to pay for them. It was a good way to bring the entire
+community together for a week of planning, discussions, and camaraderie.</p>
+<p>Still, after the last All Hands, it was clear that we couldn't do a third one
+in Mozilla's Berlin office. The Rust org was simply growing too big. The
+Berlin office didn't really have the space to accommodate us.</p>
+<h3><a href="#finding-a-space" aria-hidden="true" class="anchor" id="finding-a-space"></a>Finding a space.</h3>
+<p>As a group, our first step was to see if we could find other companies to
+sponsor a space. We followed a number of leads but ultimately never found
+anyone that had a space to offer at a suitable time. We started looking
+at other options, like private hacker spaces and universities. The University
+of Macedonia in Thessaloniki, Greece made us a quite attractive offer, and
+they had the right time available, so we decided to go for that.</p>
+<h3><a href="#budgeting-and-sponsorships" aria-hidden="true" class="anchor" id="budgeting-and-sponsorships"></a>Budgeting and sponsorships.</h3>
+<p>We in the All Hands group did our best to create a budget. Unfortunately we
+did not have access to any expense reports from the previous years. We had a
+survey we could use to estimate the number of attendees and a rough idea where
+they were coming from. We knew the costs of the venue. We added fudge factors.
+We thought we'd done a good job, though it would turn out that we were quite
+off in our calculations.</p>
+<p>However even based on our estimated budget, it was clear that Mozilla was not
+going to be able to cover the costs alone. This seemed like a good opportunity
+to try and build relationships with some of the companies that have started to
+use Rust by approaching them for sponsorships. We weren't sure, though, how
+many sponsorships we'd be able to get, and so we hit upon the idea of using
+paid tickets.</p>
+<h3><a href="#tickets" aria-hidden="true" class="anchor" id="tickets"></a>Tickets</h3>
+<p>The idea was that people could purchase a ticket to the event, which would
+help to cover the costs, but that it was also okay to have a <em>&quot;gratis&quot;</em>
+ticket. Tickets have the advantage of being relatively easy for people to
+submit in their expense report if they are travelling with a company. We also
+found a number of companies who might be interested in a more
+traditional sponsorship.</p>
+<h3><a href="#finding-a-bank-account" aria-hidden="true" class="anchor" id="finding-a-bank-account"></a>Finding a bank account.</h3>
+<p>Still, we had another problem. The Rust organisation does not have a bank
+account we could use to collect and distribute money, and we didn't have an
+obvious entity to sign legal agreements.</p>
+<p>At this point, we spoke to a company that might serve as a bank account. We
+had a quick call and went over a plan that seemed promising. Mozilla would
+contract with them for their services managing and organising the event, and
+this would serve as Mozilla's sponsorship. The other sponsorships and proceeds
+from ticket sales would collect in their bank account and we would
+manage distributions.</p>
+<h3><a href="#pulling-the-trigger" aria-hidden="true" class="anchor" id="pulling-the-trigger"></a>Pulling the trigger.</h3>
+<p>At that point, we sent mail encouraging people to book tickets, and we also
+started following up more with sponsors. Our expectation was that we would
+soon have a bank account for collecting funds, and we started collecting
+information to repay people who had booked travel.</p>
+<p>In retrospect, it's clear that this was premature. It seemed like all the
+pieces were in place, and we knew that if people didn't start booking tickets,
+they never would. But the pieces were not in place, not actually, and we clearly
+should have taken this moment ask whether we were really going to be able to
+pull this off.</p>
+<h3><a href="#realising-it-wont-work" aria-hidden="true" class="anchor" id="realising-it-wont-work"></a>Realising it won't work.</h3>
+<p>This all started to unravel about a month before the event. In short, we
+encountered some logistical hurdles around finalising the business and legal
+aspects within the organisation's constraints that also prompted us to review
+the finances in more detail. This revealed that our estimates were off. Thus,
+we were faced with a tough decision:</p>
+<ul>
+<li>If we continue with the event, there was the chance that the logistics would
+just fail to come together. That would leave attendees in Greece, out of
+pocket, and without an All Hands to attend.</li>
+<li>Further, we might not be able to raise enough money to be able to pay for
+the entirety of people's travel and lodging as we had promised. This would be
+unfortunate, though perhaps something people could live with.</li>
+<li>On the other hand, if we cancel, we have to deal with the fact that people
+had already started booking travel, and not everyone would be able to get a
+refund from their airline/hotel, and accept that there might not be an
+All Hands this year.</li>
+</ul>
+<p>After much analysis and discussion with the Rust core team, we ultimately
+opted for the painful but ultimately safer route: cancelling the event. The
+cost to cover cancelling in January was relatively low, and even if it did
+come together we were worried about the high stress of pulling it off burning
+people out of the project.</p>
+<p><strong>Addendum</strong> Since we cancelled the All Hands, outbreak of the <a href="https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic">COVID-19</a> in
+Europe in the recent weeks, would have caused the event to be cancelled
+regardless. In a weird twist of fate, we were fortunate to cancel when we did.</p>
+<h2><a href="#lessons-learned" aria-hidden="true" class="anchor" id="lessons-learned"></a>Lessons Learned</h2>
+<p><strong>Bound uncertainty and total cost.</strong> — Promising to cover all travel with
+no kind of upper limit was unwise. It had worked in the past, perhaps, but the
+event was growing, and that was partly luck. Organising an event is very complex
+and there are a lot of unknowns, and it was clear for some of them we didn't have
+the time or resources to resolve them adequately.</p>
+<p><strong>Location, location, location</strong> — It was hard to find a good location. While
+Thessaloníki was cheap and great in some ways, we encountered some logistical
+hiccups that made it less than ideal. For example; we found that the cost of a
+lot of the flights for our international members were quite high compared to
+other European cities.</p>
+<p><strong>Know your audience</strong> — Some companies weren't interested in sponsoring
+because the event wasn't sufficiently high profile, or because the &quot;ROI&quot;
+(&quot;Return On Investment&quot;) didn't quite fit into the budgets and categories it
+would have to come from. We also had some uncertainty about how much
+&quot;participation&quot; to offer in exchange for sponsorship, since we didn't want to
+give the impression that anyone could just &quot;buy their way&quot; into the All Hands —
+at the same time, there is clear value to the Rust organisation in having
+sponsors participate.</p>
+<h2><a href="#the-future" aria-hidden="true" class="anchor" id="the-future"></a>The Future</h2>
+<p>Right now, we're currently organising with Mozilla reimbursing anyone who had
+purchased non-refundable ticket. We're also going to take the time to step back
+and re-evaluate what kind of event is possible, and what kind of event our
+members want to attend.</p>
+<p>If you're a member of the Rust programming language organisation, you should
+have received an email containing a link to a survey asking you about what
+kind of All Hands you'd enjoy, and what you would want to attend. Once people
+have had enough time to respond, we'll publish the results on the
+&quot;Inside Rust&quot; blog.</p>
+<p>If you didn't receive an email and you believe you should have, or you have
+anything you'd like to mention in private to organisers. Please email us
+at <a href="mailto:rust-all-hands@rust-lang.org">rust-all-hands@rust-lang.org</a>.</p>
+<p>It's very unfortunate that we weren't able to have the All Hands like we
+planned. We know that it's a lot of our members favourite Rust event, and we
+would like to thank everyone for reaching out and being so understanding.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

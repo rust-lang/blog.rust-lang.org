@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.33.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.33.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.33.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.33.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.33.0</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 28, 2019 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.33.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.33.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1330-2019-02-28">detailed release notes for
+1.33.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1330-stable" aria-hidden="true" class="anchor" id="whats-in-1330-stable"></a>What's in 1.33.0 stable</h2>
+<p>The two largest features in this release are significant improvements to
+<code>const fn</code>s, and the stabilization of a new concept: &quot;pinning.&quot;</p>
+<h3><a href="#const-fn-improvements" aria-hidden="true" class="anchor" id="const-fn-improvements"></a><code>const fn</code> improvements</h3>
+<p>With <code>const fn</code>, you can <a href="https://github.com/rust-lang/rust/pull/57175/">now do way more
+things!</a> Specifically:</p>
+<ul>
+<li>irrefutable destructuring patterns (e.g. <code>const fn foo((x, y): (u8, u8)) { ... }</code>)</li>
+<li><code>let</code> bindings (e.g. <code>let x = 1;</code>)</li>
+<li>mutable <code>let</code> bindings (e.g. <code>let mut x = 1;</code>)</li>
+<li>assignment (e.g. <code>x = y</code>) and assignment operator (e.g. <code>x += y</code>)
+expressions, even where the assignment target is a projection (e.g. a struct
+field or index operation like <code>x[3] = 42</code>)</li>
+<li>expression statements (e.g. <code>3;</code>)</li>
+</ul>
+<p>You're also <a href="https://github.com/rust-lang/rust/pull/57067/">able to call <code>const unsafe fn</code>s inside a <code>const fn</code></a>, like this:</p>
+<pre><code class="language-rust">const unsafe fn foo() -&gt; i32 { 5 }
+const fn bar() -&gt; i32 {
+    unsafe { foo() }
+}
+</code></pre>
+<p>With these additions, many more functions in the standard library are able to
+be marked as <code>const</code>. We'll enumerate those in the library section below.</p>
+<h3><a href="#pinning" aria-hidden="true" class="anchor" id="pinning"></a>Pinning</h3>
+<p>This release introduces a new concept for Rust programs, implemented as two
+types: the <a href="https://doc.rust-lang.org/std/pin/struct.Pin.html"><code>std::pin::Pin&lt;P&gt;</code>
+type</a>, and the <a href="https://doc.rust-lang.org/std/marker/trait.Unpin.html"><code>Unpin</code>
+marker trait</a>. The core
+idea is elaborated on in <a href="https://doc.rust-lang.org/std/pin/index.html">the docs for
+<code>std::pin</code></a>:</p>
+<blockquote>
+<p>It is sometimes useful to have objects that are guaranteed to not move, in
+the sense that their placement in memory does not change, and can thus be
+relied upon. A prime example of such a scenario would be building
+self-referential structs, since moving an object with pointers to itself will
+invalidate them, which could cause undefined behavior.</p>
+<p>A <code>Pin&lt;P&gt;</code> ensures that the pointee of any pointer type <code>P</code> has a stable location
+in memory, meaning it cannot be moved elsewhere and its memory cannot be
+deallocated until it gets dropped. We say that the pointee is &quot;pinned&quot;.</p>
+</blockquote>
+<p>This feature will largely be used by library authors, and so we won't talk a
+lot more about the details here. Consult the docs if you're interested in
+digging into the details. However, the stabilization of this API is important
+to Rust users generally because it is a significant step forward towards a
+highly anticipated Rust feature: <code>async</code>/<code>await</code>. We're not quite there yet,
+but this stabilization brings us one step closer. You can track all of the
+necessary features at <a href="https://areweasyncyet.rs/">areweasyncyet.rs</a>.</p>
+<h3><a href="#import-as-_" aria-hidden="true" class="anchor" id="import-as-_"></a>Import as <code>_</code></h3>
+<p><a href="https://github.com/rust-lang/rust/pull/56303/">You can now import an item as
+<code>_</code></a>. This allows you to
+import a trait's impls, and not have the name in the namespace. e.g.</p>
+<pre><code class="language-rust">use std::io::Read as _;
+
+// Allowed as there is only one `Read` in the module.
+pub trait Read {}
+</code></pre>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1330-2019-02-28">detailed release notes</a> for more details.</p>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
+<p>Here's all of the stuff that's been made <code>const</code>:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/57566">The methods <code>overflowing_{add, sub, mul, shl, shr}</code> are now <code>const</code>
+functions for all numeric types.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/57105">The methods <code>rotate_left</code>, <code>rotate_right</code>, and <code>wrapping_{add, sub, mul, shl, shr}</code>
+are now <code>const</code> functions for all numeric types.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/57105">The methods <code>is_positive</code> and <code>is_negative</code> are now <code>const</code> functions for
+all signed numeric types.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/57167">The <code>get</code> method for all <code>NonZero</code> types is now <code>const</code>.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/57234">The methods <code>count_ones</code>, <code>count_zeros</code>, <code>leading_zeros</code>, <code>trailing_zeros</code>,
+<code>swap_bytes</code>, <code>from_be</code>, <code>from_le</code>, <code>to_be</code>, <code>to_le</code> are now <code>const</code> for all
+numeric types.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/57234"><code>Ipv4Addr::new</code> is now a <code>const</code> function</a></li>
+</ul>
+<p>Additionally, these APIs have become stable:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/os/unix/fs/trait.FileExt.html#method.read_exact_at"><code>unix::FileExt::read_exact_at</code></a> and <a href="https://doc.rust-lang.org/std/os/unix/fs/trait.FileExt.html#method.write_all_at"><code>unix::FileExt::write_all_at</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.transpose"><code>Option::transpose</code></a> and <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.transpose"><code>Result::transpose</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/convert/fn.identity.html"><code>convert::identity</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/pin/struct.Pin.html"><code>pin::Pin</code></a> and <a href="https://doc.rust-lang.org/stable/std/marker/trait.Unpin.html"><code>marker::Unpin</code></a> (mentioned above)</li>
+<li><a href="https://doc.rust-lang.org/nightly/std/marker/struct.PhantomPinned.html"><code>marker::PhantomPinned</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.resize_with"><code>Vec::resize_with</code></a> and <a href="https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.resize_with"><code>VecDeque::resize_with</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.as_millis"><code>Duration::as_millis</code></a>, <a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.as_micros"><code>Duration::as_micros</code></a>, and <a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.as_nanos"><code>Duration::as_nanos</code></a></li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1330-2019-02-28">detailed release notes</a> for more details.</p>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
+<p><a href="https://github.com/rust-lang/cargo/pull/6484/">Cargo should now rebuild a crate if a file was modified during the initial
+build.</a></p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1330-2019-02-28">detailed release notes</a> for more.</p>
+<h3><a href="#cratesio" aria-hidden="true" class="anchor" id="cratesio"></a>Crates.io</h3>
+<p><a href="https://users.rust-lang.org/t/a-verified-email-address-will-be-required-to-publish-to-crates-io-starting-on-2019-02-28/22425">As previously announced</a>, coinciding with this release, crates.io
+will require that you have a verified email address to publish. Starting at
+2019-03-01 00:00 UTC, if you don't have a verified email address and run <code>cargo publish</code>, you'll get an error.</p>
+<p>This ensures we can comply with DMCA procedures. If you haven't heeded the
+warnings cargo printed during the last release cycle, head on over to
+<a href="https://crates.io/me">crates.io/me</a> to set and verify your email address. This email address
+will never be displayed publicly and will only be used for crates.io operations.</p>
+<h2><a href="#contributors-to-1330" aria-hidden="true" class="anchor" id="contributors-to-1330"></a>Contributors to 1.33.0</h2>
+<p>Many people came together to create Rust 1.33.0. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.33.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The Rustc Dev Guide Working Group - An Introduction | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="The Rustc Dev Guide Working Group - An Introduction | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="The Rustc Dev Guide Working Group - An Introduction | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="The Rustc Dev Guide Working Group - An Introduction" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>The Rustc Dev Guide Working Group - An Introduction</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 28, 2019 &middot; Amanjeev Sethi
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide">the rustc dev guide working group</a> 
+    </div>
+
+    <div class="post">
+      <p>The <a href="https://github.com/rust-lang/compiler-team/tree/master/content/working-groups/learning">Rustc Dev Guide Working Group</a>, formed in April 2019, is focused on making the
+compiler easier to learn by ensuring that <a href="https://rustc-dev-guide.rust-lang.org/">rustc-dev-guide</a> and API docs are
+&quot;complete&quot;. It is one of the many efforts by the Rust Compiler team to
+decrease the barrier of contributing to the compiler. As noted on the WG’s
+homepage —</p>
+<p><em>This working group aims to accomplish the following:</em></p>
+<ul>
+<li><em>Ensure that major components of rustc are covered in rustc-dev-guide</em></li>
+<li><em>Ensure that API doc coverage is at least 90%</em></li>
+</ul>
+<p>The Learning Group is making entry to contribute easier by improving the
+compiler documentation for the new and potential contributors. We all know
+this bias — the more time we’ve spent in a system, the less likely we are to
+see the issues that the newcomers might face. Given that, this group
+organically became an attractive place for beginners, who would benefit
+from documenting the compiler internals, while learning those parts of it
+at the same time. This benefits the entire compiler team by giving the
+documentation a perspective from the new contributors.</p>
+<p>The Learning group, in general, is starting to document the
+“Compiler lecture series”, which are a list of Youtube video lectures
+given earlier by the more knowledgeable members of the compiler team.
+There is also the task of improving the documentation structure of
+<a href="https://rustc-dev-guide.rust-lang.org/">rustc-dev-guide</a>. At first, each member used to pick a video lecture by
+themselves and contribute via a Github pull request to the
+<a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide Github repository</a>. This proved to be a bit difficult
+for the following reasons —</p>
+<ol>
+<li>Not all members would get to watch and work on the lectures of
+their choice.</li>
+<li>The knowledge would still be fragmented depending on who watched
+which lecture.</li>
+<li>Some lectures are more interesting than others and this means that
+some contributors would miss out on the interesting ones.</li>
+<li>Certain lectures are more difficult and require input from multiple
+people.</li>
+</ol>
+<p>Hence, at the moment, the group decided to work on one video at a time.
+This has proven to be beneficial for the entire group, especially with
+the lecture <a href="https://www.youtube.com/watch?v=c01TsOsr3-c">Representing types in rustc</a>. At the time of this writing,
+it is still a work-in-progress but the input from everyone allows people
+to work together while benefiting from the questions that everyone has
+about the lecture.</p>
+<p>The group is still learning about the best possible ways to organize and
+manage and some compiler team veterans are always there to help out!
+We are always in need of help from both existing compiler contributors
+and new folks who want to contribute and learn.</p>
+<h2><a href="#call-for-participation" aria-hidden="true" class="anchor" id="call-for-participation"></a>Call for participation</h2>
+<p>There is no bar to entry in the group. To join the group, you can
+drop a message in <a href="https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide"><code>#t-compiler/wg-rustc-dev-guide</code> on Zulip</a> introducing
+yourself. We would love to hear from you and hope we all together
+can make the documentation better.</p>
+<h2><a href="#important--resources" aria-hidden="true" class="anchor" id="important--resources"></a>Important  resources</h2>
+<ul>
+<li><strong><a href="https://github.com/rust-lang/compiler-team/tree/master/content/working-groups/learning">Rustc Dev Guide Working Group</a></strong></li>
+<li><strong><a href="https://rustc-dev-guide.rust-lang.org/">Rustc Dev Guide Book</a></strong></li>
+<li><strong><a href="https://github.com/rust-lang/rustc-dev-guide">Rustc Dev Guide Repository</a></strong></li>
+<li><strong><a href="https://github.com/rust-lang/rustc-dev-guide/projects/2">Github Project (Kanban)</a></strong></li>
+<li><strong><a href="https://github.com/rust-lang/compiler-team/tree/master/content/working-groups/learning/minutes">Learning WG Meeting Minutes</a></strong></li>
+<li><strong><a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA/playlists">Rust Youtube Videos</a></strong></li>
+<li><strong><a href="https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide">Zulip Stream: <code>#t-compiler/wg-rustc-dev-guide</code> on Zulip</a></strong></li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

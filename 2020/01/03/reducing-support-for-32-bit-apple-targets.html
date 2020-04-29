@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Reducing support for 32-bit Apple targets | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Reducing support for 32-bit Apple targets | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Reducing support for 32-bit Apple targets | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Reducing support for 32-bit Apple targets" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Reducing support for 32-bit Apple targets</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 3, 2020 &middot; Pietro Albini
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team regrets to announce that Rust 1.41.0 (to be released on January
+30th, 2020) will be the last release with the current level of support for
+32-bit Apple targets. Starting from Rust 1.42.0, those targets will be demoted
+to Tier 3.</p>
+<p>The decision was made on <a href="https://github.com/rust-lang/rfcs/pull/2837">RFC 2837</a>, and was accepted by the compiler and
+release teams. This post explains what the change means, why we did it, and how
+your project is affected.</p>
+<h1><a href="#whats-a-support-tier" aria-hidden="true" class="anchor" id="whats-a-support-tier"></a>What’s a support tier?</h1>
+<p>The Rust compiler can build code targeting <a href="https://forge.rust-lang.org/release/platform-support.html">a lot of
+platforms</a> (also called “targets”), but the team doesn't have
+the resources or manpower to provide the same level of support and testing for
+each of them.
+To make our commitments clear, we follow a tiered support policy (currently
+being formalized and revised in <a href="https://github.com/rust-lang/rfcs/pull/2803">RFC 2803</a>), explaining what we guarantee:</p>
+<ul>
+<li>
+<p>Tier 1 targets can be downloaded through rustup and are fully tested
+during the project’s automated builds. A bug or a regression affecting one of
+these targets is usually prioritized more than bugs only affecting platforms
+in other tiers.</p>
+</li>
+<li>
+<p>Tier 2 targets can also be downloaded through rustup, but our
+automated builds don’t execute the test suite for them. While we guarantee a
+standard library build (and for some of them a full compiler build) will be
+available, we don’t ensure it will actually work without bugs (or even work
+at all).</p>
+</li>
+<li>
+<p>Tier 3 targets are not available for download through rustup, and are
+ignored during our automated builds. You can still build their standard
+library for cross-compiling (or the full compiler in some cases) from source
+on your own, but you might encounter build errors, bugs, or missing features.</p>
+</li>
+</ul>
+<h1><a href="#which-targets-are-affected" aria-hidden="true" class="anchor" id="which-targets-are-affected"></a>Which targets are affected?</h1>
+<p>The main target affected by this change is 32-bit macOS (<code>i686-apple-darwin</code>),
+which will be demoted from Tier 1 to Tier 3. This will affect both using the
+compiler on 32-bit Mac hardware, and cross-compiling 32-bit macOS binaries from
+any other platform.</p>
+<p>Additionally, the following 32-bit iOS targets will be demoted from Tier 2 to
+Tier 3:</p>
+<ul>
+<li><code>armv7-apple-ios</code></li>
+<li><code>armv7s-apple-ios</code></li>
+<li><code>i386-apple-ios</code></li>
+</ul>
+<p>We will continue to provide the current level of support for all Apple 64bit
+targets.</p>
+<h1><a href="#why-are-those-targets-being-demoted" aria-hidden="true" class="anchor" id="why-are-those-targets-being-demoted"></a>Why are those targets being demoted?</h1>
+<p>Apple dropped support for running 32-bit binaries starting from <a href="https://support.apple.com/en-us/HT208436">macOS
+10.15</a> and <a href="https://developer.apple.com/documentation/uikit/app_and_environment/updating_your_app_from_32-bit_to_64-bit_architecture">iOS 11</a>. They also prevented all
+developers from cross-compiling 32-bit programs and apps starting from Xcode 10
+(the platform’s IDE, containing the SDKs).</p>
+<p>Due to those decisions from Apple, the targets are no longer useful to our users,
+and their choice to prevent cross-compiling makes it hard for the
+project to continue supporting the 32-bit platform in the long term.</p>
+<h1><a href="#how-will-this-affect-my-project" aria-hidden="true" class="anchor" id="how-will-this-affect-my-project"></a>How will this affect my project?</h1>
+<p>If you don’t build 32-bit Apple binaries this change won’t affect you at all.</p>
+<p>If you still need to build them, you’ll be able to continue using Rust 1.41.0
+without issues. As usual the Rust project will provide critical bugfixes and
+security patches until the next stable version is released (on March 12th,
+2020), and we plan to keep the release available for download for the
+foreseeable future (as we do with all the releases shipped so far).</p>
+<p>The code implementing the targets won’t be removed from the compiler codebase,
+so you’ll also be able to build future releases from source on your own
+(keeping in mind they might have bugs or be broken, as that code will be
+completly untested).</p>
+<h1><a href="#what-about-the-nightly-channel" aria-hidden="true" class="anchor" id="what-about-the-nightly-channel"></a>What about the nightly channel?</h1>
+<p>We will demote the targets on the nightly channel soon, but we don't have an
+exact date for when that will happen. We recommend pinning a nightly version
+beforehand though, to prevent <code>rustup toolchain install</code> from failing once we
+apply the demotion.</p>
+<p>To pin a nightly version you need to use &quot;nightly&quot; followed by the day the
+nightly was released, as the toolchain name. For example, to install the nightly
+released on December 1st, 2019 and to use it you can run:</p>
+<pre><code class="language-plain">rustup toolchain install nightly-2019-12-01
+
+# Default to this nightly system-wide...
+rustup default nightly-2019-12-01
+
+# ...or use this nightly for a single build
+cargo +nightly-2019-12-01 build
+</code></pre>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

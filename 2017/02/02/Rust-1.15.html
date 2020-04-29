@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.15 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.15 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.15 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.15" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.15</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 2, 2017 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce the latest version of Rust, 1.15.0. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed, getting Rust 1.15 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1150-2017-02-02">detailed release notes for
+1.15.0</a> on GitHub. 1443 patches were landed in this release.</p>
+<h3><a href="#whats-in-1150-stable" aria-hidden="true" class="anchor" id="whats-in-1150-stable"></a>What's in 1.15.0 stable</h3>
+<p>Rust 1.15 sees an <em>extremely</em> eagerly-awaited feature land on stable: custom
+derive! To review, in Rust, you've always been able to automatically implement
+some traits through the <code>derive</code> attribute:</p>
+<pre><code class="language-rust">#[derive(Debug)]
+struct Pet {
+    name: String,
+}
+</code></pre>
+<p>The <code>Debug</code> trait is then implemented for <code>Pet</code>, with vastly less boilerplate.
+However, this only worked for traits provided as part of the standard library;
+it was not customizable. With Rust 1.15, it now is. That means, if you want to
+turn your <code>Pet</code> into JSON, it's as easy as adding <a href="https://serde.rs">Serde</a> to your
+<code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[dependencies]
+serde = &quot;0.9&quot;
+serde_derive = &quot;0.9&quot;
+serde_json = &quot;0.9&quot;
+</code></pre>
+<p>And adding another trait to your <code>Pet</code>:</p>
+<pre><code class="language-rust">#[macro_use]
+extern crate serde_derive;
+
+extern crate serde_json;
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Pet {
+    name: String,
+}
+
+fn main() {
+    let pet = Pet { name: String::from(&quot;Ferris&quot;) };
+
+    let serialized = serde_json::to_string(&amp;pet).unwrap();
+    println!(&quot;serialized = {}&quot;, serialized);
+
+    let deserialized: Pet = serde_json::from_str(&amp;serialized).unwrap();
+    println!(&quot;deserialized = {:?}&quot;, deserialized);
+}
+</code></pre>
+<p>This will output:</p>
+<pre><code class="language-text">serialized = {&quot;name&quot;:&quot;Ferris&quot;}
+deserialized = Pet { name: &quot;Ferris&quot; }
+</code></pre>
+<p>Another common use-case is <a href="http://diesel.rs">Diesel</a>. Say we had a database of <code>Pet</code>s.
+We could fetch them like this:</p>
+<pre><code class="language-rust">// some extern crate and use lines elided here
+
+#[derive(Queryable)]
+struct Pet {
+    name: String,
+}
+
+fn main() {
+    use diesel_demo::schema::pets::dsl::*;
+
+    let connection = establish_connection();
+    let results = pets
+        .limit(5)
+        .load::&lt;Pet&gt;(&amp;connection)
+        .expect(&quot;Error loading pets&quot;);
+
+    println!(&quot;Displaying {} pets&quot;, results.len());
+    for pet in results {
+        println!(&quot;{}&quot;, pet.name);
+    }
+}
+</code></pre>
+<p>For full instructions, see <a href="http://diesel.rs">the website</a>.</p>
+<p>These kinds of libraries are extremely powerful, but rely on custom derive for
+ergonomics. While these libraries <em>worked</em> on Rust stable previously, they were
+not as nice to use, so much so that we often heard from users &quot;I only use
+nightly because of Serde and Diesel.&quot; The use of custom derive is one of the
+most widely used nightly-only features. As such, <a href="https://github.com/rust-lang/rfcs/pull/1681">RFC 1681</a> was opened in July
+of last year to support this use-case. The RFC was merged in August, underwent
+a lot of development and testing, and now reaches stable today!</p>
+<p>To find out how to write your own custom derives, see <a href="https://doc.rust-lang.org/book/procedural-macros.html">the chapter of &quot;The Rust
+Programming Language&quot;</a>.</p>
+<p>While we've said &quot;Serde and Diesel&quot; a number of times here, there's a lot of
+other cool things you can do with custom derive: see
+<a href="https://crates.io/crates/derive-new"><code>derive-new</code></a> for another example. See
+<a href="https://crates.io/crates/syn/reverse_dependencies">the <code>syn</code> crate's reverse dependencies for more.</a> (<code>syn</code> is
+important for writing custom derives, see the book chapter, linked above, for
+more.) Custom derive was also known as &quot;macros 1.1&quot;, as it includes the
+infrastructure for supporting even more compile-time powers of Rust, nicknamed
+&quot;macros 2.0.&quot; Expect to hear more about this space in future releases.</p>
+<h4><a href="#other-improvements" aria-hidden="true" class="anchor" id="other-improvements"></a>Other improvements</h4>
+<p>The build system for Rust <a href="https://github.com/rust-lang/rust/pull/37817">has been re-written in Rust, using
+Cargo</a>. It is now the default. This process has been long, but has
+finally borne fruit. Given that all Rust development happens on the master
+branch, we've been using it since December of last year, and it's working well.
+There is an open PR <a href="https://github.com/rust-lang/rust/pull/39431">to remove the Makefiles entirely</a>, landing
+in Rust 1.17. This will pave the way for <code>rustc</code> to use packages from
+<code>crates.io</code> in the compiler like any other Rust project, and is a further
+demonstration of the maturity of Cargo.</p>
+<p>Rust has gained <a href="https://forge.rust-lang.org/platform-support.html">Tier 3 support</a> for <a href="https://github.com/rust-lang/rust/pull/38086"><code>i686-unknown-openbsd</code></a>, <a href="https://github.com/rust-lang/rust/pull/37672"><code>MSP430</code></a>,
+and <a href="https://github.com/rust-lang/rust/pull/37615"><code>ARMv5TE</code></a>.</p>
+<p><a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#compiler-performance">A number of compiler performance improvements have
+landed</a>.
+We continue to work on making the compiler faster. Expect to see more in the
+future!</p>
+<p>As a smaller improvement, <a href="https://github.com/rust-lang/rust/pull/37791"><code>?Sized</code> can now be used in <code>where</code>
+clauses</a>. In other words:</p>
+<pre><code class="language-rust">struct Foo&lt;T: ?Sized&gt; {
+    f: T,
+}
+
+struct Foo&lt;T&gt; where T: ?Sized {
+    f: T,
+}
+</code></pre>
+<p>This second form is now accepted, and is equivalent to the first.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1150-2017-02-02">detailed release notes</a> for more.</p>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
+<p>The <code>slice::sort</code> algorithm <a href="https://github.com/rust-lang/rust/pull/38192">has been rewritten</a>, and is much, much,
+much faster. It is a hybrid merge sort, drawing influences from Timsort.
+Previously it was a straightforward merge sort.</p>
+<p>If you had a <code>Vec&lt;T&gt;</code> where <code>T: Copy</code>, and you called <code>extend</code> on it,
+your code will <a href="https://github.com/rust-lang/rust/pull/38182">now be a lot faster</a>.</p>
+<p>Speaking of things getting faster, <a href="https://github.com/rust-lang/rust/pull/37888"><code>chars().count()</code></a>,
+<a href="https://github.com/rust-lang/rust/pull/37882"><code>chars().last()</code>, and <code>char_indices().last()</code></a> are too!</p>
+<p><a href="https://github.com/rust-lang/rust/pull/37855">Chinese characters now display correctly in <code>fmt::Debug</code></a>.</p>
+<p>There were a number of functions stabilized as well:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.min_by"><code>std::iter::Iterator::min_by</code></a> and <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.max_by"><code>std::iter::Iterator::max_by</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/os/unix/fs/trait.FileExt.html"><code>std::os::*::fs::FileExt</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/sync/atomic/struct.AtomicU8.html#method.get_mut"><code>std::sync::atomic::Atomic*::get_mut</code></a> and <a href="https://doc.rust-lang.org/std/sync/atomic/struct.AtomicU8.html#method.into_inner"><code>std::sync::atomic::Atomic*::into_inner</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/vec/struct.IntoIter.html#method.as_slice"><code>std::vec::IntoIter::as_slice</code></a> and <a href="https://doc.rust-lang.org/std/vec/struct.IntoIter.html#method.as_mut_slice"><code>std::vec::IntoIter::as_mut_slice</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/sync/mpsc/struct.Receiver.html#method.try_iter"><code>std::sync::mpsc::Receiver::try_iter</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/os/unix/process/trait.CommandExt.html#tymethod.before_exec"><code>std::os::unix::process::CommandExt::before_exec</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html#method.strong_count"><code>std::rc::Rc::strong_count</code></a> and <a href="https://doc.rust-lang.org/std/rc/struct.Rc.html#method.weak_count"><code>std::rc::Rc::weak_count</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/sync/struct.Arc.html#method.strong_count"><code>std::sync::Arc::strong_count</code></a> and <a href="https://doc.rust-lang.org/std/sync/struct.Arc.html#method.weak_count"><code>std::sync::Arc::weak_count</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.char.html#method.encode_utf8"><code>std::char::encode_utf8</code></a> and <a href="https://doc.rust-lang.org/std/primitive.char.html#method.encode_utf16"><code>std::char::encode_utf16</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/cell/struct.Ref.html#method.clone"><code>std::cell::Ref::clone</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/io/struct.Take.html#method.into_inner"><code>std::io::Take::into_inner</code></a></li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1150-2017-02-02">detailed release notes</a> for more.</p>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
+<p>Cargo will now <a href="https://github.com/rust-lang/cargo/pull/3361">emit a warning</a> if you have a file named <code>build.rs</code>
+at the top level of a package, but don't have a <code>build = &quot;build.rs&quot;</code>
+annotation. This is in anticipation of inferring that <code>build.rs</code> at the top
+level is always a build script, but is a warning right now for compatibility
+reasons. Previously, all build scripts required configuration, but this
+convention was strong within the community, so we're going to encode it into
+Cargo.</p>
+<p>In this release, <a href="https://github.com/rust-lang/cargo/pull/3368">Cargo build scripts no longer have access to the <code>OUT_DIR</code>
+environment variable at build time via <code>env!(&quot;OUT_DIR&quot;)</code></a>. They
+should instead check the variable at runtime with <code>std::env</code>. That the value
+was set at build time was a bug, and incorrect when cross-compiling. Please
+check what your packages are doing and update to use <code>std::env</code>!</p>
+<p>The <code>cargo test</code> command has <a href="https://github.com/rust-lang/cargo/pull/3221">gained support for a <code>--all</code> flag</a>,
+which is useful when you have a workspace.</p>
+<p>We now <a href="https://github.com/rust-lang/cargo/pull/3363">Compile statically against the MSVC CRT</a> on Windows, and
+<a href="https://github.com/rust-lang/cargo/pull/3311">Link OpenSSL statically</a> on Mac OS X.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1150-2017-02-02">detailed release notes</a> for more.</p>
+<h3><a href="#contributors-to-1150" aria-hidden="true" class="anchor" id="contributors-to-1150"></a>Contributors to 1.15.0</h3>
+<p>In this part of the release announcements, we usually post a list of
+contributors. However, we've recently started a new initiative, &quot;Thanks!&quot;, to
+do this in a more comprehensive way. One issue with this section is that it
+only counted contributions to the <code>rust-lang/rust</code> repository; those who
+committed to Cargo weren't thanked, for example. We also had to manually
+generate this list, which wasn't terrible, but running the correct git commands
+to determine who contributed is exactly what code is good for!</p>
+<p>As such, you can now visit
+<a href="https://thanks.rust-lang.org/">https://thanks.rust-lang.org/</a> to see more
+comprehensive contribution calculations. If you prefer, we also have an alias
+at <a href="https://%E2%9D%A4.rust-lang.org">https://❤.rust-lang.org</a> as well. For now, this
+will only show what we've shown in previous release posts. We do have one
+additional feature, which is an all-time contributions list, sorted by commit
+count. That's located here:
+<a href="https://thanks.rust-lang.org/rust/all-time">https://thanks.rust-lang.org/rust/all-time</a></p>
+<p>We have done some of the needed backend work to enable more repositories than
+only <code>rust-lang/rust</code>, but it's not quite done yet. If you'd like to get
+involved, please <a href="https://github.com/rust-lang-nursery/thanks">check out thanks on
+GitHub</a>!</p>
+<p>We had 137 individuals contribute to Rust 1.15.
+<a href="https://thanks.rust-lang.org/rust/1.15.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

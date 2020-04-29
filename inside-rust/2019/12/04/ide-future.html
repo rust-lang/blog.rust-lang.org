@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>2019-11-18 IDE team meeting | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="2019-11-18 IDE team meeting | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="2019-11-18 IDE team meeting | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="2019-11-18 IDE team meeting" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>2019-11-18 IDE team meeting</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 4, 2019 &middot; Aleksey Kladov, Igor Matuszewski
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/dev-tools#ides">the IDE team</a> 
+    </div>
+
+    <div class="post">
+      <p>Meeting run by nikomatsakis. Minutes written by nikomatsakis.
+Attending: nikomatsakis, pnkfelix, Xanewok, matklad
+<a href="https://hackmd.io/fAnj6pNqRRGIyDQ4el5tcQ">Notes</a></p>
+<h1><a href="#the-rust-ide" aria-hidden="true" class="anchor" id="the-rust-ide"></a>The Rust IDE</h1>
+<p>In the last compiler/IDE team meeting we've discussed the overall direction for IDE support in Rust.</p>
+<p>At the moment, the two IDEs developed as part of the Rust project are Rust Language Server (RLS) and rust-analyzer.
+The former is currently being shipped with the Rust distribution while the latter serves as a foundation for the &quot;RLS 2.0&quot; working group.</p>
+<p>Unfortunately, these are actively developed in separation without much code-sharing between the two.
+We'd like to change that and to find out how we can unify these efforts.
+Therefore, we've been having a series of talks with the aim of elaborating the design space and creating a proposal for how to improve the situation going forward.</p>
+<p>This blog post gives a short summary from our most recent meeting.</p>
+<h1><a href="#why-2-ides" aria-hidden="true" class="anchor" id="why-2-ides"></a>Why 2 IDEs?</h1>
+<p>The main benefits of rust-analyzer is greater performance (because of fully-lazy compilation model) and somewhat richer feature-set (due to more flexible analysis API).
+The main benefits of RLS is precision (it uses <code>rustc</code> under the hood).
+Additionally, RLS is the main consumer of save-analysis infrastructure, which is a good fit for tools which need a static view of the codebase, such as <a href="https://github.com/rust-dev-tools/cargo-src">cargo-src</a> or <a href="https://code.visualstudio.com/blogs/2019/02/19/lsif">lsif</a>.</p>
+<h1><a href="#save-analysis" aria-hidden="true" class="anchor" id="save-analysis"></a>Save-analysis</h1>
+<p>What is &quot;save-analysis&quot;?
+It is an unstable format which rustc uses to record information about the compiled code.
+It contains a pretty high-level information.
+For example, for each identifier in the source-crate, save-analyzer will map this identifier to a definition and list of usages.
+<code>env RUSTFLAGS=&quot;-Zunstable-options -Zsave-analysis&quot; cargo check</code> can be used to instruct <code>rustc</code> to produce save-analysis files (in JSON format).
+Because save-analysis is produced directly from rustc iternal data structures, it is guaranteed to be correct (modulo bugs in rustc itself).</p>
+<h1><a href="#query-model" aria-hidden="true" class="anchor" id="query-model"></a>Query model</h1>
+<p>The fundamental problem with save-analysis is that it is computed for the whole crate at once.
+This is pretty slow for non-trivial crates, and is also wasteful.
+At any given moment in time, only a small fraction of analysis information is really required.
+rust-analyzer solves this by using <a href="https://github.com/salsa-rs/salsa"><code>salsa</code></a> queries for code analysis.
+The result is a compilation model which is fully lazy across the whole crate graph.
+This model is similar to what rustc is using internally, but is more lazy both &quot;vertically&quot; and &quot;horizontally&quot;.
+Vertically, <code>rustc</code> starts to be incremental only after parsing and macro expansion; rust-analyzer is incremental on per-file basis.
+Horizontally, <code>rustc</code> compiles one crate at a time; rust-analyzer uses queries for the whole crate graph.</p>
+<h1><a href="#way-forward" aria-hidden="true" class="anchor" id="way-forward"></a>Way forward</h1>
+<p>Our current hypothesis is that it is possible to integrate both approaches without doubling the engineering effort.
+Specifically, we will add an option to rust-analyzer to use save-analysis for find-usages and rename functionality.
+That way, we'll get precise results for most important queries, without slowing down completion.
+Unlike RLS, however, rust-analyzer will not link to rustc and instead will rely on cargo for running the compiler and producing save-analysis data.
+If this approach works, we will consider freezing RLS and focusing fully on rust-analyzer.
+Long term, the plan is to unify the save-analysis fallback path and the lazy analysis.</p>
+<p>In parallel to this RLS/rust-analyzer unification effort, we continue to pursue rustc library-ification, with a specific focus on traits solving (via chalk) and type inference.
+&quot;Library-ification&quot; is a term we've been using for the process of extracting code out of rustc into re-usable libaries which can be shared by both rustc and rust-analyzer.
+The goal is to use library-ification to gradually reduce the amount of duplicated code between rustc and rust-analyzer, with the goal of eventually either having a single code-base, or having the vast majority of the logic be shared.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

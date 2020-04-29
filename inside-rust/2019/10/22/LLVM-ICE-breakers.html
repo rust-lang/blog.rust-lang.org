@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing the LLVM ICE-breaker group | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing the LLVM ICE-breaker group | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing the LLVM ICE-breaker group | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing the LLVM ICE-breaker group" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing the LLVM ICE-breaker group</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 22, 2019 &middot; Niko Matsakis
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">the compiler team</a> 
+    </div>
+
+    <div class="post">
+      <p>Today I'm announcing a new experiment in the compiler team, the <strong>LLVM ICE-breaker group</strong>. If you're familiar with LLVM and would like to contribute to rustc -- but without taking on a large commitment -- then the LLVM ICE-breaker group might well be for you!</p>
+<h3><a href="#what-is-the-llvm-ice-breaker-group" aria-hidden="true" class="anchor" id="what-is-the-llvm-ice-breaker-group"></a>What is the LLVM ICE-breaker group?</h3>
+<p>At its heart, the LLVM ICE-breaker group is just a list of people who would like to be notified when we come across LLVM bugs. You can add yourself to this list very easily -- just <a href="https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html#join">open a PR</a>! When we come across a suitable bug, we'll write a message that <code>@</code>-mentions every Github user on that list. If you have some time, maybe you can fix one of them, or at least offer some words of wisdom to help somebody else figure out what's going on.</p>
+<p>There are a few other things associated with the group too, however. For example, we've got a <a href="https://rustc-dev-guide.rust-lang.org/ice-breaker/llvm.html">guide</a> that offers some tips for how to fix LLVM-related bugs and may help you get started (particularly if you're not that familiar with rustc).</p>
+<h3><a href="#what-kind-of-bugs-are-we-talking-about" aria-hidden="true" class="anchor" id="what-kind-of-bugs-are-we-talking-about"></a>What kind of bugs are we talking about?</h3>
+<p>The goal is to identify &quot;self-contained&quot; bugs that are unlikely to require large-scale compiler refactorings or to get entangled in other big projects.</p>
+<p>As Rust developers triage bugs and tag them for the ICE-breakers,
+they will <a href="https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html#tagging-an-issue-for-an-ice-breaker-group">ping</a> the group on Github.</p>
+<h3><a href="#who-should-join" aria-hidden="true" class="anchor" id="who-should-join"></a>Who should join?</h3>
+<p>This group is a great fit for anyone who is familiar with LLVM and who would like to learn more about Rust or to get more involved in the Rust project. Even if you don't have time to open PRs against rustc, there are many other ways to help:</p>
+<ul>
+<li>identifying open LLVM bugs that we may be running into;</li>
+<li>reducing Rust sources to minimal reducers;</li>
+<li>reducing LLVM IR to minimal problem cases;</li>
+<li>and so forth.</li>
+</ul>
+<p>(For that matter, feel free to join the group even if you're <em>not</em> all that familiar with LLVM -- no better way to learn!)</p>
+<h3><a href="#whats-with-the-name-ice-breaker-anyway" aria-hidden="true" class="anchor" id="whats-with-the-name-ice-breaker-anyway"></a>What's with the name ICE-breaker anyway?</h3>
+<p>An &quot;ICE&quot; is an &quot;internal compiler error&quot;. It actually refers specifically to the case where the compiler panics (which tends to be an easy sort of bug to fix). In fact, very few LLVM bugs cause real ICEs, but the name was too good to pass up.</p>
+<p>But of course we also hope that these ICE-breaker groups can help people to get more acquainted with hacking on rustc; to <a href="https://en.wiktionary.org/wiki/break_the_ice">&quot;break the ice&quot;</a>, if you will (ha! I kill me).</p>
+<h3><a href="#will-there-be-more-ice-breaker-groups" aria-hidden="true" class="anchor" id="will-there-be-more-ice-breaker-groups"></a>Will there be more ICE-breaker groups?</h3>
+<p>I certainly hope so! As I mentioned before, this is an experiment, but presuming that it works out well we fully intend to create more ICE-breaker groups.</p>
+<p>The current list of ICE-breaker groups is documented in the
+<a href="https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html">rustc development guide</a></p>
+<h3><a href="#so-how-do-i-sign-up-again" aria-hidden="true" class="anchor" id="so-how-do-i-sign-up-again"></a>So how do I sign up again?</h3>
+<p>Easy! Just <a href="https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html#join">open a PR</a>!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

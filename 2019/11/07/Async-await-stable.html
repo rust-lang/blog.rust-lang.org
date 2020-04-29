@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Async-await on stable Rust! | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Async-await on stable Rust! | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Async-await on stable Rust! | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Async-await on stable Rust!" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Async-await on stable Rust!</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 7, 2019 &middot; Niko Matsakis
+    
+    </div>
+
+    <div class="post">
+      <p><strong>On this coming Thursday, November 7, async-await syntax hits stable
+Rust, as part of the 1.39.0 release.</strong> This work has been a long time
+in development -- the key ideas for zero-cost futures, for example,
+were <a href="https://aturon.github.io/blog/2016/08/11/futures/">first proposed by Aaron Turon and Alex Crichton in
+2016</a>! -- and we are very proud of the end result. We believe
+that Async I/O is going to be an increasingly important part of Rust's
+story.</p>
+<p>While this first release of &quot;async-await&quot; is a momentous event, it's
+also only the beginning. The current support for async-await marks a
+kind of &quot;Minimum Viable Product&quot; (MVP). We expect to be polishing,
+improving, and extending it for some time.</p>
+<p>Already, in the time since <a href="https://blog.rust-lang.org/2019/09/30/Async-await-hits-beta.html">async-await hit beta</a>, we've made
+a lot of great progress, including making some <a href="https://blog.rust-lang.org/inside-rust/2019/10/11/AsyncAwait-Not-Send-Error-Improvements.html">key diagnostic
+improvements</a> that help to make async-await errors far more
+approachable. To get involved in that work, check out
+the <a href="https://rust-lang.github.io/compiler-team/working-groups/async-await/">Async Foundations Working Group</a>; if nothing else, you can
+help us by filing bugs about polish issues or by <a href="https://rust-lang.github.io/compiler-team/working-groups/async-await/#nominating-issues">nominating those
+bugs that are bothering you the most</a>, to help direct our
+efforts.</p>
+<p>Many thanks are due to the people who made async-await a reality. The
+implementation and design would never have happened without the
+leadership of cramertj and withoutboats, the implementation and polish
+work from the compiler side (davidtwco, tmandry, gilescope, csmoe),
+the core generator support that futures builds on (Zoxc), the
+foundational work on <code>Future</code> and the <code>Pin</code> APIs (aturon,
+alexcrichton, RalfJ, pythonesque), and of course the input provided by
+so many community members on RFC threads and discussions.</p>
+<h1><a href="#major-developments-in-the-async-ecosystem" aria-hidden="true" class="anchor" id="major-developments-in-the-async-ecosystem"></a>Major developments in the async ecosystem</h1>
+<p>Now that async-await is approaching stabilization, all the major Async
+I/O runtimes are at work adding and extending their support for the
+new syntax:</p>
+<ul>
+<li>the <a href="https://tokio.rs/">tokio</a> runtime <a href="https://tokio.rs/blog/2019-10-scheduler/">recently announced a number of scheduler
+improvements</a>, and they are planning a stable release
+in November that supports async-await syntax;</li>
+<li>the <a href="https://async.rs/">async-std</a> runtime <a href="https://github.com/async-rs/async-std/releases">has been putting out weekly releases for the past few months</a>, and plans to make their
+1.0 release shortly after async-await hits stable;</li>
+<li>using <a href="https://docs.rs/crate/wasm-bindgen-futures/0.2.16">wasm-bindgen-futures</a>, you can even bridge Rust Futures with
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">JavaScript promises</a>;</li>
+<li>the <a href="https://hyper.rs">hyper library</a> has <a href="https://github.com/hyperium/hyper/issues/1805">migrated</a> to adopt standard Rust futures;</li>
+<li>the newly released 0.3.0 version of the <a href="https://crates.io/crates/futures">futures-rs library</a> includes support
+for async-await;</li>
+<li>finally, async-await support is starting to become available in higher-level
+<a href="https://www.arewewebyet.org/topics/frameworks/">web frameworks</a> as well, as well as other interesting applications such
+as the <a href="https://docs.rs/futures-intrusive/0.2.0/futures_intrusive/"><code>futures_intrusive</code></a>
+crate.</li>
+</ul>
+<h3><a href="#async-await-a-quick-primer" aria-hidden="true" class="anchor" id="async-await-a-quick-primer"></a>Async-await: a quick primer</h3>
+<p><em>(This section and the next are reproduced from the <a href="https://blog.rust-lang.org/2019/09/30/Async-await-hits-beta.html">&quot;Async-await hits
+beta!&quot;</a> post.)</em></p>
+<p>So, what is async await? Async-await is a way to write functions that
+can &quot;pause&quot;, return control to the runtime, and then pick up from
+where they left off.  Typically those pauses are to wait for I/O, but
+there can be any number of uses.</p>
+<p>You may be familiar with the async-await from JavaScript or C#. Rust's
+version of the feature is similar, but with a few key differences.</p>
+<p>To use async-await, you start by writing <code>async fn</code> instead of <code>fn</code>:</p>
+<pre><code class="language-rust">async fn first_function() -&gt; u32 { .. }
+</code></pre>
+<p>Unlike a regular function, calling an <code>async fn</code> doesn't have any
+immediate effect. Instead, it returns a <code>Future</code>. This is a suspended
+computation that is waiting to be executed. To actually <em>execute</em> the
+future, use the <code>.await</code> operator:</p>
+<pre><code class="language-rust">async fn another_function() {
+    // Create the future:
+    let future = first_function();
+    
+    // Await the future, which will execute it (and suspend
+    // this function if we encounter a need to wait for I/O): 
+    let result: u32 = future.await;
+    ...
+}
+</code></pre>
+<p>This example shows the first difference between Rust and other
+languages: we write <code>future.await</code> instead of <code>await future</code>. This
+syntax integrates better with Rust's <code>?</code> operator for propagating
+errors (which, after all, are very common in I/O). You can simply
+write <code>future.await?</code> to await the result of a future and propagate
+errors. It also has the advantage of making method chaining painless.</p>
+<h3><a href="#zero-cost-futures" aria-hidden="true" class="anchor" id="zero-cost-futures"></a>Zero-cost futures</h3>
+<p>The other difference between Rust futures and futures in JS and C# is
+that they are based on a &quot;poll&quot; model, which makes them <strong>zero
+cost</strong>. In other languages, invoking an async function immediately
+creates a future and schedules it for execution: awaiting the future
+isn't necessary for it to execute. But this implies some overhead for
+each future that is created.</p>
+<p>In contrast, in Rust, calling an async function does not do any
+scheduling in and of itself, which means that we can compose a complex
+nest of futures without incurring a per-future cost. As an end-user,
+though, the main thing you'll notice is that <strong>futures feel &quot;lazy&quot;</strong>:
+they don't do anything until you await them.</p>
+<p>If you'd like a closer look at how futures work under the hood, take a
+look at <a href="https://rust-lang.github.io/async-book/02_execution/04_executor.html">the executor section</a> of the <a href="https://github.com/rust-lang/async-book">async book</a>, or watch the
+<a href="https://www.youtube.com/watch?v=skos4B5x7qE">excellent talk</a> that <a href="https://github.com/withoutboats">withoutboats</a> gave at <a href="https://rustlatam.org/">Rust LATAM 2019</a>
+on the topic.</p>
+<h3><a href="#summary" aria-hidden="true" class="anchor" id="summary"></a>Summary</h3>
+<p>We believe that having async-await on stable Rust is going to be a key
+enabler for a lot of new and exciting developments in Rust. If you've
+tried Async I/O in Rust in the past and had problems -- particularly
+if you tried the combinator-based futures of the past -- you'll find
+<a href="http://aturon.github.io/tech/2018/04/24/async-borrowing/">async-await integrates much better with Rust's borrowing
+system</a>. Moreover, there are now a number of great runtimes and
+other libraries available in the ecosystem to work with.  So get out
+there and build stuff!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

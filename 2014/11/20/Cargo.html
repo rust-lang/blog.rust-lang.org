@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cargo: Rust's community crate host | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Cargo: Rust's community crate host | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Cargo: Rust's community crate host | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Cargo: Rust's community crate host" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Cargo: Rust's community crate host</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 20, 2014 &middot; Alex Crichton
+    
+    </div>
+
+    <div class="post">
+      <p>Today it is my pleasure to announce that <a href="https://crates.io/">crates.io</a> is
+online and ready for action. The site is a central location to
+discover/download Rust crates, and Cargo is ready to start publishing to it
+today. For the next few months, we are asking that intrepid early adopters
+<a href="http://doc.crates.io/crates-io.html">help us</a> get the registry battle-tested.</p>
+<p>Until Rust itself is stable early next year, registry dependencies will need to
+be updated often. Production users may want to continue using git dependencies
+until then.</p>
+<h2><a href="#what-is-cargo" aria-hidden="true" class="anchor" id="what-is-cargo"></a>What is Cargo?</h2>
+<p>Cargo is a package manager <a href="http://www.rust-lang.org/">for Rust</a>, <a href="https://github.com/rust-lang/cargo">in
+Rust</a>. Managing dependencies is a
+fundamentally difficult problem, but fortunately over the last decade there's
+been a lot of progress in the design of package managers. Designed by Carl
+Lerche and Yehuda Katz, Cargo follows the tradition of successes like
+<a href="http://bundler.io/">Bundler</a> and <a href="https://www.npmjs.org/">NPM</a>:</p>
+<ol>
+<li>
+<p>Cargo leverages crates.io to foster a thriving community of crates that can
+easily interoperate with one another and last for years to come.</p>
+</li>
+<li>
+<p>Cargo releases developers from the worry of managing dependencies and ensures
+that all collaborators are building the same code.</p>
+</li>
+<li>
+<p>Cargo lets your dependencies say how they should be built, and manages the
+entire build process for you.</p>
+</li>
+</ol>
+<h2><a href="#a-community-on-cargo" aria-hidden="true" class="anchor" id="a-community-on-cargo"></a>A Community on Cargo</h2>
+<p>To get a feel for how Cargo achieves its goals, let's take a look at some of
+its core mechanics.</p>
+<h3><a href="#declaring-dependencies" aria-hidden="true" class="anchor" id="declaring-dependencies"></a>Declaring Dependencies</h3>
+<p>Cargo makes depending on third-party code as easy as depending on the standard
+library. When using Cargo, each crate will have an associated
+<a href="http://doc.crates.io/manifest.html">manifest</a> to describe itself and its
+dependencies. Adding a new dependency is now as simple as adding one line to the
+manifest, and this ease has allowed Cargo in just a few short months to enable a
+large and growing network of Rust projects and libraries which were simply
+infeasible before.</p>
+<p>Cargo alone, however, is not quite the entire solution. Discovering dependencies
+is still difficult, and ensuring that these dependencies are available for years
+to come is also not guaranteed.</p>
+<h3><a href="#cratesio" aria-hidden="true" class="anchor" id="cratesio"></a>crates.io</h3>
+<p>To pair with Cargo, the central crates.io site serves as a single location for
+publishing and discovering libraries. This repository serves as permanent
+storage for releases of crates over time to ensure that projects can always
+build with the exact same versions years later. Up until now, users of Cargo
+have largely just downloaded dependencies directly from the source GitHub
+repository, but the primary source will now be shifting to crates.io.</p>
+<p>Other programming language communities have been quite successful with this form
+of central repository. For example <a href="http://rubygems.org/">rubygems.org</a> is your
+one-stop-shop for <a href="http://bundler.io/">Bundler</a> dependencies and
+<a href="https://www.npmjs.org/">npmjs.org</a> has had over 600 million downloads in just
+this month alone! We intend for crates.io to serve a similar role for Rust as a
+critical piece of infrastructure for <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">Rust's long-term stability story at
+1.0</a>.</p>
+<h2><a href="#versioning-and-reproducible-builds" aria-hidden="true" class="anchor" id="versioning-and-reproducible-builds"></a>Versioning and Reproducible Builds</h2>
+<p>Over the past few years, the concept of <a href="http://semver.org/">Semantic
+Versioning</a> has gained traction as a way for library
+developers to easily and clearly communicate with users when they make breaking
+changes. The core idea of semantic versioning is simple: each new release is
+categorized as a minor or major release, and only major releases can introduce
+breakage. Cargo allows you to specify version ranges for your dependencies, with
+the default meaning of &quot;compatible with&quot;.</p>
+<p>When specifying a version range, applications often end up requesting
+multiple versions of a single crate, and Cargo solves this by selecting the
+highest version of each major version (&quot;stable code&quot;) requested.  This highly
+encourages using stable distributions while still allowing duplicates of
+unstable code (pre-1.0 and git for example).</p>
+<p>Once the set of dependencies and their versions have been calculated, Cargo
+generates a <a href="http://doc.crates.io/guide.html#cargo.toml-vs-cargo.lock"><code>Cargo.lock</code></a> to encode this information. This &quot;lock file&quot; is
+then distributed to collaborators of applications to ensure that the crates
+being built remain the same from one build to the next, across times, machines,
+and environments.</p>
+<h2><a href="#building-code" aria-hidden="true" class="anchor" id="building-code"></a>Building Code</h2>
+<p>Up to this point we've seen how Cargo facilitates discovery and reuse of
+community projects while managing what versions to use. Now Cargo just has to
+deal with the problem of actually compiling all this code!</p>
+<p>With a deep understanding of the Rust code that it is building, Cargo is able to
+provide some nice standard features as well as some Rust-specific features:</p>
+<ul>
+<li>
+<p>By default, Cargo builds as many crates in parallel as possible. This not only
+applies to upstream dependencies being built in parallel, but also items for
+the local crate such as test suites, binaries, and unit tests.</p>
+</li>
+<li>
+<p>Cargo supports unit testing out of the box both for crates themselves and in
+the form of integration tests. This even includes example programs to ensure
+they don't bitrot.</p>
+</li>
+<li>
+<p>Cargo generates documentation for all crates in a dependency graph, and it can
+even run <a href="http://doc.rust-lang.org/rustdoc.html#testing-the-documentation">Rust's documentation
+tests</a> to
+ensure examples in documentation stay up to date.</p>
+</li>
+<li>
+<p>Cargo can run a <a href="http://doc.crates.io/build-script.html">build script</a> before any crate is compiled to
+perform tasks such as code generation, compiling native dependencies, or
+detecting native dependencies on the local system.</p>
+</li>
+<li>
+<p>Cargo supports cross compilation out of the box. Cross compiling is done by
+simply specifying a <code>--target</code> options and Cargo will manage tasks such as
+compiling plugins and other build dependencies for the right platform.</p>
+</li>
+</ul>
+<h2><a href="#what-else-is-in-store" aria-hidden="true" class="anchor" id="what-else-is-in-store"></a>What else is in store?</h2>
+<p>The launch of crates.io is a key step in moving the Cargo ecosystem forward,
+but the story does not end here. Usage of crates.io is architected assuming a
+stable compiler, which should be <a href="http://blog.rust-lang.org/2014/09/15/Rust-1.0.html">coming soon</a>! There are also a
+number of extensions to crates.io such as a hosted documentation service or a CI
+build infrastructure hook which could be built out using the crates.io APIs.</p>
+<p>This is just the beginning for crates.io, and I'm excited to start finding all
+Rust crates from one location. I can't wait to see what the registry looks like
+at 1.0, and I can only fathom what it will look like after 1.0!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

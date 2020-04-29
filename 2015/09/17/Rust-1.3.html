@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.3 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.3 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.3 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.3" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.3</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 17, 2015 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The gear keeps turning: we're releasing Rust 1.3 stable today! As always, read
+on for the highlights and check the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-130-september-2015">release notes</a> for more detail.</p>
+<h3><a href="#whats-in-13-stable" aria-hidden="true" class="anchor" id="whats-in-13-stable"></a>What's in 1.3 stable</h3>
+<p>This is our first release shipping with the
+<a href="https://doc.rust-lang.org/nightly/nomicon/">Rustonomicon</a>, a new book covering
+&quot;The Dark Arts of Advanced and Unsafe Rust Programming&quot;. While it's still in
+draft form, this book already provides deep coverage of some of Rust's darker
+corners.</p>
+<p>On the library front, we saw a fair amount of API stabilization, including the
+new <code>Duration</code> API and enhancements to <code>Error</code> and <code>Hash</code>/<code>Hasher</code>. We expect to
+see further growth of the <code>std::time</code> module in the 1.5 timeframe.</p>
+<p>The 1.3 cycle also saw continuing focus on performance. Most wins here are
+within the standard library:</p>
+<ul>
+<li>The substring matcher now uses a
+<a href="https://github.com/rust-lang/rust/pull/26327">more efficient algorithm</a>.</li>
+<li>There were
+<a href="https://github.com/rust-lang/rust/pull/26849">improvements to zero filling</a>
+that speed up <code>Vec::resize</code> and <code>Read::read_to_end</code>.</li>
+<li>The implementation of <code>Read::read_to_end</code> has been
+<a href="https://github.com/rust-lang/rust/pull/26950">specialized for <code>stdin</code> and <code>File</code></a>,
+resulting in additional speedups.</li>
+<li>The <code>PartialEq</code> implementation on slices is now
+<a href="https://github.com/rust-lang/rust/pull/26884">much faster</a>.</li>
+</ul>
+<p>We're continuing to invest in Windows, with
+<a href="https://github.com/rust-lang/rust/pull/26601">preliminary support for targeting Windows XP</a>. While
+we do not intend to treat Windows XP as a &quot;first tier&quot; platform, it is now
+feasible to build Rust code for XP as long as you avoid certain parts of the
+standard library. Work on MSVC toolchain integration is ongoing, with full
+support (on 64-bit) shipping in the 1.4 beta today.</p>
+<p>On the Cargo front, we have landed support for
+<a href="https://github.com/rust-lang/rust/pull/27260">lint capping</a> as specified by an
+<a href="https://github.com/rust-lang/rfcs/pull/1193">earlier RFC</a>. The idea is that
+lints in your dependencies should not affect your ability to compile cleanly,
+which in turn makes it easier to tweak the way lints work without undue hassle
+in the ecosystem.</p>
+<h3><a href="#contributors-to-13" aria-hidden="true" class="anchor" id="contributors-to-13"></a>Contributors to 1.3</h3>
+<p>Rust is a community-driven language, and we're delighted to thank the 131
+contributors to this release:</p>
+<ul>
+<li>Aaron Turon</li>
+<li>Adam Heins</li>
+<li>Agoston Szepessy</li>
+<li>Aidan Hobson Sayers</li>
+<li>Akos Kiss</li>
+<li>Alex Crichton</li>
+<li>Alex Newman</li>
+<li>Alexis Beingessner</li>
+<li>Alisdair Owens</li>
+<li>Andreas Tolfsen</li>
+<li>Andrew Kuchev</li>
+<li>Andrew Paseltiner</li>
+<li>Andy Caldwell</li>
+<li>Andy Grover</li>
+<li>Antti Keränen</li>
+<li>Ariel Ben-Yehuda</li>
+<li>Barosl Lee</li>
+<li>Benjamin Herr</li>
+<li>Björn Steinbrink</li>
+<li>Blake Loring</li>
+<li>Brian Anderson</li>
+<li>Brody Holden</li>
+<li>Chris Morgan</li>
+<li>Christian Persson</li>
+<li>Christian Weinz</li>
+<li>Cole Reynolds</li>
+<li>Corey Farwell</li>
+<li>Corey Richardson</li>
+<li>Cristian Kubis</li>
+<li>Cruz Julian Bishop</li>
+<li>Daniel Albert</li>
+<li>Dave Huseby</li>
+<li>Dirkjan Ochtman</li>
+<li>Eduard Burtescu</li>
+<li>Eli Friedman</li>
+<li>Eljay</li>
+<li>Esption</li>
+<li>Felix S. Klock II</li>
+<li>Florian Hartwig</li>
+<li>Frank McSherry</li>
+<li>FuGangqiang</li>
+<li>Geoffrey Thomas</li>
+<li>Georg Brandl</li>
+<li>Guillaume Gomez</li>
+<li>Huon Wilson</li>
+<li>Ivan Ukhov</li>
+<li>Jan Likar</li>
+<li>Jared Roesch</li>
+<li>Jashank Jeremy</li>
+<li>Jason Schein</li>
+<li>Jeehoon Kang</li>
+<li>Jesús Espino</li>
+<li>Johannes Oertel</li>
+<li>John Hodge</li>
+<li>Jonathan Hansford</li>
+<li>Jonathan Reem</li>
+<li>Jose Narvaez</li>
+<li>Josh Triplett</li>
+<li>Joshua Landau</li>
+<li>Kagami Sascha Rosylight</li>
+<li>Kelvin Ly</li>
+<li>Ken Tossell</li>
+<li>Kevin Ballard</li>
+<li>Kevin Butler</li>
+<li>Kieran Hunt</li>
+<li>Kornel Lesiński</li>
+<li>Kristof Söderström</li>
+<li>Lee Jeffery</li>
+<li>Leif Arne Storset</li>
+<li>Liigo Zhuang</li>
+<li>Makoto Kato</li>
+<li>Manish Goregaokar</li>
+<li>Marcus Klaas</li>
+<li>Mark Buer</li>
+<li>Mathieu David</li>
+<li>Mathijs van de Nes</li>
+<li>Matt Friedman</li>
+<li>Michael Sproul</li>
+<li>Michael Woerister</li>
+<li>Ms2ger</li>
+<li>Nick Cameron</li>
+<li>Nick Hamann</li>
+<li>Nick Howell</li>
+<li>Nicolette Verlinden</li>
+<li>Niko Matsakis</li>
+<li>OGINO Masanori</li>
+<li>Oliver Schneider</li>
+<li>P1start</li>
+<li>Paolo Falabella</li>
+<li>Pascal Hertleif</li>
+<li>Patrick Walton</li>
+<li>Pavel Pravosud</li>
+<li>Peter Atashian</li>
+<li>Peter Elmers</li>
+<li>Ralf Jung</li>
+<li>Remi Rampin</li>
+<li>Richo Healey</li>
+<li>Ryan Pendleton</li>
+<li>Scott Olson</li>
+<li>Sean Patrick Santos</li>
+<li>Seo Sanghyeon</li>
+<li>Simon Sapin</li>
+<li>Simonas Kazlauskas</li>
+<li>Steve Klabnik</li>
+<li>Steven Allen</li>
+<li>Steven Fackler</li>
+<li>Steven Stewart-Gallus</li>
+<li>Sébastien Marie</li>
+<li>Taliesin Beynon</li>
+<li>Tamir Duberstein</li>
+<li>Theo Belaire</li>
+<li>Ticki</li>
+<li>Tobias Bucher</li>
+<li>Tshepang Lekhonkhobe</li>
+<li>Ulrik Sverdrup</li>
+<li>Vadim Chugunov</li>
+<li>Vadim Petrochenkov</li>
+<li>Vincent Bernat</li>
+<li>Vladimir Rutsky</li>
+<li>Wei-Ming Yang</li>
+<li>Wesley Wiser</li>
+<li>William Throwe</li>
+<li>arthurprs</li>
+<li>bors</li>
+<li>diaphore</li>
+<li>eternaleye</li>
+<li>jethrogb</li>
+<li>krumelmonster</li>
+<li>mdinger</li>
+<li>midinastasurazz</li>
+<li>mitaa</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

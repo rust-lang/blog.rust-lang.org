@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>docs.rs now allows you to choose your build targets | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="docs.rs now allows you to choose your build targets | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="docs.rs now allows you to choose your build targets | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="docs.rs now allows you to choose your build targets" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>docs.rs now allows you to choose your build targets</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 15, 2020 &middot; Joshua Nelson
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/dev-tools#docs-rs">the docs.rs team</a> 
+    </div>
+
+    <div class="post">
+      <p>Recently, <a href="https://docs.rs/">docs.rs</a> added a feature that allows crates to opt-out of building on all targets.
+If you don't need to build on all targets, you can enable this feature to reduce your build times.</p>
+<h2><a href="#what-does-the-feature-do" aria-hidden="true" class="anchor" id="what-does-the-feature-do"></a>What does the feature do?</h2>
+<p>By default, docs.rs builds all crates published to <a href="https://crates.io/">crates.io</a> for <a href="https://docs.rs/about#metadata">every tier one target</a>.
+However, most crates have the same content on all targets.
+Of the platform-dependent crates, almost all target a single platform,
+and do not need to be built on other targets.
+For example, <a href="https://docs.rs/winapi/"><code>winapi</code></a> only has documentation on the <code>x86_64-pc-windows-msvc</code>
+and <code>i686-pc-windows-msvc</code> targets, and is blank on all others.</p>
+<p>This feature allows you to request building only on specific targets.
+For example, <a href="https://docs.rs/winapi/"><code>winapi</code></a> could opt into only building windows targets
+by putting the following in its <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[package.metadata.docs.rs]
+# This also sets the default target to `x86_64-pc-windows-msvc`
+targets = [&quot;x86_64-pc-windows-msvc&quot;, &quot;i686-pc-windows-msvc&quot;]
+</code></pre>
+<p>If you only need a single target, it's even simpler:</p>
+<pre><code class="language-toml">[package.metadata.docs.rs]
+# This sets the default target to `x86_64-unknown-linux-gnu`
+# and only builds that target
+targets = [&quot;x86_64-unknown-linux-gnu&quot;]
+</code></pre>
+<p>See the <a href="https://docs.rs/about#metadata">docs.rs documentation</a> for more details about how to opt-in.</p>
+<h2><a href="#how-does-this-help-my-crate" aria-hidden="true" class="anchor" id="how-does-this-help-my-crate"></a>How does this help my crate?</h2>
+<p>Instead of building for every tier-one target, you can build for only a single target,
+reducing your documentation build times by a factor of 6.
+This can especially help large crates or projects with many crates
+that take several hours to document.</p>
+<h2><a href="#how-does-this-help-docsrs" aria-hidden="true" class="anchor" id="how-does-this-help-docsrs"></a>How does this help docs.rs?</h2>
+<p>Building all crates from crates.io can take a long time!
+Building fewer targets will allow us to reduce wait times for every crate.
+Additionally, this will decrease the growth of our storage costs, improving the sustainability of the project.</p>
+<h2><a href="#possible-future-changes" aria-hidden="true" class="anchor" id="possible-future-changes"></a>Possible future changes</h2>
+<p>We're considering turning this on by default in the future;
+i.e. only building for one target unless multiple targets are specifically requested.
+However, we don't want to break anyone's documentation, so we're making this feature opt-in  while we decide the migration strategy.</p>
+<p>This change will also make it easier for docs.rs to build
+for targets that are not tier one, such as embedded targets.</p>
+<h2><a href="#how-can-i-learn-more" aria-hidden="true" class="anchor" id="how-can-i-learn-more"></a>How can I learn more?</h2>
+<p>You can learn more about the change in <a href="https://github.com/rust-lang/docs.rs/issues/343">the issue proposing it</a> and <a href="https://github.com/rust-lang/docs.rs/pull/632">the PR with the implementation</a>. Details on building non-tier-one targets are also available <a href="https://github.com/rust-lang/docs.rs/issues/563#issuecomment-573321498">in the issue requesting the feature</a>.</p>
+<p>More information on targets and what it means to be a tier-one target is available in the <a href="https://forge.rust-lang.org/release/platform-support.html">platform support</a> page.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

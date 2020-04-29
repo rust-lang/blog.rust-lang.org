@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>cargo-audit v0.11: Introducing the `fix` feature, yanked crate detection, and more | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="cargo-audit v0.11: Introducing the `fix` feature, yanked crate detection, and more | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="cargo-audit v0.11: Introducing the `fix` feature, yanked crate detection, and more | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="cargo-audit v0.11: Introducing the `fix` feature, yanked crate detection, and more" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>cargo-audit v0.11: Introducing the `fix` feature, yanked crate detection, and more</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 23, 2020 &middot; Tony Arcieri
+     on behalf of <a href="https://www.rust-lang.org/governance/wgs/wg-secure-code">the Secure Code WG</a> 
+    </div>
+
+    <div class="post">
+      <p><a href="https://github.com/rustsec/cargo-audit">cargo-audit</a> is a command-line utility which inspects <code>Cargo.lock</code> files and compares them against the <a href="https://rustsec.org">RustSec Advisory Database</a>, a community database of security vulnerabilities maintained by the <a href="https://github.com/rust-secure-code/wg">Rust Secure Code Working Group</a>.</p>
+<p>This post describes the new features in the 0.11 release of <code>cargo-audit</code>.</p>
+<h2><a href="#cargo-audit-fix-automatically-update-vulnerable-dependencies" aria-hidden="true" class="anchor" id="cargo-audit-fix-automatically-update-vulnerable-dependencies"></a><code>cargo audit fix</code>: automatically update vulnerable dependencies</h2>
+<p>One of our <a href="https://github.com/RustSec/cargo-audit/issues/23">most requested features</a> (especially by fans of the similar <a href="https://docs.npmjs.com/cli/audit"><code>npm audit fix</code></a> command), the <a href="https://github.com/RustSec/cargo-audit#cargo-audit-fix-subcommand">new <code>cargo audit fix</code> subcommand</a> will attempt to automatically update version requirements for vulnerable dependencies to non-vulnerable versions.</p>
+<p>Note that this is an experimental new feature which isn't enabled by default. To try it out, install <code>cargo-audit</code> with the following:</p>
+<pre><code>$ cargo install cargo-audit --features=fix
+</code></pre>
+<p>This will perform the same audit process as <code>cargo audit</code> initially, and then attempt to apply fixes to your <code>Cargo.toml</code>:</p>
+<p><img src="https://raw.githubusercontent.com/RustSec/cargo-audit/c857beb/img/screenshot-fix.png" alt="cargo audit fix screenshot" /></p>
+<p>Under the hood, it uses <a href="https://github.com/killercup/cargo-edit">cargo-edit</a> (as a library) to perform modifications to your <code>Cargo.toml</code> file, using the fixed version requirements listed in the advisory to try to perform an automatic upgrade to a non-vulnerable version of a dependency for each advisory.</p>
+<p>Note once more that this is a <em>new, experimental feature</em> and as such it's bound to have bugs. If you're worried, you can use <code>cargo audit fix --dry-run</code> to perform a dry run only. And if you do encounter bugs, please <a href="https://github.com/rustsec/cargo-audit/issues">file a bug report</a>.</p>
+<p>We'd like to thank Reza Fatahi and Hanif Ariffin for their work in contributing this feature.</p>
+<h2><a href="#warnings-for-yanked-crates" aria-hidden="true" class="anchor" id="warnings-for-yanked-crates"></a>Warnings for yanked crates</h2>
+<p>As you can see in the screenshot above, <code>cargo audit</code> now checks each of the crates in your <code>Cargo.lock</code> file against the <a href="https://crates.io">crates.io</a> index to determine if any of them have been yanked. If they have, it will emit a warning as per above.</p>
+<p>If you'd like for yanked crates to be a hard failure, you can run <code>cargo audit</code> with the <code>-D</code> command-line argument:</p>
+<pre><code>$ cargo audit -D
+</code></pre>
+<p>or if you prefer to be more explicit:</p>
+<pre><code>$ cargo audit --deny-warnings
+</code></pre>
+<h2><a href="#compatibility-with-the-new-v2-format-for-cargolock" aria-hidden="true" class="anchor" id="compatibility-with-the-new-v2-format-for-cargolock"></a>Compatibility with the new &quot;V2&quot; format for <code>Cargo.lock</code></h2>
+<p>Rust 1.39 shipped support for a new <a href="https://github.com/rust-lang/cargo/pull/7070">merge-friendly <code>Cargo.lock</code> format</a>.</p>
+<p><code>cargo audit</code> consumes <code>Cargo.lock</code> directly, and while the V2 format change didn't break the core vulnerability-auditing functionality of <code>cargo audit</code>, several minor features regressed because of this, such as displaying dependency trees for vulnerable dependencies.</p>
+<p>This release also upgrades to version 4.0 of the <a href="https://github.com/RustSec/cargo-lock"><code>cargo-lock</code> crate</a>, which includes full support for the V2 <code>Cargo.lock</code> format and constructs a representation of a lockfile which is the same across the V1 and V2 formats.</p>
+<p>If you noticed dependency trees failing to display after upgrading to the V2 <code>Cargo.lock</code> format, they should now be working again!</p>
+<p>Thanks for reading, and we hope you enjoy <code>cargo-audit</code> 0.11!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

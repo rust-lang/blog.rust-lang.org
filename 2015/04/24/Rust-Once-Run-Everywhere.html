@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust Once, Run Everywhere | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust Once, Run Everywhere | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust Once, Run Everywhere | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust Once, Run Everywhere" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust Once, Run Everywhere</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 24, 2015 &middot; Alex Crichton
+    
+    </div>
+
+    <div class="post">
+      <p>Rust's quest for world domination was never destined to happen overnight, so
+Rust needs to be able to interoperate with the existing world just as easily as
+it talks to itself. For this reason, <strong>Rust makes it easy to communicate with C
+APIs without overhead, and to leverage its ownership system to provide much
+stronger safety guarantees for those APIs at the same time</strong>.</p>
+<p>To communicate with other languages, Rust provides a <em>foreign function
+interface</em> (FFI). Following Rust's design principles, the FFI provides a
+<strong>zero-cost abstraction</strong> where function calls between Rust and C have identical
+performance to C function calls. FFI bindings can also leverage language
+features such as ownership and borrowing to provide a <strong>safe interface</strong> that
+enforces protocols around pointers and other resources. These protocols usually
+appear only in the documentation for C APIs -- at best -- but Rust makes them
+explicit.</p>
+<p>In this post we'll explore how to encapsulate unsafe FFI calls to C in safe,
+zero-cost abstractions. Working with C is, however, just an example; we'll also
+see how Rust can easily talk to languages like Python and Ruby just as
+seamlessly as with C.</p>
+<h3><a href="#rust-talking-to-c" aria-hidden="true" class="anchor" id="rust-talking-to-c"></a>Rust talking to C</h3>
+<p>Let's start with a simple example of calling C code from Rust and then
+demonstrate that Rust imposes no additional overhead. Here's a C program which
+will simply double all the input it's given:</p>
+<pre><code class="language-c">int double_input(int input) {
+    return input * 2;
+}
+</code></pre>
+<p>To call this from Rust, you might write a program like this:</p>
+<pre><code class="language-rust">extern crate libc;
+
+extern {
+    fn double_input(input: libc::c_int) -&gt; libc::c_int;
+}
+
+fn main() {
+    let input = 4;
+    let output = unsafe { double_input(input) };
+    println!(&quot;{} * 2 = {}&quot;, input, output);
+}
+</code></pre>
+<p>And that's it! You can try this out for yourself by
+<a href="https://github.com/alexcrichton/rust-ffi-examples/tree/master/rust-to-c">checking out the code on GitHub</a> and running <code>cargo run</code> from that
+directory. <strong>At the source level we can see that there's no burden in calling an
+external function beyond stating its signature, and we'll see soon that the
+generated code indeed has no overhead, either.</strong> There are, however, a few
+subtle aspects of this Rust program, so let's cover each piece in detail.</p>
+<p>First up we see <code>extern crate libc</code>. <a href="https://crates.io/crates/libc">The libc crate</a> provides many useful
+type definitions for FFI bindings when talking with C, and it makes it easy to
+ensure that both C and Rust agree on the types crossing the language boundary.</p>
+<p>This leads us nicely into the next part of the program:</p>
+<pre><code class="language-rust">extern {
+    fn double_input(input: libc::c_int) -&gt; libc::c_int;
+}
+</code></pre>
+<p>In Rust this is a <strong>declaration</strong> of an externally available function. You can
+think of this along the lines of a C header file. Here's where the compiler
+learns about the inputs and outputs of the function, and you can see above that
+this matches our definition in C. Next up we have the main body of the program:</p>
+<pre><code class="language-rust">fn main() {
+    let input = 4;
+    let output = unsafe { double_input(input) };
+    println!(&quot;{} * 2 = {}&quot;, input, output);
+}
+</code></pre>
+<p>We see one of the crucial aspects of FFI in Rust here, the <code>unsafe</code> block. The
+compiler knows nothing about the implementation of <code>double_input</code>, so it must
+assume that memory unsafety <em>could</em> happen whenever you call a foreign function.
+The <code>unsafe</code> block is how the programmer takes responsibility for ensuring
+safety -- you are promising that the actual call you make will not, in fact,
+violate memory safety, and thus that Rust's basic guarantees are upheld.  This
+may seem limiting, but Rust has just the right set of tools to allow consumers
+to not worry about <code>unsafe</code> (more on this in a moment).</p>
+<p>Now that we've seen how to call a C function from Rust, let's see if we can
+verify this claim of zero overhead. Almost all programming languages can call
+into C one way or another, but it often comes at a cost with runtime type
+conversions or perhaps some language-runtime juggling. To get a handle on what
+Rust is doing, let's go straight to the assembly code of the above <code>main</code>
+function's call to <code>double_input</code>:</p>
+<pre><code>mov    $0x4,%edi
+callq  3bc30 &lt;double_input&gt;
+</code></pre>
+<p>And as before, that's it! Here we can see that calling a C function from Rust
+involves precisely one call instruction after moving the arguments into place,
+exactly the same cost as it would be in C.</p>
+<h3><a href="#safe-abstractions" aria-hidden="true" class="anchor" id="safe-abstractions"></a>Safe Abstractions</h3>
+<p>Most features in Rust tie into its core concept of ownership, and the FFI is no
+exception. When binding a C library in Rust you not only have the benefit of zero
+overhead, but you are also able to make it <em>safer</em> than C can! <strong>Bindings can
+leverage the ownership and borrowing principles in Rust to codify comments
+typically found in a C header about how its API should be used.</strong></p>
+<p>For example, consider a C library for parsing a tarball. This library will
+expose functions to read the contents of each file in the tarball, probably
+something along the lines of:</p>
+<pre><code class="language-c">// Gets the data for a file in the tarball at the given index, returning NULL if
+// it does not exist. The `size` pointer is filled in with the size of the file
+// if successful.
+const char *tarball_file_data(tarball_t *tarball, unsigned index, size_t *size);
+</code></pre>
+<p>This function is implicitly making assumptions about how it can be used,
+however, by assuming that the <code>char*</code> pointer returned cannot outlive the input
+tarball. When bound in Rust, this API might look like this instead:</p>
+<pre><code class="language-rust">pub struct Tarball { raw: *mut tarball_t }
+
+impl Tarball {
+    pub fn file(&amp;self, index: u32) -&gt; Option&lt;&amp;[u8]&gt; {
+        unsafe {
+            let mut size = 0;
+            let data = tarball_file_data(self.raw, index as libc::c_uint,
+                                         &amp;mut size);
+            if data.is_null() {
+                None
+            } else {
+                Some(slice::from_raw_parts(data as *const u8, size as usize))
+            }
+        }
+    }
+}
+</code></pre>
+<p>Here the <code>*mut tarball_t</code> pointer is <em>owned by</em> a <code>Tarball</code>, which is
+responsible for any destruction and cleanup, so we already have rich knowledge
+about the lifetime of the tarball's memory. Additionally, the <code>file</code> method
+returns a <strong>borrowed slice</strong> whose lifetime is implicitly connected to the
+lifetime of the source tarball itself (the <code>&amp;self</code> argument). This is Rust's way
+of indicating that the returned slice can only be used within the lifetime of
+the tarball, statically preventing dangling pointer bugs that are easy to
+make when working directly with C. (If you're not familiar with this kind of
+borrowing in Rust, have a look at Yehuda Katz's <a href="http://blog.skylight.io/rust-means-never-having-to-close-a-socket/">blog post on ownership</a>.)</p>
+<p>A key aspect of the Rust binding here is that it is a safe function, meaning
+that callers do not have to use <code>unsafe</code> blocks to invoke it! Although it has an
+<code>unsafe</code> <em>implementation</em> (due to calling an FFI function), the <em>interface</em> uses
+borrowing to guarantee that no memory unsafety can occur in any Rust code that
+uses it. That is, due to Rust's static checking, it's simply not possible to
+cause a segfault using the API on the Rust side. And don't forget, all of this
+is coming at zero cost: the raw types in C are representable in Rust with no
+extra allocations or overhead.</p>
+<p>Rust's amazing community has already built some substantial safe bindings around
+existing C libraries, including <a href="https://crates.io/crates/openssl">OpenSSL</a>, <a href="https://crates.io/crates/git2">libgit2</a>,
+<a href="https://crates.io/crates/dispatch">libdispatch</a>, <a href="https://crates.io/crates/curl">libcurl</a>, <a href="https://crates.io/crates/sdl2">sdl2</a>, <a href="https://crates.io/crates/nix">Unix APIs</a>,
+and <a href="https://crates.io/crates/sodiumoxide">libsodium</a>. This list is also growing quite rapidly on
+<a href="https://crates.io">crates.io</a>, so your favorite C library may already be bound or will
+be bound soon!</p>
+<h3><a href="#c-talking-to-rust" aria-hidden="true" class="anchor" id="c-talking-to-rust"></a>C talking to Rust</h3>
+<p><strong>Despite guaranteeing memory safety, Rust does not have a garbage collector or
+runtime, and one of the benefits of this is that Rust code can be called from C
+with no setup at all.</strong> This means that the zero overhead FFI not only applies
+when Rust calls into C, but also when C calls into Rust!</p>
+<p>Let's take the example above, but reverse the roles of each language. As before,
+all the code below is <a href="https://github.com/alexcrichton/rust-ffi-examples/tree/master/c-to-rust">available on GitHub</a>. First we'll start off with
+our Rust code:</p>
+<pre><code class="language-rust">#[no_mangle]
+pub extern fn double_input(input: i32) -&gt; i32 {
+    input * 2
+}
+</code></pre>
+<p>As with the Rust code before, there's not a whole lot here but there are some
+subtle aspects in play. First off, we've labeled our function definition with a
+<code>#[no_mangle]</code> attribute. This instructs the compiler to not mangle the symbol
+name for the function <code>double_input</code>. Rust employs name mangling similar to C++
+to ensure that libraries do not clash with one another, and this attribute
+means that you don't have to guess a symbol name like
+<code>double_input::h485dee7f568bebafeaa</code> from C.</p>
+<p>Next we've got our function definition, and the most interesting part about
+this is the keyword <code>extern</code>. This is a specialized form of specifying the <a href="http://doc.rust-lang.org/reference.html#extern-functions">ABI
+for a function</a> which enables the function to be compatible with a C
+function call.</p>
+<p>Finally, if you <a href="https://github.com/alexcrichton/rust-ffi-examples/blob/master/c-to-rust/Cargo.toml#L8">take a look at the <code>Cargo.toml</code></a> you'll see that
+this library is not compiled as a normal Rust library (rlib) but instead as a
+static archive which Rust calls a 'staticlib'. This enables all the relevant
+Rust code to be linked statically into the C program we're about to produce.</p>
+<p>Now that we've got our Rust library squared away, let's write our C program
+which will call Rust.</p>
+<pre><code class="language-c">#include &lt;stdint.h&gt;
+#include &lt;stdio.h&gt;
+
+extern int32_t double_input(int32_t input);
+
+int main() {
+    int input = 4;
+    int output = double_input(input);
+    printf(&quot;%d * 2 = %d\n&quot;, input, output);
+    return 0;
+}
+</code></pre>
+<p>Here we can see that C, like Rust, needs to declare the <code>double_input</code> function
+that Rust defined. Other than that though everything is ready to go! If you run
+<code>make</code> from the <a href="https://github.com/alexcrichton/rust-ffi-examples/tree/master/c-to-rust">directory on GitHub</a> you'll see these examples getting
+compiled and linked together and the final executable should run and print
+<code>4 * 2 = 8</code>.</p>
+<p>Rust's lack of a garbage collector and runtime enables this seamless transition
+from C to Rust. The external C code does not need to perform any setup on Rust's
+behalf, making the transition that much cheaper.</p>
+<h3><a href="#beyond-c" aria-hidden="true" class="anchor" id="beyond-c"></a>Beyond C</h3>
+<p>Up to now we've seen how FFI in Rust has zero overhead and how we can use Rust's
+concept of ownership to write safe bindings to C libraries. If you're not using
+C, however, you're still in luck! These features of Rust enable it to also be
+called from <a href="https://github.com/alexcrichton/rust-ffi-examples/tree/master/python-to-rust">Python</a>, <a href="https://github.com/alexcrichton/rust-ffi-examples/tree/master/ruby-to-rust">Ruby</a>, <a href="https://github.com/alexcrichton/rust-ffi-examples/tree/master/node-to-rust">JavaScript</a>, and many
+more languages.</p>
+<p>When writing code in these languages, you sometimes want to speed up some
+component that's performance critical, but in the past this often required
+dropping all the way to C, and thereby giving up the memory safety, high-level
+abstractions, and ergonomics of these languages.</p>
+<p>The fact that Rust can talk to easily with C, however, means that it is also
+viable for this sort of usage. One of Rust's first production users,
+<a href="https://www.skylight.io">Skylight</a>, was able to improve the performance and
+memory usage of their data collection agent almost instantly by just using Rust,
+and the Rust code is all published as a Ruby gem.</p>
+<p>Moving from a language like Python and Ruby down to C to optimize performance is
+often quite difficult as it's tough to ensure that the program won't crash in a
+difficult-to-debug way. Rust, however, not only brings zero cost FFI, but <em>also</em>
+makes it possible to retain the same safety guarantees as the original source
+language. In the long run, this should make it much easier for programmers in
+these languages to drop down and do some systems programming to squeeze out
+critical performance when they need it.</p>
+<p>FFI is just one of many tools in the toolbox of Rust, but it's a key component
+to Rust's adoption as it allows Rust to seamlessly integrate with existing code
+bases today. I'm personally quite excited to see the benefits of Rust reach as
+many projects as possible!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

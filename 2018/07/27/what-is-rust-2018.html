@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>What is Rust 2018? | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="What is Rust 2018? | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="What is Rust 2018? | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="What is Rust 2018?" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>What is Rust 2018?</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">July 27, 2018 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>Back in March, <a href="https://blog.rust-lang.org/2018/03/12/roadmap.html">we announced</a> something new:</p>
+<blockquote>
+<p>This year, we will deliver Rust 2018, marking the first major new edition
+of Rust since 1.0 (aka Rust 2015).</p>
+<p>We will continue to publish releases every six weeks as usual. But we will
+designate a release in the latter third of the year (Rust 1.29 - 1.31) as Rust 2018.
+This new 'edition' of Rust will be the culmination of feature
+stabilization throughout the year, and will ship with polished documentation,
+tooling, and libraries that tie in to those features.</p>
+</blockquote>
+<p>Now that some time has passed, we wanted to share more about what this actually
+<em>means</em> for Rust and Rust developers.</p>
+<h2><a href="#language-change-over-time" aria-hidden="true" class="anchor" id="language-change-over-time"></a>Language change over time</h2>
+<p>One of the key questions facing language developers is &quot;how do you manage
+change over time&quot;? How does that work for your users?  We believe quite
+strongly that language stability is of utmost importance.  A language is the
+foundation that you build your application on top of, and you cannot build
+reliable, long-living things on a foundation of sand.  The very second post on
+our blog, way back in October of 2014, was &quot;<a href="https://blog.rust-lang.org/2014/10/30/Stability.html">Stability as
+a</a>
+<a href="https://blog.rust-lang.org/2014/10/30/Stability.html">Deliverable</a>&quot;. This laid
+out our plans for the six week release schedule that we still follow to this
+day. It also described how stability was important:</p>
+<blockquote>
+<p>It’s important to be clear about what we mean by stable. We don’t mean that
+Rust will stop evolving. We will release new versions of Rust on a regular,
+frequent basis, and we hope that people will upgrade just as regularly. But
+for that to happen, those upgrades need to be painless.</p>
+</blockquote>
+<p>We put in a lot of work to make upgrades painless; for example, we run a tool
+(called &quot;crater&quot;) before each Rust release that downloads every package on
+crates.io and attempts to build their code and run their tests. We have a
+strong culture of testing, and we use tooling to ensure that every single
+pull request is tested on every platform.
+While we still believe that the six-week process is a fantastic <em>engineering</em>
+strategy, it has some flaws.</p>
+<h3><a href="#losing-the-big-picture" aria-hidden="true" class="anchor" id="losing-the-big-picture"></a>Losing the big picture</h3>
+<p>Increasing the number of releases means that each release is smaller. That's
+the point! From an engineering perspective, this is great. But from a
+user-facing perspective, it's harder to keep track of what's going on in Rust
+unless you pay close attention every six weeks. And for those of us who do pay
+such attention, it's easy to lose sight of the big picture. Rust has come a
+long way in the last three years! Finally, for people who have tried Rust and
+stopped using it for whatever reason, it's hard to know if the concerns have
+been addressed: they'd have to pay attention every six weeks, which is not
+something that is likely to happen.</p>
+<h3><a href="#tiny-but-necessary-changes" aria-hidden="true" class="anchor" id="tiny-but-necessary-changes"></a>Tiny but necessary changes</h3>
+<p>Especially in a language with static types, almost any release can contain
+something that breaks someone's code. Rust's
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/1105-api-evolution.md">RFC</a>
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/1105-api-evolution.md">1105</a>
+lays out what kinds of changes we can make when incrementing a major, minor, or
+patch version of the language.  However, the concept of &quot;2.0&quot; is extremely
+overloaded in the minds of developers. 2.0 is <em>major</em> breaking change. Time to
+throw everything out and start again. As such, we are very wary of releasing a
+Rust 2.0.  There are some small changes that would be nice to make without
+needing to bump to 2.0, however. For example, the addition of a new keyword is
+a breaking change.  But sometimes, new features require a new keyword to work
+properly.  In many ways, Rust is about taking tradeoffs and bending the curve.
+Can we have our cake and eat it too?</p>
+<h2><a href="#what-is-rust-2018" aria-hidden="true" class="anchor" id="what-is-rust-2018"></a>What is Rust 2018?</h2>
+<p>The release of Rust 1.31.0 on December 6th will be the first release of &quot;Rust
+2018.&quot; This marks a culmination of the last three years of Rust's development,
+and brings it together in one neat package. For example, there will be a 2018
+edition of the book that incorporates features stabilized since the print
+edition was considered finalized.</p>
+<p>You'll be able to put <code>edition = '2018'</code> into your <code>Cargo.toml</code>, and <code>cargo new</code> will add it by default for new projects. At first, this will unlock
+some new features that are not possible without it, and eventually, it will
+enable some new lints that nudge you towards new idioms. You can also choose
+<code>'2015'</code>, and if you don't have an <code>edition</code> key at all, it will default to
+this value. These projects will continue on as before.  We'll be shipping a
+tool, that helps you automatically upgrade your code to use these new features
+and idioms. Running <code>cargo fix</code> will get your code ready in an automated
+fashion.</p>
+<p>From one perspective, editions are mostly about that cohesive package: they're
+about celebrating what we've accomplished, and telling the world about it. From
+another, editions are a way for us to make &quot;breaking&quot; changes without breaking
+your code. For example, <code>try</code> will become a keyword in Rust 2018.  We can't
+make that change in Rust 2015, as it may break code that uses it as a variable
+name. But since you opt-in to Rust 2018, we can. We can also turn some warnings
+into hard errors. But these changes are extremely limited; without getting too
+deep into the technical details, editions can only change surface-level
+features; the core of Rust is still the same.</p>
+<h2><a href="#managing-compatibility" aria-hidden="true" class="anchor" id="managing-compatibility"></a>Managing compatibility</h2>
+<p>It goes even further than that: these two universes are compatible with one
+another. We are quite sensitive to the issues in other language ecosystems,
+where new code and old code can't interoperate. Making sure that this worked
+well was a key aspect of the design of editions. In some sense, editions are
+following in the steps of Java and C++, two languages that are known for their
+stability stories.</p>
+<p>In short, the Rust compiler will know how to compile both editions of code.
+This is similar to how <code>javac</code> can compile both Java 9 and Java 10, or how
+<code>gcc</code> and <code>clang</code> support both C++14 and C++17. Additionally, each compiler
+will understand how to link both kinds of code together. This means that if
+you're using Rust 2018, you can use dependencies that use Rust 2015 with zero
+problems. If you're sticking with Rust 2015, you can use libraries that use
+Rust 2018. It all works together.  This lets people who want to use new things
+start immediately, while others that want to take it slower can upgrade on
+their own time schedule.</p>
+<p>Beyond that, it’s also important to mention that this release will be the
+<em>initial</em> release of Rust 2018; in some sense, it’s the start, not the end.
+We haven’t formally committed to a schedule for editions, but it’s likely
+that the next one will be Rust 2021. We’ll continue to add features to Rust
+2018 after its release, just like we continued to add features to Rust after
+the Rust 1.0 release.</p>
+<p>It’s also important to note that Rust 2015 is not frozen. Anything that does
+not <em>require</em> being a part of Rust 2018 will work on Rust 2015 as well. This is
+due to the way editions work; given the small nature of possible changes, the
+compiler uses the same internal representation for all editions.</p>
+<h2><a href="#a-few-words-on-long-term-support" aria-hidden="true" class="anchor" id="a-few-words-on-long-term-support"></a>A few words on long-term support</h2>
+<p>The Rust project currently only supports the most recent version of the stable
+compiler. Some have wondered if the concept of editions ties into some form of
+longer support. It does not, however, we've been talking about introducing some
+sort of LTS policy, and may do so in the future.</p>
+<h2><a href="#giving-it-a-try" aria-hidden="true" class="anchor" id="giving-it-a-try"></a>Giving it a try</h2>
+<p>We'll be doing several preview releases of Rust 2018. The most adventurous Rust
+users are already giving it a try on nightly; once we get feedback from them
+and do some polishing, we'll announce a beta that’s ready for more wide usage
+for you to try here on the blog.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

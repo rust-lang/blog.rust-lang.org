@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Recent and future pattern matching improvements | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Recent and future pattern matching improvements | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Recent and future pattern matching improvements | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Recent and future pattern matching improvements" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Recent and future pattern matching improvements</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 4, 2020 &middot; Mazdak &quot;Centril&quot; Farrokhzad
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang">the language team</a> 
+    </div>
+
+    <div class="post">
+      <p>Much of writing software revolves around checking if some data has some shape (&quot;pattern&quot;), extracting information from it, and then reacting if there was a match. To facilitate this, many modern languages, Rust included, support what is known as &quot;pattern matching&quot;.</p>
+<blockquote>
+<p>If you are new to Rust or want to refresh your knowledge, you may first want to read chapters <a href="https://doc.rust-lang.org/book/ch06-00-enums.html">6, Enums and Pattern Matching</a> and <a href="https://doc.rust-lang.org/book/ch18-00-patterns.html">18, Patterns and Matching</a> in the book, or read more about <a href="https://doc.rust-lang.org/reference/expressions/match-expr.html"><code>match</code> expressions</a> and <a href="https://doc.rust-lang.org/reference/patterns.html">patterns</a> in the reference.</p>
+</blockquote>
+<p>Pattern matching in Rust works by checking if a <a href="https://doc.rust-lang.org/reference/expressions.html#place-expressions-and-value-expressions"><em>place</em></a> in memory (the &quot;data&quot;) matches a certain <em>pattern</em>. In this post, we will look at some recent improvements to patterns soon available in stable Rust as well as some more already available in nightly.</p>
+<p>If you are familiar with the nightly features discussed and would like to help out with the efforts to drive them to stable, jump ahead to <a href="#how-can-i-help?">*How can I help?</a>.</p>
+<h2><a href="#subslice-patterns-head-tail--" aria-hidden="true" class="anchor" id="subslice-patterns-head-tail--"></a>Subslice patterns, <code>[head, tail @ ..]</code></h2>
+<p>Lists are one of the most basic and common data structures found in software. In Rust, lists are usually a contiguous sequence of elements in memory, or a <em>slice</em>.</p>
+<p>Since slices are so commonplace, it is important that working with them is easy. To that end, we stabilized <a href="https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#basic-slice-patterns"><em>fixed-length slice patterns</em> in Rust 1.26.0</a>. So now it is possible to e.g., write <code>let [a, b, c] = my_array;</code> to destructure an array of 3 elements. Oftentimes, however, we're working with a slice of unknown length, so given only fixed-length slice patterns, we have to provide a fallback <code>match</code> arm with e.g. <code>_</code> as the pattern.</p>
+<p>In Rust 1.42.0, <a href="https://github.com/rust-lang/rust/pull/67712">we are stabilizing <em>subslice patterns</em></a>. To introduce a subslice pattern, we use <code>..</code> which denotes a variable-length gap, matching as many elements as possible not matched by the patterns before and after the <code>..</code>. For example, in a parser, we would like to error when a list of attributes, <code>attrs</code>, is not followed by an item, <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_parse/parser/struct.Parser.html#method.recover_attrs_no_item">so we write</a>:</p>
+<pre><code class="language-rust">/// Recover if we parsed attributes and expected an item but there was none.
+fn recover_attrs_no_item(&amp;mut self, attrs: &amp;[Attribute]) -&gt; PResult&lt;'a, ()&gt; {
+    let (start, end) = match attrs {
+        [] =&gt; return Ok(()),
+        [x0] =&gt; (x0, x0),
+        [x0, .., xn] =&gt; (x0, xn),
+    };
+    let msg = if end.is_doc_comment() {
+        &quot;expected item after doc comment&quot;
+    } else {
+        &quot;expected item after attributes&quot;
+    };
+    let mut err = self.struct_span_err(end.span, msg);
+    if end.is_doc_comment() {
+        err.span_label(end.span, &quot;this doc comment doesn't document anything&quot;);
+    }
+    if let [.., penultimate, _] = attrs {
+        err.span_label(start.span.to(penultimate.span), &quot;other attributes here&quot;);
+    }
+    Err(err)
+}
+</code></pre>
+<p>Here we have two subslice patterns, the first one being <code>[x0, .., xn]</code>. In this case, the pattern binds <code>x0</code>, the first element, and <code>xn</code>, the last element, and ignores everything in the middle, matching a slice with at least two elements in total. Meanwhile, <code>[]</code> and <code>[x0]</code> match cases with fewer than two elements, so the compiler knows that we have covered all possibilities. In the latter case, we extract the <code>penultimate</code> element of the slice, which, as the name suggests, also requires that the slice has at least two elements.</p>
+<p>We can also bind a subslice to a variable. For example, suppose we want to disallow <code>...</code> in all but the last parameter of a function. If so, we can write:</p>
+<pre><code class="language-rust">match &amp;*fn_decl.inputs {
+    ... // other arms
+    [ps @ .., _] =&gt; {
+        for Param { ty, span, .. } in ps {
+            if let TyKind::CVarArgs = ty.kind {
+                self.err_handler().span_err(
+                    *span,
+                    &quot;`...` must be the last argument of a C-variadic function&quot;,
+                );
+            }
+        }
+    }
+}
+</code></pre>
+<p>Here, <code>ps @ ..</code> will bind the initial elements of the slice to <code>ps</code> and ignore the last element.</p>
+<p>After more than 7 years of baking in nightly, with many twists and turns, subslice patterns will finally be stable. To get here, we've had to redesign the feature, plug soundness holes in the borrow checker, and substantially refactor the exhaustiveness checker. For more on how we got here, <a href="https://github.com/rust-lang/rust/pull/67712">read the stabilization report</a>, <a href="https://thomashartmann.dev/blog/feature(slice_patterns)/">Thomas Hartmann's blog post</a>, and stay tuned for the 1.42.0 release announcement  on the 12th of March.</p>
+<h2><a href="#nested-or-patterns" aria-hidden="true" class="anchor" id="nested-or-patterns"></a>Nested OR-patterns</h2>
+<p>When pattern matching on an <code>enum</code>, the logic for some of the variants may be exactly the same. To avoid repeating ourselves, the <code>|</code> separator in <code>match</code>, <code>if let</code>, or <code>while let</code> expressions can be used to say that the branch should be taken if any of the <code>|</code>-separated patterns match. For example, we may write:</p>
+<pre><code class="language-rust">// Any local node that may call something in its body block should be explored.
+fn should_explore(tcx: TyCtxt&lt;'_&gt;, hir_id: hir::HirId) -&gt; bool {
+    match tcx.hir().find(hir_id) {
+        Some(Node::Item(..))
+        | Some(Node::ImplItem(..))
+        | Some(Node::ForeignItem(..))
+        | Some(Node::TraitItem(..))
+        | Some(Node::Variant(..))
+        | Some(Node::AnonConst(..))
+        | Some(Node::Pat(..)) =&gt; true,
+        _ =&gt; false,
+    }
+}
+</code></pre>
+<p>This is serviceable, but <code>Some(_)</code> is still repeated several times. With <a href="https://github.com/rust-lang/rust/issues/54883"><code>#![feature(or_patterns)]</code></a>, which recently became usable on nightly, this repetition can be avoided:</p>
+<pre><code class="language-rust">// Any local node that may call something in its body block should be explored.
+fn should_explore(tcx: TyCtxt&lt;'_&gt;, hir_id: hir::HirId) -&gt; bool {
+    match tcx.hir().find(hir_id) {
+        Some(
+            Node::Item(..)
+            | Node::ImplItem(..)
+            | Node::ForeignItem(..)
+            | Node::TraitItem(..)
+            | Node::Variant(..)
+            | Node::AnonConst(..)
+            | Node::Pat(..),
+        ) =&gt; true,
+        _ =&gt; false,
+    }
+}
+</code></pre>
+<p>Previously, when using <code>|</code> in a <code>match</code> expression, the <code>|</code> syntax was part of <code>match</code> itself. With <code>or_patterns</code>, this is now part of patterns themselves, so you can nest OR-patterns arbitrarily, and use them in <code>let</code> statements too:</p>
+<pre><code class="language-rust">let Ok(x) | Err(x) = foo();
+</code></pre>
+<p>An OR-pattern covers the <em>union</em> of all the <code>|</code>-ed (&quot;or-ed&quot;) patterns. To ensure that whatever alternative matched, all bindings are consistent and initialized, each or-ed pattern must include the exact same set of bindings, with the same types, and the same binding modes.</p>
+<h2><a href="#bindings-after-" aria-hidden="true" class="anchor" id="bindings-after-"></a>Bindings after <code>@</code></h2>
+<p>When matching on a certain substructure, you sometimes want to hold on to the whole. For example, given <code>Some(Expr { .. })</code>, you would like to bind the outer <code>Some(_)</code> layer. In Rust, this can be done using e.g., <code>expr @ Some(Expr { .. })</code>, which binds the matched place to <code>expr</code> while also ensuring that it matches <code>Some(Expr { .. })</code>.</p>
+<p>Suppose also that <code>Expr</code> has a field <code>span</code> that you would also use. In ancient times, that is before Rust 1.0, this was possible, but today, it results in an error:</p>
+<pre><code class="language-rust">error[E0303]: pattern bindings are not allowed after an `@`
+ --&gt; src/lib.rs:L:C
+  |
+L |         bar @ Some(Expr { span }) =&gt; {}
+  |                           ^^^^ not allowed after `@`
+</code></pre>
+<p>This was turned into an error in <a href="https://github.com/rust-lang/rust/pull/16053">#16053</a>, mainly due to the difficulties of encoding borrow checking rules in a sound way in the old AST based borrow checker.</p>
+<p>Since then, we have <a href="https://github.com/rust-lang/rust/pull/64790">removed the old borrow checker</a> in favor of one based on <a href="https://rustc-dev-guide.rust-lang.org/mir/index.html">MIR</a>, which is a simpler, and more appropriate data structure for borrow checking. Specifically, in the case of a statement like <code>let ref x @ ref y = a;</code>, we would get roughly the same MIR as if we had used <code>let x = &amp;a; let y = &amp;a;</code>.</p>
+<p>So now that having bindings to the right of <code>@</code> is handled uniformly and correctly by the borrow checker (e.g., the compiler won't allow <code>ref x @ ref mut y</code>), we have decided to allow them under <a href="https://github.com/rust-lang/rust/issues/65490"><code>#![feature(bindings_after_at)]</code></a>, now available on nightly. With the feature gate enabled, you may for example write:</p>
+<pre><code class="language-rust">#![feature(bindings_after_at)]
+
+fn main() {
+    if let x @ Some(y) = Some(0) {
+        dbg!(x, y);
+    }
+}
+</code></pre>
+<p>Our hope is that with providing this feature, we remove one surprising corner of the language.</p>
+<h2><a href="#combining-by-move-and-by-ref-bindings" aria-hidden="true" class="anchor" id="combining-by-move-and-by-ref-bindings"></a>Combining by-move and by-<code>ref</code> bindings</h2>
+<p>For similar reasons as noted in the case of bindings after <code>@</code>, Rust does not currently allow you to combine normal by-move bindings with those that are by-<code>ref</code>. For example, should you write...:</p>
+<pre><code class="language-rust">fn main() {
+    let tup = (&quot;foo&quot;.to_string(), 0);
+    let (x, ref y) = tup;
+}
+</code></pre>
+<p>... you would get an error:</p>
+<pre><code class="language-rust">error[E0009]: cannot bind by-move and by-ref in the same pattern
+ --&gt; src/main.rs:3:10
+  |
+3 |     let (x, ref y) = tup;
+  |          ^  ----- by-ref pattern here
+  |          |
+  |          by-move pattern here
+</code></pre>
+<p>At the same time, however, the compiler is perfectly happy to allow...:</p>
+<pre><code class="language-rust">fn main() {
+    let tup = (&quot;foo&quot;.to_string(), 0);
+    let x = tup.0;
+    let ref y = tup.1;
+}
+</code></pre>
+<p>... even though there is no semantic difference between these programs.</p>
+<p>Now that we have moved to the new borrow checker, as outlined in the previous section, we have relaxed this restriction on nightly as well, so under <a href="https://github.com/rust-lang/rust/issues/68354"><code>#![feature(move_ref_pattern)]</code></a>, you may write:</p>
+<pre><code class="language-rust">#![feature(move_ref_pattern)]
+
+fn main() {
+    let tup = (&quot;foo&quot;.to_string(), 0);
+    let (x, ref y) = tup;
+}
+</code></pre>
+<h2><a href="#how-can-i-help" aria-hidden="true" class="anchor" id="how-can-i-help"></a>How can I help?</h2>
+<p>To recap, we have three unstable features, all improving pattern matching in different ways:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/issues/54883"><code>#![feature(or_patterns)]</code></a>, which allows you to arbitrarily nest or-patterns e.g. <code>Some(Foo | Bar)</code></li>
+<li><a href="https://github.com/rust-lang/rust/issues/65490"><code>#![feature(bindings_after_at)]</code></a>, which allows e.g., <code>ref x @ Some(ref y)</code></li>
+<li><a href="https://github.com/rust-lang/rust/issues/68354"><code>#![feature(move_ref_pattern)]</code></a>, which allows e.g., <code>(x, ref y)</code> where <code>x</code> is by-move and <code>y</code> is by-reference</li>
+</ul>
+<p>To help us transition these features over to stable Rust, we need your help to ensure that they meet the expected quality standards. To help out, consider:</p>
+<ul>
+<li>Using the features in your code where applicable, if a nightly compiler is something you are OK with, and reporting any bugs, problems, deficiencies in diagnostics, etc. as issues.</li>
+<li>Looking through the reported issues under the feature gate labels (e.g., <a href="https://github.com/rust-lang/rust/labels/F-or_patterns"><code>F-or_patterns</code></a>) and seeing if you can help out with any of them.
+<ul>
+<li>In particular, if you can help out with writing tests, that is appreciated.</li>
+</ul>
+</li>
+</ul>
+<p>Thanks for reading, and happy pattern matching!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

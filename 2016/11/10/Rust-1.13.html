@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.13 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.13 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.13 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.13" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.13</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 10, 2016 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce the latest version of Rust, 1.13.0. Rust is
+a systems programming language focused on safety, speed, and concurrency.</p>
+<p>As always, you can <a href="https://www.rust-lang.org/downloads.html">install Rust 1.13.0</a> from the appropriate page on
+our website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1130-2016-11-10">detailed release notes for 1.13.0</a> on
+GitHub. 1448 patches were landed in this release.</p>
+<p>It's been a busy season in Rust. We enjoyed three Rust conferences, <a href="http://rustconf.com/">RustConf</a>,
+<a href="http://www.rustfest.eu/">RustFest</a>, and <a href="http://www.rust-belt-rust.com/">Rust Belt Rust</a>, in short succession. It was great to see so
+many Rustaceans in person, some for the first time! We've been <a href="https://internals.rust-lang.org/t/setting-our-vision-for-the-2017-cycle/3958/47">thinking a lot</a>
+about the future, developing a <a href="https://github.com/rust-lang/rfcs/pull/1774">roadmap for 2017</a>, and <a href="https://internals.rust-lang.org/t/introducing-rust-language-server-source-release/4209">building the tools</a> our
+users <a href="https://internals.rust-lang.org/t/2016-rust-commercial-user-survey-results/4317">tell us</a> they need.</p>
+<p>And even with all that going on, we put together a new release filled with fun
+new toys.</p>
+<h3><a href="#whats-in-113-stable" aria-hidden="true" class="anchor" id="whats-in-113-stable"></a>What's in 1.13 stable</h3>
+<p>The 1.13 release includes several extensions to the language, including the
+long-awaited <code>?</code> operator, improvements to compile times, minor feature
+additions to cargo and the standard library. This release also includes many
+small enhancements to documentation and error reporting, by many contributors,
+that are not individually mentioned in the release notes.</p>
+<p>This release contains important security updates to Cargo, which depends on curl
+and OpenSSL, which both published security updates recently. For more
+information see the respective announcements for <a href="https://curl.haxx.se/changes.html">curl 7.51.0</a> and <a href="https://www.openssl.org/news/secadv/20160922.txt">OpenSSL
+1.0.2j</a>.</p>
+<h4><a href="#the--operator" aria-hidden="true" class="anchor" id="the--operator"></a>The <code>?</code> operator</h4>
+<p>Rust has gained a new operator, <code>?</code>, that makes error handling more pleasant by
+reducing the visual noise involved. It does this by solving one simple
+problem. To illustrate, imagine we had some code to read some data from a file:</p>
+<pre><code class="language-rust">fn read_username_from_file() -&gt; Result&lt;String, io::Error&gt; {
+    let f = File::open(&quot;username.txt&quot;);
+
+    let mut f = match f {
+        Ok(file) =&gt; file,
+        Err(e) =&gt; return Err(e),
+    };
+
+    let mut s = String::new();
+
+    match f.read_to_string(&amp;mut s) {
+        Ok(_) =&gt; Ok(s),
+        Err(e) =&gt; Err(e),
+    }
+}
+</code></pre>
+<p>This code has two paths that can fail, opening the file and reading the data
+from it. If either of these fail to work, we'd like to return an error from
+<code>read_username_from_file</code>. Doing so involves <code>match</code>ing on the result of the I/O
+operations. In simple cases like this though, where we are only propagating
+errors up the call stack, the matching is just boilerplate - seeing it written
+out, in the same pattern every time, doesn't provide the reader with a great
+deal of useful information.</p>
+<p>With <code>?</code>, the above code looks like this:</p>
+<pre><code class="language-rust">fn read_username_from_file() -&gt; Result&lt;String, io::Error&gt; {
+    let mut f = File::open(&quot;username.txt&quot;)?;
+    let mut s = String::new();
+
+    f.read_to_string(&amp;mut s)?;
+
+    Ok(s)
+}
+</code></pre>
+<p>The <code>?</code> is shorthand for the entire match statements we wrote earlier. In other
+words, <code>?</code> applies to a <code>Result</code> value, and if it was an <code>Ok</code>, it unwraps it and
+gives the inner value. If it was an <code>Err</code>, it returns from the function you're
+currently in.  Visually, it is much more straightforward. Instead of an entire
+match statement, now we are just using the single &quot;?&quot; character to indicate that
+here we are handling errors in the standard way, by passing them up the
+call stack.</p>
+<p>Seasoned Rustaceans may recognize that this is the same as the <code>try!</code> macro
+that's been available since Rust <code>1.0</code>. And indeed, they are the same. Before
+1.13, <code>read_username_from_file</code> could have been implemented like this:</p>
+<pre><code class="language-rust">fn read_username_from_file() -&gt; Result&lt;String, io::Error&gt; {
+    let mut f = try!(File::open(&quot;username.txt&quot;));
+    let mut s = String::new();
+
+    try!(f.read_to_string(&amp;mut s));
+
+    Ok(s)
+}
+</code></pre>
+<p>So why extend the language when we already have a macro? There are multiple
+reasons. First, <code>try!</code> has proved to be extremely useful, and is used often in
+idiomatic Rust. It is used so often that we think it's worth having a sweet
+syntax. This sort of evolution is one of the great advantages of a powerful
+macro system: speculative extensions to the language syntax can be prototyped
+and iterated on without modifying the language itself, and in return, macros that
+turn out to be especially useful can indicate missing language features. This
+evolution, from <code>try!</code> to <code>?</code> is a great example.</p>
+<p>One of the reasons <code>try!</code> needs a sweeter syntax is that it is quite
+unattractive when multiple invocations of <code>try!</code> are used in
+succession. Consider:</p>
+<pre><code class="language-rust">try!(try!(try!(foo()).bar()).baz())
+</code></pre>
+<p>as opposed to</p>
+<pre><code class="language-rust">foo()?.bar()?.baz()?
+</code></pre>
+<p>The first is quite difficult to scan visually, and each layer of error handling
+prefixes the expression with an additional call to <code>try!</code>. This brings undue
+attention to the trivial error propagation, obscuring the main code path, in
+this example the calls to <code>foo</code>, <code>bar</code> and <code>baz</code>. This sort of method chaining
+with error handling occurs in situations like the builder pattern.</p>
+<p>Finally, the dedicated syntax will make it easier in the future to produce nicer
+error messages tailored specifically to <code>?</code>, whereas it is difficult to produce
+nice errors for macro-expanded code generally (in this release, though, the <code>?</code>
+error messages could use improvement).</p>
+<p>Though this is a small feature, in our experience so far, <code>?</code> feels like a solid
+ergonomic improvement to the old <code>try!</code> macro. This is a good example of the
+kinds of incremental, quality-of-life improvements Rust will continue to
+receive, polishing off the rough corners of our already-powerful base language.</p>
+<p>Read more about <code>?</code> in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0243-trait-based-exception-handling.md">RFC 243</a>.</p>
+<h4><a href="#performance-improvements" aria-hidden="true" class="anchor" id="performance-improvements"></a>Performance improvements</h4>
+<p>There has been a lot of focus on compiler performance lately. There's good news
+in this release, and more to come.</p>
+<p>Mark Simulacrum and Nick Cameron have been refining <a href="http://perf.rust-lang.org">perf.rust-lang.org</a>, our
+tool for tracking compiler performance. It runs the <a href="https://github.com/rust-lang-nursery/rustc-benchmarks">rustc-benchmarks</a> suite
+regularly, on dedicated hardware, and tracks the results over time. This tool
+records the results for each pass in the compiler and is used by the compiler
+developers to narrow commit ranges of performance regressions. It's an important
+part of our toolbox!</p>
+<p>We can use this tool to look at a <a href="https://goo.gl/6T69T2">graph</a> of performance over the 1.13
+development cycle, shown below. This cycle covered the dates from August 16
+through September 29 (the graph begins from Augest 25th though and is filtered
+in a few ways to eliminate bogus, incomplete, or confusing results). There
+appear to be some big reductions, which are quantified on the corresponding
+<a href="https://goo.gl/CLIAhi">statistics</a> page.</p>
+<br/>
+<p><img src="/images/2016-11-Rust-1.13/graph.png" alt="Performance graph" /></p>
+<br/>
+<p>The big improvement demonstrated in the graphs, on September 1, is from an
+optimization from Niko to <a href="https://github.com/rust-lang/rust/pull/35761">cache normalized projections during
+translation</a>. That is to say, during generation of LLVM IR, the compiler
+no longer recomputes concrete instances of associated types each time they are
+needed, but instead reuses previously-computed values. This optimization doesn't
+affect all code bases, but in code bases that exhibit certain patterns, like
+<a href="https://github.com/alexcrichton/futures-rs">futures-rs</a>, where <a href="https://github.com/rust-lang/rust/pull/37600#issuecomment-258696690">debug mode build-time improved by up to 40%</a>, you'll notice
+the difference.</p>
+<p>Another such optimization, that doesn't affect every crate but does affect some
+in a big way, came from Michael Woerister, and improves compile time for crates
+that export many <a href="https://github.com/rust-lang/rust/pull/36524">inline</a> functions. When a function is marked <code>#[inline]</code>, in
+addition to translating that function for use by the current crate, the compiler
+stores its MIR representation in the crate rlib, and translates the function to
+LLVM IR in every crate that calls it. The optimization Michael did is obvious in
+retrospect: there are some cases where inline functions are only for the
+consumption of other crates, and never called from the crate in which they are
+defined; so the compiler doesn't need to translate code for inline functions in
+the crate they are defined <em>unless</em> they are called directly. This saves the
+cost of rustc converting the function to LLVM IR and LLVM optimizing and
+converting the function to machine code.</p>
+<p>In some cases this results in dramatic improvements. Build times for the ndarray
+crate <a href="https://github.com/rust-lang/rust/pull/37600#issuecomment-258706020">improved by 50%</a>, and in the (unreleased) <a href="https://github.com/retep998/winapi-rs">winapi 0.3</a> crate, rustc
+now emits no machine code at all.</p>
+<p>But wait, there's more still! Nick Nethercote has <a href="https://blog.mozilla.org/nnethercote/2016/10/14/how-to-speed-up-the-rust-compiler">turned his focus to compiler
+performance as well</a>, focusing on profiling and micro-optimizations. This
+release contains <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#compile-time-optimizations">several fruits of his work</a>, and there are more in the
+pipeline for 1.14.</p>
+<h3><a href="#other-notable-changes" aria-hidden="true" class="anchor" id="other-notable-changes"></a>Other notable changes</h3>
+<p>This release contains important security updates to Cargo, which depends on curl
+and OpenSSL, which both published security updates recently. For more
+information see the respective announcements for <a href="https://curl.haxx.se/changes.html">curl 7.51.0</a> and <a href="https://www.openssl.org/news/secadv/20160922.txt">OpenSSL
+1.0.2j</a>.</p>
+<p>Macros can now be used in type position (<a href="https://github.com/rust-lang/rfcs/blob/master/text/0873-type-macros.md">RFC 873</a>), and
+attributes can be applied to statements (<a href="https://github.com/rust-lang/rfcs/blob/master/text/0016-more-attributes.md">RFC 16</a>):</p>
+<pre><code class="language-rust">// Use a macro to name a type
+macro_rules! Tuple {
+    { $A:ty,$B:ty } =&gt; { ($A, $B) }
+}
+
+let x: Tuple!(i32, i32) = (1, 2);
+</code></pre>
+<pre><code class="language-rust">// Apply a lint attribute to a single statement
+#[allow(non_snake_case)]
+let BAD_STYLE = List::new();
+</code></pre>
+<p>Inline drop flags have been removed. Previously, in case of a conditional move,
+the compiler would store a &quot;drop flag&quot; inline in a struct (increasing its size)
+to keep track of whether or not it needs to be dropped. This means that some
+structs take up some unexpected extra space, which interfered with things like
+passing types with destructors over FFI. It also was a waste of space for
+code that didn't have conditional moves. In 1.12,
+<a href="https://blog.rust-lang.org/2016/09/29/Rust-1.12.html">MIR became the default</a>, which laid the groundwork for many improvements,
+including <a href="https://github.com/rust-lang/rust/pull/35764">getting rid of these inline drop flags</a>. Now, drop flags are
+stored in an extra slot on the stack frames of functions that need them.</p>
+<p>1.13 contains a <a href="https://github.com/rust-lang/rust/issues/37630">serious bug in code generation</a> for ARM targets using
+hardware floats (which is most ARM targets). ARM targets in Rust are presently
+in our 2nd support tier, so this bug was not determined to block the
+release. Because 1.13 contains a security update, users that must target ARM are
+encouraged to use the 1.14 betas, which will soon get a fix for ARM.</p>
+<h4><a href="#language-stabilizations" aria-hidden="true" class="anchor" id="language-stabilizations"></a>Language stabilizations</h4>
+<ul>
+<li>The <a href="https://doc.rust-lang.org/std/marker/trait.Reflect.html"><code>Reflect</code></a> trait is deprecated. See the <a href="https://github.com/rust-lang/rust/issues/27749#issuecomment-244489589">explanation</a> of what this means
+for parametricity in Rust.</li>
+<li><a href="https://github.com/rust-lang/rust/pull/36014">Stabilize macros in type position</a>. <a href="https://github.com/rust-lang/rfcs/blob/master/text/0873-type-macros.md">RFC 873</a>.</li>
+<li><a href="https://github.com/rust-lang/rust/pull/36995">Stabilize attributes on statements</a>. <a href="https://github.com/rust-lang/rfcs/blob/master/text/0016-more-attributes.md">RFC 16</a>.</li>
+</ul>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/primitive.i32.html#method.checked_abs"><code>checked_abs</code></a>, <a href="https://doc.rust-lang.org/std/primitive.i32.html#method.wrapping_abs"><code>wrapping_abs</code></a>, and <a href="https://doc.rust-lang.org/std/primitive.i32.html#method.overflowing_abs"><code>overflowing_abs</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow"><code>RefCell::try_borrow</code></a>, and <a href="https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow_mut"><code>RefCell::try_borrow_mut</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/35074">Add <code>assert_ne!</code> and <code>debug_assert_ne!</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/35559">Implement <code>AsRef&lt;[T]&gt;</code> for <code>std::slice::Iter</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/35627">Implement <code>CoerceUnsized</code> for <code>{Cell, RefCell, UnsafeCell}</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/36101">Implement <code>Debug</code> for <code>std::path::{Components,Iter}</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/35755">Implement conversion traits for <code>char</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/hash/struct.SipHasher.html"><code>SipHasher</code></a> is deprecated. Use <a href="https://doc.rust-lang.org/std/collections/hash_map/struct.DefaultHasher.html"><code>DefaultHasher</code></a>.</li>
+<li><a href="https://github.com/rust-lang/rust/pull/35911">Implement more traits for <code>std::io::ErrorKind</code></a></li>
+</ul>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
+<ul>
+<li><a href="https://github.com/rust-lang/cargo/pull/3038">cargo: Add --all-features flag to cargo</a></li>
+<li><a href="https://github.com/rust-lang/cargo/pull/3000">cargo: Add --message-format flag</a></li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1130-2016-11-10">detailed release notes</a> for more.</p>
+<h3><a href="#contributors-to-1130" aria-hidden="true" class="anchor" id="contributors-to-1130"></a>Contributors to 1.13.0</h3>
+<p>We had 155 individuals contribute to 1.13.0. Thank you so much!</p>
+<ul>
+<li>Aaron Gallagher</li>
+<li>Abhishek Kumar</li>
+<li>aclarry</li>
+<li>Adam Medziński</li>
+<li>Ahmed Charles</li>
+<li>Aleksey Kladov</li>
+<li>Alexander von Gluck IV</li>
+<li>Alexandre Oliveira</li>
+<li>Alex Burka</li>
+<li>Alex Crichton</li>
+<li>Amanieu d'Antras</li>
+<li>Amit Levy</li>
+<li>Andrea Corradi</li>
+<li>Andre Bogus</li>
+<li>Andrew Cann</li>
+<li>Andrew Cantino</li>
+<li>Andrew Lygin</li>
+<li>Andrew Paseltiner</li>
+<li>Andy Russell</li>
+<li>Ariel Ben-Yehuda</li>
+<li>arthurprs</li>
+<li>Ashley Williams</li>
+<li>athulappadan</li>
+<li>Austin Hicks</li>
+<li>bors</li>
+<li>Brian Anderson</li>
+<li>c4rlo</li>
+<li>Caleb Jones</li>
+<li>CensoredUsername</li>
+<li>cgswords</li>
+<li>changchun.fan</li>
+<li>Chiu-Hsiang Hsu</li>
+<li>Chris Stankus</li>
+<li>Christopher Serr</li>
+<li>Chris Wong</li>
+<li>clementmiao</li>
+<li>Cobrand</li>
+<li>Corey Farwell</li>
+<li>Cristi Cobzarenco</li>
+<li>crypto-universe</li>
+<li>dangcheng</li>
+<li>Daniele Baracchi</li>
+<li>DarkEld3r</li>
+<li>David Tolnay</li>
+<li>Dustin Bensing</li>
+<li>Eduard Burtescu</li>
+<li>Eduard-Mihai Burtescu</li>
+<li>Eitan Adler</li>
+<li>Erik Uggeldahl</li>
+<li>Esteban Küber</li>
+<li>Eugene Bulkin</li>
+<li>Eugene R Gonzalez</li>
+<li>Fabian Zaiser</li>
+<li>Federico Ravasio</li>
+<li>Felix S. Klock II</li>
+<li>Florian Gilcher</li>
+<li>Gavin Baker</li>
+<li>Georg Brandl</li>
+<li>ggomez</li>
+<li>Gianni Ciccarelli</li>
+<li>Guillaume Gomez</li>
+<li>Jacob</li>
+<li>jacobpadkins</li>
+<li>Jake Goldsborough</li>
+<li>Jake Goulding</li>
+<li>Jakob Demler</li>
+<li>James Duley</li>
+<li>James Miller</li>
+<li>Jared Roesch</li>
+<li>Jared Wyles</li>
+<li>Jeffrey Seyfried</li>
+<li>JessRudder</li>
+<li>Joe Neeman</li>
+<li>Johannes Löthberg</li>
+<li>John Firebaugh</li>
+<li>johnthagen</li>
+<li>Jonas Schievink</li>
+<li>Jonathan Turner</li>
+<li>Jorge Aparicio</li>
+<li>Joseph Dunne</li>
+<li>Josh Triplett</li>
+<li>Justin LeFebvre</li>
+<li>Keegan McAllister</li>
+<li>Keith Yeung</li>
+<li>Keunhong Lee</li>
+<li>king6cong</li>
+<li>Knight</li>
+<li>knight42</li>
+<li>Kylo Ginsberg</li>
+<li>Liigo</li>
+<li>Manish Goregaokar</li>
+<li>Mark-Simulacrum</li>
+<li>Matthew Piziak</li>
+<li>Matt Ickstadt</li>
+<li>mcarton</li>
+<li>Michael Layne</li>
+<li>Michael Woerister</li>
+<li>Mikhail Modin</li>
+<li>Mohit Agarwal</li>
+<li>Nazım Can Altınova</li>
+<li>Neil Williams</li>
+<li>Nicholas Nethercote</li>
+<li>Nick Cameron</li>
+<li>Nick Platt</li>
+<li>Niels Sascha Reedijk</li>
+<li>Nikita Baksalyar</li>
+<li>Niko Matsakis</li>
+<li>Oliver Middleton</li>
+<li>Oliver Schneider</li>
+<li>orbea</li>
+<li>Panashe M. Fundira</li>
+<li>Patrick Walton</li>
+<li>Paul Fanelli</li>
+<li>philipp</li>
+<li>Phil Ruffwind</li>
+<li>Piotr Jawniak</li>
+<li>pliniker</li>
+<li>QuietMisdreavus</li>
+<li>Rahul Sharma</li>
+<li>Richard Janis Goldschmidt</li>
+<li>Scott A Carr</li>
+<li>Scott Olson</li>
+<li>Sean McArthur</li>
+<li>Sebastian Ullrich</li>
+<li>Sébastien Marie</li>
+<li>Seo Sanghyeon</li>
+<li>Sergio Benitez</li>
+<li>Shyam Sundar B</li>
+<li>silenuss</li>
+<li>Simonas Kazlauskas</li>
+<li>Simon Sapin</li>
+<li>Srinivas Reddy Thatiparthy</li>
+<li>Stefan Schindler</li>
+<li>Stephan Hügel</li>
+<li>Steve Klabnik</li>
+<li>Steven Allen</li>
+<li>Steven Fackler</li>
+<li>Terry Sun</li>
+<li>Thomas Garcia</li>
+<li>Tim Neumann</li>
+<li>Tobias Bucher</li>
+<li>Tomasz Miąsko</li>
+<li>trixnz</li>
+<li>Tshepang Lekhonkhobe</li>
+<li>Ulrich Weigand</li>
+<li>Ulrik Sverdrup</li>
+<li>Vadim Chugunov</li>
+<li>Vadim Petrochenkov</li>
+<li>Vanja Cosic</li>
+<li>Vincent Esche</li>
+<li>Wesley Wiser</li>
+<li>William Lee</li>
+<li>Ximin Luo</li>
+<li>Yossi Konstantinovsky</li>
+<li>zjhmale</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

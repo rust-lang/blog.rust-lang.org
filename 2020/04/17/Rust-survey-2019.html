@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust Survey 2019 Results | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust Survey 2019 Results | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust Survey 2019 Results | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust Survey 2019 Results" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust Survey 2019 Results</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 17, 2020 &middot; The Rust Survey Team
+    
+    </div>
+
+    <div class="post">
+      <blockquote>
+<p>Translation available for <a href="http://www.secondstate.info/blog/rust-2019">Chinese | 中文</a></p>
+</blockquote>
+<p>Greetings Rustaceans!</p>
+<p>We are happy to present the results of our fourth annual survey of our Rust community. Before we dig into the analysis, we want to give a big &quot;thank you!&quot; to all of the people who took the time to respond. You are vital to Rust continuing to improve year after year!</p>
+<p>Let's start by looking at the survey audience.</p>
+<h2><a href="#survey-audience" aria-hidden="true" class="anchor" id="survey-audience"></a>Survey Audience</h2>
+<p>The survey was available in <strong>14</strong> different languages and we received <strong>3997</strong> responses.</p>
+<p>Here is the language distribution of the responses we received.</p>
+<ul>
+<li>English: 69.6%</li>
+<li>Chinese: 10.8%</li>
+<li>German: 4.3%</li>
+<li>French: 3.3%</li>
+<li>Japanese: 3.0%</li>
+<li>Polish: 1.2%</li>
+<li>Portuguese: 1.2%</li>
+<li>Spanish: .9%</li>
+<li>Korean: .8%</li>
+<li>Italian: .6%</li>
+<li>Swedish: .5%</li>
+<li>Vietnamese: .2%</li>
+</ul>
+<p>In the 2019 survey, 82.8% of responders indicated they used Rust, 7.1% indicated they did not currently use Rust but had used it in the past, and 10.1% indicated that they had never used Rust.</p>
+<p>If we compare this to the 2018 survey (where 75% of responders indicated they used Rust, 8% indicated the did not currently use Rust but had used it in the past, and 8% indicated they had never used Rust) more responders were using Rust in 2019.</p>
+<h2><a href="#looking-back-on-rust-2018" aria-hidden="true" class="anchor" id="looking-back-on-rust-2018"></a>Looking Back on Rust 2018</h2>
+<p>In December 2018 we released the Rust 2018 edition - Rust 1.31.0. In the 2019 survey, 92% of Rust users indicated they were using the new edition. 85% said that upgrading to the Rust 2018 edition was easy.</p>
+<p>Next, we asked users to rate the improvement of key aspects of the Rust language.</p>
+<p><img src="/images/2020-03-RustSurvey/35-Adoption-Level-improvement.svg" alt="How has adoption level improved" /></p>
+<p><img src="/images/2020-03-RustSurvey/36-Async-IO-improvement.svg" alt="How has async io improved" /></p>
+<p><img src="/images/2020-03-RustSurvey/37-compile-time-improvement.svg" alt="How has compile time improved" /></p>
+<p><img src="/images/2020-03-RustSurvey/38-GUI-Development-improvement.svg" alt="How has GUI development improved" /></p>
+<p><img src="/images/2020-03-RustSurvey/39-IDE-improvement.svg" alt="How has IDE support improved" /></p>
+<p><img src="/images/2020-03-RustSurvey/40-Library-Support-improvement.svg" alt="How has library support improved" /></p>
+<p><img src="/images/2020-03-RustSurvey/41-Stable-Language-Features-and-Crates-improvement.svg" alt="How have stable language features and crates improved" /></p>
+<p><img src="/images/2020-03-RustSurvey/42-Rust-documentation-improvement.svg" alt="How has Rust documentation improved" /></p>
+<p><img src="/images/2020-03-RustSurvey/43-learning-curve-improvement.svg" alt="How has the learning curve improved" /></p>
+<p><img src="/images/2020-03-RustSurvey/44-tools-and-support-improvement.svg" alt="How has tools and support improved" /></p>
+<p>Overall, many aspects of the Rust language were perceived as &quot;somewhat better&quot; in the 2018 edition.</p>
+<h2><a href="#conferences-and-community" aria-hidden="true" class="anchor" id="conferences-and-community"></a>Conferences and Community</h2>
+<p>We noticed some differences between English language and other language results. Within the non-English language survey subset, the majority of the issues and concerns identified are the same as those within the English language. However, one concern/trend stands out among the non-English speaking subset - a desire for Rust documentation in their native language, or the language they took the survey in. This was particularly notable within the Chinese-language group, though that is likely due to the higher representation.</p>
+<p>We are tracking the <a href="https://github.com/rust-lang/book/issues?q=is%3Aopen+is%3Aissue+label%3ATranslations">ongoing translation efforts</a> with the &quot;Translation&quot; GitHub issue label.</p>
+<p>We received a lot of feedback on how we can improve Rust and make it feel more welcoming to more people. We can't include all of it here, so here is a summary of some of the feedback that stood out to us.</p>
+<p>People are in general asking for more learning material about Rust. In terms of expertise it's mainly beginner and intermediate level material being requested. A lot of these requests also asked for video content specifically.</p>
+<p>The common blockers that people mention to participating is that they have social anxiety, and accessibility. One of the common reasons mentioned was that some resources are hard to read for people with dyslexia.</p>
+<p>Here are some specific responses to the question &quot;What action could we take to make you feel more welcome?&quot;</p>
+<ul>
+<li>I feel too inexperienced and under skilled to participate in the Rust community</li>
+<li>Advertise more ways for newcomers to contribute/participate</li>
+<li>More organized mentorship, online classes</li>
+<li>Do video tutorials on how to contribute to the compiler. I'd love to contribute but I feel intimidated</li>
+<li>It's not easy to find resources for newcomers to see how Rust is being used in open source projects, so that they see the action as they're learning the language.</li>
+<li>More tutorials/blogs that explain simple rust &amp; coding concepts like the reader is a complete beginner</li>
+<li>More intermediate level tutorials. We already have a million &quot;Introductions to Rust&quot;.</li>
+<li>Smaller groups of helping people - social anxiety is making it hard to talk in the Discord, for example</li>
+<li>Don't have synchronous meetings at late EU hours. Have fewer synchronous meetings and/or more consistently publish and aggregate meeting notes for team meetings.</li>
+</ul>
+<p>These issues are definitely ones we want to address in 2020 and beyond.</p>
+<h2><a href="#who-is-using-rust-and-what-for" aria-hidden="true" class="anchor" id="who-is-using-rust-and-what-for"></a>Who is using Rust and what for?</h2>
+<p><img src="/images/2020-03-RustSurvey/11-How-Often-Use-Rust.svg" alt="How often do you use Rust" /></p>
+<p>Rust daily usage has trended slightly upward at 27.63% (it was just under 25% last year and 17.5% on 2017). Daily or weekly usage has also continued to trend slightly upward. This year it was 68.52%, last year it was 66.4%, and in 2017 it was 60.8%.</p>
+<p><img src="/images/2020-03-RustSurvey/12-How-Rate-Rust-Expertise.svg" alt="How would you rate your Rust expertise" /></p>
+<p>We also asked users how they would rate their Rust expertise - there is a clear peak around &quot;7&quot;.</p>
+<p><img src="/images/2020-03-RustSurvey/29-Rust-expertise-how-long-using-Rust.svg" alt="How would you rate your Rust expertise" /></p>
+<p>To dig deeper into this, we correlated users' self-rated Rust expertise with how long they had been using Rust.</p>
+<p><img src="/images/2020-03-RustSurvey/24-use-rust-role-title.svg" alt="What title best matches your role for Rust users" /></p>
+<p>For some larger context, we examined what titles users working with Rust full time tend to have in their organization (survey respondents could select more than one).</p>
+<p>By far the most common title for a Rust user is, unsurprisingly, Programmer/Software Engineer.</p>
+<p><img src="/images/2020-03-RustSurvey/25-use-rust-industry.svg" alt="What industry do you work in for Rust users" /></p>
+<p>To get even more context, we asked Rust survey respondents to identify what industry they work in.</p>
+<p>For users who use Rust full time, the most common industry by far is backend web applications.</p>
+<p><img src="/images/2020-03-RustSurvey/10-Size-Of-Summed-projects.svg" alt="Size of summed Rust projects" /></p>
+<p>The majority of Rust projects (43%) are 1,000-10,000 lines of code. Rust projects of medium to large size (those totaling over 10k lines of code) continue to trend higher. They have grown from 8.9% in 2016, to 16% in 2017, to 23% in 2018, to <strong>34%</strong> in 2019.</p>
+<h2><a href="#why-not-use-rust" aria-hidden="true" class="anchor" id="why-not-use-rust"></a>Why not use Rust?</h2>
+<p>A big part of a welcoming Rust community is reaching out to non-users as well.</p>
+<p><img src="/images/2020-03-RustSurvey/4-Why-Stopped-Rust.svg" alt="Why did you stop using Rust?" /></p>
+<p>When we asked why someone had stopped using Rust, the most common response was &quot;My company doesn't use Rust&quot; - which indicates Rust adoption is still the biggest reason. After that, learning curve, lack of needed libraries, being slowed down by switching to Rust, and lack of IDE support were the most common reasons a user stopped using Rust.</p>
+<p><img src="/images/2020-03-RustSurvey/5-Why-Never-Used-Rust.svg" alt="Why have you never used Rust?" /></p>
+<p>For users who indicated they had never used Rust before, most indicated either &quot;I haven't learned Rust yet, but I want to&quot; or &quot;My company doesn't use Rust&quot; - again pointing to adoption as the main hurdle.</p>
+<p>For more context, we also examined what title non-Rust users feel best matches their role.</p>
+<p><img src="/images/2020-03-RustSurvey/26-not-using-rust-title.svg" alt="What title best matches your role for non Rust users" /></p>
+<p>Like with Rust users, by far the most common title is Programmer/Software Engineer.</p>
+<p><img src="/images/2020-03-RustSurvey/27-not-using-rust-industry.svg" alt="What industry do you work in for non Rust users" /></p>
+<p>Also like with Rust users, the most common industry by far is backend web applications.</p>
+<p><img src="/images/2020-03-RustSurvey/20-Would-use-rust-more-often-if.svg" alt="I would use Rust more often if..." /></p>
+<p>We also asked users what would lead them to use Rust more often. Most indicated they would use Rust more if their company adopted it, if Rust had more libraries that they need, and if IDE support was better. The most common reasons after those pointed to a need to improve the learning curve and interoperability.</p>
+<p>As adoption seemed to be the biggest problem preventing some respondents from using Rust, let's dive deeper into it.</p>
+<h2><a href="#rust-adoption---a-closer-look" aria-hidden="true" class="anchor" id="rust-adoption---a-closer-look"></a>Rust Adoption - a Closer Look</h2>
+<p>First, we asked what would we could do to improve adoption of Rust.</p>
+<p><img src="/images/2020-03-RustSurvey/45-improve-adoption.svg" alt="How can we improve Rust for better adoption" /></p>
+<p>Several users gave specific examples:</p>
+<ul>
+<li>&quot;Smoothest learning curve as possible, as a small business even 4-6 weeks to become productive is a lot to ask&quot;</li>
+<li>&quot;Higher market penetration&quot;</li>
+<li>&quot;More stable libraries&quot;</li>
+<li>&quot;A full-stack web framework like Rails, Django and Phoenix&quot;</li>
+<li>&quot;Better documentation, more examples, recommendation on what crates to use&quot;</li>
+<li>&quot;More emphasis on how it is a safer alternative to C or C++ (and really should be the default usually).”</li>
+<li>&quot;Improve compile times. Compiling development builds at least as fast as Go would be table stakes for us to consider Rust. (Release builds can be slow.&quot;</li>
+<li>&quot;Better platform support&quot;</li>
+<li>&quot;Security and performance, cost efficient and &quot;green&quot; (low carbon footprint) language&quot;</li>
+<li>&quot;Embedded development targeting ARM&quot;</li>
+<li>&quot;Better GUI framework, similar to Qt or directly using Qt via bindings.&quot;</li>
+</ul>
+<p>Most indicated that Rust maturity - such as more libraries and complete learning resources and more mature production capabilities - would make Rust more appealing.</p>
+<p>Let's take a closer look at each of these, starting with the need for more mature libraries.</p>
+<h2><a href="#libraries---a-closer-look" aria-hidden="true" class="anchor" id="libraries---a-closer-look"></a>Libraries - a Closer Look</h2>
+<p>When we asked users what libraries they consider critical to the Rust ecosystem, these were the top ten responses:</p>
+<ul>
+<li>serde</li>
+<li>rand</li>
+<li>tokio</li>
+<li>async</li>
+<li>clap</li>
+<li>regex</li>
+<li>log</li>
+<li>futures</li>
+<li>hyper</li>
+<li>lazy_static</li>
+</ul>
+<p><img src="/images/2020-03-RustSurvey/28-dependencies-1-0-or-above.svg" alt="What dependencies are 1.0 or above" /></p>
+<p>We also asked how many dependencies users were using were 1.0 or above.</p>
+<ul>
+<li>0.8% indicated &quot;All&quot;</li>
+<li>6.7% indicated &quot;Most&quot;</li>
+<li>65.9% indicated &quot;Some&quot;</li>
+<li>5.2% indicated &quot;None&quot;</li>
+<li>21.4% indicated &quot;I don't know&quot;</li>
+</ul>
+<h2><a href="#ides-and-tooling---a-closer-look" aria-hidden="true" class="anchor" id="ides-and-tooling---a-closer-look"></a>IDEs and Tooling - a Closer Look</h2>
+<p>IDE support for Rust was also cited as a barrier to adoption.</p>
+<p><img src="/images/2020-03-RustSurvey/31-editor-using.svg" alt="What editor are you using" /></p>
+<p>When we asked users what editors they use, Vim and VSCode were the most popular by far, followed by Intellij.</p>
+<p>We also asked what IDE setups users used:</p>
+<ul>
+<li>43.3% indicated RLS</li>
+<li>21.7% indicated Intellij</li>
+<li>15.2% indicated Rust-analyzer</li>
+<li>12.4% indicated No (or CTAGS)</li>
+<li>4.2% indicated Only Racer</li>
+</ul>
+<p><img src="/images/2020-03-RustSurvey/32-what-platform-developing-on.svg" alt="What platform are you developing on" /></p>
+<p>As for platforms that users develop on - Linux and Windows continue to dominate.</p>
+<ul>
+<li>55% of Rust users develop on Linux</li>
+<li>24% develop on Windows</li>
+<li>23% develop on macOS</li>
+</ul>
+<p>We found that the vast majority of all users use the current stable version of Rust (63%). It should be noted that the survey allowed respondents to select more than one option for what Rust version they use.</p>
+<ul>
+<li>30.5% use the nightly version</li>
+<li>2.5% use the Beta release</li>
+<li>63% use the current stable version</li>
+<li>3.1% use a previous stable release</li>
+<li>0.6% use a custom fork</li>
+<li>0.3% don't know</li>
+</ul>
+<p>Surprisingly, the number of users using the Nightly compiler in their workflow is down at 20%. Last year it was at over 56%.</p>
+<h2><a href="#learning-curve---a-closer-look" aria-hidden="true" class="anchor" id="learning-curve---a-closer-look"></a>Learning Curve - a Closer Look</h2>
+<p>Rust is well known for its significant learning curve.</p>
+<p><img src="/images/2020-03-RustSurvey/8-How-Long-To-Be-Productive.svg" alt="How long did it take to be productive" /></p>
+<p>About 37% of Rust users felt productive in Rust in less than a month of use - this is not too different from the percentage last year (40%). Over 70% felt productive in their first year. Unfortunately, like last year, there is still a struggle among users - 21% indicated they did not yet feel productive.</p>
+<p><img src="/images/2020-03-RustSurvey/22-unproductive-expertise.svg" alt="Expertise level of respondents who don't feel productive yet" /></p>
+<p>As a point of interest, we took the subset of users who don't feel productive yet and plotted their ratings of their Rust expertise. This indicates that people who don't feel productive had low to intermediate levels of expertise - which are the groups that need the most support from our learning materials, documentation, and more.</p>
+<h2><a href="#interoperability---a-closer-look" aria-hidden="true" class="anchor" id="interoperability---a-closer-look"></a>Interoperability - a Closer Look</h2>
+<p>Over the years some users have expressed a desire for Rust to be more interoperable with other languages.</p>
+<p><img src="/images/2020-03-RustSurvey/23-interoperability-languages.svg" alt="What languages would you want to use with Rust" /></p>
+<p>When we asked users what languages they would want to be interoperable with Rust, there was a wide spread of answers, but C dominates, followed (somewhat surprisingly) by R, which is followed very closely behind by C++. It should be noted that respondents were able to select more than one language in response to this question - these percentages are based on total responses.</p>
+<p><img src="/images/2020-03-RustSurvey/30-platforms-targeting.svg" alt="What platforms are you targeting" /></p>
+<p>When it comes to what platforms using are targeting for their applications Linux remains the first choice with 36.9%, with Windows as second at 16.3%. Following close behind Windows are macOS and Web Assembly at 14% each. We are also seeing more users targeting Android and Apple iOS.</p>
+<h2><a href="#conclusions" aria-hidden="true" class="anchor" id="conclusions"></a>Conclusions</h2>
+<p>Overall our users indicated that productivity is still an important goal for their work (with or without using Rust). The results show the overriding problem hindering use of Rust is adoption. The learning curve continues to be a challenge - we appear to most need to improve our follow through for <strong>intermediate</strong> users - but so are libraries and tooling.</p>
+<p>Thank you to all who participated in this survey - these results are immensely informative to us - especially how we can  improve both Rust the language and the entire Rust ecosystem. We look forward to continuing working for and with you for 2020 and beyond!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust 1.0: status report and final timeline | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust 1.0: status report and final timeline | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust 1.0: status report and final timeline | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust 1.0: status report and final timeline" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust 1.0: status report and final timeline</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 13, 2015 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>It's been five weeks since we released Rust 1.0-alpha! Before this
+release cycle finishes next week, we want to give a status report and
+update on the road to 1.0 final.</p>
+<p><strong>TL;DR: Rust 1.0 final will be released by May 15, 2015</strong></p>
+<h2><a href="#what-is-the-overall-timeline" aria-hidden="true" class="anchor" id="what-is-the-overall-timeline"></a>What is the overall timeline?</h2>
+<p>Based on the progress in this release cycle, we are now comfortable
+committing to a precise release schedule for 1.0:</p>
+<ul>
+<li>Rust 1.0-alpha2 -- Feb 20</li>
+<li>All 1.0 modules stable on nightly -- around Mar 9</li>
+<li>Rust 1.0-beta -- Apr 3</li>
+<li>Rust 1.0 -- May 15</li>
+</ul>
+<p>This schedule differs from the
+<a href="http://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">previous one</a>
+by nailing down an exact set of release cycles. It also opts for a
+second alpha release and only a single beta release.</p>
+<p>The main reason for calling the next release alpha2 rather than beta1
+is that new path and IO APIs have only recently landed, and we would
+like more time to collect feedback before marking them stable. More
+details are below.</p>
+<p><strong>Update:</strong> An earlier version of this post listed Mar 31 as the 1.0-beta
+release date, due to a miscalculation.  The correct date is Apr 3, exactly six
+weeks after alpha2 and six weeks before 1.0.</p>
+<h2><a href="#whats-shipping-in-alpha2" aria-hidden="true" class="anchor" id="whats-shipping-in-alpha2"></a>What's shipping in alpha2?</h2>
+<p>We've managed to land almost all of the features
+<a href="http://blog.rust-lang.org/2015/01/09/Rust-1.0-alpha.html">previously expected</a>
+for this cycle.</p>
+<p><strong>The big headline here is that all major API revisions are
+finished</strong>: path and IO reform have landed. At this point, all modules
+shipping for 1.0 are in what we expect to be their final form, modulo
+minor tweaks during the alpha2 cycle.</p>
+<p>Other highlights are as follows:</p>
+<ul>
+<li>
+<p><strong>Closures</strong>: Rust now supports
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/0231-upvar-capture-inference.md">full capture-clause inference</a>
+and has deprecated the temporary <code>|:|</code> notation, making closures
+much more ergonomic to use.</p>
+</li>
+<li>
+<p><strong>Destructors</strong>: New
+<a href="https://github.com/rust-lang/rfcs/pull/769">destructor rules</a>
+landed, obviating the need for <code>#[unsafe destructor]</code>.</p>
+</li>
+<li>
+<p><strong>Path reform</strong>: The <code>path</code> module has been completely
+<a href="https://github.com/rust-lang/rfcs/pull/474">redesigned</a> to resolve
+a number of semantic and ergonomic problems with the old module, and
+to take advantage of DST.</p>
+</li>
+<li>
+<p><strong>IO reform</strong>: The <code>io</code> system has been
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/0517-io-os-reform.md">thoroughly revised</a>
+to improve robustness and cross-platform behavior, and to eschew
+ambitious high-level abstractions over the system. While almost all
+of the APIs are affected by this change, the changes move toward a
+much more conservative and consistent design.</p>
+</li>
+<li>
+<p><strong>Deref coercions</strong>: A
+<a href="https://github.com/rust-lang/rfcs/pull/241">new coercion</a> will
+follow smart pointers, so that you can pass <code>&amp;Vec&lt;T&gt;</code> where <code>&amp;[T]</code>
+is wanted, or <code>&amp;Arc&lt;T&gt;</code> where <code>&amp;T</code> is wanted. This removes most need
+for explicit slicing or the dreaded &quot;cross-borrowing&quot; <code>&amp;*</code>, and
+means that <code>&amp;</code> can be thought of as a general &quot;borrow&quot; operator.</p>
+</li>
+<li>
+<p><strong>Feature staging</strong>: Rust now has a notion of
+<a href="https://github.com/rust-lang/rfcs/pull/475">named API <em>features</em></a>
+akin to language features, which is how we will manage API
+stabilization going forward. These named features make it easier to
+manage progress in <code>std</code>, and make it plausible to detect the
+minimum version of Rust needed for a crate.</p>
+</li>
+<li>
+<p><strong>For loops</strong>: The new <code>IntoIterator</code> trait is now available and
+used for <code>for</code> loops, making it possible to write <code>for x in &amp;vec</code>
+rather than <code>for x in vec.iter()</code>.</p>
+</li>
+<li>
+<p><strong>Range notation</strong>: We have
+<a href="https://github.com/rust-lang/rfcs/pull/702">finalized range notation</a>,
+introducing <code>..</code> for &quot;full ranges&quot;, which will make APIs like
+<code>collection.remove(..)</code> possible in the future.</p>
+</li>
+<li>
+<p><strong>Trait system</strong>: New coherence rules were
+<a href="http://internals.rust-lang.org/t/orphan-rules/1322">finalized</a>,
+providing both flexibility and soundness for trait implementations.</p>
+</li>
+<li>
+<p><strong>Overflow semantics</strong>: After a long debate, the final integer
+overflow semantics has
+<a href="https://github.com/rust-lang/rfcs/pull/560">been decided</a> and is
+expected to land for alpha2. This change is expected to make it much
+easier to find over/underflow bugs when used in conjunction with
+fuzzing, etc.</p>
+</li>
+<li>
+<p><strong>Associated types</strong>: many compiler bugs around associated types
+have been fixed, making them usable at large scale.</p>
+</li>
+</ul>
+<p>Some other changes have not landed at the time of writing but are
+expected for alpha2:
+<a href="https://github.com/rust-lang/rfcs/pull/738">variance for type parameters</a>,
+<a href="https://github.com/rust-lang/rfcs/pull/458">Send changes</a>, and
+<a href="https://github.com/rust-lang/rust/issues/22240">the great integer audit</a>.</p>
+<p>Complete details will be available in the release notes next week.</p>
+<h2><a href="#why-another-alpha" aria-hidden="true" class="anchor" id="why-another-alpha"></a>Why another alpha?</h2>
+<p>The main reason is that we want to leave recently-landed APIs, like IO
+and path, unstable for a few more weeks while we collect feedback --
+but the beta release is intended to disallow use of unstable features.</p>
+<p>In more detail, Rust is drawing a
+<a href="http://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">difference between alpha and beta</a>
+connected with our
+<a href="http://blog.rust-lang.org/2014/10/30/Stability.html">stability system</a>.
+In alpha releases, it's possible to opt-in to unstable features, but
+after beta, this will be possible only when using nightly builds. The
+beta release will mark the point when a substantial portion of the
+community can move off of nightlies.</p>
+<p>As mentioned above, we have landed all of the major API revisions
+needed for the 1.0 release, including path and IO reform. However,
+some of these revisions landed relatively late in the cycle, and as a
+community we don't have enough experience with the revised APIs to
+declare them stable yet. Note that the API changes are, with a
+couple exceptions, very conservative: they generally move us in the
+direction of existing, successful libraries.</p>
+<p>By producing 1.0-alpha2, we leave open a longer window for tweaks to
+these APIs before declaring them stable. That window will close around
+March 9.</p>
+<h3><a href="#is-there-risk-of-slippage-by-not-moving-to-beta-now" aria-hidden="true" class="anchor" id="is-there-risk-of-slippage-by-not-moving-to-beta-now"></a>Is there risk of slippage by not moving to beta now?</h3>
+<p>It seems unlikely. Essentially all of the language and library
+features needed for 1.0 have already landed, meaning that we will have
+<em>12 weeks</em> of time to polish between alpha2 and 1.0 final.</p>
+<h2><a href="#what-will-happen-before-10" aria-hidden="true" class="anchor" id="what-will-happen-before-10"></a>What will happen before 1.0?</h2>
+<p>All features that are required for shipping 1.0 have now landed. What
+remains is polish, performance improvements, bugfixing, documentation
+-- and gaining enough confidence in recently revised APIs to mark them
+<code>#[stable]</code>.</p>
+<p>The alpha2 release will officially deprecate (but leave available) the
+old path and IO APIs. The new APIs are scheduled to be stabilized
+by March 9. <strong>Please try out these new APIs and help uncover
+problems!</strong></p>
+<p>After the March 9 deadline, it should be possible for substantial
+crates to work with &quot;stable Rust&quot;, i.e. without any use of
+<code>#[feature]</code>. Between then and the beta release, we hope to work
+directly with authors of crates.io packages to help move code to
+stable Rust, and to uncover any gaps in stabilization.</p>
+<p>By beta, we hope that a substantial part of the ecosystem will be off
+of nightlies and on to stable releases. Getting there will require a
+community-wide push toward stabilization, which we're coordinating via
+<a href="http://users.rust-lang.org/t/using-unstable-apis-tell-us-about-it/157/26">discuss</a>
+-- if you haven't, please drop by and tell us the key unstable APIs
+you're using.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

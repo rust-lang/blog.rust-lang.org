@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Tools in the 2018 edition | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Tools in the 2018 edition | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Tools in the 2018 edition | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Tools in the 2018 edition" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Tools in the 2018 edition</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 17, 2018 &middot; The Dev-tools team
+    
+    </div>
+
+    <div class="post">
+      <p>Tooling is an important part of what makes a programming language practical and
+productive. Rust has always had some great tools (Cargo in particular has a
+well-deserved reputation as a best-in-class package manager and build tool), and
+the 2018 edition includes more tools which we hope further improve Rust users'
+experience.</p>
+<p>In this blog post I'll cover Clippy and Rustfmt – two tools that have been
+around for a few years and are now stable and ready for general use. I'll also
+cover IDE support – a key workflow for many users which is now much better
+supported. I'll start by talking about Rustfix, a new tool which was central to
+our edition migration plans.</p>
+<h2><a href="#rustfix" aria-hidden="true" class="anchor" id="rustfix"></a>Rustfix</h2>
+<p>Rustfix is a tool for automatically making changes to Rust code. It is a key
+part of our migration story for the 2018 edition, making the transition from
+2015 to 2018 editions much easier, and in many cases completely automatic. This
+is essential, since without such a tool we'd be much more limited in the kinds
+of breaking changes users would accept.</p>
+<p>A simple example:</p>
+<pre><code class="language-rust">trait Foo {
+    fn foo(&amp;self, i32);
+}
+</code></pre>
+<p>The above is legal in Rust 2015, but not in Rust 2018 (method arguments must be
+made explicit). Rustfix changes the above code to:</p>
+<pre><code class="language-rust">trait Foo {
+    fn foo(&amp;self, _: i32);
+}
+</code></pre>
+<p>For detailed information on how to use Rustfix, see <a href="https://doc.rust-lang.org/stable/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html">these instructions</a>.
+To transition your code from the 2015 to 2018 edition, run <code>cargo fix --edition</code>.</p>
+<p>Rustfix can do a lot, but it is not perfect. When it can't fix your code, it
+will emit a warning informing you that you need to fix it manually. We're
+continuing to work to improve things.</p>
+<p>Rustfix works by automatically applying suggestions from the compiler. When we
+add or improve the compiler's suggestion for fixing an error or warning, then
+that improves Rustfix. We use the same information in an IDE to give quick fixes
+(such as automatically adding imports).</p>
+<p>Thank you to Pascal Hertleif (killercup), Oliver Scherer (oli-obk), Alex
+Crichton, Zack Davis, and Eric Huss for developing Rustfix and the compiler
+lints which it uses.</p>
+<h2><a href="#clippy" aria-hidden="true" class="anchor" id="clippy"></a>Clippy</h2>
+<p>Clippy is a linter for Rust. It has numerous (currently 290!) lints to help
+improve the correctness, performance and style of your programs. Each lint can
+be turned on or off (<code>allow</code>), and configured as either an error (<code>deny</code>) or
+warning (<code>warn</code>).</p>
+<p>An example: the <a href="https://rust-lang.github.io/rust-clippy/master/index.html#iter_next_loop"><code>iter_next_loop</code></a>
+lint checks that you haven't made an error by iterating on the result of <code>next</code>
+rather than the object you're calling <code>next</code> on (this is an easy mistake to make
+when changing a <code>while let</code> loop to a <code>for</code> loop).</p>
+<pre><code class="language-rust">for x in y.next() {
+    // ...
+}
+</code></pre>
+<p>will give the error</p>
+<pre><code>error: you are iterating over `Iterator::next()` which is an Option; this will compile but is probably not what you want
+ --&gt; src/main.rs:4:14
+  |
+4 |     for x in y.next() {
+  |              ^^^^^^^^
+  |
+  = note: #[deny(clippy::iter_next_loop)] on by default
+  = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#iter_next_loop
+</code></pre>
+<p>Clippy works by extending the Rust compiler. The compiler has support for a few
+built-in lints, Clippy uses the same mechanisms but with lots more lints. That
+means Clippy's error/warning format should be familiar, you should be able to
+apply Clippy's suggestions in your IDE (or using Rustfix), and that the lints
+are reliable and accurate.</p>
+<p>With Rust 1.31 and the 2018 edition, Clippy is available on stable Rust and has
+backwards compatibility guarantees (if it had a version number, it would be
+1.0). Clippy has the same stability guarantees as rustc: new lints may be added,
+and lints may be modified to add more functionality, however lints may never be
+removed (only deprecated). This means that code that compiles with Clippy will
+continue to compile with Clippy (provided there are no lints set to error via
+<code>deny</code>), but may throw new warnings.</p>
+<p>Clippy can be installed using <code>rustup component add clippy</code>, then use it with
+<code>cargo clippy</code>. For more information, including how to run it in your CI, see
+<a href="https://github.com/rust-lang/rust-clippy/">the repo readme</a>.</p>
+<p>Thank you Clippy team (Pascal Hertleif (killercup), Oliver Scherer (oli-obk),
+Manish Goregaokar (manishearth), and Andre Bogus (llogiq))!</p>
+<h2><a href="#rustfmt" aria-hidden="true" class="anchor" id="rustfmt"></a>Rustfmt</h2>
+<p>Rustfmt is a tool for formatting your source code. It takes arbitrary, messy
+code and turns it into neat, beautifully styled code.</p>
+<p>Automatically formatting saves you time and mental energy. You don't need to
+worry about style as you code. If you use Rustfmt in your CI (<code>cargo fmt --check</code>), then you don't need to worry about code style in review. By using a
+standard style you make your project feel more familiar for new contributors and
+spare yourself arguments about code style. Rust's <a href="https://github.com/rust-lang/rfcs/blob/master/style-guide/README.md">standard code
+style</a> is
+the Rustfmt default, but if you must, then you can customize Rustfmt
+extensively.</p>
+<p>Rustfmt 1.0 is part of the 2018 edition release. It should work on all code and
+will be backwards compatible until the 2.0 release. By backwards compatible we
+mean that if your code is formatted (i.e., excluding bugs which prevent any
+formatting or code which does not compile), it will always be formatted in the
+same way. This guarantee only applies if you use the default formatting options.</p>
+<p>Rustfmt is not done. Formatting is not perfect, in particular we don't touch
+comments and string literals and we are pretty limited with macro definitions
+and some macro uses. We're likely to improve formatting here, but you will need
+to opt-in to these changes until there is a 2.0 release. We <em>are</em> planning on
+having a 2.0 release. Unlike Rust itself, we think its a good idea to have a
+breaking release of Rustfmt and expect that to happen some time in late 2019.</p>
+<p>To install Rustfmt, use <code>rustup component add rustfmt</code>. To format your project,
+use <code>cargo fmt</code>. You can also format individual files using <code>rustfmt</code> (though
+note that by default rustfmt will format nested modules). You can also use
+Rustfmt in your editor or IDE using the RLS (see below; no need to install
+rustfmt for this, it comes as part of the RLS). We recommend configuring your
+editor to run rustfmt on save. Not having to think about formatting at all as
+you type is a pleasant change.</p>
+<p>Thank you Seiichi Uchida (topecongiro), Marcus Klaas, and all the Rustfmt
+contributors!</p>
+<h2><a href="#ide-support" aria-hidden="true" class="anchor" id="ide-support"></a>IDE support</h2>
+<p>For many users, their IDE is the most important tool. Rust IDE support has been
+in the works for a while and is a highly demanded feature. Rust is now supported
+in many IDEs and editors:
+<a href="https://plugins.jetbrains.com/plugin/8182-rust">IntelliJ</a>, <a href="https://marketplace.visualstudio.com/items?itemName=rust-lang.rust">Visual Studio
+Code</a>,
+<a href="https://github.com/rust-lang-nursery/atom-ide-rust">Atom</a>, <a href="https://github.com/rust-lang/rust-enhanced">Sublime
+Text</a>,
+<a href="https://www.eclipse.org/downloads/packages/release/photon/r/eclipse-ide-rust-developers-includes-incubating-components">Eclipse</a>
+(and more...). Follow each link for installation instructions.</p>
+<p>Editor support is powered in two different ways: IntelliJ uses its own compiler,
+the other editors use the Rust compiler via the Rust Language Server (RLS). Both
+approaches give a good but imperfect IDE experience. You should probably choose
+based on which editor you prefer (although if your project does not use Cargo,
+then you won't be able to use the RLS).</p>
+<p>All these editors come with support for standard IDE functions including 'go to
+definition', 'find all references', code completion, renaming, and reformatting.</p>
+<p>The RLS has been developed by the Rust dev tools team, it is a bid to bring Rust
+support to as many IDEs and editors as possible. It directly uses Cargo and the
+Rust compiler to provide accurate information about a program. Due to
+performance constraints, code completion is not yet powered by the compiler and
+therefore can be a bit more hit and miss than other features.</p>
+<p>Thanks to the IDEs and editors team for work on the RLS and the various IDEs and
+extensions (alexheretic, autozimu, jasonwilliams, LucasBullen, matklad,
+vlad20012, Xanewok), Jonathan Turner for helping start off the RLS, and
+phildawes, kngwyu, jwilm, and the other Racer contributors for their work on
+Racer (the code completion component of the RLS)!</p>
+<h2><a href="#the-future" aria-hidden="true" class="anchor" id="the-future"></a>The future</h2>
+<p>We're not done yet! There's lots more we think we can do in the tools domain
+over the next year or so.</p>
+<p>We've been improving rust debugging support in LLDB and GDB and there is more in
+the works. We're experimenting with distributing our own versions with Rustup
+and making debugging from your IDE easier and more powerful.</p>
+<p>We hope to make the RLS faster, more stable, and more accurate; including using
+the compiler for code completion.</p>
+<p>We want to make Cargo a lot more powerful: Cargo will handle compiled binaries
+as well as source code, which will make building and installing crates faster.
+We will support better integration with other build systems (which in turn will
+enable using the RLS with more projects). We'll add commands for adding and
+upgrading dependencies, and to help with security audits.</p>
+<p>Rustdoc will see improvements to its source view (powered by the RLS) and links
+between documentation for different crates.</p>
+<p>There's always lots of interesting things to work on. If you'd like to help chat
+to us on GitHub or <a href="https://discordapp.com/invite/rust-lang">Discord</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

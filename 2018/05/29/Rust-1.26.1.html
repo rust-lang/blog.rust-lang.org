@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.26.1 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.26.1 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.26.1 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.26.1" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.26.1</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">May 29, 2018 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.26.1. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.26.1 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1261-2018-05-29">detailed release notes for
+1.26.1</a> on GitHub.</p>
+<h2><a href="#whats-in-1261-stable" aria-hidden="true" class="anchor" id="whats-in-1261-stable"></a>What's in 1.26.1 stable</h2>
+<p>A couple of issues were found in 1.26.0 which were deemed sufficient for a patch release.</p>
+<p>A quick summary of the changes:</p>
+<ul>
+<li>RLS no longer interferes with command line builds</li>
+<li>Rustfmt stopped badly formatting text in some cases</li>
+<li>Returning from main via <code>impl Trait</code> where the Trait is not <code>Termination</code> is no longer permitted</li>
+<li><code>::&lt;&gt;</code> (turbofish) no longer works for method arguments whose type is <code>impl Trait</code></li>
+<li><code>NaN &gt; NaN</code> no longer returns true in const contexts</li>
+<li>rustup should no longer fail due to missing documentation on some platforms</li>
+</ul>
+<p>If your code continues to compile, only the change to floating point
+comparisons may alter behavior.</p>
+<h3><a href="#rls-no-longer-interferes-with-command-line-builds" aria-hidden="true" class="anchor" id="rls-no-longer-interferes-with-command-line-builds"></a>RLS no longer interferes with command line builds</h3>
+<p>The version of RLS shipped with 1.26.0 utilized the same target directory as
+Cargo from the command line, which meant that switching between the two would
+lead to everything being recompiled. This problem was made worse for Windows
+users due to a filesystem lock being left unreleased by either RLS or the
+compiler, leading to an increased error rate. This latter bug is not yet
+fixed, but it happens much less frequently with the first bug fixed.</p>
+<h3><a href="#rustfmt-bad-formatting" aria-hidden="true" class="anchor" id="rustfmt-bad-formatting"></a>Rustfmt bad formatting</h3>
+<p>Previously, rustfmt would overindent multi-line string literals, which is now
+fixed.</p>
+<h3><a href="#returning-from-main-with-impl-trait-no-longer-works-when-trait-isnt-termination" aria-hidden="true" class="anchor" id="returning-from-main-with-impl-trait-no-longer-works-when-trait-isnt-termination"></a>Returning from main with <code>impl Trait</code> no longer works when Trait isn't Termination</h3>
+<p>Previously, we only checked that the underlying type implemented the
+<code>Termination</code> trait. It is now only possible to return concrete types on
+stable, as nothing except for <code>impl Termination</code> will work, but that trait is
+currently unstable to import.</p>
+<p>For example, this will no longer work on 1.26.1:</p>
+<pre><code class="language-rust">fn main() -&gt; impl Copy {}
+</code></pre>
+<p>But this will keep working, as it doesn't attempt to return any hidden types
+via <code>impl Trait</code>, but rather names types concretely.</p>
+<pre><code class="language-rust">fn main() -&gt; Result&lt;(), std::io::Error&gt; {
+    Ok(())
+}
+</code></pre>
+<h3><a href="#turbofish-no-longer-works-for-method-arguments-with-impl-trait" aria-hidden="true" class="anchor" id="turbofish-no-longer-works-for-method-arguments-with-impl-trait"></a>Turbofish no longer works for method arguments with <code>impl Trait</code></h3>
+<p>Previously, we accidentally permitted code to specify the type of method
+arguments which use <code>impl Trait</code>. On 1.26.0, the code below would work, but
+how exactly turbofish (<code>::&lt;u32&gt;</code> below) should interact with <code>impl Trait</code>
+hasn't yet been decided, so we're preventing turbofish use until we can be
+sure the semantics are as we desire.</p>
+<pre><code class="language-rust">struct Foo;
+
+impl Foo {
+    fn bar(&amp;self, _arg: impl Copy) {}
+}
+
+fn main() {
+    Foo.bar::&lt;u32&gt;(0);
+}
+</code></pre>
+<h3><a href="#floating-point-comparisons-changed-in-constant-contexts" aria-hidden="true" class="anchor" id="floating-point-comparisons-changed-in-constant-contexts"></a>Floating point comparisons changed in constant contexts</h3>
+<p>Previously, comparing <code>NaN</code> as greater than other floating point numbers in a constant
+context would return true, which is a bug; now, this comparison returns false.
+In some cases that may mean that the behavior of code will change, but we
+expect this to be relatively unlikely.</p>
+<pre><code class="language-rust,ignore">use std::f64::NAN;
+const FOO: bool = ::std::f64::NAN &gt;= ::std::f64::NAN;
+# On 1.26.0
+assert_eq!(FOO, true);
+# On 1.26.1
+assert_eq!(FOO, false);
+</code></pre>
+<h3><a href="#rustup-should-now-work-to-install-stable-on-platforms-with-missing-docs" aria-hidden="true" class="anchor" id="rustup-should-now-work-to-install-stable-on-platforms-with-missing-docs"></a>rustup should now work to install stable on platforms with missing docs</h3>
+<p>During the development cycle for 1.26, a change was made to how we build the
+documentation for the standard library, which made it so that we stopped
+producing the documentation component for a variety of tier 2 platforms.  This
+led to breakage when running <code>rustup update</code> on those platforms, as rustup
+refused to partially install Rust. Some users will need to run <code>rustup install stable</code> instead of <code>rustup update</code> to make rustup avoid the missing docs
+component, but this should be a one-time problem.</p>
+<p>This was unfortunately fixed too late to make it into 1.26 stable, so we added
+the patch for 1.26.1 to permit users to install Rust on these platforms.</p>
+<pre><code class="language-console">rustup update
+info: syncing channel updates for 'stable-x86_64-unknown-freebsd'
+info: latest update on 2018-05-10, rust version 1.26.0 (a77568041 2018-05-07)
+error: component 'rust-docs' for 'x86_64-unknown-freebsd' is unavailable for download
+</code></pre>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

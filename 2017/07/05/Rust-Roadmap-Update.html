@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust's 2017 roadmap, six months in | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust's 2017 roadmap, six months in | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust's 2017 roadmap, six months in | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust's 2017 roadmap, six months in" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust's 2017 roadmap, six months in</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">July 5, 2017 &middot; Nicholas Matsakis
+    
+    </div>
+
+    <div class="post">
+      <p>In January of this year, we adopted the <a href="https://github.com/rust-lang/rfcs/blob/master/text/1774-roadmap-2017.md">2017 Rust Roadmap</a>, which
+laid out our plans for 2017. As part of the roadmap process, we plan
+to regularly release updates on the progress of each roadmap item.
+This post marks the halfway point through the year.</p>
+<h3><a href="#tracking-progress-via-roadmap-issues" aria-hidden="true" class="anchor" id="tracking-progress-via-roadmap-issues"></a>Tracking progress via roadmap issues</h3>
+<p>First, a meta note. If you'd like to follow along with the progress on
+a particular roadmap initiative, or to find out more about how you can
+get involved, the best place to go is the
+<a href="https://github.com/rust-lang/rust-roadmap/issues/">list of issues on the rust-roadmap repo</a>.
+There you will find an issue dedicated to each of the major
+initiatives that we are pushing on. These issues contain links to
+ongoing work. You'll find a number of links to issues like this in the
+descriptions that follow.</p>
+<h3><a href="#rust-should-have-a-lower-learning-curve" aria-hidden="true" class="anchor" id="rust-should-have-a-lower-learning-curve"></a>Rust should have a lower learning curve</h3>
+<p>The most direct way to make Rust easier to learn is to improve the way
+that we teach it. To that end, we've been hard at work on a brand new
+edition of the official &quot;Rust&quot; book (<a href="https://github.com/rust-lang/rust-roadmap/issues/7">roadmap issue</a>), and we now have a
+<a href="https://doc.rust-lang.org/book/">complete draft available online</a>. This new edition puts
+ownership front and center and it also has expanded coverage of a
+number of other areas in Rust, such as error handling, testing,
+matching, modules, and more. Even better, you can
+<a href="https://www.nostarch.com/rust">pre-order a printed version</a> through No Starch Press. If
+you'd like to help out, there is still
+<a href="https://github.com/rust-lang/book/projects/1">lots of editing work to be done!</a></p>
+<p>We've also been working on a number of language changes aimed at
+improving <a href="https://blog.rust-lang.org/2017/03/02/lang-ergonomics.html">language ergonomics</a>. These range from long-standing
+proposals, like <a href="https://github.com/rust-lang/rust-roadmap/issues/16">non-lexical lifetimes</a> or <a href="https://github.com/rust-lang/rfcs/pull/1951"><code>impl Trait</code></a>, to
+newer ideas, like the recently approved RFCs on <a href="https://github.com/rust-lang/rfcs/pull/1733">trait aliases</a> and
+<a href="https://github.com/rust-lang/rfcs/pull/2005">match ergonomics</a>. On the <a href="https://github.com/rust-lang/rust-roadmap/issues/17">roadmap issue</a>, you will find a
+large list of initiatives, organized by the part of the language that
+they target (e.g., ownership/borrowing, the trait system, etc). We
+are actively looking for people to help with writing RFCs but also
+implementing the accepted RFCs -- if you're interested in helping out
+with something, look for the &quot;mentoring&quot; contacts listed in the
+roadmap issue or on the tracking issue for a specific RFC. And, of
+course, if you think you've got a good idea that's not listed, open up
+a thread on internals and let's talk about it!</p>
+<h3><a href="#rust-should-have-a-pleasant-edit-compile-debug-cycle" aria-hidden="true" class="anchor" id="rust-should-have-a-pleasant-edit-compile-debug-cycle"></a>Rust should have a pleasant edit-compile-debug cycle</h3>
+<p>We've been targeting the problem of improving compiler performance in
+a number of different ways. One of the simplest is the
+<a href="https://blog.rust-lang.org/2017/03/16/Rust-1.16.html"><code>cargo check</code> command that we released in Rust 1.16</a>
+-- this command does a limited form of compilation which skips
+code-generation and simply looks for errors. Since code
+generation typically takes 50% or more of compilation time, this can
+be really useful in the early stages when you are writing new code and
+trying to get it to compile, particularly if you have a multi-crate
+project. This command is also used by the RLS.</p>
+<p>Of course, eventually you want to run your code, and for that you need
+a full compilation. In order to make <em>that</em> faster, we've been hard at
+work retooling the compiler to work in an incremental fashion.
+Earlier this year, we advertised
+<a href="https://internals.rust-lang.org/t/incremental-compilation-beta/4721">the &quot;beta&quot; release of incremental on nightly builds</a>.  While
+the beta version sometimes achieved quite large speedups, we also
+found that the dependency tracking was not as robust or effective as
+we would like. Therefore, we are now adopting a new and improved
+approach to incremental compilation that we expect be ready in the
+next month or so. If you're interested in helping with the transition
+to the new system, check out
+<a href="https://github.com/rust-lang/rust-roadmap/issues/4">the incremental compilation roadmap issue</a> or
+<a href="https://github.com/rust-lang/rust/issues/42293">the tracking issue for the new algorithm itself</a>; you can also
+follow <a href="https://internals.rust-lang.org/t/so-you-want-to-help-with-incremental-compilation/5313">this internals thread</a>, where we regularly post
+links to bugs that include mentoring instructions.</p>
+<p>Looking beyond incremental compilation, we've also been taking steps
+to optimize compilation time in other ways. Probably the most
+important step in that respect has been getting a new version of
+<a href="http://perf.rust-lang.org/">the <code>perf.rust-lang.org</code> website</a> up and running. The &quot;perf&quot;
+website tracks the effect of each and every PR on compilation
+performance, so that we can detect and correct regressions. In fact,
+the new website immediately led to some
+<a href="https://github.com/rust-lang/rust/pull/41469">major performance improvements</a>. There is still lots of work
+that could be done to improve it, however, ranging from evaluating and
+improving our benchmark suite to improving the web interface; see the
+<a href="https://github.com/rust-lang/rust/issues/42611">tracking issue on this topic</a> for more.</p>
+<h3><a href="#rust-should-provide-a-solid-but-basic-ide-experience" aria-hidden="true" class="anchor" id="rust-should-provide-a-solid-but-basic-ide-experience"></a>Rust should provide a solid, but basic IDE experience</h3>
+<p>Since it first debuted at RustConf last year, the Rust Language
+Service (RLS) has been growing rapidly (<a href="https://github.com/rust-lang/rust-roadmap/issues/6">roadmap issue</a>). It now
+offers support for most basic IDE operations, such as &quot;jump to
+definition&quot; or &quot;find all uses&quot;, as well as offering code completion
+(via <a href="https://github.com/racer-rust/racer">the racer project</a>). At
+this point, the focus is primarily on polish: making the RLS easier to
+install and fixing bugs. For example, we recently made it possible to
+<a href="https://github.com/rust-lang-nursery/rls#step-2-switch-to-nightly">install the RLS directly through rustup</a>.</p>
+<p>If you'd like to give the RLS a spin, the easiest way is to use
+<a href="https://github.com/jonathandturner/rls_vscode">the VSCode plugin</a>; however, the RLS is a generic server (it speaks
+Microsoft's <a href="https://github.com/Microsoft/language-server-protocol">Language Server Protocol</a>), and there are also
+clients available for a number of other editors. A word of warning: at
+this point, the RLS is still in an &quot;alpha&quot; period. While it is
+eminently usable, you may encounter bugs or other limitations.</p>
+<p>If you'd like to get involved with the RLS, check out the
+<a href="https://github.com/rust-lang/rust-roadmap/issues/6">roadmap issue</a> or the
+<a href="https://github.com/rust-lang-nursery/rls/issues">RLS issue listing</a>;
+in particular, those things tagged with <a href="https://github.com/rust-lang-nursery/rls/issues?q=is%3Aopen+is%3Aissue+label%3Agood-first-issue">&quot;good first issue&quot;</a>.</p>
+<h3><a href="#rust-should-provide-easy-access-to-high-quality-crates" aria-hidden="true" class="anchor" id="rust-should-provide-easy-access-to-high-quality-crates"></a>Rust should provide easy access to high quality crates</h3>
+<p>As the size of the crates.io ecosystem has grown, the simple search
+and sorting criteria used by the crates.io website are no longer that
+helpful for figuring out which crates you should use. To address this,
+we've added <a href="https://crates.io/categories">categories</a> and <a href="http://doc.crates.io/manifest.html#package-metadata">a number of badges</a> that crate authors
+can add to their crates. These help people find crates for a
+particular purpose and judge a crate’s quality at a glance. In
+addition, <a href="https://github.com/rust-lang/rfcs/pull/1824">RFC 1824</a> laid out a plan for improving the default
+sort in crates.io and exposing additional information to help in
+selecting a crate.  There is <a href="https://github.com/rust-lang/rust/issues/41616">a tracking issue</a> that lists the
+pieces of this RFC, and we’d love contributions towards those pieces!
+Once the RFC is completely implemented and people have had a chance to
+use the features for a while, we plan to ask the community for
+feedback and make adjustments.</p>
+<p>In addition, the effort on the <a href="https://rust-lang-nursery.github.io/rust-cookbook/">&quot;cookbook&quot;</a> described below will
+also be a boon for discovering crates in a task-centric way.</p>
+<h3><a href="#rust-should-be-well-equipped-for-writing-robust-servers" aria-hidden="true" class="anchor" id="rust-should-be-well-equipped-for-writing-robust-servers"></a>Rust should be well-equipped for writing robust servers</h3>
+<p>We've made some excellent strides the first half of this year towards
+making Rust well equipped for writing robust servers.  The <a href="https://crates.io/crates/futures"><code>futures</code></a>
+crate and <a href="https://tokio.rs">Tokio</a> project continue to explore the asynchronous I/O
+ecosystem and have seen some heavy usage through crates like <a href="https://hyper.rs">Hyper</a>
+and production users like <a href="https://blog.buoyant.io/2017/03/29/introducing-linkerd-tcp/">linkerd-tcp</a>. Additionally we've seen
+projects like <a href="https://rocket.rs/">Rocket</a> continue to tirelessly improve the ergonomics
+of Rust-on-the-server. A <a href="https://users.rust-lang.org/t/what-does-rust-need-today-for-server-workloads/11114">recent discussion</a> of what the biggest
+blockers are today has highlighted that <a href="https://github.com/alexcrichton/futures-await">async/await</a> notation, better
+Tokio/futures documentation, and a solid HTTP foundation for the
+ecosystem are some of the next highest priorities. We plan to enable
+async/await notation on the nightly Rust channel by the end of the
+year and position it for stabilization in early 2018. This in turn
+should help fuel a rewrite of Tokio's/<code>future</code>'s documentation and
+continue to grow community support for crates such as HTTP.</p>
+<h3><a href="#rust-should-have-10-level-crates-for-essential-tasks" aria-hidden="true" class="anchor" id="rust-should-have-10-level-crates-for-essential-tasks"></a>Rust should have 1.0-level crates for essential tasks</h3>
+<p>The <a href="https://blog.rust-lang.org/2017/05/05/libz-blitz.html">Libz Blitz</a> proceeds apace! The Libz Blitz is a
+systematic effort to identify the most broadly used crates in the Rust
+ecosystem and to ensure that they all meet a consistent level of
+completeness and quality. This effort entails collaborating on the
+internals forum to review crates according to the <a href="https://github.com/brson/rust-api-guidelines">API guidelines</a>,
+filing and fixing the issues that arise, and writing examples for a
+new <a href="https://rust-lang-nursery.github.io/rust-cookbook/">&quot;cookbook&quot; of Rust examples</a>.</p>
+<p>The effort is structured to be highly amenable to contribution,
+particularly from new Rust developers, and so far has resolved 99
+crate issues across 10 crates, and created more than 30 examples for
+the cookbook, thanks to the efforts of 53 contributors.</p>
+<p>If you're interested in participating, take a look at the
+<a href="https://internals.rust-lang.org/t/rust-libz-blitz/5184">introductory post on the internals thread</a>.</p>
+<!-- Thanks to Aaronepower, aergonaut, alisha17, AndyGauge, bjnyfv, brson, budziq,
+cetra3, cGuille, chrisvittal, cldershem, Cldfire, crazymerlyn,
+crypto-universe, DarkEld3r, derekdreery, dtolnay, Enet4, gsquire,
+imor, jaemk, jehiggs, jmcomets, kbknapp, koivunej, kper, little-dude,
+luisbg, MarkMcCaskey, Matt8898, Michael-F-Bryan, mikeastock, morrme,
+neosilky, nivkner, omh1280, opilar, pepyakin, Piripant, pwoolcoc,
+rap2hpoutre, robo9k, SamWhited, sb89, seanmonstar, SimonSapin,
+theduke, tmccombs, tomecki, tomprince, topecongiro, vedantrathore,
+xpayn, and everyone else who helps make Rust great. -->
+<h3><a href="#rust-should-integrate-easily-into-large-build-systems" aria-hidden="true" class="anchor" id="rust-should-integrate-easily-into-large-build-systems"></a>Rust should integrate easily into large build systems</h3>
+<p>Most work on build system integration has focused on more clearly
+identifying what the challenges are and developing concrete proposals
+that target them. Some of the current avenues for exploration are:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/cargo/issues/3815">Support for using Cargo to create a build plan but not execute it</a></li>
+<li><a href="https://github.com/rust-lang/cargo/issues/3816">Support declaring external dependencies in a first-class way</a>
+(rather than via arbitrary build scripts as we do today)</li>
+</ul>
+<p>We are hoping to pick up the pace on this work in the second half of the
+year, but could use help doing so. If either of the above Cargo improvements
+is of interest to you, or if you have insights on build system integration
+in general, please reach out on the <a href="https://github.com/rust-lang/rust-roadmap/issues/12">tracking issue</a>!</p>
+<h3><a href="#rusts-community-should-provide-mentoring-at-all-levels" aria-hidden="true" class="anchor" id="rusts-community-should-provide-mentoring-at-all-levels"></a>Rust's community should provide mentoring at all levels</h3>
+<p>When it comes to mentoring, we've been pursuing a few different
+efforts. The first, <a href="https://github.com/rust-community/rustbridge/">RustBridge</a>, is specifically aimed at bringing
+underrepresented folks into tech; it also serves as a great curriculum
+for people completely new to Rust. The materials have already been
+through several iterations and continue to evolve and improve, and we
+are going to be
+<a href="http://rustconf.com/training.html">running a RustBridge workshop the day before RustConf</a>.  We
+would like to see more RustBridge events.</p>
+<p>We also just launched <a href="https://blog.rust-lang.org/2017/06/27/Increasing-Rusts-Reach.html">Increasing Rust's Reach</a>, an initiative for hearing more
+from groups currently underrepresented in Rust (or technology more generally),
+and working together to make Rust accessible to a wider audience. While this
+isn't a mentorship program per se (in many cases, it's the <em>participants</em> who
+are doing the teaching!), it is still geared toward lowering the on-ramp to
+Rust's community.</p>
+<p>In addition, the various Rust teams have been pursuing a number of
+different initiatives trying to encourage people to get involved in
+the Rust project itself:</p>
+<ul>
+<li>We've <a href="https://internals.rust-lang.org/t/announcing-the-infrastructure-cargo-and-dev-tools-teams-disbanding-the-tools-team/5256">added three new teams</a> -- infrastructure, cargo,
+and dev-tools -- and hence created new areas where people can get
+involved.</li>
+<li>The lang team has adopted the new <a href="https://internals.rust-lang.org/t/language-team-shepherds/4595">shepherd role</a>. Shepherds are
+experienced members of the community who have demonstrated both
+excellent technical acumen and the ability to build consensus and
+understand alternative perspectives. Shepherds attend language
+meetings and help to steer discussion on RFCs and guide them towards
+a useful conclusion.</li>
+<li>The lang team has also been working on &quot;mentoring&quot; RFCs. The
+<a href="https://github.com/rust-lang/rust-roadmap/issues/17">roadmap issue for the ergonomics initiative</a>, for example,
+lists a number of RFCs where we are actively recruiting.</li>
+<li>A big part of the <a href="https://internals.rust-lang.org/t/rust-libz-blitz/5184">&quot;Libz Blitz&quot;</a> is helping to direct community effort
+to pushing libraries over the finish line.</li>
+<li>The compiler team has been actively pursuing &quot;mentoring bugs&quot;
+(<a href="https://github.com/rust-lang/rust/issues?utf8=%E2%9C%93&q=is%3Aopen%20is%3Aissue%20label%3AE-mentor%20label%3AT-compiler%20">bugs tagged as E-mentor</a>), which include written instructions,
+as well as <a href="https://internals.rust-lang.org/t/compiler-team-making-it-easer-to-contribute-to-rustc/5345">drawing up plans</a> to improve the documentation
+of the code and workflows.</li>
+</ul>
+<h3><a href="#areas-of-exploration" aria-hidden="true" class="anchor" id="areas-of-exploration"></a>Areas of Exploration</h3>
+<p>In addition to the main roadmap items, the roadmap RFC called out two
+&quot;areas of exploration&quot;. These are areas with strong potential for Rust
+that are still in a more exploratory phase.</p>
+<h4><a href="#embedded-rust-initiative" aria-hidden="true" class="anchor" id="embedded-rust-initiative"></a>Embedded Rust initiative</h4>
+<p>The embedded Rust ecosystem continues to grow. A bare metal
+concurrency <a href="https://docs.rs/cortex-m-rtfm/0.1.1/cortex_m_rtfm/">framework</a> for Cortex-M microcontrollers geared towards
+<a href="https://github.com/japaric/2wd">robotics</a> and <a href="https://mobile.twitter.com/japaricious/status/845697935572656128">control</a> systems has been recently developed. And
+<a href="https://www.tockos.org/">Tock</a>, an embedded OS that also targets Cortex-M microcontrollers,
+has been making progress towards pure
+<a href="https://github.com/helena-project/libtock-rs">Rust userland applications</a> and continues growing
+<a href="https://www.tockos.org/blog/">its driver support</a>.</p>
+<p>On the compiler side support for the MSP430 architecture has been improving
+thanks to <a href="https://github.com/rust-embedded/rfcs/issues/20">the community's effort</a>, and
+<a href="https://github.com/avr-rust/rust/issues">support for the AVR architecture</a> is also being worked on, out of
+tree, by the community.</p>
+<p>On the community side efforts in standardizing the development workflow are on
+going with the creation and development of <a href="http://blog.japaric.io/quickstart/">guides</a>, <a href="https://github.com/japaric/photon-quickstart">project templates</a>,
+<a href="https://github.com/japaric/cortex-m">core crates</a> and <a href="https://github.com/japaric/svd2rust">tooling</a>. Recently a <a href="https://users.rust-lang.org/t/rust-for-embedded-development-where-we-are-and-whats-missing/10861">survey</a> to identify the current needs
+of embedded developers was performed and the corresponding <a href="https://github.com/rust-lang/rust-roadmap/issues/15">roadmap issue</a> was
+updated to reflect the results. In response to the survey results a community
+effort to create a Hardware Abstraction Layer, that will serve as a base for
+building the embedded crate ecosystem, has been <a href="https://github.com/japaric/embedded-hal">started</a> and the design
+<a href="https://github.com/japaric/embedded-hal/issues">discussion</a> is currently on going. An &quot;Are we embedded yet?&quot; web site that will
+reflect the up to date state of the embedded ecosystem and track its progress is
+also <a href="https://github.com/rust-embedded/rfcs/issues/15">being worked on</a>.</p>
+<p>(Thanks to <a href="https://github.com/japaric">Jorge Aparicio</a> for this writeup.)</p>
+<h4><a href="#integrating-with-other-languages-bindgen-update" aria-hidden="true" class="anchor" id="integrating-with-other-languages-bindgen-update"></a>Integrating with Other Languages: <code>bindgen</code> Update</h4>
+<h5><a href="#c-and-c" aria-hidden="true" class="anchor" id="c-and-c"></a>C and C++</h5>
+<p><a href="https://github.com/servo/rust-bindgen"><code>bindgen</code></a> is the frontier for automating integration
+of C and C++ libraries into Rust code bases. <code>bindgen</code> takes header
+files as input, and outputs the appropriate foreign function and type
+declarations so that the C/C++ library can be used with minimal effort
+from Rust.</p>
+<p><code>bindgen</code> has become a crucial infrastructure for the <a href="https://wiki.mozilla.org/Stylo">Stylo project</a>,
+which brings Servo's style system to Firefox. As the Stylo project nears
+shipping, we've been hammering <code>bindgen</code> into shape for production. This has
+manifested itself as tons of reliability and correctness work. Our test suite is
+ever expanding, we've been focusing on correctness of struct layout, size, and
+alignment for ABI corner cases such as bitfields, as well as test coverage and
+support across different versions of libclang.</p>
+<p>At the same time, we've been working to improve the <a href="https://github.com/servo/rust-bindgen/blob/master/CONTRIBUTING.md">contribution
+experience</a>. We've been documenting workflows, adding
+<a href="https://github.com/servo/rust-bindgen/blob/master/example-graphviz-ir.png">visualizations of our internal representation</a> for debugging, and mentoring
+new contributors. Since the <a href="https://internals.rust-lang.org/t/announcing-the-infrastructure-cargo-and-dev-tools-teams-disbanding-the-tools-team/5256">creation of the Rust DevTools
+team</a>, we've also been talking with other toolsmiths about
+fostering contribution to common tools. Expect to hear more on this soon.</p>
+<p>Finally, we also introduced a <a href="https://servo.github.io/rust-bindgen/"><code>bindgen</code> Users Guide</a> to
+help folks get up and running with <code>bindgen</code> in their project.</p>
+<p>(Thanks to <a href="https://github.com/fitzgen">Nick Fitzgerald</a> for this writeup.)</p>
+<h5><a href="#other-languagesenvironments" aria-hidden="true" class="anchor" id="other-languagesenvironments"></a>Other languages/environments</h5>
+<p>Higher level languages come with their own integration challenges, often involving cooperation with an external runtime system (which possibly includes a garbage collector). Here's a quick rundown of some of the major projects on this front:</p>
+<ul>
+<li><strong>Ruby</strong>: the <a href="http://usehelix.com/">Helix</a> project is geared toward writing Ruby extensions in Rust, and publicly launched a couple of months ago.</li>
+<li><strong>Node.js</strong>: the <a href="https://github.com/dherman/neon">Neon</a> project is similarly geared toward writing Node.js modules in Rust, and continues to see active development.</li>
+<li>The <strong>GNOME Object system</strong>: after a sprint pairing up Rust and GNOME core developers, we have the basics of an <a href="http://smallcultfollowing.com/babysteps/blog/2017/05/02/gnome-class-integrating-rust-and-the-gnome-object-system/">integration story</a> for Rust and the GObject system.</li>
+<li>The <a href="http://jakegoulding.com/rust-ffi-omnibus/">Rust FFI Omnibus</a> gives guidance for the basics of calling into Rust from a variety of languages.</li>
+</ul>
+<p>There are many less high-profile projects in this space as well; if you'd like yours to be tracked as part of the roadmap, please leave a comment on the <a href="https://github.com/rust-lang/rust-roadmap/issues/14">tracking issue</a>!</p>
+<h3><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h3>
+<p>In conclusion, you can see that it's been a very busy six months in
+Rust land. I'd like to thank all the many people who have been
+involved in pushing these projects over the finish line!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

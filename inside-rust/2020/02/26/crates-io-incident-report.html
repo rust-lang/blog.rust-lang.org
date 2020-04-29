@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>crates.io incident report for 2020-02-20 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="crates.io incident report for 2020-02-20 | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="crates.io incident report for 2020-02-20 | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="crates.io incident report for 2020-02-20" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>crates.io incident report for 2020-02-20</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 26, 2020 &middot; Pietro Albini
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/crates-io">the crates.io team</a> 
+    </div>
+
+    <div class="post">
+      <p>On 2020-02-20 at 21:28 UTC we received a report from a user of crates.io that
+their crate was not available on the index even after 10 minutes since the
+upload. This was a bug in the crates.io webapp exposed by a GitHub outage.</p>
+<h2><a href="#root-cause-of-the-outage" aria-hidden="true" class="anchor" id="root-cause-of-the-outage"></a>Root cause of the outage</h2>
+<p>In some corner cases the code that uploads new commits to the GitHub repository
+of the index was returning a successful status even though the push itself
+failed. The bug caused the job scheduler to think the upload was actually
+successful, causing the job to be removed from the queue and producing a data
+loss.</p>
+<p>The outage was caused by that bug, triggered by an unexpected response during
+<a href="https://www.githubstatus.com/incidents/bd29l6zgr43g">the GitHub outage</a> happening at the same time.</p>
+<h2><a href="#resolution" aria-hidden="true" class="anchor" id="resolution"></a>Resolution</h2>
+<p>The team analyzed the code of the background job uploading commits to the
+index, and found a possible cause of the misreported success. A team member
+<a href="https://github.com/rust-lang/crates.io/pull/2207">wrote the fix</a>, another one reviewed it and we then deployed the patch
+directly to production.</p>
+<p>At the same time, once we saw the index started to be updated again, we removed
+the broken entries in the database manually and asked the reporter to upload
+their crates again.</p>
+<h2><a href="#affected-crates" aria-hidden="true" class="anchor" id="affected-crates"></a>Affected crates</h2>
+<ul>
+<li><a href="https://crates.io/crates/kaze"><code>kaze</code></a> 0.1.6</li>
+<li><a href="https://crates.io/crates/wasmer-runtime-core"><code>wasmer-runtime-core</code></a> 0.14.0</li>
+<li><a href="https://crates.io/crates/wasmer-win-exception-handler"><code>wasmer-win-exception-handler</code></a> 0.14.0</li>
+</ul>
+<h2><a href="#postmortem" aria-hidden="true" class="anchor" id="postmortem"></a>Postmortem</h2>
+<p>Deploying the change took way longer than expected: there were changes landed
+in master but waiting to be deployed on production, increasing the length of
+the build process and the risks of the deploy. In the future we should deploy
+hotfixes by branching off the current deployed commit, and cherry-picking the
+fix on top of that. We should also strive to reduce the amount of time PRs sit
+in master without being live.</p>
+<p>Nobody was paged due to this incident, as our monitoring and alerting system
+wasn’t able to catch the problem: we have monitoring in place for jobs failing
+to execute, but in this case the job was mistakenly marked as correct. We
+should implement periodic checks that ensure the database and the index are
+correctly synchronized.</p>
+<p>We were lucky that two members of the team with access to both the support
+email and the production environment were online during the outage: without
+paging available we could’ve noticed it way later than we did.</p>
+<p>During the incident investigation we also found that our logging was not good
+enough to properly diagnose the problem: there is no message logged when a
+commit is pushed to the index, nor when a background job is executed. Also, the
+API call to publish new crates doesn’t include the crate name in its line. We
+should enhance our logging capabilities to find the root cause of issues
+quickly during future incidents.</p>
+<h2><a href="#timeline-of-events" aria-hidden="true" class="anchor" id="timeline-of-events"></a>Timeline of events</h2>
+<p>It took 1 hour and 31 minutes from the start of the incident to the deploy of
+the fix.</p>
+<h3><a href="#2020-02-20" aria-hidden="true" class="anchor" id="2020-02-20"></a>2020-02-20</h3>
+<ul>
+<li><strong>21:17 UTC: the authors of <code>kaze</code>, <code>wasmer-runtime-core</code>
+and <code>wasmer-win-exception-handler</code> published them on crates.io</strong></li>
+<li>21:28 UTC: the author of <code>wasmer-runtime-core</code> and
+<code>wasmer-win-exception-handler</code> reports the issue to help@crates.io</li>
+<li><strong>21:31 UTC: GitHub updates their status page to report an outage</strong></li>
+<li>21:33 UTC: Pietro notices the support mail, pings Sean on Discord, Sean
+starts investigating</li>
+<li>21:35 UTC: Pietro got back to the author saying that the team was
+investigating</li>
+<li>21:37 UTC: Sean and Pietro find the symptoms of the incident</li>
+<li>21:50 UTC: Sean finds a possible cause for the bug</li>
+<li>22:01 UTC: Sean deletes the affected versions from the database</li>
+<li>22:09 UTC: Sean opens up <a href="https://github.com/rust-lang/crates.io/pull/2207">PR 2207</a> with the fix</li>
+<li><strong>22:16 UTC: GitHub updates their status page to say the problem is fixed</strong></li>
+<li>22:17 UTC: Pietro asks for changes on the PR</li>
+<li>22:20 UTC: Sean addresses Pietro’s concerns in the PR</li>
+<li>22:23 UTC: PR merged, Sean deploys it directly to master</li>
+<li><strong>22:48 UTC: Fix deployed on production</strong></li>
+</ul>
+<h3><a href="#2020-02-21" aria-hidden="true" class="anchor" id="2020-02-21"></a>2020-02-21</h3>
+<ul>
+<li>09:27 UTC: the author of <code>kaze</code> reports their crate was affected to
+help@crates.io</li>
+<li>12:55 UTC: Pietro deletes the affected version of <code>kaze</code> from the database
+and gets back to the author of the crate</li>
+<li>14:10 UTC: Pietro analyzes the crates.io database and finds out no other
+crate was affected</li>
+</ul>
+<h2><a href="#action-items" aria-hidden="true" class="anchor" id="action-items"></a>Action items</h2>
+<ul>
+<li><a href="https://github.com/rust-lang/crates.io/issues/2226">#2226</a>: Add simple logging when we start the index publishing process.</li>
+<li><a href="https://github.com/rust-lang/crates.io/issues/2227">#2227</a>: Add a periodic job that checks the index and the database for
+consistency, paging the on-call person if there are any mismatches. The job
+will need to account for the crates not yet published on the index but in the
+queue.</li>
+<li><a href="https://github.com/rust-lang/crates.io/issues/2228">#2228</a>: Include the crate name in the HTTP log entry for the publish API
+call.</li>
+<li><a href="https://github.com/rust-lang/crates.io/issues/2229">#2229</a>: Add in-depth logging for swirl background jobs, with information
+such as the job name or the parameters.</li>
+<li><a href="https://github.com/rust-lang/crates.io/issues/2230">#2230</a>: Investigate whether we want to implement a self-healing feature to
+automatically synchronize the index in cases of mismatch.</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

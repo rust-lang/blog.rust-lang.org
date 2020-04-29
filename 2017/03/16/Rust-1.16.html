@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.16 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.16 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.16 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.16" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.16</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 16, 2017 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce the latest version of Rust, 1.16.0. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed, getting Rust 1.16 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1160-2017-03-16">detailed release notes for
+1.16.0</a> on GitHub.</p>
+<h3><a href="#whats-in-1160-stable" aria-hidden="true" class="anchor" id="whats-in-1160-stable"></a>What's in 1.16.0 stable</h3>
+<p>The largest addition to Rust 1.16 is <code>cargo check</code>. This new subcommand should speed up the development
+workflow in many cases.</p>
+<p>What does it do? Let's take a step back and talk about how <code>rustc</code> compiles your code. Compilation has many
+&quot;passes&quot;, that is, there are many distinct steps that the compiler takes on the road from your source code
+to producing the final binary. You can see each of these steps (and how much time and memory they take)
+by passing <code>-Z time-passes</code> to a nightly compiler:</p>
+<pre><code class="language-text">rustc +nightly hello.rs -Z time-passes
+time: 0.003; rss: 16MB  parsing
+time: 0.000; rss: 16MB  recursion limit
+time: 0.000; rss: 16MB  crate injection
+time: 0.000; rss: 16MB  plugin loading
+time: 0.000; rss: 16MB  plugin registration
+time: 0.049; rss: 34MB  expansion
+&lt;snip&gt;
+</code></pre>
+<p>There's a lot of them. However, you can think of this process in two big steps: first, <code>rustc</code> does
+all of its safety checks, makes sure your syntax is correct, all that stuff. Second, once it's satisfied
+that everything is in order, it produces the actual binary code that you end up executing.</p>
+<p>It turns out that that second step takes a lot of time. And most of the time, it's not neccesary. That is,
+when you're working on some Rust code, many developers will get into a workflow like this:</p>
+<ol>
+<li>Write some code.</li>
+<li>Run <code>cargo build</code> to make sure it compiles.</li>
+<li>Repeat 1-2 as needed.</li>
+<li>Run <code>cargo test</code> to make sure your tests pass.</li>
+<li>GOTO 1.</li>
+</ol>
+<p>In step two, you never actually run your code. You're looking for feedback from the compiler, not to
+actually run the binary. <code>cargo check</code> supports exactly this use-case: it runs all of the compiler's
+checks, but doesn't produce the final binary.</p>
+<p>So how much speedup do you actually get? Like most performance related questions, the answer is &quot;it
+depends.&quot; Here are some very un-scientific benchmarks:</p>
+<p>|                 | thanks  | cargo   | diesel |
+|-----------------|--------:|--------:|-------:|
+| initial build   | 134.75s | 236.78s | 15.27s |
+| initial check   | 50.88s  | 148.52s | 12.81s |
+| speedup         | 2.648   | 1.594   | 1.192  |
+| secondary build | 15.97s  | 64.34s  | 13.54s |
+| secondary check | 2.9s    | 9.29s   | 12.3s  |
+| speedup         | 5.506   | 6.925   | 1.100  |</p>
+<p>The 'initial' categories are the first build after cloning down a project. The 'secondary' categories
+involved adding one blank line to the top of <code>src\lib.rs</code> and running the command again. That's why
+the initial ones are more dramatic; they involve also doing this for all dependencies, as well as
+the crate itself. As you can see, larger projects with many dependencies see a big improvement, but
+smaller ones see much more modest gains.</p>
+<p>We are still working on improving compile-times generally as well, though we don't have anything
+in particular to highlight at this time.</p>
+<h4><a href="#other-improvements" aria-hidden="true" class="anchor" id="other-improvements"></a>Other improvements</h4>
+<p>To support <code>cargo check</code>, <code>rustc</code> has <a href="https://github.com/rust-lang/rust/pull/38571">learned to emit</a> a new kind of file: <code>.rmeta</code>. This file
+will contain only the metadata about a particular crate. <code>cargo check</code> needs this for your
+dependencies, to let the compiler check types and such from them. It's also useful for the
+<a href="https://github.com/rust-lang-nursery/rls">Rust Language Server</a>, and possibly more tools in the future.</p>
+<p>Another large change is the removal of a long-standing diagnostic: <code>consider using an explicit lifetime parameter</code>. This diagnostic would kick in whenever you had an incorrect lifetime annotation,
+and the compiler thought that you might have meant something else. Consider this code:</p>
+<pre><code class="language-rust">use std::str::FromStr;
+
+pub struct Name&lt;'a&gt; {
+    name: &amp;'a str,
+}
+
+impl&lt;'a&gt; FromStr for Name&lt;'a&gt; {
+    type Err = ();
+
+    fn from_str(s: &amp;str) -&gt; Result&lt;Name, ()&gt; {
+        Ok(Name { name: s })
+    }
+}
+</code></pre>
+<p>Here, Rust isn't sure what to do with the lifetimes; as written, the code doesn't guarantee that <code>s</code>
+will live as long as <code>Name</code>, which is required for <code>Name</code> to be valid. Let's try to compile this
+code with Rust 1.15.1:</p>
+<pre><code class="language-bash">rustc +1.15.1 foo.rs --crate-type=lib
+error[E0495]: cannot infer an appropriate lifetime for lifetime parameter in generic type due to conflicting requirements
+  --&gt; .\foo.rs:10:5
+   |
+10 |       fn from_str(s: &amp;str) -&gt; Result&lt;Name, ()&gt; {
+   |  _____^ starting here...
+11 | |         Ok(Name { name: s })
+12 | |     }
+   | |_____^ ...ending here
+   |
+help: consider using an explicit lifetime parameter as shown: fn from_str(s: &amp;'a str) -&gt; Result&lt;Name, ()&gt;
+  --&gt; .\foo.rs:10:5
+   |
+10 |       fn from_str(s: &amp;str) -&gt; Result&lt;Name, ()&gt; {
+   |  _____^ starting here...
+11 | |         Ok(Name { name: s })
+12 | |     }
+   | |_____^ ...ending here
+</code></pre>
+<p>The compiler explains the issue, and gives a helpful suggestion. So let's try it: modify the code to add in
+the <code>'a</code>, and compile again:</p>
+<pre><code class="language-bash">rustc +1.15.1 .\foo.rs --crate-type=lib
+error[E0308]: method not compatible with trait
+  --&gt; .\foo.rs:10:5
+   |
+10 |       fn from_str(s: &amp;'a str) -&gt; Result&lt;Name, ()&gt; {
+   |  _____^ starting here...
+11 | |         Ok(Name { name: s })
+12 | |     }
+   | |_____^ ...ending here: lifetime mismatch
+   |
+&lt;snip&gt;
+help: consider using an explicit lifetime parameter as shown: fn from_str(s: &amp;'a str) -&gt; Result&lt;Name&lt;'a&gt;, ()&gt;
+  --&gt; .\foo.rs:10:5
+   |
+10 |       fn from_str(s: &amp;'a str) -&gt; Result&lt;Name, ()&gt; {
+   |  _____^ starting here...
+11 | |         Ok(Name { name: s })
+12 | |     }
+   | |_____^ ...ending here
+</code></pre>
+<p>It still doesn't work. That help message was not actually helpful. It does suggest adding another
+lifetime, this time on <code>Name</code>. If we do that...</p>
+<pre><code class="language-bash">rustc +1.15.1 .\foo.rs --crate-type=lib
+&lt;snip&gt;
+help: consider using an explicit lifetime parameter as shown: fn from_str(s: &amp;'a str) -&gt; Result&lt;Name&lt;'a&gt;, ()&gt;
+  --&gt; .\foo.rs:10:5
+</code></pre>
+<p>... that's what we already have, compiler!</p>
+<p>This diagnostic was well-intentioned, but when it's wrong, it was <em>very</em> wrong, as you can see here. Sometimes
+it wouldn't even suggest valid Rust syntax! Furthermore, more advanced Rust users didn't really need the
+suggestion, but new Rustaceans would take them to heart, and then be led down this bad path. As such, we decided
+that for now, <a href="https://github.com/rust-lang/rust/pull/37057">we should remove the help message entirely</a>. We may bring it back in the future, but only if we can
+limit false positives.</p>
+<blockquote>
+<p>An aside: the above implementation is not possible; <code>Name</code> would need to use <code>String</code>, not <code>&amp;str</code>.</p>
+</blockquote>
+<p>In other diagnostic changes, previous versions of Rust would helpfully attempt to suggest fixes for typos:</p>
+<pre><code class="language-rust">let foo = 5;
+
+println!(&quot;{}&quot;, ffo);
+</code></pre>
+<p>Would give this error:</p>
+<pre><code class="language-text">error[E0425]: cannot find value `ffo` in this scope
+ --&gt; foo.rs:4:20
+  |
+4 |     println!(&quot;{}&quot;, ffo);
+  |                    ^^^ did you mean `foo`?
+</code></pre>
+<p>However, this would only happen in certain circumstances: sometimes in local variables, and for fields in
+structs. <a href="https://github.com/rust-lang/rust/pull/38927">This now happens nearly everywhere</a>. When combined with <a href="https://github.com/rust-lang/rust/pull/38154">some other related improvements</a>, this
+results in a significant improvement in these sorts of diagnostics.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1160-2017-03-16">detailed release notes</a> for more.</p>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
+<p>21 new bits of API were stabilized this release:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/collections/vec_deque/struct.VecDeque.html#method.truncate"><code>VecDeque::truncate</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/collections/vec_deque/struct.VecDeque.html#method.resize"><code>VecDeque::resize</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/string/struct.String.html#method.insert_str"><code>String::insert_str</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.checked_add"><code>Duration::checked_add</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.checked_sub"><code>Duration::checked_sub</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.checked_div"><code>Duration::checked_div</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.checked_mul"><code>Duration::checked_mul</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.str.html#method.replacen"><code>str::replacen</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.str.html#method.repeat"><code>str::repeat</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/net/enum.SocketAddr.html#method.is_ipv4"><code>SocketAddr::is_ipv4</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/net/enum.SocketAddr.html#method.is_ipv6"><code>SocketAddr::is_ipv6</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/net/enum.IpAddr.html#method.is_ipv4"><code>IpAddr::is_ipv4</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/net/enum.IpAddr.html#method.is_ipv6"><code>IpAddr::is_ipv6</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.dedup_by"><code>Vec::dedup_by</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.dedup_by_key"><code>Vec::dedup_by_key</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or_default"><code>Result::unwrap_or_default</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.pointer.html#method.wrapping_offset"><code>&lt;*const T&gt;::wrapping_offset</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.pointer.html#method.wrapping_offset"><code>&lt;*mut T&gt;::wrapping_offset</code></a></li>
+<li><code>CommandExt::creation_flags</code></li>
+<li><a href="https://doc.rust-lang.org/std/fs/struct.File.html#method.set_permissions"><code>File::set_permissions</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/string/struct.String.html#method.split_off"><code>String::split_off</code></a></li>
+</ul>
+<p>In addition, a number of small improvements to existing functions landed. For example <a href="https://github.com/rust-lang/rust/pull/38469"><code>writeln!</code> now has
+a single-argument form</a>, just like <code>println!</code> has. This ends up writing only a newline, but is a nice bit
+of symmetry.</p>
+<p>All structs in the standard library <a href="https://github.com/rust-lang/rust/pull/38006">now implement <code>Debug</code></a>.</p>
+<p>When slicing a <code>&amp;str</code>, <a href="https://github.com/rust-lang/rust/pull/38066">you'll see better errors</a>. For example, this code:</p>
+<pre><code class="language-rust">&amp;&quot;abcαβγ&quot;[..4]
+</code></pre>
+<p>Is incorrect. It generates this error:</p>
+<pre><code class="language-text">thread 'str::test_slice_fail_boundary_1' panicked at 'byte index 4 is not
+a char boundary; it is inside 'α' (bytes 3..5) of `abcαβγ`'
+</code></pre>
+<p>The part after the <code>;</code> is new.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1160-2017-03-16">detailed release notes</a> for more.</p>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
+<p>In addition to <code>cargo check</code>, Cargo and crates.io have some new polish added. For example,
+<a href="https://github.com/rust-lang/cargo/pull/3511"><code>cargo build</code></a> and <a href="https://github.com/rust-lang/cargo/pull/3515"><code>cargo doc</code></a> now take a <code>--all</code> flag for building and documenting every
+crate in your workspace with one command.</p>
+<p>Cargo now has a <a href="https://github.com/rust-lang/cargo/pull/3604"><code>--version --verbose</code> flag</a>, mirroring <code>rustc</code>.</p>
+<p>Crates.io now <a href="https://github.com/rust-lang/cargo/pull/3546">can show off your TravisCI or AppVeyor badges</a> on your crate's page.</p>
+<p>In addition, both Cargo and crates.io <a href="https://github.com/rust-lang/cargo/pull/3301">understand categories</a>. Unlike keywords, which are free-form,
+categories are curated. In addition, keywords are used for searching, but categories are not. In other
+words, categories are intended to assist browsing, and keywords are intended to assist searching.</p>
+<p>You can browse crates by category <a href="https://crates.io/categories">here</a>.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1160-2017-03-16">detailed release notes</a> for more.</p>
+<h3><a href="#contributors-to-1160" aria-hidden="true" class="anchor" id="contributors-to-1160"></a>Contributors to 1.16.0</h3>
+<p>Last release, we introduced <a href="https://thanks.rust-lang.org">thanks.rust-lang.org</a>.
+We have been doing some behind-the-scenes refactoring work to allow for more projects
+than only Rust itself; we're hoping to introduce that in the next release.</p>
+<p>We had 135 individuals contribute to Rust 1.16.
+<a href="https://thanks.rust-lang.org/rust/1.16.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

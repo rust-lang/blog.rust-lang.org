@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.42.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.42.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.42.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.42.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.42.0</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 12, 2020 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.42.0. Rust is a programming language that is empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust 1.42.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1420-2020-03-12">detailed release notes for 1.42.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1420-stable" aria-hidden="true" class="anchor" id="whats-in-1420-stable"></a>What's in 1.42.0 stable</h2>
+<p>The highlights of Rust 1.42.0 include: more useful panic messages when <code>unwrap</code>ping, subslice patterns, the deprecation of <code>Error::description</code>, and more. See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1420-2020-03-12">detailed release notes</a> to learn about other changes not covered by this post.</p>
+<h3><a href="#useful-line-numbers-in-option-and-result-panic-messages" aria-hidden="true" class="anchor" id="useful-line-numbers-in-option-and-result-panic-messages"></a>Useful line numbers in <code>Option</code> and <code>Result</code> panic messages</h3>
+<p>In Rust 1.41.1, calling <code>unwrap()</code> on an <code>Option::None</code> value would produce an error message looking something like this:</p>
+<pre><code>thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', /.../src/libcore/macros/mod.rs:15:40
+</code></pre>
+<p>Similarly, the line numbers in the panic messages generated by <code>unwrap_err</code>, <code>expect</code>, and <code>expect_err</code>, and the corresponding methods on the <code>Result</code> type, also refer to <code>core</code> internals.</p>
+<p>In Rust 1.42.0, all eight of these functions produce panic messages that provide the line number where they were invoked. The new error messages look something like this:</p>
+<pre><code>thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', src/main.rs:2:5
+</code></pre>
+<p>This means that the invalid call to <code>unwrap</code> was on line 2 of <code>src/main.rs</code>.</p>
+<p>This behavior is made possible by an annotation, <code>#[track_caller]</code>. This annotation is not yet available to use in stable Rust; if you are interested in using it in your own code, you can follow its progress by watching <a href="https://github.com/rust-lang/rust/issues/47809">this tracking issue</a>.</p>
+<h3><a href="#subslice-patterns" aria-hidden="true" class="anchor" id="subslice-patterns"></a>Subslice patterns</h3>
+<p>In Rust 1.26, we stabilized &quot;<a href="https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#basic-slice-patterns">slice patterns</a>,&quot; which let you <code>match</code> on slices. They looked like this:</p>
+<pre><code class="language-rust">fn foo(words: &amp;[&amp;str]) {
+    match words {
+        [] =&gt; println!(&quot;empty slice!&quot;),
+        [one] =&gt; println!(&quot;one element: {:?}&quot;, one),
+        [one, two] =&gt; println!(&quot;two elements: {:?} {:?}&quot;, one, two),
+        _ =&gt; println!(&quot;I'm not sure how many elements!&quot;),
+    }
+}
+</code></pre>
+<p>This allowed you to match on slices, but was fairly limited. You had to choose the exact sizes
+you wished to support, and had to have a catch-all arm for size you didn't want to support.</p>
+<p>In Rust 1.42, we have <a href="https://github.com/rust-lang/rust/pull/67712/">expanded support for matching on parts of a slice</a>:</p>
+<pre><code class="language-rust">fn foo(words: &amp;[&amp;str]) {
+    match words {
+        [&quot;Hello&quot;, &quot;World&quot;, &quot;!&quot;, ..] =&gt; println!(&quot;Hello World!&quot;),
+        [&quot;Foo&quot;, &quot;Bar&quot;, ..] =&gt; println!(&quot;Baz&quot;),
+        rest =&gt; println!(&quot;{:?}&quot;, rest),
+    }
+}
+</code></pre>
+<p>The <code>..</code> is called a &quot;rest pattern,&quot; because it matches the rest of the slice. The above example uses the rest pattern at the end of a slice, but you can also use it in other ways:</p>
+<pre><code class="language-rust">fn foo(words: &amp;[&amp;str]) {
+    match words {
+        // Ignore everything but the last element, which must be &quot;!&quot;.
+        [.., &quot;!&quot;] =&gt; println!(&quot;!!!&quot;),
+
+        // `start` is a slice of everything except the last element, which must be &quot;z&quot;.
+        [start @ .., &quot;z&quot;] =&gt; println!(&quot;starts with: {:?}&quot;, start),
+
+        // `end` is a slice of everything but the first element, which must be &quot;a&quot;.
+        [&quot;a&quot;, end @ ..] =&gt; println!(&quot;ends with: {:?}&quot;, end),
+
+        rest =&gt; println!(&quot;{:?}&quot;, rest),
+    }
+}
+</code></pre>
+<p>If you're interested in learning more, we published <a href="https://blog.rust-lang.org/inside-rust/2020/03/04/recent-future-pattern-matching-improvements.html">a post on the Inside Rust blog</a> discussing these changes as well as more improvements to pattern matching that we may bring to stable in the future! You can also read more about slice patterns in <a href="https://thomashartmann.dev/blog/feature(slice_patterns)/">Thomas Hartmann's post</a>.</p>
+<h3><a href="#matches" aria-hidden="true" class="anchor" id="matches"></a><a href="https://doc.rust-lang.org/stable/std/macro.matches.html"><code>matches!</code></a></h3>
+<p>This release of Rust stabilizes a new macro, <a href="https://doc.rust-lang.org/nightly/std/macro.matches.html"><code>matches!</code></a>. This macro accepts an expression and a pattern, and returns true if the pattern matches the expression. In other words:</p>
+<pre><code class="language-rust">// Using a match expression:
+match self.partial_cmp(other) {
+    Some(Less) =&gt; true,
+    _ =&gt; false,
+}
+
+// Using the `matches!` macro:
+matches!(self.partial_cmp(other), Some(Less))
+</code></pre>
+<p>You can also use features like <code>|</code> patterns and <code>if</code> guards:</p>
+<pre><code class="language-rust">let foo = 'f';
+assert!(matches!(foo, 'A'..='Z' | 'a'..='z'));
+
+let bar = Some(4);
+assert!(matches!(bar, Some(x) if x &gt; 2));
+</code></pre>
+<h3><a href="#use-proc_macrotokenstream-now-works" aria-hidden="true" class="anchor" id="use-proc_macrotokenstream-now-works"></a><code>use proc_macro::TokenStream;</code> now works</h3>
+<p>In Rust 2018, we <a href="https://doc.rust-lang.org/stable/edition-guide/rust-2018/module-system/path-clarity.html#no-more-extern-crate">removed the need for <code>extern crate</code></a>. But procedural macros were a bit special, and so when you were writing a procedural macro, you still needed to say <code>extern crate proc_macro;</code>.</p>
+<p>In this release, if you are using Cargo, <a href="https://github.com/rust-lang/cargo/pull/7700">you no longer need this line when working with the 2018 edition; you can use <code>use</code> like any other crate</a>. Given that most projects will already have a line similar to <code>use proc_macro::TokenStream;</code>, this change will mean that you can delete the <code>extern crate proc_macro;</code> line and your code will still work. This change is small, but brings procedural macros closer to regular code.</p>
+<h3><a href="#libraries" aria-hidden="true" class="anchor" id="libraries"></a>Libraries</h3>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/68348/"><code>iter::Empty&lt;T&gt;</code> now implements <code>Send</code> and <code>Sync</code> for any <code>T</code>.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/67935/"><code>Pin::{map_unchecked, map_unchecked_mut}</code> no longer require the return type
+to implement <code>Sized</code>.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/67233/"><code>io::Cursor</code> now implements <code>PartialEq</code> and <code>Eq</code>.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/66254/"><code>Layout::new</code> is now <code>const</code>.</a></li>
+</ul>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.Condvar.html#method.wait_while"><code>CondVar::wait_while</code></a> &amp; <a href="https://doc.rust-lang.org/stable/std/sync/struct.Condvar.html#method.wait_timeout_while"><code>CondVar::wait_timeout_while</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/fmt/struct.DebugMap.html#method.key"><code>DebugMap::key</code></a> &amp; <a href="https://doc.rust-lang.org/stable/std/fmt/struct.DebugMap.html#method.value"><code>DebugMap::value</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/struct.ManuallyDrop.html#method.take"><code>ManuallyDrop::take</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ptr/fn.slice_from_raw_parts_mut.html"><code>ptr::slice_from_raw_parts_mut</code></a> &amp; <a href="https://doc.rust-lang.org/stable/std/ptr/fn.slice_from_raw_parts.html"><code>ptr::slice_from_raw_parts</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.42.0 release: check out what changed in <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1420-2020-03-12">Rust</a>, <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-142-2020-03-12">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-142">Clippy</a>.</p>
+<h3><a href="#compatibility-notes" aria-hidden="true" class="anchor" id="compatibility-notes"></a>Compatibility Notes</h3>
+<p>We have two notable compatibility notes this release: a deprecation in the standard library, and a demotion of 32-bit Apple targets to Tier 3.</p>
+<h4><a href="#errordescription-is-deprecated" aria-hidden="true" class="anchor" id="errordescription-is-deprecated"></a>Error::Description is deprecated</h4>
+<p>Sometimes, mistakes are made. The <code>Error::description</code> method is now considered to be one of those mistakes. The problem is with its type signature:</p>
+<pre><code class="language-rust">fn description(&amp;self) -&gt; &amp;str
+</code></pre>
+<p>Because <code>description</code> returns a <code>&amp;str</code>, it is not nearly as useful as we wished it would be. This means that you basically need to return the contents of an <code>Error</code> verbatim; if you wanted to say, use formatting to produce a nicer description, that is impossible: you'd need to return a <code>String</code>. Instead, error types should implement the <code>Display</code>/<code>Debug</code> traits to provide the description of the error.</p>
+<p>This API has existed since Rust 1.0. We've been working towards this goal for a long time: back in Rust 1.27, we <a href="https://github.com/rust-lang/rust/pull/50163">&quot;soft deprecated&quot; this method</a>. What that meant in practice was, we gave the function a default implementation. This means that users were no longer forced to implement this method when implementing the <code>Error</code> trait. In this release, <a href="https://github.com/rust-lang/rust/pull/66919/">we mark it as <em>actually</em> deprecated</a>, and took some steps to de-emphasize the method in <code>Error</code>'s documentation. Due to our stability policy, <code>description</code> will never be removed, and so this is as far as we can go.</p>
+<h4><a href="#downgrading-32-bit-apple-targets" aria-hidden="true" class="anchor" id="downgrading-32-bit-apple-targets"></a>Downgrading 32-bit Apple targets</h4>
+<p>Apple is no longer supporting 32-bit targets, and so, neither are we. They have been downgraded to Tier 3 support by the project. For more details on this, check out <a href="https://blog.rust-lang.org/2020/01/03/reducing-support-for-32-bit-apple-targets.html">this post</a> from back in January, which covers everything in detail.</p>
+<h2><a href="#contributors-to-1420" aria-hidden="true" class="anchor" id="contributors-to-1420"></a>Contributors to 1.42.0</h2>
+<p>Many people came together to create Rust 1.42.0. We couldn't have done it without all of you. <a href="https://thanks.rust-lang.org/rust/1.42.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

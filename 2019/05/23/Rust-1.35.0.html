@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.35.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.35.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.35.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.35.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.35.0</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">May 23, 2019 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.35.0. Rust is a
+programming language that is empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust 1.35.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website,
+and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1350-2019-05-23">detailed release notes for 1.35.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1350-stable" aria-hidden="true" class="anchor" id="whats-in-1350-stable"></a>What's in 1.35.0 stable</h2>
+<p>The highlight of this release is the implementation of the <code>FnOnce</code>, <code>FnMut</code>,
+and <code>Fn</code> closure traits for <code>Box&lt;dyn FnOnce&gt;</code>, <code>Box&lt;dyn FnMut&gt;</code>, and <code>Box&lt;dyn Fn&gt;</code> respectively.
+Additionally, closures may now be coerced to unsafe function pointers.
+The <code>dbg!</code> macro introduced in <a href="https://blog.rust-lang.org/2019/01/17/Rust-1.32.0.html#the-dbg-macro">Rust 1.32.0</a> can now also be called without arguments.
+Moreover, there were a number of standard library stabilizations.
+Read on for a few highlights, or see the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1350-2019-05-23">detailed release notes</a> for additional information.</p>
+<h3><a href="#fn-closure-traits-implemented-for-boxdyn-fn" aria-hidden="true" class="anchor" id="fn-closure-traits-implemented-for-boxdyn-fn"></a><code>Fn*</code> closure traits implemented for <code>Box&lt;dyn Fn*&gt;</code></h3>
+<p>In Rust 1.35.0, the <code>FnOnce</code>, <code>FnMut</code>, and the <code>Fn</code> traits <a href="https://github.com/rust-lang/rust/pull/55431">are now implemented</a> for <code>Box&lt;dyn FnOnce&gt;</code>,
+<code>Box&lt;dyn FnMut&gt;</code>, and <code>Box&lt;dyn Fn&gt;</code> respectively.</p>
+<p>Previously, if you wanted to call the function stored in a boxed closure, you had to use <a href="https://doc.rust-lang.org/1.34.0/std/boxed/trait.FnBox.html"><code>FnBox</code></a>.
+This was because instances of <code>Box&lt;dyn FnOnce&gt;</code> and friends did not implement the respective <code>Fn*</code> traits.
+This also meant that it was not possible to pass boxed functions to code expecting an implementor of a <code>Fn</code> trait,
+and you had to create temporary closures to pass them down.</p>
+<p>This was ultimately due to a limitation in the compiler's ability to reason about such implementations,
+which has since been fixed with the introduction of <a href="https://doc.rust-lang.org/nightly/unstable-book/language-features/unsized-locals.html">unsized locals</a>.</p>
+<p>With this release, you can now use boxed functions in places that expect items implementing a function trait.</p>
+<p>The following code now works:</p>
+<pre><code class="language-rust">fn foo(x: Box&lt;dyn Fn(u8) -&gt; u8&gt;) -&gt; Vec&lt;u8&gt; {
+    vec![1, 2, 3, 4].into_iter().map(x).collect()
+}
+</code></pre>
+<p>Furthermore, you can now directly call <code>Box&lt;dyn FnOnce&gt;</code> objects:</p>
+<pre><code class="language-rust">fn foo(x: Box&lt;dyn FnOnce()&gt;) {
+    x()
+}
+</code></pre>
+<h3><a href="#coercing-closures-to-unsafe-fn-pointers" aria-hidden="true" class="anchor" id="coercing-closures-to-unsafe-fn-pointers"></a>Coercing closures to <code>unsafe fn</code> pointers</h3>
+<p>Since <a href="https://blog.rust-lang.org/2017/07/20/Rust-1.19.html">Rust 1.19.0</a>, it has been possible to coerce closures that do not capture from their environment into function pointers.
+For example, you may write:</p>
+<pre><code class="language-rust">fn twice(x: u8, f: fn(u8) -&gt; u8) -&gt; u8 {
+    f(f(x))
+}
+
+fn main() {
+    assert_eq!(42, twice(0, |x| x + 21));
+}
+</code></pre>
+<p>This has however not extended to <code>unsafe</code> function pointers.
+With this release of Rust, you may now do so. For example:</p>
+<pre><code class="language-rust">/// The safety invariants are those of the `unsafe fn` pointer passed.
+unsafe fn call_unsafe_fn_ptr(f: unsafe fn()) {
+    f()
+}
+
+fn main() {
+    // SAFETY: There are no invariants.
+    // The closure is statically prevented from doing unsafe things.
+    unsafe {
+        call_unsafe_fn_ptr(|| {
+            dbg!();
+        });
+    }
+}
+</code></pre>
+<h3><a href="#calling-dbg-with-no-argument" aria-hidden="true" class="anchor" id="calling-dbg-with-no-argument"></a>Calling <code>dbg!()</code> with no argument</h3>
+<p>For the benefit of all the occasional and frequent &quot;print debuggers&quot; out there,
+<a href="https://blog.rust-lang.org/2019/01/17/Rust-1.32.0.html#the-dbg-macro">Rust 1.32.0</a> saw the release of <a href="https://doc.rust-lang.org/std/macro.dbg.html">the <code>dbg!</code> macro</a>.
+To recap, the macro allows you to quickly inspect the value of some expression with context.
+For example, when running:</p>
+<pre><code class="language-rust">fn main() {
+    let mut x = 0;
+
+    if dbg!(x == 1) {
+        x += 1;
+    }
+
+    dbg!(x);
+}
+</code></pre>
+<p>...you would see:</p>
+<pre><code>[src/main.rs:4] x == 1 = false
+[src/main.rs:8] x = 0
+</code></pre>
+<p>As seen in the previous section, where the higher order function <code>call_unsafe_fn_ptr</code> is called,
+you may now also call <code>dbg!</code> without passing any arguments.
+This is useful when tracing what branches your application takes.
+For example, with:</p>
+<pre><code class="language-rust">fn main() {
+    let condition = true;
+
+    if condition {
+        dbg!();
+    }
+}
+</code></pre>
+<p>...you would see:</p>
+<pre><code>[src/main.rs:5]
+</code></pre>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
+<p>In 1.35.0, a number of APIs have become stable.</p>
+<p>In addition, some implementations were added and other changes occurred as well.
+See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1350-2019-05-23">detailed release notes</a> for more details.</p>
+<h4><a href="#copy-the-sign-of-a-floating-point-number-onto-another" aria-hidden="true" class="anchor" id="copy-the-sign-of-a-floating-point-number-onto-another"></a>Copy the sign of a floating point number onto another</h4>
+<p>With this release, new methods <code>copysign</code> have been added to the floating point primitive types <a href="https://doc.rust-lang.org/std/primitive.f32.html"><code>f32</code></a> and <a href="https://doc.rust-lang.org/std/primitive.f64.html"><code>f64</code></a>:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/primitive.f32.html#method.copysign"><code>f32::copysign</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.f64.html#method.copysign"><code>f64::copysign</code></a></li>
+</ul>
+<p>As the name suggests, you can use these to copy the sign of one number onto another. For example:</p>
+<pre><code class="language-rust">fn main() {
+    assert_eq!(3.5_f32.copysign(-0.42), -3.5);
+}
+</code></pre>
+<h4><a href="#check-whether-a-range-contains-a-value" aria-hidden="true" class="anchor" id="check-whether-a-range-contains-a-value"></a>Check whether a <code>Range</code> <code>contains</code> a value</h4>
+<p>Rust 1.35.0 contains a few freshly minted methods on the <code>Range</code> types:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/ops/struct.Range.html#method.contains"><code>Range::contains</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/ops/struct.RangeFrom.html#method.contains"><code>RangeFrom::contains</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/ops/struct.RangeTo.html#method.contains"><code>RangeTo::contains</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/ops/struct.RangeInclusive.html#method.contains"><code>RangeInclusive::contains</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/ops/struct.RangeToInclusive.html#method.contains"><code>RangeToInclusive::contains</code></a></li>
+</ul>
+<p>With these, you can easily check whether a given value exists in a range. For example, you may write:</p>
+<pre><code class="language-rust">fn main() {
+    if (0..=10).contains(&amp;5) {
+        println!(&quot;Five is included in zero to ten.&quot;);
+    }
+}
+</code></pre>
+<h4><a href="#map-and-split-a-borrowed-refcell-value-in-two" aria-hidden="true" class="anchor" id="map-and-split-a-borrowed-refcell-value-in-two"></a>Map and split a borrowed <code>RefCell</code> value in two</h4>
+<p>With Rust 1.35.0, you can now map and split the borrowed value of a <code>RefCell</code> into multiple borrows for different components of the borrowed data:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/cell/struct.Ref.html#method.map_split"><code>Ref::map_split</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/cell/struct.RefMut.html#method.map_split"><code>RefMut::map_split</code></a></li>
+</ul>
+<h4><a href="#replace-the-value-of-a-refcell-through-a-closure" aria-hidden="true" class="anchor" id="replace-the-value-of-a-refcell-through-a-closure"></a>Replace the value of a <code>RefCell</code> through a closure</h4>
+<p>This release introduces a convenience method <code>replace_with</code> on <code>RefCell</code>:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.replace_with"><code>RefCell::replace_with</code></a></li>
+</ul>
+<p>With it, you can more ergonomically map and replace the current value of the cell and get back the old value as a result.</p>
+<h4><a href="#hash-a-pointer-or-reference-by-address-not-value" aria-hidden="true" class="anchor" id="hash-a-pointer-or-reference-by-address-not-value"></a>Hash a pointer or reference by address, not value</h4>
+<p>In this release, we have introduced:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/ptr/fn.hash.html"><code>ptr::hash</code></a></li>
+</ul>
+<p>This function takes a raw pointer and hashes it. Using <code>ptr::hash</code>,
+you can avoid hashing the pointed-to value of a reference and instead hash the address.</p>
+<h4><a href="#copy-the-contents-of-an-optiont" aria-hidden="true" class="anchor" id="copy-the-contents-of-an-optiont"></a>Copy the contents of an <code>Option&lt;&amp;T&gt;</code></h4>
+<p>From the very beginning with Rust 1.0.0,
+the methods <code>Option::cloned</code> for <code>Option&lt;&amp;T&gt;</code> and <code>Option&lt;&amp;mut T&gt;</code> have allowed you to clone the contents in case of <code>Some(_)</code>.
+However, cloning can sometimes be an expensive operation and the methods <code>opt.cloned()</code> provided no hints to that effect.</p>
+<p>With this release of Rust, we introduced:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.copied"><code>Option::copied</code></a> for both <code>Option&lt;&amp;T&gt;</code> and <code>Option&lt;&amp;mut T&gt;</code></li>
+</ul>
+<p>The functionality of <code>opt.copied()</code> is the same as for <code>opt.cloned()</code>.
+However, calling the method requires that <code>T: Copy</code>.
+Using this method, you can make sure that code stops compiling should <code>T</code> no longer implements <code>Copy</code>.</p>
+<h3><a href="#changes-in-clippy" aria-hidden="true" class="anchor" id="changes-in-clippy"></a>Changes in Clippy</h3>
+<p>In this release of Rust,
+Clippy (a collection of lints to catch common mistakes and improve your Rust code) added a new lint <a href="https://rust-lang.github.io/rust-clippy/master/index.html#drop_bounds"><code>drop_bounds</code></a>.
+This lint triggers when you add a bound <code>T: Drop</code> to a generic function. For example:</p>
+<pre><code class="language-rust">fn foo&lt;T: Drop&gt;(x: T) {}
+</code></pre>
+<p>Having a bound <code>T: Drop</code> is almost always a mistake as it excludes types,
+such as <code>u8</code>, which have trivial drop-glues.
+Moreover, <code>T: Drop</code> does not account for types like <code>String</code> not having interesting destructor behavior directly but rather as a result of embedding types,
+such as <code>Vec&lt;u8&gt;</code>, that do.</p>
+<p>In addition to <a href="https://rust-lang.github.io/rust-clippy/master/index.html#drop_bounds"><code>drop_bounds</code></a>,
+this release of Clippy <a href="https://github.com/rust-lang/rust-clippy/pull/4101">split</a> the lint<code>redundant_closure</code> into <code>redundant_closure</code> and <code>redundant_closure_for_method_calls</code>.</p>
+<p>See the <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-135-beta">detailed release notes for Clippy</a> for more details.</p>
+<h3><a href="#changes-in-cargo" aria-hidden="true" class="anchor" id="changes-in-cargo"></a>Changes in Cargo</h3>
+<p>See the <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-135-2019-05-23">detailed release notes for Cargo</a> for more details.</p>
+<h2><a href="#contributors-to-1350" aria-hidden="true" class="anchor" id="contributors-to-1350"></a>Contributors to 1.35.0</h2>
+<p>Many people came together to create Rust 1.35.0.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.35.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

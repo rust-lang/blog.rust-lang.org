@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rustup 1.20.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rustup 1.20.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rustup 1.20.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rustup 1.20.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rustup 1.20.0</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 15, 2019 &middot; The Rustup Working Group
+    
+    </div>
+
+    <div class="post">
+      <p>The rustup working group is happy to announce the release of rustup version 1.20.0. <a href="https://rustup.rs">Rustup</a> is the recommended tool to install <a href="https://www.rust-lang.org">Rust</a>, a programming language that is empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of rustup installed, getting rustup 1.20.0 is as easy as:</p>
+<pre><code>rustup self update
+</code></pre>
+<p>Rustup will also automatically update itself at the end of a normal toolchain update:</p>
+<pre><code>rustup update
+</code></pre>
+<p>If you don't have it already, you can <a href="https://rustup.rs">get rustup</a> from the appropriate page on our website.</p>
+<h2><a href="#whats-new-in-rustup-1200" aria-hidden="true" class="anchor" id="whats-new-in-rustup-1200"></a>What's new in rustup 1.20.0</h2>
+<p>The highlights of this release are profiles support, the ability to get the latest available nightly with all the components you need, and improvements to the <code>rustup doc</code> command. You can also check out <a href="https://github.com/rust-lang/rustup.rs/blob/master/CHANGELOG.md">the changelog</a> for a list of all the changes included in this release.</p>
+<h3><a href="#profiles" aria-hidden="true" class="anchor" id="profiles"></a>Profiles</h3>
+<p>Previous versions of rustup installed a few components by default along with each toolchain: the compiler (<code>rustc</code>), the package manager (<code>cargo</code>), the standard library (<code>rust-std</code>), and offline documentation (<code>rust-docs</code>). While this approach is fine while developing software locally, some of the components (like <code>rust-docs</code>) slowed down the installation, either because they're not used on build servers, or on Windows due to the large amount of installed files.</p>
+<p>To address this problem, rustup 1.20.0 introduces the concept of &quot;profiles&quot;. They are groups of components you can choose to download while installing a new Rust toolchain. The profiles available at this time are <code>minimal</code>, <code>default</code>, and <code>complete</code>:</p>
+<ul>
+<li>The <strong>minimal</strong> profile includes as few components as possible to get a working compiler (<code>rustc</code>, <code>rust-std</code>, and <code>cargo</code>). It's recommended to use this component on Windows systems if you don't use local documentation, and in CI.</li>
+<li>The <strong>default</strong> profile includes all the components previously installed by default (<code>rustc</code>, <code>rust-std</code>, <code>cargo</code>, and <code>rust-docs</code>) plus <code>rustfmt</code> and <code>clippy</code>. This profile will be used by rustup by default, and it's the one recommended for general use.</li>
+<li>The <strong>complete</strong> profile includes all the components available through rustup, including <code>miri</code> and IDE integration tools (<code>rls</code> and <code>rust-analysis</code>).</li>
+</ul>
+<p>To change the rustup profile you can use the <code>rustup set profile</code> command. For example, to select the minimal profile you can use:</p>
+<pre><code>rustup set profile minimal
+</code></pre>
+<p>It's also possible to choose the profile when installing rustup for the first time, either interactively by choosing the &quot;Customize installation&quot; option or programmaticaly by passing the <code>--profile=&lt;name&gt;</code> flag. Profiles will only affect newly installed toolchains: as usual it will be possible to install individual components later with: <code>rustup component add</code>.</p>
+<h3><a href="#installing-the-latest-compatible-nightly" aria-hidden="true" class="anchor" id="installing-the-latest-compatible-nightly"></a>Installing the latest compatible nightly</h3>
+<p>While most components are guaranteed to be present on stable releases of <a href="https://forge.rust-lang.org/release/platform-support.html">tier 1 platforms</a>, the same guarantee doesn't apply to nightly builds. Frequently, tools such as <code>rustfmt</code>, <code>clippy</code>, or <code>rls</code> are missing in the latest nightly. If you depend on these tools, that makes updating nighties hard, as rustup will prevent the upgrade if a component you previously installed is missing.</p>
+<p>Starting from rustup 1.20.0, if a component you previously installed is missing in the latest nightly, <code>rustup update</code> will walk backwards in time to find the most recent release with all the components you need. If there are no new nightlies with all the components you need you'll either need to wait or remove some of them.</p>
+<p>Along with this change, rustup 1.20.0 introduces the <code>--component</code>/<code>-c</code> and <code>--target</code>/<code>-t</code> options to the <code>rustup toolchain install</code> command, allowing you to add components and targets as the toolchain is installed. These flags will also search past nightlies if the current one does not feature all the requested components.</p>
+<h3><a href="#improvements-to-rustup-doc" aria-hidden="true" class="anchor" id="improvements-to-rustup-doc"></a>Improvements to <code>rustup doc</code></h3>
+<p>The <code>rustup doc</code> command opens the locally installed documentation on your browser, without any Internet connection required. rustup 1.20.0 enhances the command allowing you to open directly the API documentation of a specific item. For example to look at the documentation of <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html"><code>Iterator</code></a> you can use:</p>
+<pre><code>rustup doc std::iter::Iterator
+</code></pre>
+<p>This works for traits, structs/enums, macros, and modules, and can take you to the <code>std</code>, <code>alloc</code>, and <code>core</code> crates. Note, however, that this functionality will only work if you have the <code>rust-docs</code> component installed in your toolchain. We will be improving the command's UX over time, so if you have ideas, please do let us know!</p>
+<h2><a href="#thanks" aria-hidden="true" class="anchor" id="thanks"></a>Thanks</h2>
+<p>Thanks to all the contributors who made rustup 1.20.0 possible!</p>
+<ul>
+<li>Andy McCaffrey</li>
+<li>Artem Borisovskiy</li>
+<li>Benjamin Chen</li>
+<li>Daniel Silverstone</li>
+<li>Jon Gjengset</li>
+<li>Lzu Tao</li>
+<li>Matt Kantor</li>
+<li>Mitchell Hynes</li>
+<li>Nick Cameron</li>
+<li>PicoJr</li>
+<li>Pietro Albini</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Upcoming docs.rs changes | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Upcoming docs.rs changes | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Upcoming docs.rs changes | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Upcoming docs.rs changes" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Upcoming docs.rs changes</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 18, 2019 &middot; The Rust Infrastructure Team
+    
+    </div>
+
+    <div class="post">
+      <p>On September 30th breaking changes will be deployed to the <a href="https://docs.rs">docs.rs</a> build
+environment. <a href="https://docs.rs">docs.rs</a> is a free service building and hosting documentation for
+all the crates published on <a href="https://crates.io">crates.io</a>. It's <a href="https://github.com/rust-lang/docs.rs">open source</a>,
+maintained by the <a href="https://www.rust-lang.org/governance/teams/dev-tools#rustdoc">Rustdoc team</a> and operated by the
+<a href="https://www.rust-lang.org/governance/teams/operations#infra">Infrastructure team</a>.</p>
+<h2><a href="#what-will-change" aria-hidden="true" class="anchor" id="what-will-change"></a>What will change</h2>
+<p>Builds will be executed inside the <a href="https://hub.docker.com/r/rustops/crates-build-env">rustops/crates-build-env</a> Docker image.
+That image contains a lot of system dependencies installed to ensure we can
+build as many crates as possible. It's already used by <a href="https://github.com/rust-lang/crater">Crater</a>, and we added
+all the dependencies previously installed in the legacy build environment.</p>
+<p>To ensure we can continue operating the service in the future and to increase
+its reliability we also improved the sandbox the builds are executed in, adding
+new limits:</p>
+<ul>
+<li>Each platform will now have <strong>15 minutes</strong> to build its dependencies and
+documentation.</li>
+<li><strong>3 GB of RAM</strong> will be available for the build.</li>
+<li>Network access will be <strong>disabled</strong> (crates.io dependencies will still be
+fetched).</li>
+<li>Only the <code>target/</code> directory will be writable, and it will be purged after
+each build.</li>
+</ul>
+<p>Finally, docs.rs will now use the latest nightly available when building
+crates, instead of using a manually updated pinned version of nightly.</p>
+<h2><a href="#how-to-prepare-for-the-changes" aria-hidden="true" class="anchor" id="how-to-prepare-for-the-changes"></a>How to prepare for the changes</h2>
+<p>To test if your crate builds inside the new environment you can download the
+Docker image locally and execute a shell inside it:</p>
+<pre><code>docker pull rustops/crates-build-env
+docker run --rm --memory 3221225472 -it rustops/crates-build-env bash
+</code></pre>
+<p>Once you're in a shell you can install <a href="https://rustup.rs">rustup</a> (it's not installed by default
+in the image), install Rust nightly, clone your crate's repository and then
+build the documentation:</p>
+<pre><code>cargo fetch
+time cargo doc --no-deps
+</code></pre>
+<p>To aid your testing these commands will limit the available RAM to 3 GB and
+show the total execution time of <code>cargo doc</code>, but network access will not be
+blocked as you'll need to fetch dependencies.</p>
+<p>If your project needs a system dependency missing in the build environment,
+please <a href="https://github.com/rust-lang/crates-build-env/issues">open an issue</a> on the Docker image's
+<a href="https://hub.docker.com/r/rustops/crates-build-env">repository</a> and we'll consider adding it.</p>
+<p>If your crate fails to build because it took more than 15 minutes to generate
+its docs or it uses more than 3 GB of RAM please <a href="https://github.com/rust-lang/docs.rs/issues">open an issue</a>
+and we will consider reasonable limit increases for your crate. We will <strong>not</strong>
+enable network access for your crate though: you'll need to change your crate
+not to require any external resource at build time.</p>
+<p>We recommend using <a href="https://doc.rust-lang.org/cargo/reference/manifest.html#the-features-section">Cargo features</a> to remove the parts of the code causing
+build failures, enabling those features with <a href="https://docs.rs/about">docs.rs metadata</a>.</p>
+<h2><a href="#acknowledgements" aria-hidden="true" class="anchor" id="acknowledgements"></a>Acknowledgements</h2>
+<p>The new build environment is based on <a href="https://github.com/rust-lang/rustwide">Rustwide</a>, the library powering
+<a href="https://github.com/rust-lang/crater">Crater</a>. It was extracted from the Crater codebase, and created both by the
+<a href="https://github.com/rust-lang/crater/graphs/contributors">Crater contributors</a> and the <a href="https://github.com/rust-lang/rustwide/graphs/contributors">Rustwide contributors</a>.</p>
+<p>The implementation work on the docs.rs side was done by <a href="https://github.com/pietroalbini">Pietro Albini</a>
+and <a href="https://github.com/onur">Onur Aslan</a>, with <a href="https://github.com/QuietMisdreavus">QuietMisdreavus</a> and <a href="https://github.com/Mark-Simulacrum">Mark
+Rousskov</a> reviewing the changes.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

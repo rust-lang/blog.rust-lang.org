@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Incremental Compilation | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Incremental Compilation | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Incremental Compilation | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Incremental Compilation" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Incremental Compilation</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 8, 2016 &middot; Michael Woerister
+    
+    </div>
+
+    <div class="post">
+      <p>I remember when, during the 1.0 anniversary presentation at the
+<a href="https://air.mozilla.org/bay-area-rust-meetup-may-2016/">Bay Area Meetup</a>, Aaron Turon talked about Dropbox so far having been
+pretty happy with using Rust in production there. <em>The core
+team has been in touch with them regularly</em>, he said, <em>asking them, you know,
+what do you need? And their answer is always: faster compiles ...</em> To the
+seasoned Rust user it is no surprise that this solicited a knowing chuckle from
+the audience. Improving compile times has actually been a major development
+focus after Rust reached 1.0 -- although, up to this point, much of the work
+towards this goal has gone into laying <a href="https://blog.rust-lang.org/2016/04/19/MIR.html">architectural foundations</a> within
+the compiler and we are only slowly beginning to see actual results.</p>
+<p>One of the projects that is building on these foundations, and that should
+help <strong>improve compile times</strong> a lot for typical workflows,
+is <strong>incremental compilation</strong>. Incremental compilation avoids redoing work
+when you recompile a crate, which will ultimately lead to a much faster
+edit-compile-debug cycle.</p>
+<p>Today we are announcing an <strong>alpha version</strong> of incremental compilation, which
+marks an important milestone in the development of the feature: For the first
+time since implementation started towards the end of last year, all of the
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/1298-incremental-compilation.md">basic components</a> are in place, the bulk of the groundwork has
+been done. You can give it a try in the nightly version of the compiler:</p>
+<pre><code class="language-console">rustc -Zincremental=&lt;path&gt; ./main.rs
+</code></pre>
+<p>This will start the compiler in <strong>incremental mode</strong>, using whatever <code>&lt;path&gt;</code>
+you've provided as the incremental compilation cache directory. We are also
+working on a <a href="#tool">cargo subcommand to make this smoother</a>, letting you just
+write <code>cargo incremental build</code>. Once things are working reliably, of course,
+incremental compilation will be available through the default
+<code>cargo build</code> command.</p>
+<p>With that being said, incremental compilation is <strong>not production-ready</strong> yet:
+You might see crashes, you might see cases where there is no actual reduction
+in compile times and, most importantly, we still have to write extensive
+regression tests that make sure that incrementally compiled programs are
+always correct — so don't use it anywhere yet where it really matters. Over
+the next few weeks and months, however, our focus will be on making the
+implementation rock-solid from a correctness point of view and you will see
+continuous, gradual improvements in the feature's efficiency, up to a point
+where it will be transformative to your development experience.</p>
+<p>This blog post will go through why and when incremental compilation is useful
+to begin with, how our implementation of it works, what its current development
+status is, and finally what's planned for the future and how you can contribute,
+should you be so inclined.</p>
+<h1><a href="#why-incremental-compilation-in-the-first-place" aria-hidden="true" class="anchor" id="why-incremental-compilation-in-the-first-place"></a>Why Incremental Compilation in the First Place?</h1>
+<p>Much of a programmer's time is spent in an <strong>edit-compile-debug</strong> workflow:</p>
+<ul>
+<li>you make a <strong>small change</strong> (often in a single module or even function),</li>
+<li>you let the compiler <strong>translate the code into a binary</strong>, and finally</li>
+<li>you <strong>run the program</strong> or a bunch of unit tests in order to see results of
+the change.</li>
+</ul>
+<p>After that it's back to step one, making the next small change informed
+by the knowledge gained in the previous iteration.
+This essential feedback loop is at the core of our daily work. We want the time
+being stalled while waiting for the compiler to produce an executable program
+to be as short as possible — ideally
+short enough as not to warrant a time-consuming and stress-inducing mental
+context switch: You want to be able to keep working, stay in the zone. After
+all, there is only so much <a href="https://xkcd.com/303/">regressive fun</a> to be had while <code>rustc</code>
+bootstraps.</p>
+<p>Incremental compilation is a way of <strong>exploiting</strong> the fact that little changes
+between compiles during the regular programming workflow: Many, if not most,
+of the changes done in between two compilation sessions only have local impact
+on the machine code in the output binary, while the rest of the program,
+same as at the source level, will end up exactly the same, bit for bit.
+Incremental compilation aims at retaining as much of those unchanged
+parts as possible while redoing only that amount of work that actually <em>must</em>
+be redone.</p>
+<h1><a href="#how-do-you-make-something-incremental" aria-hidden="true" class="anchor" id="how-do-you-make-something-incremental"></a>How Do You Make Something &quot;Incremental&quot;?</h1>
+<p>We have already heard that computing something incrementally means updating
+only those parts of the computation's output that need to be adapted in
+response to a given change in the computation's inputs.
+One basic strategy we can employ to achieve this is to view one big computation
+(like compiling a program) as a <strong>composite</strong> of many smaller, interrelated
+computations that build up on each other. Each of those smaller computations
+will yield an <strong>intermediate result</strong> that can be <strong>cached</strong> and hopefully
+<strong>re-used</strong> in a later iteration, sparing us the need to re-compute that
+particular intermediate result again.</p>
+<p>Let's take a look at a simple example from algebra to make things more
+concrete. Let's see what it means to evaluate an expression of the form
+<code>a+b×c</code> incrementally. This will involve evaluating the expression once
+with one set of values for <code>a</code>, <code>b</code>, and <code>c</code>, and then evaluating it a second
+time with a different value for <code>a</code>. For the first time around, <code>a</code> will be
+<code>1</code>, <code>b</code> will be <code>2</code>, and <code>c</code> will be <code>3</code>:</p>
+<!--
+       a+b×c=7
+       /    \
+      /     b×c=6
+     /     /   \
+    a=1   b=2  c=3
+-->
+<p><img src="/images/2016-08-Incremental/algebra-initial.svg" alt="Initial Computation of a+b×c" /></p>
+<p>Assume that we &quot;saved&quot; the intermediate results at each step, that is, we
+remember somewhere that <code>b×c</code> is <code>6</code> and <code>a+b×c</code> is <code>7</code>. Now, in the second
+round, we want to know what <code>a+b×c</code> is if we change the value of <code>a</code> to
+<code>4</code>. When we recompute the value of the expression, however, we see that we
+already know that <code>b×c = 6</code>, so we don't have to perform that computation
+again, and can rather skip directly to <code>(a = 4) + (b×c = 6)</code>. We thus have computed
+the value of our expression in just one step instead of two, sparing us an
+entire, tedious multiplication.</p>
+<!--
+       a+b×c=10
+       /    \
+      /     b×c=6
+     /     /   \
+    a=4   b=2  c=3
+-->
+<p><img src="/images/2016-08-Incremental/algebra-update.svg" alt="Updating the Computation" /></p>
+<p>Let's see how this scheme translates to the compiler.</p>
+<h1><a href="#an-incremental-compiler" aria-hidden="true" class="anchor" id="an-incremental-compiler"></a>An Incremental Compiler</h1>
+<p>The way we chose to implement incrementality in the Rust compiler is
+straightforward: An incremental compilation session follows exactly the same
+steps in the same order as a batch compilation session. However, when control
+flow reaches a point where it is about to compute some non-trivial intermediate
+result, it will try to load that result from the incremental compilation cache
+on disk instead. If there is a valid entry in the cache, the compiler can just
+skip computing that particular piece of data. Let's take a look at a (simplified)
+overview of the different compilation phases and the intermediate results they
+produce:</p>
+<!--
+* Diagram: compilation phases and their intermediate results
+
+         AST        type info      object
+                       MIR          code        binary
+
+       A A A A     T T T M M M     O O O O
+       A A A A     T T T M M M     O O O O        B
+       A A A A     T T T M M M     O O O O
+    >===========>===============>===========>===========>
+        parse       analysis       codegen     linking
+-->
+<p><img src="/images/2016-08-Incremental/compiler-phases.svg" alt="Compiler Phases and their By-Products" /></p>
+<p>First the compiler will parse the source code into an abstract syntax tree
+(AST). The AST then goes through the analysis phase which produces type
+information and the <a href="https://blog.rust-lang.org/2016/04/19/MIR.html">MIR</a> for each function. After that, if analysis
+did not find any errors, the codegen phase will transform the MIR version of
+the program into its machine code version, producing one object file per
+source-level module. In the last step all the object files get linked together
+into the final output binary which may be a library or an executable.</p>
+<p>Comparing that with our algebra example from above, the pieces of AST correspond
+to <code>a</code>, <code>b</code>, and <code>c</code>, that is, they are the <strong>inputs</strong> to our incremental
+computation and they determine what needs to be updated as we make our way
+through the compilation process. The pieces of type information and MIR and the
+object files, on the other hand, are our <strong>intermediate results</strong>, that is, they
+correspond to the incremental computation cache entries we stored for
+<code>b×c</code> and <code>a+b×c</code>. Where a cache entry looks like <code>b×c = 6</code> in the
+algebra example, it would look something like
+<code>translate_to_obj_file(mir1, mir2, mir3) = &lt;bits of the obj-file&gt;</code> in the case
+of the compiler.</p>
+<p>So, this seems pretty simple so far: Instead of computing something a second
+time, just load the value from the cache. Things get tricky though when we need
+to <strong>find out if</strong> it's actually valid to <strong>use a value from the cache</strong> or if we
+have to <strong>re-compute</strong> it because of some changed input.</p>
+<h1><a href="#dependency-graphs" aria-hidden="true" class="anchor" id="dependency-graphs"></a>Dependency Graphs</h1>
+<p>There is a formal method that can be used to model a computation's intermediate
+results and their individual &quot;up-to-dateness&quot; in a straightforward way:
+<strong>dependency graphs</strong>. It looks like this: Each input and each <strong>intermediate
+result</strong> is represented as a <strong>node</strong> in a directed graph. The <strong>edges</strong> in the
+graph, on the other hand, represent which intermediate result or input can have
+an <strong>influence</strong> on some other intermediate result.</p>
+<!-- edited out
+More formally, let `v` be
+some intermediate result and `N(v)` be the dependency graph node representing
+`v` in the graph. Further, let `xᵢ` be the intermediate results and inputs
+that have to be **read** when computing `v` and let `N(xᵢ)`
+be their representing nodes. Then the dependency graph will contain the edges
+`N(v) → N(xᵢ)` for all `i`. In other words, each edge records a dependency
+of one intermediate result on another.
+ -->
+<p>Let's go back to our algebra example to see what this looks like in
+practice:</p>
+<!--
+       a+b×c
+       /   \
+      /    b×c
+     /    /   \
+    a    b     c
+-->
+<p><img src="/images/2016-08-Incremental/algebra-dep-graph.svg" alt="Dependency Graph of a+b×c" /></p>
+<p>As you can see, we have nodes for the inputs <code>a</code>, <code>b</code>, and <code>c</code>, and nodes for
+the intermediate results <code>b×c</code> and <code>a+b×c</code>. The edges should come as no
+surprise: There is one edge from <code>b×c</code> to <code>b</code> and one to <code>c</code> because those are
+the values we need to read when computing <code>b×c</code>. For <code>a+b×c</code> it's
+exactly the same. Note, by the way, that the above graph is a tree just because
+the computation it models has the form of a tree. In general, dependency graphs
+are <strong>directed acyclic graphs</strong>, as would be the case if we would
+add another intermediate result <code>b×c+c</code> to our computation:</p>
+<!--
+       a+b×c   b×c+c
+       /   \  /  |
+      /    b×c   |
+     /    /   \ /
+    a    b     c
+-->
+<p><img src="/images/2016-08-Incremental/algebra-dep-graph-dag.svg" alt="Example of a non-tree Dependency Graph" /></p>
+<p>What makes this data structure really useful is that we can ask it questions
+of the form &quot;if X has changed, is Y still up-to-date?&quot;. We just take the node
+representing <code>Y</code> and collect all the inputs <code>Y</code> depends on by transitively
+following all edges originating from <code>Y</code>. If any of those inputs has changed,
+the value we have cached for <code>Y</code> cannot be relied on anymore.</p>
+<h1><a href="#dependency-tracking-in-the-compiler" aria-hidden="true" class="anchor" id="dependency-tracking-in-the-compiler"></a>Dependency Tracking in the Compiler</h1>
+<p>When compiling in incremental mode, we always build the dependency graph of the
+produced data: every time, some piece of data is written (like an object file),
+we record which other pieces of data we are accessing while doing so.</p>
+<p>The emphasis is on <strong>recording</strong> here. At any point in time the compiler keeps
+track of which piece of data it is currently working on (it does so in the
+background in thread-local memory). This is the currently <strong>active node</strong> of the
+dependency graph. Conversely, the data that needs to be <strong>read</strong> to compute
+the value of the active node is also tracked: it usually already resides in some
+kind container (e.g. a hash table) that requires invoking a lookup method to
+access a specific entry. We make good use of this fact by making these <strong>lookup
+methods transparently create edges</strong> in the dependency graph: whenever an entry
+is accessed, we know that it is being read and we know what it is being read
+<em>for</em> (the currently active node). This gives us both ends of the dependency edge
+and we can simply add it to the graph. At the end of the compilation sessions we
+have all our data nicely linked up, mostly automatically:</p>
+<!--
+         AST        type info      object
+                       MIR          code        binary
+
+       A A A A     T T T M M M     O O O O
+       A A A A     T T T M M M     O O O O        B
+       A A A A     T T T M M M     O O O O
+    >===========>===============>===========>===========>
+        parse       analysis       codegen     linking
+-->
+<p><img src="/images/2016-08-Incremental/compiler-dep-graph.svg" alt="Dependency Graph of Compilation Data" /></p>
+<p>This dependency graph is then stored in the incremental compilation cache
+directory along with the cache entries it describes.</p>
+<p>At the beginning of a subsequent compilation session, we detect which inputs
+(=AST nodes) have changed by comparing them to the previous version. Given the
+graph and the set of changed inputs, we can easily find all cache entries that
+are not up-to-date anymore and just remove them from the cache:</p>
+<!--
+         AST        type info      object
+                       MIR          code        binary
+
+       A _ A _     _ _ T M _ _     O _ O _
+       _ A A A     T _ T _ _ M     O _ _ _        _
+       A A _ A     T _ _ M _ M     O O _ _
+    >===========>===============>===========>===========>
+        parse       analysis       codegen     linking
+-->
+<p><img src="/images/2016-08-Incremental/compiler-cache-purge.svg" alt="Using the Dependency Graph to Validate the Incremental Compilation Cache" /></p>
+<p>Anything that has survived this cache validation phase can safely be re-used
+during the current compilation session.</p>
+<p>There are a few benefits to the <strong>automated dependency tracking</strong> approach we
+are employing. Since it is built into the compiler's internal APIs, it will
+stay up-to-date with changes to the compiler, and it is hard to accidentally
+forget about. And if one still forgets using it correctly (e.g. by not declaring
+the correct <em>active node</em> in some place) then the result is an overly
+<strong>conservative, but still &quot;correct&quot;</strong> dependency graph: It will negatively
+impact the re-use ratio but it will not lead to incorrectly re-using some
+outdated piece of data.</p>
+<p>Another aspect is that the system does not try to predict or compute what the
+dependency graph is going to look like, it just keeps track. A large part of
+our (yet to be written) <strong>regression tests</strong>, on the other hand, <em>will</em> give a
+description of what the dependency graph for a given program ought to look like.
+This makes sure that the actual graph and the reference graph are arrived at
+via <strong>different methods</strong>, reducing the risk that both the compiler and the
+test case agree on the same, yet wrong, value.</p>
+<h1><a href="#faster-up-to-15-or-more" aria-hidden="true" class="anchor" id="faster-up-to-15-or-more"></a>&quot;Faster! Up to 15% or More.&quot;<a href="https://xkcd.com/870/">*</a></h1>
+<p>Let's take a look at some of the implications of what we've learned so far:</p>
+<ul>
+<li>The dependency graph reflects the actual dependencies between parts of the
+source code and parts of the output binary.</li>
+<li>If there is some input node that is reachable from many intermediate
+results, e.g. a central data type that is used in almost every function,
+then changing the definition of that data type will mean that everything
+has to be compiled from scratch, there's no way around it.</li>
+</ul>
+<p>In other words, the effectiveness of incremental compilation is very sensitive
+to the structure of the program being compiled and the change being made.
+Changing a single character in the source code might very well invalidate the
+whole incremental compilation cache. Usually though, this kind of change is
+a rare case and most of the time only a small portion of the program has to be
+recompiled.</p>
+<h1><a href="#the-current-status-of-the-implementation" aria-hidden="true" class="anchor" id="the-current-status-of-the-implementation"></a>The Current Status of the Implementation</h1>
+<p>For the first spike implementation of incremental compilation, what we call the
+alpha version now, we chose to focus on caching object files. Why did we do
+that? Let's take a look at the compilation phases again and especially at how
+much time is spent in each one on average:</p>
+<!--
+         AST        type info      object
+                       MIR          code        binary
+
+       A A A A     T T T M M M     O O O O
+       A A A A     T T T M M M     O O O O        B
+       A A A A     T T T M M M     O O O O
+    >===========>===============>===========>===========>
+        parse       analysis       codegen     linking
+                                   optimize
+
+TIME:    5%            20%         **65%**       10%
+-->
+<p><img src="/images/2016-08-Incremental/compiler-phases-cost.svg" alt="Relative Cost of Compilation Phases" /></p>
+<p>As you can see, the Rust compiler spends most of its time in the optimization
+and codegen passes. Consequently, if this phase can be skipped at least for
+part of a code base, this is where the biggest impact on compile times can be
+achieved.</p>
+<p>With that in mind, we can also give an <strong>upper bound</strong> on how much time this
+initial version of incremental compilation can save: If the compiler spends X
+seconds optimizing when compiling your crate, then incremental compilation will
+reduce compile times at most by those X seconds.</p>
+<p>Another area that has a large influence on the actual effectiveness of the
+alpha version is <strong>dependency tracking granularity</strong>: It's up to us how fine-grained
+we make our dependency graphs, and the current implementation makes it rather
+coarse in places. For example, the dependency graph
+<a href="https://github.com/rust-lang/rust/issues/36349">only knows a single node for all methods in an <code>impl</code></a>.
+As a consequence, the compiler will consider <em>all</em>
+methods of that <code>impl</code> as changed if just one of them is changed. This of course
+will mean that more code will be re-compiled than is strictly necessary.</p>
+<h1><a href="#performance-numbers" aria-hidden="true" class="anchor" id="performance-numbers"></a>Performance Numbers</h1>
+<p>Here are some numbers of how the current implementation fares in various
+situations. First let's take a look at the best case scenario where a 100%
+of a crate's object files can be re-used. This might occur when changing one
+crate in a multi-crate project and downstream crates need to be rebuilt but
+are not really affected.</p>
+<p><img src="/images/2016-08-Incremental/perf-full-re-use.svg" alt="Normalized Incremental Compilation Build Times" /></p>
+<p>As you can see, compiling a crate for the first time in incremental mode can be
+slower than compiling it in non-incremental mode. This is because the dependency
+tracking incurs some additional cost when activated. Note that compiling
+incrementally can also be faster (as in the case of the <a href="https://github.com/rust-lang-nursery/regex">regex</a> crate). This is
+because incremental compilation splits the code into smaller optimization units
+than a regular compilation session, resulting in less time optimizing, but
+also in less efficient runtime code.</p>
+<p>The last column shows the amount of time a rebuild of the crate takes when
+nothing has actually changed. For crates where the compiler spends a lot of
+time optimizing, like <a href="https://github.com/serde-rs/syntex/tree/master/syntex_syntax">syntex-syntax</a> or <code>regex</code>, the gain can
+be substantial: The incremental rebuild only takes about 22% of the time a
+full rebuild would need for <code>syntex-syntax</code>, only 16% for <code>regex</code>, and less than
+10% for the <a href="https://github.com/alexcrichton/futures-rs/blob/master/tests/all.rs">all.rs test case</a> of the <a href="https://github.com/alexcrichton/futures-rs">futures-rs</a> crate.</p>
+<p>On the other hand, for a crate like the <code>futures-rs</code> library that results in
+little machine code when being compiled, the current version of incremental
+compilation makes little difference: It's only 3% faster than compiling from
+scratch.</p>
+<p>The next graph shows which impact various changes made to the <code>regex</code> crate
+have on incremental rebuild times:</p>
+<p><img src="/images/2016-08-Incremental/perf-changes.svg" alt="Build Times After Specific Changes" /></p>
+<p>The numbers show that the effectiveness of incremental compilation indeed depends a
+lot on the type of change applied to the code. For changes with very local
+effect we can get close to optimal re-use (as in the case of <code>Error::cause()</code>,
+or <code>dfa::write_vari32()</code>). If we change something that has an impact on many
+places, like <code>Compiler::new()</code>, we might not see a noticeable reduction in
+compile times. But again, be aware that these measurements are from the
+current state of the implementation. They do not reflect the
+full potential of the feature.</p>
+<h1><a href="#future-plans" aria-hidden="true" class="anchor" id="future-plans"></a>Future Plans</h1>
+<p>The alpha version represents a minimal end-to-end implementation of incremental
+compilation for the Rust compiler, so there is lots of room for improvement. The
+section on the current status already laid out the two major axes along which
+we will pursue increased efficiency:</p>
+<ul>
+<li>
+<p><strong>Cache more</strong> intermediate results, like MIR and type information, which will
+allow the compiler to skip more and more steps.</p>
+</li>
+<li>
+<p>Make <strong>dependency tracking more precise</strong>, so that the compiler encounters
+fewer false positives during cache invalidation.</p>
+</li>
+</ul>
+<p>Improvements in both of these directions will make incremental compilation
+more effective as the implementation matures.</p>
+<p>In terms of correctness, we tried to err on the side of caution from the get-go,
+rather making the compiler recompute something if we were not sure if our
+dependency tracking did the right thing, but there is still more that can be
+done.</p>
+<ul>
+<li>
+<p>We want to have many <strong>more auto-tests</strong> that make sure that various basic components
+of the system <strong>don't regress</strong>. This is an area where interested people can
+start contributing with relative ease, since one only needs to understand the
+Rust language and the test framework, but not the more complicated innards of
+the compiler's implementation. If you are interested in jumping in, head on
+over to the <a href="https://github.com/rust-lang/rust/issues/36350">tracking issue</a> on GitHub and leave a
+comment!</p>
+</li>
+<li>
+<p><a name="tool"></a> We are working on the
+<a href="https://github.com/nikomatsakis/cargo-incremental"><em>cargo incremental</em></a> tool (implemented as a Cargo
+subcommand for hassle-free installation and usage) that will walk a projects
+git history, compiling successive versions of the source code and
+<strong>collecting data</strong> on the <strong>efficiency</strong> and <strong>correctness</strong> of
+incremental versus regular compilation. If you're interested in helping out,
+consider yourself invited to either hack on the tool itself or downloading
+and running it on a project of yours. The <a href="https://www.rust-lang.org/community.html">#rustc channel on IRC</a>
+is currently the best place to get further information regarding this.</p>
+</li>
+</ul>
+<p>Thanks to everyone in the community who has contributed directly or indirectly
+to incremental compilation so far! If you are interested in tackling a specific
+implementation problem, look for <a href="https://github.com/rust-lang/rust/issues?utf8=%E2%9C%93&q=is%3Aopen%20is%3Aissue%20label%3AA-incr-comp%20">issues tagged with A-incr-comp</a>
+or ask around in the <a href="https://www.rust-lang.org/community.html">#rustc channel on IRC</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

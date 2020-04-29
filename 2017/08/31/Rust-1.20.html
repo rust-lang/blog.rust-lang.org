@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.20 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.20 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.20 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.20" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.20</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 31, 2017 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce the latest version of Rust, 1.20.0. Rust
+is a systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed, getting Rust 1.20 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1200-2017-08-31">detailed release notes for
+1.20.0</a> on GitHub.</p>
+<h3><a href="#whats-in-1200-stable" aria-hidden="true" class="anchor" id="whats-in-1200-stable"></a>What's in 1.20.0 stable</h3>
+<p>In previous Rust versions, you can already define traits, structs, and enums
+that have &quot;associated functions&quot;:</p>
+<pre><code class="language-rust">struct Struct;
+
+impl Struct {
+    fn foo() {
+        println!(&quot;foo is an associated function of Struct&quot;);
+    }
+}
+
+fn main() {
+    Struct::foo();
+}
+</code></pre>
+<p>These are called &quot;associated functions&quot; because they are functions that are
+associated with the type, that is, they're attached to the type itself, and
+not any particular instance.</p>
+<p>Rust 1.20 adds the ability to define &quot;associated constants&quot; as well:</p>
+<pre><code class="language-rust">struct Struct;
+
+impl Struct {
+    const ID: u32 = 0;
+}
+
+fn main() {
+    println!(&quot;the ID of Struct is: {}&quot;, Struct::ID);
+}
+</code></pre>
+<p>That is, the constant <code>ID</code> is associated with <code>Struct</code>. Like functions,
+associated constants work with traits and enums as well.</p>
+<p>Traits have an extra ability with associated constants that gives them some
+extra power. With a trait, you can use an associated constant in the same way
+you'd use an associated type: by declaring it, but not giving it a value. The
+implementor of the trait then declares its value upon implementation:</p>
+<pre><code class="language-rust">trait Trait {
+    const ID: u32;
+}
+
+struct Struct;
+
+impl Trait for Struct {
+    const ID: u32 = 5;
+}
+
+fn main() {
+    println!(&quot;{}&quot;, Struct::ID);
+}
+</code></pre>
+<p>Before this release, if you wanted to make a trait that represented floating
+point numbers, you'd have to write this:</p>
+<pre><code class="language-rust">trait Float {
+    fn nan() -&gt; Self;
+    fn infinity() -&gt; Self;
+    ...
+}
+</code></pre>
+<p>This is slightly unwieldy, but more importantly, because they're functions, they
+cannot be used in constant expressions, even though they only return a constant.
+Because of this, a design for <code>Float</code> would also have to include constants as well:</p>
+<pre><code class="language-rust">mod f32 {
+    const NAN: f32 = 0.0f32 / 0.0f32;
+    const INFINITY: f32 = 1.0f32 / 0.0f32;
+
+    impl Float for f32 {
+        fn nan() -&gt; Self {
+            f32::NAN
+        }
+        fn infinity() -&gt; Self {
+            f32::INFINITY
+        }
+    }
+}
+</code></pre>
+<p>Associated constants let you do this in a much cleaner way. This trait definition:</p>
+<pre><code class="language-rust">trait Float {
+    const NAN: Self;
+    const INFINITY: Self;
+    ...
+}
+</code></pre>
+<p>Leads to this implementation:</p>
+<pre><code class="language-rust">mod f32 {
+    impl Float for f32 {
+        const NAN: f32 = 0.0f32 / 0.0f32;
+        const INFINITY: f32 = 1.0f32 / 0.0f32;
+    }
+}
+</code></pre>
+<p>much cleaner, and more versatile.</p>
+<p>Associated constants were proposed in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0195-associated-items.md">RFC 195</a>, almost exactly three years ago. It's
+been quite a while for this feature! That RFC contained all associated items, not just
+constants, and so some of them, such as associated types, were implemented faster than
+others. In general, we've been doing a lot of internal work for constant evaluation,
+to increase Rust's capabilities for compile-time metaprogramming. Expect more on this
+front in the future.</p>
+<p>We've also <a href="https://github.com/rust-lang/rust/pull/43782">fixed a bug</a> with the <code>include!</code> macro in documentation tests: for relative
+paths, it erroneously was relative to the working directory, rather than to the current file.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1200-2017-08-31">detailed release notes</a> for more.</p>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
+<p>There's nothing <em>super</em> exciting in libraries this release, just a number of solid
+improvements and continued stabilizing of APIs.</p>
+<p>The <code>unimplemented!</code> macro <a href="https://github.com/rust-lang/rust/pull/42155">now accepts
+messages</a> that let you say why
+something is not yet implemented.</p>
+<p>We <a href="https://github.com/rust-lang/rust/pull/42999">upgraded to Unicode 10.0.0</a>.</p>
+<p><code>min</code> and <code>max</code> on floating point types were <a href="https://github.com/rust-lang/rust/pull/42430">rewritten in
+Rust</a>, no longer relying on
+<code>cmath</code>.</p>
+<p>We are shipping mitigations against <a href="https://access.redhat.com/security/vulnerabilities/stackguard">Stack
+Clash</a> in this
+release, notably, <a href="https://github.com/rust-lang/rust/pull/42816">stack probes</a>, and <a href="https://github.com/rust-lang/rust/pull/43072">skipping the main thread's manual
+stack guard on Linux</a>. You don't need to do anything to get these protections
+other than using Rust 1.20.</p>
+<p>We've added a new trio of sorting functions to the standard library:
+<a href="https://doc.rust-lang.org/std/primitive.slice.html#method.sort_unstable_by_key"><code>slice::sort_unstable_by_key</code></a>, <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.sort_unstable_by"><code>slice::sort_unstable_by</code></a>, and
+<a href="https://doc.rust-lang.org/std/primitive.slice.html#method.sort_unstable"><code>slice::sort_unstable</code></a>. You'll note that these all have &quot;unstable&quot; in the name.
+Stability is a property of sorting algorithms that may or may not matter to you,
+but now you have both options! Here's a brief summary: imagine we had a list
+of words like this:</p>
+<pre><code class="language-text">rust
+crate
+package
+cargo
+</code></pre>
+<p>Two of these words, <code>cargo</code> and <code>crate</code>, both start with the letter <code>c</code>. A stable
+sort that sorts only on the first letter must produce this result:</p>
+<pre><code class="language-text">crate
+cargo
+package
+rust
+</code></pre>
+<p>That is, because <code>crate</code> came before <code>cargo</code> in the original list, it must also be
+before it in the final list. An unstable sort could provide that result, but could
+also give this answer too:</p>
+<pre><code class="language-text">cargo
+crate
+package
+rust
+</code></pre>
+<p>That is, the results <em>may</em> not be in the same original order.</p>
+<p>As you might imagine, fewer constraints often means faster results. If you don't care
+about stability, these sorts may be faster for you than the stable variants. As always,
+best to check both and see! These functions were added by <a href="https://github.com/rust-lang/rfcs/blob/master/text/1884-unstable-sort.md">RFC 1884</a>, if you'd like
+more details, including benchmarks.</p>
+<p>Additionally, the following APIs were also stabilized:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/ffi/struct.CStr.html#method.into_c_string"><code>CStr::into_c_string</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/ffi/struct.CString.html#method.as_c_str"><code>CString::as_c_str</code></a> and <a href="https://doc.rust-lang.org/std/ffi/struct.CString.html#method.into_boxed_c_str"><code>CString::into_boxed_c_str</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/io/struct.Chain.html#method.get_mut"><code>Chain::get_mut</code></a>, <a href="https://doc.rust-lang.org/std/io/struct.Chain.html#method.get_ref"><code>Chain::get_ref</code></a>, and <a href="https://doc.rust-lang.org/std/io/struct.Chain.html#method.into_inner"><code>Chain::into_inner</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.get_or_insert_with"><code>Option::get_or_insert_with</code></a> and <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.get_or_insert"><code>Option::get_or_insert</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/ffi/struct.OsStr.html#method.into_os_string"><code>OsStr::into_os_string</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/ffi/struct.OsString.html#method.into_boxed_os_str"><code>OsString::into_boxed_os_str</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/io/struct.Take.html#method.get_mut"><code>Take::get_mut</code></a> and <a href="https://doc.rust-lang.org/std/io/struct.Take.html#method.get_ref"><code>Take::get_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/str/struct.Utf8Error.html#method.error_len"><code>Utf8Error::error_len</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/char/struct.EscapeDebug.html"><code>char::EscapeDebug</code></a> and <a href="https://doc.rust-lang.org/std/primitive.char.html#method.escape_debug"><code>char::escape_debug</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/macro.compile_error.html"><code>compile_error!</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.f32.html#method.from_bits"><code>f32::from_bits</code></a> and <a href="https://doc.rust-lang.org/std/primitive.f32.html#method.to_bits"><code>f32::to_bits</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.f64.html#method.from_bits"><code>f64::from_bits</code></a> and <a href="https://doc.rust-lang.org/std/primitive.f64.html#method.to_bits"><code>f64::to_bits</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/mem/union.ManuallyDrop.html"><code>mem::ManuallyDrop</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/str/fn.from_boxed_utf8_unchecked.html"><code>str::from_boxed_utf8_unchecked</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.str.html#method.as_bytes_mut"><code>str::as_bytes_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/str/fn.from_utf8_mut.html"><code>str::from_utf8_mut</code></a> and <a href="https://doc.rust-lang.org/std/str/fn.from_utf8_unchecked_mut.html"><code>str::from_utf8_unchecked_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.str.html#method.get_unchecked"><code>str::get_unchecked</code></a> and <a href="https://doc.rust-lang.org/std/primitive.str.html#method.get_unchecked_mut"><code>str::get_unchecked_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.str.html#method.get"><code>str::get</code></a> and <a href="https://doc.rust-lang.org/std/primitive.str.html#method.get_mut"><code>str::get_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.str.html#method.into_boxed_bytes"><code>str::into_boxed_bytes</code></a></li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1200-2017-08-31">detailed release notes</a> for more.</p>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
+<p>Cargo has some nice upgrades this release. First of all, your crates.io
+authentication token used to be stored in <code>~/.cargo/config</code>. As a configuration
+file, this would often be stored with <code>644</code> permissions, that is, world-readable.
+But it has a secret token in it. We've <a href="https://github.com/rust-lang/cargo/pull/3978">moved the token</a> to <code>~/.cargo/credentials</code>,
+so that it can be permissioned <code>600</code>, and hidden from other users on your system.</p>
+<p>If you used secondary binaries in a Cargo package, you know that they're kept
+in <code>src/bin</code>. However, sometimes, you want multiple secondary binaries that
+have significant logic; in that case, you'd have <code>src/bin/client.rs</code> and
+<code>src/bin/server.rs</code>, and any submodules for either of them would go in the
+same directory. This is confusing. Instead, <a href="https://github.com/rust-lang/cargo/pull/4214">we now conventionally support</a>
+<code>src/bin/client/main.rs</code> and <code>src/bin/server/main.rs</code>, so that you can keep
+larger binaries more separate from one another.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1200-2017-08-31">detailed release notes</a> for more.</p>
+<h3><a href="#contributors-to-1200" aria-hidden="true" class="anchor" id="contributors-to-1200"></a>Contributors to 1.20.0</h3>
+<p>Many people came together to create Rust 1.20. We couldn't have done it without
+all of you. <a href="https://thanks.rust-lang.org/rust/1.20.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

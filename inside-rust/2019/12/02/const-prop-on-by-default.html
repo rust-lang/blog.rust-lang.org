@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Constant propagation is now on by default in nightly | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Constant propagation is now on by default in nightly | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Constant propagation is now on by default in nightly | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Constant propagation is now on by default in nightly" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Constant propagation is now on by default in nightly</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 2, 2019 &middot; Wesley Wiser
+     on behalf of <a href="https://rust-lang.github.io/compiler-team/working-groups/mir-opt/">the MIR Optimizations WG</a> 
+    </div>
+
+    <div class="post">
+      <p>I'm pleased to announce that the <a href="https://blog.rust-lang.org/2016/04/19/MIR.html">Mid-level IR</a> (MIR) constant propagation pass has been <a href="https://github.com/rust-lang/rust/pull/66074">switched on</a> by default on Rust nightly which will eventually become Rust 1.41!</p>
+<h2><a href="#what-is-constant-propagation" aria-hidden="true" class="anchor" id="what-is-constant-propagation"></a>What is constant propagation?</h2>
+<p>Constant propagation is an optimization where the compiler recognizes code that can be run at compile time, evaluates it, and replaces the original code with the result.</p>
+<p>For example:</p>
+<pre><code class="language-rust">const X: u32 = 2;
+
+let y = X + X;
+</code></pre>
+<p>Rather than evaluating <code>X + X</code> at runtime, the compiler can recognize that the value of <code>X</code> is known at compile time and replace it with the correct value resulting in:</p>
+<pre><code class="language-rust">const X: u32 = 2;
+
+let y = 4;
+</code></pre>
+<p>This optimization is opportunistic and automatically recognizes constants even when they are not declared as such:</p>
+<pre><code class="language-rust">struct Point {
+  x: u32,
+  y: u32,
+}
+
+let a = 2 + 2; // optimizes to 4
+let b = [0, 1, 2, 3, 4, 5][3]; // optimizes to 3
+let c = (Point { x: 21, y: 42 }).y; // optimizes to 42
+</code></pre>
+<h2><a href="#propagation-into-control-flow" aria-hidden="true" class="anchor" id="propagation-into-control-flow"></a>Propagation into control flow</h2>
+<p>The constant propagation pass also handles propagating into control flow.
+For example:</p>
+<pre><code class="language-rust">const Foo: Option&lt;u8&gt; = Some(12);
+
+let x = match Foo {
+   None =&gt; panic!(&quot;no value&quot;),
+   Some(v) =&gt; v,
+};
+</code></pre>
+<p>becomes:</p>
+<pre><code class="language-rust">const Foo: Option&lt;u8&gt; = Some(12);
+
+let x = 12;
+</code></pre>
+<p>This is very helpful for checked math, the default in <code>debug</code> mode, which introduces additional control flow after every operation:</p>
+<pre><code class="language-rust">let x = 2 + 4 * 6;
+</code></pre>
+<p>actually operates like this with overflow checking enabled:</p>
+<pre><code class="language-rust">let (_tmp0, overflowed) = CheckedMultiply(4, 6);
+assert!(!overflowed, &quot;attempt to multiply with overflow&quot;);
+
+let (_tmp1, overflowed) = CheckedAdd(_tmp0, 2);
+assert!(!overflowed, &quot;attempt to add with overflow&quot;);
+
+let x = _temp1;
+</code></pre>
+<p>which adds quite a bit of control flow!
+Constant propagation evaluates the math at compile time and reduces this to:</p>
+<pre><code class="language-rust">let _tmp0 = 24;
+assert!(!false, &quot;attempt to multiply with overflow&quot;);
+
+let _tmp1 = 26;
+assert!(!false, &quot;attempt to add with overflow&quot;);
+
+let x = 26;
+</code></pre>
+<p>which is further reduced to just:</p>
+<pre><code class="language-rust">let x = 26;
+</code></pre>
+<h2><a href="#compiler-performance" aria-hidden="true" class="anchor" id="compiler-performance"></a>Compiler performance</h2>
+<p>As you might have guessed, reducing the amount of control flow processed by the Rust compiler has a positive effect on compile times.
+We're seeing 2-10% improvement on a variety of test cases in both debug and release mode.
+Even though LLVM has its own constant propagation pass, we see improvements because our pass operates on MIR while it is still generic.
+The more concrete instances of a generic function that are instantiated, the larger the payoff from this optimization.</p>
+<p>We've suspected for a while that the verbose LLVM IR the Rust compiler generates contributes considerably to long compilation times.
+By implementing optimizations like this, we believe there is significant potential to lower compile times by generating better LLVM IR.
+If you'd like to get involved with the MIR Optimizations working group, stop by our <a href="https://rust-lang.zulipchat.com/#narrow/stream/189540-t-compiler.2Fwg-mir-opt">Zulip channel</a> and say hello!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>A new look for rust-lang.org | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="A new look for rust-lang.org | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="A new look for rust-lang.org | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="A new look for rust-lang.org" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>A new look for rust-lang.org</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 29, 2018 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>Before 1.0, Rust had a reputation for changing the language on a near-daily
+basis. By contrast, the website has looked pretty much the same. Here’s the
+first version of rust-lang.org, seven years ago (courtesy of <a href="https://web.archive.org/">the WayBack
+Machine</a>):</p>
+<p><img src="/images/rust-www1.png" alt="rust website in 2011" /></p>
+<p>In 2014, three years later:</p>
+<p><img src="/images/rust-www2.png" alt="rust website in 2014" /></p>
+<p>If you visit <a href="https://rust-lang.org">https://rust-lang.org</a> today, you'll see this:</p>
+<p><img src="/images/rust-www3.png" alt="rust website in 2018" /></p>
+<p>Over time, we’ve grown to love it. It’s simple. Minimal. Familiar.</p>
+<h2><a href="#improving-the-content" aria-hidden="true" class="anchor" id="improving-the-content"></a>Improving the content</h2>
+<p>But we can always do better. For example, the website suffers from what we
+call “the fireflower problem.” First formulated by <a href="http://seriouspony.com/">Kathy
+Sierra</a>, and made into an image by Samuel Hulick:</p>
+<p><img src="/images/fireflower.png" alt="the fireflower" /></p>
+<p>We want Mario to use Rust, the fireflower, and turn into the ever-awesome
+Fire Mario. But there’s a corollary here: it’s better to say “we will make
+you into Fire Mario” than it is “we sell fire flowers.”</p>
+<p>(As an aside, we had a <a href="https://brson.github.io/fireflowers/">community discussion on this
+topic</a> back in 2016.)</p>
+<p>In other words, this list:</p>
+<ul>
+<li>zero-cost abstractions</li>
+<li>move semantics</li>
+<li>guaranteed memory safety</li>
+<li>threads without data races</li>
+<li>trait-based generics</li>
+<li>pattern matching</li>
+<li>type inference</li>
+<li>minimal runtime</li>
+<li>efficient C bindings</li>
+</ul>
+<p>doesn’t explain what you can <em>do</em> with Rust, which leads people to say “Rust
+seems neat, but I don’t know what I would actually use it for.”</p>
+<h2><a href="#improving-the-style" aria-hidden="true" class="anchor" id="improving-the-style"></a>Improving the style</h2>
+<p>We also like the minimalist style of the current site, but it also may be
+<em>too</em> minimal. Furthermore, it has no room to grow; we have more than just
+rust-lang.org these days. We wanted a style that we could use to unify all of
+the websites that we maintain in the Rust project; crates.io being a big one.
+Its “pool table” design feels extremely different than rust-lang.org, which
+is confusing.</p>
+<p>Doing this requires care, as we don’t want to make the website huge and
+complicated, but at the same time, using more than black and blue might be
+nice.</p>
+<h2><a href="#the-beta" aria-hidden="true" class="anchor" id="the-beta"></a>The beta</h2>
+<p>Today, we’d like to announce a beta of the new rust-lang.org. If you go to
+<a href="https://beta.rust-lang.org">https://beta.rust-lang.org</a>, you’ll see this:</p>
+<p><img src="/images/rust-www4.png" alt="beta rust website" /></p>
+<p>Its fresh visual design gives us a lot more flexibility in how we get
+information across. It retains the minimalist spirit of the old site, while
+adding some bold color and visual variety.</p>
+<p>We hope you like it as much as we do!</p>
+<h3><a href="#some-highlights" aria-hidden="true" class="anchor" id="some-highlights"></a>Some highlights</h3>
+<p>The new site puts the “why Rust?” question front-and-center, and includes
+dedicated pages for the four application domains we targeted in 2018:</p>
+<ul>
+<li>Embedded devices</li>
+<li>WebAssembly</li>
+<li>CLI apps</li>
+<li>Network services</li>
+</ul>
+<p>We have also revised the slogan. Historically, it has been:</p>
+<blockquote>
+<p>Rust is a systems programming language that runs blazingly fast, prevents
+segfaults, and guarantees thread safety.</p>
+</blockquote>
+<p>Like the bullet list of features, this doesn't convey what you can <em>do</em> with
+Rust. So we've updated the slogan:</p>
+<blockquote>
+<p>Rust: The programming language that empowers everyone to become a systems
+programmer.</p>
+</blockquote>
+<p>We're still not sure we love the term &quot;systems programming,&quot; as it seems like
+it means something different to everyone, but this iteration is significantly
+better than the old one. Even if people have different ideas about what
+&quot;systems programming&quot; means, they at least have some idea. &quot;guarantees thread
+safety,&quot; not so much.</p>
+<h2><a href="#future-work" aria-hidden="true" class="anchor" id="future-work"></a>Future work</h2>
+<p>There’s still more work to do:</p>
+<ul>
+<li>Some information on the old site, has not yet been ported over.</li>
+<li>Translations have regressed. We’re working on adding the proper
+infrastructure here, and hope to be able to start accepting translations by
+the end of the year.</li>
+<li>We need more polish and testing in a general sense.</li>
+</ul>
+<p>Please <a href="https://github.com/rust-lang/beta.rust-lang.org/issues/new/choose">file an
+issue</a> with any
+feedback you have! We’re also looking for people with abilities of all kinds
+to help maintain the site, and especially people with design, CSS, and
+marketing skills. If you’d like to get involved, please <a href="mailto:www@rust-lang.org">email
+us</a>!</p>
+<p>We’d like to ship this new site on December 6, with the release of Rust 2018.
+Thank you for giving it a try before then, so we can work out any bugs we
+find!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

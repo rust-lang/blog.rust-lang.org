@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust in 2016 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust in 2016 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust in 2016 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust in 2016" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust in 2016</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 14, 2015 &middot; Nicholas Matsakis and Aaron Turon
+    
+    </div>
+
+    <div class="post">
+      <p>This week marks three months since Rust 1.0 was released. As we're starting to
+hit our post-1.0 stride, we'd like to talk about <strong>what 1.0 meant in hindsight,
+and where we see Rust going in the next year</strong>.</p>
+<h3><a href="#what-10-was-about" aria-hidden="true" class="anchor" id="what-10-was-about"></a>What 1.0 was about</h3>
+<p>Rust 1.0 focused on stability, community, and clarity.</p>
+<ul>
+<li>
+<p><strong>Stability</strong>, we've discussed quite a bit in <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">previous posts</a>
+introducing our release channels and stabilization process.</p>
+</li>
+<li>
+<p><strong>Community</strong> has always been one of Rust's greatest strengths. But in the year
+leading up to 1.0, we introduced and refined the <a href="https://github.com/rust-lang/rfcs#when-you-need-to-follow-this-process">RFC process</a>,
+culminating with <a href="https://github.com/rust-lang/rfcs/pull/1068">subteams</a> to manage RFCs in each particular
+area. Community-wide debate on RFCs was indispensable for delivering a quality
+1.0 release.</p>
+</li>
+<li>
+<p>All of this refinement prior to 1.0 was in service of reaching <strong>clarity</strong> on
+what Rust represents:</p>
+<ul>
+<li><a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Memory safety without garbage collection</a></li>
+<li><a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Concurrency without data races</a></li>
+<li><a href="http://blog.rust-lang.org/2015/05/11/traits.html">Abstraction without overhead</a></li>
+<li><a href="http://blog.rust-lang.org/2014/10/30/Stability.html">Stability without stagnation</a></li>
+</ul>
+</li>
+</ul>
+<p>Altogether, <strong>Rust is exciting because it is empowering: you can hack without
+fear</strong>. And you can do so in contexts you might not have before, dropping down
+from languages like Ruby or Python, making your first foray into systems
+programming.</p>
+<p>That's Rust 1.0; but what comes next?</p>
+<h3><a href="#where-we-go-from-here" aria-hidden="true" class="anchor" id="where-we-go-from-here"></a>Where we go from here</h3>
+<p>After much discussion within the core team, early production users, and the
+broader community, we've identified a number of improvements we'd like to make
+over the course of the next year or so, falling into three categories:</p>
+<ul>
+<li>Doubling down on infrastructure;</li>
+<li>Zeroing in on gaps in key features;</li>
+<li>Branching out into new places to use Rust.</li>
+</ul>
+<p>Let's look at some of the biggest plans in each of these categories.</p>
+<h3><a href="#doubling-down-infrastructure-investments" aria-hidden="true" class="anchor" id="doubling-down-infrastructure-investments"></a>Doubling down: infrastructure investments</h3>
+<h4><a href="#crater" aria-hidden="true" class="anchor" id="crater"></a>Crater</h4>
+<p>Our basic <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">stability promise</a> for Rust is that upgrades
+between versions are &quot;hassle-free&quot;. To deliver on this promise, we need to
+detect compiler bugs that cause code to stop working. Naturally, the compiler
+has its own large test suite, but that is only a small fraction of the code
+that's out there &quot;in the wild&quot;. <strong><a href="https://github.com/brson/taskcluster-crater">Crater</a> is a tool that aims to close that gap
+by testing the compiler against all the packages found in <a href="https://crates.io">crates.io</a>, giving us
+a much better idea whether any code has stopped compiling on the latest nightly.</strong></p>
+<p>Crater has quickly become an indispensable tool. We regularly compare the
+nightly release against the latest stable build, and we use crater to check
+in-progress branches and estimate the impact of a change.</p>
+<p>Interestingly, we have often found that when code stops compiling, it's not
+because of a bug in the compiler. Rather, it's because we <em>fixed</em> a bug, and
+that code happened to be relying on the older behavior. Even in those cases,
+using crater helps us improve the experience, by suggestion that we should phase
+fixes in slowly with warnings.</p>
+<p>Over the next year or so, we plan to improve crater in numerous ways:</p>
+<ul>
+<li>Extend the coverage to other platforms beyond Linux, and run test suites on
+covered libraries as well.</li>
+<li>Make it easier to use: leave an <code>@crater: test</code> comment to try out a PR.</li>
+<li>Produce a version of the tool that library authors can use to see effects of
+their changes on downstream code.</li>
+<li>Include code from other sources beyond <a href="https://crates.io">crates.io</a>.</li>
+</ul>
+<h4><a href="#incremental-compilation" aria-hidden="true" class="anchor" id="incremental-compilation"></a>Incremental compilation</h4>
+<p>Rust has always had a &quot;crate-wide&quot; compilation
+model. This means that the Rust compiler reads in all of the source files in
+your crate at once. These are type-checked and then given to LLVM for
+optimization. This approach is great for doing deep optimization, because it
+gives LLVM full access to the entire set of code, allowing for more better
+inlining, more precise analysis, and so forth. However, it can mean that
+turnaround is slow: even if you only edit one function, we will recompile
+everything. When projects get large, this can be a burden.</p>
+<p>The incremental compilation project aims to change this by having the Rust
+compiler save intermediate by-products and re-use them. This way, when you're
+debugging a problem, or tweaking a code path, <strong>you only have to recompile those
+things that you have changed, which should make the &quot;edit-compile-test&quot; cycle
+much faster</strong>.</p>
+<p>Part of this project is restructuring the compiler to introduce a new
+intermediate representation, which we call <a href="https://github.com/rust-lang/rfcs/pull/1211">MIR</a>. MIR is a simpler,
+lower-level form of Rust code that boils down the more complex features, making
+the rest of the compiler simpler. This is a crucial enabler for language changes
+like non-lexical lifetimes (discussed in the next section).</p>
+<h4><a href="#ide-integration" aria-hidden="true" class="anchor" id="ide-integration"></a>IDE integration</h4>
+<p>Top-notch IDE support can help to make Rust even more
+productive. Up until now, pioneering projects like <a href="https://github.com/phildawes/racer">Racer</a>,
+<a href="https://github.com/PistonDevelopers/VisualRust">Visual Rust</a>, and <a href="https://github.com/RustDT/RustDT">Rust DT</a> have been working largely
+without compiler support. <strong>We plan to extend the compiler to permit deeper
+integration with IDEs and other tools</strong>; the plan is to focus initially on two
+IDEs, and then grow from there.</p>
+<h3><a href="#zeroing-in-closing-gaps-in-our-key-features" aria-hidden="true" class="anchor" id="zeroing-in-closing-gaps-in-our-key-features"></a>Zeroing in: closing gaps in our key features</h3>
+<h4><a href="#specialization" aria-hidden="true" class="anchor" id="specialization"></a>Specialization</h4>
+<p>The idea of zero-cost abstractions breaks down into two
+separate goals, as identified by Stroustrup:</p>
+<ul>
+<li>What you don't use, you don't pay for.</li>
+<li>What you do use, you couldn't hand code any better.</li>
+</ul>
+<p>Rust 1.0 has essentially achieved the first goal, both in terms of language
+features and the standard library. But it doesn't quite manage to achieve the
+second goal. Take the following trait, for example:</p>
+<pre><code class="language-rust">pub trait Extend&lt;A&gt; {
+    fn extend&lt;T&gt;(&amp;mut self, iterable: T) where T: IntoIterator&lt;Item=A&gt;;
+}
+</code></pre>
+<p>The <code>Extend</code> trait provides a nice abstraction for inserting data from any kind of
+iterator into a collection. But with traits today, that also means that each
+collection can provide only one implementation that works for <em>all</em> iterator
+types, which requires actually calling <code>.next()</code> repeatedly. In some cases, you
+could hand code it better, e.g. by just calling <code>memcpy</code>.</p>
+<p>To close this gap, we've proposed <strong><a href="https://github.com/rust-lang/rfcs/pull/1210">specialization</a>, allowing
+you to provide multiple, overlapping trait implementations as long as one is
+clearly more specific than the other</strong>. Aside from giving Rust a more complete
+toolkit for zero-cost abstraction, specialization also improves its story for
+code reuse. See <a href="https://github.com/rust-lang/rfcs/pull/1210">the RFC</a> for more details.</p>
+<h4><a href="#borrow-checker-improvements" aria-hidden="true" class="anchor" id="borrow-checker-improvements"></a>Borrow checker improvements</h4>
+<p>The borrow checker is, in a way, the beating heart of Rust; it's the part of the
+compiler that lets us achieve memory safety without garbage collection, by
+catching use-after-free bugs and the like. But occasionally, the borrower
+checker also &quot;catches&quot; non-bugs, like the following pattern:</p>
+<pre><code class="language-rust">match map.find(&amp;key) {
+    Some(...) =&gt; { ... }
+    None =&gt; {
+        map.insert(key, new_value);
+    }
+}
+</code></pre>
+<p>Code like the above snippet is perfectly fine, but the borrow checker struggles
+with it today because the <code>map</code> variable is borrowed for the entire body of the
+<code>match</code>, preventing it from being mutated by <code>insert</code>. We plan to address this
+shortcoming soon by refactoring the borrow checker to view code in terms of
+finer-grained (&quot;non-lexical&quot;) regions -- a step made possible by the move to the
+MIR mentioned above.</p>
+<h4><a href="#plugins" aria-hidden="true" class="anchor" id="plugins"></a>Plugins</h4>
+<p>There are some really neat things you can do in Rust today -- if you're willing
+to use the Nightly channel. For example, the <a href="https://github.com/rust-lang/regex">regex crate</a> comes with
+macros that, at compile time, turn regular expressions directly into machine
+code to match them. Or take the <a href="https://github.com/sfackler/rust-postgres-macros">rust-postgres-macros crate</a>, which
+checks strings for SQL syntax validity at compile time. Crates like these make
+use of a highly-unstable compiler plugin system that currently exposes far too
+many compiler internals. <strong>We plan to propose a new plugin design that is more
+robust and provides built-in support for hygienic macro expansion as well</strong>.</p>
+<h3><a href="#branching-out-taking-rust-to-new-places" aria-hidden="true" class="anchor" id="branching-out-taking-rust-to-new-places"></a>Branching out: taking Rust to new places</h3>
+<h4><a href="#cross-compilation" aria-hidden="true" class="anchor" id="cross-compilation"></a>Cross-compilation</h4>
+<p>While cross-compiling with Rust is possible today, it involves a lot of manual
+configuration. <strong>We're shooting for push-button cross-compiles</strong>. The idea is
+that compiling Rust code for another target should be easy:</p>
+<ol>
+<li>Download a precompiled version of <code>libstd</code> for the target in question,
+if you don't already have it.</li>
+<li>Execute <code>cargo build --target=foo</code>.</li>
+<li>There is no step 3.</li>
+</ol>
+<h4><a href="#cargo-install" aria-hidden="true" class="anchor" id="cargo-install"></a>Cargo install</h4>
+<p>Cargo and <a href="https://crates.io">crates.io</a> is a really great tool for distributing
+libraries, but it lacks any means to install executables.  <a href="https://github.com/rust-lang/rfcs/pull/1200">RFC 1200</a> describes a
+simple addition to cargo, the <code>cargo install</code> command.  Much like the
+conventional <code>make install</code>, <strong><code>cargo install</code> will place an executable in your
+path so that you can run it</strong>. This can serve as a simple distribution channel,
+and is particularly useful for people writing tools that target Rust developers
+(who are likely to be familiar with running cargo).</p>
+<h4><a href="#tracing-hooks" aria-hidden="true" class="anchor" id="tracing-hooks"></a>Tracing hooks</h4>
+<p>One of the most promising ways of using Rust is by &quot;embedding&quot; Rust code into
+systems written in higher-level languages like <a href="http://blog.skylight.io/bending-the-curve-writing-safe-fast-native-gems-with-rust/">Ruby</a> or Python. This
+embedding is usually done by giving the Rust code a C API, and works reasonably
+well when the target sports a &quot;C friendly&quot; memory management scheme like
+reference counting or conservative GC.</p>
+<p>Integrating with an environment that uses a more advanced GC can be
+quite challenging. Perhaps the most prominent examples are JavaScript engines
+like V8 (used by <a href="https://nodejs.org/">node.js</a>) and SpiderMonkey (used by <a href="http://firefox.com/">Firefox</a> and
+<a href="https://github.com/servo/servo">Servo</a>). Integrating with those engines requires very careful coding to ensure
+that all objects are properly rooted; small mistakes can easily lead to
+crashes. These are precisely the kind of memory management problems that Rust is
+intended to eliminate.</p>
+<p><strong>To bring Rust to environments with advanced GCs, we plan to extend the
+compiler with the ability to generate &quot;trace hooks&quot;</strong>. These hooks can be used
+by a GC to sweep the stack and identify roots, making it possible to write code
+that integrates with advanced VMs smoothly and easily. Naturally, the design
+will respect Rust's &quot;pay for what you use&quot; policy, so that code which does not
+integrate with a GC is unaffected.</p>
+<h3><a href="#epilogue-rustcamp-2015-and-rusts-community-in-2016" aria-hidden="true" class="anchor" id="epilogue-rustcamp-2015-and-rusts-community-in-2016"></a>Epilogue: RustCamp 2015, and Rust's community in 2016</h3>
+<p>We recently held the first-ever Rust conference, <a href="http://rustcamp.com/">RustCamp</a>
+2015, which sold out with 160 attendees. It was amazing to see so much
+of the Rust community in person, and to see the vibe of our online
+spaces translate into a friendly and approachable in-person event. The
+day opened with a keynote from Nicholas Matsakis and Aaron Turon
+laying out the core team's view of where we are and where we're
+headed. The
+<a href="http://rustcamp.com/schedule.html">slides are available online</a>
+(along with several other talks), and the above serves as the missing
+soundtrack. <strong>Update</strong>: now you can see
+<a href="http://confreaks.tv/events/rustcamp2015">the talks</a> as well!</p>
+<p>There was a definite theme of the day: Rust's greatest potential is to unlock a
+new generation of systems programmers. And that's not just because of the
+language; it's just as much because of a community culture that says &quot;Don't know
+the difference between the stack and the heap? Don't worry, Rust is a great way
+to learn about it, and I'd love to show you how.&quot;</p>
+<p>The technical work we outlined above is important for our vision in 2016, but so
+is the work of those on our moderation and community teams, and all of those who
+tirelessly -- enthusiastically -- welcome people coming from all kinds of
+backgrounds into the Rust community. So our greatest wish for the next year of
+Rust is that, as its community grows, it continues to retain the welcoming
+spirit that it has today.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

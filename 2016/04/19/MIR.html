@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Introducing MIR | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Introducing MIR | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Introducing MIR | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Introducing MIR" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Introducing MIR</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 19, 2016 &middot; Niko Matsakis
+    
+    </div>
+
+    <div class="post">
+      <p>We are in the final stages of a grand transformation on the Rust
+compiler internals. Over the past year or so, we have been steadily
+working on a plan to change our internal compiler pipeline, as shown
+here:</p>
+<p><img src="/images/2016-04-MIR/flow.svg" alt="Compiler Flowchart" /></p>
+<p>That is, we are introducing a new intermediate representation (IR) of
+your program that we call <strong>MIR</strong>: MIR stands for <em>mid-level</em> IR, because
+the MIR comes between the existing HIR (&quot;high-level IR&quot;, roughly an
+<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">abstract syntax tree</a>) and <a href="http://llvm.org/">LLVM</a> (the &quot;low-level&quot;
+IR). Previously, the &quot;translation&quot; phase in the compiler would convert
+from full-blown Rust into machine-code-like LLVM in one rather large
+step. But now, it will do its work in two phases, with a vastly
+simplified version of Rust -- MIR -- standing in the middle.</p>
+<p>If you're not a compiler enthusiast, this all might seem arcane and unlikely to
+affect you directly. But in reality, <strong>MIR is the key to ticking off a number of
+our highest priorities</strong> for Rust:</p>
+<ul>
+<li>
+<p><strong>Faster compilation time</strong>. We are working to make Rust's compilation
+<em>incremental</em>, so that when you <em>re</em>-compile code, the compiler recomputes only
+what it has to. MIR has been designed from the start with this use-case in mind,
+so it's much easier for us to save and reload, even if other parts of the program
+have changed in the meantime.</p>
+<p>MIR also provides a foundation for more efficient data structures and removal
+of redundant work in the compiler, both of which should speed up compilation
+across the board.</p>
+</li>
+<li>
+<p><strong>Faster execution time</strong>. You may have noticed that in the new compiler
+pipeline, <em>optimization</em> appears twice. That's no accident: previously, the
+compiler relied solely on LLVM to perform optimizations, but with MIR, we can
+do some <em>Rust-specific</em> optimizations before ever hitting LLVM -- or, for that
+matter, before monomorphizing code. Rust's rich type system should provide
+fertile ground for going beyond LLVM's optimizations.</p>
+<p>In addition, MIR will uncork some longstanding performance improvements
+to the code Rust generates, like <a href="https://github.com/rust-lang/rfcs/blob/master/text/0320-nonzeroing-dynamic-drop.md">&quot;non-zeroing&quot; drop</a>.</p>
+</li>
+<li>
+<p><strong>More precise type checking</strong>. Today's Rust compiler imposes some
+artificial restrictions on <em>borrowing</em>, restrictions which largely
+stem from the way the compiler currently represents programs. MIR
+will enable <a href="https://github.com/rust-lang/rfcs/issues/811">much more flexible borrowing</a>, which will in turn
+improve Rust's ergonomics and learning curve.</p>
+</li>
+</ul>
+<p>Beyond these banner user-facing improvements, <strong>MIR also has substantial
+engineering benefits for the compiler</strong>:</p>
+<ul>
+<li>
+<p><strong>Eliminating redundancy.</strong> Currently, because we write all of our passes in
+terms of the full Rust language, there is quite a lot of duplication. For
+example, both the safety analyses and the backend which produces LLVM IR must
+agree about how to translate drops, or the precise order in which <code>match</code>
+expression arms will be tested and executed (which can get quite
+complex). With MIR, all of that logic is centralized in MIR construction, and
+the later passes can just rely on that.</p>
+</li>
+<li>
+<p><strong>Raising ambitions.</strong> In addition to being more <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>, working
+with MIR is just plain <em>easier</em>, because it contains a much more
+primitive set of operations than ordinary Rust. This simplification
+enables us to do a lot of things that were forbodingly complex
+before. We'll look at one such case in this post -- non-zeroing
+drop -- but as we'll see at the end, there are already many others
+in the pipeline.</p>
+</li>
+</ul>
+<p>Needless to say, we're excited, and the Rust community has stepped up
+in a big way to make MIR a reality. The compiler can bootstrap and run
+its test suite using MIR, and these tests have to pass on every new
+commit. Once we're able to run <a href="https://github.com/brson/taskcluster-crater">Crater</a> with MIR enabled and
+see no regressions across the entire <a href="http://crates.io/">crates.io</a>
+ecosystem, we'll turn it on by default (or, you'll forgive a terrible
+(wonderful) pun, <a href="https://en.wikipedia.org/wiki/Mir">launch MIR into orbit</a>).</p>
+<p>This blog post begins with an overview of MIR's design, demonstrating
+some of the ways that MIR is able to abstract away the full details of
+the Rust language. Next, we look at how MIR will help with
+implementing <a href="https://github.com/rust-lang/rfcs/blob/master/text/0320-nonzeroing-dynamic-drop.md">non-zeroing drops</a>, a long-desired
+optimization. If after this post you find you are hungry for more,
+have a look at the <a href="https://github.com/rust-lang/rfcs/blob/master/text/1211-mir.md">RFC that introduced MIR</a>, or jump right
+into <a href="https://github.com/rust-lang/rust/blob/f7ec6873ccfbf7dcdbd1908c0857c866b3e7087a/src/librustc/mir/repr.rs">the code</a>. (Compiler buffs may be particularly interested in
+the <a href="https://github.com/rust-lang/rfcs/blob/master/text/1211-mir.md#alternatives">alternatives section</a>, which discusses certain design
+choices in detail, such as why MIR does not currently use SSA.)</p>
+<!-- more -->
+<h3><a href="#reducing-rust-to-a-simple-core" aria-hidden="true" class="anchor" id="reducing-rust-to-a-simple-core"></a>Reducing Rust to a simple core</h3>
+<p>MIR reduces Rust down to a simple core, removing almost all of the
+Rust syntax that you use every day, such as <code>for</code> loops, <code>match</code>
+expressions, and even method calls. Instead, those constructs are
+translated to a small set of primitives. This does not mean that MIR
+is a <em>subset</em> of Rust. As we'll see, many of these primitives
+operations are not available in real Rust.  This is because those
+primitives could be misused to write unsafe or undesirable programs.</p>
+<p>The simple core language that MIR supports is not something you would
+want to program in. In fact, it makes things almost painfully
+explicit. But it's great if you want to write a type-checker or
+generate assembly code, as you now only have to handle the core
+operations that remain after MIR translation.</p>
+<p>To see what I mean, let's start by simplifying a fragment of Rust code.
+At first, we'll just break the Rust down into &quot;simpler Rust&quot;, but
+eventually we'll step away from Rust altogether and into MIR code.</p>
+<p>Our Rust example starts out as this simple <code>for</code> loop, which iterates
+over all the elements in a vector and processes them one by one:</p>
+<pre><code class="language-rust">for elem in vec {
+    process(elem);
+}
+</code></pre>
+<p>Rust itself offers three kinds of loops: <code>for</code> loops, like this one;
+<code>while</code> and <code>while let</code> loops, that iterate until some condition is
+met; and finally the simple <code>loop</code>, which just iterates until you
+break out of it. Each of these kinds of loops encapsulates a
+particular pattern, so they are quite useful when writing code. But
+for MIR, we'd like to reduce all of these into one core concept.</p>
+<p>A <code>for</code> loop in Rust works by converting a value into an iterator and
+then repeatedly calling <code>next</code> on that iterator. That means that we
+can rewrite the <code>for</code> loop we saw before into a <code>while let</code> loop
+that looks like this:</p>
+<pre><code class="language-rust">let mut iterator = vec.into_iter();
+while let Some(elem) = iterator.next() {
+    process(elem);
+}
+</code></pre>
+<p>By applying this rewriting, we can remove all <code>for</code> loops, but that
+still leaves multiple kinds of loops. So next we can imagine rewrite
+all <code>while let</code> loops into a simple <code>loop</code> combined with a <code>match</code>:</p>
+<pre><code class="language-rust">let mut iterator = vec.into_iter();
+loop {
+    match iterator.next() {
+        Some(elem) =&gt; process(elem),
+        None =&gt; break,
+    }
+}
+</code></pre>
+<p>We've already eliminated two constructs (<code>for</code> loops and <code>while</code>
+loops), but we can go further still. Let's turn from loops for a bit
+to look at the method calls that we see. In Rust, method calls like
+<code>vec.into_iter()</code> and <code>iterator.next()</code> are also a kind of
+<a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a>. These particular methods are defined in traits,
+which are basically pre-defined interfaces.  For example, <code>into_iter</code>
+is a method in the <code>IntoIterator</code> trait.  Types which can be converted
+into iterators implement that trait and define how the <code>into_iter</code>
+method works for them. Similarly, <code>next</code> is defined in the <code>Iterator</code>
+trait. When you write a method call like <code>iterator.next()</code>, the Rust
+compiler automatically figures out which trait the method belongs to
+based on the type of the <code>iterator</code> and the set of traits in
+scope. But if we prefer to be more explicit, we could instead invoke
+the methods in the trait directly, using function call syntax:</p>
+<pre><code class="language-rust">// Rather than `vec.into_iter()`, we are calling
+// the function `IntoIterator::into_iter`. This is
+// exactly equivalent, just more explicit.
+let mut iterator = IntoIterator::into_iter(vec);
+loop {
+    // Similarly, `iterator.next()` can be rewritten
+    // to make clear which trait the `next` method
+    // comes from. We see here that the `.` notation
+    // was also adding an implicit mutable reference,
+    // which is now made explicit.
+    match Iterator::next(&amp;mut iterator) {
+        Some(elem) =&gt; process(elem),
+        None =&gt; break,
+    }
+}
+</code></pre>
+<p>At this point, we've managed to reduce the set of language features
+for our little fragment quite a bit: we now only use <code>loop</code> loops and
+we don't use method calls. But we could reduce the set of concepts
+further if were moved away from <code>loop</code> and <code>break</code> and towards
+something more fundamental: <code>goto</code>. Using <code>goto</code> we could transform
+the previous code example into something like this:</p>
+<pre><code class="language-rust">    let mut iterator = IntoIterator::into_iter(vec);
+
+loop:
+    match Iterator::next(&amp;mut iterator) {
+        Some(elem) =&gt; { process(elem); goto loop; }
+        None =&gt; { goto break; }
+    }
+
+break:
+    ...
+</code></pre>
+<p>We've gotten pretty far in breaking our example down into simpler
+constructs. We're not quite done yet, but before we go further it's
+worth stepping back a second to make a few observations:</p>
+<p><strong>Some MIR primitives are more powerful than the structured construct
+they replace.</strong> Introducing the <code>goto</code> keyword is a big simplification
+in one sense: it unifies and replaces a large number of control-flow
+keywords. <code>goto</code> completely replaces <code>loop</code>, <code>break</code>, <code>continue</code>, but
+it also allows us to simplify <code>if</code> and <code>match</code> as well (we'll see more
+on <code>match</code> in particular in a bit). However, this simplification is
+only possible because <code>goto</code> is a <em>more general</em> construct than
+<code>loop</code>, and it's something we would not want to introduce into the
+language proper, because we don't want people to be able to write
+spaghetti-like-code with complex control-flow that is hard to read and
+follow later. But it's fine to have such a construct in MIR, because
+we know that it will only be used in particular ways, such as to
+express a <code>loop</code> or a <code>break</code>.</p>
+<p><strong>MIR construction is type-driven.</strong> We saw that all method calls like
+<code>iterator.next()</code> can be desugared into fully qualified function calls
+like <code>Iterator::next(&amp;mut iterator)</code>. However, doing this rewrite is
+only possible with full type information, since we must (for example)
+know the type of <code>iterator</code> to determine which trait the <code>next</code> method
+comes from. In general, constructing MIR is only possible after
+type-checking is done.</p>
+<p><strong>MIR makes all types explicit.</strong> Since we are constructing MIR after
+the main type-checking is done, MIR can include full type
+information. This is useful for analyses like the borrow checker,
+which require the types of local variables and so forth to operate,
+but also means we can run the type-checker periodically as a kind of
+sanity check to ensure that the MIR is well-formed.</p>
+<h3><a href="#control-flow-graphs" aria-hidden="true" class="anchor" id="control-flow-graphs"></a>Control-flow graphs</h3>
+<p>In the previous section, I presented a gradual &quot;deconstruction&quot; of a
+Rust program into something resembling MIR, but we stayed in textual
+form. Internally to the compiler, though, we never &quot;parse&quot; MIR or have
+it in textual form. Instead, we represent MIR as a
+<a href="https://github.com/rust-lang/rust/blob/f7ec6873ccfbf7dcdbd1908c0857c866b3e7087a/src/librustc/mir/repr.rs">set of data structures</a> encoding a
+<a href="https://en.wikipedia.org/wiki/Control_flow_graph">control-flow graph (CFG)</a>. If you've ever used a flow-chart,
+then the concept of a control-flow graph will be pretty familiar to
+you. It's a representation of your program that exposes the underlying
+control flow in a very clear way.</p>
+<p>A control-flow graph is structured as a set of basic blocks connected
+by edges. Each basic block contains a sequence of statements and ends
+in a <em>terminator</em>, which defines how the blocks are connected to one
+another. When using a control-flow graph, a loop simply appears as a
+cycle in the graph, and the <code>break</code> keyword translates into a path out
+of that cycle.</p>
+<p>Here is the running example from the previous section, expressed as a
+control-flow graph:</p>
+<p><img src="/images/2016-04-MIR/cfg.svg" alt="Control-flow-graph" /></p>
+<p>Building a control-flow graph is typically a first step for any kind
+of flow-sensitive analysis. It's also a natural match for LLVM IR,
+which is also structured into control-flow graph form. The fact that
+MIR and LLVM correspond to one another fairly closely makes
+translation quite straight-forward. It also eliminates a vector for
+bugs: in today's compiler, the control-flow graph used for analyses is
+not necessarily the same as the one which results from LLVM
+construction, which can lead to incorrect programs being accepted.</p>
+<h3><a href="#simplifying-match-expressions" aria-hidden="true" class="anchor" id="simplifying-match-expressions"></a>Simplifying match expressions</h3>
+<p>The example in the previous section showed how we can reduce all of
+Rust's loops into, effectively, gotos in the MIR and how we can remove
+methods calls in favor of calls to explicit calls to trait
+functions. But it glossed over one detail: <strong>match expressions</strong>.</p>
+<p>One of the big goals in MIR was to simplify match expressions into a
+very small core of operations. We do this by introducing two
+constructs that the main language does not include: <em>switches</em> and
+<em>variant downcasts</em>. Like <code>goto</code>, these are things that we would not
+want in the base language, because they can be misused to write bad
+code; but they are perfectly fine in MIR.</p>
+<p>It's probably easiest to explain match handling by example. Let's
+consider the <code>match</code> expression we saw in the previous section:</p>
+<pre><code class="language-rust">match Iterator::next(&amp;mut iterator) {
+    Some(elem) =&gt; process(elem),
+    None =&gt; break,
+}
+</code></pre>
+<p>Here, the result of calling <code>next</code> is of type <code>Option&lt;T&gt;</code>, where <code>T</code>
+is the type of the elements. The <code>match</code> expression is thus doing two
+things: first, it is determining whether this <code>Option</code> was a value
+with the <code>Some</code> or <code>None</code> variant. Then, in the case of the <code>Some</code>
+variant, it is extracting the value <code>elem</code> out.</p>
+<p>In normal Rust, these two operations are intentionally coupled,
+because we don't want you to read the data from an <code>Option</code> unless it
+has the <code>Some</code> variant (to do otherwise would be effectively a C
+union, where reads are not checked for correctness).</p>
+<p>In MIR, though, we separate the checking of the variant from the
+extracting of the data. I'm going to give the equivalent of MIR here
+first in a kind of pseudo-code, since there is no actual Rust syntax
+for these operations:</p>
+<pre><code class="language-rust">loop:
+    // Put the value we are matching on into a temporary variable.
+    let tmp = Iterator::next(&amp;mut iterator);
+    
+    // Next, we &quot;switch&quot; on the value to determine which it has.
+    switch tmp {
+        Some =&gt; {
+            // If this is a Some, we can extract the element out
+            // by &quot;downcasting&quot;. This effectively asserts that
+            // the value `tmp` is of the Some variant.
+            let elem = (tmp as Some).0;
+    
+            // The user's original code:
+            process(elem);
+            
+            goto loop;
+        }
+        None =&gt; {
+            goto break;
+        }
+    }
+    
+break:
+    ....
+</code></pre>
+<p>Of course, the actual MIR is based on a control-flow-graph, so it
+would look something like this:</p>
+<p><img src="/images/2016-04-MIR/loop-break.svg" alt="Loop-break control-flow graph" /></p>
+<h3><a href="#explicit-drops-and-panics" aria-hidden="true" class="anchor" id="explicit-drops-and-panics"></a>Explicit drops and panics</h3>
+<p>So now we've seen how we can remove loops, method calls, and matches
+out of the MIR, and replace them with simpler equivalents. But there
+is still one key area that we can simplify. Interestingly, it's
+something that happens almost invisibly in the code today: running
+destructors and cleanup in the case of a panic.</p>
+<p>In the example control-flow-graph we saw before, we were assuming that
+all of the code would execute successfully. But in reality, we can't
+know that. For example, any of the function calls that we see could
+panic, which would trigger the start of unwinding. As we unwind the
+stack, we would have to run destructors for any values we
+find. Figuring out precisely which local variables should be freed at
+each point of panic is actually somewhat complex, so we would like to
+make it explicit in the MIR: this way, MIR construction has to figure
+it out, but later passes can just rely on the MIR.</p>
+<p>The way we do this is two-fold. First, we make <em>drops</em> explicit in the
+MIR. Drop is the term we use for running the destructor on a value. In
+MIR, whenever control-flow passes a point where a value should be
+dropped, we add in a special <code>drop(...)</code> operation. Second, we add
+explicit edges in the control-flow graph to represent potential
+panics, and the cleanup that we have to do.</p>
+<p>Let's look at the explicit drops first. If you recall, we started with
+an example that was just a for loop:</p>
+<pre><code class="language-rust">for elem in vec {
+    process(elem);
+}
+</code></pre>
+<p>We then transformed this for loop to explicitly invoke
+<code>IntoIterator::into_iter(vec)</code>, yielding a value <code>iterator</code>, from
+which we extract the various elements. Well, this value <code>iterator</code>
+actually has a destructor, and it will need to be freed (in this case,
+its job is to free the memory that was used by the vector <code>vec</code>; this
+memory is no longer needed, since we've finished iterating over the
+vector). Using the <code>drop</code> operation, we can adjust our MIR
+control-flow-graph to show explicitly where the <code>iterator</code> value gets
+freed. Take a look at the new graph, and in particular what happens
+when a <code>None</code> variant is found:</p>
+<p><img src="/images/2016-04-MIR/drop.svg" alt="Drop control-flow graph" /></p>
+<p>Here we see that, when the loop exits normally, we will drop the
+iterator once it has finished. But what about if a panic occurs? Any
+of the function calls we see here could panic, after all. To account
+for that, we introduce panic edges into the graph:</p>
+<p><img src="/images/2016-04-MIR/drop-unwind.svg" alt="Panic control-flow graph" /></p>
+<p>Here we have introduced <code>panic</code> edges onto each of the function
+calls. By looking at these edges, you can see that if the call to
+<code>next</code> or <code>process</code> should panic, then we will drop the variable
+<code>iterator</code>; but if the call to <code>into_iter</code> panics, the <code>iterator</code>
+hasn't been initialized yet, so it should not be dropped.</p>
+<p>One interesting wrinkle: we recently approved <a href="https://github.com/rust-lang/rfcs/blob/master/text/1513-less-unwinding.md">RFC 1513</a>,
+which allows an application to specify that panics should be treated
+as calls to <code>abort</code>, rather than triggering unwinding. If the program
+is being compiled with &quot;panic as abort&quot; semantics, then this too would
+be reflected in the MIR, as the panic edges and handling would simply
+be absent from the graph.</p>
+<h3><a href="#viewing-mir-on-play" aria-hidden="true" class="anchor" id="viewing-mir-on-play"></a>Viewing MIR on play</h3>
+<p>At this point, we've reduced our example into something fairly close
+to what MIR actually looks like. If you'd like to see for yourself,
+you can <a href="http://is.gd/MOfDfg">view the MIR for our example</a> on
+<a href="https://play.rust-lang.org/">play.rust-lang.org</a>. Just
+<a href="http://is.gd/MOfDfg">follow this link</a> and then press the &quot;MIR&quot;
+button along the top. You'll wind up seeing the MIR for several
+functions, so you have to search through to find the start of the
+<code>example</code> fn. (I won't reproduce the output here, as it is fairly
+lengthy.) In the compiler itself, you can also enable graphviz output.</p>
+<h3><a href="#drops-and-stack-flags" aria-hidden="true" class="anchor" id="drops-and-stack-flags"></a>Drops and stack flags</h3>
+<p>By now I think you have a feeling for how MIR represents a simplified
+Rust. Let's look at one example of where MIR will allow us to
+implement a long-awaited improvement to Rust: the shift to non-zeroing
+drop. This is a change to how we detect when destructors must execute,
+particularly when values are only <em>sometimes</em> moved. This move was
+proposed (and approved) in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0320-nonzeroing-dynamic-drop.md">RFC 320</a>, but it has yet to be
+implemented. This is primarily because doing it on the pre-MIR
+compiler was architecturally challenging.</p>
+<p>To better understand what the feature is, consider this function
+<code>send_if</code>, which conditionally sends a vector to another thread:</p>
+<pre><code class="language-rust">fn send_if(data: Vec&lt;Data&gt;) {
+    // If `some_condition` returns *true*, then ownership of `data`
+    // moves into the `send_to_other_thread` function, and hence
+    // we should not free it (the other thread will free it).
+    if some_condition(&amp;data) {
+        send_to_other_thread(data);
+    }
+
+    post_send();
+
+    // If `some_condition` returned *false*, the ownership of `data`
+    // remains with `send_if`, which means that the `data` vector
+    // should be freed here, when we return.
+}
+</code></pre>
+<p>The key point, as indicated in the comments, is that we can't know
+statically whether we ought to free <code>data</code> or not. It depends on
+whether we entered the <code>if</code> or not.</p>
+<p>To handle this scenario today, the compiler uses <em>zeroing</em>. Or, more
+accurately, <em>overwriting</em>. What this means is that, if ownership of
+<code>data</code> is moved, we will overwrite the stack slot for <code>data</code> with a
+specific, distinctive bit pattern that is not a valid pointer (we used
+to use zeroes, so we usually call this zeroing, but we've since
+shifted to something different). Then, when it's time to free <code>data</code>,
+we check whether it was overwritten. (As an aside, this is roughly the
+same thing that the equivalent C++ code would do.)</p>
+<p>But we'd like to do better than that. What we would <em>like</em> to do is to
+use boolean flags on the stack that tell us what needs to be freed.
+So that might look something like this:</p>
+<pre><code class="language-rust">fn send_if(data: Vec&lt;Data&gt;) {
+    let mut data_is_owned = true;
+
+    if some_condition(&amp;data) {
+        send_to_other_thread(data);
+        data_is_owned = false;
+    }
+
+    post_send();
+
+    // Free `data`, but only if we still own it:
+    if data_is_owned {
+        mem::drop(data);
+    }
+}
+</code></pre>
+<p>Of course, you couldn't write code like this in Rust. You're not
+allowed to access the variable <code>data</code> after the <code>if</code>, since it might
+have been moved. (This is yet another example of where we can do
+things in MIR that we would not want to allow in full Rust.)</p>
+<p>Using boolean stack flags like this has a lot of advantages. For one,
+it's more efficient: instead of overwriting the entire vector, we only
+have to set the one flag. But also, it's easier to optimize: imagine
+that, through inlining or some other means, the compiler was able to
+determine that <code>some_condition</code> would always be true. In that case,
+standard constant propagation techniques would tell us that
+<code>data_is_owned</code> is always false, and hence we can just optimize away
+the entire call to <code>mem::drop</code>, resulting in tighter code. See
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/0320-nonzeroing-dynamic-drop.md">RFC 320</a> for more details on that.</p>
+<p>However, implementing this optimization properly on the current
+compiler architecture is quite difficult. With MIR, it becomes
+relatively straightforward. The MIR control-flow-graph tells us
+explicitly where values will be dropped and when. When MIR is first
+generated, we assume that dropping moved data has no effect -- roughly
+like the current overwriting semantics. So this means that the MIR for
+<code>send_if</code> might look like this (for simplicity, I'll ignore unwinding
+edges).</p>
+<p><img src="/images/2016-04-MIR/nzd.svg" alt="Non-zeroing drop example" /></p>
+<p>We can then transform this graph by identifying each place where
+<code>data</code> is moved or dropped and checking whether any of those places
+can reach one another. In this case, the <code>send_to_other_thread(data)</code> block can
+reach <code>drop(data)</code>. This indicates that we will need to introduce a
+flag, which can be done rather mechanically:</p>
+<p><img src="/images/2016-04-MIR/nzd-flags.svg" alt="Non-zeroing drop with flags" /></p>
+<p>Finally, we can apply standard compiler techniques to optimize this
+flag (but in this case, the flag is needed, and so the final result
+would be the same).</p>
+<p>Just to drive home why MIR is useful, let's consider a variation on
+the <code>send_if</code> function called <code>send_if2</code>. This variation checks some
+condition and, if it is met, sends the data to another thread for
+processing. Otherwise, it processes it locally:</p>
+<pre><code class="language-rust">fn send_if2(data: Vec&lt;Data&gt;) {
+    if some_condition(&amp;data) {
+        send_to_other_thread(data);
+        return;
+    }
+
+    process(&amp;data);
+}
+</code></pre>
+<p>This would generate MIR like:</p>
+<p><img src="/images/2016-04-MIR/send_if2.svg" alt="Control-flow graph for send_if2" /></p>
+<p>As before, we still generate the drops of <code>data</code> in all cases, at
+least to start. Since there are still moves that can later reach a
+drop, we could now introduce a stack flag variable, just as before:</p>
+<p><img src="/images/2016-04-MIR/send_if2-flags.svg" alt="send_if2 with flags" /></p>
+<p>But in this case, if we apply constant propagation, we can see that at
+each point where we test <code>data_is_owned</code>, we know statically whether
+it is true or false, which would allow us to remove the stack flag and
+optimize the graph above, yielding this result:</p>
+<p><img src="/images/2016-04-MIR/send_if2-opt.svg" alt="Optimized send_if2" /></p>
+<h3><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h3>
+<p>I expect the use of MIR to be quite transformative in terms of what
+the compiler can accomplish. By reducing the language to a core set of
+primitives, MIR opens the door to a number of language improvements.
+We looked at drop flags in this post. Another example is improving
+Rust's lifetime system to
+<a href="https://github.com/rust-lang/rfcs/issues/811">leverage the control-flow-graph for better precision</a>. But I
+think there will be many applications that we haven't foreseen. In
+fact, one such example has already arisen: Scott Olson has been making
+great strides developing a MIR interpreter <a href="https://github.com/tsion/miri">miri</a>, and the
+techniques it is exploring may well form the basis for a more powerful
+constant evaluator in the compiler itself.</p>
+<p>The transition to MIR in the compiler is not yet complete, but it's
+getting quite close. Special thanks go out to Simonas Kazlauskas
+(<a href="https://github.com/nagisa/">nagisa</a>) and Eduard-Mihai Burtescu (<a href="https://github.com/eddyb/">eddyb</a>), who have both had
+a particularly large impact on pushing MIR towards the finish
+line. Our initial goal is to switch our LLVM generation to operate
+exclusively from the MIR. Work is also proceeding on porting the
+borrow checker. After that, I expect we will port a number of other
+pieces on the compiler that are currently using the HIR. If you'd be
+interested in contributing, look for
+<a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AA-mir">issues tagged with <code>A-mir</code></a> or ask around in the
+<a href="https://www.rust-lang.org/community.html"><code>#rustc</code> channel on IRC</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

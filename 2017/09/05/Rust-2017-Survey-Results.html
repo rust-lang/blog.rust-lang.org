@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust 2017 Survey Results | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust 2017 Survey Results | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust 2017 Survey Results | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust 2017 Survey Results" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust 2017 Survey Results</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 5, 2017 &middot; Jonathan Turner
+    
+    </div>
+
+    <div class="post">
+      <p>It's that time of the year, where we take a good look at how things are going by asking the community at large -- both Rust users and non-users.  And wow, did you respond!</p>
+<p>This year we had <strong>5,368 responses</strong>.  <em>That's over 2,000 more responses than we had last year</em>!</p>
+<p>The scale of the feedback was both inspiring and humbling, and we've worked hard to read through all of your comments and suggestions.  There were so many helpful ideas and experiences that people shared, and we truly do appreciate it.  Without further ado, let's take a look.</p>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/do_you_use_rust.png" alt="Chart: 66.9% Rust users, 9.9% stopped using, 23.2% never used" /></p>
+<p>Just as we saw last year, 2/3rds of responses are from Rust users and the remainder from non-users. This year, we separated out the &quot;don't use Rust&quot; to capture those who used Rust and stopped from those who never used Rust. It's inspiring to see so many developers wanting to help us make Rust better (even if they don't use it!) so that it can reach even more people.</p>
+<p>We'll talk more about Rust non-users later in this report, but first let's look at the responses from Rust users.</p>
+<h1><a href="#using-rust" aria-hidden="true" class="anchor" id="using-rust"></a>Using Rust</h1>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/how_long_using_rust.png" alt="Chart: 0.5% less than a day, 4.2% less than a week, 13.1% less than a month, 39.7% less than a year, 42.5% over a year" title="0.5% less than a day, 4.2% less than a week, 13.1% less than a month, 39.7% less than a year, 42.5% over a year" />
+<em>(hover for more info)</em></p>
+<p>This year, we're seeing a growing amount of experienced users sticking with Rust, with the &quot;more than a year&quot; users growing to over 42% (up from 30% from last year).  The beginners are also an impressively large set, with the &quot;less than a month&quot; crowd at just about 18%, meaning we're currently attracting nearly a 1/5th of our user base size, even as it grows larger, every month.</p>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/size_of_rust_projects.png" alt="Chart: 36.5% less 1000 lines, 46.3% 1000 to 10000 lines, 14.2% 10000 to 100000 lines, 2.1% over 100000, 0.9% don't know" title="36.5% less 1000 lines, 46.3% 1000 to 10000 lines, 14.2% 10000 to 100000 lines, 2.1% over 100000, 0.9% don't know" />
+<em>(hover for more info)</em></p>
+<p>People are working with ever-larger amounts of Rust, with medium- and large-scale lines of code totals both nearly doubling since last year as a percentage of the whole, now making up 16% of respondents (up from last year's 8.9%).  This shows a growing interest in using Rust in ever-larger projects, and a growing need for tools to support this growth.</p>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/how_often_use_rust.png" alt="Chart: 17.5% daily, 43.3% weekly, 24.4% monthly, 14.9% rarely" title="17.5% daily, 43.3% weekly, 24.4% monthly, 14.9% rarely" /></p>
+<p>Despite the rising amount of code developers are working with, we're seeing a small downtick in both daily and weekly users.  Daily users have fallen from 19% to 17.5%, and weekly users have fallen from 48.8% to 43.3%. This could be a natural transition in this stage of our growth, as a broader range of developers begin using Rust.</p>
+<h1><a href="#path-to-stability" aria-hidden="true" class="anchor" id="path-to-stability"></a>Path to Stability</h1>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/upgrade_stable.png" alt="Chart: 92.5% no, 7.5% yes" title="92.5% no, 7.5% yes" /></p>
+<p>In the last year, we made big strides in breakages caused by releases of the compiler.  Last year, 16.2% of respondents said that upgrading to a new stable Rust compiler broke their code.  This year, that number has <strong>fallen to 7.5% of respondents</strong>.  This is a huge improvement, and one we're proud of, though we'll continue working to push this down even further.</p>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/which_version.png" alt="Chart show strong support for nightly and current stable releases" /></p>
+<p>Developers have largely opted to move to nightly or a recent stable (with some on beta), showing that developers are eager to upgrade and do so quickly.  This simplifies the support structure a bit from last year, where developers were on a wider range of versions.</p>
+<p>Stable users now make up 77.9% of Rust users. Unfortunately, despite our efforts with procedural macros and helping move crates like Serde to stable, we still have work to do to promote people moving away from the nightly Rust compiler.  This year shows an increase in nightly users, now at 1,852 votes it represents 51.6% of respondents using nightly, up from 48.8% of last year.</p>
+<h1><a href="#how-we-use-rust" aria-hidden="true" class="anchor" id="how-we-use-rust"></a>How we use Rust</h1>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/rustup.png" alt="Chart: 90.2% rustup, 18.9% linux distros, 5% homebrew, 4.7% official .msi, 3.1% official tarball, 1.4% official mac pkg" title="90.2% rustup, 18.9% linux distros, 5% homebrew, 4.7% official .msi, 3.1% official tarball, 1.4% official mac pkg" />
+<em>(hover for more info)</em></p>
+<p>One of the big success stories with Rust tooling was rustup, the Rust toolchain installer.  Last year, we saw a wide diversity in ways people were installing Rust.  This year, many of these have moved to using rustup as their main way of installing Rust, totalling now 3,205 of the responses, which moves it from last year's 52.8% to <strong>90.2%</strong>.</p>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/platforms_on.png" alt="Chart: 80.9% Linux, 35.5% macOS, 31.5% Windows, 3.2% BSD-variant" /></p>
+<p>Linux still features prominently as one of the main platforms Rust developers choose.  Of note, we also saw a rise in the use of Windows as a developer platform at 1,130 of the 3,588 total respondents, putting it at <strong>31.5% of respondents</strong>, up from 27.6% of last year.</p>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/platforms_targetted.png" alt="Chart: 91.5% Linux, 46.7% Windows, 38.2% macOS, 16.8% embedded, 13.2% WebAssembly and asm.js, 9.9% Android, 8.9% BSD-variant, 5.3% Apple iOS" /></p>
+<p>Next, we asked what platforms people were targeting with their Rust projects.  While we see a similar representation of desktop OSes here, we also see a growing range of other targets.  Android and iOS are at healthy 9.9% and 5.3% respectively, both almost <strong>10x larger</strong> than last year's percentages.  Embedded also has had substantial growth since last year's single-digit percentage.  As a whole, cross-compilation has grown considerably since this time last year.</p>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/editors.png" alt="Chart: 45.8% vim, 33.8% vscode, 16.1% intellij, 15.7% atom, 15.4% emacs, 12.2% sublime, 1.5% eclipse, 1.5% visual studio" /></p>
+<p>Among editors, vim remains king, though we see healthy growth in VSCode adoption at 34.1% (up from last year's 3.8%).  This growth no doubt has been helped by VSCode being one of the first platforms to get support for the <a href="https://github.com/rust-lang-nursery/rls">Rust Language Server</a>.</p>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/use_rust_at_work.png" alt="Chart: 4.4% full-time, 16.6% part-time, 2.9% no but company uses Rust, 57.6% no, 2.4% not sure, 16.1% not applicable" title="4.4% full-time, 16.6% part-time, 2.9% no but company uses Rust, 57.6% no, 2.4% not sure, 16.1% not applicable" />
+<em>(hover for more info)</em></p>
+<p>Rust in the workplace has also continued to grow.  This year's <strong>4.4% full-time</strong> and <strong>16.6% part-time</strong> Rust workers show a tick up from last year's 3.7% full-time and 16.1% part-time.</p>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/part_time.png" alt="Two charts part-time: 2016: 29.6% less than 1000 lines, 55.3% 1000 to 10000 lines, 14.5% 10000 to 100000 lines, 0.6% 100000 lines. 2017: 18.9% less than 1000 lines, 56% 1000 to 10000 lines, 23.1% 10000 to 100000 lines, 2% more than 100000 lines" /></p>
+<p>Users who use Rust <strong>part-time</strong> in their companies showed a growth in larger projects since last year, with the medium- and large-scale projects taking up more percentage of total projects this time around.</p>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/full_time.png" alt="Two charts full-time: 2016: 4.4% less than 1000 lines, 42.6% 1000 to 10000 lines, 39.7% 10000 to 100000 lines, 13.2% more than 100000 lines. 2017: 1.9% less than 1000 lines, 27.9% 1000 to 10000 lines, 52.6% 10000 to 100000 lines, 17.5% more than 100000 lines" /></p>
+<p>Likewise, <strong>full-time</strong> Rust commercial users saw medium- and large-scale projects grow to taking a larger part of the pie, with projects over 100,000 lines of code making up almost 18% of the all full-time commercial respondents, and a large shift in the 10,000-100,000 lines range from 39.7% up to <strong>52.6%</strong>.</p>
+<h1><a href="#feeling-welcome" aria-hidden="true" class="anchor" id="feeling-welcome"></a>Feeling Welcome</h1>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/feel_welcome.png" alt="chart: 75.1% feel welcome, 1.3% don't feel welcome, 23.6% don't know" title="75.1% feel welcome, 1.3% don't feel welcome, 23.6% don't know" />
+<em>(hover for more info)</em></p>
+<p>An important piece of the Rust community is to be one that is welcoming to new users, whether they are current users or potential users in the future.  We're pleased to see that over 3/4th of all respondents said they feel welcome in the Rust community, with 23.6% not sure.</p>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/diversity.png" alt="chart showing 81.4% not underrepresented, and a variety of underrepresented, with no category above 5%" /></p>
+<p>The demographics of respondents stayed about the same year over year.  Diversity and inclusiveness continue to be vital goals for the Rust project at all levels. The <a href="https://github.com/rust-community/rustbridge/">Rust Bridge</a> initiative aims for diversity at the entry level.  The <a href="https://blog.rust-lang.org/2017/06/27/Increasing-Rusts-Reach.html">Rust Reach</a> project, launched this year, brings in a wide range of expertise from people underrepresented in the Rust world, and pairs them with Rust team members to make Rust more accessible to a wider audience.</p>
+<h1><a href="#stopped-using-rust" aria-hidden="true" class="anchor" id="stopped-using-rust"></a>Stopped using Rust</h1>
+<p>New this year, we separated out the people who had stopped using Rust from those who had never used Rust to better understand why they stopped.  Let's take a look first at when they stopped.</p>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/stopped_using_rust.png" alt="chart: 3.2% less than a day, 18.5% less than a week, 43.1% less than a month, 30.2% less than a year, 4.9% more than a year" title="3.2% less than a day, 18.5% less than a week, 43.1% less than a month, 30.2% less than a year, 4.9% more than a year" />
+<em>(hover for more info)</em></p>
+<p>The first surprise we had here was how long people gave Rust a try before they stopped.  Our initial hunch was that people would give up using Rust in the first day, or possibly the first week, if it didn't suit them or their project.  Instead, what we see is that people tried Rust for a much longer time on average than that.</p>
+<p>Themes from people who stopped using Rust:</p>
+<ul>
+<li>23% responded that Rust is <strong>too difficult to use</strong>.</li>
+<li>20% responded that they <strong>didn't have enough time</strong> to learn and use Rust effectively.</li>
+<li>10% responded that <strong>tools aren't use mature enough</strong>.</li>
+<li>5% responded they needed <strong>better IDE support</strong>.</li>
+<li>The rest of users mentioned the need for <strong>support for Rust in their jobs</strong>, they'd <strong>finished the project</strong> they need to use Rust in, were turned away by <strong>Rust's syntax</strong>, <strong>couldn't think of a project to build</strong>, or had a <strong>bad interaction with the Rust community</strong>.</li>
+</ul>
+<h1><a href="#not-using-rust" aria-hidden="true" class="anchor" id="not-using-rust"></a>Not using Rust</h1>
+<p><img src="/images/2017-09-05-Rust-2017-Survey-Results/dont_use_rust.png" alt="chart: 666 company doesn't use Rust, 425 Rust is too intimidating hard to learn or too complicated, 295 Rust doesn't solve a problem for me, 255 Rust doesn't have good IDE support, 209 Rust doesn't have libraries I need, 161 Rust seems too risky for production, 89 Rust doesn't support platforms I need, 73 Rust doesn't have tools I need" /></p>
+<p>While the learning curve and language complexity still played a role in preventing people from picking up Rust, one aspect that resonated with many people is that there just simply aren't enough active commercial projects in Rust for people to be a part of.  For some, they could surmount the learning curve if there was strong incentive to do so.</p>
+<h1><a href="#areas-for-improvement" aria-hidden="true" class="anchor" id="areas-for-improvement"></a>Areas for Improvement</h1>
+<p>Finally, at the end of the survey we we provided a free-form area to talk about where Rust could improve.  Before we get to the themes we saw, we wanted to give a big &quot;thank you!&quot; to everyone who posted thoughtful comments.  There are many, many good ideas, which we will be making available to the respective sub-teams for future planning.  With that, let's look at the themes that were important this year:</p>
+<ul>
+<li>17% of responses underscored the need for <strong>better ergonomics</strong> in the language. People had many suggestions about how to improve Rust for day-to-day use, to allow for easier prototyping, to work with async programming more easily, and to be more flexible with more data structure types.  Just as before, the need for a much easier and smoother experience with the borrow checker and how to work with lifetimes was a popular request.</li>
+<li>16% of responses talk about the importance of creating <strong>better documentation</strong>.  These covered a topics from helping users transition from other languages, creating more examples and sample projects, helping people get started with various tasks or crates, and creating video resources to facilitate learning.</li>
+<li>15% of responses point out that <strong>library support</strong> needs to improve.  People mention the need for a strong support set of core libraries, of the difficulty finding high quality crates, the general maturity of the crates and the crate ecosystem, the need for libraries to cover a wide range of areas (eg web, GUIs, networking, databases, etc).  Additionally, people mentioned that libraries can be hard to get started with depending on their API design and amount of documentation.</li>
+<li>9% of the responses encouraged us to continue to build our <strong>IDE support</strong>. Again, this year underscored that there are a sizeable section of developers that need support for Rust in their IDEs and tools.  The Rust Language Server, the on-going effort to support IDEs broadly, was mentioned as one of the top items people are looking forward to this year, and comments pointed to these efforts needing to reach stable and grow support into other IDEs as well as continuing to grow the number of available features.</li>
+<li>8% of responses mention <strong>learning curve</strong> specifically.  As more developers try to pick up Rust or teach it to coworkers and friends, they're finding that there aren't sufficient resources to do so effectively and that Rust itself resists a smooth learning experience.</li>
+<li>Other strong themes included the need for: <strong>faster compile times</strong>, <strong>more corporate support of Rust</strong> (including jobs), <strong>better language interop</strong>, <strong>improved tooling</strong>, <strong>better error messages</strong>, <strong><em>more</em> marketing</strong>, <strong><em>less</em> marketing</strong>, and <strong>improved support for web assembly</strong>.</li>
+</ul>
+<h1><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h1>
+<p>We're blown away by the response this year.  Not only is this a much larger number of responses than we had last year, but we're also seeing a growing diversity in what people are using Rust for.  Thank you so much for your thoughtful replies.  We look forward to using your feedback, your suggestions, and your experience to help us plan for next year.
+</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

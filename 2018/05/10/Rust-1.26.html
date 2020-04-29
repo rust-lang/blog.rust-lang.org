@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.26 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.26 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.26 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.26" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.26</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">May 10, 2018 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.26.0. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.26.0 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10">detailed release notes for
+1.26.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1260-stable" aria-hidden="true" class="anchor" id="whats-in-1260-stable"></a>What's in 1.26.0 stable</h2>
+<p>The past few releases have had a steady stream of relatively minor additions. We've
+been working on a lot of stuff, however, and it's all starting to land in stable. 1.26 is
+possibly the most feature-packed release since Rust 1.0. Let's dig in!</p>
+<h4><a href="#the-rust-programming-language-second-edition" aria-hidden="true" class="anchor" id="the-rust-programming-language-second-edition"></a>&quot;The Rust Programming Language&quot; Second Edition</h4>
+<p>For almost 18 months, Carol, Steve, and others have been working on a
+complete re-write of &quot;The Rust Programming Language.&quot; We've learned a lot
+about how people learn Rust since the first book was written, and this
+version is an improvement in every way.</p>
+<p>We've shipped the draft of the second edition on the website for a while now,
+but with a disclaimer that it was a work in progress. At this point, the book
+is undergoing some final, minor copy-edits, and being prepared for print. As
+such, with this release, we are recommending the second edition over the
+first. You can <a href="https://doc.rust-lang.org/book/second-edition/">read it on
+doc.rust-lang.org</a> or
+locally via <code>rustup doc --book</code>.</p>
+<p>Speaking of print, you can pre-order a dead tree version of the book <a href="https://www.nostarch.com/Rust">from
+NoStarch Press</a>. The contents are identical,
+but you get a nice physical book to put on a shelf, or a beautifully typeset
+PDF. Proceeds are going to charity.</p>
+<h4><a href="#impl-trait" aria-hidden="true" class="anchor" id="impl-trait"></a><code>impl Trait</code></h4>
+<p>At long last, <code>impl Trait</code> is here! This feature has been highly desired for
+quite a while, and provides a feature known as &quot;existential types.&quot; It's
+simpler than that sounds, however. The core of it is this idea:</p>
+<pre><code class="language-rust">fn foo() -&gt; impl Trait {
+    // ...
+}
+</code></pre>
+<p>This type signature says &quot;<code>foo</code> is a function that takes no arguments but
+returns a type that implements the <code>Trait</code> trait.&quot; That is, we're not
+going to tell you what the return type of <code>foo</code> actually is, only that
+it implements a particular trait. You may wonder how this differs from
+a trait object:</p>
+<pre><code class="language-rust">fn foo() -&gt; Box&lt;Trait&gt; {
+    // ...
+}
+</code></pre>
+<p>While it's true that you could have written this code today, it's not
+ideal in all situations. Let's say we have a trait <code>Trait</code> that
+is implemented for both <code>i32</code> and <code>f32</code>:</p>
+<pre><code class="language-rust">trait Trait {
+    fn method(&amp;self);
+}
+
+impl Trait for i32 {
+    // implementation goes here
+}
+
+impl Trait for f32 {
+    // implementation goes here
+}
+</code></pre>
+<p>Consider this function:</p>
+<pre><code class="language-rust">fn foo() -&gt; ? {
+    5
+}
+</code></pre>
+<p>We want to fill in the return type with something. Previously, only the trait
+object version was possible:</p>
+<pre><code class="language-rust">fn foo() -&gt; Box&lt;Trait&gt; {
+    Box::new(5) as Box&lt;Trait&gt;
+}
+</code></pre>
+<p>But this introduces a <code>Box</code>, which means allocation. We're not actually
+returning some kind of dynamic data here either, so the dynamic dispatch of
+the trait object hurts too. So instead, as of Rust 1.26, you can write this:</p>
+<pre><code class="language-rust">fn foo() -&gt; impl Trait {
+    5
+}
+</code></pre>
+<p>This doesn't create a trait object, it's like we had written <code>-&gt; i32</code>, but
+instead, we're only mentioning the part about <code>Trait</code>. We get static
+dispatch, but we can hide the real type like this.</p>
+<p>Why is this useful? One good use is closures. Remember that closures in
+Rust all have a unique, un-writable type, yet implement the <code>Fn</code> trait.
+This means that if your function returns a closure, you can do this:</p>
+<pre><code class="language-rust">// before
+fn foo() -&gt; Box&lt;Fn(i32) -&gt; i32&gt; {
+    Box::new(|x| x + 1)
+}
+
+// after
+fn foo() -&gt; impl Fn(i32) -&gt; i32 {
+    |x| x + 1
+}
+</code></pre>
+<p>No boxing, no dynamic dispatch. A related scenario happens when returning
+iterators. Not only do iterators often include closures, but since they
+nest, you get quite deeply nested types. For example:</p>
+<pre><code class="language-rust">fn foo() {
+    vec![1, 2, 3]
+        .into_iter()
+        .map(|x| x + 1)
+        .filter(|x| x % 2 == 0)
+}
+</code></pre>
+<p>when compiled, gives this error:</p>
+<pre><code class="language-text">error[E0308]: mismatched types
+ --&gt; src/main.rs:5:5
+  |
+5 | /     vec![1, 2, 3]
+6 | |         .into_iter()
+7 | |         .map(|x| x + 1)
+8 | |         .filter(|x| x % 2 == 0)
+  | |_______________________________^ expected (), found struct `std::iter::Filter`
+  |
+  = note: expected type `()`
+             found type `std::iter::Filter&lt;std::iter::Map&lt;std::vec::IntoIter&lt;{integer}&gt;, [closure@src/main.rs:7:14: 7:23]&gt;, [closure@src/main.rs:8:17: 8:31]&gt;`
+</code></pre>
+<p>That's a huge 'found type'. Each adapter in the chain adds a new type.
+Additionally, we have that closure in there. Previously, we'd have had
+to use a trait object here, but now we can simply do</p>
+<pre><code class="language-rust">fn foo() -&gt; impl Iterator&lt;Item = i32&gt; {
+    vec![1, 2, 3]
+        .into_iter()
+        .map(|x| x + 1)
+        .filter(|x| x % 2 == 0)
+}
+</code></pre>
+<p>and be done with it. Working with <a href="https://crates.io/crates/futures">futures</a> is very similar.</p>
+<p>It's important to note that sometimes trait objects are still
+what you need. You can only use <code>impl Trait</code> if your function returns
+a single type; if you want to return multiple, you need dynamic dispatch.
+For example:</p>
+<pre><code class="language-rust">fn foo(x: i32) -&gt; Box&lt;Iterator&lt;Item = i32&gt;&gt; {
+    let iter = vec![1, 2, 3]
+        .into_iter()
+        .map(|x| x + 1);
+
+    if x % 2 == 0 {
+        Box::new(iter.filter(|x| x % 2 == 0))
+    } else {
+        Box::new(iter)
+    }
+}
+</code></pre>
+<p>Here, we may return a filtered iterator, or maybe not. There's two different
+types that can be returned, and so we must use a trait object.</p>
+<p>Oh, and one last thing: to make the syntax a bit more symmetrical, you can
+use <code>impl Trait</code> in argument position too. That is:</p>
+<pre><code class="language-rust">// before
+fn foo&lt;T: Trait&gt;(x: T) {
+
+// after
+fn foo(x: impl Trait) {
+</code></pre>
+<p>which can look a bit nicer for short signatures.</p>
+<blockquote>
+<p>Side note for you type theorists out there: this isn't an existential, still
+a universal. In other words, <code>impl Trait</code> is universal in an input position, but
+existential in an output position.</p>
+</blockquote>
+<h4><a href="#nicer-match-bindings" aria-hidden="true" class="anchor" id="nicer-match-bindings"></a>Nicer <code>match</code> bindings</h4>
+<p>Have you ever had a reference to an <code>Option</code>, and tried to use <code>match</code>? For
+example, code like this:</p>
+<pre><code class="language-rust">fn hello(arg: &amp;Option&lt;String&gt;) {
+    match arg {
+        Some(name) =&gt; println!(&quot;Hello {}!&quot;, name),
+        None =&gt; println!(&quot;I don't know who you are.&quot;),
+    }
+}
+</code></pre>
+<p>If you tried to compile this in Rust 1.25, you'd get this error:</p>
+<pre><code class="language-text">error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+ --&gt; src/main.rs:6:9
+  |
+6 |         Some(name) =&gt; println!(&quot;Hello {}!&quot;, name),
+  |         ^^^^^^^^^^ help: consider using a reference: `&amp;Some(name)`
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+ --&gt; src/main.rs:7:9
+  |
+7 |         None =&gt; println!(&quot;I don't know who you are.&quot;),
+  |         ^^^^ help: consider using a reference: `&amp;None`
+</code></pre>
+<p>Okay, sure. Let's modify the code:</p>
+<pre><code class="language-rust">fn hello(arg: &amp;Option&lt;String&gt;) {
+    match arg {
+        &amp;Some(name) =&gt; println!(&quot;Hello {}!&quot;, name),
+        &amp;None =&gt; println!(&quot;I don't know who you are.&quot;),
+    }
+}
+</code></pre>
+<p>We added the <code>&amp;</code>s the compiler complained about. Let's try to compile again:</p>
+<pre><code class="language-text">error[E0507]: cannot move out of borrowed content
+ --&gt; src/main.rs:6:9
+  |
+6 |         &amp;Some(name) =&gt; println!(&quot;Hello {}!&quot;, name),
+  |         ^^^^^^----^
+  |         |     |
+  |         |     hint: to prevent move, use `ref name` or `ref mut name`
+  |         cannot move out of borrowed content
+</code></pre>
+<p>Okay, sure. Let's make the compiler happy again by taking its advice:</p>
+<pre><code class="language-rust">fn hello(arg: &amp;Option&lt;String&gt;) {
+    match arg {
+        &amp;Some(ref name) =&gt; println!(&quot;Hello {}!&quot;, name),
+        &amp;None =&gt; println!(&quot;I don't know who you are.&quot;),
+    }
+}
+</code></pre>
+<p>This will finally compile. We had to add two <code>&amp;</code>s, and a <code>ref</code>. But more
+importantly, none of this was really <em>helpful</em> to us as programmers. Sure,
+we forgot a <code>&amp;</code> at first, but does that matter? We had to add <code>ref</code> to
+get a reference to the inside of the option, but we couldn't do anything <em>but</em>
+get a reference, as we can't move out of a <code>&amp;T</code>.</p>
+<p>So, as of Rust 1.26, the initial code, without the <code>&amp;</code>s and <code>ref</code>, will just
+compile and do exactly what you'd expect. In short, the compiler will automatically
+reference or de-reference in <code>match</code> statements. So when we say</p>
+<pre><code class="language-rust">    match arg {
+        Some(name) =&gt; println!(&quot;Hello {}!&quot;, name),
+</code></pre>
+<p>the compiler automatically references the <code>Some</code>, and since we're borrowing,
+<code>name</code> is bound as <code>ref name</code> automatically as well. If we were mutating:</p>
+<pre><code class="language-rust">fn hello(arg: &amp;mut Option&lt;String&gt;) {
+    match arg {
+        Some(name) =&gt; name.push_str(&quot;, world&quot;),
+        None =&gt; (),
+    }
+}
+</code></pre>
+<p>the compiler will automatically borrow by mutable reference, and <code>name</code> will
+be bound as <code>ref mut</code> too.</p>
+<p>We think this will remove a significant papercut for new and old Rustaceans
+alike. The compiler will just do the right thing more often without the need
+for boilerplate.</p>
+<h4><a href="#main-can-return-a-result" aria-hidden="true" class="anchor" id="main-can-return-a-result"></a><code>main</code> can return a <code>Result</code></h4>
+<p>Speaking of papercuts, since Rust uses the <code>Result</code> type for returning
+errors, and <code>?</code> to make handling them easy, a common pain-point of
+new Rustaceans is to try and use <code>?</code> in <code>main</code>:</p>
+<pre><code class="language-rust">use std::fs::File;
+
+fn main() {
+    let f = File::open(&quot;bar.txt&quot;)?;
+}
+</code></pre>
+<p>This will give an error like &quot;error[E0277]: the <code>?</code> operator can only be used
+in a function that returns <code>Result</code>&quot;. This leads to a pattern where many
+people write code that <a href="https://doc.rust-lang.org/book/second-edition/ch12-03-improving-error-handling-and-modularity.html#extracting-logic-from-main">looks like this</a>:</p>
+<pre><code class="language-rust">fn run(config: Config) -&gt; Result&lt;(), Box&lt;Error&gt;&gt; {
+    // --snip--
+}
+
+fn main() {
+    // --snip--
+
+    if let Err(e) = run(config) {
+        println!(&quot;Application error: {}&quot;, e);
+
+        process::exit(1);
+    }
+}
+</code></pre>
+<p>Our <code>run</code> function has all of the real logic, and <code>main</code>
+calls <code>run</code>, only checking to see if there was an error
+and exiting. We need to make this second function because
+<code>main</code> can't return a <code>Result</code>, but we'd like to use <code>?</code>
+in that logic.</p>
+<p>In Rust 1.26, you can now declare <code>main</code> that returns <code>Result</code>:</p>
+<pre><code class="language-rust">use std::fs::File;
+
+fn main() -&gt; Result&lt;(), std::io::Error&gt; {
+    let f = File::open(&quot;bar.txt&quot;)?;
+
+    Ok(())
+}
+</code></pre>
+<p>This now works just fine! If <code>main</code> returns an error, this will
+exit with an error code, and print out a debug representation
+of the error.</p>
+<h4><a href="#inclusive-ranges-with-" aria-hidden="true" class="anchor" id="inclusive-ranges-with-"></a>Inclusive ranges with <code>..=</code></h4>
+<p>Since well before Rust 1.0, you've been able to create exclusive ranges with <code>..</code>
+like this:</p>
+<pre><code class="language-rust">for i in 1..3 {
+    println!(&quot;i: {}&quot;, i);
+}
+</code></pre>
+<p>This will print <code>i: 1</code> and then <code>i: 2</code>. In Rust 1.26, you can now create an
+inclusive range, like this:</p>
+<pre><code class="language-rust">for i in 1..=3 {
+    println!(&quot;i: {}&quot;, i);
+}
+</code></pre>
+<p>This will print <code>i: 1</code> and then <code>i: 2</code> like before, but also <code>i: 3</code>; the
+three is included in the range. Inclusive ranges are especially useful
+if you want to iterate over every possible value in a range. For example,
+this is a surprising Rust program:</p>
+<pre><code class="language-rust">fn takes_u8(x: u8) {
+    // ...
+}
+
+fn main() {
+    for i in 0..256 {
+        println!(&quot;i: {}&quot;, i);
+        takes_u8(i);
+    }
+}
+</code></pre>
+<p>What does this program do? The answer: nothing. The warning we get when
+compiling has a hint:</p>
+<pre><code class="language-text">warning: literal out of range for u8
+ --&gt; src/main.rs:6:17
+  |
+6 |     for i in 0..256 {
+  |                 ^^^
+  |
+  = note: #[warn(overflowing_literals)] on by default
+</code></pre>
+<p>That's right, since <code>i</code> is a <code>u8</code>, this overflows, and is the same as writing
+<code>for i in 0..0</code>, so the loop executes zero times.</p>
+<p>We can do this with inclusive ranges, however:</p>
+<pre><code class="language-rust">fn takes_u8(x: u8) {
+    // ...
+}
+
+fn main() {
+    for i in 0..=255 {
+        println!(&quot;i: {}&quot;, i);
+        takes_u8(i);
+    }
+}
+</code></pre>
+<p>This will produce those 256 lines of output you might have been expecting.</p>
+<h4><a href="#basic-slice-patterns" aria-hidden="true" class="anchor" id="basic-slice-patterns"></a>Basic slice patterns</h4>
+<p>Another long-awaited feature is &quot;slice patterns.&quot; These let you match on
+slices similar to how you match on other data types. For example:</p>
+<pre><code class="language-rust">let arr = [1, 2, 3];
+
+match arr {
+    [1, _, _] =&gt; &quot;starts with one&quot;,
+    [a, b, c] =&gt; &quot;starts with something else&quot;,
+}
+</code></pre>
+<p>In this case, we know <code>arr</code> has a length of three, and so we need three entries
+inside the <code>[]</code>s. We can also match when we don't know the length:</p>
+<pre><code class="language-rust">fn foo(s: &amp;[u8]) {
+    match s {
+        [a, b] =&gt; (),
+        [a, b, c] =&gt; (),
+        _ =&gt; (),
+    }
+}
+</code></pre>
+<p>Here, we don't know how long <code>s</code> is, so we can write the first two arms, each with
+different lengths. This also means we need a <code>_</code> term, since we aren't covering
+every possible length, nor could we!</p>
+<h4><a href="#speed-improvements" aria-hidden="true" class="anchor" id="speed-improvements"></a>Speed improvements</h4>
+<p>We continue to work on the speed of the compiler. We discovered that deeply
+nesting types was non-linear in some cases, and <a href="https://github.com/rust-lang/rust/pull/48296">a fix was
+implemented</a>. We're seeing up
+to a 12% reduction in compile times from this change, but many other smaller
+fixes landed as well. More to come in the future!</p>
+<h4><a href="#128-bit-integers" aria-hidden="true" class="anchor" id="128-bit-integers"></a>128 bit integers</h4>
+<p>Finally, a very simple feature: Rust now has 128 bit integers!</p>
+<pre><code class="language-rust">let x: i128 = 0;
+let y: u128 = 0;
+</code></pre>
+<p>These are twice the size of <code>u64</code>, and so can hold more values. More specifically,</p>
+<ul>
+<li><code>u128</code>: 0 - 340,282,366,920,938,463,463,374,607,431,768,211,455</li>
+<li><code>i128</code>: −170,141,183,460,469,231,731,687,303,715,884,105,728 - 170,141,183,460,469,231,731,687,303,715,884,105,727</li>
+</ul>
+<p>Whew!</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10">detailed release notes</a> for more.</p>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
+<p>We stabilized <a href="https://doc.rust-lang.org/std/fs/fn.read_to_string.html"><code>fs::read_to_string</code></a>,
+a convenience over <code>File::open</code> and <code>io::Read::read_to_string</code> for easily reading an entire
+file into memory at once:</p>
+<pre><code class="language-rust">use std::fs;
+use std::net::SocketAddr;
+
+let foo: SocketAddr = fs::read_to_string(&quot;address.txt&quot;)?.parse()?;
+</code></pre>
+<p>You can now <a href="https://github.com/rust-lang/rust/pull/48978">format numbers as hexadecimal with <code>Debug</code>
+formatting</a>:</p>
+<pre><code class="language-rust">assert!(format!(&quot;{:02x?}&quot;, b&quot;Foo\0&quot;) == &quot;[46, 6f, 6f, 00]&quot;)
+</code></pre>
+<p>Trailing commas <a href="https://github.com/rust-lang/rust/pull/48056">are now supported by all macros in the standard
+library</a>.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10">detailed release notes</a> for more.</p>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
+<p>Cargo didn't receive many big new features this release but rather saw a steady
+stream of stability and performance improvements. Cargo should now resolve lock
+files even faster, backtrack more intelligently, and require manual <code>cargo update</code> invocations less. Cargo's binary <a href="https://github.com/rust-lang/cargo/pull/5083">now also shares the same version as
+<code>rustc</code></a>.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10">detailed release notes</a> for more.</p>
+<h2><a href="#contributors-to-1260" aria-hidden="true" class="anchor" id="contributors-to-1260"></a>Contributors to 1.26.0</h2>
+<p>Many people came together to create Rust 1.26. We couldn't have done it
+without all of you.</p>
+<p><a href="https://thanks.rust-lang.org/rust/1.26.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

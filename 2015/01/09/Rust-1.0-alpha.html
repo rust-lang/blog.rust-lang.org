@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.0 Alpha | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.0 Alpha | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.0 Alpha | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.0 Alpha" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.0 Alpha</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 9, 2015 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>Today, we're excited to <a href="http://www.rust-lang.org/install.html">release</a> the alpha version of Rust 1.0, a systems programming language with a focus on safety, performance and concurrency.</p>
+<p>This release marks a huge milestone for Rust and its community:</p>
+<ul>
+<li>
+<p><strong>The language is feature-complete for 1.0</strong>. While we plan to make many usability
+improvements before the final release, all 1.0 language features are now in place
+and we do not expect major breaking changes to them.</p>
+</li>
+<li>
+<p><strong>The core libraries are feature-complete for 1.0</strong>. API conventions have been
+firmly established, and core functionality -- basic types, traits, data
+structures and concurrency primitives -- has all been
+<a href="http://blog.rust-lang.org/2014/10/30/Stability.html">stabilized</a>. Here again
+we do not expect major breaking changes before 1.0.</p>
+</li>
+</ul>
+<p>The Rust community really rolled up their sleeves to help push this release over the finish line; thanks to everyone who participated, and especially to the <a href="https://github.com/rust-lang/rust/wiki/Doc-friends-of-the-tree">friends of the tree</a>!</p>
+<p>While we've come a long way in <a href="http://blog.rust-lang.org/2014/09/15/Rust-1.0.html">the last four months</a>, there's a lot left to do before Rust hits 1.0 final. Read on for more.</p>
+<h3><a href="#what-happens-during-the-alpha-cycle" aria-hidden="true" class="anchor" id="what-happens-during-the-alpha-cycle"></a>What happens during the alpha cycle?</h3>
+<p>If you're already a Rust user, the first thing you'll notice during the alpha cycle is a <em>dramatic</em> drop in the pace of breaking changes.</p>
+<p>Most features and modules that will ship with Rust 1.0 are in place and will change in only limited ways during this cycle, as detailed later in this post. Only a few modules -- the key ones being path manipulation and I/O -- are still stabilizing.</p>
+<p>We need your help to iterate on those final libraries before the beta release, and to hammer out any remaining issues on the parts of Rust we have already marked as stable.  <strong>During the alpha cycle, we recommend using the nightly releases, which will continue to evolve as these APIs take their final shape.</strong></p>
+<p>The alpha release is part of our <a href="http://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">transition</a> into <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">stability guarantees</a>. While we're not ready to make full stability guarantees yet, this release cycle moves
+us much closer to that 1.0 goal. When 1.0-beta1 is released <a href="http://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">six weeks from now</a>, these important remaining APIs will be stable. Code that compiles on the beta release should do so with minimal changes on 1.0 final as well.</p>
+<h3><a href="#whats-shipping-in-alpha" aria-hidden="true" class="anchor" id="whats-shipping-in-alpha"></a>What's shipping in alpha?</h3>
+<p>Since the <a href="https://mail.mozilla.org/pipermail/rust-dev/2014-October/011267.html">previous release</a>, we've made an enormous amount of progress. We'll cover a
+few of the highlights here; the full details are in <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md">the release notes</a>.</p>
+<h4><a href="#language-features" aria-hidden="true" class="anchor" id="language-features"></a>Language features</h4>
+<ul>
+<li>
+<p><strong>Dynamically-sized types (DSTs):</strong> <a href="http://smallcultfollowing.com/babysteps/blog/2014/01/05/dst-take-5/">Types whose size is only known at runtime</a> (such as array slices and trait objects) are now largely integrated into the language, including basic integration with user-defined smart pointers. <em>Implemented by Nick Cameron; rolled out by Jorge Aparicio</em>.</p>
+</li>
+<li>
+<p><strong>Multidispatch traits:</strong> Trait implementations can now be selected via <a href="https://github.com/rust-lang/rfcs/pull/195">multiple types</a> (not just <code>Self</code>), which has opened the door to <a href="https://github.com/rust-lang/rfcs/pull/201">many</a> <a href="https://github.com/rust-lang/rfcs/pull/235">interesting</a> <a href="https://github.com/rust-lang/rfcs/pull/529">APIs</a>. <em>Implemented by Niko Matsakis; rolled out by Jorge Aparicio and Aaron Turon</em>.</p>
+</li>
+<li>
+<p><strong>Associated types:</strong> Traits can now have <a href="https://github.com/rust-lang/rfcs/pull/195">associated types</a>, which cuts down on verbosity with generics and aids type inference. <em>Implemented by Patrick Walton, Niko Matsakis, and Nick Cameron; rolled out by Jorge Aparicio</em>.</p>
+</li>
+<li>
+<p><strong>Where clauses:</strong> A powerful new way of specifying trait bounds, <a href="https://github.com/rust-lang/rfcs/pull/135">where clauses</a> have landed and enabled some <a href="https://github.com/rust-lang/rust/pull/20398">significant</a> <a href="https://github.com/rust-lang/rust/pull/20560">simplifications</a> in the standard library. <em>Implemented by Niko Matsakis, Patrick Walton, and Jared Roesch; rolled out by Jorge Aparicio and Aaron Turon.</em></p>
+</li>
+<li>
+<p><strong>&quot;Unboxed&quot; closures:</strong> Closures are now <a href="https://github.com/rust-lang/rfcs/pull/114">just another way of using the trait system</a>, which required adding <a href="https://github.com/rust-lang/rfcs/pull/387">higher-ranked lifetimes</a>; this allows much greater flexibility for both ownership and choosing static or dynamic dispatch. <em>Implemented by Patrick Walton, Brian Koropoff and Niko Matsakis; rolled out by Jorge Aparicio.</em></p>
+</li>
+<li>
+<p><strong>Macros:</strong> The <code>macro_rules</code> system has been <a href="https://github.com/rust-lang/rfcs/pull/453">significantly</a> <a href="https://github.com/rust-lang/rfcs/pull/550">revised</a>, cleaning up a number of rough edges and future-proofing in various ways. While macros suffer from some significant deficiencies, the macro system is a powerful and important part of Rust programming that will ship with 1.0. We plan to build a second-generation macro system after the 1.0 release. <em>Implemented by Keegan McAllister and Corey Richardson.</em></p>
+</li>
+<li>
+<p><strong>Integer type changes:</strong> The long-running debate about integer types was <a href="https://github.com/rust-lang/rfcs/pull/544#issuecomment-68760871">recently resolved</a>: <code>int</code> and <code>uint</code> are now known as <code>isize</code> and <code>usize</code>, and no longer suggest the role of &quot;default integer&quot; in Rust. <em>Credit goes to the entire community for the vigorous debate.</em></p>
+</li>
+<li>
+<p><strong>Opt-in builtin traits</strong>: The marker traits that Rust uses to classify data as copyable, thread-safe, and so forth have been <a href="https://github.com/rust-lang/rfcs/blob/master/text/0019-opt-in-builtin-traits.md">significantly refactored to have safer, more predicable defaults</a>. <em>Implemented by Patrick Walton and Flavio Percoco Premoli.</em></p>
+</li>
+</ul>
+<p>All of these language features have been rolled out throughout the standard library.</p>
+<h4><a href="#library-features" aria-hidden="true" class="anchor" id="library-features"></a>Library features</h4>
+<ul>
+<li>
+<p><strong>Consistent conventions:</strong>
+<a href="https://github.com/rust-lang/rfcs/pull/199">A</a>
+<a href="https://github.com/rust-lang/rfcs/pull/236">large</a>
+<a href="https://github.com/rust-lang/rfcs/pull/240">number</a>
+<a href="https://github.com/rust-lang/rfcs/pull/344">of</a>
+<a href="https://github.com/rust-lang/rfcs/pull/430">conventions</a>
+<a href="https://github.com/rust-lang/rfcs/pull/445">RFCs</a>
+have been approved, and are largely summarized <a href="http://aturon.github.io/">in the Rust Guidelines</a>; these conventions have been rolled out through all <code>#[stable]</code> parts of <code>std</code>. <em>Led by Aaron Turon</em>.</p>
+</li>
+<li>
+<p><strong>Stable core types and traits:</strong> All of the primitive types and basic building blocks (like <code>char</code>, <code>String</code>, <code>Vec</code>, <code>Box</code>, <code>Arc</code>, <code>RefCell</code> and so on) are now <code>#[stable]</code>. <em>Stabilized by Aaron Turon, Alex Crichton, Brian Anderson, Brendan Zabarauskas and Huon Wilson</em>.</p>
+</li>
+<li>
+<p><strong>Iterators and collections:</strong> A <a href="https://github.com/rust-lang/rfcs/pull/216">series</a> <a href="https://github.com/rust-lang/rfcs/pull/235">of</a> <a href="https://github.com/rust-lang/rfcs/pull/509">RFCs</a> have been implemented to revamp and stabilize the collections APIs; iterators are also <code>#[stable]</code>. <em>RFCs by Aaron Turon and Alexis Beingessner, stabilized together with Chase Southwood, Piotr Czarnecki, Félix Raimundo, Clark Gaebel and others.</em></p>
+</li>
+<li>
+<p><strong>Concurrency primitives:</strong> Rust's concurrency modules have seen an overhaul, including
+<a href="https://github.com/rust-lang/rfcs/pull/461">thread-local storage</a>, <a href="https://github.com/rust-lang/rust/pull/19274/">synchronization primitives</a>, and a new <a href="https://github.com/rust-lang/rust/pull/20615">thread API</a> that will soon allow child threads to share data on their parent's stack. These APIs are more efficient and idiomatic than previous versions, and most are already <code>#[stable]</code>. <em>Implemented by Alex Crichton and Aaron Turon</em>.</p>
+</li>
+<li>
+<p><strong>Runtime freedom:</strong> Rust's runtime system and green-threading model has been <a href="https://github.com/rust-lang/rfcs/pull/230">entirely removed</a>, which cut the static binary size of &quot;hello world&quot; in half and has <a href="https://github.com/rust-lang/rust/pull/19169">opened the door</a> to lower-level hooks into the standard library. <em>Implemented by Aaron Turon</em>.</p>
+</li>
+</ul>
+<h4><a href="#documentation" aria-hidden="true" class="anchor" id="documentation"></a>Documentation</h4>
+<ul>
+<li>
+<p><strong>The Rust Programming Language:</strong> The previous split between &quot;The Guide&quot; and &quot;The guides&quot; has been rectified by combining them into <a href="https://github.com/rust-lang/rust/pull/19897">&quot;The book&quot;</a>. <em>Led by Steve Klabnik</em>.</p>
+</li>
+<li>
+<p><strong>Rust by Example:</strong> The lovely http://rustbyexample.com/ introduction to Rust is now part of the official documentation. <em>Initiated by Jorge Aparicio</em>.</p>
+</li>
+<li>
+<p><strong>Additional API documentation:</strong> A lot of work has gone into improving API documentation, both by expanding the overview text and adding examples throughout. <em>Credit goes to the entire community, who worked tirelessly to improve these docs</em>.</p>
+</li>
+</ul>
+<h3><a href="#what-remains-to-be-done" aria-hidden="true" class="anchor" id="what-remains-to-be-done"></a>What remains to be done?</h3>
+<p>A detailed list of possible breaking changes to <em>stable</em> features/APIs can be found <a href="https://github.com/rust-lang/rust/wiki/Anticipated-breaking-changes-during-1.0-alpha">here</a>. Below is a list of major areas of improvement for the alpha cycle:</p>
+<ul>
+<li>
+<p><strong>Improvements to <a href="https://github.com/rust-lang/rust/issues/17307">associated types</a> and <a href="https://github.com/rust-lang/rust/issues/18101">unboxed closures</a>:</strong> Both of these features are functional, but we plan to make significant ergonomic improvements during the beta cycle, such as <a href="https://github.com/rust-lang/rfcs/blob/master/text/0231-upvar-capture-inference.md">more sophisticated capture-clause inference</a> and more <a href="https://github.com/rust-lang/rust/issues/20300">uniform support for shorthands like <code>X::Type</code></a>.</p>
+</li>
+<li>
+<p><strong>Improvements to generics:</strong> We will explore <a href="http://smallcultfollowing.com/babysteps/blog/2014/07/06/implied-bounds/">avenues</a> to cut down on the number of redundant trait bounds that are currently required.</p>
+</li>
+<li>
+<p><strong>Path reform:</strong> The <code>path</code> module will soon be <a href="https://github.com/rust-lang/rfcs/pull/474">reformed</a> to make use of DST, to give a better account of platform differences, and to more closely align with the <a href="http://article.gmane.org/gmane.comp.lib.boost.devel/256220">new C++ standard</a>. Implementation work is largely complete, and the rollout should occur soon after alpha.</p>
+</li>
+<li>
+<p><strong>IO reform:</strong> An <a href="https://github.com/rust-lang/rfcs/pull/517/">overhaul of the IO APIs</a> is being planned; please join in the conversation! These changes will be landing throughout the alpha cycle.</p>
+</li>
+<li>
+<p><strong>Sync/Send changes:</strong> We plan to tweak the definitions of the <code>Sync</code> and <code>Send</code> markers so that <a href="https://github.com/rust-lang/rfcs/pull/458">threads can share stack data</a>. This may cause some minor breakage.</p>
+</li>
+<li>
+<p><strong>Integer type auditing:</strong> During the alpha cycle, we will finalize formal conventions for choosing integer types and re-audit the use of these types in <code>std</code>. This auditing may cause some breakage to <code>#[stable]</code> APIs.</p>
+</li>
+<li>
+<p><strong>Documentation for all features:</strong> Some recent feature additions, such as associated types and unboxed closures, have their RFC as the only documentation. User-facing documentation for these features will be added during the alpha cycle. The <a href="http://doc.rust-lang.org/reference.html">reference</a> will likewise be brought up to date and improved.</p>
+</li>
+<li>
+<p><strong>Complete API documentation:</strong> Everything marked stable will have <em>at least</em> a usage example, and hopefully complete textual explanation, before beta.</p>
+</li>
+</ul>
+<p>And, of course, we will continue to fix bugs and add polish throughout the alpha cycle.</p>
+<h3><a href="#contributors-to-rust-100-alpha" aria-hidden="true" class="anchor" id="contributors-to-rust-100-alpha"></a>Contributors to Rust 1.0.0-alpha</h3>
+<p>This alpha release could not have happened without the help of Rust's enthusiastic community. Thanks go to:</p>
+<ul>
+<li><code>Aaron Friel</code></li>
+<li><code>Aaron Liblong</code></li>
+<li><code>Aaron Turon</code></li>
+<li><code>Aaron Weiss</code></li>
+<li><code>Adam Szkoda</code></li>
+<li><code>Adolfo Ochagavía</code></li>
+<li><code>Adrien Tétar</code></li>
+<li><code>Aidan Cully</code></li>
+<li><code>A.J. Gardner</code></li>
+<li><code>Akos Kiss</code></li>
+<li><code>Aleksandr Koshlo</code></li>
+<li><code>Alexander Light</code></li>
+<li><code>Alex Crichton</code></li>
+<li><code>Alex Gaynor</code></li>
+<li><code>Alexis Beingessner</code></li>
+<li><code>Alex Lyon</code></li>
+<li><code>Alfie John</code></li>
+<li><code>Andrea Canciani</code></li>
+<li><code>Andrew Cann</code></li>
+<li><code>Andrew Paseltiner</code></li>
+<li><code>Andrew Wagner</code></li>
+<li><code>areski</code></li>
+<li><code>Ariel Ben-Yehuda</code></li>
+<li><code>Artem</code></li>
+<li><code>Arthur Liao</code></li>
+<li><code>arturo</code></li>
+<li><code>Austin Bonander</code></li>
+<li><code>Barosl Lee</code></li>
+<li><code>Ben Foppa</code></li>
+<li><code>Ben Gamari</code></li>
+<li><code>Ben S</code></li>
+<li><code>Bheesham Persaud</code></li>
+<li><code>Björn Steinbrink</code></li>
+<li><code>bluss</code></li>
+<li><code>Boris Egorov</code></li>
+<li><code>bors</code></li>
+<li><code>Brandon Sanderson</code></li>
+<li><code>Brendan Zabarauskas</code></li>
+<li><code>Brian Anderson</code></li>
+<li><code>Brian J Brennan</code></li>
+<li><code>Brian Koropoff</code></li>
+<li><code>Carol Nichols</code></li>
+<li><code>Chase Southwood</code></li>
+<li><code>Chris Morgan</code></li>
+<li><code>Chris Wong</code></li>
+<li><code>Clark Gaebel</code></li>
+<li><code>Cody P Schafer</code></li>
+<li><code>Colin Sherratt</code></li>
+<li><code>Corey Farwell</code></li>
+<li><code>Corey Ford</code></li>
+<li><code>Corey Richardson</code></li>
+<li><code>crhino</code></li>
+<li><code>Cristi Burcă</code></li>
+<li><code>Damien Radtke</code></li>
+<li><code>Dan Burkert</code></li>
+<li><code>dan@daramos.com</code></li>
+<li><code>Daniel Hofstetter</code></li>
+<li><code>Daniel Micay</code></li>
+<li><code>Dan Luu</code></li>
+<li><code>David Creswick</code></li>
+<li><code>Davis Silverman</code></li>
+<li><code>Diego Giagio</code></li>
+<li><code>Dirk Gadsden</code></li>
+<li><code>Dylan Ede</code></li>
+<li><code>Earl St Sauver</code></li>
+<li><code>Eduard Burtescu</code></li>
+<li><code>Eduardo Bautista</code></li>
+<li><code>elszben</code></li>
+<li><code>Eric Allen</code></li>
+<li><code>Eric Kidd</code></li>
+<li><code>Erick Tryzelaar</code></li>
+<li><code>Erwan</code></li>
+<li><code>Fabrice Desré</code></li>
+<li><code>FakeKane</code></li>
+<li><code>Falco Hirschenberger</code></li>
+<li><code>Felix Raimundo</code></li>
+<li><code>Felix S. Klock II</code></li>
+<li><code>Flavio Percoco</code></li>
+<li><code>Florian Gilcher</code></li>
+<li><code>Florian Hahn</code></li>
+<li><code>Florian Wilkens</code></li>
+<li><code>gamazeps</code></li>
+<li><code>Gil Cottle</code></li>
+<li><code>Gleb Kozyrev</code></li>
+<li><code>Graham Fawcett</code></li>
+<li><code>Guillaume Pinot</code></li>
+<li><code>Huon Wilson</code></li>
+<li><code>Ian Connolly</code></li>
+<li><code>inrustwetrust</code></li>
+<li><code>Ivan Petkov</code></li>
+<li><code>Ivan Ukhov</code></li>
+<li><code>Jacob Edelman</code></li>
+<li><code>Jake Goulding</code></li>
+<li><code>Jakub Bukaj</code></li>
+<li><code>James Miller</code></li>
+<li><code>Jared Roesch</code></li>
+<li><code>Jarod Liu</code></li>
+<li><code>Jashank Jeremy</code></li>
+<li><code>Jauhien Piatlicki</code></li>
+<li><code>jbranchaud</code></li>
+<li><code>Jeff Parsons</code></li>
+<li><code>Jelte Fennema</code></li>
+<li><code>jfager</code></li>
+<li><code>Jim Apple</code></li>
+<li><code>jmu303</code></li>
+<li><code>Johannes Hoff</code></li>
+<li><code>Johannes Muenzel</code></li>
+<li><code>John Albietz</code></li>
+<li><code>John Gallagher</code></li>
+<li><code>John Kåre Alsaker</code></li>
+<li><code>John Kleint</code></li>
+<li><code>Jonathan Reem</code></li>
+<li><code>Jonathan S</code></li>
+<li><code>Jon Haddad</code></li>
+<li><code>JONNALAGADDA Srinivas</code></li>
+<li><code>Joonas Javanainen</code></li>
+<li><code>Jorge Aparicio</code></li>
+<li><code>Joseph Crail</code></li>
+<li><code>Joseph Rushton Wakeling</code></li>
+<li><code>Josh Haberman</code></li>
+<li><code>Josh Stone</code></li>
+<li><code>Joshua Yanovski</code></li>
+<li><code>jrincayc</code></li>
+<li><code>Julian Orth</code></li>
+<li><code>juxiliary</code></li>
+<li><code>jxv</code></li>
+<li><code>Kang Seonghoon</code></li>
+<li><code>Kasey Carrothers</code></li>
+<li><code>Keegan McAllister</code></li>
+<li><code>Ken Tossell</code></li>
+<li><code>Kevin Ballard</code></li>
+<li><code>Kevin Mehall</code></li>
+<li><code>Kevin Yap</code></li>
+<li><code>klutzy</code></li>
+<li><code>kulakowski</code></li>
+<li><code>Laurence Tratt</code></li>
+<li><code>Liigo Zhuang</code></li>
+<li><code>Lionel Flandrin</code></li>
+<li><code>Luke Metz</code></li>
+<li><code>Luqman Aden</code></li>
+<li><code>Manish Goregaokar</code></li>
+<li><code>Markus Siemens</code></li>
+<li><code>Martin Pool</code></li>
+<li><code>Marvin Löbel</code></li>
+<li><code>Matej Lach</code></li>
+<li><code>Mathieu Poumeyrol</code></li>
+<li><code>Matt McPherrin</code></li>
+<li><code>Matt Murphy</code></li>
+<li><code>Matt Windsor</code></li>
+<li><code>Maxime Quandalle</code></li>
+<li><code>Maximilian Haack</code></li>
+<li><code>Maya Nitu</code></li>
+<li><code>mchaput</code></li>
+<li><code>mdinger</code></li>
+<li><code>Michael Gehring</code></li>
+<li><code>Michael Neumann</code></li>
+<li><code>Michael Sproul</code></li>
+<li><code>Michael Woerister</code></li>
+<li><code>Mike Dilger</code></li>
+<li><code>Mike Pedersen</code></li>
+<li><code>Mike Robinson</code></li>
+<li><code>Ms2ger</code></li>
+<li><code>Mukilan Thiyagarajan</code></li>
+<li><code>Murarth</code></li>
+<li><code>Nafis</code></li>
+<li><code>Nathan Zadoks</code></li>
+<li><code>Neil Pankey</code></li>
+<li><code>Nicholas Bishop</code></li>
+<li><code>Nick Cameron</code></li>
+<li><code>Nick Howell</code></li>
+<li><code>Niels Egberts</code></li>
+<li><code>Niko Matsakis</code></li>
+<li><code>NODA, Kai</code></li>
+<li><code>OGINO Masanori</code></li>
+<li><code>oli-obk</code></li>
+<li><code>Oliver Schneider</code></li>
+<li><code>olivren</code></li>
+<li><code>P1start</code></li>
+<li><code>Pascal Hertleif</code></li>
+<li><code>Patrick Walton</code></li>
+<li><code>Paul Collier</code></li>
+<li><code>Pedro Larroy</code></li>
+<li><code>Peter Atashian</code></li>
+<li><code>Peter Elmers</code></li>
+<li><code>Phil Dawes</code></li>
+<li><code>Philip Munksgaard</code></li>
+<li><code>Philipp Gesang</code></li>
+<li><code>Piotr Czarnecki</code></li>
+<li><code>Piotr Jawniak</code></li>
+<li><code>Piotr Szotkowski</code></li>
+<li><code>qwitwa</code></li>
+<li><code>Raphael Speyer</code></li>
+<li><code>Ray Clanan</code></li>
+<li><code>Richard Diamond</code></li>
+<li><code>Richo Healey</code></li>
+<li><code>Ricky Taylor</code></li>
+<li><code>rjz</code></li>
+<li><code>Robin Gloster</code></li>
+<li><code>Robin Stocker</code></li>
+<li><code>Rohit Joshi</code></li>
+<li><code>Rolf Timmermans</code></li>
+<li><code>Rolf van de Krol</code></li>
+<li><code>Roy Crihfield</code></li>
+<li><code>Ruud van Asseldonk</code></li>
+<li><code>Sean Collins</code></li>
+<li><code>Sean Gillespie</code></li>
+<li><code>Sean Jensen-Grey</code></li>
+<li><code>Sean McArthur</code></li>
+<li><code>Sean T Allen</code></li>
+<li><code>Seo Sanghyeon</code></li>
+<li><code>Seth Pollack</code></li>
+<li><code>sheroze1123</code></li>
+<li><code>Simonas Kazlauskas</code></li>
+<li><code>Simon Sapin</code></li>
+<li><code>Simon Wollwage</code></li>
+<li><code>Son</code></li>
+<li><code>Stefan Bucur</code></li>
+<li><code>Stepan Koltsov</code></li>
+<li><code>Steve Klabnik</code></li>
+<li><code>Steven Fackler</code></li>
+<li><code>Stuart Pernsteiner</code></li>
+<li><code>Subhash Bhushan</code></li>
+<li><code>Tamir Duberstein</code></li>
+<li><code>Taylor Hutchison</code></li>
+<li><code>th0114nd</code></li>
+<li><code>thiagopnts</code></li>
+<li><code>Timon Rapp</code></li>
+<li><code>Titouan Vervack</code></li>
+<li><code>Tobias Bucher</code></li>
+<li><code>Tom Jakubowski</code></li>
+<li><code>tshakah</code></li>
+<li><code>Tshepang Lekhonkhobe</code></li>
+<li><code>Ulysse Carion</code></li>
+<li><code>Utkarsh Kukreti</code></li>
+<li><code>Vadim Chugunov</code></li>
+<li><code>Vadim Petrochenkov</code></li>
+<li><code>Valerii Hiora</code></li>
+<li><code>Victor Berger</code></li>
+<li><code>Victor van den Elzen</code></li>
+<li><code>Viktor Dahl</code></li>
+<li><code>ville-h</code></li>
+<li><code>Vitali Haravy</code></li>
+<li><code>Vladimir Matveev</code></li>
+<li><code>Vladimir Smola</code></li>
+<li><code>we</code></li>
+<li><code>whataloadofwhat</code></li>
+<li><code>YawarRaza7349</code></li>
+<li><code>York Xiang</code></li>
+<li><code>Zbigniew Siciarz</code></li>
+<li><code>Ziad Hatahet</code></li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cargo: predictable dependency management | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Cargo: predictable dependency management | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Cargo: predictable dependency management | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Cargo: predictable dependency management" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Cargo: predictable dependency management</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">May 5, 2016 &middot; Yehuda Katz
+    
+    </div>
+
+    <div class="post">
+      <p>Cargo's goal is to make modern application package management a core value of
+the Rust programming language.</p>
+<p>In practice, this goal translates to being able to build a new browser engine
+like <a href="https://github.com/servo/servo">Servo</a> out of 247 community-driven
+libraries—and counting. Servo's build system is a thin wrapper around
+Cargo, and after a fresh checkout, you're only one command away from seeing the
+whole dependency graph built:</p>
+<pre><code>   Compiling num-complex v0.1.32
+   Compiling bitflags v0.6.0
+   Compiling angle v0.1.0 (https://github.com/emilio/angle?branch=servo#eefe3506)
+   Compiling backtrace v0.2.1
+   Compiling smallvec v0.1.5
+   Compiling browserhtml v0.1.4 (https://github.com/browserhtml/browserhtml?branch=gh-pages#0ca50842)
+   Compiling unicase v1.4.0
+   Compiling fnv v1.0.2
+   Compiling heapsize_plugin v0.1.4
+   ...
+</code></pre>
+<p>Why do these granular dependencies matter?</p>
+<p>Concretely, they mean that Servo's URL library (and many components like
+it) is not a deeply nested part of Servo's main tree, but rather an
+<a href="https://crates.io/crates/url">external library</a> that anyone in the
+ecosystem can use. This makes it possible for other Rust libraries, like web
+frameworks, to easily use a browser-grade URL library, sharing the costs
+and benefits of maintenance. And it flows both ways: recently, a new
+<a href="https://github.com/google/xi-editor">Rust-based text editor</a> was announced,
+and happened to provide a fast line-breaking library. Within days, that library
+<a href="https://twitter.com/mbrubeck/status/726791246014877696">replaced Servo's old custom linebreaker</a>,
+decreasing Servo's maintenance burden and increasing sharing in the Rust
+ecosystem.</p>
+<h2><a href="#the-core-concerns-of-dependency-management" aria-hidden="true" class="anchor" id="the-core-concerns-of-dependency-management"></a>The core concerns of dependency management</h2>
+<p>To make this all work at the scale of an app like Servo, you need a dependency
+management approach with good answers to a number of thorny questions:</p>
+<ol>
+<li>
+<p>How easy is it to add an external library, like a new linebreaker, to Servo?</p>
+</li>
+<li>
+<p>If I build Servo on a different machine, for a different architecture,
+in CI or for release, am I building from the same source code?</p>
+</li>
+<li>
+<p>If I build Servo for testing, will its indirect dependencies be compiled
+with debug symbols? If I build Servo for release, will its indirect
+dependencies be compiled with maximum optimizations? How can I be sure?</p>
+</li>
+<li>
+<p>If someone published a new version of one of Servo's dependencies after I
+commit to Servo, will my CI environment use the same source code as my
+machine? My production environment?</p>
+</li>
+<li>
+<p>If I add a new dependency (or upgrade one), can that break the build? Can it
+affect unrelated dependencies? Under what conditions?</p>
+</li>
+</ol>
+<p><strong>All of these questions (and many more like them) have one thing in common:
+predictability</strong>. One solution to this problem, common in the systems space, is
+vendoring dependencies—forking them directly into an application's
+repository—and then managing them manually. But this comes at a
+substantial per-project cost, since there's more to manage and configure. It
+also comes at an ecosystem-wide cost, since the work involved cannot easily be
+shared between libraries; it has to be redone instead for each application that
+brings a set of libraries together. And making sure you can answer all of the
+questions above, all of the time, is hard work indeed.</p>
+<p>Package managers for higher-level languages have shown that by turning
+dependency management over to a shared tool, you can have predictability, easy
+workflows that operate over the entire dependency graph, and increased sharing
+and robustness across the ecosystem. When we started planning Rust 1.0, we knew
+we wanted to bring these ideas to a systems setting, and making Cargo a central
+part of the way people use Rust was a big part of that.</p>
+<h2><a href="#pillars-of-cargo" aria-hidden="true" class="anchor" id="pillars-of-cargo"></a>Pillars of Cargo</h2>
+<p>Cargo is built on three major pillars:</p>
+<ol>
+<li>
+<p>Building, testing, and running projects should be predictable across
+environments and over time.</p>
+</li>
+<li>
+<p>To the extent possible, indirect dependencies should be invisible to
+application authors.</p>
+</li>
+<li>
+<p>Cargo should provide a shared workflow for the Rust ecosystem that aids the
+first two goals.</p>
+</li>
+</ol>
+<p>We'll look at each of these pillars in turn.</p>
+<h2><a href="#predictability" aria-hidden="true" class="anchor" id="predictability"></a>Predictability</h2>
+<p>Cargo's predictability goals start with a simple guarantee: <strong>once a project
+successfully compiles on one machine, subsequent compiles across machines and
+environments will use exactly the same source code</strong>.</p>
+<p>This guarantee is accomplished without incorporating the source code for
+dependencies directly into a project repository. Instead, Cargo uses several
+strategies:</p>
+<ol>
+<li>
+<p>The first time a build succeeds, Cargo emits a <code>Cargo.lock</code> file, which
+contains a manifest of precisely which source code was used in the
+build. (more on &quot;precise&quot; in a bit)</p>
+</li>
+<li>
+<p>Cargo manages the entire workflow, from running tests and benchmarks, to
+building release artifacts, to running executables for debugging. This allows
+Cargo to ensure that all dependencies (direct and indirect) are downloaded
+and properly configured for these use-cases without the user having to do
+anything extra.</p>
+</li>
+<li>
+<p>Cargo standardizes important environment configuration, like optimization
+level, static and dynamic linking, and architecture. Combined with the
+<code>Cargo.lock</code>, this makes the results of building, testing and executing Cargo
+projects highly predictable.</p>
+</li>
+</ol>
+<h3><a href="#predictability-by-example" aria-hidden="true" class="anchor" id="predictability-by-example"></a>Predictability By Example</h3>
+<p>To illustrate these strategies, let's build an example crate using Cargo. To
+keep things simple, we'll create a small <code>datetime</code> crate that exposes date and
+time functionality.</p>
+<p>First, we'll use <code>cargo new</code> to start us out:</p>
+<pre><code>$ cargo new datetime
+$ cd datetime
+$ ls
+Cargo.toml src
+$ cat Cargo.toml
+[package]
+name = &quot;datetime&quot;
+version = &quot;0.1.0&quot;
+authors = [&quot;Yehuda Katz &lt;wycats@gmail.com&gt;&quot;]
+
+[dependencies]
+</code></pre>
+<p>We don't want to build the date or time functionality from scratch, so let's
+edit the <code>Cargo.toml</code> and add the <code>time</code> crate from <a href="https://crates.io/">crates.io</a>:</p>
+<pre><code class="language-diff">  [package]
+  name = &quot;datetime&quot;
+  version = &quot;0.1.0&quot;
+  authors = [&quot;Yehuda Katz &lt;wycats@gmail.com&gt;&quot;]
+
+  [dependencies]
++ time = &quot;0.1.35&quot;
+</code></pre>
+<p>Now that we've added the <code>time</code> crate, let's see what happens if we ask Cargo to
+build our package:</p>
+<pre><code class="language-console">cargo build
+   Compiling winapi v0.2.6
+   Compiling libc v0.2.10
+   Compiling winapi-build v0.1.1
+   Compiling kernel32-sys v0.2.2
+   Compiling time v0.1.35
+   Compiling datetime v0.1.0 (file:///Users/ykatz/Code/datetime)
+</code></pre>
+<p>Whoa! That's a lot of crates. <strong>The biggest part of Cargo's job is to provide
+enough predictability to allow functionality like the <code>time</code> crate to be broken
+up into smaller crates that do one thing and do it well</strong>.</p>
+<p>Now that we successfully built our crate, what happens if we try to build it again?</p>
+<pre><code class="language-console">cargo build
+</code></pre>
+<p>Nothing happened at all. Why's that? We can always ask Cargo to give us more
+information through the <code>--verbose</code> flag, so let's do that:</p>
+<pre><code class="language-console">cargo build --verbose
+       Fresh libc v0.2.10
+       Fresh winapi v0.2.6
+       Fresh winapi-build v0.1.1
+       Fresh kernel32-sys v0.2.2
+       Fresh time v0.1.35
+       Fresh datetime v0.1.0 (file:///Users/ykatz/Code/datetime)
+</code></pre>
+<p>Cargo isn't bothering to recompile packages that it knows are &quot;fresh&quot;, like
+<code>make</code>, but without having to write the <code>Makefile</code>.</p>
+<p>But how does Cargo know that everything is fresh? When Cargo builds a crate, it
+emits a file called <code>Cargo.lock</code> that contains the precise versions of all of
+its resolved dependencies:</p>
+<pre><code class="language-toml">[root]
+name = &quot;datetime&quot;
+version = &quot;0.1.0&quot;
+dependencies = [
+ &quot;libc 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)&quot;,
+ &quot;time 0.1.35 (registry+https://github.com/rust-lang/crates.io-index)&quot;,
+]
+
+[[package]]
+name = &quot;kernel32-sys&quot;
+version = &quot;0.2.2&quot;
+source = &quot;registry+https://github.com/rust-lang/crates.io-index&quot;
+dependencies = [
+ &quot;winapi 0.2.6 (registry+https://github.com/rust-lang/crates.io-index)&quot;,
+ &quot;winapi-build 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)&quot;,
+]
+
+...
+</code></pre>
+<p>The <code>Cargo.lock</code> contains a serialized version of the entire <strong>resolved</strong>
+dependency graph, including precise versions of all of the source code included
+in the build. In the case of a package from crates.io, Cargo stores the name and
+version of the dependency. This is enough information to uniquely identify
+source code from <a href="https://crates.io/">crates.io</a>, because the registry is
+<em>append only</em> (no changes to already-published packages are allowed).</p>
+<p>In addition, the metadata for the registry is stored in a
+<a href="https://github.com/rust-lang/crates.io-index/">separate git repository</a>, and
+includes checksum for the relevant package. Before Cargo ever unpacks a crate it
+downloads, it first validates the checksum.</p>
+<h3><a href="#collaborating" aria-hidden="true" class="anchor" id="collaborating"></a>Collaborating</h3>
+<p>Now for the real test. Let's push our code up to GitHub and develop it on a
+different machine. Ideally, we would like to be able to pick up right where we
+left off, with the exact same source code for all of our dependencies.</p>
+<p>To do this, we check in our <code>Cargo.lock</code> and clone the repository on our new
+machine. Then, we run <code>cargo build</code> again.</p>
+<pre><code class="language-console">cargo build
+   Compiling libc v0.2.10
+   Compiling winapi v0.2.6
+   Compiling winapi-build v0.1.1
+   Compiling kernel32-sys v0.2.2
+   Compiling time v0.1.35
+   Compiling datetime v0.1.0 (file:///Users/ykatz/Code/datetime)
+</code></pre>
+<p>As expected, <strong>because we checked in our <code>Cargo.lock</code> we get exactly the same
+versions of all dependencies as before</strong>. And if we wanted to start collaborating
+with other developers on GitHub (or with other members of our team at work), we
+would continue to get the same level of predictability.</p>
+<h3><a href="#common-conventions-examples-tests-and-docs" aria-hidden="true" class="anchor" id="common-conventions-examples-tests-and-docs"></a>Common conventions: examples, tests, and docs</h3>
+<p>Now that we've written our snazzy new <code>datetime</code> crate, we'd love to write an
+example to show other developers how it should be used. We create a new file
+called <code>examples/date.rs</code> that looks like this:</p>
+<pre><code>extern crate datetime;
+
+fn main() {
+    println!(&quot;{}&quot;, datetime::DateTime::now());
+}
+</code></pre>
+<p>To run the example, we ask Cargo to build and run it:</p>
+<pre><code class="language-console">cargo run --example date
+   Compiling datetime v0.1.0 (file:///Users/ykatz/Code/datetime)
+     Running `target/debug/examples/date`
+26 Apr 2016 :: 05:03:38
+</code></pre>
+<p>Because we put our code in the conventional location for examples, Cargo knew
+how to do the right thing, no sweat.</p>
+<p>In addition, once you start writing a few tests, <code>cargo test</code> will automatically
+build your examples as well, which prevents them from getting out of sync with
+your code, and ensures they continue to compile as long as your tests are
+passing.</p>
+<p>Similarly, the <code>cargo doc</code> command will automatically compile not just your
+code, but that of your dependencies as well. The upshot is that the API docs it
+automatically produces include the crates you depend on, so if your APIs mention
+types from those crates, your clients can follow those links.</p>
+<p>These are just a few examples of a general point: <strong>Cargo defines a common set of
+conventions and workflows that operate precisely the same way across the entire
+Rust ecosystem</strong>.</p>
+<h3><a href="#updating" aria-hidden="true" class="anchor" id="updating"></a>Updating</h3>
+<p>All of this means that your application won't change if you don't make any
+changes to your dependencies, but what happens when you need to change them?</p>
+<p>Cargo adds another layer of protection with <em>conservative updates</em>. This means
+that if you modify your <code>Cargo.toml</code>, Cargo attempts to minimize the changes
+made to the <code>Cargo.lock</code>. The intuition of conservative updates is: <strong>if the
+change you made was unrelated to another dependency, it shouldn't change</strong>.</p>
+<p>Let's say that after developing the library for a little while, we decide that
+we want to add support for time zones. First, let's add in the <code>tz</code> dependency
+to our package:</p>
+<pre><code>  [package]
+  name = &quot;datetime&quot;
+  version = &quot;0.1.0&quot;
+  authors = [&quot;Yehuda Katz &lt;wycats@gmail.com&gt;&quot;]
+
+  [dependencies]
+  time = &quot;0.1.35&quot;
++ tz = &quot;0.2.1&quot;
+</code></pre>
+<p>After using the crate in our library, let's run <code>cargo build</code> again:</p>
+<pre><code class="language-console">cargo build
+    Updating registry `https://github.com/rust-lang/crates.io-index`
+ Downloading tz v0.2.1
+ Downloading byteorder v0.5.1
+   Compiling byteorder v0.5.1
+   Compiling tz v0.2.1
+   Compiling datetime v0.1.0 (file:///Users/ykatz/Code/datetime)
+</code></pre>
+<p>Cargo downloaded <code>tz</code> (and its dependency <code>byteorder</code>) and compiled them, but it
+didn't touch the packages we were already using (<code>kernel32-sys</code>, <code>libc</code>,
+<code>time</code>, <code>winapi</code> and <code>winapi-build</code>). Even if one of those package authors
+published an update in the meantime, you can be sure that adding new crates
+won't mess with unrelated ones.</p>
+<p>Conservative updates attempt to significantly reduce unexpected changes to your
+source code. It stands in stark contrast to 'rebuild the world', which allows a
+small change to dependencies to rebuild the entire graph, wreaking havoc in its
+wake.</p>
+<p><strong>As a rule, Cargo attempts to minimize the effects of intentional changes to
+direct dependencies.</strong></p>
+<h2><a href="#indirect-dependencies-just-work" aria-hidden="true" class="anchor" id="indirect-dependencies-just-work"></a>Indirect Dependencies &quot;Just Work&quot;</h2>
+<p>One of the most basic goals of an application package manager is separating
+direct dependencies, which are required by the application, and indirect
+dependencies, which those dependencies need in order to work.</p>
+<p>As we've seen in the <code>datetime</code> crate we built, we only needed to specify
+dependencies on <code>time</code> and <code>tz</code>, and Cargo automatically created the entire
+graph of dependencies needed to make that work. It also serialized that graph
+for future predictability.</p>
+<p>Since Cargo manages your dependencies for you, it can also make sure that it
+compiles all of your dependencies (whether you knew about them directly or not)
+appropriately for the task at hand.</p>
+<h3><a href="#testing-benchmarking-releasing-oh-my" aria-hidden="true" class="anchor" id="testing-benchmarking-releasing-oh-my"></a>Testing, Benchmarking, Releasing, Oh My</h3>
+<p>Historically, people have shied away from the kinds of granular dependencies
+we've seen here because of the configuration needed for each new dependency.</p>
+<p>For example, when running tests or type-checking your code, you would like to
+compile the code as fast as possible to keep the feedback loop fast. On the
+other hand, when benchmarking or releasing your code, you are willing to spend
+plenty of time waiting for the compiler to optimize your code if it produces a
+fast binary.</p>
+<p>It's important to compile not only your own code or your direct dependencies,
+but all indirect dependencies with the same configuration.</p>
+<p>Cargo manages that process for you automatically. Let's add a benchmark to our
+code:</p>
+<pre><code>#[bench]
+fn bench_date(b: &amp;mut Bencher) {
+    b.iter(|| DateTime::now());
+}
+</code></pre>
+<p>If we then run <code>cargo bench</code>:</p>
+<pre><code class="language-console">cargo bench
+   Compiling winapi v0.2.6
+   Compiling libc v0.2.10
+   Compiling byteorder v0.5.1
+   Compiling winapi-build v0.1.1
+   Compiling kernel32-sys v0.2.2
+   Compiling tz v0.2.1
+   Compiling time v0.1.35
+   Compiling datetime v0.1.0 (file:///Users/ykatz/Code/datetime)
+     Running target/release/datetime-2602656fcee02e68
+
+running 1 test
+test bench_date ... bench:         486 ns/iter (+/- 56)
+</code></pre>
+<p>Notice that we're re-compiling all of our dependencies. This is because <code>cargo bench</code> defaults to release mode, which uses maximum optimizations. <code>cargo build --release</code> similarly builds in optimized mode by default.</p>
+<blockquote>
+<p>As an aside, the default behavior of each command is configurable through
+<a href="http://doc.crates.io/manifest.html#the-profile-sections">profiles</a> in the
+<code>Cargo.toml</code>. This allows you to configure things like the optimization level,
+whether to include debug symbols and more. Rather than forcing you to use a
+custom workflow if something doesn't precisely meet your needs, the profiles
+feature allows you to customize the existing workflows and stay within Cargo's
+flows.</p>
+</blockquote>
+<h3><a href="#platforms-and-architectures" aria-hidden="true" class="anchor" id="platforms-and-architectures"></a>Platforms and Architectures</h3>
+<p>Similarly, applications are often built for different architectures, operating
+systems, or even operating system version. They can be compiled for maximum
+portability or to make maximum use of available platform features.</p>
+<p>Libraries can be compiled as static libraries or dynamic libraries. And even
+static libraries might want to do some dynamic linking (for example, against the
+system version of <code>openssl</code>).</p>
+<p><strong>By standardizing what it means to build and configure a package, Cargo can apply
+all of these configuration choices to your direct dependencies <em>and</em> indirect
+dependencies</strong>.</p>
+<h3><a href="#shared-dependencies" aria-hidden="true" class="anchor" id="shared-dependencies"></a>Shared Dependencies</h3>
+<p>So far, we've looked at packages and their dependencies. But what if two
+packages that your application depends on share a third dependency?</p>
+<p>For example, let's say that I decide to add the <code>nix</code> crate to my <code>datetime</code>
+library for Unix-specific functionality.</p>
+<pre><code>  [package]
+  name = &quot;datetime&quot;
+  version = &quot;0.1.0&quot;
+  authors = [&quot;Yehuda Katz &lt;wycats@gmail.com&gt;&quot;]
+
+  [dependencies]
+  time = &quot;0.1.35&quot;
+  tz = &quot;0.2.1&quot;
++ nix = &quot;0.5.0&quot;
+</code></pre>
+<p>As before, when I run <code>cargo build</code>, Cargo <em>conservatively</em> adds <code>nix</code> and its dependencies:</p>
+<pre><code class="language-console">cargo build
+    Updating registry `https://github.com/rust-lang/crates.io-index`
+ Downloading nix v0.5.0
+ Downloading bitflags v0.4.0
+   Compiling bitflags v0.4.0
+   Compiling nix v0.5.0
+   Compiling datetime v0.1.0 (file:///Users/ykatz/Code/datetime)
+</code></pre>
+<p>But if we look a little closer, we'll notice that <code>nix</code> has a dependency on
+<code>bitflags</code> <em>and</em> <code>libc</code>. It now <em>shares</em> the dependency on <code>libc</code> with the
+<code>date</code> package.</p>
+<p>If my <code>datetime</code> crate gets <code>libc</code> types from <code>time</code> and hands them off to
+<code>nix</code>, they better be the same <code>libc</code> or my program won't compile (and we
+wouldn't want it to!)</p>
+<p>Today, Cargo will automatically share dependencies between crates if they depend
+on the same <em>major</em> version (or minor version before 1.0), since Rust uses
+<a href="http://semver.org/">semantic versioning</a>. This means that if <code>nix</code> and <code>datetime</code>
+both depend on some version of <code>libc 0.2.x</code>, they will get the same version. In
+this case, they do, and the program compiles.</p>
+<p>While this policy works well (and in fact is the same policy that system package
+managers use), it doesn't always do exactly what people expect, especially when
+it comes to coordinating a major version bump across the ecosystem. (In many
+cases, it would be preferable for Cargo to hard-error than assume that a
+dependency on <code>0.2.x</code> is simply unrelated to another dependency on <code>0.3.x</code>.)</p>
+<p>This problem is especially pernicious when multiple major versions of the same
+package expose global symbols (using <code>#[no_mangle]</code> for example, or by including
+other statically linked C libraries).</p>
+<p>We have some thoughts on ways to improve Cargo to handle these cases better,
+including the ability for a package to more explicitly express when a dependency
+is used purely internally and is not shared through its public interface. Those
+packages could be more readily duplicated if needed, while dependencies that are
+used in a package's public interface must not be.</p>
+<p>You should expect to see more on this topic in the months ahead.</p>
+<h2><a href="#workflow" aria-hidden="true" class="anchor" id="workflow"></a>Workflow</h2>
+<p>As we've seen, <strong>Cargo is not just a dependency manager, but Rust's primary
+workflow tool</strong>.</p>
+<p>This allows Rust to have a rich ecosystem of interconnected dependencies,
+eliminating the need for applications to manually manage large dependency
+graphs. Applications can benefit from a vibrant ecosystem of small packages that
+do one thing and do it well, and let Cargo handle the heavy lifting of keeping
+everything up to date and compiling correctly.</p>
+<p>Even a small crate like the <code>datetime</code> example we built has a few dependencies
+on small, targeted crates, and each of those crates has some dependencies of its
+own.</p>
+<p>By defining shared, well-known workflows, like &quot;build&quot;, &quot;test&quot;, &quot;bench&quot;, &quot;run&quot;,
+and &quot;doc&quot;, Cargo provides Rust programmers with a way to think about what
+they're trying to accomplish at a high level, and not have to worry about what
+each of those workflows mean for indirect dependencies.</p>
+<p>This allows us to get closer to the holy grail of making those indirect
+dependency graphs &quot;invisible&quot;, empowering individuals to do more on their hobby
+projects, small teams to do more on their products, and large teams to have a
+high degree of confidence in the output of their work.</p>
+<p>With a workflow tool that provides predictability, even in the face of many
+indirect dependencies, we can all build higher together.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

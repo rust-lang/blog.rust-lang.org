@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.28 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.28 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.28 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.28" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.28</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 2, 2018 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.28.0. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.28.0 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1280-2018-08-02">detailed release notes for
+1.28.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1280-stable" aria-hidden="true" class="anchor" id="whats-in-1280-stable"></a>What's in 1.28.0 stable</h2>
+<h3><a href="#global-allocators" aria-hidden="true" class="anchor" id="global-allocators"></a>Global Allocators</h3>
+<p>Allocators are the way that programs in Rust obtain memory from the system at
+runtime. Previously, Rust did not allow changing the way memory is obtained,
+which prevented some use cases. On some platforms, this meant using jemalloc, on
+others, the system allocator, but there was no way for users to control this key
+component. With 1.28.0, the <code>#[global_allocator]</code> attribute is now stable, which
+allows Rust programs to set their allocator to the system allocator, as well as
+define new allocators by implementing the <a href="https://doc.rust-lang.org/stable/std/alloc/trait.GlobalAlloc.html"><code>GlobalAlloc</code></a> trait.</p>
+<p>The default allocator for Rust programs on some platforms is jemalloc. The
+standard library now provides a handle to the system allocator, which can be
+used to switch to the system allocator when desired, by declaring a static and
+marking it with the <code>#[global_allocator]</code> attribute.</p>
+<pre><code class="language-rust">use std::alloc::System;
+
+#[global_allocator]
+static GLOBAL: System = System;
+
+fn main() {
+    let mut v = Vec::new();
+    // This will allocate memory using the system allocator.
+    v.push(1);
+}
+</code></pre>
+<p>However, sometimes you want to define a custom allocator for a given application
+domain. This is also relatively easy to do by implementing the <code>GlobalAlloc</code>
+trait. You can read more about how to do this in the <a href="https://doc.rust-lang.org/stable/std/alloc/trait.GlobalAlloc.html">documentation</a>.</p>
+<h3><a href="#improved-error-message-for-formatting" aria-hidden="true" class="anchor" id="improved-error-message-for-formatting"></a>Improved error message for formatting</h3>
+<p>Work on diagnostics continues, this time with an emphasis on formatting:</p>
+<pre><code class="language-rust">format!(&quot;{_foo}&quot;, _foo = 6usize);
+</code></pre>
+<p>Previously, the error message emitted here was relatively poor:</p>
+<pre><code>error: invalid format string: expected `'}'`, found `'_'`
+  |
+2 |     format!(&quot;{_foo}&quot;, _foo = 6usize);
+  |             ^^^^^^^^
+</code></pre>
+<p>Now, we emit a diagnostic that tells you the specific reason the format string
+is invalid:</p>
+<pre><code>error: invalid format string: invalid argument name `_foo`
+  |
+2 |     let _ = format!(&quot;{_foo}&quot;, _foo = 6usize);
+  |                       ^^^^ invalid argument name in format string
+  |
+  = note: argument names cannot start with an underscore
+</code></pre>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1280-2018-08-02">detailed release notes</a> for more.</p>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
+<p>We've already mentioned the stabilization of the <code>GlobalAlloc</code> trait, but
+another important stabilization is the <a href="https://doc.rust-lang.org/stable/std/num/index.html"><code>NonZero</code></a> number types. These are wrappers
+around the standard unsigned integer types: <code>NonZeroU8</code>, <code>NonZeroU16</code>,
+<code>NonZeroU32</code>, <code>NonZeroU64</code>, <code>NonZeroU128</code>, and <code>NonZeroUsize</code>.</p>
+<p>This allows for size optimization, for example, <code>Option&lt;u8&gt;</code> is two bytes large,
+but <code>Option&lt;NonZeroU8&gt;</code> is just one byte large. Note that this optimization
+remains even when <code>NonZeroU8</code> is wrapped inside another struct; the example
+below illustrates that <code>Door</code> is still 1 byte large despite being placed inside
+an <code>Option</code>. This optimization applies to user-defined enums as well: <code>Option</code>
+is not special.</p>
+<pre><code class="language-rust">use std::mem;
+use std::num::NonZeroU8;
+
+struct Key(NonZeroU8);
+
+struct Door {
+    key: Key,
+}
+
+fn main() {
+    assert_eq!(mem::size_of::&lt;Door&gt;(), 1);
+    assert_eq!(mem::size_of::&lt;Option&lt;Door&gt;&gt;(), 1);
+}
+</code></pre>
+<p>A number of other libraries have also been stabilized: you can see the more
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1280-2018-08-02">detailed release notes</a> for full details.</p>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
+<p><a href="https://github.com/rust-lang/cargo/pull/5584/">Cargo will now no longer allow you to publish crates with build scripts that
+modify the <code>src</code> directory.</a> The <code>src</code> directory in a crate should be
+considered to be immutable.</p>
+<h2><a href="#contributors-to-1280" aria-hidden="true" class="anchor" id="contributors-to-1280"></a>Contributors to 1.28.0</h2>
+<p>Many people came together to create Rust 1.28. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.28.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

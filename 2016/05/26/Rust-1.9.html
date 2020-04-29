@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.9 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.9 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.9 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.9" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.9</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">May 26, 2016 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce the latest version of Rust, 1.9. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>As always, you can <a href="https://www.rust-lang.org/install.html">install Rust 1.9</a> from the appropriate page on our
+website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-190-2016-05-26">detailed release notes for 1.9</a> on GitHub.
+About 1000 patches were landed in this release.</p>
+<h3><a href="#whats-in-19-stable" aria-hidden="true" class="anchor" id="whats-in-19-stable"></a>What's in 1.9 stable</h3>
+<h4><a href="#controlled-unwinding" aria-hidden="true" class="anchor" id="controlled-unwinding"></a>Controlled unwinding</h4>
+<p>The biggest shift in Rust 1.9 is the stabilization of the <code>std::panic</code> module,
+which includes methods for halting the unwinding process started by a panic:</p>
+<pre><code class="language-rust">use std::panic;
+
+let result = panic::catch_unwind(|| {
+    println!(&quot;hello!&quot;);
+});
+assert!(result.is_ok());
+
+let result = panic::catch_unwind(|| {
+    panic!(&quot;oh no!&quot;);
+});
+assert!(result.is_err());
+</code></pre>
+<p>This new API was defined in <a href="https://github.com/rust-lang/rfcs/pull/1236">RFC 1236</a>.</p>
+<p>In general, Rust distinguishes between two ways that an operation can fail:</p>
+<ul>
+<li>Due to an <em>expected problem</em>, like a file not being found.</li>
+<li>Due to an <em>unexpected problem</em>, like an index being out of bounds for an array.</li>
+</ul>
+<p>Expected problems usually arise from conditions that are outside of your
+control; robust code should be prepared for anything its environment might throw
+at it. In Rust, expected problems are handled via <a href="http://static.rust-lang.org/doc/master/std/result/index.html">the <code>Result</code> type</a>,
+which allows a function to return information about the problem to its caller,
+which can then handle the error in a fine-grained way.</p>
+<p>Unexpected problems are <em>bugs</em>: they arise due to a contract or assertion being
+violated. Since they are unexpected, it doesn't make sense to handle them in a
+fine-grained way. Instead, Rust employs a &quot;fail fast&quot; approach by <em>panicking</em>,
+which by default unwinds the stack (running destructors but no other code) of
+the thread which discovered the error. Other threads continue running, but will
+discover the panic any time they try to communicate with the panicked thread
+(whether through channels or shared memory). Panics thus abort execution up to
+some &quot;isolation boundary&quot;, with code on the other side of the boundary still
+able to run, and perhaps to &quot;recover&quot; from the panic in some very coarse-grained
+way. A server, for example, does not necessarily need to go down just because of
+an assertion failure in one of its threads.</p>
+<p>The new <code>catch_unwind</code> API offers a way to introduce new isolation boundaries
+<em>within a thread</em>. There are a couple of key motivating examples:</p>
+<ul>
+<li>Embedding Rust in other languages</li>
+<li>Abstractions that manage threads</li>
+</ul>
+<p>For the first case, unwinding across a language boundary is undefined behavior,
+and often leads to segfaults in practice. Allowing panics to be caught means
+that you can safely expose Rust code via a C API, and translate unwinding into
+an error on the C side.</p>
+<p>For the second case, consider a threadpool library. If a thread in the pool
+panics, you generally don't want to kill the thread itself, but rather catch the
+panic and communicate it to the client of the pool. The <code>catch_unwind</code> API is
+paired with <code>resume_unwind</code>, which can then be used to restart the panicking
+process on the client of the pool, where it belongs.</p>
+<p>In both cases, you're introducing a new isolation boundary within a thread, and
+then translating the panic into some other form of error elsewhere.</p>
+<p>A final point: why <code>catch_unwind</code> rather than <code>catch_panic</code>? We are
+<a href="https://github.com/rust-lang/rfcs/pull/1513">in the process</a> of adding an additional strategy for panics: aborting
+the entire process (possibly after running a general <a href="https://github.com/rust-lang/rfcs/pull/1328">hook</a>). For some
+applications, this is the most reasonable way to deal with a programmer error,
+and avoiding unwinding can have performance and code size wins.</p>
+<h4><a href="#deprecation-warnings" aria-hidden="true" class="anchor" id="deprecation-warnings"></a>Deprecation warnings</h4>
+<p>We introduced a new attribute for library authors: <code>#[deprecated]</code>. This attribute
+allows you to tag an API with a deprecation warning, which users of their crate
+will receive whenever they use the API, directing them to a replacement API.
+Deprecation warnings have long been a part of the standard library, but thanks
+to <a href="https://github.com/rust-lang/rfcs/blob/master/text/1270-deprecation.md">RFC 1270</a> they're now usable ecosystem-wide.</p>
+<h4><a href="#new-targets" aria-hidden="true" class="anchor" id="new-targets"></a>New targets</h4>
+<p>We now publish standard library binaries for several new targets:</p>
+<ul>
+<li><code>mips-unknown-linux-musl</code>,</li>
+<li><code>mipsel-unknown-linux-musl</code>, and</li>
+<li><code>i586-pc-windows-msvc</code>.</li>
+</ul>
+<p>The first two targets are particularly interesting from a cross-compilation
+perspective; see the <a href="http://blog.rust-lang.org/2016/05/13/rustup.html">recent blog post on <code>rustup</code></a> for more details.</p>
+<h4><a href="#compile-time-improvements" aria-hidden="true" class="anchor" id="compile-time-improvements"></a>Compile time improvements</h4>
+<p><a href="https://github.com/rust-lang/rust/pull/32062">The time complexity of comparing variables for equivalence</a> during
+type unification is reduced from O(n!) to O(n). As a result, some programming
+patterns compile much, much more quickly.</p>
+<h4><a href="#rolling-out-use-of-specialization" aria-hidden="true" class="anchor" id="rolling-out-use-of-specialization"></a>Rolling out use of specialization</h4>
+<p>This release sees some of the first use of <a href="https://github.com/rust-lang/rfcs/pull/1210">specialization</a> within the standard
+library. Specialization, which is currently available only on <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">nightly</a>, allows
+generic code to automatically be specialized based on more specific type
+information.</p>
+<p>One example where this comes up in the standard library: conversion from a
+string slice (<code>&amp;str</code>) to an owned <code>String</code>. One method, <code>to_string</code>, comes from
+a generic API which was previously relatively slow, while the custom <code>to_owned</code>
+implementation provided better performance. Using specialization, these two
+functions are <a href="https://github.com/rust-lang/rust/pull/32586">now equivalent</a>.</p>
+<p>With this simple test of specialization under our belt, we have more performance
+improvements on the way in upcoming releases.</p>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
+<p>About 80 library functions and methods are now stable in 1.9.  The most major is
+the <code>std::panic</code> module, described earlier, but there's a lot more too:</p>
+<p><strong>Networking</strong></p>
+<ul>
+<li><code>TcpStream</code>, <code>TcpListener</code>, and <code>UdpSocket</code> gained a number of methods for
+configuring the connection.</li>
+<li><code>SocketAddr</code> and its variants gained <code>set_ip()</code> and <code>set_port()</code> conveniences.</li>
+</ul>
+<p><strong>Collections</strong></p>
+<ul>
+<li><code>BTreeSet</code> and <code>HashSet</code> gained the <code>take()</code>, <code>replace()</code>, and <code>get()</code>
+methods, which make it possible to recover ownership of the original key.</li>
+<li><code>OsString</code> gained a few methods, bringing it closer to parity with <code>String</code>.</li>
+<li>Slices gained <code>copy_from_slice()</code>, a safe form of <code>memcpy</code>.</li>
+</ul>
+<p><strong>Encoding</strong></p>
+<ul>
+<li><code>char</code> gained the ability to decode into UTF-16.</li>
+</ul>
+<p><strong>Pointers</strong></p>
+<ul>
+<li>Raw pointers gained <code>as_ref()</code> and <code>as_mut()</code>, which returns an <code>Option&lt;&amp;T&gt;</code>,
+translating null pointers into <code>None</code>.</li>
+<li><code>ptr::{read,write}_volatile()</code> allow for volatile reading and writing from a
+raw pointer.</li>
+</ul>
+<p>Finally, many of the types in <code>libcore</code> did not contain a <code>Debug</code>
+implementation. <a href="https://github.com/rust-lang/rust/pull/32054">This was fixed</a>
+in the 1.9 release.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-190-2016-05-26">detailed release notes</a> for more.</p>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
+<p>There were two major changes to Cargo:</p>
+<p>First, Cargo
+<a href="https://github.com/rust-lang/cargo/pull/2486">can now be run concurrently</a>.</p>
+<p>Second, a new flag, <code>RUSTFLAGS</code>,
+<a href="https://github.com/rust-lang/cargo/pull/2241">was added</a>. This flag allows you
+to specify arbitrary flags to be passed to <code>rustc</code> through an environment
+variable, which is useful for packagers, for example.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-190-2016-05-26">detailed release notes</a> for more.</p>
+<h3><a href="#contributors-to-19" aria-hidden="true" class="anchor" id="contributors-to-19"></a>Contributors to 1.9</h3>
+<p>We had 127 individuals contribute to 1.9. Thank you so much!</p>
+<ul>
+<li>Aaron Turon</li>
+<li>Abhishek Chanda</li>
+<li>Adolfo Ochagavía</li>
+<li>Aidan Hobson Sayers</li>
+<li>Alan Somers</li>
+<li>Alejandro Wainzinger</li>
+<li>Aleksey Kladov</li>
+<li>Alex Burka</li>
+<li>Alex Crichton</li>
+<li>Amanieu d'Antras</li>
+<li>Andrea Canciani</li>
+<li>Andreas Linz</li>
+<li>Andrew Cantino</li>
+<li>Andrew Horton</li>
+<li>Andrew Paseltiner</li>
+<li>Andrey Cherkashin</li>
+<li>Angus Lees</li>
+<li>Ariel Ben-Yehuda</li>
+<li>Benjamin Herr</li>
+<li>Björn Steinbrink</li>
+<li>Brian Anderson</li>
+<li>Brian Bowman</li>
+<li>Christian Wesselhoeft</li>
+<li>Christopher Serr</li>
+<li>Corey Farwell</li>
+<li>Craig M. Brandenburg</li>
+<li>Cyryl Płotnicki-Chudyk</li>
+<li>Daniel J Rollins</li>
+<li>Dave Huseby</li>
+<li>David AO Lozano</li>
+<li>David Henningsson</li>
+<li>Devon Hollowood</li>
+<li>Dirk Gadsden</li>
+<li>Doug Goldstein</li>
+<li>Eduard Burtescu</li>
+<li>Eduard-Mihai Burtescu</li>
+<li>Eli Friedman</li>
+<li>Emanuel Czirai</li>
+<li>Erick Tryzelaar</li>
+<li>Evan</li>
+<li>Felix S. Klock II</li>
+<li>Florian Berger</li>
+<li>Geoff Catlin</li>
+<li>Guillaume Gomez</li>
+<li>Gökhan Karabulut</li>
+<li>JP Sugarbroad</li>
+<li>James Miller</li>
+<li>Jeffrey Seyfried</li>
+<li>John Talling</li>
+<li>Jonas Schievink</li>
+<li>Jonathan S</li>
+<li>Jorge Aparicio</li>
+<li>Joshua Holmer</li>
+<li>Kai Noda</li>
+<li>Kamal Marhubi</li>
+<li>Katze</li>
+<li>Kevin Brothaler</li>
+<li>Kevin Butler</li>
+<li>Manish Goregaokar</li>
+<li>Markus Westerlind</li>
+<li>Marvin Löbel</li>
+<li>Masood Malekghassemi</li>
+<li>Matt Brubeck</li>
+<li>Michael Huynh</li>
+<li>Michael Neumann</li>
+<li>Michael Woerister</li>
+<li>Ms2ger</li>
+<li>NODA, Kai</li>
+<li>Nathan Kleyn</li>
+<li>Nick Cameron</li>
+<li>Niko Matsakis</li>
+<li>Noah</li>
+<li>Novotnik, Petr</li>
+<li>Oliver Middleton</li>
+<li>Oliver Schneider</li>
+<li>Philipp Oppermann</li>
+<li>Piotr Czarnecki</li>
+<li>Pyfisch</li>
+<li>Richo Healey</li>
+<li>Ruud van Asseldonk</li>
+<li>Scott Olson</li>
+<li>Sean McArthur</li>
+<li>Sebastian Wicki</li>
+<li>Seo Sanghyeon</li>
+<li>Simon Sapin</li>
+<li>Simonas Kazlauskas</li>
+<li>Steve Klabnik</li>
+<li>Steven Allen</li>
+<li>Steven Fackler</li>
+<li>Stu Black</li>
+<li>Sébastien Marie</li>
+<li>Tang Chenglong</li>
+<li>Ted Horst</li>
+<li>Ticki</li>
+<li>Tim Montague</li>
+<li>Tim Neumann</li>
+<li>Timon Van Overveldt</li>
+<li>Tobias Bucher</li>
+<li>Tobias Müller</li>
+<li>Todd Lucas</li>
+<li>Tom Tromey</li>
+<li>Tshepang Lekhonkhobe</li>
+<li>Ulrik Sverdrup</li>
+<li>Vadim Petrochenkov</li>
+<li>Valentin Lorentz</li>
+<li>Varun Vats</li>
+<li>Wang Xuerui</li>
+<li>Wangshan Lu</li>
+<li>York Xiang</li>
+<li>arcnmx</li>
+<li>ashleysommer</li>
+<li>bors</li>
+<li>ggomez</li>
+<li>gohyda</li>
+<li>ituxbag</li>
+<li>mitaa</li>
+<li>nicholasf</li>
+<li>petevine</li>
+<li>pierzchalski</li>
+<li>pravic</li>
+<li>srinivasreddy</li>
+<li>tiehuis</li>
+<li>ubsan</li>
+<li>vagrant</li>
+<li>vegai</li>
+<li>vlastachu</li>
+<li>Валерий Лашманов</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

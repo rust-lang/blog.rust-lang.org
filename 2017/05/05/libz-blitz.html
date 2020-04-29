@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The Rust Libz Blitz | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="The Rust Libz Blitz | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="The Rust Libz Blitz | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="The Rust Libz Blitz" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>The Rust Libz Blitz</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">May 5, 2017 &middot; Brian Anderson, David Tolnay, and Aaron Turon
+    
+    </div>
+
+    <div class="post">
+      <p>To help bring our <a href="https://blog.rust-lang.org/2017/02/06/roadmap.html">2017 vision for Rust</a> to fruition, the Rust subteams are
+launching initiatives targeted at specific roadmap goals. <strong>This post covers the
+library team's major initiative: raising a solid core of the Rust crate
+ecosystem to a consistent level of completeness and quality.</strong> This work is
+guided in part by what we learned in producing the Rust standard library, and
+will result in a &quot;cookbook&quot; chock full of ready-made examples for common tasks,
+drawing from a careful selection of Rust crates.</p>
+<p>(Also, ICYMI: please participate in the <a href="https://blog.rust-lang.org/2017/05/03/survey.html">State of Rust survey</a>; even if you don't use Rust, we'd love to hear from you!)</p>
+<h2><a href="#batteries-included" aria-hidden="true" class="anchor" id="batteries-included"></a>Batteries included?</h2>
+<p><strong>You can't be productive in a language without libraries that are easy to find
+and use.</strong> Of course, the easiest library to find is the standard library, and
+many languages have taken a &quot;batteries included&quot; approach that includes APIs for
+a broad set of tasks directly in the standard library. There's a lot of upside
+to doing so: it means there's just one place to look for common tasks, with APIs
+that (hopefully!) cohere across tasks, compatibility across the ecosystem, and a
+promise of library maintenance. What's not to like?</p>
+<p>There's a countervailing mindset which, in its harshest terms, says &quot;the
+standard library is where code goes to die&quot; (a complaint sometimes heard about
+batteries-included standard libraries). Because the standard library is coupled
+to the language itself, it is released at the same frequency as the language is,
+and making breaking changes means breaking the whole language. For these reasons
+and others, standard libraries tend to evolve conservatively.</p>
+<p>As usual in the Rust world, our goal is to have our cake and eat it too. <strong>Can
+we provide something like a batteries-included experience, without ossifying
+that code in the standard library?</strong> This is a particularly vital question for
+Rust because, as a community, we are still rapidly exploring and iterating on
+best practices for ownership-based API design.</p>
+<p>The key ingredient to our approach is <a href="https://blog.rust-lang.org/2016/05/05/cargo-pillars.html">Cargo</a>, the package manager that shipped
+with Rust 1.0 and has been improving ever since. Cargo provides a unified
+dependency and workflow story across the entire Rust ecosystem, and makes adding
+dependencies a painless and relatively low-risk proposition. The ability to
+share code with ease is a powerful change to the character of, and audience for,
+traditional systems programming tasks.</p>
+<p>Because of Cargo, we can &quot;include batteries&quot; without literally putting them into
+the standard library; pulling in other crates is nearly as easy as using the
+standard library (and will likely get even easier this year). But to capitalize
+on this ability to the fullest, we need to have excellent libraries. <strong>Our
+mission for 2017 is to ensure that crates are available for a wide swath of
+common tasks and that they are <em>discoverable</em>, <em>cohesive</em>, <em>featureful</em>, and
+<em>well-documented</em>.</strong></p>
+<h2><a href="#the-rust-libz-blitz" aria-hidden="true" class="anchor" id="the-rust-libz-blitz"></a>The Rust Libz Blitz</h2>
+<p>Fortunately, while the standard library has stayed small and focused, the
+crates.io ecosystem has been growing at breakneck pace. So the challenge here
+isn't greenfield library work. It's more a question of: <strong>how can the Rust
+community work in a focused way to polish, consolidate, and surface a core set
+of libraries for essential tasks?</strong> Our answer is the Rust Libz Blitz.</p>
+<p>The basic idea is to:</p>
+<ul>
+<li>Collectively review a few crates at a time in a shared forum. The review draws
+in part from a set of <a href="https://github.com/brson/rust-api-guidelines">API guidelines</a>.</li>
+<li>Every two weeks, hold a library team meeting focused on open questions around
+one of these crates, with the author in attendance.</li>
+<li>Push this feedback onto a tracking issue for the crate, and point the Rust
+community there to help shoulder the burden of making improvements.</li>
+<li>Write up entries for each crate in a new Rust Cookbook, which will make it
+easy to discover the crate and jump into using it.</li>
+</ul>
+<p>The Rust library team has been quietly engaging in this process already for the
+past couple of months, to sort out the kinks. But now, we want to open it up to
+the whole Rust community. In the rest of the post, we'll dive a bit more deeply
+into the mechanics and goals of this process.</p>
+<h3><a href="#rust-standards-of-quality" aria-hidden="true" class="anchor" id="rust-standards-of-quality"></a>Rust standards of quality</h3>
+<p>In all the work on the standard library, we have gained a sense of what makes
+Rust APIs great: principles like &quot;make performance characteristics clear&quot; and
+&quot;use ownership to encapsulate invariants&quot;; consistent naming conventions like
+<code>mut</code>, <code>ref</code>, <code>as</code>, <code>into</code>, that let users intuit what they don't know
+from what they do; small details of presentation that add up, like consistently
+documenting possible error cases in a dedicated &quot;Errors&quot; section; and so many
+more factors to consider when publishing Rust crates.</p>
+<p>In 2017 we plan to apply the principles behind the design of <code>std</code> to an
+ever-widening foundation of critical Rust libraries. Along the way we will
+document what we learn about Rust library design.</p>
+<p>The product of this process will be a mature core of libraries together with a
+set of <a href="https://github.com/brson/rust-api-guidelines">API guidelines</a> that Rust authors can follow to gain insight into the
+design of Rust and level up crates of their own interest. Today those guidelines
+are in a very early state, but give you a sense of where we are headed with this
+effort. Take a look and file issues where things are unclear or missing!</p>
+<h3><a href="#rust-standards-of-documentation" aria-hidden="true" class="anchor" id="rust-standards-of-documentation"></a>Rust standards of documentation</h3>
+<p>We recently ran a small survey to see what Rust programmers care most about when
+evaluating a crate. The <a href="https://github.com/rust-lang/rfcs/blob/master/text/1824-crates.io-default-ranking.md#factors-considered-when-ranking-crates">most common criterion</a>, by far, was documentation.  So
+a big part of the Libz Blitz process will be evaluating and improving the
+documentation of the targeted crates, which will supplement ongoing efforts to
+<a href="https://github.com/rust-lang/book/">rewrite the Rust book</a> and provide comprehensive <a href="https://github.com/rust-lang/rust/issues/29329">examples</a> for the standard
+library. The API guidelines contain a section dedicated to great documentation,
+and we aim for a consistent, easy to navigate docs experience across all of the
+core crates.</p>
+<p>Beyond documentation within the crates themselves (which tends to be more of the
+&quot;reference&quot; flavor), we are also starting a <a href="https://github.com/rust-lang-nursery/rust-cookbook">Rust Cookbook</a>, which will be
+organized around problems you want to solve, and provide quick, concrete example
+code you can drop directly into your project, drawing from a variety of crates
+(including the standard library). Examples like these are one of the most useful
+tools for quickly getting productive with a library, and collecting them all in
+one place, organized by problem, will help get us to a &quot;batteries included&quot;
+experience when working with Rust.</p>
+<p>Part of the work done in the Libz Blitz for each crate will be identifying the
+key problem statements the crate is trying to address, and adding strong
+examples for each to the cookbook.</p>
+<h3><a href="#rust-standards-of-discoverability" aria-hidden="true" class="anchor" id="rust-standards-of-discoverability"></a>Rust standards of discoverability</h3>
+<p>Perhaps the biggest downside to having a small standard library is the problem
+of discoverability: when a Rust programmer needs to take on a task not covered
+by the standard library, how do they figure out where to look?</p>
+<p>The cookbook mentioned above will undoubtedly become a major part of our
+answer. But at the same time, we want to ensure that there's space for new
+crates to emerge, and that people can easily find crates beyond the most common
+problem areas. To that end, we're attacking discoverability head on, by rolling
+out badges for various quality indicators on crates.io, and greatly improving
+the default ranking of results (a design debated vigorously through <a href="https://github.com/rust-lang/rfcs/pull/1824">an
+RFC</a>). There's plenty of room for more work here, so if you have ideas about
+further improving discoverability on crates.io, <a href="https://internals.rust-lang.org/">please start a thread</a>!</p>
+<h3><a href="#rust-standards-of-community" aria-hidden="true" class="anchor" id="rust-standards-of-community"></a>Rust standards of community</h3>
+<p>We have some idea of what goes into publishing exceptional Rust crates, but the
+Rust library team is not the sole authority of Rust API design—the Rust crate
+ecosystem is created by all of us together and there are many lessons yet to
+learn. In recognition of that, <strong>the library team is architecting our efforts to
+be as welcoming and inclusive as we can</strong>.</p>
+<p>We will kick off forum discussions for evaluating existing crates that we
+believe are vital to set on a path toward stability, and which mostly need
+polish-level work to get there. These evaluations will be collaborative and
+intended for public commentary. They are designed to identify any issues
+separating the crate from &quot;1.0&quot; status (in terms of quality and API stability,
+as well as literal version number). Issues may include poor adherence to Rust
+API design principles, substantial missing functionality, planned API refactors,
+incomplete documentation, or any number of unique circumstances.</p>
+<p>We'll have a small handful of such evaluations going on in parallel. Every two
+weeks, the library team will take up one of the evaluations for discussion in
+our regular video conference, which will be recorded and made available on <a href="https://air.mozilla.org/">Air
+Mozilla</a> and the <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA">Rust YouTube channel</a>. One goal of these meetings will be to
+plan out a roadmap for stabilizing the crate in question. The other goal will be
+to identify any lessons to be learned from the crate and distill those into
+broadly applicable API guidelines.</p>
+<p>We will have a rotating band of guests (including the crate authors) at the
+video conferences by invitation, in order to strengthen the bonds between the
+Rust team and the authors of the Rust ecosystem, and to foster shared values
+among the same.</p>
+<p>Based on the evaluations and library team review, we will file issues that we
+believe are important to resolve before producing a stable release of the
+crate. <strong>We are counting on many of these issues being amenable to casual
+contributions</strong>.</p>
+<p>Here are the issues that arose from the very simple <a href="https://github.com/BurntSushi/byteorder/issues/76"><code>byteorder</code></a>
+crate (all resolved now):</p>
+<ul>
+<li><a href="https://github.com/BurntSushi/byteorder/issues/69">Add a supertrait to hide trait details</a></li>
+<li><a href="https://github.com/BurntSushi/byteorder/issues/68"><code>ByteOrder::default</code> should <code>panic!</code> not <code>unreachable!</code></a></li>
+<li><a href="https://github.com/BurntSushi/byteorder/issues/72">Put panic and error docs in &quot;Panics&quot; and &quot;Errors&quot; sections</a></li>
+<li><a href="https://github.com/BurntSushi/byteorder/issues/75">Make sure there are enough examples</a></li>
+<li><a href="https://github.com/BurntSushi/byteorder/issues/74">Add CI badges to Cargo.toml</a></li>
+<li><a href="https://github.com/BurntSushi/byteorder/issues/73">Add &quot;categories&quot; to Cargo.toml</a></li>
+<li><a href="https://github.com/BurntSushi/byteorder/issues/77">Add <code>#[doc(html_root_url)]</code></a></li>
+</ul>
+<p>Beyond <code>byteorder</code> we've already worked this process for several other simple
+crates to get a feel for it: <a href="https://github.com/rust-lang-nursery/bitflags/issues/80"><code>bitflags</code></a>, <a href="https://github.com/rust-lang-nursery/tempdir/issues/28"><code>tempdir</code></a>, <a href="https://github.com/alexcrichton/flate2-rs/issues/89"><code>flate2</code></a>, and
+<a href="https://github.com/rust-lang-nursery/lazy-static.rs/issues/70"><code>lazy_static</code></a>. Even these, the most basic of crates, have some work left to do
+but you can expect them to have &quot;1.0&quot; releases soon. As the crates under
+evaluation grow in scope, presumably the tasks that arise will grow as well.</p>
+<h3><a href="#what-crates-are-we-going-to-focus-on" aria-hidden="true" class="anchor" id="what-crates-are-we-going-to-focus-on"></a>What crates are we going to focus on?</h3>
+<p>Rust has some amazing libraries in the works: things like <a href="https://tokio.rs/"><code>tokio</code></a>
+which is a really fast asynchronous I/O framework; like <a href="https://diesel.rs/"><code>diesel</code></a>, a
+really fast library for interacting with database tables; and like
+<a href="https://rocket.rs/"><code>rocket</code></a>, a really fast web framework.</p>
+<p>We are not going to be touching them.</p>
+<p>These high-profile libraries are built on <strong>dozens of smaller crates that
+perform crucial functions across the ecosystem</strong>: random number generation,
+memory mapping, compression, and so much more. We need to polish off the lower
+layers of the Rust stack so that those high-level libraries have a stable
+foundation to build on.</p>
+<p>Focusing on these lower layers is not only a practical consideration but a
+technical one—a crate should not be stable until its public dependencies are
+stable. Consider what it would mean for a hypothetical <a href="https://diesel.rs/"><code>diesel</code></a> 1.0 to export
+a function returning a type from a still-rapidly-developed <a href="https://doc.rust-lang.org/uuid/uuid/index.html"><code>uuid</code></a> 0.5. Before
+long it would be incompatible with other libraries using newer versions of
+<code>uuid</code>.</p>
+<p>Furthermore, many of these high-level libraries are very much undergoing their
+own rapid development, with their own strong leadership. We don't want to impose
+on those crates' authors' abilities to experiment with their designs by
+pressuring them to declare crates stable before they are ready. Those libraries
+will mature in time.</p>
+<p>But there are many foundational libraries that have reached relative stability,
+and are in some cases functionally complete and being widely used in
+production. Some need little work to put them across the finish line. Some, like
+the <a href="https://doc.rust-lang.org/rand/rand/index.html"><code>rand</code></a> crate, are widely used but known to have unsatisfactory designs. We
+want to finally put those crates to bed.</p>
+<p>We are currently drawing this list of foundational crates by combining crates.io
+dependency data, various existing curated crate listings, and good old gut
+feeling. The exact list is definitely up for debate, and we hope that the
+broader community will also apply this process completely independently to
+crates the libs team won't have time to discuss.</p>
+<h3><a href="#how-can-i-help" aria-hidden="true" class="anchor" id="how-can-i-help"></a>How can I help?</h3>
+<p>We're glad you asked! Creating a solid core of libraries for a young
+language is not the work of a single person or team—it is the work of
+the entire community. The central point of coordination is a <a href="https://internals.rust-lang.org/t/rust-libs-blitz/5184">thread
+on the Rust internals forum</a>. Read that thread for all the dirty
+details about what we're doing, and for ongoing opportunities to get
+involved.</p>
+<p>Roles that need your help:</p>
+<ul>
+<li>
+<p><strong>Crate lead</strong>. Each crate needs a volunteer to lead the evaluation
+effort. That entails starting up a thread, breaking up the evaluation work
+into small work items that can be taken on by others in the community, keeping
+the discussion moving in productive directions, making sure the evaluation is
+completed on time, presenting the results at the libs team meeting, and,
+finally, filing discrete, actionable issues on everything raised, and funneling
+them to TWiR.</p>
+<p><em>Anyone can be a crate lead, but it's a substantial commitment and is largely
+about organization, communication, and consensus, and requires presenting to
+the libs team in a video meeting.</em></p>
+</li>
+<li>
+<p><strong>Crate evaluator</strong>. This is the preliminary work of comparing a crate to the
+API guidelines, identifying deficiencies, and raising observations about API
+design that may impact the guidelines. It will often require working with the
+crate author to understand a crate's known shortcomings.</p>
+<p>Each evaluation will be published to the coordination thread, providing an
+opportunity for general feedback. Open feedback allows for a wide range of
+voices to be heard and is an important check against design myopia.</p>
+<p><em>This effort is collaborative and everyone is welcome to participate in this
+way at any time. The crate lead will help create opportunities to jump in.</em></p>
+</li>
+<li>
+<p><strong>Documentation slinger</strong>. A lot of the work involved in getting a crate up to
+full quality is improving documentation, including writing up cookbook entries.
+There will be lots of opportunities for this kind of high value work.</p>
+<p><em>Everyone is welcome to participate in this way at any time. The
+crate lead will help create opportunities to jump in.</em></p>
+</li>
+<li>
+<p><strong>Library hacker</strong>. Somebody must do the programming work of resolving the
+issues on the roadmap to stability for each crate. We expect to produce many
+discrete work items and that many of them will be accessible to inexperienced
+Rust programmers.</p>
+<p><em>Everyone is welcome to participate in this way at any time. The crate lead
+will help create opportunities to jump in.</em></p>
+</li>
+<li>
+<p><strong>Library designer</strong>. There remain some important libraries that are only
+lightly maintained but are known to require significant design work (again
+thinking of <a href="https://doc.rust-lang.org/rand/rand/index.html"><code>rand</code></a> especially). These will not improve without a dedicated
+and skilled author to drive them forward. We are going to be looking out for
+authors with the design skills necessary to fix the problems, and the social
+skills necessary to navigate the process.</p>
+<p><em>We will occasionally make pleas for help on specific design matters as they
+arise.</em></p>
+</li>
+<li>
+<p><strong>Libs team guest</strong>. The library team will spend one of their video meetings
+reviewing each crate evaluation. We hope that the crate authors will be
+interested in joining us, sharing their unique expertise, and getting to know
+the libs team. This kind of interaction creates strong bonds in a way that
+communicating through text does not. We hope this will foster shared values
+across the ecosystem, and pave the way for expanding the libs team more
+formally.</p>
+<p><em>This will be by invitation and focused on authors with an existing reputation
+for high quality work and productive collaboration.</em></p>
+</li>
+<li>
+<p><strong>Crate author</strong>. The libs team has some specific functionality and crates it
+wants to focus on this year. Outside of that, we are hopeful that the process
+and guidelines we develop will be widely useful and that crate authors will
+independently seek to evaluate and improve their own crates in similar ways.</p>
+</li>
+</ul>
+<h2><a href="#the-tldr" aria-hidden="true" class="anchor" id="the-tldr"></a>The TL;DR</h2>
+<p>Here's the plan:</p>
+<ul>
+<li>We will directly improve the most important crates you use every
+day.</li>
+<li>We will provide crate authors the guidance they need to do the same,
+in the form of <strong><a href="https://github.com/brson/rust-api-guidelines">API guidelines</a></strong>.</li>
+<li>We will create an endless stream of accessible contribution
+opportunities that directly contribute to key Rust strategic goals.</li>
+<li>We will produce cohesive documentation on how to use Rust's most
+foundational crates, in the form of a <strong><a href="https://rust-lang-nursery.github.io/rust-cookbook/">crate cookbook</a></strong>.</li>
+<li>We will launch a self-sustaining process of library improvement that
+can by applied consistently across the entire ecosystem.</li>
+</ul>
+<p>Thank you to everyone who has contributed thus far, including Alisha
+Aneja, Andrew Gallant, Brad Anderson, Charles Chamberlain, Dan
+Burkert, David Harris, Jan-Erik Rediger, Peter Atashian, Roman Frołow,
+Sean McArthur, Simon Sapin, Stephan Buys, Steven Fackler, Trent Spice.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

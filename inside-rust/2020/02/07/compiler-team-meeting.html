@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>2020-02-06 Compiler Team Triage Meeting | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="2020-02-06 Compiler Team Triage Meeting | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="2020-02-06 Compiler Team Triage Meeting | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="2020-02-06 Compiler Team Triage Meeting" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>2020-02-06 Compiler Team Triage Meeting</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 7, 2020 &middot; Wesley Wiser
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">the compiler team</a> 
+    </div>
+
+    <div class="post">
+      <p>The compiler team had our weekly triage meeting on 2020-02-06.
+You can find the <a href="https://rust-lang.github.io/compiler-team/minutes/triage-meeting/2020-02-06/">minutes</a> on the <a href="https://github.com/rust-lang/compiler-team">compiler-team repository</a>.
+Each week, we have general announcements from the team followed by check-ins from two of the compiler team working groups.</p>
+<h2><a href="#announcements" aria-hidden="true" class="anchor" id="announcements"></a>Announcements</h2>
+<ul>
+<li>
+<p>There is a design meeting this Friday (2020-02-07) on <a href="https://github.com/rust-lang/compiler-team/issues/237">parser-librarification</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/davidtwco">@davidtwco</a> has made progress on the polymorphization effort and has posted a <a href="https://rust-lang.zulipchat.com/#narrow/stream/216091-t-compiler.2Fwg-polymorphization/topic/progress.20updates/near/187461928">status update</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/michaelwoerister">@mw</a> has posted a major change proposal to make <a href="https://github.com/rust-lang/compiler-team/issues/245">incremental compilation respect the <code>-Ccodegen-units</code> setting</a>.</p>
+</li>
+<li>
+<p>Cargo report future-incompat <a href="https://github.com/rust-lang/rfcs/issues/2834">rfc#2834</a> is on track to get an FCP merge request from the cargo team in the near future.</p>
+</li>
+</ul>
+<h2><a href="#working-group-sync" aria-hidden="true" class="anchor" id="working-group-sync"></a>Working group sync</h2>
+<h3><a href="#wg-rls-20" aria-hidden="true" class="anchor" id="wg-rls-20"></a><a href="https://rust-lang.github.io/compiler-team/working-groups/rls-2.0/">wg-rls-2.0</a></h3>
+<ul>
+<li>
+<p>The Chalk dependency has been updated which dramatically reduced crashes.</p>
+</li>
+<li>
+<p><code>cargo check</code> handling has been moved ino the server so all editors not just VS Code benefit.</p>
+</li>
+<li>
+<p><a href="https://github.com/matklad">@matklad</a> and <a href="https://github.com/nikomatsakis">@nikomatsakis</a> have been working on an RFC to merge RLS and Rust Analyzer officially.</p>
+</li>
+<li>
+<p>Work is proceeding on &quot;production readiness&quot;.</p>
+<ul>
+<li>Binary releases are available on the project's GitHub page.</li>
+<li>Planning to publish to VS Code extension marketplace &quot;soon&quot;.</li>
+</ul>
+</li>
+</ul>
+<h3><a href="#wg-self-profile" aria-hidden="true" class="anchor" id="wg-self-profile"></a><a href="https://rust-lang.github.io/compiler-team/working-groups/self-profile/">wg-self-profile</a></h3>
+<ul>
+<li>
+<p>The <a href="https://github.com/rust-lang/rust/issues/58967">&quot;Minimum Viable Product&quot;</a> has been completed!</p>
+<ul>
+<li>Self-profling is enabled for all perf.rust-lang.org runs and we automatically publish the data. (<a href="https://perf.rust-lang.org/detailed-query.html?commit=3761dcd3467441f78939ccb3b341b03b6a7558d7&base_commit=ac2f3fa41ac5ae8425b959f955bb7433b7c57aea&benchmark=await-call-tree-debug&run_name=clean">Example</a>)</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/michaelwoerister">@mw</a> implemented query-key recording so queries can now be attributed to individual query invocations.</p>
+</li>
+<li>
+<p>The <a href="https://github.com/rust-lang/measureme/tree/master/crox"><code>crox</code></a> utility, which generates Chromium profiler compatible trace data, can now generate profiles for entire Cargo invocations via the <code>--dir</code> flag.</p>
+<ul>
+<li>This allows inspecting various rustc processes and their individual threads on a common timeline with full query data.</li>
+</ul>
+</li>
+<li>
+<p>Quite a few people have tried <code>-Zself-profile</code> and have said they found it very useful!</p>
+</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

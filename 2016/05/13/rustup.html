@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Taking Rust everywhere with rustup | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Taking Rust everywhere with rustup | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Taking Rust everywhere with rustup | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Taking Rust everywhere with rustup" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Taking Rust everywhere with rustup</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">May 13, 2016 &middot; Brian Anderson
+    
+    </div>
+
+    <div class="post">
+      <p><em>Cross-compilation</em> is an imposing term for a common kind of desire:</p>
+<ul>
+<li>
+<p>You want to build an app for Android, or iOS, or your router using your laptop.</p>
+</li>
+<li>
+<p>You want to write, test and build code on your Mac, but deploy it to your Linux server.</p>
+</li>
+<li>
+<p>You want your Linux-based build servers to produce binaries for all the platforms
+you ship on.</p>
+</li>
+<li>
+<p>You want to build an ultraportable binary you can ship to any Linux platform.</p>
+</li>
+<li>
+<p>You want to target the browser with <a href="http://kripken.github.io/emscripten-site/">Emscripten</a> or <a href="https://webassembly.github.io/">WebAssembly</a>.</p>
+</li>
+</ul>
+<p>In other words, <strong>you want to develop/build on one &quot;host&quot; platform, but get a
+final binary that runs on a different &quot;target&quot; platform</strong>.</p>
+<p>Thanks to the <a href="http://llvm.org">LLVM</a> backend, it's always been possible <em>in principle</em>
+to cross-compile Rust code: just tell the backend to use a different
+target! And indeed, intrepid hackers have put Rust on embedded systems
+<a href="http://mirrors.link/posts/cross-compiling-rust-on-os-x-for-raspberry-pi-3">like the Raspberry Pi 3</a>, <a href="https://blog.thiago.me/raspberry-pi-bare-metal-programming-with-rust/">bare metal ARM</a>, <a href="https://github.com/japaric/rust-on-openwrt">MIPS routers running
+OpenWRT</a>, and many others.</p>
+<p>But in practice, there are a lot of ducks you have to get in a row to
+make it work: the appropriate Rust standard library, a cross-compiling
+C toolchain including linker, headers and binaries for C libraries,
+and so on. This typically involves pouring over various blog posts
+and package installers to get everything &quot;just so&quot;. And the exact set
+of tools can be different for every pair of host and target platforms.</p>
+<p><strong>The Rust community has been hard at work toward the goal of &quot;push-button
+cross-compilation&quot;</strong>. We want to provide a complete setup for a given
+host/target pair with the run of a single command. Today we're happy to announce
+that a major portion of this work is reaching beta status: we're building
+binaries of the Rust standard library for a wide range of targets, and shipping
+them to you via a new tool called <strong><a href="https://www.rustup.rs">rustup</a></strong>.</p>
+<h2><a href="#introducing-rustup" aria-hidden="true" class="anchor" id="introducing-rustup"></a>Introducing rustup</h2>
+<p>At its heart, <strong>rustup is a <em>toolchain manager</em> for Rust</strong>. It can
+download and switch between copies of the Rust compiler and standard
+library for all supported platforms, and track Rust's nightly, beta,
+and release <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">channels</a>, as well as specific versions. In this way
+rustup is similar to the <a href="https://rvm.io/">rvm</a>, <a href="https://github.com/rbenv/rbenv">rbenv</a> and <a href="https://github.com/yyuu/pyenv">pyenv</a> tools for Ruby and
+Python. I'll walk through all of this functionality, and the
+situations where it's useful, in the rest of the post.</p>
+<p>Today rustup is a command line application, and I'm going to show you some
+examples of what it can do, but it's also a <a href="https://github.com/rust-lang-nursery/rustup.rs/">Rust library</a>, and eventually these
+features are expected to be presented through a graphical interface where
+appropriate — particularly on Windows. Getting cross-compilation set up should
+eventually be a matter of checking a box in the Rust installer.</p>
+<p>Our ambitions go beyond managing just the Rust toolchain: to have a
+true push-button experience for cross-compilation, it needs to set up
+the C toolchain as well. That functionality is not shipping today, but
+it's something we hope to incorporate over the next few months.</p>
+<h2><a href="#basic-toolchain-management" aria-hidden="true" class="anchor" id="basic-toolchain-management"></a>Basic toolchain management</h2>
+<p>Let's start with something simple: installing multiple Rust toolchains. In this
+example I create a new library, 'hello', then test it using rustc 1.8, then use
+rustup to install and test that same crate on the 1.9 beta.</p>
+<div style="height:420px;margin:20px;">
+<script type="text/javascript"
+	src="https://asciinema.org/a/37cr19qny7451wenmpb113s1r.js"
+	id="asciicast-37cr19qny7451wenmpb113s1r"
+	async
+	data-speed="2"
+></script>
+</div>
+<!--
+```
+$ cargo new hello && cd hello
+$ rustc --version
+$ cargo test
+$ rustup install beta
+$ rustup run beta rustc --version
+$ rustup run beta cargo test
+```
+-->
+<p>That's an easy way to verify your code works on the next Rust release. That's
+good Rust citizenship!</p>
+<p>We can use <code>rustup show</code> to show us the installed toolchains, and <code>rustup update</code> to keep them up to date with Rust's releases.</p>
+<div style="height:420px;margin:20px;">
+<script type="text/javascript"
+	src="https://asciinema.org/a/ek7vdmfltncmgnip8cnuc6ua4.js"
+	id="asciicast-ek7vdmfltncmgnip8cnuc6ua4"
+	async
+	data-speed="2"
+></script>
+</div>
+<p>Finally, rustup can also change the default toolchain with <code>rustup default</code>:</p>
+<pre><code>$ rustc --version
+rustc 1.8.0 (db2939409 2016-04-11)
+$ rustup default 1.7.0
+info: syncing channel updates for '1.7.0-x86_64-unknown-linux-gnu'
+info: downloading component 'rust'
+info: installing component 'rust'
+info: default toolchain set to '1.7.0-x86_64-unknown-linux-gnu'
+
+  1.7.0-x86_64-unknown-linux-gnu installed - rustc 1.7.0 (a5d1e7a59 2016-02-29)
+
+$ rustc --version
+rustc 1.7.0 (a5d1e7a59 2016-02-29)
+</code></pre>
+<p>On Windows, <a href="https://www.rust-lang.org/downloads.html#win-foot">where Rust supports both the GNU and MSVC ABI</a>, you
+might want to switch from the default stable toolchain on Windows,
+which targets the 32-bit x86 architecture and the GNU ABI, to a
+stable toolchain that targets the 64-bit, MSVC ABI.</p>
+<pre><code class="language-console">rustup default stable-x86_64-pc-windows-msvc
+info: syncing channel updates for 'stable-x86_64-pc-windows-msvc'
+info: downloading component 'rustc'
+info: downloading component 'rust-std'
+...
+
+  stable-x86_64-pc-windows-msvc installed - rustc 1.8.0-stable (db2939409 2016-04-11)
+
+</code></pre>
+<p>Here the &quot;stable&quot; toolchain name is appended with an extra identifier indicating
+the compiler's architecture, in this case <code>x86_64-pc-windows-msvc</code>. This
+identifier is called a &quot;target triple&quot;: &quot;target&quot; because it specifies a platform
+for which the compiler generates (targets) machine code; and &quot;triple&quot; for
+historical reasons (in many cases &quot;triples&quot; are actually quads these
+days). Target triples are the basic way we refer to particular common platforms;
+<code>rustc</code> by default knows about 56 of them, and <code>rustup</code> today can obtain
+compilers for 14, and standard libraries for 30.</p>
+<h2><a href="#example-building-static-binaries-on-linux" aria-hidden="true" class="anchor" id="example-building-static-binaries-on-linux"></a>Example: Building static binaries on Linux</h2>
+<p>Now that we've got the basic pieces in place, let's apply them to
+a simple cross-compilation task: building an ultraportable static binary
+for Linux.</p>
+<p>One of the unique features of Linux that has become increasingly appreciated is
+its stable syscall interface. Because the Linux kernel puts exceptional effort
+into maintaining a backward-compatible kernel interface, it's possible to
+distribute <a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format">ELF</a> binaries with no dynamic library dependencies that will run on
+any version of Linux. Besides being one of the features that make Docker
+possible, it also allows developers to build self-contained applications and
+deploy them to any machine running Linux, regardless of whether it's Ubuntu or
+Fedora or any other distribution, and regardless of exact mix of software
+libraries they have installed.</p>
+<p>Today's Rust depends on libc, and on most Linuxes that means
+glibc. It's technically challenging to fully statically link glibc,
+which presents difficulties when using it to produce a truly standalone
+binary. Fortunately, an alternative exists: <a href="http://www.musl-libc.org/">musl</a>, a small, modern
+implementation of libc that can be easily statically linked. Rust has been
+compatible with musl since version 1.1, but until recently developers
+have needed to build their own compiler to benefit from it.</p>
+<p>With that background, let's walk through compiling a statically-linked Linux
+executable. For this example you'll want to be running Linux — that is, your
+<em>host platform</em> will be Linux, and your <em>target platform</em> will also be Linux,
+just a different flavor: musl. (Yes, this is technically cross-compilation
+even though both targets are Linux).</p>
+<p>I'm going to be running on Ubuntu 16.04 (using <a href="https://hub.docker.com/r/brson/rustup-demo/">this Docker
+image</a>). We'll be building the basic hello world:</p>
+<pre><code>rust:~$ cargo new --bin hello &amp;&amp; cd hello
+rust:~/hello$ cargo run
+   Compiling hello v0.1.0 (file:///home/rust/hello)
+     Running `target/debug/hello`
+Hello, world!
+</code></pre>
+<p>That's with the default <code>x86_64-unknown-linux-gnu</code> target. And you can
+see it has many dynamic dependencies:</p>
+<pre><code>rust:~/hello$ ldd target/debug/hello
+        linux-vdso.so.1 =&gt;  (0x00007ffe5e979000)
+        libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fca26d03000)
+        libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fca26ae6000)
+        libgcc_s.so.1 =&gt; /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007fca268cf000)
+        libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fca26506000)
+        /lib64/ld-linux-x86-64.so.2 (0x000056104c935000)
+        libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007fca261fd000)
+</code></pre>
+<p>To compile for musl instead call <code>cargo</code> with the argument
+<code>--target=x86_64-unknown-linux-musl</code>. If we just go ahead and try that
+we'll get an error:</p>
+<pre><code>rust:~/hello$ cargo run --target=x86_64-unknown-linux-musl
+   Compiling hello v0.1.0 (file:///home/rust/hello)
+error: can't find crate for `std` [E0463]
+error: aborting due to previous error
+Could not compile `hello`.
+...
+
+</code></pre>
+<p>The error tells us that the compiler can't find <code>std</code>. That is of
+course because we haven't installed it.</p>
+<p>To start cross-compiling, you need to acquire a standard library for the target
+platform. Previously, this was an error-prone, manual process — cue those
+blog posts I mentioned earlier. But with rustup, it's just part of the usual
+workflow:</p>
+<pre><code>rust:~/hello$ rustup target add x86_64-unknown-linux-musl
+info: downloading component 'rust-std' for 'x86_64-unknown-linux-musl'
+info: installing component 'rust-std' for 'x86_64-unknown-linux-musl'
+rust:~/hello$ rustup show
+installed targets for active toolchain
+--------------------------------------
+
+x86_64-unknown-linux-gnu
+x86_64-unknown-linux-musl
+
+active toolchain
+----------------
+
+stable-x86_64-unknown-linux-gnu (default)
+rustc 1.8.0 (db2939409 2016-04-11)
+</code></pre>
+<p>So I'm running the 1.8 toolchain for Linux on 64-bit x86, as indicated by the
+<code>x86_64-unknown-linux-gnu</code> target triple, and now I can also target
+<code>x86_64-unknown-linux-musl</code>. Neat. Surely we are ready to build a slick
+statically-linked binary we can release into the cloud. Let's try:</p>
+<pre><code>rust:~/hello$ cargo run --target=x86_64-unknown-linux-musl
+   Compiling hello v0.1.0 (file:///hello)
+     Running `target/x86_64-unknown-linux-musl/debug/hello`
+Hello, world!
+</code></pre>
+<p>And that... just worked! Run <code>ldd</code> on it for proof that it's the real
+deal:</p>
+<pre><code>rust:~/hello$ ldd target/x86_64-unknown-linux-musl/debug/hello
+        not a dynamic executable
+</code></pre>
+<p>Now take that <code>hello</code> binary and copy it to any x86_64 machine running Linux and
+it'll run just fine.</p>
+<p>For more advanced use of musl consider <a href="https://github.com/emk/rust-musl-builder">rust-musl-builder</a>, a Docker
+image set up for musl development, which helpfully includes common C
+libraries compiled for musl.</p>
+<h2><a href="#example-running-rust-on-android" aria-hidden="true" class="anchor" id="example-running-rust-on-android"></a>Example: Running Rust on Android</h2>
+<p>One more example. This time building for Android, from Linux, i.e.,
+<code>arm-linux-androideabi</code> from <code>x86_64-unknown-linux-gnu</code>.  This can also be done
+from OS X or Windows, though on Windows the setup is slightly different.</p>
+<p>To build for Android we need to add the Android target, so let's
+set up another 'hello, world' project and install it.</p>
+<pre><code>rust:~$ cargo new --bin hello &amp;&amp; cd hello
+rust:~/hello$ rustup target add arm-linux-androideabi
+info: downloading component 'rust-std' for 'arm-linux-androideabi'
+info: installing component 'rust-std' for 'arm-linux-androideabi'
+rust:~/hello$ rustup show
+installed targets for active toolchain
+--------------------------------------
+
+arm-linux-androideabi
+x86_64-unknown-linux-gnu
+
+active toolchain
+----------------
+
+stable-x86_64-unknown-linux-gnu (default)
+rustc 1.8.0 (db2939409 2016-04-11)
+</code></pre>
+<p>So let's see what happens if we try to just build our 'hello'
+project without installing anything further:</p>
+<pre><code>rust:~/hello$ cargo build --target=arm-linux-androideabi
+   Compiling hello v0.1.0 (file:///home/rust/hello)
+error: linking with `cc` failed: exit code: 1
+... (lots of noise elided)
+error: aborting due to previous error
+Could not compile `hello`.
+</code></pre>
+<p>The problem is that we don't have a linker that supports Android yet,
+so let's take a moment's digression to talk about building for
+Android. To develop for Android we need the <a href="https://developer.android.com/ndk/guides/setup.html#install">Android NDK</a>. It contains
+the linker <code>rustc</code> needs to create Android binaries. To just <em>build</em>
+Rust code that targets Android the only thing we need is the NDK, but
+for practical development we'll want the <a href="https://developer.android.com/sdk/index.html">Android SDK</a> too.</p>
+<p>On Linux, download and unpack them with the following commands (the
+output of which is not included here):</p>
+<pre><code>rust:~/home$ cd
+rust:~$ curl -O https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
+rust:~$ tar xzf android-sdk_r24.4.1-linux.tgz
+rust:~$ curl -O http://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
+rust:~$ unzip android-ndk-r10e-linux-x86_64.zip
+</code></pre>
+<p>We further need to create what the NDK calls a <a href="https://developer.android.com/ndk/guides/standalone_toolchain.html">&quot;standalone
+toolchain&quot;</a>.  We're going to put ours in a directory called
+<code>android-18-toolchain</code>:</p>
+<pre><code>rust:~$ android-ndk-r10e/build/tools/make-standalone-toolchain.sh \
+      --platform=android-18 --toolchain=arm-linux-androideabi-clang3.6 \
+      --install-dir=android-18-toolchain --ndk-dir=android-ndk-r10e/ --arch=arm
+Auto-config: --toolchain=arm-linux-androideabi-4.8, --llvm-version=3.6
+Copying prebuilt binaries...
+Copying sysroot headers and libraries...
+Copying c++ runtime headers and libraries...
+Copying files to: android-18-toolchain
+Cleaning up...
+Done.
+</code></pre>
+<p>Let's notice a few things about these commands. First, the NDK we
+downloaded, <code>android-ndk-r10e-linux-x86_64.zip</code> is not the most recent
+release (which at the time of this writing is 'r11c'). Rust's <code>std</code> is
+built against <code>r10e</code> and links to symbols that are no longer included
+in the NDK. So for now we have to use the older NDK.  Second, in
+building the standalone toolchain we passed <code>--platform=android-18</code> to
+<code>make-standalone-toolchain.sh</code>. The &quot;18&quot; here is the Android <a href="http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#ApiLevels">API
+level</a>.
+Today, Rust's <code>arm-linux-androideabi</code> target is built against Android
+API level 18, and should theoretically be forwards-compatible with
+subsequent Android API levels. So we're picking level 18 to get the
+greatest Android compatibility that Rust presently allows.</p>
+<p>The final thing for us to do is tell Cargo where to find the android
+linker, which is in the standalone NDK toolchain we just created. To
+do that we configure the <code>arm-linux-androideabi</code> target in
+<a href="http://doc.crates.io/config.html"><code>.cargo/config</code></a> with the 'linker' value. And while we're doing that
+we'll go ahead and set the default target for this project to Android
+so we don't have to keep calling cargo with the <code>--target</code> option.</p>
+<pre><code class="language-toml">[build]
+target = &quot;arm-linux-androideabi&quot;
+
+[target.arm-linux-androideabi]
+linker = &quot;/home/rust/android-18-toolchain/bin/arm-linux-androideabi-clang&quot;
+</code></pre>
+<p>Now let's change back to the 'hello' project directory and try
+to build again:</p>
+<pre><code>rust:~$ cd hello
+rust:~/hello$ cargo build
+   Compiling hello v0.1.0 (file:///home/rust/hello)
+</code></pre>
+<p>Success! Of course just getting something to build is not the end of
+the story. You've also got to package your code up as an Android
+APK. For that you can use <a href="https://users.rust-lang.org/t/announcing-cargo-apk/5501">cargo-apk</a>.</p>
+<h2><a href="#rust-everywhere-else" aria-hidden="true" class="anchor" id="rust-everywhere-else"></a>Rust everywhere else</h2>
+<p>Rust is a software platform with the potential to run on anything with
+a CPU. In this post I showed you a little bit of what Rust can already
+do, with the rustup tool. Today Rust runs on most of the platforms you
+use daily. Tomorrow it will run everywhere.</p>
+<p>So what should you expect next?</p>
+<p>In the coming months we're going to continue removing barriers to Rust
+cross-compilation. Today rustup provides access to the standard library, but as
+we've seen in this post, there's more to cross-compilation than rustc +
+std. It's acquiring and configuring the linker and C toolchain that is the most
+vexing — each combination of host and target platform requires something
+slightly different. We want to make this easier, and will be adding &quot;NDK
+support&quot; to rustup. What this means will again depend on the exact scenario, but
+we're going to start working from the most demanded, like Android,
+and try to automate as much of the detection, installation and configuration of
+the non-Rust toolchain components as we can. On Android for instance, the hope
+is to automate everything for a basic initial setup except for accepting the
+licenses.</p>
+<p>In addition to that there are multiple efforts to improve Rust
+cross-compilation tooling, including <a href="https://github.com/japaric/xargo">xargo</a>, which can be used to
+build the standard library for targets unsupported by rustup, and
+<a href="https://users.rust-lang.org/t/announcing-cargo-apk/5501">cargo-apk</a>, which builds Android packages from Cargo packages.</p>
+<p>Finally, the most exciting platform on the horizon for Rust is not a traditional
+target for systems languages: the web. With <a href="http://kripken.github.io/emscripten-site/">Emscripten</a> today it's quite easy
+to run <em>C++</em> code on the web by converting LLVM IR to JavaScript (or the asm.js
+subset of JavaScript). And the upcoming <a href="https://webassembly.github.io/">WebAssembly</a> (wasm) standard will
+cement the web platform as a first-class target for programming languages.</p>
+<p><em>Rust is uniquely-positioned to be the most powerful and usable wasm-targetting
+language for the immediate future.</em> The same properties that make Rust so
+portable to real hardware makes it nearly trivial to port Rust to wasm. The same
+can't be said for languages with complex runtimes that include garbage
+collectors.</p>
+<p>Rust has <a href="https://internals.rust-lang.org/t/need-help-with-emscripten-port/3154">already been ported to Emscripten</a> (at least twice), but the code
+has not yet fully landed. This summer it's happening though: Rust +
+Emscripten. Rust on the Web. Rust everywhere.</p>
+<h2><a href="#epilogue" aria-hidden="true" class="anchor" id="epilogue"></a>Epilogue</h2>
+<p>While many people are reporting success with rustup, it remains in beta, with
+some <a href="https://github.com/rust-lang-nursery/rustup.rs/issues?q=is%3Aopen+is%3Aissue+label%3A%22initial+release%22">key outstanding bugs</a>, and is not yet the officially recommended
+installation method for Rust (though you should try it). We're going to keep
+soliciting feedback, applying polish, and fixing bugs. Then we're going to
+improve the rustup installation experience on Windows by
+<a href="https://github.com/rust-lang-nursery/rustup.rs/issues/253">embedding it into a GUI that behaves like a proper Windows installer</a>.</p>
+<p>At that point we'll likely update the <a href="https://www.rust-lang.org/downloads.html">download instructions on
+www.rust-lang.org</a> to recommend rustup. I expect all the existing
+installation methods to remain available, including the non-rustup
+Windows installers, but at that point our focus will be on improving
+the installation experience through rustup. It's also plausible that
+rustup itself will be packaged for package managers like Homebrew and
+apt.</p>
+<p>If you want to try rustup for yourself, visit <a href="https://www.rustup.rs">www.rustup.rs</a> and follow the
+instructions. Then leave feedback on the <a href="https://internals.rust-lang.org/t/beta-testing-rustup-rs/3316/112">dedicated forum thread</a>, or
+<a href="https://github.com/rust-lang-nursery/rustup.rs/issues">file bugs</a> on the issue tracker. More information about rustup is available
+in the <a href="https://github.com/rust-lang-nursery/rustup.rs/blob/master/README.md">README</a>.</p>
+<h2><a href="#thanks" aria-hidden="true" class="anchor" id="thanks"></a>Thanks</h2>
+<p>Rust would not be the powerful system it is without the help of many
+individuals. Thanks to Diggory Blake for creating rustup, to Jorge
+Aparicio for fixing lots of cross-compilation bugs and documenting the
+process, Tomaka for pioneering Rust on Android, and Alex Crichton for
+creating the release infrastructure for Rust's many platforms.</p>
+<p>And thanks to all the rustup contributors: Alex Crichton, Brian
+Anderson, Corey Farwell, David Salter, Diggory Blake, Jacob Shaffer,
+Jeremiah Peschka, Joe Wilm, Jorge Aparicio, Kai Noda, Kamal Marhubi,
+Kevin K, llogiq, Mika Attila, NODA, Kai, Paul Padier, Severen Redwood,
+Taylor Cramer, Tim Neumann, trolleyman, Vadim Petrochenkov, V Jackson,
+Vladimir, Wayne Warren, Yasushi Abe, Y. T. Chung</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.0 Beta | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.0 Beta | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.0 Beta | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.0 Beta" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.0 Beta</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 3, 2015 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>Today we are excited to announce the <a href="http://www.rust-lang.org/install.html">release of Rust 1.0 beta</a>!
+The beta release marks a very significant &quot;state transition&quot; in the
+move towards 1.0. In particular, with the beta release, <strong>all
+libraries and language features that are planned to be stable for 1.0
+have been marked as stable</strong>. As such, the beta release represents an
+accurate preview of what Rust 1.0 will include.</p>
+<p>To see what has changed since 1.0-alpha2, please see the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-100-beta-april-2015">release notes</a>.</p>
+<p>The Beta release also marks a turning point in our
+<a href="http://blog.rust-lang.org/2014/10/30/Stability.html">approach to stability</a>. During the alpha cycle, the use of
+unstable APIs and language features was permitted, but triggered a
+warning. As of the Beta release, the use of unstable APIs will become
+an error (unless you are using Nightly builds or building from
+source).</p>
+<p>The Rust ecosystem continues to grow. The
+<a href="https://crates.io/">crates.io</a> repository just passed 1 million
+downloads and has over 1,700 crates available. Many of the top crates
+in <a href="https://crates.io/">crates.io</a> can now be built using only stable
+Rust, and efforts to port the remainder are underway. Therefore, we
+are now recommending that new users start with the Beta release,
+rather than the Nightly builds, and the <a href="http://www.rust-lang.org/install.html">rustup script</a> will be
+modified to install Beta by default. (However, it is easy to switch to
+the Nightly build if some of your dependencies aren't updated yet. See
+the <a href="http://www.rust-lang.org/install.html">install page</a> for details.)</p>
+<h3><a href="#what-happens-during-the-beta-cycle" aria-hidden="true" class="anchor" id="what-happens-during-the-beta-cycle"></a>What happens during the beta cycle?</h3>
+<p><strong>The final Rust 1.0 release is scheduled for May 15th -- exactly six
+weeks from now.</strong> In the interim, we expect to put most of our effort
+into fixing bugs, improving documentation and error messages, and
+otherwise improving the end-user experience. We don't plan on making
+functional changes to stable content, though naturally we may make
+minor corrections or additions to the library APIs if shortcomings or
+problems are uncovered (but the bar for such changes is relatively
+high).</p>
+<p>While we don't expect to add any new features (or major new APIs) for
+the 1.0 release, that doesn't mean we're going to stop working on them
+altogether. In fact, quite the opposite! Per <a href="http://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">the train model</a>,
+the plan is to continue development on new features on the master
+branch, in parallel with the beta. And of course, we'll be issuing the
+beta for 1.1 release at the same time as we issue the final 1.0
+release, so you shouldn't have to wait long to start putting that work
+to use.</p>
+<p>To help ensure that we don't accidentally introduce breakage as we add
+new features, we've also been working on an exciting new CI
+infrastructure to allow us to monitor which packages are building with
+the Nightly builds and detect regressions across the entire Rust
+ecosystem, not just our own test base. This infrastructure is still in
+the development phase, but you can see a <a href="https://gist.github.com/brson/a30a77836fbec057cbee">sample report</a> here.</p>
+<h3><a href="#a-community-achievement" aria-hidden="true" class="anchor" id="a-community-achievement"></a>A community achievement</h3>
+<p>As always, this Rust release is the achievement of the fantastic Rust
+community at large. Thanks to everyone who has participated in the RFC
+process, and a particular thank you to the 170 contributors for this
+release:</p>
+<ul>
+<li><code>Aaron Turon</code></li>
+<li><code>Aaron Weiss</code></li>
+<li><code>Adam Jacob</code></li>
+<li><code>Adenilson Cavalcanti</code></li>
+<li><code>Adolfo Ochagavía</code></li>
+<li><code>Ahmed Charles</code></li>
+<li><code>Alan Cutter</code></li>
+<li><code>Alex Crichton</code></li>
+<li><code>Alexander Bliskovsky</code></li>
+<li><code>Alexander Campbell</code></li>
+<li><code>Alexander Chernyakhovsky</code></li>
+<li><code>Alexis</code></li>
+<li><code>Alexis Beingessner</code></li>
+<li><code>Amol Mundayoor</code></li>
+<li><code>Anders Kaseorg</code></li>
+<li><code>Andrew Hobden</code></li>
+<li><code>Andrew Paseltiner</code></li>
+<li><code>Angus Lees</code></li>
+<li><code>awlnx</code></li>
+<li><code>Barosl Lee</code></li>
+<li><code>bcoopers</code></li>
+<li><code>Björn Steinbrink</code></li>
+<li><code>bombless</code></li>
+<li><code>Brian Anderson</code></li>
+<li><code>Brian Brooks</code></li>
+<li><code>Brian Leibig</code></li>
+<li><code>Camille Roussel</code></li>
+<li><code>Camille TJHOA</code></li>
+<li><code>Carol Nichols</code></li>
+<li><code>Caspar Krieger</code></li>
+<li><code>Ches Martin</code></li>
+<li><code>Chloe</code></li>
+<li><code>Chris Wong</code></li>
+<li><code>Cody P Schafer</code></li>
+<li><code>Corey Farwell</code></li>
+<li><code>Corey Richardson</code></li>
+<li><code>Dabo Ross</code></li>
+<li><code>Dan Burkert</code></li>
+<li><code>Dan Connolly</code></li>
+<li><code>Dan W.</code></li>
+<li><code>Daniel Lobato García</code></li>
+<li><code>Darin Morrison</code></li>
+<li><code>Darrell Hamilton</code></li>
+<li><code>Dave Huseby</code></li>
+<li><code>David Creswick</code></li>
+<li><code>David King</code></li>
+<li><code>David Mally</code></li>
+<li><code>defuz</code></li>
+<li><code>Denis Defreyne</code></li>
+<li><code>Drew Crawford</code></li>
+<li><code>Dzmitry Malyshau</code></li>
+<li><code>Eduard Bopp</code></li>
+<li><code>Eduard Burtescu</code></li>
+<li><code>Eduardo Bautista</code></li>
+<li><code>Edward Wang</code></li>
+<li><code>Emeliov Dmitrii</code></li>
+<li><code>Eric Platon</code></li>
+<li><code>Erick Tryzelaar</code></li>
+<li><code>Eunji Jeong</code></li>
+<li><code>Falco Hirschenberger</code></li>
+<li><code>Felix S. Klock II</code></li>
+<li><code>Fenhl</code></li>
+<li><code>Flavio Percoco</code></li>
+<li><code>Florian Hahn</code></li>
+<li><code>Florian Hartwig</code></li>
+<li><code>Florian Zeitz</code></li>
+<li><code>FuGangqiang</code></li>
+<li><code>Gary M. Josack</code></li>
+<li><code>Germano Gabbianelli</code></li>
+<li><code>GlacJAY</code></li>
+<li><code>Gleb Kozyrev</code></li>
+<li><code>Guillaume Gomez</code></li>
+<li><code>GuillaumeGomez</code></li>
+<li><code>Huachao Huang</code></li>
+<li><code>Huon Wilson</code></li>
+<li><code>inrustwetrust</code></li>
+<li><code>Ivan Petkov</code></li>
+<li><code>Ivan Radanov Ivanov</code></li>
+<li><code>Jake Goulding</code></li>
+<li><code>Jakub Bukaj</code></li>
+<li><code>James Miller</code></li>
+<li><code>Jessy Diamond Exum</code></li>
+<li><code>Jihyun Yu</code></li>
+<li><code>Johannes Oertel</code></li>
+<li><code>John Hodge</code></li>
+<li><code>John Zhang</code></li>
+<li><code>Jonathan Reem</code></li>
+<li><code>Jordan Woehr</code></li>
+<li><code>Jorge Aparicio</code></li>
+<li><code>Joseph Crail</code></li>
+<li><code>JP-Ellis</code></li>
+<li><code>Julian Orth</code></li>
+<li><code>Julian Viereck</code></li>
+<li><code>Junseok Lee</code></li>
+<li><code>Kang Seonghoon</code></li>
+<li><code>Keegan McAllister</code></li>
+<li><code>Kevin Ballard</code></li>
+<li><code>Kevin Butler</code></li>
+<li><code>Kevin Yap</code></li>
+<li><code>kgv</code></li>
+<li><code>kjpgit</code></li>
+<li><code>Lai Jiangshan</code></li>
+<li><code>Leonids Maslovs</code></li>
+<li><code>Liam Monahan</code></li>
+<li><code>Liigo Zhuang</code></li>
+<li><code>Łukasz Niemier</code></li>
+<li><code>lummax</code></li>
+<li><code>Manish Goregaokar</code></li>
+<li><code>Markus Siemens</code></li>
+<li><code>Markus Unterwaditzer</code></li>
+<li><code>Marvin Löbel</code></li>
+<li><code>Matt Brubeck</code></li>
+<li><code>Matt Cox</code></li>
+<li><code>mdinger</code></li>
+<li><code>Michael Woerister</code></li>
+<li><code>Michał Krasnoborski</code></li>
+<li><code>Mihnea Dobrescu-Balaur</code></li>
+<li><code>Mikhail Zabaluev</code></li>
+<li><code>Ms2ger</code></li>
+<li><code>Murarth</code></li>
+<li><code>Nicholas Bishop</code></li>
+<li><code>Nicholas Mazzuca</code></li>
+<li><code>Nicholas</code></li>
+<li><code>Nick Cameron</code></li>
+<li><code>Niko Matsakis</code></li>
+<li><code>nwin</code></li>
+<li><code>Oliver Schneider</code></li>
+<li><code>Or Neeman</code></li>
+<li><code>Pascal Hertleif</code></li>
+<li><code>Patrick Walton</code></li>
+<li><code>Paul ADENOT</code></li>
+<li><code>Paul Osborne</code></li>
+<li><code>Peter Elmers</code></li>
+<li><code>Phil Dawes</code></li>
+<li><code>Philip Munksgaard</code></li>
+<li><code>Piotr Czarnecki</code></li>
+<li><code>Pyry Kontio</code></li>
+<li><code>Raphael Nestler</code></li>
+<li><code>ray glover</code></li>
+<li><code>Ricardo Martins</code></li>
+<li><code>Richard Diamond</code></li>
+<li><code>Richo Healey</code></li>
+<li><code>Ruud van Asseldonk</code></li>
+<li><code>Ryan Prichard</code></li>
+<li><code>Sae-bom Kim</code></li>
+<li><code>Scott Olson</code></li>
+<li><code>Sean McArthur</code></li>
+<li><code>Sébastien Marie</code></li>
+<li><code>Seo Sanghyeon</code></li>
+<li><code>Simonas Kazlauskas</code></li>
+<li><code>Stepan Koltsov</code></li>
+<li><code>Steve Klabnik</code></li>
+<li><code>Steven Crockett</code></li>
+<li><code>Steven Fackler</code></li>
+<li><code>Tamir Duberstein</code></li>
+<li><code>Tero Hänninen</code></li>
+<li><code>Tiago Nobrega</code></li>
+<li><code>Tobias Bucher</code></li>
+<li><code>Tom Jakubowski</code></li>
+<li><code>Trent Nadeau</code></li>
+<li><code>Tshepang Lekhonkhobe</code></li>
+<li><code>Ulrik Sverdrup</code></li>
+<li><code>Vadim Chugunov</code></li>
+<li><code>Vadim Petrochenkov</code></li>
+<li><code>Valerii Hiora</code></li>
+<li><code>Vladimir Pouzanov</code></li>
+<li><code>Vojtech Kral</code></li>
+<li><code>Wangshan Lu</code></li>
+<li><code>Wesley Wiser</code></li>
+<li><code>York Xiang</code></li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

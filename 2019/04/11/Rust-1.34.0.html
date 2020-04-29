@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.34.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.34.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.34.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.34.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.34.0</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 11, 2019 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.34.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.34.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate
+page on our website.</p>
+<h2><a href="#whats-in-1340-stable" aria-hidden="true" class="anchor" id="whats-in-1340-stable"></a>What's in 1.34.0 stable</h2>
+<p>The largest feature in this release is the introduction of <em>alternative</em> <code>cargo</code> registries.
+The release also includes support for <code>?</code> in documentation tests,
+some improvements for <code>#[attribute(..)]</code>s, as well as the stabilization of <code>TryFrom</code>.
+Read on for a few highlights, or see the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1340-2019-04-11">detailed release notes</a> for additional information.</p>
+<h3><a href="#alternative-cargo-registries" aria-hidden="true" class="anchor" id="alternative-cargo-registries"></a>Alternative <code>cargo</code> registries</h3>
+<p>Since before 1.0, Rust has had a public crate registry, <a href="http://crates.io/">crates.io</a>.
+People publish crates with <code>cargo publish</code> and it's easy to include these crates
+in the <code>[dependencies]</code> section of your <code>Cargo.toml</code>.</p>
+<p>However, not everyone <em>wants</em> to publish their crates to crates.io.
+People maintaining proprietary/closed-source code cannot use crates.io,
+and instead are forced to use <code>git</code> or <code>path</code> dependencies.
+This is usually fine for small projects, but if you have a lot of closed-source crates
+within a large organization, you lose the benefit of the versioning support that crates.io has.</p>
+<p>With this release, Cargo gains support for alternate registries.
+These registries coexist with crates.io, so you can write software that depends
+on crates from both crates.io and your custom registry.
+Crates on crates.io cannot however depend on external registries.</p>
+<p>To use an alternate registry, you must add these lines to your <code>.cargo/config</code>.
+This file can be in your home directory (<code>~/.cargo/config</code>) or relative to the package directory.</p>
+<pre><code class="language-toml">[registries]
+my-registry = { index = &quot;https://my-intranet:8080/git/index&quot; }
+</code></pre>
+<p>Depending on a crate from an alternate registry is easy.
+When specifying dependencies in your <code>Cargo.toml</code>, use the <code>registry</code> key to
+let Cargo know that you wish to fetch the crate from the alternate registry:</p>
+<pre><code class="language-toml">[dependencies]
+other-crate = { version = &quot;1.0&quot;, registry = &quot;my-registry&quot; }
+</code></pre>
+<p>As a crate author, if you wish to publish your crate to an alternate registry,
+you first need to save the authentication token into <code>~/.cargo/credentials</code> with the <code>cargo login</code> command:</p>
+<pre><code class="language-sh">cargo login --registry=my-registry
+</code></pre>
+<p>You can then use the <code>--registry</code> flag to indicate which registry to use when publishing:</p>
+<pre><code class="language-sh">cargo publish --registry=my-registry
+</code></pre>
+<p>There is <a href="https://doc.rust-lang.org/nightly/cargo/reference/registries.html#running-a-registry">documentation</a> on how to run your own registry.</p>
+<h3><a href="#-in-documentation-tests" aria-hidden="true" class="anchor" id="-in-documentation-tests"></a><code>?</code> in documentation tests</h3>
+<p><a href="https://rust-lang.github.io/rfcs/1937-ques-in-main.html">RFC 1937</a> proposed adding support for using the <code>?</code> operator in <code>fn main()</code>,
+<code>#[test]</code> functions, and doctests, allowing them to return <code>Option&lt;T&gt;</code> or <code>Result&lt;T, E&gt;</code>,
+with error values causing a nonzero exit code in the case of <code>fn main()</code>,
+and a test failure in the case of the tests.</p>
+<p>Support in <code>fn main()</code> and <code>#[test]</code> was implemented <a href="https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#main-can-return-a-result">many releases ago</a>.
+However, the support within documentation tests was limited to doctests that have an explicit <code>fn main()</code>.</p>
+<p>In this release, full support for <code>?</code> in doctests has been added.
+Now, you can write this in your documentation tests:</p>
+<pre><code class="language-rust">/// ```rust
+/// use std::io;
+/// let mut input = String::new();
+/// io::stdin().read_line(&amp;mut input)?;
+/// # Ok::&lt;(), io::Error&gt;(())
+/// ```
+fn my_func() {}
+</code></pre>
+<p>You still have to specify the error type being used at the bottom of the documentation test.</p>
+<h3><a href="#custom-attributes-accept-arbitrary-token-streams" aria-hidden="true" class="anchor" id="custom-attributes-accept-arbitrary-token-streams"></a>Custom attributes accept arbitrary token streams</h3>
+<p><a href="https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html">Procedural macros</a> in Rust can define custom attributes that they consume.
+Until now, such attributes were restricted to being trees of paths and literals
+according to a specific syntax, like:</p>
+<pre><code class="language-rust">#[foo(bar)]
+#[foo = &quot;bar&quot;]
+#[foo = 0]
+#[foo(bar = true)]
+#[foo(bar, baz(quux, foo = &quot;bar&quot;))]
+</code></pre>
+<p>Unlike procedural macros, these helper attributes could not accept arbitrary token streams in delimiters,
+so you could not write <code>#[range(0..10)]</code> or <code>#[bound(T: MyTrait)]</code>.
+Procedural macro crates would instead use strings for specifying syntaxes like this, e.g. <code>#[range(&quot;0..10&quot;)]</code></p>
+<p>With this Rust release, custom attributes <code>#[attr($tokens)]</code> <a href="https://github.com/rust-lang/rust/pull/57367">now accept</a>
+arbitrary token streams in <code>$tokens</code>, bringing them on par with macros.
+If you're the author of a procedural macro crate, please check if your custom attributes
+have unnecessary strings in their syntax and if they can be better expressed with token streams.</p>
+<h3><a href="#tryfrom-and-tryinto" aria-hidden="true" class="anchor" id="tryfrom-and-tryinto"></a><code>TryFrom</code> and <code>TryInto</code></h3>
+<p>The <a href="https://doc.rust-lang.org/std/convert/trait.TryFrom.html"><code>TryFrom</code></a> and <a href="https://doc.rust-lang.org/std/convert/trait.TryInto.html"><code>TryInto</code></a> traits were stabilized to allow fallible type conversions.</p>
+<p>For example, the <a href="https://doc.rust-lang.org/std/primitive.u32.html#method.from_be_bytes"><code>from_be_bytes</code></a> and related methods on integer types take arrays,
+but data is often read in via slices. Converting between slices and arrays is tedious to do manually.
+With the new traits, it can be done inline with <code>.try_into()</code>.</p>
+<pre><code class="language-rust">let num = u32::from_be_bytes(slice.try_into()?);
+</code></pre>
+<p>For conversions that cannot fail, such as <code>u8</code> to <code>u32</code>, the <a href="https://doc.rust-lang.org/std/convert/enum.Infallible.html"><code>Infallible</code></a> type was added.
+This also permits a blanket implementation of <code>TryFrom</code> for all existing <code>From</code> implementations.
+In the future, we hope to turn <code>Infallible</code> into an alias for <a href="https://github.com/rust-lang/rust/issues/35121">the <code>!</code> (never) type</a>.</p>
+<h3><a href="#fn-before_exec-deprecated-in-favor-of-unsafe-fn-pre_exec" aria-hidden="true" class="anchor" id="fn-before_exec-deprecated-in-favor-of-unsafe-fn-pre_exec"></a><code>fn before_exec</code> deprecated in favor of <code>unsafe fn pre_exec</code></h3>
+<p>On Unix-like systems, the function <a href="https://doc.rust-lang.org/std/os/unix/process/trait.CommandExt.html#tymethod.before_exec"><code>CommandExt::before_exec</code></a> allows you to
+schedule a closure to be run before <code>exec</code> is invoked.</p>
+<p>The closure provided will be run in the context of the child process after a fork.
+This means that resources, such as file descriptors and memory-mapped regions, may get duplicated.
+In other words, you can now copy a value of a non-<code>Copy</code> type into a different process
+while retaining the original in the parent. This makes <a href="https://github.com/rust-lang/rust/issues/39575#issuecomment-437658766">it possible</a> to cause
+undefined behavior and break <a href="https://github.com/rust-lang/rust/issues/39575#issuecomment-439645949">libraries assuming non-duplication</a>.</p>
+<p>The function <code>before_exec</code> should therefore have been marked as <code>unsafe</code>.
+In this release of Rust, we have deprecated <code>fn before_exec</code> in favor of the <code>unsafe fn pre_exec</code>.
+When calling <a href="https://doc.rust-lang.org/std/os/unix/process/trait.CommandExt.html#tymethod.pre_exec"><code>CommandExt::pre_exec</code></a>, it is your responsibility to make sure that the closure
+does not violate library invariants by making invalid use of these duplicates.
+If you provide a library that is in a similar situation as <code>before_exec</code>,
+consider deprecating and providing an <code>unsafe</code> alternative as well.</p>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
+<p>In 1.34.0, the set of stable atomic integer types was expanded,
+with signed and unsigned variants from 8 (<a href="https://doc.rust-lang.org/std/sync/atomic/struct.AtomicU8.html"><code>AtomicU8</code></a>) to 64 bits now available.</p>
+<p><a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1280-2018-08-02">Previously</a>, non-zero unsigned integer types, e.g. <a href="https://doc.rust-lang.org/std/num/struct.NonZeroU8.html"><code>NonZeroU8</code></a>, were stabilized.
+This gave <code>Option&lt;NonZeroU8&gt;</code> the same size as <code>u8</code>.
+With this Rust release, signed versions, e.g. <a href="https://doc.rust-lang.org/std/num/struct.NonZeroI8.html"><code>NonZeroI8</code></a>, have been stabilized.</p>
+<p>The functions <a href="https://doc.rust-lang.org/std/iter/fn.from_fn.html"><code>iter::from_fn</code></a> and <a href="https://doc.rust-lang.org/std/iter/fn.successors.html"><code>iter::successors</code></a> have been stabilized.
+The former allows you to construct an iterator from <code>FnMut() -&gt; Option&lt;T&gt;</code>.
+To pop elements from a vector iteratively, you can now write <code>from_fn(|| vec.pop())</code>.
+Meanwhile, the latter creates a new iterator where each successive item
+is computed based on the preceding one.</p>
+<p>Additionally, these APIs have become stable:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/any/trait.Any.html#tymethod.type_id">Any::type_id</a></li>
+<li><a href="https://doc.rust-lang.org/std/error/trait.Error.html#method.type_id">Error::type_id</a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.slice.html#method.sort_by_cached_key">slice::sort_by_cached_key</a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.str.html#method.escape_debug">str::escape_debug</a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.str.html#method.escape_default">str::escape_default</a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.str.html#method.escape_unicode">str::escape_unicode</a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.str.html#method.split_ascii_whitespace">str::split_ascii_whitespace</a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Instant.html#method.checked_add">Instant::checked_add</a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Instant.html#method.checked_sub">Instant::checked_sub</a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.SystemTime.html#method.checked_add">SystemTime::checked_add</a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.SystemTime.html#method.checked_sub">SystemTime::checked_sub</a></li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1340-2019-04-11">detailed release notes</a> for more details.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

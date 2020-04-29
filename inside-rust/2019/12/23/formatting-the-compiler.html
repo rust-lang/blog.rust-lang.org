@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Formatting the compiler tree | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Formatting the compiler tree | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Formatting the compiler tree | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Formatting the compiler tree" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Formatting the compiler tree</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 23, 2019 &middot; Mark Rousskov
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">the compiler team</a> 
+    </div>
+
+    <div class="post">
+      <h2><a href="#what-happened" aria-hidden="true" class="anchor" id="what-happened"></a>What happened</h2>
+<p>We recently landed two PRs which together reformatted essentially all code in the compiler tree.</p>
+<p>The first one, <a href="https://github.com/rust-lang/rust/pull/65939">#65939</a>, contained the initial formatting infrastructure. We currently use <code>rustfmt</code>
+directly, pinned to a version specified in <code>src/stage0.txt</code>. We expect to update it as needed, and
+otherwise once per cycle (coinciding with the bootstrap bump, most likely).</p>
+<p>The second one which reformatted the majority of the codebase is <a href="https://github.com/rust-lang/rust/pull/67540">#67540</a>.</p>
+<p>This change landed with the following rustfmt config. Note that this configuration is subject
+to change (in particular, merge_derives may be removed in the future), but should be fairly stable.
+Your editor should automatically pick this configuration up inside the rust-lang/rust repository (it
+is located in the <code>rustfmt.toml</code> file in the root).</p>
+<pre><code>version = &quot;Two&quot;
+use_small_heuristics = &quot;Max&quot;
+merge_derives = false
+</code></pre>
+<h2><a href="#how-to-use-formatting" aria-hidden="true" class="anchor" id="how-to-use-formatting"></a>How to use formatting</h2>
+<p>You can reformat the repository with <code>x.py fmt</code> and <code>x.py fmt --check</code> to verify formatting; these
+commands are unfortunately somewhat slow today. Tidy will also currently run the latter of these two
+checks (<code>x.py fmt --check</code>) internally, but this may change in the future if we can't improve the
+speed of formatting the entire codebase.</p>
+<h2><a href="#resolving-conflicts" aria-hidden="true" class="anchor" id="resolving-conflicts"></a>Resolving conflicts</h2>
+<p>If you have an ongoing branch, you're likely to have merge conflicts. The following should help you
+resolve them:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+set -xeo pipefail
+
+if [ &quot;$1&quot; = &quot;from-rebase&quot; ] ; then
+	git rev-parse HEAD &gt; /tmp/commit
+	git rev-parse HEAD &gt;&gt; /tmp/old.shas
+	./x.py fmt
+	git commit -a --amend --no-edit
+	git rev-parse HEAD &gt;&gt; /tmp/new.shas
+	git reset --hard $(cat /tmp/commit)
+else
+	rm -f /tmp/old.shas /tmp/commit /tmp/new.shas
+	git rebase 8eb7c58dbb7 --exec '../format.sh from-rebase'
+	branch=$(git rev-parse --abbrev-ref HEAD) # get branch name
+	git reset --hard 8eb7c58dbb7
+	for sha in $(cat /tmp/new.shas); do
+		git cherry-pick $sha -Xtheirs
+	done
+  # put yourself atop the format the world PR
+  git rebase -Xtheirs a916ac22b9f7f1f0f7aba0a41a789b3ecd765018
+fi
+</code></pre>
+<p>This script should be saved to <code>format.sh</code> in the parent directory of your Rust
+checkout, and then run <code>git fetch upstream &amp;&amp; ../format.sh</code>. <code>upstream</code> should
+be the name of the rust-lang/rust remote.</p>
+<p>Once the script runs, you will be based on the <code>a916ac22b9f7f</code> commit. You
+likely want to then run <code>git rebase -i upstream/master</code> or so to finish, but the
+script above gets you past the formatting PR at least.</p>
+<p>This should mostly resolve conflicts correctly, but occasionally if you've edited something in
+imports (a common case I've encountered) or otherwise this will not resolve quite right. Usually
+though this will solve 99% of the problems and the rest can be fixed up manually afterwards.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

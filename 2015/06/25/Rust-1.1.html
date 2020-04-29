@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust 1.1 stable, the Community Subteam, and RustCamp | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust 1.1 stable, the Community Subteam, and RustCamp | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust 1.1 stable, the Community Subteam, and RustCamp | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust 1.1 stable, the Community Subteam, and RustCamp" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust 1.1 stable, the Community Subteam, and RustCamp</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">June 25, 2015 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>We're happy to announce the completion of the first release cycle after Rust
+1.0: today we are <a href="http://www.rust-lang.org/install.html">releasing</a> Rust 1.1 stable, as well as 1.2 beta.</p>
+<p>Read on for details the releases, as well as some exciting new developments
+within the Rust community.</p>
+<h3><a href="#whats-in-11-stable" aria-hidden="true" class="anchor" id="whats-in-11-stable"></a>What's in 1.1 Stable</h3>
+<p>One of the highest priorities for Rust after its 1.0 has been improving compile
+times. Thanks to the hard work of a number of contributors, Rust 1.1 stable
+provides a <strong>32% improvement</strong> in compilation time over Rust 1.0 (as measured by
+bootstrapping).</p>
+<p>Another major focus has been improving error messages throughout the
+compiler. Again thanks to a number of contributors, a large portion of compiler
+errors now include extended explanations accessible using the <code>--explain</code> flag.</p>
+<p>Beyond these improvements, the 1.1 release includes a number of important new
+features:</p>
+<ul>
+<li><em>New <code>std::fs</code> APIs</em>. This release stabilizes a
+<a href="https://github.com/rust-lang/rfcs/pull/1044">large set of extensions</a> to the
+filesystem APIs, making it possible, for example, to compile Cargo on stable Rust.</li>
+<li><em>musl support</em>. It's
+<a href="https://github.com/rust-lang/rust/pull/24777">now possible</a> to target
+<a href="http://www.musl-libc.org/">musl</a> on Linux. Binaries built this way are
+statically linked and have zero dependencies. Nightlies are on the way.</li>
+<li><em><code>cargo rustc</code></em>. It's now possible to build a Cargo package while passing
+arbitrary flags to the final <code>rustc</code> invocation.</li>
+</ul>
+<p>More detail is available in the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-110-june-2015">release notes</a>.</p>
+<h3><a href="#whats-in-12-beta" aria-hidden="true" class="anchor" id="whats-in-12-beta"></a>What's in 1.2 Beta</h3>
+<p>Performance improvements didn't stop with 1.1 stable. Benchmark compilations are
+showing an <strong>additional 30%</strong> improvement from 1.1 stable to 1.2 beta; Cargo's
+main crate compiles 18% faster.</p>
+<p>In addition, <a href="https://github.com/rust-lang/rust/pull/26018">parallel codegen</a> is
+working again, and can substantially speed up large builds in debug mode; it
+gets another 33% speedup on bootstrapping on a 4 core machine. It's not yet on
+by default, but will be in the near future.</p>
+<p>Cargo has also seen some performance improvements, including a 10x speedup on
+large &quot;no-op&quot; builds (from 5s to 0.5s on Servo), and shared target directories
+that cache dependencies across multiple packages.</p>
+<p>In addition to all of this, 1.2 beta includes our first support for MSVC
+(Microsoft Visual C): the compiler is able to bootstrap, and we have preliminary
+nightlies targeting the platform. This is a big step for our Windows support,
+making it much easier to link Rust code against code built using the native
+toolchain. Unwinding is not yet available -- code aborts on panic -- but the
+implementation is otherwise complete, and all rust-lang crates are now testing
+on MSVC as a first-tier platform.</p>
+<p>Rust 1.2 stable will be released six weeks from now, together with 1.3 beta.</p>
+<h3><a href="#community-news" aria-hidden="true" class="anchor" id="community-news"></a>Community news</h3>
+<p>In addition to the above technical work, there's some exciting news within the
+Rust community.</p>
+<p>In the past few weeks, we've <a href="https://internals.rust-lang.org/t/announcing-the-community-subteam/2248">formed a new subteam</a> explicitly
+devoted to supporting the Rust community. The team will have a number of
+responsibilities, including aggregating resources for meetups and other events,
+supporting diversity in the community through leadership in outreach, policies,
+and awareness-raising, and working with our early production users and the core
+team to help guide prioritization.</p>
+<p>In addition, we'll soon be holding the first official Rust conference:
+<a href="http://rustcamp.com/">RustCamp</a>, on August 1, 2015, in Berkeley, CA, USA. We've
+received a number of excellent talk submissions, and are expecting a great
+program.</p>
+<h3><a href="#contributors-to-11" aria-hidden="true" class="anchor" id="contributors-to-11"></a>Contributors to 1.1</h3>
+<p>As with every release, 1.1 stable is the result of work from an amazing and
+active community. Thanks to the 168 contributors to this release:</p>
+<ul>
+<li>Aaron Gallagher</li>
+<li>Aaron Turon</li>
+<li>Abhishek Chanda</li>
+<li>Adolfo Ochagavía</li>
+<li>Alex Burka</li>
+<li>Alex Crichton</li>
+<li>Alexander Polakov</li>
+<li>Alexis Beingessner</li>
+<li>Andreas Tolfsen</li>
+<li>Andrei Oprea</li>
+<li>Andrew Paseltiner</li>
+<li>Andrew Straw</li>
+<li>Andrzej Janik</li>
+<li>Aram Visser</li>
+<li>Ariel Ben-Yehuda</li>
+<li>Avdi Grimm</li>
+<li>Barosl Lee</li>
+<li>Ben Gesoff</li>
+<li>Björn Steinbrink</li>
+<li>Brad King</li>
+<li>Brendan Graetz</li>
+<li>Brian Anderson</li>
+<li>Brian Campbell</li>
+<li>Carol Nichols</li>
+<li>Chris Morgan</li>
+<li>Chris Wong</li>
+<li>Clark Gaebel</li>
+<li>Cole Reynolds</li>
+<li>Colin Walters</li>
+<li>Conrad Kleinespel</li>
+<li>Corey Farwell</li>
+<li>David Reid</li>
+<li>Diggory Hardy</li>
+<li>Dominic van Berkel</li>
+<li>Don Petersen</li>
+<li>Eduard Burtescu</li>
+<li>Eli Friedman</li>
+<li>Erick Tryzelaar</li>
+<li>Felix S. Klock II</li>
+<li>Florian Hahn</li>
+<li>Florian Hartwig</li>
+<li>Franziska Hinkelmann</li>
+<li>FuGangqiang</li>
+<li>Garming Sam</li>
+<li>Geoffrey Thomas</li>
+<li>Geoffry Song</li>
+<li>Graydon Hoare</li>
+<li>Guillaume Gomez</li>
+<li>Hech</li>
+<li>Heejong Ahn</li>
+<li>Hika Hibariya</li>
+<li>Huon Wilson</li>
+<li>Isaac Ge</li>
+<li>J Bailey</li>
+<li>Jake Goulding</li>
+<li>James Perry</li>
+<li>Jan Andersson</li>
+<li>Jan Bujak</li>
+<li>Jan-Erik Rediger</li>
+<li>Jannis Redmann</li>
+<li>Jason Yeo</li>
+<li>Johann</li>
+<li>Johann Hofmann</li>
+<li>Johannes Oertel</li>
+<li>John Gallagher</li>
+<li>John Van Enk</li>
+<li>Jordan Humphreys</li>
+<li>Joseph Crail</li>
+<li>Kang Seonghoon</li>
+<li>Kelvin Ly</li>
+<li>Kevin Ballard</li>
+<li>Kevin Mehall</li>
+<li>Krzysztof Drewniak</li>
+<li>Lee Aronson</li>
+<li>Lee Jeffery</li>
+<li>Liigo Zhuang</li>
+<li>Luke Gallagher</li>
+<li>Luqman Aden</li>
+<li>Manish Goregaokar</li>
+<li>Marin Atanasov Nikolov</li>
+<li>Mathieu Rochette</li>
+<li>Mathijs van de Nes</li>
+<li>Matt Brubeck</li>
+<li>Michael Park</li>
+<li>Michael Rosenberg</li>
+<li>Michael Sproul</li>
+<li>Michael Wu</li>
+<li>Michał Czardybon</li>
+<li>Mike Boutin</li>
+<li>Mike Sampson</li>
+<li>Ms2ger</li>
+<li>Nelo Onyiah</li>
+<li>Nicholas</li>
+<li>Nicholas Mazzuca</li>
+<li>Nick Cameron</li>
+<li>Nick Hamann</li>
+<li>Nick Platt</li>
+<li>Niko Matsakis</li>
+<li>Oliver Schneider</li>
+<li>P1start</li>
+<li>Pascal Hertleif</li>
+<li>Paul Banks</li>
+<li>Paul Faria</li>
+<li>Paul Quint</li>
+<li>Pete Hunt</li>
+<li>Peter Marheine</li>
+<li>Philip Munksgaard</li>
+<li>Piotr Czarnecki</li>
+<li>Poga Po</li>
+<li>Przemysław Wesołek</li>
+<li>Ralph Giles</li>
+<li>Raphael Speyer</li>
+<li>Ricardo Martins</li>
+<li>Richo Healey</li>
+<li>Rob Young</li>
+<li>Robin Kruppe</li>
+<li>Robin Stocker</li>
+<li>Rory O’Kane</li>
+<li>Ruud van Asseldonk</li>
+<li>Ryan Prichard</li>
+<li>Sean Bowe</li>
+<li>Sean McArthur</li>
+<li>Sean Patrick Santos</li>
+<li>Shmuale Mark</li>
+<li>Simon Kern</li>
+<li>Simon Sapin</li>
+<li>Simonas Kazlauskas</li>
+<li>Sindre Johansen</li>
+<li>Skyler</li>
+<li>Steve Klabnik</li>
+<li>Steven Allen</li>
+<li>Steven Fackler</li>
+<li>Swaroop C H</li>
+<li>Sébastien Marie</li>
+<li>Tamir Duberstein</li>
+<li>Theo Belaire</li>
+<li>Thomas Jespersen</li>
+<li>Tincan</li>
+<li>Ting-Yu Lin</li>
+<li>Tobias Bucher</li>
+<li>Toni Cárdenas</li>
+<li>Tshepang Lekhonkhobe</li>
+<li>Ulrik Sverdrup</li>
+<li>Vadim Chugunov</li>
+<li>Valerii Hiora</li>
+<li>Wangshan Lu</li>
+<li>Wei-Ming Yang</li>
+<li>Wojciech Ogrodowczyk</li>
+<li>Xuefeng Wu</li>
+<li>York Xiang</li>
+<li>Young Wu</li>
+<li>bors</li>
+<li>critiqjo</li>
+<li>diwic</li>
+<li>gareins</li>
+<li>inrustwetrust</li>
+<li>jooert</li>
+<li>klutzy</li>
+<li>kwantam</li>
+<li>leunggamciu</li>
+<li>mdinger</li>
+<li>nwin</li>
+<li>parir</li>
+<li>pez</li>
+<li>robertfoss</li>
+<li>sinkuu</li>
+<li>tynopex</li>
+<li>らいどっと</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.27 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.27 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.27 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.27" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.27</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">June 21, 2018 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.27.0. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.27.0 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1270-2018-06-21">detailed release notes for
+1.27.0</a> on GitHub.</p>
+<p>Additionally, we would like to draw attention to something: just before the
+release of 1.27.0, we found <a href="https://github.com/rust-lang/rust/pull/51686">a
+bug</a> in the 'default match
+bindings' feature introduced in 1.26.0 that can possibly introduce unsoundness.
+Since it was discovered very late in the release process, and has been present
+since 1.26.0, we decided to stick to our release train model. We expect to put
+out a 1.27.1 with that fix applied soon, and if there's demand, possibly a
+1.26.3 as well. More information about the specifics here will come in that
+release announcement.</p>
+<h2><a href="#whats-in-1270-stable" aria-hidden="true" class="anchor" id="whats-in-1270-stable"></a>What's in 1.27.0 stable</h2>
+<p>This release has two big language features that people have been waiting for.
+But first, a small comment on documentation: All books in <a href="https://doc.rust-lang.org/">the Rust
+Bookshelf</a> are <a href="https://github.com/rust-lang/rust/pull/49623/">now searchable</a>! For example, here's <a href="https://doc.rust-lang.org/book/second-edition/?search=borrow">a search of &quot;The Rust
+Programming Language&quot; for
+'borrow'</a>.
+This will hopefully make it much easier to find what you're looking for.
+Additionally, there's one new book: <a href="https://github.com/rust-lang/rust/pull/49707/">the <code>rustc</code> Book</a>. This book explains
+how to use <code>rustc</code> directly, as well as some other useful information, like a
+list of all lints.</p>
+<h3><a href="#simd" aria-hidden="true" class="anchor" id="simd"></a>SIMD</h3>
+<p>Okay, now for the big news: the <a href="https://github.com/rust-lang/rust/pull/49664/">basics of SIMD</a> are now available! SIMD
+stands for &quot;single instruction, multiple data.&quot; Consider a function
+like this:</p>
+<pre><code class="language-rust">pub fn foo(a: &amp;[u8], b: &amp;[u8], c: &amp;mut [u8]) {
+    for ((a, b), c) in a.iter().zip(b).zip(c) {
+        *c = *a + *b;
+    }
+}
+</code></pre>
+<p>Here, we're taking two slices, and adding the numbers together, placing the
+result in a third slice. The simplest possible way to do this would be to do
+exactly what the code does, and loop through each set of elements, add them
+together, and store it in the result. However, compilers can often do better.
+LLVM will often &quot;autovectorize&quot; code like this, which is a fancy term for
+&quot;use SIMD.&quot; Imagine that <code>a</code> and <code>b</code> were both 16 elements long. Each element
+is a <code>u8</code>, and so that means that each slice would be 128 bits of data. Using
+SIMD, we could put <em>both</em> <code>a</code> and <code>b</code> into 128 bit registers, add them
+together in a <code>*single*</code> instruction, and then copy the resulting 128 bits
+into <code>c</code>. That'd be much faster!</p>
+<p>While stable Rust has always been able to take advantage of
+autovectorization, sometimes, the compiler just isn't smart enough to realize
+that we can do something like this. Additionally, not every CPU has these
+features, and so LLVM may not use them so your program can be used on a wide
+variety of hardware. So, in Rust 1.27, the addition of <a href="https://doc.rust-lang.org/stable/std/arch/">the <code>std::arch</code>
+module</a> allows us to use these kinds of instructions <em>directly</em>, which
+means we don't need to rely on a smart compiler. Additionally, it includes
+some features that allow us to choose a particular implementation based
+on various criteria. For example:</p>
+<pre><code class="language-rust">#[cfg(all(any(target_arch = &quot;x86&quot;, target_arch = &quot;x86_64&quot;),
+      target_feature = &quot;avx2&quot;))]
+fn foo() {
+    #[cfg(target_arch = &quot;x86&quot;)]
+    use std::arch::x86::_mm256_add_epi64;
+    #[cfg(target_arch = &quot;x86_64&quot;)]
+    use std::arch::x86_64::_mm256_add_epi64;
+
+    unsafe {
+        _mm256_add_epi64(...);
+    }
+}
+</code></pre>
+<p>Here, we use <code>cfg</code> flags to choose the correct version based on the machine
+we're targeting; on <code>x86</code> we use that version, and on <code>x86_64</code> we use
+its version. We can also choose at runtime:</p>
+<pre><code class="language-rust">fn foo() {
+    #[cfg(any(target_arch = &quot;x86&quot;, target_arch = &quot;x86_64&quot;))]
+    {
+        if is_x86_feature_detected!(&quot;avx2&quot;) {
+            return unsafe { foo_avx2() };
+        }
+    }
+
+    foo_fallback();
+}
+</code></pre>
+<p>Here, we have two versions of the function: one which uses <code>AVX2</code>, a specific
+kind of SIMD feature that lets you do 256-bit operations. The
+<code>is_x86_feature_detected!</code> macro will generate code that detects if your CPU
+supports AVX2, and if so, calls the <code>foo_avx2</code> function. If not, then we fall
+back to a non-AVX implementation, <code>foo_fallback</code>. This means that our code
+will run super fast on CPUs that support AVX2, but still work on ones that
+don't, albeit slower.</p>
+<p>If all of this seems a bit low-level and fiddly, well, it is! <code>std::arch</code> is
+specifically <em>primitives</em> for building these kinds of things. We hope to
+eventually stabilize a <code>std::simd</code> module with higher-level stuff in the
+future. But landing the basics now lets the ecosystem experiment with higher
+level libraries starting today. For example, check out the
+<a href="https://github.com/AdamNiederer/faster">faster</a> crate. Here's a code
+snippet with no SIMD:</p>
+<pre><code class="language-rust">let lots_of_3s = (&amp;[-123.456f32; 128][..]).iter()
+    .map(|v| {
+        9.0 * v.abs().sqrt().sqrt().recip().ceil().sqrt() - 4.0 - 2.0
+    })
+    .collect::&lt;Vec&lt;f32&gt;&gt;();
+</code></pre>
+<p>To use SIMD with this code via <code>faster</code>, you'd change it to this:</p>
+<pre><code class="language-rust">let lots_of_3s = (&amp;[-123.456f32; 128][..]).simd_iter()
+    .simd_map(f32s(0.0), |v| {
+        f32s(9.0) * v.abs().sqrt().rsqrt().ceil().sqrt() - f32s(4.0) - f32s(2.0)
+    })
+    .scalar_collect();
+</code></pre>
+<p>It looks almost the same: <code>simd_iter</code> instead of <code>iter</code>, <code>simd_map</code> instead
+of <code>map</code>, <code>f32s(2.0)</code> instead of <code>2.0</code>. But you get a SIMD-ified version
+generated for you.</p>
+<p>Beyond <em>that</em>, you may never write any of this yourself, but as always, the
+libraries you depend on may. For example, the <a href="https://github.com/rust-lang/regex/pull/456">regex crate has already added
+support</a>, and a new release
+will contain these SIMD speedups without you needing to do anything at all!</p>
+<h3><a href="#dyn-trait" aria-hidden="true" class="anchor" id="dyn-trait"></a><code>dyn Trait</code></h3>
+<p>Rust's trait object syntax is one that we ultimately regret. If you'll recall,
+given a trait <code>Foo</code>, this is a trait object:</p>
+<pre><code class="language-rust">Box&lt;Foo&gt;
+</code></pre>
+<p>However, if <code>Foo</code> were a struct, it'd just be a normal struct placed inside a
+<code>Box&lt;T&gt;</code>. When designing the language, we thought that the similarity here was
+a good thing, but experience has demonstrated that it is confusing. And it's
+not just for the <code>Box&lt;Trait&gt;</code> case; <code>impl SomeTrait for SomeOtherTrait</code> is
+also technically valid syntax, but you almost always want to write <code>impl&lt;T&gt; SomeTrait for T where T: SomeOtherTrait</code> instead. Same with <code>impl SomeTrait</code>,
+which looks like it would add methods or possibly default implementations
+but in fact adds inherent methods to a trait object. Finally, with the recent
+addition of <code>impl Trait</code> syntax, it's <code>impl Trait</code> vs <code>Trait</code> when explaining
+things, and so that feels like <code>Trait</code> is what you should use, given that it's
+shorter, but in reality, that's not always true.</p>
+<p>As such, in Rust 1.27, we have stabilized a new syntax, <a href="https://github.com/rust-lang/rfcs/blob/master/text/2113-dyn-trait-syntax.md"><code>dyn Trait</code></a>. A
+trait object now looks like this:</p>
+<pre><code class="language-rust">// old =&gt; new
+Box&lt;Foo&gt; =&gt; Box&lt;dyn Foo&gt;
+&amp;Foo =&gt; &amp;dyn Foo
+&amp;mut Foo =&gt; &amp;mut dyn Foo
+</code></pre>
+<p>And similarly for other pointer types, <code>Arc&lt;Foo&gt;</code> is now <code>Arc&lt;dyn Foo&gt;</code>, etc.
+Due to backwards compatibility, we cannot remove the old syntax, but we have
+included a lint, which is set to allow by default, called <a href="https://doc.rust-lang.org/rustc/lints/listing/allowed-by-default.html#bare-trait-object"><code>bare-trait-object</code></a>.
+If you want to lint against the older syntax, you can turn it on. We thought that
+it would throw far too many warnings to turn on by default at present.</p>
+<blockquote>
+<p>Incidentally, we're working on a tool called <code>rustfix</code> that can automatically
+upgrade your code to newer idioms. It uses these sorts of lints to do so.
+Expect to hear more about <code>rustfix</code> in a future announcement.</p>
+</blockquote>
+<h3><a href="#must_use-on-functions" aria-hidden="true" class="anchor" id="must_use-on-functions"></a><code>#[must_use]</code> on functions</h3>
+<p>Finally, the <code>#[must_use]</code> attribute is getting an upgrade: <a href="https://github.com/rust-lang/rust/pull/48925/">it can now be
+used on functions</a>.</p>
+<p>Previously, it only applied to types, like <code>Result&lt;T, E&gt;</code>. But now, you can
+do this:</p>
+<pre><code class="language-rust">#[must_use]
+fn double(x: i32) -&gt; i32 {
+    2 * x
+}
+
+fn main() {
+    double(4); // warning: unused return value of `double` which must be used
+
+    let _ = double(4); // (no warning)
+}
+</code></pre>
+<p>We've also <a href="https://github.com/rust-lang/rust/pull/49533/">enhanced several bits of the standard
+library</a> to make use of this;
+<code>Clone::clone</code>, <code>Iterator::collect</code>, and <code>ToOwned::to_owned</code> will all start
+warning if you don't use their results, helping you notice expensive operations
+you may be throwing away by accident.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1270-2018-06-21">detailed release notes</a> for more.</p>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
+<p>Several new APIs were stabilized this release:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html#method.rfind"><code>DoubleEndedIterator::rfind</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html#method.rfold"><code>DoubleEndedIterator::rfold</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html#method.try_rfold"><code>DoubleEndedIterator::try_rfold</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.from_micros"><code>Duration::from_micros</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.from_nanos"><code>Duration::from_nanos</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.subsec_micros"><code>Duration::subsec_micros</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.subsec_millis"><code>Duration::subsec_millis</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.remove_entry"><code>HashMap::remove_entry</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.try_fold"><code>Iterator::try_fold</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.try_for_each"><code>Iterator::try_for_each</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/ptr/struct.NonNull.html#method.cast"><code>NonNull::cast</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.filter"><code>Option::filter</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/string/struct.String.html#method.replace_range"><code>String::replace_range</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/io/struct.Take.html#method.set_limit"><code>Take::set_limit</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/hint/fn.unreachable_unchecked.html"><code>hint::unreachable_unchecked</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/os/unix/process/fn.parent_id.html"><code>os::unix::process::parent_id</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/process/fn.id.html"><code>process::id</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/ptr/fn.swap_nonoverlapping.html"><code>ptr::swap_nonoverlapping</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.slice.html#method.rsplit_mut"><code>slice::rsplit_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.slice.html#method.rsplit"><code>slice::rsplit</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.slice.html#method.swap_with_slice"><code>slice::swap_with_slice</code></a></li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1270-2018-06-21">detailed release notes</a> for more.</p>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
+<p>Cargo has two small upgrades this release. First, it now <a href="https://github.com/rust-lang/cargo/pull/5393/">takes a
+<code>--target-dir</code> flag</a> if you'd
+like to change the target directory for a given invocation.</p>
+<p>Additionally, a tweak to the way Cargo deals with targets has landed. Cargo
+will attempt to automatically discover tests, examples, and binaries within
+your project. However, sometimes explicit configuration is needed. But the
+initial implementation had a problem: let's say that you have two examples,
+and Cargo is discovering them both. You want to tweak one of them, and so
+you add a <code>[[example]]</code> to your <code>Cargo.toml</code> to configure its settings.
+Cargo currently sees that you've set one explicitly, and therefore, doesn't
+attempt to do any autodetection for the others. That's quite surprising.</p>
+<p>As such, we've <a href="https://github.com/rust-lang/cargo/pull/5335/">added several 'auto' keys to
+<code>Cargo.toml</code></a> We can't fix
+this behavior without possibly breaking projects that may have inadvertently
+been relying on it, and so, if you'd like to configure some targets, but not
+others, you can set the <code>autoexamples</code> key to <code>true</code> in the <code>[package]</code>
+section.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1270-2018-06-21">detailed release notes</a> for more.</p>
+<h2><a href="#contributors-to-1270" aria-hidden="true" class="anchor" id="contributors-to-1270"></a>Contributors to 1.27.0</h2>
+<p>Many people came together to create Rust 1.27. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.27.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

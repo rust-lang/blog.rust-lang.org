@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Stability as a Deliverable | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Stability as a Deliverable | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Stability as a Deliverable | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Stability as a Deliverable" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Stability as a Deliverable</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 30, 2014 &middot; Aaron Turon and Niko Matsakis
+    
+    </div>
+
+    <div class="post">
+      <p>The upcoming Rust 1.0 release means
+<a href="http://blog.rust-lang.org/2014/09/15/Rust-1.0.html">a lot</a>, but most
+fundamentally it is a commitment to stability, alongside our
+long-running commitment to safety.</p>
+<p>Starting with 1.0, we will move to
+a 6-week release cycle and a menu of release &quot;channels&quot;. The stable
+release channel will provide pain-free upgrades, and the nightly
+channel will give early adopters access to unfinished features as we
+work on them.</p>
+<h3><a href="#committing-to-stability" aria-hidden="true" class="anchor" id="committing-to-stability"></a>Committing to stability</h3>
+<p>Since the early days of Rust, there have only been two things you
+could count on: safety, and change. And sometimes not the first
+one. In the process of developing Rust, we've encountered a lot of
+dead ends, and so it's been essential to have the freedom to change
+the language as needed.</p>
+<p>But Rust has matured, and core aspects of the language have been
+steady for a long time. The design feels right. And there is a huge
+amount of pent up interest in Rust, waiting for 1.0 to ship so that
+there is a stable foundation to build on.</p>
+<p>It's important to be clear about what we mean by stable. We don't mean
+that Rust will stop evolving. We will release new versions of Rust on
+a regular, frequent basis, and we hope that people will upgrade just
+as regularly. But for that to happen, those upgrades need to be
+painless.</p>
+<p>To put it simply, our responsibility is to ensure that you never dread
+upgrading Rust. If your code compiles on Rust stable 1.0, it should
+compile with Rust stable 1.x with a minimum of hassle.</p>
+<h3><a href="#the-plan" aria-hidden="true" class="anchor" id="the-plan"></a>The plan</h3>
+<p>We will use a variation of the train model, first introduced in web
+browsers and now widely used to provide stability without stagnation:</p>
+<ul>
+<li>
+<p>New work lands directly in the master branch.</p>
+</li>
+<li>
+<p>Each day, the last successful build from master becomes the new nightly release.</p>
+</li>
+<li>
+<p>Every six weeks, a beta branch is created from the current state of
+master, and the previous beta is promoted to be the new stable
+release.</p>
+</li>
+</ul>
+<p>In short, there are three release channels -- nightly, beta, and
+stable -- with regular, frequent promotions from one channel to the
+next.</p>
+<p>New features and new APIs will be flagged as unstable via feature gates
+and stability attributes respectively. Unstable features and standard
+library APIs will only be available on the nightly branch, and only if you
+explicitly &quot;opt in&quot; to the instability.</p>
+<p>The beta and stable releases, on the other hand, will only include
+features and APIs deemed <em>stable</em>, which represents a commitment to
+avoid breaking code that uses those features or APIs.</p>
+<h3><a href="#the-faq" aria-hidden="true" class="anchor" id="the-faq"></a>The FAQ</h3>
+<p>There are a lot of details involved in the above process, and we plan
+to publish RFCs laying out the fine points. The rest of this post will
+cover some of the most important details and potential worries about
+this plan.</p>
+<h3><a href="#what-features-will-be-stable-for-10" aria-hidden="true" class="anchor" id="what-features-will-be-stable-for-10"></a>What features will be stable for 1.0?</h3>
+<p>We've done an analysis of the current Rust ecosystem to determine the
+most used crates and the feature gates they depend on, and used this
+data to guide our stabilization plan. The good news is that the vast
+majority of what's currently being used will be stable by 1.0:</p>
+<ul>
+<li>
+<p>There are several features that are nearly finished already: struct
+variants, default type parameters, tuple indexing, and slicing syntax.</p>
+</li>
+<li>
+<p>There are two key features that need significant more work, but are
+crucial for 1.0: unboxed closures and associated types.</p>
+</li>
+<li>
+<p>Finally, there are some widely-used features with flaws that cannot
+be addressed in the 1.0 timeframe: glob imports, macros, and syntax
+extensions. This is where we have to make some tough decisions.</p>
+</li>
+</ul>
+<p>After extensive discussion, we plan to release globs and macros as
+stable at 1.0. For globs, we believe we can address problems in a
+backwards-compatible way. For macros, we will likely provide an
+alternative way to define macros (with better
+<a href="http://en.wikipedia.org/wiki/Hygienic_macro">hygiene</a>) at some later
+date, and will incrementally improve the &quot;macro rules&quot; feature until
+then. The 1.0 release will stabilize all current macro support,
+including import/export.</p>
+<p>On the other hand, we <em>cannot</em> stabilize syntax extensions, which are
+plugins with complete access to compiler internals. Stabilizing it
+would effectively forever freeze the internals of the compiler; we
+need to design a more deliberate interface between extensions and the
+compiler. So syntax extensions will remain behind a feature gate for
+1.0.</p>
+<p>Many major uses of syntax extensions could be replaced with
+traditional code generation, and the Cargo tool will soon be growing
+specific support for this use case. We plan to work with library
+authors to help them migrate away from syntax extensions prior to
+1.0. Because many syntax extensions don't fit this model, we also see
+stabilizing syntax extensions as an immediate priority after the 1.0
+release.</p>
+<h3><a href="#what-parts-of-the-standard-library-will-be-stable-for-10" aria-hidden="true" class="anchor" id="what-parts-of-the-standard-library-will-be-stable-for-10"></a>What parts of the standard library will be stable for 1.0?</h3>
+<p>We have been steadily stabilizing the standard library, and have a
+plan for nearly <em>all</em> of the modules it provides. The expectation is
+that the vast majority of functionality in the standard library will
+be stable for 1.0. We have also been migrating more experimental APIs
+out of the standard library and into their own crates.</p>
+<h3><a href="#what-about-stability-attributes-outside-of-the-standard-library" aria-hidden="true" class="anchor" id="what-about-stability-attributes-outside-of-the-standard-library"></a>What about stability attributes outside of the standard library?</h3>
+<p>Library authors can continue to use stability attributes as they do
+today to mark their own stability promises. These attributes are not
+tied into the Rust release channels by default. That is, when you're
+compiling on Rust stable, you can only use stable APIs from the
+standard library, but you can opt into experimental APIs from other
+libraries. The Rust release channels are about making upgrading <em>Rust
+itself</em> (the compiler and standard library) painless.</p>
+<p>Library authors should follow <a href="http://semver.org/">semver</a>; we will
+soon publish an RFC defining how library stability attributes and
+semver interact.</p>
+<h3><a href="#why-not-allow-opting-in-to-instability-in-the-stable-release" aria-hidden="true" class="anchor" id="why-not-allow-opting-in-to-instability-in-the-stable-release"></a>Why not allow opting in to instability in the stable release?</h3>
+<p>There are three problems with allowing unstable features on the
+stable release.</p>
+<p>First, as the web has shown numerous times, merely <em>advertising</em>
+instability doesn't work. Once features are in wide use it is very
+hard to change them -- and once features are available at all, it is
+very hard to prevent them from being used. Mechanisms like &quot;vendor
+prefixes&quot; on the web that were meant to support experimentation
+instead led to de facto standardization.</p>
+<p>Second, unstable features are by definition work in progress. But the
+beta/stable snapshots freeze the feature at scheduled points in time,
+while library authors will want to work with the latest version of the
+feature.</p>
+<p>Finally, we simply <em>cannot</em> deliver stability for Rust unless we
+enforce it. Our promise is that, if you are using the stable release
+of Rust, you will never dread upgrading to the next release. If
+libraries could opt in to instability, then we could only keep this
+promise if all library authors guaranteed the same thing by supporting
+all three release channels simultaneously.</p>
+<p>It's not realistic or necessary for the entire ecosystem to flawlessly
+deal with these problems. Instead, we will enforce that stable means
+stable: the stable channel provides only stable features.</p>
+<h3><a href="#wont-this-split-the-ecosystem-will-everyone-use-nightly-at-10" aria-hidden="true" class="anchor" id="wont-this-split-the-ecosystem-will-everyone-use-nightly-at-10"></a>Won't this split the ecosystem? Will everyone use nightly at 1.0?</h3>
+<p>It doesn't split the ecosystem: it creates a subset. Programmers
+working with the nightly release channel can freely use libraries that
+are designed for the stable channel. There will be pressure to
+stabilize important features and APIs, and so the incentives to stay
+in the unstable world will shrink over time.</p>
+<p>We have carefully planned the 1.0 release so that the bulk of the
+existing ecosystem will fit into the &quot;stable&quot; category, and thus
+newcomers to Rust will immediately be able to use most libraries on
+the stable 1.0 release.</p>
+<h3><a href="#what-are-the-stability-caveats" aria-hidden="true" class="anchor" id="what-are-the-stability-caveats"></a>What are the stability caveats?</h3>
+<p>We reserve the right to fix compiler bugs, patch safety holes, and
+change type inference in ways that may occasionally require new type
+annotations. We do not expect any of these changes to cause
+headaches when upgrading Rust.</p>
+<p>The library API caveats will be laid out in a forthcoming RFC, but are
+similarly designed to minimize upgrade pain in practice.</p>
+<h3><a href="#will-rust-and-its-ecosystem-continue-their-rapid-development" aria-hidden="true" class="anchor" id="will-rust-and-its-ecosystem-continue-their-rapid-development"></a>Will Rust and its ecosystem continue their rapid development?</h3>
+<p>Yes! Because new work can land on master at any time, the train model
+doesn't slow down the pace of development or introduce artificial
+delays. Rust has always evolved at a rapid pace, with lots of help
+from amazing community members, and we expect this will only accelerate.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

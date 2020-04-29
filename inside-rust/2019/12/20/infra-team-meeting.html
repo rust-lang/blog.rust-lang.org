@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>2019-12-17 Infrastructure Team Meeting | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="2019-12-17 Infrastructure Team Meeting | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="2019-12-17 Infrastructure Team Meeting | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="2019-12-17 Infrastructure Team Meeting" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>2019-12-17 Infrastructure Team Meeting</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 20, 2019 &middot; Pietro Albini
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/operations#infra">the infrastructure team</a> 
+    </div>
+
+    <div class="post">
+      <p>Meeting run by pietroalbini. Minutes written by pietroalbini.<br />
+Attending: aidanhs, alexcrichton, kennytm, Mark-Simulacrum, pietroalbini,
+shepmaster</p>
+<h2><a href="#spurious-chocolatey-failures" aria-hidden="true" class="anchor" id="spurious-chocolatey-failures"></a>Spurious Chocolatey failures</h2>
+<p>Since a few days ago, Chocolatey started returning 503 error codes at random,
+preventing some Windows CI runners from downloading MSYS2, and the tree was
+closed to prevent the failures from affecting a bunch of PRs. There were a few
+proposals on how to work around them, spanning from a proper mirroring
+implementation to just a quick fix to get CI working again.</p>
+<p>After the discussion the team agreed to prioritize getting CI working
+consistently rather than implement the correct solution from the start. aidanhs
+is going to look into that during the weekend, if nobody else finishes the work
+before.</p>
+<h2><a href="#progress-on-moving-the-infrastructure-to-terraform" aria-hidden="true" class="anchor" id="progress-on-moving-the-infrastructure-to-terraform"></a>Progress on moving the infrastructure to Terraform</h2>
+<p>In the past few months pietroalbini started exploring moving the configuration
+of Rust’s AWS infrastructure to Terraform, to allow for better collaboration
+and auditability. So far a few services have been moved over to Terraform, and
+pietroalbini proposed in the meeting to evaluate moving dynamic applications
+over to ECS and configure those with Terraform.</p>
+<p>alexcrichton brought up the point that pietroalbini is at the moment the only
+person in the team familiar with our Terraform setup, and while it’s probably a
+better solution than the status quo we need more people able to work with it
+before we decide to fully commit to using it. He acknowledged the current
+solution (services manually configured through the console) is not scalable nor
+long term, but we can’t jump to Terraform if most of the team doesn’t know how
+to work with it.</p>
+<p>shepmaster said that this is not much different than the situation in the past,
+where alexcrichton was the only one knowing how our infrastructure worked
+(since then other people in the team got up to speed). aidanhs pointed out that
+we had a case in the past like that, when only alexcrichton knew how a system
+worked and it broke while he was on holiday.</p>
+<p>alexcrichton proposed to pause investing time into Terraform until at least
+another team member gets familiar with it, and Mark-Simulacrum said he’s
+willing to pair with pietroalbini for a few hours to migrate one of the
+services to Terraform, learning how it works in the process.</p>
+<p>The feelings about ECS turned up to be mostly the same: everyone agreed it’s
+surely a better solution than the setup we have right now, but only
+pietroalbini is familiar with it. We agreed that pietroalbini and
+Mark-Simulacrum are going to deploy one of the small applications to ECS using
+Terraform while pairing, testing both the new things in one go.</p>
+<p>In the end, pietroalbini reminded the team that not every application we
+currently host is going to fit into ECS + Fargate without changes, especially
+because you can’t really persist data on the filesystem with it, but he
+mentioned he’s willing to do the implementation work to adapt those
+applications not to use the filesystem anymore.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.29 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.29 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.29 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.29" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.29</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 13, 2018 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.29.0. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.29.0 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1290-2018-09-13">detailed release notes for
+1.29.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1290-stable" aria-hidden="true" class="anchor" id="whats-in-1290-stable"></a>What's in 1.29.0 stable</h2>
+<p>The 1.29 release is fairly small; Rust 1.30 and 1.31 are going to have a lot
+in them, and so much of the 1.29 cycle was spent preparing for those
+releases. The two most significant things in this release aren't even language
+features: they're new abilities that Cargo has grown, and they're both about lints.</p>
+<ul>
+<li><code>cargo fix</code> can automatically fix your code that has warnings</li>
+<li><code>cargo clippy</code> is a bunch of lints to catch common mistakes and improve your Rust code</li>
+</ul>
+<h3><a href="#cargo-fix" aria-hidden="true" class="anchor" id="cargo-fix"></a><code>cargo fix</code></h3>
+<p>With the release of Rust 1.29, Cargo has a new subcommand: <code>cargo fix</code>. If you've written
+code in Rust before, you've probably seen a compiler warning before. For example, consider
+this code:</p>
+<pre><code class="language-rust">fn do_something() {}
+
+fn main() {
+    for i in 0..100 {
+        do_something();
+    }
+}
+</code></pre>
+<p>Here, we're calling <code>do_something</code> a hundred times. But we never use the variable <code>i</code>.
+And so Rust warns:</p>
+<pre><code class="language-console">cargo build
+   Compiling myprogram v0.1.0 (file:///path/to/myprogram)
+warning: unused variable: `i`
+ --&gt; src\main.rs:4:9
+  |
+4 |     for i in 1..100 {
+  |         ^ help: consider using `_i` instead
+  |
+  = note: #[warn(unused_variables)] on by default
+
+    Finished dev [unoptimized + debuginfo] target(s) in 0.50s
+</code></pre>
+<p>See how it suggests that we use <code>_i</code> as a name instead? We can automatically
+apply that suggestion with <code>cargo fix</code>:</p>
+<pre><code class="language-console">cargo fix
+    Checking myprogram v0.1.0 (file:///C:/Users/steve/tmp/fix)
+      Fixing src\main.rs (1 fix)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.59s
+</code></pre>
+<p>If we look at <code>src\main.rs</code> again, we'll see that the code has changed:</p>
+<pre><code class="language-rust">fn do_something() {}
+
+fn main() {
+    for _i in 0..100 {
+        do_something();
+    }
+}
+</code></pre>
+<p>We're now using <code>_i</code>, and the warning will no longer appear.</p>
+<p>This initial release of <code>cargo fix</code> only fixes up a small number of warnings.
+The compiler has an API for this, and it only suggests fixing lints that
+we're confident recommend correct code. Over time, as our suggestions
+improve, we'll be expanding this to automatically fix more warnings.</p>
+<p>if you find a compiler suggestion and want to help make it fixable, please
+leave a comment on <a href="https://github.com/rust-lang/rust/issues/50723">this
+issue</a>.</p>
+<h3><a href="#cargo-clippy" aria-hidden="true" class="anchor" id="cargo-clippy"></a><code>cargo clippy</code></h3>
+<p>Speaking of warnings, you can now check out a preview of <code>cargo clippy</code> through Rustup.
+Clippy is a large number of additional warnings that you can run against your Rust code.</p>
+<p>For example:</p>
+<pre><code class="language-rust">let mut lock_guard = mutex.lock();
+
+std::mem::drop(&amp;lock_guard)
+
+operation_that_requires_mutex_to_be_unlocked();
+</code></pre>
+<p>This code is syntactically correct, but may have a deadlock! You see, we
+dropped <em>a reference to <code>lock_guard</code></em>, not the guard itself. Dropping
+a reference is a no-op, and so this is almost certainly a bug.</p>
+<p>We can get the preview of Clippy from Rustup:</p>
+<pre><code class="language-console">rustup component add clippy-preview
+</code></pre>
+<p>and then run it:</p>
+<pre><code class="language-console">cargo clippy
+error: calls to `std::mem::drop` with a reference instead of an owned value. Dropping a reference does nothing.
+ --&gt; src\main.rs:5:5
+  |
+5 |     std::mem::drop(&amp;lock_guard);
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: #[deny(drop_ref)] on by default
+note: argument has type &amp;std::result::Result&lt;std::sync::MutexGuard&lt;'_, i32&gt;, std::sync::PoisonError&lt;std::sync::MutexGuard&lt;'_, i32&gt;&gt;&gt;
+ --&gt; src\main.rs:5:20
+  |
+5 |     std::mem::drop(&amp;lock_guard);
+  |                    ^^^^^^^^^^^
+  = help: for further information visit https://rust-lang-nursery.github.io/rust-clippy/v0.0.212/index.html#drop_ref
+</code></pre>
+<p>As you can see from that help message, you can view all of the lints that
+clippy offers on the web.</p>
+<p>Please note that this is a preview; clippy has not yet reached 1.0. As such,
+its lints may change. We'll release a <code>clippy</code> component once it has stabilized;
+please give the preview a try and let us know how it goes.</p>
+<p>Oh, and one more thing: <a href="https://github.com/rust-lang-nursery/rustfix/issues/130">you can't use clippy with <code>cargo-fix</code> yet,
+really</a>. It's in the works!</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1290-2018-09-13">detailed release notes</a> for more.</p>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
+<p>Three APIs were stabilized this release:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/sync/struct.Arc.html#method.downcast"><code>Arc&lt;T&gt;::downcast</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html#method.downcast"><code>Rc&lt;T&gt;::downcast</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flatten"><code>Iterator::flatten</code></a></li>
+</ul>
+<p>Additionally, you can <a href="https://github.com/rust-lang/rust/pull/51178/">now compare <code>&amp;str</code> and
+<code>OsString</code></a>.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1290-2018-09-13">detailed release notes</a> for more.</p>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
+<p>We covered the two new subcommands to Cargo above, but additionally, <a href="https://github.com/rust-lang/cargo/pull/5831/">Cargo
+will now try to fix up lockfiles that have been corrupted by a <code>git merge</code></a>. You can pass
+<code>--locked</code> to disable this behavior.</p>
+<p><code>cargo doc</code> has also grown a new flag:
+<a href="https://github.com/rust-lang/cargo/pull/5543"><code>--document-private-items</code></a>.  By
+default, <code>cargo doc</code> only documents public things, as the docs it produces are
+intended for end-users. But if you're working on your own crate, and you have
+internal documentation for yourself to refer to, <code>--document-private-items</code>
+will generate docs for all items, not just public ones.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1290-2018-09-13">detailed release notes</a> for more.</p>
+<h2><a href="#contributors-to-1290" aria-hidden="true" class="anchor" id="contributors-to-1290"></a>Contributors to 1.29.0</h2>
+<p>Many people came together to create Rust 1.29. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.29.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

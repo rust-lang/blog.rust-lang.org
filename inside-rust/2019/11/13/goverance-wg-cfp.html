@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Governance WG Call For Participation | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Governance WG Call For Participation | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Governance WG Call For Participation | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Governance WG Call For Participation" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Governance WG Call For Participation</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 13, 2019 &middot; Erin Power
+     on behalf of <a href="https://github.com/rust-lang/wg-governance">The Governance WG</a> 
+    </div>
+
+    <div class="post">
+      <p>Hello everyone, the governance working group has been working a few efforts, but
+we haven't made as much progress as we would have liked over the past few
+months, so we are going to try out a new process and meeting agenda aimed at
+trying to get more work done in the time we know we have.</p>
+<h2><a href="#new-meeting-structure" aria-hidden="true" class="anchor" id="new-meeting-structure"></a>New Meeting Structure</h2>
+<p>Previously we have been doing most of our work async while using our bi-weekly
+meeting call to triage tasks. The problem we ran into with this is that a lot of
+the members also heavy contributors to the Rust project as a whole, and it can
+be can hard for some people to schedule time write an initial draft.</p>
+<p>To address this instead of triaging during the meeting and working on tasks in
+async, we're going to hold focused topic based meetings, and use the time between
+meetings, to publish posts like this and to research and prepare for the next
+topic. To help do this we're going to extend our current meeting duration from
+30 minutes to an hour. (The meeting will still be every two weeks.)</p>
+<p>The current goals are to documenting the de-facto governance structure, provide
+the result as a RFC and then if merged provide a version on
+<a href="https://forge.rust-lang.org/">forge.rust-lang.org</a> so that it has greater visbility. We also want to
+schedule people involved in Rust and other governance structures to come and
+talk about their experiences.</p>
+<p>For deciding what topics, we're going to rotate who takes the lead for each
+meeting. It's that person's responsibility to decide the topic and to
+prepare a call for participation similar to this post informing people of
+the topic and how they might best prepare if they wish to join.</p>
+<p>We also hope that having a focused topic will reduce any barrier of expected
+knowledge in order to participate and contribute. With that said let's talk
+about the topic for next meeting.</p>
+<h2><a href="#reviewing--examining-previous-governance-rfcs" aria-hidden="true" class="anchor" id="reviewing--examining-previous-governance-rfcs"></a>Reviewing &amp; Examining Previous Governance RFCs</h2>
+<p>Our first topic for new meeting is going to be to read <a href="https://rust-lang.github.io/rfcs/1068-rust-governance.html">RFC 1068</a>, the
+original Rust Governance RFC, review how accurate it is to today's structure,
+and see any if there are questions that we have that it doesn't answer. Here
+are some other relevant RFCs for additional context:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rfcs/blob/26197104b7bb9a5a35db243d639aee6e46d35d75/text/1728-north-star.md">&quot;North Star&quot; RFC</a> lays out the Rust roadmap process.</li>
+<li><a href="https://rust-lang.github.io/rfcs/2689-compiler-team-contributors.html">Compiler contributors RFC</a> details the process of contributing to the
+compiler and progression towards joining the compiler team.</li>
+<li><a href="https://rust-lang.github.io/rfcs/1589-rustc-bug-fix-procedure.html">Compiler bug fix procedure</a> defines the best practices for making a bug fix
+to the compiler.</li>
+</ul>
+<p>Our next meeting is going to be at <strong>22:00 UTC on Tuesday, November 19th</strong>
+and we'd like to encourage anyone who's interested, regardless of their
+previous experience to read those RFCs and come to the <code>#wg-governance</code>
+channel on discord to attend the meeting. (Our meetings are done over a video
+call with Zoom, but we use the discord channel to organise ourselves).</p>
+<p>If some reason you know you won't be able to attend these meetings but would
+still like to participate. Please feel free to post any questions about Rust's
+governance as <a href="https://github.com/rust-lang/wg-governance/issues?q=is%3Aissue+is%3Aopen+label%3AQuestion">issues on our GitHub repository</a>, even if you are
+not available to attend the working group's meetings.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

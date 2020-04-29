@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Traits working group 2020 sprint 1 summary | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Traits working group 2020 sprint 1 summary | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Traits working group 2020 sprint 1 summary | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Traits working group 2020 sprint 1 summary" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Traits working group 2020 sprint 1 summary</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 28, 2020 &middot; Jack Huey
+     on behalf of <a href="https://rust-lang.github.io/wg-traits/">The Traits WG</a> 
+    </div>
+
+    <div class="post">
+      <p>This Tuesday, the traits working group finished our first sprint of 2020, last 6 weeks from February 11th through March 24th. The last sprint was about a year ago, but we decided to resurrect the format in order to help push forward traits-related work in <a href="https://github.com/rust-lang/chalk">Chalk</a> and rustc.</p>
+<h2><a href="#what-is-wg-traits-and-what-do-we-do" aria-hidden="true" class="anchor" id="what-is-wg-traits-and-what-do-we-do"></a>What is wg-traits and what do we do?</h2>
+<h3><a href="#goal-an-efficient-extensible-and-reusable-crate-for-the-rust-trait-system" aria-hidden="true" class="anchor" id="goal-an-efficient-extensible-and-reusable-crate-for-the-rust-trait-system"></a>Goal: An efficient, extensible, and reusable crate for the Rust trait system</h3>
+<p>The overarching goal of the <a href="https://rust-lang.github.io/wg-traits/">traits working group</a> is to create a performant, extensible, and clean implementation of Rust's trait system. This implementation should scale not only to existing Rust features but also to new and upcoming features, such as:</p>
+<ul>
+<li>Implied bounds (<a href="https://rust-lang.github.io/rfcs/2089-implied-bounds.html">RFC</a>)</li>
+<li>Const generics (<a href="https://rust-lang.github.io/rfcs/2000-const-generics.html">RFC</a>)</li>
+<li>Generic associated types (GATs) (<a href="https://rust-lang.github.io/rfcs/1598-generic_associated_types.html">RFC</a>)</li>
+<li>Inherent associated items (<a href="https://github.com/rust-lang/rust/issues/8995">tracking issue</a>)</li>
+</ul>
+<p>As if that weren't enough, we'd like the implementaton to be <strong>reusable</strong>, too -- meaning that it can be used by rustc, yes, but also rust-analyzer and potentially other contexts as well.</p>
+<p>This effort is part of one of the big, longer term goals for the compiler team: <strong>library-ification</strong>. This refers to the idea of breaking apart the compiler into independent libraries that can be learned, tested, and developed independently.</p>
+<p>In order to achieve these and future features, our work is split into two parts: 1) Improving rustc's existing trait solver. 2) Design and implement the <a href="https://github.com/rust-lang/chalk">Chalk</a> trait solver, work towards integration into rustc. The Chalk trait solver, briefly, is a logic-based trait solver, designed to be independent of rustc internals. In addition to it being more powerful than the current rustc trait solving implementation, Chalk can be used as a library for compiler-related work, such as IDE integration (e.g. <a href="https://github.com/rust-analyzer/rust-analyzer">rust-analyzer</a>).</p>
+<p>Coming into 2020, we — the traits working group — knew we wanted to get more organized and start to push more on getting Chalk fully integrated into rustc, by cleaning up the Chalk codebase itself, fixing bugs, implementing new features, and ultimately integrating Chalk into rustc itself. In addition, we are committed to documenting design considerations and decisions for better accesibility now and in the future. For example, we now publish a Chalk <a href="http://rust-lang.github.io/chalk/book/">book</a> which, while incomplete, attempts to document the Chalk internals somewhat akin to the <a href="https://rustc-dev-guide.rust-lang.org/">rustc dev guide</a>.</p>
+<h4><a href="#a-note-about-chalk-integration-in-rustc" aria-hidden="true" class="anchor" id="a-note-about-chalk-integration-in-rustc"></a>A note about Chalk integration in rustc</h4>
+<p>An experimental integration of Chalk was in rustc (under the <code>-Z chalk</code> flag) for over a year, but since its initial implementation, little work had been done while much work had been done on Chalk itself. This ultimately meant that the initial implementation based on the older Chalk version looks very different from what an implementation based on the current Chalk would and should look like. Under this reasoning, that experimental implementation has been removed.</p>
+<h2><a href="#2020-sprint-1" aria-hidden="true" class="anchor" id="2020-sprint-1"></a>2020 sprint 1</h2>
+<p>Ok, with the background finished, that brings us to the actual 2020 sprint 1. Going into this, we didn't <em>quite</em> know what our goals would be. In this post, we'll share an overview of each of the things that were accomplished during this sprint, which actually was quite a lot!</p>
+<h3><a href="#credit-where-credit-is-due" aria-hidden="true" class="anchor" id="credit-where-credit-is-due"></a>Credit where credit is due</h3>
+<p>A big thank you :hearts: to the folks who participated in this sprint:</p>
+<ul>
+<li><a href="https://github.com/davidbarsky">David Barsky</a></li>
+<li><a href="https://github.com/detrumi">detrumi</a></li>
+<li><a href="https://github.com/flodiebold">Florian Diebold</a></li>
+<li><a href="https://github.com/jackh726">Jack Huey</a></li>
+<li><a href="https://github.com/crlf0710">Charles Lew</a></li>
+<li><a href="https://github.com/yaahc">Jane Lusby</a></li>
+<li><a href="https://github.com/nikomatsakis">Niko Matsakis</a></li>
+</ul>
+<h3><a href="#wg-traits-skill-tree" aria-hidden="true" class="anchor" id="wg-traits-skill-tree"></a>wg-traits skill tree</h3>
+<p>Our &quot;<a href="https://rust-lang.github.io/wg-traits/roadmap/skill-tree.html">skill tree</a>&quot; is how we track our <a href="https://rust-lang.github.io/wg-traits/roadmap.html">development roadmap</a>. It shows some of the major goals we are working towards (e.g., having chalk be usable as a standalone library) along with some of the major tasks that we have to complete along the way. You can click on the tasks to be taken to a github issue or other explanation. We try to update it after every meeting so that we have some idea of what we're doing and why.</p>
+<p>The skill tree structure was inspired by <a href="https://hacks.mozilla.org/2018/10/webassemblys-post-mvp-future/">this blog post about WebAssembly</a>, which in turn borrowed the term from games. Sadly, the current tool that generates the skill tree doesn't yet make anything as beautiful as the hand-drawn art in the WASM post. If anybody is interested in improving the tool's output, that is on the list of 'stretch goals' for this coming sprint!</p>
+<h3><a href="#chalk-book-chalk-engine-chapter" aria-hidden="true" class="anchor" id="chalk-book-chalk-engine-chapter"></a>Chalk book <code>chalk-engine</code> chapter</h3>
+<p>As mentioned before, in our effort to document Chalk internals, we started publishing a <a href="http://rust-lang.github.io/chalk/book/">book</a> late last year. Near the beginning of this sprint, we added a whole chapter about <a href="http://rust-lang.github.io/chalk/book/engine.html"><code>chalk-engine</code></a> itself. This is the core crate of Chalk that solves a given set of <code>Goal</code>s. While there is always more that can be documented, we hope this at least is a start in helping people, potentially newcomers, to understand how Chalk works internally.</p>
+<h3><a href="#work-on-basic-support-for-impl-trait" aria-hidden="true" class="anchor" id="work-on-basic-support-for-impl-trait"></a>Work on basic support for <code>impl Trait</code></h3>
+<p>In Rust, there are a few places, currently and in the future, where you may specify <code>impl Trait</code> instead of a specific struct. For example, the signature of a function may be <code>fn foo() -&gt; impl Debug</code>. Another place where you may use the <code>impl Trait</code> syntax in the future is with <code>type Foo = impl Trait</code> (currently under the <a href="https://github.com/rust-lang/rust/issues/63063"><code>type_alias_impl_trait</code></a> feature). This would allow you to use <code>Foo</code> as if it was a concrete type. During this sprint, we made significant progress in allowing both of these to work with Chalk. We'll be doing follow-up work on this in the upcoming sprint, and hopefully landing support.</p>
+<h3><a href="#creating-a-proposal-for-a-shared-type-library" aria-hidden="true" class="anchor" id="creating-a-proposal-for-a-shared-type-library"></a>Creating a proposal for a shared type library</h3>
+<p>Currently, rustc, rust-analyzer, and chalk each represent Rust types using a different set of structs. This means that when rustc or rust-analyzer wish to invoke chalk functions, we have to convert the representation of Rust types back and forth. This is fine for the time being, but eventually we would like to be having everyone use the same representation, so that no interconversion is required. This is a bit tricky, though, because the requirements of rustc (a batch compiler) and rust-analyzer (an IDE) are somewhat different. During this sprint, we wrote up a proposal for a shared type library, and led a design meeting on the topic. You can find the <a href="https://rust-lang.github.io/compiler-team/minutes/design-meeting/2020-03-12-shared-library-for-types/">record of that meeting here</a>, which also includes the proposal.</p>
+<p>During this upcoming sprint, we'll be following up on this design by starting to do some of the preliminary refactorings in rustc.</p>
+<h3><a href="#refactoring-for-passing-interner-around" aria-hidden="true" class="anchor" id="refactoring-for-passing-interner-around"></a>Refactoring for passing <code>Interner</code> around</h3>
+<p>One of the requirements for a shared type library is that it needs to support interning and arena allocation of types. <em>Interning</em> a type means to re-use the same memory each time you have an equivalent type, rather than allocating multiples copies. <em>Arena allocation</em> is a memory management strategy where you allocate all the memory in an ever-growing pool and then free the entire pool at once, rather than tracking and freeing individual allocations.</p>
+<p>Chalk's existing type library was implemented with simplicity in mind, however, and couldn't support either of these use-cases. The problem was that to support interning and arena allocation, you need to track around an <em>interner</em> variable that contains the hash-maps, arenas, and other supporting data structures, and chalk's APIs didn't have any space for that. This sprint, we fixed that, so that we now pass along an <code>interner</code> value throughout chalk, meaning we can bridge to rustc and rust-analyzer more easily.</p>
+<h3><a href="#refactoring-how-chalk-represents-bound-types-and-lifetimes" aria-hidden="true" class="anchor" id="refactoring-how-chalk-represents-bound-types-and-lifetimes"></a>Refactoring how chalk represents bound types and lifetimes</h3>
+<p>Some of the details of how chalk represented types with <em>bound variables</em> (e.g., the <code>'a</code> in <code>for&lt;'a&gt; fn(&amp;'a u32)</code>) differed from how rustc was handling such types. This made bridging from rustc to chalk much harder.  We found that the design we ultimately want was a hybrid of what rustc and and chalk have. During this sprint, we did most of the chalk refactoring, and in the upcoming sprint, we'll work on the rustc side of the work.</p>
+<h3><a href="#work-on-adding-tracing-support-to-chalk" aria-hidden="true" class="anchor" id="work-on-adding-tracing-support-to-chalk"></a>Work on adding <code>tracing</code> support to Chalk</h3>
+<p>The <a href="https://crates.io/crates/tracing"><code>tracing</code></a> crate provides a framework for collecting event-based diagnostic information. Currently, in Chalk, we only have basic logging support. By adding <code>tracing</code> support, we expect to get more fine-grained control of Chalk diagnostics. Initial support is nearly finished and hopefully will get merged soon.</p>
+<h3><a href="#exploratory-rustc-integration-mvp" aria-hidden="true" class="anchor" id="exploratory-rustc-integration-mvp"></a>Exploratory rustc integration MVP</h3>
+<p>As mentioned before, the previous experimental Chalk integration was removed from rustc since it was outdated. Since there are quite a few design differences between Chalk and rustc's current trait solver, some subtle, it's not always clear what <em>exactly</em> needs to be modified to makes things work correctly. We have <a href="https://github.com/rust-lang/rust/pull/69406">started</a> writing the experimental Chalk integration. The goal, at least to start, is to create a minimal implementation as a basis for future work. While the pull request is not <em>quite</em> there, it's close and has been tremendously helpful in uncovering blocking issues in Chalk that hold up progress.</p>
+<h3><a href="#exploratory-recursive-solver" aria-hidden="true" class="anchor" id="exploratory-recursive-solver"></a>Exploratory recursive solver</h3>
+<p>One of the interesting aspects of chalk's design is that it separates out the <strong>solver strategy</strong> from other parts of the trait system implementation. In addition to our existing solver, the so-called <a href="http://smallcultfollowing.com/babysteps/blog/2018/01/31/an-on-demand-slg-solver-for-chalk/">&quot;on demand slg solver&quot;</a>, we are exploring a <a href="https://gist.github.com/nikomatsakis/bfbdbe588d6fc61ecb09e3b51847fb7c">&quot;recursive solver&quot;</a> design. We began by resurrecting an older version of this code that was removed and have been exploring adapting it to the newer ideas.</p>
+<h3><a href="#minor-chalk-cleanups" aria-hidden="true" class="anchor" id="minor-chalk-cleanups"></a>Minor Chalk cleanups</h3>
+<p>Over the last sprint, there have been a couple smaller cleanups to Chalk to mention. It can build rustc again, passing rustc's lints. We removed an unneeded dependency (well, it's technically there for tests). Finally, we also made Chalk a bit more panic-safe.</p>
+<h2><a href="#2020-sprint-2" aria-hidden="true" class="anchor" id="2020-sprint-2"></a>2020 sprint 2</h2>
+<p>We plan to begin the next sprint of 2020 next Tuesday, March 31st. We'll briefly cover a few goals:</p>
+<h3><a href="#how-to-get-involved" aria-hidden="true" class="anchor" id="how-to-get-involved"></a>How to get involved</h3>
+<p>If you'd like to get involved, please drop in on the <a href="https://rust-lang.zulipchat.com/">rust-lang Zulip</a> in the <code>#wg-traits</code> stream. We also have a <a href="https://calendar.google.com/event?action=TEMPLATE&tmeid=b2hhbXZ2YzcxNzhsMTZqNHFibGxpMmZubjRfMjAyMDAzMzFUMjAwMDAwWiA2dTVycnRjZTZscnR2MDdwZmkzZGFtZ2p1c0Bn&tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&scp=ALL">weekly design meeting</a> (held on Zulip) that we use to sync up on progress and discuss tricky issues.</p>
+<h3><a href="#chalk-rustc-integration-mvp" aria-hidden="true" class="anchor" id="chalk-rustc-integration-mvp"></a>Chalk rustc-integration MVP</h3>
+<p>It will be a bit of a stretch, but we hope that this sprint we can complete work on a &quot;MVP&quot; of chalk-rustc integration that we can use to drive further development. This MVP will be unsound and incomplete (for example, it will likely not enforce borrow checker rules correctly), but it will help us to uncover corner cases and to validate the design of the chalk solver. Towards this end, we have a number of concrete tasks:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/chalk/issues/363">Extending chalk with support for builtin traits like <code>Sized</code>, <code>Copy</code>, and <code>Clone</code></a>
+<ul>
+<li>There are several traits for which the precise rules are not expressed as ordinary impls, but rather require special integration in the library itself. Chalk doesn't currently have any support for these traits, so we need to extend it.</li>
+</ul>
+</li>
+<li>Land existing branch</li>
+<li>Converting rustc types into chalk types
+<ul>
+<li>Eventually, we hope to have rustc and chalk sharing the same type library, so that no bridging is needed between them. But creating such a library will take a while. So, in the interim, we will write code that converts rustc types into chalk types on demand. (Some of the other sprint goals, meanwhile, will be adapting rustc types so that we are also moving towards our eventual goal.)</li>
+</ul>
+</li>
+</ul>
+<h3><a href="#design-meeting-for-const-integration" aria-hidden="true" class="anchor" id="design-meeting-for-const-integration"></a>Design meeting for <code>const</code> integration</h3>
+<p>As mentioned in the previous section, our initial Chalk rustc-integration MVP won't have support for <code>const</code>. During this sprint, we plan on <a href="https://github.com/rust-lang/wg-traits/issues/15">scheduling a design meeting</a> to specifically flesh out some of the design about what <code>const</code> <em>would</em> look like. Actual implementation will be left for a later sprint.</p>
+<h3><a href="#move-towards-aligning-rustc-and-chalk-types" aria-hidden="true" class="anchor" id="move-towards-aligning-rustc-and-chalk-types"></a>Move towards aligning rustc and Chalk types</h3>
+<p>During this sprint, we plan to start working towards extracting a shared library for Rust types, as discussed in the <a href="https://rust-lang.github.io/compiler-team/minutes/design-meeting/2020-03-12-shared-library-for-types/">design meeting</a> mentioned previously. This will involve work on refactoring rustc as well as changes to chalk. (<a href="https://github.com/rust-lang/wg-traits/issues/16">Tracking issue.</a>)</p>
+<h3><a href="#land-basic-support-for-impl-trait" aria-hidden="true" class="anchor" id="land-basic-support-for-impl-trait"></a>Land basic support for <code>impl Trait</code></h3>
+<p>We expect to land basic support for <code>impl Trait</code> fairly early in the next sprint. However, there is some <a href="https://github.com/rust-lang/chalk/issues/335">followup work</a> to be done to further refine the implementation.</p>
+<h3><a href="#exploratory-implementations-and-research" aria-hidden="true" class="anchor" id="exploratory-implementations-and-research"></a>Exploratory implementations and research</h3>
+<p>In addition to the more concrete goals, there is also some exploratory work being done:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/chalk/issues/351">Implementating a recursive solver</a></li>
+<li><a href="https://github.com/rust-lang/chalk/issues/364">Converting semantic to syntactic equality</a></li>
+<li><a href="https://github.com/rust-lang/chalk/issues/365">Outputting a file for reproducing bugs</a></li>
+</ul>
+<h3><a href="#chalk-performance-work" aria-hidden="true" class="anchor" id="chalk-performance-work"></a>Chalk performance work</h3>
+<p>Most of the work on Chalk has been focused on design, and <em>not much</em> has been done to optimize performance. While the particular &quot;end goal&quot; isn't clear here, we hope to start by createing a set of memory, cpu, and time benchmarks for Chalk. With this framework, we can diagnose specific performance issues and monitor future changes for regressions. Part of this will be to <a href="https://github.com/rust-lang/chalk/issues/337">land</a> <code>tracing</code> support.</p>
+<h3><a href="#improving-the-skill-tree" aria-hidden="true" class="anchor" id="improving-the-skill-tree"></a>Improving the skill tree</h3>
+<p>The skill tree has been a useful tool for helping us organize our work and track our status and overall plan. However, the current output is not exactly self explanatory, nor is it particularly attractive. The ultimate goal is to generate pictures similar to Lin's <a href="https://hacks.mozilla.org/2018/10/webassemblys-post-mvp-future/">hand drawn artwork</a>. There are also some missing features. If there is someone out there interested in taking a stab at improving the quality of the output, or adding features, that would be great! skill-tree lives in its own <a href="https://github.com/nikomatsakis/skill-tree">github repo</a>, but just drop by the <code>#wg-traits</code> stream on Zulip to chat about it.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>One year of Rust | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="One year of Rust | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="One year of Rust | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="One year of Rust" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>One year of Rust</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">May 16, 2016 &middot; Aaron Turon
+    
+    </div>
+
+    <div class="post">
+      <p>Rust is a language that gives you:</p>
+<ul>
+<li>uncompromising performance and control;</li>
+<li>prevention of entire categories of bugs, including <a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">classic concurrency pitfalls</a>;</li>
+<li>ergonomics that often rival languages like <a href="http://lucumr.pocoo.org/2015/5/27/rust-for-pythonistas/">Python</a> and <a href="http://diesel.rs/">Ruby</a>.</li>
+</ul>
+<p>It's a language for writing highly reliable, screamingly fast software—and
+having fun doing it.</p>
+<p>And yesterday, Rust turned one year old.</p>
+<img src="http://rustcamp.com/images/after/cupcakes.jpg" height="300px" width="300px">
+<h3><a href="#rust-in-numbers" aria-hidden="true" class="anchor" id="rust-in-numbers"></a>Rust in numbers</h3>
+<p>A lot has happened in the last 365 days:</p>
+<ul>
+<li>11,894 <a href="https://github.com/rust-lang/rust/commits/master">commits</a> by 702 contributors added to the core repository;</li>
+<li>88 <a href="https://github.com/rust-lang/rfcs">RFCs</a> merged;</li>
+<li>18 compiler targets introduced;</li>
+<li>9 releases shipped;</li>
+<li>1 year of <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">stability delivered</a>.</li>
+</ul>
+<p>On an <strong>average week</strong> this year, the Rust community merged two RFCs and
+published 53 brand new <a href="https://crates.io/">crates</a>. Not a single day went by without at least one
+new Rust library hitting the central package manager. And Rust topped the
+&quot;<a href="https://stackoverflow.com/research/developer-survey-2016">most loved</a> language&quot; in this year's StackOverflow survey.</p>
+<p>Speaking of numbers: we recently launched a <a href="http://blog.rust-lang.org/2016/05/09/survey.html">survey</a> of our own, and want to
+hear from you whether you are an old hat at Rust, or have never used it.</p>
+<p>One place where our numbers are not where we want them to be: community
+diversity. We've had ongoing local outreach efforts, but the Rust community team
+will soon be launching a coordinated, global effort following the <a href="http://bridgefoundry.org/">Bridge</a> model
+(e.g. RailsBridge). If you want to get involved, or have other ideas for
+outreach, please let <a href="mailto:community-team@rust-lang.org">the community team</a> know.</p>
+<h3><a href="#rust-in-production" aria-hidden="true" class="anchor" id="rust-in-production"></a>Rust in production</h3>
+<p>This year saw more companies <a href="https://www.rust-lang.org/friends.html">betting on Rust</a>. Each one has a story, but two
+particularly resonated.</p>
+<p>First, there's Dropbox. For the last several years, the company has been
+secretively working on a move
+<a href="http://www.wired.com/2016/03/epic-story-dropboxs-exodus-amazon-cloud-empire/">away from AWS and onto its own infrastructure</a>. The move, which is now
+complete, included developing custom-build hardware and the software to drive
+it. While much of Dropbox's back-end infrastructure is historically written in
+Go, for some key components the memory footprint and lack of control stood in
+the way of achieving the server utilization they were striving for. They rewrote
+those components in Rust.  In the <a href="https://news.ycombinator.com/item?id=11283688">words of Jamie Turner</a>, a lead
+engineer for the project, &quot;the advantages of Rust are many: really powerful
+abstractions, no null, no segfaults, no leaks, yet C-like performance and
+control over memory.&quot;</p>
+<p>Second, there's Mozilla. They've long been developing <a href="https://github.com/servo/servo/">Servo</a> as a research
+browser engine in Rust, but their first <em>production</em> Rust code shipped through a
+different vehicle: <em>Firefox</em>. In Firefox 45, without any fanfare, Rust code for
+<a href="https://github.com/mozilla/mp4parse-rust">mp4 metadata parsing</a> went out to OSX and 64-bit Linux users; it will hit
+Windows in version 48. The code is currently running in test mode, with its
+results compared against the legacy C++ library: 100% correctness on
+<a href="https://telemetry.mozilla.org/new-pipeline/dist.html#!cumulative=0&end_date=2016-04-07&keys=__none__!__none__!__none__&max_channel_version=release%252F45&measure=MEDIA_RUST_MP4PARSE_SUCCESS&min_channel_version=null&product=Firefox&sanitize=1&sort_keys=submissions&start_date=2016-03-03&table=0&trim=1&use_submission_date=0">1 <em>billion</em> reported executions</a>. But this code is just the tip of the iceberg:
+after laying a lot of <a href="http://wiki.mozilla.org/Oxidation">groundwork for Rust integration</a>, Firefox is poised to
+bring in significant amounts of new Rust code, including components from
+Servo—and not just in test mode.</p>
+<p>We're hearing <a href="http://confreaks.tv/videos/rustcamp2015-using-rust-from-c-or-any-language">similar stories</a> from a range of other shops that are putting
+Rust into production: Rust helps a team punch above its weight. It gives many of
+the same benefits as traditional systems languages while being more
+approachable, safer and often more productive.</p>
+<p>These are just a few stories of Rust in production, but we'd love to <a href="https://github.com/rust-lang/rust-www/issues/new?title=New+Website+Logo%3A+%5Binsert+name%5D%0A&body=To+list+your+organization%27s+logo+on+the+Rust+website%2C+fill+out+the+following+information+and+click+%22submit+new+issue%22.+Alternately%2C+you+may+edit+_data%2Fusers.yml+as+described+therein+and+submit+a+pull+request.%0D%0A%0D%0A-+Organization+name%3A+%28as+you+want+it+displayed%29%0D%0A-+Homepage+url%3A+%28homepage%2Fprimary+entry+point+for+users%29%0D%0A-+Logo+url%3A+%28svg+if+possible%2C+pngs+over+400x200px+with+transparent+backgrounds+are+also+acceptable%29%0D%0A-+How+you+are+using+Rust%3A+%28one+sentence+describing+your+use+of+Rust%29%0D%0A-+Url+describing+Rust+usage%3A+%28optional+link+to+e.g.+blog+post+explaining+how+you+use+Rust%29%0D%0A-+Organization+contact%3A+%28name+and+email.+we+may+contact+you+when+updating+this+page.+alternately+you+may+email+this+information+to+user-logos%40rust-lang.org+and+it+will+be+kept+secret%29.%0D%0A">hear yours</a>!</p>
+<h3><a href="#rust-improved" aria-hidden="true" class="anchor" id="rust-improved"></a>Rust, improved</h3>
+<p>Of course, Rust itself hasn't been standing still. The focus in its first year
+has been growing and polishing its ecosystem and tooling:</p>
+<ul>
+<li><strong>Ecosystem</strong>. The standard library has steadily expanded, with growth focused
+on <a href="http://static.rust-lang.org/doc/master/std/fs/index.html">filesystem access</a>, <a href="http://static.rust-lang.org/doc/master/std/net/index.html">networking</a>, <a href="http://static.rust-lang.org/doc/master/std/time/index.html">time</a>, and <a href="http://static.rust-lang.org/doc/master/std/collections/index.html">collections</a> APIs—and
+dramatically better documentation coverage.  There's good support for working
+with C libraries via the <a href="https://github.com/rust-lang/libc">libc</a>, <a href="https://github.com/retep998/winapi-rs">winapi</a>, and <a href="https://github.com/alexcrichton/gcc-rs">gcc</a> crates. And new libraries
+for <a href="https://github.com/carllerche/mio/">low-level async io</a>, <a href="http://smallcultfollowing.com/babysteps/blog/2015/12/18/rayon-data-parallelism-in-rust/">easy parallelism</a>,
+<a href="http://aturon.github.io/blog/2015/08/27/epoch/">lock-free data structures</a>,
+<a href="http://diesel.rs/">Rails-like object-relational mapping</a>, <a href="https://github.com/rust-lang-nursery/regex">regular expressions</a>,
+and several <a href="https://github.com/Geal/nom">parsing</a> <a href="http://smallcultfollowing.com/babysteps/blog/2015/09/14/lalrpop/">libraries</a>, including <a href="https://kmcallister.github.io/talks/rust/2014-rust-macros/slides.html">html5ever</a>, a
+unique HTML5 parser that leverages Rust's macro system to make the code
+resemble the spec as closely as possible. These are just scratching the
+surface, of course, and ecosystem growth, curation and
+coherence—particularly around async IO and the web stack—will
+continue to be a major focus in the coming year.</li>
+</ul>
+<ul>
+<li><strong>Platforms and targets</strong>. Rust's memory footprint is not much bigger than C's, which
+makes it ideal for using in all kinds of places. Over the last year, Rust
+gained the ability to work directly with the native <a href="https://github.com/rust-lang/rust/pull/25350">MSVC toolchain</a> on
+Windows, to target <a href="https://www.musl-libc.org/">musl</a> (thereby creating a binary that can be used with
+zero dependencies on <em>any</em> variety of Linux), to target Android and ARM
+devices, and <a href="https://forge.rust-lang.org/platform-support.html">many more platforms</a>. The new <a href="http://blog.rust-lang.org/2016/05/13/rustup.html">rustup tool</a> makes it
+a breeze to manage and compile to these various targets. As of
+<a href="http://blog.rust-lang.org/2016/01/21/Rust-1.6.html">Rust 1.6</a>, you can use Rust without its full standard library,
+limiting to a core library that does not require any OS services (and hence is
+suitable for <a href="http://os.phil-opp.com/">writing OSes</a>
+<a href="https://intermezzos.github.io/">in Rust</a>). Finally, there are an increasing number of libraries
+for embedding Rust code into other contexts, like <a href="http://calculist.org/blog/2015/12/23/neon-node-rust/">node.js</a>,
+<a href="http://blog.skylight.io/introducing-helix/">Ruby</a> and <a href="https://github.com/BurntSushi/rure-go">Go</a>.</li>
+</ul>
+<ul>
+<li><strong>Tools</strong>. Because Rust looks just like C on the outside, it's instantly
+usable with a wide range of existing tools; it works out of the box with
+<a href="http://lldb.llvm.org/">lldb</a>, <a href="https://www.gnu.org/software/gdb/">gdb</a>, <a href="https://perf.wiki.kernel.org/index.php/Main_Page">perf</a>, <a href="http://valgrind.org/">valgrind</a>, <a href="https://kcachegrind.github.io/html/Home.html">callgrind</a>, and many, many more.  Our
+focus has been to <a href="https://michaelwoerister.github.io/2015/03/27/rust-xxdb.html">enrich the experience</a> for these tools by adding
+<a href="https://sourceware.org/ml/gdb-patches/2016-04/msg00570.html">Rust-specific hooks</a> and <a href="http://www.suchin.co/2016/05/11/Introducing-Cargo-Profiler/">workflows</a>. Another major
+priority is providing full IDE support, in part by providing daemonized
+services from the compiler; we made <a href="https://www.rust-lang.org/ides.html">good progress</a> on that front this
+year, and thanks to the <a href="https://github.com/phildawes/racer">Racer</a> project, <a href="https://areweideyet.com/">numerous IDE plugins</a> are already
+providing some semantic support for Rust. At the same time, the <a href="https://github.com/rust-lang-nursery/rustfmt">rustfmt</a> code
+formatting tool has matured to the point that the Rust community is ready to
+produce an <a href="https://github.com/rust-lang/rfcs/pull/1607">official style</a>.  And the beating heart of Rust's workflow,
+<a href="http://blog.rust-lang.org/2016/05/05/cargo-pillars.html">Cargo</a>, gained numerous abilities this year, most notably the
+<a href="http://blog.rust-lang.org/2015/12/10/Rust-1.5.html">install subcommand</a>.</li>
+</ul>
+<ul>
+<li><strong>Compiler</strong>. We've seen some <a href="http://blog.rust-lang.org/2015/06/25/Rust-1.1.html">across-the-board improvements</a> to compile
+times, and now offer <a href="http://blog.rust-lang.org/2015/08/06/Rust-1.2.html">parallelized code generation</a> for
+further speedups. But the biggest wins will come from the ongoing work on
+<a href="https://github.com/rust-lang/rfcs/pull/1298">incremental compilation</a>, which will minimize the amount of work the needed
+when recompiling code after editing it. A vital step here was the move to a
+<a href="http://blog.rust-lang.org/2016/04/19/MIR.html">custom intermediate representation</a>, which has many other benefits as
+well. Another focus has been errors, including
+<a href="https://doc.rust-lang.org/error-index.html">detailed explanations of most errors</a>, and ongoing work to
+<a href="https://internals.rust-lang.org/t/new-error-format/3438">improve the &quot;at a glance&quot; readability of errors</a>. Expect to
+hear more on both fronts soon.</li>
+</ul>
+<ul>
+<li><strong>Core language</strong>. We've kept one list purposefully short this year: growth in
+the core language. While we have some important features in the pipeline (like
+<a href="https://github.com/rust-lang/rfcs/pull/243">improved error handling</a>, <a href="http://smallcultfollowing.com/babysteps/blog/2016/04/27/non-lexical-lifetimes-introduction/">more flexible borrowing rules</a> and
+<a href="https://github.com/rust-lang/rfcs/pull/1210">specialization</a>), <a href="https://internals.rust-lang.org/t/production-user-research-summary/2530">Rust users</a> by and large are happy with the core language
+and prefer the community to focus on the ecosystem and tooling.</li>
+</ul>
+<p>There's a lot more to say about what's happened and what's coming up in the Rust
+world—over the coming months, we'll be using this blog to say it.</p>
+<h3><a href="#rust-in-community" aria-hidden="true" class="anchor" id="rust-in-community"></a>Rust in community</h3>
+<p>It turns out that people like to get together and talk Rust. We had a sold out
+<a href="http://rustcamp.com/">RustCamp</a> last August, and several upcoming events in 2016:</p>
+<ul>
+<li>September 9-10, 2016: the first <a href="http://rustconf.com/">RustConf</a> in Portland, OR, USA;</li>
+<li>September 17, 2016: <a href="http://www.rustfest.eu/blog/happy-birthday-announcing-rustfest">RustFest</a>, the European community conference, in Berlin, Germany;</li>
+<li>October 27-18, 2016: <a href="http://rust-belt-rust.com/">Rust Belt Rust</a>, a Rust conference in Pittsburgh, PA, USA;</li>
+<li>71 Rust-related <a href="http://rust.meetup.com/">meetup</a> groups worldwide.</li>
+</ul>
+<p>And that's no surprise. From a personal perspective, the best part about working
+with Rust is its <a href="https://www.rust-lang.org/community.html">community</a>. It's hard to explain quite what it's like to be
+part of this group, but two things stand out. First, its sheer <em>energy</em>: so much
+happens in any given week that <a href="https://this-week-in-rust.org/">This Week in Rust</a> is a vital resource for
+anyone hoping to keep up. Second, its <em>welcoming spirit</em>. Rust's core message is
+one of empowerment—you can <a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">fearlessly</a> write safe, low-level systems
+code—and that's reflected in the community. We're all here to learn how to
+be better programmers, and support each other in doing so.</p>
+<p>There's never been a better time to get started with Rust, whether through
+attending a local <a href="http://rust.meetup.com/">meetup</a>, saying hello in the <a href="https://users.rust-lang.org/">users forum</a>, watching
+<a href="http://www.infoq.com/presentations/rust-thread-safety">a talk</a>, or reading <a href="https://doc.rust-lang.org/book/">the book</a>. No matter how you find your way in, we'll be
+glad to have you.</p>
+<p>Happy birthday, Rust!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

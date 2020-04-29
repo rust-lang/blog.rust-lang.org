@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.15.1 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.15.1 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.15.1 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.15.1" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.15.1</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 9, 2017 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce the latest version of Rust, 1.15.1. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed, getting Rust 1.15.1 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">download Rust</a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1151-2017-02-09">detailed release notes for
+1.15.1</a> on GitHub.</p>
+<h3><a href="#whats-in-1151-stable" aria-hidden="true" class="anchor" id="whats-in-1151-stable"></a>What's in 1.15.1 stable</h3>
+<p>This release fixes two issues, a soundness bug in the new
+<code>vec::IntoIter::as_mut_slice</code> method, and a regression wherein certain C
+components of the Rust distribution were <a href="https://github.com/rust-lang/rust/pull/39523">not compiled with <code>-fPIC</code></a>.  The
+latter results in the text section of executables being writable in some
+configurations, including common Linux configurations, subverting an important
+attack mitigation, and creating longer startup times by causing the linker to do
+more work. For mostly-Rust codebases, the practical impact of losing read-only
+text sections is relatively small (since Rust's type system is its first line of
+defense), but for Rust linked into other codebases the impact could be
+unexpectedly quite significant. <a href="https://en.wikipedia.org/wiki/Position-independent_code">PIC</a> issues are well understood and not
+Rust-specific, so the rest of this post focuses on the soundness bug.</p>
+<p>The problem with <code>as_mut_slice</code>, a three line function, was <a href="https://www.reddit.com/r/rust/comments/5roiq7/announcing_rust_115/dd8vujs/">discovered</a> just
+minutes after publishing Rust 1.15.0, and is a reminder of the perils of writing
+unsafe code.</p>
+<p><code>as_mut_slice</code> is a method on the <code>IntoIter</code> iterator for the <code>Vec</code> type that
+offers a mutable view into the buffer being iterated over. Conceptually it is
+simple: just return a reference to the buffer; and indeed the implementation is
+simple, but it's unsafe because <code>IntoIter</code> is implemented with an unsafe pointer
+to the buffer:</p>
+<pre><code class="language-rust">pub fn as_mut_slice(&amp;self) -&gt; &amp;mut [T] {
+    unsafe {
+        slice::from_raw_parts_mut(self.ptr as *mut T, self.len())
+    }
+}
+</code></pre>
+<p>It's just about the simplest unsafe method one could ask for. Can you spot the
+error? Our reviewers didn't! This API slipped through the cracks because it is
+such a standard and small one. It's a copy-paste bug that the reviewers glossed
+over. This method takes a shared reference and unsafely derives from it a
+mutable reference. That is totally bogus because it means <code>as_mut_slice</code> can be
+used to produce multiple mutable references to the same buffer, which is the one
+single thing you must not do in Rust.</p>
+<p>Here's a simple example of what this bug would let you write, incorrectly:</p>
+<pre><code class="language-rust">fn main() {
+    let v = vec![0];
+    let v_iter = v.into_iter();
+    let slice1: &amp;mut [_] = v_iter.as_mut_slice();
+    let slice2: &amp;mut [_] = v_iter.as_mut_slice();
+    slice1[0] = 1;
+    slice2[0] = 2;
+}
+</code></pre>
+<p>Here both <code>slice1</code> and <code>slice2</code> are referencing the same mutable slice. Also
+notice that the iterator they are created from, <code>v_iter</code> is not declared
+mutable, which is a good indication something fishy is going on.</p>
+<p>The <a href="https://github.com/rust-lang/rust/pull/39466">solution</a> here is trivial, just change <code>&amp;self</code> to <code>&amp;mut self</code>:</p>
+<pre><code class="language-rust">pub fn as_mut_slice(&amp;mut self) -&gt; &amp;mut [T] {
+    unsafe {
+        slice::from_raw_parts_mut(self.ptr as *mut T, self.len())
+    }
+}
+</code></pre>
+<p>With that, proper uniqueness invariants are maintained, only one mutable slice
+can be created at a time, and <code>v_iter</code> must be declared mutable in order to pull
+out a mutable slice.</p>
+<p>So we made that change, and we're releasing a fix. In Rust we take pride in not
+breaking APIs, but since this is a new, minor feature, and the present
+implementation is spectacularly unsound, we decided to go ahead and release the
+fix immediately, hopefully before too many codebases pick it up — that is, we
+don't consider this a breaking change that requires a careful transition, but a
+necessary bug fix. For more about Rust's approach to ensuring stability see the
+<a href="https://blog.rust-lang.org/2014/10/30/Stability.html">&quot;Stability as a Deliverable&quot;</a> blog post, <a href="https://github.com/rust-lang/rfcs/blob/master/text/1122-language-semver.md">RFC 1122</a>, on language
+evolution, and <a href="https://github.com/rust-lang/rfcs/blob/master/text/1105-api-evolution.md">RFC 1105</a>, on library evolution.</p>
+<p>We're still evaluating what to learn from this, but this is a good reminder of
+the care that must be taken when writing unsafe code. We have some ideas for how
+to catch this kind of problem earlier in the development process, but haven't
+made any decisions yet.</p>
+<p>We apologize for the inconvenience. Let's go hack.</p>
+<h3><a href="#contributors-to-1151" aria-hidden="true" class="anchor" id="contributors-to-1151"></a>Contributors to 1.15.1</h3>
+<p>We had 2 individuals contribute to Rust 1.15.1.
+<a href="https://thanks.rust-lang.org/rust/1.15.1">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust's 2018 roadmap | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust's 2018 roadmap | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust's 2018 roadmap | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust's 2018 roadmap" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust's 2018 roadmap</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 12, 2018 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>Each year the Rust community <a href="https://github.com/rust-lang/rfcs/pull/1728">comes together</a> to set out a
+roadmap. This year, in addition to the <a href="https://blog.rust-lang.org/2017/09/05/Rust-2017-Survey-Results.html">survey</a>, we put out
+a <a href="https://blog.rust-lang.org/2018/01/03/new-years-rust-a-call-for-community-blogposts.html">call for blog posts</a> in December, which resulted
+in <a href="https://readrust.net/rust-2018/">100 blog posts</a> written over the span of a few weeks. The end
+result is the recently-merged <a href="https://github.com/rust-lang/rfcs/pull/2314">2018 roadmap RFC</a>.</p>
+<h2><a href="#rust-2018-edition" aria-hidden="true" class="anchor" id="rust-2018-edition"></a>Rust: 2018 edition</h2>
+<p><strong>This year, we will deliver <em>Rust 2018</em>, marking the first major new edition of
+Rust since 1.0</strong> (aka Rust 2015).</p>
+<p>We will continue to publish releases every six weeks as usual. But we will
+designate a release in the latter third of the year (Rust 1.29 - 1.31) as <em>Rust
+2018</em>. This new &quot;edition&quot; of Rust will be the culmination of feature
+stabilization throughout the year, and will ship with polished documentation,
+tooling, and libraries that tie in to those features.</p>
+<p>The idea of editions is to signify major steps in Rust’s evolution, where a
+collection of new features or idioms, taken as a whole, changes the experience
+of using Rust. They’re a chance, every few years, to take stock of the work
+we’ve delivered in six-week increments. To tell a bigger story about where Rust
+is going. And to ship the whole stack as a polished product.</p>
+<p>We expect that each edition will have a core theme or focus. Thinking of 1.0 as
+&quot;Rust 2015&quot;, we have:</p>
+<ul>
+<li>Rust 2015: <a href="https://blog.rust-lang.org/2014/09/15/Rust-1.0.html">stability</a></li>
+<li>Rust 2018: productivity</li>
+</ul>
+<h2><a href="#what-will-be-in-rust-2018" aria-hidden="true" class="anchor" id="what-will-be-in-rust-2018"></a>What will be in Rust 2018?</h2>
+<p>The roadmap doesn’t say <em>for certain</em> what will ship in Rust 2018, but we have a
+pretty good idea, and we’ll cover the major suspects below.</p>
+<h3><a href="#documentation-improvements" aria-hidden="true" class="anchor" id="documentation-improvements"></a>Documentation improvements</h3>
+<p>Part of the goal with the Rust 2018 release is to provide high quality
+documentation for the full set of new and improved features and the idioms they
+give rise to. <a href="https://doc.rust-lang.org/nightly/book/second-edition/">The Rust Programming Language book</a> has been completely
+re-written over the last 18 months, and will be updated throughout the year as
+features reach the stable compiler. <a href="https://rustbyexample.com/">Rust By Example</a> will likewise undergo a
+revamp this year. And there are numerous third party books, like <a href="http://shop.oreilly.com/product/0636920040385.do">Programming
+Rust</a>, reaching print as well.</p>
+<h3><a href="#language-improvements" aria-hidden="true" class="anchor" id="language-improvements"></a>Language improvements</h3>
+<p>The most prominent language work in the pipeline stems from <a href="https://blog.rust-lang.org/2017/03/02/lang-ergonomics.html">2017’s ergonomics
+initiative</a>. Almost all of the accepted RFCs from the initiative are available
+on nightly today, and will be polished and stabilized over the next several
+months. Among these productivity improvements are a few “headliners” that will
+form the backbone of the release:</p>
+<ul>
+<li><strong>Ownership system improvements</strong>, including making borrowing more flexible
+via “non-lexical lifetimes”, improved pattern matching integration, and more.</li>
+<li><strong>Trait system improvements</strong>, including the long-awaited <code>impl Trait</code> syntax
+for dealing with types abstractly.</li>
+<li><strong>Module system improvements</strong>, focused on increasing clarity and reducing
+complexity.</li>
+<li><strong>Generators/async/await:</strong> work is rapidly progressing on first-class async
+programming support.</li>
+</ul>
+<p>In addition, we anticipate a few more major features to stabilize prior to the
+Rust 2018 release, including <strong>SIMD</strong>, <strong>custom allocators</strong>, and <strong>macros 2.0</strong>.</p>
+<h3><a href="#compiler-improvements" aria-hidden="true" class="anchor" id="compiler-improvements"></a>Compiler improvements</h3>
+<p>As of <a href="https://blog.rust-lang.org/2018/02/15/Rust-1.24.html">Rust 1.24</a>,
+incremental recompilation is available and enabled by default on the stable
+compiler. This feature already makes rebuilds significantly faster than fresh
+builds, but over the course of the year we expect continued improvements for
+<em>both</em> fresh and re-builds. Compiler performance should not be an obstacle to
+productivity in Rust 2018.</p>
+<h3><a href="#tooling-improvements" aria-hidden="true" class="anchor" id="tooling-improvements"></a>Tooling improvements</h3>
+<p>Rust 2018 will see high quality 1.0 releases of the <a href="https://github.com/rust-lang-nursery/rls">Rust Language Server</a> (&quot;RLS&quot;,
+which underlies much of our IDE integration story) and <a href="https://github.com/rust-lang-nursery/rustfmt"><code>rustfmt</code></a> (a standard
+formatting tool for Rust code). We will continue to improve Cargo by stabilizing
+custom registries, public dependencies, and a revised profile system. We’re also
+expecting further work on <a href="https://github.com/rust-lang/rfcs/pull/2136">Cargo build system integration</a>, <a href="https://github.com/rust-lang/cargo/issues/4959">Xargo integration</a>,
+and <a href="https://github.com/rust-lang/rfcs/pull/2318">custom test frameworks</a>, though it’s unclear as yet how many of these will
+be complete prior to Rust 2018.</p>
+<h3><a href="#library-improvements" aria-hidden="true" class="anchor" id="library-improvements"></a>Library improvements</h3>
+<p>Building on <a href="https://blog.rust-lang.org/2017/05/05/libz-blitz.html">our work from last year</a>, we will publish a 1.0 version of
+the <a href="https://github.com/rust-lang-nursery/api-guidelines">Rust API guidelines book</a>, continue pushing important libraries to 1.0
+status, improve discoverability through a revamped cookbook effort, and make
+heavy investments in libraries in specific domains—as we’ll see below.</p>
+<h3><a href="#web-site-improvements" aria-hidden="true" class="anchor" id="web-site-improvements"></a>Web site improvements</h3>
+<p>As part of Rust 2018, we will completely overhaul the Rust web site, making it
+useful for CTOs and engineers alike. It should be far easier to find information
+to help evaluate Rust for your use case, and to stay up to date with the latest
+tooling and ecosystem improvements.</p>
+<h3><a href="#four-target-domains" aria-hidden="true" class="anchor" id="four-target-domains"></a>Four target domains</h3>
+<p>Part of our goal with Rust 2018 is to demonstrate Rust’s productivity in
+specific domains of use. We’ve selected four such domains to invest in and
+highlight this year:</p>
+<ul>
+<li><strong>Network services</strong>. Rust’s reliability and low footprint make it an
+excellent match for network services and infrastructure, especially at high
+scale.</li>
+<li><strong><a href="https://internals.rust-lang.org/t/announcing-the-cli-working-group/6872">Command-line apps</a></strong> (CLI). Rust’s portability, reliability, ergonomics, and ability to
+produce static binaries come together to great effect for writing CLI apps.</li>
+<li><strong><a href="https://internals.rust-lang.org/t/come-join-the-rust-and-webassembly-working-group/6845">WebAssembly</a></strong>. The “wasm” web standard allows shipping native-like binaries
+to all major browsers, but GC support is still years away. Rust
+is <a href="https://mgattozzi.com/rust-wasm">extremely well positioned</a> to target this
+domain, and provides a reasonable on-ramp for programmers coming from JS.</li>
+<li><strong><a href="https://internals.rust-lang.org/t/announcing-the-embedded-devices-working-group/6839">Embedded devices</a></strong>. Rust has the potential to make programming
+resource-constrained devices much more productive—and fun! We want embedded
+programming to reach first-class status this year.</li>
+</ul>
+<p>Each of these domains has a dedicated working group for the year. These WGs will
+work in a cross-cutting fashion, interfacing with language, tooling, library,
+and documentation work.</p>
+<h3><a href="#compatibility-across-editions" aria-hidden="true" class="anchor" id="compatibility-across-editions"></a>Compatibility across editions</h3>
+<p><strong>TL;DR: Rust will continue its stability guarantee
+of <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">hassle-free updates to new versions</a></strong>.</p>
+<p>Editions will have a meaning for the compiler. You will be able to write:</p>
+<pre><code class="language-toml">edition = &quot;2018&quot;
+</code></pre>
+<p>in your Cargo.toml to <em>opt in</em> to the new edition for your crate. Doing so may
+introduce new keywords or otherwise require adjustments to code. However:</p>
+<ul>
+<li>You can use <em>old</em> editions indefinitely on <em>new</em> compilers; <strong>editions are
+opt-in</strong>.</li>
+<li>Editions are set on a <em>per-crate</em> basis and can be mixed and matched; <strong>you
+can be on a different edition from your dependencies</strong>.</li>
+<li>Warning-free code in one edition must compile, and have the same behavior, on
+the next.</li>
+<li>Edition-related warnings, e.g. that an identifier will become a keyword in the
+next edition, must be easily fixable via an automated migration tool
+(rustfix). <strong>Only a small minority of crates should require <em>any</em>
+manual work to opt in to a new edition</strong>, and that manual work must be
+minimal.</li>
+<li>Most new features are edition-independent, and will be usable on new compilers
+even when an older edition is selected.</li>
+</ul>
+<p>In other words, the progression of new compiler versions is independent from
+editions; you can migrate at your leisure, and don’t have to worry about ecosystem
+compatibility; and edition migration is normally trivial.</p>
+<h2><a href="#additional-2018-goals" aria-hidden="true" class="anchor" id="additional-2018-goals"></a>Additional 2018 goals</h2>
+<p>While the Rust 2018 release is our major focus this year, there are some
+additional ongoing concerns that we want to give attention to.</p>
+<h3><a href="#better-serving-intermediate-rustaceans" aria-hidden="true" class="anchor" id="better-serving-intermediate-rustaceans"></a>Better serving intermediate Rustaceans</h3>
+<p>One of the strongest messages we’ve heard from production users, and <a href="https://blog.rust-lang.org/2017/09/05/Rust-2017-Survey-Results.html">the 2017
+survey</a>, is that people need more resources to take them from understanding
+Rust’s concepts to knowing how to use them <em>effectively</em>. The roadmap does not
+stipulate exactly what these resources should look like
+— <a href="https://quietmisdreavus.net/code/2018/01/10/not-a-layer-cake-analogy/">probably there should be several kinds</a> — but commits us as a
+community to putting significant work into this space, and ending the year with
+some solid new material.</p>
+<h3><a href="#community" aria-hidden="true" class="anchor" id="community"></a>Community</h3>
+<p><strong>Connect and empower Rust's global community</strong>. We will pursue
+internationalization as a first-class concern, and proactively work to build
+ties between Rust subcommunities currently separated by language, geography, or
+culture. We will spin up and support Rust events worldwide, including further
+growth of the RustBridge program.</p>
+<p><strong>Grow Rust's teams and new leaders within them</strong>. We will refactor the Rust
+team structure to support more scale, agility, and leadership growth. We will
+systematically invest in mentoring, both by creating more on-ramp resources and
+through direct mentorship relationships.</p>
+<h2><a href="#a-call-to-action" aria-hidden="true" class="anchor" id="a-call-to-action"></a>A call to action</h2>
+<p>As always in the Rust world, the goals laid out here will ultimately be the
+result of a community-wide effort—maybe one including you! Here are some of the
+teams where we could use the most help. Note that all IRC channels refer to the
+irc.mozilla.org network.</p>
+<ul>
+<li><strong>WebAssembly WG</strong>. Compiling Rust to WebAssembly should be <em>the</em> best choice for fast code on the Web. Check out <a href="https://github.com/rust-lang-nursery/rust-wasm">rust-lang-nursery/rust-wasm</a> to learn more and get involved!</li>
+<li><strong>CLI WG</strong>. Writing CLI apps in Rust should be a frictionless experience--from finding the right libraries and writing concise integration tests up to cross-platform distribution. Join us at <a href="https://github.com/rust-lang-nursery/cli-wg">rust-lang-nursery/cli-wg</a> and help us reach that goal!</li>
+<li><strong>Embedded Devices WG</strong>. Quality, productivity, accessibility: Rust can change the embedded industry for the better. Let's get this process started in 2018! Join us at <a href="https://github.com/rust-lang-nursery/embedded-wg">https://github.com/rust-lang-nursery/embedded-wg</a></li>
+<li><strong>Ecosystem WG</strong>. We'll be providing guidance and support to important crates throughout the ecosystem. Drop into the <a href="https://gitter.im/rust-lang/WG-ecosystem">WG-ecosystem room</a> and we'll guide you to places that need help!</li>
+<li><strong>Dev Tools Team</strong>. There are always interesting things to tackle with developer tools  (IDEs, Cargo, rustdoc, Clippy, Rustfmt, custom test frameworks, and more). Drop in to #rust-dev-tools and have a chat with the team!</li>
+<li><strong>Rustdoc Team</strong>. With your help, we can make documentation better for everyone. Come join us in #rustdoc on IRC, and we can help you get started!</li>
+<li><strong>Release Team</strong>. Drop by #rust-release on IRC to get involved with regression triage and release production!</li>
+<li><strong>Community Team</strong>. We've kicked off several new Teams within the Community Team
+and are eager to add new members: Events, Content, Switchboard, RustBridge, Survey,
+and Localization! <a href="https://github.com/rust-community/team">Check out our team repo</a> or stop by our IRC channel, #rust-community,
+to learn more and get involved!</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.30 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.30 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.30 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.30" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.30</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 25, 2018 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.30.0. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.30.0 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25">detailed release notes for
+1.30.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1300-stable" aria-hidden="true" class="anchor" id="whats-in-1300-stable"></a>What's in 1.30.0 stable</h2>
+<p>Rust 1.30 is an exciting release with a number of features. On Monday, expect another
+blog post asking you to check out Rust 1.31's beta; Rust 1.31 will be the first release
+of &quot;Rust 2018.&quot; For more on that concept, please see our previous post
+<a href="https://blog.rust-lang.org/2018/07/27/what-is-rust-2018.html">&quot;What is Rust 2018&quot;</a>.</p>
+<h2><a href="#procedural-macros" aria-hidden="true" class="anchor" id="procedural-macros"></a>Procedural Macros</h2>
+<p>Way back in <a href="https://blog.rust-lang.org/2017/02/02/Rust-1.15.html">Rust 1.15</a>, we announced the ability to define &quot;custom derives.&quot; For example,
+with <code>serde_derive</code>, you could</p>
+<pre><code class="language-rust">#[derive(Serialize, Deserialize, Debug)]
+struct Pet {
+    name: String,
+}
+</code></pre>
+<p>And convert a <code>Pet</code> to and from JSON using <code>serde_json</code> because <code>serde_derive</code>
+defined <code>Serialize</code> and <code>Deserialize</code> in a procedural macro.</p>
+<p>Rust 1.30 expands on this by adding the ability to define two other kinds of
+advanced macros, &quot;attribute-like procedural macros&quot; and &quot;function-like
+procedural macros.&quot;</p>
+<p>Attribute-like macros are similar to custom derive macros, but instead of generating code
+for only the <code>#[derive]</code> attribute, they allow you to create new, custom attributes of
+your own. They're also more flexible: derive only works for structs and enums, but
+attributes can go on other places, like functions. As an example of using an
+attribute-like macro, you might have something like this when using a web application
+framework:</p>
+<pre><code>#[route(GET, &quot;/&quot;)]
+fn index() {
+</code></pre>
+<p>This <code>#[route]</code> attribute would be defined by the framework itself, as a
+procedural macro. Its signature would look like this:</p>
+<pre><code>#[proc_macro_attribute]
+pub fn route(attr: TokenStream, item: TokenStream) -&gt; TokenStream {
+</code></pre>
+<p>Here, we have two input <code>TokenStreams</code>: the first is for the contents of the
+attribute itself, that is, the <code>GET, &quot;/&quot;</code> stuff. The second is the body of the
+thing the attribute is attached to, in this case, <code>fn index() {}</code> and the rest
+of the function's body.</p>
+<p>Function-like macros define macros that look like function calls. For
+example, the <a href="https://gitlab.gnome.org/federico/gnome-class"><code>gnome-class</code> crate</a>
+has a procedural macro that defines <code>GObject</code> classes in Rust:</p>
+<pre><code class="language-rust">gobject_gen!(
+    class MyClass: GObject {
+        foo: Cell&lt;i32&gt;,
+        bar: RefCell&lt;String&gt;,
+    }
+
+    impl MyClass {
+        virtual fn my_virtual_method(&amp;self, x: i32) {
+            // ... do something with x ...
+        }
+    }
+)
+</code></pre>
+<p>This looks like a function that is taking a bunch of code as an argument.
+This macro would be defined like this:</p>
+<pre><code>#[proc_macro]
+pub fn gobject_gen(input: TokenStream) -&gt; TokenStream {
+</code></pre>
+<p>This is similar to the derive macro's signature: we get the tokens that
+are inside of the parentheses and return the code we want to generate.</p>
+<h3><a href="#use-and-macros" aria-hidden="true" class="anchor" id="use-and-macros"></a><code>use</code> and macros</h3>
+<p>You can now <a href="https://github.com/rust-lang/rust/pull/50911/">bring macros into scope with the <code>use</code> keyword</a>. For example,
+to use <code>serde-json</code>'s <code>json</code> macro, you used to write:</p>
+<pre><code class="language-rust">#[macro_use]
+extern crate serde_json;
+
+let john = json!({
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;age&quot;: 43,
+    &quot;phones&quot;: [
+        &quot;+44 1234567&quot;,
+        &quot;+44 2345678&quot;
+    ]
+});
+</code></pre>
+<p>But now, you'd write</p>
+<pre><code class="language-rust">extern crate serde_json;
+
+use serde_json::json;
+
+let john = json!({
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;age&quot;: 43,
+    &quot;phones&quot;: [
+        &quot;+44 1234567&quot;,
+        &quot;+44 2345678&quot;
+    ]
+});
+</code></pre>
+<p>This brings macros more in line with other items and removes the need for
+<code>macro_use</code> annotations.</p>
+<p>Finally, the <a href="https://doc.rust-lang.org/stable/proc_macro/"><code>proc_macro</code> crate</a>
+is made stable, which gives you the needed APIs to write these sorts of macros.
+It also has significantly improved the APIs for errors, and crates like <code>syn</code> and
+<code>quote</code> are already using them. For example, before:</p>
+<pre><code class="language-rust,ignore">#[derive(Serialize)]
+struct Demo {
+    ok: String,
+    bad: std::thread::Thread,
+}
+</code></pre>
+<p>used to give this error:</p>
+<pre><code class="language-text">error[E0277]: the trait bound `std::thread::Thread: _IMPL_SERIALIZE_FOR_Demo::_serde::Serialize` is not satisfied
+ --&gt; src/main.rs:3:10
+  |
+3 | #[derive(Serialize)]
+  |          ^^^^^^^^^ the trait `_IMPL_SERIALIZE_FOR_Demo::_serde::Serialize` is not implemented for `std::thread::Thread`
+</code></pre>
+<p>Now it will give this one:</p>
+<pre><code class="language-text">error[E0277]: the trait bound `std::thread::Thread: serde::Serialize` is not satisfied
+ --&gt; src/main.rs:7:5
+  |
+7 |     bad: std::thread::Thread,
+  |     ^^^ the trait `serde::Serialize` is not implemented for `std::thread::Thread`
+</code></pre>
+<h2><a href="#module-system-improvements" aria-hidden="true" class="anchor" id="module-system-improvements"></a>Module system improvements</h2>
+<p>The module system has long been a pain point of new Rustaceans; several of
+its rules felt awkward in practice. These changes are the first steps we're
+taking to make the module system feel more straightforward.</p>
+<p>There's two changes to <code>use</code> in addition to the aforementioned change for
+macros. The first is that <a href="https://github.com/rust-lang/rust/pull/54404/">external crates are now in the
+prelude</a>, that is:</p>
+<pre><code class="language-rust">// old
+let json = ::serde_json::from_str(&quot;...&quot;);
+
+// new
+let json = serde_json::from_str(&quot;...&quot;);
+</code></pre>
+<p>The trick here is that the 'old' style wasn't always needed, due to the way Rust's
+module system worked:</p>
+<pre><code class="language-rust,ignore">extern crate serde_json;
+
+fn main() {
+    // this works just fine; we're in the crate root, so `serde_json` is in
+    // scope here
+    let json = serde_json::from_str(&quot;...&quot;);
+}
+
+mod foo {
+    fn bar() {
+        // this doesn't work; we're inside the `foo` namespace, and `serde_json`
+        // isn't declared there
+        let json = serde_json::from_str(&quot;...&quot;);
+
+    }
+
+    // one option is to `use` it inside the module
+    use serde_json;
+
+    fn baz() {
+        // the other option is to use `::serde_json`, so we're using an absolute path
+        // rather than a relative one
+        let json = ::serde_json::from_str(&quot;...&quot;);
+    }
+}
+</code></pre>
+<p>Moving a function to a submodule and having some of your code break was not a great
+experience. Now, it will check the first part of the path and see if it's an <code>extern crate</code>, and if it is, use it regardless of where you're at in the module hierarchy.</p>
+<p>Finally, <a href="https://github.com/rust-lang/rust/pull/54404/"><code>use</code> also supports bringing items into scope with paths starting with
+<code>crate</code></a>:</p>
+<pre><code class="language-rust">mod foo {
+    pub fn bar() {
+        // ...
+    }
+}
+
+// old
+use ::foo::bar;
+// or
+use foo::bar;
+
+// new
+use crate::foo::bar;
+</code></pre>
+<p>The <code>crate</code> keyword at the start of the path indicates that you would like the path to
+start at your crate root. Previously, paths specified after <code>use</code> would always start at
+the crate root, but paths referring to items directly would start at the local path,
+meaning the behavior of paths was inconsistent:</p>
+<pre><code class="language-rust">mod foo {
+    pub fn bar() {
+        // ...
+    }
+}
+
+mod baz {
+    pub fn qux() {
+        // old
+        ::foo::bar();
+        // does not work, which is different than with `use`:
+        // foo::bar();
+
+        // new
+        crate::foo::bar();
+    }
+}
+</code></pre>
+<p>Once this style becomes widely used, this will hopefully make absolute paths a bit more
+clear and remove some of the ugliness of leading <code>::</code>.</p>
+<p>All of these changes combined lead to a more straightforward understanding of how paths
+resolve. Wherever you see a path like <code>a::b::c</code> someplace other than a <code>use</code> statement,
+you can ask:</p>
+<ul>
+<li>Is <code>a</code> the name of a crate? Then we're looking for <code>b::c</code> inside of it.</li>
+<li>Is <code>a</code> the keyword <code>crate</code>? Then we're looking for <code>b::c</code> from the root of our crate.</li>
+<li>Otherwise, we're looking for <code>a::b::c</code> from the current spot in the module hierarchy.</li>
+</ul>
+<p>The old behavior of <code>use</code> paths always starting from the crate root still applies. But
+after making a one-time switch to the new style, these rules will apply uniformly to
+paths everywhere, and you'll need to tweak your imports much less when moving code around.</p>
+<h2><a href="#raw-identifiers" aria-hidden="true" class="anchor" id="raw-identifiers"></a>Raw Identifiers</h2>
+<p><a href="https://github.com/rust-lang/rust/pull/53236/">You can now use keywords as identifiers</a> with some new syntax:</p>
+<pre><code class="language-rust">// define a local variable named `for`
+let r#for = true;
+
+// define a function named `for`
+fn r#for() {
+    // ...
+}
+
+// call that function
+r#for();
+</code></pre>
+<p>This doesn't have many use cases today, but will once you are trying to use a Rust 2015
+crate with a Rust 2018 project and vice-versa because the set of keywords will be
+different in the two editions; we'll explain more in the upcoming blog post about
+Rust 2018.</p>
+<h2><a href="#no_std-applications" aria-hidden="true" class="anchor" id="no_std-applications"></a><code>no_std</code> applications</h2>
+<p>Back in Rust 1.6, we announced the <a href="https://blog.rust-lang.org/2016/01/21/Rust-1.6.html">stabilization of <code>no_std</code> and
+<code>libcore</code></a> for building
+projects without the standard library. There was a twist, though: you could
+only build libraries, but not applications.</p>
+<p>With Rust 1.30, you can <a href="https://github.com/rust-lang/rust/pull/51366/">use the <code>#[panic_handler]</code></a> attribute
+to implement panics yourself. This now means that you can build applications,
+not just libraries, that don't use the standard library.</p>
+<h2><a href="#other-things" aria-hidden="true" class="anchor" id="other-things"></a>Other things</h2>
+<p>Finally, you can now <a href="https://github.com/rust-lang/rust/pull/53370/">match on visibility keywords, like <code>pub</code>, in
+macros</a> using the <code>vis</code> specifier. Additionally, &quot;tool
+attributes&quot; like <code>#[rustfmt::skip]</code> <a href="https://github.com/rust-lang/rust/pull/53459/">are now
+stable</a>. Tool <em>lints</em>
+like <code>#[allow(clippy::something)]</code> are not yet stable, however.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25">detailed release notes</a> for more.</p>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
+<p>A few new APIs were <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#stabilized-apis">stabilized for this
+release</a>:</p>
+<ul>
+<li><code>Ipv4Addr::{BROADCAST, LOCALHOST, UNSPECIFIED}</code></li>
+<li><code>Ipv6Addr::{LOCALHOST, UNSPECIFIED}</code></li>
+<li><code>Iterator::find_map</code></li>
+</ul>
+<p>Additionally, the standard library has long had functions like <code>trim_left</code> to eliminate
+whitespace on one side of some text. However, when considering right-to-left (RTL)
+languages, the meaning of &quot;right&quot; and &quot;left&quot; gets confusing. As such, we're introducing
+new names for these APIs:</p>
+<ul>
+<li><code>trim_left</code> -&gt; <code>trim_start</code></li>
+<li><code>trim_right</code> -&gt; <code>trim_end</code></li>
+<li><code>trim_left_matches</code> -&gt; <code>trim_start_matches</code></li>
+<li><code>trim_right_matches</code> -&gt; <code>trim_end_matches</code></li>
+</ul>
+<p>We plan to deprecate (but not remove, of course) the old names in Rust 1.33.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25">detailed release notes</a> for more.</p>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
+<p>The largest feature of Cargo in this release is that we now <a href="https://github.com/rust-lang/cargo/pull/5995/">have a progress
+bar!</a></p>
+<p><img src="/images/2018-10-25-Rust-1.30/demo.gif" alt="demo gif" /></p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25">detailed release notes</a> for more.</p>
+<h2><a href="#contributors-to-1300" aria-hidden="true" class="anchor" id="contributors-to-1300"></a>Contributors to 1.30.0</h2>
+<p>Many people came together to create Rust 1.30. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.30.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

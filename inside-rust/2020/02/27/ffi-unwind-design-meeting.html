@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing the first FFI-unwind project design meeting | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing the first FFI-unwind project design meeting | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing the first FFI-unwind project design meeting | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing the first FFI-unwind project design meeting" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing the first FFI-unwind project design meeting</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 27, 2020 &middot; Kyle Strand, Niko Matsakis, and Amanieu d'Antras
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang#wg-ffi-unwind">the FFI-unwind project group</a> 
+    </div>
+
+    <div class="post">
+      <p>The FFI-unwind project group, announced in <a href="https://github.com/rust-lang/rfcs/pull/2797">this RFC</a>, is
+working to extend the language to support unwinding that crosses FFI
+boundaries.</p>
+<p>We have reached our first technical decision point, on a question we have been
+discussing internally for quite a while. This blog post lays out the arguments
+on each side of the issue and invites the Rust community to join us at an
+upcoming meeting to help finalize our decision, which will be formalized and
+published as our first language-change RFC. This RFC will propose an &quot;MVP&quot;
+specification for well-defined cross-language unwinding.</p>
+<p>The meeting will be on <a href="https://arewemeetingyet.com/UTC/2020-03-02/17:00/Lang%20Team%20Design%20Meeting:%20FFI-unwind#eyJ1cmwiOiJodHRwczovL21vemlsbGEuem9vbS51cy9qLzc2ODIzMTc2MCJ9">March 2nd</a>.</p>
+<h2><a href="#background-what-is-unwinding" aria-hidden="true" class="anchor" id="background-what-is-unwinding"></a>Background: what is unwinding?</h2>
+<p>Exceptions are a familiar control flow mechanism in many programming languages.
+They are particularly commonplace in managed languages such as Java, but they
+are also part of the C++ language, which introduced them to the world of
+unmanaged systems programming.</p>
+<p>When an exception is thrown, the runtime <em>unwinds</em> the stack, essentially
+traversing it backwards and calling clean-up or error-recovery code such as
+destructors or <code>catch</code> blocks.</p>
+<p>Compilers may implement their own unwinding mechanisms, but in native code such
+as Rust binaries, the mechanism is more commonly provided by the platform ABI.</p>
+<p>It is well known that Rust does not have exceptions as such. But Rust <em>does</em>
+support unwinding! There are two scenarios that will cause unwinding to occur:</p>
+<ul>
+<li>By default, Rust's <code>panic!()</code> unwinds the stack.</li>
+<li>Using FFI, Rust can call functions in other languages (such as C++) that can
+unwind the stack.
+<ul>
+<li>There are some special cases where C libraries can actually cause
+unwinding.  For instance, on Microsoft platforms, <code>longjmp</code> is implemented
+as &quot;forced unwinding&quot; (see below)</li>
+</ul>
+</li>
+</ul>
+<p>Currently, when foreign (non-Rust) code invokes Rust code, the behavior of a
+<code>panic!()</code> unwind that &quot;escapes&quot; from Rust is explicitly undefined. Similarly,
+when Rust calls a foreign function that unwinds, the behavior once the unwind
+operation encounters Rust frames is undefined. The primary reason for this is
+to ensure that Rust implementations may use their own unwinding mechanism,
+which may not be compatible with the platform-provided &quot;native&quot; unwinding
+mechanism. Currently, however, <code>rustc</code> uses the native mechanism, and there are
+no plans to change this.</p>
+<h3><a href="#forced-unwinding" aria-hidden="true" class="anchor" id="forced-unwinding"></a>Forced unwinding</h3>
+<p>Platform ABIs can define a special kind of unwinding called &quot;forced unwinding.&quot;
+This type of unwinding works regardless of whether the code being unwound
+supports unwinding or not. However, destructors may not be executed if the
+frames being unwound do not have unwinding support.</p>
+<p>There are two common examples of forced unwinding:</p>
+<ul>
+<li>On Windows platforms, <code>longjmp</code> is implemented as a forced unwind.</li>
+<li>On glibc Linux, <code>pthread_exit</code> and <code>pthread_cancel</code> are implemented as a forced unwind.
+<ul>
+<li>In fact, <code>pthread_cancel</code> can cause all manner of C functions to unwind,
+including common functions like <code>read</code> and <code>write</code>.  (For a complete list,
+search for &quot;cancellation points&quot; in the <a href="http://man7.org/linux/man-pages/man7/pthreads.7.html">pthreads man page</a>.)</li>
+</ul>
+</li>
+</ul>
+<h2><a href="#requirements-for-any-cross-language-unwinding-specification" aria-hidden="true" class="anchor" id="requirements-for-any-cross-language-unwinding-specification"></a>Requirements for any cross-language unwinding specification</h2>
+<ul>
+<li>Unwinding between Rust functions (and in particular unwinding of Rust panics)
+may not necessarily use the system unwinding mechanism
+<ul>
+<li>In practice, we do use the system mechanism today, but we would like to
+reserve the freedom to change this.</li>
+</ul>
+</li>
+<li>If you enable <code>-Cpanic=abort</code>, we are able to optimize the size of binaries
+to remove most code related to unwinding.
+<ul>
+<li>Even with <code>-Cpanic=unwind</code> it should be possible to optimize away code when
+unwinding is known to never occur.</li>
+<li>In practice, most &quot;C&quot; functions are never expected to unwind (because they
+are written in C, for example, and not in C++).
+<ul>
+<li>However, because unwinding is now part of most system ABIs, even C
+functions can unwind — most notably cancellation points triggered
+by <code>pthread_cancel</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Changing the behavior from <code>-Cpanic=unwind</code> to <code>-Cpanic=abort</code> should not
+cause Undefined Behavior.
+<ul>
+<li>However, this may not be tenable, or at least not without making binaries
+much larger. See the discussion below for more details.</li>
+<li>It may, of course, cause programs to abort that used to execute
+successfully. This could occur if a panic would've been caught and
+recovered.</li>
+</ul>
+</li>
+<li>We cannot change the ABI (the <code>&quot;C&quot;</code> in <code>extern &quot;C&quot;</code>) of functions in the libc
+crate, because this would be a breaking change: function pointers of different
+ABIs have different types.
+<ul>
+<li>This is relevant for the libc functions which may perform forced unwinding
+when <code>pthread_cancel</code> is called.</li>
+</ul>
+</li>
+</ul>
+<h2><a href="#the-primary-question-introduce-a-new-abi-or-let-the-c-abi-permit-unwinding" aria-hidden="true" class="anchor" id="the-primary-question-introduce-a-new-abi-or-let-the-c-abi-permit-unwinding"></a>The primary question: introduce a new ABI, or let the <code>&quot;C&quot;</code> ABI permit unwinding?</h2>
+<p>The core question that we would like to decide is whether the <code>&quot;C&quot;</code> ABI, as
+defined by Rust, should permit unwinding.</p>
+<p>This is not a question we expected to be debating. We've long declared that
+unwinding through Rust's <code>&quot;C&quot;</code> ABI is undefined behavior. In part, this is
+because nobody had spent the time to figure out what the correct behavior would
+be, or how to implement it, although (as we'll see shortly) there are other
+good reasons for this choice.</p>
+<p>In any case, in PR #65646, @Amanieu proposed that we could, in fact, simply
+define the behavior of unwinding across <code>&quot;C&quot;</code> boundaries. In discussing this,
+discovered that the question of whether the <code>&quot;C&quot;</code> ABI should permit unwinding was
+less clear-cut than we had assumed.</p>
+<p>If the <code>&quot;C&quot;</code> ABI does not permit unwinding, a new ABI, called <code>&quot;C unwind&quot;</code>,
+will be introduced specifically to support unwinding.</p>
+<h2><a href="#three-specific-proposals" aria-hidden="true" class="anchor" id="three-specific-proposals"></a>Three specific proposals</h2>
+<p>The project group has narrowed the design space down to three specific
+proposals. Two of these introduce the new <code>&quot;C unwind&quot;</code> ABI, and one does not.</p>
+<p>Each proposal specifies the behavior of each type of unwind (Rust <code>panic!</code>,
+foreign (e.g. C++), and forced (e.g. <code>pthread_exit</code>)) when it encounters an
+ABI boundary under either the <code>panic=unwind</code> or <code>panic=abort</code> compile-mode.</p>
+<p>Note that currently, <code>catch_unwind</code> does not intercept foreign unwinding
+(forced or unforced), and our initial RFCs will not change that. We may decide
+at a later date to define a way for Rust code to intercept foreign exceptions.</p>
+<p>Throughout, the  unwind generated by <code>panic!</code> will be referred to as
+<code>panic</code>-unwind.</p>
+<h3><a href="#proposal-1-introduce-c-unwind-minimal-specification" aria-hidden="true" class="anchor" id="proposal-1-introduce-c-unwind-minimal-specification"></a>Proposal 1: Introduce <code>&quot;C unwind&quot;</code>, minimal specification</h3>
+<ul>
+<li><code>&quot;C&quot;</code> ABI boundary, <code>panic=&lt;any&gt;</code>
+<ul>
+<li><code>panic</code>-unwind: program aborts</li>
+<li>forced unwinding, no destructors: unwind behaves normally</li>
+<li>other foreign unwinding: undefined behavior</li>
+</ul>
+</li>
+<li><code>&quot;C unwind&quot;</code> ABI boundary
+<ul>
+<li>With <code>panic=unwind</code>: all types of unwinding behave normally</li>
+<li>With <code>panic=abort</code>: all types of unwinding abort the program</li>
+</ul>
+</li>
+</ul>
+<p>This proposal provides 2 ABIs, each suited for different purposes: you would
+generally use <code>extern &quot;C&quot;</code> when interacting with C APIs (making sure to avoid
+destructors where <code>longjmp</code> might be used), and <code>extern &quot;C unwind&quot;</code>
+when interacting with C++ APIs. The main advantage of this proposal is that
+switching between <code>panic=unwind</code> and <code>panic=abort</code> does not introduce UB if you
+have correctly marked all potential unwinding calls as <code>&quot;C unwind&quot;</code> (your
+program will abort instead).</p>
+<h3><a href="#proposal-2-introduce-c-unwind-forced-unwinding-always-permitted" aria-hidden="true" class="anchor" id="proposal-2-introduce-c-unwind-forced-unwinding-always-permitted"></a>Proposal 2: Introduce <code>&quot;C unwind&quot;</code>, forced unwinding always permitted</h3>
+<p>This is the same as the previous design, except that when compiled with
+<code>panic=abort</code>, forced unwinding would <em>not</em> be intercepted at <code>&quot;C unwind&quot;</code> ABI
+boundaries; that is, they would behave normally (though still UB if there are
+any destructors), without causing the program to abort. <code>panic</code>-unwind and
+non-forced foreign exceptions would still cause the program to abort.</p>
+<p>The advantage of treating forced unwinding differently is that it reduces
+portability incompatibilities. Specifically, it ensures that using <code>&quot;C unwind&quot;</code>
+cannot cause <code>longjmp</code> or <code>pthread_exit</code> to stop working (abort the program)
+when the target platform and/or compile flags are changed.  With proposal 1,
+<code>longjmp</code> will be able to cross <code>&quot;C unwind&quot;</code> boundaries <em>except</em> on Windows
+with MSVC under <code>panic=abort</code>, and <code>pthread_exit</code> will work inside <code>&quot;C unwind&quot;</code>
+functions <em>except</em> when linked with glibc under <code>panic=abort</code>. The downside of
+this proposal is that the abort stubs around <code>&quot;C unwind&quot;</code> calls in <code>panic=abort</code>
+become more complicated since they need to distinguish between different types
+of foreign exceptions.</p>
+<h3><a href="#proposal-3-no-new-abi" aria-hidden="true" class="anchor" id="proposal-3-no-new-abi"></a>Proposal 3: No new ABI</h3>
+<ul>
+<li><code>panic=unwind</code>: unwind behaves normally</li>
+<li><code>panic=abort</code>:
+<ul>
+<li><code>panic</code>-unwind: does not exist; <code>panic!</code> aborts the program</li>
+<li>forced unwinding, no destructors: unwind behaves normally</li>
+<li>other foreign unwinding: undefined behavior</li>
+</ul>
+</li>
+</ul>
+<p>The main advantage of this proposal is its simplicity: there is only one ABI and
+the behavior of <code>panic=abort</code> is identical to that of <code>-fno-exceptions</code> in C++.
+However this comes with the downside that switching to <code>panic=abort</code> may in some
+cases introduce UB (though only in unsafe code) if FFI calls unwind through Rust
+code.</p>
+<p>Another advantage is that forced unwinding from existing functions defined in
+the <code>libc</code> crate such as <code>pthread_exit</code> and <code>longjmp</code> will be able to unwind
+frames with destructors when compiled with <code>panic=unwind</code>, which is not possible
+with the other proposals.</p>
+<h2><a href="#comparison-table-for-the-proposed-designs" aria-hidden="true" class="anchor" id="comparison-table-for-the-proposed-designs"></a>Comparison table for the proposed designs</h2>
+<p>In this table, &quot;UB&quot; stands for &quot;undefined behavior&quot;. We believe that all of
+these instances of undefined behavior could be detected at runtime, but the
+code to do so would impose an undesirable code-size penalty, entirely negating
+the optimizations made possible by using <code>panic=unwind</code> or the non-unwinding
+<code>&quot;C&quot;</code> ABI. This code would therefore only be appropriate for debug builds.
+Additionally, the complexity of implementing such checks may outweight their
+benefits.</p>
+<p>Note that unwinding through a frame that has destructors without running those
+destructors (e.g. because they have been optimized out by <code>panic=abort</code>) is
+always undefined behavior.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>panic</code>-unwind</th>
+<th>Forced unwind, no destructors</th>
+<th>Forced unwind with destructors</th>
+<th>Other foreign unwind</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proposals 1 &amp; 2, <code>"C"</code> boundary, <code>panic=unwind</code></td>
+<td>abort</td>
+<td>unwind</td>
+<td>UB</td>
+<td>UB</td>
+</tr>
+<tr>
+<td>Proposals 1 &amp; 2, <code>"C"</code> boundary, <code>panic=abort</code></td>
+<td><code>panic!</code> aborts (no unwinding occurs)</td>
+<td>unwind</td>
+<td>UB</td>
+<td>UB</td>
+</tr>
+<tr>
+<td>Proposals 1 &amp; 2, <code>"C unwind"</code> boundary, <code>panic=unwind</code></td>
+<td>unwind</td>
+<td>unwind</td>
+<td>unwind</td>
+<td>unwind</td>
+</tr>
+<tr>
+<td>Proposal 1, <code>"C unwind"</code> boundary, <code>panic=abort</code></td>
+<td><code>panic!</code> aborts</td>
+<td>abort</td>
+<td>abort</td>
+<td>abort</td>
+</tr>
+<tr>
+<td>Proposal 2, <code>"C unwind"</code> boundary, <code>panic=abort</code></td>
+<td><code>panic!</code> aborts</td>
+<td>unwind</td>
+<td>UB</td>
+<td>abort</td>
+</tr>
+<tr>
+<td>Proposal 3,  <code>"C"</code> boundary, <code>panic=unwind</code></td>
+<td>unwind</td>
+<td>unwind</td>
+<td>unwind</td>
+<td>unwind</td>
+</tr>
+<tr>
+<td>Proposal 3, <code>"C"</code> boundary, <code>panic=abort</code></td>
+<td><code>panic!</code> aborts</td>
+<td>unwind</td>
+<td>UB</td>
+<td>UB</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

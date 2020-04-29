@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.23 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.23 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.23 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.23" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.23</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 4, 2018 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.23.0. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.23.0 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1230-2018-01-04">detailed release notes for
+1.23.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1230-stable" aria-hidden="true" class="anchor" id="whats-in-1230-stable"></a>What's in 1.23.0 stable</h2>
+<p>New year, new Rust! For our first improvement today, we now <a href="https://github.com/rust-lang/rust/pull/45380">avoid some unnecessary
+copies</a> in certain situations.
+We've seen memory usage of using <code>rustc</code> to drop 5-10% with this change; it may
+be different with your programs.</p>
+<p>The documentation team has been on a long journey to move <code>rustdoc</code> to use
+<a href="http://commonmark.org/">CommonMark</a>. Previously, <code>rustdoc</code> never guaranteed which markdown rendering
+engine it used, but we're finally committing to CommonMark. As part of this
+release, we render the documentation with our previous renderer, <a href="https://github.com/hoedown/hoedown">Hoedown</a>,
+but also render it with a CommonMark compliant renderer, and <a href="https://github.com/rust-lang/rust/pull/45324">warn if there
+are any differences</a>. There should be a way for you to modify the syntax you
+use to render correctly under both; we're not aware of any situations where
+this is impossible. Docs team member Guillaume Gomez has <a href="https://blog.guillaume-gomez.fr/articles/2017-09-18+New+rustdoc+rendering+common+errors">written a blog post</a>
+showing some common differences and how to solve them. In a future release,
+we will switch to using the CommonMark renderer by default. This <a href="https://github.com/rust-lang/rust/pull/41991">warning
+landed in nightly in May of last year</a>, and has been on by default <a href="https://github.com/rust-lang/rust/pull/45324">since
+October of last year</a>, so many crates have already fixed any issues that
+they've found.</p>
+<p>In other documentation news, historically, Cargo's docs have been a bit strange.
+Rather than being on <a href="https://doc.rust-lang.org">doc.rust-lang.org</a>,
+they've been at <a href="http://doc.crates.io">doc.crates.io</a>.
+With this release, <a href="https://github.com/rust-lang/rust/pull/45692">that's changing</a>.
+You can now find Cargo's docs at <a href="https://doc.rust-lang.org/cargo">doc.rust-lang.org/cargo</a>.
+Additionally, they've been converted to the same format as our other long-form documentation.
+We'll be adding a redirect from <code>doc.crates.io</code> to this page, and you can expect to see more
+improvements and updates to Cargo's docs throughout the year.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1230-2018-01-04">detailed release notes</a> for more.</p>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
+<p>As of Rust 1.0, a trait named <a href="https://doc.rust-lang.org/std/ascii/trait.AsciiExt.html"><code>AsciiExt</code></a> existed to provide ASCII related functionality
+on <code>u8</code>, <code>char</code>, <code>[u8]</code>, and <code>str</code>. To use it, you'd write code like this:</p>
+<pre><code class="language-rust">use std::ascii::AsciiExt;
+
+let ascii = 'a';
+let non_ascii = '❤';
+let int_ascii = 97;
+
+assert!(ascii.is_ascii());
+assert!(!non_ascii.is_ascii());
+assert!(int_ascii.is_ascii());
+</code></pre>
+<p>In Rust 1.23, these methods are now defined directly on those types, and so you no longer need
+to import the trait. Thanks to our stability guarantees, this trait still exists, so if you'd
+like to still support Rust versions before Rust 1.23, you can do this:</p>
+<pre><code class="language-rust">#[allow(unused_imports)]
+use std::ascii::AsciiExt;
+</code></pre>
+<p>…to suppress the related warning. Once you drop support for older Rusts, you
+can remove both lines, and everything will continue to work.</p>
+<p>Additionally, a few new APIs were stabilized this release:</p>
+<ul>
+<li>The various <a href="https://doc.rust-lang.org/std/sync/atomic/index.html#structs"><code>std::sync::atomic types</code></a>
+now implement <code>From</code> their non-atomic types. For example, <code>let x = AtomicBool::from(true);</code>.</li>
+<li><a href="https://github.com/rust-lang/rust/pull/45379"><code>()</code> now implements <code>FromIterator&lt;()&gt;</code></a>; check the PR for
+a neat use-case.</li>
+<li><a href="https://github.com/rust-lang/rust/pull/45682"><code>RwLock&lt;T&gt;</code> has had its <code>Send</code> restriction lifted</a></li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1230-2018-01-04">detailed release notes</a> for more.</p>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
+<p><code>cargo check</code> can now <a href="https://github.com/rust-lang/cargo/pull/4592">check your unit tests</a>.</p>
+<p><code>cargo uninstall</code> can now <a href="https://github.com/rust-lang/cargo/pull/4561">uninstall more than one package in one command</a>.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1230-2018-01-04">detailed release notes</a> for more.</p>
+<h2><a href="#contributors-to-1230" aria-hidden="true" class="anchor" id="contributors-to-1230"></a>Contributors to 1.23.0</h2>
+<p>Many people came together to create Rust 1.23. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.23.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

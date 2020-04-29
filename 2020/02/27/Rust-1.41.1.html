@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.41.1 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.41.1 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.41.1 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.41.1" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.41.1</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 27, 2020 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team has published a new point release of Rust, 1.41.1.
+Rust is a programming language that is empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust 1.41.1 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/tools/install">get <code>rustup</code></a> from the appropriate page on our website.</p>
+<h2><a href="#whats-in-1411-stable" aria-hidden="true" class="anchor" id="whats-in-1411-stable"></a>What's in 1.41.1 stable</h2>
+<p>Rust 1.41.1 addresses two critical regressions introduced in Rust 1.41.0:
+a soundness hole related to static lifetimes, and a miscompilation causing segfaults.
+These regressions do not affect earlier releases of Rust,
+and we recommend users of Rust 1.41.0 to upgrade as soon as possible.
+Another issue related to interactions between <code>'static</code> and <code>Copy</code> implementations,
+dating back to Rust 1.0, was also addressed by this release.</p>
+<h3><a href="#a-soundness-hole-in-checking-static-items" aria-hidden="true" class="anchor" id="a-soundness-hole-in-checking-static-items"></a>A soundness hole in checking <code>static</code> items</h3>
+<p>In Rust 1.41.0, due to some changes in the internal representation of <code>static</code> values,
+the borrow checker accidentally allowed some unsound programs.
+Specifically, the borrow checker would not check that <code>static</code> items had the correct type.
+This in turn would allow the assignment of a temporary,
+with a lifetime less than <code>'static</code>, to a <code>static</code> variable:</p>
+<pre><code class="language-rust">static mut MY_STATIC: &amp;'static u8 = &amp;0;
+
+fn main() {
+    let my_temporary = 42;
+    unsafe {
+        // Erroneously allowed in 1.41.0:
+        MY_STATIC = &amp;my_temporary;
+    }
+}
+</code></pre>
+<p>This was addressed in 1.41.1, with the program failing to compile:</p>
+<pre><code>error[E0597]: `my_temporary` does not live long enough
+ --&gt; src/main.rs:6:21
+  |
+6 |         MY_STATIC = &amp;my_temporary;
+  |         ------------^^^^^^^^^^^^^
+  |         |           |
+  |         |           borrowed value does not live long enough
+  |         assignment requires that `my_temporary` is borrowed for `'static`
+7 |     }
+8 | }
+  | - `my_temporary` dropped here while still borrowed
+
+</code></pre>
+<p>You can learn more about this bug in <a href="https://github.com/rust-lang/rust/issues/69114">issue #69114</a> and the <a href="https://github.com/rust-lang/rust/pull/69145">PR that fixed it</a>.</p>
+<h3><a href="#respecting-a-static-lifetime-in-a-copy-implementation" aria-hidden="true" class="anchor" id="respecting-a-static-lifetime-in-a-copy-implementation"></a>Respecting a <code>'static</code> lifetime in a <code>Copy</code> implementation</h3>
+<p>Ever since Rust 1.0, the following erroneous program has been compiling:</p>
+<pre><code class="language-rust">#[derive(Clone)]
+struct Foo&lt;'a&gt;(&amp;'a u32);
+impl Copy for Foo&lt;'static&gt; {}
+
+fn main() {
+    let temporary = 2;
+    let foo = (Foo(&amp;temporary),);
+    drop(foo.0); // Accessing a part of `foo` is necessary.
+    drop(foo.0); // Indexing an array would also work.
+}
+</code></pre>
+<p>In Rust 1.41.1, this issue was fixed <a href="https://github.com/rust-lang/rust/pull/69145">by the same PR as the one above</a>.
+Compiling the program now produces the following error:</p>
+<pre><code class="language-rust">error[E0597]: `temporary` does not live long enough
+  --&gt; src/main.rs:7:20
+   |
+7  |     let foo = (Foo(&amp;temporary),);
+   |                    ^^^^^^^^^^ borrowed value does not live long enough
+8  |     drop(foo.0);
+   |          ----- copying this value requires that
+   |                `temporary` is borrowed for `'static`
+9  |     drop(foo.0);
+10 | }
+   | - `temporary` dropped here while still borrowed
+</code></pre>
+<p>This error occurs because <code>Foo&lt;'a&gt;</code>, for some <code>'a</code>, only implements <code>Copy</code> when <code>'a: 'static</code>.
+However, the <code>temporary</code> variable,
+with some lifetime <code>'0</code> does not outlive <code>'static</code> and hence <code>Foo&lt;'0&gt;</code> is not <code>Copy</code>,
+so using <code>drop</code> the second time around should be an error.</p>
+<h3><a href="#miscompiled-bound-checks-leading-to-segfaults" aria-hidden="true" class="anchor" id="miscompiled-bound-checks-leading-to-segfaults"></a>Miscompiled bound checks leading to segfaults</h3>
+<p>In a few cases, programs compiled with Rust 1.41.0 were omitting bound checks in the memory allocation code.
+This caused segfaults if out of bound values were provided.
+The root cause of the miscompilation was a change in a LLVM optimization pass,
+introduced in LLVM 9 and reverted in LLVM 10.</p>
+<p>Rust 1.41.0 uses a snapshot of LLVM 9, so we cherry-picked the revert into Rust 1.41.1,
+addressing the miscompilation. <a href="https://github.com/rust-lang/rust/issues/69225">You can learn more about this bug in issue #69225</a>.</p>
+<h2><a href="#contributors-to-1411" aria-hidden="true" class="anchor" id="contributors-to-1411"></a>Contributors to 1.41.1</h2>
+<p>Many people came together to create Rust 1.41.1.
+We couldn't have done it without all of you. <a href="https://thanks.rust-lang.org/rust/1.41.1/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

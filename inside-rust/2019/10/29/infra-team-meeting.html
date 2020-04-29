@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>2019-10-29 Infrastructure Team Meeting | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="2019-10-29 Infrastructure Team Meeting | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="2019-10-29 Infrastructure Team Meeting | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="2019-10-29 Infrastructure Team Meeting" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>2019-10-29 Infrastructure Team Meeting</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 29, 2019 &middot; Pietro Albini
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/operations#infra">the infrastructure team</a> 
+    </div>
+
+    <div class="post">
+      <p>Meeting run by Mark-Simulacrum. Minutes written by pietroalbini.<br />
+Attending: alexcrichton, kennytm, Mark-Simulacrum, pietroalbini, shepmaster<br />
+<a href="https://discordapp.com/channels/442252698964721669/443148319431065610/638784152014946321">Start of the conversation</a></p>
+<h2><a href="#news-from-the-team" aria-hidden="true" class="anchor" id="news-from-the-team"></a>News from the team</h2>
+<ul>
+<li>
+<p>A big PR moving most of the CI build environment preparation to standalone
+scripts finally landed! This will allow multiple other CI improvements down
+the line!</p>
+</li>
+<li>
+<p>A crates.io staging environment behind CloudFront has been configured on
+<a href="https://staging.cratesio.com">staging.cratesio.com</a>, testing the
+configuration before deploying it on the main domain. Please note the staging
+server is on a temporary domain and will be moved in the near future.</p>
+</li>
+</ul>
+<h2><a href="#rolling-back-the-msys2-hack-p-high-issue" aria-hidden="true" class="anchor" id="rolling-back-the-msys2-hack-p-high-issue"></a>Rolling back the msys2 hack (P-high issue)</h2>
+<p>Last week there was an issue in our CI caused by a broken <code>ca-certificates</code>
+msys2 package, that caused all the windows builders to fail. To patch the
+problem an older version of that package was vendored and CI was configured to
+download it instead of the broken one. Now that upstream fixed the issue,
+pietroalbini will prepare PRs targeting both master and beta rolling back the
+temporary patch.</p>
+<h2><a href="#what-to-do-with-mirroring-msys2mingw" aria-hidden="true" class="anchor" id="what-to-do-with-mirroring-msys2mingw"></a>What to do with mirroring msys2/mingw?</h2>
+<p>The CI issue mentioned in the previous topic started thoughts about vendoring
+msys2 and MinGW as a whole, to prevent such issues from happening in the
+future. msys2 is a weird program to package as it’s more of a Linux-like
+distribution on Windows, with its own package manager based on tooling borrowed
+from Arch Linux.</p>
+<p>Creating the initial mirrors is not trivial but doable, but the concern is how
+to keep them updated, because for example an outdated OpenSSL is really bad.
+mati865 suggested that other projects often tar the whole msys2 installation
+directory and periodically update that, and we’ll explore that. More discussion
+on the approach will likely happen on the PR implementing the changes.</p>
+<h2><a href="#restricted-aws-access-for-docsrs-operators" aria-hidden="true" class="anchor" id="restricted-aws-access-for-docsrs-operators"></a>Restricted AWS access for docs.rs operators</h2>
+<p>One of the issues exposed in the <a href="https://blog.rust-lang.org/inside-rust/2019/10/24/docsrs-outage-postmortem.html">docs.rs outage postmortem</a> was that
+the people in the docs.rs on-call rotation did not have access to the AWS
+resources part of docs.rs. pietroalbini proposed to give them limited access,
+namely to stop/start the EC2 instance and to inspect/change the underlying S3
+storage bucket. Mark-Simulacrum thought the access was not needed in practice,
+and we agreed to revisit the topic if issues arise again.</p>
+<h2><a href="#new-server-for-perf" aria-hidden="true" class="anchor" id="new-server-for-perf"></a>New server for perf</h2>
+<p>To ensure consistent results the collector for <a href="https://perf.rust-lang.org">perf.rust-lang.org</a> needs to be
+on bare metal hardware, and until now it was a server lying under
+alexcrichton’s desk. The server will have to be moved by December though, and
+alexcrichton asked the team on feedback on what to do. There was consensus that
+the best solution is to look for a rented bare metal server, and pietroalbini
+will do an initial investigation.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

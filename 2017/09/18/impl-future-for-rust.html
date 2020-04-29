@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>impl Future for Rust | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="impl Future for Rust | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="impl Future for Rust | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="impl Future for Rust" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>impl Future for Rust</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 18, 2017 &middot; Aaron Turon
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust community has been hard at work on our <a href="https://github.com/rust-lang/rfcs/pull/1774">2017 roadmap</a>, but as we come
+up on the final quarter of the year, we're going to kick it into high gear—and
+we want you to join us!</p>
+<p>Our goals for the year are ambitious:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust-roadmap/issues/3">Rust should have a lower learning curve</a>.</li>
+<li><a href="https://github.com/rust-lang/rust-roadmap/issues/1">Rust should have a pleasant edit-compile-debug cycle</a>.</li>
+<li><a href="https://github.com/rust-lang/rust-roadmap/issues/2">Rust should provide a solid, but basic IDE experience</a>.</li>
+<li><a href="https://github.com/rust-lang/rust-roadmap/issues/9">Rust should provide easy access to high quality crates</a>.</li>
+<li><a href="https://github.com/rust-lang/rust-roadmap/issues/10">Rust should be well-equipped for writing robust, high-scale servers</a>.</li>
+<li><a href="https://github.com/rust-lang/rust-roadmap/issues/11">Rust should have 1.0-level crates for essential tasks</a>.</li>
+<li><a href="https://github.com/rust-lang/rust-roadmap/issues/12">Rust should integrate easily into large build systems</a>.</li>
+<li><a href="https://github.com/rust-lang/rust-roadmap/issues/13">Rust's community should provide mentoring at all levels</a></li>
+</ul>
+<p><strong>To finish off these goals, we intend to spend the rest of the year focused
+purely on &quot;implementation&quot; work—which doesn't just mean code!</strong> In particular, we
+are effectively spinning down the <a href="https://github.com/rust-lang/rfcs#rust-rfcs">RFC process</a> for 2017, after having merged
+<a href="https://github.com/rust-lang/rfcs/pulls?utf8=%E2%9C%93&q=is%3Apr%20merged%3A%3E2017-01-01">almost 90</a> RFCs this year!</p>
+<p>So here's the plan. Each Rust team has put together several <em>working groups</em>
+focused on a specific sub-area. Each WG has a leader who is responsible for
+carving out and coordinating work, and a dedicated chat channel for getting
+involved. We are working hard to divvy up work items into many shapes and sizes,
+and to couple them with mentoring instructions and hands-on mentors. <strong>So if
+you've always wanted to contribute to Rust but weren't sure how, this is the
+perfect opportunity for you.</strong> Don't be shy—we want and need your help, and, as
+per our roadmap, our aim is mentoring at <em>all</em> levels of experience. To get started,
+say hello in the chat rooms for any of the work groups you're interested in!</p>
+<h2><a href="#a-few-points-of-order" aria-hidden="true" class="anchor" id="a-few-points-of-order"></a>A few points of order</h2>
+<p>There are a few online venues for keeping in the loop with working group activity:</p>
+<ul>
+<li>
+<p>There is a <a href="https://gitter.im/rust-impl-period/">dedicated Gitter community</a>
+with channels for each working group, as well as
+a <a href="https://gitter.im/rust-impl-period/Lobby">global channel</a> for talking about
+the process as a whole, or getting help finding your way to a working group.
+<strong>For those who prefer IRC, a good <a href="https://irc.gitter.im/">bridge</a> is available</strong>!</p>
+</li>
+<li>
+<p>The brand-new <a href="https://www.rustaceans.org/findwork">findwork</a> site, which
+provides an entry point to a number of open issues across the Rust project,
+including those managed by working groups (see the &quot;impl period&quot; tab). Thanks,
+@nrc, for putting this together!</p>
+</li>
+</ul>
+<p>We also plan two in-person events, paired with upcoming Rust conferences. Each
+of them is a two-day event populated in part by Rust core developers; come hang
+out and work together!</p>
+<ul>
+<li><a href="http://blog.rustfest.eu/this-week-in-rustfest-9-impl-days">October 2-3 at RustFest</a>.</li>
+<li><a href="https://goo.gl/forms/e9hmmsFw4owhhDf62">October 24-25 at Rust Belt Rust</a>.</li>
+</ul>
+<p>As usual, all of these venues abide by the <a href="https://www.rust-lang.org/conduct.html">Rust code of conduct</a>. But more than
+that: this &quot;impl period&quot; is a chance for us all to have fun <em>collaborating</em> and
+<em>helping</em> each other, and those participating in the official venues are
+expected to meet the highest standards of behavior.</p>
+<h2><a href="#the-working-groups" aria-hidden="true" class="anchor" id="the-working-groups"></a>The working groups</h2>
+<p>Without further ado, here's the initial lineup! (A few more working groups are
+expected to arise over time.)</p>
+<p><strong>If you find a group that interests you, please say hello in the corresponding
+chat room!</strong></p>
+<h3><a href="#compiler-team" aria-hidden="true" class="anchor" id="compiler-team"></a>Compiler team</h3>
+<table>
+<tr>
+    <td><b>WG-compiler-errors</b></td>
+    <td>Make Rust's error messages even friendlier.</td>
+    <td><a href="https://paper.dropbox.com/doc/Compiler-errors-FSZdfXAGo3uMQ1wuDcZcy">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-errors">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-compiler-front</b></td>
+    <td>Dip your toes in with parsing and syntax sugar.</td>
+    <td><a href="https://paper.dropbox.com/doc/Parser-and-Name-Resolution-Front-end-b0SZiNroIE1HK3lHKm8k7">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-front">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-compiler-middle</b></td>
+    <td>Implement features that involve typechecking.</td>
+    <td><a href="https://paper.dropbox.com/doc/Middle-Type-checker-XEPTHIWvzlvqkSC3cluTr">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-middle">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-compiler-traits</b></td>
+    <td>Want generic associated types? You know what to do.</td>
+    <td><a href="https://paper.dropbox.com/doc/Trait-system-LCgNlSbM5cPOyEyWdoqzW">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-traits">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-compiler-incr</b></td>
+    <td>Finish incremental compilation; receive undying love.</td>
+    <td><a href="https://paper.dropbox.com/doc/Incremental-Compilation-GtIsqsyiXfiyzOh99xp9R">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-incr">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-compiler-nll</b></td>
+    <td>Delve into the bowels of borrowck to slay the beast: NLL!</td>
+    <td><a href="https://paper.dropbox.com/doc/Non-Lexical-Lifetimes-u5uc6VxJic67K2ynmTiFV">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-nll">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-compiler-const</b></td>
+    <td>Const generics. Enough said.</td>
+    <td><a href="https://paper.dropbox.com/doc/Const-system-hNGg3H7sqnHb6nf39zpwl">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-compiler-const">Chat</a></td>
+</tr>
+</table>
+<h3><a href="#libs-team" aria-hidden="true" class="anchor" id="libs-team"></a>Libs team</h3>
+<table>
+<tr>
+    <td><b>WG-libs-blitz</b></td>
+    <td>Help finish off the Blitz before all the issues are gone!</td>
+    <td><a href="https://paper.dropbox.com/doc/libz-blitz-ymXpoWVNDwVDigdrJ5o49">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libz-blitz">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-libs-cookbook</b></td>
+    <td>Work on bite-sized examples to get folks cooking with Rust.</td>
+    <td><a href="https://paper.dropbox.com/doc/Rust-cookbook-DFaopl45jyZGWKI6iFDwD">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libs-cookbook">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-libs-guidelines</b></td>
+    <td>Take the wisdom from the Blitz and pass it on.</td>
+    <td><a href="https://paper.dropbox.com/doc/API-Guidelines-bDAAOER4WHdxJ1XtEAFYs">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libs-guidelines">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-libs-simd</b></td>
+    <td>Provide access to hardware parallelism in Rust! </td>
+    <td><a href="https://paper.dropbox.com/doc/simd-9H0xb83w1TD8Tc1yEG75M">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libs-simd">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-libs-openssl</b></td>
+    <td>Want better docs for openssl? So do we.</td>
+    <td><a href="https://paper.dropbox.com/doc/OpenSSL-crate-FRMKrV0PjCVqFSBHfmNS5">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libs-openssl">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-libs-rand</b></td>
+    <td>Craft a stable, core crate for randomness.</td>
+    <td><a href="https://github.com/rust-lang/rfcs/pull/2152">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-libs-rand">Chat</a></td>
+</tr>
+</table>
+<h3><a href="#docs-team" aria-hidden="true" class="anchor" id="docs-team"></a>Docs team</h3>
+<table>
+<tr>
+    <td><b>WG-docs-rustdoc</b></td>
+    <td>Help make docs beautiful for everyone!</td>
+    <td><a href="https://paper.dropbox.com/doc/Rustdoc-issue-roundup-ZSIIXNDGEPozTM9axn0BO">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-docs-rustdoc">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-docs-rustdoc2</b></td>
+    <td>Get in on a bottom-up revamp of rustdoc!</td>
+    <td><a href="https://paper.dropbox.com/doc/WG-rustdoc2-3lxugWOmvpXC2eMaAQK04">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-docs-rustdoc2">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-docs-rbe</b></td>
+    <td>Teach others Rust in the browser.</td>
+    <td><a href="https://paper.dropbox.com/doc/WG-rbe-Tgd0wu70N6zSmACkNL3TI">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-docs-rbe">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-docs-checklist</b></td>
+    <td>Help finish the standard library documentation!</td>
+    <td><a href="https://paper.dropbox.com/doc/Finish-the-docs-checklist-WG-docs-checklist-7CiH332jWblQUTqUOVXaZ">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-docs-checklist">Chat</a></td>
+</tr>
+</table>
+<h3><a href="#dev-tools-team" aria-hidden="true" class="anchor" id="dev-tools-team"></a>Dev tools team</h3>
+<table>
+<tr>
+    <td><b>WG-dev-tools-rls</b></td>
+    <td>Help make Rust's IDE experience first class.</td>
+    <td><a href="https://paper.dropbox.com/doc/Rust-Language-Server-RLS-XQbsngZNog9pkt0AfcMo7">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-rls">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-dev-tools-vscode</b></td>
+    <td>Improve Rust's IDE experience for VSCode.</td>
+    <td><a href="https://paper.dropbox.com/doc/Rust-support-in-Visual-Studio-Code-RZ34qWGwy04Xwc82NFi78">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-vscode">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-dev-tools-clients</b></td>
+    <td>Implement new RLS clients: Atom, Sublime, Visual Studio...</td>
+    <td><a href="https://paper.dropbox.com/doc/New-RLS-clients-VrtQKnZR4r3uLD1VBypRI">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-clients">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-dev-tools-IntelliJ</b></td>
+    <td>Polish up an already-rich Rust IDE experience.</td>
+    <td><a href="https://paper.dropbox.com/doc/Intellij-Rust-IYJGtI7uAjdqr2igv4Y7r">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-IntelliJ">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-dev-tools-rustfmt</b></td>
+    <td>Make Rust's code the prettiest!</td>
+    <td><a href="https://paper.dropbox.com/doc/rustfmt-7yTxFPEHtV6jktqZ2pRj1">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-rustfmt">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-dev-tools-rustup</b></td>
+    <td>Make Rust's first impression even better!</td>
+    <td><a href="https://paper.dropbox.com/doc/rustup-mngGQUtX1UkBay3wgOGJi">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-rustup">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-dev-tools-clippy</b></td>
+    <td>It looks like you're trying to write a linter. Want help?</td>
+    <td><a href="https://paper.dropbox.com/doc/Clippy-integration-and-improvements-gebwGlwNOoy6UGLspGO4T">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-clippy">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-dev-tools-bindgen</b></td>
+    <td>Make FFI'ing to C and C++ easy, automatic, and robust!</td>
+    <td><a href="https://paper.dropbox.com/doc/bindgen-xTXplHlfqJpnDvPhMqmfW">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-dev-tools-bindgen">Chat</a></td>
+</tr>
+</table>
+<h3><a href="#cargo-team" aria-hidden="true" class="anchor" id="cargo-team"></a>Cargo team</h3>
+<table>
+<tr>
+    <td><b>WG-cargo-native</b></td>
+    <td>Let's make native dependencies as painless as we can.</td>
+    <td><a href="https://paper.dropbox.com/doc/Declarative-native-dependencies-iLRUq6Zt2tPtLWE9IyLqS">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-cargo-native">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-cargo-registries</b></td>
+    <td>Going beyond crates.io to support custom registries.</td>
+    <td><a href="https://paper.dropbox.com/doc/Cargo-Multiple-Registries-IrW9bRuZ1rdc4o9UPdQM9">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-cargo-registries">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-cargo-pub-deps</b></td>
+    <td>Teach Cargo which of your dependencies affects your users.</td>
+    <td><a href="https://paper.dropbox.com/doc/Cargo-pubpriv-dependencies-JDXpDtGRnz8CY3KYlcUBD">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-cargo-pub-deps">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-cargo-integration</b></td>
+    <td>How easy can it be to use Cargo with your build system?</td>
+    <td><a href="https://paper.dropbox.com/doc/Cargo-build-system-integration-1sqRG8uyCqxv9EfoS8cco">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-cargo-integration">Chat</a></td>
+</tr>
+</table>
+<h3><a href="#infrastructure-team" aria-hidden="true" class="anchor" id="infrastructure-team"></a>Infrastructure team</h3>
+<table>
+<tr>
+    <td><b>WG-infra-crates.io</b></td>
+    <td>Try your hand at a production Rust web app!</td>
+    <td><a href="https://paper.dropbox.com/doc/Crates.io-g8NWnnNIeTq8DaqjGoZLr">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-infra-crates.io">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-infra-perf</b></td>
+    <td>Let's make sure Rust gets faster.</td>
+    <td><a href="https://paper.dropbox.com/doc/Perf.rlo-dp5rp6tSg7bOMmQwLygp4">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-infra-perf">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-infra-crater</b></td>
+    <td>Regularly testing the compiler against the Rust ecosystem.</td>
+    <td><a href="https://paper.dropbox.com/doc/Crater-D7DpG48tMhhHhrUm8kyhY">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-infra-crater">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-infra-secure</b></td>
+    <td>Help us implement best practices for Rust's infrastructure!</td>
+    <td><a href="https://paper.dropbox.com/doc/Securing-Infrastructure-xq5FfLQs1hkxwgxDsHi2Z">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-infra-secure">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-infra-host</b></td>
+    <td>Managing the services that keep the Rust machine running.</td>
+    <td><a href="https://paper.dropbox.com/doc/Host-WiqosInW7SpUblFVGKeOo">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-infra-host">Chat</a></td>
+</tr>
+<tr>
+    <td><b>WG-infra-rustbuild</b></td>
+    <td>Streamline the compiler build process.</td>
+    <td><a href="https://paper.dropbox.com/doc/Rustbuild-Cz96pk6FBtP54JClTCDNd">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-infra-rustbuild">Chat</a></td>
+</tr>
+</table>
+<h3><a href="#core-team" aria-hidden="true" class="anchor" id="core-team"></a>Core team</h3>
+<table>
+<tr>
+    <td><b>WG-core-site</b></td>
+    <td>The web site is getting overhauled; help shape the new content!</td>
+    <td><a href="https://paper.dropbox.com/doc/rust-lang.org-content-improvement-uGns2d39DFgT0X9FQg0yD">Learn more</a></td>
+    <td><a href="https://gitter.im/rust-impl-period/WG-core-site">Chat</a></td>
+</tr>
+</table>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

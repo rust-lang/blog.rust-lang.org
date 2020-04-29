@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>An Update from WG-Learning | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="An Update from WG-Learning | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="An Update from WG-Learning | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="An Update from WG-Learning" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>An Update from WG-Learning</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 20, 2019 &middot; mark-i-m
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide">the Rustc Dev Guide Working Group</a> 
+    </div>
+
+    <div class="post">
+      <h1><a href="#an-update-from-wg-learning" aria-hidden="true" class="anchor" id="an-update-from-wg-learning"></a>An update from WG-Learning</h1>
+<p>In our last post in <a href="https://blog.rust-lang.org/inside-rust/2019/10/28/rustc-learning-working-group-introduction.html">October</a> we gave an overview what the Learning WG is
+and what we are doing. We have made a lot of progress since that post, and we
+have also held a meeting to decide what to work on next. So let's dig in...</p>
+<h2><a href="#work-completed" aria-hidden="true" class="anchor" id="work-completed"></a>Work completed</h2>
+<p>We mentioned before that we are in the process of producing <a href="https://rustc-dev-guide.rust-lang.org/">rustc-dev-guide</a>
+chapters from the &quot;Compiler Lecture Series&quot; videos. The goal is to try to
+produce guide chapters that are approachable for beginners and give a good
+foundation for exploring and hacking on the compiler.</p>
+<p>Recently, we merge a <a href="https://rustc-dev-guide.rust-lang.org/salsa.html">chapter</a> on <a href="https://crates.io/crates/salsa"><code>salsa</code></a> by <code>@Karrq</code>.
+<code>salsa</code> is a crate that makes incremental computation easier. While it is not
+used in <code>rustc</code> itself, it is heavily inspired by it, and it is used by
+<a href="https://github.com/rust-analyzer/rust-analyzer"><code>rust-analyzer</code></a>.</p>
+<p>We also collectively have been working on a chapter about <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc/ty/type.Ty.html"><code>ty::Ty</code></a> and
+the way that rustc represents types internally. You can find that PR
+<a href="https://github.com/rust-lang/rustc-dev-guide/pull/530">here</a>. This has been a big effort for a few months now, and we are excited
+to have this new chapter in the guide.</p>
+<h2><a href="#whats-next" aria-hidden="true" class="anchor" id="whats-next"></a>What's next?</h2>
+<p>We just had a <a href="https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide/topic/planning.20meeting">planning meeting</a> to discuss what to work on next. The
+guide has some long-standing holes and shortcomings that we would like to address.</p>
+<p>Specifically, the Learning WG decided that we wanted to pursue the following goals next:</p>
+<ul>
+<li>Write an overview chapter</li>
+<li>Gather source material for chapters on monomorphization and LLVM</li>
+</ul>
+<h3><a href="#overview-chapter" aria-hidden="true" class="anchor" id="overview-chapter"></a>Overview chapter</h3>
+<p>One of the challenges with big software systems is understanding how everything
+fits together. We have seen this problem come up with the rustc-dev-guide; the chapters
+tunnel down into a single part of the compiler, but it is hard to get a good
+view of all the things that happen to a piece of code between lexing and linking.</p>
+<p>We want to remedy this problem by creating an Overview chapter that walks
+through some example from the beginning of the compiler to the end of the
+compiler at a high level.  We plan to put this chapter at the beginning of
+(part 2 of) the guide, so that it guide readers as to what part of the
+compilation they are reading about in the subsequent chapters.</p>
+<h3><a href="#monomorphization-codegen-llvm" aria-hidden="true" class="anchor" id="monomorphization-codegen-llvm"></a>Monomorphization, Codegen, LLVM</h3>
+<p>One of the biggest gaps in the guide currently is what happens to your code
+after the MIR is produced. We have chapters on almost everything that happens
+before that (though many of them are pretty slim), but we have almost nothing
+after the MIR is produced, borrow checked, and optimized.</p>
+<p>In particular, after the MIR is optimized, we need to <a href="https://rustc-dev-guide.rust-lang.org/appendix/glossary.html">monomorphize</a> it,
+produce LLVM IR from it, call LLVM to produce executable code, and then link
+everything to form a final binary object.</p>
+<p>The Learning WG will work on collecting information to write chapters on these
+topics.</p>
+<h2><a href="#getting-involved" aria-hidden="true" class="anchor" id="getting-involved"></a>Getting involved</h2>
+<p>Did any of this sound interesting to you? We would love for you to join us! You
+can the Learning WG on the <a href="https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide"><code>t-compiler/wg-rustc-dev-guide</code></a> stream on Zulip.
+Feel free to stop by and ping us.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

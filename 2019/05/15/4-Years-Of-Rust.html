@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>4 years of Rust | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="4 years of Rust | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="4 years of Rust | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="4 years of Rust" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>4 years of Rust</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">May 15, 2019 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>On May 15th, 2015, <a href="https://blog.rust-lang.org/2015/05/15/Rust-1.0.html">Rust</a> was released to the world! After 5 years of open development (and a couple of years of sketching before that), we finally hit the button on making the attempt to create a new systems programming language a serious effort!</p>
+<p>It’s easy to look back on the pre-1.0 times and cherish them for being the wild times of language development and fun research. Features were added and cut, syntax and keywords were tried, and before 1.0, there was a big clean-up that removed a lot of the standard library. For fun, you can check Niko’s blog post on <a href="https://smallcultfollowing.com/babysteps/blog/2012/04/09/rusts-object-system/">how Rust's object system works</a>, Marijn Haverbeke’s talk on <a href="https://www.youtube.com/watch?v=olbTX95hdbg">features that never made it close to 1.0</a> or even the <a href="http://venge.net/graydon/talks/intro-talk-2.pdf">introductory slides about Servo</a>, which present a language looking very different from today.</p>
+<p>Releasing Rust with stability guarantees also meant putting a stop to large visible changes. The face of Rust is still very similar to Rust 1.0. Even with the changes from last year’s 2018 Edition, Rust is still very recognizable as what it was in 2015. That steadiness hides that the time of Rust’s fastest development and growth is <em>now</em>. With the stability of the language and easy upgrades as a base, a ton of new features have been built. We’ve seen a bunch of achievements in the last year:</p>
+<ul>
+<li>We have been StackOverflow’s <a href="https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-and-wanted">“Most loved programming language”</a> 4 consecutive years in a row</li>
+<li>We opened up a whole new area of development for stable Rust: <a href="https://www.rust-lang.org/what/embedded">embedded development</a></li>
+<li><a href="https://www.rust-lang.org/what/wasm">Rust+WASM</a> went from an experiment to a usable product, making rustc the first compiler with focus on supporting WASM</li>
+<li>We shipped a new language edition: <a href="https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html">Rust 2018</a></li>
+<li><a href="http://crates.io">Crates.io</a> passed a billion downloads and has over 25,000 crates available</li>
+<li>There’s now over 100 meetups around the world, in 42 countries</li>
+<li>6(!) new conferences were spun up (<a href="https://rustrush.ru/">RustRush</a>, <a href="https://rustcon.asia/">RustCon Asia</a>, <a href="https://oxidizeconf.com/">Oxidize</a>, <a href="https://rustlatam.org/">Rust LATAM</a>, <a href="https://cogoldrust.com/">Colorado Gold Rust</a>, <a href="https://www.rustlab.it/">RustLab Italy</a>)</li>
+</ul>
+<p>This list could go on and on. While the time before and after release was a time where language changes had huge impact how Rust is perceived, it's becoming more and more important what people start building in and around it. This includes projects like whole game engines, but also many small, helpful libraries, meetup formats, tutorials other educational material. Birthdays are a great time to take a look back over the last year and see the happy parts!</p>
+<p>Rust would be nothing, and especially not winning prizes, without its community. Community happens everywhere! We would like to thank everyone for being along on this ride, from team members to small scale contributors to people just checking the language out and finding interest in it. Your interest and curiosity is what makes the Rust community an enjoyable place to be. Some meetups <a href="https://calendar.google.com/calendar/embed?showTitle=0&showPrint=0&showTabs=0&showCalendars=0&mode=AGENDA&height=400&wkst=1&bgcolor=%23FFFFFF&src=apd9vmbc22egenmtu5l6c5jbfc%40group.calendar.google.com&color=%23691426&ctz=Europe%2FMadrid">are running birthday parties</a> today to which everyone is invited. If you are not attending one, you can take the chance to celebrate in any other fashion: maybe show us a picture of what you are currently working on or talk about what excites you. If you want to take it to social media, consider tagging our <a href="https://twitter.com/rustlang">Twitter account</a> or using the hashtag #rustbirthday.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

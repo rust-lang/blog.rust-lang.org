@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.21 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.21 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.21 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.21" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.21</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 12, 2017 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce the latest version of Rust, 1.21.0. Rust
+is a systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed, getting Rust 1.21 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1210-2017-10-12">detailed release notes for
+1.21.0</a> on GitHub.</p>
+<h3><a href="#whats-in-1210-stable" aria-hidden="true" class="anchor" id="whats-in-1210-stable"></a>What's in 1.21.0 stable</h3>
+<p>This release contains some very minor, but nice-to-have features, as well as
+some new documentation.</p>
+<p>First up, a small change to literals. Consider code like this:</p>
+<pre><code class="language-rust">let x = &amp;5;
+</code></pre>
+<p>In Rust, this code is synonymous with:</p>
+<pre><code class="language-rust">let _x = 5;
+let x = &amp;_x;
+</code></pre>
+<p>That is, the <code>5</code> here will be stored on the stack, or possibly in registers.
+<code>x</code> will be a reference to it.</p>
+<p>However, given that it's a literal integer, there's no reason that it <em>has</em>
+to be local like this. Imagine we had a function that took a <code>'static</code> argument,
+like <code>std::thread::spawn</code>. You might use <code>x</code> like this:</p>
+<pre><code class="language-rust">use std::thread;
+
+fn main() {
+    let x = &amp;5;
+
+    thread::spawn(move || {
+        println!(&quot;{}&quot;, x);
+    });
+
+}
+</code></pre>
+<p>In previous versions of Rust, this would fail to compile:</p>
+<pre><code class="language-text">error[E0597]: borrowed value does not live long enough
+  --&gt; src/main.rs:4:14
+   |
+4  |     let x = &amp;5;
+   |              ^ does not live long enough
+...
+10 | }
+   | - temporary value only lives until here
+   |
+   = note: borrowed value must be valid for the static lifetime...
+</code></pre>
+<p>Because the <code>5</code> is local, so is its borrow, which doesn't satisfy the
+requirements for <code>spawn</code>.</p>
+<p>However, if you compile this on Rust 1.21, it will work. Why? Well,
+if the thing being referred to is okay to put into a <code>static</code>, we could
+instead de-sugar <code>let x = &amp;5;</code> like this:</p>
+<pre><code class="language-rust">static FIVE: i32 = 5;
+
+let x = &amp;FIVE;
+</code></pre>
+<p>Here, since the <code>FIVE</code> is <code>static</code>, <code>x</code> is a <code>&amp;'static i32</code>. And so this
+is what Rust will now do in this kind of case. For full details, see <a href="https://github.com/rust-lang/rfcs/blob/master/text/1414-rvalue_static_promotion.md">RFC 1414</a>,
+which was accepted in January, but started in December of 2015!</p>
+<p>We <a href="https://github.com/rust-lang/rust/pull/43506">now run LLVM in parallel while generating
+code</a>, which should reduce peak
+memory usage.</p>
+<p>The <a href="https://github.com/rust-lang-nursery/rls/">RLS</a> can now be installed
+<a href="https://github.com/rust-lang/rust/pull/44204">through rustup</a> by invoking
+<code>rustup component add rls-preview</code>. In general, many useful Rust developer
+tools such as the RLS, Clippy, and <code>rustfmt</code> need nightly Rust; this is the
+first steps toward having them work on stable Rust. Please check out the
+preview, and you'll hear more about these plans in the future.</p>
+<p>Finally, a few documentation improvements. First up, if you visit <a href="https://doc.rust-lang.org/stable/std/os/">the docs
+for <code>std::os</code></a>, which contains
+operating system specific functionality, you'll now see more than just <code>linux</code>,
+the platform we build the documentation on. We've long regretted that the hosted
+version of the documentation has been Linux-specific; this is a first step towards
+rectifying that. This is <a href="https://github.com/rust-lang/rust/pull/43348">specific to the standard
+library</a> and not for general use;
+we hope to improve this further in the future.</p>
+<p>Next, <a href="https://github.com/rust-lang/rust/pull/43916">Cargo's docs are moving!</a>
+Historically, Cargo's docs were hosted on doc.crates.io, which doesn't follow
+the release train model, even though Cargo itself does. This led to situations
+where a feature would land in Cargo nightly, the docs would be updated, and
+then for up to twelve weeks, users would <em>think</em> that it should work, but it
+wouldn't yet. <a href="https://doc.rust-lang.org/cargo">https://doc.rust-lang.org/cargo</a>
+will be the new home of Cargo's docs, though for now, that URL is a redirect to
+doc.crates.io. Future releases will move Cargo's docs over, and at that point,
+doc.crates.io will redirect to doc.rust-lang.org/cargo. Cargo's docs have long
+needed a refreshing, so expect to hear more news about Cargo's docs generally
+in the future!</p>
+<p>Finally, until now, <code>rustdoc</code> did not have any documentation. This is now
+<a href="https://github.com/rust-lang/rust/pull/43863">fixed</a>, with a new &quot;<code>rustdoc</code>
+Book,&quot; located at
+<a href="https://doc.rust-lang.org/rustdoc">https://doc.rust-lang.org/rustdoc</a>. These
+docs are fairly bare-bones at the moment, but we'll be improving them over
+time.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1210-2017-10-12">detailed release notes</a> for more.</p>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
+<p>Not too many stabilizations this release, but there's one really great
+quality of life change: due to the lack of type-level integers, arrays only
+supported various traits up to size 32. This <a href="https://github.com/rust-lang/rust/pull/43690">has now been fixed for the
+<code>Clone</code> trait</a>, which also
+caused a lot of ICEs at times, when a type would be <code>Copy</code> but not <code>Clone</code>.
+For other traits, <a href="https://github.com/rust-lang/rfcs/blob/master/text/2000-const-generics.md">an RFC for type-level integers was accepted
+recently</a>,
+which may help with this situation. That change has yet to be implemented, however,
+though pre-requisite work is ongoing at the moment.</p>
+<p>Next, <a href="https://github.com/rust-lang/rust/pull/44567"><code>Iterator::for_each</code></a> has
+been stabilized, letting you consume an iterator for side effects without needing
+a <code>for</code> loop:</p>
+<pre><code class="language-rust">// old
+for i in 0..10 {
+    println!(&quot;{}&quot;, i);
+}
+
+// new
+(0..10).for_each(|i| println!(&quot;{}&quot;, i));
+</code></pre>
+<p>The correct one to use depends on your situation; in the sample above, the <code>for</code> loop
+is pretty straightforward. But when you're chaining a number of iterators together,
+the <code>for_each</code> version is sometimes clearer. Consider this:</p>
+<pre><code class="language-rust">// old
+for i in (0..100).map(|x| x + 1).filter(|x| x % 2 == 0) {
+    println!(&quot;{}&quot;, i);
+}
+
+// new
+(0..100)
+    .map(|x| x + 1)
+    .filter(|x| x % 2 == 0)
+    .for_each(|i| println!(&quot;{}&quot;, i));
+</code></pre>
+<p><a href="https://github.com/rust-lang/rust/pull/42565"><code>Rc&lt;T&gt;</code> and <code>Arc&lt;T&gt;</code> now implement <code>From&lt;&amp;[T]&gt; where T: Clone</code>, <code>From&lt;str&gt;</code>,
+<code>From&lt;String&gt;</code>, <code>From&lt;Box&lt;T&gt;&gt; where T: ?Sized</code>, and
+<code>From&lt;Vec&lt;T&gt;&gt;</code>.</a></p>
+<p>The <a href="https://github.com/rust-lang/rust/pull/44593"><code>max</code> and <code>min</code> functions on the <code>Ord</code>
+trait</a> are now stable.</p>
+<p>The <a href="https://github.com/rust-lang/rust/pull/44639"><code>needs_drop</code> intrinsic</a>
+is now stable.</p>
+<p>Finally, <a href="https://doc.rust-lang.org/std/mem/fn.discriminant.html"><code>std::mem::discriminant</code> has been
+stabilized</a>, allowing
+you to see what variant an <code>enum</code> instance is without a <code>match</code> statement.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1210-2017-10-12">detailed release notes</a> for more.</p>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
+<p>Beyond the documentation features listed above, Cargo is gaining one major
+feature in this release:
+<a href="https://github.com/rust-lang/cargo/pull/4123"><code>[patch]</code></a>. Designed in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1969-cargo-prepublish.md">RFC
+1969</a>,
+the <code>[patch]</code> section of your <code>Cargo.toml</code> can be used when you want to
+override certain parts of your dependency graph. We also have a feature,
+<code>[replace]</code> that has similar functionality. In many ways, <code>[patch]</code> is the new
+<code>[replace]</code>, and while we have no plans to deprecate or remove <code>[replace]</code>,
+at this point, you should use <code>[patch]</code> instead of <code>[replace]</code>.</p>
+<p>So what's it look like? Let's say we have a <code>Cargo.toml</code> that looks like this:</p>
+<pre><code class="language-toml">[dependencies]
+foo = &quot;1.2.3&quot;
+</code></pre>
+<p>In addition, our <code>foo</code> crate depends on a <code>bar</code> crate, and we find a bug in
+<code>bar</code>. To test this out, we'd download the source code for <code>bar</code>, and then
+update our <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[dependencies]
+foo = &quot;1.2.3&quot;
+
+[patch.crates-io]
+bar = { path = '/path/to/bar' }
+</code></pre>
+<p>Now, when you <code>cargo build</code>, it will use the local version of <code>bar</code>, rather
+than the one from <code>crates.io</code> that <code>foo</code> depends on.</p>
+<p>For more details, see the
+<a href="http://doc.crates.io/manifest.html#the-patch-section">documentation</a>.</p>
+<p>Additionally:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/cargo/pull/4216">you can now <code>cargo install</code> multiple crates at
+once</a></li>
+<li><a href="https://github.com/rust-lang/cargo/pull/4335">If you're in a virtual workspace, <code>--all</code> is now
+applied automatically</a>.</li>
+<li><a href="https://github.com/rust-lang/cargo/pull/4270"><code>include</code> and <code>exclude</code> fields in your <code>Cargo.toml</code> accepts patterns similar
+to a <code>.gitignore</code></a>.</li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1210-2017-10-12">detailed release notes</a> for more.</p>
+<h3><a href="#contributors-to-1210" aria-hidden="true" class="anchor" id="contributors-to-1210"></a>Contributors to 1.21.0</h3>
+<p>Many people came together to create Rust 1.21. We couldn't have done it without
+all of you. <a href="https://thanks.rust-lang.org/rust/1.21.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

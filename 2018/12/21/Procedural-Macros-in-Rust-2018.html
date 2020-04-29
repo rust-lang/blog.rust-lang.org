@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Procedural Macros in Rust 2018 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Procedural Macros in Rust 2018 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Procedural Macros in Rust 2018 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Procedural Macros in Rust 2018" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Procedural Macros in Rust 2018</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 21, 2018 &middot; Alex Crichton
+    
+    </div>
+
+    <div class="post">
+      <p>Perhaps my favorite feature in the Rust 2018 edition is <a href="https://doc.rust-lang.org/reference/procedural-macros.html">procedural macros</a>.
+Procedural macros have had a long and storied history in Rust (and will continue
+to have a storied future!), and now is perhaps one of the best times to get
+involved with them because the 2018 edition has so dramatically improved the
+experience both defining and using them.</p>
+<p>Here I'd like to explore what procedural macros are, what they're capable of,
+notable new features, and some fun use cases of procedural macros. I might even
+convince you that this is Rust 2018's best feature as well!</p>
+<h3><a href="#what-is-a-procedural-macro" aria-hidden="true" class="anchor" id="what-is-a-procedural-macro"></a>What is a procedural macro?</h3>
+<p>First defined over two years ago in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1566-proc-macros.md">RFC 1566</a>, procedural macros are, in
+layman's terms, a function that takes a piece of syntax at compile time and
+produces a new bit of syntax. Procedural macros in Rust 2018 come in one of
+three flavors:</p>
+<ul>
+<li>
+<p><strong><code>#[derive]</code> mode macros</strong> have actually been stable since <a href="https://blog.rust-lang.org/2017/02/02/Rust-1.15.html">Rust 1.15</a>
+and bring all the goodness and ease of use of <code>#[derive(Debug)]</code> to
+user-defined traits as well, such as <a href="https://serde.rs">Serde</a>'s <code>#[derive(Deserialize)]</code>.</p>
+</li>
+<li>
+<p><strong>Function-like macros</strong> are newly stable to the 2018 edition and allow
+defining macros like <code>env!(&quot;FOO&quot;)</code> or <code>format_args!(&quot;...&quot;)</code> in a
+crates.io-based library. You can think of these as sort of &quot;<code>macro_rules!</code>
+macros&quot; on steroids.</p>
+</li>
+<li>
+<p><strong>Attribute macros</strong>, my favorite, are also new in the 2018 edition
+and allow you to provide lightweight annotations on Rust functions which
+perform syntactical transformations over the code at compile time.</p>
+</li>
+</ul>
+<p>Each of these flavors of macros can be defined in a crate with <code>proc-macro = true</code> <a href="https://doc.rust-lang.org/cargo/reference/manifest.html">specified in its manifest</a>. When used, a procedural macro is
+loaded by the Rust compiler and executed as the invocation is expanded. This
+means that Cargo is in control of versioning for procedural macros and you can
+use them with all same ease of use you'd expect from other Cargo dependencies!</p>
+<h3><a href="#defining-a-procedural-macro" aria-hidden="true" class="anchor" id="defining-a-procedural-macro"></a>Defining a procedural macro</h3>
+<p>Each of the three types of procedural macros are <a href="https://doc.rust-lang.org/stable/reference/procedural-macros.html">defined in a slightly different
+fashion</a>, and here we'll single out attribute macros. First, we'll flag
+<code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[lib]
+proc-macro = true
+</code></pre>
+<p>and then in <code>src/lib.rs</code> we can write our macro:</p>
+<pre><code class="language-rust">extern crate proc_macro;
+use proc_macro::TokenStream;
+
+#[proc_macro_attribute]
+pub fn hello(attr: TokenStream, item: TokenStream) -&gt; TokenStream {
+    // ...
+}
+</code></pre>
+<p>We can then write some unit tests in <code>tests/smoke.rs</code>:</p>
+<pre><code class="language-rust">#[my_crate::hello]
+fn wrapped_function() {}
+
+#[test]
+fn works() {
+    wrapped_function();
+}
+</code></pre>
+<p>... and that's it! When we execute <code>cargo test</code> Cargo will compile our
+procedural macro. Afterwards it will compile our unit test which loads the macro
+at compile time, executing the <code>hello</code> function and compiling the resulting
+syntax.</p>
+<p>Right off the bat we can see a few important properties of procedural macros:</p>
+<ul>
+<li>The input/output is this fancy <code>TokenStream</code> type we'll talk about more in a
+bit</li>
+<li>We're <em>executing arbitrary code</em> at compile time, which means we can do just
+about anything!</li>
+<li>Procedural macros are incorporated with the module system, meaning they can
+be imported just like any other name.</li>
+</ul>
+<p>Before we take a look at implementing a procedural macro, let's first dive into
+some of these points.</p>
+<h3><a href="#macros-and-the-module-system" aria-hidden="true" class="anchor" id="macros-and-the-module-system"></a>Macros and the module system</h3>
+<p>First stabilized in <a href="https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html">Rust 1.30</a> (noticing a trend with 1.15?) macros are now
+integrated with the module system in Rust. This mainly means that you no longer
+need the clunky <code>#[macro_use]</code> attribute when importing macros! Instead of this:</p>
+<pre><code class="language-rust">#[macro_use]
+extern crate log;
+
+fn main() {
+    debug!(&quot;hello, &quot;);
+    info!(&quot;world!&quot;);
+}
+</code></pre>
+<p>you can do:</p>
+<pre><code class="language-rust">use log::info;
+
+fn main() {
+    log::debug!(&quot;hello, &quot;);
+    info!(&quot;world!&quot;);
+}
+</code></pre>
+<p>Integration with the module system solves one of the most confusing parts about
+macros historically. They're now imported and namespaced just as you would any
+other item in Rust!</p>
+<p>The benefits are not only limited to bang-style <code>macro_rules</code> macros, as you can
+now transform code that looks like this:</p>
+<pre><code class="language-rust">#[macro_use]
+extern crate serde_derive;
+
+#[derive(Deserialize)]
+struct Foo {
+    // ...
+}
+</code></pre>
+<p>into</p>
+<pre><code class="language-rust">use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Foo {
+    // ...
+}
+</code></pre>
+<p>and you don't even need to explicitly depend on <code>serde_derive</code> in <code>Cargo.toml</code>!
+All you need is:</p>
+<pre><code class="language-toml">[dependencies]
+serde = { version = '1.0.82', features = ['derive'] }
+</code></pre>
+<h3><a href="#whats-inside-a-tokenstream" aria-hidden="true" class="anchor" id="whats-inside-a-tokenstream"></a>What's inside a <code>TokenStream</code>?</h3>
+<p>This mysterious <code>TokenStream</code> type comes from the <a href="https://doc.rust-lang.org/proc_macro/">compiler-provided
+<code>proc_macro</code> crate</a>. When it was first added all you could do with a
+<a href="https://doc.rust-lang.org/stable/proc_macro/struct.TokenStream.html"><code>TokenStream</code></a> was call convert it to or from a string using <code>to_string()</code> or <code>parse()</code>.
+As of Rust 2018, you can act on the tokens in a <a href="https://doc.rust-lang.org/stable/proc_macro/struct.TokenStream.html"><code>TokenStream</code></a> directly.</p>
+<p>A <a href="https://doc.rust-lang.org/stable/proc_macro/struct.TokenStream.html"><code>TokenStream</code></a> is effectively &quot;just&quot; an iterator over <a href="https://doc.rust-lang.org/stable/proc_macro/enum.TokenTree.html"><code>TokenTree</code></a>. All
+syntax in Rust falls into one of these four categories, the four variants of
+<a href="https://doc.rust-lang.org/stable/proc_macro/enum.TokenTree.html"><code>TokenTree</code></a>:</p>
+<ul>
+<li><code>Ident</code> is any identifier like <code>foo</code> or <code>bar</code>. This also contains keywords
+such as <code>self</code> and <code>super</code>.</li>
+<li><code>Literal</code> include things like <code>1</code>, <code>&quot;foo&quot;</code>, and <code>'b'</code>. All literals are one
+token and represent constant values in a program.</li>
+<li><code>Punct</code> represents some form of punctuation that's not a delimiter. For
+example <code>.</code> is a <code>Punct</code> token in the field access of <code>foo.bar</code>.
+Multi-character punctuation like <code>=&gt;</code> is represented as two <code>Punct</code> tokens,
+one for <code>=</code> and one for <code>&gt;</code>, and the <code>Spacing</code> enum says that the <code>=</code> is
+adjacent to the <code>&gt;</code>.</li>
+<li><code>Group</code> is where the term &quot;tree&quot; is most relevant, as <code>Group</code> represents a
+delimited sub-token-stream. For example <code>(a, b)</code> is a <code>Group</code> with parentheses
+as delimiters, and the internal token stream is <code>a, b</code>.</li>
+</ul>
+<p>While this is conceptually simple, this may sound like there's not much we can
+do with this! It's unclear, for example, how we might parse a function from a
+<code>TokenStream</code>. The minimality of <code>TokenTree</code> is crucial, however, for
+stabilization. It would be infeasible to stabilize the Rust AST because that
+means we could never change it. (imagine if we couldn't have added the <code>?</code>
+operator!)</p>
+<p>By using <code>TokenStream</code> to communicate with procedural macros, the compiler is
+able to add new language syntax while also being able to compile
+and work with older procedural macros. Let's see now, though, how we can
+actually get useful information out of a <code>TokenStream</code>.</p>
+<h3><a href="#parsing-a-tokenstream" aria-hidden="true" class="anchor" id="parsing-a-tokenstream"></a>Parsing a <code>TokenStream</code></h3>
+<p>If <code>TokenStream</code> is just a simple iterator, then we've got a long way to go from
+that to an actual parsed function. Although the code is already lexed for us
+we still need to write a whole Rust parser! Thankfully though the community has
+been hard at work to make sure writing procedural macros in Rust is as smooth as
+can be, so you need look no further than the <a href="https://crates.io/crates/syn"><code>syn</code> crate</a>.</p>
+<p>With the <a href="https://crates.io/crates/syn"><code>syn</code></a> crate we can parse any Rust AST as a one-liner:</p>
+<pre><code class="language-rust">#[proc_macro_attribute]
+pub fn hello(attr: TokenStream, item: TokenStream) -&gt; TokenStream {
+    let input = syn::parse_macro_input!(item as syn::ItemFn);
+    let name = &amp;input.ident;
+    let abi = &amp;input.abi;
+    // ...
+}
+</code></pre>
+<p>The <a href="https://crates.io/crates/syn"><code>syn</code></a> crate not only comes with the ability to parse built-in syntax
+but you can also easily write a recursive descent parser for your own syntax.
+The <a href="https://docs.rs/syn/0.15/syn/parse/index.html"><code>syn::parse</code> module</a> has more information about this capability.</p>
+<h3><a href="#producing-a-tokenstream" aria-hidden="true" class="anchor" id="producing-a-tokenstream"></a>Producing a <code>TokenStream</code></h3>
+<p>Not only do we take a <code>TokenStream</code> as input with a procedural macro, but we
+also need to produce a <code>TokenStream</code> as output. This output is typically
+required to be valid Rust syntax, but like the input it's just list of tokens
+that we need to build somehow.</p>
+<p>Technically the only way to create a <code>TokenStream</code> is via its <code>FromIterator</code>
+implementation, which means we'd have to create each token one-by-one and
+collect it into a <code>TokenStream</code>. This is quite tedious, though, so let's take a
+look at <a href="https://crates.io/crates/syn"><code>syn</code></a>'s sibling crate: <a href="https://docs.rs/quote/0.6/quote/"><code>quote</code></a>.</p>
+<p>The <a href="https://docs.rs/quote/0.6/quote/"><code>quote</code></a> crate is a quasi-quoting implementation for Rust which primarily
+provides a convenient macro for us to use:</p>
+<pre><code class="language-rust">use quote::quote;
+
+#[proc_macro_attribute]
+pub fn hello(attr: TokenStream, item: TokenStream) -&gt; TokenStream {
+    let input = syn::parse_macro_input!(item as syn::ItemFn);
+    let name = &amp;input.ident;
+
+    // Our input function is always equivalent to returning 42, right?
+    let result = quote! {
+        fn #name() -&gt; u32 { 42 }
+    };
+    result.into()
+}
+</code></pre>
+<p>The <a href="https://docs.rs/quote/0.6/quote/macro.quote.html"><code>quote!</code> macro</a> allows you to write mostly-Rust syntax and interpolate
+variables quickly from the environment with <code>#foo</code>. This removes much of the
+tedium of creating a <code>TokenStream</code> token-by-token and allows quickly cobbling
+together various pieces of syntax into one return value.</p>
+<h3><a href="#tokens-and-span" aria-hidden="true" class="anchor" id="tokens-and-span"></a>Tokens and <code>Span</code></h3>
+<p>Perhaps the greatest feature of procedural macros in Rust 2018 is the ability to
+customize and use <a href="https://doc.rust-lang.org/proc_macro/struct.Span.html"><code>Span</code></a> information on each token, giving us the ability for
+amazing syntactical error messages from procedural macros:</p>
+<pre><code>error: expected `fn`
+ --&gt; src/main.rs:3:14
+  |
+3 | my_annotate!(not_fn foo() {});
+  |              ^^^^^^
+</code></pre>
+<p>as well as completely custom error messages:</p>
+<pre><code>error: imported methods must have at least one argument
+  --&gt; invalid-imports.rs:12:5
+   |
+12 |     fn f1();
+   |     ^^^^^^^^
+</code></pre>
+<p>A <a href="https://doc.rust-lang.org/proc_macro/struct.Span.html"><code>Span</code></a> can be thought of as a pointer back into an original source file,
+typically saying something like &quot;the <code>Ident</code> token<code> foo</code> came from file
+<code>bar.rs</code>, line 4, column 5, and was 3 bytes long&quot;. This information is
+primarily used by the compiler's diagnostics with warnings and error messages.</p>
+<p>In Rust 2018 each <a href="https://doc.rust-lang.org/stable/proc_macro/enum.TokenTree.html"><code>TokenTree</code></a> has a <a href="https://doc.rust-lang.org/proc_macro/struct.Span.html"><code>Span</code></a> associated with it. This means that
+if you preserve the <a href="https://doc.rust-lang.org/proc_macro/struct.Span.html"><code>Span</code></a> of all input tokens into the output then even
+though you're producing brand new syntax the compiler's error messages are still
+accurate!</p>
+<p>For example, a small macro like:</p>
+<pre><code class="language-rust">#[proc_macro]
+pub fn make_pub(item: TokenStream) -&gt; TokenStream {
+    let result = quote! {
+        pub #item
+    };
+    result.into()
+}
+</code></pre>
+<p>when invoked as:</p>
+<pre><code class="language-rust">my_macro::make_pub! {
+    static X: u32 = &quot;foo&quot;;
+}
+</code></pre>
+<p>is invalid because we're returning a string from a function that should return a
+<code>u32</code>, and the compiler will helpfully diagnose the problem as:</p>
+<pre><code>error[E0308]: mismatched types
+ --&gt; src/main.rs:1:37
+  |
+1 | my_macro::make_pub!(static X: u32 = &quot;foo&quot;);
+  |                                     ^^^^^ expected u32, found reference
+  |
+  = note: expected type `u32`
+             found type `&amp;'static str`
+
+error: aborting due to previous error
+
+</code></pre>
+<p>And we can see here that although we're generating brand new syntax, the
+compiler can preserve span information to continue to provide targeted
+diagnostics about code that we've written.</p>
+<h3><a href="#procedural-macros-in-the-wild" aria-hidden="true" class="anchor" id="procedural-macros-in-the-wild"></a>Procedural Macros in the Wild</h3>
+<p>Ok up to this point we've got a pretty good idea about what procedural macros
+can do and the various capabilities they have in the 2018 edition. As such a
+long-awaited feature, the ecosystem is already making use of these new
+capabilities! If you're interested, some projects to keep your eyes on are:</p>
+<ul>
+<li>
+<p><a href="https://crates.io/crates/syn"><code>syn</code></a>, <a href="https://docs.rs/quote/0.6/quote/"><code>quote</code></a>, and <a href="https://docs.rs/proc-macro2/0.4/proc_macro2/"><code>proc-macro2</code></a> are your go-to libraries for
+writing procedural macros. They make it easy to define custom parsers, parse
+existing syntax, create new syntax, work with older versions of Rust, and much
+more!</p>
+</li>
+<li>
+<p><a href="https://serde.rs">Serde</a> and its derive macros for <code>Serialize</code> and <code>Deserialize</code> are likely the
+most used macros in the ecosystem. They sport an <a href="https://serde.rs/attributes.html">impressive amount of
+configuration</a> and are a great example of how small annotations
+can be so powerful.</p>
+</li>
+<li>
+<p>The <a href="https://github.com/rustwasm/wasm-bindgen"><code>wasm-bindgen</code> project</a> uses attribute macros to easily define
+interfaces in Rust and import interfaces from JS. The <code>#[wasm_bindgen]</code>
+lightweight annotation makes it easy to understand what's coming in and out,
+as well as removing lots of conversion boilerplate.</p>
+</li>
+<li>
+<p>The <a href="https://gitlab.gnome.org/federico/gnome-class"><code>gobject_gen!</code> macro</a> is an experimental IDL for the GNOME
+project to define GObject objects safely in Rust, eschewing manually writing
+all the glue necessary to talk to C and interface with other GObject
+instances in Rust.</p>
+</li>
+<li>
+<p>The <a href="https://rocket.rs/">Rocket framework</a> has recently switched over to procedural
+macros, and showcases some of nightly-only features of procedural macros like
+custom diagnostics, custom span creation, and more. Expect to see these
+features stabilize in 2019!</p>
+</li>
+</ul>
+<p>That's just a <em>taste</em> of the power of procedural macros and some example usage
+throughout the ecosystem today. We're only 6 weeks out from the original release
+of procedural macros on stable, so we've surely only scratched the surface as
+well! I'm really excited to see where we can take Rust with procedural macros by
+empowering all kinds of lightweight additions and extensions to the language!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

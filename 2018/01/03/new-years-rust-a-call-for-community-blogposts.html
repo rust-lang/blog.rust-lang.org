@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>New Year's Rust: A Call for Community Blogposts | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="New Year's Rust: A Call for Community Blogposts | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="New Year's Rust: A Call for Community Blogposts | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="New Year's Rust: A Call for Community Blogposts" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>New Year's Rust: A Call for Community Blogposts</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 3, 2018 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>'Tis the season for people and communities to reflect and set goals- and the Rust team is
+no different. Last month, we published <a href="https://blog.rust-lang.org/2017/12/21/rust-in-2017.html">a blogpost about our accomplishments in 2017</a>,
+and the teams have already begun brainstorming goals for next year.</p>
+<p>Last year, the Rust team started a new tradition: defining a roadmap of goals for the
+upcoming year. We leveraged our
+<a href="https://github.com/aturon/rfcs/blob/roadmap-2017/text/0000-roadmap-2017.md">RFC process</a>
+to solicit community feedback. While we got a lot of awesome feedback on that RFC, we'd
+like to try something new <strong>in addition to</strong> the RFC process: a call for community blog posts
+for ideas of what the goals should be.</p>
+<p>As open source software becomes more and more ubiquitous and popular, the Rust team is
+interested in exploring new and innovative ways to solicit community feedback and
+participation. We're commited to extending and improving our community organization and
+outreach- and this effort is just the first of what we hope to be many iterations of new kinds of
+community feedback mechanisms.</p>
+<h2><a href="#rust2018" aria-hidden="true" class="anchor" id="rust2018"></a>#Rust2018</h2>
+<p>Starting today and running until the end of January we'd like to ask the community to write
+blogposts reflecting on Rust in 2017 and proposing goals and directions for Rust in 2018.
+These can take many forms:</p>
+<ul>
+<li>A post on your personal or company blog</li>
+<li>A Medium post</li>
+<li>A GitHub gist</li>
+<li>Or any other online writing platform you prefer.</li>
+</ul>
+<p>We're looking for posts on many topics:</p>
+<ul>
+<li>Ideas for community programs</li>
+<li>Language features</li>
+<li>Documentation improvements</li>
+<li>Ecosystem needs</li>
+<li>Tooling enhancements</li>
+<li>Or anything else Rust related you hope for in 2018 :D</li>
+</ul>
+<p>A great example of what we're looking for is this post,
+<a href="https://mgattozzi.com/rust-wasm">&quot;Rust and the case for WebAssembly in 2018&quot;</a> by
+<a href="https://github.com/mgattozzi">@mgattozzi</a> or this post,
+<a href="https://medium.com/@Hisako1337/rust-in-2017-8f2b57a67d9b">&quot;Rust in 2017&quot;</a>
+by <a href="https://github.com/Anonyfox">Anonyfox</a>.</p>
+<p>You can write up these posts and email them to <a href="mailto:community@rust-lang.org">community@rust-lang.org</a>
+or tweet them with the hashtag <a href="https://twitter.com/search?q=%23Rust2018"><code>#Rust2018</code></a>. We'll aggregate any blog posts sent via email or with the hashtag in one
+big blog post here.</p>
+<p>The Core team will be reading all of the submitted posts and using them to inform the initial
+roadmap RFC for 2018. Once the RFC is submitted, we'll open up the normal RFC process, though
+if you want, you are welcome to write a post and link to it on the GitHub discussion.</p>
+<h2><a href="#preliminary-timeline" aria-hidden="true" class="anchor" id="preliminary-timeline"></a>Preliminary Timeline</h2>
+<p>We hope to get a draft roadmap RFC posted in mid January, so blog posts written before then
+would be the most useful. We expect discussion and final comment period of that RFC to last
+through at least the end of January, though, so blog posts until then will also be considered
+for ideas.</p>
+<p>Dates are likely to change, but this is a general overview of the upcoming process:</p>
+<ul>
+<li><strong>Jan 3</strong>: call for posts!</li>
+<li><strong>throughout Jan</strong>: read current posts, draft roadmap RFC</li>
+<li><strong>mid Jan</strong>: post roadmap RFC on GitHub</li>
+<li><strong>late Jan</strong>: evaluate roadmap based on RFC comments</li>
+<li><strong>late Jan - early Feb</strong>: final RFC comment period</li>
+<li><strong>Feb</strong>: assuming discussion has reached a steady state, and we've found consensus, accept final roadmap</li>
+</ul>
+<p>So, as we kick off 2018, if you find yourself in a reflective mood and your mind drifts to the future of Rust,
+please write up your thoughts and share them! We're excited to hear where <em>you</em> want Rust to go this coming year!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.41.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.41.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.41.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.41.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.41.0</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 30, 2020 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.41.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.41.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1410-2020-01-30">detailed release notes for
+1.41.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1410-stable" aria-hidden="true" class="anchor" id="whats-in-1410-stable"></a>What's in 1.41.0 stable</h2>
+<p>The highlights of Rust 1.41.0 include relaxed restrictions for trait
+implementations, improvements to <code>cargo install</code>, a more <code>git</code>-friendly
+<code>Cargo.lock</code>, and new FFI-related guarantees for <code>Box&lt;T&gt;</code>. See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1410-2020-01-30">detailed
+release notes</a> to learn about other changes not covered by this post.</p>
+<h3><a href="#relaxed-restrictions-when-implementing-traits" aria-hidden="true" class="anchor" id="relaxed-restrictions-when-implementing-traits"></a>Relaxed restrictions when implementing traits</h3>
+<p>To prevent breakages in the ecosystem when a dependency adds a new trait
+<code>impl</code>, Rust enforces the <a href="https://doc.rust-lang.org/book/ch10-02-traits.html#implementing-a-trait-on-a-type"><em>orphan rule</em></a>. The gist of it is that
+a trait <code>impl</code> is only allowed if either the trait or the type being
+implemented is <em>local</em> to (defined in) the current crate as opposed to a
+<em>foreign</em> crate. <a href="https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence">What this means exactly</a> is complicated, however,
+when generics are involved.</p>
+<p>Before Rust 1.41.0, the orphan rule was unnecessarily strict, getting in the
+way of composition. As an example, suppose your crate defines the
+<code>BetterVec&lt;T&gt;</code> struct, and you want a way to convert your struct to the
+standard library's <code>Vec&lt;T&gt;</code>. The code you would write is:</p>
+<pre><code class="language-rust">impl&lt;T&gt; From&lt;BetterVec&lt;T&gt;&gt; for Vec&lt;T&gt; {
+    // ...
+}
+</code></pre>
+<p>...which is an instance of the pattern:</p>
+<pre><code class="language-rust">impl&lt;T&gt; ForeignTrait&lt;LocalType&gt; for ForeignType&lt;T&gt; {
+    // ...
+}
+</code></pre>
+<p>In Rust 1.40.0 this <code>impl</code> was forbidden by the orphan rule, as both <code>From</code> and
+<code>Vec</code> are defined in the standard library, which is foreign to the current
+crate. There were ways to work around the limitation, such as <a href="https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types">the <em>newtype</em>
+pattern</a>, but they were often cumbersome or even impossible in
+some cases.</p>
+<p>While it's still true that both <code>From</code> and <code>Vec</code> were foreign, the trait (in
+this case <code>From</code>) was parameterized by a local type. Therefore, Rust 1.41.0
+allows this <code>impl</code>.</p>
+<p>For more details, read the <a href="https://github.com/rust-lang/rust/issues/63599">the stabilization report</a> and <a href="https://rust-lang.github.io/rfcs/2451-re-rebalancing-coherence.html">the
+RFC proposing the change</a>.</p>
+<h3><a href="#cargo-install-updates-packages-when-outdated" aria-hidden="true" class="anchor" id="cargo-install-updates-packages-when-outdated"></a><code>cargo install</code> updates packages when outdated</h3>
+<p>With <code>cargo install</code>, you can install binary crates in your system. The command
+is often used by the community to install popular CLI tools written in Rust.</p>
+<p>Starting from Rust 1.41.0, <code>cargo install</code> will also update existing
+installations of the crate if a new release came out since you installed it.
+Before this release the only option was to pass the <code>--force</code> flag, which
+reinstalls the binary crate even if it's up to date.</p>
+<h3><a href="#less-conflict-prone-cargolock-format" aria-hidden="true" class="anchor" id="less-conflict-prone-cargolock-format"></a>Less conflict-prone <code>Cargo.lock</code> format</h3>
+<p>To ensure consistent builds, Cargo uses a file named <code>Cargo.lock</code>, containing
+dependency versions and checksums. Unfortunately, the way the data was arranged
+in it caused unnecessary merge conflicts when changing dependencies in separate
+branches.</p>
+<p>Rust 1.41.0 introduces a new format for the file, explicitly designed to avoid
+those conflicts. This new format will be used for all new lockfiles, while
+existing lockfiles will still rely on the previous format. You can learn about
+the choices leading to the new format <a href="https://github.com/rust-lang/cargo/pull/7070">in the PR adding it</a>.</p>
+<h3><a href="#more-guarantees-when-using-boxt-in-ffi" aria-hidden="true" class="anchor" id="more-guarantees-when-using-boxt-in-ffi"></a>More guarantees when using <code>Box&lt;T&gt;</code> in FFI</h3>
+<p>Starting with Rust 1.41.0, we have declared that a <code>Box&lt;T&gt;</code>, where <code>T: Sized</code>
+is now ABI compatible with the C language's pointer (<code>T*</code>) types. So if you
+have an <code>extern &quot;C&quot;</code> Rust function, called from C, your Rust function can now
+use <code>Box&lt;T&gt;</code>, for some specific <code>T</code>, while using <code>T*</code> in C for the
+corresponding function. As an example, on the C side you may have:</p>
+<pre><code class="language-c">// C header
+
+// Returns ownership to the caller.
+struct Foo* foo_new(void);
+
+// Takes ownership from the caller; no-op when invoked with NULL.
+void foo_delete(struct Foo*);
+</code></pre>
+<p>...while on the Rust side, you would have:</p>
+<pre><code class="language-rust">#[repr(C)]
+pub struct Foo;
+
+#[no_mangle]
+pub extern &quot;C&quot; fn foo_new() -&gt; Box&lt;Foo&gt; {
+    Box::new(Foo)
+}
+
+// The possibility of NULL is represented with the `Option&lt;_&gt;`.
+#[no_mangle]
+pub extern &quot;C&quot; fn foo_delete(_: Option&lt;Box&lt;Foo&gt;&gt;) {}
+</code></pre>
+<p>Note however that while <code>Box&lt;T&gt;</code> and <code>T*</code> have the same representation and ABI,
+a <code>Box&lt;T&gt;</code> must still be non-null, aligned, and ready for deallocation by the
+global allocator. To ensure this, it is best to only use <code>Box</code>es originating
+from the global allocator.</p>
+<p><strong>Important:</strong> At least at present, you should avoid using <code>Box&lt;T&gt;</code> types for
+functions that are defined in C but invoked from Rust. In those cases, you
+should directly mirror the C types as closely as possible. Using types like
+<code>Box&lt;T&gt;</code> where the C definition is just using <code>T*</code> can lead to undefined
+behavior.</p>
+<p>To read more, <a href="https://doc.rust-lang.org/std/boxed/index.html">consult the documentation for <code>Box&lt;T&gt;</code></a>.</p>
+<h3><a href="#library-changes" aria-hidden="true" class="anchor" id="library-changes"></a>Library changes</h3>
+<p>In Rust 1.41.0, we've made the following additions to the standard library:</p>
+<ul>
+<li>
+<p>The <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map_or"><code>Result::map_or</code></a> and <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map_or_else"><code>Result::map_or_else</code></a> methods were stabilized.</p>
+<p>Similar to <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map_or"><code>Option::map_or</code></a> and <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map_or_else"><code>Option::map_or_else</code></a>, these methods are
+shorthands for the <code>.map(|val| process(val)).unwrap_or(default)</code> pattern.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust/pull/66277"><code>NonZero*</code> numerics now implement <code>From&lt;NonZero*&gt;</code> if it's a smaller integer
+width.</a> For example, <code>NonZeroU16</code> now implements <code>From&lt;NonZeroU8&gt;</code>.</p>
+</li>
+<li>
+<p>The <code>weak_count</code> and <code>strong_count</code> methods on <code>Weak</code> pointers were stabilized.</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/rc/struct.Weak.html#method.weak_count"><code>std::rc::Weak::weak_count</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/rc/struct.Weak.html#method.strong_count"><code>std::rc::Weak::strong_count</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/sync/struct.Weak.html#method.weak_count"><code>std::sync::Weak::weak_count</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/sync/struct.Weak.html#method.strong_count"><code>std::sync::Weak::strong_count</code></a></li>
+</ul>
+<p>These methods return the number of weak (<code>rc::Weak&lt;T&gt;</code> and <code>sync::Weak&lt;T&gt;</code>)
+or strong (<code>Rc&lt;T&gt;</code> and <code>Arc&lt;T&gt;</code>) pointers to the allocation respectively.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-lang/rust/pull/65013"><code>MaybeUninit&lt;T&gt;</code> now implements <code>fmt::Debug</code>.</a></p>
+</li>
+</ul>
+<h3><a href="#reducing-support-for-32-bit-apple-targets-soon" aria-hidden="true" class="anchor" id="reducing-support-for-32-bit-apple-targets-soon"></a>Reducing support for 32-bit Apple targets soon</h3>
+<p>Rust 1.41.0 is the last release with the current level of compiler support for
+32-bit Apple targets, including the <code>i686-apple-darwin</code> target. Starting from
+Rust 1.42.0, these targets will be demoted to the lowest support tier.</p>
+<p><a href="https://blog.rust-lang.org/2020/01/03/reducing-support-for-32-bit-apple-targets.html">You can learn more about this change in this blog post.</a></p>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.41.0 release: check out what changed in
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1410-2020-01-30">Rust</a>, <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-141-2020-01-30">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-141">Clippy</a>. We also
+have started landing MIR optimizations, which should improve compile time: you
+can learn more about them in the <a href="https://blog.rust-lang.org/inside-rust/2019/12/02/const-prop-on-by-default.html">&quot;Inside Rust&quot; blog post</a>.</p>
+<h2><a href="#contributors-to-1410" aria-hidden="true" class="anchor" id="contributors-to-1410"></a>Contributors to 1.41.0</h2>
+<p>Many people came together to create Rust 1.41.0. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.41.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

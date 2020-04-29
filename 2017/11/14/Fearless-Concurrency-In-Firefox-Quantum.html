@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Fearless Concurrency in Firefox Quantum | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Fearless Concurrency in Firefox Quantum | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Fearless Concurrency in Firefox Quantum | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Fearless Concurrency in Firefox Quantum" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Fearless Concurrency in Firefox Quantum</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 14, 2017 &middot; Manish Goregaokar
+    
+    </div>
+
+    <div class="post">
+      <p>These days, Rust is used for <a href="https://www.rust-lang.org/friends.html">all kinds of things</a>. But its founding application was
+<a href="https://servo.org/">Servo</a>, an experimental browser engine.</p>
+<p>Now, after years of effort, a major part of Servo is shipping in production: Mozilla is releasing <a href="https://www.mozilla.org/en-US/firefox/quantum/">Firefox Quantum</a>!</p>
+<p>Rust code <a href="https://hacks.mozilla.org/2016/07/shipping-rust-in-firefox/">began shipping in Firefox</a> last year, starting with relatively small
+pilot projects like an MP4 metadata parser to replace some uses of libstagefright. These components
+performed well and caused effectively no crashes, but browser development had yet to see large
+benefits from the full power Rust could offer. This changes today.</p>
+<h1><a href="#stylo-a-parallel-css-engine" aria-hidden="true" class="anchor" id="stylo-a-parallel-css-engine"></a>Stylo: a parallel CSS engine</h1>
+<p>Firefox Quantum includes Stylo, a pure-Rust CSS engine that makes full use of Rust’s
+“<a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Fearless Concurrency</a>” to speed up page styling. It’s the first major component of Servo to be
+integrated with Firefox, and is a major milestone for Servo, Firefox, and Rust. It replaces
+approximately 160,000 lines of C++ with 85,000 lines of Rust.</p>
+<p>When a browser is loading a web page, it looks at the CSS and parses the rules. It then determines
+which rules apply to which elements and their precedence, and “cascades” these down the DOM tree,
+computing the final style for each element. Styling is a top-down process: you need to know the
+style of a parent to calculate the styles of its children, but the styles of its children can be
+calculated independently thereafter.</p>
+<p>This top-down structure is ripe for parallelism; however, since styling is a complex process, it’s
+hard to get right. Mozilla made two previous attempts to parallelize its style system in C++, and
+both of them failed. But Rust’s fearless concurrency has made parallelism practical! We use <a href="https://crates.io/crates/rayon">rayon</a>
+—one of the hundreds of <a href="http://crates.io/">crates</a> Servo uses from Rust’s ecosystem — to drive a work-stealing cascade
+algorithm. You can read more about that in <a href="https://hacks.mozilla.org/2017/08/inside-a-super-fast-css-engine-quantum-css-aka-stylo/">Lin Clark’s post</a>. Parallelism leads to a lot
+of performance improvements, including a 30% page load speedup for Amazon’s homepage.</p>
+<h1><a href="#fearless-concurrency" aria-hidden="true" class="anchor" id="fearless-concurrency"></a>Fearless concurrency</h1>
+<p>An example of Rust preventing thread safety bugs is how style information is shared in Stylo.
+Computed styles are grouped into “style structs” of related properties, e.g. there’s one for all the
+font properties, one for all the background properties, and so on. Now, most of these are shared;
+for example, the font of a child element is usually the same as its parent, and often sibling
+elements share styles even if they don’t have the same style as the parent. Stylo uses Rust’s
+atomically reference counted <a href="https://doc.rust-lang.org/std/sync/struct.Arc.html"><code>Arc&lt;T&gt;</code></a> to share style structs between elements.  <code>Arc&lt;T&gt;</code>
+makes its contents immutable, so it’s thread safe — you can’t accidentally modify a style struct
+when there’s a chance it is being used by other elements.</p>
+<p>We supplement this immutable access with <code>Arc::make_mut()</code>;  for example, <a href="https://github.com/servo/servo/blob/657b2339a1e68f3a9c4525f35db023d3f149ffac/components/style/values/computed/font.rs#L182">this line</a>
+calls <code>.mutate_font()</code> (a thin wrapper around <code>Arc::make_mut()</code> for the font style struct) to set
+the font size. If the given element is the only element that has a reference to this specific font
+struct, it will just mutate it in place. But if it is not, <code>make_mut()</code> will copy the entire style
+struct into a new, unique reference, which will then be mutated in place and eventually stored on
+the element.</p>
+<pre><code class="language-rust">context.builder.mutate_font().set_font_size(computed);
+</code></pre>
+<p>On the other hand, Rust guarantees that it is impossible to mutate the style of the <em>parent</em>
+element, because it is <a href="https://github.com/servo/servo/blob/657b2339a1e68f3a9c4525f35db023d3f149ffac/components/style/properties/properties.mako.rs#L2623-L2627">kept behind an immutable reference</a>. Rayon’s scoped
+threading functionality makes sure that there is no way for that struct to even obtain/store a
+mutable reference if it wanted to. The parent style is something which one thread was allowed to
+write to to create (when the parent element was being processed), after which everyone is only
+allowed to read from it. You’ll notice that the reference is a zero-overhead “borrowed pointer”,
+<em>not</em> a reference counted pointer, because Rust and Rayon let you share data across threads without
+needing reference counting when they can guarantee that the data will be alive at least as long as
+the thread.</p>
+<p>Personally, my “aha, I now fully understand the power of Rust” moment was when thread safety issues
+cropped up on the C++ side. Browsers are complex beings, and despite Stylo being Rust code, it needs
+to call back into Firefox’s C++ code a lot. Firefox has a single “main thread” per process, and
+while it does use other threads they are relatively limited in what they do. Stylo, being quite
+parallel, occasionally calls into C++ code off the main thread. That was usually fine, but would
+regularly surface thread safety bugs in the C++ code when there was a cache or global mutable state
+involved, things which basically never were a problem on the Rust side.</p>
+<p>These bugs were not easy to notice, and were often very tricky to debug. And that was with only the
+<em>occasional</em> call into C++ code off the main thread; It feels like if we had tried this project in
+pure C++ we’d be dealing with this far too much to be able to get anything useful done. And indeed,
+bugs like these have thwarted multiple attempts to parallelize styling in the past, both in Firefox
+and other browsers.</p>
+<h1><a href="#rusts-productivity" aria-hidden="true" class="anchor" id="rusts-productivity"></a>Rust’s productivity</h1>
+<p>Firefox developers had a great time learning and using Rust. People really enjoyed being able to
+aggressively write code without having to worry about safety, and many mentioned that Rust’s
+ownership model was close to how they implicitly reason about memory within Firefox’s large C++
+codebase. It was refreshing to have fuzzers catch mostly explicit <em>panics</em> in Rust code, which are
+much easier to debug and fix than segfaults and other memory safety issues on the C++ side.</p>
+<p>A conversation amongst Firefox developers that stuck with me — one that was included in Josh
+Matthews’ <a href="https://www.joshmatthews.net/rbr17">talk</a> at Rust Belt Rust — was</p>
+<blockquote>
+<p>&lt;heycam&gt; one of the best parts about stylo has been how much easier it has been to implement these style system optimizations that we need, because Rust</p>
+<p>&lt;heycam&gt; can you imagine if we needed to implement this all in C++ in the timeframe we have</p>
+<p>&lt;heycam&gt; yeah srsly</p>
+<p>&lt;bholley&gt; heycam: it's so rare that we get fuzz bugs in rust code</p>
+<p>&lt;bholley&gt; heycam: considering all the complex stuff we're doing</p>
+<p>*heycam remembers getting a bunch of fuzzer bugs from all kinds of style system stuff in gecko</p>
+<p>&lt;bholley&gt; heycam: think about how much time we could save if each one of those annoying compiler errors today was swapped for a fuzz bug tomorrow :-)</p>
+<p>&lt;heycam&gt; heh</p>
+<p>&lt;njn&gt; you guys sound like an ad for Rust</p>
+</blockquote>
+<h1><a href="#wrapping-up" aria-hidden="true" class="anchor" id="wrapping-up"></a>Wrapping up</h1>
+<p>Overall, Firefox Quantum benefits significantly from Stylo, and thus from Rust. Not only does it
+speed up page load, but it also speeds up interaction times since styling information can be
+recalculated much faster, making the entire experience smoother.</p>
+<p>But Stylo is only the beginning. There are two major Rust integrations  getting close to the end of
+the pipeline. One is integrating <a href="https://github.com/servo/webrender/">Webrender</a> into Firefox; Webrender
+<a href="https://hacks.mozilla.org/2017/10/the-whole-web-at-maximum-fps-how-webrender-gets-rid-of-jank/">heavily uses the GPU to speed up rendering</a>. Another is <a href="https://github.com/pcwalton/pathfinder">Pathfinder</a>,
+a project that offloads font rendering to the GPU.
+And beyond those, there remains Servo’s parallel layout and DOM work, which are continuing to grow
+and improve. Firefox has a very bright future ahead.</p>
+<p>As a Rust team member, I’m really happy to see Rust being successfully used in production to such
+great effect! As a Servo and Stylo developer, I’m grateful to the tools Rust gave us to be able to
+pull this off, and I’m happy to see a large component of Servo finally make its way to users!</p>
+<p>Experience the benefits of Rust yourself — try out <a href="https://www.mozilla.org/en-US/firefox/quantum/">Firefox Quantum</a>!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

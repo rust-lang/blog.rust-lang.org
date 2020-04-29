@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.22 (and 1.22.1) | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.22 (and 1.22.1) | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.22 (and 1.22.1) | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.22 (and 1.22.1)" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.22 (and 1.22.1)</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 22, 2017 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce <em>two</em> new versions of Rust, 1.22.0 and
+1.22.1. Rust is a systems programming language focused on safety, speed, and
+concurrency.</p>
+<blockquote>
+<p>Wait, two versions? At the last moment, we <a href="https://github.com/rust-lang/rust/pull/46183">discovered a late-breaking
+issue with the new macOS High
+Sierra</a> in 1.22.0, and for
+various reasons, decided to release 1.22.0 as usual, but also put out a
+1.22.1 with the patch. The bug is actually in Cargo, not <code>rustc</code>, and only
+affects users on macOS High Sierra.</p>
+</blockquote>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.22.1 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1220-2017-11-22">detailed release notes for
+1.22.0</a> and 1.22.1 on GitHub.</p>
+<h2><a href="#whats-in-1220-and-1221-stable" aria-hidden="true" class="anchor" id="whats-in-1220-and-1221-stable"></a>What's in 1.22.0 and 1.22.1 stable</h2>
+<p>The headline feature for this release is one many have been anticipating for
+a long time: you can now <a href="https://github.com/rust-lang/rust/pull/42526">use <code>?</code> with <code>Option&lt;T&gt;</code></a>! About a year ago, in
+<a href="https://blog.rust-lang.org/2016/11/10/Rust-1.13.html">Rust 1.13</a>, we introduced the <code>?</code> operator for working with <code>Result&lt;T, E&gt;</code>.
+Ever since then, there's been discussion about how far <code>?</code> should go: should
+it stay only for results? Should it be user-extensible? Should it be
+usable with <code>Option&lt;T&gt;</code>?</p>
+<p>In Rust 1.22, basic usage of <code>?</code> with <code>Option&lt;T&gt;</code> is now stable.
+This code will now compile:</p>
+<pre><code class="language-rust">fn add_one_to_first(list: &amp;[u8]) -&gt; Option&lt;u8&gt; {
+    // get first element, if exists
+    // return None if it doesn't
+    let first = list.get(0)?;
+    Some(first + 1)
+}
+
+assert_eq!(add_one_to_first(&amp;[10, 20, 30]), Some(11));
+assert_eq!(add_one_to_first(&amp;[]), None);
+</code></pre>
+<p>However, this functionality is still a bit limited; you cannot yet write
+code that mixes results and options with <code>?</code> in the same function, for
+example. This will be possible in the future, and already is in nightly
+Rust; expect to hear more about this in a future release.</p>
+<p>Types that implement <code>Drop</code> are <a href="https://github.com/rust-lang/rust/pull/44456">now allowed in <code>const</code> and <code>static</code>
+items</a>. Like this:</p>
+<pre><code class="language-rust">struct Foo {
+    a: u32,
+}
+
+impl Drop for Foo {
+    fn drop(&amp;mut self) {}
+}
+
+const F: Foo = Foo { a: 0 };
+static S: Foo = Foo { a: 0 };
+</code></pre>
+<p>This change doesn't bring much on its own, but as we improve our
+ability to compute things at compile-time, more and more will be
+possible in <code>const</code> and <code>static</code>.</p>
+<p>Additionally, some small quality-of-life improvements:</p>
+<p><a href="https://github.com/rust-lang/rust/pull/45075">Two</a> recent <a href="https://github.com/rust-lang/rust/pull/45064">compiler changes</a> should speed up compiles in debug mode. We
+don't have any specific numbers to commit to with these changes, but as
+always, compile times are very important to us, and we're continuing to
+work on improving them.</p>
+<p><a href="https://github.com/rust-lang/rust/pull/44287"><code>T op= &amp;T</code> now works for primitive types</a>, which is a fancy way of saying:</p>
+<pre><code class="language-rust">let mut x = 2;
+let y = &amp;8;
+
+// this didn't work, but now does
+x += y;
+</code></pre>
+<p>Previously, you'd have needed to write <code>x += *y</code> in order to de-reference, so
+this solves a small papercut.</p>
+<p><a href="https://github.com/rust-lang/rust/pull/44251">Backtraces are improved on MacOS</a>.</p>
+<p>You can now <a href="https://github.com/rust-lang/rust/pull/43949">create <code>compile-fail</code> tests in Rustdoc</a>, like this:</p>
+<pre><code>/// ```compile_fail
+/// let x = 5;
+/// x += 2; // shouldn't compile!
+/// ```
+</code></pre>
+<p>Please note that these kinds of tests can be more fragile than others, as
+additions to Rust may cause code to compile when it previously would not.
+Consider the first announcement with <code>?</code>, for example: that code would fail
+to compile on Rust 1.21, but compile successfully on Rust 1.22, causing your
+test suite to start failing.</p>
+<p>Finally, we <a href="https://github.com/rust-lang/rust/pull/45041">removed support for the <code>le32-unknown-nacl</code>
+target</a>. Google itself <a href="https://blog.chromium.org/2017/05/goodbye-pnacl-hello-webassembly.html">has
+deprecated
+PNaCl</a>,
+instead throwing its support behind <a href="http://webassembly.org/">WebAssembly</a>.
+You can already compile Rust code to WebAssembly today, and you can expect
+to hear more developments regarding this in future releases.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1220-2017-11-22">detailed release notes</a> for more.</p>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
+<p>A few new APIs were stabilized this release:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/44466"><code>Box&lt;Error&gt;</code> now impls <code>From&lt;Cow&lt;str&gt;&gt;</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/45095"><code>std::mem::Discriminant</code> is now guaranteed to be <code>Send + Sync</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/44895"><code>fs::copy</code> now returns the length of the main stream on NTFS.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/44220">Properly detect overflow in <code>Instant += Duration</code>.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/44015">impl <code>Hasher</code> for <code>{&amp;mut Hasher, Box&lt;Hasher&gt;}</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/44303">impl <code>fmt::Debug</code> for <code>SplitWhitespace</code>.</a></li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1220-2017-11-22">detailed release notes</a> for more.</p>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
+<p>If you have a big example to show your users, Cargo has grown
+the ability to <a href="https://github.com/rust-lang/cargo/pull/4496">build multi-file
+examples</a> by
+creating a subdirectory inside <code>examples</code> that contains a
+<code>main.rs</code>.</p>
+<p>Cargo now has the ability to <a href="https://github.com/rust-lang/cargo/pull/3992">vendor git repositories</a>.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1220-2017-11-22">detailed release notes</a> for more.</p>
+<h2><a href="#contributors-to-1220-and-1221" aria-hidden="true" class="anchor" id="contributors-to-1220-and-1221"></a>Contributors to 1.22.0 and 1.22.1</h2>
+<p>Many people came together to create Rust 1.22. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.22.0">Thanks!</a> (and
+<a href="https://thanks.rust-lang.org/rust/1.22.1">Thanks again!</a>)</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>docs.rs outage postmortem | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="docs.rs outage postmortem | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="docs.rs outage postmortem | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="docs.rs outage postmortem" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>docs.rs outage postmortem</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 24, 2019 &middot; Pietro Albini
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/operations#infra">the infrastructure team</a> 
+    </div>
+
+    <div class="post">
+      <p>At 2019-10-21 01:38 UTC the docs.rs website went down because no available disk
+space was left on the server hosting the application. Crate builds were failing
+since 2019-10-20 00:55 UTC due to the same reason.</p>
+<h2><a href="#root-cause-of-the-outage" aria-hidden="true" class="anchor" id="root-cause-of-the-outage"></a>Root cause of the outage</h2>
+<p>docs.rs needs to store the built documentation on the filesystem before
+uploading it to the database, and it does so in the
+<code>/opt/docs-rs-prefix/documentations</code> directory. docs.rs never cleared that
+directory though, so over time it started to increase its size until it caused
+this outage. Code to periodically purge temporary directories was present, but
+it was never configured to purge the one which caused the outage.</p>
+<h2><a href="#resolution" aria-hidden="true" class="anchor" id="resolution"></a>Resolution</h2>
+<p>As the directory doesn’t contain any persistent data we cleared it and the web
+server was restarted. Once we were confident the situation was resolved all the
+crates that failed due to the outage were queued for a rebuild.</p>
+<h2><a href="#postmortem" aria-hidden="true" class="anchor" id="postmortem"></a>Postmortem</h2>
+<p>The increased disk usage was gradual over weeks, slowly reaching 100% and
+causing the outage. While monitoring systems were in place and recorded graphs
+of the increase, no alert was configured so nobody noticed the problem. We need
+to add alerts when disk usage reaches 90%, so the problem can be investigated
+and dealt with on time.</p>
+<p>Crates started to fail to build a day earlier, and close to no builds were
+successfully completed since then. We need to setup alerts when most of the
+builds are failing: as we don’t have the necessary metrics at the moment to
+reliably alert we'll have to add extra instrumentation as well.</p>
+<p>Our response was slower due to issues with our on-call rotation for the
+service. The primary contacts don’t have the level of access required to
+increase the disk space of the instance (the temporary fix that was
+investigated at first but discarded after the discovery nobody awake could do
+it), and the backup contacts don’t have any production access or expertise on
+docs.rs.</p>
+<h2><a href="#timeline-of-events" aria-hidden="true" class="anchor" id="timeline-of-events"></a>Timeline of events</h2>
+<p>Unless otherwise noted all events happened on 2019-10-21, and all times are in
+UTC.</p>
+<ul>
+<li><strong>2019-10-20 00:55: crate builds started failing due to the low disk space</strong></li>
+<li><strong>01:38: alerts fired for the docs.rs website being down, <a href="https://github.com/ashleygwilliams">ashleygwilliams</a>
+(backup contact) got paged</strong></li>
+<li>01:39: <a href="https://github.com/QuietMisdreavus">QuietMisdreavus</a> joins into the operations channel</li>
+<li>01:39: <a href="https://github.com/QuietMisdreavus">QuietMisdreavus</a> found the reason for the outage (full root partition)</li>
+<li>01:52: <a href="https://github.com/ashleygwilliams">ashleygwilliams</a> proposed to increase disk space, nobody with
+permissions required to so was awake or available though</li>
+<li>01:56: <a href="https://github.com/ashleygwilliams">ashleygwilliams</a> contacts <a href="https://github.com/Mark-Simulacrum">Mark-Simulacrum</a>, who has the access
+required to increase disk space</li>
+<li>01:57: <a href="https://github.com/QuietMisdreavus">QuietMisdreavus</a> found the directory taking up all the disk space</li>
+<li>02:00: <a href="https://github.com/QuietMisdreavus">QuietMisdreavus</a> removed the directory taking up all the disk space</li>
+<li>02:03: <a href="https://github.com/QuietMisdreavus">QuietMisdreavus</a> restarted the web server</li>
+<li><strong>02:06: CDN propagated the changes, docs.rs back online</strong></li>
+<li>02:06: <a href="https://github.com/Mark-Simulacrum">Mark-Simulacrum</a> joins into the operations channel</li>
+<li>08:19: <a href="https://github.com/pietroalbini">pietroalbini</a> added builds failed during the outage back into the
+queue</li>
+<li><strong>19:27: builds of the crates failed during the outage finished</strong></li>
+</ul>
+<h2><a href="#action-items" aria-hidden="true" class="anchor" id="action-items"></a>Action items</h2>
+<ul>
+<li>Update the docs.rs source code to cleanup the offending directory
+automatically.</li>
+<li>Add alerts when the available disk space on a server is below 10%.</li>
+<li>Add alerts when most of the builds are failing.</li>
+<li>Revisit the on-call rotation to make sure everyone on it has the
+permissions to either react to the incidents or escalate.</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

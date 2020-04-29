@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.2 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.2 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.2 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.2" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.2</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 6, 2015 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>Today marks the <a href="http://www.rust-lang.org/install.html">completion</a> of the Rust 1.2 stable and 1.3 beta
+release cycles! Read on for the highlight, or check the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-120-august-2015">release notes</a>
+for more detail.</p>
+<h3><a href="#whats-in-12-stable" aria-hidden="true" class="anchor" id="whats-in-12-stable"></a>What's in 1.2 stable</h3>
+<p>As we
+<a href="http://blog.rust-lang.org/2015/06/25/Rust-1.1.html">previously announced</a>, Rust
+1.2 comes with two major performance improvements for the compiler:</p>
+<ul>
+<li>
+<p><strong>An across-the-board improvement</strong> to real-world compiler
+performance. Representative crates include <a href="https://crates.io/crates/hyper">hyper</a> (compiles 1.16x
+faster), <a href="https://crates.io/crates/html5ever">html5ever</a> (1.62x faster), <a href="https://crates.io/crates/regex">regex</a> (1.32x faster)
+and <a href="https://crates.io/crates/encoding">rust-encoding</a> (1.35x faster). You can explore some of this
+performance data at Nick Cameron's
+<a href="http://www.ncameron.org/perf-rustc/">preliminary tracking site</a>, using dates
+2015-05-15 to 2015-06-25.</p>
+</li>
+<li>
+<p><strong>Parallel codegen</strong> is
+<a href="https://github.com/rust-lang/rust/pull/26018">now working</a>, and produces a
+33% speedup when bootstrapping on a 4 core machine. Parallel codegen is
+particularly useful for debug builds, since it prevents some optimizations;
+but it can also be used with optimizations as an effective <code>-O1</code> flag. It can
+be activated by passing <code>-C codegen-units=N</code> to <code>rustc</code>, where <code>N</code> is the
+desired number of threads.</p>
+</li>
+</ul>
+<p>Cargo's performance has also improved dramatically:</p>
+<ul>
+<li>
+<p>Builds that do not require any recompilation (&quot;no-op builds&quot;) for large
+projects are much faster: for Servo, build time went from 5 seconds to 0.5
+seconds.</p>
+</li>
+<li>
+<p>Cargo now supports shared target directories that cache dependencies across
+multiple packages, which results in significant build-time reduction for
+complex projects.</p>
+</li>
+</ul>
+<p>The 1.2 release also
+<a href="https://github.com/rust-lang/rust/pull/25350">introduces support</a> for the MSVC
+(Microsoft Visual C) toolchain, as opposed to GNU variants. The upshot is that
+Rust code is now directly linkable against code built using the native Windows
+toolchain. The compiler bootstraps on MSVC, we have preliminary nightlies, and
+we are testing all rust-lang crates against MSVC. Unwinding support is not yet
+available (the process aborts on panic), but work is underway to land it.</p>
+<p>On the language side, Rust 1.2 marks the completion of the
+<a href="http://smallcultfollowing.com/babysteps/blog/2014/01/05/dst-take-5/">dynamically-sized type (DST)</a>
+work, allowing smart pointers like <code>Rc</code> to seamless apply to arrays and trait
+objects, so that <code>Rc&lt;[T]&gt;</code> is fully usable. This final enhancement applies to
+all smart pointers in the standard library. Support for external smart pointer
+types is available in nightlies, and will be stabilized soon.</p>
+<h3><a href="#whats-in-13-beta" aria-hidden="true" class="anchor" id="whats-in-13-beta"></a>What's in 1.3 beta</h3>
+<p>One of the most exciting developments during the 1.3 cycle was the introduction
+of the <a href="https://doc.rust-lang.org/nightly/nomicon/">Rustonomicon</a>, a new book
+covering &quot;The Dark Arts of Advanced and Unsafe Rust Programming&quot;. While it's
+still in its early days, this book already provides indispensable coverage of
+some of Rust's more subtle aspects.</p>
+<p>The 1.3 cycle also saw additional focus on performance, though most wins here
+are within the standard library:</p>
+<ul>
+<li>The substring matcher now uses a
+<a href="https://github.com/rust-lang/rust/pull/26327">more efficient algorithm</a>.</li>
+<li>There were
+<a href="https://github.com/rust-lang/rust/pull/26849">improvements to zero filling</a>
+that speed up <code>Vec::resize</code> and <code>Read::read_to_end</code>.</li>
+<li>The implementation of <code>Read::read_to_end</code> has been
+<a href="https://github.com/rust-lang/rust/pull/26950">specialized for <code>stdin</code> and <code>File</code></a>,
+resulting in additional speedups.</li>
+<li>The <code>PartialEq</code> implementation on slices is now
+<a href="https://github.com/rust-lang/rust/pull/26884">much faster</a>.</li>
+</ul>
+<p>We have also made strides in our Windows support, landing
+<a href="https://github.com/rust-lang/rust/pull/26601">preliminary support for targeting Windows XP</a>. While
+we do not intend to treat Windows XP as a &quot;first tier&quot; platform, it is now
+feasible to build Rust code for XP as long as you avoid certain parts of the
+standard library.</p>
+<p>On the Cargo front, we have landed support for
+<a href="https://github.com/rust-lang/rust/pull/27260">lint capping</a> as specified by an
+<a href="https://github.com/rust-lang/rfcs/pull/1193">earlier RFC</a>. The idea is that
+lints in your dependencies should not affect your ability to compile cleanly,
+which in turn makes it easier to tweak the way lints work without undue hassle
+in the ecosystem.</p>
+<h3><a href="#contributors-to-12" aria-hidden="true" class="anchor" id="contributors-to-12"></a>Contributors to 1.2</h3>
+<p>The 1.2 stable release represents the hard work of 180 fine folks:</p>
+<ul>
+<li>Aaron Turon</li>
+<li>Abhishek Chanda</li>
+<li>Adolfo Ochagavía</li>
+<li>Aidan Hobson Sayers</li>
+<li>Akshay Chiwhane</li>
+<li>Alex Burka</li>
+<li>Alex Crichton</li>
+<li>Alex Stokes</li>
+<li>Alexander Artemenko</li>
+<li>Alexis Beingessner</li>
+<li>Andrea Canciani</li>
+<li>Andrew Foote</li>
+<li>Andrew Kensler</li>
+<li>Andrew Straw</li>
+<li>Ariel Ben-Yehuda</li>
+<li>Austin Hellyer</li>
+<li>Barosl Lee</li>
+<li>Ben Striegel</li>
+<li>Björn Steinbrink</li>
+<li>Brian Anderson</li>
+<li>Brian Campbell</li>
+<li>Brian Leibig</li>
+<li>Brian Quinlan</li>
+<li>Carol (Nichols || Goulding)</li>
+<li>Chris Hellmuth</li>
+<li>Christian Stadelmann</li>
+<li>Chuck Bassett</li>
+<li>Corey Farwell</li>
+<li>Cornel Punga</li>
+<li>Cruz Julian Bishop</li>
+<li>Dave Huseby</li>
+<li>David Campbell</li>
+<li>David Stygstra</li>
+<li>David Voit</li>
+<li>Eduard Bopp</li>
+<li>Eduard Burtescu</li>
+<li>Eli Friedman</li>
+<li>Emilio Cobos Álvarez</li>
+<li>Emily Dunham</li>
+<li>Eric Ye</li>
+<li>Erik Michaels-Ober</li>
+<li>Falco Hirschenberger</li>
+<li>Felix S. Klock II</li>
+<li>FuGangqiang</li>
+<li>Geoffrey Thomas</li>
+<li>Gleb Kozyrev</li>
+<li>Guillaume Gomez</li>
+<li>Gulshan Singh</li>
+<li>Heejong Ahn</li>
+<li>Huachao Huang</li>
+<li>Huon Wilson</li>
+<li>Ivan Ukhov</li>
+<li>Iven Hsu</li>
+<li>Jake Goulding</li>
+<li>Jake Hickey</li>
+<li>James Miller</li>
+<li>Jared Roesch</li>
+<li>Jeremy Schlatter</li>
+<li>Jexell</li>
+<li>Jim Blandy</li>
+<li>Johann Tuffe</li>
+<li>Johannes Hoff</li>
+<li>Johannes Oertel</li>
+<li>John Hodge</li>
+<li>Jonathan Reem</li>
+<li>Joshua Landau</li>
+<li>Kevin Ballard</li>
+<li>Kubilay Kocak</li>
+<li>Lee Jeffery</li>
+<li>Leo Correa</li>
+<li>Liigo Zhuang</li>
+<li>Lorenz</li>
+<li>Luca Bruno</li>
+<li>Luqman Aden</li>
+<li>Manish Goregaokar</li>
+<li>Marcel Müller</li>
+<li>Marcus Klaas</li>
+<li>Marin Atanasov Nikolov</li>
+<li>Markus Westerlind</li>
+<li>Martin Pool</li>
+<li>Marvin Löbel</li>
+<li>Matej Lach</li>
+<li>Mathieu David</li>
+<li>Matt Brubeck</li>
+<li>Matthew Astley</li>
+<li>Max Jacobson</li>
+<li>Maximilian Haack</li>
+<li>Michael Layzell</li>
+<li>Michael Macias</li>
+<li>Michael Rosenberg</li>
+<li>Michael Sproul</li>
+<li>Michael Woerister</li>
+<li>Mihnea Dobrescu-Balaur</li>
+<li>Mikhail Zabaluev</li>
+<li>Mohammed Attia</li>
+<li>Ms2ger</li>
+<li>Murarth</li>
+<li>Mário Feroldi</li>
+<li>Nathan Long</li>
+<li>Nathaniel Theis</li>
+<li>Nick Cameron</li>
+<li>Nick Desaulniers</li>
+<li>Nick Fitzgerald</li>
+<li>Nick Hamann</li>
+<li>Nick Howell</li>
+<li>Niko Matsakis</li>
+<li>Nils Liberg</li>
+<li>OlegTsyba</li>
+<li>Oliver 'ker' Schneider</li>
+<li>Oliver Schneider</li>
+<li>P1start</li>
+<li>Parker Moore</li>
+<li>Pascal Hertleif</li>
+<li>Paul Faria</li>
+<li>Paul Oliver</li>
+<li>Peer Aramillo Irizar</li>
+<li>Peter Atashian</li>
+<li>Peter Elmers</li>
+<li>Philip Munksgaard</li>
+<li>Ralph Giles</li>
+<li>Rein Henrichs</li>
+<li>Ricardo Martins</li>
+<li>Richo Healey</li>
+<li>Ricky Taylor</li>
+<li>Russell Johnston</li>
+<li>Russell McClellan</li>
+<li>Ryan Pendleton</li>
+<li>Ryman</li>
+<li>Rémi Audebert</li>
+<li>Sae-bom Kim</li>
+<li>Sean Collins</li>
+<li>Sean Gillespie</li>
+<li>Sean Patrick Santos</li>
+<li>Seo Sanghyeon</li>
+<li>Simon Sapin</li>
+<li>Simonas Kazlauskas</li>
+<li>Steve Gury</li>
+<li>Steve Klabnik</li>
+<li>Steven Allen</li>
+<li>Steven Fackler</li>
+<li>Steven Walter</li>
+<li>Sébastien Marie</li>
+<li>Tamir Duberstein</li>
+<li>Thomas Karpiniec</li>
+<li>Tim Ringenbach</li>
+<li>Tshepang Lekhonkhobe</li>
+<li>Ulrik Sverdrup</li>
+<li>Vadim Petrochenkov</li>
+<li>Wei-Ming Yang</li>
+<li>Wesley Wiser</li>
+<li>Wilfred Hughes</li>
+<li>Will Andrews</li>
+<li>Will Engler</li>
+<li>Xuefeng Wu</li>
+<li>XuefengWu</li>
+<li>Yongqian Li</li>
+<li>York Xiang</li>
+<li>Z1</li>
+<li>ben fleis</li>
+<li>benaryorg</li>
+<li>bluss</li>
+<li>bors</li>
+<li>clatour</li>
+<li>diwic</li>
+<li>dmgawel</li>
+<li>econoplas</li>
+<li>frankamp</li>
+<li>funkill</li>
+<li>inrustwetrust</li>
+<li>joliv</li>
+<li>klutzy</li>
+<li>marcell</li>
+<li>mdinger</li>
+<li>olombard</li>
+<li>peferron</li>
+<li>ray glover</li>
+<li>saml</li>
+<li>simplex</li>
+<li>sumito3478</li>
+<li>webmobster</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

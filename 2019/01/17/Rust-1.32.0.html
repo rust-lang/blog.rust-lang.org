@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.32.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.32.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.32.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.32.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.32.0</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 17, 2019 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.32.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.32.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1320-2019-01-17">detailed release notes for
+1.32.0</a> on GitHub.</p>
+<blockquote>
+<p>As a small side note, <code>rustup</code> has seen some new releases lately! To update
+<code>rustup</code> itself, run <code>rustup self update</code>.</p>
+</blockquote>
+<h2><a href="#whats-in-1320-stable" aria-hidden="true" class="anchor" id="whats-in-1320-stable"></a>What's in 1.32.0 stable</h2>
+<p>Rust 1.32.0 has a few quality of life improvements, switches the default
+allocator, and makes additional functions <code>const</code>. Read on for a few
+highlights, or see the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1320-2019-01-17">detailed release notes</a> for additional
+information.</p>
+<h4><a href="#the-dbg-macro" aria-hidden="true" class="anchor" id="the-dbg-macro"></a>The <code>dbg</code> macro</h4>
+<p>First up, a quality of life improvement. Are you a &quot;print debugger&quot;? If you are, and
+you've wanted to print out some value while working on some code, you have to do this:</p>
+<pre><code class="language-rust">let x = 5;
+
+println!(&quot;{:?}&quot;, x);
+
+// or maybe even this
+println!(&quot;{:#?}&quot;, x);
+</code></pre>
+<p>This isn't the <em>largest</em> speed bump, but it is a lot of stuff to simply show the value of <code>x</code>.
+Additionally, there's no context here. If you have several of these <code>println!</code>s, it can be hard
+to tell which is which, unless you add your own context to each invocation, requiring even more work.</p>
+<p>In Rust 1.32.0, <a href="https://github.com/rust-lang/rust/pull/56395/">we've added a new macro,
+<code>dbg!</code></a>, for this purpose:</p>
+<pre><code class="language-rust">fn main() {
+    let x = 5;
+
+    dbg!(x);
+}
+</code></pre>
+<p>If you run this program, you'll see:</p>
+<pre><code class="language-text">[src/main.rs:4] x = 5
+</code></pre>
+<p>You get the file and line number of where this was invoked, as well as the
+name and value. Additionally, <code>println!</code> prints to the standard output, so
+you really should be using <code>eprintln!</code> to print to standard error. <code>dbg!</code>
+does the right thing and goes to <code>stderr</code>.</p>
+<p>It even works in more complex circumstances. Consider this factorial example:</p>
+<pre><code class="language-rust">fn factorial(n: u32) -&gt; u32 {
+    if n &lt;= 1 {
+        n
+    } else {
+        n * factorial(n - 1)
+    }
+}
+</code></pre>
+<p>If we wanted to debug this, we might write it like this with <code>eprintln!</code>:</p>
+<pre><code class="language-rust">fn factorial(n: u32) -&gt; u32 {
+    eprintln!(&quot;n: {}&quot;, n);
+
+    if n &lt;= 1 {
+        eprintln!(&quot;n &lt;= 1&quot;);
+
+        n
+    } else {
+        let n = n * factorial(n - 1);
+
+        eprintln!(&quot;n: {}&quot;, n);
+
+        n
+    }
+}
+</code></pre>
+<p>We want to log <code>n</code> on each iteration, as well as have some kind of context
+for each of the branches. We see this output for <code>factorial(4)</code>:</p>
+<pre><code class="language-text">n: 4
+n: 3
+n: 2
+n: 1
+n &lt;= 1
+n: 2
+n: 6
+n: 24
+</code></pre>
+<p>This is servicable, but not particularly great. Maybe we could work on how we
+print out the context to make it more clear, but now we're not debugging our code,
+we're figuring out how to make our debugging code better.</p>
+<p>Consider this version using <code>dbg!</code>:</p>
+<pre><code class="language-rust">fn factorial(n: u32) -&gt; u32 {
+    if dbg!(n &lt;= 1) {
+        dbg!(1)
+    } else {
+        dbg!(n * factorial(n - 1))
+    }
+}
+</code></pre>
+<p>We simply wrap each of the various expressions we want to print with the macro. We
+get this output instead:</p>
+<pre><code class="language-text">[src/main.rs:3] n &lt;= 1 = false
+[src/main.rs:3] n &lt;= 1 = false
+[src/main.rs:3] n &lt;= 1 = false
+[src/main.rs:3] n &lt;= 1 = true
+[src/main.rs:4] 1 = 1
+[src/main.rs:5] n * factorial(n - 1) = 2
+[src/main.rs:5] n * factorial(n - 1) = 6
+[src/main.rs:5] n * factorial(n - 1) = 24
+[src/main.rs:11] factorial(4) = 24
+</code></pre>
+<p>Because the <code>dbg!</code> macro returns the value of what it's debugging, instead of
+<code>eprintln!</code> which returns <code>()</code>, we need to make <em>no</em> changes to the structure
+of our code. Additionally, we have <em>vastly</em> more useful output.</p>
+<p>That's a lot to say about a little macro, but we hope it improves your
+debugging experience! We are contining to work on support for <code>gdb</code> and
+friends as well, of course.</p>
+<h4><a href="#jemalloc-is-removed-by-default" aria-hidden="true" class="anchor" id="jemalloc-is-removed-by-default"></a><code>jemalloc</code> is removed by default</h4>
+<p>Long, long ago, Rust had a large, Erlang-like runtime. We chose to use
+<a href="http://jemalloc.net/">jemalloc</a> instead of the system allocator, because it often improved
+performance over the default system one. Over time, we shed more and more of
+this runtime, and eventually almost all of it was removed, but jemalloc
+was not. We didn't have a way to choose a custom allocator, and so we
+couldn't really remove it without causing a regression for people who do need
+jemalloc.</p>
+<p>Also, saying that <code>jemalloc</code> was always the default is a bit UNIX-centric,
+as it was only the default on <em>some</em> platforms. Notably, the MSVC target on
+Windows has shipped the system allocator for a long time.</p>
+<p>Finally, while jemalloc <em>usually</em> has great performance, that's not always
+the case. Additionally, it adds about 300kb to every Rust binary. We've also
+had a host of <a href="https://github.com/rust-lang/rust/issues/36963#issuecomment-252029017">other
+issues</a>
+with jemalloc in the past. It has also felt a little strange that a systems
+language does not default to the system's allocator.</p>
+<p>For all of these reasons, once <a href="https://blog.rust-lang.org/2018/08/02/Rust-1.28.html#whats-in-1.28.0-stable">Rust 1.28 shipped a way to choose a global
+allocator</a>,
+we started making plans to switch the default to the system allocator, and
+allow you to use <code>jemalloc</code> via a crate. In Rust 1.32, we've finally finished
+this work, and by default, you will get the system allocator for your
+programs.</p>
+<p>If you'd like to continue to use jemalloc, use <a href="https://crates.io/crates/jemallocator">the jemallocator crate</a>. In
+your <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">jemallocator = &quot;0.1.8&quot;
+</code></pre>
+<p>And in your crate root:</p>
+<pre><code class="language-rust">#[global_allocator]
+static ALLOC: jemallocator::Jemalloc = jemallocator::Jemalloc;
+</code></pre>
+<p>That's it! If you don't need jemalloc, it's not forced upon you, and if
+you do need it, it's a few lines of code away.</p>
+<h4><a href="#final-module-improvements" aria-hidden="true" class="anchor" id="final-module-improvements"></a>Final module improvements</h4>
+<p>In the past two releases, we announced several improvements to the module
+system. We have one last tweak landing in 1.32.0 and the 2018 edition.
+Nicknamed <a href="https://github.com/rust-lang/rust/pull/56759#issuecomment-450051210">&quot;uniform
+paths&quot;</a>,
+it permits previously invalid import path statements to be resolved exactly
+the same way as non-import paths. For example:</p>
+<pre><code class="language-rust">enum Color { Red, Green, Blue }
+
+use Color::*;
+</code></pre>
+<p>This code did <em>not</em> previously compile, as <code>use</code> statements had to start with
+<code>super</code>, <code>self</code>, or <code>crate</code>. Now that the compiler supports uniform paths,
+this code will work, and do what you probably expect: import the variants of
+the <code>Color</code> enum defined above the <code>use</code> statement.</p>
+<p>With this change in place, we've completed our efforts at revising the module
+system. We hope you've been enjoying the simplified system so far!</p>
+<h4><a href="#macro-improvements" aria-hidden="true" class="anchor" id="macro-improvements"></a>Macro improvements</h4>
+<p>A few improvements to macros have landed in Rust 1.32.0. First, <a href="https://github.com/rust-lang/rust/pull/56072/">a new
+<code>literal</code> matcher</a> was added:</p>
+<pre><code class="language-rust">macro_rules! m {
+    ($lt:literal) =&gt; {};
+}
+
+fn main() {
+    m!(&quot;some string literal&quot;);
+}
+</code></pre>
+<p><code>literal</code> matches against literals of any type; string literals, numeric literals, <code>char</code> literals.</p>
+<p>In the 2018 edition, <code>macro_rules</code> macros can also use <code>?</code>, like this:</p>
+<pre><code class="language-rust">macro_rules! bar {
+    ($(a)?) =&gt; {}
+}
+</code></pre>
+<p>The <code>?</code> will match zero or one repetitions of the pattern, similar to the
+already-existing <code>*</code> for &quot;zero or more&quot; and <code>+</code> for &quot;one or more.&quot;</p>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
+<p>We talked above about the <code>dbg!</code> macro, which is a big library addition.
+Beyond that, 19 functions were made <code>const fn</code>s, and all integral numeric
+primitives now provide conversion functions to and from byte-arrays with
+specified endianness. These six functions are named <code>to_&lt;endian&gt;_bytes</code> and
+<code>from_&lt;endian&gt;_bytes</code>, where <code>&lt;endian&gt;</code> is one of:</p>
+<ul>
+<li><code>ne</code> - native endianness</li>
+<li><code>le</code> - little endian</li>
+<li><code>be</code> - big endian</li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1320-2019-01-17">detailed release notes</a> for more details.</p>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
+<p>Cargo gained <a href="https://github.com/rust-lang/cargo/pull/6218/"><code>cargo c</code> as an alias for <code>cargo check</code></a>, and now <a href="https://github.com/rust-lang/cargo/pull/6242/">allows
+usernames in registry URLs</a>.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1320-2019-01-17">detailed release notes</a> for more.</p>
+<h2><a href="#contributors-to-1320" aria-hidden="true" class="anchor" id="contributors-to-1320"></a>Contributors to 1.32.0</h2>
+<p>Many people came together to create Rust 1.32.0. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.32.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

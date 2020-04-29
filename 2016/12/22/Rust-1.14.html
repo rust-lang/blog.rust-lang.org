@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.14 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.14 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.14 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.14" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.14</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 22, 2016 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce the latest version of Rust, 1.14.0. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>As always, you can <a href="https://www.rust-lang.org/install.html">install Rust 1.14.0</a> from the appropriate page on our
+website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1140-2016-12-22">detailed release notes for 1.14.0</a> on GitHub.
+1230 patches were landed in this release.</p>
+<h3><a href="#whats-in-1140-stable" aria-hidden="true" class="anchor" id="whats-in-1140-stable"></a>What's in 1.14.0 stable</h3>
+<p>One of the biggest features in Rust 1.14 isn't actually in the language or
+compiler: the <a href="https://internals.rust-lang.org/t/beta-testing-rustup-rs/3316/203">rustup tool has reached a 1.0 release</a>, and is now the
+recommended way to install Rust from the project directly. Rustup does a bit
+more than just install Rust:</p>
+<blockquote>
+<p>rustup installs The Rust Programming Language from the official release
+channels, enabling you to easily switch between stable, beta, and nightly
+compilers and keep them updated. It makes cross-compiling simpler with binary
+builds of the standard library for common platforms. And it runs on all
+platforms Rust supports, including Windows.</p>
+</blockquote>
+<p>We had <a href="https://blog.rust-lang.org/2016/05/13/rustup.html">a previous post about Rustup</a> back in May. You can learn more
+about it there, or by checking it out <a href="https://github.com/rust-lang-nursery/rustup.rs">on
+GitHub</a>.</p>
+<p>Another exciting feature is <a href="https://users.rust-lang.org/t/compiling-to-the-web-with-rust-and-emscripten/7627">experimental support for WebAssembly</a> as a
+target, <code>wasm32-unknown-emscripten</code>. It is still early days, and there's a lot
+of bugs to shake out, so please give it a try and report them! To give you a
+small taste of how it works, once you have <a href="http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html">emscripten</a> installed, compiling
+some Rust code to WebAssembly is as easy as:</p>
+<pre><code class="language-bash">rustup target add wasm32-unknown-emscripten
+$ echo 'fn main() { println!(&quot;Hello, Emscripten!&quot;); }' &gt; hello.rs
+$ rustc --target=wasm32-unknown-emscripten hello.rs
+$ node hello.js
+</code></pre>
+<p>The community has been doing interesting, experimental work in this area: see
+<a href="http://www.hellorust.com/emscripten/">Jan-Erik's slides</a> for the workshop he ran at <a href="http://www.rust-belt-rust.com/sessions/">Rust Belt Rust</a> for some
+examples, or check out <a href="http://timryan.org/rust-todomvc/">Tim's example of the classic TodoMVC project</a>.
+This implementation builds off of his <a href="https://crates.io/crates/webplatform">webplatform
+crate</a>, which exposes the DOM to Rust.</p>
+<p>Speaking of platforms, a large number of platforms have gained additional
+support:</p>
+<p>For <code>rustc</code>:</p>
+<ul>
+<li><code>mips-unknown-linux-gnu</code></li>
+<li><code>mipsel-unknown-linux-gnu</code></li>
+<li><code>mips64-unknown-linux-gnuabi64</code></li>
+<li><code>mips64el-unknown-linux-gnuabi64</code></li>
+<li><code>powerpc-unknown-linux-gnu</code></li>
+<li><code>powerpc64-unknown-linux-gnu</code></li>
+<li><code>powerpc64le-unknown-linux-gnu</code></li>
+<li><code>s390x-unknown-linux-gnu</code></li>
+</ul>
+<p>And for <code>std</code>:</p>
+<ul>
+<li><code>arm-unknown-linux-musleabi</code></li>
+<li><code>arm-unknown-linux-musleabihf</code></li>
+<li><code>armv7-unknown-linux-musleabihf</code></li>
+</ul>
+<p>If you're using one of these platforms, follow the instructions on the website
+to install, or add the targets to an existing installation with
+<code>rustup target add</code>.</p>
+<p>These platforms are all 'tier 2', please see our page on <a href="https://forge.rust-lang.org/platform-support.html">platform support</a> for
+more details.</p>
+<p>Just like how the community is doing interesting work on the WebAssembly
+target, there's also neat things going on with increasing Rust's target support
+beyond what's listed above. <a href="https://github.com/japaric/xargo">xargo</a> allows for easy cross-compilation of Rust
+to bare-metal targets. If you're writing an operating system in Rust, or doing
+something interesting on a microcontroller, xargo can make your life a lot
+simpler.</p>
+<p>The landing of MIR over the last few releases means that a <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#compile-time-optimizations">number of
+improvements to compile times</a> have landed, with more coming in the future.</p>
+<p>In the language, one small improvement has landed: support for <a href="https://github.com/rust-lang/rfcs/blob/master/text/1492-dotdot-in-patterns.md">RFC 1492</a>. This small
+addition lets you use <code>..</code> in more places. Previously, say you had a struct like this:</p>
+<pre><code class="language-rust">struct Point {
+    x: i32,
+    y: i32,
+    z: i32,
+}
+</code></pre>
+<p>In any context where you're doing a pattern match, you could use <code>..</code> to ignore the
+parts you don't care about. For example:</p>
+<pre><code class="language-rust">let p = Point { x: 0, y: 1, z: 2 };
+
+match p {
+    Point { x, .. } =&gt; println!(&quot;x is {}&quot;, x),
+}
+</code></pre>
+<p>The <code>..</code> ignores <code>y</code> and <code>z</code>.</p>
+<p>Consider a similar <code>Point</code>, but as a tuple struct:</p>
+<pre><code class="language-rust">struct Point(i32, i32, i32);
+</code></pre>
+<p>Previously, you could use <code>..</code> to ignore all three elements:</p>
+<pre><code class="language-rust">let p = Point(0, 1, 2);
+
+match p {
+    Point(..) =&gt; println!(&quot;found a point&quot;),
+}
+</code></pre>
+<p>But you could not use it to only ignore parts of the tuple:</p>
+<pre><code class="language-rust">let p = Point(0, 1, 2);
+
+match p {
+    Point(x, ..) =&gt; println!(&quot;x is {}&quot;, x),
+}
+</code></pre>
+<p>This was an inconsistency, and so with RFC 1492 stabilized, compiles fine as of
+this release. This applies to more situations than tuples; please see <a href="https://github.com/rust-lang/rfcs/blob/master/text/1492-dotdot-in-patterns.md">the
+RFC</a> for more details.</p>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
+<p>There have been a number of additions to the standard library, but they don't
+fit into particularly nice categories for this release. Here's the highlights:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/issues/36825"><code>println!()</code>, with no arguments, prints newline</a>.
+Previously, an empty string was required to achieve the same.</li>
+<li><a href="https://github.com/rust-lang/rust/issues/37356"><code>Wrapping</code> impls standard binary and unary operators on references, as well
+as the <code>Sum</code> and <code>Product</code> iterators</a>, making references to these
+types easier to use.</li>
+<li><a href="https://github.com/rust-lang/rust/issues/37326">Implement <code>From&lt;Cow&lt;str&gt;&gt; for String</code> and <code>From&lt;Cow&lt;[T]&gt;&gt; for Vec&lt;T&gt;</code></a>. These implementations make sense, but were not yet added.</li>
+<li><a href="https://github.com/rust-lang/rust/issues/37230">Expand <code>.zip()</code> specialization to <code>.map()</code> and <code>.cloned()</code></a> for improved performance.</li>
+<li><a href="https://github.com/rust-lang/rust/issues/37178">Implement <code>RefUnwindSafe</code> for atomic types</a>, as these types are
+&quot;unwind safe,&quot; though that wasn't obvious at first.</li>
+<li><a href="https://github.com/rust-lang/rust/issues/37094">Specialize <code>Vec::extend</code> to <code>Vec::extend_from_slice</code></a> for performance gains.</li>
+<li><a href="https://github.com/rust-lang/rust/issues/37470">Don't reuse <code>HashMap</code> random seeds</a>. This helps to mitigate one type
+of DDoS attack.</li>
+<li><a href="https://github.com/rust-lang/rust/issues/36692">The internal memory layout of <code>HashMap</code> is more cache-friendly, for
+significant improvements in some operations</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/36430">Impl <code>Add&lt;{str, Cow&lt;str&gt;}&gt;</code> for <code>Cow&lt;str&gt;</code></a>. We already support <code>Add</code>
+for other string types, so not having it on <code>Cow</code> is inconsistent.</li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1140-2016-12-22">detailed release notes</a> for more.</p>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
+<p>As for Cargo, <a href="https://github.com/rust-lang/rfcs/blob/master/text/1721-crt-static.md">RFC 1721</a> has been implemented. Cargo will now pass along the
+values printed by <code>rustc --print cfg</code> to build scripts. The motivation for this
+feature is that Cargo can now compile objects for statically linking against
+the msvcrt on the MSVC platform.</p>
+<p>Cargo now works properly <a href="https://github.com/rust-lang/cargo/issues/3259">with a read-only <code>CARGO_HOME</code></a>.</p>
+<p>Finally, Cargo will <a href="https://github.com/rust-lang/cargo/issues/3175">ignore the <code>panic</code> configuration for the <code>test</code> and
+<code>bench</code> profiles</a>. This is important because the test runner relies on
+panics counting as failing tests, and so with <code>panic=abort</code>, a failing test
+would abort the entire test suite.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1140-2016-12-22">detailed release notes</a> for more.</p>
+<h3><a href="#contributors-to-1140" aria-hidden="true" class="anchor" id="contributors-to-1140"></a>Contributors to 1.14.0</h3>
+<p>We had 144 individuals contribute to 1.14.0. Thank you so much!</p>
+<ul>
+<li>Abhishek Chanda</li>
+<li>Adam Perry</li>
+<li>Ahmed Charles</li>
+<li>Aidan Hobson Sayers</li>
+<li>Aleksey Kladov</li>
+<li>Alexander von Gluck IV</li>
+<li>Alex Burka</li>
+<li>Alex Crichton</li>
+<li>Alex von Gluck IV</li>
+<li>Amanieu d'Antras</li>
+<li>Andrea Corradi</li>
+<li>Andrea Pretto</li>
+<li>Andreas Sommer</li>
+<li>Andre Bogus</li>
+<li>Andrew Paseltiner</li>
+<li>angelsl</li>
+<li>Anthony Ramine</li>
+<li>Ariel Ben-Yehuda</li>
+<li>arthurprs</li>
+<li>Austin Hicks</li>
+<li>bors</li>
+<li>Brian Anderson</li>
+<li>Bunts Thy Unholy</li>
+<li>CensoredUsername</li>
+<li>Chris McDonald</li>
+<li>Christopher</li>
+<li>christopherdumas</li>
+<li>Christopher Serr</li>
+<li>Cobrand</li>
+<li>Corey Farwell</li>
+<li>Cristi Cobzarenco</li>
+<li>Daan Sprenkels</li>
+<li>Danny Hua</li>
+<li>David Henningsson</li>
+<li>Devon Hollowood</li>
+<li>Dmitry Gritsay</li>
+<li>Dominik Inführ</li>
+<li>Duncan</li>
+<li>Eduard Burtescu</li>
+<li>Eduard-Mihai Burtescu</li>
+<li>Eric Roshan-Eisner</li>
+<li>est31</li>
+<li>Fabian Frei</li>
+<li>Federico Mena Quintero</li>
+<li>Felix S. Klock II</li>
+<li>Florian Diebold</li>
+<li>Florian Hartwig</li>
+<li>Florian Zeitz</li>
+<li>Frank Rehberger</li>
+<li>Gavin Baker</li>
+<li>Geoffry Song</li>
+<li>Guillaume Gomez</li>
+<li>iirelu</li>
+<li>James Miller</li>
+<li>Jan-Erik Rediger</li>
+<li>Jared Roesch</li>
+<li>Jeffrey Seyfried</li>
+<li>Jesus Garlea</li>
+<li>Jethro Beekman</li>
+<li>Joe Neeman</li>
+<li>Johannes Muenzel</li>
+<li>John Firebaugh</li>
+<li>John Hodge</li>
+<li>johnthagen</li>
+<li>Jonas Schievink</li>
+<li>Jonathan Turner</li>
+<li>Jorge Aparicio</li>
+<li>Josh Stone</li>
+<li>Josh Triplett</li>
+<li>Keegan McAllister</li>
+<li>Keith Yeung</li>
+<li>KillTheMule</li>
+<li>Konrad Borowski</li>
+<li>leonardo.yvens</li>
+<li>Liigo Zhuang</li>
+<li>loggerhead</li>
+<li>Manish Goregaokar</li>
+<li>Marcin Fatyga</li>
+<li>Mark-Simulacrum</li>
+<li>Martin Glagla</li>
+<li>Martin Thoresen</li>
+<li>Mathieu Borderé</li>
+<li>Mathieu Poumeyrol</li>
+<li>Matt Brubeck</li>
+<li>Matthew Piziak</li>
+<li>Matwey V. Kornilov</li>
+<li>mcarton</li>
+<li>Michael Woerister</li>
+<li>Mikhail Modin</li>
+<li>Mikko Rantanen</li>
+<li>msiglreith</li>
+<li>Nabeel Omer</li>
+<li>Nathan Musoke</li>
+<li>Nicholas Nethercote</li>
+<li>Nick Cameron</li>
+<li>Nick Fitzgerald</li>
+<li>Nick Stevens</li>
+<li>Nikhil Shagrithaya</li>
+<li>Niko Matsakis</li>
+<li>Oliver Middleton</li>
+<li>p512</li>
+<li>ParkHanbum</li>
+<li>Paul Lange</li>
+<li>Paulo Matos</li>
+<li>Paul Osborne</li>
+<li>Peter Atashian</li>
+<li>Peter N</li>
+<li>Philip Davis</li>
+<li>Pieter Frenssen</li>
+<li>Pweaver (Paul Weaver)</li>
+<li>pweyck</li>
+<li>QuietMisdreavus</li>
+<li>Raph Levien</li>
+<li>Razican</li>
+<li>Robin Stocker</li>
+<li>Ross Schulman</li>
+<li>Ryan Senior</li>
+<li>Scott Olson</li>
+<li>Seo Sanghyeon</li>
+<li>Simonas Kazlauskas</li>
+<li>Simon Sapin</li>
+<li>Srinivas Reddy Thatiparthy</li>
+<li>Stefan Schindler</li>
+<li>Stephen M. Coakley</li>
+<li>Steve Klabnik</li>
+<li>Steven Fackler</li>
+<li>Tamir Duberstein</li>
+<li>Taylor Cramer</li>
+<li>Tim Neumann</li>
+<li>Tobias Bucher</li>
+<li>Tomasz Miąsko</li>
+<li>tormol</li>
+<li>Tshepang Lekhonkhobe</li>
+<li>Ulrik Sverdrup</li>
+<li>Vadim Chugunov</li>
+<li>Vadim Petrochenkov</li>
+<li>Vadzim Dambrouski</li>
+<li>Vangelis Katsikaros</li>
+<li>Wang Xuerui</li>
+<li>Wesley Wiser</li>
+<li>Zack M. Davis</li>
+<li>Zoffix Znet</li>
+<li>Артём Павлов [Artyom Pavlov]</li>
+<li>石博文</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

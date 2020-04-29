@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.38.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.38.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.38.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.38.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.38.0</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 26, 2019 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.38.0. Rust is a programming language that is empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust 1.38.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website.</p>
+<h2><a href="#whats-in-1380-stable" aria-hidden="true" class="anchor" id="whats-in-1380-stable"></a>What's in 1.38.0 stable</h2>
+<p>The highlight of this release is pipelined compilation.</p>
+<h3><a href="#pipelined-compilation" aria-hidden="true" class="anchor" id="pipelined-compilation"></a>Pipelined compilation</h3>
+<p>To compile a crate, the compiler doesn't need the dependencies to be fully built. Instead, it just needs their &quot;metadata&quot; (i.e. the list of types, dependencies, exports...). This metadata is produced early in the compilation process. Starting with Rust 1.38.0, Cargo will take advantage of this by automatically starting to build dependent crates as soon as metadata is ready.</p>
+<p>While the change doesn't have any effect on builds for a single crate, during testing <a href="https://internals.rust-lang.org/t/evaluating-pipelined-rustc-compilation/10199">we got reports</a> of 10-20% compilation speed increases for optimized, clean builds of some crate graphs. Other ones did not improve much, and the speedup depends on the hardware running the build, so your mileage might vary. No code changes are needed to benefit from this.</p>
+<h3><a href="#linting-some-incorrect-uses-of-memuninitialized-zeroed" aria-hidden="true" class="anchor" id="linting-some-incorrect-uses-of-memuninitialized-zeroed"></a>Linting some incorrect uses of <code>mem::{uninitialized, zeroed}</code></h3>
+<p>As <a href="https://blog.rust-lang.org/2019/07/04/Rust-1.36.0.html#maybeuninitt%3E-instead-of-mem::uninitialized">previously announced</a>, <code>std::mem::uninitialized</code> is essentially impossible to use safely. Instead, <code>MaybeUninit&lt;T&gt;</code> should be used.</p>
+<p>We have not yet deprecated <code>mem::uninitialized</code>; this will be done in a future release. Starting in 1.38.0, however, <code>rustc</code> will provide a lint for a narrow class of incorrect initializations using <code>mem::uninitialized</code> or <code>mem::zeroed</code>.</p>
+<p>It is undefined behavior for some types, such as <code>&amp;T</code> and <code>Box&lt;T&gt;</code>, to ever contain an all-<code>0</code> bit pattern, because they represent pointer-like objects that cannot be <code>null</code>. It is therefore an error to use <code>mem::uninitialized</code> or <code>mem::zeroed</code> to initialize one of these types, so the new lint will attempt to warn whenever one of those functions is used to initialize one of them, either directly or as a member of a larger <code>struct</code>. The check is recursive, so the following code will emit a warning:</p>
+<pre><code class="language-rust">struct Wrap&lt;T&gt;(T);
+struct Outer(Wrap&lt;Wrap&lt;Wrap&lt;Box&lt;i32&gt;&gt;&gt;&gt;);
+struct CannotBeZero {
+    outer: Outer,
+    foo: i32,
+    bar: f32
+}
+
+...
+
+let bad_value: CannotBeZero = unsafe { std::mem::uninitialized() };
+</code></pre>
+<p>Astute readers may note that Rust has more types that cannot be zero, notably <code>NonNull&lt;T&gt;</code> and <code>NonZero&lt;T&gt;</code>. For now, initialization of these structs with <code>mem::uninitialized</code> or <code>mem::zeroed</code> is <em>not</em> linted against.</p>
+<p>These checks do not cover all cases of unsound use of <code>mem::uninitialized</code> or <code>mem::zeroed</code>, they merely help identify code that is definitely wrong. All code should still be moved to use <code>MaybeUninit</code> instead.</p>
+<h3><a href="#deprecated-macros" aria-hidden="true" class="anchor" id="deprecated-macros"></a><code>#[deprecated]</code> macros</h3>
+<p>The <code>#[deprecated]</code> attribute, first introduced in Rust 1.9.0, allows crate authors to notify their users an item of their crate is deprecated and will be removed in a future release. Rust 1.38.0 extends the attribute, allowing it to be applied to macros as well.</p>
+<h3><a href="#stdanytype_name" aria-hidden="true" class="anchor" id="stdanytype_name"></a><code>std::any::type_name</code></h3>
+<p>For debugging, it is sometimes useful to get the name of a type. For instance, in generic code, you may want to see, at run-time, what concrete types a function's type parameters has been instantiated with. This can now be done using <code>std::any::type_name</code>:</p>
+<pre><code class="language-rust">fn gen_value&lt;T: Default&gt;() -&gt; T {
+    println!(&quot;Initializing an instance of {}&quot;, std::any::type_name::&lt;T&gt;());
+    Default::default()
+}
+
+fn main() {
+    let _: i32 = gen_value();
+    let _: String = gen_value();
+}
+</code></pre>
+<p>This prints:</p>
+<pre><code class="language-text">Initializing an instance of i32
+Initializing an instance of alloc::string::String
+</code></pre>
+<p>Like all standard library functions intended only for debugging, the exact contents and format of the string are not guaranteed. The value returned is only a best-effort description of the type; multiple types may share the same <code>type_name</code> value, and the value may change in future compiler releases.</p>
+<h3><a href="#library-changes" aria-hidden="true" class="anchor" id="library-changes"></a>Library changes</h3>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/62528/"><code>slice::{concat, connect, join}</code> now accepts <code>&amp;[T]</code> in addition to <code>&amp;T</code>.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/62583/"><code>*const T</code> and <code>*mut T</code> now implement <code>marker::Unpin</code>.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/61953/"><code>Arc&lt;[T]&gt;</code> and <code>Rc&lt;[T]&gt;</code> now implement <code>FromIterator&lt;T&gt;</code>.</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/61457/"><code>iter::{StepBy, Peekable, Take}</code> now implement <code>DoubleEndedIterator</code>.</a></li>
+</ul>
+<p>Additionally, these functions have been stabilized:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/primitive.pointer.html#method.cast"><code>&lt;*const T&gt;::cast</code></a> and <a href="https://doc.rust-lang.org/std/primitive.pointer.html#method.cast-1"><code>&lt;*mut T&gt;::cast</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.as_secs_f32"><code>Duration::as_secs_f32</code></a> and <a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.as_secs_f64"><code>Duration::as_secs_f64</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.div_f32"><code>Duration::div_f32</code></a> and <a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.div_f64"><code>Duration::div_f64</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.from_secs_f32"><code>Duration::from_secs_f32</code></a> and <a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.from_secs_f64"><code>Duration::from_secs_f64</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.mul_f32"><code>Duration::mul_f32</code></a> and <a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.mul_f64"><code>Duration::mul_f64</code></a></li>
+<li>Euclidean remainder and division operations -- <a href="https://doc.rust-lang.org/std/primitive.i32.html#method.div_euclid"><code>div_euclid</code></a>,
+<a href="https://doc.rust-lang.org/std/primitive.i32.html#method.rem_euclid"><code>rem_euclid</code></a> -- for all integer primitives. <code>checked</code>,
+<code>overflowing</code>, and <code>wrapping</code> versions are also available.</li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.38 release: check out what changed in <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1380-2019-09-26">Rust</a>, <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-138-2019-09-26">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-138">Clippy</a>.</p>
+<h3><a href="#corrections" aria-hidden="true" class="anchor" id="corrections"></a>Corrections</h3>
+<p>A Previous version of this post mistakenly marked these functions as stable. They are not yet stable.
+<a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.div_duration_f32"><code>Duration::div_duration_f32</code></a> and <a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.div_duration_f64"><code>Duration::div_duration_f64</code></a>.</p>
+<h2><a href="#contributors-to-1380" aria-hidden="true" class="anchor" id="contributors-to-1380"></a>Contributors to 1.38.0</h2>
+<p>Many people came together to create Rust 1.38.0. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.38.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

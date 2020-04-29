@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.18 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.18 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.18 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.18" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.18</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">June 8, 2017 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce the latest version of Rust, 1.18.0. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed, getting Rust 1.18 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1180-2017-06-08">detailed release notes for
+1.18.0</a> on GitHub.</p>
+<h3><a href="#whats-in-1180-stable" aria-hidden="true" class="anchor" id="whats-in-1180-stable"></a>What's in 1.18.0 stable</h3>
+<p>As usual, Rust 1.18.0 is a collection of improvements, cleanups, and new
+features.</p>
+<p>One of the largest changes is a long time coming: core team members Carol
+Nichols and Steve Klabnik have been writing a new edition of &quot;The Rust
+Programming Language&quot;, the official book about Rust. It's being <a href="https://github.com/rust-lang/book">written openly
+on GitHub</a>, and has over a hundred
+contributors in total. This release <a href="https://doc.rust-lang.org/stable/book/">includes the first draft of the second
+edition in our online documentation</a>.
+19 out of 20 chapters have a draft; the draft of chapter 20 will land in Rust
+1.19. When the book is done, a print version will be made available through <a href="https://www.nostarch.com/Rust">No
+Starch Press</a>, if you'd like a paper copy. We're
+still working with the editors at No Starch to improve the text, but we wanted
+to start getting a wider audience now.</p>
+<p>The new edition is a complete re-write from the ground up, using the last two
+years of knowledge we've gained from teaching people Rust. You'll find
+brand-new explanations for a lot of Rust's core concepts, new projects to
+build, and all kinds of other good stuff. Please check it out and <a href="https://github.com/rust-lang/book/issues/new">let us know
+what you think</a>!</p>
+<p>As for the language itself, an old feature has learned some new tricks: the
+<code>pub</code> keyword has been expanded a bit. Experienced Rustaceans will know that
+items are private by default in Rust, and you can use the <code>pub</code> keyword to make
+them public. In Rust 1.18.0, <code>pub</code> has <a href="https://github.com/rust-lang/rust/pull/40556">gained a new
+form</a>:</p>
+<pre><code class="language-rust">pub(crate) bar;
+</code></pre>
+<p>The bit inside of <code>()</code> is a 'restriction', which refines the notion of how this
+is made public. Using the <code>crate</code> keyword like the example above means that
+<code>bar</code> would be public to the entire crate, but not outside of it. This makes it
+easier to declare APIs that are &quot;public to your crate&quot;, but not exposed to your
+users. This was <em>possible</em> with the existing module system, but often very
+awkward.</p>
+<p>You can also specify a path, like this:</p>
+<pre><code class="language-rust">pub(in a::b::c) foo;
+</code></pre>
+<p>This means &quot;usable within the hierarchy of <code>a::b::c</code>, but not elsewhere.&quot; This
+feature was defined in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1422-pub-restricted.md">RFC
+1422</a>
+and <a href="https://doc.rust-lang.org/stable/reference/visibility-and-privacy.html#pubin-path-pubcrate-pubsuper-and-pubself">is documented in the
+reference</a>.</p>
+<p>For our Windows users, Rust 1.18.0 has <a href="https://github.com/rust-lang/rust/pull/40870">a new attribute,
+<code>#![windows_subsystem]</code></a>. It
+works like this:</p>
+<pre><code class="language-rust">#![windows_subsystem = &quot;console&quot;]
+#![windows_subsystem = &quot;windows&quot;]
+</code></pre>
+<p>These control the <a href="https://msdn.microsoft.com/en-us/library/fcc1zstk.aspx"><code>/SUBSYSTEM</code> flag</a>
+in the linker. For now, only <code>&quot;console&quot;</code> and <code>&quot;windows&quot;</code> are supported.</p>
+<p>When is this useful? In the simplest terms, if you're developing a graphical
+application, and do not specify <code>&quot;windows&quot;</code>, a console window would flash up upon
+your application's start. With this flag, it won't.</p>
+<p>Finally, Rust's tuples, enum variant fields, and structs (without <code>#[repr]</code>) have
+always had an unspecified layout. <a href="https://github.com/rust-lang/rust/pull/40377">We've turned on automatic re-ordering</a>, which can result in smaller sizes
+through reducing padding. Consider a struct like this:</p>
+<pre><code class="language-rust">struct Suboptimal(u8, u16, u8);
+</code></pre>
+<p>In previous versions of Rust on the x86_64 platform, this struct would have the
+size of six bytes. But looking at the source, you'd expect it to have four. The
+extra two bytes come from padding; given that we have a <code>u16</code> here, it should be
+aligned to two bytes. But in this case, it's at offset one. To move it to offset
+two, another byte of padding is placed after the first <code>u8</code>. To give the whole struct
+a proper alignment, another byte is added after the second <code>u8</code> as well, giving us
+<code>1 + 1 (padding) + 2 + 1 + 1 (padding) = 6 bytes</code>.</p>
+<p>But what if our struct looked like this?</p>
+<pre><code class="language-rust">struct Optimal(u8, u8, u16);
+</code></pre>
+<p>This struct is properly aligned; the <code>u16</code> lies on a two byte boundary, and so
+does the entire struct. No padding is needed. This gives us <code>1 + 1 + 2 = 4 bytes</code>.</p>
+<p>When designing Rust, we left the details of memory layout undefined for just
+this reason. Because we didn't commit to a particular layout, we can make
+improvements to it, such as in this case where the compiler can optimize
+<code>Suboptimal</code> into <code>Optimal</code> automatically. And if you check the sizes of
+<code>Suboptimal</code> and <code>Optimal</code> on Rust 1.18.0, you'll see that they both have a
+size of four bytes.</p>
+<p>We've been planning this change for a while; previous versions of Rust included
+this optimization on the nightly channel, but some people wrote unsafe code
+that assumed the exact details of the representation. We rolled it back while
+we fixed all instances of this that we know about, but if you find some code
+breaks due to this, please let us know so we can help fix it! Structs used
+for FFI can be given the <code>#[repr(C)]</code> annotation to prevent reordering, in
+addition to C-compatible field layout.</p>
+<p>We've been planning on moving <code>rustdoc</code> to use a CommonMark compliant markdown
+parser for a long time now. However, just switching over can introduce
+regressions where the CommonMark spec differs from our existing parser,
+Hoedown. As part of the transition plan, <a href="https://github.com/rust-lang/rust/pull/40338">a new flag has been added to
+<code>rustdoc</code></a>,
+<code>--enable-commonmark</code>. This will use the new parser instead of the old one.
+Please give it a try! As far as we know, both parsers will produce identical
+results, but we'd be interested in knowing if you find a scenario where the
+rendered results differ!</p>
+<p>Finally, compiling <code>rustc</code> itself is now <a href="https://github.com/rust-lang/rust/pull/41469">15%-20%
+faster</a>. Each commit message in
+this PR goes over the details; there were some inefficiencies, and now they've
+been cleaned up.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1180-2017-06-08">detailed release notes</a> for more.</p>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
+<p>Seven new APIs were stabilized this release:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/process/struct.Child.html#method.try_wait"><code>Child::try_wait</code></a> is a non-blocking form of <code>Child::wait</code>.</li>
+<li><a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.retain"><code>HashMap::retain</code></a> and  <a href="https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.retain"><code>HashSet::retain</code></a> bring the <code>retain</code> API <code>Vec&lt;T&gt;</code> has to these two hash data structures.</li>
+<li><a href="https://doc.rust-lang.org/std/collections/binary_heap/struct.PeekMut.html#method.pop"><code>PeekMut::pop</code></a> lets you pop the top element from a <code>BinaryHeap&lt;T&gt;</code> after you've already peeked at it without needing to reorder the heap a second time.</li>
+<li><a href="https://doc.rust-lang.org/std/net/struct.TcpStream.html#method.peek"><code>TcpStream::peek</code></a>, <a href="https://doc.rust-lang.org/std/net/struct.UdpSocket.html#method.peek"><code>UdpSocket::peek</code></a>, <a href="https://doc.rust-lang.org/std/net/struct.UdpSocket.html#method.peek_from"><code>UdpSocket::peek_from</code></a> let you peek at a stream or socket.</li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1180-2017-06-08">detailed release notes</a> for more.</p>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
+<p>Cargo has <a href="https://github.com/rust-lang/cargo/pull/3842">added support</a> for the Pijul VCS,
+which is written in Rust. <code>cargo new my-awesome-project --vcs=pijul</code> will get you going!</p>
+<p>To supplement the <code>--all</code> flag, Cargo now has <a href="https://github.com/rust-lang/cargo/pull/3901">several new
+flags</a> such as <code>--bins</code>,
+<code>--examples</code>, <code>--tests</code>, and <code>--benches</code>, which will let you build all programs of
+that type.</p>
+<p>Finally, Cargo now supports <a href="https://github.com/rust-lang/cargo/pull/3952">Haiku</a> and
+<a href="https://github.com/rust-lang/cargo/pull/3885">Android</a>!</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1180-2017-06-08">detailed release notes</a> for more.</p>
+<h3><a href="#contributors-to-1180" aria-hidden="true" class="anchor" id="contributors-to-1180"></a>Contributors to 1.18.0</h3>
+<p>Many people came together to create Rust 1.18. We couldn't have done it without
+all of you. <a href="https://thanks.rust-lang.org/rust/1.18.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

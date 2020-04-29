@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Improving async-await's &quot;Future is not Send&quot; diagnostic | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Improving async-await's &quot;Future is not Send&quot; diagnostic | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Improving async-await's &quot;Future is not Send&quot; diagnostic | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Improving async-await's &quot;Future is not Send&quot; diagnostic" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Improving async-await's &quot;Future is not Send&quot; diagnostic</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 11, 2019 &middot; David Wood
+     on behalf of <a href="https://rust-lang.github.io/compiler-team/working-groups/async-await/">the Async Foundations WG</a> 
+    </div>
+
+    <div class="post">
+      <p>Async-await is due to hit stable in the 1.39 release (only a month away!), and as announced in the
+<a href="https://blog.rust-lang.org/inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues.html">&quot;Async Foundations Update: Time for polish!&quot;</a> post last month, the Async
+Foundations WG has shifted its focus to polish. This post will highlight one aspect of that
+focus, diagnostic improvements, and in particular, the improvements that the working group has
+been making to the once-unhelpful &quot;future is not send&quot; diagnostic.</p>
+<h1><a href="#why-doesnt-my-future-implement-send" aria-hidden="true" class="anchor" id="why-doesnt-my-future-implement-send"></a>Why doesn't my future implement <code>Send</code>?</h1>
+<p>One of the major places where async-await should be a pleasure to use is in multithreaded contexts,
+where having a future that can be sent to other threads is desirable. This might look something
+like the following (for brevity, there aren't any threads here, just a requirement that the
+future implement <code>std::marker::Send</code>):</p>
+<pre><code class="language-rust">use std::sync::{Mutex, MutexGuard};
+
+fn is_send&lt;T: Send&gt;(t: T) { }
+
+async fn foo() {
+    bar(&amp;Mutex::new(22)).await
+}
+
+async fn bar(x: &amp;Mutex&lt;u32&gt;) {
+    let g = x.lock().unwrap();
+    baz().await
+}
+
+async fn baz() { }
+
+fn main() {
+    is_send(foo());
+}
+</code></pre>
+<p>When we try to compile this, we'll get an unwieldly and hard-to-follow diagnostic:</p>
+<pre><code>error[E0277]: `std::sync::MutexGuard&lt;'_, u32&gt;` cannot be sent between threads safely
+  --&gt; src/main.rs:23:5
+   |
+23 |     is_send(foo());
+   |     ^^^^^^^ `std::sync::MutexGuard&lt;'_, u32&gt;` cannot be sent between threads safely
+   |
+   = help: within `impl std::future::Future`, the trait `std::marker::Send` is not implemented for `std::sync::MutexGuard&lt;'_, u32&gt;`
+   = note: required because it appears within the type `for&lt;'r, 's&gt; {&amp;'r std::sync::Mutex&lt;u32&gt;, std::sync::MutexGuard&lt;'s, u32&gt;, impl std::future::Future, ()}`
+   = note: required because it appears within the type `[static generator@src/main.rs:13:30: 16:2 x:&amp;std::sync::Mutex&lt;u32&gt; for&lt;'r, 's&gt; {&amp;'r std::sync::Mutex&lt;u32&gt;, std::sync::MutexGuard&lt;'s, u32&gt;, impl std::future::Future, ()}]`
+   = note: required because it appears within the type `std::future::GenFuture&lt;[static generator@src/main.rs:13:30: 16:2 x:&amp;std::sync::Mutex&lt;u32&gt; for&lt;'r, 's&gt; {&amp;'r std::sync::Mutex&lt;u32&gt;, std::sync::MutexGuard&lt;'s, u32&gt;, impl std::future::Future, ()}]&gt;`
+   = note: required because it appears within the type `impl std::future::Future`
+   = note: required because it appears within the type `impl std::future::Future`
+   = note: required because it appears within the type `for&lt;'r&gt; {impl std::future::Future, ()}`
+   = note: required because it appears within the type `[static generator@src/main.rs:9:16: 11:2 for&lt;'r&gt; {impl std::future::Future, ()}]`
+   = note: required because it appears within the type `std::future::GenFuture&lt;[static generator@src/main.rs:9:16: 11:2 for&lt;'r&gt; {impl std::future::Future, ()}]&gt;`
+   = note: required because it appears within the type `impl std::future::Future`
+   = note: required because it appears within the type `impl std::future::Future`
+note: required by `is_send`
+  --&gt; src/main.rs:5:1
+   |
+5  | fn is_send&lt;T: Send&gt;(t: T) {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^
+</code></pre>
+<p>That's.. not great. Let's break down what's happening and understand what this error is trying to
+tell us.</p>
+<pre><code class="language-rust">fn main() {
+    is_send(foo());
+}
+</code></pre>
+<p>In <code>main</code>, we are calling <code>foo</code> and passing the return value to <code>is_send</code>. <code>foo</code> is an <code>async fn</code>,
+so it doesn't return <code>()</code> (what you might expect for a function with no return type specified).
+Instead, it returns <code>impl std::future::Future&lt;Output = ()&gt;</code>, some unnamed type that implements
+<code>std::future::Future</code>:</p>
+<pre><code class="language-rust">async fn foo() {
+    bar(&amp;Mutex::new(22)).await
+}
+
+// becomes...
+
+fn foo() -&gt; impl std::future::Future&lt;Output = ()&gt; {
+    async move {
+        bar(&amp;Mutex::new(22)).await
+    }
+}
+</code></pre>
+<p>If you want to learn more about the transformations that happen with async-await, consider
+reading the <a href="https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html"><code>async</code>/<code>.await</code> primer chapter of the async book</a>.</p>
+<pre><code class="language-rust">fn is_send&lt;T: Send&gt;(t: T) { }
+</code></pre>
+<p>It looks like the error we're getting is because the future returned by <code>foo</code> doesn't satisfy
+the <code>T: Send</code> bound of <code>is_send</code>.</p>
+<h2><a href="#how-are-async-functions-implemented" aria-hidden="true" class="anchor" id="how-are-async-functions-implemented"></a>How are async functions implemented?</h2>
+<p>To explain why our future doesn't implement <code>Send</code>, we first need to understand a little bit more
+about what async-await is doing under the hood. rustc implements <code>async fn</code>s using generators,
+an unstable language feature for resumable functions like the co-routines you might be familiar
+with from other languages. Generators are laid out like enums with variants containing all of the
+variables that are used across await points (which desugar to generator yields):</p>
+<pre><code class="language-rust">async fn bar(x: &amp;Mutex&lt;u32&gt;) {
+    let g = x.lock().unwrap();
+    baz().await // &lt;- await point (suspend #0), `g` and `x` are in use before await point
+} // &lt;- `g` and `x` dropped here, after await point
+</code></pre>
+<pre><code class="language-rust">enum BarGenerator {
+    // `bar`'s parameters.
+    Unresumed { x: &amp;Mutex&lt;u32&gt; },
+
+    Suspend0 {
+        // Future returned by `baz`, which is being polled.
+        baz_future: BazGenerator,
+
+        // Locals that are used across the await point.
+        x: &amp;Mutex&lt;u32&gt;,
+        g: MutexGuard&lt;'_, u32&gt;,
+    },
+
+    Returned { value: () }
+}
+</code></pre>
+<p>If you want to learn more about the <code>async fn</code> implementation details, then Tyler Mandry has
+written <a href="https://tmandry.gitlab.io/blog/posts/optimizing-await-1/">an excellent blog post</a> diving into their work here in more depth which is
+definitely worth a read.</p>
+<h2><a href="#so-why-doesnt-my-future-implement-send" aria-hidden="true" class="anchor" id="so-why-doesnt-my-future-implement-send"></a>So, why doesn't my future implement <code>Send</code>?</h2>
+<p>We now know that an <code>async fn</code> is represented like an enum behind-the-scenes. In synchronous Rust,
+you'll be used to your types automatically implementing <code>Send</code> when the
+<a href="https://doc.rust-lang.org/std/marker/trait.Send.html">compiler determines it's appropriate</a> - typically when all of the fields of your type
+also implement <code>Send</code>. It follows that the enum-like that represents our <code>async fn</code> would
+implement <code>Send</code> if all of the types in it do.</p>
+<p>In other words, a future is safe to send across threads if all of the types that are held across
+<code>.await</code> points implement <code>Send</code>. This behaviour is useful because it lets us write generic code
+that interoperates smoothly with async-await, but without diagnostic support we get confusing error
+messages.</p>
+<h2><a href="#well-which-type-is-the-problem-in-the-example" aria-hidden="true" class="anchor" id="well-which-type-is-the-problem-in-the-example"></a>Well, which type is the problem in the example?</h2>
+<p>Returning to our example, the future must be holding a type across an <code>.await</code> point that doesn't
+implement <code>Send</code>, but where? This is the primary question that the diagnostic improvement aims to
+help answer. Let's start by looking at <code>foo</code>:</p>
+<pre><code class="language-rust">async fn foo() {
+    bar(&amp;Mutex::new(22)).await
+}
+</code></pre>
+<p><code>foo</code> invokes <code>bar</code>, passing a reference to a <code>std::sync::Mutex</code> and getting a future back, before
+<code>await</code>ing it.</p>
+<pre><code class="language-rust">async fn bar(x: &amp;Mutex&lt;u32&gt;) {
+    let g: MutexGuard&lt;u32&gt; = x.lock().unwrap();
+    baz().await
+} // &lt;- `g` is dropped here
+</code></pre>
+<p><code>bar</code> locks the mutex before <code>await</code>ing <code>baz</code>. <code>std::sync::MutexGuard&lt;u32&gt;</code> does not implement
+<code>Send</code> and lives across the <code>baz().await</code> point (because <code>g</code> is dropped at the end of the scope)
+which causes the entire future not to implement <code>Send</code>.</p>
+<p>That wasn't obvious from the error: we had to know that futures might implement <code>Send</code> depending
+on the types they capture <em>and</em> find the type which lives across an await point ourselves.</p>
+<p>Fortunately, the Async Foundations WG has been working to improve this error, and
+<a href="https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=7e80a8bc151df8817e0983e55bf2667a">in nightly</a>, we see the following diagnostic instead:</p>
+<pre><code>error[E0277]: `std::sync::MutexGuard&lt;'_, u32&gt;` cannot be sent between threads safely
+  --&gt; src/main.rs:23:5
+   |
+5  | fn is_send&lt;T: Send&gt;(t: T) {
+   |    -------    ---- required by this bound in `is_send`
+...
+23 |     is_send(foo());
+   |     ^^^^^^^ `std::sync::MutexGuard&lt;'_, u32&gt;` cannot be sent between threads safely
+   |
+   = help: within `impl std::future::Future`, the trait `std::marker::Send` is not implemented for `std::sync::MutexGuard&lt;'_, u32&gt;`
+note: future does not implement `std::marker::Send` as this value is used across an await
+  --&gt; src/main.rs:15:3
+   |
+14 |   let g = x.lock().unwrap();
+   |       - has type `std::sync::MutexGuard&lt;'_, u32&gt;`
+15 |   baz().await;
+   |   ^^^^^^^^^^^ await occurs here, with `g` maybe used later
+16 | }
+   | - `g` is later dropped here
+</code></pre>
+<p>Much better!</p>
+<h1><a href="#how-does-it-work" aria-hidden="true" class="anchor" id="how-does-it-work"></a>How does it work?</h1>
+<p>When rustc's trait system determines that a trait wasn't implemented, in this case
+<code>std::marker::Send</code>, it emits this error. The trait system produces a chain of &quot;obligations&quot;.
+Obligations are types which denote where a bound (e.g <code>T: Send</code> in <code>is_send</code>) originated,
+or where a bound was propagated.</p>
+<p>To improve this diagnostic, the chain of obligations is now treated like a stack frame, where
+each &quot;frame&quot; of obligations represents each function's contribution to the error. Let's make
+that more concrete with a very rough approximation:</p>
+<pre><code class="language-rust">Obligation {
+    kind: DerivedObligation(/* generator that captured `g` */),
+    source: /* `Span` type pointing at `bar`'s location in user code */,
+    parent: Some(Obligation {
+        kind: DerivedObligation(/* generator calling `bar` */),
+        source: /* `Span` type pointing at `foo`'s location in user code */,
+        parent: Some(Obligation {
+            kind: ItemObligation(/* type representing `std::marker::Send` */),
+            source: /* `Span` type pointing at `is_send`'s location in user code */,
+            cause: None,
+        }),
+    }),
+}
+</code></pre>
+<p>The compiler matches against the chain expecting an <code>ItemObligation</code> and some <code>DerivedObligation</code>s
+containing generators, which identifies the error we want to improve. Using information from these
+obligations, rustc can construct the specialized error shown above - if you'd like to see what the
+actual implementation looks like, check out PR <a href="https://github.com/rust-lang/rust/pull/64895">#64895</a>.</p>
+<p>If you're interested in improving diagnostics like this, or even just fixing bugs, consider
+contributing to the compiler! There are many working groups to join and resources to help you get
+started (like the <a href="https://rustc-dev-guide.rust-lang.org">rustc dev guide</a> or the <a href="https://rust-lang.github.io/compiler-team">compiler team documentation</a>).</p>
+<h1><a href="#whats-next" aria-hidden="true" class="anchor" id="whats-next"></a>What's next?</h1>
+<p>More improvements to this diagnostic are planned and being worked on, so that it is applicable in
+more cases, and has specialized messages for <code>Send</code> and <code>Sync</code>, like below:</p>
+<pre><code>error[E0277]: future cannot be sent between threads safely
+  --&gt; src/main.rs:23:5
+   |
+5  | fn is_send&lt;T: Send&gt;(t: T) {
+   |    -------    ---- required by this bound in `is_send`
+...
+23 |     is_send(foo());
+   |     ^^^^^^^ future returned by `foo` is not `Send`
+   |
+   = help:  future is not `Send` as this value is used across an await
+note: future does not implement `std::marker::Send` as this value is used across an await
+  --&gt; src/main.rs:15:3
+   |
+14 |   let g = x.lock().unwrap();
+   |       - has type `std::sync::MutexGuard&lt;'_, u32&gt;`
+15 |   baz().await;
+   |   ^^^^^^^^^^^ await occurs here, with `g` maybe used later
+16 | }
+   | - `g` is later dropped here
+</code></pre>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

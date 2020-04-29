@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>2019-11-14 Compiler Team Triage Meeting | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="2019-11-14 Compiler Team Triage Meeting | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="2019-11-14 Compiler Team Triage Meeting | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="2019-11-14 Compiler Team Triage Meeting" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>2019-11-14 Compiler Team Triage Meeting</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 19, 2019 &middot; Wesley Wiser
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">the compiler team</a> 
+    </div>
+
+    <div class="post">
+      <p>The compiler team had our weekly triage meeting on 2019-11-14.
+You can find the <a href="https://rust-lang.github.io/compiler-team/minutes/triage-meeting/2019-11-14/">minutes</a> on the <a href="https://github.com/rust-lang/compiler-team">compiler-team</a> repository.
+Each week, we have general announcements from the team followed by check-ins from two of the compiler team working groups.</p>
+<h2><a href="#announcements" aria-hidden="true" class="anchor" id="announcements"></a>Announcements</h2>
+<ul>
+<li>
+<p>Request for assistance: &quot;Rustc panics (NoSolution): could not prove Binder(projection soup)&quot; <a href="https://github.com/rust-lang/rust/issues/65581">#65581</a></p>
+</li>
+<li>
+<p>Request for assistance: &quot;Rust 1.38 regressions weren't fully triaged&quot; <a href="https://github.com/rust-lang/rust/issues/65577">#65577</a></p>
+</li>
+<li>
+<p>Request for assistance: &quot;Miscompilation with target-cpu=znver1 (AMD Ryzen 1000/2000 series) on Windows + LLVM 9.&quot; <a href="https://github.com/rust-lang/rust/issues/63959">#63959</a></p>
+</li>
+<li>
+<p><a href="https://github.com/cjgillot">@cjgillot</a> replaced a lot of TypeFoldable impls with a derive <a href="https://github.com/rust-lang/rust/pull/66384">#66384</a></p>
+</li>
+<li>
+<p>The Infra team has finished evaluating GitHub Actions and we're switching!</p>
+<ul>
+<li>This will have a signficant, positive impact on CI build time.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/centril">@centril</a> is fixing useless <code>&lt;std macros&gt;</code> spans <a href="https://github.com/rust-lang/rust/pull/66364">#66364</a></p>
+</li>
+</ul>
+<h2><a href="#working-group-sync" aria-hidden="true" class="anchor" id="working-group-sync"></a>Working group sync</h2>
+<p>This week we heard from three working groups because we ran out of time in the previous meeting.</p>
+<h3><a href="#wg-polonius" aria-hidden="true" class="anchor" id="wg-polonius"></a><a href="https://rust-lang.github.io/compiler-team/working-groups/polonius/">wg-polonius</a></h3>
+<ul>
+<li>
+<p>Made a lot of progress on the completeness goals with move/initialization errors and subset errors both getting close to completion.</p>
+</li>
+<li>
+<p>Fixed the last failure in the rustc test suite.</p>
+<ul>
+<li>There are still the same 2 OOMs as last time, we haven't had much time to look at those yet.</li>
+</ul>
+</li>
+<li>
+<p>Made diagnostics output match NLL in a lot more cases.</p>
+</li>
+<li>
+<p>Did some cleanup in our terminology by picking better names for our atoms hopefully making it clearer in the process, and more work is planned here.</p>
+<ul>
+<li>&quot;origin&quot; instead of &quot;region&quot;</li>
+<li>&quot;path&quot; instead of &quot;MovePath&quot;</li>
+</ul>
+</li>
+<li>
+<p>There is a <a href="https://rust-lang.github.io/polonius/">polonius book</a> now! It's sparse at the moment but more documentation work is in-flight and planned.</p>
+</li>
+<li>
+<p>The exploration and prototype on the rules offering more flow-sensitive precision for the analysis has also progressed a lot.</p>
+</li>
+<li>
+<p>There's also been some refactoring, and quite a bit of work on performance. Since the latter can step on the other work and vice-versa, we decided to focus on completeness first, and then after that has been achieved, re-adapt and land the optimization work.</p>
+</li>
+<li>
+<p><a href="https://github.com/nikomatsakis">@nikomatsakis</a> did a presentation on Polonius at RustBelt Rust. <a href="https://nikomatsakis.github.io/rust-belt-rust-2019/">Slides</a></p>
+</li>
+<li>
+<p><a href="https://github.com/albins">@albins</a> has finished their master's thesis and is currently rewriting most of the <a href="https://rust-lang.zulipchat.com/user_uploads/4715/ufu5BGNrkzVbV8FtkK3Tco6M/Albins-Thesis-draft-version.pdf">draft</a>.</p>
+</li>
+<li>
+<p>We hope to have a &quot;polonius work week&quot; at the end of November to push the in-progress work over the finish line together.</p>
+</li>
+</ul>
+<h3><a href="#wg-self-profile" aria-hidden="true" class="anchor" id="wg-self-profile"></a><a href="https://rust-lang.github.io/compiler-team/working-groups/self-profile/">wg-self-profile</a></h3>
+<ul>
+<li>
+<p>We've nearly completed our long standing MVP goal!</p>
+<ul>
+<li><a href="https://github.com/mark-simulacrum">@simulacrum</a> has done some nice work to polish the integration with perf.rlo</li>
+<li>We've added tracking for all the events we're aware of that should be traced with the exception of trait selection.
+<ul>
+<li>We could really use some input as to what would be helpful to track!</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/michaelwoerister">@mw</a> has been working on some changes to the binary format we record events in.</p>
+<ul>
+<li>The new format is more compact so results in a smaller trace file and hopefully less runtime overhead.</li>
+<li>The new format is also more amenable to recording query keys, which is a highly requested feature.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/wesleywiser">@wesleywiser</a> has added some crate level docs to make getting into the code easier.</p>
+</li>
+<li>
+<p><a href="https://github.com/wesleywiser">@wesleywiser</a> also added code to record process id, start time, and arguments to the trace file which we've started using.</p>
+</li>
+<li>
+<p><a href="https://github.com/andjo403">@andjo403</a> has been a roll with a lot of great PRs!</p>
+<ul>
+<li>We now have a dedicated tool for generating flamegraphs directly so you don't have to use the Perl scripts anymore.</li>
+<li>Some internal refactoring that makes adding new tools easier.</li>
+<li>Lots of work on the Chromium dev tools exporter:
+<ul>
+<li>New option to collapse disjoint threads so it's a little more manageable</li>
+<li>New option to filter out small events under a configurable threshold (necessary for very large compilations)</li>
+<li>You can now have multiple crate compilations in the same export file. This is similar to what cargo build -Z timings can do but much more detailed.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3><a href="#wg-rls-20" aria-hidden="true" class="anchor" id="wg-rls-20"></a><a href="https://rust-lang.github.io/compiler-team/working-groups/rls-2.0/">wg-rls-2.0</a></h3>
+<ul>
+<li>
+<p>Work is procedding on splitting core of rust-analyzer into crates.</p>
+</li>
+<li>
+<p>Find usages is implemented.</p>
+</li>
+<li>
+<p>Macro expansion now can map source ranges to expanded ranges, so goto def correctly goes &quot;inside&quot; macro call.</p>
+</li>
+<li>
+<p>More chalk an type inference work, specifically, support for closures.</p>
+</li>
+<li>
+<p>There's ongoing discussion about the general planning about rustc, rls, and rust-analyzer.</p>
+</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

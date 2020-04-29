@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Intro to rustc's self profiler | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Intro to rustc's self profiler | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Intro to rustc's self profiler | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Intro to rustc's self profiler" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Intro to rustc's self profiler</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 25, 2020 &middot; Wesley Wiser
+     on behalf of <a href="https://rust-lang.github.io/compiler-team/working-groups/self-profile/">the self-profile working group</a> 
+    </div>
+
+    <div class="post">
+      <p>Over the last year, the <a href="https://rust-lang.github.io/compiler-team/working-groups/self-profile/">Self-Profile Working Group</a> has been building tools to profile <code>rustc</code> because we often hear requests to know where compilation time is being spent.
+This is useful when optimizing the compiler, one of the Compiler Team's ongoing efforts to improve compile times, but it's also useful to users who want to refactor their crate so that it will compile faster.
+We've been working on a new feature that will help with that and this blog post gives a preview of how it works.
+Be warned, though: it is still experimental and we expect the interface to change over time.
+The Rust Unstable Book has <a href="https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/self-profile.html">documentation for this feature</a> and we'll keep that up to date so you can always find the latest instructions there.</p>
+<p>In this post, we'll look at the tools currently available and use them to profile <code>rustc</code> while it compiles an example crate.</p>
+<h2><a href="#setup" aria-hidden="true" class="anchor" id="setup"></a>Setup</h2>
+<p>First, we'll install the tools we're going to use from the <code>measureme</code> repository to analyze self-profile trace data.</p>
+<pre><code class="language-sh">$ cargo install --git https://github.com/rust-lang/measureme crox flamegraph summarize
+</code></pre>
+<p>Now that we have our tools, let's download an example crate to profile its build.</p>
+<pre><code class="language-sh">$ cd ..
+$ git clone https://github.com/rust-lang/regex.git
+$ cd regex
+</code></pre>
+<p>We'll need to use a recent nightly compiler to get access to unstable <code>-Z</code> flags.</p>
+<pre><code class="language-sh">$ rustup override set nightly
+</code></pre>
+<p>If you haven't installed a nightly compiler before, this will download the nightly compiler for you.
+If you have, then update it to make sure you're on a recent version.</p>
+<pre><code class="language-sh">$ rustup update nightly
+</code></pre>
+<h2><a href="#profiling-the-compiler" aria-hidden="true" class="anchor" id="profiling-the-compiler"></a>Profiling the compiler</h2>
+<p>Now we can build it and tell <code>rustc</code> to profile the build of the <code>regex</code> crate.
+This will cause three new files to be created in the working directory which contain the profling data.</p>
+<pre><code class="language-sh">$ cargo rustc -- -Zself-profile
+$ ls
+CHANGELOG.md        LICENSE-APACHE       UNICODE.md              regex-17088.string_data       regex-syntax         target
+Cargo.lock          LICENSE-MIT          bench                   regex-17088.string_index      rustfmt.toml         test
+Cargo.toml          PERFORMANCE.md       examples                regex-capi                    scripts              tests
+HACKING.md          README.md            regex-17088.events      regex-debug                   src
+</code></pre>
+<p>The new files follow the format <code>{crate name}-{rustc process id}.{events,string_data,string_index}</code>.</p>
+<p>We'll use each of the three main tools to analyze the profiling data:</p>
+<h3><a href="#summarize" aria-hidden="true" class="anchor" id="summarize"></a><code>summarize</code></h3>
+<p>As its name suggests, this tool summarizes the data found in the trace files.
+Additionally, <code>summarize</code> can also show a &quot;diff&quot; between two trace files but we won't be using this mode.</p>
+<p>Let's run the tool, passing just the file name (but not the extension) for the trace:</p>
+<pre><code class="language-sh">$ summarize summarize regex-17088
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| Item                                          | Self time | % of total time | Time     | Item count |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| LLVM_module_codegen_emit_obj                  | 4.89s     | 42.752          | 4.89s    | 159        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| codegen_module                                | 1.25s     | 10.967          | 1.37s    | 159        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| LLVM_module_optimize_module_passes            | 1.15s     | 10.022          | 1.15s    | 159        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| LLVM_module_codegen_make_bitcode              | 786.56ms  | 6.875           | 960.73ms | 159        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| typeck_tables_of                              | 565.18ms  | 4.940           | 689.39ms | 848        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| LLVM_module_codegen                           | 408.01ms  | 3.566           | 6.26s    | 159        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| mir_borrowck                                  | 224.03ms  | 1.958           | 543.33ms | 848        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| LLVM_module_codegen_emit_compressed_bitcode   | 174.17ms  | 1.522           | 174.17ms | 159        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| optimized_mir                                 | 157.91ms  | 1.380           | 205.29ms | 1996       |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| evaluate_obligation                           | 146.50ms  | 1.281           | 184.17ms | 8304       |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| codegen_crate                                 | 139.48ms  | 1.219           | 1.58s    | 1          |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| mir_built                                     | 123.88ms  | 1.083           | 168.01ms | 848        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| metadata_decode_entry                         | 88.36ms   | 0.772           | 117.77ms | 55642      |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| incr_comp_copy_cgu_workproducts               | 64.21ms   | 0.561           | 64.21ms  | 1          |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| monomorphization_collector_graph_walk         | 54.11ms   | 0.473           | 344.00ms | 1          |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| link_rlib                                     | 43.21ms   | 0.378           | 43.21ms  | 1          |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| check_impl_item_well_formed                   | 41.36ms   | 0.362           | 77.14ms  | 736        |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| codegen_fulfill_obligation                    | 40.36ms   | 0.353           | 51.56ms  | 1759       |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| expand_crate                                  | 37.24ms   | 0.326           | 48.52ms  | 1          |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| symbol_name                                   | 36.31ms   | 0.317           | 39.06ms  | 5513       |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+| free_global_ctxt                              | 34.34ms   | 0.300           | 34.34ms  | 1          |
++-----------------------------------------------+-----------+-----------------+----------+------------+
+...
+Total cpu time: 11.440758871s
+</code></pre>
+<p>The output is sorted by the self time (time spent in the query or activity but not other queries or activities called by itself).
+As you can see, most of the compilation time is spent in LLVM generating the binary code for the executable.</p>
+<h3><a href="#flamegraph" aria-hidden="true" class="anchor" id="flamegraph"></a><code>flamegraph</code></h3>
+<p>As you may have guessed, <code>flamegraph</code> will produce a <a href="http://www.brendangregg.com/flamegraphs.html">flame graph</a> of the profiling data.
+To run the tool, we'll pass just the filename without a file extension like we did for <code>summarize</code>:</p>
+<pre><code class="language-sh">$ flamegraph regex-17088
+</code></pre>
+<p>This will create a file called <code>rustc.svg</code> in the working directory:</p>
+<p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png" alt="Image of flamegraph output" /></a></p>
+<p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/rustc.svg">Click here</a> to try the interactive svg.</p>
+<h3><a href="#crox" aria-hidden="true" class="anchor" id="crox"></a><code>crox</code></h3>
+<p>This tool processes self-profiling data into the JSON format that the Chromium profiler understands.
+You can use it to create a graphical timeline showing exactly when various traced events occurred.</p>
+<p>In this section, we'll cover a few different modes <code>crox</code> can run in such as profiling an entire crate compilation including dependencies and filtering out small events.
+Let's get started with the basics!</p>
+<h4><a href="#basic-usage" aria-hidden="true" class="anchor" id="basic-usage"></a>Basic usage</h4>
+<p>To run the tool, we'll just pass the filename without a file extension like we've done before:</p>
+<pre><code class="language-sh">$ crox regex-17088
+</code></pre>
+<p>This creates a file called <code>chrome_profiler.json</code> in the working directory.
+To open it, we'll use the regular Chromium performance tools you might already be familiar with:</p>
+<ol>
+<li>Open Chrome</li>
+<li>Open the Developer Tools console by pressing <code>Ctrl</code> + <code>Shift</code> + <code>i</code> (Windows/Linux) or <code>Cmd</code> + <code>Option</code> + <code>i</code> (macOS)</li>
+<li>Click the Performance tab at the top of the console.</li>
+<li>Click the &quot;Load profile&quot; button which looks like an arrow pointing up.</li>
+<li>Select the <code>chrome_profiler.json</code> file we created.</li>
+</ol>
+<p>You should now see something similar to this:</p>
+<p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler1.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler1.png" alt="Image of chrome profiler" /></a></p>
+<p>You can use the scroll wheel on a mouse or the appropriate gesture on a touchpad to zoom in or out of the timeline.</p>
+<h4><a href="#filtering-short-events" aria-hidden="true" class="anchor" id="filtering-short-events"></a>Filtering short events</h4>
+<p>If the <code>chrome_profiler.json</code> file gets too large, the normal Chromium performance tools have issues opening the file.
+One easy way to deal with this is to tell <code>crox</code> to remove events shorter than a chosen duration:</p>
+<pre><code class="language-sh">$ crox --minimum-duration 2 regex-17088
+</code></pre>
+<p>Filtering out events less than 2 microseconds shrinks our <code>chrome_profiler.js</code> file from 27mb to 11mb.</p>
+<h4><a href="#capturing-event-arguments" aria-hidden="true" class="anchor" id="capturing-event-arguments"></a>Capturing event arguments</h4>
+<p>The self-profiler can be configured to record event arguments during compilation.
+For example, queries will include their query key.
+This functionality is turned off by default because it increases the self-profiler overhead.</p>
+<p>To turn this feature on, we'll need to record a new compilation, passing an additional argument to <code>rustc</code>:</p>
+<pre><code class="language-sh">$ cargo clean
+$ cargo rustc -- -Zself-profile -Zself-profile-events=default,args
+</code></pre>
+<p>And then process the new output files:</p>
+<pre><code class="language-sh">$ crox regex-23649
+</code></pre>
+<p>Now in the Chromium profiler, if you click on a node, you can see additional data about many of the events at the bottom of the screen:</p>
+<p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png" alt="Image of Chrome profiler details" /></a></p>
+<p>Which shows this <code>optimized_mir</code> query was processing the <code>regex::compile::{{impl}}::new</code> function body.</p>
+<h4><a href="#profiling-an-entire-crate-graph" aria-hidden="true" class="anchor" id="profiling-an-entire-crate-graph"></a>Profiling an entire crate graph</h4>
+<p>By using the <code>RUSTFLAGS</code> environment variable, we can profile every <code>rustc</code> invocation, not just the final crate's.
+<code>crox</code> can then combine all of the profiles together into one output file.
+Since this will create a lot of files, we'll tell <code>rustc</code> to create a folder to put all the traces in.</p>
+<pre><code class="language-sh">$ rm regex-17088.* regex-23649.* # clean up the old trace files since we're done with them
+$ cargo clean
+$ RUSTFLAGS=&quot;-Zself-profile=$(pwd)/profiles -Zself-profile-events=default,args&quot; cargo build
+</code></pre>
+<p>This creates quite a few trace files in the working directory.
+Now, we'll tell <code>crox</code> to combine all of the trace files in the current directory together:</p>
+<pre><code class="language-sh">$ crox --dir profiles
+</code></pre>
+<p>Opening this file shows all of the crates compiled:</p>
+<p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png" alt="Image of Chrome profiler with all crates" /></a></p>
+<p>Clicking on a crate will expand it to show the threads and event data inside it:</p>
+<p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler4.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler4.png" alt="Image of Chrome profiler with a crate expanded" /></a></p>
+<p>Thanks for reading!</p>
+<p>We've been using these tools extensively ourselves over the last few months and they've helped us tremendously in understanding where the compiler spends its time.
+In the future we'll be adding more features and we'll work on making the tooling easier to use.
+If you have questions or would like to get involved with the Self-Profile Working Group, please check out the <a href="https://github.com/rust-lang/measureme">measureme repository</a> or stop by our <a href="https://rust-lang.zulipchat.com/#narrow/stream/187831-t-compiler.2Fwg-self-profile">Zulip stream</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

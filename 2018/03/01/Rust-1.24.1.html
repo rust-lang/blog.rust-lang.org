@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.24.1 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.24.1 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.24.1 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.24.1" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.24.1</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 1, 2018 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.24.1. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.24.1 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1241-2018-03-01">detailed release notes for
+1.24.1</a> on GitHub.</p>
+<h2><a href="#whats-in-1241-stable" aria-hidden="true" class="anchor" id="whats-in-1241-stable"></a>What's in 1.24.1 stable</h2>
+<p>Several minor regressions were found in 1.24.0 which collectively merited a
+release.</p>
+<p>A quick summary of the changes:</p>
+<ul>
+<li>Do not abort when unwinding through FFI (this reverts behavior added in 1.24.0)</li>
+<li>Emit UTF-16 files for linker arguments on Windows</li>
+<li>Make the error index generator work again</li>
+<li>Cargo will warn on Windows 7 if an update is needed.</li>
+</ul>
+<p>If your code is continuing to build, then the only issue that may affect you is
+the unwinding issue. We plan on bringing this behavior back in 1.25 or 1.26,
+depending on how smoothly the new strategy goes.</p>
+<p>With that, let's dig into the details!</p>
+<h3><a href="#do-not-abort-when-unwinding-through-ffi" aria-hidden="true" class="anchor" id="do-not-abort-when-unwinding-through-ffi"></a>Do not abort when unwinding through FFI</h3>
+<p>TL;DR: the new behavior in 1.24.0 broke the <code>rlua</code> crate, and is being
+reverted. If you have since changed your code to take advantage of the behavior
+in 1.24.0, you'll need to revert it for now.  While we still plan to introduce
+this behavior eventually, we will be rolling it out more slowly and with a new
+implementation strategy.</p>
+<p>Quoting <a href="https://blog.rust-lang.org/2018/02/15/Rust-1.24.html">the 1.24 annoucement</a>:</p>
+<blockquote>
+<p>There’s one other change we’d like to talk about here: undefined behavior.
+Rust generally strives to minimize undefined behavior, having none of it in
+safe code, and as little as possible in unsafe code. One area where you could
+invoke UB is when a panic! goes across an FFI boundary. In other words, this:</p>
+</blockquote>
+<pre><code class="language-rust">extern &quot;C&quot; fn panic_in_ffi() {
+    panic!(&quot;Test&quot;);
+}
+</code></pre>
+<blockquote>
+<p>This cannot work, as the exact mechanism of how panics work would have to
+be reconciled with how the &quot;C&quot; ABI works, in this example, or any other ABI
+in other examples.</p>
+<p>In Rust 1.24, this code will now abort instead of producing undefined behavior.</p>
+</blockquote>
+<p>As mentioned above, this caused breakage. It started with <a href="https://github.com/chucklefish/rlua/issues/71">a bug filed against
+the <code>rlua</code> crate</a>. <code>rlua</code> is a
+package that provides high level bindings between Rust and the <a href="https://www.lua.org/">Lua programming
+language</a>.</p>
+<blockquote>
+<p>Side note: <code>rlua</code> is maintained by <a href="https://chucklefish.org/">Chucklefish</a>,
+a game development studio from London that's using Rust. Lua is a very
+popular language to use for extending and scripting games. We care deeply about
+production Rust users, and so handling this was a very high priority for the
+Rust team.</p>
+</blockquote>
+<p>On Windows, and only on Windows, any attempt to handle errors from Lua would
+simply abort. This makes <code>rlua</code> unusable, as any error of any kind within Lua
+causes your program to die.</p>
+<p>After digging in, the culpurit was found: <code>setjmp</code>/<code>longjmp</code>. These functions
+are provided by the C standard library as a means of handling errors. You
+first call <code>setjmp</code>, and then, at some later point in time, call <code>longjmp</code>.
+When you do, control flow returns to where you had previously called
+<code>setjmp</code>. This is often used as a way to implement exceptions, and sometimes,
+even coroutines. Lua's implementation uses <code>setjmp</code>/<code>longjmp</code> <a href="https://www.lua.org/pil/24.3.html">to implement
+exceptions</a>:</p>
+<blockquote>
+<p>Unlike C++ or Java, the C language does not offer an exception handling
+mechanism. To ameliorate this difficulty, Lua uses the setjmp facility from
+C, which results in a mechanism similar to exception handling. (If you
+compile Lua with C++, it is not difficult to change the code so that it uses
+real exceptions instead.)</p>
+</blockquote>
+<p>The issue is this: what happens when some C code <code>setjmp</code>/<code>longjmp</code>'s through
+Rust stack frames? Because drop checking and borrow checking know nothing
+about this style of control flow, if you <code>longjmp</code> across a Rust stack
+frame that has any type that's not <code>Copy</code> on its stack, undefined
+behavior will result. However, if the jump happens entirely in C, this
+should work just fine. This is how <code>rlua</code> was managing it: every call
+into Lua is <a href="https://www.lua.org/pil/24.3.2.html">wrapped with <code>lua_pcall</code></a>:</p>
+<blockquote>
+<p>When you write library functions for Lua, however, there is a standard way
+to handle errors. Whenever a C function detects an error, it simply calls
+<code>lua_error</code>, (or better yet <code>luaL_error</code>, which formats the error message and
+then calls <code>lua_error</code>). The <code>lua_error</code> function clears whatever needs to be
+cleared in Lua and jumps back to the <code>lua_pcall</code> that originated that
+execution, passing along the error message.</p>
+</blockquote>
+<p>So, the question becomes: Why does this break? And why does it break on
+Windows?</p>
+<p>When we talked about <code>setjmp</code>/<code>longjmp</code> inititally, a key phrase here wasn't
+highlighted. Here it is:</p>
+<blockquote>
+<p>After digging in, the culpurit was found: <code>setjmp</code>/<code>longjmp</code>. These functions
+are <em>provided by the C standard library</em> as a means of handling errors.</p>
+</blockquote>
+<p>These functions aren't part of the C language, but part of the standard
+library. That means that platform authors implement these functions, and
+their implementations may differ.</p>
+<p>Windows has a concept called SEH, short for <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms680657(v=vs.85).aspx">&quot;Structured Exception
+Handling&quot;</a>.
+Windows uses SEH to implement <code>setjmp</code>/<code>longjmp</code>, as the whole idea of SEH
+is to have uniform error handling. For similar reasons, C++ exceptions use
+SEH, as do Rust panics.</p>
+<p>Before we can sort the exact details of what's happening, let's look at how <code>rlua</code>
+works. <code>rlua</code> has an internal function, <code>protect_lua_call</code>, used to call into
+Lua. Using it looks like this:</p>
+<pre><code class="language-rust">protect_lua_call(self.state, 0, 1, |state| {
+    ffi::lua_newtable(state);
+})?;
+</code></pre>
+<p>That is, <code>protect_lua_call</code> takes some arguments, one of which is a closure. This
+closure is passed to <code>lua_pcall</code>, which catches any <code>longjmp</code>s that may be thrown
+by the code passed to it, aka, that closure.</p>
+<p>Consider the code above, and imagine that <code>lua_newtable</code> here could call
+<code>longjmp</code>. Here's what should happen:</p>
+<ol>
+<li><code>protect_lua_call</code> takes our closure, and passes it to <code>lua_pcall</code>.</li>
+<li><code>lua_pcall</code> calls <code>setjmp</code> to handle any errors, and invokes our closure.</li>
+<li>Inside our closure, <code>lua_newtable</code> has an error, and calls <code>longjmp</code>.</li>
+<li>The initial <code>lua_pcall</code> catches the <code>longjmp</code> with the <code>setjmp</code> it called earlier.</li>
+<li>Everyone is happy.</li>
+</ol>
+<p>However, the implementation of <code>protect_lua_call</code> converts our closure to an
+<code>extern fn</code>, since that's what Lua needs. So, with the changes in 1.24.0, it
+sets up a panic handler that will cause an abort. In other words, the code
+sorta looks something like this pseudo code now:</p>
+<pre><code class="language-rust">protect_lua_call(self.state, 0, 1, |state| {
+    let result = panic::catch_unwind(|| {
+        ffi::lua_newtable(state);
+    });
+
+    if result.is_err() {
+        process::abort();
+    }
+})?;
+</code></pre>
+<p>Earlier, when discussing <code>setjmp</code>/<code>longjmp</code>, we said that the issue with it in
+Rust code is that it doesn't handle Rust destructors. So, on every platform but
+Windows, the above <code>catch_unwind</code> shenanigans is effectively ignored, so
+everything works. However, on Windows, since both <code>setjmp</code>/<code>longjmp</code> and Rust
+panics use SEH, the <code>longjmp</code> gets &quot;caught&quot;, and runs the new abort code!</p>
+<p>The <a href="https://github.com/rust-lang/rust/pull/48572">solution here</a> is to
+generate the abort handler, but in a way that <code>longjmp</code> won't trigger it.  It's
+not 100% clear if this will make it into Rust 1.25; if the landing is smooth,
+we may backport, otherwise, this functionality will be back in 1.26.</p>
+<h3><a href="#emit-utf-16-files-for-linker-arguments-on-windows" aria-hidden="true" class="anchor" id="emit-utf-16-files-for-linker-arguments-on-windows"></a>Emit UTF-16 files for linker arguments on Windows</h3>
+<p>TL;DR: <code>rustc</code> stopped working for some Windows users in edge-case situations.
+If it's been working for you, you were not affected by this bug.</p>
+<p>In constrast with the previous bug, which is very complex and tough to understand,
+this bug's impact is simple: if you have non-ASCII paths in the directory where
+you invoke <code>rustc</code>, in 1.24, it would incorrectly error with a message like</p>
+<blockquote>
+<p>fatal error LNK1181: cannot open input file</p>
+</blockquote>
+<p>The PR that caused it, <a href="https://github.com/rust-lang/rust/pull/47507">#47507</a>,
+has a good explanation of the behavior that ended up causing the problem:</p>
+<blockquote>
+<p>When spawning a linker rustc has historically been known to blow OS limits
+for the command line being too large, notably on Windows. This is especially
+true of incremental compilation where there can be dozens of object files per
+compilation. The compiler currently has logic for detecting a failure to
+spawn and instead passing arguments via a file instead, but this failure
+detection only triggers if a process actually fails to spawn.</p>
+</blockquote>
+<p>However, when generating that file, we were doing it incorrectly. As <a href="https://docs.microsoft.com/en-gb/cpp/build/reference/unicode-support-in-the-compiler-and-linker#linker-response-files-and-def-files">the
+docs state</a>:</p>
+<blockquote>
+<p>Response files and DEF files can be either UTF-16 with a BOM, or ANSI.</p>
+</blockquote>
+<p>We were providing a UTF-8 encoded file, with no
+<a href="https://en.wikipedia.org/wiki/Byte_order_mark">BOM</a>. The fix is therefore
+straightforward: produce a UTF-16 file with a BOM.</p>
+<h3><a href="#make-the-error-index-generator-work-again" aria-hidden="true" class="anchor" id="make-the-error-index-generator-work-again"></a>Make the error index generator work again</h3>
+<p>TL;DR: building Rust 1.24.0 with Rust 1.24.0 broke in some circumstances.
+If you weren't building Rust yourself, you were not affected by this bug.</p>
+<p>When packaging Rust for various Linux distros, it was found that <a href="https://github.com/rust-lang/rust/issues/48308">building
+1.24 with 1.24 fails</a>.
+This was caused by an incorrect path, causing certain metadata to not
+be generated properly.</p>
+<p>As this issue is not particularly interesting, and only affects a small
+number of people, all of whom should be aware of it by now, we won't go
+into the details further. To learn more, please check out the issue and
+the resulting discussion.</p>
+<h3><a href="#cargo-will-warn-on-windows-7-if-an-update-is-needed" aria-hidden="true" class="anchor" id="cargo-will-warn-on-windows-7-if-an-update-is-needed"></a>Cargo will warn on Windows 7 if an update is needed.</h3>
+<p>TL;DR: Cargo couldn't fetch the index from crates.io if you were using an older
+Windows without having applied security fixes. If you are using a newer
+Windows, or a patched Windows, you are not affected by this bug.</p>
+<p>In February of 2017, <a href="https://githubengineering.com/crypto-deprecation-notice/">GitHub announced that they were dropping support for
+weak cryptographic
+standards</a>. One
+year later, in February of 2018, <a href="https://blog.github.com/2018-02-23-weak-cryptographic-standards-removed/">the deprecation period is over, and support
+is
+removed</a>.
+In general, this is a great thing.</p>
+<p>Cargo uses GitHub to store the index of Crates.io, our package repository.
+It also uses <code>libgit2</code> for <code>git</code> operations. <code>libgit2</code> uses
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa382925(v=vs.85).aspx">WinHTTP</a>
+for making HTTP calls. As part of the OS, its feature set depends on the OS you're using.</p>
+<blockquote>
+<p>This section uses &quot;Windows 7&quot; to mean &quot;Windows 7, Windows Server 2018, and Windows Server 2012&quot;,
+because it's much shorter. The following applies to all three of these editions of Windows,
+however.</p>
+</blockquote>
+<p>Windows 7 <a href="https://support.microsoft.com/en-us/help/3140245/update-to-enable-tls-1-1-and-tls-1-2-as-a-default-secure-protocols-in">received an update</a>
+in June of 2016 regarding TLS. Before the patch, Windows 7 would use TLS 1.0 by default. This update
+allows for applications to use TLS 1.1 or 1.2 natively instead.</p>
+<p>If your system has not received that update, then you'd still be using TLS 1.0. This means
+that accessing GitHub would start to fail.</p>
+<p><code>libgit2</code> <a href="https://github.com/libgit2/libgit2/pull/4550">created a fix</a>, using the <code>WinHTTP</code> API
+to request TLS 1.2. On master, we've <a href="https://github.com/rust-lang/cargo/pull/5091">updated to fix this</a>,
+but for 1.24.1 stable, we're <a href="https://github.com/rust-lang/cargo/pull/5069">issuing a warning</a>,
+suggesting that they upgrade their Windows version. Although the <code>libgit2</code> fix
+could have been backported, we felt that the code change footprint was too
+large for the point release, especially since the issue does not affect patched
+systems.</p>
+<h2><a href="#contributors-to-1241" aria-hidden="true" class="anchor" id="contributors-to-1241"></a>Contributors to 1.24.1</h2>
+<p><a href="https://thanks.rust-lang.org/rust/1.24.1">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

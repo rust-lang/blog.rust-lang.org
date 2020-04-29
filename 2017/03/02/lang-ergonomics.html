@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust's language ergonomics initiative | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust's language ergonomics initiative | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust's language ergonomics initiative | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust's language ergonomics initiative" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust's language ergonomics initiative</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 2, 2017 &middot; Aaron Turon
+    
+    </div>
+
+    <div class="post">
+      <p>To help bring our <a href="https://blog.rust-lang.org/2017/02/06/roadmap.html">2017 vision for Rust</a> to fruition, the Rust subteams are
+launching initiatives targeted at specific roadmap goals. <strong>This post covers the
+language team's major initiative: improving the ergonomics of the core
+language.</strong> The aim is to improve productivity and bring down the learning curve
+by streamlining features and glossing over irrelevant details.</p>
+<h2><a href="#ergonomics" aria-hidden="true" class="anchor" id="ergonomics"></a>Ergonomics</h2>
+<p><strong>Ergonomics is a measure of the friction you experience when trying to get
+things done with a tool</strong>. You want to achieve a state of &quot;flow&quot;, in which ideas
+and intuitions are steadily transformed into working code with a minimum of
+fuss. (And, with Rust, we want that code to be reliable and fast as well.) The
+great threat to this experience is <strong>interruptions</strong>, which come in many forms:
+looking things up, switching contexts, going through a large amount of ceremony,
+or dealing with reams of errors where the compiler pedantically points out tiny
+things you forgot. Anything that takes your attention away from the problem at
+hand and puts it on details that don't really matter (or don't matter <em>just yet</em>).</p>
+<p>A corollary is that ergonomics is rarely about raw character count. When you
+have good momentum, the difference between typing <code>pos</code> and <code>position</code> isn't so
+significant; <strong>what matters much more is how easy it is to remember the right
+one to type</strong>. Similarly, <em>typing</em> <code>ref</code> in a <code>match</code> pattern, or <code>*</code> to
+dereference an <code>&amp;i32</code>, is easy; knowing or remembering to type them, on the
+other hand...</p>
+<p>The same things you have to remember as an expert are things you have to learn
+as a newbie. Ergonomic improvements make life better for everyone.</p>
+<p>Often, the heart of the matter is the question of <strong>what to make implicit</strong>. In
+the rest of this post, I'll present a basic framework for thinking about this
+question, and then apply that framework to three areas of Rust, analyzing both
+the current design and some streamlining we may want to consider this year.</p>
+<h3><a href="#implicit-vs-explicit" aria-hidden="true" class="anchor" id="implicit-vs-explicit"></a>Implicit vs explicit</h3>
+<p><strong>Information is implicit when it is <em>implied</em> but not <em>expressed</em>.</strong> The
+potential ergonomic wins are pretty easy to see: forcing you to write down
+information that's obvious (because it's already implied) is a pain, because it
+adds distracting noise and is easy to forget. Allowing you to leave it implicit
+reduces that friction. Yet implicitness gets a bad rap, with Python going so far
+as to state &quot;explicit is better than implicit&quot; as a core design rule. Why?</p>
+<p>Implicitness can be very powerful. After all, the compiler knows a <em>lot</em> about
+your code, and it's possible to leverage that to inject behavior in all kinds of
+subtle ways. If taken too far, these techniques can impair readability, or
+worse: introduce surprising behavior that can be tricky to track down, because
+it's the result of a subtle chain of inference. If you've had first-hand
+experience with these pitfalls, it's easy to come away with the sense that
+implicitness itself is to blame.</p>
+<p>But this, in my opinion, is a misdiagnosis of the problem, one that throws out
+the baby with the bathwater. The root issue is instead: <strong>how much information
+do you need to confidently understand what a particular line of code is doing,
+and how hard is that information to find?</strong> Let's call this the <em>reasoning
+footprint</em> for a piece of code. The pitfalls above come from the reasoning
+footprint getting out of hand, rather than implicitness per se.</p>
+<p>Does readability then demand that we <em>minimize</em> the reasoning footprint? I don't
+think so: make it too small, and code becomes hopelessly verbose, making it
+difficult to read by forcing too much information into view at all times. What
+we want is a sweet spot, where routine or easy to find details can be left out,
+but relevant or surprising information is kept front and center.</p>
+<h3><a href="#how-to-analyze-and-manage-the-reasoning-footprint" aria-hidden="true" class="anchor" id="how-to-analyze-and-manage-the-reasoning-footprint"></a>How to analyze and manage the reasoning footprint</h3>
+<p>There are three dimensions of the reasoning footprint for implicitness:</p>
+<ul>
+<li>
+<p><strong>Applicability</strong>. Where are you allowed to elide implied information? Is
+there any heads-up that this might be happening?</p>
+</li>
+<li>
+<p><strong>Power</strong>. What influence does the elided information have? Can it radically
+change program behavior or its types?</p>
+</li>
+<li>
+<p><strong>Context-dependence</strong>. How much of do you have to know about the rest of the
+code to know what is being implied, i.e. how elided details will be filled in?
+Is there always a clear place to look?</p>
+</li>
+</ul>
+<p><strong>The basic thesis of this post is that implicit features should balance these
+three dimensions</strong>. If a feature is large in one of the dimensions, it's best to
+strongly limit it in the other two.</p>
+<p>The <a href="https://blog.rust-lang.org/2016/11/10/Rust-1.13.html"><code>?</code> operator</a> in Rust
+is a good example of this kind of tradeoff. It explicitly (but concisely) marks
+a point where you will bail out of the current context on an error, possibly
+doing an implicit conversion on the way. The fact that it's marked means the
+feature has strongly limited applicability: you'll never be surprised that it's
+coming into play. On the other hand, it's fairly powerful, and somewhat
+context-dependent, since the conversion can depend on the type where <code>?</code> is
+used, and the type expected in the scope it's jumping to. Altogether, this
+careful balance makes error handling in Rust feels as ergonomic as working with
+exceptions while avoiding some of their well-known downsides.</p>
+<p>By contrast, a feature like unrestricted implicit conversion rightfully has a
+bad reputation, because it's universally applicable, quite powerful, <em>and</em>
+context-dependent. If we were to expand implicit conversions in Rust, we would
+likely limit their power (by, say, restricting them to <code>AsRef</code>-style coercions,
+which can do very little).</p>
+<p>One route for strongly limiting context-dependence is employing <em>conventions</em>,
+in which the compiler is simply assuming a default unless told otherwise. Often
+such conventions are universal and well-known, meaning that you don't need to
+know anything about the rest of the code to know what they are. A good example
+of this technique in Rust is the fact that <code>mod foo;</code> looks for <code>foo.rs</code> (or
+<code>foo/mod.rs</code>) by default.</p>
+<p>One final point. &quot;Implicitness&quot; is often relative to where the language is
+today, something that seems radical at first—like type inference!—but then
+quickly disappears into the background, to the point that it no longer feels
+implicit at all (see <a href="https://thefeedbackloop.xyz/stroustrups-rule-and-layering-over-time/">Stroustrup's rule</a>). But sometimes a bit of implicitness
+really is a bad idea. The key is to carefully consider the impact on the
+reasoning footprint.</p>
+<h2><a href="#example-type-annotations" aria-hidden="true" class="anchor" id="example-type-annotations"></a>Example: type annotations</h2>
+<p>One bit of ergonomics that is increasingly taken for granted is <em>type
+inference</em>. In the days of yore, you'd have to annotate every local variable
+with its type, a practice that seems wildly verbose now—but at the time, type
+inference seemed wildly implicit.</p>
+<p>Type inference in Rust is quite powerful, but we limit the other two dimensions:</p>
+<ul>
+<li>
+<p>Applicability: type inference happens only for variable bindings; data
+types and functions must include complete, explicit signatures.</p>
+</li>
+<li>
+<p>Context-dependence: because data types and functions are annotated, it's easy
+to determine the information that's influencing the outcome of inference. You
+only need to look <em>shallowly</em> at code outside of the current function. Another
+way of saying this is that type inference is performed modularly, one function
+body at a time.</p>
+</li>
+</ul>
+<p>By and large, the amount of type inference we do in Rust seems to be a good
+match for what you can hold in your head.</p>
+<p>The type system also provides a good example of using conventions for
+ergonomics: <a href="https://github.com/rust-lang/rfcs/pull/141">lifetime elision</a>. That feature allows you to leave off lifetimes
+from function signatures in the vast majority of cases (check out the RFC—we
+measured!). <strong>Lifetime elision greatly aids learnability, because it allows you
+to work at an intuitive level with borrowing before you grapple with explicit
+lifetimes.</strong></p>
+<ul>
+<li>
+<p>Applicability: lifetime elision applies to a broad class of locations—any
+function signature—but is limited to those cases for which the lifetimes are
+<em>strongly</em> implied.</p>
+</li>
+<li>
+<p>Power: limited; elision is just a shorthand for a use of lifetime parameters,
+and if you get this wrong, the compiler will complain.</p>
+</li>
+<li>
+<p>Context-dependence: here, we overshot. The fact that elision applies to types
+other than <code>&amp;</code> and <code>&amp;mut</code>, means that to even know whether reborrrowing is
+happening in a signature like <code>fn lookup(&amp;self) -&gt; Ref&lt;T&gt;</code>, you need to know
+whether <code>Ref</code> has a lifetime parameter that's being left out. For something as
+common as function signatures, this is too much context. We've been considering
+pushing in the direction of a small but explicit marker to say that a lifetime
+is being elided for <code>Ref</code>, a strategy similar to the one for <code>?</code> mentioned
+earlier.</p>
+</li>
+</ul>
+<p>There's also been some extensions to the original elision proposal, again
+carefully crafted to follow these rules, like the <a href="https://github.com/rust-lang/rfcs/pull/1623">lifetimes in statics</a> RFC.</p>
+<h3><a href="#idea-implied-bounds" aria-hidden="true" class="anchor" id="idea-implied-bounds"></a>Idea: implied bounds</h3>
+<p>One papercut with Rust today is the fact that, for certain data structures, you
+end up having to repeat the same set of trait bounds over and over. <code>HashMap</code> is
+a good example; it takes a key type which, in practice, must satisfy the <code>Hash</code>
+and <code>Eq</code> traits. So the question is, how should we understand a signature like
+the following?</p>
+<pre><code class="language-rust">fn use_map&lt;K, V&gt;(map: HashMap&lt;K, V&gt;) { ... }
+</code></pre>
+<p>Right now, such a signature would be accepted, but if you tried to use any of
+<code>map</code>'s methods, you'd get an error that <code>K</code> needs to be <code>Hash</code> and <code>Eq</code>, and
+have to go back and add those bounds. That's an example of the compiler being
+pedantic in a way that can interrupt your flow, and doesn't <em>really</em> add
+anything; the fact that we're using <code>K</code> as a hashmap key essentially forces some
+additional assumptions about the type. But the compiler is making us spell out
+those assumptions explicitly in the signature. This situation seems ripe for an
+ergonomic improvement.</p>
+<p>It's
+<a href="http://smallcultfollowing.com/babysteps/blog/2014/07/06/implied-bounds/">straightforward</a>
+to assume bounds that are &quot;implied&quot; by the type, like assuming that <code>K</code> must be
+<code>Hash</code> and <code>Eq</code> above, by tying it to the type definition:</p>
+<pre><code class="language-rust">struct HashMap&lt;K: Hash + Eq, V&gt; { ... }
+</code></pre>
+<p>What's the impact on the reasoning footprint? It means that to completely
+understand a signature like</p>
+<pre><code class="language-rust">fn use_map&lt;K, V&gt;(map: HashMap&lt;K, V&gt;) { ... }
+</code></pre>
+<p>you need to be aware of the bounds on any type constructor like <code>HashMap</code> that
+you're applying to a type variable like <code>K</code>. So in particular, if you're trying
+to invoke <code>use_map</code>, you need to know that there are some unstated constraints
+on <code>K</code>.</p>
+<ul>
+<li>
+<p>Applicability: very broad; applies to any use of generics.</p>
+</li>
+<li>
+<p>Power: very limited; the bounds will almost always be needed anyway, and in
+any case adding bounds is not very risky.</p>
+</li>
+<li>
+<p>Context-dependence: fairly limited; it draws from the bounds on all type
+constructors that are applied to type variables (like <code>HashMap&lt;K, V&gt;</code>). Usually you will be well aware of these bounds anyway, and when <em>using</em>
+a function like <code>use_map</code>, you're generally going to be passing in an existing
+<code>HashMap</code>, which by construction will ensure that the bounds already hold.
+The compiler can reliably also produce an error pointing directly to the
+type(s) imposing unfulfilled bounds.</p>
+</li>
+</ul>
+<h2><a href="#example-ownership" aria-hidden="true" class="anchor" id="example-ownership"></a>Example: ownership</h2>
+<p>A lot of work went into making Rust's ownership system ergonomic, and that work
+entailed judicious use of &quot;implicit&quot; features. It's particularly instructive to
+look at the places where borrowing is explicit, and places where it's not:</p>
+<ul>
+<li>Borrowing is implicit for the receiver when invoking a method.</li>
+<li>Borrowing is explicit for normal function arguments and in other expressions.</li>
+</ul>
+<p>Ownership is important in Rust, and reasoning locally about it is vital. So why
+did we end up with this particular mix of implicit and explicit ownership
+tracking?</p>
+<ul>
+<li>
+<p>Applicability: common, but narrowly-described: it applies only to the receiver
+of method calls.</p>
+</li>
+<li>
+<p>Power: moderately powerful, since it can determine whether the receiver can be
+mutated (by mutably borrowing it). That's mitigated to some degree by borrow
+checking, which will at least ensure that it's <em>permitted</em> to do such a borrow.</p>
+</li>
+<li>
+<p>Context-dependence: in principle, you need to know how the method is resolved,
+and then its signature. In practice, the style of <code>self</code> borrowing is almost
+always implied by the method name (e.g. <code>push()</code> versus <code>len()</code>). Notably, this
+point does <em>not</em> apply to function arguments.</p>
+</li>
+</ul>
+<p><strong>This design also aids learnability, by often just doing &quot;the obvious thing&quot;
+for borrowing, and thereby limiting the situations in which newcomers have to
+grapple with choices about it</strong>.</p>
+<h3><a href="#ideas-implied-borrows" aria-hidden="true" class="anchor" id="ideas-implied-borrows"></a>Ideas: implied borrows</h3>
+<p>Nevertheless, there are some pain points around borrowing in Rust today. To wit:</p>
+<p><strong>Discarding ownership</strong>. Sometimes you have ownership of a value, like a
+<code>String</code>, and want to pass it to a function that only needs a borrow (say,
+<code>&amp;str</code>), after which you no longer need the value. Today, you <em>must</em> borrow the
+value in the argument:</p>
+<pre><code class="language-rust">fn read_config(path: &amp;Path) -&gt; Config { ... }
+
+let mut path = PathBuf::new(src_dir);
+path.push(&quot;Config.toml&quot;);
+
+// we have to borrow `path` with `&amp;` even though we're done with it
+let config = read_config(&amp;path);
+</code></pre>
+<p>But we could easily allow you to write <code>read_config(path)</code>, implicitly borrowing
+<code>path</code> for <code>read_config</code> and then <em>dropping it</em> immediately afterwards. That
+would retain one's ability to reason locally about ownership, since ownership of
+<code>path</code> is indeed fully relinquished from the caller's perspective (and the
+buffer is destroyed at the end of the call to <code>read_config</code>). But it allows you
+to gloss over the unimportant detail that the callee happened to only need a
+borrow. And again, if you just forgot to borrow, and try to use <code>path</code>
+afterward, the compiler will catch it, just as it does today. This is an example
+of a not terribly powerful bit of inference (it's only introducing a shared
+borrow for an object about to be dropped) that we'd allow to occur virtually
+everywhere.</p>
+<p><strong>Borrowing in match patterns</strong>. One stumbling block when learning Rust is the
+interaction between pattern matching and borrowing. In particular, when you're
+pattern matching against borrowed data, you often have to do a little
+reborrowing dance:</p>
+<pre><code class="language-rust">match *foo {
+    Some(ref contents) =&gt; { ... }
+    None =&gt; { ... }
+}
+</code></pre>
+<p>Here we're using <code>*</code> to dereference an <code>Option</code>, and then <code>ref</code> to <em>re</em>reference
+its contents. Beginners and experienced Rustaceans alike tend to miss one or
+both of these markers, in part because it's usually <em>the only thing you could be
+doing</em>. Thus, we could consider inferring these markers from context:</p>
+<ul>
+<li>
+<p>Infer the need for dereferencing based on the type of the expression being
+matched and the arms of the match. That's a very limited amount of context
+that will already be front and center in the programmer's head.</p>
+</li>
+<li>
+<p>Infer the need for <code>ref</code> (or <code>ref mut</code>) based on the borrowing usage in the
+match arm, much like we do for closures already. That expands the reasoning
+footprint a bit, since you can't tell at a glance from the pattern what kind
+of borrow is being taken. But examining code blocks to determine the borrows
+<em>they</em> take is something Rust programmers do all the time, and as explained in
+the ownership section, the borrowing system is designed to make that easy to
+do. And in any case, it's still quite <em>local</em> context. As usual, if you get
+this wrong, the borrow checker will catch it.</p>
+</li>
+</ul>
+<p>In addition to that story for context-dependence, the feature would be only
+narrowly applicable (only to <code>match</code>) and only moderately powerful (since,
+again, the borrower checker will catch mistakes).</p>
+<p>Both of these changes would expand the reasoning footprint slightly, but in a
+very controlled way. They remove the need to write down annotations which are
+essentially already forced by nearby code. And that in turn lowers the learning
+curve for <code>match</code>.</p>
+<h2><a href="#example-the-module-system" aria-hidden="true" class="anchor" id="example-the-module-system"></a>Example: the module system</h2>
+<p>Finally, let's take the module system. In the most common usage, modules are
+defined like so:</p>
+<pre><code class="language-rust">mod some_module;
+</code></pre>
+<p>where <code>some_module.rs</code> is a file at an appropriate place in the source tree. You
+can specify an explicit path if you prefer, so this is a case of implicitness
+through convention. But while this bit of implicitness helps, the module system
+still makes a number of fine distinctions that trip up newcomers and require
+redundancy that even old hands can forget.</p>
+<h3><a href="#idea-eliminate-the-need-for-extern-crate-and-maybe-mod-too" aria-hidden="true" class="anchor" id="idea-eliminate-the-need-for-extern-crate-and-maybe-mod-too"></a>Idea: eliminate the need for <code>extern crate</code>, and maybe <code>mod</code> too</h3>
+<p>The clearest-cut case is the <code>extern crate</code> declaration, which is used to bring
+an external crate into scope. The vast majority of Rust projects use Cargo for
+dependency management, and already specify the crates they depend on in their
+<code>Cargo.toml</code> file. Hence, <code>extern crate</code> is usually redundant, and it's easy to
+forget to add it after updating <code>Cargo.toml</code>. New users often complain about
+baroque distinctions between <code>mod</code>, <code>use</code>, <code>extern crate</code>, and entries in
+<code>Cargo.toml</code>; maybe we could improve matters by obviating the need for <code>extern crate</code>.  What does that mean for the reasoning footprint?</p>
+<p>It means that to know what crates are in scope at the root, you need to consult
+the <code>Cargo.toml</code>, which becomes the sole source of truth for this
+concern. That's a pretty limited context: it's single place to look, and in many
+cases you already need some level of awareness of its contents, to know <em>which
+version</em> of the crate is being assumed. Inferring <code>extern crate</code> also fares well
+on the applicability front: only root modules are affected, so it's easy to
+know precisely when you need to consult <code>Cargo.toml</code>.</p>
+<p>Thinking along similar, but more radical lines, an argument could be made about
+the need for <code>mod</code> itself. After all, if we're usually just writing <code>mod some_module</code> to tell Rust to pull in a file at a canonical location with the
+same name, we're being forced to duplicate information that was already readily
+available. You could instead imagine the filesystem hierarchy directly informing
+the module system hierarchy. The concerns about limited context and
+applicability work out pretty much the same way as with <code>Cargo.toml</code>, and the
+learnability and ergonomic gains are significant.</p>
+<p>Now, both of these proposals assume your code follows the <em>typical</em> patterns,
+not making use of extra, non-default flexibility. There are a lot of questions
+about the fine details and expressiveness. But, at least from an <em>implicitness</em>
+perspective, neither of these changes set off any alarm bells for the reasoning
+footprint.</p>
+<h2><a href="#the-initiative" aria-hidden="true" class="anchor" id="the-initiative"></a>The initiative</h2>
+<p>With those aims and that design philosophy in mind, how do we plan to proceed?</p>
+<p>First off, we'll be using the <a href="https://github.com/rust-lang/rust-roadmap/issues/17">roadmap tracker</a> to help organize ideas for
+ergonomic improvements. The tracker is already populated with some of the ideas
+the language team has been mulling over, but we'll keep it updated as proposals
+emerge on the <a href="https://internals.rust-lang.org/">the internals forum</a> and elsewhere. The language team is eager
+to mentor, so if one of the ideas catches your eye and you'd like guidance
+working toward a full-blown RFC, log your interest on the tracker! And similarly
+for implementation, once the RFC has merged.</p>
+<p>Digging deeper, there's a vital cross-cutting concern: <em>empathy</em>. The goal here
+is to try to imagine and evaluate ways that Rust could be different. To do this
+well, we need to be able to put ourselves back in the shoes of a newcomer. Of
+someone who prefers a different workflow. We need to be able to come to Rust
+fresh, shedding our current habits and mental models and trying on new ones.</p>
+<p>And, perhaps most importantly, we need empathy for each other. Transformative
+insights can be fragile; they can start out embedded in ideas that have lots of
+problems. If we're too quick to shut down a line of thought based on those
+problems, we risk foreclosing on avenues to something better. We've got to have
+the patience to sit with ideas that are foreign and uncomfortable, and gain some
+new perspective from them. We've got to trust that we all want to make Rust
+better, and that good faith deliberation is the way to
+<a href="https://blog.rust-lang.org/2017/02/06/roadmap.html">make productivity a core value, without sacrificing the others</a>.</p>
+<p>Let's do this!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

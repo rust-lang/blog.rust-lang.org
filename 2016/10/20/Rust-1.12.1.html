@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.12.1 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.12.1 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.12.1 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.12.1" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.12.1</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 20, 2016 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce the latest version of Rust, 1.12.1. Rust is a
+systems programming language with a focus on reliability, performance, and
+concurrency.</p>
+<p>As always, you can <a href="https://www.rust-lang.org/install.html">install Rust 1.12.1</a> from the appropriate page on our
+website, or install via <a href="https://www.rustup.rs/">rustup</a> with <code>rustup update stable</code>.</p>
+<h3><a href="#whats-in-1121-stable" aria-hidden="true" class="anchor" id="whats-in-1121-stable"></a>What's in 1.12.1 stable</h3>
+<p>Wait... one-point-twelve-point... one?</p>
+<p>In <a href="https://blog.rust-lang.org/2016/09/29/Rust-1.12.html">the release announcement for 1.12</a> a few weeks ago, we said:</p>
+<blockquote>
+<p>The release of 1.12 might be one of the most significant Rust releases since
+1.0.</p>
+</blockquote>
+<p>It was true. One of the biggest changes was turning on a large compiler
+refactoring, <a href="https://blog.rust-lang.org/2016/04/19/MIR.html">MIR</a>, which re-architects the internals of the compiler. The
+overall process went like this:</p>
+<ul>
+<li>Initial MIR support landed in nightlies back in Rust 1.6.</li>
+<li>While work was being done, a flag, <code>--enable-orbit</code>, was added so that
+people working on the compiler could try it out.</li>
+<li>Back <a href="https://github.com/rust-lang/rust/pull/28748">in October</a>, we would always attempt to build MIR, even though it
+was not being used.</li>
+<li>A flag was added, <code>-Z orbit</code>, to allow users on nightly to try and use MIR
+rather than the traditional compilation step ('trans').</li>
+<li>After substantial testing over months and months, for Rust 1.12, <a href="https://github.com/rust-lang/rust/pull/34096">we enabled
+MIR by default</a>.</li>
+<li>In Rust 1.13, <a href="https://github.com/rust-lang/rust/pull/35764">MIR will be the only option</a>.</li>
+</ul>
+<p>A change of this magnitude is huge, and important. So it's also important to do
+it right, and do it carefully. This is why this process took so long; we
+regularly tested the compiler against every crate on crates.io, we asked people
+to try out <code>-Z orbit</code> on their private code, and after six weeks of beta, no
+significant problems appeared. So we made the decision to keep it on by default
+in 1.12.</p>
+<p>But large changes still have an element of risk, even though we tried to reduce
+that risk as much as possible. And so, after release, 1.12 saw a fair number of
+regressions that we hadn't detected in our testing. Not all of them are
+directly MIR related, but when you change the compiler internals so much, it's
+bound to ripple outward through everything.</p>
+<h3><a href="#why-make-a-point-release" aria-hidden="true" class="anchor" id="why-make-a-point-release"></a>Why make a point release?</h3>
+<p>Now, given that we have a six-week release cycle, and we're halfway towards
+Rust 1.13, you may wonder why we're choosing to cut a patch version of Rust
+1.12 rather than telling users to just wait for the next release. We have
+previously said something like &quot;point releases should only happen in extreme
+situations, such as a security vulnerability in the standard library.&quot;</p>
+<p>The Rust team cares deeply about the stability of Rust, and about our users'
+experience with it. We could have told you all to wait, but we want you to know
+how seriously we take this stuff. We think it's worth it to demonstrate our
+commitment to you by putting in the work of making a point release in this
+situation.</p>
+<p>Furthermore, given that this is not security related, it's a good time to
+practice actually cutting a point release. We've never done it before, and the
+release process is <a href="https://forge.rust-lang.org/release-process.html">semi-automated</a> but still not completely so. Having a point
+release in the world will also <a href="https://github.com/rust-lang/rust/pull/37173#issuecomment-253938822">shake out any bugs</a> in dealing with point
+releases in other tooling as well, like <a href="https://www.rustup.rs/">rustup</a>. Making sure that this all goes
+smoothly and getting some practice going through the motions will be useful if
+we ever need to cut some sort of <em>emergency</em> point release due to a security
+advisory or anything else.</p>
+<p>This is the first Rust point release since <a href="https://mail.mozilla.org/pipermail/rust-dev/2012-July/002152.html">Rust 0.3.1</a>, all the way back in
+2012, and marks 72 weeks since Rust 1.0, when we established our six week
+release cadence along with a commitment to aggressive stability
+guarantees. While we're disappointed that 1.12 had these regressions, we're
+really proud of Rust's stability and will to continue expanding our efforts to
+ensure that it's a platform you can rely on. We want Rust to be the most
+reliable programming platform in the world.</p>
+<h3><a href="#a-note-about-testing-on-beta" aria-hidden="true" class="anchor" id="a-note-about-testing-on-beta"></a>A note about testing on beta</h3>
+<p>One thing that you, as a user of Rust, can do to help us fix these issues
+sooner: test your code against the beta channel! Every beta release is a
+release candidate for the next stable release, so for the cost of an extra
+build in CI, you can help us know if there's going to be some sort of problem
+before it hits a stable release! It's really easy. For example, on
+<a href="https://travis-ci.org/">Travis</a>, you can use this as your <code>.travis.yml</code>:</p>
+<pre><code class="language-yaml">language: rust
+rust:
+  - stable
+  - beta
+</code></pre>
+<p>And you'll test against both. Furthermore, if you'd like to make it so that any
+beta failure doesn't fail your own build, do this:</p>
+<pre><code class="language-yaml">matrix:
+  allow_failures:
+    - rust: beta
+</code></pre>
+<p>The beta build may go red, but your build will stay green.</p>
+<p>Most other CI systems, such as <a href="https://www.appveyor.com/">AppVeyor</a>, should
+support <a href="https://www.appveyor.com/docs/build-configuration/#allow-failing-jobs">something
+similar</a>.
+Check the documentation for your specific continuous integration product for
+full details.</p>
+<h3><a href="#full-details" aria-hidden="true" class="anchor" id="full-details"></a>Full details</h3>
+<p>There were nine issues fixed in 1.12.1, and all of those fixes have been
+backported to 1.13 beta as well.</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/issues/36381">ICE: 'rustc' panicked at 'assertion failed: concrete_substs.is_normalized_for_trans()' #36381</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/36856">Confusion with double negation and booleans</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/36875">rustc 1.12.0 fails with SIGSEGV in release mode (syn crate 0.8.0)</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/36924">Rustc 1.12.0 Windows build of <code>ethcore</code> crate fails with LLVM error</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/36926">1.12.0: High memory usage when linking in release mode with debug info</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/36936">Corrupted memory after updated to 1.12</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/37026">&quot;Let NullaryConstructor = something;&quot; causes internal compiler error: &quot;tried to overwrite interned AdtDef&quot;</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/37112">Fix ICE: inject bitcast if types mismatch for invokes/calls/stores</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/37153">debuginfo: Handle spread_arg case in MIR-trans in a more stable way.</a></li>
+</ul>
+<p>In addition, there were four more regressions that we decided not to include
+in 1.12.1 for various reasons, but we'll be working on fixing those as soon
+as possible as well.</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/issues/36325">ICE, possibly related to associated types of associated types?</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/36799">Compilation of a crate using a large static map fails on latest i686-pc-windows-gnu Beta</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/37154">Regression: &quot;no method found&quot; error when calling same method twice, with HRTB impl</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/37109">ICE: fictitious type sizing_type_of</a></li>
+</ul>
+<p>You can see the full diff from 1.12.0 to 1.12.1
+<a href="https://github.com/rust-lang/rust/pull/37173">here</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

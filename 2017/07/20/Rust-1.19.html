@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.19 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.19 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.19 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.19" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.19</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">July 20, 2017 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce the latest version of Rust, 1.19.0. Rust is a
+systems programming language focused on safety, speed, and concurrency.</p>
+<p>If you have a previous version of Rust installed, getting Rust 1.19 is as easy as:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1190-2017-07-20">detailed release notes for
+1.19.0</a> on GitHub.</p>
+<h3><a href="#whats-in-1190-stable" aria-hidden="true" class="anchor" id="whats-in-1190-stable"></a>What's in 1.19.0 stable</h3>
+<p>Rust 1.19.0 has some long-awaited features, but first, a note for our Windows
+users. On Windows, Rust relies on <code>link.exe</code> for linking, which you can get via
+the &quot;Microsoft Visual C++ Build Tools.&quot; With the recent release of Visual
+Studio 2017, the directory structure for these tools has changed. As such, to
+use Rust, you had to stick with the 2015 tools or use a workaround (such as
+running <code>vcvars.bat</code>). In 1.19.0, <code>rustc</code> now knows how to find the 2017 tools,
+and so they work without a workaround.</p>
+<p>On to new features! Rust 1.19.0 is the first release that supports <a href="https://github.com/rust-lang/rust/pull/42068"><code>union</code>s</a>:</p>
+<pre><code class="language-rust">union MyUnion {
+    f1: u32,
+    f2: f32,
+}
+</code></pre>
+<p>Unions are kind of like <code>enum</code>s, but they are &quot;untagged&quot;. Enums have a &quot;tag&quot;
+that stores which variant is the correct one at runtime; unions elide this tag.</p>
+<p>Since we can interpret the data held in the union using the wrong variant and
+Rust can't check this for us, that means reading or writing a union's field is
+unsafe:</p>
+<pre><code class="language-rust">let u = MyUnion { f1: 1 };
+
+unsafe { u.f1 = 5 };
+
+let value = unsafe { u.f1 };
+</code></pre>
+<p>Pattern matching works too:</p>
+<pre><code class="language-rust">fn f(u: MyUnion) {
+    unsafe {
+        match u {
+            MyUnion { f1: 10 } =&gt; { println!(&quot;ten&quot;); }
+            MyUnion { f2 } =&gt; { println!(&quot;{}&quot;, f2); }
+        }
+    }
+}
+</code></pre>
+<p>When are unions useful? One major use-case is interoperability with C. C APIs
+can (and depending on the area, often do) expose unions, and so this makes writing
+API wrappers for those libraries significantly easier. Additionally, from <a href="https://github.com/rust-lang/rfcs/blob/master/text/1444-union.md#motivation">its RFC</a>:</p>
+<blockquote>
+<p>A native union mechanism would also simplify Rust implementations of
+space-efficient or cache-efficient structures relying on value
+representation, such as machine-word-sized unions using the least-significant
+bits of aligned pointers to distinguish cases.</p>
+</blockquote>
+<p>This feature has been long awaited, and there's still more improvements to come.
+For now, <code>union</code>s can only include <code>Copy</code> types and may not implement <code>Drop</code>.
+We expect to lift these restrictions in the future.</p>
+<blockquote>
+<p>As a side note, have you ever wondered how new features get added to Rust? This
+feature was suggested by Josh Triplett, and he <a href="https://youtu.be/U8Gl3RTXf88?list=PLE7tQUdRKcybLShxegjn0xyTTDJeYwEkI">gave a talk at RustConf
+2016</a>
+about the process of getting <code>union</code>s into Rust. You should check it out!</p>
+</blockquote>
+<p>In other news, <a href="https://github.com/rust-lang/rust/pull/42016"><code>loop</code>s can now <code>break</code> with a value</a>:</p>
+<pre><code class="language-rust">// old code
+let x;
+
+loop {
+    x = 7;
+    break;
+}
+
+// new code
+let x = loop { break 7; };
+</code></pre>
+<p>Rust has traditionally positioned itself as an &quot;expression oriented language&quot;, that is,
+most things are expressions that evaluate to a value, rather than statements. <code>loop</code> stuck
+out as strange in this way, as it was previously a statement.</p>
+<p>What about other forms of loops? It's not yet clear. See <a href="https://github.com/rust-lang/rfcs/blob/master/text/1624-loop-break-value.md#extension-to-for-while-while-let">its
+RFC</a>
+for some discussion around the open questions here.</p>
+<p>A smaller feature, closures that do not capture an environment <a href="https://github.com/rust-lang/rust/pull/42162">can now be coerced
+to a function pointer</a>:</p>
+<pre><code class="language-rust">let f: fn(i32) -&gt; i32 = |x| x + 1;
+</code></pre>
+<p>We now produce <a href="https://github.com/rust-lang/rust-installer/pull/57">xz compressed tarballs</a> and prefer them by default,
+making the data transfer smaller and faster. <code>gzip</code>'d tarballs are still produced
+in case you can't use <code>xz</code> for some reason.</p>
+<p>The compiler can now <a href="https://github.com/rust-lang/rust/pull/41370">bootstrap on
+Android</a>. We've long supported Android
+in various ways, and this continues to improve our support.</p>
+<p>Finally, a compatibility note. Way back when we were running up to Rust 1.0, we did
+a huge push to verify everything that was being marked as stable and as unstable.
+We overlooked one thing, however: <code>-Z</code> flags. The <code>-Z</code> flag to the compiler enables
+unstable flags. Unlike the rest of our stability story, you could still use <code>-Z</code> on
+stable Rust. Back in April of 2016, in Rust 1.8, we made the use of <code>-Z</code> on stable
+or beta produce a warning. Over a year later, we're fixing this hole in our
+stability story by <a href="https://github.com/rust-lang/rust/pull/41751">disallowing <code>-Z</code> on stable and beta</a>.</p>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1190-2017-07-20">detailed release notes</a> for more.</p>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
+<p>The largest new library feature is the <a href="https://github.com/rust-lang/rust/pull/41192"><code>eprint!</code> and <code>eprintln!</code> macros</a>.
+These work exactly the same as <code>print!</code> and <code>println!</code> but instead write
+to standard error, as opposed to standard output.</p>
+<p>Other new features:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/41449"><code>String</code> now implements <code>FromIterator&lt;Cow&lt;'a, str&gt;&gt;</code> and
+<code>Extend&lt;Cow&lt;'a, str&gt;&gt;</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/41530"><code>Vec</code> now implements <code>From&lt;&amp;mut [T]&gt;</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/41258"><code>Box&lt;[u8]&gt;</code> now implements <code>From&lt;Box&lt;str&gt;&gt;</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/41659"><code>SplitWhitespace</code> now implements <code>Clone</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/41764">
+<code>[u8]::reverse</code> is now 5x faster and
+<code>[u16]::reverse</code> is now 1.5x faster</a></li>
+</ul>
+<p>And some freshly-stabilized APIs:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/ffi/struct.OsString.html#method.shrink_to_fit"><code>OsString::shrink_to_fit</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/cmp/struct.Reverse.html"><code>cmp::Reverse</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/process/struct.Command.html#method.envs"><code>Command::envs</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/thread/struct.ThreadId.html"><code>thread::ThreadId</code></a></li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1190-2017-07-20">detailed release notes</a> for more.</p>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
+<p>Cargo mostly received small but valuable improvements in this release. The
+largest is possibly that <a href="https://github.com/rust-lang/cargo/pull/4026">Cargo no longer checks out a local working
+directory for the crates.io index</a>. This should provide smaller
+file size for the registry and improve cloning times, especially on Windows
+machines.</p>
+<p>Other improvements:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/cargo/pull/3929">Build scripts can now add environment variables to the environment
+the crate is being compiled in.
+Example: <code>println!(&quot;cargo:rustc-env=FOO=bar&quot;);</code></a></li>
+<li><a href="https://github.com/rust-lang/cargo/pull/3979">Workspace members can now accept glob file patterns</a></li>
+<li><a href="https://github.com/rust-lang/cargo/pull/3988">Added <code>--all</code> flag to the <code>cargo bench</code> subcommand to run benchmarks of all
+the members in a given workspace.</a></li>
+<li><a href="https://github.com/rust-lang/cargo/pull/4031">Added an <code>--exclude</code> option for excluding certain packages when using the
+<code>--all</code> option</a></li>
+<li><a href="https://github.com/rust-lang/cargo/pull/4084">The <code>--features</code> option now accepts multiple comma or space
+delimited values.</a></li>
+<li><a href="https://github.com/rust-lang/cargo/pull/3954">Added support for custom target specific runners</a></li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1190-2017-07-20">detailed release notes</a> for more.</p>
+<h3><a href="#contributors-to-1190" aria-hidden="true" class="anchor" id="contributors-to-1190"></a>Contributors to 1.19.0</h3>
+<p>Many people came together to create Rust 1.19. We couldn't have done it without
+all of you. <a href="https://thanks.rust-lang.org/rust/1.19.0">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

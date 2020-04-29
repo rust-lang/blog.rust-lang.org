@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The Rust Team All Hands in Berlin: a Recap | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="The Rust Team All Hands in Berlin: a Recap | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="The Rust Team All Hands in Berlin: a Recap | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- fonts -->
+<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
+<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="The Rust Team All Hands in Berlin: a Recap" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>The Rust Team All Hands in Berlin: a Recap</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 6, 2018 &middot; Aaron Turon
+    
+    </div>
+
+    <div class="post">
+      <p>Last week we held an &quot;All Hands&quot; event in Berlin, which drew more than 50 people
+involved in 15 different Rust Teams or Working Groups, with a majority being
+volunteer contributors. This was the first such event, and its location reflects
+the current concentration of team members in Europe. The week was a smashing
+success which we plan to repeat on at least an annual basis.</p>
+<p>The impetus for this get-together was, in part, our <a href="https://blog.rust-lang.org/2018/03/12/roadmap.html">ambitious plans</a> to ship
+<em>Rust, 2018 edition</em> later this year. A week of work-focused facetime was a
+great way to kick off these efforts!</p>
+<p>We've also asked attendees to blog and tweet about their experiences at the
+#RustAllHands hashtag; the Content Team will be gathering up and summarizing
+this content as well.</p>
+<h2><a href="#highlights-by-team" aria-hidden="true" class="anchor" id="highlights-by-team"></a>Highlights by team</h2>
+<p>Below we'll go through the biggest items addressed last week. <strong>Note
+that, as always, reaching consensus in a meeting does <em>not</em> mean any final
+decision has been made</strong>. All major decisions will go through the usual <a href="https://github.com/rust-lang/rfcs">RFC
+process</a>.</p>
+<h3><a href="#language-design" aria-hidden="true" class="anchor" id="language-design"></a>Language design</h3>
+<ul>
+<li><strong>Macros</strong>: put together a proposal for the 2018 edition.
+<ul>
+<li>Stabilize a forward-compatible subset of procedural macros that explicitly
+opts out of hygiene (by asking all names to be interpreted at the call
+site).</li>
+<li>Work out a revised API surface for procedural macros based on what we've learned so far.</li>
+<li>Stabilize importing macros through normal <code>use</code> statements.</li>
+<li><strong>Alex Crichton will drive the stabilization process</strong>.</li>
+</ul>
+</li>
+<li><strong>Extern types</strong>: worked through <a href="https://github.com/rust-lang/rust/issues/43467#issuecomment-377521693">remaining issues for stabilization</a>.</li>
+<li><strong>Improvements to <code>derive</code></strong>: a <a href="https://github.com/rust-lang/rfcs/pull/2385">proposal</a> to make <code>derive</code> more ergonomic in Rust 2018.</li>
+<li><strong>Best practices</strong>: set up a cross-cutting guidelines effort, encompassing the
+API guidelines but also including style, lints, and Lang Team recommendations.</li>
+</ul>
+<h3><a href="#libraries" aria-hidden="true" class="anchor" id="libraries"></a>Libraries</h3>
+<ul>
+<li><strong>SIMD</strong>: talked through final steps of stabilization; we hope to <a href="https://github.com/rust-lang/rust/issues/48556#issuecomment-378184312">stabilize in 1.27</a>.</li>
+<li><strong>Allocators</strong>: developed a conservative proposal for stabilizing global allocators; <strong>Simon Sapin has set up a <a href="https://github.com/rust-lang/rust/issues/49668">new tracking issue</a></strong>.</li>
+</ul>
+<h3><a href="#compiler" aria-hidden="true" class="anchor" id="compiler"></a>Compiler</h3>
+<ul>
+<li><strong>Tool integration</strong>: extensive discussion and planning about the needs of
+compiler clients, composable plugins, and the compiler's new query
+architecture.</li>
+<li><strong>Query compilation</strong>: a plan for end-to-end query compilation, i.e. fully-incremental compilation.</li>
+<li><strong>libsyntax</strong>: a long-run plan for a revamped libsyntax, shared amongst a variety of tools.</li>
+<li><strong>Contribution</strong>: improved contribution experience for the compiler.</li>
+</ul>
+<h3><a href="#community" aria-hidden="true" class="anchor" id="community"></a>Community</h3>
+<ul>
+<li><strong>Mozilla Activate</strong>: shipped a revamp of the page</li>
+<li><strong>RustBridge &quot;in a box&quot;</strong>: shipped a ton of resources.</li>
+<li><strong>Events</strong>: developed event standards, including:
+<ul>
+<li>Diversity Outreach</li>
+<li><a href="https://github.com/rust-community/events-team/pull/18">Speaker support and quality</a></li>
+<li><a href="https://github.com/rust-community/events-team/pull/19">Program guidelines</a></li>
+<li><a href="https://github.com/rust-community/events-team/pull/20">Review committee guidelines</a></li>
+<li>Communication and transparency (e.g. <a href="https://github.com/rust-community/events-team/pull/22">timelines</a>)</li>
+<li>Attendee experience, accessibility and support</li>
+</ul>
+</li>
+</ul>
+<h3><a href="#documentation" aria-hidden="true" class="anchor" id="documentation"></a>Documentation</h3>
+<ul>
+<li><strong>Edition planning</strong>: determined resources needed for the 2018 edition, what
+that means for the Rust Bookshelf, and who will be responsible for each.</li>
+<li><strong>Team blog</strong>: “This week in Rust docs” is going to move to a new <a href="https://rust-docs.github.io/blog/">docs team blog</a>!</li>
+<li><strong>Doxidize</strong> (aka rustdoc2): made <a href="https://github.com/steveklabnik/doxidize">initial public release</a>; it's like https://docusaurus.io/ but for Rust.</li>
+<li><strong>Intermediate-level docs</strong>: contributed to <a href="https://github.com/rust-docs/team/issues/8">idea generation</a>.</li>
+</ul>
+<h3><a href="#tools" aria-hidden="true" class="anchor" id="tools"></a>Tools</h3>
+<ul>
+<li><strong>Edition planning</strong>, especially for the rustfix tool.</li>
+<li><strong>Clippy lint audit</strong>: developed plan for reaching 1.0 on Clippy this year, based on categorizing lints into Correctness, Performance, Style, Complexity, Pedantry, and Nursery categories.</li>
+<li><strong>Custom test frameworks</strong>: reached consensus on most of the details for <a href="https://github.com/rust-lang/rfcs/pull/2318">the RFC</a></li>
+<li><strong>IDEs</strong>: discussed improvements to code completion, stability
+improvements, and new features like refactoring and auto-import support.</li>
+</ul>
+<h3><a href="#cargo" aria-hidden="true" class="anchor" id="cargo"></a>Cargo</h3>
+<ul>
+<li><strong>Xargo integration</strong>: making a few more platforms tier 1 addresses the
+immediate need for embedded; otherwise, plan to go
+the
+<a href="https://github.com/rust-lang/rfcs/pull/1133#issuecomment-362355002">&quot;std-aware Cargo&quot; route</a> late
+in 2018. Key insight: will entirely obsolete the concept of &quot;targets&quot; in rustup.</li>
+<li><strong>Rustup integration</strong>: with Xargo integration we can simplify rustup; plan to
+expose new interface via Cargo late in 2018.</li>
+<li><strong>Custom registries</strong>: ready to stabilize.</li>
+<li><strong>Profiles</strong>: the v2 design is clear, and <strong>Aleksey Kladov plans to implement</strong>.</li>
+<li><strong>Public dependencies</strong>: significantly revised plan to have more conservative ecosystem impact. <strong>Aaron Turon will write a blog post</strong>.</li>
+<li><strong>Build system integration</strong>: determined two pieces of functionality to implement to decouple the RLS from Cargo.</li>
+<li><strong>Project templates</strong>: developed a minimal design; <strong>withoutboats will write an RFC</strong>.</li>
+<li><strong>Custom workflows</strong>: designed workflow customization, which is useful for frameworks; <strong>Aaron Turon has written a <a href="http://aturon.github.io/2018/04/05/workflows/">blog post</a></strong>.</li>
+</ul>
+<h3><a href="#infrastructure" aria-hidden="true" class="anchor" id="infrastructure"></a>Infrastructure</h3>
+<ul>
+<li><strong>bors queue</strong>: hatched and resourced lots of ideas to reduce the PR queue for Rust 2018.</li>
+<li><strong>crater</strong>: pietroalbini is testing a bot for running crater!</li>
+<li><strong>Travis log bot</strong>: TimNN has <a href="https://github.com/rust-ops/rust-log-analyzer">written a bot</a> to <a href="https://github.com/rust-lang/rust/pull/49513#issuecomment-377538323">extract errors</a> from Travis logs</li>
+</ul>
+<h3><a href="#wg-cli-apps" aria-hidden="true" class="anchor" id="wg-cli-apps"></a>WG: CLI apps</h3>
+<ul>
+<li><a href="https://git.io/rust-all-hands-cli">WG overview slides</a>.</li>
+<li><strong>Survey and strategy</strong>: dove into survey data and developed strategy from it; posts forthcoming.</li>
+<li><strong>Distribution</strong>: &quot;distribution-friendly&quot; badge on crates.io</li>
+<li><strong>Extensible Cargo install</strong>: wrote <a href="https://github.com/rust-lang/rfcs/pull/2376">an RFC</a> on-site!</li>
+</ul>
+<h3><a href="#wg-network-services" aria-hidden="true" class="anchor" id="wg-network-services"></a>WG: network services</h3>
+<ul>
+<li><a href="https://gist.github.com/withoutboats/6d4c4639b286d3da19d89d8af82d82d7">WG overview slides</a>.</li>
+<li><strong>Launching the WG</strong>: determined goals for the WG, including async/await, documentaiton, mid-level HTTP libraries, and the <a href="https://github.com/tower-rs/tower">Tower</a> ecosystem.
+Kickoff announcement coming soon!</li>
+<li><strong>Async/await</strong>: finalized design and stabilization approach for RFCs (blog post and links to RFCs <a href="https://boats.gitlab.io/blog/post/2018-04-06-async-await-final/">here</a>).</li>
+</ul>
+<h3><a href="#wg-embedded-devices" aria-hidden="true" class="anchor" id="wg-embedded-devices"></a>WG: embedded devices</h3>
+<ul>
+<li><a href="https://github.com/japaric/all-hands-2018-embedded">WG overview slides</a></li>
+<li><strong>Embedded Rust on stable</strong>: addressed all known blockers and several mid-priority issues as well.</li>
+<li><strong>The Embedded Rust book</strong>: defined audience and basic outline.</li>
+</ul>
+<h3><a href="#wg-webassembly" aria-hidden="true" class="anchor" id="wg-webassembly"></a>WG: WebAssembly</h3>
+<ul>
+<li><a href="https://gist.github.com/fitzgen/700e134cffe9a8438524f0a39810a4d0">WG overview slides</a>.</li>
+<li><strong>2018 edition planning</strong>, including scoping the toolchain and book efforts for the release.</li>
+<li><strong>JS integration</strong>: dove into integrating JS callbacks vs Rust functions in wasm-bindgen.</li>
+<li><strong>Ecosystem integration</strong>: wasm-bindgen now works with CommonJS!</li>
+<li><strong>Code bloat</strong>, <a href="https://github.com/rust-lang/rust/pull/49488">reducing the footprint</a> of panicking from 44k to 350 bytes.</li>
+</ul>
+<h3><a href="#unsafe-code-guidelines" aria-hidden="true" class="anchor" id="unsafe-code-guidelines"></a>Unsafe code guidelines</h3>
+<ul>
+<li><strong>Restarted the WG</strong>: dug back into two competing approaches (&quot;validity&quot; and
+&quot;access&quot;-based), substantially iterated on both. <strong>Niko Matsakis and Ralf Jung
+will be writing blog posts about these ideas</strong>.</li>
+<li><strong>Pressing issues</strong>: tackled a few near-term decisions that need to be made,
+including <code>union</code> semantics, <code>Pin</code> semantics, <code>thread::abort</code> and more.</li>
+</ul>
+<h3><a href="#web-site" aria-hidden="true" class="anchor" id="web-site"></a>Web site</h3>
+<ul>
+<li><strong>Domain WG sketching</strong>: over a couple of sessions, the four domain-centered
+working groups (listed above) developed some initial sketches of landing pages
+for each domain.</li>
+</ul>
+<h3><a href="#rust-reach" aria-hidden="true" class="anchor" id="rust-reach"></a>Rust reach</h3>
+<ul>
+<li><strong>Prepared for launch</strong>, which happened <a href="https://blog.rust-lang.org/2018/04/02/Increasing-Rusts-Reach-2018.html">earlier this week!</a></li>
+</ul>
+<h3><a href="#new-working-groups" aria-hidden="true" class="anchor" id="new-working-groups"></a>New working groups</h3>
+<p>In addition to the work by existing teams, we had critical mass to form two new working groups:</p>
+<ul>
+<li><strong>Verification</strong>: bringing together folks interested in testing, static analysis, and formal verification.</li>
+<li><strong>Codegen</strong>: work to improve the quality of code rustc generates, both in terms of size and runtime performance.</li>
+</ul>
+<p>The Verification WG has been <a href="https://internals.rust-lang.org/t/announcing-the-formal-verification-working-group/7240/">formally announced</a>, and the Codegen WG should be announced soon!</p>
+<h2><a href="#general-reflections-and-notes-of-appreciation" aria-hidden="true" class="anchor" id="general-reflections-and-notes-of-appreciation"></a>General reflections and notes of appreciation</h2>
+<p>The combination of having a clear goal -- Rust 2018 -- and a solid majority of
+team member present made the All Hands extremely fun and productive. We strive
+to keep the Rust community open and inclusive through asynchronous online
+communication, but it's important to occasionally come together in person. The
+mix of ambition and kindness at play last week really captured the spirit of the
+Rust Community.</p>
+<p>Of course, an event like this is only possible with a lot of help, and I'd like
+to thank the co-organizers and Mozilla Berlin office staff:</p>
+<ul>
+<li>Johann Hofmann</li>
+<li>Jan-Erik Rediger</li>
+<li>Florian Gilcher</li>
+<li>Ashley Williams</li>
+<li>Martyna Sobczak</li>
+</ul>
+<p>as well as all the team leads who organized and led sessions!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
