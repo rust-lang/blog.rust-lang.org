@@ -17,13 +17,11 @@ jobs:
           path: target
           key: cargo-build-${{ hashFiles('**/Cargo.lock') }}
           restore-key: cargo-build-
-      - name: Build Blog
-        run: cargo run
-      - name: Deploy to GitHub Pages
-        run: |
-          cp CNAME ./site/
-          curl -LsSf https://raw.githubusercontent.com/rust-lang/simpleinfra/master/setup-deploy-keys/src/deploy.rs | rustc - -o /tmp/deploy
-          (cd site/ && /tmp/deploy)
-        env:
-          GITHUB_DEPLOY_KEY: ${{ secrets.GITHUB_DEPLOY_KEY }}
+      - run: cargo run
+      - run: cp CNAME ./site/
+      - uses: JamesIves/github-pages-deploy-action@releases/v3
         if: github.ref == 'refs/heads/master'
+        with:
+          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: site
