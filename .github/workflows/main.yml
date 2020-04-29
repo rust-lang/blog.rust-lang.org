@@ -19,6 +19,7 @@ jobs:
           restore-key: cargo-build-
       - run: cargo run
       - run: cp CNAME ./site/
+      - run: touch site/.nojekyll
       - uses: JamesIves/github-pages-deploy-action@releases/v3
         if: github.ref == 'refs/heads/master'
         with:
