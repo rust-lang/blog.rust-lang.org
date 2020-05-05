@@ -475,7 +475,8 @@ reliability, and productivity in their projects.
 ## Conclusion
 Obviously we couldn't cover every change or improvement to Rust that's happened
 since 2015. What have been your favourite changes or new favourite Rust
-projects? Feel free to post your answer and discussion on [our Discourse forum][urlo]
+projects? Feel free to post your answer and discussion on [our
+Discourse forum][urlo].
 
 [urlo]: <TODO: CREATE FORUM POST BEFORE MERGE>
 
