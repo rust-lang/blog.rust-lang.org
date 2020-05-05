@@ -18,6 +18,8 @@ their time and expertise to help make Rust what it is.
 
 ## Major Changes since 1.0
 
+#### 2015
+
 **[1.2] — Parallel Codegen** Compile time improvements are large theme to every
 release of Rust, and it's hard to imagine that there was a short time where
 Rust had no parallel code generation at all.
@@ -43,6 +45,8 @@ alongside cargo's pre-existing plugin support has given birth to an entire
 ecosystem of apps, utilities, and developer tools that the community has come
 to love and depend on. Quite a few of the commands cargo has today were first
 plugins that the community built and shared on crates.io!
+
+#### 2016
 
 **[1.6] — Libcore** Libcore is a subset of the standard library that only
 contains APIs that don't require allocation or operating system level feature
@@ -78,6 +82,8 @@ humble shell script has become what the maintainers affectionately call a
 Linux, macOS, Windows, and the dozens of target platforms would have been a
 myth just five years ago.
 
+#### 2017
+
 **[1.15] — Derive Procedural Macros** Derive Macros allow you to create powerful
 and extensive strongly typed APIs without all the boilerplate. This was the
 first version of Rust you could use libraries like `serde` or `diesel`'s
@@ -93,6 +99,8 @@ with a module. In 1.20 we stabilised associating constants on struct, enums,
 and importantly traits. Making it easier to add rich sets of preset values for
 types in your API, such as common IP addresses or interesting numbers.
 
+#### 2018
+
 **[1.24] — Incremental Compilation** Before 1.24 when you made a change in your
 library rustc would have to re-compile all of the code. Now rustc is a lot
 smarter about caching as much as possible and only needing to re-generate
@@ -106,7 +114,7 @@ allocator that rust provided. With the global allocator API you can now
 customise your allocator to one that suits your needs. This was an important
 step in enabling the creation of the `alloc` library, another subset of the
 standard library containing only the parts of std that need an allocator like
-Vec` or `String`. Now it's easier than ever to use even more parts of the
+`Vec` or `String`. Now it's easier than ever to use even more parts of the
 standard library on a variety of systems.
 
 **[1.31] — 2018 edition** The release of the 2018 edition was easily our biggest
@@ -126,6 +134,8 @@ libraries built with different editions to seamlessly work together.
 - **Rustfix** With all the syntax changes, we knew we wanted to provide the
   tooling to make the transition as easy as possible. Now when changes are
   required to Rust's syntax they're just a `cargo fix` away from being resolved.
+
+#### 2019
 
 **[1.34] — Alternative Crate Registries** As Rust is used more and more in
 production, there is a greater need to be able to host and use your projects
