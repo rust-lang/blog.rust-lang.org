@@ -32,6 +32,28 @@ body {
   }
 }
 
+blockquote {
+    font-style: italic;
+    position: relative;
+    background-color: lighten($gray, 78%);
+    border-left: 8px solid lighten($gray, 60%);
+    border-radius: 5px;
+    margin: 0;
+    margin-bottom: 2rem;
+    padding: 2rem;
+
+    &:before {
+        font-size: 4em;
+        line-height: 0.1em;
+        margin-right: 0.25em;
+        vertical-align: -0.4em;
+    }
+
+    p:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
 code {
   overflow: auto;
 }
