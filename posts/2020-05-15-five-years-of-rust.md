@@ -9,7 +9,7 @@ of today, it has been five years since we released 1.0 in 2015! Rust has changed
 a lot these past five years, so we wanted reflect back on all of our
 contributors' work over these past five years.
 
-**If this is the first time you're reading about Rust;** Rust is a general
+**If this is the first time you're reading about Rust:** Rust is a general
 purpose programming language empowering everyone to build reliable and efficient
 software. Rust can be built to run anywhere in the stack, whether as the kernel
 for your operating system or your next web app. It is built entirely by an open
@@ -484,4 +484,3 @@ you contributed a new feature or fixed a typo, your work has made Rust the
 amazing it is today. We can't wait to see how Rust and its community will
 continue to grow and change, and see what you all will build with Rust in the
 coming decade!
-
