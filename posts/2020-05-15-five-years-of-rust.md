@@ -386,7 +386,7 @@ To learn more, run the command again with --verbose.
 
 ## Quotes from the teams
 Of course we can't cover every change that has happened. So we reached out and
-asked some of our leads what changes their most proud of;
+asked some of our leads what changes their most proud of:
 
 > For rustdoc, the big things were:
 > * The automatically generated documentation for blanket implementations
