@@ -30,7 +30,7 @@ resource for anyone looking to learn and understand one of the hardest aspects
 of the language.
 
 **[1.4] — Windows MSVC Tier 1 Support** The first tier 1 platform promotion was
-bringing native support for 64-bit Windows using the Microsoft Visual Compiler
+bringing native support for 64-bit Windows using the Microsoft Visual C++ toolchain
 (MSVC). Before 1.4 you needed to also have MinGW (a third party GNU environment)
 installed in order to use and compile your Rust programs. Rust's Windows support
 is one of the biggest improvements these past five years. Just recently
