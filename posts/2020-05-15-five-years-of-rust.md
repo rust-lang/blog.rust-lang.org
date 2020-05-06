@@ -488,8 +488,8 @@ statistics on just how much Rust has grown.
 
 When Rust turned turned 1.0 you could count the number of companies that were
 using it in production on one hand. Today, it is being used by hundreds of
-tech companies with some of the largest tech companies such as Apple, Dropbox,
-Facebook, Google, and Microsoft choosing to use Rust for its performance,
+tech companies with some of the largest tech companies such as Apple, Amazon,
+Dropbox, Facebook, Google, and Microsoft choosing to use Rust for its performance,
 reliability, and productivity in their projects.
 
 ## Conclusion
