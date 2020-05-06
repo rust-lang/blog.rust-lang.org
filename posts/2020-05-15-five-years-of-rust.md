@@ -479,7 +479,7 @@ statistics on just how much Rust has grown.
 
 - Rust has been voted ["Most Loved Programming"][mlp] every year in the past
   four Stack Overflow developer surveys since it went 1.0.
-- We have served over 2 Petabytes (1PB = 1,000 TB) of different versions of the
+- We have served over 2.25 Petabytes (1PB = 1,000 TB) of different versions of the
   compiler, tooling, and documentation this year alone!
 - In the same time we have served over 170TB of crates to roughly 1.8 billion
   requests on crates.io.
