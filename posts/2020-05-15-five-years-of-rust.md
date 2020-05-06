@@ -128,8 +128,8 @@ libraries built with different editions to seamlessly work together.
   use modules.
 - **Const Functions** Const functions allow you to run and evaluate Rust code
   at compile time.
-- **Rustfmt** A new code formatting tool built specifically for Rust.
-- **Clippy** Rust's linter for catching common mistakes. Clippy makes it a lot
+- **Rustfmt 1.0** A new code formatting tool built specifically for Rust.
+- **Clippy 1.0** Rust's linter for catching common mistakes. Clippy makes it a lot
   easier to make sure that your code is not only safe but correct.
 - **Rustfix** With all the syntax changes, we knew we wanted to provide the
   tooling to make the transition as easy as possible. Now when changes are
@@ -450,6 +450,15 @@ asked some of our teams what changes they are most proud of:
 >
 > — Ralf Jung ([Miri])
 
+> If I had to pick one thing I'm most proud of, it was the work on non-lexical
+> lifetimes (NLL). It's not only because I think it made a big difference in
+> the usability of Rust, but also because of the way that we implemented it by
+> forming the NLL working group. This working group brought in a lot of great
+> contributors, many of whom are still working on the compiler today. Open
+> source at its best!
+>
+> — Niko Matsakis ([Language])
+
 [stacked borrows]: https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md
 [find and fix bugs]:  https://github.com/rust-lang/miri/#bugs-found-by-miri
 
@@ -458,6 +467,7 @@ asked some of our teams what changes they are most proud of:
 [ewg]: https://www.rust-lang.org/governance/wgs/embedded
 [release]: https://www.rust-lang.org/governance/teams/release
 [miri]: https://www.rust-lang.org/governance/teams/compiler#miri
+[language]: https://www.rust-lang.org/governance/teams/lang
 
 
 ## The Community
