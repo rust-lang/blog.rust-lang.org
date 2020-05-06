@@ -49,9 +49,10 @@ plugins that the community built and shared on crates.io!
 #### 2016
 
 **[1.6] — Libcore** Libcore is a subset of the standard library that only
-contains APIs that don't require allocation or operating system level features
-. The stabilisation of libcore brought the ability to compile Rust was one of
-the first major steps towards Rust's support for embedded systems development.
+contains APIs that don't require allocation or operating system level features.
+The stabilisation of libcore brought the ability to compile Rust with no allocation
+or operating system dependency was one of the first major steps towards Rust's
+support for embedded systems development.
 
 **[1.10] — C ABI Dynamic Libraries** The `cdylib` crate type allows Rust to be
 compiled as a C dynamic library, enabling you to embed your Rust projects in
@@ -403,7 +404,6 @@ asked some of our teams what changes they are most proud of:
 > * The search itself and its optimizations (last one being to convert it into JSON)
 > * The possibility to test more accurately doc code blocks "compile_fail,
 >   should_panic, allow_fail"
-> * Supporting blanket impls.
 >
 > — Guillaume Gomez ([rustdoc])
 
