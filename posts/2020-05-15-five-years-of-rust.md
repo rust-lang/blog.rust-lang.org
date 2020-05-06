@@ -404,6 +404,7 @@ asked some of our teams what changes they are most proud of:
 > * The search itself and its optimizations (last one being to convert it into JSON)
 > * The possibility to test more accurately doc code blocks "compile_fail,
 >   should_panic, allow_fail"
+> * Doc tests can now be put into their own files.
 >
 > — Guillaume Gomez ([rustdoc])
 
