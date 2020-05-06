@@ -106,7 +106,7 @@ library rustc would have to re-compile all of the code. Now rustc is a lot
 smarter about caching as much as possible and only needing to re-generate
 what's needed.
 
-**[1.26] — Existential Types** The addition of `impl Trait` gives you expressive
+**[1.26] — impl Trait** The addition of `impl Trait` gives you expressive
 dynamic APIs with the benefits and performance of static dispatch.
 
 **[1.28] — Global Allocators** Previously you were restricted to using the
