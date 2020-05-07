@@ -7,7 +7,7 @@ author: The Rust Core Team
 With all that's going on in the world you'd be forgiven for forgetting that as
 of today, it has been five years since we released 1.0 in 2015! Rust has changed
 a lot these past five years, so we wanted reflect back on all of our
-contributors' work over these past five years.
+contributors' work since the stabilization of the language.
 
 **If this is the first time you're reading about Rust:** Rust is a general
 purpose programming language empowering everyone to build reliable and efficient
