@@ -434,7 +434,7 @@ asked some of our teams what changes they are most proud of:
 > excellent job of managing to scale to the increasing traffic on issue
 > trackers, PRs being filed, etc.
 >
-> — Mark Rousskov ([Release team][release])
+> — Mark Rousskov ([Release][release])
 
 
 > Within the last 3 years we managed to turn Miri from an experimental
