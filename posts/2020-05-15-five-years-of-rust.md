@@ -483,7 +483,7 @@ statistics on just how much Rust has grown.
 - We have served over 2.25 Petabytes (1PB = 1,000 TB) of different versions of the
   compiler, tooling, and documentation this year alone!
 - In the same time we have served over 170TB of crates to roughly 1.8 billion
-  requests on crates.io.
+  requests on crates.io, doubling the monthly traffic compared to last year.
 
 [mlp]: https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-and-wanted
 
