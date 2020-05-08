@@ -10,8 +10,38 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-07T15:25:25.811342070+00:00</updated>
+    <updated>2020-05-08T18:50:31.959166276+00:00</updated>
 
+    
+    <entry>
+        <title>Lang Team meetings moving to new time slots</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/05/08/lang-team-meetings-rescheduled.html" type="text/html" title="Lang Team meetings moving to new time slots" />
+        <published>2020-05-08T00:00:00+00:00</published>
+        <updated>2020-05-08T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/05/08/lang-team-meetings-rescheduled.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/05/08/lang-team-meetings-rescheduled.html">&lt;p&gt;The Rust language team holds two weekly meetings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The triage meeting, where we go through open items that need language team
+review or guidance.&lt;/li&gt;
+&lt;li&gt;The design meeting, where we do in-depth dives and explorations on a specific
+proposal, issue, or idea.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To better accommodate the schedules of lang team members and other regular
+attendees, we've rescheduled the time slots for both of these meetings.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The triage meeting now takes place on Mondays from 12-1pm US/Pacific.&lt;/li&gt;
+&lt;li&gt;The design meeting now takes place on Wednesdays from 10-11am US/Pacific.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These meetings are open to the public; you can find the details on the lang
+team calendar. For more information on how to subscribe to the lang team
+calendar, see the README in the &lt;a href=&quot;https://github.com/rust-lang/lang-team&quot;&gt;lang team
+repository&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Josh Triplett</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Governance Working Group Update: Meeting 09 April 2020</title>
@@ -580,47 +610,6 @@ would like to thank everyone for reaching out and being so understanding.&lt;/p&
 
         <author>
             <name>Erin Power</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Governance Working Group Update: Meeting 12 March 2020</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/03/17/governance-wg.html" type="text/html" title="Governance Working Group Update: Meeting 12 March 2020" />
-        <published>2020-03-17T00:00:00+00:00</published>
-        <updated>2020-03-17T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/03/17/governance-wg.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/03/17/governance-wg.html">&lt;p&gt;Hello everyone!&lt;/p&gt;
-&lt;p&gt;We held another meeting of the Rust Governance Working Group on Zulip on 12 March.&lt;/p&gt;
-&lt;p&gt;The agenda included&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Follow up on &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2856&quot;&gt;the Project Group RFC&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Follow up on moving repositories (community, devtools, and nursery) into the &lt;a href=&quot;https://github.com/rust-lang/&quot;&gt;Rust-Lang GitHub Org&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Pre-RFC process&lt;/li&gt;
-&lt;li&gt;How to manage RFC discussion&lt;/li&gt;
-&lt;li&gt;Plan Agenda for Next time&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;You can find the &lt;a href=&quot;https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.03.12.md&quot;&gt;detailed minutes&lt;/a&gt; on the &lt;a href=&quot;https://github.com/rust-lang/wg-governance&quot;&gt;wg-governance&lt;/a&gt; repository, but here is a quick summary:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Follow up on the &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2856&quot;&gt;Project Group RFC&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Follow up on moving repos from community, devtools, and nursery into the &lt;a href=&quot;https://github.com/rust-lang&quot;&gt;Rust-Lang GitHub Org&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Pre-RFC process&lt;/li&gt;
-&lt;li&gt;Managing RFC discussions&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href=&quot;#next-meeting&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;next-meeting&quot;&gt;&lt;/a&gt;Next meeting&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Our next meeting will be 26 March 2020 via &lt;a href=&quot;https://rust-lang.zulipchat.com/#narrow/stream/223182-wg-governance&quot;&gt;Zulip&lt;/a&gt; 18-19 CET / 1pm-2pm EST / 10-11am PST.&lt;/li&gt;
-&lt;li&gt;In 2020 the agenda is always at https://hackmd.io/ATj1rZJaRimaIfIWfAOYfQ&lt;/li&gt;
-&lt;li&gt;Current plan is:
-&lt;ol&gt;
-&lt;li&gt;Domain Working Group changes&lt;/li&gt;
-&lt;li&gt;Pre-RFC RFC (if ready)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>Nell Shamrell-Harrington</name>
         </author>
     </entry>
     
