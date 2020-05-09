@@ -439,7 +439,7 @@ asked some of our teams what changes they are most proud of:
 
 > Within the last 3 years we managed to turn Miri from an experimental
 > interpreter into a practical tool for exploring language design and finding
-> bugs in real code -- a great combination of PL theory and practice.  On the
+> bugs in real code—a great combination of PL theory and practice.  On the
 > theoretical side we have [Stacked Borrows], the most concrete proposal for a
 > Rust aliasing model so far.
 >
