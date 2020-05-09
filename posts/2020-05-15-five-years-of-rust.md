@@ -50,7 +50,7 @@ plugins that the community built and shared on crates.io!
 
 **[1.6] — Libcore** Libcore is a subset of the standard library that only
 contains APIs that don't require allocation or operating system level features.
-The stabilisation of libcore brought the ability to compile Rust with no allocation
+The stabilization of libcore brought the ability to compile Rust with no allocation
 or operating system dependency was one of the first major steps towards Rust's
 support for embedded systems development.
 
