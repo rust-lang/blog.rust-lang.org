@@ -9,27 +9,26 @@ of today, it has been five years since we released 1.0 in 2015! Rust has changed
 a lot these past five years, so we wanted reflect back on all of our
 contributors' work since the stabilization of the language.
 
-**If this is the first time you're reading about Rust:** Rust is a general
-purpose programming language empowering everyone to build reliable and efficient
-software. Rust can be built to run anywhere in the stack, whether as the kernel
-for your operating system or your next web app. It is built entirely by an open
-and diverse community of individuals, primarily volunteers who generously donate
-their time and expertise to help make Rust what it is.
+Rust is a general purpose programming language empowering everyone to build
+reliable and efficient software. Rust can be built to run anywhere in the stack,
+whether as the kernel for your operating system or your next web app. It is built
+entirely by an open and diverse community of individuals, primarily volunteers who
+generously donate their time and expertise to help make Rust what it is.
 
 ## Major Changes since 1.0
 
 #### 2015
 
-**[1.2] — Parallel Codegen** Compile time improvements are large theme to every
+**[1.2] — Parallel Codegen:** Compile time improvements are large theme to every
 release of Rust, and it's hard to imagine that there was a short time where
 Rust had no parallel code generation at all.
 
-**[1.3] — The Rustnomicon** Our first release of the fantastic "Rustnomicon", a
+**[1.3] — The Rustonomicon:** Our first release of the fantastic "Rustnomicon", a
 book that explores Unsafe Rust and its surrounding topics has become a great
 resource for anyone looking to learn and understand one of the hardest aspects
 of the language.
 
-**[1.4] — Windows MSVC Tier 1 Support** The first tier 1 platform promotion was
+**[1.4] — Windows MSVC Tier 1 Support:** The first tier 1 platform promotion was
 bringing native support for 64-bit Windows using the Microsoft Visual C++ toolchain
 (MSVC). Before 1.4 you needed to also have MinGW (a third party GNU environment)
 installed in order to use and compile your Rust programs. Rust's Windows support
@@ -40,7 +39,7 @@ platform apps.
 
 [winrt]: https://blogs.windows.com/windowsdeveloper/2020/04/30/rust-winrt-public-preview/
 
-**[1.5] — Cargo Install** The addition of being able to build Rust binaries
+**[1.5] — Cargo Install:** The addition of being able to build Rust binaries
 alongside cargo's pre-existing plugin support has given birth to an entire
 ecosystem of apps, utilities, and developer tools that the community has come
 to love and depend on. Quite a few of the commands cargo has today were first
@@ -48,24 +47,24 @@ plugins that the community built and shared on crates.io!
 
 #### 2016
 
-**[1.6] — Libcore** Libcore is a subset of the standard library that only
+**[1.6] — Libcore:** `libcore` is a subset of the standard library that only
 contains APIs that don't require allocation or operating system level features.
 The stabilization of libcore brought the ability to compile Rust with no allocation
 or operating system dependency was one of the first major steps towards Rust's
 support for embedded systems development.
 
-**[1.10] — C ABI Dynamic Libraries** The `cdylib` crate type allows Rust to be
+**[1.10] — C ABI Dynamic Libraries:** The `cdylib` crate type allows Rust to be
 compiled as a C dynamic library, enabling you to embed your Rust projects in
 any system that supports the C ABI. Some of Rust's biggest success stories
 among users is being able to write a small critical part of their system in
 Rust and seamlessly integrate in the larger codebase, and it's now easier
 than ever.
 
-**[1.12] — Cargo Workspaces** Workspaces allow you to organise multiple rust
+**[1.12] — Cargo Workspaces:** Workspaces allow you to organise multiple rust
 projects and share the same lockfile. Workspaces have been invaluable in
 building large multi-crate level projects.
 
-**[1.13] — The Try Operator** The first major syntax addition was the `?` or
+**[1.13] — The Try Operator:** The first major syntax addition was the `?` or
 the "Try" operator. The operator allows you to easily propagate your error
 through your call stack. Previously you had to use the `try!` macro, which
 required you to wrap the entire expression each time you encountered a result,
@@ -76,7 +75,7 @@ try!(try!(expression).method()); // Old
 expression?.method()?;           // New
 ```
 
-**[1.14] — Rustup 1.0** Rustup is Rust's Toolchain manager, it allows you to
+**[1.14] — Rustup 1.0:** Rustup is Rust's Toolchain manager, it allows you to
 seamlessly use any version of Rust or any of its tooling. What started as a
 humble shell script has become what the maintainers affectionately call a
 *"chimera"*. Being able to provide first class compiler version management across
@@ -85,32 +84,32 @@ myth just five years ago.
 
 #### 2017
 
-**[1.15] — Derive Procedural Macros** Derive Macros allow you to create powerful
+**[1.15] — Derive Procedural Macros:** Derive Macros allow you to create powerful
 and extensive strongly typed APIs without all the boilerplate. This was the
 first version of Rust you could use libraries like `serde` or `diesel`'s
 derive macros on stable.
 
-**[1.17] — Rustbuild** One of the biggest improvements for our contributors to
+**[1.17] — Rustbuild:** One of the biggest improvements for our contributors to
 the language was moving our build system from the initial `make` based system
 to using cargo. This has opened up `rust-lang/rust` to being a lot easier for
 members and newcomers alike to build and contribute to the project.
 
-**[1.20] — Associated Constants** Previously constants could only be associated
+**[1.20] — Associated Constants:** Previously constants could only be associated
 with a module. In 1.20 we stabilised associating constants on struct, enums,
 and importantly traits. Making it easier to add rich sets of preset values for
 types in your API, such as common IP addresses or interesting numbers.
 
 #### 2018
 
-**[1.24] — Incremental Compilation** Before 1.24 when you made a change in your
+**[1.24] — Incremental Compilation:** Before 1.24 when you made a change in your
 library rustc would have to re-compile all of the code. Now rustc is a lot
 smarter about caching as much as possible and only needing to re-generate
 what's needed.
 
-**[1.26] — impl Trait** The addition of `impl Trait` gives you expressive
+**[1.26] — impl Trait:** The addition of `impl Trait` gives you expressive
 dynamic APIs with the benefits and performance of static dispatch.
 
-**[1.28] — Global Allocators** Previously you were restricted to using the
+**[1.28] — Global Allocators:** Previously you were restricted to using the
 allocator that rust provided. With the global allocator API you can now
 customise your allocator to one that suits your needs. This was an important
 step in enabling the creation of the `alloc` library, another subset of the
@@ -118,7 +117,7 @@ standard library containing only the parts of std that need an allocator like
 `Vec` or `String`. Now it's easier than ever to use even more parts of the
 standard library on a variety of systems.
 
-**[1.31] — 2018 edition** The release of the 2018 edition was easily our biggest
+**[1.31] — 2018 edition:** The release of the 2018 edition was easily our biggest
 release since 1.0, adding a collection of syntax changes and improvements to
 writing Rust written in a completely backwards compatible fashion, allowing
 libraries built with different editions to seamlessly work together.
@@ -138,17 +137,24 @@ libraries built with different editions to seamlessly work together.
 
 #### 2019
 
-**[1.34] — Alternative Crate Registries** As Rust is used more and more in
+**[1.34] — Alternative Crate Registries:** As Rust is used more and more in
 production, there is a greater need to be able to host and use your projects
 in non-public spaces, while cargo has always allowed remote git dependencies,
 with Alternative Registries your organisation can easily build and share your
 own registry of crates that can be used in your projects like they were
 on crates.io.
 
-**[1.39] — Async/Await** The stabilisation of the async/await keywords for
+**[1.39] — Async/Await:** The stabilisation of the async/await keywords for
 handling Futures was one of the major milestones to making async programming
 in Rust a first class citizen. Even just six months after its release the
 async programming has blossomed into a diverse and performant ecosystem.
+
+#### 2020
+
+**[1.42] — Subslice patterns:** While not the biggest change, the addition
+  of the `..` (rest) pattern has been a long awaited quality of life
+  feature that greatly improves the expressivity of pattern matching
+  with slices.
 
 [1.2]: https://blog.rust-lang.org/2015/08/06/Rust-1.2.html
 [1.3]: https://blog.rust-lang.org/2015/09/17/Rust-1.3.html
@@ -172,9 +178,8 @@ async programming has blossomed into a diverse and performant ecosystem.
 ## Error Diagnostics
 
 One thing that we haven't mentioned much is how much Rust's error messages and
-diagnostics have improved since 1.0. But they have improved so much over these
-past five years, looking at older error messages now feels like looking at a
-different language.
+diagnostics have improved since 1.0. Looking at older error messages now feels
+like looking at a different language.
 
 We’ve highlighted a couple of examples that best showcase just how much we’ve
 improved showing users where they made mistakes and importantly help them
@@ -441,13 +446,11 @@ asked some of our teams what changes they are most proud of:
 > interpreter into a practical tool for exploring language design and finding
 > bugs in real code—a great combination of PL theory and practice.  On the
 > theoretical side we have [Stacked Borrows], the most concrete proposal for a
-> Rust aliasing model so far.
->
-> On the practical side, while initially only a few key libraries were checked in
-> Miri by us, recently we saw a great uptake of people using Miri to
-> [find and fix bugs] in their own crates and dependencies, and a similar uptake in
-> contributors improving Miri e.g. by adding support for file system access,
-> unwinding, and concurrency.
+> Rust aliasing model so far. On the practical side, while initially only a 
+> few key libraries were checked in Miri by us, recently we saw a great uptake
+> of people using Miri to [find and fix bugs] in their own crates and
+> dependencies, and a similar uptake in contributors improving Miri e.g. by
+> adding support for file system access, unwinding, and concurrency.
 >
 > — Ralf Jung ([Miri])
 
