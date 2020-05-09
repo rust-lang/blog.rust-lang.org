@@ -173,7 +173,7 @@ async programming has blossomed into a diverse and performant ecosystem.
 
 One thing that we haven't mentioned much is how much Rust's error messages and
 diagnostics have improved since 1.0. But they have improved so much over these
-past five years, looking at older error messages now feels like looking a
+past five years, looking at older error messages now feels like looking at a
 different language.
 
 We’ve highlighted a couple of examples that best showcase just how much we’ve
