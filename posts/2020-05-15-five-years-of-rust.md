@@ -442,7 +442,7 @@ asked some of our teams what changes they are most proud of:
 > — Mark Rousskov ([Release][release])
 
 
-> Within the last 3 years we managed to turn Miri from an experimental
+> Within the last 3 years we managed to turn [Miri][miri-repo] from an experimental
 > interpreter into a practical tool for exploring language design and finding
 > bugs in real code—a great combination of PL theory and practice.  On the
 > theoretical side we have [Stacked Borrows], the most concrete proposal for a
@@ -454,6 +454,10 @@ asked some of our teams what changes they are most proud of:
 >
 > — Ralf Jung ([Miri])
 
+[miri-repo]: https://github.com/rust-lang/miri
+[stacked borrows]: https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md
+[find and fix bugs]:  https://github.com/rust-lang/miri/#bugs-found-by-miri
+
 > If I had to pick one thing I'm most proud of, it was the work on non-lexical
 > lifetimes (NLL). It's not only because I think it made a big difference in
 > the usability of Rust, but also because of the way that we implemented it by
@@ -462,9 +466,6 @@ asked some of our teams what changes they are most proud of:
 > source at its best!
 >
 > — Niko Matsakis ([Language])
-
-[stacked borrows]: https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md
-[find and fix bugs]:  https://github.com/rust-lang/miri/#bugs-found-by-miri
 
 [rustdoc]: https://www.rust-lang.org/governance/teams/rustdoc
 [ides]: https://www.rust-lang.org/governance/teams/ides
