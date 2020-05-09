@@ -443,9 +443,9 @@ asked some of our teams what changes they are most proud of:
 > theoretical side we have [Stacked Borrows], the most concrete proposal for a
 > Rust aliasing model so far.
 >
-> On the practical side, while initially we had to prompt maintainers to add
-> Miri checking to a few key libraries, recently we saw a great uptake of people
-> using Miri to [find and fix bugs] in various crates, and a similar uptake in
+> On the practical side, while initially only a few key libraries were checked in
+> Miri by us, recently we saw a great uptake of people using Miri to
+> [find and fix bugs] in their own crates and dependencies, and a similar uptake in
 > contributors improving Miri e.g. by adding support for file system access,
 > unwinding, and concurrency.
 >
