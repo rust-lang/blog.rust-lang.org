@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Governance Working Group Update: Meeting 23 April 2020"
+author: Val Grimm
 team: The Governance WG <https://github.com/rust-lang/wg-governance>
 ---
 
@@ -31,4 +32,4 @@ You can find the [detailed minutes](https://github.com/rust-lang/wg-governance/b
 
 [wg-governance]: https://github.com/rust-lang/wg-governance/
 [detailed minutes]: https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.04.23.md
-[Zulip thread]: https://rust-lang.zulipchat.com/#narrow/stream/223182-wg-governance/topic/Meeting.202020-04-09 
+[Zulip thread]: https://rust-lang.zulipchat.com/#narrow/stream/223182-wg-governance/topic/Meeting.2020-05-07
