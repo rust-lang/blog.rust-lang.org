@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-08T18:50:31.959166276+00:00</updated>
+    <updated>2020-05-10T15:49:09.281220156+00:00</updated>
 
     
     <entry>
@@ -40,6 +40,45 @@ repository&lt;/a&gt;.&lt;/p&gt;
 
         <author>
             <name>Josh Triplett</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Governance Working Group Update: Meeting 23 April 2020</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/04/23/Governance-wg.html" type="text/html" title="Governance Working Group Update: Meeting 23 April 2020" />
+        <published>2020-04-23T00:00:00+00:00</published>
+        <updated>2020-04-23T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/04/23/Governance-wg.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/04/23/Governance-wg.html">&lt;p&gt;Greetings Rustaceans!&lt;/p&gt;
+&lt;p&gt;The Rust Governance Working Group held another meeting on Zulip on 23 April.&lt;/p&gt;
+&lt;p&gt;The agenda included:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Follow up on &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2856&quot;&gt;the Project Group RFC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Pre-RFC process&lt;/li&gt;
+&lt;li&gt;Domain Working Group Retrospective&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You can find the &lt;a href=&quot;https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.04.23.md&quot;&gt;detailed minutes&lt;/a&gt; on the &lt;a href=&quot;https://github.com/rust-lang/wg-governance&quot;&gt;wg-governance&lt;/a&gt; repository, but here is a quick summary:&lt;/p&gt;
+&lt;h1&gt;&lt;a href=&quot;#follow-up-on-the-project-group-rfc&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;follow-up-on-the-project-group-rfc&quot;&gt;&lt;/a&gt;Follow up on the &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2856&quot;&gt;Project Group RFC&lt;/a&gt;&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Is in Final comment Period, on track to be merged by the rfcbot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;&lt;a href=&quot;#pre-rfc-process&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;pre-rfc-process&quot;&gt;&lt;/a&gt;Pre-RFC process&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;No update at present time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;&lt;a href=&quot;#domain-working-group-retrospective&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;domain-working-group-retrospective&quot;&gt;&lt;/a&gt;Domain Working Group Retrospective&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;There is lack of contextual clarity about how domain work relates to the Rust project in general&lt;/li&gt;
+&lt;li&gt;First step: Created questionnaire to be shared with Domain WG leads via email to gain clarity on this&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href=&quot;#next-meeting&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;next-meeting&quot;&gt;&lt;/a&gt;Next meeting&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Our next meeting will be 7 May 2020 via &lt;a href=&quot;https://rust-lang.zulipchat.com/#narrow/stream/223182-wg-governance&quot;&gt;Zulip&lt;/a&gt; 17:00 UTC.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Val Grimm</name>
         </author>
     </entry>
     
@@ -472,144 +511,6 @@ thread&lt;/a&gt;.&lt;/p&gt;
 
         <author>
             <name>Mark Rousskov</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>All Hands Retrospective</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/03/18/all-hands-retrospective.html" type="text/html" title="All Hands Retrospective" />
-        <published>2020-03-18T00:00:00+00:00</published>
-        <updated>2020-03-18T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/03/18/all-hands-retrospective.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/03/18/all-hands-retrospective.html">&lt;p&gt;If you're not already aware, the Rust All Hands event, originally scheduled for
-March 16th–20th in Thessaloníki, Greece was cancelled in January. The All Hands'
-is one of our members' favourite events of the year and we were quite
-disappointed that we weren't able to pull off the event this year. In the
-interest of being transparent, as well as documenting for future events, we
-have written a retrospective about what happened, what we learned, and the
-future of the All Hands.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#timeline&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;timeline&quot;&gt;&lt;/a&gt;Timeline&lt;/h2&gt;
-&lt;h3&gt;&lt;a href=&quot;#context&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;context&quot;&gt;&lt;/a&gt;Context&lt;/h3&gt;
-&lt;p&gt;Both previous All Hands took place in Mozilla's Berlin office. Mozilla
-traditionally sponsored the event, providing the venue and catering, and also
-paying for the flights and accommodation of volunteers who didn't have a
-company or other person to pay for them. It was a good way to bring the entire
-community together for a week of planning, discussions, and camaraderie.&lt;/p&gt;
-&lt;p&gt;Still, after the last All Hands, it was clear that we couldn't do a third one
-in Mozilla's Berlin office. The Rust org was simply growing too big. The
-Berlin office didn't really have the space to accommodate us.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#finding-a-space&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;finding-a-space&quot;&gt;&lt;/a&gt;Finding a space.&lt;/h3&gt;
-&lt;p&gt;As a group, our first step was to see if we could find other companies to
-sponsor a space. We followed a number of leads but ultimately never found
-anyone that had a space to offer at a suitable time. We started looking
-at other options, like private hacker spaces and universities. The University
-of Macedonia in Thessaloniki, Greece made us a quite attractive offer, and
-they had the right time available, so we decided to go for that.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#budgeting-and-sponsorships&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;budgeting-and-sponsorships&quot;&gt;&lt;/a&gt;Budgeting and sponsorships.&lt;/h3&gt;
-&lt;p&gt;We in the All Hands group did our best to create a budget. Unfortunately we
-did not have access to any expense reports from the previous years. We had a
-survey we could use to estimate the number of attendees and a rough idea where
-they were coming from. We knew the costs of the venue. We added fudge factors.
-We thought we'd done a good job, though it would turn out that we were quite
-off in our calculations.&lt;/p&gt;
-&lt;p&gt;However even based on our estimated budget, it was clear that Mozilla was not
-going to be able to cover the costs alone. This seemed like a good opportunity
-to try and build relationships with some of the companies that have started to
-use Rust by approaching them for sponsorships. We weren't sure, though, how
-many sponsorships we'd be able to get, and so we hit upon the idea of using
-paid tickets.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#tickets&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;tickets&quot;&gt;&lt;/a&gt;Tickets&lt;/h3&gt;
-&lt;p&gt;The idea was that people could purchase a ticket to the event, which would
-help to cover the costs, but that it was also okay to have a &lt;em&gt;&amp;quot;gratis&amp;quot;&lt;/em&gt;
-ticket. Tickets have the advantage of being relatively easy for people to
-submit in their expense report if they are travelling with a company. We also
-found a number of companies who might be interested in a more
-traditional sponsorship.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#finding-a-bank-account&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;finding-a-bank-account&quot;&gt;&lt;/a&gt;Finding a bank account.&lt;/h3&gt;
-&lt;p&gt;Still, we had another problem. The Rust organisation does not have a bank
-account we could use to collect and distribute money, and we didn't have an
-obvious entity to sign legal agreements.&lt;/p&gt;
-&lt;p&gt;At this point, we spoke to a company that might serve as a bank account. We
-had a quick call and went over a plan that seemed promising. Mozilla would
-contract with them for their services managing and organising the event, and
-this would serve as Mozilla's sponsorship. The other sponsorships and proceeds
-from ticket sales would collect in their bank account and we would
-manage distributions.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#pulling-the-trigger&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;pulling-the-trigger&quot;&gt;&lt;/a&gt;Pulling the trigger.&lt;/h3&gt;
-&lt;p&gt;At that point, we sent mail encouraging people to book tickets, and we also
-started following up more with sponsors. Our expectation was that we would
-soon have a bank account for collecting funds, and we started collecting
-information to repay people who had booked travel.&lt;/p&gt;
-&lt;p&gt;In retrospect, it's clear that this was premature. It seemed like all the
-pieces were in place, and we knew that if people didn't start booking tickets,
-they never would. But the pieces were not in place, not actually, and we clearly
-should have taken this moment ask whether we were really going to be able to
-pull this off.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#realising-it-wont-work&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;realising-it-wont-work&quot;&gt;&lt;/a&gt;Realising it won't work.&lt;/h3&gt;
-&lt;p&gt;This all started to unravel about a month before the event. In short, we
-encountered some logistical hurdles around finalising the business and legal
-aspects within the organisation's constraints that also prompted us to review
-the finances in more detail. This revealed that our estimates were off. Thus,
-we were faced with a tough decision:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;If we continue with the event, there was the chance that the logistics would
-just fail to come together. That would leave attendees in Greece, out of
-pocket, and without an All Hands to attend.&lt;/li&gt;
-&lt;li&gt;Further, we might not be able to raise enough money to be able to pay for
-the entirety of people's travel and lodging as we had promised. This would be
-unfortunate, though perhaps something people could live with.&lt;/li&gt;
-&lt;li&gt;On the other hand, if we cancel, we have to deal with the fact that people
-had already started booking travel, and not everyone would be able to get a
-refund from their airline/hotel, and accept that there might not be an
-All Hands this year.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;After much analysis and discussion with the Rust core team, we ultimately
-opted for the painful but ultimately safer route: cancelling the event. The
-cost to cover cancelling in January was relatively low, and even if it did
-come together we were worried about the high stress of pulling it off burning
-people out of the project.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Addendum&lt;/strong&gt; Since we cancelled the All Hands, outbreak of the &lt;a href=&quot;https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic&quot;&gt;COVID-19&lt;/a&gt; in
-Europe in the recent weeks, would have caused the event to be cancelled
-regardless. In a weird twist of fate, we were fortunate to cancel when we did.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#lessons-learned&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;lessons-learned&quot;&gt;&lt;/a&gt;Lessons Learned&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Bound uncertainty and total cost.&lt;/strong&gt; — Promising to cover all travel with
-no kind of upper limit was unwise. It had worked in the past, perhaps, but the
-event was growing, and that was partly luck. Organising an event is very complex
-and there are a lot of unknowns, and it was clear for some of them we didn't have
-the time or resources to resolve them adequately.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Location, location, location&lt;/strong&gt; — It was hard to find a good location. While
-Thessaloníki was cheap and great in some ways, we encountered some logistical
-hiccups that made it less than ideal. For example; we found that the cost of a
-lot of the flights for our international members were quite high compared to
-other European cities.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Know your audience&lt;/strong&gt; — Some companies weren't interested in sponsoring
-because the event wasn't sufficiently high profile, or because the &amp;quot;ROI&amp;quot;
-(&amp;quot;Return On Investment&amp;quot;) didn't quite fit into the budgets and categories it
-would have to come from. We also had some uncertainty about how much
-&amp;quot;participation&amp;quot; to offer in exchange for sponsorship, since we didn't want to
-give the impression that anyone could just &amp;quot;buy their way&amp;quot; into the All Hands —
-at the same time, there is clear value to the Rust organisation in having
-sponsors participate.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#the-future&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;the-future&quot;&gt;&lt;/a&gt;The Future&lt;/h2&gt;
-&lt;p&gt;Right now, we're currently organising with Mozilla reimbursing anyone who had
-purchased non-refundable ticket. We're also going to take the time to step back
-and re-evaluate what kind of event is possible, and what kind of event our
-members want to attend.&lt;/p&gt;
-&lt;p&gt;If you're a member of the Rust programming language organisation, you should
-have received an email containing a link to a survey asking you about what
-kind of All Hands you'd enjoy, and what you would want to attend. Once people
-have had enough time to respond, we'll publish the results on the
-&amp;quot;Inside Rust&amp;quot; blog.&lt;/p&gt;
-&lt;p&gt;If you didn't receive an email and you believe you should have, or you have
-anything you'd like to mention in private to organisers. Please email us
-at &lt;a href=&quot;mailto:rust-all-hands@rust-lang.org&quot;&gt;rust-all-hands@rust-lang.org&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;It's very unfortunate that we weren't able to have the All Hands like we
-planned. We know that it's a lot of our members favourite Rust event, and we
-would like to thank everyone for reaching out and being so understanding.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Erin Power</name>
         </author>
     </entry>
     
