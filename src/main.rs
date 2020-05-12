@@ -1,6 +1,7 @@
 mod blogs;
 mod posts;
 
+use chrono::Timelike;
 use crate::blogs::Blog;
 use crate::posts::Post;
 use handlebars::{handlebars_helper, Handlebars};
@@ -162,7 +163,7 @@ impl<'a> Generator<'a> {
         let data = json!({
             "blog": blog,
             "posts": posts,
-            "feed_updated": chrono::Utc::now().to_rfc3339(),
+            "feed_updated": chrono::Utc::now().with_nanosecond(0).unwrap().to_rfc3339(),
         });
 
         self.render_template(blog.prefix().join("feed.xml"), "feed", data)?;
@@ -185,7 +186,7 @@ impl<'a> Generator<'a> {
             .collect();
         let data = Releases {
             releases: releases,
-            feed_updated: chrono::Utc::now().to_rfc3339(),
+            feed_updated: chrono::Utc::now().with_nanosecond(0).unwrap().to_rfc3339(),
         };
         fs::write(
             self.out_directory.join(blog.prefix()).join("releases.json"),
