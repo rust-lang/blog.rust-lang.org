@@ -19,12 +19,12 @@ generously donate their time and expertise to help make Rust what it is.
 
 #### 2015
 
-**[1.2] — Parallel Codegen:** Compile time improvements are large theme to every
+**[1.2] — Parallel Codegen:** Compile time improvements are a large theme to every
 release of Rust, and it's hard to imagine that there was a short time where
 Rust had no parallel code generation at all.
 
 **[1.3] — The Rustonomicon:** Our first release of the fantastic "Rustonomicon", a
-book that explores Unsafe Rust and its surrounding topics has become a great
+book that explores Unsafe Rust and its surrounding topics and has become a great
 resource for anyone looking to learn and understand one of the hardest aspects
 of the language.
 
@@ -146,8 +146,8 @@ on crates.io.
 
 **[1.39] — Async/Await:** The stabilisation of the async/await keywords for
 handling Futures was one of the major milestones to making async programming
-in Rust a first class citizen. Even just six months after its release the
-async programming has blossomed into a diverse and performant ecosystem.
+in Rust a first class citizen. Even just six months after its release
+async programming in Rust has blossomed into a diverse and performant ecosystem.
 
 #### 2020
 
