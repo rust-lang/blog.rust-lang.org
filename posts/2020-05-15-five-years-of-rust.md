@@ -467,8 +467,8 @@ asked some of our teams what changes they are most proud of:
 >
 > — Niko Matsakis ([Language])
 
-[rustdoc]: https://www.rust-lang.org/governance/teams/rustdoc
-[ides]: https://www.rust-lang.org/governance/teams/ides
+[rustdoc]: https://www.rust-lang.org/governance/teams/dev-tools#rustdoc
+[ides]: https://www.rust-lang.org/governance/teams/dev-tools#ides
 [ewg]: https://www.rust-lang.org/governance/wgs/embedded
 [release]: https://www.rust-lang.org/governance/teams/release
 [miri]: https://www.rust-lang.org/governance/teams/compiler#miri
