@@ -491,7 +491,7 @@ statistics on just how much Rust has grown.
 
 [mlp]: https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-and-wanted
 
-When Rust turned turned 1.0 you could count the number of companies that were
+When Rust turned 1.0 you could count the number of companies that were
 using it in production on one hand. Today, it is being used by hundreds of
 tech companies with some of the largest tech companies such as Apple, Amazon,
 Dropbox, Facebook, Google, and Microsoft choosing to use Rust for its performance,
