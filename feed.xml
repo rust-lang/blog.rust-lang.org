@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-15T12:24:07+00:00</updated>
+    <updated>2020-05-15T13:16:35+00:00</updated>
 
     
     <entry>
@@ -30,11 +30,11 @@ entirely by an open and diverse community of individuals, primarily volunteers w
 generously donate their time and expertise to help make Rust what it is.&lt;/p&gt;
 &lt;h2&gt;&lt;a href=&quot;#major-changes-since-10&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;major-changes-since-10&quot;&gt;&lt;/a&gt;Major Changes since 1.0&lt;/h2&gt;
 &lt;h4&gt;&lt;a href=&quot;#2015&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;2015&quot;&gt;&lt;/a&gt;2015&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/08/06/Rust-1.2.html&quot;&gt;1.2&lt;/a&gt; — Parallel Codegen:&lt;/strong&gt; Compile time improvements are large theme to every
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/08/06/Rust-1.2.html&quot;&gt;1.2&lt;/a&gt; — Parallel Codegen:&lt;/strong&gt; Compile time improvements are a large theme to every
 release of Rust, and it's hard to imagine that there was a short time where
 Rust had no parallel code generation at all.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/09/17/Rust-1.3.html&quot;&gt;1.3&lt;/a&gt; — The Rustonomicon:&lt;/strong&gt; Our first release of the fantastic &amp;quot;Rustonomicon&amp;quot;, a
-book that explores Unsafe Rust and its surrounding topics has become a great
+book that explores Unsafe Rust and its surrounding topics and has become a great
 resource for anyone looking to learn and understand one of the hardest aspects
 of the language.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2015/10/29/Rust-1.4.html&quot;&gt;1.4&lt;/a&gt; — Windows MSVC Tier 1 Support:&lt;/strong&gt; The first tier 1 platform promotion was
@@ -133,8 +133,8 @@ own registry of crates that can be used in your projects like they were
 on crates.io.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2019/11/07/Rust-1.39.0.html&quot;&gt;1.39&lt;/a&gt; — Async/Await:&lt;/strong&gt; The stabilisation of the async/await keywords for
 handling Futures was one of the major milestones to making async programming
-in Rust a first class citizen. Even just six months after its release the
-async programming has blossomed into a diverse and performant ecosystem.&lt;/p&gt;
+in Rust a first class citizen. Even just six months after its release
+async programming in Rust has blossomed into a diverse and performant ecosystem.&lt;/p&gt;
 &lt;h4&gt;&lt;a href=&quot;#2020&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;2020&quot;&gt;&lt;/a&gt;2020&lt;/h4&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.rust-lang.org/2020/03/12/Rust-1.42.html&quot;&gt;1.42&lt;/a&gt; — Subslice patterns:&lt;/strong&gt; While not the biggest change, the addition
 of the &lt;code&gt;..&lt;/code&gt; (rest) pattern has been a long awaited quality of life
