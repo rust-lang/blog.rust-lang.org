@@ -34,6 +34,23 @@ body {
   body > #main-content {
     flex: 1; }
 
+blockquote {
+  font-style: italic;
+  position: relative;
+  background-color: #f7f9f9;
+  border-left: 8px solid #c3cdd2;
+  border-radius: 5px;
+  margin: 0;
+  margin-bottom: 2rem;
+  padding: 2rem; }
+  blockquote:before {
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em; }
+  blockquote p:last-of-type {
+    margin-bottom: 0; }
+
 code {
   overflow: auto; }
 
