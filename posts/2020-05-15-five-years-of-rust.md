@@ -507,6 +507,6 @@ Discourse forum][urlo].
 
 Lastly, we wanted to thank everyone who has to contributed to the Rust, whether
 you contributed a new feature or fixed a typo, your work has made Rust the
-amazing thing it is today. We can't wait to see how Rust and its community will
+amazing project it is today. We can't wait to see how Rust and its community will
 continue to grow and change, and see what you all will build with Rust in the
 coming decade!
