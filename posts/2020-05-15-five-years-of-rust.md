@@ -503,7 +503,7 @@ since 2015. What have been your favourite changes or new favourite Rust
 projects? Feel free to post your answer and discussion on [our
 Discourse forum][urlo].
 
-[urlo]: <TODO: CREATE FORUM POST BEFORE MERGE>
+[urlo]: https://users.rust-lang.org/t/five-years-of-rust/42661
 
 Lastly, we wanted to thank everyone who has to contributed to the Rust, whether
 you contributed a new feature or fixed a typo, your work has made Rust the
