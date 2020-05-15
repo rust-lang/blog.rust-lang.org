@@ -174,7 +174,7 @@ async programming has blossomed into a diverse and performant ecosystem.
 [1.31]: https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html
 [1.34]: https://blog.rust-lang.org/2019/04/11/Rust-1.34.0.html
 [1.39]: https://blog.rust-lang.org/2019/11/07/Rust-1.39.0.html
-
+[1.42]: https://blog.rust-lang.org/2020/03/12/Rust-1.42.html
 ## Error Diagnostics
 
 One thing that we haven't mentioned much is how much Rust's error messages and
