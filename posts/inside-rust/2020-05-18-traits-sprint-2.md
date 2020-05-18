@@ -80,7 +80,7 @@ We landed initial support for `impl Trait` during this sprint. It doesn't yet su
 
 ### Progress towards removing the leak check in rustc
 
-In the rustc trait solver, there is currently a special check done in regards to lifetimes call the "leak check". Without going into the techinical details, there are some design flaws with this approach and it being there blocks features such lazy normalization (which is required for features such const generics and GATs). However, removing the leak check completely has some backward-compatiblity concerns. But [some progress] was made.
+In the rustc trait solver, there is currently a special check done in regards to lifetimes called the "leak check". Without going into the techinical details, there are some design flaws with this approach and it being there blocks features such lazy normalization (which is required for features such const generics and GATs). However, removing the leak check completely has some backward-compatiblity concerns. But [some progress] was made.
 
 ### Adding a recursive solver to Chalk
 
@@ -94,7 +94,7 @@ For now, we'll continue to work on resolving design problems with the SLG solver
 
 Oftentimes we'll get a bug report where Chalk doesn't report the result one would expect. And as anyone who has maintained a piece of software knows, getting a minimal reproduction is difficult. What makes it even more difficult is that the goals and programs that Chalk understands are a "lowered" form of actual Rust code, which means not only do we have to make a minimal *Rust* example, but also a minimal *Chalk* example.
 
-In order to help make this process easier, we have started to make a logging shim for Chalk to generate programs that Chalk can run and reproduce the bug. Moreso, it should be able to be used seemlessly, regardless of the user of Chalk, whether it be rustc, rust-analyzer, or anything else.
+In order to help make this process easier, we have started to make a logging shim for Chalk to generate programs that Chalk can run and reproduce the bug. Moreso, it should be able to be used seamlessly, regardless of the user of Chalk, whether it be rustc, rust-analyzer, or anything else.
 
 ### Documentation in the Chalk book
 
