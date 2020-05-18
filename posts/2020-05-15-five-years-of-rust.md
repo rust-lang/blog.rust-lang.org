@@ -470,7 +470,7 @@ asked some of our teams what changes they are most proud of:
 [rustdoc]: https://www.rust-lang.org/governance/teams/dev-tools#rustdoc
 [ides]: https://www.rust-lang.org/governance/teams/dev-tools#ides
 [ewg]: https://www.rust-lang.org/governance/wgs/embedded
-[release]: https://www.rust-lang.org/governance/teams/release
+[release]: https://www.rust-lang.org/governance/teams/operations#release
 [miri]: https://www.rust-lang.org/governance/teams/compiler#miri
 [language]: https://www.rust-lang.org/governance/teams/lang
 
