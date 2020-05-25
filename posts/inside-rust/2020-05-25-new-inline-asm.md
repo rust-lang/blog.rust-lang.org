@@ -125,6 +125,4 @@ instruction.
 For full details on the new `asm!` syntax, see [RFC
 2873](https://github.com/Amanieu/rfcs/blob/inline-asm/text/0000-inline-asm.md).
 Please try it out, and [report any bugs via the rust issue
-tracker](https://github.com/rust-lang/rust/issues/) with the tag `F-asm`.  You
-can also [report your experiences on the tracking
-issue](https://github.com/rust-lang/rust/issues/72016).
+tracker](https://github.com/rust-lang/rust/issues/) with the tag `F-asm`.
