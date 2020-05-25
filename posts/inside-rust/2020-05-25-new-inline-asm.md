@@ -27,7 +27,8 @@ one of the most requested features.
 
 In an effort to improve `asm!` and bring it to more users, [Amanieu
 d'Antras](https://github.com/Amanieu) designed and implemented a new,
-friendlier syntax for `asm!`. This syntax has had a long road:
+friendlier syntax for `asm!`. This syntax has had a long road from concept to
+compiler implementation:
 - The proposal first started as a [pre-RFC on
   internals](https://internals.rust-lang.org/t/pre-rfc-2-inline-assembly/11310).
 - Inline assembly became the language team's first [project
