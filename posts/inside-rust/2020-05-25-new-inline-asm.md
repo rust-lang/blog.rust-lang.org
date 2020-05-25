@@ -22,8 +22,8 @@ this syntax even slightly wrong tended to produce an Internal Compiler Error
 (ICE) rather than the kind of friendly error message you've come to expect from
 rustc. This syntax also had little to no hope of being supported on any
 non-LLVM backend. As a result of these limitations, the `asm!` syntax was
-highly unlikely to ever graduate from nightly to stable Rust, despite it being
-one of the most requested features.
+highly unlikely to ever graduate from nightly to stable Rust, despite being one
+of the most requested features.
 
 In an effort to improve `asm!` and bring it to more users, [Amanieu
 d'Antras](https://github.com/Amanieu) designed and implemented a new,
