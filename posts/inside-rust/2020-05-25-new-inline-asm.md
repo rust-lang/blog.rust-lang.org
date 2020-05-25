@@ -127,4 +127,7 @@ For full details on the new `asm!` syntax, see [RFC
 2873](https://github.com/Amanieu/rfcs/blob/inline-asm/text/0000-inline-asm.md).
 Please try it out (including translating existing inline assembly to the new
 syntax), and [report any bugs via the rust issue
-tracker](https://github.com/rust-lang/rust/issues/) with the tag `F-asm`.
+tracker](https://github.com/rust-lang/rust/issues/) with the tag `F-asm`. You
+can also discuss inline assembly by creating a topic on [the project-inline-asm
+stream in
+Zulip](https://rust-lang.zulipchat.com/#narrow/stream/216763-project-inline-asm).
