@@ -20,7 +20,7 @@ organizing meetups, etc, but this survey's purpose is to identify and eliminate
 barriers to entry for code contributions.
 
 The survey is targeting current, past, and future contributors to Rust. We're
-particularly interested in hearing from *new or prospective contributors*.
+particularly interested in hearing from *new or prospective code contributors*.
 
 So whether you're a frequent contributor already or someone who has only
 thought about contributing, please take a few minutes to [fill out the
