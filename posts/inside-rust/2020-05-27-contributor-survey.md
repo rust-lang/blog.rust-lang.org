@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "2020-05-27 Contributor Survey"
+author: The Compiler Team
 team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
 ---
 
