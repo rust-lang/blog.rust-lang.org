@@ -31,7 +31,7 @@ friendlier syntax for `asm!`. This syntax has had a long road from concept to
 compiler implementation:
 - The proposal first started as a [pre-RFC on
   internals](https://internals.rust-lang.org/t/pre-rfc-2-inline-assembly/11310).
-- Inline assembly became the language team's first [project
+- Inline assembly became one of the language team's first [project
   group](https://github.com/rust-lang/rfcs/blob/master/text/2836-project-asm.md),
   and iteratively designed RFCs in [the project group
   repository](https://github.com/rust-lang/project-inline-asm/).
