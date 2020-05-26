@@ -20,10 +20,12 @@ however, this syntax just exposed a very raw version of LLVM's assembly
 construct, with no safeguards to help developers use it. Getting any detail of
 this syntax even slightly wrong tended to produce an Internal Compiler Error
 (ICE) rather than the kind of friendly error message you've come to expect from
-rustc. This syntax also had little to no hope of being supported on any
-non-LLVM backend. As a result of these limitations, the `asm!` syntax was
-highly unlikely to ever graduate from nightly to stable Rust, despite being one
-of the most requested features.
+rustc. This syntax was also error-prone for another reason: it looks similar to
+GCC's inline assembly syntax, but has subtle differences (such as the names in
+register constraints). This syntax also had little to no hope of being
+supported on any non-LLVM backend. As a result of all these limitations, the
+`asm!` syntax was highly unlikely to ever graduate from nightly to stable Rust,
+despite being one of the most requested features.
 
 In an effort to improve `asm!` and bring it to more users, [Amanieu
 d'Antras](https://github.com/Amanieu) designed and implemented a new,
