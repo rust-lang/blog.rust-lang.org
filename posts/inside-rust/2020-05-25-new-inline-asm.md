@@ -63,7 +63,7 @@ fn main() {
         asm!(
             "syscall",
             in("rax") 1, // syscall number
-            in("rdi") 1, // fd
+            in("rdi") 1, // fd (stdout)
             in("rsi") buf.as_ptr(),
             in("rdx") buf.len(),
             out("rcx") _, // clobbered by syscalls
