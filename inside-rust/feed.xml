@@ -10,8 +10,41 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-05-26T20:43:03+00:00</updated>
+    <updated>2020-05-27T20:38:17+00:00</updated>
 
+    
+    <entry>
+        <title>2020-05-27 Contributor Survey</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/05/27/contributor-survey.html" type="text/html" title="2020-05-27 Contributor Survey" />
+        <published>2020-05-27T00:00:00+00:00</published>
+        <updated>2020-05-27T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/05/27/contributor-survey.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/05/27/contributor-survey.html">&lt;p&gt;You may be aware that &lt;a href=&quot;https://blog.rust-lang.org/2020/05/15/five-years-of-rust.html&quot;&gt;Rust recently turned 5&lt;/a&gt;! If you read this blog,
+then you probably already know that the Rust project thrives because of its
+many contributors, and that we're always looking for ways to make it easier for
+people to get involved.&lt;/p&gt;
+&lt;p&gt;Today we are pleased to announce the &lt;a href=&quot;https://forms.gle/G1jKM1ppGunft6j29&quot;&gt;Rust contributor survey&lt;/a&gt;. This
+short, anonymous survey should only take a few minutes to fill out, but it will
+really help us in understanding what kinds of problems people experience when
+contributing to Rust so that we can try to address them. We value many
+different kinds of contributions, such as reporting problems, triaging issues,
+organizing meetups, etc, but this survey's purpose is to identify and eliminate
+barriers to entry for code contributions.&lt;/p&gt;
+&lt;p&gt;The survey is targeting current, past, and future contributors to Rust. We're
+particularly interested in hearing from &lt;em&gt;new or prospective code contributors&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;So whether you're a frequent contributor already or someone who has only
+thought about contributing, please take a few minutes to &lt;a href=&quot;https://forms.gle/G1jKM1ppGunft6j29&quot;&gt;fill out the
+survey&lt;/a&gt; before &lt;strong&gt;June 10, 2020&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;We plan to share and discuss summary data. We may quote free-form responses
+unless you ask us not to. All information is collected anonymously. Only team
+members or people specifically helping administer the survey will be able to
+view full results.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Compiler Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>A retrospective on the 2018 rust-lang.org redesign</title>
@@ -468,87 +501,6 @@ were satisfied enough to start evaluating a migration for &lt;a href=&quot;https
 
         <author>
             <name>Jack Huey</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Goodbye, docs team</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/03/27/goodbye-docs-team.html" type="text/html" title="Goodbye, docs team" />
-        <published>2020-03-27T00:00:00+00:00</published>
-        <updated>2020-03-27T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/03/27/goodbye-docs-team.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/03/27/goodbye-docs-team.html">&lt;p&gt;I'll cut right to the chase: the docs team no longer exists.&lt;/p&gt;
-&lt;p&gt;Back in &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/1683&quot;&gt;August of 2016&lt;/a&gt;, we
-formed a team to work on documenting Rust. Here's the original description
-and motivation:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The Rust documentation team will be responsible for all of the things
-listed above. Specifically, they will pertain to these areas of the Rust
-project:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The standard library documentation&lt;/li&gt;
-&lt;li&gt;The book and other long-form docs&lt;/li&gt;
-&lt;li&gt;Cargo's documentation&lt;/li&gt;
-&lt;li&gt;The Error Index&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Furthermore, the documentation team will be available to help with
-ecosystem documentation, in a few ways. Firstly, in an advisory capacity:
-helping people who want better documentation for their crates to understand
-how to accomplish that goal. Furthermore, monitoring the overall ecosystem
-documentation, and identifying places where we could contribute and make a
-large impact for all Rustaceans. If the Rust project itself has wonderful
-docs, but the ecosystem has terrible docs, then people will still be
-frustrated with Rust's documentation situation, especially given our
-anti-batteries-included attitude. To be clear, this does not mean owning the
-ecosystem docs, but rather working to contribute in more ways than just the
-Rust project itself.&lt;/p&gt;
-&lt;p&gt;We will coordinate in the #rust-docs IRC room, and have regular meetings,
-as the team sees fit. Regular meetings will be important to coordinate
-broader goals; and participation will be important for team members. We hold
-meetings weekly.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;At the time, all of this was sorely needed. There weren't as many people working
-on Rust, and there wasn't that much documentation.&lt;/p&gt;
-&lt;p&gt;But documentation is a funny thing. It's really a cross-cutting concern. One
-team of folks writing docs for tons of other teams of folks doesn't really
-&lt;em&gt;work&lt;/em&gt;, long-term. In the short term, it was an absolutely necessary and good
-strategy. Today, it doesn't make as much sense. Let's look again at those original
-resources:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The standard library's documentation is pretty much filled out, and when new APIs
-are added, the libs team writes some initial docs.&lt;/li&gt;
-&lt;li&gt;The book is maintained by Steve and Carol.&lt;/li&gt;
-&lt;li&gt;Cargo's documentation is the responsibility of the Cargo team (and the docs
-team never really helped here. I always wanted to, but years later, it just
-hasn't worked out.)&lt;/li&gt;
-&lt;li&gt;The error index describes compiler errors, and so that's the compiler team's
-job.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We've also added way more stuff:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Rust by Example&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;rustc&lt;/code&gt; book and &lt;code&gt;rustc&lt;/code&gt; guide&lt;/li&gt;
-&lt;li&gt;The reference&lt;/li&gt;
-&lt;li&gt;The nomicon&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The list goes on and on. And all this time, the membership of the team didn't
-really grow; I tried several times to get folks involved, but most people
-just plain don't like writing docs. At this point, the only person really
-writing docs is me, and I haven't had a ton of time lately either. So we
-haven't had a docs team meeting since August of 2018. There also aren't
-really docs RFCs these days. As such, this blog post isn't really announcing
-the end of the docs team as much as it is describing what is already true
-today.&lt;/p&gt;
-&lt;p&gt;I will still be doing my work on core, and the book. And I plan on submitting
-some more docs PRs in the future.&lt;/p&gt;
-&lt;p&gt;I would like to thank everyone who's been on the team in the past, and
-everyone who's submitted documentation PRs over the years. A lot of people
-really love Rust's documentation, and that wouldn't have been possible
-without all of you.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Steve Klabnik</name>
         </author>
     </entry>
     
