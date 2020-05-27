@@ -1,9 +1,11 @@
 ---
 layout: post
-title: "2020-05-27 Contributor Survey"
-author: The Compiler Team
+title: "2020 Contributor Survey"
+author: Niko Matsakis and @mark-i-m
+description: "We announce a new survey about the code contribution experience."
 team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
 ---
+
 
 You may be aware that [Rust recently turned 5][five]! If you read this blog,
 then you probably already know that the Rust project thrives because of its
