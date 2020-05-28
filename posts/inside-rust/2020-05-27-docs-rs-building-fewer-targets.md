@@ -63,7 +63,8 @@ We can guarantee at least a month (July 1st) before we will implement the change
 
 More information on targets is available in the [platform support] page.
 You can learn more about the change in [the issue proposing it][docs.rs#343] and [the PR with the implementation][docs.rs#532].
-If you want to discuss the change with the docs.rs team, feel free to join the [docs.rs discord channel].
+If you want to discuss the change with the docs.rs team,
+feel free to join the [docs.rs discord channel] or [open an issue][issue link].
 
 
 [platform support]: https://forge.rust-lang.org/release/platform-support.html
@@ -71,3 +72,4 @@ If you want to discuss the change with the docs.rs team, feel free to join the [
 [docs.rs#532]: https://github.com/rust-lang/docs.rs/issues/532
 [docs.rs discord channel]: https://discord.gg/f7mTXPW
 [conditional compilation]: https://doc.rust-lang.org/reference/conditional-compilation.html#forms-of-conditional-compilation
+[issue link]: (https://github.com/rust-lang/docs.rs/issues/new?title=Changing%20default%20targets)
