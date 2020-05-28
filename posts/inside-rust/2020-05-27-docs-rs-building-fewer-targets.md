@@ -49,7 +49,7 @@ targets = ["x86_64-unknown-linux-gnu", "x86_64-pc-windows-msvc"]
 ```
 
 Any target supported by `rustup add target` is also supported by docs.rs.
-See [docs.rs/about](https://docs.rs/about#metadata) for the complete details.
+See [the metadata documentation](https://docs.rs/about#metadata) for more details.
 
 If you develop but do not maintain a crate that uses conditional compilation,
 you can open an issue or PR to add these targets.
