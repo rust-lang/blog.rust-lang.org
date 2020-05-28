@@ -13,6 +13,7 @@ you should consider specifying your targets explicitly.
 
 Currently, docs.rs builds documentation for all [tier 1 platforms][platform support] by default.
 After this change, docs.rs will only build one platform by default.
+Usually the platform is `x86_64-unknown-linux-gnu`, but this can be configured.
 This only changes the default, you can still opt-in to more targets if you choose.
 
 ## Why is this change being made?
