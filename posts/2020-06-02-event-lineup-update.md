@@ -31,7 +31,7 @@ The team hopes to be able to resume the event in the future.
 **Oxidize**<br>July 17th-20th, 2020
 ---
 
-The [Oxidize conference][oxidize-site] was relabeld to become Oxidize Global.
+The [Oxidize conference][oxidize-site] was relabeled to become Oxidize Global.
 From July 17-20 you will be able to learn about embedded systems and IoT in Rust.
 Over the course of 4 days you will be able to attend online workshops (July 17th), listen to talks (July 18th) and take part in the Impl Days, where you can collaborate with other Embedded Rust contributors in active programming sessions.
 
