@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "2020 Event Lineup - Update"
-author: Rust Community
+author: The Rust Community Team
 description: "Join Rust events online"
 ---
 
