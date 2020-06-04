@@ -10,8 +10,28 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-06-02T08:23:32+00:00</updated>
+    <updated>2020-06-04T17:52:12+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.44.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/06/04/Rust-1.44.0.html" type="text/html" title="Announcing Rust 1.44.0" />
+        <published>2020-06-04T00:00:00+00:00</published>
+        <updated>2020-06-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/06/04/Rust-1.44.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/06/04/Rust-1.44.0.html">&lt;p&gt;The Rust team has published a new version of Rust, 1.44.0. Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;This is a shorter blog post than usual: in acknowledgement that taking a stand against the police brutality currently happening in the US and the world at large is more important than sharing tech knowledge, we decided to significantly scale back the amount of promotion we're doing for this release.&lt;/p&gt;
+&lt;p&gt;The Rust Core Team believes that tech is and always will be political, and we encourage everyone take the time today to learn about racial inequality and &lt;a href=&quot;https://blacklivesmatters.carrd.co/&quot;&gt;support the Black Lives Matter movement.&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-1440-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1440-stable&quot;&gt;&lt;/a&gt;What's in 1.44.0 stable&lt;/h2&gt;
+&lt;p&gt;Rust 1.44 is a small release, with &lt;a href=&quot;https://github.com/rust-lang/cargo/pull/8062/&quot;&gt;&lt;code&gt;cargo tree&lt;/code&gt; integrated in Cargo itself&lt;/a&gt; and &lt;a href=&quot;https://github.com/rust-lang/rust/pull/69033/&quot;&gt;support for &lt;code&gt;async&lt;/code&gt;/&lt;code&gt;await&lt;/code&gt; in &lt;code&gt;no_std&lt;/code&gt; contexts&lt;/a&gt; as its highlights. You can learn more about all the changes in this release by &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1440-2020-06-04&quot;&gt;reading the release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-1440&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1440&quot;&gt;&lt;/a&gt;Contributors to 1.44.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.44.0. We couldn't have done it without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.44.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Core Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Five Years of Rust</title>
@@ -1052,157 +1072,6 @@ We couldn't have done it without all of you. &lt;a href=&quot;https://thanks.rus
 
         <author>
             <name>Rust Community</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.41.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/01/30/Rust-1.41.0.html" type="text/html" title="Announcing Rust 1.41.0" />
-        <published>2020-01-30T00:00:00+00:00</published>
-        <updated>2020-01-30T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/01/30/Rust-1.41.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/01/30/Rust-1.41.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.41.0. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.41.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1410-2020-01-30&quot;&gt;detailed release notes for
-1.41.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-1410-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1410-stable&quot;&gt;&lt;/a&gt;What's in 1.41.0 stable&lt;/h2&gt;
-&lt;p&gt;The highlights of Rust 1.41.0 include relaxed restrictions for trait
-implementations, improvements to &lt;code&gt;cargo install&lt;/code&gt;, a more &lt;code&gt;git&lt;/code&gt;-friendly
-&lt;code&gt;Cargo.lock&lt;/code&gt;, and new FFI-related guarantees for &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt;. See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1410-2020-01-30&quot;&gt;detailed
-release notes&lt;/a&gt; to learn about other changes not covered by this post.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#relaxed-restrictions-when-implementing-traits&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;relaxed-restrictions-when-implementing-traits&quot;&gt;&lt;/a&gt;Relaxed restrictions when implementing traits&lt;/h3&gt;
-&lt;p&gt;To prevent breakages in the ecosystem when a dependency adds a new trait
-&lt;code&gt;impl&lt;/code&gt;, Rust enforces the &lt;a href=&quot;https://doc.rust-lang.org/book/ch10-02-traits.html#implementing-a-trait-on-a-type&quot;&gt;&lt;em&gt;orphan rule&lt;/em&gt;&lt;/a&gt;. The gist of it is that
-a trait &lt;code&gt;impl&lt;/code&gt; is only allowed if either the trait or the type being
-implemented is &lt;em&gt;local&lt;/em&gt; to (defined in) the current crate as opposed to a
-&lt;em&gt;foreign&lt;/em&gt; crate. &lt;a href=&quot;https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence&quot;&gt;What this means exactly&lt;/a&gt; is complicated, however,
-when generics are involved.&lt;/p&gt;
-&lt;p&gt;Before Rust 1.41.0, the orphan rule was unnecessarily strict, getting in the
-way of composition. As an example, suppose your crate defines the
-&lt;code&gt;BetterVec&amp;lt;T&amp;gt;&lt;/code&gt; struct, and you want a way to convert your struct to the
-standard library's &lt;code&gt;Vec&amp;lt;T&amp;gt;&lt;/code&gt;. The code you would write is:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;impl&amp;lt;T&amp;gt; From&amp;lt;BetterVec&amp;lt;T&amp;gt;&amp;gt; for Vec&amp;lt;T&amp;gt; {
-    // ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;...which is an instance of the pattern:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;impl&amp;lt;T&amp;gt; ForeignTrait&amp;lt;LocalType&amp;gt; for ForeignType&amp;lt;T&amp;gt; {
-    // ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In Rust 1.40.0 this &lt;code&gt;impl&lt;/code&gt; was forbidden by the orphan rule, as both &lt;code&gt;From&lt;/code&gt; and
-&lt;code&gt;Vec&lt;/code&gt; are defined in the standard library, which is foreign to the current
-crate. There were ways to work around the limitation, such as &lt;a href=&quot;https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types&quot;&gt;the &lt;em&gt;newtype&lt;/em&gt;
-pattern&lt;/a&gt;, but they were often cumbersome or even impossible in
-some cases.&lt;/p&gt;
-&lt;p&gt;While it's still true that both &lt;code&gt;From&lt;/code&gt; and &lt;code&gt;Vec&lt;/code&gt; were foreign, the trait (in
-this case &lt;code&gt;From&lt;/code&gt;) was parameterized by a local type. Therefore, Rust 1.41.0
-allows this &lt;code&gt;impl&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;For more details, read the &lt;a href=&quot;https://github.com/rust-lang/rust/issues/63599&quot;&gt;the stabilization report&lt;/a&gt; and &lt;a href=&quot;https://rust-lang.github.io/rfcs/2451-re-rebalancing-coherence.html&quot;&gt;the
-RFC proposing the change&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#cargo-install-updates-packages-when-outdated&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;cargo-install-updates-packages-when-outdated&quot;&gt;&lt;/a&gt;&lt;code&gt;cargo install&lt;/code&gt; updates packages when outdated&lt;/h3&gt;
-&lt;p&gt;With &lt;code&gt;cargo install&lt;/code&gt;, you can install binary crates in your system. The command
-is often used by the community to install popular CLI tools written in Rust.&lt;/p&gt;
-&lt;p&gt;Starting from Rust 1.41.0, &lt;code&gt;cargo install&lt;/code&gt; will also update existing
-installations of the crate if a new release came out since you installed it.
-Before this release the only option was to pass the &lt;code&gt;--force&lt;/code&gt; flag, which
-reinstalls the binary crate even if it's up to date.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#less-conflict-prone-cargolock-format&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;less-conflict-prone-cargolock-format&quot;&gt;&lt;/a&gt;Less conflict-prone &lt;code&gt;Cargo.lock&lt;/code&gt; format&lt;/h3&gt;
-&lt;p&gt;To ensure consistent builds, Cargo uses a file named &lt;code&gt;Cargo.lock&lt;/code&gt;, containing
-dependency versions and checksums. Unfortunately, the way the data was arranged
-in it caused unnecessary merge conflicts when changing dependencies in separate
-branches.&lt;/p&gt;
-&lt;p&gt;Rust 1.41.0 introduces a new format for the file, explicitly designed to avoid
-those conflicts. This new format will be used for all new lockfiles, while
-existing lockfiles will still rely on the previous format. You can learn about
-the choices leading to the new format &lt;a href=&quot;https://github.com/rust-lang/cargo/pull/7070&quot;&gt;in the PR adding it&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#more-guarantees-when-using-boxt-in-ffi&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;more-guarantees-when-using-boxt-in-ffi&quot;&gt;&lt;/a&gt;More guarantees when using &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; in FFI&lt;/h3&gt;
-&lt;p&gt;Starting with Rust 1.41.0, we have declared that a &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt;, where &lt;code&gt;T: Sized&lt;/code&gt;
-is now ABI compatible with the C language's pointer (&lt;code&gt;T*&lt;/code&gt;) types. So if you
-have an &lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt; Rust function, called from C, your Rust function can now
-use &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt;, for some specific &lt;code&gt;T&lt;/code&gt;, while using &lt;code&gt;T*&lt;/code&gt; in C for the
-corresponding function. As an example, on the C side you may have:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// C header
-
-// Returns ownership to the caller.
-struct Foo* foo_new(void);
-
-// Takes ownership from the caller; no-op when invoked with NULL.
-void foo_delete(struct Foo*);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;...while on the Rust side, you would have:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[repr(C)]
-pub struct Foo;
-
-#[no_mangle]
-pub extern &amp;quot;C&amp;quot; fn foo_new() -&amp;gt; Box&amp;lt;Foo&amp;gt; {
-    Box::new(Foo)
-}
-
-// The possibility of NULL is represented with the `Option&amp;lt;_&amp;gt;`.
-#[no_mangle]
-pub extern &amp;quot;C&amp;quot; fn foo_delete(_: Option&amp;lt;Box&amp;lt;Foo&amp;gt;&amp;gt;) {}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note however that while &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; and &lt;code&gt;T*&lt;/code&gt; have the same representation and ABI,
-a &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; must still be non-null, aligned, and ready for deallocation by the
-global allocator. To ensure this, it is best to only use &lt;code&gt;Box&lt;/code&gt;es originating
-from the global allocator.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt; At least at present, you should avoid using &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; types for
-functions that are defined in C but invoked from Rust. In those cases, you
-should directly mirror the C types as closely as possible. Using types like
-&lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; where the C definition is just using &lt;code&gt;T*&lt;/code&gt; can lead to undefined
-behavior.&lt;/p&gt;
-&lt;p&gt;To read more, &lt;a href=&quot;https://doc.rust-lang.org/std/boxed/index.html&quot;&gt;consult the documentation for &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#library-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
-&lt;p&gt;In Rust 1.41.0, we've made the following additions to the standard library:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;a href=&quot;https://doc.rust-lang.org/std/result/enum.Result.html#method.map_or&quot;&gt;&lt;code&gt;Result::map_or&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/result/enum.Result.html#method.map_or_else&quot;&gt;&lt;code&gt;Result::map_or_else&lt;/code&gt;&lt;/a&gt; methods were stabilized.&lt;/p&gt;
-&lt;p&gt;Similar to &lt;a href=&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.map_or&quot;&gt;&lt;code&gt;Option::map_or&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.map_or_else&quot;&gt;&lt;code&gt;Option::map_or_else&lt;/code&gt;&lt;/a&gt;, these methods are
-shorthands for the &lt;code&gt;.map(|val| process(val)).unwrap_or(default)&lt;/code&gt; pattern.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/66277&quot;&gt;&lt;code&gt;NonZero*&lt;/code&gt; numerics now implement &lt;code&gt;From&amp;lt;NonZero*&amp;gt;&lt;/code&gt; if it's a smaller integer
-width.&lt;/a&gt; For example, &lt;code&gt;NonZeroU16&lt;/code&gt; now implements &lt;code&gt;From&amp;lt;NonZeroU8&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;code&gt;weak_count&lt;/code&gt; and &lt;code&gt;strong_count&lt;/code&gt; methods on &lt;code&gt;Weak&lt;/code&gt; pointers were stabilized.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/rc/struct.Weak.html#method.weak_count&quot;&gt;&lt;code&gt;std::rc::Weak::weak_count&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/rc/struct.Weak.html#method.strong_count&quot;&gt;&lt;code&gt;std::rc::Weak::strong_count&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/sync/struct.Weak.html#method.weak_count&quot;&gt;&lt;code&gt;std::sync::Weak::weak_count&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/sync/struct.Weak.html#method.strong_count&quot;&gt;&lt;code&gt;std::sync::Weak::strong_count&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These methods return the number of weak (&lt;code&gt;rc::Weak&amp;lt;T&amp;gt;&lt;/code&gt; and &lt;code&gt;sync::Weak&amp;lt;T&amp;gt;&lt;/code&gt;)
-or strong (&lt;code&gt;Rc&amp;lt;T&amp;gt;&lt;/code&gt; and &lt;code&gt;Arc&amp;lt;T&amp;gt;&lt;/code&gt;) pointers to the allocation respectively.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/65013&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt; now implements &lt;code&gt;fmt::Debug&lt;/code&gt;.&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;#reducing-support-for-32-bit-apple-targets-soon&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;reducing-support-for-32-bit-apple-targets-soon&quot;&gt;&lt;/a&gt;Reducing support for 32-bit Apple targets soon&lt;/h3&gt;
-&lt;p&gt;Rust 1.41.0 is the last release with the current level of compiler support for
-32-bit Apple targets, including the &lt;code&gt;i686-apple-darwin&lt;/code&gt; target. Starting from
-Rust 1.42.0, these targets will be demoted to the lowest support tier.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.rust-lang.org/2020/01/03/reducing-support-for-32-bit-apple-targets.html&quot;&gt;You can learn more about this change in this blog post.&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#other-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.41.0 release: check out what changed in
-&lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1410-2020-01-30&quot;&gt;Rust&lt;/a&gt;, &lt;a href=&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-141-2020-01-30&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-141&quot;&gt;Clippy&lt;/a&gt;. We also
-have started landing MIR optimizations, which should improve compile time: you
-can learn more about them in the &lt;a href=&quot;https://blog.rust-lang.org/inside-rust/2019/12/02/const-prop-on-by-default.html&quot;&gt;&amp;quot;Inside Rust&amp;quot; blog post&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#contributors-to-1410&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1410&quot;&gt;&lt;/a&gt;Contributors to 1.41.0&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.41.0. We couldn't have done it
-without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.41.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
