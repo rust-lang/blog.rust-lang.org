@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>New inline assembly syntax available in nightly | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="New inline assembly syntax available in nightly | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="New inline assembly syntax available in nightly | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="New inline assembly syntax available in nightly" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>New inline assembly syntax available in nightly</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">June 8, 2020 &middot; Josh Triplett
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang">the language team</a> 
+    </div>
+
+    <div class="post">
+      <p>In the course of optimization, OS or embedded development, or other kinds of
+low-level programming, you may sometimes need to write native assembly code for
+the processor you're running on. &quot;Inline assembly&quot; provides a simple way to
+integrate some assembly instructions into a Rust program, feeding Rust
+expressions in as input registers, and getting output directly into Rust
+variables. We've introduced a new syntax for inline assembly in nightly Rust,
+and we're seeking feedback on it; we believe this new syntax has a path to
+stabilization in the future.</p>
+<p>Nightly Rust has had a syntax for &quot;inline assembly&quot; (<code>asm!</code>) for a long time;
+however, this syntax just exposed a very raw version of LLVM's assembly
+construct, with no safeguards to help developers use it. Getting any detail of
+this syntax even slightly wrong tended to produce an Internal Compiler Error
+(ICE) rather than the kind of friendly error message you've come to expect from
+rustc. This syntax was also error-prone for another reason: it looks similar to
+GCC's inline assembly syntax, but has subtle differences (such as the names in
+register constraints). This syntax also had little to no hope of being
+supported on any non-LLVM backend. As a result of all these limitations, the
+<code>asm!</code> syntax was highly unlikely to ever graduate from nightly to stable Rust,
+despite being one of the most requested features.</p>
+<p>In an effort to improve <code>asm!</code> and bring it to more users, <a href="https://github.com/Amanieu">Amanieu
+d'Antras</a> designed and implemented a new,
+friendlier syntax for <code>asm!</code>. This syntax has had a long road from concept to
+compiler implementation:</p>
+<ul>
+<li>The proposal first started as a <a href="https://internals.rust-lang.org/t/pre-rfc-2-inline-assembly/11310">pre-RFC on
+internals</a>.</li>
+<li>Inline assembly became one of the language team's first <a href="https://github.com/rust-lang/rfcs/blob/master/text/2836-project-asm.md">project
+groups</a>,
+and iteratively designed RFCs in <a href="https://github.com/rust-lang/project-inline-asm/">the project group
+repository</a>.</li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/2873">RFC 2873</a> (still under
+discussion) provides a specification for the syntax and its interaction with
+the Rust language.</li>
+<li>We <a href="https://github.com/rust-lang/rust/pull/68404">renamed the existing <code>asm!</code> to
+<code>llvm_asm!</code></a>, so that people
+currently using inline assembly on nightly can continue to use the existing
+syntax for now. (We plan to remove this syntax eventually, given its fragile
+ICE-happy nature, but while evaluating the new syntax we want the old syntax
+available for comparison and alternatives.)</li>
+<li><a href="https://github.com/rust-lang/rust/pull/69171">PR 69171</a> (also by Amanieu)
+implemented the new <code>asm!</code> syntax in nightly.</li>
+</ul>
+<p>Here's an example of using the new inline assembly syntax, to print a message
+to standard output using a direct <a href="https://man7.org/linux/man-pages/man2/write.2.html"><code>write</code>
+syscall</a> on x86-64 Linux:</p>
+<pre><code class="language-rust">#![feature(asm)]
+
+fn main() {
+    let buf = &quot;Hello from asm!\n&quot;;
+    let ret: i32;
+    unsafe {
+        asm!(
+            &quot;syscall&quot;,
+            in(&quot;rax&quot;) 1, // syscall number
+            in(&quot;rdi&quot;) 1, // fd (stdout)
+            in(&quot;rsi&quot;) buf.as_ptr(),
+            in(&quot;rdx&quot;) buf.len(),
+            out(&quot;rcx&quot;) _, // clobbered by syscalls
+            out(&quot;r11&quot;) _, // clobbered by syscalls
+            lateout(&quot;rax&quot;) ret,
+        );
+    }
+    println!(&quot;write returned: {}&quot;, ret);
+}
+</code></pre>
+<p>(You can <a href="https://play.rust-lang.org/?version=nightly&mode=release&edition=2018&gist=e983a5f5cffa51f4320f1176465d3a56">try this example on the
+playground</a>.)</p>
+<p>The example above specifies the exact inputs, outputs, and clobbers required by
+the Linux syscall calling convention. You can also provide inputs and outputs
+via arbitrary registers, and the compiler will select appropriate registers for
+you. The following example uses <a href="https://en.wikipedia.org/wiki/Bit_Manipulation_Instruction_Sets">bit manipulation
+instructions</a>
+to compute the bit numbers of all set bits in a value, and stores them in a
+slice of memory:</p>
+<pre><code class="language-rust">#![feature(asm)]
+
+fn main() {
+    let mut bits = [0u8; 64];
+    for value in 0..=1024u64 {
+        let popcnt;
+        unsafe {
+            asm!(&quot;
+                popcnt {popcnt}, {v}
+                2:
+                blsi rax, {v}
+                jz 1f
+                xor {v}, rax
+                tzcnt rax, rax
+                stosb
+                jmp 2b
+                1:
+                &quot;,
+                v = inout(reg) value =&gt; _,
+                popcnt = out(reg) popcnt,
+                out(&quot;rax&quot;) _, // scratch
+                inout(&quot;rdi&quot;) bits.as_mut_ptr() =&gt; _,
+            );
+        }
+        println!(&quot;bits of {}: {:?}&quot;, value, &amp;bits[0..popcnt]);
+    }
+}
+</code></pre>
+<p>(You can <a href="https://play.rust-lang.org/?version=nightly&mode=release&edition=2018&gist=38874735e48aa20289f23f5a3cbeae0c">try this example on the
+playground</a>.
+Note that this code serves to demonstrate inline assembly, not to demonstrate
+an efficient implementation of any particular algorithm.)</p>
+<p>Notice that <code>value</code> and <code>popcnt</code> have registers selected for them, while
+<code>bits.as_mut_ptr()</code> must go in the <code>rdi</code> register for use with the <code>stosb</code>
+instruction.</p>
+<p>For full details on the new <code>asm!</code> syntax, see <a href="https://github.com/Amanieu/rfcs/blob/inline-asm/text/0000-inline-asm.md">RFC
+2873</a>.
+Please try it out (including translating existing inline assembly to the new
+syntax), and <a href="https://github.com/rust-lang/rust/issues/">report any bugs via the rust issue
+tracker</a> with the tag <code>F-asm</code>. You
+can also discuss inline assembly by creating a topic on <a href="https://rust-lang.zulipchat.com/#narrow/stream/216763-project-inline-asm">the project-inline-asm
+stream in
+Zulip</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

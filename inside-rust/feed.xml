@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-06-08T20:53:07+00:00</updated>
+    <updated>2020-06-08T21:13:14+00:00</updated>
 
     
     <entry>
@@ -41,6 +41,136 @@ steering meeting process here&lt;/a&gt;.&lt;/p&gt;
 
         <author>
             <name>Felix Klock</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>New inline assembly syntax available in nightly</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/06/08/new-inline-asm.html" type="text/html" title="New inline assembly syntax available in nightly" />
+        <published>2020-06-08T00:00:00+00:00</published>
+        <updated>2020-06-08T00:00:01+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/06/08/new-inline-asm.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/06/08/new-inline-asm.html">&lt;p&gt;In the course of optimization, OS or embedded development, or other kinds of
+low-level programming, you may sometimes need to write native assembly code for
+the processor you're running on. &amp;quot;Inline assembly&amp;quot; provides a simple way to
+integrate some assembly instructions into a Rust program, feeding Rust
+expressions in as input registers, and getting output directly into Rust
+variables. We've introduced a new syntax for inline assembly in nightly Rust,
+and we're seeking feedback on it; we believe this new syntax has a path to
+stabilization in the future.&lt;/p&gt;
+&lt;p&gt;Nightly Rust has had a syntax for &amp;quot;inline assembly&amp;quot; (&lt;code&gt;asm!&lt;/code&gt;) for a long time;
+however, this syntax just exposed a very raw version of LLVM's assembly
+construct, with no safeguards to help developers use it. Getting any detail of
+this syntax even slightly wrong tended to produce an Internal Compiler Error
+(ICE) rather than the kind of friendly error message you've come to expect from
+rustc. This syntax was also error-prone for another reason: it looks similar to
+GCC's inline assembly syntax, but has subtle differences (such as the names in
+register constraints). This syntax also had little to no hope of being
+supported on any non-LLVM backend. As a result of all these limitations, the
+&lt;code&gt;asm!&lt;/code&gt; syntax was highly unlikely to ever graduate from nightly to stable Rust,
+despite being one of the most requested features.&lt;/p&gt;
+&lt;p&gt;In an effort to improve &lt;code&gt;asm!&lt;/code&gt; and bring it to more users, &lt;a href=&quot;https://github.com/Amanieu&quot;&gt;Amanieu
+d'Antras&lt;/a&gt; designed and implemented a new,
+friendlier syntax for &lt;code&gt;asm!&lt;/code&gt;. This syntax has had a long road from concept to
+compiler implementation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The proposal first started as a &lt;a href=&quot;https://internals.rust-lang.org/t/pre-rfc-2-inline-assembly/11310&quot;&gt;pre-RFC on
+internals&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Inline assembly became one of the language team's first &lt;a href=&quot;https://github.com/rust-lang/rfcs/blob/master/text/2836-project-asm.md&quot;&gt;project
+groups&lt;/a&gt;,
+and iteratively designed RFCs in &lt;a href=&quot;https://github.com/rust-lang/project-inline-asm/&quot;&gt;the project group
+repository&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2873&quot;&gt;RFC 2873&lt;/a&gt; (still under
+discussion) provides a specification for the syntax and its interaction with
+the Rust language.&lt;/li&gt;
+&lt;li&gt;We &lt;a href=&quot;https://github.com/rust-lang/rust/pull/68404&quot;&gt;renamed the existing &lt;code&gt;asm!&lt;/code&gt; to
+&lt;code&gt;llvm_asm!&lt;/code&gt;&lt;/a&gt;, so that people
+currently using inline assembly on nightly can continue to use the existing
+syntax for now. (We plan to remove this syntax eventually, given its fragile
+ICE-happy nature, but while evaluating the new syntax we want the old syntax
+available for comparison and alternatives.)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/69171&quot;&gt;PR 69171&lt;/a&gt; (also by Amanieu)
+implemented the new &lt;code&gt;asm!&lt;/code&gt; syntax in nightly.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here's an example of using the new inline assembly syntax, to print a message
+to standard output using a direct &lt;a href=&quot;https://man7.org/linux/man-pages/man2/write.2.html&quot;&gt;&lt;code&gt;write&lt;/code&gt;
+syscall&lt;/a&gt; on x86-64 Linux:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#![feature(asm)]
+
+fn main() {
+    let buf = &amp;quot;Hello from asm!\n&amp;quot;;
+    let ret: i32;
+    unsafe {
+        asm!(
+            &amp;quot;syscall&amp;quot;,
+            in(&amp;quot;rax&amp;quot;) 1, // syscall number
+            in(&amp;quot;rdi&amp;quot;) 1, // fd (stdout)
+            in(&amp;quot;rsi&amp;quot;) buf.as_ptr(),
+            in(&amp;quot;rdx&amp;quot;) buf.len(),
+            out(&amp;quot;rcx&amp;quot;) _, // clobbered by syscalls
+            out(&amp;quot;r11&amp;quot;) _, // clobbered by syscalls
+            lateout(&amp;quot;rax&amp;quot;) ret,
+        );
+    }
+    println!(&amp;quot;write returned: {}&amp;quot;, ret);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(You can &lt;a href=&quot;https://play.rust-lang.org/?version=nightly&amp;mode=release&amp;edition=2018&amp;gist=e983a5f5cffa51f4320f1176465d3a56&quot;&gt;try this example on the
+playground&lt;/a&gt;.)&lt;/p&gt;
+&lt;p&gt;The example above specifies the exact inputs, outputs, and clobbers required by
+the Linux syscall calling convention. You can also provide inputs and outputs
+via arbitrary registers, and the compiler will select appropriate registers for
+you. The following example uses &lt;a href=&quot;https://en.wikipedia.org/wiki/Bit_Manipulation_Instruction_Sets&quot;&gt;bit manipulation
+instructions&lt;/a&gt;
+to compute the bit numbers of all set bits in a value, and stores them in a
+slice of memory:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#![feature(asm)]
+
+fn main() {
+    let mut bits = [0u8; 64];
+    for value in 0..=1024u64 {
+        let popcnt;
+        unsafe {
+            asm!(&amp;quot;
+                popcnt {popcnt}, {v}
+                2:
+                blsi rax, {v}
+                jz 1f
+                xor {v}, rax
+                tzcnt rax, rax
+                stosb
+                jmp 2b
+                1:
+                &amp;quot;,
+                v = inout(reg) value =&amp;gt; _,
+                popcnt = out(reg) popcnt,
+                out(&amp;quot;rax&amp;quot;) _, // scratch
+                inout(&amp;quot;rdi&amp;quot;) bits.as_mut_ptr() =&amp;gt; _,
+            );
+        }
+        println!(&amp;quot;bits of {}: {:?}&amp;quot;, value, &amp;amp;bits[0..popcnt]);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(You can &lt;a href=&quot;https://play.rust-lang.org/?version=nightly&amp;mode=release&amp;edition=2018&amp;gist=38874735e48aa20289f23f5a3cbeae0c&quot;&gt;try this example on the
+playground&lt;/a&gt;.
+Note that this code serves to demonstrate inline assembly, not to demonstrate
+an efficient implementation of any particular algorithm.)&lt;/p&gt;
+&lt;p&gt;Notice that &lt;code&gt;value&lt;/code&gt; and &lt;code&gt;popcnt&lt;/code&gt; have registers selected for them, while
+&lt;code&gt;bits.as_mut_ptr()&lt;/code&gt; must go in the &lt;code&gt;rdi&lt;/code&gt; register for use with the &lt;code&gt;stosb&lt;/code&gt;
+instruction.&lt;/p&gt;
+&lt;p&gt;For full details on the new &lt;code&gt;asm!&lt;/code&gt; syntax, see &lt;a href=&quot;https://github.com/Amanieu/rfcs/blob/inline-asm/text/0000-inline-asm.md&quot;&gt;RFC
+2873&lt;/a&gt;.
+Please try it out (including translating existing inline assembly to the new
+syntax), and &lt;a href=&quot;https://github.com/rust-lang/rust/issues/&quot;&gt;report any bugs via the rust issue
+tracker&lt;/a&gt; with the tag &lt;code&gt;F-asm&lt;/code&gt;. You
+can also discuss inline assembly by creating a topic on &lt;a href=&quot;https://rust-lang.zulipchat.com/#narrow/stream/216763-project-inline-asm&quot;&gt;the project-inline-asm
+stream in
+Zulip&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Josh Triplett</name>
         </author>
     </entry>
     
@@ -385,52 +515,6 @@ events will be updated.&lt;/p&gt;
 
         <author>
             <name>Josh Triplett</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Update on the GitHub Actions evaluation</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/04/07/update-on-the-github-actions-evaluation.html" type="text/html" title="Update on the GitHub Actions evaluation" />
-        <published>2020-04-07T00:00:00+00:00</published>
-        <updated>2020-04-07T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/04/07/update-on-the-github-actions-evaluation.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/04/07/update-on-the-github-actions-evaluation.html">&lt;p&gt;The infrastructure team is happy to report that &lt;a href=&quot;https://blog.rust-lang.org/inside-rust/2019/11/14/evaluating-github-actions.html&quot;&gt;the evaluation we started last
-year&lt;/a&gt; of &lt;a href=&quot;https://github.com/features/actions&quot;&gt;GitHub Actions&lt;/a&gt; as the new CI platform for the
-&lt;a href=&quot;https://github.com/rust-lang/rust&quot;&gt;rust-lang/rust&lt;/a&gt; repository is making progress!&lt;/p&gt;
-&lt;p&gt;On March 20th, 2020 we merged &lt;a href=&quot;https://github.com/rust-lang/rust/pull/70190&quot;&gt;PR #70190&lt;/a&gt;, adding the GitHub Actions
-configuration to the compiler repository. We’re still gating merges on the
-existing Azure Pipelines setup, but running the two providers side by side
-allows us to find bugs in the GitHub Actions configuration without impacting
-the work of our contributors.&lt;/p&gt;
-&lt;p&gt;Once &lt;a href=&quot;https://github.com/rust-lang/rust/labels/A-github-actions&quot;&gt;all outstanding issues&lt;/a&gt; are fixed, the Infrastructure Team
-will make the decision to either switch to GitHub Actions or stay on Azure
-Pipelines. We expect the decision to happen in a couple of months.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-changing-with-github-actions&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-changing-with-github-actions&quot;&gt;&lt;/a&gt;What’s changing with GitHub Actions?&lt;/h2&gt;
-&lt;p&gt;This change should have no visible effect to any user of Rust, but will greatly
-improve the experience of our contributors.&lt;/p&gt;
-&lt;p&gt;The main difference our contributors are going to notice is a big reduction of
-our CI times. In the current Azure Pipelines setup builds regularly take more
-than 3 hours to finish (with 60 parallel 2-core VMs), while we expect the new
-GitHub Actions setup to take less than half the time to finish a build, thanks
-to a dedicated pool of 8-core VMs GitHub generously prepared for us.&lt;/p&gt;
-&lt;p&gt;Another technical change is that we’re now running most CI builds on the
-&lt;a href=&quot;https://github.com/rust-lang-ci/rust&quot;&gt;rust-lang-ci/rust&lt;/a&gt; fork. This should only impact team members that want to get
-a list of all the past builds, and should be completly transparent to everyone
-else thanks to our integration bot &lt;a href=&quot;https://github.com/rust-lang/homu&quot;&gt;@bors&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#what-configuration-is-the-project-using&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;what-configuration-is-the-project-using&quot;&gt;&lt;/a&gt;What configuration is the project using?&lt;/h2&gt;
-&lt;p&gt;Our CI configuration is available at &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/src/ci/github-actions/ci.yml&quot;&gt;&lt;code&gt;src/ci/github-actions/ci.yml&lt;/code&gt;&lt;/a&gt;.
-Note that our configuration is not using the standard GitHub Actions syntax,
-but we’re relying on a preprocessor to expand YAML anchors to ease the
-maintenance work on our end.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#why-are-you-moving-away-from-azure-pipelines&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;why-are-you-moving-away-from-azure-pipelines&quot;&gt;&lt;/a&gt;Why are you moving away from Azure Pipelines?&lt;/h2&gt;
-&lt;p&gt;We're happy with Azure Pipelines as a product, but both Microsoft and GitHub
-asked us to try GitHub Actions as it's more closely integrated into the GitHub
-workflow we already use. After we used it for a while in other repositories we
-were satisfied enough to start evaluating a migration for &lt;a href=&quot;https://github.com/rust-lang/rust&quot;&gt;rust-lang/rust&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Pietro Albini</name>
         </author>
     </entry>
     
