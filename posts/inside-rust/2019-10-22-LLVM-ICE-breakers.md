@@ -12,11 +12,11 @@ Today I'm announcing a new experiment in the compiler team, the **LLVM ICE-break
 
 At its heart, the LLVM ICE-breaker group is just a list of people who would like to be notified when we come across LLVM bugs. You can add yourself to this list very easily -- just [open a PR]! When we come across a suitable bug, we'll write a message that `@`-mentions every Github user on that list. If you have some time, maybe you can fix one of them, or at least offer some words of wisdom to help somebody else figure out what's going on.
 
-[open a PR]: https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html#join
+[open a PR]: https://rustc-dev-guide.rust-lang.org/notification-groups/about.html#join
 
 There are a few other things associated with the group too, however. For example, we've got a [guide][llvm guide] that offers some tips for how to fix LLVM-related bugs and may help you get started (particularly if you're not that familiar with rustc).
 
-[llvm guide]: https://rustc-dev-guide.rust-lang.org/ice-breaker/llvm.html
+[llvm guide]: https://rustc-dev-guide.rust-lang.org/notification-groups/llvm.html
 
 ### What kind of bugs are we talking about?
 
@@ -25,7 +25,7 @@ The goal is to identify "self-contained" bugs that are unlikely to require large
 As Rust developers triage bugs and tag them for the ICE-breakers,
 they will [ping][tag syntax] the group on Github.
 
-[tag syntax]: https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html#tagging-an-issue-for-an-ice-breaker-group
+[tag syntax]: https://rustc-dev-guide.rust-lang.org/notification-groups/about.html#tagging-an-issue-for-a-notification-group
 
 ### Who should join?
 
@@ -53,8 +53,12 @@ I certainly hope so! As I mentioned before, this is an experiment, but presuming
 The current list of ICE-breaker groups is documented in the
 [rustc development guide][rustc dev guide]
 
-[rustc dev guide]: https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html
+[rustc dev guide]: https://rustc-dev-guide.rust-lang.org/notification-groups/about.html
 
 ### So how do I sign up again?
 
 Easy! Just [open a PR]!
+
+### Update
+
+Since this blog post was written, the "ICE-breaker" groups have been renamed to "notification groups". 

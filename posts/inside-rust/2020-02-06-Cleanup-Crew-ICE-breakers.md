@@ -37,9 +37,13 @@ bug, we'll [write a message][tag syntax] that `@`-mentions every Github user on 
 team. If you have some time, maybe you can provide some useful
 information.
 
-[instructions here]: https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html#join
+[instructions here]: https://rustc-dev-guide.rust-lang.org/notification-groups/about.html#join
 
-[tag syntax]: https://rustc-dev-guide.rust-lang.org/ice-breaker/about.html#tagging-an-issue-for-an-ice-breaker-group
+[tag syntax]: https://rustc-dev-guide.rust-lang.org/notifiation-groups/about.html#tagging-an-issue-for-a-notification-group
 
 You can find more information about the group on it's [rustc-dev-guide
-section](https://rustc-dev-guide.rust-lang.org/ice-breaker/cleanup-crew.html).
+section](https://rustc-dev-guide.rust-lang.org/notification-groups/cleanup-crew.html).
+
+### Update
+
+Since this blog post was written, the "ICE-breaker" groups have been renamed to "notification groups".
