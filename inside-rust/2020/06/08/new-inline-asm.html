@@ -180,6 +180,9 @@ an efficient implementation of any particular algorithm.)</p>
 <p>Notice that <code>value</code> and <code>popcnt</code> have registers selected for them, while
 <code>bits.as_mut_ptr()</code> must go in the <code>rdi</code> register for use with the <code>stosb</code>
 instruction.</p>
+<p>Also, note that on x86 platforms, <code>asm!</code> uses Intel syntax by default; however,
+you can use AT&amp;T syntax with <code>option(att_syntax)</code>. You may find this useful
+when translating existing inline assembly code to the new <code>asm!</code> syntax.</p>
 <p>For full details on the new <code>asm!</code> syntax, see <a href="https://github.com/Amanieu/rfcs/blob/inline-asm/text/0000-inline-asm.md">RFC
 2873</a>.
 Please try it out (including translating existing inline assembly to the new

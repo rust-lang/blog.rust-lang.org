@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-06-08T21:13:14+00:00</updated>
+    <updated>2020-06-09T21:06:00+00:00</updated>
 
     
     <entry>
@@ -159,6 +159,9 @@ an efficient implementation of any particular algorithm.)&lt;/p&gt;
 &lt;p&gt;Notice that &lt;code&gt;value&lt;/code&gt; and &lt;code&gt;popcnt&lt;/code&gt; have registers selected for them, while
 &lt;code&gt;bits.as_mut_ptr()&lt;/code&gt; must go in the &lt;code&gt;rdi&lt;/code&gt; register for use with the &lt;code&gt;stosb&lt;/code&gt;
 instruction.&lt;/p&gt;
+&lt;p&gt;Also, note that on x86 platforms, &lt;code&gt;asm!&lt;/code&gt; uses Intel syntax by default; however,
+you can use AT&amp;amp;T syntax with &lt;code&gt;option(att_syntax)&lt;/code&gt;. You may find this useful
+when translating existing inline assembly code to the new &lt;code&gt;asm!&lt;/code&gt; syntax.&lt;/p&gt;
 &lt;p&gt;For full details on the new &lt;code&gt;asm!&lt;/code&gt; syntax, see &lt;a href=&quot;https://github.com/Amanieu/rfcs/blob/inline-asm/text/0000-inline-asm.md&quot;&gt;RFC
 2873&lt;/a&gt;.
 Please try it out (including translating existing inline assembly to the new
