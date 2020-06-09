@@ -125,6 +125,10 @@ Notice that `value` and `popcnt` have registers selected for them, while
 `bits.as_mut_ptr()` must go in the `rdi` register for use with the `stosb`
 instruction.
 
+Also, note that on x86 platforms, `asm!` uses Intel syntax by default; however,
+you can use AT&T syntax with `option(att_syntax)`. You may find this useful
+when translating existing inline assembly code to the new `asm!` syntax.
+
 For full details on the new `asm!` syntax, see [RFC
 2873](https://github.com/Amanieu/rfcs/blob/inline-asm/text/0000-inline-asm.md).
 Please try it out (including translating existing inline assembly to the new
