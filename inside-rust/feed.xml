@@ -10,8 +10,38 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-06-09T21:06:00+00:00</updated>
+    <updated>2020-06-09T22:13:15+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing the Windows and ARM notification groups</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/06/09/windows-notification-group.html" type="text/html" title="Announcing the Windows and ARM notification groups" />
+        <published>2020-06-09T00:00:00+00:00</published>
+        <updated>2020-06-09T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/06/09/windows-notification-group.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/06/09/windows-notification-group.html">&lt;p&gt;We are forming two new groups in the compiler team:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A Windows group, for helping us to diagnose and resolve Windows-related issues.&lt;/li&gt;
+&lt;li&gt;An ARM group, for helping us to resolve issues specific to the ARM architectures&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each of these groups are &amp;quot;notification groups&amp;quot;, which means that anyone can add their own name to the list -- if you do, you'll receive pings when Windows- or ARM-related bugs arise.&lt;/p&gt;
+&lt;p&gt;Each group also has an associated Zulip stream ([&lt;code&gt;#t-compiler/windows&lt;/code&gt;], [&lt;code&gt;#t-compiler/arm&lt;/code&gt;]) where people can go to pose questions and discuss topics specific to that target.&lt;/p&gt;
+&lt;p&gt;To get a better idea for what the groups will do, here are some examples of the kinds of questions where we would have reached out to the Windows group for advice in determining the best course of action:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Should we remove the legacy InnoSetup GUI installer? &lt;a href=&quot;https://github.com/rust-lang/rust/pull/72569&quot;&gt;#72569&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;What names should we use for static libraries on Windows? &lt;a href=&quot;https://github.com/rust-lang/rust/pull/29520&quot;&gt;#29520&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So, if you are interested in participating, please sign up for the Windows or aarch64 groups! To do so, you open a PR against the &lt;a href=&quot;https://github.com/rust-lang/team&quot;&gt;rust-lang/team&lt;/a&gt; repository. Just follow these examples (but change the username to your own):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/team/pull/348&quot;&gt;Windows example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/team/pull/358&quot;&gt;ARM example&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Upcoming compiler-team design meetings</title>
@@ -463,61 +493,6 @@ steering meeting process here&lt;/a&gt;.&lt;/p&gt;
 
         <author>
             <name>Niko Matsakis</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>April Lang Team Design Meetings</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/04/10/lang-team-design-meetings.html" type="text/html" title="April Lang Team Design Meetings" />
-        <published>2020-04-10T00:00:00+00:00</published>
-        <updated>2020-04-10T00:00:01+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/04/10/lang-team-design-meetings.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/04/10/lang-team-design-meetings.html">&lt;p&gt;We've scheduled our &lt;strong&gt;language team design meetings&lt;/strong&gt; for April. We have plans
-for three meetings:&lt;/p&gt;
-&lt;h1&gt;&lt;a href=&quot;#try-blocks-try-traits-functions-that-try-oh-my&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;try-blocks-try-traits-functions-that-try-oh-my&quot;&gt;&lt;/a&gt;try blocks, Try traits, functions that try, oh my!&lt;/h1&gt;
-&lt;p&gt;(Update: tentatively moved to May 4.)&lt;/p&gt;
-&lt;p&gt;Clear the path to stabilizing &lt;code&gt;try&lt;/code&gt; blocks and the &lt;code&gt;Try&lt;/code&gt; trait, and identify
-some next steps for function-level try.&lt;/p&gt;
-&lt;p&gt;Agenda:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/issues/70941&quot;&gt;Resolving &lt;code&gt;Ok&lt;/code&gt;-wrapping for &lt;code&gt;try&lt;/code&gt;
-blocks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Discuss revisions to the &lt;code&gt;Try&lt;/code&gt; trait required for stabilization.&lt;/li&gt;
-&lt;li&gt;Discuss syntax for early exit from a &lt;code&gt;try&lt;/code&gt; with an error (&lt;code&gt;Err(e)?&lt;/code&gt;): &lt;code&gt;fail&lt;/code&gt;,
-&lt;code&gt;throw&lt;/code&gt;, &lt;code&gt;raise&lt;/code&gt;, &lt;code&gt;yeet&lt;/code&gt;, etc.&lt;/li&gt;
-&lt;li&gt;If we have time, talk some about possibilities for function-level &lt;code&gt;try&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;&lt;a href=&quot;#april-20----edition-planning&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;april-20----edition-planning&quot;&gt;&lt;/a&gt;April 20 -- Edition planning&lt;/h1&gt;
-&lt;p&gt;Plan the 2021 edition, with a checklist of language features we will need to
-land in 2020 if we want to ship them in Rust 2021. We hope to emerge from this
-meeting with a checklist to guide our efforts, which we can adapt through the
-process.&lt;/p&gt;
-&lt;h1&gt;&lt;a href=&quot;#april-27----type-aliases-and-traits-enforcement&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;april-27----type-aliases-and-traits-enforcement&quot;&gt;&lt;/a&gt;April 27 -- Type aliases and traits enforcement&lt;/h1&gt;
-&lt;p&gt;Long-standing issue: &lt;code&gt;type Foo&amp;lt;T: Trait&amp;gt; = ...&lt;/code&gt; doesn't enforce &lt;code&gt;T: Trait&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Goal:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Discuss the situation with type aliases and decide what actions we may want
-to take.&lt;/li&gt;
-&lt;li&gt;Or, if we don't reach a decision, decide what measurements we might need to
-reach one.&lt;/li&gt;
-&lt;li&gt;Ideally, decide about &lt;a href=&quot;https://github.com/rust-lang/rust/pull/69741&quot;&gt;estebank's
-PR&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href=&quot;#about-the-language-team-design-meetings&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;about-the-language-team-design-meetings&quot;&gt;&lt;/a&gt;About the language team design meetings&lt;/h2&gt;
-&lt;p&gt;The idea of the design meeting is that it's a time for us to have in-depth
-discussions on some particular topic. This might be a burning problem that
-we've discovered, an update on some existing design work, or a forward looking
-proposal.&lt;/p&gt;
-&lt;p&gt;The meetings are open for anyone to listen in and attend. They are typically
-also recorded and posted online, along with minutes, after the fact. They
-generally take place on Mondays at noon Eastern time, 9am Pacific time -- but
-for the precise scheduling you should check the &lt;a href=&quot;https://github.com/rust-lang/lang-team/#meeting-calendar&quot;&gt;lang team calendar&lt;/a&gt;. Scheduled
-meetings are subject to change and cancelation. In that case, the calendar
-events will be updated.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Josh Triplett</name>
         </author>
     </entry>
     
