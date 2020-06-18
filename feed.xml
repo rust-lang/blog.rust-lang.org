@@ -10,8 +10,34 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-06-18T11:55:40+00:00</updated>
+    <updated>2020-06-18T14:06:06+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.44.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/06/18/Rust.1.44.1.html" type="text/html" title="Announcing Rust 1.44.1" />
+        <published>2020-06-18T00:00:00+00:00</published>
+        <updated>2020-06-18T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/06/18/Rust.1.44.1.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/06/18/Rust.1.44.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.44.1.
+Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.44.1 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
+appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-rust-1441&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-rust-1441&quot;&gt;&lt;/a&gt;What's in Rust 1.44.1&lt;/h2&gt;
+&lt;p&gt;Rust 1.44.1 addresses several tool regressions in Cargo, Clippy, and Rustfmt introduced in the 1.44.0 stable
+release. You can find more detailed information on the specific regressions in the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1441-2020-06-18&quot;&gt;release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-1441&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1441&quot;&gt;&lt;/a&gt;Contributors to 1.44.1&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.44.1.
+We couldn't have done it without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.44.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>2020 Event Lineup - Update</title>
@@ -988,104 +1014,6 @@ to implement &lt;code&gt;Sized&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
 
         <author>
             <name>Rust Community</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.41.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/02/27/Rust-1.41.1.html" type="text/html" title="Announcing Rust 1.41.1" />
-        <published>2020-02-27T00:00:00+00:00</published>
-        <updated>2020-02-27T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/02/27/Rust-1.41.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/02/27/Rust-1.41.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.41.1.
-Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.41.1 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/tools/install&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-1411-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1411-stable&quot;&gt;&lt;/a&gt;What's in 1.41.1 stable&lt;/h2&gt;
-&lt;p&gt;Rust 1.41.1 addresses two critical regressions introduced in Rust 1.41.0:
-a soundness hole related to static lifetimes, and a miscompilation causing segfaults.
-These regressions do not affect earlier releases of Rust,
-and we recommend users of Rust 1.41.0 to upgrade as soon as possible.
-Another issue related to interactions between &lt;code&gt;'static&lt;/code&gt; and &lt;code&gt;Copy&lt;/code&gt; implementations,
-dating back to Rust 1.0, was also addressed by this release.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#a-soundness-hole-in-checking-static-items&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;a-soundness-hole-in-checking-static-items&quot;&gt;&lt;/a&gt;A soundness hole in checking &lt;code&gt;static&lt;/code&gt; items&lt;/h3&gt;
-&lt;p&gt;In Rust 1.41.0, due to some changes in the internal representation of &lt;code&gt;static&lt;/code&gt; values,
-the borrow checker accidentally allowed some unsound programs.
-Specifically, the borrow checker would not check that &lt;code&gt;static&lt;/code&gt; items had the correct type.
-This in turn would allow the assignment of a temporary,
-with a lifetime less than &lt;code&gt;'static&lt;/code&gt;, to a &lt;code&gt;static&lt;/code&gt; variable:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;static mut MY_STATIC: &amp;amp;'static u8 = &amp;amp;0;
-
-fn main() {
-    let my_temporary = 42;
-    unsafe {
-        // Erroneously allowed in 1.41.0:
-        MY_STATIC = &amp;amp;my_temporary;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This was addressed in 1.41.1, with the program failing to compile:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;error[E0597]: `my_temporary` does not live long enough
- --&amp;gt; src/main.rs:6:21
-  |
-6 |         MY_STATIC = &amp;amp;my_temporary;
-  |         ------------^^^^^^^^^^^^^
-  |         |           |
-  |         |           borrowed value does not live long enough
-  |         assignment requires that `my_temporary` is borrowed for `'static`
-7 |     }
-8 | }
-  | - `my_temporary` dropped here while still borrowed
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can learn more about this bug in &lt;a href=&quot;https://github.com/rust-lang/rust/issues/69114&quot;&gt;issue #69114&lt;/a&gt; and the &lt;a href=&quot;https://github.com/rust-lang/rust/pull/69145&quot;&gt;PR that fixed it&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#respecting-a-static-lifetime-in-a-copy-implementation&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;respecting-a-static-lifetime-in-a-copy-implementation&quot;&gt;&lt;/a&gt;Respecting a &lt;code&gt;'static&lt;/code&gt; lifetime in a &lt;code&gt;Copy&lt;/code&gt; implementation&lt;/h3&gt;
-&lt;p&gt;Ever since Rust 1.0, the following erroneous program has been compiling:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[derive(Clone)]
-struct Foo&amp;lt;'a&amp;gt;(&amp;amp;'a u32);
-impl Copy for Foo&amp;lt;'static&amp;gt; {}
-
-fn main() {
-    let temporary = 2;
-    let foo = (Foo(&amp;amp;temporary),);
-    drop(foo.0); // Accessing a part of `foo` is necessary.
-    drop(foo.0); // Indexing an array would also work.
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In Rust 1.41.1, this issue was fixed &lt;a href=&quot;https://github.com/rust-lang/rust/pull/69145&quot;&gt;by the same PR as the one above&lt;/a&gt;.
-Compiling the program now produces the following error:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;error[E0597]: `temporary` does not live long enough
-  --&amp;gt; src/main.rs:7:20
-   |
-7  |     let foo = (Foo(&amp;amp;temporary),);
-   |                    ^^^^^^^^^^ borrowed value does not live long enough
-8  |     drop(foo.0);
-   |          ----- copying this value requires that
-   |                `temporary` is borrowed for `'static`
-9  |     drop(foo.0);
-10 | }
-   | - `temporary` dropped here while still borrowed
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This error occurs because &lt;code&gt;Foo&amp;lt;'a&amp;gt;&lt;/code&gt;, for some &lt;code&gt;'a&lt;/code&gt;, only implements &lt;code&gt;Copy&lt;/code&gt; when &lt;code&gt;'a: 'static&lt;/code&gt;.
-However, the &lt;code&gt;temporary&lt;/code&gt; variable,
-with some lifetime &lt;code&gt;'0&lt;/code&gt; does not outlive &lt;code&gt;'static&lt;/code&gt; and hence &lt;code&gt;Foo&amp;lt;'0&amp;gt;&lt;/code&gt; is not &lt;code&gt;Copy&lt;/code&gt;,
-so using &lt;code&gt;drop&lt;/code&gt; the second time around should be an error.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#miscompiled-bound-checks-leading-to-segfaults&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;miscompiled-bound-checks-leading-to-segfaults&quot;&gt;&lt;/a&gt;Miscompiled bound checks leading to segfaults&lt;/h3&gt;
-&lt;p&gt;In a few cases, programs compiled with Rust 1.41.0 were omitting bound checks in the memory allocation code.
-This caused segfaults if out of bound values were provided.
-The root cause of the miscompilation was a change in a LLVM optimization pass,
-introduced in LLVM 9 and reverted in LLVM 10.&lt;/p&gt;
-&lt;p&gt;Rust 1.41.0 uses a snapshot of LLVM 9, so we cherry-picked the revert into Rust 1.41.1,
-addressing the miscompilation. &lt;a href=&quot;https://github.com/rust-lang/rust/issues/69225&quot;&gt;You can learn more about this bug in issue #69225&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#contributors-to-1411&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1411&quot;&gt;&lt;/a&gt;Contributors to 1.41.1&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.41.1.
-We couldn't have done it without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.41.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
