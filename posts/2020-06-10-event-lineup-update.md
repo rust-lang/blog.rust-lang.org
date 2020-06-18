@@ -82,16 +82,20 @@ Keep an eye on [their Twitter stream][lab-twitter] for further details.
 
 ---
 
-**RustFest Netherlands**<br>Q4, 2020
+**RustFest <del>Netherlands</del> Global**<br>November 7th-8th, 2020
 ---
 
 [RustFest Netherlands][nether-site] was supposed to happen this June.
 The team decided to postpone the event and is now happening as an online conference in Q4 of this year.
 More information will be available soon on the [RustFest blog][nether-blog] and also on [Twitter][nether-twitter].
 
+**Update 2020-06-18**: RustFest has announced its dates: November 7th & 8th, running as an online community conference.
+See [the announcement blog post for details][rustfest-announcement].
+
 [nether-site]: https://netherlands.rustfest.eu/
 [nether-blog]: https://blog.rustfest.eu/
 [nether-twitter]: https://twitter.com/rustfest
+[rustfest-announcement]: https://blog.rustfest.eu/announcing-rustfest-2020
 
 ---
 
