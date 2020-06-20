@@ -94,17 +94,16 @@ fn main() {
     for value in 0..=1024u64 {
         let popcnt;
         unsafe {
-            asm!("
-                popcnt {popcnt}, {v}
-                2:
-                blsi rax, {v}
-                jz 1f
-                xor {v}, rax
-                tzcnt rax, rax
-                stosb
-                jmp 2b
-                1:
-                ",
+            asm!(
+                "    popcnt {popcnt}, {v}",
+                "2:",
+                "    blsi rax, {v}",
+                "    jz 1f",
+                "    xor {v}, rax",
+                "    tzcnt rax, rax",
+                "    stosb",
+                "    jmp 2b",
+                "1:",
                 v = inout(reg) value => _,
                 popcnt = out(reg) popcnt,
                 out("rax") _, // scratch
