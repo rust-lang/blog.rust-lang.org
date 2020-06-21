@@ -95,14 +95,14 @@ fn main() {
         let popcnt;
         unsafe {
             asm!(
-                "    popcnt {popcnt}, {v}",
+                "popcnt {popcnt}, {v}",
                 "2:",
-                "    blsi rax, {v}",
-                "    jz 1f",
-                "    xor {v}, rax",
-                "    tzcnt rax, rax",
-                "    stosb",
-                "    jmp 2b",
+                "blsi rax, {v}",
+                "jz 1f",
+                "xor {v}, rax",
+                "tzcnt rax, rax",
+                "stosb",
+                "jmp 2b",
                 "1:",
                 v = inout(reg) value => _,
                 popcnt = out(reg) popcnt,
