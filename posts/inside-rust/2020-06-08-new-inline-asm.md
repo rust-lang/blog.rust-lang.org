@@ -116,7 +116,7 @@ fn main() {
 ```
 
 (You can [try this example on the
-playground](https://play.rust-lang.org/?version=nightly&mode=release&edition=2018&gist=38874735e48aa20289f23f5a3cbeae0c).
+playground](https://play.rust-lang.org/?version=nightly&mode=release&edition=2018&gist=894a407f0fe858559aa378edf6ec4801).
 Note that this code serves to demonstrate inline assembly, not to demonstrate
 an efficient implementation of any particular algorithm.)
 
