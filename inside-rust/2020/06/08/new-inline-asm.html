@@ -152,17 +152,16 @@ fn main() {
     for value in 0..=1024u64 {
         let popcnt;
         unsafe {
-            asm!(&quot;
-                popcnt {popcnt}, {v}
-                2:
-                blsi rax, {v}
-                jz 1f
-                xor {v}, rax
-                tzcnt rax, rax
-                stosb
-                jmp 2b
-                1:
-                &quot;,
+            asm!(
+                &quot;popcnt {popcnt}, {v}&quot;,
+                &quot;2:&quot;,
+                &quot;blsi rax, {v}&quot;,
+                &quot;jz 1f&quot;,
+                &quot;xor {v}, rax&quot;,
+                &quot;tzcnt rax, rax&quot;,
+                &quot;stosb&quot;,
+                &quot;jmp 2b&quot;,
+                &quot;1:&quot;,
                 v = inout(reg) value =&gt; _,
                 popcnt = out(reg) popcnt,
                 out(&quot;rax&quot;) _, // scratch
@@ -173,7 +172,7 @@ fn main() {
     }
 }
 </code></pre>
-<p>(You can <a href="https://play.rust-lang.org/?version=nightly&mode=release&edition=2018&gist=38874735e48aa20289f23f5a3cbeae0c">try this example on the
+<p>(You can <a href="https://play.rust-lang.org/?version=nightly&mode=release&edition=2018&gist=894a407f0fe858559aa378edf6ec4801">try this example on the
 playground</a>.
 Note that this code serves to demonstrate inline assembly, not to demonstrate
 an efficient implementation of any particular algorithm.)</p>

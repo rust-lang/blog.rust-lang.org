@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-06-18T14:06:05+00:00</updated>
+    <updated>2020-06-22T05:36:55+00:00</updated>
 
     
     <entry>
@@ -161,17 +161,16 @@ fn main() {
     for value in 0..=1024u64 {
         let popcnt;
         unsafe {
-            asm!(&amp;quot;
-                popcnt {popcnt}, {v}
-                2:
-                blsi rax, {v}
-                jz 1f
-                xor {v}, rax
-                tzcnt rax, rax
-                stosb
-                jmp 2b
-                1:
-                &amp;quot;,
+            asm!(
+                &amp;quot;popcnt {popcnt}, {v}&amp;quot;,
+                &amp;quot;2:&amp;quot;,
+                &amp;quot;blsi rax, {v}&amp;quot;,
+                &amp;quot;jz 1f&amp;quot;,
+                &amp;quot;xor {v}, rax&amp;quot;,
+                &amp;quot;tzcnt rax, rax&amp;quot;,
+                &amp;quot;stosb&amp;quot;,
+                &amp;quot;jmp 2b&amp;quot;,
+                &amp;quot;1:&amp;quot;,
                 v = inout(reg) value =&amp;gt; _,
                 popcnt = out(reg) popcnt,
                 out(&amp;quot;rax&amp;quot;) _, // scratch
@@ -182,7 +181,7 @@ fn main() {
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;(You can &lt;a href=&quot;https://play.rust-lang.org/?version=nightly&amp;mode=release&amp;edition=2018&amp;gist=38874735e48aa20289f23f5a3cbeae0c&quot;&gt;try this example on the
+&lt;p&gt;(You can &lt;a href=&quot;https://play.rust-lang.org/?version=nightly&amp;mode=release&amp;edition=2018&amp;gist=894a407f0fe858559aa378edf6ec4801&quot;&gt;try this example on the
 playground&lt;/a&gt;.
 Note that this code serves to demonstrate inline assembly, not to demonstrate
 an efficient implementation of any particular algorithm.)&lt;/p&gt;
