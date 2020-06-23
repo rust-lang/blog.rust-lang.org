@@ -11,7 +11,7 @@ The Libs team traditionally selects members who like to design APIs. A lot of ba
 
 As a codebase, the standard library is paradoxically specialized. It has priviledged access to compiler internals, deep domain knowledge baked into algorithms (have you ever wondered what it takes to efficiently format a float as text for instance?), platform-specific integration, and a lot of tricky unsafe code.
 
-The Compiler team is used to giving consistent and dedicated attention to big projects.  The standard library is exactly the kind of codebase the Compiler team already has years of experience working on.
+The Compiler team is used to giving consistent and dedicated attention to big projects. The standard library is exactly the kind of codebase the Compiler team already has years of experience working on.
 
 Teams aren’t bubbles though, and in practice API design and implementation are going to influence eachother. This is just a shared understanding between the Libs and Compiler teams to make standard library activities more focused.
 
