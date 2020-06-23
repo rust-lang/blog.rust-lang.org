@@ -7,7 +7,7 @@ team: The Libs team <https://www.rust-lang.org/governance/teams/library>
 
 Our Rust project is a large and diverse one. Its activities are broadly coordinated by teams that give the community space to find and contribute to the things that matter to them. We’re trialing a reorganization of standard library activities between the Libs and Compiler teams. Going forward, the Libs team will own just the public API of the standard library, and the Compiler team will own its implementation. The goal of this separation of concerns is to better suit the interests of both teams to better support the needs of the standard library. Why do we think this is necessary?
 
-The Libs team traditionally selects members who like to design APIs. A lot of bandwidth is spent su-porting libraries in the wider Rust ecosystem and working to consolidate idioms into standard APIs. This leaves little room for development of the standard library itself, which takes a lot of consistent and dedicated attention.
+The Libs team traditionally selects members who like to design APIs. A lot of bandwidth is spent supporting libraries in the wider Rust ecosystem and working to consolidate idioms into standard APIs. This leaves little room for development of the standard library itself, which takes a lot of consistent and dedicated attention.
 
 As a codebase, the standard library is paradoxically specialized. It has priviledged access to compiler internals, deep domain knowledge baked into algorithms (have you ever wondered what it takes to efficiently format a float as text for instance?), platform-specific integration, and a lot of tricky unsafe code.
 
