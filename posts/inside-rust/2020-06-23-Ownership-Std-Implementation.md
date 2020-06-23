@@ -13,6 +13,6 @@ As a codebase, the standard library is paradoxically specialized. It has privile
 
 The Compiler team is used to giving consistent and dedicated attention to big projects. The standard library is exactly the kind of codebase the Compiler team already has years of experience working on.
 
-Teams aren’t bubbles though, and in practice API design and implementation are going to influence eachother. This is just a shared understanding between the Libs and Compiler teams to make standard library activities more focused.
+Teams aren’t bubbles though, and in practice API design and implementation are going to influence each other. This is just a shared understanding between the Libs and Compiler teams to make standard library activities more focused.
 
 Do any of those activities appeal to you? Maybe you’re interested in identifying and capturing idioms as standard APIs. If so, you can find the Libs team [here](https://forge.rust-lang.org/libs/index.html). Maybe you’d like to work on a big codebase used by almost every Rust developer. If so, you can find the Compiler team [here](https://forge.rust-lang.org/compiler/index.html). Maybe you like the sound of both and anything in-between! Whatever the case, the standard library has something for you.
