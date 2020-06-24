@@ -24,7 +24,7 @@ When compiling a library, `rustc` saves the output in an `rlib` file which is an
 LTO is an optimization technique that can perform whole-program analysis. It analyzes all of the bitcode from every library at once, and performs optimizations and code generation. `rustc` supports several forms of LTO:
 
 * Fat LTO. This performs "full" LTO, which can take a long time to complete and may require a significant amount of memory.
-* [Thin LTO]. This is a lightweight version of "fat" LTO that can achieve similar performance improvements while taking much less time to complete.
+* [Thin LTO]. This LTO variant supports much better parallelism than fat LTO. It can achieve similar performance improvements as fat LTO (sometimes even better!), while taking much less total time by taking advantage of more CPUs.
 * Thin-local LTO. By default, `rustc` will split a crate into multiple "codegen units" so that they can be processed in parallel by LLVM. But this prevents some optimizations as code is separated into different codegen units, and is handled independently. Thin-local LTO will perform thin LTO across the codegen units within a single crate, bringing back some optimizations that would otherwise be lost by the separation. This is `rustc`'s default behavior if opt-level is greater than 0.
 
 ## What has changed
@@ -35,7 +35,7 @@ If the project is using LTO, then Cargo will instruct `rustc` to not place objec
 
 Two `rustc` flags are now available to control how the rlib is constructed:
 
-* [`-C linker-plugin-lto`] causes `rustc` to only place bitcode in the `.o` files, and skips code generation. Cargo uses this when the rlib is only intended for use with LTO. This can also be used when doing cross-language LTO.
+* [`-C linker-plugin-lto`] causes `rustc` to only place bitcode in the `.o` files, and skips code generation. This flag was [originally added][linker-plugin-lto-track] to support cross-language LTO. Cargo now uses this when the rlib is only intended for use with LTO.
 * [`-C embed-bitcode=no`] causes `rustc` to avoid placing bitcode in the rlib altogether. Cargo uses this when LTO is not being used, which reduces some disk space usage.
 
 Additionally, the method in which bitcode is embedded in the rlib has changed. Previously, `rustc` would place compressed bitcode as a `.bc.z` file in the rlib archive. Now, the bitcode is placed as an uncompressed section within each `.o` [object file] in the rlib archive. This can sometimes be a small performance benefit, because it avoids cost of compressing the bitcode, and sometimes can be slower due to needing to write more data to disk. This change helped simplify the implementation, and also matches the behavior of clang's `-fembed-bitcode` option (typically used with Apple's iOS-based operating systems).
@@ -89,3 +89,4 @@ Although this is a conceptually simple change (LTO=bitcode, non-LTO=object code)
 [`-C linker-plugin-lto`]: https://doc.rust-lang.org/nightly/rustc/codegen-options/#linker-plugin-lto
 [`-C embed-bitcode=no`]: https://doc.rust-lang.org/nightly/rustc/codegen-options/#embed-bitcode
 [metadata]: https://github.com/rust-lang/rust/blob/0b66a89735305ebac93894461559576495ab920e/src/librustc_metadata/rmeta/mod.rs#L172-L214
+[linker-plugin-lto-track]: https://github.com/rust-lang/rust/issues/49879
