@@ -8,7 +8,7 @@ team: the Cargo team <https://www.rust-lang.org/governance/teams/dev-tools#cargo
 
 Thanks to the work of [Nicholas Nethercote] and [Alex Crichton], there have been some recent improvements that reduce the size of compiled libraries, and improves the compile-time performance, particularly when using LTO. This post dives into some of the details of what changed, and an estimation of the benefits.
 
-These changes have been added incrementally over the past three months, with the latest changes landing just a few days ago on the nightly channel. The bulk of the improvements will be found in the 1.46 stable release. It would be great for any projects that use LTO to test it out on the nightly channel and report any issues that arise.
+These changes have been added incrementally over the past three months, with the latest changes landing just a few days ago on the nightly channel. The bulk of the improvements will be found in the 1.46 stable release (available on 2020-08-27). It would be great for any projects that use LTO to test it out on the nightly channel (starting from the 2020-06-13 release) and report any issues that arise.
 
 [Nicholas Nethercote]: https://github.com/nnethercote
 [Alex Crichton]: https://github.com/alexcrichton/
