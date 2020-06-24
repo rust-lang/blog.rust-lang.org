@@ -15,10 +15,11 @@ These changes have been added incrementally over the past three months, with the
 
 ## Background
 
-When compiling a library, `rustc` saves the output in an `rlib` file which is an [archive file]. This has historically contained these two things (among others):
+When compiling a library, `rustc` saves the output in an `rlib` file which is an [archive file]. This has historically contained the following:
 
 * Object code, which is the result of code generation. This is used during regular linking.
 * [LLVM bitcode], which is a binary representation of LLVM's intermediate representation. This can be used for [Link Time Optimization] (LTO).
+* Rust-specific metadata, which covers [a wide range of data][metadata] about the crate.
 
 LTO is an optimization technique that can perform whole-program analysis. It analyzes all of the bitcode from every library at once, and performs optimizations and code generation. `rustc` supports several forms of LTO:
 
@@ -37,7 +38,7 @@ Two `rustc` flags are now available to control how the rlib is constructed:
 * [`-C linker-plugin-lto`] causes `rustc` to only place bitcode in the `.o` files, and skips code generation. Cargo uses this when the rlib is only intended for use with LTO. This can also be used when doing cross-language LTO.
 * [`-C embed-bitcode=no`] causes `rustc` to avoid placing bitcode in the rlib altogether. Cargo uses this when LTO is not being used, which reduces some disk space usage.
 
-Additionally, the method in which bitcode is embedded in the rlib has changed. Previously, `rustc` would place compressed bitcode as a `.bc.z` file in the rlib archive. Now, the bitcode is placed as an uncompressed section within each `.o` [object file] in the rlib archive. This avoids a small performance hit for compressing the bitcode, and also matches the standard format used by clang.
+Additionally, the method in which bitcode is embedded in the rlib has changed. Previously, `rustc` would place compressed bitcode as a `.bc.z` file in the rlib archive. Now, the bitcode is placed as an uncompressed section within each `.o` [object file] in the rlib archive. This can sometimes be a small performance benefit, because it avoids cost of compressing the bitcode, and sometimes can be slower due to needing to write more data to disk. This change helped simplify the implementation, and also matches the behavior of clang's `-fembed-bitcode` option (typically used with Apple's iOS-based operating systems).
 
 ## Improvements
 
@@ -87,3 +88,4 @@ Although this is a conceptually simple change (LTO=bitcode, non-LTO=object code)
 [object file]: https://en.wikipedia.org/wiki/Object_file
 [`-C linker-plugin-lto`]: https://doc.rust-lang.org/nightly/rustc/codegen-options/#linker-plugin-lto
 [`-C embed-bitcode=no`]: https://doc.rust-lang.org/nightly/rustc/codegen-options/#embed-bitcode
+[metadata]: https://github.com/rust-lang/rust/blob/0b66a89735305ebac93894461559576495ab920e/src/librustc_metadata/rmeta/mod.rs#L172-L214
