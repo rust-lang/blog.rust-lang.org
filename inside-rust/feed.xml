@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-06-29T20:00:47+00:00</updated>
+    <updated>2020-06-29T22:47:47+00:00</updated>
 
     
     <entry>
@@ -45,8 +45,8 @@
 &lt;p&gt;Additionally, the method in which bitcode is embedded in the rlib has changed. Previously, &lt;code&gt;rustc&lt;/code&gt; would place compressed bitcode as a &lt;code&gt;.bc.z&lt;/code&gt; file in the rlib archive. Now, the bitcode is placed as an uncompressed section within each &lt;code&gt;.o&lt;/code&gt; &lt;a href=&quot;https://en.wikipedia.org/wiki/Object_file&quot;&gt;object file&lt;/a&gt; in the rlib archive. This can sometimes be a small performance benefit, because it avoids cost of compressing the bitcode, and sometimes can be slower due to needing to write more data to disk. This change helped simplify the implementation, and also matches the behavior of clang's &lt;code&gt;-fembed-bitcode&lt;/code&gt; option (typically used with Apple's iOS-based operating systems).&lt;/p&gt;
 &lt;h2&gt;&lt;a href=&quot;#improvements&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;improvements&quot;&gt;&lt;/a&gt;Improvements&lt;/h2&gt;
 &lt;p&gt;The following is a summary of improvements observed on a small number of real-world projects of small and medium size. Improvements of a project will depend heavily on the code, optimization settings, operating system, environment, and hardware. These were recorded with the 2020-06-21 nightly release on Linux with parallel job settings between 2 and 32.&lt;/p&gt;
-&lt;p&gt;The performance wins for debug builds were anywhere from 0% to 4.7% faster. Larger binary crates tended to fair better than smaller library crates.&lt;/p&gt;
-&lt;p&gt;LTO builds were recorded anywhere from 4% to 20% faster. Thin LTO faired consistently better than fat LTO.&lt;/p&gt;
+&lt;p&gt;The performance wins for debug builds were anywhere from 0% to 4.7% faster. Larger binary crates tended to fare better than smaller library crates.&lt;/p&gt;
+&lt;p&gt;LTO builds were recorded anywhere from 4% to 20% faster. Thin LTO fared consistently better than fat LTO.&lt;/p&gt;
 &lt;p&gt;The number of parallel jobs also had a large impact on the amount of improvement. Lower parallel job counts saw substantially more benefit than higher ones. A project built with &lt;code&gt;-j2&lt;/code&gt; can be 20% faster, whereas the same project at &lt;code&gt;-j32&lt;/code&gt; would only be 1% faster. Presumably this is because the code-generation phase benefits from higher concurrency, so it was taking a relatively smaller total percentage of time.&lt;/p&gt;
 &lt;p&gt;The overall target directory size is typically 20% to 30% smaller for debug builds. LTO builds did not see as much of an improvement, ranging from 11% to 19% smaller.&lt;/p&gt;
 &lt;h2&gt;&lt;a href=&quot;#more-details&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;more-details&quot;&gt;&lt;/a&gt;More details&lt;/h2&gt;
