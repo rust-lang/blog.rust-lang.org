@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Disk space and LTO improvements | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Disk space and LTO improvements | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Disk space and LTO improvements | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Disk space and LTO improvements" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Disk space and LTO improvements</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">June 29, 2020 &middot; Eric Huss
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/dev-tools#cargo">the Cargo team</a> 
+    </div>
+
+    <div class="post">
+      <p>Thanks to the work of <a href="https://github.com/nnethercote">Nicholas Nethercote</a> and <a href="https://github.com/alexcrichton/">Alex Crichton</a>, there have been some recent improvements that reduce the size of compiled libraries, and improves the compile-time performance, particularly when using LTO. This post dives into some of the details of what changed, and an estimation of the benefits.</p>
+<p>These changes have been added incrementally over the past three months, with the latest changes landing just a few days ago on the nightly channel. The bulk of the improvements will be found in the 1.46 stable release (available on 2020-08-27). It would be great for any projects that use LTO to test it out on the nightly channel (starting from the 2020-06-13 release) and report any issues that arise.</p>
+<h2><a href="#background" aria-hidden="true" class="anchor" id="background"></a>Background</h2>
+<p>When compiling a library, <code>rustc</code> saves the output in an <code>rlib</code> file which is an <a href="https://en.wikipedia.org/wiki/Ar_(Unix)">archive file</a>. This has historically contained the following:</p>
+<ul>
+<li>Object code, which is the result of code generation. This is used during regular linking.</li>
+<li><a href="https://llvm.org/docs/BitCodeFormat.html">LLVM bitcode</a>, which is a binary representation of LLVM's intermediate representation. This can be used for <a href="https://llvm.org/docs/LinkTimeOptimization.html">Link Time Optimization</a> (LTO).</li>
+<li>Rust-specific metadata, which covers <a href="https://github.com/rust-lang/rust/blob/0b66a89735305ebac93894461559576495ab920e/src/librustc_metadata/rmeta/mod.rs#L172-L214">a wide range of data</a> about the crate.</li>
+</ul>
+<p>LTO is an optimization technique that can perform whole-program analysis. It analyzes all of the bitcode from every library at once, and performs optimizations and code generation. <code>rustc</code> supports several forms of LTO:</p>
+<ul>
+<li>Fat LTO. This performs &quot;full&quot; LTO, which can take a long time to complete and may require a significant amount of memory.</li>
+<li><a href="http://blog.llvm.org/2016/06/thinlto-scalable-and-incremental-lto.html">Thin LTO</a>. This LTO variant supports much better parallelism than fat LTO. It can achieve similar performance improvements as fat LTO (sometimes even better!), while taking much less total time by taking advantage of more CPUs.</li>
+<li>Thin-local LTO. By default, <code>rustc</code> will split a crate into multiple &quot;codegen units&quot; so that they can be processed in parallel by LLVM. But this prevents some optimizations as code is separated into different codegen units, and is handled independently. Thin-local LTO will perform thin LTO across the codegen units within a single crate, bringing back some optimizations that would otherwise be lost by the separation. This is <code>rustc</code>'s default behavior if opt-level is greater than 0.</li>
+</ul>
+<h2><a href="#what-has-changed" aria-hidden="true" class="anchor" id="what-has-changed"></a>What has changed</h2>
+<p>Changes have been made to both <code>rustc</code> and Cargo to control which libraries should include object code and which should include bitcode based on the project's <a href="https://doc.rust-lang.org/cargo/reference/profiles.html">profile</a> LTO settings. If the project is not using LTO, then Cargo will instruct <code>rustc</code> to not place bitcode in the rlib files, which should reduce the amount of disk space used. This may have a small improvement in performance since <code>rustc</code> no longer needs to compress and write out the bitcode.</p>
+<p>If the project is using LTO, then Cargo will instruct <code>rustc</code> to not place object code in the rlib files, avoiding the expensive code generation step. This should improve the build time when building from scratch, and reduce the amount of disk space used.</p>
+<p>Two <code>rustc</code> flags are now available to control how the rlib is constructed:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/nightly/rustc/codegen-options/#linker-plugin-lto"><code>-C linker-plugin-lto</code></a> causes <code>rustc</code> to only place bitcode in the <code>.o</code> files, and skips code generation. This flag was <a href="https://github.com/rust-lang/rust/issues/49879">originally added</a> to support cross-language LTO. Cargo now uses this when the rlib is only intended for use with LTO.</li>
+<li><a href="https://doc.rust-lang.org/nightly/rustc/codegen-options/#embed-bitcode"><code>-C embed-bitcode=no</code></a> causes <code>rustc</code> to avoid placing bitcode in the rlib altogether. Cargo uses this when LTO is not being used, which reduces some disk space usage.</li>
+</ul>
+<p>Additionally, the method in which bitcode is embedded in the rlib has changed. Previously, <code>rustc</code> would place compressed bitcode as a <code>.bc.z</code> file in the rlib archive. Now, the bitcode is placed as an uncompressed section within each <code>.o</code> <a href="https://en.wikipedia.org/wiki/Object_file">object file</a> in the rlib archive. This can sometimes be a small performance benefit, because it avoids cost of compressing the bitcode, and sometimes can be slower due to needing to write more data to disk. This change helped simplify the implementation, and also matches the behavior of clang's <code>-fembed-bitcode</code> option (typically used with Apple's iOS-based operating systems).</p>
+<h2><a href="#improvements" aria-hidden="true" class="anchor" id="improvements"></a>Improvements</h2>
+<p>The following is a summary of improvements observed on a small number of real-world projects of small and medium size. Improvements of a project will depend heavily on the code, optimization settings, operating system, environment, and hardware. These were recorded with the 2020-06-21 nightly release on Linux with parallel job settings between 2 and 32.</p>
+<p>The performance wins for debug builds were anywhere from 0% to 4.7% faster. Larger binary crates tended to fair better than smaller library crates.</p>
+<p>LTO builds were recorded anywhere from 4% to 20% faster. Thin LTO faired consistently better than fat LTO.</p>
+<p>The number of parallel jobs also had a large impact on the amount of improvement. Lower parallel job counts saw substantially more benefit than higher ones. A project built with <code>-j2</code> can be 20% faster, whereas the same project at <code>-j32</code> would only be 1% faster. Presumably this is because the code-generation phase benefits from higher concurrency, so it was taking a relatively smaller total percentage of time.</p>
+<p>The overall target directory size is typically 20% to 30% smaller for debug builds. LTO builds did not see as much of an improvement, ranging from 11% to 19% smaller.</p>
+<h2><a href="#more-details" aria-hidden="true" class="anchor" id="more-details"></a>More details</h2>
+<p>Nicholas Nethercote wrote about the journey to implement these changes at <a href="https://blog.mozilla.org/nnethercote/2020/04/24/how-to-speed-up-the-rust-compiler-in-2020/">https://blog.mozilla.org/nnethercote/2020/04/24/how-to-speed-up-the-rust-compiler-in-2020/</a>. It took several PRs across <code>rustc</code> and Cargo to make this happen:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/66598">#66598</a> — The original approach, that was decided to be too simplistic.</li>
+<li><a href="https://github.com/rust-lang/rust/issues/66961">#66961</a> — The issue outlining the strategy that was employed.</li>
+<li><a href="https://github.com/rust-lang/rust/pull/70289">#70289</a>
+<a href="https://github.com/rust-lang/rust/pull/70297">#70297</a>
+<a href="https://github.com/rust-lang/rust/pull/70345">#70345</a>
+<a href="https://github.com/rust-lang/rust/pull/70384">#70384</a>
+<a href="https://github.com/rust-lang/rust/pull/70644">#70644</a>
+<a href="https://github.com/rust-lang/rust/pull/70729">#70729</a>
+<a href="https://github.com/rust-lang/rust/pull/71374">#71374</a>
+<a href="https://github.com/rust-lang/rust/pull/71716">#71716</a>
+<a href="https://github.com/rust-lang/rust/pull/71754">#71754</a> — A series of refactorings to prepare for the new behavior and do some cleanup.</li>
+<li><a href="https://github.com/rust-lang/rust/pull/71323">#71323</a> — Introduced a new flag to control whether or not bitcode is embedded.</li>
+<li><a href="https://github.com/rust-lang/rust/pull/70458">#70458</a> <a href="https://github.com/rust-lang/rust/pull/71528">#71528</a> — Switched how LLVM bitcode is embedded.</li>
+<li><a href="https://github.com/rust-lang/cargo/pull/8066">#8066</a>
+<a href="https://github.com/rust-lang/cargo/pull/8192">#8192</a>
+<a href="https://github.com/rust-lang/cargo/pull/8204">#8204</a>
+<a href="https://github.com/rust-lang/cargo/pull/8226">#8226</a>
+<a href="https://github.com/rust-lang/cargo/pull/8254">#8254</a>
+<a href="https://github.com/rust-lang/cargo/pull/8349">#8349</a> — The series of Cargo changes to implement the new functionality.</li>
+</ul>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>Although this is a conceptually simple change (LTO=bitcode, non-LTO=object code), it took quite a bit of preparation and work to make it happen. There were many edge cases and platform-specific behaviors to consider, and testing to perform. And, of course, the obligatory bike-shedding over the names of new command-line flags. This resulted in quite a substantial improvement in performance, particularly for LTO builds, and a huge improvement in disk space usage. Thanks to all of those that helped to make this happen!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
