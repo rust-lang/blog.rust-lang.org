@@ -44,9 +44,9 @@ Additionally, the method in which bitcode is embedded in the rlib has changed. P
 
 The following is a summary of improvements observed on a small number of real-world projects of small and medium size. Improvements of a project will depend heavily on the code, optimization settings, operating system, environment, and hardware. These were recorded with the 2020-06-21 nightly release on Linux with parallel job settings between 2 and 32.
 
-The performance wins for debug builds were anywhere from 0% to 4.7% faster. Larger binary crates tended to fair better than smaller library crates.
+The performance wins for debug builds were anywhere from 0% to 4.7% faster. Larger binary crates tended to fare better than smaller library crates.
 
-LTO builds were recorded anywhere from 4% to 20% faster. Thin LTO faired consistently better than fat LTO.
+LTO builds were recorded anywhere from 4% to 20% faster. Thin LTO fared consistently better than fat LTO.
 
 The number of parallel jobs also had a large impact on the amount of improvement. Lower parallel job counts saw substantially more benefit than higher ones. A project built with `-j2` can be 20% faster, whereas the same project at `-j32` would only be 1% faster. Presumably this is because the code-generation phase benefits from higher concurrency, so it was taking a relatively smaller total percentage of time.
 
