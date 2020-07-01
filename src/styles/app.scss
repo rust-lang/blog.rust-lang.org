@@ -300,10 +300,11 @@ header h1 {
 
 
 .highlight {
-  height: 30px;
+  height: 12px;
   position: relative;
-  top: -30px;
+  top: 0;
   left: -10px;
   width: 120%;
   max-width: 90vw;
+  border-radius: 2px;
 }
