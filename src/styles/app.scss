@@ -308,3 +308,11 @@ header h1 {
   max-width: 90vw;
   border-radius: 2px;
 }
+
+@media screen and (max-width: 769px) {
+  .highlight {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+}
+
