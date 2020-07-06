@@ -10,8 +10,82 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-07-06T08:10:36+00:00</updated>
+    <updated>2020-07-06T15:38:50+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rustup 1.22.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/07/06/Rustup-1.22.0.html" type="text/html" title="Announcing Rustup 1.22.0" />
+        <published>2020-07-06T00:00:00+00:00</published>
+        <updated>2020-07-06T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/07/06/Rustup-1.22.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/07/06/Rustup-1.22.0.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.22.0. &lt;a href=&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href=&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.22.0 is as easy as closing your IDE and running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup self update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-new-in-rustup-1220&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-new-in-rustup-1220&quot;&gt;&lt;/a&gt;What's new in rustup 1.22.0&lt;/h2&gt;
+&lt;p&gt;This release is mostly related to internal rework and tweaks in UI messages.  It is effectively a quality-of-life update which includes things such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Supporting the larger MIPS release files which now exceed 100MB in individual files&lt;/li&gt;
+&lt;li&gt;Supporting running in a lower-memory mode on single-CPU systems, along with detecting any in-place soft-limits on memory consumption in an effort to reduce the chance you run out of RAM during an install on systems like Raspberry Pis&lt;/li&gt;
+&lt;li&gt;When we skip a &lt;code&gt;nightly&lt;/code&gt; for missing-component reasons we now tell you all the missing components&lt;/li&gt;
+&lt;li&gt;We now tell you where overrides are coming from in &lt;code&gt;rustup show&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Added &lt;code&gt;riscv64gc-unknown-linux.gnu&lt;/code&gt; version of &lt;code&gt;rustup&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;You can now specify multiple components when installing a toolchain more easily.  For example, if you wanted to install nightly with the &lt;code&gt;default&lt;/code&gt; profile, but add the IDE support all in one go, you can now run
+&lt;pre&gt;&lt;code&gt;rustup toolchain install --profile default --component rls,rust-analysis,rust-src nightly
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There are many more changes in 1.22.0, with around 90 PRs, though a large number of them are internal changes which you can look at in &lt;a href=&quot;https://github.com/rust-lang/rustup/commits/master&quot;&gt;Github&lt;/a&gt; if you want, and you can see a little more detail than the above in our &lt;a href=&quot;https://github.com/rust-lang/rustup/blob/stable/CHANGELOG.md#1220---2020-06-30&quot;&gt;changelog&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#thanks&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
+&lt;p&gt;Thanks to all the contributors who made rustup 1.22.0 possible!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alejandro Martinez Ruiz&lt;/li&gt;
+&lt;li&gt;Alexander D'hoore&lt;/li&gt;
+&lt;li&gt;Ben Chen&lt;/li&gt;
+&lt;li&gt;Chris Denton&lt;/li&gt;
+&lt;li&gt;Daniel Silverstone&lt;/li&gt;
+&lt;li&gt;Evan Weiler&lt;/li&gt;
+&lt;li&gt;Guillaume Gomez&lt;/li&gt;
+&lt;li&gt;Harry Sarson&lt;/li&gt;
+&lt;li&gt;Jacob Lifshay&lt;/li&gt;
+&lt;li&gt;James Yang&lt;/li&gt;
+&lt;li&gt;Joel Parker Henderson&lt;/li&gt;
+&lt;li&gt;John Titor&lt;/li&gt;
+&lt;li&gt;Jonas Platte&lt;/li&gt;
+&lt;li&gt;Josh Stone&lt;/li&gt;
+&lt;li&gt;Jubilee&lt;/li&gt;
+&lt;li&gt;Kellda&lt;/li&gt;
+&lt;li&gt;LeSeulArtichaut&lt;/li&gt;
+&lt;li&gt;Linus Färnstrand&lt;/li&gt;
+&lt;li&gt;LitoMore&lt;/li&gt;
+&lt;li&gt;LIU An (劉安)&lt;/li&gt;
+&lt;li&gt;Luciano Bestia&lt;/li&gt;
+&lt;li&gt;Lzu Tao&lt;/li&gt;
+&lt;li&gt;Manish Goregaokar&lt;/li&gt;
+&lt;li&gt;Mingye Wang&lt;/li&gt;
+&lt;li&gt;Montgomery Edwards&lt;/li&gt;
+&lt;li&gt;Per Lundberg&lt;/li&gt;
+&lt;li&gt;Pietro Albini&lt;/li&gt;
+&lt;li&gt;Robert Collins&lt;/li&gt;
+&lt;li&gt;Rudolf B.&lt;/li&gt;
+&lt;li&gt;Solomon Ucko&lt;/li&gt;
+&lt;li&gt;Stein Somers&lt;/li&gt;
+&lt;li&gt;Tetsuharu Ohzeki&lt;/li&gt;
+&lt;li&gt;Tom Eccles&lt;/li&gt;
+&lt;li&gt;Trevor Arjeski&lt;/li&gt;
+&lt;li&gt;Tshepang Lekhonkhobe&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>The Rustup Working Group</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.44.1</title>
@@ -996,24 +1070,6 @@ to implement &lt;code&gt;Sized&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>The 2020 RustConf CFP is Now Open!</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/03/10/rustconf-cfp.html" type="text/html" title="The 2020 RustConf CFP is Now Open!" />
-        <published>2020-03-10T00:00:00+00:00</published>
-        <updated>2020-03-10T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/03/10/rustconf-cfp.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/03/10/rustconf-cfp.html">&lt;p&gt;Greetings fellow Rustaceans!&lt;/p&gt;
-&lt;p&gt;The 2020 RustConf Call for Proposals is now open!&lt;/p&gt;
-&lt;p&gt;Got something to share about Rust? Want to talk about the experience of learning and using Rust? Want to dive deep into an aspect of the language? Got something different in mind? We want to hear from you! The &lt;a href=&quot;https://cfp.rustconf.com/events/rustconf-2020&quot;&gt;RustConf 2020 CFP site&lt;/a&gt; is now up and accepting proposals.&lt;/p&gt;
-&lt;p&gt;If you may be interested in speaking but aren't quite ready to submit a proposal yet, we are here to help you. We will be holding speaker office hours regularly throughout the proposal process, after the proposal process, and up to RustConf itself on August 20 and 21, 2020. We are available to brainstorm ideas for proposals, talk through proposals, and provide support throughout the entire speaking journey. We need a variety of perspectives, interests, and experience levels for RustConf to be the best that it can be - if you have questions or want to talk through things please don't hesitate to reach out to us! Watch this blog for more details on speaker office hours - they will be posted very soon.&lt;/p&gt;
-&lt;p&gt;The RustConf CFP will be open through Monday, April 5th, 2020, hope to see your proposal soon!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Rust Community</name>
         </author>
     </entry>
     
