@@ -10,8 +10,35 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-07-08T14:21:13+00:00</updated>
+    <updated>2020-07-08T15:16:50+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rustup 1.22.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/07/08/Rustup-1.22.1.html" type="text/html" title="Announcing Rustup 1.22.1" />
+        <published>2020-07-08T00:00:00+00:00</published>
+        <updated>2020-07-08T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/07/08/Rustup-1.22.1.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/07/08/Rustup-1.22.1.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.22.1. &lt;a href=&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href=&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.22.0 may be as easy as closing your IDE and running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup self update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, or if the 1.22.0 release of rustup caused you to experience the problem that 1.22.1 fixes, you can &lt;a href=&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-new-in-rustup-1221&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-new-in-rustup-1221&quot;&gt;&lt;/a&gt;What's new in rustup 1.22.1&lt;/h2&gt;
+&lt;p&gt;When updating dependency crates for 1.22.0, a change in behaviour of the &lt;code&gt;url&lt;/code&gt; crate slipped in which caused &lt;code&gt;env_proxy&lt;/code&gt; to cease to work with proxy data set in the environment.  This is unfortunate since those of you who use &lt;code&gt;rustup&lt;/code&gt; behind a proxy and have updated to 1.22.0 will now find that rustup may not work properly for you.&lt;/p&gt;
+&lt;p&gt;If you are affected by this, simply &lt;a href=&quot;https://rustup.rs&quot;&gt;re-download the installer&lt;/a&gt; and run it.  It will update your existing installation of Rust with no need to uninstall first.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#thanks&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
+&lt;p&gt;Thanks to Ivan Nejgebauer who spotted the issue, provided the fix, and made rustup 1.22.1 possible,
+and to Ben Chen who provided a fix for our website.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rustup Working Group</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rustup 1.22.0</title>
@@ -951,125 +978,6 @@ for targets that are not tier one, such as embedded targets.&lt;/p&gt;
 
         <author>
             <name>Joshua Nelson</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.42.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/03/12/Rust-1.42.html" type="text/html" title="Announcing Rust 1.42.0" />
-        <published>2020-03-12T00:00:00+00:00</published>
-        <updated>2020-03-12T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/03/12/Rust-1.42.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/03/12/Rust-1.42.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.42.0. Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.42.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1420-2020-03-12&quot;&gt;detailed release notes for 1.42.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-1420-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1420-stable&quot;&gt;&lt;/a&gt;What's in 1.42.0 stable&lt;/h2&gt;
-&lt;p&gt;The highlights of Rust 1.42.0 include: more useful panic messages when &lt;code&gt;unwrap&lt;/code&gt;ping, subslice patterns, the deprecation of &lt;code&gt;Error::description&lt;/code&gt;, and more. See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1420-2020-03-12&quot;&gt;detailed release notes&lt;/a&gt; to learn about other changes not covered by this post.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#useful-line-numbers-in-option-and-result-panic-messages&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;useful-line-numbers-in-option-and-result-panic-messages&quot;&gt;&lt;/a&gt;Useful line numbers in &lt;code&gt;Option&lt;/code&gt; and &lt;code&gt;Result&lt;/code&gt; panic messages&lt;/h3&gt;
-&lt;p&gt;In Rust 1.41.1, calling &lt;code&gt;unwrap()&lt;/code&gt; on an &lt;code&gt;Option::None&lt;/code&gt; value would produce an error message looking something like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', /.../src/libcore/macros/mod.rs:15:40
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Similarly, the line numbers in the panic messages generated by &lt;code&gt;unwrap_err&lt;/code&gt;, &lt;code&gt;expect&lt;/code&gt;, and &lt;code&gt;expect_err&lt;/code&gt;, and the corresponding methods on the &lt;code&gt;Result&lt;/code&gt; type, also refer to &lt;code&gt;core&lt;/code&gt; internals.&lt;/p&gt;
-&lt;p&gt;In Rust 1.42.0, all eight of these functions produce panic messages that provide the line number where they were invoked. The new error messages look something like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', src/main.rs:2:5
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This means that the invalid call to &lt;code&gt;unwrap&lt;/code&gt; was on line 2 of &lt;code&gt;src/main.rs&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;This behavior is made possible by an annotation, &lt;code&gt;#[track_caller]&lt;/code&gt;. This annotation is not yet available to use in stable Rust; if you are interested in using it in your own code, you can follow its progress by watching &lt;a href=&quot;https://github.com/rust-lang/rust/issues/47809&quot;&gt;this tracking issue&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#subslice-patterns&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;subslice-patterns&quot;&gt;&lt;/a&gt;Subslice patterns&lt;/h3&gt;
-&lt;p&gt;In Rust 1.26, we stabilized &amp;quot;&lt;a href=&quot;https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#basic-slice-patterns&quot;&gt;slice patterns&lt;/a&gt;,&amp;quot; which let you &lt;code&gt;match&lt;/code&gt; on slices. They looked like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn foo(words: &amp;amp;[&amp;amp;str]) {
-    match words {
-        [] =&amp;gt; println!(&amp;quot;empty slice!&amp;quot;),
-        [one] =&amp;gt; println!(&amp;quot;one element: {:?}&amp;quot;, one),
-        [one, two] =&amp;gt; println!(&amp;quot;two elements: {:?} {:?}&amp;quot;, one, two),
-        _ =&amp;gt; println!(&amp;quot;I'm not sure how many elements!&amp;quot;),
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This allowed you to match on slices, but was fairly limited. You had to choose the exact sizes
-you wished to support, and had to have a catch-all arm for size you didn't want to support.&lt;/p&gt;
-&lt;p&gt;In Rust 1.42, we have &lt;a href=&quot;https://github.com/rust-lang/rust/pull/67712/&quot;&gt;expanded support for matching on parts of a slice&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn foo(words: &amp;amp;[&amp;amp;str]) {
-    match words {
-        [&amp;quot;Hello&amp;quot;, &amp;quot;World&amp;quot;, &amp;quot;!&amp;quot;, ..] =&amp;gt; println!(&amp;quot;Hello World!&amp;quot;),
-        [&amp;quot;Foo&amp;quot;, &amp;quot;Bar&amp;quot;, ..] =&amp;gt; println!(&amp;quot;Baz&amp;quot;),
-        rest =&amp;gt; println!(&amp;quot;{:?}&amp;quot;, rest),
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;..&lt;/code&gt; is called a &amp;quot;rest pattern,&amp;quot; because it matches the rest of the slice. The above example uses the rest pattern at the end of a slice, but you can also use it in other ways:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn foo(words: &amp;amp;[&amp;amp;str]) {
-    match words {
-        // Ignore everything but the last element, which must be &amp;quot;!&amp;quot;.
-        [.., &amp;quot;!&amp;quot;] =&amp;gt; println!(&amp;quot;!!!&amp;quot;),
-
-        // `start` is a slice of everything except the last element, which must be &amp;quot;z&amp;quot;.
-        [start @ .., &amp;quot;z&amp;quot;] =&amp;gt; println!(&amp;quot;starts with: {:?}&amp;quot;, start),
-
-        // `end` is a slice of everything but the first element, which must be &amp;quot;a&amp;quot;.
-        [&amp;quot;a&amp;quot;, end @ ..] =&amp;gt; println!(&amp;quot;ends with: {:?}&amp;quot;, end),
-
-        rest =&amp;gt; println!(&amp;quot;{:?}&amp;quot;, rest),
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you're interested in learning more, we published &lt;a href=&quot;https://blog.rust-lang.org/inside-rust/2020/03/04/recent-future-pattern-matching-improvements.html&quot;&gt;a post on the Inside Rust blog&lt;/a&gt; discussing these changes as well as more improvements to pattern matching that we may bring to stable in the future! You can also read more about slice patterns in &lt;a href=&quot;https://thomashartmann.dev/blog/feature(slice_patterns)/&quot;&gt;Thomas Hartmann's post&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#matches&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;matches&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/macro.matches.html&quot;&gt;&lt;code&gt;matches!&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;This release of Rust stabilizes a new macro, &lt;a href=&quot;https://doc.rust-lang.org/nightly/std/macro.matches.html&quot;&gt;&lt;code&gt;matches!&lt;/code&gt;&lt;/a&gt;. This macro accepts an expression and a pattern, and returns true if the pattern matches the expression. In other words:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;// Using a match expression:
-match self.partial_cmp(other) {
-    Some(Less) =&amp;gt; true,
-    _ =&amp;gt; false,
-}
-
-// Using the `matches!` macro:
-matches!(self.partial_cmp(other), Some(Less))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can also use features like &lt;code&gt;|&lt;/code&gt; patterns and &lt;code&gt;if&lt;/code&gt; guards:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;let foo = 'f';
-assert!(matches!(foo, 'A'..='Z' | 'a'..='z'));
-
-let bar = Some(4);
-assert!(matches!(bar, Some(x) if x &amp;gt; 2));
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;&lt;a href=&quot;#use-proc_macrotokenstream-now-works&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;use-proc_macrotokenstream-now-works&quot;&gt;&lt;/a&gt;&lt;code&gt;use proc_macro::TokenStream;&lt;/code&gt; now works&lt;/h3&gt;
-&lt;p&gt;In Rust 2018, we &lt;a href=&quot;https://doc.rust-lang.org/stable/edition-guide/rust-2018/module-system/path-clarity.html#no-more-extern-crate&quot;&gt;removed the need for &lt;code&gt;extern crate&lt;/code&gt;&lt;/a&gt;. But procedural macros were a bit special, and so when you were writing a procedural macro, you still needed to say &lt;code&gt;extern crate proc_macro;&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;In this release, if you are using Cargo, &lt;a href=&quot;https://github.com/rust-lang/cargo/pull/7700&quot;&gt;you no longer need this line when working with the 2018 edition; you can use &lt;code&gt;use&lt;/code&gt; like any other crate&lt;/a&gt;. Given that most projects will already have a line similar to &lt;code&gt;use proc_macro::TokenStream;&lt;/code&gt;, this change will mean that you can delete the &lt;code&gt;extern crate proc_macro;&lt;/code&gt; line and your code will still work. This change is small, but brings procedural macros closer to regular code.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#libraries&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;libraries&quot;&gt;&lt;/a&gt;Libraries&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/68348/&quot;&gt;&lt;code&gt;iter::Empty&amp;lt;T&amp;gt;&lt;/code&gt; now implements &lt;code&gt;Send&lt;/code&gt; and &lt;code&gt;Sync&lt;/code&gt; for any &lt;code&gt;T&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/67935/&quot;&gt;&lt;code&gt;Pin::{map_unchecked, map_unchecked_mut}&lt;/code&gt; no longer require the return type
-to implement &lt;code&gt;Sized&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/67233/&quot;&gt;&lt;code&gt;io::Cursor&lt;/code&gt; now implements &lt;code&gt;PartialEq&lt;/code&gt; and &lt;code&gt;Eq&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/66254/&quot;&gt;&lt;code&gt;Layout::new&lt;/code&gt; is now &lt;code&gt;const&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;#stabilized-apis&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/sync/struct.Condvar.html#method.wait_while&quot;&gt;&lt;code&gt;CondVar::wait_while&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://doc.rust-lang.org/stable/std/sync/struct.Condvar.html#method.wait_timeout_while&quot;&gt;&lt;code&gt;CondVar::wait_timeout_while&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/fmt/struct.DebugMap.html#method.key&quot;&gt;&lt;code&gt;DebugMap::key&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://doc.rust-lang.org/stable/std/fmt/struct.DebugMap.html#method.value&quot;&gt;&lt;code&gt;DebugMap::value&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/mem/struct.ManuallyDrop.html#method.take&quot;&gt;&lt;code&gt;ManuallyDrop::take&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/ptr/fn.slice_from_raw_parts_mut.html&quot;&gt;&lt;code&gt;ptr::slice_from_raw_parts_mut&lt;/code&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://doc.rust-lang.org/stable/std/ptr/fn.slice_from_raw_parts.html&quot;&gt;&lt;code&gt;ptr::slice_from_raw_parts&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;#other-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.42.0 release: check out what changed in &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1420-2020-03-12&quot;&gt;Rust&lt;/a&gt;, &lt;a href=&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-142-2020-03-12&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-142&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#compatibility-notes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;compatibility-notes&quot;&gt;&lt;/a&gt;Compatibility Notes&lt;/h3&gt;
-&lt;p&gt;We have two notable compatibility notes this release: a deprecation in the standard library, and a demotion of 32-bit Apple targets to Tier 3.&lt;/p&gt;
-&lt;h4&gt;&lt;a href=&quot;#errordescription-is-deprecated&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;errordescription-is-deprecated&quot;&gt;&lt;/a&gt;Error::Description is deprecated&lt;/h4&gt;
-&lt;p&gt;Sometimes, mistakes are made. The &lt;code&gt;Error::description&lt;/code&gt; method is now considered to be one of those mistakes. The problem is with its type signature:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn description(&amp;amp;self) -&amp;gt; &amp;amp;str
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Because &lt;code&gt;description&lt;/code&gt; returns a &lt;code&gt;&amp;amp;str&lt;/code&gt;, it is not nearly as useful as we wished it would be. This means that you basically need to return the contents of an &lt;code&gt;Error&lt;/code&gt; verbatim; if you wanted to say, use formatting to produce a nicer description, that is impossible: you'd need to return a &lt;code&gt;String&lt;/code&gt;. Instead, error types should implement the &lt;code&gt;Display&lt;/code&gt;/&lt;code&gt;Debug&lt;/code&gt; traits to provide the description of the error.&lt;/p&gt;
-&lt;p&gt;This API has existed since Rust 1.0. We've been working towards this goal for a long time: back in Rust 1.27, we &lt;a href=&quot;https://github.com/rust-lang/rust/pull/50163&quot;&gt;&amp;quot;soft deprecated&amp;quot; this method&lt;/a&gt;. What that meant in practice was, we gave the function a default implementation. This means that users were no longer forced to implement this method when implementing the &lt;code&gt;Error&lt;/code&gt; trait. In this release, &lt;a href=&quot;https://github.com/rust-lang/rust/pull/66919/&quot;&gt;we mark it as &lt;em&gt;actually&lt;/em&gt; deprecated&lt;/a&gt;, and took some steps to de-emphasize the method in &lt;code&gt;Error&lt;/code&gt;'s documentation. Due to our stability policy, &lt;code&gt;description&lt;/code&gt; will never be removed, and so this is as far as we can go.&lt;/p&gt;
-&lt;h4&gt;&lt;a href=&quot;#downgrading-32-bit-apple-targets&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;downgrading-32-bit-apple-targets&quot;&gt;&lt;/a&gt;Downgrading 32-bit Apple targets&lt;/h4&gt;
-&lt;p&gt;Apple is no longer supporting 32-bit targets, and so, neither are we. They have been downgraded to Tier 3 support by the project. For more details on this, check out &lt;a href=&quot;https://blog.rust-lang.org/2020/01/03/reducing-support-for-32-bit-apple-targets.html&quot;&gt;this post&lt;/a&gt; from back in January, which covers everything in detail.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#contributors-to-1420&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1420&quot;&gt;&lt;/a&gt;Contributors to 1.42.0&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.42.0. We couldn't have done it without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.42.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
