@@ -30,11 +30,11 @@ We recently held two lang-team design meetings:
   consider "things that may not be const-evaluable" as "unsafe" in a
   const fn][ralfj].
   * [Minutes][m1], [recording][r1]
-* Safe transmute project group: We discussed the approaches explored
-  by the safe transmute group, and in particular did a bit of a deep
-  dive into the [exciting `typic` crate][typic] being developed by
+* **Safe transmute project group**: We discussed the approaches explored
+  by the safe transmute group, and in particular did a bit of a **deep
+  dive into the [exciting `typic` crate][typic]** being developed by
   [jswrenn]. We looked at what it might make sense to pursue as an
-  immediate RFC and what ought to stay in the realm of library experimentation
+  **immediate RFC** and what ought to stay in the realm of library experimentation
   for the time being.
   * [Minutes][m2], [recording][r2]
   
