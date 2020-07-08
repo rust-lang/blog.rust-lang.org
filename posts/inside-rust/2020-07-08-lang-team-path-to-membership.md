@@ -19,10 +19,7 @@ particularly clear *path to membership* -- i.e., it's been hard to say
 exactly what are the kinds of steps that one should be taking if you
 would like to become a member of the lang team. However, with the
 shift to [major change proposals] and in particular [project groups],
-we're starting to see what such a path looks like. Simultaneously,
-that same shift is helping to reveal that overall lang team bandwidth
-remains low, and that we could use to grow the team -- so thinking
-about the path to membership is an important thing to do.
+we're starting to see what such a path looks like. 
 
 [major change proposals]: https://github.com/rust-lang/rfcs/pull/2936/
 [project groups]: https://github.com/rust-lang/rfcs/pull/2856
