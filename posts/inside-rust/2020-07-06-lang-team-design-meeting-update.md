@@ -9,11 +9,12 @@ team: the lang team <https://www.rust-lang.org/governance/teams/lang>
 Hello! Did you know that the [lang team] now has regular design
 meetings? We use these meetings to dig deeper into the output of
 active project groups. After the meeting, we typically post a
-recording to YouTube as well as some [minutes into the lang-team
+recording to [YouTube] as well as some [minutes into the lang-team
 repository][min]. I wanted to write a quick update listing out some of
 the meetings we've had recently as well as some of our upcoming
 meetings.
 
+[YouTube]: https://www.youtube.com/playlist?list=PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa
 [lang team]: https://www.rust-lang.org/governance/teams/lang
 [min]: https://lang-team.rust-lang.org/minutes.html
 
@@ -39,6 +40,8 @@ We recently held two lang-team design meetings:
   
 [m1]: https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-06-24-const-eval-unsafe-and-skill-tree.md
 [r1]: https://youtu.be/b3p2vX8wZ_c
+[m2]: https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-01-safe-transmute-typic.md
+[r2]: https://youtu.be/3aw-5Fcyo7s
 [ralfj]: https://www.ralfj.de/blog/2018/07/19/const.html
 ["skill tree"]: https://github.com/nikomatsakis/skill-tree#what-is-a-skill-tree
 [typic]: https://github.com/jswrenn/typic
@@ -48,12 +51,13 @@ We recently held two lang-team design meetings:
 
 Every proposed meeting begins with an issue on the lang-team
 repository. If you're curious, you can take a look at the [open issues
-with the `meeting proposal` label][issues] to get an idea of what
+with the `meeting proposal` label][mp] to get an idea of what
 meetings are being considered; if a meeting has been scheduled, it
-will also be tagged with `meeting scheduled` and have some comments as
+will also be tagged with [`meeting scheduled`][ms] and have some comments as
 to the current date.
 
-[issues]: https://github.com/rust-lang/lang-team/issues?q=label%3Ameeting-proposal
+[mp]: https://github.com/rust-lang/lang-team/issues?q=label%3Ameeting-proposal
+[ms]: https://github.com/rust-lang/lang-team/issues?q=label%3Ameeting-scheduled
 
 We currently schedule meetings in a rather ad-hoc fashion, basically
 hammering it out over Zulip. I'd probably like to move us to a more
