@@ -10,8 +10,79 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-07-06T16:14:24+00:00</updated>
+    <updated>2020-07-08T14:14:55+00:00</updated>
 
+    
+    <entry>
+        <title>Lang team design meeting update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/08/lang-team-design-meeting-update.html" type="text/html" title="Lang team design meeting update" />
+        <published>2020-07-08T00:00:00+00:00</published>
+        <updated>2020-07-08T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/07/08/lang-team-design-meeting-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/08/lang-team-design-meeting-update.html">&lt;p&gt;Hello! Did you know that the &lt;a href=&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; now has regular design
+meetings? We use these meetings to dig deeper into the output of
+active project groups. After the meeting, we typically post a
+recording to &lt;a href=&quot;https://www.youtube.com/playlist?list=PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa&quot;&gt;YouTube&lt;/a&gt; as well as some &lt;a href=&quot;https://lang-team.rust-lang.org/minutes.html&quot;&gt;minutes into the lang-team
+repository&lt;/a&gt;. I wanted to write a quick update listing out some of
+the meetings we've had recently as well as some of our upcoming
+meetings.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#recent-lang-team-design-meetings&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;recent-lang-team-design-meetings&quot;&gt;&lt;/a&gt;Recent lang-team design meetings&lt;/h3&gt;
+&lt;p&gt;We recently held two lang-team design meetings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;const evaluation project group&lt;/strong&gt; discussed the overall state
+of const evaluation and a &lt;a href=&quot;https://github.com/nikomatsakis/skill-tree#what-is-a-skill-tree&quot;&gt;&amp;quot;skill tree&amp;quot;&lt;/a&gt; that they've been
+developing to show &lt;strong&gt;what some of the next steps are&lt;/strong&gt; and how they
+relate to one another.  We also discussed &lt;strong&gt;what &amp;quot;unsafe&amp;quot; might mean
+in a const evaluation context&lt;/strong&gt; and in particular &lt;a href=&quot;https://www.ralfj.de/blog/2018/07/19/const.html&quot;&gt;Ralf's proposal to
+consider &amp;quot;things that may not be const-evaluable&amp;quot; as &amp;quot;unsafe&amp;quot; in a
+const fn&lt;/a&gt;.
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-06-24-const-eval-unsafe-and-skill-tree.md&quot;&gt;Minutes&lt;/a&gt;, &lt;a href=&quot;https://youtu.be/b3p2vX8wZ_c&quot;&gt;recording&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Safe transmute project group: We discussed the approaches explored
+by the safe transmute group, and in particular did a bit of a deep
+dive into the &lt;a href=&quot;https://github.com/jswrenn/typic&quot;&gt;exciting &lt;code&gt;typic&lt;/code&gt; crate&lt;/a&gt; being developed by
+&lt;a href=&quot;https://github.com/jswrenn&quot;&gt;jswrenn&lt;/a&gt;. We looked at what it might make sense to pursue as an
+immediate RFC and what ought to stay in the realm of library experimentation
+for the time being.
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-01-safe-transmute-typic.md&quot;&gt;Minutes&lt;/a&gt;, &lt;a href=&quot;https://youtu.be/3aw-5Fcyo7s&quot;&gt;recording&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;#how-lang-team-design-meeting-proposals-work&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-lang-team-design-meeting-proposals-work&quot;&gt;&lt;/a&gt;How lang-team design meeting proposals work&lt;/h3&gt;
+&lt;p&gt;Every proposed meeting begins with an issue on the lang-team
+repository. If you're curious, you can take a look at the &lt;a href=&quot;https://github.com/rust-lang/lang-team/issues?q=label%3Ameeting-proposal&quot;&gt;open issues
+with the &lt;code&gt;meeting proposal&lt;/code&gt; label&lt;/a&gt; to get an idea of what
+meetings are being considered; if a meeting has been scheduled, it
+will also be tagged with &lt;a href=&quot;https://github.com/rust-lang/lang-team/issues?q=label%3Ameeting-scheduled&quot;&gt;&lt;code&gt;meeting scheduled&lt;/code&gt;&lt;/a&gt; and have some comments as
+to the current date.&lt;/p&gt;
+&lt;p&gt;We currently schedule meetings in a rather ad-hoc fashion, basically
+hammering it out over Zulip. I'd probably like to move us to a more
+&amp;quot;regularly scheduled&amp;quot; scheduling meeting, like the compiler team, but
+we haven't adopted such a scheme yet.&lt;/p&gt;
+&lt;p&gt;Anyone can propose a design meeting, though they are meant to be
+proposed mostly in conjunction with active project groups or other
+ongoing discussions, and not just out of the blue. Moreover, anyone is
+welcome to listen in on a design meeting, though you should be aware
+that the meeting is typically being recorded. Zoom links are available
+upon request.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#upcoming-lang-team-meeting-proposals&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;upcoming-lang-team-meeting-proposals&quot;&gt;&lt;/a&gt;Upcoming lang-team meeting proposals&lt;/h3&gt;
+&lt;p&gt;We currently have two pending lang-team meeting proposals:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A proposal to discuss the path to lang-team membership (&lt;a href=&quot;https://github.com/rust-lang/lang-team/issues/32&quot;&gt;rust-lang/lang-team#32&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;A proposal to discuss enforcing bounds on type aliases and how we
+might phase that in (&lt;a href=&quot;https://github.com/rust-lang/lang-team/issues/25&quot;&gt;rust-lang/lang-team#25&lt;/a&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We expect to be scheduling those soon, and we'll update the issues
+with dates when they are available.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Ownership of the standard library implementation</title>
@@ -492,45 +563,6 @@ repository&lt;/a&gt;.&lt;/p&gt;
 
         <author>
             <name>Josh Triplett</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Governance Working Group Update: Meeting 23 April 2020</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/04/23/Governance-wg.html" type="text/html" title="Governance Working Group Update: Meeting 23 April 2020" />
-        <published>2020-04-23T00:00:00+00:00</published>
-        <updated>2020-04-23T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/04/23/Governance-wg.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/04/23/Governance-wg.html">&lt;p&gt;Greetings Rustaceans!&lt;/p&gt;
-&lt;p&gt;The Rust Governance Working Group held another meeting on Zulip on 23 April.&lt;/p&gt;
-&lt;p&gt;The agenda included:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Follow up on &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2856&quot;&gt;the Project Group RFC&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Pre-RFC process&lt;/li&gt;
-&lt;li&gt;Domain Working Group Retrospective&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;You can find the &lt;a href=&quot;https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.04.23.md&quot;&gt;detailed minutes&lt;/a&gt; on the &lt;a href=&quot;https://github.com/rust-lang/wg-governance&quot;&gt;wg-governance&lt;/a&gt; repository, but here is a quick summary:&lt;/p&gt;
-&lt;h1&gt;&lt;a href=&quot;#follow-up-on-the-project-group-rfc&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;follow-up-on-the-project-group-rfc&quot;&gt;&lt;/a&gt;Follow up on the &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2856&quot;&gt;Project Group RFC&lt;/a&gt;&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;Is in Final comment Period, on track to be merged by the rfcbot&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;&lt;a href=&quot;#pre-rfc-process&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;pre-rfc-process&quot;&gt;&lt;/a&gt;Pre-RFC process&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;No update at present time&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;&lt;a href=&quot;#domain-working-group-retrospective&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;domain-working-group-retrospective&quot;&gt;&lt;/a&gt;Domain Working Group Retrospective&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;There is lack of contextual clarity about how domain work relates to the Rust project in general&lt;/li&gt;
-&lt;li&gt;First step: Created questionnaire to be shared with Domain WG leads via email to gain clarity on this&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href=&quot;#next-meeting&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;next-meeting&quot;&gt;&lt;/a&gt;Next meeting&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Our next meeting will be 7 May 2020 via &lt;a href=&quot;https://rust-lang.zulipchat.com/#narrow/stream/223182-wg-governance&quot;&gt;Zulip&lt;/a&gt; 17:00 UTC.&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>Val Grimm</name>
         </author>
     </entry>
     

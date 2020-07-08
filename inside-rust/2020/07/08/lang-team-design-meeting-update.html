@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lang team design meeting update | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Lang team design meeting update | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Lang team design meeting update | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Lang team design meeting update" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Lang team design meeting update</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">July 8, 2020 &middot; Niko Matsakis
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang">the lang team</a> 
+    </div>
+
+    <div class="post">
+      <p>Hello! Did you know that the <a href="https://www.rust-lang.org/governance/teams/lang">lang team</a> now has regular design
+meetings? We use these meetings to dig deeper into the output of
+active project groups. After the meeting, we typically post a
+recording to <a href="https://www.youtube.com/playlist?list=PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa">YouTube</a> as well as some <a href="https://lang-team.rust-lang.org/minutes.html">minutes into the lang-team
+repository</a>. I wanted to write a quick update listing out some of
+the meetings we've had recently as well as some of our upcoming
+meetings.</p>
+<h3><a href="#recent-lang-team-design-meetings" aria-hidden="true" class="anchor" id="recent-lang-team-design-meetings"></a>Recent lang-team design meetings</h3>
+<p>We recently held two lang-team design meetings:</p>
+<ul>
+<li>The <strong>const evaluation project group</strong> discussed the overall state
+of const evaluation and a <a href="https://github.com/nikomatsakis/skill-tree#what-is-a-skill-tree">&quot;skill tree&quot;</a> that they've been
+developing to show <strong>what some of the next steps are</strong> and how they
+relate to one another.  We also discussed <strong>what &quot;unsafe&quot; might mean
+in a const evaluation context</strong> and in particular <a href="https://www.ralfj.de/blog/2018/07/19/const.html">Ralf's proposal to
+consider &quot;things that may not be const-evaluable&quot; as &quot;unsafe&quot; in a
+const fn</a>.
+<ul>
+<li><a href="https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-06-24-const-eval-unsafe-and-skill-tree.md">Minutes</a>, <a href="https://youtu.be/b3p2vX8wZ_c">recording</a></li>
+</ul>
+</li>
+<li>Safe transmute project group: We discussed the approaches explored
+by the safe transmute group, and in particular did a bit of a deep
+dive into the <a href="https://github.com/jswrenn/typic">exciting <code>typic</code> crate</a> being developed by
+<a href="https://github.com/jswrenn">jswrenn</a>. We looked at what it might make sense to pursue as an
+immediate RFC and what ought to stay in the realm of library experimentation
+for the time being.
+<ul>
+<li><a href="https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-01-safe-transmute-typic.md">Minutes</a>, <a href="https://youtu.be/3aw-5Fcyo7s">recording</a></li>
+</ul>
+</li>
+</ul>
+<h3><a href="#how-lang-team-design-meeting-proposals-work" aria-hidden="true" class="anchor" id="how-lang-team-design-meeting-proposals-work"></a>How lang-team design meeting proposals work</h3>
+<p>Every proposed meeting begins with an issue on the lang-team
+repository. If you're curious, you can take a look at the <a href="https://github.com/rust-lang/lang-team/issues?q=label%3Ameeting-proposal">open issues
+with the <code>meeting proposal</code> label</a> to get an idea of what
+meetings are being considered; if a meeting has been scheduled, it
+will also be tagged with <a href="https://github.com/rust-lang/lang-team/issues?q=label%3Ameeting-scheduled"><code>meeting scheduled</code></a> and have some comments as
+to the current date.</p>
+<p>We currently schedule meetings in a rather ad-hoc fashion, basically
+hammering it out over Zulip. I'd probably like to move us to a more
+&quot;regularly scheduled&quot; scheduling meeting, like the compiler team, but
+we haven't adopted such a scheme yet.</p>
+<p>Anyone can propose a design meeting, though they are meant to be
+proposed mostly in conjunction with active project groups or other
+ongoing discussions, and not just out of the blue. Moreover, anyone is
+welcome to listen in on a design meeting, though you should be aware
+that the meeting is typically being recorded. Zoom links are available
+upon request.</p>
+<h3><a href="#upcoming-lang-team-meeting-proposals" aria-hidden="true" class="anchor" id="upcoming-lang-team-meeting-proposals"></a>Upcoming lang-team meeting proposals</h3>
+<p>We currently have two pending lang-team meeting proposals:</p>
+<ul>
+<li>A proposal to discuss the path to lang-team membership (<a href="https://github.com/rust-lang/lang-team/issues/32">rust-lang/lang-team#32</a>).</li>
+<li>A proposal to discuss enforcing bounds on type aliases and how we
+might phase that in (<a href="https://github.com/rust-lang/lang-team/issues/25">rust-lang/lang-team#25</a>).</li>
+</ul>
+<p>We expect to be scheduling those soon, and we'll update the issues
+with dates when they are available.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
