@@ -72,15 +72,15 @@
 
     <div class="post">
       <p>The rustup working group is happy to announce the release of rustup version 1.22.1. <a href="https://rustup.rs">Rustup</a> is the recommended tool to install <a href="https://www.rust-lang.org">Rust</a>, a programming language that is empowering everyone to build reliable and efficient software.</p>
-<p>If you have a previous version of rustup installed, getting rustup 1.22.0 may be as easy as closing your IDE and running:</p>
+<p>If you have a previous version of rustup installed, getting rustup 1.22.1 may be as easy as closing your IDE and running:</p>
 <pre><code>rustup self update
 </code></pre>
 <p>Rustup will also automatically update itself at the end of a normal toolchain update:</p>
 <pre><code>rustup update
 </code></pre>
-<p>If you don't have it already, or if the 1.22.0 release of rustup caused you to experience the problem that 1.22.1 fixes, you can <a href="https://rustup.rs">get rustup</a> from the appropriate page on our website.</p>
+<p>If you don't have it already, or if the 1.22.1 release of rustup caused you to experience the problem that 1.22.1 fixes, you can <a href="https://rustup.rs">get rustup</a> from the appropriate page on our website.</p>
 <h2><a href="#whats-new-in-rustup-1221" aria-hidden="true" class="anchor" id="whats-new-in-rustup-1221"></a>What's new in rustup 1.22.1</h2>
-<p>When updating dependency crates for 1.22.0, a change in behaviour of the <code>url</code> crate slipped in which caused <code>env_proxy</code> to cease to work with proxy data set in the environment.  This is unfortunate since those of you who use <code>rustup</code> behind a proxy and have updated to 1.22.0 will now find that rustup may not work properly for you.</p>
+<p>When updating dependency crates for 1.22.1, a change in behaviour of the <code>url</code> crate slipped in which caused <code>env_proxy</code> to cease to work with proxy data set in the environment.  This is unfortunate since those of you who use <code>rustup</code> behind a proxy and have updated to 1.22.1 will now find that rustup may not work properly for you.</p>
 <p>If you are affected by this, simply <a href="https://rustup.rs">re-download the installer</a> and run it.  It will update your existing installation of Rust with no need to uninstall first.</p>
 <h2><a href="#thanks" aria-hidden="true" class="anchor" id="thanks"></a>Thanks</h2>
 <p>Thanks to Ivan Nejgebauer who spotted the issue, provided the fix, and made rustup 1.22.1 possible,
