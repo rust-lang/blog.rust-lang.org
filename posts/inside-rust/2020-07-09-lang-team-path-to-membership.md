@@ -45,9 +45,9 @@ time to do some subset of these things at any given time.
 ### A sketch for a path to membership
 
 The core idea for a path to membership is that we want some set of
-steps that let us see people doing the things we expect from lang-team
-members, so that we can tell how it is working (and so that people can
-experience what it's like).
+steps that let us see people doing the things and demonstrating the
+qualities we expect from lang-team members, so that we can tell how it
+is working (and so that people can experience what it's like).
 
 This suggests that a "path to membership" might look something like this:
 
@@ -112,6 +112,6 @@ interest in being on the lang team.
 
 We concluded that we'll start experimenting with "non-team-member
 liaisons", and that people who are maybe interested in that role can
-reach out privately to Josh Triplett or myself. Further, we'll work to
-write up the "path to membership" as well as the expectations for team
-membership.
+reach out privately to Josh Triplett or myself
+(nikomatsakis). Further, we'll work to write up the "path to
+membership" as well as the expectations for team membership.
