@@ -6,7 +6,7 @@ description: "Lang team design meeting: path to membership"
 team: the lang team <https://www.rust-lang.org/governance/teams/lang>
 ---
 
-Today the [lang team] design meeting was on the topic of the "path to
+This week the [lang team] design meeting was on the topic of the "path to
 membership". This blog post gives a brief summary; you can also read
 the [minutes] or view the [recording].
 
