@@ -108,3 +108,10 @@ lang-team membership -- although it doesn't have to be. It's useful to
 have people serve as liaisons even if they don't really have time or
 interest in being on the lang team.
 
+### Conclusion
+
+We concluded that we'll start experimenting with "non-team-member
+liaisons", and that people who are maybe interested in that role can
+reach out privately to Josh Triplett or myself. Further, we'll work to
+write up the "path to membership" as well as the expectations for team
+membership.
