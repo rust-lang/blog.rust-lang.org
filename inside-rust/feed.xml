@@ -10,8 +10,110 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-07-08T16:37:07+00:00</updated>
+    <updated>2020-07-09T16:53:58+00:00</updated>
 
+    
+    <entry>
+        <title>Lang team design meeting: path to membership</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/09/lang-team-path-to-membership.html" type="text/html" title="Lang team design meeting: path to membership" />
+        <published>2020-07-09T00:00:00+00:00</published>
+        <updated>2020-07-09T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/07/09/lang-team-path-to-membership.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/09/lang-team-path-to-membership.html">&lt;p&gt;This week the &lt;a href=&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; design meeting was on the topic of the &amp;quot;path to
+membership&amp;quot;. This blog post gives a brief summary; you can also read
+the &lt;a href=&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-08-lang-team-path-to-membership.md&quot;&gt;minutes&lt;/a&gt; or view the &lt;a href=&quot;https://youtu.be/SeH-hZgDG1Y&quot;&gt;recording&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The premise of the meeting was that the lang team has never had a
+particularly clear &lt;em&gt;path to membership&lt;/em&gt; -- i.e., it's been hard to say
+exactly what are the kinds of steps that one should be taking if you
+would like to become a member of the lang team. However, with the
+shift to &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2936/&quot;&gt;major change proposals&lt;/a&gt; and in particular &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2856&quot;&gt;project groups&lt;/a&gt;,
+we're starting to see what such a path looks like.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#expectations-for-a-team-member&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;expectations-for-a-team-member&quot;&gt;&lt;/a&gt;Expectations for a team member&lt;/h3&gt;
+&lt;p&gt;As part of our discussion, we came up with a relatively complete list of
+what we see as the &amp;quot;expectations for a lang-team member&amp;quot;. To be clear,
+this is the full set of possible expectations: many members only have the
+time to do some subset of these things at any given time.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lead project groups, where appropriate&lt;/li&gt;
+&lt;li&gt;Liaison for projects, where appropriate&lt;/li&gt;
+&lt;li&gt;Participate in triage meetings&lt;/li&gt;
+&lt;li&gt;Participate in design meetings&lt;/li&gt;
+&lt;li&gt;Respond to rfcbot fcp requests in a timely fashion&lt;/li&gt;
+&lt;li&gt;Participate constructively in, and help facilitate, RFC discussion, issues, PRs, and other GitHub-based discussions
+&lt;ul&gt;
+&lt;li&gt;Provide important technical points&lt;/li&gt;
+&lt;li&gt;Help to drive discussions towards common understanding&lt;/li&gt;
+&lt;li&gt;Understanding and documenting the positions and points being raised&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Monitor and respond to communication in Zulip&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;#a-sketch-for-a-path-to-membership&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;a-sketch-for-a-path-to-membership&quot;&gt;&lt;/a&gt;A sketch for a path to membership&lt;/h3&gt;
+&lt;p&gt;The core idea for a path to membership is that we want some set of
+steps that let us see people doing the things and demonstrating the
+qualities we expect from lang-team members, so that we can tell how it
+is working (and so that people can experience what it's like).&lt;/p&gt;
+&lt;p&gt;This suggests that a &amp;quot;path to membership&amp;quot; might look something like this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lead or be heavily involved in one or more project groups&lt;/li&gt;
+&lt;li&gt;Serve as a liaison for one or more project groups&lt;/li&gt;
+&lt;li&gt;Participate in meetings, where possible&lt;/li&gt;
+&lt;li&gt;Participate in discussions and in particular help to create summaries or otherwise resolve technical disputes in a productive way&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We realize that we can identify people who are doing some of those
+things already and approach to see if they are interested in lang-team
+membership.  If so, we can look for opportunities to complete some of
+the other bullets.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#a-bit-of-background-project-groups&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;a-bit-of-background-project-groups&quot;&gt;&lt;/a&gt;A bit of background: project groups&lt;/h2&gt;
+&lt;p&gt;We've not been blogging a lot about the idea of project groups and the
+like so let me give just a bit of background. In short, the idea is
+that we are trying to &amp;quot;intercept&amp;quot; the RFC process earlier by
+introducing a &amp;quot;pre-step&amp;quot; called a Major Change Proposal
+(MCP). (Terminology still subject to change as we experiment here.)&lt;/p&gt;
+&lt;p&gt;The idea is that if you have an idea you'd like to pursue, you can
+file an MCP issue and describe the high-level details. If the idea
+catches the eye of somebody within the team, we will create a
+&lt;strong&gt;project group&lt;/strong&gt; to pursue the idea, with that member serving as the
+&lt;strong&gt;lang team liaison&lt;/strong&gt; and you (or others) serving as the &lt;strong&gt;group
+lead&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;project group&lt;/strong&gt; doesn't have to be a huge group of people. It
+might even just be one or two people and a dedicated Zulip stream.
+The idea is that the group will work out the design space and author
+RFCs; once the RFCs are accepted, the group can also pursue the
+implementation (though the set of people involved may shift at that
+point), and hopefully see the idea all the way through to
+stabilization.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#growing-the-set-of-folks-who-can-serve-as-liaison&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;growing-the-set-of-folks-who-can-serve-as-liaison&quot;&gt;&lt;/a&gt;Growing the set of folks who can serve as liaison&lt;/h3&gt;
+&lt;p&gt;One of the things we talked about was the proper role for a project
+group liaison. As described in the previous paragraph, a liaison was
+basically a member of the team who would follow along with the design
+and help to keep the rest of the team up to date.&lt;/p&gt;
+&lt;p&gt;But we realized that if we limit liaisons to team members, then this
+is incompatible with this idea of a &amp;quot;path to membership&amp;quot; where people
+can &amp;quot;trial run&amp;quot; lang-team activities.  It's also somewhat incompatible
+with a core goal, which is that the experience of someone who is &lt;em&gt;not&lt;/em&gt;
+on a team and someone who &lt;em&gt;is&lt;/em&gt; on a team ought to be awfully close,
+and that we should be careful when creating distinctions.&lt;/p&gt;
+&lt;p&gt;Therefore, we discussed the idea of saying that liaisons don't have to
+be team members, they just have to be people who are heavily involved
+in the project and who can be trusted to create regular updates for
+the lang-team and keep the rest of the team in the loop.&lt;/p&gt;
+&lt;p&gt;In particular, this can also be a useful stepping stone towards full
+lang-team membership -- although it doesn't have to be. It's useful to
+have people serve as liaisons even if they don't really have time or
+interest in being on the lang team.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#conclusion&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;We concluded that we'll start experimenting with &amp;quot;non-team-member
+liaisons&amp;quot;, and that people who are maybe interested in that role can
+reach out privately to Josh Triplett or myself
+(nikomatsakis). Further, we'll work to write up the &amp;quot;path to
+membership&amp;quot; as well as the expectations for team membership.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Lang team design meeting update</title>
@@ -533,36 +635,6 @@ view full results.&lt;/p&gt;
 
         <author>
             <name>Jack Huey</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Lang Team meetings moving to new time slots</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/05/08/lang-team-meetings-rescheduled.html" type="text/html" title="Lang Team meetings moving to new time slots" />
-        <published>2020-05-08T00:00:00+00:00</published>
-        <updated>2020-05-08T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/05/08/lang-team-meetings-rescheduled.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/05/08/lang-team-meetings-rescheduled.html">&lt;p&gt;The Rust language team holds two weekly meetings:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The triage meeting, where we go through open items that need language team
-review or guidance.&lt;/li&gt;
-&lt;li&gt;The design meeting, where we do in-depth dives and explorations on a specific
-proposal, issue, or idea.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;To better accommodate the schedules of lang team members and other regular
-attendees, we've rescheduled the time slots for both of these meetings.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The triage meeting now takes place on Mondays from 12-1pm US/Pacific.&lt;/li&gt;
-&lt;li&gt;The design meeting now takes place on Wednesdays from 10-11am US/Pacific.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These meetings are open to the public; you can find the details on the lang
-team calendar. For more information on how to subscribe to the lang team
-calendar, see the README in the &lt;a href=&quot;https://github.com/rust-lang/lang-team&quot;&gt;lang team
-repository&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Josh Triplett</name>
         </author>
     </entry>
     
