@@ -236,9 +236,15 @@ header h1 {
   letter-spacing: 1px; }
 
 .highlight {
-  height: 30px;
+  height: 12px;
   position: relative;
-  top: -30px;
+  top: 0;
   left: -10px;
   width: 120%;
-  max-width: 90vw; }
+  max-width: 90vw;
+  border-radius: 2px; }
+
+@media screen and (max-width: 769px) {
+  .highlight {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0; } }
