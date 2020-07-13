@@ -15,7 +15,7 @@ Yes, [RustRush][rustrush] was actually in 2018, but we didn't cover it in the [2
 lineup][2018-event-lineup] so we're counting it in 2019! This was the first Rust event in Russia.
 You can [watch the talk videos][rustrush-yt] and [follow the conference on Twitter][rustrush-tw].
 
-[rustrush]: https://rustrush.ru/
+[rustrush]: https://web.archive.org/web/20190517105107/https://rustrush.ru/
 [2018-event-lineup]: https://blog.rust-lang.org/2018/01/31/The-2018-Rust-Event-Lineup.html
 [rustrush-yt]: https://www.youtube.com/playlist?list=PLTooeo4dmVkQ_1lHJEY99ZTH_oP5ksIUL
 [rustrush-tw]: https://twitter.com/rustrush1
