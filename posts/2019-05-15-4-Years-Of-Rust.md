@@ -31,7 +31,7 @@ Rust would be nothing, and especially not winning prizes, without its community.
 [rust-2018]: https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html
 [rust-wasm]: https://www.rust-lang.org/what/wasm
 [crates-io]: http://crates.io
-[rustrush]: https://rustrush.ru/
+[rustrush]: https://web.archive.org/web/20190517105107/https://rustrush.ru/
 [rustcon-asia]: https://rustcon.asia/
 [oxidize]: https://oxidizeconf.com/
 [coloradogoldrust]: https://cogoldrust.com/
