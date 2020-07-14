@@ -10,8 +10,68 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-07-13T21:28:28+00:00</updated>
+    <updated>2020-07-14T19:09:38+00:00</updated>
 
+    
+    <entry>
+        <title>crates.io security advisory</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/07/14/crates-io-security-advisory.html" type="text/html" title="crates.io security advisory" />
+        <published>2020-07-14T00:00:00+00:00</published>
+        <updated>2020-07-14T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/07/14/crates-io-security-advisory.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/07/14/crates-io-security-advisory.html">&lt;p&gt;This is a cross-post of &lt;a href=&quot;https://groups.google.com/forum/?oldui=1#!topic/rustlang-security-announcements/wc5d_Qq35RA&quot;&gt;the official security advisory&lt;/a&gt;. The official post
+contains a signed version with our PGP key, as well.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;The Rust Security Response Working Group was recently notified of a security
+issue affecting token generation in the &lt;a href=&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt; web application, and while
+investigated that issue we discovered an additional vulnerability affecting
+crates.io API tokens.&lt;/p&gt;
+&lt;p&gt;We have no evidence of this being exploited in the wild, but out of an
+abundance of caution we opted to revoke all existing API keys. You can generate
+a new one at &lt;a href=&quot;https://crates.io/me&quot;&gt;crates.io/me&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#overview&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;overview&quot;&gt;&lt;/a&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Until recently, API keys for &lt;a href=&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt; were generated using the PostgreSQL
+random function, which is not a cryptographically secure random number
+generator. This means that in theory, an attacker could observe enough random
+values to determine the internal state of the random number generator, and use
+this information to determine previously created API keys up to the last
+database server reboot.&lt;/p&gt;
+&lt;p&gt;As part of the investigation for this, we also found that API keys were being
+stored in plain text. This would mean if our database were somehow compromised
+the attacker would be have API access for all current tokens.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#mitigations&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;mitigations&quot;&gt;&lt;/a&gt;Mitigations&lt;/h2&gt;
+&lt;p&gt;We deployed a code change to production to use a cryptographically secure
+random number generator, and we implemented hashing for storing tokens in the
+database.&lt;/p&gt;
+&lt;p&gt;Exploiting either issue would be incredibly impractical in practice, and we've
+found no evidence of this being exploited in the wild. However, out of an
+abundance of caution, we've opted to revoke all existing API keys. You can
+generate a new API key by visiting &lt;a href=&quot;https://crates.io/me&quot;&gt;crates.io/me&lt;/a&gt;. We apologize for any
+inconvenience this causes.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#acknowledgements&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;acknowledgements&quot;&gt;&lt;/a&gt;Acknowledgements&lt;/h2&gt;
+&lt;p&gt;Thanks to &lt;a href=&quot;https://github.com/jsha&quot;&gt;Jacob Hoffman-Andrews&lt;/a&gt; for responsibly disclosing the random number
+generator issue according to &lt;a href=&quot;https://www.rust-lang.org/policies/security&quot;&gt;our security policy&lt;/a&gt;. Thanks to &lt;a href=&quot;https://github.com/sgrif&quot;&gt;Siân
+Griffin&lt;/a&gt; and &lt;a href=&quot;https://github.com/jtgeibel&quot;&gt;Justin Geibel&lt;/a&gt; from the crates.io team for helping the Security
+Response WG addressing both of the issues. Thanks to &lt;a href=&quot;https://github.com/pietroalbini&quot;&gt;Pietro Albini&lt;/a&gt; from the
+Security Response WG for coordinating the work on this vulnerability.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#timeline-of-events&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;timeline-of-events&quot;&gt;&lt;/a&gt;Timeline of events&lt;/h2&gt;
+&lt;p&gt;All times are listed in UTC.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2020-07-11 17:43 - The issue is reported to &lt;a href=&quot;mailto:security@rust-lang.org&quot;&gt;security@rust-lang.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2020-07-11 20:56 - The issue is acknowledged, the leads of the crates.io team
+are looped in&lt;/li&gt;
+&lt;li&gt;2020-07-11 23:48 - The issue is confirmed and a planned fix is agreed on&lt;/li&gt;
+&lt;li&gt;2020-07-13 08:00 - The development of the fix is started&lt;/li&gt;
+&lt;li&gt;2020-07-14 12:53 - The fix is tested on the staging environment&lt;/li&gt;
+&lt;li&gt;2020-07-14 19:03 - The fix is deployed, existing tokens are revoked, and the
+issue is disclosed publicly&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Rust Security Response WG</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rustup 1.22.1</title>
@@ -924,60 +984,6 @@ without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.43.0/&q
 
         <author>
             <name>The Rust Survey Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>docs.rs now allows you to choose your build targets</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/03/15/docs-rs-opt-into-fewer-targets.html" type="text/html" title="docs.rs now allows you to choose your build targets" />
-        <published>2020-03-15T00:00:00+00:00</published>
-        <updated>2020-03-15T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/03/15/docs-rs-opt-into-fewer-targets.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/03/15/docs-rs-opt-into-fewer-targets.html">&lt;p&gt;Recently, &lt;a href=&quot;https://docs.rs/&quot;&gt;docs.rs&lt;/a&gt; added a feature that allows crates to opt-out of building on all targets.
-If you don't need to build on all targets, you can enable this feature to reduce your build times.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#what-does-the-feature-do&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;what-does-the-feature-do&quot;&gt;&lt;/a&gt;What does the feature do?&lt;/h2&gt;
-&lt;p&gt;By default, docs.rs builds all crates published to &lt;a href=&quot;https://crates.io/&quot;&gt;crates.io&lt;/a&gt; for &lt;a href=&quot;https://docs.rs/about#metadata&quot;&gt;every tier one target&lt;/a&gt;.
-However, most crates have the same content on all targets.
-Of the platform-dependent crates, almost all target a single platform,
-and do not need to be built on other targets.
-For example, &lt;a href=&quot;https://docs.rs/winapi/&quot;&gt;&lt;code&gt;winapi&lt;/code&gt;&lt;/a&gt; only has documentation on the &lt;code&gt;x86_64-pc-windows-msvc&lt;/code&gt;
-and &lt;code&gt;i686-pc-windows-msvc&lt;/code&gt; targets, and is blank on all others.&lt;/p&gt;
-&lt;p&gt;This feature allows you to request building only on specific targets.
-For example, &lt;a href=&quot;https://docs.rs/winapi/&quot;&gt;&lt;code&gt;winapi&lt;/code&gt;&lt;/a&gt; could opt into only building windows targets
-by putting the following in its &lt;code&gt;Cargo.toml&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[package.metadata.docs.rs]
-# This also sets the default target to `x86_64-pc-windows-msvc`
-targets = [&amp;quot;x86_64-pc-windows-msvc&amp;quot;, &amp;quot;i686-pc-windows-msvc&amp;quot;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you only need a single target, it's even simpler:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[package.metadata.docs.rs]
-# This sets the default target to `x86_64-unknown-linux-gnu`
-# and only builds that target
-targets = [&amp;quot;x86_64-unknown-linux-gnu&amp;quot;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;See the &lt;a href=&quot;https://docs.rs/about#metadata&quot;&gt;docs.rs documentation&lt;/a&gt; for more details about how to opt-in.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#how-does-this-help-my-crate&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-does-this-help-my-crate&quot;&gt;&lt;/a&gt;How does this help my crate?&lt;/h2&gt;
-&lt;p&gt;Instead of building for every tier-one target, you can build for only a single target,
-reducing your documentation build times by a factor of 6.
-This can especially help large crates or projects with many crates
-that take several hours to document.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#how-does-this-help-docsrs&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-does-this-help-docsrs&quot;&gt;&lt;/a&gt;How does this help docs.rs?&lt;/h2&gt;
-&lt;p&gt;Building all crates from crates.io can take a long time!
-Building fewer targets will allow us to reduce wait times for every crate.
-Additionally, this will decrease the growth of our storage costs, improving the sustainability of the project.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#possible-future-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;possible-future-changes&quot;&gt;&lt;/a&gt;Possible future changes&lt;/h2&gt;
-&lt;p&gt;We're considering turning this on by default in the future;
-i.e. only building for one target unless multiple targets are specifically requested.
-However, we don't want to break anyone's documentation, so we're making this feature opt-in  while we decide the migration strategy.&lt;/p&gt;
-&lt;p&gt;This change will also make it easier for docs.rs to build
-for targets that are not tier one, such as embedded targets.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#how-can-i-learn-more&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-can-i-learn-more&quot;&gt;&lt;/a&gt;How can I learn more?&lt;/h2&gt;
-&lt;p&gt;You can learn more about the change in &lt;a href=&quot;https://github.com/rust-lang/docs.rs/issues/343&quot;&gt;the issue proposing it&lt;/a&gt; and &lt;a href=&quot;https://github.com/rust-lang/docs.rs/pull/632&quot;&gt;the PR with the implementation&lt;/a&gt;. Details on building non-tier-one targets are also available &lt;a href=&quot;https://github.com/rust-lang/docs.rs/issues/563#issuecomment-573321498&quot;&gt;in the issue requesting the feature&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;More information on targets and what it means to be a tier-one target is available in the &lt;a href=&quot;https://forge.rust-lang.org/release/platform-support.html&quot;&gt;platform support&lt;/a&gt; page.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Joshua Nelson</name>
         </author>
     </entry>
     
