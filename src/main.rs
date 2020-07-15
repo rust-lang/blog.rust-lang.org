@@ -1,9 +1,9 @@
 mod blogs;
 mod posts;
 
-use chrono::Timelike;
 use crate::blogs::Blog;
 use crate::posts::Post;
+use chrono::Timelike;
 use handlebars::{handlebars_helper, Handlebars};
 use sass_rs::{compile_file, Options};
 use serde_derive::Serialize;
