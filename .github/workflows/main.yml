@@ -12,11 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Cache cargo
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: target
           key: cargo-build-${{ hashFiles('**/Cargo.lock') }}
-          restore-key: cargo-build-
+          restore-keys: |
+            cargo-build-
       - run: cargo run
       - run: cp CNAME ./site/
       - run: touch site/.nojekyll
