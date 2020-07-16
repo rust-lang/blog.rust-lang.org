@@ -10,8 +10,234 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-07-16T06:31:45+00:00</updated>
+    <updated>2020-07-16T14:03:21+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.45.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/07/16/Rust-1.45.0.html" type="text/html" title="Announcing Rust 1.45.0" />
+        <published>2020-07-16T00:00:00+00:00</published>
+        <updated>2020-07-16T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/07/16/Rust-1.45.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/07/16/Rust-1.45.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.45.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.45.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
+appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1450-2020-07-16&quot;&gt;detailed release notes for
+1.45.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-1450-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1450-stable&quot;&gt;&lt;/a&gt;What's in 1.45.0 stable&lt;/h2&gt;
+&lt;p&gt;There are two big changes to be aware of in Rust 1.45.0: a fix for some
+long-standing unsoundness when casting between integers and floats, and the
+stabilization of the final feature needed for one of the more popular web
+frameworks to work on stable Rust.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#fixing-unsoundness-in-casts&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;fixing-unsoundness-in-casts&quot;&gt;&lt;/a&gt;Fixing unsoundness in casts&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/issues/10184&quot;&gt;Issue 10184&lt;/a&gt; was originally
+opened back in October of 2013, a year and a half before Rust 1.0. As you may
+know, &lt;code&gt;rustc&lt;/code&gt; uses &lt;a href=&quot;http://llvm.org/&quot;&gt;LLVM&lt;/a&gt; as a compiler backend. When you
+write code like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;pub fn cast(x: f32) -&amp;gt; u8 {
+    x as u8
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The Rust compiler in Rust 1.44.0 and before would produce LLVM-IR that looks
+like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-llvm-ir&quot;&gt;define i8 @_ZN10playground4cast17h1bdf307357423fcfE(float %x) unnamed_addr #0 {
+start:
+  %0 = fptoui float %x to i8
+  ret i8 %0
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That &lt;code&gt;fptoui&lt;/code&gt; implements the cast, it is short for &amp;quot;floating point to
+unsigned integer.&amp;quot;&lt;/p&gt;
+&lt;p&gt;But there's a problem here. From &lt;a href=&quot;https://llvm.org/docs/LangRef.html#fptoui-to-instruction&quot;&gt;the
+docs&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The ‘fptoui’ instruction converts its floating-point operand into the
+nearest (rounding towards zero) unsigned integer value. If the value cannot
+fit in ty2, the result is a poison value.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Now, unless you happen to dig into the depths of compilers regularly, you may
+not understand what that means. It's full of jargon, but there's a simpler
+explanation: if you cast a floating point number that's large to an integer
+that's small, you get undefined behavior.&lt;/p&gt;
+&lt;p&gt;That means that this, for example, was not well-defined:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn cast(x: f32) -&amp;gt; u8 {
+    x as u8
+}
+
+fn main() {
+    let f = 300.0;
+
+    let x = cast(f);
+
+    println!(&amp;quot;x: {}&amp;quot;, x);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;On Rust 1.44.0, this happens to print &amp;quot;x: 0&amp;quot; on my machine. But it could
+print anything, or do anything: this is undefined behavior. But we have
+no &lt;code&gt;unsafe&lt;/code&gt; code here. This is what we call a &amp;quot;soundness&amp;quot; bug, that is,
+it is a bug where the compiler does the wrong thing. We tag these bugs
+as
+&lt;a href=&quot;https://github.com/rust-lang/rust/issues?q=is%3Aissue+is%3Aopen+label%3A%22I-unsound+%F0%9F%92%A5%22&quot;&gt;I-unsound&lt;/a&gt;
+on our issue tracker, and take them very seriously.&lt;/p&gt;
+&lt;p&gt;This bug took a long time to resolve, though. The reason is that it was very
+unclear what the correct path forward was.&lt;/p&gt;
+&lt;p&gt;In the end, the decision was made to do this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;as&lt;/code&gt; would perform a &amp;quot;saturating cast&amp;quot;.&lt;/li&gt;
+&lt;li&gt;A new &lt;code&gt;unsafe&lt;/code&gt; cast would be added if you wanted to skip the checks.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is very similar to array access, for example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;array[i]&lt;/code&gt; will check to make sure that &lt;code&gt;array&lt;/code&gt; has at least &lt;code&gt;i&lt;/code&gt; elements.&lt;/li&gt;
+&lt;li&gt;You can use &lt;code&gt;unsafe { array.get_unchecked(i) }&lt;/code&gt; to skip the check.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So, what's a saturating cast? Let's look at a slightly modified example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn cast(x: f32) -&amp;gt; u8 {
+    x as u8
+}
+
+fn main() {
+    let too_big = 300.0;
+    let too_small = -100.0;
+    let nan = f32::NAN;
+
+    println!(&amp;quot;too_big_casted = {}&amp;quot;, cast(too_big));
+    println!(&amp;quot;too_small_casted = {}&amp;quot;, cast(too_small));
+    println!(&amp;quot;not_a_number_casted = {}&amp;quot;, cast(nan));
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will print:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;too_big_casted = 255
+too_small_casted = 0
+not_a_number_casted = 0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That is, numbers that are too big turn into the largest possible value.
+Numbers that are too small produce the smallest possible value (which is
+zero). NaN produces zero.&lt;/p&gt;
+&lt;p&gt;The new API to cast in an unsafe manner is:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;let x: f32 = 1.0;
+let y: u8 = unsafe { x.to_int_unchecked() };
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But as always, you should only use this method as a last resort. Just like
+with array access, the compiler can often optimize the checks away, making
+the safe and unsafe versions equivalent when the compiler can prove it.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#stabilizing-function-like-procedural-macros-in-expressions-patterns-and-statements&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;stabilizing-function-like-procedural-macros-in-expressions-patterns-and-statements&quot;&gt;&lt;/a&gt;Stabilizing function-like procedural macros in expressions, patterns, and statements&lt;/h2&gt;
+&lt;p&gt;In &lt;a href=&quot;https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html&quot;&gt;Rust 1.30.0&lt;/a&gt;, we stabilized
+&amp;quot;function-like procedural macros in item position.&amp;quot; For example, &lt;a href=&quot;https://gitlab.gnome.org/federico/gnome-class&quot;&gt;the
+&lt;code&gt;gnome-class&lt;/code&gt; crate&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Gnome-class is a procedural macro for Rust.  Within the macro, we
+define a mini-language which looks as Rust-y as possible, and that has
+extensions to let you define GObject subclasses, their properties,
+signals, interface implementations, and the rest of GObject's
+features.  The goal is to require no unsafe code on your part.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;gobject_gen! {
+    class MyClass: GObject {
+        foo: Cell&amp;lt;i32&amp;gt;,
+        bar: RefCell&amp;lt;String&amp;gt;,
+    }
+
+    impl MyClass {
+        virtual fn my_virtual_method(&amp;amp;self, x: i32) {
+            ... do something with x ...
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &amp;quot;in item position&amp;quot; bit is some jargon, but basically what this means is that
+you could only invoke &lt;code&gt;gobject_gen!&lt;/code&gt; in certain places in your code.&lt;/p&gt;
+&lt;p&gt;Rust 1.45.0 adds the ability to invoke procedural macros in three new places:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;// imagine we have a procedural macro named &amp;quot;mac&amp;quot;
+
+mac!(); // item position, this was what was stable before
+
+// but these three are new:
+fn main() {
+  let expr = mac!(); // expression position
+
+  match expr {
+      mac!() =&amp;gt; {} // pattern position
+  }
+
+  mac!(); // statement position
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Being able to use macros in more places is interesting, but there's another
+reason why many Rustaceans have been waiting for this feature for a long time:
+&lt;a href=&quot;https://rocket.rs&quot;&gt;Rocket&lt;/a&gt;. Inititally released in December of 2016, Rocket is
+a popular web framework for Rust often described as one of the best things the
+Rust ecosystem has to offer. Here's the &amp;quot;hello world&amp;quot; example from its upcoming
+release:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[macro_use] extern crate rocket;
+
+#[get(&amp;quot;/&amp;lt;name&amp;gt;/&amp;lt;age&amp;gt;&amp;quot;)]
+fn hello(name: String, age: u8) -&amp;gt; String {
+    format!(&amp;quot;Hello, {} year old named {}!&amp;quot;, age, name)
+}
+
+#[launch]
+fn rocket() -&amp;gt; rocket::Rocket {
+    rocket::ignite().mount(&amp;quot;/hello&amp;quot;, routes![hello])
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Until today, Rocket depended on nightly-only features to deliver on its promise
+of flexibility and ergonomics. In fact, as can be seen on the &lt;a href=&quot;https://rocket.rs/v0.4&quot;&gt;project's
+homepage&lt;/a&gt;, the same example above in the current version
+of Rocket requires the &lt;code&gt;proc_macro_hygiene&lt;/code&gt; feature to compile. However, as you
+may guess from the feature's name, today it ships in stable! &lt;a href=&quot;https://github.com/SergioBenitez/Rocket/issues/19&quot;&gt;This
+issue&lt;/a&gt; tracked the history of
+nightly-only features in Rocket. Now, they're all checked off!&lt;/p&gt;
+&lt;p&gt;This next version of Rocket is still in the works, but when released, many folks
+will be very happy :)&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#library-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
+&lt;p&gt;In Rust 1.45.0, the following APIs were stabilized:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.as_ptr&quot;&gt;&lt;code&gt;Arc::as_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/collections/struct.BTreeMap.html#method.remove_entry&quot;&gt;&lt;code&gt;BTreeMap::remove_entry&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#method.as_ptr&quot;&gt;&lt;code&gt;Rc::as_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/rc/struct.Weak.html#method.as_ptr&quot;&gt;&lt;code&gt;rc::Weak::as_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/rc/struct.Weak.html#method.from_raw&quot;&gt;&lt;code&gt;rc::Weak::from_raw&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/rc/struct.Weak.html#method.into_raw&quot;&gt;&lt;code&gt;rc::Weak::into_raw&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/primitive.str.html#method.strip_prefix&quot;&gt;&lt;code&gt;str::strip_prefix&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/primitive.str.html#method.strip_suffix&quot;&gt;&lt;code&gt;str::strip_suffix&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/sync/struct.Weak.html#method.as_ptr&quot;&gt;&lt;code&gt;sync::Weak::as_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/sync/struct.Weak.html#method.from_raw&quot;&gt;&lt;code&gt;sync::Weak::from_raw&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/sync/struct.Weak.html#method.into_raw&quot;&gt;&lt;code&gt;sync::Weak::into_raw&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/std/char/constant.UNICODE_VERSION.html&quot;&gt;&lt;code&gt;char::UNICODE_VERSION&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/struct.Span.html#method.resolved_at&quot;&gt;&lt;code&gt;Span::resolved_at&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/struct.Span.html#method.located_at&quot;&gt;&lt;code&gt;Span::located_at&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/struct.Span.html#method.mixed_site&quot;&gt;&lt;code&gt;Span::mixed_site&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/os/unix/process/trait.CommandExt.html#tymethod.arg0&quot;&gt;&lt;code&gt;unix::process::CommandExt::arg0&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Additionally, you can &lt;a href=&quot;https://github.com/rust-lang/rust/pull/72413/&quot;&gt;use &lt;code&gt;char&lt;/code&gt; with
+ranges&lt;/a&gt;, to iterate over
+codepoints:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;for ch in 'a'..='z' {
+    print!(&amp;quot;{}&amp;quot;, ch);
+}
+println!();
+// Prints &amp;quot;abcdefghijklmnopqrstuvwxyz&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For a full list of changes, see &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1450-2020-07-16&quot;&gt;the full release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#other-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.45.0 release: check out what changed in
+&lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1450-2020-07-16&quot;&gt;Rust&lt;/a&gt;, &lt;a href=&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-145-2020-07-16&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-145&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-1450&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1450&quot;&gt;&lt;/a&gt;Contributors to 1.45.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.45.0. We couldn't have done it
+without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.45.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>crates.io security advisory</title>
@@ -798,192 +1024,6 @@ without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.43.0/&q
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Rust Survey 2019 Results</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/04/17/Rust-survey-2019.html" type="text/html" title="Rust Survey 2019 Results" />
-        <published>2020-04-17T00:00:00+00:00</published>
-        <updated>2020-04-17T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/04/17/Rust-survey-2019.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/04/17/Rust-survey-2019.html">&lt;blockquote&gt;
-&lt;p&gt;Translation available for &lt;a href=&quot;http://www.secondstate.info/blog/rust-2019&quot;&gt;Chinese | 中文&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Greetings Rustaceans!&lt;/p&gt;
-&lt;p&gt;We are happy to present the results of our fourth annual survey of our Rust community. Before we dig into the analysis, we want to give a big &amp;quot;thank you!&amp;quot; to all of the people who took the time to respond. You are vital to Rust continuing to improve year after year!&lt;/p&gt;
-&lt;p&gt;Let's start by looking at the survey audience.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#survey-audience&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;survey-audience&quot;&gt;&lt;/a&gt;Survey Audience&lt;/h2&gt;
-&lt;p&gt;The survey was available in &lt;strong&gt;14&lt;/strong&gt; different languages and we received &lt;strong&gt;3997&lt;/strong&gt; responses.&lt;/p&gt;
-&lt;p&gt;Here is the language distribution of the responses we received.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;English: 69.6%&lt;/li&gt;
-&lt;li&gt;Chinese: 10.8%&lt;/li&gt;
-&lt;li&gt;German: 4.3%&lt;/li&gt;
-&lt;li&gt;French: 3.3%&lt;/li&gt;
-&lt;li&gt;Japanese: 3.0%&lt;/li&gt;
-&lt;li&gt;Polish: 1.2%&lt;/li&gt;
-&lt;li&gt;Portuguese: 1.2%&lt;/li&gt;
-&lt;li&gt;Spanish: .9%&lt;/li&gt;
-&lt;li&gt;Korean: .8%&lt;/li&gt;
-&lt;li&gt;Italian: .6%&lt;/li&gt;
-&lt;li&gt;Swedish: .5%&lt;/li&gt;
-&lt;li&gt;Vietnamese: .2%&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;In the 2019 survey, 82.8% of responders indicated they used Rust, 7.1% indicated they did not currently use Rust but had used it in the past, and 10.1% indicated that they had never used Rust.&lt;/p&gt;
-&lt;p&gt;If we compare this to the 2018 survey (where 75% of responders indicated they used Rust, 8% indicated the did not currently use Rust but had used it in the past, and 8% indicated they had never used Rust) more responders were using Rust in 2019.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#looking-back-on-rust-2018&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;looking-back-on-rust-2018&quot;&gt;&lt;/a&gt;Looking Back on Rust 2018&lt;/h2&gt;
-&lt;p&gt;In December 2018 we released the Rust 2018 edition - Rust 1.31.0. In the 2019 survey, 92% of Rust users indicated they were using the new edition. 85% said that upgrading to the Rust 2018 edition was easy.&lt;/p&gt;
-&lt;p&gt;Next, we asked users to rate the improvement of key aspects of the Rust language.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/35-Adoption-Level-improvement.svg&quot; alt=&quot;How has adoption level improved&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/36-Async-IO-improvement.svg&quot; alt=&quot;How has async io improved&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/37-compile-time-improvement.svg&quot; alt=&quot;How has compile time improved&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/38-GUI-Development-improvement.svg&quot; alt=&quot;How has GUI development improved&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/39-IDE-improvement.svg&quot; alt=&quot;How has IDE support improved&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/40-Library-Support-improvement.svg&quot; alt=&quot;How has library support improved&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/41-Stable-Language-Features-and-Crates-improvement.svg&quot; alt=&quot;How have stable language features and crates improved&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/42-Rust-documentation-improvement.svg&quot; alt=&quot;How has Rust documentation improved&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/43-learning-curve-improvement.svg&quot; alt=&quot;How has the learning curve improved&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/44-tools-and-support-improvement.svg&quot; alt=&quot;How has tools and support improved&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Overall, many aspects of the Rust language were perceived as &amp;quot;somewhat better&amp;quot; in the 2018 edition.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#conferences-and-community&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;conferences-and-community&quot;&gt;&lt;/a&gt;Conferences and Community&lt;/h2&gt;
-&lt;p&gt;We noticed some differences between English language and other language results. Within the non-English language survey subset, the majority of the issues and concerns identified are the same as those within the English language. However, one concern/trend stands out among the non-English speaking subset - a desire for Rust documentation in their native language, or the language they took the survey in. This was particularly notable within the Chinese-language group, though that is likely due to the higher representation.&lt;/p&gt;
-&lt;p&gt;We are tracking the &lt;a href=&quot;https://github.com/rust-lang/book/issues?q=is%3Aopen+is%3Aissue+label%3ATranslations&quot;&gt;ongoing translation efforts&lt;/a&gt; with the &amp;quot;Translation&amp;quot; GitHub issue label.&lt;/p&gt;
-&lt;p&gt;We received a lot of feedback on how we can improve Rust and make it feel more welcoming to more people. We can't include all of it here, so here is a summary of some of the feedback that stood out to us.&lt;/p&gt;
-&lt;p&gt;People are in general asking for more learning material about Rust. In terms of expertise it's mainly beginner and intermediate level material being requested. A lot of these requests also asked for video content specifically.&lt;/p&gt;
-&lt;p&gt;The common blockers that people mention to participating is that they have social anxiety, and accessibility. One of the common reasons mentioned was that some resources are hard to read for people with dyslexia.&lt;/p&gt;
-&lt;p&gt;Here are some specific responses to the question &amp;quot;What action could we take to make you feel more welcome?&amp;quot;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;I feel too inexperienced and under skilled to participate in the Rust community&lt;/li&gt;
-&lt;li&gt;Advertise more ways for newcomers to contribute/participate&lt;/li&gt;
-&lt;li&gt;More organized mentorship, online classes&lt;/li&gt;
-&lt;li&gt;Do video tutorials on how to contribute to the compiler. I'd love to contribute but I feel intimidated&lt;/li&gt;
-&lt;li&gt;It's not easy to find resources for newcomers to see how Rust is being used in open source projects, so that they see the action as they're learning the language.&lt;/li&gt;
-&lt;li&gt;More tutorials/blogs that explain simple rust &amp;amp; coding concepts like the reader is a complete beginner&lt;/li&gt;
-&lt;li&gt;More intermediate level tutorials. We already have a million &amp;quot;Introductions to Rust&amp;quot;.&lt;/li&gt;
-&lt;li&gt;Smaller groups of helping people - social anxiety is making it hard to talk in the Discord, for example&lt;/li&gt;
-&lt;li&gt;Don't have synchronous meetings at late EU hours. Have fewer synchronous meetings and/or more consistently publish and aggregate meeting notes for team meetings.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These issues are definitely ones we want to address in 2020 and beyond.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#who-is-using-rust-and-what-for&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;who-is-using-rust-and-what-for&quot;&gt;&lt;/a&gt;Who is using Rust and what for?&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/11-How-Often-Use-Rust.svg&quot; alt=&quot;How often do you use Rust&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Rust daily usage has trended slightly upward at 27.63% (it was just under 25% last year and 17.5% on 2017). Daily or weekly usage has also continued to trend slightly upward. This year it was 68.52%, last year it was 66.4%, and in 2017 it was 60.8%.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/12-How-Rate-Rust-Expertise.svg&quot; alt=&quot;How would you rate your Rust expertise&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;We also asked users how they would rate their Rust expertise - there is a clear peak around &amp;quot;7&amp;quot;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/29-Rust-expertise-how-long-using-Rust.svg&quot; alt=&quot;How would you rate your Rust expertise&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;To dig deeper into this, we correlated users' self-rated Rust expertise with how long they had been using Rust.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/24-use-rust-role-title.svg&quot; alt=&quot;What title best matches your role for Rust users&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;For some larger context, we examined what titles users working with Rust full time tend to have in their organization (survey respondents could select more than one).&lt;/p&gt;
-&lt;p&gt;By far the most common title for a Rust user is, unsurprisingly, Programmer/Software Engineer.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/25-use-rust-industry.svg&quot; alt=&quot;What industry do you work in for Rust users&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;To get even more context, we asked Rust survey respondents to identify what industry they work in.&lt;/p&gt;
-&lt;p&gt;For users who use Rust full time, the most common industry by far is backend web applications.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/10-Size-Of-Summed-projects.svg&quot; alt=&quot;Size of summed Rust projects&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;The majority of Rust projects (43%) are 1,000-10,000 lines of code. Rust projects of medium to large size (those totaling over 10k lines of code) continue to trend higher. They have grown from 8.9% in 2016, to 16% in 2017, to 23% in 2018, to &lt;strong&gt;34%&lt;/strong&gt; in 2019.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#why-not-use-rust&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;why-not-use-rust&quot;&gt;&lt;/a&gt;Why not use Rust?&lt;/h2&gt;
-&lt;p&gt;A big part of a welcoming Rust community is reaching out to non-users as well.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/4-Why-Stopped-Rust.svg&quot; alt=&quot;Why did you stop using Rust?&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;When we asked why someone had stopped using Rust, the most common response was &amp;quot;My company doesn't use Rust&amp;quot; - which indicates Rust adoption is still the biggest reason. After that, learning curve, lack of needed libraries, being slowed down by switching to Rust, and lack of IDE support were the most common reasons a user stopped using Rust.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/5-Why-Never-Used-Rust.svg&quot; alt=&quot;Why have you never used Rust?&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;For users who indicated they had never used Rust before, most indicated either &amp;quot;I haven't learned Rust yet, but I want to&amp;quot; or &amp;quot;My company doesn't use Rust&amp;quot; - again pointing to adoption as the main hurdle.&lt;/p&gt;
-&lt;p&gt;For more context, we also examined what title non-Rust users feel best matches their role.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/26-not-using-rust-title.svg&quot; alt=&quot;What title best matches your role for non Rust users&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Like with Rust users, by far the most common title is Programmer/Software Engineer.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/27-not-using-rust-industry.svg&quot; alt=&quot;What industry do you work in for non Rust users&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Also like with Rust users, the most common industry by far is backend web applications.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/20-Would-use-rust-more-often-if.svg&quot; alt=&quot;I would use Rust more often if...&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;We also asked users what would lead them to use Rust more often. Most indicated they would use Rust more if their company adopted it, if Rust had more libraries that they need, and if IDE support was better. The most common reasons after those pointed to a need to improve the learning curve and interoperability.&lt;/p&gt;
-&lt;p&gt;As adoption seemed to be the biggest problem preventing some respondents from using Rust, let's dive deeper into it.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#rust-adoption---a-closer-look&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rust-adoption---a-closer-look&quot;&gt;&lt;/a&gt;Rust Adoption - a Closer Look&lt;/h2&gt;
-&lt;p&gt;First, we asked what would we could do to improve adoption of Rust.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/45-improve-adoption.svg&quot; alt=&quot;How can we improve Rust for better adoption&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Several users gave specific examples:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&amp;quot;Smoothest learning curve as possible, as a small business even 4-6 weeks to become productive is a lot to ask&amp;quot;&lt;/li&gt;
-&lt;li&gt;&amp;quot;Higher market penetration&amp;quot;&lt;/li&gt;
-&lt;li&gt;&amp;quot;More stable libraries&amp;quot;&lt;/li&gt;
-&lt;li&gt;&amp;quot;A full-stack web framework like Rails, Django and Phoenix&amp;quot;&lt;/li&gt;
-&lt;li&gt;&amp;quot;Better documentation, more examples, recommendation on what crates to use&amp;quot;&lt;/li&gt;
-&lt;li&gt;&amp;quot;More emphasis on how it is a safer alternative to C or C++ (and really should be the default usually).”&lt;/li&gt;
-&lt;li&gt;&amp;quot;Improve compile times. Compiling development builds at least as fast as Go would be table stakes for us to consider Rust. (Release builds can be slow.&amp;quot;&lt;/li&gt;
-&lt;li&gt;&amp;quot;Better platform support&amp;quot;&lt;/li&gt;
-&lt;li&gt;&amp;quot;Security and performance, cost efficient and &amp;quot;green&amp;quot; (low carbon footprint) language&amp;quot;&lt;/li&gt;
-&lt;li&gt;&amp;quot;Embedded development targeting ARM&amp;quot;&lt;/li&gt;
-&lt;li&gt;&amp;quot;Better GUI framework, similar to Qt or directly using Qt via bindings.&amp;quot;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Most indicated that Rust maturity - such as more libraries and complete learning resources and more mature production capabilities - would make Rust more appealing.&lt;/p&gt;
-&lt;p&gt;Let's take a closer look at each of these, starting with the need for more mature libraries.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#libraries---a-closer-look&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;libraries---a-closer-look&quot;&gt;&lt;/a&gt;Libraries - a Closer Look&lt;/h2&gt;
-&lt;p&gt;When we asked users what libraries they consider critical to the Rust ecosystem, these were the top ten responses:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;serde&lt;/li&gt;
-&lt;li&gt;rand&lt;/li&gt;
-&lt;li&gt;tokio&lt;/li&gt;
-&lt;li&gt;async&lt;/li&gt;
-&lt;li&gt;clap&lt;/li&gt;
-&lt;li&gt;regex&lt;/li&gt;
-&lt;li&gt;log&lt;/li&gt;
-&lt;li&gt;futures&lt;/li&gt;
-&lt;li&gt;hyper&lt;/li&gt;
-&lt;li&gt;lazy_static&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/28-dependencies-1-0-or-above.svg&quot; alt=&quot;What dependencies are 1.0 or above&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;We also asked how many dependencies users were using were 1.0 or above.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;0.8% indicated &amp;quot;All&amp;quot;&lt;/li&gt;
-&lt;li&gt;6.7% indicated &amp;quot;Most&amp;quot;&lt;/li&gt;
-&lt;li&gt;65.9% indicated &amp;quot;Some&amp;quot;&lt;/li&gt;
-&lt;li&gt;5.2% indicated &amp;quot;None&amp;quot;&lt;/li&gt;
-&lt;li&gt;21.4% indicated &amp;quot;I don't know&amp;quot;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href=&quot;#ides-and-tooling---a-closer-look&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;ides-and-tooling---a-closer-look&quot;&gt;&lt;/a&gt;IDEs and Tooling - a Closer Look&lt;/h2&gt;
-&lt;p&gt;IDE support for Rust was also cited as a barrier to adoption.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/31-editor-using.svg&quot; alt=&quot;What editor are you using&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;When we asked users what editors they use, Vim and VSCode were the most popular by far, followed by Intellij.&lt;/p&gt;
-&lt;p&gt;We also asked what IDE setups users used:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;43.3% indicated RLS&lt;/li&gt;
-&lt;li&gt;21.7% indicated Intellij&lt;/li&gt;
-&lt;li&gt;15.2% indicated Rust-analyzer&lt;/li&gt;
-&lt;li&gt;12.4% indicated No (or CTAGS)&lt;/li&gt;
-&lt;li&gt;4.2% indicated Only Racer&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/32-what-platform-developing-on.svg&quot; alt=&quot;What platform are you developing on&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;As for platforms that users develop on - Linux and Windows continue to dominate.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;55% of Rust users develop on Linux&lt;/li&gt;
-&lt;li&gt;24% develop on Windows&lt;/li&gt;
-&lt;li&gt;23% develop on macOS&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We found that the vast majority of all users use the current stable version of Rust (63%). It should be noted that the survey allowed respondents to select more than one option for what Rust version they use.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;30.5% use the nightly version&lt;/li&gt;
-&lt;li&gt;2.5% use the Beta release&lt;/li&gt;
-&lt;li&gt;63% use the current stable version&lt;/li&gt;
-&lt;li&gt;3.1% use a previous stable release&lt;/li&gt;
-&lt;li&gt;0.6% use a custom fork&lt;/li&gt;
-&lt;li&gt;0.3% don't know&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Surprisingly, the number of users using the Nightly compiler in their workflow is down at 20%. Last year it was at over 56%.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#learning-curve---a-closer-look&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;learning-curve---a-closer-look&quot;&gt;&lt;/a&gt;Learning Curve - a Closer Look&lt;/h2&gt;
-&lt;p&gt;Rust is well known for its significant learning curve.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/8-How-Long-To-Be-Productive.svg&quot; alt=&quot;How long did it take to be productive&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;About 37% of Rust users felt productive in Rust in less than a month of use - this is not too different from the percentage last year (40%). Over 70% felt productive in their first year. Unfortunately, like last year, there is still a struggle among users - 21% indicated they did not yet feel productive.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/22-unproductive-expertise.svg&quot; alt=&quot;Expertise level of respondents who don't feel productive yet&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;As a point of interest, we took the subset of users who don't feel productive yet and plotted their ratings of their Rust expertise. This indicates that people who don't feel productive had low to intermediate levels of expertise - which are the groups that need the most support from our learning materials, documentation, and more.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#interoperability---a-closer-look&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;interoperability---a-closer-look&quot;&gt;&lt;/a&gt;Interoperability - a Closer Look&lt;/h2&gt;
-&lt;p&gt;Over the years some users have expressed a desire for Rust to be more interoperable with other languages.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/23-interoperability-languages.svg&quot; alt=&quot;What languages would you want to use with Rust&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;When we asked users what languages they would want to be interoperable with Rust, there was a wide spread of answers, but C dominates, followed (somewhat surprisingly) by R, which is followed very closely behind by C++. It should be noted that respondents were able to select more than one language in response to this question - these percentages are based on total responses.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2020-03-RustSurvey/30-platforms-targeting.svg&quot; alt=&quot;What platforms are you targeting&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;When it comes to what platforms using are targeting for their applications Linux remains the first choice with 36.9%, with Windows as second at 16.3%. Following close behind Windows are macOS and Web Assembly at 14% each. We are also seeing more users targeting Android and Apple iOS.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#conclusions&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;conclusions&quot;&gt;&lt;/a&gt;Conclusions&lt;/h2&gt;
-&lt;p&gt;Overall our users indicated that productivity is still an important goal for their work (with or without using Rust). The results show the overriding problem hindering use of Rust is adoption. The learning curve continues to be a challenge - we appear to most need to improve our follow through for &lt;strong&gt;intermediate&lt;/strong&gt; users - but so are libraries and tooling.&lt;/p&gt;
-&lt;p&gt;Thank you to all who participated in this survey - these results are immensely informative to us - especially how we can  improve both Rust the language and the entire Rust ecosystem. We look forward to continuing working for and with you for 2020 and beyond!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Survey Team</name>
         </author>
     </entry>
     
