@@ -145,7 +145,7 @@ unclear what the correct path forward was.</p>
 </ul>
 <p>This is very similar to array access, for example:</p>
 <ul>
-<li><code>array[i]</code> will check to make sure that <code>array</code> has at least <code>i</code> elements.</li>
+<li><code>array[i]</code> will check to make sure that <code>array</code> has at least <code>i + 1</code> elements.</li>
 <li>You can use <code>unsafe { array.get_unchecked(i) }</code> to skip the check.</li>
 </ul>
 <p>So, what's a saturating cast? Let's look at a slightly modified example:</p>
