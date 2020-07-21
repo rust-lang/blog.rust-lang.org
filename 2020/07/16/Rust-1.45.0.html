@@ -130,10 +130,10 @@ fn main() {
 }
 </code></pre>
 <p>On Rust 1.44.0, this happens to print &quot;x: 0&quot; on my machine. But it could
-print anything, or do anything: this is undefined behavior. But we have
-no <code>unsafe</code> code here. This is what we call a &quot;soundness&quot; bug, that is,
-it is a bug where the compiler does the wrong thing. We tag these bugs
-as
+print anything, or do anything: this is undefined behavior. But the <code>unsafe</code>
+keyword is not used within this block of code. This is what we call a
+&quot;soundness&quot; bug, that is, it is a bug where the compiler does the wrong thing.
+We tag these bugs as
 <a href="https://github.com/rust-lang/rust/issues?q=is%3Aissue+is%3Aopen+label%3A%22I-unsound+%F0%9F%92%A5%22">I-unsound</a>
 on our issue tracker, and take them very seriously.</p>
 <p>This bug took a long time to resolve, though. The reason is that it was very
