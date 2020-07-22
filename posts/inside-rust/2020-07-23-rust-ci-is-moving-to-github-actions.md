@@ -27,7 +27,7 @@ previously using. GitHub Actions also provides most of the features we loved
 about Azure Pipelines while being integrated with GitHub’s permissions and UI,
 which made the switch even more fruitful.
 
-As of July 22th, all the CI builds for the [rust-lang/rust] repository except
+As of July 22nd, all the CI builds for the [rust-lang/rust] repository except
 for macOS builds are running exclusively on GitHub Actions! We’re still running
 macOS builds on Azure Pipelines for the time being, as we’re waiting on GitHub
 to fix [issue #71988][71988], but we hope to move them to GitHub Actions soon.
