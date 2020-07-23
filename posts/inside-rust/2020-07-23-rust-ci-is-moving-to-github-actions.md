@@ -7,15 +7,15 @@ team: the infrastructure team <https://www.rust-lang.org/governance/teams/operat
 
 The Rust Infrastructure Team is happy to announce that, as part of the
 [evaluation we started last year][eval], most of Rust’s CI is moving to GitHub
-Actions! While we don’t expect the change to have any impact to our users, the
+Actions! While we don’t expect the change to have any impact on our users, the
 switch will considerably improve the experience for compiler contributors.
 
 One of the major pain points for compiler contributors over the past few years
 has been waiting for PRs to be merged. We value having an always-green master
-branch, and to ensure that we test and merge just one PR at a time, with the
+branch, and to ensure that, we test and merge just one PR at a time, with the
 other approved ones [waiting in the queue][homu]. Our CI is extensive too, with
 57 machines building and testing the compiler across all the platforms we
-support. On our previous system, each of those builders takes between three to
+support. On our previous system, each of those builders took between three to
 four hours to finish. Combined with testing one PR at a time, this often causes
 PRs to wait in the queue for days before being tested.
 
