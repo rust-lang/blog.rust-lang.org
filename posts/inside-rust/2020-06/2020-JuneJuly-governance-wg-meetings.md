@@ -24,7 +24,7 @@ on the [wg-governance](https://github.com/rust-lang/wg-governance) repository, b
     * how they relate to the Rust Project
     * and their level of decision-making power
 * Rust repository structure and permissions should ideally represent status of groups in the project
-* There will very likely be a proposal for Community Groups to have their own repositories outside of the Rust project and not be listed in
+* There was discussion around Community Groups having their own repositories outside of the Rust project and not be listed in
 Rust materials. Instead, it is likely that, to avoid some community groups being perceived to be "more official", 
 the Rust project would possibly only link to the [Mozilla Communities Portal](https://community.mozilla.org/), 
 and Rust community groups wishing to do outreach could can create profiles there, share events, and generally do promotion and recruitment
