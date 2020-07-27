@@ -10,36 +10,16 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-07-27T21:00:54+00:00</updated>
+    <updated>2020-07-27T21:03:56+00:00</updated>
 
-    
-    <entry>
-        <title>1.45.1 prerelease testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/27/1.45.1-prerelease.html" type="text/html" title="1.45.1 prerelease testing" />
-        <published>2020-07-27T00:00:00+00:00</published>
-        <updated>2020-07-27T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/07/27/1.45.1-prerelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/27/1.45.1-prerelease.html">&lt;p&gt;The 1.45.1 pre-release is ready for testing. The release is scheduled for this
-Thursday, the 30th. Release notes can be found here:
-&lt;a href=&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1451-2020-07-30&quot;&gt;https://github.com/rust-lang/rust/blob/stable/RELEASES.md&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can try it out locally with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href=&quot;https://dev-static.rust-lang.org/dist/2020-07-26/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2020-07-26/index.html&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Mark Rousskov</name>
-        </author>
-    </entry>
     
     <entry>
         <title>Opening up the Core Team agenda</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/24/opening-up-the-core-team-agenda.html" type="text/html" title="Opening up the Core Team agenda" />
-        <published>2020-07-24T00:00:00+00:00</published>
-        <updated>2020-07-24T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/07/24/opening-up-the-core-team-agenda.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/24/opening-up-the-core-team-agenda.html">&lt;p&gt;The Core Team works on project-wide policy questions on all sorts of matters,
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/27/opening-up-the-core-team-agenda.html" type="text/html" title="Opening up the Core Team agenda" />
+        <published>2020-07-27T00:00:00+00:00</published>
+        <updated>2020-07-27T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/07/27/opening-up-the-core-team-agenda.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/27/opening-up-the-core-team-agenda.html">&lt;p&gt;The Core Team works on project-wide policy questions on all sorts of matters,
 as well as generally monitoring the overall health of the project. While some
 of the discussed topics are sensitive (related to personal issues, finances, or
 security) and can’t be shared outside the Core Team, a lot of them are not.&lt;/p&gt;
@@ -67,6 +47,26 @@ an existing topic, please email &lt;a href=&quot;mailto:core-team@rust-lang.org&
 
         <author>
             <name>Pietro Albini</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>1.45.1 prerelease testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/27/1.45.1-prerelease.html" type="text/html" title="1.45.1 prerelease testing" />
+        <published>2020-07-27T00:00:00+00:00</published>
+        <updated>2020-07-27T00:00:01+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/07/27/1.45.1-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/27/1.45.1-prerelease.html">&lt;p&gt;The 1.45.1 pre-release is ready for testing. The release is scheduled for this
+Thursday, the 30th. Release notes can be found here:
+&lt;a href=&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1451-2020-07-30&quot;&gt;https://github.com/rust-lang/rust/blob/stable/RELEASES.md&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can try it out locally with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href=&quot;https://dev-static.rust-lang.org/dist/2020-07-26/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2020-07-26/index.html&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mark Rousskov</name>
         </author>
     </entry>
     
