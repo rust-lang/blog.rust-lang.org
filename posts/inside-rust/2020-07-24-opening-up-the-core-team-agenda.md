@@ -5,7 +5,7 @@ author: Pietro Albini
 team: the Core Team <https://www.rust-lang.org/governance/teams/core>
 ---
 
-The Core Team tends to project-wide policy questions on all sorts of matters,
+The Core Team works on project-wide policy questions on all sorts of matters,
 as well as generally monitoring the overall health of the project. While some
 of the discussed topics are sensitive (related to personal issues, finances, or
 security) and can’t be shared outside the Core Team, a lot of them are not.
