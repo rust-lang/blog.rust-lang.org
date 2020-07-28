@@ -16,7 +16,7 @@ meetings.
 
 [YouTube]: https://www.youtube.com/playlist?list=PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa
 [lang team]: https://www.rust-lang.org/governance/teams/lang
-[min]: https://lang-team.rust-lang.org/minutes.html
+[min]: https://github.com/rust-lang/lang-team/tree/master/design-meeting-minutes
 
 This blog post is about the meeting we held on 2020-07-29. We
 discussed the idea of trying to enforce the "well-formedness" rules
