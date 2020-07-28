@@ -51,5 +51,5 @@ always an error to use. (Like any conclusion that happens in a
 meeting, it may be revised if we encounter new evidence that changes
 our minds.)
 
-[minutes from the meeting]: https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-22-Const-generics-MVP.md
+[minutes from the meeting]: https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-29-wf-checks-and-ty-aliases.md
 [watch the recording]: https://youtu.be/tIBZYQSA_eM
