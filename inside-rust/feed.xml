@@ -10,8 +10,83 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-07-27T21:03:56+00:00</updated>
+    <updated>2020-07-29T19:45:32+00:00</updated>
 
+    
+    <entry>
+        <title>Lang team design meeting: well-formedness and type aliases</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-wf-types.html" type="text/html" title="Lang team design meeting: well-formedness and type aliases" />
+        <published>2020-07-29T00:00:00+00:00</published>
+        <updated>2020-07-29T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-wf-types.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-wf-types.html">&lt;p&gt;Hello! Did you know that the &lt;a href=&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; now has regular design
+meetings? We use these meetings to dig deeper into the output of
+active project groups. After the meeting, we typically post a
+recording to &lt;a href=&quot;https://www.youtube.com/playlist?list=PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa&quot;&gt;YouTube&lt;/a&gt; as well as some &lt;a href=&quot;https://github.com/rust-lang/lang-team/tree/master/design-meeting-minutes&quot;&gt;minutes into the lang-team
+repository&lt;/a&gt;. I wanted to write a quick update listing out some of
+the meetings we've had recently as well as some of our upcoming
+meetings.&lt;/p&gt;
+&lt;p&gt;This blog post is about the meeting we held on 2020-07-29. We
+discussed the idea of trying to enforce the &amp;quot;well-formedness&amp;quot; rules
+for type aliases, as has been floated on and off over the years.&lt;/p&gt;
+&lt;p&gt;The context is that the compiler's current rules expand type aliases
+as if they were a kind of macro, which means that we don't wind up
+enforcing many sorts of rules about them.&lt;/p&gt;
+&lt;p&gt;For example, the following type alias definition is legal even though
+it would be an error to ever use it:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;struct MyType&amp;lt;T: Display&amp;gt; { t: T }
+
+// This alias, perhaps, should err, as `Vec&amp;lt;u32&amp;gt;: Display`
+// does not hold:
+type MyAlias = MyType&amp;lt;Vec&amp;lt;u32&amp;gt;&amp;gt;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For more information, check out the &lt;a href=&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-29-wf-checks-and-ty-aliases.md&quot;&gt;minutes from the meeting&lt;/a&gt; or
+&lt;a href=&quot;https://youtu.be/tIBZYQSA_eM&quot;&gt;watch the recording&lt;/a&gt;. We covered a number of examples of what goes
+wrong, as well as various possible &amp;quot;endstates&amp;quot; that we might want to
+reach (for example, there is an argument that the above example should
+be accepted after all, perhaps with a warning).&lt;/p&gt;
+&lt;p&gt;The conclusion during the meeting was that we would not put a lot of
+energy into type aliases at this time, and in particular we wouldn't
+aim for any Edition-related migrations and hard-errors, but we would
+accept PRs that introduce warnings for type alias definitions that are
+always an error to use. (Like any conclusion that happens in a
+meeting, it may be revised if we encounter new evidence that changes
+our minds.)&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Lang team design meeting: minimal const generics</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-min-const-generics.html" type="text/html" title="Lang team design meeting: minimal const generics" />
+        <published>2020-07-29T00:00:00+00:00</published>
+        <updated>2020-07-29T00:00:01+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-min-const-generics.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-min-const-generics.html">&lt;p&gt;Hello! Did you know that the &lt;a href=&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; now has regular design
+meetings? We use these meetings to dig deeper into the output of
+active project groups. After the meeting, we typically post a
+recording to &lt;a href=&quot;https://www.youtube.com/playlist?list=PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa&quot;&gt;YouTube&lt;/a&gt; as well as some &lt;a href=&quot;https://github.com/rust-lang/lang-team/tree/master/design-meeting-minutes&quot;&gt;minutes into the lang-team
+repository&lt;/a&gt;. I wanted to write a quick update listing out some of
+the meetings we've had recently as well as some of our upcoming
+meetings.&lt;/p&gt;
+&lt;p&gt;This blog post is about the meeting we held on 2020-07-22. We
+discussed the idea of creating a &amp;quot;minimal const generics MVP&amp;quot;, as
+proposed by boats in &lt;a href=&quot;https://without.boats/blog/shipping-const-generics/&quot;&gt;a recent blog
+post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can read the &lt;a href=&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-22-Const-generics-MVP.md&quot;&gt;minutes from the meeting&lt;/a&gt; to learn more details or
+to find a link to the recording. In general, though, we were all
+pretty excited about the idea. I expect that we will be creating a
+project group soon around const generics and that its first goal will
+be working towards this MVP.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Opening up the Core Team agenda</title>
@@ -461,67 +536,6 @@ Maybe you like the sound of both and anything in-between! Whatever the case, the
 
         <author>
             <name>Eric Huss</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing the Windows and ARM notification groups</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/06/09/windows-notification-group.html" type="text/html" title="Announcing the Windows and ARM notification groups" />
-        <published>2020-06-09T00:00:00+00:00</published>
-        <updated>2020-06-09T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/06/09/windows-notification-group.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/06/09/windows-notification-group.html">&lt;p&gt;We are forming two new groups in the compiler team:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A Windows group, for helping us to diagnose and resolve Windows-related issues.&lt;/li&gt;
-&lt;li&gt;An ARM group, for helping us to resolve issues specific to the ARM architectures&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Each of these groups are &amp;quot;notification groups&amp;quot;, which means that anyone can add their own name to the list -- if you do, you'll receive pings when Windows- or ARM-related bugs arise.&lt;/p&gt;
-&lt;p&gt;Each group also has an associated Zulip stream ([&lt;code&gt;#t-compiler/windows&lt;/code&gt;], [&lt;code&gt;#t-compiler/arm&lt;/code&gt;]) where people can go to pose questions and discuss topics specific to that target.&lt;/p&gt;
-&lt;p&gt;To get a better idea for what the groups will do, here are some examples of the kinds of questions where we would have reached out to the Windows group for advice in determining the best course of action:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Should we remove the legacy InnoSetup GUI installer? &lt;a href=&quot;https://github.com/rust-lang/rust/pull/72569&quot;&gt;#72569&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;What names should we use for static libraries on Windows? &lt;a href=&quot;https://github.com/rust-lang/rust/pull/29520&quot;&gt;#29520&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So, if you are interested in participating, please sign up for the Windows or aarch64 groups! To do so, you open a PR against the &lt;a href=&quot;https://github.com/rust-lang/team&quot;&gt;rust-lang/team&lt;/a&gt; repository. Just follow these examples (but change the username to your own):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/team/pull/348&quot;&gt;Windows example&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/team/pull/358&quot;&gt;ARM example&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>Niko Matsakis</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Upcoming compiler-team design meetings</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/06/08/upcoming-compiler-team-design-meeting.html" type="text/html" title="Upcoming compiler-team design meetings" />
-        <published>2020-06-08T00:00:00+00:00</published>
-        <updated>2020-06-08T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/06/08/upcoming-compiler-team-design-meeting.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/06/08/upcoming-compiler-team-design-meeting.html">&lt;p&gt;In our &lt;a href=&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/16428planningmeeting20200605.html&quot;&gt;planning meeting today&lt;/a&gt;, the &lt;a href=&quot;https://www.rust-lang.org/governance/teams/compiler&quot;&gt;compiler team&lt;/a&gt; has scheduled our
-next batch of upcoming design meetings. You can find the exact times
-on the compiler team's &lt;a href=&quot;https://rust-lang.github.io/compiler-team/#meeting-calendar&quot;&gt;meeting calendar&lt;/a&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;On June 19th (&lt;a href=&quot;https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=NGhzYXBkZm12ZzVmbzEzb2VpMzlsYzN0dnEgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;calendar event&lt;/a&gt;), we will
-have a follow-up discussion of our internal survey results.
-See &lt;a href=&quot;https://github.com/rust-lang/compiler-team/issues/302&quot;&gt;rust-lang/compiler-team#302&lt;/a&gt; for more details.&lt;/li&gt;
-&lt;li&gt;On June 26th (&lt;a href=&quot;https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=NmVjcTNibm03Ym5jamc2Z2NnaGNzaHFtMHYgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;calendar event&lt;/a&gt;), we will discuss
-restructuring our current team organization
-to reflect &amp;quot;areas of the compiler&amp;quot;.
-See &lt;a href=&quot;https://github.com/rust-lang/compiler-team/issues/288&quot;&gt;rust-lang/compiler-team#288&lt;/a&gt; for more details.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;#did-you-know&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;did-you-know&quot;&gt;&lt;/a&gt;Did you know?&lt;/h3&gt;
-&lt;p&gt;Most weeks, the compiler team has some sort of design meeting. These
-meetings take place on Zulip and are open to all. Every 4 weeks, we do
-a planning meeting to pick the next few meetings from the list of open
-proposals. You can find &lt;a href=&quot;https://rust-lang.github.io/compiler-team/about/steering-meeting/&quot;&gt;more details about how the compiler-team
-steering meeting process here&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Felix Klock</name>
         </author>
     </entry>
     
