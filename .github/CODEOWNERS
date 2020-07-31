@@ -1,3 +1,4 @@
-* @rust-lang/website
-posts/* @rust-lang/core
-posts/inside-rust/* @rust-lang/website @rust-lang/core
+src/* @rust-lang/website
+static/* @rust-lang/website
+templates/* @rust-lang/website
+posts/*.md @rust-lang/core
