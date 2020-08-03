@@ -10,8 +10,45 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-07-30T18:18:08+00:00</updated>
+    <updated>2020-08-03T15:10:31+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.45.2</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/08/03/Rust-1.45.2.html" type="text/html" title="Announcing Rust 1.45.2" />
+        <published>2020-08-03T00:00:00+00:00</published>
+        <updated>2020-08-03T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/08/03/Rust-1.45.2.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/08/03/Rust-1.45.2.html">&lt;p&gt;The Rust team is announcing a new version of Rust, 1.45.2. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.45.2 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
+appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1452-2020-08-03&quot;&gt;detailed release notes for
+1.45.2&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-1452-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1452-stable&quot;&gt;&lt;/a&gt;What's in 1.45.2 stable&lt;/h2&gt;
+&lt;p&gt;1.45.2 contains two fixes, one to 1.45.1 and the other to 1.45.0.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#track_caller-on-trait-objects&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;track_caller-on-trait-objects&quot;&gt;&lt;/a&gt;&lt;code&gt;#[track_caller]&lt;/code&gt; on trait objects&lt;/h2&gt;
+&lt;p&gt;Trait objects with methods annotated with &lt;code&gt;#[track_caller]&lt;/code&gt; would be
+miscompiled. &lt;code&gt;#[track_caller]&lt;/code&gt; is not yet stable on 1.45. However, the standard
+library makes use of this on some traits for better error messages. Trait
+objects of &lt;code&gt;SliceIndex&lt;/code&gt;, &lt;code&gt;Index&lt;/code&gt;, and &lt;code&gt;IndexMut&lt;/code&gt; were affected by this bug.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#tuple-patterns-binding--to-an-identifier&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;tuple-patterns-binding--to-an-identifier&quot;&gt;&lt;/a&gt;Tuple patterns binding &lt;code&gt;..&lt;/code&gt; to an identifier&lt;/h2&gt;
+&lt;p&gt;In 1.45.1, we backported a fix for &lt;a href=&quot;https://github.com/rust-lang/rust/issues/74539&quot;&gt;#74539&lt;/a&gt;, but this fix turned out to be
+incorrect, causing other unrelated breakage. As such, this release reverts that
+fix.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-1452&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1452&quot;&gt;&lt;/a&gt;Contributors to 1.45.2&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.45.2. We couldn't have done it
+without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.45.2/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.45.1</title>
@@ -955,38 +992,6 @@ coming decade!&lt;/p&gt;
 
         <author>
             <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.43.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/05/07/Rust.1.43.1.html" type="text/html" title="Announcing Rust 1.43.1" />
-        <published>2020-05-07T00:00:00+00:00</published>
-        <updated>2020-05-07T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/05/07/Rust.1.43.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/05/07/Rust.1.43.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.43.1.
-Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.43.1 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1431-2020-05-07&quot;&gt;detailed release notes for
-1.43.1&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-rust-1431&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-rust-1431&quot;&gt;&lt;/a&gt;What's in Rust 1.43.1&lt;/h2&gt;
-&lt;p&gt;Rust 1.43.1 addresses two regressions introduced in the 1.43.0 stable release, and updates the OpenSSL version used by Cargo.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#fixed-undetectable-cpu-features&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;fixed-undetectable-cpu-features&quot;&gt;&lt;/a&gt;Fixed undetectable CPU features&lt;/h3&gt;
-&lt;p&gt;Rust 1.27.0 introduced support for detecting x86 CPU features in the standard library, thanks to the &lt;a href=&quot;https://doc.rust-lang.org/stable/std/macro.is_x86_feature_detected.html&quot;&gt;&lt;code&gt;is_x86_feature_detected!&lt;/code&gt;&lt;/a&gt; macro. Due to an internal refactoring, Rust 1.43.0 prevented the detection of features that can't be used on stable yet (such as AVX-512), even though detecting them was allowed in the past. Rust 1.43.1 fixes this regression. More information on the regression in available in &lt;a href=&quot;https://github.com/rust-lang/rust/issues/71473&quot;&gt;issue #71473&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#fixed-broken-cargo-package---list&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;fixed-broken-cargo-package---list&quot;&gt;&lt;/a&gt;Fixed broken &lt;code&gt;cargo package --list&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;Rust 1.43.0 broke support for listing the files included in packages published with Cargo, when inside a workspace with path dependencies or unpublished versions. A fix for the issue is included in Rust 1.43.1. More information on the bug is available in &lt;a href=&quot;https://github.com/rust-lang/cargo/issues/8151&quot;&gt;Cargo issue #8151&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#openssl-updated-to-111g&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;openssl-updated-to-111g&quot;&gt;&lt;/a&gt;OpenSSL updated to 1.1.1g&lt;/h3&gt;
-&lt;p&gt;OpenSSL, one of the dependencies of Cargo, recently released a &lt;a href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967&quot;&gt;security advisory&lt;/a&gt;. Unfortunately we were not able to include the fix in time for Rust 1.43.0, so we upgraded OpenSSL in Rust 1.43.1. We have no evidence this vulnerability could compromise the security of Cargo users (if you do, &lt;a href=&quot;https://www.rust-lang.org/policies/security&quot;&gt;please follow our security policy&lt;/a&gt;).&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#contributors-to-1431&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-1431&quot;&gt;&lt;/a&gt;Contributors to 1.43.1&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.43.1.
-We couldn't have done it without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.43.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
