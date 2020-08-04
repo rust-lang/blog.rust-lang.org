@@ -1,5 +1,4 @@
 use crate::blogs::Manifest;
-use comrak::{ComrakExtensionOptions, ComrakOptions, ComrakRenderOptions};
 use regex::Regex;
 use serde_derive::{Deserialize, Serialize};
 use std::error::Error;
@@ -63,19 +62,7 @@ impl Post {
             layout,
         } = serde_yaml::from_str(yaml)?;
         // next, the contents. we add + to get rid of the final "---\n\n"
-        let options = ComrakOptions {
-            render: ComrakRenderOptions {
-                unsafe_: true, // Allow rendering of raw HTML
-                ..ComrakRenderOptions::default()
-            },
-            extension: ComrakExtensionOptions {
-                header_ids: Some(String::new()),
-                ..ComrakExtensionOptions::default()
-            },
-            ..ComrakOptions::default()
-        };
-
-        let contents = comrak::markdown_to_html(&contents[end_of_yaml + 5..], &options);
+        let contents = crate::markdown::render(&contents[end_of_yaml + 5..])?;
 
         // finally, the url.
         let mut url = PathBuf::from(&*filename);

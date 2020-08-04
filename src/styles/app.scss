@@ -54,8 +54,19 @@ blockquote {
     }
 }
 
+p {
+  text-align: justify;
+
+  /* Use manual hyphenation, as automatic hyphenation is not widely
+   * supported (Chrome doesn't implement it on all platforms). */
+  -webkit-hyphens: manual;
+      -ms-hyphens: manual;
+          hyphens: manual;
+}
+
 code {
   overflow: auto;
+  line-break: anywhere;
 }
 
 code.language-console::before,
