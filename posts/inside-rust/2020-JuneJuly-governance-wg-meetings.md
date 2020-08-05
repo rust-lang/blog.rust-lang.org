@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Governance Working Group Update: Meeting 21 May 2020"
+title: "Governance Working Group Update: Meeting June/July 2020"
 author: Val Grimm
 team: The Governance WG <https://github.com/rust-lang/wg-governance>
 ---
