@@ -12,23 +12,20 @@ This blog post summarizes the thematically-related meetings of June 4, June 25, 
 ## Big picture themes
 Define the role of domain working groups and community groups in the Rust Project; Rust governance taxonomy
 
-You can find the <br>
-[detailed minutes June 4](https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.06.04.md)  <br>
-[detailed minutes June 25](https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.06.25.md)  <br>
-[detailed minutes July 9](https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.07.09.md)  <br>
-on the [wg-governance](https://github.com/rust-lang/wg-governance) repository, but here is a quick summary: <br>
-
 * There is a need for more clarity about why and how groups are formed, 
     * what group categories mean, 
     * how they relate to each other, 
     * how they relate to the Rust Project
     * and their level of decision-making power
 * Rust repository structure and permissions should ideally represent status of groups in the project
-* There was discussion around Community Groups having their own repositories outside of the Rust project and not be listed in
-Rust materials. Instead, it is likely that, to avoid some community groups being perceived to be "more official", 
-the Rust project would possibly only link to the [Mozilla Communities Portal](https://community.mozilla.org/), 
-and Rust community groups wishing to do outreach could can create profiles there, share events, and generally do promotion and recruitment
+* One possibility might be to link to other community portals, such as Mozilla's community portal, where folks can list those groups.
 * We discussed the idea of streamlining rfcbot procedures, as discussed in rust-lang/wg-governance#38.
+
+You can find the <br>
+[detailed minutes June 4](https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.06.04.md)  <br>
+[detailed minutes June 25](https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.06.25.md)  <br>
+[detailed minutes July 9](https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.07.09.md)  <br>
+on the [wg-governance](https://github.com/rust-lang/wg-governance) repository, but here is a quick summary: <br>
 
 ## Next meeting
 * Our next meeting will be 23 July 2020 via [Zulip](https://rust-lang.zulipchat.com/#narrow/stream/223182-wg-governance) 18-19 CET / 1pm-2pm EST / 10-11am PST.
