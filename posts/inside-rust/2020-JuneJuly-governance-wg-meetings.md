@@ -28,7 +28,7 @@ on the [wg-governance](https://github.com/rust-lang/wg-governance) repository, b
 Rust materials. Instead, it is likely that, to avoid some community groups being perceived to be "more official", 
 the Rust project would possibly only link to the [Mozilla Communities Portal](https://community.mozilla.org/), 
 and Rust community groups wishing to do outreach could can create profiles there, share events, and generally do promotion and recruitment
-* "Pre-FCP" likely going away
+* We discussed the idea of streamlining rfcbot procedures, as discussed in rust-lang/wg-governance#38.
 
 ## Next meeting
 * Our next meeting will be 23 July 2020 via [Zulip](https://rust-lang.zulipchat.com/#narrow/stream/223182-wg-governance) 18-19 CET / 1pm-2pm EST / 10-11am PST.
