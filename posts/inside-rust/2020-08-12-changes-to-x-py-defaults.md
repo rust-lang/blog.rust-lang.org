@@ -15,7 +15,7 @@ Recently, the defaults for [x.py], the tool used to [bootstrap] the Rust compile
   + `test`: stage 1
   + `doc`: stage 0
 
-- stage1 `rustc` artifacts are no longer built by `x.py build --stage 1`. To get the old behavior back, use `x.py build --stage 1 src/rustc`.
+- stage1 `rustc` artifacts are no longer built by `x.py build --stage 1`. To get the old behavior back, use `x.py build --stage 1 src/rustc`. The new behavior for `build --stage 1` builds everything except `rustc`, which includes the standard library, `rustdoc`, and various other tools (if the tools are enabled).
 
 - `debuginfo` now defaults to `1` when `debug = true`. Previously, the default was 2.
 
