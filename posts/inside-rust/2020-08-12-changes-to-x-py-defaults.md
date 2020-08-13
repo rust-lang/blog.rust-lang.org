@@ -5,11 +5,11 @@ author: Joshua Nelson
 team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
 ---
 
-Recently, the defaults for [x.py] - the tool used to [bootstrap] the rust compiler from source - changed. If you regularly contribute to the rust compiler, this might affect your workflow.
+Recently, the defaults for [x.py], the tool used to [bootstrap] the Rust compiler from source, changed. If you regularly contribute to Rust, this might affect your workflow.
 
 ## What changes were made?
 
-- The default stage is now dependent on the subcommand.
+- The default stage is now dependent on the subcommand:
   + `dist`: stage 2
   + `build`: stage 1
   + `test`: stage 1
