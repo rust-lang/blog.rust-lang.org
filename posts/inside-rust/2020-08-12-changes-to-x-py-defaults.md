@@ -21,6 +21,19 @@ Recently, the defaults for [x.py], the tool used to [bootstrap] the Rust compile
 
 ## Why were the changes made?
 
+Previously, `x.py build` would build `rustc` three separate times:
+
+1. `build/stage0-rustc`
+2. `build/stage1-rustc`
+3. `build/stage2-rustc`
+
+Normally, contributors only want to build the compiler once, which lets them test their changes quickly. After this change, this is in fact what happens:
+
+1. `build/stage0-rustc`
+
+`debuginfo = 2` generates several gigabytes of debug information,
+making the previous default settings for `debug = true` very painful.
+
 For a detailed rationale of the changes, as well as more information about the alternatives considered, see
 
 - [the MCP]
