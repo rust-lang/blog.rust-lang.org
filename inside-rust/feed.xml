@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-08-12T07:59:03+00:00</updated>
+    <updated>2020-08-14T07:51:42+00:00</updated>
 
     
     <entry>
@@ -19,34 +19,34 @@
         <published>2020-07-29T00:00:00+00:00</published>
         <updated>2020-07-29T00:00:00+00:00</updated>
         <id>https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-wf-types.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-wf-types.html">&lt;p&gt;Hello! Did you know that the &lt;a href=&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; now has regular design
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-wf-types.html">&lt;p&gt;Hello! Did you know that the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; now has regular design
 meetings? We use these meetings to dig deeper into the output of
 active project groups. After the meeting, we typically post a
-recording to &lt;a href=&quot;https://www.youtube.com/playlist?list=PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa&quot;&gt;YouTube&lt;/a&gt; as well as some &lt;a href=&quot;https://github.com/rust-lang/lang-team/tree/master/design-meeting-minutes&quot;&gt;minutes into the lang-team
+recording to &lt;a href&#x3D;&quot;https://www.youtube.com/playlist?list&#x3D;PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa&quot;&gt;YouTube&lt;/a&gt; as well as some &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/tree/master/design-meeting-minutes&quot;&gt;minutes into the lang-team
 repository&lt;/a&gt;. I wanted to write a quick update listing out some of
-the meetings we've had recently as well as some of our upcoming
+the meetings we&#x27;ve had recently as well as some of our upcoming
 meetings.&lt;/p&gt;
 &lt;p&gt;This blog post is about the meeting we held on 2020-07-29. We
 discussed the idea of trying to enforce the &amp;quot;well-formedness&amp;quot; rules
 for type aliases, as has been floated on and off over the years.&lt;/p&gt;
-&lt;p&gt;The context is that the compiler's current rules expand type aliases
-as if they were a kind of macro, which means that we don't wind up
+&lt;p&gt;The context is that the compiler&#x27;s current rules expand type aliases
+as if they were a kind of macro, which means that we don&#x27;t wind up
 enforcing many sorts of rules about them.&lt;/p&gt;
 &lt;p&gt;For example, the following type alias definition is legal even though
 it would be an error to ever use it:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;struct MyType&amp;lt;T: Display&amp;gt; { t: T }
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct MyType&amp;lt;T: Display&amp;gt; { t: T }
 
-// This alias, perhaps, should err, as `Vec&amp;lt;u32&amp;gt;: Display`
+// This alias, perhaps, should err, as &#x60;Vec&amp;lt;u32&amp;gt;: Display&#x60;
 // does not hold:
-type MyAlias = MyType&amp;lt;Vec&amp;lt;u32&amp;gt;&amp;gt;;
+type MyAlias &#x3D; MyType&amp;lt;Vec&amp;lt;u32&amp;gt;&amp;gt;;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For more information, check out the &lt;a href=&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-29-wf-checks-and-ty-aliases.md&quot;&gt;minutes from the meeting&lt;/a&gt; or
-&lt;a href=&quot;https://youtu.be/tIBZYQSA_eM&quot;&gt;watch the recording&lt;/a&gt;. We covered a number of examples of what goes
+&lt;p&gt;For more information, check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-29-wf-checks-and-ty-aliases.md&quot;&gt;minutes from the meeting&lt;/a&gt; or
+&lt;a href&#x3D;&quot;https://youtu.be/tIBZYQSA_eM&quot;&gt;watch the recording&lt;/a&gt;. We covered a number of examples of what goes
 wrong, as well as various possible &amp;quot;endstates&amp;quot; that we might want to
 reach (for example, there is an argument that the above example should
 be accepted after all, perhaps with a warning).&lt;/p&gt;
 &lt;p&gt;The conclusion during the meeting was that we would not put a lot of
-energy into type aliases at this time, and in particular we wouldn't
+energy into type aliases at this time, and in particular we wouldn&#x27;t
 aim for any Edition-related migrations and hard-errors, but we would
 accept PRs that introduce warnings for type alias definitions that are
 always an error to use. (Like any conclusion that happens in a
@@ -65,18 +65,18 @@ our minds.)&lt;/p&gt;
         <published>2020-07-29T00:00:00+00:00</published>
         <updated>2020-07-29T00:00:01+00:00</updated>
         <id>https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-min-const-generics.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-min-const-generics.html">&lt;p&gt;Hello! Did you know that the &lt;a href=&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; now has regular design
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-min-const-generics.html">&lt;p&gt;Hello! Did you know that the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; now has regular design
 meetings? We use these meetings to dig deeper into the output of
 active project groups. After the meeting, we typically post a
-recording to &lt;a href=&quot;https://www.youtube.com/playlist?list=PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa&quot;&gt;YouTube&lt;/a&gt; as well as some &lt;a href=&quot;https://github.com/rust-lang/lang-team/tree/master/design-meeting-minutes&quot;&gt;minutes into the lang-team
+recording to &lt;a href&#x3D;&quot;https://www.youtube.com/playlist?list&#x3D;PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa&quot;&gt;YouTube&lt;/a&gt; as well as some &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/tree/master/design-meeting-minutes&quot;&gt;minutes into the lang-team
 repository&lt;/a&gt;. I wanted to write a quick update listing out some of
-the meetings we've had recently as well as some of our upcoming
+the meetings we&#x27;ve had recently as well as some of our upcoming
 meetings.&lt;/p&gt;
 &lt;p&gt;This blog post is about the meeting we held on 2020-07-22. We
 discussed the idea of creating a &amp;quot;minimal const generics MVP&amp;quot;, as
-proposed by boats in &lt;a href=&quot;https://without.boats/blog/shipping-const-generics/&quot;&gt;a recent blog
+proposed by boats in &lt;a href&#x3D;&quot;https://without.boats/blog/shipping-const-generics/&quot;&gt;a recent blog
 post&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can read the &lt;a href=&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-22-Const-generics-MVP.md&quot;&gt;minutes from the meeting&lt;/a&gt; to learn more details or
+&lt;p&gt;You can read the &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-22-Const-generics-MVP.md&quot;&gt;minutes from the meeting&lt;/a&gt; to learn more details or
 to find a link to the recording. In general, though, we were all
 pretty excited about the idea. I expect that we will be creating a
 project group soon around const generics and that its first goal will
@@ -101,12 +101,12 @@ security) and can’t be shared outside the Core Team, a lot of them are not.&lt
 &lt;p&gt;Much of the activity of the Core Team happens during weekly “triage” calls,
 where we discuss and make decisions on the items brought to our attention. Last
 year, we started opening up those calls by recording the parts where
-non-sensitive topics are discussed and uploading the videos &lt;a href=&quot;https://www.youtube.com/playlist?list=PL85XCvVPmGQjmo8ivhTMipwQRFl4ZW2cZ&quot;&gt;on our YouTube
+non-sensitive topics are discussed and uploading the videos &lt;a href&#x3D;&quot;https://www.youtube.com/playlist?list&#x3D;PL85XCvVPmGQjmo8ivhTMipwQRFl4ZW2cZ&quot;&gt;on our YouTube
 channel&lt;/a&gt;. While the videos provide the full context and nuance of the
 discussion, they take a good amount of time to watch, and referring to parts of
 the discussion is not always practical.&lt;/p&gt;
 &lt;p&gt;Continuing with the effort of opening up our meetings, we’re happy to announce
-that the public agenda of those calls is now recorded in &lt;a href=&quot;https://github.com/rust-lang/core-team/issues&quot;&gt;issues inside the
+that the public agenda of those calls is now recorded in &lt;a href&#x3D;&quot;https://github.com/rust-lang/core-team/issues&quot;&gt;issues inside the
 rust-lang/core-team&lt;/a&gt; repository! Each discussed topic will have its own issue,
 and we will provide updates each week with a summary of what we discussed
 during the call.&lt;/p&gt;
@@ -117,7 +117,7 @@ calls for the people who care to listen to the whole discussion.&lt;/p&gt;
 &lt;p&gt;We’ve decided at this time to limit permissions to post on the issues to the
 Core Team only, and possibly invited collaborators as relevant to particular
 topics. If you have an item you’d like us to discuss or if you have thoughts on
-an existing topic, please email &lt;a href=&quot;mailto:core-team@rust-lang.org&quot;&gt;core-team@rust-lang.org&lt;/a&gt;.&lt;/p&gt;
+an existing topic, please email &lt;a href&#x3D;&quot;mailto:core-team@rust-lang.org&quot;&gt;core-team@rust-lang.org&lt;/a&gt;.&lt;/p&gt;
 </content>
 
         <author>
@@ -133,11 +133,11 @@ an existing topic, please email &lt;a href=&quot;mailto:core-team@rust-lang.org&
         <id>https://blog.rust-lang.org/inside-rust/2020/07/27/1.45.1-prerelease.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/27/1.45.1-prerelease.html">&lt;p&gt;The 1.45.1 pre-release is ready for testing. The release is scheduled for this
 Thursday, the 30th. Release notes can be found here:
-&lt;a href=&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1451-2020-07-30&quot;&gt;https://github.com/rust-lang/rust/blob/stable/RELEASES.md&lt;/a&gt;.&lt;/p&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1451-2020-07-30&quot;&gt;https://github.com/rust-lang/rust/blob/stable/RELEASES.md&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;You can try it out locally with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href=&quot;https://dev-static.rust-lang.org/dist/2020-07-26/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2020-07-26/index.html&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2020-07-26/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2020-07-26/index.html&lt;/a&gt;.&lt;/p&gt;
 </content>
 
         <author>
@@ -146,19 +146,19 @@ Thursday, the 30th. Release notes can be found here:
     </entry>
     
     <entry>
-        <title>Rust's CI is moving to GitHub Actions</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/23/rust-ci-is-moving-to-github-actions.html" type="text/html" title="Rust's CI is moving to GitHub Actions" />
+        <title>Rust&#x27;s CI is moving to GitHub Actions</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/23/rust-ci-is-moving-to-github-actions.html" type="text/html" title="Rust&#x27;s CI is moving to GitHub Actions" />
         <published>2020-07-23T00:00:00+00:00</published>
         <updated>2020-07-23T00:00:00+00:00</updated>
         <id>https://blog.rust-lang.org/inside-rust/2020/07/23/rust-ci-is-moving-to-github-actions.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/23/rust-ci-is-moving-to-github-actions.html">&lt;p&gt;The Rust Infrastructure Team is happy to announce that, as part of the
-&lt;a href=&quot;https://blog.rust-lang.org/inside-rust/2019/11/14/evaluating-github-actions.html&quot;&gt;evaluation we started last year&lt;/a&gt;, most of Rust’s CI is moving to GitHub
+&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2019/11/14/evaluating-github-actions.html&quot;&gt;evaluation we started last year&lt;/a&gt;, most of Rust’s CI is moving to GitHub
 Actions! While we don’t expect the change to have any impact on our users, the
 switch will considerably improve the experience for compiler contributors.&lt;/p&gt;
 &lt;p&gt;One of the major pain points for compiler contributors over the past few years
 has been waiting for PRs to be merged. We value having an always-green master
 branch, and to ensure that, we test and merge just one PR at a time, with the
-other approved ones &lt;a href=&quot;https://bors.rust-lang.org/queue/rust&quot;&gt;waiting in the queue&lt;/a&gt;. Our CI is extensive too, with
+other approved ones &lt;a href&#x3D;&quot;https://bors.rust-lang.org/queue/rust&quot;&gt;waiting in the queue&lt;/a&gt;. Our CI is extensive too, with
 57 machines building and testing the compiler across all the platforms we
 support. On our previous system, each of those builders took between three to
 four hours to finish. Combined with testing one PR at a time, this often causes
@@ -170,10 +170,10 @@ our builds on, which is a big improvement compared to the 2-core VMs we were
 previously using. GitHub Actions also provides most of the features we loved
 about Azure Pipelines while being integrated with GitHub’s permissions and UI,
 which made the switch even more fruitful.&lt;/p&gt;
-&lt;p&gt;As of July 22nd, all the CI builds for the &lt;a href=&quot;https://github.com/rust-lang/rust&quot;&gt;rust-lang/rust&lt;/a&gt; repository except
+&lt;p&gt;As of July 22nd, all the CI builds for the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust&quot;&gt;rust-lang/rust&lt;/a&gt; repository except
 for macOS builds are running exclusively on GitHub Actions! We’re still running
 macOS builds on Azure Pipelines for the time being, as we’re waiting on GitHub
-to fix &lt;a href=&quot;https://github.com/rust-lang/rust/issues/71988&quot;&gt;issue #71988&lt;/a&gt;, but we hope to move them to GitHub Actions soon.&lt;/p&gt;
+to fix &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/71988&quot;&gt;issue #71988&lt;/a&gt;, but we hope to move them to GitHub Actions soon.&lt;/p&gt;
 &lt;p&gt;We’d like to thank GitHub for sponsoring our CI builders and Microsoft for the
 Azure Pipelines capacity we used over the past year.&lt;/p&gt;
 </content>
@@ -190,30 +190,30 @@ Azure Pipelines capacity we used over the past year.&lt;/p&gt;
         <updated>2020-07-17T00:00:00+00:00</updated>
         <id>https://blog.rust-lang.org/inside-rust/2020/07/17/traits-sprint-3.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/17/traits-sprint-3.html">&lt;p&gt;Again? It feels like we just had one of these...6 weeks ago 😉. Anyways, much of this sprint was a continuation of the previous two: working towards making Chalk feature-complete and eventually using it in rustc for trait solving.&lt;/p&gt;
-&lt;p&gt;For those who haven't seen one of these before, if you're curious about the traits working group, you can find a summary &lt;a href=&quot;https://rust-lang.github.io/wg-traits/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#credit-where-credit-is-due&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;credit-where-credit-is-due&quot;&gt;&lt;/a&gt;Credit where credit is due&lt;/h3&gt;
+&lt;p&gt;For those who haven&#x27;t seen one of these before, if you&#x27;re curious about the traits working group, you can find a summary &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-traits/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#credit-where-credit-is-due&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;credit-where-credit-is-due&quot;&gt;&lt;/a&gt;Credit where credit is due&lt;/h3&gt;
 &lt;p&gt;As always, a big thanks to everyone who participated in this sprint:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/detrumi&quot;&gt;Wilco Kusee&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/flodiebold&quot;&gt;Florian Diebold&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/jackh726&quot;&gt;Jack Huey&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/crlf0710&quot;&gt;Charles Lew&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/nikomatsakis&quot;&gt;Niko Matsakis&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/nathanwhit&quot;&gt;Nathan Whitaker&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/adamrk&quot;&gt;Adam Bratschi-Kaye&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/super-tuple&quot;&gt;super-tuple&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/daboross&quot;&gt;David Ross&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/zaharidichev&quot;&gt;Zahari Dichev&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/Areredify&quot;&gt;Mikhail Babenko&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/Mcat12&quot;&gt;Mark Drobnak&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/Aaron1011&quot;&gt;Aaron Hill&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/pksunkara&quot;&gt;Pavan Kumar Sunkara&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/doctorn&quot;&gt;Nathan Corbyn&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/matthewjasper&quot;&gt;Matthew Jasper&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/lcnr&quot;&gt;Bastian Kauschke&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/detrumi&quot;&gt;Wilco Kusee&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/flodiebold&quot;&gt;Florian Diebold&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/jackh726&quot;&gt;Jack Huey&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/crlf0710&quot;&gt;Charles Lew&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/nikomatsakis&quot;&gt;Niko Matsakis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/nathanwhit&quot;&gt;Nathan Whitaker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/adamrk&quot;&gt;Adam Bratschi-Kaye&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/super-tuple&quot;&gt;super-tuple&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/daboross&quot;&gt;David Ross&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/zaharidichev&quot;&gt;Zahari Dichev&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/Areredify&quot;&gt;Mikhail Babenko&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/Mcat12&quot;&gt;Mark Drobnak&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/Aaron1011&quot;&gt;Aaron Hill&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/pksunkara&quot;&gt;Pavan Kumar Sunkara&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/doctorn&quot;&gt;Nathan Corbyn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/matthewjasper&quot;&gt;Matthew Jasper&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/lcnr&quot;&gt;Bastian Kauschke&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;#chalk-crate-cleanups-and-weekly-publish&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;chalk-crate-cleanups-and-weekly-publish&quot;&gt;&lt;/a&gt;Chalk crate cleanups and weekly publish&lt;/h3&gt;
-&lt;p&gt;Since its inception, Chalk has undergone a fair number of changes in regards to the structure of its crates, as any reasonably sized project might. During this sprint, we took the time to clean up the crate structure a bit. It's probably easiest to just give a brief overview of what we ended up with. A more comprehensive overview can be found in the &lt;a href=&quot;http://rust-lang.github.io/chalk/book/what_is_chalk/crates.html&quot;&gt;Chalk book&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#chalk-crate-cleanups-and-weekly-publish&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;chalk-crate-cleanups-and-weekly-publish&quot;&gt;&lt;/a&gt;Chalk crate cleanups and weekly publish&lt;/h3&gt;
+&lt;p&gt;Since its inception, Chalk has undergone a fair number of changes in regards to the structure of its crates, as any reasonably sized project might. During this sprint, we took the time to clean up the crate structure a bit. It&#x27;s probably easiest to just give a brief overview of what we ended up with. A more comprehensive overview can be found in the &lt;a href&#x3D;&quot;http://rust-lang.github.io/chalk/book/what_is_chalk/crates.html&quot;&gt;Chalk book&lt;/a&gt;.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;chalk-derive&lt;/code&gt; - Defines the derive proc macros&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;chalk-ir&lt;/code&gt; - A basic &amp;quot;type library&amp;quot;, which might someday be shared between rustc, Chalk, and rust-analyzer&lt;/li&gt;
@@ -225,15 +225,15 @@ Azure Pipelines capacity we used over the past year.&lt;/p&gt;
 &lt;li&gt;&lt;code&gt;chalk&lt;/code&gt; - Used for testing, provides a REPL&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Also during this sprint, we set up regular weekly releases of the Chalk crates. While at the moment these are all &lt;code&gt;0.*.0&lt;/code&gt; patch releases, it sets up the infrastructure for future stable releases and provides published crates to be used in rustc and rust-analyzer. In the future, when Chalk development is more stable, we want to switch this to be manual. We also plan to set up bors to ensure that &lt;code&gt;master&lt;/code&gt; always builds and passes tests.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#work-towards-gat-support-in-rustc&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;work-towards-gat-support-in-rustc&quot;&gt;&lt;/a&gt;Work towards GAT support in rustc&lt;/h3&gt;
-&lt;p&gt;Chalk has had support for GATs for &lt;a href=&quot;https://github.com/rust-lang/chalk/pull/145&quot;&gt;a while now&lt;/a&gt;; in Chalk terms, GATs are a natural extension of everything else. &lt;a href=&quot;https://github.com/rust-lang/rust/issues/44265&quot;&gt;GATs in rustc&lt;/a&gt;, however, are a bit more difficult, and have been fairly stagnant over the past couple of years, with the primary focus going towards getting Chalk ready. Recently, however, some work has been done in rustc to get GATs working under the current rustc trait system.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#extracting-a-shared-library-representing-types&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;extracting-a-shared-library-representing-types&quot;&gt;&lt;/a&gt;Extracting a shared library representing types&lt;/h3&gt;
-&lt;p&gt;As a long term goal, we hope to one day have a shared type library between Chalk and rustc. Moreover, this type library could be used for other projects, such as rust-analyzer. On the Chalk side, more types — such as closures and enums — and more traits — such as the &lt;code&gt;Fn&lt;/code&gt; family and &lt;code&gt;Unsize&lt;/code&gt; — were added. Additionally, some work has been done to go the &lt;em&gt;other direction&lt;/em&gt;: to move rustc closer to Chalk, such as &lt;a href=&quot;https://github.com/rust-lang/rust/pull/72055&quot;&gt;interning &lt;code&gt;Predicate&lt;/code&gt;s&lt;/a&gt;, and &lt;a href=&quot;https://github.com/rust-lang/rust/pull/73503&quot;&gt;introducing &lt;code&gt;ForAll&lt;/code&gt; predicates&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#writing-a-chalk-file-for-debugging&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;writing-a-chalk-file-for-debugging&quot;&gt;&lt;/a&gt;Writing a &lt;code&gt;.chalk&lt;/code&gt; file for debugging&lt;/h3&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#work-towards-gat-support-in-rustc&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;work-towards-gat-support-in-rustc&quot;&gt;&lt;/a&gt;Work towards GAT support in rustc&lt;/h3&gt;
+&lt;p&gt;Chalk has had support for GATs for &lt;a href&#x3D;&quot;https://github.com/rust-lang/chalk/pull/145&quot;&gt;a while now&lt;/a&gt;; in Chalk terms, GATs are a natural extension of everything else. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/44265&quot;&gt;GATs in rustc&lt;/a&gt;, however, are a bit more difficult, and have been fairly stagnant over the past couple of years, with the primary focus going towards getting Chalk ready. Recently, however, some work has been done in rustc to get GATs working under the current rustc trait system.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#extracting-a-shared-library-representing-types&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;extracting-a-shared-library-representing-types&quot;&gt;&lt;/a&gt;Extracting a shared library representing types&lt;/h3&gt;
+&lt;p&gt;As a long term goal, we hope to one day have a shared type library between Chalk and rustc. Moreover, this type library could be used for other projects, such as rust-analyzer. On the Chalk side, more types — such as closures and enums — and more traits — such as the &lt;code&gt;Fn&lt;/code&gt; family and &lt;code&gt;Unsize&lt;/code&gt; — were added. Additionally, some work has been done to go the &lt;em&gt;other direction&lt;/em&gt;: to move rustc closer to Chalk, such as &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/72055&quot;&gt;interning &lt;code&gt;Predicate&lt;/code&gt;s&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73503&quot;&gt;introducing &lt;code&gt;ForAll&lt;/code&gt; predicates&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#writing-a-chalk-file-for-debugging&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;writing-a-chalk-file-for-debugging&quot;&gt;&lt;/a&gt;Writing a &lt;code&gt;.chalk&lt;/code&gt; file for debugging&lt;/h3&gt;
 &lt;p&gt;As part of Chalk tests, we can write Rust-like &amp;quot;programs&amp;quot; that get parsed into Chalk types. Importantly, these programs are much more succint than the types they get lowered to. As part of an effort to better enable debugging, we implemented a system to go in the opposite direction: to be able to generate the Rust-like programs from the underlying types. This is extremely useful to, for example, debug a bug for a given bit of code that rustc tries to compile. Additionally, this could be used to generate programs for cases with performance problems.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#improving-impl-trait-support&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;improving-impl-trait-support&quot;&gt;&lt;/a&gt;Improving &lt;code&gt;impl Trait&lt;/code&gt; support&lt;/h3&gt;
-&lt;p&gt;In the last sprint, we landed initial &lt;code&gt;impl Trait&lt;/code&gt; support, to handle the simple case of something like &lt;code&gt;type Foo&amp;lt;T&amp;gt; = impl Bar&lt;/code&gt;. During this sprint, we began work on adding more support for more complex cases such as &lt;code&gt;type Foo&amp;lt;T&amp;gt;: Debug = impl Bar where T: Debug&lt;/code&gt;. Additionally, some design work was done to support checking that these are well-formed.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#extend-chalk-to-support-rust-semantics&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;extend-chalk-to-support-rust-semantics&quot;&gt;&lt;/a&gt;Extend Chalk to support Rust semantics&lt;/h3&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#improving-impl-trait-support&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improving-impl-trait-support&quot;&gt;&lt;/a&gt;Improving &lt;code&gt;impl Trait&lt;/code&gt; support&lt;/h3&gt;
+&lt;p&gt;In the last sprint, we landed initial &lt;code&gt;impl Trait&lt;/code&gt; support, to handle the simple case of something like &lt;code&gt;type Foo&amp;lt;T&amp;gt; &#x3D; impl Bar&lt;/code&gt;. During this sprint, we began work on adding more support for more complex cases such as &lt;code&gt;type Foo&amp;lt;T&amp;gt;: Debug &#x3D; impl Bar where T: Debug&lt;/code&gt;. Additionally, some design work was done to support checking that these are well-formed.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#extend-chalk-to-support-rust-semantics&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;extend-chalk-to-support-rust-semantics&quot;&gt;&lt;/a&gt;Extend Chalk to support Rust semantics&lt;/h3&gt;
 &lt;p&gt;This goal overlaps a bit with &amp;quot;extracting a shared type library&amp;quot;, but is less about representing types themselves and more about expressing the semantics of those types. For example, consider the following program:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;trait Foo: Sized {
     fn foo(self) {}
@@ -242,21 +242,21 @@ impl Foo for u32 {}
 impl Foo for String {}
 
 fn main() {
-  let x = 0;
+  let x &#x3D; 0;
   x.foo();
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Prior to the current sprint, Chalk wouldn't be able to handle this properly; it wouldn't know that you can call &lt;code&gt;foo&lt;/code&gt; on &lt;code&gt;0&lt;/code&gt;. In fact, to be able to compile this program correctly, the compiler has to know that &lt;code&gt;0&lt;/code&gt; can never be a &lt;code&gt;String&lt;/code&gt;. Consider what would happen if you changed to impl for &lt;code&gt;String&lt;/code&gt; to &lt;code&gt;u64&lt;/code&gt;: rustc wouldn't know if you wanted &lt;code&gt;0&lt;/code&gt; to be a &lt;code&gt;u32&lt;/code&gt; or an &lt;code&gt;u64&lt;/code&gt;. That's essentially how Chalk would have seen this program prior to this sprint. However, Chalk now correctly handles this situation.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#handle-lifetime-constraints-in-rustc-integration&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;handle-lifetime-constraints-in-rustc-integration&quot;&gt;&lt;/a&gt;Handle lifetime constraints in rustc integration&lt;/h3&gt;
+&lt;p&gt;Prior to the current sprint, Chalk wouldn&#x27;t be able to handle this properly; it wouldn&#x27;t know that you can call &lt;code&gt;foo&lt;/code&gt; on &lt;code&gt;0&lt;/code&gt;. In fact, to be able to compile this program correctly, the compiler has to know that &lt;code&gt;0&lt;/code&gt; can never be a &lt;code&gt;String&lt;/code&gt;. Consider what would happen if you changed to impl for &lt;code&gt;String&lt;/code&gt; to &lt;code&gt;u64&lt;/code&gt;: rustc wouldn&#x27;t know if you wanted &lt;code&gt;0&lt;/code&gt; to be a &lt;code&gt;u32&lt;/code&gt; or an &lt;code&gt;u64&lt;/code&gt;. That&#x27;s essentially how Chalk would have seen this program prior to this sprint. However, Chalk now correctly handles this situation.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#handle-lifetime-constraints-in-rustc-integration&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;handle-lifetime-constraints-in-rustc-integration&quot;&gt;&lt;/a&gt;Handle lifetime constraints in rustc integration&lt;/h3&gt;
 &lt;p&gt;So, as part of trait solving Chalk and rustc may sometimes find one lifetime needs to outlive another, or that a type must outlive a lifetime. For example,&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;trait Foo&amp;lt;'a, 'b, T&amp;gt; where 'a: 'b, T: 'a  {}
+&lt;pre&gt;&lt;code&gt;trait Foo&amp;lt;&#x27;a, &#x27;b, T&amp;gt; where &#x27;a: &#x27;b, T: &#x27;a  {}
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Chalk doesn't solve these lifetime constraints on its own, instead it passes them back to rustc. During this sprint, we added the ability to express these where clauses in Chalk.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#other-work&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;other-work&quot;&gt;&lt;/a&gt;Other work&lt;/h3&gt;
-&lt;p&gt;There was a bunch of smaller stuff done during this sprint that doesn't really fit into separate goals. Chalk got a little bit smarter in its suggestions. We introduced &lt;code&gt;tracing&lt;/code&gt; for logging. We did some design work for the recursive solver. And of course, a fair amount of internal refactoring and cleanup. And of course, the rustc integration has been kept up with and updated for newer Chalk features.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#summer-vacation&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;summer-vacation&quot;&gt;&lt;/a&gt;Summer vacation&lt;/h2&gt;
-&lt;p&gt;It's been a busy year so far! Since the first sprint started in early February, we've made tons of progress. However, unlike the past couple sprints, we aren't going to immediately jump into our next one. Instead, we're taking a couple months for vacation, and we'll start back up in September. Until then, we won't have have weekly meetings on &lt;a href=&quot;https://rust-lang.zulipchat.com/#narrow/stream/144729-wg-traits&quot;&gt;Zulip&lt;/a&gt; nor will we have any defined goals. This is in part since some members might be taking a vacation. But also, code burnout is very real and a break every now and then can be helpful. In the meantime, there are a few items left to finish/cleanup.&lt;/p&gt;
-&lt;p&gt;If you're interested in helping, don't be discouraged! Zulip should still be fairly active, so feel free to drop by!&lt;/p&gt;
+&lt;p&gt;Chalk doesn&#x27;t solve these lifetime constraints on its own, instead it passes them back to rustc. During this sprint, we added the ability to express these where clauses in Chalk.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-work&quot;&gt;&lt;/a&gt;Other work&lt;/h3&gt;
+&lt;p&gt;There was a bunch of smaller stuff done during this sprint that doesn&#x27;t really fit into separate goals. Chalk got a little bit smarter in its suggestions. We introduced &lt;code&gt;tracing&lt;/code&gt; for logging. We did some design work for the recursive solver. And of course, a fair amount of internal refactoring and cleanup. And of course, the rustc integration has been kept up with and updated for newer Chalk features.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#summer-vacation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;summer-vacation&quot;&gt;&lt;/a&gt;Summer vacation&lt;/h2&gt;
+&lt;p&gt;It&#x27;s been a busy year so far! Since the first sprint started in early February, we&#x27;ve made tons of progress. However, unlike the past couple sprints, we aren&#x27;t going to immediately jump into our next one. Instead, we&#x27;re taking a couple months for vacation, and we&#x27;ll start back up in September. Until then, we won&#x27;t have have weekly meetings on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/144729-wg-traits&quot;&gt;Zulip&lt;/a&gt; nor will we have any defined goals. This is in part since some members might be taking a vacation. But also, code burnout is very real and a break every now and then can be helpful. In the meantime, there are a few items left to finish/cleanup.&lt;/p&gt;
+&lt;p&gt;If you&#x27;re interested in helping, don&#x27;t be discouraged! Zulip should still be fairly active, so feel free to drop by!&lt;/p&gt;
 </content>
 
         <author>
@@ -270,16 +270,16 @@ fn main() {
         <published>2020-07-09T00:00:00+00:00</published>
         <updated>2020-07-09T00:00:00+00:00</updated>
         <id>https://blog.rust-lang.org/inside-rust/2020/07/09/lang-team-path-to-membership.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/09/lang-team-path-to-membership.html">&lt;p&gt;This week the &lt;a href=&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; design meeting was on the topic of the &amp;quot;path to
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/09/lang-team-path-to-membership.html">&lt;p&gt;This week the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; design meeting was on the topic of the &amp;quot;path to
 membership&amp;quot;. This blog post gives a brief summary; you can also read
-the &lt;a href=&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-08-lang-team-path-to-membership.md&quot;&gt;minutes&lt;/a&gt; or view the &lt;a href=&quot;https://youtu.be/SeH-hZgDG1Y&quot;&gt;recording&lt;/a&gt;.&lt;/p&gt;
+the &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-08-lang-team-path-to-membership.md&quot;&gt;minutes&lt;/a&gt; or view the &lt;a href&#x3D;&quot;https://youtu.be/SeH-hZgDG1Y&quot;&gt;recording&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The premise of the meeting was that the lang team has never had a
-particularly clear &lt;em&gt;path to membership&lt;/em&gt; -- i.e., it's been hard to say
+particularly clear &lt;em&gt;path to membership&lt;/em&gt; -- i.e., it&#x27;s been hard to say
 exactly what are the kinds of steps that one should be taking if you
 would like to become a member of the lang team. However, with the
-shift to &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2936/&quot;&gt;major change proposals&lt;/a&gt; and in particular &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2856&quot;&gt;project groups&lt;/a&gt;,
-we're starting to see what such a path looks like.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#expectations-for-a-team-member&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;expectations-for-a-team-member&quot;&gt;&lt;/a&gt;Expectations for a team member&lt;/h3&gt;
+shift to &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2936/&quot;&gt;major change proposals&lt;/a&gt; and in particular &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2856&quot;&gt;project groups&lt;/a&gt;,
+we&#x27;re starting to see what such a path looks like.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#expectations-for-a-team-member&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;expectations-for-a-team-member&quot;&gt;&lt;/a&gt;Expectations for a team member&lt;/h3&gt;
 &lt;p&gt;As part of our discussion, we came up with a relatively complete list of
 what we see as the &amp;quot;expectations for a lang-team member&amp;quot;. To be clear,
 this is the full set of possible expectations: many members only have the
@@ -299,11 +299,11 @@ time to do some subset of these things at any given time.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;Monitor and respond to communication in Zulip&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;#a-sketch-for-a-path-to-membership&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;a-sketch-for-a-path-to-membership&quot;&gt;&lt;/a&gt;A sketch for a path to membership&lt;/h3&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#a-sketch-for-a-path-to-membership&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-sketch-for-a-path-to-membership&quot;&gt;&lt;/a&gt;A sketch for a path to membership&lt;/h3&gt;
 &lt;p&gt;The core idea for a path to membership is that we want some set of
 steps that let us see people doing the things and demonstrating the
 qualities we expect from lang-team members, so that we can tell how it
-is working (and so that people can experience what it's like).&lt;/p&gt;
+is working (and so that people can experience what it&#x27;s like).&lt;/p&gt;
 &lt;p&gt;This suggests that a &amp;quot;path to membership&amp;quot; might look something like this:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Lead or be heavily involved in one or more project groups&lt;/li&gt;
@@ -315,49 +315,49 @@ is working (and so that people can experience what it's like).&lt;/p&gt;
 things already and approach to see if they are interested in lang-team
 membership.  If so, we can look for opportunities to complete some of
 the other bullets.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#a-bit-of-background-project-groups&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;a-bit-of-background-project-groups&quot;&gt;&lt;/a&gt;A bit of background: project groups&lt;/h2&gt;
-&lt;p&gt;We've not been blogging a lot about the idea of project groups and the
+&lt;h2&gt;&lt;a href&#x3D;&quot;#a-bit-of-background-project-groups&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-bit-of-background-project-groups&quot;&gt;&lt;/a&gt;A bit of background: project groups&lt;/h2&gt;
+&lt;p&gt;We&#x27;ve not been blogging a lot about the idea of project groups and the
 like so let me give just a bit of background. In short, the idea is
 that we are trying to &amp;quot;intercept&amp;quot; the RFC process earlier by
 introducing a &amp;quot;pre-step&amp;quot; called a Major Change Proposal
 (MCP). (Terminology still subject to change as we experiment here.)&lt;/p&gt;
-&lt;p&gt;The idea is that if you have an idea you'd like to pursue, you can
+&lt;p&gt;The idea is that if you have an idea you&#x27;d like to pursue, you can
 file an MCP issue and describe the high-level details. If the idea
 catches the eye of somebody within the team, we will create a
 &lt;strong&gt;project group&lt;/strong&gt; to pursue the idea, with that member serving as the
 &lt;strong&gt;lang team liaison&lt;/strong&gt; and you (or others) serving as the &lt;strong&gt;group
 lead&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;A &lt;strong&gt;project group&lt;/strong&gt; doesn't have to be a huge group of people. It
+&lt;p&gt;A &lt;strong&gt;project group&lt;/strong&gt; doesn&#x27;t have to be a huge group of people. It
 might even just be one or two people and a dedicated Zulip stream.
 The idea is that the group will work out the design space and author
 RFCs; once the RFCs are accepted, the group can also pursue the
 implementation (though the set of people involved may shift at that
 point), and hopefully see the idea all the way through to
 stabilization.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#growing-the-set-of-folks-who-can-serve-as-liaison&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;growing-the-set-of-folks-who-can-serve-as-liaison&quot;&gt;&lt;/a&gt;Growing the set of folks who can serve as liaison&lt;/h3&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#growing-the-set-of-folks-who-can-serve-as-liaison&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;growing-the-set-of-folks-who-can-serve-as-liaison&quot;&gt;&lt;/a&gt;Growing the set of folks who can serve as liaison&lt;/h3&gt;
 &lt;p&gt;One of the things we talked about was the proper role for a project
 group liaison. As described in the previous paragraph, a liaison was
 basically a member of the team who would follow along with the design
 and help to keep the rest of the team up to date.&lt;/p&gt;
 &lt;p&gt;But we realized that if we limit liaisons to team members, then this
 is incompatible with this idea of a &amp;quot;path to membership&amp;quot; where people
-can &amp;quot;trial run&amp;quot; lang-team activities.  It's also somewhat incompatible
+can &amp;quot;trial run&amp;quot; lang-team activities.  It&#x27;s also somewhat incompatible
 with a core goal, which is that the experience of someone who is &lt;em&gt;not&lt;/em&gt;
 on a team and someone who &lt;em&gt;is&lt;/em&gt; on a team ought to be awfully close,
 and that we should be careful when creating distinctions.&lt;/p&gt;
-&lt;p&gt;Therefore, we discussed the idea of saying that liaisons don't have to
+&lt;p&gt;Therefore, we discussed the idea of saying that liaisons don&#x27;t have to
 be team members, they just have to be people who are heavily involved
 in the project and who can be trusted to create regular updates for
 the lang-team and keep the rest of the team in the loop.&lt;/p&gt;
 &lt;p&gt;In particular, this can also be a useful stepping stone towards full
-lang-team membership -- although it doesn't have to be. It's useful to
-have people serve as liaisons even if they don't really have time or
+lang-team membership -- although it doesn&#x27;t have to be. It&#x27;s useful to
+have people serve as liaisons even if they don&#x27;t really have time or
 interest in being on the lang team.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#conclusion&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h3&gt;
-&lt;p&gt;We concluded that we'll start experimenting with &amp;quot;non-team-member
+&lt;h3&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;We concluded that we&#x27;ll start experimenting with &amp;quot;non-team-member
 liaisons&amp;quot;, and that people who are maybe interested in that role can
 reach out privately to Josh Triplett or myself
-(nikomatsakis). Further, we'll work to write up the &amp;quot;path to
+(nikomatsakis). Further, we&#x27;ll work to write up the &amp;quot;path to
 membership&amp;quot; as well as the expectations for team membership.&lt;/p&gt;
 </content>
 
@@ -372,63 +372,63 @@ membership&amp;quot; as well as the expectations for team membership.&lt;/p&gt;
         <published>2020-07-08T00:00:00+00:00</published>
         <updated>2020-07-08T00:00:00+00:00</updated>
         <id>https://blog.rust-lang.org/inside-rust/2020/07/08/lang-team-design-meeting-update.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/08/lang-team-design-meeting-update.html">&lt;p&gt;Hello! Did you know that the &lt;a href=&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; now has regular design
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/08/lang-team-design-meeting-update.html">&lt;p&gt;Hello! Did you know that the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; now has regular design
 meetings? We use these meetings to dig deeper into the output of
 active project groups. After the meeting, we typically post a
-recording to &lt;a href=&quot;https://www.youtube.com/playlist?list=PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa&quot;&gt;YouTube&lt;/a&gt; as well as some &lt;a href=&quot;https://lang-team.rust-lang.org/minutes.html&quot;&gt;minutes into the lang-team
+recording to &lt;a href&#x3D;&quot;https://www.youtube.com/playlist?list&#x3D;PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa&quot;&gt;YouTube&lt;/a&gt; as well as some &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/minutes.html&quot;&gt;minutes into the lang-team
 repository&lt;/a&gt;. I wanted to write a quick update listing out some of
-the meetings we've had recently as well as some of our upcoming
+the meetings we&#x27;ve had recently as well as some of our upcoming
 meetings.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#recent-lang-team-design-meetings&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;recent-lang-team-design-meetings&quot;&gt;&lt;/a&gt;Recent lang-team design meetings&lt;/h3&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#recent-lang-team-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;recent-lang-team-design-meetings&quot;&gt;&lt;/a&gt;Recent lang-team design meetings&lt;/h3&gt;
 &lt;p&gt;We recently held two lang-team design meetings:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The &lt;strong&gt;const evaluation project group&lt;/strong&gt; discussed the overall state
-of const evaluation and a &lt;a href=&quot;https://github.com/nikomatsakis/skill-tree#what-is-a-skill-tree&quot;&gt;&amp;quot;skill tree&amp;quot;&lt;/a&gt; that they've been
+of const evaluation and a &lt;a href&#x3D;&quot;https://github.com/nikomatsakis/skill-tree#what-is-a-skill-tree&quot;&gt;&amp;quot;skill tree&amp;quot;&lt;/a&gt; that they&#x27;ve been
 developing to show &lt;strong&gt;what some of the next steps are&lt;/strong&gt; and how they
 relate to one another.  We also discussed &lt;strong&gt;what &amp;quot;unsafe&amp;quot; might mean
-in a const evaluation context&lt;/strong&gt; and in particular &lt;a href=&quot;https://www.ralfj.de/blog/2018/07/19/const.html&quot;&gt;Ralf's proposal to
+in a const evaluation context&lt;/strong&gt; and in particular &lt;a href&#x3D;&quot;https://www.ralfj.de/blog/2018/07/19/const.html&quot;&gt;Ralf&#x27;s proposal to
 consider &amp;quot;things that may not be const-evaluable&amp;quot; as &amp;quot;unsafe&amp;quot; in a
 const fn&lt;/a&gt;.
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-06-24-const-eval-unsafe-and-skill-tree.md&quot;&gt;Minutes&lt;/a&gt;, &lt;a href=&quot;https://youtu.be/b3p2vX8wZ_c&quot;&gt;recording&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-06-24-const-eval-unsafe-and-skill-tree.md&quot;&gt;Minutes&lt;/a&gt;, &lt;a href&#x3D;&quot;https://youtu.be/b3p2vX8wZ_c&quot;&gt;recording&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Safe transmute project group&lt;/strong&gt;: We discussed the approaches explored
 by the safe transmute group, and in particular did a bit of a &lt;strong&gt;deep
-dive into the &lt;a href=&quot;https://github.com/jswrenn/typic&quot;&gt;exciting &lt;code&gt;typic&lt;/code&gt; crate&lt;/a&gt;&lt;/strong&gt; being developed by
-&lt;a href=&quot;https://github.com/jswrenn&quot;&gt;jswrenn&lt;/a&gt;. We looked at what it might make sense to pursue as an
+dive into the &lt;a href&#x3D;&quot;https://github.com/jswrenn/typic&quot;&gt;exciting &lt;code&gt;typic&lt;/code&gt; crate&lt;/a&gt;&lt;/strong&gt; being developed by
+&lt;a href&#x3D;&quot;https://github.com/jswrenn&quot;&gt;jswrenn&lt;/a&gt;. We looked at what it might make sense to pursue as an
 &lt;strong&gt;immediate RFC&lt;/strong&gt; and what ought to stay in the realm of library experimentation
 for the time being.
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-01-safe-transmute-typic.md&quot;&gt;Minutes&lt;/a&gt;, &lt;a href=&quot;https://youtu.be/3aw-5Fcyo7s&quot;&gt;recording&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-01-safe-transmute-typic.md&quot;&gt;Minutes&lt;/a&gt;, &lt;a href&#x3D;&quot;https://youtu.be/3aw-5Fcyo7s&quot;&gt;recording&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;#how-lang-team-design-meeting-proposals-work&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-lang-team-design-meeting-proposals-work&quot;&gt;&lt;/a&gt;How lang-team design meeting proposals work&lt;/h3&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#how-lang-team-design-meeting-proposals-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-lang-team-design-meeting-proposals-work&quot;&gt;&lt;/a&gt;How lang-team design meeting proposals work&lt;/h3&gt;
 &lt;p&gt;Every proposed meeting begins with an issue on the lang-team
-repository. If you're curious, you can take a look at the &lt;a href=&quot;https://github.com/rust-lang/lang-team/issues?q=label%3Ameeting-proposal&quot;&gt;open issues
+repository. If you&#x27;re curious, you can take a look at the &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues?q&#x3D;label%3Ameeting-proposal&quot;&gt;open issues
 with the &lt;code&gt;meeting proposal&lt;/code&gt; label&lt;/a&gt; to get an idea of what
 meetings are being considered; if a meeting has been scheduled, it
-will also be tagged with &lt;a href=&quot;https://github.com/rust-lang/lang-team/issues?q=label%3Ameeting-scheduled&quot;&gt;&lt;code&gt;meeting scheduled&lt;/code&gt;&lt;/a&gt; and have some comments as
+will also be tagged with &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues?q&#x3D;label%3Ameeting-scheduled&quot;&gt;&lt;code&gt;meeting scheduled&lt;/code&gt;&lt;/a&gt; and have some comments as
 to the current date.&lt;/p&gt;
 &lt;p&gt;We currently schedule meetings in a rather ad-hoc fashion, basically
-hammering it out over Zulip. I'd probably like to move us to a more
+hammering it out over Zulip. I&#x27;d probably like to move us to a more
 &amp;quot;regularly scheduled&amp;quot; scheduling meeting, like the compiler team, but
-we haven't adopted such a scheme yet.&lt;/p&gt;
+we haven&#x27;t adopted such a scheme yet.&lt;/p&gt;
 &lt;p&gt;Anyone can propose a design meeting, though they are meant to be
 proposed mostly in conjunction with active project groups or other
 ongoing discussions, and not just out of the blue. Moreover, anyone is
 welcome to listen in on a design meeting, though you should be aware
 that the meeting is typically being recorded. Zoom links are available
 upon request.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#upcoming-lang-team-meeting-proposals&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;upcoming-lang-team-meeting-proposals&quot;&gt;&lt;/a&gt;Upcoming lang-team meeting proposals&lt;/h3&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#upcoming-lang-team-meeting-proposals&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-lang-team-meeting-proposals&quot;&gt;&lt;/a&gt;Upcoming lang-team meeting proposals&lt;/h3&gt;
 &lt;p&gt;We currently have two pending lang-team meeting proposals:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;A proposal to discuss the path to lang-team membership (&lt;a href=&quot;https://github.com/rust-lang/lang-team/issues/32&quot;&gt;rust-lang/lang-team#32&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;A proposal to discuss the path to lang-team membership (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/32&quot;&gt;rust-lang/lang-team#32&lt;/a&gt;).&lt;/li&gt;
 &lt;li&gt;A proposal to discuss enforcing bounds on type aliases and how we
-might phase that in (&lt;a href=&quot;https://github.com/rust-lang/lang-team/issues/25&quot;&gt;rust-lang/lang-team#25&lt;/a&gt;).&lt;/li&gt;
+might phase that in (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/25&quot;&gt;rust-lang/lang-team#25&lt;/a&gt;).&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;We expect to be scheduling those soon, and we'll update the issues
+&lt;p&gt;We expect to be scheduling those soon, and we&#x27;ll update the issues
 with dates when they are available.&lt;/p&gt;
 </content>
 
@@ -447,8 +447,8 @@ with dates when they are available.&lt;/p&gt;
 We’re trialing a reorganization of standard library activities between the Libs and Compiler teams.
 Going forward, the Libs team will own just the public API of the standard library, and the Compiler team will own its implementation.
 The goal of this separation of concerns is to better suit the interests of both teams to better support the needs of the standard library.
-It's a lot like the existing relationship between the Lang and Compiler teams, where the Lang team owns the Rust language design and the Compiler team owns the code that implements it.
-We'll re-evaluate how the trial is going later in the year and decide whether or not to make the change permanent.&lt;/p&gt;
+It&#x27;s a lot like the existing relationship between the Lang and Compiler teams, where the Lang team owns the Rust language design and the Compiler team owns the code that implements it.
+We&#x27;ll re-evaluate how the trial is going later in the year and decide whether or not to make the change permanent.&lt;/p&gt;
 &lt;p&gt;The Libs team traditionally selects members who like to design APIs.
 A lot of bandwidth is spent supporting libraries in the wider Rust ecosystem and working to consolidate idioms into standard APIs.
 This leaves little room for development of the standard library itself, which takes a lot of consistent and dedicated attention.&lt;/p&gt;
@@ -460,9 +460,9 @@ The standard library is exactly the kind of codebase the Compiler team already h
 This is just a shared understanding between the Libs and Compiler teams to make standard library activities more focused.&lt;/p&gt;
 &lt;p&gt;Do any of those activities appeal to you?
 Maybe you’re interested in identifying and capturing idioms as standard APIs.
-If so, you can find the Libs team &lt;a href=&quot;https://forge.rust-lang.org/libs/index.html&quot;&gt;here&lt;/a&gt;.
+If so, you can find the Libs team &lt;a href&#x3D;&quot;https://forge.rust-lang.org/libs/index.html&quot;&gt;here&lt;/a&gt;.
 Maybe you’d like to work on a big codebase used by almost every Rust developer.
-If so, you can find the Compiler team &lt;a href=&quot;https://forge.rust-lang.org/compiler/index.html&quot;&gt;here&lt;/a&gt;.
+If so, you can find the Compiler team &lt;a href&#x3D;&quot;https://forge.rust-lang.org/compiler/index.html&quot;&gt;here&lt;/a&gt;.
 Maybe you like the sound of both and anything in-between! Whatever the case, the standard library has something for you.&lt;/p&gt;
 </content>
 
@@ -477,61 +477,61 @@ Maybe you like the sound of both and anything in-between! Whatever the case, the
         <published>2020-06-29T00:00:00+00:00</published>
         <updated>2020-06-29T00:00:00+00:00</updated>
         <id>https://blog.rust-lang.org/inside-rust/2020/06/29/lto-improvements.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/06/29/lto-improvements.html">&lt;p&gt;Thanks to the work of &lt;a href=&quot;https://github.com/nnethercote&quot;&gt;Nicholas Nethercote&lt;/a&gt; and &lt;a href=&quot;https://github.com/alexcrichton/&quot;&gt;Alex Crichton&lt;/a&gt;, there have been some recent improvements that reduce the size of compiled libraries, and improves the compile-time performance, particularly when using LTO. This post dives into some of the details of what changed, and an estimation of the benefits.&lt;/p&gt;
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/06/29/lto-improvements.html">&lt;p&gt;Thanks to the work of &lt;a href&#x3D;&quot;https://github.com/nnethercote&quot;&gt;Nicholas Nethercote&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/alexcrichton/&quot;&gt;Alex Crichton&lt;/a&gt;, there have been some recent improvements that reduce the size of compiled libraries, and improves the compile-time performance, particularly when using LTO. This post dives into some of the details of what changed, and an estimation of the benefits.&lt;/p&gt;
 &lt;p&gt;These changes have been added incrementally over the past three months, with the latest changes landing just a few days ago on the nightly channel. The bulk of the improvements will be found in the 1.46 stable release (available on 2020-08-27). It would be great for any projects that use LTO to test it out on the nightly channel (starting from the 2020-06-13 release) and report any issues that arise.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#background&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;background&quot;&gt;&lt;/a&gt;Background&lt;/h2&gt;
-&lt;p&gt;When compiling a library, &lt;code&gt;rustc&lt;/code&gt; saves the output in an &lt;code&gt;rlib&lt;/code&gt; file which is an &lt;a href=&quot;https://en.wikipedia.org/wiki/Ar_(Unix)&quot;&gt;archive file&lt;/a&gt;. This has historically contained the following:&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#background&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;background&quot;&gt;&lt;/a&gt;Background&lt;/h2&gt;
+&lt;p&gt;When compiling a library, &lt;code&gt;rustc&lt;/code&gt; saves the output in an &lt;code&gt;rlib&lt;/code&gt; file which is an &lt;a href&#x3D;&quot;https://en.wikipedia.org/wiki/Ar_(Unix)&quot;&gt;archive file&lt;/a&gt;. This has historically contained the following:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Object code, which is the result of code generation. This is used during regular linking.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://llvm.org/docs/BitCodeFormat.html&quot;&gt;LLVM bitcode&lt;/a&gt;, which is a binary representation of LLVM's intermediate representation. This can be used for &lt;a href=&quot;https://llvm.org/docs/LinkTimeOptimization.html&quot;&gt;Link Time Optimization&lt;/a&gt; (LTO).&lt;/li&gt;
-&lt;li&gt;Rust-specific metadata, which covers &lt;a href=&quot;https://github.com/rust-lang/rust/blob/0b66a89735305ebac93894461559576495ab920e/src/librustc_metadata/rmeta/mod.rs#L172-L214&quot;&gt;a wide range of data&lt;/a&gt; about the crate.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://llvm.org/docs/BitCodeFormat.html&quot;&gt;LLVM bitcode&lt;/a&gt;, which is a binary representation of LLVM&#x27;s intermediate representation. This can be used for &lt;a href&#x3D;&quot;https://llvm.org/docs/LinkTimeOptimization.html&quot;&gt;Link Time Optimization&lt;/a&gt; (LTO).&lt;/li&gt;
+&lt;li&gt;Rust-specific metadata, which covers &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/0b66a89735305ebac93894461559576495ab920e/src/librustc_metadata/rmeta/mod.rs#L172-L214&quot;&gt;a wide range of data&lt;/a&gt; about the crate.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;LTO is an optimization technique that can perform whole-program analysis. It analyzes all of the bitcode from every library at once, and performs optimizations and code generation. &lt;code&gt;rustc&lt;/code&gt; supports several forms of LTO:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Fat LTO. This performs &amp;quot;full&amp;quot; LTO, which can take a long time to complete and may require a significant amount of memory.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.llvm.org/2016/06/thinlto-scalable-and-incremental-lto.html&quot;&gt;Thin LTO&lt;/a&gt;. This LTO variant supports much better parallelism than fat LTO. It can achieve similar performance improvements as fat LTO (sometimes even better!), while taking much less total time by taking advantage of more CPUs.&lt;/li&gt;
-&lt;li&gt;Thin-local LTO. By default, &lt;code&gt;rustc&lt;/code&gt; will split a crate into multiple &amp;quot;codegen units&amp;quot; so that they can be processed in parallel by LLVM. But this prevents some optimizations as code is separated into different codegen units, and is handled independently. Thin-local LTO will perform thin LTO across the codegen units within a single crate, bringing back some optimizations that would otherwise be lost by the separation. This is &lt;code&gt;rustc&lt;/code&gt;'s default behavior if opt-level is greater than 0.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;http://blog.llvm.org/2016/06/thinlto-scalable-and-incremental-lto.html&quot;&gt;Thin LTO&lt;/a&gt;. This LTO variant supports much better parallelism than fat LTO. It can achieve similar performance improvements as fat LTO (sometimes even better!), while taking much less total time by taking advantage of more CPUs.&lt;/li&gt;
+&lt;li&gt;Thin-local LTO. By default, &lt;code&gt;rustc&lt;/code&gt; will split a crate into multiple &amp;quot;codegen units&amp;quot; so that they can be processed in parallel by LLVM. But this prevents some optimizations as code is separated into different codegen units, and is handled independently. Thin-local LTO will perform thin LTO across the codegen units within a single crate, bringing back some optimizations that would otherwise be lost by the separation. This is &lt;code&gt;rustc&lt;/code&gt;&#x27;s default behavior if opt-level is greater than 0.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;&lt;a href=&quot;#what-has-changed&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;what-has-changed&quot;&gt;&lt;/a&gt;What has changed&lt;/h2&gt;
-&lt;p&gt;Changes have been made to both &lt;code&gt;rustc&lt;/code&gt; and Cargo to control which libraries should include object code and which should include bitcode based on the project's &lt;a href=&quot;https://doc.rust-lang.org/cargo/reference/profiles.html&quot;&gt;profile&lt;/a&gt; LTO settings. If the project is not using LTO, then Cargo will instruct &lt;code&gt;rustc&lt;/code&gt; to not place bitcode in the rlib files, which should reduce the amount of disk space used. This may have a small improvement in performance since &lt;code&gt;rustc&lt;/code&gt; no longer needs to compress and write out the bitcode.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-has-changed&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-has-changed&quot;&gt;&lt;/a&gt;What has changed&lt;/h2&gt;
+&lt;p&gt;Changes have been made to both &lt;code&gt;rustc&lt;/code&gt; and Cargo to control which libraries should include object code and which should include bitcode based on the project&#x27;s &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/profiles.html&quot;&gt;profile&lt;/a&gt; LTO settings. If the project is not using LTO, then Cargo will instruct &lt;code&gt;rustc&lt;/code&gt; to not place bitcode in the rlib files, which should reduce the amount of disk space used. This may have a small improvement in performance since &lt;code&gt;rustc&lt;/code&gt; no longer needs to compress and write out the bitcode.&lt;/p&gt;
 &lt;p&gt;If the project is using LTO, then Cargo will instruct &lt;code&gt;rustc&lt;/code&gt; to not place object code in the rlib files, avoiding the expensive code generation step. This should improve the build time when building from scratch, and reduce the amount of disk space used.&lt;/p&gt;
 &lt;p&gt;Two &lt;code&gt;rustc&lt;/code&gt; flags are now available to control how the rlib is constructed:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/nightly/rustc/codegen-options/#linker-plugin-lto&quot;&gt;&lt;code&gt;-C linker-plugin-lto&lt;/code&gt;&lt;/a&gt; causes &lt;code&gt;rustc&lt;/code&gt; to only place bitcode in the &lt;code&gt;.o&lt;/code&gt; files, and skips code generation. This flag was &lt;a href=&quot;https://github.com/rust-lang/rust/issues/49879&quot;&gt;originally added&lt;/a&gt; to support cross-language LTO. Cargo now uses this when the rlib is only intended for use with LTO.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/nightly/rustc/codegen-options/#embed-bitcode&quot;&gt;&lt;code&gt;-C embed-bitcode=no&lt;/code&gt;&lt;/a&gt; causes &lt;code&gt;rustc&lt;/code&gt; to avoid placing bitcode in the rlib altogether. Cargo uses this when LTO is not being used, which reduces some disk space usage.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/rustc/codegen-options/#linker-plugin-lto&quot;&gt;&lt;code&gt;-C linker-plugin-lto&lt;/code&gt;&lt;/a&gt; causes &lt;code&gt;rustc&lt;/code&gt; to only place bitcode in the &lt;code&gt;.o&lt;/code&gt; files, and skips code generation. This flag was &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/49879&quot;&gt;originally added&lt;/a&gt; to support cross-language LTO. Cargo now uses this when the rlib is only intended for use with LTO.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/rustc/codegen-options/#embed-bitcode&quot;&gt;&lt;code&gt;-C embed-bitcode&#x3D;no&lt;/code&gt;&lt;/a&gt; causes &lt;code&gt;rustc&lt;/code&gt; to avoid placing bitcode in the rlib altogether. Cargo uses this when LTO is not being used, which reduces some disk space usage.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Additionally, the method in which bitcode is embedded in the rlib has changed. Previously, &lt;code&gt;rustc&lt;/code&gt; would place compressed bitcode as a &lt;code&gt;.bc.z&lt;/code&gt; file in the rlib archive. Now, the bitcode is placed as an uncompressed section within each &lt;code&gt;.o&lt;/code&gt; &lt;a href=&quot;https://en.wikipedia.org/wiki/Object_file&quot;&gt;object file&lt;/a&gt; in the rlib archive. This can sometimes be a small performance benefit, because it avoids cost of compressing the bitcode, and sometimes can be slower due to needing to write more data to disk. This change helped simplify the implementation, and also matches the behavior of clang's &lt;code&gt;-fembed-bitcode&lt;/code&gt; option (typically used with Apple's iOS-based operating systems).&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#improvements&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;improvements&quot;&gt;&lt;/a&gt;Improvements&lt;/h2&gt;
+&lt;p&gt;Additionally, the method in which bitcode is embedded in the rlib has changed. Previously, &lt;code&gt;rustc&lt;/code&gt; would place compressed bitcode as a &lt;code&gt;.bc.z&lt;/code&gt; file in the rlib archive. Now, the bitcode is placed as an uncompressed section within each &lt;code&gt;.o&lt;/code&gt; &lt;a href&#x3D;&quot;https://en.wikipedia.org/wiki/Object_file&quot;&gt;object file&lt;/a&gt; in the rlib archive. This can sometimes be a small performance benefit, because it avoids cost of compressing the bitcode, and sometimes can be slower due to needing to write more data to disk. This change helped simplify the implementation, and also matches the behavior of clang&#x27;s &lt;code&gt;-fembed-bitcode&lt;/code&gt; option (typically used with Apple&#x27;s iOS-based operating systems).&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#improvements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improvements&quot;&gt;&lt;/a&gt;Improvements&lt;/h2&gt;
 &lt;p&gt;The following is a summary of improvements observed on a small number of real-world projects of small and medium size. Improvements of a project will depend heavily on the code, optimization settings, operating system, environment, and hardware. These were recorded with the 2020-06-21 nightly release on Linux with parallel job settings between 2 and 32.&lt;/p&gt;
 &lt;p&gt;The performance wins for debug builds were anywhere from 0% to 4.7% faster. Larger binary crates tended to fare better than smaller library crates.&lt;/p&gt;
 &lt;p&gt;LTO builds were recorded anywhere from 4% to 20% faster. Thin LTO fared consistently better than fat LTO.&lt;/p&gt;
 &lt;p&gt;The number of parallel jobs also had a large impact on the amount of improvement. Lower parallel job counts saw substantially more benefit than higher ones. A project built with &lt;code&gt;-j2&lt;/code&gt; can be 20% faster, whereas the same project at &lt;code&gt;-j32&lt;/code&gt; would only be 1% faster. Presumably this is because the code-generation phase benefits from higher concurrency, so it was taking a relatively smaller total percentage of time.&lt;/p&gt;
 &lt;p&gt;The overall target directory size is typically 20% to 30% smaller for debug builds. LTO builds did not see as much of an improvement, ranging from 11% to 19% smaller.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#more-details&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;more-details&quot;&gt;&lt;/a&gt;More details&lt;/h2&gt;
-&lt;p&gt;Nicholas Nethercote wrote about the journey to implement these changes at &lt;a href=&quot;https://blog.mozilla.org/nnethercote/2020/04/24/how-to-speed-up-the-rust-compiler-in-2020/&quot;&gt;https://blog.mozilla.org/nnethercote/2020/04/24/how-to-speed-up-the-rust-compiler-in-2020/&lt;/a&gt;. It took several PRs across &lt;code&gt;rustc&lt;/code&gt; and Cargo to make this happen:&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#more-details&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;more-details&quot;&gt;&lt;/a&gt;More details&lt;/h2&gt;
+&lt;p&gt;Nicholas Nethercote wrote about the journey to implement these changes at &lt;a href&#x3D;&quot;https://blog.mozilla.org/nnethercote/2020/04/24/how-to-speed-up-the-rust-compiler-in-2020/&quot;&gt;https://blog.mozilla.org/nnethercote/2020/04/24/how-to-speed-up-the-rust-compiler-in-2020/&lt;/a&gt;. It took several PRs across &lt;code&gt;rustc&lt;/code&gt; and Cargo to make this happen:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/66598&quot;&gt;#66598&lt;/a&gt; — The original approach, that was decided to be too simplistic.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/issues/66961&quot;&gt;#66961&lt;/a&gt; — The issue outlining the strategy that was employed.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/70289&quot;&gt;#70289&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/rust/pull/70297&quot;&gt;#70297&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/rust/pull/70345&quot;&gt;#70345&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/rust/pull/70384&quot;&gt;#70384&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/rust/pull/70644&quot;&gt;#70644&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/rust/pull/70729&quot;&gt;#70729&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/rust/pull/71374&quot;&gt;#71374&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/rust/pull/71716&quot;&gt;#71716&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/rust/pull/71754&quot;&gt;#71754&lt;/a&gt; — A series of refactorings to prepare for the new behavior and do some cleanup.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/71323&quot;&gt;#71323&lt;/a&gt; — Introduced a new flag to control whether or not bitcode is embedded.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/70458&quot;&gt;#70458&lt;/a&gt; &lt;a href=&quot;https://github.com/rust-lang/rust/pull/71528&quot;&gt;#71528&lt;/a&gt; — Switched how LLVM bitcode is embedded.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/cargo/pull/8066&quot;&gt;#8066&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/cargo/pull/8192&quot;&gt;#8192&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/cargo/pull/8204&quot;&gt;#8204&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/cargo/pull/8226&quot;&gt;#8226&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/cargo/pull/8254&quot;&gt;#8254&lt;/a&gt;
-&lt;a href=&quot;https://github.com/rust-lang/cargo/pull/8349&quot;&gt;#8349&lt;/a&gt; — The series of Cargo changes to implement the new functionality.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/66598&quot;&gt;#66598&lt;/a&gt; — The original approach, that was decided to be too simplistic.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/66961&quot;&gt;#66961&lt;/a&gt; — The issue outlining the strategy that was employed.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70289&quot;&gt;#70289&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70297&quot;&gt;#70297&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70345&quot;&gt;#70345&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70384&quot;&gt;#70384&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70644&quot;&gt;#70644&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70729&quot;&gt;#70729&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/71374&quot;&gt;#71374&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/71716&quot;&gt;#71716&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/71754&quot;&gt;#71754&lt;/a&gt; — A series of refactorings to prepare for the new behavior and do some cleanup.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/71323&quot;&gt;#71323&lt;/a&gt; — Introduced a new flag to control whether or not bitcode is embedded.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70458&quot;&gt;#70458&lt;/a&gt; &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/71528&quot;&gt;#71528&lt;/a&gt; — Switched how LLVM bitcode is embedded.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8066&quot;&gt;#8066&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8192&quot;&gt;#8192&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8204&quot;&gt;#8204&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8226&quot;&gt;#8226&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8254&quot;&gt;#8254&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8349&quot;&gt;#8349&lt;/a&gt; — The series of Cargo changes to implement the new functionality.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;&lt;a href=&quot;#conclusion&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Although this is a conceptually simple change (LTO=bitcode, non-LTO=object code), it took quite a bit of preparation and work to make it happen. There were many edge cases and platform-specific behaviors to consider, and testing to perform. And, of course, the obligatory bike-shedding over the names of new command-line flags. This resulted in quite a substantial improvement in performance, particularly for LTO builds, and a huge improvement in disk space usage. Thanks to all of those that helped to make this happen!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Although this is a conceptually simple change (LTO&#x3D;bitcode, non-LTO&#x3D;object code), it took quite a bit of preparation and work to make it happen. There were many edge cases and platform-specific behaviors to consider, and testing to perform. And, of course, the obligatory bike-shedding over the names of new command-line flags. This resulted in quite a substantial improvement in performance, particularly for LTO builds, and a huge improvement in disk space usage. Thanks to all of those that helped to make this happen!&lt;/p&gt;
 </content>
 
         <author>
