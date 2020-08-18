@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Laying the foundation for Rust&#x27;s future | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Laying the foundation for Rust&#x27;s future | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Laying the foundation for Rust&#x27;s future | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Laying the foundation for Rust&#x27;s future" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Laying the foundation for Rust&#x27;s future</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 18, 2020 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust project was originally <a href="https://github.com/rust-lang/rust/commit/c01efc669f09508b55eced32d3c88702578a7c3e">conceived in 2010</a> (depending on how you count, you might even say <a href="https://github.com/graydon/rust-prehistory/commit/b0fd440798ab3cfb05c60a1a1bd2894e1618479e">2006</a>!) as a <a href="https://research.mozilla.org/">Mozilla Research</a> project, but the long term goal has always been to establish Rust as a self-sustaining project. In 2015, <a href="https://blog.rust-lang.org/2015/05/15/Rust-1.0.html">with the launch of Rust 1.0</a>, Rust established its project direction and governance independent of the Mozilla organization. Since then, Rust has been operating as an autonomous organization, with Mozilla being a prominent and consistent financial and legal sponsor.</p>
+<p>Mozilla was, and continues to be, excited by the opportunity for the Rust language to be widely used, <em>and supported</em>, by many companies throughout the industry. Today, many companies, both large and small, are using Rust in more diverse and more significant ways, from <a href="https://aws.amazon.com/blogs/aws/firecracker-lightweight-virtualization-for-serverless-computing/">Amazon’s Firecracker</a>, to <a href="https://www.fastly.com/blog/announcing-lucet-fastly-native-webassembly-compiler-runtime">Fastly’s Lucet</a>, to critical services that power <a href="https://blog.discord.com/why-discord-is-switching-from-go-to-rust-a190bbca2b1f">Discord</a>, <a href="https://blog.cloudflare.com/enjoy-a-slice-of-quic-and-rust/">Cloudflare</a>, <a href="https://www.figma.com/blog/rust-in-production-at-figma/">Figma</a>, <a href="https://blog.1password.com/1passwordx-december-2019-release/">1Password</a>, and many, many more.</p>
+<p>On Tuesday, August 11th 2020, Mozilla <a href="https://blog.mozilla.org/blog/2020/08/11/changing-world-changing-mozilla/">announced</a> their decision to restructure the company and to lay off around 250 people, including folks who are active members of the Rust project and the Rust community. Understandably, these layoffs have generated a lot of uncertainty and confusion about the impact on the Rust project itself. Our goal in this post is to address those concerns. We’ve also got a big announcement to make, so read on!</p>
+<h2><a href="#community-impact" aria-hidden="true" class="anchor" id="community-impact"></a>Community impact</h2>
+<p>There’s no denying the impact these layoffs have had on all members of the Rust community, particularly the folks who have lost their jobs in the middle of a global pandemic. Sudden, unexpected layoffs can be a difficult experience, and they are made no less difficult when it feels like the world is watching. Impacted employees who are looking for job assistance can be found on <a href="https://talentdirectory.mozilla.org/">Mozilla’s talent directory</a>.</p>
+<p>Notwithstanding the deep personal impact, the Rust project as a whole is very resilient to such events. We have leaders and contributors from a diverse set of different backgrounds and employers, and that diversity is a critical strength. Further, it is a common misconception that all of the Mozilla employees who participated in Rust leadership did so as a part of their employment. In fact, many Mozilla employees in Rust leadership <a href="https://twitter.com/ManishEarth/status/1294023260770770944">contributed to Rust in their personal time</a>, not as a part of their job.</p>
+<p>Finally, we would like to emphasize that membership in Rust teams is given to individuals and is not connected to one’s employer. Mozilla employees who are also members of the Rust teams continue to be members today, even if they were affected by the layoffs. Of course, some may choose to scale back their involvement. We understand not everyone might be able to continue contributing, and we would fully support their decision. We're grateful for everything they have done for the project so far.</p>
+<h2><a href="#starting-a-foundation" aria-hidden="true" class="anchor" id="starting-a-foundation"></a>Starting a foundation</h2>
+<p>As the project has grown in size, adoption, and maturity, we’ve begun to feel the pains of our success. We’ve developed legal and financial needs that our current organization lacks the capacity to fulfill. While we were able to be successful with Mozilla’s assistance for quite a while, we’ve reached a point where it’s difficult to operate without a legal name, address, and bank account. “How does the Rust project sign a contract?” has become a question we can no longer put off.</p>
+<p>Last year, we began <a href="http://smallcultfollowing.com/babysteps/blog/2020/01/09/towards-a-rust-foundation/">investigating the idea of creating an independent Rust foundation</a>. Members of the Rust Team with prior experience in open source foundations got together to look at the current landscape, identifying the things we’d need from a foundation, evaluating our options, and interviewing key members and directors from other foundations.</p>
+<p>Building on that work, <strong>Mozilla and the Rust Core Team are happy to announce plans to create a Rust foundation. Our goal is to have the first iteration of the foundation up and running by the end of the year.</strong></p>
+<p>This foundation’s first task will be something Rust is already great at: <a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html">taking ownership</a>. This time, the resource is legal, rather than something in a program. The various trademarks and domain names associated with Rust, Cargo, and crates.io will move into the foundation, which will also take financial responsibility for the costs they incur. We see this first iteration of the foundation as just the beginning. There’s a lot of possibilities for growing the role of the foundation, and we’re excited to explore those in the future.</p>
+<p>For now though, we remain laser-focused on these initial narrow goals for the foundation. As an immediate step the Core Team has <a href="https://www.rust-lang.org/governance/teams/core#project-foundation">selected members to form a project group</a> driving the efforts to form the foundation. Expect to see follow-up blog posts from the group with more details about the process and opportunities to give feedback. In the meantime, you can email the group at <a href="mailto:foundation@rust-lang.org">foundation@rust-lang.org</a>.</p>
+<h2><a href="#leading-with-infrastructure" aria-hidden="true" class="anchor" id="leading-with-infrastructure"></a>Leading with infrastructure</h2>
+<p>While we have only begun the process of setting up the foundation, over the past two years the Infrastructure Team has been leading the charge to reduce the reliance on any single company sponsoring the project, as well as growing the number of companies that support Rust.</p>
+<p>These efforts have been quite successful, and — as you can see on our <a href="https://www.rust-lang.org/sponsors">sponsorship page</a> — Rust’s infrastructure is already supported by a number of different companies throughout the ecosystem. As we legally transition into a fully independent entity, the Infrastructure Team plans to continue their efforts to ensure that we are not overly reliant on any single sponsor.</p>
+<h2><a href="#thank-you" aria-hidden="true" class="anchor" id="thank-you"></a>Thank you</h2>
+<p>We’re excited to start the next chapter of the project by forming a foundation. We would like to thank everyone we shared this journey with so far: Mozilla for incubating the project and for their support in creating a foundation, our team of leaders and contributors for constantly improving the community and the language, and everyone using Rust for creating the powerful ecosystem that drives so many people to the project. We can’t wait to see what our vibrant community does next.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
