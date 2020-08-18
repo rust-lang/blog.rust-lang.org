@@ -25,7 +25,7 @@ As the project has grown in size, adoption, and maturity, we’ve begun to feel 
 
 Last year, we began [investigating the idea of creating an independent Rust foundation][niko-post]. Members of the Rust Team with prior experience in open source foundations got together to look at the current landscape, identifying the things we’d need from a foundation, evaluating our options, and interviewing key members and directors from other foundations.
 
-Building on that work, **Mozilla and the Rust Core Team are happy to announce plans to create a Rust foundation. Our goal is to have the first iteration of the foundation up and running by the end of the year.**
+Building on that work, **the Rust Core Team and Mozilla are happy to announce plans to create a Rust foundation. The Rust Core Team's goal is to have the first iteration of the foundation up and running by the end of the year.**
 
 This foundation’s first task will be something Rust is already great at: [taking ownership]. This time, the resource is legal, rather than something in a program. The various trademarks and domain names associated with Rust, Cargo, and crates.io will move into the foundation, which will also take financial responsibility for the costs they incur. We see this first iteration of the foundation as just the beginning. There’s a lot of possibilities for growing the role of the foundation, and we’re excited to explore those in the future. 
 
