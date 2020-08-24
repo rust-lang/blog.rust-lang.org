@@ -10,8 +10,28 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-08-18T15:56:17+00:00</updated>
+    <updated>2020-08-24T19:29:04+00:00</updated>
 
+    
+    <entry>
+        <title>1.46.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/08/24/1.46.0-prerelease.html" type="text/html" title="1.46.0 pre-release testing" />
+        <published>2020-08-24T00:00:00+00:00</published>
+        <updated>2020-08-24T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/08/24/1.46.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/08/24/1.46.0-prerelease.html">&lt;p&gt;The 1.46.0 pre-release is ready for testing. The release is scheduled for this
+Thursday, August 27th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1460-2020-08-27&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2020-08-24/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2020-08-24/index.html&lt;/a&gt;. You
+can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-46-0-pre-release-testing/12957&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Pietro Albini</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Lang team design meeting: well-formedness and type aliases</title>
@@ -468,74 +488,6 @@ Maybe you like the sound of both and anything in-between! Whatever the case, the
 
         <author>
             <name>Ashley Mannix</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Disk space and LTO improvements</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/06/29/lto-improvements.html" type="text/html" title="Disk space and LTO improvements" />
-        <published>2020-06-29T00:00:00+00:00</published>
-        <updated>2020-06-29T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/06/29/lto-improvements.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/06/29/lto-improvements.html">&lt;p&gt;Thanks to the work of &lt;a href&#x3D;&quot;https://github.com/nnethercote&quot;&gt;Nicholas Nethercote&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/alexcrichton/&quot;&gt;Alex Crichton&lt;/a&gt;, there have been some recent improvements that reduce the size of compiled libraries, and improves the compile-time performance, particularly when using LTO. This post dives into some of the details of what changed, and an estimation of the benefits.&lt;/p&gt;
-&lt;p&gt;These changes have been added incrementally over the past three months, with the latest changes landing just a few days ago on the nightly channel. The bulk of the improvements will be found in the 1.46 stable release (available on 2020-08-27). It would be great for any projects that use LTO to test it out on the nightly channel (starting from the 2020-06-13 release) and report any issues that arise.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#background&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;background&quot;&gt;&lt;/a&gt;Background&lt;/h2&gt;
-&lt;p&gt;When compiling a library, &lt;code&gt;rustc&lt;/code&gt; saves the output in an &lt;code&gt;rlib&lt;/code&gt; file which is an &lt;a href&#x3D;&quot;https://en.wikipedia.org/wiki/Ar_(Unix)&quot;&gt;archive file&lt;/a&gt;. This has historically contained the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Object code, which is the result of code generation. This is used during regular linking.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://llvm.org/docs/BitCodeFormat.html&quot;&gt;LLVM bitcode&lt;/a&gt;, which is a binary representation of LLVM&#x27;s intermediate representation. This can be used for &lt;a href&#x3D;&quot;https://llvm.org/docs/LinkTimeOptimization.html&quot;&gt;Link Time Optimization&lt;/a&gt; (LTO).&lt;/li&gt;
-&lt;li&gt;Rust-specific metadata, which covers &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/0b66a89735305ebac93894461559576495ab920e/src/librustc_metadata/rmeta/mod.rs#L172-L214&quot;&gt;a wide range of data&lt;/a&gt; about the crate.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;LTO is an optimization technique that can perform whole-program analysis. It analyzes all of the bitcode from every library at once, and performs optimizations and code generation. &lt;code&gt;rustc&lt;/code&gt; supports several forms of LTO:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Fat LTO. This performs &amp;quot;full&amp;quot; LTO, which can take a long time to complete and may require a significant amount of memory.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;http://blog.llvm.org/2016/06/thinlto-scalable-and-incremental-lto.html&quot;&gt;Thin LTO&lt;/a&gt;. This LTO variant supports much better parallelism than fat LTO. It can achieve similar performance improvements as fat LTO (sometimes even better!), while taking much less total time by taking advantage of more CPUs.&lt;/li&gt;
-&lt;li&gt;Thin-local LTO. By default, &lt;code&gt;rustc&lt;/code&gt; will split a crate into multiple &amp;quot;codegen units&amp;quot; so that they can be processed in parallel by LLVM. But this prevents some optimizations as code is separated into different codegen units, and is handled independently. Thin-local LTO will perform thin LTO across the codegen units within a single crate, bringing back some optimizations that would otherwise be lost by the separation. This is &lt;code&gt;rustc&lt;/code&gt;&#x27;s default behavior if opt-level is greater than 0.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#what-has-changed&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-has-changed&quot;&gt;&lt;/a&gt;What has changed&lt;/h2&gt;
-&lt;p&gt;Changes have been made to both &lt;code&gt;rustc&lt;/code&gt; and Cargo to control which libraries should include object code and which should include bitcode based on the project&#x27;s &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/profiles.html&quot;&gt;profile&lt;/a&gt; LTO settings. If the project is not using LTO, then Cargo will instruct &lt;code&gt;rustc&lt;/code&gt; to not place bitcode in the rlib files, which should reduce the amount of disk space used. This may have a small improvement in performance since &lt;code&gt;rustc&lt;/code&gt; no longer needs to compress and write out the bitcode.&lt;/p&gt;
-&lt;p&gt;If the project is using LTO, then Cargo will instruct &lt;code&gt;rustc&lt;/code&gt; to not place object code in the rlib files, avoiding the expensive code generation step. This should improve the build time when building from scratch, and reduce the amount of disk space used.&lt;/p&gt;
-&lt;p&gt;Two &lt;code&gt;rustc&lt;/code&gt; flags are now available to control how the rlib is constructed:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/rustc/codegen-options/#linker-plugin-lto&quot;&gt;&lt;code&gt;-C linker-plugin-lto&lt;/code&gt;&lt;/a&gt; causes &lt;code&gt;rustc&lt;/code&gt; to only place bitcode in the &lt;code&gt;.o&lt;/code&gt; files, and skips code generation. This flag was &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/49879&quot;&gt;originally added&lt;/a&gt; to support cross-language LTO. Cargo now uses this when the rlib is only intended for use with LTO.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/rustc/codegen-options/#embed-bitcode&quot;&gt;&lt;code&gt;-C embed-bitcode&#x3D;no&lt;/code&gt;&lt;/a&gt; causes &lt;code&gt;rustc&lt;/code&gt; to avoid placing bitcode in the rlib altogether. Cargo uses this when LTO is not being used, which reduces some disk space usage.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Additionally, the method in which bitcode is embedded in the rlib has changed. Previously, &lt;code&gt;rustc&lt;/code&gt; would place compressed bitcode as a &lt;code&gt;.bc.z&lt;/code&gt; file in the rlib archive. Now, the bitcode is placed as an uncompressed section within each &lt;code&gt;.o&lt;/code&gt; &lt;a href&#x3D;&quot;https://en.wikipedia.org/wiki/Object_file&quot;&gt;object file&lt;/a&gt; in the rlib archive. This can sometimes be a small performance benefit, because it avoids cost of compressing the bitcode, and sometimes can be slower due to needing to write more data to disk. This change helped simplify the implementation, and also matches the behavior of clang&#x27;s &lt;code&gt;-fembed-bitcode&lt;/code&gt; option (typically used with Apple&#x27;s iOS-based operating systems).&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#improvements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improvements&quot;&gt;&lt;/a&gt;Improvements&lt;/h2&gt;
-&lt;p&gt;The following is a summary of improvements observed on a small number of real-world projects of small and medium size. Improvements of a project will depend heavily on the code, optimization settings, operating system, environment, and hardware. These were recorded with the 2020-06-21 nightly release on Linux with parallel job settings between 2 and 32.&lt;/p&gt;
-&lt;p&gt;The performance wins for debug builds were anywhere from 0% to 4.7% faster. Larger binary crates tended to fare better than smaller library crates.&lt;/p&gt;
-&lt;p&gt;LTO builds were recorded anywhere from 4% to 20% faster. Thin LTO fared consistently better than fat LTO.&lt;/p&gt;
-&lt;p&gt;The number of parallel jobs also had a large impact on the amount of improvement. Lower parallel job counts saw substantially more benefit than higher ones. A project built with &lt;code&gt;-j2&lt;/code&gt; can be 20% faster, whereas the same project at &lt;code&gt;-j32&lt;/code&gt; would only be 1% faster. Presumably this is because the code-generation phase benefits from higher concurrency, so it was taking a relatively smaller total percentage of time.&lt;/p&gt;
-&lt;p&gt;The overall target directory size is typically 20% to 30% smaller for debug builds. LTO builds did not see as much of an improvement, ranging from 11% to 19% smaller.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#more-details&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;more-details&quot;&gt;&lt;/a&gt;More details&lt;/h2&gt;
-&lt;p&gt;Nicholas Nethercote wrote about the journey to implement these changes at &lt;a href&#x3D;&quot;https://blog.mozilla.org/nnethercote/2020/04/24/how-to-speed-up-the-rust-compiler-in-2020/&quot;&gt;https://blog.mozilla.org/nnethercote/2020/04/24/how-to-speed-up-the-rust-compiler-in-2020/&lt;/a&gt;. It took several PRs across &lt;code&gt;rustc&lt;/code&gt; and Cargo to make this happen:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/66598&quot;&gt;#66598&lt;/a&gt; — The original approach, that was decided to be too simplistic.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/66961&quot;&gt;#66961&lt;/a&gt; — The issue outlining the strategy that was employed.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70289&quot;&gt;#70289&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70297&quot;&gt;#70297&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70345&quot;&gt;#70345&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70384&quot;&gt;#70384&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70644&quot;&gt;#70644&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70729&quot;&gt;#70729&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/71374&quot;&gt;#71374&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/71716&quot;&gt;#71716&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/71754&quot;&gt;#71754&lt;/a&gt; — A series of refactorings to prepare for the new behavior and do some cleanup.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/71323&quot;&gt;#71323&lt;/a&gt; — Introduced a new flag to control whether or not bitcode is embedded.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70458&quot;&gt;#70458&lt;/a&gt; &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/71528&quot;&gt;#71528&lt;/a&gt; — Switched how LLVM bitcode is embedded.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8066&quot;&gt;#8066&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8192&quot;&gt;#8192&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8204&quot;&gt;#8204&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8226&quot;&gt;#8226&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8254&quot;&gt;#8254&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8349&quot;&gt;#8349&lt;/a&gt; — The series of Cargo changes to implement the new functionality.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Although this is a conceptually simple change (LTO&#x3D;bitcode, non-LTO&#x3D;object code), it took quite a bit of preparation and work to make it happen. There were many edge cases and platform-specific behaviors to consider, and testing to perform. And, of course, the obligatory bike-shedding over the names of new command-line flags. This resulted in quite a substantial improvement in performance, particularly for LTO builds, and a huge improvement in disk space usage. Thanks to all of those that helped to make this happen!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Eric Huss</name>
         </author>
     </entry>
     
