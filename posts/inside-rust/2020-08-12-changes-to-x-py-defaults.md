@@ -27,7 +27,7 @@ Previously, `x.py build` would build `rustc` three separate times:
 2. `build/stage1-rustc`
 3. `build/stage2-rustc`
 
-Normally, contributors only want to build the compiler once, which lets them test their changes quickly. After this change, this is in fact what happens:
+Normally, contributors only want to build the compiler once, which lets them test their changes quickly. After this change, that's now the case:
 
 1. `build/stage0-rustc`
 
