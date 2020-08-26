@@ -5,7 +5,7 @@ author: Joshua Nelson
 team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
 ---
 
-Recently, the defaults for [x.py], the tool used to [bootstrap] the Rust compiler from source, changed. If you regularly contribute to Rust, this might affect your workflow.
+Recently, the defaults for [`x.py`], the tool used to [bootstrap] the Rust compiler from source, changed. If you regularly contribute to Rust, this might affect your workflow.
 
 ## What changes were made?
 
@@ -40,7 +40,7 @@ For a detailed rationale of the changes, as well as more information about the a
 - the [implementation PR]
 - the [Zulip stream]
 
-[x.py]: https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html#what-is-xpy
+[`x.py`]: https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html#what-is-xpy
 [bootstrap]: https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html
 [the MCP]: https://github.com/rust-lang/compiler-team/issues/326
 [implementation PR]: https://github.com/rust-lang/rust/pull/73964
