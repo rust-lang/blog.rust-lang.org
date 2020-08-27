@@ -10,8 +10,97 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-08-24T19:29:05+00:00</updated>
+    <updated>2020-08-27T15:55:49+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.46.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/08/27/Rust-1.46.0.html" type="text/html" title="Announcing Rust 1.46.0" />
+        <published>2020-08-27T00:00:00+00:00</published>
+        <updated>2020-08-27T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/08/27/Rust-1.46.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/08/27/Rust-1.46.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.46.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.46.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/tools/install&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
+appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1460-2020-08-27&quot;&gt;detailed release notes for
+1.46.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1460-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1460-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.46.0 stable&lt;/h2&gt;
+&lt;p&gt;This release enables quite a lot of new things to appear in &lt;code&gt;const fn&lt;/code&gt;, two
+new standard library APIs, and one feature useful for library authors. See
+the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1460-2020-08-27&quot;&gt;detailed release notes&lt;/a&gt; to learn about other changes not covered
+by this post.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#const-fn-improvements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-fn-improvements&quot;&gt;&lt;/a&gt;&lt;code&gt;const fn&lt;/code&gt; improvements&lt;/h3&gt;
+&lt;p&gt;There are &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/72437/&quot;&gt;several core language features&lt;/a&gt; you can now use in a &lt;code&gt;const fn&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;if&lt;/code&gt;, &lt;code&gt;if let&lt;/code&gt;, and &lt;code&gt;match&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;while&lt;/code&gt;, &lt;code&gt;while let&lt;/code&gt;, and &lt;code&gt;loop&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;the &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; and &lt;code&gt;||&lt;/code&gt; operators&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can also &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73862/&quot;&gt;cast to a slice&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;const fn foo() {
+  let x &#x3D; [1, 2, 3, 4, 5];
+
+  // cast the array to a slice
+  let y: &amp;amp;[_] &#x3D; &amp;amp;x;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;While these features may not feel &lt;em&gt;new&lt;/em&gt;, given that you could use them all
+outside of &lt;code&gt;const fn&lt;/code&gt;, they add a lot of compile-time computation power! As
+an example, the &lt;a href&#x3D;&quot;https://github.com/rylev/const-sha1&quot;&gt;&lt;code&gt;const-sha1&lt;/code&gt; crate&lt;/a&gt; can let you compute SHA-1 hashes
+at compile time. This led to a &lt;a href&#x3D;&quot;https://github.com/microsoft/winrt-rs/pull/279#issuecomment-668436700&quot;&gt;40x performance improvement&lt;/a&gt; in
+Microsoft&#x27;s WinRT bindings for Rust.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#track_caller&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;track_caller&quot;&gt;&lt;/a&gt;&lt;code&gt;#[track_caller]&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Back in March, the release of Rust 1.42 introduced &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/03/12/Rust-1.42.html#useful-line-numbers-in-option-and-result-panic-messages&quot;&gt;better error messages when &lt;code&gt;unwrap&lt;/code&gt; and related functions would panic&lt;/a&gt;. At the time, we mentioned that the way
+this was implemented was not yet stable. Rust 1.46 stabilizes this feature.&lt;/p&gt;
+&lt;p&gt;This attribute is called &lt;code&gt;#[track_caller]&lt;/code&gt;, which was originally proposed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2091&quot;&gt;RFC 2091&lt;/a&gt; way back in July of 2017! If you&#x27;re writing a function
+like &lt;code&gt;unwrap&lt;/code&gt; that may panic, you can put this annotation on your functions,
+and the default panic formatter will use its caller as the location in its
+error message. For example, here is &lt;code&gt;unwrap&lt;/code&gt; previously:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub fn unwrap(self) -&amp;gt; T {
+    match self {
+        Some(val) &#x3D;&amp;gt; val,
+        None &#x3D;&amp;gt; panic!(&amp;quot;called &#x60;Option::unwrap()&#x60; on a &#x60;None&#x60; value&amp;quot;),
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It now looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[track_caller]
+pub fn unwrap(self) -&amp;gt; T {
+    match self {
+        Some(val) &#x3D;&amp;gt; val,
+        None &#x3D;&amp;gt; panic!(&amp;quot;called &#x60;Option::unwrap()&#x60; on a &#x60;None&#x60; value&amp;quot;),
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That&#x27;s it!&lt;/p&gt;
+&lt;p&gt;If you are implementing a panic hook yourself, you can use the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/panic/struct.Location.html#method.caller&quot;&gt;caller&lt;/a&gt; method
+on &lt;code&gt;std::panic::Location&lt;/code&gt; to get access to this information.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#library-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
+&lt;p&gt;Keeping with the theme of &lt;code&gt;const fn&lt;/code&gt; improvements, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73887/&quot;&gt;&lt;code&gt;std::mem::forget&lt;/code&gt; is now
+a &lt;code&gt;const fn&lt;/code&gt;&lt;/a&gt;. Additionally, two new APIs were stabilized this release:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.zip&quot;&gt;&lt;code&gt;Option::zip&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/vec/struct.Drain.html#method.as_slice&quot;&gt;&lt;code&gt;vec::Drain::as_slice&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1460-2020-08-27&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.46.0 release: check out what changed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1460-2020-08-27&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-146-2020-08-27&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-146&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1460&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1460&quot;&gt;&lt;/a&gt;Contributors to 1.46.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.46.0. We couldn&#x27;t have done it
+without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.46.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Laying the foundation for Rust&#x27;s future</title>
@@ -604,26 +693,6 @@ Send an email to the &lt;a href&#x3D;&quot;mailto:community@rust-lang.org&quot;&
 
         <author>
             <name>The Rust Community Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.44.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/06/04/Rust-1.44.0.html" type="text/html" title="Announcing Rust 1.44.0" />
-        <published>2020-06-04T00:00:00+00:00</published>
-        <updated>2020-06-04T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/06/04/Rust-1.44.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/06/04/Rust-1.44.0.html">&lt;p&gt;The Rust team has published a new version of Rust, 1.44.0. Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;This is a shorter blog post than usual: in acknowledgement that taking a stand against the police brutality currently happening in the US and the world at large is more important than sharing tech knowledge, we decided to significantly scale back the amount of promotion we&#x27;re doing for this release.&lt;/p&gt;
-&lt;p&gt;The Rust Core Team believes that tech is and always will be political, and we encourage everyone take the time today to learn about racial inequality and &lt;a href&#x3D;&quot;https://blacklivesmatters.carrd.co/&quot;&gt;support the Black Lives Matter movement.&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1440-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1440-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.44.0 stable&lt;/h2&gt;
-&lt;p&gt;Rust 1.44 is a small release, with &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8062/&quot;&gt;&lt;code&gt;cargo tree&lt;/code&gt; integrated in Cargo itself&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/69033/&quot;&gt;support for &lt;code&gt;async&lt;/code&gt;/&lt;code&gt;await&lt;/code&gt; in &lt;code&gt;no_std&lt;/code&gt; contexts&lt;/a&gt; as its highlights. You can learn more about all the changes in this release by &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1440-2020-06-04&quot;&gt;reading the release notes&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1440&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1440&quot;&gt;&lt;/a&gt;Contributors to 1.44.0&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.44.0. We couldn&#x27;t have done it without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.44.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
         </author>
     </entry>
     
