@@ -10,8 +10,36 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-08-28T02:55:09+00:00</updated>
+    <updated>2020-08-28T15:53:15+00:00</updated>
 
+    
+    <entry>
+        <title>Upcoming compiler-team design meetings</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/08/28/upcoming-compiler-team-design-meetings.html" type="text/html" title="Upcoming compiler-team design meetings" />
+        <published>2020-08-28T00:00:00+00:00</published>
+        <updated>2020-08-28T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/08/28/upcoming-compiler-team-design-meetings.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/08/28/upcoming-compiler-team-design-meetings.html">&lt;p&gt;In our &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/99475planningmeeting20200828.html&quot;&gt;planning meeting today&lt;/a&gt;, the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/compiler&quot;&gt;compiler team&lt;/a&gt; has scheduled our
+next batch of upcoming design meetings. You can find the exact times
+on the compiler team&#x27;s &lt;a href&#x3D;&quot;https://rust-lang.github.io/compiler-team/#meeting-calendar&quot;&gt;meeting calendar&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;On September 4th (&lt;a href&#x3D;&quot;https://calendar.google.com/event?action&#x3D;TEMPLATE&amp;tmeid&#x3D;NTMwYmxwaDRxZG8xdHJkdm1mdW1jMWxwMmYgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;calendar event&lt;/a&gt;), we will discuss the results
+of the contributor survey that we conducted. See &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/318&quot;&gt;rust-lang/compiler-team#318&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;li&gt;On September 18th (&lt;a href&#x3D;&quot;https://calendar.google.com/event?action&#x3D;TEMPLATE&amp;tmeid&#x3D;MzVmbGVvcXVkcTM4MmJxam5lM25wbWEzaG8gNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;calendar event&lt;/a&gt;), we will conduct a retrospective
+of the &lt;a href&#x3D;&quot;https://forge.rust-lang.org/compiler/mcp.html&quot;&gt;compiler-team MCP process&lt;/a&gt;. See &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/314&quot;&gt;rust-lang/compiler-team#314&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#did-you-know&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;did-you-know&quot;&gt;&lt;/a&gt;Did you know?&lt;/h3&gt;
+&lt;p&gt;Most weeks, the compiler team has some sort of design meeting. These
+meetings take place on Zulip and are open to all. Every 4 weeks, we do
+a planning meeting to pick the next few meetings from the list of open
+proposals. You can find &lt;a href&#x3D;&quot;https://rust-lang.github.io/compiler-team/about/steering-meeting/&quot;&gt;more details about how the compiler-team
+steering meeting process here&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.46.0 pre-release testing</title>
@@ -454,40 +482,6 @@ with dates when they are available.&lt;/p&gt;
 
         <author>
             <name>Niko Matsakis</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Ownership of the standard library implementation</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/02/Ownership-Std-Implementation.html" type="text/html" title="Ownership of the standard library implementation" />
-        <published>2020-07-02T00:00:00+00:00</published>
-        <updated>2020-07-02T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/07/02/Ownership-Std-Implementation.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/02/Ownership-Std-Implementation.html">&lt;p&gt;Our Rust project is a large and diverse one. Its activities are broadly coordinated by teams that give the community space to find and contribute to the things that matter to them.
-We’re trialing a reorganization of standard library activities between the Libs and Compiler teams.
-Going forward, the Libs team will own just the public API of the standard library, and the Compiler team will own its implementation.
-The goal of this separation of concerns is to better suit the interests of both teams to better support the needs of the standard library.
-It&#x27;s a lot like the existing relationship between the Lang and Compiler teams, where the Lang team owns the Rust language design and the Compiler team owns the code that implements it.
-We&#x27;ll re-evaluate how the trial is going later in the year and decide whether or not to make the change permanent.&lt;/p&gt;
-&lt;p&gt;The Libs team traditionally selects members who like to design APIs.
-A lot of bandwidth is spent supporting libraries in the wider Rust ecosystem and working to consolidate idioms into standard APIs.
-This leaves little room for development of the standard library itself, which takes a lot of consistent and dedicated attention.&lt;/p&gt;
-&lt;p&gt;As a codebase, the standard library is paradoxically specialized.
-It has privileged access to compiler internals, deep domain knowledge baked into algorithms (have you ever wondered what it takes to efficiently format a float as text for instance?), platform-specific integration, and a lot of tricky unsafe code.&lt;/p&gt;
-&lt;p&gt;The Compiler team is used to giving consistent and dedicated attention to big projects.
-The standard library is exactly the kind of codebase the Compiler team already has years of experience working on.&lt;/p&gt;
-&lt;p&gt;Teams aren’t bubbles though, and in practice API design and implementation are going to influence each other.
-This is just a shared understanding between the Libs and Compiler teams to make standard library activities more focused.&lt;/p&gt;
-&lt;p&gt;Do any of those activities appeal to you?
-Maybe you’re interested in identifying and capturing idioms as standard APIs.
-If so, you can find the Libs team &lt;a href&#x3D;&quot;https://forge.rust-lang.org/libs/index.html&quot;&gt;here&lt;/a&gt;.
-Maybe you’d like to work on a big codebase used by almost every Rust developer.
-If so, you can find the Compiler team &lt;a href&#x3D;&quot;https://forge.rust-lang.org/compiler/index.html&quot;&gt;here&lt;/a&gt;.
-Maybe you like the sound of both and anything in-between! Whatever the case, the standard library has something for you.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Ashley Mannix</name>
         </author>
     </entry>
     
