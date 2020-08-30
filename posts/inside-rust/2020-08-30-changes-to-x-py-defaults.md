@@ -21,13 +21,12 @@ Recently, the defaults for [`x.py`], the tool used to [bootstrap] the Rust compi
 
 ## Why were the changes made?
 
-Previously, `x.py build` would build `rustc` twice and the standard library three times:
+Previously, `x.py build` would build `rustc` twice:
 
 1. `build/stage0-std`
 2. `build/stage0-rustc`
 3. `build/stage1-std`
 4. `build/stage1-rustc`
-5. `build/stage2-std`
 
 Normally, contributors only want to build the compiler once, which lets them test their changes quickly. After this change, that's now the default:
 
