@@ -7,7 +7,14 @@ release: false
 
 The core team is beginning to think about the 2021 Roadmap, and we want to hear from the community. We’re going to be running two parallel efforts over the next several weeks: the 2020 Rust Survey, to be announced next week, and a call for blog posts.
 
-Blog posts can contain anything related to Rust: language features, tooling improvements, organizational changes, ecosystem needs — everything is in scope. We would encourage you to try to identify themes or broad areas into which your suggestions fit in, because these help guide the project as a whole. We are trying something a bit different this year. When you write a post, please submit it into [this google form](https://forms.gle/Hv41uA5qJEY89XRm7) so we don’t miss it! We will try to look at posts not submitted via this form, too, but posts submitted here aren’t going to be missed. Any platform — from blogs to GitHub gists — is fine!
+Blog posts can contain anything related to Rust: language features, tooling improvements, organizational changes, ecosystem needs — everything is in scope. We encourage you to try to identify themes or broad areas into which your suggestions fit in, because these help guide the project as a whole.
+
+One way of helping us understand the lens you're looking at Rust through is to give one (or more) statements of the form "As a X I want Rust to Y because Z". These then may provide motivation behind items you call out in your post. Some examples might be:
+
+- "As a day-to-day Rust developer, I want Rust to make consuming libraries a better experience so that I can more easily take advantage of the ecosystem"
+- "As an embedded developer who wants to grow the niche, I want Rust to make end-to-end embedded development easier so that newcomers can get started more easily"
+
+This year, to make sure we don’t miss anything, when you write a post please submit it into [this google form](https://forms.gle/Hv41uA5qJEY89XRm7)! We will try to look at posts not submitted via this form, too, but posts submitted here aren’t going to be missed. Any platform — from blogs to GitHub gists — is fine!
 
 To give you some context for the upcoming year, we established these high-level goals for 2020, and we wanted to take a look back at the first part of the year. We’ve made some excellent progress!
 
