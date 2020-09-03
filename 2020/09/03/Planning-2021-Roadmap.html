@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Planning the 2021 Roadmap | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Planning the 2021 Roadmap | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Planning the 2021 Roadmap | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Planning the 2021 Roadmap" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Planning the 2021 Roadmap</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 3, 2020 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>The core team is beginning to think about the 2021 Roadmap, and we want to hear from the community. We’re going to be running two parallel efforts over the next several weeks: the 2020 Rust Survey, to be announced next week, and a call for blog posts.</p>
+<p>Blog posts can contain anything related to Rust: language features, tooling improvements, organizational changes, ecosystem needs — everything is in scope. We encourage you to try to identify themes or broad areas into which your suggestions fit in, because these help guide the project as a whole.</p>
+<p>One way of helping us understand the lens you're looking at Rust through is to give one (or more) statements of the form &quot;As a X I want Rust to Y because Z&quot;. These then may provide motivation behind items you call out in your post. Some examples might be:</p>
+<ul>
+<li>&quot;As a day-to-day Rust developer, I want Rust to make consuming libraries a better experience so that I can more easily take advantage of the ecosystem&quot;</li>
+<li>&quot;As an embedded developer who wants to grow the niche, I want Rust to make end-to-end embedded development easier so that newcomers can get started more easily&quot;</li>
+</ul>
+<p>This year, to make sure we don’t miss anything, when you write a post please submit it into <a href="https://forms.gle/Hv41uA5qJEY89XRm7">this google form</a>! We will try to look at posts not submitted via this form, too, but posts submitted here aren’t going to be missed. Any platform — from blogs to GitHub gists — is fine!</p>
+<p>To give you some context for the upcoming year, we established these high-level goals for 2020, and we wanted to take a look back at the first part of the year. We’ve made some excellent progress!</p>
+<ul>
+<li>Prepare for a possible Rust 2021 Edition</li>
+<li>Follow-through on in-progress designs and efforts</li>
+<li>Improve project functioning and governance</li>
+</ul>
+<h2><a href="#prepare-for-a-possible-rust-2021-edition" aria-hidden="true" class="anchor" id="prepare-for-a-possible-rust-2021-edition"></a>Prepare for a possible Rust 2021 Edition</h2>
+<p>There is now an <a href="https://github.com/rust-lang/rfcs/pull/2966">open RFC</a> proposing a plan for the 2021 edition! There has been quite a bit of discussion, but we hope to have it merged within the next 6 weeks. The plan is for the new edition to be much smaller in scope than Rust 2018. It it is expected to include a few minor tweaks to improve language usability, along with the promotion of various edition idiom lints (like requiring <code>dyn Trait</code> over <code>Trait</code>) so that they will be “deny by default”. We believe that we are on track for being able to produce an edition in 2021.</p>
+<h2><a href="#follow-through-on-in-progress-designs-and-efforts" aria-hidden="true" class="anchor" id="follow-through-on-in-progress-designs-and-efforts"></a>Follow-through on in-progress designs and efforts</h2>
+<p>One of our goals for 2020 was to push “in progress” design efforts through to completion. We’ve seen a lot of efforts in this direction:</p>
+<ul>
+<li>The inline assembly RFC has <a href="https://rust-lang.github.io/rfcs/2873-inline-asm.html">merged</a> and new implementation ready for experimentation</li>
+<li>Procedural macros have been stabilized in most positions <a href="https://blog.rust-lang.org/2020/07/16/Rust-1.45.0.html#stabilizing-function-like-procedural-macros-in-expressions-patterns-and-statements">as of Rust 1.45</a></li>
+<li>There is a proposal for a MVP of const generics, which we’re hoping to <a href="https://without.boats/blog/shipping-const-generics/">ship in 2020</a></li>
+<li>The async foundations group is expecting to post an RFC on the <code>Stream</code> trait soon</li>
+<li>The FFI unwind project group is closing out a long-standing soundness hole, and the <a href="https://rust-lang.github.io/rfcs/2945-c-unwind-abi.html">first RFC</a> there has been merged</li>
+<li>The safe transmute project group has proposed a <a href="https://github.com/rust-lang/rfcs/pull/2981">draft RFC</a></li>
+<li>The traits working group is polishing Chalk, preparing rustc integration, and seeing experimental usage in rust-analyzer. You can learn more in <a href="https://blog.rust-lang.org/inside-rust/2020/03/28/traits-sprint-1.html">their</a> <a href="https://blog.rust-lang.org/inside-rust/2020/05/18/traits-sprint-2.html">blog</a> <a href="https://blog.rust-lang.org/inside-rust/2020/07/17/traits-sprint-3.html">posts</a>.</li>
+<li>We are transitioning to rust-analyzer as the official Rust IDE solution, with a <a href="https://rust-lang.github.io/rfcs/2912-rust-analyzer.html">merged RFC</a> laying out the plan</li>
+<li>Rust’s tier system is being formalized with guarantees and expectations set in an <a href="https://github.com/rust-lang/rfcs/pull/2803">in-progress RFC</a></li>
+<li>Compiler performance work continues, with wins of <a href="https://perf.rust-lang.org/compare.html?start=2020-01-01&end=&stat=instructions%3Au">10-30%</a> on many of our benchmarks</li>
+<li>Reading into uninitialized buffers has an open <a href="https://github.com/sfackler/rfcs/blob/read-buf/text/0000-read-buf.md">RFC</a>, solving another long-standing problem for I/O in Rust</li>
+<li>A project group proposal for portable SIMD in std has an open <a href="https://github.com/KodrAus/rfcs/blob/simd-pg/text/0000-stdsimd.md">RFC</a></li>
+<li>A project group proposal for error handling ergonomics, focusing on the std::error API, has an open <a href="https://github.com/yaahc/rfcs/blob/ehpg/text/0000-project-error-handling.md">RFC</a></li>
+<li><code>std::sync</code> module updates are in brainstorming phase</li>
+<li>Rustdoc's support for intra-doc links is <a href="https://github.com/rust-lang/rust/pull/74430">close to stabilization</a>!</li>
+</ul>
+<p>There’s been a lot of other work as well both within the Rust teams, but these items highlight some of the issues and designs that are being worked on actively by the Rust teams.</p>
+<h2><a href="#improve-project-functioning-and-governance" aria-hidden="true" class="anchor" id="improve-project-functioning-and-governance"></a>Improve project functioning and governance</h2>
+<p>Another goal was to document and improve our processes for running the project. We had three main subgoals.</p>
+<h3><a href="#improved-visibility-into-state-of-initiatives-and-design-efforts" aria-hidden="true" class="anchor" id="improved-visibility-into-state-of-initiatives-and-design-efforts"></a>Improved visibility into state of initiatives and design efforts</h3>
+<p>The Rust teams are moving to the use of <a href="https://rust-lang.github.io/rfcs/2856-project-groups.html">project groups</a> for exploratory work, aiming to create dedicated groups of people who can explore an area, propose a design, and see it through to completion. The language team has kicked us off with <a href="https://github.com/rust-lang/project-safe-transmute/">safe transmute</a>, <a href="https://github.com/rust-lang/project-ffi-unwind/">FFI unwind</a>, and <a href="https://github.com/rust-lang/project-inline-asm">inline assembly</a> project groups. All of these have been enormous successes! Other teams are looking to use this model as well.</p>
+<p>The compiler team has begun publishing <a href="https://github.com/rust-lang/rustc-perf/tree/master/triage">weekly performance triage reports</a>, in the continuing drive to reduce compile times. The LLVM working group has also been helping to highlight performance regressions in <a href="https://nikic.github.io/2020/05/10/Make-LLVM-fast-again.html">LLVM itself</a>, to reduce compile time performance regressions when updating LLVM.</p>
+<p>The <a href="https://github.com/rust-lang/compiler-team/">compiler team</a> has introduced <a href="https://forge.rust-lang.org/compiler/mcp.html">Major Change Proposals</a> as a way to introduce larger changes to the implementation, surfacing design questions before implementation work begins. The <a href="https://github.com/rust-lang/lang-team/">language team</a> is also experimenting with a <a href="https://lang-team.rust-lang.org/proposing_a_project.html">similar process</a> for gaining quick language team feedback on proposals and, potentially, forming project groups. These both give a high-level view of changes being proposed, letting interested parties follow along without needing to subscribe to our very busy repositories.</p>
+<h3><a href="#increase-mentoring-leadership-and-organizational-bandwidth" aria-hidden="true" class="anchor" id="increase-mentoring-leadership-and-organizational-bandwidth"></a>Increase mentoring, leadership, and organizational bandwidth</h3>
+<ul>
+<li>The language team has identified a path for contributors to membership on the team, involving participation and leading in project group efforts. For more details, see <a href="https://blog.rust-lang.org/inside-rust/2020/07/09/lang-team-path-to-membership.html">their post</a>.</li>
+<li>The Governance working group has been formalizing existing processes into RFCs, such as the <a href="https://rust-lang.github.io/rfcs/2856-project-groups.html">Project Group RFC</a>, <a href="https://github.com/rust-lang/rfcs/pull/2872">Access Policy RFC</a>, and more.</li>
+<li>The library team is pioneering the effort of drafting formal <a href="https://github.com/KodrAus/rfcs/blob/libs-governance/text/0000-libs-governance.md">charters</a> for teams, with the help of the governance working group.</li>
+</ul>
+<h3><a href="#making-design-discussions-more-productive-and-less-exhausting" aria-hidden="true" class="anchor" id="making-design-discussions-more-productive-and-less-exhausting"></a>Making design discussions more productive and less exhausting</h3>
+<p>The primary effort here has been the project groups, which have so far been largely a success. We expect to do more here in the future.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -10,8 +10,71 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-09-03T05:42:28+00:00</updated>
+    <updated>2020-09-03T17:15:57+00:00</updated>
 
+    
+    <entry>
+        <title>Planning the 2021 Roadmap</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/09/03/Planning-2021-Roadmap.html" type="text/html" title="Planning the 2021 Roadmap" />
+        <published>2020-09-03T00:00:00+00:00</published>
+        <updated>2020-09-03T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/09/03/Planning-2021-Roadmap.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/09/03/Planning-2021-Roadmap.html">&lt;p&gt;The core team is beginning to think about the 2021 Roadmap, and we want to hear from the community. We’re going to be running two parallel efforts over the next several weeks: the 2020 Rust Survey, to be announced next week, and a call for blog posts.&lt;/p&gt;
+&lt;p&gt;Blog posts can contain anything related to Rust: language features, tooling improvements, organizational changes, ecosystem needs — everything is in scope. We encourage you to try to identify themes or broad areas into which your suggestions fit in, because these help guide the project as a whole.&lt;/p&gt;
+&lt;p&gt;One way of helping us understand the lens you&#x27;re looking at Rust through is to give one (or more) statements of the form &amp;quot;As a X I want Rust to Y because Z&amp;quot;. These then may provide motivation behind items you call out in your post. Some examples might be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;quot;As a day-to-day Rust developer, I want Rust to make consuming libraries a better experience so that I can more easily take advantage of the ecosystem&amp;quot;&lt;/li&gt;
+&lt;li&gt;&amp;quot;As an embedded developer who wants to grow the niche, I want Rust to make end-to-end embedded development easier so that newcomers can get started more easily&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This year, to make sure we don’t miss anything, when you write a post please submit it into &lt;a href&#x3D;&quot;https://forms.gle/Hv41uA5qJEY89XRm7&quot;&gt;this google form&lt;/a&gt;! We will try to look at posts not submitted via this form, too, but posts submitted here aren’t going to be missed. Any platform — from blogs to GitHub gists — is fine!&lt;/p&gt;
+&lt;p&gt;To give you some context for the upcoming year, we established these high-level goals for 2020, and we wanted to take a look back at the first part of the year. We’ve made some excellent progress!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Prepare for a possible Rust 2021 Edition&lt;/li&gt;
+&lt;li&gt;Follow-through on in-progress designs and efforts&lt;/li&gt;
+&lt;li&gt;Improve project functioning and governance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#prepare-for-a-possible-rust-2021-edition&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;prepare-for-a-possible-rust-2021-edition&quot;&gt;&lt;/a&gt;Prepare for a possible Rust 2021 Edition&lt;/h2&gt;
+&lt;p&gt;There is now an &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2966&quot;&gt;open RFC&lt;/a&gt; proposing a plan for the 2021 edition! There has been quite a bit of discussion, but we hope to have it merged within the next 6 weeks. The plan is for the new edition to be much smaller in scope than Rust 2018. It it is expected to include a few minor tweaks to improve language usability, along with the promotion of various edition idiom lints (like requiring &lt;code&gt;dyn Trait&lt;/code&gt; over &lt;code&gt;Trait&lt;/code&gt;) so that they will be “deny by default”. We believe that we are on track for being able to produce an edition in 2021.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#follow-through-on-in-progress-designs-and-efforts&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;follow-through-on-in-progress-designs-and-efforts&quot;&gt;&lt;/a&gt;Follow-through on in-progress designs and efforts&lt;/h2&gt;
+&lt;p&gt;One of our goals for 2020 was to push “in progress” design efforts through to completion. We’ve seen a lot of efforts in this direction:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The inline assembly RFC has &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2873-inline-asm.html&quot;&gt;merged&lt;/a&gt; and new implementation ready for experimentation&lt;/li&gt;
+&lt;li&gt;Procedural macros have been stabilized in most positions &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/07/16/Rust-1.45.0.html#stabilizing-function-like-procedural-macros-in-expressions-patterns-and-statements&quot;&gt;as of Rust 1.45&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;There is a proposal for a MVP of const generics, which we’re hoping to &lt;a href&#x3D;&quot;https://without.boats/blog/shipping-const-generics/&quot;&gt;ship in 2020&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The async foundations group is expecting to post an RFC on the &lt;code&gt;Stream&lt;/code&gt; trait soon&lt;/li&gt;
+&lt;li&gt;The FFI unwind project group is closing out a long-standing soundness hole, and the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2945-c-unwind-abi.html&quot;&gt;first RFC&lt;/a&gt; there has been merged&lt;/li&gt;
+&lt;li&gt;The safe transmute project group has proposed a &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2981&quot;&gt;draft RFC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The traits working group is polishing Chalk, preparing rustc integration, and seeing experimental usage in rust-analyzer. You can learn more in &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/03/28/traits-sprint-1.html&quot;&gt;their&lt;/a&gt; &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/05/18/traits-sprint-2.html&quot;&gt;blog&lt;/a&gt; &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/07/17/traits-sprint-3.html&quot;&gt;posts&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;We are transitioning to rust-analyzer as the official Rust IDE solution, with a &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2912-rust-analyzer.html&quot;&gt;merged RFC&lt;/a&gt; laying out the plan&lt;/li&gt;
+&lt;li&gt;Rust’s tier system is being formalized with guarantees and expectations set in an &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2803&quot;&gt;in-progress RFC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Compiler performance work continues, with wins of &lt;a href&#x3D;&quot;https://perf.rust-lang.org/compare.html?start&#x3D;2020-01-01&amp;end&#x3D;&amp;stat&#x3D;instructions%3Au&quot;&gt;10-30%&lt;/a&gt; on many of our benchmarks&lt;/li&gt;
+&lt;li&gt;Reading into uninitialized buffers has an open &lt;a href&#x3D;&quot;https://github.com/sfackler/rfcs/blob/read-buf/text/0000-read-buf.md&quot;&gt;RFC&lt;/a&gt;, solving another long-standing problem for I/O in Rust&lt;/li&gt;
+&lt;li&gt;A project group proposal for portable SIMD in std has an open &lt;a href&#x3D;&quot;https://github.com/KodrAus/rfcs/blob/simd-pg/text/0000-stdsimd.md&quot;&gt;RFC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;A project group proposal for error handling ergonomics, focusing on the std::error API, has an open &lt;a href&#x3D;&quot;https://github.com/yaahc/rfcs/blob/ehpg/text/0000-project-error-handling.md&quot;&gt;RFC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;std::sync&lt;/code&gt; module updates are in brainstorming phase&lt;/li&gt;
+&lt;li&gt;Rustdoc&#x27;s support for intra-doc links is &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/74430&quot;&gt;close to stabilization&lt;/a&gt;!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There’s been a lot of other work as well both within the Rust teams, but these items highlight some of the issues and designs that are being worked on actively by the Rust teams.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#improve-project-functioning-and-governance&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improve-project-functioning-and-governance&quot;&gt;&lt;/a&gt;Improve project functioning and governance&lt;/h2&gt;
+&lt;p&gt;Another goal was to document and improve our processes for running the project. We had three main subgoals.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#improved-visibility-into-state-of-initiatives-and-design-efforts&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improved-visibility-into-state-of-initiatives-and-design-efforts&quot;&gt;&lt;/a&gt;Improved visibility into state of initiatives and design efforts&lt;/h3&gt;
+&lt;p&gt;The Rust teams are moving to the use of &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2856-project-groups.html&quot;&gt;project groups&lt;/a&gt; for exploratory work, aiming to create dedicated groups of people who can explore an area, propose a design, and see it through to completion. The language team has kicked us off with &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-safe-transmute/&quot;&gt;safe transmute&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-ffi-unwind/&quot;&gt;FFI unwind&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-inline-asm&quot;&gt;inline assembly&lt;/a&gt; project groups. All of these have been enormous successes! Other teams are looking to use this model as well.&lt;/p&gt;
+&lt;p&gt;The compiler team has begun publishing &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-perf/tree/master/triage&quot;&gt;weekly performance triage reports&lt;/a&gt;, in the continuing drive to reduce compile times. The LLVM working group has also been helping to highlight performance regressions in &lt;a href&#x3D;&quot;https://nikic.github.io/2020/05/10/Make-LLVM-fast-again.html&quot;&gt;LLVM itself&lt;/a&gt;, to reduce compile time performance regressions when updating LLVM.&lt;/p&gt;
+&lt;p&gt;The &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/&quot;&gt;compiler team&lt;/a&gt; has introduced &lt;a href&#x3D;&quot;https://forge.rust-lang.org/compiler/mcp.html&quot;&gt;Major Change Proposals&lt;/a&gt; as a way to introduce larger changes to the implementation, surfacing design questions before implementation work begins. The &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/&quot;&gt;language team&lt;/a&gt; is also experimenting with a &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/proposing_a_project.html&quot;&gt;similar process&lt;/a&gt; for gaining quick language team feedback on proposals and, potentially, forming project groups. These both give a high-level view of changes being proposed, letting interested parties follow along without needing to subscribe to our very busy repositories.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#increase-mentoring-leadership-and-organizational-bandwidth&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;increase-mentoring-leadership-and-organizational-bandwidth&quot;&gt;&lt;/a&gt;Increase mentoring, leadership, and organizational bandwidth&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;The language team has identified a path for contributors to membership on the team, involving participation and leading in project group efforts. For more details, see &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/07/09/lang-team-path-to-membership.html&quot;&gt;their post&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The Governance working group has been formalizing existing processes into RFCs, such as the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2856-project-groups.html&quot;&gt;Project Group RFC&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2872&quot;&gt;Access Policy RFC&lt;/a&gt;, and more.&lt;/li&gt;
+&lt;li&gt;The library team is pioneering the effort of drafting formal &lt;a href&#x3D;&quot;https://github.com/KodrAus/rfcs/blob/libs-governance/text/0000-libs-governance.md&quot;&gt;charters&lt;/a&gt; for teams, with the help of the governance working group.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#making-design-discussions-more-productive-and-less-exhausting&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;making-design-discussions-more-productive-and-less-exhausting&quot;&gt;&lt;/a&gt;Making design discussions more productive and less exhausting&lt;/h3&gt;
+&lt;p&gt;The primary effort here has been the project groups, which have so far been largely a success. We expect to do more here in the future.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Core Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.46.0</title>
@@ -631,68 +694,6 @@ We couldn&#x27;t have done it without all of you. &lt;a href&#x3D;&quot;https://
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>2020 Event Lineup - Update</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/06/10/event-lineup-update.html" type="text/html" title="2020 Event Lineup - Update" />
-        <published>2020-06-10T00:00:00+00:00</published>
-        <updated>2020-06-10T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/06/10/event-lineup-update.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/06/10/event-lineup-update.html">&lt;p&gt;In 2020 the way we can do events suddenly changed.
-In the past we had in-person events all around the world, with some major conferences throughout the year.
-With everything changed due to a global pandemic this won&#x27;t be possible anymore.
-Nonetheless the Rust community found ways to continue with events in some form or another.
-With more and more events moving online they are getting more accessible to people no matter where they are.&lt;/p&gt;
-&lt;p&gt;Below you find updated information about Rust events in 2020.&lt;/p&gt;
-&lt;p&gt;Do you plan to run a Rust online event?
-Send an email to the &lt;a href&#x3D;&quot;mailto:community@rust-lang.org&quot;&gt;Rust Community team&lt;/a&gt; and the team will be able to get your event on the calendar and might be able to offer further help.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#rust-latam&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rust-latam&quot;&gt;&lt;/a&gt;&lt;strong&gt;Rust LATAM&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;Unfortunately the Latin American event &lt;a href&#x3D;&quot;https://rustlatam.org/&quot;&gt;Rust LATAM&lt;/a&gt; had to be canceled this year.
-The team hopes to be able to resume the event in the future.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#oxidizejuly-17th-20th-2020&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;oxidizejuly-17th-20th-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;Oxidize&lt;/strong&gt;&lt;br&gt;July 17th-20th, 2020&lt;/h2&gt;
-&lt;p&gt;The &lt;a href&#x3D;&quot;https://oxidizeconf.com/&quot;&gt;Oxidize conference&lt;/a&gt; was relabeled to become Oxidize Global.
-From July 17-20 you will be able to learn about embedded systems and IoT in Rust.
-Over the course of 4 days you will be able to attend online workshops (July 17th), listen to talks (July 18th) and take part in the Impl Days, where you can collaborate with other Embedded Rust contributors in active programming sessions.&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://oxidizeconf.com/#Schedule&quot;&gt;Tickets are on sale&lt;/a&gt; and the speakers &amp;amp; talks will be announced soon.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#rustconfaugust-20th-2020&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rustconfaugust-20th-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;RustConf&lt;/strong&gt;&lt;br&gt;August 20th, 2020&lt;/h2&gt;
-&lt;p&gt;The official &lt;a href&#x3D;&quot;https://rustconf.com/&quot;&gt;RustConf&lt;/a&gt; will be taking place fully online.
-Listen to talks and meet other Rust enthusiasts online in digital meetups &amp;amp; breakout rooms.
-See the &lt;a href&#x3D;&quot;https://rustconf.com/speakers&quot;&gt;list of speakers&lt;/a&gt;, register already and follow &lt;a href&#x3D;&quot;https://twitter.com/rustconf&quot;&gt;Twitter&lt;/a&gt; for updates as the event date approaches!&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#rusty-daysjuly-27th---august-2nd-2020&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rusty-daysjuly-27th---august-2nd-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;Rusty Days&lt;/strong&gt;&lt;br&gt;July 27th - August 2nd, 2020&lt;/h2&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://rusty-days.org/&quot;&gt;Rusty Days&lt;/a&gt; is a new conference and was planned to happen in Wroclaw, Poland.
-It now turned into a virtual Rust conference stretched over five days.
-You&#x27;ll be able to see five speakers with five talks -- and everything is free of charge, streamed online and available to watch later.&lt;/p&gt;
-&lt;p&gt;The &lt;a href&#x3D;&quot;https://rusty-days.org/cfp&quot;&gt;Call for Papers&lt;/a&gt; is open. Follow &lt;a href&#x3D;&quot;https://twitter.com/rdconf&quot;&gt;Twitter&lt;/a&gt; for updates.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#rustlaboctober-16th-17th-2020&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rustlaboctober-16th-17th-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;RustLab&lt;/strong&gt;&lt;br&gt;October 16th-17th, 2020&lt;/h2&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://www.rustlab.it&quot;&gt;RustLab 2020&lt;/a&gt; is also turning into an online event.
-The details are not yet settled, but they are aiming for the original dates.
-Keep an eye on &lt;a href&#x3D;&quot;https://twitter.com/rustlab_conf&quot;&gt;their Twitter stream&lt;/a&gt; for further details.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#rustfest-netherlands-globalnovember-7th-8th-2020&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rustfest-netherlands-globalnovember-7th-8th-2020&quot;&gt;&lt;/a&gt;&lt;strong&gt;RustFest &lt;del&gt;Netherlands&lt;/del&gt; Global&lt;/strong&gt;&lt;br&gt;November 7th-8th, 2020&lt;/h2&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://netherlands.rustfest.eu/&quot;&gt;RustFest Netherlands&lt;/a&gt; was supposed to happen this June.
-The team decided to postpone the event and is now happening as an online conference in Q4 of this year.
-More information will be available soon on the &lt;a href&#x3D;&quot;https://blog.rustfest.eu/&quot;&gt;RustFest blog&lt;/a&gt; and also on &lt;a href&#x3D;&quot;https://twitter.com/rustfest&quot;&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Update 2020-06-18&lt;/strong&gt;: RustFest has announced its dates: November 7th &amp;amp; 8th, running as an online community conference.
-See &lt;a href&#x3D;&quot;https://blog.rustfest.eu/announcing-rustfest-2020&quot;&gt;the announcement blog post for details&lt;/a&gt;.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;Conferences are not the only thing happening.
-More and more local meetups get turned into online events.
-We try to highlight these in the &lt;a href&#x3D;&quot;https://calendar.google.com/calendar/embed?src&#x3D;apd9vmbc22egenmtu5l6c5jbfc@group.calendar.google.com&quot;&gt;community calendar&lt;/a&gt; as well as in the &lt;a href&#x3D;&quot;https://this-week-in-rust.org/&quot;&gt;This Week in Rust newsletter&lt;/a&gt;.
-Some Rust developers are streaming their work on the language &amp;amp; their Rust projects.
-You can get more information in a &lt;a href&#x3D;&quot;https://github.com/jamesmunns/awesome-rust-streaming&quot;&gt;curated list of Rust streams&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Do you plan to run a Rust online event?
-Send an email to the &lt;a href&#x3D;&quot;mailto:community@rust-lang.org&quot;&gt;Rust Community team&lt;/a&gt; and the team will be able to get your event on the calendar and might be able to offer further help.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Community Team</name>
         </author>
     </entry>
     
