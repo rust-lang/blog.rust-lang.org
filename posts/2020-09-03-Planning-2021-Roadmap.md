@@ -28,7 +28,7 @@ There is now an [open RFC](https://github.com/rust-lang/rfcs/pull/2966) proposin
 
 ## Follow-through on in-progress designs and efforts
 
-One of our goals for 2020 was to push “in progress” design efforts through to completion. We’ve seen a lot of such efforts making progress:
+One of our goals for 2020 was to push “in progress” design efforts through to completion. We’ve seen a lot of efforts in this direction:
 
 - The inline assembly RFC has [merged](https://rust-lang.github.io/rfcs/2873-inline-asm.html) and new implementation ready for experimentation
 - Procedural macros have been stabilized in most positions [as of Rust 1.45](https://blog.rust-lang.org/2020/07/16/Rust-1.45.0.html#stabilizing-function-like-procedural-macros-in-expressions-patterns-and-statements)
