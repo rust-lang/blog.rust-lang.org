@@ -17,7 +17,7 @@ To give you some context for the upcoming year, we established these high-level 
 
 ## Prepare for a possible Rust 2021 Edition
 
-There is now an [open RFC](https://github.com/rust-lang/rfcs/pull/2966) proposing a plan for the 2021 edition! There has been quite a bit of discussion, but we hope to have it merged within the next 6 weeks. The plan is for the new edition to be much smaller in scope than Rust 2018. It it is expected to include a few minor tweaks to improve language usability, along with the promotion of various style lints so that they will be “deny by default”. We believe that we are on track for being able to produce an edition in 2021.
+There is now an [open RFC](https://github.com/rust-lang/rfcs/pull/2966) proposing a plan for the 2021 edition! There has been quite a bit of discussion, but we hope to have it merged within the next 6 weeks. The plan is for the new edition to be much smaller in scope than Rust 2018. It it is expected to include a few minor tweaks to improve language usability, along with the promotion of various edition idiom lints (like requiring `dyn Trait` over `Trait`) so that they will be “deny by default”. We believe that we are on track for being able to produce an edition in 2021.
 
 ## Follow-through on in-progress designs and efforts
 
@@ -37,6 +37,7 @@ One of our goals for 2020 was to push “in progress” design efforts through t
 - A project group proposal for portable SIMD in std has an open [RFC](https://github.com/KodrAus/rfcs/blob/simd-pg/text/0000-stdsimd.md)
 - A project group proposal for error handling ergonomics, focusing on the std::error API, has an open [RFC](https://github.com/yaahc/rfcs/blob/ehpg/text/0000-project-error-handling.md)
 - `std::sync` module updates are in brainstorming phase
+- Rustdoc's support for intra-doc links is [close to stabilization](https://github.com/rust-lang/rust/pull/74430)!
 
 There’s been a lot of other work as well both within the Rust teams, but these items highlight some of the issues and designs that are being worked on actively by the Rust teams.
 
