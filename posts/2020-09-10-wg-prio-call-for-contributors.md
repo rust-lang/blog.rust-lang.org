@@ -11,7 +11,7 @@ The [WG-prioritization][wg-prio] can be the right place for you: we are looking 
 
 ## What is the WG-prioritization?
 
-We do triaging on the Github rust lang issue tracker, mainly deciding if bugs are critical (potential release blockers) and prepare the weekly agenda for the Compiler Team with the most pressing issues to be taken care of.
+The Prioritization WG is a compiler working group dedicated to handling the most important bugs found in `rustc`, to ensure that they are resolved. We do triaging on the Github rust lang issue tracker, mainly deciding if bugs are critical (potential release blockers) and prepare the weekly agenda for the Compiler Team with the most pressing issues to be taken care of.
 
 Here is a bit more [comprehensive description][wg-prio]. How we work is detailed [on the Rust Forge](https://forge.rust-lang.org/compiler/prioritization.html).
 
@@ -41,6 +41,7 @@ Everything is described in excruciatingly detail on [Rust Forge](https://forge.r
 
 ## How can I contribute?
 
+- **Help with triaging compiler issues**: helping keeping the issue tracker tidy is very important for any big project. Labeling and pinging people to work on MCVEs or bisection is very helpful to resolve any issue, and is required for our next task:
 - **Help with issues prioritization**: keep an eye on the messages on our Zulip stream (~10 issues a week) and cast a vote on what the priority should be. Analyze the issue, figure out how the release could be impacted. More votes balance the prioritization. A couple of made-up examples:
   - **ICE (Internal Compiler Error) on Rust stable channel for Tier3 supported platform**: unless it impacts Tier 1 platforms will likely be labelled as `P-low` (low priority). Will probably ping the relevant team and that's it until someone will pick it.
   - **A "hello world" kind of code snippet fails to compile in the latest nightly**: that's a critical issue (`P-critical`) and we must stop this regression before it gets into the `beta` or (gosh!) `stable` channel. The relevant team will be swiftly alerted.
@@ -52,13 +53,13 @@ Everything is described in excruciatingly detail on [Rust Forge](https://forge.r
 
 ## Ok, but can I actually contribute? I don't feel skilled enough
 
-Yes, you are! There will always be one or more members available to explain, mentor and clarify things. Don't be shy and do not refrain from asking questions.
+Yes, you are! There will always be one or more members available to explain, mentor and clarify things. Don't be shy and do not refrain from asking questions. You will very quickly be able to give a helpful opinion in our discussions.
 
 Everyone can contribute on their capacity and availability.
 
 ## Where do we hang out
 
-One of the great things of the Rust governance is its openness. Join our stream [#t-compiler/wg-prioritization][zulip-wg-prio] and peek at how we work and if you want, also feel free to keep an eye to the weekly Team Compiler official meetings on [#t-compiler/meetings](https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings). You can even simply just hang out on our Zulip stream, see how things work and then get involved when you feel to.
+One of the great things of the Rust governance is its openness. Join our stream [#t-compiler/wg-prioritization][zulip-wg-prio] and peek at how we work and if you want, also feel free to keep an eye to the weekly Team Compiler official meetings on [#t-compiler/meetings](https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings). You can even simply just hang out on our Zulip stream, see how things work and then get involved where you feel able.
 
 The main contact points for this working group are Santiago Pastorino (`@Santiago Pastorino` on Zulip) and Wesley Wiser (`@Wesley Wiser` on Zulip).
 
