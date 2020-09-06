@@ -29,7 +29,7 @@ Our week starts on Thursday/Friday after the Rust Compiler Team meeting (one of 
 
 In the following days the WG-prioritization and other teams will asynchronously monitor the issue tracker - everyone at their own pace, when time allows - trying to assign a priority to new issues. This greatly helps the various teams (compiler team, standard library team, documentation team and so on) to sort and prioritize their work.
 
-If the issue priority is not immediately clear, it will tagged with a temporary label and briefly discussed on Zulip by the WG-prioritization: is this issue critical? Is it clear? Does it need a [minimal reproducible example](https://stackoverflow.com/help/minimal-reproducible-example) (often abbreviated in `MCVE`) or even better a [git bisect](https://github.com/rust-lang/cargo-bisect-rustc) to find a regression (we love contributors bisecting code)?
+If the issue priority is not immediately clear, it will be tagged with a temporary label and briefly discussed on Zulip by the WG-prioritization: is this issue critical? Is it clear? Does it need a [minimal reproducible example](https://stackoverflow.com/help/minimal-reproducible-example) (often abbreviated in `MCVE`) or even better a [git bisect](https://github.com/rust-lang/cargo-bisect-rustc) to find a regression (we love contributors bisecting code)?
 
 The day before the meeting the agenda is finalized and handed to the Compiler Team.
 
@@ -37,7 +37,7 @@ Someone from the WG-Prioritization will then attend the meeting and provide deta
 
 Rinse and repeat for the next meeting.
 
-Everything is described in excruciatingly detail on [Rust Forge](https://forge.rust-lang.org/compiler/prioritization/procedure.html). Please have a look there to learn more.
+Everything is described in excruciating detail on [Rust Forge](https://forge.rust-lang.org/compiler/prioritization/procedure.html). Please have a look there to learn more.
 
 ## How can I contribute?
 
