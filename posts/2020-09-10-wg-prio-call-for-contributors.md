@@ -11,7 +11,7 @@ The [WG-prioritization][wg-prio] can be the right place for you: we are looking 
 
 ## What is the WG-prioritization?
 
-The Prioritization WG is a compiler working group dedicated to handling the most important bugs found in `rustc`, to ensure that they are resolved. We do triaging on the Github rust lang issue tracker, mainly deciding if bugs are critical (potential release blockers) and prepare the weekly agenda for the Compiler Team with the most pressing issues to be taken care of.
+The Prioritization WG is a compiler working group dedicated to handling the most important bugs found in `rustc`, to ensure that they are resolved. We do triaging on the [Github rust issue tracker](https://github.com/rust-lang/rust/issues), mainly deciding if bugs are critical (potential release blockers) and prepare the weekly agenda for the Compiler Team with the most pressing issues to be taken care of.
 
 Here is a bit more [comprehensive description][wg-prio]. How we work is detailed [on the Rust Forge](https://forge.rust-lang.org/compiler/prioritization.html).
 
@@ -29,7 +29,7 @@ Our week starts on Thursday/Friday after the Rust Compiler Team meeting (one of 
 
 In the following days the WG-prioritization and other teams will asynchronously monitor the issue tracker - everyone at their own pace, when time allows - trying to assign a priority to new issues. This greatly helps the various teams (compiler team, standard library team, documentation team and so on) to sort and prioritize their work.
 
-If the issue priority is not immediately clear, it will be tagged with a temporary label and briefly discussed on Zulip by the WG-prioritization: is this issue critical? Is it clear? Does it need a [minimal reproducible example](https://stackoverflow.com/help/minimal-reproducible-example) (often abbreviated in `MCVE`) or even better a [git bisect](https://github.com/rust-lang/cargo-bisect-rustc) to find a regression (we love contributors bisecting code)?
+If the issue priority is not immediately clear, it will be tagged with a temporary label and briefly discussed on Zulip by the WG-prioritization: is this issue critical? Is it clear? Does it need a [minimal reproducible example](https://stackoverflow.com/help/minimal-reproducible-example) (often abbreviated in `MCVE`) or even better a [bisect](https://github.com/rust-lang/cargo-bisect-rustc) to find a regression (we love contributors bisecting code)?
 
 The day before the meeting the agenda is finalized and handed to the Compiler Team.
 
@@ -49,7 +49,7 @@ Everything is described in excruciating detail on [Rust Forge](https://forge.rus
 
     With some experience, you will develop an _instinct_ to prioritize issues :-)
 
-- **Help properly summarize issues in the agenda**: what is this issue about? What has been already done to frame a context? Is is a regression? We add any detail that could be relevant to the Compiler team during their meeting. These folks are busy and could use all the help to get the context of an issue at a glance.
+- **Help properly summarize issues in the agenda**: what is this issue about? What has been already done to frame a context? Is this a regression? We add any detail that could be relevant to the Compiler team during their meeting. These folks are busy and could use all the help to get the context of an issue at a glance.
 
 ## Ok, but can I actually contribute? I don't feel skilled enough
 
