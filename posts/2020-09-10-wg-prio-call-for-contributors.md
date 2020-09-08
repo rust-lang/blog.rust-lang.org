@@ -2,7 +2,7 @@
 layout: post
 title: A call for contributors from the WG-prioritization team
 author: The Rust WG-Prioritization Team
-release: false
+release: true
 ---
 
 Are you looking for opportunities to contribute to the Rust community? Have some spare time to donate? And maybe learn something interesting along the way?
