@@ -37,16 +37,16 @@ Finally, we wanted to thank everyone who helped develop, polish, and test the su
 [2019 survey]: https://blog.rust-lang.org/2020/04/17/Rust-survey-2019.html
 
 [survey]: https://docs.google.com/forms/d/e/1FAIpQLSf__XKjS2xa55jUOi78ONvjG0elG5ZWqOz0MYdX6sgmcjb5pw/viewform?usp=sf_link
-[portuguese]: 
-[simplified chinese]: 
-[polish]: 
-[vietnamese]: 
-[french]: 
-[italian]: 
-[korean]: 
-[spanish]: 
-[russian]: 
-[traditional chinese]: 
-[swedish]: 
-[german]: 
-[japanese]: 
+[Portuguese]: 
+[Simplified Chinese]: 
+[Polish]: 
+[Vietnamese]: 
+[French]: 
+[Italian]: 
+[Korean]: 
+[Spanish]: 
+[Russian]: 
+[Traditional chinese]: 
+[Swedish]: 
+[German]: 
+[Japanese]: 
