@@ -37,16 +37,16 @@ Finally, we wanted to thank everyone who helped develop, polish, and test the su
 [2019 survey]: https://blog.rust-lang.org/2020/04/17/Rust-survey-2019.html
 
 [survey]: https://docs.google.com/forms/d/e/1FAIpQLSf__XKjS2xa55jUOi78ONvjG0elG5ZWqOz0MYdX6sgmcjb5pw/viewform?usp=sf_link
-[Portuguese]: 
+[Portuguese]: https://docs.google.com/forms/d/e/1FAIpQLSeMTgzEh1MIvOnH0RPcyZVcg1OOcjsjp1eR55KrTQsP6jvOvQ/viewform?usp=sf_link
 [Simplified Chinese]: 
-[Polish]: 
-[Vietnamese]: 
-[French]: 
-[Italian]: 
-[Korean]: 
-[Spanish]: 
-[Russian]: 
-[Traditional chinese]: 
-[Swedish]: 
-[German]: 
-[Japanese]: 
+[Polish]: https://docs.google.com/forms/d/e/1FAIpQLScBvNYpnh4fUyCUaUt6Er7jA96HONN7aoQFSloGGPnZPq8z4w/viewform?usp=sf_link
+[Vietnamese]: https://docs.google.com/forms/d/e/1FAIpQLSc_EKfKS8ZMxGyqGMLZvPL7cBbYT-CN33i13rxkIXq_CDxXHw/viewform?usp=sf_link
+[French]: https://docs.google.com/forms/d/e/1FAIpQLSf4nsxMALOgsibbOuOCyqtw_kRXw5S3GXT-zD91vCokP9T1QA/viewform?usp=sf_link
+[Italian]: https://docs.google.com/forms/d/e/1FAIpQLSc_QaYM_YNgqXuykSPpTHsK9A-kPmpXhrDJGwbMMKnkYbDcug/viewform?usp=sf_link
+[Korean]: https://docs.google.com/forms/d/e/1FAIpQLSeaV5iay4xjS0ng3SdIJ3X_gMG5VFYpSk_vyEpim6uG21RM3A/viewform?usp=sf_link
+[Spanish]: https://docs.google.com/forms/d/e/1FAIpQLScn-49B-k7ZD6PUb6PqzE_X105X4KHJ9BJrYEZ0PIN8v6H6IA/viewform?usp=sf_link
+[Russian]: https://docs.google.com/forms/d/e/1FAIpQLSccIcuXtEj-XmzGRDr_JJeW9gf1xN-PC31L3oSbGPhqedQV6g/viewform?usp=sf_link
+[Traditional Chinese]: https://docs.google.com/forms/d/e/1FAIpQLSdExtEatN0UOsjmadXcGcHyQpwuhsgkLCQb-VLoRzL9P1K5iw/viewform?usp=sf_link
+[Swedish]: https://docs.google.com/forms/d/e/1FAIpQLSdt0KZFqf9tR-xb7JV3uiAWTuLlotN8LbTgGBr2H2rpsQDIJQ/viewform?usp=sf_link
+[German]: https://docs.google.com/forms/d/e/1FAIpQLSeNx7KKNM48dWycfwGzcJV3z87cwG941n4rke_-HQeblRUHDw/viewform?usp=sf_link
+[Japanese]: https://docs.google.com/forms/d/e/1FAIpQLSe68ThS0F1rmCDJJy4v7GfLVKQiUi8KGvJcr2OLyr8brvWM_Q/viewform?usp=sf_link
