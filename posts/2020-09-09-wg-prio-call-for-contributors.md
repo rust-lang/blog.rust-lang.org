@@ -25,13 +25,13 @@ This requires our workflow to be as efficient and well documented as possible. A
 
 ## The typical week of a WG-prioritization member
 
-Our week starts on Thursday/Friday after the Rust Compiler Team meeting (one of the cool teams that keep that beast at bay). We summarize the meeting and draft an agenda for the following one.
+Our week starts on Thursday/Friday after the Rust Compiler Team meeting (one of the cool teams that keep that beast at bay) by preparing a new agenda for the following meeting, leaving placeholders to be filled during the week.
 
 In the following days the WG-prioritization and other teams will asynchronously monitor the issue tracker - everyone at their own pace, when time allows - trying to assign a priority to new issues. This greatly helps the compiler team to sort and prioritize their work.
 
 If the issue priority is not immediately clear, it will be tagged with a temporary label and briefly discussed on Zulip by the WG-prioritization: is this issue critical? Is it clear? Does it need a [minimal reproducible example](https://stackoverflow.com/help/minimal-reproducible-example) (often abbreviated in `MCVE`) or even better a [bisect](https://github.com/rust-lang/cargo-bisect-rustc) to find a regression (we love contributors bisecting code)? We then assign the priority by choosing a value in a range from `P-low` to `P-critical`. The rationale behind the priority levels is detailed in our [guide](https://forge.rust-lang.org/compiler/prioritization/priority-levels.html).
 
-The day before the meeting the agenda is finalized (gathering also the last inputs from other teams) and finally handed to the Compiler Team.
+The day before the meeting the agenda is filled and handed to the Compiler Team.
 
 Someone from the WG-Prioritization will attend the meeting and provide some support (if needed).
 
