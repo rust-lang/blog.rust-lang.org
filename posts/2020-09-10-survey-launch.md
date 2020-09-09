@@ -38,7 +38,7 @@ Finally, we wanted to thank everyone who helped develop, polish, and test the su
 
 [survey]: https://docs.google.com/forms/d/e/1FAIpQLSf__XKjS2xa55jUOi78ONvjG0elG5ZWqOz0MYdX6sgmcjb5pw/viewform?usp=sf_link
 [Portuguese]: https://docs.google.com/forms/d/e/1FAIpQLSeMTgzEh1MIvOnH0RPcyZVcg1OOcjsjp1eR55KrTQsP6jvOvQ/viewform?usp=sf_link
-[Simplified Chinese]: 
+[Simplified Chinese]: https://wj.qq.com/s2/7111747/269f
 [Polish]: https://docs.google.com/forms/d/e/1FAIpQLScBvNYpnh4fUyCUaUt6Er7jA96HONN7aoQFSloGGPnZPq8z4w/viewform?usp=sf_link
 [Vietnamese]: https://docs.google.com/forms/d/e/1FAIpQLSc_EKfKS8ZMxGyqGMLZvPL7cBbYT-CN33i13rxkIXq_CDxXHw/viewform?usp=sf_link
 [French]: https://docs.google.com/forms/d/e/1FAIpQLSf4nsxMALOgsibbOuOCyqtw_kRXw5S3GXT-zD91vCokP9T1QA/viewform?usp=sf_link
