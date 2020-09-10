@@ -16,6 +16,7 @@ Completing this survey should take about 10–15 minutes and is anonymous unless
 - [German]
 - [Italian]
 - [Japanese]
+- [Korean]
 - [Polish]
 - [Portuguese]
 - [Russian]
@@ -43,7 +44,7 @@ Finally, we wanted to thank everyone who helped develop, polish, and test the su
 [Vietnamese]: https://docs.google.com/forms/d/e/1FAIpQLSc_EKfKS8ZMxGyqGMLZvPL7cBbYT-CN33i13rxkIXq_CDxXHw/viewform?usp=sf_link
 [French]: https://docs.google.com/forms/d/e/1FAIpQLSf4nsxMALOgsibbOuOCyqtw_kRXw5S3GXT-zD91vCokP9T1QA/viewform?usp=sf_link
 [Italian]: https://docs.google.com/forms/d/e/1FAIpQLSc_QaYM_YNgqXuykSPpTHsK9A-kPmpXhrDJGwbMMKnkYbDcug/viewform?usp=sf_link
-[Korean]: https://docs.google.com/forms/d/e/1FAIpQLSeaV5iay4xjS0ng3SdIJ3X_gMG5VFYpSk_vyEpim6uG21RM3A/viewform?usp=sf_link
+[Korean]: https://docs.google.com/forms/d/1vPoB5oz50dbJFyO98N2qeDUK1QAnwd5OQA4GRcEIrr8/viewform?edit_requested=true
 [Spanish]: https://docs.google.com/forms/d/e/1FAIpQLScn-49B-k7ZD6PUb6PqzE_X105X4KHJ9BJrYEZ0PIN8v6H6IA/viewform?usp=sf_link
 [Russian]: https://docs.google.com/forms/d/e/1FAIpQLSccIcuXtEj-XmzGRDr_JJeW9gf1xN-PC31L3oSbGPhqedQV6g/viewform?usp=sf_link
 [Traditional Chinese]: https://docs.google.com/forms/d/e/1FAIpQLSdExtEatN0UOsjmadXcGcHyQpwuhsgkLCQb-VLoRzL9P1K5iw/viewform?usp=sf_link
