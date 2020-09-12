@@ -65,6 +65,8 @@ fn main() {
         macro m() {}
     };
 }
+```
+```
 thread 'rustc' panicked at 'called `Option::unwrap()` on a `None` value', /home/joshua/src/rust/src/librustc_hir/definitions.rs:358:9
 ```
 
