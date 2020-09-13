@@ -16,15 +16,9 @@ pub struct S;
 pub fn f() {}
 ```
 
-Since [docs.rs](https://docs.rs) uses the latest nightly, intra-doc links are
-available to use today! Feel free to switch your libraries to use intra-doc
-links, which will fix broken links for re-exported types and links to different
-crates. We hope to add support for automating this process with [`cargo fix`]
-in the future.
+Intra-doc links have been around for a while, all the way back [since 2017][tracking-issue]! What changed recently is that they will be available on `stable` starting with Rust 1.48.0. We recommend that you switch your libraries to use intra-doc links, which will fix broken links for re-exported types and links to different crates. We hope to add support for automating this process with [`cargo fix`] in the future.
 
 ## The history of intra-doc links
-
-Intra-doc links have been around for a while, all the way back [since 2017][tracking-issue]!
 
 I (Manish) and [QuietMisdreavus](https://github.com/QuietMisdreavus) started working on them in December 2017. Mozilla had given the whole company a couple weeks off after the release of [Firefox Quantum](https://blog.mozilla.org/blog/2017/11/14/introducing-firefox-quantum/), and I was visiting family in Mumbai. This meant that I had a fair amount of free time, and we were in diametrically opposite timezones. QuietMisdreavus had been working on the feature for a while but was less familiar with rustc's path resolution code, so I decided to help. We ended up pairing for those few weeks: during the day I'd write some code, discuss with QuietMisdreavus in the evening, and then hand it over for her to continue overnight. It was a great experience, pairing in open source can be really fun! This ended up in a [46-commit pull request][intra-pr] with commits from both of us.
 
