@@ -16,6 +16,12 @@ pub struct S;
 pub fn f() {}
 ```
 
+Since [docs.rs](https://docs.rs) uses the latest nightly, intra-doc links are
+available to use today! Feel free to switch your libraries to use intra-doc
+links, which will fix broken links for re-exported types and links to different
+crates. We hope to add support for automating this process with [`cargo fix`]
+in the future.
+
 ## The history of intra-doc links
 
 Intra-doc links have been around for a while, all the way back [since 2017][tracking-issue]!
@@ -215,3 +221,4 @@ In particular, there have been a ton of people who stepped up to help [convert t
 [primitive-module-ambiguity]: https://github.com/rust-lang/rust/pull/75815
 [remove-disambiguators]: https://github.com/rust-lang/rust/pull/76078
 [improve-suggestions]: https://github.com/rust-lang/rust/pull/75756
+[`cargo fix`]: https://github.com/rust-lang/rust/issues/75805
