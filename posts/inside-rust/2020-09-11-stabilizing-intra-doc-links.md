@@ -6,7 +6,7 @@ team: the rustdoc team <https://www.rust-lang.org/governance/teams/dev-tools#rus
 
 # Intra-doc links close to stabilization
 
-We're excited to share that
+We're excited to share that intra-doc links are stabilizing soon!
 
 [Intra-doc links] are a feature of `rustdoc` that allow you to link to '[items]' - functions, types, and more - by their name, instead of a hard-coded url. This lets you have accurate links even if your types are [re-exported in a different module or crate][broken-string-links]. Here is a simple example:
 
