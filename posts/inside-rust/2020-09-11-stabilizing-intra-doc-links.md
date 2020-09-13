@@ -16,7 +16,7 @@ pub struct S;
 pub fn f() {}
 ```
 
-Intra-doc links have been around for a while, all the way back [since 2017][tracking-issue]! What changed recently is that they will be available on `stable` starting with Rust 1.48.0. We recommend that you switch your libraries to use intra-doc links, which will fix broken links for re-exported types and links to different crates. We hope to add support for automating this process with [`cargo fix`] in the future.
+Intra-doc links have been around for a while, all the way back [since 2017][tracking-issue]! They have been available on `nightly` without flags (and thus, on docs.rs), so you may be surprised to hear that they weren't yet stable. What's changing now is that they will be available on stable Rust, which also means we are more confident in the implementation and would strongly encourage their use. We recommend that you switch your libraries to use intra-doc links, which will fix broken links for re-exported types and links to different crates. We hope to add support for automating this process with [`cargo fix`] in the future.
 
 ## The history of intra-doc links
 
