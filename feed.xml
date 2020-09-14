@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-09-14T21:36:13+00:00</updated>
+    <updated>2020-09-14T21:56:17+00:00</updated>
 
     
     <entry>
@@ -20,51 +20,6 @@
         <updated>2020-09-14T00:00:00+00:00</updated>
         <id>https://blog.rust-lang.org/2020/09/14/wg-prio-call-for-contributors.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2020/09/14/wg-prio-call-for-contributors.html">&lt;p&gt;Are you looking for opportunities to contribute to the Rust community? Have some spare time to donate? And maybe learn something interesting along the way?&lt;/p&gt;
-&lt;p&gt;The &lt;a href&#x3D;&quot;https://rust-lang.github.io/compiler-team/working-groups/prioritization&quot;&gt;WG-prioritization&lt;/a&gt; can be the right place for you: we are looking for new contributors!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-the-wg-prioritization&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-the-wg-prioritization&quot;&gt;&lt;/a&gt;What is the WG-prioritization?&lt;/h2&gt;
-&lt;p&gt;The Prioritization WG is a compiler Working Group dedicated to handling the most important bugs found in the Rust compiler (&lt;code&gt;rustc&lt;/code&gt;), to ensure that they are resolved. We stand at the frontline of the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues&quot;&gt;Github Rust issue tracker&lt;/a&gt; and our job is to do triaging, mainly deciding which bugs are critical (potential release blockers) and prepare the weekly agenda for the Compiler Team with the most pressing issues to be taken care of.&lt;/p&gt;
-&lt;p&gt;Here is a bit more &lt;a href&#x3D;&quot;https://rust-lang.github.io/compiler-team/working-groups/prioritization&quot;&gt;comprehensive description&lt;/a&gt;. How we work is detailed &lt;a href&#x3D;&quot;https://forge.rust-lang.org/compiler/prioritization.html&quot;&gt;on the Rust Forge&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Our tooling is mainly the &lt;a href&#x3D;&quot;https://github.com/rust-lang/triagebot&quot;&gt;triagebot&lt;/a&gt;, a trustful messenger that helps us by sending notification to our &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/227806-t-compiler.2Fwg-prioritization&quot;&gt;Zulip stream&lt;/a&gt; when an issue on Github is labelled.&lt;/p&gt;
-&lt;p&gt;We also have a repository with some &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team-prioritization/issues&quot;&gt;issues and meta-issues&lt;/a&gt;, where we basically note down how we would like our workflow to evolve. Contributions to these issues are welcome, but a bit more context about the workflow of this Working Group is probably necessary.&lt;/p&gt;
-&lt;p&gt;Documentation is also a fundamental part of the onboarding package that we provide to newcomers. As we basically &amp;quot;organize and sort stuff&amp;quot;, a lot happens without writing a single line of code but rather applying procedures to optimize triaging and issues prioritization.&lt;/p&gt;
-&lt;p&gt;This requires our workflow to be as efficient and well documented as possible. As such, we are always open to contributions to clarify the documentation (and fresh eyeballs are especially precious for that!).&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#the-typical-week-of-a-wg-prioritization-member&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-typical-week-of-a-wg-prioritization-member&quot;&gt;&lt;/a&gt;The typical week of a WG-prioritization member&lt;/h2&gt;
-&lt;p&gt;Our week starts on Thursday/Friday after the Rust Compiler Team meeting (one of the cool teams that keep that beast at bay) by preparing a new agenda for the following meeting, leaving placeholders to be filled during the week.&lt;/p&gt;
-&lt;p&gt;In the following days the WG-prioritization and other teams will asynchronously monitor the issue tracker - everyone at their own pace, when time allows - trying to assign a priority to new issues. This greatly helps the compiler team to sort and prioritize their work.&lt;/p&gt;
-&lt;p&gt;If the issue priority is not immediately clear, it will be tagged with a temporary label and briefly discussed on Zulip by the WG-prioritization: is this issue critical? Is it clear? Does it need a &lt;a href&#x3D;&quot;https://stackoverflow.com/help/minimal-reproducible-example&quot;&gt;minimal reproducible example&lt;/a&gt; (often abbreviated in &lt;code&gt;MCVE&lt;/code&gt;) or even better a &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo-bisect-rustc&quot;&gt;bisect&lt;/a&gt; to find a regression (we love contributors bisecting code)? We then assign the priority by choosing a value in a range from &lt;code&gt;P-low&lt;/code&gt; to &lt;code&gt;P-critical&lt;/code&gt;. The rationale behind the priority levels is detailed in our &lt;a href&#x3D;&quot;https://forge.rust-lang.org/compiler/prioritization/priority-levels.html&quot;&gt;guide&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The day before the meeting the agenda is filled and handed to the Compiler Team.&lt;/p&gt;
-&lt;p&gt;Someone from the WG-Prioritization will attend the meeting and provide some support (if needed).&lt;/p&gt;
-&lt;p&gt;Rinse and repeat for the next meeting.&lt;/p&gt;
-&lt;p&gt;Everything is described in excruciating detail on &lt;a href&#x3D;&quot;https://forge.rust-lang.org/compiler/prioritization/procedure.html&quot;&gt;Rust Forge&lt;/a&gt;. Feel free to have a look there to learn more. The quantity of information there can be a bit overwhelming at first (there is quite a bit of lingo we use), but things will become clearer.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#how-can-i-contribute&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-can-i-contribute&quot;&gt;&lt;/a&gt;How can I contribute?&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Help with triaging compiler issues&lt;/strong&gt;: helping keeping the issue tracker tidy is very important for any big project. Labelling and pinging people to work on MCVEs or bisection is very helpful to resolve any issue. We focus our attention on issues labelled with &lt;code&gt;I-prioritize&lt;/code&gt; (issues that need a brief discussion before assigning a priority) but also &lt;code&gt;P-critical&lt;/code&gt; and &lt;code&gt;P-high&lt;/code&gt; (issues that need attention during the compiler meeting). All this is required for our next task:&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Help with issues prioritization&lt;/strong&gt;: keep an eye on the messages on our Zulip stream (about 10/15 issues a week) and cast a vote on what the priority should be. Analyze the issue, figure out how the release could be impacted. More votes balance the prioritization and with some experience, you will develop an &lt;em&gt;instinct&lt;/em&gt; to prioritize issues :-)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Help properly summarize issues in the agenda&lt;/strong&gt;: what is this issue about? What has been already done to frame a context? Is this a regression? We add any detail that could be relevant to the Compiler team during their meeting. These folks are busy and could use all the help to get the context of an issue at a glance.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#ok-but-can-i-actually-contribute-i-dont-feel-skilled-enough&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;ok-but-can-i-actually-contribute-i-dont-feel-skilled-enough&quot;&gt;&lt;/a&gt;Ok, but can I actually contribute? I don&#x27;t feel skilled enough&lt;/h2&gt;
-&lt;p&gt;Yes, you are! There will always be one or more members available to explain, mentor and clarify things. Don&#x27;t be shy and do not refrain from asking questions. You will very quickly be able to give a helpful opinion in our discussions.&lt;/p&gt;
-&lt;p&gt;Everyone can contribute on their capacity and availability. The reward is the warm feeling to do something concrete to ensure that the Rust compiler, one of the cornerstone of the project, stays in good shape and improves continuously. Moreover, you will be exposed to a continuous stream of new bugs and seeing how they are evaluated and managed is pretty educational.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#where-do-we-hang-out&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;where-do-we-hang-out&quot;&gt;&lt;/a&gt;Where do we hang out&lt;/h2&gt;
-&lt;p&gt;One of the great things of the Rust governance is its openness. Join our stream &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/227806-t-compiler.2Fwg-prioritization&quot;&gt;#t-compiler/wg-prioritization&lt;/a&gt;, peek at how we work and if you want, also keep an eye to the weekly Team Compiler official meetings on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;#t-compiler/meetings&lt;/a&gt;. Have a question? Don&#x27;t hesitate to open a new topic in our stream!&lt;/p&gt;
-&lt;p&gt;You can even simply just hang out on our Zulip stream, see how things work and then get involved where you feel able.&lt;/p&gt;
-&lt;p&gt;We keep a separate substream &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/245100-t-compiler.2Fwg-prioritization.2Falerts&quot;&gt;#t-compiler/wg-prioritization/alerts&lt;/a&gt; where all the issues nominated for discussion will receive their own topic. Subscription to this stream is optional for the members of the Working Group as it has a non-negligible volume of notifications (it is public and freely accessible anyway).&lt;/p&gt;
-&lt;p&gt;The main contact points for this Working Group are Santiago Pastorino (&lt;code&gt;@Santiago Pastorino&lt;/code&gt; on Zulip) and Wesley Wiser (&lt;code&gt;@Wesley Wiser&lt;/code&gt; on Zulip).&lt;/p&gt;
-&lt;p&gt;See you there!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust WG-Prioritization Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>A call for contributors from the WG-prioritization team</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/09/11/wg-prio-call-for-contributors.html" type="text/html" title="A call for contributors from the WG-prioritization team" />
-        <published>2020-09-11T00:00:00+00:00</published>
-        <updated>2020-09-11T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/09/11/wg-prio-call-for-contributors.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/09/11/wg-prio-call-for-contributors.html">&lt;p&gt;Are you looking for opportunities to contribute to the Rust community? Have some spare time to donate? And maybe learn something interesting along the way?&lt;/p&gt;
 &lt;p&gt;The &lt;a href&#x3D;&quot;https://rust-lang.github.io/compiler-team/working-groups/prioritization&quot;&gt;WG-prioritization&lt;/a&gt; can be the right place for you: we are looking for new contributors!&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-the-wg-prioritization&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-the-wg-prioritization&quot;&gt;&lt;/a&gt;What is the WG-prioritization?&lt;/h2&gt;
 &lt;p&gt;The Prioritization WG is a compiler Working Group dedicated to handling the most important bugs found in the Rust compiler (&lt;code&gt;rustc&lt;/code&gt;), to ensure that they are resolved. We stand at the frontline of the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues&quot;&gt;Github Rust issue tracker&lt;/a&gt; and our job is to do triaging, mainly deciding which bugs are critical (potential release blockers) and prepare the weekly agenda for the Compiler Team with the most pressing issues to be taken care of.&lt;/p&gt;
@@ -692,6 +647,33 @@ issue is disclosed publicly&lt;/li&gt;
 
         <author>
             <name>Rust Security Response WG</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Announcing Rustup 1.22.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/07/08/Rustup-1.22.1.html" type="text/html" title="Announcing Rustup 1.22.1" />
+        <published>2020-07-08T00:00:00+00:00</published>
+        <updated>2020-07-08T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/07/08/Rustup-1.22.1.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/07/08/Rustup-1.22.1.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.22.1. &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.22.1 may be as easy as closing your IDE and running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup self update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, or if the 1.22.0 release of rustup caused you to experience the problem that 1.22.1 fixes, you can &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1221&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1221&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.22.1&lt;/h2&gt;
+&lt;p&gt;When updating dependency crates for 1.22.0, a change in behaviour of the &lt;code&gt;url&lt;/code&gt; crate slipped in which caused &lt;code&gt;env_proxy&lt;/code&gt; to cease to work with proxy data set in the environment.  This is unfortunate since those of you who use &lt;code&gt;rustup&lt;/code&gt; behind a proxy and have updated to 1.22.0 will now find that rustup may not work properly for you.&lt;/p&gt;
+&lt;p&gt;If you are affected by this, simply &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;re-download the installer&lt;/a&gt; and run it.  It will update your existing installation of Rust with no need to uninstall first.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
+&lt;p&gt;Thanks to Ivan Nejgebauer who spotted the issue, provided the fix, and made rustup 1.22.1 possible,
+and to Ben Chen who provided a fix for our website.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rustup Working Group</name>
         </author>
     </entry>
     
