@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>A call for contributors from the WG-prioritization team | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="A call for contributors from the WG-prioritization team | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="A call for contributors from the WG-prioritization team | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="A call for contributors from the WG-prioritization team" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>A call for contributors from the WG-prioritization team</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 14, 2020 &middot; The Rust WG-Prioritization Team
+    
+    </div>
+
+    <div class="post">
+      <p>Are you looking for opportunities to contribute to the Rust community? Have some spare time to donate? And maybe learn something interesting along the way?</p>
+<p>The <a href="https://rust-lang.github.io/compiler-team/working-groups/prioritization">WG-prioritization</a> can be the right place for you: we are looking for new contributors!</p>
+<h2><a href="#what-is-the-wg-prioritization" aria-hidden="true" class="anchor" id="what-is-the-wg-prioritization"></a>What is the WG-prioritization?</h2>
+<p>The Prioritization WG is a compiler Working Group dedicated to handling the most important bugs found in the Rust compiler (<code>rustc</code>), to ensure that they are resolved. We stand at the frontline of the <a href="https://github.com/rust-lang/rust/issues">Github Rust issue tracker</a> and our job is to do triaging, mainly deciding which bugs are critical (potential release blockers) and prepare the weekly agenda for the Compiler Team with the most pressing issues to be taken care of.</p>
+<p>Here is a bit more <a href="https://rust-lang.github.io/compiler-team/working-groups/prioritization">comprehensive description</a>. How we work is detailed <a href="https://forge.rust-lang.org/compiler/prioritization.html">on the Rust Forge</a>.</p>
+<p>Our tooling is mainly the <a href="https://github.com/rust-lang/triagebot">triagebot</a>, a trustful messenger that helps us by sending notification to our <a href="https://rust-lang.zulipchat.com/#narrow/stream/227806-t-compiler.2Fwg-prioritization">Zulip stream</a> when an issue on Github is labelled.</p>
+<p>We also have a repository with some <a href="https://github.com/rust-lang/compiler-team-prioritization/issues">issues and meta-issues</a>, where we basically note down how we would like our workflow to evolve. Contributions to these issues are welcome, but a bit more context about the workflow of this Working Group is probably necessary.</p>
+<p>Documentation is also a fundamental part of the onboarding package that we provide to newcomers. As we basically &quot;organize and sort stuff&quot;, a lot happens without writing a single line of code but rather applying procedures to optimize triaging and issues prioritization.</p>
+<p>This requires our workflow to be as efficient and well documented as possible. As such, we are always open to contributions to clarify the documentation (and fresh eyeballs are especially precious for that!).</p>
+<h2><a href="#the-typical-week-of-a-wg-prioritization-member" aria-hidden="true" class="anchor" id="the-typical-week-of-a-wg-prioritization-member"></a>The typical week of a WG-prioritization member</h2>
+<p>Our week starts on Thursday/Friday after the Rust Compiler Team meeting (one of the cool teams that keep that beast at bay) by preparing a new agenda for the following meeting, leaving placeholders to be filled during the week.</p>
+<p>In the following days the WG-prioritization and other teams will asynchronously monitor the issue tracker - everyone at their own pace, when time allows - trying to assign a priority to new issues. This greatly helps the compiler team to sort and prioritize their work.</p>
+<p>If the issue priority is not immediately clear, it will be tagged with a temporary label and briefly discussed on Zulip by the WG-prioritization: is this issue critical? Is it clear? Does it need a <a href="https://stackoverflow.com/help/minimal-reproducible-example">minimal reproducible example</a> (often abbreviated in <code>MCVE</code>) or even better a <a href="https://github.com/rust-lang/cargo-bisect-rustc">bisect</a> to find a regression (we love contributors bisecting code)? We then assign the priority by choosing a value in a range from <code>P-low</code> to <code>P-critical</code>. The rationale behind the priority levels is detailed in our <a href="https://forge.rust-lang.org/compiler/prioritization/priority-levels.html">guide</a>.</p>
+<p>The day before the meeting the agenda is filled and handed to the Compiler Team.</p>
+<p>Someone from the WG-Prioritization will attend the meeting and provide some support (if needed).</p>
+<p>Rinse and repeat for the next meeting.</p>
+<p>Everything is described in excruciating detail on <a href="https://forge.rust-lang.org/compiler/prioritization/procedure.html">Rust Forge</a>. Feel free to have a look there to learn more. The quantity of information there can be a bit overwhelming at first (there is quite a bit of lingo we use), but things will become clearer.</p>
+<h2><a href="#how-can-i-contribute" aria-hidden="true" class="anchor" id="how-can-i-contribute"></a>How can I contribute?</h2>
+<ul>
+<li><strong>Help with triaging compiler issues</strong>: helping keeping the issue tracker tidy is very important for any big project. Labelling and pinging people to work on MCVEs or bisection is very helpful to resolve any issue. We focus our attention on issues labelled with <code>I-prioritize</code> (issues that need a brief discussion before assigning a priority) but also <code>P-critical</code> and <code>P-high</code> (issues that need attention during the compiler meeting). All this is required for our next task:</li>
+<li><strong>Help with issues prioritization</strong>: keep an eye on the messages on our Zulip stream (about 10/15 issues a week) and cast a vote on what the priority should be. Analyze the issue, figure out how the release could be impacted. More votes balance the prioritization and with some experience, you will develop an <em>instinct</em> to prioritize issues :-)</li>
+<li><strong>Help properly summarize issues in the agenda</strong>: what is this issue about? What has been already done to frame a context? Is this a regression? We add any detail that could be relevant to the Compiler team during their meeting. These folks are busy and could use all the help to get the context of an issue at a glance.</li>
+</ul>
+<h2><a href="#ok-but-can-i-actually-contribute-i-dont-feel-skilled-enough" aria-hidden="true" class="anchor" id="ok-but-can-i-actually-contribute-i-dont-feel-skilled-enough"></a>Ok, but can I actually contribute? I don't feel skilled enough</h2>
+<p>Yes, you are! There will always be one or more members available to explain, mentor and clarify things. Don't be shy and do not refrain from asking questions. You will very quickly be able to give a helpful opinion in our discussions.</p>
+<p>Everyone can contribute on their capacity and availability. The reward is the warm feeling to do something concrete to ensure that the Rust compiler, one of the cornerstone of the project, stays in good shape and improves continuously. Moreover, you will be exposed to a continuous stream of new bugs and seeing how they are evaluated and managed is pretty educational.</p>
+<h2><a href="#where-do-we-hang-out" aria-hidden="true" class="anchor" id="where-do-we-hang-out"></a>Where do we hang out</h2>
+<p>One of the great things of the Rust governance is its openness. Join our stream <a href="https://rust-lang.zulipchat.com/#narrow/stream/227806-t-compiler.2Fwg-prioritization">#t-compiler/wg-prioritization</a>, peek at how we work and if you want, also keep an eye to the weekly Team Compiler official meetings on <a href="https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings">#t-compiler/meetings</a>. Have a question? Don't hesitate to open a new topic in our stream!</p>
+<p>You can even simply just hang out on our Zulip stream, see how things work and then get involved where you feel able.</p>
+<p>We keep a separate substream <a href="https://rust-lang.zulipchat.com/#narrow/stream/245100-t-compiler.2Fwg-prioritization.2Falerts">#t-compiler/wg-prioritization/alerts</a> where all the issues nominated for discussion will receive their own topic. Subscription to this stream is optional for the members of the Working Group as it has a non-negligible volume of notifications (it is public and freely accessible anyway).</p>
+<p>The main contact points for this Working Group are Santiago Pastorino (<code>@Santiago Pastorino</code> on Zulip) and Wesley Wiser (<code>@Wesley Wiser</code> on Zulip).</p>
+<p>See you there!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
