@@ -4,19 +4,18 @@ author: Manish Goregaokar and Joshua Nelson
 team: the rustdoc team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>
 ---
 
-# Intra-doc links close to stabilization
-
 We're excited to share that intra-doc links are stabilizing soon!
 
-[Intra-doc links] are a feature of `rustdoc` that allow you to link to '[items]' - functions, types, and more - by their name, instead of a hard-coded url. This lets you have accurate links even if your types are [re-exported in a different module or crate][broken-string-links]. Here is a simple example:
+[Intra-doc links] are a feature of `rustdoc` that allow you to link to '[items]' - functions, types, and more - by their name, instead of a hard-coded URL. This lets you have accurate links even if your types are [re-exported in a different module or crate][broken-string-links]. Here is a simple example:
 
 ```rust
 /// Link to [`f()`]
 pub struct S;
+
 pub fn f() {}
 ```
 
-Intra-doc links have been around for a while, all the way back [since 2017][tracking-issue]! They have been available on `nightly` without flags (and thus, on docs.rs), so you may be surprised to hear that they weren't yet stable. What's changing now is that they will be available on stable Rust, which also means we are more confident in the implementation and would strongly encourage their use. We recommend that you switch your libraries to use intra-doc links, which will fix broken links for re-exported types and links to different crates. We hope to add support for automating this process with [`cargo fix`] in the future.
+Intra-doc links have been around for a while, all the way back [since 2017][tracking-issue]! They have been available on `nightly` without flags (and thus, on [docs.rs](https://docs.rs)), so you may be surprised to hear that they weren't yet stable. What's changing now is that they will be available on stable Rust, which also means we are more confident in the implementation and would strongly encourage their use. We recommend that you switch your libraries to use intra-doc links, which will fix broken links for re-exported types and links to different crates. We hope to add support for automating this process with [`cargo fix`] in the future.
 
 ## The history of intra-doc links
 
@@ -72,10 +71,10 @@ thread 'rustc' panicked at 'called `Option::unwrap()` on a `None` value', /home/
 
 ## HirIds and DefIds and trees, oh my!
 
-(If you're not interested in the internals of the rust compiler, feel free to skip this section.)
+(If you're not interested in the internals of the Rust compiler, feel free to skip this section.)
 
 The error above came because of a pass called [`everybody_loops`]. A compiler 'pass' is a transformation on the source code, for example [finding items without documentation][missing_docs].
-The `everybody_loops` pass turns the above code into
+The `everybody_loops` pass turns the above code into:
 
 ```rust
 fn main() {
