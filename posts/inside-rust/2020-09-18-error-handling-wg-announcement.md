@@ -18,11 +18,16 @@ Some of the goals this project group will be working on include:
 5. Consolidating the Rust error handling ecosystem. 
 
 This new project group is being shepherded by Jane Lusby 
-([@yaahc](https://github.com/yaahc)), Andrew Gallant 
-([@BurntSushi](https://github.com/burntsushi)), and Sean Chen 
-([@seanchen1991](https://github.com/seanchen1991)).
+([@yaahc](https://github.com/yaahc)) and Sean Chen 
+([@seanchen1991](https://github.com/seanchen1991)), with Andrew
+Gallant ([@BurntSushi](https://github.com/burntsushi)) acting in
+an advisory capacity and Ashley Mannix 
+([@KodrAus](https://github.com/KodrAus)) acting as the library team
+liaison.
 
 Anyone interested in helping out with the above goals is invited to 
-come say hi in the group’s  Zulip stream `#t-libs/project-error-handling`. 
-Feel free to also check out the group’s GitHub repository at 
-[https://github.com/rust-lang/project-error-handling](https://github.com/rust-lang/project-error-handling).
+come say hi in the group’s  [Zulip stream]. Feel free to also check 
+out the group’s [GitHub repository].
+
+[Zulip stream]: https://rust-lang.zulipchat.com/#narrow/stream/257204-project-error-handling
+[GitHub repository]: https://github.com/rust-lang/project-error-handling
