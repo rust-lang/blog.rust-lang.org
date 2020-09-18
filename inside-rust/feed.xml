@@ -10,8 +10,41 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-09-17T13:39:42+00:00</updated>
+    <updated>2020-09-18T16:54:39+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing the Error Handling Project Group</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/09/18/error-handling-wg-announcement.html" type="text/html" title="Announcing the Error Handling Project Group" />
+        <published>2020-09-18T00:00:00+00:00</published>
+        <updated>2020-09-18T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/09/18/error-handling-wg-announcement.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/09/18/error-handling-wg-announcement.html">&lt;p&gt;Today we are announcing the formation of a new project group under
+the libs team, focused on error handling!&lt;/p&gt;
+&lt;p&gt;Some of the goals this project group will be working on include:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Defining and codifying common error handling terminology.&lt;/li&gt;
+&lt;li&gt;Generating consensus on current error handling best practices.&lt;/li&gt;
+&lt;li&gt;Identifying pain points that exist in Rust’s error handling story.&lt;/li&gt;
+&lt;li&gt;Communicating current error handling best practices.&lt;/li&gt;
+&lt;li&gt;Consolidating the Rust error handling ecosystem.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This new project group is being shepherded by Jane Lusby
+(&lt;a href&#x3D;&quot;https://github.com/yaahc&quot;&gt;@yaahc&lt;/a&gt;) and Sean Chen
+(&lt;a href&#x3D;&quot;https://github.com/seanchen1991&quot;&gt;@seanchen1991&lt;/a&gt;), with Andrew
+Gallant (&lt;a href&#x3D;&quot;https://github.com/burntsushi&quot;&gt;@BurntSushi&lt;/a&gt;) acting in
+an advisory capacity and Ashley Mannix
+(&lt;a href&#x3D;&quot;https://github.com/KodrAus&quot;&gt;@KodrAus&lt;/a&gt;) acting as the library team
+liaison.&lt;/p&gt;
+&lt;p&gt;Anyone interested in helping out with the above goals is invited to
+come say hi in the group’s  &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/257204-project-error-handling&quot;&gt;Zulip stream&lt;/a&gt;. Feel free to also check
+out the group’s &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling&quot;&gt;GitHub repository&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Sean Chen</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Intra-doc links close to stabilization</title>
@@ -412,87 +445,6 @@ Azure Pipelines capacity we used over the past year.&lt;/p&gt;
 
         <author>
             <name>Pietro Albini</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Traits working group 2020 sprint 3 summary</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/17/traits-sprint-3.html" type="text/html" title="Traits working group 2020 sprint 3 summary" />
-        <published>2020-07-17T00:00:00+00:00</published>
-        <updated>2020-07-17T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/07/17/traits-sprint-3.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/17/traits-sprint-3.html">&lt;p&gt;Again? It feels like we just had one of these...6 weeks ago 😉. Anyways, much of this sprint was a continuation of the previous two: working towards making Chalk feature-complete and eventually using it in rustc for trait solving.&lt;/p&gt;
-&lt;p&gt;For those who haven&#x27;t seen one of these before, if you&#x27;re curious about the traits working group, you can find a summary &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-traits/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#credit-where-credit-is-due&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;credit-where-credit-is-due&quot;&gt;&lt;/a&gt;Credit where credit is due&lt;/h3&gt;
-&lt;p&gt;As always, a big thanks to everyone who participated in this sprint:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/detrumi&quot;&gt;Wilco Kusee&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/flodiebold&quot;&gt;Florian Diebold&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/jackh726&quot;&gt;Jack Huey&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/crlf0710&quot;&gt;Charles Lew&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/nikomatsakis&quot;&gt;Niko Matsakis&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/nathanwhit&quot;&gt;Nathan Whitaker&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/adamrk&quot;&gt;Adam Bratschi-Kaye&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/super-tuple&quot;&gt;super-tuple&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/daboross&quot;&gt;David Ross&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/zaharidichev&quot;&gt;Zahari Dichev&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/Areredify&quot;&gt;Mikhail Babenko&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/Mcat12&quot;&gt;Mark Drobnak&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/Aaron1011&quot;&gt;Aaron Hill&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/pksunkara&quot;&gt;Pavan Kumar Sunkara&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/doctorn&quot;&gt;Nathan Corbyn&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/matthewjasper&quot;&gt;Matthew Jasper&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/lcnr&quot;&gt;Bastian Kauschke&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#chalk-crate-cleanups-and-weekly-publish&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;chalk-crate-cleanups-and-weekly-publish&quot;&gt;&lt;/a&gt;Chalk crate cleanups and weekly publish&lt;/h3&gt;
-&lt;p&gt;Since its inception, Chalk has undergone a fair number of changes in regards to the structure of its crates, as any reasonably sized project might. During this sprint, we took the time to clean up the crate structure a bit. It&#x27;s probably easiest to just give a brief overview of what we ended up with. A more comprehensive overview can be found in the &lt;a href&#x3D;&quot;http://rust-lang.github.io/chalk/book/what_is_chalk/crates.html&quot;&gt;Chalk book&lt;/a&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;chalk-derive&lt;/code&gt; - Defines the derive proc macros&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;chalk-ir&lt;/code&gt; - A basic &amp;quot;type library&amp;quot;, which might someday be shared between rustc, Chalk, and rust-analyzer&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;chalk-solve&lt;/code&gt; - Defines the Rust semantics of the types from &lt;code&gt;chalk-ir&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;chalk-engine&lt;/code&gt; - Implements the SLG solver&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;chalk-recursive&lt;/code&gt; - Implements the recursive solver&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;chalk-parse&lt;/code&gt; - Used for testing, parses a Rust-like syntax into &lt;code&gt;chalk-ir&lt;/code&gt; and &lt;code&gt;chalk-solve&lt;/code&gt; types&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;chalk-integration&lt;/code&gt; - Used for testing, provides types useful for testing&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;chalk&lt;/code&gt; - Used for testing, provides a REPL&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Also during this sprint, we set up regular weekly releases of the Chalk crates. While at the moment these are all &lt;code&gt;0.*.0&lt;/code&gt; patch releases, it sets up the infrastructure for future stable releases and provides published crates to be used in rustc and rust-analyzer. In the future, when Chalk development is more stable, we want to switch this to be manual. We also plan to set up bors to ensure that &lt;code&gt;master&lt;/code&gt; always builds and passes tests.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#work-towards-gat-support-in-rustc&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;work-towards-gat-support-in-rustc&quot;&gt;&lt;/a&gt;Work towards GAT support in rustc&lt;/h3&gt;
-&lt;p&gt;Chalk has had support for GATs for &lt;a href&#x3D;&quot;https://github.com/rust-lang/chalk/pull/145&quot;&gt;a while now&lt;/a&gt;; in Chalk terms, GATs are a natural extension of everything else. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/44265&quot;&gt;GATs in rustc&lt;/a&gt;, however, are a bit more difficult, and have been fairly stagnant over the past couple of years, with the primary focus going towards getting Chalk ready. Recently, however, some work has been done in rustc to get GATs working under the current rustc trait system.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#extracting-a-shared-library-representing-types&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;extracting-a-shared-library-representing-types&quot;&gt;&lt;/a&gt;Extracting a shared library representing types&lt;/h3&gt;
-&lt;p&gt;As a long term goal, we hope to one day have a shared type library between Chalk and rustc. Moreover, this type library could be used for other projects, such as rust-analyzer. On the Chalk side, more types — such as closures and enums — and more traits — such as the &lt;code&gt;Fn&lt;/code&gt; family and &lt;code&gt;Unsize&lt;/code&gt; — were added. Additionally, some work has been done to go the &lt;em&gt;other direction&lt;/em&gt;: to move rustc closer to Chalk, such as &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/72055&quot;&gt;interning &lt;code&gt;Predicate&lt;/code&gt;s&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73503&quot;&gt;introducing &lt;code&gt;ForAll&lt;/code&gt; predicates&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#writing-a-chalk-file-for-debugging&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;writing-a-chalk-file-for-debugging&quot;&gt;&lt;/a&gt;Writing a &lt;code&gt;.chalk&lt;/code&gt; file for debugging&lt;/h3&gt;
-&lt;p&gt;As part of Chalk tests, we can write Rust-like &amp;quot;programs&amp;quot; that get parsed into Chalk types. Importantly, these programs are much more succint than the types they get lowered to. As part of an effort to better enable debugging, we implemented a system to go in the opposite direction: to be able to generate the Rust-like programs from the underlying types. This is extremely useful to, for example, debug a bug for a given bit of code that rustc tries to compile. Additionally, this could be used to generate programs for cases with performance problems.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#improving-impl-trait-support&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improving-impl-trait-support&quot;&gt;&lt;/a&gt;Improving &lt;code&gt;impl Trait&lt;/code&gt; support&lt;/h3&gt;
-&lt;p&gt;In the last sprint, we landed initial &lt;code&gt;impl Trait&lt;/code&gt; support, to handle the simple case of something like &lt;code&gt;type Foo&amp;lt;T&amp;gt; &#x3D; impl Bar&lt;/code&gt;. During this sprint, we began work on adding more support for more complex cases such as &lt;code&gt;type Foo&amp;lt;T&amp;gt;: Debug &#x3D; impl Bar where T: Debug&lt;/code&gt;. Additionally, some design work was done to support checking that these are well-formed.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#extend-chalk-to-support-rust-semantics&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;extend-chalk-to-support-rust-semantics&quot;&gt;&lt;/a&gt;Extend Chalk to support Rust semantics&lt;/h3&gt;
-&lt;p&gt;This goal overlaps a bit with &amp;quot;extracting a shared type library&amp;quot;, but is less about representing types themselves and more about expressing the semantics of those types. For example, consider the following program:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;trait Foo: Sized {
-    fn foo(self) {}
-}
-impl Foo for u32 {}
-impl Foo for String {}
-
-fn main() {
-  let x &#x3D; 0;
-  x.foo();
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Prior to the current sprint, Chalk wouldn&#x27;t be able to handle this properly; it wouldn&#x27;t know that you can call &lt;code&gt;foo&lt;/code&gt; on &lt;code&gt;0&lt;/code&gt;. In fact, to be able to compile this program correctly, the compiler has to know that &lt;code&gt;0&lt;/code&gt; can never be a &lt;code&gt;String&lt;/code&gt;. Consider what would happen if you changed to impl for &lt;code&gt;String&lt;/code&gt; to &lt;code&gt;u64&lt;/code&gt;: rustc wouldn&#x27;t know if you wanted &lt;code&gt;0&lt;/code&gt; to be a &lt;code&gt;u32&lt;/code&gt; or an &lt;code&gt;u64&lt;/code&gt;. That&#x27;s essentially how Chalk would have seen this program prior to this sprint. However, Chalk now correctly handles this situation.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#handle-lifetime-constraints-in-rustc-integration&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;handle-lifetime-constraints-in-rustc-integration&quot;&gt;&lt;/a&gt;Handle lifetime constraints in rustc integration&lt;/h3&gt;
-&lt;p&gt;So, as part of trait solving Chalk and rustc may sometimes find one lifetime needs to outlive another, or that a type must outlive a lifetime. For example,&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;trait Foo&amp;lt;&#x27;a, &#x27;b, T&amp;gt; where &#x27;a: &#x27;b, T: &#x27;a  {}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Chalk doesn&#x27;t solve these lifetime constraints on its own, instead it passes them back to rustc. During this sprint, we added the ability to express these where clauses in Chalk.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-work&quot;&gt;&lt;/a&gt;Other work&lt;/h3&gt;
-&lt;p&gt;There was a bunch of smaller stuff done during this sprint that doesn&#x27;t really fit into separate goals. Chalk got a little bit smarter in its suggestions. We introduced &lt;code&gt;tracing&lt;/code&gt; for logging. We did some design work for the recursive solver. And of course, a fair amount of internal refactoring and cleanup. And of course, the rustc integration has been kept up with and updated for newer Chalk features.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#summer-vacation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;summer-vacation&quot;&gt;&lt;/a&gt;Summer vacation&lt;/h2&gt;
-&lt;p&gt;It&#x27;s been a busy year so far! Since the first sprint started in early February, we&#x27;ve made tons of progress. However, unlike the past couple sprints, we aren&#x27;t going to immediately jump into our next one. Instead, we&#x27;re taking a couple months for vacation, and we&#x27;ll start back up in September. Until then, we won&#x27;t have have weekly meetings on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/144729-wg-traits&quot;&gt;Zulip&lt;/a&gt; nor will we have any defined goals. This is in part since some members might be taking a vacation. But also, code burnout is very real and a break every now and then can be helpful. In the meantime, there are a few items left to finish/cleanup.&lt;/p&gt;
-&lt;p&gt;If you&#x27;re interested in helping, don&#x27;t be discouraged! Zulip should still be fairly active, so feel free to drop by!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Jack Huey</name>
         </author>
     </entry>
     
