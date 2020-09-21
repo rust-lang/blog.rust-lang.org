@@ -14,7 +14,7 @@ One way of helping us understand the lens you're looking at Rust through is to g
 - "As a day-to-day Rust developer, I want Rust to make consuming libraries a better experience so that I can more easily take advantage of the ecosystem"
 - "As an embedded developer who wants to grow the niche, I want Rust to make end-to-end embedded development easier so that newcomers can get started more easily"
 
-This year, to make sure we don’t miss anything, when you write a post please submit it into [this google form](https://forms.gle/Hv41uA5qJEY89XRm7)! We will try to look at posts not submitted via this form, too, but posts submitted here aren’t going to be missed. Any platform — from blogs to GitHub gists — is fine!
+This year, to make sure we don’t miss anything, when you write a post please submit it into [this google form](https://forms.gle/Hv41uA5qJEY89XRm7)! We will try to look at posts not submitted via this form, too, but posts submitted here aren’t going to be missed. Any platform — from blogs to GitHub gists — is fine! We plan to close the form on October 5th.
 
 To give you some context for the upcoming year, we established these high-level goals for 2020, and we wanted to take a look back at the first part of the year. We’ve made some excellent progress!
 
