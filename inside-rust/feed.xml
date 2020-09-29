@@ -10,8 +10,52 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-09-21T13:11:51+00:00</updated>
+    <updated>2020-09-29T23:09:24+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing the Portable SIMD Project Group</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/09/29/Portable-SIMD-PG.html" type="text/html" title="Announcing the Portable SIMD Project Group" />
+        <published>2020-09-29T00:00:00+00:00</published>
+        <updated>2020-09-29T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/09/29/Portable-SIMD-PG.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/09/29/Portable-SIMD-PG.html">&lt;p&gt;We&#x27;re announcing the start of the &lt;em&gt;Portable SIMD Project Group&lt;/em&gt; within the Libs team. This group is dedicated to making a portable SIMD API available to stable Rust users.&lt;/p&gt;
+&lt;p&gt;The Portable SIMD Project Group is lead by &lt;a href&#x3D;&quot;https://github.com/calebzulawski&quot;&gt;@calebzulawski&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/Lokathor&quot;&gt;@Lokathor&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/workingjubilee&quot;&gt;@workingjubilee&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-are-project-groups&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-are-project-groups&quot;&gt;&lt;/a&gt;What are project groups?&lt;/h2&gt;
+&lt;p&gt;Rust uses &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2856-project-groups.html&quot;&gt;project groups&lt;/a&gt; to help coordinate work.
+They&#x27;re a place for people to get involved in helping shape the parts of Rust that matter to them.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-simd&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-simd&quot;&gt;&lt;/a&gt;What is SIMD?&lt;/h2&gt;
+&lt;p&gt;SIMD stands for Single Instruction, Multiple Data.
+It lets the CPU apply a single instruction to a &amp;quot;vector&amp;quot; of data.
+The vector is a single extra-wide CPU register made of multiple &amp;quot;lanes&amp;quot; of the same data type.
+You can think of it as being &lt;em&gt;similar&lt;/em&gt; to an array.
+Instead of processing each lane individually, all lanes have the same operation applied &lt;em&gt;simultaneously&lt;/em&gt;.
+This lets you transform data much faster than with standard code.
+Not every problem can be accelerated with &amp;quot;vectorized&amp;quot; code, but for multimedia and list-processing applications there can be significant gains.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#why-do-you-need-to-make-it-portable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;why-do-you-need-to-make-it-portable&quot;&gt;&lt;/a&gt;Why do you need to make it portable?&lt;/h2&gt;
+&lt;p&gt;Different chip vendors offer different SIMD instructions.
+Some of these are available in Rust&#x27;s &lt;a href&#x3D;&quot;https://doc.rust-lang.org/core/arch/index.html&quot;&gt;&lt;code&gt;std::arch&lt;/code&gt;&lt;/a&gt; module.
+You &lt;em&gt;can&lt;/em&gt; build vectorized functions using that, but at the cost of maintaining a different version for each CPU you want to support.
+You can also &lt;em&gt;not&lt;/em&gt; write vectorized operations and hope that LLVM&#x27;s optimizations will &amp;quot;auto-vectorize&amp;quot; your code.
+However, the auto-vectorizer is easily confused and can fail to optimize &amp;quot;obvious&amp;quot; vector tasks.&lt;/p&gt;
+&lt;p&gt;The portable SIMD API will enable writing SIMD code just once using a high-level API.
+By explicitly communicating your intent to the compiler, it&#x27;s better able to generate the best possible final code.
+This is still only a best-effort process.
+If your target doesn&#x27;t support a desired operation in SIMD, the compiler will fall back to using scalar code, processing one lane at a time.
+The details of what&#x27;s available depend on the build target.&lt;/p&gt;
+&lt;p&gt;We intend to release the Portable SIMD API as &lt;code&gt;std::simd&lt;/code&gt;.
+We will cover as many use cases as we can, but it might still be appropriate for you to use &lt;code&gt;std::arch&lt;/code&gt; directly.
+For that reason the &lt;code&gt;std::simd&lt;/code&gt; types will also be easily convertable to &lt;code&gt;std::arch&lt;/code&gt; types where needed.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#how-can-i-get-involved&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-can-i-get-involved&quot;&gt;&lt;/a&gt;How can I get involved?&lt;/h2&gt;
+&lt;p&gt;Everyone can get involved!
+No previous experience necessary.
+If you&#x27;d like to help make portable SIMD a reality you can visit our &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-portable-simd&quot;&gt;GitHub repository&lt;/a&gt; or reach out on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/257879-project-portable-simd&quot;&gt;Zulip&lt;/a&gt; and say hi! :wave:&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Jubilee and Lokathor</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing the Error Handling Project Group</title>
@@ -407,44 +451,6 @@ Thursday, the 30th. Release notes can be found here:
 
         <author>
             <name>Mark Rousskov</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Rust&#x27;s CI is moving to GitHub Actions</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/23/rust-ci-is-moving-to-github-actions.html" type="text/html" title="Rust&#x27;s CI is moving to GitHub Actions" />
-        <published>2020-07-23T00:00:00+00:00</published>
-        <updated>2020-07-23T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/07/23/rust-ci-is-moving-to-github-actions.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/23/rust-ci-is-moving-to-github-actions.html">&lt;p&gt;The Rust Infrastructure Team is happy to announce that, as part of the
-&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2019/11/14/evaluating-github-actions.html&quot;&gt;evaluation we started last year&lt;/a&gt;, most of Rust’s CI is moving to GitHub
-Actions! While we don’t expect the change to have any impact on our users, the
-switch will considerably improve the experience for compiler contributors.&lt;/p&gt;
-&lt;p&gt;One of the major pain points for compiler contributors over the past few years
-has been waiting for PRs to be merged. We value having an always-green master
-branch, and to ensure that, we test and merge just one PR at a time, with the
-other approved ones &lt;a href&#x3D;&quot;https://bors.rust-lang.org/queue/rust&quot;&gt;waiting in the queue&lt;/a&gt;. Our CI is extensive too, with
-57 machines building and testing the compiler across all the platforms we
-support. On our previous system, each of those builders took between three to
-four hours to finish. Combined with testing one PR at a time, this often causes
-PRs to wait in the queue for days before being tested.&lt;/p&gt;
-&lt;p&gt;Making the CI setup faster is a permanent goal of the Infrastructure Team, and
-GitHub Actions provided us with a great opportunity to improve landing time:
-GitHub offered to sponsor a fully managed, private pool of 8-core VMs to run
-our builds on, which is a big improvement compared to the 2-core VMs we were
-previously using. GitHub Actions also provides most of the features we loved
-about Azure Pipelines while being integrated with GitHub’s permissions and UI,
-which made the switch even more fruitful.&lt;/p&gt;
-&lt;p&gt;As of July 22nd, all the CI builds for the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust&quot;&gt;rust-lang/rust&lt;/a&gt; repository except
-for macOS builds are running exclusively on GitHub Actions! We’re still running
-macOS builds on Azure Pipelines for the time being, as we’re waiting on GitHub
-to fix &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/71988&quot;&gt;issue #71988&lt;/a&gt;, but we hope to move them to GitHub Actions soon.&lt;/p&gt;
-&lt;p&gt;We’d like to thank GitHub for sponsoring our CI builders and Microsoft for the
-Azure Pipelines capacity we used over the past year.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Pietro Albini</name>
         </author>
     </entry>
     
