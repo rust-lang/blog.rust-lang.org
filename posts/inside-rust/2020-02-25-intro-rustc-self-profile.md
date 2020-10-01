@@ -46,30 +46,30 @@ $ rustup update nightly
 ## Profiling the compiler
 
 Now we can build it and tell `rustc` to profile the build of the `regex` crate.
-This will cause three new files to be created in the working directory which contain the profling data.
+This will cause a new file to be created in the working directory which contains the profiling data.
 
 ```sh
 $ cargo rustc -- -Zself-profile
 $ ls
-CHANGELOG.md        LICENSE-APACHE       UNICODE.md              regex-17088.string_data       regex-syntax         target
-Cargo.lock          LICENSE-MIT          bench                   regex-17088.string_index      rustfmt.toml         test
-Cargo.toml          PERFORMANCE.md       examples                regex-capi                    scripts              tests
-HACKING.md          README.md            regex-17088.events      regex-debug                   src
+CHANGELOG.md        LICENSE-APACHE       UNICODE.md                 regex-capi         scripts
+Cargo.lock          LICENSE-MIT          bench                      regex-debug        src
+Cargo.toml          PERFORMANCE.md       examples                   regex-syntax       target
+HACKING.md          README.md            regex-17088.mm_profdata    rustfmt-toml       test
 ```
 
-The new files follow the format `{crate name}-{rustc process id}.{events,string_data,string_index}`.
+The new file follows the format `{crate name}-{rustc process id}.mm_profdata`.
 
 We'll use each of the three main tools to analyze the profiling data:
 
 ### `summarize`
 
-As its name suggests, this tool summarizes the data found in the trace files.
+As its name suggests, this tool summarizes the data found in the trace file.
 Additionally, `summarize` can also show a "diff" between two trace files but we won't be using this mode.
 
-Let's run the tool, passing just the file name (but not the extension) for the trace:
+Let's run the tool, passing the file name for the trace:
 
 ```sh
-$ summarize summarize regex-17088
+$ summarize summarize regex-17088.mm_profdata
 +-----------------------------------------------+-----------+-----------------+----------+------------+
 | Item                                          | Self time | % of total time | Time     | Item count |
 +-----------------------------------------------+-----------+-----------------+----------+------------+
@@ -125,10 +125,10 @@ As you can see, most of the compilation time is spent in LLVM generating the bin
 ### `flamegraph`
 
 As you may have guessed, `flamegraph` will produce a [flame graph] of the profiling data.
-To run the tool, we'll pass just the filename without a file extension like we did for `summarize`:
+To run the tool, we'll pass the filename like we did for `summarize`:
 
 ```sh
-$ flamegraph regex-17088
+$ flamegraph regex-17088.mm_profdata
 ```
 
 This will create a file called `rustc.svg` in the working directory:
@@ -147,10 +147,10 @@ Let's get started with the basics!
 
 #### Basic usage
 
-To run the tool, we'll just pass the filename without a file extension like we've done before:
+To run the tool, we'll pass the filename like we've done before:
 
 ```sh
-$ crox regex-17088
+$ crox regex-17088.mm_profdata
 ```
 
 This creates a file called `chrome_profiler.json` in the working directory.
@@ -174,7 +174,7 @@ If the `chrome_profiler.json` file gets too large, the normal Chromium performan
 One easy way to deal with this is to tell `crox` to remove events shorter than a chosen duration:
 
 ```sh
-$ crox --minimum-duration 2 regex-17088
+$ crox --minimum-duration 2 regex-17088.mm_profdata
 ```
 
 Filtering out events less than 2 microseconds shrinks our `chrome_profiler.js` file from 27mb to 11mb.
@@ -192,10 +192,10 @@ $ cargo clean
 $ cargo rustc -- -Zself-profile -Zself-profile-events=default,args
 ```
 
-And then process the new output files:
+And then process the new output file:
 
 ```sh
-$ crox regex-23649
+$ crox regex-23649.mm_profdata
 ```
 
 Now in the Chromium profiler, if you click on a node, you can see additional data about many of the events at the bottom of the screen:
@@ -211,7 +211,7 @@ By using the `RUSTFLAGS` environment variable, we can profile every `rustc` invo
 Since this will create a lot of files, we'll tell `rustc` to create a folder to put all the traces in.
 
 ```sh
-$ rm regex-17088.* regex-23649.* # clean up the old trace files since we're done with them
+$ rm regex-17088.mm_profdata regex-23649.mm_profdata # clean up the old trace files since we're done with them
 $ cargo clean
 $ RUSTFLAGS="-Zself-profile=$(pwd)/profiles -Zself-profile-events=default,args" cargo build
 ```
@@ -237,6 +237,11 @@ We've been using these tools extensively ourselves over the last few months and 
 In the future we'll be adding more features and we'll work on making the tooling easier to use.
 If you have questions or would like to get involved with the Self-Profile Working Group, please check out the [measureme repository] or stop by our [Zulip stream].
 
+---
+
+Note: This post has been updated to reflect the current release of `measureme`.
+You can read the previous verison of this post [here].
+
 [chrome profiler img1]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler1.png
 [chrome profiler img2]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png
 [chrome profiler img3]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png
@@ -245,6 +250,7 @@ If you have questions or would like to get involved with the Self-Profile Workin
 [documentation for this feature]: https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/self-profile.html
 [flame graph]: http://www.brendangregg.com/flamegraphs.html
 [flame graph img]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png
+[here]: https://github.com/rust-lang/blog.rust-lang.org/blob/9feb096cd3d949b48233a09cf73389727f772815/posts/inside-rust/2020-02-25-intro-rustc-self-profile.md
 [measureme repository]: https://github.com/rust-lang/measureme
 [Self-Profile Working Group]: https://rust-lang.github.io/compiler-team/working-groups/self-profile/
 [Zulip stream]: https://rust-lang.zulipchat.com/#narrow/stream/187831-t-compiler.2Fwg-self-profile
