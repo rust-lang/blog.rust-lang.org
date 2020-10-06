@@ -10,8 +10,31 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-09-29T23:09:24+00:00</updated>
+    <updated>2020-10-06T13:25:09+00:00</updated>
 
+    
+    <entry>
+        <title>1.47.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/10/06/1.47.0-prerelease.html" type="text/html" title="1.47.0 pre-release testing" />
+        <published>2020-10-06T00:00:00+00:00</published>
+        <updated>2020-10-06T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/10/06/1.47.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/10/06/1.47.0-prerelease.html">&lt;p&gt;The 1.47.0 pre-release is ready for testing. The release is scheduled for this
+Thursday, October 8th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1470-2020-10-08&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2020-10-06/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2020-10-06/index.html&lt;/a&gt;. You
+can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-47-0-pre-release-testing/&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Additionally, the release team is still investigating a regression in procedural
+macros which include C++ code, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/76980&quot;&gt;#76980&lt;/a&gt;, and are interested in feedback and help
+from the community in figuring out a resolution to that bug.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mark Rousskov</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing the Portable SIMD Project Group</title>
@@ -431,26 +454,6 @@ an existing topic, please email &lt;a href&#x3D;&quot;mailto:core-team@rust-lang
 
         <author>
             <name>Pietro Albini</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>1.45.1 prerelease testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/27/1.45.1-prerelease.html" type="text/html" title="1.45.1 prerelease testing" />
-        <published>2020-07-27T00:00:00+00:00</published>
-        <updated>2020-07-27T00:00:01+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/07/27/1.45.1-prerelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/27/1.45.1-prerelease.html">&lt;p&gt;The 1.45.1 pre-release is ready for testing. The release is scheduled for this
-Thursday, the 30th. Release notes can be found here:
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1451-2020-07-30&quot;&gt;https://github.com/rust-lang/rust/blob/stable/RELEASES.md&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can try it out locally with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2020-07-26/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2020-07-26/index.html&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Mark Rousskov</name>
         </author>
     </entry>
     
