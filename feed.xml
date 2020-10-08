@@ -10,8 +10,188 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-10-07T12:19:45+00:00</updated>
+    <updated>2020-10-08T13:31:12+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.47.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/10/08/Rust-1.47.html" type="text/html" title="Announcing Rust 1.47.0" />
+        <published>2020-10-08T00:00:00+00:00</published>
+        <updated>2020-10-08T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/10/08/Rust-1.47.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/10/08/Rust-1.47.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.47.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.47.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/tools/install&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
+appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1470-2020-10-08&quot;&gt;detailed release notes for
+1.47.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1470-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1470-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.47.0 stable&lt;/h2&gt;
+&lt;p&gt;This release contains no new language features, though it does add one
+long-awaited standard library feature. It is mostly quality of life
+improvements, library stabilizations and const-ifications, and toolchain
+improvements. See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1470-2020-10-08&quot;&gt;detailed release notes&lt;/a&gt; to learn about other
+changes not covered by this post.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#traits-on-larger-arrays&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;traits-on-larger-arrays&quot;&gt;&lt;/a&gt;Traits on larger arrays&lt;/h4&gt;
+&lt;p&gt;Rust does not currently have a way to be generic over integer values. This
+has long caused problems with arrays, because arrays have an integer as part
+of their type; &lt;code&gt;[T; N]&lt;/code&gt; is the type of an array of type &lt;code&gt;T&lt;/code&gt; of &lt;code&gt;N&lt;/code&gt; length.
+Because there is no way to be generic over &lt;code&gt;N&lt;/code&gt;, you have to manually implement
+traits for arrays for every &lt;code&gt;N&lt;/code&gt; you want to support. For the standard library,
+it was decided to support up to &lt;code&gt;N&lt;/code&gt; of 32.&lt;/p&gt;
+&lt;p&gt;We have been working on a feature called &amp;quot;const generics&amp;quot; that would allow
+you to be generic over &lt;code&gt;N&lt;/code&gt;. Fully explaining this feature is out of the scope
+of this post, because we are not stabilizing const generics just yet.
+However, the core of this feature has been implemented in the compiler, and
+it has been decided that the feature is far enough along that we are okay
+with &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/74060/&quot;&gt;the standard library using it to implement traits on arrays of any
+length&lt;/a&gt;. What this means in
+practice is that if you try to do something like this on Rust 1.46:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn main() {
+    let xs &#x3D; [0; 34];
+
+    println!(&amp;quot;{:?}&amp;quot;, xs);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;you&#x27;d get this error:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;error[E0277]: arrays only have std trait implementations for lengths 0..&#x3D;32
+ --&amp;gt; src/main.rs:4:22
+  |
+4 |     println!(&amp;quot;{:?}&amp;quot;, xs);
+  |                      ^^ the trait &#x60;std::array::LengthAtMost32&#x60; is not implemented for &#x60;[{integer}; 34]&#x60;
+  |
+  &#x3D; note: required because of the requirements on the impl of &#x60;std::fmt::Debug&#x60; for &#x60;[{integer}; 34]&#x60;
+  &#x3D; note: required by &#x60;std::fmt::Debug::fmt&#x60;
+  &#x3D; note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But with Rust 1.47, it will properly print out the array.&lt;/p&gt;
+&lt;p&gt;This should make arrays significantly more useful to folks, though it will
+take until the const generics feature stabilizes for libraries to be able to do
+this kind of implementation for their own traits. We do not have a current
+estimated date for the stabilization of const generics.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#shorter-backtraces&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;shorter-backtraces&quot;&gt;&lt;/a&gt;Shorter backtraces&lt;/h4&gt;
+&lt;p&gt;Back in Rust 1.18, we &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/38165&quot;&gt;made some changes to the backtraces &lt;code&gt;rustc&lt;/code&gt; would
+print on panic&lt;/a&gt;. There are a
+number of things in a backtrace that aren&#x27;t useful the majority of the time.
+However, at some point, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/47429&quot;&gt;these
+regressed&lt;/a&gt;. In Rust 1.47.0,
+the culprit was found, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/75048&quot;&gt;this has now been
+fixed&lt;/a&gt;. Since the regression,
+this program:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn main() {
+    panic!();
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;would give you a backtrace that looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;thread &#x27;main&#x27; panicked at &#x27;explicit panic&#x27;, src/main.rs:2:5
+stack backtrace:
+   0: backtrace::backtrace::libunwind::trace
+             at /cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/libunwind.rs:86
+   1: backtrace::backtrace::trace_unsynchronized
+             at /cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/mod.rs:66
+   2: std::sys_common::backtrace::_print_fmt
+             at src/libstd/sys_common/backtrace.rs:78
+   3: &amp;lt;std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display&amp;gt;::fmt
+             at src/libstd/sys_common/backtrace.rs:59
+   4: core::fmt::write
+             at src/libcore/fmt/mod.rs:1076
+   5: std::io::Write::write_fmt
+             at src/libstd/io/mod.rs:1537
+   6: std::sys_common::backtrace::_print
+             at src/libstd/sys_common/backtrace.rs:62
+   7: std::sys_common::backtrace::print
+             at src/libstd/sys_common/backtrace.rs:49
+   8: std::panicking::default_hook::{{closure}}
+             at src/libstd/panicking.rs:198
+   9: std::panicking::default_hook
+             at src/libstd/panicking.rs:217
+  10: std::panicking::rust_panic_with_hook
+             at src/libstd/panicking.rs:526
+  11: std::panicking::begin_panic
+             at /rustc/04488afe34512aa4c33566eb16d8c912a3ae04f9/src/libstd/panicking.rs:456
+  12: playground::main
+             at src/main.rs:2
+  13: std::rt::lang_start::{{closure}}
+             at /rustc/04488afe34512aa4c33566eb16d8c912a3ae04f9/src/libstd/rt.rs:67
+  14: std::rt::lang_start_internal::{{closure}}
+             at src/libstd/rt.rs:52
+  15: std::panicking::try::do_call
+             at src/libstd/panicking.rs:348
+  16: std::panicking::try
+             at src/libstd/panicking.rs:325
+  17: std::panic::catch_unwind
+             at src/libstd/panic.rs:394
+  18: std::rt::lang_start_internal
+             at src/libstd/rt.rs:51
+  19: std::rt::lang_start
+             at /rustc/04488afe34512aa4c33566eb16d8c912a3ae04f9/src/libstd/rt.rs:67
+  20: main
+  21: __libc_start_main
+  22: _start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, in Rust 1.47.0, you&#x27;ll see this instead:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;thread &#x27;main&#x27; panicked at &#x27;explicit panic&#x27;, src/main.rs:2:5
+stack backtrace:
+   0: std::panicking::begin_panic
+             at /rustc/d6646f64790018719caebeafd352a92adfa1d75a/library/std/src/panicking.rs:497
+   1: playground::main
+             at ./src/main.rs:2
+   2: core::ops::function::FnOnce::call_once
+             at /rustc/d6646f64790018719caebeafd352a92adfa1d75a/library/core/src/ops/function.rs:227
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This makes it much easier to see where the panic actually originated, and
+you can still set &lt;code&gt;RUST_BACKTRACE&#x3D;full&lt;/code&gt; if you want to see everything.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#llvm-11&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;llvm-11&quot;&gt;&lt;/a&gt;LLVM 11&lt;/h4&gt;
+&lt;p&gt;We have &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73526/&quot;&gt;upgraded to LLVM 11&lt;/a&gt;.
+The compiler still supports being compiled with LLVM versions as old as 8,
+but by default, 11 is what you&#x27;ll be getting.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#control-flow-guard-on-windows&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;control-flow-guard-on-windows&quot;&gt;&lt;/a&gt;Control Flow Guard on Windows&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;rustc&lt;/code&gt; &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73893/&quot;&gt;now supports&lt;/a&gt; &lt;code&gt;-C control-flow-guard&lt;/code&gt;, an option that will turn on &lt;a href&#x3D;&quot;https://docs.microsoft.com/en-us/windows/win32/secbp/control-flow-guard&quot;&gt;Control Flow
+Guard&lt;/a&gt;
+on Windows. Other platforms ignore this flag.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#library-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
+&lt;p&gt;Additionally, nine new APIs were stabilized this release:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/proc_macro/struct.Ident.html#method.new_raw&quot;&gt;&lt;code&gt;Ident::new_raw&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ops/struct.Range.html#method.is_empty&quot;&gt;&lt;code&gt;Range::is_empty&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ops/struct.RangeInclusive.html#method.is_empty&quot;&gt;&lt;code&gt;RangeInclusive::is_empty&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.as_deref&quot;&gt;&lt;code&gt;Result::as_deref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.as_deref_mut&quot;&gt;&lt;code&gt;Result::as_deref_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.leak&quot;&gt;&lt;code&gt;Vec::leak&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.offset_from&quot;&gt;&lt;code&gt;pointer::offset_from&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/f32/consts/constant.TAU.html&quot;&gt;&lt;code&gt;f32::TAU&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/f64/consts/constant.TAU.html&quot;&gt;&lt;code&gt;f64::TAU&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following previously stable APIs have now been made &lt;code&gt;const&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73858/&quot;&gt;The &lt;code&gt;new&lt;/code&gt; method for all &lt;code&gt;NonZero&lt;/code&gt; integers.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73858/&quot;&gt;The &lt;code&gt;checked_add&lt;/code&gt;,&lt;code&gt;checked_sub&lt;/code&gt;,&lt;code&gt;checked_mul&lt;/code&gt;,&lt;code&gt;checked_neg&lt;/code&gt;, &lt;code&gt;checked_shl&lt;/code&gt;,
+&lt;code&gt;checked_shr&lt;/code&gt;, &lt;code&gt;saturating_add&lt;/code&gt;, &lt;code&gt;saturating_sub&lt;/code&gt;, and &lt;code&gt;saturating_mul&lt;/code&gt;
+methods for all integers.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73858/&quot;&gt;The &lt;code&gt;checked_abs&lt;/code&gt;, &lt;code&gt;saturating_abs&lt;/code&gt;, &lt;code&gt;saturating_neg&lt;/code&gt;, and &lt;code&gt;signum&lt;/code&gt;  for all
+signed integers.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73858/&quot;&gt;The &lt;code&gt;is_ascii_alphabetic&lt;/code&gt;, &lt;code&gt;is_ascii_uppercase&lt;/code&gt;, &lt;code&gt;is_ascii_lowercase&lt;/code&gt;,
+&lt;code&gt;is_ascii_alphanumeric&lt;/code&gt;, &lt;code&gt;is_ascii_digit&lt;/code&gt;, &lt;code&gt;is_ascii_hexdigit&lt;/code&gt;,
+&lt;code&gt;is_ascii_punctuation&lt;/code&gt;, &lt;code&gt;is_ascii_graphic&lt;/code&gt;, &lt;code&gt;is_ascii_whitespace&lt;/code&gt;, and
+&lt;code&gt;is_ascii_control&lt;/code&gt; methods for &lt;code&gt;char&lt;/code&gt; and &lt;code&gt;u8&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1470-2020-10-08&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/71237/&quot;&gt;Rustdoc has gained support for the Ayu theme&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are other changes in the Rust 1.47.0 release: check out what changed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1470-2020-10-08&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-147-2020-10-08&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-147&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1470&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1470&quot;&gt;&lt;/a&gt;Contributors to 1.47.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.47.0. We couldn&#x27;t have done it
+without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.47.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Call for 2021 Roadmap Blogs Ending Soon</title>
@@ -608,66 +788,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.45
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>crates.io security advisory</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/07/14/crates-io-security-advisory.html" type="text/html" title="crates.io security advisory" />
-        <published>2020-07-14T00:00:00+00:00</published>
-        <updated>2020-07-14T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/07/14/crates-io-security-advisory.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/07/14/crates-io-security-advisory.html">&lt;p&gt;This is a cross-post of &lt;a href&#x3D;&quot;https://groups.google.com/forum/?oldui&#x3D;1#!topic/rustlang-security-announcements/wc5d_Qq35RA&quot;&gt;the official security advisory&lt;/a&gt;. The official post
-contains a signed version with our PGP key, as well.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;The Rust Security Response Working Group was recently notified of a security
-issue affecting token generation in the &lt;a href&#x3D;&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt; web application, and while
-investigated that issue we discovered an additional vulnerability affecting
-crates.io API tokens.&lt;/p&gt;
-&lt;p&gt;We have no evidence of this being exploited in the wild, but out of an
-abundance of caution we opted to revoke all existing API keys. You can generate
-a new one at &lt;a href&#x3D;&quot;https://crates.io/me&quot;&gt;crates.io/me&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#overview&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;overview&quot;&gt;&lt;/a&gt;Overview&lt;/h2&gt;
-&lt;p&gt;Until recently, API keys for &lt;a href&#x3D;&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt; were generated using the PostgreSQL
-random function, which is not a cryptographically secure random number
-generator. This means that in theory, an attacker could observe enough random
-values to determine the internal state of the random number generator, and use
-this information to determine previously created API keys up to the last
-database server reboot.&lt;/p&gt;
-&lt;p&gt;As part of the investigation for this, we also found that API keys were being
-stored in plain text. This would mean if our database were somehow compromised
-the attacker would be have API access for all current tokens.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#mitigations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;mitigations&quot;&gt;&lt;/a&gt;Mitigations&lt;/h2&gt;
-&lt;p&gt;We deployed a code change to production to use a cryptographically secure
-random number generator, and we implemented hashing for storing tokens in the
-database.&lt;/p&gt;
-&lt;p&gt;Exploiting either issue would be incredibly impractical in practice, and we&#x27;ve
-found no evidence of this being exploited in the wild. However, out of an
-abundance of caution, we&#x27;ve opted to revoke all existing API keys. You can
-generate a new API key by visiting &lt;a href&#x3D;&quot;https://crates.io/me&quot;&gt;crates.io/me&lt;/a&gt;. We apologize for any
-inconvenience this causes.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#acknowledgements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgements&quot;&gt;&lt;/a&gt;Acknowledgements&lt;/h2&gt;
-&lt;p&gt;Thanks to &lt;a href&#x3D;&quot;https://github.com/jsha&quot;&gt;Jacob Hoffman-Andrews&lt;/a&gt; for responsibly disclosing the random number
-generator issue according to &lt;a href&#x3D;&quot;https://www.rust-lang.org/policies/security&quot;&gt;our security policy&lt;/a&gt;. Thanks to &lt;a href&#x3D;&quot;https://github.com/sgrif&quot;&gt;Siân
-Griffin&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/jtgeibel&quot;&gt;Justin Geibel&lt;/a&gt; from the crates.io team for helping the Security
-Response WG addressing both of the issues. Thanks to &lt;a href&#x3D;&quot;https://github.com/pietroalbini&quot;&gt;Pietro Albini&lt;/a&gt; from the
-Security Response WG for coordinating the work on this vulnerability.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#timeline-of-events&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;timeline-of-events&quot;&gt;&lt;/a&gt;Timeline of events&lt;/h2&gt;
-&lt;p&gt;All times are listed in UTC.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;2020-07-11 17:43 - The issue is reported to &lt;a href&#x3D;&quot;mailto:security@rust-lang.org&quot;&gt;security@rust-lang.org&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;2020-07-11 20:56 - The issue is acknowledged, the leads of the crates.io team
-are looped in&lt;/li&gt;
-&lt;li&gt;2020-07-11 23:48 - The issue is confirmed and a planned fix is agreed on&lt;/li&gt;
-&lt;li&gt;2020-07-13 08:00 - The development of the fix is started&lt;/li&gt;
-&lt;li&gt;2020-07-14 12:53 - The fix is tested on the staging environment&lt;/li&gt;
-&lt;li&gt;2020-07-14 19:03 - The fix is deployed, existing tokens are revoked, and the
-issue is disclosed publicly&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>Rust Security Response WG</name>
         </author>
     </entry>
     
