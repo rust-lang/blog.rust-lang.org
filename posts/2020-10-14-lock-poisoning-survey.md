@@ -65,7 +65,8 @@ There isn't a `Result` or `?` to be seen so we know there's no chance of an earl
 What if `self.changes.push` didn't return normally?
 What if it panicked instead without actually doing anything?
 Then we'd return from `update_balance` early without restoring the balance invariant.
-That seems ok too, because a panic will start unwinding the thread it was called from, leaving no trace of any data it owned behind. No data means no broken invariants.
+That seems ok too, because a panic will start unwinding the thread it was called from, leaving no trace of any data it owned behind.
+Ignoring the `Drop` trait, no data means no broken invariants.
 Problem solved, right?
 
 What if our `Account` wasn't owned by that thread that panicked?
