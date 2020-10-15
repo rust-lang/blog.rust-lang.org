@@ -39,7 +39,7 @@ information.
 
 [instructions here]: https://rustc-dev-guide.rust-lang.org/notification-groups/about.html#join
 
-[tag syntax]: https://rustc-dev-guide.rust-lang.org/notifiation-groups/about.html#tagging-an-issue-for-a-notification-group
+[tag syntax]: https://rustc-dev-guide.rust-lang.org/notification-groups/about.html#tagging-an-issue-for-a-notification-group
 
 You can find more information about the group on it's [rustc-dev-guide
 section](https://rustc-dev-guide.rust-lang.org/notification-groups/cleanup-crew.html).
