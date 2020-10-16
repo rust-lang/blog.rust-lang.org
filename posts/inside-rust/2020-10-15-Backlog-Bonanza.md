@@ -16,7 +16,7 @@ forms of backlog, such as tracking issues.
 
 When we look at an RFC, we're typically deciding between one of the following outcomes:
 
-* **Close** the RFC, if we think that this problem is a good fit for the moment.
+* **Close** the RFC, if the problem doesn't seem like high priority at the moment, or the solution seems quite far from what we would want.
 * Close, but **suggest a [project proposal]**, if we think that the we might like to see the problem solved, but we aren't sure if the RFC has the design right, or we're not sure who would be a good liaison.
 * **Merge** the RFC, if we think the RFC basically nailed it and we have a lang team liaison in mind.
 
