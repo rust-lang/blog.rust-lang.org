@@ -54,8 +54,9 @@ people, though they can get significantly larger.
 Creating a smaller project group is meant to be lightweight. We
 basically convert the project proposal into a charter that states the
 general goals and create an associated zulip stream where folks can
-chat. Each project also gets a tracking issue that shows up on
-our [lang team project board].
+chat. Each project also gets a tracking issue that shows up on our
+[lang team project board]. (For larger project groups, we can make a
+dedicated repo and an entry in the [Rust team repo].)
 
 [recent example]: https://github.com/rust-lang/lang-team/tree/master/projects/declarative-macro-repetition-counts
 [Rust team repo]: https://github.com/rust-lang/team
