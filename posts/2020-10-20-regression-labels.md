@@ -6,34 +6,25 @@ author: Camelid
 team: the release team <https://www.rust-lang.org/governance/teams/operations#release>
 ---
 
-If you've contributed to Rust before, you have likely used a command like this
-to [set labels][rustbot-labeling-docs]:
+The Rust project gets many issues filed every day, and we need to keep track
+of them all to make sure we don't miss anything. To do that we use GitHub's
+issue labels feature, and we need your help to make sure we fix regressions
+as soon as possible!
 
-> **@rustbot** modify labels: A-typesystem C-enhancement
-
-Setting labels on issues and pull requests helps us keep track of and filter
-issues. There are many kinds of labels you can set to mark an issue
-as pertinent to a particular team, related to a part of the compiler, or
-what kind of bug it is (a hang, a crash, etc.).
-
-We also have labels that help us keep track of regressions so that we can
-prioritize them and fix them quickly if they are severe. We have three
-regression labels, each representing when the regression occurred:
-
-* `regression-from-stable-to-nightly`
-* `regression-from-stable-to-beta`
-* `regression-from-stable-to-stable`
+We have many issue labels that help us organize our issues, and we have a few
+in particular that mark an issue as a regression. These labels will ping a Rust
+working group called the [*prioritization working group*][wg-prioritization],
+whose members will work to determine the severity of an issue and then
+prioritize it. But, this won't happen unless someone marks the issue with one
+of those labels!
 
 We recently had a case where a [regression was not caught][internals-thread]
 before a release because the issue was not marked with a regression label.
 So we have now [added the ability][regression-label-pr] for *anyone* to set
 regression labels on issues! This is all you have to do to mark an issue as a
-regression and it will automatically be prioritized:
+regression and it will automatically ping people to prioritize it:
 
-> **@rustbot** modify labels: regression-from-stable-to-{release-channel}
-
-Just replace `{release-channel}` with one of `nightly`, `beta`, or `stable`,
-depending on when the regression occurred, and you're good to go!
+> **@rustbot** modify labels: regression-untriaged
 
 Alternatively, if you are reporting a new regression, you can use the regression
 [issue template]. It will guide you through the process of reporting a
@@ -47,7 +38,7 @@ that is important to be fixed, you can request prioritization with:
 We really appreciate it if you mark all regressions with an appropriate label
 so we can track them and fix them as soon as possible!
 
-[rustbot-labeling-docs]: https://rustc-dev-guide.rust-lang.org/rustbot.html#issue-relabeling
+[wg-prioritization]: https://rust-lang.github.io/compiler-team/working-groups/prioritization
 [internals-thread]: https://internals.rust-lang.org/t/1-46-is-unusable-for-me-solved/13161/10
 [regression-label-pr]: https://github.com/rust-lang/rust/pull/77555
 [issue template]: https://github.com/rust-lang/rust/issues/new/choose
