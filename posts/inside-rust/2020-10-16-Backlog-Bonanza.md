@@ -97,7 +97,7 @@ to shipping coming first:
 ### Ways to get involved
 
 If you like, you are welcome to attend backlog bonanza meetings. They
-are open for anyone and take place during our [design meeting slot]
+are open for anyone and take place during our [design meeting]
 most weeks. We haven't setup a very good process for announcing our
 design meeting schedule, though, that's something that we need to get
 better at.
