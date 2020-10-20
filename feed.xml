@@ -10,8 +10,49 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-10-17T01:52:01+00:00</updated>
+    <updated>2020-10-20T14:19:17+00:00</updated>
 
+    
+    <entry>
+        <title>Marking issues as regressions</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/10/20/regression-labels.html" type="text/html" title="Marking issues as regressions" />
+        <published>2020-10-20T00:00:00+00:00</published>
+        <updated>2020-10-20T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/10/20/regression-labels.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/10/20/regression-labels.html">&lt;p&gt;The Rust project gets many issues filed every day, and we need to keep track
+of them all to make sure we don&#x27;t miss anything. To do that we use GitHub&#x27;s
+issue labels feature, and we need your help to make sure we fix regressions
+as soon as possible!&lt;/p&gt;
+&lt;p&gt;We have many issue labels that help us organize our issues, and we have a few
+in particular that mark an issue as a regression. These labels will ping a Rust
+working group called the &lt;a href&#x3D;&quot;https://rust-lang.github.io/compiler-team/working-groups/prioritization&quot;&gt;&lt;em&gt;prioritization working group&lt;/em&gt;&lt;/a&gt;,
+whose members will work to determine the severity of an issue and then
+prioritize it. But, this won&#x27;t happen unless someone marks the issue with one
+of those labels!&lt;/p&gt;
+&lt;p&gt;We recently had a case where a &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/1-46-is-unusable-for-me-solved/13161/10&quot;&gt;regression was not caught&lt;/a&gt;
+before a release because the issue was not marked with a regression label.
+So we have now &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/77555&quot;&gt;added the ability&lt;/a&gt; for &lt;em&gt;anyone&lt;/em&gt; to set
+regression labels on issues! This is all you have to do to mark an issue as a
+regression and it will automatically ping people to prioritize it:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;@rustbot&lt;/strong&gt; modify labels: regression-untriaged&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Alternatively, if you are reporting a new regression, you can use the regression
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;issue template&lt;/a&gt;. It will guide you through the process of reporting a
+regression and providing information that will help us fix the issue.&lt;/p&gt;
+&lt;p&gt;Finally, if you have an issue that is &lt;em&gt;not&lt;/em&gt; a regression, but is still something
+that is important to be fixed, you can request prioritization with:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;@rustbot&lt;/strong&gt; prioritize&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We really appreciate it if you mark all regressions with an appropriate label
+so we can track them and fix them as soon as possible!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Camelid</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.47.0</title>
@@ -558,232 +599,6 @@ fn main() {
 &lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1451&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1451&quot;&gt;&lt;/a&gt;Contributors to 1.45.1&lt;/h2&gt;
 &lt;p&gt;Many people came together to create Rust 1.45.1. We couldn&#x27;t have done it
 without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.45.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.45.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/07/16/Rust-1.45.0.html" type="text/html" title="Announcing Rust 1.45.0" />
-        <published>2020-07-16T00:00:00+00:00</published>
-        <updated>2020-07-16T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/07/16/Rust-1.45.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/07/16/Rust-1.45.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.45.0. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.45.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1450-2020-07-16&quot;&gt;detailed release notes for
-1.45.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1450-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1450-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.45.0 stable&lt;/h2&gt;
-&lt;p&gt;There are two big changes to be aware of in Rust 1.45.0: a fix for some
-long-standing unsoundness when casting between integers and floats, and the
-stabilization of the final feature needed for one of the more popular web
-frameworks to work on stable Rust.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#fixing-unsoundness-in-casts&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;fixing-unsoundness-in-casts&quot;&gt;&lt;/a&gt;Fixing unsoundness in casts&lt;/h2&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/10184&quot;&gt;Issue 10184&lt;/a&gt; was originally
-opened back in October of 2013, a year and a half before Rust 1.0. As you may
-know, &lt;code&gt;rustc&lt;/code&gt; uses &lt;a href&#x3D;&quot;http://llvm.org/&quot;&gt;LLVM&lt;/a&gt; as a compiler backend. When you
-write code like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub fn cast(x: f32) -&amp;gt; u8 {
-    x as u8
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The Rust compiler in Rust 1.44.0 and before would produce LLVM-IR that looks
-like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-llvm-ir&quot;&gt;define i8 @_ZN10playground4cast17h1bdf307357423fcfE(float %x) unnamed_addr #0 {
-start:
-  %0 &#x3D; fptoui float %x to i8
-  ret i8 %0
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That &lt;code&gt;fptoui&lt;/code&gt; implements the cast, it is short for &amp;quot;floating point to
-unsigned integer.&amp;quot;&lt;/p&gt;
-&lt;p&gt;But there&#x27;s a problem here. From &lt;a href&#x3D;&quot;https://llvm.org/docs/LangRef.html#fptoui-to-instruction&quot;&gt;the
-docs&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The ‘fptoui’ instruction converts its floating-point operand into the
-nearest (rounding towards zero) unsigned integer value. If the value cannot
-fit in ty2, the result is a poison value.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Now, unless you happen to dig into the depths of compilers regularly, you may
-not understand what that means. It&#x27;s full of jargon, but there&#x27;s a simpler
-explanation: if you cast a floating point number that&#x27;s large to an integer
-that&#x27;s small, you get undefined behavior.&lt;/p&gt;
-&lt;p&gt;That means that this, for example, was not well-defined:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn cast(x: f32) -&amp;gt; u8 {
-    x as u8
-}
-
-fn main() {
-    let f &#x3D; 300.0;
-
-    let x &#x3D; cast(f);
-
-    println!(&amp;quot;x: {}&amp;quot;, x);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;On Rust 1.44.0, this happens to print &amp;quot;x: 0&amp;quot; on my machine. But it could
-print anything, or do anything: this is undefined behavior. But the &lt;code&gt;unsafe&lt;/code&gt;
-keyword is not used within this block of code. This is what we call a
-&amp;quot;soundness&amp;quot; bug, that is, it is a bug where the compiler does the wrong thing.
-We tag these bugs as
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues?q&#x3D;is%3Aissue+is%3Aopen+label%3A%22I-unsound+%F0%9F%92%A5%22&quot;&gt;I-unsound&lt;/a&gt;
-on our issue tracker, and take them very seriously.&lt;/p&gt;
-&lt;p&gt;This bug took a long time to resolve, though. The reason is that it was very
-unclear what the correct path forward was.&lt;/p&gt;
-&lt;p&gt;In the end, the decision was made to do this:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;as&lt;/code&gt; would perform a &amp;quot;saturating cast&amp;quot;.&lt;/li&gt;
-&lt;li&gt;A new &lt;code&gt;unsafe&lt;/code&gt; cast would be added if you wanted to skip the checks.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;This is very similar to array access, for example:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;array[i]&lt;/code&gt; will check to make sure that &lt;code&gt;array&lt;/code&gt; has at least &lt;code&gt;i + 1&lt;/code&gt; elements.&lt;/li&gt;
-&lt;li&gt;You can use &lt;code&gt;unsafe { array.get_unchecked(i) }&lt;/code&gt; to skip the check.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So, what&#x27;s a saturating cast? Let&#x27;s look at a slightly modified example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn cast(x: f32) -&amp;gt; u8 {
-    x as u8
-}
-
-fn main() {
-    let too_big &#x3D; 300.0;
-    let too_small &#x3D; -100.0;
-    let nan &#x3D; f32::NAN;
-
-    println!(&amp;quot;too_big_casted &#x3D; {}&amp;quot;, cast(too_big));
-    println!(&amp;quot;too_small_casted &#x3D; {}&amp;quot;, cast(too_small));
-    println!(&amp;quot;not_a_number_casted &#x3D; {}&amp;quot;, cast(nan));
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This will print:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;too_big_casted &#x3D; 255
-too_small_casted &#x3D; 0
-not_a_number_casted &#x3D; 0
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That is, numbers that are too big turn into the largest possible value.
-Numbers that are too small produce the smallest possible value (which is
-zero). NaN produces zero.&lt;/p&gt;
-&lt;p&gt;The new API to cast in an unsafe manner is:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let x: f32 &#x3D; 1.0;
-let y: u8 &#x3D; unsafe { x.to_int_unchecked() };
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But as always, you should only use this method as a last resort. Just like
-with array access, the compiler can often optimize the checks away, making
-the safe and unsafe versions equivalent when the compiler can prove it.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#stabilizing-function-like-procedural-macros-in-expressions-patterns-and-statements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilizing-function-like-procedural-macros-in-expressions-patterns-and-statements&quot;&gt;&lt;/a&gt;Stabilizing function-like procedural macros in expressions, patterns, and statements&lt;/h2&gt;
-&lt;p&gt;In &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html&quot;&gt;Rust 1.30.0&lt;/a&gt;, we stabilized
-&amp;quot;function-like procedural macros in item position.&amp;quot; For example, &lt;a href&#x3D;&quot;https://gitlab.gnome.org/federico/gnome-class&quot;&gt;the
-&lt;code&gt;gnome-class&lt;/code&gt; crate&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Gnome-class is a procedural macro for Rust.  Within the macro, we
-define a mini-language which looks as Rust-y as possible, and that has
-extensions to let you define GObject subclasses, their properties,
-signals, interface implementations, and the rest of GObject&#x27;s
-features.  The goal is to require no unsafe code on your part.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;This looks like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;gobject_gen! {
-    class MyClass: GObject {
-        foo: Cell&amp;lt;i32&amp;gt;,
-        bar: RefCell&amp;lt;String&amp;gt;,
-    }
-
-    impl MyClass {
-        virtual fn my_virtual_method(&amp;amp;self, x: i32) {
-            ... do something with x ...
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &amp;quot;in item position&amp;quot; bit is some jargon, but basically what this means is that
-you could only invoke &lt;code&gt;gobject_gen!&lt;/code&gt; in certain places in your code.&lt;/p&gt;
-&lt;p&gt;Rust 1.45.0 adds the ability to invoke procedural macros in three new places:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// imagine we have a procedural macro named &amp;quot;mac&amp;quot;
-
-mac!(); // item position, this was what was stable before
-
-// but these three are new:
-fn main() {
-  let expr &#x3D; mac!(); // expression position
-
-  match expr {
-      mac!() &#x3D;&amp;gt; {} // pattern position
-  }
-
-  mac!(); // statement position
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Being able to use macros in more places is interesting, but there&#x27;s another
-reason why many Rustaceans have been waiting for this feature for a long time:
-&lt;a href&#x3D;&quot;https://rocket.rs&quot;&gt;Rocket&lt;/a&gt;. Initially released in December of 2016, Rocket is
-a popular web framework for Rust often described as one of the best things the
-Rust ecosystem has to offer. Here&#x27;s the &amp;quot;hello world&amp;quot; example from its upcoming
-release:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[macro_use] extern crate rocket;
-
-#[get(&amp;quot;/&amp;lt;name&amp;gt;/&amp;lt;age&amp;gt;&amp;quot;)]
-fn hello(name: String, age: u8) -&amp;gt; String {
-    format!(&amp;quot;Hello, {} year old named {}!&amp;quot;, age, name)
-}
-
-#[launch]
-fn rocket() -&amp;gt; rocket::Rocket {
-    rocket::ignite().mount(&amp;quot;/hello&amp;quot;, routes![hello])
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Until today, Rocket depended on nightly-only features to deliver on its promise
-of flexibility and ergonomics. In fact, as can be seen on the &lt;a href&#x3D;&quot;https://rocket.rs/v0.4&quot;&gt;project&#x27;s
-homepage&lt;/a&gt;, the same example above in the current version
-of Rocket requires the &lt;code&gt;proc_macro_hygiene&lt;/code&gt; feature to compile. However, as you
-may guess from the feature&#x27;s name, today it ships in stable! &lt;a href&#x3D;&quot;https://github.com/SergioBenitez/Rocket/issues/19&quot;&gt;This
-issue&lt;/a&gt; tracked the history of
-nightly-only features in Rocket. Now, they&#x27;re all checked off!&lt;/p&gt;
-&lt;p&gt;This next version of Rocket is still in the works, but when released, many folks
-will be very happy :)&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#library-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
-&lt;p&gt;In Rust 1.45.0, the following APIs were stabilized:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.as_ptr&quot;&gt;&lt;code&gt;Arc::as_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/struct.BTreeMap.html#method.remove_entry&quot;&gt;&lt;code&gt;BTreeMap::remove_entry&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#method.as_ptr&quot;&gt;&lt;code&gt;Rc::as_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/rc/struct.Weak.html#method.as_ptr&quot;&gt;&lt;code&gt;rc::Weak::as_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/rc/struct.Weak.html#method.from_raw&quot;&gt;&lt;code&gt;rc::Weak::from_raw&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/rc/struct.Weak.html#method.into_raw&quot;&gt;&lt;code&gt;rc::Weak::into_raw&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.str.html#method.strip_prefix&quot;&gt;&lt;code&gt;str::strip_prefix&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.str.html#method.strip_suffix&quot;&gt;&lt;code&gt;str::strip_suffix&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Weak.html#method.as_ptr&quot;&gt;&lt;code&gt;sync::Weak::as_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Weak.html#method.from_raw&quot;&gt;&lt;code&gt;sync::Weak::from_raw&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Weak.html#method.into_raw&quot;&gt;&lt;code&gt;sync::Weak::into_raw&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/char/constant.UNICODE_VERSION.html&quot;&gt;&lt;code&gt;char::UNICODE_VERSION&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/proc_macro/struct.Span.html#method.resolved_at&quot;&gt;&lt;code&gt;Span::resolved_at&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/proc_macro/struct.Span.html#method.located_at&quot;&gt;&lt;code&gt;Span::located_at&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/proc_macro/struct.Span.html#method.mixed_site&quot;&gt;&lt;code&gt;Span::mixed_site&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/os/unix/process/trait.CommandExt.html#tymethod.arg0&quot;&gt;&lt;code&gt;unix::process::CommandExt::arg0&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Additionally, you can &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/72413/&quot;&gt;use &lt;code&gt;char&lt;/code&gt; with
-ranges&lt;/a&gt;, to iterate over
-codepoints:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;for ch in &#x27;a&#x27;..&#x3D;&#x27;z&#x27; {
-    print!(&amp;quot;{}&amp;quot;, ch);
-}
-println!();
-// Prints &amp;quot;abcdefghijklmnopqrstuvwxyz&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For a full list of changes, see &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1450-2020-07-16&quot;&gt;the full release notes&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.45.0 release: check out what changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1450-2020-07-16&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-145-2020-07-16&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-145&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1450&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1450&quot;&gt;&lt;/a&gt;Contributors to 1.45.0&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.45.0. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.45.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
 </content>
 
         <author>
