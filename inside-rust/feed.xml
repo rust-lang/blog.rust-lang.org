@@ -10,8 +10,24 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-10-20T14:19:20+00:00</updated>
+    <updated>2020-10-23T15:00:36+00:00</updated>
 
+    
+    <entry>
+        <title>Core team membership changes</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/10/23/Core-team-membership.html" type="text/html" title="Core team membership changes" />
+        <published>2020-10-23T00:00:00+00:00</published>
+        <updated>2020-10-23T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/10/23/Core-team-membership.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/10/23/Core-team-membership.html">&lt;p&gt;The core team has had a few membership updates in the last month, and we wanted to provide an update.&lt;/p&gt;
+&lt;p&gt;To start, Florian Gilcher is joining the Core team as a full member. Florian has been attending meetings as an observer since March 2019. He is the lead of the Community Events team, and has done a lot of work in the open source world, with plenty of insight to offer especially as we look to form a Rust Foundation.&lt;/p&gt;
+&lt;p&gt;There are also two folks stepping back from the team. Carol Nichols has been a member of the team for three years, and she is stepping back to make more time for other projects in the community, including crates.io and her continued work on the Rust book. Nick Cameron &lt;a href&#x3D;&quot;https://www.ncameron.org/blog/leaving-the-rust-core-team/&quot;&gt;has recently welcomed a second child&lt;/a&gt; (congratulations!) and is leaving the core team to be able to focus more on his family and his work at PingCAP. He will continue to be around in the Rust community. Thanks to both Carol and Nick for their hard work over the years — we’ll miss you!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mark Rousskov</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Lang team Backlog Bonanza and Project Proposals</title>
@@ -454,52 +470,6 @@ can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/
 
         <author>
             <name>Pietro Albini</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Lang team design meeting: well-formedness and type aliases</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-wf-types.html" type="text/html" title="Lang team design meeting: well-formedness and type aliases" />
-        <published>2020-07-29T00:00:00+00:00</published>
-        <updated>2020-07-29T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-wf-types.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/07/29/lang-team-design-meeting-wf-types.html">&lt;p&gt;Hello! Did you know that the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;lang team&lt;/a&gt; now has regular design
-meetings? We use these meetings to dig deeper into the output of
-active project groups. After the meeting, we typically post a
-recording to &lt;a href&#x3D;&quot;https://www.youtube.com/playlist?list&#x3D;PL85XCvVPmGQg-gYy7R6a_Y91oQLdsbSpa&quot;&gt;YouTube&lt;/a&gt; as well as some &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/tree/master/design-meeting-minutes&quot;&gt;minutes into the lang-team
-repository&lt;/a&gt;. I wanted to write a quick update listing out some of
-the meetings we&#x27;ve had recently as well as some of our upcoming
-meetings.&lt;/p&gt;
-&lt;p&gt;This blog post is about the meeting we held on 2020-07-29. We
-discussed the idea of trying to enforce the &amp;quot;well-formedness&amp;quot; rules
-for type aliases, as has been floated on and off over the years.&lt;/p&gt;
-&lt;p&gt;The context is that the compiler&#x27;s current rules expand type aliases
-as if they were a kind of macro, which means that we don&#x27;t wind up
-enforcing many sorts of rules about them.&lt;/p&gt;
-&lt;p&gt;For example, the following type alias definition is legal even though
-it would be an error to ever use it:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct MyType&amp;lt;T: Display&amp;gt; { t: T }
-
-// This alias, perhaps, should err, as &#x60;Vec&amp;lt;u32&amp;gt;: Display&#x60;
-// does not hold:
-type MyAlias &#x3D; MyType&amp;lt;Vec&amp;lt;u32&amp;gt;&amp;gt;;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For more information, check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2020-07-29-wf-checks-and-ty-aliases.md&quot;&gt;minutes from the meeting&lt;/a&gt; or
-&lt;a href&#x3D;&quot;https://youtu.be/tIBZYQSA_eM&quot;&gt;watch the recording&lt;/a&gt;. We covered a number of examples of what goes
-wrong, as well as various possible &amp;quot;endstates&amp;quot; that we might want to
-reach (for example, there is an argument that the above example should
-be accepted after all, perhaps with a warning).&lt;/p&gt;
-&lt;p&gt;The conclusion during the meeting was that we would not put a lot of
-energy into type aliases at this time, and in particular we wouldn&#x27;t
-aim for any Edition-related migrations and hard-errors, but we would
-accept PRs that introduce warnings for type alias definitions that are
-always an error to use. (Like any conclusion that happens in a
-meeting, it may be revised if we encounter new evidence that changes
-our minds.)&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Niko Matsakis</name>
         </author>
     </entry>
     
