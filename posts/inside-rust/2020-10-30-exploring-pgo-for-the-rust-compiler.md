@@ -124,6 +124,7 @@ Fortunately, thanks to [good documentation][rustc-perf-local], running the bench
 Here's a glance at the effect that a PGOed LLVM has on *rustc*'s performance:
 
 [![Performance improvements gained from apply PGO to LLVM][rustc-perf-pgo-llvm-thumb]][rustc-perf-pgo-llvm]
+
 [rustc-perf-pgo-llvm-thumb]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm-thumb.png
 [rustc-perf-pgo-llvm]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm.png
 
@@ -132,6 +133,7 @@ but they are pretty encouraging and show no significant performance regressions.
 Diving more into details shows the expected profile:
 
 ![Performance improvements gained from apply PGO to LLVM (details)][rustc-perf-pgo-llvm-expanded]
+
 [rustc-perf-pgo-llvm-expanded]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm-expanded.png
 
 Workloads that spend most of their time in LLVM (e.g. optimized builds) show the most improvement, while workloads that don't invoke LLVM at all (e.g. check builds) also don't profit from a faster LLVM.
