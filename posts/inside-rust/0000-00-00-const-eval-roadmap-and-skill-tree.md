@@ -5,7 +5,7 @@ author: Oli Scherer
 team: the const eval working group <https://github.com/rust-lang/const-eval/>
 ---
 
-Y'all probably noticed that const eval finally got loops, mutable local variables and branches. With those features stabilized, we were able to make a lot of basic arithmetic functions `const fn` on the stable compiler. These features have been asked for a lot, and while it may not appear so, these were the low hanging fruit.
+Y'all probably noticed that const eval finally got loops, mutable local variables and branches. With those features stabilized, we were able to make a lot of checked and saturating arithmetic functions `const fn` on the stable compiler. These features have been asked for a lot, and while it may not appear so, these were the low hanging fruit.
 
 So you may now be thinking "If the low hanging fruit took you 5 years" *(yes oli-obk has been working on const eval for that long, and in the end ecstaticmorse implemented const control flow)*, "will we see any of the more fancy features in this new decade?".
 
