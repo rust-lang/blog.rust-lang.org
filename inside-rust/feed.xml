@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-10-23T15:00:36+00:00</updated>
+    <updated>2020-11-08T13:43:45+00:00</updated>
 
     
     <entry>
@@ -248,7 +248,7 @@ out the group’s &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-err
         <updated>2020-09-17T00:00:00+00:00</updated>
         <id>https://blog.rust-lang.org/inside-rust/2020/09/17/stabilizing-intra-doc-links.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/09/17/stabilizing-intra-doc-links.html">&lt;p&gt;We&#x27;re excited to share that intra-doc links are stabilizing soon!&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/rustdoc/unstable-features.html#linking-to-items-by-name&quot;&gt;Intra-doc links&lt;/a&gt; are a feature of &lt;code&gt;rustdoc&lt;/code&gt; that allow you to link to &#x27;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/reference/items.html&quot;&gt;items&lt;/a&gt;&#x27; - functions, types, and more - by their name, instead of a hard-coded URL. This lets you have accurate links even if your types are &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/32129&quot;&gt;re-exported in a different module or crate&lt;/a&gt;. Here is a simple example:&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/rustdoc/linking-to-items-by-name.html&quot;&gt;Intra-doc links&lt;/a&gt; are a feature of &lt;code&gt;rustdoc&lt;/code&gt; that allow you to link to &#x27;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/reference/items.html&quot;&gt;items&lt;/a&gt;&#x27; - functions, types, and more - by their name, instead of a hard-coded URL. This lets you have accurate links even if your types are &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/32129&quot;&gt;re-exported in a different module or crate&lt;/a&gt;. Here is a simple example:&lt;/p&gt;
 &lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;/// Link to [&#x60;f()&#x60;]
 pub struct S;
 
