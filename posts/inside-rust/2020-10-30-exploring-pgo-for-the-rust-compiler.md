@@ -6,7 +6,7 @@ description: "Investigate the effects that profile guided optimization has on ru
 team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
 ---
 
-**TLDR** -- PGO makes the compiler [faster](#Final-Benchmark-Numbers-and-a-Measurement-Surprise) but is [not straightforward](#Where-to-go-from-here) to realize in CI.
+**TLDR** -- PGO makes the compiler [faster](#final-numbers-and-a-benchmarking-plot-twist) but is [not straightforward](#where-to-go-from-here) to realize in CI.
 
 For the last few months Mozilla has been using Profile-Guided Optimization (PGO) to build their own [optimized version of Clang][moz-clang], leading to an up to 9% reduction of Firefox compile times on their build infrastructure.
 Would the same be possible for the Rust compiler, that is, could we apply profile-guided optimization to *rustc* itself in order to make it faster?
@@ -126,7 +126,7 @@ Here's a glance at the effect that a PGOed LLVM has on *rustc*'s performance:
 [![Performance improvements gained from apply PGO to LLVM][rustc-perf-pgo-llvm-thumb]][rustc-perf-pgo-llvm]
 
 [rustc-perf-pgo-llvm-thumb]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm-thumb.png
-[rustc-perf-pgo-llvm]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm.png
+[rustc-perf-pgo-llvm]: https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none&end=pgo-2020-10-30-llvm&stat=instructions%3Au
 
 The results are not quite as spectacular as the anecdotal 20% improvement from Clang's documentation;
 but they are pretty encouraging and show no significant performance regressions.
@@ -210,7 +210,7 @@ As expected the results are similar to when PGO was applied to LLVM: a reduction
 [![Performance improvements gained from applying PGO to (only) the Rust part of the compiler][rustc-perf-pgo-rust-thumb]][rustc-perf-pgo-rust]
 
 [rustc-perf-pgo-rust-thumb]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-rust-thumb.png
-[rustc-perf-pgo-rust]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-rust.png
+[rustc-perf-pgo-rust]: https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none&end=pgo-2020-10-30-rust&stat=instructions%3Au
 
 Because different workloads execute different amounts of Rust code (vs C++/LLVM code), the total reduction can be a lot less for LLVM-heavy cases.
 For example, a full *webrender-opt* build will spend more than 80% of its time in LLVM, so reducing the remaining 20% by 5% can only reduce the total number by 1%.
@@ -246,7 +246,7 @@ Sure, PGO seems to lead to a pretty solid 5% reduction of instruction counts acr
 That is pretty nice -- but also far away from the 20% improvement mentioned in the Clang documentation.
 Given that PGO adds quite a few complications to the build process of the compiler itself (not to mention the almost tripled build times) I started to think that applying PGO to the compiler would probably not be worth the trouble.
 
-[rustc-perf-pgo-both]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-both.png
+[rustc-perf-pgo-both]: https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none&end=pgo-2020-10-30-both&stat=instructions%3Au
 
 I then took a glance that the benchmarks' wall time measurements (instead of the instruction count measurements) and saw quite a different picture: *webrender-opt* minus 15%, *style-servo-opt* minus 14%, *serde-check* minus 15%?
 This looked decidedly better than for instruction counts.
@@ -255,10 +255,10 @@ I decided to try and reduce the noise by increasing the number of benchmark iter
 I only did "full" builds in this configuration as PGO's effect seemed to translate pretty predictably to incremental builds.
 After roughly eight hours to complete both the PGO and the non-PGO versions of the benchmarks these are the numbers I got:
 
-[![Wall time improvements gained from applying PGO to the entire compiler][rustc-perf-pgo-both-walltime-thump]][rustc-perf-pgo-both-walltime]
+[![Wall time improvements gained from applying PGO to the entire compiler][rustc-perf-pgo-both-walltime-thumb]][rustc-perf-pgo-both-walltime]
 
-[rustc-perf-pgo-both-walltime-thump]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-both-walltime-thump.png
-[rustc-perf-pgo-both-walltime]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-both-walltime.png
+[rustc-perf-pgo-both-walltime-thumb]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-both-walltime-thumb.png
+[rustc-perf-pgo-both-walltime]: https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none-20&end=pgo-2020-10-30-both-20&stat=wall-time
 
 As you can see we get a 10-16% reduction of build times almost across the board.
 This was more in line with what I had initially hoped to get from PGO.
@@ -299,3 +299,5 @@ Having a straightforward way of obtaining a PGOed compiler (e.g. by adding a sim
 It's unlikely that I can spend a lot of time on this personally -- but my hope is that others will pick up the baton. I'd be happy to provide guidance on how to use PGO specifically.
 
 [dist-builds]: https://github.com/rust-lang/rust/tree/master/src/ci/docker/host-x86_64
+
+**PS** -- Special thanks to Mark Rousskov for uploading my local benchmarking data to [perf.rust-lang.org][perf.rlo], which makes it much nicer to explore!
