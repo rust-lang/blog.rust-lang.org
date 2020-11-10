@@ -55,8 +55,8 @@ In order to enable PGO for rustc's LLVM we basically follow the steps laid out i
     [llvm]
 
     # Pass extra compiler and linker flags to the LLVM CMake build.
-    # <PROFDATA_DIR> must be an absolute path to a writeable directory,
-    # like for example /tmp/my-rustc-profdata
+    # <PROFDATA_DIR> must be an absolute path to a writeable
+    # directory, like for example /tmp/my-rustc-profdata
     cflags = "-fprofile-generate=<PROFDATA_DIR>"
     cxxflags = "-fprofile-generate=<PROFDATA_DIR>"
 
@@ -94,7 +94,7 @@ In order to enable PGO for rustc's LLVM we basically follow the steps laid out i
 [llvm-profdata]: https://clang.llvm.org/docs/UsersManual.html#cmdoption-fprofile-generate
 
 3. Now that the combined profile data from all *rustc* invocations can be found in `<PROFDATA_DIR>/rustc-llvm.profdata` it is time to re-compile LLVM and *rustc* again, this time instructing Clang to make use of this valuable new information.
-    To this end, we modify `config.toml` as follows:
+    To this end we modify `config.toml` as follows:
 
     ```toml
     [llvm]
@@ -137,7 +137,7 @@ Diving more into details shows the expected profile:
 [rustc-perf-pgo-llvm-expanded]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm-expanded.png
 
 Workloads that spend most of their time in LLVM (e.g. optimized builds) show the most improvement, while workloads that don't invoke LLVM at all (e.g. check builds) also don't profit from a faster LLVM.
-Let's take a look how we can take things further by applying PGO to the other half of the compiler.
+Let's take a look at how we can take things further by applying PGO to the other half of the compiler.
 
 [clang-pgo-20]: https://www.llvm.org/docs/HowToBuildWithPGO.html#introduction
 [perf.rlo]: https://perf.rust-lang.org/
@@ -166,8 +166,9 @@ pub fn rustc_cargo_env(builder: &Builder<'_>,
         cargo.env("RUSTC_VERIFY_LLVM_IR", "1");
     }
 
-    // This is new: Hard code instrumentation in the RUSTFLAGS of the Cargo
-    // invocation that builds the compiler
+    // This is new: Hard code instrumentation in the
+    // RUSTFLAGS of the Cargo invocation that builds
+    // the compiler
     cargo.rustflag("-Cprofile-generate=<PROFDATA_DIR>");
 
     // ... omitted ...
@@ -190,11 +191,14 @@ pub fn rustc_cargo_env(builder: &Builder<'_>,
         cargo.env("RUSTC_VERIFY_LLVM_IR", "1");
     }
 
-    // Replace `-Cprofile-generate` with `-Cprofile-use`, assuming
-    // that we used the `llvm-profdata` tool to merge the collected
-    // `<PROFDATA_DIR>/*.profraw` files into a common file named
+    // Replace `-Cprofile-generate` with `-Cprofile-use`,
+    // assuming that we used the `llvm-profdata` tool to
+    // merge the collected `<PROFDATA_DIR>/*.profraw` files
+    // into a common file named
     // `<PROFDATA_DIR>/rustc-rust.profdata`.
-    cargo.rustflag("-Cprofile-use=<PROFDATA_DIR>/rustc-rust.profdata");
+    cargo.rustflag(
+        "-Cprofile-use=<PROFDATA_DIR>/rustc-rust.profdata"
+    );
 
     // ... omitted ...
 }
@@ -214,7 +218,7 @@ As expected the results are similar to when PGO was applied to LLVM: a reduction
 
 Because different workloads execute different amounts of Rust code (vs C++/LLVM code), the total reduction can be a lot less for LLVM-heavy cases.
 For example, a full *webrender-opt* build will spend more than 80% of its time in LLVM, so reducing the remaining 20% by 5% can only reduce the total number by 1%.
-On the other hand, a *check* build or an *incr-unchanged* build spends almost no time in LLVM, so the 5% Rust performance improvement translates almost entirely into a 5% build time reduction for these cases:
+On the other hand, a *check* build or an *incr-unchanged* build spends almost no time in LLVM, so the 5% Rust performance improvement translates almost entirely into a 5% instruction count reduction for these cases:
 
 ![Performance improvements gained from applying PGO to (only) the Rust part of the compiler (details)][rustc-perf-pgo-rust-expanded]
 
@@ -248,7 +252,7 @@ Given that PGO adds quite a few complications to the build process of the compil
 
 [rustc-perf-pgo-both]: https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none&end=pgo-2020-10-30-both&stat=instructions%3Au
 
-I then took a glance that the benchmarks' wall time measurements (instead of the instruction count measurements) and saw quite a different picture: *webrender-opt* minus 15%, *style-servo-opt* minus 14%, *serde-check* minus 15%?
+I then took a glance at the benchmarks' wall time measurements (instead of the instruction count measurements) and saw quite a different picture: *webrender-opt* minus 15%, *style-servo-opt* minus 14%, *serde-check* minus 15%?
 This looked decidedly better than for instruction counts.
 But wall time measurements can be very noisy (which is why most people only look at instruction counts on perf.rust-lang.org), and `rustc-perf` only does a single iteration for each benchmark, so I was not prepared to trust these numbers just yet.
 I decided to try and reduce the noise by increasing the number of benchmark iterations from one to twenty.
@@ -260,7 +264,7 @@ After roughly eight hours to complete both the PGO and the non-PGO versions of t
 [rustc-perf-pgo-both-walltime-thumb]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-both-walltime-thumb.png
 [rustc-perf-pgo-both-walltime]: https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none-20&end=pgo-2020-10-30-both-20&stat=wall-time
 
-As you can see we get a 10-16% reduction of build times almost across the board.
+As you can see we get a 10-16% reduction of build times almost across the board for real world test cases.
 This was more in line with what I had initially hoped to get from PGO.
 It is a bit surprising that the difference between instruction counts and wall time is so pronounced.
 One plausible explanation would be that PGO improves instruction cache utilization, something which makes a difference for execution time but would not be reflected in the amount of instructions executed.
@@ -300,4 +304,4 @@ It's unlikely that I can spend a lot of time on this personally -- but my hope i
 
 [dist-builds]: https://github.com/rust-lang/rust/tree/master/src/ci/docker/host-x86_64
 
-**PS** -- Special thanks to Mark Rousskov for uploading my local benchmarking data to [perf.rust-lang.org][perf.rlo], which makes it much nicer to explore!
+**PS** -- Special thanks to Mark Rousskov for uploading my local benchmarking data to [perf.rust-lang.org][rustc-perf-pgo-both-walltime], which makes it much nicer to explore!
