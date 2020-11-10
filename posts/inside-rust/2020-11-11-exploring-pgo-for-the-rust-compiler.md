@@ -125,7 +125,7 @@ Here's a glance at the effect that a PGOed LLVM has on *rustc*'s performance:
 
 [![Performance improvements gained from apply PGO to LLVM][rustc-perf-pgo-llvm-thumb]][rustc-perf-pgo-llvm]
 
-[rustc-perf-pgo-llvm-thumb]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm-thumb.png
+[rustc-perf-pgo-llvm-thumb]: /images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm-thumb.png
 [rustc-perf-pgo-llvm]: https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none&end=pgo-2020-10-30-llvm&stat=instructions%3Au
 
 The results are not quite as spectacular as the anecdotal 20% improvement from Clang's documentation;
@@ -134,7 +134,7 @@ Diving more into details shows the expected profile:
 
 ![Performance improvements gained from apply PGO to LLVM (details)][rustc-perf-pgo-llvm-expanded]
 
-[rustc-perf-pgo-llvm-expanded]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm-expanded.png
+[rustc-perf-pgo-llvm-expanded]: /images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm-expanded.png
 
 Workloads that spend most of their time in LLVM (e.g. optimized builds) show the most improvement, while workloads that don't invoke LLVM at all (e.g. check builds) also don't profit from a faster LLVM.
 Let's take a look at how we can take things further by applying PGO to the other half of the compiler.
@@ -213,7 +213,7 @@ As expected the results are similar to when PGO was applied to LLVM: a reduction
 
 [![Performance improvements gained from applying PGO to (only) the Rust part of the compiler][rustc-perf-pgo-rust-thumb]][rustc-perf-pgo-rust]
 
-[rustc-perf-pgo-rust-thumb]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-rust-thumb.png
+[rustc-perf-pgo-rust-thumb]: /images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-rust-thumb.png
 [rustc-perf-pgo-rust]: https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none&end=pgo-2020-10-30-rust&stat=instructions%3Au
 
 Because different workloads execute different amounts of Rust code (vs C++/LLVM code), the total reduction can be a lot less for LLVM-heavy cases.
@@ -222,7 +222,7 @@ On the other hand, a *check* build or an *incr-unchanged* build spends almost no
 
 ![Performance improvements gained from applying PGO to (only) the Rust part of the compiler (details)][rustc-perf-pgo-rust-expanded]
 
-[rustc-perf-pgo-rust-expanded]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-rust-expanded.png
+[rustc-perf-pgo-rust-expanded]: /images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-rust-expanded.png
 
 
 ### Can we apply PGO to Rust and LLVM at the same time?
@@ -261,7 +261,7 @@ After roughly eight hours to complete both the PGO and the non-PGO versions of t
 
 [![Wall time improvements gained from applying PGO to the entire compiler][rustc-perf-pgo-both-walltime-thumb]][rustc-perf-pgo-both-walltime]
 
-[rustc-perf-pgo-both-walltime-thumb]: /images/inside-rust/2020-10-30-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-both-walltime-thumb.png
+[rustc-perf-pgo-both-walltime-thumb]: /images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-both-walltime-thumb.png
 [rustc-perf-pgo-both-walltime]: https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none-20&end=pgo-2020-10-30-both-20&stat=wall-time
 
 As you can see we get a 10-16% reduction of build times almost across the board for real world test cases.
