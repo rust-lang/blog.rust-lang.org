@@ -112,19 +112,19 @@ let mut guard = shared.lock().unwrap_or_else(|err| err.into_inner());
 
 All Rust code needs to remain free from any possible undefined behavior in the presence of panics, so ignoring panics is always safe.
 Rust doesn't try guarantee all safe code is free from logic bugs, so broken invariants that don't potentially lead to undefined behavior aren't strictly considered unsafe.
-Since ignoring lock poisoning is also always safe it doesn't really give you a dependable tool to protect state from panics. You can always ignore it.
+Since ignoring lock poisoning is also always safe it doesn't really give you a dependable tool to protect state from panics.
+You can always ignore it.
 
-Lock poisoning doesn't give you a tool for guaranteeing safety in the presence of panics.
+So lock poisoning doesn't give you a tool for guaranteeing safety in the presence of panics.
 What it does give you is a way to propagate those panics to other threads.
-The machinery needed to do this adds a non-trivial cost to using the standard locks.
-It comes with an ergonomic cost in having to call `.lock().unwrap()`, and a runtime cost in having to maintain thread-local state to track panics.
+The machinery needed to do this adds costs to using the standard locks.
+There's an ergonomic cost in having to call `.lock().unwrap()`, and a runtime cost in having to actually track state for panics.
 
-With the standard locks you pay this cost whether you need it or not.
+With the standard locks you pay those costs whether you need to or not.
 That's not typically how APIs in the standard library work.
 Instead, you compose costs together so you only pay for what you need.
-It shouldn't be a standard lock's job to synchronize access _and_ propagate panics.
-That's what's wrong with lock poisoning.
-
-The next question is what should we do about it?
+Should it be a standard lock's job to synchronize access _and_ propagate panics?
+We're not so sure it is.
+If it's not then what should we do about it?
 That's where the survey comes in.
 We'd like to get a better idea of how you use locks and poisoning in your projects to help decide what to do about lock poisoning.
