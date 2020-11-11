@@ -27,13 +27,15 @@ granularity is sometimes too coarse, and debug info can be unreliable,
 especially when building in release mode. The result is coverage reports that
 only show an approximation of what code actually executed.
 
-Source-based code coverage instrumentation happens directly in the Rust
-compiler. The compiler can see branches in individual expressions within the
-same line or spanning multiple lines, and this analysis is always precise
-because it's being done in MIR. That means that things like short-circuited
-conditionals, closures, and match guards are all precisely counted. Counters
-are injected as additional MIR code statements, so the compiler can still
-optimize the program without affecting the coverage results.
+Source-based code coverage instrumentation is applied by the Rust compiler,
+not LLVM. This instrumentation is more precise because it's being done in
+MIR, which holds a mapping between the original Rust source code and the
+control-flow graph of the program.
+
+That means things like short-circuited conditionals, closures, and match
+guards are all precisely counted. And since instrumentation counters are
+injected as regular MIR statements, the compiler can further optimize the
+program without affecting coverage results.
 
 [![Comparison of gcov and source-based coverage results][comparison-img]][comparison-img]
 
