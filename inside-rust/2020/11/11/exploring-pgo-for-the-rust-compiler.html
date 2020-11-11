@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Exploring PGO for the Rust compiler | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Exploring PGO for the Rust compiler | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Exploring PGO for the Rust compiler | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Exploring PGO for the Rust compiler" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Exploring PGO for the Rust compiler</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 11, 2020 &middot; Michael Woerister
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">the compiler team</a> 
+    </div>
+
+    <div class="post">
+      <p><strong>TLDR</strong> -- PGO makes the compiler <a href="#final-numbers-and-a-benchmarking-plot-twist">faster</a> but is <a href="#where-to-go-from-here">not straightforward</a> to realize in CI.</p>
+<p>For the last few months Mozilla has been using Profile-Guided Optimization (PGO) to build their own <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1326486">optimized version of Clang</a>, leading to an up to 9% reduction of Firefox compile times on their build infrastructure.
+Would the same be possible for the Rust compiler, that is, could we apply profile-guided optimization to <em>rustc</em> itself in order to make it faster?
+This post explores exactly this question, detailing first the steps needed for generating a PGOed versions of <em>rustc</em> (in two flavors), and then taking a look at the resulting performance implications.
+But before that let's have a little reminder what PGO even is and how it works in general.</p>
+<h2><a href="#pgo-primer" aria-hidden="true" class="anchor" id="pgo-primer"></a>PGO Primer</h2>
+<p>Here is how the respective <a href="https://doc.rust-lang.org/rustc/profile-guided-optimization.html">chapter from the rustc book</a> describes profile-guided optimization:</p>
+<blockquote>
+<p>The basic concept of PGO is to collect data about the typical execution of a program (e.g. which branches it is likely to take) and then use this data to inform optimizations such as inlining, machine-code layout, register allocation, etc.</p>
+<p>There are different ways of collecting data about a program's execution. One is to run the program inside a profiler (such as perf) and another is to create an instrumented binary, that is, a binary that has data collection built into it, and run that. The latter usually provides more accurate data and it is also what is supported by <code>rustc</code>.</p>
+</blockquote>
+<p>In other words, we first generate a special, &quot;instrumented&quot; version of the program we want to optimize, and then use this instrumented version to generate an execution profile.
+This execution profile is then used by the compiler for better optimizing the actual, final version of the program.</p>
+<h2><a href="#how-to-apply-pgo-to-the-rust-compiler" aria-hidden="true" class="anchor" id="how-to-apply-pgo-to-the-rust-compiler"></a>How to apply PGO to the Rust compiler</h2>
+<p>Generating a PGOed version of <em>rustc</em> involves the same basic steps as it does for any other kind of program:</p>
+<ol>
+<li>Create an instrumented version of <em>rustc</em>.</li>
+<li>Use the instrumented version of <em>rustc</em> in order to collect profile data, i.e. compile a bunch of programs with it, ideally in a way that represents the typical use cases of the compiler.</li>
+<li>Compile the final version of <em>rustc</em>, this time pointing the build system to the profile data we generated in the previous step.</li>
+</ol>
+<p>However, as opposed to many other programs, <em>rustc</em> is a bit of a special case because it consists of two very large chunks of code written in different programming languages: the LLVM backend (written in C++) and the front and middle parts of the compiler (written in Rust).
+Consequently, there are also two separate compilers involved in building <em>rustc</em> -- both of which support their own version of PGO.
+This complicates things slightly but fortunately the PGO setup for each of the two components can be treated in isolation.
+Let's take a look at the LLVM part first, since that is slightly simpler.</p>
+<h3><a href="#compiling-rustcs-llvm-with-pgo" aria-hidden="true" class="anchor" id="compiling-rustcs-llvm-with-pgo"></a>Compiling rustc's LLVM with PGO</h3>
+<p>PGO is a toolchain specific feature, so how it works might be different for different C++ compilers.
+In this article I will only go into how it works with Clang because (a) I have no experience with PGO in other compilers, and (b) Clang is what the Rust project actually uses in production.</p>
+<p>In order to enable PGO for rustc's LLVM we basically follow the steps laid out in the previous section.</p>
+<ol>
+<li>
+<p>We make sure that our LLVM gets instrumented by applying the following changes to the <code>config.toml</code> file in the root directory of our Rust checkout:</p>
+<pre><code class="language-toml">[llvm]
+
+# Pass extra compiler and linker flags to the LLVM CMake build.
+# &lt;PROFDATA_DIR&gt; must be an absolute path to a writeable
+# directory, like for example /tmp/my-rustc-profdata
+cflags = &quot;-fprofile-generate=&lt;PROFDATA_DIR&gt;&quot;
+cxxflags = &quot;-fprofile-generate=&lt;PROFDATA_DIR&gt;&quot;
+
+# Make sure that LLVM is built as a dylib
+link-shared = true
+
+# Make sure we use Clang for compiling LLVM
+# (assuming that we are building for x86_64 Linux in this case)
+[target.x86_64-unknown-linux-gnu]
+cc = &quot;clang&quot;
+cxx = &quot;clang++&quot;
+linker = &quot;clang&quot;
+</code></pre>
+<p>The <code>-fprofile-generate</code> flag tells Clang to create an instrumented binary that will write any profile data it generates to the given directory.
+It is advisable to always use an absolute path here since we don't want things to depend on the working directory of the compiler.
+We also set <code>link-shared = true</code> which makes sure that <em>rustc</em>'s linker does not have to deal with linking the instrumentation runtime into C++ code.
+It's possible to make that work but it's not worth the trouble.
+Now we just need to run <code>./x.py build</code> and wait until we have a working <em>rustc</em> with an instrumented LLVM.</p>
+</li>
+<li>
+<p>Next we collect profile data by running the compiler we built in the previous step.
+This is straightforward because data collection happens completely transparently.
+Just run the compiler as you always would (e.g. via Cargo) and the profile data will show up in the <code>&lt;PROFDATA_DIR&gt;</code> we specified in the <code>-fprofile-generate</code> flag above.
+In order to make the collected data as useful as possible, we should try to exercise all the common code paths within the compiler.
+I typically use the &quot;standard&quot; <a href="https://github.com/rust-lang/rustc-perf">rustc-perf</a> benchmark suite for this purpose, which includes debug builds, optimized builds, check builds, both incremental and non-incremental.
+After this is done, you will find a number of <code>.profraw</code> files in <code>&lt;PROFDATA_DIR&gt;</code>.
+<a href="https://clang.llvm.org/docs/UsersManual.html#cmdoption-fprofile-generate">As described in the Clang user manual</a> these <code>.profraw</code> files need to be merged into a single <code>.profdata</code> file by using the <code>llvm-profdata</code> tool that comes with your Clang installation:</p>
+<pre><code class="language-bash">$ cd &lt;PROFDATA_DIR&gt;
+$ llvm-profdata merge -output=rustc-llvm.profdata *.profraw
+</code></pre>
+</li>
+</ol>
+<ol start="3">
+<li>
+<p>Now that the combined profile data from all <em>rustc</em> invocations can be found in <code>&lt;PROFDATA_DIR&gt;/rustc-llvm.profdata</code> it is time to re-compile LLVM and <em>rustc</em> again, this time instructing Clang to make use of this valuable new information.
+To this end we modify <code>config.toml</code> as follows:</p>
+<pre><code class="language-toml">[llvm]
+# Instead of -fprofile-generate, we now pass -fprofile-use to Clang
+cflags = &quot;-fprofile-use=&lt;PROFDATA_DIR&gt;/rustc-llvm.profdata&quot;
+cxxflags = &quot;-fprofile-use=&lt;PROFDATA_DIR&gt;/rustc-llvm.profdata&quot;
+</code></pre>
+<p>Now we make sure that LLVM is properly rebuilt by deleting the old version and build everything again:</p>
+<pre><code class="language-bash">$ cd $RUST_PROJECT_ROOT
+$ rm -rf ./build/x86_64-unknown-linux-gnu/llvm
+$ ./x.py build
+</code></pre>
+<p>Once this is done, we have a Rust compiler with PGO-optimized LLVM. Congratulations!</p>
+</li>
+</ol>
+<h4><a href="#pgo-optimized-llvm----benchmark-results" aria-hidden="true" class="anchor" id="pgo-optimized-llvm----benchmark-results"></a>PGO-optimized LLVM -- Benchmark Results</h4>
+<p>As mentioned above Firefox build times have improved by up to 9% with a PGOed compiler.
+Clang's own documentation even <a href="https://www.llvm.org/docs/HowToBuildWithPGO.html#introduction">reports</a> an up to 20% improvement.
+The best way we have for assessing the Rust compiler's performance is the <a href="https://github.com/rust-lang/rustc-perf">rustc-perf</a> benchmark suite.
+Since compiling with PGO does not quite fit with how the Rust project's CI works, we cannot use the <a href="https://perf.rust-lang.org/">perf.rust-lang.org</a> version of the benchmark suite.
+Fortunately, thanks to <a href="https://github.com/rust-lang/rustc-perf/blob/master/collector/README.md">good documentation</a>, running the benchmarks locally is straightforward enough.
+Here's a glance at the effect that a PGOed LLVM has on <em>rustc</em>'s performance:</p>
+<p><a href="https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none&end=pgo-2020-10-30-llvm&stat=instructions%3Au"><img src="/images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm-thumb.png" alt="Performance improvements gained from apply PGO to LLVM" /></a></p>
+<p>The results are not quite as spectacular as the anecdotal 20% improvement from Clang's documentation;
+but they are pretty encouraging and show no significant performance regressions.
+Diving more into details shows the expected profile:</p>
+<p><img src="/images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm-expanded.png" alt="Performance improvements gained from apply PGO to LLVM (details)" /></p>
+<p>Workloads that spend most of their time in LLVM (e.g. optimized builds) show the most improvement, while workloads that don't invoke LLVM at all (e.g. check builds) also don't profit from a faster LLVM.
+Let's take a look at how we can take things further by applying PGO to the other half of the compiler.</p>
+<h3><a href="#applying-pgo-to-the-rust-part-of-the-compiler" aria-hidden="true" class="anchor" id="applying-pgo-to-the-rust-part-of-the-compiler"></a>Applying PGO to the Rust part of the compiler</h3>
+<p>The basic principle stays the same:
+create an instrumented compiler, use it to collect profile data, use that data when compiling the final version of the compiler.
+The only difference is that this time we instrument a different part of the compiler's code, namely the part generated by <em>rustc</em> itself.
+The compiler has had support for doing that <a href="https://github.com/rust-lang/rust/pull/61268">for a while now</a> and, as can be seen in the <a href="https://doc.rust-lang.org/rustc/profile-guided-optimization.html">respective chapter of the rustc book</a>, the command-line interface has been modeled after Clang's set of flags.
+Unfortunately, the compiler's build system does not support using PGO out of the box, so we have to directly modify <code>src/bootstrap/compile.rs</code> in order to set the desired flags.
+We only want to instrument the compiler itself, not the other tools or the standard library, see we add the flags to <code>rustc_cargo_env()</code>:</p>
+<pre><code class="language-rust">pub fn rustc_cargo_env(builder: &amp;Builder&lt;'_&gt;,
+                       cargo: &amp;mut Cargo,
+                       target: TargetSelection) {
+    // ... omitted ...
+
+    if builder.config.rustc_parallel {
+        cargo.rustflag(&quot;--cfg=parallel_compiler&quot;);
+    }
+    if builder.config.rust_verify_llvm_ir {
+        cargo.env(&quot;RUSTC_VERIFY_LLVM_IR&quot;, &quot;1&quot;);
+    }
+
+    // This is new: Hard code instrumentation in the
+    // RUSTFLAGS of the Cargo invocation that builds
+    // the compiler
+    cargo.rustflag(&quot;-Cprofile-generate=&lt;PROFDATA_DIR&gt;&quot;);
+
+    // ... omitted ...
+}
+</code></pre>
+<p>As before <code>&lt;PROFDATA_DIR&gt;</code> must be an actual, absolute path to a directory.
+Once we have collected enough profile data, we go back to <code>src/bootstrap/compile.rs</code> and replace the <code>-Cprofile-generate</code> flag with a <code>-Cprofile-use</code> flag:</p>
+<pre><code class="language-rust">pub fn rustc_cargo_env(builder: &amp;Builder&lt;'_&gt;,
+                       cargo: &amp;mut Cargo,
+                       target: TargetSelection) {
+    // ... omitted ...
+
+    if builder.config.rustc_parallel {
+        cargo.rustflag(&quot;--cfg=parallel_compiler&quot;);
+    }
+    if builder.config.rust_verify_llvm_ir {
+        cargo.env(&quot;RUSTC_VERIFY_LLVM_IR&quot;, &quot;1&quot;);
+    }
+
+    // Replace `-Cprofile-generate` with `-Cprofile-use`,
+    // assuming that we used the `llvm-profdata` tool to
+    // merge the collected `&lt;PROFDATA_DIR&gt;/*.profraw` files
+    // into a common file named
+    // `&lt;PROFDATA_DIR&gt;/rustc-rust.profdata`.
+    cargo.rustflag(
+        &quot;-Cprofile-use=&lt;PROFDATA_DIR&gt;/rustc-rust.profdata&quot;
+    );
+
+    // ... omitted ...
+}
+</code></pre>
+<p>Let's take a look at the effects PGO has on this portion of the compiler.</p>
+<h4><a href="#pgo-optimized-rust----benchmark-results" aria-hidden="true" class="anchor" id="pgo-optimized-rust----benchmark-results"></a>PGO-optimized Rust -- Benchmark Results</h4>
+<p>As expected the results are similar to when PGO was applied to LLVM: a reduction of instruction counts by roughly 5%. NOTE: These numbers show the improvement from applying PGO <em>exclusively</em> to the Rust part of the compiler. The LLVM part was <em>not</em> compiled with PGO here:</p>
+<p><a href="https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none&end=pgo-2020-10-30-rust&stat=instructions%3Au"><img src="/images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-rust-thumb.png" alt="Performance improvements gained from applying PGO to (only) the Rust part of the compiler" /></a></p>
+<p>Because different workloads execute different amounts of Rust code (vs C++/LLVM code), the total reduction can be a lot less for LLVM-heavy cases.
+For example, a full <em>webrender-opt</em> build will spend more than 80% of its time in LLVM, so reducing the remaining 20% by 5% can only reduce the total number by 1%.
+On the other hand, a <em>check</em> build or an <em>incr-unchanged</em> build spends almost no time in LLVM, so the 5% Rust performance improvement translates almost entirely into a 5% instruction count reduction for these cases:</p>
+<p><img src="/images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-rust-expanded.png" alt="Performance improvements gained from applying PGO to (only) the Rust part of the compiler (details)" /></p>
+<h3><a href="#can-we-apply-pgo-to-rust-and-llvm-at-the-same-time" aria-hidden="true" class="anchor" id="can-we-apply-pgo-to-rust-and-llvm-at-the-same-time"></a>Can we apply PGO to Rust and LLVM at the same time?</h3>
+<p>The short answer is <em>yes</em>.
+The longer answer is that we have to be careful about profile data incompatibilities.
+Both Clang and the Rust compiler use the same LLVM-based PGO mechanisms underneath.
+If both Clang and the Rust compiler use the exact same version of LLVM, we can even combine the two into a single <code>.profdata</code> file.
+However, if the two LLVM versions are different, we better make sure that the two compilers don't get into each other's way.
+Luckily it's straightforward to facilitate that:</p>
+<ol>
+<li>
+<p>We need to specify different directories for the respective <code>-fprofile-generate</code> and <code>-Cprofile-generate</code> (and <code>*-use</code>) flags.
+This way the instrumentation code coming from Clang will write into one directory and the code coming from <em>rustc</em> will write into another.</p>
+</li>
+<li>
+<p>We need to make sure that we use the right <code>llvm-profdata</code> tool for each set of <code>.profraw</code> files.
+Use the one coming with Clang for handling the files in the Clang directory and the one coming with the Rust compiler for the files in the Rust directory.</p>
+</li>
+</ol>
+<p>If we do that, we get a compiler with both parts optimized via PGO, with the compile time reductions adding up nicely.</p>
+<h3><a href="#final-numbers-and-a-benchmarking-plot-twist" aria-hidden="true" class="anchor" id="final-numbers-and-a-benchmarking-plot-twist"></a>Final Numbers and a Benchmarking Plot Twist</h3>
+<p>When I looked at the <a href="https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none&end=pgo-2020-10-30-both&stat=instructions%3Au">the final numbers</a>, I was a bit underwhelmed.
+Sure, PGO seems to lead to a pretty solid 5% reduction of instruction counts across basically all real world workloads in the benchmark suite, for <em>check</em>, <em>debug</em>, and <em>opt</em> builds alike.
+That is pretty nice -- but also far away from the 20% improvement mentioned in the Clang documentation.
+Given that PGO adds quite a few complications to the build process of the compiler itself (not to mention the almost tripled build times) I started to think that applying PGO to the compiler would probably not be worth the trouble.</p>
+<p>I then took a glance at the benchmarks' wall time measurements (instead of the instruction count measurements) and saw quite a different picture: <em>webrender-opt</em> minus 15%, <em>style-servo-opt</em> minus 14%, <em>serde-check</em> minus 15%?
+This looked decidedly better than for instruction counts.
+But wall time measurements can be very noisy (which is why most people only look at instruction counts on perf.rust-lang.org), and <code>rustc-perf</code> only does a single iteration for each benchmark, so I was not prepared to trust these numbers just yet.
+I decided to try and reduce the noise by increasing the number of benchmark iterations from one to twenty.
+I only did &quot;full&quot; builds in this configuration as PGO's effect seemed to translate pretty predictably to incremental builds.
+After roughly eight hours to complete both the PGO and the non-PGO versions of the benchmarks these are the numbers I got:</p>
+<p><a href="https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none-20&end=pgo-2020-10-30-both-20&stat=wall-time"><img src="/images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-both-walltime-thumb.png" alt="Wall time improvements gained from applying PGO to the entire compiler" /></a></p>
+<p>As you can see we get a 10-16% reduction of build times almost across the board for real world test cases.
+This was more in line with what I had initially hoped to get from PGO.
+It is a bit surprising that the difference between instruction counts and wall time is so pronounced.
+One plausible explanation would be that PGO improves instruction cache utilization, something which makes a difference for execution time but would not be reflected in the amount of instructions executed.
+I also don't know how branch mispredictions factor into instruction counts -- branch prediction being another aspect explicitly targeted by PGO.</p>
+<p>As good as these numbers look, please keep in mind that they come from a single machine.
+It's possible that the Ryzen 1700X processor I used has some idiosyncrasies that favor the kind of optimizations that PGO does, and a different processor with a different caching system and branch predictor would generate quite different numbers.
+Nonetheless, the numbers undoubtedly are very encouraging and warrant further investigation.</p>
+<h2><a href="#where-to-go-from-here" aria-hidden="true" class="anchor" id="where-to-go-from-here"></a>Where to go from here</h2>
+<p>The numbers above suggest that PGO can indeed provide noticeable compile time reductions.
+Unfortunately, bringing these improvements to end users is not as simple as adding a few compiler flags to our <a href="https://github.com/rust-lang/rust/tree/master/src/ci/docker/host-x86_64">dist builds</a>.
+PGO is different from most other optimizations in that it</p>
+<ul>
+<li>requires a different, extended build workflow due to the additional instrumentation and data collection phases, and</li>
+<li>it incurs a sustained build time cost (a trait it shares with other automated optimizations like LTO).</li>
+</ul>
+<p>Both of these problems pose substantial hurdles for actually using PGO on the compiler itself.
+Rust's CI build times have always been too long and we already forgo some optimizations because of them
+(e.g. macOS still does not get the 10% performance boost from using a ThinLTOed LLVM because the build machines on that platform are especially slow).
+However, I think there's still a way forward. There's a tradeoff between the two obstacles mentioned above:</p>
+<ul>
+<li>If build times are not a problem, then the engineering effort for supporting PGO in the compiler's build system is quite low.
+That is, if it is OK for instrumentation, data collection, and final build to all occur as a single monolithic build on the same machine then it should be straightforward to extend the build system to support just that.</li>
+<li>If a lot of engineering effort is put into a more complicated build setup, with out-of-band instrumentation and caching of profile data, then the impact on build times can be kept quite low.</li>
+</ul>
+<p>I estimate that the first approach is more fruitful, as it is always better to put more value on low engineering and maintenance costs than on low compute times.
+Having a straightforward way of obtaining a PGOed compiler (e.g. by adding a simple setting in <code>config.toml</code>) would unblock the path to a couple of scenarios:</p>
+<ul>
+<li>Organizations and individuals who don't switch compiler versions too frequently can easily compile their own, optimized version of <em>rustc</em> for internal use, like Mozilla is already doing with Clang.
+Letting a computer spend a couple of hours in order to get a 15% compile time reduction for the next couple of months seems like a good investment.</li>
+<li>The Rust project itself could start thinking about providing more optimized builds, at least on the beta and stable channels.
+Significantly increasing the compiler's build times on the official build infrastructure is a lot more viable if it only has to be done every six weeks instead of for every merged pull request.</li>
+</ul>
+<p>It's unlikely that I can spend a lot of time on this personally -- but my hope is that others will pick up the baton. I'd be happy to provide guidance on how to use PGO specifically.</p>
+<p><strong>PS</strong> -- Special thanks to Mark Rousskov for uploading my local benchmarking data to <a href="https://perf.rust-lang.org/compare.html?start=pgo-2020-10-30-none-20&end=pgo-2020-10-30-both-20&stat=wall-time">perf.rust-lang.org</a>, which makes it much nicer to explore!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
