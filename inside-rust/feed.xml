@@ -10,8 +10,68 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-11-11T14:22:13+00:00</updated>
+    <updated>2020-11-12T21:34:49+00:00</updated>
 
+    
+    <entry>
+        <title>Source-based code coverage in nightly</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/11/12/source-based-code-coverage.html" type="text/html" title="Source-based code coverage in nightly" />
+        <published>2020-11-12T00:00:00+00:00</published>
+        <updated>2020-11-12T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/11/12/source-based-code-coverage.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/11/12/source-based-code-coverage.html">&lt;p&gt;Support has landed in the nightly compiler for source-based code coverage,
+and we want your help testing it!&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#what-is-source-based-code-coverage-exactly&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-source-based-code-coverage-exactly&quot;&gt;&lt;/a&gt;What is &lt;em&gt;source-based&lt;/em&gt; code coverage, exactly?&lt;/h1&gt;
+&lt;p&gt;You may already be familiar with code coverage, which shows you which lines
+of code execute. Code coverage is usually applied to tests to find out which
+code is actually being tested and which code isn’t.&lt;/p&gt;
+&lt;p&gt;Nightly Rust already supports another kind of source code coverage, commonly
+called gcov, which relies on debug info to map from LLVM IR to lines of
+source code. Instrumentation is then added in the LLVM backend during code
+generation to count how many times each line is run.&lt;/p&gt;
+&lt;p&gt;However, since LLVM doesn’t know exactly how Rust code is structured, there’s
+a lot lost in the translation between Rust source and LLVM IR. Line-level
+granularity is sometimes too coarse, and debug info can be unreliable,
+especially when building in release mode. The result is coverage reports that
+only show an approximation of what code actually executed.&lt;/p&gt;
+&lt;p&gt;Source-based code coverage instrumentation is applied by the Rust compiler,
+not LLVM. This instrumentation is more precise because it&#x27;s being done in
+MIR, which holds a mapping between the original Rust source code and the
+control-flow graph of the program.&lt;/p&gt;
+&lt;p&gt;That means things like short-circuited conditionals, closures, and match
+guards are all precisely counted. And since instrumentation counters are
+injected as regular MIR statements, the compiler can further optimize the
+program without affecting coverage results.&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;/images/inside-rust/2020-11-12-source-based-code-coverage/comparison.png&quot;&gt;&lt;img src&#x3D;&quot;/images/inside-rust/2020-11-12-source-based-code-coverage/comparison.png&quot; alt&#x3D;&quot;Comparison of gcov and source-based coverage results&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Above: A comparison of the gcov (left) and source-based coverage (right)
+results. gcov highlights skipped lines, marked with #####, while source-based
+coverage highlights exact regions of code that were skipped. Note that on
+line 30, one boolean subexpression is short-circuited. This is surfaced by
+source-based coverage but not gcov.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;What this means is that source-based code coverage is both efficient and
+accurate. LLVM’s existing coverage tools (&lt;a href&#x3D;&quot;https://llvm.org/docs/CommandGuide/llvm-profdata.html&quot;&gt;llvm-profdata&lt;/a&gt; and &lt;a href&#x3D;&quot;https://llvm.org/docs/CommandGuide/llvm-cov.html&quot;&gt;llvm-cov&lt;/a&gt;)
+generate both coverage summaries and very fine-grained code regions, helping
+you find gaps in your testing coverage. What you do about that is up to you!&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#trying-it-out&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;trying-it-out&quot;&gt;&lt;/a&gt;Trying it out&lt;/h1&gt;
+&lt;p&gt;Work on the implementation &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/278&quot;&gt;began back in April&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pulls?q&#x3D;is%3Apr+author%3Arichkadel+is%3Aclosed+closed%3A%3C2020-11-06&quot;&gt;many PRs
+later&lt;/a&gt;, it’s ready for you to try. All you need is a recent nightly and
+a tool to read the coverage reports.&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/source-based-code-coverage.html&quot;&gt;Take a look at this guide to get started&lt;/a&gt;. If you spot any issues,
+please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report them&lt;/a&gt;. It’s a huge help!&lt;/p&gt;
+&lt;p&gt;Finally, if you try it out and it works well, we’d also like to hear from
+you! Come by the &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/233931-t-compiler.2Fmajor-changes/topic/Implement.20LLVM-compatible.20source-based.20cod.20compiler-team.23278&quot;&gt;Zulip stream&lt;/a&gt; for this change or comment on the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/34701&quot;&gt;feature
+request&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#acknowledgements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgements&quot;&gt;&lt;/a&gt;Acknowledgements&lt;/h1&gt;
+&lt;p&gt;The implementation work was all done by Rich Kadel; thanks to him for all the
+amazing work he’s done. Thanks also to Wesley Wiser for helping with reviews,
+to Bob Wilson for lending his experience with LLVM&#x27;s InstrProf coverage APIs,
+and to eddyb for their guidance in choosing a MIR-based approach.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Tyler Mandry</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Exploring PGO for the Rust compiler</title>
@@ -660,34 +720,6 @@ making the previous default settings for &lt;code&gt;debug &#x3D; true&lt;/code&
 
         <author>
             <name>Joshua Nelson</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Upcoming compiler-team design meetings</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/08/28/upcoming-compiler-team-design-meetings.html" type="text/html" title="Upcoming compiler-team design meetings" />
-        <published>2020-08-28T00:00:00+00:00</published>
-        <updated>2020-08-28T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/08/28/upcoming-compiler-team-design-meetings.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/08/28/upcoming-compiler-team-design-meetings.html">&lt;p&gt;In our &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/99475planningmeeting20200828.html&quot;&gt;planning meeting today&lt;/a&gt;, the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/compiler&quot;&gt;compiler team&lt;/a&gt; has scheduled our
-next batch of upcoming design meetings. You can find the exact times
-on the compiler team&#x27;s &lt;a href&#x3D;&quot;https://rust-lang.github.io/compiler-team/#meeting-calendar&quot;&gt;meeting calendar&lt;/a&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;On September 4th (&lt;a href&#x3D;&quot;https://calendar.google.com/event?action&#x3D;TEMPLATE&amp;tmeid&#x3D;NTMwYmxwaDRxZG8xdHJkdm1mdW1jMWxwMmYgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;calendar event&lt;/a&gt;), we will discuss the results
-of the contributor survey that we conducted. See &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/318&quot;&gt;rust-lang/compiler-team#318&lt;/a&gt; for more details.&lt;/li&gt;
-&lt;li&gt;On September 18th (&lt;a href&#x3D;&quot;https://calendar.google.com/event?action&#x3D;TEMPLATE&amp;tmeid&#x3D;MzVmbGVvcXVkcTM4MmJxam5lM25wbWEzaG8gNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;calendar event&lt;/a&gt;), we will conduct a retrospective
-of the &lt;a href&#x3D;&quot;https://forge.rust-lang.org/compiler/mcp.html&quot;&gt;compiler-team MCP process&lt;/a&gt;. See &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/314&quot;&gt;rust-lang/compiler-team#314&lt;/a&gt; for more details.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#did-you-know&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;did-you-know&quot;&gt;&lt;/a&gt;Did you know?&lt;/h3&gt;
-&lt;p&gt;Most weeks, the compiler team has some sort of design meeting. These
-meetings take place on Zulip and are open to all. Every 4 weeks, we do
-a planning meeting to pick the next few meetings from the list of open
-proposals. You can find &lt;a href&#x3D;&quot;https://rust-lang.github.io/compiler-team/about/steering-meeting/&quot;&gt;more details about how the compiler-team
-steering meeting process here&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Niko Matsakis</name>
         </author>
     </entry>
     
