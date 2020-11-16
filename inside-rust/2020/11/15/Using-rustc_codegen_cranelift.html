@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Using rustc_codegen_cranelift for debug builds | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Using rustc_codegen_cranelift for debug builds | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Using rustc_codegen_cranelift for debug builds | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Using rustc_codegen_cranelift for debug builds" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Using rustc_codegen_cranelift for debug builds</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 15, 2020 &middot; Joshua Nelson
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">The Compiler Team</a> 
+    </div>
+
+    <div class="post">
+      <h2><a href="#what-is-rustc_codegen_cranelift" aria-hidden="true" class="anchor" id="what-is-rustc_codegen_cranelift"></a>What is <code>rustc_codegen_cranelift</code>?</h2>
+<p><a href="https://github.com/bjorn3/rustc_codegen_cranelift"><code>rustc_codegen_cranelift</code></a>, or just <code>cg_clif</code> for short, is a new experimental
+codegen backend for the Rust compiler. The existing backend is LLVM, which is very
+good at producing fast, highly optimized code, but is not very good at
+compiling code quickly. <code>cg_clif</code>, which uses the <a href="https://github.com/bytecodealliance/wasmtime/tree/main/cranelift#cranelift-code-generator">Cranelift</a> project, would
+provide a fast backend which greatly improves compile times, at the cost of
+performing very few optimizations. This is a great fit for debug builds, and the hope is
+that <code>cg_clif</code> will eventually be the default backend in debug mode.</p>
+<h2><a href="#what-is-the-progress-of-using-rustc_codegen_cranelift-for-debug-builds" aria-hidden="true" class="anchor" id="what-is-the-progress-of-using-rustc_codegen_cranelift-for-debug-builds"></a>What is the progress of using <code>rustc_codegen_cranelift</code> for debug builds?</h2>
+<p>There has been a <a href="https://forge.rust-lang.org/compiler/mcp.html">Major Change Proposal</a> open for some time for making
+<code>cg_clif</code> part of the main Rust repository. Recently, <a href="https://github.com/rust-lang/compiler-team/issues/270">the MCP was
+accepted</a> and the compiler team <a href="https://github.com/rust-lang/rust/pull/77975">merged</a>
+<code>rustc_cranelift_codegen</code> <a href="https://github.com/rust-lang/rust/pull/77975">into the main Rust git repository</a>.
+<code>cg_clif</code> is not yet distributed with <code>rustup</code>, but this means you can now
+build it from source in-tree!</p>
+<h2><a href="#how-do-i-use-rustc_codegen_cranelift" aria-hidden="true" class="anchor" id="how-do-i-use-rustc_codegen_cranelift"></a>How do I use <code>rustc_codegen_cranelift</code>?</h2>
+<p>In this section, I'll walk through step-by-step how to build the new backend from source, then use it on your own projects. All code is copy/paste-able, and each step is explained.</p>
+<p>First, let's build <code>cg_clif</code> from source.</p>
+<pre><code class="language-sh">$ git clone https://github.com/bjorn3/rustc_codegen_cranelift.git
+$ ./prepare.sh
+$ ./build.sh
+</code></pre>
+<p>Now, we can start using it to compile a project. For demonstration purposes,
+I'll be be using <code>cargo</code>, but you can use any Rust project supported by
+<code>cg_clif</code>.</p>
+<pre><code>$ cd ..
+$ git clone https://github.com/rust-lang/cargo/
+$ cd cargo
+$ ../rustc_codegen_cranelift/build/cargo.sh build
+...
+    Finished dev [unoptimized + debuginfo] target(s) in 49.93s
+</code></pre>
+<p>It works! For comparison, let's see how long the equivalent LLVM backend would
+take.</p>
+<pre><code class="language-sh">$ rustup install nightly-2020-10-31
+$ cargo +nightly-2020-10-31 build
+...
+    Finished dev [unoptimized + debuginfo] target(s) in 54.64s
+</code></pre>
+<p>LLVM takes a full 5 seconds longer for a full build. Next, let's try incremental builds:</p>
+<pre><code>$ git apply &lt;&lt;EOF
+diff --git a/src/cargo/lib.rs b/src/cargo/lib.rs
+index bccb41121..703afa754 100644
+--- a/src/cargo/lib.rs
++++ b/src/cargo/lib.rs
+@@ -36,8 +36,8 @@ use anyhow::Error;
+ use log::debug;
+ use std::fmt;
+ 
+-pub use crate::util::errors::{InternalError, VerboseError};
+ pub use crate::util::{CargoResult, CliError, CliResult, Config};
++pub use crate::util::errors::{InternalError, VerboseError};
+ 
+ pub const CARGO_ENV: &amp;str = &quot;CARGO&quot;;
+EOF
+$ ../rustc_codegen_cranelift/build/cargo.sh build
+    Finished dev [unoptimized + debuginfo] target(s) in 7.98s
+$ cargo +nightly-2020-10-31 build
+   Compiling cargo v0.50.0 (/home/joshua/cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 5.48s
+</code></pre>
+<p>LLVM is actually <em>faster</em> here: <code>serde_derive</code> took longer to run under cranelift, since it wasn't as optimized. Under cranelift it takes ~14% percent of the time, while under LLVM it takes less than 3%.</p>
+<h2><a href="#building-in-tree" aria-hidden="true" class="anchor" id="building-in-tree"></a>Building in-tree</h2>
+<p>This section is mostly for compiler hackers, but feel free to follow along even
+if you're just interested! The reason this isn't the recommended way to build
+<code>cg_clif</code> is because the Rust compiler takes a very long time to build.</p>
+<p>First, download the Rust repository.</p>
+<pre><code class="language-console">git clone https://github.com/rust-lang/rust
+</code></pre>
+<p>Now, let's set up the build system to use <code>cg_clif</code>.</p>
+<pre><code class="language-text">$ cat &gt; config.toml &lt;&lt;EOF
+[rust]
+codegen-backends = [&quot;cranelift&quot;]
+EOF
+</code></pre>
+<p>Finally, let's run the build. This can take a long time, over a half-hour in some cases.</p>
+<pre><code class="language-console">./x.py build
+</code></pre>
+<h2><a href="#how-can-i-help" aria-hidden="true" class="anchor" id="how-can-i-help"></a>How can I help?</h2>
+<p>You don't need to be a compiler developer to help improve <code>cg_clif</code>!  The best
+way you can help is by testing <code>cg_clif</code> on different Rust crates across the
+ecosystem.  Just while writing this article, I found <a href="https://github.com/bjorn3/rustc_codegen_cranelift/issues/1102">two</a>
+<a href="https://github.com/bjorn3/rustc_codegen_cranelift/issues/1101">bugs</a>, so there's plenty of work left to be done. Please report any bugs you find
+to the <a href="https://github.com/bjorn3/rustc_codegen_cranelift/issues/new"><code>rustc_codegen_cranelift</code> git repository</a>.</p>
+<p>In the future, we hope to distribute <code>cg_clif</code> with Rustup, and if it matures sufficiently, eventually make it the default backend for debug builds.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

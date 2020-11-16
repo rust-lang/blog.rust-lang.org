@@ -10,8 +10,106 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-11-12T21:34:49+00:00</updated>
+    <updated>2020-11-16T02:15:03+00:00</updated>
 
+    
+    <entry>
+        <title>Using rustc_codegen_cranelift for debug builds</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/11/15/Using-rustc_codegen_cranelift.html" type="text/html" title="Using rustc_codegen_cranelift for debug builds" />
+        <published>2020-11-15T00:00:00+00:00</published>
+        <updated>2020-11-15T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/11/15/Using-rustc_codegen_cranelift.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/11/15/Using-rustc_codegen_cranelift.html">&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-rustc_codegen_cranelift&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-rustc_codegen_cranelift&quot;&gt;&lt;/a&gt;What is &lt;code&gt;rustc_codegen_cranelift&lt;/code&gt;?&lt;/h2&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/bjorn3/rustc_codegen_cranelift&quot;&gt;&lt;code&gt;rustc_codegen_cranelift&lt;/code&gt;&lt;/a&gt;, or just &lt;code&gt;cg_clif&lt;/code&gt; for short, is a new experimental
+codegen backend for the Rust compiler. The existing backend is LLVM, which is very
+good at producing fast, highly optimized code, but is not very good at
+compiling code quickly. &lt;code&gt;cg_clif&lt;/code&gt;, which uses the &lt;a href&#x3D;&quot;https://github.com/bytecodealliance/wasmtime/tree/main/cranelift#cranelift-code-generator&quot;&gt;Cranelift&lt;/a&gt; project, would
+provide a fast backend which greatly improves compile times, at the cost of
+performing very few optimizations. This is a great fit for debug builds, and the hope is
+that &lt;code&gt;cg_clif&lt;/code&gt; will eventually be the default backend in debug mode.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-the-progress-of-using-rustc_codegen_cranelift-for-debug-builds&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-the-progress-of-using-rustc_codegen_cranelift-for-debug-builds&quot;&gt;&lt;/a&gt;What is the progress of using &lt;code&gt;rustc_codegen_cranelift&lt;/code&gt; for debug builds?&lt;/h2&gt;
+&lt;p&gt;There has been a &lt;a href&#x3D;&quot;https://forge.rust-lang.org/compiler/mcp.html&quot;&gt;Major Change Proposal&lt;/a&gt; open for some time for making
+&lt;code&gt;cg_clif&lt;/code&gt; part of the main Rust repository. Recently, &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/270&quot;&gt;the MCP was
+accepted&lt;/a&gt; and the compiler team &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/77975&quot;&gt;merged&lt;/a&gt;
+&lt;code&gt;rustc_cranelift_codegen&lt;/code&gt; &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/77975&quot;&gt;into the main Rust git repository&lt;/a&gt;.
+&lt;code&gt;cg_clif&lt;/code&gt; is not yet distributed with &lt;code&gt;rustup&lt;/code&gt;, but this means you can now
+build it from source in-tree!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#how-do-i-use-rustc_codegen_cranelift&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-do-i-use-rustc_codegen_cranelift&quot;&gt;&lt;/a&gt;How do I use &lt;code&gt;rustc_codegen_cranelift&lt;/code&gt;?&lt;/h2&gt;
+&lt;p&gt;In this section, I&#x27;ll walk through step-by-step how to build the new backend from source, then use it on your own projects. All code is copy/paste-able, and each step is explained.&lt;/p&gt;
+&lt;p&gt;First, let&#x27;s build &lt;code&gt;cg_clif&lt;/code&gt; from source.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-sh&quot;&gt;$ git clone https://github.com/bjorn3/rustc_codegen_cranelift.git
+$ ./prepare.sh
+$ ./build.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, we can start using it to compile a project. For demonstration purposes,
+I&#x27;ll be be using &lt;code&gt;cargo&lt;/code&gt;, but you can use any Rust project supported by
+&lt;code&gt;cg_clif&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ cd ..
+$ git clone https://github.com/rust-lang/cargo/
+$ cd cargo
+$ ../rustc_codegen_cranelift/build/cargo.sh build
+...
+    Finished dev [unoptimized + debuginfo] target(s) in 49.93s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It works! For comparison, let&#x27;s see how long the equivalent LLVM backend would
+take.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-sh&quot;&gt;$ rustup install nightly-2020-10-31
+$ cargo +nightly-2020-10-31 build
+...
+    Finished dev [unoptimized + debuginfo] target(s) in 54.64s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;LLVM takes a full 5 seconds longer for a full build. Next, let&#x27;s try incremental builds:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git apply &amp;lt;&amp;lt;EOF
+diff --git a/src/cargo/lib.rs b/src/cargo/lib.rs
+index bccb41121..703afa754 100644
+--- a/src/cargo/lib.rs
++++ b/src/cargo/lib.rs
+@@ -36,8 +36,8 @@ use anyhow::Error;
+ use log::debug;
+ use std::fmt;
+ 
+-pub use crate::util::errors::{InternalError, VerboseError};
+ pub use crate::util::{CargoResult, CliError, CliResult, Config};
++pub use crate::util::errors::{InternalError, VerboseError};
+ 
+ pub const CARGO_ENV: &amp;amp;str &#x3D; &amp;quot;CARGO&amp;quot;;
+EOF
+$ ../rustc_codegen_cranelift/build/cargo.sh build
+    Finished dev [unoptimized + debuginfo] target(s) in 7.98s
+$ cargo +nightly-2020-10-31 build
+   Compiling cargo v0.50.0 (/home/joshua/cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 5.48s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;LLVM is actually &lt;em&gt;faster&lt;/em&gt; here: &lt;code&gt;serde_derive&lt;/code&gt; took longer to run under cranelift, since it wasn&#x27;t as optimized. Under cranelift it takes ~14% percent of the time, while under LLVM it takes less than 3%.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#building-in-tree&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;building-in-tree&quot;&gt;&lt;/a&gt;Building in-tree&lt;/h2&gt;
+&lt;p&gt;This section is mostly for compiler hackers, but feel free to follow along even
+if you&#x27;re just interested! The reason this isn&#x27;t the recommended way to build
+&lt;code&gt;cg_clif&lt;/code&gt; is because the Rust compiler takes a very long time to build.&lt;/p&gt;
+&lt;p&gt;First, download the Rust repository.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;git clone https://github.com/rust-lang/rust
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, let&#x27;s set up the build system to use &lt;code&gt;cg_clif&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;$ cat &amp;gt; config.toml &amp;lt;&amp;lt;EOF
+[rust]
+codegen-backends &#x3D; [&amp;quot;cranelift&amp;quot;]
+EOF
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, let&#x27;s run the build. This can take a long time, over a half-hour in some cases.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;./x.py build
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#how-can-i-help&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-can-i-help&quot;&gt;&lt;/a&gt;How can I help?&lt;/h2&gt;
+&lt;p&gt;You don&#x27;t need to be a compiler developer to help improve &lt;code&gt;cg_clif&lt;/code&gt;!  The best
+way you can help is by testing &lt;code&gt;cg_clif&lt;/code&gt; on different Rust crates across the
+ecosystem.  Just while writing this article, I found &lt;a href&#x3D;&quot;https://github.com/bjorn3/rustc_codegen_cranelift/issues/1102&quot;&gt;two&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/bjorn3/rustc_codegen_cranelift/issues/1101&quot;&gt;bugs&lt;/a&gt;, so there&#x27;s plenty of work left to be done. Please report any bugs you find
+to the &lt;a href&#x3D;&quot;https://github.com/bjorn3/rustc_codegen_cranelift/issues/new&quot;&gt;&lt;code&gt;rustc_codegen_cranelift&lt;/code&gt; git repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the future, we hope to distribute &lt;code&gt;cg_clif&lt;/code&gt; with Rustup, and if it matures sufficiently, eventually make it the default backend for debug builds.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Joshua Nelson</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Source-based code coverage in nightly</title>
@@ -666,60 +764,6 @@ async fn bar() {
 
         <author>
             <name>Manish Goregaokar and Joshua Nelson</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Changes to x.py defaults</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/08/30/changes-to-x-py-defaults.html" type="text/html" title="Changes to x.py defaults" />
-        <published>2020-08-30T00:00:00+00:00</published>
-        <updated>2020-08-30T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/08/30/changes-to-x-py-defaults.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/08/30/changes-to-x-py-defaults.html">&lt;p&gt;Recently, the defaults for &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html#what-is-xpy&quot;&gt;&lt;code&gt;x.py&lt;/code&gt;&lt;/a&gt;, the tool used to &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html&quot;&gt;bootstrap&lt;/a&gt; the Rust compiler from source, changed. If you regularly contribute to Rust, this might affect your workflow.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#what-changes-were-made&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-changes-were-made&quot;&gt;&lt;/a&gt;What changes were made?&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;The default stage is now dependent on the subcommand:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;dist&lt;/code&gt;: stage 2&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;build&lt;/code&gt;: stage 1&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;test&lt;/code&gt;: stage 1&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;doc&lt;/code&gt;: stage 0&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;stage 1 &lt;code&gt;rustc&lt;/code&gt; artifacts are no longer built by &lt;code&gt;x.py build --stage 1&lt;/code&gt;. To get the old behavior back, use &lt;code&gt;x.py build --stage 1 src/rustc&lt;/code&gt;. The new behavior for &lt;code&gt;build --stage 1&lt;/code&gt; builds everything except &lt;code&gt;rustc&lt;/code&gt;, which includes the standard library, &lt;code&gt;rustdoc&lt;/code&gt;, and various other tools (if the tools are enabled).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;debuginfo&lt;/code&gt; now defaults to &lt;code&gt;1&lt;/code&gt; when &lt;code&gt;debug &#x3D; true&lt;/code&gt;. Previously, the default was 2.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#why-were-the-changes-made&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;why-were-the-changes-made&quot;&gt;&lt;/a&gt;Why were the changes made?&lt;/h2&gt;
-&lt;p&gt;Previously, &lt;code&gt;x.py build&lt;/code&gt; would build &lt;code&gt;rustc&lt;/code&gt; twice:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;build/stage0-std&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;build/stage0-rustc&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;build/stage1-std&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;build/stage1-rustc&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Normally, contributors only want to build the compiler once, which lets them test their changes quickly. After this change, that&#x27;s now the default:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;build/stage0-std&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;build/stage0-rustc&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;build/stage1-std&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;code&gt;debuginfo &#x3D; 2&lt;/code&gt; generates several gigabytes of debug information,
-making the previous default settings for &lt;code&gt;debug &#x3D; true&lt;/code&gt; very painful.&lt;/p&gt;
-&lt;p&gt;For a detailed rationale of the changes, as well as more information about the alternatives considered, see&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/326&quot;&gt;the MCP&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73964&quot;&gt;implementation PR&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;the &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/233931-xxx/topic/Use.20sane.20defaults.20in.20x.py.20compiler-team.23326&quot;&gt;Zulip stream&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>Joshua Nelson</name>
         </author>
     </entry>
     
