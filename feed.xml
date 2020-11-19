@@ -10,8 +10,182 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-11-16T16:58:54+00:00</updated>
+    <updated>2020-11-19T14:40:51+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.48.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/11/19/Rust-1.48.html" type="text/html" title="Announcing Rust 1.48.0" />
+        <published>2020-11-19T00:00:00+00:00</published>
+        <updated>2020-11-19T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/11/19/Rust-1.48.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/11/19/Rust-1.48.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.48.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.48.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/tools/install&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
+appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1480-2020-11-19&quot;&gt;detailed release notes for
+1.48.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1480-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1480-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.48.0 stable&lt;/h2&gt;
+&lt;p&gt;The star of this release is Rustdoc, with a few changes to make writing
+documentation even easier! See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1480-2020-11-19&quot;&gt;detailed release notes&lt;/a&gt; to learn
+about other changes not covered by this post.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#easier-linking-in-rustdoc&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;easier-linking-in-rustdoc&quot;&gt;&lt;/a&gt;Easier linking in rustdoc&lt;/h3&gt;
+&lt;p&gt;Rustdoc, the library documentation tool included in the Rust distribution,
+lets you write documentation in Markdown. This makes it very easy to use, but
+also has some pain points. Let&#x27;s say that you are writing some documentation
+for some Rust code that looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub mod foo {
+    pub struct Foo;
+}
+
+pub mod bar {
+    pub struct Bar;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We have two modules, each with a struct inside. Imagine we wanted to use these
+two structs together; we may want to note this in the documentation. So we&#x27;d
+write some docs that look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub mod foo {
+    /// Some docs for &#x60;Foo&#x60;
+    ///
+    /// You may want to use &#x60;Foo&#x60; with &#x60;Bar&#x60;.
+    pub struct Foo;
+}
+
+pub mod bar {
+    /// Some docs for &#x60;Bar&#x60;
+    ///
+    /// You may want to use &#x60;Bar&#x60; with &#x60;Foo&#x60;.
+    pub struct Bar;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That&#x27;s all well and good, but it would be really nice if we could link to these
+other types. That would make it much easier for the users of our library to
+navigate between them in our docs.&lt;/p&gt;
+&lt;p&gt;The problem here is that Markdown doesn&#x27;t know anything about Rust, and the
+URLs that rustdoc generates. So what Rust programmers have had to do is write
+those links out manually:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub mod foo {
+    /// Some docs for &#x60;Foo&#x60;
+    ///
+    /// You may want to use &#x60;Foo&#x60; with [&#x60;Bar&#x60;].
+    ///
+    /// [&#x60;Bar&#x60;]: ../bar/struct.Bar.html
+    pub struct Foo;
+}
+
+pub mod bar {
+    /// Some docs for &#x60;Bar&#x60;
+    ///
+    /// You may want to use &#x60;Bar&#x60; with [&#x60;Foo&#x60;].
+    ///
+    /// [&#x60;Foo&#x60;]: ../foo/struct.Foo.html
+    pub struct Bar;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that we&#x27;ve also had to use relative links, so that this works offline.
+Not only is this process tedious, and error prone, but it&#x27;s also just wrong
+in places. If we put a &lt;code&gt;pub use bar::Bar&lt;/code&gt; in our crate root, that would
+re-export &lt;code&gt;Bar&lt;/code&gt; in our root. Now our links are wrong. But if we fix them,
+then they end up being wrong when we navigate to the &lt;code&gt;Bar&lt;/code&gt; that lives inside
+the module. You can&#x27;t actually write these links by hand, and have them all
+be accurate.&lt;/p&gt;
+&lt;p&gt;In this release, you can use some syntax to let rustdoc know that you&#x27;re
+trying to link to a type, and it will generate the URLs for you. Here&#x27;s
+two different examples, based off of our code before:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub mod foo {
+    /// Some docs for &#x60;Foo&#x60;
+    ///
+    /// You may want to use &#x60;Foo&#x60; with [&#x60;Bar&#x60;](crate::bar::Bar).
+    pub struct Foo;
+}
+
+pub mod bar {
+    /// Some docs for &#x60;Bar&#x60;
+    ///
+    /// You may want to use &#x60;Bar&#x60; with [&#x60;crate::foo::Foo&#x60;].
+    pub struct Bar;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The first example will show the same text as before; but generate the proper
+link to the &lt;code&gt;Bar&lt;/code&gt; type. The second will link to &lt;code&gt;Foo&lt;/code&gt;, but will show the whole
+&lt;code&gt;crate::foo::Foo&lt;/code&gt; as the link text.&lt;/p&gt;
+&lt;p&gt;There are a bunch of options you can use here. Please see the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/rustdoc/linking-to-items-by-name.html&quot;&gt;&amp;quot;Linking to
+items by name&amp;quot;&lt;/a&gt; section of the rustdoc book for more. There is also
+a post on Inside Rust &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/09/17/stabilizing-intra-doc-links.html&quot;&gt;on the history of this feature&lt;/a&gt;, written
+by some of the contributors behind it!&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#adding-search-aliases&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;adding-search-aliases&quot;&gt;&lt;/a&gt;Adding search aliases&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/75740/&quot;&gt;You can now specify &lt;code&gt;#[doc(alias &#x3D; &amp;quot;&amp;lt;alias&amp;gt;&amp;quot;)]&lt;/code&gt; on items to add search
+aliases when searching through &lt;code&gt;rustdoc&lt;/code&gt;&#x27;s UI.&lt;/a&gt; This is a smaller change,
+but still useful. It looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[doc(alias &#x3D; &amp;quot;bar&amp;quot;)]
+struct Foo;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With this annotation, if we search for &amp;quot;bar&amp;quot; in rustdoc&#x27;s search, &lt;code&gt;Foo&lt;/code&gt; will
+come up as part of the results, even though our search text doesn&#x27;t have
+&amp;quot;Foo&amp;quot; in it.&lt;/p&gt;
+&lt;p&gt;An interesting use case for aliases is FFI wrapper crates, where each Rust
+function could be aliased to the C function it wraps. Existing users of the
+underlying C library would then be able to easily search the right Rust
+functions!&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#library-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
+&lt;p&gt;The most significant API change is kind of a mouthful: &lt;code&gt;[T; N]: TryFrom&amp;lt;Vec&amp;lt;T&amp;gt;&amp;gt;&lt;/code&gt;
+is now stable. What does this mean? Well, you can use this to try and turn
+a vector into an array of a given length:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::convert::TryInto;
+
+let v1: Vec&amp;lt;u32&amp;gt; &#x3D; vec![1, 2, 3];
+
+// This will succeed; our vector has a length of three, we&#x27;re trying to
+// make an array of length three.
+let a1: [u32; 3] &#x3D; v1.try_into().expect(&amp;quot;wrong length&amp;quot;);
+
+// But if we try to do it with a vector of length five...
+let v2: Vec&amp;lt;u32&amp;gt; &#x3D; vec![1, 2, 3, 4, 5];
+
+// ... this will panic, since we have the wrong length.
+let a2: [u32; 3] &#x3D; v2.try_into().expect(&amp;quot;wrong length&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the last release, we talked about the standard library being able to use
+const generics. This is a good example of the kinds of APIs that we can add
+with these sorts of features. Expect to hear more about the stabilization of
+const generics soon.&lt;/p&gt;
+&lt;p&gt;Additionally, five new APIs were stabilized this release:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.slice.html#method.as_ptr_range&quot;&gt;&lt;code&gt;slice::as_ptr_range&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.slice.html#method.as_mut_ptr_range&quot;&gt;&lt;code&gt;slice::as_mut_ptr_range&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.make_contiguous&quot;&gt;&lt;code&gt;VecDeque::make_contiguous&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/future/fn.pending.html&quot;&gt;&lt;code&gt;future::pending&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/future/fn.ready.html&quot;&gt;&lt;code&gt;future::ready&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following previously stable APIs have now been made &lt;code&gt;const&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.is_some&quot;&gt;&lt;code&gt;Option::is_some&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.is_none&quot;&gt;&lt;code&gt;Option::is_none&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.as_ref&quot;&gt;&lt;code&gt;Option::as_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/result/enum.Result.html#method.is_ok&quot;&gt;&lt;code&gt;Result::is_ok&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/result/enum.Result.html#method.is_err&quot;&gt;&lt;code&gt;Result::is_err&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/result/enum.Result.html#method.as_ref&quot;&gt;&lt;code&gt;Result::as_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/cmp/enum.Ordering.html#method.reverse&quot;&gt;&lt;code&gt;Ordering::reverse&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/cmp/enum.Ordering.html#method.then&quot;&gt;&lt;code&gt;Ordering::then&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1480-2020-11-19&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.48.0 release: check out what changed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1480-2020-11-19&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-148-2020-11-19&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-148&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1480&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1480&quot;&gt;&lt;/a&gt;Contributors to 1.48.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.48.0. We couldn&#x27;t have done it
+without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.48.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Marking issues as regressions</title>
@@ -548,57 +722,6 @@ fix.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1452&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1452&quot;&gt;&lt;/a&gt;Contributors to 1.45.2&lt;/h2&gt;
 &lt;p&gt;Many people came together to create Rust 1.45.2. We couldn&#x27;t have done it
 without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.45.2/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.45.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/07/30/Rust-1.45.1.html" type="text/html" title="Announcing Rust 1.45.1" />
-        <published>2020-07-30T00:00:00+00:00</published>
-        <updated>2020-07-30T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/07/30/Rust-1.45.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/07/30/Rust-1.45.1.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.45.1. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.45.1 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1451-2020-07-30&quot;&gt;detailed release notes for
-1.45.1&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1451-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1451-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.45.1 stable&lt;/h2&gt;
-&lt;p&gt;1.45.1 contains a collection of fixes, including one soundness fix. All patches
-in 1.45.1 address bugs that affect only the 1.45.0 release; prior releases are
-not affected by the bugs fixed in this release.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#fix-const-propagation-with-references&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;fix-const-propagation-with-references&quot;&gt;&lt;/a&gt;Fix const propagation with references&lt;/h3&gt;
-&lt;p&gt;In Rust 1.45.0, &lt;code&gt;rustc&lt;/code&gt;&#x27;s const propagation pass did not properly handle
-encountering references when determining whether to propagate a given constant,
-which could lead to incorrect behavior. Our releases are run through &lt;a href&#x3D;&quot;https://github.com/rust-lang/crater&quot;&gt;crater&lt;/a&gt;,
-and we did not detect it, which helps us be fairly confident that this affects a
-very small set of code in the wild (if any).&lt;/p&gt;
-&lt;p&gt;The conditions necessary to cause this bug are highly unlikely to occur in
-practice: the code must have inputs consisting of entirely constant values and
-no control flow or function calls in between.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct Foo {
-    x: u32,
-}
-
-fn main() {
-    let mut foo &#x3D; Foo { x: 42 };
-    let x &#x3D; &amp;amp;mut foo.x;
-    *x &#x3D; 13;
-    let y &#x3D; foo;
-    println!(&amp;quot;{}&amp;quot;, y.x); // -&amp;gt; 42; expected result: 13
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1451&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1451&quot;&gt;&lt;/a&gt;Contributors to 1.45.1&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.45.1. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.45.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
 </content>
 
         <author>

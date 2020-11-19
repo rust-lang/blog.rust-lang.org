@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.48.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.48.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.48.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.48.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.48.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 19, 2020 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.48.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.48.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/tools/install">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1480-2020-11-19">detailed release notes for
+1.48.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1480-stable" aria-hidden="true" class="anchor" id="whats-in-1480-stable"></a>What's in 1.48.0 stable</h2>
+<p>The star of this release is Rustdoc, with a few changes to make writing
+documentation even easier! See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1480-2020-11-19">detailed release notes</a> to learn
+about other changes not covered by this post.</p>
+<h3><a href="#easier-linking-in-rustdoc" aria-hidden="true" class="anchor" id="easier-linking-in-rustdoc"></a>Easier linking in rustdoc</h3>
+<p>Rustdoc, the library documentation tool included in the Rust distribution,
+lets you write documentation in Markdown. This makes it very easy to use, but
+also has some pain points. Let's say that you are writing some documentation
+for some Rust code that looks like this:</p>
+<pre><code class="language-rust">pub mod foo {
+    pub struct Foo;
+}
+
+pub mod bar {
+    pub struct Bar;
+}
+</code></pre>
+<p>We have two modules, each with a struct inside. Imagine we wanted to use these
+two structs together; we may want to note this in the documentation. So we'd
+write some docs that look like this:</p>
+<pre><code class="language-rust">pub mod foo {
+    /// Some docs for `Foo`
+    ///
+    /// You may want to use `Foo` with `Bar`.
+    pub struct Foo;
+}
+
+pub mod bar {
+    /// Some docs for `Bar`
+    ///
+    /// You may want to use `Bar` with `Foo`.
+    pub struct Bar;
+}
+</code></pre>
+<p>That's all well and good, but it would be really nice if we could link to these
+other types. That would make it much easier for the users of our library to
+navigate between them in our docs.</p>
+<p>The problem here is that Markdown doesn't know anything about Rust, and the
+URLs that rustdoc generates. So what Rust programmers have had to do is write
+those links out manually:</p>
+<pre><code class="language-rust">pub mod foo {
+    /// Some docs for `Foo`
+    ///
+    /// You may want to use `Foo` with [`Bar`].
+    ///
+    /// [`Bar`]: ../bar/struct.Bar.html
+    pub struct Foo;
+}
+
+pub mod bar {
+    /// Some docs for `Bar`
+    ///
+    /// You may want to use `Bar` with [`Foo`].
+    ///
+    /// [`Foo`]: ../foo/struct.Foo.html
+    pub struct Bar;
+}
+</code></pre>
+<p>Note that we've also had to use relative links, so that this works offline.
+Not only is this process tedious, and error prone, but it's also just wrong
+in places. If we put a <code>pub use bar::Bar</code> in our crate root, that would
+re-export <code>Bar</code> in our root. Now our links are wrong. But if we fix them,
+then they end up being wrong when we navigate to the <code>Bar</code> that lives inside
+the module. You can't actually write these links by hand, and have them all
+be accurate.</p>
+<p>In this release, you can use some syntax to let rustdoc know that you're
+trying to link to a type, and it will generate the URLs for you. Here's
+two different examples, based off of our code before:</p>
+<pre><code class="language-rust">pub mod foo {
+    /// Some docs for `Foo`
+    ///
+    /// You may want to use `Foo` with [`Bar`](crate::bar::Bar).
+    pub struct Foo;
+}
+
+pub mod bar {
+    /// Some docs for `Bar`
+    ///
+    /// You may want to use `Bar` with [`crate::foo::Foo`].
+    pub struct Bar;
+}
+</code></pre>
+<p>The first example will show the same text as before; but generate the proper
+link to the <code>Bar</code> type. The second will link to <code>Foo</code>, but will show the whole
+<code>crate::foo::Foo</code> as the link text.</p>
+<p>There are a bunch of options you can use here. Please see the <a href="https://doc.rust-lang.org/stable/rustdoc/linking-to-items-by-name.html">&quot;Linking to
+items by name&quot;</a> section of the rustdoc book for more. There is also
+a post on Inside Rust <a href="https://blog.rust-lang.org/inside-rust/2020/09/17/stabilizing-intra-doc-links.html">on the history of this feature</a>, written
+by some of the contributors behind it!</p>
+<h3><a href="#adding-search-aliases" aria-hidden="true" class="anchor" id="adding-search-aliases"></a>Adding search aliases</h3>
+<p><a href="https://github.com/rust-lang/rust/pull/75740/">You can now specify <code>#[doc(alias = &quot;&lt;alias&gt;&quot;)]</code> on items to add search
+aliases when searching through <code>rustdoc</code>'s UI.</a> This is a smaller change,
+but still useful. It looks like this:</p>
+<pre><code class="language-rust">#[doc(alias = &quot;bar&quot;)]
+struct Foo;
+</code></pre>
+<p>With this annotation, if we search for &quot;bar&quot; in rustdoc's search, <code>Foo</code> will
+come up as part of the results, even though our search text doesn't have
+&quot;Foo&quot; in it.</p>
+<p>An interesting use case for aliases is FFI wrapper crates, where each Rust
+function could be aliased to the C function it wraps. Existing users of the
+underlying C library would then be able to easily search the right Rust
+functions!</p>
+<h3><a href="#library-changes" aria-hidden="true" class="anchor" id="library-changes"></a>Library changes</h3>
+<p>The most significant API change is kind of a mouthful: <code>[T; N]: TryFrom&lt;Vec&lt;T&gt;&gt;</code>
+is now stable. What does this mean? Well, you can use this to try and turn
+a vector into an array of a given length:</p>
+<pre><code class="language-rust">use std::convert::TryInto;
+
+let v1: Vec&lt;u32&gt; = vec![1, 2, 3];
+
+// This will succeed; our vector has a length of three, we're trying to
+// make an array of length three.
+let a1: [u32; 3] = v1.try_into().expect(&quot;wrong length&quot;);
+
+// But if we try to do it with a vector of length five...
+let v2: Vec&lt;u32&gt; = vec![1, 2, 3, 4, 5];
+
+// ... this will panic, since we have the wrong length.
+let a2: [u32; 3] = v2.try_into().expect(&quot;wrong length&quot;);
+</code></pre>
+<p>In the last release, we talked about the standard library being able to use
+const generics. This is a good example of the kinds of APIs that we can add
+with these sorts of features. Expect to hear more about the stabilization of
+const generics soon.</p>
+<p>Additionally, five new APIs were stabilized this release:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/primitive.slice.html#method.as_ptr_range"><code>slice::as_ptr_range</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.slice.html#method.as_mut_ptr_range"><code>slice::as_mut_ptr_range</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.make_contiguous"><code>VecDeque::make_contiguous</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/future/fn.pending.html"><code>future::pending</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/future/fn.ready.html"><code>future::ready</code></a></li>
+</ul>
+<p>The following previously stable APIs have now been made <code>const</code>:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.is_some"><code>Option::is_some</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.is_none"><code>Option::is_none</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.as_ref"><code>Option::as_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.is_ok"><code>Result::is_ok</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.is_err"><code>Result::is_err</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.as_ref"><code>Result::as_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/cmp/enum.Ordering.html#method.reverse"><code>Ordering::reverse</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/cmp/enum.Ordering.html#method.then"><code>Ordering::then</code></a></li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1480-2020-11-19">detailed release notes</a> for more.</p>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.48.0 release: check out what changed in
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1480-2020-11-19">Rust</a>, <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-148-2020-11-19">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-148">Clippy</a>.</p>
+<h2><a href="#contributors-to-1480" aria-hidden="true" class="anchor" id="contributors-to-1480"></a>Contributors to 1.48.0</h2>
+<p>Many people came together to create Rust 1.48.0. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.48.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
