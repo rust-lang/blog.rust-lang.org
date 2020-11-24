@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>What the Error Handling Project Group is Working On | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="What the Error Handling Project Group is Working On | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="What the Error Handling Project Group is Working On | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="What the Error Handling Project Group is Working On" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>What the Error Handling Project Group is Working On</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 23, 2020 &middot; Sean Chen
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/library">the library team</a> 
+    </div>
+
+    <div class="post">
+      <p>The Rust community takes its error handling seriously. There’s already a strong culture in place for emphasizing helpful error handling and reporting, with multiple libraries each offering their own take (see Jane Lusby’s thorough <a href="https://youtu.be/rAF8mLI0naQ">survey</a> of Rust error handling/reporting libraries).</p>
+<p>But there’s still room for improvement. The main focus of the group is carrying on error handling-related work that was in progress before the group's formation. To that end, we're working on systematically addressing error handling-related issues, as well as eliminating blockers that are holding up stalled RFCs.</p>
+<p>Our first few meetings saw us setting a number of short- and long-term goals. These goals fall into one of three themes: making the <code>Error</code> trait more universally accessible, improving error handling ergonomics, and authoring additional learning resources.</p>
+<h2><a href="#one-standardized-error-trait" aria-hidden="true" class="anchor" id="one-standardized-error-trait"></a>One Standardized <code>Error</code> Trait</h2>
+<p>The <code>Error</code> trait has been around since 1.0, and exposed two methods: <code>Error::description</code> and <code>Error::cause</code>. As it was originally constructed, it was too restictive for a number of reasons<sup>1</sup>. The <code>Failure</code> crate addressed many of the <code>Error</code> trait's shortcomings by exporting the <code>Fail</code> trait, which informs many of changes that are being made to improve the <code>Error</code> trait.</p>
+<p>On that note, bolstering the <code>std::error::Error</code> trait such that it could be adopted across the Rust community as <em>the</em> <code>Error</code> trait has been an ongoing process since <a href="https://github.com/rust-lang/rfcs/pull/2504">RFC 2504</a> was merged in August 2018.</p>
+<p>This process also involves stabilizing many <code>Error</code> trait APIs and crates that are, as of this writing, on nightly only. These include the <code>backtrace</code> and <code>chain</code> methods, which are both extremely useful for working with error types. If you’re interested in following or contributing to this work, take a look at <a href="https://github.com/rust-lang/project-error-handling/issues/3">this issue</a>.</p>
+<p>Another related initiative is migrating the <code>Error</code> trait to <code>core</code> so that it’s more widely accessible to different use cases (such as in FFI or embedded contexts).</p>
+<h2><a href="#more-ways-to-access-error-contexts" aria-hidden="true" class="anchor" id="more-ways-to-access-error-contexts"></a>More Ways to Access Error Contexts</h2>
+<p>Rust’s language semantics already provide a decently ergonomic error handling experience, what with the <code>Result</code> type and the <code>?</code> operator. The error handling group has identified a few additional features to further improve the error handling user experience.</p>
+<h3><a href="#adding-the-capability-to-iterate-through-the-backtrace-type" aria-hidden="true" class="anchor" id="adding-the-capability-to-iterate-through-the-backtrace-type"></a>Adding the Capability to Iterate Through the <code>Backtrace</code> Type</h3>
+<p>As of this writing, the <code>backtrace</code> type only implements the <code>Display</code> and <code>Debug</code> traits. This means that the only way to work with the <code>backtrace</code> type is to print it out, which is less than ideal. An iterator API that provided the ability to iterate through stack frames would give users the ability to control how their backtraces are formatted, which is a necessary step adding <code>std::backtrace::Backtrace</code> support to crates like <code>color-backtrace</code>.</p>
+<p>Upon researching strategies for how to tackle this, we found that the <code>backtrace</code> crate already has a <code>frames</code> method that would work nicely for implementing the <code>Iterator</code> API. It should be a relatively straightforward ordeal to expose an identical method in <code>std</code>.</p>
+<p>A <a href="https://github.com/rust-lang/rust/pull/78299">PR</a> for this has been opened for anyone who would like to check it out.</p>
+<h3><a href="#generic-member-access" aria-hidden="true" class="anchor" id="generic-member-access"></a>Generic Member Access</h3>
+<p>Currently, when we want to fetch some additional context related to an error, there are specific methods that need to be called in order to fetch that context. For example, to see the backtrace for an error, we’d call the <code>backtrace</code> method: <code>let backtrace = some_error.backtrace();</code>. The problem with this approach is that it's not possible to support types that are defined outside of <code>std</code>. Even for types that exist within <code>std</code>, a method to access each respective type needs to be defined, which makes things cumbersome and harder to maintain.</p>
+<p>As the name implies, generic member access, when it gets implemented, is a type-agnostic way to access different pieces of context from an <code>Error</code> trait object. The analogy that clicked for me is when you’re parsing a string into a number, with something like:</p>
+<pre><code class="language-rust">let ten = &quot;10&quot;.parse::&lt;i32&gt;();
+</code></pre>
+<p>Or when you’re collecting the contents yielded by an iterator:</p>
+<pre><code class="language-rust">use std::collections::HashSet;
+
+let a_to_z_set = ('a'..='z').collect::&lt;HashSet&lt;_&gt;&gt;();
+</code></pre>
+<p>In a similar vein, you’d be able to access some piece of context from an error by specifying its type ID:</p>
+<pre><code class="language-rust">let span_trace = some_error.context::&lt;&amp;SpanTrace&gt;();
+</code></pre>
+<p>This could be used to fetch other pieces of context related to the error such as its backtrace, the error’s sources, status codes, alternate formatting representations (such as <code>&amp;dyn Serialize</code>).</p>
+<p>This feature will enable other features we plan on adding down the line, such as exposing a way to report back all of the locations from which errors originated from in a program, as well as exposing a more consistent error reporting format besides just <code>Display</code> and <code>Debug</code>.</p>
+<p>Jane has been putting in a lot of work on pushing these ideas forward. You can check out the associated <a href="https://github.com/rust-lang/rfcs/pull/2895">RFC</a>.</p>
+<h2><a href="#authoring-a-book-on-rust-error-handling-best-practices" aria-hidden="true" class="anchor" id="authoring-a-book-on-rust-error-handling-best-practices"></a>Authoring a Book on Rust Error Handling Best Practices</h2>
+<p>Last but not least, there’s a lot of interest in the group around authoring <a href="https://github.com/rust-lang/project-error-handling/tree/master/the-rust-error-book"><em>The Rust Error Book</em></a>. The aim of the book would be to codify and communicate different error handling best practices based on the respective use-case. This could include FFI use-cases, or best practices around returning error codes from programs.</p>
+<p>This is an ongoing effort that will see a lot of progress in the coming weeks and months!</p>
+<h2><a href="#in-summary" aria-hidden="true" class="anchor" id="in-summary"></a>In Summary</h2>
+<p>We're excited by the opportunities to continue to iterate on and improve Rust's error handling ergonomics and culture! If you're interested in helping out and/or joining in on the conversation, please come by and introduce yourself in our <a href="https://rust-lang.zulipchat.com/#narrow/stream/257204-project-error-handling">Zulip stream</a>. You can also keep track of our progress via our <a href="https://github.com/rust-lang/project-error-handling">GitHub repo</a>.</p>
+<p>Lastly, we'll be presenting some forthcoming news about a universally consistent error reporting format in our next update, so stay tuned for that!</p>
+<h3><a href="#footnotes" aria-hidden="true" class="anchor" id="footnotes"></a>Footnotes</h3>
+<p><sup>1</sup>The <code>Error::description</code> method only supported string slices, which meant that it was not straightforward to create dynamic error messages that included additional context. This method was deprecated in favor of <code>Display</code>. The <code>Error::cause</code> method, now known as <code>Error::source</code>, doesn't enforce errors having a <code>'static</code> lifetime, which means that downcasting error sources is impossible, making it much more difficult to handle errors using dynamic error handlers.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
