@@ -10,8 +10,89 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-11-24T01:31:46+00:00</updated>
+    <updated>2020-11-27T15:13:40+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rustup 1.23.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/11/27/Rustup-1.23.0.html" type="text/html" title="Announcing Rustup 1.23.0" />
+        <published>2020-11-27T00:00:00+00:00</published>
+        <updated>2020-11-27T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/11/27/Rustup-1.23.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/11/27/Rustup-1.23.0.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.23.0. &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.23.0 is as easy as closing your IDE and running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup self update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1230&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1230&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.23.0&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#support-for-apple-m1-devices&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;support-for-apple-m1-devices&quot;&gt;&lt;/a&gt;Support for Apple M1 devices&lt;/h3&gt;
+&lt;p&gt;Rustup is now natively available for the new Apple M1 devices, allowing you to install it on the new Macs the same way you&#x27;d install it on other platforms!&lt;/p&gt;
+&lt;p&gt;Note that at the time of writing this blog post the &lt;code&gt;aarch64-apple-darwin&lt;/code&gt; compiler is at &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/platform-support.html#tier-2&quot;&gt;Tier 2 target&lt;/a&gt;: precompiled binaries are available starting from Rust 1.49 (currently in the beta channel), but no automated tests are executed on them.&lt;/p&gt;
+&lt;p&gt;You can follow &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/73908&quot;&gt;issue #73908&lt;/a&gt; to track the work needed to bring Apple Silicon support to Tier 1.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#support-for-installing-minor-releases&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;support-for-installing-minor-releases&quot;&gt;&lt;/a&gt;Support for installing minor releases&lt;/h3&gt;
+&lt;p&gt;The Rust team releases a new version every six weeks, bringing new features and bugfixes on a regular basis. Sometimes a regression slips into a stable release, and the team releases a &amp;quot;point release&amp;quot; containing fixes for that regression. For example, &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/07/30/Rust-1.45.1.html&quot;&gt;1.45.1&lt;/a&gt; and &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/08/03/Rust-1.45.2.html&quot;&gt;1.45.2&lt;/a&gt; were point releases of &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/07/16/Rust-1.45.0.html&quot;&gt;Rust 1.45.0&lt;/a&gt;, while &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/08/27/Rust-1.46.0.html&quot;&gt;1.46.0&lt;/a&gt; and &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/10/08/Rust-1.47.html&quot;&gt;1.47.0&lt;/a&gt; both had no point releases.&lt;/p&gt;
+&lt;p&gt;With rustup 1.22.1 or earlier if you wanted to use a stable release you were able to either install &lt;code&gt;stable&lt;/code&gt; (which automatically updates to the latest one) or a specific version number, such as &lt;code&gt;1.48.0&lt;/code&gt;, &lt;code&gt;1.45.0&lt;/code&gt; or &lt;code&gt;1.45.2&lt;/code&gt;. Starting from this release of rustup (1.23.0) you can also install a minor version without specifying the patch version, like &lt;code&gt;1.48&lt;/code&gt; or &lt;code&gt;1.45&lt;/code&gt;. These &amp;quot;virtual&amp;quot; releases will always point to the latest patch release of that cycle, so &lt;code&gt;rustup toolchain install 1.45&lt;/code&gt; will get you a &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/08/03/Rust-1.45.2.html&quot;&gt;1.45.2&lt;/a&gt; toolchain.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#new-format-for-rust-toolchain&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;new-format-for-rust-toolchain&quot;&gt;&lt;/a&gt;New format for &lt;code&gt;rust-toolchain&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;The rustup 1.5.0 release introduced the &lt;code&gt;rust-toolchain&lt;/code&gt; file, allowing you to choose the default toolchain for a project. When the file is present rustup ensures the toolchain specified in it is installed on the local system, and it will use that version when calling &lt;code&gt;rustc&lt;/code&gt; or &lt;code&gt;cargo&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ cat rust-toolchain
+nightly-2020-07-10
+$ cargo --version
+cargo 1.46.0-nightly (fede83ccf 2020-07-02)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The file works great for projects wanting to use a specific nightly version, but didn&#x27;t allow to add extra components (like &lt;code&gt;clippy&lt;/code&gt;) or compilation targets. Rustup 1.23.0 introduces a new, optional TOML syntax for the file, with support for specifying components and targets:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[toolchain]
+channel &#x3D; &amp;quot;nightly-2020-07-10&amp;quot;
+components &#x3D; [&amp;quot;rustfmt&amp;quot;, &amp;quot;clippy&amp;quot;]
+targets &#x3D; [&amp;quot;wasm32-unknown-unknown&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The new syntax doesn&#x27;t replace the old one, and both will continue to work. You can learn more about overriding the default toolchain in the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file&quot;&gt;&amp;quot;Overrides&amp;quot; chapter of the rustup book&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are more changes in rustup 1.23.0: check them out in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/blob/stable/CHANGELOG.md&quot;&gt;changelog&lt;/a&gt;! Rustup&#x27;s documentation is also available in &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/&quot;&gt;the rustup book&lt;/a&gt; starting from this release.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
+&lt;p&gt;Thanks to all the contributors who made rustup 1.23.0 possible!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Aaron Loucks&lt;/li&gt;
+&lt;li&gt;Aleksey Kladov&lt;/li&gt;
+&lt;li&gt;Aurelia Dolo&lt;/li&gt;
+&lt;li&gt;Camelid&lt;/li&gt;
+&lt;li&gt;Chansuke&lt;/li&gt;
+&lt;li&gt;Carol (Nichols || Goulding)&lt;/li&gt;
+&lt;li&gt;Daniel Silverstone&lt;/li&gt;
+&lt;li&gt;Dany Marcoux&lt;/li&gt;
+&lt;li&gt;Eduard Miller&lt;/li&gt;
+&lt;li&gt;Eduardo Broto&lt;/li&gt;
+&lt;li&gt;Eric Huss&lt;/li&gt;
+&lt;li&gt;Francesco Zardi&lt;/li&gt;
+&lt;li&gt;FR Bimo&lt;/li&gt;
+&lt;li&gt;Ivan Nejgebauer&lt;/li&gt;
+&lt;li&gt;Ivan Tham&lt;/li&gt;
+&lt;li&gt;Jake Goulding&lt;/li&gt;
+&lt;li&gt;Jens Reidel&lt;/li&gt;
+&lt;li&gt;Joshua M. Clulow&lt;/li&gt;
+&lt;li&gt;Joshua Nelson&lt;/li&gt;
+&lt;li&gt;Jubilee Young&lt;/li&gt;
+&lt;li&gt;Leigh McCulloch&lt;/li&gt;
+&lt;li&gt;Lzu Tao&lt;/li&gt;
+&lt;li&gt;Matthias Krüger&lt;/li&gt;
+&lt;li&gt;Matt Kraai&lt;/li&gt;
+&lt;li&gt;Matt McKay&lt;/li&gt;
+&lt;li&gt;Nick Ashley&lt;/li&gt;
+&lt;li&gt;Pascal Hertleif&lt;/li&gt;
+&lt;li&gt;Paul Lange&lt;/li&gt;
+&lt;li&gt;Pietro Albini&lt;/li&gt;
+&lt;li&gt;Robert Collins&lt;/li&gt;
+&lt;li&gt;Stephen Muss&lt;/li&gt;
+&lt;li&gt;Tom Eccles&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>The Rustup Working Group</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.48.0</title>
@@ -689,43 +770,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.46
 
         <author>
             <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.45.2</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/08/03/Rust-1.45.2.html" type="text/html" title="Announcing Rust 1.45.2" />
-        <published>2020-08-03T00:00:00+00:00</published>
-        <updated>2020-08-03T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/08/03/Rust-1.45.2.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/08/03/Rust-1.45.2.html">&lt;p&gt;The Rust team is announcing a new version of Rust, 1.45.2. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.45.2 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1452-2020-08-03&quot;&gt;detailed release notes for
-1.45.2&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1452-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1452-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.45.2 stable&lt;/h2&gt;
-&lt;p&gt;1.45.2 contains two fixes, one to 1.45.1 and the other to 1.45.0.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#track_caller-on-trait-objects&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;track_caller-on-trait-objects&quot;&gt;&lt;/a&gt;&lt;code&gt;#[track_caller]&lt;/code&gt; on trait objects&lt;/h2&gt;
-&lt;p&gt;Trait objects with methods annotated with &lt;code&gt;#[track_caller]&lt;/code&gt; would be
-miscompiled. &lt;code&gt;#[track_caller]&lt;/code&gt; is not yet stable on 1.45. However, the standard
-library makes use of this on some traits for better error messages. Trait
-objects of &lt;code&gt;SliceIndex&lt;/code&gt;, &lt;code&gt;Index&lt;/code&gt;, and &lt;code&gt;IndexMut&lt;/code&gt; were affected by this bug.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#tuple-patterns-binding--to-an-identifier&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;tuple-patterns-binding--to-an-identifier&quot;&gt;&lt;/a&gt;Tuple patterns binding &lt;code&gt;..&lt;/code&gt; to an identifier&lt;/h2&gt;
-&lt;p&gt;In 1.45.1, we backported a fix for &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/74539&quot;&gt;#74539&lt;/a&gt;, but this fix turned out to be
-incorrect, causing other unrelated breakage. As such, this release reverts that
-fix.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1452&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1452&quot;&gt;&lt;/a&gt;Contributors to 1.45.2&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.45.2. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.45.2/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
