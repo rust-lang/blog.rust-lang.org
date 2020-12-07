@@ -70,6 +70,7 @@ impl Post {
             },
             extension: ComrakExtensionOptions {
                 header_ids: Some(String::new()),
+                table: true,
                 ..ComrakExtensionOptions::default()
             },
             ..ComrakOptions::default()
