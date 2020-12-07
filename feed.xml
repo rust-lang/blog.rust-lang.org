@@ -10,8 +10,112 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-11-27T15:13:40+00:00</updated>
+    <updated>2020-12-07T17:05:17+00:00</updated>
 
+    
+    <entry>
+        <title>The Foundation Conversation</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/12/07/the-foundation-conversation.html" type="text/html" title="The Foundation Conversation" />
+        <published>2020-12-07T00:00:00+00:00</published>
+        <updated>2020-12-07T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/12/07/the-foundation-conversation.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/12/07/the-foundation-conversation.html">&lt;p&gt;In August, we on the Core Team &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/08/18/laying-the-foundation-for-rusts-future.html&quot;&gt;announced our plans to create a Foundation&lt;/a&gt; by the end of the year. Since that time, we’ve been doing a lot of work but it has been difficult to share many details, and we know that a lot of you have questions.&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#the-foundation-conversation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-foundation-conversation&quot;&gt;&lt;/a&gt;The &amp;quot;Foundation Conversation&amp;quot;&lt;/h1&gt;
+&lt;p&gt;This blog post announces the start of the “Foundation Conversation”. This is a week-long period in which we have planned a number of forums and opportunities where folks can ask questions about the Foundation and get answers from the Core team. It includes both text-based “question-and-answer” (Q&amp;amp;A) periods as well as live broadcasts. We’re also going to be coming to the Rust team’s meetings to have discussions. We hope that this will help us to share our vision for the Foundation and to get the community excited about what’s to come.&lt;/p&gt;
+&lt;p&gt;A secondary goal for the Foundation Conversation is to help us develop the Foundation FAQ. Most FAQs get written before anyone has ever really asked a question, but we really wanted to write a FAQ that responds honestly to the questions that people have. We’ve currently got a draft of the FAQ which is based both on questions we thought people would ask and questions that were raised by Rust team members thus far, but we would like to extend it to include questions raised by people in the broader community. That’s where you come in!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#how-to-join-the-conversation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-to-join-the-conversation&quot;&gt;&lt;/a&gt;How to join the conversation&lt;/h2&gt;
+&lt;p&gt;There are many ways to participate in the Foundation Conversation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/foundation-faq-2020/blob/main/FAQ.md&quot;&gt;Read the draft FAQ we’ve been working on&lt;/a&gt;&lt;/strong&gt;. It contains the answers to some of the questions that we have been asked thus far.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fill out our &lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSeciTU1hLi-Y5842fvWC2lhYRHvkWOtPbk39p72amGcGmZIaA/viewform&quot;&gt;survey&lt;/a&gt;&lt;/strong&gt;. This survey is designed to help us understand how the Rust community is feeling about the Foundation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ask questions during the Community Q&amp;amp;A periods&lt;/strong&gt;. We’ve scheduled a number of 3 hour periods during which the foundation-faq-2020 repo will be open for anyone to ask questions. There will be members of the core team around during those periods to answer those questions as best we can.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Watch our Live Broadcasts&lt;/strong&gt;. We’ve scheduled live broadcasts this week where members of the core team will be answering and discussing some of the questions that have come up thus far. These will be posted to YouTube later.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Read on for more details.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#the-foundation-faq-2020-repository&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-foundation-faq-2020-repository&quot;&gt;&lt;/a&gt;The foundation-faq-2020 repository&lt;/h2&gt;
+&lt;p&gt;We have chosen to coordinate the Foundation Conversation using a GitHub repository called &lt;a href&#x3D;&quot;https://github.com/rust-lang/foundation-faq-2020&quot;&gt;foundation-faq-2020&lt;/a&gt;. This repository contains the &lt;a href&#x3D;&quot;https://github.com/rust-lang/foundation-faq-2020/blob/main/FAQ.md&quot;&gt;draft FAQ&lt;/a&gt; we’ve written so far, along with a series of issues representing the questions that people have. Last week we opened the repository for Rust team members, so you can see that we’ve already had quite a few questions raised (and answered). Once a new issue is opened, someone from the core team will come along and post an answer, and then label the question as “&lt;a href&#x3D;&quot;https://github.com/rust-lang/foundation-faq-2020/issues?q&#x3D;is%3Aissue+is%3Aopen+label%3Aanswered&quot;&gt;answered&lt;/a&gt;”.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#community-qa-sessions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;community-qa-sessions&quot;&gt;&lt;/a&gt;Community Q&amp;amp;A sessions&lt;/h2&gt;
+&lt;p&gt;We have scheduled a number of 3 hour periods in which the repository will be open for anyone to open new issues. Outside of these slots, the repository is generally “read only” unless you are a member of a Rust team. We are calling these slots the “Community Q&amp;amp;A” sessions, since it is a time for the broader community to open questions and get answers.&lt;/p&gt;
+&lt;p&gt;We’ve tried to stagger the times for the “Community Q&amp;amp;A” periods to be accessible from all time zones. During each slot, members of the core team will be standing by to monitor new questions and post answers. In some cases, if the question is complex, we may hold off on answering right away and instead take time to draft the response and post it later.&lt;/p&gt;
+&lt;p&gt;Here are the times that we’ve scheduled for folks to pose questions.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;PST US&lt;/th&gt;
+&lt;th&gt;EST US&lt;/th&gt;
+&lt;th&gt;UTC Europe/Africa&lt;/th&gt;
+&lt;th&gt;India&lt;/th&gt;
+&lt;th&gt;China&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Dec 7th (&lt;a href&#x3D;&quot;https://everytimezone.com/s/213ef6bd&quot;&gt;View in my timezone&lt;/a&gt;)&lt;/td&gt;
+&lt;td&gt;3-6pm&lt;/td&gt;
+&lt;td&gt;6-9pm&lt;/td&gt;
+&lt;td&gt;23:00-2:00 (Dec 8)&lt;/td&gt;
+&lt;td&gt;1:30am-4:30am (Dec 8)&lt;/td&gt;
+&lt;td&gt;3pm-6am (Dec 8)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dec 9th (&lt;a href&#x3D;&quot;https://everytimezone.com/s/f10ec849&quot;&gt;View in my timezone&lt;/a&gt;)&lt;/td&gt;
+&lt;td&gt;4-7am&lt;/td&gt;
+&lt;td&gt;7-10am&lt;/td&gt;
+&lt;td&gt;12:00-15:00&lt;/td&gt;
+&lt;td&gt;5:30-8:30pm&lt;/td&gt;
+&lt;td&gt;8pm-11pm&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dec 11th (&lt;a href&#x3D;&quot;https://everytimezone.com/s/3c5c1b75&quot;&gt;View in my timezone&lt;/a&gt;)&lt;/td&gt;
+&lt;td&gt;1-4pm&lt;/td&gt;
+&lt;td&gt;10-1pm&lt;/td&gt;
+&lt;td&gt;18:00-21:00&lt;/td&gt;
+&lt;td&gt;11:30pm-2:30am (Dec 12)&lt;/td&gt;
+&lt;td&gt;2am-5am (Dec 12)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#live-broadcasts&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;live-broadcasts&quot;&gt;&lt;/a&gt;Live broadcasts&lt;/h2&gt;
+&lt;p&gt;In addition to the repository, we’ve scheduled two “live broadcasts”. These sessions will feature members of the core team discussing and responding to some of the questions that have been asked thus far. Naturally, even if you can’t catch the live broadcast, the video will be available for streaming afterwards. Here is the schedule for these broadcasts:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;PST US&lt;/th&gt;
+&lt;th&gt;EST US&lt;/th&gt;
+&lt;th&gt;UTC Europe/Africa&lt;/th&gt;
+&lt;th&gt;India&lt;/th&gt;
+&lt;th&gt;China&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Dec 9th (&lt;a href&#x3D;&quot;https://everytimezone.com/s/a0b6bb44&quot;&gt;View in my timezone&lt;/a&gt;)&lt;/td&gt;
+&lt;td&gt;3-4pm&lt;/td&gt;
+&lt;td&gt;6-7pm&lt;/td&gt;
+&lt;td&gt;23:00-24:00&lt;/td&gt;
+&lt;td&gt;4:30-5:30am   (Dec 10)&lt;/td&gt;
+&lt;td&gt;7-8am   (Dec 10)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dec 12th (&lt;a href&#x3D;&quot;https://everytimezone.com/s/8e88716f&quot;&gt;View in my timezone&lt;/a&gt;)&lt;/td&gt;
+&lt;td&gt;4-5am&lt;/td&gt;
+&lt;td&gt;7-8am&lt;/td&gt;
+&lt;td&gt;12:00-13:00&lt;/td&gt;
+&lt;td&gt;5:30pm-6:30pm&lt;/td&gt;
+&lt;td&gt;8-9pm&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;These will be hosted on our &lt;a href&#x3D;&quot;https://www.youtube.com/c/rustvideos&quot;&gt;YouTube channel&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We’re very excited about the progress on the Rust foundation and we’re looking forward to hearing from all of you.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Core Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rustup 1.23.0</title>
@@ -739,37 +843,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.46
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Laying the foundation for Rust&#x27;s future</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/08/18/laying-the-foundation-for-rusts-future.html" type="text/html" title="Laying the foundation for Rust&#x27;s future" />
-        <published>2020-08-18T00:00:00+00:00</published>
-        <updated>2020-08-18T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/08/18/laying-the-foundation-for-rusts-future.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/08/18/laying-the-foundation-for-rusts-future.html">&lt;p&gt;The Rust project was originally &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/commit/c01efc669f09508b55eced32d3c88702578a7c3e&quot;&gt;conceived in 2010&lt;/a&gt; (depending on how you count, you might even say &lt;a href&#x3D;&quot;https://github.com/graydon/rust-prehistory/commit/b0fd440798ab3cfb05c60a1a1bd2894e1618479e&quot;&gt;2006&lt;/a&gt;!) as a &lt;a href&#x3D;&quot;https://research.mozilla.org/&quot;&gt;Mozilla Research&lt;/a&gt; project, but the long term goal has always been to establish Rust as a self-sustaining project. In 2015, &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2015/05/15/Rust-1.0.html&quot;&gt;with the launch of Rust 1.0&lt;/a&gt;, Rust established its project direction and governance independent of the Mozilla organization. Since then, Rust has been operating as an autonomous organization, with Mozilla being a prominent and consistent financial and legal sponsor.&lt;/p&gt;
-&lt;p&gt;Mozilla was, and continues to be, excited by the opportunity for the Rust language to be widely used, &lt;em&gt;and supported&lt;/em&gt;, by many companies throughout the industry. Today, many companies, both large and small, are using Rust in more diverse and more significant ways, from &lt;a href&#x3D;&quot;https://aws.amazon.com/blogs/aws/firecracker-lightweight-virtualization-for-serverless-computing/&quot;&gt;Amazon’s Firecracker&lt;/a&gt;, to &lt;a href&#x3D;&quot;https://www.fastly.com/blog/announcing-lucet-fastly-native-webassembly-compiler-runtime&quot;&gt;Fastly’s Lucet&lt;/a&gt;, to critical services that power &lt;a href&#x3D;&quot;https://blog.discord.com/why-discord-is-switching-from-go-to-rust-a190bbca2b1f&quot;&gt;Discord&lt;/a&gt;, &lt;a href&#x3D;&quot;https://blog.cloudflare.com/enjoy-a-slice-of-quic-and-rust/&quot;&gt;Cloudflare&lt;/a&gt;, &lt;a href&#x3D;&quot;https://www.figma.com/blog/rust-in-production-at-figma/&quot;&gt;Figma&lt;/a&gt;, &lt;a href&#x3D;&quot;https://blog.1password.com/1passwordx-december-2019-release/&quot;&gt;1Password&lt;/a&gt;, and many, many more.&lt;/p&gt;
-&lt;p&gt;On Tuesday, August 11th 2020, Mozilla &lt;a href&#x3D;&quot;https://blog.mozilla.org/blog/2020/08/11/changing-world-changing-mozilla/&quot;&gt;announced&lt;/a&gt; their decision to restructure the company and to lay off around 250 people, including folks who are active members of the Rust project and the Rust community. Understandably, these layoffs have generated a lot of uncertainty and confusion about the impact on the Rust project itself. Our goal in this post is to address those concerns. We’ve also got a big announcement to make, so read on!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#community-impact&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;community-impact&quot;&gt;&lt;/a&gt;Community impact&lt;/h2&gt;
-&lt;p&gt;There’s no denying the impact these layoffs have had on all members of the Rust community, particularly the folks who have lost their jobs in the middle of a global pandemic. Sudden, unexpected layoffs can be a difficult experience, and they are made no less difficult when it feels like the world is watching. Impacted employees who are looking for job assistance can be found on &lt;a href&#x3D;&quot;https://talentdirectory.mozilla.org/&quot;&gt;Mozilla’s talent directory&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Notwithstanding the deep personal impact, the Rust project as a whole is very resilient to such events. We have leaders and contributors from a diverse set of different backgrounds and employers, and that diversity is a critical strength. Further, it is a common misconception that all of the Mozilla employees who participated in Rust leadership did so as a part of their employment. In fact, many Mozilla employees in Rust leadership &lt;a href&#x3D;&quot;https://twitter.com/ManishEarth/status/1294023260770770944&quot;&gt;contributed to Rust in their personal time&lt;/a&gt;, not as a part of their job.&lt;/p&gt;
-&lt;p&gt;Finally, we would like to emphasize that membership in Rust teams is given to individuals and is not connected to one’s employer. Mozilla employees who are also members of the Rust teams continue to be members today, even if they were affected by the layoffs. Of course, some may choose to scale back their involvement. We understand not everyone might be able to continue contributing, and we would fully support their decision. We&#x27;re grateful for everything they have done for the project so far.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#starting-a-foundation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;starting-a-foundation&quot;&gt;&lt;/a&gt;Starting a foundation&lt;/h2&gt;
-&lt;p&gt;As the project has grown in size, adoption, and maturity, we’ve begun to feel the pains of our success. We’ve developed legal and financial needs that our current organization lacks the capacity to fulfill. While we were able to be successful with Mozilla’s assistance for quite a while, we’ve reached a point where it’s difficult to operate without a legal name, address, and bank account. “How does the Rust project sign a contract?” has become a question we can no longer put off.&lt;/p&gt;
-&lt;p&gt;Last year, we began &lt;a href&#x3D;&quot;http://smallcultfollowing.com/babysteps/blog/2020/01/09/towards-a-rust-foundation/&quot;&gt;investigating the idea of creating an independent Rust foundation&lt;/a&gt;. Members of the Rust Team with prior experience in open source foundations got together to look at the current landscape, identifying the things we’d need from a foundation, evaluating our options, and interviewing key members and directors from other foundations.&lt;/p&gt;
-&lt;p&gt;Building on that work, &lt;strong&gt;the Rust Core Team and Mozilla are happy to announce plans to create a Rust foundation. The Rust Core Team&#x27;s goal is to have the first iteration of the foundation up and running by the end of the year.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;This foundation’s first task will be something Rust is already great at: &lt;a href&#x3D;&quot;https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html&quot;&gt;taking ownership&lt;/a&gt;. This time, the resource is legal, rather than something in a program. The various trademarks and domain names associated with Rust, Cargo, and crates.io will move into the foundation, which will also take financial responsibility for the costs they incur. We see this first iteration of the foundation as just the beginning. There’s a lot of possibilities for growing the role of the foundation, and we’re excited to explore those in the future.&lt;/p&gt;
-&lt;p&gt;For now though, we remain laser-focused on these initial narrow goals for the foundation. As an immediate step the Core Team has &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/core#project-foundation&quot;&gt;selected members to form a project group&lt;/a&gt; driving the efforts to form the foundation. Expect to see follow-up blog posts from the group with more details about the process and opportunities to give feedback. In the meantime, you can email the group at &lt;a href&#x3D;&quot;mailto:foundation@rust-lang.org&quot;&gt;foundation@rust-lang.org&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#leading-with-infrastructure&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;leading-with-infrastructure&quot;&gt;&lt;/a&gt;Leading with infrastructure&lt;/h2&gt;
-&lt;p&gt;While we have only begun the process of setting up the foundation, over the past two years the Infrastructure Team has been leading the charge to reduce the reliance on any single company sponsoring the project, as well as growing the number of companies that support Rust.&lt;/p&gt;
-&lt;p&gt;These efforts have been quite successful, and — as you can see on our &lt;a href&#x3D;&quot;https://www.rust-lang.org/sponsors&quot;&gt;sponsorship page&lt;/a&gt; — Rust’s infrastructure is already supported by a number of different companies throughout the ecosystem. As we legally transition into a fully independent entity, the Infrastructure Team plans to continue their efforts to ensure that we are not overly reliant on any single sponsor.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#thank-you&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thank-you&quot;&gt;&lt;/a&gt;Thank you&lt;/h2&gt;
-&lt;p&gt;We’re excited to start the next chapter of the project by forming a foundation. We would like to thank everyone we shared this journey with so far: Mozilla for incubating the project and for their support in creating a foundation, our team of leaders and contributors for constantly improving the community and the language, and everyone using Rust for creating the powerful ecosystem that drives so many people to the project. We can’t wait to see what our vibrant community does next.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
         </author>
     </entry>
     

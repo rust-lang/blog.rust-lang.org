@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The Foundation Conversation | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="The Foundation Conversation | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="The Foundation Conversation | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="The Foundation Conversation" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>The Foundation Conversation</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 7, 2020 &middot; The Rust Core Team
+    
+    </div>
+
+    <div class="post">
+      <p>In August, we on the Core Team <a href="https://blog.rust-lang.org/2020/08/18/laying-the-foundation-for-rusts-future.html">announced our plans to create a Foundation</a> by the end of the year. Since that time, we’ve been doing a lot of work but it has been difficult to share many details, and we know that a lot of you have questions.</p>
+<h1><a href="#the-foundation-conversation" aria-hidden="true" class="anchor" id="the-foundation-conversation"></a>The &quot;Foundation Conversation&quot;</h1>
+<p>This blog post announces the start of the “Foundation Conversation”. This is a week-long period in which we have planned a number of forums and opportunities where folks can ask questions about the Foundation and get answers from the Core team. It includes both text-based “question-and-answer” (Q&amp;A) periods as well as live broadcasts. We’re also going to be coming to the Rust team’s meetings to have discussions. We hope that this will help us to share our vision for the Foundation and to get the community excited about what’s to come.</p>
+<p>A secondary goal for the Foundation Conversation is to help us develop the Foundation FAQ. Most FAQs get written before anyone has ever really asked a question, but we really wanted to write a FAQ that responds honestly to the questions that people have. We’ve currently got a draft of the FAQ which is based both on questions we thought people would ask and questions that were raised by Rust team members thus far, but we would like to extend it to include questions raised by people in the broader community. That’s where you come in!</p>
+<h2><a href="#how-to-join-the-conversation" aria-hidden="true" class="anchor" id="how-to-join-the-conversation"></a>How to join the conversation</h2>
+<p>There are many ways to participate in the Foundation Conversation:</p>
+<ul>
+<li><strong><a href="https://github.com/rust-lang/foundation-faq-2020/blob/main/FAQ.md">Read the draft FAQ we’ve been working on</a></strong>. It contains the answers to some of the questions that we have been asked thus far.</li>
+<li><strong>Fill out our <a href="https://docs.google.com/forms/d/e/1FAIpQLSeciTU1hLi-Y5842fvWC2lhYRHvkWOtPbk39p72amGcGmZIaA/viewform">survey</a></strong>. This survey is designed to help us understand how the Rust community is feeling about the Foundation.</li>
+<li><strong>Ask questions during the Community Q&amp;A periods</strong>. We’ve scheduled a number of 3 hour periods during which the foundation-faq-2020 repo will be open for anyone to ask questions. There will be members of the core team around during those periods to answer those questions as best we can.</li>
+<li><strong>Watch our Live Broadcasts</strong>. We’ve scheduled live broadcasts this week where members of the core team will be answering and discussing some of the questions that have come up thus far. These will be posted to YouTube later.</li>
+</ul>
+<p>Read on for more details.</p>
+<h2><a href="#the-foundation-faq-2020-repository" aria-hidden="true" class="anchor" id="the-foundation-faq-2020-repository"></a>The foundation-faq-2020 repository</h2>
+<p>We have chosen to coordinate the Foundation Conversation using a GitHub repository called <a href="https://github.com/rust-lang/foundation-faq-2020">foundation-faq-2020</a>. This repository contains the <a href="https://github.com/rust-lang/foundation-faq-2020/blob/main/FAQ.md">draft FAQ</a> we’ve written so far, along with a series of issues representing the questions that people have. Last week we opened the repository for Rust team members, so you can see that we’ve already had quite a few questions raised (and answered). Once a new issue is opened, someone from the core team will come along and post an answer, and then label the question as “<a href="https://github.com/rust-lang/foundation-faq-2020/issues?q=is%3Aissue+is%3Aopen+label%3Aanswered">answered</a>”.</p>
+<h2><a href="#community-qa-sessions" aria-hidden="true" class="anchor" id="community-qa-sessions"></a>Community Q&amp;A sessions</h2>
+<p>We have scheduled a number of 3 hour periods in which the repository will be open for anyone to open new issues. Outside of these slots, the repository is generally “read only” unless you are a member of a Rust team. We are calling these slots the “Community Q&amp;A” sessions, since it is a time for the broader community to open questions and get answers.</p>
+<p>We’ve tried to stagger the times for the “Community Q&amp;A” periods to be accessible from all time zones. During each slot, members of the core team will be standing by to monitor new questions and post answers. In some cases, if the question is complex, we may hold off on answering right away and instead take time to draft the response and post it later.</p>
+<p>Here are the times that we’ve scheduled for folks to pose questions.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>PST US</th>
+<th>EST US</th>
+<th>UTC Europe/Africa</th>
+<th>India</th>
+<th>China</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dec 7th (<a href="https://everytimezone.com/s/213ef6bd">View in my timezone</a>)</td>
+<td>3-6pm</td>
+<td>6-9pm</td>
+<td>23:00-2:00 (Dec 8)</td>
+<td>1:30am-4:30am (Dec 8)</td>
+<td>3pm-6am (Dec 8)</td>
+</tr>
+<tr>
+<td>Dec 9th (<a href="https://everytimezone.com/s/f10ec849">View in my timezone</a>)</td>
+<td>4-7am</td>
+<td>7-10am</td>
+<td>12:00-15:00</td>
+<td>5:30-8:30pm</td>
+<td>8pm-11pm</td>
+</tr>
+<tr>
+<td>Dec 11th (<a href="https://everytimezone.com/s/3c5c1b75">View in my timezone</a>)</td>
+<td>1-4pm</td>
+<td>10-1pm</td>
+<td>18:00-21:00</td>
+<td>11:30pm-2:30am (Dec 12)</td>
+<td>2am-5am (Dec 12)</td>
+</tr>
+</tbody>
+</table>
+<h2><a href="#live-broadcasts" aria-hidden="true" class="anchor" id="live-broadcasts"></a>Live broadcasts</h2>
+<p>In addition to the repository, we’ve scheduled two “live broadcasts”. These sessions will feature members of the core team discussing and responding to some of the questions that have been asked thus far. Naturally, even if you can’t catch the live broadcast, the video will be available for streaming afterwards. Here is the schedule for these broadcasts:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>PST US</th>
+<th>EST US</th>
+<th>UTC Europe/Africa</th>
+<th>India</th>
+<th>China</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dec 9th (<a href="https://everytimezone.com/s/a0b6bb44">View in my timezone</a>)</td>
+<td>3-4pm</td>
+<td>6-7pm</td>
+<td>23:00-24:00</td>
+<td>4:30-5:30am   (Dec 10)</td>
+<td>7-8am   (Dec 10)</td>
+</tr>
+<tr>
+<td>Dec 12th (<a href="https://everytimezone.com/s/8e88716f">View in my timezone</a>)</td>
+<td>4-5am</td>
+<td>7-8am</td>
+<td>12:00-13:00</td>
+<td>5:30pm-6:30pm</td>
+<td>8-9pm</td>
+</tr>
+</tbody>
+</table>
+<p>These will be hosted on our <a href="https://www.youtube.com/c/rustvideos">YouTube channel</a>.</p>
+<p>We’re very excited about the progress on the Rust foundation and we’re looking forward to hearing from all of you.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

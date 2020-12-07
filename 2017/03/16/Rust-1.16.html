@@ -112,14 +112,54 @@ actually run the binary. <code>cargo check</code> supports exactly this use-case
 checks, but doesn't produce the final binary.</p>
 <p>So how much speedup do you actually get? Like most performance related questions, the answer is &quot;it
 depends.&quot; Here are some very un-scientific benchmarks:</p>
-<p>|                 | thanks  | cargo   | diesel |
-|-----------------|--------:|--------:|-------:|
-| initial build   | 134.75s | 236.78s | 15.27s |
-| initial check   | 50.88s  | 148.52s | 12.81s |
-| speedup         | 2.648   | 1.594   | 1.192  |
-| secondary build | 15.97s  | 64.34s  | 13.54s |
-| secondary check | 2.9s    | 9.29s   | 12.3s  |
-| speedup         | 5.506   | 6.925   | 1.100  |</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="right">thanks</th>
+<th align="right">cargo</th>
+<th align="right">diesel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initial build</td>
+<td align="right">134.75s</td>
+<td align="right">236.78s</td>
+<td align="right">15.27s</td>
+</tr>
+<tr>
+<td>initial check</td>
+<td align="right">50.88s</td>
+<td align="right">148.52s</td>
+<td align="right">12.81s</td>
+</tr>
+<tr>
+<td>speedup</td>
+<td align="right">2.648</td>
+<td align="right">1.594</td>
+<td align="right">1.192</td>
+</tr>
+<tr>
+<td>secondary build</td>
+<td align="right">15.97s</td>
+<td align="right">64.34s</td>
+<td align="right">13.54s</td>
+</tr>
+<tr>
+<td>secondary check</td>
+<td align="right">2.9s</td>
+<td align="right">9.29s</td>
+<td align="right">12.3s</td>
+</tr>
+<tr>
+<td>speedup</td>
+<td align="right">5.506</td>
+<td align="right">6.925</td>
+<td align="right">1.100</td>
+</tr>
+</tbody>
+</table>
 <p>The 'initial' categories are the first build after cloning down a project. The 'secondary' categories
 involved adding one blank line to the top of <code>src\lib.rs</code> and running the command again. That's why
 the initial ones are more dramatic; they involve also doing this for all dependencies, as well as
