@@ -38,9 +38,9 @@ Here are the times that we’ve scheduled for folks to pose questions.
 
 |                                                 | PST US | EST US | UTC Europe/Africa  | India                   | China            |
 |-------------------------------------------------|--------|--------|--------------------|-------------------------|------------------|
-| Dec 7th ([View in my timezone][dec7-session])   | 3-6pm  | 6-9pm  | 23:00-2:00 (Dec 8) | 1:30am-4:30am (Dec 8)   | 3pm-6am (Dec 8)  |
+| Dec 7th ([View in my timezone][dec7-session])   | 3-6pm  | 6-9pm  | 23:00-2:00         | 4:30am-7:30am (Dec 8)   | 7am-10am (Dec 8) |
 | Dec 9th ([View in my timezone][dec9-session])   | 4-7am  | 7-10am | 12:00-15:00        | 5:30-8:30pm             | 8pm-11pm         |
-| Dec 11th ([View in my timezone][dec11-session]) | 1-4pm  | 10-1pm | 18:00-21:00        | 11:30pm-2:30am (Dec 12) | 2am-5am (Dec 12) |
+| Dec 11th ([View in my timezone][dec11-session]) | 10-1pm | 1-4pm  | 18:00-21:00        | 11:30pm-2:30am          | 2am-5am (Dec 12) |
 
 ## Live broadcasts
 
