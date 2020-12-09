@@ -46,10 +46,10 @@ Here are the times that we’ve scheduled for folks to pose questions.
 
 In addition to the repository, we’ve scheduled two “live broadcasts”. These sessions will feature members of the core team discussing and responding to some of the questions that have been asked thus far. Naturally, even if you can’t catch the live broadcast, the video will be available for streaming afterwards. Here is the schedule for these broadcasts:
 
-|                                                   | PST US | EST US | UTC Europe/Africa  | India                   | China            |
-|---------------------------------------------------|--------|--------|--------------------|-------------------------|------------------|
-| Dec 9th ([View in my timezone][dec9-broadcast])   | 3-4pm  | 6-7pm  | 23:00-24:00        | 4:30-5:30am   (Dec 10)  | 7-8am   (Dec 10) |
-| Dec 12th ([View in my timezone][dec12-broadcast]) | 4-5am  | 7-8am  | 12:00-13:00        | 5:30pm-6:30pm           | 8-9pm            |
+|                                                   |                            | PST US | EST US | UTC Europe/Africa  | India                   | China            |
+|---------------------------------------------------|----------------------------|--------|--------|--------------------|-------------------------|------------------|
+| Dec 9th ([View in my timezone][dec9-broadcast])   | [Watch on YouTube][live-1] | 3-4pm  | 6-7pm  | 23:00-24:00        | 4:30-5:30am   (Dec 10)  | 7-8am   (Dec 10) |
+| Dec 12th ([View in my timezone][dec11-broadcast]) | [Watch on YouTube][live-2] | 4-5am  | 7-8am  | 12:00-13:00        | 5:30pm-6:30pm           | 8-9pm            |
 
 These will be hosted on our [YouTube channel].
 
@@ -65,3 +65,6 @@ We’re very excited about the progress on the Rust foundation and we’re looki
 [dec11-session]: https://everytimezone.com/s/3c5c1b75
 [dec9-broadcast]: https://everytimezone.com/s/a0b6bb44
 [dec12-broadcast]: https://everytimezone.com/s/8e88716f
+
+[live-1]: https://www.youtube.com/watch?v=OmEcRWyT6Ak
+[live-2]: https://www.youtube.com/watch?v=42ZWHYWv9Ic
