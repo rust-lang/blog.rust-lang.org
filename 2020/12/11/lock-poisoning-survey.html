@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Launching the Lock Poisoning Survey | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Launching the Lock Poisoning Survey | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Launching the Lock Poisoning Survey | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Launching the Lock Poisoning Survey" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Launching the Lock Poisoning Survey</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 11, 2020 &middot; Ashley Mannix
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/library">The Libs team</a> 
+    </div>
+
+    <div class="post">
+      <p>The Libs team is looking at how we can improve the <code>std::sync</code> module, by potentially splitting it up into new modules and making some changes to APIs along the way.
+One of those API changes we're looking at is non-poisoning implementations of <code>Mutex</code> and <code>RwLock</code>.
+To find the best path forward we're conducting a survey to get a clearer picture of how the standard locks are used out in the wild.</p>
+<p>The survey is a Google Form.
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSehk-GkwoCag_w3YfXDfgeANulR0h5m2d3EzUMQaiY1vRfIEw/viewform">You can fill it out here</a>.</p>
+<h3><a href="#what-is-this-survey-for" aria-hidden="true" class="anchor" id="what-is-this-survey-for"></a>What is this survey for?</h3>
+<p>The survey is intended to answer the following questions:</p>
+<ul>
+<li>When is poisoning on <code>Mutex</code> and <code>RwLock</code> being used deliberately.</li>
+<li>Whether <code>Mutex</code> and <code>RwLock</code> (and their guard types) appear in the public API of libraries.</li>
+<li>How much friction there is switching from the poisoning <code>Mutex</code> and <code>RwLock</code> locks to non-poisoning ones (such as from <code>antidote</code> or <code>parking_lot</code>).</li>
+</ul>
+<p>This information will then inform an RFC that will set out a path to non-poisoning locks in the standard library.
+It may also give us a starting point for looking at the tangentially related <code>UnwindSafe</code> and <code>RefUnwindSafe</code> traits for panic safety.</p>
+<h3><a href="#who-is-this-survey-for" aria-hidden="true" class="anchor" id="who-is-this-survey-for"></a>Who is this survey for?</h3>
+<p>If you write code that uses locks then this survey is for you.
+That includes the standard library's <code>Mutex</code> and <code>RwLock</code> as well as locks from <code>crates.io</code>, such as <code>antidote</code>, <code>parking_lot</code>, and <code>tokio::sync</code>.</p>
+<h3><a href="#so-what-is-poisoning-anyway" aria-hidden="true" class="anchor" id="so-what-is-poisoning-anyway"></a>So what is poisoning anyway?</h3>
+<p>Let's say you have an <code>Account</code> that can update its balance:</p>
+<pre><code class="language-rust">impl Account {
+    pub fn update_balance(&amp;mut self, change: i32) {
+        self.balance += change;
+        self.changes.push(change);
+    }
+}
+</code></pre>
+<p>Let's also say we have the invariant that <code>balance == changes.sum()</code>.
+We'll call this the <em>balance invariant</em>.
+So at any point when interacting with an <code>Account</code> you can always depend on its <code>balance</code> being the sum of its <code>changes</code>, thanks to the balance invariant.</p>
+<p>There's a point in our <code>update_balance</code> method where the balance invariant isn't maintained though:</p>
+<pre><code class="language-rust">impl Account {
+    pub fn update_balance(&amp;mut self, change: i32) {
+        self.balance += change;
+//      self.balance != self.changes.sum()
+        self.changes.push(change);
+    }
+}
+</code></pre>
+<p>That seems ok, because we're in the middle of a method with exclusive access to our <code>Account</code> and everything is back to good when we return.
+There isn't a <code>Result</code> or <code>?</code> to be seen so we know there's no chance of an early return before the balance invariant is restored. Or so we think.</p>
+<p>What if <code>self.changes.push</code> didn't return normally?
+What if it panicked instead without actually doing anything?
+Then we'd return from <code>update_balance</code> early without restoring the balance invariant.
+That seems ok too, because a panic will start unwinding the thread it was called from, leaving no trace of any data it owned behind.
+Ignoring the <code>Drop</code> trait, no data means no broken invariants.
+Problem solved, right?</p>
+<p>What if our <code>Account</code> wasn't owned by that thread that panicked?
+What if it was shared with other threads as a <code>Arc&lt;Mutex&lt;Account&gt;&gt;</code>?
+Unwinding one thread isn't going to protect other threads that could still access the <code>Account</code>, and they're not going to know that it's now invalid.</p>
+<p>This is where poisoning comes in.
+The <code>Mutex</code> and <code>RwLock</code> types in the standard library use a strategy that makes panics (and by extension the possibility for broken invariants) observable.
+The next consumer of the lock, such as another thread that didn't unwind, can decide at that point what to do about it.
+This is done by storing a switch in the lock itself that's flipped when a panic causes a thread to unwind through its guard.
+Once that switch is flipped the lock is considered <em>poisoned</em>, and the next attempt to acquire it will receive an error instead of a guard.</p>
+<p>The standard approach for dealing with a poisoned lock is to propagate the panic to the current thread by unwrapping the error it returns:</p>
+<pre><code class="language-rust">let mut guard = shared.lock().unwrap();
+</code></pre>
+<p>That way nobody can ever observe the possibly violated balance invariant on our shared <code>Account</code>.</p>
+<p>That sounds great! So why would we want to remove it?</p>
+<h3><a href="#whats-wrong-with-lock-poisoning" aria-hidden="true" class="anchor" id="whats-wrong-with-lock-poisoning"></a>What's wrong with lock poisoning?</h3>
+<p>There's nothing wrong with poisoning itself.
+It's an excellent pattern for dealing with failures that can leave behind unworkable state.
+The question we're really asking is whether it should be used by the <em>standard locks</em>, which are <code>std::sync::Mutex</code> and <code>std::sync::RwLock</code>.
+We're asking whether it's a standard lock's job to implement poisoning. Just to avoid any confusion, we'll distinguish the poisoning pattern from the API of the standard locks by calling the former <em>poisoning</em> and the latter <em>lock poisoning</em>.
+We're just talking about lock poisoning.</p>
+<p>In the previous section we motivated poisoning as a way to protect us from possibly broken invariants.
+Lock poisoning isn't actually a tool for doing this in the way you might think.
+In general, a poisoned lock can't tell whether or not any invariants are <em>actually</em> broken.
+It assumes that a lock is shared, so is likely going to outlive any individual thread that can access it.
+It also assumes that if a panic leaves any data behind then it's more likely to be left in an unexpected state, because panics aren't part of normal control flow in Rust.
+Everything <em>could</em> be fine after a panic, but the standard lock can't guarantee it.
+Since there's no guarantee there's an escape hatch.
+We can always still get access to the state guarded by a poisoned lock:</p>
+<pre><code class="language-rust">let mut guard = shared.lock().unwrap_or_else(|err| err.into_inner());
+</code></pre>
+<p>All Rust code needs to remain free from any possible undefined behavior in the presence of panics, so ignoring panics is always safe.
+Rust doesn't try guarantee all safe code is free from logic bugs, so broken invariants that don't potentially lead to undefined behavior aren't strictly considered unsafe.
+Since ignoring lock poisoning is also always safe it doesn't really give you a dependable tool to protect state from panics.
+You can always ignore it.</p>
+<p>So lock poisoning doesn't give you a tool for guaranteeing safety in the presence of panics.
+What it does give you is a way to propagate those panics to other threads.
+The machinery needed to do this adds costs to using the standard locks.
+There's an ergonomic cost in having to call <code>.lock().unwrap()</code>, and a runtime cost in having to actually track state for panics.</p>
+<p>With the standard locks you pay those costs whether you need to or not.
+That's not typically how APIs in the standard library work.
+Instead, you compose costs together so you only pay for what you need.
+Should it be a standard lock's job to synchronize access <em>and</em> propagate panics?
+We're not so sure it is.
+If it's not then what should we do about it?
+That's where the survey comes in.
+We'd like to get a better idea of how you use locks and poisoning in your projects to help decide what to do about lock poisoning.
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSehk-GkwoCag_w3YfXDfgeANulR0h5m2d3EzUMQaiY1vRfIEw/viewform">You can fill it out here</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

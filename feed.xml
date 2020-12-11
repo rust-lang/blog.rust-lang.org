@@ -10,8 +10,113 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-12-09T23:32:03+00:00</updated>
+    <updated>2020-12-11T14:15:26+00:00</updated>
 
+    
+    <entry>
+        <title>Launching the Lock Poisoning Survey</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/12/11/lock-poisoning-survey.html" type="text/html" title="Launching the Lock Poisoning Survey" />
+        <published>2020-12-11T00:00:00+00:00</published>
+        <updated>2020-12-11T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/12/11/lock-poisoning-survey.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/12/11/lock-poisoning-survey.html">&lt;p&gt;The Libs team is looking at how we can improve the &lt;code&gt;std::sync&lt;/code&gt; module, by potentially splitting it up into new modules and making some changes to APIs along the way.
+One of those API changes we&#x27;re looking at is non-poisoning implementations of &lt;code&gt;Mutex&lt;/code&gt; and &lt;code&gt;RwLock&lt;/code&gt;.
+To find the best path forward we&#x27;re conducting a survey to get a clearer picture of how the standard locks are used out in the wild.&lt;/p&gt;
+&lt;p&gt;The survey is a Google Form.
+&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSehk-GkwoCag_w3YfXDfgeANulR0h5m2d3EzUMQaiY1vRfIEw/viewform&quot;&gt;You can fill it out here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#what-is-this-survey-for&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-this-survey-for&quot;&gt;&lt;/a&gt;What is this survey for?&lt;/h3&gt;
+&lt;p&gt;The survey is intended to answer the following questions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;When is poisoning on &lt;code&gt;Mutex&lt;/code&gt; and &lt;code&gt;RwLock&lt;/code&gt; being used deliberately.&lt;/li&gt;
+&lt;li&gt;Whether &lt;code&gt;Mutex&lt;/code&gt; and &lt;code&gt;RwLock&lt;/code&gt; (and their guard types) appear in the public API of libraries.&lt;/li&gt;
+&lt;li&gt;How much friction there is switching from the poisoning &lt;code&gt;Mutex&lt;/code&gt; and &lt;code&gt;RwLock&lt;/code&gt; locks to non-poisoning ones (such as from &lt;code&gt;antidote&lt;/code&gt; or &lt;code&gt;parking_lot&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This information will then inform an RFC that will set out a path to non-poisoning locks in the standard library.
+It may also give us a starting point for looking at the tangentially related &lt;code&gt;UnwindSafe&lt;/code&gt; and &lt;code&gt;RefUnwindSafe&lt;/code&gt; traits for panic safety.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#who-is-this-survey-for&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;who-is-this-survey-for&quot;&gt;&lt;/a&gt;Who is this survey for?&lt;/h3&gt;
+&lt;p&gt;If you write code that uses locks then this survey is for you.
+That includes the standard library&#x27;s &lt;code&gt;Mutex&lt;/code&gt; and &lt;code&gt;RwLock&lt;/code&gt; as well as locks from &lt;code&gt;crates.io&lt;/code&gt;, such as &lt;code&gt;antidote&lt;/code&gt;, &lt;code&gt;parking_lot&lt;/code&gt;, and &lt;code&gt;tokio::sync&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#so-what-is-poisoning-anyway&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;so-what-is-poisoning-anyway&quot;&gt;&lt;/a&gt;So what is poisoning anyway?&lt;/h3&gt;
+&lt;p&gt;Let&#x27;s say you have an &lt;code&gt;Account&lt;/code&gt; that can update its balance:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;impl Account {
+    pub fn update_balance(&amp;amp;mut self, change: i32) {
+        self.balance +&#x3D; change;
+        self.changes.push(change);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let&#x27;s also say we have the invariant that &lt;code&gt;balance &#x3D;&#x3D; changes.sum()&lt;/code&gt;.
+We&#x27;ll call this the &lt;em&gt;balance invariant&lt;/em&gt;.
+So at any point when interacting with an &lt;code&gt;Account&lt;/code&gt; you can always depend on its &lt;code&gt;balance&lt;/code&gt; being the sum of its &lt;code&gt;changes&lt;/code&gt;, thanks to the balance invariant.&lt;/p&gt;
+&lt;p&gt;There&#x27;s a point in our &lt;code&gt;update_balance&lt;/code&gt; method where the balance invariant isn&#x27;t maintained though:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;impl Account {
+    pub fn update_balance(&amp;amp;mut self, change: i32) {
+        self.balance +&#x3D; change;
+//      self.balance !&#x3D; self.changes.sum()
+        self.changes.push(change);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That seems ok, because we&#x27;re in the middle of a method with exclusive access to our &lt;code&gt;Account&lt;/code&gt; and everything is back to good when we return.
+There isn&#x27;t a &lt;code&gt;Result&lt;/code&gt; or &lt;code&gt;?&lt;/code&gt; to be seen so we know there&#x27;s no chance of an early return before the balance invariant is restored. Or so we think.&lt;/p&gt;
+&lt;p&gt;What if &lt;code&gt;self.changes.push&lt;/code&gt; didn&#x27;t return normally?
+What if it panicked instead without actually doing anything?
+Then we&#x27;d return from &lt;code&gt;update_balance&lt;/code&gt; early without restoring the balance invariant.
+That seems ok too, because a panic will start unwinding the thread it was called from, leaving no trace of any data it owned behind.
+Ignoring the &lt;code&gt;Drop&lt;/code&gt; trait, no data means no broken invariants.
+Problem solved, right?&lt;/p&gt;
+&lt;p&gt;What if our &lt;code&gt;Account&lt;/code&gt; wasn&#x27;t owned by that thread that panicked?
+What if it was shared with other threads as a &lt;code&gt;Arc&amp;lt;Mutex&amp;lt;Account&amp;gt;&amp;gt;&lt;/code&gt;?
+Unwinding one thread isn&#x27;t going to protect other threads that could still access the &lt;code&gt;Account&lt;/code&gt;, and they&#x27;re not going to know that it&#x27;s now invalid.&lt;/p&gt;
+&lt;p&gt;This is where poisoning comes in.
+The &lt;code&gt;Mutex&lt;/code&gt; and &lt;code&gt;RwLock&lt;/code&gt; types in the standard library use a strategy that makes panics (and by extension the possibility for broken invariants) observable.
+The next consumer of the lock, such as another thread that didn&#x27;t unwind, can decide at that point what to do about it.
+This is done by storing a switch in the lock itself that&#x27;s flipped when a panic causes a thread to unwind through its guard.
+Once that switch is flipped the lock is considered &lt;em&gt;poisoned&lt;/em&gt;, and the next attempt to acquire it will receive an error instead of a guard.&lt;/p&gt;
+&lt;p&gt;The standard approach for dealing with a poisoned lock is to propagate the panic to the current thread by unwrapping the error it returns:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let mut guard &#x3D; shared.lock().unwrap();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That way nobody can ever observe the possibly violated balance invariant on our shared &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;That sounds great! So why would we want to remove it?&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#whats-wrong-with-lock-poisoning&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-wrong-with-lock-poisoning&quot;&gt;&lt;/a&gt;What&#x27;s wrong with lock poisoning?&lt;/h3&gt;
+&lt;p&gt;There&#x27;s nothing wrong with poisoning itself.
+It&#x27;s an excellent pattern for dealing with failures that can leave behind unworkable state.
+The question we&#x27;re really asking is whether it should be used by the &lt;em&gt;standard locks&lt;/em&gt;, which are &lt;code&gt;std::sync::Mutex&lt;/code&gt; and &lt;code&gt;std::sync::RwLock&lt;/code&gt;.
+We&#x27;re asking whether it&#x27;s a standard lock&#x27;s job to implement poisoning. Just to avoid any confusion, we&#x27;ll distinguish the poisoning pattern from the API of the standard locks by calling the former &lt;em&gt;poisoning&lt;/em&gt; and the latter &lt;em&gt;lock poisoning&lt;/em&gt;.
+We&#x27;re just talking about lock poisoning.&lt;/p&gt;
+&lt;p&gt;In the previous section we motivated poisoning as a way to protect us from possibly broken invariants.
+Lock poisoning isn&#x27;t actually a tool for doing this in the way you might think.
+In general, a poisoned lock can&#x27;t tell whether or not any invariants are &lt;em&gt;actually&lt;/em&gt; broken.
+It assumes that a lock is shared, so is likely going to outlive any individual thread that can access it.
+It also assumes that if a panic leaves any data behind then it&#x27;s more likely to be left in an unexpected state, because panics aren&#x27;t part of normal control flow in Rust.
+Everything &lt;em&gt;could&lt;/em&gt; be fine after a panic, but the standard lock can&#x27;t guarantee it.
+Since there&#x27;s no guarantee there&#x27;s an escape hatch.
+We can always still get access to the state guarded by a poisoned lock:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let mut guard &#x3D; shared.lock().unwrap_or_else(|err| err.into_inner());
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;All Rust code needs to remain free from any possible undefined behavior in the presence of panics, so ignoring panics is always safe.
+Rust doesn&#x27;t try guarantee all safe code is free from logic bugs, so broken invariants that don&#x27;t potentially lead to undefined behavior aren&#x27;t strictly considered unsafe.
+Since ignoring lock poisoning is also always safe it doesn&#x27;t really give you a dependable tool to protect state from panics.
+You can always ignore it.&lt;/p&gt;
+&lt;p&gt;So lock poisoning doesn&#x27;t give you a tool for guaranteeing safety in the presence of panics.
+What it does give you is a way to propagate those panics to other threads.
+The machinery needed to do this adds costs to using the standard locks.
+There&#x27;s an ergonomic cost in having to call &lt;code&gt;.lock().unwrap()&lt;/code&gt;, and a runtime cost in having to actually track state for panics.&lt;/p&gt;
+&lt;p&gt;With the standard locks you pay those costs whether you need to or not.
+That&#x27;s not typically how APIs in the standard library work.
+Instead, you compose costs together so you only pay for what you need.
+Should it be a standard lock&#x27;s job to synchronize access &lt;em&gt;and&lt;/em&gt; propagate panics?
+We&#x27;re not so sure it is.
+If it&#x27;s not then what should we do about it?
+That&#x27;s where the survey comes in.
+We&#x27;d like to get a better idea of how you use locks and poisoning in your projects to help decide what to do about lock poisoning.
+&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSehk-GkwoCag_w3YfXDfgeANulR0h5m2d3EzUMQaiY1vRfIEw/viewform&quot;&gt;You can fill it out here&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Ashley Mannix</name>
+        </author>
+    </entry>
     
     <entry>
         <title>The Foundation Conversation</title>
@@ -757,95 +862,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.47
 
         <author>
             <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.46.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/08/27/Rust-1.46.0.html" type="text/html" title="Announcing Rust 1.46.0" />
-        <published>2020-08-27T00:00:00+00:00</published>
-        <updated>2020-08-27T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/08/27/Rust-1.46.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/08/27/Rust-1.46.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.46.0. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.46.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/tools/install&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1460-2020-08-27&quot;&gt;detailed release notes for
-1.46.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1460-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1460-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.46.0 stable&lt;/h2&gt;
-&lt;p&gt;This release enables quite a lot of new things to appear in &lt;code&gt;const fn&lt;/code&gt;, two
-new standard library APIs, and one feature useful for library authors. See
-the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1460-2020-08-27&quot;&gt;detailed release notes&lt;/a&gt; to learn about other changes not covered
-by this post.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#const-fn-improvements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-fn-improvements&quot;&gt;&lt;/a&gt;&lt;code&gt;const fn&lt;/code&gt; improvements&lt;/h3&gt;
-&lt;p&gt;There are &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/72437/&quot;&gt;several core language features&lt;/a&gt; you can now use in a &lt;code&gt;const fn&lt;/code&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;if&lt;/code&gt;, &lt;code&gt;if let&lt;/code&gt;, and &lt;code&gt;match&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;while&lt;/code&gt;, &lt;code&gt;while let&lt;/code&gt;, and &lt;code&gt;loop&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;the &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; and &lt;code&gt;||&lt;/code&gt; operators&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;You can also &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73862/&quot;&gt;cast to a slice&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;const fn foo() {
-  let x &#x3D; [1, 2, 3, 4, 5];
-
-  // cast the array to a slice
-  let y: &amp;amp;[_] &#x3D; &amp;amp;x;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;While these features may not feel &lt;em&gt;new&lt;/em&gt;, given that you could use them all
-outside of &lt;code&gt;const fn&lt;/code&gt;, they add a lot of compile-time computation power! As
-an example, the &lt;a href&#x3D;&quot;https://github.com/rylev/const-sha1&quot;&gt;&lt;code&gt;const-sha1&lt;/code&gt; crate&lt;/a&gt; can let you compute SHA-1 hashes
-at compile time. This led to a &lt;a href&#x3D;&quot;https://github.com/microsoft/winrt-rs/pull/279#issuecomment-668436700&quot;&gt;40x performance improvement&lt;/a&gt; in
-Microsoft&#x27;s WinRT bindings for Rust.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#track_caller&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;track_caller&quot;&gt;&lt;/a&gt;&lt;code&gt;#[track_caller]&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;Back in March, the release of Rust 1.42 introduced &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/03/12/Rust-1.42.html#useful-line-numbers-in-option-and-result-panic-messages&quot;&gt;better error messages when &lt;code&gt;unwrap&lt;/code&gt; and related functions would panic&lt;/a&gt;. At the time, we mentioned that the way
-this was implemented was not yet stable. Rust 1.46 stabilizes this feature.&lt;/p&gt;
-&lt;p&gt;This attribute is called &lt;code&gt;#[track_caller]&lt;/code&gt;, which was originally proposed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2091&quot;&gt;RFC 2091&lt;/a&gt; way back in July of 2017! If you&#x27;re writing a function
-like &lt;code&gt;unwrap&lt;/code&gt; that may panic, you can put this annotation on your functions,
-and the default panic formatter will use its caller as the location in its
-error message. For example, here is &lt;code&gt;unwrap&lt;/code&gt; previously:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub fn unwrap(self) -&amp;gt; T {
-    match self {
-        Some(val) &#x3D;&amp;gt; val,
-        None &#x3D;&amp;gt; panic!(&amp;quot;called &#x60;Option::unwrap()&#x60; on a &#x60;None&#x60; value&amp;quot;),
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It now looks like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[track_caller]
-pub fn unwrap(self) -&amp;gt; T {
-    match self {
-        Some(val) &#x3D;&amp;gt; val,
-        None &#x3D;&amp;gt; panic!(&amp;quot;called &#x60;Option::unwrap()&#x60; on a &#x60;None&#x60; value&amp;quot;),
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That&#x27;s it!&lt;/p&gt;
-&lt;p&gt;If you are implementing a panic hook yourself, you can use the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/panic/struct.Location.html#method.caller&quot;&gt;caller&lt;/a&gt; method
-on &lt;code&gt;std::panic::Location&lt;/code&gt; to get access to this information.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#library-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
-&lt;p&gt;Keeping with the theme of &lt;code&gt;const fn&lt;/code&gt; improvements, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73887/&quot;&gt;&lt;code&gt;std::mem::forget&lt;/code&gt; is now
-a &lt;code&gt;const fn&lt;/code&gt;&lt;/a&gt;. Additionally, two new APIs were stabilized this release:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.zip&quot;&gt;&lt;code&gt;Option::zip&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/vec/struct.Drain.html#method.as_slice&quot;&gt;&lt;code&gt;vec::Drain::as_slice&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1460-2020-08-27&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.46.0 release: check out what changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1460-2020-08-27&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-146-2020-08-27&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-146&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1460&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1460&quot;&gt;&lt;/a&gt;Contributors to 1.46.0&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.46.0. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.46.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
