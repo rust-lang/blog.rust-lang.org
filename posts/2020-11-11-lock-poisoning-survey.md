@@ -5,8 +5,6 @@ author: Ashley Mannix
 team: The Libs team <https://www.rust-lang.org/governance/teams/library>
 ---
 
-It's survey season!
-
 The Libs team is looking at how we can improve the `std::sync` module, by potentially splitting it up into new modules and making some changes to APIs along the way.
 One of those API changes we're looking at is non-poisoning implementations of `Mutex` and `RwLock`.
 To find the best path forward we're conducting a survey to get a clearer picture of how the standard locks are used out in the wild.
