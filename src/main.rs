@@ -185,7 +185,7 @@ impl<'a> Generator<'a> {
             })
             .collect();
         let data = Releases {
-            releases: releases,
+            releases,
             feed_updated: chrono::Utc::now().with_nanosecond(0).unwrap().to_rfc3339(),
         };
         fs::write(
