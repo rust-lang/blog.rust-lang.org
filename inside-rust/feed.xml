@@ -10,8 +10,30 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-12-13T13:28:05+00:00</updated>
+    <updated>2020-12-14T19:09:54+00:00</updated>
 
+    
+    <entry>
+        <title>Changes to Rust compiler team</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/12/14/changes-to-compiler-team.html" type="text/html" title="Changes to Rust compiler team" />
+        <published>2020-12-14T00:00:00+00:00</published>
+        <updated>2020-12-14T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2020/12/14/changes-to-compiler-team.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/12/14/changes-to-compiler-team.html">&lt;p&gt;There have been important changes recently to the Rust compiler team.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#leadership-rotation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;leadership-rotation&quot;&gt;&lt;/a&gt;Leadership Rotation&lt;/h2&gt;
+&lt;p&gt;Here is something very new for our team: We are rotating the leadership. Niko Matsakis will be stepping down from their role as co-lead, and Wesley Wiser will be joining Felix Klock as the co-leads for the team.&lt;/p&gt;
+&lt;p&gt;Niko remains a compiler team member and will continue his contributions, especially on the RFC 2229, Polonius and Chalk projects. &lt;a href&#x3D;&quot;https://smallcultfollowing.com/babysteps/blog/2020/12/11/rotating-the-compiler-team-leads/&quot;&gt;Niko&#x27;s blog post&lt;/a&gt; discusses their motivations for stepping down in more detail.&lt;/p&gt;
+&lt;p&gt;Wesley has been contributing to Rust since 2015, and became a compiler team member in 2019. Wesley has contributed heavily to the compiler&#x27;s &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/02/25/intro-rustc-self-profile.html&quot;&gt;&lt;code&gt;self-profile&lt;/code&gt; infrastructure&lt;/a&gt;, to its collection of &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2019/12/02/const-prop-on-by-default.html&quot;&gt;MIR optimizations&lt;/a&gt;, and to its const-eval and incremental compilation subsystems. Wesley has also already proven himself as an effective leader: they are currently co-lead of several working groups: wg-incr-comp, wg-prioritization, and wg-self-profile.&lt;/p&gt;
+&lt;p&gt;Niko and I are delighted that Wesley is taking on this new leadership role, and I look forward to steering the compiler alongside them.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#membership-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;membership-changes&quot;&gt;&lt;/a&gt;Membership Changes&lt;/h2&gt;
+&lt;p&gt;In addition to the changes in leadership, we also have a new compiler team member to announce: lcnr.&lt;/p&gt;
+&lt;p&gt;lcnr has been contributing to the compiler since 2018. They have improved the type system via changes such as higher-ranked lifetimes in predicates (&lt;a href&#x3D;&quot;rust-lang/rust#73503&quot;&gt;#73503&lt;/a&gt;), and also have focused for the past two years on improving Rust&#x27;s support for complex generic expressions in constants (tracked at &lt;a href&#x3D;&quot;rust-lang/rust#76560&quot;&gt;#76560&lt;/a&gt;)&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Felix S. Klock II</name>
+        </author>
+    </entry>
     
     <entry>
         <title>What the Error Handling Project Group is Working On</title>
@@ -628,50 +650,6 @@ from the community in figuring out a resolution to that bug.&lt;/p&gt;
 
         <author>
             <name>Mark Rousskov</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing the Portable SIMD Project Group</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/09/29/Portable-SIMD-PG.html" type="text/html" title="Announcing the Portable SIMD Project Group" />
-        <published>2020-09-29T00:00:00+00:00</published>
-        <updated>2020-09-29T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/09/29/Portable-SIMD-PG.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/09/29/Portable-SIMD-PG.html">&lt;p&gt;We&#x27;re announcing the start of the &lt;em&gt;Portable SIMD Project Group&lt;/em&gt; within the Libs team. This group is dedicated to making a portable SIMD API available to stable Rust users.&lt;/p&gt;
-&lt;p&gt;The Portable SIMD Project Group is lead by &lt;a href&#x3D;&quot;https://github.com/calebzulawski&quot;&gt;@calebzulawski&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/Lokathor&quot;&gt;@Lokathor&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/workingjubilee&quot;&gt;@workingjubilee&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#what-are-project-groups&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-are-project-groups&quot;&gt;&lt;/a&gt;What are project groups?&lt;/h2&gt;
-&lt;p&gt;Rust uses &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2856-project-groups.html&quot;&gt;project groups&lt;/a&gt; to help coordinate work.
-They&#x27;re a place for people to get involved in helping shape the parts of Rust that matter to them.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-simd&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-simd&quot;&gt;&lt;/a&gt;What is SIMD?&lt;/h2&gt;
-&lt;p&gt;SIMD stands for Single Instruction, Multiple Data.
-It lets the CPU apply a single instruction to a &amp;quot;vector&amp;quot; of data.
-The vector is a single extra-wide CPU register made of multiple &amp;quot;lanes&amp;quot; of the same data type.
-You can think of it as being &lt;em&gt;similar&lt;/em&gt; to an array.
-Instead of processing each lane individually, all lanes have the same operation applied &lt;em&gt;simultaneously&lt;/em&gt;.
-This lets you transform data much faster than with standard code.
-Not every problem can be accelerated with &amp;quot;vectorized&amp;quot; code, but for multimedia and list-processing applications there can be significant gains.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#why-do-you-need-to-make-it-portable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;why-do-you-need-to-make-it-portable&quot;&gt;&lt;/a&gt;Why do you need to make it portable?&lt;/h2&gt;
-&lt;p&gt;Different chip vendors offer different SIMD instructions.
-Some of these are available in Rust&#x27;s &lt;a href&#x3D;&quot;https://doc.rust-lang.org/core/arch/index.html&quot;&gt;&lt;code&gt;std::arch&lt;/code&gt;&lt;/a&gt; module.
-You &lt;em&gt;can&lt;/em&gt; build vectorized functions using that, but at the cost of maintaining a different version for each CPU you want to support.
-You can also &lt;em&gt;not&lt;/em&gt; write vectorized operations and hope that LLVM&#x27;s optimizations will &amp;quot;auto-vectorize&amp;quot; your code.
-However, the auto-vectorizer is easily confused and can fail to optimize &amp;quot;obvious&amp;quot; vector tasks.&lt;/p&gt;
-&lt;p&gt;The portable SIMD API will enable writing SIMD code just once using a high-level API.
-By explicitly communicating your intent to the compiler, it&#x27;s better able to generate the best possible final code.
-This is still only a best-effort process.
-If your target doesn&#x27;t support a desired operation in SIMD, the compiler will fall back to using scalar code, processing one lane at a time.
-The details of what&#x27;s available depend on the build target.&lt;/p&gt;
-&lt;p&gt;We intend to release the Portable SIMD API as &lt;code&gt;std::simd&lt;/code&gt;.
-We will cover as many use cases as we can, but it might still be appropriate for you to use &lt;code&gt;std::arch&lt;/code&gt; directly.
-For that reason the &lt;code&gt;std::simd&lt;/code&gt; types will also be easily convertable to &lt;code&gt;std::arch&lt;/code&gt; types where needed.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#how-can-i-get-involved&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-can-i-get-involved&quot;&gt;&lt;/a&gt;How can I get involved?&lt;/h2&gt;
-&lt;p&gt;Everyone can get involved!
-No previous experience necessary.
-If you&#x27;d like to help make portable SIMD a reality you can visit our &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-portable-simd&quot;&gt;GitHub repository&lt;/a&gt; or reach out on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/257879-project-portable-simd&quot;&gt;Zulip&lt;/a&gt; and say hi! :wave:&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Jubilee and Lokathor</name>
         </author>
     </entry>
     
