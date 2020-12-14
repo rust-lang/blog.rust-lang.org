@@ -47,6 +47,6 @@ The code for rustdoc is in [the main Rust repository](https://github.com/rust-la
 
 ## Where to get in contact
 
-The official channel for day to day conversations will be soon on Zulip at the [#rustdoc stream](https://rust-lang.zulipchat.com/#narrow/stream/266220-rustdoc). If you happen to be on [Discord](https://discord.gg/4yEYPuT), there is also the channel there.
+The official channel for day to day conversations is on Zulip at the [#rustdoc stream](https://rust-lang.zulipchat.com/#narrow/stream/266220-rustdoc). If you happen to be on [Discord](https://discord.gg/4yEYPuT), there is also the channel there.
 
 The team is looking forward to welcoming new contributors, so roll up your sleeves, get involved and dive straight into the center of the Rust ecosystem!
