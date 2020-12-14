@@ -10,8 +10,32 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-12-14T19:09:52+00:00</updated>
+    <updated>2020-12-14T19:24:12+00:00</updated>
 
+    
+    <entry>
+        <title>Next steps for the Foundation Conversation</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/12/14/Next-steps-for-the-foundation-conversation.html" type="text/html" title="Next steps for the Foundation Conversation" />
+        <published>2020-12-14T00:00:00+00:00</published>
+        <updated>2020-12-14T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/12/14/Next-steps-for-the-foundation-conversation.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/12/14/Next-steps-for-the-foundation-conversation.html">&lt;p&gt;Last week we kicked off the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/12/07/the-foundation-conversation.html&quot;&gt;Foundation Conversation&lt;/a&gt;, a week-long period of Q&amp;amp;A forums and live broadcasts with the goal of explaining our vision for the Foundation and finding out what sorts of questions people had. We used those questions to help build a &lt;a href&#x3D;&quot;https://github.com/rust-lang/foundation-faq-2020/blob/main/FAQ.md&quot;&gt;draft Foundation FAQ&lt;/a&gt;, and if you’ve not seen it yet, you should definitely take a look -- it’s chock full of good information. Thanks to everyone for asking such great questions!&lt;/p&gt;
+&lt;p&gt;We’ve created a &lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSfeq4L0Rk6yXzGS19A6qLo4hpLlQiJh1nYFHsRJ9MrxO6k4iQ/viewform&quot;&gt;new survey&lt;/a&gt; that asks about how people experienced the Foundation Conversation. Please take a moment to &lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSfeq4L0Rk6yXzGS19A6qLo4hpLlQiJh1nYFHsRJ9MrxO6k4iQ/viewform&quot;&gt;fill it out&lt;/a&gt;! We’re planning a similar event for this January, so your feedback will be really helpful.&lt;/p&gt;
+&lt;p&gt;This post is going to discuss how the Foundation and the Rust project relate to one another.&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#what-is-the-central-purpose-of-the-foundation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-the-central-purpose-of-the-foundation&quot;&gt;&lt;/a&gt;What is the central purpose of the Foundation?&lt;/h1&gt;
+&lt;p&gt;At its core, &lt;em&gt;the mission of the Foundation is to empower the Rust maintainers to joyfully do their best work&lt;/em&gt;. We think of the Foundation as working with the teams, helping them to create the scaffolding that people need to contribute and participate in the Rust project.&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#the-scope-and-role-of-the-rust-teams-does-not-change&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-scope-and-role-of-the-rust-teams-does-not-change&quot;&gt;&lt;/a&gt;The scope and role of the Rust teams does not change&lt;/h1&gt;
+&lt;p&gt;For most Rust teams, the creation of the Foundation doesn’t change anything about the scope of their work and decision making authority. The compiler team is still going to be maintaining the compiler, the community team will still be helping coordinate and mentor community events, and so forth. One exception is the Rust core team: there are various legal details that we expect to off-load onto the Foundation.&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#let-the-rust-teams-be-their-best-selves&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;let-the-rust-teams-be-their-best-selves&quot;&gt;&lt;/a&gt;Let the Rust teams be their best selves&lt;/h1&gt;
+&lt;p&gt;We are really excited for all the things that the Foundation will make possible for the Rust teams. We hope to draw on the Foundation to target some of the hardest problems in running an open-source project. We’re thinking of programs like offering training for maintainers, assistance with product and program management, access to trained mediators for conflict management, as well as facilitating events to help contributors get more high bandwidth communication (assuming, that is, we’re ever allowed to leave our houses again).&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#what-comes-next&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-comes-next&quot;&gt;&lt;/a&gt;What comes next&lt;/h1&gt;
+&lt;p&gt;This last week has been intense -- we calculated about 60 person hours of sync time answering questions -- and it’s been really valuable. The questions that everyone asked really helped us to refine and sharpen our thinking. For the remainder of the year we are going to be working hard on finalizing the details of the Foundation. We expect to launch the Foundation officially early next year! In the meantime, remember to fill out our &lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSfeq4L0Rk6yXzGS19A6qLo4hpLlQiJh1nYFHsRJ9MrxO6k4iQ/viewform&quot;&gt;survey&lt;/a&gt;!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Core Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Launching the Lock Poisoning Survey</title>
@@ -799,69 +823,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.47
 
         <author>
             <name>The Rust Community Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Planning the 2021 Roadmap</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/09/03/Planning-2021-Roadmap.html" type="text/html" title="Planning the 2021 Roadmap" />
-        <published>2020-09-03T00:00:00+00:00</published>
-        <updated>2020-09-03T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/09/03/Planning-2021-Roadmap.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/09/03/Planning-2021-Roadmap.html">&lt;p&gt;The core team is beginning to think about the 2021 Roadmap, and we want to hear from the community. We’re going to be running two parallel efforts over the next several weeks: the 2020 Rust Survey, to be announced next week, and a call for blog posts.&lt;/p&gt;
-&lt;p&gt;Blog posts can contain anything related to Rust: language features, tooling improvements, organizational changes, ecosystem needs — everything is in scope. We encourage you to try to identify themes or broad areas into which your suggestions fit in, because these help guide the project as a whole.&lt;/p&gt;
-&lt;p&gt;One way of helping us understand the lens you&#x27;re looking at Rust through is to give one (or more) statements of the form &amp;quot;As a X I want Rust to Y because Z&amp;quot;. These then may provide motivation behind items you call out in your post. Some examples might be:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&amp;quot;As a day-to-day Rust developer, I want Rust to make consuming libraries a better experience so that I can more easily take advantage of the ecosystem&amp;quot;&lt;/li&gt;
-&lt;li&gt;&amp;quot;As an embedded developer who wants to grow the niche, I want Rust to make end-to-end embedded development easier so that newcomers can get started more easily&amp;quot;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;This year, to make sure we don’t miss anything, when you write a post please submit it into &lt;a href&#x3D;&quot;https://forms.gle/Hv41uA5qJEY89XRm7&quot;&gt;this google form&lt;/a&gt;! We will try to look at posts not submitted via this form, too, but posts submitted here aren’t going to be missed. Any platform — from blogs to GitHub gists — is fine! We plan to close the form on October 5th.&lt;/p&gt;
-&lt;p&gt;To give you some context for the upcoming year, we established these high-level goals for 2020, and we wanted to take a look back at the first part of the year. We’ve made some excellent progress!&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Prepare for a possible Rust 2021 Edition&lt;/li&gt;
-&lt;li&gt;Follow-through on in-progress designs and efforts&lt;/li&gt;
-&lt;li&gt;Improve project functioning and governance&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#prepare-for-a-possible-rust-2021-edition&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;prepare-for-a-possible-rust-2021-edition&quot;&gt;&lt;/a&gt;Prepare for a possible Rust 2021 Edition&lt;/h2&gt;
-&lt;p&gt;There is now an &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2966&quot;&gt;open RFC&lt;/a&gt; proposing a plan for the 2021 edition! There has been quite a bit of discussion, but we hope to have it merged within the next 6 weeks. The plan is for the new edition to be much smaller in scope than Rust 2018. It it is expected to include a few minor tweaks to improve language usability, along with the promotion of various edition idiom lints (like requiring &lt;code&gt;dyn Trait&lt;/code&gt; over &lt;code&gt;Trait&lt;/code&gt;) so that they will be “deny by default”. We believe that we are on track for being able to produce an edition in 2021.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#follow-through-on-in-progress-designs-and-efforts&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;follow-through-on-in-progress-designs-and-efforts&quot;&gt;&lt;/a&gt;Follow-through on in-progress designs and efforts&lt;/h2&gt;
-&lt;p&gt;One of our goals for 2020 was to push “in progress” design efforts through to completion. We’ve seen a lot of efforts in this direction:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The inline assembly RFC has &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2873-inline-asm.html&quot;&gt;merged&lt;/a&gt; and new implementation ready for experimentation&lt;/li&gt;
-&lt;li&gt;Procedural macros have been stabilized in most positions &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/07/16/Rust-1.45.0.html#stabilizing-function-like-procedural-macros-in-expressions-patterns-and-statements&quot;&gt;as of Rust 1.45&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;There is a proposal for a MVP of const generics, which we’re hoping to &lt;a href&#x3D;&quot;https://without.boats/blog/shipping-const-generics/&quot;&gt;ship in 2020&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;The async foundations group is expecting to post an RFC on the &lt;code&gt;Stream&lt;/code&gt; trait soon&lt;/li&gt;
-&lt;li&gt;The FFI unwind project group is closing out a long-standing soundness hole, and the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2945-c-unwind-abi.html&quot;&gt;first RFC&lt;/a&gt; there has been merged&lt;/li&gt;
-&lt;li&gt;The safe transmute project group has proposed a &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2981&quot;&gt;draft RFC&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;The traits working group is polishing Chalk, preparing rustc integration, and seeing experimental usage in rust-analyzer. You can learn more in &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/03/28/traits-sprint-1.html&quot;&gt;their&lt;/a&gt; &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/05/18/traits-sprint-2.html&quot;&gt;blog&lt;/a&gt; &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/07/17/traits-sprint-3.html&quot;&gt;posts&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;We are transitioning to rust-analyzer as the official Rust IDE solution, with a &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2912-rust-analyzer.html&quot;&gt;merged RFC&lt;/a&gt; laying out the plan&lt;/li&gt;
-&lt;li&gt;Rust’s tier system is being formalized with guarantees and expectations set in an &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2803&quot;&gt;in-progress RFC&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Compiler performance work continues, with wins of &lt;a href&#x3D;&quot;https://perf.rust-lang.org/compare.html?start&#x3D;2020-01-01&amp;end&#x3D;&amp;stat&#x3D;instructions%3Au&quot;&gt;10-30%&lt;/a&gt; on many of our benchmarks&lt;/li&gt;
-&lt;li&gt;Reading into uninitialized buffers has an open &lt;a href&#x3D;&quot;https://github.com/sfackler/rfcs/blob/read-buf/text/0000-read-buf.md&quot;&gt;RFC&lt;/a&gt;, solving another long-standing problem for I/O in Rust&lt;/li&gt;
-&lt;li&gt;A project group proposal for portable SIMD in std has an open &lt;a href&#x3D;&quot;https://github.com/KodrAus/rfcs/blob/simd-pg/text/0000-stdsimd.md&quot;&gt;RFC&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;A project group proposal for error handling ergonomics, focusing on the std::error API, has an open &lt;a href&#x3D;&quot;https://github.com/yaahc/rfcs/blob/ehpg/text/0000-project-error-handling.md&quot;&gt;RFC&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;std::sync&lt;/code&gt; module updates are in brainstorming phase&lt;/li&gt;
-&lt;li&gt;Rustdoc&#x27;s support for intra-doc links is &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/74430&quot;&gt;close to stabilization&lt;/a&gt;!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;There’s been a lot of other work as well both within the Rust teams, but these items highlight some of the issues and designs that are being worked on actively by the Rust teams.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#improve-project-functioning-and-governance&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improve-project-functioning-and-governance&quot;&gt;&lt;/a&gt;Improve project functioning and governance&lt;/h2&gt;
-&lt;p&gt;Another goal was to document and improve our processes for running the project. We had three main subgoals.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#improved-visibility-into-state-of-initiatives-and-design-efforts&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improved-visibility-into-state-of-initiatives-and-design-efforts&quot;&gt;&lt;/a&gt;Improved visibility into state of initiatives and design efforts&lt;/h3&gt;
-&lt;p&gt;The Rust teams are moving to the use of &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2856-project-groups.html&quot;&gt;project groups&lt;/a&gt; for exploratory work, aiming to create dedicated groups of people who can explore an area, propose a design, and see it through to completion. The language team has kicked us off with &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-safe-transmute/&quot;&gt;safe transmute&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-ffi-unwind/&quot;&gt;FFI unwind&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-inline-asm&quot;&gt;inline assembly&lt;/a&gt; project groups. All of these have been enormous successes! Other teams are looking to use this model as well.&lt;/p&gt;
-&lt;p&gt;The compiler team has begun publishing &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-perf/tree/master/triage&quot;&gt;weekly performance triage reports&lt;/a&gt;, in the continuing drive to reduce compile times. The LLVM working group has also been helping to highlight performance regressions in &lt;a href&#x3D;&quot;https://nikic.github.io/2020/05/10/Make-LLVM-fast-again.html&quot;&gt;LLVM itself&lt;/a&gt;, to reduce compile time performance regressions when updating LLVM.&lt;/p&gt;
-&lt;p&gt;The &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/&quot;&gt;compiler team&lt;/a&gt; has introduced &lt;a href&#x3D;&quot;https://forge.rust-lang.org/compiler/mcp.html&quot;&gt;Major Change Proposals&lt;/a&gt; as a way to introduce larger changes to the implementation, surfacing design questions before implementation work begins. The &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/&quot;&gt;language team&lt;/a&gt; is also experimenting with a &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/proposing_a_project.html&quot;&gt;similar process&lt;/a&gt; for gaining quick language team feedback on proposals and, potentially, forming project groups. These both give a high-level view of changes being proposed, letting interested parties follow along without needing to subscribe to our very busy repositories.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#increase-mentoring-leadership-and-organizational-bandwidth&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;increase-mentoring-leadership-and-organizational-bandwidth&quot;&gt;&lt;/a&gt;Increase mentoring, leadership, and organizational bandwidth&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;The language team has identified a path for contributors to membership on the team, involving participation and leading in project group efforts. For more details, see &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/07/09/lang-team-path-to-membership.html&quot;&gt;their post&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;The Governance working group has been formalizing existing processes into RFCs, such as the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2856-project-groups.html&quot;&gt;Project Group RFC&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2872&quot;&gt;Access Policy RFC&lt;/a&gt;, and more.&lt;/li&gt;
-&lt;li&gt;The library team is pioneering the effort of drafting formal &lt;a href&#x3D;&quot;https://github.com/KodrAus/rfcs/blob/libs-governance/text/0000-libs-governance.md&quot;&gt;charters&lt;/a&gt; for teams, with the help of the governance working group.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#making-design-discussions-more-productive-and-less-exhausting&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;making-design-discussions-more-productive-and-less-exhausting&quot;&gt;&lt;/a&gt;Making design discussions more productive and less exhausting&lt;/h3&gt;
-&lt;p&gt;The primary effort here has been the project groups, which have so far been largely a success. We expect to do more here in the future.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
         </author>
     </entry>
     
