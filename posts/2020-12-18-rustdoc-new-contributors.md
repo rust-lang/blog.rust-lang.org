@@ -22,7 +22,7 @@ then this call is for you!
 
 Rustdoc builds the documentation for a Rust crate. It ships with your Rust compiler and it is invoked with `cargo doc`.
 
-rustdoc is not to be confused with docs.rs (even though docs.rs is using rustdoc!): docs.rs is the website hosting the documentation for Rust crates and it's a separate entity with different stewardship (some contributors share their work among these two projects).
+Rustdoc is not to be confused with docs.rs (even though docs.rs is using rustdoc!): docs.rs is the website hosting the documentation for Rust crates and it's a separate entity with different stewardship (some contributors share their work among these two projects).
 
 ## Why is `rustdoc` important?
 
