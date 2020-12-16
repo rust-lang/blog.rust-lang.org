@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust Survey 2020 Results | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust Survey 2020 Results | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust Survey 2020 Results | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust Survey 2020 Results" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust Survey 2020 Results</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 16, 2020 &middot; The Rust Survey Team
+    
+    </div>
+
+    <div class="post">
+      <p>Greetings Rustaceans!</p>
+<p>Another year has passed, and with it comes another annual Rust survey analysis! The survey was <a href="https://blog.rust-lang.org/2020/09/10/survey-launch.html">conducted</a> in the second half of September 2020 over a two-week period. We’d like to thank everyone who participated in this year’s survey with a special shout-out to those who helped translate non-English responses.</p>
+<p>Without further ado, let’s dive into the analysis!</p>
+<h2><a href="#survey-audience" aria-hidden="true" class="anchor" id="survey-audience"></a>Survey Audience</h2>
+<p>The survey was available in <strong>14</strong> different languages and had a record <strong>8,323</strong> total responses.</p>
+<p>Here's the distribution of languages across the responses:</p>
+<ul>
+<li>English: 75.0%</li>
+<li>Simplified Chinese: 5.4%</li>
+<li>Russian: 5.3%</li>
+<li>German: 4.0%</li>
+<li>French: 2.7%</li>
+<li>Japanese: 2.2%</li>
+<li>Korean: 1.2%</li>
+<li>Traditional Chinese: 1.1%</li>
+<li>Spanish: 1.0%</li>
+<li>Portuguese: 0.7%</li>
+<li>Italian: 0.6%</li>
+<li>Swedish: 0.5%</li>
+<li>Vietnamese: 0.1%</li>
+<li>Polish: 0.1%</li>
+</ul>
+<p>83.0% of respondents said they used Rust (an all time high) while 7% said they had used Rust in the past but no longer do. When asked why they had stopped using Rust, the largest group (35%) said they just hadn’t learned it yet (presumably from lack of time), followed by those whose company was not using Rust (34%) and those who said switching to Rust would “slow them down” compared to their current language of choice (19%).</p>
+<h2><a href="#stability" aria-hidden="true" class="anchor" id="stability"></a>Stability</h2>
+<p>While Rust itself has always had a strong stability guarantee, stability often means more than just ensuring users’ code doesn’t break when compiled with a new version of the compiler. Rust in 2020 has largely been about cleaning up and stabilizing features and initiatives that were already under way. While this work is not nearly completed, respondents have noted that the stability of Rust in general has been improving.</p>
+<p>First, we’d like to make a shout out to the <a href="https://rust-analyzer.github.io/">rust-analyzer</a> and <a href="https://intellij-rust.github.io/">IntelliJ Rust plugin</a> projects which both enjoy relatively happy user bases. Nearly 3/4ths of all respondents noted that they saw at least some improvement in the IDE story, but users of rust-analyzer and IntelliJ were especially happy with 47% of rust-analyzer users noting “a lot of improvement” while 40% of IntelliJ users said the same.</p>
+<p>In addition to improvements in the IDE experience, the number of users who are relying on a nightly compiler at least part of the time continues to drop - down to 28% compared with last year’s 30.5% with only 8.7% of respondents saying they use nightly exclusively. When asked why people are using nightly the largest reason was to use the Rocket web framework which has announced <a href="https://github.com/SergioBenitez/Rocket/issues/19">it will work on the stable version of Rust in its next release</a>. The next largest reason for nightly was const generics, but with <a href="https://github.com/rust-lang/rust/pull/79135">a minimal version of const generics reaching stable</a>, we should see less of a reliance on nightly for this feature.</p>
+<p><img src="/images/2020-12-rust-survey-2020/rust-versions.svg" alt="Which versions of Rust do you use?" /></p>
+<p>It’s worth noting that a decent percentage of users who use nightly do so out of habit because “nightly is stable enough”. When asked what broke people’s code most often, by far the largest answer was the introduction of new warnings to a code base where warnings break the build (which is not part of Rust’s stability guarantee though Rust is designed so that adding new warnings never breaks your dependencies). Since we rely on nightly testing to catch regressions, this is a very good sign: nightly is stable enough to be useful while still allowing for continual changes. A shout-out to the Rust infrastructure, compiler, and libs teams for doing such a good job of ensuring that what lands in the nightly compiler is already fairly stable!</p>
+<h2><a href="#whos-using-rust" aria-hidden="true" class="anchor" id="whos-using-rust"></a>Who’s using Rust?</h2>
+<p>Rust continues to make inroads as a language used for production with roughly 40% of respondents that work in software noting that they use Rust at their day job. Additionally, the future of Rust on the job is bright with nearly half of those who knew saying that their employer planned to hire Rust developers in the next year.</p>
+<p><img src="/images/2020-12-rust-survey-2020/rust-at-work.svg" alt="Do you use Rust at work?" /></p>
+<p>The seemingly largest change in those using Rust seems to be students with a much larger percentage (~15% vs ~11% last year) of the respondents answering that they don’t use Rust at work because they’re students or software hobbyists and therefore don’t have a job in software.</p>
+<p>Additionally, the use of Rust at respondents' workplaces seems to be getting bigger with 44% of respondents saying that the amount of Rust at work was 10,000 lines of code or more compared to 34% last year.</p>
+<p><img src="/images/2020-12-rust-survey-2020/project-size.svg" alt="Size of Rust code bases at work" /></p>
+<h2><a href="#improving-rust" aria-hidden="true" class="anchor" id="improving-rust"></a>Improving Rust</h2>
+<p>While Rust usage seems to be growing at a healthy pace, the results of the survey made it clear that there is still work to be done to make Rust a more appropriate tool for many people’s workflows.</p>
+<h3><a href="#c-interop" aria-hidden="true" class="anchor" id="c-interop"></a>C++ Interop</h3>
+<p>Interestingly, C++ interop was the most requested language for better interop with Rust with C and Python in second and third place. Improved C++ interop was especially often mentioned as a way to improve Rust usage specifically at work. In fact, for users who work on large codebases (100,000 lines of code or larger) C++ interop and unsurprisingly compile times were the most cited ways to improve their Rust experience.</p>
+<p><img src="/images/2020-12-rust-survey-2020/language-interop.svg" alt="If you want better language interop, with which language?" /></p>
+<h3><a href="#improved-learnability" aria-hidden="true" class="anchor" id="improved-learnability"></a>Improved Learnability</h3>
+<p>When asked how to improve adoption of Rust, many cited making Rust easier to learn with 15.8% of respondents saying they would use Rust more if it were “less intimidating, easier to learn, or less complicated”. Additionally when directly asked how people think we can improve adoption of Rust, the largest category of feedback was documentation and training.</p>
+<p>When we asked respondents to rate their expertise in Rust, there was a clear peak at 7 out of 10. It’s hard to say how this compares across languages but it seems notable that relatively few are willing to claim full expertise. However, when compared with last year, the Rust community does seem to be gaining expertise in the language.</p>
+<p><img src="/images/2020-12-rust-survey-2020/rust-expertise-overall.svg" alt="How would you rate your expertise in Rust?" /></p>
+<p>We also asked about the difficulty of specific topics. The most difficult topic to learn according to survey results is somewhat unsurprisingly lifetime management with 61.4% of respondents saying that the use of lifetimes is either tricky or very difficult.</p>
+<p><img src="/images/2020-12-rust-survey-2020/topic-difficulty-ratings.svg" alt="Percent of respondents rating each topic as tricky or very difficult." /></p>
+<p>It does seem that having C++ knowledge helps with 20.2% of respondents with at least some C++ experience noting lifetimes to be “very difficult” while 22.2% of those without C++ knowledge found the topic to be “very difficult”. Overall, systems programming knowledge (defined as at least some experience in C and C++), tends to make for more confident Rust users: those with systems programming experience rated themselves as 5.5 out of 10 on their Rust expertise, while those with experience in statically typed garbage collected languages like Java or C# rated themselves as 4.9 out of 10. Those with only experience in dynamically typed languages like Ruby or JavaScript rated themselves as 4.8 out of 10.</p>
+<p>Unsurprisingly, the more often people use Rust, the more they feel they are experts in the language with 56.3% of those who use Rust daily ranking themselves as 7 or more out of 10 on how much of an expert they are on Rust compared with 22% of those who use Rust monthly.</p>
+<p><img src="/images/2020-12-rust-survey-2020/rust-expertise-daily.svg" alt="How would you rate your expertise in Rust? (Daily Rust users)" /></p>
+<h3><a href="#compile-times" aria-hidden="true" class="anchor" id="compile-times"></a>Compile Times</h3>
+<p>One continuing topic of importance to the Rust community and the Rust team is improving compile times. Progress has already been made with 50.5% of respondents saying they felt compile times have improved. This improvement was particularly pronounced with respondents with large codebases (10,000 lines of code or more) where 62.6% citing improvement and only 2.9% saying they have gotten worse. Improving compile times is likely to be the source of significant effort in 2021, so stay tuned!</p>
+<h3><a href="#library-support" aria-hidden="true" class="anchor" id="library-support"></a>Library Support</h3>
+<p>In general, respondents seemed pleased with the growing library support in the Rust ecosystem with 65.9% of respondents saying they had seen at least some improvement and only 4.9% saying they hadn't seen any improvement. When asked what type of library support was missing most, GUI programming was the overwhelming answer with only 26.9% of respondents noting that this was an area of improvement in the last year.</p>
+<p>Additional topics for improvement include maturing the async programming story, more libraries for specific tasks not already covered by the crates.io ecosystem, and more &quot;blessed&quot; libraries for common tasks.</p>
+<h3><a href="#community" aria-hidden="true" class="anchor" id="community"></a>Community</h3>
+<p>Ways that the Rust community could improve varied but were highlighted by two popular points. First, improving the state of the Rust community for those who do not wish to or cannot participate in English. There does not seem to be a particular language that is especially underserved with Russian, Mandarin, Japanese, Portuguese, Spanish and French coming up frequently.</p>
+<p>Additionally, many said that having large corporate sponsors in the Rust community will make it easier for them to make the case for using Rust at work.</p>
+<p>Another interesting find was that Europe seemed by far to be the most favored place for holding a Rust conference with all parts of Europe (West, East, North, South, and Central) all having more than 14% of respondents saying they would be interested in attending a conference there with Western Europe getting the highest percentage (26.3% of respondents). The only other region in the same ballpark was the United States with 21.6% of respondents saying they’d be interested in a conference located there.</p>
+<h2><a href="#getting-excited-for-rusts-future" aria-hidden="true" class="anchor" id="getting-excited-for-rusts-future"></a>Getting Excited for Rust’s Future</h2>
+<p>Generally, respondents seemed to have a positive picture not only for how Rust has improved over the last year but for the year to come. In particular, many noted their excitement for new features to the language such as const generics and generic associated types (GATs) as well as the 2021 edition, improvements to async, the Bevy game engine, more adoption of Rust by companies, WebAssembly and more!</p>
+<p>Here’s to an exciting 2021! 🎉🦀</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

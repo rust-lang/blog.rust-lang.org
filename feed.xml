@@ -10,8 +10,82 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-12-15T09:59:52+00:00</updated>
+    <updated>2020-12-16T18:14:02+00:00</updated>
 
+    
+    <entry>
+        <title>Rust Survey 2020 Results</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2020/12/16/rust-survey-2020.html" type="text/html" title="Rust Survey 2020 Results" />
+        <published>2020-12-16T00:00:00+00:00</published>
+        <updated>2020-12-16T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2020/12/16/rust-survey-2020.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2020/12/16/rust-survey-2020.html">&lt;p&gt;Greetings Rustaceans!&lt;/p&gt;
+&lt;p&gt;Another year has passed, and with it comes another annual Rust survey analysis! The survey was &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/09/10/survey-launch.html&quot;&gt;conducted&lt;/a&gt; in the second half of September 2020 over a two-week period. We’d like to thank everyone who participated in this year’s survey with a special shout-out to those who helped translate non-English responses.&lt;/p&gt;
+&lt;p&gt;Without further ado, let’s dive into the analysis!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#survey-audience&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;survey-audience&quot;&gt;&lt;/a&gt;Survey Audience&lt;/h2&gt;
+&lt;p&gt;The survey was available in &lt;strong&gt;14&lt;/strong&gt; different languages and had a record &lt;strong&gt;8,323&lt;/strong&gt; total responses.&lt;/p&gt;
+&lt;p&gt;Here&#x27;s the distribution of languages across the responses:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;English: 75.0%&lt;/li&gt;
+&lt;li&gt;Simplified Chinese: 5.4%&lt;/li&gt;
+&lt;li&gt;Russian: 5.3%&lt;/li&gt;
+&lt;li&gt;German: 4.0%&lt;/li&gt;
+&lt;li&gt;French: 2.7%&lt;/li&gt;
+&lt;li&gt;Japanese: 2.2%&lt;/li&gt;
+&lt;li&gt;Korean: 1.2%&lt;/li&gt;
+&lt;li&gt;Traditional Chinese: 1.1%&lt;/li&gt;
+&lt;li&gt;Spanish: 1.0%&lt;/li&gt;
+&lt;li&gt;Portuguese: 0.7%&lt;/li&gt;
+&lt;li&gt;Italian: 0.6%&lt;/li&gt;
+&lt;li&gt;Swedish: 0.5%&lt;/li&gt;
+&lt;li&gt;Vietnamese: 0.1%&lt;/li&gt;
+&lt;li&gt;Polish: 0.1%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;83.0% of respondents said they used Rust (an all time high) while 7% said they had used Rust in the past but no longer do. When asked why they had stopped using Rust, the largest group (35%) said they just hadn’t learned it yet (presumably from lack of time), followed by those whose company was not using Rust (34%) and those who said switching to Rust would “slow them down” compared to their current language of choice (19%).&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#stability&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stability&quot;&gt;&lt;/a&gt;Stability&lt;/h2&gt;
+&lt;p&gt;While Rust itself has always had a strong stability guarantee, stability often means more than just ensuring users’ code doesn’t break when compiled with a new version of the compiler. Rust in 2020 has largely been about cleaning up and stabilizing features and initiatives that were already under way. While this work is not nearly completed, respondents have noted that the stability of Rust in general has been improving.&lt;/p&gt;
+&lt;p&gt;First, we’d like to make a shout out to the &lt;a href&#x3D;&quot;https://rust-analyzer.github.io/&quot;&gt;rust-analyzer&lt;/a&gt; and &lt;a href&#x3D;&quot;https://intellij-rust.github.io/&quot;&gt;IntelliJ Rust plugin&lt;/a&gt; projects which both enjoy relatively happy user bases. Nearly 3/4ths of all respondents noted that they saw at least some improvement in the IDE story, but users of rust-analyzer and IntelliJ were especially happy with 47% of rust-analyzer users noting “a lot of improvement” while 40% of IntelliJ users said the same.&lt;/p&gt;
+&lt;p&gt;In addition to improvements in the IDE experience, the number of users who are relying on a nightly compiler at least part of the time continues to drop - down to 28% compared with last year’s 30.5% with only 8.7% of respondents saying they use nightly exclusively. When asked why people are using nightly the largest reason was to use the Rocket web framework which has announced &lt;a href&#x3D;&quot;https://github.com/SergioBenitez/Rocket/issues/19&quot;&gt;it will work on the stable version of Rust in its next release&lt;/a&gt;. The next largest reason for nightly was const generics, but with &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/79135&quot;&gt;a minimal version of const generics reaching stable&lt;/a&gt;, we should see less of a reliance on nightly for this feature.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;/images/2020-12-rust-survey-2020/rust-versions.svg&quot; alt&#x3D;&quot;Which versions of Rust do you use?&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;It’s worth noting that a decent percentage of users who use nightly do so out of habit because “nightly is stable enough”. When asked what broke people’s code most often, by far the largest answer was the introduction of new warnings to a code base where warnings break the build (which is not part of Rust’s stability guarantee though Rust is designed so that adding new warnings never breaks your dependencies). Since we rely on nightly testing to catch regressions, this is a very good sign: nightly is stable enough to be useful while still allowing for continual changes. A shout-out to the Rust infrastructure, compiler, and libs teams for doing such a good job of ensuring that what lands in the nightly compiler is already fairly stable!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whos-using-rust&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whos-using-rust&quot;&gt;&lt;/a&gt;Who’s using Rust?&lt;/h2&gt;
+&lt;p&gt;Rust continues to make inroads as a language used for production with roughly 40% of respondents that work in software noting that they use Rust at their day job. Additionally, the future of Rust on the job is bright with nearly half of those who knew saying that their employer planned to hire Rust developers in the next year.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;/images/2020-12-rust-survey-2020/rust-at-work.svg&quot; alt&#x3D;&quot;Do you use Rust at work?&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The seemingly largest change in those using Rust seems to be students with a much larger percentage (~15% vs ~11% last year) of the respondents answering that they don’t use Rust at work because they’re students or software hobbyists and therefore don’t have a job in software.&lt;/p&gt;
+&lt;p&gt;Additionally, the use of Rust at respondents&#x27; workplaces seems to be getting bigger with 44% of respondents saying that the amount of Rust at work was 10,000 lines of code or more compared to 34% last year.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;/images/2020-12-rust-survey-2020/project-size.svg&quot; alt&#x3D;&quot;Size of Rust code bases at work&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#improving-rust&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improving-rust&quot;&gt;&lt;/a&gt;Improving Rust&lt;/h2&gt;
+&lt;p&gt;While Rust usage seems to be growing at a healthy pace, the results of the survey made it clear that there is still work to be done to make Rust a more appropriate tool for many people’s workflows.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#c-interop&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;c-interop&quot;&gt;&lt;/a&gt;C++ Interop&lt;/h3&gt;
+&lt;p&gt;Interestingly, C++ interop was the most requested language for better interop with Rust with C and Python in second and third place. Improved C++ interop was especially often mentioned as a way to improve Rust usage specifically at work. In fact, for users who work on large codebases (100,000 lines of code or larger) C++ interop and unsurprisingly compile times were the most cited ways to improve their Rust experience.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;/images/2020-12-rust-survey-2020/language-interop.svg&quot; alt&#x3D;&quot;If you want better language interop, with which language?&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#improved-learnability&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improved-learnability&quot;&gt;&lt;/a&gt;Improved Learnability&lt;/h3&gt;
+&lt;p&gt;When asked how to improve adoption of Rust, many cited making Rust easier to learn with 15.8% of respondents saying they would use Rust more if it were “less intimidating, easier to learn, or less complicated”. Additionally when directly asked how people think we can improve adoption of Rust, the largest category of feedback was documentation and training.&lt;/p&gt;
+&lt;p&gt;When we asked respondents to rate their expertise in Rust, there was a clear peak at 7 out of 10. It’s hard to say how this compares across languages but it seems notable that relatively few are willing to claim full expertise. However, when compared with last year, the Rust community does seem to be gaining expertise in the language.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;/images/2020-12-rust-survey-2020/rust-expertise-overall.svg&quot; alt&#x3D;&quot;How would you rate your expertise in Rust?&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;We also asked about the difficulty of specific topics. The most difficult topic to learn according to survey results is somewhat unsurprisingly lifetime management with 61.4% of respondents saying that the use of lifetimes is either tricky or very difficult.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;/images/2020-12-rust-survey-2020/topic-difficulty-ratings.svg&quot; alt&#x3D;&quot;Percent of respondents rating each topic as tricky or very difficult.&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;It does seem that having C++ knowledge helps with 20.2% of respondents with at least some C++ experience noting lifetimes to be “very difficult” while 22.2% of those without C++ knowledge found the topic to be “very difficult”. Overall, systems programming knowledge (defined as at least some experience in C and C++), tends to make for more confident Rust users: those with systems programming experience rated themselves as 5.5 out of 10 on their Rust expertise, while those with experience in statically typed garbage collected languages like Java or C# rated themselves as 4.9 out of 10. Those with only experience in dynamically typed languages like Ruby or JavaScript rated themselves as 4.8 out of 10.&lt;/p&gt;
+&lt;p&gt;Unsurprisingly, the more often people use Rust, the more they feel they are experts in the language with 56.3% of those who use Rust daily ranking themselves as 7 or more out of 10 on how much of an expert they are on Rust compared with 22% of those who use Rust monthly.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;/images/2020-12-rust-survey-2020/rust-expertise-daily.svg&quot; alt&#x3D;&quot;How would you rate your expertise in Rust? (Daily Rust users)&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#compile-times&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;compile-times&quot;&gt;&lt;/a&gt;Compile Times&lt;/h3&gt;
+&lt;p&gt;One continuing topic of importance to the Rust community and the Rust team is improving compile times. Progress has already been made with 50.5% of respondents saying they felt compile times have improved. This improvement was particularly pronounced with respondents with large codebases (10,000 lines of code or more) where 62.6% citing improvement and only 2.9% saying they have gotten worse. Improving compile times is likely to be the source of significant effort in 2021, so stay tuned!&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#library-support&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;library-support&quot;&gt;&lt;/a&gt;Library Support&lt;/h3&gt;
+&lt;p&gt;In general, respondents seemed pleased with the growing library support in the Rust ecosystem with 65.9% of respondents saying they had seen at least some improvement and only 4.9% saying they hadn&#x27;t seen any improvement. When asked what type of library support was missing most, GUI programming was the overwhelming answer with only 26.9% of respondents noting that this was an area of improvement in the last year.&lt;/p&gt;
+&lt;p&gt;Additional topics for improvement include maturing the async programming story, more libraries for specific tasks not already covered by the crates.io ecosystem, and more &amp;quot;blessed&amp;quot; libraries for common tasks.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#community&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;community&quot;&gt;&lt;/a&gt;Community&lt;/h3&gt;
+&lt;p&gt;Ways that the Rust community could improve varied but were highlighted by two popular points. First, improving the state of the Rust community for those who do not wish to or cannot participate in English. There does not seem to be a particular language that is especially underserved with Russian, Mandarin, Japanese, Portuguese, Spanish and French coming up frequently.&lt;/p&gt;
+&lt;p&gt;Additionally, many said that having large corporate sponsors in the Rust community will make it easier for them to make the case for using Rust at work.&lt;/p&gt;
+&lt;p&gt;Another interesting find was that Europe seemed by far to be the most favored place for holding a Rust conference with all parts of Europe (West, East, North, South, and Central) all having more than 14% of respondents saying they would be interested in attending a conference there with Western Europe getting the highest percentage (26.3% of respondents). The only other region in the same ballpark was the United States with 21.6% of respondents saying they’d be interested in a conference located there.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#getting-excited-for-rusts-future&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;getting-excited-for-rusts-future&quot;&gt;&lt;/a&gt;Getting Excited for Rust’s Future&lt;/h2&gt;
+&lt;p&gt;Generally, respondents seemed to have a positive picture not only for how Rust has improved over the last year but for the year to come. In particular, many noted their excitement for new features to the language such as const generics and generic associated types (GATs) as well as the 2021 edition, improvements to async, the Bevy game engine, more adoption of Rust by companies, WebAssembly and more!&lt;/p&gt;
+&lt;p&gt;Here’s to an exciting 2021! 🎉🦀&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Survey Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Next steps for the Foundation Conversation</title>
@@ -788,41 +862,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.47
 
         <author>
             <name>The Rust WG-Prioritization Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Launching the 2020 State of Rust Survey</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/09/10/survey-launch.html" type="text/html" title="Launching the 2020 State of Rust Survey" />
-        <published>2020-09-10T00:00:00+00:00</published>
-        <updated>2020-09-10T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/09/10/survey-launch.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/09/10/survey-launch.html">&lt;p&gt;It&#x27;s that time again! Time for us to take a look at how the Rust project is doing, and what we should plan for the future. The Rust Community Team is pleased to announce our &lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSf__XKjS2xa55jUOi78ONvjG0elG5ZWqOz0MYdX6sgmcjb5pw/viewform?usp&#x3D;sf_link&quot;&gt;2020 State of Rust Survey&lt;/a&gt;! Whether or not you use Rust today, we want to know your opinions. Your responses will help the project understand its strengths and weaknesses and establish development priorities for the future. (If you&#x27;d like to give longer form feedback on the Rust roadmap, &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/09/03/Planning-2021-Roadmap.html&quot;&gt;we&#x27;re also collecting blog posts!&lt;/a&gt;)&lt;/p&gt;
-&lt;p&gt;Completing this survey should take about 10–15 minutes and is anonymous unless you choose to give us your contact information. We will be accepting submissions for the next two weeks (until September 24th), and we will write up our findings afterwards to &lt;a href&#x3D;&quot;https://blog.rust-lang.org&quot;&gt;blog.rust-lang.org&lt;/a&gt;. You can also check out &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/04/17/Rust-survey-2019.html&quot;&gt;last year’s results&lt;/a&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSf__XKjS2xa55jUOi78ONvjG0elG5ZWqOz0MYdX6sgmcjb5pw/viewform?usp&#x3D;sf_link&quot;&gt;English&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://wj.qq.com/s2/7111747/269f&quot;&gt;Simplified Chinese&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSdExtEatN0UOsjmadXcGcHyQpwuhsgkLCQb-VLoRzL9P1K5iw/viewform?usp&#x3D;sf_link&quot;&gt;Traditional Chinese&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSf4nsxMALOgsibbOuOCyqtw_kRXw5S3GXT-zD91vCokP9T1QA/viewform?usp&#x3D;sf_link&quot;&gt;French&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSeNx7KKNM48dWycfwGzcJV3z87cwG941n4rke_-HQeblRUHDw/viewform?usp&#x3D;sf_link&quot;&gt;German&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSc_QaYM_YNgqXuykSPpTHsK9A-kPmpXhrDJGwbMMKnkYbDcug/viewform?usp&#x3D;sf_link&quot;&gt;Italian&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSe68ThS0F1rmCDJJy4v7GfLVKQiUi8KGvJcr2OLyr8brvWM_Q/viewform?usp&#x3D;sf_link&quot;&gt;Japanese&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/1vPoB5oz50dbJFyO98N2qeDUK1QAnwd5OQA4GRcEIrr8/viewform?edit_requested&#x3D;true&quot;&gt;Korean&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLScBvNYpnh4fUyCUaUt6Er7jA96HONN7aoQFSloGGPnZPq8z4w/viewform?usp&#x3D;sf_link&quot;&gt;Polish&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSeMTgzEh1MIvOnH0RPcyZVcg1OOcjsjp1eR55KrTQsP6jvOvQ/viewform?usp&#x3D;sf_link&quot;&gt;Portuguese&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSccIcuXtEj-XmzGRDr_JJeW9gf1xN-PC31L3oSbGPhqedQV6g/viewform?usp&#x3D;sf_link&quot;&gt;Russian&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLScn-49B-k7ZD6PUb6PqzE_X105X4KHJ9BJrYEZ0PIN8v6H6IA/viewform?usp&#x3D;sf_link&quot;&gt;Spanish&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSdt0KZFqf9tR-xb7JV3uiAWTuLlotN8LbTgGBr2H2rpsQDIJQ/viewform?usp&#x3D;sf_link&quot;&gt;Swedish&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSc_EKfKS8ZMxGyqGMLZvPL7cBbYT-CN33i13rxkIXq_CDxXHw/viewform?usp&#x3D;sf_link&quot;&gt;Vietnamese&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;(If you speak multiple languages, please pick one)&lt;/p&gt;
-&lt;p&gt;Please help us spread the word by sharing the survey link on your social network feeds, at meetups, around your office, and in other communities.&lt;/p&gt;
-&lt;p&gt;If you have any questions, please see our &lt;a href&#x3D;&quot;https://forge.rust-lang.org/community/survey-faq.html&quot;&gt;frequently asked questions&lt;/a&gt; or email the Rust Community team at &lt;a href&#x3D;&quot;mailto:community-team@rust-lang.org&quot;&gt;community-team@rust-lang.org&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Finally, we wanted to thank everyone who helped develop, polish, and test the survey. In particular, we&#x27;d like to thank all of the volunteers who worked to provide all of the translations available this year and who will help to translate the results.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Community Team</name>
         </author>
     </entry>
     
