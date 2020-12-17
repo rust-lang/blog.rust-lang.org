@@ -22,4 +22,4 @@ Niko and I are delighted that Wesley is taking on this new leadership role, and 
 
 In addition to the changes in leadership, we also have a new compiler team member to announce: lcnr.
 
-lcnr has been contributing to the compiler since 2018. They have improved the type system via changes such as higher-ranked lifetimes in predicates ([#73503](rust-lang/rust#73503)), and also have focused for the past two years on improving Rust's support for complex generic expressions in constants (tracked at [#76560](rust-lang/rust#76560))
+lcnr has been contributing to the compiler since 2018. They have improved the type system via changes such as higher-ranked lifetimes in predicates ([#73503](https://github.com/rust-lang/rust/pull/73503)), and also have focused for the past two years on improving Rust's support for complex generic expressions in constants (tracked at [#76560](https://github.com/rust-lang/rust/pull/76560))
