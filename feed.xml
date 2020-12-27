@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-12-17T12:20:54+00:00</updated>
+    <updated>2020-12-27T21:26:50+00:00</updated>
 
     
     <entry>
@@ -57,7 +57,7 @@
 &lt;h2&gt;&lt;a href&#x3D;&quot;#improving-rust&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improving-rust&quot;&gt;&lt;/a&gt;Improving Rust&lt;/h2&gt;
 &lt;p&gt;While Rust usage seems to be growing at a healthy pace, the results of the survey made it clear that there is still work to be done to make Rust a more appropriate tool for many people’s workflows.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#c-interop&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;c-interop&quot;&gt;&lt;/a&gt;C++ Interop&lt;/h3&gt;
-&lt;p&gt;Interestingly, C++ interop was the most requested language for better interop with Rust with C and Python in second and third place. Improved C++ interop was especially often mentioned as a way to improve Rust usage specifically at work. In fact, for users who work on large codebases (100,000 lines of code or larger) C++ interop and unsurprisingly compile times were the most cited ways to improve their Rust experience.&lt;/p&gt;
+&lt;p&gt;Interestingly, C++ was the most requested language for better interop with Rust, with C and Python in second and third place. Improved C++ interop was especially often mentioned as a way to improve Rust usage specifically at work. In fact, for users who work on large codebases (100,000 lines of code or larger), C++ interop and — unsurprisingly — compile times were the most cited ways to improve their Rust experience.&lt;/p&gt;
 &lt;p&gt;&lt;img src&#x3D;&quot;/images/2020-12-rust-survey-2020/language-interop.svg&quot; alt&#x3D;&quot;If you want better language interop, with which language?&quot; /&gt;&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#improved-learnability&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improved-learnability&quot;&gt;&lt;/a&gt;Improved Learnability&lt;/h3&gt;
 &lt;p&gt;When asked how to improve adoption of Rust, many cited making Rust easier to learn with 15.8% of respondents saying they would use Rust more if it were “less intimidating, easier to learn, or less complicated”. Additionally when directly asked how people think we can improve adoption of Rust, the largest category of feedback was documentation and training.&lt;/p&gt;
