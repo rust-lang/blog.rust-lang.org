@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.49.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.49.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.49.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.49.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.49.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 31, 2020 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.49.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.49.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
+appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1490-2020-12-31">detailed release notes for
+1.49.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1490-stable" aria-hidden="true" class="anchor" id="whats-in-1490-stable"></a>What's in 1.49.0 stable</h2>
+<p>For this release, we have some new targets and an improvement to the test
+framework. See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1490-2020-12-31">detailed release notes</a> to learn about other
+changes not covered by this post.</p>
+<h3><a href="#64-bit-arm-linux-reaches-tier-1" aria-hidden="true" class="anchor" id="64-bit-arm-linux-reaches-tier-1"></a>64-bit ARM Linux reaches Tier 1</h3>
+<p>The Rust compiler supports <a href="https://doc.rust-lang.org/stable/rustc/platform-support.html">a wide variety of targets</a>, but
+the Rust Team can't provide the same level of support for all of them. To
+clearly mark how supported each target is, we use a tiering system:</p>
+<ul>
+<li>Tier 3 targets are technically supported by the compiler, but we don't check
+whether their code build or passes the tests, and we don't provide any
+prebuilt binaries as part of our releases.</li>
+<li>Tier 2 targets are guaranteed to build and we provide prebuilt binaries, but
+we don't execute the test suite on those platforms: the produced binaries
+might not work or might have bugs.</li>
+<li>Tier 1 targets provide the highest support guarantee, and we run the full
+suite on those platforms for every change merged in the compiler. Prebuilt
+binaries are also available.</li>
+</ul>
+<p>Rust 1.49.0 promotes the <code>aarch64-unknown-linux-gnu</code> target to Tier 1 support,
+bringing our highest guarantees to users of 64-bit ARM systems running Linux!
+We expect this change to benefit workloads spanning from embedded to desktops
+and servers.</p>
+<p>This is an important milestone for the project, since it's the first time a
+non-x86 target has reached Tier 1 support: we hope this will pave the way for
+more targets to reach our highest tier in the future.</p>
+<p>Note that Android is not affected by this change as it uses a different Tier 2
+target.</p>
+<h3><a href="#64-bit-arm-macos-and-windows-reach-tier-2" aria-hidden="true" class="anchor" id="64-bit-arm-macos-and-windows-reach-tier-2"></a>64-bit ARM macOS and Windows reach Tier 2</h3>
+<p>Rust 1.49.0 also features two targets reaching Tier 2 support:</p>
+<ul>
+<li>The <code>aarch64-apple-darwin</code> target brings support for Rust on Apple M1 systems.</li>
+<li>The <code>aarch64-pc-windows-msvc</code> target brings support for Rust on 64-bit ARM
+devices running Windows on ARM.</li>
+</ul>
+<p>Developers can expect both of those targets to have prebuilt binaries
+installable with <code>rustup</code> from now on! The Rust Team is not running the test
+suite on those platforms though, so there might be bugs or instabilities.</p>
+<h3><a href="#test-framework-captures-output-in-threads" aria-hidden="true" class="anchor" id="test-framework-captures-output-in-threads"></a>Test framework captures output in threads</h3>
+<p>Rust's built-in testing framework doesn't have a ton of features, but that
+doesn't mean it can't be improved! Consider a test that looks like this:</p>
+<pre><code class="language-rust">#[test]
+fn thready_pass() {
+    println!(&quot;fee&quot;);
+    std::thread::spawn(|| {
+        println!(&quot;fie&quot;);
+        println!(&quot;foe&quot;);
+    })
+    .join()
+    .unwrap();
+    println!(&quot;fum&quot;);
+}
+</code></pre>
+<p>Here's what running this test looks like before Rust 1.49.0:</p>
+<pre><code class="language-text">❯ cargo test
+   Compiling threadtest v0.1.0 (C:\threadtest)
+    Finished test [unoptimized + debuginfo] target(s) in 0.38s
+     Running target\debug\deps\threadtest-02f42ffd9836cae5.exe
+
+running 1 test
+fie
+foe
+test thready_pass ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+
+   Doc-tests threadtest
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+</code></pre>
+<p>You can see that the output from the thread is printed, which intermixes
+from the output of the test framework itself. Wouldn't it be nice
+if every <code>println!</code> worked like that one that prints &quot;<code>fum</code>?&quot; Well, <a href="https://github.com/rust-lang/rust/pull/78227">that's
+the behavior in Rust 1.49.0</a>:</p>
+<pre><code class="language-text">❯ cargo +nightly test
+   Compiling threadtest v0.1.0 (C:\threadtest)
+    Finished test [unoptimized + debuginfo] target(s) in 0.52s
+     Running target\debug\deps\threadtest-40aabfaa345584be.exe
+
+running 1 test
+test thready_pass ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests threadtest
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>But don't worry; if the test were to fail, you'll still see all of the
+output. By adding a <code>panic!</code> to the end of the test, we can see what failure
+looks like:</p>
+<pre><code class="language-text">❯ cargo +nightly test
+   Compiling threadtest v0.1.0 (C:\threadtest)
+    Finished test [unoptimized + debuginfo] target(s) in 0.52s
+     Running target\debug\deps\threadtest-40aabfaa345584be.exe
+
+running 1 test
+test thready_pass ... FAILED
+
+failures:
+
+---- thready_pass stdout ----
+fee
+fie
+foe
+fum
+thread 'thready_pass' panicked at 'explicit panic', src\lib.rs:11:5
+</code></pre>
+<p>Specifically, the test runner makes sure to capture the output, and saves it
+in case the test fails.</p>
+<h3><a href="#library-changes" aria-hidden="true" class="anchor" id="library-changes"></a>Library changes</h3>
+<p>In Rust 1.49.0, there are three new stable functions:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/nightly/std/primitive.slice.html#method.select_nth_unstable"><code>slice::select_nth_unstable</code></a></li>
+<li><a href="https://doc.rust-lang.org/nightly/std/primitive.slice.html#method.select_nth_unstable_by"><code>slice::select_nth_unstable_by</code></a></li>
+<li><a href="https://doc.rust-lang.org/nightly/std/primitive.slice.html#method.select_nth_unstable_by_key"><code>slice::select_nth_unstable_by_key</code></a></li>
+</ul>
+<p>And two functions were made <code>const</code>:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/task/enum.Poll.html#method.is_ready"><code>Poll::is_ready</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/task/enum.Poll.html#method.is_pending"><code>Poll::is_pending</code></a></li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1490-2020-12-31">detailed release notes</a> to learn about other changes.</p>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.49.0 release: check out what changed in
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1490-2020-12-31">Rust</a>, <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-149-2020-12-31">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-149">Clippy</a>.</p>
+<h2><a href="#contributors-to-1490" aria-hidden="true" class="anchor" id="contributors-to-1490"></a>Contributors to 1.49.0</h2>
+<p>Many people came together to create Rust 1.49.0. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.49.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
