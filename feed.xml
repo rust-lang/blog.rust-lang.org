@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2020-12-31T14:40:28+00:00</updated>
+    <updated>2020-12-31T15:08:08+00:00</updated>
 
     
     <entry>
@@ -83,7 +83,7 @@ fn thready_pass() {
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here&#x27;s what running this test looks like before Rust 1.49.0:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;❯ cargo test
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;❯ cargo +1.48.0 test
    Compiling threadtest v0.1.0 (C:\threadtest)
     Finished test [unoptimized + debuginfo] target(s) in 0.38s
      Running target\debug\deps\threadtest-02f42ffd9836cae5.exe
@@ -105,7 +105,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 from the output of the test framework itself. Wouldn&#x27;t it be nice
 if every &lt;code&gt;println!&lt;/code&gt; worked like that one that prints &amp;quot;&lt;code&gt;fum&lt;/code&gt;?&amp;quot; Well, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/78227&quot;&gt;that&#x27;s
 the behavior in Rust 1.49.0&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;❯ cargo +nightly test
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;❯ cargo test
    Compiling threadtest v0.1.0 (C:\threadtest)
     Finished test [unoptimized + debuginfo] target(s) in 0.52s
      Running target\debug\deps\threadtest-40aabfaa345584be.exe
@@ -124,7 +124,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 &lt;p&gt;But don&#x27;t worry; if the test were to fail, you&#x27;ll still see all of the
 output. By adding a &lt;code&gt;panic!&lt;/code&gt; to the end of the test, we can see what failure
 looks like:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;❯ cargo +nightly test
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;❯ cargo test
    Compiling threadtest v0.1.0 (C:\threadtest)
     Finished test [unoptimized + debuginfo] target(s) in 0.52s
      Running target\debug\deps\threadtest-40aabfaa345584be.exe

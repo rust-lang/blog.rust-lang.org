@@ -135,7 +135,7 @@ fn thready_pass() {
 }
 </code></pre>
 <p>Here's what running this test looks like before Rust 1.49.0:</p>
-<pre><code class="language-text">❯ cargo test
+<pre><code class="language-text">❯ cargo +1.48.0 test
    Compiling threadtest v0.1.0 (C:\threadtest)
     Finished test [unoptimized + debuginfo] target(s) in 0.38s
      Running target\debug\deps\threadtest-02f42ffd9836cae5.exe
@@ -157,7 +157,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 from the output of the test framework itself. Wouldn't it be nice
 if every <code>println!</code> worked like that one that prints &quot;<code>fum</code>?&quot; Well, <a href="https://github.com/rust-lang/rust/pull/78227">that's
 the behavior in Rust 1.49.0</a>:</p>
-<pre><code class="language-text">❯ cargo +nightly test
+<pre><code class="language-text">❯ cargo test
    Compiling threadtest v0.1.0 (C:\threadtest)
     Finished test [unoptimized + debuginfo] target(s) in 0.52s
      Running target\debug\deps\threadtest-40aabfaa345584be.exe
@@ -176,7 +176,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 <p>But don't worry; if the test were to fail, you'll still see all of the
 output. By adding a <code>panic!</code> to the end of the test, we can see what failure
 looks like:</p>
-<pre><code class="language-text">❯ cargo +nightly test
+<pre><code class="language-text">❯ cargo test
    Compiling threadtest v0.1.0 (C:\threadtest)
     Finished test [unoptimized + debuginfo] target(s) in 0.52s
      Running target\debug\deps\threadtest-40aabfaa345584be.exe
