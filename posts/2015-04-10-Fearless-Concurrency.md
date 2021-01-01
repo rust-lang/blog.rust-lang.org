@@ -618,6 +618,6 @@ months. Stay tuned!
 [syncbox]: https://github.com/carllerche/syncbox
 [simple_parallel]: https://github.com/huonw/simple_parallel
 [crossbeam-crate]: https://crates.io/crates/crossbeam
-[crossbeam-doc]: http://aturon.github.io/crossbeam-doc/crossbeam/fn.scope.html
+[crossbeam-doc]: https://docs.rs/crossbeam/0.8.0/crossbeam/fn.scope.html
 [scoped-threadpool-crate]: https://crates.io/crates/scoped_threadpool
 [scoped-threadpool-doc]: http://kimundi.github.io/scoped-threadpool-rs/scoped_threadpool/index.html#examples:
