@@ -10,8 +10,53 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-01-01T17:50:05+00:00</updated>
+    <updated>2021-01-04T15:10:59+00:00</updated>
 
+    
+    <entry>
+        <title>mdBook security advisory</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/01/04/mdbook-security-advisory.html" type="text/html" title="mdBook security advisory" />
+        <published>2021-01-04T00:00:00+00:00</published>
+        <updated>2021-01-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/01/04/mdbook-security-advisory.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/01/04/mdbook-security-advisory.html">&lt;blockquote&gt;
+&lt;p&gt;This is a cross-post of &lt;a href&#x3D;&quot;https://groups.google.com/g/rustlang-security-announcements/c/3-sO6of29O0&quot;&gt;the official security advisory&lt;/a&gt;. The official post
+contains a signed version with our PGP key, as well.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The Rust Security Response Working Group was recently notified of a security
+issue affecting the search feature of mdBook, which could allow an attacker to
+execute arbitrary JavaScript code on the page.&lt;/p&gt;
+&lt;p&gt;The CVE for this vulnerability is &lt;a href&#x3D;&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name&#x3D;CVE-2020-26297&quot;&gt;CVE-2020-26297&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#overview&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;overview&quot;&gt;&lt;/a&gt;Overview&lt;/h2&gt;
+&lt;p&gt;The search feature of mdBook (introduced in version 0.1.4) was affected by a
+cross site scripting vulnerability that allowed an attacker to execute
+arbitrary JavaScript code on an user&#x27;s browser by tricking the user into typing
+a malicious search query, or tricking the user into clicking a link to the
+search page with the malicious search query prefilled.&lt;/p&gt;
+&lt;p&gt;mdBook 0.4.5 fixes the vulnerability by properly escaping the search query.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#mitigations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;mitigations&quot;&gt;&lt;/a&gt;Mitigations&lt;/h2&gt;
+&lt;p&gt;Owners of websites built with mdBook have to upgrade to mdBook 0.4.5 or greater
+and rebuild their website contents with it. It&#x27;s possible to install mdBook
+0.4.5 on the local system with:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cargo install mdbook --version 0.4.5 --force
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#acknowledgements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgements&quot;&gt;&lt;/a&gt;Acknowledgements&lt;/h2&gt;
+&lt;p&gt;Thanks to Kamil Vavra for responsibly disclosing the vulnerability to us
+according to &lt;a href&#x3D;&quot;https://www.rust-lang.org/policies/security&quot;&gt;our security policy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#timeline-of-events&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;timeline-of-events&quot;&gt;&lt;/a&gt;Timeline of events&lt;/h2&gt;
+&lt;p&gt;All times are listed in UTC.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2020-12-30 20:14 - The issue is reported to the Rust Security Response WG&lt;/li&gt;
+&lt;li&gt;2020-12-30 20:32 - The issue is acknowledged and the investigation began&lt;/li&gt;
+&lt;li&gt;2020-12-30 21:21 - Found the cause of the vulnerability and prepared the patch&lt;/li&gt;
+&lt;li&gt;2021-01-04 15:00 - Patched version released and vulnerability disclosed&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Rust Security Response WG</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.49.0</title>
@@ -952,27 +997,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.47
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Call for 2021 Roadmap Blogs Ending Soon</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/09/21/Scheduling-2021-Roadmap.html" type="text/html" title="Call for 2021 Roadmap Blogs Ending Soon" />
-        <published>2020-09-21T00:00:00+00:00</published>
-        <updated>2020-09-21T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/09/21/Scheduling-2021-Roadmap.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/09/21/Scheduling-2021-Roadmap.html">&lt;p&gt;We will be closing the collection of blog posts on &lt;strong&gt;October 5th&lt;/strong&gt;. As a reminder, we plan to close the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/09/10/survey-launch.html&quot;&gt;survey&lt;/a&gt; on &lt;strong&gt;September 24th&lt;/strong&gt;, later this week.&lt;/p&gt;
-&lt;p&gt;If you haven&#x27;t written a post yet, read the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/09/03/Planning-2021-Roadmap.html&quot;&gt;initial announcement&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Looking forward, we are expecting the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Roadmap RFC proposed by mid-November&lt;/li&gt;
-&lt;li&gt;Roadmap RFC merged by mid-December&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We look forward to reading your posts!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
         </author>
     </entry>
     
