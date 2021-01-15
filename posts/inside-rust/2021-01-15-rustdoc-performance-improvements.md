@@ -11,6 +11,37 @@ Hi everyone! [**@GuillaumeGomez**] recently tweeted about the rustdoc performanc
 
 The tweet received a lot of comments approving the blog post idea so here we go!
 
+## Performance changes
+
+There were actually only two PRs explicitly meant to improve the performance of rustdoc.
+
+1. Rustdoc: Cache resolved links [#77700](https://github.com/rust-lang/rust/pull/77700)
+
+This does what it says in the title. In particular, this sped up the time to generate intra-doc
+links for `stm32h7xx` by a whopping [90000%]. [**@bugadani**](https://github.com/bugadani) did an
+excellent job on this, congratulations!
+
+[90000%]: https://github.com/rust-lang/rust/pull/77700#issuecomment-735995025.
+
+2. Don't look for blanket impls in intra-doc links [#79682](https://github.com/rust-lang/rust/pull/77700)
+
+This PR was very disappointing to write. The gist is that if you had
+
+```rust
+trait Trait {
+    fn f() {}
+}
+
+impl<T> Trait for T {}
+```
+
+then linking to `usize::f` would not only not work, but would take longer to run than the rest of
+intra-doc links to run. This temporarily disabled blanket impls until the bug is fixed and the performance can be improved, for a similar [90x] speedup on `stm32h7xx`.
+
+You may be wondering why stm32h7xx was so slow before; see the end of the post for details.
+
+[90x]: https://github.com/rust-lang/rust/pull/79682#issuecomment-738505531
+
 ## It's all about cleanup
 
 With the recent growth of the rustdoc team, we finally had some time to pay the technical debt we've been accumulating for a while. To sum it up: removing implementations in rustdoc and use the compiler types directly. First, we need to explain a bit how rustdoc works. When we run it to generate HTML documentation, it goes through several steps:
@@ -24,7 +55,7 @@ With the recent growth of the rustdoc team, we finally had some time to pay the 
 [**@jyn514**] noticed a while ago that [most of the work in Rustdoc is duplicated](https://github.com/rust-lang/rust/issues/76382): there are actually *three* different abstract syntax trees (ASTs)! One for `doctree`, one for `clean`, and one is the original [HIR](https://rustc-dev-guide.rust-lang.org/hir.html) used by the compiler.
 Rustdoc was spending quite a lot of time converting between them. Most of the speed improvements have come from getting rid of parts of the AST altogether.
 
-### Burning down the tree
+### Pruning the tree
 
 Most of the work `doctree` did was 100% unnecessary. All the information it had was already present in the [HIR], and recursively walking the crate and building up new types took quite a while to run.
 
@@ -120,11 +151,24 @@ Most of the existing cleanups have been focused on calculating info on-demand th
 
 ### Speed up `collect_blanket_impls`
 
-One of the slowest functions in all of rustdoc is a function called [`get_auto_trait_and_blanket_impls`](https://doc.rust-lang.org/nightly/nightly-rustc/rustdoc/clean/utils/fn.get_auto_trait_and_blanket_impls.html). On crates with many blanket implementation, such as `stm32`-generated crates, this can take [almost half of the *total* time](https://github.com/rust-lang/rust/issues/79103#issuecomment-745732064) rustdoc spends on the crate.
+One of the slowest functions in all of rustdoc is a function called
+[`get_auto_trait_and_blanket_impls`](https://doc.rust-lang.org/nightly/nightly-rustc/rustdoc/clean/utils/fn.get_auto_trait_and_blanket_impls.html).
+On crates with many blanket implementation, such as `stm32`-generated crates, this can take
+[almost half of the *total*
+time](https://github.com/rust-lang/rust/issues/79103#issuecomment-745732064) rustdoc spends on
+the crate.
 
 We are not sure yet how to speed this up, but there is definitely lots of room for improvement.
+If you're interested in working on this, please reach out [on Zulip].
+
+[on Zulip]: https://rust-lang.zulipchat.com/#narrow/stream/247081-t-compiler.2Fperformance/topic/rustdoc.20calls.20.60for_each_relevant_impl.60.20a.20lot
 
 Overall, rustdoc is making rapid progress in performance, but there is still a lot more work to be done.
+
+## Errata
+
+An earlier version of the blog post described the section on slimming `doctree` as "Burning down
+the tree". The name was changed to be more environmentally friendly.
 
 [**@jyn514**]: https://github.com/jyn514
 [**@GuillaumeGomez**]: https://github.com/GuillaumeGomez
