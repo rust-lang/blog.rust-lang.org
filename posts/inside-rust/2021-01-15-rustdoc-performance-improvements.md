@@ -112,7 +112,7 @@ The interesting part is that it also allowed some [small improvements](https://g
 
 With the same logic came [#80261](https://github.com/rust-lang/rust/pull/80261) (which required [#80295](https://github.com/rust-lang/rust/pull/80295) beforehand) which kept the original document attributes [`Symbol`] with the "transformation information" instead of the transformed string. If you want to know more about how rustdoc works on doc comments formatting, [**@GuillaumeGomez**] wrote a blog post about it [here](https://blog.guillaume-gomez.fr/articles/2020-11-11+New+doc+comment+handling+in+rustdoc). The idea here is once again to compute this "on demand" instead of storing the results ahead for (potential) usage.
 
-## Why not relying more on rustc internals earlier?
+## Why did we not rely more on rustc internals earlier?
 
 At this stage of reading this blog post, you may be wondering why rustdoc didn't rely more on rustc internals before this cleanup. The answer is actually simple: rustdoc is **old**. When it was being written, rustc internals changed very frequently (even daily), making it very complicated for the rustdoc maintainers to keep up. To allow them to work without worrying too much about these changes, they decided to abstract the compiler internals so that they could then work with those rustdoc types without having breaking changes to worry about every day.
 
