@@ -23,7 +23,7 @@ excellent job on this, congratulations!
 
 [90000%]: https://github.com/rust-lang/rust/pull/77700#issuecomment-735995025.
 
-2. Don't look for blanket impls in intra-doc links [#79682](https://github.com/rust-lang/rust/pull/77700)
+2. Don't look for blanket impls in intra-doc links [#79682](https://github.com/rust-lang/rust/pull/79682)
 
 This PR was very disappointing to write. The gist is that if you had
 
