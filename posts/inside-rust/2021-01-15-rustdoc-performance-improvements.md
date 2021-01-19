@@ -17,28 +17,28 @@ There were actually only two PRs explicitly meant to improve the performance of 
 
 1. Rustdoc: Cache resolved links [#77700](https://github.com/rust-lang/rust/pull/77700)
 
-This does what it says in the title. In particular, this sped up the time to generate intra-doc
-links for `stm32h7xx` by a whopping [90,000%]. [**@bugadani**](https://github.com/bugadani) did an
-excellent job on this, congratulations!
+   This does what it says in the title. In particular, this sped up the time to generate intra-doc
+   links for `stm32h7xx` by a whopping [90,000%]. [**@bugadani**](https://github.com/bugadani) did an
+   excellent job on this, congratulations!
 
 [90,000%]: https://github.com/rust-lang/rust/pull/77700#issuecomment-735995025
 
 2. Don't look for blanket impls in intra-doc links [#79682](https://github.com/rust-lang/rust/pull/79682)
 
-This PR was very disappointing to write. The gist is that if you had
+   This PR was very disappointing to write. The gist is that if you had
 
-```rust
-trait Trait {
-    fn f() {}
-}
+   ```rust
+   trait Trait {
+       fn f() {}
+   }
 
-impl<T> Trait for T {}
-```
+   impl<T> Trait for T {}
+   ```
 
-then linking to `usize::f` would not only not work, but would take longer to run than the rest of
-intra-doc links to run. This temporarily disabled blanket impls until the bug is fixed and the performance can be improved, for a similar [90x] speedup on `stm32h7xx`.
+   then linking to `usize::f` would not only not work, but would take longer to run than the rest of
+   intra-doc links to run. This temporarily disabled blanket impls until the bug is fixed and the performance can be improved, for a similar [90x] speedup on `stm32h7xx`.
 
-You may be wondering why `stm32h7xx` was so slow before; see the end of the post for details.
+   You may be wondering why `stm32h7xx` was so slow before; see the end of the post for details.
 
 [90x]: https://github.com/rust-lang/rust/pull/79682#issuecomment-738505531
 
@@ -130,17 +130,17 @@ This is the "useful work" (as opposed to unnecessary complexity) that `doctree` 
 - Inlining items that are only reachable from an export. 'Inlining' is showing the full documentation for an item at a re-export (`pub use std::process::Command`) instead of just showing the `use` statement. It's used pervasively by the standard library and facade crates like `futures` to show the relevant documentation in one place, instead of spread out across many crates. **@jyn514** hopes this could be done in `clean` instead, but has no idea yet how to do it.
 - Moving macros from always being at the root of the crate to the module where they're accessible. For example, this macro:
 
-```rust
-#![crate_name="my_crate"]
-#![feature(decl_macro)]
-mod inner {
-    pub macro m() {}
-}
-```
+  ```rust
+  #![crate_name="my_crate"]
+  #![feature(decl_macro)]
+  mod inner {
+      pub macro m() {}
+  }
+  ```
 
-should be documented at `my_crate::inner::m`, but the compiler shows it at `my_crate::m` instead. The fix for this is an awful hack that goes through every module Rustdoc knows about to see if the name of the module matches the name of the macro's parent module. At some point in the future, it would be great to fix the compiler APIs so this is no longer necessary.
+  should be documented at `my_crate::inner::m`, but the compiler shows it at `my_crate::m` instead. The fix for this is an awful hack that goes through every module Rustdoc knows about to see if the name of the module matches the name of the macro's parent module. At some point in the future, it would be great to fix the compiler APIs so this is no longer necessary.
 
-Giant thank you to [**@danielhenrymantilla**](https://github.com/danielhenrymantilla) both for writing up the fix, and discovering and fixing several other macro-related bugs along the way!
+  Giant thank you to [**@danielhenrymantilla**](https://github.com/danielhenrymantilla) both for writing up the fix, and discovering and fixing several other macro-related bugs along the way!
 
 If all these issues could be fixed, that would be an even bigger speedup - there would be no need to walk the tree in the first place!
 
