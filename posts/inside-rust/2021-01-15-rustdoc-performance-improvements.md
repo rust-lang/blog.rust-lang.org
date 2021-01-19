@@ -13,15 +13,15 @@ The tweet received a lot of comments approving the blog post idea so here we go!
 
 ## Performance changes
 
-There were actually only two PRs explicitly meant to improve the performance of rustdoc.
+There were actually only two PRs explicitly meant to improve the performance of rustdoc:
 
 1. Rustdoc: Cache resolved links [#77700](https://github.com/rust-lang/rust/pull/77700)
 
 This does what it says in the title. In particular, this sped up the time to generate intra-doc
-links for `stm32h7xx` by a whopping [90000%]. [**@bugadani**](https://github.com/bugadani) did an
+links for `stm32h7xx` by a whopping [90,000%]. [**@bugadani**](https://github.com/bugadani) did an
 excellent job on this, congratulations!
 
-[90000%]: https://github.com/rust-lang/rust/pull/77700#issuecomment-735995025.
+[90,000%]: https://github.com/rust-lang/rust/pull/77700#issuecomment-735995025
 
 2. Don't look for blanket impls in intra-doc links [#79682](https://github.com/rust-lang/rust/pull/79682)
 
@@ -38,16 +38,16 @@ impl<T> Trait for T {}
 then linking to `usize::f` would not only not work, but would take longer to run than the rest of
 intra-doc links to run. This temporarily disabled blanket impls until the bug is fixed and the performance can be improved, for a similar [90x] speedup on `stm32h7xx`.
 
-You may be wondering why stm32h7xx was so slow before; see the end of the post for details.
+You may be wondering why `stm32h7xx` was so slow before; see the end of the post for details.
 
 [90x]: https://github.com/rust-lang/rust/pull/79682#issuecomment-738505531
 
 ## It's all about cleanup
 
-With the recent growth of the rustdoc team, we finally had some time to pay the technical debt we've been accumulating for a while. To sum it up: removing implementations in rustdoc and use the compiler types directly. First, we need to explain a bit how rustdoc works. When we run it to generate HTML documentation, it goes through several steps:
+With the recent growth of the rustdoc team, we finally had some time to pay down the technical debt we've been accumulating for a while. To sum it up: removing implementations in rustdoc and using the compiler types directly. First, we need to explain a bit about how rustdoc works. When we run it to generate HTML documentation, it goes through several steps:
 
 * Run parts of the compiler to get the information we need.
-* Remove the information provided by the compiler that we don't need (for example, if an item is "doc hidden", we don't need it). There is a lot to say on this part so maybe we'll write another blog post to go more into details.
+* Remove the information provided by the compiler that we don't need (for example, if an item is `doc(hidden)`, we don't need it). There is a lot to say on this part so maybe we'll write another blog post to go more into details.
 * The `doctree` pass which adds some extra information needed by rustdoc on some items of the compiler.
 * The `clean` pass which converts the compiler types into rustdoc ones: basically, it transforms everything into "printable" content.
 * The `render` pass which then generates the desired output (HTML or, on nightly, JSON).
@@ -60,7 +60,7 @@ Rustdoc was spending quite a lot of time converting between them. Most of the sp
 Most of the work `doctree` did was 100% unnecessary. All the information it had was already present in the [HIR], and recursively walking the crate and building up new types took quite a while to run.
 
 [**@jyn514**]'s first stab at this was to [get rid of the pass altogether](https://github.com/rust-lang/rust/pull/78082). This went... badly. It turns out it did some useful work after all.
- 
+
 That said, there was a bunch of unnecessary work it didn't need to do, which was to add its own types for everything. If you look at [the types from 3 months ago](https://github.com/rust-lang/rust/blob/31d275e5877d983fecb39bbaad837f6b7cf120d3/src/librustdoc/doctree.rs) against [the types from today](https://github.com/rust-lang/rust/blob/a4f022e1099c712fdcc8555fd10caccb1a631877/src/librustdoc/doctree.rs), the difference is really startling! It went from 300 lines of code replicating almost every type in the compiler to only 75 lines and 6 types.
 
 ## Cleaning the `clean` pass
@@ -76,7 +76,7 @@ Along the way, [**@jyn514**] found several cleanups that were necessary in the c
 
 Once that was done, we were able to get rid of large parts of the [`Item`] type by calculating the information on-demand instead, using the compiler internals. This had two benefits:
 
-1. Less memory usage, because the information wasn't stored longer than it was needed
+1. Less memory usage, because the information wasn't stored longer than it was needed.
 2. Less time overall, because not every item needed all the information available.
 
 This benefited quite a lot from the [query system](https://rustc-dev-guide.rust-lang.org/query.html), which I highly encourage reading about.
@@ -114,19 +114,20 @@ With the same logic came [#80261](https://github.com/rust-lang/rust/pull/80261) 
 
 ## Why did we not rely more on rustc internals earlier?
 
-At this stage of reading this blog post, you may be wondering why rustdoc didn't rely more on rustc internals before this cleanup. The answer is actually simple: rustdoc is **old**. When it was being written, rustc internals changed very frequently (even daily), making it very complicated for the rustdoc maintainers to keep up. To allow them to work without worrying too much about these changes, they decided to abstract the compiler internals so that they could then work with those rustdoc types without having breaking changes to worry about every day.
+By now, you may be wondering why rustdoc didn't rely more on rustc internals before this cleanup. The answer is actually simple: rustdoc is **old**. When it was being written, rustc internals changed very frequently (even daily), making it very complicated for the rustdoc maintainers to keep up. To allow them to work without worrying too much about these changes, they decided to abstract the compiler internals so that they could then work with those rustdoc types without having breaking changes to worry about every day.
 
-Since then, things got improved, the 1.0 version of Rust finally got released and things slowed down. Then, focus was mostly on adding new features to make rustdoc as great as possible. With the arrival of new rustdoc team members, we were finally able to get back on this aspect. It didn't make much sense to keep all those abstractions because the internals are somewhat stable now (understand: the APIs we use don't change much anymore) and we can all see the results. :)
+Since then, things got improved, the 1.0 version of Rust finally got released and things slowed down. Then, focus was mostly on adding new features to make rustdoc as great as possible. With the arrival of new rustdoc team members, we were finally able to get back on this aspect. It didn't make much sense to keep all those abstractions because the internals are somewhat stable now and we can all see the results. :)
 
 ## Next Steps
 
 As you saw from the displayed benchmarks, the results were strongly positive. However, we're still far from done. As we speak, we continue to simplify and rework a lot of the rustdoc source code.
 
-### Removing doctree altogether
+### Remove doctree altogether
 
-This is the "useful work" (as opposed to unnecessary complexity) that doctree does today:
+This is the "useful work" (as opposed to unnecessary complexity) that `doctree` does today:
 
 - Detecting which items are publicly reachable. Ideally, this would just use compiler APIs, but those APIs [are broken](https://github.com/rust-lang/rust/issues/64762).
+- Inlining items that are only reachable from an export. 'Inlining' is showing the full documentation for an item at a re-export (`pub use std::process::Command`) instead of just showing the `use` statement. It's used pervasively by the standard library and facade crates like `futures` to show the relevant documentation in one place, instead of spread out across many crates. **@jyn514** hopes this could be done in `clean` instead, but has no idea yet how to do it.
 - Moving macros from always being at the root of the crate to the module where they're accessible. For example, this macro:
 
 ```rust
@@ -141,9 +142,7 @@ should be documented at `my_crate::inner::m`, but the compiler shows it at `my_c
 
 Giant thank you to [**@danielhenrymantilla**](https://github.com/danielhenrymantilla) both for writing up the fix, and discovering and fixing several other macro-related bugs along the way!
 
-- Inlining items that are only reachable from an export. 'Inlining' is showing the full documentation for an item at a re-export (`pub use std::process::Command`) instead of just showing the `use` statement. It's used pervasively by the standard library and facade crates like `futures` to show the relevant documentation in one place, instead of spread out across many crates. **@jyn514** hopes this could be done in `clean` instead, but has no idea yet how to do it.
-
- If all these issues could be fixed, that would be an even bigger speedup - there would be no need to walk the tree in the first place!
+If all these issues could be fixed, that would be an even bigger speedup - there would be no need to walk the tree in the first place!
 
 ### Continue to shrink `clean::Item`
 
