@@ -10,8 +10,32 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-01-04T15:11:02+00:00</updated>
+    <updated>2021-01-20T12:27:42+00:00</updated>
 
+    
+    <entry>
+        <title>Changes to the Rustdoc team</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/01/19/changes-to-rustdoc-team.html" type="text/html" title="Changes to the Rustdoc team" />
+        <published>2021-01-19T00:00:00+00:00</published>
+        <updated>2021-01-19T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/01/19/changes-to-rustdoc-team.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/01/19/changes-to-rustdoc-team.html">&lt;p&gt;Recently, there have been a lot of improvements in rustdoc. It was possible thanks to our new contributors. In light of these recent contributions, a few changes were made in the rustdoc team.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#adding-a-new-team-leader&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;adding-a-new-team-leader&quot;&gt;&lt;/a&gt;Adding a new team leader&lt;/h2&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/jyn514&quot;&gt;Joshua&lt;/a&gt; has been helping me &lt;strong&gt;a lot&lt;/strong&gt; on the leading parts by tagging issues and mentoring newcomers. But at the same time, he initiated great changes in the rustdoc codebase that led to huge performance improvements, he finished the &amp;quot;intra doc link&amp;quot; features which is now stable after years of instability (more information &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustdoc/linking-to-items-by-name.html&quot;&gt;here&lt;/a&gt;). He also did multiple additional things but let&#x27;s stop the listing here. :)&lt;/p&gt;
+&lt;p&gt;Overall, he&#x27;s been an enormous help and making him co-lead is just making offical everything&#x27;s he&#x27;s been doing since he joined the rustdoc team (and even before!). I&#x27;m glad to have him on the team and as co-lead.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#membership-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;membership-changes&quot;&gt;&lt;/a&gt;Membership Changes&lt;/h2&gt;
+&lt;p&gt;In addition to the new co-leadership nomination, we also have some new rustdoc team members to announce: &lt;a href&#x3D;&quot;https://github.com/camelid&quot;&gt;&lt;strong&gt;@camelid&lt;/strong&gt;&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/Nemo157&quot;&gt;&lt;strong&gt;@Nemo157&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/camelid&quot;&gt;&lt;strong&gt;@camelid&lt;/strong&gt;&lt;/a&gt; did a huge number of contributions on rustdoc, helping on the cleanup and fixing bugs.&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/Nemo157&quot;&gt;&lt;strong&gt;@Nemo157&lt;/strong&gt;&lt;/a&gt; helped a lot on the &amp;quot;front-end&amp;quot; part of rustdoc (i.e. HTML/CSS/JS), not only reviewing but also fixing bugs and improving the current code.&lt;/p&gt;
+&lt;p&gt;Both of them have been contributing for a long time and we&#x27;re really glad to (finally) have them on board.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;With all these great new onboardings, we&#x27;re expecting rustdoc to improve at much faster rate. More to come soon!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Guillaume Gomez</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.49.0 pre-release testing</title>
@@ -556,94 +580,6 @@ Significantly increasing the compiler&#x27;s build times on the official build i
 
         <author>
             <name>Mark Rousskov</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Lang team Backlog Bonanza and Project Proposals</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/10/16/Backlog-Bonanza.html" type="text/html" title="Lang team Backlog Bonanza and Project Proposals" />
-        <published>2020-10-16T00:00:00+00:00</published>
-        <updated>2020-10-16T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/10/16/Backlog-Bonanza.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/10/16/Backlog-Bonanza.html">&lt;p&gt;A month or two back, the lang team embarked on a new initiative that
-we call the &amp;quot;Backlog Bonanza&amp;quot;. The idea is simple: we are holding a
-series of meetings in which we go through every pending RFC, one by
-one, and try to reach some sort of determination about what to do with
-it.  Once we&#x27;ve finished that, we can start in on categorizing other
-forms of backlog, such as tracking issues.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#possible-outcomes-for-each-rfc&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;possible-outcomes-for-each-rfc&quot;&gt;&lt;/a&gt;Possible outcomes for each RFC&lt;/h3&gt;
-&lt;p&gt;When we look at an RFC, we&#x27;re typically deciding between one of the following outcomes:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Close&lt;/strong&gt; the RFC, if the problem doesn&#x27;t seem like high priority at the moment, or the solution seems quite far from what we would want.&lt;/li&gt;
-&lt;li&gt;Close, but &lt;strong&gt;suggest a &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/proposing_a_project.html&quot;&gt;project proposal&lt;/a&gt;&lt;/strong&gt;, if we think that the we might like to see the problem solved, but we aren&#x27;t sure if the RFC has the design right, or we&#x27;re not sure who would be a good liaison.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Merge&lt;/strong&gt; the RFC, if we think the RFC basically nailed it and we have a lang team liaison in mind.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#wait-what-is-a-project-proposal&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;wait-what-is-a-project-proposal&quot;&gt;&lt;/a&gt;Wait, what is a project proposal?&lt;/h3&gt;
-&lt;p&gt;I&#x27;m so glad you asked! The lang team is experimenting with a new
-process for extending the language. Instead of starting out by writing
-an RFC, the idea is to start with a &lt;strong&gt;&lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/proposing_a_project.html&quot;&gt;project proposal&lt;/a&gt;&lt;/strong&gt;. This is a
-lightweight description that you do by &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/new/choose&quot;&gt;opening an issue&lt;/a&gt; on the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/&quot;&gt;lang-team repository&lt;/a&gt; using the &amp;quot;Project proposal&amp;quot; template. That
-will create an issue and a corresponding stream on Zulip.&lt;/p&gt;
-&lt;p&gt;In our &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/meetings.html&quot;&gt;weekly triage meetings&lt;/a&gt;, we go over each new project proposal
-and try to provide feedback. Project proposals generally result in one
-of a few possible outcomes:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Close&lt;/strong&gt;, if we feel like the idea isn&#x27;t a good fit right now.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Suggest implementing&lt;/strong&gt;, if we feel like the idea is simple or obvious enough that an RFC isn&#x27;t really needed. In that case, folks can just write a PR and we can use the fcp process to approve the PR.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Charter a project group&lt;/strong&gt;, if we feel like the idea is good, but we&#x27;d like to see the design spelled out. To do this, there has to be some lang-team liaison who wants to help see it through (though that liaison doesn&#x27;t have to be a member of the team; &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/07/09/lang-team-path-to-membership.html&quot;&gt;serving as a liaison is a good way to get more involved in the lang team&lt;/a&gt;).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#chartering-a-project-group&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;chartering-a-project-group&quot;&gt;&lt;/a&gt;Chartering a project group&lt;/h3&gt;
-&lt;p&gt;A &amp;quot;project group&amp;quot; is basically just a group of people working together
-completing some idea. Project groups are often pretty small, just 1 or 2
-people, though they can get significantly larger.&lt;/p&gt;
-&lt;p&gt;Creating a smaller project group is meant to be lightweight. We
-basically convert the project proposal into a charter that states the
-general goals and create an associated zulip stream where folks can
-chat. Each project also gets a tracking issue that shows up on our
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/projects/2&quot;&gt;lang team project board&lt;/a&gt;. (For larger project groups, we can make a
-dedicated repo and an entry in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/team&quot;&gt;Rust team repo&lt;/a&gt;.)&lt;/p&gt;
-&lt;p&gt;In the early stages of an idea, project groups work to draft an
-RFC. This RFC is then taken to the lang-team for feedback. Once the
-lang-team is basically happy on the direction things are going, we&#x27;ll
-encourage the group to open the RFC on the main RFC repository, where
-it&#x27;ll get feedback from a broader audience.&lt;/p&gt;
-&lt;p&gt;Once the RFC is &lt;strong&gt;accepted&lt;/strong&gt;, the hope is that project groups stick
-around. If desired, the same folks can try to implement the feature
-(in collaboration with the compiler team) or we can find new people.
-But this way, as those people try to implement, they&#x27;ll become a part
-of the same group that was designing the feature so that we can
-iterate more readily. The same logic applies to the other aspects of
-shipping a feature, most notably writing documentation.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#tracking-projects-the-lang-team-project-board&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;tracking-projects-the-lang-team-project-board&quot;&gt;&lt;/a&gt;Tracking projects: the lang team project board&lt;/h3&gt;
-&lt;p&gt;I mentioned the &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/projects/2&quot;&gt;lang team project board&lt;/a&gt; off-hand in the previous
-paragraph. This is our attempt to track the ongoing efforts. It breaks
-down the various projects into stages, with the things that are closest
-to shipping coming first:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Stabilization&lt;/strong&gt; -- projects that we are ready to stabilize, or in
-the process of stabilizing.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Evaluation&lt;/strong&gt; -- projects that are fully implemented but where we are
-seeking feedback on how well the design works.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Implementation&lt;/strong&gt; -- projects that are currently working on implementation
-(and sometimes concurrent design iteration).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Pending RFC&lt;/strong&gt; -- projects with an RFC that is pending public comment&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Design&lt;/strong&gt; -- projects actively iterating towards an RFC&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Shortlisted&lt;/strong&gt; -- project ideas that we might want to take up once we
-find a suitable liaison or people have enough bandwidth&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#ways-to-get-involved&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;ways-to-get-involved&quot;&gt;&lt;/a&gt;Ways to get involved&lt;/h3&gt;
-&lt;p&gt;If you like, you are welcome to attend backlog bonanza meetings. They
-are open for anyone and take place during our &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/meetings.html&quot;&gt;design meeting&lt;/a&gt;
-most weeks. We haven&#x27;t setup a very good process for announcing our
-design meeting schedule, though, that&#x27;s something that we need to get
-better at.&lt;/p&gt;
-&lt;p&gt;Alternatively, if you have ideas you&#x27;d like to float, please feel free
-to open a &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/proposing_a_project.html&quot;&gt;project proposal&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Nicholas Matsakis</name>
         </author>
     </entry>
     
