@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rustdoc performance improvements | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rustdoc performance improvements | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rustdoc performance improvements | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rustdoc performance improvements" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rustdoc performance improvements</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 15, 2021 &middot; Joshua Nelson and Guillaume Gomez
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/dev-tools#rustdoc">The Rustdoc Team</a> 
+    </div>
+
+    <div class="post">
+      <p>Hi everyone! <a href="https://github.com/GuillaumeGomez"><strong>@GuillaumeGomez</strong></a> recently tweeted about the rustdoc performance improvements and suggested that we write a blog post about it:</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">The performance comparison between <a href="https://twitter.com/rustlang?ref_src=twsrc%5Etfw">@rustlang</a> rustdoc now and rustdoc 4 months ago are crazy! The rustdoc cleanup going on (we&#39;re still far from done!) is having a huge positive impact! Can&#39;t wait to see how much better the results will be.<br><br>Maybe I should write a blog post? <a href="https://t.co/XapdmdZ1IZ">pic.twitter.com/XapdmdZ1IZ</a></p>&mdash; Guillaume Gomez (@imperioworld_) <a href="https://twitter.com/imperioworld_/status/1349383125051305984?ref_src=twsrc%5Etfw">January 13, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+<p>The tweet received a lot of comments approving the blog post idea so here we go!</p>
+<h2><a href="#performance-changes" aria-hidden="true" class="anchor" id="performance-changes"></a>Performance changes</h2>
+<p>There were actually only two PRs explicitly meant to improve the performance of rustdoc:</p>
+<ol>
+<li>
+<p>Rustdoc: Cache resolved links <a href="https://github.com/rust-lang/rust/pull/77700">#77700</a></p>
+<p>This does what it says in the title. In particular, this sped up the time to generate intra-doc
+links for <code>stm32h7xx</code> by a whopping <a href="https://github.com/rust-lang/rust/pull/77700#issuecomment-735995025">90,000%</a>. <a href="https://github.com/bugadani"><strong>@bugadani</strong></a> did an
+excellent job on this, congratulations!</p>
+</li>
+</ol>
+<ol start="2">
+<li>
+<p>Don't look for blanket impls in intra-doc links <a href="https://github.com/rust-lang/rust/pull/79682">#79682</a></p>
+<p>This PR was very disappointing to write. The gist is that if you had</p>
+<pre><code class="language-rust">trait Trait {
+    fn f() {}
+}
+
+impl&lt;T&gt; Trait for T {}
+</code></pre>
+<p>then linking to <code>usize::f</code> would not only not work, but would take longer to run than the rest of
+intra-doc links to run. This temporarily disabled blanket impls until the bug is fixed and the performance can be improved, for a similar <a href="https://github.com/rust-lang/rust/pull/79682#issuecomment-738505531">90x</a> speedup on <code>stm32h7xx</code>.</p>
+<p>You may be wondering why <code>stm32h7xx</code> was so slow before; see the end of the post for details.</p>
+</li>
+</ol>
+<h2><a href="#its-all-about-cleanup" aria-hidden="true" class="anchor" id="its-all-about-cleanup"></a>It's all about cleanup</h2>
+<p>With the recent growth of the rustdoc team, we finally had some time to pay down the technical debt we've been accumulating for a while. To sum it up: removing implementations in rustdoc and using the compiler types directly. First, we need to explain a bit about how rustdoc works. When we run it to generate HTML documentation, it goes through several steps:</p>
+<ul>
+<li>Run parts of the compiler to get the information we need.</li>
+<li>Remove the information provided by the compiler that we don't need (for example, if an item is <code>doc(hidden)</code>, we don't need it). There is a lot to say on this part so maybe we'll write another blog post to go more into details.</li>
+<li>The <code>doctree</code> pass which adds some extra information needed by rustdoc on some items of the compiler.</li>
+<li>The <code>clean</code> pass which converts the compiler types into rustdoc ones: basically, it transforms everything into &quot;printable&quot; content.</li>
+<li>The <code>render</code> pass which then generates the desired output (HTML or, on nightly, JSON).</li>
+</ul>
+<p><a href="https://github.com/jyn514"><strong>@jyn514</strong></a> noticed a while ago that <a href="https://github.com/rust-lang/rust/issues/76382">most of the work in Rustdoc is duplicated</a>: there are actually <em>three</em> different abstract syntax trees (ASTs)! One for <code>doctree</code>, one for <code>clean</code>, and one is the original <a href="https://rustc-dev-guide.rust-lang.org/hir.html">HIR</a> used by the compiler.
+Rustdoc was spending quite a lot of time converting between them. Most of the speed improvements have come from getting rid of parts of the AST altogether.</p>
+<h3><a href="#pruning-the-tree" aria-hidden="true" class="anchor" id="pruning-the-tree"></a>Pruning the tree</h3>
+<p>Most of the work <code>doctree</code> did was 100% unnecessary. All the information it had was already present in the <a href="https://rustc-dev-guide.rust-lang.org/hir.html">HIR</a>, and recursively walking the crate and building up new types took quite a while to run.</p>
+<p><a href="https://github.com/jyn514"><strong>@jyn514</strong></a>'s first stab at this was to <a href="https://github.com/rust-lang/rust/pull/78082">get rid of the pass altogether</a>. This went... badly. It turns out it did some useful work after all.</p>
+<p>That said, there was a bunch of unnecessary work it didn't need to do, which was to add its own types for everything. If you look at <a href="https://github.com/rust-lang/rust/blob/31d275e5877d983fecb39bbaad837f6b7cf120d3/src/librustdoc/doctree.rs">the types from 3 months ago</a> against <a href="https://github.com/rust-lang/rust/blob/a4f022e1099c712fdcc8555fd10caccb1a631877/src/librustdoc/doctree.rs">the types from today</a>, the difference is really startling! It went from 300 lines of code replicating almost every type in the compiler to only 75 lines and 6 types.</p>
+<h2><a href="#cleaning-the-clean-pass" aria-hidden="true" class="anchor" id="cleaning-the-clean-pass"></a>Cleaning the <code>clean</code> pass</h2>
+<p>The first and most important part of this cleanup was a PR called 'Add <code>Item::from_def_id_and_kind</code> to reduce duplication in rustdoc' (<a href="https://github.com/rust-lang/rust/pull/77820">#77820</a>). Before that change, every <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustdoc/clean/types/struct.Item.html"><code>Item</code></a> in rustdoc was constructed in dozens of different places - for structs, for enums, for traits, the list went on and on. This made it very hard to make changes to the <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustdoc/clean/types/struct.Item.html"><code>Item</code></a> struct, because any change would break dozens of callsites, each of which had to be fixed individually. What <a href="https://github.com/rust-lang/rust/pull/77820">#77820</a> did was to construct all those items in the same place, which made it far easier to change how <code>Item</code> was represented internally.</p>
+<p>Along the way, <a href="https://github.com/jyn514"><strong>@jyn514</strong></a> found several cleanups that were necessary in the compiler first:</p>
+<ul>
+<li>Calculate visibilities once in resolve <a href="https://github.com/rust-lang/rust/pull/78077">#78077</a>. Thanks to <a href="https://github.com/petrochenkov"><strong>@petrochenkov</strong></a> for tackling this!</li>
+<li>Fix handling of item names for HIR <a href="https://github.com/rust-lang/rust/pull/78345">#78345</a></li>
+</ul>
+<h3><a href="#deleting-parts-of-item" aria-hidden="true" class="anchor" id="deleting-parts-of-item"></a>Deleting parts of <code>Item</code></h3>
+<p>Once that was done, we were able to get rid of large parts of the <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustdoc/clean/types/struct.Item.html"><code>Item</code></a> type by calculating the information on-demand instead, using the compiler internals. This had two benefits:</p>
+<ol>
+<li>Less memory usage, because the information wasn't stored longer than it was needed.</li>
+<li>Less time overall, because not every item needed all the information available.</li>
+</ol>
+<p>This benefited quite a lot from the <a href="https://rustc-dev-guide.rust-lang.org/query.html">query system</a>, which I highly encourage reading about.</p>
+<p>Here are some example changes that calculate information on demand:</p>
+<ul>
+<li>Don't unnecessarily override attrs for Module <a href="https://github.com/rust-lang/rust/pull/80340">#80340</a></li>
+<li>Get rid of <code>clean::Deprecation</code> <a href="https://github.com/rust-lang/rust/pull/80041">#80041</a></li>
+<li>Get rid of <code>clean::{Method, TyMethod}</code> <a href="https://github.com/rust-lang/rust/pull/79125">#79125</a></li>
+<li>Remove duplicate <code>Trait::auto</code> field <a href="https://github.com/rust-lang/rust/pull/79126">#79126</a></li>
+<li>Get rid of some doctree items <a href="https://github.com/rust-lang/rust/pull/79264">#79264</a></li>
+<li>Get rid of <code>doctree::{ExternalCrate, ForeignItem, Trait, Function}</code> <a href="https://github.com/rust-lang/rust/pull/79335">#79335</a></li>
+<li>Get rid of <code>doctree::Impl</code> <a href="https://github.com/rust-lang/rust/pull/79312">79312</a></li>
+<li>Remove <code>doctree::Macro</code> and distinguish between <code>macro_rules!</code> and <code>pub macro</code> <a href="https://github.com/rust-lang/rust/pull/79455">#79455</a></li>
+<li>Pass around Symbols instead of Idents in doctree <a href="https://github.com/rust-lang/rust/pull/79623">#79623</a></li>
+</ul>
+<p>As you can see, all these changes not only sped up rustdoc, but discovered bugs and duplication that had been around for years.</p>
+<h3><a href="#reusing-compiler-types" aria-hidden="true" class="anchor" id="reusing-compiler-types"></a>Reusing compiler types</h3>
+<p>And some examples of using the existing compiler types without adding our own:</p>
+<ul>
+<li>[rustdoc] Switch to Symbol for <code>item.name</code> <a href="https://github.com/rust-lang/rust/pull/80044">#80044</a></li>
+<li>Use more symbols in rustdoc <a href="https://github.com/rust-lang/rust/pull/80047">#80047</a></li>
+<li>Replace String with Symbol where possible <a href="https://github.com/rust-lang/rust/pull/80091">#80091</a></li>
+<li>Continue String to Symbol conversion in rustdoc (1) <a href="https://github.com/rust-lang/rust/pull/80119">#80119</a></li>
+<li>Continue String to Symbol conversion in rustdoc (2) <a href="https://github.com/rust-lang/rust/pull/80154">#80154</a></li>
+<li>Get rid of custom pretty-printing in rustdoc <a href="https://github.com/rust-lang/rust/pull/80799">#80799</a></li>
+</ul>
+<p>They replace <code>String</code> used for items' name to use <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_span/symbol/struct.Symbol.html"><code>Symbol</code></a> instead. Symbols are interned strings, so we're not only preventing unnecessary conversions but also greatly improving memory usage. You can read more about Symbols in the <a href="https://rustc-dev-guide.rust-lang.org/appendix/glossary.html?highlight=symbol#glossary">rustc-dev-guide</a>.</p>
+<p>The interesting part is that it also allowed some <a href="https://github.com/rust-lang/rust/pull/80750">small improvements</a> in the compiler itself.</p>
+<p>With the same logic came <a href="https://github.com/rust-lang/rust/pull/80261">#80261</a> (which required <a href="https://github.com/rust-lang/rust/pull/80295">#80295</a> beforehand) which kept the original document attributes <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_span/symbol/struct.Symbol.html"><code>Symbol</code></a> with the &quot;transformation information&quot; instead of the transformed string. If you want to know more about how rustdoc works on doc comments formatting, <a href="https://github.com/GuillaumeGomez"><strong>@GuillaumeGomez</strong></a> wrote a blog post about it <a href="https://blog.guillaume-gomez.fr/articles/2020-11-11+New+doc+comment+handling+in+rustdoc">here</a>. The idea here is once again to compute this &quot;on demand&quot; instead of storing the results ahead for (potential) usage.</p>
+<h2><a href="#why-did-we-not-rely-more-on-rustc-internals-earlier" aria-hidden="true" class="anchor" id="why-did-we-not-rely-more-on-rustc-internals-earlier"></a>Why did we not rely more on rustc internals earlier?</h2>
+<p>By now, you may be wondering why rustdoc didn't rely more on rustc internals before this cleanup. The answer is actually simple: rustdoc is <strong>old</strong>. When it was being written, rustc internals changed very frequently (even daily), making it very complicated for the rustdoc maintainers to keep up. To allow them to work without worrying too much about these changes, they decided to abstract the compiler internals so that they could then work with those rustdoc types without having breaking changes to worry about every day.</p>
+<p>Since then, things got improved, the 1.0 version of Rust finally got released and things slowed down. Then, focus was mostly on adding new features to make rustdoc as great as possible. With the arrival of new rustdoc team members, we were finally able to get back on this aspect. It didn't make much sense to keep all those abstractions because the internals are somewhat stable now and we can all see the results. :)</p>
+<h2><a href="#next-steps" aria-hidden="true" class="anchor" id="next-steps"></a>Next Steps</h2>
+<p>As you saw from the displayed benchmarks, the results were strongly positive. However, we're still far from done. As we speak, we continue to simplify and rework a lot of the rustdoc source code.</p>
+<h3><a href="#remove-doctree-altogether" aria-hidden="true" class="anchor" id="remove-doctree-altogether"></a>Remove doctree altogether</h3>
+<p>This is the &quot;useful work&quot; (as opposed to unnecessary complexity) that <code>doctree</code> does today:</p>
+<ul>
+<li>
+<p>Detecting which items are publicly reachable. Ideally, this would just use compiler APIs, but those APIs <a href="https://github.com/rust-lang/rust/issues/64762">are broken</a>.</p>
+</li>
+<li>
+<p>Inlining items that are only reachable from an export. 'Inlining' is showing the full documentation for an item at a re-export (<code>pub use std::process::Command</code>) instead of just showing the <code>use</code> statement. It's used pervasively by the standard library and facade crates like <code>futures</code> to show the relevant documentation in one place, instead of spread out across many crates. <strong>@jyn514</strong> hopes this could be done in <code>clean</code> instead, but has no idea yet how to do it.</p>
+</li>
+<li>
+<p>Moving macros from always being at the root of the crate to the module where they're accessible. For example, this macro:</p>
+<pre><code class="language-rust">#![crate_name=&quot;my_crate&quot;]
+#![feature(decl_macro)]
+mod inner {
+    pub macro m() {}
+}
+</code></pre>
+<p>should be documented at <code>my_crate::inner::m</code>, but the compiler shows it at <code>my_crate::m</code> instead. The fix for this is an awful hack that goes through every module Rustdoc knows about to see if the name of the module matches the name of the macro's parent module. At some point in the future, it would be great to fix the compiler APIs so this is no longer necessary.</p>
+<p>Giant thank you to <a href="https://github.com/danielhenrymantilla"><strong>@danielhenrymantilla</strong></a> both for writing up the fix, and discovering and fixing several other macro-related bugs along the way!</p>
+</li>
+</ul>
+<p>If all these issues could be fixed, that would be an even bigger speedup - there would be no need to walk the tree in the first place!</p>
+<h3><a href="#continue-to-shrink-cleanitem" aria-hidden="true" class="anchor" id="continue-to-shrink-cleanitem"></a>Continue to shrink <code>clean::Item</code></h3>
+<p>Most of the existing cleanups have been focused on calculating info on-demand that's used for <em>every</em> item in rustdoc, since that has the greatest impact. There are still lots of other parts that are calculated ahead of time, though: in particular <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustdoc/clean/types/enum.ItemKind.html"><code>ItemKind</code></a> goes completely through <code>clean</code> before starting to render the documentation.</p>
+<h3><a href="#speed-up-collect_blanket_impls" aria-hidden="true" class="anchor" id="speed-up-collect_blanket_impls"></a>Speed up <code>collect_blanket_impls</code></h3>
+<p>One of the slowest functions in all of rustdoc is a function called
+<a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustdoc/clean/utils/fn.get_auto_trait_and_blanket_impls.html"><code>get_auto_trait_and_blanket_impls</code></a>.
+On crates with many blanket implementation, such as <code>stm32</code>-generated crates, this can take
+<a href="https://github.com/rust-lang/rust/issues/79103#issuecomment-745732064">almost half of the <em>total</em>
+time</a> rustdoc spends on
+the crate.</p>
+<p>We are not sure yet how to speed this up, but there is definitely lots of room for improvement.
+If you're interested in working on this, please reach out <a href="https://rust-lang.zulipchat.com/#narrow/stream/247081-t-compiler.2Fperformance/topic/rustdoc.20calls.20.60for_each_relevant_impl.60.20a.20lot">on Zulip</a>.</p>
+<p>Overall, rustdoc is making rapid progress in performance, but there is still a lot more work to be done.</p>
+<h2><a href="#errata" aria-hidden="true" class="anchor" id="errata"></a>Errata</h2>
+<p>An earlier version of the blog post described the section on slimming <code>doctree</code> as &quot;Burning down
+the tree&quot;. The name was changed to be more environmentally friendly.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
