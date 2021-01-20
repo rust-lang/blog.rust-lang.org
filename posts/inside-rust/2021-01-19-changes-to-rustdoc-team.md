@@ -12,7 +12,7 @@ Recently, there have been a lot of improvements in rustdoc. It was possible than
 
 [Joshua](https://github.com/jyn514) has been helping me **a lot** on the leading parts by tagging issues and mentoring newcomers. But at the same time, he initiated great changes in the rustdoc codebase that led to huge performance improvements, he finished the "intra doc link" features which is now stable after years of instability (more information [here](https://doc.rust-lang.org/rustdoc/linking-to-items-by-name.html)). He also did multiple additional things but let's stop the listing here. :)
 
-Overall, he's been an enormous help and making him co-lead is just making offical everything's he's been doing since he joined the rustdoc team (and even before!). I'm glad to have him on the team and as co-lead.
+Overall, he's been an enormous help and making him co-lead is just making official everything's he's been doing since he joined the rustdoc team (and even before!). I'm glad to have him on the team and as co-lead.
 
 ## Membership Changes
 
