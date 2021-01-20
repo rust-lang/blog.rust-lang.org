@@ -61,7 +61,7 @@ Most of the work `doctree` did was 100% unnecessary. All the information it had 
 
 [**@jyn514**]'s first stab at this was to [get rid of the pass altogether](https://github.com/rust-lang/rust/pull/78082). This went... badly. It turns out it did some useful work after all.
 
-That said, there was a bunch of unnecessary work it didn't need to do, which was to add its own types for everything. If you look at [the types from 3 months ago](https://github.com/rust-lang/rust/blob/31d275e5877d983fecb39bbaad837f6b7cf120d3/src/librustdoc/doctree.rs) against [the types from today](https://github.com/rust-lang/rust/blob/a4f022e1099c712fdcc8555fd10caccb1a631877/src/librustdoc/doctree.rs), the difference is really startling! It went from 300 lines of code replicating almost every type in the compiler to only 75 lines and 6 types.
+That said, there was a bunch of unnecessary work it didn't need to do, which was to add its own types for everything. If you look at [the types from 3 months ago](https://github.com/rust-lang/rust/blob/31d275e5877d983fecb39bbaad837f6b7cf120d3/src/librustdoc/doctree.rs) against [the types from today](https://github.com/rust-lang/rust/blob/a4cbb44ae2c80545db957763b502dc7f6ea22085/src/librustdoc/doctree.rs), the difference is really startling! It went from 300 lines of code replicating almost every type in the compiler to only 75 lines and 6 types.
 
 ## Cleaning the `clean` pass
 
