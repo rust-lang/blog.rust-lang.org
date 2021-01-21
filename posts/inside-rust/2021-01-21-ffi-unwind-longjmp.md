@@ -186,14 +186,6 @@ fn no_drop(jmp_buf: CJmpBuf) {
 }
 ```
 
-## Difference from the "never" type
-
-Above, a Rust call to C's `longjmp` function was declared with the "never"
-return type, `!`. A function with this return type cannot return normally,
-which sounds superficially similar to functions that can be "canceled".
-However, cancelation is more restrictive: `-> !` usually indicates an infinite
-loop. This cannot cause a resource leak, so it is safe for non-POFs.
-
 ## Join us!
 
 If you would like to help us create this specification and write an RFC for it,
