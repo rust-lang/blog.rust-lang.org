@@ -1,4 +1,4 @@
- ---
+---
 layout: post
 title: "Rust & the case of the disappearing stack frames"
 author: Kyle Strand on behalf of the FFI-unwind project group
