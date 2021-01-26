@@ -10,8 +10,177 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-01-20T21:30:22+00:00</updated>
+    <updated>2021-01-26T14:07:45+00:00</updated>
 
+    
+    <entry>
+        <title>Rust &amp; the case of the disappearing stack frames</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/01/26/ffi-unwind-longjmp.html" type="text/html" title="Rust &amp; the case of the disappearing stack frames" />
+        <published>2021-01-26T00:00:00+00:00</published>
+        <updated>2021-01-26T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/01/26/ffi-unwind-longjmp.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/01/26/ffi-unwind-longjmp.html">&lt;p&gt;Now that the &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-ffi-unwind&quot;&gt;FFI-unwind Project Group&lt;/a&gt; has merged &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md&quot;&gt;an
+RFC&lt;/a&gt; specifying the &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; ABI and removing some instances
+of undefined behavior in the &lt;code&gt;&amp;quot;C&amp;quot;&lt;/code&gt; ABI, we are ready to establish new goals for
+the group.&lt;/p&gt;
+&lt;p&gt;Our most important task, of course, is to implement the newly-specified
+behavior. This work has been undertaken by Katelyn Martin and can be followed
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/76570&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The requirements of our current charter, and the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/2797-project-ffi-unwind.md&quot;&gt;RFC creating the
+group&lt;/a&gt;, are effectively fulfilled by the specification of &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt;, so one option is to simply wind down the project group. While
+drafting the &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; RFC, however, we discovered that the existing
+guarantees around &lt;code&gt;longjmp&lt;/code&gt; and similar functions could be improved. Although
+this is not strictly related to unwinding&lt;sup&gt;&lt;a href&#x3D;&quot;#longjmp-unwind&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, they
+are closesly related: they are both &amp;quot;non-local&amp;quot; control-flow mechanisms that
+prevent functions from returning normally. Because one of the goals of the Rust
+project is for Rust to interoperate with existing C-like languages, and these
+control-flow mechanisms are widely used in practice, we believe that Rust must
+have some level of support for them.&lt;/p&gt;
+&lt;p&gt;This blog post will explain the problem space. If you&#x27;re interested in helping
+specify this behavior, please come join us in &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/210922-project-ffi-unwind/topic/welcome.2C.20redux/near/216807277&quot;&gt;our Zulip
+stream&lt;/a&gt;!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#longjmp-and-its-ilk&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;longjmp-and-its-ilk&quot;&gt;&lt;/a&gt;&lt;code&gt;longjmp&lt;/code&gt; and its ilk&lt;/h2&gt;
+&lt;p&gt;Above, I mentioned &lt;code&gt;longjmp&lt;/code&gt; and &amp;quot;similar functions&amp;quot;. Within the context of the
+&lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; PR, this referred to functions that have different implementations
+on different platforms, and which, on &lt;em&gt;some&lt;/em&gt; platforms, rely on &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md#forced-unwinding&quot;&gt;forced
+unwinding&lt;/a&gt;. In our next specification effort, however, we
+would like to ignore the connection to unwinding entirely, and define a class
+of functions with the following characteristic:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;a function that causes a &amp;quot;jump&amp;quot; in control flow by deallocating some number of
+stack frames without performing any additional &amp;quot;clean-up&amp;quot; such as running
+destructors&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This is the class of functions we would like to address. The other primary
+example is &lt;code&gt;pthread_exit&lt;/code&gt;. As part of our specification, we would like to
+create a name for this type of function, but we have not settled on one yet;
+for now, we are referring to them as &amp;quot;cancelable&amp;quot;, &amp;quot;&lt;code&gt;longjmp&lt;/code&gt;-like&amp;quot;, or
+&amp;quot;stack-deallocating&amp;quot; functions.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#our-constraints&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;our-constraints&quot;&gt;&lt;/a&gt;Our constraints&lt;/h2&gt;
+&lt;p&gt;Taking a step back, we have two mandatory constraints on our design:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;There must be sound way to call &lt;code&gt;libc&lt;/code&gt; functions that may &lt;code&gt;pthread_cancel&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;There must be a sound way for Rust code to invoke C code that may &lt;code&gt;longjmp&lt;/code&gt;
+over Rust frames.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In addition, we would like to adhere to several design principles:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The specified behavior can&#x27;t be target-platform-specific; in other words, our
+specification of Rust&#x27;s interaction with &lt;code&gt;longjmp&lt;/code&gt; should not depend on
+whether &lt;code&gt;longjmp&lt;/code&gt; deallocates frames or initiates a forced-unwind.
+Optimizations, however, &lt;em&gt;can&lt;/em&gt; be target-platform-specific.&lt;/li&gt;
+&lt;li&gt;There should be no difference in the specified behavior of frame-deallocation
+performed by &lt;code&gt;longjmp&lt;/code&gt; versus that performed by &lt;code&gt;pthread_cancel&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;We will only permit canceling POFs (&amp;quot;Plain Old Frames&amp;quot;, explained in the next
+section).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#pofs-and-stack-deallocating-functions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;pofs-and-stack-deallocating-functions&quot;&gt;&lt;/a&gt;POFs and stack-deallocating functions&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; RFC introduced a new concept designed to help us deal with
+force-unwinding or stack-deallocating functions: the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md#plain-old-frames&quot;&gt;POF, or &amp;quot;Plain Old
+Frame&amp;quot;&lt;/a&gt;. These are frames that can be trivially deallocated,
+i.e., they do no &amp;quot;cleanup&amp;quot; (such as running &lt;code&gt;Drop&lt;/code&gt; destructors) before
+returning.&lt;/p&gt;
+&lt;p&gt;From the definition, it should be clear that it is dangerous to call a
+stack-deallocating function in a context that could destroy a non-POF stack
+frame. A simple specification for Rust&#x27;s interaction with stack-deallocating
+functions, then, could be that they are safe to call as long as only POFs are
+deallocated. This would make Rust&#x27;s guarantees for &lt;code&gt;longjmp&lt;/code&gt; essentially the
+same as C++&#x27;s.&lt;/p&gt;
+&lt;p&gt;For now, however, we are considering POFs to be &amp;quot;necessary but not sufficient.&amp;quot;
+We believe that a more restrictive specification may provide the following
+advantages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;more opportunities for helpful compiler warnings or errors to prevent misuse
+of stack-deallocation functions&lt;/li&gt;
+&lt;li&gt;semantic tracatbility: we can make reliance on stack-frame-deallocation
+visible for all functions involved&lt;/li&gt;
+&lt;li&gt;increased optimization potential when cleanup is &amp;quot;guaranteed&amp;quot; (i.e., the
+compiler may turn a POF into a non-POF if it knows that this is safe and that
+the newly inserted cleanup operation is necessary for an optimization)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#annotating-pofs&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;annotating-pofs&quot;&gt;&lt;/a&gt;Annotating POFs&lt;/h2&gt;
+&lt;p&gt;Our current plan is to introduce a new annotation for frames that are intended
+to be safe to cancel. These functions, of course, must be POFs. The
+annotation would be &amp;quot;transitive&amp;quot;, just like &lt;code&gt;async&lt;/code&gt;: functions without this
+annotation either must not invoke any annotated functions or must guarantee
+that they will cause the stack-deallocation to terminate (for instance, a
+non-POF, non-annotated function may call &lt;code&gt;setjmp&lt;/code&gt;).&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#open-questions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;open-questions&quot;&gt;&lt;/a&gt;Open questions&lt;/h3&gt;
+&lt;p&gt;The name of the annotation should be based on the terminology used to refer to
+functions that are safe to deallocate. Because this terminology is not
+finalized, we do not yet have a name for the annotation.&lt;/p&gt;
+&lt;p&gt;It is also not yet clear whether annotated functions should be able to invoke
+any functions without this annotation. As long as the function call does not
+return a new &lt;code&gt;Drop&lt;/code&gt; resource (making the annotated function no longer a POF),
+it may be safe, as long as we guarantee that the annotated function cannot be
+canceled while the un-annotated function is still on the stack; i.e.,
+cancelation must happen during an active call to an annotated cancelable
+function.&lt;/p&gt;
+&lt;p&gt;Most importantly, we do not have a plan for how to indicate that a
+non-annotated function can safely call an annotated function. The example of
+using &lt;code&gt;setjmp&lt;/code&gt; to ensure that a &lt;code&gt;longjmp&lt;/code&gt; will not discard a stack frame is
+non-trivial:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;setjmp&lt;/code&gt; is not a function but a C macro. There is no way to call it directly
+in Rust.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;setjmp&lt;/code&gt; does not prevent arbitrary &lt;code&gt;longjmp&lt;/code&gt;s from crossing over a frame,
+the way C++&#x27;s &lt;code&gt;catch&lt;/code&gt; can catch any exception. Instead, &lt;code&gt;setjmp&lt;/code&gt; creates an
+object of type &lt;code&gt;jmp_buf&lt;/code&gt;, which must be passed to &lt;code&gt;longjmp&lt;/code&gt;; this causes the
+jump to stop at the corresponding &lt;code&gt;setjmp&lt;/code&gt; call.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And, of course, &lt;code&gt;setjmp&lt;/code&gt;/&lt;code&gt;longjmp&lt;/code&gt; is not the only example of such a mechanism!
+Thus, there is probably no way for the compiler to guarantee that this is safe,
+and it&#x27;s unclear what heuristics could be applied to make it as safe as
+possible.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#examples&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;examples&quot;&gt;&lt;/a&gt;Examples&lt;/h3&gt;
+&lt;p&gt;Let us use &lt;code&gt;#[pof-longjmp]&lt;/code&gt; as a placeholder for the annotation indicating a
+function that can be safely deallocated, and let us assume that the following
+function is a wrapper around &lt;code&gt;longjmp&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;extern &amp;quot;C&amp;quot; {
+    #[pof-longjmp]
+    fn longjmp(CJmpBuf) -&amp;gt; !;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The compiler would not allow this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn has_drop(jmp_buf: CJmpBuf) {
+    let s &#x3D; &amp;quot;string data&amp;quot;.to_owned();
+    unsafe { longjmp(jmp_buf); }
+    println!(&amp;quot;{}&amp;quot;, s);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here, &lt;code&gt;s&lt;/code&gt; implements &lt;code&gt;Drop&lt;/code&gt;, so &lt;code&gt;has_drop&lt;/code&gt; is not a POF. Since &lt;code&gt;longjmp&lt;/code&gt; is
+annotated &lt;code&gt;#[pof-longjmp]&lt;/code&gt;, the un-annotated function &lt;code&gt;has_drop&lt;/code&gt; can&#x27;t call it
+(even in an &lt;code&gt;unsafe&lt;/code&gt; block). If, however, &lt;code&gt;has_drop&lt;/code&gt; is annotated:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[pof-longjmp]
+fn has_drop(jmp_buf: CJmpBuf) {
+    let s &#x3D; &amp;quot;string data&amp;quot;.to_owned();
+    unsafe { longjmp(jmp_buf); }
+    println!(&amp;quot;{}&amp;quot;, s);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;...there is a different error: &lt;code&gt;#[pof-longjmp]&lt;/code&gt; can only be applied to POFs,
+and since &lt;code&gt;s&lt;/code&gt; implements &lt;code&gt;Drop&lt;/code&gt;, &lt;code&gt;has_drop&lt;/code&gt; is not a POF.&lt;/p&gt;
+&lt;p&gt;An example of a permissible &lt;code&gt;longjmp&lt;/code&gt; call would be:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[pof-longjmp]
+fn no_drop(jmp_buf: CJmpBuf) {
+    let s &#x3D; &amp;quot;string data&amp;quot;;
+    unsafe { longjmp(jmp_buf); }
+    println!(&amp;quot;{}&amp;quot;, s);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#join-us&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;join-us&quot;&gt;&lt;/a&gt;Join us!&lt;/h2&gt;
+&lt;p&gt;If you would like to help us create this specification and write an RFC for it,
+please join us in &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/210922-project-ffi-unwind/topic/welcome.2C.20redux/near/216807277&quot;&gt;zulip&lt;/a&gt;!&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#footnotes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;footnotes&quot;&gt;&lt;/a&gt;Footnotes&lt;/h4&gt;
+&lt;p&gt;&lt;a name&#x3D;&quot;longjmp-unwind&quot;&gt;1&lt;/a&gt;: As mentioned in the RFC, on Windows,
+&lt;code&gt;longjmp&lt;/code&gt; actually &lt;em&gt;is&lt;/em&gt; an unwinding operation. On other platforms, however,
+&lt;code&gt;longjmp&lt;/code&gt; is unrelated to unwinding.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Kyle Strand on behalf of the FFI-unwind project group</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Changes to the Rustdoc team</title>
@@ -464,244 +633,6 @@ and to eddyb for their guidance in choosing a MIR-based approach.&lt;/p&gt;
 
         <author>
             <name>Tyler Mandry</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Exploring PGO for the Rust compiler</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/11/11/exploring-pgo-for-the-rust-compiler.html" type="text/html" title="Exploring PGO for the Rust compiler" />
-        <published>2020-11-11T00:00:00+00:00</published>
-        <updated>2020-11-11T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/11/11/exploring-pgo-for-the-rust-compiler.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/11/11/exploring-pgo-for-the-rust-compiler.html">&lt;p&gt;&lt;strong&gt;TLDR&lt;/strong&gt; -- PGO makes the compiler &lt;a href&#x3D;&quot;#final-numbers-and-a-benchmarking-plot-twist&quot;&gt;faster&lt;/a&gt; but is &lt;a href&#x3D;&quot;#where-to-go-from-here&quot;&gt;not straightforward&lt;/a&gt; to realize in CI.&lt;/p&gt;
-&lt;p&gt;For the last few months Mozilla has been using Profile-Guided Optimization (PGO) to build their own &lt;a href&#x3D;&quot;https://bugzilla.mozilla.org/show_bug.cgi?id&#x3D;1326486&quot;&gt;optimized version of Clang&lt;/a&gt;, leading to an up to 9% reduction of Firefox compile times on their build infrastructure.
-Would the same be possible for the Rust compiler, that is, could we apply profile-guided optimization to &lt;em&gt;rustc&lt;/em&gt; itself in order to make it faster?
-This post explores exactly this question, detailing first the steps needed for generating a PGOed versions of &lt;em&gt;rustc&lt;/em&gt; (in two flavors), and then taking a look at the resulting performance implications.
-But before that let&#x27;s have a little reminder what PGO even is and how it works in general.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#pgo-primer&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;pgo-primer&quot;&gt;&lt;/a&gt;PGO Primer&lt;/h2&gt;
-&lt;p&gt;Here is how the respective &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/profile-guided-optimization.html&quot;&gt;chapter from the rustc book&lt;/a&gt; describes profile-guided optimization:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The basic concept of PGO is to collect data about the typical execution of a program (e.g. which branches it is likely to take) and then use this data to inform optimizations such as inlining, machine-code layout, register allocation, etc.&lt;/p&gt;
-&lt;p&gt;There are different ways of collecting data about a program&#x27;s execution. One is to run the program inside a profiler (such as perf) and another is to create an instrumented binary, that is, a binary that has data collection built into it, and run that. The latter usually provides more accurate data and it is also what is supported by &lt;code&gt;rustc&lt;/code&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;In other words, we first generate a special, &amp;quot;instrumented&amp;quot; version of the program we want to optimize, and then use this instrumented version to generate an execution profile.
-This execution profile is then used by the compiler for better optimizing the actual, final version of the program.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#how-to-apply-pgo-to-the-rust-compiler&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-to-apply-pgo-to-the-rust-compiler&quot;&gt;&lt;/a&gt;How to apply PGO to the Rust compiler&lt;/h2&gt;
-&lt;p&gt;Generating a PGOed version of &lt;em&gt;rustc&lt;/em&gt; involves the same basic steps as it does for any other kind of program:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Create an instrumented version of &lt;em&gt;rustc&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;Use the instrumented version of &lt;em&gt;rustc&lt;/em&gt; in order to collect profile data, i.e. compile a bunch of programs with it, ideally in a way that represents the typical use cases of the compiler.&lt;/li&gt;
-&lt;li&gt;Compile the final version of &lt;em&gt;rustc&lt;/em&gt;, this time pointing the build system to the profile data we generated in the previous step.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;However, as opposed to many other programs, &lt;em&gt;rustc&lt;/em&gt; is a bit of a special case because it consists of two very large chunks of code written in different programming languages: the LLVM backend (written in C++) and the front and middle parts of the compiler (written in Rust).
-Consequently, there are also two separate compilers involved in building &lt;em&gt;rustc&lt;/em&gt; -- both of which support their own version of PGO.
-This complicates things slightly but fortunately the PGO setup for each of the two components can be treated in isolation.
-Let&#x27;s take a look at the LLVM part first, since that is slightly simpler.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#compiling-rustcs-llvm-with-pgo&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;compiling-rustcs-llvm-with-pgo&quot;&gt;&lt;/a&gt;Compiling rustc&#x27;s LLVM with PGO&lt;/h3&gt;
-&lt;p&gt;PGO is a toolchain specific feature, so how it works might be different for different C++ compilers.
-In this article I will only go into how it works with Clang because (a) I have no experience with PGO in other compilers, and (b) Clang is what the Rust project actually uses in production.&lt;/p&gt;
-&lt;p&gt;In order to enable PGO for rustc&#x27;s LLVM we basically follow the steps laid out in the previous section.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;We make sure that our LLVM gets instrumented by applying the following changes to the &lt;code&gt;config.toml&lt;/code&gt; file in the root directory of our Rust checkout:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[llvm]
-
-# Pass extra compiler and linker flags to the LLVM CMake build.
-# &amp;lt;PROFDATA_DIR&amp;gt; must be an absolute path to a writeable
-# directory, like for example /tmp/my-rustc-profdata
-cflags &#x3D; &amp;quot;-fprofile-generate&#x3D;&amp;lt;PROFDATA_DIR&amp;gt;&amp;quot;
-cxxflags &#x3D; &amp;quot;-fprofile-generate&#x3D;&amp;lt;PROFDATA_DIR&amp;gt;&amp;quot;
-
-# Make sure that LLVM is built as a dylib
-link-shared &#x3D; true
-
-# Make sure we use Clang for compiling LLVM
-# (assuming that we are building for x86_64 Linux in this case)
-[target.x86_64-unknown-linux-gnu]
-cc &#x3D; &amp;quot;clang&amp;quot;
-cxx &#x3D; &amp;quot;clang++&amp;quot;
-linker &#x3D; &amp;quot;clang&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;-fprofile-generate&lt;/code&gt; flag tells Clang to create an instrumented binary that will write any profile data it generates to the given directory.
-It is advisable to always use an absolute path here since we don&#x27;t want things to depend on the working directory of the compiler.
-We also set &lt;code&gt;link-shared &#x3D; true&lt;/code&gt; which makes sure that &lt;em&gt;rustc&lt;/em&gt;&#x27;s linker does not have to deal with linking the instrumentation runtime into C++ code.
-It&#x27;s possible to make that work but it&#x27;s not worth the trouble.
-Now we just need to run &lt;code&gt;./x.py build&lt;/code&gt; and wait until we have a working &lt;em&gt;rustc&lt;/em&gt; with an instrumented LLVM.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Next we collect profile data by running the compiler we built in the previous step.
-This is straightforward because data collection happens completely transparently.
-Just run the compiler as you always would (e.g. via Cargo) and the profile data will show up in the &lt;code&gt;&amp;lt;PROFDATA_DIR&amp;gt;&lt;/code&gt; we specified in the &lt;code&gt;-fprofile-generate&lt;/code&gt; flag above.
-In order to make the collected data as useful as possible, we should try to exercise all the common code paths within the compiler.
-I typically use the &amp;quot;standard&amp;quot; &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-perf&quot;&gt;rustc-perf&lt;/a&gt; benchmark suite for this purpose, which includes debug builds, optimized builds, check builds, both incremental and non-incremental.
-After this is done, you will find a number of &lt;code&gt;.profraw&lt;/code&gt; files in &lt;code&gt;&amp;lt;PROFDATA_DIR&amp;gt;&lt;/code&gt;.
-&lt;a href&#x3D;&quot;https://clang.llvm.org/docs/UsersManual.html#cmdoption-fprofile-generate&quot;&gt;As described in the Clang user manual&lt;/a&gt; these &lt;code&gt;.profraw&lt;/code&gt; files need to be merged into a single &lt;code&gt;.profdata&lt;/code&gt; file by using the &lt;code&gt;llvm-profdata&lt;/code&gt; tool that comes with your Clang installation:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-bash&quot;&gt;$ cd &amp;lt;PROFDATA_DIR&amp;gt;
-$ llvm-profdata merge -output&#x3D;rustc-llvm.profdata *.profraw
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ol start&#x3D;&quot;3&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Now that the combined profile data from all &lt;em&gt;rustc&lt;/em&gt; invocations can be found in &lt;code&gt;&amp;lt;PROFDATA_DIR&amp;gt;/rustc-llvm.profdata&lt;/code&gt; it is time to re-compile LLVM and &lt;em&gt;rustc&lt;/em&gt; again, this time instructing Clang to make use of this valuable new information.
-To this end we modify &lt;code&gt;config.toml&lt;/code&gt; as follows:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[llvm]
-# Instead of -fprofile-generate, we now pass -fprofile-use to Clang
-cflags &#x3D; &amp;quot;-fprofile-use&#x3D;&amp;lt;PROFDATA_DIR&amp;gt;/rustc-llvm.profdata&amp;quot;
-cxxflags &#x3D; &amp;quot;-fprofile-use&#x3D;&amp;lt;PROFDATA_DIR&amp;gt;/rustc-llvm.profdata&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now we make sure that LLVM is properly rebuilt by deleting the old version and build everything again:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-bash&quot;&gt;$ cd $RUST_PROJECT_ROOT
-$ rm -rf ./build/x86_64-unknown-linux-gnu/llvm
-$ ./x.py build
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Once this is done, we have a Rust compiler with PGO-optimized LLVM. Congratulations!&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4&gt;&lt;a href&#x3D;&quot;#pgo-optimized-llvm----benchmark-results&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;pgo-optimized-llvm----benchmark-results&quot;&gt;&lt;/a&gt;PGO-optimized LLVM -- Benchmark Results&lt;/h4&gt;
-&lt;p&gt;As mentioned above Firefox build times have improved by up to 9% with a PGOed compiler.
-Clang&#x27;s own documentation even &lt;a href&#x3D;&quot;https://www.llvm.org/docs/HowToBuildWithPGO.html#introduction&quot;&gt;reports&lt;/a&gt; an up to 20% improvement.
-The best way we have for assessing the Rust compiler&#x27;s performance is the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-perf&quot;&gt;rustc-perf&lt;/a&gt; benchmark suite.
-Since compiling with PGO does not quite fit with how the Rust project&#x27;s CI works, we cannot use the &lt;a href&#x3D;&quot;https://perf.rust-lang.org/&quot;&gt;perf.rust-lang.org&lt;/a&gt; version of the benchmark suite.
-Fortunately, thanks to &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-perf/blob/master/collector/README.md&quot;&gt;good documentation&lt;/a&gt;, running the benchmarks locally is straightforward enough.
-Here&#x27;s a glance at the effect that a PGOed LLVM has on &lt;em&gt;rustc&lt;/em&gt;&#x27;s performance:&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://perf.rust-lang.org/compare.html?start&#x3D;pgo-2020-10-30-none&amp;end&#x3D;pgo-2020-10-30-llvm&amp;stat&#x3D;instructions%3Au&quot;&gt;&lt;img src&#x3D;&quot;/images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm-thumb.png&quot; alt&#x3D;&quot;Performance improvements gained from apply PGO to LLVM&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The results are not quite as spectacular as the anecdotal 20% improvement from Clang&#x27;s documentation;
-but they are pretty encouraging and show no significant performance regressions.
-Diving more into details shows the expected profile:&lt;/p&gt;
-&lt;p&gt;&lt;img src&#x3D;&quot;/images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-llvm-expanded.png&quot; alt&#x3D;&quot;Performance improvements gained from apply PGO to LLVM (details)&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Workloads that spend most of their time in LLVM (e.g. optimized builds) show the most improvement, while workloads that don&#x27;t invoke LLVM at all (e.g. check builds) also don&#x27;t profit from a faster LLVM.
-Let&#x27;s take a look at how we can take things further by applying PGO to the other half of the compiler.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#applying-pgo-to-the-rust-part-of-the-compiler&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;applying-pgo-to-the-rust-part-of-the-compiler&quot;&gt;&lt;/a&gt;Applying PGO to the Rust part of the compiler&lt;/h3&gt;
-&lt;p&gt;The basic principle stays the same:
-create an instrumented compiler, use it to collect profile data, use that data when compiling the final version of the compiler.
-The only difference is that this time we instrument a different part of the compiler&#x27;s code, namely the part generated by &lt;em&gt;rustc&lt;/em&gt; itself.
-The compiler has had support for doing that &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/61268&quot;&gt;for a while now&lt;/a&gt; and, as can be seen in the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/profile-guided-optimization.html&quot;&gt;respective chapter of the rustc book&lt;/a&gt;, the command-line interface has been modeled after Clang&#x27;s set of flags.
-Unfortunately, the compiler&#x27;s build system does not support using PGO out of the box, so we have to directly modify &lt;code&gt;src/bootstrap/compile.rs&lt;/code&gt; in order to set the desired flags.
-We only want to instrument the compiler itself, not the other tools or the standard library, see we add the flags to &lt;code&gt;rustc_cargo_env()&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub fn rustc_cargo_env(builder: &amp;amp;Builder&amp;lt;&#x27;_&amp;gt;,
-                       cargo: &amp;amp;mut Cargo,
-                       target: TargetSelection) {
-    // ... omitted ...
-
-    if builder.config.rustc_parallel {
-        cargo.rustflag(&amp;quot;--cfg&#x3D;parallel_compiler&amp;quot;);
-    }
-    if builder.config.rust_verify_llvm_ir {
-        cargo.env(&amp;quot;RUSTC_VERIFY_LLVM_IR&amp;quot;, &amp;quot;1&amp;quot;);
-    }
-
-    // This is new: Hard code instrumentation in the
-    // RUSTFLAGS of the Cargo invocation that builds
-    // the compiler
-    cargo.rustflag(&amp;quot;-Cprofile-generate&#x3D;&amp;lt;PROFDATA_DIR&amp;gt;&amp;quot;);
-
-    // ... omitted ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;As before &lt;code&gt;&amp;lt;PROFDATA_DIR&amp;gt;&lt;/code&gt; must be an actual, absolute path to a directory.
-Once we have collected enough profile data, we go back to &lt;code&gt;src/bootstrap/compile.rs&lt;/code&gt; and replace the &lt;code&gt;-Cprofile-generate&lt;/code&gt; flag with a &lt;code&gt;-Cprofile-use&lt;/code&gt; flag:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub fn rustc_cargo_env(builder: &amp;amp;Builder&amp;lt;&#x27;_&amp;gt;,
-                       cargo: &amp;amp;mut Cargo,
-                       target: TargetSelection) {
-    // ... omitted ...
-
-    if builder.config.rustc_parallel {
-        cargo.rustflag(&amp;quot;--cfg&#x3D;parallel_compiler&amp;quot;);
-    }
-    if builder.config.rust_verify_llvm_ir {
-        cargo.env(&amp;quot;RUSTC_VERIFY_LLVM_IR&amp;quot;, &amp;quot;1&amp;quot;);
-    }
-
-    // Replace &#x60;-Cprofile-generate&#x60; with &#x60;-Cprofile-use&#x60;,
-    // assuming that we used the &#x60;llvm-profdata&#x60; tool to
-    // merge the collected &#x60;&amp;lt;PROFDATA_DIR&amp;gt;/*.profraw&#x60; files
-    // into a common file named
-    // &#x60;&amp;lt;PROFDATA_DIR&amp;gt;/rustc-rust.profdata&#x60;.
-    cargo.rustflag(
-        &amp;quot;-Cprofile-use&#x3D;&amp;lt;PROFDATA_DIR&amp;gt;/rustc-rust.profdata&amp;quot;
-    );
-
-    // ... omitted ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Let&#x27;s take a look at the effects PGO has on this portion of the compiler.&lt;/p&gt;
-&lt;h4&gt;&lt;a href&#x3D;&quot;#pgo-optimized-rust----benchmark-results&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;pgo-optimized-rust----benchmark-results&quot;&gt;&lt;/a&gt;PGO-optimized Rust -- Benchmark Results&lt;/h4&gt;
-&lt;p&gt;As expected the results are similar to when PGO was applied to LLVM: a reduction of instruction counts by roughly 5%. NOTE: These numbers show the improvement from applying PGO &lt;em&gt;exclusively&lt;/em&gt; to the Rust part of the compiler. The LLVM part was &lt;em&gt;not&lt;/em&gt; compiled with PGO here:&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://perf.rust-lang.org/compare.html?start&#x3D;pgo-2020-10-30-none&amp;end&#x3D;pgo-2020-10-30-rust&amp;stat&#x3D;instructions%3Au&quot;&gt;&lt;img src&#x3D;&quot;/images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-rust-thumb.png&quot; alt&#x3D;&quot;Performance improvements gained from applying PGO to (only) the Rust part of the compiler&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Because different workloads execute different amounts of Rust code (vs C++/LLVM code), the total reduction can be a lot less for LLVM-heavy cases.
-For example, a full &lt;em&gt;webrender-opt&lt;/em&gt; build will spend more than 80% of its time in LLVM, so reducing the remaining 20% by 5% can only reduce the total number by 1%.
-On the other hand, a &lt;em&gt;check&lt;/em&gt; build or an &lt;em&gt;incr-unchanged&lt;/em&gt; build spends almost no time in LLVM, so the 5% Rust performance improvement translates almost entirely into a 5% instruction count reduction for these cases:&lt;/p&gt;
-&lt;p&gt;&lt;img src&#x3D;&quot;/images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-rust-expanded.png&quot; alt&#x3D;&quot;Performance improvements gained from applying PGO to (only) the Rust part of the compiler (details)&quot; /&gt;&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#can-we-apply-pgo-to-rust-and-llvm-at-the-same-time&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;can-we-apply-pgo-to-rust-and-llvm-at-the-same-time&quot;&gt;&lt;/a&gt;Can we apply PGO to Rust and LLVM at the same time?&lt;/h3&gt;
-&lt;p&gt;The short answer is &lt;em&gt;yes&lt;/em&gt;.
-The longer answer is that we have to be careful about profile data incompatibilities.
-Both Clang and the Rust compiler use the same LLVM-based PGO mechanisms underneath.
-If both Clang and the Rust compiler use the exact same version of LLVM, we can even combine the two into a single &lt;code&gt;.profdata&lt;/code&gt; file.
-However, if the two LLVM versions are different, we better make sure that the two compilers don&#x27;t get into each other&#x27;s way.
-Luckily it&#x27;s straightforward to facilitate that:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;We need to specify different directories for the respective &lt;code&gt;-fprofile-generate&lt;/code&gt; and &lt;code&gt;-Cprofile-generate&lt;/code&gt; (and &lt;code&gt;*-use&lt;/code&gt;) flags.
-This way the instrumentation code coming from Clang will write into one directory and the code coming from &lt;em&gt;rustc&lt;/em&gt; will write into another.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;We need to make sure that we use the right &lt;code&gt;llvm-profdata&lt;/code&gt; tool for each set of &lt;code&gt;.profraw&lt;/code&gt; files.
-Use the one coming with Clang for handling the files in the Clang directory and the one coming with the Rust compiler for the files in the Rust directory.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;If we do that, we get a compiler with both parts optimized via PGO, with the compile time reductions adding up nicely.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#final-numbers-and-a-benchmarking-plot-twist&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;final-numbers-and-a-benchmarking-plot-twist&quot;&gt;&lt;/a&gt;Final Numbers and a Benchmarking Plot Twist&lt;/h3&gt;
-&lt;p&gt;When I looked at the &lt;a href&#x3D;&quot;https://perf.rust-lang.org/compare.html?start&#x3D;pgo-2020-10-30-none&amp;end&#x3D;pgo-2020-10-30-both&amp;stat&#x3D;instructions%3Au&quot;&gt;the final numbers&lt;/a&gt;, I was a bit underwhelmed.
-Sure, PGO seems to lead to a pretty solid 5% reduction of instruction counts across basically all real world workloads in the benchmark suite, for &lt;em&gt;check&lt;/em&gt;, &lt;em&gt;debug&lt;/em&gt;, and &lt;em&gt;opt&lt;/em&gt; builds alike.
-That is pretty nice -- but also far away from the 20% improvement mentioned in the Clang documentation.
-Given that PGO adds quite a few complications to the build process of the compiler itself (not to mention the almost tripled build times) I started to think that applying PGO to the compiler would probably not be worth the trouble.&lt;/p&gt;
-&lt;p&gt;I then took a glance at the benchmarks&#x27; wall time measurements (instead of the instruction count measurements) and saw quite a different picture: &lt;em&gt;webrender-opt&lt;/em&gt; minus 15%, &lt;em&gt;style-servo-opt&lt;/em&gt; minus 14%, &lt;em&gt;serde-check&lt;/em&gt; minus 15%?
-This looked decidedly better than for instruction counts.
-But wall time measurements can be very noisy (which is why most people only look at instruction counts on perf.rust-lang.org), and &lt;code&gt;rustc-perf&lt;/code&gt; only does a single iteration for each benchmark, so I was not prepared to trust these numbers just yet.
-I decided to try and reduce the noise by increasing the number of benchmark iterations from one to twenty.
-I only did &amp;quot;full&amp;quot; builds in this configuration as PGO&#x27;s effect seemed to translate pretty predictably to incremental builds.
-After roughly eight hours to complete both the PGO and the non-PGO versions of the benchmarks these are the numbers I got:&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://perf.rust-lang.org/compare.html?start&#x3D;pgo-2020-10-30-none-20&amp;end&#x3D;pgo-2020-10-30-both-20&amp;stat&#x3D;wall-time&quot;&gt;&lt;img src&#x3D;&quot;/images/inside-rust/2020-11-11-exploring-pgo-for-the-rust-compiler/rustc-perf-pgo-both-walltime-thumb.png&quot; alt&#x3D;&quot;Wall time improvements gained from applying PGO to the entire compiler&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;As you can see we get a 10-16% reduction of build times almost across the board for real world test cases.
-This was more in line with what I had initially hoped to get from PGO.
-It is a bit surprising that the difference between instruction counts and wall time is so pronounced.
-One plausible explanation would be that PGO improves instruction cache utilization, something which makes a difference for execution time but would not be reflected in the amount of instructions executed.
-I also don&#x27;t know how branch mispredictions factor into instruction counts -- branch prediction being another aspect explicitly targeted by PGO.&lt;/p&gt;
-&lt;p&gt;As good as these numbers look, please keep in mind that they come from a single machine.
-It&#x27;s possible that the Ryzen 1700X processor I used has some idiosyncrasies that favor the kind of optimizations that PGO does, and a different processor with a different caching system and branch predictor would generate quite different numbers.
-Nonetheless, the numbers undoubtedly are very encouraging and warrant further investigation.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#where-to-go-from-here&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;where-to-go-from-here&quot;&gt;&lt;/a&gt;Where to go from here&lt;/h2&gt;
-&lt;p&gt;The numbers above suggest that PGO can indeed provide noticeable compile time reductions.
-Unfortunately, bringing these improvements to end users is not as simple as adding a few compiler flags to our &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/ci/docker/host-x86_64&quot;&gt;dist builds&lt;/a&gt;.
-PGO is different from most other optimizations in that it&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;requires a different, extended build workflow due to the additional instrumentation and data collection phases, and&lt;/li&gt;
-&lt;li&gt;it incurs a sustained build time cost (a trait it shares with other automated optimizations like LTO).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Both of these problems pose substantial hurdles for actually using PGO on the compiler itself.
-Rust&#x27;s CI build times have always been too long and we already forgo some optimizations because of them
-(e.g. macOS still does not get the 10% performance boost from using a ThinLTOed LLVM because the build machines on that platform are especially slow).
-However, I think there&#x27;s still a way forward. There&#x27;s a tradeoff between the two obstacles mentioned above:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;If build times are not a problem, then the engineering effort for supporting PGO in the compiler&#x27;s build system is quite low.
-That is, if it is OK for instrumentation, data collection, and final build to all occur as a single monolithic build on the same machine then it should be straightforward to extend the build system to support just that.&lt;/li&gt;
-&lt;li&gt;If a lot of engineering effort is put into a more complicated build setup, with out-of-band instrumentation and caching of profile data, then the impact on build times can be kept quite low.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I estimate that the first approach is more fruitful, as it is always better to put more value on low engineering and maintenance costs than on low compute times.
-Having a straightforward way of obtaining a PGOed compiler (e.g. by adding a simple setting in &lt;code&gt;config.toml&lt;/code&gt;) would unblock the path to a couple of scenarios:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Organizations and individuals who don&#x27;t switch compiler versions too frequently can easily compile their own, optimized version of &lt;em&gt;rustc&lt;/em&gt; for internal use, like Mozilla is already doing with Clang.
-Letting a computer spend a couple of hours in order to get a 15% compile time reduction for the next couple of months seems like a good investment.&lt;/li&gt;
-&lt;li&gt;The Rust project itself could start thinking about providing more optimized builds, at least on the beta and stable channels.
-Significantly increasing the compiler&#x27;s build times on the official build infrastructure is a lot more viable if it only has to be done every six weeks instead of for every merged pull request.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;It&#x27;s unlikely that I can spend a lot of time on this personally -- but my hope is that others will pick up the baton. I&#x27;d be happy to provide guidance on how to use PGO specifically.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt; -- Special thanks to Mark Rousskov for uploading my local benchmarking data to &lt;a href&#x3D;&quot;https://perf.rust-lang.org/compare.html?start&#x3D;pgo-2020-10-30-none-20&amp;end&#x3D;pgo-2020-10-30-both-20&amp;stat&#x3D;wall-time&quot;&gt;perf.rust-lang.org&lt;/a&gt;, which makes it much nicer to explore!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Michael Woerister</name>
         </author>
     </entry>
     

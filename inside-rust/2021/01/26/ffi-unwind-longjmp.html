@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust &amp; the case of the disappearing stack frames | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust &amp; the case of the disappearing stack frames | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust &amp; the case of the disappearing stack frames | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust &amp; the case of the disappearing stack frames" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust &amp; the case of the disappearing stack frames</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 26, 2021 &middot; Kyle Strand on behalf of the FFI-unwind project group
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang#wg-ffi-unwind">the FFI-unwind project group</a> 
+    </div>
+
+    <div class="post">
+      <p>Now that the <a href="https://github.com/rust-lang/project-ffi-unwind">FFI-unwind Project Group</a> has merged <a href="https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md">an
+RFC</a> specifying the <code>&quot;C unwind&quot;</code> ABI and removing some instances
+of undefined behavior in the <code>&quot;C&quot;</code> ABI, we are ready to establish new goals for
+the group.</p>
+<p>Our most important task, of course, is to implement the newly-specified
+behavior. This work has been undertaken by Katelyn Martin and can be followed
+<a href="https://github.com/rust-lang/rust/pull/76570">here</a>.</p>
+<p>The requirements of our current charter, and the <a href="https://github.com/rust-lang/rfcs/blob/master/text/2797-project-ffi-unwind.md">RFC creating the
+group</a>, are effectively fulfilled by the specification of <code>&quot;C unwind&quot;</code>, so one option is to simply wind down the project group. While
+drafting the <code>&quot;C unwind&quot;</code> RFC, however, we discovered that the existing
+guarantees around <code>longjmp</code> and similar functions could be improved. Although
+this is not strictly related to unwinding<sup><a href="#longjmp-unwind">1</a></sup>, they
+are closesly related: they are both &quot;non-local&quot; control-flow mechanisms that
+prevent functions from returning normally. Because one of the goals of the Rust
+project is for Rust to interoperate with existing C-like languages, and these
+control-flow mechanisms are widely used in practice, we believe that Rust must
+have some level of support for them.</p>
+<p>This blog post will explain the problem space. If you're interested in helping
+specify this behavior, please come join us in <a href="https://rust-lang.zulipchat.com/#narrow/stream/210922-project-ffi-unwind/topic/welcome.2C.20redux/near/216807277">our Zulip
+stream</a>!</p>
+<h2><a href="#longjmp-and-its-ilk" aria-hidden="true" class="anchor" id="longjmp-and-its-ilk"></a><code>longjmp</code> and its ilk</h2>
+<p>Above, I mentioned <code>longjmp</code> and &quot;similar functions&quot;. Within the context of the
+<code>&quot;C unwind&quot;</code> PR, this referred to functions that have different implementations
+on different platforms, and which, on <em>some</em> platforms, rely on <a href="https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md#forced-unwinding">forced
+unwinding</a>. In our next specification effort, however, we
+would like to ignore the connection to unwinding entirely, and define a class
+of functions with the following characteristic:</p>
+<blockquote>
+<p>a function that causes a &quot;jump&quot; in control flow by deallocating some number of
+stack frames without performing any additional &quot;clean-up&quot; such as running
+destructors</p>
+</blockquote>
+<p>This is the class of functions we would like to address. The other primary
+example is <code>pthread_exit</code>. As part of our specification, we would like to
+create a name for this type of function, but we have not settled on one yet;
+for now, we are referring to them as &quot;cancelable&quot;, &quot;<code>longjmp</code>-like&quot;, or
+&quot;stack-deallocating&quot; functions.</p>
+<h2><a href="#our-constraints" aria-hidden="true" class="anchor" id="our-constraints"></a>Our constraints</h2>
+<p>Taking a step back, we have two mandatory constraints on our design:</p>
+<ul>
+<li>There must be sound way to call <code>libc</code> functions that may <code>pthread_cancel</code>.</li>
+<li>There must be a sound way for Rust code to invoke C code that may <code>longjmp</code>
+over Rust frames.</li>
+</ul>
+<p>In addition, we would like to adhere to several design principles:</p>
+<ul>
+<li>The specified behavior can't be target-platform-specific; in other words, our
+specification of Rust's interaction with <code>longjmp</code> should not depend on
+whether <code>longjmp</code> deallocates frames or initiates a forced-unwind.
+Optimizations, however, <em>can</em> be target-platform-specific.</li>
+<li>There should be no difference in the specified behavior of frame-deallocation
+performed by <code>longjmp</code> versus that performed by <code>pthread_cancel</code>.</li>
+<li>We will only permit canceling POFs (&quot;Plain Old Frames&quot;, explained in the next
+section).</li>
+</ul>
+<h2><a href="#pofs-and-stack-deallocating-functions" aria-hidden="true" class="anchor" id="pofs-and-stack-deallocating-functions"></a>POFs and stack-deallocating functions</h2>
+<p>The <code>&quot;C unwind&quot;</code> RFC introduced a new concept designed to help us deal with
+force-unwinding or stack-deallocating functions: the <a href="https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md#plain-old-frames">POF, or &quot;Plain Old
+Frame&quot;</a>. These are frames that can be trivially deallocated,
+i.e., they do no &quot;cleanup&quot; (such as running <code>Drop</code> destructors) before
+returning.</p>
+<p>From the definition, it should be clear that it is dangerous to call a
+stack-deallocating function in a context that could destroy a non-POF stack
+frame. A simple specification for Rust's interaction with stack-deallocating
+functions, then, could be that they are safe to call as long as only POFs are
+deallocated. This would make Rust's guarantees for <code>longjmp</code> essentially the
+same as C++'s.</p>
+<p>For now, however, we are considering POFs to be &quot;necessary but not sufficient.&quot;
+We believe that a more restrictive specification may provide the following
+advantages:</p>
+<ul>
+<li>more opportunities for helpful compiler warnings or errors to prevent misuse
+of stack-deallocation functions</li>
+<li>semantic tracatbility: we can make reliance on stack-frame-deallocation
+visible for all functions involved</li>
+<li>increased optimization potential when cleanup is &quot;guaranteed&quot; (i.e., the
+compiler may turn a POF into a non-POF if it knows that this is safe and that
+the newly inserted cleanup operation is necessary for an optimization)</li>
+</ul>
+<h2><a href="#annotating-pofs" aria-hidden="true" class="anchor" id="annotating-pofs"></a>Annotating POFs</h2>
+<p>Our current plan is to introduce a new annotation for frames that are intended
+to be safe to cancel. These functions, of course, must be POFs. The
+annotation would be &quot;transitive&quot;, just like <code>async</code>: functions without this
+annotation either must not invoke any annotated functions or must guarantee
+that they will cause the stack-deallocation to terminate (for instance, a
+non-POF, non-annotated function may call <code>setjmp</code>).</p>
+<h3><a href="#open-questions" aria-hidden="true" class="anchor" id="open-questions"></a>Open questions</h3>
+<p>The name of the annotation should be based on the terminology used to refer to
+functions that are safe to deallocate. Because this terminology is not
+finalized, we do not yet have a name for the annotation.</p>
+<p>It is also not yet clear whether annotated functions should be able to invoke
+any functions without this annotation. As long as the function call does not
+return a new <code>Drop</code> resource (making the annotated function no longer a POF),
+it may be safe, as long as we guarantee that the annotated function cannot be
+canceled while the un-annotated function is still on the stack; i.e.,
+cancelation must happen during an active call to an annotated cancelable
+function.</p>
+<p>Most importantly, we do not have a plan for how to indicate that a
+non-annotated function can safely call an annotated function. The example of
+using <code>setjmp</code> to ensure that a <code>longjmp</code> will not discard a stack frame is
+non-trivial:</p>
+<ul>
+<li><code>setjmp</code> is not a function but a C macro. There is no way to call it directly
+in Rust.</li>
+<li><code>setjmp</code> does not prevent arbitrary <code>longjmp</code>s from crossing over a frame,
+the way C++'s <code>catch</code> can catch any exception. Instead, <code>setjmp</code> creates an
+object of type <code>jmp_buf</code>, which must be passed to <code>longjmp</code>; this causes the
+jump to stop at the corresponding <code>setjmp</code> call.</li>
+</ul>
+<p>And, of course, <code>setjmp</code>/<code>longjmp</code> is not the only example of such a mechanism!
+Thus, there is probably no way for the compiler to guarantee that this is safe,
+and it's unclear what heuristics could be applied to make it as safe as
+possible.</p>
+<h3><a href="#examples" aria-hidden="true" class="anchor" id="examples"></a>Examples</h3>
+<p>Let us use <code>#[pof-longjmp]</code> as a placeholder for the annotation indicating a
+function that can be safely deallocated, and let us assume that the following
+function is a wrapper around <code>longjmp</code>:</p>
+<pre><code class="language-rust">extern &quot;C&quot; {
+    #[pof-longjmp]
+    fn longjmp(CJmpBuf) -&gt; !;
+}
+</code></pre>
+<p>The compiler would not allow this:</p>
+<pre><code class="language-rust">fn has_drop(jmp_buf: CJmpBuf) {
+    let s = &quot;string data&quot;.to_owned();
+    unsafe { longjmp(jmp_buf); }
+    println!(&quot;{}&quot;, s);
+}
+</code></pre>
+<p>Here, <code>s</code> implements <code>Drop</code>, so <code>has_drop</code> is not a POF. Since <code>longjmp</code> is
+annotated <code>#[pof-longjmp]</code>, the un-annotated function <code>has_drop</code> can't call it
+(even in an <code>unsafe</code> block). If, however, <code>has_drop</code> is annotated:</p>
+<pre><code class="language-rust">#[pof-longjmp]
+fn has_drop(jmp_buf: CJmpBuf) {
+    let s = &quot;string data&quot;.to_owned();
+    unsafe { longjmp(jmp_buf); }
+    println!(&quot;{}&quot;, s);
+}
+</code></pre>
+<p>...there is a different error: <code>#[pof-longjmp]</code> can only be applied to POFs,
+and since <code>s</code> implements <code>Drop</code>, <code>has_drop</code> is not a POF.</p>
+<p>An example of a permissible <code>longjmp</code> call would be:</p>
+<pre><code class="language-rust">#[pof-longjmp]
+fn no_drop(jmp_buf: CJmpBuf) {
+    let s = &quot;string data&quot;;
+    unsafe { longjmp(jmp_buf); }
+    println!(&quot;{}&quot;, s);
+}
+</code></pre>
+<h2><a href="#join-us" aria-hidden="true" class="anchor" id="join-us"></a>Join us!</h2>
+<p>If you would like to help us create this specification and write an RFC for it,
+please join us in <a href="https://rust-lang.zulipchat.com/#narrow/stream/210922-project-ffi-unwind/topic/welcome.2C.20redux/near/216807277">zulip</a>!</p>
+<h4><a href="#footnotes" aria-hidden="true" class="anchor" id="footnotes"></a>Footnotes</h4>
+<p><a name="longjmp-unwind">1</a>: As mentioned in the RFC, on Windows,
+<code>longjmp</code> actually <em>is</em> an unwinding operation. On other platforms, however,
+<code>longjmp</code> is unrelated to unwinding.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
