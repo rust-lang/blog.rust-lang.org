@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Rust & the case of the disappearing stack frames"
-author: Kyle Strand on behalf of the FFI-unwind project group
+author: Kyle Strand
 description: "introducing an exploration of how `longjmp` and similar functions can be handled in Rust"
 team: the FFI-unwind project group <https://www.rust-lang.org/governance/teams/lang#wg-ffi-unwind>
 ---
