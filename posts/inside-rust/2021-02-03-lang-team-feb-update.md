@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Lang team February Update"
+title: "Lang team February update"
 author: Niko Matsakis
-description: ""
+description: "Lang team February update"
 team: the lang team <https://lang-team.rust-lang.org/>
 ---
 
@@ -31,7 +31,7 @@ Did you know that you can see the lang team's active projects on our [project bo
     * continued progress on the implementation, things are going well
     * we will likely add a `capture!` macro to use for migration; it would force the capture of a particular local variable (and not some subpath of it)
 * inline assembly
-    * we would like to consider stabiliing inline assembly for certain architectures (but not all)
+    * we are investigating stabiliing inline assembly for certain architectures (but not all)
 
 ## Upcoming design meetings
 
