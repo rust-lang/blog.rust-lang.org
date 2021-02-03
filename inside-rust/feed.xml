@@ -10,8 +10,62 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-02-01T22:06:17+00:00</updated>
+    <updated>2021-02-03T23:30:05+00:00</updated>
 
+    
+    <entry>
+        <title>Lang team February update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/02/03/lang-team-feb-update.html" type="text/html" title="Lang team February update" />
+        <published>2021-02-03T00:00:00+00:00</published>
+        <updated>2021-02-03T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/02/03/lang-team-feb-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/02/03/lang-team-feb-update.html">&lt;p&gt;Today the lang team held its first planning meeting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-02-03-Planning-Meeting.md&quot;&gt;minutes&lt;/a&gt;). From now on, we&#x27;re going to hold these meetings on the first Wednesday of every month.&lt;/p&gt;
+&lt;p&gt;The planning meeting is used for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Checking in on the status of our active projects&lt;/li&gt;
+&lt;li&gt;Planning the design meetings for the remainder of the month&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After each meeting, we plan to post an update (like this one!) with notes and meeting announcements.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#update-from-active-projects&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;update-from-active-projects&quot;&gt;&lt;/a&gt;Update from active projects&lt;/h2&gt;
+&lt;p&gt;Did you know that you can see the lang team&#x27;s active projects on our &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/projects/2&quot;&gt;project board&lt;/a&gt;? We&#x27;re still experimenting and evolving the setup, but the goal is that it should give you a quick overview of what kinds of things the lang team is focused on, and what stage they are in their development. Our minutes contain a &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-02-03-Planning-Meeting.md#project-updates-and-discussion&quot;&gt;writeup for each active project&lt;/a&gt;, but let me call out a few highlights here:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;async foundations:
+&lt;ul&gt;
+&lt;li&gt;continued progress on polish, new traits&lt;/li&gt;
+&lt;li&gt;making plans to stabilize async functions in traits&lt;/li&gt;
+&lt;li&gt;working on a &lt;a href&#x3D;&quot;https://hackmd.io/p6cmRZ9ZRQ-F1tlhGaN9rg&quot;&gt;vision document&lt;/a&gt; that lays out a multi-year vision for how async I/O should look/feel in Rust&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;const generics:
+&lt;ul&gt;
+&lt;li&gt;min const generics is stable in nightly, will be coming to a stable release soon&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;rfc 2229 (&amp;quot;minimal closure capture&amp;quot;):
+&lt;ul&gt;
+&lt;li&gt;continued progress on the implementation, things are going well&lt;/li&gt;
+&lt;li&gt;we will likely add a &lt;code&gt;capture!&lt;/code&gt; macro to use for migration; it would force the capture of a particular local variable (and not some subpath of it)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;inline assembly
+&lt;ul&gt;
+&lt;li&gt;we are investigating stabiliing inline assembly for certain architectures (but not all)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
+&lt;p&gt;We planned three design meetings for February. Our meetings are typically open for anyone to observe, although we have one closed meeting this week. They are also typically recorded and posted to YouTube. Ping nikomatsakis or joshtriplett for info about attending.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Feb 10 [CLOSED]: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/81&quot;&gt;Growing the team&lt;/a&gt;. The plan is to talk about our plans to grow the team and recruit new members. &lt;strong&gt;Closed because we expect some frank talk about who might be a good candidate.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Feb 17: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/79&quot;&gt;Improving trust in the Rust compiler&lt;/a&gt;, discussing the Ferrocene proposal and the semantics of MIR.&lt;/li&gt;
+&lt;li&gt;Feb 24: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/83&quot;&gt;2021 idiom lint overview&lt;/a&gt;, discussing the various 2018 idiom lints and whether they ought to be included in 2021.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Welcoming David Wood to compiler team and Jack Huey to compiler-contributors</title>
@@ -496,104 +550,6 @@ can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/
 
         <author>
             <name>Pietro Albini</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Using rustc_codegen_cranelift for debug builds</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/11/15/Using-rustc_codegen_cranelift.html" type="text/html" title="Using rustc_codegen_cranelift for debug builds" />
-        <published>2020-11-15T00:00:00+00:00</published>
-        <updated>2020-11-15T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/11/15/Using-rustc_codegen_cranelift.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/11/15/Using-rustc_codegen_cranelift.html">&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-rustc_codegen_cranelift&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-rustc_codegen_cranelift&quot;&gt;&lt;/a&gt;What is &lt;code&gt;rustc_codegen_cranelift&lt;/code&gt;?&lt;/h2&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/bjorn3/rustc_codegen_cranelift&quot;&gt;&lt;code&gt;rustc_codegen_cranelift&lt;/code&gt;&lt;/a&gt;, or just &lt;code&gt;cg_clif&lt;/code&gt; for short, is a new experimental
-codegen backend for the Rust compiler. The existing backend is LLVM, which is very
-good at producing fast, highly optimized code, but is not very good at
-compiling code quickly. &lt;code&gt;cg_clif&lt;/code&gt;, which uses the &lt;a href&#x3D;&quot;https://github.com/bytecodealliance/wasmtime/tree/main/cranelift#cranelift-code-generator&quot;&gt;Cranelift&lt;/a&gt; project, would
-provide a fast backend which greatly improves compile times, at the cost of
-performing very few optimizations. This is a great fit for debug builds, and the hope is
-that &lt;code&gt;cg_clif&lt;/code&gt; will eventually be the default backend in debug mode.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-the-progress-of-using-rustc_codegen_cranelift-for-debug-builds&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-the-progress-of-using-rustc_codegen_cranelift-for-debug-builds&quot;&gt;&lt;/a&gt;What is the progress of using &lt;code&gt;rustc_codegen_cranelift&lt;/code&gt; for debug builds?&lt;/h2&gt;
-&lt;p&gt;There has been a &lt;a href&#x3D;&quot;https://forge.rust-lang.org/compiler/mcp.html&quot;&gt;Major Change Proposal&lt;/a&gt; open for some time for making
-&lt;code&gt;cg_clif&lt;/code&gt; part of the main Rust repository. Recently, &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/270&quot;&gt;the MCP was
-accepted&lt;/a&gt; and the compiler team &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/77975&quot;&gt;merged&lt;/a&gt;
-&lt;code&gt;rustc_cranelift_codegen&lt;/code&gt; &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/77975&quot;&gt;into the main Rust git repository&lt;/a&gt;.
-&lt;code&gt;cg_clif&lt;/code&gt; is not yet distributed with &lt;code&gt;rustup&lt;/code&gt;, but this means you can now
-build it from source in-tree!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#how-do-i-use-rustc_codegen_cranelift&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-do-i-use-rustc_codegen_cranelift&quot;&gt;&lt;/a&gt;How do I use &lt;code&gt;rustc_codegen_cranelift&lt;/code&gt;?&lt;/h2&gt;
-&lt;p&gt;In this section, I&#x27;ll walk through step-by-step how to build the new backend from source, then use it on your own projects. All code is copy/paste-able, and each step is explained.&lt;/p&gt;
-&lt;p&gt;First, let&#x27;s build &lt;code&gt;cg_clif&lt;/code&gt; from source.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-sh&quot;&gt;$ git clone https://github.com/bjorn3/rustc_codegen_cranelift.git
-$ ./prepare.sh
-$ ./build.sh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, we can start using it to compile a project. For demonstration purposes,
-I&#x27;ll be be using &lt;code&gt;cargo&lt;/code&gt;, but you can use any Rust project supported by
-&lt;code&gt;cg_clif&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ cd ..
-$ git clone https://github.com/rust-lang/cargo/
-$ cd cargo
-$ ../rustc_codegen_cranelift/build/cargo.sh build
-...
-    Finished dev [unoptimized + debuginfo] target(s) in 49.93s
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It works! For comparison, let&#x27;s see how long the equivalent LLVM backend would
-take.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-sh&quot;&gt;$ rustup install nightly-2020-10-31
-$ cargo +nightly-2020-10-31 build
-...
-    Finished dev [unoptimized + debuginfo] target(s) in 54.64s
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;LLVM takes a full 5 seconds longer for a full build. Next, let&#x27;s try incremental builds:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ git apply &amp;lt;&amp;lt;EOF
-diff --git a/src/cargo/lib.rs b/src/cargo/lib.rs
-index bccb41121..703afa754 100644
---- a/src/cargo/lib.rs
-+++ b/src/cargo/lib.rs
-@@ -36,8 +36,8 @@ use anyhow::Error;
- use log::debug;
- use std::fmt;
- 
--pub use crate::util::errors::{InternalError, VerboseError};
- pub use crate::util::{CargoResult, CliError, CliResult, Config};
-+pub use crate::util::errors::{InternalError, VerboseError};
- 
- pub const CARGO_ENV: &amp;amp;str &#x3D; &amp;quot;CARGO&amp;quot;;
-EOF
-$ ../rustc_codegen_cranelift/build/cargo.sh build
-    Finished dev [unoptimized + debuginfo] target(s) in 7.98s
-$ cargo +nightly-2020-10-31 build
-   Compiling cargo v0.50.0 (/home/joshua/cargo)
-    Finished dev [unoptimized + debuginfo] target(s) in 5.48s
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;LLVM is actually &lt;em&gt;faster&lt;/em&gt; here: &lt;code&gt;serde_derive&lt;/code&gt; took longer to run under cranelift, since it wasn&#x27;t as optimized. Under cranelift it takes ~14% percent of the time, while under LLVM it takes less than 3%.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#building-in-tree&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;building-in-tree&quot;&gt;&lt;/a&gt;Building in-tree&lt;/h2&gt;
-&lt;p&gt;This section is mostly for compiler hackers, but feel free to follow along even
-if you&#x27;re just interested! The reason this isn&#x27;t the recommended way to build
-&lt;code&gt;cg_clif&lt;/code&gt; is because the Rust compiler takes a very long time to build.&lt;/p&gt;
-&lt;p&gt;First, download the Rust repository.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;git clone https://github.com/rust-lang/rust
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, let&#x27;s set up the build system to use &lt;code&gt;cg_clif&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;$ cat &amp;gt; config.toml &amp;lt;&amp;lt;EOF
-[rust]
-codegen-backends &#x3D; [&amp;quot;cranelift&amp;quot;]
-EOF
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Finally, let&#x27;s run the build. This can take a long time, over a half-hour in some cases.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;./x.py build
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#how-can-i-help&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-can-i-help&quot;&gt;&lt;/a&gt;How can I help?&lt;/h2&gt;
-&lt;p&gt;You don&#x27;t need to be a compiler developer to help improve &lt;code&gt;cg_clif&lt;/code&gt;!  The best
-way you can help is by testing &lt;code&gt;cg_clif&lt;/code&gt; on different Rust crates across the
-ecosystem.  Just while writing this article, I found &lt;a href&#x3D;&quot;https://github.com/bjorn3/rustc_codegen_cranelift/issues/1102&quot;&gt;two&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/bjorn3/rustc_codegen_cranelift/issues/1101&quot;&gt;bugs&lt;/a&gt;, so there&#x27;s plenty of work left to be done. Please report any bugs you find
-to the &lt;a href&#x3D;&quot;https://github.com/bjorn3/rustc_codegen_cranelift/issues/new&quot;&gt;&lt;code&gt;rustc_codegen_cranelift&lt;/code&gt; git repository&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;In the future, we hope to distribute &lt;code&gt;cg_clif&lt;/code&gt; with Rustup, and if it matures sufficiently, eventually make it the default backend for debug builds.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Joshua Nelson</name>
         </author>
     </entry>
     
