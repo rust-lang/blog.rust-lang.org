@@ -31,7 +31,7 @@ Did you know that you can see the lang team's active projects on our [project bo
     * continued progress on the implementation, things are going well
     * we will likely add a `capture!` macro to use for migration; it would force the capture of a particular local variable (and not some subpath of it)
 * inline assembly
-    * we are investigating stabiliing inline assembly for certain architectures (but not all)
+    * we are investigating stabilising inline assembly for certain architectures (but not all)
 
 ## Upcoming design meetings
 
