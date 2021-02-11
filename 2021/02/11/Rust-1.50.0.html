@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.50.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.50.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.50.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.50.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.50.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 11, 2021 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.50.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.50.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a>
+from the appropriate page on our website, and check out the
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11">detailed release notes for 1.50.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1500-stable" aria-hidden="true" class="anchor" id="whats-in-1500-stable"></a>What's in 1.50.0 stable</h2>
+<p>For this release, we have improved array indexing, expanded safe access to union fields, and added to the standard library.
+See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11">detailed release notes</a> to learn about other changes
+not covered by this post.</p>
+<h3><a href="#const-generic-array-indexing" aria-hidden="true" class="anchor" id="const-generic-array-indexing"></a>Const-generic array indexing</h3>
+<p>Continuing the march toward stable <code>const</code> generics, this release adds
+implementations of <code>ops::Index</code> and <code>IndexMut</code> for arrays <code>[T; N]</code> for
+<em>any</em> length of <code>const N</code>. The indexing operator <code>[]</code> already worked on
+arrays through built-in compiler magic, but at the type level, arrays
+didn't actually implement the library traits until now.</p>
+<pre><code class="language-rust">fn second&lt;C&gt;(container: &amp;C) -&gt; &amp;C::Output
+where
+    C: std::ops::Index&lt;usize&gt; + ?Sized,
+{
+    &amp;container[1]
+}
+
+fn main() {
+    let array: [i32; 3] = [1, 2, 3];
+    assert_eq!(second(&amp;array[..]), &amp;2); // slices worked before
+    assert_eq!(second(&amp;array), &amp;2); // now it also works directly
+}
+</code></pre>
+<h3><a href="#const-value-repetition-for-arrays" aria-hidden="true" class="anchor" id="const-value-repetition-for-arrays"></a><code>const</code> value repetition for arrays</h3>
+<p>Arrays in Rust can be written either as a list <code>[a, b, c]</code> or a repetition <code>[x; N]</code>.
+For lengths <code>N</code> greater than one, repetition has only been allowed for <code>x</code>s that are <code>Copy</code>,
+and <a href="https://rust-lang.github.io/rfcs/2203-const-repeat-expr.html">RFC 2203</a> sought to allow any <code>const</code> expression there. However,
+while that feature was unstable for arbitrary expressions, its implementation
+since Rust 1.38 accidentally allowed stable use of <code>const</code> <em>values</em> in array
+repetition.</p>
+<pre><code class="language-rust">fn main() {
+    // This is not allowed, because `Option&lt;Vec&lt;i32&gt;&gt;` does not implement `Copy`.
+    let array: [Option&lt;Vec&lt;i32&gt;&gt;; 10] = [None; 10];
+
+    const NONE: Option&lt;Vec&lt;i32&gt;&gt; = None;
+    const EMPTY: Option&lt;Vec&lt;i32&gt;&gt; = Some(Vec::new());
+
+    // However, repeating a `const` value is allowed!
+    let nones = [NONE; 10];
+    let empties = [EMPTY; 10];
+}
+</code></pre>
+<p>In Rust 1.50, that stabilization is formally acknowledged. In the future, to avoid such &quot;temporary&quot; named
+constants, you can look forward to inline <code>const</code> expressions per <a href="https://rust-lang.github.io/rfcs/2920-inline-const.html">RFC 2920</a>.</p>
+<h3><a href="#safe-assignments-to-manuallydropt-union-fields" aria-hidden="true" class="anchor" id="safe-assignments-to-manuallydropt-union-fields"></a>Safe assignments to <code>ManuallyDrop&lt;T&gt;</code> union fields</h3>
+<p>Rust 1.49 made it possible to add <code>ManuallyDrop&lt;T&gt;</code> fields to a <code>union</code> as part
+of allowing <code>Drop</code> for unions at all. However, unions don't drop old values
+when a field is assigned, since they don't know which variant was formerly
+valid, so safe Rust previously limited this to <code>Copy</code> types only, which never <code>Drop</code>.
+Of course, <code>ManuallyDrop&lt;T&gt;</code> also doesn't need to <code>Drop</code>, so now Rust 1.50
+allows safe assignments to these fields as well.</p>
+<h3><a href="#a-niche-for-file-on-unix-platforms" aria-hidden="true" class="anchor" id="a-niche-for-file-on-unix-platforms"></a>A niche for <code>File</code> on Unix platforms</h3>
+<p>Some types in Rust have specific limitations on what is considered a
+valid value, which may not cover the entire range of possible memory
+values. We call any remaining invalid value a <a href="https://rust-lang.github.io/unsafe-code-guidelines/glossary.html#niche">niche</a>, and this space
+may be used for type layout optimizations. For example, in Rust 1.28
+we introduced <code>NonZero</code> integer types (like <code>NonZeroU8</code>) where <code>0</code> is a niche, and this allowed
+<code>Option&lt;NonZero&gt;</code> to use <code>0</code> to represent <code>None</code> with no extra memory.</p>
+<p>On Unix platforms, Rust's <code>File</code> is simply made of the system's integer
+file descriptor, and this happens to have a possible niche
+as well because it can never be <code>-1</code>! System calls which return a file
+descriptor use <code>-1</code> to indicate that an error occurred (check <code>errno</code>)
+so it's never possible for <code>-1</code> to be a real file descriptor. Starting
+in Rust 1.50 this niche is added to the type's definition so it can be
+used in layout optimizations too. It follows that <code>Option&lt;File&gt;</code> will
+now have the same size as <code>File</code> itself!</p>
+<h3><a href="#library-changes" aria-hidden="true" class="anchor" id="library-changes"></a>Library changes</h3>
+<p>In Rust 1.50.0, there are nine new stable functions:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.bool.html#method.then"><code>bool::then</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/btree_map/enum.Entry.html#method.or_insert_with_key"><code>btree_map::Entry::or_insert_with_key</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f32.html#method.clamp"><code>f32::clamp</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f64.html#method.clamp"><code>f64::clamp</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/hash_map/enum.Entry.html#method.or_insert_with_key"><code>hash_map::Entry::or_insert_with_key</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/cmp/trait.Ord.html#method.clamp"><code>Ord::clamp</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/cell/struct.RefCell.html#method.take"><code>RefCell::take</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.fill"><code>slice::fill</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/cell/struct.UnsafeCell.html#method.get_mut"><code>UnsafeCell::get_mut</code></a></li>
+</ul>
+<p>And quite a few existing functions were made <code>const</code>:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/net/enum.IpAddr.html#method.is_ipv4"><code>IpAddr::is_ipv4</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/net/enum.IpAddr.html#method.is_ipv6"><code>IpAddr::is_ipv6</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.size"><code>Layout::size</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.align"><code>Layout::align</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.from_size_align"><code>Layout::from_size_align</code></a></li>
+<li><code>pow</code> for all integer types.</li>
+<li><code>checked_pow</code> for all integer types.</li>
+<li><code>saturating_pow</code> for all integer types.</li>
+<li><code>wrapping_pow</code> for all integer types.</li>
+<li><code>next_power_of_two</code> for all unsigned integer types.</li>
+<li><code>checked_power_of_two</code> for all unsigned integer types.</li>
+</ul>
+<p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11">detailed release notes</a> to learn about other changes.</p>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.50.0 release: check out what changed in
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11">Rust</a>, <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-150-2021-02-11">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-150">Clippy</a>.</p>
+<h2><a href="#contributors-to-1500" aria-hidden="true" class="anchor" id="contributors-to-1500"></a>Contributors to 1.50.0</h2>
+<p>Many people came together to create Rust 1.50.0. We couldn't have done it
+without all of you. <a href="https://thanks.rust-lang.org/rust/1.50.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

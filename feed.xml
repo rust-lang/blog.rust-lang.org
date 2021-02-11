@@ -10,8 +10,131 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-02-11T05:27:34+00:00</updated>
+    <updated>2021-02-11T14:42:09+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.50.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/02/11/Rust-1.50.0.html" type="text/html" title="Announcing Rust 1.50.0" />
+        <published>2021-02-11T00:00:00+00:00</published>
+        <updated>2021-02-11T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/02/11/Rust-1.50.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/02/11/Rust-1.50.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.50.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.50.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
+from the appropriate page on our website, and check out the
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11&quot;&gt;detailed release notes for 1.50.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1500-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1500-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.50.0 stable&lt;/h2&gt;
+&lt;p&gt;For this release, we have improved array indexing, expanded safe access to union fields, and added to the standard library.
+See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11&quot;&gt;detailed release notes&lt;/a&gt; to learn about other changes
+not covered by this post.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#const-generic-array-indexing&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-generic-array-indexing&quot;&gt;&lt;/a&gt;Const-generic array indexing&lt;/h3&gt;
+&lt;p&gt;Continuing the march toward stable &lt;code&gt;const&lt;/code&gt; generics, this release adds
+implementations of &lt;code&gt;ops::Index&lt;/code&gt; and &lt;code&gt;IndexMut&lt;/code&gt; for arrays &lt;code&gt;[T; N]&lt;/code&gt; for
+&lt;em&gt;any&lt;/em&gt; length of &lt;code&gt;const N&lt;/code&gt;. The indexing operator &lt;code&gt;[]&lt;/code&gt; already worked on
+arrays through built-in compiler magic, but at the type level, arrays
+didn&#x27;t actually implement the library traits until now.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn second&amp;lt;C&amp;gt;(container: &amp;amp;C) -&amp;gt; &amp;amp;C::Output
+where
+    C: std::ops::Index&amp;lt;usize&amp;gt; + ?Sized,
+{
+    &amp;amp;container[1]
+}
+
+fn main() {
+    let array: [i32; 3] &#x3D; [1, 2, 3];
+    assert_eq!(second(&amp;amp;array[..]), &amp;amp;2); // slices worked before
+    assert_eq!(second(&amp;amp;array), &amp;amp;2); // now it also works directly
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#const-value-repetition-for-arrays&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-value-repetition-for-arrays&quot;&gt;&lt;/a&gt;&lt;code&gt;const&lt;/code&gt; value repetition for arrays&lt;/h3&gt;
+&lt;p&gt;Arrays in Rust can be written either as a list &lt;code&gt;[a, b, c]&lt;/code&gt; or a repetition &lt;code&gt;[x; N]&lt;/code&gt;.
+For lengths &lt;code&gt;N&lt;/code&gt; greater than one, repetition has only been allowed for &lt;code&gt;x&lt;/code&gt;s that are &lt;code&gt;Copy&lt;/code&gt;,
+and &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2203-const-repeat-expr.html&quot;&gt;RFC 2203&lt;/a&gt; sought to allow any &lt;code&gt;const&lt;/code&gt; expression there. However,
+while that feature was unstable for arbitrary expressions, its implementation
+since Rust 1.38 accidentally allowed stable use of &lt;code&gt;const&lt;/code&gt; &lt;em&gt;values&lt;/em&gt; in array
+repetition.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn main() {
+    // This is not allowed, because &#x60;Option&amp;lt;Vec&amp;lt;i32&amp;gt;&amp;gt;&#x60; does not implement &#x60;Copy&#x60;.
+    let array: [Option&amp;lt;Vec&amp;lt;i32&amp;gt;&amp;gt;; 10] &#x3D; [None; 10];
+
+    const NONE: Option&amp;lt;Vec&amp;lt;i32&amp;gt;&amp;gt; &#x3D; None;
+    const EMPTY: Option&amp;lt;Vec&amp;lt;i32&amp;gt;&amp;gt; &#x3D; Some(Vec::new());
+
+    // However, repeating a &#x60;const&#x60; value is allowed!
+    let nones &#x3D; [NONE; 10];
+    let empties &#x3D; [EMPTY; 10];
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In Rust 1.50, that stabilization is formally acknowledged. In the future, to avoid such &amp;quot;temporary&amp;quot; named
+constants, you can look forward to inline &lt;code&gt;const&lt;/code&gt; expressions per &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2920-inline-const.html&quot;&gt;RFC 2920&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#safe-assignments-to-manuallydropt-union-fields&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;safe-assignments-to-manuallydropt-union-fields&quot;&gt;&lt;/a&gt;Safe assignments to &lt;code&gt;ManuallyDrop&amp;lt;T&amp;gt;&lt;/code&gt; union fields&lt;/h3&gt;
+&lt;p&gt;Rust 1.49 made it possible to add &lt;code&gt;ManuallyDrop&amp;lt;T&amp;gt;&lt;/code&gt; fields to a &lt;code&gt;union&lt;/code&gt; as part
+of allowing &lt;code&gt;Drop&lt;/code&gt; for unions at all. However, unions don&#x27;t drop old values
+when a field is assigned, since they don&#x27;t know which variant was formerly
+valid, so safe Rust previously limited this to &lt;code&gt;Copy&lt;/code&gt; types only, which never &lt;code&gt;Drop&lt;/code&gt;.
+Of course, &lt;code&gt;ManuallyDrop&amp;lt;T&amp;gt;&lt;/code&gt; also doesn&#x27;t need to &lt;code&gt;Drop&lt;/code&gt;, so now Rust 1.50
+allows safe assignments to these fields as well.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#a-niche-for-file-on-unix-platforms&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-niche-for-file-on-unix-platforms&quot;&gt;&lt;/a&gt;A niche for &lt;code&gt;File&lt;/code&gt; on Unix platforms&lt;/h3&gt;
+&lt;p&gt;Some types in Rust have specific limitations on what is considered a
+valid value, which may not cover the entire range of possible memory
+values. We call any remaining invalid value a &lt;a href&#x3D;&quot;https://rust-lang.github.io/unsafe-code-guidelines/glossary.html#niche&quot;&gt;niche&lt;/a&gt;, and this space
+may be used for type layout optimizations. For example, in Rust 1.28
+we introduced &lt;code&gt;NonZero&lt;/code&gt; integer types (like &lt;code&gt;NonZeroU8&lt;/code&gt;) where &lt;code&gt;0&lt;/code&gt; is a niche, and this allowed
+&lt;code&gt;Option&amp;lt;NonZero&amp;gt;&lt;/code&gt; to use &lt;code&gt;0&lt;/code&gt; to represent &lt;code&gt;None&lt;/code&gt; with no extra memory.&lt;/p&gt;
+&lt;p&gt;On Unix platforms, Rust&#x27;s &lt;code&gt;File&lt;/code&gt; is simply made of the system&#x27;s integer
+file descriptor, and this happens to have a possible niche
+as well because it can never be &lt;code&gt;-1&lt;/code&gt;! System calls which return a file
+descriptor use &lt;code&gt;-1&lt;/code&gt; to indicate that an error occurred (check &lt;code&gt;errno&lt;/code&gt;)
+so it&#x27;s never possible for &lt;code&gt;-1&lt;/code&gt; to be a real file descriptor. Starting
+in Rust 1.50 this niche is added to the type&#x27;s definition so it can be
+used in layout optimizations too. It follows that &lt;code&gt;Option&amp;lt;File&amp;gt;&lt;/code&gt; will
+now have the same size as &lt;code&gt;File&lt;/code&gt; itself!&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#library-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
+&lt;p&gt;In Rust 1.50.0, there are nine new stable functions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.bool.html#method.then&quot;&gt;&lt;code&gt;bool::then&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/btree_map/enum.Entry.html#method.or_insert_with_key&quot;&gt;&lt;code&gt;btree_map::Entry::or_insert_with_key&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.f32.html#method.clamp&quot;&gt;&lt;code&gt;f32::clamp&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.f64.html#method.clamp&quot;&gt;&lt;code&gt;f64::clamp&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/hash_map/enum.Entry.html#method.or_insert_with_key&quot;&gt;&lt;code&gt;hash_map::Entry::or_insert_with_key&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cmp/trait.Ord.html#method.clamp&quot;&gt;&lt;code&gt;Ord::clamp&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cell/struct.RefCell.html#method.take&quot;&gt;&lt;code&gt;RefCell::take&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.fill&quot;&gt;&lt;code&gt;slice::fill&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cell/struct.UnsafeCell.html#method.get_mut&quot;&gt;&lt;code&gt;UnsafeCell::get_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And quite a few existing functions were made &lt;code&gt;const&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/enum.IpAddr.html#method.is_ipv4&quot;&gt;&lt;code&gt;IpAddr::is_ipv4&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/enum.IpAddr.html#method.is_ipv6&quot;&gt;&lt;code&gt;IpAddr::is_ipv6&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.size&quot;&gt;&lt;code&gt;Layout::size&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.align&quot;&gt;&lt;code&gt;Layout::align&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.from_size_align&quot;&gt;&lt;code&gt;Layout::from_size_align&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pow&lt;/code&gt; for all integer types.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;checked_pow&lt;/code&gt; for all integer types.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;saturating_pow&lt;/code&gt; for all integer types.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wrapping_pow&lt;/code&gt; for all integer types.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;next_power_of_two&lt;/code&gt; for all unsigned integer types.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;checked_power_of_two&lt;/code&gt; for all unsigned integer types.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11&quot;&gt;detailed release notes&lt;/a&gt; to learn about other changes.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.50.0 release: check out what changed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-150-2021-02-11&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-150&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1500&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1500&quot;&gt;&lt;/a&gt;Contributors to 1.50.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.50.0. We couldn&#x27;t have done it
+without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.50.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>mdBook security advisory</title>
@@ -817,186 +940,6 @@ so we can track them and fix them as soon as possible!&lt;/p&gt;
 
         <author>
             <name>Camelid</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.47.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/10/08/Rust-1.47.html" type="text/html" title="Announcing Rust 1.47.0" />
-        <published>2020-10-08T00:00:00+00:00</published>
-        <updated>2020-10-08T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/10/08/Rust-1.47.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/10/08/Rust-1.47.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.47.0. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.47.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/tools/install&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1470-2020-10-08&quot;&gt;detailed release notes for
-1.47.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1470-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1470-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.47.0 stable&lt;/h2&gt;
-&lt;p&gt;This release contains no new language features, though it does add one
-long-awaited standard library feature. It is mostly quality of life
-improvements, library stabilizations and const-ifications, and toolchain
-improvements. See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1470-2020-10-08&quot;&gt;detailed release notes&lt;/a&gt; to learn about other
-changes not covered by this post.&lt;/p&gt;
-&lt;h4&gt;&lt;a href&#x3D;&quot;#traits-on-larger-arrays&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;traits-on-larger-arrays&quot;&gt;&lt;/a&gt;Traits on larger arrays&lt;/h4&gt;
-&lt;p&gt;Rust does not currently have a way to be generic over integer values. This
-has long caused problems with arrays, because arrays have an integer as part
-of their type; &lt;code&gt;[T; N]&lt;/code&gt; is the type of an array of type &lt;code&gt;T&lt;/code&gt; of &lt;code&gt;N&lt;/code&gt; length.
-Because there is no way to be generic over &lt;code&gt;N&lt;/code&gt;, you have to manually implement
-traits for arrays for every &lt;code&gt;N&lt;/code&gt; you want to support. For the standard library,
-it was decided to support up to &lt;code&gt;N&lt;/code&gt; of 32.&lt;/p&gt;
-&lt;p&gt;We have been working on a feature called &amp;quot;const generics&amp;quot; that would allow
-you to be generic over &lt;code&gt;N&lt;/code&gt;. Fully explaining this feature is out of the scope
-of this post, because we are not stabilizing const generics just yet.
-However, the core of this feature has been implemented in the compiler, and
-it has been decided that the feature is far enough along that we are okay
-with &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/74060/&quot;&gt;the standard library using it to implement traits on arrays of any
-length&lt;/a&gt;. What this means in
-practice is that if you try to do something like this on Rust 1.46:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn main() {
-    let xs &#x3D; [0; 34];
-
-    println!(&amp;quot;{:?}&amp;quot;, xs);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;you&#x27;d get this error:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;error[E0277]: arrays only have std trait implementations for lengths 0..&#x3D;32
- --&amp;gt; src/main.rs:4:22
-  |
-4 |     println!(&amp;quot;{:?}&amp;quot;, xs);
-  |                      ^^ the trait &#x60;std::array::LengthAtMost32&#x60; is not implemented for &#x60;[{integer}; 34]&#x60;
-  |
-  &#x3D; note: required because of the requirements on the impl of &#x60;std::fmt::Debug&#x60; for &#x60;[{integer}; 34]&#x60;
-  &#x3D; note: required by &#x60;std::fmt::Debug::fmt&#x60;
-  &#x3D; note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But with Rust 1.47, it will properly print out the array.&lt;/p&gt;
-&lt;p&gt;This should make arrays significantly more useful to folks, though it will
-take until the const generics feature stabilizes for libraries to be able to do
-this kind of implementation for their own traits. We do not have a current
-estimated date for the stabilization of const generics.&lt;/p&gt;
-&lt;h4&gt;&lt;a href&#x3D;&quot;#shorter-backtraces&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;shorter-backtraces&quot;&gt;&lt;/a&gt;Shorter backtraces&lt;/h4&gt;
-&lt;p&gt;Back in Rust 1.18, we &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/38165&quot;&gt;made some changes to the backtraces &lt;code&gt;rustc&lt;/code&gt; would
-print on panic&lt;/a&gt;. There are a
-number of things in a backtrace that aren&#x27;t useful the majority of the time.
-However, at some point, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/47429&quot;&gt;these
-regressed&lt;/a&gt;. In Rust 1.47.0,
-the culprit was found, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/75048&quot;&gt;this has now been
-fixed&lt;/a&gt;. Since the regression,
-this program:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn main() {
-    panic!();
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;would give you a backtrace that looks like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;thread &#x27;main&#x27; panicked at &#x27;explicit panic&#x27;, src/main.rs:2:5
-stack backtrace:
-   0: backtrace::backtrace::libunwind::trace
-             at /cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/libunwind.rs:86
-   1: backtrace::backtrace::trace_unsynchronized
-             at /cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/mod.rs:66
-   2: std::sys_common::backtrace::_print_fmt
-             at src/libstd/sys_common/backtrace.rs:78
-   3: &amp;lt;std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display&amp;gt;::fmt
-             at src/libstd/sys_common/backtrace.rs:59
-   4: core::fmt::write
-             at src/libcore/fmt/mod.rs:1076
-   5: std::io::Write::write_fmt
-             at src/libstd/io/mod.rs:1537
-   6: std::sys_common::backtrace::_print
-             at src/libstd/sys_common/backtrace.rs:62
-   7: std::sys_common::backtrace::print
-             at src/libstd/sys_common/backtrace.rs:49
-   8: std::panicking::default_hook::{{closure}}
-             at src/libstd/panicking.rs:198
-   9: std::panicking::default_hook
-             at src/libstd/panicking.rs:217
-  10: std::panicking::rust_panic_with_hook
-             at src/libstd/panicking.rs:526
-  11: std::panicking::begin_panic
-             at /rustc/04488afe34512aa4c33566eb16d8c912a3ae04f9/src/libstd/panicking.rs:456
-  12: playground::main
-             at src/main.rs:2
-  13: std::rt::lang_start::{{closure}}
-             at /rustc/04488afe34512aa4c33566eb16d8c912a3ae04f9/src/libstd/rt.rs:67
-  14: std::rt::lang_start_internal::{{closure}}
-             at src/libstd/rt.rs:52
-  15: std::panicking::try::do_call
-             at src/libstd/panicking.rs:348
-  16: std::panicking::try
-             at src/libstd/panicking.rs:325
-  17: std::panic::catch_unwind
-             at src/libstd/panic.rs:394
-  18: std::rt::lang_start_internal
-             at src/libstd/rt.rs:51
-  19: std::rt::lang_start
-             at /rustc/04488afe34512aa4c33566eb16d8c912a3ae04f9/src/libstd/rt.rs:67
-  20: main
-  21: __libc_start_main
-  22: _start
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, in Rust 1.47.0, you&#x27;ll see this instead:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;thread &#x27;main&#x27; panicked at &#x27;explicit panic&#x27;, src/main.rs:2:5
-stack backtrace:
-   0: std::panicking::begin_panic
-             at /rustc/d6646f64790018719caebeafd352a92adfa1d75a/library/std/src/panicking.rs:497
-   1: playground::main
-             at ./src/main.rs:2
-   2: core::ops::function::FnOnce::call_once
-             at /rustc/d6646f64790018719caebeafd352a92adfa1d75a/library/core/src/ops/function.rs:227
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This makes it much easier to see where the panic actually originated, and
-you can still set &lt;code&gt;RUST_BACKTRACE&#x3D;full&lt;/code&gt; if you want to see everything.&lt;/p&gt;
-&lt;h4&gt;&lt;a href&#x3D;&quot;#llvm-11&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;llvm-11&quot;&gt;&lt;/a&gt;LLVM 11&lt;/h4&gt;
-&lt;p&gt;We have &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73526/&quot;&gt;upgraded to LLVM 11&lt;/a&gt;.
-The compiler still supports being compiled with LLVM versions as old as 8,
-but by default, 11 is what you&#x27;ll be getting.&lt;/p&gt;
-&lt;h4&gt;&lt;a href&#x3D;&quot;#control-flow-guard-on-windows&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;control-flow-guard-on-windows&quot;&gt;&lt;/a&gt;Control Flow Guard on Windows&lt;/h4&gt;
-&lt;p&gt;&lt;code&gt;rustc&lt;/code&gt; &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73893/&quot;&gt;now supports&lt;/a&gt; &lt;code&gt;-C control-flow-guard&lt;/code&gt;, an option that will turn on &lt;a href&#x3D;&quot;https://docs.microsoft.com/en-us/windows/win32/secbp/control-flow-guard&quot;&gt;Control Flow
-Guard&lt;/a&gt;
-on Windows. Other platforms ignore this flag.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#library-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
-&lt;p&gt;Additionally, nine new APIs were stabilized this release:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/proc_macro/struct.Ident.html#method.new_raw&quot;&gt;&lt;code&gt;Ident::new_raw&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ops/struct.Range.html#method.is_empty&quot;&gt;&lt;code&gt;Range::is_empty&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ops/struct.RangeInclusive.html#method.is_empty&quot;&gt;&lt;code&gt;RangeInclusive::is_empty&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.as_deref&quot;&gt;&lt;code&gt;Result::as_deref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.as_deref_mut&quot;&gt;&lt;code&gt;Result::as_deref_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.leak&quot;&gt;&lt;code&gt;Vec::leak&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.offset_from&quot;&gt;&lt;code&gt;pointer::offset_from&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/f32/consts/constant.TAU.html&quot;&gt;&lt;code&gt;f32::TAU&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/f64/consts/constant.TAU.html&quot;&gt;&lt;code&gt;f64::TAU&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The following previously stable APIs have now been made &lt;code&gt;const&lt;/code&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73858/&quot;&gt;The &lt;code&gt;new&lt;/code&gt; method for all &lt;code&gt;NonZero&lt;/code&gt; integers.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73858/&quot;&gt;The &lt;code&gt;checked_add&lt;/code&gt;,&lt;code&gt;checked_sub&lt;/code&gt;,&lt;code&gt;checked_mul&lt;/code&gt;,&lt;code&gt;checked_neg&lt;/code&gt;, &lt;code&gt;checked_shl&lt;/code&gt;,
-&lt;code&gt;checked_shr&lt;/code&gt;, &lt;code&gt;saturating_add&lt;/code&gt;, &lt;code&gt;saturating_sub&lt;/code&gt;, and &lt;code&gt;saturating_mul&lt;/code&gt;
-methods for all integers.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73858/&quot;&gt;The &lt;code&gt;checked_abs&lt;/code&gt;, &lt;code&gt;saturating_abs&lt;/code&gt;, &lt;code&gt;saturating_neg&lt;/code&gt;, and &lt;code&gt;signum&lt;/code&gt;  for all
-signed integers.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73858/&quot;&gt;The &lt;code&gt;is_ascii_alphabetic&lt;/code&gt;, &lt;code&gt;is_ascii_uppercase&lt;/code&gt;, &lt;code&gt;is_ascii_lowercase&lt;/code&gt;,
-&lt;code&gt;is_ascii_alphanumeric&lt;/code&gt;, &lt;code&gt;is_ascii_digit&lt;/code&gt;, &lt;code&gt;is_ascii_hexdigit&lt;/code&gt;,
-&lt;code&gt;is_ascii_punctuation&lt;/code&gt;, &lt;code&gt;is_ascii_graphic&lt;/code&gt;, &lt;code&gt;is_ascii_whitespace&lt;/code&gt;, and
-&lt;code&gt;is_ascii_control&lt;/code&gt; methods for &lt;code&gt;char&lt;/code&gt; and &lt;code&gt;u8&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1470-2020-10-08&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/71237/&quot;&gt;Rustdoc has gained support for the Ayu theme&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;There are other changes in the Rust 1.47.0 release: check out what changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1470-2020-10-08&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-147-2020-10-08&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-147&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1470&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1470&quot;&gt;&lt;/a&gt;Contributors to 1.47.0&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.47.0. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.47.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
