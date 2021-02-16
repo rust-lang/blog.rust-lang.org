@@ -29,7 +29,7 @@ do some extra sprint planning during that time. We established:
 One detail about this sprint that differs a little from previous rust hacking sessions like "impl days":
 we are not actively trying to solicit new contributors during this time. (Of course new contributors are
 always welcome to join in the fun, but the compiler team recognized that we do not have as much mentoring
-bandwwidth for this first sprint compared to past "impl days" events.)
+bandwidth for this first sprint compared to past "impl days" events.)
 
 [mtg-2020-12-04]: https://zulip-archive.rust-lang.org/238009tcompilermeetings/99285steeringmeeting20201204PerformanceGoalsfor2020.html
 
