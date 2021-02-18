@@ -21,15 +21,16 @@ During our most recent planning meeting ([12 feb 2021][mtg-2021-02-12]),
 there were no new significant steering meeting proposals, so we decided to
 do some extra sprint planning during that time. We established:
 
- * we should settle on a common set of tools for measuring memory usage (for now we expect it to be Valgrind DHAT on Linux).
- * we need some centralized documentation for how to best use those tools to measure rustc's memory usage
+ * we should settle on a common set of tools for measuring memory usage,
+ * we need some centralized documentation for how to best use those tools to measure rustc's memory usage, and
  * we need concrete proposals for tasks that will drive activity during the sprint; we started up
-   the [shrinkmem-sprint zulip][] to host conversations related to that.
+   the [shrinkmem-sprint zulip][] ([public archive][shrinkmem-sprint archive]) to host conversations related to that.
 
-One detail about this sprint that differs a little from previous rust hacking sessions like "impl days":
-we are not actively trying to solicit new contributors during this time. (Of course new contributors are
-always welcome to join in the fun, but the compiler team recognized that we do not have as much mentoring
-bandwidth for this first sprint compared to past "impl days" events.)
+Given the more narrow focus of this sprint, the Rust Compiler Team is interested
+in input from people with strong experience using Valgrind DHAT or Windows
+Performance Analyzer (or other tools) to help with identifying opportunities to
+reduce memory usage. If this sounds like you please drop by the
+[shrinkmem-sprint zulip][] and say hello!
 
 [mtg-2020-12-04]: https://zulip-archive.rust-lang.org/238009tcompilermeetings/99285steeringmeeting20201204PerformanceGoalsfor2020.html
 
@@ -39,4 +40,5 @@ bandwidth for this first sprint compared to past "impl days" events.)
 
 [mtg-2021-02-12]: https://zulip-archive.rust-lang.org/238009tcompilermeetings/44925planningmeeting20210212.html
 
-[shrinkmem-sprint zulip]: https://zulip-archive.rust-lang.org/276895tcompilershrinkmemsprint/index.html
+[shrinkmem-sprint zulip]: https://rust-lang.zulipchat.com/#narrow/stream/276895-t-compiler.2Fshrinkmem-sprint
+[shrinkmem-sprint archive]: https://zulip-archive.rust-lang.org/276895tcompilershrinkmemsprint/index.html
