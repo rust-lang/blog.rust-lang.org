@@ -10,8 +10,44 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-02-11T14:42:12+00:00</updated>
+    <updated>2021-02-19T16:29:54+00:00</updated>
 
+    
+    <entry>
+        <title>March Sprint for rustc: Shrink Memory Usage</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/02/15/shrinkmem-rustc-sprint.html" type="text/html" title="March Sprint for rustc: Shrink Memory Usage" />
+        <published>2021-02-15T00:00:00+00:00</published>
+        <updated>2021-02-15T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/02/15/shrinkmem-rustc-sprint.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/02/15/shrinkmem-rustc-sprint.html">&lt;p&gt;I am very excited about the compiler team&#x27;s upcoming sprint, and
+I want to share that excitement with all of you.&lt;/p&gt;
+&lt;p&gt;The Rust Compiler Team decided over a series of recent meetings
+(&lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/99285steeringmeeting20201204PerformanceGoalsfor2020.html&quot;&gt;4 dec 2020&lt;/a&gt;, &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/79391planningmeeting20210115.html&quot;&gt;15 jan 2021&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/95022steeringmeeting20210129.html&quot;&gt;29 jan 2021&lt;/a&gt;) that our focus for 2021 will be improving the compiler&#x27;s
+performance from the perspective of the new contributor experience bootstrapping
+the compiler and developing code for the compiler.&lt;/p&gt;
+&lt;p&gt;The team&#x27;s first sprint for 2021 will be during the first week of March, and its
+focus will be on reducing the memory footprint of the compiler during bootstrap.&lt;/p&gt;
+&lt;p&gt;During our most recent planning meeting (&lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/44925planningmeeting20210212.html&quot;&gt;12 feb 2021&lt;/a&gt;),
+there were no new significant steering meeting proposals, so we decided to
+do some extra sprint planning during that time. We established:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;we should settle on a common set of tools for measuring memory usage,&lt;/li&gt;
+&lt;li&gt;we need some centralized documentation for how to best use those tools to measure rustc&#x27;s memory usage, and&lt;/li&gt;
+&lt;li&gt;we need concrete proposals for tasks that will drive activity during the sprint; we started up
+the &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/276895-t-compiler.2Fshrinkmem-sprint&quot;&gt;shrinkmem-sprint zulip&lt;/a&gt; (&lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/276895tcompilershrinkmemsprint/index.html&quot;&gt;public archive&lt;/a&gt;) to host conversations related to that.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Given the more narrow focus of this sprint, the Rust Compiler Team is interested
+in input from people with strong experience using Valgrind DHAT or Windows
+Performance Analyzer (or other tools) to help with identifying opportunities to
+reduce memory usage. If this sounds like you please drop by the
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/276895-t-compiler.2Fshrinkmem-sprint&quot;&gt;shrinkmem-sprint zulip&lt;/a&gt; and say hello!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Felix Klock</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.50.0 pre-release testing</title>
@@ -499,57 +535,6 @@ They have also been working on implementing features related to pattern matching
 
         <author>
             <name>Felix S. Klock II</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>What the Error Handling Project Group is Working On</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/11/23/What-the-error-handling-project-group-is-working-on.html" type="text/html" title="What the Error Handling Project Group is Working On" />
-        <published>2020-11-23T00:00:00+00:00</published>
-        <updated>2020-11-23T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/11/23/What-the-error-handling-project-group-is-working-on.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/11/23/What-the-error-handling-project-group-is-working-on.html">&lt;p&gt;The Rust community takes its error handling seriously. There’s already a strong culture in place for emphasizing helpful error handling and reporting, with multiple libraries each offering their own take (see Jane Lusby’s thorough &lt;a href&#x3D;&quot;https://youtu.be/rAF8mLI0naQ&quot;&gt;survey&lt;/a&gt; of Rust error handling/reporting libraries).&lt;/p&gt;
-&lt;p&gt;But there’s still room for improvement. The main focus of the group is carrying on error handling-related work that was in progress before the group&#x27;s formation. To that end, we&#x27;re working on systematically addressing error handling-related issues, as well as eliminating blockers that are holding up stalled RFCs.&lt;/p&gt;
-&lt;p&gt;Our first few meetings saw us setting a number of short- and long-term goals. These goals fall into one of three themes: making the &lt;code&gt;Error&lt;/code&gt; trait more universally accessible, improving error handling ergonomics, and authoring additional learning resources.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#one-standardized-error-trait&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;one-standardized-error-trait&quot;&gt;&lt;/a&gt;One Standardized &lt;code&gt;Error&lt;/code&gt; Trait&lt;/h2&gt;
-&lt;p&gt;The &lt;code&gt;Error&lt;/code&gt; trait has been around since 1.0, and exposed two methods: &lt;code&gt;Error::description&lt;/code&gt; and &lt;code&gt;Error::cause&lt;/code&gt;. As it was originally constructed, it was too restictive for a number of reasons&lt;sup&gt;1&lt;/sup&gt;. The &lt;code&gt;Failure&lt;/code&gt; crate addressed many of the &lt;code&gt;Error&lt;/code&gt; trait&#x27;s shortcomings by exporting the &lt;code&gt;Fail&lt;/code&gt; trait, which informs many of changes that are being made to improve the &lt;code&gt;Error&lt;/code&gt; trait.&lt;/p&gt;
-&lt;p&gt;On that note, bolstering the &lt;code&gt;std::error::Error&lt;/code&gt; trait such that it could be adopted across the Rust community as &lt;em&gt;the&lt;/em&gt; &lt;code&gt;Error&lt;/code&gt; trait has been an ongoing process since &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2504&quot;&gt;RFC 2504&lt;/a&gt; was merged in August 2018.&lt;/p&gt;
-&lt;p&gt;This process also involves stabilizing many &lt;code&gt;Error&lt;/code&gt; trait APIs and crates that are, as of this writing, on nightly only. These include the &lt;code&gt;backtrace&lt;/code&gt; and &lt;code&gt;chain&lt;/code&gt; methods, which are both extremely useful for working with error types. If you’re interested in following or contributing to this work, take a look at &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling/issues/3&quot;&gt;this issue&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Another related initiative is migrating the &lt;code&gt;Error&lt;/code&gt; trait to &lt;code&gt;core&lt;/code&gt; so that it’s more widely accessible to different use cases (such as in FFI or embedded contexts).&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#more-ways-to-access-error-contexts&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;more-ways-to-access-error-contexts&quot;&gt;&lt;/a&gt;More Ways to Access Error Contexts&lt;/h2&gt;
-&lt;p&gt;Rust’s language semantics already provide a decently ergonomic error handling experience, what with the &lt;code&gt;Result&lt;/code&gt; type and the &lt;code&gt;?&lt;/code&gt; operator. The error handling group has identified a few additional features to further improve the error handling user experience.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#adding-the-capability-to-iterate-through-the-backtrace-type&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;adding-the-capability-to-iterate-through-the-backtrace-type&quot;&gt;&lt;/a&gt;Adding the Capability to Iterate Through the &lt;code&gt;Backtrace&lt;/code&gt; Type&lt;/h3&gt;
-&lt;p&gt;As of this writing, the &lt;code&gt;backtrace&lt;/code&gt; type only implements the &lt;code&gt;Display&lt;/code&gt; and &lt;code&gt;Debug&lt;/code&gt; traits. This means that the only way to work with the &lt;code&gt;backtrace&lt;/code&gt; type is to print it out, which is less than ideal. An iterator API that provided the ability to iterate through stack frames would give users the ability to control how their backtraces are formatted, which is a necessary step adding &lt;code&gt;std::backtrace::Backtrace&lt;/code&gt; support to crates like &lt;code&gt;color-backtrace&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Upon researching strategies for how to tackle this, we found that the &lt;code&gt;backtrace&lt;/code&gt; crate already has a &lt;code&gt;frames&lt;/code&gt; method that would work nicely for implementing the &lt;code&gt;Iterator&lt;/code&gt; API. It should be a relatively straightforward ordeal to expose an identical method in &lt;code&gt;std&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;A &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/78299&quot;&gt;PR&lt;/a&gt; for this has been opened for anyone who would like to check it out.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#generic-member-access&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;generic-member-access&quot;&gt;&lt;/a&gt;Generic Member Access&lt;/h3&gt;
-&lt;p&gt;Currently, when we want to fetch some additional context related to an error, there are specific methods that need to be called in order to fetch that context. For example, to see the backtrace for an error, we’d call the &lt;code&gt;backtrace&lt;/code&gt; method: &lt;code&gt;let backtrace &#x3D; some_error.backtrace();&lt;/code&gt;. The problem with this approach is that it&#x27;s not possible to support types that are defined outside of &lt;code&gt;std&lt;/code&gt;. Even for types that exist within &lt;code&gt;std&lt;/code&gt;, a method to access each respective type needs to be defined, which makes things cumbersome and harder to maintain.&lt;/p&gt;
-&lt;p&gt;As the name implies, generic member access, when it gets implemented, is a type-agnostic way to access different pieces of context from an &lt;code&gt;Error&lt;/code&gt; trait object. The analogy that clicked for me is when you’re parsing a string into a number, with something like:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let ten &#x3D; &amp;quot;10&amp;quot;.parse::&amp;lt;i32&amp;gt;();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Or when you’re collecting the contents yielded by an iterator:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::collections::HashSet;
-
-let a_to_z_set &#x3D; (&#x27;a&#x27;..&#x3D;&#x27;z&#x27;).collect::&amp;lt;HashSet&amp;lt;_&amp;gt;&amp;gt;();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In a similar vein, you’d be able to access some piece of context from an error by specifying its type ID:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let span_trace &#x3D; some_error.context::&amp;lt;&amp;amp;SpanTrace&amp;gt;();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This could be used to fetch other pieces of context related to the error such as its backtrace, the error’s sources, status codes, alternate formatting representations (such as &lt;code&gt;&amp;amp;dyn Serialize&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;This feature will enable other features we plan on adding down the line, such as exposing a way to report back all of the locations from which errors originated from in a program, as well as exposing a more consistent error reporting format besides just &lt;code&gt;Display&lt;/code&gt; and &lt;code&gt;Debug&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Jane has been putting in a lot of work on pushing these ideas forward. You can check out the associated &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2895&quot;&gt;RFC&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#authoring-a-book-on-rust-error-handling-best-practices&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;authoring-a-book-on-rust-error-handling-best-practices&quot;&gt;&lt;/a&gt;Authoring a Book on Rust Error Handling Best Practices&lt;/h2&gt;
-&lt;p&gt;Last but not least, there’s a lot of interest in the group around authoring &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling/tree/master/the-rust-error-book&quot;&gt;&lt;em&gt;The Rust Error Book&lt;/em&gt;&lt;/a&gt;. The aim of the book would be to codify and communicate different error handling best practices based on the respective use-case. This could include FFI use-cases, or best practices around returning error codes from programs.&lt;/p&gt;
-&lt;p&gt;This is an ongoing effort that will see a lot of progress in the coming weeks and months!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#in-summary&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;in-summary&quot;&gt;&lt;/a&gt;In Summary&lt;/h2&gt;
-&lt;p&gt;We&#x27;re excited by the opportunities to continue to iterate on and improve Rust&#x27;s error handling ergonomics and culture! If you&#x27;re interested in helping out and/or joining in on the conversation, please come by and introduce yourself in our &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/257204-project-error-handling&quot;&gt;Zulip stream&lt;/a&gt;. You can also keep track of our progress via our &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling&quot;&gt;GitHub repo&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Lastly, we&#x27;ll be presenting some forthcoming news about a universally consistent error reporting format in our next update, so stay tuned for that!&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#footnotes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;footnotes&quot;&gt;&lt;/a&gt;Footnotes&lt;/h3&gt;
-&lt;p&gt;&lt;sup&gt;1&lt;/sup&gt;The &lt;code&gt;Error::description&lt;/code&gt; method only supported string slices, which meant that it was not straightforward to create dynamic error messages that included additional context. This method was deprecated in favor of &lt;code&gt;Display&lt;/code&gt;. The &lt;code&gt;Error::cause&lt;/code&gt; method, now known as &lt;code&gt;Error::source&lt;/code&gt;, doesn&#x27;t enforce errors having a &lt;code&gt;&#x27;static&lt;/code&gt; lifetime, which means that downcasting error sources is impossible, making it much more difficult to handle errors using dynamic error handlers.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Sean Chen</name>
         </author>
     </entry>
     
