@@ -37,7 +37,7 @@ For now, the only types that may be used as the type of a const generic argument
 
 #### No complex generic expressions in const arguments
 
-Currently, const parameters may only be instantiated by const arguments of the current forms:
+Currently, const parameters may only be instantiated by const arguments of the following forms:
 
 - A standalone const parameter.
 - A literal (i.e. an integer, bool, or character).
