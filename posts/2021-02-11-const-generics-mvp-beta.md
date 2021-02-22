@@ -6,7 +6,7 @@ author: The const generics project group
 
 After more than 3 years since the [original RFC for const generics](https://github.com/rust-lang/rfcs/blob/master/text/2000-const-generics.md) was accepted, **the first version of const generics is now available in the Rust beta channel!** It will be available in the 1.51 release, which is expected to be released on **March 25th, 2021**. Const generics is one of the [most highly anticipated](https://blog.rust-lang.org/2020/12/16/rust-survey-2020.html) features coming to Rust, and we're excited for people to start taking advantage of the increased power of the language following this addition.
 
-Even if you don't know what const generics are (in which case, read on!), you've likely been benefitting from them: const generics are already employed in the Rust compiler to improve the ergonomics of arrays and diagnostics; more on that below.
+Even if you don't know what const generics are (in which case, read on!), you've likely been benefitting from them: const generics are already employed in the Rust standard library to improve the ergonomics of arrays and diagnostics; more on that below.
 
 With const generics hitting beta, let's take a quick look over what's actually being stabilized, what this means practically, and what's next.
 
