@@ -139,7 +139,7 @@ for elem in array::IntoIter::new(arr) {
 // entities in the compiler, so we need a way to check
 // if they should be considered equal.
 fn foo&lt;const N: usize&gt;() -&gt; [u8; N + 1] {
-    [u8; N + 1]
+    [0; N + 1]
 }
 </code></pre>
 <p>We also want a way to deal with potential errors when evaluating generic operations.</p>

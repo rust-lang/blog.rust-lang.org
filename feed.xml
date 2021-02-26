@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-02-26T16:00:43+00:00</updated>
+    <updated>2021-02-26T23:48:34+00:00</updated>
 
     
     <entry>
@@ -87,7 +87,7 @@ for elem in array::IntoIter::new(arr) {
 // entities in the compiler, so we need a way to check
 // if they should be considered equal.
 fn foo&amp;lt;const N: usize&amp;gt;() -&amp;gt; [u8; N + 1] {
-    [u8; N + 1]
+    [0; N + 1]
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We also want a way to deal with potential errors when evaluating generic operations.&lt;/p&gt;
