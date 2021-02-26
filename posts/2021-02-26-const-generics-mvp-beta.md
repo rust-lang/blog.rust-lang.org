@@ -102,7 +102,7 @@ One difficulty lies in the necessity of having some way to compare unevaluated c
 // entities in the compiler, so we need a way to check
 // if they should be considered equal.
 fn foo<const N: usize>() -> [u8; N + 1] {
-    [u8; N + 1]
+    [0; N + 1]
 }
 ```
 
