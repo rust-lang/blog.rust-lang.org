@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Const generics MVP hits beta! | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Const generics MVP hits beta! | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Const generics MVP hits beta! | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Const generics MVP hits beta!" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Const generics MVP hits beta!</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 26, 2021 &middot; The const generics project group
+    
+    </div>
+
+    <div class="post">
+      <p>After more than 3 years since the <a href="https://github.com/rust-lang/rfcs/blob/master/text/2000-const-generics.md">original RFC for const generics</a> was accepted, <strong>the first version of const generics is now available in the Rust beta channel!</strong> It will be available in the 1.51 release, which is expected to be released on <strong>March 25th, 2021</strong>. Const generics is one of the <a href="https://blog.rust-lang.org/2020/12/16/rust-survey-2020.html">most highly anticipated</a> features coming to Rust, and we're excited for people to start taking advantage of the increased power of the language following this addition.</p>
+<p>Even if you don't know what const generics are (in which case, read on!), you've likely been benefitting from them: const generics are already employed in the Rust standard library to improve the ergonomics of arrays and diagnostics; more on that below.</p>
+<p>With const generics hitting beta, let's take a quick look over what's actually being stabilized, what this means practically, and what's next.</p>
+<h2><a href="#what-are-const-generics" aria-hidden="true" class="anchor" id="what-are-const-generics"></a>What are const generics?</h2>
+<p>Const generics are generic arguments that range over constant values, rather than types or lifetimes. This allows, for instance, types to be parameterized by integers. In fact, there has been one example of const generic types since early on in Rust's development: the array types <code>[T; N]</code>, for some type <code>T</code> and <code>N: usize</code>. However, there has previously been no way to abstract over arrays of an arbitrary size: if you wanted to implement a trait for arrays of any size, you would have to do so manually for each possible value. For a long time, even the standard library methods for arrays were limited to arrays of length at most 32 due to this problem. This restriction was <a href="https://blog.rust-lang.org/2020/10/08/Rust-1.47.html#traits-on-larger-arrays">finally lifted in Rust 1.47</a> - a change that was made possible by const generics.</p>
+<p>Here's an example of a type and implementation making use of const generics: a type wrapping a pair of arrays of the same size.</p>
+<pre><code class="language-rust">struct ArrayPair&lt;T, const N: usize&gt; {
+    left: [T; N],
+    right: [T; N],
+}
+
+impl&lt;T: Debug, const N: usize&gt; Debug for ArrayPair&lt;T, N&gt; {
+    // ...
+}
+</code></pre>
+<h3><a href="#current-restrictions" aria-hidden="true" class="anchor" id="current-restrictions"></a>Current restrictions</h3>
+<p>The first iteration of const generics has been deliberately constrained: in other words, this version is the MVP (minimal viable product) for const generics. This decision is motivated both by the additional complexity of general const generics (the implementation for general const generics is not yet complete, but we feel const generics in 1.51 are already very useful), as well as by the desire to introduce a large feature gradually, to gain experience with any potential shortcomings and difficulties. We intend to lift these in future versions of Rust: see <a href="#whats-next">what's next</a>.</p>
+<h4><a href="#only-integral-types-are-permitted-for-const-generics" aria-hidden="true" class="anchor" id="only-integral-types-are-permitted-for-const-generics"></a>Only integral types are permitted for const generics</h4>
+<p>For now, the only types that may be used as the type of a const generic argument are the types of integers (i.e. signed and unsigned integers, including <code>isize</code> and <code>usize</code>) as well as <code>char</code> and <code>bool</code>. This covers a primary use case of const, namely abstracting over arrays. In the future, this restriction will be lifted to allow more complex types, such as <code>&amp;str</code> and user-defined types.</p>
+<h4><a href="#no-complex-generic-expressions-in-const-arguments" aria-hidden="true" class="anchor" id="no-complex-generic-expressions-in-const-arguments"></a>No complex generic expressions in const arguments</h4>
+<p>Currently, const parameters may only be instantiated by const arguments of the following forms:</p>
+<ul>
+<li>A standalone const parameter.</li>
+<li>A literal (i.e. an integer, bool, or character).</li>
+<li>A concrete constant expression (enclosed by <code>{}</code>), involving no generic parameters.</li>
+</ul>
+<p>For example:</p>
+<pre><code class="language-rust">fn foo&lt;const N: usize&gt;() {}
+
+fn bar&lt;T, const M: usize&gt;() {
+    foo::&lt;M&gt;(); // ok: `M` is a const parameter
+    foo::&lt;2021&gt;(); // ok: `2021` is a literal
+    foo::&lt;{20 * 100 + 20 * 10 + 1}&gt;(); // ok: const expression contains no generic parameters
+    
+    foo::&lt;{ M + 1 }&gt;(); // error: const expression contains the generic parameter `M`
+    foo::&lt;{ std::mem::size_of::&lt;T&gt;() }&gt;(); // error: const expression contains the generic parameter `T`
+    
+    let _: [u8; M]; // ok: `M` is a const parameter
+    let _: [u8; std::mem::size_of::&lt;T&gt;()]; // error: const expression contains the generic parameter `T`
+}
+</code></pre>
+<h2><a href="#by-value-array-iterator" aria-hidden="true" class="anchor" id="by-value-array-iterator"></a>By-value array iterator</h2>
+<p>In addition to the language changes described above, we've also started adding methods to the standard library taking advantage of const generics. While most are not yet ready for stabilization in this version, there is one method that has been stabilized. <a href="https://doc.rust-lang.org/nightly/std/array/struct.IntoIter.html"><code>array::IntoIter</code></a> allows arrays to be iterated by value, rather than by reference, addressing a significant shortcoming. There is ongoing discussion about the possibility of implementing <code>IntoIterator</code> directly for arrays, though there are <a href="https://github.com/rust-lang/rust/pull/65819">backwards-compatibility concerns</a> that still have to be addressed. <code>IntoIter::new</code> acts as an interim solution that makes working with arrays significantly simpler.</p>
+<pre><code class="language-rust">use std::array;
+fn needs_vec(v: Vec&lt;i32&gt;) {
+    // ...
+}
+
+let arr = [vec![0, 1], vec![1, 2, 3], vec![3]];
+for elem in array::IntoIter::new(arr) {
+    needs_vec(elem);
+}
+</code></pre>
+<h2><a href="#whats-next" aria-hidden="true" class="anchor" id="whats-next"></a>What's next?</h2>
+<h3><a href="#const-generics-and-default-arguments" aria-hidden="true" class="anchor" id="const-generics-and-default-arguments"></a>Const generics and default arguments</h3>
+<p>Generic parameters must currently come in a specific order: lifetimes, types, consts. However, this causes difficulties when one attempts to use default arguments alongside const parameters. For the compiler to know which generic argument is which, any default arguments need to be placed last. These two constraints - &quot;types come before consts&quot;, and &quot;defaults come last&quot; - conflict with each other for definitions that have default type arguments <em>and</em> const parameters.</p>
+<p>The solution to this is to relax the ordering constraint so that const parameters may precede type arguments. However, there turn out to be subtleties involved in implementing this change, because the Rust compiler currently makes assumptions about parameter ordering that require some delicacy to remove.</p>
+<p>In light of similar design questions around defaults for const arguments, these are also currently not supported in version 1.51. However, fixing the parameter ordering issues above will also unblock const defaults.</p>
+<h3><a href="#const-generics-for-custom-types" aria-hidden="true" class="anchor" id="const-generics-for-custom-types"></a>Const generics for custom types</h3>
+<p>For a type to be valid, in theory, as the type of a const parameter, we must be able to compare values of that type at compile-time. Furthermore, equality of values should be well-behaved (namely, it should be deterministic, reflexive, symmetric, and transitive). To guarantee these properties, the concept of <em>structural equality</em> was introduced in the <a href="https://github.com/rust-lang/rfcs/blob/master/text/2000-const-generics.md">const generics RFC</a>: essentially this includes any type with <code>#[derive(PartialEq, Eq)]</code> whose members also satisfy structural equality.</p>
+<p>There are <a href="https://github.com/rust-lang/rust/issues/74446">still some questions</a> concerning precisely how structural equality should behave, and <a href="https://github.com/rust-lang/compiler-team/issues/323">prerequisites for implementation</a>. Primitive types are significantly simpler, which has allowed use to stabilize const generics for these types before more general types.</p>
+<h3><a href="#const-generics-with-complex-expressions" aria-hidden="true" class="anchor" id="const-generics-with-complex-expressions"></a>Const generics with complex expressions</h3>
+<p>There are several complexities involved in supporting complex expressions. A feature flag, <code>feature(const_evaluatable_checked)</code>, is available in the Nightly channel, which enables a version of complex expression support for const generics.</p>
+<p>One difficulty lies in the necessity of having some way to compare unevaluated constants, as the compiler does not automatically know that two syntactically identical expressions are actually equal. This involves a kind of symbolic reasoning about expressions, which is a complex problem in general.</p>
+<pre><code class="language-rust">// The two expressions `N + 1` and `N + 1` are distinct
+// entities in the compiler, so we need a way to check
+// if they should be considered equal.
+fn foo&lt;const N: usize&gt;() -&gt; [u8; N + 1] {
+    [u8; N + 1]
+}
+</code></pre>
+<p>We also want a way to deal with potential errors when evaluating generic operations.</p>
+<pre><code class="language-rust">fn split_first&lt;T, const N: usize&gt;(arr: [T; N]) -&gt; (T, [T; N - 1]) {
+    // ...
+}
+
+fn generic_function&lt;const M: usize&gt;(arr: [i32; M]) {
+    // ...
+    let (head, tail) = split_first(arr);
+    // ...
+}
+</code></pre>
+<p>Without a way to restrict the possible values of <code>M</code> here, calling <code>generic_function::&lt;0&gt;()</code> would cause an error when evaluating <code>0 - 1</code> that is not caught at declaration time and so may unexpectedly fail for downstream users.</p>
+<p>There are <a href="https://github.com/rust-lang/rust/issues/68436">design questions</a> about how exactly to express these kinds of bounds, which need to be addressed before stabilising complex const arguments.</p>
+<h2><a href="#summary" aria-hidden="true" class="anchor" id="summary"></a>Summary</h2>
+<p>With such a major new feature, there are likely to be a few rough edges. If you encounter any problems, even if it's as minor as a confusing error message, <a href="https://github.com/rust-lang/rust/issues/new/choose">please open an issue</a>! We want the user experience to be the best it can possibly be - and any issues now are likely to be even more important for the next iterations of const generics.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
