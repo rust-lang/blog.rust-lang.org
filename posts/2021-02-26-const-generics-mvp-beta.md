@@ -90,7 +90,7 @@ In light of similar design questions around defaults for const arguments, these 
 
 For a type to be valid, in theory, as the type of a const parameter, we must be able to compare values of that type at compile-time. Furthermore, equality of values should be well-behaved (namely, it should be deterministic, reflexive, symmetric, and transitive). To guarantee these properties, the concept of *structural equality* was introduced in the [const generics RFC](https://github.com/rust-lang/rfcs/blob/master/text/2000-const-generics.md): essentially this includes any type with `#[derive(PartialEq, Eq)]` whose members also satisfy structural equality.
 
-There are [still some questions](https://github.com/rust-lang/rust/issues/74446) concerning precisely how structural equality should behave, and [prerequisites for implementation](https://github.com/rust-lang/compiler-team/issues/323). Primitive types are significantly simpler, which has allowed use to stabilize const generics for these types before more general types.
+There are [still some questions](https://github.com/rust-lang/rust/issues/74446) concerning precisely how structural equality should behave, and [prerequisites for implementation](https://github.com/rust-lang/compiler-team/issues/323). Primitive types are significantly simpler, which has allowed us to stabilize const generics for these types before more general types.
 
 ### Const generics with complex expressions
 
