@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-02-26T23:48:34+00:00</updated>
+    <updated>2021-02-28T13:19:53+00:00</updated>
 
     
     <entry>
@@ -79,7 +79,7 @@ for elem in array::IntoIter::new(arr) {
 &lt;p&gt;In light of similar design questions around defaults for const arguments, these are also currently not supported in version 1.51. However, fixing the parameter ordering issues above will also unblock const defaults.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#const-generics-for-custom-types&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-generics-for-custom-types&quot;&gt;&lt;/a&gt;Const generics for custom types&lt;/h3&gt;
 &lt;p&gt;For a type to be valid, in theory, as the type of a const parameter, we must be able to compare values of that type at compile-time. Furthermore, equality of values should be well-behaved (namely, it should be deterministic, reflexive, symmetric, and transitive). To guarantee these properties, the concept of &lt;em&gt;structural equality&lt;/em&gt; was introduced in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/2000-const-generics.md&quot;&gt;const generics RFC&lt;/a&gt;: essentially this includes any type with &lt;code&gt;#[derive(PartialEq, Eq)]&lt;/code&gt; whose members also satisfy structural equality.&lt;/p&gt;
-&lt;p&gt;There are &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/74446&quot;&gt;still some questions&lt;/a&gt; concerning precisely how structural equality should behave, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/323&quot;&gt;prerequisites for implementation&lt;/a&gt;. Primitive types are significantly simpler, which has allowed use to stabilize const generics for these types before more general types.&lt;/p&gt;
+&lt;p&gt;There are &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/74446&quot;&gt;still some questions&lt;/a&gt; concerning precisely how structural equality should behave, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/323&quot;&gt;prerequisites for implementation&lt;/a&gt;. Primitive types are significantly simpler, which has allowed us to stabilize const generics for these types before more general types.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#const-generics-with-complex-expressions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-generics-with-complex-expressions&quot;&gt;&lt;/a&gt;Const generics with complex expressions&lt;/h3&gt;
 &lt;p&gt;There are several complexities involved in supporting complex expressions. A feature flag, &lt;code&gt;feature(const_evaluatable_checked)&lt;/code&gt;, is available in the Nightly channel, which enables a version of complex expression support for const generics.&lt;/p&gt;
 &lt;p&gt;One difficulty lies in the necessity of having some way to compare unevaluated constants, as the compiler does not automatically know that two syntactically identical expressions are actually equal. This involves a kind of symbolic reasoning about expressions, which is a complex problem in general.&lt;/p&gt;
