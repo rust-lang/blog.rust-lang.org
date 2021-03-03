@@ -10,8 +10,101 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-02-28T13:19:55+00:00</updated>
+    <updated>2021-03-03T21:24:18+00:00</updated>
 
+    
+    <entry>
+        <title>Lang team March update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/03/03/lang-team-mar-update.html" type="text/html" title="Lang team March update" />
+        <published>2021-03-03T00:00:00+00:00</published>
+        <updated>2021-03-03T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/03/03/lang-team-mar-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/03/03/lang-team-mar-update.html">&lt;p&gt;Today the lang team held its March planning meeting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-03-03-Planning-Meeting.md&quot;&gt;minutes&lt;/a&gt;). We hold these meetings on the first Wednesday of every month.&lt;/p&gt;
+&lt;p&gt;The planning meeting is used for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Checking in on the status of our active projects&lt;/li&gt;
+&lt;li&gt;Planning the design meetings for the remainder of the month&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After each meeting, we post an update (like this one!) with notes and meeting announcements.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#update-from-active-projects&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;update-from-active-projects&quot;&gt;&lt;/a&gt;Update from active projects&lt;/h2&gt;
+&lt;p&gt;Did you know that you can see the lang team&#x27;s active projects on our &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/projects/2&quot;&gt;project board&lt;/a&gt;? We&#x27;re still experimenting and evolving the setup, but the goal is that it should give you a quick overview of what kinds of things the lang team is focused on, and what stage they are in their development. Our minutes contain a &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-02-03-Planning-Meeting.md#project-updates-and-discussion&quot;&gt;writeup for each active project&lt;/a&gt;, but let me call out a few highlights here:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;type ascription expressions:
+&lt;ul&gt;
+&lt;li&gt;we&#x27;ve recently made progress on type ascriptions and are likely to overcome the last issue blocking stabilization&lt;/li&gt;
+&lt;li&gt;we would like to post a revised RFC&lt;/li&gt;
+&lt;li&gt;there is some debate about the &lt;code&gt;x: T&lt;/code&gt; syntax that was previously proposed, and some desire to find an alternative (but also plenty of folks who liked it)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;never type:
+&lt;ul&gt;
+&lt;li&gt;current status is still &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/79366&quot;&gt;#79366&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;simulacrum is going to recap the scenario for next triage meeting&lt;/li&gt;
+&lt;li&gt;we are considering whether it makes sense to leverage 2021 Edition in any way&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;const generics:
+&lt;ul&gt;
+&lt;li&gt;min const generics will be stable in 1.51&lt;/li&gt;
+&lt;li&gt;we are looking at various small extensions&lt;/li&gt;
+&lt;li&gt;there is now a weekly meeting to look into improvements&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;declarative macro repitition counts:
+&lt;ul&gt;
+&lt;li&gt;there is an &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3086&quot;&gt;open RFC&lt;/a&gt; with proposed FCP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;instruction set attribute:
+&lt;ul&gt;
+&lt;li&gt;exploration continues, the interaction of instruction set attribute with inline is not great, but it&#x27;s not clear how to improve&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;revised try trait:
+&lt;ul&gt;
+&lt;li&gt;generally positive vibes about the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3058/&quot;&gt;RFC 3058&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;one question is whether to consider leveraging edition to tweak the desugaring and bypass some of the &amp;quot;accidental stabilization&amp;quot;
+&lt;ul&gt;
+&lt;li&gt;currently evaluating how many projects rely on this behavior; most of them don&#x27;t want to&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;ffi-unwind:
+&lt;ul&gt;
+&lt;li&gt;C-unwind implementation has almost landed&lt;/li&gt;
+&lt;li&gt;exploring impact of longjmp on optimization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
+&lt;p&gt;We planned three design meetings for March. Our meetings are open for anyone to join and observe. They are also typically recorded and posted to YouTube. Ping nikomatsakis or joshtriplett for info about attending.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;March 10 -- no meeting, pnkfelix is absent&lt;/li&gt;
+&lt;li&gt;March 17 -- RFC backlog bonanza recap (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/84&quot;&gt;lang-team#84&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;March 24 -- lang team reorg: shepherds 4.0, triage update (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/85&quot;&gt;lang-team#85&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;March 24 -- How to dismantle an &lt;code&gt;&amp;amp;Atomic&lt;/code&gt; bomb (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/82&quot;&gt;lang-team#82&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#design-meeting-expectations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-meeting-expectations&quot;&gt;&lt;/a&gt;Design meeting expectations&lt;/h2&gt;
+&lt;p&gt;We also settled some our expectations around preparation for design meetings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The document for the meeting must be prepared by the triage meeting on Tuesday.
+&lt;ul&gt;
+&lt;li&gt;If it is not sent out by then, the meeting will be canceled. This gives folks 24 hour notice.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
+&lt;ul&gt;
+&lt;li&gt;However, there is no rule &lt;strong&gt;against&lt;/strong&gt; reading the document beforehand and provided feedback or advice on how to improve it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>March Sprint for rustc: Shrink Memory Usage</title>
@@ -513,28 +606,6 @@ They have also been working on implementing features related to pattern matching
 
         <author>
             <name>Wesley Wiser</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Changes to Rust compiler team</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/12/14/changes-to-compiler-team.html" type="text/html" title="Changes to Rust compiler team" />
-        <published>2020-12-14T00:00:00+00:00</published>
-        <updated>2020-12-14T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/12/14/changes-to-compiler-team.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/12/14/changes-to-compiler-team.html">&lt;p&gt;There have been important changes recently to the Rust compiler team.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#leadership-rotation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;leadership-rotation&quot;&gt;&lt;/a&gt;Leadership Rotation&lt;/h2&gt;
-&lt;p&gt;Here is something very new for our team: We are rotating the leadership. Niko Matsakis will be stepping down from their role as co-lead, and Wesley Wiser will be joining Felix Klock as the co-leads for the team.&lt;/p&gt;
-&lt;p&gt;Niko remains a compiler team member and will continue his contributions, especially on the RFC 2229, Polonius and Chalk projects. &lt;a href&#x3D;&quot;https://smallcultfollowing.com/babysteps/blog/2020/12/11/rotating-the-compiler-team-leads/&quot;&gt;Niko&#x27;s blog post&lt;/a&gt; discusses their motivations for stepping down in more detail.&lt;/p&gt;
-&lt;p&gt;Wesley has been contributing to Rust since 2015, and became a compiler team member in 2019. Wesley has contributed heavily to the compiler&#x27;s &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/02/25/intro-rustc-self-profile.html&quot;&gt;&lt;code&gt;self-profile&lt;/code&gt; infrastructure&lt;/a&gt;, to its collection of &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2019/12/02/const-prop-on-by-default.html&quot;&gt;MIR optimizations&lt;/a&gt;, and to its const-eval and incremental compilation subsystems. Wesley has also already proven himself as an effective leader: they are currently co-lead of several working groups: wg-incr-comp, wg-prioritization, and wg-self-profile.&lt;/p&gt;
-&lt;p&gt;Niko and I are delighted that Wesley is taking on this new leadership role, and I look forward to steering the compiler alongside them.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#membership-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;membership-changes&quot;&gt;&lt;/a&gt;Membership Changes&lt;/h2&gt;
-&lt;p&gt;In addition to the changes in leadership, we also have a new compiler team member to announce: lcnr.&lt;/p&gt;
-&lt;p&gt;lcnr has been contributing to the compiler since 2018. They have improved the type system via changes such as higher-ranked lifetimes in predicates (&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73503&quot;&gt;#73503&lt;/a&gt;), and also have focused for the past two years on improving Rust&#x27;s support for complex generic expressions in constants (tracked at &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/76560&quot;&gt;#76560&lt;/a&gt;)&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Felix S. Klock II</name>
         </author>
     </entry>
     
