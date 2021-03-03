@@ -56,7 +56,7 @@ We planned three design meetings for March. Our meetings are open for anyone to 
 
 ## Design meeting expectations
 
-We also settled some our expectations are preparation for design meetings:
+We also settled some our expectations around preparation for design meetings:
 
 * The document for the meeting must be prepared by the triage meeting on Tuesday.
     * If it is not sent out by then, the meeting will be canceled. This gives folks 24 hour notice.
