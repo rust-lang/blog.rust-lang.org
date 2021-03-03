@@ -47,7 +47,7 @@ Did you know that you can see the lang team's active projects on our [project bo
 
 ## Upcoming design meetings
 
-We planned three design meetings for March. Our meetings are typically open for anyone to observe, although we have one closed meeting this week. They are also typically recorded and posted to YouTube. Ping nikomatsakis or joshtriplett for info about attending.
+We planned three design meetings for March. Our meetings are open for anyone to join and observe. They are also typically recorded and posted to YouTube. Ping nikomatsakis or joshtriplett for info about attending.
 
 * March 10 -- no meeting, pnkfelix is absent
 * March 17 -- RFC backlog bonanza recap ([lang-team#84](https://github.com/rust-lang/lang-team/issues/84))
