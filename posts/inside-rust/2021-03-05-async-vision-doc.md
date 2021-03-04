@@ -18,7 +18,7 @@ team: the Async Foundations Working Group <https://rust-lang.github.io/wg-async-
 [gr]: https://is.gd/T6TadC
 [z]: https://rust-lang.zulipchat.com/
 [wgz]: https://rust-lang.zulipchat.com/#streams/187312/wg-async-foundations
-[amb]: https://rust-lang.github.io/wg-async-foundations/vision.html#think-big----too-big-if-you-have-to
+[amb]: https://rust-lang.github.io/wg-async-foundations/vision/shiny_future.html#think-big----too-big-if-you-have-to
 [cok]: https://en.wikipedia.org/wiki/Curse_of_knowledge
 [workarounds]: https://rust-lang.github.io/async-book/07_workarounds/01_chapter.html
 
