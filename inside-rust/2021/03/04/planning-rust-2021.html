@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Planning the Rust 2021 Edition | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Planning the Rust 2021 Edition | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Planning the Rust 2021 Edition | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Planning the Rust 2021 Edition" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Planning the Rust 2021 Edition</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 4, 2021 &middot; Ryan Levick
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang#project-edition-2021">The Rust 2021 Edition Working Group</a> 
+    </div>
+
+    <div class="post">
+      <p>The Rust 2021 Edition working group is happy to announce that the next edition of Rust, Rust 2021, is scheduled for release later this year. While the <a href="https://github.com/rust-lang/rfcs/pull/3085">RFC</a> formally introducing this edition is still open, we expect it to be merged soon. Planning and preparation have already begun, and we're on schedule!</p>
+<p>If you're curious what features Rust 2021 will introduce or what the timeline for getting the edition released on stable is, keep reading!</p>
+<h2><a href="#whats-included-in-this-edition" aria-hidden="true" class="anchor" id="whats-included-in-this-edition"></a>What's included in this edition?</h2>
+<p>The final list of features for inclusion in Rust 2021 is still being decided. Overall, we aim for Rust 2021 to be a much smaller release than Rust 2018. This is for several reasons:</p>
+<ul>
+<li>establishing a regular cadence for edition releases means we get many of the benefits of Rust's &quot;train&quot; release model at the edition level.</li>
+<li>Rust 2018 worked directly against the Rust model of &quot;low stress&quot; releases.</li>
+<li>there's simply fewer breaking changes needed to continue to evolve the language.</li>
+</ul>
+<p>You can read more about the evolution of the concept of editions <a href="https://github.com/rust-lang/rfcs/pull/3085">in the RFC</a>.</p>
+<p>Whether a feature will be included in Rust 2021 is a part of the RFC process, so the short list of possible features can and will change between now and the edition being released. That being said, here are some of the possible features that may be a part of the edition:</p>
+<h3><a href="#prelude-changes" aria-hidden="true" class="anchor" id="prelude-changes"></a>Prelude changes</h3>
+<p>While types and free functions can be added to the prelude independent of edition boundaries, the same is not true for traits. Adding a trait to the prelude can cause compatibility issues because calls to methods named the same as methods of the newly in-scope traits can become ambiguous.</p>
+<p>Currently the following traits are being proposed for inclusion in the Rust 2021 edition:</p>
+<ul>
+<li><code>TryFrom</code>/<code>TryInto</code></li>
+<li><code>FromIterator</code></li>
+</ul>
+<p>The RFC for this change can be found <a href="https://github.com/rust-lang/rfcs/pull/3090">here</a>. Please note that the RFC is not yet merged, and the contents for a new prelude are still under active discussion.</p>
+<h3><a href="#new-closure-capture-rules" aria-hidden="true" class="anchor" id="new-closure-capture-rules"></a>New closure capture rules</h3>
+<p><a href="https://github.com/rust-lang/rfcs/pull/2229">RFC 2229</a> proposed that closures capture individual fields and not the whole struct when possible. This RFC has been accepted. In some circumstances this change would cause destructors to run at different times than they currently do, so the change must be tied to an edition. Migration lints will be provided to avoid changing the semantics of existing code.</p>
+<h3><a href="#new-default-feature-resolver-in-cargo" aria-hidden="true" class="anchor" id="new-default-feature-resolver-in-cargo"></a>New default feature resolver in Cargo</h3>
+<p>In Rust 1.51, Cargo will stabilize a new <a href="https://github.com/rust-lang/cargo/issues/8088">feature resolver</a> which allows a crate's dependencies to use different features in different contexts. For example, a <code>#[no_std]</code> crate might want to use a particular dependency both as a build dependency (with <code>std</code> enabled) and as a regular dependency (with <code>std</code> disabled). Currently, this leads to <code>std</code> being enabled in both cases since features belong to a global namespace.</p>
+<p>In Rust 2021 this new resolver will become the default, but older editions can still use the new resolver by opting into it.</p>
+<h3><a href="#other" aria-hidden="true" class="anchor" id="other"></a>Other</h3>
+<p>Other proposed changes include <a href="https://github.com/rust-lang/rust/issues/80162">unifying how <code>panic</code> in <code>std</code> and <code>core</code> work</a> and upgrading several lints from <a href="https://github.com/rust-lang/rust/issues/80165">warnings to errors</a>.</p>
+<p>You can find a full list of features that are under consideration <a href="https://docs.google.com/spreadsheets/d/1chZ2SL9T444nvU9al1kQ7TJMwC3IVQQV2xIv1HWGQ_k/edit?usp=sharing">here</a>.</p>
+<p>If you're aware of a feature that has already been under discussion for inclusion in the next edition of Rust but is not listed here, <a href="https://rust-lang.zulipchat.com/#narrow/stream/268952-edition-2021">please let us know</a>. While we are excited to hear additional features that have not yet been discussed for inclusion in a Rust edition, we are unlikely to have the bandwidth to discuss such features until after the Rust 2021 edition is ready for release.</p>
+<h2><a href="#rough-timeline" aria-hidden="true" class="anchor" id="rough-timeline"></a>Rough timeline</h2>
+<p>So how do we plan on shipping the new edition? Here's a timeline of milestones we're aiming for:</p>
+<ul>
+<li>01 April: All relevant RFCs either merged or in a good state (i.e., all major decisions reached and merging will happen in the following weeks).</li>
+<li>01 May: All features for inclusion in Rust 2021 are on nightly under feature flags.</li>
+<li>01 June: All lints are implemented on nightly.</li>
+<li>01 September: The edition is stabilized on nightly.</li>
+<li>21 October: The edition hits stable.</li>
+</ul>
+<p>As we approach these deadlines, we'll be narrowing down the list of proposed changes to those items that have made active progress.</p>
+<h2><a href="#call-for-participation" aria-hidden="true" class="anchor" id="call-for-participation"></a>Call for participation</h2>
+<p>If you're interested in helping with the 2021 edition release, please <a href="https://rust-lang.zulipchat.com/#narrow/stream/268952-edition-2021">get in touch</a>. Besides feature work and edition management planning, there will be plenty of work to do. Some of the additional work items that will need to happen for the edition release include:</p>
+<ul>
+<li><code>rustfix</code> migrations for all relevant features</li>
+<li>testing all features and their migration paths</li>
+<li>blog posts and other marketing material</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -10,8 +10,66 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-03-03T21:24:18+00:00</updated>
+    <updated>2021-03-04T18:27:07+00:00</updated>
 
+    
+    <entry>
+        <title>Planning the Rust 2021 Edition</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/03/04/planning-rust-2021.html" type="text/html" title="Planning the Rust 2021 Edition" />
+        <published>2021-03-04T00:00:00+00:00</published>
+        <updated>2021-03-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/03/04/planning-rust-2021.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/03/04/planning-rust-2021.html">&lt;p&gt;The Rust 2021 Edition working group is happy to announce that the next edition of Rust, Rust 2021, is scheduled for release later this year. While the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3085&quot;&gt;RFC&lt;/a&gt; formally introducing this edition is still open, we expect it to be merged soon. Planning and preparation have already begun, and we&#x27;re on schedule!&lt;/p&gt;
+&lt;p&gt;If you&#x27;re curious what features Rust 2021 will introduce or what the timeline for getting the edition released on stable is, keep reading!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-included-in-this-edition&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-included-in-this-edition&quot;&gt;&lt;/a&gt;What&#x27;s included in this edition?&lt;/h2&gt;
+&lt;p&gt;The final list of features for inclusion in Rust 2021 is still being decided. Overall, we aim for Rust 2021 to be a much smaller release than Rust 2018. This is for several reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;establishing a regular cadence for edition releases means we get many of the benefits of Rust&#x27;s &amp;quot;train&amp;quot; release model at the edition level.&lt;/li&gt;
+&lt;li&gt;Rust 2018 worked directly against the Rust model of &amp;quot;low stress&amp;quot; releases.&lt;/li&gt;
+&lt;li&gt;there&#x27;s simply fewer breaking changes needed to continue to evolve the language.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can read more about the evolution of the concept of editions &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3085&quot;&gt;in the RFC&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Whether a feature will be included in Rust 2021 is a part of the RFC process, so the short list of possible features can and will change between now and the edition being released. That being said, here are some of the possible features that may be a part of the edition:&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#prelude-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;prelude-changes&quot;&gt;&lt;/a&gt;Prelude changes&lt;/h3&gt;
+&lt;p&gt;While types and free functions can be added to the prelude independent of edition boundaries, the same is not true for traits. Adding a trait to the prelude can cause compatibility issues because calls to methods named the same as methods of the newly in-scope traits can become ambiguous.&lt;/p&gt;
+&lt;p&gt;Currently the following traits are being proposed for inclusion in the Rust 2021 edition:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;TryFrom&lt;/code&gt;/&lt;code&gt;TryInto&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FromIterator&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The RFC for this change can be found &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3090&quot;&gt;here&lt;/a&gt;. Please note that the RFC is not yet merged, and the contents for a new prelude are still under active discussion.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#new-closure-capture-rules&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;new-closure-capture-rules&quot;&gt;&lt;/a&gt;New closure capture rules&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2229&quot;&gt;RFC 2229&lt;/a&gt; proposed that closures capture individual fields and not the whole struct when possible. This RFC has been accepted. In some circumstances this change would cause destructors to run at different times than they currently do, so the change must be tied to an edition. Migration lints will be provided to avoid changing the semantics of existing code.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#new-default-feature-resolver-in-cargo&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;new-default-feature-resolver-in-cargo&quot;&gt;&lt;/a&gt;New default feature resolver in Cargo&lt;/h3&gt;
+&lt;p&gt;In Rust 1.51, Cargo will stabilize a new &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/8088&quot;&gt;feature resolver&lt;/a&gt; which allows a crate&#x27;s dependencies to use different features in different contexts. For example, a &lt;code&gt;#[no_std]&lt;/code&gt; crate might want to use a particular dependency both as a build dependency (with &lt;code&gt;std&lt;/code&gt; enabled) and as a regular dependency (with &lt;code&gt;std&lt;/code&gt; disabled). Currently, this leads to &lt;code&gt;std&lt;/code&gt; being enabled in both cases since features belong to a global namespace.&lt;/p&gt;
+&lt;p&gt;In Rust 2021 this new resolver will become the default, but older editions can still use the new resolver by opting into it.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other&quot;&gt;&lt;/a&gt;Other&lt;/h3&gt;
+&lt;p&gt;Other proposed changes include &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/80162&quot;&gt;unifying how &lt;code&gt;panic&lt;/code&gt; in &lt;code&gt;std&lt;/code&gt; and &lt;code&gt;core&lt;/code&gt; work&lt;/a&gt; and upgrading several lints from &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/80165&quot;&gt;warnings to errors&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can find a full list of features that are under consideration &lt;a href&#x3D;&quot;https://docs.google.com/spreadsheets/d/1chZ2SL9T444nvU9al1kQ7TJMwC3IVQQV2xIv1HWGQ_k/edit?usp&#x3D;sharing&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you&#x27;re aware of a feature that has already been under discussion for inclusion in the next edition of Rust but is not listed here, &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/268952-edition-2021&quot;&gt;please let us know&lt;/a&gt;. While we are excited to hear additional features that have not yet been discussed for inclusion in a Rust edition, we are unlikely to have the bandwidth to discuss such features until after the Rust 2021 edition is ready for release.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#rough-timeline&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rough-timeline&quot;&gt;&lt;/a&gt;Rough timeline&lt;/h2&gt;
+&lt;p&gt;So how do we plan on shipping the new edition? Here&#x27;s a timeline of milestones we&#x27;re aiming for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;01 April: All relevant RFCs either merged or in a good state (i.e., all major decisions reached and merging will happen in the following weeks).&lt;/li&gt;
+&lt;li&gt;01 May: All features for inclusion in Rust 2021 are on nightly under feature flags.&lt;/li&gt;
+&lt;li&gt;01 June: All lints are implemented on nightly.&lt;/li&gt;
+&lt;li&gt;01 September: The edition is stabilized on nightly.&lt;/li&gt;
+&lt;li&gt;21 October: The edition hits stable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As we approach these deadlines, we&#x27;ll be narrowing down the list of proposed changes to those items that have made active progress.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#call-for-participation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;call-for-participation&quot;&gt;&lt;/a&gt;Call for participation&lt;/h2&gt;
+&lt;p&gt;If you&#x27;re interested in helping with the 2021 edition release, please &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/268952-edition-2021&quot;&gt;get in touch&lt;/a&gt;. Besides feature work and edition management planning, there will be plenty of work to do. Some of the additional work items that will need to happen for the edition release include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;rustfix&lt;/code&gt; migrations for all relevant features&lt;/li&gt;
+&lt;li&gt;testing all features and their migration paths&lt;/li&gt;
+&lt;li&gt;blog posts and other marketing material&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Ryan Levick</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Lang team March update</title>
@@ -585,27 +643,6 @@ can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/
 
         <author>
             <name>Pietro Albini</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Please welcome cjgillot and Nadrieril to compiler-contributors</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/12/28/cjgillot-and-nadrieril-for-compiler-contributors.html" type="text/html" title="Please welcome cjgillot and Nadrieril to compiler-contributors" />
-        <published>2020-12-28T00:00:00+00:00</published>
-        <updated>2020-12-28T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/12/28/cjgillot-and-nadrieril-for-compiler-contributors.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/12/28/cjgillot-and-nadrieril-for-compiler-contributors.html">&lt;p&gt;Please welcome &lt;a href&#x3D;&quot;https://github.com/cjgillot&quot;&gt;@cjgillot&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/Nadrieril&quot;&gt;@Nadrieril&lt;/a&gt; to the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2689-compiler-team-contributors.html&quot;&gt;compiler-contributors&lt;/a&gt; group!&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/cjgillot&quot;&gt;@cjgillot&lt;/a&gt; has been working to improve the query system used internally in &lt;code&gt;rustc&lt;/code&gt; which powers incremental compilation.
-Some of their improvements have been to reduce unnecessary work performed during incremental compilation, leading to faster builds.
-Other improvements have made the query system leaner allowing &lt;code&gt;rustc&lt;/code&gt; to bootstrap faster.
-&lt;a href&#x3D;&quot;https://github.com/cjgillot&quot;&gt;@cjgillot&lt;/a&gt; has also made many tweaks and optimizations to the query system.&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/Nadrieril&quot;&gt;@Nadrieril&lt;/a&gt; has been working on the pattern matching system resulting in improvements to compilation performance, code readability and related diagnostics generated by rustc.
-They have also been working on implementing features related to pattern matching like or-patterns and slice-patterns and helping push those features closer to stabilization.&lt;/p&gt;
-&lt;p&gt;Congratulations &lt;a href&#x3D;&quot;https://github.com/cjgillot&quot;&gt;@cjgillot&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/Nadrieril&quot;&gt;@Nadrieril&lt;/a&gt; and thanks!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Wesley Wiser</name>
         </author>
     </entry>
     
