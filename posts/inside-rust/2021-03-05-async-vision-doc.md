@@ -47,7 +47,7 @@ Each character has a biography with more details. For example, let me tell you a
 
 > Grace is a principal engineer who has been building high-performance networking systems in Java and C++ for a number of years. She currently works on a distributed data storage service that is used in a lot of the world's largest web properties. This service is implemented in Java, with certain key components written in C++. Grace is currently working on introducing Rust into the system.
 
-For each character, we are writing a series of ["status quo" stories][sq] that describe the challanges they face as they try to achieve their goals (and typically fail in dramatic fashion). These stories are not fiction. They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets.
+For each character, we are writing a series of ["status quo" stories][sq] that describe the challenges they face as they try to achieve their goals (and typically fail in dramatic fashion). These stories are not fiction. They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets.
 
 For example, here is what happens to Grace as she is porting part of her service into Rust (still a rough draft, mind):
 
