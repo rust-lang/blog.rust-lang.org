@@ -35,20 +35,11 @@ If you'd like to be a part of that, good news: We need your help! As a first ste
 
 Building a truly great experience for Async Rust takes more than just `async fn`. We need to think about the end-to-end experience, from first learning Async Rust, to building an application, to deployment and maintenance.
 
-The challenge for us is to drive that holistic product experience while retaining the loosely coupled, exploration-oriented ecosystem we have built. Async Rust was intentionally designed not to have a "one size fits all" mindset, and we don't want to change that.
-
-However, we _do_ need a forum where we can coordinate on the overall experience we are shooting for. This is where the [vision doc][vd] comes in.
+The challenge for us is to drive that holistic product experience while retaining the loosely coupled, exploration-oriented ecosystem we have built. Async Rust was intentionally designed not to have a "one size fits all" mindset, and we don't want to change that. Still, we need a forum where we can coordinate on the overall experience we are all shooting for. That is what the document is for!
 
 ### To know where you're going, you have to know where you are
 
-Our first goal for the [vision document][vd] is to describe what it's like to use Async Rust today. We've created a [cast of characters][cc] that represent the different backgrounds and experiences that people bring to bear when learning and using Async Rust:
-
-* **Alan**, the full-stack developer working across many companies,
-* **Grace**, the principal engineer hacking on a data storage service,
-* **Niklaus**, the developer building generic Rust libraries and frameworks;
-* **Barbara**, the embedded developer doing networking.
-
-Each character has a biography with more details. For example, let me tell you a bit more about Grace:
+Our first goal for the [vision document][vd] is to write stories that describe what it's like to use Async Rust today. We're working on a [cast of characters][cc] who will populate these stories. These characters represent key points in the full space of users that we are targeting, though of course they can't cover it in its entirety. Each character has a biography with more details. For example, let me introduce you to one such character, Grace:
 
 > Grace is a principal engineer who has been building high-performance networking systems in Java and C++ for a number of years. She currently works on a distributed data storage service that is used in a lot of the world's largest web properties. This service is implemented in Java, with certain key components written in C++. Grace is currently working on introducing Rust into the system.
 
@@ -62,11 +53,9 @@ For example, here is what happens to Grace as she is porting part of her service
 >
 > Soon enough, she and her team have a proof of concept working. They run some local stress tests and notice that 5% of requests hang and fail to respond and the client eventually times out. She is unable to reproduce this problem when running one-off requests locally, it only shows up when sending above 200 requests-per-second.
 >
-> She realizes that she doesn't have any tooling that can give her insight into what's going on. She starts to add lots of logging, attempting to tie log entries to specific connections. [...]
->
-> Eventually, she identifies that the last log message is right before calling the HMAC authentication library that is written C, and is synchronous, but only when refreshing the private authentication token from the source of truth.
+> She realizes that she doesn't have any tooling that can give her insight into what's going on. She starts to add lots of logging, attempting to tie log entries to specific connections. [...] Eventually, she identifies that the last log message is right before calling the HMAC authentication library that is written C, and is synchronous, but only when refreshing the private authentication token from the source of truth.
 
-As a spoiler, Grace eventually figures out that the `Waker` for her hand-written `Future` is never being invoked (yes, this is a true story). She is ultimately able to the fix the bug, but it took her several frustrating days to track it down. It sure would be nice if there were a better way!
+Grace eventually figures out that the `Waker` for her hand-written `Future` is never being invoked (yes, this is a true story). She is ultimately able to the fix the bug, but it took her several frustrating days to track it down. It sure would be nice if there were a better way!
 
 ### Why we write the "status quo" stories
 
@@ -76,7 +65,7 @@ Writing the "status quo" stories gives us a way to put ourselves in the shoes of
 
 ### Next stop, the future!
 
-The ultimate goal of the vision doc, of course, is not just to tell us where we are now, but where we are going. Once we're making good progress on the status quo user stories, we're also going to start talking about the "shiny future" – that is, what will these stories read like 2-3 years in the future?
+The ultimate goal of the vision doc, of course, is not just to tell us where we are now, but where we are going. Once we're making good progress on the status quo user stories, we're also going to start talking about the "shiny future" – that is, what will these stories read like 3-5 years in the future?
 
 Maybe Grace has access to a debugging tool, for example, that is able to diagnose her stuck futures and tell her what kind of future they are blocked on, so she doesn't have to grep through the logs. Probably she has better ways to do her logging, too. [Let's be ambitious!][amb]
 
