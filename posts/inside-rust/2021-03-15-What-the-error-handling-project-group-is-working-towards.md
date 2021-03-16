@@ -100,7 +100,7 @@ thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: MyError'
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-I definitely don't think this is what we want as a default when promoting recoverable errors to non-recoverable errors! `unwrap` and `expect` work by stringifying the error variant using it's `Debug` impl, but this is entirely the wrong operation for `Error` types! By converting the `Error` to a `String` we lose access to the pieces of context we carefully split up via the `Error` trait, in all likelyhood the `derive(Debug)` output of our error types won't even include the error messages in our `Display` impls.
+I definitely don't think this is what we want as a default when promoting recoverable errors to non-recoverable errors... `unwrap` and `expect` work by stringifying the error variant using it's `Debug` impl, but this is entirely the wrong operation for `Error` types! By converting the `Error` to a `String` we lose access to the pieces of context we carefully split up via the `Error` trait, in all likelyhood the `derive(Debug)` output of our error types won't even include the error messages in our `Display` impls.
 
 So we need some way to create panics _from_ `Error` types that doesn't hide the `Error` interface. We'd like it if `PanicInfo` could store a `dyn Error + 'static` instead of, or in addition to the `dyn Any + 'static` payload it currently carries. We're thinking about adding a `std::panic::panic_error` function similar to `std::panic::panic_any`. Then, if possible, we'd like to specialize the `unwrap` and `expect` functions on `Result` to call `panic_error` instead of `panic!` when `E` implements `Error`.
 
@@ -187,7 +187,9 @@ Also worth noting, this doesn't change how `std::result::Result` works. If you'r
 To summarize on the above our plan is to:
 
 1. Move the error trait into core
-2. Info`'s API, similar to how you can extract the payload as a `dyn Any`
+2. Integrate the Error trait with the panic runtime so that errors can be smoothly upgraded into panics without losing information
+    * Add a `panic_error` function for creating a panic from an `Error` type
+    * Expose `dyn Error` as part of `PanicInfo`'s API, similar to how you can extract the payload as a `dyn Any`
     * Update the default panic hook in `std` to iterate over source errors and prints captured backtraces when reporting errors, if the panic came from a `dyn Error`
     * specialize `unwrap`/`expect` on result to call `panic_error` instead of `panic!`
 3. Add basic reporting logic for printing via the `Error` trait including source errors, possibly by integrating it directly with the `fmt` grammar
