@@ -178,7 +178,7 @@ Assuming this works as well as we hope it does, and doesn't introduce worse prob
 
 ### Disclaimers
 
-Note, we almost certainly won't _start_ with adding these types to std, and will instead trial this approach in 3rd party libraries, probably in a fork of `eyre` or `anyhow`. We're particularly worried about backwards compatilibity so its easy to switch to the new libraries that properly implement `Error`. We're also worried about teachability, particularly with respect to knowing which `Result` type to use in each situation, and we're looking into what kind of errors get produced when you pick the wrong Error or Result type, and how we can guide users to the correct types.
+Note, we almost certainly won't _start_ with adding these types to std, and will instead trial this approach in 3rd party libraries, probably in a fork of `eyre` or `anyhow`. We're particularly worried about backwards compatibility so its easy to switch to the new libraries that properly implement `Error`. We're also worried about teachability, particularly with respect to knowing which `Result` type to use in each situation, and we're looking into what kind of errors get produced when you pick the wrong Error or Result type, and how we can guide users to the correct types.
 
 Also worth noting, this doesn't change how `std::result::Result` works. If you're happy with enum based error handling and `From` impls as necessary then you can still stick with the current `Result` type and `?` as you currently do. These changes only apply to types like `Box<dyn Error>` that implement From for all error types so they can still implement error while using `?` for convenience.
 
