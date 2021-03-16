@@ -2,7 +2,7 @@
 layout: post
 title: "What the Error Handling Project Group is Working Towards"
 author: Jane Lusby
-team: the library team <https://www.rust-lang.org/governance/teams/library>
+team: The Error Handling Project Group <https://www.rust-lang.org/governance/teams/library#project-error-handling>
 ---
 
 This blog post is a follow up of our [previous](https://blog.rust-lang.org/inside-rust/2020/11/23/What-the-error-handling-project-group-is-working-on.html) post detailing what we're working on now. We figure it's time to take a step back and answer some of the bigger questions of why we're making these changes and how they're going to fit into the bigger picture of error-handling provided by Rust.
