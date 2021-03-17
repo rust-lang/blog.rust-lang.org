@@ -23,6 +23,8 @@ description: "Building a shared vision for Async Rust"
 [workarounds]: https://github.com/rust-lang/async-book/tree/a927107bfe501a44dde1560a5942b1471c11c71d/src/07_workarounds
 [stabilized]: https://blog.rust-lang.org/2019/11/07/Async-await-stable.html
 [Grace]: https://rust-lang.github.io/wg-async-foundations/vision/characters/grace.html
+[Alan]: https://rust-lang.github.io/wg-async-foundations/vision/characters/alan.html
+[soflow]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo/alan_runs_into_stack_trouble.html
 [awards]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision/awards.html
 [gba]: https://rust-lang.github.io/wg-async-foundations/vision/characters/grace.html#variant-a-networking-systems
 [gbb]: https://rust-lang.github.io/wg-async-foundations/vision/characters/grace.html#variant-b-embedded
@@ -40,11 +42,11 @@ We are launching a collaborative effort to build a shared [vision document][vd] 
 
 The "vision document" starts with a [cast of characters][cc]. Each character is tied to a particular Rust value (e.g., performance, productivity, etc) determined by their background; this background also informs the expectations they bring when using Rust. 
 
-Let me introduce you to one character, [Grace]. As an experienced C developer, Grace is used to high performance and control, but she likes the idea of using Rust to get memory safety. Here is [one biography for Grace][gba], where she is building networking systems (there is another where she [builds an embedded system][gbb]):
+Let me introduce you to one character, [Grace]. As an experienced C developer, Grace is used to high performance and control, but she likes the idea of using Rust to get memory safety. Here is her biography:
 
-> Grace has been building high-performance networking systems in C and C++ for a number of years. She's accustomed to hacking lots of low-level details to coax the most performance she can from her network stack. She's also experienced her share of epic debugging sessions resulting from memory errors in C. She's intrigued by Rust: she likes the idea of getting the same control and performance she gets from C but with the productivity benefits she gets from memory safety. She's currently experimenting with introducing Rust into some of the systems she works on, and she's considering Rust for a few greenfield projects as well.
+> Grace has been writing C and C++ for a number of years. She's accustomed to hacking lots of low-level details to coax the most performance she can from her code. She's also experienced her share of epic debugging sessions resulting from memory errors in C. She's intrigued by Rust: she likes the idea of getting the same control and performance she gets from C but with the productivity benefits she gets from memory safety. She's currently experimenting with introducing Rust into some of the systems she works on, and she's considering Rust for a few greenfield projects as well.
 
-For each character, we will write a series of ["status quo" stories][sq] that describe the challenges they face as they try to achieve their goals (and typically fail in dramatic fashion!) **These stories are not fiction.** They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. To give you an idea, we have a draft story where [Grace has to debug a custom future that she wrote][gsq]. We expect to improve this story and add more, both for Grace and other characters.
+For each character, we will write a series of ["status quo" stories][sq] that describe the challenges they face as they try to achieve their goals (and typically fail in dramatic fashion!) **These stories are not fiction.** They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. To give you the idea, we currently have two examples: one where [Grace has to debug a custom future that she wrote][gsq], and another where [Alan] -- a programmer coming from a GC'd language -- [encounters a stack overflow and has to debug the cause][soflow].
 
 Writing the "status quo" stories helps us to compensate for the [curse of knowledge][cok]: the folks working on Async Rust tend to be experts in Async Rust. We've gotten used to the [workarounds] required to be productive, and we know the little tips and tricks that can get you out of a jam. The stories help us gauge the cumulative impact all the paper cuts can have on someone still learning their way around. This gives us the data we need to prioritize.
 
