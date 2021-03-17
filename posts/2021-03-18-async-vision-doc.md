@@ -66,4 +66,4 @@ Once the brainstorming period is complete, the working group leads will begin wo
 
 ### Want to help?
 
-If you'd like to help us to write the vision document, we'd love for you to contribute your experiences and vision! Right now, we are accepting status quo stories, and we have created [instructions on how to author a PR][hvtsq]. The [How To Vision][htv] page contains the full details on the schedule and how you can get involved.
+If you'd like to help us to write the vision document, we'd love for you to contribute your experiences and vision! Right now, we are focused on creating status quo stories. We are looking for people to author PRs or to talk about their experiences on issues or elsewhere. You can find out more on the [How To Vision][htv] page, which describes the process overall, and especially on the [How To Vision: Status Quo][htvsq] page, which is focused on the "status quo" stories in particular.
