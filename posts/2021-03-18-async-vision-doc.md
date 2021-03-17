@@ -54,21 +54,16 @@ Writing the "status quo" stories helps us to compensate for the [curse of knowle
 
 The ultimate goal of the vision doc, of course, is not just to tell us where we are now, but where we are going and how  we will get there. Once we've made good progress on the status quo stories, the next step will be start brainstorming stories about the ["shiny future"][sf].
 
-The idea is to replay the same scenarios from the "status quo" document, except 2 or 3 years in the future. For example, maybe Grace has access to a debugging tool that is able to diagnose her stuck tasks and tell her what kind of future they are blocked on, so she doesn't have to grep through the logs. Probably she has better ways to do her logging, too, and better documentation to help her get started. Let's be ambitious!
+The idea is to replay the same scenarios from the "status quo" document, except 2 or 3 years in the future. For example, maybe Grace has access to a debugging tool that is able to diagnose her stuck tasks and tell her what kind of future they are blocked on, so she doesn't have to grep through the logs. Maybe the compiler could warn Alan about a likely stack overflow, or (better yet) we can tweak the design of `select` to avoid the problem in the first place. The idea is to be ambitious and focus first and foremost on the user experience we want to create; we'll figure out the steps along the way (and maybe adjust the goal, if we have to).
 
 ### Involving the whole community
 
 The async vision document provides a forum where the Async Rust community can plan a great overall experience for Async Rust users. Async Rust was intentionally designed not to have a "one size fits all" mindset, and we don't want to change that. Our goal is to build a shared vision for the end-to-end experience while retaining the loosely coupled, exploration-oriented ecosystem we have built.
 
-The [process][htv] we are using to write the vision doc encourages active collaboration and "position sum" thinking. It begins with a [brainstorming period][b] in which we are inviting people to describe their experiences as "status quo" stories; later on, we'll start accepting "shiny future" stories. At the end of the brainstorming period, we will be giving [awards] and then begin work on [harmonizing] the stories into a coherent whole.
+The process we are using to write the vision doc encourages active collaboration and "positive sum" thinking. It starts with a brainstorming period, during which we aim to collect as many "status quo" and "shiny future" stories as we can. This brainstorming period runs for six weeks, until the end of April. For the first two weeks (until April 5th), we are collecting "status quo" stories only. After that, we will accept both "status quo" and "shiny future" stories until the end of the brainstorming period. Finally, to cap off the brainstorming period, we will select winners for [awards] like "Most Humorous Story" or "Must Supportive Contributor". 
 
-During this brainstorming period, we want to focus on getting as many ideas as we can. Having multiple "shiny futures" that address the same problem is a feature, not a bug, as it will let us mix-and-match later to try and find the best overall plan. Comments and questions will be used as a [tool for improving understanding or sharpening proposals.][c] Presenting alternative ideas is done by [writing an alternative narrative][alt].
+Once the brainstorming period is complete, the working group leads will begin work on assembling the various stories and shiny futures into a coherent draft. This draft will be reviewed by the community and the Rust teams and adjusted based on feedback.
 
 ### Want to help?
 
-If you'd like to help us to write the vision document, we'd love for you to contribute your experiences and vision! **Right now, we're looking for people to write "status quo" stories.** [You'll find instructions and more here!][htvsq]
-
-
-
-
-
+If you'd like to help us to write the vision document, we'd love for you to contribute your experiences and vision! Right now, we are accepting status quo stories, and we have created [instructions on how to author a PR][hvtsq]. The [How To Vision][htv] page contains the full details on the schedule and how you can get involved.
