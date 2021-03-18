@@ -13,7 +13,7 @@ description: "Building a shared vision for Async Rust"
 [dt]: https://rust-lang.github.io/wg-async-foundations/vision/tenets.html
 [cc]: https://rust-lang.github.io/wg-async-foundations/vision/characters.html
 [dd]: https://rust-lang.github.io/wg-async-foundations/design_docs.html
-[htv]: https://rust-lang.github.io/wg-async-foundations/vison/how_to_vision.html
+[htv]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html
 [htvsq]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision/status_quo.html
 [gf]: https://forms.gle/YKNniGhaNXBhmjXNA
 [gr]: https://is.gd/T6TadC
