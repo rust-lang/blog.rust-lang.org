@@ -10,30 +10,15 @@ team: the Async Foundations Working Group <https://rust-lang.github.io/wg-async-
 [vd]: https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision
 [sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
 [sf]: https://rust-lang.github.io/wg-async-foundations/vision/shiny_future.html
-[r]: https://rust-lang.github.io/wg-async-foundations/vision/roadmap.html
-[dt]: https://rust-lang.github.io/wg-async-foundations/vision/tenets.html
 [cc]: https://rust-lang.github.io/wg-async-foundations/vision/characters.html
-[dd]: https://rust-lang.github.io/wg-async-foundations/design_docs.html
 [htv]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html
-[htvsq]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision/status_quo.html
-[gf]: https://forms.gle/YKNniGhaNXBhmjXNA
-[gr]: https://is.gd/T6TadC
-[z]: https://rust-lang.zulipchat.com/
-[wgz]: https://rust-lang.zulipchat.com/#streams/187312/wg-async-foundations
 [cok]: https://en.wikipedia.org/wiki/Curse_of_knowledge
 [workarounds]: https://github.com/rust-lang/async-book/tree/a927107bfe501a44dde1560a5942b1471c11c71d/src/07_workarounds
-[stabilized]: https://blog.rust-lang.org/2019/11/07/Async-await-stable.html
 [Grace]: https://rust-lang.github.io/wg-async-foundations/vision/characters/grace.html
 [Alan]: https://rust-lang.github.io/wg-async-foundations/vision/characters/alan.html
 [soflow]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo/alan_runs_into_stack_trouble.html
 [awards]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision/awards.html
-[gba]: https://rust-lang.github.io/wg-async-foundations/vision/characters/grace.html#variant-a-networking-systems
-[gbb]: https://rust-lang.github.io/wg-async-foundations/vision/characters/grace.html#variant-b-embedded
-[c]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision/comment.html
 [gsq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo/grace_deploys_her_service.html
-[b]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html#brainstorming
-[alt]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision/comment.html#you-might-just-want-to-write-your-own-story
-[harmonizing]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html#harmonizing
 [template]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo/template.html
 
 The [Async Foundations Working Group][wg] believes Rust can become one of the most popular choices for building distributed systems, ranging from embedded devices to foundational cloud services. Whatever they're using it for, we want all developers to love using Async Rust. For that to happen, we need to move Async Rust beyond the "MVP" state it's in today and make it accessible to everyone.
