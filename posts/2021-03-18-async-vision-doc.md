@@ -33,6 +33,7 @@ description: "Building a shared vision for Async Rust"
 [b]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html#brainstorming
 [alt]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision/comment.html#you-might-just-want-to-write-your-own-story
 [harmonizing]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html#harmonizing
+[template]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo/template.html
 
 The [Async Foundations Working Group][wg] believes Rust can become one of the most popular choices for building distributed systems, ranging from embedded devices to foundational cloud services. Whatever they're using it for, we want all developers to love using Async Rust. For that to happen, we need to move Async Rust beyond the "MVP" state it's in today and make it accessible to everyone.
 
@@ -66,4 +67,4 @@ Once the brainstorming period is complete, the working group leads will begin wo
 
 ### Want to help?
 
-If you'd like to help us to write the vision document, we'd love for you to contribute your experiences and vision! Right now, we are focused on creating status quo stories. We are looking for people to author PRs or to talk about their experiences on issues or elsewhere. You can find out more on the [How To Vision][htv] page, which describes the process overall, and especially on the [How To Vision: Status Quo][htvsq] page, which is focused on the "status quo" stories in particular.
+If you'd like to help us to write the vision document, we'd love for you to contribute your experiences and vision! Right now, we are focused on creating status quo stories. We are looking for people to author PRs or to talk about their experiences on issues or elsewhere. If you'd like to get started, check out the [template for status quo stories][template] -- it has all the information you need to open a PR. Alternatively, you can view the [How To Vision][htv] page, which covers the whole vision document process in detail.
