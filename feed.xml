@@ -10,8 +10,40 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-03-04T23:00:56+00:00</updated>
+    <updated>2021-03-18T15:10:56+00:00</updated>
 
+    
+    <entry>
+        <title>Building a shared vision for Async Rust</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/03/18/async-vision-doc.html" type="text/html" title="Building a shared vision for Async Rust" />
+        <published>2021-03-18T00:00:00+00:00</published>
+        <updated>2021-03-18T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/03/18/async-vision-doc.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/03/18/async-vision-doc.html">&lt;p&gt;The &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/&quot;&gt;Async Foundations Working Group&lt;/a&gt; believes Rust can become one of the most popular choices for building distributed systems, ranging from embedded devices to foundational cloud services. Whatever they&#x27;re using it for, we want all developers to love using Async Rust. For that to happen, we need to move Async Rust beyond the &amp;quot;MVP&amp;quot; state it&#x27;s in today and make it accessible to everyone.&lt;/p&gt;
+&lt;p&gt;We are launching a collaborative effort to build a shared &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision&quot;&gt;vision document&lt;/a&gt; for Async Rust. &lt;strong&gt;Our goal is to engage the entire community in a collective act of the imagination:&lt;/strong&gt; how can we make the end-to-end experience of using Async I/O not only a pragmatic choice, but a &lt;em&gt;joyful&lt;/em&gt; one?&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#the-vision-document-starts-with-the-status-quo&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-vision-document-starts-with-the-status-quo&quot;&gt;&lt;/a&gt;The vision document starts with the status quo...&lt;/h3&gt;
+&lt;p&gt;The &amp;quot;vision document&amp;quot; starts with a &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/characters.html&quot;&gt;cast of characters&lt;/a&gt;. Each character is tied to a particular Rust value (e.g., performance, productivity, etc) determined by their background; this background also informs the expectations they bring when using Rust.&lt;/p&gt;
+&lt;p&gt;Let me introduce you to one character, &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/characters/grace.html&quot;&gt;Grace&lt;/a&gt;. As an experienced C developer, Grace is used to high performance and control, but she likes the idea of using Rust to get memory safety. Here is her biography:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Grace has been writing C and C++ for a number of years. She&#x27;s accustomed to hacking lots of low-level details to coax the most performance she can from her code. She&#x27;s also experienced her share of epic debugging sessions resulting from memory errors in C. She&#x27;s intrigued by Rust: she likes the idea of getting the same control and performance she gets from C but with the productivity benefits she gets from memory safety. She&#x27;s currently experimenting with introducing Rust into some of the systems she works on, and she&#x27;s considering Rust for a few greenfield projects as well.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For each character, we will write a series of &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html&quot;&gt;&amp;quot;status quo&amp;quot; stories&lt;/a&gt; that describe the challenges they face as they try to achieve their goals (and typically fail in dramatic fashion!) &lt;strong&gt;These stories are not fiction.&lt;/strong&gt; They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. To give you the idea, we currently have two examples: one where &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo/grace_deploys_her_service.html&quot;&gt;Grace has to debug a custom future that she wrote&lt;/a&gt;, and another where &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/characters/alan.html&quot;&gt;Alan&lt;/a&gt; -- a programmer coming from a GC&#x27;d language -- &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo/alan_runs_into_stack_trouble.html&quot;&gt;encounters a stack overflow and has to debug the cause&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Writing the &amp;quot;status quo&amp;quot; stories helps us to compensate for the &lt;a href&#x3D;&quot;https://en.wikipedia.org/wiki/Curse_of_knowledge&quot;&gt;curse of knowledge&lt;/a&gt;: the folks working on Async Rust tend to be experts in Async Rust. We&#x27;ve gotten used to the &lt;a href&#x3D;&quot;https://github.com/rust-lang/async-book/tree/a927107bfe501a44dde1560a5942b1471c11c71d/src/07_workarounds&quot;&gt;workarounds&lt;/a&gt; required to be productive, and we know the little tips and tricks that can get you out of a jam. The stories help us gauge the cumulative impact all the paper cuts can have on someone still learning their way around. This gives us the data we need to prioritize.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#and-then-tells-how-we-will-change-it&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;and-then-tells-how-we-will-change-it&quot;&gt;&lt;/a&gt;...and then tells how we will change it&lt;/h3&gt;
+&lt;p&gt;The ultimate goal of the vision doc, of course, is not just to tell us where we are now, but where we are going and how  we will get there. Once we&#x27;ve made good progress on the status quo stories, the next step will be start brainstorming stories about the &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/shiny_future.html&quot;&gt;&amp;quot;shiny future&amp;quot;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Shiny future stories talk about what the world of async could look like 2 or 3 years in the future. Typically, they will replay the same scenario as a &amp;quot;status quo&amp;quot; story, but with a happier ending. For example, maybe Grace has access to a debugging tool that is able to diagnose her stuck tasks and tell her what kind of future they are blocked on, so she doesn&#x27;t have to grep through the logs. Maybe the compiler could warn Alan about a likely stack overflow, or (better yet) we can tweak the design of &lt;code&gt;select&lt;/code&gt; to avoid the problem in the first place. The idea is to be ambitious and focus first and foremost on the user experience we want to create; we&#x27;ll figure out the steps along the way (and maybe adjust the goal, if we have to).&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#involving-the-whole-community&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;involving-the-whole-community&quot;&gt;&lt;/a&gt;Involving the whole community&lt;/h3&gt;
+&lt;p&gt;The async vision document provides a forum where the Async Rust community can plan a great overall experience for Async Rust users. Async Rust was intentionally designed not to have a &amp;quot;one size fits all&amp;quot; mindset, and we don&#x27;t want to change that. Our goal is to build a shared vision for the end-to-end experience while retaining the loosely coupled, exploration-oriented ecosystem we have built.&lt;/p&gt;
+&lt;p&gt;The process we are using to write the vision doc encourages active collaboration and &amp;quot;positive sum&amp;quot; thinking. It starts with a brainstorming period, during which we aim to collect as many &amp;quot;status quo&amp;quot; and &amp;quot;shiny future&amp;quot; stories as we can. This brainstorming period runs for six weeks, until the end of April. For the first two weeks (until 2021-04-02), we are collecting &amp;quot;status quo&amp;quot; stories only. After that, we will accept both &amp;quot;status quo&amp;quot; and &amp;quot;shiny future&amp;quot; stories until the end of the brainstorming period. Finally, to cap off the brainstorming period, we will select winners for &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision/awards.html&quot;&gt;awards&lt;/a&gt; like &amp;quot;Most Humorous Story&amp;quot; or &amp;quot;Must Supportive Contributor&amp;quot;.&lt;/p&gt;
+&lt;p&gt;Once the brainstorming period is complete, the working group leads will begin work on assembling the various stories and shiny futures into a coherent draft. This draft will be reviewed by the community and the Rust teams and adjusted based on feedback.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#want-to-help&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;want-to-help&quot;&gt;&lt;/a&gt;Want to help?&lt;/h3&gt;
+&lt;p&gt;If you&#x27;d like to help us to write the vision document, we&#x27;d love for you to contribute your experiences and vision! Right now, we are focused on creating status quo stories. We are looking for people to author PRs or to talk about their experiences on issues or elsewhere. If you&#x27;d like to get started, check out the &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo/template.html&quot;&gt;template for status quo stories&lt;/a&gt; -- it has all the information you need to open a PR. Alternatively, you can view the &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html&quot;&gt;How To Vision&lt;/a&gt; page, which covers the whole vision document process in detail.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Const generics MVP hits beta!</title>
@@ -824,180 +856,6 @@ targets &#x3D; [&amp;quot;wasm32-unknown-unknown&amp;quot;]
 
         <author>
             <name>The Rustup Working Group</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.48.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/11/19/Rust-1.48.html" type="text/html" title="Announcing Rust 1.48.0" />
-        <published>2020-11-19T00:00:00+00:00</published>
-        <updated>2020-11-19T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/11/19/Rust-1.48.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/11/19/Rust-1.48.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.48.0. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.48.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/tools/install&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1480-2020-11-19&quot;&gt;detailed release notes for
-1.48.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1480-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1480-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.48.0 stable&lt;/h2&gt;
-&lt;p&gt;The star of this release is Rustdoc, with a few changes to make writing
-documentation even easier! See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1480-2020-11-19&quot;&gt;detailed release notes&lt;/a&gt; to learn
-about other changes not covered by this post.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#easier-linking-in-rustdoc&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;easier-linking-in-rustdoc&quot;&gt;&lt;/a&gt;Easier linking in rustdoc&lt;/h3&gt;
-&lt;p&gt;Rustdoc, the library documentation tool included in the Rust distribution,
-lets you write documentation in Markdown. This makes it very easy to use, but
-also has some pain points. Let&#x27;s say that you are writing some documentation
-for some Rust code that looks like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub mod foo {
-    pub struct Foo;
-}
-
-pub mod bar {
-    pub struct Bar;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We have two modules, each with a struct inside. Imagine we wanted to use these
-two structs together; we may want to note this in the documentation. So we&#x27;d
-write some docs that look like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub mod foo {
-    /// Some docs for &#x60;Foo&#x60;
-    ///
-    /// You may want to use &#x60;Foo&#x60; with &#x60;Bar&#x60;.
-    pub struct Foo;
-}
-
-pub mod bar {
-    /// Some docs for &#x60;Bar&#x60;
-    ///
-    /// You may want to use &#x60;Bar&#x60; with &#x60;Foo&#x60;.
-    pub struct Bar;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That&#x27;s all well and good, but it would be really nice if we could link to these
-other types. That would make it much easier for the users of our library to
-navigate between them in our docs.&lt;/p&gt;
-&lt;p&gt;The problem here is that Markdown doesn&#x27;t know anything about Rust, and the
-URLs that rustdoc generates. So what Rust programmers have had to do is write
-those links out manually:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub mod foo {
-    /// Some docs for &#x60;Foo&#x60;
-    ///
-    /// You may want to use &#x60;Foo&#x60; with [&#x60;Bar&#x60;].
-    ///
-    /// [&#x60;Bar&#x60;]: ../bar/struct.Bar.html
-    pub struct Foo;
-}
-
-pub mod bar {
-    /// Some docs for &#x60;Bar&#x60;
-    ///
-    /// You may want to use &#x60;Bar&#x60; with [&#x60;Foo&#x60;].
-    ///
-    /// [&#x60;Foo&#x60;]: ../foo/struct.Foo.html
-    pub struct Bar;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that we&#x27;ve also had to use relative links, so that this works offline.
-Not only is this process tedious, and error prone, but it&#x27;s also just wrong
-in places. If we put a &lt;code&gt;pub use bar::Bar&lt;/code&gt; in our crate root, that would
-re-export &lt;code&gt;Bar&lt;/code&gt; in our root. Now our links are wrong. But if we fix them,
-then they end up being wrong when we navigate to the &lt;code&gt;Bar&lt;/code&gt; that lives inside
-the module. You can&#x27;t actually write these links by hand, and have them all
-be accurate.&lt;/p&gt;
-&lt;p&gt;In this release, you can use some syntax to let rustdoc know that you&#x27;re
-trying to link to a type, and it will generate the URLs for you. Here&#x27;s
-two different examples, based off of our code before:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub mod foo {
-    /// Some docs for &#x60;Foo&#x60;
-    ///
-    /// You may want to use &#x60;Foo&#x60; with [&#x60;Bar&#x60;](crate::bar::Bar).
-    pub struct Foo;
-}
-
-pub mod bar {
-    /// Some docs for &#x60;Bar&#x60;
-    ///
-    /// You may want to use &#x60;Bar&#x60; with [&#x60;crate::foo::Foo&#x60;].
-    pub struct Bar;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The first example will show the same text as before; but generate the proper
-link to the &lt;code&gt;Bar&lt;/code&gt; type. The second will link to &lt;code&gt;Foo&lt;/code&gt;, but will show the whole
-&lt;code&gt;crate::foo::Foo&lt;/code&gt; as the link text.&lt;/p&gt;
-&lt;p&gt;There are a bunch of options you can use here. Please see the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/rustdoc/linking-to-items-by-name.html&quot;&gt;&amp;quot;Linking to
-items by name&amp;quot;&lt;/a&gt; section of the rustdoc book for more. There is also
-a post on Inside Rust &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/09/17/stabilizing-intra-doc-links.html&quot;&gt;on the history of this feature&lt;/a&gt;, written
-by some of the contributors behind it!&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#adding-search-aliases&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;adding-search-aliases&quot;&gt;&lt;/a&gt;Adding search aliases&lt;/h3&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/75740/&quot;&gt;You can now specify &lt;code&gt;#[doc(alias &#x3D; &amp;quot;&amp;lt;alias&amp;gt;&amp;quot;)]&lt;/code&gt; on items to add search
-aliases when searching through &lt;code&gt;rustdoc&lt;/code&gt;&#x27;s UI.&lt;/a&gt; This is a smaller change,
-but still useful. It looks like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[doc(alias &#x3D; &amp;quot;bar&amp;quot;)]
-struct Foo;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With this annotation, if we search for &amp;quot;bar&amp;quot; in rustdoc&#x27;s search, &lt;code&gt;Foo&lt;/code&gt; will
-come up as part of the results, even though our search text doesn&#x27;t have
-&amp;quot;Foo&amp;quot; in it.&lt;/p&gt;
-&lt;p&gt;An interesting use case for aliases is FFI wrapper crates, where each Rust
-function could be aliased to the C function it wraps. Existing users of the
-underlying C library would then be able to easily search the right Rust
-functions!&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#library-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
-&lt;p&gt;The most significant API change is kind of a mouthful: &lt;code&gt;[T; N]: TryFrom&amp;lt;Vec&amp;lt;T&amp;gt;&amp;gt;&lt;/code&gt;
-is now stable. What does this mean? Well, you can use this to try and turn
-a vector into an array of a given length:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::convert::TryInto;
-
-let v1: Vec&amp;lt;u32&amp;gt; &#x3D; vec![1, 2, 3];
-
-// This will succeed; our vector has a length of three, we&#x27;re trying to
-// make an array of length three.
-let a1: [u32; 3] &#x3D; v1.try_into().expect(&amp;quot;wrong length&amp;quot;);
-
-// But if we try to do it with a vector of length five...
-let v2: Vec&amp;lt;u32&amp;gt; &#x3D; vec![1, 2, 3, 4, 5];
-
-// ... this will panic, since we have the wrong length.
-let a2: [u32; 3] &#x3D; v2.try_into().expect(&amp;quot;wrong length&amp;quot;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In the last release, we talked about the standard library being able to use
-const generics. This is a good example of the kinds of APIs that we can add
-with these sorts of features. Expect to hear more about the stabilization of
-const generics soon.&lt;/p&gt;
-&lt;p&gt;Additionally, five new APIs were stabilized this release:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.slice.html#method.as_ptr_range&quot;&gt;&lt;code&gt;slice::as_ptr_range&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.slice.html#method.as_mut_ptr_range&quot;&gt;&lt;code&gt;slice::as_mut_ptr_range&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.make_contiguous&quot;&gt;&lt;code&gt;VecDeque::make_contiguous&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/future/fn.pending.html&quot;&gt;&lt;code&gt;future::pending&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/future/fn.ready.html&quot;&gt;&lt;code&gt;future::ready&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The following previously stable APIs have now been made &lt;code&gt;const&lt;/code&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.is_some&quot;&gt;&lt;code&gt;Option::is_some&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.is_none&quot;&gt;&lt;code&gt;Option::is_none&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.as_ref&quot;&gt;&lt;code&gt;Option::as_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/result/enum.Result.html#method.is_ok&quot;&gt;&lt;code&gt;Result::is_ok&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/result/enum.Result.html#method.is_err&quot;&gt;&lt;code&gt;Result::is_err&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/result/enum.Result.html#method.as_ref&quot;&gt;&lt;code&gt;Result::as_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/cmp/enum.Ordering.html#method.reverse&quot;&gt;&lt;code&gt;Ordering::reverse&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/cmp/enum.Ordering.html#method.then&quot;&gt;&lt;code&gt;Ordering::then&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1480-2020-11-19&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.48.0 release: check out what changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1480-2020-11-19&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-148-2020-11-19&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-148&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1480&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1480&quot;&gt;&lt;/a&gt;Contributors to 1.48.0&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.48.0. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.48.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
