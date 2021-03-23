@@ -10,8 +10,28 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-03-18T15:10:59+00:00</updated>
+    <updated>2021-03-23T21:21:27+00:00</updated>
 
+    
+    <entry>
+        <title>1.51.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/03/23/1.51.0-prerelease.html" type="text/html" title="1.51.0 pre-release testing" />
+        <published>2021-03-23T00:00:00+00:00</published>
+        <updated>2021-03-23T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/03/23/1.51.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/03/23/1.51.0-prerelease.html">&lt;p&gt;The 1.51.0 pre-release is ready for testing. The release is scheduled for this
+Thursday, March 25th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2021-03-23/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2021-03-23/index.html&lt;/a&gt;. You
+can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/1-51-0-prerelease-testing&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mark Rousskov</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Planning the Rust 2021 Edition</title>
@@ -623,26 +643,6 @@ the tree&amp;quot;. The name was changed to be more environmentally friendly.&lt
 
         <author>
             <name>Joshua Nelson and Guillaume Gomez</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>1.49.0 pre-release testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2020/12/29/1.49.0-prerelease.html" type="text/html" title="1.49.0 pre-release testing" />
-        <published>2020-12-29T00:00:00+00:00</published>
-        <updated>2020-12-29T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2020/12/29/1.49.0-prerelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2020/12/29/1.49.0-prerelease.html">&lt;p&gt;The 1.49.0 pre-release is ready for testing. The release is scheduled for this
-Thursday, December 31st. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1490-2020-12-31&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2020-12-29/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2020-12-29/index.html&lt;/a&gt;. You
-can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-49-0-pre-release-testing/13690&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Pietro Albini</name>
         </author>
     </entry>
     
