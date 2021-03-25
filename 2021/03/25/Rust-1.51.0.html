@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.51.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.51.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.51.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.51.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.51.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 25, 2021 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.51.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.51.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a>
+from the appropriate page on our website, and check out the
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1510-2021-03-25">detailed release notes for 1.51.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1510-stable" aria-hidden="true" class="anchor" id="whats-in-1510-stable"></a>What's in 1.51.0 stable</h2>
+<p>This release represents one of the largest additions to the Rust language and Cargo in quite a while, stabilizing an MVP of const generics and a new feature resolver for Cargo. Let's dive right into it!</p>
+<h3><a href="#const-generics-mvp" aria-hidden="true" class="anchor" id="const-generics-mvp"></a>Const Generics MVP</h3>
+<p>Before this release, Rust allowed you to haves your types be parameterized over lifetimes or types. For example if we wanted to have a <code>struct</code> that is generic over the element type of an array, we'd write the following:</p>
+<pre><code class="language-rust">struct FixedArray&lt;T&gt; {
+              // ^^^ Type generic definition
+    list: [T; 32]
+        // ^ Where we're using it.
+}
+</code></pre>
+<p>If we then use <code>FixedArray&lt;u8&gt;</code>, the compiler will make a monomorphic version of <code>FixedArray</code> that looks like:</p>
+<pre><code class="language-rust">struct FixedArray&lt;u8&gt; {
+    list: [u8; 32]
+}
+</code></pre>
+<p>This is a powerful feature that allows you to write reusable code with no runtime overhead. However, until this release it hasn't been possible to easily be generic over the <em>values</em> of those types. This was most notable in arrays which include their length in their type definition (<code>[T; N]</code>), which previously you could not be generic over. Now with 1.51.0 you can write code that is generic over the values of any integer, <code>bool</code>, or <code>char</code> type! (Using <code>struct</code> or <code>enum</code> values is still unstable.)</p>
+<p>This change now lets us have our own array struct that's generic over its type <em>and</em> its length. Let's look at an example definition, and how it can be used.</p>
+<pre><code class="language-rust">struct Array&lt;T, const LENGTH: usize&gt; {
+    //          ^^^^^^^^^^^^^^^^^^^ Const generic definition.
+    list: [T; LENGTH]
+    //        ^^^^^^ We use it here.
+}
+</code></pre>
+<p>Now if we then used <code>Array&lt;u8, 32&gt;</code>, the compiler will make a monomorphic version of <code>Array</code> that looks like:</p>
+<pre><code class="language-rust">struct Array&lt;u8, 32&gt; {
+    list: [u8; 32]
+}
+</code></pre>
+<p>Const generics adds an important new tool for library designers in creating new, powerful compile-time safe APIs. If you'd like to learn more about const generics you can also check out the <a href="https://blog.rust-lang.org/2021/02/26/const-generics-mvp-beta.html">&quot;Const Generics MVP Hits Beta&quot;</a> blog post for more information about the feature and its current restrictions. We can't wait to see what new libraries and APIs you create!</p>
+<h3><a href="#arrayintoiter-stabilisation" aria-hidden="true" class="anchor" id="arrayintoiter-stabilisation"></a><code>array::IntoIter</code> Stabilisation</h3>
+<p>As part of const generics stabilising, we're also stabilising a new API that uses it, <code>std::array::IntoIter</code>. <code>IntoIter</code> allows you to create a by value iterator over any array. Previously there wasn't a convenient way to iterate over owned values of an array, only references to them.</p>
+<pre><code class="language-rust">fn main() {
+  let array = [1, 2, 3, 4, 5];
+  
+  // Previously
+  for item in array.iter().copied() {
+      println!(&quot;{}&quot;, item);
+  }
+  
+  // Now
+  for item in std::array::IntoIter::new(array) {
+      println!(&quot;{}&quot;, item);
+  }
+}
+</code></pre>
+<p>Note that this is added as a separate method instead of <code>.into_iter()</code> on arrays, as that currently introduces some amount of breakage; currently <code>.into_iter()</code> refers to the slice by-reference iterator. We're exploring ways to make this more ergonomic in the future.</p>
+<h3><a href="#cargos-new-feature-resolver" aria-hidden="true" class="anchor" id="cargos-new-feature-resolver"></a>Cargo's New Feature Resolver</h3>
+<p>Dependency management is a hard problem, and one of the hardest parts of it is just picking what <em>version</em> of a dependency to use when it's depended on by two different packages. This doesn't just include its version number, but also what features are or aren't enabled for the package. Cargo's default behaviour is to merge features for a single package when it's referred to multiple times in the dependency graph.</p>
+<p>For example, let's say you had a dependency called <code>foo</code> with features A and B, which was being used by packages <code>bar</code> and <code>baz</code>, but <code>bar</code> depends on <code>foo+A</code> and <code>baz</code> depends on <code>foo+B</code>. Cargo will merge both of those features and compile <code>foo</code> as <code>foo+AB</code>. This has a benefit that you only have to compile <code>foo</code> once, and then it can reused for both <code>foo</code> and <code>bar</code>.</p>
+<p>However, this also comes with a downside. What if a feature enabled in a build-dependency is not compatible with the target you are building for?</p>
+<p>A common example of this in the ecosystem is the optional <code>std</code> feature included in many <code>#![no_std]</code> crates, that allows crates to provide added functionality when <code>std</code> is available. Now imagine you want to use the <code>#![no_std]</code> version of <code>foo</code> in your <code>#![no_std]</code> binary, and use the <code>foo</code> at build time in your <code>build.rs</code>. If your build time dependency depends on <code>foo+std</code>, your binary now also depends on <code>foo+std</code>, which means it will no longer compile because <code>std</code> is not available for your target platform.</p>
+<p>This has been a long-standing issue in cargo, and with this release there's a new <code>resolver</code> option in your <code>Cargo.toml</code>, where you can set <code>resolver=&quot;2&quot;</code> to tell cargo to try a new approach to resolving features. You can check out <a href="https://rust-lang.github.io/rfcs/2957-cargo-features2.html">RFC 2957</a> for a detailed description of the behaviour, which can be summarised as follows.</p>
+<ul>
+<li><strong>Dev dependencies</strong> — When a package is shared as a normal dependency and a dev-dependency, the dev-dependency features are only enabled if the current build is including dev-dependencies.</li>
+<li><strong>Host Dependencies</strong> — When a package is shared as a normal dependency and a build-dependency or proc-macro, the features for the normal dependency are kept independent of the build-dependency or proc-macro.</li>
+<li><strong>Target dependencies</strong> — When a package appears multiple times in the build graph, and one of those instances is a target-specific dependency, then the features of the target-specific dependency are only enabled if the target is currently being built.</li>
+</ul>
+<p>While this can lead to some crates compiling more than once, this should provide a much more intuitive development experience when using features with cargo. If you'd like to know more, you can also read the <a href="https://doc.rust-lang.org/nightly/cargo/reference/features.html#feature-resolver-version-2">&quot;Feature Resolver&quot;</a> section in the Cargo Book for more information. We'd like to thank the cargo team and everyone involved for all their hard work in designing and implementing the new resolver!</p>
+<pre><code class="language-toml">[package]
+resolver = &quot;2&quot;
+# Or if you're using a workspace
+[workspace]
+resolver = &quot;2&quot;
+</code></pre>
+<h3><a href="#splitting-debug-information" aria-hidden="true" class="anchor" id="splitting-debug-information"></a>Splitting Debug Information</h3>
+<p>While not often highlighted in the release, the Rust teams are constantly working on improving Rust's compile times, and this release marks one of the largest improvements in a long time for Rust on macOS. Debug information maps the binary code back to your source code, so that the program can give you more information about what went wrong at runtime. In macOS, debug info was previously collected into a single <code>.dSYM</code> folder using a tool called <code>dsymutil</code>, which can take some time and use up quite a bit of disk space.</p>
+<p>Collecting all of the debuginfo into this directory helps in finding it at runtime, particularly if the binary is being moved. However, it does have the drawback that even when you make a small change to your program, <code>dsymutil</code> will need to run over the entire final binary to produce the final <code>.dSYM</code> folder. This can sometimes add a lot to the build time, especially for larger projects, as all dependencies always get recollected, but this has been a necessary step as without it Rust's standard library didn't know how to load the debug info on macOS.</p>
+<p>Recently, Rust backtraces switched to using a different backend which supports loading debuginfo without needing to run <code>dsymutil</code>, and we've stabilized support for skipping the <code>dsymutil</code> run. This can significantly speed up builds that include debuginfo and significantly reduce the amount of disk space used. We haven't run extensive benchmarks, but have seen a lot of reports of people's builds being a lot faster on macOS with this behavior.</p>
+<p>You can enable this new behaviour by setting the <code>-Csplit-debuginfo=unpacked</code> flag when running <code>rustc</code>, or by setting the <a href="https://doc.rust-lang.org/nightly/cargo/reference/profiles.html#split-debuginfo"><code>split-debuginfo</code></a> <code>[profile]</code> option to <code>unpacked</code> in Cargo. The &quot;unpacked&quot; option instructs rustc to leave the .o object files in the build output directory instead of deleting them, and skips the step of running dsymutil. Rust's backtrace support is smart enough to know how to find these .o files. Tools such as lldb also know how to do this. This should work as long as you don't need to move the binary to a different location while retaining the debug information.</p>
+<pre><code class="language-toml">[profile.dev]
+split-debuginfo = &quot;unpacked&quot;
+</code></pre>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<p>In total, this release saw the stabilisation of 18 new methods for various types like <code>slice</code> and <code>Peekable</code>. One notable addition is the stabilisation of <code>ptr::addr_of!</code> and <code>ptr::addr_of_mut!</code>, which allow you to create raw pointers to unaligned fields. Previously this wasn't possible because Rust requires <code>&amp;/&amp;mut</code> to be aligned and point to initialized data, and <code>&amp;addr as *const _</code> would then cause undefined behaviour as <code>&amp;addr</code> needs to be aligned. These two macros now let you safely create unaligned pointers.</p>
+<pre><code class="language-rust">use std::ptr;
+
+#[repr(packed)]
+struct Packed {
+    f1: u8,
+    f2: u16,
+}
+
+let packed = Packed { f1: 1, f2: 2 };
+// `&amp;packed.f2` would create an unaligned reference, and thus be Undefined Behavior!
+let raw_f2 = ptr::addr_of!(packed.f2);
+assert_eq!(unsafe { raw_f2.read_unaligned() }, 2);
+</code></pre>
+<p>The following methods were stabilised.</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.decrement_strong_count"><code>Arc::decrement_strong_count</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.increment_strong_count"><code>Arc::increment_strong_count</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.Once.html#method.call_once_force"><code>Once::call_once_force</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/iter/struct.Peekable.html#method.next_if_eq"><code>Peekable::next_if_eq</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/iter/struct.Peekable.html#method.next_if"><code>Peekable::next_if</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/trait.Seek.html#method.stream_position"><code>Seek::stream_position</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/array/struct.IntoIter.html"><code>array::IntoIter</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/panic/fn.panic_any.html"><code>panic::panic_any</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ptr/macro.addr_of.html"><code>ptr::addr_of!</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ptr/macro.addr_of_mut.html"><code>ptr::addr_of_mut!</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.fill_with"><code>slice::fill_with</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.split_inclusive_mut"><code>slice::split_inclusive_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.split_inclusive"><code>slice::split_inclusive</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.strip_prefix"><code>slice::strip_prefix</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.strip_prefix"><code>slice::strip_suffix</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.str.html#method.split_inclusive"><code>str::split_inclusive</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.OnceState.html"><code>sync::OnceState</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/task/trait.Wake.html"><code>task::Wake</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.51.0 release: check out what changed in <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1510-2021-03-25">Rust</a>, <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-151-2021-03-25">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-151">Clippy</a>.</p>
+<h3><a href="#contributors-to-1510" aria-hidden="true" class="anchor" id="contributors-to-1510"></a>Contributors to 1.51.0</h3>
+<p>Many people came together to create Rust 1.51.0. We couldn't have done it without all of you. <a href="https://thanks.rust-lang.org/rust/1.51.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
