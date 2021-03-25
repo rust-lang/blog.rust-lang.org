@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-03-25T14:19:07+00:00</updated>
+    <updated>2021-03-25T14:33:17+00:00</updated>
 
     
     <entry>
@@ -32,7 +32,7 @@ from the appropriate page on our website, and check out the
 &lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1510-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1510-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.51.0 stable&lt;/h2&gt;
 &lt;p&gt;This release represents one of the largest additions to the Rust language and Cargo in quite a while, stabilizing an MVP of const generics and a new feature resolver for Cargo. Let&#x27;s dive right into it!&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#const-generics-mvp&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-generics-mvp&quot;&gt;&lt;/a&gt;Const Generics MVP&lt;/h3&gt;
-&lt;p&gt;Before this release, Rust allowed you to haves your types be parameterized over lifetimes or types. For example if we wanted to have a &lt;code&gt;struct&lt;/code&gt; that is generic over the element type of an array, we&#x27;d write the following:&lt;/p&gt;
+&lt;p&gt;Before this release, Rust allowed you to have your types be parameterized over lifetimes or types. For example if we wanted to have a &lt;code&gt;struct&lt;/code&gt; that is generic over the element type of an array, we&#x27;d write the following:&lt;/p&gt;
 &lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct FixedArray&amp;lt;T&amp;gt; {
               // ^^^ Type generic definition
     list: [T; 32]
