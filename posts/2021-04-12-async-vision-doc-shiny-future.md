@@ -16,7 +16,7 @@ Now that we have a good base of "status quo" stories, we are starting to imagine
 
 [^youknow]: Don't be modest. You know you do.
 
-When writing "shiny future" stories, the goal is to focus on the **experience** of Rust's users first and foremost, and not so much on the specific technical details. In fact, you don't even have to know exactly how the experience will be achieved. We have a few years to figure that out, after all. :rocket: 
+When writing "shiny future" stories, the goal is to focus on the **experience** of Rust's users first and foremost, and not so much on the specific technical details. In fact, you don't even have to know exactly how the experience will be achieved. We have a few years to figure that out, after all. 🚀
 
 Every "shiny future" story is a "retelling" of one or more "status quo" stories. The idea is to replay the same scenario but hopefully with a happier ending, as a result of the improvements we've made. If you don't see a "status quo" story that is right for telling your "shiny future" story, though, that's no problem! Just write it now! We are still requesting "status quo" and "shiny future" stories, and we will do so right up until the end. 
 
