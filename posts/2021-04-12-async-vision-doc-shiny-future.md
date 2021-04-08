@@ -12,7 +12,7 @@ On March 18th, we [announced the start of the Async Vision Doc][announce] proces
 [writing]: https://smallcultfollowing.com/babysteps/blog/2021/03/25/async-vision-doc-writing-sessions-ii/
 [sessions]: https://smallcultfollowing.com/babysteps/blog/2021/03/29/async-vision-doc-writing-sessions-iii/
 
-Now that we have a good base of "status quo" stories, we are starting to imagine what the [✨ "shiny future" ✨][sf] might look like. **We want your help!** If you have a great idea for Async Rust[^youknow], then [take a look at the template and open a PR][template]! Alternatively, if you have an idea for a story but would like to discuss it before writing, you can [open a "shiny future" issue][open].
+Now that we have a good base of "status quo" stories, we are starting to imagine what the [✨ "shiny future" ✨][sf] might look like. **We want your help!** If you have a great idea for Async Rust[^youknow], then [take a look at the template and open a PR][template]! Alternatively, if you have an idea for a story but would like to discuss it before writing, you can [open a "shiny future" issue][open]. Also, we would still love to get more ["status quo" stories][sq], so please continue to share those.
 
 [^youknow]: Don't be modest. You know you do.
 
@@ -70,6 +70,7 @@ The brainstorming period lasts until the end of the month. After that, the [work
 [vd]: https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision
 [sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
 [sf]: https://rust-lang.github.io/wg-async-foundations/vision/shiny_future.html
+[sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
 [prs]: https://github.com/rust-lang/wg-async-foundations/pulls
 [announce]: https://blog.rust-lang.org/2021/03/18/async-vision-doc.html
 [bp]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html#brainstorming
