@@ -26,13 +26,17 @@ Here is the idea in a nutshell:
 
 > We are launching a collaborative effort to build a shared [vision document][vd] for Async Rust. **Our goal is to engage the entire community in a collective act of the imagination:** how can we make the end-to-end experience of using Async I/O not only a pragmatic choice, but a _joyful_ one?
 
-As described in the [original announcement][announce], the [vision document][vd] is structured as a series of "status quo" and "shiny future" stories. Each story describes the experiences of one or more of our four [characters] as they go about achieving their goals using Async Rust.  The "status quo" stories describe the experiences that users have today. They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. The goal with these stories is to help us understand and gauge the cumulative impact that problems can have on our users. The "shiny future" stories describe those some characters achieving those same goals, but looking forward a few years into the future. They are meant to illustrate the experience we are aiming towards, and to give the overall context for the RFCs and other kinds of changes we want to pursue.
+As described in the [original announcement][announce], the [vision document][vd] is structured as a series of "status quo" and "shiny future" stories. Each story describes the experiences of one or more of our four [characters] as they go about achieving their goals using Async Rust.  
+
+The "status quo" stories describe the experiences that users have today. They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. The goal with these stories is to help us understand and gauge the cumulative impact that problems can have on our users. 
+
+The "shiny future" stories describe those some characters achieving those same goals, but looking forward a few years into the future. They are meant to illustrate the experience we are aiming towards, and to give the overall context for the RFCs and other kinds of changes we want to pursue.
 
 ### The brainstorming period and what comes next
 
 We are currently in the midst of the [brainstorming period][bp]. This means that we are seeking to collect as many stories -- both about the "status quo" and the "shiny future" -- as we can. The brainstorming period lasts until the end of the month. After that, the [working group leads] are going to merge the remaining stories and get to work drafting a synthesized vision document that incorporates elements of the various stories that have been submitted.
 
-After that, we plan to revisit the vision document regularly. We fully expect that some aspects of the "shiny future" stories we write are going to be wrong, sometimes very wrong. We will be regularly returning to the vision document to check how things are going and adjust our trajectory appropriately.
+Going forward, we plan to revisit the vision document regularly. We fully expect that some aspects of the "shiny future" stories we write are going to be wrong, sometimes very wrong. We will be regularly returning to the vision document to check how things are going and adjust our trajectory appropriately.
 
 ### This sounds cool, how can I get involved?
 
