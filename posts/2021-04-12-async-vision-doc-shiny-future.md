@@ -20,52 +20,28 @@ When writing "shiny future" stories, the goal is to focus on the **experience** 
 
 Every "shiny future" story is a "retelling" of one or more "status quo" stories. The idea is to replay the same scenario but hopefully with a happier ending, as a result of the improvements we've made. If you don't see a "status quo" story that is right for telling your "shiny future" story, though, that's no problem! Just write it now! We are still requesting "status quo" and "shiny future" stories, and we will do so right up until the end. 
 
-### 🤔 Frequently asked questions
-
 #### What is the async vision doc and how does it work?
 
 Here is the idea in a nutshell:
 
 > We are launching a collaborative effort to build a shared [vision document][vd] for Async Rust. **Our goal is to engage the entire community in a collective act of the imagination:** how can we make the end-to-end experience of using Async I/O not only a pragmatic choice, but a _joyful_ one?
 
-Check out the [original announcement][announce] to get more details! The [How to Vision] page outlines the process we are using.
+As described in the [original announcement][announce], the [vision document][vd] is structured as a series of "status quo" and "shiny future" stories. Each story describes the experiences of one or more of our four [characters] as they go about achieving their goals using Async Rust.  The "status quo" stories describe the experiences that users have today. They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. The goal with these stories is to help us understand and gauge the cumulative impact that problems can have on our users. The "shiny future" stories describe those some characters achieving those same goals, but looking forward a few years into the future. They are meant to illustrate the experience we are aiming towards, and to give the overall context for the RFCs and other kinds of changes we want to pursue.
 
-#### "Status quo" stories? "Shiny future" stories? What are you talking about?
+### The brainstorming period and what comes next
 
-The "status quo" and "shiny future" stories are the heart of the [Async Vision Doc][vd]. Each story describes the experiences of one or more of our four [characters] as they go about achieving their goals using Async Rust. 
+We are currently in the midst of the [brainstorming period][bp]. This means that we are seeking to collect as many stories -- both about the "status quo" and the "shiny future" -- as we can. The brainstorming period lasts until the end of the month. After that, the [working group leads] are going to merge the remaining stories and get to work drafting a synthesized vision document that incorporates elements of the various stories that have been submitted.
 
-The "status quo" stories describe the experiences that users have today. They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. The goal with these stories is to help us understand and gauge the cumulative impact that problems can have on our users.
+After that, we plan to revisit the vision document regularly. We fully expect that some aspects of the "shiny future" stories we write are going to be wrong, sometimes very wrong. We will be regularly returning to the vision document to check how things are going and adjust our trajectory appropriately.
 
-The "shiny future" stories describe those some characters achieving those same goals, but looking forward a few years into the future. They are meant to illustrate the experience we are aiming towards, and to give the overall context for the RFCs and other kinds of changes we want to pursue.
+### This sounds cool, how can I get involved?
 
-#### What happens when there are multiple "shiny future" stories about the same thing?
+If you'd like to help, we'd love to have you! If you've got an idea for a story, then feel free to create a PR to the wg-async-foundations repository based on one of the following templates:
 
-During this brainstorming period, we want to focus on getting as many ideas as we can. Having multiple "shiny futures" that address the same problem is a feature, not a bug, as it will let us mix-and-match later to try and find the best overall plan.
+* [Template for "status quo" stories][sqtemplate]
+* [Template for "shiny future" stories][template]
 
-#### Do we have to know exactly how we will achieve the "shiny future"?
-
-No! Of course, we will eventually have to figure out the precise designs, but at this point we're more interested in talking about the experience we aim to create. That said, shiny future PRs can also include [design docs] that give technical details.
-
-#### What if we write a "shiny future" story but it turns out to be impossible to implement?
-
-Glad you asked! The vision document is a living document, and we intend to revisit it regularly. This is important because it turns out that predicting the future is hard. We fully expect that some aspects of the "shiny future" stories we write are going to be wrong, sometimes very wrong. We will be regularly returning to the vision document to check how things are going and adjust our trajectory appropriately.
-
-#### What if I'm not sure how to get started?
-
-[Ryan Levick] and [I] have been hosting "vision doc writing sessions" and they expect to continue doing this. These sessions are a fun way to work with other people from the Rust community. Keep an eye on the [babysteps blog] or twitter for announcements.
-
-#### Can I still submit "status quo" stories?
-
-Yes! We are accepting status quo stories right up until the end of the brainstorming period.
-
-#### What is the "scope" of a shiny future story?
-
-All the stories in the vision doc are meant to cover the full "end to end" experience of using async Rust. That means that sometimes they will take about things that are really part of projects that are outside of the Rust org. For example, we might write a shiny future that involves how the standard library has published standard traits for core concepts and those concepts have been adopted by libraries throughout the ecosystem.
-
-#### How long does the brainstorming period last, and what happens next?
-
-The brainstorming period lasts until the end of the month. After that, the [working group leads] are going to merge the remaining stories and get to work drafting a synthesized vision document that incorporates elements of the various stories that have been submitted (the ["harmonizing"] period).
-
+If you'd like a bit more inspiration, then you can join [Ryan Levick] and [I] at one of our vision doc writing sessions. Look for announcements from us on twitter or check the `#wg-async-foundations` stream on [the rust-lang Zulip][z].
 
 [vd]: https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision
 [sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
@@ -75,6 +51,7 @@ The brainstorming period lasts until the end of the month. After that, the [work
 [announce]: https://blog.rust-lang.org/2021/03/18/async-vision-doc.html
 [bp]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html#brainstorming
 [template]: https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/template.html
+[sqtemplate]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo/template.html
 [open]: https://github.com/rust-lang/wg-async-foundations/issues/new/choose
 [ws]: https://smallcultfollowing.com/babysteps/blog/2021/03/29/async-vision-doc-writing-sessions-iii/
 [design docs]: https://rust-lang.github.io/wg-async-foundations/design_docs.html
@@ -84,3 +61,5 @@ The brainstorming period lasts until the end of the month. After that, the [work
 [babysteps blog]: https://smallcultfollowing.com/babysteps/
 [characters]: https://rust-lang.github.io/wg-async-foundations/vision/characters.html
 [cok]: https://en.wikipedia.org/wiki/Curse_of_knowledge
+[z]: https://rust-lang.zulipchat.com/
+[working group leads]: https://rust-lang.github.io/wg-async-foundations/#leads
