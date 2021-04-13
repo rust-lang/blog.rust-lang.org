@@ -6,11 +6,9 @@ description: "Brainstorming Async Rust's Shiny Future"
 team: the Async Foundations Working Group <https://rust-lang.github.io/wg-async-foundations/>
 ---
 
-On March 18th, we [announced the start of the Async Vision Doc][announce] process. Since then, we've landed [17 "status quo" stories][sq] and we have [5 more stories in open PRs][prs]; [Ryan Levick] and [I] have also hosted more than ten [collaborative][] [writing][] [sessions][] over the course of the last few weeks.
+On March 18th, we [announced the start of the Async Vision Doc][announce] process. Since then, we've landed [24 "status quo" stories][sq] and we have [4 more stories in open PRs][prs]; [Ryan Levick] and [I] have also hosted more than ten collaborative writing sessions over the course of the last few weeks, and we have [more scheduled for this week][cws].
 
-[collaborative]: https://smallcultfollowing.com/babysteps/blog/2021/03/22/async-vision-doc-writing-sessions/
-[writing]: https://smallcultfollowing.com/babysteps/blog/2021/03/25/async-vision-doc-writing-sessions-ii/
-[sessions]: https://smallcultfollowing.com/babysteps/blog/2021/03/29/async-vision-doc-writing-sessions-iii/
+[cws]: https://smallcultfollowing.com/babysteps/blog/2021/04/12/async-vision-doc-writing-sessions-v/
 
 Now that we have a good base of "status quo" stories, we are starting to imagine what the [✨ "shiny future" ✨][sf] might look like. **We want your help!** If you have a great idea for Async Rust[^youknow], then [take a look at the template and open a PR][template]! Alternatively, if you have an idea for a story but would like to discuss it before writing, you can [open a "shiny future" issue][open]. Also, we would still love to get more ["status quo" stories][sq], so please continue to share those.
 
@@ -45,7 +43,7 @@ If you'd like to help, we'd love to have you! If you've got an idea for a story,
 * [Template for "status quo" stories][sqtemplate]
 * [Template for "shiny future" stories][template]
 
-If you'd like a bit more inspiration, then you can join [Ryan Levick] and [I] at one of our vision doc writing sessions. Look for announcements from us on twitter or check the `#wg-async-foundations` stream on [the rust-lang Zulip][z].
+If you'd like a bit more inspiration, then you can join [Ryan Levick] and [I] at one of our vision doc writing sessions. We have [four sessions scheduled this week][cws] and you can look for announcements from us on twitter or check the `#wg-async-foundations` stream on [the rust-lang Zulip][z].
 
 [vd]: https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision
 [sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
