@@ -34,7 +34,7 @@ The "shiny future" stories describe those some characters achieving those same g
 
 ### The brainstorming period and what comes next
 
-We are currently in the midst of the [brainstorming period][bp]. This means that we are seeking to collect as many stories -- both about the "status quo" and the "shiny future" -- as we can. The brainstorming period lasts until the end of the month. After that, the [working group leads] are going to merge the remaining stories and get to work drafting a synthesized vision document that incorporates elements of the various stories that have been submitted.
+We are currently in the midst of the [brainstorming period][bp]. This means that we are seeking to collect as many stories -- both about the "status quo" and the "shiny future" -- as we can. The brainstorming period lasts until the end of April. After that, the [working group leads] are going to merge the remaining stories and get to work drafting a synthesized vision document that incorporates elements of the various stories that have been submitted.
 
 Going forward, we plan to revisit the vision document regularly. We fully expect that some aspects of the "shiny future" stories we write are going to be wrong, sometimes very wrong. We will be regularly returning to the vision document to check how things are going and adjust our trajectory appropriately.
 
