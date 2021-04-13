@@ -18,6 +18,8 @@ When writing "shiny future" stories, the goal is to focus on the **experience** 
 
 Every "shiny future" story is a "retelling" of one or more "status quo" stories. The idea is to replay the same scenario but hopefully with a happier ending, as a result of the improvements we've made. If you don't see a "status quo" story that is right for telling your "shiny future" story, though, that's no problem! Just write it now! We are still requesting "status quo" and "shiny future" stories, and we will do so right up until the end. 
 
+If you'd like to see what a "shiny future" story looks like, we have merged one example, [Barbara Makes a Wish](https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/barbara_makes_a_wish.html). This story describes Barbara's experiences using a nifty new tool that gives her lots of information about the state of her async executor. It is a "retelling" of the "status quo" story [Barbara Wants Async Insights](https://rust-lang.github.io/wg-async-foundations/vision/status_quo/barbara_wants_async_insights.html).
+
 #### What is the async vision doc and how does it work?
 
 Here is the idea in a nutshell:
