@@ -71,50 +71,36 @@
     </div>
 
     <div class="post">
-      <p>On March 18th, we [announced the start of the Async Vision Doc][announce] process. Since then, we've landed [24 &quot;status quo&quot; stories][sq] and we have [4 more stories in open PRs][prs]; [Ryan Levick] and [I] have also hosted more than ten collaborative writing sessions over the course of the last few weeks, and we have <a href="https://smallcultfollowing.com/babysteps/blog/2021/04/12/async-vision-doc-writing-sessions-v/">more scheduled for this week</a>.</p>
-<p>Now that we have a good base of &quot;status quo&quot; stories, we are starting to imagine what the [✨ &quot;shiny future&quot; ✨][sf] might look like. <strong>We want your help!</strong> If you have a great idea for Async Rust[^youknow], then [take a look at the template and open a PR][template]! Alternatively, if you have an idea for a story but would like to discuss it before writing, you can [open a &quot;shiny future&quot; issue][open]. Also, we would still love to get more [&quot;status quo&quot; stories][sq], so please continue to share those.</p>
-<p>[^youknow]: Don't be modest. You know you do.</p>
+      <p>On March 18th, we <a href="https://blog.rust-lang.org/2021/03/18/async-vision-doc.html">announced the start of the Async Vision Doc</a> process. Since then, we've landed <a href="https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html">24 &quot;status quo&quot; stories</a> and we have <a href="https://github.com/rust-lang/wg-async-foundations/pulls">4 more stories in open PRs</a>; <a href="https://twitter.com/ryan_levick/">Ryan Levick</a> and <a href="https://twitter.com/nikomatsakis/">I</a> have also hosted more than ten collaborative writing sessions over the course of the last few weeks, and we have <a href="https://smallcultfollowing.com/babysteps/blog/2021/04/12/async-vision-doc-writing-sessions-v/">more scheduled for this week</a>.</p>
+<p>Now that we have a good base of &quot;status quo&quot; stories, we are starting to imagine what the <a href="https://rust-lang.github.io/wg-async-foundations/vision/shiny_future.html">✨ &quot;shiny future&quot; ✨</a> might look like. <strong>We want your help!</strong> If you have a great idea for Async Rust<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>, then <a href="https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/template.html">take a look at the template and open a PR</a>! Alternatively, if you have an idea for a story but would like to discuss it before writing, you can <a href="https://github.com/rust-lang/wg-async-foundations/issues/new/choose">open a &quot;shiny future&quot; issue</a>. Also, we would still love to get more <a href="https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html">&quot;status quo&quot; stories</a>, so please continue to share those.</p>
 <p>When writing &quot;shiny future&quot; stories, the goal is to focus on the <strong>experience</strong> of Rust's users first and foremost, and not so much on the specific technical details. In fact, you don't even have to know exactly how the experience will be achieved. We have a few years to figure that out, after all. 🚀</p>
 <p>Every &quot;shiny future&quot; story is a &quot;retelling&quot; of one or more &quot;status quo&quot; stories. The idea is to replay the same scenario but hopefully with a happier ending, as a result of the improvements we've made. If you don't see a &quot;status quo&quot; story that is right for telling your &quot;shiny future&quot; story, though, that's no problem! Write up your story and we'll figure out the &quot;status quo&quot; story it addresses. There is always the option of writing a new &quot;status quo&quot; story, too; we are still requesting &quot;status quo&quot; and &quot;shiny future&quot; stories, and we will do so right up until the end.</p>
 <p>If you'd like to see what a &quot;shiny future&quot; story looks like, we have merged one example, <a href="https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/barbara_makes_a_wish.html">Barbara Makes a Wish</a>. This story describes Barbara's experiences using a nifty new tool that gives her lots of information about the state of her async executor. It is a &quot;retelling&quot; of the &quot;status quo&quot; story <a href="https://rust-lang.github.io/wg-async-foundations/vision/status_quo/barbara_wants_async_insights.html">Barbara Wants Async Insights</a>.</p>
 <h4><a href="#what-is-the-async-vision-doc-and-how-does-it-work" aria-hidden="true" class="anchor" id="what-is-the-async-vision-doc-and-how-does-it-work"></a>What is the async vision doc and how does it work?</h4>
 <p>Here is the idea in a nutshell:</p>
 <blockquote>
-<p>We are launching a collaborative effort to build a shared [vision document][vd] for Async Rust. <strong>Our goal is to engage the entire community in a collective act of the imagination:</strong> how can we make the end-to-end experience of using Async I/O not only a pragmatic choice, but a <em>joyful</em> one?</p>
+<p>We are launching a collaborative effort to build a shared <a href="https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision">vision document</a> for Async Rust. <strong>Our goal is to engage the entire community in a collective act of the imagination:</strong> how can we make the end-to-end experience of using Async I/O not only a pragmatic choice, but a <em>joyful</em> one?</p>
 </blockquote>
-<p>As described in the [original announcement][announce], the [vision document][vd] is structured as a series of &quot;status quo&quot; and &quot;shiny future&quot; stories. Each story describes the experiences of one or more of our four [characters] as they go about achieving their goals using Async Rust.</p>
+<p>As described in the <a href="https://blog.rust-lang.org/2021/03/18/async-vision-doc.html">original announcement</a>, the <a href="https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision">vision document</a> is structured as a series of &quot;status quo&quot; and &quot;shiny future&quot; stories. Each story describes the experiences of one or more of our four <a href="https://rust-lang.github.io/wg-async-foundations/vision/characters.html">characters</a> as they go about achieving their goals using Async Rust.</p>
 <p>The &quot;status quo&quot; stories describe the experiences that users have today. They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. The goal with these stories is to help us understand and gauge the cumulative impact that problems can have on our users.</p>
 <p>The &quot;shiny future&quot; stories describe those some characters achieving those same goals, but looking forward a few years into the future. They are meant to illustrate the experience we are aiming towards, and to give the overall context for the RFCs and other kinds of changes we want to pursue.</p>
 <h3><a href="#the-brainstorming-period-and-what-comes-next" aria-hidden="true" class="anchor" id="the-brainstorming-period-and-what-comes-next"></a>The brainstorming period and what comes next</h3>
-<p>We are currently in the midst of the [brainstorming period][bp]. This means that we are seeking to collect as many stories -- both about the &quot;status quo&quot; and the &quot;shiny future&quot; -- as we can. The brainstorming period lasts until the end of April. After that, the [working group leads] are going to merge the remaining stories and get to work drafting a synthesized vision document that incorporates elements of the various stories that have been submitted.</p>
+<p>We are currently in the midst of the <a href="https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html#brainstorming">brainstorming period</a>. This means that we are seeking to collect as many stories -- both about the &quot;status quo&quot; and the &quot;shiny future&quot; -- as we can. The brainstorming period lasts until the end of April. After that, the <a href="https://rust-lang.github.io/wg-async-foundations/#leads">working group leads</a> are going to merge the remaining stories and get to work drafting a synthesized vision document that incorporates elements of the various stories that have been submitted.</p>
 <p>Going forward, we plan to revisit the vision document regularly. We fully expect that some aspects of the &quot;shiny future&quot; stories we write are going to be wrong, sometimes very wrong. We will be regularly returning to the vision document to check how things are going and adjust our trajectory appropriately.</p>
 <h3><a href="#this-sounds-cool-how-can-i-get-involved" aria-hidden="true" class="anchor" id="this-sounds-cool-how-can-i-get-involved"></a>This sounds cool, how can I get involved?</h3>
 <p>If you'd like to help, we'd love to have you! If you've got an idea for a story, then feel free to create a PR to the wg-async-foundations repository based on one of the following templates:</p>
 <ul>
-<li>[Template for &quot;status quo&quot; stories][sqtemplate]</li>
-<li>[Template for &quot;shiny future&quot; stories][template]</li>
+<li><a href="https://rust-lang.github.io/wg-async-foundations/vision/status_quo/template.html">Template for &quot;status quo&quot; stories</a></li>
+<li><a href="https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/template.html">Template for &quot;shiny future&quot; stories</a></li>
 </ul>
-<p>If you'd like a bit more inspiration, then you can join [Ryan Levick] and [I] at one of our vision doc writing sessions. We have <a href="https://smallcultfollowing.com/babysteps/blog/2021/04/12/async-vision-doc-writing-sessions-v/">more sessions scheduled this week</a> and you can look for announcements from us on twitter or check the <code>#wg-async-foundations</code> stream on [the rust-lang Zulip][z].
-[vd]: https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision
-[sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
-[sf]: https://rust-lang.github.io/wg-async-foundations/vision/shiny_future.html
-[sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
-[prs]: https://github.com/rust-lang/wg-async-foundations/pulls
-[announce]: https://blog.rust-lang.org/2021/03/18/async-vision-doc.html
-[bp]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html#brainstorming
-[template]: https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/template.html
-[sqtemplate]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo/template.html
-[open]: https://github.com/rust-lang/wg-async-foundations/issues/new/choose
-[ws]: https://smallcultfollowing.com/babysteps/blog/2021/03/29/async-vision-doc-writing-sessions-iii/
-[design docs]: https://rust-lang.github.io/wg-async-foundations/design_docs.html
-[I]: https://twitter.com/nikomatsakis/
-[Ryan Levick]: https://twitter.com/ryan_levick/
-[How to Vision]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html
-[babysteps blog]: https://smallcultfollowing.com/babysteps/
-[characters]: https://rust-lang.github.io/wg-async-foundations/vision/characters.html
-[cok]: https://en.wikipedia.org/wiki/Curse_of_knowledge
-[z]: https://rust-lang.zulipchat.com/
-[working group leads]: https://rust-lang.github.io/wg-async-foundations/#leads</p>
+<p>If you'd like a bit more inspiration, then you can join <a href="https://twitter.com/ryan_levick/">Ryan Levick</a> and <a href="https://twitter.com/nikomatsakis/">I</a> at one of our vision doc writing sessions. We have <a href="https://smallcultfollowing.com/babysteps/blog/2021/04/12/async-vision-doc-writing-sessions-v/">more sessions scheduled this week</a> and you can look for announcements from us on twitter or check the <code>#wg-async-foundations</code> stream on <a href="https://rust-lang.zulipchat.com/">the rust-lang Zulip</a>.</p>
+<section class="footnotes">
+<ol>
+<li id="fn1">
+<p>Don't be modest. You know you do. <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
 
     </div>
   </div>
