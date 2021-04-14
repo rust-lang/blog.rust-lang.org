@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Brainstorming Async Rust&#x27;s Shiny Future | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Brainstorming Async Rust&#x27;s Shiny Future | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Brainstorming Async Rust&#x27;s Shiny Future | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Brainstorming Async Rust&#x27;s Shiny Future" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Brainstorming Async Rust&#x27;s Shiny Future</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 14, 2021 &middot; Niko Matsakis
+     on behalf of <a href="https://rust-lang.github.io/wg-async-foundations/">the Async Foundations Working Group</a> 
+    </div>
+
+    <div class="post">
+      <p>On March 18th, we [announced the start of the Async Vision Doc][announce] process. Since then, we've landed [24 &quot;status quo&quot; stories][sq] and we have [4 more stories in open PRs][prs]; [Ryan Levick] and [I] have also hosted more than ten collaborative writing sessions over the course of the last few weeks, and we have <a href="https://smallcultfollowing.com/babysteps/blog/2021/04/12/async-vision-doc-writing-sessions-v/">more scheduled for this week</a>.</p>
+<p>Now that we have a good base of &quot;status quo&quot; stories, we are starting to imagine what the [✨ &quot;shiny future&quot; ✨][sf] might look like. <strong>We want your help!</strong> If you have a great idea for Async Rust[^youknow], then [take a look at the template and open a PR][template]! Alternatively, if you have an idea for a story but would like to discuss it before writing, you can [open a &quot;shiny future&quot; issue][open]. Also, we would still love to get more [&quot;status quo&quot; stories][sq], so please continue to share those.</p>
+<p>[^youknow]: Don't be modest. You know you do.</p>
+<p>When writing &quot;shiny future&quot; stories, the goal is to focus on the <strong>experience</strong> of Rust's users first and foremost, and not so much on the specific technical details. In fact, you don't even have to know exactly how the experience will be achieved. We have a few years to figure that out, after all. 🚀</p>
+<p>Every &quot;shiny future&quot; story is a &quot;retelling&quot; of one or more &quot;status quo&quot; stories. The idea is to replay the same scenario but hopefully with a happier ending, as a result of the improvements we've made. If you don't see a &quot;status quo&quot; story that is right for telling your &quot;shiny future&quot; story, though, that's no problem! Write up your story and we'll figure out the &quot;status quo&quot; story it addresses. There is always the option of writing a new &quot;status quo&quot; story, too; we are still requesting &quot;status quo&quot; and &quot;shiny future&quot; stories, and we will do so right up until the end.</p>
+<p>If you'd like to see what a &quot;shiny future&quot; story looks like, we have merged one example, <a href="https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/barbara_makes_a_wish.html">Barbara Makes a Wish</a>. This story describes Barbara's experiences using a nifty new tool that gives her lots of information about the state of her async executor. It is a &quot;retelling&quot; of the &quot;status quo&quot; story <a href="https://rust-lang.github.io/wg-async-foundations/vision/status_quo/barbara_wants_async_insights.html">Barbara Wants Async Insights</a>.</p>
+<h4><a href="#what-is-the-async-vision-doc-and-how-does-it-work" aria-hidden="true" class="anchor" id="what-is-the-async-vision-doc-and-how-does-it-work"></a>What is the async vision doc and how does it work?</h4>
+<p>Here is the idea in a nutshell:</p>
+<blockquote>
+<p>We are launching a collaborative effort to build a shared [vision document][vd] for Async Rust. <strong>Our goal is to engage the entire community in a collective act of the imagination:</strong> how can we make the end-to-end experience of using Async I/O not only a pragmatic choice, but a <em>joyful</em> one?</p>
+</blockquote>
+<p>As described in the [original announcement][announce], the [vision document][vd] is structured as a series of &quot;status quo&quot; and &quot;shiny future&quot; stories. Each story describes the experiences of one or more of our four [characters] as they go about achieving their goals using Async Rust.</p>
+<p>The &quot;status quo&quot; stories describe the experiences that users have today. They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. The goal with these stories is to help us understand and gauge the cumulative impact that problems can have on our users.</p>
+<p>The &quot;shiny future&quot; stories describe those some characters achieving those same goals, but looking forward a few years into the future. They are meant to illustrate the experience we are aiming towards, and to give the overall context for the RFCs and other kinds of changes we want to pursue.</p>
+<h3><a href="#the-brainstorming-period-and-what-comes-next" aria-hidden="true" class="anchor" id="the-brainstorming-period-and-what-comes-next"></a>The brainstorming period and what comes next</h3>
+<p>We are currently in the midst of the [brainstorming period][bp]. This means that we are seeking to collect as many stories -- both about the &quot;status quo&quot; and the &quot;shiny future&quot; -- as we can. The brainstorming period lasts until the end of April. After that, the [working group leads] are going to merge the remaining stories and get to work drafting a synthesized vision document that incorporates elements of the various stories that have been submitted.</p>
+<p>Going forward, we plan to revisit the vision document regularly. We fully expect that some aspects of the &quot;shiny future&quot; stories we write are going to be wrong, sometimes very wrong. We will be regularly returning to the vision document to check how things are going and adjust our trajectory appropriately.</p>
+<h3><a href="#this-sounds-cool-how-can-i-get-involved" aria-hidden="true" class="anchor" id="this-sounds-cool-how-can-i-get-involved"></a>This sounds cool, how can I get involved?</h3>
+<p>If you'd like to help, we'd love to have you! If you've got an idea for a story, then feel free to create a PR to the wg-async-foundations repository based on one of the following templates:</p>
+<ul>
+<li>[Template for &quot;status quo&quot; stories][sqtemplate]</li>
+<li>[Template for &quot;shiny future&quot; stories][template]</li>
+</ul>
+<p>If you'd like a bit more inspiration, then you can join [Ryan Levick] and [I] at one of our vision doc writing sessions. We have <a href="https://smallcultfollowing.com/babysteps/blog/2021/04/12/async-vision-doc-writing-sessions-v/">more sessions scheduled this week</a> and you can look for announcements from us on twitter or check the <code>#wg-async-foundations</code> stream on [the rust-lang Zulip][z].
+[vd]: https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision
+[sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
+[sf]: https://rust-lang.github.io/wg-async-foundations/vision/shiny_future.html
+[sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
+[prs]: https://github.com/rust-lang/wg-async-foundations/pulls
+[announce]: https://blog.rust-lang.org/2021/03/18/async-vision-doc.html
+[bp]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html#brainstorming
+[template]: https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/template.html
+[sqtemplate]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo/template.html
+[open]: https://github.com/rust-lang/wg-async-foundations/issues/new/choose
+[ws]: https://smallcultfollowing.com/babysteps/blog/2021/03/29/async-vision-doc-writing-sessions-iii/
+[design docs]: https://rust-lang.github.io/wg-async-foundations/design_docs.html
+[I]: https://twitter.com/nikomatsakis/
+[Ryan Levick]: https://twitter.com/ryan_levick/
+[How to Vision]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html
+[babysteps blog]: https://smallcultfollowing.com/babysteps/
+[characters]: https://rust-lang.github.io/wg-async-foundations/vision/characters.html
+[cok]: https://en.wikipedia.org/wiki/Curse_of_knowledge
+[z]: https://rust-lang.zulipchat.com/
+[working group leads]: https://rust-lang.github.io/wg-async-foundations/#leads</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

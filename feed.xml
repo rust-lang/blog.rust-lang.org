@@ -10,8 +10,65 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-04-03T00:12:56+00:00</updated>
+    <updated>2021-04-14T15:49:02+00:00</updated>
 
+    
+    <entry>
+        <title>Brainstorming Async Rust&#x27;s Shiny Future</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/04/14/async-vision-doc-shiny-future.html" type="text/html" title="Brainstorming Async Rust&#x27;s Shiny Future" />
+        <published>2021-04-14T00:00:00+00:00</published>
+        <updated>2021-04-14T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/04/14/async-vision-doc-shiny-future.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/04/14/async-vision-doc-shiny-future.html">&lt;p&gt;On March 18th, we [announced the start of the Async Vision Doc][announce] process. Since then, we&#x27;ve landed [24 &amp;quot;status quo&amp;quot; stories][sq] and we have [4 more stories in open PRs][prs]; [Ryan Levick] and [I] have also hosted more than ten collaborative writing sessions over the course of the last few weeks, and we have &lt;a href&#x3D;&quot;https://smallcultfollowing.com/babysteps/blog/2021/04/12/async-vision-doc-writing-sessions-v/&quot;&gt;more scheduled for this week&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now that we have a good base of &amp;quot;status quo&amp;quot; stories, we are starting to imagine what the [✨ &amp;quot;shiny future&amp;quot; ✨][sf] might look like. &lt;strong&gt;We want your help!&lt;/strong&gt; If you have a great idea for Async Rust[^youknow], then [take a look at the template and open a PR][template]! Alternatively, if you have an idea for a story but would like to discuss it before writing, you can [open a &amp;quot;shiny future&amp;quot; issue][open]. Also, we would still love to get more [&amp;quot;status quo&amp;quot; stories][sq], so please continue to share those.&lt;/p&gt;
+&lt;p&gt;[^youknow]: Don&#x27;t be modest. You know you do.&lt;/p&gt;
+&lt;p&gt;When writing &amp;quot;shiny future&amp;quot; stories, the goal is to focus on the &lt;strong&gt;experience&lt;/strong&gt; of Rust&#x27;s users first and foremost, and not so much on the specific technical details. In fact, you don&#x27;t even have to know exactly how the experience will be achieved. We have a few years to figure that out, after all. 🚀&lt;/p&gt;
+&lt;p&gt;Every &amp;quot;shiny future&amp;quot; story is a &amp;quot;retelling&amp;quot; of one or more &amp;quot;status quo&amp;quot; stories. The idea is to replay the same scenario but hopefully with a happier ending, as a result of the improvements we&#x27;ve made. If you don&#x27;t see a &amp;quot;status quo&amp;quot; story that is right for telling your &amp;quot;shiny future&amp;quot; story, though, that&#x27;s no problem! Write up your story and we&#x27;ll figure out the &amp;quot;status quo&amp;quot; story it addresses. There is always the option of writing a new &amp;quot;status quo&amp;quot; story, too; we are still requesting &amp;quot;status quo&amp;quot; and &amp;quot;shiny future&amp;quot; stories, and we will do so right up until the end.&lt;/p&gt;
+&lt;p&gt;If you&#x27;d like to see what a &amp;quot;shiny future&amp;quot; story looks like, we have merged one example, &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/barbara_makes_a_wish.html&quot;&gt;Barbara Makes a Wish&lt;/a&gt;. This story describes Barbara&#x27;s experiences using a nifty new tool that gives her lots of information about the state of her async executor. It is a &amp;quot;retelling&amp;quot; of the &amp;quot;status quo&amp;quot; story &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo/barbara_wants_async_insights.html&quot;&gt;Barbara Wants Async Insights&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#what-is-the-async-vision-doc-and-how-does-it-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-the-async-vision-doc-and-how-does-it-work&quot;&gt;&lt;/a&gt;What is the async vision doc and how does it work?&lt;/h4&gt;
+&lt;p&gt;Here is the idea in a nutshell:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We are launching a collaborative effort to build a shared [vision document][vd] for Async Rust. &lt;strong&gt;Our goal is to engage the entire community in a collective act of the imagination:&lt;/strong&gt; how can we make the end-to-end experience of using Async I/O not only a pragmatic choice, but a &lt;em&gt;joyful&lt;/em&gt; one?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;As described in the [original announcement][announce], the [vision document][vd] is structured as a series of &amp;quot;status quo&amp;quot; and &amp;quot;shiny future&amp;quot; stories. Each story describes the experiences of one or more of our four [characters] as they go about achieving their goals using Async Rust.&lt;/p&gt;
+&lt;p&gt;The &amp;quot;status quo&amp;quot; stories describe the experiences that users have today. They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. The goal with these stories is to help us understand and gauge the cumulative impact that problems can have on our users.&lt;/p&gt;
+&lt;p&gt;The &amp;quot;shiny future&amp;quot; stories describe those some characters achieving those same goals, but looking forward a few years into the future. They are meant to illustrate the experience we are aiming towards, and to give the overall context for the RFCs and other kinds of changes we want to pursue.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#the-brainstorming-period-and-what-comes-next&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-brainstorming-period-and-what-comes-next&quot;&gt;&lt;/a&gt;The brainstorming period and what comes next&lt;/h3&gt;
+&lt;p&gt;We are currently in the midst of the [brainstorming period][bp]. This means that we are seeking to collect as many stories -- both about the &amp;quot;status quo&amp;quot; and the &amp;quot;shiny future&amp;quot; -- as we can. The brainstorming period lasts until the end of April. After that, the [working group leads] are going to merge the remaining stories and get to work drafting a synthesized vision document that incorporates elements of the various stories that have been submitted.&lt;/p&gt;
+&lt;p&gt;Going forward, we plan to revisit the vision document regularly. We fully expect that some aspects of the &amp;quot;shiny future&amp;quot; stories we write are going to be wrong, sometimes very wrong. We will be regularly returning to the vision document to check how things are going and adjust our trajectory appropriately.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#this-sounds-cool-how-can-i-get-involved&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;this-sounds-cool-how-can-i-get-involved&quot;&gt;&lt;/a&gt;This sounds cool, how can I get involved?&lt;/h3&gt;
+&lt;p&gt;If you&#x27;d like to help, we&#x27;d love to have you! If you&#x27;ve got an idea for a story, then feel free to create a PR to the wg-async-foundations repository based on one of the following templates:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[Template for &amp;quot;status quo&amp;quot; stories][sqtemplate]&lt;/li&gt;
+&lt;li&gt;[Template for &amp;quot;shiny future&amp;quot; stories][template]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you&#x27;d like a bit more inspiration, then you can join [Ryan Levick] and [I] at one of our vision doc writing sessions. We have &lt;a href&#x3D;&quot;https://smallcultfollowing.com/babysteps/blog/2021/04/12/async-vision-doc-writing-sessions-v/&quot;&gt;more sessions scheduled this week&lt;/a&gt; and you can look for announcements from us on twitter or check the &lt;code&gt;#wg-async-foundations&lt;/code&gt; stream on [the rust-lang Zulip][z].
+[vd]: https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision
+[sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
+[sf]: https://rust-lang.github.io/wg-async-foundations/vision/shiny_future.html
+[sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
+[prs]: https://github.com/rust-lang/wg-async-foundations/pulls
+[announce]: https://blog.rust-lang.org/2021/03/18/async-vision-doc.html
+[bp]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html#brainstorming
+[template]: https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/template.html
+[sqtemplate]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo/template.html
+[open]: https://github.com/rust-lang/wg-async-foundations/issues/new/choose
+[ws]: https://smallcultfollowing.com/babysteps/blog/2021/03/29/async-vision-doc-writing-sessions-iii/
+[design docs]: https://rust-lang.github.io/wg-async-foundations/design_docs.html
+[I]: https://twitter.com/nikomatsakis/
+[Ryan Levick]: https://twitter.com/ryan_levick/
+[How to Vision]: https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html
+[babysteps blog]: https://smallcultfollowing.com/babysteps/
+[characters]: https://rust-lang.github.io/wg-async-foundations/vision/characters.html
+[cok]: https://en.wikipedia.org/wiki/Curse_of_knowledge
+[z]: https://rust-lang.zulipchat.com/
+[working group leads]: https://rust-lang.github.io/wg-async-foundations/#leads&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.51.0</title>
@@ -803,113 +860,6 @@ We&#x27;d like to get a better idea of how you use locks and poisoning in your p
 
         <author>
             <name>Ashley Mannix</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>The Foundation Conversation</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/12/07/the-foundation-conversation.html" type="text/html" title="The Foundation Conversation" />
-        <published>2020-12-07T00:00:00+00:00</published>
-        <updated>2020-12-07T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/12/07/the-foundation-conversation.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/12/07/the-foundation-conversation.html">&lt;p&gt;In August, we on the Core Team &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/08/18/laying-the-foundation-for-rusts-future.html&quot;&gt;announced our plans to create a Foundation&lt;/a&gt; by the end of the year. Since that time, we’ve been doing a lot of work but it has been difficult to share many details, and we know that a lot of you have questions.&lt;/p&gt;
-&lt;h1&gt;&lt;a href&#x3D;&quot;#the-foundation-conversation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-foundation-conversation&quot;&gt;&lt;/a&gt;The &amp;quot;Foundation Conversation&amp;quot;&lt;/h1&gt;
-&lt;p&gt;This blog post announces the start of the “Foundation Conversation”. This is a week-long period in which we have planned a number of forums and opportunities where folks can ask questions about the Foundation and get answers from the Core team. It includes both text-based “question-and-answer” (Q&amp;amp;A) periods as well as live broadcasts. We’re also going to be coming to the Rust team’s meetings to have discussions. We hope that this will help us to share our vision for the Foundation and to get the community excited about what’s to come.&lt;/p&gt;
-&lt;p&gt;A secondary goal for the Foundation Conversation is to help us develop the Foundation FAQ. Most FAQs get written before anyone has ever really asked a question, but we really wanted to write a FAQ that responds honestly to the questions that people have. We’ve currently got a draft of the FAQ which is based both on questions we thought people would ask and questions that were raised by Rust team members thus far, but we would like to extend it to include questions raised by people in the broader community. That’s where you come in!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#how-to-join-the-conversation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-to-join-the-conversation&quot;&gt;&lt;/a&gt;How to join the conversation&lt;/h2&gt;
-&lt;p&gt;There are many ways to participate in the Foundation Conversation:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/foundation-faq-2020/blob/main/FAQ.md&quot;&gt;Read the draft FAQ we’ve been working on&lt;/a&gt;&lt;/strong&gt;. It contains the answers to some of the questions that we have been asked thus far.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Fill out our &lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSeciTU1hLi-Y5842fvWC2lhYRHvkWOtPbk39p72amGcGmZIaA/viewform&quot;&gt;survey&lt;/a&gt;&lt;/strong&gt;. This survey is designed to help us understand how the Rust community is feeling about the Foundation.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Ask questions during the Community Q&amp;amp;A periods&lt;/strong&gt;. We’ve scheduled a number of 3 hour periods during which the foundation-faq-2020 repo will be open for anyone to ask questions. There will be members of the core team around during those periods to answer those questions as best we can.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Watch our Live Broadcasts&lt;/strong&gt;. We’ve scheduled live broadcasts this week where members of the core team will be answering and discussing some of the questions that have come up thus far. These will be posted to YouTube later.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Read on for more details.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#the-foundation-faq-2020-repository&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-foundation-faq-2020-repository&quot;&gt;&lt;/a&gt;The foundation-faq-2020 repository&lt;/h2&gt;
-&lt;p&gt;We have chosen to coordinate the Foundation Conversation using a GitHub repository called &lt;a href&#x3D;&quot;https://github.com/rust-lang/foundation-faq-2020&quot;&gt;foundation-faq-2020&lt;/a&gt;. This repository contains the &lt;a href&#x3D;&quot;https://github.com/rust-lang/foundation-faq-2020/blob/main/FAQ.md&quot;&gt;draft FAQ&lt;/a&gt; we’ve written so far, along with a series of issues representing the questions that people have. Last week we opened the repository for Rust team members, so you can see that we’ve already had quite a few questions raised (and answered). Once a new issue is opened, someone from the core team will come along and post an answer, and then label the question as “&lt;a href&#x3D;&quot;https://github.com/rust-lang/foundation-faq-2020/issues?q&#x3D;is%3Aissue+is%3Aopen+label%3Aanswered&quot;&gt;answered&lt;/a&gt;”.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#community-qa-sessions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;community-qa-sessions&quot;&gt;&lt;/a&gt;Community Q&amp;amp;A sessions&lt;/h2&gt;
-&lt;p&gt;We have scheduled a number of 3 hour periods in which the repository will be open for anyone to open new issues. Outside of these slots, the repository is generally “read only” unless you are a member of a Rust team. We are calling these slots the “Community Q&amp;amp;A” sessions, since it is a time for the broader community to open questions and get answers.&lt;/p&gt;
-&lt;p&gt;We’ve tried to stagger the times for the “Community Q&amp;amp;A” periods to be accessible from all time zones. During each slot, members of the core team will be standing by to monitor new questions and post answers. In some cases, if the question is complex, we may hold off on answering right away and instead take time to draft the response and post it later.&lt;/p&gt;
-&lt;p&gt;Here are the times that we’ve scheduled for folks to pose questions.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;PST US&lt;/th&gt;
-&lt;th&gt;EST US&lt;/th&gt;
-&lt;th&gt;UTC Europe/Africa&lt;/th&gt;
-&lt;th&gt;India&lt;/th&gt;
-&lt;th&gt;China&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Dec 7th (&lt;a href&#x3D;&quot;https://everytimezone.com/s/213ef6bd&quot;&gt;View in my timezone&lt;/a&gt;)&lt;/td&gt;
-&lt;td&gt;3-6pm&lt;/td&gt;
-&lt;td&gt;6-9pm&lt;/td&gt;
-&lt;td&gt;23:00-2:00&lt;/td&gt;
-&lt;td&gt;4:30am-7:30am (Dec 8)&lt;/td&gt;
-&lt;td&gt;7am-10am (Dec 8)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Dec 9th (&lt;a href&#x3D;&quot;https://everytimezone.com/s/f10ec849&quot;&gt;View in my timezone&lt;/a&gt;)&lt;/td&gt;
-&lt;td&gt;4-7am&lt;/td&gt;
-&lt;td&gt;7-10am&lt;/td&gt;
-&lt;td&gt;12:00-15:00&lt;/td&gt;
-&lt;td&gt;5:30-8:30pm&lt;/td&gt;
-&lt;td&gt;8pm-11pm&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Dec 11th (&lt;a href&#x3D;&quot;https://everytimezone.com/s/3c5c1b75&quot;&gt;View in my timezone&lt;/a&gt;)&lt;/td&gt;
-&lt;td&gt;10-1pm&lt;/td&gt;
-&lt;td&gt;1-4pm&lt;/td&gt;
-&lt;td&gt;18:00-21:00&lt;/td&gt;
-&lt;td&gt;11:30pm-2:30am&lt;/td&gt;
-&lt;td&gt;2am-5am (Dec 12)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#live-broadcasts&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;live-broadcasts&quot;&gt;&lt;/a&gt;Live broadcasts&lt;/h2&gt;
-&lt;p&gt;In addition to the repository, we’ve scheduled two “live broadcasts”. These sessions will feature members of the core team discussing and responding to some of the questions that have been asked thus far. Naturally, even if you can’t catch the live broadcast, the video will be available for streaming afterwards. Here is the schedule for these broadcasts:&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;PST US&lt;/th&gt;
-&lt;th&gt;EST US&lt;/th&gt;
-&lt;th&gt;UTC Europe/Africa&lt;/th&gt;
-&lt;th&gt;India&lt;/th&gt;
-&lt;th&gt;China&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Dec 9th (&lt;a href&#x3D;&quot;https://everytimezone.com/s/a0b6bb44&quot;&gt;View in my timezone&lt;/a&gt;)&lt;/td&gt;
-&lt;td&gt;&lt;a href&#x3D;&quot;https://www.youtube.com/watch?v&#x3D;OmEcRWyT6Ak&quot;&gt;Watch on YouTube&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;3-4pm&lt;/td&gt;
-&lt;td&gt;6-7pm&lt;/td&gt;
-&lt;td&gt;23:00-24:00&lt;/td&gt;
-&lt;td&gt;4:30-5:30am   (Dec 10)&lt;/td&gt;
-&lt;td&gt;7-8am   (Dec 10)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Dec 12th (&lt;a href&#x3D;&quot;https://everytimezone.com/s/8e88716f&quot;&gt;View in my timezone&lt;/a&gt;)&lt;/td&gt;
-&lt;td&gt;&lt;a href&#x3D;&quot;https://www.youtube.com/watch?v&#x3D;42ZWHYWv9Ic&quot;&gt;Watch on YouTube&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;4-5am&lt;/td&gt;
-&lt;td&gt;7-8am&lt;/td&gt;
-&lt;td&gt;12:00-13:00&lt;/td&gt;
-&lt;td&gt;5:30pm-6:30pm&lt;/td&gt;
-&lt;td&gt;8-9pm&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;These will be hosted on our &lt;a href&#x3D;&quot;https://www.youtube.com/c/rustvideos&quot;&gt;YouTube channel&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;We’re very excited about the progress on the Rust foundation and we’re looking forward to hearing from all of you.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
         </author>
     </entry>
     
