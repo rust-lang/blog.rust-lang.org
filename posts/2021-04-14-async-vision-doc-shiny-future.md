@@ -26,9 +26,9 @@ Here is the idea in a nutshell:
 
 > We are launching a collaborative effort to build a shared [vision document][vd] for Async Rust. **Our goal is to engage the entire community in a collective act of the imagination:** how can we make the end-to-end experience of using Async I/O not only a pragmatic choice, but a _joyful_ one?
 
-As described in the [original announcement][announce], the [vision document][vd] is structured as a series of "status quo" and "shiny future" stories. Each story describes the experiences of one or more of our four [characters] as they go about achieving their goals using Async Rust.  
+As described in the [original announcement][announce], the [vision document][vd] is structured as a series of "status quo" and "shiny future" stories. Each story describes the experiences of one or more of our four [characters] as they go about achieving their goals using Async Rust.
 
-The "status quo" stories describe the experiences that users have today. They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. The goal with these stories is to help us understand and gauge the cumulative impact that problems can have on our users. 
+The "status quo" stories describe the experiences that users have today. They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. The goal with these stories is to help us understand and gauge the cumulative impact that problems can have on our users.
 
 The "shiny future" stories describe those some characters achieving those same goals, but looking forward a few years into the future. They are meant to illustrate the experience we are aiming towards, and to give the overall context for the RFCs and other kinds of changes we want to pursue.
 
@@ -47,6 +47,7 @@ If you'd like to help, we'd love to have you! If you've got an idea for a story,
 
 
 If you'd like a bit more inspiration, then you can join [Ryan Levick] and [I] at one of our vision doc writing sessions. We have [more sessions scheduled this week][cws] and you can look for announcements from us on twitter or check the `#wg-async-foundations` stream on [the rust-lang Zulip][z].
+
 [vd]: https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision
 [sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
 [sf]: https://rust-lang.github.io/wg-async-foundations/vision/shiny_future.html
