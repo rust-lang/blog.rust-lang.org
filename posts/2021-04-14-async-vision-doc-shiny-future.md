@@ -45,8 +45,8 @@ If you'd like to help, we'd love to have you! If you've got an idea for a story,
 * [Template for "status quo" stories][sqtemplate]
 * [Template for "shiny future" stories][template]
 
-If you'd like a bit more inspiration, then you can join [Ryan Levick] and [I] at one of our vision doc writing sessions. We have [four sessions scheduled this week][cws] and you can look for announcements from us on twitter or check the `#wg-async-foundations` stream on [the rust-lang Zulip][z].
 
+If you'd like a bit more inspiration, then you can join [Ryan Levick] and [I] at one of our vision doc writing sessions. We have [more sessions scheduled this week][cws] and you can look for announcements from us on twitter or check the `#wg-async-foundations` stream on [the rust-lang Zulip][z].
 [vd]: https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision
 [sq]: https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html
 [sf]: https://rust-lang.github.io/wg-async-foundations/vision/shiny_future.html
