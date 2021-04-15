@@ -10,8 +10,36 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-04-14T16:03:10+00:00</updated>
+    <updated>2021-04-15T16:36:34+00:00</updated>
 
+    
+    <entry>
+        <title>Rust Compiler April Steering Cycle</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/04/15/compiler-team-april-steering-cycle.html" type="text/html" title="Rust Compiler April Steering Cycle" />
+        <published>2021-04-15T00:00:00+00:00</published>
+        <updated>2021-04-15T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/04/15/compiler-team-april-steering-cycle.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/04/15/compiler-team-april-steering-cycle.html">&lt;p&gt;On &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/96901planningmeeting20210409.html&quot;&gt;Friday, April 9th&lt;/a&gt;, the Rust Compiler team had a planning meeting for the April steering cycle.&lt;/p&gt;
+&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
+it is going to use its scheduled steering and design meeting time over the next
+three Fridays.&lt;/p&gt;
+&lt;p&gt;On Friday, 23 April 2021, we will be having a meeting to discuss a
+set of proposed &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/424&quot;&gt;guiding principles&lt;/a&gt; for compiler contributors.&lt;/p&gt;
+&lt;p&gt;On Friday, 30 April 2021, we will be having a meeting to discuss the
+process used for weekly compiler &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/400&quot;&gt;performance triage&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Both meetings will run from 2pm to 3pm GMT, and will take place on the
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;(Also: we neglected to post an announcement at the outset of the March steering
+cycle. In March we had two meetings: the first was a &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/412&quot;&gt;retrospective&lt;/a&gt; on the
+memshrink development sprint that we had over the first week of March, and the
+second was a meeting to &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/416&quot;&gt;discuss&lt;/a&gt; the static vs dynamic linking
+defaults for our musl libc targets.)&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Felix Klock</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Core Team updates</title>
@@ -500,30 +528,6 @@ please join us in &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/
 
         <author>
             <name>Kyle Strand</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Changes to the Rustdoc team</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/01/19/changes-to-rustdoc-team.html" type="text/html" title="Changes to the Rustdoc team" />
-        <published>2021-01-19T00:00:00+00:00</published>
-        <updated>2021-01-19T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/01/19/changes-to-rustdoc-team.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/01/19/changes-to-rustdoc-team.html">&lt;p&gt;Recently, there have been a lot of improvements in rustdoc. It was possible thanks to our new contributors. In light of these recent contributions, a few changes were made in the rustdoc team.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#adding-a-new-team-leader&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;adding-a-new-team-leader&quot;&gt;&lt;/a&gt;Adding a new team leader&lt;/h2&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/jyn514&quot;&gt;Joshua&lt;/a&gt; has been helping me &lt;strong&gt;a lot&lt;/strong&gt; on the leading parts by tagging issues and mentoring newcomers. But at the same time, he initiated great changes in the rustdoc codebase that led to huge performance improvements, he finished the &amp;quot;intra doc link&amp;quot; features which is now stable after years of instability (more information &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustdoc/linking-to-items-by-name.html&quot;&gt;here&lt;/a&gt;). He also did multiple additional things but let&#x27;s stop the listing here. :)&lt;/p&gt;
-&lt;p&gt;Overall, he&#x27;s been an enormous help and making him co-lead is just making official everything&#x27;s he&#x27;s been doing since he joined the rustdoc team (and even before!). I&#x27;m glad to have him on the team and as co-lead.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#membership-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;membership-changes&quot;&gt;&lt;/a&gt;Membership Changes&lt;/h2&gt;
-&lt;p&gt;In addition to the new co-leadership nomination, we also have some new rustdoc team members to announce: &lt;a href&#x3D;&quot;https://github.com/camelid&quot;&gt;&lt;strong&gt;@camelid&lt;/strong&gt;&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/Nemo157&quot;&gt;&lt;strong&gt;@Nemo157&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/camelid&quot;&gt;&lt;strong&gt;@camelid&lt;/strong&gt;&lt;/a&gt; did a huge number of contributions on rustdoc, helping on the cleanup and fixing bugs.&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/Nemo157&quot;&gt;&lt;strong&gt;@Nemo157&lt;/strong&gt;&lt;/a&gt; helped a lot on the &amp;quot;front-end&amp;quot; part of rustdoc (i.e. HTML/CSS/JS), not only reviewing but also fixing bugs and improving the current code.&lt;/p&gt;
-&lt;p&gt;Both of them have been contributing for a long time and we&#x27;re really glad to (finally) have them on board.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;With all these great new onboardings, we&#x27;re expecting rustdoc to improve at much faster rate. More to come soon!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Guillaume Gomez</name>
         </author>
     </entry>
     
