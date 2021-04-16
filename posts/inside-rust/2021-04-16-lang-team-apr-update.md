@@ -29,7 +29,8 @@ The minutes contain [links the tracking issues for each project](https://github.
     * implementation is working quite well and migration is nearly implemented also
 * [ffi-unwind](https://github.com/rust-lang/lang-team/issues/19#issuecomment-814581675):
     * C-unwind implementation has landed
-    * there is some ongoing twork to 
+    * there is some ongoing work to fix some bugs in the initial implementation
+    * looking at potentially moving to considering setjmp/longjmp
 * [nested pattern stabilization](https://github.com/rust-lang/rust/pull/83386#issuecomment-819719603) has almost completed
 
 ## Upcoming design meetings
@@ -45,5 +46,4 @@ We planned three design meetings for March. Our meetings are open for anyone to 
     * If it is not sent out by then, the meeting will be canceled. This gives folks 24 hour notice.
 * There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
     * However, there is no rule **against** reading the document beforehand and provided feedback or advice on how to improve it.
-
 
