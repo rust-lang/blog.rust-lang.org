@@ -35,7 +35,7 @@ The minutes contain [links the tracking issues for each project](https://github.
 
 ## Upcoming design meetings
 
-We planned three design meetings for March. Our meetings are open for anyone to join and observe. They are also typically recorded and posted to YouTube. Ping nikomatsakis or joshtriplett for info about attending.
+We planned two design meetings for April. Our meetings are open for anyone to join and observe. They are also typically recorded and posted to YouTube. Ping nikomatsakis or joshtriplett for info about attending.
 
 * April 21 -- proposed "wasm" ABI ([lang-team#90](https://github.com/rust-lang/lang-team/issues/90)), featuring special guest Alex Crichton
 * April 28 -- generators ([lang-team#92](https://github.com/rust-lang/lang-team/issues/92)), featuring special guest Esteban Küber
