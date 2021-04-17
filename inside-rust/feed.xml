@@ -10,8 +10,70 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-04-15T16:36:34+00:00</updated>
+    <updated>2021-04-17T19:15:15+00:00</updated>
 
+    
+    <entry>
+        <title>Lang team April update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/04/17/lang-team-apr-update.html" type="text/html" title="Lang team April update" />
+        <published>2021-04-17T00:00:00+00:00</published>
+        <updated>2021-04-17T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/04/17/lang-team-apr-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/04/17/lang-team-apr-update.html">&lt;p&gt;This week the lang team held its April planning meeting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-04-14-Planning-Meeting.md&quot;&gt;minutes&lt;/a&gt;). We normally hold these meetings on the first Wednesday of every month, but this month we were delayed by one week due to scheduling conflicts.&lt;/p&gt;
+&lt;p&gt;The planning meeting is used for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Checking in on the status of our active projects&lt;/li&gt;
+&lt;li&gt;Planning the design meetings for the remainder of the month&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After each meeting, we post an update (like this one!) with notes and meeting announcements.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#update-from-active-projects&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;update-from-active-projects&quot;&gt;&lt;/a&gt;Update from active projects&lt;/h2&gt;
+&lt;p&gt;Did you know that you can see the lang team&#x27;s active projects on our &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/projects/2&quot;&gt;project board&lt;/a&gt;? We&#x27;re still experimenting and evolving the setup, but the goal is that it should give you a quick overview of what kinds of things the lang team is focused on, and what stage they are in their development.&lt;/p&gt;
+&lt;p&gt;The minutes contain &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-04-14-Planning-Meeting.md#updates-from-active-groups-and-projects&quot;&gt;links the tracking issues for each project&lt;/a&gt; and those issues contain status reports. Here are some interesting updates:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/60#issuecomment-814509681&quot;&gt;never type update&lt;/a&gt;:
+&lt;ul&gt;
+&lt;li&gt;we have a general plan for hybrid fallback that we think will allow us to stabilize &lt;code&gt;!&lt;/code&gt; at long last without breaking existing crates&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/50#issuecomment-814526085&quot;&gt;improved closure capture (RFC 2229)&lt;/a&gt;:
+&lt;ul&gt;
+&lt;li&gt;implementation is working quite well and migration is nearly implemented also&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/19#issuecomment-814581675&quot;&gt;ffi-unwind&lt;/a&gt;:
+&lt;ul&gt;
+&lt;li&gt;C-unwind implementation has landed&lt;/li&gt;
+&lt;li&gt;there is some ongoing work to fix some bugs in the initial implementation&lt;/li&gt;
+&lt;li&gt;looking at potentially moving to considering setjmp/longjmp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/83386#issuecomment-819719603&quot;&gt;nested pattern stabilization&lt;/a&gt; has almost completed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
+&lt;p&gt;We planned two design meetings for April. Our meetings are open for anyone to join and observe. They are also typically recorded and posted to YouTube. Ping nikomatsakis or joshtriplett for info about attending.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;April 21 -- proposed &amp;quot;wasm&amp;quot; ABI (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/90&quot;&gt;lang-team#90&lt;/a&gt;), featuring special guest Alex Crichton&lt;/li&gt;
+&lt;li&gt;April 28 -- generators (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/92&quot;&gt;lang-team#92&lt;/a&gt;), featuring special guest Esteban Küber&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#design-meeting-expectations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-meeting-expectations&quot;&gt;&lt;/a&gt;Design meeting expectations&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The document for the meeting must be prepared by the triage meeting on Tuesday and posted to the tracking issue.
+&lt;ul&gt;
+&lt;li&gt;If it is not sent out by then, the meeting will be canceled. This gives folks 24 hour notice.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
+&lt;ul&gt;
+&lt;li&gt;However, there is no rule &lt;strong&gt;against&lt;/strong&gt; reading the document beforehand and providing feedback or advice on how to improve it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Rust Compiler April Steering Cycle</title>
@@ -359,175 +421,6 @@ Jack is also the co-lead of the &lt;a href&#x3D;&quot;https://rust-lang.github.i
 
         <author>
             <name>Wesley Wiser</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Rust &amp; the case of the disappearing stack frames</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/01/26/ffi-unwind-longjmp.html" type="text/html" title="Rust &amp; the case of the disappearing stack frames" />
-        <published>2021-01-26T00:00:00+00:00</published>
-        <updated>2021-01-26T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/01/26/ffi-unwind-longjmp.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/01/26/ffi-unwind-longjmp.html">&lt;p&gt;Now that the &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-ffi-unwind&quot;&gt;FFI-unwind Project Group&lt;/a&gt; has merged &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md&quot;&gt;an
-RFC&lt;/a&gt; specifying the &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; ABI and removing some instances
-of undefined behavior in the &lt;code&gt;&amp;quot;C&amp;quot;&lt;/code&gt; ABI, we are ready to establish new goals for
-the group.&lt;/p&gt;
-&lt;p&gt;Our most important task, of course, is to implement the newly-specified
-behavior. This work has been undertaken by Katelyn Martin and can be followed
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/76570&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The requirements of our current charter, and the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/2797-project-ffi-unwind.md&quot;&gt;RFC creating the
-group&lt;/a&gt;, are effectively fulfilled by the specification of &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt;, so one option is to simply wind down the project group. While
-drafting the &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; RFC, however, we discovered that the existing
-guarantees around &lt;code&gt;longjmp&lt;/code&gt; and similar functions could be improved. Although
-this is not strictly related to unwinding&lt;sup&gt;&lt;a href&#x3D;&quot;#longjmp-unwind&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, they
-are closesly related: they are both &amp;quot;non-local&amp;quot; control-flow mechanisms that
-prevent functions from returning normally. Because one of the goals of the Rust
-project is for Rust to interoperate with existing C-like languages, and these
-control-flow mechanisms are widely used in practice, we believe that Rust must
-have some level of support for them.&lt;/p&gt;
-&lt;p&gt;This blog post will explain the problem space. If you&#x27;re interested in helping
-specify this behavior, please come join us in &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/210922-project-ffi-unwind/topic/welcome.2C.20redux/near/216807277&quot;&gt;our Zulip
-stream&lt;/a&gt;!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#longjmp-and-its-ilk&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;longjmp-and-its-ilk&quot;&gt;&lt;/a&gt;&lt;code&gt;longjmp&lt;/code&gt; and its ilk&lt;/h2&gt;
-&lt;p&gt;Above, I mentioned &lt;code&gt;longjmp&lt;/code&gt; and &amp;quot;similar functions&amp;quot;. Within the context of the
-&lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; PR, this referred to functions that have different implementations
-on different platforms, and which, on &lt;em&gt;some&lt;/em&gt; platforms, rely on &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md#forced-unwinding&quot;&gt;forced
-unwinding&lt;/a&gt;. In our next specification effort, however, we
-would like to ignore the connection to unwinding entirely, and define a class
-of functions with the following characteristic:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;a function that causes a &amp;quot;jump&amp;quot; in control flow by deallocating some number of
-stack frames without performing any additional &amp;quot;clean-up&amp;quot; such as running
-destructors&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;This is the class of functions we would like to address. The other primary
-example is &lt;code&gt;pthread_exit&lt;/code&gt;. As part of our specification, we would like to
-create a name for this type of function, but we have not settled on one yet;
-for now, we are referring to them as &amp;quot;cancelable&amp;quot;, &amp;quot;&lt;code&gt;longjmp&lt;/code&gt;-like&amp;quot;, or
-&amp;quot;stack-deallocating&amp;quot; functions.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#our-constraints&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;our-constraints&quot;&gt;&lt;/a&gt;Our constraints&lt;/h2&gt;
-&lt;p&gt;Taking a step back, we have two mandatory constraints on our design:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;There must be sound way to call &lt;code&gt;libc&lt;/code&gt; functions that may &lt;code&gt;pthread_cancel&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;There must be a sound way for Rust code to invoke C code that may &lt;code&gt;longjmp&lt;/code&gt;
-over Rust frames.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;In addition, we would like to adhere to several design principles:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The specified behavior can&#x27;t be target-platform-specific; in other words, our
-specification of Rust&#x27;s interaction with &lt;code&gt;longjmp&lt;/code&gt; should not depend on
-whether &lt;code&gt;longjmp&lt;/code&gt; deallocates frames or initiates a forced-unwind.
-Optimizations, however, &lt;em&gt;can&lt;/em&gt; be target-platform-specific.&lt;/li&gt;
-&lt;li&gt;There should be no difference in the specified behavior of frame-deallocation
-performed by &lt;code&gt;longjmp&lt;/code&gt; versus that performed by &lt;code&gt;pthread_cancel&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;We will only permit canceling POFs (&amp;quot;Plain Old Frames&amp;quot;, explained in the next
-section).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#pofs-and-stack-deallocating-functions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;pofs-and-stack-deallocating-functions&quot;&gt;&lt;/a&gt;POFs and stack-deallocating functions&lt;/h2&gt;
-&lt;p&gt;The &lt;code&gt;&amp;quot;C unwind&amp;quot;&lt;/code&gt; RFC introduced a new concept designed to help us deal with
-force-unwinding or stack-deallocating functions: the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md#plain-old-frames&quot;&gt;POF, or &amp;quot;Plain Old
-Frame&amp;quot;&lt;/a&gt;. These are frames that can be trivially deallocated,
-i.e., they do no &amp;quot;cleanup&amp;quot; (such as running &lt;code&gt;Drop&lt;/code&gt; destructors) before
-returning.&lt;/p&gt;
-&lt;p&gt;From the definition, it should be clear that it is dangerous to call a
-stack-deallocating function in a context that could destroy a non-POF stack
-frame. A simple specification for Rust&#x27;s interaction with stack-deallocating
-functions, then, could be that they are safe to call as long as only POFs are
-deallocated. This would make Rust&#x27;s guarantees for &lt;code&gt;longjmp&lt;/code&gt; essentially the
-same as C++&#x27;s.&lt;/p&gt;
-&lt;p&gt;For now, however, we are considering POFs to be &amp;quot;necessary but not sufficient.&amp;quot;
-We believe that a more restrictive specification may provide the following
-advantages:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;more opportunities for helpful compiler warnings or errors to prevent misuse
-of stack-deallocation functions&lt;/li&gt;
-&lt;li&gt;semantic tracatbility: we can make reliance on stack-frame-deallocation
-visible for all functions involved&lt;/li&gt;
-&lt;li&gt;increased optimization potential when cleanup is &amp;quot;guaranteed&amp;quot; (i.e., the
-compiler may turn a POF into a non-POF if it knows that this is safe and that
-the newly inserted cleanup operation is necessary for an optimization)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#annotating-pofs&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;annotating-pofs&quot;&gt;&lt;/a&gt;Annotating POFs&lt;/h2&gt;
-&lt;p&gt;Our current plan is to introduce a new annotation for frames that are intended
-to be safe to cancel. These functions, of course, must be POFs. The
-annotation would be &amp;quot;transitive&amp;quot;, just like &lt;code&gt;async&lt;/code&gt;: functions without this
-annotation either must not invoke any annotated functions or must guarantee
-that they will cause the stack-deallocation to terminate (for instance, a
-non-POF, non-annotated function may call &lt;code&gt;setjmp&lt;/code&gt;).&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#open-questions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;open-questions&quot;&gt;&lt;/a&gt;Open questions&lt;/h3&gt;
-&lt;p&gt;The name of the annotation should be based on the terminology used to refer to
-functions that are safe to deallocate. Because this terminology is not
-finalized, we do not yet have a name for the annotation.&lt;/p&gt;
-&lt;p&gt;It is also not yet clear whether annotated functions should be able to invoke
-any functions without this annotation. As long as the function call does not
-return a new &lt;code&gt;Drop&lt;/code&gt; resource (making the annotated function no longer a POF),
-it may be safe, as long as we guarantee that the annotated function cannot be
-canceled while the un-annotated function is still on the stack; i.e.,
-cancelation must happen during an active call to an annotated cancelable
-function.&lt;/p&gt;
-&lt;p&gt;Most importantly, we do not have a plan for how to indicate that a
-non-annotated function can safely call an annotated function. The example of
-using &lt;code&gt;setjmp&lt;/code&gt; to ensure that a &lt;code&gt;longjmp&lt;/code&gt; will not discard a stack frame is
-non-trivial:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;setjmp&lt;/code&gt; is not a function but a C macro. There is no way to call it directly
-in Rust.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;setjmp&lt;/code&gt; does not prevent arbitrary &lt;code&gt;longjmp&lt;/code&gt;s from crossing over a frame,
-the way C++&#x27;s &lt;code&gt;catch&lt;/code&gt; can catch any exception. Instead, &lt;code&gt;setjmp&lt;/code&gt; creates an
-object of type &lt;code&gt;jmp_buf&lt;/code&gt;, which must be passed to &lt;code&gt;longjmp&lt;/code&gt;; this causes the
-jump to stop at the corresponding &lt;code&gt;setjmp&lt;/code&gt; call.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And, of course, &lt;code&gt;setjmp&lt;/code&gt;/&lt;code&gt;longjmp&lt;/code&gt; is not the only example of such a mechanism!
-Thus, there is probably no way for the compiler to guarantee that this is safe,
-and it&#x27;s unclear what heuristics could be applied to make it as safe as
-possible.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#examples&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;examples&quot;&gt;&lt;/a&gt;Examples&lt;/h3&gt;
-&lt;p&gt;Let us use &lt;code&gt;#[pof-longjmp]&lt;/code&gt; as a placeholder for the annotation indicating a
-function that can be safely deallocated, and let us assume that the following
-function is a wrapper around &lt;code&gt;longjmp&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;extern &amp;quot;C&amp;quot; {
-    #[pof-longjmp]
-    fn longjmp(CJmpBuf) -&amp;gt; !;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The compiler would not allow this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn has_drop(jmp_buf: CJmpBuf) {
-    let s &#x3D; &amp;quot;string data&amp;quot;.to_owned();
-    unsafe { longjmp(jmp_buf); }
-    println!(&amp;quot;{}&amp;quot;, s);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here, &lt;code&gt;s&lt;/code&gt; implements &lt;code&gt;Drop&lt;/code&gt;, so &lt;code&gt;has_drop&lt;/code&gt; is not a POF. Since &lt;code&gt;longjmp&lt;/code&gt; is
-annotated &lt;code&gt;#[pof-longjmp]&lt;/code&gt;, the un-annotated function &lt;code&gt;has_drop&lt;/code&gt; can&#x27;t call it
-(even in an &lt;code&gt;unsafe&lt;/code&gt; block). If, however, &lt;code&gt;has_drop&lt;/code&gt; is annotated:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[pof-longjmp]
-fn has_drop(jmp_buf: CJmpBuf) {
-    let s &#x3D; &amp;quot;string data&amp;quot;.to_owned();
-    unsafe { longjmp(jmp_buf); }
-    println!(&amp;quot;{}&amp;quot;, s);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;...there is a different error: &lt;code&gt;#[pof-longjmp]&lt;/code&gt; can only be applied to POFs,
-and since &lt;code&gt;s&lt;/code&gt; implements &lt;code&gt;Drop&lt;/code&gt;, &lt;code&gt;has_drop&lt;/code&gt; is not a POF.&lt;/p&gt;
-&lt;p&gt;An example of a permissible &lt;code&gt;longjmp&lt;/code&gt; call would be:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[pof-longjmp]
-fn no_drop(jmp_buf: CJmpBuf) {
-    let s &#x3D; &amp;quot;string data&amp;quot;;
-    unsafe { longjmp(jmp_buf); }
-    println!(&amp;quot;{}&amp;quot;, s);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#join-us&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;join-us&quot;&gt;&lt;/a&gt;Join us!&lt;/h2&gt;
-&lt;p&gt;If you would like to help us create this specification and write an RFC for it,
-please join us in &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/210922-project-ffi-unwind/topic/welcome.2C.20redux/near/216807277&quot;&gt;zulip&lt;/a&gt;!&lt;/p&gt;
-&lt;h4&gt;&lt;a href&#x3D;&quot;#footnotes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;footnotes&quot;&gt;&lt;/a&gt;Footnotes&lt;/h4&gt;
-&lt;p&gt;&lt;a name&#x3D;&quot;longjmp-unwind&quot;&gt;1&lt;/a&gt;: As mentioned in the RFC, on Windows,
-&lt;code&gt;longjmp&lt;/code&gt; actually &lt;em&gt;is&lt;/em&gt; an unwinding operation. On other platforms, however,
-&lt;code&gt;longjmp&lt;/code&gt; is unrelated to unwinding.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Kyle Strand</name>
         </author>
     </entry>
     
