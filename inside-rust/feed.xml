@@ -10,8 +10,30 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-04-17T19:15:15+00:00</updated>
+    <updated>2021-04-20T17:59:10+00:00</updated>
 
+    
+    <entry>
+        <title>Jacob Hoffman-Andrews joins the Rustdoc team</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/04/20/jsha-rustdoc-member.html" type="text/html" title="Jacob Hoffman-Andrews joins the Rustdoc team" />
+        <published>2021-04-20T00:00:00+00:00</published>
+        <updated>2021-04-20T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/04/20/jsha-rustdoc-member.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/04/20/jsha-rustdoc-member.html">&lt;p&gt;Hello everyone, please welcome &lt;a href&#x3D;&quot;https://github.com/jsha&quot;&gt;Jacob Hoffman-Andrews&lt;/a&gt; to the rustdoc team!&lt;/p&gt;
+&lt;p&gt;Jacob Hoffman-Andrews (&lt;a href&#x3D;&quot;https://github.com/jsha&quot;&gt;@jsha&lt;/a&gt;) has been contributing a lot on rustdoc front-end. Thanks to him, the pageload of the rustdoc pages is much faster. Here is a non-exhaustive list of the stuff he&#x27;s done recently:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The huge search index is now only loaded &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/82310&quot;&gt;when needed&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The pageload has &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/82315&quot;&gt;has been optimized a bunch&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Rustdoc&#x27;s show/hide toggles &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/83332&quot;&gt;are being converted to pure HTML&lt;/a&gt;, reducing complexity and improving pageload performance.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And this is just an overview!&lt;/p&gt;
+&lt;p&gt;We are really happy to have Jacob joining us, so thanks a lot for your work and congratulations!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Guillaume Gomez</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Lang team April update</title>
@@ -400,27 +422,6 @@ can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/
 
         <author>
             <name>Niko Matsakis</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Welcoming David Wood to compiler team and Jack Huey to compiler-contributors</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/02/01/davidtwco-jackhuey-compiler-members.html" type="text/html" title="Welcoming David Wood to compiler team and Jack Huey to compiler-contributors" />
-        <published>2021-02-01T00:00:00+00:00</published>
-        <updated>2021-02-01T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/02/01/davidtwco-jackhuey-compiler-members.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/02/01/davidtwco-jackhuey-compiler-members.html">&lt;p&gt;Please welcome &lt;a href&#x3D;&quot;https://github.com/davidtwco&quot;&gt;David Wood&lt;/a&gt; to the compiler team and &lt;a href&#x3D;&quot;https://github.com/jackh726&quot;&gt;Jack Huey&lt;/a&gt; to the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2689-compiler-team-contributors.html&quot;&gt;compiler-contributors&lt;/a&gt; group!&lt;/p&gt;
-&lt;p&gt;David Wood (&lt;a href&#x3D;&quot;https://github.com/davidtwco&quot;&gt;@davidtwco&lt;/a&gt;) has been a frequent contributor to Rust in many different parts of the compiler.
-Much of David&#x27;s recent work has been focused on &lt;a href&#x3D;&quot;https://davidtw.co/media/masters_dissertation.pdf&quot;&gt;polymorphisation&lt;/a&gt; which allows rustc to reduce the number of duplicated generic functions in certain situations and on adding &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/77117&quot;&gt;split DWARF&lt;/a&gt; support to the LLVM backend.
-Previously, David has worked on numerous diagnostic improvements, internal compiler error fixes and the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.html&quot;&gt;non-lexical lifetimes&lt;/a&gt; initiative.&lt;/p&gt;
-&lt;p&gt;Jack Huey (&lt;a href&#x3D;&quot;https://github.com/jackh726&quot;&gt;@jackh726&lt;/a&gt;) has been a major contributor to the &lt;a href&#x3D;&quot;https://github.com/rust-lang/chalk&quot;&gt;Chalk&lt;/a&gt; project which is a re-implementation of the Rust trait system using logical-programming constructs with the eventual goal of replacing the current system.
-In addition to Chalk, Jack has also worked on various refactorings to make the rustc trait code more like Chalk.
-Jack is also the co-lead of the &lt;a href&#x3D;&quot;https://rust-lang.github.io/compiler-team/working-groups/traits/&quot;&gt;traits working group&lt;/a&gt; which is coordinating this effort.&lt;/p&gt;
-&lt;p&gt;Congratulations &lt;a href&#x3D;&quot;https://github.com/davidtwco&quot;&gt;David Wood&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/jackh726&quot;&gt;Jack Huey&lt;/a&gt; and thanks!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Wesley Wiser</name>
         </author>
     </entry>
     
