@@ -8,7 +8,7 @@ team: the compiler team <https://rust-lang.org/governance/teams/compiler>
 
 I am pleased to announce that [Aaron Hill] has been made a full member of the [compiler team].
 
-[Aaron Hill] ([@Aaron1011]) has been contributing to many different parts of the compiler since his start in 2017.
+Aaron Hill ([@Aaron1011]) has been contributing to many different parts of the compiler since his start in 2017.
 Recently, Aaron has been working on finding and fixing bugs and correctness issues in the incremental system, cleanups and improvements to macro expansion and hygiene, as well as miscellaneous bug fixes.
 Beyond the compiler, Aaron has also implemented support for [unwinding in Miri], [generating documentation for auto-traits], and [future incompatibility reporting in Cargo].
 
