@@ -10,8 +10,26 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-04-20T17:59:10+00:00</updated>
+    <updated>2021-04-26T20:18:34+00:00</updated>
 
+    
+    <entry>
+        <title>Congrats to compiler team member Aaron Hill</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/04/26/aaron-hill-compiler-team.html" type="text/html" title="Congrats to compiler team member Aaron Hill" />
+        <published>2021-04-26T00:00:00+00:00</published>
+        <updated>2021-04-26T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/04/26/aaron-hill-compiler-team.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/04/26/aaron-hill-compiler-team.html">&lt;p&gt;I am pleased to announce that &lt;a href&#x3D;&quot;https://github.com/aaron1011&quot;&gt;Aaron Hill&lt;/a&gt; has been made a full member of the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/compiler&quot;&gt;compiler team&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Aaron Hill (&lt;a href&#x3D;&quot;https://github.com/aaron1011&quot;&gt;@Aaron1011&lt;/a&gt;) has been contributing to many different parts of the compiler since his start in 2017.
+Recently, Aaron has been working on finding and fixing bugs and correctness issues in the incremental system, cleanups and improvements to macro expansion and hygiene, as well as miscellaneous bug fixes.
+Beyond the compiler, Aaron has also implemented support for &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/60026&quot;&gt;unwinding in Miri&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/47833&quot;&gt;generating documentation for auto-traits&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8825&quot;&gt;future incompatibility reporting in Cargo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Congratulations Aaron and thanks for all of your contributions to the project!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Wesley Wiser</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Jacob Hoffman-Andrews joins the Rustdoc team</title>
@@ -368,60 +386,6 @@ can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/
 
         <author>
             <name>Pietro Albini</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Lang team February update</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/02/03/lang-team-feb-update.html" type="text/html" title="Lang team February update" />
-        <published>2021-02-03T00:00:00+00:00</published>
-        <updated>2021-02-03T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/02/03/lang-team-feb-update.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/02/03/lang-team-feb-update.html">&lt;p&gt;Today the lang team held its first planning meeting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-02-03-Planning-Meeting.md&quot;&gt;minutes&lt;/a&gt;). From now on, we&#x27;re going to hold these meetings on the first Wednesday of every month.&lt;/p&gt;
-&lt;p&gt;The planning meeting is used for:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Checking in on the status of our active projects&lt;/li&gt;
-&lt;li&gt;Planning the design meetings for the remainder of the month&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;After each meeting, we plan to post an update (like this one!) with notes and meeting announcements.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#update-from-active-projects&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;update-from-active-projects&quot;&gt;&lt;/a&gt;Update from active projects&lt;/h2&gt;
-&lt;p&gt;Did you know that you can see the lang team&#x27;s active projects on our &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/projects/2&quot;&gt;project board&lt;/a&gt;? We&#x27;re still experimenting and evolving the setup, but the goal is that it should give you a quick overview of what kinds of things the lang team is focused on, and what stage they are in their development. Our minutes contain a &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-02-03-Planning-Meeting.md#project-updates-and-discussion&quot;&gt;writeup for each active project&lt;/a&gt;, but let me call out a few highlights here:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;async foundations:
-&lt;ul&gt;
-&lt;li&gt;continued progress on polish, new traits&lt;/li&gt;
-&lt;li&gt;making plans to stabilize async functions in traits&lt;/li&gt;
-&lt;li&gt;working on a &lt;a href&#x3D;&quot;https://hackmd.io/p6cmRZ9ZRQ-F1tlhGaN9rg&quot;&gt;vision document&lt;/a&gt; that lays out a multi-year vision for how async I/O should look/feel in Rust&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;const generics:
-&lt;ul&gt;
-&lt;li&gt;min const generics is stable in nightly, will be coming to a stable release soon&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;rfc 2229 (&amp;quot;minimal closure capture&amp;quot;):
-&lt;ul&gt;
-&lt;li&gt;continued progress on the implementation, things are going well&lt;/li&gt;
-&lt;li&gt;we will likely add a &lt;code&gt;capture!&lt;/code&gt; macro to use for migration; it would force the capture of a particular local variable (and not some subpath of it)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;inline assembly
-&lt;ul&gt;
-&lt;li&gt;we are investigating stabilising inline assembly for certain architectures (but not all)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
-&lt;p&gt;We planned three design meetings for February. Our meetings are typically open for anyone to observe, although we have one closed meeting this week. They are also typically recorded and posted to YouTube. Ping nikomatsakis or joshtriplett for info about attending.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Feb 10 [CLOSED]: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/81&quot;&gt;Growing the team&lt;/a&gt;. The plan is to talk about our plans to grow the team and recruit new members. &lt;strong&gt;Closed because we expect some frank talk about who might be a good candidate.&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Feb 17: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/79&quot;&gt;Improving trust in the Rust compiler&lt;/a&gt;, discussing the Ferrocene proposal and the semantics of MIR.&lt;/li&gt;
-&lt;li&gt;Feb 24: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/83&quot;&gt;2021 idiom lint overview&lt;/a&gt;, discussing the various 2018 idiom lints and whether they ought to be included in 2021.&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>Niko Matsakis</name>
         </author>
     </entry>
     
