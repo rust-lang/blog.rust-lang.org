@@ -71,7 +71,17 @@
     </div>
 
     <div class="post">
-      <p>The rustup working group is happy to announce the release of rustup version 1.24.0. <a href="https://rustup.rs">Rustup</a> is the recommended tool to install <a href="https://www.rust-lang.org">Rust</a>, a programming language that is empowering everyone to build reliable and efficient software.</p>
+      <blockquote>
+<p>Shortly after publishing the release we got reports of <a href="https://github.com/rust-lang/rustup/issues/2737">a regression</a>
+preventing users from running <code>rustfmt</code> and <code>cargo fmt</code> after upgrading to
+Rustup 1.24.0. To limit the damage we <strong>reverted</strong> the release to version
+1.23.1.</p>
+<p>If you have been affected by this issue you can revert to version 1.23.1 by
+running the following command:</p>
+<pre><code>rustup self update
+</code></pre>
+</blockquote>
+<p>The rustup working group is happy to announce the release of rustup version 1.24.0. <a href="https://rustup.rs">Rustup</a> is the recommended tool to install <a href="https://www.rust-lang.org">Rust</a>, a programming language that is empowering everyone to build reliable and efficient software.</p>
 <p>If you have a previous version of rustup installed, getting rustup 1.24.0 is as easy as closing your IDE and running:</p>
 <pre><code>rustup self update
 </code></pre>
