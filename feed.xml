@@ -10,8 +10,70 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-04-26T20:18:35+00:00</updated>
+    <updated>2021-04-27T15:07:49+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rustup 1.24.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/04/27/Rustup-1.24.0.html" type="text/html" title="Announcing Rustup 1.24.0" />
+        <published>2021-04-27T00:00:00+00:00</published>
+        <updated>2021-04-27T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/04/27/Rustup-1.24.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/04/27/Rustup-1.24.0.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.24.0. &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.24.0 is as easy as closing your IDE and running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup self update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1240&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1240&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.24.0&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#support-of-rust-toolchaintoml-as-a-filename-for-specifying-toolchains&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;support-of-rust-toolchaintoml-as-a-filename-for-specifying-toolchains&quot;&gt;&lt;/a&gt;Support of &lt;code&gt;rust-toolchain.toml&lt;/code&gt; as a filename for specifying toolchains.&lt;/h3&gt;
+&lt;p&gt;Last year we released a new &lt;code&gt;toml&lt;/code&gt; format for the &lt;code&gt;rust-toolchain&lt;/code&gt; file. In order to bring Rustup closer into line with Cargo&#x27;s behaviour around &lt;code&gt;.cargo/config&lt;/code&gt; we now support the &lt;code&gt;.toml&lt;/code&gt; extension for that file. If you call the toolchain file &lt;code&gt;rust-toolchain.toml&lt;/code&gt; then you &lt;em&gt;must&lt;/em&gt; use the &lt;code&gt;toml&lt;/code&gt; format, rather than the legacy one-line format.&lt;/p&gt;
+&lt;p&gt;If both &lt;code&gt;rust-toolchain&lt;/code&gt; and &lt;code&gt;rust-toolchain.toml&lt;/code&gt; are present, then the former will win out over the latter to ensure compatibility between Rustup versions.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#better-support-for-low-memory-systems&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;better-support-for-low-memory-systems&quot;&gt;&lt;/a&gt;Better support for low-memory systems&lt;/h3&gt;
+&lt;p&gt;Rustup&#x27;s component unpacker has been changed to have a smaller memory footprint when unpacking large components. This should permit users of memory-constrained systems such as some Raspberry Pi systems to install newer Rust toolchains which contain particularly large files.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#better-support-for-windows-addremove-programs&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;better-support-for-windows-addremove-programs&quot;&gt;&lt;/a&gt;Better support for Windows Add/Remove programs&lt;/h3&gt;
+&lt;p&gt;Fresh installations of Rustup on Windows will now install themselves into the program list so that you can trigger the uninstallation of Rustup via the Add/Remove programs dialogs similar to any other Windows program.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This will only take effect on installation, so you will need to rerun &lt;code&gt;rustup-init.exe&lt;/code&gt; if you want this on your PC.&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are more changes in rustup 1.24.0: check them out in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/blob/stable/CHANGELOG.md&quot;&gt;changelog&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Rustup&#x27;s documentation is also available in &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/&quot;&gt;the rustup book&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
+&lt;p&gt;Thanks to all the contributors who made rustup 1.24.0 possible!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alex Chan&lt;/li&gt;
+&lt;li&gt;Aloïs Micard&lt;/li&gt;
+&lt;li&gt;Andrew Norton&lt;/li&gt;
+&lt;li&gt;Avery Harnish&lt;/li&gt;
+&lt;li&gt;chansuke&lt;/li&gt;
+&lt;li&gt;Daniel Alley&lt;/li&gt;
+&lt;li&gt;Daniel Silverstone&lt;/li&gt;
+&lt;li&gt;Eduard Miller&lt;/li&gt;
+&lt;li&gt;Eric Huss&lt;/li&gt;
+&lt;li&gt;est31&lt;/li&gt;
+&lt;li&gt;Gareth Hubball&lt;/li&gt;
+&lt;li&gt;Gurkenglas&lt;/li&gt;
+&lt;li&gt;Jakub Stasiak&lt;/li&gt;
+&lt;li&gt;Joshua Nelson&lt;/li&gt;
+&lt;li&gt;Jubilee (workingjubilee)&lt;/li&gt;
+&lt;li&gt;kellda&lt;/li&gt;
+&lt;li&gt;Michael Cooper&lt;/li&gt;
+&lt;li&gt;Philipp Oppermann&lt;/li&gt;
+&lt;li&gt;Robert Collins&lt;/li&gt;
+&lt;li&gt;SHA Miao&lt;/li&gt;
+&lt;li&gt;skim (sl4m)&lt;/li&gt;
+&lt;li&gt;Tudor Brindus&lt;/li&gt;
+&lt;li&gt;Vasili (3point2)&lt;/li&gt;
+&lt;li&gt;наб (nabijaczleweli)&lt;/li&gt;
+&lt;li&gt;二手掉包工程师 (hi-rustin)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>The Rustup Working Group</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Brainstorming Async Rust&#x27;s Shiny Future</title>
@@ -741,111 +803,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.49
 
         <author>
             <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Launching the Lock Poisoning Survey</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/12/11/lock-poisoning-survey.html" type="text/html" title="Launching the Lock Poisoning Survey" />
-        <published>2020-12-11T00:00:00+00:00</published>
-        <updated>2020-12-11T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/12/11/lock-poisoning-survey.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/12/11/lock-poisoning-survey.html">&lt;p&gt;The Libs team is looking at how we can improve the &lt;code&gt;std::sync&lt;/code&gt; module, by potentially splitting it up into new modules and making some changes to APIs along the way.
-One of those API changes we&#x27;re looking at is non-poisoning implementations of &lt;code&gt;Mutex&lt;/code&gt; and &lt;code&gt;RwLock&lt;/code&gt;.
-To find the best path forward we&#x27;re conducting a survey to get a clearer picture of how the standard locks are used out in the wild.&lt;/p&gt;
-&lt;p&gt;The survey is a Google Form.
-&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSehk-GkwoCag_w3YfXDfgeANulR0h5m2d3EzUMQaiY1vRfIEw/viewform&quot;&gt;You can fill it out here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#what-is-this-survey-for&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-this-survey-for&quot;&gt;&lt;/a&gt;What is this survey for?&lt;/h3&gt;
-&lt;p&gt;The survey is intended to answer the following questions:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;When is poisoning on &lt;code&gt;Mutex&lt;/code&gt; and &lt;code&gt;RwLock&lt;/code&gt; being used deliberately.&lt;/li&gt;
-&lt;li&gt;Whether &lt;code&gt;Mutex&lt;/code&gt; and &lt;code&gt;RwLock&lt;/code&gt; (and their guard types) appear in the public API of libraries.&lt;/li&gt;
-&lt;li&gt;How much friction there is switching from the poisoning &lt;code&gt;Mutex&lt;/code&gt; and &lt;code&gt;RwLock&lt;/code&gt; locks to non-poisoning ones (such as from &lt;code&gt;antidote&lt;/code&gt; or &lt;code&gt;parking_lot&lt;/code&gt;).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;This information will then inform an RFC that will set out a path to non-poisoning locks in the standard library.
-It may also give us a starting point for looking at the tangentially related &lt;code&gt;UnwindSafe&lt;/code&gt; and &lt;code&gt;RefUnwindSafe&lt;/code&gt; traits for panic safety.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#who-is-this-survey-for&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;who-is-this-survey-for&quot;&gt;&lt;/a&gt;Who is this survey for?&lt;/h3&gt;
-&lt;p&gt;If you write code that uses locks then this survey is for you.
-That includes the standard library&#x27;s &lt;code&gt;Mutex&lt;/code&gt; and &lt;code&gt;RwLock&lt;/code&gt; as well as locks from &lt;code&gt;crates.io&lt;/code&gt;, such as &lt;code&gt;antidote&lt;/code&gt;, &lt;code&gt;parking_lot&lt;/code&gt;, and &lt;code&gt;tokio::sync&lt;/code&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#so-what-is-poisoning-anyway&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;so-what-is-poisoning-anyway&quot;&gt;&lt;/a&gt;So what is poisoning anyway?&lt;/h3&gt;
-&lt;p&gt;Let&#x27;s say you have an &lt;code&gt;Account&lt;/code&gt; that can update its balance:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;impl Account {
-    pub fn update_balance(&amp;amp;mut self, change: i32) {
-        self.balance +&#x3D; change;
-        self.changes.push(change);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Let&#x27;s also say we have the invariant that &lt;code&gt;balance &#x3D;&#x3D; changes.sum()&lt;/code&gt;.
-We&#x27;ll call this the &lt;em&gt;balance invariant&lt;/em&gt;.
-So at any point when interacting with an &lt;code&gt;Account&lt;/code&gt; you can always depend on its &lt;code&gt;balance&lt;/code&gt; being the sum of its &lt;code&gt;changes&lt;/code&gt;, thanks to the balance invariant.&lt;/p&gt;
-&lt;p&gt;There&#x27;s a point in our &lt;code&gt;update_balance&lt;/code&gt; method where the balance invariant isn&#x27;t maintained though:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;impl Account {
-    pub fn update_balance(&amp;amp;mut self, change: i32) {
-        self.balance +&#x3D; change;
-//      self.balance !&#x3D; self.changes.sum()
-        self.changes.push(change);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That seems ok, because we&#x27;re in the middle of a method with exclusive access to our &lt;code&gt;Account&lt;/code&gt; and everything is back to good when we return.
-There isn&#x27;t a &lt;code&gt;Result&lt;/code&gt; or &lt;code&gt;?&lt;/code&gt; to be seen so we know there&#x27;s no chance of an early return before the balance invariant is restored. Or so we think.&lt;/p&gt;
-&lt;p&gt;What if &lt;code&gt;self.changes.push&lt;/code&gt; didn&#x27;t return normally?
-What if it panicked instead without actually doing anything?
-Then we&#x27;d return from &lt;code&gt;update_balance&lt;/code&gt; early without restoring the balance invariant.
-That seems ok too, because a panic will start unwinding the thread it was called from, leaving no trace of any data it owned behind.
-Ignoring the &lt;code&gt;Drop&lt;/code&gt; trait, no data means no broken invariants.
-Problem solved, right?&lt;/p&gt;
-&lt;p&gt;What if our &lt;code&gt;Account&lt;/code&gt; wasn&#x27;t owned by that thread that panicked?
-What if it was shared with other threads as a &lt;code&gt;Arc&amp;lt;Mutex&amp;lt;Account&amp;gt;&amp;gt;&lt;/code&gt;?
-Unwinding one thread isn&#x27;t going to protect other threads that could still access the &lt;code&gt;Account&lt;/code&gt;, and they&#x27;re not going to know that it&#x27;s now invalid.&lt;/p&gt;
-&lt;p&gt;This is where poisoning comes in.
-The &lt;code&gt;Mutex&lt;/code&gt; and &lt;code&gt;RwLock&lt;/code&gt; types in the standard library use a strategy that makes panics (and by extension the possibility for broken invariants) observable.
-The next consumer of the lock, such as another thread that didn&#x27;t unwind, can decide at that point what to do about it.
-This is done by storing a switch in the lock itself that&#x27;s flipped when a panic causes a thread to unwind through its guard.
-Once that switch is flipped the lock is considered &lt;em&gt;poisoned&lt;/em&gt;, and the next attempt to acquire it will receive an error instead of a guard.&lt;/p&gt;
-&lt;p&gt;The standard approach for dealing with a poisoned lock is to propagate the panic to the current thread by unwrapping the error it returns:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let mut guard &#x3D; shared.lock().unwrap();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That way nobody can ever observe the possibly violated balance invariant on our shared &lt;code&gt;Account&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;That sounds great! So why would we want to remove it?&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#whats-wrong-with-lock-poisoning&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-wrong-with-lock-poisoning&quot;&gt;&lt;/a&gt;What&#x27;s wrong with lock poisoning?&lt;/h3&gt;
-&lt;p&gt;There&#x27;s nothing wrong with poisoning itself.
-It&#x27;s an excellent pattern for dealing with failures that can leave behind unworkable state.
-The question we&#x27;re really asking is whether it should be used by the &lt;em&gt;standard locks&lt;/em&gt;, which are &lt;code&gt;std::sync::Mutex&lt;/code&gt; and &lt;code&gt;std::sync::RwLock&lt;/code&gt;.
-We&#x27;re asking whether it&#x27;s a standard lock&#x27;s job to implement poisoning. Just to avoid any confusion, we&#x27;ll distinguish the poisoning pattern from the API of the standard locks by calling the former &lt;em&gt;poisoning&lt;/em&gt; and the latter &lt;em&gt;lock poisoning&lt;/em&gt;.
-We&#x27;re just talking about lock poisoning.&lt;/p&gt;
-&lt;p&gt;In the previous section we motivated poisoning as a way to protect us from possibly broken invariants.
-Lock poisoning isn&#x27;t actually a tool for doing this in the way you might think.
-In general, a poisoned lock can&#x27;t tell whether or not any invariants are &lt;em&gt;actually&lt;/em&gt; broken.
-It assumes that a lock is shared, so is likely going to outlive any individual thread that can access it.
-It also assumes that if a panic leaves any data behind then it&#x27;s more likely to be left in an unexpected state, because panics aren&#x27;t part of normal control flow in Rust.
-Everything &lt;em&gt;could&lt;/em&gt; be fine after a panic, but the standard lock can&#x27;t guarantee it.
-Since there&#x27;s no guarantee there&#x27;s an escape hatch.
-We can always still get access to the state guarded by a poisoned lock:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let mut guard &#x3D; shared.lock().unwrap_or_else(|err| err.into_inner());
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;All Rust code needs to remain free from any possible undefined behavior in the presence of panics, so ignoring panics is always safe.
-Rust doesn&#x27;t try guarantee all safe code is free from logic bugs, so broken invariants that don&#x27;t potentially lead to undefined behavior aren&#x27;t strictly considered unsafe.
-Since ignoring lock poisoning is also always safe it doesn&#x27;t really give you a dependable tool to protect state from panics.
-You can always ignore it.&lt;/p&gt;
-&lt;p&gt;So lock poisoning doesn&#x27;t give you a tool for guaranteeing safety in the presence of panics.
-What it does give you is a way to propagate those panics to other threads.
-The machinery needed to do this adds costs to using the standard locks.
-There&#x27;s an ergonomic cost in having to call &lt;code&gt;.lock().unwrap()&lt;/code&gt;, and a runtime cost in having to actually track state for panics.&lt;/p&gt;
-&lt;p&gt;With the standard locks you pay those costs whether you need to or not.
-That&#x27;s not typically how APIs in the standard library work.
-Instead, you compose costs together so you only pay for what you need.
-Should it be a standard lock&#x27;s job to synchronize access &lt;em&gt;and&lt;/em&gt; propagate panics?
-We&#x27;re not so sure it is.
-If it&#x27;s not then what should we do about it?
-That&#x27;s where the survey comes in.
-We&#x27;d like to get a better idea of how you use locks and poisoning in your projects to help decide what to do about lock poisoning.
-&lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSehk-GkwoCag_w3YfXDfgeANulR0h5m2d3EzUMQaiY1vRfIEw/viewform&quot;&gt;You can fill it out here&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Ashley Mannix</name>
         </author>
     </entry>
     
