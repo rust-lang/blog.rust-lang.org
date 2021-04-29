@@ -1,0 +1,38 @@
+version: 2
+updates:
+- package-ecosystem: cargo
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: regex
+    versions:
+    - 1.4.3
+    - 1.4.4
+    - 1.4.5
+  - dependency-name: serde
+    versions:
+    - 1.0.123
+    - 1.0.124
+  - dependency-name: serde_derive
+    versions:
+    - 1.0.123
+    - 1.0.124
+  - dependency-name: serde_json
+    versions:
+    - 1.0.61
+    - 1.0.62
+    - 1.0.63
+  - dependency-name: handlebars
+    versions:
+    - 3.5.2
+    - 3.5.3
+  - dependency-name: comrak
+    versions:
+    - 0.9.0
+    - 0.9.1
+  - dependency-name: serde_yaml
+    versions:
+    - 0.8.15
+    - 0.8.16
