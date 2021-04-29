@@ -10,8 +10,69 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-04-29T08:27:49+00:00</updated>
+    <updated>2021-04-29T16:28:48+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rustup 1.24.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/04/29/Rustup-1.24.1.html" type="text/html" title="Announcing Rustup 1.24.1" />
+        <published>2021-04-29T00:00:00+00:00</published>
+        <updated>2021-04-29T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/04/29/Rustup-1.24.1.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/04/29/Rustup-1.24.1.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.24.1. &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.24.1 is as easy as closing your IDE and running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup self update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1241&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1241&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.24.1&lt;/h2&gt;
+&lt;p&gt;Firstly, if you have not read the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/04/27/Rustup-1.24.0.html&quot;&gt;previous announcement&lt;/a&gt; then in brief, 1.24
+introduces better support for low memory systems, installs itself into the Add/Remove programs
+list on Windows, and now supports using &lt;code&gt;rust-toolchain.toml&lt;/code&gt; files.&lt;/p&gt;
+&lt;p&gt;Shortly after publishing the 1.24.0 release of Rustup, we got reports of &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/issues/2737&quot;&gt;a regression&lt;/a&gt;
+preventing users from running &lt;code&gt;rustfmt&lt;/code&gt; and &lt;code&gt;cargo fmt&lt;/code&gt; after upgrading to
+Rustup 1.24.0. To limit the damage we &lt;strong&gt;reverted&lt;/strong&gt; the release to version
+1.23.1. The only substantive change between 1.24.0 and 1.24.1 is to correct this regression.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;You can check out all the changes to Rustup for 1.24.0 and 1.24.1 in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/blob/stable/CHANGELOG.md&quot;&gt;changelog&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Rustup&#x27;s documentation is also available in &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/&quot;&gt;the rustup book&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
+&lt;p&gt;Thanks again to all the contributors who made rustup 1.24.0 and 1.24.1 possible!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alex Chan&lt;/li&gt;
+&lt;li&gt;Aloïs Micard&lt;/li&gt;
+&lt;li&gt;Andrew Norton&lt;/li&gt;
+&lt;li&gt;Avery Harnish&lt;/li&gt;
+&lt;li&gt;chansuke&lt;/li&gt;
+&lt;li&gt;Daniel Alley&lt;/li&gt;
+&lt;li&gt;Daniel Silverstone&lt;/li&gt;
+&lt;li&gt;Eduard Miller&lt;/li&gt;
+&lt;li&gt;Eric Huss&lt;/li&gt;
+&lt;li&gt;est31&lt;/li&gt;
+&lt;li&gt;Gareth Hubball&lt;/li&gt;
+&lt;li&gt;Gurkenglas&lt;/li&gt;
+&lt;li&gt;Jakub Stasiak&lt;/li&gt;
+&lt;li&gt;Joshua Nelson&lt;/li&gt;
+&lt;li&gt;Jubilee (workingjubilee)&lt;/li&gt;
+&lt;li&gt;kellda&lt;/li&gt;
+&lt;li&gt;Michael Cooper&lt;/li&gt;
+&lt;li&gt;Philipp Oppermann&lt;/li&gt;
+&lt;li&gt;Robert Collins&lt;/li&gt;
+&lt;li&gt;SHA Miao&lt;/li&gt;
+&lt;li&gt;skim (sl4m)&lt;/li&gt;
+&lt;li&gt;Tudor Brindus&lt;/li&gt;
+&lt;li&gt;Vasili (3point2)&lt;/li&gt;
+&lt;li&gt;наб (nabijaczleweli)&lt;/li&gt;
+&lt;li&gt;二手掉包工程师 (hi-rustin)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>The Rustup Working Group</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rustup 1.24.0</title>
@@ -789,30 +850,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.49
 
         <author>
             <name>The Rust Survey Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Next steps for the Foundation Conversation</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/12/14/Next-steps-for-the-foundation-conversation.html" type="text/html" title="Next steps for the Foundation Conversation" />
-        <published>2020-12-14T00:00:00+00:00</published>
-        <updated>2020-12-14T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/12/14/Next-steps-for-the-foundation-conversation.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/12/14/Next-steps-for-the-foundation-conversation.html">&lt;p&gt;Last week we kicked off the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/12/07/the-foundation-conversation.html&quot;&gt;Foundation Conversation&lt;/a&gt;, a week-long period of Q&amp;amp;A forums and live broadcasts with the goal of explaining our vision for the Foundation and finding out what sorts of questions people had. We used those questions to help build a &lt;a href&#x3D;&quot;https://github.com/rust-lang/foundation-faq-2020/blob/main/FAQ.md&quot;&gt;draft Foundation FAQ&lt;/a&gt;, and if you’ve not seen it yet, you should definitely take a look -- it’s chock full of good information. Thanks to everyone for asking such great questions!&lt;/p&gt;
-&lt;p&gt;We’ve created a &lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSfeq4L0Rk6yXzGS19A6qLo4hpLlQiJh1nYFHsRJ9MrxO6k4iQ/viewform&quot;&gt;new survey&lt;/a&gt; that asks about how people experienced the Foundation Conversation. Please take a moment to &lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSfeq4L0Rk6yXzGS19A6qLo4hpLlQiJh1nYFHsRJ9MrxO6k4iQ/viewform&quot;&gt;fill it out&lt;/a&gt;! We’re planning a similar event for this January, so your feedback will be really helpful.&lt;/p&gt;
-&lt;p&gt;This post is going to discuss how the Foundation and the Rust project relate to one another.&lt;/p&gt;
-&lt;h1&gt;&lt;a href&#x3D;&quot;#what-is-the-central-purpose-of-the-foundation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-the-central-purpose-of-the-foundation&quot;&gt;&lt;/a&gt;What is the central purpose of the Foundation?&lt;/h1&gt;
-&lt;p&gt;At its core, &lt;em&gt;the mission of the Foundation is to empower the Rust maintainers to joyfully do their best work&lt;/em&gt;. We think of the Foundation as working with the teams, helping them to create the scaffolding that people need to contribute and participate in the Rust project.&lt;/p&gt;
-&lt;h1&gt;&lt;a href&#x3D;&quot;#the-scope-and-role-of-the-rust-teams-does-not-change&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-scope-and-role-of-the-rust-teams-does-not-change&quot;&gt;&lt;/a&gt;The scope and role of the Rust teams does not change&lt;/h1&gt;
-&lt;p&gt;For most Rust teams, the creation of the Foundation doesn’t change anything about the scope of their work and decision making authority. The compiler team is still going to be maintaining the compiler, the community team will still be helping coordinate and mentor community events, and so forth. One exception is the Rust core team: there are various legal details that we expect to off-load onto the Foundation.&lt;/p&gt;
-&lt;h1&gt;&lt;a href&#x3D;&quot;#let-the-rust-teams-be-their-best-selves&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;let-the-rust-teams-be-their-best-selves&quot;&gt;&lt;/a&gt;Let the Rust teams be their best selves&lt;/h1&gt;
-&lt;p&gt;We are really excited for all the things that the Foundation will make possible for the Rust teams. We hope to draw on the Foundation to target some of the hardest problems in running an open-source project. We’re thinking of programs like offering training for maintainers, assistance with product and program management, access to trained mediators for conflict management, as well as facilitating events to help contributors get more high bandwidth communication (assuming, that is, we’re ever allowed to leave our houses again).&lt;/p&gt;
-&lt;h1&gt;&lt;a href&#x3D;&quot;#what-comes-next&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-comes-next&quot;&gt;&lt;/a&gt;What comes next&lt;/h1&gt;
-&lt;p&gt;This last week has been intense -- we calculated about 60 person hours of sync time answering questions -- and it’s been really valuable. The questions that everyone asked really helped us to refine and sharpen our thinking. For the remainder of the year we are going to be working hard on finalizing the details of the Foundation. We expect to launch the Foundation officially early next year! In the meantime, remember to fill out our &lt;a href&#x3D;&quot;https://docs.google.com/forms/d/e/1FAIpQLSfeq4L0Rk6yXzGS19A6qLo4hpLlQiJh1nYFHsRJ9MrxO6k4iQ/viewform&quot;&gt;survey&lt;/a&gt;!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
         </author>
     </entry>
     
