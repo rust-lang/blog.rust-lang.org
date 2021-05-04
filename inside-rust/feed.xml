@@ -10,14 +10,90 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-05-04T10:50:44+00:00</updated>
+    <updated>2021-05-04T16:07:09+00:00</updated>
 
+    
+    <entry>
+        <title>Core Team Update: May 2021</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/05/04/core-team-update.html" type="text/html" title="Core Team Update: May 2021" />
+        <published>2021-05-04T00:00:00+00:00</published>
+        <updated>2021-05-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/05/04/core-team-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/05/04/core-team-update.html">&lt;p&gt;Hey everyone!  Back in August of last year, the core team wrote a blog post
+titled &amp;quot;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/08/18/laying-the-foundation-for-rusts-future.html&quot;&gt;Laying the foundation for Rust&#x27;s Future&lt;/a&gt;.&amp;quot; Ever since then,
+the Core Team has been doing a tremendous amount of work to help get the
+foundation going, and prepare the project for the changes that have now
+occurred because of these events.&lt;/p&gt;
+&lt;p&gt;But that also means we&#x27;ve been very quiet!  This sort of work has largely
+been focused inward, and not really something that&#x27;s visible from the
+outside, even if you are on a Rust team.  However, thanks to these efforts,
+the Foundation now exists, and is starting to work on its mission.  That also
+means it&#x27;s time for the core team to shift the focus of its work.&lt;/p&gt;
+&lt;p&gt;Beyond the Foundation efforts, we&#x27;ve also had several initiatives underway
+that you may or may not know about:&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#the-2021-roadmap&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-2021-roadmap&quot;&gt;&lt;/a&gt;The 2021 Roadmap&lt;/h2&gt;
+&lt;p&gt;The &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3037&quot;&gt;2021 Roadmap&lt;/a&gt; RFC was merged back in January.  This set the goals for
+the core team for this year.  This is a bit different from previous years,
+where we laid out goals for the entire project.  We decided this year to
+focus on Core, and give the teams the leeway to set their own goals, while we
+focused on overall organizational health.&lt;/p&gt;
+&lt;p&gt;Later in the year, we&#x27;ll be starting the process for next year as well. We&#x27;re
+not actively thinking about this yet, but ideally, a yearly roadmap would be
+merged in December, rather than in January, so we want to make sure and begin
+early enough to get this shipped on time for 2022.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#team-charters&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;team-charters&quot;&gt;&lt;/a&gt;Team Charters&lt;/h2&gt;
+&lt;p&gt;As part of that work, we&#x27;ve begun the first steps of a process to give each
+team a formal charter.  Way back in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/1068-rust-governance.md&quot;&gt;RFC 1068&lt;/a&gt;, the scope of the initial
+teams was laid out.  While that has served us well over the years, as teams
+were spun up, shut down, and changed, we haven&#x27;t always done a good job of
+making it clear where the boundaries of responsibility lie in each team.
+Part of the magic in Rust&#x27;s governance structure is that individual teams are
+given significant authority to do as they see fit, but that also means that
+we have to be concious about scope. We&#x27;ll have more to report on this process
+as it continues to unfold, but the end goal is stated in the roadmap:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The Rust teams, in concert with the core team, will work to establish a
+charter for each of the Rust teams over the course of the year, with an aim
+for defining, particularly, the purpose and membership requirements.  Our
+goal is that going into 2022, all active groups within the Rust project will
+have well-defined charters and membership.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Now is the time to redouble efforts here, and we are excited to work with all
+of the teams on nailing these charters down. As a start, we&#x27;ve been working with
+the Libs, Release, and Cargo teams for an initial pass at their charters. We&#x27;ve
+structured this to be largely team-driven; we&#x27;re setting expectations and framing
+what charters should look like, but the teams work on what goes in them. As this
+progresses, we hope to learn more about the challenges involved so that we can
+improve our process and bring in more teams.&lt;/p&gt;
+&lt;p&gt;It&#x27;s worth pointing out explicitly that this work also includes the Core Team; we&#x27;ll
+be creating a charter for ourselves as well.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#audit-of-packages-owned-by-the-project&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;audit-of-packages-owned-by-the-project&quot;&gt;&lt;/a&gt;Audit of packages owned by the project&lt;/h2&gt;
+&lt;p&gt;As another example of something the core team has been working on, we&#x27;ve been
+doing work to clarify the status of a number of packages owned by the Rust team
+on crates.io. We are conducting a full audit of these packages, making sure that
+they&#x27;re things that should be owned by the project, making sure that they have
+appropriate permissions, making sure that they have people taking care of them,
+all of that kind of thing. Historically, we&#x27;ve been fairly ad-hoc about this sort
+of thing, but as we grow, it is very imporant to be deliberate. An
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3119&quot;&gt;RFC&lt;/a&gt; was just opened to create a policy here.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks!&lt;/h2&gt;
+&lt;p&gt;So that&#x27;s a quick summary of what we&#x27;ve been up to, and some of what we&#x27;ll be
+doing in the immediate future. We plan on trying to communicate what Core is working
+on more often in the future; 2020 was an extremely complex year for a variety of
+reasons, but we&#x27;re feeling really positive about the future of Core and the
+Rust project generally. Thank you to the teams for all you&#x27;ve done for Rust.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Steve Klabnik</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.52.0 pre-release testing</title>
         <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/05/04/1.52.0-prerelease.html" type="text/html" title="1.52.0 pre-release testing" />
         <published>2021-05-04T00:00:00+00:00</published>
-        <updated>2021-05-04T00:00:00+00:00</updated>
+        <updated>2021-05-04T00:00:01+00:00</updated>
         <id>https://blog.rust-lang.org/inside-rust/2021/05/04/1.52.0-prerelease.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/05/04/1.52.0-prerelease.html">&lt;p&gt;The 1.52.0 pre-release is ready for testing. The release is scheduled for this
 Thursday, May 6th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1520-2021-05-06&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
@@ -332,99 +408,6 @@ can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/
 
         <author>
             <name>Ryan Levick</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Lang team March update</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/03/03/lang-team-mar-update.html" type="text/html" title="Lang team March update" />
-        <published>2021-03-03T00:00:00+00:00</published>
-        <updated>2021-03-03T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/03/03/lang-team-mar-update.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/03/03/lang-team-mar-update.html">&lt;p&gt;Today the lang team held its March planning meeting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-03-03-Planning-Meeting.md&quot;&gt;minutes&lt;/a&gt;). We hold these meetings on the first Wednesday of every month.&lt;/p&gt;
-&lt;p&gt;The planning meeting is used for:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Checking in on the status of our active projects&lt;/li&gt;
-&lt;li&gt;Planning the design meetings for the remainder of the month&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;After each meeting, we post an update (like this one!) with notes and meeting announcements.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#update-from-active-projects&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;update-from-active-projects&quot;&gt;&lt;/a&gt;Update from active projects&lt;/h2&gt;
-&lt;p&gt;Did you know that you can see the lang team&#x27;s active projects on our &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/projects/2&quot;&gt;project board&lt;/a&gt;? We&#x27;re still experimenting and evolving the setup, but the goal is that it should give you a quick overview of what kinds of things the lang team is focused on, and what stage they are in their development. Our minutes contain a &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-02-03-Planning-Meeting.md#project-updates-and-discussion&quot;&gt;writeup for each active project&lt;/a&gt;, but let me call out a few highlights here:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;type ascription expressions:
-&lt;ul&gt;
-&lt;li&gt;we&#x27;ve recently made progress on type ascriptions and are likely to overcome the last issue blocking stabilization&lt;/li&gt;
-&lt;li&gt;we would like to post a revised RFC&lt;/li&gt;
-&lt;li&gt;there is some debate about the &lt;code&gt;x: T&lt;/code&gt; syntax that was previously proposed, and some desire to find an alternative (but also plenty of folks who liked it)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;never type:
-&lt;ul&gt;
-&lt;li&gt;current status is still &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/79366&quot;&gt;#79366&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;simulacrum is going to recap the scenario for next triage meeting&lt;/li&gt;
-&lt;li&gt;we are considering whether it makes sense to leverage 2021 Edition in any way&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;const generics:
-&lt;ul&gt;
-&lt;li&gt;min const generics will be stable in 1.51&lt;/li&gt;
-&lt;li&gt;we are looking at various small extensions&lt;/li&gt;
-&lt;li&gt;there is now a weekly meeting to look into improvements&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;declarative macro repitition counts:
-&lt;ul&gt;
-&lt;li&gt;there is an &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3086&quot;&gt;open RFC&lt;/a&gt; with proposed FCP&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;instruction set attribute:
-&lt;ul&gt;
-&lt;li&gt;exploration continues, the interaction of instruction set attribute with inline is not great, but it&#x27;s not clear how to improve&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;revised try trait:
-&lt;ul&gt;
-&lt;li&gt;generally positive vibes about the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3058/&quot;&gt;RFC 3058&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;one question is whether to consider leveraging edition to tweak the desugaring and bypass some of the &amp;quot;accidental stabilization&amp;quot;
-&lt;ul&gt;
-&lt;li&gt;currently evaluating how many projects rely on this behavior; most of them don&#x27;t want to&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;ffi-unwind:
-&lt;ul&gt;
-&lt;li&gt;C-unwind implementation has almost landed&lt;/li&gt;
-&lt;li&gt;exploring impact of longjmp on optimization&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
-&lt;p&gt;We planned three design meetings for March. Our meetings are open for anyone to join and observe. They are also typically recorded and posted to YouTube. Ping nikomatsakis or joshtriplett for info about attending.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;March 10 -- no meeting, pnkfelix is absent&lt;/li&gt;
-&lt;li&gt;March 17 -- RFC backlog bonanza recap (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/84&quot;&gt;lang-team#84&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;March 24 -- lang team reorg: shepherds 4.0, triage update (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/85&quot;&gt;lang-team#85&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;March 24 -- How to dismantle an &lt;code&gt;&amp;amp;Atomic&lt;/code&gt; bomb (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/82&quot;&gt;lang-team#82&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#design-meeting-expectations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-meeting-expectations&quot;&gt;&lt;/a&gt;Design meeting expectations&lt;/h2&gt;
-&lt;p&gt;We also settled some our expectations around preparation for design meetings:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The document for the meeting must be prepared by the triage meeting on Tuesday.
-&lt;ul&gt;
-&lt;li&gt;If it is not sent out by then, the meeting will be canceled. This gives folks 24 hour notice.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
-&lt;ul&gt;
-&lt;li&gt;However, there is no rule &lt;strong&gt;against&lt;/strong&gt; reading the document beforehand and provided feedback or advice on how to improve it.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>Niko Matsakis</name>
         </author>
     </entry>
     
