@@ -10,8 +10,28 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-04-29T16:28:47+00:00</updated>
+    <updated>2021-05-04T10:50:44+00:00</updated>
 
+    
+    <entry>
+        <title>1.52.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/05/04/1.52.0-prerelease.html" type="text/html" title="1.52.0 pre-release testing" />
+        <published>2021-05-04T00:00:00+00:00</published>
+        <updated>2021-05-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/05/04/1.52.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/05/04/1.52.0-prerelease.html">&lt;p&gt;The 1.52.0 pre-release is ready for testing. The release is scheduled for this
+Thursday, May 6th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1520-2021-05-06&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2021-05-04/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2021-05-04/index.html&lt;/a&gt;. You
+can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/1-52-0-prerelease-testing&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Pietro Albini</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Rustup 1.24.0 release incident report for 2021-04-27</title>
@@ -405,42 +425,6 @@ can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/
 
         <author>
             <name>Niko Matsakis</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>March Sprint for rustc: Shrink Memory Usage</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/02/15/shrinkmem-rustc-sprint.html" type="text/html" title="March Sprint for rustc: Shrink Memory Usage" />
-        <published>2021-02-15T00:00:00+00:00</published>
-        <updated>2021-02-15T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/02/15/shrinkmem-rustc-sprint.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/02/15/shrinkmem-rustc-sprint.html">&lt;p&gt;I am very excited about the compiler team&#x27;s upcoming sprint, and
-I want to share that excitement with all of you.&lt;/p&gt;
-&lt;p&gt;The Rust Compiler Team decided over a series of recent meetings
-(&lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/99285steeringmeeting20201204PerformanceGoalsfor2020.html&quot;&gt;4 dec 2020&lt;/a&gt;, &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/79391planningmeeting20210115.html&quot;&gt;15 jan 2021&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/95022steeringmeeting20210129.html&quot;&gt;29 jan 2021&lt;/a&gt;) that our focus for 2021 will be improving the compiler&#x27;s
-performance from the perspective of the new contributor experience bootstrapping
-the compiler and developing code for the compiler.&lt;/p&gt;
-&lt;p&gt;The team&#x27;s first sprint for 2021 will be during the first week of March, and its
-focus will be on reducing the memory footprint of the compiler during bootstrap.&lt;/p&gt;
-&lt;p&gt;During our most recent planning meeting (&lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/44925planningmeeting20210212.html&quot;&gt;12 feb 2021&lt;/a&gt;),
-there were no new significant steering meeting proposals, so we decided to
-do some extra sprint planning during that time. We established:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;we should settle on a common set of tools for measuring memory usage,&lt;/li&gt;
-&lt;li&gt;we need some centralized documentation for how to best use those tools to measure rustc&#x27;s memory usage, and&lt;/li&gt;
-&lt;li&gt;we need concrete proposals for tasks that will drive activity during the sprint; we started up
-the &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/276895-t-compiler.2Fshrinkmem-sprint&quot;&gt;shrinkmem-sprint zulip&lt;/a&gt; (&lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/276895tcompilershrinkmemsprint/index.html&quot;&gt;public archive&lt;/a&gt;) to host conversations related to that.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Given the more narrow focus of this sprint, the Rust Compiler Team is interested
-in input from people with strong experience using Valgrind DHAT or Windows
-Performance Analyzer (or other tools) to help with identifying opportunities to
-reduce memory usage. If this sounds like you please drop by the
-&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/276895-t-compiler.2Fshrinkmem-sprint&quot;&gt;shrinkmem-sprint zulip&lt;/a&gt; and say hello!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Felix Klock</name>
         </author>
     </entry>
     
