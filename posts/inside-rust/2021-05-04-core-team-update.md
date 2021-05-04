@@ -6,7 +6,7 @@ team: The Core Team <https://www.rust-lang.org/governance/teams/core>
 ---
 
 Hey everyone!  Back in August of last year, the core team wrote a blog post
-titled "[Laying the foundation for Rust's Future][future]." Every since then,
+titled "[Laying the foundation for Rust's Future][future]." Ever since then,
 the Core Team has been doing a tremendous amount of work to help get the
 foundation going, and prepare the project for the changes that have now
 occurred because of these events.
