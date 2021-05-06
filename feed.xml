@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-05-06T15:55:47+00:00</updated>
+    <updated>2021-05-06T16:22:42+00:00</updated>
 
     
     <entry>
@@ -28,7 +28,7 @@ efficient software.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
 from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1510-2021-03-25&quot;&gt;detailed release notes for 1.52.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1520-2021-05-06&quot;&gt;detailed release notes for 1.52.0&lt;/a&gt; on GitHub.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1520-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1520-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.52.0 stable&lt;/h2&gt;
 &lt;p&gt;The most significant change in this release is not to the language or standard
 libraries, but rather an enhancement to tooling support for Clippy.&lt;/p&gt;
@@ -40,8 +40,6 @@ behavior independent of the order in which they run the two commands.&lt;/p&gt;
 &lt;p&gt;The following methods were stabilized.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/fmt/struct.Arguments.html#method.as_str&quot;&gt;&lt;code&gt;Arguments::as_str&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.Peekable.html#method.next_if_eq&quot;&gt;&lt;code&gt;Peekable::next_if_eq&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.Peekable.html#method.next_if&quot;&gt;&lt;code&gt;Peekable::next_if&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.char.html#associatedconstant.MAX&quot;&gt;&lt;code&gt;char::MAX&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.char.html#associatedconstant.REPLACEMENT_CHARACTER&quot;&gt;&lt;code&gt;char::REPLACEMENT_CHARACTER&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.char.html#associatedconstant.UNICODE_VERSION&quot;&gt;&lt;code&gt;char::UNICODE_VERSION&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
