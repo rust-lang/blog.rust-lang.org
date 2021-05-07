@@ -45,7 +45,10 @@ Fingerprints are part of our architecture for detecting when inputs change. More
 
 [rustc-dev-guide-fingerprints]: https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation-in-detail.html#checking-query-results-for-changes-hashstable-and-fingerprints
 
-The `verify-ich` check is a safeguard asserting internal inconsistency of the fingerprints. When loading a value from the cache, it recomputes the fingerprint, and compares the resulting value against the fingerprint stored in the cache from the previous compiler run. There are multiple ways that a fingerprint mismatch could arise, but they all represent bugs within the Rust compiler itself.
+The `verify-ich` check is a safeguard asserting internal inconsistency of the fingerprints.
+The compiler stores fingerprints for both cached and uncached values.
+Every time we compute an uncached value, we double-check that its newly computed fingerprint against the finger print stored in the cache.
+There are multiple ways that a fingerprint mismatch could arise, but they all represent bugs within the Rust compiler itself.
 
 ## History of deployment
 
