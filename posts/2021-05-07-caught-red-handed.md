@@ -76,15 +76,7 @@ Essentially, for some crates, certain sequences of edit-compile cycles will caus
 Another recent example looks [like this](https://github.com/rust-lang/rust/issues/85039):
 
 ```
-thread 'rustc' panicked at 'found unstable fingerprints for predicates_of(core[b0ed]::convert::From): \
-GenericPredicates { parent: None, predicates: [(Binder(TraitPredicate(<Self as std::marker::Sized>)), \
-/home/coolreader18/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/cor\
-e/src/convert/mod.rs:365:20: 365:25 (#0)), (Binder(TraitPredicate(<T as std::marker::Sized>)), /home/c\
-oolreader18/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/c\
-onvert/mod.rs:365:16: 365:17 (#0)), (Binder(TraitPredicate(<Self as std::convert::From<T>>)), /home/co\
-olreader18/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/co\
-nvert/mod.rs:365:1: 365:25 (#0))] }', /rustc/88f19c6dab716c6281af7602e30f413e809c5974/compiler/rustc_q\
-uery_system/src/query/plumbing.rs:593:5
+thread 'rustc' panicked at 'found unstable fingerprints for predicates_of(<massive text describing rustc internals elided>)', /rustc/88f19c6dab716c6281af7602e30f413e809c5974/compiler/rustc_query_system/src/query/plumbing.rs:593:5
 ```
 
 They all arise from inconsistencies when comparing the incremental-compilation cache stored on disk against the values computed during a current `rustc` invocation, which means they all arise from using incremental compilation.
