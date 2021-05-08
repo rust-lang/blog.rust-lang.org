@@ -64,9 +64,9 @@ When we first turned on `verify-ich` by default, we assumed we would have time t
 
 [issue-84970]: https://github.com/rust-lang/rust/issues/84970
 
-It turns out `verify-ich` was turned on in version 1.52.0, which was [released yesterday][].
+It turns out `verify-ich` was turned on in version 1.52.0, which was [released recently][].
 
-[released yesterday]: /2021/05/06/Rust-1.52.0.html
+[released recently]: /2021/05/06/Rust-1.52.0.html
 
 ## How does this show up
 
