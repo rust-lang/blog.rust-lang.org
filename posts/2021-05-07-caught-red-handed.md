@@ -85,7 +85,7 @@ There are three ways that you may have incremental compilation turned on: You ma
 
 [env-vars]: https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-reads
 [cargo-toml]: https://doc.rust-lang.org/cargo/reference/config.html#buildincremental
-[profiles]: (https://doc.rust-lang.org/cargo/reference/profiles.html
+[profiles]: https://doc.rust-lang.org/cargo/reference/profiles.html
 
 If your project has not opted into enabling incremental compilation, then none of the fingerprint issues should affect your release builds.
 
