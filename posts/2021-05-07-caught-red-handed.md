@@ -7,7 +7,7 @@ team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
 
 The Rust teams are always excited to report on new features offered with each release. Sometimes, however, an important change that is not yet "fully baked" gets accidentally included in a release.
 
-There was an instance of this in yesterday's release, 1.52.0, which added a new bit of internal-consistency checking, called "incremental compilation hash verification" (abbreviated `verify-ich`). This check is also called an "unstable fingerprint" check, because the diagnostic it currently prints look [like this](https://github.com/rust-lang/rust/issues/84336):
+There was an instance of this in the most recent release, 1.52.0, which added a new bit of internal-consistency checking, called "incremental compilation hash verification" (abbreviated `verify-ich`). This check is also called an "unstable fingerprint" check, because the diagnostic it currently prints look [like this](https://github.com/rust-lang/rust/issues/84336):
 
 ```
 thread 'rustc' panicked at 'assertion failed: `(left == right)`
