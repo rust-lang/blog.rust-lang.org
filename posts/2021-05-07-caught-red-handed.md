@@ -32,7 +32,7 @@ versions, and can trigger miscompilations in incremental builds, so downgrading
 to a prior stable version is not a fix.
 
 Users are encouraged to upgrade to 1.52.1 or disable incremental in their local
-environment if on a prior versions: please see the [what you should do][part3]
+environment if on a prior version: please see the [what you should do][part3]
 section for details on how to do so.
 
 Incremental compilation is off by default for release builds, so few
