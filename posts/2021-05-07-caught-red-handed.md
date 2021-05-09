@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rust 1.52.1"
+title: "Announcing Rust 1.52.1"
 author: Felix Klock, Mark Rousskov
 team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
 release: true
@@ -28,7 +28,7 @@ from the appropriate page on our website.
 
 This release works around broken builds on 1.52.0, which are caused by newly
 added verification. The bugs this verification detects are present in all Rust
-versions, and can trigger miscompilations in incremental builds, so downgrading
+versions[^1], and can trigger miscompilations in incremental builds, so downgrading
 to a prior stable version is not a fix.
 
 Users are encouraged to upgrade to 1.52.1 or disable incremental in their local
@@ -37,6 +37,14 @@ section for details on how to do so.
 
 Incremental compilation is off by default for release builds, so few
 production builds should be affected (only users who may have opted in).
+
+Miscompilations that can arise from the bugs in incremental compilation generate incorrect code in final
+artifacts, essentially producing malformed binaries, which means that in theory
+any behavior is possible. In practice we are currently only aware of one
+particular known miscompilation, but bugs due to incremental are notoriously
+hard to track down: users frequently simply rebuild after some light editing if
+they see unexpected results from their binaries, and this often causes
+sufficient recompilation to fix the bug(s).
 
 This post is going to:
 
@@ -57,7 +65,7 @@ This post is going to:
 The error message looks something like this, with the key piece being the "found
 unstable fingerprints" text.
 
-```
+```text
 thread 'rustc' panicked at 'assertion failed: `(left == right)`
   left: `Some(Fingerprint(4565771098143344972, 7869445775526300234))`,
   right: `Some(Fingerprint(14934403843752251060, 623484215826468126))`: found unstable fingerprints for <massive text describing rustc internals elided>
@@ -67,7 +75,7 @@ error: internal compiler error: unexpected panic
 note: the compiler unexpectedly panicked. this is a bug.
 ```
 
-This is the error caused by the internal consistency check, and as stated in the diagnostic, it yields an "Internal Compiler Error" (or ICE). In other words, it represents a bug in the internals of the Rust compiler itself. In *this* case, the ICE is revealing a bug in incremental compilation that predates the 1.52.0 release and could result in miscompilation if it had not been caught by `verify-ich`.
+This is the error caused by the internal consistency check, and as stated in the diagnostic, it yields an "Internal Compiler Error" (or ICE). In other words, it represents a bug in the internals of the Rust compiler itself. In *this* case, the ICE is revealing a bug in incremental compilation that predates the 1.52.0 release and could result in miscompilation if it had not been caught.
 
 ## What are fingerprints? Why are we checking them?
 
@@ -79,8 +87,8 @@ Fingerprints are part of our architecture for detecting when inputs change. More
 
 [rustc-dev-guide-fingerprints]: https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation-in-detail.html#checking-query-results-for-changes-hashstable-and-fingerprints
 
-The `verify-ich` check is a safeguard asserting internal consistency of the
-fingerprints. Sometimes the compiler is forced to rerun a query, and expects
+The fingerprint stability check is a safeguard asserting internal consistency of
+the fingerprints. Sometimes the compiler is forced to rerun a query, and expects
 that the output is the same as from a prior incremental compilation session. The
 newly enabled verification checks that the value is indeed as expected, rather
 than assuming so. In some cases, due to bugs in the compiler's implementation,
@@ -88,9 +96,9 @@ this was not actually the case.
 
 ## History
 
-We [initially added][pr-45867] `verify-ich` as a tool to use when developing
-rustc itself, back in 2017. It was solely provided via an unstable `-Z` flag,
-only available to nightly and development builds.
+We [initially added][pr-45867] these fingerprint checks as a tool to use when
+developing rustc itself, back in 2017. It was solely provided via an unstable
+`-Z` flag, only available to nightly and development builds.
 
 More recently, in March, we encountered a [miscompilation][issue-82920] that led us to [turn on `verify-ich` by default][pr-83007]. The Rust compiler team decided it was better to catch fingerprint problems and abort compilation, rather than allow for potential miscompilations (and subsequent misbehavior) to sneak into Rust programmer's binaries.
 
@@ -98,9 +106,10 @@ More recently, in March, we encountered a [miscompilation][issue-82920] that led
 [issue-82920]: https://github.com/rust-lang/rust/issues/82920
 [pr-83007]: https://github.com/rust-lang/rust/pull/83007
 
-When we first turned on `verify-ich` by default, there was a steady stream of
-issues filed by users of the nightly (and beta) toolchains, and steady progress
-has been made on identifying fixes, a number of which have already landed.
+When we first turned on the fingerprint checks by default, there was a steady
+stream of issues filed by users of the nightly (and beta) toolchains, and steady
+progress has been made on identifying fixes, a number of which have already
+landed.
 
 In the past week, we had started [making plans][issue-84970] to improve the
 user-experience, so that the diagnostic issued by the check would do a better
@@ -144,7 +153,7 @@ There are several ways that you may have incremental compilation turned on:
 
 If your project has not adjusted the defaults, then when running `cargo build
 --release` or otherwise in the `release` profile configuration incremental is
-disabled on all Rust versions, and these issues should not affect your release
+disabled on all Rust versions[^1], and these issues should not affect your release
 builds.
 
 ## What should a Rust programmer do in response
@@ -212,3 +221,10 @@ identified and fixed. Depending on the state of the fixes, future stable
 releases (1.53 and onwards) will likely re-enable incremental compilation.
 
 [issue-list]: https://github.com/rust-lang/rust/issues?q=is%3Aissue+is%3Aopen+unstable+fingerprints
+
+The Rust teams will also be developing plans to ensure we have better tracking
+systems in place in the future for bugs, both to prevent situations like this
+from arising again, but also to further increase the stability of our releases
+by tracking bugs more accurately as they propagate across channels.
+
+[^1]: Since incremental was first enabled, which was in Rust 1.24.
