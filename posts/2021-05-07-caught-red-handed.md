@@ -6,9 +6,11 @@ team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
 release: true
 ---
 
-The Rust team has prepared a new release, 1.52.1, working around a bug
-introduced in 1.52.0. We recommend all Rust users, including those currently
-using stable versions prior to 1.52.0 upgrade to 1.52.1.
+The Rust team has prepared a new release, 1.52.1, working around a bug in
+incremental compilation which was made into a compiler error in 1.52.0. We
+recommend all Rust users, including those currently using stable versions prior
+to 1.52.0, upgrade to 1.52.1 or disable incremental compilation. Guidance on how
+to do so is available below.
 
 If you have a previous version of Rust installed via rustup, getting Rust
 1.52.1 is as easy as:
@@ -22,43 +24,50 @@ from the appropriate page on our website.
 
 [install]: https://www.rust-lang.org/install.html
 
-# What's in 1.52.1 stable
-
-This point release contains a single change: it disables incremental
-compilation. Read on for more details as to why, and the next steps the Rust
-project is pursuing on this issue.
-
 # Summary
 
-The Rust teams are always excited to report on new features offered with each release. Sometimes, however, an important change that is not yet "fully baked" gets accidentally included in a release, and we need to issue a point release.
+This release works around broken builds on 1.52.0, which are caused by newly
+added verification. The bugs this verification detects are present in all Rust
+versions, and can trigger miscompilations in incremental builds, so downgrading
+to a prior stable version is not a fix.
 
-There was an instance of this in the most recent release, 1.52.0, which added a new bit of internal-consistency checking, called "incremental compilation hash verification" (abbreviated `verify-ich`). This check is also called an "unstable fingerprint" check, because the diagnostic it currently prints look [like this](https://github.com/rust-lang/rust/issues/84336):
+Users are encouraged to upgrade to 1.52.1 or disable incremental in their local
+environment if on a prior versions: please see the [what you should do][part3]
+section for details on how to do so.
+
+Incremental compilation is off by default for release builds, so few
+production builds should be affected (only users who may have opted in).
+
+This post is going to:
+
+ 1. Explain [what the errors look like][part0],
+ 1. Explain [what the check does][part1], at a high level,
+ 2. Explain [how the check is presenting itself][part2] in the Rust 1.52.0 release,
+ 3. Tell you [what you should do][part3] if you see an unstable fingerprint on your project,
+ 4. Describe our plans for [how the Rust project will address][part4] the problems discussed here.
+
+[part0]: #what-does-the-error-look-like
+[part1]: #what-are-fingerprints-why-are-we-checking-them
+[part2]: #how-does-this-show-up
+[part3]: #what-should-a-rust-programmer-do-in-response
+[part4]: #what-is-the-rust-project-going-to-do-to-fix-this
+
+## What does the error look like?
+
+The error message looks something like this, with the key piece being the "found
+unstable fingerprints" text.
 
 ```
 thread 'rustc' panicked at 'assertion failed: `(left == right)`
   left: `Some(Fingerprint(4565771098143344972, 7869445775526300234))`,
-   right: `Some(Fingerprint(14934403843752251060, 623484215826468126))`: found unstable fingerprints for <massive text describing rustc internals elided>
+  right: `Some(Fingerprint(14934403843752251060, 623484215826468126))`: found unstable fingerprints for <massive text describing rustc internals elided>
 
 error: internal compiler error: unexpected panic
 
 note: the compiler unexpectedly panicked. this is a bug.
 ```
 
-This internal-consistency check, as stated in the diagnostic, yields an "Internal Compiler Error" (or ICE). In other words, it represents a bug in the internals of the Rust compiler itself. In *this* case, though, the ICE is revealing a bug that 1.) predates the 1.52.0 release and 2.) could result in miscompilation if it had not been caught by `verify-ich`.
-
-In other words: If you are seeing the above Internal Compiler Error, you may be tempted to respond by reverting to the 1.51 release. It is important to note that a downgrade is *not* the best response to this problem.
-
-This post is going to:
-
- 1. Explain [what the check does][part1], at a high level,
- 2. Explain [how the check is presenting itself][part2] in the Rust 1.52.0 release,
- 3. Tell you [what you should do][part3] if you see an unstable fingerprint on your project,
- 4. Describe our plans for [how the Rust project will address][part4] the problems discussed here.
-
-[part1]: #what-are-fingerprints-why-are-we-checking-them
-[part2]: #how-does-this-show-up
-[part3]: #what-should-a-rust-programmer-do-in-response
-[part4]: #what-is-the-rust-project-going-to-do-to-fix-this
+This is the error caused by the internal consistency check, and as stated in the diagnostic, it yields an "Internal Compiler Error" (or ICE). In other words, it represents a bug in the internals of the Rust compiler itself. In *this* case, the ICE is revealing a bug that predates the 1.52.0 release and could result in miscompilation if it had not been caught by `verify-ich`.
 
 ## What are fingerprints? Why are we checking them?
 
@@ -70,14 +79,18 @@ Fingerprints are part of our architecture for detecting when inputs change. More
 
 [rustc-dev-guide-fingerprints]: https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation-in-detail.html#checking-query-results-for-changes-hashstable-and-fingerprints
 
-The `verify-ich` check is a safeguard asserting internal inconsistency of the fingerprints.
-The compiler stores fingerprints for both cached and uncached values.
-Every time we compute an uncached value, we double-check that its newly computed fingerprint against the finger print stored in the cache.
-There are multiple ways that a fingerprint mismatch could arise, but they all represent bugs within the Rust compiler itself.
+The `verify-ich` check is a safeguard asserting internal consistency of the
+fingerprints. Sometimes the compiler is forced to rerun a query, and expects
+that the output is the same as from a prior incremental compilation session. The
+newly enabled verification checks that the value is indeed as expected, rather
+than assuming so. In some cases, due to bugs in the compiler's implementation,
+this was not actually the case.
 
-## History of deployment
+## History
 
-We [initially added][pr-45867] `verify-ich` as a tool to use when developing rustc itself, back in 2017; it was solely provided via an unstable `-Z` flag, only available to nightly and development builds.
+We [initially added][pr-45867] `verify-ich` as a tool to use when developing
+rustc itself, back in 2017. It was solely provided via an unstable `-Z` flag,
+only available to nightly and development builds.
 
 More recently, in March, we encountered a [miscompilation][issue-82920] that led us to [turn on `verify-ich` by default][pr-83007]. The Rust compiler team decided it was better to catch fingerprint problems and abort compilation, rather than allow for potential miscompilations (and subsequent misbehavior) to sneak into Rust programmer's binaries.
 
@@ -87,11 +100,13 @@ More recently, in March, we encountered a [miscompilation][issue-82920] that led
 
 When we first turned on `verify-ich` by default, there was a steady stream of
 issues filed by users of the nightly (and beta) toolchains, and steady progress
-has been made on identifying fixes, a number of which have already landed. This
-last week, we noted incorrectly that the error would be shipping to stable
-next cycle in 1.53.0, and we started [making plans][issue-84970] to improve the
+has been made on identifying fixes, a number of which have already landed.
+
+In the past week, we had started [making plans][issue-84970] to improve the
 user-experience, so that the diagnostic issued by the check would do a better
-job of telling the programmer what to do in response.
+job of telling the programmer what to do in response. Unfortunately, this was
+done under the assumption that the new verification would ship in 1.53, not
+1.52.
 
 [issue-84970]: https://github.com/rust-lang/rust/issues/84970
 
@@ -110,20 +125,27 @@ Essentially, for some crates, certain sequences of edit-compile cycles will caus
 Another recent example looks [like this](https://github.com/rust-lang/rust/issues/85039):
 
 ```
-thread 'rustc' panicked at 'found unstable fingerprints for predicates_of(<massive text describing rustc internals elided>)', /rustc/88f19c6dab716c6281af7602e30f413e809c5974/compiler/rustc_query_system/src/query/plumbing.rs:593:5
+thread 'rustc' panicked at 'found unstable fingerprints for predicates_of(<massive text describing rustc internals elided>)', /rustc/.../compiler/rustc_query_system/src/query/plumbing.rs:593:5
 ```
 
 They all arise from inconsistencies when comparing the incremental-compilation cache stored on disk against the values computed during a current `rustc` invocation, which means they all arise from using incremental compilation.
 
-There are three ways that you may have incremental compilation turned on: You may have set the [environment variable][env-vars] `CARGO_INCREMENTAL=1`, or you may have enabled the `build.incremental` [setting in your Cargo.toml][cargo-toml], or you may be building with the `dev` or `test` [profiles][], which default to having incremental compilation enabled.
+There are several ways that you may have incremental compilation turned on:
+
+1. You may be building with the `dev` or `test` [profiles][] which default to having incremental compilation enabled.
+2. You may have set the [environment variable][env-vars] `CARGO_INCREMENTAL=1`
+3. You may have enabled the `build.incremental` [setting in your Cargo config][cargo-config]
+4. You may have enabled the `incremental` [setting in your Cargo.toml][cargo-toml] for a given profile
 
 [env-vars]: https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-reads
-[cargo-toml]: https://doc.rust-lang.org/cargo/reference/config.html#buildincremental
+[cargo-config]: https://doc.rust-lang.org/cargo/reference/config.html#buildincremental
+[cargo-toml]: https://doc.rust-lang.org/cargo/reference/profiles.html#incremental
 [profiles]: https://doc.rust-lang.org/cargo/reference/profiles.html
 
-Incremental is disabled by default for the release profile, which should mean
-that unless you have enabled it yourself, these errors do not affect release
-builds, as they are only present in incremental builds.
+If your project has not adjusted the defaults, then when running `cargo build
+--release` or otherwise in the `release` profile configuration incremental is
+disabled on all Rust versions, and these issues should not affect your release
+builds.
 
 ## What should a Rust programmer do in response
 
@@ -144,9 +166,18 @@ We do *not* recommend that users of 1.52.0 downgrade to an earlier version of Ru
 If a user is willing to deal with the incremental verification ICE's, and wishes
 to opt back into the 1.52.0 behavior, they may set `RUSTC_FORCE_INCREMENTAL` to
 `1` in their environment. The Rust compiler will then respect the
-`-Cincremental` option passed by Cargo, and things will work as before. Note
-that this flag does not enable incremental if it has not already been separately
-enabled (whether by Cargo or otherwise).
+`-Cincremental` option passed by Cargo, and things will work as before, though
+with the added verification. Note that this flag does not enable incremental if
+it has not already been separately enabled (whether by Cargo or otherwise).
+
+If you are currently using a toolchain prior to 1.52.0, and wish to continue
+doing so, we recommend that you disable incremental compilation to avoid hitting
+silent miscompilations.
+
+On all Rust builds since incremental has landed, it has been a major
+improvement to compile times for many users, and has only improved over time. We
+acknowledge that the workarounds presented here and recommendations are painful,
+and will be working hard to ensure the situation is as temporary as possible.
 
 ## What is the Rust project going to do to fix this
 
@@ -156,7 +187,9 @@ We have issued 1.52.1 today which:
 
 * Disables incremental compilation in the Rust compiler (unless asked for by a
   new environment variable, `RUSTC_FORCE_INCREMENTAL=1`).
-* Improves diagnostic output for the new verification if incremental compilation is enabled, indicating how to work around the bugs.
+* Improves diagnostic output for the new verification if incremental compilation is enabled,
+  indicating how to work around the bugs by purging incremental state or
+  disabling incremental.
 
 This is intended to be a mitigation that helps the majority of Rust users have
 an upgrade path to a safe Rust compiler which does not have the risk of
