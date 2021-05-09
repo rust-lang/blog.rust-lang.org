@@ -67,7 +67,7 @@ error: internal compiler error: unexpected panic
 note: the compiler unexpectedly panicked. this is a bug.
 ```
 
-This is the error caused by the internal consistency check, and as stated in the diagnostic, it yields an "Internal Compiler Error" (or ICE). In other words, it represents a bug in the internals of the Rust compiler itself. In *this* case, the ICE is revealing a bug that predates the 1.52.0 release and could result in miscompilation if it had not been caught by `verify-ich`.
+This is the error caused by the internal consistency check, and as stated in the diagnostic, it yields an "Internal Compiler Error" (or ICE). In other words, it represents a bug in the internals of the Rust compiler itself. In *this* case, the ICE is revealing a bug in incremental compilation that predates the 1.52.0 release and could result in miscompilation if it had not been caught by `verify-ich`.
 
 ## What are fingerprints? Why are we checking them?
 
