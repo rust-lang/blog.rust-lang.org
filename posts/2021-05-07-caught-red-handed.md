@@ -123,7 +123,7 @@ It turns out `verify-ich` was turned on in version 1.52.0, which was [released r
 
 [released recently]: /2021/05/06/Rust-1.52.0.html
 
-This release, 1.52.1, works around the breakage caused by the newly added
+Today's new release, 1.52.1, works around the breakage caused by the newly added
 verification by temporarily changing the defaults in the Rust compiler to disable
 incremental unless the user knowingly opts in.
 
