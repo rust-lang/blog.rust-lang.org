@@ -163,7 +163,7 @@ The Internal Compiler Error asks you to report a bug, and if you can do so, we s
 But regardless of whether or not you file a bug, the problem can be worked around on your end by either:
 
  1. upgrading to 1.52.1, if you have not yet done so (which will disable
-    incremental for you).
+    incremental for you), or
  2. deleting your incremental compilation cache (e.g. by running `cargo clean`), or
  3. forcing incremental compilation to be disabled, by setting `CARGO_INCREMENTAL=0` in your environment or `build.incremental` to `false` in the `config.toml`.
 
