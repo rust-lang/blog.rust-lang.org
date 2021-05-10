@@ -160,7 +160,7 @@ builds.
 
 The Internal Compiler Error asks you to report a bug, and if you can do so, we still want that information. We *want* to know about the cases that are failing.
 
-But regardless of whether or not you file a bug, the problem here can be resolved by either:
+But regardless of whether or not you file a bug, the problem can be worked around on your end by either:
 
  1. upgrading to 1.52.1, if you have not yet done so (which will disable
     incremental for you).
