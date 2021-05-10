@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.52.1 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.52.1 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.52.1 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.52.1" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.52.1</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 10, 2021 &middot; Felix Klock, Mark Rousskov
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">the compiler team</a> 
+    </div>
+
+    <div class="post">
+      <p>The Rust team has prepared a new release, 1.52.1, working around a bug in
+incremental compilation which was made into a compiler error in 1.52.0. We
+recommend all Rust users, including those currently using stable versions prior
+to 1.52.0, upgrade to 1.52.1 or disable incremental compilation. Guidance on how
+to do so is available below.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.52.1 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a>
+from the appropriate page on our website.</p>
+<h1><a href="#summary" aria-hidden="true" class="anchor" id="summary"></a>Summary</h1>
+<p>This release works around broken builds on 1.52.0, which are caused by newly
+added verification. The bugs this verification detects are present in all Rust
+versions<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>, and can trigger miscompilations in incremental builds, so downgrading
+to a prior stable version is not a fix.</p>
+<p>Users are encouraged to upgrade to 1.52.1 or disable incremental in their local
+environment if on a prior version: please see the <a href="#what-should-a-rust-programmer-do-in-response">what you should do</a>
+section for details on how to do so.</p>
+<p>Incremental compilation is off by default for release builds, so few
+production builds should be affected (only for users who have opted in).</p>
+<p>Miscompilations that can arise from the bugs in incremental compilation generate incorrect code in final
+artifacts, essentially producing malformed binaries, which means that in theory
+any behavior is possible. In practice we are currently only aware of one
+particular known miscompilation, but bugs due to incremental are notoriously
+hard to track down: users frequently simply rebuild after some light editing if
+they see unexpected results from their binaries, and this often causes
+sufficient recompilation to fix the bug(s).</p>
+<p>This post is going to:</p>
+<ol>
+<li>Explain <a href="#what-does-the-error-look-like">what the errors look like</a>,</li>
+<li>Explain <a href="#what-are-fingerprints-why-are-we-checking-them">what the check does</a>, at a high level,</li>
+<li>Explain <a href="#how-does-this-show-up">how the check is presenting itself</a> in the Rust 1.52.0 release,</li>
+<li>Tell you <a href="#what-should-a-rust-programmer-do-in-response">what you should do</a> if you see an unstable fingerprint on your project,</li>
+<li>Describe our plans for <a href="#what-is-the-rust-project-going-to-do-to-fix-this">how the Rust project will address</a> the problems discussed here.</li>
+</ol>
+<h2><a href="#what-does-the-error-look-like" aria-hidden="true" class="anchor" id="what-does-the-error-look-like"></a>What does the error look like?</h2>
+<p>The error message looks something like this, with the key piece being the &quot;found
+unstable fingerprints&quot; text.</p>
+<pre><code class="language-text">thread 'rustc' panicked at 'assertion failed: `(left == right)`
+  left: `Some(Fingerprint(4565771098143344972, 7869445775526300234))`,
+  right: `Some(Fingerprint(14934403843752251060, 623484215826468126))`: found unstable fingerprints for &lt;massive text describing rustc internals elided&gt;
+
+error: internal compiler error: unexpected panic
+
+note: the compiler unexpectedly panicked. this is a bug.
+</code></pre>
+<p>This is the error caused by the internal consistency check, and as stated in the diagnostic, it yields an &quot;Internal Compiler Error&quot; (or ICE). In other words, it represents a bug in the internals of the Rust compiler itself. In <em>this</em> case, the ICE is revealing a bug in incremental compilation that predates the 1.52.0 release and could result in miscompilation if it had not been caught.</p>
+<h2><a href="#what-are-fingerprints-why-are-we-checking-them" aria-hidden="true" class="anchor" id="what-are-fingerprints-why-are-we-checking-them"></a>What are fingerprints? Why are we checking them?</h2>
+<p>The Rust compiler has support for &quot;incremental compilation&quot;, which has been described in a <a href="https://blog.rust-lang.org/2016/09/08/incremental.html">2016 blog post</a>. When incremental compilation is turned on, the compiler breaks the input source into pieces, and tracks how those input pieces influence the final build product. Then, when the inputs change, it detects this and reuses artifacts from previous builds, striving to expend effort solely on building the parts that need to respond to the changes to the input source code.</p>
+<p>Fingerprints are part of our architecture for detecting when inputs change. More specifically, a fingerprint (along with some other state to establish context) is a 128-bit value intended to uniquely identify internal values used within the compiler. Some compiler-internal results are stored on disk (&quot;cached&quot;) between runs. Fingerprints are used to validate that a newly computed result is unchanged from the cached result. (More details about this are available in the <a href="https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation-in-detail.html#checking-query-results-for-changes-hashstable-and-fingerprints">relevant chapter of the rustc dev guide</a>.)</p>
+<p>The fingerprint stability check is a safeguard asserting internal consistency of
+the fingerprints. Sometimes the compiler is forced to rerun a query, and expects
+that the output is the same as from a prior incremental compilation session. The
+newly enabled verification checks that the value is indeed as expected, rather
+than assuming so. In some cases, due to bugs in the compiler's implementation,
+this was not actually the case.</p>
+<h2><a href="#history" aria-hidden="true" class="anchor" id="history"></a>History</h2>
+<p>We <a href="https://github.com/rust-lang/rust/pull/45867">initially added</a> these fingerprint checks as a tool to use when
+developing rustc itself, back in 2017. It was solely provided via an unstable
+<code>-Z</code> flag, only available to nightly and development builds.</p>
+<p>More recently, in March, we encountered a <a href="https://github.com/rust-lang/rust/issues/82920">miscompilation</a> that led us to <a href="https://github.com/rust-lang/rust/pull/83007">turn on <code>verify-ich</code> by default</a>. The Rust compiler team decided it was better to catch fingerprint problems and abort compilation, rather than allow for potential miscompilations (and subsequent misbehavior) to sneak into Rust programmer's binaries.</p>
+<p>When we first turned on the fingerprint checks by default, there was a steady
+stream of issues filed by users of the nightly (and beta) toolchains, and steady
+progress has been made on identifying fixes, a number of which have already
+landed.</p>
+<p>In the past week, we had started <a href="https://github.com/rust-lang/rust/issues/84970">making plans</a> to improve the
+user-experience, so that the diagnostic issued by the check would do a better
+job of telling the programmer what to do in response. Unfortunately, this was
+done under the assumption that the new verification would ship in 1.53, not
+1.52.</p>
+<p>It turns out <code>verify-ich</code> was turned on in version 1.52.0, which was <a href="/2021/05/06/Rust-1.52.0.html">released recently</a>.</p>
+<p>Today's new release, 1.52.1, works around the breakage caused by the newly added
+verification by temporarily changing the defaults in the Rust compiler to disable
+incremental unless the user knowingly opts in.</p>
+<h2><a href="#how-does-this-show-up" aria-hidden="true" class="anchor" id="how-does-this-show-up"></a>How does this show up</h2>
+<p>Essentially, for some crates, certain sequences of edit-compile cycles will cause <code>rustc</code> to hit the &quot;unstable fingerprints&quot; ICE. I showed one example at the start of this blog post.</p>
+<p>Another recent example looks <a href="https://github.com/rust-lang/rust/issues/85039">like this</a>:</p>
+<pre><code class="language-text">thread 'rustc' panicked at 'found unstable fingerprints for predicates_of(&lt;massive text describing rustc internals elided&gt;)', /rustc/.../compiler/rustc_query_system/src/query/plumbing.rs:593:5
+</code></pre>
+<p>They all arise from inconsistencies when comparing the incremental-compilation cache stored on disk against the values computed during a current <code>rustc</code> invocation, which means they all arise from using incremental compilation.</p>
+<p>There are several ways that you may have incremental compilation turned on:</p>
+<ol>
+<li>You may be building with the <code>dev</code> or <code>test</code> <a href="https://doc.rust-lang.org/cargo/reference/profiles.html">profiles</a> which default to having incremental compilation enabled.</li>
+<li>You may have set the <a href="https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-reads">environment variable</a> <code>CARGO_INCREMENTAL=1</code></li>
+<li>You may have enabled the <code>build.incremental</code> <a href="https://doc.rust-lang.org/cargo/reference/config.html#buildincremental">setting in your Cargo config</a></li>
+<li>You may have enabled the <code>incremental</code> <a href="https://doc.rust-lang.org/cargo/reference/profiles.html#incremental">setting in your Cargo.toml</a> for a given profile</li>
+</ol>
+<p>If your project has not adjusted the defaults, then when running <code>cargo build --release</code> or otherwise in the <code>release</code> profile configuration incremental is
+disabled on all Rust versions<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>, and these issues should not affect your release
+builds.</p>
+<h2><a href="#what-should-a-rust-programmer-do-in-response" aria-hidden="true" class="anchor" id="what-should-a-rust-programmer-do-in-response"></a>What should a Rust programmer do in response</h2>
+<p>The Internal Compiler Error asks you to report a bug, and if you can do so, we still want that information. We <em>want</em> to know about the cases that are failing.</p>
+<p>But regardless of whether or not you file a bug, the problem can be worked around on your end by either:</p>
+<ol>
+<li>upgrading to 1.52.1, if you have not yet done so (which will disable
+incremental for you), or</li>
+<li>deleting your incremental compilation cache (e.g. by running <code>cargo clean</code>), or</li>
+<li>forcing incremental compilation to be disabled, by setting <code>CARGO_INCREMENTAL=0</code> in your environment or <code>build.incremental</code> to <code>false</code> in the <code>config.toml</code>.</li>
+</ol>
+<p>We recommend that users of 1.52.0 upgrade to 1.52.1, which disables incremental
+compilation.</p>
+<p>We do <em>not</em> recommend that users of 1.52.0 downgrade to an earlier version of Rust in response to this problem. As noted above, there is at least one instance of a silent <a href="https://github.com/rust-lang/rust/issues/82920">miscompilation</a> caused by incremental compilation that was not caught until we added the fingerprint checking.</p>
+<p>If a user is willing to deal with the incremental verification ICE's, and wishes
+to opt back into the 1.52.0 behavior, they may set <code>RUSTC_FORCE_INCREMENTAL</code> to
+<code>1</code> in their environment. The Rust compiler will then respect the
+<code>-Cincremental</code> option passed by Cargo, and things will work as before, though
+with the added verification. Note that this flag does not enable incremental if
+it has not already been separately enabled (whether by Cargo or otherwise).</p>
+<p>If you are currently using a toolchain prior to 1.52.0, and wish to continue
+doing so, we recommend that you disable incremental compilation to avoid hitting
+silent miscompilations.</p>
+<p>On all Rust builds since incremental has landed, it has been a major
+improvement to compile times for many users, and has only improved over time. We
+acknowledge that the workarounds presented here and recommendations are painful,
+and will be working hard to ensure the situation is as temporary as possible.</p>
+<h2><a href="#what-is-the-rust-project-going-to-do-to-fix-this" aria-hidden="true" class="anchor" id="what-is-the-rust-project-going-to-do-to-fix-this"></a>What is the Rust project going to do to fix this</h2>
+<h3><a href="#short-term-plan" aria-hidden="true" class="anchor" id="short-term-plan"></a>Short-term plan</h3>
+<p>We have issued 1.52.1 today which:</p>
+<ul>
+<li>Disables incremental compilation in the Rust compiler (unless asked for by a
+new environment variable, <code>RUSTC_FORCE_INCREMENTAL=1</code>).</li>
+<li>Improves diagnostic output for the new verification if incremental compilation is enabled,
+indicating how to work around the bugs by purging incremental state or
+disabling incremental.</li>
+</ul>
+<p>This is intended to be a mitigation that helps the majority of Rust users have
+an upgrade path to a safe Rust compiler which does not have the risk of
+miscompiling their code, but also provide the option for users willing to deal
+with the errors to do so.</p>
+<p>We expect to continue to actively invest in fixing the bugs, and depending on
+our confidence in the fixes, may issue a 1.52.2 point release which backports
+those fixes to the stable channel. Users wishing to help us test can use the
+nightly channel, and report bugs to rust-lang/rust with any ICEs they
+are seeing.</p>
+<p>We are also currently not planning to disable incremental on the beta channel,
+but this decision has not been firmly committed to. A number of fixes are
+available on 1.53 beta today, so users who wish to continue using incremental
+may want to switch to that. Nightly will always have the latest in fixes, of
+course.</p>
+<h3><a href="#long-term-plan" aria-hidden="true" class="anchor" id="long-term-plan"></a>Long-term plan</h3>
+<p>The long-term plan is to fix the bugs! Incremental compilation is the only realistic way for the Rust compiler to be able to provide a fast edit-compile-run cycle for all of its programmers, and so we need to address <a href="https://github.com/rust-lang/rust/issues?q=is%3Aissue+is%3Aopen+unstable+fingerprints">all of the issues</a> that have been identified thus far via <code>verify-ich</code>. (There are 32 such issues as of this writing, though many are duplicates.)</p>
+<p>We are actively investing in this, and a number of bugs have already been
+identified and fixed. Depending on the state of the fixes, future stable
+releases (1.53 and onwards) will likely re-enable incremental compilation.</p>
+<p>The Rust teams will also be developing plans to ensure we have better tracking
+systems in place in the future for bugs, both to prevent situations like this
+from arising again, but also to further increase the stability of our releases
+by tracking bugs more accurately as they propagate across channels.</p>
+<section class="footnotes">
+<ol>
+<li id="fn1">
+<p>Since incremental was first enabled, which was in Rust 1.24. <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

@@ -10,8 +10,177 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-05-06T16:22:42+00:00</updated>
+    <updated>2021-05-10T14:40:39+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.52.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/05/10/Rust-1.52.1.html" type="text/html" title="Announcing Rust 1.52.1" />
+        <published>2021-05-10T00:00:00+00:00</published>
+        <updated>2021-05-10T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/05/10/Rust-1.52.1.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/05/10/Rust-1.52.1.html">&lt;p&gt;The Rust team has prepared a new release, 1.52.1, working around a bug in
+incremental compilation which was made into a compiler error in 1.52.0. We
+recommend all Rust users, including those currently using stable versions prior
+to 1.52.0, upgrade to 1.52.1 or disable incremental compilation. Guidance on how
+to do so is available below.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.52.1 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
+from the appropriate page on our website.&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#summary&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;summary&quot;&gt;&lt;/a&gt;Summary&lt;/h1&gt;
+&lt;p&gt;This release works around broken builds on 1.52.0, which are caused by newly
+added verification. The bugs this verification detects are present in all Rust
+versions&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, and can trigger miscompilations in incremental builds, so downgrading
+to a prior stable version is not a fix.&lt;/p&gt;
+&lt;p&gt;Users are encouraged to upgrade to 1.52.1 or disable incremental in their local
+environment if on a prior version: please see the &lt;a href&#x3D;&quot;#what-should-a-rust-programmer-do-in-response&quot;&gt;what you should do&lt;/a&gt;
+section for details on how to do so.&lt;/p&gt;
+&lt;p&gt;Incremental compilation is off by default for release builds, so few
+production builds should be affected (only for users who have opted in).&lt;/p&gt;
+&lt;p&gt;Miscompilations that can arise from the bugs in incremental compilation generate incorrect code in final
+artifacts, essentially producing malformed binaries, which means that in theory
+any behavior is possible. In practice we are currently only aware of one
+particular known miscompilation, but bugs due to incremental are notoriously
+hard to track down: users frequently simply rebuild after some light editing if
+they see unexpected results from their binaries, and this often causes
+sufficient recompilation to fix the bug(s).&lt;/p&gt;
+&lt;p&gt;This post is going to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Explain &lt;a href&#x3D;&quot;#what-does-the-error-look-like&quot;&gt;what the errors look like&lt;/a&gt;,&lt;/li&gt;
+&lt;li&gt;Explain &lt;a href&#x3D;&quot;#what-are-fingerprints-why-are-we-checking-them&quot;&gt;what the check does&lt;/a&gt;, at a high level,&lt;/li&gt;
+&lt;li&gt;Explain &lt;a href&#x3D;&quot;#how-does-this-show-up&quot;&gt;how the check is presenting itself&lt;/a&gt; in the Rust 1.52.0 release,&lt;/li&gt;
+&lt;li&gt;Tell you &lt;a href&#x3D;&quot;#what-should-a-rust-programmer-do-in-response&quot;&gt;what you should do&lt;/a&gt; if you see an unstable fingerprint on your project,&lt;/li&gt;
+&lt;li&gt;Describe our plans for &lt;a href&#x3D;&quot;#what-is-the-rust-project-going-to-do-to-fix-this&quot;&gt;how the Rust project will address&lt;/a&gt; the problems discussed here.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-does-the-error-look-like&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-does-the-error-look-like&quot;&gt;&lt;/a&gt;What does the error look like?&lt;/h2&gt;
+&lt;p&gt;The error message looks something like this, with the key piece being the &amp;quot;found
+unstable fingerprints&amp;quot; text.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;thread &#x27;rustc&#x27; panicked at &#x27;assertion failed: &#x60;(left &#x3D;&#x3D; right)&#x60;
+  left: &#x60;Some(Fingerprint(4565771098143344972, 7869445775526300234))&#x60;,
+  right: &#x60;Some(Fingerprint(14934403843752251060, 623484215826468126))&#x60;: found unstable fingerprints for &amp;lt;massive text describing rustc internals elided&amp;gt;
+
+error: internal compiler error: unexpected panic
+
+note: the compiler unexpectedly panicked. this is a bug.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is the error caused by the internal consistency check, and as stated in the diagnostic, it yields an &amp;quot;Internal Compiler Error&amp;quot; (or ICE). In other words, it represents a bug in the internals of the Rust compiler itself. In &lt;em&gt;this&lt;/em&gt; case, the ICE is revealing a bug in incremental compilation that predates the 1.52.0 release and could result in miscompilation if it had not been caught.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-are-fingerprints-why-are-we-checking-them&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-are-fingerprints-why-are-we-checking-them&quot;&gt;&lt;/a&gt;What are fingerprints? Why are we checking them?&lt;/h2&gt;
+&lt;p&gt;The Rust compiler has support for &amp;quot;incremental compilation&amp;quot;, which has been described in a &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2016/09/08/incremental.html&quot;&gt;2016 blog post&lt;/a&gt;. When incremental compilation is turned on, the compiler breaks the input source into pieces, and tracks how those input pieces influence the final build product. Then, when the inputs change, it detects this and reuses artifacts from previous builds, striving to expend effort solely on building the parts that need to respond to the changes to the input source code.&lt;/p&gt;
+&lt;p&gt;Fingerprints are part of our architecture for detecting when inputs change. More specifically, a fingerprint (along with some other state to establish context) is a 128-bit value intended to uniquely identify internal values used within the compiler. Some compiler-internal results are stored on disk (&amp;quot;cached&amp;quot;) between runs. Fingerprints are used to validate that a newly computed result is unchanged from the cached result. (More details about this are available in the &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation-in-detail.html#checking-query-results-for-changes-hashstable-and-fingerprints&quot;&gt;relevant chapter of the rustc dev guide&lt;/a&gt;.)&lt;/p&gt;
+&lt;p&gt;The fingerprint stability check is a safeguard asserting internal consistency of
+the fingerprints. Sometimes the compiler is forced to rerun a query, and expects
+that the output is the same as from a prior incremental compilation session. The
+newly enabled verification checks that the value is indeed as expected, rather
+than assuming so. In some cases, due to bugs in the compiler&#x27;s implementation,
+this was not actually the case.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#history&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;history&quot;&gt;&lt;/a&gt;History&lt;/h2&gt;
+&lt;p&gt;We &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/45867&quot;&gt;initially added&lt;/a&gt; these fingerprint checks as a tool to use when
+developing rustc itself, back in 2017. It was solely provided via an unstable
+&lt;code&gt;-Z&lt;/code&gt; flag, only available to nightly and development builds.&lt;/p&gt;
+&lt;p&gt;More recently, in March, we encountered a &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/82920&quot;&gt;miscompilation&lt;/a&gt; that led us to &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/83007&quot;&gt;turn on &lt;code&gt;verify-ich&lt;/code&gt; by default&lt;/a&gt;. The Rust compiler team decided it was better to catch fingerprint problems and abort compilation, rather than allow for potential miscompilations (and subsequent misbehavior) to sneak into Rust programmer&#x27;s binaries.&lt;/p&gt;
+&lt;p&gt;When we first turned on the fingerprint checks by default, there was a steady
+stream of issues filed by users of the nightly (and beta) toolchains, and steady
+progress has been made on identifying fixes, a number of which have already
+landed.&lt;/p&gt;
+&lt;p&gt;In the past week, we had started &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/84970&quot;&gt;making plans&lt;/a&gt; to improve the
+user-experience, so that the diagnostic issued by the check would do a better
+job of telling the programmer what to do in response. Unfortunately, this was
+done under the assumption that the new verification would ship in 1.53, not
+1.52.&lt;/p&gt;
+&lt;p&gt;It turns out &lt;code&gt;verify-ich&lt;/code&gt; was turned on in version 1.52.0, which was &lt;a href&#x3D;&quot;/2021/05/06/Rust-1.52.0.html&quot;&gt;released recently&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Today&#x27;s new release, 1.52.1, works around the breakage caused by the newly added
+verification by temporarily changing the defaults in the Rust compiler to disable
+incremental unless the user knowingly opts in.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#how-does-this-show-up&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-does-this-show-up&quot;&gt;&lt;/a&gt;How does this show up&lt;/h2&gt;
+&lt;p&gt;Essentially, for some crates, certain sequences of edit-compile cycles will cause &lt;code&gt;rustc&lt;/code&gt; to hit the &amp;quot;unstable fingerprints&amp;quot; ICE. I showed one example at the start of this blog post.&lt;/p&gt;
+&lt;p&gt;Another recent example looks &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/85039&quot;&gt;like this&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;thread &#x27;rustc&#x27; panicked at &#x27;found unstable fingerprints for predicates_of(&amp;lt;massive text describing rustc internals elided&amp;gt;)&#x27;, /rustc/.../compiler/rustc_query_system/src/query/plumbing.rs:593:5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;They all arise from inconsistencies when comparing the incremental-compilation cache stored on disk against the values computed during a current &lt;code&gt;rustc&lt;/code&gt; invocation, which means they all arise from using incremental compilation.&lt;/p&gt;
+&lt;p&gt;There are several ways that you may have incremental compilation turned on:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You may be building with the &lt;code&gt;dev&lt;/code&gt; or &lt;code&gt;test&lt;/code&gt; &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/profiles.html&quot;&gt;profiles&lt;/a&gt; which default to having incremental compilation enabled.&lt;/li&gt;
+&lt;li&gt;You may have set the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-reads&quot;&gt;environment variable&lt;/a&gt; &lt;code&gt;CARGO_INCREMENTAL&#x3D;1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;You may have enabled the &lt;code&gt;build.incremental&lt;/code&gt; &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/config.html#buildincremental&quot;&gt;setting in your Cargo config&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;You may have enabled the &lt;code&gt;incremental&lt;/code&gt; &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/profiles.html#incremental&quot;&gt;setting in your Cargo.toml&lt;/a&gt; for a given profile&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If your project has not adjusted the defaults, then when running &lt;code&gt;cargo build --release&lt;/code&gt; or otherwise in the &lt;code&gt;release&lt;/code&gt; profile configuration incremental is
+disabled on all Rust versions&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, and these issues should not affect your release
+builds.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-should-a-rust-programmer-do-in-response&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-should-a-rust-programmer-do-in-response&quot;&gt;&lt;/a&gt;What should a Rust programmer do in response&lt;/h2&gt;
+&lt;p&gt;The Internal Compiler Error asks you to report a bug, and if you can do so, we still want that information. We &lt;em&gt;want&lt;/em&gt; to know about the cases that are failing.&lt;/p&gt;
+&lt;p&gt;But regardless of whether or not you file a bug, the problem can be worked around on your end by either:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;upgrading to 1.52.1, if you have not yet done so (which will disable
+incremental for you), or&lt;/li&gt;
+&lt;li&gt;deleting your incremental compilation cache (e.g. by running &lt;code&gt;cargo clean&lt;/code&gt;), or&lt;/li&gt;
+&lt;li&gt;forcing incremental compilation to be disabled, by setting &lt;code&gt;CARGO_INCREMENTAL&#x3D;0&lt;/code&gt; in your environment or &lt;code&gt;build.incremental&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt; in the &lt;code&gt;config.toml&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We recommend that users of 1.52.0 upgrade to 1.52.1, which disables incremental
+compilation.&lt;/p&gt;
+&lt;p&gt;We do &lt;em&gt;not&lt;/em&gt; recommend that users of 1.52.0 downgrade to an earlier version of Rust in response to this problem. As noted above, there is at least one instance of a silent &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/82920&quot;&gt;miscompilation&lt;/a&gt; caused by incremental compilation that was not caught until we added the fingerprint checking.&lt;/p&gt;
+&lt;p&gt;If a user is willing to deal with the incremental verification ICE&#x27;s, and wishes
+to opt back into the 1.52.0 behavior, they may set &lt;code&gt;RUSTC_FORCE_INCREMENTAL&lt;/code&gt; to
+&lt;code&gt;1&lt;/code&gt; in their environment. The Rust compiler will then respect the
+&lt;code&gt;-Cincremental&lt;/code&gt; option passed by Cargo, and things will work as before, though
+with the added verification. Note that this flag does not enable incremental if
+it has not already been separately enabled (whether by Cargo or otherwise).&lt;/p&gt;
+&lt;p&gt;If you are currently using a toolchain prior to 1.52.0, and wish to continue
+doing so, we recommend that you disable incremental compilation to avoid hitting
+silent miscompilations.&lt;/p&gt;
+&lt;p&gt;On all Rust builds since incremental has landed, it has been a major
+improvement to compile times for many users, and has only improved over time. We
+acknowledge that the workarounds presented here and recommendations are painful,
+and will be working hard to ensure the situation is as temporary as possible.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-the-rust-project-going-to-do-to-fix-this&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-the-rust-project-going-to-do-to-fix-this&quot;&gt;&lt;/a&gt;What is the Rust project going to do to fix this&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#short-term-plan&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;short-term-plan&quot;&gt;&lt;/a&gt;Short-term plan&lt;/h3&gt;
+&lt;p&gt;We have issued 1.52.1 today which:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Disables incremental compilation in the Rust compiler (unless asked for by a
+new environment variable, &lt;code&gt;RUSTC_FORCE_INCREMENTAL&#x3D;1&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;Improves diagnostic output for the new verification if incremental compilation is enabled,
+indicating how to work around the bugs by purging incremental state or
+disabling incremental.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is intended to be a mitigation that helps the majority of Rust users have
+an upgrade path to a safe Rust compiler which does not have the risk of
+miscompiling their code, but also provide the option for users willing to deal
+with the errors to do so.&lt;/p&gt;
+&lt;p&gt;We expect to continue to actively invest in fixing the bugs, and depending on
+our confidence in the fixes, may issue a 1.52.2 point release which backports
+those fixes to the stable channel. Users wishing to help us test can use the
+nightly channel, and report bugs to rust-lang/rust with any ICEs they
+are seeing.&lt;/p&gt;
+&lt;p&gt;We are also currently not planning to disable incremental on the beta channel,
+but this decision has not been firmly committed to. A number of fixes are
+available on 1.53 beta today, so users who wish to continue using incremental
+may want to switch to that. Nightly will always have the latest in fixes, of
+course.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#long-term-plan&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;long-term-plan&quot;&gt;&lt;/a&gt;Long-term plan&lt;/h3&gt;
+&lt;p&gt;The long-term plan is to fix the bugs! Incremental compilation is the only realistic way for the Rust compiler to be able to provide a fast edit-compile-run cycle for all of its programmers, and so we need to address &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues?q&#x3D;is%3Aissue+is%3Aopen+unstable+fingerprints&quot;&gt;all of the issues&lt;/a&gt; that have been identified thus far via &lt;code&gt;verify-ich&lt;/code&gt;. (There are 32 such issues as of this writing, though many are duplicates.)&lt;/p&gt;
+&lt;p&gt;We are actively investing in this, and a number of bugs have already been
+identified and fixed. Depending on the state of the fixes, future stable
+releases (1.53 and onwards) will likely re-enable incremental compilation.&lt;/p&gt;
+&lt;p&gt;The Rust teams will also be developing plans to ensure we have better tracking
+systems in place in the future for bugs, both to prevent situations like this
+from arising again, but also to further increase the stability of our releases
+by tracking bugs more accurately as they propagate across channels.&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn1&quot;&gt;
+&lt;p&gt;Since incremental was first enabled, which was in Rust 1.24. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Felix Klock, Mark Rousskov</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.52.0</title>
@@ -680,162 +849,6 @@ according to &lt;a href&#x3D;&quot;https://www.rust-lang.org/policies/security&q
 
         <author>
             <name>Rust Security Response WG</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.49.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2020/12/31/Rust-1.49.0.html" type="text/html" title="Announcing Rust 1.49.0" />
-        <published>2020-12-31T00:00:00+00:00</published>
-        <updated>2020-12-31T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2020/12/31/Rust-1.49.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2020/12/31/Rust-1.49.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.49.0. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.49.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1490-2020-12-31&quot;&gt;detailed release notes for
-1.49.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1490-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1490-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.49.0 stable&lt;/h2&gt;
-&lt;p&gt;For this release, we have some new targets and an improvement to the test
-framework. See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1490-2020-12-31&quot;&gt;detailed release notes&lt;/a&gt; to learn about other
-changes not covered by this post.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#64-bit-arm-linux-reaches-tier-1&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;64-bit-arm-linux-reaches-tier-1&quot;&gt;&lt;/a&gt;64-bit ARM Linux reaches Tier 1&lt;/h3&gt;
-&lt;p&gt;The Rust compiler supports &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/rustc/platform-support.html&quot;&gt;a wide variety of targets&lt;/a&gt;, but
-the Rust Team can&#x27;t provide the same level of support for all of them. To
-clearly mark how supported each target is, we use a tiering system:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Tier 3 targets are technically supported by the compiler, but we don&#x27;t check
-whether their code build or passes the tests, and we don&#x27;t provide any
-prebuilt binaries as part of our releases.&lt;/li&gt;
-&lt;li&gt;Tier 2 targets are guaranteed to build and we provide prebuilt binaries, but
-we don&#x27;t execute the test suite on those platforms: the produced binaries
-might not work or might have bugs.&lt;/li&gt;
-&lt;li&gt;Tier 1 targets provide the highest support guarantee, and we run the full
-suite on those platforms for every change merged in the compiler. Prebuilt
-binaries are also available.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Rust 1.49.0 promotes the &lt;code&gt;aarch64-unknown-linux-gnu&lt;/code&gt; target to Tier 1 support,
-bringing our highest guarantees to users of 64-bit ARM systems running Linux!
-We expect this change to benefit workloads spanning from embedded to desktops
-and servers.&lt;/p&gt;
-&lt;p&gt;This is an important milestone for the project, since it&#x27;s the first time a
-non-x86 target has reached Tier 1 support: we hope this will pave the way for
-more targets to reach our highest tier in the future.&lt;/p&gt;
-&lt;p&gt;Note that Android is not affected by this change as it uses a different Tier 2
-target.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#64-bit-arm-macos-and-windows-reach-tier-2&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;64-bit-arm-macos-and-windows-reach-tier-2&quot;&gt;&lt;/a&gt;64-bit ARM macOS and Windows reach Tier 2&lt;/h3&gt;
-&lt;p&gt;Rust 1.49.0 also features two targets reaching Tier 2 support:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;aarch64-apple-darwin&lt;/code&gt; target brings support for Rust on Apple M1 systems.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;aarch64-pc-windows-msvc&lt;/code&gt; target brings support for Rust on 64-bit ARM
-devices running Windows on ARM.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Developers can expect both of those targets to have prebuilt binaries
-installable with &lt;code&gt;rustup&lt;/code&gt; from now on! The Rust Team is not running the test
-suite on those platforms though, so there might be bugs or instabilities.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#test-framework-captures-output-in-threads&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;test-framework-captures-output-in-threads&quot;&gt;&lt;/a&gt;Test framework captures output in threads&lt;/h3&gt;
-&lt;p&gt;Rust&#x27;s built-in testing framework doesn&#x27;t have a ton of features, but that
-doesn&#x27;t mean it can&#x27;t be improved! Consider a test that looks like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[test]
-fn thready_pass() {
-    println!(&amp;quot;fee&amp;quot;);
-    std::thread::spawn(|| {
-        println!(&amp;quot;fie&amp;quot;);
-        println!(&amp;quot;foe&amp;quot;);
-    })
-    .join()
-    .unwrap();
-    println!(&amp;quot;fum&amp;quot;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here&#x27;s what running this test looks like before Rust 1.49.0:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;❯ cargo +1.48.0 test
-   Compiling threadtest v0.1.0 (C:\threadtest)
-    Finished test [unoptimized + debuginfo] target(s) in 0.38s
-     Running target\debug\deps\threadtest-02f42ffd9836cae5.exe
-
-running 1 test
-fie
-foe
-test thready_pass ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-   Doc-tests threadtest
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can see that the output from the thread is printed, which intermixes
-from the output of the test framework itself. Wouldn&#x27;t it be nice
-if every &lt;code&gt;println!&lt;/code&gt; worked like that one that prints &amp;quot;&lt;code&gt;fum&lt;/code&gt;?&amp;quot; Well, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/78227&quot;&gt;that&#x27;s
-the behavior in Rust 1.49.0&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;❯ cargo test
-   Compiling threadtest v0.1.0 (C:\threadtest)
-    Finished test [unoptimized + debuginfo] target(s) in 0.52s
-     Running target\debug\deps\threadtest-40aabfaa345584be.exe
-
-running 1 test
-test thready_pass ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
-
-   Doc-tests threadtest
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But don&#x27;t worry; if the test were to fail, you&#x27;ll still see all of the
-output. By adding a &lt;code&gt;panic!&lt;/code&gt; to the end of the test, we can see what failure
-looks like:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;❯ cargo test
-   Compiling threadtest v0.1.0 (C:\threadtest)
-    Finished test [unoptimized + debuginfo] target(s) in 0.52s
-     Running target\debug\deps\threadtest-40aabfaa345584be.exe
-
-running 1 test
-test thready_pass ... FAILED
-
-failures:
-
----- thready_pass stdout ----
-fee
-fie
-foe
-fum
-thread &#x27;thready_pass&#x27; panicked at &#x27;explicit panic&#x27;, src\lib.rs:11:5
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Specifically, the test runner makes sure to capture the output, and saves it
-in case the test fails.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#library-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
-&lt;p&gt;In Rust 1.49.0, there are three new stable functions:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/std/primitive.slice.html#method.select_nth_unstable&quot;&gt;&lt;code&gt;slice::select_nth_unstable&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/std/primitive.slice.html#method.select_nth_unstable_by&quot;&gt;&lt;code&gt;slice::select_nth_unstable_by&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/std/primitive.slice.html#method.select_nth_unstable_by_key&quot;&gt;&lt;code&gt;slice::select_nth_unstable_by_key&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And two functions were made &lt;code&gt;const&lt;/code&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/task/enum.Poll.html#method.is_ready&quot;&gt;&lt;code&gt;Poll::is_ready&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/task/enum.Poll.html#method.is_pending&quot;&gt;&lt;code&gt;Poll::is_pending&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1490-2020-12-31&quot;&gt;detailed release notes&lt;/a&gt; to learn about other changes.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.49.0 release: check out what changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1490-2020-12-31&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-149-2020-12-31&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-149&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1490&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1490&quot;&gt;&lt;/a&gt;Contributors to 1.49.0&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.49.0. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.49.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
