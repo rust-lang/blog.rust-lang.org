@@ -165,7 +165,7 @@ But regardless of whether or not you file a bug, the problem can be worked aroun
  1. upgrading to 1.52.1, if you have not yet done so (which will disable
     incremental for you).
  2. deleting your incremental compilation cache (e.g. by running `cargo clean`), or
- 3. force incremental compilation to be disabled, by setting `CARGO_INCREMENTAL=0` in your environment or `build.incremental` to `false` in the `config.toml`.
+ 3. forcing incremental compilation to be disabled, by setting `CARGO_INCREMENTAL=0` in your environment or `build.incremental` to `false` in the `config.toml`.
 
 We recommend that users of 1.52.0 upgrade to 1.52.1, which disables incremental
 compilation.
