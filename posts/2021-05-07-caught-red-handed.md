@@ -208,9 +208,14 @@ with the errors to do so.
 We expect to continue to actively invest in fixing the bugs, and depending on
 our confidence in the fixes, may issue a 1.52.2 point release which backports
 those fixes to the stable channel. Users wishing to help us test can use the
-nightly channel, and report bugs to rust-lang/rust with any ICEs they are
-seeing. We do not expect at this time to disable incremental by default on the
-nightly channel.
+nightly channel, and report bugs to rust-lang/rust with any ICEs they
+are seeing.
+
+We are also currently not planning to disable incremental on the beta channel,
+but this decision has not been firmly committed to. A number of fixes are
+available on 1.53 beta today, so users who wish to continue using incremental
+may want to switch to that. Nightly will always have the latest in fixes, of
+course.
 
 ### Long-term plan
 
