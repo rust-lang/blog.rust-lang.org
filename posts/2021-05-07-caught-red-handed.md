@@ -36,7 +36,7 @@ environment if on a prior version: please see the [what you should do][part3]
 section for details on how to do so.
 
 Incremental compilation is off by default for release builds, so few
-production builds should be affected (only users who may have opted in).
+production builds should be affected (only for users who have opted in).
 
 Miscompilations that can arise from the bugs in incremental compilation generate incorrect code in final
 artifacts, essentially producing malformed binaries, which means that in theory
