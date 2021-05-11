@@ -10,8 +10,295 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-05-10T14:40:39+00:00</updated>
+    <updated>2021-05-11T15:00:15+00:00</updated>
 
+    
+    <entry>
+        <title>The Plan for the Rust 2021 Edition</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/05/11/edition-2021.html" type="text/html" title="The Plan for the Rust 2021 Edition" />
+        <published>2021-05-11T00:00:00+00:00</published>
+        <updated>2021-05-11T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/05/11/edition-2021.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/05/11/edition-2021.html">&lt;p&gt;We are happy to announce that the third edition of the Rust language, Rust 2021,
+is scheduled for release in October.
+Rust 2021 contains a number of small changes that are
+nonetheless expected to make a significant improvement to how Rust feels in practice.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-an-edition&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-an-edition&quot;&gt;&lt;/a&gt;What is an Edition?&lt;/h2&gt;
+&lt;p&gt;The release of Rust 1.0 established
+&lt;a href&#x3D;&quot;https://blog.rust-lang.org/2014/10/30/Stability.html&quot;&gt;&amp;quot;stability without stagnation&amp;quot;&lt;/a&gt;
+as a core Rust deliverable.
+Ever since the 1.0 release,
+the rule for Rust has been that once a feature has been released on stable,
+we are committed to supporting that feature for all future releases.&lt;/p&gt;
+&lt;p&gt;There are times, however, when it is useful to be able to make small changes
+to the language that are not backwards compatible.
+The most obvious example is introducing a new keyword,
+which would invalidate variables with the same name.
+For example, the first version of Rust did not have the &lt;code&gt;async&lt;/code&gt; and &lt;code&gt;await&lt;/code&gt; keywords.
+Suddenly changing those words to keywords in a later version would&#x27;ve broken code like &lt;code&gt;let async &#x3D; 1;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Editions&lt;/strong&gt; are the mechanism we use to solve this problem.
+When we want to release a feature that would otherwise be backwards incompatible,
+we do so as part of a new Rust &lt;em&gt;edition&lt;/em&gt;.
+Editions are opt-in, and so existing crates do
+not see these changes until they explicitly migrate over to the new edition.
+This means that even the latest version of Rust will still &lt;em&gt;not&lt;/em&gt; treat &lt;code&gt;async&lt;/code&gt; as a keyword,
+unless edition 2018 or later is chosen.
+This choice is made &lt;em&gt;per crate&lt;/em&gt; &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/manifest.html#the-edition-field&quot;&gt;as part of its &lt;code&gt;Cargo.toml&lt;/code&gt;&lt;/a&gt;.
+New crates created by &lt;code&gt;cargo new&lt;/code&gt; are always configured to use the latest stable edition.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#editions-do-not-split-the-ecosystem&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;editions-do-not-split-the-ecosystem&quot;&gt;&lt;/a&gt;Editions do not split the ecosystem&lt;/h3&gt;
+&lt;p&gt;The most important rule for editions is that crates in one edition can
+interoperate seamlessly with crates compiled in other editions. This ensures
+that the decision to migrate to a newer edition is a &amp;quot;private one&amp;quot; that the
+crate can make without affecting others.&lt;/p&gt;
+&lt;p&gt;The requirement for crate interoperability implies some limits on the kinds of
+changes that we can make in an edition.
+In general, changes that occur in an edition tend to be &amp;quot;skin deep&amp;quot;.
+All Rust code, regardless of edition,
+is ultimately compiled to the same internal representation within the compiler.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#edition-migration-is-easy-and-largely-automated&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;edition-migration-is-easy-and-largely-automated&quot;&gt;&lt;/a&gt;Edition migration is easy and largely automated&lt;/h3&gt;
+&lt;p&gt;Our goal is to make it easy for crates to upgrade to a new edition.
+When we release a new edition,
+we also provide &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/commands/cargo-fix.html&quot;&gt;tooling to automate the migration&lt;/a&gt;.
+It makes minor changes to your code necessary to make it compatible with the new edition.
+For example, when migrating to Rust 2018, it changes anything named &lt;code&gt;async&lt;/code&gt; to use the equivalent
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/rust-by-example/compatibility/raw_identifiers.html&quot;&gt;raw identifier syntax&lt;/a&gt;: &lt;code&gt;r#async&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The automated migrations are not necessarily perfect:
+there might be some corner cases where manual changes are still required.
+The tooling tries hard to avoid changes
+to semantics that could affect the correctness or performance of the code.&lt;/p&gt;
+&lt;p&gt;In addition to tooling, we also maintain an Edition Migration Guide that covers
+the changes that are part of an edition.
+This guide will describe the change and give pointers to where people can learn more about it.
+It will also cover any corner cases or details that people should be aware of.
+The guide serves both as an overview of the edition,
+but also as a quick troubleshooting reference
+if people encounter problems with the automated tooling.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-changes-are-planned-for-rust-2021&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-changes-are-planned-for-rust-2021&quot;&gt;&lt;/a&gt;What changes are planned for Rust 2021?&lt;/h2&gt;
+&lt;p&gt;Over the last few months, the Rust 2021 Working Group has
+gone through a number of proposals for what to include in the new edition.
+We are happy to announce the final list of edition changes.
+Each feature had to meet two criteria to make this list.
+First, they had to be approved by the appropriate Rust team(s).
+Second, their implementation had to be far enough along that we had
+confidence that they would be completed in time for the planned milestones.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#additions-to-the-prelude&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;additions-to-the-prelude&quot;&gt;&lt;/a&gt;Additions to the prelude&lt;/h3&gt;
+&lt;p&gt;The &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/prelude/index.html&quot;&gt;prelude of the standard library&lt;/a&gt;
+is the module containing everything that is automatically imported in every module.
+It contains commonly used items such as &lt;code&gt;Option&lt;/code&gt;, &lt;code&gt;Vec&lt;/code&gt;, &lt;code&gt;drop&lt;/code&gt;, and &lt;code&gt;Clone&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The Rust compiler prioritizes any manually imported items over those
+from the prelude, to make sure additions to the prelude will not break any existing code.
+For example, if you have a crate or module called &lt;code&gt;example&lt;/code&gt; containing a &lt;code&gt;pub struct Option;&lt;/code&gt;,
+then &lt;code&gt;use example::*;&lt;/code&gt; will make &lt;code&gt;Option&lt;/code&gt; unambiguously refer to the one from &lt;code&gt;example&lt;/code&gt;;
+not the one from the standard library.&lt;/p&gt;
+&lt;p&gt;However, adding a &lt;em&gt;trait&lt;/em&gt; to the prelude can break existing code in a subtle way.
+A call to &lt;code&gt;x.try_into()&lt;/code&gt; using a &lt;code&gt;MyTryInto&lt;/code&gt; trait might become ambiguous and
+fail to compile if &lt;code&gt;std&lt;/code&gt;&#x27;s &lt;code&gt;TryInto&lt;/code&gt; is also imported,
+since it provides a method with the same name.
+This is the reason we haven&#x27;t added &lt;code&gt;TryInto&lt;/code&gt; to the prelude yet,
+since there is a lot of code that would break this way.&lt;/p&gt;
+&lt;p&gt;As a solution, Rust 2021 will use a new prelude.
+It&#x27;s identical to the current one, except for three new additions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/convert/trait.TryInto.html&quot;&gt;&lt;code&gt;std::convert::TryInto&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/convert/trait.TryFrom.html&quot;&gt;&lt;code&gt;std::convert::TryFrom&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/trait.FromIterator.html&quot;&gt;&lt;code&gt;std::iter::FromIterator&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#default-cargo-feature-resolver&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;default-cargo-feature-resolver&quot;&gt;&lt;/a&gt;Default Cargo feature resolver&lt;/h3&gt;
+&lt;p&gt;Since Rust 1.51.0, Cargo has opt-in support for a &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/resolver.html#feature-resolver-version-2&quot;&gt;new feature resolver&lt;/a&gt;
+which can be activated with &lt;code&gt;resolver &#x3D; &amp;quot;2&amp;quot;&lt;/code&gt; in &lt;code&gt;Cargo.toml&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Starting in Rust 2021, this will be the default.
+That is, writing &lt;code&gt;edition &#x3D; &amp;quot;2021&amp;quot;&lt;/code&gt; in &lt;code&gt;Cargo.toml&lt;/code&gt; will imply &lt;code&gt;resolver &#x3D; &amp;quot;2&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The new feature resolver no longer merges all requested features for
+crates that are depended on in multiple ways.
+See &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html#cargos-new-feature-resolver&quot;&gt;the announcement of Rust 1.51&lt;/a&gt; for details.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#intoiterator-for-arrays&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;intoiterator-for-arrays&quot;&gt;&lt;/a&gt;IntoIterator for arrays&lt;/h3&gt;
+&lt;p&gt;Until Rust 1.53, only &lt;em&gt;references&lt;/em&gt; to arrays implement &lt;code&gt;IntoIterator&lt;/code&gt;.
+This means you can iterate over &lt;code&gt;&amp;amp;[1, 2, 3]&lt;/code&gt; and &lt;code&gt;&amp;amp;mut [1, 2, 3]&lt;/code&gt;,
+but not over &lt;code&gt;[1, 2, 3]&lt;/code&gt; directly.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;for &amp;amp;e in &amp;amp;[1, 2, 3] {} // Ok :)
+
+for e in [1, 2, 3] {} // Error :(
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This has been &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/25725&quot;&gt;a long-standing issue&lt;/a&gt;, but the solution is not as simple as it seems.
+Just &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/65819&quot;&gt;adding the trait implementation&lt;/a&gt; would break existing code.
+&lt;code&gt;array.into_iter()&lt;/code&gt; already compiles today because that implicitly calls
+&lt;code&gt;(&amp;amp;array).into_iter()&lt;/code&gt; due to &lt;a href&#x3D;&quot;https://doc.rust-lang.org/book/ch05-03-method-syntax.html#wheres-the---operator&quot;&gt;how method call syntax works&lt;/a&gt;.
+Adding the trait implementation would change the meaning.&lt;/p&gt;
+&lt;p&gt;Usually we categorize this type of breakage
+(adding a trait implementation) &#x27;minor&#x27; and acceptable.
+But in this case there is too much code that would be broken by it.&lt;/p&gt;
+&lt;p&gt;It has been suggested many times to &amp;quot;only implement &lt;code&gt;IntoIterator&lt;/code&gt; for arrays in Rust 2021&amp;quot;.
+However, this is simply not possible.
+You can&#x27;t have a trait implementation exist in one edition and not in another,
+since editions can be mixed.&lt;/p&gt;
+&lt;p&gt;Instead, we decided to add the trait implementation in &lt;em&gt;all&lt;/em&gt; editions (starting in Rust 1.53.0),
+but add a small hack to avoid breakage until Rust 2021.
+In Rust 2015 and 2018 code, the compiler will still resolve &lt;code&gt;array.into_iter()&lt;/code&gt;
+to &lt;code&gt;(&amp;amp;array).into_iter()&lt;/code&gt; like before, as if the trait implementation does not exist.
+This &lt;em&gt;only&lt;/em&gt; applies to the &lt;code&gt;.into_iter()&lt;/code&gt; method call syntax.
+It does not affect any other syntax such as &lt;code&gt;for e in [1, 2, 3]&lt;/code&gt;, &lt;code&gt;iter.zip([1, 2, 3])&lt;/code&gt; or
+&lt;code&gt;IntoIterator::into_iter([1, 2, 3])&lt;/code&gt;.
+Those will start to work in &lt;em&gt;all&lt;/em&gt; editions.&lt;/p&gt;
+&lt;p&gt;While it&#x27;s a shame that this required a small hack to avoid breakage,
+we&#x27;re very happy with how this solution keeps the difference between
+the editions to an absolute minimum.
+Since the hack is only present in the older editions,
+there is no added complexity in the new edition.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#disjoint-capture-in-closures&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;disjoint-capture-in-closures&quot;&gt;&lt;/a&gt;Disjoint capture in closures&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/book/ch13-01-closures.html&quot;&gt;Closures&lt;/a&gt;
+automatically capture anything that you refer to from within their body.
+For example, &lt;code&gt;|| a + 1&lt;/code&gt; automatically captures a reference to &lt;code&gt;a&lt;/code&gt; from the surrounding context.&lt;/p&gt;
+&lt;p&gt;Currently, this applies to whole structs, even when only using one field.
+For example, &lt;code&gt;|| a.x + 1&lt;/code&gt; captures a reference to &lt;code&gt;a&lt;/code&gt; and not just &lt;code&gt;a.x&lt;/code&gt;.
+In some situations, this is a problem.
+When a field of the struct is already borrowed (mutably) or moved out of,
+the other fields can no longer be used in a closure,
+since that would capture the whole struct, which is no longer available.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let a &#x3D; SomeStruct::new();
+
+drop(a.x); // Move out of one field of the struct
+
+println!(&amp;quot;{}&amp;quot;, a.y); // Ok: Still use another field of the struct
+
+let c &#x3D; || println!(&amp;quot;{}&amp;quot;, a.y); // Error: Tries to capture all of &#x60;a&#x60;
+c();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Starting in Rust 2021, closures will only capture the fields that they use.
+So, the above example will compile fine in Rust 2021.&lt;/p&gt;
+&lt;p&gt;This new behavior is only activated in the new edition,
+since it can change the order in which fields are dropped.
+As for all edition changes, an automatic migration is available,
+which will update your closures for which this matters.
+It can insert &lt;code&gt;let _ &#x3D; &amp;amp;a;&lt;/code&gt; inside the closure to force the entire
+struct to be captured as before.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#panic-macro-consistency&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;panic-macro-consistency&quot;&gt;&lt;/a&gt;Panic macro consistency&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;panic!()&lt;/code&gt; macro is one of Rust&#x27;s most well known macros.
+However, it has &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/3007-panic-plan.md&quot;&gt;some subtle surprises&lt;/a&gt;
+that we can&#x27;t just change due to backwards compatibility.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;panic!(&amp;quot;{}&amp;quot;, 1); // Ok, panics with the message &amp;quot;1&amp;quot;
+panic!(&amp;quot;{}&amp;quot;); // Ok, panics with the message &amp;quot;{}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;panic!()&lt;/code&gt; macro only uses string formatting when it&#x27;s invoked with more than one argument.
+When invoked with a single argument, it doesn&#x27;t even look at that argument.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let a &#x3D; &amp;quot;{&amp;quot;;
+println!(a); // Error: First argument must be a format string literal
+panic!(a); // Ok: The panic macro doesn&#x27;t care
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(It even accepts non-strings such as &lt;code&gt;panic!(123)&lt;/code&gt;, which is uncommon and rarely useful.)&lt;/p&gt;
+&lt;p&gt;This will especially be a problem once
+&lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2795-format-args-implicit-identifiers.html&quot;&gt;implicit format arguments&lt;/a&gt;
+are stabilized.
+That feature will make &lt;code&gt;println!(&amp;quot;hello {name}&amp;quot;)&lt;/code&gt; a short-hand for &lt;code&gt;println!(&amp;quot;hello {}&amp;quot;, name)&lt;/code&gt;.
+However, &lt;code&gt;panic!(&amp;quot;hello {name}&amp;quot;)&lt;/code&gt; would not work as expected,
+since &lt;code&gt;panic!()&lt;/code&gt; doesn&#x27;t process a single argument as format string.&lt;/p&gt;
+&lt;p&gt;To avoid that confusing situation, Rust 2021 features a more consistent &lt;code&gt;panic!()&lt;/code&gt; macro.
+The new &lt;code&gt;panic!()&lt;/code&gt; macro will no longer accept arbitrary expressions as the only argument.
+It will, just like &lt;code&gt;println!()&lt;/code&gt;, always process the first argument as format string.
+Since &lt;code&gt;panic!()&lt;/code&gt; will no longer accept arbitrary payloads,
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/panic/fn.panic_any.html&quot;&gt;&lt;code&gt;panic_any()&lt;/code&gt;&lt;/a&gt;
+will be the only way to panic with something other than a formatted string.&lt;/p&gt;
+&lt;p&gt;In addition, &lt;code&gt;core::panic!()&lt;/code&gt; and &lt;code&gt;std::panic!()&lt;/code&gt; will be identical in Rust 2021.
+Currently, there are some historical differences between those two,
+which can be noticable when switching &lt;code&gt;#![no_std]&lt;/code&gt; on or off.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#reserving-syntax&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;reserving-syntax&quot;&gt;&lt;/a&gt;Reserving syntax&lt;/h3&gt;
+&lt;p&gt;To make space for some new syntax in the future,
+we&#x27;ve decided to reserve syntax for prefixed identifiers and literals:
+&lt;code&gt;prefix#identifier&lt;/code&gt;, &lt;code&gt;prefix&amp;quot;string&amp;quot;&lt;/code&gt;, &lt;code&gt;prefix&#x27;c&#x27;&lt;/code&gt;, and &lt;code&gt;prefix#123&lt;/code&gt;,
+where &lt;code&gt;prefix&lt;/code&gt; can be any identifier.
+(Except those that already have a meaning, such as &lt;code&gt;b&#x27;…&#x27;&lt;/code&gt; and &lt;code&gt;r&amp;quot;…&amp;quot;&lt;/code&gt;.)&lt;/p&gt;
+&lt;p&gt;This is a breaking change, since macros can currently accept &lt;code&gt;hello&amp;quot;world&amp;quot;&lt;/code&gt;,
+which they will see as two separate tokens: &lt;code&gt;hello&lt;/code&gt; and &lt;code&gt;&amp;quot;world&amp;quot;&lt;/code&gt;.
+The (automatic) fix is simple though. Just insert a space: &lt;code&gt;hello &amp;quot;world&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;!--
+The original plan was to reserve only &#x60;k#&#x60; and &#x60;f&quot;&quot;&#x60; for future use,
+but reserving *all* possible prefixes did not have many downsides.
+It leaves more space for new syntax which would otherwise need to wait for another edition.
+--&gt;
+&lt;p&gt;Other than turning these into a tokenization error,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3101&quot;&gt;the RFC&lt;/a&gt; does not attach a meaning to any prefix yet.
+Assigning meaning to specific prefixes is left to future proposals,
+which will—thanks to reserving these prefixes now—not be breaking changes.&lt;/p&gt;
+&lt;p&gt;These are some new prefixes you might see in the future:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;f&amp;quot;&amp;quot;&lt;/code&gt; as a short-hand for a format string.
+For example, &lt;code&gt;f&amp;quot;hello {name}&amp;quot;&lt;/code&gt; as a short-hand for the equivalent &lt;code&gt;format_args!()&lt;/code&gt; invocation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;c&amp;quot;&amp;quot;&lt;/code&gt; or &lt;code&gt;z&amp;quot;&amp;quot;&lt;/code&gt; for null-terminated C strings.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;k#keyword&lt;/code&gt; to allow writing keywords that don&#x27;t exist yet in the current edition.
+For example, while &lt;code&gt;async&lt;/code&gt; is not a keyword in edition 2015,
+this prefix would&#x27;ve allowed us to accept &lt;code&gt;k#async&lt;/code&gt; as an alternative in edition 2015
+while we waited for edition 2018 to reserve &lt;code&gt;async&lt;/code&gt; as a keyword.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#promoting-two-warnings-to-hard-errors&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;promoting-two-warnings-to-hard-errors&quot;&gt;&lt;/a&gt;Promoting two warnings to hard errors&lt;/h3&gt;
+&lt;p&gt;Two existing lints are becoming hard errors in Rust 2021.
+These lints will remain warnings in older editions.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;bare-trait-objects&lt;/code&gt;:
+The use of the &lt;code&gt;dyn&lt;/code&gt; keyword to identify &lt;a href&#x3D;&quot;https://doc.rust-lang.org/book/ch17-02-trait-objects.html&quot;&gt;trait objects&lt;/a&gt;
+will be mandatory in Rust 2021.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ellipsis-inclusive-range-patterns&lt;/code&gt;:
+The &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/reference/patterns.html#range-patterns&quot;&gt;deprecated &lt;code&gt;...&lt;/code&gt; syntax&lt;/a&gt;
+for inclusive range patterns is no longer accepted in Rust 2021.
+It has been superseded by &lt;code&gt;..&#x3D;&lt;/code&gt;, which is consistent with expressions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#or-patterns-in-macro_rules&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;or-patterns-in-macro_rules&quot;&gt;&lt;/a&gt;Or patterns in macro_rules&lt;/h3&gt;
+&lt;p&gt;Starting in Rust 1.53.0, &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/reference/patterns.html&quot;&gt;patterns&lt;/a&gt;
+are extended to support &lt;code&gt;|&lt;/code&gt; nested anywhere in the pattern.
+This enables you to write &lt;code&gt;Some(1 | 2)&lt;/code&gt; instead of &lt;code&gt;Some(1) | Some(2)&lt;/code&gt;.
+Since this was simply not allowed before, this is not a breaking change.&lt;/p&gt;
+&lt;p&gt;However, this change also affects &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/reference/macros-by-example.html&quot;&gt;&lt;code&gt;macro_rules&lt;/code&gt; macros&lt;/a&gt;.
+Such macros can accept patterns using the &lt;code&gt;:pat&lt;/code&gt; fragment specifier.
+Currently, &lt;code&gt;:pat&lt;/code&gt; does &lt;em&gt;not&lt;/em&gt; match &lt;code&gt;|&lt;/code&gt;, since before Rust 1.53,
+not all patterns (at all nested levels) could contain a &lt;code&gt;|&lt;/code&gt;.
+Macros that accept patterns like &lt;code&gt;A | B&lt;/code&gt;,
+such as &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.51.0/std/macro.matches.html&quot;&gt;&lt;code&gt;matches!()&lt;/code&gt;&lt;/a&gt;
+use something like &lt;code&gt;$($_:pat)|+&lt;/code&gt;.
+Because we don&#x27;t want to break any existing macros,
+we did &lt;em&gt;not&lt;/em&gt; change the meaning of &lt;code&gt;:pat&lt;/code&gt; in Rust 1.53.0 to include &lt;code&gt;|&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Instead, we will make that change as part of Rust 2021.
+In the new edition, the &lt;code&gt;:pat&lt;/code&gt; fragment specifier &lt;em&gt;will&lt;/em&gt; match &lt;code&gt;A | B&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Since there are times that one still wishes to match a single pattern
+variant without &lt;code&gt;|&lt;/code&gt;, the fragment specified &lt;code&gt;:pat_param&lt;/code&gt; has been added
+to retain the older behavior.
+The name refers to its main use case: a pattern in a closure parameter.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-comes-next&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-comes-next&quot;&gt;&lt;/a&gt;What comes next?&lt;/h2&gt;
+&lt;p&gt;Our plan is to have these changes merged and fully tested by September,
+to make sure the 2021 edition makes it into Rust 1.56.0.
+Rust 1.56.0 will then be in beta for six weeks,
+after which it is released as stable on October 21st.&lt;/p&gt;
+&lt;p&gt;However, note that Rust is a project run by volunteers.
+We prioritize the personal well-being of everyone working on Rust
+over any deadlines and expectations we might have set.
+This could mean delaying the edition a version if necessary,
+or dropping a feature that turns out to be too difficult or stressful to finish in time.&lt;/p&gt;
+&lt;p&gt;That said, we are on schedule and many of the difficult problems are already tackled,
+thanks to all the people contributing to Rust 2021! 💛&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;You can expect another announcement about the new edition in July.
+At that point we expect all changes and automatic migrations to be implemented
+and ready for public testing.&lt;/p&gt;
+&lt;p&gt;We&#x27;ll be posting some more details about the process and rejected proposals on
+the &amp;quot;Inside Rust&amp;quot; blog soon.&lt;/p&gt;
+&lt;!--
+If you really can&#x27;t wait, many features are already available on
+Rust [Nightly](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html)
+with &#x60;-Zunstable-options --edition&#x3D;2021&#x60;.
+--&gt;
+</content>
+
+        <author>
+            <name>Mara Bos</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.52.1</title>
@@ -804,51 +1091,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.50
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>mdBook security advisory</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/01/04/mdbook-security-advisory.html" type="text/html" title="mdBook security advisory" />
-        <published>2021-01-04T00:00:00+00:00</published>
-        <updated>2021-01-04T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/01/04/mdbook-security-advisory.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/01/04/mdbook-security-advisory.html">&lt;blockquote&gt;
-&lt;p&gt;This is a cross-post of &lt;a href&#x3D;&quot;https://groups.google.com/g/rustlang-security-announcements/c/3-sO6of29O0&quot;&gt;the official security advisory&lt;/a&gt;. The official post
-contains a signed version with our PGP key, as well.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The Rust Security Response Working Group was recently notified of a security
-issue affecting the search feature of mdBook, which could allow an attacker to
-execute arbitrary JavaScript code on the page.&lt;/p&gt;
-&lt;p&gt;The CVE for this vulnerability is &lt;a href&#x3D;&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name&#x3D;CVE-2020-26297&quot;&gt;CVE-2020-26297&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#overview&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;overview&quot;&gt;&lt;/a&gt;Overview&lt;/h2&gt;
-&lt;p&gt;The search feature of mdBook (introduced in version 0.1.4) was affected by a
-cross site scripting vulnerability that allowed an attacker to execute
-arbitrary JavaScript code on an user&#x27;s browser by tricking the user into typing
-a malicious search query, or tricking the user into clicking a link to the
-search page with the malicious search query prefilled.&lt;/p&gt;
-&lt;p&gt;mdBook 0.4.5 fixes the vulnerability by properly escaping the search query.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#mitigations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;mitigations&quot;&gt;&lt;/a&gt;Mitigations&lt;/h2&gt;
-&lt;p&gt;Owners of websites built with mdBook have to upgrade to mdBook 0.4.5 or greater
-and rebuild their website contents with it. It&#x27;s possible to install mdBook
-0.4.5 on the local system with:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;cargo install mdbook --version 0.4.5 --force
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#acknowledgements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgements&quot;&gt;&lt;/a&gt;Acknowledgements&lt;/h2&gt;
-&lt;p&gt;Thanks to Kamil Vavra for responsibly disclosing the vulnerability to us
-according to &lt;a href&#x3D;&quot;https://www.rust-lang.org/policies/security&quot;&gt;our security policy&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#timeline-of-events&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;timeline-of-events&quot;&gt;&lt;/a&gt;Timeline of events&lt;/h2&gt;
-&lt;p&gt;All times are listed in UTC.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;2020-12-30 20:14 - The issue is reported to the Rust Security Response WG&lt;/li&gt;
-&lt;li&gt;2020-12-30 20:32 - The issue is acknowledged and the investigation began&lt;/li&gt;
-&lt;li&gt;2020-12-30 21:21 - Found the cause of the vulnerability and prepared the patch&lt;/li&gt;
-&lt;li&gt;2021-01-04 15:00 - Patched version released and vulnerability disclosed&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>Rust Security Response WG</name>
         </author>
     </entry>
     

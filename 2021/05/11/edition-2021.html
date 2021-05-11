@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The Plan for the Rust 2021 Edition | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="The Plan for the Rust 2021 Edition | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="The Plan for the Rust 2021 Edition | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="The Plan for the Rust 2021 Edition" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>The Plan for the Rust 2021 Edition</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 11, 2021 &middot; Mara Bos
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/core#project-edition-2021">The Rust 2021 Edition Working Group</a> 
+    </div>
+
+    <div class="post">
+      <p>We are happy to announce that the third edition of the Rust language, Rust 2021,
+is scheduled for release in October.
+Rust 2021 contains a number of small changes that are
+nonetheless expected to make a significant improvement to how Rust feels in practice.</p>
+<h2><a href="#what-is-an-edition" aria-hidden="true" class="anchor" id="what-is-an-edition"></a>What is an Edition?</h2>
+<p>The release of Rust 1.0 established
+<a href="https://blog.rust-lang.org/2014/10/30/Stability.html">&quot;stability without stagnation&quot;</a>
+as a core Rust deliverable.
+Ever since the 1.0 release,
+the rule for Rust has been that once a feature has been released on stable,
+we are committed to supporting that feature for all future releases.</p>
+<p>There are times, however, when it is useful to be able to make small changes
+to the language that are not backwards compatible.
+The most obvious example is introducing a new keyword,
+which would invalidate variables with the same name.
+For example, the first version of Rust did not have the <code>async</code> and <code>await</code> keywords.
+Suddenly changing those words to keywords in a later version would've broken code like <code>let async = 1;</code>.</p>
+<p><strong>Editions</strong> are the mechanism we use to solve this problem.
+When we want to release a feature that would otherwise be backwards incompatible,
+we do so as part of a new Rust <em>edition</em>.
+Editions are opt-in, and so existing crates do
+not see these changes until they explicitly migrate over to the new edition.
+This means that even the latest version of Rust will still <em>not</em> treat <code>async</code> as a keyword,
+unless edition 2018 or later is chosen.
+This choice is made <em>per crate</em> <a href="https://doc.rust-lang.org/cargo/reference/manifest.html#the-edition-field">as part of its <code>Cargo.toml</code></a>.
+New crates created by <code>cargo new</code> are always configured to use the latest stable edition.</p>
+<h3><a href="#editions-do-not-split-the-ecosystem" aria-hidden="true" class="anchor" id="editions-do-not-split-the-ecosystem"></a>Editions do not split the ecosystem</h3>
+<p>The most important rule for editions is that crates in one edition can
+interoperate seamlessly with crates compiled in other editions. This ensures
+that the decision to migrate to a newer edition is a &quot;private one&quot; that the
+crate can make without affecting others.</p>
+<p>The requirement for crate interoperability implies some limits on the kinds of
+changes that we can make in an edition.
+In general, changes that occur in an edition tend to be &quot;skin deep&quot;.
+All Rust code, regardless of edition,
+is ultimately compiled to the same internal representation within the compiler.</p>
+<h3><a href="#edition-migration-is-easy-and-largely-automated" aria-hidden="true" class="anchor" id="edition-migration-is-easy-and-largely-automated"></a>Edition migration is easy and largely automated</h3>
+<p>Our goal is to make it easy for crates to upgrade to a new edition.
+When we release a new edition,
+we also provide <a href="https://doc.rust-lang.org/cargo/commands/cargo-fix.html">tooling to automate the migration</a>.
+It makes minor changes to your code necessary to make it compatible with the new edition.
+For example, when migrating to Rust 2018, it changes anything named <code>async</code> to use the equivalent
+<a href="https://doc.rust-lang.org/rust-by-example/compatibility/raw_identifiers.html">raw identifier syntax</a>: <code>r#async</code>.</p>
+<p>The automated migrations are not necessarily perfect:
+there might be some corner cases where manual changes are still required.
+The tooling tries hard to avoid changes
+to semantics that could affect the correctness or performance of the code.</p>
+<p>In addition to tooling, we also maintain an Edition Migration Guide that covers
+the changes that are part of an edition.
+This guide will describe the change and give pointers to where people can learn more about it.
+It will also cover any corner cases or details that people should be aware of.
+The guide serves both as an overview of the edition,
+but also as a quick troubleshooting reference
+if people encounter problems with the automated tooling.</p>
+<h2><a href="#what-changes-are-planned-for-rust-2021" aria-hidden="true" class="anchor" id="what-changes-are-planned-for-rust-2021"></a>What changes are planned for Rust 2021?</h2>
+<p>Over the last few months, the Rust 2021 Working Group has
+gone through a number of proposals for what to include in the new edition.
+We are happy to announce the final list of edition changes.
+Each feature had to meet two criteria to make this list.
+First, they had to be approved by the appropriate Rust team(s).
+Second, their implementation had to be far enough along that we had
+confidence that they would be completed in time for the planned milestones.</p>
+<h3><a href="#additions-to-the-prelude" aria-hidden="true" class="anchor" id="additions-to-the-prelude"></a>Additions to the prelude</h3>
+<p>The <a href="https://doc.rust-lang.org/stable/std/prelude/index.html">prelude of the standard library</a>
+is the module containing everything that is automatically imported in every module.
+It contains commonly used items such as <code>Option</code>, <code>Vec</code>, <code>drop</code>, and <code>Clone</code>.</p>
+<p>The Rust compiler prioritizes any manually imported items over those
+from the prelude, to make sure additions to the prelude will not break any existing code.
+For example, if you have a crate or module called <code>example</code> containing a <code>pub struct Option;</code>,
+then <code>use example::*;</code> will make <code>Option</code> unambiguously refer to the one from <code>example</code>;
+not the one from the standard library.</p>
+<p>However, adding a <em>trait</em> to the prelude can break existing code in a subtle way.
+A call to <code>x.try_into()</code> using a <code>MyTryInto</code> trait might become ambiguous and
+fail to compile if <code>std</code>'s <code>TryInto</code> is also imported,
+since it provides a method with the same name.
+This is the reason we haven't added <code>TryInto</code> to the prelude yet,
+since there is a lot of code that would break this way.</p>
+<p>As a solution, Rust 2021 will use a new prelude.
+It's identical to the current one, except for three new additions:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/convert/trait.TryInto.html"><code>std::convert::TryInto</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/convert/trait.TryFrom.html"><code>std::convert::TryFrom</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/iter/trait.FromIterator.html"><code>std::iter::FromIterator</code></a></li>
+</ul>
+<h3><a href="#default-cargo-feature-resolver" aria-hidden="true" class="anchor" id="default-cargo-feature-resolver"></a>Default Cargo feature resolver</h3>
+<p>Since Rust 1.51.0, Cargo has opt-in support for a <a href="https://doc.rust-lang.org/cargo/reference/resolver.html#feature-resolver-version-2">new feature resolver</a>
+which can be activated with <code>resolver = &quot;2&quot;</code> in <code>Cargo.toml</code>.</p>
+<p>Starting in Rust 2021, this will be the default.
+That is, writing <code>edition = &quot;2021&quot;</code> in <code>Cargo.toml</code> will imply <code>resolver = &quot;2&quot;</code>.</p>
+<p>The new feature resolver no longer merges all requested features for
+crates that are depended on in multiple ways.
+See <a href="https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html#cargos-new-feature-resolver">the announcement of Rust 1.51</a> for details.</p>
+<h3><a href="#intoiterator-for-arrays" aria-hidden="true" class="anchor" id="intoiterator-for-arrays"></a>IntoIterator for arrays</h3>
+<p>Until Rust 1.53, only <em>references</em> to arrays implement <code>IntoIterator</code>.
+This means you can iterate over <code>&amp;[1, 2, 3]</code> and <code>&amp;mut [1, 2, 3]</code>,
+but not over <code>[1, 2, 3]</code> directly.</p>
+<pre><code class="language-rust">for &amp;e in &amp;[1, 2, 3] {} // Ok :)
+
+for e in [1, 2, 3] {} // Error :(
+</code></pre>
+<p>This has been <a href="https://github.com/rust-lang/rust/issues/25725">a long-standing issue</a>, but the solution is not as simple as it seems.
+Just <a href="https://github.com/rust-lang/rust/pull/65819">adding the trait implementation</a> would break existing code.
+<code>array.into_iter()</code> already compiles today because that implicitly calls
+<code>(&amp;array).into_iter()</code> due to <a href="https://doc.rust-lang.org/book/ch05-03-method-syntax.html#wheres-the---operator">how method call syntax works</a>.
+Adding the trait implementation would change the meaning.</p>
+<p>Usually we categorize this type of breakage
+(adding a trait implementation) 'minor' and acceptable.
+But in this case there is too much code that would be broken by it.</p>
+<p>It has been suggested many times to &quot;only implement <code>IntoIterator</code> for arrays in Rust 2021&quot;.
+However, this is simply not possible.
+You can't have a trait implementation exist in one edition and not in another,
+since editions can be mixed.</p>
+<p>Instead, we decided to add the trait implementation in <em>all</em> editions (starting in Rust 1.53.0),
+but add a small hack to avoid breakage until Rust 2021.
+In Rust 2015 and 2018 code, the compiler will still resolve <code>array.into_iter()</code>
+to <code>(&amp;array).into_iter()</code> like before, as if the trait implementation does not exist.
+This <em>only</em> applies to the <code>.into_iter()</code> method call syntax.
+It does not affect any other syntax such as <code>for e in [1, 2, 3]</code>, <code>iter.zip([1, 2, 3])</code> or
+<code>IntoIterator::into_iter([1, 2, 3])</code>.
+Those will start to work in <em>all</em> editions.</p>
+<p>While it's a shame that this required a small hack to avoid breakage,
+we're very happy with how this solution keeps the difference between
+the editions to an absolute minimum.
+Since the hack is only present in the older editions,
+there is no added complexity in the new edition.</p>
+<h3><a href="#disjoint-capture-in-closures" aria-hidden="true" class="anchor" id="disjoint-capture-in-closures"></a>Disjoint capture in closures</h3>
+<p><a href="https://doc.rust-lang.org/book/ch13-01-closures.html">Closures</a>
+automatically capture anything that you refer to from within their body.
+For example, <code>|| a + 1</code> automatically captures a reference to <code>a</code> from the surrounding context.</p>
+<p>Currently, this applies to whole structs, even when only using one field.
+For example, <code>|| a.x + 1</code> captures a reference to <code>a</code> and not just <code>a.x</code>.
+In some situations, this is a problem.
+When a field of the struct is already borrowed (mutably) or moved out of,
+the other fields can no longer be used in a closure,
+since that would capture the whole struct, which is no longer available.</p>
+<pre><code class="language-rust">let a = SomeStruct::new();
+
+drop(a.x); // Move out of one field of the struct
+
+println!(&quot;{}&quot;, a.y); // Ok: Still use another field of the struct
+
+let c = || println!(&quot;{}&quot;, a.y); // Error: Tries to capture all of `a`
+c();
+</code></pre>
+<p>Starting in Rust 2021, closures will only capture the fields that they use.
+So, the above example will compile fine in Rust 2021.</p>
+<p>This new behavior is only activated in the new edition,
+since it can change the order in which fields are dropped.
+As for all edition changes, an automatic migration is available,
+which will update your closures for which this matters.
+It can insert <code>let _ = &amp;a;</code> inside the closure to force the entire
+struct to be captured as before.</p>
+<h3><a href="#panic-macro-consistency" aria-hidden="true" class="anchor" id="panic-macro-consistency"></a>Panic macro consistency</h3>
+<p>The <code>panic!()</code> macro is one of Rust's most well known macros.
+However, it has <a href="https://github.com/rust-lang/rfcs/blob/master/text/3007-panic-plan.md">some subtle surprises</a>
+that we can't just change due to backwards compatibility.</p>
+<pre><code class="language-rust">panic!(&quot;{}&quot;, 1); // Ok, panics with the message &quot;1&quot;
+panic!(&quot;{}&quot;); // Ok, panics with the message &quot;{}&quot;
+</code></pre>
+<p>The <code>panic!()</code> macro only uses string formatting when it's invoked with more than one argument.
+When invoked with a single argument, it doesn't even look at that argument.</p>
+<pre><code class="language-rust">let a = &quot;{&quot;;
+println!(a); // Error: First argument must be a format string literal
+panic!(a); // Ok: The panic macro doesn't care
+</code></pre>
+<p>(It even accepts non-strings such as <code>panic!(123)</code>, which is uncommon and rarely useful.)</p>
+<p>This will especially be a problem once
+<a href="https://rust-lang.github.io/rfcs/2795-format-args-implicit-identifiers.html">implicit format arguments</a>
+are stabilized.
+That feature will make <code>println!(&quot;hello {name}&quot;)</code> a short-hand for <code>println!(&quot;hello {}&quot;, name)</code>.
+However, <code>panic!(&quot;hello {name}&quot;)</code> would not work as expected,
+since <code>panic!()</code> doesn't process a single argument as format string.</p>
+<p>To avoid that confusing situation, Rust 2021 features a more consistent <code>panic!()</code> macro.
+The new <code>panic!()</code> macro will no longer accept arbitrary expressions as the only argument.
+It will, just like <code>println!()</code>, always process the first argument as format string.
+Since <code>panic!()</code> will no longer accept arbitrary payloads,
+<a href="https://doc.rust-lang.org/stable/std/panic/fn.panic_any.html"><code>panic_any()</code></a>
+will be the only way to panic with something other than a formatted string.</p>
+<p>In addition, <code>core::panic!()</code> and <code>std::panic!()</code> will be identical in Rust 2021.
+Currently, there are some historical differences between those two,
+which can be noticable when switching <code>#![no_std]</code> on or off.</p>
+<h3><a href="#reserving-syntax" aria-hidden="true" class="anchor" id="reserving-syntax"></a>Reserving syntax</h3>
+<p>To make space for some new syntax in the future,
+we've decided to reserve syntax for prefixed identifiers and literals:
+<code>prefix#identifier</code>, <code>prefix&quot;string&quot;</code>, <code>prefix'c'</code>, and <code>prefix#123</code>,
+where <code>prefix</code> can be any identifier.
+(Except those that already have a meaning, such as <code>b'…'</code> and <code>r&quot;…&quot;</code>.)</p>
+<p>This is a breaking change, since macros can currently accept <code>hello&quot;world&quot;</code>,
+which they will see as two separate tokens: <code>hello</code> and <code>&quot;world&quot;</code>.
+The (automatic) fix is simple though. Just insert a space: <code>hello &quot;world&quot;</code>.</p>
+<!--
+The original plan was to reserve only `k#` and `f""` for future use,
+but reserving *all* possible prefixes did not have many downsides.
+It leaves more space for new syntax which would otherwise need to wait for another edition.
+-->
+<p>Other than turning these into a tokenization error,
+<a href="https://github.com/rust-lang/rfcs/pull/3101">the RFC</a> does not attach a meaning to any prefix yet.
+Assigning meaning to specific prefixes is left to future proposals,
+which will—thanks to reserving these prefixes now—not be breaking changes.</p>
+<p>These are some new prefixes you might see in the future:</p>
+<ul>
+<li>
+<p><code>f&quot;&quot;</code> as a short-hand for a format string.
+For example, <code>f&quot;hello {name}&quot;</code> as a short-hand for the equivalent <code>format_args!()</code> invocation.</p>
+</li>
+<li>
+<p><code>c&quot;&quot;</code> or <code>z&quot;&quot;</code> for null-terminated C strings.</p>
+</li>
+<li>
+<p><code>k#keyword</code> to allow writing keywords that don't exist yet in the current edition.
+For example, while <code>async</code> is not a keyword in edition 2015,
+this prefix would've allowed us to accept <code>k#async</code> as an alternative in edition 2015
+while we waited for edition 2018 to reserve <code>async</code> as a keyword.</p>
+</li>
+</ul>
+<h3><a href="#promoting-two-warnings-to-hard-errors" aria-hidden="true" class="anchor" id="promoting-two-warnings-to-hard-errors"></a>Promoting two warnings to hard errors</h3>
+<p>Two existing lints are becoming hard errors in Rust 2021.
+These lints will remain warnings in older editions.</p>
+<ul>
+<li>
+<p><code>bare-trait-objects</code>:
+The use of the <code>dyn</code> keyword to identify <a href="https://doc.rust-lang.org/book/ch17-02-trait-objects.html">trait objects</a>
+will be mandatory in Rust 2021.</p>
+</li>
+<li>
+<p><code>ellipsis-inclusive-range-patterns</code>:
+The <a href="https://doc.rust-lang.org/stable/reference/patterns.html#range-patterns">deprecated <code>...</code> syntax</a>
+for inclusive range patterns is no longer accepted in Rust 2021.
+It has been superseded by <code>..=</code>, which is consistent with expressions.</p>
+</li>
+</ul>
+<h3><a href="#or-patterns-in-macro_rules" aria-hidden="true" class="anchor" id="or-patterns-in-macro_rules"></a>Or patterns in macro_rules</h3>
+<p>Starting in Rust 1.53.0, <a href="https://doc.rust-lang.org/stable/reference/patterns.html">patterns</a>
+are extended to support <code>|</code> nested anywhere in the pattern.
+This enables you to write <code>Some(1 | 2)</code> instead of <code>Some(1) | Some(2)</code>.
+Since this was simply not allowed before, this is not a breaking change.</p>
+<p>However, this change also affects <a href="https://doc.rust-lang.org/stable/reference/macros-by-example.html"><code>macro_rules</code> macros</a>.
+Such macros can accept patterns using the <code>:pat</code> fragment specifier.
+Currently, <code>:pat</code> does <em>not</em> match <code>|</code>, since before Rust 1.53,
+not all patterns (at all nested levels) could contain a <code>|</code>.
+Macros that accept patterns like <code>A | B</code>,
+such as <a href="https://doc.rust-lang.org/1.51.0/std/macro.matches.html"><code>matches!()</code></a>
+use something like <code>$($_:pat)|+</code>.
+Because we don't want to break any existing macros,
+we did <em>not</em> change the meaning of <code>:pat</code> in Rust 1.53.0 to include <code>|</code>.</p>
+<p>Instead, we will make that change as part of Rust 2021.
+In the new edition, the <code>:pat</code> fragment specifier <em>will</em> match <code>A | B</code>.</p>
+<p>Since there are times that one still wishes to match a single pattern
+variant without <code>|</code>, the fragment specified <code>:pat_param</code> has been added
+to retain the older behavior.
+The name refers to its main use case: a pattern in a closure parameter.</p>
+<h2><a href="#what-comes-next" aria-hidden="true" class="anchor" id="what-comes-next"></a>What comes next?</h2>
+<p>Our plan is to have these changes merged and fully tested by September,
+to make sure the 2021 edition makes it into Rust 1.56.0.
+Rust 1.56.0 will then be in beta for six weeks,
+after which it is released as stable on October 21st.</p>
+<p>However, note that Rust is a project run by volunteers.
+We prioritize the personal well-being of everyone working on Rust
+over any deadlines and expectations we might have set.
+This could mean delaying the edition a version if necessary,
+or dropping a feature that turns out to be too difficult or stressful to finish in time.</p>
+<p>That said, we are on schedule and many of the difficult problems are already tackled,
+thanks to all the people contributing to Rust 2021! 💛</p>
+<hr />
+<p>You can expect another announcement about the new edition in July.
+At that point we expect all changes and automatic migrations to be implemented
+and ready for public testing.</p>
+<p>We'll be posting some more details about the process and rejected proposals on
+the &quot;Inside Rust&quot; blog soon.</p>
+<!--
+If you really can't wait, many features are already available on
+Rust [Nightly](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html)
+with `-Zunstable-options --edition=2021`.
+-->
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
