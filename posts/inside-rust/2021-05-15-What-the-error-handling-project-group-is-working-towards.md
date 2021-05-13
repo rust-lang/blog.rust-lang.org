@@ -5,13 +5,13 @@ author: Jane Lusby
 team: the library team <https://www.rust-lang.org/governance/teams/library>
 ---
 
-This blog post is a follow up of our [previous](https://blog.rust-lang.org/inside-rust/2020/11/23/What-the-error-handling-project-group-is-working-on.html) post detailing what we're working on now. We've been iterating for a while now on some of the problems that we see with error handling today and have reached the point where we want to describe some of the new changes we're working towards. But first we need to describe the main problems we've identified.
+This blog post is a follow up of our [previous](https://blog.rust-lang.org/inside-rust/2020/11/23/What-the-error-handling-project-group-is-working-on.html) post detailing what we're working on now. We've been iterating for a while now on some of the challenges that we see with error handling today and have reached the point where we want to describe some of the new changes we're working towards. But first we need to describe the main challenges we've identified.
 
 > Disclaimer: *This post is equal parts plan and aspiration. There are technical challenges here to sort out so the final outcome may look rather different from our initial vision, so please don't assume any of this is final.*
 
 ## Error Handling Today
 
-The first problem we'd like to solve is that it's easy to lose context accidentally when reporting errors. There are a couple of places this can happen, either when printing an error and forgetting to print sources, when returning an error from main, or when converting a recoverable error into a non recoverable error.
+The first challenge we'd like to solve is that it's easy to lose context accidentally when reporting errors. There are a couple of places this can happen, either when printing an error and forgetting to print sources, when returning an error from main, or when converting a recoverable error into a non recoverable error.
 
 Consider this example:
 
@@ -85,7 +85,7 @@ thread 'main' panicked at 'config is always valid and exists: Error(SourceError)
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-Now, I definitely don't think this is what we want as a default when promoting recoverable errors to non-recoverable errors! `unwrap` and `expect` work by stringifying the error variant using it's `Debug` impl, but this is often the wrong operation for types that implement the `Error` trait. By converting the `Error` to a `String` we lose access to the pieces of context we carefully split up via the `Error` trait, and in all likelihood the `derive(Debug)` output of our error types won't even include the error messages in our `Display` impls. Rust's panic infrastructure doesn't provide a method for converting an `Error` type into a panic, it only supports converting `Debug` types into panics, and we feel that this is a major problem.
+Now, I definitely don't think this is what we want as a default when promoting recoverable errors to non-recoverable errors! `unwrap` and `expect` work by stringifying the error variant using it's `Debug` impl, but this is often the wrong operation for types that implement the `Error` trait. By converting the `Error` to a `String` we lose access to the pieces of context we carefully split up via the `Error` trait, and in all likelihood the `derive(Debug)` output of our error types won't even include the error messages in our `Display` impls. Rust's panic infrastructure doesn't provide a method for converting an `Error` type into a panic, it only supports converting `Debug` types into panics, and we feel that this is a major issue.
 
 Similarly, there's no convenient tools provided by the language for printing an error and all of its source's error messages.
 
@@ -118,7 +118,7 @@ $ cargo run
 Error: invalid config
 ```
 
-By default all of the source's error messages are lost. This problem arises from the fact that we used `Display` as the interface to an individual error message. If we could go back we'd currently propose instead adding `fn message(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result'` to the `Error` trait, but that ship has sailed.
+By default all of the source's error messages are lost. This arises from the fact that we used `Display` as the interface to an individual error message. If we could go back we'd currently propose instead adding `fn message(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result'` to the `Error` trait, but that ship has sailed.
 
 The way we fix this today is by abusing the `Debug` trait. Types like [`eyre`](https://docs.rs/eyre/0.6.5/eyre/trait.EyreHandler.html#tymethod.debug), [`anyhow`](https://docs.rs/anyhow/1.0.40/src/anyhow/fmt.rs.html#19), and even sometimes [`custom error enums`]() use their `Debug` output to print the full chain of errors in a human readable report.
 
