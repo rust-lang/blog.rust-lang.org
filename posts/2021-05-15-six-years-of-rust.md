@@ -31,7 +31,7 @@ Rustc wasn't the only tool that had significant improvements.
 
 
 ## Rust In Production
-Each year Rust's growth and adoption in the community and industry has been unbelievable, and this past year has been no exception. Once again in 2020, Rust was been voted StackOverflow's [Most Loved Programming Language][stackoverflow]. Thank you to everyone in the community for your support, and help making Rust what it is today.
+Each year Rust's growth and adoption in the community and industry has been unbelievable, and this past year has been no exception. Once again in 2020, Rust was voted StackOverflow's [Most Loved Programming Language][stackoverflow]. Thank you to everyone in the community for your support, and help making Rust what it is today.
 
 With the formation of the [Rust foundation], Rust has been in a better position build a sustainable open source ecosystem empowering everyone to build reliable and efficient software. A number of companies that use Rust have formed teams dedicated to maintaining and improving the Rust project, including [AWS](https://aws.amazon.com/blogs/opensource/how-our-aws-rust-team-will-contribute-to-rusts-future-successes/), [Facebook](https://engineering.fb.com/2021/04/29/developer-tools/rust/), and Microsoft.
 
