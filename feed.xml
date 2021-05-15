@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-05-15T17:52:36+00:00</updated>
+    <updated>2021-05-15T18:36:57+00:00</updated>
 
     
     <entry>
@@ -21,7 +21,7 @@
         <id>https://blog.rust-lang.org/2021/05/15/six-years-of-rust.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2021/05/15/six-years-of-rust.html">&lt;p&gt;Today marks &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;&#x27;s sixth birthday since it went 1.0 in 2015. A lot has changed since then and especially over the past year, and Rust was no different. In 2020, there was no foundation yet, no const generics, and a lot organisations were still wondering whether Rust was production ready.&lt;/p&gt;
 &lt;p&gt;In the midst of the COVID-19 pandemic, hundreds of Rust&#x27;s global distributed set of team members and volunteers shipped over nine new stable releases of Rust, in addition to various bugfix releases. Today, &amp;quot;Rust in production&amp;quot; isn&#x27;t a question, but a statement. The newly founded Rust foundation has several members who value using Rust in production enough to help continue to support and contribute to its open development ecosystem.&lt;/p&gt;
-&lt;p&gt;We wanted to take today to look back at some of the major improvements over the past year, how the community has been using in Rust in production, and finally look ahead at some of the work that is currently ongoing to improve and use Rust for small and large scale projects over the next year. Let&#x27;s get started!&lt;/p&gt;
+&lt;p&gt;We wanted to take today to look back at some of the major improvements over the past year, how the community has been using Rust in production, and finally look ahead at some of the work that is currently ongoing to improve and use Rust for small and large scale projects over the next year. Let&#x27;s get started!&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#recent-additions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;recent-additions&quot;&gt;&lt;/a&gt;Recent Additions&lt;/h2&gt;
 &lt;p&gt;The Rust language has improved tremendously in the past year, gaining a lot of quality of life features, that while they don&#x27;t fundamentally change the language, they help make using and maintaining Rust in more places even easier.&lt;/p&gt;
 &lt;ul&gt;
@@ -49,7 +49,7 @@
 &lt;/ul&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#rust-in-production&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rust-in-production&quot;&gt;&lt;/a&gt;Rust In Production&lt;/h2&gt;
 &lt;p&gt;Each year Rust&#x27;s growth and adoption in the community and industry has been unbelievable, and this past year has been no exception. Once again in 2020, Rust was voted StackOverflow&#x27;s &lt;a href&#x3D;&quot;https://stackoverflow.blog/2020/06/05/why-the-developers-who-use-rust-love-it-so-much/&quot;&gt;Most Loved Programming Language&lt;/a&gt;. Thank you to everyone in the community for your support, and help making Rust what it is today.&lt;/p&gt;
-&lt;p&gt;With the formation of the &lt;a href&#x3D;&quot;https://foundation.rust-lang.org/posts/2021-02-08-hello-world/&quot;&gt;Rust foundation&lt;/a&gt;, Rust has been in a better position build a sustainable open source ecosystem empowering everyone to build reliable and efficient software. A number of companies that use Rust have formed teams dedicated to maintaining and improving the Rust project, including &lt;a href&#x3D;&quot;https://aws.amazon.com/blogs/opensource/how-our-aws-rust-team-will-contribute-to-rusts-future-successes/&quot;&gt;AWS&lt;/a&gt;, &lt;a href&#x3D;&quot;https://engineering.fb.com/2021/04/29/developer-tools/rust/&quot;&gt;Facebook&lt;/a&gt;, and Microsoft.&lt;/p&gt;
+&lt;p&gt;With the formation of the &lt;a href&#x3D;&quot;https://foundation.rust-lang.org/posts/2021-02-08-hello-world/&quot;&gt;Rust foundation&lt;/a&gt;, Rust has been in a better position to build a sustainable open source ecosystem empowering everyone to build reliable and efficient software. A number of companies that use Rust have formed teams dedicated to maintaining and improving the Rust project, including &lt;a href&#x3D;&quot;https://aws.amazon.com/blogs/opensource/how-our-aws-rust-team-will-contribute-to-rusts-future-successes/&quot;&gt;AWS&lt;/a&gt;, &lt;a href&#x3D;&quot;https://engineering.fb.com/2021/04/29/developer-tools/rust/&quot;&gt;Facebook&lt;/a&gt;, and Microsoft.&lt;/p&gt;
 &lt;p&gt;And it isn&#x27;t just Rust that has been getting bigger. Larger and larger companies have been adopting Rust in their projects and offering officially supported Rust APIs.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Both Microsoft and Amazon have just recently announced and released their new officially supported Rust libraries for interacting with &lt;a href&#x3D;&quot;https://github.com/microsoft/windows-rs&quot;&gt;Windows&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/awslabs/aws-sdk-rust&quot;&gt;AWS&lt;/a&gt;. Official first party support for these massive APIs helps make Rust people&#x27;s first choice when deciding what to use for their project.&lt;/li&gt;
