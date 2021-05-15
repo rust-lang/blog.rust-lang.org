@@ -10,8 +10,70 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-05-11T15:00:15+00:00</updated>
+    <updated>2021-05-15T15:23:36+00:00</updated>
 
+    
+    <entry>
+        <title>Six Years of Rust</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/05/15/six-years-of-rust.html" type="text/html" title="Six Years of Rust" />
+        <published>2021-05-15T00:00:00+00:00</published>
+        <updated>2021-05-15T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/05/15/six-years-of-rust.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/05/15/six-years-of-rust.html">&lt;p&gt;Today marks &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;&#x27;s sixth birthday since it went 1.0 in 2015. A lot has changed since then and especially over the past year, and Rust was no different. In 2020, there was no foundation yet, no const generics, and a lot organisations were still wondering whether Rust was production ready.&lt;/p&gt;
+&lt;p&gt;In the midst of the COVID-19 pandemic, hundreds of Rust&#x27;s global distributed set of team members and volunteers shipped over nine new stable releases of Rust, in addition to various bugfix releases. Today, &amp;quot;Rust in production&amp;quot; isn&#x27;t a question, but a statement. The newly founded Rust foundation has several members who value using Rust in production enough to help continue to support and contribute to its open development ecosystem.&lt;/p&gt;
+&lt;p&gt;We wanted to take today to look back at some of the major improvements over the past year, how the community has been using in Rust in production, and finally look ahead at some of the work that is currently ongoing to improve and use Rust for small and large scale projects over the next year. Let&#x27;s get started!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#recent-additions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;recent-additions&quot;&gt;&lt;/a&gt;Recent Additions&lt;/h2&gt;
+&lt;p&gt;The Rust language has improved tremendously in the past year, gaining a lot of quality of life features, that while they don&#x27;t fundamentally change the language, they help make using and maintaining Rust in more places even easier.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;As of Rust 1.52.0 and the upgrade to LLVM 12, one of few cases of unsoundness around forward progress (such as handling infinite loops) has finally been resolved. This has been a long running collaboration between the Rust teams and the LLVM project, and is a great example of improvements to Rust also benefitting the wider ecosystem of programming languages.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On supporting an even wider ecosystem, the introduction of Tier 1 support for 64 bit ARM Linux, and Tier 2 support for ARM macOS &amp;amp; ARM Windows, has made Rust an even better place to easily build your projects across new and different architectures.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The most notable exception to the theme of polish has been the major improvements to Rust&#x27;s compile-time capabilities. The stabilisation of const generics for primitive types, the addition of control flow for &lt;code&gt;const fn&lt;/code&gt;s, and allowing procedural macros to be used in more places, have allowed completely powerful new types of APIs and crates to be created.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Rustc wasn&#x27;t the only tool that had significant improvements.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Cargo just recently stabilised its new feature resolver, that makes it easier to use your dependencies across different targets.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Rustdoc stabilised its &amp;quot;intra-doc links&amp;quot; feature, allowing you to easily and automatically cross reference Rust types and functions in your documentation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Clippy with Cargo now uses a separate build cache that provides much more consistent behaviour.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#rust-in-production&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rust-in-production&quot;&gt;&lt;/a&gt;Rust In Production&lt;/h2&gt;
+&lt;p&gt;Each year Rust&#x27;s growth and adoption in the community and industry has been unbelievable, and this past year has been no exception. Once again in 2020, Rust was been voted StackOverflow&#x27;s &lt;a href&#x3D;&quot;https://stackoverflow.blog/2020/06/05/why-the-developers-who-use-rust-love-it-so-much/&quot;&gt;Most Loved Programming Language&lt;/a&gt;. Thank you to everyone in the community for your support, and help making Rust what it is today.&lt;/p&gt;
+&lt;p&gt;With the formation of the &lt;a href&#x3D;&quot;https://foundation.rust-lang.org/posts/2021-02-08-hello-world/&quot;&gt;Rust foundation&lt;/a&gt;, Rust has been in a better position build a sustainable open source ecosystem empowering everyone to build reliable and efficient software. A number of companies that use Rust have formed teams dedicated to maintaining and improving the Rust project, including &lt;a href&#x3D;&quot;https://aws.amazon.com/blogs/opensource/how-our-aws-rust-team-will-contribute-to-rusts-future-successes/&quot;&gt;AWS&lt;/a&gt;, &lt;a href&#x3D;&quot;https://engineering.fb.com/2021/04/29/developer-tools/rust/&quot;&gt;Facebook&lt;/a&gt;, and Microsoft.&lt;/p&gt;
+&lt;p&gt;And it isn&#x27;t just Rust that has been getting bigger. Larger and larger companies have been adopting Rust in their projects and offering officially supported Rust APIs.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Both Microsoft and Amazon have just recently announced and released their new officially supported Rust libraries for interacting with &lt;a href&#x3D;&quot;https://github.com/microsoft/windows-rs&quot;&gt;Windows&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/awslabs/aws-sdk-rust&quot;&gt;AWS&lt;/a&gt;. Official first party support for these massive APIs helps make Rust people&#x27;s first choice when deciding what to use for their project.&lt;/li&gt;
+&lt;li&gt;The cURL project has released new versions that offer opt-in support for using Rust libraries for handling &lt;a href&#x3D;&quot;https://daniel.haxx.se/blog/2020/10/09/rust-in-curl-with-hyper/&quot;&gt;HTTP/s&lt;/a&gt; and &lt;a href&#x3D;&quot;https://daniel.haxx.se/blog/2021/02/09/curl-supports-rustls/&quot;&gt;TLS&lt;/a&gt; communication. This has been a huge inter-community collaboration between the ISRG, the Hyper &amp;amp; Rustls teams, and the cURL project, and we&#x27;d like to thank everyone for their hard work in providing new memory safe backends for a project as massive and widely used as cURL!&lt;/li&gt;
+&lt;li&gt;Tokio (an asynchronous runtime written in Rust), released its &lt;a href&#x3D;&quot;https://tokio.rs/blog/2020-12-tokio-1-0&quot;&gt;1.0 version&lt;/a&gt; and announced their three year stability guarantee, providing everyone with a solid, stable foundation for writing reliable network applications without compromising speed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#future-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;future-work&quot;&gt;&lt;/a&gt;Future Work&lt;/h2&gt;
+&lt;p&gt;Of course, all that is just to start, we&#x27;re seeing more and more initiatives putting Rust in exciting new places;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Critical Section &amp;amp; Ferrous Systems have started &lt;a href&#x3D;&quot;https://ferrous-systems.com/ferrocene&quot;&gt;Ferrocene&lt;/a&gt;. A project to make Rust a viable programming language for safety and mission critical systems across the industry.&lt;/li&gt;
+&lt;li&gt;Embark Studios have released an initial prototype of &lt;a href&#x3D;&quot;https://github.com/EmbarkStudios/rust-gpu&quot;&gt;&lt;code&gt;rust-gpu&lt;/code&gt;&lt;/a&gt;, a new compiler backend that allows writing graphics shaders using Rust for GPUs.&lt;/li&gt;
+&lt;li&gt;The Linux project is currently &lt;a href&#x3D;&quot;https://lore.kernel.org/lkml/CANiq72khBa2GcB6-PHM3A44Y90d6vzYAS&#x3D;BVpk3nT4B6u+NVDw@mail.gmail.com/T/#mb5e524dae9d5a5815c6e68eb36b9bde4e87c861d&quot;&gt;considering a proposal to add Rust as the second language to the kernel&lt;/a&gt; to enable writing safer driver and kernel-space code.&lt;/li&gt;
+&lt;li&gt;Google has announced that it &lt;a href&#x3D;&quot;https://security.googleblog.com/2021/04/rust-in-android-platform.html&quot;&gt;now supports building low level components of the Android OS in Rust&lt;/a&gt;, and have already begun an effort to rewrite their bluetooth stack with Rust!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Right now the Rust teams are planning and coordinating the 2021 edition of Rust. Much like this past year, a lot of themes of the changes are around improving quality of life. You can check out our recent post about &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/05/11/edition-2021.html&quot;&gt;&amp;quot;The Plan for the Rust 2021 Edition&amp;quot;&lt;/a&gt; to see what the changes the teams are planning.&lt;/p&gt;
+&lt;p&gt;And that&#x27;s just the tip of the iceberg; there are a lot more changes being worked on, and exciting new open projects being started every day in Rust. We can&#x27;t wait to see what you all build in the year ahead!&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;Are there changes, or projects from the past year that you&#x27;re excited about? Are you looking to get started with Rust? Do you want to help contribute to the 2021 edition? Then come on over, introduce yourself, and join the discussion over on our &lt;a href&#x3D;&quot;https://users.rust-lang.org/&quot;&gt;Discourse&lt;/a&gt; forum and &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/&quot;&gt;Zulip&lt;/a&gt; chat! Everyone is welcome, we are committed to providing a friendly, safe and welcoming environment for all, regardless of gender, sexual orientation, disability, ethnicity, religion, or similar personal characteristic.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>The Plan for the Rust 2021 Edition</title>
@@ -968,129 +1030,6 @@ fn generic_function&amp;lt;const M: usize&amp;gt;(arr: [i32; M]) {
 
         <author>
             <name>The const generics project group</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.50.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/02/11/Rust-1.50.0.html" type="text/html" title="Announcing Rust 1.50.0" />
-        <published>2021-02-11T00:00:00+00:00</published>
-        <updated>2021-02-11T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/02/11/Rust-1.50.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/02/11/Rust-1.50.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.50.0. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.50.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11&quot;&gt;detailed release notes for 1.50.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1500-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1500-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.50.0 stable&lt;/h2&gt;
-&lt;p&gt;For this release, we have improved array indexing, expanded safe access to union fields, and added to the standard library.
-See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11&quot;&gt;detailed release notes&lt;/a&gt; to learn about other changes
-not covered by this post.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#const-generic-array-indexing&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-generic-array-indexing&quot;&gt;&lt;/a&gt;Const-generic array indexing&lt;/h3&gt;
-&lt;p&gt;Continuing the march toward stable &lt;code&gt;const&lt;/code&gt; generics, this release adds
-implementations of &lt;code&gt;ops::Index&lt;/code&gt; and &lt;code&gt;IndexMut&lt;/code&gt; for arrays &lt;code&gt;[T; N]&lt;/code&gt; for
-&lt;em&gt;any&lt;/em&gt; length of &lt;code&gt;const N&lt;/code&gt;. The indexing operator &lt;code&gt;[]&lt;/code&gt; already worked on
-arrays through built-in compiler magic, but at the type level, arrays
-didn&#x27;t actually implement the library traits until now.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn second&amp;lt;C&amp;gt;(container: &amp;amp;C) -&amp;gt; &amp;amp;C::Output
-where
-    C: std::ops::Index&amp;lt;usize&amp;gt; + ?Sized,
-{
-    &amp;amp;container[1]
-}
-
-fn main() {
-    let array: [i32; 3] &#x3D; [1, 2, 3];
-    assert_eq!(second(&amp;amp;array[..]), &amp;amp;2); // slices worked before
-    assert_eq!(second(&amp;amp;array), &amp;amp;2); // now it also works directly
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#const-value-repetition-for-arrays&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-value-repetition-for-arrays&quot;&gt;&lt;/a&gt;&lt;code&gt;const&lt;/code&gt; value repetition for arrays&lt;/h3&gt;
-&lt;p&gt;Arrays in Rust can be written either as a list &lt;code&gt;[a, b, c]&lt;/code&gt; or a repetition &lt;code&gt;[x; N]&lt;/code&gt;.
-For lengths &lt;code&gt;N&lt;/code&gt; greater than one, repetition has only been allowed for &lt;code&gt;x&lt;/code&gt;s that are &lt;code&gt;Copy&lt;/code&gt;,
-and &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2203-const-repeat-expr.html&quot;&gt;RFC 2203&lt;/a&gt; sought to allow any &lt;code&gt;const&lt;/code&gt; expression there. However,
-while that feature was unstable for arbitrary expressions, its implementation
-since Rust 1.38 accidentally allowed stable use of &lt;code&gt;const&lt;/code&gt; &lt;em&gt;values&lt;/em&gt; in array
-repetition.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn main() {
-    // This is not allowed, because &#x60;Option&amp;lt;Vec&amp;lt;i32&amp;gt;&amp;gt;&#x60; does not implement &#x60;Copy&#x60;.
-    let array: [Option&amp;lt;Vec&amp;lt;i32&amp;gt;&amp;gt;; 10] &#x3D; [None; 10];
-
-    const NONE: Option&amp;lt;Vec&amp;lt;i32&amp;gt;&amp;gt; &#x3D; None;
-    const EMPTY: Option&amp;lt;Vec&amp;lt;i32&amp;gt;&amp;gt; &#x3D; Some(Vec::new());
-
-    // However, repeating a &#x60;const&#x60; value is allowed!
-    let nones &#x3D; [NONE; 10];
-    let empties &#x3D; [EMPTY; 10];
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In Rust 1.50, that stabilization is formally acknowledged. In the future, to avoid such &amp;quot;temporary&amp;quot; named
-constants, you can look forward to inline &lt;code&gt;const&lt;/code&gt; expressions per &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2920-inline-const.html&quot;&gt;RFC 2920&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#safe-assignments-to-manuallydropt-union-fields&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;safe-assignments-to-manuallydropt-union-fields&quot;&gt;&lt;/a&gt;Safe assignments to &lt;code&gt;ManuallyDrop&amp;lt;T&amp;gt;&lt;/code&gt; union fields&lt;/h3&gt;
-&lt;p&gt;Rust 1.49 made it possible to add &lt;code&gt;ManuallyDrop&amp;lt;T&amp;gt;&lt;/code&gt; fields to a &lt;code&gt;union&lt;/code&gt; as part
-of allowing &lt;code&gt;Drop&lt;/code&gt; for unions at all. However, unions don&#x27;t drop old values
-when a field is assigned, since they don&#x27;t know which variant was formerly
-valid, so safe Rust previously limited this to &lt;code&gt;Copy&lt;/code&gt; types only, which never &lt;code&gt;Drop&lt;/code&gt;.
-Of course, &lt;code&gt;ManuallyDrop&amp;lt;T&amp;gt;&lt;/code&gt; also doesn&#x27;t need to &lt;code&gt;Drop&lt;/code&gt;, so now Rust 1.50
-allows safe assignments to these fields as well.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#a-niche-for-file-on-unix-platforms&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-niche-for-file-on-unix-platforms&quot;&gt;&lt;/a&gt;A niche for &lt;code&gt;File&lt;/code&gt; on Unix platforms&lt;/h3&gt;
-&lt;p&gt;Some types in Rust have specific limitations on what is considered a
-valid value, which may not cover the entire range of possible memory
-values. We call any remaining invalid value a &lt;a href&#x3D;&quot;https://rust-lang.github.io/unsafe-code-guidelines/glossary.html#niche&quot;&gt;niche&lt;/a&gt;, and this space
-may be used for type layout optimizations. For example, in Rust 1.28
-we introduced &lt;code&gt;NonZero&lt;/code&gt; integer types (like &lt;code&gt;NonZeroU8&lt;/code&gt;) where &lt;code&gt;0&lt;/code&gt; is a niche, and this allowed
-&lt;code&gt;Option&amp;lt;NonZero&amp;gt;&lt;/code&gt; to use &lt;code&gt;0&lt;/code&gt; to represent &lt;code&gt;None&lt;/code&gt; with no extra memory.&lt;/p&gt;
-&lt;p&gt;On Unix platforms, Rust&#x27;s &lt;code&gt;File&lt;/code&gt; is simply made of the system&#x27;s integer
-file descriptor, and this happens to have a possible niche
-as well because it can never be &lt;code&gt;-1&lt;/code&gt;! System calls which return a file
-descriptor use &lt;code&gt;-1&lt;/code&gt; to indicate that an error occurred (check &lt;code&gt;errno&lt;/code&gt;)
-so it&#x27;s never possible for &lt;code&gt;-1&lt;/code&gt; to be a real file descriptor. Starting
-in Rust 1.50 this niche is added to the type&#x27;s definition so it can be
-used in layout optimizations too. It follows that &lt;code&gt;Option&amp;lt;File&amp;gt;&lt;/code&gt; will
-now have the same size as &lt;code&gt;File&lt;/code&gt; itself!&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#library-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
-&lt;p&gt;In Rust 1.50.0, there are nine new stable functions:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.bool.html#method.then&quot;&gt;&lt;code&gt;bool::then&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/btree_map/enum.Entry.html#method.or_insert_with_key&quot;&gt;&lt;code&gt;btree_map::Entry::or_insert_with_key&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.f32.html#method.clamp&quot;&gt;&lt;code&gt;f32::clamp&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.f64.html#method.clamp&quot;&gt;&lt;code&gt;f64::clamp&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/hash_map/enum.Entry.html#method.or_insert_with_key&quot;&gt;&lt;code&gt;hash_map::Entry::or_insert_with_key&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cmp/trait.Ord.html#method.clamp&quot;&gt;&lt;code&gt;Ord::clamp&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cell/struct.RefCell.html#method.take&quot;&gt;&lt;code&gt;RefCell::take&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.fill&quot;&gt;&lt;code&gt;slice::fill&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cell/struct.UnsafeCell.html#method.get_mut&quot;&gt;&lt;code&gt;UnsafeCell::get_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And quite a few existing functions were made &lt;code&gt;const&lt;/code&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/enum.IpAddr.html#method.is_ipv4&quot;&gt;&lt;code&gt;IpAddr::is_ipv4&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/enum.IpAddr.html#method.is_ipv6&quot;&gt;&lt;code&gt;IpAddr::is_ipv6&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.size&quot;&gt;&lt;code&gt;Layout::size&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.align&quot;&gt;&lt;code&gt;Layout::align&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.from_size_align&quot;&gt;&lt;code&gt;Layout::from_size_align&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;pow&lt;/code&gt; for all integer types.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;checked_pow&lt;/code&gt; for all integer types.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;saturating_pow&lt;/code&gt; for all integer types.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;wrapping_pow&lt;/code&gt; for all integer types.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;next_power_of_two&lt;/code&gt; for all unsigned integer types.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;checked_power_of_two&lt;/code&gt; for all unsigned integer types.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11&quot;&gt;detailed release notes&lt;/a&gt; to learn about other changes.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.50.0 release: check out what changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1500-2021-02-11&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-150-2021-02-11&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-150&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1500&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1500&quot;&gt;&lt;/a&gt;Contributors to 1.50.0&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.50.0. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.50.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     

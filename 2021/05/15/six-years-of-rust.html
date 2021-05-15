@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Six Years of Rust | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Six Years of Rust | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Six Years of Rust | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Six Years of Rust" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Six Years of Rust</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 15, 2021 &middot; The Rust Team
+    
+    </div>
+
+    <div class="post">
+      <p>Today marks <a href="https://www.rust-lang.org">Rust</a>'s sixth birthday since it went 1.0 in 2015. A lot has changed since then and especially over the past year, and Rust was no different. In 2020, there was no foundation yet, no const generics, and a lot organisations were still wondering whether Rust was production ready.</p>
+<p>In the midst of the COVID-19 pandemic, hundreds of Rust's global distributed set of team members and volunteers shipped over nine new stable releases of Rust, in addition to various bugfix releases. Today, &quot;Rust in production&quot; isn't a question, but a statement. The newly founded Rust foundation has several members who value using Rust in production enough to help continue to support and contribute to its open development ecosystem.</p>
+<p>We wanted to take today to look back at some of the major improvements over the past year, how the community has been using in Rust in production, and finally look ahead at some of the work that is currently ongoing to improve and use Rust for small and large scale projects over the next year. Let's get started!</p>
+<h2><a href="#recent-additions" aria-hidden="true" class="anchor" id="recent-additions"></a>Recent Additions</h2>
+<p>The Rust language has improved tremendously in the past year, gaining a lot of quality of life features, that while they don't fundamentally change the language, they help make using and maintaining Rust in more places even easier.</p>
+<ul>
+<li>
+<p>As of Rust 1.52.0 and the upgrade to LLVM 12, one of few cases of unsoundness around forward progress (such as handling infinite loops) has finally been resolved. This has been a long running collaboration between the Rust teams and the LLVM project, and is a great example of improvements to Rust also benefitting the wider ecosystem of programming languages.</p>
+</li>
+<li>
+<p>On supporting an even wider ecosystem, the introduction of Tier 1 support for 64 bit ARM Linux, and Tier 2 support for ARM macOS &amp; ARM Windows, has made Rust an even better place to easily build your projects across new and different architectures.</p>
+</li>
+<li>
+<p>The most notable exception to the theme of polish has been the major improvements to Rust's compile-time capabilities. The stabilisation of const generics for primitive types, the addition of control flow for <code>const fn</code>s, and allowing procedural macros to be used in more places, have allowed completely powerful new types of APIs and crates to be created.</p>
+</li>
+</ul>
+<p>Rustc wasn't the only tool that had significant improvements.</p>
+<ul>
+<li>
+<p>Cargo just recently stabilised its new feature resolver, that makes it easier to use your dependencies across different targets.</p>
+</li>
+<li>
+<p>Rustdoc stabilised its &quot;intra-doc links&quot; feature, allowing you to easily and automatically cross reference Rust types and functions in your documentation.</p>
+</li>
+<li>
+<p>Clippy with Cargo now uses a separate build cache that provides much more consistent behaviour.</p>
+</li>
+</ul>
+<h2><a href="#rust-in-production" aria-hidden="true" class="anchor" id="rust-in-production"></a>Rust In Production</h2>
+<p>Each year Rust's growth and adoption in the community and industry has been unbelievable, and this past year has been no exception. Once again in 2020, Rust was been voted StackOverflow's <a href="https://stackoverflow.blog/2020/06/05/why-the-developers-who-use-rust-love-it-so-much/">Most Loved Programming Language</a>. Thank you to everyone in the community for your support, and help making Rust what it is today.</p>
+<p>With the formation of the <a href="https://foundation.rust-lang.org/posts/2021-02-08-hello-world/">Rust foundation</a>, Rust has been in a better position build a sustainable open source ecosystem empowering everyone to build reliable and efficient software. A number of companies that use Rust have formed teams dedicated to maintaining and improving the Rust project, including <a href="https://aws.amazon.com/blogs/opensource/how-our-aws-rust-team-will-contribute-to-rusts-future-successes/">AWS</a>, <a href="https://engineering.fb.com/2021/04/29/developer-tools/rust/">Facebook</a>, and Microsoft.</p>
+<p>And it isn't just Rust that has been getting bigger. Larger and larger companies have been adopting Rust in their projects and offering officially supported Rust APIs.</p>
+<ul>
+<li>Both Microsoft and Amazon have just recently announced and released their new officially supported Rust libraries for interacting with <a href="https://github.com/microsoft/windows-rs">Windows</a> and <a href="https://github.com/awslabs/aws-sdk-rust">AWS</a>. Official first party support for these massive APIs helps make Rust people's first choice when deciding what to use for their project.</li>
+<li>The cURL project has released new versions that offer opt-in support for using Rust libraries for handling <a href="https://daniel.haxx.se/blog/2020/10/09/rust-in-curl-with-hyper/">HTTP/s</a> and <a href="https://daniel.haxx.se/blog/2021/02/09/curl-supports-rustls/">TLS</a> communication. This has been a huge inter-community collaboration between the ISRG, the Hyper &amp; Rustls teams, and the cURL project, and we'd like to thank everyone for their hard work in providing new memory safe backends for a project as massive and widely used as cURL!</li>
+<li>Tokio (an asynchronous runtime written in Rust), released its <a href="https://tokio.rs/blog/2020-12-tokio-1-0">1.0 version</a> and announced their three year stability guarantee, providing everyone with a solid, stable foundation for writing reliable network applications without compromising speed.</li>
+</ul>
+<h2><a href="#future-work" aria-hidden="true" class="anchor" id="future-work"></a>Future Work</h2>
+<p>Of course, all that is just to start, we're seeing more and more initiatives putting Rust in exciting new places;</p>
+<ul>
+<li>Critical Section &amp; Ferrous Systems have started <a href="https://ferrous-systems.com/ferrocene">Ferrocene</a>. A project to make Rust a viable programming language for safety and mission critical systems across the industry.</li>
+<li>Embark Studios have released an initial prototype of <a href="https://github.com/EmbarkStudios/rust-gpu"><code>rust-gpu</code></a>, a new compiler backend that allows writing graphics shaders using Rust for GPUs.</li>
+<li>The Linux project is currently <a href="https://lore.kernel.org/lkml/CANiq72khBa2GcB6-PHM3A44Y90d6vzYAS=BVpk3nT4B6u+NVDw@mail.gmail.com/T/#mb5e524dae9d5a5815c6e68eb36b9bde4e87c861d">considering a proposal to add Rust as the second language to the kernel</a> to enable writing safer driver and kernel-space code.</li>
+<li>Google has announced that it <a href="https://security.googleblog.com/2021/04/rust-in-android-platform.html">now supports building low level components of the Android OS in Rust</a>, and have already begun an effort to rewrite their bluetooth stack with Rust!</li>
+</ul>
+<p>Right now the Rust teams are planning and coordinating the 2021 edition of Rust. Much like this past year, a lot of themes of the changes are around improving quality of life. You can check out our recent post about <a href="https://blog.rust-lang.org/2021/05/11/edition-2021.html">&quot;The Plan for the Rust 2021 Edition&quot;</a> to see what the changes the teams are planning.</p>
+<p>And that's just the tip of the iceberg; there are a lot more changes being worked on, and exciting new open projects being started every day in Rust. We can't wait to see what you all build in the year ahead!</p>
+<hr />
+<p>Are there changes, or projects from the past year that you're excited about? Are you looking to get started with Rust? Do you want to help contribute to the 2021 edition? Then come on over, introduce yourself, and join the discussion over on our <a href="https://users.rust-lang.org/">Discourse</a> forum and <a href="https://rust-lang.zulipchat.com/">Zulip</a> chat! Everyone is welcome, we are committed to providing a friendly, safe and welcoming environment for all, regardless of gender, sexual orientation, disability, ethnicity, religion, or similar personal characteristic.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
