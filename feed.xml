@@ -10,8 +10,54 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-05-15T18:36:57+00:00</updated>
+    <updated>2021-05-17T13:29:19+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rustup 1.24.2</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/05/17/Rustup-1.24.2.html" type="text/html" title="Announcing Rustup 1.24.2" />
+        <published>2021-05-17T00:00:00+00:00</published>
+        <updated>2021-05-17T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/05/17/Rustup-1.24.2.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/05/17/Rustup-1.24.2.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.24.2. &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.24.2 is as easy as closing your IDE and running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup self update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1242&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1242&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.24.2&lt;/h2&gt;
+&lt;p&gt;1.24.2 introduces pooled allocations to prevent memory fragmentation issues on
+some platforms with 1.24.x. We&#x27;re not entirely sure what aspect of the streamed
+unpacking logic caused allocator fragmentation, but memory pools are a well
+known fix that should solve this for all platforms.&lt;/p&gt;
+&lt;p&gt;Those who were encountering CI issues with 1.24.1 should find them resolved.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;You can check out all the changes to Rustup for 1.24.2 in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/blob/stable/CHANGELOG.md&quot;&gt;changelog&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Rustup&#x27;s documentation is also available in &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/&quot;&gt;the rustup book&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, the Rustup working group are pleased to welcome a new member. Between
+1.24.1 and 1.24.2 二手掉包工程师 (hi-rustin) has joined, having already made some
+excellent contributions.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
+&lt;p&gt;Thanks again to all the contributors who made rustup 1.24.2 possible!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Carol (Nichols || Goulding)&lt;/li&gt;
+&lt;li&gt;Daniel Silverstone&lt;/li&gt;
+&lt;li&gt;João Marcos Bezerra&lt;/li&gt;
+&lt;li&gt;Josh Rotenberg&lt;/li&gt;
+&lt;li&gt;Joshua Nelson&lt;/li&gt;
+&lt;li&gt;Martijn Gribnau&lt;/li&gt;
+&lt;li&gt;pierwill&lt;/li&gt;
+&lt;li&gt;Robert Collins&lt;/li&gt;
+&lt;li&gt;二手掉包工程师 (hi-rustin)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>The Rustup Working Group</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Six Years of Rust</title>
@@ -931,105 +977,6 @@ assert_eq!(unsafe { raw_f2.read_unaligned() }, 2);
 
         <author>
             <name>Niko Matsakis</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Const generics MVP hits beta!</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/02/26/const-generics-mvp-beta.html" type="text/html" title="Const generics MVP hits beta!" />
-        <published>2021-02-26T00:00:00+00:00</published>
-        <updated>2021-02-26T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/02/26/const-generics-mvp-beta.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/02/26/const-generics-mvp-beta.html">&lt;p&gt;After more than 3 years since the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/2000-const-generics.md&quot;&gt;original RFC for const generics&lt;/a&gt; was accepted, &lt;strong&gt;the first version of const generics is now available in the Rust beta channel!&lt;/strong&gt; It will be available in the 1.51 release, which is expected to be released on &lt;strong&gt;March 25th, 2021&lt;/strong&gt;. Const generics is one of the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/12/16/rust-survey-2020.html&quot;&gt;most highly anticipated&lt;/a&gt; features coming to Rust, and we&#x27;re excited for people to start taking advantage of the increased power of the language following this addition.&lt;/p&gt;
-&lt;p&gt;Even if you don&#x27;t know what const generics are (in which case, read on!), you&#x27;ve likely been benefitting from them: const generics are already employed in the Rust standard library to improve the ergonomics of arrays and diagnostics; more on that below.&lt;/p&gt;
-&lt;p&gt;With const generics hitting beta, let&#x27;s take a quick look over what&#x27;s actually being stabilized, what this means practically, and what&#x27;s next.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#what-are-const-generics&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-are-const-generics&quot;&gt;&lt;/a&gt;What are const generics?&lt;/h2&gt;
-&lt;p&gt;Const generics are generic arguments that range over constant values, rather than types or lifetimes. This allows, for instance, types to be parameterized by integers. In fact, there has been one example of const generic types since early on in Rust&#x27;s development: the array types &lt;code&gt;[T; N]&lt;/code&gt;, for some type &lt;code&gt;T&lt;/code&gt; and &lt;code&gt;N: usize&lt;/code&gt;. However, there has previously been no way to abstract over arrays of an arbitrary size: if you wanted to implement a trait for arrays of any size, you would have to do so manually for each possible value. For a long time, even the standard library methods for arrays were limited to arrays of length at most 32 due to this problem. This restriction was &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/10/08/Rust-1.47.html#traits-on-larger-arrays&quot;&gt;finally lifted in Rust 1.47&lt;/a&gt; - a change that was made possible by const generics.&lt;/p&gt;
-&lt;p&gt;Here&#x27;s an example of a type and implementation making use of const generics: a type wrapping a pair of arrays of the same size.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct ArrayPair&amp;lt;T, const N: usize&amp;gt; {
-    left: [T; N],
-    right: [T; N],
-}
-
-impl&amp;lt;T: Debug, const N: usize&amp;gt; Debug for ArrayPair&amp;lt;T, N&amp;gt; {
-    // ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#current-restrictions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;current-restrictions&quot;&gt;&lt;/a&gt;Current restrictions&lt;/h3&gt;
-&lt;p&gt;The first iteration of const generics has been deliberately constrained: in other words, this version is the MVP (minimal viable product) for const generics. This decision is motivated both by the additional complexity of general const generics (the implementation for general const generics is not yet complete, but we feel const generics in 1.51 are already very useful), as well as by the desire to introduce a large feature gradually, to gain experience with any potential shortcomings and difficulties. We intend to lift these in future versions of Rust: see &lt;a href&#x3D;&quot;#whats-next&quot;&gt;what&#x27;s next&lt;/a&gt;.&lt;/p&gt;
-&lt;h4&gt;&lt;a href&#x3D;&quot;#only-integral-types-are-permitted-for-const-generics&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;only-integral-types-are-permitted-for-const-generics&quot;&gt;&lt;/a&gt;Only integral types are permitted for const generics&lt;/h4&gt;
-&lt;p&gt;For now, the only types that may be used as the type of a const generic argument are the types of integers (i.e. signed and unsigned integers, including &lt;code&gt;isize&lt;/code&gt; and &lt;code&gt;usize&lt;/code&gt;) as well as &lt;code&gt;char&lt;/code&gt; and &lt;code&gt;bool&lt;/code&gt;. This covers a primary use case of const, namely abstracting over arrays. In the future, this restriction will be lifted to allow more complex types, such as &lt;code&gt;&amp;amp;str&lt;/code&gt; and user-defined types.&lt;/p&gt;
-&lt;h4&gt;&lt;a href&#x3D;&quot;#no-complex-generic-expressions-in-const-arguments&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;no-complex-generic-expressions-in-const-arguments&quot;&gt;&lt;/a&gt;No complex generic expressions in const arguments&lt;/h4&gt;
-&lt;p&gt;Currently, const parameters may only be instantiated by const arguments of the following forms:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A standalone const parameter.&lt;/li&gt;
-&lt;li&gt;A literal (i.e. an integer, bool, or character).&lt;/li&gt;
-&lt;li&gt;A concrete constant expression (enclosed by &lt;code&gt;{}&lt;/code&gt;), involving no generic parameters.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;For example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn foo&amp;lt;const N: usize&amp;gt;() {}
-
-fn bar&amp;lt;T, const M: usize&amp;gt;() {
-    foo::&amp;lt;M&amp;gt;(); // ok: &#x60;M&#x60; is a const parameter
-    foo::&amp;lt;2021&amp;gt;(); // ok: &#x60;2021&#x60; is a literal
-    foo::&amp;lt;{20 * 100 + 20 * 10 + 1}&amp;gt;(); // ok: const expression contains no generic parameters
-    
-    foo::&amp;lt;{ M + 1 }&amp;gt;(); // error: const expression contains the generic parameter &#x60;M&#x60;
-    foo::&amp;lt;{ std::mem::size_of::&amp;lt;T&amp;gt;() }&amp;gt;(); // error: const expression contains the generic parameter &#x60;T&#x60;
-    
-    let _: [u8; M]; // ok: &#x60;M&#x60; is a const parameter
-    let _: [u8; std::mem::size_of::&amp;lt;T&amp;gt;()]; // error: const expression contains the generic parameter &#x60;T&#x60;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#by-value-array-iterator&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;by-value-array-iterator&quot;&gt;&lt;/a&gt;By-value array iterator&lt;/h2&gt;
-&lt;p&gt;In addition to the language changes described above, we&#x27;ve also started adding methods to the standard library taking advantage of const generics. While most are not yet ready for stabilization in this version, there is one method that has been stabilized. &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/std/array/struct.IntoIter.html&quot;&gt;&lt;code&gt;array::IntoIter&lt;/code&gt;&lt;/a&gt; allows arrays to be iterated by value, rather than by reference, addressing a significant shortcoming. There is ongoing discussion about the possibility of implementing &lt;code&gt;IntoIterator&lt;/code&gt; directly for arrays, though there are &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/65819&quot;&gt;backwards-compatibility concerns&lt;/a&gt; that still have to be addressed. &lt;code&gt;IntoIter::new&lt;/code&gt; acts as an interim solution that makes working with arrays significantly simpler.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::array;
-fn needs_vec(v: Vec&amp;lt;i32&amp;gt;) {
-    // ...
-}
-
-let arr &#x3D; [vec![0, 1], vec![1, 2, 3], vec![3]];
-for elem in array::IntoIter::new(arr) {
-    needs_vec(elem);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-next&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-next&quot;&gt;&lt;/a&gt;What&#x27;s next?&lt;/h2&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#const-generics-and-default-arguments&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-generics-and-default-arguments&quot;&gt;&lt;/a&gt;Const generics and default arguments&lt;/h3&gt;
-&lt;p&gt;Generic parameters must currently come in a specific order: lifetimes, types, consts. However, this causes difficulties when one attempts to use default arguments alongside const parameters. For the compiler to know which generic argument is which, any default arguments need to be placed last. These two constraints - &amp;quot;types come before consts&amp;quot;, and &amp;quot;defaults come last&amp;quot; - conflict with each other for definitions that have default type arguments &lt;em&gt;and&lt;/em&gt; const parameters.&lt;/p&gt;
-&lt;p&gt;The solution to this is to relax the ordering constraint so that const parameters may precede type arguments. However, there turn out to be subtleties involved in implementing this change, because the Rust compiler currently makes assumptions about parameter ordering that require some delicacy to remove.&lt;/p&gt;
-&lt;p&gt;In light of similar design questions around defaults for const arguments, these are also currently not supported in version 1.51. However, fixing the parameter ordering issues above will also unblock const defaults.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#const-generics-for-custom-types&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-generics-for-custom-types&quot;&gt;&lt;/a&gt;Const generics for custom types&lt;/h3&gt;
-&lt;p&gt;For a type to be valid, in theory, as the type of a const parameter, we must be able to compare values of that type at compile-time. Furthermore, equality of values should be well-behaved (namely, it should be deterministic, reflexive, symmetric, and transitive). To guarantee these properties, the concept of &lt;em&gt;structural equality&lt;/em&gt; was introduced in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/2000-const-generics.md&quot;&gt;const generics RFC&lt;/a&gt;: essentially this includes any type with &lt;code&gt;#[derive(PartialEq, Eq)]&lt;/code&gt; whose members also satisfy structural equality.&lt;/p&gt;
-&lt;p&gt;There are &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/74446&quot;&gt;still some questions&lt;/a&gt; concerning precisely how structural equality should behave, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/323&quot;&gt;prerequisites for implementation&lt;/a&gt;. Primitive types are significantly simpler, which has allowed us to stabilize const generics for these types before more general types.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#const-generics-with-complex-expressions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-generics-with-complex-expressions&quot;&gt;&lt;/a&gt;Const generics with complex expressions&lt;/h3&gt;
-&lt;p&gt;There are several complexities involved in supporting complex expressions. A feature flag, &lt;code&gt;feature(const_evaluatable_checked)&lt;/code&gt;, is available in the Nightly channel, which enables a version of complex expression support for const generics.&lt;/p&gt;
-&lt;p&gt;One difficulty lies in the necessity of having some way to compare unevaluated constants, as the compiler does not automatically know that two syntactically identical expressions are actually equal. This involves a kind of symbolic reasoning about expressions, which is a complex problem in general.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// The two expressions &#x60;N + 1&#x60; and &#x60;N + 1&#x60; are distinct
-// entities in the compiler, so we need a way to check
-// if they should be considered equal.
-fn foo&amp;lt;const N: usize&amp;gt;() -&amp;gt; [u8; N + 1] {
-    [0; N + 1]
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We also want a way to deal with potential errors when evaluating generic operations.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn split_first&amp;lt;T, const N: usize&amp;gt;(arr: [T; N]) -&amp;gt; (T, [T; N - 1]) {
-    // ...
-}
-
-fn generic_function&amp;lt;const M: usize&amp;gt;(arr: [i32; M]) {
-    // ...
-    let (head, tail) &#x3D; split_first(arr);
-    // ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Without a way to restrict the possible values of &lt;code&gt;M&lt;/code&gt; here, calling &lt;code&gt;generic_function::&amp;lt;0&amp;gt;()&lt;/code&gt; would cause an error when evaluating &lt;code&gt;0 - 1&lt;/code&gt; that is not caught at declaration time and so may unexpectedly fail for downstream users.&lt;/p&gt;
-&lt;p&gt;There are &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/68436&quot;&gt;design questions&lt;/a&gt; about how exactly to express these kinds of bounds, which need to be addressed before stabilising complex const arguments.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#summary&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;summary&quot;&gt;&lt;/a&gt;Summary&lt;/h2&gt;
-&lt;p&gt;With such a major new feature, there are likely to be a few rough edges. If you encounter any problems, even if it&#x27;s as minor as a confusing error message, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;please open an issue&lt;/a&gt;! We want the user experience to be the best it can possibly be - and any issues now are likely to be even more important for the next iterations of const generics.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The const generics project group</name>
         </author>
     </entry>
     
