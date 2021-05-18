@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-05-18T16:00:06+00:00</updated>
+    <updated>2021-05-18T16:00:24+00:00</updated>
 
     
     <entry>
@@ -105,7 +105,7 @@ excellent contributions.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#future-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;future-work&quot;&gt;&lt;/a&gt;Future Work&lt;/h2&gt;
 &lt;p&gt;Of course, all that is just to start, we&#x27;re seeing more and more initiatives putting Rust in exciting new places;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Critical Section &amp;amp; Ferrous Systems have started &lt;a href&#x3D;&quot;https://ferrous-systems.com/ferrocene&quot;&gt;Ferrocene&lt;/a&gt;, a project to make Rust a viable programming language for safety and mission critical systems across the industry.&lt;/li&gt;
+&lt;li&gt;Critical Section &amp;amp; Ferrous Systems have started &lt;a href&#x3D;&quot;https://ferrous-systems.com/ferrocene&quot;&gt;Ferrocene&lt;/a&gt;. A project to make Rust a viable programming language for safety and mission critical systems across the industry.&lt;/li&gt;
 &lt;li&gt;Embark Studios have released an initial prototype of &lt;a href&#x3D;&quot;https://github.com/EmbarkStudios/rust-gpu&quot;&gt;&lt;code&gt;rust-gpu&lt;/code&gt;&lt;/a&gt;, a new compiler backend that allows writing graphics shaders using Rust for GPUs.&lt;/li&gt;
 &lt;li&gt;The Linux project is currently &lt;a href&#x3D;&quot;https://lore.kernel.org/lkml/CANiq72khBa2GcB6-PHM3A44Y90d6vzYAS&#x3D;BVpk3nT4B6u+NVDw@mail.gmail.com/T/#mb5e524dae9d5a5815c6e68eb36b9bde4e87c861d&quot;&gt;considering a proposal to add Rust as the second language to the kernel&lt;/a&gt; to enable writing safer driver and kernel-space code.&lt;/li&gt;
 &lt;li&gt;Google has announced that it &lt;a href&#x3D;&quot;https://security.googleblog.com/2021/04/rust-in-android-platform.html&quot;&gt;now supports building low level components of the Android OS in Rust&lt;/a&gt;, and have already begun an effort to rewrite their bluetooth stack with Rust!&lt;/li&gt;
