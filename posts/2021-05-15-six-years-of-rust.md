@@ -52,7 +52,7 @@ And it isn't just Rust that has been getting bigger. Larger and larger companies
 ## Future Work
 Of course, all that is just to start, we're seeing more and more initiatives putting Rust in exciting new places;
 
-- Critical Section & Ferrous Systems have started [Ferrocene]. A project to make Rust a viable programming language for safety and mission critical systems across the industry.
+- Critical Section & Ferrous Systems have started [Ferrocene], a project to make Rust a viable programming language for safety and mission critical systems across the industry.
 - Embark Studios have released an initial prototype of [`rust-gpu`], a new compiler backend that allows writing graphics shaders using Rust for GPUs.
 - The Linux project is currently [considering a proposal to add Rust as the second language to the kernel][linux-rust] to enable writing safer driver and kernel-space code.
 - Google has announced that it [now supports building low level components of the Android OS in Rust][android-rust], and have already begun an effort to rewrite their bluetooth stack with Rust! 
