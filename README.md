@@ -29,6 +29,15 @@ any web server to check it out in your browser:
 
 The site is now available at <http://0.0.0.0:8000>.
 
+If you need to preview the site from another machine, pass the host's address via `--bind`. For example, if running on 192.168.72.73:
+
+```console
+> cd site
+> python3 -m http.server --bind 192.168.72.73
+```
+
+The site is now available at <http://192.168.72.73:8000>.
+
 ## Contributing
 
 First of all, thank you!
