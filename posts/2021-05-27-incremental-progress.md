@@ -45,7 +45,7 @@ beta channel. Therefore, starting with the 1.53.0 release, we will resume
 providing incremental-compilation support *without* requiring use of the
 `RUSTC_FORCE_INCREMENTAL` environment variable.
 
-## 1.53-beta: Not Just For βreakfast Anymore
+## 1.53-beta: Not Just For Breakfast Anymore
 
 If you or your team *need* incremental compilation, and thus turned on the
 `RUSTC_FORCE_INCREMENTAL=1` environment setting after the [1.52.1 blog post][],
@@ -71,7 +71,7 @@ of Rust. (And, of course, file issues if you see any bugs!)
 
 [law of the excluded middle]: https://en.wikipedia.org/wiki/Law_of_excluded_middle
 
-## βetta Than Evvah
+## Betta Than Evvah
 
 To update to the beta:
 
