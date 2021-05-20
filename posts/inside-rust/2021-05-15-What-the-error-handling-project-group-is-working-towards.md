@@ -120,7 +120,7 @@ Error: invalid config
 
 By default all of the source's error messages are lost. This arises from the fact that we used `Display` as the interface to an individual error message. If we could go back we'd currently propose instead adding `fn message(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result` to the `Error` trait, but that ship has sailed.
 
-The way that libraries work around this today is by abusing the `Debug` trait. Types like [`eyre`](https://docs.rs/eyre/0.6.5/eyre/trait.EyreHandler.html#tymethod.debug), [`anyhow`](https://docs.rs/anyhow/1.0.40/src/anyhow/fmt.rs.html#19), and even sometimes [`custom error enums`]() use their `Debug` output to print the full chain of errors in a human readable report.
+The way that libraries work around this today is by abusing the `Debug` trait. Types like [`eyre`](https://docs.rs/eyre/0.6.5/eyre/trait.EyreHandler.html#tymethod.debug), [`anyhow`](https://docs.rs/anyhow/1.0.40/src/anyhow/fmt.rs.html#19), and even sometimes [`custom error enums`](https://www.lpalmieri.com/posts/error-handling-rust/#error_chain_fmt) use their `Debug` output to print the full chain of errors in a human readable report.
 
 This has the advantage of making it easy to print a full error report and makes it so `unwrap`, `expect`, and return from main all print the full error report. But doing so prevents us from accessing the derived `Debug` format of our errors, potentially hiding internal details that might be needed for debugging but which aren't part of the error messages intended for users to read.
 
