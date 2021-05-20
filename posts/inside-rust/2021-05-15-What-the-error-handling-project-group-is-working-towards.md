@@ -118,11 +118,11 @@ $ cargo run
 Error: invalid config
 ```
 
-By default all of the source's error messages are lost. This arises from the fact that we used `Display` as the interface to an individual error message. If we could go back we'd currently propose instead adding `fn message(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result'` to the `Error` trait, but that ship has sailed.
+By default all of the source's error messages are lost. This arises from the fact that we used `Display` as the interface to an individual error message. If we could go back we'd currently propose instead adding `fn message(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result` to the `Error` trait, but that ship has sailed.
 
-The way we fix this today is by abusing the `Debug` trait. Types like [`eyre`](https://docs.rs/eyre/0.6.5/eyre/trait.EyreHandler.html#tymethod.debug), [`anyhow`](https://docs.rs/anyhow/1.0.40/src/anyhow/fmt.rs.html#19), and even sometimes [`custom error enums`]() use their `Debug` output to print the full chain of errors in a human readable report.
+The way that libraries work around this today is by abusing the `Debug` trait. Types like [`eyre`](https://docs.rs/eyre/0.6.5/eyre/trait.EyreHandler.html#tymethod.debug), [`anyhow`](https://docs.rs/anyhow/1.0.40/src/anyhow/fmt.rs.html#19), and even sometimes [`custom error enums`]() use their `Debug` output to print the full chain of errors in a human readable report.
 
-This has the advantage of making it easy to print a full error report and makes it so `unwrap`, `expect`, and return from main all print the full error report. But doing so prevent's us from accessing the derived `Debug` format of our errors, potentially hiding internal details that might be needed for debugging but which aren't part of the error messages intended for users to read.
+This has the advantage of making it easy to print a full error report and makes it so `unwrap`, `expect`, and return from main all print the full error report. But doing so prevents us from accessing the derived `Debug` format of our errors, potentially hiding internal details that might be needed for debugging but which aren't part of the error messages intended for users to read.
 
 ## Error Handling Tomorrow
 
@@ -134,7 +134,7 @@ Our plan to fix these issues is two-fold:
 
 First we need to integrate the Error trait and the panic runtime, and the first step to doing so will be moving the `Error` trait into `core`. This is necessary because the panic runtime is part of `core` and the language itself, where as the `Error` trait currently resides in `std`. We're pretty excited about this change which we hope will have other positive downstream effects, particularly in the embedded ecosystem.
 
-Once we've gotten to the point where the `Error` trait is usable in `core` APIs the next step will be to add an interface for creating a panic from an `Error` type. We're currently planning on adding a `panic_error` function, similar to the `panic_any` function that is already available in `std`. Then we will need to expose the `dyn Error` from `PanicInfo`, so the errors can be accessed and reported in the panic handler.
+Once we've gotten to the point where the `Error` trait is usable in `core` APIs the next step will be to add an interface for creating a panic from an `Error` type. We're currently planning on adding a `panic_error` function, similar to the `panic_any` function that is already available in `std`. This function will give the panic handler access to errors via a `dyn Error`.
 
 Once panic handlers are able to process `Error` types the next step will be to update the default panic hook provided by `std` to actually report panics via the `Error` trait if they're exposed as such. It should iterate over sources and print the backtrace captured by the error itself if one is available, or possibly capture one itself otherwise.
 
@@ -224,9 +224,9 @@ To resolve this issue, project error handling recently created a guideline for [
 
 **An error type with a source error should either return that error via `source` or include that source's error message in it's own `Display` output, but never both.**
 
-We figure the default will be to return error's via source, so that source errors can be reacted to via `downcast` when appropriate. In coming up with this recommendation we had to figure out what the `Error` trait's primary role is in Rust. After discussing it with the library team we concluded that reporting should be treated as the primary role, and that reacting via `downcast` should come second when designing error types.
+We figure the default will be to return errors via source, so that source errors can be reacted to via `downcast` when appropriate. In coming up with this recommendation we had to figure out what the `Error` trait's primary role is in Rust. After discussing it with the library team we concluded that reporting should be treated as the primary role, and that reacting via `downcast` should come second when designing error types.
 
-This recommendation only applies for error types that are exposed as part of library APIs. Internal errors in libraries or and applicatoins can do whatever they want, but as soon as they need to be integrated into other crates by 3rd party users it's important that errors follow a consistent style. If you're interested in our rational or have any comments please check out our github issue on the topic: [rust-lang/project-error-handling#27](https://github.com/rust-lang/project-error-handling/issues/27).
+This recommendation only applies for error types that are exposed as part of library APIs. Internal errors in libraries or and applications can do whatever they want, but as soon as they need to be integrated into other crates by 3rd party users it's important that errors follow a consistent style. If you're interested in our rationale or have any comments please check out our github issue on the topic: [rust-lang/project-error-handling#27](https://github.com/rust-lang/project-error-handling/issues/27).
 
 ## Conclusion
 
