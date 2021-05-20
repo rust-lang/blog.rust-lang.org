@@ -38,6 +38,10 @@ If you need to preview the site from another machine, pass the host's address vi
 
 The site is now available at <http://192.168.72.73:8000>.
 
+(As a short-cut: If you pass `--bind 0.0.0.0`, the server will be reachable at [all of the host's IP addresses][].)
+
+[all of the host's IP addresses]: https://www.howtogeek.com/225487/what-is-the-difference-between-127.0.0.1-and-0.0.0.0/
+
 ## Contributing
 
 First of all, thank you!
