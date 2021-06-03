@@ -77,7 +77,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
 In this error message we can see that we exited because of a panic. We can see what invariant we violated that was supposed to prevent this panic from happening. We can see the location where the panic was produced. And we can see the error message of each error in the chain of errors accessible via `source`.
 
-That's what we would like, at least in the version of rust that the error handling project group wants to see, but what we actually get is this...
+That's what we would like, at least in the version of Rust that the error handling project group wants to see, but what we actually get is this...
 
 ```
 $ cargo run
@@ -85,9 +85,9 @@ thread 'main' panicked at 'config is always valid and exists: Error(SourceError)
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-Now, I definitely don't think this is what we want as a default when promoting recoverable errors to non-recoverable errors! `unwrap` and `expect` work by stringifying the error variant using it's `Debug` impl, but this is often the wrong operation for types that implement the `Error` trait. By converting the `Error` to a `String` we lose access to the pieces of context we carefully split up via the `Error` trait, and in all likelihood the `derive(Debug)` output of our error types won't even include the error messages in our `Display` impls. Rust's panic infrastructure doesn't provide a method for converting an `Error` type into a panic, it only supports converting `Debug` types into panics, and we feel that this is a major issue.
+Now, I definitely don't think this is what we want as a default when promoting recoverable errors to non-recoverable errors! `unwrap` and `expect` work by stringifying the error variant using it's `Debug` impl, but this is often the wrong operation for types that implement the `Error` trait. By converting the `Error` to a `String` we lose access to the pieces of context we carefully split up via the `Error` trait, and in all likelihood the `derive(Debug)` output of our error types won't even include the error messages in our `Display` impls.
 
-Similarly, there's no convenient tools provided by the language for printing an error and all of its source's error messages.
+Rust's panic infrastructure doesn't provide a method for converting an `Error` type into a panic, it only supports converting `Debug` types into panics, and we feel that this is a major issue. Similarly, there's no convenient tools provided by the language for printing an error and all of its source's error messages.
 
 ```rust
 fn main() {
@@ -126,7 +126,7 @@ This has the advantage of making it easy to print a full error report and makes 
 
 ## Error Handling Tomorrow
 
-Eventually we'd like to get to a place where the default tools you reach for when error handling in rust all do the right thing and fully leverage the `Error` trait's design. Unwrapping a type that implements the `Error` trait will preserve the original error as a `dyn Error` which is then available in the panic hook. Printing a full error report will be easy to do and obvious. With these changes in place it will hopefully be quite difficult to accidentally discard information when reporting errors.
+Eventually we'd like to get to a place where the default tools you reach for when error handling in Rust all do the right thing and fully leverage the `Error` trait's design. Unwrapping a type that implements the `Error` trait will preserve the original error as a `dyn Error` which is then available in the panic hook. Printing a full error report will be easy to do and obvious. With these changes in place it will hopefully be quite difficult to accidentally discard information when reporting errors.
 
 Our plan to fix these issues is two-fold:
 
@@ -144,7 +144,7 @@ Finally, we need to specialize `expect` and `unwrap` to use these new `Error` aw
 
 We would also like to provide a basic error reporter in `std`, and some facilities for making it easy to use, or easy to replace with your own preferred error reporter. Printing an error and its sources is a fundamental operation in Rust, so we want the language to provide a pit of success for reporting, where the easiest thing to do is the right thing. We can't get there completely because we use `Display` for individual error messages, and we can't change that in a backwards compatible fashion, but we hope that adding a convenient method for printing a full chain of errors and some clever lints will relieve most of the pressure.
 
-We plan on fixing this by first adding a `Report` type to the standard library that wraps a `&dyn Error` and implements `Display` such that it prints each source as desired. We would like the output of `Report`'s display method to support the styles of error concatenation that are most common in the rust ecosystem.
+We plan on fixing this by first adding a `Report` type to the standard library that wraps a `&dyn Error` and implements `Display` such that it prints each source as desired. We would like the output of `Report`'s display method to support the styles of error concatenation that are most common in the Rust ecosystem.
 
 Either one line with each error message concatenated with colons:
 
@@ -184,7 +184,7 @@ where
 }
 ```
 
-We want the return type here to be generic rather than hard coded to `Report` so that individual error types can provide their own report format if desired. We expect there will be some fun things derive macros can do here to customize error reporting formats. This will work well with composition because the reporter from the outermost type will be used to format the full chain of errors.
+We want the return type here to be generic rather than hard coded to `Report` so that individual error types can provide their own report format if desired. We expect that derive macros may leverage this to customize error reporting format defaults. This will work well with composition because the reporter from the outermost type will be used to format the full chain of errors.
 
 For now we can't implement this method as described because `impl Trait` isn't allowed in return types on trait methods, but we're working to find a way to add this to the error trait backwards compatibly.
 
