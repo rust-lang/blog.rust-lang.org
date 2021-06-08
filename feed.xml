@@ -10,8 +10,45 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-05-20T15:24:27+00:00</updated>
+    <updated>2021-06-08T16:14:19+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rustup 1.24.3</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/06/08/Rustup-1.24.3.html" type="text/html" title="Announcing Rustup 1.24.3" />
+        <published>2021-06-08T00:00:00+00:00</published>
+        <updated>2021-06-08T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/06/08/Rustup-1.24.3.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/06/08/Rustup-1.24.3.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.24.3. &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.24.3 is as easy as closing your IDE and running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup self update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1243&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1243&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.24.3&lt;/h2&gt;
+&lt;p&gt;This patch release focusses around resolving some regressions in behaviour in
+the 1.24.x series, in either low tier platforms, or unusual situations around
+very old toolchains.&lt;/p&gt;
+&lt;p&gt;Full details are available in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/blob/stable/CHANGELOG.md&quot;&gt;changelog&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Rustup&#x27;s documentation is also available in &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/&quot;&gt;the rustup book&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
+&lt;p&gt;Thanks again to all the contributors who made rustup 1.24.3 possible!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alexander (asv7c2)&lt;/li&gt;
+&lt;li&gt;Ian Jackson&lt;/li&gt;
+&lt;li&gt;pierwill&lt;/li&gt;
+&lt;li&gt;二手掉包工程师 (hi-rustin)&lt;/li&gt;
+&lt;li&gt;Robert Collins&lt;/li&gt;
+&lt;li&gt;Daniel Silverstone&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>The Rustup Working Group</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rustup 1.24.2</title>
@@ -945,38 +982,6 @@ assert_eq!(unsafe { raw_f2.read_unaligned() }, 2);
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Building a shared vision for Async Rust</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/03/18/async-vision-doc.html" type="text/html" title="Building a shared vision for Async Rust" />
-        <published>2021-03-18T00:00:00+00:00</published>
-        <updated>2021-03-18T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/03/18/async-vision-doc.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/03/18/async-vision-doc.html">&lt;p&gt;The &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/&quot;&gt;Async Foundations Working Group&lt;/a&gt; believes Rust can become one of the most popular choices for building distributed systems, ranging from embedded devices to foundational cloud services. Whatever they&#x27;re using it for, we want all developers to love using Async Rust. For that to happen, we need to move Async Rust beyond the &amp;quot;MVP&amp;quot; state it&#x27;s in today and make it accessible to everyone.&lt;/p&gt;
-&lt;p&gt;We are launching a collaborative effort to build a shared &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision&quot;&gt;vision document&lt;/a&gt; for Async Rust. &lt;strong&gt;Our goal is to engage the entire community in a collective act of the imagination:&lt;/strong&gt; how can we make the end-to-end experience of using Async I/O not only a pragmatic choice, but a &lt;em&gt;joyful&lt;/em&gt; one?&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#the-vision-document-starts-with-the-status-quo&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-vision-document-starts-with-the-status-quo&quot;&gt;&lt;/a&gt;The vision document starts with the status quo...&lt;/h3&gt;
-&lt;p&gt;The &amp;quot;vision document&amp;quot; starts with a &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/characters.html&quot;&gt;cast of characters&lt;/a&gt;. Each character is tied to a particular Rust value (e.g., performance, productivity, etc) determined by their background; this background also informs the expectations they bring when using Rust.&lt;/p&gt;
-&lt;p&gt;Let me introduce you to one character, &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/characters/grace.html&quot;&gt;Grace&lt;/a&gt;. As an experienced C developer, Grace is used to high performance and control, but she likes the idea of using Rust to get memory safety. Here is her biography:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Grace has been writing C and C++ for a number of years. She&#x27;s accustomed to hacking lots of low-level details to coax the most performance she can from her code. She&#x27;s also experienced her share of epic debugging sessions resulting from memory errors in C. She&#x27;s intrigued by Rust: she likes the idea of getting the same control and performance she gets from C but with the productivity benefits she gets from memory safety. She&#x27;s currently experimenting with introducing Rust into some of the systems she works on, and she&#x27;s considering Rust for a few greenfield projects as well.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;For each character, we will write a series of &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html&quot;&gt;&amp;quot;status quo&amp;quot; stories&lt;/a&gt; that describe the challenges they face as they try to achieve their goals (and typically fail in dramatic fashion!) &lt;strong&gt;These stories are not fiction.&lt;/strong&gt; They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. To give you the idea, we currently have two examples: one where &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo/grace_deploys_her_service.html&quot;&gt;Grace has to debug a custom future that she wrote&lt;/a&gt;, and another where &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/characters/alan.html&quot;&gt;Alan&lt;/a&gt; -- a programmer coming from a GC&#x27;d language -- &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo/alan_runs_into_stack_trouble.html&quot;&gt;encounters a stack overflow and has to debug the cause&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Writing the &amp;quot;status quo&amp;quot; stories helps us to compensate for the &lt;a href&#x3D;&quot;https://en.wikipedia.org/wiki/Curse_of_knowledge&quot;&gt;curse of knowledge&lt;/a&gt;: the folks working on Async Rust tend to be experts in Async Rust. We&#x27;ve gotten used to the &lt;a href&#x3D;&quot;https://github.com/rust-lang/async-book/tree/a927107bfe501a44dde1560a5942b1471c11c71d/src/07_workarounds&quot;&gt;workarounds&lt;/a&gt; required to be productive, and we know the little tips and tricks that can get you out of a jam. The stories help us gauge the cumulative impact all the paper cuts can have on someone still learning their way around. This gives us the data we need to prioritize.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#and-then-tells-how-we-will-change-it&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;and-then-tells-how-we-will-change-it&quot;&gt;&lt;/a&gt;...and then tells how we will change it&lt;/h3&gt;
-&lt;p&gt;The ultimate goal of the vision doc, of course, is not just to tell us where we are now, but where we are going and how  we will get there. Once we&#x27;ve made good progress on the status quo stories, the next step will be start brainstorming stories about the &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/shiny_future.html&quot;&gt;&amp;quot;shiny future&amp;quot;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Shiny future stories talk about what the world of async could look like 2 or 3 years in the future. Typically, they will replay the same scenario as a &amp;quot;status quo&amp;quot; story, but with a happier ending. For example, maybe Grace has access to a debugging tool that is able to diagnose her stuck tasks and tell her what kind of future they are blocked on, so she doesn&#x27;t have to grep through the logs. Maybe the compiler could warn Alan about a likely stack overflow, or (better yet) we can tweak the design of &lt;code&gt;select&lt;/code&gt; to avoid the problem in the first place. The idea is to be ambitious and focus first and foremost on the user experience we want to create; we&#x27;ll figure out the steps along the way (and maybe adjust the goal, if we have to).&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#involving-the-whole-community&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;involving-the-whole-community&quot;&gt;&lt;/a&gt;Involving the whole community&lt;/h3&gt;
-&lt;p&gt;The async vision document provides a forum where the Async Rust community can plan a great overall experience for Async Rust users. Async Rust was intentionally designed not to have a &amp;quot;one size fits all&amp;quot; mindset, and we don&#x27;t want to change that. Our goal is to build a shared vision for the end-to-end experience while retaining the loosely coupled, exploration-oriented ecosystem we have built.&lt;/p&gt;
-&lt;p&gt;The process we are using to write the vision doc encourages active collaboration and &amp;quot;positive sum&amp;quot; thinking. It starts with a brainstorming period, during which we aim to collect as many &amp;quot;status quo&amp;quot; and &amp;quot;shiny future&amp;quot; stories as we can. This brainstorming period runs for six weeks, until the end of April. For the first two weeks (until 2021-04-02), we are collecting &amp;quot;status quo&amp;quot; stories only. After that, we will accept both &amp;quot;status quo&amp;quot; and &amp;quot;shiny future&amp;quot; stories until the end of the brainstorming period. Finally, to cap off the brainstorming period, we will select winners for &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision/awards.html&quot;&gt;awards&lt;/a&gt; like &amp;quot;Most Humorous Story&amp;quot; or &amp;quot;Must Supportive Contributor&amp;quot;.&lt;/p&gt;
-&lt;p&gt;Once the brainstorming period is complete, the working group leads will begin work on assembling the various stories and shiny futures into a coherent draft. This draft will be reviewed by the community and the Rust teams and adjusted based on feedback.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#want-to-help&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;want-to-help&quot;&gt;&lt;/a&gt;Want to help?&lt;/h3&gt;
-&lt;p&gt;If you&#x27;d like to help us to write the vision document, we&#x27;d love for you to contribute your experiences and vision! Right now, we are focused on creating status quo stories. We are looking for people to author PRs or to talk about their experiences on issues or elsewhere. If you&#x27;d like to get started, check out the &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo/template.html&quot;&gt;template for status quo stories&lt;/a&gt; -- it has all the information you need to open a PR. Alternatively, you can view the &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html&quot;&gt;How To Vision&lt;/a&gt; page, which covers the whole vision document process in detail.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Niko Matsakis</name>
         </author>
     </entry>
     
