@@ -10,8 +10,154 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-06-15T21:32:20+00:00</updated>
+    <updated>2021-06-17T14:43:52+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.53.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/06/17/Rust-1.53.0.html" type="text/html" title="Announcing Rust 1.53.0" />
+        <published>2021-06-17T00:00:00+00:00</published>
+        <updated>2021-06-17T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/06/17/Rust-1.53.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/06/17/Rust-1.53.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.53.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.53.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
+from the appropriate page on our website, and check out the
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1530-2021-06-17&quot;&gt;detailed release notes for 1.53.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1530-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1530-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.53.0 stable&lt;/h2&gt;
+&lt;p&gt;This release contains several new language features and many new library features,
+including the long-awaited &lt;code&gt;IntoIterator&lt;/code&gt; implementation for arrays.
+See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1530-2021-06-17&quot;&gt;detailed release notes&lt;/a&gt;
+to learn about other changes not covered by this post.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#intoiterator-for-arrays&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;intoiterator-for-arrays&quot;&gt;&lt;/a&gt;IntoIterator for arrays&lt;/h3&gt;
+&lt;p&gt;This is the first Rust release in which arrays implement the &lt;code&gt;IntoIterator&lt;/code&gt; trait.
+This means you can now iterate over arrays by value:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;for i in [1, 2, 3] {
+    ..
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Previously, this was only possible by reference, using &lt;code&gt;&amp;amp;[1, 2, 3]&lt;/code&gt; or &lt;code&gt;[1, 2, 3].iter()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Similarly, you can now pass arrays to methods expecting a &lt;code&gt;T: IntoIterator&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let set &#x3D; BTreeSet::from_iter([1, 2, 3]);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;for (a, b) in some_iterator.chain([1]).zip([1, 2, 3]) {
+    ..
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This was not implemented before, due to backwards compatibility problems.
+Because &lt;code&gt;IntoIterator&lt;/code&gt; was already implemented for references to arrays,
+&lt;code&gt;array.into_iter()&lt;/code&gt; already compiled in earlier versions,
+resolving to &lt;code&gt;(&amp;amp;array).into_iter()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;As of this release, arrays implement &lt;code&gt;IntoIterator&lt;/code&gt; with a small workaround to avoid breaking code.
+The compiler will continue to resolve &lt;code&gt;array.into_iter()&lt;/code&gt; to &lt;code&gt;(&amp;amp;array).into_iter()&lt;/code&gt;,
+as if the trait implementation does not exist.
+This only applies to the &lt;code&gt;.into_iter()&lt;/code&gt; method call syntax, and does not
+affect any other syntax such as &lt;code&gt;for e in [1, 2, 3]&lt;/code&gt;, &lt;code&gt;iter.zip([1, 2, 3])&lt;/code&gt; or
+&lt;code&gt;IntoIterator::into_iter([1, 2, 3])&lt;/code&gt;, which all compile fine.&lt;/p&gt;
+&lt;p&gt;Since this special case for &lt;code&gt;.into_iter()&lt;/code&gt; is only required to avoid breaking existing code,
+it is removed in the new edition, Rust 2021, which will be released later this year.
+See &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/05/11/edition-2021.html#intoiterator-for-arrays&quot;&gt;the edition announcement&lt;/a&gt;
+for more information.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#or-patterns&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;or-patterns&quot;&gt;&lt;/a&gt;Or patterns&lt;/h3&gt;
+&lt;p&gt;Pattern syntax has been extended to support &lt;code&gt;|&lt;/code&gt; nested anywhere in the pattern.
+This enables you to write &lt;code&gt;Some(1 | 2)&lt;/code&gt; instead of &lt;code&gt;Some(1) | Some(2)&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;match result {
+     Ok(Some(1 | 2)) &#x3D;&amp;gt; { .. }
+     Err(MyError { kind: FileNotFound | PermissionDenied, .. }) &#x3D;&amp;gt; { .. }
+     _ &#x3D;&amp;gt; { .. }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#unicode-identifiers&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;unicode-identifiers&quot;&gt;&lt;/a&gt;Unicode identifiers&lt;/h3&gt;
+&lt;p&gt;Identifiers can now contain non-ascii characters.
+All valid identifier characters in Unicode as defined in &lt;a href&#x3D;&quot;https://unicode.org/reports/tr31/&quot;&gt;UAX #31&lt;/a&gt; can now be used.
+That includes characters from many different scripts and languages, but does not include emoji.&lt;/p&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;const BLÅHAJ: &amp;amp;str &#x3D; &amp;quot;🦈&amp;quot;;
+
+struct 人 {
+    名字: String,
+}
+
+let α &#x3D; 1;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The compiler will warn about about potentially confusing situations involving different scripts.
+For example, using identifiers that look very similar will result in a warning.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;warning: identifier pair considered confusable between &#x60;ｓ&#x60; and &#x60;s&#x60;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#head-branch-name-support-in-cargo&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;head-branch-name-support-in-cargo&quot;&gt;&lt;/a&gt;HEAD branch name support in Cargo&lt;/h3&gt;
+&lt;p&gt;Cargo no longer assumes the default &lt;code&gt;HEAD&lt;/code&gt; of git repositories is named &lt;code&gt;master&lt;/code&gt;.
+This means you no longer need to specify &lt;code&gt;branch &#x3D; &amp;quot;main&amp;quot;&lt;/code&gt; for git dependencies
+from a repository where the default branch is called &lt;code&gt;main&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
+&lt;p&gt;The following methods and trait implementations were stabilized.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/array/fn.from_ref.html&quot;&gt;&lt;code&gt;array::from_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/array/fn.from_mut.html&quot;&gt;&lt;code&gt;array::from_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/atomic/struct.AtomicBool.html#method.fetch_update&quot;&gt;&lt;code&gt;AtomicBool::fetch_update&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/atomic/struct.AtomicPtr.html#method.fetch_update&quot;&gt;&lt;code&gt;AtomicPtr::fetch_update&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/struct.BTreeSet.html#method.retain&quot;&gt;&lt;code&gt;BTreeSet::retain&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/struct.BTreeMap.html#method.retain&quot;&gt;&lt;code&gt;BTreeMap::retain&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/io/struct.BufReader.html#method.seek_relative&quot;&gt;&lt;code&gt;BufReader::seek_relative&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cmp/fn.min_by.html&quot;&gt;&lt;code&gt;cmp::min_by&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cmp/fn.min_by_key.html&quot;&gt;&lt;code&gt;cmp::min_by_key&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cmp/fn.max_by.html&quot;&gt;&lt;code&gt;cmp::max_by&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cmp/fn.max_by_key.html&quot;&gt;&lt;code&gt;cmp::max_by_key&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/fmt/struct.DebugStruct.html#method.finish_non_exhaustive&quot;&gt;&lt;code&gt;DebugStruct::finish_non_exhaustive&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#associatedconstant.ZERO&quot;&gt;&lt;code&gt;Duration::ZERO&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#associatedconstant.MAX&quot;&gt;&lt;code&gt;Duration::MAX&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.is_zero&quot;&gt;&lt;code&gt;Duration::is_zero&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.saturating_add&quot;&gt;&lt;code&gt;Duration::saturating_add&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.saturating_sub&quot;&gt;&lt;code&gt;Duration::saturating_sub&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.saturating_mul&quot;&gt;&lt;code&gt;Duration::saturating_mul&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.f32.html#method.is_subnormal&quot;&gt;&lt;code&gt;f32::is_subnormal&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.f64.html#method.is_subnormal&quot;&gt;&lt;code&gt;f64::is_subnormal&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.array.html#impl-IntoIterator&quot;&gt;&lt;code&gt;IntoIterator for array&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.usize.html#associatedconstant.BITS&quot;&gt;&lt;code&gt;{integer}::BITS&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.Unsupported&quot;&gt;&lt;code&gt;io::Error::Unsupported&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroU32.html#method.leading_zeros&quot;&gt;&lt;code&gt;NonZero*::leading_zeros&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroU32.html#method.trailing_zeros&quot;&gt;&lt;code&gt;NonZero*::trailing_zeros&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.insert&quot;&gt;&lt;code&gt;Option::insert&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cmp/enum.Ordering.html#method.is_eq&quot;&gt;&lt;code&gt;Ordering::is_eq&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cmp/enum.Ordering.html#method.is_ne&quot;&gt;&lt;code&gt;Ordering::is_ne&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cmp/enum.Ordering.html#method.is_lt&quot;&gt;&lt;code&gt;Ordering::is_lt&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cmp/enum.Ordering.html#method.is_gt&quot;&gt;&lt;code&gt;Ordering::is_gt&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cmp/enum.Ordering.html#method.is_le&quot;&gt;&lt;code&gt;Ordering::is_le&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cmp/enum.Ordering.html#method.is_ge&quot;&gt;&lt;code&gt;Ordering::is_ge&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/struct.OsStr.html#method.make_ascii_lowercase&quot;&gt;&lt;code&gt;OsStr::make_ascii_lowercase&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/struct.OsStr.html#method.make_ascii_uppercase&quot;&gt;&lt;code&gt;OsStr::make_ascii_uppercase&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/struct.OsStr.html#method.to_ascii_lowercase&quot;&gt;&lt;code&gt;OsStr::to_ascii_lowercase&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/struct.OsStr.html#method.to_ascii_uppercase&quot;&gt;&lt;code&gt;OsStr::to_ascii_uppercase&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/struct.OsStr.html#method.is_ascii&quot;&gt;&lt;code&gt;OsStr::is_ascii&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/struct.OsStr.html#method.eq_ignore_ascii_case&quot;&gt;&lt;code&gt;OsStr::eq_ignore_ascii_case&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.Peekable.html#method.peek_mut&quot;&gt;&lt;code&gt;Peekable::peek_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#method.increment_strong_count&quot;&gt;&lt;code&gt;Rc::increment_strong_count&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#method.decrement_strong_count&quot;&gt;&lt;code&gt;Rc::decrement_strong_count&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/slice/struct.IterMut.html#method.as_slice&quot;&gt;&lt;code&gt;slice::IterMut::as_slice&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/slice/struct.IterMut.html#impl-AsRef%3C%5BT%5D%3E&quot;&gt;&lt;code&gt;AsRef&amp;lt;[T]&amp;gt; for slice::IterMut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.tuple.html#impl-SliceIndex%3C%5BT%5D%3E&quot;&gt;&lt;code&gt;impl SliceIndex for (Bound&amp;lt;usize&amp;gt;, Bound&amp;lt;usize&amp;gt;)&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.extend_from_within&quot;&gt;&lt;code&gt;Vec::extend_from_within&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.53.0 release:
+check out what changed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1530-2021-06-17&quot;&gt;Rust&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-153-2021-06-17&quot;&gt;Cargo&lt;/a&gt;,
+and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-153&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1530&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1530&quot;&gt;&lt;/a&gt;Contributors to 1.53.0&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.53.0.
+We couldn&#x27;t have done it without all of you.
+&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.53.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rustup 1.24.3</title>
@@ -847,141 +993,6 @@ running the following command:&lt;/p&gt;
 
         <author>
             <name>Niko Matsakis</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.51.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html" type="text/html" title="Announcing Rust 1.51.0" />
-        <published>2021-03-25T00:00:00+00:00</published>
-        <updated>2021-03-25T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.51.0. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.51.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1510-2021-03-25&quot;&gt;detailed release notes for 1.51.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1510-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1510-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.51.0 stable&lt;/h2&gt;
-&lt;p&gt;This release represents one of the largest additions to the Rust language and Cargo in quite a while, stabilizing an MVP of const generics and a new feature resolver for Cargo. Let&#x27;s dive right into it!&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#const-generics-mvp&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-generics-mvp&quot;&gt;&lt;/a&gt;Const Generics MVP&lt;/h3&gt;
-&lt;p&gt;Before this release, Rust allowed you to have your types be parameterized over lifetimes or types. For example if we wanted to have a &lt;code&gt;struct&lt;/code&gt; that is generic over the element type of an array, we&#x27;d write the following:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct FixedArray&amp;lt;T&amp;gt; {
-              // ^^^ Type generic definition
-    list: [T; 32]
-        // ^ Where we&#x27;re using it.
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If we then use &lt;code&gt;FixedArray&amp;lt;u8&amp;gt;&lt;/code&gt;, the compiler will make a monomorphic version of &lt;code&gt;FixedArray&lt;/code&gt; that looks like:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct FixedArray&amp;lt;u8&amp;gt; {
-    list: [u8; 32]
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This is a powerful feature that allows you to write reusable code with no runtime overhead. However, until this release it hasn&#x27;t been possible to easily be generic over the &lt;em&gt;values&lt;/em&gt; of those types. This was most notable in arrays which include their length in their type definition (&lt;code&gt;[T; N]&lt;/code&gt;), which previously you could not be generic over. Now with 1.51.0 you can write code that is generic over the values of any integer, &lt;code&gt;bool&lt;/code&gt;, or &lt;code&gt;char&lt;/code&gt; type! (Using &lt;code&gt;struct&lt;/code&gt; or &lt;code&gt;enum&lt;/code&gt; values is still unstable.)&lt;/p&gt;
-&lt;p&gt;This change now lets us have our own array struct that&#x27;s generic over its type &lt;em&gt;and&lt;/em&gt; its length. Let&#x27;s look at an example definition, and how it can be used.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct Array&amp;lt;T, const LENGTH: usize&amp;gt; {
-    //          ^^^^^^^^^^^^^^^^^^^ Const generic definition.
-    list: [T; LENGTH]
-    //        ^^^^^^ We use it here.
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now if we then used &lt;code&gt;Array&amp;lt;u8, 32&amp;gt;&lt;/code&gt;, the compiler will make a monomorphic version of &lt;code&gt;Array&lt;/code&gt; that looks like:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct Array&amp;lt;u8, 32&amp;gt; {
-    list: [u8; 32]
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Const generics adds an important new tool for library designers in creating new, powerful compile-time safe APIs. If you&#x27;d like to learn more about const generics you can also check out the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/02/26/const-generics-mvp-beta.html&quot;&gt;&amp;quot;Const Generics MVP Hits Beta&amp;quot;&lt;/a&gt; blog post for more information about the feature and its current restrictions. We can&#x27;t wait to see what new libraries and APIs you create!&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#arrayintoiter-stabilisation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;arrayintoiter-stabilisation&quot;&gt;&lt;/a&gt;&lt;code&gt;array::IntoIter&lt;/code&gt; Stabilisation&lt;/h3&gt;
-&lt;p&gt;As part of const generics stabilising, we&#x27;re also stabilising a new API that uses it, &lt;code&gt;std::array::IntoIter&lt;/code&gt;. &lt;code&gt;IntoIter&lt;/code&gt; allows you to create a by value iterator over any array. Previously there wasn&#x27;t a convenient way to iterate over owned values of an array, only references to them.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn main() {
-  let array &#x3D; [1, 2, 3, 4, 5];
-  
-  // Previously
-  for item in array.iter().copied() {
-      println!(&amp;quot;{}&amp;quot;, item);
-  }
-  
-  // Now
-  for item in std::array::IntoIter::new(array) {
-      println!(&amp;quot;{}&amp;quot;, item);
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that this is added as a separate method instead of &lt;code&gt;.into_iter()&lt;/code&gt; on arrays, as that currently introduces some amount of breakage; currently &lt;code&gt;.into_iter()&lt;/code&gt; refers to the slice by-reference iterator. We&#x27;re exploring ways to make this more ergonomic in the future.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#cargos-new-feature-resolver&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargos-new-feature-resolver&quot;&gt;&lt;/a&gt;Cargo&#x27;s New Feature Resolver&lt;/h3&gt;
-&lt;p&gt;Dependency management is a hard problem, and one of the hardest parts of it is just picking what &lt;em&gt;version&lt;/em&gt; of a dependency to use when it&#x27;s depended on by two different packages. This doesn&#x27;t just include its version number, but also what features are or aren&#x27;t enabled for the package. Cargo&#x27;s default behaviour is to merge features for a single package when it&#x27;s referred to multiple times in the dependency graph.&lt;/p&gt;
-&lt;p&gt;For example, let&#x27;s say you had a dependency called &lt;code&gt;foo&lt;/code&gt; with features A and B, which was being used by packages &lt;code&gt;bar&lt;/code&gt; and &lt;code&gt;baz&lt;/code&gt;, but &lt;code&gt;bar&lt;/code&gt; depends on &lt;code&gt;foo+A&lt;/code&gt; and &lt;code&gt;baz&lt;/code&gt; depends on &lt;code&gt;foo+B&lt;/code&gt;. Cargo will merge both of those features and compile &lt;code&gt;foo&lt;/code&gt; as &lt;code&gt;foo+AB&lt;/code&gt;. This has a benefit that you only have to compile &lt;code&gt;foo&lt;/code&gt; once, and then it can be reused for both &lt;code&gt;bar&lt;/code&gt; and &lt;code&gt;baz&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;However, this also comes with a downside. What if a feature enabled in a build-dependency is not compatible with the target you are building for?&lt;/p&gt;
-&lt;p&gt;A common example of this in the ecosystem is the optional &lt;code&gt;std&lt;/code&gt; feature included in many &lt;code&gt;#![no_std]&lt;/code&gt; crates, that allows crates to provide added functionality when &lt;code&gt;std&lt;/code&gt; is available. Now imagine you want to use the &lt;code&gt;#![no_std]&lt;/code&gt; version of &lt;code&gt;foo&lt;/code&gt; in your &lt;code&gt;#![no_std]&lt;/code&gt; binary, and use the &lt;code&gt;foo&lt;/code&gt; at build time in your &lt;code&gt;build.rs&lt;/code&gt;. If your build time dependency depends on &lt;code&gt;foo+std&lt;/code&gt;, your binary now also depends on &lt;code&gt;foo+std&lt;/code&gt;, which means it will no longer compile because &lt;code&gt;std&lt;/code&gt; is not available for your target platform.&lt;/p&gt;
-&lt;p&gt;This has been a long-standing issue in cargo, and with this release there&#x27;s a new &lt;code&gt;resolver&lt;/code&gt; option in your &lt;code&gt;Cargo.toml&lt;/code&gt;, where you can set &lt;code&gt;resolver&#x3D;&amp;quot;2&amp;quot;&lt;/code&gt; to tell cargo to try a new approach to resolving features. You can check out &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2957-cargo-features2.html&quot;&gt;RFC 2957&lt;/a&gt; for a detailed description of the behaviour, which can be summarised as follows.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Dev dependencies&lt;/strong&gt; — When a package is shared as a normal dependency and a dev-dependency, the dev-dependency features are only enabled if the current build is including dev-dependencies.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Host Dependencies&lt;/strong&gt; — When a package is shared as a normal dependency and a build-dependency or proc-macro, the features for the normal dependency are kept independent of the build-dependency or proc-macro.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Target dependencies&lt;/strong&gt; — When a package appears multiple times in the build graph, and one of those instances is a target-specific dependency, then the features of the target-specific dependency are only enabled if the target is currently being built.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;While this can lead to some crates compiling more than once, this should provide a much more intuitive development experience when using features with cargo. If you&#x27;d like to know more, you can also read the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/features.html#feature-resolver-version-2&quot;&gt;&amp;quot;Feature Resolver&amp;quot;&lt;/a&gt; section in the Cargo Book for more information. We&#x27;d like to thank the cargo team and everyone involved for all their hard work in designing and implementing the new resolver!&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[package]
-resolver &#x3D; &amp;quot;2&amp;quot;
-# Or if you&#x27;re using a workspace
-[workspace]
-resolver &#x3D; &amp;quot;2&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#splitting-debug-information&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;splitting-debug-information&quot;&gt;&lt;/a&gt;Splitting Debug Information&lt;/h3&gt;
-&lt;p&gt;While not often highlighted in the release, the Rust teams are constantly working on improving Rust&#x27;s compile times, and this release marks one of the largest improvements in a long time for Rust on macOS. Debug information maps the binary code back to your source code, so that the program can give you more information about what went wrong at runtime. In macOS, debug info was previously collected into a single &lt;code&gt;.dSYM&lt;/code&gt; folder using a tool called &lt;code&gt;dsymutil&lt;/code&gt;, which can take some time and use up quite a bit of disk space.&lt;/p&gt;
-&lt;p&gt;Collecting all of the debuginfo into this directory helps in finding it at runtime, particularly if the binary is being moved. However, it does have the drawback that even when you make a small change to your program, &lt;code&gt;dsymutil&lt;/code&gt; will need to run over the entire final binary to produce the final &lt;code&gt;.dSYM&lt;/code&gt; folder. This can sometimes add a lot to the build time, especially for larger projects, as all dependencies always get recollected, but this has been a necessary step as without it Rust&#x27;s standard library didn&#x27;t know how to load the debug info on macOS.&lt;/p&gt;
-&lt;p&gt;Recently, Rust backtraces switched to using a different backend which supports loading debuginfo without needing to run &lt;code&gt;dsymutil&lt;/code&gt;, and we&#x27;ve stabilized support for skipping the &lt;code&gt;dsymutil&lt;/code&gt; run. This can significantly speed up builds that include debuginfo and significantly reduce the amount of disk space used. We haven&#x27;t run extensive benchmarks, but have seen a lot of reports of people&#x27;s builds being a lot faster on macOS with this behavior.&lt;/p&gt;
-&lt;p&gt;You can enable this new behaviour by setting the &lt;code&gt;-Csplit-debuginfo&#x3D;unpacked&lt;/code&gt; flag when running &lt;code&gt;rustc&lt;/code&gt;, or by setting the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/profiles.html#split-debuginfo&quot;&gt;&lt;code&gt;split-debuginfo&lt;/code&gt;&lt;/a&gt; &lt;code&gt;[profile]&lt;/code&gt; option to &lt;code&gt;unpacked&lt;/code&gt; in Cargo. The &amp;quot;unpacked&amp;quot; option instructs rustc to leave the .o object files in the build output directory instead of deleting them, and skips the step of running dsymutil. Rust&#x27;s backtrace support is smart enough to know how to find these .o files. Tools such as lldb also know how to do this. This should work as long as you don&#x27;t need to move the binary to a different location while retaining the debug information.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[profile.dev]
-split-debuginfo &#x3D; &amp;quot;unpacked&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
-&lt;p&gt;In total, this release saw the stabilisation of 18 new methods for various types like &lt;code&gt;slice&lt;/code&gt; and &lt;code&gt;Peekable&lt;/code&gt;. One notable addition is the stabilisation of &lt;code&gt;ptr::addr_of!&lt;/code&gt; and &lt;code&gt;ptr::addr_of_mut!&lt;/code&gt;, which allow you to create raw pointers to unaligned fields. Previously this wasn&#x27;t possible because Rust requires &lt;code&gt;&amp;amp;/&amp;amp;mut&lt;/code&gt; to be aligned and point to initialized data, and &lt;code&gt;&amp;amp;addr as *const _&lt;/code&gt; would then cause undefined behaviour as &lt;code&gt;&amp;amp;addr&lt;/code&gt; needs to be aligned. These two macros now let you safely create unaligned pointers.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::ptr;
-
-#[repr(packed)]
-struct Packed {
-    f1: u8,
-    f2: u16,
-}
-
-let packed &#x3D; Packed { f1: 1, f2: 2 };
-// &#x60;&amp;amp;packed.f2&#x60; would create an unaligned reference, and thus be Undefined Behavior!
-let raw_f2 &#x3D; ptr::addr_of!(packed.f2);
-assert_eq!(unsafe { raw_f2.read_unaligned() }, 2);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The following methods were stabilised.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.decrement_strong_count&quot;&gt;&lt;code&gt;Arc::decrement_strong_count&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.increment_strong_count&quot;&gt;&lt;code&gt;Arc::increment_strong_count&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Once.html#method.call_once_force&quot;&gt;&lt;code&gt;Once::call_once_force&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.Peekable.html#method.next_if_eq&quot;&gt;&lt;code&gt;Peekable::next_if_eq&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.Peekable.html#method.next_if&quot;&gt;&lt;code&gt;Peekable::next_if&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/io/trait.Seek.html#method.stream_position&quot;&gt;&lt;code&gt;Seek::stream_position&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/array/struct.IntoIter.html&quot;&gt;&lt;code&gt;array::IntoIter&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/panic/fn.panic_any.html&quot;&gt;&lt;code&gt;panic::panic_any&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ptr/macro.addr_of.html&quot;&gt;&lt;code&gt;ptr::addr_of!&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ptr/macro.addr_of_mut.html&quot;&gt;&lt;code&gt;ptr::addr_of_mut!&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.fill_with&quot;&gt;&lt;code&gt;slice::fill_with&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.split_inclusive_mut&quot;&gt;&lt;code&gt;slice::split_inclusive_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.split_inclusive&quot;&gt;&lt;code&gt;slice::split_inclusive&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.strip_prefix&quot;&gt;&lt;code&gt;slice::strip_prefix&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.strip_suffix&quot;&gt;&lt;code&gt;slice::strip_suffix&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.str.html#method.split_inclusive&quot;&gt;&lt;code&gt;str::split_inclusive&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.OnceState.html&quot;&gt;&lt;code&gt;sync::OnceState&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/task/trait.Wake.html&quot;&gt;&lt;code&gt;task::Wake&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.51.0 release: check out what changed in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1510-2021-03-25&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-151-2021-03-25&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-151&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1510&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1510&quot;&gt;&lt;/a&gt;Contributors to 1.51.0&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.51.0. We couldn&#x27;t have done it without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.51.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
