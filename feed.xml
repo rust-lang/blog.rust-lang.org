@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-06-17T14:43:52+00:00</updated>
+    <updated>2021-06-17T19:14:14+00:00</updated>
 
     
     <entry>
@@ -93,6 +93,8 @@ For example, using identifiers that look very similar will result in a warning.&
 &lt;p&gt;Cargo no longer assumes the default &lt;code&gt;HEAD&lt;/code&gt; of git repositories is named &lt;code&gt;master&lt;/code&gt;.
 This means you no longer need to specify &lt;code&gt;branch &#x3D; &amp;quot;main&amp;quot;&lt;/code&gt; for git dependencies
 from a repository where the default branch is called &lt;code&gt;main&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#incremental-compilation-remains-off-by-default&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;incremental-compilation-remains-off-by-default&quot;&gt;&lt;/a&gt;Incremental Compilation remains off by default&lt;/h3&gt;
+&lt;p&gt;As previously discussed on the &lt;a href&#x3D;&quot;/2021/05/10/Rust-1.52.1.html&quot;&gt;blog post for version 1.52.1&lt;/a&gt;, incremental compilation has been turned off by default on the stable Rust release channel. The feature remains available on the beta and nightly release channels. For the 1.53.0 stable release, the method for reenabling incremental is unchanged from 1.52.1.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
 &lt;p&gt;The following methods and trait implementations were stabilized.&lt;/p&gt;
 &lt;ul&gt;
