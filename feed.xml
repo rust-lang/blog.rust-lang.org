@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-06-17T19:14:14+00:00</updated>
+    <updated>2021-06-21T15:35:15+00:00</updated>
 
     
     <entry>
@@ -85,7 +85,7 @@ struct 人 {
 
 let α &#x3D; 1;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The compiler will warn about about potentially confusing situations involving different scripts.
+&lt;p&gt;The compiler will warn about potentially confusing situations involving different scripts.
 For example, using identifiers that look very similar will result in a warning.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;warning: identifier pair considered confusable between &#x60;ｓ&#x60; and &#x60;s&#x60;
 &lt;/code&gt;&lt;/pre&gt;
