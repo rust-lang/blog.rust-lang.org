@@ -10,8 +10,32 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-06-21T15:35:13+00:00</updated>
+    <updated>2021-06-23T19:41:32+00:00</updated>
 
+    
+    <entry>
+        <title>Rust Compiler April Steering Cycle</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/06/23/compiler-team-june-steering-cycle.html" type="text/html" title="Rust Compiler April Steering Cycle" />
+        <published>2021-06-23T00:00:00+00:00</published>
+        <updated>2021-06-23T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/06/23/compiler-team-june-steering-cycle.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/06/23/compiler-team-june-steering-cycle.html">&lt;p&gt;On &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/93506planningmeeting20210604.html&quot;&gt;Friday, June 4th&lt;/a&gt;, the Rust Compiler team had a planning meeting for the June steering cycle.&lt;/p&gt;
+&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
+it is going to use its scheduled steering and design meeting time over the next
+three Fridays.&lt;/p&gt;
+&lt;p&gt;On &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/435&quot;&gt;Friday, 25 June&lt;/a&gt;, we will be having a meeting to review a
+document discussing the incremental compilation fingerprint issue that led to
+the emergency 1.52.1 release, and the steps the project is taking to prevent
+future occurrences of similar scenarios. (This date is a change in schedule from
+its original date that had been discussed in the planning meeting.)&lt;/p&gt;
+&lt;p&gt;The meeting will run from 2pm to 3pm GMT, and will take place on the
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Felix Klock</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Please welcome Boxy, Léo Lanteri Thauvin and the8472 to compiler-contributors</title>
@@ -352,25 +376,6 @@ defaults for our musl libc targets.)&lt;/p&gt;
 
         <author>
             <name>Felix Klock</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Core Team updates</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/04/03/core-team-updates.html" type="text/html" title="Core Team updates" />
-        <published>2021-04-03T00:00:00+00:00</published>
-        <updated>2021-04-03T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/04/03/core-team-updates.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/04/03/core-team-updates.html">&lt;p&gt;Niko Matsakis is &lt;a href&#x3D;&quot;https://smallcultfollowing.com/babysteps/blog/2021/04/02/my-shiny-future/&quot;&gt;stepping back&lt;/a&gt; from the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/core&quot;&gt;Core Team&lt;/a&gt;,
-focusing his energy on leading the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/lang&quot;&gt;Language Team&lt;/a&gt;. Amongst the many
-things he has done for the Rust project over the years, Niko has been part of
-the Core Team since the beginning, and had a key role in shaping Rust’s
-governance. We’re all excited to see what his new focus is going to bring!&lt;/p&gt;
-&lt;p&gt;Thanks Niko!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Pietro Albini</name>
         </author>
     </entry>
     
