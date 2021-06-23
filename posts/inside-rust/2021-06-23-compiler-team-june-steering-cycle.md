@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Rust Compiler April Steering Cycle
+title: Rust Compiler June Steering Cycle
 author: Felix Klock
 description: "The compiler team's June steering cycle"
 team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
