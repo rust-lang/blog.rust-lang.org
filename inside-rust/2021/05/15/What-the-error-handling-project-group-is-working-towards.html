@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>What the Error Handling Project Group is Working Towards | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="What the Error Handling Project Group is Working Towards | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="What the Error Handling Project Group is Working Towards | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="What the Error Handling Project Group is Working Towards" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>What the Error Handling Project Group is Working Towards</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 15, 2021 &middot; Jane Lusby
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/library">the library team</a> 
+    </div>
+
+    <div class="post">
+      <p>This blog post is a follow up of our <a href="https://blog.rust-lang.org/inside-rust/2020/11/23/What-the-error-handling-project-group-is-working-on.html">previous</a> post detailing what we're working on now. We've been iterating for a while now on some of the challenges that we see with error handling today and have reached the point where we want to describe some of the new changes we're working towards. But first we need to describe the main challenges we've identified.</p>
+<blockquote>
+<p>Disclaimer: <em>This post is equal parts plan and aspiration. There are technical challenges here to sort out so the final outcome may look rather different from our initial vision, so please don't assume any of this is final.</em></p>
+</blockquote>
+<h2><a href="#error-handling-today" aria-hidden="true" class="anchor" id="error-handling-today"></a>Error Handling Today</h2>
+<p>The first challenge we'd like to solve is that it's easy to lose context accidentally when reporting errors. There are a couple of places this can happen, either when printing an error and forgetting to print sources, when returning an error from main, or when converting a recoverable error into a non recoverable error.</p>
+<p>Consider this example:</p>
+<pre><code class="language-rust">use std::fmt;
+
+// We have a program that loads a config and expects that
+// loading the config will always succeed.
+fn main() {
+    let _config = load_config()
+        .expect(&quot;config is always valid and exists&quot;);
+}
+
+// We have a dummy implementation of load_config which
+// always errors, since we're just focusing on diagnostics
+// here.
+fn load_config() -&gt; Result&lt;(), Error&gt; {
+    Err(Error(SourceError))
+}
+
+// And we have an error type that just prints &quot;invalid
+// config&quot; and has a source error which just prints &quot;config
+// file does not exist&quot;
+#[derive(Debug)]
+struct Error(SourceError);
+
+impl fmt::Display for Error {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
+        f.write_str(&quot;invalid config&quot;)
+    }
+}
+
+impl std::error::Error for Error {
+    fn source(&amp;self) -&gt; Option&lt;&amp;(dyn std::error::Error + 'static)&gt; {
+        Some(&amp;self.0)
+    }
+}
+
+#[derive(Debug)]
+struct SourceError;
+
+impl fmt::Display for SourceError {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
+        f.write_str(&quot;config file does not exist&quot;)
+    }
+}
+
+impl std::error::Error for SourceError {}
+</code></pre>
+<p>When we run this we would like to see output somewhat like this:</p>
+<pre><code>$ cargo run
+thread 'main' panicked at 'config is always valid and exists', src/main.rs:4:33
+
+Error:
+    0: invalid config
+    1: config file does not exist
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>In this error message we can see that we exited because of a panic. We can see what invariant we violated that was supposed to prevent this panic from happening. We can see the location where the panic was produced. And we can see the error message of each error in the chain of errors accessible via <code>source</code>.</p>
+<p>That's what we would like, at least in the version of Rust that the error handling project group wants to see, but what we actually get is this...</p>
+<pre><code>$ cargo run
+thread 'main' panicked at 'config is always valid and exists: Error(SourceError)', main.rs:4:33
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Now, I definitely don't think this is what we want as a default when promoting recoverable errors to non-recoverable errors! <code>unwrap</code> and <code>expect</code> work by stringifying the error variant using it's <code>Debug</code> impl, but this is often the wrong operation for types that implement the <code>Error</code> trait. By converting the <code>Error</code> to a <code>String</code> we lose access to the pieces of context we carefully split up via the <code>Error</code> trait, and in all likelihood the <code>derive(Debug)</code> output of our error types won't even include the error messages in our <code>Display</code> impls.</p>
+<p>Rust's panic infrastructure doesn't provide a method for converting an <code>Error</code> type into a panic, it only supports converting <code>Debug</code> types into panics, and we feel that this is a major issue. Similarly, there's no convenient tools provided by the language for printing an error and all of its source's error messages.</p>
+<pre><code class="language-rust">fn main() {
+    let result = load_config();
+    let _config = match result {
+        Ok(config) =&gt; config,
+        Err(error) =&gt; {
+            println!(&quot;Error: {}&quot;, error);
+            return;
+        }
+    };
+}
+</code></pre>
+<p>When we run this program we'd like to see output that looks something like this:</p>
+<pre><code>$ cargo run
+Error: invalid config: config file does not exist
+</code></pre>
+<p>Here we can see the header we provided to indicate we're printing an error, followed by each error message in the chain of sources separated by colons.</p>
+<p>But instead all we get is this:</p>
+<pre><code>$ cargo run
+Error: invalid config
+</code></pre>
+<p>By default all of the source's error messages are lost. This arises from the fact that we used <code>Display</code> as the interface to an individual error message. If we could go back we'd currently propose instead adding <code>fn message(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result</code> to the <code>Error</code> trait, but that ship has sailed.</p>
+<p>The way that libraries work around this today is by abusing the <code>Debug</code> trait. Types like <a href="https://docs.rs/eyre/0.6.5/eyre/trait.EyreHandler.html#tymethod.debug"><code>eyre</code></a>, <a href="https://docs.rs/anyhow/1.0.40/src/anyhow/fmt.rs.html#19"><code>anyhow</code></a>, and even sometimes <a href="https://www.lpalmieri.com/posts/error-handling-rust/#error_chain_fmt"><code>custom error enums</code></a> use their <code>Debug</code> output to print the full chain of errors in a human readable report.</p>
+<p>This has the advantage of making it easy to print a full error report and makes it so <code>unwrap</code>, <code>expect</code>, and return from main all print the full error report. But doing so prevents us from accessing the derived <code>Debug</code> format of our errors, potentially hiding internal details that might be needed for debugging but which aren't part of the error messages intended for users to read.</p>
+<h2><a href="#error-handling-tomorrow" aria-hidden="true" class="anchor" id="error-handling-tomorrow"></a>Error Handling Tomorrow</h2>
+<p>Eventually we'd like to get to a place where the default tools you reach for when error handling in Rust all do the right thing and fully leverage the <code>Error</code> trait's design. Unwrapping a type that implements the <code>Error</code> trait will preserve the original error as a <code>dyn Error</code> which is then available in the panic hook. Printing a full error report will be easy to do and obvious. With these changes in place it will hopefully be quite difficult to accidentally discard information when reporting errors.</p>
+<p>Our plan to fix these issues is two-fold:</p>
+<h3><a href="#1-error-traits--panic-runtime-integration" aria-hidden="true" class="anchor" id="1-error-traits--panic-runtime-integration"></a>1. Error Traits + Panic Runtime Integration</h3>
+<p>First we need to integrate the Error trait and the panic runtime, and the first step to doing so will be moving the <code>Error</code> trait into <code>core</code>. This is necessary because the panic runtime is part of <code>core</code> and the language itself, where as the <code>Error</code> trait currently resides in <code>std</code>. We're pretty excited about this change which we hope will have other positive downstream effects, particularly in the embedded ecosystem.</p>
+<p>Once we've gotten to the point where the <code>Error</code> trait is usable in <code>core</code> APIs the next step will be to add an interface for creating a panic from an <code>Error</code> type. We're currently planning on adding a <code>panic_error</code> function, similar to the <code>panic_any</code> function that is already available in <code>std</code>. This function will give the panic handler access to errors via a <code>dyn Error</code>.</p>
+<p>Once panic handlers are able to process <code>Error</code> types the next step will be to update the default panic hook provided by <code>std</code> to actually report panics via the <code>Error</code> trait if they're exposed as such. It should iterate over sources and print the backtrace captured by the error itself if one is available, or possibly capture one itself otherwise.</p>
+<p>Finally, we need to specialize <code>expect</code> and <code>unwrap</code> to use these new <code>Error</code> aware panic interfaces when unwrapping types that implement the <code>Error</code> trait. To do this we first need to work around a <a href="https://smallcultfollowing.com/babysteps/blog/2018/02/09/maximally-minimal-specialization-always-applicable-impls/#the-soundness-problem">soundness issue</a> with specialization for trait impls that are conditional based on lifetimes, though thankfully we already have a good idea of <a href="https://smallcultfollowing.com/babysteps/blog/2018/02/09/maximally-minimal-specialization-always-applicable-impls">how to fix this</a>.</p>
+<h3><a href="#2-error-reporter" aria-hidden="true" class="anchor" id="2-error-reporter"></a>2. Error Reporter</h3>
+<p>We would also like to provide a basic error reporter in <code>std</code>, and some facilities for making it easy to use, or easy to replace with your own preferred error reporter. Printing an error and its sources is a fundamental operation in Rust, so we want the language to provide a pit of success for reporting, where the easiest thing to do is the right thing. We can't get there completely because we use <code>Display</code> for individual error messages, and we can't change that in a backwards compatible fashion, but we hope that adding a convenient method for printing a full chain of errors and some clever lints will relieve most of the pressure.</p>
+<p>We plan on fixing this by first adding a <code>Report</code> type to the standard library that wraps a <code>&amp;dyn Error</code> and implements <code>Display</code> such that it prints each source as desired. We would like the output of <code>Report</code>'s display method to support the styles of error concatenation that are most common in the Rust ecosystem.</p>
+<p>Either one line with each error message concatenated with colons:</p>
+<pre><code class="language-rust">println!(&quot;Error: {}&quot;, Report::from(error));
+
+// Outputs:
+// Error: outermost error: second error: root error
+</code></pre>
+<p>Or multiple lines with each error message on it's own line :</p>
+<pre><code class="language-rust">println!(&quot;Error: {:#}&quot;, Report::from(error))
+
+// Outputs:
+// Error: outermost error
+//
+// Caused by:
+//    0: second error
+//    1: root error
+</code></pre>
+<p>The first single line format is useful for log output or inlined error messages, whereas the alternate multi line format is useful for user facing output such as a CLI interface or a GUI popup.</p>
+<p>We also want to add a method to the error trait for conveniently wrapping up any error in the <code>Report</code> type so that reporting an error is as simple as <code>println!(&quot;Error: {}&quot;, error.report());</code></p>
+<p>We expect the report method will look something like this:</p>
+<pre><code class="language-rust">fn report(&amp;self) -&gt; impl Display + '_
+where
+    Self: Sized,
+{
+    Report::from(self)
+}
+</code></pre>
+<p>We want the return type here to be generic rather than hard coded to <code>Report</code> so that individual error types can provide their own report format if desired. We expect that derive macros may leverage this to customize error reporting format defaults. This will work well with composition because the reporter from the outermost type will be used to format the full chain of errors.</p>
+<p>For now we can't implement this method as described because <code>impl Trait</code> isn't allowed in return types on trait methods, but we're working to find a way to add this to the error trait backwards compatibly.</p>
+<h2><a href="#duplicate-information-issue" aria-hidden="true" class="anchor" id="duplicate-information-issue"></a>Duplicate Information Issue</h2>
+<p>With these fixes in place it will become easy to chain errors and report them completely and consistently. However there is a hazard that <code>Error</code> implementors need to be aware of in this system: duplicate information.</p>
+<p>Imagine an error like the one in the previous example, except instead of each error printing its own message and returning the next error via <code>source</code>, they also include their source's error message after their own. That way when we print the outer error's <code>Display</code> output we see all of the error messages, not just the first in the chain.</p>
+<pre><code class="language-rust">println!(&quot;Error: {}&quot;, error);
+
+// Outputs:
+// Error: outermost error: second error: root error
+</code></pre>
+<p>Now, what happens we then print this same error type with <code>Report</code> expecting that we need to iterate over the sources and print them too?</p>
+<pre><code class="language-rust">println!(&quot;Error: {:#}&quot;, error.report());
+
+// Outputs
+// Error: outermost error: second error: root error
+//
+// Caused by:
+//    0: second error: root error
+//    1: root error
+</code></pre>
+<p>The source error messages get duplicated! With the multi-line output of <code>anyhow</code> and <code>eyre</code> we get this nice little triangle shape to the error report, which you've probably encountered if you've ever used these libraries before. We can no longer separate the error messages of the individual errors in the chain of errors because this error type concatenates the sources manually and returns them via the <code>source</code> function. This also restricts how we can format our error reports. If we want a consistent report format and we have a dependency that concatenates errors in a single line we are forced to do so as well ourselves throughout our entire application. If, on the other hand, we have two dependencies that concatenate errors in different ways, well, we're out of luck.</p>
+<p>So how do we avoid this? We adopt a consistent separation for <code>Display</code> and <code>source</code> implementations.</p>
+<h2><a href="#guidelines-for-implementing-displayfmt-and-errorsource" aria-hidden="true" class="anchor" id="guidelines-for-implementing-displayfmt-and-errorsource"></a>Guidelines for implementing <code>Display::fmt</code> and <code>Error::source</code></h2>
+<p>To resolve this issue, project error handling recently created a guideline for <a href="https://github.com/rust-lang/project-error-handling/issues/27#issuecomment-763950178">how to implement <code>Display::fmt</code> and <code>Error::source</code></a>. In it we make the following recommendation:</p>
+<p><strong>An error type with a source error should either return that error via <code>source</code> or include that source's error message in it's own <code>Display</code> output, but never both.</strong></p>
+<p>We figure the default will be to return errors via source. That way source errors can be reacted to via <code>downcast</code> when appropriate. This is particularly important for libraries that are changing existing public error types. For these libraries removing an error from <code>source</code> is a breaking change that isn't detected at compile time, making a major version bump likely insufficient. Changing the <code>Display</code> output is also a breaking change, though a less dangerous one. To help with this we've drafted a suggested migration plan: <a href="https://github.com/rust-lang/project-error-handling/issues/44">rust-lang/project-error-handling#44</a>.</p>
+<p>In coming up with this recommendation we had to figure out what the <code>Error</code> trait's primary role is in Rust. After discussing it with the library team we concluded that reporting should be treated as the primary role, and that reacting via <code>downcast</code> should come second when designing error types. Generally these needs are not in conflict, but it is possible for issues to come up. For example, when working with transparent error types that forward all methods to an inner error type. When these types follow this guideline the inner error type is skipped over and is never made available for <code>downcast</code>ing.</p>
+<p>This recommendation only applies for error types that are exposed as part of library APIs. Internal errors in libraries or and applications can do whatever they want, but as soon as they need to be integrated into other crates by 3rd party users it's important that errors follow a consistent style. If you're interested in our rationale or have any comments please check out our github issue on the topic: <a href="https://github.com/rust-lang/project-error-handling/issues/27">rust-lang/project-error-handling#27</a>.</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>We hope that these changes will significantly improve error handling experience provided by Rust. Error reporting will be more consistent and flexible and let the final application developer define how to format error reports for their specific use-case. It will be a lot harder to accidentally lose information when reporting errors. The tools for reporting errors will be more tightly integrated into the standard library and the language itself and we hope this will have extra benefits to the embedded ecosystem by more universally standardizing on the <code>Error</code> trait.</p>
+<p>So that's the plan for now, it's not the full plan of all the changes we'd like to make, but we think its the best first step. However, this is by no means set in stone and we're interested in getting feedback from the rest of the community so we can refine our design. So if you have thoughts please let us know, our project group repo is https://github.com/rust-lang/project-error-handling. Please feel free to <a href="https://github.com/rust-lang/project-error-handling/issues">open an issue</a> or hop in our <a href="https://rust-lang.zulipchat.com/#narrow/stream/257204-project-error-handling">zulip stream</a> and create a new topic to let us know what you think of this plan.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
