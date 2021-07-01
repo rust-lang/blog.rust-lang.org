@@ -130,7 +130,7 @@ Eventually we'd like to get to a place where the default tools you reach for whe
 
 Our plan to fix these issues is two-fold:
 
-### 1. Error Traits + Panic Runtime Integration
+### 1. Error Trait + Panic Runtime Integration
 
 First we need to integrate the Error trait and the panic runtime, and the first step to doing so will be moving the `Error` trait into `core`. This is necessary because the panic runtime is part of `core` and the language itself, where as the `Error` trait currently resides in `std`. We're pretty excited about this change which we hope will have other positive downstream effects, particularly in the embedded ecosystem.
 
