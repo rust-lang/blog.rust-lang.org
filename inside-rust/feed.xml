@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-07-01T21:43:14+00:00</updated>
+    <updated>2021-07-01T21:58:15+00:00</updated>
 
     
     <entry>
@@ -115,7 +115,7 @@ Error: invalid config
 &lt;h2&gt;&lt;a href&#x3D;&quot;#error-handling-tomorrow&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;error-handling-tomorrow&quot;&gt;&lt;/a&gt;Error Handling Tomorrow&lt;/h2&gt;
 &lt;p&gt;Eventually we&#x27;d like to get to a place where the default tools you reach for when error handling in Rust all do the right thing and fully leverage the &lt;code&gt;Error&lt;/code&gt; trait&#x27;s design. Unwrapping a type that implements the &lt;code&gt;Error&lt;/code&gt; trait will preserve the original error as a &lt;code&gt;dyn Error&lt;/code&gt; which is then available in the panic hook. Printing a full error report will be easy to do and obvious. With these changes in place it will hopefully be quite difficult to accidentally discard information when reporting errors.&lt;/p&gt;
 &lt;p&gt;Our plan to fix these issues is two-fold:&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#1-error-traits--panic-runtime-integration&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;1-error-traits--panic-runtime-integration&quot;&gt;&lt;/a&gt;1. Error Traits + Panic Runtime Integration&lt;/h3&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#1-error-trait--panic-runtime-integration&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;1-error-trait--panic-runtime-integration&quot;&gt;&lt;/a&gt;1. Error Trait + Panic Runtime Integration&lt;/h3&gt;
 &lt;p&gt;First we need to integrate the Error trait and the panic runtime, and the first step to doing so will be moving the &lt;code&gt;Error&lt;/code&gt; trait into &lt;code&gt;core&lt;/code&gt;. This is necessary because the panic runtime is part of &lt;code&gt;core&lt;/code&gt; and the language itself, where as the &lt;code&gt;Error&lt;/code&gt; trait currently resides in &lt;code&gt;std&lt;/code&gt;. We&#x27;re pretty excited about this change which we hope will have other positive downstream effects, particularly in the embedded ecosystem.&lt;/p&gt;
 &lt;p&gt;Once we&#x27;ve gotten to the point where the &lt;code&gt;Error&lt;/code&gt; trait is usable in &lt;code&gt;core&lt;/code&gt; APIs the next step will be to add an interface for creating a panic from an &lt;code&gt;Error&lt;/code&gt; type. We&#x27;re currently planning on adding a &lt;code&gt;panic_error&lt;/code&gt; function, similar to the &lt;code&gt;panic_any&lt;/code&gt; function that is already available in &lt;code&gt;std&lt;/code&gt;. This function will give the panic handler access to errors via a &lt;code&gt;dyn Error&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Once panic handlers are able to process &lt;code&gt;Error&lt;/code&gt; types the next step will be to update the default panic hook provided by &lt;code&gt;std&lt;/code&gt; to actually report panics via the &lt;code&gt;Error&lt;/code&gt; trait if they&#x27;re exposed as such. It should iterate over sources and print the backtrace captured by the error itself if one is available, or possibly capture one itself otherwise.&lt;/p&gt;
