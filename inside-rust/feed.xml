@@ -10,8 +10,34 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-07-01T21:58:15+00:00</updated>
+    <updated>2021-07-02T17:19:33+00:00</updated>
 
+    
+    <entry>
+        <title>Rust Compiler July Steering Cycle</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/07/02/compiler-team-july-steering-cycle.html" type="text/html" title="Rust Compiler July Steering Cycle" />
+        <published>2021-07-02T00:00:00+00:00</published>
+        <updated>2021-07-02T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/07/02/compiler-team-july-steering-cycle.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/07/02/compiler-team-july-steering-cycle.html">&lt;p&gt;n &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/74498steeringmeeting20210702fingerprintsplanning.html&quot;&gt;Friday, July 2nd&lt;/a&gt;, the Rust Compiler team had a planning meeting for the July steering cycle, followed by a continuation of an ongoing discussion of the 1.52.0 fingerprint event.&lt;/p&gt;
+&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
+it is going to use its scheduled steering and design meeting time over the next
+three Fridays.&lt;/p&gt;
+&lt;p&gt;On &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/435&quot;&gt;Friday, 9 July&lt;/a&gt;, we will be having a third follow-up meeting to
+continue the discussion of the incremental compilation fingerprint issue that
+led to the emergency 1.52.1 release. For reference, the first meeting on this
+subject was help on &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/56399steeringmeeting20210625152retrocompilerteam435.html&quot;&gt;Friday, 25 June&lt;/a&gt; (and the second was
+today, &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/74498steeringmeeting20210702fingerprintsplanning.html&quot;&gt;July 2nd&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;On &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/444&quot;&gt;Friday, 16 July&lt;/a&gt;, we will be having a meeting to discuss
+extensions to the review policy for Rust Compiler Pull Requests.&lt;/p&gt;
+&lt;p&gt;Each meeting will run from 2pm to 3pm GMT, and will take place on the
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Felix Klock</name>
+        </author>
+    </entry>
     
     <entry>
         <title>What the Error Handling Project Group is Working Towards</title>
@@ -460,68 +486,6 @@ Beyond the compiler, Aaron has also implemented support for &lt;a href&#x3D;&quo
 
         <author>
             <name>Guillaume Gomez</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Lang team April update</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/04/17/lang-team-apr-update.html" type="text/html" title="Lang team April update" />
-        <published>2021-04-17T00:00:00+00:00</published>
-        <updated>2021-04-17T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/04/17/lang-team-apr-update.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/04/17/lang-team-apr-update.html">&lt;p&gt;This week the lang team held its April planning meeting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-04-14-Planning-Meeting.md&quot;&gt;minutes&lt;/a&gt;). We normally hold these meetings on the first Wednesday of every month, but this month we were delayed by one week due to scheduling conflicts.&lt;/p&gt;
-&lt;p&gt;The planning meeting is used for:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Checking in on the status of our active projects&lt;/li&gt;
-&lt;li&gt;Planning the design meetings for the remainder of the month&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;After each meeting, we post an update (like this one!) with notes and meeting announcements.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#update-from-active-projects&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;update-from-active-projects&quot;&gt;&lt;/a&gt;Update from active projects&lt;/h2&gt;
-&lt;p&gt;Did you know that you can see the lang team&#x27;s active projects on our &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/projects/2&quot;&gt;project board&lt;/a&gt;? We&#x27;re still experimenting and evolving the setup, but the goal is that it should give you a quick overview of what kinds of things the lang team is focused on, and what stage they are in their development.&lt;/p&gt;
-&lt;p&gt;The minutes contain &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-04-14-Planning-Meeting.md#updates-from-active-groups-and-projects&quot;&gt;links the tracking issues for each project&lt;/a&gt; and those issues contain status reports. Here are some interesting updates:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/60#issuecomment-814509681&quot;&gt;never type update&lt;/a&gt;:
-&lt;ul&gt;
-&lt;li&gt;we have a general plan for hybrid fallback that we think will allow us to stabilize &lt;code&gt;!&lt;/code&gt; at long last without breaking existing crates&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/50#issuecomment-814526085&quot;&gt;improved closure capture (RFC 2229)&lt;/a&gt;:
-&lt;ul&gt;
-&lt;li&gt;implementation is working quite well and migration is nearly implemented also&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/19#issuecomment-814581675&quot;&gt;ffi-unwind&lt;/a&gt;:
-&lt;ul&gt;
-&lt;li&gt;C-unwind implementation has landed&lt;/li&gt;
-&lt;li&gt;there is some ongoing work to fix some bugs in the initial implementation&lt;/li&gt;
-&lt;li&gt;looking at potentially moving to considering setjmp/longjmp&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/83386#issuecomment-819719603&quot;&gt;nested pattern stabilization&lt;/a&gt; has almost completed&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
-&lt;p&gt;We planned two design meetings for April. Our meetings are open for anyone to join and observe. They are also typically recorded and posted to YouTube. Ping nikomatsakis or joshtriplett for info about attending.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;April 21 -- proposed &amp;quot;wasm&amp;quot; ABI (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/90&quot;&gt;lang-team#90&lt;/a&gt;), featuring special guest Alex Crichton&lt;/li&gt;
-&lt;li&gt;April 28 -- generators (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/92&quot;&gt;lang-team#92&lt;/a&gt;), featuring special guest Esteban Küber&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#design-meeting-expectations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-meeting-expectations&quot;&gt;&lt;/a&gt;Design meeting expectations&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;The document for the meeting must be prepared by the triage meeting on Tuesday and posted to the tracking issue.
-&lt;ul&gt;
-&lt;li&gt;If it is not sent out by then, the meeting will be canceled. This gives folks 24 hour notice.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
-&lt;ul&gt;
-&lt;li&gt;However, there is no rule &lt;strong&gt;against&lt;/strong&gt; reading the document beforehand and providing feedback or advice on how to improve it.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>Niko Matsakis</name>
         </author>
     </entry>
     
