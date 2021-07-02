@@ -85,7 +85,7 @@ thread 'main' panicked at 'config is always valid and exists: Error(SourceError)
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-Now, I definitely don't think this is what we want as a default when promoting recoverable errors to non-recoverable errors! `unwrap` and `expect` work by stringifying the error variant using it's `Debug` impl, but this is often the wrong operation for types that implement the `Error` trait. By converting the `Error` to a `String` we lose access to the pieces of context we carefully split up via the `Error` trait, and in all likelihood the `derive(Debug)` output of our error types won't even include the error messages in our `Display` impls.
+Now, I definitely don't think this is what we want as a default when promoting recoverable errors to non-recoverable errors! `unwrap` and `expect` work by stringifying the error variant using its `Debug` impl, but this is often the wrong operation for types that implement the `Error` trait. By converting the `Error` to a `String` we lose access to the pieces of context we carefully split up via the `Error` trait, and in all likelihood the `derive(Debug)` output of our error types won't even include the error messages in our `Display` impls.
 
 Rust's panic infrastructure doesn't provide a method for converting an `Error` type into a panic, it only supports converting `Debug` types into panics, and we feel that this is a major issue. Similarly, there's no convenient tools provided by the language for printing an error and all of its source's error messages.
 
@@ -155,7 +155,7 @@ println!("Error: {}", Report::from(error));
 // Error: outermost error: second error: root error
 ```
 
-Or multiple lines with each error message on it's own line :
+Or multiple lines with each error message on its own line :
 
 
 ```rust
@@ -222,7 +222,7 @@ So how do we avoid this? We adopt a consistent separation for `Display` and `sou
 
 To resolve this issue, project error handling recently created a guideline for [how to implement `Display::fmt` and `Error::source`](https://github.com/rust-lang/project-error-handling/issues/27#issuecomment-763950178). In it we make the following recommendation:
 
-**An error type with a source error should either return that error via `source` or include that source's error message in it's own `Display` output, but never both.**
+**An error type with a source error should either return that error via `source` or include that source's error message in its own `Display` output, but never both.**
 
 We figure the default will be to return errors via source. That way source errors can be reacted to via `downcast` when appropriate. This is particularly important for libraries that are changing existing public error types. For these libraries removing an error from `source` is a breaking change that isn't detected at compile time, making a major version bump likely insufficient. Changing the `Display` output is also a breaking change, though a less dangerous one. To help with this we've drafted a suggested migration plan: [rust-lang/project-error-handling#44](https://github.com/rust-lang/project-error-handling/issues/44).
 
