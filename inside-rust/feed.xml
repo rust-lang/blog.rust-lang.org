@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-07-02T17:19:33+00:00</updated>
+    <updated>2021-07-02T22:00:00+00:00</updated>
 
     
     <entry>
@@ -113,7 +113,7 @@ note: run with &#x60;RUST_BACKTRACE&#x3D;1&#x60; environment variable to display
 thread &#x27;main&#x27; panicked at &#x27;config is always valid and exists: Error(SourceError)&#x27;, main.rs:4:33
 note: run with &#x60;RUST_BACKTRACE&#x3D;1&#x60; environment variable to display a backtrace
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, I definitely don&#x27;t think this is what we want as a default when promoting recoverable errors to non-recoverable errors! &lt;code&gt;unwrap&lt;/code&gt; and &lt;code&gt;expect&lt;/code&gt; work by stringifying the error variant using it&#x27;s &lt;code&gt;Debug&lt;/code&gt; impl, but this is often the wrong operation for types that implement the &lt;code&gt;Error&lt;/code&gt; trait. By converting the &lt;code&gt;Error&lt;/code&gt; to a &lt;code&gt;String&lt;/code&gt; we lose access to the pieces of context we carefully split up via the &lt;code&gt;Error&lt;/code&gt; trait, and in all likelihood the &lt;code&gt;derive(Debug)&lt;/code&gt; output of our error types won&#x27;t even include the error messages in our &lt;code&gt;Display&lt;/code&gt; impls.&lt;/p&gt;
+&lt;p&gt;Now, I definitely don&#x27;t think this is what we want as a default when promoting recoverable errors to non-recoverable errors! &lt;code&gt;unwrap&lt;/code&gt; and &lt;code&gt;expect&lt;/code&gt; work by stringifying the error variant using its &lt;code&gt;Debug&lt;/code&gt; impl, but this is often the wrong operation for types that implement the &lt;code&gt;Error&lt;/code&gt; trait. By converting the &lt;code&gt;Error&lt;/code&gt; to a &lt;code&gt;String&lt;/code&gt; we lose access to the pieces of context we carefully split up via the &lt;code&gt;Error&lt;/code&gt; trait, and in all likelihood the &lt;code&gt;derive(Debug)&lt;/code&gt; output of our error types won&#x27;t even include the error messages in our &lt;code&gt;Display&lt;/code&gt; impls.&lt;/p&gt;
 &lt;p&gt;Rust&#x27;s panic infrastructure doesn&#x27;t provide a method for converting an &lt;code&gt;Error&lt;/code&gt; type into a panic, it only supports converting &lt;code&gt;Debug&lt;/code&gt; types into panics, and we feel that this is a major issue. Similarly, there&#x27;s no convenient tools provided by the language for printing an error and all of its source&#x27;s error messages.&lt;/p&gt;
 &lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn main() {
     let result &#x3D; load_config();
@@ -155,7 +155,7 @@ Error: invalid config
 // Outputs:
 // Error: outermost error: second error: root error
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Or multiple lines with each error message on it&#x27;s own line :&lt;/p&gt;
+&lt;p&gt;Or multiple lines with each error message on its own line :&lt;/p&gt;
 &lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;println!(&amp;quot;Error: {:#}&amp;quot;, Report::from(error))
 
 // Outputs:
@@ -199,7 +199,7 @@ where
 &lt;p&gt;So how do we avoid this? We adopt a consistent separation for &lt;code&gt;Display&lt;/code&gt; and &lt;code&gt;source&lt;/code&gt; implementations.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#guidelines-for-implementing-displayfmt-and-errorsource&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;guidelines-for-implementing-displayfmt-and-errorsource&quot;&gt;&lt;/a&gt;Guidelines for implementing &lt;code&gt;Display::fmt&lt;/code&gt; and &lt;code&gt;Error::source&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;To resolve this issue, project error handling recently created a guideline for &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling/issues/27#issuecomment-763950178&quot;&gt;how to implement &lt;code&gt;Display::fmt&lt;/code&gt; and &lt;code&gt;Error::source&lt;/code&gt;&lt;/a&gt;. In it we make the following recommendation:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;An error type with a source error should either return that error via &lt;code&gt;source&lt;/code&gt; or include that source&#x27;s error message in it&#x27;s own &lt;code&gt;Display&lt;/code&gt; output, but never both.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;An error type with a source error should either return that error via &lt;code&gt;source&lt;/code&gt; or include that source&#x27;s error message in its own &lt;code&gt;Display&lt;/code&gt; output, but never both.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;We figure the default will be to return errors via source. That way source errors can be reacted to via &lt;code&gt;downcast&lt;/code&gt; when appropriate. This is particularly important for libraries that are changing existing public error types. For these libraries removing an error from &lt;code&gt;source&lt;/code&gt; is a breaking change that isn&#x27;t detected at compile time, making a major version bump likely insufficient. Changing the &lt;code&gt;Display&lt;/code&gt; output is also a breaking change, though a less dangerous one. To help with this we&#x27;ve drafted a suggested migration plan: &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling/issues/44&quot;&gt;rust-lang/project-error-handling#44&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In coming up with this recommendation we had to figure out what the &lt;code&gt;Error&lt;/code&gt; trait&#x27;s primary role is in Rust. After discussing it with the library team we concluded that reporting should be treated as the primary role, and that reacting via &lt;code&gt;downcast&lt;/code&gt; should come second when designing error types. Generally these needs are not in conflict, but it is possible for issues to come up. For example, when working with transparent error types that forward all methods to an inner error type. When these types follow this guideline the inner error type is skipped over and is never made available for &lt;code&gt;downcast&lt;/code&gt;ing.&lt;/p&gt;
 &lt;p&gt;This recommendation only applies for error types that are exposed as part of library APIs. Internal errors in libraries or and applications can do whatever they want, but as soon as they need to be integrated into other crates by 3rd party users it&#x27;s important that errors follow a consistent style. If you&#x27;re interested in our rationale or have any comments please check out our github issue on the topic: &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling/issues/27&quot;&gt;rust-lang/project-error-handling#27&lt;/a&gt;.&lt;/p&gt;
