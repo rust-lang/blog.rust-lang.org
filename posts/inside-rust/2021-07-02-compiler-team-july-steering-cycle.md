@@ -14,7 +14,7 @@ three Fridays.
 On [Friday, 9 July][jul-09-mtg], we will be having a third follow-up meeting to
 continue the discussion of the incremental compilation fingerprint issue that
 led to the emergency 1.52.1 release. For reference, the first meeting on this
-subject was help on [Friday, 25 June][jun-25-zulip-archive] (and the second was
+subject was held on [Friday, 25 June][jun-25-zulip-archive] (and the second was
 today, [July 2nd][jul-02-zulip-archive]).
 
 [jun-25-zulip-archive]: https://zulip-archive.rust-lang.org/238009tcompilermeetings/56399steeringmeeting20210625152retrocompilerteam435.html
