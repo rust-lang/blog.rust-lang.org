@@ -19,7 +19,7 @@ After each meeting, we post an update (like this one!) with notes and meeting an
 
 ## Update on meeting recordings
 
-As proposed in [lang-team#100](https://github.com/rust-lang/lang-team/issues/100), we have decided to discontinue recording our meetings. A number of people reported that they felt uncomfortable participating if they knew that their participation would be made available on YouTube, and we decided to prioritize participation in the meeting itself over making recordings available. We are aware that many people enjoyed viewing the recordings and also that they were useful for enabling more "asynchronous" participation or giving more color to lang-team reasoning (the minutes can't capture all the details). We are investigating alternatives here and may resume some form of recording at some future time.
+As proposed in [lang-team#100](https://github.com/rust-lang/lang-team/issues/100), we have decided to discontinue recording our meetings. A number of people reported that they felt uncomfortable participating if they knew that their participation would be made available on YouTube, and we decided to prioritize participation in the meeting itself over making recordings available. We are aware that many people enjoyed viewing the recordings and also that they were useful for enabling more "asynchronous" participation or giving more color to lang-team reasoning (the minutes can't capture all the details). We are investigating alternatives here and may resume some form of recording at some future time. We encourage folks to engage on Zulip if you have thoughts on the solution space, or propose an MCP with concrete ideas!
 
 ## Update from active initiatives
 
