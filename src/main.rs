@@ -4,18 +4,19 @@ mod posts;
 use crate::blogs::Blog;
 use crate::posts::Post;
 use chrono::Timelike;
-use handlebars::{handlebars_helper, Handlebars};
+use tera::{Tera, try_get_value, Context};
 use sass_rs::{compile_file, Options};
 use serde_derive::Serialize;
-use serde_json::json;
+use serde_json::{json, Value, to_value};
 use std::convert::AsRef;
+use std::collections::HashMap;
 use std::error::Error;
 use std::fs::{self, File};
 use std::io::Write;
 use std::path::{Path, PathBuf};
 
-struct Generator<'a> {
-    handlebars: Handlebars<'a>,
+struct Generator {
+    tera: Tera,
     blogs: Vec<Blog>,
     out_directory: PathBuf,
 }
@@ -31,34 +32,39 @@ struct ReleasePost {
     title: String,
     url: String,
 }
-handlebars_helper!(hb_month_name_helper: |month_num: u64| match month_num {
-    1 => "Jan.",
-    2 => "Feb.",
-    3 => "Mar.",
-    4 => "Apr.",
-    5 => "May",
-    6 => "June",
-    7 => "July",
-    8 => "Aug.",
-    9 => "Sept.",
-    10 => "Oct.",
-    11 => "Nov.",
-    12 => "Dec.",
-    _ => "Error!",
-});
 
-impl<'a> Generator<'a> {
+fn month_name_filter(value: &Value, _: &HashMap<String, Value>) -> tera::Result<Value> {
+    let month_num = try_get_value!("month_name", "value", u64, value);
+
+    let month_name = match month_num {
+        1 => "Jan.",
+        2 => "Feb.",
+        3 => "Mar.",
+        4 => "Apr.",
+        5 => "May",
+        6 => "June",
+        7 => "July",
+        8 => "Aug.",
+        9 => "Sept.",
+        10 => "Oct.",
+        11 => "Nov.",
+        12 => "Dec.",
+        _ => "Error!",
+    };
+
+    Ok(to_value(month_name).unwrap())
+}
+
+impl Generator {
     fn new(
         out_directory: impl AsRef<Path>,
         posts_directory: impl AsRef<Path>,
     ) -> Result<Self, Box<dyn Error>> {
-        let mut handlebars = Handlebars::new();
-        handlebars.set_strict_mode(true);
-        handlebars.register_templates_directory(".hbs", "templates")?;
-        handlebars.register_helper("month_name", Box::new(hb_month_name_helper));
+        let mut tera = Tera::new("templates/**/*.html")?;
+        tera.register_filter("month_name", month_name_filter);
 
         Ok(Generator {
-            handlebars,
+            tera,
             blogs: crate::blogs::load(posts_directory.as_ref())?,
             out_directory: out_directory.as_ref().into(),
         })
@@ -213,12 +219,17 @@ impl<'a> Generator<'a> {
     fn render_template(
         &self,
         name: impl AsRef<Path>,
-        template: &str,
+        template_name: &str,
         data: serde_json::Value,
     ) -> Result<(), Box<dyn Error>> {
-        let out_file = self.out_directory.join(name.as_ref());
-        let file = File::create(out_file)?;
-        self.handlebars.render_to_write(template, &data, file)?;
+        let out_path = self.out_directory.join(name.as_ref());
+        let mut out_file = File::create(out_path)?;
+        let context = Context::from_value(data)?;
+        let template_file_name = template_name.to_string() + ".html";
+
+        let rendered = self.tera.render(&template_file_name, &context)?;
+        out_file.write(rendered.as_bytes())?;
+        
         Ok(())
     }
 }
