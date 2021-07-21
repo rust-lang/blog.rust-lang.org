@@ -10,8 +10,34 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-07-13T01:18:50+00:00</updated>
+    <updated>2021-07-21T18:59:26+00:00</updated>
 
+    
+    <entry>
+        <title>Rust 2021 public testing period</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/07/21/Rust-2021-public-testing.html" type="text/html" title="Rust 2021 public testing period" />
+        <published>2021-07-21T00:00:00+00:00</published>
+        <updated>2021-07-21T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/07/21/Rust-2021-public-testing.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/07/21/Rust-2021-public-testing.html">&lt;h1&gt;&lt;a href&#x3D;&quot;#rust-2021-public-testing-period&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rust-2021-public-testing-period&quot;&gt;&lt;/a&gt;Rust 2021 public testing period&lt;/h1&gt;
+&lt;p&gt;We are happy to announce that the Rust 2021 edition is entering its &lt;strong&gt;public testing period&lt;/strong&gt;. All of the planned features for the edition are now available on nightly builds along with migrations that should move your code from Rust 2018 to Rust 2021. If you&#x27;d like to learn more about the changes that are part of Rust 2021, check out the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/edition-guide/rust-2021/index.html&quot;&gt;nightly version of the Edition Guide&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#public-testing-period&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;public-testing-period&quot;&gt;&lt;/a&gt;Public testing period&lt;/h3&gt;
+&lt;p&gt;As we enter the public testing period, &lt;strong&gt;we are encouraging adventurous users to test migrating their crates over to Rust 2021.&lt;/strong&gt; As always, we expect this to be a largely automated process. The steps to try out the Rust 2021 Edition as follows (&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html&quot;&gt;more detailed directions can be found here&lt;/a&gt;):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Install the most recent nightly: &lt;code&gt;rustup update nightly&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;cargo +nightly fix --edition&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Edit &lt;code&gt;Cargo.toml&lt;/code&gt; and place &lt;code&gt;cargo-features &#x3D; [&amp;quot;edition2021&amp;quot;]&lt;/code&gt; at the top (above &lt;code&gt;[package]&lt;/code&gt;), and change the edition field to say &lt;code&gt;edition &#x3D; &amp;quot;2021&amp;quot;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;cargo +nightly check&lt;/code&gt; to verify it now works in the new edition.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Note that Rust 2021 is still unstable, so you can expect bugs and other changes!&lt;/strong&gt; We recommend migrating your crates in a temporary copy of your code versus your main branch. If you do encounter problems, or find areas where quality could be improved (missing documentation, confusing error messages, etc) please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;file an issue&lt;/a&gt; and tell us about it! Thank you!&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#what-comes-next&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-comes-next&quot;&gt;&lt;/a&gt;What comes next&lt;/h3&gt;
+&lt;p&gt;We are targeting stabilization of all Rust 2021 for Rust 1.56, which will be released on October 21st, 2021. Per the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/book/appendix-07-nightly-rust.html&quot;&gt;Rust train release model&lt;/a&gt;, that means all features and work must be landed on nightly by September 7th.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.53.0</title>
@@ -953,49 +979,6 @@ running the following command:&lt;/p&gt;
 
         <author>
             <name>The Rustup Working Group</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Brainstorming Async Rust&#x27;s Shiny Future</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/04/14/async-vision-doc-shiny-future.html" type="text/html" title="Brainstorming Async Rust&#x27;s Shiny Future" />
-        <published>2021-04-14T00:00:00+00:00</published>
-        <updated>2021-04-14T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/04/14/async-vision-doc-shiny-future.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/04/14/async-vision-doc-shiny-future.html">&lt;p&gt;On March 18th, we &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/03/18/async-vision-doc.html&quot;&gt;announced the start of the Async Vision Doc&lt;/a&gt; process. Since then, we&#x27;ve landed &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html&quot;&gt;24 &amp;quot;status quo&amp;quot; stories&lt;/a&gt; and we have &lt;a href&#x3D;&quot;https://github.com/rust-lang/wg-async-foundations/pulls&quot;&gt;4 more stories in open PRs&lt;/a&gt;; &lt;a href&#x3D;&quot;https://twitter.com/ryan_levick/&quot;&gt;Ryan Levick&lt;/a&gt; and &lt;a href&#x3D;&quot;https://twitter.com/nikomatsakis/&quot;&gt;I&lt;/a&gt; have also hosted more than ten collaborative writing sessions over the course of the last few weeks, and we have &lt;a href&#x3D;&quot;https://smallcultfollowing.com/babysteps/blog/2021/04/12/async-vision-doc-writing-sessions-v/&quot;&gt;more scheduled for this week&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Now that we have a good base of &amp;quot;status quo&amp;quot; stories, we are starting to imagine what the &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/shiny_future.html&quot;&gt;✨ &amp;quot;shiny future&amp;quot; ✨&lt;/a&gt; might look like. &lt;strong&gt;We want your help!&lt;/strong&gt; If you have a great idea for Async Rust&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, then &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/template.html&quot;&gt;take a look at the template and open a PR&lt;/a&gt;! Alternatively, if you have an idea for a story but would like to discuss it before writing, you can &lt;a href&#x3D;&quot;https://github.com/rust-lang/wg-async-foundations/issues/new/choose&quot;&gt;open a &amp;quot;shiny future&amp;quot; issue&lt;/a&gt;. Also, we would still love to get more &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo.html&quot;&gt;&amp;quot;status quo&amp;quot; stories&lt;/a&gt;, so please continue to share those.&lt;/p&gt;
-&lt;p&gt;When writing &amp;quot;shiny future&amp;quot; stories, the goal is to focus on the &lt;strong&gt;experience&lt;/strong&gt; of Rust&#x27;s users first and foremost, and not so much on the specific technical details. In fact, you don&#x27;t even have to know exactly how the experience will be achieved. We have a few years to figure that out, after all. 🚀&lt;/p&gt;
-&lt;p&gt;Every &amp;quot;shiny future&amp;quot; story is a &amp;quot;retelling&amp;quot; of one or more &amp;quot;status quo&amp;quot; stories. The idea is to replay the same scenario but hopefully with a happier ending, as a result of the improvements we&#x27;ve made. If you don&#x27;t see a &amp;quot;status quo&amp;quot; story that is right for telling your &amp;quot;shiny future&amp;quot; story, though, that&#x27;s no problem! Write up your story and we&#x27;ll figure out the &amp;quot;status quo&amp;quot; story it addresses. There is always the option of writing a new &amp;quot;status quo&amp;quot; story, too; we are still requesting &amp;quot;status quo&amp;quot; and &amp;quot;shiny future&amp;quot; stories, and we will do so right up until the end.&lt;/p&gt;
-&lt;p&gt;If you&#x27;d like to see what a &amp;quot;shiny future&amp;quot; story looks like, we have merged one example, &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/barbara_makes_a_wish.html&quot;&gt;Barbara Makes a Wish&lt;/a&gt;. This story describes Barbara&#x27;s experiences using a nifty new tool that gives her lots of information about the state of her async executor. It is a &amp;quot;retelling&amp;quot; of the &amp;quot;status quo&amp;quot; story &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo/barbara_wants_async_insights.html&quot;&gt;Barbara Wants Async Insights&lt;/a&gt;.&lt;/p&gt;
-&lt;h4&gt;&lt;a href&#x3D;&quot;#what-is-the-async-vision-doc-and-how-does-it-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-the-async-vision-doc-and-how-does-it-work&quot;&gt;&lt;/a&gt;What is the async vision doc and how does it work?&lt;/h4&gt;
-&lt;p&gt;Here is the idea in a nutshell:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;We are launching a collaborative effort to build a shared &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision&quot;&gt;vision document&lt;/a&gt; for Async Rust. &lt;strong&gt;Our goal is to engage the entire community in a collective act of the imagination:&lt;/strong&gt; how can we make the end-to-end experience of using Async I/O not only a pragmatic choice, but a &lt;em&gt;joyful&lt;/em&gt; one?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;As described in the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/03/18/async-vision-doc.html&quot;&gt;original announcement&lt;/a&gt;, the &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision&quot;&gt;vision document&lt;/a&gt; is structured as a series of &amp;quot;status quo&amp;quot; and &amp;quot;shiny future&amp;quot; stories. Each story describes the experiences of one or more of our four &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/characters.html&quot;&gt;characters&lt;/a&gt; as they go about achieving their goals using Async Rust.&lt;/p&gt;
-&lt;p&gt;The &amp;quot;status quo&amp;quot; stories describe the experiences that users have today. They are an amalgamation of the real experiences of people using Async Rust, as reported to us by interviews, blog posts, and tweets. The goal with these stories is to help us understand and gauge the cumulative impact that problems can have on our users.&lt;/p&gt;
-&lt;p&gt;The &amp;quot;shiny future&amp;quot; stories describe those some characters achieving those same goals, but looking forward a few years into the future. They are meant to illustrate the experience we are aiming towards, and to give the overall context for the RFCs and other kinds of changes we want to pursue.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#the-brainstorming-period-and-what-comes-next&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-brainstorming-period-and-what-comes-next&quot;&gt;&lt;/a&gt;The brainstorming period and what comes next&lt;/h3&gt;
-&lt;p&gt;We are currently in the midst of the &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/how_to_vision.html#brainstorming&quot;&gt;brainstorming period&lt;/a&gt;. This means that we are seeking to collect as many stories -- both about the &amp;quot;status quo&amp;quot; and the &amp;quot;shiny future&amp;quot; -- as we can. The brainstorming period lasts until the end of April. After that, the &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/#leads&quot;&gt;working group leads&lt;/a&gt; are going to merge the remaining stories and get to work drafting a synthesized vision document that incorporates elements of the various stories that have been submitted.&lt;/p&gt;
-&lt;p&gt;Going forward, we plan to revisit the vision document regularly. We fully expect that some aspects of the &amp;quot;shiny future&amp;quot; stories we write are going to be wrong, sometimes very wrong. We will be regularly returning to the vision document to check how things are going and adjust our trajectory appropriately.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#this-sounds-cool-how-can-i-get-involved&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;this-sounds-cool-how-can-i-get-involved&quot;&gt;&lt;/a&gt;This sounds cool, how can I get involved?&lt;/h3&gt;
-&lt;p&gt;If you&#x27;d like to help, we&#x27;d love to have you! If you&#x27;ve got an idea for a story, then feel free to create a PR to the wg-async-foundations repository based on one of the following templates:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/status_quo/template.html&quot;&gt;Template for &amp;quot;status quo&amp;quot; stories&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async-foundations/vision/shiny_future/template.html&quot;&gt;Template for &amp;quot;shiny future&amp;quot; stories&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;If you&#x27;d like a bit more inspiration, then you can join &lt;a href&#x3D;&quot;https://twitter.com/ryan_levick/&quot;&gt;Ryan Levick&lt;/a&gt; and &lt;a href&#x3D;&quot;https://twitter.com/nikomatsakis/&quot;&gt;I&lt;/a&gt; at one of our vision doc writing sessions. We have &lt;a href&#x3D;&quot;https://smallcultfollowing.com/babysteps/blog/2021/04/12/async-vision-doc-writing-sessions-v/&quot;&gt;more sessions scheduled this week&lt;/a&gt; and you can look for announcements from us on twitter or check the &lt;code&gt;#wg-async-foundations&lt;/code&gt; stream on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/&quot;&gt;the rust-lang Zulip&lt;/a&gt;.&lt;/p&gt;
-&lt;section class&#x3D;&quot;footnotes&quot;&gt;
-&lt;ol&gt;
-&lt;li id&#x3D;&quot;fn1&quot;&gt;
-&lt;p&gt;Don&#x27;t be modest. You know you do. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
-</content>
-
-        <author>
-            <name>Niko Matsakis</name>
         </author>
     </entry>
     
