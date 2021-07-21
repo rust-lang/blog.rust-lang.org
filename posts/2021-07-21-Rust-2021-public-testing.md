@@ -7,11 +7,11 @@ team: the Edition 2021 Project Group <https://www.rust-lang.org/governance/teams
 
 # Rust 2021 public testing period
 
-We are happy to announce that the Rust 2021 edition is entering its **public testing period**. All of the planned features for the edition are now available on nightly builds along with migrations that should move your code from Rust 2018 to Rust 2021. If you'd like to learn more about the changes that are part of Rust 2021, check out the [Edition Guide](https://doc.rust-lang.org/nightly/edition-guide/rust-2021/index.html).
+We are happy to announce that the Rust 2021 edition is entering its **public testing period**. All of the planned features for the edition are now available on nightly builds along with migrations that should move your code from Rust 2018 to Rust 2021. If you'd like to learn more about the changes that are part of Rust 2021, check out the [nightly version of the Edition Guide](https://doc.rust-lang.org/nightly/edition-guide/rust-2021/index.html).
 
 ### Public testing period
 
-As we enter the public testing period, **we are encouraging adventurous users to test migrating their crates over to Rust 2021.** As always, we expect this to be a largely automated process. The steps to try out the Rust 2021 Edition as follows (more detailed directions can be found [in the Edition Guide](https://doc.rust-lang.org/nightly/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html)):
+As we enter the public testing period, **we are encouraging adventurous users to test migrating their crates over to Rust 2021.** As always, we expect this to be a largely automated process. The steps to try out the Rust 2021 Edition as follows ([more detailed directions can be found here](https://doc.rust-lang.org/nightly/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html)):
 
 1. Install the most recent nightly: `rustup update nightly`.
 2. Run `cargo +nightly fix --edition`.
