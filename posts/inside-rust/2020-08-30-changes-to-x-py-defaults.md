@@ -47,4 +47,4 @@ For a detailed rationale of the changes, as well as more information about the a
 [bootstrap]: https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html
 [the MCP]: https://github.com/rust-lang/compiler-team/issues/326
 [implementation PR]: https://github.com/rust-lang/rust/pull/73964
-[Zulip stream]: https://rust-lang.zulipchat.com/#narrow/stream/233931-xxx/topic/Use.20sane.20defaults.20in.20x.py.20compiler-team.23326
+[Zulip stream]: https://rust-lang.zulipchat.com/#narrow/stream/233931-t-compiler.2Fmajor-changes/topic/Improve.20defaults.20in.20x.2Epy.20compiler-team.23326
