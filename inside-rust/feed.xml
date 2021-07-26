@@ -10,8 +10,28 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-07-23T02:29:17+00:00</updated>
+    <updated>2021-07-26T21:01:18+00:00</updated>
 
+    
+    <entry>
+        <title>1.54.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/07/26/1.54.0-prerelease.html" type="text/html" title="1.54.0 pre-release testing" />
+        <published>2021-07-26T00:00:00+00:00</published>
+        <updated>2021-07-26T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/07/26/1.54.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/07/26/1.54.0-prerelease.html">&lt;p&gt;The 1.54.0 pre-release is ready for testing. The release is scheduled for this
+Thursday, July 29th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1540-2021-07-29&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2021-07-29/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2021-07-29/index.html&lt;/a&gt;. You
+can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/1-54-0-pre-release-testing/15087&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Pietro Albini</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Rust Compiler July Steering Cycle</title>
@@ -464,28 +484,6 @@ Beyond the compiler, Aaron has also implemented support for &lt;a href&#x3D;&quo
 
         <author>
             <name>Wesley Wiser</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Jacob Hoffman-Andrews joins the Rustdoc team</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/04/20/jsha-rustdoc-member.html" type="text/html" title="Jacob Hoffman-Andrews joins the Rustdoc team" />
-        <published>2021-04-20T00:00:00+00:00</published>
-        <updated>2021-04-20T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/04/20/jsha-rustdoc-member.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/04/20/jsha-rustdoc-member.html">&lt;p&gt;Hello everyone, please welcome &lt;a href&#x3D;&quot;https://github.com/jsha&quot;&gt;Jacob Hoffman-Andrews&lt;/a&gt; to the rustdoc team!&lt;/p&gt;
-&lt;p&gt;Jacob Hoffman-Andrews (&lt;a href&#x3D;&quot;https://github.com/jsha&quot;&gt;@jsha&lt;/a&gt;) has been contributing a lot on rustdoc front-end. Thanks to him, the pageload of the rustdoc pages is much faster. Here is a non-exhaustive list of the stuff he&#x27;s done recently:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The huge search index is now only loaded &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/82310&quot;&gt;when needed&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;The pageload has &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/82315&quot;&gt;has been optimized a bunch&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Rustdoc&#x27;s show/hide toggles &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/83332&quot;&gt;are being converted to pure HTML&lt;/a&gt;, reducing complexity and improving pageload performance.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And this is just an overview!&lt;/p&gt;
-&lt;p&gt;We are really happy to have Jacob joining us, so thanks a lot for your work and congratulations!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Guillaume Gomez</name>
         </author>
     </entry>
     
