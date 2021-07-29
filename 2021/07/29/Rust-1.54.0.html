@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.54.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.54.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.54.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.54.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.54.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">July 29, 2021 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.54.0. Rust is a programming language empowering everyone
+to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.54.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a>
+from the appropriate page on our website, and check out the
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1540-2021-07-29">detailed release notes for 1.54.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1540-stable" aria-hidden="true" class="anchor" id="whats-in-1540-stable"></a>What's in 1.54.0 stable</h2>
+<h3><a href="#attributes-can-invoke-function-like-macros" aria-hidden="true" class="anchor" id="attributes-can-invoke-function-like-macros"></a>Attributes can invoke function-like macros</h3>
+<p>Rust 1.54 supports invoking function-like macros inside attributes. Function-like macros can be either <code>macro_rules!</code> based or procedural macros which are invoked like <code>macro!(...)</code>. One notable use case for this is including documentation from other files into Rust doc comments. For example, if your project's README represents a good documentation comment, you can use <code>include_str!</code> to directly incorporate the contents. Previously, various workarounds allowed similar functionality, but from 1.54 this is much more ergonomic.</p>
+<pre><code class="language-rust=">#![doc = include_str!(&quot;README.md&quot;)]
+</code></pre>
+<p>Macros can be nested inside the attribute as well, for example to include content generated by a build script:</p>
+<pre><code class="language-rust">#[path = concat!(env!(&quot;OUT_DIR&quot;), &quot;/generated.rs&quot;)]
+mod generated;
+</code></pre>
+<p>Read <a href="https://github.com/rust-lang/rust/pull/83366">here</a> for more details.</p>
+<h3><a href="#wasm32-intrinsics-stabilized" aria-hidden="true" class="anchor" id="wasm32-intrinsics-stabilized"></a>wasm32 intrinsics stabilized</h3>
+<p>A number of intrinsics for the wasm32 platform have been stabilized, which gives access to the SIMD instructions in WebAssembly.</p>
+<p>Notably, unlike the previously stabilized <code>x86</code> and <code>x86_64</code> intrinsics, these do not have a safety requirement to only be called when the appropriate target feature is enabled. This is because WebAssembly was written from the start to validate code safely before executing it, so instructions are guaranteed to be decoded correctly (or not at all).</p>
+<p>This means that we can expose some of the intrinsics as entirely safe functions, for example <a href="https://doc.rust-lang.org/beta/core/arch/wasm32/fn.v128_bitselect.html"><code>v128_bitselect</code></a>. However, there are still some intrinsics which are unsafe because they use raw pointers, such as <a href="https://doc.rust-lang.org/beta/core/arch/wasm32/fn.v128_load.html"><code>v128_load</code></a>.</p>
+<h3><a href="#incremental-compilation-is-re-enabled-by-default" aria-hidden="true" class="anchor" id="incremental-compilation-is-re-enabled-by-default"></a>Incremental Compilation is re-enabled by default</h3>
+<p>Incremental compilation has been re-enabled by default in this release, after it being disabled by default in 1.52.1.</p>
+<p>In Rust 1.52, additional validation was added when loading incremental compilation data from the on-disk cache.
+This resulted in a number of pre-existing potential soundness issues being uncovered as the validation changed these silent bugs into internal compiler errors (ICEs).
+In response, the Compiler Team decided to disable incremental compilation in the 1.52.1 patch, allowing users to avoid encountering the ICEs and the underlying unsoundness, at the expense of longer compile times. <sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup></p>
+<p>Since then, we've conducted a <a href="https://github.com/rust-lang/compiler-team/issues/435">series of retrospectives</a> and contributors have been hard at work resolving the reported issues, with some fixes landing in 1.53 and the majority landing in this release. <sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup></p>
+<p>There are currently still two known issues which can result in an ICE.
+Due to the lack of automated crash reporting, we can't be certain of the full extent of impact of the outstanding issues. However, based on the feedback we received from users affected by the 1.52 release, we believe the remaining issues to be rare in practice.</p>
+<p>Therefore, incremental compilation has been re-enabled in this release!</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<p>The following methods and trait implementations were stabilized.</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/std/collections/struct.BTreeMap.html#method.into_keys"><code>BTreeMap::into_keys</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/collections/struct.BTreeMap.html#method.into_values"><code>BTreeMap::into_values</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.into_keys"><code>HashMap::into_keys</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.into_values"><code>HashMap::into_values</code></a></li>
+<li><a href="https://doc.rust-lang.org/core/arch/wasm32/index.html"><code>arch::wasm32</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.binary_search"><code>VecDeque::binary_search</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.binary_search_by"><code>VecDeque::binary_search_by</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.binary_search_by_key"><code>VecDeque::binary_search_by_key</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.partition_point"><code>VecDeque::partition_point</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.54.0 release:
+check out what changed in <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1540-2021-07-29">Rust</a>, <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-154-2021-07-29">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-154">Clippy</a>.</p>
+<p>rustfmt has also been fixed in the 1.54.0 release to properly format nested
+out-of-line modules. This may cause changes in formatting to files that were
+being ignored by the 1.53.0 rustfmt. See details <a href="https://github.com/rust-lang/rust/pull/86424">here</a>.</p>
+<h3><a href="#contributors-to-1540" aria-hidden="true" class="anchor" id="contributors-to-1540"></a>Contributors to 1.54.0</h3>
+<p>Many people came together to create Rust 1.54.0.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.54.0/">Thanks!</a></p>
+<section class="footnotes">
+<ol>
+<li id="fn1">
+<p>The <a href="https://blog.rust-lang.org/2021/05/10/Rust-1.52.1.html">1.52.1 release notes</a> contain a more detailed description of these events. <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2">
+<p>The tracking issue for the issues is <a href="https://github.com/rust-lang/rust/issues/84970">#84970</a>. <a href="#fnref2" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
