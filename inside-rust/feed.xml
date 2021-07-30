@@ -10,8 +10,29 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-07-29T14:18:33+00:00</updated>
+    <updated>2021-07-30T15:23:59+00:00</updated>
 
+    
+    <entry>
+        <title>Rust Compiler August Steering Cycle</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/07/30/compiler-team-august-steering-cycle.html" type="text/html" title="Rust Compiler August Steering Cycle" />
+        <published>2021-07-30T00:00:00+00:00</published>
+        <updated>2021-07-30T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/07/30/compiler-team-august-steering-cycle.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/07/30/compiler-team-august-steering-cycle.html">&lt;p&gt;n &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/86722planningmeeting20210730.html&quot;&gt;Friday, July 30th&lt;/a&gt;, the Rust Compiler team had a planning meeting for the August steering cycle.&lt;/p&gt;
+&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
+it is going to use its scheduled steering and design meeting time over the next
+three Fridays.&lt;/p&gt;
+&lt;p&gt;On &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/446&quot;&gt;Friday, 20 August&lt;/a&gt;, we will be having a meeting to
+discuss how to increase the number of reviewers available to handle the review queue load.&lt;/p&gt;
+&lt;p&gt;Each meeting will run from 2pm to 3pm GMT, and will take place on the
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Felix Klock</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.54.0 pre-release testing</title>
@@ -466,24 +487,6 @@ do between releasing Rustup and how the Rust release train runs.&lt;/p&gt;
 
         <author>
             <name>Daniel Silverstone</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Congrats to compiler team member Aaron Hill</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/04/26/aaron-hill-compiler-team.html" type="text/html" title="Congrats to compiler team member Aaron Hill" />
-        <published>2021-04-26T00:00:00+00:00</published>
-        <updated>2021-04-26T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/04/26/aaron-hill-compiler-team.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/04/26/aaron-hill-compiler-team.html">&lt;p&gt;I am pleased to announce that &lt;a href&#x3D;&quot;https://github.com/aaron1011&quot;&gt;Aaron Hill&lt;/a&gt; has been made a full member of the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/compiler&quot;&gt;compiler team&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Aaron Hill (&lt;a href&#x3D;&quot;https://github.com/aaron1011&quot;&gt;@Aaron1011&lt;/a&gt;) has been contributing to many different parts of the compiler since his start in 2017.
-Recently, Aaron has been working on finding and fixing bugs and correctness issues in the incremental system, cleanups and improvements to macro expansion and hygiene, as well as miscellaneous bug fixes.
-Beyond the compiler, Aaron has also implemented support for &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/60026&quot;&gt;unwinding in Miri&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/47833&quot;&gt;generating documentation for auto-traits&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/8825&quot;&gt;future incompatibility reporting in Cargo&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Congratulations Aaron and thanks for all of your contributions to the project!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Wesley Wiser</name>
         </author>
     </entry>
     
