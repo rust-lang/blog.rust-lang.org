@@ -20,7 +20,7 @@ trait Foo {
 }
 ```
 
-Now, this may seem seem underwhelming, but I'll go into more detail later as to *why* this really is a powerful feature.
+Now, this may seem underwhelming, but I'll go into more detail later as to *why* this really is a powerful feature.
 
 But for now: what exactly *is* happening? Well, nearly four years after its RFC was merged, the `generic_associated_types` feature is no longer "incomplete."
 
