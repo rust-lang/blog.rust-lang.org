@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-08-03T18:32:30+00:00</updated>
+    <updated>2021-08-03T19:06:15+00:00</updated>
 
     
     <entry>
@@ -28,7 +28,7 @@
     type Bar&amp;lt;&#x27;a&amp;gt;;
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, this may seem seem underwhelming, but I&#x27;ll go into more detail later as to &lt;em&gt;why&lt;/em&gt; this really is a powerful feature.&lt;/p&gt;
+&lt;p&gt;Now, this may seem underwhelming, but I&#x27;ll go into more detail later as to &lt;em&gt;why&lt;/em&gt; this really is a powerful feature.&lt;/p&gt;
 &lt;p&gt;But for now: what exactly &lt;em&gt;is&lt;/em&gt; happening? Well, nearly four years after its RFC was merged, the &lt;code&gt;generic_associated_types&lt;/code&gt; feature is no longer &amp;quot;incomplete.&amp;quot;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;crickets chirping&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Wait...that&#x27;s it?? Well, yes! I&#x27;ll go into a bit of detail later in this blog post as to why this &lt;em&gt;is&lt;/em&gt; a big deal. But, long story short, there have been a good amount of changes that have had to have been made to the compiler to get GATs to work. And, while there are still a few small remaining diagnostics issues, the feature is finally in a space that we feel comfortable making it no longer &amp;quot;incomplete&amp;quot;.&lt;/p&gt;
