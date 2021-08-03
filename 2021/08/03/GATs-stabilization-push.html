@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The push for GATs stabilization | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="The push for GATs stabilization | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="The push for GATs stabilization | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="The push for GATs stabilization" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>The push for GATs stabilization</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 3, 2021 &middot; Jack Huey
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler#wg-traits">the Traits Working Group</a> 
+    </div>
+
+    <div class="post">
+      <h1><a href="#the-push-for-gats-stabilization" aria-hidden="true" class="anchor" id="the-push-for-gats-stabilization"></a>The push for GATs stabilization</h1>
+<p>Where to start, where to start...</p>
+<p>Let's begin by saying: this is a very exciting post. Some people reading this will be overwhelmingly thrilled; some will have no idea what GATs (generic associated types) are; others might be in disbelief. The <a href="https://github.com/rust-lang/rfcs/pull/1598">RFC</a> for this feature did get opened in April of <em>2016</em> (and merged about a year and a half later). In fact, this RFC even predates const generics (which an MVP of was <a href="https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html#const-generics-mvp">recently stabilized</a>). Don't let this fool you though: it is a powerful feature; and the reactions to the tracking issue on Github should maybe give you an idea of its popularity (it is <em>the</em> most upvoted issue on the Rust repository):
+<img src="/images/2021-08-03-GATs-stabilization-push/gats-reactions.png" alt="GATs reactions" /></p>
+<p>If you're not familiar with GATs, they allow you to define type, lifetime, or const generics on associated types. Like so:</p>
+<pre><code class="language-rust">trait Foo {
+    type Bar&lt;'a&gt;;
+}
+</code></pre>
+<p>Now, this may seem seem underwhelming, but I'll go into more detail later as to <em>why</em> this really is a powerful feature.</p>
+<p>But for now: what exactly <em>is</em> happening? Well, nearly four years after its RFC was merged, the <code>generic_associated_types</code> feature is no longer &quot;incomplete.&quot;</p>
+<p><em>crickets chirping</em></p>
+<p>Wait...that's it?? Well, yes! I'll go into a bit of detail later in this blog post as to why this <em>is</em> a big deal. But, long story short, there have been a good amount of changes that have had to have been made to the compiler to get GATs to work. And, while there are still a few small remaining diagnostics issues, the feature is finally in a space that we feel comfortable making it no longer &quot;incomplete&quot;.</p>
+<p>So, what does that mean? Well, all it <em>really</em> means is that when you use this feature on nightly, you'll no longer get the &quot;<code>generic_associated_types</code> is incomplete&quot; warning. However, the real reason this is a big deal: we want to stabilize this feature. But we need your help. We need you to test this feature, to file issues for any bugs you find or for potential diagnostic improvements. Also, we'd love for you to just tell us about some interesting patterns that GATs enable over on <a href="https://rust-lang.zulipchat.com/#narrow/stream/144729-wg-traits">Zulip</a>!</p>
+<p>Without making promises that we aren't 100% sure we can keep, we have high hopes we can stabilize this feature within the next couple months. But, we want to make sure we aren't missing glaringly obvious bugs or flaws. We want this to be a smooth stabilization.</p>
+<p>Okay. Phew. That's the main point of this post and the most exciting news. But as I said before, I think it's also reasonable for me to explain <em>what</em> this feature is, what you can do with it, and some of the background and how we got here.</p>
+<h2><a href="#so-what-are-gats" aria-hidden="true" class="anchor" id="so-what-are-gats"></a>So what are GATs?</h2>
+<p><strong>Note: this will only be a brief overview. The <a href="https://github.com/rust-lang/rfcs/pull/1598">RFC</a> contains many more details.</strong></p>
+<p>GATs (generic associated types) were originally proposed in <a href="https://github.com/rust-lang/rfcs/pull/1598">RFC 1598</a>. As said before, they allow you to define type, lifetime, or const generics on associated types. If you're familiar with languages that have &quot;higher-kinded types&quot;, then you could call GATs <em>type constructors on traits</em>. Perhaps the easiest way for you to get a sense of how you might use GATs is to jump into an example.</p>
+<p>Here is a popular use case: a <code>LendingIterator</code> (formerly known as a <code>StreamingIterator</code>):</p>
+<pre><code class="language-rust">trait LendingIterator {
+    type Item&lt;'a&gt; where Self: 'a;
+
+    fn next&lt;'a&gt;(&amp;'a mut self) -&gt; Option&lt;Self::Item&lt;'a&gt;&gt;;
+}
+</code></pre>
+<p>Let's go through one implementation of this, a hypothetical <code>&lt;[T]&gt;::windows_mut</code>, which allows for iterating through overlapping mutable windows on a slice. If you were to try to implement this with <code>Iterator</code> today like</p>
+<pre><code class="language-rust">struct WindowsMut&lt;'t, T&gt; {
+    slice: &amp;'t mut [T],
+    start: usize,
+    window_size: usize,
+}
+
+impl&lt;'t, T&gt; Iterator for WindowsMut&lt;'t, T&gt; {
+    type Item = &amp;'t mut [T];
+
+    fn next&lt;'a&gt;(&amp;'a mut self) -&gt; Option&lt;Self::Item&gt; {
+        let retval = self.slice[self.start..].get_mut(..self.window_size)?;
+        self.start += 1;
+        Some(retval)
+    }
+}
+</code></pre>
+<p>then you would get an error.</p>
+<pre><code class="language-rust">error[E0495]: cannot infer an appropriate lifetime for lifetime parameter in function call due to conflicting requirements
+  --&gt; src/lib.rs:9:22
+   |
+9  |         let retval = self.slice[self.start..].get_mut(..self.window_size)?;
+   |                      ^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+note: first, the lifetime cannot outlive the lifetime `'a` as defined on the method body at 8:13...
+  --&gt; src/lib.rs:8:13
+   |
+8  |     fn next&lt;'a&gt;(&amp;'a mut self) -&gt; Option&lt;Self::Item&gt; {
+   |             ^^
+note: ...so that reference does not outlive borrowed content
+  --&gt; src/lib.rs:9:22
+   |
+9  |         let retval = self.slice[self.start..].get_mut(..self.window_size)?;
+   |                      ^^^^^^^^^^
+note: but, the lifetime must be valid for the lifetime `'t` as defined on the impl at 6:6...
+  --&gt; src/lib.rs:6:6
+   |
+6  | impl&lt;'t, T: 't&gt; Iterator for WindowsMut&lt;'t, T&gt; {
+   |      ^^
+</code></pre>
+<p>Put succinctly, this error is essentially telling us that in order for us to be able to return a reference to <code>self.slice</code>, it must live as long as <code>'a</code>, which would require a <code>'a: 't</code> bound (which we can't provide). Without this, we could call <code>next</code> while already holding a reference to the slice, creating overlapping mutable references. However, it does compile fine if you were to implement this using the <code>LendingIterator</code> trait from before:</p>
+<pre><code class="language-rust">impl&lt;'t, T&gt; LendingIterator for WindowsMut&lt;'t, T&gt; {
+    type Item&lt;'a&gt; where Self: 'a = &amp;'a mut [T];
+
+    fn next&lt;'a&gt;(&amp;'a mut self) -&gt; Option&lt;Self::Item&lt;'a&gt;&gt; {
+        let retval = self.slice[self.start..].get_mut(..self.window_size)?;
+        self.start += 1;
+        Some(retval)
+    }
+}
+</code></pre>
+<p>As an aside, there's one thing to note about this trait and impl that you might be curious about: the <code>where Self: 'a</code> clause on <code>Item</code>. Briefly, this allows us to use <code>&amp;'a mut [T]</code>; without this where clause, someone could try to return <code>Self::Item&lt;'static&gt;</code> and extend the lifetime of the slice. We understand that this is a point of confusion sometimes and are considering potential alternatives, such as always assuming this bound or implying it based on usage within the trait (see <a href="https://github.com/rust-lang/rust/issues/87479">this issue</a>). We definitely would love to hear about your use cases here, particularly when assuming this bound would be a hindrance.</p>
+<p>As another example, imagine you wanted a struct to be generic over a pointer to a specific type. You might write the following code:</p>
+<pre><code class="language-rust">trait PointerFamily {
+    type Pointer&lt;T&gt;: Deref&lt;Target = T&gt;;
+
+    fn new&lt;T&gt;(value: T) -&gt; Self::Pointer&lt;T&gt;;
+}
+
+struct ArcFamily;
+struct RcFamily;
+
+impl PointerFamily for ArcFamily {
+    type Pointer&lt;T&gt; = Arc&lt;T&gt;;
+    ...
+}
+impl PointerFamily for RcFamily {
+    type Pointer&lt;T&gt; = Rc&lt;T&gt;;
+    ...
+}
+
+struct MyStruct&lt;P: PointerFamily&gt; {
+    pointer: P::Pointer&lt;String&gt;,
+}
+</code></pre>
+<p>We won't go in-depth on the details here, but this example is nice in that it not only highlights the use of types in GATs, but also shows that you can still use the trait bounds that you already can use on associated types.</p>
+<p>These two examples only scratch the surface of the patterns that GATs support. If you find any that seem particularly interesting or clever, we would love to hear about them over on <a href="https://rust-lang.zulipchat.com/#narrow/stream/144729-wg-traits">Zulip</a>!</p>
+<h2><a href="#why-has-it-taken-so-long-to-implement-this" aria-hidden="true" class="anchor" id="why-has-it-taken-so-long-to-implement-this"></a>Why has it taken so long to implement this?</h2>
+<p>So what has caused us to have taken nearly four years to get to the point that we are now? Well, it's hard to put into words how much the existing trait solver has had to change and adapt; but, consider this: for a while, it was thought that to support GATs, we would have to transition rustc to use <a href="https://github.com/rust-lang/chalk">Chalk</a>, a potential future trait solver that uses logical predicates to solve trait goals (though, while some progress has been made, it's still very experimental even now).</p>
+<p>For reference, here are some various implementation additions and changes that have been made that have furthered GAT support in some way or another:</p>
+<ul>
+<li>Parsing GATs in AST (<a href="https://github.com/rust-lang/rust/pull/45904">#45904</a>)</li>
+<li>Resolving lifetimes in GATs (<a href="https://github.com/rust-lang/rust/pull/46706">#46706</a>)</li>
+<li>Initial trait solver work to support lifetimes (<a href="https://github.com/rust-lang/rust/pull/67160">#67160</a>)</li>
+<li>Validating projection bounds (and making changes that allow type and const GATs) (<a href="https://github.com/rust-lang/rust/pull/72788">#72788</a>)</li>
+<li>Separating projection bounds and predicates (<a href="https://github.com/rust-lang/rust/pull/73905">#73905</a>)</li>
+<li>Allowing GATs in trait paths (<a href="https://github.com/rust-lang/rust/pull/79554">#79554</a>)</li>
+<li>Partially replace leak check with universes (<a href="https://github.com/rust-lang/rust/pull/65232">#65232</a>)</li>
+<li>Move leak check to later in trait solving (<a href="https://github.com/rust-lang/rust/pull/72493">#72493</a>)</li>
+<li>Replacing bound vars in GATs with placeholders when projecting (<a href="https://github.com/rust-lang/rust/pull/86993">#86993</a>)</li>
+</ul>
+<p>And to further emphasize the work above: many of these PRs are large and have considerable design work behind them. There are also several smaller PRs along the way. <em>But</em>, we made it. And I just want to congratulate everyone who's put effort into this one way or another. You rock.</p>
+<h2><a href="#what-limitations-are-there-currently" aria-hidden="true" class="anchor" id="what-limitations-are-there-currently"></a>What limitations are there currently?</h2>
+<p>Ok, so now comes the part that nobody likes hearing about: the limitations. Fortunately, in this case, there's really only one GAT limitation: traits with GATs are not object safe. This means you won't be able to do something like</p>
+<pre><code class="language-rust">fn takes_iter(_: &amp;mut dyn for&lt;'a&gt; LendingIterator&lt;Item&lt;'a&gt; = &amp;'a i32&gt;) {}
+</code></pre>
+<p>The biggest reason for this decision is that there's still a bit of design and implementation work to actually make this usable. And while this is a nice feature, adding this in the future would be a backward-compatible change. We feel that it's better to get <em>most</em> of GATs stabilized and then come back and try to tackle this later than to block GATs for even longer. Also, GATs without object safety are still very powerful, so we don't lose much by defering this.</p>
+<p>As was mentioned earlier in this post, there are still a couple remaining diagnostics <a href="https://github.com/rust-lang/rust/labels/F-generic_associated_types">issues</a>. If you do find bugs though, please file issues!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

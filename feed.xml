@@ -10,8 +10,145 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-08-03T13:40:04+00:00</updated>
+    <updated>2021-08-03T18:32:30+00:00</updated>
 
+    
+    <entry>
+        <title>The push for GATs stabilization</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html" type="text/html" title="The push for GATs stabilization" />
+        <published>2021-08-03T00:00:00+00:00</published>
+        <updated>2021-08-03T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html">&lt;h1&gt;&lt;a href&#x3D;&quot;#the-push-for-gats-stabilization&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-push-for-gats-stabilization&quot;&gt;&lt;/a&gt;The push for GATs stabilization&lt;/h1&gt;
+&lt;p&gt;Where to start, where to start...&lt;/p&gt;
+&lt;p&gt;Let&#x27;s begin by saying: this is a very exciting post. Some people reading this will be overwhelmingly thrilled; some will have no idea what GATs (generic associated types) are; others might be in disbelief. The &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/1598&quot;&gt;RFC&lt;/a&gt; for this feature did get opened in April of &lt;em&gt;2016&lt;/em&gt; (and merged about a year and a half later). In fact, this RFC even predates const generics (which an MVP of was &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html#const-generics-mvp&quot;&gt;recently stabilized&lt;/a&gt;). Don&#x27;t let this fool you though: it is a powerful feature; and the reactions to the tracking issue on Github should maybe give you an idea of its popularity (it is &lt;em&gt;the&lt;/em&gt; most upvoted issue on the Rust repository):
+&lt;img src&#x3D;&quot;/images/2021-08-03-GATs-stabilization-push/gats-reactions.png&quot; alt&#x3D;&quot;GATs reactions&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;If you&#x27;re not familiar with GATs, they allow you to define type, lifetime, or const generics on associated types. Like so:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait Foo {
+    type Bar&amp;lt;&#x27;a&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, this may seem seem underwhelming, but I&#x27;ll go into more detail later as to &lt;em&gt;why&lt;/em&gt; this really is a powerful feature.&lt;/p&gt;
+&lt;p&gt;But for now: what exactly &lt;em&gt;is&lt;/em&gt; happening? Well, nearly four years after its RFC was merged, the &lt;code&gt;generic_associated_types&lt;/code&gt; feature is no longer &amp;quot;incomplete.&amp;quot;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;crickets chirping&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Wait...that&#x27;s it?? Well, yes! I&#x27;ll go into a bit of detail later in this blog post as to why this &lt;em&gt;is&lt;/em&gt; a big deal. But, long story short, there have been a good amount of changes that have had to have been made to the compiler to get GATs to work. And, while there are still a few small remaining diagnostics issues, the feature is finally in a space that we feel comfortable making it no longer &amp;quot;incomplete&amp;quot;.&lt;/p&gt;
+&lt;p&gt;So, what does that mean? Well, all it &lt;em&gt;really&lt;/em&gt; means is that when you use this feature on nightly, you&#x27;ll no longer get the &amp;quot;&lt;code&gt;generic_associated_types&lt;/code&gt; is incomplete&amp;quot; warning. However, the real reason this is a big deal: we want to stabilize this feature. But we need your help. We need you to test this feature, to file issues for any bugs you find or for potential diagnostic improvements. Also, we&#x27;d love for you to just tell us about some interesting patterns that GATs enable over on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/144729-wg-traits&quot;&gt;Zulip&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Without making promises that we aren&#x27;t 100% sure we can keep, we have high hopes we can stabilize this feature within the next couple months. But, we want to make sure we aren&#x27;t missing glaringly obvious bugs or flaws. We want this to be a smooth stabilization.&lt;/p&gt;
+&lt;p&gt;Okay. Phew. That&#x27;s the main point of this post and the most exciting news. But as I said before, I think it&#x27;s also reasonable for me to explain &lt;em&gt;what&lt;/em&gt; this feature is, what you can do with it, and some of the background and how we got here.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#so-what-are-gats&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;so-what-are-gats&quot;&gt;&lt;/a&gt;So what are GATs?&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Note: this will only be a brief overview. The &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/1598&quot;&gt;RFC&lt;/a&gt; contains many more details.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;GATs (generic associated types) were originally proposed in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/1598&quot;&gt;RFC 1598&lt;/a&gt;. As said before, they allow you to define type, lifetime, or const generics on associated types. If you&#x27;re familiar with languages that have &amp;quot;higher-kinded types&amp;quot;, then you could call GATs &lt;em&gt;type constructors on traits&lt;/em&gt;. Perhaps the easiest way for you to get a sense of how you might use GATs is to jump into an example.&lt;/p&gt;
+&lt;p&gt;Here is a popular use case: a &lt;code&gt;LendingIterator&lt;/code&gt; (formerly known as a &lt;code&gt;StreamingIterator&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait LendingIterator {
+    type Item&amp;lt;&#x27;a&amp;gt; where Self: &#x27;a;
+
+    fn next&amp;lt;&#x27;a&amp;gt;(&amp;amp;&#x27;a mut self) -&amp;gt; Option&amp;lt;Self::Item&amp;lt;&#x27;a&amp;gt;&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let&#x27;s go through one implementation of this, a hypothetical &lt;code&gt;&amp;lt;[T]&amp;gt;::windows_mut&lt;/code&gt;, which allows for iterating through overlapping mutable windows on a slice. If you were to try to implement this with &lt;code&gt;Iterator&lt;/code&gt; today like&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct WindowsMut&amp;lt;&#x27;t, T&amp;gt; {
+    slice: &amp;amp;&#x27;t mut [T],
+    start: usize,
+    window_size: usize,
+}
+
+impl&amp;lt;&#x27;t, T&amp;gt; Iterator for WindowsMut&amp;lt;&#x27;t, T&amp;gt; {
+    type Item &#x3D; &amp;amp;&#x27;t mut [T];
+
+    fn next&amp;lt;&#x27;a&amp;gt;(&amp;amp;&#x27;a mut self) -&amp;gt; Option&amp;lt;Self::Item&amp;gt; {
+        let retval &#x3D; self.slice[self.start..].get_mut(..self.window_size)?;
+        self.start +&#x3D; 1;
+        Some(retval)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;then you would get an error.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;error[E0495]: cannot infer an appropriate lifetime for lifetime parameter in function call due to conflicting requirements
+  --&amp;gt; src/lib.rs:9:22
+   |
+9  |         let retval &#x3D; self.slice[self.start..].get_mut(..self.window_size)?;
+   |                      ^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+note: first, the lifetime cannot outlive the lifetime &#x60;&#x27;a&#x60; as defined on the method body at 8:13...
+  --&amp;gt; src/lib.rs:8:13
+   |
+8  |     fn next&amp;lt;&#x27;a&amp;gt;(&amp;amp;&#x27;a mut self) -&amp;gt; Option&amp;lt;Self::Item&amp;gt; {
+   |             ^^
+note: ...so that reference does not outlive borrowed content
+  --&amp;gt; src/lib.rs:9:22
+   |
+9  |         let retval &#x3D; self.slice[self.start..].get_mut(..self.window_size)?;
+   |                      ^^^^^^^^^^
+note: but, the lifetime must be valid for the lifetime &#x60;&#x27;t&#x60; as defined on the impl at 6:6...
+  --&amp;gt; src/lib.rs:6:6
+   |
+6  | impl&amp;lt;&#x27;t, T: &#x27;t&amp;gt; Iterator for WindowsMut&amp;lt;&#x27;t, T&amp;gt; {
+   |      ^^
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Put succinctly, this error is essentially telling us that in order for us to be able to return a reference to &lt;code&gt;self.slice&lt;/code&gt;, it must live as long as &lt;code&gt;&#x27;a&lt;/code&gt;, which would require a &lt;code&gt;&#x27;a: &#x27;t&lt;/code&gt; bound (which we can&#x27;t provide). Without this, we could call &lt;code&gt;next&lt;/code&gt; while already holding a reference to the slice, creating overlapping mutable references. However, it does compile fine if you were to implement this using the &lt;code&gt;LendingIterator&lt;/code&gt; trait from before:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;impl&amp;lt;&#x27;t, T&amp;gt; LendingIterator for WindowsMut&amp;lt;&#x27;t, T&amp;gt; {
+    type Item&amp;lt;&#x27;a&amp;gt; where Self: &#x27;a &#x3D; &amp;amp;&#x27;a mut [T];
+
+    fn next&amp;lt;&#x27;a&amp;gt;(&amp;amp;&#x27;a mut self) -&amp;gt; Option&amp;lt;Self::Item&amp;lt;&#x27;a&amp;gt;&amp;gt; {
+        let retval &#x3D; self.slice[self.start..].get_mut(..self.window_size)?;
+        self.start +&#x3D; 1;
+        Some(retval)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As an aside, there&#x27;s one thing to note about this trait and impl that you might be curious about: the &lt;code&gt;where Self: &#x27;a&lt;/code&gt; clause on &lt;code&gt;Item&lt;/code&gt;. Briefly, this allows us to use &lt;code&gt;&amp;amp;&#x27;a mut [T]&lt;/code&gt;; without this where clause, someone could try to return &lt;code&gt;Self::Item&amp;lt;&#x27;static&amp;gt;&lt;/code&gt; and extend the lifetime of the slice. We understand that this is a point of confusion sometimes and are considering potential alternatives, such as always assuming this bound or implying it based on usage within the trait (see &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/87479&quot;&gt;this issue&lt;/a&gt;). We definitely would love to hear about your use cases here, particularly when assuming this bound would be a hindrance.&lt;/p&gt;
+&lt;p&gt;As another example, imagine you wanted a struct to be generic over a pointer to a specific type. You might write the following code:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait PointerFamily {
+    type Pointer&amp;lt;T&amp;gt;: Deref&amp;lt;Target &#x3D; T&amp;gt;;
+
+    fn new&amp;lt;T&amp;gt;(value: T) -&amp;gt; Self::Pointer&amp;lt;T&amp;gt;;
+}
+
+struct ArcFamily;
+struct RcFamily;
+
+impl PointerFamily for ArcFamily {
+    type Pointer&amp;lt;T&amp;gt; &#x3D; Arc&amp;lt;T&amp;gt;;
+    ...
+}
+impl PointerFamily for RcFamily {
+    type Pointer&amp;lt;T&amp;gt; &#x3D; Rc&amp;lt;T&amp;gt;;
+    ...
+}
+
+struct MyStruct&amp;lt;P: PointerFamily&amp;gt; {
+    pointer: P::Pointer&amp;lt;String&amp;gt;,
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We won&#x27;t go in-depth on the details here, but this example is nice in that it not only highlights the use of types in GATs, but also shows that you can still use the trait bounds that you already can use on associated types.&lt;/p&gt;
+&lt;p&gt;These two examples only scratch the surface of the patterns that GATs support. If you find any that seem particularly interesting or clever, we would love to hear about them over on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/144729-wg-traits&quot;&gt;Zulip&lt;/a&gt;!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#why-has-it-taken-so-long-to-implement-this&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;why-has-it-taken-so-long-to-implement-this&quot;&gt;&lt;/a&gt;Why has it taken so long to implement this?&lt;/h2&gt;
+&lt;p&gt;So what has caused us to have taken nearly four years to get to the point that we are now? Well, it&#x27;s hard to put into words how much the existing trait solver has had to change and adapt; but, consider this: for a while, it was thought that to support GATs, we would have to transition rustc to use &lt;a href&#x3D;&quot;https://github.com/rust-lang/chalk&quot;&gt;Chalk&lt;/a&gt;, a potential future trait solver that uses logical predicates to solve trait goals (though, while some progress has been made, it&#x27;s still very experimental even now).&lt;/p&gt;
+&lt;p&gt;For reference, here are some various implementation additions and changes that have been made that have furthered GAT support in some way or another:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Parsing GATs in AST (&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/45904&quot;&gt;#45904&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Resolving lifetimes in GATs (&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/46706&quot;&gt;#46706&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Initial trait solver work to support lifetimes (&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/67160&quot;&gt;#67160&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Validating projection bounds (and making changes that allow type and const GATs) (&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/72788&quot;&gt;#72788&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Separating projection bounds and predicates (&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/73905&quot;&gt;#73905&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Allowing GATs in trait paths (&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/79554&quot;&gt;#79554&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Partially replace leak check with universes (&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/65232&quot;&gt;#65232&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Move leak check to later in trait solving (&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/72493&quot;&gt;#72493&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Replacing bound vars in GATs with placeholders when projecting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/86993&quot;&gt;#86993&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And to further emphasize the work above: many of these PRs are large and have considerable design work behind them. There are also several smaller PRs along the way. &lt;em&gt;But&lt;/em&gt;, we made it. And I just want to congratulate everyone who&#x27;s put effort into this one way or another. You rock.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-limitations-are-there-currently&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-limitations-are-there-currently&quot;&gt;&lt;/a&gt;What limitations are there currently?&lt;/h2&gt;
+&lt;p&gt;Ok, so now comes the part that nobody likes hearing about: the limitations. Fortunately, in this case, there&#x27;s really only one GAT limitation: traits with GATs are not object safe. This means you won&#x27;t be able to do something like&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn takes_iter(_: &amp;amp;mut dyn for&amp;lt;&#x27;a&amp;gt; LendingIterator&amp;lt;Item&amp;lt;&#x27;a&amp;gt; &#x3D; &amp;amp;&#x27;a i32&amp;gt;) {}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The biggest reason for this decision is that there&#x27;s still a bit of design and implementation work to actually make this usable. And while this is a nice feature, adding this in the future would be a backward-compatible change. We feel that it&#x27;s better to get &lt;em&gt;most&lt;/em&gt; of GATs stabilized and then come back and try to tackle this later than to block GATs for even longer. Also, GATs without object safety are still very powerful, so we don&#x27;t lose much by defering this.&lt;/p&gt;
+&lt;p&gt;As was mentioned earlier in this post, there are still a couple remaining diagnostics &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/labels/F-generic_associated_types&quot;&gt;issues&lt;/a&gt;. If you do find bugs though, please file issues!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Jack Huey</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.54.0</title>
@@ -942,67 +1079,6 @@ behavior independent of the order in which they run the two commands.&lt;/p&gt;
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rustup 1.24.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/04/29/Rustup-1.24.1.html" type="text/html" title="Announcing Rustup 1.24.1" />
-        <published>2021-04-29T00:00:00+00:00</published>
-        <updated>2021-04-29T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/04/29/Rustup-1.24.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/04/29/Rustup-1.24.1.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.24.1. &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.24.1 is as easy as closing your IDE and running:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup self update
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup update
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1241&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1241&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.24.1&lt;/h2&gt;
-&lt;p&gt;Firstly, if you have not read the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/04/27/Rustup-1.24.0.html&quot;&gt;previous announcement&lt;/a&gt; then in brief, 1.24
-introduces better support for low memory systems, installs itself into the Add/Remove programs
-list on Windows, and now supports using &lt;code&gt;rust-toolchain.toml&lt;/code&gt; files.&lt;/p&gt;
-&lt;p&gt;Shortly after publishing the 1.24.0 release of Rustup, we got reports of &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/issues/2737&quot;&gt;a regression&lt;/a&gt;
-preventing users from running &lt;code&gt;rustfmt&lt;/code&gt; and &lt;code&gt;cargo fmt&lt;/code&gt; after upgrading to
-Rustup 1.24.0. To limit the damage we &lt;strong&gt;reverted&lt;/strong&gt; the release to version
-1.23.1. The only substantive change between 1.24.0 and 1.24.1 is to correct this regression.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;You can check out all the changes to Rustup for 1.24.0 and 1.24.1 in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/blob/stable/CHANGELOG.md&quot;&gt;changelog&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;Rustup&#x27;s documentation is also available in &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/&quot;&gt;the rustup book&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
-&lt;p&gt;Thanks again to all the contributors who made rustup 1.24.0 and 1.24.1 possible!&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Alex Chan&lt;/li&gt;
-&lt;li&gt;Aloïs Micard&lt;/li&gt;
-&lt;li&gt;Andrew Norton&lt;/li&gt;
-&lt;li&gt;Avery Harnish&lt;/li&gt;
-&lt;li&gt;chansuke&lt;/li&gt;
-&lt;li&gt;Daniel Alley&lt;/li&gt;
-&lt;li&gt;Daniel Silverstone&lt;/li&gt;
-&lt;li&gt;Eduard Miller&lt;/li&gt;
-&lt;li&gt;Eric Huss&lt;/li&gt;
-&lt;li&gt;est31&lt;/li&gt;
-&lt;li&gt;Gareth Hubball&lt;/li&gt;
-&lt;li&gt;Gurkenglas&lt;/li&gt;
-&lt;li&gt;Jakub Stasiak&lt;/li&gt;
-&lt;li&gt;Joshua Nelson&lt;/li&gt;
-&lt;li&gt;Jubilee (workingjubilee)&lt;/li&gt;
-&lt;li&gt;kellda&lt;/li&gt;
-&lt;li&gt;Michael Cooper&lt;/li&gt;
-&lt;li&gt;Philipp Oppermann&lt;/li&gt;
-&lt;li&gt;Robert Collins&lt;/li&gt;
-&lt;li&gt;SHA Miao&lt;/li&gt;
-&lt;li&gt;skim (sl4m)&lt;/li&gt;
-&lt;li&gt;Tudor Brindus&lt;/li&gt;
-&lt;li&gt;Vasili (3point2)&lt;/li&gt;
-&lt;li&gt;наб (nabijaczleweli)&lt;/li&gt;
-&lt;li&gt;二手掉包工程师 (hi-rustin)&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>The Rustup Working Group</name>
         </author>
     </entry>
     
