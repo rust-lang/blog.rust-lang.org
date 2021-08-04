@@ -10,8 +10,46 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-08-03T19:06:18+00:00</updated>
+    <updated>2021-08-04T18:01:26+00:00</updated>
 
+    
+    <entry>
+        <title>Lang team August update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/08/04/lang-team-aug-update.html" type="text/html" title="Lang team August update" />
+        <published>2021-08-04T00:00:00+00:00</published>
+        <updated>2021-08-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/08/04/lang-team-aug-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/08/04/lang-team-aug-update.html">&lt;p&gt;This week the lang team held its August planning meeting. We normally hold
+these meetings on the first Wednesday of every month.&lt;/p&gt;
+&lt;p&gt;We had a short meeting this month, just planning and scheduling the design
+meetings for the remainder of the month.&lt;/p&gt;
+&lt;p&gt;After each meeting, we post an update (like this one!) with notes and meeting announcements.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
+&lt;p&gt;We planned two design meetings for August. Our meetings are open for anyone to join and observe. Ping nikomatsakis or joshtriplett for info about attending.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2021-08-11: No meeting this week&lt;/li&gt;
+&lt;li&gt;2021-08-18: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/94&quot;&gt;Structural equality&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2021-08-25: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/111&quot;&gt;Non-terminal divergence between parser and macro matcher&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#design-meeting-expectations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-meeting-expectations&quot;&gt;&lt;/a&gt;Design meeting expectations&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The document for the meeting must be prepared by the triage meeting on Tuesday and posted to the tracking issue.
+&lt;ul&gt;
+&lt;li&gt;If it is not sent out by then, the meeting will be canceled. This gives folks 24-hour notice.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
+&lt;ul&gt;
+&lt;li&gt;However, there is no rule &lt;strong&gt;against&lt;/strong&gt; reading the document beforehand and providing feedback or advice on how to improve it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Josh Triplett</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Rust Compiler August Steering Cycle</title>
@@ -412,81 +450,6 @@ can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/
 
         <author>
             <name>Pietro Albini</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Rustup 1.24.0 release incident report for 2021-04-27</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/04/28/rustup-1.24.0-incident-report.html" type="text/html" title="Rustup 1.24.0 release incident report for 2021-04-27" />
-        <published>2021-04-28T00:00:00+00:00</published>
-        <updated>2021-04-28T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/04/28/rustup-1.24.0-incident-report.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/04/28/rustup-1.24.0-incident-report.html">&lt;p&gt;On 2021-04-27 at 15:09 UTC we released a new version of Rustup (1.24.0). At
-15:23 UTC we received a report that we had introduced a regression in the part
-of the code which is responsible for proxying the &lt;code&gt;rustfmt&lt;/code&gt; and &lt;code&gt;cargo-fmt&lt;/code&gt;
-portions of Rust toolchains. At 15:27 UTC we had confirmed and identified the
-cause of the problem, and while we worked on a fix, we reverted the released
-Rustup to version 1.23.1 - an action completed by 15:56 UTC.&lt;/p&gt;
-&lt;p&gt;This means that for approximately 47 minutes, CI jobs which used the code
-formatting features of Rust toolchains may have had spurious failures, and users
-who upgraded will have had to revert to 1.23.1. The revert process is designed
-to be as easy as upgrading was, meaning that users should not have had lingering
-issues.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#root-cause-of-the-issue&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;root-cause-of-the-issue&quot;&gt;&lt;/a&gt;Root cause of the issue&lt;/h2&gt;
-&lt;p&gt;In an effort to
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/issues/2286&quot;&gt;reduce confusion when downloaded copies of &lt;code&gt;rustup-init.exe&lt;/code&gt;are renamed&lt;/a&gt;
-we merged a change which causes Rustup to report an error if an unknown name is
-used when invoking the binary.&lt;/p&gt;
-&lt;p&gt;Due to past complexities with &lt;code&gt;rustfmt&lt;/code&gt; and &lt;code&gt;cargo-fmt&lt;/code&gt; being binaries which
-tended to be distributed by &lt;code&gt;cargo install&lt;/code&gt; rather than via
-&lt;code&gt;rustup component add&lt;/code&gt; there is some intricate handling in Rustup&#x27;s proxy
-management for those specific binaries. The fix for the above issue failed to
-include these corner case proxies in the check it undertook to ensure the caller
-hadn&#x27;t used an unexpected binary name.&lt;/p&gt;
-&lt;p&gt;The 1.24.0 release had been staged at this point, however there was a problem
-with the low-memory installation pathways which required a fix, and at the time
-we incorrectly assessed that it was low-impact to rebase the release onto the
-new master branch which had not only the fix for the low-memory installation
-pathway but also the &amp;quot;refuse bad names&amp;quot; change for the above issue.&lt;/p&gt;
-&lt;p&gt;Subsequent testing of the release focussed almost entirely on the installation
-pathways, omitting to validate the proxy name verification code we had also
-acquired into the release. As a result, this regression slipped in.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#resolution&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;resolution&quot;&gt;&lt;/a&gt;Resolution&lt;/h2&gt;
-&lt;p&gt;The author of the validation PR correctly identified it as the root-cause of
-the regression, and the team discussed and decided that it was better to fix
-the problem properly than to simply revert the change out of the release.&lt;/p&gt;
-&lt;p&gt;The release team member who was helping with the release process began the
-revert to Rustup 1.23.1 while the fixes were developed. In addition an issue
-was filed around adding some tests around all the proxies (we currently test a
-subset which we believed to be representative). We subsequently staged a
-proposed 1.24.1 release to Rust&#x27;s development stage and we have issued a &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/seeking-beta-testers-for-rustup-1-24-1/14582&quot;&gt;call
-for beta testers&lt;/a&gt; to confirm that we have not introduced any other
-regressions.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#lessons-learned&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;lessons-learned&quot;&gt;&lt;/a&gt;Lessons learned&lt;/h2&gt;
-&lt;p&gt;The big lesson here is that while we&#x27;ve taken similar notes away from past
-releases of Rustup and other tooling, we&#x27;ve not yet managed to set up a proper
-beta-testing process for Rustup. As such we will be making changes to the
-Rustup release process to codify testing phases with the wider community.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#long-term-changes-to-rustup-releases&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;long-term-changes-to-rustup-releases&quot;&gt;&lt;/a&gt;Long term changes to Rustup releases&lt;/h2&gt;
-&lt;p&gt;In order to try and reduce the chance of this happening again, the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/blob/master/CONTRIBUTING.md#making-a-release&quot;&gt;release
-process&lt;/a&gt; will be updated to include a public beta-testing phase for any non-
-purely-bugfix release and we intend to look into the possibility of a &amp;quot;nightly&amp;quot;
-Rustup release for a &lt;em&gt;small&lt;/em&gt; subset of platforms.&lt;/p&gt;
-&lt;p&gt;Finally we are hoping to work with the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/release&quot;&gt;release team&lt;/a&gt; to do what we can to
-unify the Rustup release process with the well oiled Rust release process
-though, due to the historical differences in how Rustup has been released, this
-will likely be a long term effort.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#action-items&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;action-items&quot;&gt;&lt;/a&gt;Action items&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/issues/2739&quot;&gt;#2739&lt;/a&gt;: Testing for proxying, including TOOLS and DUP_TOOLS&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/issues/2741&quot;&gt;#2741&lt;/a&gt;: Release process should include explicit beta test period&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And as mentioned above, longer term we shall look to see what unification we can
-do between releasing Rustup and how the Rust release train runs.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Daniel Silverstone</name>
         </author>
     </entry>
     
