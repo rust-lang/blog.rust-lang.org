@@ -4,7 +4,7 @@ title: "Introducing Disjoint Capture in Closures"
 author: The RFC 2229 working group <https://www.rust-lang.org/governance/teams/compiler#wg-rfc-2229>
 ---
 
-One of the major features of the [upcoming Rust 2021 Edition](https://blog.rust-lang.org/2021/05/11/edition-2021.html)) is a change to how Rust closures work. This change makes closure captures more precise, eliminating common borrow check errors. As a result, it involves some (minor) changes to Rust semantics, reason why it is tied to the Rust 2021 edition.
+One of the major features of the [upcoming Rust 2021 Edition](https://blog.rust-lang.org/2021/05/11/edition-2021.html)) is a change to how Rust closures work. This change makes closure captures more precise, eliminating common borrow check errors. As a result, it involves some (minor) changes to Rust semantics, which is why it is tied to the Rust 2021 edition.
 
 Like any Edition migration, we have also created lints that will warn you of upcoming changes and suggest precise edits to preserve the semantics of your code. This blog post will explain the new feature and also tell you how you can try it out today on nightly if you like.
 
@@ -55,7 +55,7 @@ The feature also includes (minor) breaking changes to the Rust semantics which a
 
 Interested in testing this out? You can now try disjoint capture in Rust closures on rust nightly using `#![feature(capture_disjoint_fields)]`. 
 
-If you would like to be warned of semantics change that may impact your code, you can follow migration instructions provided in the (2021 Edition Guide)[https://doc.rust-lang.org/nightly/edition-guide/rust-2021/disjoint-capture-in-closures.html#migration]
+If you would like to be warned of semantics change that may impact your code, you can follow migration instructions provided in the [2021 Edition Guide](https://doc.rust-lang.org/nightly/edition-guide/rust-2021/disjoint-capture-in-closures.html#migration).
 
 ## How to submit bugs?
 
