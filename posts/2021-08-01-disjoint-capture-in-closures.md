@@ -33,9 +33,9 @@ For those who would like a quick recap, we recommend reading the [Rust Reference
 
 ## What is disjoint capture?
 
-Disjoint capture is the ability of a closure to capture only part of a variable rather than the variable in its entirety (Rust 2018 behavior). The goal with this feature is to unify the semantics of closure captures with those of borrowing and move operations.
+"Disjoint capture" is the ability of a closure to capture only part of a variable rather than the variable in its entirety (the behavior in Rust 2018). The goal with this feature is to unify the semantics of closure captures with those of borrowing and move operations.
 
-Consider a Point `p` with fields `x` and `y` corresponding to the x and y coordinates of the point.
+Consider a `Point` `p` with fields `x` and `y` corresponding to the x and y coordinates of the point.
 
 ```rust
 let p = Point { x: 10, y: 20 };
@@ -47,9 +47,9 @@ let c = || println!("{}", p.x);
 
 Disjoint capture was proposed as part of [RFC 2229](https://github.com/rust-lang/rfcs/blob/master/text/2229-capture-disjoint-fields.md), and we suggest reading the RFC to better understand motivations behind the feature.
 
-The precise path that gets captured is typically the full path that is used in the closure, but there are cases where we will only capture a prefix of the path. See this pending PR to the [Rust Reference](https://github.com/rust-lang/reference/blob/d24c4642c8efd26915209558e065a5e670363fc0/src/types/closure.md) for the full details.
+The precise path that gets captured is typically the full path that is used in the closure, but there are cases where we will only capture a prefix of the path. See this pending PR to the [Rust Reference](https://github.com/rust-lang/reference/blob/6b88e48ffebc46be91884ef6237accb947e5f6f3/src/types/closure.md) for the full details.
 
-The feature also includes (minor) breaking changes to the Rust semantics which are also documented in this pending PR to the [Rust Reference](https://github.com/rust-lang/reference/blob/d24c4642c8efd26915209558e065a5e670363fc0/src/types/closure.md).
+The feature also includes (minor) breaking changes to the Rust semantics which are also documented in this pending PR to the [Rust Reference](https://github.com/rust-lang/reference/blob/6b88e48ffebc46be91884ef6237accb947e5f6f3/src/types/closure.md).
 
 ## How to use the feature?
 
