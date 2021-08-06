@@ -82,7 +82,7 @@ efficient software.</p>
 from the appropriate page on our website, and check out the
 <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1510-2021-03-25">detailed release notes for 1.51.0</a> on GitHub.</p>
 <h2><a href="#whats-in-1510-stable" aria-hidden="true" class="anchor" id="whats-in-1510-stable"></a>What's in 1.51.0 stable</h2>
-<p>This release represents one of the largest additions to the Rust language and Cargo in quite a while, stabilizing an MVP of const generics and a new feature resolver for Cargo. Let's dive right into it!</p>
+<p>This release represents one of the largest additions to the Rust language and Cargo in quite a while, stabilizing an <a href="https://en.wikipedia.org/wiki/Minimum_viable_product">MVP</a> of const generics and a new feature resolver for Cargo. Let's dive right into it!</p>
 <h3><a href="#const-generics-mvp" aria-hidden="true" class="anchor" id="const-generics-mvp"></a>Const Generics MVP</h3>
 <p>Before this release, Rust allowed you to have your types be parameterized over lifetimes or types. For example if we wanted to have a <code>struct</code> that is generic over the element type of an array, we'd write the following:</p>
 <pre><code class="language-rust">struct FixedArray&lt;T&gt; {
