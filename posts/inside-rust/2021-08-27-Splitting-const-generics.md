@@ -50,7 +50,7 @@ While the issues mentioned above are definitely not trivial, I wouldn't be surpr
 
 ### `feature(generic_const_exprs)`
 
-Without any unstable feature, const arguments must either be a fully concrete expression or a generic parameters by themselves, so constants like `N + 1` are forbidden. With this feature, expressions using generic parameters are possible. 
+Without any unstable feature, const arguments must either be a fully concrete expression or a generic parameter by itself, so constants like `N + 1` are forbidden. With this feature, expressions using generic parameters are possible. 
 
 ```rust
 #![feature(generic_const_exprs)]
