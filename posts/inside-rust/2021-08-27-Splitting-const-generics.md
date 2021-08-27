@@ -101,7 +101,7 @@ stabilization report.
 While it is already possible to use a wildcard `_` for type arguments inside of bodies, this is not the case for const arguments.
 This feature adds this capability for constants.
 
-```rust=
+```rust
 #![feature(generic_arg_infer)]
 fn array_from<T, U, const N: usize>(arr: [T; N]) -> [U; N]
 where
