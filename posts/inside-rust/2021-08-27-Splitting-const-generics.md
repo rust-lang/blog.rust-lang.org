@@ -67,7 +67,10 @@ where
 }
 ```
 
-We currently require the user to add bounds asserting that generic constants evaluate successfully. For all constants visible in the API of an item, these bounds are added implicitly. If the constant expression `expr` would otherwise not be used in the where bounds or function signature, we tend to add a `[u8; expr]: Sized` bound to the `where`-clauses of our item. While it is highly likely that we will add a dedicated syntax for these bounds in the future, we are waiting with this until the rest of this feature is more mature.
+We currently require the user to add bounds asserting that generic constants evaluate successfully. For all constants visible in the API of an item, these bounds are added implicitly. 
+
+If the constant expression `expr` of type `Foo` would otherwise not be used in the `where`-clauses or function signature, we add an otherwise irrelevant bound mentioning `expr` to the `where`-clauses of our item. For this one can define a `struct Evaluatable<const N: Foo>;` and use `Evaluatable<{ expr }>:` as a bound. If `expr` is of type `usize` we tend to use `[u8; expr]:`
+or `[u8; expr]: Sized` for this. While it is highly likely that we will add a dedicated syntax for these bounds in the future, we are waiting with this until the rest of this feature is more mature.
 
 This feature is still far from being stable and has some [**major** unsolved issues](https://github.com/rust-lang/project-const-generics/blob/master/design-docs/anon-const-substs.md). Especially for constants inside of `where`-bounds there are a lot of subtle bugs and backwards incompatibilities we have to fix before we can even think about how to stabilize this.
 
