@@ -69,7 +69,7 @@ where
 
 We currently require the user to add bounds asserting that generic constants evaluate successfully. For all constants visible in the API of an item, these bounds are added implicitly. If the constant expression `expr` would otherwise not be used in the where bounds or function signature, we tend to add a `[u8; expr]: Sized` bound to the `where`-clauses of our item. While it is highly likely that we will add a dedicated syntax for these bounds in the future, we are waiting with this until the rest of this feature is more mature.
 
-This feature is still from being stable and has some [**major** unsolved issues](https://github.com/rust-lang/project-const-generics/blob/master/design-docs/anon-const-substs.md). Especially for constants inside of `where`-bounds there are a lot of subtle bugs and backwards incompatabilities we have to fix before we can even think about how to stabilize this.
+This feature is still far from being stable and has some [**major** unsolved issues](https://github.com/rust-lang/project-const-generics/blob/master/design-docs/anon-const-substs.md). Especially for constants inside of `where`-bounds there are a lot of subtle bugs and backwards incompatibilities we have to fix before we can even think about how to stabilize this.
 
 ### `feature(const_generics_defaults)`
 
