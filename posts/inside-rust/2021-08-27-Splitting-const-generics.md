@@ -11,15 +11,15 @@ work on const generics. Large parts of this work were gated behind the feature g
 `const_generics` feature became fairly useless on its own while the name of
 `const_evaluatable_checked` didn't really capture what this feature was intended to do.
 
-To improve this, we have removed the features `const_generics`, `lazy_normalization_consts`, and `const_evaluatable_checked`. They have been replaced by `feature(const_param_types)` and `feature(generic_const_exprs)`.
+To improve this, we have removed the features `const_generics`, `lazy_normalization_consts`, and `const_evaluatable_checked`. They have been replaced by `feature(adt_const_params)` and `feature(generic_const_exprs)`.
 
 As there is a lot going on with const generics, here's a quick overview of the new - and preexisting - features and how much still needs to be done for them to get stabilized:
 
-### `feature(const_param_types)`
+### `feature(adt_const_params)`
 
 On stable, only integers, `char` and `bool` are allowed as the types of const parameters. This feature allows additional types, such as `&'static str` and user defined types.
 ```rust
-#![feature(const_param_types)]
+#![feature(adt_const_params)]
 
 #[derive(PartialEq, Eq)]
 enum ImageFormat {
