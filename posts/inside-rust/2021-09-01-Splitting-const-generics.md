@@ -48,7 +48,7 @@ The first being the [transition to valtrees](https://github.com/rust-lang/rust/p
 Additionally, we have to figure out which types we *even want* to allow as const parameter types. This ties into the discussion
 about ["structural match"](https://github.com/rust-lang/rust/issues/74446), which is still ongoing.
 
-While the issues mentioned above are definitely not trivial, I wouldn't be surprised to see this ready for stabilization in a few months.
+While the issues mentioned above are definitely not trivial, it is definitely possible for this to be ready for stabilization in a few months.
 
 ### `feature(generic_const_exprs)`
 
