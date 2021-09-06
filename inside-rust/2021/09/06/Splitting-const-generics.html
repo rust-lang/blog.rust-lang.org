@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Splitting the const generics features | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Splitting the const generics features | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Splitting the const generics features | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Splitting the const generics features" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Splitting the const generics features</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 6, 2021 &middot; lcnr
+     on behalf of <a href="https://rust-lang.github.io/project-const-generics/">The Const Generics Project Group</a> 
+    </div>
+
+    <div class="post">
+      <p>After the stabilization of the const generics MVP in version 1.51, the const generics project group has continued to
+work on const generics. Large parts of this work were gated behind the feature gates <code>const_generics</code> and <code>const_evaluatable_checked</code>. As time went on, the
+<code>const_generics</code> feature became fairly useless on its own while the name of
+<code>const_evaluatable_checked</code> didn't really capture what this feature was intended to do.</p>
+<p>To improve this, we have recently removed the features <code>const_generics</code>, <code>lazy_normalization_consts</code>, and <code>const_evaluatable_checked</code>. They have been replaced by <code>feature(adt_const_params)</code> and <code>feature(generic_const_exprs)</code>.</p>
+<p>As there is a lot going on with const generics, here's a quick overview of the new - and preexisting - features and how much still needs to be done for them to get stabilized:</p>
+<h3><a href="#featureadt_const_params" aria-hidden="true" class="anchor" id="featureadt_const_params"></a><code>feature(adt_const_params)</code></h3>
+<p>On stable, only integers, <code>char</code> and <code>bool</code> are allowed as the types of const parameters. This feature allows additional types, such as <code>&amp;'static str</code> and user defined types.</p>
+<pre><code class="language-rust">#![feature(adt_const_params)]
+
+#[derive(PartialEq, Eq)]
+enum ImageFormat {
+    Rgb8,
+    Rgba8,
+    // ...c
+}
+
+struct Image&lt;const FORMAT: ImageFormat&gt; {
+    // ...
+}
+
+impl Image&lt;{ ImageFormat::Rgba }&gt; {
+    fn alpha(&amp;self, pixel: PixelLocation) -&gt; u8 {
+        // ...
+    }
+}
+</code></pre>
+<p>Note that even with this feature, generic const parameter types, such as <code>struct Foo&lt;T, const N: T&gt; { ... }</code>, are forbidden.
+While allowing such things is desired, it adds additional complications exceeding our current capacity.</p>
+<p>There are still two major blockers for stabilization:</p>
+<p>The first being the <a href="https://github.com/rust-lang/rust/pull/83234">transition to valtrees</a>. Valtrees are a representation of values as trees with integer nodes, simplifiying the way we interact with more complex types.</p>
+<p>Additionally, we have to figure out which types we <em>even want</em> to allow as const parameter types. This ties into the discussion
+about <a href="https://github.com/rust-lang/rust/issues/74446">&quot;structural match&quot;</a>, which is still ongoing.</p>
+<p>While the issues mentioned above are definitely not trivial, it is definitely possible for this to be ready for stabilization in a few months.</p>
+<h3><a href="#featuregeneric_const_exprs" aria-hidden="true" class="anchor" id="featuregeneric_const_exprs"></a><code>feature(generic_const_exprs)</code></h3>
+<p>Without any unstable features, const arguments must either be a fully concrete expression or a generic parameter by itself, so constants like <code>N + 1</code> are forbidden. With this feature, expressions using generic parameters are possible.</p>
+<pre><code class="language-rust">#![feature(generic_const_exprs)]
+
+fn split_first&lt;T, const N: usize&gt;(arr: [T; N]) -&gt; (T, [T; N - 1]) {
+    // ...
+}
+
+struct BitSet&lt;const SIZE: usize&gt;
+where
+    [u8; (SIZE + 7) / 8]: Sized,
+{
+    storage: [u8; (SIZE + 7) / 8],
+}
+</code></pre>
+<p>We currently require the user to add bounds asserting that generic constants evaluate successfully. For all constants visible in the API of an item, these bounds are added implicitly.</p>
+<p>If the constant expression <code>expr</code> of type <code>Foo</code> would otherwise not be used in the <code>where</code>-clauses or function signature, we add an otherwise irrelevant bound mentioning <code>expr</code> to the <code>where</code>-clauses of our item. For this one can define a <code>struct Evaluatable&lt;const N: Foo&gt;;</code> and use <code>Evaluatable&lt;{ expr }&gt;:</code> as a bound. If <code>expr</code> is of type <code>usize</code> we tend to use <code>[u8; expr]:</code>
+or <code>[u8; expr]: Sized</code> for this. While it is highly likely that we will add a dedicated syntax for these bounds in the future, we are waiting with this until the rest of this feature is more mature.</p>
+<p>This feature is still far from being stable and has some <a href="https://github.com/rust-lang/project-const-generics/blob/master/design-docs/anon-const-substs.md"><strong>major</strong> unsolved issues</a>. Especially for constants inside of <code>where</code>-bounds there are a lot of subtle bugs and backwards incompatibilities we have to fix before we can even think about how to stabilize this.</p>
+<h3><a href="#featureconst_generics_defaults" aria-hidden="true" class="anchor" id="featureconst_generics_defaults"></a><code>feature(const_generics_defaults)</code></h3>
+<p>Similar to type parameter defaults, this feature adds the ability to declare default values for const parameters.</p>
+<pre><code class="language-rust">#![feature(const_generics_defaults)]
+
+struct ArrayStorage&lt;T, const N: usize = 2&gt; {
+    arr: [T; N],
+}
+
+impl&lt;T&gt; ArrayStorage&lt;T&gt; {
+    fn new(a: T, b: T) -&gt; ArrayStorage&lt;T&gt; {
+        ArrayStorage {
+            arr: [a, b],
+        }
+    }
+}
+</code></pre>
+<p>To allow type parameter defaults in the same listing as const parameters we also intend to remove the ordering restriction for
+type and const parameters, allowing <code>struct Foo&lt;const N: usize, T = [u32; N]&gt; { ... }</code>.</p>
+<p>This feature is pretty much ready for stabilization and is currently blocked on figuring out any potential edge cases for the
+stabilization report.</p>
+<h3><a href="#featuregeneric_arg_infer" aria-hidden="true" class="anchor" id="featuregeneric_arg_infer"></a><code>feature(generic_arg_infer)</code></h3>
+<p>While it is already possible to use a wildcard <code>_</code> for type arguments inside of bodies, this is not the case for const arguments.
+This feature adds this capability for constants.</p>
+<pre><code class="language-rust">#![feature(generic_arg_infer)]
+fn array_from&lt;T, U, const N: usize&gt;(arr: [T; N]) -&gt; [U; N]
+where
+    U: From&lt;T&gt;,
+{
+    arr.map(From::from)
+}
+
+fn main() {
+    let x = [&quot;this&quot;, &quot;is&quot;, &quot;a&quot;, &quot;six&quot;, &quot;element&quot;, &quot;array&quot;];
+    // using `_` for the parameter `N` lets
+    // the compiler infer the correct value
+    let _y = array_from::&lt;_, String, _&gt;(x);
+}
+</code></pre>
+<p>This feature is not yet ready for stabilization, though there aren't any known big blockers here.
+To confidently stabilize this we are probably in need of some large refactorings though, as the current setup
+feels fairly fragile in some areas.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

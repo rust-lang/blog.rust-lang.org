@@ -10,8 +10,115 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-08-06T11:33:16+00:00</updated>
+    <updated>2021-09-06T14:54:51+00:00</updated>
 
+    
+    <entry>
+        <title>Splitting the const generics features</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/09/06/Splitting-const-generics.html" type="text/html" title="Splitting the const generics features" />
+        <published>2021-09-06T00:00:00+00:00</published>
+        <updated>2021-09-06T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/09/06/Splitting-const-generics.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/09/06/Splitting-const-generics.html">&lt;p&gt;After the stabilization of the const generics MVP in version 1.51, the const generics project group has continued to
+work on const generics. Large parts of this work were gated behind the feature gates &lt;code&gt;const_generics&lt;/code&gt; and &lt;code&gt;const_evaluatable_checked&lt;/code&gt;. As time went on, the
+&lt;code&gt;const_generics&lt;/code&gt; feature became fairly useless on its own while the name of
+&lt;code&gt;const_evaluatable_checked&lt;/code&gt; didn&#x27;t really capture what this feature was intended to do.&lt;/p&gt;
+&lt;p&gt;To improve this, we have recently removed the features &lt;code&gt;const_generics&lt;/code&gt;, &lt;code&gt;lazy_normalization_consts&lt;/code&gt;, and &lt;code&gt;const_evaluatable_checked&lt;/code&gt;. They have been replaced by &lt;code&gt;feature(adt_const_params)&lt;/code&gt; and &lt;code&gt;feature(generic_const_exprs)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;As there is a lot going on with const generics, here&#x27;s a quick overview of the new - and preexisting - features and how much still needs to be done for them to get stabilized:&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#featureadt_const_params&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;featureadt_const_params&quot;&gt;&lt;/a&gt;&lt;code&gt;feature(adt_const_params)&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;On stable, only integers, &lt;code&gt;char&lt;/code&gt; and &lt;code&gt;bool&lt;/code&gt; are allowed as the types of const parameters. This feature allows additional types, such as &lt;code&gt;&amp;amp;&#x27;static str&lt;/code&gt; and user defined types.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#![feature(adt_const_params)]
+
+#[derive(PartialEq, Eq)]
+enum ImageFormat {
+    Rgb8,
+    Rgba8,
+    // ...c
+}
+
+struct Image&amp;lt;const FORMAT: ImageFormat&amp;gt; {
+    // ...
+}
+
+impl Image&amp;lt;{ ImageFormat::Rgba }&amp;gt; {
+    fn alpha(&amp;amp;self, pixel: PixelLocation) -&amp;gt; u8 {
+        // ...
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that even with this feature, generic const parameter types, such as &lt;code&gt;struct Foo&amp;lt;T, const N: T&amp;gt; { ... }&lt;/code&gt;, are forbidden.
+While allowing such things is desired, it adds additional complications exceeding our current capacity.&lt;/p&gt;
+&lt;p&gt;There are still two major blockers for stabilization:&lt;/p&gt;
+&lt;p&gt;The first being the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/83234&quot;&gt;transition to valtrees&lt;/a&gt;. Valtrees are a representation of values as trees with integer nodes, simplifiying the way we interact with more complex types.&lt;/p&gt;
+&lt;p&gt;Additionally, we have to figure out which types we &lt;em&gt;even want&lt;/em&gt; to allow as const parameter types. This ties into the discussion
+about &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/74446&quot;&gt;&amp;quot;structural match&amp;quot;&lt;/a&gt;, which is still ongoing.&lt;/p&gt;
+&lt;p&gt;While the issues mentioned above are definitely not trivial, it is definitely possible for this to be ready for stabilization in a few months.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#featuregeneric_const_exprs&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;featuregeneric_const_exprs&quot;&gt;&lt;/a&gt;&lt;code&gt;feature(generic_const_exprs)&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Without any unstable features, const arguments must either be a fully concrete expression or a generic parameter by itself, so constants like &lt;code&gt;N + 1&lt;/code&gt; are forbidden. With this feature, expressions using generic parameters are possible.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#![feature(generic_const_exprs)]
+
+fn split_first&amp;lt;T, const N: usize&amp;gt;(arr: [T; N]) -&amp;gt; (T, [T; N - 1]) {
+    // ...
+}
+
+struct BitSet&amp;lt;const SIZE: usize&amp;gt;
+where
+    [u8; (SIZE + 7) / 8]: Sized,
+{
+    storage: [u8; (SIZE + 7) / 8],
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We currently require the user to add bounds asserting that generic constants evaluate successfully. For all constants visible in the API of an item, these bounds are added implicitly.&lt;/p&gt;
+&lt;p&gt;If the constant expression &lt;code&gt;expr&lt;/code&gt; of type &lt;code&gt;Foo&lt;/code&gt; would otherwise not be used in the &lt;code&gt;where&lt;/code&gt;-clauses or function signature, we add an otherwise irrelevant bound mentioning &lt;code&gt;expr&lt;/code&gt; to the &lt;code&gt;where&lt;/code&gt;-clauses of our item. For this one can define a &lt;code&gt;struct Evaluatable&amp;lt;const N: Foo&amp;gt;;&lt;/code&gt; and use &lt;code&gt;Evaluatable&amp;lt;{ expr }&amp;gt;:&lt;/code&gt; as a bound. If &lt;code&gt;expr&lt;/code&gt; is of type &lt;code&gt;usize&lt;/code&gt; we tend to use &lt;code&gt;[u8; expr]:&lt;/code&gt;
+or &lt;code&gt;[u8; expr]: Sized&lt;/code&gt; for this. While it is highly likely that we will add a dedicated syntax for these bounds in the future, we are waiting with this until the rest of this feature is more mature.&lt;/p&gt;
+&lt;p&gt;This feature is still far from being stable and has some &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-const-generics/blob/master/design-docs/anon-const-substs.md&quot;&gt;&lt;strong&gt;major&lt;/strong&gt; unsolved issues&lt;/a&gt;. Especially for constants inside of &lt;code&gt;where&lt;/code&gt;-bounds there are a lot of subtle bugs and backwards incompatibilities we have to fix before we can even think about how to stabilize this.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#featureconst_generics_defaults&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;featureconst_generics_defaults&quot;&gt;&lt;/a&gt;&lt;code&gt;feature(const_generics_defaults)&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Similar to type parameter defaults, this feature adds the ability to declare default values for const parameters.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#![feature(const_generics_defaults)]
+
+struct ArrayStorage&amp;lt;T, const N: usize &#x3D; 2&amp;gt; {
+    arr: [T; N],
+}
+
+impl&amp;lt;T&amp;gt; ArrayStorage&amp;lt;T&amp;gt; {
+    fn new(a: T, b: T) -&amp;gt; ArrayStorage&amp;lt;T&amp;gt; {
+        ArrayStorage {
+            arr: [a, b],
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To allow type parameter defaults in the same listing as const parameters we also intend to remove the ordering restriction for
+type and const parameters, allowing &lt;code&gt;struct Foo&amp;lt;const N: usize, T &#x3D; [u32; N]&amp;gt; { ... }&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This feature is pretty much ready for stabilization and is currently blocked on figuring out any potential edge cases for the
+stabilization report.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#featuregeneric_arg_infer&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;featuregeneric_arg_infer&quot;&gt;&lt;/a&gt;&lt;code&gt;feature(generic_arg_infer)&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;While it is already possible to use a wildcard &lt;code&gt;_&lt;/code&gt; for type arguments inside of bodies, this is not the case for const arguments.
+This feature adds this capability for constants.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#![feature(generic_arg_infer)]
+fn array_from&amp;lt;T, U, const N: usize&amp;gt;(arr: [T; N]) -&amp;gt; [U; N]
+where
+    U: From&amp;lt;T&amp;gt;,
+{
+    arr.map(From::from)
+}
+
+fn main() {
+    let x &#x3D; [&amp;quot;this&amp;quot;, &amp;quot;is&amp;quot;, &amp;quot;a&amp;quot;, &amp;quot;six&amp;quot;, &amp;quot;element&amp;quot;, &amp;quot;array&amp;quot;];
+    // using &#x60;_&#x60; for the parameter &#x60;N&#x60; lets
+    // the compiler infer the correct value
+    let _y &#x3D; array_from::&amp;lt;_, String, _&amp;gt;(x);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This feature is not yet ready for stabilization, though there aren&#x27;t any known big blockers here.
+To confidently stabilize this we are probably in need of some large refactorings though, as the current setup
+feels fairly fragile in some areas.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>lcnr</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Lang team August update</title>
@@ -430,26 +537,6 @@ Rust project generally. Thank you to the teams for all you&#x27;ve done for Rust
 
         <author>
             <name>Steve Klabnik</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>1.52.0 pre-release testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/05/04/1.52.0-prerelease.html" type="text/html" title="1.52.0 pre-release testing" />
-        <published>2021-05-04T00:00:00+00:00</published>
-        <updated>2021-05-04T00:00:01+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/05/04/1.52.0-prerelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/05/04/1.52.0-prerelease.html">&lt;p&gt;The 1.52.0 pre-release is ready for testing. The release is scheduled for this
-Thursday, May 6th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1520-2021-05-06&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2021-05-04/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2021-05-04/index.html&lt;/a&gt;. You
-can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/1-52-0-prerelease-testing&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Pietro Albini</name>
         </author>
     </entry>
     
