@@ -11,7 +11,7 @@ work on const generics. Large parts of this work were gated behind the feature g
 `const_generics` feature became fairly useless on its own while the name of
 `const_evaluatable_checked` didn't really capture what this feature was intended to do.
 
-To improve this, we have removed the features `const_generics`, `lazy_normalization_consts`, and `const_evaluatable_checked` starting this nightly release. They have been replaced by `feature(adt_const_params)` and `feature(generic_const_exprs)`.
+To improve this, we have recently removed the features `const_generics`, `lazy_normalization_consts`, and `const_evaluatable_checked`. They have been replaced by `feature(adt_const_params)` and `feature(generic_const_exprs)`.
 
 As there is a lot going on with const generics, here's a quick overview of the new - and preexisting - features and how much still needs to be done for them to get stabilized:
 
@@ -123,7 +123,7 @@ fn main() {
 }
 ```
 
-This feature is not yet ready for stabilization, though to my knowledge there aren't any big blockers here.
+This feature is not yet ready for stabilization, though there aren't any known big blockers here.
 To confidently stabilize this we are probably in need of some large refactorings though, as the current setup
 feels fairly fragile in some areas.
 
