@@ -10,8 +10,123 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-09-07T13:41:17+00:00</updated>
+    <updated>2021-09-09T14:21:38+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.55.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/09/09/Rust-1.55.0.html" type="text/html" title="Announcing Rust 1.55.0" />
+        <published>2021-09-09T00:00:00+00:00</published>
+        <updated>2021-09-09T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/09/09/Rust-1.55.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/09/09/Rust-1.55.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.55.0. Rust is a programming language empowering everyone
+to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.55.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
+from the appropriate page on our website, and check out the
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-55-2021-09-09&quot;&gt;detailed release notes for 1.55.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1550-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1550-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.55.0 stable&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#cargo-deduplicates-compiler-errors&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargo-deduplicates-compiler-errors&quot;&gt;&lt;/a&gt;Cargo deduplicates compiler errors&lt;/h3&gt;
+&lt;p&gt;In past releases, when running &lt;code&gt;cargo test&lt;/code&gt;, &lt;code&gt;cargo check --all-targets&lt;/code&gt;, or similar commands which built the same Rust crate in multiple configurations, errors and warnings could show up duplicated as the rustc&#x27;s were run in parallel and both showed the same warning.&lt;/p&gt;
+&lt;p&gt;For example, in 1.54.0, output like this was common:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ cargo +1.54.0 check --all-targets
+    Checking foo v0.1.0
+warning: function is never used: &#x60;foo&#x60;
+ --&amp;gt; src/lib.rs:9:4
+  |
+9 | fn foo() {}
+  |    ^^^
+  |
+  &#x3D; note: &#x60;#[warn(dead_code)]&#x60; on by default
+
+warning: 1 warning emitted
+
+warning: function is never used: &#x60;foo&#x60;
+ --&amp;gt; src/lib.rs:9:4
+  |
+9 | fn foo() {}
+  |    ^^^
+  |
+  &#x3D; note: &#x60;#[warn(dead_code)]&#x60; on by default
+
+warning: 1 warning emitted
+
+    Finished dev [unoptimized + debuginfo] target(s) in 0.10s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In 1.55, this behavior has been adjusted to deduplicate and print a report at the end of compilation:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ cargo +1.55.0 check --all-targets
+    Checking foo v0.1.0
+warning: function is never used: &#x60;foo&#x60;
+ --&amp;gt; src/lib.rs:9:4
+  |
+9 | fn foo() {}
+  |    ^^^
+  |
+  &#x3D; note: &#x60;#[warn(dead_code)]&#x60; on by default
+
+warning: &#x60;foo&#x60; (lib) generated 1 warning
+warning: &#x60;foo&#x60; (lib test) generated 1 warning (1 duplicate)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.84s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#faster-more-correct-float-parsing&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;faster-more-correct-float-parsing&quot;&gt;&lt;/a&gt;Faster, more correct float parsing&lt;/h3&gt;
+&lt;p&gt;The standard library&#x27;s implementation of float parsing has been updated to use the Eisel-Lemire algorithm, which brings both speed improvements and improved correctness. In the past, certain edge cases failed to parse, and this has now been fixed.&lt;/p&gt;
+&lt;p&gt;You can read more details on the new implementation &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/86761&quot;&gt;in the pull request description&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stdioerrorkind-variants-updated&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stdioerrorkind-variants-updated&quot;&gt;&lt;/a&gt;&lt;code&gt;std::io::ErrorKind&lt;/code&gt; variants updated&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html&quot;&gt;&lt;code&gt;std::io::ErrorKind&lt;/code&gt;&lt;/a&gt; is a &lt;a href&#x3D;&quot;https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute&quot;&gt;&lt;code&gt;#[non_exhaustive]&lt;/code&gt;&lt;/a&gt; enum that classifies errors into portable categories, such as &lt;code&gt;NotFound&lt;/code&gt; or &lt;code&gt;WouldBlock&lt;/code&gt;. Rust code that has a &lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/io/struct.Error.html&quot;&gt;&lt;code&gt;std::io::Error&lt;/code&gt;&lt;/a&gt; can call the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/io/struct.Error.html#method.kind&quot;&gt;&lt;code&gt;kind&lt;/code&gt; method&lt;/a&gt; to obtain a &lt;code&gt;std::io::ErrorKind&lt;/code&gt; and match on that to handle a specific error.&lt;/p&gt;
+&lt;p&gt;Not all errors are categorized into &lt;code&gt;ErrorKind&lt;/code&gt; values; some are left uncategorized and placed in a catch-all variant. In previous versions of Rust, uncategorized errors used &lt;code&gt;ErrorKind::Other&lt;/code&gt;; however, user-created &lt;code&gt;std::io::Error&lt;/code&gt; values also commonly used &lt;code&gt;ErrorKind::Other&lt;/code&gt;. In 1.55, uncategorized errors now use the internal variant &lt;code&gt;ErrorKind::Uncategorized&lt;/code&gt;, which we intend to leave hidden and never available for stable Rust code to name explicitly; this leaves &lt;code&gt;ErrorKind::Other&lt;/code&gt; exclusively for constructing &lt;code&gt;std::io::Error&lt;/code&gt; values that don&#x27;t come from the standard library. This enforces the &lt;code&gt;#[non_exhaustive]&lt;/code&gt; nature of &lt;code&gt;ErrorKind&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Rust code should never match &lt;code&gt;ErrorKind::Other&lt;/code&gt; and expect any particular underlying error code; only match &lt;code&gt;ErrorKind::Other&lt;/code&gt; if you&#x27;re catching a constructed &lt;code&gt;std::io::Error&lt;/code&gt; that uses that error kind. Rust code matching on &lt;code&gt;std::io::Error&lt;/code&gt; should always use &lt;code&gt;_&lt;/code&gt; for any error kinds it doesn&#x27;t know about, in which case it can match the underlying error code, or report the error, or bubble it up to calling code.&lt;/p&gt;
+&lt;p&gt;We&#x27;re making this change to smooth the way for introducing new ErrorKind variants in the future; those new variants will start out nightly-only, and only become stable later. This change ensures that code matching variants it doesn&#x27;t know about must use a catch-all &lt;code&gt;_&lt;/code&gt; pattern, which will work both with &lt;code&gt;ErrorKind::Uncategorized&lt;/code&gt; and with future nightly-only variants.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#open-range-patterns-added&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;open-range-patterns-added&quot;&gt;&lt;/a&gt;Open range patterns added&lt;/h3&gt;
+&lt;p&gt;Rust 1.55 stabilized using open ranges in patterns:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;match x as u32 {
+      0 &#x3D;&amp;gt; println!(&amp;quot;zero!&amp;quot;),
+      1.. &#x3D;&amp;gt; println!(&amp;quot;positive number!&amp;quot;),
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Read more details &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/83918&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
+&lt;p&gt;The following methods and trait implementations were stabilized.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ops/enum.Bound.html#method.cloned&quot;&gt;&lt;code&gt;Bound::cloned&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/string/struct.Drain.html#method.as_str&quot;&gt;&lt;code&gt;Drain::as_str&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/io/struct.IntoInnerError.html#method.into_error&quot;&gt;&lt;code&gt;IntoInnerError::into_error&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/io/struct.IntoInnerError.html#method.into_parts&quot;&gt;&lt;code&gt;IntoInnerError::into_parts&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.assume_init_mut&quot;&gt;&lt;code&gt;MaybeUninit::assume_init_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.assume_init_ref&quot;&gt;&lt;code&gt;MaybeUninit::assume_init_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.write&quot;&gt;&lt;code&gt;MaybeUninit::write&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.array.html#method.map&quot;&gt;&lt;code&gt;array::map&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ops/enum.ControlFlow.html&quot;&gt;&lt;code&gt;ops::ControlFlow&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/arch/x86/fn._bittest.html&quot;&gt;&lt;code&gt;x86::_bittest&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/arch/x86/fn._bittestandcomplement.html&quot;&gt;&lt;code&gt;x86::_bittestandcomplement&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/arch/x86/fn._bittestandreset.html&quot;&gt;&lt;code&gt;x86::_bittestandreset&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/arch/x86/fn._bittestandset.html&quot;&gt;&lt;code&gt;x86::_bittestandset&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/arch/x86_64/fn._bittest64.html&quot;&gt;&lt;code&gt;x86_64::_bittest64&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/arch/x86_64/fn._bittestandcomplement64.html&quot;&gt;&lt;code&gt;x86_64::_bittestandcomplement64&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/arch/x86_64/fn._bittestandreset64.html&quot;&gt;&lt;code&gt;x86_64::_bittestandreset64&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/arch/x86_64/fn._bittestandset64.html&quot;&gt;&lt;code&gt;x86_64::_bittestandset64&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following previously stable functions are now &lt;code&gt;const&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/str/fn.from_utf8_unchecked.html&quot;&gt;&lt;code&gt;str::from_utf8_unchecked&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.55.0 release:
+check out what changed in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-55-2021-09-09&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-155-2021-09-09&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-155&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1550&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1550&quot;&gt;&lt;/a&gt;Contributors to 1.55.0&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.55.0.
+We couldn&#x27;t have done it without all of you.
+&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.55.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#dedication&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;dedication&quot;&gt;&lt;/a&gt;Dedication&lt;/h3&gt;
+&lt;p&gt;Anna Harren was a member of the community and contributor to Rust known for coining the term &amp;quot;Turbofish&amp;quot; to describe &lt;code&gt;::&amp;lt;&amp;gt;&lt;/code&gt; syntax. Anna recently passed away after living with cancer. Her contribution will forever be remembered and be part of the language, and we dedicate this release to her memory.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>The push for GATs stabilization</title>
@@ -1019,66 +1134,6 @@ by tracking bugs more accurately as they propagate across channels.&lt;/p&gt;
 
         <author>
             <name>Felix Klock, Mark Rousskov</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.52.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/05/06/Rust-1.52.0.html" type="text/html" title="Announcing Rust 1.52.0" />
-        <published>2021-05-06T00:00:00+00:00</published>
-        <updated>2021-05-06T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/05/06/Rust-1.52.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/05/06/Rust-1.52.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.52.0. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.52.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1520-2021-05-06&quot;&gt;detailed release notes for 1.52.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1520-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1520-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.52.0 stable&lt;/h2&gt;
-&lt;p&gt;The most significant change in this release is not to the language or standard
-libraries, but rather an enhancement to tooling support for Clippy.&lt;/p&gt;
-&lt;p&gt;Previously, running &lt;code&gt;cargo check&lt;/code&gt; followed by &lt;code&gt;cargo clippy&lt;/code&gt; wouldn&#x27;t actually
-run Clippy: the build caching in Cargo didn&#x27;t differentiate between the two. In
-1.52, however, this has been fixed, which means that users will get the expected
-behavior independent of the order in which they run the two commands.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
-&lt;p&gt;The following methods were stabilized.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/fmt/struct.Arguments.html#method.as_str&quot;&gt;&lt;code&gt;Arguments::as_str&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.char.html#associatedconstant.MAX&quot;&gt;&lt;code&gt;char::MAX&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.char.html#associatedconstant.REPLACEMENT_CHARACTER&quot;&gt;&lt;code&gt;char::REPLACEMENT_CHARACTER&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.char.html#associatedconstant.UNICODE_VERSION&quot;&gt;&lt;code&gt;char::UNICODE_VERSION&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.char.html#method.decode_utf16&quot;&gt;&lt;code&gt;char::decode_utf16&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.char.html#method.from_digit&quot;&gt;&lt;code&gt;char::from_digit&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.char.html#method.from_u32_unchecked&quot;&gt;&lt;code&gt;char::from_u32_unchecked&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.char.html#method.from_u32&quot;&gt;&lt;code&gt;char::from_u32&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.partition_point&quot;&gt;&lt;code&gt;slice::partition_point&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.str.html#method.rsplit_once&quot;&gt;&lt;code&gt;str::rsplit_once&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.str.html#method.split_once&quot;&gt;&lt;code&gt;str::split_once&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The following previously stable APIs are now &lt;code&gt;const&lt;/code&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.char.html#method.len_utf8&quot;&gt;&lt;code&gt;char::len_utf8&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.char.html#method.len_utf16&quot;&gt;&lt;code&gt;char::len_utf16&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.char.html#method.to_ascii_uppercase&quot;&gt;&lt;code&gt;char::to_ascii_uppercase&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.char.html#method.to_ascii_lowercase&quot;&gt;&lt;code&gt;char::to_ascii_lowercase&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.char.html#method.eq_ignore_ascii_case&quot;&gt;&lt;code&gt;char::eq_ignore_ascii_case&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u8.html#method.to_ascii_uppercase&quot;&gt;&lt;code&gt;u8::to_ascii_uppercase&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u8.html#method.to_ascii_lowercase&quot;&gt;&lt;code&gt;u8::to_ascii_lowercase&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u8.html#method.eq_ignore_ascii_case&quot;&gt;&lt;code&gt;u8::eq_ignore_ascii_case&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.52.0 release: check out what changed in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1520-2021-05-06&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-152-2021-05-06&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-152&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1520&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1520&quot;&gt;&lt;/a&gt;Contributors to 1.52.0&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.52.0. We couldn&#x27;t have done it without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.52.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     

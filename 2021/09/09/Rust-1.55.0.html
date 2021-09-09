@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.55.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.55.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.55.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.55.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.55.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 9, 2021 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.55.0. Rust is a programming language empowering everyone
+to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust
+1.55.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a>
+from the appropriate page on our website, and check out the
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-55-2021-09-09">detailed release notes for 1.55.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1550-stable" aria-hidden="true" class="anchor" id="whats-in-1550-stable"></a>What's in 1.55.0 stable</h2>
+<h3><a href="#cargo-deduplicates-compiler-errors" aria-hidden="true" class="anchor" id="cargo-deduplicates-compiler-errors"></a>Cargo deduplicates compiler errors</h3>
+<p>In past releases, when running <code>cargo test</code>, <code>cargo check --all-targets</code>, or similar commands which built the same Rust crate in multiple configurations, errors and warnings could show up duplicated as the rustc's were run in parallel and both showed the same warning.</p>
+<p>For example, in 1.54.0, output like this was common:</p>
+<pre><code>$ cargo +1.54.0 check --all-targets
+    Checking foo v0.1.0
+warning: function is never used: `foo`
+ --&gt; src/lib.rs:9:4
+  |
+9 | fn foo() {}
+  |    ^^^
+  |
+  = note: `#[warn(dead_code)]` on by default
+
+warning: 1 warning emitted
+
+warning: function is never used: `foo`
+ --&gt; src/lib.rs:9:4
+  |
+9 | fn foo() {}
+  |    ^^^
+  |
+  = note: `#[warn(dead_code)]` on by default
+
+warning: 1 warning emitted
+
+    Finished dev [unoptimized + debuginfo] target(s) in 0.10s
+</code></pre>
+<p>In 1.55, this behavior has been adjusted to deduplicate and print a report at the end of compilation:</p>
+<pre><code>$ cargo +1.55.0 check --all-targets
+    Checking foo v0.1.0
+warning: function is never used: `foo`
+ --&gt; src/lib.rs:9:4
+  |
+9 | fn foo() {}
+  |    ^^^
+  |
+  = note: `#[warn(dead_code)]` on by default
+
+warning: `foo` (lib) generated 1 warning
+warning: `foo` (lib test) generated 1 warning (1 duplicate)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.84s
+</code></pre>
+<h3><a href="#faster-more-correct-float-parsing" aria-hidden="true" class="anchor" id="faster-more-correct-float-parsing"></a>Faster, more correct float parsing</h3>
+<p>The standard library's implementation of float parsing has been updated to use the Eisel-Lemire algorithm, which brings both speed improvements and improved correctness. In the past, certain edge cases failed to parse, and this has now been fixed.</p>
+<p>You can read more details on the new implementation <a href="https://github.com/rust-lang/rust/pull/86761">in the pull request description</a>.</p>
+<h3><a href="#stdioerrorkind-variants-updated" aria-hidden="true" class="anchor" id="stdioerrorkind-variants-updated"></a><code>std::io::ErrorKind</code> variants updated</h3>
+<p><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html"><code>std::io::ErrorKind</code></a> is a <a href="https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute"><code>#[non_exhaustive]</code></a> enum that classifies errors into portable categories, such as <code>NotFound</code> or <code>WouldBlock</code>. Rust code that has a <a href="https://doc.rust-lang.org/std/io/struct.Error.html"><code>std::io::Error</code></a> can call the <a href="https://doc.rust-lang.org/std/io/struct.Error.html#method.kind"><code>kind</code> method</a> to obtain a <code>std::io::ErrorKind</code> and match on that to handle a specific error.</p>
+<p>Not all errors are categorized into <code>ErrorKind</code> values; some are left uncategorized and placed in a catch-all variant. In previous versions of Rust, uncategorized errors used <code>ErrorKind::Other</code>; however, user-created <code>std::io::Error</code> values also commonly used <code>ErrorKind::Other</code>. In 1.55, uncategorized errors now use the internal variant <code>ErrorKind::Uncategorized</code>, which we intend to leave hidden and never available for stable Rust code to name explicitly; this leaves <code>ErrorKind::Other</code> exclusively for constructing <code>std::io::Error</code> values that don't come from the standard library. This enforces the <code>#[non_exhaustive]</code> nature of <code>ErrorKind</code>.</p>
+<p>Rust code should never match <code>ErrorKind::Other</code> and expect any particular underlying error code; only match <code>ErrorKind::Other</code> if you're catching a constructed <code>std::io::Error</code> that uses that error kind. Rust code matching on <code>std::io::Error</code> should always use <code>_</code> for any error kinds it doesn't know about, in which case it can match the underlying error code, or report the error, or bubble it up to calling code.</p>
+<p>We're making this change to smooth the way for introducing new ErrorKind variants in the future; those new variants will start out nightly-only, and only become stable later. This change ensures that code matching variants it doesn't know about must use a catch-all <code>_</code> pattern, which will work both with <code>ErrorKind::Uncategorized</code> and with future nightly-only variants.</p>
+<h3><a href="#open-range-patterns-added" aria-hidden="true" class="anchor" id="open-range-patterns-added"></a>Open range patterns added</h3>
+<p>Rust 1.55 stabilized using open ranges in patterns:</p>
+<pre><code class="language-rust">match x as u32 {
+      0 =&gt; println!(&quot;zero!&quot;),
+      1.. =&gt; println!(&quot;positive number!&quot;),
+}
+</code></pre>
+<p>Read more details <a href="https://github.com/rust-lang/rust/pull/83918">here</a>.</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<p>The following methods and trait implementations were stabilized.</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/ops/enum.Bound.html#method.cloned"><code>Bound::cloned</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/string/struct.Drain.html#method.as_str"><code>Drain::as_str</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/struct.IntoInnerError.html#method.into_error"><code>IntoInnerError::into_error</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/struct.IntoInnerError.html#method.into_parts"><code>IntoInnerError::into_parts</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.assume_init_mut"><code>MaybeUninit::assume_init_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.assume_init_ref"><code>MaybeUninit::assume_init_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.write"><code>MaybeUninit::write</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.array.html#method.map"><code>array::map</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ops/enum.ControlFlow.html"><code>ops::ControlFlow</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/arch/x86/fn._bittest.html"><code>x86::_bittest</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/arch/x86/fn._bittestandcomplement.html"><code>x86::_bittestandcomplement</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/arch/x86/fn._bittestandreset.html"><code>x86::_bittestandreset</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/arch/x86/fn._bittestandset.html"><code>x86::_bittestandset</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/arch/x86_64/fn._bittest64.html"><code>x86_64::_bittest64</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/arch/x86_64/fn._bittestandcomplement64.html"><code>x86_64::_bittestandcomplement64</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/arch/x86_64/fn._bittestandreset64.html"><code>x86_64::_bittestandreset64</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/arch/x86_64/fn._bittestandset64.html"><code>x86_64::_bittestandset64</code></a></li>
+</ul>
+<p>The following previously stable functions are now <code>const</code>.</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/str/fn.from_utf8_unchecked.html"><code>str::from_utf8_unchecked</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.55.0 release:
+check out what changed in <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-55-2021-09-09">Rust</a>, <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-155-2021-09-09">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-155">Clippy</a>.</p>
+<h3><a href="#contributors-to-1550" aria-hidden="true" class="anchor" id="contributors-to-1550"></a>Contributors to 1.55.0</h3>
+<p>Many people came together to create Rust 1.55.0.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.55.0/">Thanks!</a></p>
+<h3><a href="#dedication" aria-hidden="true" class="anchor" id="dedication"></a>Dedication</h3>
+<p>Anna Harren was a member of the community and contributor to Rust known for coining the term &quot;Turbofish&quot; to describe <code>::&lt;&gt;</code> syntax. Anna recently passed away after living with cancer. Her contribution will forever be remembered and be part of the language, and we dedicate this release to her memory.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
