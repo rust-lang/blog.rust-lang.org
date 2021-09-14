@@ -59,4 +59,4 @@ If you would like to be warned of semantics change that may impact your code, yo
 
 ## How to submit bugs?
 
-To submit a bug simply [open an issue](https://github.com/rust-lang/rust/issues/new/choose) and tag the RFC 2229 working group using `@rust-lang/wg-rfc-2229`. We hope to create the best experince posible so no issue is too small, even a confusing error messages is worth reporting.
+To submit a bug simply [open an issue](https://github.com/rust-lang/rust/issues/new/choose) and tag the RFC 2229 working group using `@rust-lang/wg-rfc-2229`. We hope to create the best experience possible, so no issue is too small, even a confusing error message is worth reporting.
