@@ -79,7 +79,7 @@ diversity we can continue to improve. We see this work as critical to the
 ongoing health of the Rust project and is part of the work that will be
 coordinated between the Rust core team and the Rust Foundation.
 
-[Manish Goregaokar](github.com/Manishearth) is also leaving the team to be able
+[Manish Goregaokar](https://github.com/Manishearth) is also leaving the team to be able
 to focus better on the dev-tools team. Combining team leadership with Core team
 duties is a heavy burden. While Manish has enjoyed his time working on
 project-wide initiatives, this coupling isn’t quite fair to the needs of the
