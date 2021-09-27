@@ -59,7 +59,7 @@ introduction.
   sometime in late 2014 and has been a member of the Rust Community Team since
   2016. That same year he co-founded RustFest, one of the first conferences
   dedicated to Rust. In the following years seven RustFest conferences have
-  brought together hundreds of Rust community members all around Europe, and
+  brought together hundreds of Rust community members all around Europe and
   more recently online.
 * [JT](https://github.com/jntrnr) has 15 years of programming language
   experience. During that time, JT worked at Cray on the Chapel programming
