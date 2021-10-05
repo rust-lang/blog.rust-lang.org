@@ -4,10 +4,9 @@ title: "Introducing Disjoint Capture in Closures"
 author: The RFC 2229 working group <https://www.rust-lang.org/governance/teams/compiler#wg-rfc-2229>
 ---
 
-One of the major features of the [upcoming Rust 2021 Edition](https://blog.rust-lang.org/2021/05/11/edition-2021.html)) is a change to how Rust closures work. This change makes closure captures more precise, eliminating common borrow check errors. As a result, it involves some (minor) changes to Rust semantics, which is why it is tied to the Rust 2021 edition.
+One of the major features of the [Rust 2021 Edition](https://blog.rust-lang.org/2021/05/11/edition-2021.html)) is a change to how Rust closures work. This change makes closure captures more precise, eliminating common borrow check errors. As a result, it involves some (minor) changes to Rust semantics, which is why it is tied to the Rust 2021 edition.
 
-Like any Edition migration, we have also created lints that will warn you of upcoming changes and suggest precise edits to preserve the semantics of your code. This blog post will explain the new feature and also tell you how you can try it out today on nightly if you like.
-
+Like any Edition migration, we have also created lints that will warn you of upcoming changes and suggest precise edits to preserve the semantics of your code. This blog post will explain the new feature and also tell you how you can try it out today if you like.
 
 ## What are closures?
 Closures are anonymous functions you can save in a variable or pass as an argument to other functions. They are referred to as ”lambda functions” in other programming languages.
@@ -53,10 +52,11 @@ The feature also includes (minor) breaking changes to the Rust semantics which a
 
 ## How to use the feature?
 
-Interested in testing this out? You can now try disjoint capture in Rust closures on rust nightly using `#![feature(capture_disjoint_fields)]`. 
+Interested in testing this out? You can now try disjoint capture in Rust closures in Rust Edition 2021. 
 
 If you would like to be warned of semantics change that may impact your code, you can follow migration instructions provided in the [2021 Edition Guide](https://doc.rust-lang.org/nightly/edition-guide/rust-2021/disjoint-capture-in-closures.html#migration).
 
 ## How to submit bugs?
 
-To submit a bug simply [open an issue](https://github.com/rust-lang/rust/issues/new/choose) and tag the RFC 2229 working group using `@rust-lang/wg-rfc-2229`. We hope to create the best experience possible, so no issue is too small, even a confusing error message is worth reporting.
+To submit a bug simply [open an issue](https://github.com/rust-lang/rust/issues/new/choose). We hope to create the best experience possible, so no issue is too small, even a confusing error message is worth reporting.
+
