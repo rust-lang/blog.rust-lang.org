@@ -10,8 +10,109 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-09-27T15:45:56+00:00</updated>
+    <updated>2021-10-08T17:29:56+00:00</updated>
 
+    
+    <entry>
+        <title>Lang team October update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/10/08/Lang-team-Oct-update.html" type="text/html" title="Lang team October update" />
+        <published>2021-10-08T00:00:00+00:00</published>
+        <updated>2021-10-08T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/10/08/Lang-team-Oct-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/10/08/Lang-team-Oct-update.html">&lt;p&gt;This week the lang team held its October planning meeting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-10-06-Planning-meeting.md&quot;&gt;minutes&lt;/a&gt;). We hold these meetings on the first Wednesday of every month.&lt;/p&gt;
+&lt;p&gt;The planning meeting is used for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Checking in on the status of our &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/initiatives.html&quot;&gt;active initiatives&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Planning the design meetings for the remainder of the month&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After each meeting, we post an update (like this one!) with notes and meeting announcements.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#update-from-active-initiatives&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;update-from-active-initiatives&quot;&gt;&lt;/a&gt;Update from active initiatives&lt;/h2&gt;
+&lt;p&gt;What follows are the updates that were submitted this month. Note that many of the more recent initiatives have dedicated repositories which contain other byproducts of the design process (e.g., evaluation documents, open design questions, etc). Take a look!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/async-fundamentals-initiative/updates/2021-oct.html&quot;&gt;Async fundamentals update&lt;/a&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;What is it?&lt;/strong&gt; Async fn in traits, async drop, async closures&lt;/li&gt;
+&lt;li&gt;Have designated an &lt;a href&#x3D;&quot;https://rust-lang.github.io/async-fundamentals-initiative/roadmap/mvp.html&quot;&gt;MVP&lt;/a&gt; version of async functions in traits that we intend to stabilize first, and done a lot of exploration on next steps (read up on that in the ever evolving &lt;a href&#x3D;&quot;https://rust-lang.github.io/async-fundamentals-initiative/evaluation.html&quot;&gt;evaluation doc&lt;/a&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/impl-trait-initiative/updates/2021-oct.html&quot;&gt;Impl trait initiative update&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;What is it?&lt;/strong&gt; &lt;code&gt;type Foo &#x3D; impl Trait&lt;/code&gt; at the module and impl level.&lt;/li&gt;
+&lt;li&gt;oli-obk has completed a rewrite of the inference engine to better match the design proposed the RFC, and it is slowly being merged in&lt;/li&gt;
+&lt;li&gt;We are working on explainer plus stabilization doc to &amp;quot;Type alias impl trait&amp;quot;.&lt;/li&gt;
+&lt;li&gt;We would like to add syntax to give names for function types, which unblocks &amp;quot;impl trait in traits&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/dyn-upcasting-coercion-initiative/updates/2021-oct.html&quot;&gt;Dyn upcasting initiative update&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;What is it?&lt;/strong&gt; Ability to cast &lt;code&gt;dyn Foo&lt;/code&gt; to &lt;code&gt;dyn Bar&lt;/code&gt; if &lt;code&gt;trait Foo: Bar&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Made good progress, need to resolve a soundness question and then ready to merge.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/generic-associated-types-initiative/updates/2021-oct.html&quot;&gt;Generic associated type initiative update&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;What is it?&lt;/strong&gt; Ability to have associated types with generic parameters, such as &lt;code&gt;type Foo&amp;lt;&#x27;me&amp;gt;&lt;/code&gt;, in traits.&lt;/li&gt;
+&lt;li&gt;Resolved the question of where clause defaults by deciding on a conservative, if not maximally ergonomic, path.&lt;/li&gt;
+&lt;li&gt;Making continued progress towards something we can stabilize. The intent is to start with some known ergonomic shortcomings and build from there.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/87335#issuecomment-933672440&quot;&gt;Let else update&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;What is it?&lt;/strong&gt; Generalization of &lt;code&gt;let&lt;/code&gt; to permit you to match against something and panic, return, etc when match fails:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;let Ok(x) &#x3D; something else panic!()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Implementation available on nightly, may be feature complete&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/88#issuecomment-935056996&quot;&gt;Deref patterns update&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;What is it?&lt;/strong&gt; Applying Deref impls in the context of a match, such as &lt;code&gt;match rc { Some(x) &#x3D;&amp;gt; ..., None &#x3D;&amp;gt; ... }&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Decided to build prototype that does not have any explicit syntax for deref and works against &amp;quot;known safe&amp;quot; std types.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/60#issuecomment-935233842&quot;&gt;Never type stabilization update&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;What is it?&lt;/strong&gt; The never type &lt;code&gt;!&lt;/code&gt;&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;li&gt;We have landed an improved, if complex, analysis that allows us to choose between the current behavior (fallback to &lt;code&gt;()&lt;/code&gt;) and the new behavior (fallback to &lt;code&gt;!&lt;/code&gt;) without breaking important existing code. The hope is to proceed with stabilization and slowly improve and simplify the rules using warnings, editions, or other tools.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In addition to the reports above, you&#x27;ll find more detailed discussing in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2021-10-06-Planning-meeting.md&quot;&gt;minutes&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
+&lt;p&gt;We have planned the following design meetings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;October 13: Syntax for where clauses in GATs and type aliases (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/120&quot;&gt;lang-team#120&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;October 20: Safety considerations for dyn upcasting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/119&quot;&gt;lang-team#119&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;October 27: Forbidding unwinding from drop impls (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/97&quot;&gt;lang-team#97&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#design-meeting-expectations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-meeting-expectations&quot;&gt;&lt;/a&gt;Design meeting expectations&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The document for the meeting must be prepared by the triage meeting on Tuesday and posted to the tracking issue.
+&lt;ul&gt;
+&lt;li&gt;If it is not sent out by then, the meeting will be canceled. This gives folks 24 hour notice.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
+&lt;ul&gt;
+&lt;li&gt;However, there is no rule &lt;strong&gt;against&lt;/strong&gt; reading the document beforehand and providing feedback or advice on how to improve it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn1&quot;&gt;
+&lt;p&gt;The never type is called never because it will &lt;em&gt;never&lt;/em&gt; be stabilized. Ha! I kill me. --nikomatsakis &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.55.0 pre-release testing</title>
@@ -461,26 +562,6 @@ Recently, Léo has been &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/
 
         <author>
             <name>Wesley Wiser</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>1.53.0 pre-release testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/06/15/1.53.0-prelease.html" type="text/html" title="1.53.0 pre-release testing" />
-        <published>2021-06-15T00:00:00+00:00</published>
-        <updated>2021-06-15T00:00:01+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/06/15/1.53.0-prelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/06/15/1.53.0-prelease.html">&lt;p&gt;The 1.53.0 pre-release is ready for testing. The release is scheduled for this
-Thursday, June 17th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1530-2021-06-17&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2021-06-15/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2021-06-15/index.html&lt;/a&gt;. You
-can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/1-53-0-prerelease-testing/14884&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Mark Rousskov</name>
         </author>
     </entry>
     
