@@ -25,7 +25,7 @@ What follows are the updates that were submitted this month. Note that many of t
 
 * [Async fundamentals update](https://rust-lang.github.io/async-fundamentals-initiative/updates/2021-oct.html):
     * **What is it?** Async fn in traits, async drop, async closures
-    * Have designated an [MVP](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/mvp.html) version of async function sin traits that we intend to stabilize first, and done a lot of exploration on next steps (read up on that in the ever evolving [evaluation doc](https://rust-lang.github.io/async-fundamentals-initiative/evaluation.html)).
+    * Have designated an [MVP](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/mvp.html) version of async functions in traits that we intend to stabilize first, and done a lot of exploration on next steps (read up on that in the ever evolving [evaluation doc](https://rust-lang.github.io/async-fundamentals-initiative/evaluation.html)).
 * [Impl trait initiative update](https://rust-lang.github.io/impl-trait-initiative/updates/2021-oct.html)
     * **What is it?** `type Foo = impl Trait` at the module and impl level.
     * oli-obk has completed a rewrite of the inference engine to better match the design proposed the RFC, and it is slowly being merged in
