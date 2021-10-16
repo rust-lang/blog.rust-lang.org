@@ -90,7 +90,7 @@ In total, **1 in 4** people commented on the learning curve when talking about R
 
 > "Steep learning curve at the beginning"
 
-The proverbial gauntlet has been thrown.  For Rust to do well, it will need to retain the power it has while also improving the experience of learning the language and mastering its ownership system.  There are a few early initiatives here, including a [new Rust book](http://rust-lang.github.io/book/), an [upcoming O'Reilly book](http://shop.oreilly.com/product/0636920040385.do), improvements to [Rust error messages](https://github.com/jonathandturner/rfcs/blob/master/text/0000-default-and-expanded-rustc-errors.md), as well as improvements to the borrow checker to [give fewer false warnings](http://smallcultfollowing.com/babysteps/blog/2016/05/04/non-lexical-lifetimes-based-on-liveness/). We expect learning curve and developer productivity to be an area of sustained focus.
+The proverbial gauntlet has been thrown.  For Rust to do well, it will need to retain the power it has while also improving the experience of learning the language and mastering its ownership system.  There are a few early initiatives here, including a [new Rust book](https://rust-lang.github.io/book/), an [upcoming O'Reilly book](https://shop.oreilly.com/product/0636920040385.do), improvements to [Rust error messages](https://github.com/jonathandturner/rfcs/blob/master/text/0000-default-and-expanded-rustc-errors.md), as well as improvements to the borrow checker to [give fewer false warnings](https://smallcultfollowing.com/babysteps/blog/2016/05/04/non-lexical-lifetimes-based-on-liveness/). We expect learning curve and developer productivity to be an area of sustained focus.
 
 # Immaturity of the Language and Libraries
 
@@ -124,7 +124,7 @@ Investing in IDE support not only helps new users but also helps enable teams mo
 
 Other languages have had years to build up their tooling muscle, and for Rust to stand on even footing, we'll also have to build up our own muscle.  There are some early experiments here, namely [Racer](https://github.com/phildawes/racer) and [rustw](https://github.com/nrc/rustw), as well as a [number of IDE plugins](https://areweideyet.com/).
 
-We've also been investing in other tooling muscles, including a [new installer with cross-compilation support](http://blog.rust-lang.org/2016/05/13/rustup.html).  These are just the first steps, and we'll be exploring more ideas in further blog posts.
+We've also been investing in other tooling muscles, including a [new installer with cross-compilation support](https://blog.rust-lang.org/2016/05/13/rustup.html).  These are just the first steps, and we'll be exploring more ideas in further blog posts.
 
 ## Survey Demographics
 

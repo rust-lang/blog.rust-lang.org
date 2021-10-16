@@ -11,7 +11,7 @@ announced.
 
 ### Sept 9-10: RustConf
 
-[RustConf](http://rustconf.com/) is a two-day event held in **Portland, OR,
+[RustConf](https://rustconf.com/) is a two-day event held in **Portland, OR,
 USA** on September 9-10. The first day offers tutorials on Rust given directly
 by members of the Rust core team, ranging from absolute basics to advanced
 ownership techniques. The second day is the main event, with talks at every
@@ -26,7 +26,7 @@ Follow us on Twitter [@rustconf](https://twitter.com/rustconf).
 
 ### Sept 17-18: Rust Fest
 
-Join us at [RustFest](http://www.rustfest.eu/), Europe's first conference
+Join us at [RustFest](https://www.rustfest.eu/), Europe's first conference
 dedicated to the Rust programming language. Over the weekend 17-18th September
 we'll gather in **Berlin** to talk Rust, its ecosystem and community. All day
 Saturday will have talks with topics ranging from hardware and testing over
@@ -38,13 +38,13 @@ meet-n-greet-n-hack area provided.
 Thanks to the many awesome sponsors, we are able to offer affordable tickets to
 go on sale this week, with an optional combo—including both
 [Viewsource](https://viewsourceconf.org/berlin-2016/) and RustFest. Keep an eye
-on http://www.rustfest.eu/, get all the updates on the
-[blog](http://www.rustfest.eu/blog/) and don't forget to follow us on Twitter
+on https://www.rustfest.eu/, get all the updates on the
+[blog](https://www.rustfest.eu/blog/) and don't forget to follow us on Twitter
 [@rustfest](https://twitter.com/rustfest)
 
 ### Oct 27-28: Rust Belt Rust
 
-[Rust Belt Rust](http://www.rust-belt-rust.com/) is a two-day conference in
+[Rust Belt Rust](https://www.rust-belt-rust.com/) is a two-day conference in
 **Pittsburgh, PA, USA** on October 27 and 28, 2016, and people with any level of
 Rust experience are encouraged to attend. The first day of the conference has a
 wide variety of interactive workshops to choose from, covering topics like an

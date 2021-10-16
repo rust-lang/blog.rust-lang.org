@@ -701,8 +701,8 @@ the [user group]).
 and Niko Matsakis, as well as
 `Mutabah`, `proc`, `libfud`, `asQuirrel`, and `annodomini` from `#rust`.)
 
-[structured data]: http://en.wikipedia.org/wiki/Record_%28computer_science%29
-[Algebraic data types]: http://en.wikipedia.org/wiki/Algebraic_data_type
+[structured data]: https://en.wikipedia.org/wiki/Record_%28computer_science%29
+[Algebraic data types]: https://en.wikipedia.org/wiki/Algebraic_data_type
 [rust_docs]: https://doc.rust-lang.org/
-[user group]: http://users.rust-lang.org/
+[user group]: https://users.rust-lang.org/
 [L_value]: https://doc.rust-lang.org/reference.html#lvalues,-rvalues-and-temporaries

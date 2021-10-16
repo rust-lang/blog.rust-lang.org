@@ -17,8 +17,8 @@ We understand that not everyone wishes to switch to Discord for many reasons. Fo
 There are still a couple months before irc.mozilla.org shuts down — we’ll work at making this transition as smooth as possible in this time. Thanks to everyone who made #rust and #rust-beginners on Mozilla IRC a great place to hang out! We are sad to see it go. 😢
 
 
- [mhoye-post]: http://exple.tive.org/blarg/2019/04/26/synchronous-text/
+ [mhoye-post]: https://exple.tive.org/blarg/2019/04/26/synchronous-text/
  [new-platforms]: https://internals.rust-lang.org/t/exploring-new-communication-channels/7859
- [discord]: http://discord.gg/rust-lang
- [freenode]: http://webchat.freenode.net/?channels=##rust
+ [discord]: https://discord.gg/rust-lang
+ [freenode]: https://webchat.freenode.net/?channels=##rust
  [freenode-rules]: https://freenode.net/policies#off-topic-use

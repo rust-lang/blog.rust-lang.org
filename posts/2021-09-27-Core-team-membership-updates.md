@@ -46,7 +46,7 @@ Jan-Erik Rediger, and JT are joining the Core team. To give some context on
 their backgrounds and experiences, each new member has written up a brief
 introduction.
 
-* [Ryan Levick](http://github.com/rylev) began exploring Rust in 2014 always
+* [Ryan Levick](https://github.com/rylev) began exploring Rust in 2014 always
   looking for more and more ways to be involved in the community. Over time he
   participated more by co-organizing the Berlin Rust meetup, doing YouTube
   tutorials, helping with various project efforts, and more. In 2019, Ryan got
