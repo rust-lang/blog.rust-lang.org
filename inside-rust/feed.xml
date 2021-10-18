@@ -10,8 +10,28 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-10-08T17:29:56+00:00</updated>
+    <updated>2021-10-18T15:36:33+00:00</updated>
 
+    
+    <entry>
+        <title>1.56.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/10/18/1.56.0-prerelease.html" type="text/html" title="1.56.0 pre-release testing" />
+        <published>2021-10-18T00:00:00+00:00</published>
+        <updated>2021-10-18T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/10/18/1.56.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/10/18/1.56.0-prerelease.html">&lt;p&gt;The 1.56.0 pre-release is ready for testing. The release is scheduled for this
+Thursday, October 21th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1560-2021-10-21&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2021-10-18/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2021-10-18/index.html&lt;/a&gt;. You
+can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-56-0-pre-release-testing/15459&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Pietro Albini</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Lang team October update</title>
@@ -541,27 +561,6 @@ its original date that had been discussed in the planning meeting.)&lt;/p&gt;
 
         <author>
             <name>Felix Klock</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Please welcome Boxy, Léo Lanteri Thauvin and the8472 to compiler-contributors</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/06/15/boxyuwu-leseulartichaut-the8472-compiler-contributors.html" type="text/html" title="Please welcome Boxy, Léo Lanteri Thauvin and the8472 to compiler-contributors" />
-        <published>2021-06-15T00:00:00+00:00</published>
-        <updated>2021-06-15T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/06/15/boxyuwu-leseulartichaut-the8472-compiler-contributors.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/06/15/boxyuwu-leseulartichaut-the8472-compiler-contributors.html">&lt;p&gt;Please welcome &lt;a href&#x3D;&quot;https://github.com/BoxyUwU&quot;&gt;Boxy&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/LeSeulArtichaut&quot;&gt;Léo Lanteri Thauvin&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/the8472&quot;&gt;the8472&lt;/a&gt; to the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2689-compiler-team-contributors.html&quot;&gt;compiler-contributors&lt;/a&gt; group!&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/BoxyUwU&quot;&gt;Boxy&lt;/a&gt; has been working on pushing const generics forward by &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/81577&quot;&gt;implementing parts&lt;/a&gt; of the &lt;code&gt;const_evaluatable_checked&lt;/code&gt; feature, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/82067&quot;&gt;fixing bugs&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/85957&quot;&gt;making rustdoc work with const generics&lt;/a&gt;.
-Boxy is also a frequent contributor to &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/260443-project-const-generics&quot;&gt;#project-const-generics&lt;/a&gt; discussions and meetings.&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/LeSeulArtichaut&quot;&gt;Léo Lanteri Thauvin&lt;/a&gt; has been a consistent contributor of &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/78182&quot;&gt;refactorings and improvements&lt;/a&gt; to rustc.
-Recently, Léo has been &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/83129&quot;&gt;implementing&lt;/a&gt; a &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/402&quot;&gt;Major Change Proposal&lt;/a&gt; to migrate the &lt;code&gt;unsafe&lt;/code&gt; checker to operate on THIR instead of MIR.&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/the8472&quot;&gt;the8472&lt;/a&gt; has been a frequent contributor of performance improvements to both the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/84965&quot;&gt;compiler itself&lt;/a&gt; as well as the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/83245&quot;&gt;standard library&lt;/a&gt;.
-&lt;a href&#x3D;&quot;https://github.com/the8472&quot;&gt;the8472&lt;/a&gt; can also be frequently found on Zulip offering advice and help.&lt;/p&gt;
-&lt;p&gt;Congratulations &lt;a href&#x3D;&quot;https://github.com/BoxyUwU&quot;&gt;Boxy&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/LeSeulArtichaut&quot;&gt;Léo Lanteri Thauvin&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/the8472&quot;&gt;the8472&lt;/a&gt; and thanks!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Wesley Wiser</name>
         </author>
     </entry>
     
