@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.56.0 and Rust 2021 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.56.0 and Rust 2021 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.56.0 and Rust 2021 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.56.0 and Rust 2021" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.56.0 and Rust 2021</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 21, 2021 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.56.0. This stabilizes the 2021 edition as well.
+Rust is a programming language empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust 1.56.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a>
+from the appropriate page on our website, and check out the
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1560-2021-10-21">detailed release notes for 1.56.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1560-stable" aria-hidden="true" class="anchor" id="whats-in-1560-stable"></a>What's in 1.56.0 stable</h2>
+<h3><a href="#rust-2021" aria-hidden="true" class="anchor" id="rust-2021"></a>Rust 2021</h3>
+<p>We wrote about plans for the Rust 2021 Edition <a href="https://blog.rust-lang.org/2021/05/11/edition-2021.html">in May</a>.
+Editions are a mechanism for opt-in changes that may otherwise pose backwards compatibility risk. See <a href="https://doc.rust-lang.org/stable/edition-guide/editions/index.html">the edition guide</a> for details on how this is achieved.
+This a smaller edition, especially compared to 2018, but there
+are still some nice quality-of-life changes that require an edition opt-in to
+avoid breaking some corner cases in existing code. See the new chapters of the
+edition guide below for more details on each new feature and guidance for
+migration.</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2021/disjoint-capture-in-closures.html">Disjoint capture</a>: closures now capture individual named fields rather than always capturing whole identifiers.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2021/IntoIterator-for-arrays.html"><code>IntoIterator</code> for arrays</a>: <code>array.into_iter()</code> now iterates over items by value instead of by reference.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2021/or-patterns-macro-rules.html">Or patterns in macro-rules</a> now match top-level <code>A|B</code> in <code>:pat</code>.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2021/default-cargo-resolver.html">Default Cargo feature resolver</a> is now version 2.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2021/prelude.html">Additions to the prelude</a>: <code>TryInto</code>, <code>TryFrom</code>, and <code>FromIterator</code> are now in scope by default.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2021/panic-macro-consistency.html">Panic macros</a> now always expect format strings, just like <code>println!()</code>.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2021/reserving-syntax.html">Reserving syntax</a> for <code>ident#</code>, <code>ident&quot;...&quot;</code>, and <code>ident'...'</code>.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html">Warnings promoted to errors</a>: <code>bare_trait_objects</code> and <code>ellipsis_inclusive_range_patterns</code>.</li>
+</ul>
+<h4><a href="#disjoint-capture-in-closures" aria-hidden="true" class="anchor" id="disjoint-capture-in-closures"></a>Disjoint capture in closures</h4>
+<p>Closures automatically capture values or references to identifiers that are
+used in the body, but before 2021, they were always captured as a whole. The new
+disjoint-capture feature will likely simplify the way you write closures, so
+let's look at a quick example:</p>
+<pre><code class="language-rust">// 2015 or 2018 edition code
+let a = SomeStruct::new();
+
+// Move out of one field of the struct
+drop(a.x);
+
+// Ok: Still use another field of the struct
+println!(&quot;{}&quot;, a.y);
+
+// Error: Before 2021 edition, tries to capture all of `a`
+let c = || println!(&quot;{}&quot;, a.y);
+c();
+</code></pre>
+<p>To fix this, you would have had to extract something like <code>let y = &amp;a.y;</code>
+manually before the closure to limit its capture. Starting in Rust 2021,
+closures will automatically capture only the fields that they use, so the
+above example will compile fine!</p>
+<p>This new behavior is only activated in the new edition, since it can change
+the order in which fields are dropped. As for all edition changes, an
+automatic migration is available, which will update your closures for which
+this matters by inserting <code>let _ = &amp;a;</code> inside the closure to force the
+entire struct to be captured as before.</p>
+<h4><a href="#migrating-to-2021" aria-hidden="true" class="anchor" id="migrating-to-2021"></a>Migrating to 2021</h4>
+<p>The guide includes migration instructions for all new features, and in general
+<a href="https://doc.rust-lang.org/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html">transitioning an existing project to a new edition</a>.
+In many cases <code>cargo fix</code> can automate the necessary changes. You may even
+find that no changes in your code are needed at all for 2021!</p>
+<p>However small this edition appears on the surface, it's still the product
+of a lot of hard work from many contributors: see our dedicated
+<a href="https://github.com/rust-lang/rust/issues/88623">celebration and thanks</a> tracker!</p>
+<h3><a href="#cargo-rust-version" aria-hidden="true" class="anchor" id="cargo-rust-version"></a>Cargo <code>rust-version</code></h3>
+<p><code>Cargo.toml</code> now supports a <code>[package]</code> <a href="https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field"><code>rust-version</code></a> field to specify
+the minimum supported Rust version for a crate, and Cargo will exit with an
+early error if that is not satisfied. This doesn't currently influence the
+dependency resolver, but the idea is to catch compatibility problems before
+they turn into cryptic compiler errors.</p>
+<h3><a href="#new-bindings-in-binding--pattern" aria-hidden="true" class="anchor" id="new-bindings-in-binding--pattern"></a>New bindings in <code>binding @ pattern</code></h3>
+<p>Rust pattern matching can be written with a single identifier that binds
+the entire value, followed by <code>@</code> and a more refined structural pattern,
+but this has not allowed additional bindings in that pattern -- until now!</p>
+<pre><code class="language-rust">struct Matrix {
+    data: Vec&lt;f64&gt;,
+    row_len: usize,
+}
+
+// Before, we need separate statements to bind
+// the whole struct and also read its parts.
+let matrix = get_matrix();
+let row_len = matrix.row_len;
+// or with a destructuring pattern:
+let Matrix { row_len, .. } = matrix;
+
+// Rust 1.56 now lets you bind both at once!
+let matrix @ Matrix { row_len, .. } = get_matrix();
+</code></pre>
+<p>This actually was allowed in the days before Rust 1.0, but that was removed
+due to known <a href="https://github.com/rust-lang/rust/pull/16053">unsoundness</a> at
+the time. With the evolution of the borrow checker since that time, and with
+heavy testing, the compiler team determined that this was safe to finally
+allow in stable Rust!</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<p>The following methods and trait implementations were stabilized.</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/os/unix/fs/fn.chroot.html"><code>std::os::unix::fs::chroot</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/cell/struct.UnsafeCell.html#method.raw_get"><code>UnsafeCell::raw_get</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/struct.BufWriter.html#method.into_parts"><code>BufWriter::into_parts</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/84662"><code>core::panic::{UnwindSafe, RefUnwindSafe, AssertUnwindSafe}</code></a><br />
+(previously only in <code>std</code>)</li>
+<li><a href="https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.shrink_to"><code>Vec::shrink_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/string/struct.String.html#method.shrink_to"><code>String::shrink_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.OsString.html#method.shrink_to"><code>OsString::shrink_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/path/struct.PathBuf.html#method.shrink_to"><code>PathBuf::shrink_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/struct.BinaryHeap.html#method.shrink_to"><code>BinaryHeap::shrink_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/struct.VecDeque.html#method.shrink_to"><code>VecDeque::shrink_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/hash_map/struct.HashMap.html#method.shrink_to"><code>HashMap::shrink_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/hash_set/struct.HashSet.html#method.shrink_to"><code>HashSet::shrink_to</code></a></li>
+</ul>
+<p>The following previously stable functions are now <code>const</code>.</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/fn.transmute.html"><code>std::mem::transmute</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.first"><code>[T]::first</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.split_first"><code>[T]::split_first</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.last"><code>[T]::last</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.split_last"><code>[T]::split_last</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.56.0 release: check out what changed in
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1560-2021-10-21">Rust</a>,
+<a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-156-2021-10-21">Cargo</a>,
+and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-156">Clippy</a>.</p>
+<h3><a href="#contributors-to-1560" aria-hidden="true" class="anchor" id="contributors-to-1560"></a>Contributors to 1.56.0</h3>
+<p>Many people came together to create Rust 1.56.0 and the 2021 edition.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.56.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
