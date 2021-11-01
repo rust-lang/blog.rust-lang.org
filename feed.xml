@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-11-01T11:59:58+00:00</updated>
+    <updated>2021-11-01T12:39:33+00:00</updated>
 
     
     <entry>
@@ -114,7 +114,7 @@ efficient software.&lt;/p&gt;
 appropriate page on our website.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1561-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1561-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.56.1 stable&lt;/h2&gt;
 &lt;p&gt;Rust 1.56.1 introduces two new lints to mitigate the impact of a security
-concern recently disclosed, CVE-2021-42574. We recommend all users upgrade
+concern recently disclosed, &lt;a href&#x3D;&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name&#x3D;CVE-2021-42574&quot;&gt;CVE-2021-42574&lt;/a&gt;. We recommend all users upgrade
 immediately to ensure their codebase is not affected by the security issue.&lt;/p&gt;
 &lt;p&gt;You can learn more about the security issue in &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/11/01/cve-2021-42574.html&quot;&gt;the advisory&lt;/a&gt;.&lt;/p&gt;
 </content>
