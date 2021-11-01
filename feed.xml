@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-11-01T07:23:59+00:00</updated>
+    <updated>2021-11-01T11:59:58+00:00</updated>
 
     
     <entry>
@@ -90,6 +90,33 @@ similar security issue identified as &lt;a href&#x3D;&quot;https://cve.mitre.org
 identifiers. Rust already includes mitigations for that attack since Rust
 1.53.0. Rust 1.0.0 through Rust 1.52.1 is not affected due to the lack of
 support for non-ASCII identifiers in those releases.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Security Response WG</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Announcing Rust 1.56.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/11/01/Rust-1.56.1.html" type="text/html" title="Announcing Rust 1.56.1" />
+        <published>2021-11-01T00:00:00+00:00</published>
+        <updated>2021-11-01T00:00:01+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/11/01/Rust-1.56.1.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/11/01/Rust-1.56.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.56.1. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.56.1 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
+appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1561-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1561-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.56.1 stable&lt;/h2&gt;
+&lt;p&gt;Rust 1.56.1 introduces two new lints to mitigate the impact of a security
+concern recently disclosed, CVE-2021-42574. We recommend all users upgrade
+immediately to ensure their codebase is not affected by the security issue.&lt;/p&gt;
+&lt;p&gt;You can learn more about the security issue in &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/11/01/cve-2021-42574.html&quot;&gt;the advisory&lt;/a&gt;.&lt;/p&gt;
 </content>
 
         <author>
@@ -880,52 +907,6 @@ very old toolchains.&lt;/p&gt;
 &lt;li&gt;二手掉包工程师 (hi-rustin)&lt;/li&gt;
 &lt;li&gt;Robert Collins&lt;/li&gt;
 &lt;li&gt;Daniel Silverstone&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>The Rustup Working Group</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rustup 1.24.2</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/05/17/Rustup-1.24.2.html" type="text/html" title="Announcing Rustup 1.24.2" />
-        <published>2021-05-17T00:00:00+00:00</published>
-        <updated>2021-05-17T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/05/17/Rustup-1.24.2.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/05/17/Rustup-1.24.2.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.24.2. &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.24.2 is as easy as closing your IDE and running:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup self update
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup update
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1242&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1242&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.24.2&lt;/h2&gt;
-&lt;p&gt;1.24.2 introduces pooled allocations to prevent memory fragmentation issues on
-some platforms with 1.24.x. We&#x27;re not entirely sure what aspect of the streamed
-unpacking logic caused allocator fragmentation, but memory pools are a well
-known fix that should solve this for all platforms.&lt;/p&gt;
-&lt;p&gt;Those who were encountering CI issues with 1.24.1 should find them resolved.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;You can check out all the changes to Rustup for 1.24.2 in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/blob/stable/CHANGELOG.md&quot;&gt;changelog&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;Rustup&#x27;s documentation is also available in &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/&quot;&gt;the rustup book&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Finally, the Rustup working group are pleased to welcome a new member. Between
-1.24.1 and 1.24.2 二手掉包工程师 (hi-rustin) has joined, having already made some
-excellent contributions.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
-&lt;p&gt;Thanks again to all the contributors who made rustup 1.24.2 possible!&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Carol (Nichols || Goulding)&lt;/li&gt;
-&lt;li&gt;Daniel Silverstone&lt;/li&gt;
-&lt;li&gt;João Marcos Bezerra&lt;/li&gt;
-&lt;li&gt;Josh Rotenberg&lt;/li&gt;
-&lt;li&gt;Joshua Nelson&lt;/li&gt;
-&lt;li&gt;Martijn Gribnau&lt;/li&gt;
-&lt;li&gt;pierwill&lt;/li&gt;
-&lt;li&gt;Robert Collins&lt;/li&gt;
-&lt;li&gt;二手掉包工程师 (hi-rustin)&lt;/li&gt;
 &lt;/ul&gt;
 </content>
 
