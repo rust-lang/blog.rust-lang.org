@@ -10,8 +10,93 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-10-21T16:12:42+00:00</updated>
+    <updated>2021-11-01T00:04:22+00:00</updated>
 
+    
+    <entry>
+        <title>Security advisory for rustc (CVE-2021-42574)</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/11/01/cve-2021-42574.html" type="text/html" title="Security advisory for rustc (CVE-2021-42574)" />
+        <published>2021-11-01T00:00:00+00:00</published>
+        <updated>2021-11-01T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/11/01/cve-2021-42574.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/11/01/cve-2021-42574.html">&lt;blockquote&gt;
+&lt;p&gt;This is a cross-post of &lt;a href&#x3D;&quot;https://groups.google.com/g/rustlang-security-announcements/c/bKPH8XYMvJU&quot;&gt;the official security advisory&lt;/a&gt;. The
+official advisory contains a signed version with our PGP key, as well.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The Rust Security Response WG was notified of a security concern affecting
+source code containing &amp;quot;bidirectional override&amp;quot; Unicode codepoints: in some
+cases the use of those codepoints could lead to the reviewed code being
+different than the compiled code.&lt;/p&gt;
+&lt;p&gt;This is a vulnerability in the Unicode specification, and its assigned
+identifier is &lt;a href&#x3D;&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name&#x3D;CVE-2021-42574&quot;&gt;CVE-2021-42574&lt;/a&gt;. While the vulnerability itself is not a rustc
+flaw, we&#x27;re taking proactive measures to mitigate its impact on Rust
+developers.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#overview&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;overview&quot;&gt;&lt;/a&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Unicode has support for both left-to-right and right-to-left languages, and to
+aid writing left-to-right words inside a right-to-left sentence (or vice versa)
+it also features invisible codepoints called &amp;quot;bidirectional override&amp;quot;.&lt;/p&gt;
+&lt;p&gt;These codepoints are normally used across the Internet to embed a word inside a
+sentence of another language (with a different text direction), but it was
+reported to us that they could be used to manipulate how source code is
+displayed in some editors and code review tools, leading to the reviewed code
+being different than the compiled code. This is especially bad if the whole
+team relies on bidirectional-aware tooling.&lt;/p&gt;
+&lt;p&gt;As an example, the following snippet (with &lt;code&gt;{U+NNNN}&lt;/code&gt; replaced with the Unicode
+codepoint &lt;code&gt;NNNN&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;if access_level !&#x3D; &amp;quot;user{U+202E} {U+2066}// Check if admin{U+2069} {U+2066}&amp;quot; {
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;...would be rendered by bidirectional-aware tools as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;if access_level !&#x3D; &amp;quot;user&amp;quot; { // Check if admin
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#affected-versions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;affected-versions&quot;&gt;&lt;/a&gt;Affected Versions&lt;/h2&gt;
+&lt;p&gt;Rust 1.56.1 introduces two new lints to detect and reject code containing the
+affected codepoints. Rust 1.0.0 through Rust 1.56.0 do not include such lints,
+leaving your source code vulnerable to this attack if you do not perform
+out-of-band checks for the presence of those codepoints.&lt;/p&gt;
+&lt;p&gt;To assess the security of the ecosystem we analyzed all crate versions ever
+published on crates.io (as of 2021-10-17), and only 5 crates have the affected
+codepoints in their source code, with none of the occurrences being malicious.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#mitigations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;mitigations&quot;&gt;&lt;/a&gt;Mitigations&lt;/h2&gt;
+&lt;p&gt;We will be releasing Rust 1.56.1 today, 2021-11-01, with two new
+deny-by-default lints detecting the affected codepoints, respectively in string
+literals and in comments. The lints will prevent source code files containing
+those codepoints from being compiled, protecting you from the attack.&lt;/p&gt;
+&lt;p&gt;If your code has legitimate uses for the codepoints we recommend replacing them
+with the related escape sequence. The error messages will suggest the right
+escapes to use.&lt;/p&gt;
+&lt;p&gt;If you can&#x27;t upgrade your compiler version, or your codebase also includes
+non-Rust source code files, we recommend periodically checking that the
+following codepoints are not present in your repository and your dependencies:
+U+202A, U+202B, U+202C, U+202D, U+202E, U+2066, U+2067, U+2068, U+2069.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#timeline-of-events&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;timeline-of-events&quot;&gt;&lt;/a&gt;Timeline of events&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;2021-07-25: we received the report and started working on a fix.&lt;/li&gt;
+&lt;li&gt;2021-09-14: the date for the embargo lift (2021-11-01) is communicated to us.&lt;/li&gt;
+&lt;li&gt;2021-10-17: performed an analysis of all the source code ever published to
+crates.io to check for the presence of this attack.&lt;/li&gt;
+&lt;li&gt;2021-11-01: embargo lifts, the vulnerability is disclosed and Rust 1.56.1 is
+released.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#acknowledgments&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgments&quot;&gt;&lt;/a&gt;Acknowledgments&lt;/h2&gt;
+&lt;p&gt;Thanks to &lt;a href&#x3D;&quot;https://github.com/nickboucher&quot;&gt;Nicholas Boucher&lt;/a&gt; and &lt;a href&#x3D;&quot;https://www.cl.cam.ac.uk/~rja14&quot;&gt;Ross Anderson&lt;/a&gt; from the University of
+Cambridge for disclosing this to us according to our &lt;a href&#x3D;&quot;https://www.rust-lang.org/policies/security&quot;&gt;security policy&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;We also want to thank the members of the Rust project who contributed to the
+mitigations for this issue. Thanks to Esteban Küber for developing the lints,
+Pietro Albini for leading the security response, and many others for their
+involvement, insights and feedback: Josh Stone, Josh Triplett, Manish
+Goregaokar, Mara Bos, Mark Rousskov, Niko Matsakis, and Steve Klabnik.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#appendix-homoglyph-attacks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;appendix-homoglyph-attacks&quot;&gt;&lt;/a&gt;Appendix: Homoglyph attacks&lt;/h2&gt;
+&lt;p&gt;As part of their research, Nicholas Boucher and Ross Anderson also uncovered a
+similar security issue identified as &lt;a href&#x3D;&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name&#x3D;CVE-2021-42694&quot;&gt;CVE-2021-42694&lt;/a&gt; involving homoglyphs inside
+identifiers. Rust already includes mitigations for that attack since Rust
+1.53.0. Rust 1.0.0 through Rust 1.52.1 is not affected due to the lack of
+support for non-ASCII identifiers in those releases.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Security Response WG</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.56.0 and Rust 2021</title>
@@ -847,68 +932,6 @@ excellent contributions.&lt;/p&gt;
 
         <author>
             <name>The Rustup Working Group</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Six Years of Rust</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/05/15/six-years-of-rust.html" type="text/html" title="Six Years of Rust" />
-        <published>2021-05-15T00:00:00+00:00</published>
-        <updated>2021-05-15T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/05/15/six-years-of-rust.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/05/15/six-years-of-rust.html">&lt;p&gt;Today marks &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;&#x27;s sixth birthday since it went 1.0 in 2015. A lot has changed since then and especially over the past year, and Rust was no different. In 2020, there was no foundation yet, no const generics, and a lot of organisations were still wondering whether Rust was production ready.&lt;/p&gt;
-&lt;p&gt;In the midst of the COVID-19 pandemic, hundreds of Rust&#x27;s global distributed set of team members and volunteers shipped over nine new stable releases of Rust, in addition to various bugfix releases. Today, &amp;quot;Rust in production&amp;quot; isn&#x27;t a question, but a statement. The newly founded Rust foundation has several members who value using Rust in production enough to help continue to support and contribute to its open development ecosystem.&lt;/p&gt;
-&lt;p&gt;We wanted to take today to look back at some of the major improvements over the past year, how the community has been using Rust in production, and finally look ahead at some of the work that is currently ongoing to improve and use Rust for small and large scale projects over the next year. Let&#x27;s get started!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#recent-additions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;recent-additions&quot;&gt;&lt;/a&gt;Recent Additions&lt;/h2&gt;
-&lt;p&gt;The Rust language has improved tremendously in the past year, gaining a lot of quality of life features, that while they don&#x27;t fundamentally change the language, they help make using and maintaining Rust in more places even easier.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;As of Rust 1.52.0 and the upgrade to LLVM 12, one of few cases of unsoundness around forward progress (such as handling infinite loops) has finally been resolved. This has been a long running collaboration between the Rust teams and the LLVM project, and is a great example of improvements to Rust also benefitting the wider ecosystem of programming languages.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On supporting an even wider ecosystem, the introduction of Tier 1 support for 64 bit ARM Linux, and Tier 2 support for ARM macOS &amp;amp; ARM Windows, has made Rust an even better place to easily build your projects across new and different architectures.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The most notable exception to the theme of polish has been the major improvements to Rust&#x27;s compile-time capabilities. The stabilisation of const generics for primitive types, the addition of control flow for &lt;code&gt;const fn&lt;/code&gt;s, and allowing procedural macros to be used in more places, have allowed completely powerful new types of APIs and crates to be created.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Rustc wasn&#x27;t the only tool that had significant improvements.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Cargo just recently stabilised its new feature resolver, that makes it easier to use your dependencies across different targets.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Rustdoc stabilised its &amp;quot;intra-doc links&amp;quot; feature, allowing you to easily and automatically cross reference Rust types and functions in your documentation.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Clippy with Cargo now uses a separate build cache that provides much more consistent behaviour.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#rust-in-production&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rust-in-production&quot;&gt;&lt;/a&gt;Rust In Production&lt;/h2&gt;
-&lt;p&gt;Each year Rust&#x27;s growth and adoption in the community and industry has been unbelievable, and this past year has been no exception. Once again in 2020, Rust was voted StackOverflow&#x27;s &lt;a href&#x3D;&quot;https://stackoverflow.blog/2020/06/05/why-the-developers-who-use-rust-love-it-so-much/&quot;&gt;Most Loved Programming Language&lt;/a&gt;. Thank you to everyone in the community for your support, and help making Rust what it is today.&lt;/p&gt;
-&lt;p&gt;With the formation of the &lt;a href&#x3D;&quot;https://foundation.rust-lang.org/posts/2021-02-08-hello-world/&quot;&gt;Rust foundation&lt;/a&gt;, Rust has been in a better position to build a sustainable open source ecosystem empowering everyone to build reliable and efficient software. A number of companies that use Rust have formed teams dedicated to maintaining and improving the Rust project, including &lt;a href&#x3D;&quot;https://aws.amazon.com/blogs/opensource/how-our-aws-rust-team-will-contribute-to-rusts-future-successes/&quot;&gt;AWS&lt;/a&gt;, &lt;a href&#x3D;&quot;https://engineering.fb.com/2021/04/29/developer-tools/rust/&quot;&gt;Facebook&lt;/a&gt;, and Microsoft.&lt;/p&gt;
-&lt;p&gt;And it isn&#x27;t just Rust that has been getting bigger. Larger and larger companies have been adopting Rust in their projects and offering officially supported Rust APIs.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Both Microsoft and Amazon have just recently announced and released their new officially supported Rust libraries for interacting with &lt;a href&#x3D;&quot;https://github.com/microsoft/windows-rs&quot;&gt;Windows&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/awslabs/aws-sdk-rust&quot;&gt;AWS&lt;/a&gt;. Official first party support for these massive APIs helps make Rust people&#x27;s first choice when deciding what to use for their project.&lt;/li&gt;
-&lt;li&gt;The cURL project has released new versions that offer opt-in support for using Rust libraries for handling &lt;a href&#x3D;&quot;https://daniel.haxx.se/blog/2020/10/09/rust-in-curl-with-hyper/&quot;&gt;HTTP/s&lt;/a&gt; and &lt;a href&#x3D;&quot;https://daniel.haxx.se/blog/2021/02/09/curl-supports-rustls/&quot;&gt;TLS&lt;/a&gt; communication. This has been a huge inter-community collaboration between the ISRG, the Hyper &amp;amp; Rustls teams, and the cURL project, and we&#x27;d like to thank everyone for their hard work in providing new memory safe backends for a project as massive and widely used as cURL!&lt;/li&gt;
-&lt;li&gt;Tokio (an asynchronous runtime written in Rust), released its &lt;a href&#x3D;&quot;https://tokio.rs/blog/2020-12-tokio-1-0&quot;&gt;1.0 version&lt;/a&gt; and announced their three year stability guarantee, providing everyone with a solid, stable foundation for writing reliable network applications without compromising speed.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#future-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;future-work&quot;&gt;&lt;/a&gt;Future Work&lt;/h2&gt;
-&lt;p&gt;Of course, all that is just to start, we&#x27;re seeing more and more initiatives putting Rust in exciting new places;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Critical Section &amp;amp; Ferrous Systems have started &lt;a href&#x3D;&quot;https://ferrous-systems.com/ferrocene&quot;&gt;Ferrocene&lt;/a&gt;, a project to make Rust a viable programming language for safety and mission critical systems across the industry.&lt;/li&gt;
-&lt;li&gt;Embark Studios have released an initial prototype of &lt;a href&#x3D;&quot;https://github.com/EmbarkStudios/rust-gpu&quot;&gt;&lt;code&gt;rust-gpu&lt;/code&gt;&lt;/a&gt;, a new compiler backend that allows writing graphics shaders using Rust for GPUs.&lt;/li&gt;
-&lt;li&gt;The Linux project is currently &lt;a href&#x3D;&quot;https://lore.kernel.org/lkml/CANiq72khBa2GcB6-PHM3A44Y90d6vzYAS&#x3D;BVpk3nT4B6u+NVDw@mail.gmail.com/T/#mb5e524dae9d5a5815c6e68eb36b9bde4e87c861d&quot;&gt;considering a proposal to add Rust as the second language to the kernel&lt;/a&gt; to enable writing safer driver and kernel-space code.&lt;/li&gt;
-&lt;li&gt;Google has announced that it &lt;a href&#x3D;&quot;https://security.googleblog.com/2021/04/rust-in-android-platform.html&quot;&gt;now supports building low level components of the Android OS in Rust&lt;/a&gt;, and have already begun an effort to rewrite their bluetooth stack with Rust!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Right now the Rust teams are planning and coordinating the 2021 edition of Rust. Much like this past year, a lot of themes of the changes are around improving quality of life. You can check out our recent post about &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/05/11/edition-2021.html&quot;&gt;&amp;quot;The Plan for the Rust 2021 Edition&amp;quot;&lt;/a&gt; to see what the changes the teams are planning.&lt;/p&gt;
-&lt;p&gt;And that&#x27;s just the tip of the iceberg; there are a lot more changes being worked on, and exciting new open projects being started every day in Rust. We can&#x27;t wait to see what you all build in the year ahead!&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;Are there changes, or projects from the past year that you&#x27;re excited about? Are you looking to get started with Rust? Do you want to help contribute to the 2021 edition? Then come on over, introduce yourself, and join the discussion over on our &lt;a href&#x3D;&quot;https://users.rust-lang.org/&quot;&gt;Discourse&lt;/a&gt; forum and &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/&quot;&gt;Zulip&lt;/a&gt; chat! Everyone is welcome, we are committed to providing a friendly, safe and welcoming environment for all, regardless of gender, sexual orientation, disability, ethnicity, religion, or similar personal characteristic.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Team</name>
         </author>
     </entry>
     
