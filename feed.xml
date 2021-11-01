@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-11-01T00:04:22+00:00</updated>
+    <updated>2021-11-01T07:23:59+00:00</updated>
 
     
     <entry>
@@ -20,17 +20,16 @@
         <updated>2021-11-01T00:00:00+00:00</updated>
         <id>https://blog.rust-lang.org/2021/11/01/cve-2021-42574.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2021/11/01/cve-2021-42574.html">&lt;blockquote&gt;
-&lt;p&gt;This is a cross-post of &lt;a href&#x3D;&quot;https://groups.google.com/g/rustlang-security-announcements/c/bKPH8XYMvJU&quot;&gt;the official security advisory&lt;/a&gt;. The
+&lt;p&gt;This is a lightly edited cross-post of &lt;a href&#x3D;&quot;https://groups.google.com/g/rustlang-security-announcements/c/bKPH8XYMvJU&quot;&gt;the official security advisory&lt;/a&gt;. The
 official advisory contains a signed version with our PGP key, as well.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;The Rust Security Response WG was notified of a security concern affecting
 source code containing &amp;quot;bidirectional override&amp;quot; Unicode codepoints: in some
 cases the use of those codepoints could lead to the reviewed code being
 different than the compiled code.&lt;/p&gt;
-&lt;p&gt;This is a vulnerability in the Unicode specification, and its assigned
-identifier is &lt;a href&#x3D;&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name&#x3D;CVE-2021-42574&quot;&gt;CVE-2021-42574&lt;/a&gt;. While the vulnerability itself is not a rustc
-flaw, we&#x27;re taking proactive measures to mitigate its impact on Rust
-developers.&lt;/p&gt;
+&lt;p&gt;This is an issue with how source code may be rendered in certain contexts, and
+its assigned identifier is &lt;a href&#x3D;&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name&#x3D;CVE-2021-42574&quot;&gt;CVE-2021-42574&lt;/a&gt;. While the issue itself is not a flaw
+in rustc, we&#x27;re taking proactive measures to mitigate its impact on Rust developers.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#overview&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;overview&quot;&gt;&lt;/a&gt;Overview&lt;/h2&gt;
 &lt;p&gt;Unicode has support for both left-to-right and right-to-left languages, and to
 aid writing left-to-right words inside a right-to-left sentence (or vice versa)
