@@ -71,7 +71,7 @@
     </div>
 
     <div class="post">
-      <p>Today, we're excited to <a href="http://www.rust-lang.org/install.html">release</a> the alpha version of Rust 1.0, a systems programming language with a focus on safety, performance and concurrency.</p>
+      <p>Today, we're excited to <a href="https://www.rust-lang.org/install.html">release</a> the alpha version of Rust 1.0, a systems programming language with a focus on safety, performance and concurrency.</p>
 <p>This release marks a huge milestone for Rust and its community:</p>
 <ul>
 <li>
@@ -83,25 +83,25 @@ and we do not expect major breaking changes to them.</p>
 <p><strong>The core libraries are feature-complete for 1.0</strong>. API conventions have been
 firmly established, and core functionality -- basic types, traits, data
 structures and concurrency primitives -- has all been
-<a href="http://blog.rust-lang.org/2014/10/30/Stability.html">stabilized</a>. Here again
+<a href="https://blog.rust-lang.org/2014/10/30/Stability.html">stabilized</a>. Here again
 we do not expect major breaking changes before 1.0.</p>
 </li>
 </ul>
 <p>The Rust community really rolled up their sleeves to help push this release over the finish line; thanks to everyone who participated, and especially to the <a href="https://github.com/rust-lang/rust/wiki/Doc-friends-of-the-tree">friends of the tree</a>!</p>
-<p>While we've come a long way in <a href="http://blog.rust-lang.org/2014/09/15/Rust-1.0.html">the last four months</a>, there's a lot left to do before Rust hits 1.0 final. Read on for more.</p>
+<p>While we've come a long way in <a href="https://blog.rust-lang.org/2014/09/15/Rust-1.0.html">the last four months</a>, there's a lot left to do before Rust hits 1.0 final. Read on for more.</p>
 <h3><a href="#what-happens-during-the-alpha-cycle" aria-hidden="true" class="anchor" id="what-happens-during-the-alpha-cycle"></a>What happens during the alpha cycle?</h3>
 <p>If you're already a Rust user, the first thing you'll notice during the alpha cycle is a <em>dramatic</em> drop in the pace of breaking changes.</p>
 <p>Most features and modules that will ship with Rust 1.0 are in place and will change in only limited ways during this cycle, as detailed later in this post. Only a few modules -- the key ones being path manipulation and I/O -- are still stabilizing.</p>
 <p>We need your help to iterate on those final libraries before the beta release, and to hammer out any remaining issues on the parts of Rust we have already marked as stable.  <strong>During the alpha cycle, we recommend using the nightly releases, which will continue to evolve as these APIs take their final shape.</strong></p>
-<p>The alpha release is part of our <a href="http://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">transition</a> into <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">stability guarantees</a>. While we're not ready to make full stability guarantees yet, this release cycle moves
-us much closer to that 1.0 goal. When 1.0-beta1 is released <a href="http://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">six weeks from now</a>, these important remaining APIs will be stable. Code that compiles on the beta release should do so with minimal changes on 1.0 final as well.</p>
+<p>The alpha release is part of our <a href="https://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">transition</a> into <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">stability guarantees</a>. While we're not ready to make full stability guarantees yet, this release cycle moves
+us much closer to that 1.0 goal. When 1.0-beta1 is released <a href="https://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">six weeks from now</a>, these important remaining APIs will be stable. Code that compiles on the beta release should do so with minimal changes on 1.0 final as well.</p>
 <h3><a href="#whats-shipping-in-alpha" aria-hidden="true" class="anchor" id="whats-shipping-in-alpha"></a>What's shipping in alpha?</h3>
 <p>Since the <a href="https://mail.mozilla.org/pipermail/rust-dev/2014-October/011267.html">previous release</a>, we've made an enormous amount of progress. We'll cover a
 few of the highlights here; the full details are in <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md">the release notes</a>.</p>
 <h4><a href="#language-features" aria-hidden="true" class="anchor" id="language-features"></a>Language features</h4>
 <ul>
 <li>
-<p><strong>Dynamically-sized types (DSTs):</strong> <a href="http://smallcultfollowing.com/babysteps/blog/2014/01/05/dst-take-5/">Types whose size is only known at runtime</a> (such as array slices and trait objects) are now largely integrated into the language, including basic integration with user-defined smart pointers. <em>Implemented by Nick Cameron; rolled out by Jorge Aparicio</em>.</p>
+<p><strong>Dynamically-sized types (DSTs):</strong> <a href="https://smallcultfollowing.com/babysteps/blog/2014/01/05/dst-take-5/">Types whose size is only known at runtime</a> (such as array slices and trait objects) are now largely integrated into the language, including basic integration with user-defined smart pointers. <em>Implemented by Nick Cameron; rolled out by Jorge Aparicio</em>.</p>
 </li>
 <li>
 <p><strong>Multidispatch traits:</strong> Trait implementations can now be selected via <a href="https://github.com/rust-lang/rfcs/pull/195">multiple types</a> (not just <code>Self</code>), which has opened the door to <a href="https://github.com/rust-lang/rfcs/pull/201">many</a> <a href="https://github.com/rust-lang/rfcs/pull/235">interesting</a> <a href="https://github.com/rust-lang/rfcs/pull/529">APIs</a>. <em>Implemented by Niko Matsakis; rolled out by Jorge Aparicio and Aaron Turon</em>.</p>
@@ -136,7 +136,7 @@ few of the highlights here; the full details are in <a href="https://github.com/
 <a href="https://github.com/rust-lang/rfcs/pull/344">of</a>
 <a href="https://github.com/rust-lang/rfcs/pull/430">conventions</a>
 <a href="https://github.com/rust-lang/rfcs/pull/445">RFCs</a>
-have been approved, and are largely summarized <a href="http://aturon.github.io/">in the Rust Guidelines</a>; these conventions have been rolled out through all <code>#[stable]</code> parts of <code>std</code>. <em>Led by Aaron Turon</em>.</p>
+have been approved, and are largely summarized <a href="https://aturon.github.io/">in the Rust Guidelines</a>; these conventions have been rolled out through all <code>#[stable]</code> parts of <code>std</code>. <em>Led by Aaron Turon</em>.</p>
 </li>
 <li>
 <p><strong>Stable core types and traits:</strong> All of the primitive types and basic building blocks (like <code>char</code>, <code>String</code>, <code>Vec</code>, <code>Box</code>, <code>Arc</code>, <code>RefCell</code> and so on) are now <code>#[stable]</code>. <em>Stabilized by Aaron Turon, Alex Crichton, Brian Anderson, Brendan Zabarauskas and Huon Wilson</em>.</p>
@@ -158,7 +158,7 @@ have been approved, and are largely summarized <a href="http://aturon.github.io/
 <p><strong>The Rust Programming Language:</strong> The previous split between &quot;The Guide&quot; and &quot;The guides&quot; has been rectified by combining them into <a href="https://github.com/rust-lang/rust/pull/19897">&quot;The book&quot;</a>. <em>Led by Steve Klabnik</em>.</p>
 </li>
 <li>
-<p><strong>Rust by Example:</strong> The lovely http://rustbyexample.com/ introduction to Rust is now part of the official documentation. <em>Initiated by Jorge Aparicio</em>.</p>
+<p><strong>Rust by Example:</strong> The lovely https://rustbyexample.com/ introduction to Rust is now part of the official documentation. <em>Initiated by Jorge Aparicio</em>.</p>
 </li>
 <li>
 <p><strong>Additional API documentation:</strong> A lot of work has gone into improving API documentation, both by expanding the overview text and adding examples throughout. <em>Credit goes to the entire community, who worked tirelessly to improve these docs</em>.</p>
@@ -171,10 +171,10 @@ have been approved, and are largely summarized <a href="http://aturon.github.io/
 <p><strong>Improvements to <a href="https://github.com/rust-lang/rust/issues/17307">associated types</a> and <a href="https://github.com/rust-lang/rust/issues/18101">unboxed closures</a>:</strong> Both of these features are functional, but we plan to make significant ergonomic improvements during the beta cycle, such as <a href="https://github.com/rust-lang/rfcs/blob/master/text/0231-upvar-capture-inference.md">more sophisticated capture-clause inference</a> and more <a href="https://github.com/rust-lang/rust/issues/20300">uniform support for shorthands like <code>X::Type</code></a>.</p>
 </li>
 <li>
-<p><strong>Improvements to generics:</strong> We will explore <a href="http://smallcultfollowing.com/babysteps/blog/2014/07/06/implied-bounds/">avenues</a> to cut down on the number of redundant trait bounds that are currently required.</p>
+<p><strong>Improvements to generics:</strong> We will explore <a href="https://smallcultfollowing.com/babysteps/blog/2014/07/06/implied-bounds/">avenues</a> to cut down on the number of redundant trait bounds that are currently required.</p>
 </li>
 <li>
-<p><strong>Path reform:</strong> The <code>path</code> module will soon be <a href="https://github.com/rust-lang/rfcs/pull/474">reformed</a> to make use of DST, to give a better account of platform differences, and to more closely align with the <a href="http://article.gmane.org/gmane.comp.lib.boost.devel/256220">new C++ standard</a>. Implementation work is largely complete, and the rollout should occur soon after alpha.</p>
+<p><strong>Path reform:</strong> The <code>path</code> module will soon be <a href="https://github.com/rust-lang/rfcs/pull/474">reformed</a> to make use of DST, to give a better account of platform differences, and to more closely align with the <a href="http://web.archive.org/web/20150427231422/http://article.gmane.org/gmane.comp.lib.boost.devel/256220">new C++ standard</a>. Implementation work is largely complete, and the rollout should occur soon after alpha.</p>
 </li>
 <li>
 <p><strong>IO reform:</strong> An <a href="https://github.com/rust-lang/rfcs/pull/517/">overhaul of the IO APIs</a> is being planned; please join in the conversation! These changes will be landing throughout the alpha cycle.</p>
@@ -186,7 +186,7 @@ have been approved, and are largely summarized <a href="http://aturon.github.io/
 <p><strong>Integer type auditing:</strong> During the alpha cycle, we will finalize formal conventions for choosing integer types and re-audit the use of these types in <code>std</code>. This auditing may cause some breakage to <code>#[stable]</code> APIs.</p>
 </li>
 <li>
-<p><strong>Documentation for all features:</strong> Some recent feature additions, such as associated types and unboxed closures, have their RFC as the only documentation. User-facing documentation for these features will be added during the alpha cycle. The <a href="http://doc.rust-lang.org/reference.html">reference</a> will likewise be brought up to date and improved.</p>
+<p><strong>Documentation for all features:</strong> Some recent feature additions, such as associated types and unboxed closures, have their RFC as the only documentation. User-facing documentation for these features will be added during the alpha cycle. The <a href="https://doc.rust-lang.org/reference.html">reference</a> will likewise be brought up to date and improved.</p>
 </li>
 <li>
 <p><strong>Complete API documentation:</strong> Everything marked stable will have <em>at least</em> a usage example, and hopefully complete textual explanation, before beta.</p>

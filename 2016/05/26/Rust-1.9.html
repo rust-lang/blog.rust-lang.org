@@ -100,7 +100,7 @@ assert!(result.is_err());
 </ul>
 <p>Expected problems usually arise from conditions that are outside of your
 control; robust code should be prepared for anything its environment might throw
-at it. In Rust, expected problems are handled via <a href="http://static.rust-lang.org/doc/master/std/result/index.html">the <code>Result</code> type</a>,
+at it. In Rust, expected problems are handled via <a href="https://static.rust-lang.org/doc/master/std/result/index.html">the <code>Result</code> type</a>,
 which allows a function to return information about the problem to its caller,
 which can then handle the error in a fine-grained way.</p>
 <p>Unexpected problems are <em>bugs</em>: they arise due to a contract or assertion being
@@ -150,14 +150,14 @@ to <a href="https://github.com/rust-lang/rfcs/blob/master/text/1270-deprecation.
 <li><code>i586-pc-windows-msvc</code>.</li>
 </ul>
 <p>The first two targets are particularly interesting from a cross-compilation
-perspective; see the <a href="http://blog.rust-lang.org/2016/05/13/rustup.html">recent blog post on <code>rustup</code></a> for more details.</p>
+perspective; see the <a href="https://blog.rust-lang.org/2016/05/13/rustup.html">recent blog post on <code>rustup</code></a> for more details.</p>
 <h4><a href="#compile-time-improvements" aria-hidden="true" class="anchor" id="compile-time-improvements"></a>Compile time improvements</h4>
 <p><a href="https://github.com/rust-lang/rust/pull/32062">The time complexity of comparing variables for equivalence</a> during
 type unification is reduced from O(n!) to O(n). As a result, some programming
 patterns compile much, much more quickly.</p>
 <h4><a href="#rolling-out-use-of-specialization" aria-hidden="true" class="anchor" id="rolling-out-use-of-specialization"></a>Rolling out use of specialization</h4>
 <p>This release sees some of the first use of <a href="https://github.com/rust-lang/rfcs/pull/1210">specialization</a> within the standard
-library. Specialization, which is currently available only on <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">nightly</a>, allows
+library. Specialization, which is currently available only on <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">nightly</a>, allows
 generic code to automatically be specialized based on more specific type
 information.</p>
 <p>One example where this comes up in the standard library: conversion from a

@@ -405,7 +405,7 @@ test bench_date ... bench:         486 ns/iter (+/- 56)
 <p>Notice that we're re-compiling all of our dependencies. This is because <code>cargo bench</code> defaults to release mode, which uses maximum optimizations. <code>cargo build --release</code> similarly builds in optimized mode by default.</p>
 <blockquote>
 <p>As an aside, the default behavior of each command is configurable through
-<a href="http://doc.crates.io/manifest.html#the-profile-sections">profiles</a> in the
+<a href="https://doc.crates.io/manifest.html#the-profile-sections">profiles</a> in the
 <code>Cargo.toml</code>. This allows you to configure things like the optimization level,
 whether to include debug symbols and more. Rather than forcing you to use a
 custom workflow if something doesn't precisely meet your needs, the profiles
@@ -454,7 +454,7 @@ library for Unix-specific functionality.</p>
 wouldn't want it to!)</p>
 <p>Today, Cargo will automatically share dependencies between crates if they depend
 on the same <em>major</em> version (or minor version before 1.0), since Rust uses
-<a href="http://semver.org/">semantic versioning</a>. This means that if <code>nix</code> and <code>datetime</code>
+<a href="https://semver.org/">semantic versioning</a>. This means that if <code>nix</code> and <code>datetime</code>
 both depend on some version of <code>libc 0.2.x</code>, they will get the same version. In
 this case, they do, and the program compiles.</p>
 <p>While this policy works well (and in fact is the same policy that system package

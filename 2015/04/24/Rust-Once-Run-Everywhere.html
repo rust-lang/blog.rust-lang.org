@@ -195,7 +195,7 @@ lifetime of the source tarball itself (the <code>&amp;self</code> argument). Thi
 of indicating that the returned slice can only be used within the lifetime of
 the tarball, statically preventing dangling pointer bugs that are easy to
 make when working directly with C. (If you're not familiar with this kind of
-borrowing in Rust, have a look at Yehuda Katz's <a href="http://blog.skylight.io/rust-means-never-having-to-close-a-socket/">blog post on ownership</a>.)</p>
+borrowing in Rust, have a look at Yehuda Katz's <a href="https://blog.skylight.io/rust-means-never-having-to-close-a-socket/">blog post on ownership</a>.)</p>
 <p>A key aspect of the Rust binding here is that it is a safe function, meaning
 that callers do not have to use <code>unsafe</code> blocks to invoke it! Although it has an
 <code>unsafe</code> <em>implementation</em> (due to calling an FFI function), the <em>interface</em> uses
@@ -231,7 +231,7 @@ to ensure that libraries do not clash with one another, and this attribute
 means that you don't have to guess a symbol name like
 <code>double_input::h485dee7f568bebafeaa</code> from C.</p>
 <p>Next we've got our function definition, and the most interesting part about
-this is the keyword <code>extern</code>. This is a specialized form of specifying the <a href="http://doc.rust-lang.org/reference.html#extern-functions">ABI
+this is the keyword <code>extern</code>. This is a specialized form of specifying the <a href="https://doc.rust-lang.org/reference.html#extern-functions">ABI
 for a function</a> which enables the function to be compatible with a C
 function call.</p>
 <p>Finally, if you <a href="https://github.com/alexcrichton/rust-ffi-examples/blob/master/c-to-rust/Cargo.toml#L8">take a look at the <code>Cargo.toml</code></a> you'll see that

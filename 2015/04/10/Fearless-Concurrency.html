@@ -92,20 +92,20 @@ functional), and Rust will help you avoid common pitfalls.</p>
 <p>Here's a taste of concurrency in Rust:</p>
 <ul>
 <li>
-<p>A <a href="http://static.rust-lang.org/doc/master/std/sync/mpsc/index.html">channel</a> transfers ownership of the messages sent along it,
+<p>A <a href="https://static.rust-lang.org/doc/master/std/sync/mpsc/index.html">channel</a> transfers ownership of the messages sent along it,
 so you can send a pointer from one thread to another without fear of
 the threads later racing for access through that pointer. <strong>Rust's
 channels enforce thread isolation.</strong></p>
 </li>
 <li>
-<p>A <a href="http://static.rust-lang.org/doc/master/std/sync/struct.Mutex.html">lock</a> knows what data it protects, and Rust guarantees
+<p>A <a href="https://static.rust-lang.org/doc/master/std/sync/struct.Mutex.html">lock</a> knows what data it protects, and Rust guarantees
 that the data can only be accessed when the lock is held. State is
 never accidentally shared. <strong>&quot;Lock data, not code&quot; is enforced in
 Rust.</strong></p>
 </li>
 <li>
-<p>Every data type knows whether it can safely be <a href="http://static.rust-lang.org/doc/master/std/marker/trait.Send.html">sent</a> between
-or <a href="http://static.rust-lang.org/doc/master/std/marker/trait.Sync.html">accessed</a> by multiple threads, and Rust enforces this safe
+<p>Every data type knows whether it can safely be <a href="https://static.rust-lang.org/doc/master/std/marker/trait.Send.html">sent</a> between
+or <a href="https://static.rust-lang.org/doc/master/std/marker/trait.Sync.html">accessed</a> by multiple threads, and Rust enforces this safe
 usage; there are no data races, even for lock-free data structures.
 <strong>Thread safety isn't just documentation; it's law.</strong></p>
 </li>
@@ -129,9 +129,9 @@ features.</p>
 systems. If you're already familiar with these, you can skip the two
 &quot;background&quot; sections and jump straight into concurrency. If you want
 a deeper introduction, I can't recommend
-<a href="http://blog.skylight.io/rust-means-never-having-to-close-a-socket/">Yehuda Katz's post</a>
+<a href="https://blog.skylight.io/rust-means-never-having-to-close-a-socket/">Yehuda Katz's post</a>
 highly enough. And
-<a href="http://doc.rust-lang.org/book/ownership.html">the Rust book</a> has all
+<a href="https://doc.rust-lang.org/book/ownership.html">the Rust book</a> has all
 the details.</p>
 </blockquote>
 <p>In Rust, every value has an &quot;owning scope,&quot; and passing or returning a
@@ -289,11 +289,11 @@ it ties together sharing and communication:</p>
 <blockquote>
 <p>Do not communicate by sharing memory; instead, share memory by
 communicating.</p>
-<p>--<a href="http://golang.org/doc/effective_go.html">Effective Go</a></p>
+<p>--<a href="https://golang.org/doc/effective_go.html">Effective Go</a></p>
 </blockquote>
 <p><strong>Rust's ownership makes it easy to turn that advice into a
 compiler-checked rule</strong>. Consider the following channel API
-(<a href="http://static.rust-lang.org/doc/master/std/sync/mpsc/index.html">channels in Rust's standard library</a> are a bit different):</p>
+(<a href="https://static.rust-lang.org/doc/master/std/sync/mpsc/index.html">channels in Rust's standard library</a> are a bit different):</p>
 <pre><code class="language-rust">fn send&lt;T: Send&gt;(chan: &amp;Channel&lt;T&gt;, t: T);
 fn recv&lt;T: Send&gt;(chan: &amp;Channel&lt;T&gt;) -&gt; T;
 </code></pre>
@@ -348,7 +348,7 @@ time</strong>.  To see how this plays out, let's look at locks.</p>
 borrows. Locks provide the same guarantee (&quot;mutual exclusion&quot;) through
 synchronization at runtime. That leads to a locking API that hooks
 directly into Rust's ownership system.</p>
-<p>Here is a simplified version (the <a href="http://static.rust-lang.org/doc/master/std/sync/struct.Mutex.html">standard library's</a>
+<p>Here is a simplified version (the <a href="https://static.rust-lang.org/doc/master/std/sync/struct.Mutex.html">standard library's</a>
 is more ergonomic):</p>
 <pre><code class="language-rust">// create a new mutex
 fn mutex&lt;T: Send&gt;(t: T) -&gt; Mutex&lt;T&gt;;
@@ -445,7 +445,7 @@ race conditions that corrupt the count.</p>
 make no <em>semantic</em> distinction between thread-safe and thread-unsafe
 types.</p>
 <p>In Rust, the world is divided into two kinds of data types: those that
-are <a href="http://static.rust-lang.org/doc/master/std/marker/trait.Send.html"><code>Send</code></a>, meaning they can be safely moved from one thread to
+are <a href="https://static.rust-lang.org/doc/master/std/marker/trait.Send.html"><code>Send</code></a>, meaning they can be safely moved from one thread to
 another, and those that are <code>!Send</code>, meaning that it may not be safe
 to do so. If all of a type's components are <code>Send</code>, so is that type --
 which covers most types. Certain base types are not inherently
@@ -468,7 +468,7 @@ compiler will say:</p>
 the standard library. You can find equivalent functionality in
 <a href="https://crates.io/crates/crossbeam"><code>crossbeam</code></a> (<a href="https://docs.rs/crossbeam/0.8.0/crossbeam/fn.scope.html">documentation for <code>scope()</code></a>)
 and <a href="https://crates.io/crates/scoped_threadpool"><code>scoped_threadpool</code></a>
-(<a href="http://kimundi.github.io/scoped-threadpool-rs/scoped_threadpool/index.html#examples:">documentation for <code>scoped()</code></a>)</em></p>
+(<a href="https://kimundi.github.io/scoped-threadpool-rs/scoped_threadpool/index.html#examples:">documentation for <code>scoped()</code></a>)</em></p>
 <p>So far, all the patterns we've seen involve creating data structures
 on the heap that get shared between threads. But what if we wanted to
 start some threads that make use of data living in our stack frame?

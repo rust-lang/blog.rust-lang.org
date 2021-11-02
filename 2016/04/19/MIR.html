@@ -79,7 +79,7 @@ here:</p>
 <p>That is, we are introducing a new intermediate representation (IR) of
 your program that we call <strong>MIR</strong>: MIR stands for <em>mid-level</em> IR, because
 the MIR comes between the existing HIR (&quot;high-level IR&quot;, roughly an
-<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">abstract syntax tree</a>) and <a href="http://llvm.org/">LLVM</a> (the &quot;low-level&quot;
+<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">abstract syntax tree</a>) and <a href="https://llvm.org/">LLVM</a> (the &quot;low-level&quot;
 IR). Previously, the &quot;translation&quot; phase in the compiler would convert
 from full-blown Rust into machine-code-like LLVM in one rather large
 step. But now, it will do its work in two phases, with a vastly
@@ -142,7 +142,7 @@ in the pipeline.</p>
 in a big way to make MIR a reality. The compiler can bootstrap and run
 its test suite using MIR, and these tests have to pass on every new
 commit. Once we're able to run <a href="https://github.com/brson/taskcluster-crater">Crater</a> with MIR enabled and
-see no regressions across the entire <a href="http://crates.io/">crates.io</a>
+see no regressions across the entire <a href="https://crates.io/">crates.io</a>
 ecosystem, we'll turn it on by default (or, you'll forgive a terrible
 (wonderful) pun, <a href="https://en.wikipedia.org/wiki/Mir">launch MIR into orbit</a>).</p>
 <p>This blog post begins with an overview of MIR's design, demonstrating
@@ -422,9 +422,9 @@ be absent from the graph.</p>
 <h3><a href="#viewing-mir-on-play" aria-hidden="true" class="anchor" id="viewing-mir-on-play"></a>Viewing MIR on play</h3>
 <p>At this point, we've reduced our example into something fairly close
 to what MIR actually looks like. If you'd like to see for yourself,
-you can <a href="http://is.gd/MOfDfg">view the MIR for our example</a> on
+you can <a href="https://is.gd/MOfDfg">view the MIR for our example</a> on
 <a href="https://play.rust-lang.org/">play.rust-lang.org</a>. Just
-<a href="http://is.gd/MOfDfg">follow this link</a> and then press the &quot;MIR&quot;
+<a href="https://is.gd/MOfDfg">follow this link</a> and then press the &quot;MIR&quot;
 button along the top. You'll wind up seeing the MIR for several
 functions, so you have to search through to find the start of the
 <code>example</code> fn. (I won't reproduce the output here, as it is fairly

@@ -86,7 +86,7 @@ and more time for spending with loved ones.</p>
 largest APIs stabilized  was support for custom hash algorithms in the standard
 library’s <code>HashMap&lt;K, V&gt;</code> type. Previously all hash maps would use <a href="https://en.wikipedia.org/wiki/SipHash">SipHash</a> as
 the hashing algorithm, which provides protection against DOS attacks by
-default. SipHash, however, is <a href="http://cglab.ca/~abeinges/blah/hash-rs/">not very fast</a> at hashing small keys. As shown,
+default. SipHash, however, is <a href="https://cglab.ca/~abeinges/blah/hash-rs/">not very fast</a> at hashing small keys. As shown,
 however, the <a href="https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function">FNV hash algorithm</a> is much faster for these size of inputs. This
 means that by switching hash algorithms for types like <code>HashMap&lt;usize, V&gt;</code>
 there can be a significant speedup so long as the loss of DOS protection is
@@ -110,7 +110,7 @@ fn main() {
 </code></pre>
 <p>Note that most of the time you don’t even need to specify the hasher as type
 inference will take care of it, so <code>HashMap::default()</code> should be all you need
-to get up to 2x faster hashes. It’s also worth pointing out that <a href="http://doc.rust-lang.org/std/hash/trait.Hash.html"><code>Hash</code></a> trait
+to get up to 2x faster hashes. It’s also worth pointing out that <a href="https://doc.rust-lang.org/std/hash/trait.Hash.html"><code>Hash</code></a> trait
 is agnostic to the hashing algorithm used, so no changes are needed to the
 types being inserted into hash maps to reap the benefits!</p>
 <p>Other notable improvements include:</p>

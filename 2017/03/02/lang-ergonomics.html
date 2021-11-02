@@ -237,7 +237,7 @@ additional assumptions about the type. But the compiler is making us spell out
 those assumptions explicitly in the signature. This situation seems ripe for an
 ergonomic improvement.</p>
 <p>It's
-<a href="http://smallcultfollowing.com/babysteps/blog/2014/07/06/implied-bounds/">straightforward</a>
+<a href="https://smallcultfollowing.com/babysteps/blog/2014/07/06/implied-bounds/">straightforward</a>
 to assume bounds that are &quot;implied&quot; by the type, like assuming that <code>K</code> must be
 <code>Hash</code> and <code>Eq</code> above, by tying it to the type definition:</p>
 <pre><code class="language-rust">struct HashMap&lt;K: Hash + Eq, V&gt; { ... }

@@ -75,17 +75,17 @@
 online and ready for action. The site is a central location to
 discover/download Rust crates, and Cargo is ready to start publishing to it
 today. For the next few months, we are asking that intrepid early adopters
-<a href="http://doc.crates.io/crates-io.html">help us</a> get the registry battle-tested.</p>
+<a href="https://doc.crates.io/crates-io.html">help us</a> get the registry battle-tested.</p>
 <p>Until Rust itself is stable early next year, registry dependencies will need to
 be updated often. Production users may want to continue using git dependencies
 until then.</p>
 <h2><a href="#what-is-cargo" aria-hidden="true" class="anchor" id="what-is-cargo"></a>What is Cargo?</h2>
-<p>Cargo is a package manager <a href="http://www.rust-lang.org/">for Rust</a>, <a href="https://github.com/rust-lang/cargo">in
+<p>Cargo is a package manager <a href="https://www.rust-lang.org/">for Rust</a>, <a href="https://github.com/rust-lang/cargo">in
 Rust</a>. Managing dependencies is a
 fundamentally difficult problem, but fortunately over the last decade there's
 been a lot of progress in the design of package managers. Designed by Carl
 Lerche and Yehuda Katz, Cargo follows the tradition of successes like
-<a href="http://bundler.io/">Bundler</a> and <a href="https://www.npmjs.org/">NPM</a>:</p>
+<a href="https://bundler.io/">Bundler</a> and <a href="https://www.npmjs.org/">NPM</a>:</p>
 <ol>
 <li>
 <p>Cargo leverages crates.io to foster a thriving community of crates that can
@@ -106,7 +106,7 @@ its core mechanics.</p>
 <h3><a href="#declaring-dependencies" aria-hidden="true" class="anchor" id="declaring-dependencies"></a>Declaring Dependencies</h3>
 <p>Cargo makes depending on third-party code as easy as depending on the standard
 library. When using Cargo, each crate will have an associated
-<a href="http://doc.crates.io/manifest.html">manifest</a> to describe itself and its
+<a href="https://doc.crates.io/manifest.html">manifest</a> to describe itself and its
 dependencies. Adding a new dependency is now as simple as adding one line to the
 manifest, and this ease has allowed Cargo in just a few short months to enable a
 large and growing network of Rust projects and libraries which were simply
@@ -122,14 +122,14 @@ build with the exact same versions years later. Up until now, users of Cargo
 have largely just downloaded dependencies directly from the source GitHub
 repository, but the primary source will now be shifting to crates.io.</p>
 <p>Other programming language communities have been quite successful with this form
-of central repository. For example <a href="http://rubygems.org/">rubygems.org</a> is your
-one-stop-shop for <a href="http://bundler.io/">Bundler</a> dependencies and
+of central repository. For example <a href="https://rubygems.org/">rubygems.org</a> is your
+one-stop-shop for <a href="https://bundler.io/">Bundler</a> dependencies and
 <a href="https://www.npmjs.org/">npmjs.org</a> has had over 600 million downloads in just
 this month alone! We intend for crates.io to serve a similar role for Rust as a
-critical piece of infrastructure for <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">Rust's long-term stability story at
+critical piece of infrastructure for <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">Rust's long-term stability story at
 1.0</a>.</p>
 <h2><a href="#versioning-and-reproducible-builds" aria-hidden="true" class="anchor" id="versioning-and-reproducible-builds"></a>Versioning and Reproducible Builds</h2>
-<p>Over the past few years, the concept of <a href="http://semver.org/">Semantic
+<p>Over the past few years, the concept of <a href="https://semver.org/">Semantic
 Versioning</a> has gained traction as a way for library
 developers to easily and clearly communicate with users when they make breaking
 changes. The core idea of semantic versioning is simple: each new release is
@@ -142,7 +142,7 @@ highest version of each major version (&quot;stable code&quot;) requested.  This
 encourages using stable distributions while still allowing duplicates of
 unstable code (pre-1.0 and git for example).</p>
 <p>Once the set of dependencies and their versions have been calculated, Cargo
-generates a <a href="http://doc.crates.io/guide.html#cargo.toml-vs-cargo.lock"><code>Cargo.lock</code></a> to encode this information. This &quot;lock file&quot; is
+generates a <a href="https://doc.crates.io/guide.html#cargo.toml-vs-cargo.lock"><code>Cargo.lock</code></a> to encode this information. This &quot;lock file&quot; is
 then distributed to collaborators of applications to ensure that the crates
 being built remain the same from one build to the next, across times, machines,
 and environments.</p>
@@ -165,12 +165,12 @@ they don't bitrot.</p>
 </li>
 <li>
 <p>Cargo generates documentation for all crates in a dependency graph, and it can
-even run <a href="http://doc.rust-lang.org/rustdoc.html#testing-the-documentation">Rust's documentation
+even run <a href="https://doc.rust-lang.org/rustdoc.html#testing-the-documentation">Rust's documentation
 tests</a> to
 ensure examples in documentation stay up to date.</p>
 </li>
 <li>
-<p>Cargo can run a <a href="http://doc.crates.io/build-script.html">build script</a> before any crate is compiled to
+<p>Cargo can run a <a href="https://doc.crates.io/build-script.html">build script</a> before any crate is compiled to
 perform tasks such as code generation, compiling native dependencies, or
 detecting native dependencies on the local system.</p>
 </li>
@@ -183,7 +183,7 @@ compiling plugins and other build dependencies for the right platform.</p>
 <h2><a href="#what-else-is-in-store" aria-hidden="true" class="anchor" id="what-else-is-in-store"></a>What else is in store?</h2>
 <p>The launch of crates.io is a key step in moving the Cargo ecosystem forward,
 but the story does not end here. Usage of crates.io is architected assuming a
-stable compiler, which should be <a href="http://blog.rust-lang.org/2014/09/15/Rust-1.0.html">coming soon</a>! There are also a
+stable compiler, which should be <a href="https://blog.rust-lang.org/2014/09/15/Rust-1.0.html">coming soon</a>! There are also a
 number of extensions to crates.io such as a hosted documentation service or a CI
 build infrastructure hook which could be built out using the crates.io APIs.</p>
 <p>This is just the beginning for crates.io, and I'm excited to start finding all

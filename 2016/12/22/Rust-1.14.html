@@ -94,7 +94,7 @@ GitHub</a>.</p>
 <p>Another exciting feature is <a href="https://users.rust-lang.org/t/compiling-to-the-web-with-rust-and-emscripten/7627">experimental support for WebAssembly</a> as a
 target, <code>wasm32-unknown-emscripten</code>. It is still early days, and there's a lot
 of bugs to shake out, so please give it a try and report them! To give you a
-small taste of how it works, once you have <a href="http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html">emscripten</a> installed, compiling
+small taste of how it works, once you have <a href="https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html">emscripten</a> installed, compiling
 some Rust code to WebAssembly is as easy as:</p>
 <pre><code class="language-bash">rustup target add wasm32-unknown-emscripten
 $ echo 'fn main() { println!(&quot;Hello, Emscripten!&quot;); }' &gt; hello.rs
@@ -102,8 +102,8 @@ $ rustc --target=wasm32-unknown-emscripten hello.rs
 $ node hello.js
 </code></pre>
 <p>The community has been doing interesting, experimental work in this area: see
-<a href="http://www.hellorust.com/emscripten/">Jan-Erik's slides</a> for the workshop he ran at <a href="http://www.rust-belt-rust.com/sessions/">Rust Belt Rust</a> for some
-examples, or check out <a href="http://timryan.org/rust-todomvc/">Tim's example of the classic TodoMVC project</a>.
+<a href="https://www.hellorust.com/emscripten/">Jan-Erik's slides</a> for the workshop he ran at <a href="https://www.rust-belt-rust.com/sessions/">Rust Belt Rust</a> for some
+examples, or check out <a href="https://github.com/rust-webplatform/rust-todomvc">Tim's example of the classic TodoMVC project</a>.
 This implementation builds off of his <a href="https://crates.io/crates/webplatform">webplatform
 crate</a>, which exposes the DOM to Rust.</p>
 <p>Speaking of platforms, a large number of platforms have gained additional

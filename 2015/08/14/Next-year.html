@@ -78,7 +78,7 @@ and where we see Rust going in the next year</strong>.</p>
 <p>Rust 1.0 focused on stability, community, and clarity.</p>
 <ul>
 <li>
-<p><strong>Stability</strong>, we've discussed quite a bit in <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">previous posts</a>
+<p><strong>Stability</strong>, we've discussed quite a bit in <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">previous posts</a>
 introducing our release channels and stabilization process.</p>
 </li>
 <li>
@@ -92,10 +92,10 @@ area. Community-wide debate on RFCs was indispensable for delivering a quality
 <p>All of this refinement prior to 1.0 was in service of reaching <strong>clarity</strong> on
 what Rust represents:</p>
 <ul>
-<li><a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Memory safety without garbage collection</a></li>
-<li><a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Concurrency without data races</a></li>
-<li><a href="http://blog.rust-lang.org/2015/05/11/traits.html">Abstraction without overhead</a></li>
-<li><a href="http://blog.rust-lang.org/2014/10/30/Stability.html">Stability without stagnation</a></li>
+<li><a href="https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Memory safety without garbage collection</a></li>
+<li><a href="https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Concurrency without data races</a></li>
+<li><a href="https://blog.rust-lang.org/2015/05/11/traits.html">Abstraction without overhead</a></li>
+<li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html">Stability without stagnation</a></li>
 </ul>
 </li>
 </ul>
@@ -116,7 +116,7 @@ over the course of the next year or so, falling into three categories:</p>
 <p>Let's look at some of the biggest plans in each of these categories.</p>
 <h3><a href="#doubling-down-infrastructure-investments" aria-hidden="true" class="anchor" id="doubling-down-infrastructure-investments"></a>Doubling down: infrastructure investments</h3>
 <h4><a href="#crater" aria-hidden="true" class="anchor" id="crater"></a>Crater</h4>
-<p>Our basic <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">stability promise</a> for Rust is that upgrades
+<p>Our basic <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">stability promise</a> for Rust is that upgrades
 between versions are &quot;hassle-free&quot;. To deliver on this promise, we need to
 detect compiler bugs that cause code to stop working. Naturally, the compiler
 has its own large test suite, but that is only a small fraction of the code
@@ -239,13 +239,13 @@ and is particularly useful for people writing tools that target Rust developers
 (who are likely to be familiar with running cargo).</p>
 <h4><a href="#tracing-hooks" aria-hidden="true" class="anchor" id="tracing-hooks"></a>Tracing hooks</h4>
 <p>One of the most promising ways of using Rust is by &quot;embedding&quot; Rust code into
-systems written in higher-level languages like <a href="http://blog.skylight.io/bending-the-curve-writing-safe-fast-native-gems-with-rust/">Ruby</a> or Python. This
+systems written in higher-level languages like <a href="https://blog.skylight.io/bending-the-curve-writing-safe-fast-native-gems-with-rust/">Ruby</a> or Python. This
 embedding is usually done by giving the Rust code a C API, and works reasonably
 well when the target sports a &quot;C friendly&quot; memory management scheme like
 reference counting or conservative GC.</p>
 <p>Integrating with an environment that uses a more advanced GC can be
 quite challenging. Perhaps the most prominent examples are JavaScript engines
-like V8 (used by <a href="https://nodejs.org/">node.js</a>) and SpiderMonkey (used by <a href="http://firefox.com/">Firefox</a> and
+like V8 (used by <a href="https://nodejs.org/">node.js</a>) and SpiderMonkey (used by <a href="https://firefox.com/">Firefox</a> and
 <a href="https://github.com/servo/servo">Servo</a>). Integrating with those engines requires very careful coding to ensure
 that all objects are properly rooted; small mistakes can easily lead to
 crashes. These are precisely the kind of memory management problems that Rust is
@@ -257,17 +257,17 @@ that integrates with advanced VMs smoothly and easily. Naturally, the design
 will respect Rust's &quot;pay for what you use&quot; policy, so that code which does not
 integrate with a GC is unaffected.</p>
 <h3><a href="#epilogue-rustcamp-2015-and-rusts-community-in-2016" aria-hidden="true" class="anchor" id="epilogue-rustcamp-2015-and-rusts-community-in-2016"></a>Epilogue: RustCamp 2015, and Rust's community in 2016</h3>
-<p>We recently held the first-ever Rust conference, <a href="http://rustcamp.com/">RustCamp</a>
+<p>We recently held the first-ever Rust conference, <a href="https://rustcamp.com/">RustCamp</a>
 2015, which sold out with 160 attendees. It was amazing to see so much
 of the Rust community in person, and to see the vibe of our online
 spaces translate into a friendly and approachable in-person event. The
 day opened with a keynote from Nicholas Matsakis and Aaron Turon
 laying out the core team's view of where we are and where we're
 headed. The
-<a href="http://rustcamp.com/schedule.html">slides are available online</a>
+<a href="https://rustcamp.com/schedule.html">slides are available online</a>
 (along with several other talks), and the above serves as the missing
 soundtrack. <strong>Update</strong>: now you can see
-<a href="http://confreaks.tv/events/rustcamp2015">the talks</a> as well!</p>
+<a href="https://confreaks.tv/events/rustcamp2015">the talks</a> as well!</p>
 <p>There was a definite theme of the day: Rust's greatest potential is to unlock a
 new generation of systems programmers. And that's not just because of the
 language; it's just as much because of a community culture that says &quot;Don't know

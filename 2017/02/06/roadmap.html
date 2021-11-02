@@ -88,20 +88,20 @@ small complexities entail glossing over safety holes or performance cliffs?</p>
 <p>Our approach with Rust has always been to bend the curve around tradeoffs, as
 embodied in the various pillars we've talked about on this blog:</p>
 <ul>
-<li><a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Memory safety without garbage collection</a></li>
-<li><a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Concurrency without data races</a></li>
-<li><a href="http://blog.rust-lang.org/2015/05/11/traits.html">Abstraction without overhead</a></li>
-<li><a href="http://blog.rust-lang.org/2014/10/30/Stability.html">Stability without stagnation</a></li>
+<li><a href="https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Memory safety without garbage collection</a></li>
+<li><a href="https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Concurrency without data races</a></li>
+<li><a href="https://blog.rust-lang.org/2015/05/11/traits.html">Abstraction without overhead</a></li>
+<li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html">Stability without stagnation</a></li>
 </ul>
 <p>In the core language we've sometimes been able to leverage things like Rust's
-ownership model to make features easier to use. For example, <a href="http://huonw.github.io/blog/2015/05/finding-closure-in-rust/">closures in Rust</a>,
+ownership model to make features easier to use. For example, <a href="https://huonw.github.io/blog/2015/05/finding-closure-in-rust/">closures in Rust</a>,
 unlike those in C++, do not require explicit &quot;capture clauses&quot;; Rust's ownership
 tracking means that we can automatically infer whether to move or borrow data
 into the closure, without sacrificing reliability or performance. We've also
 been working to make the language easier to learn by improving the
 <a href="https://blog.rust-lang.org/2016/08/10/Shape-of-errors-to-come.html">compiler's error messages</a>. And <a href="https://blog.rust-lang.org/2016/05/05/cargo-pillars.html">Cargo</a> is an example of early focus on
 productivity that has only enhanced the power of systems programming with Rust,
-allowing for <a href="http://os.phil-opp.com/">OS</a>
+allowing for <a href="https://os.phil-opp.com/">OS</a>
 <a href="https://intermezzos.github.io/">projects</a> to easily build and leverage an
 ecosystem of shared libraries. There's so much more we can do along these lines!</p>
 <p>In short, <strong>productivity should be a core value of Rust</strong>, and we should work
@@ -142,7 +142,7 @@ testing and benchmarking frameworks, new API and documentation guidelines, and
 </li>
 <li>
 <p><a href="https://github.com/rust-lang/rust-roadmap/issues/10"><strong>Rust should be well-equipped for writing robust, high-scale servers</strong></a>. Plans
-mostly focus on the <a href="http://tokio.rs/">Tokio project</a> for asynchronous I/O and
+mostly focus on the <a href="https://tokio.rs/">Tokio project</a> for asynchronous I/O and
 potentially
 <a href="https://github.com/rust-lang/rfcs/pull/1823">async/await notation</a>.</p>
 </li>

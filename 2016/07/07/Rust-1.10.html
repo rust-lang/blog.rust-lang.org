@@ -79,7 +79,7 @@ website, and check out the <a href="https://github.com/rust-lang/rust/blob/maste
 <h3><a href="#whats-in-110-stable" aria-hidden="true" class="anchor" id="whats-in-110-stable"></a>What's in 1.10 stable</h3>
 <p>Rust 1.10 contains one of the most-requested features in Rust: through the <a href="https://github.com/rust-lang/rust/pull/32900"><code>-C panic=abort</code> flag</a> or a <a href="https://github.com/rust-lang/cargo/pull/2687">setting in your <code>Cargo.toml</code></a>, when a <code>panic!</code>
 happens, it will abort rather than unwind. Why would you want to do this?
-Remember that <a href="http://blog.rust-lang.org/2016/05/26/Rust-1.9.html">panics are for unexpected problems</a>, and for many applications,
+Remember that <a href="https://blog.rust-lang.org/2016/05/26/Rust-1.9.html">panics are for unexpected problems</a>, and for many applications,
 aborting is a reasonable choice. With an abort, less code gets generated,
 meaning that binary sizes are a bit smaller, and compilation time is
 ever-so-slightly faster. Some very rough numbers are 10% smaller binaries, and
@@ -123,8 +123,8 @@ groups:</p>
 <ul>
 <li><a href="https://github.com/rust-lang/rfcs/pull/1252"><code>std::os::windows::fs::OpenOptionsExt</code></a>, for Windows-specific file operations.</li>
 <li>The ability to <a href="https://github.com/rust-lang/rfcs/pull/1328">register and unregister panic hooks</a> with <code>std::panic::{set,take}_hook</code>.</li>
-<li><a href="http://doc.rust-lang.org/std/ffi/struct.CStr.html#method.from_bytes_with_nul"><code>CStr::from_bytes_with_nul</code></a>, to create a <code>CStr</code> from a byte slice (<a href="http://doc.rust-lang.org/std/ffi/struct.CStr.html#method.from_bytes_with_nul_unchecked">and an unchecked variant</a>).</li>
-<li>Small improvements to <a href="http://doc.rust-lang.org/std/fs/struct.Metadata.html"><code>std::fs::Metadata</code></a>.</li>
+<li><a href="https://doc.rust-lang.org/std/ffi/struct.CStr.html#method.from_bytes_with_nul"><code>CStr::from_bytes_with_nul</code></a>, to create a <code>CStr</code> from a byte slice (<a href="https://doc.rust-lang.org/std/ffi/struct.CStr.html#method.from_bytes_with_nul_unchecked">and an unchecked variant</a>).</li>
+<li>Small improvements to <a href="https://doc.rust-lang.org/std/fs/struct.Metadata.html"><code>std::fs::Metadata</code></a>.</li>
 <li><a href="https://github.com/rust-lang/rfcs/pull/1443"><code>compare_exchange</code> for various atomic types</a>.</li>
 <li>A lot of <a href="https://github.com/rust-lang/rfcs/pull/1479">UNIX-specific networking capabilities</a> via
 <code>std::os::unix::net::{UnixStream, UnixListener, UnixDatagram, SocketAddr}</code>.</li>

@@ -71,7 +71,7 @@
     </div>
 
     <div class="post">
-      <p><a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Previous posts</a> have covered two pillars of Rust's design:</p>
+      <p><a href="https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Previous posts</a> have covered two pillars of Rust's design:</p>
 <ul>
 <li>Memory safety without garbage collection</li>
 <li>Concurrency without data races</li>
@@ -115,7 +115,7 @@ you want to dispatch at runtime.</p>
 <li>
 <p><strong>Traits solve a variety of additional problems beyond simple abstraction</strong>.
 They are used as &quot;markers&quot; for types, like the <code>Send</code> marker described
-<a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">in a previous post</a>. They can be used to define &quot;extension methods&quot;
+<a href="https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">in a previous post</a>. They can be used to define &quot;extension methods&quot;
 -- that is, to add methods to an externally-defined type. They largely obviate
 the need for traditional method overloading. And they provide a simple scheme
 for operator overloading.</p>
@@ -157,7 +157,7 @@ functions, inherent methods are always &quot;in scope&quot;.</li>
 </ul>
 <p>The first parameter for a method is always an explicit &quot;self&quot;, which is either
 <code>self</code>, <code>&amp;mut self</code>, or <code>&amp;self</code> depending on the
-<a href="http://blog.skylight.io/rust-means-never-having-to-close-a-socket/">level of ownership required</a>.  Methods are invoked using the <code>.</code>
+<a href="https://blog.skylight.io/rust-means-never-having-to-close-a-socket/">level of ownership required</a>.  Methods are invoked using the <code>.</code>
 notation familiar from object-oriented programming, and the self parameter is
 <em>implicitly borrowed</em> as per the form of <code>self</code> used in the method:</p>
 <pre><code class="language-rust">let p = Point { x: 1.2, y: -3.7 };
@@ -298,7 +298,7 @@ out the internal vector? The answer is the usual one: indirection. We'll store
 }
 </code></pre>
 <p>Here, we are using the <code>ClickCallback</code> trait as if it were a type. Actually, in
-Rust, <a href="http://smallcultfollowing.com/babysteps/blog/2014/01/05/dst-take-5/">traits <em>are</em> types, but they are &quot;unsized&quot;</a>, which roughly means
+Rust, <a href="https://smallcultfollowing.com/babysteps/blog/2014/01/05/dst-take-5/">traits <em>are</em> types, but they are &quot;unsized&quot;</a>, which roughly means
 that they are only allowed to show up behind a pointer like <code>Box</code> (which points
 onto the heap) or <code>&amp;</code> (which can point anywhere).</p>
 <p>In Rust, a type like <code>&amp;ClickCallback</code> or <code>Box&lt;ClickCallback&gt;</code> is called a &quot;trait
@@ -321,7 +321,7 @@ wind up playing a few other important roles in Rust. Here's a taste:</p>
 <li>
 <p><strong>Closures</strong>. Somewhat like the <code>ClickCallback</code> trait, closures in Rust are
 simply particular traits. You can read more about how this works in
-Huon Wilson's <a href="http://huonw.github.io/blog/2015/05/finding-closure-in-rust/">in-depth post</a> on the topic.</p>
+Huon Wilson's <a href="https://huonw.github.io/blog/2015/05/finding-closure-in-rust/">in-depth post</a> on the topic.</p>
 </li>
 <li>
 <p><strong>Conditional APIs</strong>. Generics make it possible to implement a trait
@@ -355,7 +355,7 @@ question, and <em>voila</em>, the method is available.</p>
 which can then be used in both generics and trait objects. Markers can be
 defined in libraries, and they automatically provide <code>#[derive]</code>-style
 implementations: if all of a types components are <code>Send</code>, for example, so is
-the type. As we saw <a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">before</a>, these markers can be very powerful:
+the type. As we saw <a href="https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">before</a>, these markers can be very powerful:
 the <code>Send</code> marker is how Rust guarantees thread safety.</p>
 </li>
 <li>
@@ -364,7 +364,7 @@ method is defined with multiple signatures. But traits provide much of the
 benefit of overloading: if a method is defined generically over a trait, it
 can be called with any type implementing that trait. Compared to traditional
 overloading, this has two advantages. First, it means the overloading is less
-<a href="http://dl.acm.org/citation.cfm?id=75283">ad hoc</a>: once you understand a trait, you immediately understand the
+<a href="https://dl.acm.org/citation.cfm?id=75283">ad hoc</a>: once you understand a trait, you immediately understand the
 overloading pattern of any APIs using it. Second, it is <em>extensible</em>: you can
 effectively provide new overloads downstream from a method by providing new
 trait implementations.</p>
@@ -381,7 +381,7 @@ that supports a wide range of use cases and patterns, without having to pile on
 additional language features.</strong></p>
 <h3><a href="#the-future" aria-hidden="true" class="anchor" id="the-future"></a>The future</h3>
 <p>One of the primary ways that languages tend to evolve is in their abstraction
-facilities, and Rust is no exception: many of our <a href="http://internals.rust-lang.org/t/priorities-after-1-0/1901">post-1.0 priorities</a>
+facilities, and Rust is no exception: many of our <a href="https://internals.rust-lang.org/t/priorities-after-1-0/1901">post-1.0 priorities</a>
 are extensions of the trait system in one direction or another. Here are some
 highlights.</p>
 <ul>
@@ -417,7 +417,7 @@ reuse that don't fit well into the language today -- notably, object-oriented
 hierarchies found in things like the DOM, GUI frameworks, and many
 games. Accommodating these use cases without adding too much overlap or
 complexity is a very interesting design problem, and one that Niko Matsakis
-has started a separate <a href="http://smallcultfollowing.com/babysteps/blog/2015/05/05/where-rusts-enum-shines/">blog series</a> about. It's not yet clear
+has started a separate <a href="https://smallcultfollowing.com/babysteps/blog/2015/05/05/where-rusts-enum-shines/">blog series</a> about. It's not yet clear
 whether this can all be done with traits, or whether some other ingredients
 are needed.</p>
 </li>

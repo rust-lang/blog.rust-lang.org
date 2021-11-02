@@ -87,15 +87,15 @@ you ship on.</p>
 <p>You want to build an ultraportable binary you can ship to any Linux platform.</p>
 </li>
 <li>
-<p>You want to target the browser with <a href="http://kripken.github.io/emscripten-site/">Emscripten</a> or <a href="https://webassembly.github.io/">WebAssembly</a>.</p>
+<p>You want to target the browser with <a href="https://kripken.github.io/emscripten-site/">Emscripten</a> or <a href="https://webassembly.github.io/">WebAssembly</a>.</p>
 </li>
 </ul>
 <p>In other words, <strong>you want to develop/build on one &quot;host&quot; platform, but get a
 final binary that runs on a different &quot;target&quot; platform</strong>.</p>
-<p>Thanks to the <a href="http://llvm.org">LLVM</a> backend, it's always been possible <em>in principle</em>
+<p>Thanks to the <a href="https://llvm.org">LLVM</a> backend, it's always been possible <em>in principle</em>
 to cross-compile Rust code: just tell the backend to use a different
 target! And indeed, intrepid hackers have put Rust on embedded systems
-<a href="http://mirrors.link/posts/cross-compiling-rust-on-os-x-for-raspberry-pi-3">like the Raspberry Pi 3</a>, <a href="https://blog.thiago.me/raspberry-pi-bare-metal-programming-with-rust/">bare metal ARM</a>, <a href="https://github.com/japaric/rust-on-openwrt">MIPS routers running
+<a href="https://mirrors.link/posts/cross-compiling-rust-on-os-x-for-raspberry-pi-3">like the Raspberry Pi 3</a>, <a href="https://blog.thiago.me/raspberry-pi-bare-metal-programming-with-rust/">bare metal ARM</a>, <a href="https://github.com/japaric/rust-on-openwrt">MIPS routers running
 OpenWRT</a>, and many others.</p>
 <p>But in practice, there are a lot of ducks you have to get in a row to
 make it work: the appropriate Rust standard library, a cross-compiling
@@ -113,7 +113,7 @@ them to you via a new tool called <strong><a href="https://www.rustup.rs">rustup
 <p>At its heart, <strong>rustup is a <em>toolchain manager</em> for Rust</strong>. It can
 download and switch between copies of the Rust compiler and standard
 library for all supported platforms, and track Rust's nightly, beta,
-and release <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">channels</a>, as well as specific versions. In this way
+and release <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">channels</a>, as well as specific versions. In this way
 rustup is similar to the <a href="https://rvm.io/">rvm</a>, <a href="https://github.com/rbenv/rbenv">rbenv</a> and <a href="https://github.com/yyuu/pyenv">pyenv</a> tools for Ruby and
 Python. I'll walk through all of this functionality, and the
 situations where it's useful, in the rest of the post.</p>
@@ -210,7 +210,7 @@ libraries they have installed.</p>
 <p>Today's Rust depends on libc, and on most Linuxes that means
 glibc. It's technically challenging to fully statically link glibc,
 which presents difficulties when using it to produce a truly standalone
-binary. Fortunately, an alternative exists: <a href="http://www.musl-libc.org/">musl</a>, a small, modern
+binary. Fortunately, an alternative exists: <a href="https://www.musl-libc.org/">musl</a>, a small, modern
 implementation of libc that can be easily statically linked. Rust has been
 compatible with musl since version 1.1, but until recently developers
 have needed to build their own compiler to benefit from it.</p>
@@ -333,7 +333,7 @@ output of which is not included here):</p>
 <pre><code>rust:~/home$ cd
 rust:~$ curl -O https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
 rust:~$ tar xzf android-sdk_r24.4.1-linux.tgz
-rust:~$ curl -O http://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
+rust:~$ curl -O https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
 rust:~$ unzip android-ndk-r10e-linux-x86_64.zip
 </code></pre>
 <p>We further need to create what the NDK calls a <a href="https://developer.android.com/ndk/guides/standalone_toolchain.html">&quot;standalone
@@ -356,7 +356,7 @@ release (which at the time of this writing is 'r11c'). Rust's <code>std</code> i
 built against <code>r10e</code> and links to symbols that are no longer included
 in the NDK. So for now we have to use the older NDK.  Second, in
 building the standalone toolchain we passed <code>--platform=android-18</code> to
-<code>make-standalone-toolchain.sh</code>. The &quot;18&quot; here is the Android <a href="http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#ApiLevels">API
+<code>make-standalone-toolchain.sh</code>. The &quot;18&quot; here is the Android <a href="https://developer.android.com/guide/topics/manifest/uses-sdk-element.html#ApiLevels">API
 level</a>.
 Today, Rust's <code>arm-linux-androideabi</code> target is built against Android
 API level 18, and should theoretically be forwards-compatible with
@@ -365,7 +365,7 @@ greatest Android compatibility that Rust presently allows.</p>
 <p>The final thing for us to do is tell Cargo where to find the android
 linker, which is in the standalone NDK toolchain we just created. To
 do that we configure the <code>arm-linux-androideabi</code> target in
-<a href="http://doc.crates.io/config.html"><code>.cargo/config</code></a> with the 'linker' value. And while we're doing that
+<a href="https://doc.crates.io/config.html"><code>.cargo/config</code></a> with the 'linker' value. And while we're doing that
 we'll go ahead and set the default target for this project to Android
 so we don't have to keep calling cargo with the <code>--target</code> option.</p>
 <pre><code class="language-toml">[build]
@@ -406,7 +406,7 @@ cross-compilation tooling, including <a href="https://github.com/japaric/xargo">
 build the standard library for targets unsupported by rustup, and
 <a href="https://users.rust-lang.org/t/announcing-cargo-apk/5501">cargo-apk</a>, which builds Android packages from Cargo packages.</p>
 <p>Finally, the most exciting platform on the horizon for Rust is not a traditional
-target for systems languages: the web. With <a href="http://kripken.github.io/emscripten-site/">Emscripten</a> today it's quite easy
+target for systems languages: the web. With <a href="https://kripken.github.io/emscripten-site/">Emscripten</a> today it's quite easy
 to run <em>C++</em> code on the web by converting LLVM IR to JavaScript (or the asm.js
 subset of JavaScript). And the upcoming <a href="https://webassembly.github.io/">WebAssembly</a> (wasm) standard will
 cement the web platform as a first-class target for programming languages.</p>
