@@ -166,7 +166,7 @@ the tarball, statically preventing dangling pointer bugs that are easy to
 make when working directly with C. (If you're not familiar with this kind of
 borrowing in Rust, have a look at Yehuda Katz's [blog post on ownership].)
 
-[blog post]: http://blog.skylight.io/rust-means-never-having-to-close-a-socket/
+[blog post]: https://blog.skylight.io/rust-means-never-having-to-close-a-socket/
 
 A key aspect of the Rust binding here is that it is a safe function, meaning
 that callers do not have to use `unsafe` blocks to invoke it! Although it has an
@@ -184,7 +184,7 @@ and [libsodium][sodiumoxide]. This list is also growing quite rapidly on
 [crates.io][crates-io], so your favorite C library may already be bound or will
 be bound soon!
 
-[blog post on ownership]: http://blog.skylight.io/rust-means-never-having-to-close-a-socket/
+[blog post on ownership]: https://blog.skylight.io/rust-means-never-having-to-close-a-socket/
 [rust-openssl]: https://crates.io/crates/openssl
 [git2-rs]: https://crates.io/crates/git2
 [curl-rust]: https://crates.io/crates/curl
@@ -227,7 +227,7 @@ this is the keyword `extern`. This is a specialized form of specifying the [ABI
 for a function][abi-fn] which enables the function to be compatible with a C
 function call.
 
-[abi-fn]: http://doc.rust-lang.org/reference.html#extern-functions
+[abi-fn]: https://doc.rust-lang.org/reference.html#extern-functions
 
 Finally, if you [take a look at the `Cargo.toml`][cargo-toml] you'll see that
 this library is not compiled as a normal Rust library (rlib) but instead as a

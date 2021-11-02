@@ -8,7 +8,7 @@ There are changes afoot in the Rust world. If you've tried out the latest nightl
 something is *a little different*. For the past few months we've been working on new way of
 reporting errors that's easier to read and understand. This is part of an on-going campaign to
 improve Rust's usability across the board. We mentioned ways to help us
-[make the transition](http://www.jonathanturner.org/2016/08/helping-out-with-rust-errors.html)
+[make the transition](https://www.jonathanturner.org/2016/08/helping-out-with-rust-errors.html)
 to the new errors, and already many people have jumped in (and thank you to those volunteers!)
 
 Let's dive in and see what's changed.  We'll start with a simple example:
@@ -166,7 +166,7 @@ extended errors looks like, come jump into the #rust-cli channel on irc.mozilla.
 
 Great!  We love the enthusiasm. There's
 [a lot to do](https://github.com/rust-lang/rust/issues/35233), and a
-[lot of skills](http://www.jonathanturner.org/2016/08/helping-out-with-rust-errors.html) that could
+[lot of skills](https://www.jonathanturner.org/2016/08/helping-out-with-rust-errors.html) that could
 help us in different ways. Whether you're good at unit tests, writing docs,
 writing code, or working on designs, there are places to jump in.
 
@@ -188,4 +188,4 @@ improve the learning curve bit by bit, and we're looking forward to seeing how f
 [new_errors3]: /images/2016-08-09-Errors/new_errors3.png
 [new_errors4]: /images/2016-08-09-Errors/new_errors4.png
 [Dybuk]: https://github.com/ticki/dybuk
-[Elm]: http://elm-lang.org/blog/compiler-errors-for-humans
+[Elm]: https://elm-lang.org/blog/compiler-errors-for-humans

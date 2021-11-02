@@ -64,9 +64,9 @@ The goal of this post is to give you some idea of how that's done.
 systems. If you're already familiar with these, you can skip the two
 "background" sections and jump straight into concurrency. If you want
 a deeper introduction, I can't recommend
-[Yehuda Katz's post](http://blog.skylight.io/rust-means-never-having-to-close-a-socket/)
+[Yehuda Katz's post](https://blog.skylight.io/rust-means-never-having-to-close-a-socket/)
 highly enough. And
-[the Rust book](http://doc.rust-lang.org/book/ownership.html) has all
+[the Rust book](https://doc.rust-lang.org/book/ownership.html) has all
 the details.
 
 In Rust, every value has an "owning scope," and passing or returning a
@@ -262,7 +262,7 @@ it ties together sharing and communication:
 > Do not communicate by sharing memory; instead, share memory by
 > communicating.
 >
-> --[Effective Go](http://golang.org/doc/effective_go.html)
+> --[Effective Go](https://golang.org/doc/effective_go.html)
 
 **Rust's ownership makes it easy to turn that advice into a
 compiler-checked rule**. Consider the following channel API
@@ -610,14 +610,14 @@ catch new classes of bugs. Libraries like [syncbox][syncbox] and
 and we expect to invest heavily in this space in the next few
 months. Stay tuned!
 
-[mpsc]: http://static.rust-lang.org/doc/master/std/sync/mpsc/index.html
-[mutex]: http://static.rust-lang.org/doc/master/std/sync/struct.Mutex.html
-[send]: http://static.rust-lang.org/doc/master/std/marker/trait.Send.html
-[sync]: http://static.rust-lang.org/doc/master/std/marker/trait.Sync.html
+[mpsc]: https://static.rust-lang.org/doc/master/std/sync/mpsc/index.html
+[mutex]: https://static.rust-lang.org/doc/master/std/sync/struct.Mutex.html
+[send]: https://static.rust-lang.org/doc/master/std/marker/trait.Send.html
+[sync]: https://static.rust-lang.org/doc/master/std/marker/trait.Sync.html
 [scoped]: https://doc.rust-lang.org/1.0.0/std/thread/fn.scoped.html
 [syncbox]: https://github.com/carllerche/syncbox
 [simple_parallel]: https://github.com/huonw/simple_parallel
 [crossbeam-crate]: https://crates.io/crates/crossbeam
 [crossbeam-doc]: https://docs.rs/crossbeam/0.8.0/crossbeam/fn.scope.html
 [scoped-threadpool-crate]: https://crates.io/crates/scoped_threadpool
-[scoped-threadpool-doc]: http://kimundi.github.io/scoped-threadpool-rs/scoped_threadpool/index.html#examples:
+[scoped-threadpool-doc]: https://kimundi.github.io/scoped-threadpool-rs/scoped_threadpool/index.html#examples:

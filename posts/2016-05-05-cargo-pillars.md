@@ -406,7 +406,7 @@ bench` defaults to release mode, which uses maximum optimizations. `cargo build
 --release` similarly builds in optimized mode by default.
 
 > As an aside, the default behavior of each command is configurable through
-> [profiles](http://doc.crates.io/manifest.html#the-profile-sections) in the
+> [profiles](https://doc.crates.io/manifest.html#the-profile-sections) in the
 > `Cargo.toml`. This allows you to configure things like the optimization level,
 > whether to include debug symbols and more. Rather than forcing you to use a
 > custom workflow if something doesn't precisely meet your needs, the profiles
@@ -469,7 +469,7 @@ wouldn't want it to!)
 
 Today, Cargo will automatically share dependencies between crates if they depend
 on the same *major* version (or minor version before 1.0), since Rust uses
-[semantic versioning](http://semver.org/). This means that if `nix` and `datetime`
+[semantic versioning](https://semver.org/). This means that if `nix` and `datetime`
 both depend on some version of `libc 0.2.x`, they will get the same version. In
 this case, they do, and the program compiles.
 

@@ -193,7 +193,7 @@ those assumptions explicitly in the signature. This situation seems ripe for an
 ergonomic improvement.
 
 It's
-[straightforward](http://smallcultfollowing.com/babysteps/blog/2014/07/06/implied-bounds/)
+[straightforward](https://smallcultfollowing.com/babysteps/blog/2014/07/06/implied-bounds/)
 to assume bounds that are "implied" by the type, like assuming that `K` must be
 `Hash` and `Eq` above, by tying it to the type definition:
 

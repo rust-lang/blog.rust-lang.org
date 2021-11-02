@@ -7,7 +7,7 @@ author: The Rust Community Team
 The [Rust Community Team](https://community.rs) is pleased to announce the
 first annual Underhanded Rust Contest, inspired by the [Underhanded
 C](http://www.underhanded-c.org/) and [Underhanded
-Crypto](https://underhandedcrypto.com/) contests. Our goal with
+Crypto](http://underhandedcrypto.com/) contests. Our goal with
 [Rust](https://www.rust-lang.org/) is to make it easy to write trustworthy
 low-level software that is resistant to accidental security vulnerabilities.
 Less often challenged has been Rust's ability to protect against

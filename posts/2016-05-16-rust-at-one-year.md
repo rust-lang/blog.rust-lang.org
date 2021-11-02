@@ -14,9 +14,9 @@ Rust is a language that gives you:
 It's a language for writing highly reliable, screamingly fast software&mdash;and
 having fun doing it.
 
-[classic concurrency pitfalls]: http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html
-[Python]: http://lucumr.pocoo.org/2015/5/27/rust-for-pythonistas/
-[Ruby]: http://diesel.rs/
+[classic concurrency pitfalls]: https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html
+[Python]: https://lucumr.pocoo.org/2015/5/27/rust-for-pythonistas/
+[Ruby]: https://diesel.rs/
 
 And yesterday, Rust turned one year old.
 
@@ -46,16 +46,16 @@ will soon be launching a coordinated, global effort following the [Bridge] model
 (e.g. RailsBridge). If you want to get involved, or have other ideas for
 outreach, please let [the community team] know.
 
-[survey]: http://blog.rust-lang.org/2016/05/09/survey.html
+[survey]: https://blog.rust-lang.org/2016/05/09/survey.html
 
 [most loved]: https://stackoverflow.com/research/developer-survey-2016
 
 [commits]: https://github.com/rust-lang/rust/commits/master
 [RFCs]: https://github.com/rust-lang/rfcs
-[stability delivered]: http://blog.rust-lang.org/2014/10/30/Stability.html
+[stability delivered]: https://blog.rust-lang.org/2014/10/30/Stability.html
 [crates]: https://crates.io/
 
-[Bridge]: http://bridgefoundry.org/
+[Bridge]: https://bridgefoundry.org/
 [the community team]: mailto:community-team@rust-lang.org
 
 ### Rust in production
@@ -77,7 +77,7 @@ engineer for the project, "the advantages of Rust are many: really powerful
 abstractions, no null, no segfaults, no leaks, yet C-like performance and
 control over memory."
 
-[dropbox]: http://www.wired.com/2016/03/epic-story-dropboxs-exodus-amazon-cloud-empire/
+[dropbox]: https://www.wired.com/2016/03/epic-story-dropboxs-exodus-amazon-cloud-empire/
 [dropbox quote]: https://news.ycombinator.com/item?id=11283688
 
 Second, there's Mozilla. They've long been developing [Servo] as a research
@@ -94,14 +94,14 @@ Servo&mdash;and not just in test mode.
 [Servo]: https://github.com/servo/servo/
 [mp4 metadata parsing]: https://github.com/mozilla/mp4parse-rust
 [ff]: https://telemetry.mozilla.org/new-pipeline/dist.html#!cumulative=0&end_date=2016-04-07&keys=__none__!__none__!__none__&max_channel_version=release%252F45&measure=MEDIA_RUST_MP4PARSE_SUCCESS&min_channel_version=null&product=Firefox&sanitize=1&sort_keys=submissions&start_date=2016-03-03&table=0&trim=1&use_submission_date=0
-[groundwork for Rust integration]: http://wiki.mozilla.org/Oxidation
+[groundwork for Rust integration]: https://wiki.mozilla.org/Oxidation
 
 We're hearing [similar stories] from a range of other shops that are putting
 Rust into production: Rust helps a team punch above its weight. It gives many of
 the same benefits as traditional systems languages while being more
 approachable, safer and often more productive.
 
-[similar stories]: http://confreaks.tv/videos/rustcamp2015-using-rust-from-c-or-any-language
+[similar stories]: https://confreaks.tv/videos/rustcamp2015-using-rust-from-c-or-any-language
 
 These are just a few stories of Rust in production, but we'd love to [hear yours]!
 
@@ -126,20 +126,20 @@ has been growing and polishing its ecosystem and tooling:
   coherence&mdash;particularly around async IO and the web stack&mdash;will
   continue to be a major focus in the coming year.
 
-[filesystem access]: http://static.rust-lang.org/doc/master/std/fs/index.html
-[networking]: http://static.rust-lang.org/doc/master/std/net/index.html
-[time]: http://static.rust-lang.org/doc/master/std/time/index.html
-[collections]: http://static.rust-lang.org/doc/master/std/collections/index.html
+[filesystem access]: https://static.rust-lang.org/doc/master/std/fs/index.html
+[networking]: https://static.rust-lang.org/doc/master/std/net/index.html
+[time]: https://static.rust-lang.org/doc/master/std/time/index.html
+[collections]: https://static.rust-lang.org/doc/master/std/collections/index.html
 [libc]: https://github.com/rust-lang/libc
 [winapi]: https://github.com/retep998/winapi-rs
 [gcc]: https://github.com/alexcrichton/gcc-rs
 [mio]: https://github.com/carllerche/mio/
-[rayon]: http://smallcultfollowing.com/babysteps/blog/2015/12/18/rayon-data-parallelism-in-rust/
-[crossbeam]: http://aturon.github.io/blog/2015/08/27/epoch/
+[rayon]: https://smallcultfollowing.com/babysteps/blog/2015/12/18/rayon-data-parallelism-in-rust/
+[crossbeam]: https://aturon.github.io/blog/2015/08/27/epoch/
 [regex]: https://github.com/rust-lang-nursery/regex
-[diesel]: http://diesel.rs/
+[diesel]: https://diesel.rs/
 [nom]: https://github.com/Geal/nom
-[lalrpop]: http://smallcultfollowing.com/babysteps/blog/2015/09/14/lalrpop/
+[lalrpop]: https://smallcultfollowing.com/babysteps/blog/2015/09/14/lalrpop/
 [html5ever]: https://kmcallister.github.io/talks/rust/2014-rust-macros/slides.html
 
 - **Platforms and targets**. Rust's memory footprint is not much bigger than C's, which
@@ -151,7 +151,7 @@ has been growing and polishing its ecosystem and tooling:
   a breeze to manage and compile to these various targets. As of
   [Rust 1.6][no_std], you can use Rust without its full standard library,
   limiting to a core library that does not require any OS services (and hence is
-  suitable for [writing OSes](http://os.phil-opp.com/)
+  suitable for [writing OSes](https://os.phil-opp.com/)
   [in Rust][intermezzos]). Finally, there are an increasing number of libraries
   for embedding Rust code into other contexts, like [node.js][neon],
   [Ruby][helix] and [Go][rure-go].
@@ -159,11 +159,11 @@ has been growing and polishing its ecosystem and tooling:
 [MSVC toolchain]: https://github.com/rust-lang/rust/pull/25350
 [MUSL]: https://www.musl-libc.org/
 [platforms]: https://forge.rust-lang.org/platform-support.html
-[rustup tool]: http://blog.rust-lang.org/2016/05/13/rustup.html
-[no_std]: http://blog.rust-lang.org/2016/01/21/Rust-1.6.html
+[rustup tool]: https://blog.rust-lang.org/2016/05/13/rustup.html
+[no_std]: https://blog.rust-lang.org/2016/01/21/Rust-1.6.html
 [intermezzos]: https://intermezzos.github.io/
-[neon]: http://calculist.org/blog/2015/12/23/neon-node-rust/
-[helix]: http://blog.skylight.io/introducing-helix/
+[neon]: https://calculist.org/blog/2015/12/23/neon-node-rust/
+[helix]: https://blog.skylight.io/introducing-helix/
 [rure-go]: https://github.com/BurntSushi/rure-go
 
 - **Tools**. Because Rust looks just like C on the outside, it's instantly
@@ -180,21 +180,21 @@ has been growing and polishing its ecosystem and tooling:
   [Cargo], gained numerous abilities this year, most notably the
   [install subcommand].
 
-[lldb]: http://lldb.llvm.org/
+[lldb]: https://lldb.llvm.org/
 [gdb]: https://www.gnu.org/software/gdb/
 [perf]: https://perf.wiki.kernel.org/index.php/Main_Page
-[valgrind]: http://valgrind.org/
+[valgrind]: https://valgrind.org/
 [callgrind]: https://kcachegrind.github.io/html/Home.html
 [enrich the experience]: https://michaelwoerister.github.io/2015/03/27/rust-xxdb.html
 [gdb hooks]: https://sourceware.org/ml/gdb-patches/2016-04/msg00570.html
-[cargo profile]: http://www.suchin.co/2016/05/11/Introducing-Cargo-Profiler/
+[cargo profile]: https://www.suchin.co/2016/05/11/Introducing-Cargo-Profiler/
 [IDEs]: https://www.rust-lang.org/ides.html
 [Racer]: https://github.com/phildawes/racer
 [numerous IDE plugins]: https://areweideyet.com/
 [rustfmt]: https://github.com/rust-lang-nursery/rustfmt
 [official style]: https://github.com/rust-lang/rfcs/pull/1607
-[Cargo]: http://blog.rust-lang.org/2016/05/05/cargo-pillars.html
-[install subcommand]: http://blog.rust-lang.org/2015/12/10/Rust-1.5.html
+[Cargo]: https://blog.rust-lang.org/2016/05/05/cargo-pillars.html
+[install subcommand]: https://blog.rust-lang.org/2015/12/10/Rust-1.5.html
 
 - **Compiler**. We've seen some [across-the-board improvements] to compile
   times, and now offer [parallelized code generation][parallel codegen] for
@@ -207,10 +207,10 @@ has been growing and polishing its ecosystem and tooling:
   [improve the "at a glance" readability of errors][error format]. Expect to
   hear more on both fronts soon.
 
-[across-the-board improvements]: http://blog.rust-lang.org/2015/06/25/Rust-1.1.html
-[parallel codegen]: http://blog.rust-lang.org/2015/08/06/Rust-1.2.html
+[across-the-board improvements]: https://blog.rust-lang.org/2015/06/25/Rust-1.1.html
+[parallel codegen]: https://blog.rust-lang.org/2015/08/06/Rust-1.2.html
 [incremental compilation]: https://github.com/rust-lang/rfcs/pull/1298
-[MIR]: http://blog.rust-lang.org/2016/04/19/MIR.html
+[MIR]: https://blog.rust-lang.org/2016/04/19/MIR.html
 [error index]: https://doc.rust-lang.org/error-index.html
 [error format]: https://internals.rust-lang.org/t/new-error-format/3438
 
@@ -222,7 +222,7 @@ has been growing and polishing its ecosystem and tooling:
 
 [Rust users]: https://internals.rust-lang.org/t/production-user-research-summary/2530
 [improved error handling]: https://github.com/rust-lang/rfcs/pull/243
-[more flexible borrowing rules]: http://smallcultfollowing.com/babysteps/blog/2016/04/27/non-lexical-lifetimes-introduction/
+[more flexible borrowing rules]: https://smallcultfollowing.com/babysteps/blog/2016/04/27/non-lexical-lifetimes-introduction/
 [specialization]: https://github.com/rust-lang/rfcs/pull/1210
 
 There's a lot more to say about what's happened and what's coming up in the Rust
@@ -238,11 +238,11 @@ It turns out that people like to get together and talk Rust. We had a sold out
 - October 27-18, 2016: [Rust Belt Rust], a Rust conference in Pittsburgh, PA, USA;
 - 71 Rust-related [meetup] groups worldwide.
 
-[RustCamp]: http://rustcamp.com/
-[RustConf]: http://rustconf.com/
-[RustFest]: http://www.rustfest.eu/blog/happy-birthday-announcing-rustfest
-[Rust Belt Rust]: http://rust-belt-rust.com/
-[meetup]: http://rust.meetup.com/
+[RustCamp]: https://rustcamp.com/
+[RustConf]: https://rustconf.com/
+[RustFest]: https://www.rustfest.eu/blog/happy-birthday-announcing-rustfest
+[Rust Belt Rust]: https://rust-belt-rust.com/
+[meetup]: https://rust.meetup.com/
 
 And that's no surprise. From a personal perspective, the best part about working
 with Rust is its [community]. It's hard to explain quite what it's like to be
@@ -253,7 +253,7 @@ one of empowerment&mdash;you can [fearlessly] write safe, low-level systems
 code&mdash;and that's reflected in the community. We're all here to learn how to
 be better programmers, and support each other in doing so.
 
-[fearlessly]: http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html
+[fearlessly]: https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html
 [This Week in Rust]: https://this-week-in-rust.org/
 [community]: https://www.rust-lang.org/community.html
 
@@ -263,7 +263,7 @@ attending a local [meetup], saying hello in the [users forum], watching
 glad to have you.
 
 [users forum]: https://users.rust-lang.org/
-[a talk]: http://www.infoq.com/presentations/rust-thread-safety
+[a talk]: https://www.infoq.com/presentations/rust-thread-safety
 [the book]: https://doc.rust-lang.org/book/
 
 Happy birthday, Rust!

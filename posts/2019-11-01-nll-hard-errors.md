@@ -106,4 +106,4 @@ or if you are seeing errors in your code that you need to fix -- take
 a look at this [excellent blog post by Felix Klock][nllpost], which
 goes into great detail.
 
-[nllpost]: http://blog.pnkfx.org/blog/2019/06/26/breaking-news-non-lexical-lifetimes-arrives-for-everyone/
+[nllpost]: https://blog.pnkfx.org/blog/2019/06/26/breaking-news-non-lexical-lifetimes-arrives-for-everyone/

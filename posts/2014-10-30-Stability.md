@@ -6,7 +6,7 @@ description: "The upcoming Rust 1.0 release means a lot, but most fundamentally 
 ---
 
 The upcoming Rust 1.0 release means
-[a lot](http://blog.rust-lang.org/2014/09/15/Rust-1.0.html), but most
+[a lot](https://blog.rust-lang.org/2014/09/15/Rust-1.0.html), but most
 fundamentally it is a commitment to stability, alongside our
 long-running commitment to safety.
 
@@ -93,7 +93,7 @@ After extensive discussion, we plan to release globs and macros as
 stable at 1.0. For globs, we believe we can address problems in a
 backwards-compatible way. For macros, we will likely provide an
 alternative way to define macros (with better
-[hygiene](http://en.wikipedia.org/wiki/Hygienic_macro)) at some later
+[hygiene](https://en.wikipedia.org/wiki/Hygienic_macro)) at some later
 date, and will incrementally improve the "macro rules" feature until
 then. The 1.0 release will stabilize all current macro support,
 including import/export.
@@ -131,7 +131,7 @@ standard library, but you can opt into experimental APIs from other
 libraries. The Rust release channels are about making upgrading *Rust
 itself* (the compiler and standard library) painless.
 
-Library authors should follow [semver](http://semver.org/); we will
+Library authors should follow [semver](https://semver.org/); we will
 soon publish an RFC defining how library stability attributes and
 semver interact.
 
