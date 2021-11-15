@@ -10,8 +10,36 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-11-02T18:34:34+00:00</updated>
+    <updated>2021-11-15T17:04:23+00:00</updated>
 
+    
+    <entry>
+        <title>Please welcome The 8472 and Ashley Mannix to Library Contributors</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/11/15/libs-contributors-the8472-kodraus.html" type="text/html" title="Please welcome The 8472 and Ashley Mannix to Library Contributors" />
+        <published>2021-11-15T00:00:00+00:00</published>
+        <updated>2021-11-15T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/11/15/libs-contributors-the8472-kodraus.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/11/15/libs-contributors-the8472-kodraus.html">&lt;p&gt;Please welcome The 8472 and Ashley Mannix to the
+&lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/library#libs-contributors&quot;&gt;Library Contributors&lt;/a&gt; group!&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/the8472&quot;&gt;The 8472&lt;/a&gt; has been working on
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70793&quot;&gt;various&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/75272&quot;&gt;specializations&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/78641&quot;&gt;in the&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/83245&quot;&gt;standard library&lt;/a&gt;,
+and has been involved in many library-related changes and discussions.&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/KodrAus/&quot;&gt;Ashley Mannix&lt;/a&gt; maintains
+&lt;a href&#x3D;&quot;https://crates.io/users/KodrAus?sort&#x3D;downloads&quot;&gt;several popular Rust crates&lt;/a&gt;
+and used to be a part of the Library (API) Team.
+Ashley is now getting back into Rust open source work,
+and will be helping out with maintenance of the standard library
+and some official &lt;code&gt;rust-lang&lt;/code&gt; crates such as &lt;a href&#x3D;&quot;https://crates.io/crates/log&quot;&gt;&lt;code&gt;log&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Congratulations The 8472 and Ashley, and thanks for everything you do!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mara Bos</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.56.0 pre-release testing</title>
@@ -537,30 +565,6 @@ where
 
         <author>
             <name>Jane Lusby</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Rust Compiler June Steering Cycle</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/06/23/compiler-team-june-steering-cycle.html" type="text/html" title="Rust Compiler June Steering Cycle" />
-        <published>2021-06-23T00:00:00+00:00</published>
-        <updated>2021-06-23T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/06/23/compiler-team-june-steering-cycle.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/06/23/compiler-team-june-steering-cycle.html">&lt;p&gt;On &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/93506planningmeeting20210604.html&quot;&gt;Friday, June 4th&lt;/a&gt;, the Rust Compiler team had a planning meeting for the June steering cycle.&lt;/p&gt;
-&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
-it is going to use its scheduled steering and design meeting time over the next
-three Fridays.&lt;/p&gt;
-&lt;p&gt;On &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/435&quot;&gt;Friday, 25 June&lt;/a&gt;, we will be having a meeting to review a
-document discussing the incremental compilation fingerprint issue that led to
-the emergency 1.52.1 release, and the steps the project is taking to prevent
-future occurrences of similar scenarios. (This date is a change in schedule from
-its original date that had been discussed in the planning meeting.)&lt;/p&gt;
-&lt;p&gt;The meeting will run from 2pm to 3pm GMT, and will take place on the
-&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Felix Klock</name>
         </author>
     </entry>
     
