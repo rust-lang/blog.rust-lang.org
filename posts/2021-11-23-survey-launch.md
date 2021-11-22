@@ -9,7 +9,7 @@ It's that time again! Time for us to take a look at who the Rust community is co
 
 Completing this survey should take about 10–30 minutes and is anonymous. We will be accepting submissions for the next two weeks (until the 6th of December), and we will write up our findings afterwards to [blog.rust-lang.org]. You can also check out [last year’s results][2020 survey].
 
-- [English][survey]
+- [English]
 - [Simplified Chinese]
 - [Traditional Chinese]
 - [French]
@@ -33,13 +33,14 @@ Finally, we wanted to thank everyone who helped develop, polish, and test the su
 [community-team@rust-lang.org]: mailto:community-team@rust-lang.org
 [2020 survey]: https://blog.rust-lang.org/2020/12/16/rust-survey-2020.html
 
-[survey]: 
-[Portuguese]: 
-[Simplified Chinese]: 
-[French]: 
-[Korean]: 
-[Spanish]: 
-[Russian]: 
-[Traditional Chinese]: 
-[German]: 
-[Japanese]: 
+[survey]: https://surveyhero.com/c/jzesmzph
+[English]: https://surveyhero.com/c/dauv4jcd
+[Portuguese]: https://surveyhero.com/c/bhdqz3hj
+[Simplified Chinese]: https://surveyhero.com/c/7rnfv4cf
+[French]: https://surveyhero.com/c/y7hb34nm
+[Korean]: https://surveyhero.com/c/m3bi3nad
+[Spanish]: https://surveyhero.com/c/he7yvafu
+[Russian]: https://surveyhero.com/c/xix7rf7d
+[Traditional Chinese]: https://surveyhero.com/c/h7guatdt
+[German]: https://surveyhero.com/c/pq43azn4
+[Japanese]: https://surveyhero.com/c/9pput3ye
