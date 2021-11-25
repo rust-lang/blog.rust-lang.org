@@ -10,8 +10,54 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-11-15T17:04:23+00:00</updated>
+    <updated>2021-11-25T15:00:56+00:00</updated>
 
+    
+    <entry>
+        <title>In response to the moderation team resignation</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/11/25/in-response-to-the-moderation-team-resignation.html" type="text/html" title="In response to the moderation team resignation" />
+        <published>2021-11-25T00:00:00+00:00</published>
+        <updated>2021-11-25T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/11/25/in-response-to-the-moderation-team-resignation.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/11/25/in-response-to-the-moderation-team-resignation.html">&lt;p&gt;As top-level team leads, project directors to the Foundation, and core team
+members, we are actively collaborating to establish next steps after the
+statement from the Rust moderation team.&lt;/p&gt;
+&lt;p&gt;While we are having ongoing conversations to share perspectives on the
+situation, we&#x27;d like to collectively state that we are all committed to the
+continuity and long term health of the project.&lt;/p&gt;
+&lt;p&gt;Updates on next steps will be shared with the project and wider community over
+the next few weeks. In the meantime, we are grateful to the interim moderators
+who have stepped up to provide moderation continuity to the project.&lt;/p&gt;
+&lt;p&gt;Signed, in alphabetical order, &lt;br /&gt;
+  Aidan Hobson Sayers (Core team) &lt;br /&gt;
+  Ashley Williams (Core team) &lt;br /&gt;
+  Felix Klock (Compiler team co-lead) &lt;br /&gt;
+  Florian Gilcher (Core team) &lt;br /&gt;
+  Jan-Erik Rediger (Core team) &lt;br /&gt;
+  Jane Lusby (Project Director for Collaboration) &lt;br /&gt;
+  Josh Stone (Project Director for Reliability) &lt;br /&gt;
+  Josh Triplett (Language team co-lead) &lt;br /&gt;
+  Joshua Gould (Mod team) &lt;br /&gt;
+  JT (Core team) &lt;br /&gt;
+  Justin Geibel (crates.io team co-lead) &lt;br /&gt;
+  Khionu Sybiern (Mod team) &lt;br /&gt;
+  Manish Goregaokar (Devtools co-lead) &lt;br /&gt;
+  Mara Bos (Library team lead) &lt;br /&gt;
+  Mark Rousskov (Core team) &lt;br /&gt;
+  Nicholas Matsakis (Language team co-lead) &lt;br /&gt;
+  Pascal Hertleif (Devtools co-lead) &lt;br /&gt;
+  Pietro Albini (Core team) &lt;br /&gt;
+  Ryan Levick (Core team) &lt;br /&gt;
+  Steve Klabnik (Core team) &lt;br /&gt;
+  Tobias Bieniek (crates.io team co-lead) &lt;br /&gt;
+  Tyler Mandry (Project Director for Quality) &lt;br /&gt;
+  Wesley Wiser (Compiler team co-lead)&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The undersigned</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Please welcome The 8472 and Ashley Mannix to Library Contributors</title>
@@ -391,180 +437,6 @@ extensions to the review policy for Rust Compiler Pull Requests.&lt;/p&gt;
 
         <author>
             <name>Felix Klock</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>What the Error Handling Project Group is Working Towards</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/07/01/What-the-error-handling-project-group-is-working-towards.html" type="text/html" title="What the Error Handling Project Group is Working Towards" />
-        <published>2021-07-01T00:00:00+00:00</published>
-        <updated>2021-07-01T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/07/01/What-the-error-handling-project-group-is-working-towards.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/07/01/What-the-error-handling-project-group-is-working-towards.html">&lt;p&gt;This blog post is a follow up of our &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2020/11/23/What-the-error-handling-project-group-is-working-on.html&quot;&gt;previous&lt;/a&gt; post detailing what we&#x27;re working on now. We&#x27;ve been iterating for a while now on some of the challenges that we see with error handling today and have reached the point where we want to describe some of the new changes we&#x27;re working towards. But first we need to describe the main challenges we&#x27;ve identified.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Disclaimer: &lt;em&gt;This post is equal parts plan and aspiration. There are technical challenges here to sort out so the final outcome may look rather different from our initial vision, so please don&#x27;t assume any of this is final.&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#error-handling-today&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;error-handling-today&quot;&gt;&lt;/a&gt;Error Handling Today&lt;/h2&gt;
-&lt;p&gt;The first challenge we&#x27;d like to solve is that it&#x27;s easy to lose context accidentally when reporting errors. There are a couple of places this can happen, either when printing an error and forgetting to print sources, when returning an error from main, or when converting a recoverable error into a non recoverable error.&lt;/p&gt;
-&lt;p&gt;Consider this example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::fmt;
-
-// We have a program that loads a config and expects that
-// loading the config will always succeed.
-fn main() {
-    let _config &#x3D; load_config()
-        .expect(&amp;quot;config is always valid and exists&amp;quot;);
-}
-
-// We have a dummy implementation of load_config which
-// always errors, since we&#x27;re just focusing on diagnostics
-// here.
-fn load_config() -&amp;gt; Result&amp;lt;(), Error&amp;gt; {
-    Err(Error(SourceError))
-}
-
-// And we have an error type that just prints &amp;quot;invalid
-// config&amp;quot; and has a source error which just prints &amp;quot;config
-// file does not exist&amp;quot;
-#[derive(Debug)]
-struct Error(SourceError);
-
-impl fmt::Display for Error {
-    fn fmt(&amp;amp;self, f: &amp;amp;mut fmt::Formatter&amp;lt;&#x27;_&amp;gt;) -&amp;gt; fmt::Result {
-        f.write_str(&amp;quot;invalid config&amp;quot;)
-    }
-}
-
-impl std::error::Error for Error {
-    fn source(&amp;amp;self) -&amp;gt; Option&amp;lt;&amp;amp;(dyn std::error::Error + &#x27;static)&amp;gt; {
-        Some(&amp;amp;self.0)
-    }
-}
-
-#[derive(Debug)]
-struct SourceError;
-
-impl fmt::Display for SourceError {
-    fn fmt(&amp;amp;self, f: &amp;amp;mut fmt::Formatter&amp;lt;&#x27;_&amp;gt;) -&amp;gt; fmt::Result {
-        f.write_str(&amp;quot;config file does not exist&amp;quot;)
-    }
-}
-
-impl std::error::Error for SourceError {}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;When we run this we would like to see output somewhat like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ cargo run
-thread &#x27;main&#x27; panicked at &#x27;config is always valid and exists&#x27;, src/main.rs:4:33
-
-Error:
-    0: invalid config
-    1: config file does not exist
-
-note: run with &#x60;RUST_BACKTRACE&#x3D;1&#x60; environment variable to display a backtrace
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In this error message we can see that we exited because of a panic. We can see what invariant we violated that was supposed to prevent this panic from happening. We can see the location where the panic was produced. And we can see the error message of each error in the chain of errors accessible via &lt;code&gt;source&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;That&#x27;s what we would like, at least in the version of Rust that the error handling project group wants to see, but what we actually get is this...&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ cargo run
-thread &#x27;main&#x27; panicked at &#x27;config is always valid and exists: Error(SourceError)&#x27;, main.rs:4:33
-note: run with &#x60;RUST_BACKTRACE&#x3D;1&#x60; environment variable to display a backtrace
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, I definitely don&#x27;t think this is what we want as a default when promoting recoverable errors to non-recoverable errors! &lt;code&gt;unwrap&lt;/code&gt; and &lt;code&gt;expect&lt;/code&gt; work by stringifying the error variant using its &lt;code&gt;Debug&lt;/code&gt; impl, but this is often the wrong operation for types that implement the &lt;code&gt;Error&lt;/code&gt; trait. By converting the &lt;code&gt;Error&lt;/code&gt; to a &lt;code&gt;String&lt;/code&gt; we lose access to the pieces of context we carefully split up via the &lt;code&gt;Error&lt;/code&gt; trait, and in all likelihood the &lt;code&gt;derive(Debug)&lt;/code&gt; output of our error types won&#x27;t even include the error messages in our &lt;code&gt;Display&lt;/code&gt; impls.&lt;/p&gt;
-&lt;p&gt;Rust&#x27;s panic infrastructure doesn&#x27;t provide a method for converting an &lt;code&gt;Error&lt;/code&gt; type into a panic, it only supports converting &lt;code&gt;Debug&lt;/code&gt; types into panics, and we feel that this is a major issue. Similarly, there&#x27;s no convenient tools provided by the language for printing an error and all of its source&#x27;s error messages.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn main() {
-    let result &#x3D; load_config();
-    let _config &#x3D; match result {
-        Ok(config) &#x3D;&amp;gt; config,
-        Err(error) &#x3D;&amp;gt; {
-            println!(&amp;quot;Error: {}&amp;quot;, error);
-            return;
-        }
-    };
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;When we run this program we&#x27;d like to see output that looks something like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ cargo run
-Error: invalid config: config file does not exist
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here we can see the header we provided to indicate we&#x27;re printing an error, followed by each error message in the chain of sources separated by colons.&lt;/p&gt;
-&lt;p&gt;But instead all we get is this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ cargo run
-Error: invalid config
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;By default all of the source&#x27;s error messages are lost. This arises from the fact that we used &lt;code&gt;Display&lt;/code&gt; as the interface to an individual error message. If we could go back we&#x27;d currently propose instead adding &lt;code&gt;fn message(&amp;amp;self, f: &amp;amp;mut fmt::Formatter&amp;lt;&#x27;_&amp;gt;) -&amp;gt; fmt::Result&lt;/code&gt; to the &lt;code&gt;Error&lt;/code&gt; trait, but that ship has sailed.&lt;/p&gt;
-&lt;p&gt;The way that libraries work around this today is by abusing the &lt;code&gt;Debug&lt;/code&gt; trait. Types like &lt;a href&#x3D;&quot;https://docs.rs/eyre/0.6.5/eyre/trait.EyreHandler.html#tymethod.debug&quot;&gt;&lt;code&gt;eyre&lt;/code&gt;&lt;/a&gt;, &lt;a href&#x3D;&quot;https://docs.rs/anyhow/1.0.40/src/anyhow/fmt.rs.html#19&quot;&gt;&lt;code&gt;anyhow&lt;/code&gt;&lt;/a&gt;, and even sometimes &lt;a href&#x3D;&quot;https://www.lpalmieri.com/posts/error-handling-rust/#error_chain_fmt&quot;&gt;&lt;code&gt;custom error enums&lt;/code&gt;&lt;/a&gt; use their &lt;code&gt;Debug&lt;/code&gt; output to print the full chain of errors in a human readable report.&lt;/p&gt;
-&lt;p&gt;This has the advantage of making it easy to print a full error report and makes it so &lt;code&gt;unwrap&lt;/code&gt;, &lt;code&gt;expect&lt;/code&gt;, and return from main all print the full error report. But doing so prevents us from accessing the derived &lt;code&gt;Debug&lt;/code&gt; format of our errors, potentially hiding internal details that might be needed for debugging but which aren&#x27;t part of the error messages intended for users to read.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#error-handling-tomorrow&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;error-handling-tomorrow&quot;&gt;&lt;/a&gt;Error Handling Tomorrow&lt;/h2&gt;
-&lt;p&gt;Eventually we&#x27;d like to get to a place where the default tools you reach for when error handling in Rust all do the right thing and fully leverage the &lt;code&gt;Error&lt;/code&gt; trait&#x27;s design. Unwrapping a type that implements the &lt;code&gt;Error&lt;/code&gt; trait will preserve the original error as a &lt;code&gt;dyn Error&lt;/code&gt; which is then available in the panic hook. Printing a full error report will be easy to do and obvious. With these changes in place it will hopefully be quite difficult to accidentally discard information when reporting errors.&lt;/p&gt;
-&lt;p&gt;Our plan to fix these issues is two-fold:&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#1-error-trait--panic-runtime-integration&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;1-error-trait--panic-runtime-integration&quot;&gt;&lt;/a&gt;1. Error Trait + Panic Runtime Integration&lt;/h3&gt;
-&lt;p&gt;First we need to integrate the Error trait and the panic runtime, and the first step to doing so will be moving the &lt;code&gt;Error&lt;/code&gt; trait into &lt;code&gt;core&lt;/code&gt;. This is necessary because the panic runtime is part of &lt;code&gt;core&lt;/code&gt; and the language itself, where as the &lt;code&gt;Error&lt;/code&gt; trait currently resides in &lt;code&gt;std&lt;/code&gt;. We&#x27;re pretty excited about this change which we hope will have other positive downstream effects, particularly in the embedded ecosystem.&lt;/p&gt;
-&lt;p&gt;Once we&#x27;ve gotten to the point where the &lt;code&gt;Error&lt;/code&gt; trait is usable in &lt;code&gt;core&lt;/code&gt; APIs the next step will be to add an interface for creating a panic from an &lt;code&gt;Error&lt;/code&gt; type. We&#x27;re currently planning on adding a &lt;code&gt;panic_error&lt;/code&gt; function, similar to the &lt;code&gt;panic_any&lt;/code&gt; function that is already available in &lt;code&gt;std&lt;/code&gt;. This function will give the panic handler access to errors via a &lt;code&gt;dyn Error&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Once panic handlers are able to process &lt;code&gt;Error&lt;/code&gt; types the next step will be to update the default panic hook provided by &lt;code&gt;std&lt;/code&gt; to actually report panics via the &lt;code&gt;Error&lt;/code&gt; trait if they&#x27;re exposed as such. It should iterate over sources and print the backtrace captured by the error itself if one is available, or possibly capture one itself otherwise.&lt;/p&gt;
-&lt;p&gt;Finally, we need to specialize &lt;code&gt;expect&lt;/code&gt; and &lt;code&gt;unwrap&lt;/code&gt; to use these new &lt;code&gt;Error&lt;/code&gt; aware panic interfaces when unwrapping types that implement the &lt;code&gt;Error&lt;/code&gt; trait. To do this we first need to work around a &lt;a href&#x3D;&quot;https://smallcultfollowing.com/babysteps/blog/2018/02/09/maximally-minimal-specialization-always-applicable-impls/#the-soundness-problem&quot;&gt;soundness issue&lt;/a&gt; with specialization for trait impls that are conditional based on lifetimes, though thankfully we already have a good idea of &lt;a href&#x3D;&quot;https://smallcultfollowing.com/babysteps/blog/2018/02/09/maximally-minimal-specialization-always-applicable-impls&quot;&gt;how to fix this&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#2-error-reporter&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;2-error-reporter&quot;&gt;&lt;/a&gt;2. Error Reporter&lt;/h3&gt;
-&lt;p&gt;We would also like to provide a basic error reporter in &lt;code&gt;std&lt;/code&gt;, and some facilities for making it easy to use, or easy to replace with your own preferred error reporter. Printing an error and its sources is a fundamental operation in Rust, so we want the language to provide a pit of success for reporting, where the easiest thing to do is the right thing. We can&#x27;t get there completely because we use &lt;code&gt;Display&lt;/code&gt; for individual error messages, and we can&#x27;t change that in a backwards compatible fashion, but we hope that adding a convenient method for printing a full chain of errors and some clever lints will relieve most of the pressure.&lt;/p&gt;
-&lt;p&gt;We plan on fixing this by first adding a &lt;code&gt;Report&lt;/code&gt; type to the standard library that wraps a &lt;code&gt;&amp;amp;dyn Error&lt;/code&gt; and implements &lt;code&gt;Display&lt;/code&gt; such that it prints each source as desired. We would like the output of &lt;code&gt;Report&lt;/code&gt;&#x27;s display method to support the styles of error concatenation that are most common in the Rust ecosystem.&lt;/p&gt;
-&lt;p&gt;Either one line with each error message concatenated with colons:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;println!(&amp;quot;Error: {}&amp;quot;, Report::from(error));
-
-// Outputs:
-// Error: outermost error: second error: root error
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Or multiple lines with each error message on its own line :&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;println!(&amp;quot;Error: {:#}&amp;quot;, Report::from(error))
-
-// Outputs:
-// Error: outermost error
-//
-// Caused by:
-//    0: second error
-//    1: root error
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The first single line format is useful for log output or inlined error messages, whereas the alternate multi line format is useful for user facing output such as a CLI interface or a GUI popup.&lt;/p&gt;
-&lt;p&gt;We also want to add a method to the error trait for conveniently wrapping up any error in the &lt;code&gt;Report&lt;/code&gt; type so that reporting an error is as simple as &lt;code&gt;println!(&amp;quot;Error: {}&amp;quot;, error.report());&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;We expect the report method will look something like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn report(&amp;amp;self) -&amp;gt; impl Display + &#x27;_
-where
-    Self: Sized,
-{
-    Report::from(self)
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We want the return type here to be generic rather than hard coded to &lt;code&gt;Report&lt;/code&gt; so that individual error types can provide their own report format if desired. We expect that derive macros may leverage this to customize error reporting format defaults. This will work well with composition because the reporter from the outermost type will be used to format the full chain of errors.&lt;/p&gt;
-&lt;p&gt;For now we can&#x27;t implement this method as described because &lt;code&gt;impl Trait&lt;/code&gt; isn&#x27;t allowed in return types on trait methods, but we&#x27;re working to find a way to add this to the error trait backwards compatibly.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#duplicate-information-issue&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;duplicate-information-issue&quot;&gt;&lt;/a&gt;Duplicate Information Issue&lt;/h2&gt;
-&lt;p&gt;With these fixes in place it will become easy to chain errors and report them completely and consistently. However there is a hazard that &lt;code&gt;Error&lt;/code&gt; implementors need to be aware of in this system: duplicate information.&lt;/p&gt;
-&lt;p&gt;Imagine an error like the one in the previous example, except instead of each error printing its own message and returning the next error via &lt;code&gt;source&lt;/code&gt;, they also include their source&#x27;s error message after their own. That way when we print the outer error&#x27;s &lt;code&gt;Display&lt;/code&gt; output we see all of the error messages, not just the first in the chain.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;println!(&amp;quot;Error: {}&amp;quot;, error);
-
-// Outputs:
-// Error: outermost error: second error: root error
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, what happens we then print this same error type with &lt;code&gt;Report&lt;/code&gt; expecting that we need to iterate over the sources and print them too?&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;println!(&amp;quot;Error: {:#}&amp;quot;, error.report());
-
-// Outputs
-// Error: outermost error: second error: root error
-//
-// Caused by:
-//    0: second error: root error
-//    1: root error
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The source error messages get duplicated! With the multi-line output of &lt;code&gt;anyhow&lt;/code&gt; and &lt;code&gt;eyre&lt;/code&gt; we get this nice little triangle shape to the error report, which you&#x27;ve probably encountered if you&#x27;ve ever used these libraries before. We can no longer separate the error messages of the individual errors in the chain of errors because this error type concatenates the sources manually and returns them via the &lt;code&gt;source&lt;/code&gt; function. This also restricts how we can format our error reports. If we want a consistent report format and we have a dependency that concatenates errors in a single line we are forced to do so as well ourselves throughout our entire application. If, on the other hand, we have two dependencies that concatenate errors in different ways, well, we&#x27;re out of luck.&lt;/p&gt;
-&lt;p&gt;So how do we avoid this? We adopt a consistent separation for &lt;code&gt;Display&lt;/code&gt; and &lt;code&gt;source&lt;/code&gt; implementations.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#guidelines-for-implementing-displayfmt-and-errorsource&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;guidelines-for-implementing-displayfmt-and-errorsource&quot;&gt;&lt;/a&gt;Guidelines for implementing &lt;code&gt;Display::fmt&lt;/code&gt; and &lt;code&gt;Error::source&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;To resolve this issue, project error handling recently created a guideline for &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling/issues/27#issuecomment-763950178&quot;&gt;how to implement &lt;code&gt;Display::fmt&lt;/code&gt; and &lt;code&gt;Error::source&lt;/code&gt;&lt;/a&gt;. In it we make the following recommendation:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;An error type with a source error should either return that error via &lt;code&gt;source&lt;/code&gt; or include that source&#x27;s error message in its own &lt;code&gt;Display&lt;/code&gt; output, but never both.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;We figure the default will be to return errors via source. That way source errors can be reacted to via &lt;code&gt;downcast&lt;/code&gt; when appropriate. This is particularly important for libraries that are changing existing public error types. For these libraries removing an error from &lt;code&gt;source&lt;/code&gt; is a breaking change that isn&#x27;t detected at compile time, making a major version bump likely insufficient. Changing the &lt;code&gt;Display&lt;/code&gt; output is also a breaking change, though a less dangerous one. To help with this we&#x27;ve drafted a suggested migration plan: &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling/issues/44&quot;&gt;rust-lang/project-error-handling#44&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;In coming up with this recommendation we had to figure out what the &lt;code&gt;Error&lt;/code&gt; trait&#x27;s primary role is in Rust. After discussing it with the library team we concluded that reporting should be treated as the primary role, and that reacting via &lt;code&gt;downcast&lt;/code&gt; should come second when designing error types. Generally these needs are not in conflict, but it is possible for issues to come up. For example, when working with transparent error types that forward all methods to an inner error type. When these types follow this guideline the inner error type is skipped over and is never made available for &lt;code&gt;downcast&lt;/code&gt;ing.&lt;/p&gt;
-&lt;p&gt;This recommendation only applies for error types that are exposed as part of library APIs. Internal errors in libraries or and applications can do whatever they want, but as soon as they need to be integrated into other crates by 3rd party users it&#x27;s important that errors follow a consistent style. If you&#x27;re interested in our rationale or have any comments please check out our github issue on the topic: &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling/issues/27&quot;&gt;rust-lang/project-error-handling#27&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;We hope that these changes will significantly improve error handling experience provided by Rust. Error reporting will be more consistent and flexible and let the final application developer define how to format error reports for their specific use-case. It will be a lot harder to accidentally lose information when reporting errors. The tools for reporting errors will be more tightly integrated into the standard library and the language itself and we hope this will have extra benefits to the embedded ecosystem by more universally standardizing on the &lt;code&gt;Error&lt;/code&gt; trait.&lt;/p&gt;
-&lt;p&gt;So that&#x27;s the plan for now, it&#x27;s not the full plan of all the changes we&#x27;d like to make, but we think its the best first step. However, this is by no means set in stone and we&#x27;re interested in getting feedback from the rest of the community so we can refine our design. So if you have thoughts please let us know, our project group repo is https://github.com/rust-lang/project-error-handling. Please feel free to &lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling/issues&quot;&gt;open an issue&lt;/a&gt; or hop in our &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/257204-project-error-handling&quot;&gt;zulip stream&lt;/a&gt; and create a new topic to let us know what you think of this plan.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Jane Lusby</name>
         </author>
     </entry>
     
