@@ -10,8 +10,28 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-11-25T15:00:56+00:00</updated>
+    <updated>2021-11-30T12:10:29+00:00</updated>
 
+    
+    <entry>
+        <title>1.57.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/11/30/1.57.0-prerelease.html" type="text/html" title="1.57.0 pre-release testing" />
+        <published>2021-11-30T00:00:00+00:00</published>
+        <updated>2021-11-30T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2021/11/30/1.57.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/11/30/1.57.0-prerelease.html">&lt;p&gt;The 1.57.0 pre-release is ready for testing. The release is scheduled for this
+Thursday, December 2nd. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1570-2021-12-02&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2021-11-30/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2021-11-30/index.html&lt;/a&gt;. You
+can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-57-0-prerelease-testing/15690&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mark Rousskov</name>
+        </author>
+    </entry>
     
     <entry>
         <title>In response to the moderation team resignation</title>
@@ -411,32 +431,6 @@ can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/
 
         <author>
             <name>Pietro Albini</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Rust Compiler July Steering Cycle</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/07/02/compiler-team-july-steering-cycle.html" type="text/html" title="Rust Compiler July Steering Cycle" />
-        <published>2021-07-02T00:00:00+00:00</published>
-        <updated>2021-07-02T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/07/02/compiler-team-july-steering-cycle.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/07/02/compiler-team-july-steering-cycle.html">&lt;p&gt;n &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/74498steeringmeeting20210702fingerprintsplanning.html&quot;&gt;Friday, July 2nd&lt;/a&gt;, the Rust Compiler team had a planning meeting for the July steering cycle, followed by a continuation of an ongoing discussion of the 1.52.0 fingerprint event.&lt;/p&gt;
-&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
-it is going to use its scheduled steering and design meeting time over the next
-three Fridays.&lt;/p&gt;
-&lt;p&gt;On &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/435&quot;&gt;Friday, 9 July&lt;/a&gt;, we will be having a third follow-up meeting to
-continue the discussion of the incremental compilation fingerprint issue that
-led to the emergency 1.52.1 release. For reference, the first meeting on this
-subject was held on &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/56399steeringmeeting20210625152retrocompilerteam435.html&quot;&gt;Friday, 25 June&lt;/a&gt; (and the second was
-today, &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/238009tcompilermeetings/74498steeringmeeting20210702fingerprintsplanning.html&quot;&gt;July 2nd&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;On &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/444&quot;&gt;Friday, 16 July&lt;/a&gt;, we will be having a meeting to discuss
-extensions to the review policy for Rust Compiler Pull Requests.&lt;/p&gt;
-&lt;p&gt;Each meeting will run from 2pm to 3pm GMT, and will take place on the
-&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Felix Klock</name>
         </author>
     </entry>
     
