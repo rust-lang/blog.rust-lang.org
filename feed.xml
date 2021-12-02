@@ -10,8 +10,86 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2021-11-30T12:10:31+00:00</updated>
+    <updated>2021-12-02T14:57:39+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.57.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2021/12/02/Rust-1.57.0.html" type="text/html" title="Announcing Rust 1.57.0" />
+        <published>2021-12-02T00:00:00+00:00</published>
+        <updated>2021-12-02T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2021/12/02/Rust-1.57.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2021/12/02/Rust-1.57.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.57.0.
+Rust is a programming language empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.57.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
+from the appropriate page on our website, and check out the
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1570-2021-12-02&quot;&gt;detailed release notes for 1.57.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1570-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1570-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.57.0 stable&lt;/h2&gt;
+&lt;p&gt;Rust 1.57 brings &lt;code&gt;panic!&lt;/code&gt; to const contexts, adds support for custom profiles to Cargo, and stabilizes fallible reservation APIs.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#panic-in-const-contexts&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;panic-in-const-contexts&quot;&gt;&lt;/a&gt;&lt;code&gt;panic!&lt;/code&gt; in const contexts&lt;/h3&gt;
+&lt;p&gt;With previous versions of Rust, the &lt;code&gt;panic!&lt;/code&gt; macro was not usable in &lt;code&gt;const fn&lt;/code&gt; and other compile-time contexts. Now, this has been stabilized. Together with the stabilization of &lt;code&gt;panic!&lt;/code&gt;, several other standard library APIs are now usable in const, such as &lt;code&gt;assert!&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This stabilization does not yet include the full formatting infrastructure, so the &lt;code&gt;panic!&lt;/code&gt; macro must be called with either a static string (&lt;code&gt;panic!(&amp;quot;...&amp;quot;)&lt;/code&gt;), or with a single &lt;code&gt;&amp;amp;str&lt;/code&gt; interpolated value (&lt;code&gt;panic!(&amp;quot;{}&amp;quot;, a)&lt;/code&gt;) which must be used with &lt;code&gt;{}&lt;/code&gt; (no format specifiers or other traits).&lt;/p&gt;
+&lt;p&gt;It is expected that in the future this support will expand, but this minimal stabilization already enables straightforward compile-time assertions, for example to verify the size of a type:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;const _: () &#x3D; assert!(std::mem::size_of::&amp;lt;u64&amp;gt;() &#x3D;&#x3D; 8);
+const _: () &#x3D; assert!(std::mem::size_of::&amp;lt;u8&amp;gt;() &#x3D;&#x3D; 1);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#cargo-support-for-custom-profiles&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargo-support-for-custom-profiles&quot;&gt;&lt;/a&gt;Cargo support for custom profiles&lt;/h3&gt;
+&lt;p&gt;Cargo has long supported four profiles: &lt;code&gt;dev&lt;/code&gt;, &lt;code&gt;release&lt;/code&gt;, &lt;code&gt;test&lt;/code&gt;, and &lt;code&gt;bench&lt;/code&gt;. With Rust 1.57, support has been added for arbitrarily named profiles.&lt;/p&gt;
+&lt;p&gt;For example, if you want to enable link time optimizations (&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/profiles.html#lto&quot;&gt;LTO&lt;/a&gt;) only when making the final production build, adding the following snippet to Cargo.toml enables the &lt;code&gt;lto&lt;/code&gt; flag when this profile is selected, but avoids enabling it for regular release builds.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[profile.production]
+inherits &#x3D; &amp;quot;release&amp;quot;
+lto &#x3D; true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that custom profiles must specify a profile from which they inherit default settings. Once the profile has been defined, Cargo commands which build code can be asked to use it with &lt;code&gt;--profile production&lt;/code&gt;. Currently, this will build artifacts in a separate directory (&lt;code&gt;target/production&lt;/code&gt; in this case), which means that artifacts are not shared between directories.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#fallible-allocation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;fallible-allocation&quot;&gt;&lt;/a&gt;Fallible allocation&lt;/h3&gt;
+&lt;p&gt;Rust 1.57 stabilizes &lt;code&gt;try_reserve&lt;/code&gt; for &lt;code&gt;Vec&lt;/code&gt;, &lt;code&gt;String&lt;/code&gt;, &lt;code&gt;HashMap&lt;/code&gt;, &lt;code&gt;HashSet&lt;/code&gt;, and &lt;code&gt;VecDeque&lt;/code&gt;. This API enables callers to fallibly allocate the backing storage for these types.&lt;/p&gt;
+&lt;p&gt;Rust will usually abort the process if the global allocator fails, which is not always desirable. This API provides a method for avoiding that abort when working with the standard library collections. However, Rust does not guarantee that the returned memory is actually allocated by the kernel: for example, if overcommit is enabled on Linux, the memory may not be available when its use is attempted.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
+&lt;p&gt;The following methods and trait implementations were stabilized.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.array.html#method.as_mut_slice&quot;&gt;&lt;code&gt;[T; N]::as_mut_slice&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/primitive.array.html#method.as_slice&quot;&gt;&lt;code&gt;[T; N]::as_slice&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.TryReserveError.html&quot;&gt;&lt;code&gt;collections::TryReserveError&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.try_reserve&quot;&gt;&lt;code&gt;HashMap::try_reserve&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/hash_set/struct.HashSet.html#method.try_reserve&quot;&gt;&lt;code&gt;HashSet::try_reserve&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/alloc/string/struct.String.html#method.try_reserve&quot;&gt;&lt;code&gt;String::try_reserve&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/alloc/string/struct.String.html#method.try_reserve_exact&quot;&gt;&lt;code&gt;String::try_reserve_exact&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/vec/struct.Vec.html#method.try_reserve&quot;&gt;&lt;code&gt;Vec::try_reserve&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/vec/struct.Vec.html#method.try_reserve_exact&quot;&gt;&lt;code&gt;Vec::try_reserve_exact&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.try_reserve&quot;&gt;&lt;code&gt;VecDeque::try_reserve&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.try_reserve_exact&quot;&gt;&lt;code&gt;VecDeque::try_reserve_exact&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map_while&quot;&gt;&lt;code&gt;Iterator::map_while&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/iter/struct.MapWhile.html&quot;&gt;&lt;code&gt;iter::MapWhile&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/proc_macro/fn.is_available.html&quot;&gt;&lt;code&gt;proc_macro::is_available&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/process/struct.Command.html#method.get_program&quot;&gt;&lt;code&gt;Command::get_program&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/process/struct.Command.html#method.get_args&quot;&gt;&lt;code&gt;Command::get_args&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/process/struct.Command.html#method.get_envs&quot;&gt;&lt;code&gt;Command::get_envs&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/process/struct.Command.html#method.get_current_dir&quot;&gt;&lt;code&gt;Command::get_current_dir&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/process/struct.CommandArgs.html&quot;&gt;&lt;code&gt;CommandArgs&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/process/struct.CommandEnvs.html&quot;&gt;&lt;code&gt;CommandEnvs&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following previously stable functions are now &lt;code&gt;const&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/hint/fn.unreachable_unchecked.html&quot;&gt;&lt;code&gt;hint::unreachable_unchecked&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.57.0 release: check out what changed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1570-2021-12-02&quot;&gt;Rust&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-157-2021-12-02&quot;&gt;Cargo&lt;/a&gt;,
+and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-157&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1570&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1570&quot;&gt;&lt;/a&gt;Contributors to 1.57.0&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.57.0.
+We couldn&#x27;t have done it without all of you.
+&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.57.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Security advisory for rustc (CVE-2021-42574)</title>
@@ -875,43 +953,6 @@ We couldn&#x27;t have done it without all of you.
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rustup 1.24.3</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/06/08/Rustup-1.24.3.html" type="text/html" title="Announcing Rustup 1.24.3" />
-        <published>2021-06-08T00:00:00+00:00</published>
-        <updated>2021-06-08T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/06/08/Rustup-1.24.3.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/06/08/Rustup-1.24.3.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.24.3. &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.24.3 is as easy as closing your IDE and running:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup self update
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup update
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1243&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1243&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.24.3&lt;/h2&gt;
-&lt;p&gt;This patch release focusses around resolving some regressions in behaviour in
-the 1.24.x series, in either low tier platforms, or unusual situations around
-very old toolchains.&lt;/p&gt;
-&lt;p&gt;Full details are available in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/blob/stable/CHANGELOG.md&quot;&gt;changelog&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;Rustup&#x27;s documentation is also available in &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/&quot;&gt;the rustup book&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
-&lt;p&gt;Thanks again to all the contributors who made rustup 1.24.3 possible!&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Alexander (asv7c2)&lt;/li&gt;
-&lt;li&gt;Ian Jackson&lt;/li&gt;
-&lt;li&gt;pierwill&lt;/li&gt;
-&lt;li&gt;二手掉包工程师 (hi-rustin)&lt;/li&gt;
-&lt;li&gt;Robert Collins&lt;/li&gt;
-&lt;li&gt;Daniel Silverstone&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>The Rustup Working Group</name>
         </author>
     </entry>
     
