@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.58.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.58.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.58.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.58.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.58.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 13, 2022 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.58.0.
+Rust is a programming language empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, getting Rust 1.58.0 is as easy as:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a>
+from the appropriate page on our website, and check out the
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1580-2022-01-13">detailed release notes for 1.58.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1580-stable" aria-hidden="true" class="anchor" id="whats-in-1580-stable"></a>What's in 1.58.0 stable</h2>
+<p>Rust 1.58 brings captured identifiers in format strings, a change to the
+<code>Command</code> search path on Windows, more <code>#[must_use]</code> annotations in the
+standard library, and some new library stabilizations.</p>
+<h3><a href="#captured-identifiers-in-format-strings" aria-hidden="true" class="anchor" id="captured-identifiers-in-format-strings"></a>Captured identifiers in format strings</h3>
+<p>Format strings can now capture arguments simply by writing <code>{ident}</code> in the
+string. Formats have long accepted positional arguments (optionally by index)
+and named arguments, for example:</p>
+<pre><code class="language-rust">println!(&quot;Hello, {}!&quot;, get_person());                // implicit position
+println!(&quot;Hello, {0}!&quot;, get_person());               // explicit index
+println!(&quot;Hello, {person}!&quot;, person = get_person()); // named
+</code></pre>
+<p>Now named arguments can also be captured from the surrounding scope, like:</p>
+<pre><code class="language-rust">let person = get_person();
+// ...
+println!(&quot;Hello, {person}!&quot;); // captures the local `person`
+</code></pre>
+<p>This may also be used in formatting parameters:</p>
+<pre><code class="language-rust">let (width, precision) = get_format();
+for (name, score) in get_scores() {
+  println!(&quot;{name}: {score:width$.precision$}&quot;);
+}
+</code></pre>
+<p>Format strings can only capture plain identifiers, not arbitrary paths or
+expressions. For more complicated arguments, either assign them to a local name
+first, or use the older <code>name = expression</code> style of formatting arguments.</p>
+<p>This feature works in all macros accepting format strings. However, one corner
+case is the <code>panic!</code> macro in 2015 and 2018 editions, where <code>panic!(&quot;{ident}&quot;)</code>
+is still treated as an unformatted string -- the compiler will warn about this
+not having the intended effect. Due to the 2021 edition's update of panic
+macros for <a href="https://doc.rust-lang.org/stable/edition-guide/rust-2021/panic-macro-consistency.html">improved consistency</a>, this works as expected in 2021 <code>panic!</code>.</p>
+<h3><a href="#reduced-windows-command-search-path" aria-hidden="true" class="anchor" id="reduced-windows-command-search-path"></a>Reduced Windows <code>Command</code> search path</h3>
+<p>On Windows targets, <code>std::process::Command</code> will no longer search the current
+directory for executables. That effect was owed to historical behavior of the
+win32 <a href="https://docs.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessa"><code>CreateProcess</code></a> API, so Rust was effectively searching in this order:</p>
+<ol>
+<li>(Rust specific) The directories that are listed in the child's <code>PATH</code>
+environment variable, if it was explicitly changed from the parent.</li>
+<li>The directory from which the application loaded.</li>
+<li>The current directory for the parent process.</li>
+<li>The 32-bit Windows system directory.</li>
+<li>The 16-bit Windows system directory.</li>
+<li>The Windows directory.</li>
+<li>The directories that are listed in the <code>PATH</code> environment variable.</li>
+</ol>
+<p>However, using the current directory can lead to surprising results, or even
+malicious behavior when dealing with untrusted directories. For example,
+<code>ripgrep</code> published <a href="https://www.cve.org/CVERecord?id=CVE-2021-3013">CVE-2021-3013</a> when they learned that their child
+processes could be intercepted in this way. Even Microsoft's own PowerShell
+<a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_command_precedence?view=powershell-7.2">documents</a> that they do not use the current directory for security.</p>
+<p>Rust now performs its own search without the current directory, and the legacy
+16-bit directory is also not included, as there is no API to discover its
+location. So the new <code>Command</code> search order for Rust on Windows is:</p>
+<ol>
+<li>The directories that are listed in the child's <code>PATH</code> environment variable.</li>
+<li>The directory from which the application loaded.</li>
+<li>The 32-bit Windows system directory.</li>
+<li>The Windows directory.</li>
+<li>The directories that are listed in the <code>PATH</code> environment variable.</li>
+</ol>
+<p>Non-Windows targets continue to use their platform-specific behavior, most
+often only considering the child or parent <code>PATH</code> environment variable.</p>
+<h3><a href="#more-must_use-in-the-standard-library" aria-hidden="true" class="anchor" id="more-must_use-in-the-standard-library"></a>More <code>#[must_use]</code> in the standard library</h3>
+<p>The <code>#[must_use]</code> attribute can be applied to types or functions when failing
+to explicitly consider them or their output is almost certainly a bug. This has
+long been used in the standard library for types like <code>Result</code>, which should be
+checked for error conditions. This also helps catch mistakes such as expecting
+a function to mutate a value in-place, when it actually returns a new value.</p>
+<p>Library <a href="https://github.com/rust-lang/libs-team/issues/35">proposal 35</a> was approved in October 2021 to audit and expand the
+application of <code>#[must_use]</code> throughout the standard library, covering many
+more functions where the primary effect is the return value. This is similar
+to the idea of function purity, but looser than a true language feature. Some
+of these additions were present in release 1.57.0, and now in 1.58.0 the effort
+has completed.</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<p>The following methods and trait implementations were stabilized.</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/fs/struct.Metadata.html#method.is_symlink"><code>Metadata::is_symlink</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/path/struct.Path.html#method.is_symlink"><code>Path::is_symlink</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.i8.html#method.saturating_div"><code>{integer}::saturating_div</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.unwrap_unchecked"><code>Option::unwrap_unchecked</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.unwrap_unchecked"><code>Result::unwrap_unchecked</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.unwrap_err_unchecked"><code>Result::unwrap_err_unchecked</code></a></li>
+</ul>
+<p>The following previously stable functions are now <code>const</code>.</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.new"><code>Duration::new</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.checked_add"><code>Duration::checked_add</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.saturating_add"><code>Duration::saturating_add</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.checked_sub"><code>Duration::checked_sub</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.saturating_sub"><code>Duration::saturating_sub</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.checked_mul"><code>Duration::checked_mul</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.saturating_mul"><code>Duration::saturating_mul</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.checked_div"><code>Duration::checked_div</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.58.0 release: check out what changed in
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1580-2022-01-13">Rust</a>,
+<a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-158-2022-01-13">Cargo</a>,
+and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-158">Clippy</a>.</p>
+<h3><a href="#contributors-to-1580" aria-hidden="true" class="anchor" id="contributors-to-1580"></a>Contributors to 1.58.0</h3>
+<p>Many people came together to create Rust 1.58.0.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.58.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
