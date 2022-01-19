@@ -10,8 +10,35 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-01-13T20:32:32+00:00</updated>
+    <updated>2022-01-19T00:28:51+00:00</updated>
 
+    
+    <entry>
+        <title>Rust Compiler January 2022 Steering Cycle</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/01/18/jan-steering-cycle.html" type="text/html" title="Rust Compiler January 2022 Steering Cycle" />
+        <published>2022-01-18T00:00:00+00:00</published>
+        <updated>2022-01-18T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/01/18/jan-steering-cycle.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/01/18/jan-steering-cycle.html">&lt;p&gt;n &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/stream/238009-t-compiler/meetings/topic/.5Bplanning.20meeting.5D.202022-01-14.html&quot;&gt;Friday, January 14th&lt;/a&gt;, the Rust Compiler team had a planning meeting for the January steering cycle.&lt;/p&gt;
+&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
+it is going to use its scheduled steering and design meeting time over the next
+three Fridays.&lt;/p&gt;
+&lt;p&gt;On &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/479&quot;&gt;Friday, 28 January&lt;/a&gt;, we will be having a meeting to
+discuss the  backlog of P-high issues (there are currently &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues?q&#x3D;is%3Aopen+is%3Aissue+label%3AP-high&quot;&gt;86 such issues&lt;/a&gt;). pnkfelix will prepare a document to drive the meeting, with a categorization of the issues, especially in terms of how they relate to specific subteams.&lt;/p&gt;
+&lt;p&gt;On Friday, 4 February, we will be having a meeting to
+discuss any beta regressions or backports that are pending for the
+Rust 1.59 release (due out 24 February, 2022). (We did not file a
+meeting proposal for this meeting, but you can see a similar meeting
+proposal that was used to drive an analogous meeting for the 1.48 release
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/382&quot;&gt;here&lt;/a&gt;.)&lt;/p&gt;
+&lt;p&gt;Each meeting will run from 2pm to 3pm GMT, and will take place on the
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Felix Klock</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.58.0 pre-release testing</title>
@@ -507,44 +534,6 @@ feels fairly fragile in some areas.&lt;/p&gt;
 
         <author>
             <name>lcnr</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Lang team August update</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/08/04/lang-team-aug-update.html" type="text/html" title="Lang team August update" />
-        <published>2021-08-04T00:00:00+00:00</published>
-        <updated>2021-08-04T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/08/04/lang-team-aug-update.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/08/04/lang-team-aug-update.html">&lt;p&gt;This week the lang team held its August planning meeting. We normally hold
-these meetings on the first Wednesday of every month.&lt;/p&gt;
-&lt;p&gt;We had a short meeting this month, just planning and scheduling the design
-meetings for the remainder of the month.&lt;/p&gt;
-&lt;p&gt;After each meeting, we post an update (like this one!) with notes and meeting announcements.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
-&lt;p&gt;We planned two design meetings for August. Our meetings are open for anyone to join and observe. Ping nikomatsakis or joshtriplett for info about attending.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;2021-08-11: No meeting this week&lt;/li&gt;
-&lt;li&gt;2021-08-18: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/94&quot;&gt;Structural equality&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;2021-08-25: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/111&quot;&gt;Non-terminal divergence between parser and macro matcher&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#design-meeting-expectations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-meeting-expectations&quot;&gt;&lt;/a&gt;Design meeting expectations&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;The document for the meeting must be prepared by the triage meeting on Tuesday and posted to the tracking issue.
-&lt;ul&gt;
-&lt;li&gt;If it is not sent out by then, the meeting will be canceled. This gives folks 24-hour notice.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
-&lt;ul&gt;
-&lt;li&gt;However, there is no rule &lt;strong&gt;against&lt;/strong&gt; reading the document beforehand and providing feedback or advice on how to improve it.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>Josh Triplett</name>
         </author>
     </entry>
     
