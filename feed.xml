@@ -10,8 +10,85 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-01-19T00:28:48+00:00</updated>
+    <updated>2022-01-20T11:08:58+00:00</updated>
 
+    
+    <entry>
+        <title>Security advisory for the standard library (CVE-2022-21658)</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/01/20/cve-2022-21658.html" type="text/html" title="Security advisory for the standard library (CVE-2022-21658)" />
+        <published>2022-01-20T00:00:00+00:00</published>
+        <updated>2022-01-20T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/01/20/cve-2022-21658.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/01/20/cve-2022-21658.html">&lt;blockquote&gt;
+&lt;p&gt;This is a cross-post of &lt;a href&#x3D;&quot;https://groups.google.com/g/rustlang-security-announcements/c/R1fZFDhnJVQ&quot;&gt;the official security advisory&lt;/a&gt;. The
+official advisory contains a signed version with our PGP key, as well.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The Rust Security Response WG was notified that the &lt;code&gt;std::fs::remove_dir_all&lt;/code&gt;
+standard library function is vulneable a race condition enabling symlink
+following (CWE-363). An attacker could use this security issue to trick a
+privileged program into deleting files and directories the attacker couldn&#x27;t
+otherwise access or delete.&lt;/p&gt;
+&lt;p&gt;This issue has been assigned &lt;a href&#x3D;&quot;https://www.cve.org/CVERecord?id&#x3D;CVE-2022-21658&quot;&gt;CVE-2022-21658&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#overview&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;overview&quot;&gt;&lt;/a&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Let&#x27;s suppose an attacker obtained unprivileged access to a system and needed
+to delete a system directory called &lt;code&gt;sensitive/&lt;/code&gt;, but they didn&#x27;t have the
+permissions to do so. If &lt;code&gt;std::fs::remove_dir_all&lt;/code&gt; followed symbolic links,
+they could find a privileged program that removes a directory they have access
+to (called &lt;code&gt;temp/&lt;/code&gt;), create a symlink from &lt;code&gt;temp/foo&lt;/code&gt; to &lt;code&gt;sensitive/&lt;/code&gt;, and wait
+for the privileged program to delete &lt;code&gt;foo/&lt;/code&gt;. The privileged program would
+follow the symlink from &lt;code&gt;temp/foo&lt;/code&gt; to &lt;code&gt;sensitive/&lt;/code&gt; while recursively deleting,
+resulting in &lt;code&gt;sensitive/&lt;/code&gt; being deleted.&lt;/p&gt;
+&lt;p&gt;To prevent such attacks, &lt;code&gt;std::fs::remove_dir_all&lt;/code&gt; already includes protection
+to avoid recursively deleting symlinks, as described in its documentation:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This function does &lt;strong&gt;not&lt;/strong&gt; follow symbolic links and it will simply remove
+the symbolic link itself.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Unfortunately that check was implemented incorrectly in the standard library,
+resulting in a TOCTOU (Time-of-check Time-of-use) race condition. Instead of
+telling the system not to follow symlinks, the standard library first checked
+whether the thing it was about to delete was a symlink, and otherwise it would
+proceed to recursively delete the directory.&lt;/p&gt;
+&lt;p&gt;This exposed a race condition: an attacker could create a directory and replace
+it with a symlink between the check and the actual deletion. While this attack
+likely won&#x27;t work the first time it&#x27;s attempted, in our experimentation we were
+able to reliably perform it within a couple of seconds.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#affected-versions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;affected-versions&quot;&gt;&lt;/a&gt;Affected Versions&lt;/h2&gt;
+&lt;p&gt;Rust 1.0.0 through Rust 1.58.0 is affected by this vulnerability. We&#x27;re going
+to release Rust 1.58.1 later today, which will include mitigations for this
+vulnerability. Patches to the Rust standard library are also available for
+custom-built Rust toolchains here (TODO: link).&lt;/p&gt;
+&lt;p&gt;Note that the following targets don&#x27;t have usable APIs to properly mitigate the
+attack, and are thus still vulnerable even with a patched toolchain:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;macOS before version 10.10 (Yosemite)&lt;/li&gt;
+&lt;li&gt;REDOX&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#mitigations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;mitigations&quot;&gt;&lt;/a&gt;Mitigations&lt;/h2&gt;
+&lt;p&gt;We recommend everyone to update to Rust 1.58.1 as soon as possible, especially
+people developing programs expected to run in privileged contexts (including
+system daemons and setuid binaries), as those have the highest risk of being
+affected by this.&lt;/p&gt;
+&lt;p&gt;Note that adding checks in your codebase before calling &lt;code&gt;remove_dir_all&lt;/code&gt; will
+&lt;strong&gt;not&lt;/strong&gt; mitigate the vulnerability, as they would also be vulnerable to race
+conditions like &lt;code&gt;remove_dir_all&lt;/code&gt; itself. The existing mitigation is working as
+intended outside of race conditions.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#acknowledgments&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgments&quot;&gt;&lt;/a&gt;Acknowledgments&lt;/h2&gt;
+&lt;p&gt;We want to thank Hans Kratz for independently discovering and disclosing this
+issue to us according to the &lt;a href&#x3D;&quot;https://www.rust-lang.org/policies/security&quot;&gt;Rust security policy&lt;/a&gt;, for developing the fix
+for UNIX-like targets and for reviewing fixes for other platforms.&lt;/p&gt;
+&lt;p&gt;We also want to thank Florian Weimer for reviewing the UNIX-like fix and for
+reporting the same issue back in 2018, even though the Security Response WG
+didn&#x27;t realize the severity of the issue at the time.&lt;/p&gt;
+&lt;p&gt;Finally we want to thank Pietro Albini for coordinating the security response
+and writing this advisory, Chris Denton for writing the Windows fix, Alex
+Crichton for writing the WASI fix, and Mara Bos for reviewing the patches.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Security Response WG</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.58.0</title>
@@ -840,102 +917,6 @@ struct MyStruct&amp;lt;P: PointerFamily&amp;gt; {
 
         <author>
             <name>Jack Huey</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.54.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/07/29/Rust-1.54.0.html" type="text/html" title="Announcing Rust 1.54.0" />
-        <published>2021-07-29T00:00:00+00:00</published>
-        <updated>2021-07-29T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/07/29/Rust-1.54.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/07/29/Rust-1.54.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.54.0. Rust is a programming language empowering everyone
-to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.54.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1540-2021-07-29&quot;&gt;detailed release notes for 1.54.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1540-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1540-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.54.0 stable&lt;/h2&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#attributes-can-invoke-function-like-macros&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;attributes-can-invoke-function-like-macros&quot;&gt;&lt;/a&gt;Attributes can invoke function-like macros&lt;/h3&gt;
-&lt;p&gt;Rust 1.54 supports invoking function-like macros inside attributes. Function-like macros can be either &lt;code&gt;macro_rules!&lt;/code&gt; based or procedural macros which are invoked like &lt;code&gt;macro!(...)&lt;/code&gt;. One notable use case for this is including documentation from other files into Rust doc comments. For example, if your project&#x27;s README represents a good documentation comment, you can use &lt;code&gt;include_str!&lt;/code&gt; to directly incorporate the contents. Previously, various workarounds allowed similar functionality, but from 1.54 this is much more ergonomic.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&#x3D;&quot;&gt;#![doc &#x3D; include_str!(&amp;quot;README.md&amp;quot;)]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Macros can be nested inside the attribute as well.
-For example, the &lt;code&gt;concat!&lt;/code&gt; macro can be used to construct a doc comment from within a macro that uses &lt;code&gt;stringify!&lt;/code&gt; to include substitutions:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;macro_rules! make_function {
-    ($name:ident, $value:expr) &#x3D;&amp;gt; {
-        #[doc &#x3D; concat!(&amp;quot;The &#x60;&amp;quot;, stringify!($name), &amp;quot;&#x60; example.&amp;quot;)]
-        ///
-        /// # Example
-        ///
-        /// &#x60;&#x60;&#x60;
-        #[doc &#x3D; concat!(
-            &amp;quot;assert_eq!(&amp;quot;, module_path!(), &amp;quot;::&amp;quot;, stringify!($name), &amp;quot;(), &amp;quot;,
-            stringify!($value), &amp;quot;);&amp;quot;)
-        ]
-        /// &#x60;&#x60;&#x60;
-        pub fn $name() -&amp;gt; i32 {
-            $value
-        }
-    };
-}
-
-make_function! {func_name, 123}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Read &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/83366&quot;&gt;here&lt;/a&gt; for more details.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#wasm32-intrinsics-stabilized&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;wasm32-intrinsics-stabilized&quot;&gt;&lt;/a&gt;wasm32 intrinsics stabilized&lt;/h3&gt;
-&lt;p&gt;A number of intrinsics for the wasm32 platform have been stabilized, which gives access to the SIMD instructions in WebAssembly.&lt;/p&gt;
-&lt;p&gt;Notably, unlike the previously stabilized &lt;code&gt;x86&lt;/code&gt; and &lt;code&gt;x86_64&lt;/code&gt; intrinsics, these do not have a safety requirement to only be called when the appropriate target feature is enabled. This is because WebAssembly was written from the start to validate code safely before executing it, so instructions are guaranteed to be decoded correctly (or not at all).&lt;/p&gt;
-&lt;p&gt;This means that we can expose some of the intrinsics as entirely safe functions, for example &lt;a href&#x3D;&quot;https://doc.rust-lang.org/beta/core/arch/wasm32/fn.v128_bitselect.html&quot;&gt;&lt;code&gt;v128_bitselect&lt;/code&gt;&lt;/a&gt;. However, there are still some intrinsics which are unsafe because they use raw pointers, such as &lt;a href&#x3D;&quot;https://doc.rust-lang.org/beta/core/arch/wasm32/fn.v128_load.html&quot;&gt;&lt;code&gt;v128_load&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#incremental-compilation-is-re-enabled-by-default&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;incremental-compilation-is-re-enabled-by-default&quot;&gt;&lt;/a&gt;Incremental Compilation is re-enabled by default&lt;/h3&gt;
-&lt;p&gt;Incremental compilation has been re-enabled by default in this release, after it being disabled by default in 1.52.1.&lt;/p&gt;
-&lt;p&gt;In Rust 1.52, additional validation was added when loading incremental compilation data from the on-disk cache.
-This resulted in a number of pre-existing potential soundness issues being uncovered as the validation changed these silent bugs into internal compiler errors (ICEs).
-In response, the Compiler Team decided to disable incremental compilation in the 1.52.1 patch, allowing users to avoid encountering the ICEs and the underlying unsoundness, at the expense of longer compile times. &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;p&gt;Since then, we&#x27;ve conducted a &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/435&quot;&gt;series of retrospectives&lt;/a&gt; and contributors have been hard at work resolving the reported issues, with some fixes landing in 1.53 and the majority landing in this release. &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn2&quot; id&#x3D;&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;p&gt;There are currently still two known issues which can result in an ICE.
-Due to the lack of automated crash reporting, we can&#x27;t be certain of the full extent of impact of the outstanding issues. However, based on the feedback we received from users affected by the 1.52 release, we believe the remaining issues to be rare in practice.&lt;/p&gt;
-&lt;p&gt;Therefore, incremental compilation has been re-enabled in this release!&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
-&lt;p&gt;The following methods and trait implementations were stabilized.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.BTreeMap.html#method.into_keys&quot;&gt;&lt;code&gt;BTreeMap::into_keys&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.BTreeMap.html#method.into_values&quot;&gt;&lt;code&gt;BTreeMap::into_values&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.into_keys&quot;&gt;&lt;code&gt;HashMap::into_keys&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.into_values&quot;&gt;&lt;code&gt;HashMap::into_values&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/core/arch/wasm32/index.html&quot;&gt;&lt;code&gt;arch::wasm32&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.binary_search&quot;&gt;&lt;code&gt;VecDeque::binary_search&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.binary_search_by&quot;&gt;&lt;code&gt;VecDeque::binary_search_by&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.binary_search_by_key&quot;&gt;&lt;code&gt;VecDeque::binary_search_by_key&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.partition_point&quot;&gt;&lt;code&gt;VecDeque::partition_point&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.54.0 release:
-check out what changed in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1540-2021-07-29&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-154-2021-07-29&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-154&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;rustfmt has also been fixed in the 1.54.0 release to properly format nested
-out-of-line modules. This may cause changes in formatting to files that were
-being ignored by the 1.53.0 rustfmt. See details &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/86424&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1540&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1540&quot;&gt;&lt;/a&gt;Contributors to 1.54.0&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.54.0.
-We couldn&#x27;t have done it without all of you.
-&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.54.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-&lt;section class&#x3D;&quot;footnotes&quot;&gt;
-&lt;ol&gt;
-&lt;li id&#x3D;&quot;fn1&quot;&gt;
-&lt;p&gt;The &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/05/10/Rust-1.52.1.html&quot;&gt;1.52.1 release notes&lt;/a&gt; contain a more detailed description of these events. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id&#x3D;&quot;fn2&quot;&gt;
-&lt;p&gt;The tracking issue for the issues is &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/84970&quot;&gt;#84970&lt;/a&gt;. &lt;a href&#x3D;&quot;#fnref2&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
