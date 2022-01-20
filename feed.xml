@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-01-20T11:30:35+00:00</updated>
+    <updated>2022-01-20T17:13:25+00:00</updated>
 
     
     <entry>
@@ -24,7 +24,7 @@
 official advisory contains a signed version with our PGP key, as well.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;The Rust Security Response WG was notified that the &lt;code&gt;std::fs::remove_dir_all&lt;/code&gt;
-standard library function is vulnerable a race condition enabling symlink
+standard library function is vulnerable to a race condition enabling symlink
 following (CWE-363). An attacker could use this security issue to trick a
 privileged program into deleting files and directories the attacker couldn&#x27;t
 otherwise access or delete.&lt;/p&gt;
@@ -39,7 +39,7 @@ for the privileged program to delete &lt;code&gt;foo/&lt;/code&gt;. The privileg
 follow the symlink from &lt;code&gt;temp/foo&lt;/code&gt; to &lt;code&gt;sensitive/&lt;/code&gt; while recursively deleting,
 resulting in &lt;code&gt;sensitive/&lt;/code&gt; being deleted.&lt;/p&gt;
 &lt;p&gt;To prevent such attacks, &lt;code&gt;std::fs::remove_dir_all&lt;/code&gt; already includes protection
-to avoid recursively deleting symlinks, as described in its documentation:&lt;/p&gt;
+to avoid recursively deleting symlinks, as described in &lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/fs/fn.remove_dir_all.html&quot;&gt;its documentation&lt;/a&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;This function does &lt;strong&gt;not&lt;/strong&gt; follow symbolic links and it will simply remove
 the symbolic link itself.&lt;/p&gt;
