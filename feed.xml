@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-01-20T11:08:58+00:00</updated>
+    <updated>2022-01-20T11:30:35+00:00</updated>
 
     
     <entry>
@@ -24,7 +24,7 @@
 official advisory contains a signed version with our PGP key, as well.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;The Rust Security Response WG was notified that the &lt;code&gt;std::fs::remove_dir_all&lt;/code&gt;
-standard library function is vulneable a race condition enabling symlink
+standard library function is vulnerable a race condition enabling symlink
 following (CWE-363). An attacker could use this security issue to trick a
 privileged program into deleting files and directories the attacker couldn&#x27;t
 otherwise access or delete.&lt;/p&gt;
@@ -57,7 +57,7 @@ able to reliably perform it within a couple of seconds.&lt;/p&gt;
 &lt;p&gt;Rust 1.0.0 through Rust 1.58.0 is affected by this vulnerability. We&#x27;re going
 to release Rust 1.58.1 later today, which will include mitigations for this
 vulnerability. Patches to the Rust standard library are also available for
-custom-built Rust toolchains here (TODO: link).&lt;/p&gt;
+custom-built Rust toolchains &lt;a href&#x3D;&quot;https://github.com/rust-lang/wg-security-response/tree/master/patches/CVE-2022-21658&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Note that the following targets don&#x27;t have usable APIs to properly mitigate the
 attack, and are thus still vulnerable even with a patched toolchain:&lt;/p&gt;
 &lt;ul&gt;
