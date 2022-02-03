@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Async Rust in 2022 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Async Rust in 2022 | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Async Rust in 2022 | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Async Rust in 2022" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Async Rust in 2022</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 3, 2022 &middot; Niko Matsakis and Tyler Mandry
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/wg-async">Async Working Group</a> 
+    </div>
+
+    <div class="post">
+      <p>Almost a year ago, the Async Working Group<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup> <a href="https://blog.rust-lang.org/2021/03/18/async-vision-doc.html">embarked on a collaborative effort</a> to write a <a href="https://rust-lang.github.io/wg-async/vision.html">shared async vision document</a>. As we enter 2022, we wanted to give an update on the results from that process along with the progress we are making towards realizing that vision.</p>
+<h2><a href="#writing-an-async-issue-aggregator-in-rust-2024" aria-hidden="true" class="anchor" id="writing-an-async-issue-aggregator-in-rust-2024"></a>Writing an async issue aggregator in Rust 2024</h2>
+<p>To set the scene, imagine it's Rust 2024, and you've decided to build your first project in Rust. You're working on a project that uses GitHub and you'd like a tool that will walk over all the issues on your repository and do some automatic triage. You decide to use async Rust for this. You pull out the Rust book and thumb over to the Async I/O section. In there, it shows you the basic structure of an async Rust application. Like any Rust program, it begins with <code>main</code>, but this time with an <code>async fn</code>...</p>
+<pre><code class="language-rust">async fn main() {
+    ...
+}
+</code></pre>
+<p>Thumbing over to crates.io, you search for &quot;github&quot; and find that there is a nifty crate <code>crabbycat</code> for navigating github issues. You import it and sit down to work. The first thing you need to do is to to iterate over all the issues:</p>
+<pre><code class="language-rust">async fn main() {
+    for await? issue in crabbycat::issues(&quot;https://github.com/rust-lang/rust&quot;) {
+        if meets_criteria(&amp;issue) {
+            println!(&quot;{issue:?}&quot;);
+        }
+    }
+}
+</code></pre>
+<p>Your crate seems to be working well and you happily tweet about it. Soon enough you find yourself with some users and one of them opens a PR to extend it to to support GitLab. To do this, they introduce a trait that allows you to write code that is generic over the issue provider. This trait has one method, <code>issues</code> which returns an iterator (in this case, an async iterator):</p>
+<pre><code class="language-rust">trait IssueProvider {
+    async fn issues(&amp;mut self, url: &amp;str)
+        -&gt; impl AsyncIterator&lt;Item = Result&lt;Issue, Err&gt;&gt;;
+}
+
+#[derive(Debug)]
+struct Issue {
+    number: usize,
+    header: String,
+    assignee: String,
+}
+</code></pre>
+<p>Now they are able to refactor the main loop into a function that is generic over the <code>IssueProvider</code>. They decide to use a <code>dyn</code> trait to avoid monomorphizing many times.</p>
+<pre><code class="language-rust">fn process_issues(provider: &amp;mut dyn IssueProvider) {
+    for await? issue in provider.issues(&quot;https://github.com/rust-lang/rust&quot;) {
+        if meets_criteria(&amp;issue) {
+            println!(&quot;{issue:?}&quot;);
+        }
+    }
+}
+</code></pre>
+<p>You happily hit merge on the PR and everything works great. Later on, somebody wants to port your system to run on the Chartreuse operating system. Chartreuse is based on an actor model and uses its own custom async runtime -- but luckily for you, you don't care. All your code is seamlessly able to switch the underlying runtime implementation over to the Chartreuse async runtime.</p>
+<h2><a href="#meanwhile-in-2022" aria-hidden="true" class="anchor" id="meanwhile-in-2022"></a>Meanwhile, in 2022...</h2>
+<p>Of course, the year is still 2022, and the vision we just painted is not reality -- at least not yet. There is a lot of work to do yet in terms of RFCing and implementing the features that will let us write the code we talked about:</p>
+<ul>
+<li>Writing the <code>IssueProvider</code> trait requires async fns in traits.</li>
+<li>Taking an <code>&amp;mut dyn IssueProvider</code> argument requires supporting dynamic dispatch in traits that have async functions
+<ul>
+<li>and returning <code>impl AsyncIterator</code>!</li>
+</ul>
+</li>
+<li>The code used a <code>for await?</code> loop, which permitted easy iteration over iterators in async code.</li>
+<li>The trait for async iteration in the standard library (<code>Stream</code>) has a different name and is not stabilized; its definition is likely to change, too, once we have strong support for async fns in traits.</li>
+<li>Writing <code>async fn main</code> and changing to an alternate runtime requires portability across runtimes.</li>
+</ul>
+<p>As this work proceeds we can expect plenty of changes in the details along the way, and we might decide some pieces aren't worth it; if nothing else, the syntax for generators is a hotly contested topic. <strong>What won't change is the the overall vision:</strong> that writing async Rust code should be as easy as writing sync code, apart from the occasional <code>async</code> and <code>await</code> keyword.</p>
+<h2><a href="#how-we-get-there" aria-hidden="true" class="anchor" id="how-we-get-there"></a>How we get there</h2>
+<p>We've organized the Async working group into a number of distinct initiatives, each of which is pursuing one part of the vision. What follows is a list of the currently active groups and some of the things they've done over the last few months since they got up and running.</p>
+<h3><a href="#async-fundamentals-initiative" aria-hidden="true" class="anchor" id="async-fundamentals-initiative"></a><a href="https://rust-lang.github.io/async-fundamentals-initiative/">Async fundamentals</a> initiative</h3>
+<p>Led by <a href="https://github.com/tmandry">tmandry</a>, currently focused on supporting <code>async fn</code> in traits.</p>
+<ul>
+<li>We have been coordinating and supporting the <a href="https://rust-lang.github.io/generic-associated-types-initiative/">generic associated types</a> and <a href="https://rust-lang.github.io/impl-trait-initiative/">impl trait</a> initiatives.</li>
+<li>We have also landed the <a href="https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html">static async fn in traits</a> RFC and <a href="https://github.com/rust-lang/rfcs/pull/3193">drafted an RFC for return position impl trait</a> (which still needs a few tweaks before it's ready to land).</li>
+<li>We've been working on a design for dynamic dispatch, the most recent iteration of which is described in <a href="http://smallcultfollowing.com/babysteps//blog/2022/01/07/dyn-async-traits-part-7/">this blog post</a>.</li>
+<li>We've also been spinning off efforts, such as the proposal for <a href="https://tmandry.gitlab.io/blog/posts/2021-12-21-context-capabilities/">context and capabilities</a> that tmandry blogged about.</li>
+</ul>
+<h3><a href="#async-iteration-initiative" aria-hidden="true" class="anchor" id="async-iteration-initiative"></a><a href="https://estebank.github.io/rust-iterator-item-syntax.html">Async iteration</a> initiative</h3>
+<p>Led by <a href="https://github.com/estebank">estebank</a>, exploring generators and async generators.</p>
+<ul>
+<li>Estebank has <a href="https://estebank.github.io/rust-iterator-item-syntax.html">prototyped a procedural macro for generators</a> and put out a call for discussion about the syntax and other details.</li>
+</ul>
+<h3><a href="#portability-initiative" aria-hidden="true" class="anchor" id="portability-initiative"></a><a href="https://www.ncameron.org/blog/portable-and-interoperable-async-rust/">Portability</a> initiative</h3>
+<p>Led by <a href="https://github.com/nrc">nrc</a>, exploring what it takes to make code easily portable across runtimes, beginning with standardized traits for things like <code>AsyncRead</code> and <code>AsyncWrite</code>.</p>
+<ul>
+<li><a href="https://github.com/nrc">nrc</a> posted a <a href="https://www.ncameron.org/blog/portable-and-interoperable-async-rust/">blog post</a> laying out a vision.</li>
+</ul>
+<h3><a href="#polish-initiative" aria-hidden="true" class="anchor" id="polish-initiative"></a><a href="https://rust-lang.github.io/wg-async/vision/roadmap/polish.html">Polish</a> initiative</h3>
+<p>Led by <a href="https://github.com/eholk">eholk</a>, focused on improving the existing capabilities via smaller changes that collectively make a big difference.</p>
+<ul>
+<li>We've got a <a href="https://github.com/rust-lang/rust/issues/91032">pending PR</a> that will improve the generator's capture analysis when variables are moved before a yield point, as well as <a href="https://github.com/rust-lang/rust/pull/92508">another PR</a> that tightens temporary scopes to further avoid unnecessary generator captures.</li>
+<li><a href="https://github.com/guswynn">Gus Wynn</a> made significant progress towards a <a href="https://github.com/rust-lang/rust/pull/88865"><code>must_not_suspend</code></a> lint that catches cases where values are live across an await point that should not be.</li>
+<li>We are starting to look at ways to make <a href="https://rust-lang.github.io/wg-async/design_docs/async_stack_traces.html">async stack traces</a> more readable and helpful.</li>
+</ul>
+<h3><a href="#tooling-initiative" aria-hidden="true" class="anchor" id="tooling-initiative"></a><a href="https://nikomatsakis.github.io/wg-async/vision/deliverables/tooling.html">Tooling</a> initiative</h3>
+<p>Led by <a href="https://github.com/pnkfelix">pnkfelix</a>, working to support folks in the async ecosystem who are building interesting tooling to support async Rust others.</p>
+<ul>
+<li>Michael Woerister is exploring <a href="https://github.com/rust-lang/async-crashdump-debugging-initiative">async crashdump recovery</a>, offering a mechanism to recover and inspect the state of an async Rust program based on a crashdump.</li>
+<li>Eliza Weisman and <a href="https://tokio.rs/blog/2021-12-announcing-tokio-console#thanks-to">many others</a> recently <a href="https://tokio.rs/blog/2021-12-announcing-tokio-console">announced their 0.1 release</a> of <a href="https://github.com/tokio-rs/console">tokio console</a>. Tokio Console is a diagnostics and debugging tool for asynchronous Rust programs. It gives you a live view onto the state of the async runtime, and can also signal warnings  when it detects suspicious behavior that might indicate a bug or performance problem.</li>
+</ul>
+<p>You can find the complete set of work that we have planned on our <a href="https://rust-lang.github.io/wg-async/vision/roadmap.html">roadmap page</a>, which also links to various deliverables we're working toward.</p>
+<h2><a href="#want-to-help" aria-hidden="true" class="anchor" id="want-to-help"></a>Want to help?</h2>
+<p>If you're interested in helping out, a good place to start is the <a href="https://rust-lang.github.io/wg-async/vision/roadmap/polish.html#-how-to-help">How to help</a> section of the polish initiative page. There is also a weekly <a href="https://rust-lang.github.io/wg-async/triage.html">polish triage meeting</a> which you may want to attend.</p>
+<section class="footnotes">
+<ol>
+<li id="fn1">
+<p>We used to be called the Async Foundations Working Group, or wg-async-foundations. wg-async is much easier to type. The <a href="https://rust-lang.github.io/wg-async/CHARTER.html">focus</a> of the working group being on the &quot;foundations&quot; of async, namely the language and standard library, hasn't changed. <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
