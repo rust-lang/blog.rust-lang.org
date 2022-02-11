@@ -21,14 +21,11 @@ Working Group and the Compiler Team.
 
 - (5 min) Opening remarks 👋 ([angelonfira])
 - (20 min) Rust 2021 Survey Results ([nrc])
-- (20 min) Async working group update ([tmandry])
 - (20 min) Compiler team ambitions ([pnkfelix], [wesleywiser])
 - (5 min) Closing ([angelonfira])
 
-[nikomatsakis]: https://github.com/nikomatsakis
 [angelonfira]: https://github.com/angelonfira
 [nrc]: https://github.com/nrc
-[tmandry]: https://github.com/tmandry
 [pnkfelix]: https://github.com/pnkfelix
 [wesleywiser]: https://github.com/wesleywiser
 
