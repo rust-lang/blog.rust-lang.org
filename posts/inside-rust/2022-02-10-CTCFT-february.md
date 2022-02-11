@@ -1,8 +1,7 @@
 ---
 layout: post
-title: "CTCFT 2022-02-21 Agenda"
-author: The Rust CTCFT Team
-release: true
+title: CTCFT 2022-02-21 Agenda
+author: Rust CTCFT Team
 ---
 
 The next ["Cross Team Collaboration Fun Times" (CTCFT)][CTCFT] meeting will take
