@@ -8,12 +8,12 @@ release: false
 Every so often, the [crates.io index](https://github.com/rust-lang/crates.io-index)'s Git history
 is [squashed into one
 commit](https://internals.rust-lang.org/t/cargos-crate-index-upcoming-squash-into-one-commit/8440)
-to minimize the history Cargo needs to download. When the index is squashed, we have saved snapshot
-branches to preserve the history of crate publishes.
+to minimize the history Cargo needs to download. When the index is squashed, we save snapshots
+to preserve the history of crate publishes.
 
-Those branches are using server resources because of the recompression of objects that are
+Currently, those snapshots are stored as branches in the main index Git repository. This uses server resources because of the recompression of objects that are
 delta-compressed against objects that are only referenced in branches not fetched by the client. We
-will be deleting the snapshot branches to ensure that all objects referenced in the master branch
+will be deleting the snapshot branches from this repository to ensure that all objects referenced in the master branch
 will only be compressed against other objects in the master branch, ensuring that the current clone
 behavior will be much more efficient on the server side.
 
