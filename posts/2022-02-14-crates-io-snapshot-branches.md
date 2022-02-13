@@ -11,11 +11,12 @@ commit](https://internals.rust-lang.org/t/cargos-crate-index-upcoming-squash-int
 to minimize the history Cargo needs to download. When the index is squashed, we save snapshots
 to preserve the history of crate publishes.
 
-Currently, those snapshots are stored as branches in the main index Git repository. This uses server resources because of the recompression of objects that are
-delta-compressed against objects that are only referenced in branches not fetched by the client. We
-will be deleting the snapshot branches from this repository to ensure that all objects referenced in the master branch
-will only be compressed against other objects in the master branch, ensuring that the current clone
-behavior will be much more efficient on the server side.
+Currently, those snapshots are stored as branches in the main index Git repository. Those branches
+are using server resources though, as the server still has to consider their contents whenever
+Cargo asks for the master branch. We will be deleting the snapshot branches from this repository to
+ensure that all objects referenced in the master branch will only be compressed against other
+objects in the master branch, ensuring that the current clone behavior will be much more efficient
+on the server side.
 
 Here's how this might affect you:
 
