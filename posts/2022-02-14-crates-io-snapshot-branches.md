@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Crates.io Index Snapshot Branches Moving"
-author: the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>
+author: The Crates.io Team
 release: false
 ---
 
