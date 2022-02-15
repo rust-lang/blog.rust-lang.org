@@ -23,7 +23,7 @@ Here's how this might affect you:
 ## If you use Cargo
 
 You should not see any effects from this change. Cargo does not use the snapshot branches, and
-Cargo regularly handles index squashes. If you do see any issues, they are a bug, please [report
+Cargo regularly handles index squashes. If you do see any issues, they are bugs, please [report
 them on the Cargo repo](https://github.com/rust-lang/cargo).
 
 ## If you use the snapshot branches
