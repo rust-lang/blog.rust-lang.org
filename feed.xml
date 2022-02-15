@@ -10,8 +10,54 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-02-15T03:27:48+00:00</updated>
+    <updated>2022-02-15T16:57:01+00:00</updated>
 
+    
+    <entry>
+        <title>Rust Survey 2021 Results</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html" type="text/html" title="Rust Survey 2021 Results" />
+        <published>2022-02-15T00:00:00+00:00</published>
+        <updated>2022-02-15T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html">&lt;h1&gt;&lt;a href&#x3D;&quot;#blog-post&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;blog-post&quot;&gt;&lt;/a&gt;Blog Post&lt;/h1&gt;
+&lt;p&gt;Greetings Rustaceans!&lt;/p&gt;
+&lt;p&gt;Another year has passed, and with it comes another annual Rust survey analysis! The survey was conducted in December 2021.&lt;/p&gt;
+&lt;p&gt;We’d like to thank everyone who participated in this year’s survey, with a special shout-out to those who helped translate the survey from English into other languages.&lt;/p&gt;
+&lt;p&gt;Without further ado, let’s dive into the analysis!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#a-global-community&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-global-community&quot;&gt;&lt;/a&gt;A Global Community&lt;/h2&gt;
+&lt;p&gt;The Rust community continues to grow, with this survey having the largest number of complete survey responses (9354 respondents), exceeding last year&#x27;s total by roughly 1500 responses.&lt;/p&gt;
+&lt;p&gt;90% of respondents said that they use Rust for any purpose, while 5% stated they had used Rust at some point in the past but no longer do, and 4% stated they have yet to use Rust at all.&lt;/p&gt;
+&lt;p&gt;The survey was offered in 10 languages with 78% filling out the survey in English followed by Simplified Chinese (6%), German (4%), and French (3%). Despite English being the language most respondents completed the survey in, respondents hailed from all around the world. The United States was the country with the largest representation at 24% followed by Germany (12%), China (7%), and the U.K. (6%). In total 113 different countries and territories were represented through this survey!&lt;/p&gt;
+&lt;p&gt;English, however, is not the language of choice for all Rustaceans with nearly 7% preferring not to use English as a language for technical communication. An additional 23% of respondents prefer another language in addition to English. The most commonly preferred languages (besides English) roughly follow where Rustaceans live with Simplified Chinese, German, and French being the top 3. However, Japanese, Simplified Chinese, and Russian speakers were the most likely to prefer not to use English at all for technical conversation.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#using-rust&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;using-rust&quot;&gt;&lt;/a&gt;Using Rust&lt;/h2&gt;
+&lt;p&gt;The percentage of people using Rust continues to rise. Of those using Rust, 81% are currently using it on at least a weekly basis compared to 72% from last year&#x27;s survey.&lt;/p&gt;
+&lt;p&gt;75% of all Rust users say they can write production ready code, though 27% say that it is at times a struggle.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;/images/2022-02-RustSurvey/expertise.png&quot; alt&#x3D;&quot;Rust expertise&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Overall, Rustaceans seem to be having a great time writing Rust with only 1% saying it isn&#x27;t fun to use. Only a quarter of a percent find Rust doesn&#x27;t have any real benefit over other programming languages.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#rust-at-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rust-at-work&quot;&gt;&lt;/a&gt;Rust at Work&lt;/h2&gt;
+&lt;p&gt;Rust can now safely be classified as a language used by people in professional settings. Of those respondents using Rust, 59% use it at least occasionally at work with 23% using Rust for the majority of their coding. This is a large increase over last year where only 42% of respondents used Rust at work.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;/images/2022-02-RustSurvey/rust-at-work.png&quot; alt&#x3D;&quot;Do you use Rust at work?&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Adopting Rust at work seems to follow a long but ultimately worthwhile path for a lot of Rustaceans. First, 83% of those who have adopted Rust at work found it to be &amp;quot;challenging&amp;quot;. How much this is related to Rust itself versus general challenges with adopting a new programming language, however, is unclear. During adoption only 13% of respondents found the language was slowing their team down and 82% found that Rust helped their teams achieve their goals.&lt;/p&gt;
+&lt;p&gt;After adoption, the costs seem to be justified: only 1% of respondents did not find the challenge worth it while 79% said it definitely was. When asked if their teams were likely to use Rust again in the future, 90% agreed. Finally, of respondents using Rust at work, 89% of respondents said their teams found it fun and enjoyable to program.&lt;/p&gt;
+&lt;p&gt;As for why respondents are using Rust at work, the top answer was that it allowed users &amp;quot;to build relatively correct and bug free software&amp;quot; with 96% of respondents agreeing with that statement. After correctness, performance (92%) was the next most popular choice. 89% of respondents agreed that they picked Rust at work because of Rust&#x27;s much-discussed security properties.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;/images/2022-02-RustSurvey/rust-adoption.png&quot; alt&#x3D;&quot;Adopting Rust&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Overall, Rust seems to be a language ready for the challenges of production, with only 3% of respondents saying that Rust was a &amp;quot;risky&amp;quot; choice for production use.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#challenges-ahead&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;challenges-ahead&quot;&gt;&lt;/a&gt;Challenges Ahead&lt;/h2&gt;
+&lt;p&gt;Overall, the annual survey points towards a growing, healthy community of Rustaceans, but this is not to say we don&#x27;t have work ahead of us. Compile times, a historical focus of improvement for the Rust project, continue to not be where they need to be, with 61% of respondents saying work still needs to be done to improve them. Although, to the compiler team&#x27;s credit, 61% found that they improved over the past year.  Other areas indicated as in need of more improvement were disk space (45%), debugging (40%), and GUI development (56%).&lt;/p&gt;
+&lt;p&gt;The IDE experience (led through continued adoption and improvement of various tools like rust-analyzer, IntelliJ Rust, etc.) gets the prize for showing the most improvement:  56% found it has improved over the last year.&lt;/p&gt;
+&lt;p&gt;However, compiler error messages received the most praise, with 90% approval of their current state. 🎉&lt;/p&gt;
+&lt;p&gt;When asked what their biggest worries for the future of Rust are, the top answer was a fear that there will not be enough usage in industry (38%). Given that Rust continues to show strides in adoption at places of work, the community seems to be on a good path to overcoming this concern.&lt;/p&gt;
+&lt;p&gt;The next largest concern was that the language would become too complex (33%). This was combined with a relative small number of folks calling for additional features (especially for ones not already in the pipeline).&lt;/p&gt;
+&lt;p&gt;Finally, the third largest concern was that those working on Rust would not find the proper support they need to continue to develop the language and community in a healthy way (30%). With the establishment of the Rust Foundation, support structures are coming into place that hopefully will address this point, but no doubt plenty of work is still ahead of us.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#an-exciting-future&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;an-exciting-future&quot;&gt;&lt;/a&gt;An Exciting Future&lt;/h2&gt;
+&lt;p&gt;2021 was arguably one of the most significant years in Rust&#x27;s history - with the establishment of the Rust foundation, the 2021 edition, and a larger community than ever, Rust seems to be on a solid path as we head into the future.&lt;/p&gt;
+&lt;p&gt;Plenty of work remains, but here&#x27;s hoping for a great 2022!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Survey Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Crates.io Index Snapshot Branches Moving</title>
@@ -550,145 +596,6 @@ immediately to ensure their codebase is not affected by the security issue.&lt;/
 
         <author>
             <name>The Rust Security Response WG</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.56.0 and Rust 2021</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/10/21/Rust-1.56.0.html" type="text/html" title="Announcing Rust 1.56.0 and Rust 2021" />
-        <published>2021-10-21T00:00:00+00:00</published>
-        <updated>2021-10-21T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/10/21/Rust-1.56.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/10/21/Rust-1.56.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.56.0. This stabilizes the 2021 edition as well.
-Rust is a programming language empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.56.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1560-2021-10-21&quot;&gt;detailed release notes for 1.56.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1560-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1560-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.56.0 stable&lt;/h2&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#rust-2021&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rust-2021&quot;&gt;&lt;/a&gt;Rust 2021&lt;/h3&gt;
-&lt;p&gt;We wrote about plans for the Rust 2021 Edition &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/05/11/edition-2021.html&quot;&gt;in May&lt;/a&gt;.
-Editions are a mechanism for opt-in changes that may otherwise pose backwards compatibility risk. See &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/edition-guide/editions/index.html&quot;&gt;the edition guide&lt;/a&gt; for details on how this is achieved.
-This is a smaller edition, especially compared to 2018, but there
-are still some nice quality-of-life changes that require an edition opt-in to
-avoid breaking some corner cases in existing code. See the new chapters of the
-edition guide below for more details on each new feature and guidance for
-migration.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/disjoint-capture-in-closures.html&quot;&gt;Disjoint capture&lt;/a&gt;: closures now capture individual named fields rather than always capturing whole identifiers.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/IntoIterator-for-arrays.html&quot;&gt;&lt;code&gt;IntoIterator&lt;/code&gt; for arrays&lt;/a&gt;: &lt;code&gt;array.into_iter()&lt;/code&gt; now iterates over items by value instead of by reference.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/or-patterns-macro-rules.html&quot;&gt;Or patterns in macro-rules&lt;/a&gt; now match top-level &lt;code&gt;A|B&lt;/code&gt; in &lt;code&gt;:pat&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/default-cargo-resolver.html&quot;&gt;Default Cargo feature resolver&lt;/a&gt; is now version 2.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/prelude.html&quot;&gt;Additions to the prelude&lt;/a&gt;: &lt;code&gt;TryInto&lt;/code&gt;, &lt;code&gt;TryFrom&lt;/code&gt;, and &lt;code&gt;FromIterator&lt;/code&gt; are now in scope by default.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/panic-macro-consistency.html&quot;&gt;Panic macros&lt;/a&gt; now always expect format strings, just like &lt;code&gt;println!()&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/reserving-syntax.html&quot;&gt;Reserving syntax&lt;/a&gt; for &lt;code&gt;ident#&lt;/code&gt;, &lt;code&gt;ident&amp;quot;...&amp;quot;&lt;/code&gt;, and &lt;code&gt;ident&#x27;...&#x27;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html&quot;&gt;Warnings promoted to errors&lt;/a&gt;: &lt;code&gt;bare_trait_objects&lt;/code&gt; and &lt;code&gt;ellipsis_inclusive_range_patterns&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4&gt;&lt;a href&#x3D;&quot;#disjoint-capture-in-closures&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;disjoint-capture-in-closures&quot;&gt;&lt;/a&gt;Disjoint capture in closures&lt;/h4&gt;
-&lt;p&gt;Closures automatically capture values or references to identifiers that are
-used in the body, but before 2021, they were always captured as a whole. The new
-disjoint-capture feature will likely simplify the way you write closures, so
-let&#x27;s look at a quick example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// 2015 or 2018 edition code
-let a &#x3D; SomeStruct::new();
-
-// Move out of one field of the struct
-drop(a.x);
-
-// Ok: Still use another field of the struct
-println!(&amp;quot;{}&amp;quot;, a.y);
-
-// Error: Before 2021 edition, tries to capture all of &#x60;a&#x60;
-let c &#x3D; || println!(&amp;quot;{}&amp;quot;, a.y);
-c();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To fix this, you would have had to extract something like &lt;code&gt;let y &#x3D; &amp;amp;a.y;&lt;/code&gt;
-manually before the closure to limit its capture. Starting in Rust 2021,
-closures will automatically capture only the fields that they use, so the
-above example will compile fine!&lt;/p&gt;
-&lt;p&gt;This new behavior is only activated in the new edition, since it can change
-the order in which fields are dropped. As for all edition changes, an
-automatic migration is available, which will update your closures for which
-this matters by inserting &lt;code&gt;let _ &#x3D; &amp;amp;a;&lt;/code&gt; inside the closure to force the
-entire struct to be captured as before.&lt;/p&gt;
-&lt;h4&gt;&lt;a href&#x3D;&quot;#migrating-to-2021&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;migrating-to-2021&quot;&gt;&lt;/a&gt;Migrating to 2021&lt;/h4&gt;
-&lt;p&gt;The guide includes migration instructions for all new features, and in general
-&lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html&quot;&gt;transitioning an existing project to a new edition&lt;/a&gt;.
-In many cases &lt;code&gt;cargo fix&lt;/code&gt; can automate the necessary changes. You may even
-find that no changes in your code are needed at all for 2021!&lt;/p&gt;
-&lt;p&gt;However small this edition appears on the surface, it&#x27;s still the product
-of a lot of hard work from many contributors: see our dedicated
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/88623&quot;&gt;celebration and thanks&lt;/a&gt; tracker!&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#cargo-rust-version&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargo-rust-version&quot;&gt;&lt;/a&gt;Cargo &lt;code&gt;rust-version&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;Cargo.toml&lt;/code&gt; now supports a &lt;code&gt;[package]&lt;/code&gt; &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field&quot;&gt;&lt;code&gt;rust-version&lt;/code&gt;&lt;/a&gt; field to specify
-the minimum supported Rust version for a crate, and Cargo will exit with an
-early error if that is not satisfied. This doesn&#x27;t currently influence the
-dependency resolver, but the idea is to catch compatibility problems before
-they turn into cryptic compiler errors.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#new-bindings-in-binding--pattern&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;new-bindings-in-binding--pattern&quot;&gt;&lt;/a&gt;New bindings in &lt;code&gt;binding @ pattern&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;Rust pattern matching can be written with a single identifier that binds
-the entire value, followed by &lt;code&gt;@&lt;/code&gt; and a more refined structural pattern,
-but this has not allowed additional bindings in that pattern -- until now!&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct Matrix {
-    data: Vec&amp;lt;f64&amp;gt;,
-    row_len: usize,
-}
-
-// Before, we need separate statements to bind
-// the whole struct and also read its parts.
-let matrix &#x3D; get_matrix();
-let row_len &#x3D; matrix.row_len;
-// or with a destructuring pattern:
-let Matrix { row_len, .. } &#x3D; matrix;
-
-// Rust 1.56 now lets you bind both at once!
-let matrix @ Matrix { row_len, .. } &#x3D; get_matrix();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This actually was allowed in the days before Rust 1.0, but that was removed
-due to known &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/16053&quot;&gt;unsoundness&lt;/a&gt; at
-the time. With the evolution of the borrow checker since that time, and with
-heavy testing, the compiler team determined that this was safe to finally
-allow in stable Rust!&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
-&lt;p&gt;The following methods and trait implementations were stabilized.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/unix/fs/fn.chroot.html&quot;&gt;&lt;code&gt;std::os::unix::fs::chroot&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cell/struct.UnsafeCell.html#method.raw_get&quot;&gt;&lt;code&gt;UnsafeCell::raw_get&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/io/struct.BufWriter.html#method.into_parts&quot;&gt;&lt;code&gt;BufWriter::into_parts&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/84662&quot;&gt;&lt;code&gt;core::panic::{UnwindSafe, RefUnwindSafe, AssertUnwindSafe}&lt;/code&gt;&lt;/a&gt;&lt;br /&gt;
-(previously only in &lt;code&gt;std&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.shrink_to&quot;&gt;&lt;code&gt;Vec::shrink_to&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/string/struct.String.html#method.shrink_to&quot;&gt;&lt;code&gt;String::shrink_to&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/struct.OsString.html#method.shrink_to&quot;&gt;&lt;code&gt;OsString::shrink_to&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/path/struct.PathBuf.html#method.shrink_to&quot;&gt;&lt;code&gt;PathBuf::shrink_to&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/struct.BinaryHeap.html#method.shrink_to&quot;&gt;&lt;code&gt;BinaryHeap::shrink_to&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/struct.VecDeque.html#method.shrink_to&quot;&gt;&lt;code&gt;VecDeque::shrink_to&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/hash_map/struct.HashMap.html#method.shrink_to&quot;&gt;&lt;code&gt;HashMap::shrink_to&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/hash_set/struct.HashSet.html#method.shrink_to&quot;&gt;&lt;code&gt;HashSet::shrink_to&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The following previously stable functions are now &lt;code&gt;const&lt;/code&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/mem/fn.transmute.html&quot;&gt;&lt;code&gt;std::mem::transmute&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.first&quot;&gt;&lt;code&gt;[T]::first&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.split_first&quot;&gt;&lt;code&gt;[T]::split_first&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.last&quot;&gt;&lt;code&gt;[T]::last&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.split_last&quot;&gt;&lt;code&gt;[T]::split_last&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.56.0 release: check out what changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1560-2021-10-21&quot;&gt;Rust&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-156-2021-10-21&quot;&gt;Cargo&lt;/a&gt;,
-and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-156&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1560&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1560&quot;&gt;&lt;/a&gt;Contributors to 1.56.0&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.56.0 and the 2021 edition.
-We couldn&#x27;t have done it without all of you.
-&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.56.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
