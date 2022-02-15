@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-02-14T16:25:04+00:00</updated>
+    <updated>2022-02-15T03:27:48+00:00</updated>
 
     
     <entry>
@@ -33,7 +33,7 @@ on the server side.&lt;/p&gt;
 &lt;p&gt;Here&#x27;s how this might affect you:&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#if-you-use-cargo&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;if-you-use-cargo&quot;&gt;&lt;/a&gt;If you use Cargo&lt;/h2&gt;
 &lt;p&gt;You should not see any effects from this change. Cargo does not use the snapshot branches, and
-Cargo regularly handles index squashes. If you do see any issues, they are a bug, please &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo&quot;&gt;report
+Cargo regularly handles index squashes. If you do see any issues, they are bugs, please &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo&quot;&gt;report
 them on the Cargo repo&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#if-you-use-the-snapshot-branches&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;if-you-use-the-snapshot-branches&quot;&gt;&lt;/a&gt;If you use the snapshot branches&lt;/h2&gt;
 &lt;p&gt;In one week, on 2022-02-21, we will be removing all snapshot branches from the crates.io-index
