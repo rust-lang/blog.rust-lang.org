@@ -31,7 +31,7 @@ You should use the awesome [IntelliJ Rust](https://intellij-rust.github.io) plug
 
 The rust-analyzer project was started at the very end of 2017 ([first commit](https://github.com/rust-analyzer/rust-analyzer/commit/a63222cd240d9b5405826783603f3b391c90885d)).
 At that time, the existing LSP implementation, RLS, had been providing IDE support for Rust for several years.
-While it handled some of most important and essential features, it was clearly far from state-of-the art in other languages' ecosystems.
+While it handled well the most important features, it was clearly far from the experience offered by state-of-the-art IDEs for some other languages.
 
 Originally, the plan was to just experiment with error-resilient parsing for Rust; but when you have a good parser, it is so tempting [to add a simple LSP server](https://github.com/rust-analyzer/rust-analyzer/commit/d7c5a6f3081c2e7266620779d3c32067f947b959) on top of it.
 Long story short, it took surprisingly little effort to get to a prototype which was already useful as an IDE, which happened in Autumn 2018.
