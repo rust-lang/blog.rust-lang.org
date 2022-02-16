@@ -7,7 +7,7 @@ author: The rust-analyzer Team on behalf of the entire Rust Team
 We have an exciting announcement to make!
 The [rust-analyzer](https://rust-analyzer.github.io) project, a new implementation of the Language Server Protocol (LSP) for Rust, is now officially a part of the wider Rust organization! :tada:
 
-We want to start by thanking everyone who has gotten us this far from contributors, to sponsors, to all the users of rust-analyzer in the Rust community. We could not have done this without you.
+We want to start by thanking everyone who has gotten us this far, from contributors, to sponsors, to all the users of rust-analyzer in the Rust community. We could not have done this without you.
 
 The immediate impact of this organizational change is limited -- nothing changes for rust-analyzer users or contributors.
 However, this change unblocks technical work to make rust-analyzer the officially recommended language server for Rust in the near future.
@@ -16,7 +16,7 @@ If you were hesitant to try rust-analyzer before, today is a good opportunity to
 Not only is it a very capable language server for Rust, but according to [VS Code statistics](https://marketplace.visualstudio.com/search?target=VSCode&category=Programming%20Languages&sortBy=Rating), it is one of the best rated LSP implementations *across* programming languages.
 We highly recommend giving rust-analyzer a spin today, even if it will take some more time for us to complete the due process and switch from the existing officially recommended LSP implementation (RLS) properly.
 
-rust-analyzer enjoys first-class support in many editors:
+rust-analyzer enjoys excellent support in many editors:
 
 * For VS Code, install the [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer) extension from the marketplace.
 * For Neovim, follow the setup instructions [from this post](https://sharksforarms.dev/posts/neovim-rust/).
