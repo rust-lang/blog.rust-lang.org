@@ -5,7 +5,7 @@ author: Sean Chen
 description: "Lang team February update"
 team: the lang team <https://lang-team.rust-lang.org/>
 ---
-This week the lang team held its February planning meeting ([minutes]). We hold these meetings on the first Wednesday of every month.
+Two weeks ago, the lang team held its February planning meeting ([minutes]). We hold these meetings on the first Wednesday of every month.
 
 The planning meeting is used for:
 
@@ -20,12 +20,10 @@ After each meeting, we post an update (like this one!) with notes and meeting an
 
 ## Update from active initiatives
 
-This section details the updates submitted by the many active initiatives doing valuable work in the Rust project.
-Note that many of the more recent initiatives have dedicated repositories which contain other byproducts of the design process (e.g., evaluation documents, open design questions, etc).
-
-Unfortunately, no significant updates were reported by any of the active initiatives. 😞
-
-However, you can still check in on the progress of any active initiatives you're interested in by visiting the [active initiatives][active-initiatives] project board.
+We didn't have any updates from initiatives this week and in fact are thinking of changing our
+"update" structure to integrate into the regular triage meeting. For the time being, though, you
+can check in on the progress of any active initiatives you're interested in by visiting the [active initiatives][active-initiatives] project board, which is also a great way to get a summary of the
+major goings on of the Lang team.
 
 ## Upcoming design meetings
 
