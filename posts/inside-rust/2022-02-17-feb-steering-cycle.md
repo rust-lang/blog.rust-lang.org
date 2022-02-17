@@ -5,7 +5,8 @@ author: Felix Klock
 description: "The compiler team's February 2022 steering cycle"
 team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
 ---
-On [Friday, Febraury 11th][feb-11-zulip-archive], the Rust Compiler team had a planning meeting for the February steering cycle.
+
+On [Friday, February 11th][feb-11-zulip-archive], the Rust Compiler team had a planning meeting for the February steering cycle.
 
 [feb-11-zulip-archive]: https://zulip-archive.rust-lang.org/stream/238009-t-compiler/meetings/topic/.5Bplanning.20meeting.5D.202022-02-11.html
 
