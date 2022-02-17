@@ -25,7 +25,8 @@ We will be skipping the meeting on Friday, 25 February.
 
 On [Friday, 3 March][mar-03-mtg], we will be having a "backlog bonanza", in a
 similar vein to that done by T-lang, to review the list of unimplemented or
-partially-implemented features.
+partially-implemented features. pnkfelix and Jack Huey will prepare a document to
+drive the meeting.
 
 [mar-03-mtg]: https://github.com/rust-lang/compiler-team/issues/484
 
