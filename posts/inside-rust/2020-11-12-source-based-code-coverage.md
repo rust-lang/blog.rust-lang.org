@@ -69,7 +69,7 @@ request].
 
 [MCP]: https://github.com/rust-lang/compiler-team/issues/278
 [PRs]: https://github.com/rust-lang/rust/pulls?q=is%3Apr+author%3Arichkadel+is%3Aclosed+closed%3A%3C2020-11-06
-[guide]: https://doc.rust-lang.org/beta/unstable-book/compiler-flags/instrument-coverage.htmL
+[guide]: https://doc.rust-lang.org/nightly/rustc/instrument-coverage.html
 [report them]: https://github.com/rust-lang/rust/issues/new/choose
 [Zulip stream]: https://rust-lang.zulipchat.com/#narrow/stream/233931-t-compiler.2Fmajor-changes/topic/Implement.20LLVM-compatible.20source-based.20cod.20compiler-team.23278
 [feature request]: https://github.com/rust-lang/rust/issues/34701
