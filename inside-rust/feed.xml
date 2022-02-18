@@ -10,8 +10,51 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-02-18T08:38:41+00:00</updated>
+    <updated>2022-02-18T09:27:56+00:00</updated>
 
+    
+    <entry>
+        <title>Lang team February update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/02/18/lang-team-feb-update.html" type="text/html" title="Lang team February update" />
+        <published>2022-02-18T00:00:00+00:00</published>
+        <updated>2022-02-18T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/02/18/lang-team-feb-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/02/18/lang-team-feb-update.html">&lt;p&gt;wo weeks ago, the lang team held its February planning meeting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2022-02-02-planning.md&quot;&gt;minutes&lt;/a&gt;). We hold these meetings on the first Wednesday of every month.&lt;/p&gt;
+&lt;p&gt;The planning meeting is used for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Checking in on the status of our &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/initiatives.html&quot;&gt;active initiatives&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Planning the design meetings for the remainder of the month&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After each meeting, we post an update (like this one!) with notes and meeting announcements.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#update-from-active-initiatives&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;update-from-active-initiatives&quot;&gt;&lt;/a&gt;Update from active initiatives&lt;/h2&gt;
+&lt;p&gt;We didn&#x27;t have any updates from initiatives this week and in fact are thinking of changing our
+&amp;quot;update&amp;quot; structure to integrate into the regular triage meeting. For the time being, though, you
+can check in on the progress of any active initiatives you&#x27;re interested in by visiting the &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/initiatives.html&quot;&gt;active initiatives&lt;/a&gt; project board, which is also a great way to get a summary of the
+major goings on of the Lang team.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
+&lt;p&gt;We have planned the following design meetings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;February 23: Never type next steps (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/141&quot;&gt;lang-team#141&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#design-meeting-expectations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-meeting-expectations&quot;&gt;&lt;/a&gt;Design meeting expectations&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The document for the meeting must be prepared by the triage meeting on Tuesday and posted to the tracking issue.
+&lt;ul&gt;
+&lt;li&gt;If it is not sent out by then, the meeting will be canceled. This gives folks 24 hour notice.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
+&lt;ul&gt;
+&lt;li&gt;However, there is no rule &lt;strong&gt;against&lt;/strong&gt; reading the document beforehand and providing feedback or advice on how to improve it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Sean Chen</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Rust Compiler February 2022 Steering Cycle</title>
@@ -454,26 +497,6 @@ and some official &lt;code&gt;rust-lang&lt;/code&gt; crates such as &lt;a href&#
 
         <author>
             <name>Mara Bos</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>1.56.0 pre-release testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/10/18/1.56.0-prerelease.html" type="text/html" title="1.56.0 pre-release testing" />
-        <published>2021-10-18T00:00:00+00:00</published>
-        <updated>2021-10-18T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/10/18/1.56.0-prerelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/10/18/1.56.0-prerelease.html">&lt;p&gt;The 1.56.0 pre-release is ready for testing. The release is scheduled for this
-Thursday, October 21st. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1560-2021-10-21&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2021-10-18/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2021-10-18/index.html&lt;/a&gt;. You
-can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-56-0-pre-release-testing/15459&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Pietro Albini</name>
         </author>
     </entry>
     
