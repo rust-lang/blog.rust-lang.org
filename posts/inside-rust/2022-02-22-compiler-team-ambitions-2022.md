@@ -1,24 +1,20 @@
 ---
-title: T-compiler Ambitions in 2022
-breaks: false
+layout: post
+title: Rust Compiler Ambitions for 2022
+author: Felix Klock, Wesley Wiser
+description: "The compiler team's concrete initiatives and hopeful aspirations for this year."
+team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
 ---
 
-# T-compiler Ambitions in 2022
-
-*Editor's note: Previously considered titles include: ~~T-compiler 2022 roadmap~~, ~~T-compiler astrological chart~~, ~~T-compiler horoscope~~, ~~T-compiler fortune cookies~~, ~~T-compiler crystal ball~~. Other suggestions welcome!* 
-
-*Editor's note: Our intent is to post this on the Inside Rust blog in the near future, circa February 18th. You can consider it an early preview; we want feedback from the members of T-compiler and T-compiler-contributors before we circulate it more broadly. You can post comments in the HackMD margin, or send us an email, or write in a [Zulip thread](https://rust-lang.zulipchat.com/#narrow/stream/131828-t-compiler/topic/roadmap.20for.202022.20discussion/near/270258331).*
+# Rust Compiler Ambitions for 2022
 
 Some people have been wondering about what the Rust Compiler Team has planned for 2022. This note is to let you all know what activities the team plans to focus on this year.
 
 This document is structured into three parts: our [Overall Themes][] for this year, the [Concrete Initiatives][] we have resources to drive, and [Aspirations][] for what we could do if given more help.
 
-
 [Overall Themes]: #Overall-Themes
 [Concrete Initiatives]: #Concrete-Initiatives
 [Aspirations]: #Aspirations
-
-[toc]
 
 ## Introduction
 
@@ -119,6 +115,37 @@ Finally, improving the Compiler Contributor Workflow means technology enhancemen
 [Compiler Backend]: #Compiler-Backend
 [Review Queue Crew]: #Review-Queue-Crew
 
+Category  | [Concrete Initiatives] |  [Aspirations]
+----------|---------------------|-----------
+I-unsound | [Initiatives][I-unsound Issues]      |
+Async Rust| [Initiatives][Async Initiatives]     |
+Debugging | [Initiatives][Debugging Initiatives] | [Aspirations][Debugging Aspirations]
+Faster Builds | [Initiatives][Faster Builds Initiatives] | [Aspirations][Faster Builds Aspirations]
+Expressiveness     | [Initiatives][Expressiveness Initiatives] | [Aspirations][Expressiveness Aspirations]
+Librarification    | [Initiatives][Librarification Initiatives]                 | [Aspirations][Librarification Aspirations]
+Team Operations    |                             | [Aspirations][Team Operations]
+Backend            |                             | [Aspirations][Backend Aspirations]
+Diagnostics        |                             | [Aspirations][Diagnostics Aspirations]
+
+[Concrete Initiatives]: #concrete-initiatives
+[I-unsound Issues]: #i-unsound-issues-
+[Async Initiatives]: #async-rust-initiatives--
+[Debugging Initiatives]: #debugging-initiatives-
+[Faster Builds Initiatives]: #faster-builds-initiatives--
+[Expressiveness Initiatives]: #expressiveness-initatives--
+[Librarification Initiatives]: #librarification-initiatives-
+[Aspirations]: #aspirations
+[P-high Aspirations]: #p-high-aspirations-
+[Debugging Aspirations]: #debugging-aspirations-
+[Faster Builds Aspirations]: #faster-builds-aspirations--
+[Expressiveness Aspirations]: #expressiveness-aspirations--
+[Librarification Aspirations]: #librarification-aspirations-%EF%B8%8F
+[Team Operations]: #compiler-team-operations-aspirations-%EF%B8%8F
+[Backend Aspirations]: #compiler-backend-aspirations-%EF%B8%8F-
+[Diagnostics Aspirations]: #diagnostics-aspirations-
+
+<!-- end of manually made [toc] -->
+
 ## Concrete Initiatives
 
 This section is the closest thing to a "roadmap" we have for 2022. It is a list of important items with dedicated owners that have time allocated to make significant progress on the problem this year. 
@@ -149,19 +176,19 @@ There is a ton of other work being done in the Async Rust space. Check out the [
 
 
 ### Debugging Initiatives (🦀)
- 
+
 [wesleywiser], from Microsoft, and [pnkfelix] are spinning up a wg-debugging working group. It will cover at least the following sub-items: improving Rust's debuginfo quality ([mw], [wesleywiser]), supporting split debuginfo ([davidtwco], from Huawei R&D UK), and better integration with trace-based debuggers like `rr` ([pnkfelix]).
 
 The immediate goals for this initiative: establish the working group, determine priorities for the backlog of debugging issues, and find out what active users of debuggers miss most when they operate on Rust code.
 
-### Compilation Time Initiatives (👩‍💻, 🛠️)
+### Faster Builds Initiatives (👩‍💻, 🛠️)
  
 The Rust compiler's end-to-end latency is known to be a problem.
- 
+
 [lqd], sponsored by the Internet Security Research Group, is dedicating the majority of 2022 to working on this, partnering with Rust's compiler-performance working group as well as performance experts like [nnethercote] (from Futurewei Technologies). [lqd] has their own [living document](https://hackmd.io/3Dp68rTDSpWvRDfWF6lbMw?view) that lists areas under investigation.
 
 [ISRG]: https://www.abetterinternet.org/
- 
+
 ### Expressiveness Initiatives (👩‍💻, 🦀)
 
 A common refrain we hear is: "I need feature X, but it's not implemented in rustc or stable." 
@@ -213,7 +240,7 @@ We want to revisit our debugger extension architecture for rendering Rust data s
 
 If you want to help out here, please reach out to [pnkfelix] and [wesleywiser].
 
-### Faster Compilation Aspirations (👩‍💻, 🛠️)
+### Faster Builds Aspirations (👩‍💻, 🛠️)
 
 #### Parallel Compilation
 
@@ -355,18 +382,6 @@ This is not a problem! Many members of our community learned about compilers by 
 [Contributing to the Compiler]: https://www.youtube.com/watch?v=vCODCbUSA_w
 
 In addition, there are areas in this project where people without compiler expertise can have impact. For example, as mentioned in the [Performance Dashboard](#Performance-Dashboard) section, some of our internal tools could use some web front-end work.
-
-## 2022-02-18 Meeting Questions/Comments/Issues
-
-- We should explicitly state that we are using emojis to categorize topics by the high-level area they relate to.
-- pnkfelix: there should be a FAQ entry for "why aren't you putting in Monads" (half joke), where answer is "The scope of this doc is largely restricted to Compiler Team issues. Language design work is done by the Language Design team."
-- jackh726: Nit `LendingItetator` instead of `StreamingIterator`
-- simulacrum: What are our goals for progress reporting, if any? Should we plan for a +1 year blog post, at least?
-    - This 'planning' might mean something as simple as asking folks working on things to add PRs, etc. to a list we can then reference, or something more involved.
-
-- pnkfelix: comments say we should highlight need for code quality benchmarks as part of performance work. What can/should we say on that front?
-
-
 
 
 
