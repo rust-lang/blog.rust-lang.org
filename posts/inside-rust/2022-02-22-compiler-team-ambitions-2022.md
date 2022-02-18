@@ -184,8 +184,8 @@ The immediate goals for this initiative: establish the working group, determine 
 ### Faster Builds Initiatives (👩‍💻, 🛠️)
  
 The Rust compiler's end-to-end latency is known to be a problem.
-
-[lqd], sponsored by the Internet Security Research Group, is dedicating the majority of 2022 to working on this, partnering with Rust's compiler-performance working group as well as performance experts like [nnethercote] (from Futurewei Technologies). [lqd] has their own [living document](https://hackmd.io/3Dp68rTDSpWvRDfWF6lbMw?view) that lists areas under investigation.
+ 
+[lqd], sponsored by the Internet Security Research Group, is dedicating the majority of 2022 to working on this, partnering with Rust's compiler-performance working group as well as performance experts like [nnethercote] (from Futurewei Technologies). [lqd] has their own [living document](https://hackmd.io/3Dp68rTDSpWvRDfWF6lbMw?view) that lists areas under investigation, and [nnethercote] has a [roadmap under development](https://hackmd.io/YJQSj_nLSZWl2sbI84R1qA).
 
 [ISRG]: https://www.abetterinternet.org/
 
