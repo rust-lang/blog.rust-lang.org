@@ -244,7 +244,7 @@ If you want to help out here, please reach out to [pnkfelix] and [wesleywiser].
 
 #### Parallel Compilation
 
-Parallel Compilation is one avenue for improving compiler performance. It is also a very complex area, especially when it comes to the tradeoff of how much of a hit one is willing to take on single core builds in order to enable more parallel computation. This is an area we think needs long-term collaborative effort with the compiler team. We do not expect to deliver a solution here this year.
+Parallel Compilation is one avenue for improving compiler performance. It is also a very complex area, especially when it comes to the tradeoff of how much of a hit one is willing to take on single core builds in order to enable more parallel computation. We already parallelize our LLVM invocations, but the parallelization of the rest of the compiler remains in an experimental state. This is an area we think needs long-term collaborative effort with the compiler team. We do not expect to deliver a solution here this year.
 
 If you want to discuss more with us about past attempts and ideas for the future, please reach out to [pnkfelix] and [wesleywiser]. 
 
