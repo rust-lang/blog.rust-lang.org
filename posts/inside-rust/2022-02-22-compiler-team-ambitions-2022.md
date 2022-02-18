@@ -117,15 +117,16 @@ Finally, improving the Compiler Contributor Workflow means technology enhancemen
 
 Category  | [Concrete Initiatives] |  [Aspirations]
 ----------|---------------------|-----------
-I-unsound | [Initiatives][I-unsound Issues]      |
-Async Rust| [Initiatives][Async Initiatives]     |
-Debugging | [Initiatives][Debugging Initiatives] | [Aspirations][Debugging Aspirations]
-Faster Builds | [Initiatives][Faster Builds Initiatives] | [Aspirations][Faster Builds Aspirations]
-Expressiveness     | [Initiatives][Expressiveness Initiatives] | [Aspirations][Expressiveness Aspirations]
-Librarification    | [Initiatives][Librarification Initiatives]                 | [Aspirations][Librarification Aspirations]
-Team Operations    |                             | [Aspirations][Team Operations]
-Backend            |                             | [Aspirations][Backend Aspirations]
-Diagnostics        |                             | [Aspirations][Diagnostics Aspirations]
+I-unsound (🦀) | [Initiatives][I-unsound Issues]      |
+Async Rust (🦀, 👩‍💻)| [Initiatives][Async Initiatives]     |
+Debugging (🦀, 👩‍💻)| [Initiatives][Debugging Initiatives] | [Aspirations][Debugging Aspirations]
+Faster Builds (👩‍💻, 🛠️) | [Initiatives][Faster Builds Initiatives] | [Aspirations][Faster Builds Aspirations]
+Expressiveness (👩‍💻, 🦀) | [Initiatives][Expressiveness Initiatives] | [Aspirations][Expressiveness Aspirations]
+Librarification (🛠️) | [Initiatives][Librarification Initiatives]                 | [Aspirations][Librarification Aspirations]
+P-high Backlog (🦀) |                             | [Aspirations][P-high Aspirations]
+Team Operations (🛠️) |                             | [Aspirations][Team Operations]
+Backend (🛠️, 👩‍💻) |                             | [Aspirations][Backend Aspirations]
+Diagnostics  (👩‍💻) |                             | [Aspirations][Diagnostics Aspirations]
 
 [Concrete Initiatives]: #concrete-initiatives
 [I-unsound Issues]: #i-unsound-issues-
