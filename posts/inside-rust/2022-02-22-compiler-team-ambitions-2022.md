@@ -94,26 +94,13 @@ Fulfilling Rust's Promise is a cross-cutting theme; it means identifying the gap
 We have opportunities to improve the experience of writing, of compiling, and of running Rust code. We want answers to the question, "what would delight Rust developers?" This is not about meeting their expectations: It's about *surpassing* them.
 
 
-[Debugging concrete]: #Debugging-Initiatives
-[Debugging aspirational]: #Debugging-Aspirations
-[Debugging]: #Debugging-Object-Code
-[Faster concrete]: #Compilation-Time-Initiatives
-[Faster aspirational]: #Faster-Compilation-Aspirations
-[Expressiveness concrete]: #Language-Expressiveness-Initiatives
-[Expressiveness aspirational]: #Expressiveness-Aspirations
-
 ### Contributor Workflow (🛠️)
 
 Finally, improving the Compiler Contributor Workflow means technology enhancements that benefit people maintaining and extending the Rust compiler itself.
 
 (We also make non-technical enhancements, such as changes to our social processes, but this document focuses on technology.)
 
-
-[Librarification Initiatives]: #Librarification-Initiatives
-[Librarification Aspirations]: #Librarification-Aspirations
-
-[Compiler Backend]: #Compiler-Backend
-[Review Queue Crew]: #Review-Queue-Crew
+## Work Items
 
 Category  | [Concrete Initiatives] |  [Aspirations]
 ----------|---------------------|-----------
