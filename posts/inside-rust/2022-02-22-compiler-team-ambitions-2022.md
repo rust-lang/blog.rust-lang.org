@@ -212,7 +212,7 @@ In Rust, we use an open Request-for-Comment (RFC) process for designing new feat
 
 [RFC tracking issue list]: https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AC-tracking-issue++label%3AB-RFC-approved+
 
-Generic Associated Types, or [GATs](https://github.com/rust-lang/generic-associated-types-initiative/issues/4), are an ongoing effort owned by [jackh726]. GATs have many applications, such as traits whose associated types have lifetimes tied to the local borrowing of the receiver type ([e.g. `StreamingIterator`][GAT-motivation]).
+Generic Associated Types, or [GATs](https://github.com/rust-lang/generic-associated-types-initiative/issues/4), are an ongoing effort owned by [jackh726]. GATs have many applications, such as traits whose associated types have lifetimes tied to the local borrowing of the receiver type ([e.g. `LendingIterator`][GAT-motivation]).
 
 [GAT-motivation]: https://github.com/rust-lang/rfcs/blob/master/text/1598-generic_associated_types.md#motivation
 
