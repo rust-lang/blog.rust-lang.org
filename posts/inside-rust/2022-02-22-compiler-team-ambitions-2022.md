@@ -12,9 +12,9 @@ Some people have been wondering about what the Rust Compiler Team has planned fo
 
 This document is structured into three parts: our [Overall Themes][] for this year, the [Concrete Initiatives][] we have resources to drive, and [Aspirations][] for what we could do if given more help.
 
-[Overall Themes]: #Overall-Themes
-[Concrete Initiatives]: #Concrete-Initiatives
-[Aspirations]: #Aspirations
+[Overall Themes]: #overall-themes
+[Concrete Initiatives]: #concrete-initiatives
+[Aspirations]: #aspirations
 
 ## Introduction
 
@@ -132,13 +132,14 @@ Diagnostics  (👩‍💻) |                             | [Aspirations][Diagnos
 [I-unsound Issues]: #i-unsound-issues-
 [Async Initiatives]: #async-rust-initiatives--
 [Debugging Initiatives]: #debugging-initiatives-
-[Faster Builds Initiatives]: #faster-builds-initiatives--
-[Expressiveness Initiatives]: #expressiveness-initatives--
-[Librarification Initiatives]: #librarification-initiatives-
+[Faster Builds Initiatives]: #faster-builds-initiatives--%EF%B8%8F
+[Expressiveness Initiatives]: #expressiveness-initiatives--
+[Librarification Initiatives]: #librarification-initiatives-%EF%B8%8F
+
 [Aspirations]: #aspirations
 [P-high Aspirations]: #p-high-aspirations-
 [Debugging Aspirations]: #debugging-aspirations-
-[Faster Builds Aspirations]: #faster-builds-aspirations--
+[Faster Builds Aspirations]: #faster-builds-aspirations--%EF%B8%8F
 [Expressiveness Aspirations]: #expressiveness-aspirations--
 [Librarification Aspirations]: #librarification-aspirations-%EF%B8%8F
 [Team Operations]: #compiler-team-operations-aspirations-%EF%B8%8F
