@@ -337,7 +337,7 @@ Reading over this list, the number of items on it seems quite daunting.
 
 Do we really think we can get all this stuff done in one year?
 
-No, we don't! :laughing:
+No, we don't! 😂
 
 The introduction explicitly said the latter half are things that *don't* have resources attached to them. And the word "aspiration" was chosen to reinforce that.
 
