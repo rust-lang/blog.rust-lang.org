@@ -82,6 +82,11 @@ But the flip side of this is: if something really is important, then there almos
 
 ## Overall Themes
 
+There are three themes associated with the work we are planning; this section describes those themes, and attaches an
+emoji to each one which may help you when looking at the [tabular overview][Work Items].
+
+[Work Items]: #work-items
+
 ### Fulfill Rust's Promise (🦀)
 
 Fulfilling Rust's Promise is a cross-cutting theme; it means identifying the gaps between expectation and reality for each of our three pillars: [Performance, Reliability, and Productivity][rust-lang], and then addressing those gaps.
