@@ -58,8 +58,8 @@ But the flip side of this is: if something really is important, then there almos
 <!-- [lcnr zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/216206-user216206 --> <!-- @**lcnr** -->
 <!-- lcnr sponsorship: https://lcnr.de/funding/ -->
 [michaelwoerister]: https://github.com/michaelwoerister
-<!-- [mw zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/124287-user124287 --> <!-- @**michaelwoerister** -->
-<!-- mw affiliation: MS -->
+<!-- [michaelwoerister zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/124287-user124287 --> <!-- @**mw** -->
+<!-- michaelwoerister affiliation: MS -->
 [nikomatsakis]: https://github.com/nikomatsakis
 <!-- [nikomatsakis zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116009-user116009 --> <!-- @**nikomatsakis** -->
 <!-- nikomatsakis affiliation: AWS -->
@@ -192,7 +192,7 @@ There is a ton of other work being done in the Async Rust space. Check out the [
 
 ### Debugging Initiatives (🦀)
 
-[wesleywiser], from Microsoft, and [pnkfelix] are spinning up a wg-debugging working group. It will cover at least the following sub-items: improving Rust's debuginfo quality ([mw], [wesleywiser]), supporting split debuginfo ([davidtwco], from Huawei R&D UK), and better integration with trace-based debuggers like `rr` ([pnkfelix]). They are `@**Wesley Wiser**`, `@**pnkfelix**`, `@**mw**` and `@**davidtwco**` [on zulip].
+[wesleywiser], from Microsoft, and [pnkfelix] are spinning up a wg-debugging working group. It will cover at least the following sub-items: improving Rust's debuginfo quality ([michaelwoerister], [wesleywiser]), supporting split debuginfo ([davidtwco], from Huawei R&D UK), and better integration with trace-based debuggers like `rr` ([pnkfelix]). They are `@**Wesley Wiser**`, `@**pnkfelix**`, `@**mw**` and `@**davidtwco**` [on zulip].
 
 The immediate goals for this initiative: establish the working group, determine priorities for the backlog of debugging issues, and find out what active users of debuggers miss most when they operate on Rust code.
 
@@ -363,7 +363,7 @@ Diagnostics improvements are an *excellent* first step for learning about how to
 
 Reading over this list, the number of items on it seems quite daunting! We believe these initiatives will provide the highest impact to the Rust community by helping to fulfill Rust's promise, delighting Rust developers and improving our contributor workflows and aligns well with the results of the [2021 Rust Survey](https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html).
 
-While we think we will be able to make signficant progress on these initiatives this year, project estimation is a difficult and inexact science, especially for open source projects. What we will achieve is ultimately a result of who decides to contribute. Our aspirational goals are currently just that: aspriations.
+While we think we will be able to make signficant progress on these initiatives this year, project estimation is a difficult and inexact science, especially for open source projects. What we will achieve is ultimately a result of who decides to contribute. Our aspirational goals are currently just that: aspirations.
 
 This is where you all, the Rust community (including *future members* of that community) come into the picture. Each item has one or two people listed with it; if you're feeling inspired, please do contact us!
 
