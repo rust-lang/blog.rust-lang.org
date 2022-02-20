@@ -21,7 +21,7 @@ This document is structured into three parts: our [Overall Themes][] for this ye
 Part of the motivation for this note is to encourage new contributors to get involved. We have a lot of newcomers, from individuals to large organizations, who are very excited about Rust's potential, and we want to show all of them what they can do to help.
 
 This is a list of items, divided into a [Concrete Initiatives][] section and an [Aspirations][] section. We accumulated these items during discussions with the Compiler Team and the Compiler Contributors.
-The [Concrete Initiatives][] have owners assigned; each has  allocated time this year to attack the problem. The [Aspirations][], on the other hand, are items that the team agrees would be great areas for investment, but where we currently lack sufficient resources or experienced developers to make progress this year. 
+The [Concrete Initiatives][] have owners assigned; each has  allocated time this year to attack the problem. The [Aspirations][], on the other hand, are items that the team agrees would be great areas for investment, but where we currently lack sufficient resources or experienced developers to make progress this year.
 
 This is *not* a list of everything we will do this year; at least, not without help.
 
@@ -29,7 +29,7 @@ You can think of the [Aspirations][] part of the doc as an explicit call to arms
 
 As you read the document, it is useful to keep in mind that [Rust is not a company][mara-post]: The teams, and the leaders of the teams, do not establish goals in a top-down manner, nor do they hand out tasks in a round-robin fashion. Instead, we collectively (and iteratively) refine our a shared vision for the future, and take steps that hopefully move towards that future. Each contributor decides for themself how much time they can afford to contribute, and that can vary wildly between contributors. The goals that we set for the project must be aligned with the goals of our current and future contributors; otherwise, they just won't get done. We have processes (e.g. [RFCs](https://github.com/rust-lang/rfcs#readme), [MCPs](https://forge.rust-lang.org/compiler/mcp.html)) that try to ensure alignment; in some ways, a document like this one is just another tool for recalibrating alignment.
 
-<!-- 
+<!--
 But the flip side of this is: if something really is important, then there almost certainly exists a contributor willing to work on it. The real hurdle then is *enabling* that contributor to succeed.
 (Note: this is hard! Its not just about mentorship/education; its just as much about achieving *alignment* amongst the whole group!)
 -->
@@ -46,26 +46,26 @@ But the flip side of this is: if something really is important, then there almos
 <!-- [bjorn3 zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/133247-user133247 --> <!-- @**bjorn3**  -->
 <!-- bjorn3 donation page: https://liberapay.com/bjorn3 -->
 [cjgillot]: https://github.com/cjgillot
-<!-- [cjgillot zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/248906-user248906 --> <!-- @**cjgillot**  --> 
+<!-- [cjgillot zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/248906-user248906 --> <!-- @**cjgillot**  -->
 <!-- no response from cjgillot re affiliation yet -->
 [davidtwco]: https://github.com/davidtwco
 <!-- [davidtwco zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/248906-user248906 --> <!-- @**davidtwco**  -->
 <!-- davidtwco affiliation: "Huawei R&D UK"-->
 [estebank]: https://github.com/estebank
 <!-- [estebank zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/119031-user119031 --> <!-- @**Esteban Küber** -->
-<!-- estebank affiliation: AWS --> 
+<!-- estebank affiliation: AWS -->
 [lcnr]: https://github.com/lcnr
 <!-- [lcnr zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/216206-user216206 --> <!-- @**lcnr** -->
 <!-- lcnr sponsorship: https://lcnr.de/funding/ -->
-[mw]: https://github.com/michaelwoerister
-<!-- [mw zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/124287-user124287 --> <!-- @**mw** -->
+[michaelwoerister]: https://github.com/michaelwoerister
+<!-- [mw zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/124287-user124287 --> <!-- @**michaelwoerister** -->
 <!-- mw affiliation: MS -->
 [nikomatsakis]: https://github.com/nikomatsakis
 <!-- [nikomatsakis zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116009-user116009 --> <!-- @**nikomatsakis** -->
 <!-- nikomatsakis affiliation: AWS -->
 [oli-obk]: https://github.com/oli-obk
 <!-- [oli-obk zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/124288-user124288 --> <!-- @**oli** -->
-<!-- oli affiliation: AWS --> 
+<!-- oli affiliation: AWS -->
 [jackh726]: https://github.com/jackh726
 <!-- [jackh726 zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/232957-user232957 --> <!-- @**Jack Huey** -->
 <!-- jackh726: no affiliation -->
@@ -93,7 +93,7 @@ But the flip side of this is: if something really is important, then there almos
 [apiraino]: https://github.com/apiraino
 <!-- [apiraino zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/250987-user250987 --> <!-- @**apiraino**  -->
 <!-- apiraino: no affiliation -->
-[simulacrum]: https://github.com/Mark-simulacrum
+[Mark-Simulacrum]: https://github.com/Mark-Simulacrum
 <!-- [simulacrum zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116122-user116122 --> <!-- @**simulacrum**  -->
 <!-- simulacrum sponsorship: https://github.com/sponsors/Mark-Simulacrum -->
 [rylev]: https://github.com/rylev
@@ -164,7 +164,7 @@ Diagnostics  (👩‍💻) |                             | [Aspirations][Diagnos
 
 ## Concrete Initiatives
 
-This section is the closest thing to a "roadmap" we have for 2022. It is a list of important items with dedicated owners that have time allocated to make significant progress on the problem this year. 
+This section is the closest thing to a "roadmap" we have for 2022. It is a list of important items with dedicated owners that have time allocated to make significant progress on the problem this year.
 
 ### I-unsound issues (🦀)
 
@@ -186,10 +186,9 @@ Rust today does not allow `async fn` in a trait, so Async Rust code usually ends
 
 #### async crashdump dissection
 
-[mw], from Microsoft, is driving the [async crashdump initiative](https://rust-lang.github.io/async-crashdump-debugging-initiative/), which will enable developers to understand the control-flow stacks encoded in crashdumps for their async Rust programs. He is `@**mw**` [on zulip].
+[michaelwoerister], from Microsoft, is driving the [async crashdump initiative](https://rust-lang.github.io/async-crashdump-debugging-initiative/), which will enable developers to understand the control-flow stacks encoded in crashdumps for their async Rust programs. He is `@**mw**` [on zulip].
 
 There is a ton of other work being done in the Async Rust space. Check out the [Async Vision web site](https://rust-lang.github.io/wg-async/welcome.html) for more information.
-
 
 ### Debugging Initiatives (🦀)
 
@@ -198,16 +197,16 @@ There is a ton of other work being done in the Async Rust space. Check out the [
 The immediate goals for this initiative: establish the working group, determine priorities for the backlog of debugging issues, and find out what active users of debuggers miss most when they operate on Rust code.
 
 ### Faster Builds Initiatives (👩‍💻, 🛠️)
- 
+
 The Rust compiler's end-to-end latency is known to be a problem.
- 
+
 [lqd], sponsored by the Internet Security Research Group, is dedicating the majority of 2022 to working on this, partnering with Rust's compiler-performance working group as well as performance experts like [nnethercote] (from Futurewei Technologies). [lqd] has their own [living document](https://hackmd.io/3Dp68rTDSpWvRDfWF6lbMw?view) that lists areas under investigation, and [nnethercote] has a [roadmap under development](https://hackmd.io/YJQSj_nLSZWl2sbI84R1qA). They are `@**lqd**` and `@**nnethercote**` [on zulip].
 
 [ISRG]: https://www.abetterinternet.org/
 
 ### Expressiveness Initiatives (👩‍💻, 🦀)
 
-A common refrain we hear is: "I need feature X, but it's not implemented in rustc or stable." 
+A common refrain we hear is: "I need feature X, but it's not implemented in rustc or stable."
 In Rust, we use an open Request-for-Comment (RFC) process for designing new features. Currently, we have [this set of RFCs approved][RFC tracking issue list]; here are some imporant features with dedicated owners that we expect forward movement on.
 
 [RFC tracking issue list]: https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AC-tracking-issue++label%3AB-RFC-approved+
@@ -268,9 +267,9 @@ If you want to discuss more with us about past attempts and ideas for the future
 
 #### Incremental Compilation Aspirations
 
-Incremental compilation performance and stability are both ongoing concerns to the team. We *know* there is significant room to improve the effectiveness of incremental compilation, in terms of reducing the amount of redundant work done by successive `rustc` invocations. 
+Incremental compilation performance and stability are both ongoing concerns to the team. We *know* there is significant room to improve the effectiveness of incremental compilation, in terms of reducing the amount of redundant work done by successive `rustc` invocations.
 
-In addition, there is a significant amount of work that could be done to improve our testing infrastructure for incremental compiliation which does not require deep knowledge of the compiler. 
+In addition, there is a significant amount of work that could be done to improve our testing infrastructure for incremental compiliation which does not require deep knowledge of the compiler.
 
 If you want to learn more, reach out to [cjgillot] and [Aaron Hill]. They are `@**cjgillot**` and `@**Aaron Hill**` [on zulip].
 
@@ -320,11 +319,11 @@ If you are interested in helping in this area, please reach out to [pnkfelix]. T
 
 #### Performance Dashboard
 
-[perf.rust-lang.org][perf] is a dashboard that measures the performance of `rustc`, in terms of resources (time and memory) consumed during compilation. [@rust-timer] is a bot that summarizes whether a given Pull Request regressed or improved performance. 
+[perf.rust-lang.org][perf] is a dashboard that measures the performance of `rustc`, in terms of resources (time and memory) consumed during compilation. [@rust-timer] is a bot that summarizes whether a given Pull Request regressed or improved performance.
 
 The performance working group has many ideas for things to improve in these tools, but limited resources. This is an area where you don't need any compiler expertise to make a huge impact; for example, our Web Front-end could use work. And Data Scientists might have useful insights into our problems. Beyond just measuring the compiler's own performance, we're also interested in measuring the runtime performance of produced binaries.
 
-Reach out to [rylev], from Microsoft, and [simulacrum] (supported via [sponsorship](https://github.com/sponsors/Mark-Simulacrum)), performance working group lead, if you want to help. They are `@**rylev**` and `@**simulacrum**` [on zulip].
+Reach out to [rylev], from Microsoft, and [Mark-Simulacrum] (supported via [sponsorship](https://github.com/sponsors/Mark-Simulacrum)), performance working group lead, if you want to help. They are `@**rylev**` and `@**simulacrum**` [on zulip].
 
 [@rust-timer]: https://github.com/rust-timer
 [perf]: https://perf.rust-lang.org/
@@ -362,13 +361,9 @@ Diagnostics improvements are an *excellent* first step for learning about how to
 
 ## Conclusion
 
-Reading over this list, the number of items on it seems quite daunting.
+Reading over this list, the number of items on it seems quite daunting! We believe these initiatives will provide the highest impact to the Rust community by helping to fulfill Rust's promise, delighting Rust developers and improving our contributor workflows and aligns well with the results of the [2021 Rust Survey](https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html).
 
-Do we really think we can get all this stuff done in one year?
-
-No, we don't! 😂
-
-The introduction explicitly said the latter half are things that *don't* have resources attached to them. And the word "aspiration" was chosen to reinforce that.
+While we think we will be able to make signficant progress on these initiatives this year, project estimation is a difficult and inexact science, especially for open source projects. What we will achieve is ultimately a result of who decides to contribute. Our aspirational goals are currently just that: aspriations.
 
 This is where you all, the Rust community (including *future members* of that community) come into the picture. Each item has one or two people listed with it; if you're feeling inspired, please do contact us!
 
@@ -382,7 +377,7 @@ The compiler team leadership plans to put out a post in June summarizing the pro
 
 #### I did not see any mention of monadic burritos (or other non-Rust language feature); why is that not part of your plan?
 
-The scope of this doc is largely restricted to Compiler Team issues. Language design work is done by the Language Design team. You can reach out to them about their initiatives for this year and beyond.
+The scope of this doc is largely restricted to Compiler Team issues. Language design work is done by the Language Team. You can reach out to them about their initiatives for this year and beyond.
 
 #### What do I do if I'm interested in learning more about a specific item on this list?
 
@@ -401,9 +396,3 @@ This is not a problem! Many members of our community learned about compilers by 
 [Contributing to the Compiler]: https://www.youtube.com/watch?v=vCODCbUSA_w
 
 In addition, there are areas in this project where people without compiler expertise can have impact. For example, as mentioned in the [Performance Dashboard](#Performance-Dashboard) section, some of our internal tools could use some web front-end work.
-
-
-
-
-
-
