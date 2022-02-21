@@ -394,7 +394,7 @@ This is not a problem! Many members of our community learned about compilers by 
 
 In addition, there are areas in this project where people without compiler expertise can have impact. For example, as mentioned in the [Performance Dashboard](#Performance-Dashboard) section, some of our internal tools could use some web front-end work.
 
-### How can I contact an item's owners or sponsor their work on Rust?
+#### How can I contact an item's owners or sponsor their work on Rust?
 
 This table lists the item owners mentioned above, their [Zulip] username and if they are accepting sponsorships to help them work on Rust:
 
