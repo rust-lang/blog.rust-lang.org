@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>rust-analyzer joins the Rust organization! | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="rust-analyzer joins the Rust organization! | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="rust-analyzer joins the Rust organization! | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="rust-analyzer joins the Rust organization!" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>rust-analyzer joins the Rust organization!</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 21, 2022 &middot; The rust-analyzer Team on behalf of the entire Rust Team
+    
+    </div>
+
+    <div class="post">
+      <p>We have an exciting announcement to make!
+The <a href="https://rust-analyzer.github.io">rust-analyzer</a> project, a new implementation of the Language Server Protocol (LSP) for Rust, is now officially a part of the wider Rust organization! :tada:</p>
+<p>We want to start by thanking everyone who has gotten us this far, from contributors, to sponsors, to all the users of rust-analyzer in the Rust community. We could not have done this without you.</p>
+<p>The immediate impact of this organizational change is limited -- nothing changes for rust-analyzer users or contributors.
+However, this change unblocks technical work to make rust-analyzer the officially recommended language server for Rust in the near future.</p>
+<p>If you were hesitant to try rust-analyzer before, today is a good opportunity to do so.
+Not only is it a very capable language server for Rust, but according to <a href="https://marketplace.visualstudio.com/search?target=VSCode&category=Programming%20Languages&sortBy=Rating">VS Code statistics</a>, it is one of the best rated LSP implementations <em>across</em> programming languages.
+We highly recommend giving rust-analyzer a spin today, even if it will take some more time for us to complete the due process and switch from the existing officially recommended LSP implementation (RLS) properly.</p>
+<p>rust-analyzer enjoys excellent support in many editors:</p>
+<ul>
+<li>For VS Code, install the <a href="https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer">rust-analyzer</a> extension from the marketplace.</li>
+<li>For Neovim, follow the setup instructions <a href="https://sharksforarms.dev/posts/neovim-rust/">from this post</a>.
+For Vim, see <a href="https://github.com/fannheyward/coc-rust-analyzer">coc-rust-analyzer</a>.</li>
+<li>For Emacs, follow the setup instructions <a href="https://robert.kra.hn/posts/2021-02-07_rust-with-emacs/">from this post</a>.</li>
+</ul>
+<p>For other editors, check <a href="https://rust-analyzer.github.io/manual.html">the manual</a>.
+Finally, if you are using IntelliJ-Platform based IDEs like CLion, IDEA or PyCharm, you don't need rust-analyzer.
+You should use the awesome <a href="https://intellij-rust.github.io">IntelliJ Rust</a> plugin by JetBrains.</p>
+<h2><a href="#history-and-future" aria-hidden="true" class="anchor" id="history-and-future"></a>History and Future</h2>
+<p>The rust-analyzer project was started at the very end of 2017 (<a href="https://github.com/rust-analyzer/rust-analyzer/commit/a63222cd240d9b5405826783603f3b391c90885d">first commit</a>).
+At that time, the existing LSP implementation, RLS, had been providing IDE support for Rust for several years.
+While it handled well the most important features, it was clearly far from the experience offered by state-of-the-art IDEs for some other languages.</p>
+<p>Originally, the plan was to just experiment with error-resilient parsing for Rust; but when you have a good parser, it is so tempting <a href="https://github.com/rust-analyzer/rust-analyzer/commit/d7c5a6f3081c2e7266620779d3c32067f947b959">to add a simple LSP server</a> on top of it.
+Long story short, it took surprisingly little effort to get to a prototype which was already useful as an IDE, which happened in Autumn 2018.
+At that critical point, the company <a href="https://ferrous-systems.com">Ferrous Systems</a> (which was newborn itself) stepped in to fund further development of the prototype.
+During 2019, the then nascent rust-analyzer community worked hard to build out the foundation of an IDE.
+By 2020, we realized that what we had built was no longer a prototype, but an already tremendously useful tool for day-to-day Rust programming.
+This culminated in <a href="https://github.com/rust-lang/rfcs/pull/2912">RFC2912</a>: &quot;Transition to rust-analyzer as our official LSP (Language Server Protocol) implementation&quot;.
+The RFC was accepted with overwhelming support from the community: it is still the most upvoted Rust RFC ever.
+However, there was a wrinkle in the plan -- rust-analyzer was not an official Rust project!
+That's what we are fixing today!</p>
+<p>Next, we will proceed with the plan outlined in the RFC: advertising rust-analyzer as the very likely future of Rust IDE support, gathering feedback, and, conditioned on the positive outcome of that, sunsetting RLS, the currently recommended language server.
+So, once again -- do try out rust-analyzer and leave feedback on the <a href="https://github.com/rust-analyzer/rust-analyzer/issues/4224">tracking issues</a>.</p>
+<p>After the transition, we will double down on the technical side of things.
+As exciting as rust-analyzer is today, it only scratches the surface of what's possible when you bring the compiler's intricate understanding of the code right into the text editor.
+The end-game we are aiming for is creating an API to analyze and transform Rust code with full access to semantics.</p>
+<h2><a href="#funding" aria-hidden="true" class="anchor" id="funding"></a>Funding</h2>
+<p>One of the hardest nuts to crack for the present transition was the question of funding.
+Today, Rust is organized as a set of somewhat independent projects (rustc, cargo, rustup, rustfmt), and there's deliberately no way to fund a specific project directly. The new <a href="https://foundation.rust-lang.org">Rust Foundation</a> is the official place to sponsor Rust in general, with the Foundation Board overseeing funds allocation. Yet, it has always been encouraged for individuals to seek individual funding. While the Rust project may advertise funding opportunities for individual contributors, it does not officially <em>endorse</em> these efforts nor does it facilitate the funding of entire teams.</p>
+<p>rust-analyzer has received a significant share of funds from its OpenCollective and later GitHub Sponsors, managed by Ferrous Systems. This OpenCollective funded efforts by both individual contributors and Ferrous Systems employees. Details of this can be found in their <a href="https://rust-analyzer.github.io/blog/2021/08/03/financial-report-3.html">transparency reports</a>. Luckily, the OpenCollective has always been managed in a way that would make it possible to transfer it to a different account holder.
+With this transition, the OpenCollective will be renamed from &quot;rust-analyzer OpenCollective&quot; to &quot;Ferrous Systems OpenCollective (rust-analyzer)&quot;. This allows current sponsors to continue to sponsor and also make it clear that their chosen project will continue to be funded.
+In a sense, the OpenCollective is handed to Ferrous Systems. All Sponsor credits will move to https://ferrous-systems.com/open-source/#sponsors.</p>
+<p>We would like to thank Ferrous Systems for their openness and flexibility in the process, for their thoughtfulness in making sure the funding situation around rust-analyzer was clear, and for taking on the effort of fundraising.</p>
+<p>Eventually the <a href="https://github.com/sponsors/rust-analyzer">rust-analyzer GitHub Sponsors</a> will also move away from the rust-analyzer GitHub organisation.</p>
+<p>And of course, another great way for companies to support rust-analyzer development is to hire <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">the people working on rust-analyzer</a> to continue to do so.</p>
+<h2><a href="#thanks" aria-hidden="true" class="anchor" id="thanks"></a>Thanks</h2>
+<p>We'd like to once again thank everyone who help get rust-analyzer to this point. From experiment to being well on its way to the officially recommended LSP implementation for Rust, we couldn't have done it without the help of our contributors, sponsors, and users.</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>So that's where we are at right now!
+Thanks to the awesome contributors to rustc, clippy, cargo, LSP, IntelliJ Rust, RLS and rust-analyzer, Rust today already enjoys great IDE support, even if it still has a bit of experimental flair to it.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
