@@ -266,7 +266,7 @@ If you want to discuss more with us about past attempts and ideas for the future
 
 Incremental compilation performance and stability are both ongoing concerns to the team. We *know* there is significant room to improve the effectiveness of incremental compilation, in terms of reducing the amount of redundant work done by successive `rustc` invocations.
 
-In addition, there is a significant amount of work that could be done to improve our testing infrastructure for incremental compiliation which does not require deep knowledge of the compiler.
+In addition, there is a significant amount of work that could be done to improve our testing infrastructure for incremental compilation which does not require deep knowledge of the compiler.
 
 If you want to learn more, reach out to [cjgillot] and [Aaron Hill].
 
