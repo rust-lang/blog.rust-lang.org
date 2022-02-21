@@ -403,7 +403,7 @@ Owner | Zulip Username | Accepting sponsorships?
 [Aaron Hill] | `@Aaron Hill` | No
 [antoyo] | `@antoyo` | Yes: [GitHub Sponsors](https://github.com/sponsors/antoyo)
 [apiraino] | `@apiraino` | No
-[bjorn3] | `@bjorn3` | Yes: [Librapay](https://liberapay.com/bjorn3)
+[bjorn3] | `@bjorn3` | Yes: [Liberapay](https://liberapay.com/bjorn3)
 [cjgillot] | `@cjgillot` | No
 [davidtwco] | `@davidtwco` | No: works on Rust at Huawei R&D UK
 [estebank] | `@Esteban Küber` | No: works on Rust at Amazon Web Services
