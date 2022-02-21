@@ -409,7 +409,7 @@ Owner | Zulip Username | Accepting sponsorships?
 [estebank] | `@Esteban Küber` | No: works on Rust at Amazon Web Services
 [jackh726] | `@Jack Huey` | No
 [jswrenn] | `@Jack Wrenn` | No: works on Rust at Amazon Web Services
-[lcnr] | `@lcnr` | Yes: https://lcnr.de/funding/
+[lcnr] | `@lcnr` | Yes: [https://lcnr.de/funding/](https://lcnr.de/funding/)
 [lqd] | `@lqd` | No: sponsored by the Internet Security Research Group
 [Mark-Simulacrum] | `@simulacrum` | Yes, [GitHub Sponsors](https://github.com/sponsors/Mark-Simulacrum)
 [michaelwoerister] | `@mw` | No: works on Rust at Microsoft
