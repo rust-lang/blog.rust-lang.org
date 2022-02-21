@@ -21,7 +21,7 @@ This document is structured into three parts: our [Overall Themes][] for this ye
 Part of the motivation for this note is to encourage new contributors to get involved. We have a lot of newcomers, from individuals to large organizations, who are very excited about Rust's potential, and we want to show all of them what they can do to help.
 
 This is a list of items, divided into a [Concrete Initiatives][] section and an [Aspirations][] section. We accumulated these items during discussions with the Compiler Team and the Compiler Contributors.
-The [Concrete Initiatives][] have owners assigned; each has  allocated time this year to attack the problem. The [Aspirations][], on the other hand, are items that the team agrees would be great areas for investment, but where we currently lack sufficient resources or experienced developers to make progress this year.
+The [Concrete Initiatives][] have owners assigned; each has allocated time this year to attack the problem. The [Aspirations][], on the other hand, are items that the team agrees would be great areas for investment but where we currently lack sufficient resources or experienced developers to make progress this year.
 
 This is *not* a list of everything we will do this year; at least, not without help.
 
