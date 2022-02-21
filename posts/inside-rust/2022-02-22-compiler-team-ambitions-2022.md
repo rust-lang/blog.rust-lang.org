@@ -173,8 +173,7 @@ As of this writing, we have 69 [open issues tagged I-unsound](https://github.com
 
 In theory, any unsoundness issue potentially undermines Rust's promise of reliability. We want, by the end of this year, to have a clear understanding of how each of those I-unsound issues came to be. We are looking into systematically detecting such issues and whether we can deploy mitigations or fixes for entire classes of issues, instead of addressing them on a case by case basis.
 
-[oli-obk], from Amazon Web Services, will be the primary owner of  work in this space. Please reach out to [oli-obk] and [pnkfelix] (also from Amazon Web Services) if you are interested in helping resolve these issues! They are `@**oli**` and `@**pnkfelix**` [on zulip].
-
+[oli-obk] will be the primary owner of work in this space. Please reach out to [oli-obk] and [pnkfelix] if you are interested in helping resolve these issues!
 
 ### Async Rust Initiatives (🦀, 👩‍💻)
 
@@ -182,17 +181,17 @@ There is significant overlap between async rust and other areas of this document
 
 #### async traits
 
-Rust today does not allow `async fn` in a trait, so Async Rust code usually ends up with components that are too tightly coupled; one cannot write reusable, general-purpose libraries without using workarounds like `#[async_trait]` that impose hidden costs. [nikomatsakis], from Amazon Web Services, and [tmandry], from Google, are driving the [async fn in traits initiative](https://github.com/rust-lang/async-fundamentals-initiative/issues/5), which will unlock the ability to write `async` methods in traits, natively. They are `@**nikomatsakis**` and `@**tmandry**` [on zulip].
+Rust today does not allow `async fn` in a trait, so Async Rust code usually ends up with components that are too tightly coupled; one cannot write reusable, general-purpose libraries without using workarounds like `#[async_trait]` that impose hidden costs. [nikomatsakis] and [tmandry] are driving the [async fn in traits initiative](https://github.com/rust-lang/async-fundamentals-initiative/issues/5), which will unlock the ability to write `async` methods in traits, natively.
 
 #### async crashdump dissection
 
-[michaelwoerister], from Microsoft, is driving the [async crashdump initiative](https://rust-lang.github.io/async-crashdump-debugging-initiative/), which will enable developers to understand the control-flow stacks encoded in crashdumps for their async Rust programs. He is `@**mw**` [on zulip].
+[michaelwoerister] is driving the [async crashdump initiative](https://rust-lang.github.io/async-crashdump-debugging-initiative/), which will enable developers to understand the control-flow stacks encoded in crashdumps for their async Rust programs.
 
 There is a ton of other work being done in the Async Rust space. Check out the [Async Vision web site](https://rust-lang.github.io/wg-async/welcome.html) for more information.
 
 ### Debugging Initiatives (🦀)
 
-[wesleywiser], from Microsoft, and [pnkfelix] are spinning up a wg-debugging working group. It will cover at least the following sub-items: improving Rust's debuginfo quality ([michaelwoerister], [wesleywiser]), supporting split debuginfo ([davidtwco], from Huawei R&D UK), and better integration with trace-based debuggers like `rr` ([pnkfelix]). They are `@**Wesley Wiser**`, `@**pnkfelix**`, `@**mw**` and `@**davidtwco**` [on zulip].
+[wesleywiser] and [pnkfelix] are spinning up a wg-debugging working group. It will cover at least the following sub-items: improving Rust's debuginfo quality ([michaelwoerister], [wesleywiser]), supporting split debuginfo ([davidtwco]), and better integration with trace-based debuggers like `rr` ([pnkfelix]).
 
 The immediate goals for this initiative: establish the working group, determine priorities for the backlog of debugging issues, and find out what active users of debuggers miss most when they operate on Rust code.
 
@@ -200,7 +199,7 @@ The immediate goals for this initiative: establish the working group, determine 
 
 The Rust compiler's end-to-end latency is known to be a problem.
 
-[lqd], sponsored by the Internet Security Research Group, is dedicating the majority of 2022 to working on this, partnering with Rust's compiler-performance working group as well as performance experts like [nnethercote] (from Futurewei Technologies). [lqd] has their own [living document](https://hackmd.io/3Dp68rTDSpWvRDfWF6lbMw?view) that lists areas under investigation, and [nnethercote] has a [roadmap under development](https://hackmd.io/YJQSj_nLSZWl2sbI84R1qA). They are `@**lqd**` and `@**nnethercote**` [on zulip].
+[lqd] is dedicating the majority of 2022 to working on this, partnering with Rust's compiler-performance working group as well as performance experts like [nnethercote]. [lqd] has their own [living document](https://hackmd.io/3Dp68rTDSpWvRDfWF6lbMw?view) that lists areas under investigation, and [nnethercote] has a [roadmap under development](https://hackmd.io/YJQSj_nLSZWl2sbI84R1qA).
 
 [ISRG]: https://www.abetterinternet.org/
 
@@ -217,9 +216,7 @@ Generic Associated Types, or [GATs](https://github.com/rust-lang/generic-associa
 
 [`async fn` in traits](https://github.com/rust-lang/async-fundamentals-initiative/issues/5) is an ongoing effort (already mentioned above) owned by [tmandry]. This is one of the most frequently requested features for async rust: supplying first class support for traits like `trait Foo { async fn bar(&self); }`
 
-The [safe transmute](https://github.com/rust-lang/lang-team/issues/21) project, led by [jswrenn] from Amazon Web Services, is expected to be feature-complete in summer 2022. It will enable a large class of types to be transmuted (i.e. zero-cost type conversion) without any risk of injecting undefined behavior.
-
-You can reach these owners as `@**Jack Huey**`, `@**tmandry**`, and `@**Jack Wrenn**` [on zulip].
+The [safe transmute](https://github.com/rust-lang/lang-team/issues/21) project, led by [jswrenn], is expected to be feature-complete in summer 2022. It will enable a large class of types to be transmuted (i.e. zero-cost type conversion) without any risk of injecting undefined behavior.
 
 ### Librarification Initiatives (🛠️)
 
@@ -233,7 +230,7 @@ These are initiatives dedicated to the "librarification" of the compiler: breaki
 
 Chalk has been years in development, and has been experimentally integrated into rustc in the past. This year, [jackh726] and [nikomatsakis] own the task of improving the chalk integration, to drive it to the point where the team can consider migrating to chalk as the implementation of the trait system. This will unlock many features that up until now have been too difficult to implement in the old trait system implementation, and its declarative structure will provide a proper foundation for people to reason about the *correctness* of the trait system.
 
-If you want to help out with this, reach out to [jackh726] and [nikomatsakis]. They are `@**Jack Huey**` and `@**nikomatsakis**` [on zulip].
+If you want to help out with this, reach out to [jackh726] and [nikomatsakis].
 
 ## Aspirations
 
@@ -243,9 +240,9 @@ If you are interested in helping with any items here, please do reach out to the
 
 ### P-high Aspirations (🦀)
 
-[pnkfelix] and [wesleywiser], as team leads, are deploying processes to help us get a handle on the "high priority, but *not critical*" issues that the compiler has accumulated. We will be gradually identifying owners for each who will move progress forward, and in general working to keep better track of the set overall.
+[pnkfelix] and [wesleywiser], as Compiler Team leads, are deploying processes to help us get a handle on the "high priority, but *not critical*" issues that the compiler has accumulated. We will be gradually identifying owners for each who will move progress forward, and in general working to keep better track of the set overall.
 
-If you would like to help with the task of reviewing or resolving such issues, reach out to [wesleywiser] and [apiraino], who are co-leads of WG-prioritization. They are `@**Wesley Wiser**` and `@**apiraino**` [on zulip].
+If you would like to help with the task of reviewing or resolving such issues, reach out to [wesleywiser] and [apiraino], who are co-leads of WG-prioritization.
 
 ### Debugging Aspirations (👩‍💻)
 
@@ -255,7 +252,7 @@ We want to improve expression evaluation support: Today, most forms of method in
 
 We want to revisit our debugger extension architecture for rendering Rust data structures, which is currently mostly independent sets of Python scripts.
 
-If you want to help out here, please reach out to [pnkfelix] and [wesleywiser]. They are `@**pnkfelix**` and `@**Wesley Wiser**` [on zulip].
+If you want to help out here, please reach out to [pnkfelix] and [wesleywiser].
 
 ### Faster Builds Aspirations (👩‍💻, 🛠️)
 
@@ -263,7 +260,7 @@ If you want to help out here, please reach out to [pnkfelix] and [wesleywiser]. 
 
 Parallel Compilation is one avenue for improving compiler performance. It is also a very complex area, especially when it comes to the tradeoff of how much of a hit one is willing to take on single core builds in order to enable more parallel computation. We already parallelize our LLVM invocations, but the parallelization of the rest of the compiler remains in an experimental state. This is an area we think needs long-term collaborative effort with the compiler team. We do not expect to deliver a solution here this year.
 
-If you want to discuss more with us about past attempts and ideas for the future, please reach out to [pnkfelix] and [wesleywiser]. They are `@**pnkfelix**` and `@**Wesley Wiser**` [on zulip].
+If you want to discuss more with us about past attempts and ideas for the future, please reach out to [pnkfelix] and [wesleywiser].
 
 #### Incremental Compilation Aspirations
 
@@ -271,14 +268,14 @@ Incremental compilation performance and stability are both ongoing concerns to t
 
 In addition, there is a significant amount of work that could be done to improve our testing infrastructure for incremental compiliation which does not require deep knowledge of the compiler.
 
-If you want to learn more, reach out to [cjgillot] and [Aaron Hill]. They are `@**cjgillot**` and `@**Aaron Hill**` [on zulip].
+If you want to learn more, reach out to [cjgillot] and [Aaron Hill].
 
 #### Inter-crate Sharing Aspirations
 
 nnethercote has noted that there may be opportunities
 to improve end-to-end compilation time for multi-crate builds by identifying redundant activity that can be shared between builds of distinct crates. (For example, the metadata from libstd is read and decoded on every single crate compile.)
 
-If you are interested in exploring this idea further, reach out to [nnethercote] and [lqd]. They are `@**nnethercote**` and `@**lqd**` [on zulip].
+If you are interested in exploring this idea further, reach out to [nnethercote] and [lqd].
 
 ### Expressiveness Aspirations (🦀, 👩‍💻)
 
@@ -286,7 +283,7 @@ const generics and const eval are making steady progress. There are a *lot* of f
 
 What we can probably use the most help with is in identifying what subset of the features we should be striving to stabilize in order to unlock specific use cases for Rust developers.
 
-So, if you or your team is enthuastically awaiting const generics or const eval, reach out to [lcnr] (supported via [sponsorship][sponsor-lcnr]) and [oli-obk]. They are `@**lcnr**` and `@**oli**` [on zulip].
+So, if you or your team is enthuastically awaiting const generics or const eval, reach out to [lcnr] and [oli-obk].
 
 [sponsor-lcnr]: https://lcnr.de/funding/
 
@@ -302,7 +299,7 @@ For example, [Kani] is a bit-precise model-checker for Rust under development at
 [Prusti]: https://github.com/viperproject/prusti-dev#prusti
 [Creusot]: https://github.com/xldenis/creusot#about
 
-Reach out to [xldenis], from the LMF at the University of Paris-Saclay (and co-lead of the Rust Formal Methods working group), and [pnkfelix] if you are interested in helping us here. They are `@**Xavier Denis**` and `@**pnkfelix**` [on zulip].
+Reach out to [xldenis], from the LMF at the University of Paris-Saclay (and co-lead of the Rust Formal Methods working group), and [pnkfelix] if you are interested in helping us here.
 
 ### Compiler Team Operations Aspirations (🛠️)
 
@@ -312,7 +309,7 @@ One common task for compiler developers is to create a [minimal complete verifia
 
 This is an area where you do not need any knowledge of the `rustc` source code at all. Anyone with an interest in programming language technology can get involved; e.g. one might consider adding IDE commands for certain code reducing transformations.
 
-If you are interested in helping in this area, please reach out to [pnkfelix]. They are `@**pnkfelix**` [on zulip].
+If you are interested in helping in this area, please reach out to [pnkfelix].
 
 [E-needs-mcve]: https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AE-needs-mcve+
 [mcve blog post]: https://blog.pnkfx.org/blog/2019/11/18/rust-bug-minimization-patterns/
@@ -323,7 +320,7 @@ If you are interested in helping in this area, please reach out to [pnkfelix]. T
 
 The performance working group has many ideas for things to improve in these tools, but limited resources. This is an area where you don't need any compiler expertise to make a huge impact; for example, our Web Front-end could use work. And Data Scientists might have useful insights into our problems. Beyond just measuring the compiler's own performance, we're also interested in measuring the runtime performance of produced binaries.
 
-Reach out to [rylev], from Microsoft, and [Mark-Simulacrum] (supported via [sponsorship](https://github.com/sponsors/Mark-Simulacrum)), performance working group lead, if you want to help. They are `@**rylev**` and `@**simulacrum**` [on zulip].
+Reach out to [rylev] and [Mark-Simulacrum], performance working group lead, if you want to help.
 
 [@rust-timer]: https://github.com/rust-timer
 [perf]: https://perf.rust-lang.org/
@@ -332,13 +329,13 @@ Reach out to [rylev], from Microsoft, and [Mark-Simulacrum] (supported via [spon
 
 #### Ease writing new backends
 
-One source of tedium when defining a new Rust compiler backend is implementing the intrinsics that each backend must provide. But a small change to the intrinsic system: namely, allowing intrinsics to define a [fallback MIR implementation][], could ease that burden. Reach out to [scottmcm] if you are interested in helping out here. They are `@**scottmcm**` [on zulip].
+One source of tedium when defining a new Rust compiler backend is implementing the intrinsics that each backend must provide. But a small change to the intrinsic system: namely, allowing intrinsics to define a [fallback MIR implementation][], could ease that burden. Reach out to [scottmcm] if you are interested in helping out here.
 
 [fallback MIR implementation]: https://github.com/rust-lang/rust/issues/93145
 
 #### Cranelift
 
-The [Cranelift Code Generator][Cranelift] is getting a lot of attention from various parties. rustc has a [Cranelift backend][]. If you are interested in helping out with it, reach out to [bjorn3] (supported via [sponsorship][sponsor-bjorn3]). They are `@**bjorn3**` [on zulip].
+The [Cranelift Code Generator][Cranelift] is getting a lot of attention from various parties. rustc has a [Cranelift backend][]. If you are interested in helping out with it, reach out to [bjorn3].
 
 [sponsor-bjorn3]: https://liberapay.com/bjorn3
 
@@ -349,14 +346,14 @@ The [Cranelift Code Generator][Cranelift] is getting a lot of attention from var
 
 In addition to the LLVM and Cranelift backends, there is also a new backend under development that uses `libgccjit` from GCC (which, as many have clarified, is usable for ahead-of-time as well as just-in-time compilation). This backend enables Rust to target more platforms that are not supported by LLVM.
 
-If you are interested in helping out with this project, reach out to [antoyo] (supported via [sponsorship](https://github.com/sponsors/antoyo)) and [bjorn3]. They are `@**antoyo**` and `@**bjorn3**` [on zulip].
+If you are interested in helping out with this project, reach out to [antoyo] and [bjorn3].
 
 
 ### Diagnostics Aspirations (👩‍💻)
 
 The Rust compiler has pretty good diagnotics. But the good news is, there's a [full employment theorem](https://en.wikipedia.org/wiki/Full_employment_theorem) for diagnostics engineers which is supported by the 1,500+ [open diagnostics issues](https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AA-diagnostics) we have.
 
-Diagnostics improvements are an *excellent* first step for learning about how to contribute to the Rust compiler. If you're interested in helping out but don't have any idea where to start, fixing diagnostic bugs is a great jumping off point, and you can reach out to [estebank], at Amazon Web Services, to find out more about how to help. They are `@**Esteban Küber**` [on zulip].
+Diagnostics improvements are an *excellent* first step for learning about how to contribute to the Rust compiler. If you're interested in helping out but don't have any idea where to start, fixing diagnostic bugs is a great jumping off point, and you can reach out to [estebank] to find out more about how to help.
 
 
 ## Conclusion
@@ -396,3 +393,32 @@ This is not a problem! Many members of our community learned about compilers by 
 [Contributing to the Compiler]: https://www.youtube.com/watch?v=vCODCbUSA_w
 
 In addition, there are areas in this project where people without compiler expertise can have impact. For example, as mentioned in the [Performance Dashboard](#Performance-Dashboard) section, some of our internal tools could use some web front-end work.
+
+### How can I contact an item's owners or sponsor their work on Rust?
+
+This table lists the item owners mentioned above, their [Zulip] username and if they are accepting sponsorships to help them work on Rust:
+
+Owner | Zulip Username | Accepting sponsorships?
+-|-|-
+[Aaron Hill] | `@Aaron Hill` | No
+[antoyo] | `@antoyo` | Yes: [GitHub Sponsors](https://github.com/sponsors/antoyo)
+[apiraino] | `@apiraino` | No
+[bjorn3] | `@bjorn3` | Yes: [Librapay](https://liberapay.com/bjorn3)
+[cjgillot] | `@cjgillot` | No
+[davidtwco] | `@davidtwco` | No: works on Rust at Huawei R&D UK
+[estebank] | `@Esteban Küber` | No: works on Rust at Amazon Web Services
+[jackh726] | `@Jack Huey` | No
+[jswrenn] | `@Jack Wrenn` | No: works on Rust at Amazon Web Services
+[lcnr] | `@lcnr` | Yes: https://lcnr.de/funding/
+[lqd] | `@lqd` | No: sponsored by the Internet Security Research Group
+[Mark-Simulacrum] | `@simulacrum` | Yes, [GitHub Sponsors](https://github.com/sponsors/Mark-Simulacrum)
+[michaelwoerister] | `@mw` | No: works on Rust at Microsoft
+[nikomatsakis] | `@nikomatsakis` | No: works on Rust at Amazon Web Services
+[nnethercote] | `@nnethercote` | No: works on Rust at Futurewei
+[oli-obk] | `@oli` | No: works on Rust at Amazon Web Services
+[pnkfelix] | `@pnkfelix` | No: works on Rust at Amazon Web Services
+[rylev] | `@rylev` | No: works on Rust at Microsoft
+[scottmcm] | `@scottmcm` | No
+[tmandry] | `@tmandry` | No: works on Rust at Google
+[wesleywiser] | `@Wesley Wiser` | No: works on Rust at Microsoft
+[xldenis] | `@Xavier Denis` | No
