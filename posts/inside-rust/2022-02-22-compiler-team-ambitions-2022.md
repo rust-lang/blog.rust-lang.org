@@ -283,7 +283,7 @@ const generics and const eval are making steady progress. There are a *lot* of f
 
 What we can probably use the most help with is in identifying what subset of the features we should be striving to stabilize in order to unlock specific use cases for Rust developers.
 
-So, if you or your team is enthuastically awaiting const generics or const eval, reach out to [lcnr] and [oli-obk].
+So, if you or your team is enthusiastically awaiting const generics or const eval, reach out to [lcnr] and [oli-obk].
 
 [sponsor-lcnr]: https://lcnr.de/funding/
 
