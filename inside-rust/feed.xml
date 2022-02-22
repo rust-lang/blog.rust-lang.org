@@ -10,8 +10,30 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-02-21T17:59:29+00:00</updated>
+    <updated>2022-02-22T15:58:15+00:00</updated>
 
+    
+    <entry>
+        <title>1.59.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/02/22/1.59.0-prerelease.html" type="text/html" title="1.59.0 pre-release testing" />
+        <published>2022-02-22T00:00:00+00:00</published>
+        <updated>2022-02-22T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/02/22/1.59.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/02/22/1.59.0-prerelease.html">&lt;p&gt;The 1.59.0 pre-release is ready for testing. The release is scheduled for this
+Thursday, February 24th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1590-2022-02-22&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2022-02-22/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2022-02-22/index.html&lt;/a&gt;. You
+can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-59-0-pre-release-testing/&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The release team is also thinking about changes to our pre-release process:
+we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mark Rousskov</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Lang team February update</title>
@@ -469,34 +491,6 @@ who have stepped up to provide moderation continuity to the project.&lt;/p&gt;
 
         <author>
             <name>The undersigned</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Please welcome The 8472 and Ashley Mannix to Library Contributors</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/11/15/libs-contributors-the8472-kodraus.html" type="text/html" title="Please welcome The 8472 and Ashley Mannix to Library Contributors" />
-        <published>2021-11-15T00:00:00+00:00</published>
-        <updated>2021-11-15T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/11/15/libs-contributors-the8472-kodraus.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/11/15/libs-contributors-the8472-kodraus.html">&lt;p&gt;Please welcome The 8472 and Ashley Mannix to the
-&lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/library#libs-contributors&quot;&gt;Library Contributors&lt;/a&gt; group!&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/the8472&quot;&gt;The 8472&lt;/a&gt; has been working on
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/70793&quot;&gt;various&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/75272&quot;&gt;specializations&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/78641&quot;&gt;in the&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/83245&quot;&gt;standard library&lt;/a&gt;,
-and has been involved in many library-related changes and discussions.&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/KodrAus/&quot;&gt;Ashley Mannix&lt;/a&gt; maintains
-&lt;a href&#x3D;&quot;https://crates.io/users/KodrAus?sort&#x3D;downloads&quot;&gt;several popular Rust crates&lt;/a&gt;
-and used to be a part of the Library (API) Team.
-Ashley is now getting back into Rust open source work,
-and will be helping out with maintenance of the standard library
-and some official &lt;code&gt;rust-lang&lt;/code&gt; crates such as &lt;a href&#x3D;&quot;https://crates.io/crates/log&quot;&gt;&lt;code&gt;log&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Congratulations The 8472 and Ashley, and thanks for everything you do!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Mara Bos</name>
         </author>
     </entry>
     
