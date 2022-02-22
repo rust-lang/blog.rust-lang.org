@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust Compiler Ambitions for 2022 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust Compiler Ambitions for 2022 | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust Compiler Ambitions for 2022 | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust Compiler Ambitions for 2022" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust Compiler Ambitions for 2022</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 22, 2022 &middot; Felix Klock, Wesley Wiser
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">The Compiler Team</a> 
+    </div>
+
+    <div class="post">
+      <h1><a href="#rust-compiler-ambitions-for-2022" aria-hidden="true" class="anchor" id="rust-compiler-ambitions-for-2022"></a>Rust Compiler Ambitions for 2022</h1>
+<p>Some people have been wondering about what the Rust Compiler Team has planned for 2022. This note is to let you all know what activities the team plans to focus on this year.</p>
+<p>This document is structured into three parts: our <a href="#overall-themes">Overall Themes</a> for this year, the <a href="#concrete-initiatives">Concrete Initiatives</a> we have resources to drive, and <a href="#aspirations">Aspirations</a> for what we could do if given more help.</p>
+<h2><a href="#introduction" aria-hidden="true" class="anchor" id="introduction"></a>Introduction</h2>
+<p>Part of the motivation for this note is to encourage new contributors to get involved. We have a lot of newcomers, from individuals to large organizations, who are very excited about Rust's potential, and we want to show all of them what they can do to help.</p>
+<p>This is a list of items, divided into a <a href="#concrete-initiatives">Concrete Initiatives</a> section and an <a href="#aspirations">Aspirations</a> section. We accumulated these items during discussions with the Compiler Team and the Compiler Contributors.
+The <a href="#concrete-initiatives">Concrete Initiatives</a> have owners assigned; each has allocated time this year to attack the problem. The <a href="#aspirations">Aspirations</a>, on the other hand, are items that the team agrees would be great areas for investment but where we currently lack sufficient resources or experienced developers to make progress this year.</p>
+<p>This is <em>not</em> a list of everything we will do this year; at least, not without help.</p>
+<p>You can think of the <a href="#aspirations">Aspirations</a> part of the doc as an explicit call to arms: If you see something there that interests you, please reach out to the owners listed in that section to find out how you might be able to help.</p>
+<p>As you read the document, it is useful to keep in mind that <a href="https://blog.m-ou.se/rust-is-not-a-company/">Rust is not a company</a>: The teams, and the leaders of the teams, do not establish goals in a top-down manner, nor do they hand out tasks in a round-robin fashion. Instead, we collectively (and iteratively) refine our a shared vision for the future, and take steps that hopefully move towards that future. Each contributor decides for themself how much time they can afford to contribute, and that can vary wildly between contributors. The goals that we set for the project must be aligned with the goals of our current and future contributors; otherwise, they just won't get done. We have processes (e.g. <a href="https://github.com/rust-lang/rfcs#readme">RFCs</a>, <a href="https://forge.rust-lang.org/compiler/mcp.html">MCPs</a>) that try to ensure alignment; in some ways, a document like this one is just another tool for recalibrating alignment.</p>
+<!--
+But the flip side of this is: if something really is important, then there almost certainly exists a contributor willing to work on it. The real hurdle then is *enabling* that contributor to succeed.
+(Note: this is hard! Its not just about mentorship/education; its just as much about achieving *alignment* amongst the whole group!)
+-->
+<!-- [antoyo zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/404242-user404242 --> <!-- @**antoyo** -->
+<!-- antoyo sponsorship: https://github.com/sponsors/antoyo -->
+<!-- [Aaron Hill zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116083-user116083 --> <!-- @**Aaron Hill** -->
+<!-- Aaron1011: no affiliation -->
+<!-- [bjorn3 zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/133247-user133247 --> <!-- @**bjorn3**  -->
+<!-- bjorn3 donation page: https://liberapay.com/bjorn3 -->
+<!-- [cjgillot zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/248906-user248906 --> <!-- @**cjgillot**  -->
+<!-- no response from cjgillot re affiliation yet -->
+<!-- [davidtwco zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/248906-user248906 --> <!-- @**davidtwco**  -->
+<!-- davidtwco affiliation: "Huawei R&D UK"-->
+<!-- [estebank zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/119031-user119031 --> <!-- @**Esteban Küber** -->
+<!-- estebank affiliation: AWS -->
+<!-- [lcnr zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/216206-user216206 --> <!-- @**lcnr** -->
+<!-- lcnr sponsorship: https://lcnr.de/funding/ -->
+<!-- [michaelwoerister zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/124287-user124287 --> <!-- @**mw** -->
+<!-- michaelwoerister affiliation: MS -->
+<!-- [nikomatsakis zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116009-user116009 --> <!-- @**nikomatsakis** -->
+<!-- nikomatsakis affiliation: AWS -->
+<!-- [oli-obk zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/124288-user124288 --> <!-- @**oli** -->
+<!-- oli affiliation: AWS -->
+<!-- [jackh726 zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/232957-user232957 --> <!-- @**Jack Huey** -->
+<!-- jackh726: no affiliation -->
+<!-- [lqd zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116113-user116113 --> <!-- @**lqd**  -->
+<!-- lqd affiliation: ISRG -->
+<!-- [nnethercote zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/120989-user120989 --> <!-- @**nnethercote**  -->
+<!-- nnethercote affiliation: Futurewei -->
+<!-- [tmandry zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116883-user116883 --> <!-- @**tmandry**  -->
+<!-- tmandry affiliation: Google (TBD) -->
+<!-- [scottmcm zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/125270-user125270 --> <!-- @**scottmcm**  -->
+<!-- scottmcm: no affiliation -->
+<!-- [pnkfelix zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116083-user116083  --> <!-- @**pnkfelix**  -->
+<!-- pnkfelix affiliation: AWS -->
+<!-- [wesleywiser zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/125250-user125250 --> <!-- @**Wesley Wiser**  -->
+<!-- wesleywiser affiliation: MS -->
+<!-- [jswrenn zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/219211-user219211 --> <!-- @**Jack Wrenn** -->
+<!-- jswrenn affiliation: AWS -->
+<!-- [apiraino zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/250987-user250987 --> <!-- @**apiraino**  -->
+<!-- apiraino: no affiliation -->
+<!-- [simulacrum zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116122-user116122 --> <!-- @**simulacrum**  -->
+<!-- simulacrum sponsorship: https://github.com/sponsors/Mark-Simulacrum -->
+<!-- [rylev zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/224872-user224872 --> <!-- @**rylev**  -->
+<!-- rylev affiliation: MS -->
+<!-- [xldenis zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/312719-user312719 --> <!-- @**Xavier Denis**  -->
+<h2><a href="#overall-themes" aria-hidden="true" class="anchor" id="overall-themes"></a>Overall Themes</h2>
+<p>There are three themes associated with the work we are planning; this section describes those themes, and attaches an
+emoji to each one which may help you when looking at the <a href="#work-items">tabular overview</a>.</p>
+<h3><a href="#fulfill-rusts-promise-" aria-hidden="true" class="anchor" id="fulfill-rusts-promise-"></a>Fulfill Rust's Promise (🦀)</h3>
+<p>Fulfilling Rust's Promise is a cross-cutting theme; it means identifying the gaps between expectation and reality for each of our three pillars: <a href="https://www.rust-lang.org">Performance, Reliability, and Productivity</a>, and then addressing those gaps.</p>
+<h3><a href="#developer-delight-" aria-hidden="true" class="anchor" id="developer-delight-"></a>Developer Delight (👩‍💻)</h3>
+<p>We have opportunities to improve the experience of writing, of compiling, and of running Rust code. We want answers to the question, &quot;what would delight Rust developers?&quot; This is not about meeting their expectations: It's about <em>surpassing</em> them.</p>
+<h3><a href="#contributor-workflow-️" aria-hidden="true" class="anchor" id="contributor-workflow-️"></a>Contributor Workflow (🛠️)</h3>
+<p>Finally, improving the Compiler Contributor Workflow means technology enhancements that benefit people maintaining and extending the Rust compiler itself.</p>
+<p>(We also make non-technical enhancements, such as changes to our social processes, but this document focuses on technology.)</p>
+<h2><a href="#work-items" aria-hidden="true" class="anchor" id="work-items"></a>Work Items</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th><a href="#concrete-initiatives">Concrete Initiatives</a></th>
+<th><a href="#aspirations">Aspirations</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I-unsound (🦀)</td>
+<td><a href="#i-unsound-issues-">Initiatives</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Async Rust (🦀, 👩‍💻)</td>
+<td><a href="#async-rust-initiatives--">Initiatives</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Debugging (🦀, 👩‍💻)</td>
+<td><a href="#debugging-initiatives-">Initiatives</a></td>
+<td><a href="#debugging-aspirations-">Aspirations</a></td>
+</tr>
+<tr>
+<td>Faster Builds (👩‍💻, 🛠️)</td>
+<td><a href="#faster-builds-initiatives--%EF%B8%8F">Initiatives</a></td>
+<td><a href="#faster-builds-aspirations--%EF%B8%8F">Aspirations</a></td>
+</tr>
+<tr>
+<td>Expressiveness (👩‍💻, 🦀)</td>
+<td><a href="#expressiveness-initiatives--">Initiatives</a></td>
+<td><a href="#expressiveness-aspirations--">Aspirations</a></td>
+</tr>
+<tr>
+<td>Librarification (🛠️)</td>
+<td><a href="#librarification-initiatives-%EF%B8%8F">Initiatives</a></td>
+<td><a href="#librarification-aspirations-%EF%B8%8F">Aspirations</a></td>
+</tr>
+<tr>
+<td>P-high Backlog (🦀)</td>
+<td></td>
+<td><a href="#p-high-aspirations-">Aspirations</a></td>
+</tr>
+<tr>
+<td>Team Operations (🛠️)</td>
+<td></td>
+<td><a href="#compiler-team-operations-aspirations-%EF%B8%8F">Aspirations</a></td>
+</tr>
+<tr>
+<td>Backend (🛠️, 👩‍💻)</td>
+<td></td>
+<td><a href="#compiler-backend-aspirations-%EF%B8%8F-">Aspirations</a></td>
+</tr>
+<tr>
+<td>Diagnostics  (👩‍💻)</td>
+<td></td>
+<td><a href="#diagnostics-aspirations-">Aspirations</a></td>
+</tr>
+</tbody>
+</table>
+<!-- end of manually made [toc] -->
+<h2><a href="#concrete-initiatives" aria-hidden="true" class="anchor" id="concrete-initiatives"></a>Concrete Initiatives</h2>
+<p>This section is the closest thing to a &quot;roadmap&quot; we have for 2022. It is a list of important items with dedicated owners that have time allocated to make significant progress on the problem this year.</p>
+<h3><a href="#i-unsound-issues-" aria-hidden="true" class="anchor" id="i-unsound-issues-"></a>I-unsound issues (🦀)</h3>
+<p>As of this writing, we have 69 <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AI-unsound">open issues tagged I-unsound</a>, and 44 of those are <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AI-unsound++label%3AT-compiler">also tagged T-compiler</a>.</p>
+<p>In theory, any unsoundness issue potentially undermines Rust's promise of reliability. We want, by the end of this year, to have a clear understanding of how each of those I-unsound issues came to be. We are looking into systematically detecting such issues and whether we can deploy mitigations or fixes for entire classes of issues, instead of addressing them on a case by case basis.</p>
+<p><a href="https://github.com/oli-obk">oli-obk</a> will be the primary owner of work in this space. Please reach out to <a href="https://github.com/oli-obk">oli-obk</a> and <a href="https://github.com/pnkfelix">pnkfelix</a> if you are interested in helping resolve these issues!</p>
+<h3><a href="#async-rust-initiatives--" aria-hidden="true" class="anchor" id="async-rust-initiatives--"></a>Async Rust Initiatives (🦀, 👩‍💻)</h3>
+<p>There is significant overlap between async rust and other areas of this document, such as debugging and language expressiveness.</p>
+<h4><a href="#async-traits" aria-hidden="true" class="anchor" id="async-traits"></a>async traits</h4>
+<p>Rust today does not allow <code>async fn</code> in a trait, so Async Rust code usually ends up with components that are too tightly coupled; one cannot write reusable, general-purpose libraries without using workarounds like <code>#[async_trait]</code> that impose hidden costs. <a href="https://github.com/nikomatsakis">nikomatsakis</a> and <a href="https://github.com/tmandry">tmandry</a> are driving the <a href="https://github.com/rust-lang/async-fundamentals-initiative/issues/5">async fn in traits initiative</a>, which will unlock the ability to write <code>async</code> methods in traits, natively.</p>
+<h4><a href="#async-crashdump-dissection" aria-hidden="true" class="anchor" id="async-crashdump-dissection"></a>async crashdump dissection</h4>
+<p><a href="https://github.com/michaelwoerister">michaelwoerister</a> is driving the <a href="https://rust-lang.github.io/async-crashdump-debugging-initiative/">async crashdump initiative</a>, which will enable developers to understand the control-flow stacks encoded in crashdumps for their async Rust programs.</p>
+<p>There is a ton of other work being done in the Async Rust space. Check out the <a href="https://rust-lang.github.io/wg-async/welcome.html">Async Vision web site</a> for more information.</p>
+<h3><a href="#debugging-initiatives-" aria-hidden="true" class="anchor" id="debugging-initiatives-"></a>Debugging Initiatives (🦀)</h3>
+<p><a href="https://github.com/wesleywiser">wesleywiser</a> and <a href="https://github.com/pnkfelix">pnkfelix</a> are spinning up a wg-debugging working group. It will cover at least the following sub-items: improving Rust's debuginfo quality (<a href="https://github.com/michaelwoerister">michaelwoerister</a>, <a href="https://github.com/wesleywiser">wesleywiser</a>), supporting split debuginfo (<a href="https://github.com/davidtwco">davidtwco</a>), and better integration with trace-based debuggers like <code>rr</code> (<a href="https://github.com/pnkfelix">pnkfelix</a>).</p>
+<p>The immediate goals for this initiative: establish the working group, determine priorities for the backlog of debugging issues, and find out what active users of debuggers miss most when they operate on Rust code.</p>
+<h3><a href="#faster-builds-initiatives--️" aria-hidden="true" class="anchor" id="faster-builds-initiatives--️"></a>Faster Builds Initiatives (👩‍💻, 🛠️)</h3>
+<p>The Rust compiler's end-to-end latency is known to be a problem.</p>
+<p><a href="https://github.com/lqd">lqd</a> is dedicating the majority of 2022 to working on this, partnering with Rust's compiler-performance working group as well as performance experts like <a href="https://github.com/nnethercote">nnethercote</a>. <a href="https://github.com/lqd">lqd</a> has their own <a href="https://hackmd.io/3Dp68rTDSpWvRDfWF6lbMw?view">living document</a> that lists areas under investigation, and <a href="https://github.com/nnethercote">nnethercote</a> has a <a href="https://hackmd.io/YJQSj_nLSZWl2sbI84R1qA">roadmap under development</a>.</p>
+<h3><a href="#expressiveness-initiatives--" aria-hidden="true" class="anchor" id="expressiveness-initiatives--"></a>Expressiveness Initiatives (👩‍💻, 🦀)</h3>
+<p>A common refrain we hear is: &quot;I need feature X, but it's not implemented in rustc or stable.&quot;
+In Rust, we use an open Request-for-Comment (RFC) process for designing new features. Currently, we have <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AC-tracking-issue++label%3AB-RFC-approved+">this set of RFCs approved</a>; here are some imporant features with dedicated owners that we expect forward movement on.</p>
+<p>Generic Associated Types, or <a href="https://github.com/rust-lang/generic-associated-types-initiative/issues/4">GATs</a>, are an ongoing effort owned by <a href="https://github.com/jackh726">jackh726</a>. GATs have many applications, such as traits whose associated types have lifetimes tied to the local borrowing of the receiver type (<a href="https://github.com/rust-lang/rfcs/blob/master/text/1598-generic_associated_types.md#motivation">e.g. <code>LendingIterator</code></a>).</p>
+<p><a href="https://github.com/rust-lang/async-fundamentals-initiative/issues/5"><code>async fn</code> in traits</a> is an ongoing effort (already mentioned above) owned by <a href="https://github.com/tmandry">tmandry</a>. This is one of the most frequently requested features for async rust: supplying first class support for traits like <code>trait Foo { async fn bar(&amp;self); }</code></p>
+<p>The <a href="https://github.com/rust-lang/lang-team/issues/21">safe transmute</a> project, led by <a href="https://github.com/jswrenn">jswrenn</a>, is expected to be feature-complete in summer 2022. It will enable a large class of types to be transmuted (i.e. zero-cost type conversion) without any risk of injecting undefined behavior.</p>
+<h3><a href="#librarification-initiatives-️" aria-hidden="true" class="anchor" id="librarification-initiatives-️"></a>Librarification Initiatives (🛠️)</h3>
+<p>These are initiatives dedicated to the &quot;librarification&quot; of the compiler: breaking the monolithic code base of <code>rustc</code> into a set of decoupled parts that can be independently developed, and, ideally, repurposed for other kinds of tools besides <code>rustc</code> such as <code>rust-analyzer</code>.</p>
+<h4><a href="#chalk" aria-hidden="true" class="anchor" id="chalk"></a>Chalk</h4>
+<p><a href="https://github.com/rust-lang/chalk">Chalk</a> is a reimplementation of Rust's trait system using declarative logic rules, a la Prolog.</p>
+<p>Chalk has been years in development, and has been experimentally integrated into rustc in the past. This year, <a href="https://github.com/jackh726">jackh726</a> and <a href="https://github.com/nikomatsakis">nikomatsakis</a> own the task of improving the chalk integration, to drive it to the point where the team can consider migrating to chalk as the implementation of the trait system. This will unlock many features that up until now have been too difficult to implement in the old trait system implementation, and its declarative structure will provide a proper foundation for people to reason about the <em>correctness</em> of the trait system.</p>
+<p>If you want to help out with this, reach out to <a href="https://github.com/jackh726">jackh726</a> and <a href="https://github.com/nikomatsakis">nikomatsakis</a>.</p>
+<h2><a href="#aspirations" aria-hidden="true" class="anchor" id="aspirations"></a>Aspirations</h2>
+<p>We would love help with any of the areas listed on this document, but this section specifically lists areas where we know we lack resources today.</p>
+<p>If you are interested in helping with any items here, please do reach out to the owner listed; they will be thrilled to talk to you.</p>
+<h3><a href="#p-high-aspirations-" aria-hidden="true" class="anchor" id="p-high-aspirations-"></a>P-high Aspirations (🦀)</h3>
+<p><a href="https://github.com/pnkfelix">pnkfelix</a> and <a href="https://github.com/wesleywiser">wesleywiser</a>, as Compiler Team leads, are deploying processes to help us get a handle on the &quot;high priority, but <em>not critical</em>&quot; issues that the compiler has accumulated. We will be gradually identifying owners for each who will move progress forward, and in general working to keep better track of the set overall.</p>
+<p>If you would like to help with the task of reviewing or resolving such issues, reach out to <a href="https://github.com/wesleywiser">wesleywiser</a> and <a href="https://github.com/apiraino">apiraino</a>, who are co-leads of WG-prioritization.</p>
+<h3><a href="#debugging-aspirations-" aria-hidden="true" class="anchor" id="debugging-aspirations-"></a>Debugging Aspirations (👩‍💻)</h3>
+<p>We want better integration, at least with the popular debuggers. The command sequence to set up an idealized debugging experience is too obscure and therefore goes unused.</p>
+<p>We want to improve expression evaluation support: Today, most forms of method invocation do not work, because the debuggers do not know about Rust's method resolution rules.</p>
+<p>We want to revisit our debugger extension architecture for rendering Rust data structures, which is currently mostly independent sets of Python scripts.</p>
+<p>If you want to help out here, please reach out to <a href="https://github.com/pnkfelix">pnkfelix</a> and <a href="https://github.com/wesleywiser">wesleywiser</a>.</p>
+<h3><a href="#faster-builds-aspirations--️" aria-hidden="true" class="anchor" id="faster-builds-aspirations--️"></a>Faster Builds Aspirations (👩‍💻, 🛠️)</h3>
+<h4><a href="#parallel-compilation" aria-hidden="true" class="anchor" id="parallel-compilation"></a>Parallel Compilation</h4>
+<p>Parallel Compilation is one avenue for improving compiler performance. It is also a very complex area, especially when it comes to the tradeoff of how much of a hit one is willing to take on single core builds in order to enable more parallel computation. We already parallelize our LLVM invocations, but the parallelization of the rest of the compiler remains in an experimental state. This is an area we think needs long-term collaborative effort with the compiler team. We do not expect to deliver a solution here this year.</p>
+<p>If you want to discuss more with us about past attempts and ideas for the future, please reach out to <a href="https://github.com/pnkfelix">pnkfelix</a> and <a href="https://github.com/wesleywiser">wesleywiser</a>.</p>
+<h4><a href="#incremental-compilation-aspirations" aria-hidden="true" class="anchor" id="incremental-compilation-aspirations"></a>Incremental Compilation Aspirations</h4>
+<p>Incremental compilation performance and stability are both ongoing concerns to the team. We <em>know</em> there is significant room to improve the effectiveness of incremental compilation, in terms of reducing the amount of redundant work done by successive <code>rustc</code> invocations.</p>
+<p>In addition, there is a significant amount of work that could be done to improve our testing infrastructure for incremental compilation which does not require deep knowledge of the compiler. We have had to disable and subsequently reenable incremental compilation on the stable release; we want to expand our validation strategies so that we get alerted to problems in incremental compilation well before they come close to the stable channel.</p>
+<p>If you want to learn more, reach out to <a href="https://github.com/cjgillot">cjgillot</a> and <a href="https://github.com/Aaron1011">Aaron Hill</a>.</p>
+<h4><a href="#inter-crate-sharing-aspirations" aria-hidden="true" class="anchor" id="inter-crate-sharing-aspirations"></a>Inter-crate Sharing Aspirations</h4>
+<p>nnethercote has noted that there may be opportunities
+to improve end-to-end compilation time for multi-crate builds by identifying redundant activity that can be shared between builds of distinct crates. (For example, the metadata from libstd is read and decoded on every single crate compile.)</p>
+<p>If you are interested in exploring this idea further, reach out to <a href="https://github.com/nnethercote">nnethercote</a> and <a href="https://github.com/lqd">lqd</a>.</p>
+<h3><a href="#expressiveness-aspirations--" aria-hidden="true" class="anchor" id="expressiveness-aspirations--"></a>Expressiveness Aspirations (🦀, 👩‍💻)</h3>
+<p>const generics and const eval are making steady progress. There are a <em>lot</em> of feature flags, which implies there's a lot of knobs that could be turned on and off.</p>
+<p>What we can probably use the most help with is in identifying what subset of the features we should be striving to stabilize in order to unlock specific use cases for Rust developers.</p>
+<p>So, if you or your team is enthusiastically awaiting const generics or const eval, reach out to <a href="https://github.com/lcnr">lcnr</a> and <a href="https://github.com/oli-obk">oli-obk</a>.</p>
+<h3><a href="#librarification-aspirations-️" aria-hidden="true" class="anchor" id="librarification-aspirations-️"></a>Librarification Aspirations (🛠️)</h3>
+<h4><a href="#mir-tooling" aria-hidden="true" class="anchor" id="mir-tooling"></a>MIR tooling</h4>
+<p>Various stakeholders, especially in the formal methods space, are making extensions to Rust that are based on analyzing MIR, the intermediate representation used by the compiler. Should we be trying to stabilize that as an interop format of some kind?</p>
+<p>For example, <a href="https://github.com/model-checking/kani">Kani</a> is a bit-precise model-checker for Rust under development at Amazon Web Services. It is implemented as another backend on <code>rustc</code>; but it would be cleaner if rustc could just generate MIR and their compiler could consume MIR. <a href="https://github.com/viperproject/prusti-dev#prusti">Prusti</a> and <a href="https://github.com/xldenis/creusot#about">Creusot</a> could likewise benefit from a stable MIR interop.</p>
+<p>Reach out to <a href="https://github.com/xldenis">xldenis</a>, from the LMF at the University of Paris-Saclay (and co-lead of the Rust Formal Methods working group), and <a href="https://github.com/pnkfelix">pnkfelix</a> if you are interested in helping us here.</p>
+<h3><a href="#compiler-team-operations-aspirations-️" aria-hidden="true" class="anchor" id="compiler-team-operations-aspirations-️"></a>Compiler Team Operations Aspirations (🛠️)</h3>
+<h4><a href="#mcve-reduction-tooling" aria-hidden="true" class="anchor" id="mcve-reduction-tooling"></a>MCVE reduction tooling</h4>
+<p>One common task for compiler developers is to create a <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AE-needs-mcve+">minimal complete verifiable example</a>. This task is largely mechanical; pnkfelix has a <a href="https://blog.pnkfx.org/blog/2019/11/18/rust-bug-minimization-patterns/">blog post</a> about Rust source-to-source tranformations that accomplish this. But despite its mechanical nature, the current state of the art in automating this task is in tools like <a href="https://github.com/csmith-project/creduce">creduce</a>, which have some big limitations (such as only working on a single file at a time).</p>
+<p>This is an area where you do not need any knowledge of the <code>rustc</code> source code at all. Anyone with an interest in programming language technology can get involved; e.g. one might consider adding IDE commands for certain code reducing transformations.</p>
+<p>If you are interested in helping in this area, please reach out to <a href="https://github.com/pnkfelix">pnkfelix</a>.</p>
+<h4><a href="#performance-dashboard" aria-hidden="true" class="anchor" id="performance-dashboard"></a>Performance Dashboard</h4>
+<p><a href="https://perf.rust-lang.org/">perf.rust-lang.org</a> is a dashboard that measures the performance of <code>rustc</code>, in terms of resources (time and memory) consumed during compilation. <a href="https://github.com/rust-timer">@rust-timer</a> is a bot that summarizes whether a given Pull Request regressed or improved performance.</p>
+<p>The performance working group has many ideas for things to improve in these tools, but limited resources. This is an area where you don't need any compiler expertise to make a huge impact; for example, our Web Front-end could use work. And Data Scientists might have useful insights into our problems. Beyond just measuring the compiler's own performance, we're also interested in measuring the runtime performance of produced binaries.</p>
+<p>Reach out to <a href="https://github.com/rylev">rylev</a> and <a href="https://github.com/Mark-Simulacrum">Mark-Simulacrum</a>, performance working group lead, if you want to help.</p>
+<h3><a href="#compiler-backend-aspirations-️-" aria-hidden="true" class="anchor" id="compiler-backend-aspirations-️-"></a>Compiler Backend Aspirations (🛠️, 👩‍💻)</h3>
+<h4><a href="#ease-writing-new-backends" aria-hidden="true" class="anchor" id="ease-writing-new-backends"></a>Ease writing new backends</h4>
+<p>One source of tedium when defining a new Rust compiler backend is implementing the intrinsics that each backend must provide. But a small change to the intrinsic system: namely, allowing intrinsics to define a <a href="https://github.com/rust-lang/rust/issues/93145">fallback MIR implementation</a>, could ease that burden. Reach out to <a href="https://github.com/scottmcm">scottmcm</a> if you are interested in helping out here.</p>
+<h4><a href="#cranelift" aria-hidden="true" class="anchor" id="cranelift"></a>Cranelift</h4>
+<p>The <a href="https://github.com/bytecodealliance/wasmtime/tree/main/cranelift">Cranelift Code Generator</a> is getting a lot of attention from various parties. rustc has a <a href="https://github.com/bjorn3/rustc_codegen_cranelift">Cranelift backend</a>. If you are interested in helping out with it, reach out to <a href="https://github.com/bjorn3">bjorn3</a>.</p>
+<h4><a href="#gcc-backend" aria-hidden="true" class="anchor" id="gcc-backend"></a>GCC backend</h4>
+<p>In addition to the LLVM and Cranelift backends, there is also a new backend under development that uses <code>libgccjit</code> from GCC (which, as many have clarified, is usable for ahead-of-time as well as just-in-time compilation). This backend enables Rust to target more platforms that are not supported by LLVM.</p>
+<p>If you are interested in helping out with this project, reach out to <a href="https://github.com/antoyo">antoyo</a> and <a href="https://github.com/bjorn3">bjorn3</a>.</p>
+<h3><a href="#diagnostics-aspirations-" aria-hidden="true" class="anchor" id="diagnostics-aspirations-"></a>Diagnostics Aspirations (👩‍💻)</h3>
+<p>The Rust compiler has pretty good diagnotics. But the good news is, there's a <a href="https://en.wikipedia.org/wiki/Full_employment_theorem">full employment theorem</a> for diagnostics engineers which is supported by the 1,500+ <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AA-diagnostics">open diagnostics issues</a> we have.</p>
+<p>Diagnostics improvements are an <em>excellent</em> first step for learning about how to contribute to the Rust compiler. If you're interested in helping out but don't have any idea where to start, fixing diagnostic bugs is a great jumping off point, and you can reach out to <a href="https://github.com/estebank">estebank</a> to find out more about how to help.</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>Reading over this list, the number of items on it seems quite daunting! We believe these initiatives will provide the highest impact to the Rust community by helping to fulfill Rust's promise, delighting Rust developers and improving our contributor workflows and aligns well with the results of the <a href="https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html">2021 Rust Survey</a>.</p>
+<p>While we think we will be able to make signficant progress on these initiatives this year, project estimation is a difficult and inexact science, especially for open source projects. What we will achieve is ultimately a result of who decides to contribute. Our aspirational goals are currently just that: aspirations.</p>
+<p>This is where you all, the Rust community (including <em>future members</em> of that community) come into the picture. Each item has one or two people listed with it; if you're feeling inspired, please do contact us!</p>
+<h2><a href="#faq" aria-hidden="true" class="anchor" id="faq"></a>FAQ</h2>
+<h4><a href="#how-can-i-learn-about-progress-on-all-this-stuff-will-we-see-another-post-like-this-soon" aria-hidden="true" class="anchor" id="how-can-i-learn-about-progress-on-all-this-stuff-will-we-see-another-post-like-this-soon"></a>How can I learn about progress on all this stuff? Will we see another post like this soon?</h4>
+<p>The Rust project constantly  experiments with different ways to track progress on its on-going initiatives. We do not yet have a single place that summarizes the status of everything, though there is some effort towards making better use of Github Projects for this; see e.g. what the lang team is doing with its <a href="https://github.com/orgs/rust-lang/projects/16">initiatives</a>.</p>
+<p>The compiler team leadership plans to put out a post in June summarizing the progress so far on the items listed here, and another post in November with a retrospective on how the year went.</p>
+<h4><a href="#i-did-not-see-any-mention-of-monadic-burritos-or-other-non-rust-language-feature-why-is-that-not-part-of-your-plan" aria-hidden="true" class="anchor" id="i-did-not-see-any-mention-of-monadic-burritos-or-other-non-rust-language-feature-why-is-that-not-part-of-your-plan"></a>I did not see any mention of monadic burritos (or other non-Rust language feature); why is that not part of your plan?</h4>
+<p>The scope of this doc is largely restricted to Compiler Team issues. The Language Team is planning to write more about their initiatives for this year and beyond in another post. Stay tuned for that!</p>
+<h4><a href="#what-do-i-do-if-im-interested-in-learning-more-about-a-specific-item-on-this-list" aria-hidden="true" class="anchor" id="what-do-i-do-if-im-interested-in-learning-more-about-a-specific-item-on-this-list"></a>What do I do if I'm interested in learning more about a specific item on this list?</h4>
+<p>Each item in this list has one or more owners listed with it. The Rust Compiler team largely communicates via the <a href="https://rust-lang.zulipchat.com/">Zulip</a> chat platform.</p>
+<p>So: set up a Zulip account, sign into Zulip, and join the <a href="https://rust-lang.zulipchat.com/#narrow/stream/122652-new-members/topic/compiler.202022">#<strong>new members&gt;compiler 2022</strong></a> topic. Tell the group which item you're interested in, and also mention the owners listed with that topic so that they know to join you in that conversation channel. We will help you get started from there.</p>
+<h4><a href="#what-do-i-do-if-im-interested-in-compiler-development-but-have-no-experience-in-compilers" aria-hidden="true" class="anchor" id="what-do-i-do-if-im-interested-in-compiler-development-but-have-no-experience-in-compilers"></a>What do I do if I'm interested in compiler development but have no experience in compilers?</h4>
+<p>This is not a problem! Many members of our community learned about compilers by working on rustc, and we encourage others to do so as well. You can start by reading the <a href="https://rustc-dev-guide.rust-lang.org/">Rustc Dev Guide</a> and by joining us on <a href="https://rust-lang.zulipchat.com/">Zulip</a>. You may also benefit from watching the RustConf 2021 presentation on <a href="https://www.youtube.com/watch?v=vCODCbUSA_w">Contributing to the Compiler</a> by <a href="https://github.com/estebank">estebank</a>.</p>
+<p>In addition, there are areas in this project where people without compiler expertise can have impact. For example, as mentioned in the <a href="#Performance-Dashboard">Performance Dashboard</a> section, some of our internal tools could use some web front-end work.</p>
+<h4><a href="#how-can-i-contact-an-items-owners-or-sponsor-their-work-on-rust" aria-hidden="true" class="anchor" id="how-can-i-contact-an-items-owners-or-sponsor-their-work-on-rust"></a>How can I contact an item's owners or sponsor their work on Rust?</h4>
+<p>This table lists the item owners mentioned above, their <a href="https://rust-lang.zulipchat.com/">Zulip</a> username and if they are accepting sponsorships to help them work on Rust:</p>
+<table>
+<thead>
+<tr>
+<th>Owner</th>
+<th>Zulip Username</th>
+<th>Accepting sponsorships?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/Aaron1011">Aaron Hill</a></td>
+<td><code>@Aaron Hill</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://github.com/antoyo">antoyo</a></td>
+<td><code>@antoyo</code></td>
+<td>Yes: <a href="https://github.com/sponsors/antoyo">GitHub Sponsors</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/apiraino">apiraino</a></td>
+<td><code>@apiraino</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://github.com/bjorn3">bjorn3</a></td>
+<td><code>@bjorn3</code></td>
+<td>Yes: <a href="https://liberapay.com/bjorn3">Liberapay</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/cjgillot">cjgillot</a></td>
+<td><code>@cjgillot</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://github.com/davidtwco">davidtwco</a></td>
+<td><code>@davidtwco</code></td>
+<td>No: works on Rust at Huawei R&amp;D UK</td>
+</tr>
+<tr>
+<td><a href="https://github.com/estebank">estebank</a></td>
+<td><code>@Esteban Küber</code></td>
+<td>No: works on Rust at Amazon Web Services</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jackh726">jackh726</a></td>
+<td><code>@Jack Huey</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jswrenn">jswrenn</a></td>
+<td><code>@Jack Wrenn</code></td>
+<td>No: works on Rust at Amazon Web Services</td>
+</tr>
+<tr>
+<td><a href="https://github.com/lcnr">lcnr</a></td>
+<td><code>@lcnr</code></td>
+<td>Yes: <a href="https://lcnr.de/funding/">https://lcnr.de/funding/</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/lqd">lqd</a></td>
+<td><code>@lqd</code></td>
+<td>No: sponsored by the Internet Security Research Group</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Mark-Simulacrum">Mark-Simulacrum</a></td>
+<td><code>@simulacrum</code></td>
+<td>Yes, <a href="https://github.com/sponsors/Mark-Simulacrum">GitHub Sponsors</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/michaelwoerister">michaelwoerister</a></td>
+<td><code>@mw</code></td>
+<td>No: works on Rust at Microsoft</td>
+</tr>
+<tr>
+<td><a href="https://github.com/nikomatsakis">nikomatsakis</a></td>
+<td><code>@nikomatsakis</code></td>
+<td>No: works on Rust at Amazon Web Services</td>
+</tr>
+<tr>
+<td><a href="https://github.com/nnethercote">nnethercote</a></td>
+<td><code>@nnethercote</code></td>
+<td>No: works on Rust at Futurewei</td>
+</tr>
+<tr>
+<td><a href="https://github.com/oli-obk">oli-obk</a></td>
+<td><code>@oli</code></td>
+<td>No: works on Rust at Amazon Web Services</td>
+</tr>
+<tr>
+<td><a href="https://github.com/pnkfelix">pnkfelix</a></td>
+<td><code>@pnkfelix</code></td>
+<td>No: works on Rust at Amazon Web Services</td>
+</tr>
+<tr>
+<td><a href="https://github.com/rylev">rylev</a></td>
+<td><code>@rylev</code></td>
+<td>No: works on Rust at Microsoft</td>
+</tr>
+<tr>
+<td><a href="https://github.com/scottmcm">scottmcm</a></td>
+<td><code>@scottmcm</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://github.com/tmandry">tmandry</a></td>
+<td><code>@tmandry</code></td>
+<td>No: works on Rust at Google</td>
+</tr>
+<tr>
+<td><a href="https://github.com/wesleywiser">wesleywiser</a></td>
+<td><code>@Wesley Wiser</code></td>
+<td>No: works on Rust at Microsoft</td>
+</tr>
+<tr>
+<td><a href="https://github.com/xldenis">xldenis</a></td>
+<td><code>@Xavier Denis</code></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
