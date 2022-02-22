@@ -374,7 +374,7 @@ The compiler team leadership plans to put out a post in June summarizing the pro
 
 #### I did not see any mention of monadic burritos (or other non-Rust language feature); why is that not part of your plan?
 
-The scope of this doc is largely restricted to Compiler Team issues. Language design work is done by the Language Team. You can reach out to them about their initiatives for this year and beyond.
+The scope of this doc is largely restricted to Compiler Team issues. The Language Team is planning to write more about their initiatives for this year and beyond in another post. Stay tuned for that!
 
 #### What do I do if I'm interested in learning more about a specific item on this list?
 
