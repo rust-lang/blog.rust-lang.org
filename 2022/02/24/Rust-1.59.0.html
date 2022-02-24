@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.59.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.59.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.59.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.59.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.59.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 24, 2022 &middot; The Rust Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team has published a new version of Rust, 1.59.0. Rust is a programming
+language that is empowering everyone to build reliable and efficient software.</p>
+<hr />
+<p>Today's release falls on the day in which the world's attention is captured by
+the sudden invasion of Ukraine by Putin's forces. Before going into the details
+of the new Rust release, we'd like to state that we stand in solidarity with the
+people of Ukraine and express our support for all people affected by this
+conflict.</p>
+<hr />
+<p>If you have a previous version of Rust installed via rustup, you can get 1.59.0
+with:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a>
+from the appropriate page on our website, and check out the
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1590-2022-02-24">detailed release notes for 1.59.0</a> on GitHub.</p>
+<h2><a href="#whats-in-1590-stable" aria-hidden="true" class="anchor" id="whats-in-1590-stable"></a>What's in 1.59.0 stable</h2>
+<h3><a href="#inline-assembly" aria-hidden="true" class="anchor" id="inline-assembly"></a>Inline assembly</h3>
+<p>The Rust language now supports inline assembly. This enables many applications
+that need very low-level control over their execution, or access to
+specialized machine instructions.</p>
+<p>When compiling for x86-64 targets, for instance, you can now write:</p>
+<pre><code class="language-rust">use std::arch::asm;
+
+// Multiply x by 6 using shifts and adds
+let mut x: u64 = 4;
+unsafe {
+    asm!(
+        &quot;mov {tmp}, {x}&quot;,
+        &quot;shl {tmp}, 1&quot;,
+        &quot;shl {x}, 2&quot;,
+        &quot;add {x}, {tmp}&quot;,
+        x = inout(reg) x,
+        tmp = out(reg) _,
+    );
+}
+assert_eq!(x, 4 * 6);
+</code></pre>
+<p>The format string syntax used to name registers in the <code>asm!</code> and <code>global_asm!</code>
+macros is the same used in Rust <a href="https://doc.rust-lang.org/stable/std/fmt/">format strings</a>, so it should feel quite familiar
+to Rust programmers.</p>
+<p>The assembly language and instructions available with inline assembly vary
+according to the target architecture. Today, the stable Rust compiler supports
+inline assembly on the following architectures:</p>
+<ul>
+<li>x86 and x86-64</li>
+<li>ARM</li>
+<li>AArch64</li>
+<li>RISC-V</li>
+</ul>
+<p>You can see more examples of inline assembly in <a href="https://doc.rust-lang.org/nightly/rust-by-example/unsafe/asm.html">Rust By Example</a>,
+and find more detailed documentation in the <a href="https://doc.rust-lang.org/nightly/reference/inline-assembly.html">reference</a>.</p>
+<h3><a href="#destructuring-assignments" aria-hidden="true" class="anchor" id="destructuring-assignments"></a>Destructuring assignments</h3>
+<p>You can now use tuple, slice, and struct patterns as the left-hand side of an
+assignment.</p>
+<pre><code class="language-rust">let (a, b, c, d, e);
+
+(a, b) = (1, 2);
+[c, .., d, _] = [1, 2, 3, 4, 5];
+Struct { e, .. } = Struct { e: 5, f: 3 };
+
+assert_eq!([1, 2, 1, 4, 5], [a, b, c, d, e]);
+</code></pre>
+<p>This makes assignment more consistent with <code>let</code> bindings, which have long
+supported the same thing. Note that destructuring assignments with operators
+such as <code>+=</code> are not allowed.</p>
+<h3><a href="#const-generics-defaults-and-interleaving" aria-hidden="true" class="anchor" id="const-generics-defaults-and-interleaving"></a>Const generics defaults and interleaving</h3>
+<p>Generic types can now specify default values for their const generics. For
+example, you can now write the following:</p>
+<pre><code class="language-rust">struct ArrayStorage&lt;T, const N: usize = 2&gt; {
+    arr: [T; N],
+}
+
+impl&lt;T&gt; ArrayStorage&lt;T&gt; {
+    fn new(a: T, b: T) -&gt; ArrayStorage&lt;T&gt; {
+        ArrayStorage {
+            arr: [a, b],
+        }
+    }
+}
+</code></pre>
+<p>Previously, type parameters were required to come before all const parameters.
+That restriction has been relaxed and you can now interleave them.</p>
+<pre><code class="language-rust">fn cartesian_product&lt;
+    T, const N: usize,
+    U, const M: usize,
+    V, F
+&gt;(a: [T; N], b: [U; M]) -&gt; [[V; N]; M]
+where
+    F: FnMut(&amp;T, &amp;U) -&gt; V
+{
+    // ...
+}
+</code></pre>
+<h3><a href="#future-incompatibility-warnings" aria-hidden="true" class="anchor" id="future-incompatibility-warnings"></a>Future incompatibility warnings</h3>
+<p>Sometimes bugs in the Rust compiler cause it to accept code that should not
+have been accepted. An example of this was <a href="https://github.com/rust-lang/rust/issues/46043">borrows of packed struct
+fields</a> being allowed in safe code.</p>
+<p>While this happens very rarely, it can be quite disruptive when a crate used by
+your project has code that will no longer be allowed. In fact, you might not
+notice until your project inexplicably stops building!</p>
+<p>Cargo now shows you warnings when a dependency will be rejected by a future
+version of Rust. After running <code>cargo build</code> or <code>cargo check</code>, you might see:</p>
+<pre><code>warning: the following packages contain code that will be rejected by a future version of Rust: old_dep v0.1.0
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+</code></pre>
+<p>You can run the <code>cargo report</code> command mentioned in the warning to see a full
+report of the code that will be rejected. This gives you time to upgrade your
+dependency before it breaks your build.</p>
+<h3><a href="#creating-stripped-binaries" aria-hidden="true" class="anchor" id="creating-stripped-binaries"></a>Creating stripped binaries</h3>
+<p>It's often useful to strip unnecessary information like debuginfo from binaries
+you distribute, making them smaller.</p>
+<p>While it has always been possible to do this manually after the binary is
+created, cargo and rustc now support stripping when the binary is linked. To
+enable this, add the following to your <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[profile.release]
+strip = &quot;debuginfo&quot;
+</code></pre>
+<p>This causes debuginfo to be stripped from release binaries. You can also supply
+<code>&quot;symbols&quot;</code> or just <code>true</code> to strip all symbol information where supported.</p>
+<p>The standard library typically ships with debug symbols and line-level
+debuginfo, so Rust binaries built without debug symbols enabled still include
+the debug information from the standard library by default. Using the <code>strip</code>
+option allows you to remove this extra information, producing smaller Rust
+binaries.</p>
+<p>See <a href="https://doc.rust-lang.org/beta/cargo/reference/profiles.html#strip">Cargo's documentation</a> for more details.</p>
+<h3><a href="#incremental-compilation-off-by-default" aria-hidden="true" class="anchor" id="incremental-compilation-off-by-default"></a>Incremental compilation off by default</h3>
+<p>The 1.59.0 release disables incremental by default (unless explicitly asked for
+by via an environment variable: <code>RUSTC_FORCE_INCREMENTAL=1</code>). This mitigates
+the effects of a known bug, <a href="https://github.com/rust-lang/rust/issues/94124">#94124</a>, which can cause deserialization errors (and panics) during compilation
+with incremental compilation turned on.</p>
+<p>The specific fix for <a href="https://github.com/rust-lang/rust/issues/94124">#94124</a> has landed and is currently in the 1.60 beta,
+which will ship in six weeks. We are not presently aware of other issues that
+would encourage a decision to disable incremental in 1.60 stable, and if none
+arise it is likely that 1.60 stable will re-enable incremental compilation
+again. Incremental compilation remains on by default in the beta and nightly
+channels.</p>
+<p>As always, we encourage users to test on the nightly and beta channels and
+report issues you find: particularly for incremental bugs, this is the best way
+to ensure the Rust team can judge whether there is breakage and the number of
+users it affects.</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<p>The following methods and trait implementations are now stabilized:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/thread/fn.available_parallelism.html"><code>std::thread::available_parallelism</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.copied"><code>Result::copied</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.cloned"><code>Result::cloned</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/arch/macro.asm.html"><code>arch::asm!</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/arch/macro.global_asm.html"><code>arch::global_asm!</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ops/enum.ControlFlow.html#method.is_break"><code>ops::ControlFlow::is_break</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ops/enum.ControlFlow.html#method.is_continue"><code>ops::ControlFlow::is_continue</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.char.html#impl-TryFrom%3Cchar%3E"><code>TryFrom&lt;char&gt; for u8</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/char/struct.TryFromCharError.html"><code>char::TryFromCharError</code></a>
+implementing <code>Clone</code>, <code>Debug</code>, <code>Display</code>, <code>PartialEq</code>, <code>Copy</code>, <code>Eq</code>, <code>Error</code></li>
+<li><a href="https://doc.rust-lang.org/stable/std/iter/fn.zip.html"><code>iter::zip</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/num/struct.NonZeroU8.html#method.is_power_of_two"><code>NonZeroU8::is_power_of_two</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/num/struct.NonZeroU16.html#method.is_power_of_two"><code>NonZeroU16::is_power_of_two</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/num/struct.NonZeroU32.html#method.is_power_of_two"><code>NonZeroU32::is_power_of_two</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/num/struct.NonZeroU64.html#method.is_power_of_two"><code>NonZeroU64::is_power_of_two</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/num/struct.NonZeroU128.html#method.is_power_of_two"><code>NonZeroU128::is_power_of_two</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/char/struct.ToLowercase.html#impl-DoubleEndedIterator"><code>DoubleEndedIterator for ToLowercase</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/char/struct.ToUppercase.html#impl-DoubleEndedIterator"><code>DoubleEndedIterator for ToUppercase</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/convert/trait.TryFrom.html#impl-TryFrom%3C%26%27_%20mut%20%5BT%5D%3E"><code>TryFrom&lt;&amp;mut [T]&gt; for [T; N]</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.Once.html#impl-UnwindSafe"><code>UnwindSafe for Once</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.Once.html#impl-RefUnwindSafe"><code>RefUnwindSafe for Once</code></a></li>
+<li><a href="https://github.com/rust-lang/stdarch/pull/1266">armv8 neon intrinsics for aarch64</a></li>
+</ul>
+<p>The following previously stable functions are now <code>const</code>:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.as_ptr"><code>mem::MaybeUninit::as_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.assume_init"><code>mem::MaybeUninit::assume_init</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.assume_init_ref"><code>mem::MaybeUninit::assume_init_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.CStr.html#method.from_bytes_with_nul_unchecked"><code>ffi::CStr::from_bytes_with_nul_unchecked</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.59.0 release. Check out what changed in
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1590-2022-02-24">Rust</a>,
+<a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-159-2022-02-24">Cargo</a>,
+and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-159">Clippy</a>.</p>
+<h3><a href="#contributors-to-1590" aria-hidden="true" class="anchor" id="contributors-to-1590"></a>Contributors to 1.59.0</h3>
+<p>Many people came together to create Rust 1.59.0.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.59.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
