@@ -158,7 +158,7 @@ That restriction has been relaxed and you can now interleave them.</p>
     T, const N: usize,
     U, const M: usize,
     V, F
-&gt;(a: [T; N], b: [U; M]) -&gt; [[V; N]; M]
+&gt;(a: [T; N], b: [U; M], f: F) -&gt; [[V; N]; M]
 where
     F: FnMut(&amp;T, &amp;U) -&gt; V
 {
