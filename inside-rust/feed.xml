@@ -10,8 +10,43 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-03-08T14:04:20+00:00</updated>
+    <updated>2022-03-09T21:45:31+00:00</updated>
 
+    
+    <entry>
+        <title>Lang team March update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/03/09/lang-team-mar-update.html" type="text/html" title="Lang team March update" />
+        <published>2022-03-09T00:00:00+00:00</published>
+        <updated>2022-03-09T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/03/09/lang-team-mar-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/03/09/lang-team-mar-update.html">&lt;p&gt;wo weeks ago, the lang team held its March planning meeting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2022-03-02-planning-meeting.md&quot;&gt;minutes&lt;/a&gt;). We hold these meetings on the first Wednesday of every month and we use them to schedule &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/meetings/design.html&quot;&gt;design meetings&lt;/a&gt; for the remainder of the month.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
+&lt;p&gt;We have planned the following design meetings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;March 9: Draft lang team roadmap (this already happened! &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2022-03-09-lang-roadmap.md&quot;&gt;minutes&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;March 16: &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/meetings/backlog-bonanza.html&quot;&gt;Backlog bonanza&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;March 23: Return Position Impl Trait in Dyn Trait (RPITIDT) &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/144&quot;&gt;lang-team#144&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;March 30: Lint policy &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/132&quot;&gt;lang-team#132&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#design-meeting-expectations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-meeting-expectations&quot;&gt;&lt;/a&gt;Design meeting expectations&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The document for the meeting must be prepared by the triage meeting on Tuesday and posted to the tracking issue.
+&lt;ul&gt;
+&lt;li&gt;If it is not sent out by then, the meeting will be canceled. This gives folks 24 hour notice.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
+&lt;ul&gt;
+&lt;li&gt;However, there is no rule &lt;strong&gt;against&lt;/strong&gt; reading the document beforehand and providing feedback or advice on how to improve it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Rust Compiler Ambitions for 2022</title>
@@ -790,26 +825,6 @@ team members, and the new moderators.&lt;/p&gt;
 
         <author>
             <name>Ryan Levick and Mara Bos</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>1.57.0 pre-release testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2021/11/30/1.57.0-prerelease.html" type="text/html" title="1.57.0 pre-release testing" />
-        <published>2021-11-30T00:00:00+00:00</published>
-        <updated>2021-11-30T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2021/11/30/1.57.0-prerelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2021/11/30/1.57.0-prerelease.html">&lt;p&gt;The 1.57.0 pre-release is ready for testing. The release is scheduled for this
-Thursday, December 2nd. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1570-2021-12-02&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2021-11-30/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2021-11-30/index.html&lt;/a&gt;. You
-can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-57-0-prerelease-testing/15690&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Mark Rousskov</name>
         </author>
     </entry>
     
