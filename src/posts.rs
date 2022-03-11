@@ -77,7 +77,8 @@ impl Post {
             ..ComrakOptions::default()
         };
 
-        let contents = comrak::markdown_to_html(&contents[end_of_yaml + 5..], &options);
+        // Content starts after "---\n" (we don't assume an extra newline)
+        let contents = comrak::markdown_to_html(&contents[end_of_yaml + 4..], &options);
 
         // finally, the url.
         let mut url = PathBuf::from(&*filename);
