@@ -20,7 +20,7 @@ Rumbul, the CEO of the Rust Foundation, will give some insight into the Foundati
 mission. Niko Matsakis and Josh Triplett will go over the lang team's roadmap
 of the priorities for Rust 2024.
 
-- (5 min) Opening remarks 👋 ([Rebecca Rumbul])
+- (5 min) Opening remarks 👋 ([nikomatsakis])
 - (15 min) Planning for Rust 2024 ([nikomatsakis], [joshtriplett])
   - Now that Rust 2021 is behind us, it's time to start thinking about Rust
     2024! The lang team has been working on a roadmap that proposes various
