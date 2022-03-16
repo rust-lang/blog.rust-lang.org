@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-03-11T18:14:16+00:00</updated>
+    <updated>2022-03-16T09:08:36+00:00</updated>
 
     
     <entry>
@@ -45,7 +45,7 @@ to perform denial of service attacks by sending specially crafted regexes to
 services accepting user-controlled, untrusted regexes.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#affected-versions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;affected-versions&quot;&gt;&lt;/a&gt;Affected versions&lt;/h2&gt;
 &lt;p&gt;All versions of the &lt;code&gt;regex&lt;/code&gt; crate before or equal to 1.5.4 are affected by this
-issue. The fix is include starting from  &lt;code&gt;regex&lt;/code&gt; 1.5.5.&lt;/p&gt;
+issue. The fix is included starting from  &lt;code&gt;regex&lt;/code&gt; 1.5.5.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#mitigations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;mitigations&quot;&gt;&lt;/a&gt;Mitigations&lt;/h2&gt;
 &lt;p&gt;We recommend everyone accepting user-controlled regexes to upgrade immediately
 to the latest version of the &lt;code&gt;regex&lt;/code&gt; crate.&lt;/p&gt;
