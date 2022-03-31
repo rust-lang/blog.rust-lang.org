@@ -47,7 +47,7 @@ features may be accepted after being approved by the Cargo Team.
 Cargo is a large project with many moving pieces and different use cases. The
 fact that it works reliably and that it is intuitive has been a significant
 multiplier for Rust's success. But it also means that reviewing changes needs
-to be done very carefully. It is easy for changes to on one hand break on some
+to be done very carefully. It is easy for changes to break some
 obscure configuration, or be a targeted fix that deepens our technical debt
 making it even harder to understand the whole of Cargo. We appreciate people's
 patience as we move forward.
