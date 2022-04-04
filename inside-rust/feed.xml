@@ -10,8 +10,30 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-04-01T00:18:40+00:00</updated>
+    <updated>2022-04-04T14:45:40+00:00</updated>
 
+    
+    <entry>
+        <title>1.60.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/04/1.60.0-prerelease.html" type="text/html" title="1.60.0 pre-release testing" />
+        <published>2022-04-04T00:00:00+00:00</published>
+        <updated>2022-04-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/04/04/1.60.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/04/1.60.0-prerelease.html">&lt;p&gt;The 1.60.0 pre-release is ready for testing. The release is scheduled for this
+Thursday, April 7th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1600-2022-04-07&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2022-04-04/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2022-04-04/index.html&lt;/a&gt;. You
+can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-60-0-prerelease-testing/&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The release team is also thinking about changes to our pre-release process:
+we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Pietro Albini</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Changes at the Cargo Team</title>
@@ -687,115 +709,6 @@ with different themes. You can join any breakout room you like and hangout.&lt;/
 
         <author>
             <name>Rust CTCFT Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Async Rust in 2022</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/02/03/async-in-2022.html" type="text/html" title="Async Rust in 2022" />
-        <published>2022-02-03T00:00:00+00:00</published>
-        <updated>2022-02-03T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/02/03/async-in-2022.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/02/03/async-in-2022.html">&lt;p&gt;Almost a year ago, the Async Working Group&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/03/18/async-vision-doc.html&quot;&gt;embarked on a collaborative effort&lt;/a&gt; to write a &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/vision.html&quot;&gt;shared async vision document&lt;/a&gt;. As we enter 2022, we wanted to give an update on the results from that process along with the progress we are making towards realizing that vision.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#writing-an-async-issue-aggregator-in-rust-2024&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;writing-an-async-issue-aggregator-in-rust-2024&quot;&gt;&lt;/a&gt;Writing an async issue aggregator in Rust 2024&lt;/h2&gt;
-&lt;p&gt;To set the scene, imagine it&#x27;s Rust 2024, and you&#x27;ve decided to build your first project in Rust. You&#x27;re working on a project that uses GitHub and you&#x27;d like a tool that will walk over all the issues on your repository and do some automatic triage. You decide to use async Rust for this. You pull out the Rust book and thumb over to the Async I/O section. In there, it shows you the basic structure of an async Rust application. Like any Rust program, it begins with &lt;code&gt;main&lt;/code&gt;, but this time with an &lt;code&gt;async fn&lt;/code&gt;...&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;async fn main() {
-    ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Thumbing over to crates.io, you search for &amp;quot;github&amp;quot; and find that there is a nifty crate &lt;code&gt;crabbycat&lt;/code&gt; for navigating github issues. You import it and sit down to work. The first thing you need to do is to to iterate over all the issues:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;async fn main() {
-    for await? issue in crabbycat::issues(&amp;quot;https://github.com/rust-lang/rust&amp;quot;) {
-        if meets_criteria(&amp;amp;issue) {
-            println!(&amp;quot;{issue:?}&amp;quot;);
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Your crate seems to be working well and you happily tweet about it. Soon enough you find yourself with some users and one of them opens a PR to extend it to to support GitLab. To do this, they introduce a trait that allows you to write code that is generic over the issue provider. This trait has one method, &lt;code&gt;issues&lt;/code&gt; which returns an iterator (in this case, an async iterator):&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait IssueProvider {
-    async fn issues(&amp;amp;mut self, url: &amp;amp;str)
-        -&amp;gt; impl AsyncIterator&amp;lt;Item &#x3D; Result&amp;lt;Issue, Err&amp;gt;&amp;gt;;
-}
-
-#[derive(Debug)]
-struct Issue {
-    number: usize,
-    header: String,
-    assignee: String,
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now they are able to refactor the main loop into a function that is generic over the &lt;code&gt;IssueProvider&lt;/code&gt;. They decide to use a &lt;code&gt;dyn&lt;/code&gt; trait to avoid monomorphizing many times.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn process_issues(provider: &amp;amp;mut dyn IssueProvider) {
-    for await? issue in provider.issues(&amp;quot;https://github.com/rust-lang/rust&amp;quot;) {
-        if meets_criteria(&amp;amp;issue) {
-            println!(&amp;quot;{issue:?}&amp;quot;);
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You happily hit merge on the PR and everything works great. Later on, somebody wants to port your system to run on the Chartreuse operating system. Chartreuse is based on an actor model and uses its own custom async runtime -- but luckily for you, you don&#x27;t care. All your code is seamlessly able to switch the underlying runtime implementation over to the Chartreuse async runtime.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#meanwhile-in-2022&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;meanwhile-in-2022&quot;&gt;&lt;/a&gt;Meanwhile, in 2022...&lt;/h2&gt;
-&lt;p&gt;Of course, the year is still 2022, and the vision we just painted is not reality -- at least not yet. There is a lot of work to do yet in terms of RFCing and implementing the features that will let us write the code we talked about:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Writing the &lt;code&gt;IssueProvider&lt;/code&gt; trait requires async fns in traits.&lt;/li&gt;
-&lt;li&gt;Taking an &lt;code&gt;&amp;amp;mut dyn IssueProvider&lt;/code&gt; argument requires supporting dynamic dispatch in traits that have async functions
-&lt;ul&gt;
-&lt;li&gt;and returning &lt;code&gt;impl AsyncIterator&lt;/code&gt;!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;The code used a &lt;code&gt;for await?&lt;/code&gt; loop, which permitted easy iteration over iterators in async code.&lt;/li&gt;
-&lt;li&gt;The trait for async iteration in the standard library (&lt;code&gt;Stream&lt;/code&gt;) has a different name and is not stabilized; its definition is likely to change, too, once we have strong support for async fns in traits.&lt;/li&gt;
-&lt;li&gt;Writing &lt;code&gt;async fn main&lt;/code&gt; and changing to an alternate runtime requires portability across runtimes.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;As this work proceeds we can expect plenty of changes in the details along the way, and we might decide some pieces aren&#x27;t worth it; if nothing else, the syntax for generators is a hotly contested topic. &lt;strong&gt;What won&#x27;t change is the the overall vision:&lt;/strong&gt; that writing async Rust code should be as easy as writing sync code, apart from the occasional &lt;code&gt;async&lt;/code&gt; and &lt;code&gt;await&lt;/code&gt; keyword.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#how-we-get-there&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-we-get-there&quot;&gt;&lt;/a&gt;How we get there&lt;/h2&gt;
-&lt;p&gt;We&#x27;ve organized the Async working group into a number of distinct initiatives, each of which is pursuing one part of the vision. What follows is a list of the currently active groups and some of the things they&#x27;ve done over the last few months since they got up and running.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#async-fundamentals-initiative&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;async-fundamentals-initiative&quot;&gt;&lt;/a&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/async-fundamentals-initiative/&quot;&gt;Async fundamentals&lt;/a&gt; initiative&lt;/h3&gt;
-&lt;p&gt;Led by &lt;a href&#x3D;&quot;https://github.com/tmandry&quot;&gt;tmandry&lt;/a&gt;, currently focused on supporting &lt;code&gt;async fn&lt;/code&gt; in traits.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;We have been coordinating and supporting the &lt;a href&#x3D;&quot;https://rust-lang.github.io/generic-associated-types-initiative/&quot;&gt;generic associated types&lt;/a&gt; and &lt;a href&#x3D;&quot;https://rust-lang.github.io/impl-trait-initiative/&quot;&gt;impl trait&lt;/a&gt; initiatives.&lt;/li&gt;
-&lt;li&gt;We have also landed the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html&quot;&gt;static async fn in traits&lt;/a&gt; RFC and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3193&quot;&gt;drafted an RFC for return position impl trait&lt;/a&gt; (which still needs a few tweaks before it&#x27;s ready to land).&lt;/li&gt;
-&lt;li&gt;We&#x27;ve been working on a design for dynamic dispatch, the most recent iteration of which is described in &lt;a href&#x3D;&quot;http://smallcultfollowing.com/babysteps//blog/2022/01/07/dyn-async-traits-part-7/&quot;&gt;this blog post&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;We&#x27;ve also been spinning off efforts, such as the proposal for &lt;a href&#x3D;&quot;https://tmandry.gitlab.io/blog/posts/2021-12-21-context-capabilities/&quot;&gt;context and capabilities&lt;/a&gt; that tmandry blogged about.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#async-iteration-initiative&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;async-iteration-initiative&quot;&gt;&lt;/a&gt;&lt;a href&#x3D;&quot;https://estebank.github.io/rust-iterator-item-syntax.html&quot;&gt;Async iteration&lt;/a&gt; initiative&lt;/h3&gt;
-&lt;p&gt;Led by &lt;a href&#x3D;&quot;https://github.com/estebank&quot;&gt;estebank&lt;/a&gt;, exploring generators and async generators.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Estebank has &lt;a href&#x3D;&quot;https://estebank.github.io/rust-iterator-item-syntax.html&quot;&gt;prototyped a procedural macro for generators&lt;/a&gt; and put out a call for discussion about the syntax and other details.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#portability-initiative&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;portability-initiative&quot;&gt;&lt;/a&gt;&lt;a href&#x3D;&quot;https://www.ncameron.org/blog/portable-and-interoperable-async-rust/&quot;&gt;Portability&lt;/a&gt; initiative&lt;/h3&gt;
-&lt;p&gt;Led by &lt;a href&#x3D;&quot;https://github.com/nrc&quot;&gt;nrc&lt;/a&gt;, exploring what it takes to make code easily portable across runtimes, beginning with standardized traits for things like &lt;code&gt;AsyncRead&lt;/code&gt; and &lt;code&gt;AsyncWrite&lt;/code&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/nrc&quot;&gt;nrc&lt;/a&gt; posted a &lt;a href&#x3D;&quot;https://www.ncameron.org/blog/portable-and-interoperable-async-rust/&quot;&gt;blog post&lt;/a&gt; laying out a vision.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#polish-initiative&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;polish-initiative&quot;&gt;&lt;/a&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/vision/roadmap/polish.html&quot;&gt;Polish&lt;/a&gt; initiative&lt;/h3&gt;
-&lt;p&gt;Led by &lt;a href&#x3D;&quot;https://github.com/eholk&quot;&gt;eholk&lt;/a&gt;, focused on improving the existing capabilities via smaller changes that collectively make a big difference.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;We&#x27;ve got a &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/91032&quot;&gt;pending PR&lt;/a&gt; that will improve the generator&#x27;s capture analysis when variables are moved before a yield point, as well as &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/92508&quot;&gt;another PR&lt;/a&gt; that tightens temporary scopes to further avoid unnecessary generator captures.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/guswynn&quot;&gt;Gus Wynn&lt;/a&gt; made significant progress towards a &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/88865&quot;&gt;&lt;code&gt;must_not_suspend&lt;/code&gt;&lt;/a&gt; lint that catches cases where values are live across an await point that should not be.&lt;/li&gt;
-&lt;li&gt;We are starting to look at ways to make &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/design_docs/async_stack_traces.html&quot;&gt;async stack traces&lt;/a&gt; more readable and helpful.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#tooling-initiative&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;tooling-initiative&quot;&gt;&lt;/a&gt;&lt;a href&#x3D;&quot;https://nikomatsakis.github.io/wg-async/vision/deliverables/tooling.html&quot;&gt;Tooling&lt;/a&gt; initiative&lt;/h3&gt;
-&lt;p&gt;Led by &lt;a href&#x3D;&quot;https://github.com/pnkfelix&quot;&gt;pnkfelix&lt;/a&gt;, working to support folks in the async ecosystem who are building interesting tooling to support async Rust others.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Michael Woerister is exploring &lt;a href&#x3D;&quot;https://github.com/rust-lang/async-crashdump-debugging-initiative&quot;&gt;async crashdump recovery&lt;/a&gt;, offering a mechanism to recover and inspect the state of an async Rust program based on a crashdump.&lt;/li&gt;
-&lt;li&gt;Eliza Weisman and &lt;a href&#x3D;&quot;https://tokio.rs/blog/2021-12-announcing-tokio-console#thanks-to&quot;&gt;many others&lt;/a&gt; recently &lt;a href&#x3D;&quot;https://tokio.rs/blog/2021-12-announcing-tokio-console&quot;&gt;announced their 0.1 release&lt;/a&gt; of &lt;a href&#x3D;&quot;https://github.com/tokio-rs/console&quot;&gt;tokio console&lt;/a&gt;. Tokio Console is a diagnostics and debugging tool for asynchronous Rust programs. It gives you a live view onto the state of the async runtime, and can also signal warnings  when it detects suspicious behavior that might indicate a bug or performance problem.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;You can find the complete set of work that we have planned on our &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/vision/roadmap.html&quot;&gt;roadmap page&lt;/a&gt;, which also links to various deliverables we&#x27;re working toward.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#want-to-help&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;want-to-help&quot;&gt;&lt;/a&gt;Want to help?&lt;/h2&gt;
-&lt;p&gt;If you&#x27;re interested in helping out, a good place to start is the &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/vision/roadmap/polish.html#-how-to-help&quot;&gt;How to help&lt;/a&gt; section of the polish initiative page. There is also a weekly &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/triage.html&quot;&gt;polish triage meeting&lt;/a&gt; which you may want to attend.&lt;/p&gt;
-&lt;section class&#x3D;&quot;footnotes&quot;&gt;
-&lt;ol&gt;
-&lt;li id&#x3D;&quot;fn1&quot;&gt;
-&lt;p&gt;We used to be called the Async Foundations Working Group, or wg-async-foundations. wg-async is much easier to type. The &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/CHARTER.html&quot;&gt;focus&lt;/a&gt; of the working group being on the &amp;quot;foundations&amp;quot; of async, namely the language and standard library, hasn&#x27;t changed. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
-</content>
-
-        <author>
-            <name>Niko Matsakis and Tyler Mandry</name>
         </author>
     </entry>
     
