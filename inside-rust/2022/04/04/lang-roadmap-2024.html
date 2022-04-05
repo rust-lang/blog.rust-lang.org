@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust Lang Roadmap for 2024 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust Lang Roadmap for 2024 | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust Lang Roadmap for 2024 | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust Lang Roadmap for 2024" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust Lang Roadmap for 2024</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 4, 2022 &middot; Josh Triplett, Niko Matsakis
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang">The Rust Lang Team</a> 
+    </div>
+
+    <div class="post">
+      <p>Note: this blog post is a snapshot of the living roadmap at
+<a href="https://lang-team.rust-lang.org/roadmaps/roadmap-2024.html">https://lang-team.rust-lang.org/roadmaps/roadmap-2024.html</a>. Subsequent
+changes may occur in that version, but not in this blog post. Please see that
+page for the most up-to-date version.</p>
+<h1><a href="#lang-team-roadmap-2024" aria-hidden="true" class="anchor" id="lang-team-roadmap-2024"></a>Lang Team Roadmap 2024</h1>
+<p>Rust 1.0 was released in 2015. Since that time, we've seen Rust grow from a
+small language used for a handful of prominent projects into a mainstay in use
+at virtually every major tech company.</p>
+<p>As we work towards Rust 2024, it's natural to ask what's next for the language.
+This roadmap provides insight into that question by describing what we, as
+members of the lang team with input from other Rust teams, would like to
+prioritize.</p>
+<p>We have two goals with this roadmap:</p>
+<ul>
+<li>to give people a sense for what to expect in Rust over the next few years;</li>
+<li>for those who would like to contribute to Rust, to help provide &quot;starting
+points&quot; for how to get involved, and a sense for what kind of projects we are
+looking for.</li>
+</ul>
+<p>Also see the <a href="https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html">Rust Compiler Ambitions for
+2022</a>,
+for plans from the Rust Compiler team, and watch the Inside Rust blog for the
+upcoming roadmap from the Rust Library team.</p>
+<h2><a href="#rust-2024-scaling-empowerment" aria-hidden="true" class="anchor" id="rust-2024-scaling-empowerment"></a>Rust 2024: scaling empowerment</h2>
+<p>Rust's goal is to <strong>empower everyone to build reliable and efficient
+software</strong>. Success requires not only designing and implementing a great
+language with great libraries and great tools, but also maintaining a great and
+supportive community.</p>
+<p>Our focus for Rust 2024 is to <strong>scale empowerment</strong> in many different ways. As
+we grow, we face increasing challenges in how we can scale the ways in which we
+empower people to an increasing number of people. This roadmap presents three
+general themes we plan to focus on:</p>
+<ul>
+<li><strong><a href="#Theme-Flatten-the-learning-curve">Flatten the (learning) curve</a></strong>:
+scaling to new users and new use cases
+<ul>
+<li>Make Rust more accessible to new and existing users alike, and make
+solving hard problems easier.</li>
+</ul>
+</li>
+<li><strong><a href="#Theme-Help-users-help-each-other">Help Rust's users help each other</a></strong>:
+scaling the ecosystem
+<ul>
+<li>Empower library authors so they can---in turn---empower their users.</li>
+</ul>
+</li>
+<li><strong><a href="#Theme-Help-the-Rust-project-scale">Help the Rust project scale</a></strong>:
+scaling the project
+<ul>
+<li>Develop processes to scale to the needs and use cases of a growing number
+of users; evaluate and finish projects we've started.</li>
+</ul>
+</li>
+</ul>
+<p>For each theme, we'll describe our goals for Rust 2024, and give a few examples
+of the kinds of things that we're working on right now, as well as the kinds of
+things we would like to do over the next few years.</p>
+<p>This roadmap is a starting point. Our intent is to highlight those areas that
+will have the biggest impact on Rust's success. Specific examples will change
+over time, whether because they're finished or because new proposals arise. As
+2023 approaches, we will revisit these themes to see how much progress we have
+made, and whether we wish to adjust the list.</p>
+<h2><a href="#theme-flatten-the-learning-curve" aria-hidden="true" class="anchor" id="theme-flatten-the-learning-curve"></a>Theme: Flatten the (learning) curve</h2>
+<h3><a href="#the-vision" aria-hidden="true" class="anchor" id="the-vision"></a>The vision</h3>
+<p>Thanks to a consistent focus on ergonomics, Rust has become considerably easier
+to use over the last few years. Companies building large teams of Rust users
+report that the typical onboarding time for a Rust engineer is around 3-6
+months. Once folks learn Rust, they typically love it. Even so, many people
+report a sense of high &quot;cognitive overhead&quot; in using it, and &quot;learning curve&quot;
+remains the most common reason not to use Rust. The fact is that, even after
+you learn how the Rust borrow checker works, there remain a lot of &quot;small
+details&quot; that you have to get just right to get your Rust program to compile.</p>
+<p>For Rust 2024, we will identify and eliminate many of those patterns and
+idiosyncracies that one must learn to use Rust; our goal is to let you focus
+squarely on the &quot;inherent complexity&quot; of your problem domain and avoid
+&quot;accidental complexity&quot; from Rust as much as possible.</p>
+<p>Async and embedded Rust are areas of particular interest. We have made a lot of
+strides to support those areas, and they are growing rapidly. Nonetheless, Rust
+lacks many core capabilities that would be required to make working in those
+domains not only <em>possible</em> but <em>straightforward and delightful</em>. For Rust
+2024, we will close that gap.</p>
+<p>Our plan for achieving this vision is to focus on four high-level goals (in
+order from broad to precise):</p>
+<ul>
+<li><strong>More precise analyses, less rigamarole:</strong> Make the compiler better able to
+recognize when code is correct via improvements to the borrow checker, type
+inference, and so forth. Identify and eliminate &quot;boilerplate&quot; patterns like
+having to copy-and-paste the same set of where clauses everywhere.</li>
+<li><strong>Express yourself more easily:</strong> Where necessary, extend the language so you
+can express what you want your code to do more directly. In some cases this
+takes the form of syntactic sugar (such as
+<a href="https://github.com/rust-lang/rust/issues/87335">let-else</a>) but in other
+cases it may mean extending the type system to be able to describe new
+patterns (such as <a href="https://rust-lang.github.io/generic-associated-types-initiative/">generic associated
+types</a>).</li>
+<li><strong>Improve async support:</strong> Extend our async-await support beyond the current
+&quot;MVP&quot; to include features like async fns in traits, async drop, and other
+features needed to support the <a href="https://rust-lang.github.io/wg-async/vision/roadmap.html">async vision
+document</a> roadmap.</li>
+<li><strong>Make <code>dyn Trait</code> more usable:</strong> Broaden the set of traits that can be used
+with <code>dyn</code> and make working with <code>dyn</code> closer to working with generics.</li>
+</ul>
+<h3><a href="#how-you-can-help" aria-hidden="true" class="anchor" id="how-you-can-help"></a>How you can help</h3>
+<p>Join the rust-lang Zulip, and either start a thread in the
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/318377-t-lang.2Froadmap-2024"><code>#t-lang/roadmap-2024</code></a>
+stream, or send a private message to nikomatsakis if you'd like to discuss
+privately first.</p>
+<h3><a href="#the-plan-so-far" aria-hidden="true" class="anchor" id="the-plan-so-far"></a>The plan (so far)</h3>
+<p>Current active <a href="https://lang-team.rust-lang.org/initiatives.html">initiatives</a>
+in each category include:</p>
+<ul>
+<li><strong>More precise analyses, less rigamarole:</strong>
+<ul>
+<li>Non-lexical lifetimes were a big stride forward, but the <a href="https://github.com/rust-lang/polonius/">polonius
+project</a> promises to improve the
+borrow check's precision even more.</li>
+<li><a href="https://github.com/rust-lang/rust/issues/44491">Implied bounds</a> promise
+to remove a lot of copy-and-pasting of where clauses.</li>
+</ul>
+</li>
+<li><strong>Express yourself more easily:</strong>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/issues/87335">let-else</a> directly
+express the &quot;match this variant or <code>return</code>/<code>continue</code>/etc&quot; pattern.</li>
+<li><a href="https://github.com/rust-lang/rust/issues/53667">let-chains</a> allow you to
+express iterative refinement with a series of pattern-matches and
+conditionals</li>
+<li><a href="https://rust-lang.github.io/impl-trait-initiative/explainer/tait.html">&quot;Type alias&quot; impl
+Trait</a>
+permits APIs to name previously unnameable types. This is part of a
+larger effort to <a href="https://rust-lang.github.io/impl-trait-initiative/">expand impl
+Trait</a>.</li>
+<li><a href="https://rust-lang.github.io/generic-associated-types-initiative/">Generic associated
+types</a>
+allow traits to express a number of patterns (like &quot;iterable&quot;) that the
+current trait system cannot handle. They are a particularly important
+foundational piece for async programming.</li>
+</ul>
+</li>
+<li><strong>Improve async support:</strong>
+<ul>
+<li>We are working to support <a href="https://rust-lang.github.io/async-fundamentals-initiative/explainer/async_fn_in_traits.html">async fns in
+traits</a>,
+including both static dispatch and dyn dispatch.</li>
+</ul>
+</li>
+<li><strong>Make <code>dyn Trait</code> more usable:</strong>
+<ul>
+<li><a href="https://github.com/rust-lang/dyn-upcasting-coercion-initiative/issues/6">Dyn upcasting coercion
+initiative</a>:
+Allow upcasting <code>dyn trait</code> objects from <code>&amp;dyn Subtrait</code> to <code>&amp;dyn Supertrait</code>.</li>
+<li>The <a href="https://rust-lang.github.io/async-fundamentals-initiative/explainer/async_fn_in_traits.html">async fn in
+traits</a>
+initiative is also extending dyn trait to support async fns and &quot;return
+position impl Trait&quot;.</li>
+</ul>
+</li>
+</ul>
+<h3><a href="#looking-forward" aria-hidden="true" class="anchor" id="looking-forward"></a>Looking forward</h3>
+<p>Looking beyond the initiatives that are in progress, there's a lot of room for
+more improvement. Here are some other ideas we'd like to see. <strong>For many of
+these ideas, the main thing they need is someone to own the design!</strong> If you
+might be interested in giving that a try, come to
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/318377-t-lang.2Froadmap-2024"><code>#t-lang/roadmap-2024</code></a>
+to discuss, or send a private message to nikomatsakis.</p>
+<ul>
+<li><strong>More precise analyses, less rigamarole:</strong>
+<ul>
+<li><a href="https://github.com/rust-lang/lang-team/issues/88">Deref patterns</a>:
+Permit matching types with patterns they can dereference to, such as
+matching a <code>String</code> with a <code>&quot;str&quot;</code>.</li>
+<li>Perfect derive: determine the precise conditions for generic type
+parameters based on the types of a struct fields. For instance,
+<code>#[derive(Clone)] struct MyStruct(Rc&lt;T&gt;)</code> would not require <code>T: Clone</code>,
+because <code>Rc&lt;T&gt;</code> can be cloned without it.</li>
+<li>Autoref, operators, and clones: Generic methods that operate on
+references sometimes necessitate types like <code>&amp;u32</code>; since <code>u32</code> is
+<code>Copy</code>, we could automatically make it a reference. We've historically
+had some hesitance to add more reference-producing operations, because it
+can lead to types the user doesn't expect (such as <code>&amp;&amp;&amp;str</code>). We have
+some ideas to simplify those cases and avoid unnecessary
+double-references.</li>
+</ul>
+</li>
+<li><strong>Express yourself more easily:</strong>
+<ul>
+<li><a href="https://github.com/rust-lang/lang-team/issues/137">Generators</a>, allowing
+users to write iterators (async and otherwise) using custom syntax.</li>
+</ul>
+</li>
+<li><strong>Improve async support:</strong>
+<ul>
+<li>After adding async fn in traits, we intend to add support for async drop,
+async closures, and potentially other features.</li>
+</ul>
+</li>
+<li><strong>Make <code>dyn Trait</code> more usable:</strong>
+<ul>
+<li>Make more patterns &quot;object safe&quot; and thus usable in <code>dyn Trait</code> objects,
+including passing <code>self</code> by value and handling <code>impl Trait</code> in argument
+position (<a href="https://smallcultfollowing.com/babysteps/blog/2022/01/07/dyn-async-traits-part-7/">see this post for more
+information</a>).</li>
+</ul>
+</li>
+</ul>
+<h2><a href="#theme-help-users-help-each-other" aria-hidden="true" class="anchor" id="theme-help-users-help-each-other"></a>Theme: Help users help each other</h2>
+<h3><a href="#the-vision-1" aria-hidden="true" class="anchor" id="the-vision-1"></a>The vision</h3>
+<p>Rust's combination of ownership and borrowing, low-level systems control, and
+powerful extensibility mechanisms like procedural macros makes it a great
+language for writing libraries. And, thanks to Cargo, using a library in your
+program only takes a few lines of code. Nonetheless, there are a number of
+things that library authors <em>can't</em> do, or can't do easily -- for example, they
+can't control the error messages you see or deploy an &quot;unstable&quot; feature that
+requires special opt-in to use. For Rust 2024, we want to build features that
+empower library authors to better serve their users, either by helping to
+manage the feature lifecycle or by expanding the capabilities of what a library
+can do.</p>
+<p>We encourage people to experiment and explore in the library ecosystem,
+building new functionality for people to use. Sometimes, that new functionality
+becomes a foundation for others to build on, and standardizing it simplifies
+further development atop it, letting the cycle continue at another level.
+However, some aspects of the Rust language (notably coherence) make it harder
+to extend the Rust standard library or well-established crates from separate
+libraries, discouraging experimentation. Other features (such as aspects of
+method resolution) make it hard to promote best-in-class functionality into the
+standard library or into well-established crates without breaking users of the
+crates that first developed that functionality. For Rust 2024, we want to
+pursue changes that enable more exploration in the ecosystem, and enable stable
+migration of code from the ecosystem into the standard library.</p>
+<p>Our plan for achieving this vision is to focus on four categories of work:</p>
+<ul>
+<li><strong>Feature lifecycle</strong>: Help library authors support features as they move
+from experimental to finalized. Help library authors manage their development
+lifecycle and evolution.</li>
+<li><strong>Richer abstractions</strong>: Extend the language to let library authors express
+richer abstractions.</li>
+<li><strong>Custom developer experience</strong>: Permit library authors can tailor the
+developer experience, for example by tailoring the error messages a user gets
+when traits are not implemented or introducing custom lints.</li>
+<li><strong>Interoperability</strong>: The library ecosystem can easily coordinate, making
+libraries work together without tying them together. Library authors can
+write code that is portable across many environments or specific to one, as
+they please.</li>
+</ul>
+<h3><a href="#how-you-can-help-1" aria-hidden="true" class="anchor" id="how-you-can-help-1"></a>How you can help</h3>
+<p>Join the rust-lang Zulip, and either start a thread in the
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/318377-t-lang.2Froadmap-2024"><code>#t-lang/roadmap-2024</code></a>
+stream, or send a private message to Josh Triplett if you'd like to discuss
+privately first.</p>
+<h3><a href="#the-plan-so-far-1" aria-hidden="true" class="anchor" id="the-plan-so-far-1"></a>The plan (so far)</h3>
+<p>Current active <a href="https://lang-team.rust-lang.org/initiatives.html">initiatives</a>
+in each category include:</p>
+<ul>
+<li><strong>Feature lifecycle:</strong>
+<ul>
+<li>RFC 3240 proposes <a href="https://github.com/rust-lang/rfcs/pull/3240">edition-based method
+disambiguation</a>, to support
+moving extension methods from external crates into the standard library.</li>
+</ul>
+</li>
+<li><strong>Richer abstractions:</strong>
+<ul>
+<li>There are numerous core extensions to Rust's type system that permit
+richer traits to be developed. Often the lack of these features prohibits
+people from writing general purpose libraries because they can't get
+sufficient reuse:
+<ul>
+<li><a href="https://rust-lang.github.io/async-fundamentals-initiative/">Async fn in
+traits</a></li>
+<li><a href="https://github.com/rust-lang/lang-team/issues/51">Const generics</a>
+and <a href="https://github.com/rust-lang/lang-team/issues/22">constant
+evaluation</a></li>
+<li><a href="https://rust-lang.github.io/impl-trait-initiative/explainer/tait.html">Type alias impl
+Trait</a></li>
+<li><a href="https://rust-lang.github.io/generic-associated-types-initiative/">Generic associated
+types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Custom developer experience:</strong>
+<ul>
+<li>We are not currently doing any coordinated initiatives here, though there
+are ongoing efforts that help lay groundwork for this.</li>
+</ul>
+</li>
+<li><strong>Interoperability:</strong>
+<ul>
+<li>Support &quot;global capabilities&quot; like allocators or async runtimes, perhaps
+via an approach like <a href="https://github.com/rust-lang/rfcs/pull/2492">RFC
+2492</a>, and perhaps extending
+to something like <a href="https://tmandry.gitlab.io/blog/posts/2021-12-21-context-capabilities/">scoped contexts and
+capabilities</a>.</li>
+<li><a href="https://rust-lang.github.io/negative-impls-initiative/">Negative impls in
+coherence</a> allows
+for more flexibility in the coherence check by permitting crates to
+explicitly declare that a given type will never implement a given trait.</li>
+<li>The async working group's <a href="https://www.ncameron.org/blog/portable-and-interoperable-async-rust/">portability
+initiative</a>
+(which builds on the work to support <a href="https://rust-lang.github.io/async-fundamentals-initiative/">async fn in
+traits</a>) will
+help the async ecosystem to grow by enabling more interoperability.</li>
+</ul>
+</li>
+</ul>
+<h3><a href="#looking-forward-1" aria-hidden="true" class="anchor" id="looking-forward-1"></a>Looking forward</h3>
+<p>Looking beyond the initiatives that are in progress, there's a lot of room for
+more improvement. Here are some other ideas we'd like to see. <strong>For many of
+these ideas, the main thing they need is someone to own the design!</strong> If you
+might be interested in giving that a try, come to
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/318377-t-lang.2Froadmap-2024"><code>#t-lang/roadmap-2024</code></a>
+to discuss, or send a private message to Josh Triplett.</p>
+<ul>
+<li><strong>Feature lifecycle</strong>:
+<ul>
+<li>All ecosystem crates can have &quot;release trains&quot;, with the equivalent of
+&quot;nightly features&quot; that require a stability opt-ins. Top-level crates
+retain control over whether any of their dependencies may use nightly
+features.</li>
+</ul>
+</li>
+<li><strong>Richer abstractions</strong>:
+<ul>
+<li>Allow libraries to implement the <code>Fn</code> traits to define callable objects.</li>
+<li>Variadic tuples and variadic generics would address a common pain point
+of &quot;implement this trait for tuples of any arity&quot;.</li>
+</ul>
+</li>
+<li><strong>Custom developer experience</strong>:
+<ul>
+<li>Allow libraries to provide custom lints for their users.</li>
+<li>Allow libraries to control or customize Rust diagnostics, especially for
+trait resolution failures.</li>
+</ul>
+</li>
+<li><strong>Interoperability</strong>:
+<ul>
+<li>Revive the stalled <a href="https://github.com/rust-lang/rfcs/pull/1868">portability
+lint</a> or pursue an
+alternative design (a recent suggestion is that the &quot;platform&quot; might be a
+global service, similar to <a href="https://github.com/rust-lang/rfcs/pull/2492">RFC
+2492</a>, permitting one to use
+where clauses to designate portable code)</li>
+<li>The coherence rules make it hard to implement interoperability traits; we
+should find a way to lift this restriction, while preserving coherence's
+key benefits.</li>
+<li>Adopt a standard way to write performance benchmarks (perhaps simply
+adopt <code>criterion</code> officially).</li>
+<li>Better support for dynamic linking, with richer and safer types than the
+C ABI. For instance, implement an <code>extern &quot;safe&quot;</code> providing a subset of
+Rust's rich types.</li>
+</ul>
+</li>
+</ul>
+<h2><a href="#theme-help-the-rust-project-scale" aria-hidden="true" class="anchor" id="theme-help-the-rust-project-scale"></a>Theme: <strong>Help the Rust project scale</strong></h2>
+<h3><a href="#the-vision-2" aria-hidden="true" class="anchor" id="the-vision-2"></a>The vision</h3>
+<p>The Rust repo is a blizzard of activity. This is great, but it can be
+overwhelming, particularly if you are trying to figure out the status of some
+particular thing that you are interested in or would like to contribute to.</p>
+<p>To ship Rust 2024 and make Rust all that it can be, we need a system that makes
+it easy for people to find out what's going on and how they can help. We want
+to scale our language development through delegation, empowering developers to
+own and drive the work that they are passionate about. Lang team liaisons and
+frequent lang team check-in will help ensure quality, stability, and overall
+coherence. The team itself will have a clear &quot;path to membership&quot; that helps us
+to maintain our membership and make sure we have the expertise we need.</p>
+<p>Our plan for achieving this vision is to focus on four categories of work:</p>
+<ul>
+<li><strong>See the status at a glance:</strong> We want it to be easy to identify what things
+the lang-team is actively working on and how far those designs have come. We
+want every tracking issue to clearly identify what &quot;next steps&quot; are needed to
+push that particular feature over the finish line and make sure that those
+steps are clearly documented for would-be contributors.</li>
+<li><strong>Clear owners and clear communication:</strong> Rust operates by consensus, but
+that doesn't mean that everybody has to know all the details of everything.
+We need a system that has clear owners for the work to be done, and ideally,
+owners that are not on the lang team. Simply dividing work though can lead to
+conflicts later on, so we also need frequent communication and updates to
+ensure that everyone is keeping abreast of the overall direction things are
+going, and to surface concerns early.</li>
+<li><strong>Efficient, open processes with tooling support:</strong> We are always looking for
+ways to improve how we operate to help us stay on top of what is going on in
+the Rust project and to reach conclusions more quickly. One thing we've
+noticed is that processes that are supported by bots or other tooling tend to
+work much better.</li>
+</ul>
+<h3><a href="#how-you-can-help-2" aria-hidden="true" class="anchor" id="how-you-can-help-2"></a>How you can help</h3>
+<p>Join the rust-lang Zulip, and either start a thread in the
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/318377-t-lang.2Froadmap-2024"><code>#t-lang/roadmap-2024</code></a>
+stream, or send a private message to Josh Triplett and nikomatsakis if you'd
+like to discuss privately first.</p>
+<h3><a href="#the-plan-so-far-2" aria-hidden="true" class="anchor" id="the-plan-so-far-2"></a>The plan (so far)</h3>
+<p>Current active <a href="https://lang-team.rust-lang.org/initiatives.html">initiatives</a>
+in each category include:</p>
+<ul>
+<li><strong>See the status at a glance:</strong>
+<ul>
+<li>The <a href="https://github.com/orgs/rust-lang/projects/16/">initiative project
+board</a> tracks all the
+currently active initiatives that we are focusing on. For each one, it
+shows their <a href="https://lang-team.rust-lang.org/initiatives/process/stages.html">current
+stage</a>
+along with their
+<a href="https://lang-team.rust-lang.org/initiatives/process/roles/owner.html">owners</a>
+and <a href="https://lang-team.rust-lang.org/initiatives/process/roles/liaison.html">lang-team
+liaisons</a>.</li>
+<li>During the <a href="https://lang-team.rust-lang.org/meetings/backlog-bonanza.html">backlog
+bonanza</a>
+meetings, we are going through each older tracking issue and identifying
+what kinds of work is needed to move it forward (needs a summary, needs
+design work, etc).</li>
+<li>We're taking the time to stabilize features that people are using, and
+remove incomplete features as well as features people are not using, with
+the eventual goal of treating everything open as &quot;in-flight&quot; rather than
+&quot;unknown&quot;. We will also reduce the total number of in-flight features.</li>
+</ul>
+</li>
+<li><strong>Clear owners and clear communication:</strong>
+<ul>
+<li>The <a href="https://lang-team.rust-lang.org/initiatives.html">initiative system</a>
+assigns each task an owner, who drives the design, as well as a lang-team
+liaison, who helps ensure alignment with the team. More work is needed to
+get this system up and running smoothly.</li>
+<li>We are launching a <a href="https://hackmd.io/@nikomatsakis/rJ3h_-kJc">formality
+team</a> that will take ownership
+of ensuring Rust's type soundness and diving into the details. This will
+help to grow the set of people with expertise in that area while also
+allowing the main lang team to consult as needed.</li>
+</ul>
+</li>
+<li><strong>Efficient, open processes with tooling support:</strong>
+<ul>
+<li>We have designed a new <a href="https://lang-team.rust-lang.org/decision_process.html">consensus decision
+process</a> that is
+designed to overcome some of the shortcomings we've seen with rfcbot; it
+needs to be implemented. This will help us make easily reversible
+decisions easier, enable more experimentation, make it smoother to raise
+and resolve concerns, and keep track of potential issues from proposal
+through to stabilization</li>
+</ul>
+</li>
+</ul>
+<h3><a href="#looking-forward-2" aria-hidden="true" class="anchor" id="looking-forward-2"></a>Looking forward</h3>
+<p>Looking beyond the initiatives that are in progress, there's a lot of room for
+more improvement. Here are some other ideas we'd like to see. If you might be
+interested in giving that a try, come to
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/318377-t-lang.2Froadmap-2024"><code>#t-lang/roadmap-2024</code></a>
+to discuss, or send a private message to Josh Triplett and nikomatsakis.</p>
+<ul>
+<li><strong>See the status at a glance:</strong>
+<ul>
+<li>Find ways to integrate the older tracking issues with active initiatives;
+reduce the manual updates required to keep the project board in sync.</li>
+<li>Improve the visualization of projects and blockers to something more
+compelling and easier to follow.</li>
+</ul>
+</li>
+<li><strong>Clear owners and clear communication:</strong>
+<ul>
+<li>Beyond the type system, there are other areas where forming specialized
+teams could be useful.</li>
+</ul>
+</li>
+<li><strong>Efficient, open processes with tooling support:</strong>
+<ul>
+<li>Generally improve rustbot to make meetings more efficient.</li>
+<li>Improve and automate the process of going from initiative proposal to
+tracked initiative.</li>
+</ul>
+</li>
+</ul>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>We hope that this post has given you a taste for what we plan to focus on over
+the next few years. If you'd like to help us reach these goals, please <a href="https://rust-lang.zulipchat.com/#narrow/stream/318377-t-lang.2Froadmap-2024">get
+involved</a>!
+We've listed a number of active initiatives for each point, but we've also
+included a lot of ideas that are looking for an owner. Whether you prefer to
+code, design, document, or organize, there's work for you to do. And if the
+only thing you want to do with Rust 2024 is to use it, we welcome that too.
+Happy Rust hacking to y'all!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
