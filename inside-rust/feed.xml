@@ -10,8 +10,42 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-04-05T02:33:25+00:00</updated>
+    <updated>2022-04-06T17:59:52+00:00</updated>
 
+    
+    <entry>
+        <title>Lang team April update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/06/lang-team-april-update.html" type="text/html" title="Lang team April update" />
+        <published>2022-04-06T00:00:00+00:00</published>
+        <updated>2022-04-06T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/04/06/lang-team-april-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/06/lang-team-april-update.html">&lt;p&gt;Today, the lang team held its April planning meeting. We hold these meetings on the first Wednesday of every month, and we use them to schedule &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/meetings/design.html&quot;&gt;design meetings&lt;/a&gt; for the remainder of the month.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
+&lt;p&gt;We have planned the following design meetings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2021-04-13: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/152&quot;&gt;Implied bounds and perfect derive&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2021-04-20: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/155&quot;&gt;Language design research overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2021-04-27: &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/meetings/backlog-bonanza.html&quot;&gt;Backlog Bonanza&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#design-meeting-expectations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-meeting-expectations&quot;&gt;&lt;/a&gt;Design meeting expectations&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The document for the meeting must be prepared by the triage meeting on Tuesday and posted to the tracking issue.
+&lt;ul&gt;
+&lt;li&gt;If it is not sent out by then, the meeting will be replaced with a &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/meetings/backlog-bonanza.html&quot;&gt;Backlog Bonanza&lt;/a&gt; session. This gives folks 24 hour notice.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
+&lt;ul&gt;
+&lt;li&gt;However, there is no rule &lt;strong&gt;against&lt;/strong&gt; reading the document beforehand and providing feedback or advice on how to improve it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Josh Triplett</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Rust Lang Roadmap for 2024</title>
@@ -1143,34 +1177,6 @@ major goings on of the Lang team.&lt;/p&gt;
 
         <author>
             <name>Sean Chen</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Rust Compiler February 2022 Steering Cycle</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/02/17/feb-steering-cycle.html" type="text/html" title="Rust Compiler February 2022 Steering Cycle" />
-        <published>2022-02-17T00:00:00+00:00</published>
-        <updated>2022-02-17T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/02/17/feb-steering-cycle.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/02/17/feb-steering-cycle.html">&lt;p&gt;On &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/stream/238009-t-compiler/meetings/topic/.5Bplanning.20meeting.5D.202022-02-11.html&quot;&gt;Friday, February 11th&lt;/a&gt;, the Rust Compiler team had a planning meeting for the February steering cycle.&lt;/p&gt;
-&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
-it is going to use its scheduled steering and design meeting time over the next
-three Fridays.&lt;/p&gt;
-&lt;p&gt;On &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/483&quot;&gt;Friday, 18 February&lt;/a&gt;, we will be having a meeting to discuss the
-draft blog post describing the compiler team&#x27;s ambitions for 2022.
-pnkfelix and wesleywiser have prepared the post and circulated it amongst the
-compiler contributors.&lt;/p&gt;
-&lt;p&gt;We will be skipping the meeting on Friday, 25 February.&lt;/p&gt;
-&lt;p&gt;On &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/484&quot;&gt;Friday, 4 March&lt;/a&gt;, we will be having a &amp;quot;backlog bonanza&amp;quot;, in a
-similar vein to that done by T-lang, to review the list of unimplemented or
-partially-implemented features. pnkfelix and Jack Huey will prepare a document to
-drive the meeting.&lt;/p&gt;
-&lt;p&gt;Each meeting will run from 2pm to 3pm GMT, and will take place on the
-&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Felix Klock</name>
         </author>
     </entry>
     
