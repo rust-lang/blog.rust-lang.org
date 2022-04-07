@@ -10,8 +10,161 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-04-06T17:59:54+00:00</updated>
+    <updated>2022-04-07T14:02:20+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.60.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/04/07/Rust-1.60.0.html" type="text/html" title="Announcing Rust 1.60.0" />
+        <published>2022-04-07T00:00:00+00:00</published>
+        <updated>2022-04-07T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/04/07/Rust-1.60.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/04/07/Rust-1.60.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.60.0. Rust is a programming language empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.60.0 with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
+from the appropriate page on our website, and check out the
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1600-2022-04-07&quot;&gt;detailed release notes for 1.60.0&lt;/a&gt; on GitHub.
+If you&#x27;d like to help us out by testing future releases, you might consider updating locally to use
+the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly channel (&lt;code&gt;rustup default nightly&lt;/code&gt;). Please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you might come across!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1600-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1600-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.60.0 stable&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#source-based-code-coverage&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;source-based-code-coverage&quot;&gt;&lt;/a&gt;Source-based Code Coverage&lt;/h3&gt;
+&lt;p&gt;Support for LLVM-based coverage instrumentation has been stabilized in rustc. You can try this out on your code by rebuilding your code with &lt;code&gt;-Cinstrument-coverage&lt;/code&gt;, for example like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-shell&#x3D;&quot;&gt;RUSTFLAGS&#x3D;&amp;quot;-C instrument-coverage&amp;quot; cargo build
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After that, you can run the resulting binary, which will produce a
+&lt;code&gt;default.profraw&lt;/code&gt; file in the current directory. (The path and filename can be
+overriden by an environment variable; see
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/rustc/instrument-coverage.html#running-the-instrumented-binary-to-generate-raw-coverage-profiling-data&quot;&gt;documentation&lt;/a&gt;
+for details).&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;llvm-tools-preview&lt;/code&gt; component includes &lt;code&gt;llvm-profdata&lt;/code&gt; for processing and
+merging raw profile output (coverage region execution counts); and &lt;code&gt;llvm-cov&lt;/code&gt;
+for report generation. &lt;code&gt;llvm-cov&lt;/code&gt; combines the processed output, from
+&lt;code&gt;llvm-profdata&lt;/code&gt;, and the binary itself, because the binary embeds a mapping from
+counters to actual source code regions.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-shell&#x3D;&quot;&gt;rustup component add llvm-tools-preview
+$(rustc --print sysroot)/lib/rustlib/x86_64-unknown-linux-gnu/bin/llvm-profdata merge -sparse default.profraw -o default.profdata
+$(rustc --print sysroot)/lib/rustlib/x86_64-unknown-linux-gnu/bin/llvm-cov show -Xdemangler&#x3D;rustfilt target/debug/coverage-testing \
+    -instr-profile&#x3D;default.profdata \
+    -show-line-counts-or-regions \
+    -show-instantiations
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The above commands on a simple helloworld binary produce this annotated report, showing that each line of the input was covered.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    1|      1|fn main() {
+    2|      1|    println!(&amp;quot;Hello, world!&amp;quot;);
+    3|      1|}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For more details, please read the
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/instrument-coverage.html&quot;&gt;documentation&lt;/a&gt; in the
+rustc book. The baseline functionality is stable and will exist in some form
+in all future Rust releases, but the specific output format and LLVM tooling which
+produces it are subject to change. For this reason, it is important to make
+sure that you use the same version for both the &lt;code&gt;llvm-tools-preview&lt;/code&gt; and the
+rustc binary used to compile your code.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#cargo---timings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargo---timings&quot;&gt;&lt;/a&gt;&lt;code&gt;cargo --timings&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Cargo has stabilized support for collecting information on build with the &lt;code&gt;--timings&lt;/code&gt; flag.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-shell&quot;&gt;$ cargo build --timings
+   Compiling hello-world v0.1.0 (hello-world)
+      Timing report saved to target/cargo-timings/cargo-timing-20220318T174818Z.html
+    Finished dev [unoptimized + debuginfo] target(s) in 0.98s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The report is also copied to &lt;code&gt;target/cargo-timings/cargo-timing.html&lt;/code&gt;. A report on the release build of Cargo has been put up &lt;a href&#x3D;&quot;/images/2022-04-07-timing.html&quot;&gt;here&lt;/a&gt;. These reports can be useful for improving build performance.
+More information about the timing reports may be found in the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/timings.html&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#new-syntax-for-cargo-features&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;new-syntax-for-cargo-features&quot;&gt;&lt;/a&gt;New syntax for Cargo features&lt;/h3&gt;
+&lt;p&gt;This release introduces two new changes to improve support for &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/features.html&quot;&gt;Cargo features&lt;/a&gt; and how they interact with &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/features.html#optional-dependencies&quot;&gt;optional dependencies&lt;/a&gt;: Namespaced dependencies and weak dependency features.&lt;/p&gt;
+&lt;p&gt;Cargo has long supported features along with optional dependencies, as illustrated by the snippet below.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[dependencies]
+jpeg-decoder &#x3D; { version &#x3D; &amp;quot;0.1.20&amp;quot;, default-features &#x3D; false, optional &#x3D; true }
+
+[features]
+# Enables parallel processing support by enabling the &amp;quot;rayon&amp;quot; feature of jpeg-decoder.
+parallel &#x3D; [&amp;quot;jpeg-decoder/rayon&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are two things to note in this example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The optional dependency &lt;code&gt;jpeg-decoder&lt;/code&gt; implicitly defines a feature of the same name. Enabling the &lt;code&gt;jpeg-decoder&lt;/code&gt; feature will enable the &lt;code&gt;jpeg-decoder&lt;/code&gt; dependency.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;&amp;quot;jpeg-decoder/rayon&amp;quot;&lt;/code&gt; syntax enables the &lt;code&gt;jpeg-decoder&lt;/code&gt; dependency &lt;em&gt;and&lt;/em&gt; enables the &lt;code&gt;jpeg-decoder&lt;/code&gt; dependency&#x27;s &lt;code&gt;rayon&lt;/code&gt; feature.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Namespaced features tackles the first issue. You can now use the &lt;code&gt;dep:&lt;/code&gt; prefix in the &lt;code&gt;[features]&lt;/code&gt; table to explicitly refer to an optional dependency without implicitly exposing it as a feature. This gives you more control on how to define the feature corresponding to the optional dependency including hiding optional dependencies behind more descriptive feature names.&lt;/p&gt;
+&lt;p&gt;Weak dependency features tackle the second issue where the &lt;code&gt;&amp;quot;optional-dependency/feature-name&amp;quot;&lt;/code&gt; syntax would always enable &lt;code&gt;optional-dependency&lt;/code&gt;. However, often you want to enable the feature on the optional dependency &lt;em&gt;only&lt;/em&gt; if some other feature has enabled the optional dependency. Starting in 1.60, you can add a ? as in &lt;code&gt;&amp;quot;package-name?/feature-name&amp;quot;&lt;/code&gt; which will only enable the given feature if something else has enabled the optional dependency.&lt;/p&gt;
+&lt;p&gt;For example, let&#x27;s say we have added some serialization support to our library, and it requires enabling a corresponding feature in some optional dependencies. That can be done like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[dependencies]
+serde &#x3D; { version &#x3D; &amp;quot;1.0.133&amp;quot;, optional &#x3D; true }
+rgb &#x3D; { version &#x3D; &amp;quot;0.8.25&amp;quot;, optional &#x3D; true }
+
+[features]
+serde &#x3D; [&amp;quot;dep:serde&amp;quot;, &amp;quot;rgb?/serde&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this example, enabling the serde feature will enable the serde dependency. It will also enable the serde feature for the rgb dependency, but only if something else has enabled the rgb dependency.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#incremental-compilation-status&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;incremental-compilation-status&quot;&gt;&lt;/a&gt;Incremental compilation status&lt;/h3&gt;
+&lt;p&gt;Incremental compilation is re-enabled for the 1.60 release. The Rust team continues to work on fixing bugs in incremental, but no problems causing widespread breakage are known at this time, so we have chosen to reenable incremental compilation. Additionally, the compiler team is continuing to work on long-term strategy to avoid future problems of this kind. That process is in relatively early days, so we don&#x27;t have anything to share yet on that front.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#instant-monotonicity-guarantees&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;instant-monotonicity-guarantees&quot;&gt;&lt;/a&gt;&lt;code&gt;Instant&lt;/code&gt; monotonicity guarantees&lt;/h3&gt;
+&lt;p&gt;On all platforms &lt;code&gt;Instant&lt;/code&gt; will try to use an OS API that guarantees monotonic
+behavior if available (which is the case on all tier 1 platforms). In practice
+such guarantees are -- under rare circumstances -- broken by hardware,
+virtualization, or operating system bugs. To work around these bugs and platforms
+not offering monotonic clocks, &lt;code&gt;Instant::duration_since&lt;/code&gt;, &lt;code&gt;Instant::elapsed&lt;/code&gt; and
+&lt;code&gt;Instant::sub&lt;/code&gt; now saturate to zero. In older Rust versions this led to a panic
+instead. &lt;code&gt;Instant::checked_duration_since&lt;/code&gt; can be used to detect and handle
+situations where monotonicity is violated, or &lt;code&gt;Instant&lt;/code&gt;s are subtracted in the
+wrong order.&lt;/p&gt;
+&lt;p&gt;This workaround obscures programming errors where earlier and later instants are
+accidentally swapped. For this reason future Rust versions may reintroduce
+panics in at least those cases, if possible and efficient.&lt;/p&gt;
+&lt;p&gt;Prior to 1.60, the monotonicity guarantees were provided through mutexes or
+atomics in std, which can introduce large performance overheads to
+&lt;code&gt;Instant::now()&lt;/code&gt;. Additionally, the panicking behavior meant that Rust software
+could panic in a subset of environments, which was largely undesirable, as the
+authors of that software may not be able to fix or upgrade the operating system,
+hardware, or virtualization system they are running on. Further, introducing
+unexpected panics into these environments made Rust software less reliable and
+portable, which is of higher concern than exposing typically uninteresting
+platform bugs in monotonic clock handling to end users.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
+&lt;p&gt;The following methods and trait implementations are now stabilized:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.new_cyclic&quot;&gt;&lt;code&gt;Arc::new_cyclic&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#method.new_cyclic&quot;&gt;&lt;code&gt;Rc::new_cyclic&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/slice/struct.EscapeAscii.html&quot;&gt;&lt;code&gt;slice::EscapeAscii&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.escape_ascii&quot;&gt;&lt;code&gt;&amp;lt;[u8]&amp;gt;::escape_ascii&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u8.html#method.escape_ascii&quot;&gt;&lt;code&gt;u8::escape_ascii&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.spare_capacity_mut&quot;&gt;&lt;code&gt;Vec::spare_capacity_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.assume_init_drop&quot;&gt;&lt;code&gt;MaybeUninit::assume_init_drop&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.assume_init_read&quot;&gt;&lt;code&gt;MaybeUninit::assume_init_read&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i8.html#method.abs_diff&quot;&gt;&lt;code&gt;i8::abs_diff&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i16.html#method.abs_diff&quot;&gt;&lt;code&gt;i16::abs_diff&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i32.html#method.abs_diff&quot;&gt;&lt;code&gt;i32::abs_diff&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i64.html#method.abs_diff&quot;&gt;&lt;code&gt;i64::abs_diff&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i128.html#method.abs_diff&quot;&gt;&lt;code&gt;i128::abs_diff&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.isize.html#method.abs_diff&quot;&gt;&lt;code&gt;isize::abs_diff&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u8.html#method.abs_diff&quot;&gt;&lt;code&gt;u8::abs_diff&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u16.html#method.abs_diff&quot;&gt;&lt;code&gt;u16::abs_diff&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u32.html#method.abs_diff&quot;&gt;&lt;code&gt;u32::abs_diff&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u64.html#method.abs_diff&quot;&gt;&lt;code&gt;u64::abs_diff&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u128.html#method.abs_diff&quot;&gt;&lt;code&gt;u128::abs_diff&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.usize.html#method.abs_diff&quot;&gt;&lt;code&gt;usize::abs_diff&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#impl-Display&quot;&gt;&lt;code&gt;Display for io::ErrorKind&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/process/struct.ExitCode.html#impl-From%3Cu8%3E&quot;&gt;&lt;code&gt;From&amp;lt;u8&amp;gt; for ExitCode&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.never.html#impl-Not&quot;&gt;&lt;code&gt;Not for !&lt;/code&gt; (the &amp;quot;never&amp;quot; type)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.Wrapping.html#trait-implementations&quot;&gt;_Op_&lt;code&gt;Assign&amp;lt;$t&amp;gt; for Wrapping&amp;lt;$t&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/arch/macro.is_aarch64_feature_detected.html&quot;&gt;&lt;code&gt;arch::is_aarch64_feature_detected!&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.60.0 release. Check out what changed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1600-2022-04-07&quot;&gt;Rust&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-160-2022-04-07&quot;&gt;Cargo&lt;/a&gt;,
+and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-160&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1600&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1600&quot;&gt;&lt;/a&gt;Contributors to 1.60.0&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.60.0.
+We couldn&#x27;t have done it without all of you.
+&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.60.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Security advisory for the regex crate (CVE-2022-24713)</title>
@@ -686,37 +839,6 @@ We couldn&#x27;t have done it without all of you.
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Launching the 2021 State of Rust Survey</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2021/12/08/survey-launch.html" type="text/html" title="Launching the 2021 State of Rust Survey" />
-        <published>2021-12-08T00:00:00+00:00</published>
-        <updated>2021-12-08T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2021/12/08/survey-launch.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2021/12/08/survey-launch.html">&lt;p&gt;It&#x27;s that time again! Time for us to take a look at who the Rust community is composed of, how the Rust project is doing, and how we can improve the Rust programming experience. The Rust Community Team is pleased to announce our &lt;a href&#x3D;&quot;https://surveyhero.com/c/jzesmzph&quot;&gt;2021 State of Rust Survey&lt;/a&gt;! Whether or not you use Rust today, we want to know your opinions. Your responses will help the project understand its strengths and weaknesses, and establish development priorities for the future.&lt;/p&gt;
-&lt;p&gt;Completing this survey should take about 10–30 minutes and is anonymous. We will be accepting submissions for the next two weeks (until the 22nd of December), and we will write up our findings afterwards to &lt;a href&#x3D;&quot;https://blog.rust-lang.org&quot;&gt;blog.rust-lang.org&lt;/a&gt;. You can also check out &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2020/12/16/rust-survey-2020.html&quot;&gt;last year’s results&lt;/a&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/dauv4jcd&quot;&gt;English&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/7rnfv4cf&quot;&gt;Simplified Chinese&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/h7guatdt&quot;&gt;Traditional Chinese&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/y7hb34nm&quot;&gt;French&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/pq43azn4&quot;&gt;German&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/9pput3ye&quot;&gt;Japanese&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/m3bi3nad&quot;&gt;Korean&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/bhdqz3hj&quot;&gt;Portuguese&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/xix7rf7d&quot;&gt;Russian&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/he7yvafu&quot;&gt;Spanish&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;(If you speak multiple languages, please pick one)&lt;/p&gt;
-&lt;p&gt;Please help us spread the word by sharing the survey link on your social network feeds, at meetups, around your office, and in other communities.&lt;/p&gt;
-&lt;p&gt;If you have any questions, please see our &lt;a href&#x3D;&quot;https://github.com/rust-lang/surveys/blob/main/documents/Community-Survey-FAQ.md&quot;&gt;frequently asked questions&lt;/a&gt; or email the Rust Community team at &lt;a href&#x3D;&quot;mailto:community-team@rust-lang.org&quot;&gt;community-team@rust-lang.org&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Finally, we wanted to thank everyone who helped develop, polish, and test the survey. In particular, we&#x27;d like to thank all of the volunteers who worked to provide all of the translations available this year and who will help to translate the results.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Community Team</name>
         </author>
     </entry>
     

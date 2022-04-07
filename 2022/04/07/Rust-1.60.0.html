@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.60.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.60.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.60.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.60.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.60.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 7, 2022 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.60.0. Rust is a programming language empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, you can get 1.60.0 with:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a>
+from the appropriate page on our website, and check out the
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1600-2022-04-07">detailed release notes for 1.60.0</a> on GitHub.
+If you'd like to help us out by testing future releases, you might consider updating locally to use
+the beta channel (<code>rustup default beta</code>) or the nightly channel (<code>rustup default nightly</code>). Please <a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you might come across!</p>
+<h2><a href="#whats-in-1600-stable" aria-hidden="true" class="anchor" id="whats-in-1600-stable"></a>What's in 1.60.0 stable</h2>
+<h3><a href="#source-based-code-coverage" aria-hidden="true" class="anchor" id="source-based-code-coverage"></a>Source-based Code Coverage</h3>
+<p>Support for LLVM-based coverage instrumentation has been stabilized in rustc. You can try this out on your code by rebuilding your code with <code>-Cinstrument-coverage</code>, for example like this:</p>
+<pre><code class="language-shell=">RUSTFLAGS=&quot;-C instrument-coverage&quot; cargo build
+</code></pre>
+<p>After that, you can run the resulting binary, which will produce a
+<code>default.profraw</code> file in the current directory. (The path and filename can be
+overriden by an environment variable; see
+<a href="https://doc.rust-lang.org/stable/rustc/instrument-coverage.html#running-the-instrumented-binary-to-generate-raw-coverage-profiling-data">documentation</a>
+for details).</p>
+<p>The <code>llvm-tools-preview</code> component includes <code>llvm-profdata</code> for processing and
+merging raw profile output (coverage region execution counts); and <code>llvm-cov</code>
+for report generation. <code>llvm-cov</code> combines the processed output, from
+<code>llvm-profdata</code>, and the binary itself, because the binary embeds a mapping from
+counters to actual source code regions.</p>
+<pre><code class="language-shell=">rustup component add llvm-tools-preview
+$(rustc --print sysroot)/lib/rustlib/x86_64-unknown-linux-gnu/bin/llvm-profdata merge -sparse default.profraw -o default.profdata
+$(rustc --print sysroot)/lib/rustlib/x86_64-unknown-linux-gnu/bin/llvm-cov show -Xdemangler=rustfilt target/debug/coverage-testing \
+    -instr-profile=default.profdata \
+    -show-line-counts-or-regions \
+    -show-instantiations
+</code></pre>
+<p>The above commands on a simple helloworld binary produce this annotated report, showing that each line of the input was covered.</p>
+<pre><code>    1|      1|fn main() {
+    2|      1|    println!(&quot;Hello, world!&quot;);
+    3|      1|}
+</code></pre>
+<p>For more details, please read the
+<a href="https://doc.rust-lang.org/rustc/instrument-coverage.html">documentation</a> in the
+rustc book. The baseline functionality is stable and will exist in some form
+in all future Rust releases, but the specific output format and LLVM tooling which
+produces it are subject to change. For this reason, it is important to make
+sure that you use the same version for both the <code>llvm-tools-preview</code> and the
+rustc binary used to compile your code.</p>
+<h3><a href="#cargo---timings" aria-hidden="true" class="anchor" id="cargo---timings"></a><code>cargo --timings</code></h3>
+<p>Cargo has stabilized support for collecting information on build with the <code>--timings</code> flag.</p>
+<pre><code class="language-shell">$ cargo build --timings
+   Compiling hello-world v0.1.0 (hello-world)
+      Timing report saved to target/cargo-timings/cargo-timing-20220318T174818Z.html
+    Finished dev [unoptimized + debuginfo] target(s) in 0.98s
+</code></pre>
+<p>The report is also copied to <code>target/cargo-timings/cargo-timing.html</code>. A report on the release build of Cargo has been put up <a href="/images/2022-04-07-timing.html">here</a>. These reports can be useful for improving build performance.
+More information about the timing reports may be found in the <a href="https://doc.rust-lang.org/nightly/cargo/reference/timings.html">documentation</a>.</p>
+<h3><a href="#new-syntax-for-cargo-features" aria-hidden="true" class="anchor" id="new-syntax-for-cargo-features"></a>New syntax for Cargo features</h3>
+<p>This release introduces two new changes to improve support for <a href="https://doc.rust-lang.org/cargo/reference/features.html">Cargo features</a> and how they interact with <a href="https://doc.rust-lang.org/cargo/reference/features.html#optional-dependencies">optional dependencies</a>: Namespaced dependencies and weak dependency features.</p>
+<p>Cargo has long supported features along with optional dependencies, as illustrated by the snippet below.</p>
+<pre><code class="language-toml">[dependencies]
+jpeg-decoder = { version = &quot;0.1.20&quot;, default-features = false, optional = true }
+
+[features]
+# Enables parallel processing support by enabling the &quot;rayon&quot; feature of jpeg-decoder.
+parallel = [&quot;jpeg-decoder/rayon&quot;]
+</code></pre>
+<p>There are two things to note in this example:</p>
+<ul>
+<li>The optional dependency <code>jpeg-decoder</code> implicitly defines a feature of the same name. Enabling the <code>jpeg-decoder</code> feature will enable the <code>jpeg-decoder</code> dependency.</li>
+<li>The <code>&quot;jpeg-decoder/rayon&quot;</code> syntax enables the <code>jpeg-decoder</code> dependency <em>and</em> enables the <code>jpeg-decoder</code> dependency's <code>rayon</code> feature.</li>
+</ul>
+<p>Namespaced features tackles the first issue. You can now use the <code>dep:</code> prefix in the <code>[features]</code> table to explicitly refer to an optional dependency without implicitly exposing it as a feature. This gives you more control on how to define the feature corresponding to the optional dependency including hiding optional dependencies behind more descriptive feature names.</p>
+<p>Weak dependency features tackle the second issue where the <code>&quot;optional-dependency/feature-name&quot;</code> syntax would always enable <code>optional-dependency</code>. However, often you want to enable the feature on the optional dependency <em>only</em> if some other feature has enabled the optional dependency. Starting in 1.60, you can add a ? as in <code>&quot;package-name?/feature-name&quot;</code> which will only enable the given feature if something else has enabled the optional dependency.</p>
+<p>For example, let's say we have added some serialization support to our library, and it requires enabling a corresponding feature in some optional dependencies. That can be done like this:</p>
+<pre><code class="language-toml">[dependencies]
+serde = { version = &quot;1.0.133&quot;, optional = true }
+rgb = { version = &quot;0.8.25&quot;, optional = true }
+
+[features]
+serde = [&quot;dep:serde&quot;, &quot;rgb?/serde&quot;]
+</code></pre>
+<p>In this example, enabling the serde feature will enable the serde dependency. It will also enable the serde feature for the rgb dependency, but only if something else has enabled the rgb dependency.</p>
+<h3><a href="#incremental-compilation-status" aria-hidden="true" class="anchor" id="incremental-compilation-status"></a>Incremental compilation status</h3>
+<p>Incremental compilation is re-enabled for the 1.60 release. The Rust team continues to work on fixing bugs in incremental, but no problems causing widespread breakage are known at this time, so we have chosen to reenable incremental compilation. Additionally, the compiler team is continuing to work on long-term strategy to avoid future problems of this kind. That process is in relatively early days, so we don't have anything to share yet on that front.</p>
+<h3><a href="#instant-monotonicity-guarantees" aria-hidden="true" class="anchor" id="instant-monotonicity-guarantees"></a><code>Instant</code> monotonicity guarantees</h3>
+<p>On all platforms <code>Instant</code> will try to use an OS API that guarantees monotonic
+behavior if available (which is the case on all tier 1 platforms). In practice
+such guarantees are -- under rare circumstances -- broken by hardware,
+virtualization, or operating system bugs. To work around these bugs and platforms
+not offering monotonic clocks, <code>Instant::duration_since</code>, <code>Instant::elapsed</code> and
+<code>Instant::sub</code> now saturate to zero. In older Rust versions this led to a panic
+instead. <code>Instant::checked_duration_since</code> can be used to detect and handle
+situations where monotonicity is violated, or <code>Instant</code>s are subtracted in the
+wrong order.</p>
+<p>This workaround obscures programming errors where earlier and later instants are
+accidentally swapped. For this reason future Rust versions may reintroduce
+panics in at least those cases, if possible and efficient.</p>
+<p>Prior to 1.60, the monotonicity guarantees were provided through mutexes or
+atomics in std, which can introduce large performance overheads to
+<code>Instant::now()</code>. Additionally, the panicking behavior meant that Rust software
+could panic in a subset of environments, which was largely undesirable, as the
+authors of that software may not be able to fix or upgrade the operating system,
+hardware, or virtualization system they are running on. Further, introducing
+unexpected panics into these environments made Rust software less reliable and
+portable, which is of higher concern than exposing typically uninteresting
+platform bugs in monotonic clock handling to end users.</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<p>The following methods and trait implementations are now stabilized:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.new_cyclic"><code>Arc::new_cyclic</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#method.new_cyclic"><code>Rc::new_cyclic</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/slice/struct.EscapeAscii.html"><code>slice::EscapeAscii</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.escape_ascii"><code>&lt;[u8]&gt;::escape_ascii</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.u8.html#method.escape_ascii"><code>u8::escape_ascii</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.spare_capacity_mut"><code>Vec::spare_capacity_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.assume_init_drop"><code>MaybeUninit::assume_init_drop</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.assume_init_read"><code>MaybeUninit::assume_init_read</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.i8.html#method.abs_diff"><code>i8::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.i16.html#method.abs_diff"><code>i16::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.i32.html#method.abs_diff"><code>i32::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.i64.html#method.abs_diff"><code>i64::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.i128.html#method.abs_diff"><code>i128::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.isize.html#method.abs_diff"><code>isize::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.u8.html#method.abs_diff"><code>u8::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.u16.html#method.abs_diff"><code>u16::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.u32.html#method.abs_diff"><code>u32::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.u64.html#method.abs_diff"><code>u64::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.u128.html#method.abs_diff"><code>u128::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.usize.html#method.abs_diff"><code>usize::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#impl-Display"><code>Display for io::ErrorKind</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/process/struct.ExitCode.html#impl-From%3Cu8%3E"><code>From&lt;u8&gt; for ExitCode</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.never.html#impl-Not"><code>Not for !</code> (the &quot;never&quot; type)</a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.Wrapping.html#trait-implementations">_Op_<code>Assign&lt;$t&gt; for Wrapping&lt;$t&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/arch/macro.is_aarch64_feature_detected.html"><code>arch::is_aarch64_feature_detected!</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.60.0 release. Check out what changed in
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1600-2022-04-07">Rust</a>,
+<a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-160-2022-04-07">Cargo</a>,
+and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-160">Clippy</a>.</p>
+<h3><a href="#contributors-to-1600" aria-hidden="true" class="anchor" id="contributors-to-1600"></a>Contributors to 1.60.0</h3>
+<p>Many people came together to create Rust 1.60.0.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.60.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
