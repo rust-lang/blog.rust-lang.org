@@ -10,8 +10,38 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-04-07T14:02:23+00:00</updated>
+    <updated>2022-04-12T13:42:22+00:00</updated>
 
+    
+    <entry>
+        <title>CTCFT 2022-04-18 Agenda</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/12/CTCFT-april.html" type="text/html" title="CTCFT 2022-04-18 Agenda" />
+        <published>2022-04-12T00:00:00+00:00</published>
+        <updated>2022-04-12T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/04/12/CTCFT-april.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/12/CTCFT-april.html">&lt;p&gt;The next &lt;a href&#x3D;&quot;https://rust-lang.github.io/ctcft/&quot;&gt;&amp;quot;Cross Team Collaboration Fun Times&amp;quot; (CTCFT)&lt;/a&gt; meeting will take
+place on Monday, 2022-04-18 at &lt;strong&gt;9pm US Eastern Time&lt;/strong&gt; (&lt;a href&#x3D;&quot;https://everytimezone.com/s/497ef0a9&quot;&gt;click to see in your
+time zone&lt;/a&gt;). You’ll find the full details (along with a calendar
+event, zoom details, etc) &lt;a href&#x3D;&quot;https://rust-lang.github.io/ctcft/meetings/2022-04-18.html&quot;&gt;on the CTCFT website&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#agenda&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;agenda&quot;&gt;&lt;/a&gt;Agenda&lt;/h2&gt;
+&lt;p&gt;The theme of April&#x27;s CTCFT is &amp;quot;learning&amp;quot;. Doc Jones will speak about the Rustc
+Reading Club Phase II, and what was learned from the first iteration of the
+club. Jon Gjengset will talk about teaching advanced Rust concepts.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(5 min) Opening remarks 👋 ([angelonfira])&lt;/li&gt;
+&lt;li&gt;(15 min) Rustc Reading Club Phase II ([doc-jones])&lt;/li&gt;
+&lt;li&gt;(15 min) Teaching Advanced Rust ([jonhoo])&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#afterwards-social-hour&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;afterwards-social-hour&quot;&gt;&lt;/a&gt;Afterwards: Social Hour&lt;/h2&gt;
+&lt;p&gt;Like always, we&#x27;ll be running a social hour after the CTCFT. The idea is really
+simple: for the hour after the meeting, we will create breakout rooms in Zoom
+with different themes. You can join any breakout room you like and hangout.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Rust CTCFT Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Lang team April update</title>
@@ -1134,49 +1164,6 @@ we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/
 
         <author>
             <name>Mark Rousskov</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Lang team February update</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/02/18/lang-team-feb-update.html" type="text/html" title="Lang team February update" />
-        <published>2022-02-18T00:00:00+00:00</published>
-        <updated>2022-02-18T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/02/18/lang-team-feb-update.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/02/18/lang-team-feb-update.html">&lt;p&gt;Two weeks ago, the lang team held its February planning meeting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2022-02-02-planning.md&quot;&gt;minutes&lt;/a&gt;). We hold these meetings on the first Wednesday of every month.&lt;/p&gt;
-&lt;p&gt;The planning meeting is used for:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Checking in on the status of our &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/initiatives.html&quot;&gt;active initiatives&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Planning the design meetings for the remainder of the month&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;After each meeting, we post an update (like this one!) with notes and meeting announcements.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#update-from-active-initiatives&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;update-from-active-initiatives&quot;&gt;&lt;/a&gt;Update from active initiatives&lt;/h2&gt;
-&lt;p&gt;We didn&#x27;t have any updates from initiatives this week and in fact are thinking of changing our
-&amp;quot;update&amp;quot; structure to integrate into the regular triage meeting. For the time being, though, you
-can check in on the progress of any active initiatives you&#x27;re interested in by visiting the &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/initiatives.html&quot;&gt;active initiatives&lt;/a&gt; project board, which is also a great way to get a summary of the
-major goings on of the Lang team.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
-&lt;p&gt;We have planned the following design meetings:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;February 23: Never type next steps (&lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/141&quot;&gt;lang-team#141&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#design-meeting-expectations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-meeting-expectations&quot;&gt;&lt;/a&gt;Design meeting expectations&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;The document for the meeting must be prepared by the triage meeting on Tuesday and posted to the tracking issue.
-&lt;ul&gt;
-&lt;li&gt;If it is not sent out by then, the meeting will be canceled. This gives folks 24 hour notice.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
-&lt;ul&gt;
-&lt;li&gt;However, there is no rule &lt;strong&gt;against&lt;/strong&gt; reading the document beforehand and providing feedback or advice on how to improve it.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>Sean Chen</name>
         </author>
     </entry>
     
