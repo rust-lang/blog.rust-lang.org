@@ -19,8 +19,8 @@ feeling that we aren't as qualified as our peers. This makes us feel
 unqualified and undeserving compared to those around us. It can make us
 hesitate to join communities in the first place and, for those already
 involved, it can create a sense of impending doom where you constantly feel
-like you're going to get found out and expelled from the community. It's
-overall just not great for mental health, 0/10 would not recommend.
+like you're going to get found out and expelled from the community. Overall
+it's just not great for mental health, 0/10, would not recommend.
 
 The thing is though, imposter syndrome is a logical fallacy[^2]. Imposter
 syndrome occurs when we discount what we know and inflate what we think other
