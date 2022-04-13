@@ -59,7 +59,7 @@ you to know that I really look forward to seeing you around the project.
 ---
 
 *To help reinforce and normalize this, I want to turn this end of this blog
-post into a living documenent of times when current of past project members
+post into a living document of times when current or past project members
 have struggled with imposter syndrome, have made mistakes, or have had to ask
 "basic" questions. If you have any examples that fit in here please open a PR
 to add them.*
