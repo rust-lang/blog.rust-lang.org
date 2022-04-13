@@ -66,10 +66,12 @@ to add them.*
 
 * Jane Lusby (yaahc): "I frequently struggle with imposter syndrome and feeling
   like I don't get as much done as my peers. When I do all of my work based off
-  of notifications I completely lose track of what I've done. I'm learning to
-  set reasonable expectations for myself and getting better at managing
-  distractions and being intentional about when I respond to github/zulip
-  notifications which helps me with this time blindness."
+  of notifications I completely lose track of what I've done and end up
+  starving the tasks I wanted to work on. I'm learning to set reasonable
+  expectations for myself, getting better at managing distractions, and being
+  intentional about when I respond to github/zulip notifications which helps me
+  with keeping track of what I've done and making steady progress on my
+  priorities."
 
 [^1]: Quote from https://yaah.dev/getting-involved: "What happened at the
   Google meetup you ask? Manish, our wonderful meetup organizer, walked up to
