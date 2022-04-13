@@ -31,22 +31,30 @@ those of us who don't get the assumption of competence.
 
 In reality, we're all specialists within the Rust project. We all have areas
 where we have deep expertise and other large areas where we only have the
-vaguest idea of how things work. Niko still comes to me to ask questions about
-error handling. I frequently need to tell my fellow contributors that I have no
-idea what the acronyms they're using mean[^3]. But this doesn't mean we don't
-deserve our positions within the project. We don't expect every contributor
-know everything, to be perfect, or to make no mistakes. The only thing we
-expect from our contributors is the ability to collaborate effectively with
-others and the ability to learn and grow over time.
+vaguest idea of how things work. [Niko](https://github.com/nikomatsakis), one
+of the lang team co-leads, former compiler team lead and core team alumni,
+still comes to me to ask questions about error handling. I frequently need to
+tell my fellow contributors that I have no idea what the acronyms they're using
+mean[^3]. But this doesn't mean we don't deserve our positions within the
+project. We don't expect every contributor know everything, to be perfect, or
+to make no mistakes. The only thing we expect from our contributors is the
+ability to collaborate effectively with others and a willingness to learn and
+grow over time.
 
 The thing that makes the Rust project as good as it is isn't a couple of
 prolific contributors lifting mountains by themselves, it's everyone working
 together that brought us to where we are today. We all make mistakes. The
 project has layer[^4] after layer[^5] of safeguards to make sure we have a
 chance to catch and fix them before they affect our users. These incidents are
-unavoidable, expected, and honestly fine! We want people to feel empowered to
-make changes they're not 100% confident in, to make mistakes, to learn, and to
-grow within the Rust project. This is how all of us got to where we are today!
+unavoidable, expected, and honestly fine! This is the most fundamental
+philosophy of both the Rust language and the Rust project: we don't think it's
+sufficient to build robust systems by only including people who don't make
+mistakes; we think it's better to provide tooling and process to catch and
+prevent mistakes. It isn't an accident that our motto is "A language empowering
+everyone to build reliable and efficient software." We want people to feel
+empowered to make changes they're not 100% confident in, to make mistakes, to
+learn, and to grow within the Rust project. This is how all of us got to where
+we are today!
 
 So, if you look up to people within the Rust project, if the work we do here
 interests you, if you have always wanted to contribute, and _especially_ if you
@@ -58,20 +66,29 @@ you to know that I really look forward to seeing you around the project.
 
 ---
 
-*To help reinforce and normalize this, I want to turn this end of this blog
-post into a living document of times when current or past project members
-have struggled with imposter syndrome, have made mistakes, or have had to ask
-"basic" questions. If you have any examples that fit in here please open a PR
-to add them.*
+*To help reinforce and normalize this, I've gathered a list of times when
+current or past project members have struggled with imposter syndrome, have
+made mistakes, have had to ask "basic" questions, and similar experiences that
+will hopefully help set more reasonable expectations for new and old
+contributors across the project.*
 
-* Jane Lusby (yaahc): "I frequently struggle with imposter syndrome and feeling
-  like I don't get as much done as my peers. When I do all of my work based off
-  of notifications I completely lose track of what I've done and end up
-  starving the tasks I wanted to work on. I'm learning to set reasonable
-  expectations for myself, getting better at managing distractions, and being
-  intentional about when I respond to github/zulip notifications which helps me
-  with keeping track of what I've done and making steady progress on my
-  priorities."
+* [Jane Lusby](https://github.com/yaahc/): "I frequently struggle with imposter
+  syndrome and feeling like I don't get as much done as my peers. When I do all
+  of my work based off of notifications I completely lose track of what I've
+  done and end up starving the tasks I wanted to work on. I'm learning to set
+  reasonable expectations for myself, getting better at managing distractions,
+  and being intentional about when I respond to github/zulip notifications
+  which helps me with keeping track of what I've done and making steady
+  progress on my priorities."
+* [Josh Triplett](https://github.com/joshtriplett/): "I didn't fully understand
+  `Pin` until I read fasterthanlime's ["Pin and
+  suffering"](https://fasterthanli.me/articles/pin-and-suffering) blog post and
+  I gave a talk in 2016 where my [most important
+  point](https://www.youtube.com/watch?v=U8Gl3RTXf88#t=24m40s) was that people
+  erroneously believe that you have to be an expert to write an RFC or change
+  Rust, but that I wasn't, and you don't need to be one either."
+* [Ralf Jung](https://github.com/ralfjung): "I am still surprised anyone is
+  taking Miri and Stacked Borrows seriously."
 
 [^1]: Quote from https://yaah.dev/getting-involved: "What happened at the
   Google meetup you ask? Manish, our wonderful meetup organizer, walked up to
