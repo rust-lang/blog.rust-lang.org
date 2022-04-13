@@ -56,6 +56,21 @@ fellowships](https://foundation.rust-lang.org/grants/). You're one of the
 people we want to eventually see join teams. You're not an imposter, and I want
 you to know that I really look forward to seeing you around the project.
 
+---
+
+*To help reinforce and normalize this, I want to turn this end of this blog
+post into a living documenent of times when current of past project members
+have struggled with imposter syndrome, have made mistakes, or have had to ask
+"basic" questions. If you have any examples that fit in here please open a PR
+to add them.*
+
+* Jane Lusby (yaahc): "I frequently struggle with imposter syndrome and feeling
+  like I don't get as much done as my peers. When I do all of my work based off
+  of notifications I completely lose track of what I've done. I'm learning to
+  set reasonable expectations for myself and getting better at managing
+  distractions and being intentional about when I respond to github/zulip
+  notifications which helps me with this time blindness."
+
 [^1]: Quote from https://yaah.dev/getting-involved: "What happened at the
   Google meetup you ask? Manish, our wonderful meetup organizer, walked up to
   me, unprompted, and asked “Hey, you’re Jane right?”. I was shocked, how the
