@@ -89,6 +89,12 @@ contributors across the project.*
   Rust, but that I wasn't, and you don't need to be one either."
 * [Ralf Jung](https://github.com/ralfjung): "I am still surprised anyone is
   taking Miri and Stacked Borrows seriously."
+* [Forest Anderson](https://github.com/angelonfira/): "As someone who just
+  learned last week what `dyn` does, it still amazes me that I have something to
+  give as a team lead. I was immersed in Rust communities by writing weekly
+  blogs about Veloren (I took this on because I didn't know enough to contribute
+  code), which lead to helping with the Rust Gamedev newsletter, which led me to
+  helping to run the Cross Team Collaboration Fun Times meetup!"
 
 [^1]: Quote from https://yaah.dev/getting-involved: "What happened at the
   Google meetup you ask? Manish, our wonderful meetup organizer, walked up to
