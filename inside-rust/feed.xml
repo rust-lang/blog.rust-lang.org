@@ -10,8 +10,54 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-04-13T20:35:21+00:00</updated>
+    <updated>2022-04-15T16:51:33+00:00</updated>
 
+    
+    <entry>
+        <title>Rust Compiler April 2022 Steering Cycle</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/15/apr-steering-cycle.html" type="text/html" title="Rust Compiler April 2022 Steering Cycle" />
+        <published>2022-04-15T00:00:00+00:00</published>
+        <updated>2022-04-15T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/04/15/apr-steering-cycle.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/15/apr-steering-cycle.html">&lt;p&gt;On &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/stream/238009-t-compiler/meetings/topic/.5Bplanning.20meeting.5D.202022-04-08.html&quot;&gt;Friday, April 8th&lt;/a&gt;, the Rust Compiler team had a planning meeting for the April 2022 steering cycle.&lt;/p&gt;
+&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
+it is going to use its scheduled steering and design meeting time over the next
+three Fridays.&lt;/p&gt;
+&lt;p&gt;I want to apologize for how late I am posting this message: Our planning meeting
+was a week ago, and my intent each cycle is to put up this post that day, so
+that everyone, not just the compiler team members, has a chance participate in
+the meetings. But, since this is going out a week late, it means one of the
+meetings already happened (today).&lt;/p&gt;
+&lt;p&gt;On Friday, 15 April, we discussed &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/507&quot;&gt;salsa 2.0&#x27;s entity design&lt;/a&gt;. &lt;a href&#x3D;&quot;https://github.com/salsa-rs/salsa&quot;&gt;Salsa&lt;/a&gt;
+is a generic framework for on-demand incrementalized computation, which has many
+ties to &lt;code&gt;rustc&lt;/code&gt;&#x27;s query system. Niko Matsakis authored the document that drove
+the meeting&#x27;s discussion. The discussion was on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings/topic/.5Bsteering.20meeting.5D.202022-04-15.20compiler-team.23507/near/279082491&quot;&gt;zulip&lt;/a&gt;, and
+should eventually be available on Rust&#x27;s public zulip archive.&lt;/p&gt;
+&lt;p&gt;On Friday, 22 April, we will be having a meeting to discuss compiler team
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/506&quot;&gt;leadership and succession planning&lt;/a&gt;. Leadership of the Compiler Team,
+and selection of new leads, has thus far been performed in an ad-hoc manner. We
+will be reviewing a document authored by Felix Klock that tries to fix this by
+writing down 1. what the leads do today, 2. the minimum we expect from future
+leads, and 3. what process we should use for selecting new leads.&lt;/p&gt;
+&lt;p&gt;We are expecting this meeting may not occupy a full hour slot, and plan to
+occupy any remaining time doing &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/484&quot;&gt;&amp;quot;backlog bonanza&amp;quot;&lt;/a&gt;, reviewing the list
+of unimplemented or partially-implemented features.&lt;/p&gt;
+&lt;p&gt;On Friday, 29 April, we will be having a meeting to discuss the future of Rust&#x27;s
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/491&quot;&gt;incrementatal compilation&lt;/a&gt;. The incremental compilation system has been
+hard to maintain and hasn&#x27;t been delivering as much value as we had hoped, at
+least given the amount of effort that goes into maintaining it. We already had a
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/490&quot;&gt;meeting on Friday, 1 April&lt;/a&gt; that looked at our high-level options going
+forward; this meeting is a follow-up to that, but will now be informed by the
+aforementioned discussion of Salsa 2.0&#x27;s entity design, which would resolve some
+(but not all) of the issues that plague us today.&lt;/p&gt;
+&lt;p&gt;The three meetings in April each run from 2pm to 3pm GMT.&lt;/p&gt;
+&lt;p&gt;All of the steering meetings take place on the &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Felix Klock</name>
+        </author>
+    </entry>
     
     <entry>
         <title>CTCFT 2022-04-18 Agenda</title>
@@ -1163,28 +1209,6 @@ to improve end-to-end compilation time for multi-crate builds by identifying red
 
         <author>
             <name>Felix Klock, Wesley Wiser</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>1.59.0 pre-release testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/02/22/1.59.0-prerelease.html" type="text/html" title="1.59.0 pre-release testing" />
-        <published>2022-02-22T00:00:00+00:00</published>
-        <updated>2022-02-22T00:00:01+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/02/22/1.59.0-prerelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/02/22/1.59.0-prerelease.html">&lt;p&gt;The 1.59.0 pre-release is ready for testing. The release is scheduled for this
-Thursday, February 24th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1590-2022-02-22&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2022-02-22/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2022-02-22/index.html&lt;/a&gt;. You
-can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-59-0-prerelease-testing/&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The release team is also thinking about changes to our pre-release process:
-we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Mark Rousskov</name>
         </author>
     </entry>
     
