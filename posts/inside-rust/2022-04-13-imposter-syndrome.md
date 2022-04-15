@@ -95,6 +95,15 @@ contributors across the project.*
   blogs about Veloren (I took this on because I didn't know enough to contribute
   code), which lead to helping with the Rust Gamedev newsletter, which led me to
   helping to run the Cross Team Collaboration Fun Times meetup!"
+* [Felix S Klock II](https://github.com/pnkfelix): "Back in 2015, while I was
+  presenting a tutorial on Rust, and explaining `&T`, I had someone from the
+  audience, a Rust expert, say "ah ah ah! but what about interior mutability";
+  and in my mind I thought "... oh no; what is that?", followed by "... what am
+  I doing, I'm not qualified to be up here...". All of us "imposters" must
+  strive to prevent such moments from becoming barriers to our own
+  participation. I've learned a lot about Rust (and group dynamics, and
+  organizational behavior) since then, but I'm still learning every day;
+  re-learning, in some cases."
 
 [^1]: Quote from https://yaah.dev/getting-involved: "What happened at the
   Google meetup you ask? Manish, our wonderful meetup organizer, walked up to
