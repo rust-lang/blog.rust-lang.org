@@ -14,7 +14,7 @@ of the standard library, such as [optimizing `io::Error`](https://github.com/rus
 [optimizing `Chars::count`](https://github.com/rust-lang/rust/pull/90414), and has been helping out
 with reviewing various implementation changes.
 
-[Chris](https://github.com/ChrisDenton/) has been focussing on the Windows specific parts of the standard library.
+[Chris](https://github.com/ChrisDenton/) has been focusing on the Windows specific parts of the standard library.
 Chris implemented the Windows part of the patch for [CVE-2022-21658](https://blog.rust-lang.org/2022/01/20/cve-2022-21658.html),
 and has done [a ton of work](https://github.com/rust-lang/rust/pulls?q=is%3Apr+author%3Achrisdenton+is%3Aclosed)
 to improve the Windows side of `std::fs`, `std::path`, `std::process` and other modules.
