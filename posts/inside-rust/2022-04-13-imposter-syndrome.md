@@ -61,8 +61,10 @@ interests you, if you have always wanted to contribute, and _especially_ if you
 already have contributed, I want you to know that you're one of the people we
 want to apply for [Rust Foundation grants and
 fellowships](https://foundation.rust-lang.org/grants/). You're one of the
-people we want to eventually see join teams. You're not an imposter, and I want
-you to know that I really look forward to seeing you around the project.
+people we want to eventually see join teams. If you're already on a team, I
+want you to know that you're there for a good reason, and we value your
+judgement. You're not an imposter, and I want you to know that I really look
+forward to seeing you around the project.
 
 ---
 
