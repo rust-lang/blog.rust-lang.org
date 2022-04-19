@@ -36,7 +36,7 @@ of the lang team co-leads, former compiler team lead and core team alumni,
 still comes to me to ask questions about error handling. I frequently need to
 tell my fellow contributors that I have no idea what the acronyms they're using
 mean[^3]. But this doesn't mean we don't deserve our positions within the
-project. We don't expect every contributor know everything, to be perfect, or
+project. We don't expect every contributor to know everything, to be perfect, or
 to make no mistakes. The only thing we expect from our contributors is the
 ability to collaborate effectively with others and a willingness to learn and
 grow over time.
