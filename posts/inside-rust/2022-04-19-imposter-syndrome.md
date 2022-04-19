@@ -107,13 +107,13 @@ contributors across the project.*
   organizational behavior) since then, but I'm still learning every day;
   re-learning, in some cases."
 
-[^1]: Quote from https://yaah.dev/getting-involved: "What happened at the
+[^1]: Quote from <https://yaah.dev/getting-involved>: "What happened at the
   Google meetup you ask? Manish, our wonderful meetup organizer, walked up to
   me, unprompted, and asked “Hey, you’re Jane right?”. I was shocked, how the
   heck did Manish know who I was? It didn’t feel as though I’d done anything
   worthy of notice, and yet here he was asking for me by name."
-[^2]: https://twitter.com/ithinkwellHugh/status/1175900121097220096
-[^3]: https://github.com/rust-lang/project-error-handling/issues/34#issuecomment-1092269566
+[^2]: <https://twitter.com/ithinkwellHugh/status/1175900121097220096>
+[^3]: <https://github.com/rust-lang/project-error-handling/issues/34#issuecomment-1092269566>
 [^4]: Any irreversible changes such as stabilizations require almost everyone
   on the relevant team to approve the change and zero people on the team to
   raise concerns.
