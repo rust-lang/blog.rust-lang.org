@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Imposter Syndrome | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Imposter Syndrome | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Imposter Syndrome | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Imposter Syndrome" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Imposter Syndrome</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 19, 2022 &middot; Jane Lusby, Project Director of Collaboration
+     on behalf of <a href="https://foundation.rust-lang.org/about/">Rust Foundation Project Directors</a> 
+    </div>
+
+    <div class="post">
+      <p><em>Preface: This is in response to some feedback the project directors received
+from the Rust Foundation staff. Some of the contributors they'd talked to said
+they didn't feel justified in applying for Foundation grants even though they'd
+love the opportunity, because they don't feel qualified or deserving of them
+compared to the other amazing contributors they look up to within the Rust
+project. This was a little bit heart breaking to me, because I know exactly
+what that feeling is like<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>, and I also know just how wrong they are.</em></p>
+<p>Imposter syndrome is an insidious problem within software communities. Many of
+us, especially members of marginalized communities, struggle to shake the
+feeling that we aren't as qualified as our peers. This makes us feel
+unqualified and undeserving compared to those around us. It can make us
+hesitate to join communities in the first place and, for those already
+involved, it can create a sense of impending doom where you constantly feel
+like you're going to get found out and expelled from the community. Overall
+it's just not great for mental health, 0/10, would not recommend.</p>
+<p>The thing is though, imposter syndrome is a logical fallacy<sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup>. Imposter
+syndrome occurs when we discount what we know and inflate what we think other
+people know, and this effect is often then reinforced by systemic bias for
+those of us who don't get the assumption of competence.</p>
+<p><img src="/static/images/2022-04-19-imposter-syndrome/imposter_syndrome.jpg" alt="picture of imposter syndrome, left side shows a large circle saying &quot;What I think others know&quot; and a small circle inside of it saying &quot;What I know&quot;, right side shows the same small circle saying &quot;What I know&quot; surrounded by many other equally sized small circles labeled &quot;What others know&quot;" /></p>
+<p>In reality, we're all specialists within the Rust project. We all have areas
+where we have deep expertise and other large areas where we only have the
+vaguest idea of how things work. <a href="https://github.com/nikomatsakis">Niko</a>, one
+of the lang team co-leads, former compiler team lead and core team alumni,
+still comes to me to ask questions about error handling. I frequently need to
+tell my fellow contributors that I have no idea what the acronyms they're using
+mean<sup class="footnote-ref"><a href="#fn3" id="fnref3">3</a></sup>. But this doesn't mean we don't deserve our positions within the
+project. We don't expect every contributor know everything, to be perfect, or
+to make no mistakes. The only thing we expect from our contributors is the
+ability to collaborate effectively with others and a willingness to learn and
+grow over time.</p>
+<p>The thing that makes the Rust project as good as it is isn't a couple of
+prolific contributors lifting mountains by themselves, it's everyone working
+together that brought us to where we are today. We all make mistakes. The
+project has layer<sup class="footnote-ref"><a href="#fn4" id="fnref4">4</a></sup> after layer<sup class="footnote-ref"><a href="#fn5" id="fnref5">5</a></sup> of safeguards to make sure we have a
+chance to catch and fix them before they affect our users. These incidents are
+unavoidable, expected, and honestly fine! This is the most fundamental
+philosophy of both the Rust language and the Rust project: we don't think it's
+sufficient to build robust systems by only including people who don't make
+mistakes; we think it's better to provide tooling and process to catch and
+prevent mistakes. It isn't an accident that our motto is &quot;A language empowering
+everyone to build reliable and efficient software.&quot; We want people to feel
+empowered to make changes they're not 100% confident in, to make mistakes, to
+learn, and to grow within the Rust project. This is how all of us got to where
+we are today!</p>
+<p>So, if you look up to people within the Rust project, if the work we do here
+interests you, if you have always wanted to contribute, and <em>especially</em> if you
+already have contributed, I want you to know that you're one of the people we
+want to apply for <a href="https://foundation.rust-lang.org/grants/">Rust Foundation grants and
+fellowships</a>. You're one of the
+people we want to eventually see join teams. If you're already on a team, I
+want you to know that you're there for a good reason, and we value your
+judgement. You're not an imposter, and I want you to know that I really look
+forward to seeing you around the project.</p>
+<hr />
+<p><em>To help reinforce and normalize this, I've gathered a list of times when
+current or past project members have struggled with imposter syndrome, have
+made mistakes, have had to ask &quot;basic&quot; questions, and similar experiences that
+will hopefully help set more reasonable expectations for new and old
+contributors across the project.</em></p>
+<ul>
+<li><a href="https://github.com/yaahc/">Jane Lusby</a>: &quot;I frequently struggle with imposter
+syndrome and feeling like I don't get as much done as my peers. When I do all
+of my work based off of notifications I completely lose track of what I've
+done and end up starving the tasks I wanted to work on. I'm learning to set
+reasonable expectations for myself, getting better at managing distractions,
+and being intentional about when I respond to github/zulip notifications
+which helps me with keeping track of what I've done and making steady
+progress on my priorities.&quot;</li>
+<li><a href="https://github.com/joshtriplett/">Josh Triplett</a>: &quot;I didn't fully understand
+<code>Pin</code> until I read fasterthanlime's <a href="https://fasterthanli.me/articles/pin-and-suffering">&quot;Pin and
+suffering&quot;</a> blog post and
+I gave a talk in 2016 where my <a href="https://www.youtube.com/watch?v=U8Gl3RTXf88#t=24m40s">most important
+point</a> was that people
+erroneously believe that you have to be an expert to write an RFC or change
+Rust, but that I wasn't, and you don't need to be one either.&quot;</li>
+<li><a href="https://github.com/ralfjung">Ralf Jung</a>: &quot;I am still surprised anyone is
+taking Miri and Stacked Borrows seriously.&quot;</li>
+<li><a href="https://github.com/angelonfira/">Forest Anderson</a>: &quot;As someone who just
+learned last week what <code>dyn</code> does, it still amazes me that I have something to
+give as a team lead. I was immersed in Rust communities by writing weekly
+blogs about Veloren (I took this on because I didn't know enough to contribute
+code), which lead to helping with the Rust Gamedev newsletter, which led me to
+helping to run the Cross Team Collaboration Fun Times meetup!&quot;</li>
+<li><a href="https://github.com/pnkfelix">Felix S Klock II</a>: &quot;Back in 2015, while I was
+presenting a tutorial on Rust, and explaining <code>&amp;T</code>, I had someone from the
+audience, a Rust expert, say &quot;ah ah ah! but what about interior mutability&quot;;
+and in my mind I thought &quot;... oh no; what is that?&quot;, followed by &quot;... what am
+I doing, I'm not qualified to be up here...&quot;. All of us &quot;imposters&quot; must
+strive to prevent such moments from becoming barriers to our own
+participation. I've learned a lot about Rust (and group dynamics, and
+organizational behavior) since then, but I'm still learning every day;
+re-learning, in some cases.&quot;</li>
+</ul>
+<section class="footnotes">
+<ol>
+<li id="fn1">
+<p>Quote from https://yaah.dev/getting-involved: &quot;What happened at the
+Google meetup you ask? Manish, our wonderful meetup organizer, walked up to
+me, unprompted, and asked “Hey, you’re Jane right?”. I was shocked, how the
+heck did Manish know who I was? It didn’t feel as though I’d done anything
+worthy of notice, and yet here he was asking for me by name.&quot; <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2">
+<p>https://twitter.com/ithinkwellHugh/status/1175900121097220096 <a href="#fnref2" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn3">
+<p>https://github.com/rust-lang/project-error-handling/issues/34#issuecomment-1092269566 <a href="#fnref3" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn4">
+<p>Any irreversible changes such as stabilizations require almost everyone
+on the relevant team to approve the change and zero people on the team to
+raise concerns. <a href="#fnref4" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn5">
+<p>We double check all changes with
+<a href="https://github.com/rust-lang/crater">crater</a> before they ever land on stable
+and are careful to <a href="https://github.com/rust-lang/rust/issues/88967">quickly</a>
+<a href="https://github.com/rust-lang/rust/issues/90904">revert</a>
+<a href="https://github.com/rust-lang/rust/issues/82913">changes</a> that cause problems
+on crater or nightly. <a href="#fnref5" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>
