@@ -19,28 +19,12 @@ To build the site locally:
 
 You could do it in release mode if you'd like, but it's pretty fast in debug.
 
-From there, the generated HTML will be in a `site` directory. You can use
-any web server to check it out in your browser:
+From there, the generated HTML will be in a `site` directory.
+Open `site/index.html` in your web browser to view the site.
 
 ```console
-> cd site
-> python3 -m http.server
+> firefox site/index.html
 ```
-
-The site is now available at <http://0.0.0.0:8000>.
-
-If you need to preview the site from another machine, pass the host's address via `--bind`. For example, if running on 192.168.72.73:
-
-```console
-> cd site
-> python3 -m http.server --bind 192.168.72.73
-```
-
-The site is now available at <http://192.168.72.73:8000>.
-
-(As a short-cut: If you pass `--bind 0.0.0.0`, the server will be reachable at [all of the host's IP addresses][].)
-
-[all of the host's IP addresses]: https://www.howtogeek.com/225487/what-is-the-difference-between-127.0.0.1-and-0.0.0.0/
 
 ## Contributing
 
