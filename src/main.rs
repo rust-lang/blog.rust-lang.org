@@ -120,7 +120,7 @@ impl<'a> Generator<'a> {
             .map(|other_blog| {
                 json!({
                     "link_text": other_blog.link_text(),
-                    "url": PathBuf::from("/").join(other_blog.prefix()).join("index.html"),
+                    "url": other_blog.prefix().join("index.html"),
                 })
             })
             .collect();
@@ -130,6 +130,7 @@ impl<'a> Generator<'a> {
             "parent": "layout",
             "blog": blog,
             "other_blogs": other_blogs,
+            "root": blog.path_back_to_root(),
         });
         self.render_template(blog.prefix().join("index.html"), "index", data)?;
         Ok(())
@@ -152,6 +153,7 @@ impl<'a> Generator<'a> {
             "parent": "layout",
             "blog": blog,
             "post": post,
+            "root": blog.path_back_to_root().join("../../../"),
         });
 
         self.render_template(path.join(filename), &post.layout, data)?;
