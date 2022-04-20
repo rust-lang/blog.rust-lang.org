@@ -209,4 +209,8 @@ These are some parts that we're especially interested in seeing improvements in:
 
 ### Conclusion
 
-TODO
+We hope this summary provides a healthy amount inspiration and excitement,
+and gives you an idea of what direction the library team is headed.
+If you want to help out, whether you want to work on implementation work,
+design, documentation, organisation, or any other kind of helpful work,
+you're warmly invited to [get involved](https://rust-lang.zulipchat.com/#narrow/stream/219381-t-libs)!
