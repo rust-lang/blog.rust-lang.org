@@ -121,7 +121,7 @@ we would like to collaborate with the language and compiler teams to make it eas
 for the standard library to properly support targets with very different needs,
 without it becoming hugely inconvenient for maintainers, contributors, or users:
 
-- Make it easier to port std to a new platform, ideally allowing the relevant code
+- Make it easier to port std to a new platform, possibly allowing the relevant code
   to live outside of the `rust-lang/rust` repository for less popular platforms.
 - A better way to allow only parts of `std` to be available, depending on the platform.
   For example, a `where Platform: Unix` bound, or something like a [`#[cfg]` portibility lint](https://rust-lang.github.io/rfcs/1868-portability-lint.html).
@@ -169,6 +169,7 @@ Some of the bigger examples are:
 - Allocators and fallible allocation
 - Error and panic handling
 - Portable SIMD
+- Benchmarking and custom test/bench frameworks
 
 **Reducing and improving unsafe code**
 
