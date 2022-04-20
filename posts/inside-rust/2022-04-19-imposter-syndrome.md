@@ -66,6 +66,17 @@ want you to know that you're there for a good reason, and we value your
 judgement. You're not an imposter, and I want you to know that I really look
 forward to seeing you around the project.
 
+Edit: After I posted this it was brought to my attention that the image I used
+and tweet I cited are not from an original source, and they can actually be
+traced back to a series of blog posts by Alicia Liu. These original sources do
+a much more subtle exploration of what is and isn't imposter syndrome, and
+particularly focus on how imposter syndrome impacts members of marginalized
+communities, I highly recommend reading these posts.
+
+- [Overcoming Imposter Syndrome](https://medium.com/counter-intuition/overcoming-impostor-syndrome-bdae04e46ec5)
+- [You don't have Imposter Syndrome](https://medium.com/counter-intuition/you-don-t-have-impostor-syndrome-126e4c4bdcc)
+- [Impostor Syndrome Is Not Just a Confidence Problem](https://medium.com/counter-intuition/impostor-syndrome-is-not-just-a-confidence-problem-dea670e59f6e)
+
 ---
 
 *To help reinforce and normalize this, I've gathered a list of times when
