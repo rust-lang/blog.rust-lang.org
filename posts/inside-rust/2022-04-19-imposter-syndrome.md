@@ -74,8 +74,8 @@ particularly focus on how imposter syndrome impacts members of marginalized
 communities, I highly recommend reading these posts.
 
 - [Overcoming Imposter Syndrome](https://medium.com/counter-intuition/overcoming-impostor-syndrome-bdae04e46ec5)
-- [You don't have Imposter Syndrome](https://medium.com/counter-intuition/you-don-t-have-impostor-syndrome-126e4c4bdcc)
 - [Impostor Syndrome Is Not Just a Confidence Problem](https://medium.com/counter-intuition/impostor-syndrome-is-not-just-a-confidence-problem-dea670e59f6e)
+- [You don't have Imposter Syndrome](https://medium.com/counter-intuition/you-don-t-have-impostor-syndrome-126e4c4bdcc)
 
 ---
 
