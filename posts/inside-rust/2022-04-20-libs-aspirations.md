@@ -37,11 +37,11 @@ as an invitation and source of inspiration.
 
 As mentioned above, the Rust language, standard library, and ecosystem
 is growing and getting more mature.
-We need to invest in way to keep evolving these smoothly.
+We need to invest in ways to keep evolving these smoothly.
 
 **Evolvability of the standard library and fixing mistakes**
 
-The stability guarantee of Rust and makes it hard to evolve the standard library.
+The stability guarantee of Rust makes it hard to evolve the standard library.
 Unlike most crates, we cannot release a new major version, as that would effectively be releasing a 'Rust 2.0'.
 So, once an API is stable, we have to keep it there forever, meaning that we have to be extremely careful
 when stabilizing anything new.
@@ -125,6 +125,9 @@ without it becoming hugely inconvenient for maintainers, contributors, or users:
   to live outside of the `rust-lang/rust` repository for less popular platforms.
 - A better way to allow only parts of `std` to be available, depending on the platform.
   For example, a `where Platform: Unix` bound, or something like a [`#[cfg]` portibility lint](https://rust-lang.github.io/rfcs/1868-portability-lint.html).
+- A way to allow non-portable functionality to be available when on platforms
+  that would support it, such as allowing infallible conversion between `u64` and
+  `usize` in code that declares it only runs on 64-bit platforms.
 - Make the standard library more modular, allowing to disable e.g. floating point support
   or file system support on certain platforms.
 
@@ -185,7 +188,7 @@ This includes situations where users tend to reach for `unsafe` for performance 
 - Extending `NonNull` and pointer methods
 - A more complete interface to `OsString`, `Path`, and `CString`
 - Documentation for `Pin` and other 'unsafe' types
-- File descriptors and handles (`OwnedFd`, etc.)
+- File descriptors (`OwnedFd`, `AsFd`, etc) and handles (`OwnedHandle`, `AsHandle`, etc)
 
 ### Improving implementations of things within the standard library
 
