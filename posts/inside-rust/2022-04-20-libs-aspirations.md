@@ -47,7 +47,7 @@ So, once an API is stable, we have to keep it there forever, meaning that we hav
 when stabilizing anything new.
 
 While we are very careful with adding new APIs, mistakes can still happen.
-There are a few things we would do differently if we could back in time, based on current experience.
+There are a few things we would do differently if we could go back in time, based on current experience.
 There are not a lot of these cases, but over time these can still accumulate to the point that
 it'd be useful to have a mechanism to correct past mistakes.
 
