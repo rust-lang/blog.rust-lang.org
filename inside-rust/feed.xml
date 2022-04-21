@@ -10,8 +10,199 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-04-20T16:32:22+00:00</updated>
+    <updated>2022-04-21T10:56:56+00:00</updated>
 
+    
+    <entry>
+        <title>Rust Library Team Aspirations</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/20/libs-aspirations.html" type="text/html" title="Rust Library Team Aspirations" />
+        <published>2022-04-20T00:00:00+00:00</published>
+        <updated>2022-04-20T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/04/20/libs-aspirations.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/20/libs-aspirations.html">&lt;p&gt;Over the past years, Rust has grown from a language used by a few dedicated users
+into a well-known language used by lots of highly visible projects and
+successful companies.
+As the Rust user base, the community, and the ecosystem continues to grow,
+we need to look forward and consider how we need to scale to adapt
+to the needs of the ever expanding Rust ecosystem.&lt;/p&gt;
+&lt;p&gt;Recently, the compiler team shared &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html&quot;&gt;their blog post&lt;/a&gt;
+detailing their ambitions for 2022,
+and the language team published &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/04/04/lang-roadmap-2024.html&quot;&gt;a roadmap&lt;/a&gt;
+with their vision for Rust in 2024.&lt;/p&gt;
+&lt;p&gt;In this blog post, we, the Rust library team, will share our perspective
+on the future of the Rust standard library and the library ecosystem.&lt;/p&gt;
+&lt;p&gt;It&#x27;s important to note that
+the role of the team is to coordinate changes and to guide, review and decide.
+The majority of the work itself is done by contributors, like yourself,
+both in and outside the Rust team.
+While we often also participate in design and implementation work,
+we do so as contributors, like everyone else.&lt;/p&gt;
+&lt;p&gt;What follows is an (incomplete) summary of topics we think
+are important and would like to coordinate and guide;
+things that we&#x27;d love to see happen,
+as an invitation and source of inspiration.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#scalability&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;scalability&quot;&gt;&lt;/a&gt;Scalability&lt;/h3&gt;
+&lt;p&gt;As mentioned above, the Rust language, standard library, and ecosystem
+is growing and getting more mature.
+We need to invest in ways to keep evolving these smoothly.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Evolvability of the standard library and fixing mistakes&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The stability guarantee of Rust makes it hard to evolve the standard library.
+Unlike most crates, we cannot release a new major version, as that would effectively be releasing a &#x27;Rust 2.0&#x27;.
+So, once an API is stable, we have to keep it there forever, meaning that we have to be extremely careful
+when stabilizing anything new.&lt;/p&gt;
+&lt;p&gt;While we are very careful with adding new APIs, mistakes can still happen.
+There are a few things we would do differently if we could go back in time, based on current experience.
+There are not a lot of these cases, but over time these can still accumulate to the point that
+it&#x27;d be useful to have a mechanism to correct past mistakes.&lt;/p&gt;
+&lt;p&gt;The Rust language has the concept of &lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/editions/index.html&quot;&gt;editions&lt;/a&gt;
+to be able to make breaking changes in the language itself, without disrupting Rust users.
+The library, however, can make very limited use of editions to correct mistakes.
+We have used them for the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/panic-macro-consistency.html&quot;&gt;&lt;code&gt;panic!()&lt;/code&gt; macro&lt;/a&gt;
+and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/prelude.html&quot;&gt;the prelude&lt;/a&gt;.
+However, in general, it&#x27;s extremely tricky to make use of the edition mechanism for backwards incompatible
+library changes, as crates of different editions can be mixed, while all using the same standard library.&lt;/p&gt;
+&lt;p&gt;There are also cases when adding a new API can subtly break existing Rust code,
+even when not changing any existing API.
+This can happen, for example, when a type gets a new method that was already available through
+a popular trait, such as &lt;code&gt;itertools::Itertools&lt;/code&gt; or &lt;code&gt;num::Integer&lt;/code&gt;.
+Adding a method to the standard library can result in an existing method call resolving differently,
+potentially breaking code.
+This is usually considered &#x27;acceptable&#x27; breakage, but as Rust usage grows,
+the impact of such breakage increases, often making such breakage unacceptable in practice.&lt;/p&gt;
+&lt;p&gt;So, in order to keep evolving the standard library, we&#x27;d like to collaborate on language features
+that alleviate these issues:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3240&quot;&gt;Edition based method disambiguation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;A way to fix the &lt;code&gt;Range&lt;/code&gt; types, such that &lt;code&gt;1..2&lt;/code&gt; can be &lt;code&gt;Copy&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;A way to remove or improve lock poisoning without breaking existing code.&lt;/li&gt;
+&lt;li&gt;General mechanisms to provide for the library what editions provide for the language.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;People and collaboration&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The most important thing to keep Rust and the ecosystem scalable,
+are the people: Rust team members, maintainers of crates in the ecosystem,
+reviewers, contributors, and so on.
+It&#x27;s important we keep working on how we collaborate and make it
+as easy as possible for everyone to get involved in a way that works for them.&lt;/p&gt;
+&lt;p&gt;Concretely, we want to work on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Better and more complete guidelines for contributors and reviewers; and&lt;/li&gt;
+&lt;li&gt;More interaction with the rest of the ecosystem.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Making &lt;code&gt;std&lt;/code&gt; less special / Empowering other crates in the ecosystem&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The standard library uses a
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/94970&quot;&gt;huge amount of unstable language features&lt;/a&gt;
+that other crates in the ecosystem cannot (or should not) use.
+While this is unavoidable for &lt;code&gt;core&lt;/code&gt;, because it contains everything related
+to Rust&#x27;s built-in types, we should be able to make &lt;code&gt;alloc&lt;/code&gt; and &lt;code&gt;std&lt;/code&gt; less
+dependent on unstable features.
+Maybe some day these libraries could be no different than any other
+popular crate in the ecosystem.&lt;/p&gt;
+&lt;p&gt;A big part of the work here will be in collaboration with the language team,
+to help move the unstable language features we need towards a state where
+they can be stabilized.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Adapting to different platforms&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As Rust&#x27;s popularity increases, it is used on an increasingly wider variety of platforms.
+The Rust standard library does an okay job at abstracting away some of the
+differences between popular platforms like Linux and Windows,
+through things like &lt;code&gt;File&lt;/code&gt; and &lt;code&gt;TcpStream&lt;/code&gt;,
+but we don&#x27;t do a great job for targets that do not look like those,
+such as Wasm or kernel modules.&lt;/p&gt;
+&lt;p&gt;For example, &lt;code&gt;core&lt;/code&gt; includes &lt;code&gt;f32&lt;/code&gt; and &lt;code&gt;f64&lt;/code&gt;, even if the platform doesn&#x27;t support floating point operations,
+and &lt;code&gt;std&lt;/code&gt; includes &lt;code&gt;File::open&lt;/code&gt;, even if it isn&#x27;t implemented and always fails on the specific platform you&#x27;re targeting.&lt;/p&gt;
+&lt;p&gt;In order to better support the ever growing diversity of platforms Rust is used on,
+we would like to collaborate with the language and compiler teams to make it easier
+for the standard library to properly support targets with very different needs,
+without it becoming hugely inconvenient for maintainers, contributors, or users:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Make it easier to port std to a new platform, possibly allowing the relevant code
+to live outside of the &lt;code&gt;rust-lang/rust&lt;/code&gt; repository for less popular platforms.&lt;/li&gt;
+&lt;li&gt;A better way to allow only parts of &lt;code&gt;std&lt;/code&gt; to be available, depending on the platform.
+For example, a &lt;code&gt;where Platform: Unix&lt;/code&gt; bound, or something like a &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/1868-portability-lint.html&quot;&gt;&lt;code&gt;#[cfg]&lt;/code&gt; portibility lint&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;A way to allow non-portable functionality to be available when on platforms
+that would support it, such as allowing infallible conversion between &lt;code&gt;u64&lt;/code&gt; and
+&lt;code&gt;usize&lt;/code&gt; in code that declares it only runs on 64-bit platforms.&lt;/li&gt;
+&lt;li&gt;Make the standard library more modular, allowing to disable e.g. floating point support
+or file system support on certain platforms.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#improving-and-adding-new-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improving-and-adding-new-apis&quot;&gt;&lt;/a&gt;Improving and adding new APIs&lt;/h3&gt;
+&lt;p&gt;A main focus of the library team is and will always be the public interface of the standard library.
+As of last year, we even have a separate team to make the final calls for API changes and additions:
+the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/library#Library%20API%20team&quot;&gt;library API team&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Rust purposely has a minimal standard library. Lots of commonly used functionality is
+found in other crates in the ecosystem, rather than the standard library.&lt;/p&gt;
+&lt;p&gt;Where exactly we draw the line between things that should and shouldn&#x27;t go in the standard library
+can be tricky to define and is somewhat flexible, but there are a few categories we&#x27;re most interested in.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ergonomics&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A lot of additions to the standard library are very small ones that increase ergonomics.
+Quite often, these are things that were already possible in some way, just not in an ergonomic way.
+Some recent examples are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;abs_diff()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Path::is_symlink&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;iter::from_fn&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NonZero*::saturating_add&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;While we always have to consider the trade-off for niche features to the already large interface
+on some types and traits, additions like these continue to happen regularly.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Standardizing some bigger features the ecosystem needs&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As Rust grows into new territories, there is more and more a need
+for certain features to be included in the standard library.
+This is especially true for things where a consistent, standard, interface is
+important.
+Some of the bigger examples are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Async traits and functions&lt;/li&gt;
+&lt;li&gt;Allocators and fallible allocation&lt;/li&gt;
+&lt;li&gt;Error and panic handling&lt;/li&gt;
+&lt;li&gt;Portable SIMD&lt;/li&gt;
+&lt;li&gt;Benchmarking and custom test/bench frameworks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Reducing and improving unsafe code&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;By providing the right low level APIs and abstractions, we can greatly minimize
+the amount of complex unsafe code that users need to write. Tools like
+&lt;code&gt;MaybeUninit&lt;/code&gt; guide users to correct unsafe code that&#x27;s easy to follow and
+prove correct. Even better, some APIs can entirely remove the need for unsafe
+code in many situations.
+This includes situations where users tend to reach for &lt;code&gt;unsafe&lt;/code&gt; for performance reasons.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;std::arch&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;std::simd&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Scoped threads&lt;/li&gt;
+&lt;li&gt;More atomic primitives&lt;/li&gt;
+&lt;li&gt;&#x27;&lt;code&gt;Iterator&lt;/code&gt;&#x27; with static length for arrays&lt;/li&gt;
+&lt;li&gt;Improving &lt;code&gt;MaybeUninit&lt;/code&gt; and related methods&lt;/li&gt;
+&lt;li&gt;Extending &lt;code&gt;NonNull&lt;/code&gt; and pointer methods&lt;/li&gt;
+&lt;li&gt;A more complete interface to &lt;code&gt;OsString&lt;/code&gt;, &lt;code&gt;Path&lt;/code&gt;, and &lt;code&gt;CString&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Documentation for &lt;code&gt;Pin&lt;/code&gt; and other &#x27;unsafe&#x27; types&lt;/li&gt;
+&lt;li&gt;File descriptors (&lt;code&gt;OwnedFd&lt;/code&gt;, &lt;code&gt;AsFd&lt;/code&gt;, etc) and handles (&lt;code&gt;OwnedHandle&lt;/code&gt;, &lt;code&gt;AsHandle&lt;/code&gt;, etc)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#improving-implementations-of-things-within-the-standard-library&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improving-implementations-of-things-within-the-standard-library&quot;&gt;&lt;/a&gt;Improving implementations of things within the standard library&lt;/h3&gt;
+&lt;p&gt;Historically, the implementation details of the standard library got less attention
+than its public API.
+Recently, however, we&#x27;re seeing more and more contributions towards improving the implementation
+of various parts of the standard library.&lt;/p&gt;
+&lt;p&gt;These are some parts that we&#x27;re especially interested in seeing improvements in:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;core::fmt&lt;/code&gt; and the implementation of &lt;code&gt;format_args!()&lt;/code&gt; and &lt;code&gt;fmt::Arguments&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/93740&quot;&gt;Synchronization primitives like &lt;code&gt;Mutex&lt;/code&gt;, &lt;code&gt;RwLock&lt;/code&gt;, and &lt;code&gt;Condvar&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Cleanups in platform-specific code in &lt;code&gt;std::sys&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Avoiding allocations wherever possible, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/93668&quot;&gt;such as when calling functions in &lt;code&gt;std::fs&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Making widely used types &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/87869&quot;&gt;such as &lt;code&gt;std::io::Error&lt;/code&gt;&lt;/a&gt; more light-weight&lt;/li&gt;
+&lt;li&gt;Cleaning up all unnecessary &lt;code&gt;SeqCst&lt;/code&gt; memory ordering&lt;/li&gt;
+&lt;li&gt;Optimizing thread local variables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;We hope this summary provides a healthy amount of inspiration and excitement,
+and gives you an idea of what direction the library team is headed.
+If you want to help out, whether you want to work on implementation work,
+design, documentation, organisation, or any other kind of helpful work,
+you&#x27;re warmly invited to &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/219381-t-libs&quot;&gt;get involved&lt;/a&gt;!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mara Bos</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Imposter Syndrome</title>
@@ -936,51 +1127,6 @@ with different themes. You can join any breakout room you like and hangout.&lt;/
 
         <author>
             <name>Rust CTCFT Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Rust Compiler March 2022 Steering Cycle</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/03/11/mar-steering-cycle.html" type="text/html" title="Rust Compiler March 2022 Steering Cycle" />
-        <published>2022-03-11T00:00:00+00:00</published>
-        <updated>2022-03-11T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/03/11/mar-steering-cycle.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/03/11/mar-steering-cycle.html">&lt;p&gt;On &lt;a href&#x3D;&quot;https://zulip-archive.rust-lang.org/stream/238009-t-compiler/meetings/topic/.5Bplanning.20meeting.5D.202022-03-11.html&quot;&gt;Friday, March 11th&lt;/a&gt;, the Rust Compiler team had a planning meeting for the March steering cycle.&lt;/p&gt;
-&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
-it is going to use its scheduled steering and design meeting time over the next
-three Fridays.&lt;/p&gt;
-&lt;p&gt;On Friday, 18 March, we will be having a &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/484&quot;&gt;&amp;quot;backlog bonanza&amp;quot;&lt;/a&gt;, in a
-similar vein to that done by T-lang, to review the list of unimplemented or
-partially-implemented features. pnkfelix and Jack Huey will prepare a document
-to drive the meeting.&lt;/p&gt;
-&lt;p&gt;On Friday, 25 March, we will be reviewing &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/488&quot;&gt;formal methods in Rust&lt;/a&gt;, and
-also discuss how to provide a &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/498&quot;&gt;stable interface to MIR&lt;/a&gt;, &lt;code&gt;rustc&lt;/code&gt;&#x27;s middle
-intermediate representation, for use by external tools (such as those developed
-by the formal methods community). pnkfelix and Xavier Denis will prepare a
-document to drive the meeting.&lt;/p&gt;
-&lt;p&gt;Note: The MIR interface topic is of interest to a number of external
-stakeholders, so we expect to have the document to drive the meeting ready for
-review well ahead of this meeting. Please reach out to pnkfelix if you are
-working on a project that would benefit from stable MIR, so we can determine if
-you should be included in the development of that document. (Of course, all are
-welcome at the steering meeting itself.)&lt;/p&gt;
-&lt;p&gt;On Friday, 1 April, we will discuss &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/490&quot;&gt;robust incremental compilation&lt;/a&gt;. The
-compiler team has opted to disable incremental compilation in the stable channel
-twice in the past year. This meeting will discuss the pervasive issues suffered
-by the current design, and possible strategies to validate the incremental
-compilation subsystem going forward. mw and Aaron Hill will prepare a document
-to drive the meeting.&lt;/p&gt;
-&lt;p&gt;The two meetings in March will run from 2pm to 3pm GMT.&lt;/p&gt;
-&lt;p&gt;The meeting on April 1st has a different time than normal; it will run from 4pm
-to 5pm GMT.&lt;/p&gt;
-&lt;p&gt;All of the meetings will take place on the &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can find a public link to the &lt;a href&#x3D;&quot;https://rust-lang.github.io/compiler-team/#meeting-calendar&quot;&gt;compiler team calendar&lt;/a&gt; here; it lists
-these meetings as well as a number of other meetings for the compiler team and
-various projects and working groups.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Felix Klock</name>
         </author>
     </entry>
     
