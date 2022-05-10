@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CTCFT 2022-05-16 Agenda | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="CTCFT 2022-05-16 Agenda | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="CTCFT 2022-05-16 Agenda | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="CTCFT 2022-05-16 Agenda" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>CTCFT 2022-05-16 Agenda</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 10, 2022 &middot; Rust CTCFT Team
+    
+    </div>
+
+    <div class="post">
+      <p>The next <a href="https://rust-lang.github.io/ctcft/">&quot;Cross Team Collaboration Fun Times&quot; (CTCFT)</a> meeting will take
+place on Monday, 2022-05-16 at <strong>11am US Eastern Time</strong> (<a href="https://everytimezone.com/s/6c2a0d08">click to see in your
+time zone</a>). You’ll find the full details (along with a calendar
+event, zoom details, etc) <a href="https://rust-lang.github.io/ctcft/meetings/2022-05-16.html">on the CTCFT website</a>.</p>
+<h2><a href="#agenda" aria-hidden="true" class="anchor" id="agenda"></a>Agenda</h2>
+<p>The theme for this month's CTCFT is <strong>Embedded Rust</strong>. We'll hear from some
+members of the Rust Embedded Working Group and community about the state of the ecosystem, as
+well as how async Rust is working for embedded systems. We also have some people
+coming in from the automotive industry to talk about how Rust use is starting to
+progress.</p>
+<ul>
+<li>(5 min) Opening remarks 👋 (<a href="https://github.com/angelonfira">angelonfira</a>)</li>
+<li>(15 min) A whirlwind tour of Embedded Rust (<a href="https://github.com/jamesmunns">jamesmunns</a>)
+<ul>
+<li>A brief history of the embedded-wg and use of Rust for embedded</li>
+<li>A look at how developing embedded Rust looks like today</li>
+<li>A sample of patterns that are special to embedded Rust, or differences from
+&quot;desktop&quot; Rust</li>
+</ul>
+</li>
+<li>(15 min) Async Rust for Embedded Systems (<a href="https://github.com/Dirbaio">Dirbaio</a>)
+<ul>
+<li>We'll explore how concurrency is traditionally handled in embedded, and how
+Rust's async makes it significantly easier while still requiring no runtime,
+no OS, and no allocation, and what Rust improvements could make it even more
+awesome.</li>
+</ul>
+</li>
+<li>(15 min) Rust in Automotive (<a href="https://github.com/cpetig">cpetig</a>, <a href="https://github.com/skade">skade</a>)
+<ul>
+<li>We'll look at Rust from a Functional Safety perspective, and continuing to
+the AUTOSAR architecture. We'll also look a bit at what Ferrocene's role is
+in all this, and look at the AUTOSAR Rust bindings. Finally, we'll see
+what's next for this space.</li>
+</ul>
+</li>
+<li>(5 min) Closing (<a href="https://github.com/angelonfira">angelonfira</a>)</li>
+</ul>
+<h2><a href="#afterwards-social-hour" aria-hidden="true" class="anchor" id="afterwards-social-hour"></a>Afterwards: Social Hour</h2>
+<p>Like always, we'll be running a social hour after the CTCFT. The idea is really
+simple: for the hour after the meeting, we will create breakout rooms in Zoom
+with different themes. You can join any breakout room you like and hangout.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

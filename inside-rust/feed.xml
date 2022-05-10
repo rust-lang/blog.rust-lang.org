@@ -10,8 +10,63 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-05-10T17:02:57+00:00</updated>
+    <updated>2022-05-10T22:15:11+00:00</updated>
 
+    
+    <entry>
+        <title>CTCFT 2022-05-16 Agenda</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/05/10/CTCFT-may.html" type="text/html" title="CTCFT 2022-05-16 Agenda" />
+        <published>2022-05-10T00:00:00+00:00</published>
+        <updated>2022-05-10T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/05/10/CTCFT-may.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/05/10/CTCFT-may.html">&lt;p&gt;The next &lt;a href&#x3D;&quot;https://rust-lang.github.io/ctcft/&quot;&gt;&amp;quot;Cross Team Collaboration Fun Times&amp;quot; (CTCFT)&lt;/a&gt; meeting will take
+place on Monday, 2022-05-16 at &lt;strong&gt;11am US Eastern Time&lt;/strong&gt; (&lt;a href&#x3D;&quot;https://everytimezone.com/s/6c2a0d08&quot;&gt;click to see in your
+time zone&lt;/a&gt;). You’ll find the full details (along with a calendar
+event, zoom details, etc) &lt;a href&#x3D;&quot;https://rust-lang.github.io/ctcft/meetings/2022-05-16.html&quot;&gt;on the CTCFT website&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#agenda&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;agenda&quot;&gt;&lt;/a&gt;Agenda&lt;/h2&gt;
+&lt;p&gt;The theme for this month&#x27;s CTCFT is &lt;strong&gt;Embedded Rust&lt;/strong&gt;. We&#x27;ll hear from some
+members of the Rust Embedded Working Group and community about the state of the ecosystem, as
+well as how async Rust is working for embedded systems. We also have some people
+coming in from the automotive industry to talk about how Rust use is starting to
+progress.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(5 min) Opening remarks 👋 (&lt;a href&#x3D;&quot;https://github.com/angelonfira&quot;&gt;angelonfira&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;(15 min) A whirlwind tour of Embedded Rust (&lt;a href&#x3D;&quot;https://github.com/jamesmunns&quot;&gt;jamesmunns&lt;/a&gt;)
+&lt;ul&gt;
+&lt;li&gt;A brief history of the embedded-wg and use of Rust for embedded&lt;/li&gt;
+&lt;li&gt;A look at how developing embedded Rust looks like today&lt;/li&gt;
+&lt;li&gt;A sample of patterns that are special to embedded Rust, or differences from
+&amp;quot;desktop&amp;quot; Rust&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(15 min) Async Rust for Embedded Systems (&lt;a href&#x3D;&quot;https://github.com/Dirbaio&quot;&gt;Dirbaio&lt;/a&gt;)
+&lt;ul&gt;
+&lt;li&gt;We&#x27;ll explore how concurrency is traditionally handled in embedded, and how
+Rust&#x27;s async makes it significantly easier while still requiring no runtime,
+no OS, and no allocation, and what Rust improvements could make it even more
+awesome.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(15 min) Rust in Automotive (&lt;a href&#x3D;&quot;https://github.com/cpetig&quot;&gt;cpetig&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/skade&quot;&gt;skade&lt;/a&gt;)
+&lt;ul&gt;
+&lt;li&gt;We&#x27;ll look at Rust from a Functional Safety perspective, and continuing to
+the AUTOSAR architecture. We&#x27;ll also look a bit at what Ferrocene&#x27;s role is
+in all this, and look at the AUTOSAR Rust bindings. Finally, we&#x27;ll see
+what&#x27;s next for this space.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(5 min) Closing (&lt;a href&#x3D;&quot;https://github.com/angelonfira&quot;&gt;angelonfira&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#afterwards-social-hour&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;afterwards-social-hour&quot;&gt;&lt;/a&gt;Afterwards: Social Hour&lt;/h2&gt;
+&lt;p&gt;Like always, we&#x27;ll be running a social hour after the CTCFT. The idea is really
+simple: for the hour after the meeting, we will create breakout rooms in Zoom
+with different themes. You can join any breakout room you like and hangout.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Rust CTCFT Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Rust Library Team Aspirations</title>
@@ -1073,60 +1128,6 @@ patience as we move forward.&lt;/p&gt;
 
         <author>
             <name>Eric Huss</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>CTCFT 2022-03-21 Agenda</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/03/16/CTCFT-march.html" type="text/html" title="CTCFT 2022-03-21 Agenda" />
-        <published>2022-03-16T00:00:00+00:00</published>
-        <updated>2022-03-16T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/03/16/CTCFT-march.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/03/16/CTCFT-march.html">&lt;p&gt;The next &lt;a href&#x3D;&quot;https://rust-lang.github.io/ctcft/&quot;&gt;&amp;quot;Cross Team Collaboration Fun Times&amp;quot; (CTCFT)&lt;/a&gt; meeting will take
-place on Monday, 2022-03-21 at &lt;strong&gt;1pm US Eastern Time&lt;/strong&gt; (&lt;a href&#x3D;&quot;https://everytimezone.com/s/d733869e&quot;&gt;click to see in your
-time zone&lt;/a&gt;). You’ll find the full details (along with a calendar
-event, zoom details, etc) &lt;a href&#x3D;&quot;https://rust-lang.github.io/ctcft/meetings/2022-03-21.html&quot;&gt;on the CTCFT website&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#agenda&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;agenda&quot;&gt;&lt;/a&gt;Agenda&lt;/h2&gt;
-&lt;p&gt;For this month&#x27;s CTCFT meeting, the theme is &amp;quot;planning for 2022&amp;quot;. Rebecca
-Rumbul, the CEO of the Rust Foundation, will give some insight into the Foundation&#x27;s
-mission. Niko Matsakis and Josh Triplett will go over the lang team&#x27;s roadmap
-of the priorities for Rust 2024.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;(5 min) Opening remarks 👋 (&lt;a href&#x3D;&quot;https://github.com/nikomatsakis&quot;&gt;nikomatsakis&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;(15 min) Planning for Rust 2024 (&lt;a href&#x3D;&quot;https://github.com/nikomatsakis&quot;&gt;nikomatsakis&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/joshtriplett&quot;&gt;joshtriplett&lt;/a&gt;)
-&lt;ul&gt;
-&lt;li&gt;Now that Rust 2021 is behind us, it&#x27;s time to start thinking about Rust
-2024! The lang team has been working on a roadmap that proposes various
-priorities for Rust 2024 and discusses some of the language changes that can
-help support those priorities. &lt;a href&#x3D;&quot;https://github.com/nikomatsakis&quot;&gt;@nikomatsakis&lt;/a&gt; and
-&lt;a href&#x3D;&quot;https://github.com/joshtriplett&quot;&gt;@joshtriplett&lt;/a&gt; will discuss the contents of that document. We
-would love feedback, both on the document and on whether it can be broadened
-to include other teams&#x27; efforts as well.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;(15 min) Rust Foundation 2022 (&lt;a href&#x3D;&quot;https://twitter.com/rebeccarumbul&quot;&gt;Rebecca Rumbul&lt;/a&gt;)
-&lt;ul&gt;
-&lt;li&gt;Bec will give an overview of the Foundation&#x27;s current thinking on its
-mission and how to achieve it, and talk a little about some of the bigger
-questions that need to be addressed for the future. This will include more
-detail on the work programs that the Foundation is currently pursuing (such
-as the Community Grants Program), and some potential gaps / areas that the
-Foundation is considering in terms of what support and resources it could
-provide. Bec will also talk about the more operational/practical side of the
-Foundation, outlining how the organisation is growing and how the split of
-responsibilities between board and staff is working.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;(5 min) Closing (&lt;a href&#x3D;&quot;https://github.com/nikomatsakis&quot;&gt;nikomatsakis&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#afterwards-social-hour&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;afterwards-social-hour&quot;&gt;&lt;/a&gt;Afterwards: Social Hour&lt;/h2&gt;
-&lt;p&gt;Like always, we&#x27;ll be running a social hour after the CTCFT. The idea is really
-simple: for the hour after the meeting, we will create breakout rooms in Zoom
-with different themes. You can join any breakout room you like and hangout.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Rust CTCFT Team</name>
         </author>
     </entry>
     
