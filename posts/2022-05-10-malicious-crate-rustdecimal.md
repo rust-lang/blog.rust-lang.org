@@ -34,7 +34,7 @@ The crate contained identical source code and functionality as the legit
 When the function was called, it checked whether the `GITLAB_CI` environment
 variable was set, and if so it downloaded a binary payload into
 `/tmp/git-updater.bin` and executed it. The binary payload supported both Linux
-and macOS, but not for Windows.
+and macOS, but not Windows.
 
 An analysis of the binary payload was not possible, as the download URL didn't
 work anymore when the analysis was performed.
