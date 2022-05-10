@@ -10,8 +10,59 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-04-21T10:56:53+00:00</updated>
+    <updated>2022-05-10T16:07:48+00:00</updated>
 
+    
+    <entry>
+        <title>Security advisory: malicious crate rustdecimal</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/05/10/malicious-crate-rustdecimal.html" type="text/html" title="Security advisory: malicious crate rustdecimal" />
+        <published>2022-05-10T00:00:00+00:00</published>
+        <updated>2022-05-10T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/05/10/malicious-crate-rustdecimal.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/05/10/malicious-crate-rustdecimal.html">&lt;blockquote&gt;
+&lt;p&gt;This is a cross-post of &lt;a href&#x3D;&quot;https://groups.google.com/g/rustlang-security-announcements/c/5DVtC8pgJLw&quot;&gt;the official security advisory&lt;/a&gt;. The
+official advisory contains a signed version with our PGP key, as well.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The Rust Security Response WG and the crates.io team &lt;a href&#x3D;&quot;https://github.com/paupino/rust-decimal/issues/514#issuecomment-1115408888&quot;&gt;were notified&lt;/a&gt; on
+2022-05-02 of the existence of the malicious crate &lt;code&gt;rustdecimal&lt;/code&gt;, which
+contained malware. The crate name was intentionally similar to the name of the
+popular &lt;a href&#x3D;&quot;https://crates.io/crates/rust_decimal&quot;&gt;&lt;code&gt;rust_decimal&lt;/code&gt;&lt;/a&gt; crate, hoping that potential victims would misspell
+its name (an attack called &amp;quot;typosquatting&amp;quot;).&lt;/p&gt;
+&lt;p&gt;To protect the security of the ecosystem, the crates.io team permanently
+removed the crate from the registry as soon as it was made aware of the
+malware. An analysis of all the crates on crates.io was also performed, and no
+other crate with similar code patterns was found.&lt;/p&gt;
+&lt;p&gt;Keep in mind that the &lt;a href&#x3D;&quot;https://crates.io/crates/rust_decimal&quot;&gt;&lt;code&gt;rust_decimal&lt;/code&gt;&lt;/a&gt; crate was &lt;strong&gt;not&lt;/strong&gt; compromised, and it
+is still safe to use.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#analysis-of-the-crate&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;analysis-of-the-crate&quot;&gt;&lt;/a&gt;Analysis of the crate&lt;/h2&gt;
+&lt;p&gt;The crate had less than 500 downloads since its first release on 2022-03-25,
+and no crates on the crates.io registry depended on it.&lt;/p&gt;
+&lt;p&gt;The crate contained identical source code and functionality as the legit
+&lt;code&gt;rust_decimal&lt;/code&gt; crate, except for the &lt;code&gt;Decimal::new&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;When the function was called, it checked whether the &lt;code&gt;GITLAB_CI&lt;/code&gt; environment
+variable was set, and if so it downloaded a binary payload into
+&lt;code&gt;/tmp/git-updater.bin&lt;/code&gt; and executed it. The binary payload supported both Linux
+and macOS, but not Windows.&lt;/p&gt;
+&lt;p&gt;An analysis of the binary payload was not possible, as the download URL didn&#x27;t
+work anymore when the analysis was performed.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#recommendations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;recommendations&quot;&gt;&lt;/a&gt;Recommendations&lt;/h2&gt;
+&lt;p&gt;If your project or organization is running GitLab CI, we strongly recommend
+checking whether your project or one of its dependencies depended on the
+&lt;code&gt;rustdecimal&lt;/code&gt; crate, starting from 2022-03-25. If you notice a dependency on
+that crate, you should consider your CI environment to be compromised.&lt;/p&gt;
+&lt;p&gt;In general, we recommend regularly auditing your dependencies, and only
+depending on crates whose author you trust. If you notice any suspicious
+behavior in a crate&#x27;s source code please follow &lt;a href&#x3D;&quot;https://www.rust-lang.org/policies/security&quot;&gt;the Rust security
+policy&lt;/a&gt; and report it to the Rust Security Response WG.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#acknowledgements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgements&quot;&gt;&lt;/a&gt;Acknowledgements&lt;/h2&gt;
+&lt;p&gt;We want to thank GitHub user &lt;a href&#x3D;&quot;https://github.com/safinaskar&quot;&gt;&lt;code&gt;@safinaskar&lt;/code&gt;&lt;/a&gt; for identifying the
+malicious crate in &lt;a href&#x3D;&quot;https://github.com/paupino/rust-decimal/issues/514#issuecomment-1115408888&quot;&gt;this GitHub issue&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Security Response WG</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.60.0</title>
@@ -709,132 +760,6 @@ passed through the standard input has been fixed.&lt;/li&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1581&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1581&quot;&gt;&lt;/a&gt;Contributors to 1.58.1&lt;/h3&gt;
 &lt;p&gt;Many people came together to create Rust 1.58.1. We couldn&#x27;t have done it
 without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.58.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.58.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/01/13/Rust-1.58.0.html" type="text/html" title="Announcing Rust 1.58.0" />
-        <published>2022-01-13T00:00:00+00:00</published>
-        <updated>2022-01-13T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/01/13/Rust-1.58.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/01/13/Rust-1.58.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.58.0.
-Rust is a programming language empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.58.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1580-2022-01-13&quot;&gt;detailed release notes for 1.58.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1580-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1580-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.58.0 stable&lt;/h2&gt;
-&lt;p&gt;Rust 1.58 brings captured identifiers in format strings, a change to the
-&lt;code&gt;Command&lt;/code&gt; search path on Windows, more &lt;code&gt;#[must_use]&lt;/code&gt; annotations in the
-standard library, and some new library stabilizations.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#captured-identifiers-in-format-strings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;captured-identifiers-in-format-strings&quot;&gt;&lt;/a&gt;Captured identifiers in format strings&lt;/h3&gt;
-&lt;p&gt;Format strings can now capture arguments simply by writing &lt;code&gt;{ident}&lt;/code&gt; in the
-string. Formats have long accepted positional arguments (optionally by index)
-and named arguments, for example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;println!(&amp;quot;Hello, {}!&amp;quot;, get_person());                // implicit position
-println!(&amp;quot;Hello, {0}!&amp;quot;, get_person());               // explicit index
-println!(&amp;quot;Hello, {person}!&amp;quot;, person &#x3D; get_person()); // named
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now named arguments can also be captured from the surrounding scope, like:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let person &#x3D; get_person();
-// ...
-println!(&amp;quot;Hello, {person}!&amp;quot;); // captures the local &#x60;person&#x60;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This may also be used in formatting parameters:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let (width, precision) &#x3D; get_format();
-for (name, score) in get_scores() {
-  println!(&amp;quot;{name}: {score:width$.precision$}&amp;quot;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Format strings can only capture plain identifiers, not arbitrary paths or
-expressions. For more complicated arguments, either assign them to a local name
-first, or use the older &lt;code&gt;name &#x3D; expression&lt;/code&gt; style of formatting arguments.&lt;/p&gt;
-&lt;p&gt;This feature works in all macros accepting format strings. However, one corner
-case is the &lt;code&gt;panic!&lt;/code&gt; macro in 2015 and 2018 editions, where &lt;code&gt;panic!(&amp;quot;{ident}&amp;quot;)&lt;/code&gt;
-is still treated as an unformatted string -- the compiler will warn about this
-not having the intended effect. Due to the 2021 edition&#x27;s update of panic
-macros for &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/edition-guide/rust-2021/panic-macro-consistency.html&quot;&gt;improved consistency&lt;/a&gt;, this works as expected in 2021 &lt;code&gt;panic!&lt;/code&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#reduced-windows-command-search-path&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;reduced-windows-command-search-path&quot;&gt;&lt;/a&gt;Reduced Windows &lt;code&gt;Command&lt;/code&gt; search path&lt;/h3&gt;
-&lt;p&gt;On Windows targets, &lt;code&gt;std::process::Command&lt;/code&gt; will no longer search the current
-directory for executables. That effect was owed to historical behavior of the
-win32 &lt;a href&#x3D;&quot;https://docs.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessa&quot;&gt;&lt;code&gt;CreateProcess&lt;/code&gt;&lt;/a&gt; API, so Rust was effectively searching in this order:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;(Rust specific) The directories that are listed in the child&#x27;s &lt;code&gt;PATH&lt;/code&gt;
-environment variable, if it was explicitly changed from the parent.&lt;/li&gt;
-&lt;li&gt;The directory from which the application loaded.&lt;/li&gt;
-&lt;li&gt;The current directory for the parent process.&lt;/li&gt;
-&lt;li&gt;The 32-bit Windows system directory.&lt;/li&gt;
-&lt;li&gt;The 16-bit Windows system directory.&lt;/li&gt;
-&lt;li&gt;The Windows directory.&lt;/li&gt;
-&lt;li&gt;The directories that are listed in the &lt;code&gt;PATH&lt;/code&gt; environment variable.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;However, using the current directory can lead to surprising results, or even
-malicious behavior when dealing with untrusted directories. For example,
-&lt;code&gt;ripgrep&lt;/code&gt; published &lt;a href&#x3D;&quot;https://www.cve.org/CVERecord?id&#x3D;CVE-2021-3013&quot;&gt;CVE-2021-3013&lt;/a&gt; when they learned that their child
-processes could be intercepted in this way. Even Microsoft&#x27;s own PowerShell
-&lt;a href&#x3D;&quot;https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_command_precedence?view&#x3D;powershell-7.2&quot;&gt;documents&lt;/a&gt; that they do not use the current directory for security.&lt;/p&gt;
-&lt;p&gt;Rust now performs its own search without the current directory, and the legacy
-16-bit directory is also not included, as there is no API to discover its
-location. So the new &lt;code&gt;Command&lt;/code&gt; search order for Rust on Windows is:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;The directories that are listed in the child&#x27;s &lt;code&gt;PATH&lt;/code&gt; environment variable.&lt;/li&gt;
-&lt;li&gt;The directory from which the application loaded.&lt;/li&gt;
-&lt;li&gt;The 32-bit Windows system directory.&lt;/li&gt;
-&lt;li&gt;The Windows directory.&lt;/li&gt;
-&lt;li&gt;The directories that are listed in the &lt;code&gt;PATH&lt;/code&gt; environment variable.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Non-Windows targets continue to use their platform-specific behavior, most
-often only considering the child or parent &lt;code&gt;PATH&lt;/code&gt; environment variable.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#more-must_use-in-the-standard-library&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;more-must_use-in-the-standard-library&quot;&gt;&lt;/a&gt;More &lt;code&gt;#[must_use]&lt;/code&gt; in the standard library&lt;/h3&gt;
-&lt;p&gt;The &lt;code&gt;#[must_use]&lt;/code&gt; attribute can be applied to types or functions when failing
-to explicitly consider them or their output is almost certainly a bug. This has
-long been used in the standard library for types like &lt;code&gt;Result&lt;/code&gt;, which should be
-checked for error conditions. This also helps catch mistakes such as expecting
-a function to mutate a value in-place, when it actually returns a new value.&lt;/p&gt;
-&lt;p&gt;Library &lt;a href&#x3D;&quot;https://github.com/rust-lang/libs-team/issues/35&quot;&gt;proposal 35&lt;/a&gt; was approved in October 2021 to audit and expand the
-application of &lt;code&gt;#[must_use]&lt;/code&gt; throughout the standard library, covering many
-more functions where the primary effect is the return value. This is similar
-to the idea of function purity, but looser than a true language feature. Some
-of these additions were present in release 1.57.0, and now in 1.58.0 the effort
-has completed.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
-&lt;p&gt;The following methods and trait implementations were stabilized.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/fs/struct.Metadata.html#method.is_symlink&quot;&gt;&lt;code&gt;Metadata::is_symlink&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/path/struct.Path.html#method.is_symlink&quot;&gt;&lt;code&gt;Path::is_symlink&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i8.html#method.saturating_div&quot;&gt;&lt;code&gt;{integer}::saturating_div&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.unwrap_unchecked&quot;&gt;&lt;code&gt;Option::unwrap_unchecked&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.unwrap_unchecked&quot;&gt;&lt;code&gt;Result::unwrap_unchecked&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.unwrap_err_unchecked&quot;&gt;&lt;code&gt;Result::unwrap_err_unchecked&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/fs/struct.File.html#method.options&quot;&gt;&lt;code&gt;File::options&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The following previously stable functions are now &lt;code&gt;const&lt;/code&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.new&quot;&gt;&lt;code&gt;Duration::new&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.checked_add&quot;&gt;&lt;code&gt;Duration::checked_add&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.saturating_add&quot;&gt;&lt;code&gt;Duration::saturating_add&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.checked_sub&quot;&gt;&lt;code&gt;Duration::checked_sub&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.saturating_sub&quot;&gt;&lt;code&gt;Duration::saturating_sub&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.checked_mul&quot;&gt;&lt;code&gt;Duration::checked_mul&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.saturating_mul&quot;&gt;&lt;code&gt;Duration::saturating_mul&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.checked_div&quot;&gt;&lt;code&gt;Duration::checked_div&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.58.0 release: check out what changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1580-2022-01-13&quot;&gt;Rust&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-158-2022-01-13&quot;&gt;Cargo&lt;/a&gt;,
-and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-158&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1580&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1580&quot;&gt;&lt;/a&gt;Contributors to 1.58.0&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.58.0.
-We couldn&#x27;t have done it without all of you.
-&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.58.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
 </content>
 
         <author>
