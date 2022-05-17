@@ -10,8 +10,30 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-05-10T22:15:11+00:00</updated>
+    <updated>2022-05-17T07:16:43+00:00</updated>
 
+    
+    <entry>
+        <title>1.61.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/05/16/1.61.0-prerelease.html" type="text/html" title="1.61.0 pre-release testing" />
+        <published>2022-05-16T00:00:00+00:00</published>
+        <updated>2022-05-16T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/05/16/1.61.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/05/16/1.61.0-prerelease.html">&lt;p&gt;The 1.61.0 pre-release is ready for testing. The release is scheduled for this
+Thursday, May 19th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1610-2022-05-19&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2022-05-16/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2022-05-16/index.html&lt;/a&gt;. You
+can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-61-0-prerelease-testing/&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The release team is also thinking about changes to our pre-release process:
+we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mark Rousskov</name>
+        </author>
+    </entry>
     
     <entry>
         <title>CTCFT 2022-05-16 Agenda</title>
@@ -1074,60 +1096,6 @@ we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/
 
         <author>
             <name>Pietro Albini</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Changes at the Cargo Team</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/03/31/cargo-team-changes.html" type="text/html" title="Changes at the Cargo Team" />
-        <published>2022-03-31T00:00:00+00:00</published>
-        <updated>2022-03-31T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/03/31/cargo-team-changes.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/03/31/cargo-team-changes.html">&lt;p&gt;We are thrilled to publicly announce that &lt;a href&#x3D;&quot;https://github.com/weihanglo&quot;&gt;Weihang
-Lo&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/epage/&quot;&gt;Ed Page&lt;/a&gt;
-have joined the Cargo Team!&lt;/p&gt;
-&lt;p&gt;Weihang has been providing thoughtful and helpful replies on our issue
-tracker. He has often had the patience to explain to people what problem
-they&#x27;re hitting and how to get unstuck. He often summarizes technical
-conversations clearly describing the available solutions and their costs both
-technical and more importantly human. He has also been contributing to many
-improvements and code reviews.&lt;/p&gt;
-&lt;p&gt;Ed has been a champion on many fronts. He has done tremendous work on
-&lt;a href&#x3D;&quot;https://crates.io/crates/toml_edit&quot;&gt;toml_edit&lt;/a&gt; to push Cargo towards getting
-&lt;code&gt;cargo add&lt;/code&gt; &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/10472&quot;&gt;merged in cargo
-proper&lt;/a&gt;. He has brought
-&lt;a href&#x3D;&quot;https://crates.io/crates/clap&quot;&gt;clap&lt;/a&gt; to the momentous 3.0 release and
-continues to push on CLI improvements, more advanced testing tools, and much
-more!&lt;/p&gt;
-&lt;p&gt;At the same time one of the pillars of our team is stepping down. &lt;del&gt;Alex is
-a programming robot sent back in time from the future to make sure that Rust
-succeeds.&lt;/del&gt; &lt;a href&#x3D;&quot;https://github.com/alexcrichton/&quot;&gt;Alex Crichton&lt;/a&gt; has done
-more than his fair share being a keystone holding the Rust project together.
-&lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/scaling-back-my-involvement-in-rust/&quot;&gt;Several years
-ago&lt;/a&gt;
-he stepped back from single-handedly running everything, to spin out many new
-teams to take care of things he did alone. The Cargo Team was lucky enough to
-be one of the places he still had energy to provide guidance, mentorship, and
-continuity. He is the last member of the team to have been involved with Rust
-since before Cargo existed. He will be deeply missed. Good luck on your next
-project of interest! Or, take the time to relax. You&#x27;ve earned it!&lt;/p&gt;
-&lt;p&gt;As a result of these changes to the team, the rate of new PRs is beyond our
-capacity to accept at this time. Reviews for PRs will be taking significantly
-longer than before. For now, Cargo will be having a freeze on any new features
-or major changes. We will still be accepting bug fixes and work on existing
-projects under active development. As capacity becomes more available, new
-features may be accepted after being approved by the Cargo Team.&lt;/p&gt;
-&lt;p&gt;Cargo is a large project with many moving pieces and different use cases. The
-fact that it works reliably and that it is intuitive has been a significant
-multiplier for Rust&#x27;s success. But it also means that reviewing changes needs
-to be done very carefully. It is easy for changes to break some
-obscure configuration, or be a targeted fix that deepens our technical debt
-making it even harder to understand the whole of Cargo. We appreciate people&#x27;s
-patience as we move forward.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Eric Huss</name>
         </author>
     </entry>
     
