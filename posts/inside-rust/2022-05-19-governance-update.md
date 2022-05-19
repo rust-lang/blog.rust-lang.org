@@ -12,6 +12,11 @@ Since proper governance of the Rust project impacts all users of Rust, we though
 
 As is noted in the summary, the next steps are to take the findings we have so far and begin crafting proposals for how the Rust project will be governed in the future. This will eventually lead to RFCs or similar documents with concrete proposals.
 
+> From: Ryan Levick\
+> To: All members of the Rust project\
+> Date: Mon, 11 Apr 2021 18:27:00 UTC\
+> Subject: Rust Governance Update
+>
 > Hey @all,
 >
 > We’d like to provide you with an update to our email from December about the issue that led to the resignation of the moderation team in November. In that email, we indicated that we had three high-level goals:
