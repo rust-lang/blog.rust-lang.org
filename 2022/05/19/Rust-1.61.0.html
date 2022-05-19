@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.61.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.61.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.61.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="/styles/vendor.css"/>
+<link rel="stylesheet" href="/styles/fonts.css"/>
+<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="/styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+<link rel="manifest" href="/images/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.61.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.61.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 19, 2022 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.61.0. Rust is a programming language
+empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, you can get 1.61.0 with:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a>
+from the appropriate page on our website, and check out the
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1610-2022-05-19">detailed release notes for 1.61.0</a> on GitHub.</p>
+<p>If you'd like to help us out by testing future releases, you might consider updating locally to use
+the beta channel (<code>rustup default beta</code>) or the nightly channel (<code>rustup default nightly</code>).
+Please <a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you might come across!</p>
+<h2><a href="#whats-in-1610-stable" aria-hidden="true" class="anchor" id="whats-in-1610-stable"></a>What's in 1.61.0 stable</h2>
+<h3><a href="#custom-exit-codes-from-main" aria-hidden="true" class="anchor" id="custom-exit-codes-from-main"></a>Custom exit codes from <code>main</code></h3>
+<p>In the beginning, Rust <code>main</code> functions could only return the unit type <code>()</code> (either implicitly or explicitly), always indicating success
+in the exit status, and if you wanted otherwise you had to call <code>process::exit(code)</code>. Since Rust
+1.26, <code>main</code> has been allowed to return a <code>Result</code>, where <code>Ok</code> translated to a C <code>EXIT_SUCCESS</code> and
+<code>Err</code> to <code>EXIT_FAILURE</code> (also debug-printing the error). Under the hood, these alternate return
+types were unified by an unstable <code>Termination</code> trait.</p>
+<p>In this release, that <code>Termination</code> trait is finally stable, along with a more general <code>ExitCode</code>
+type that wraps platform-specific return types. That has <code>SUCCESS</code> and <code>FAILURE</code> constants, and also
+implements <code>From&lt;u8&gt;</code> for more arbitrary values. The <code>Termination</code> trait can also be implemented for
+your own types, allowing you to customize any kind of reporting before converting to an <code>ExitCode</code>.</p>
+<p>For example, here's a type-safe way to write exit codes for a <a href="https://git-scm.com/docs/git-bisect#_bisect_run"><code>git bisect run</code></a> script:</p>
+<pre><code class="language-rust">use std::process::{ExitCode, Termination};
+
+#[repr(u8)]
+pub enum GitBisectResult {
+    Good = 0,
+    Bad = 1,
+    Skip = 125,
+    Abort = 255,
+}
+
+impl Termination for GitBisectResult {
+    fn report(self) -&gt; ExitCode {
+        // Maybe print a message here
+        ExitCode::from(self as u8)
+    }
+}
+
+fn main() -&gt; GitBisectResult {
+    std::panic::catch_unwind(|| {
+        todo!(&quot;test the commit&quot;)
+    }).unwrap_or(GitBisectResult::Abort)
+}
+</code></pre>
+<h3><a href="#more-capabilities-for-const-fn" aria-hidden="true" class="anchor" id="more-capabilities-for-const-fn"></a>More capabilities for <code>const fn</code></h3>
+<p>Several incremental features have been stabilized in this release to enable more functionality in
+<code>const</code> functions:</p>
+<ul>
+<li>
+<p><strong>Basic handling of <code>fn</code> pointers</strong>: You can now create, pass, and cast function pointers in a
+<code>const fn</code>. For example, this could be useful to build compile-time function tables for an
+interpreter. However, it is still not permitted to call <code>fn</code> pointers.</p>
+</li>
+<li>
+<p><strong>Trait bounds</strong>: You can now write trait bounds on generic parameters to <code>const fn</code>, such as
+<code>T: Copy</code>, where previously only <code>Sized</code> was allowed.</p>
+</li>
+<li>
+<p><strong><code>dyn Trait</code> types</strong>: Similarly, <code>const fn</code> can now deal with trait objects, <code>dyn Trait</code>.</p>
+</li>
+<li>
+<p><strong><code>impl Trait</code> types</strong>: Arguments and return values for <code>const fn</code> can now be opaque <code>impl Trait</code>
+types.</p>
+</li>
+</ul>
+<p>Note that the trait features do not yet support calling methods from those traits in a <code>const fn</code>.</p>
+<p>See the <a href="https://doc.rust-lang.org/stable/reference/const_eval.html">Constant Evaluation</a> section of
+the reference book to learn more about the current capabilities of <code>const</code> contexts, and future
+capabilities can be tracked in <a href="https://github.com/rust-lang/rust/issues/57563">rust#57563</a>.</p>
+<h3><a href="#static-handles-for-locked-stdio" aria-hidden="true" class="anchor" id="static-handles-for-locked-stdio"></a>Static handles for locked stdio</h3>
+<p>The three standard I/O streams -- <code>Stdin</code>, <code>Stdout</code>, and <code>Stderr</code> -- each have a <code>lock(&amp;self)</code> to
+allow more control over synchronizing read and writes. However, they returned lock guards with a
+lifetime borrowed from <code>&amp;self</code>, so they were limited to the scope of the original handle. This was
+determined to be an unnecessary limitation, since the underlying locks were actually in static
+storage, so now the guards are returned with a <code>'static</code> lifetime, disconnected from the handle.</p>
+<p>For example, a common error came from trying to get a handle and lock it in one statement:</p>
+<pre><code class="language-rust">// error[E0716]: temporary value dropped while borrowed
+let out = std::io::stdout().lock();
+//        ^^^^^^^^^^^^^^^^^       - temporary value is freed at the end of this statement
+//        |
+//        creates a temporary which is freed while still in use
+</code></pre>
+<p>Now the lock guard is <code>'static</code>, not borrowing from that temporary, so this works!</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<p>The following methods and trait implementations are now stabilized:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/pin/struct.Pin.html#method.static_mut"><code>Pin::static_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/pin/struct.Pin.html#method.static_ref"><code>Pin::static_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/vec/struct.Vec.html#method.retain_mut"><code>Vec::retain_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/collections/struct.VecDeque.html#method.retain_mut"><code>VecDeque::retain_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/io/struct.Cursor.html#impl-Write-4"><code>Write</code> for <code>Cursor&lt;[u8; N]&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/os/unix/net/struct.SocketAddr.html#method.from_pathname"><code>std::os::unix::net::SocketAddr::from_pathname</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/process/struct.ExitCode.html"><code>std::process::ExitCode</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/process/trait.Termination.html"><code>std::process::Termination</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/thread/struct.JoinHandle.html#method.is_finished"><code>std::thread::JoinHandle::is_finished</code></a></li>
+</ul>
+<p>The following previously stable functions are now <code>const</code>:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.offset"><code>&lt;*const T&gt;::offset</code></a>
+and <a href="https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.offset-1"><code>&lt;*mut T&gt;::offset</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_offset"><code>&lt;*const T&gt;::wrapping_offset</code></a>
+and <a href="https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_offset-1"><code>&lt;*mut T&gt;::wrapping_offset</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.add"><code>&lt;*const T&gt;::add</code></a>
+and <a href="https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.add-1"><code>&lt;*mut T&gt;::add</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.sub"><code>&lt;*const T&gt;::sub</code></a>
+and <a href="https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.sub-1"><code>&lt;*mut T&gt;::sub</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_add"><code>&lt;*const T&gt;::wrapping_add</code></a>
+and <a href="https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_add-1"><code>&lt;*mut T&gt;::wrapping_add</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_sub"><code>&lt;*const T&gt;::wrapping_sub</code></a>
+and <a href="https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_sub-1"><code>&lt;*mut T&gt;::wrapping_sub</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/primitive.slice.html#method.as_mut_ptr"><code>&lt;[T]&gt;::as_mut_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/primitive.slice.html#method.as_ptr_range"><code>&lt;[T]&gt;::as_ptr_range</code></a></li>
+<li><a href="https://doc.rust-lang.org/1.61.0/std/primitive.slice.html#method.as_mut_ptr_range"><code>&lt;[T]&gt;::as_mut_ptr_range</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.61.0 release. Check out what changed in
+<a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1610-2022-05-19">Rust</a>,
+<a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-161-2022-05-19">Cargo</a>,
+and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-161">Clippy</a>.</p>
+<p>In a future release we're planning to increase the baseline requirements for
+the Linux kernel to version 3.2, and for glibc to version 2.17. We'd love
+your feedback in <a href="https://github.com/rust-lang/rust/pull/95026">rust#95026</a>.</p>
+<h3><a href="#contributors-to-1610" aria-hidden="true" class="anchor" id="contributors-to-1610"></a>Contributors to 1.61.0</h3>
+<p>Many people came together to create Rust 1.61.0.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.61.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="/feed.xml">Main Blog</a></li>
+          <li><a href="/inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="/scripts/highlight.js"></script>
+
+  </body>
+</html>

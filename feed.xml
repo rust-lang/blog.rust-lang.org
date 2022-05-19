@@ -10,8 +10,149 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-05-17T07:16:40+00:00</updated>
+    <updated>2022-05-19T14:08:54+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.61.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/05/19/Rust-1.61.0.html" type="text/html" title="Announcing Rust 1.61.0" />
+        <published>2022-05-19T00:00:00+00:00</published>
+        <updated>2022-05-19T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/05/19/Rust-1.61.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/05/19/Rust-1.61.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.61.0. Rust is a programming language
+empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.61.0 with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
+from the appropriate page on our website, and check out the
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1610-2022-05-19&quot;&gt;detailed release notes for 1.61.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider updating locally to use
+the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly channel (&lt;code&gt;rustup default nightly&lt;/code&gt;).
+Please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you might come across!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1610-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1610-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.61.0 stable&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#custom-exit-codes-from-main&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;custom-exit-codes-from-main&quot;&gt;&lt;/a&gt;Custom exit codes from &lt;code&gt;main&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;In the beginning, Rust &lt;code&gt;main&lt;/code&gt; functions could only return the unit type &lt;code&gt;()&lt;/code&gt; (either implicitly or explicitly), always indicating success
+in the exit status, and if you wanted otherwise you had to call &lt;code&gt;process::exit(code)&lt;/code&gt;. Since Rust
+1.26, &lt;code&gt;main&lt;/code&gt; has been allowed to return a &lt;code&gt;Result&lt;/code&gt;, where &lt;code&gt;Ok&lt;/code&gt; translated to a C &lt;code&gt;EXIT_SUCCESS&lt;/code&gt; and
+&lt;code&gt;Err&lt;/code&gt; to &lt;code&gt;EXIT_FAILURE&lt;/code&gt; (also debug-printing the error). Under the hood, these alternate return
+types were unified by an unstable &lt;code&gt;Termination&lt;/code&gt; trait.&lt;/p&gt;
+&lt;p&gt;In this release, that &lt;code&gt;Termination&lt;/code&gt; trait is finally stable, along with a more general &lt;code&gt;ExitCode&lt;/code&gt;
+type that wraps platform-specific return types. That has &lt;code&gt;SUCCESS&lt;/code&gt; and &lt;code&gt;FAILURE&lt;/code&gt; constants, and also
+implements &lt;code&gt;From&amp;lt;u8&amp;gt;&lt;/code&gt; for more arbitrary values. The &lt;code&gt;Termination&lt;/code&gt; trait can also be implemented for
+your own types, allowing you to customize any kind of reporting before converting to an &lt;code&gt;ExitCode&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For example, here&#x27;s a type-safe way to write exit codes for a &lt;a href&#x3D;&quot;https://git-scm.com/docs/git-bisect#_bisect_run&quot;&gt;&lt;code&gt;git bisect run&lt;/code&gt;&lt;/a&gt; script:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::process::{ExitCode, Termination};
+
+#[repr(u8)]
+pub enum GitBisectResult {
+    Good &#x3D; 0,
+    Bad &#x3D; 1,
+    Skip &#x3D; 125,
+    Abort &#x3D; 255,
+}
+
+impl Termination for GitBisectResult {
+    fn report(self) -&amp;gt; ExitCode {
+        // Maybe print a message here
+        ExitCode::from(self as u8)
+    }
+}
+
+fn main() -&amp;gt; GitBisectResult {
+    std::panic::catch_unwind(|| {
+        todo!(&amp;quot;test the commit&amp;quot;)
+    }).unwrap_or(GitBisectResult::Abort)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#more-capabilities-for-const-fn&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;more-capabilities-for-const-fn&quot;&gt;&lt;/a&gt;More capabilities for &lt;code&gt;const fn&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Several incremental features have been stabilized in this release to enable more functionality in
+&lt;code&gt;const&lt;/code&gt; functions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Basic handling of &lt;code&gt;fn&lt;/code&gt; pointers&lt;/strong&gt;: You can now create, pass, and cast function pointers in a
+&lt;code&gt;const fn&lt;/code&gt;. For example, this could be useful to build compile-time function tables for an
+interpreter. However, it is still not permitted to call &lt;code&gt;fn&lt;/code&gt; pointers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Trait bounds&lt;/strong&gt;: You can now write trait bounds on generic parameters to &lt;code&gt;const fn&lt;/code&gt;, such as
+&lt;code&gt;T: Copy&lt;/code&gt;, where previously only &lt;code&gt;Sized&lt;/code&gt; was allowed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;dyn Trait&lt;/code&gt; types&lt;/strong&gt;: Similarly, &lt;code&gt;const fn&lt;/code&gt; can now deal with trait objects, &lt;code&gt;dyn Trait&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;impl Trait&lt;/code&gt; types&lt;/strong&gt;: Arguments and return values for &lt;code&gt;const fn&lt;/code&gt; can now be opaque &lt;code&gt;impl Trait&lt;/code&gt;
+types.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note that the trait features do not yet support calling methods from those traits in a &lt;code&gt;const fn&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;See the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/reference/const_eval.html&quot;&gt;Constant Evaluation&lt;/a&gt; section of
+the reference book to learn more about the current capabilities of &lt;code&gt;const&lt;/code&gt; contexts, and future
+capabilities can be tracked in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/57563&quot;&gt;rust#57563&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#static-handles-for-locked-stdio&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;static-handles-for-locked-stdio&quot;&gt;&lt;/a&gt;Static handles for locked stdio&lt;/h3&gt;
+&lt;p&gt;The three standard I/O streams -- &lt;code&gt;Stdin&lt;/code&gt;, &lt;code&gt;Stdout&lt;/code&gt;, and &lt;code&gt;Stderr&lt;/code&gt; -- each have a &lt;code&gt;lock(&amp;amp;self)&lt;/code&gt; to
+allow more control over synchronizing read and writes. However, they returned lock guards with a
+lifetime borrowed from &lt;code&gt;&amp;amp;self&lt;/code&gt;, so they were limited to the scope of the original handle. This was
+determined to be an unnecessary limitation, since the underlying locks were actually in static
+storage, so now the guards are returned with a &lt;code&gt;&#x27;static&lt;/code&gt; lifetime, disconnected from the handle.&lt;/p&gt;
+&lt;p&gt;For example, a common error came from trying to get a handle and lock it in one statement:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// error[E0716]: temporary value dropped while borrowed
+let out &#x3D; std::io::stdout().lock();
+//        ^^^^^^^^^^^^^^^^^       - temporary value is freed at the end of this statement
+//        |
+//        creates a temporary which is freed while still in use
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now the lock guard is &lt;code&gt;&#x27;static&lt;/code&gt;, not borrowing from that temporary, so this works!&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
+&lt;p&gt;The following methods and trait implementations are now stabilized:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/pin/struct.Pin.html#method.static_mut&quot;&gt;&lt;code&gt;Pin::static_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/pin/struct.Pin.html#method.static_ref&quot;&gt;&lt;code&gt;Pin::static_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/vec/struct.Vec.html#method.retain_mut&quot;&gt;&lt;code&gt;Vec::retain_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/collections/struct.VecDeque.html#method.retain_mut&quot;&gt;&lt;code&gt;VecDeque::retain_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/io/struct.Cursor.html#impl-Write-4&quot;&gt;&lt;code&gt;Write&lt;/code&gt; for &lt;code&gt;Cursor&amp;lt;[u8; N]&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/os/unix/net/struct.SocketAddr.html#method.from_pathname&quot;&gt;&lt;code&gt;std::os::unix::net::SocketAddr::from_pathname&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/process/struct.ExitCode.html&quot;&gt;&lt;code&gt;std::process::ExitCode&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/process/trait.Termination.html&quot;&gt;&lt;code&gt;std::process::Termination&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/thread/struct.JoinHandle.html#method.is_finished&quot;&gt;&lt;code&gt;std::thread::JoinHandle::is_finished&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following previously stable functions are now &lt;code&gt;const&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.offset&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::offset&lt;/code&gt;&lt;/a&gt;
+and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.offset-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::offset&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_offset&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::wrapping_offset&lt;/code&gt;&lt;/a&gt;
+and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_offset-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::wrapping_offset&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.add&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::add&lt;/code&gt;&lt;/a&gt;
+and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.add-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::add&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.sub&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::sub&lt;/code&gt;&lt;/a&gt;
+and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.sub-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::sub&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_add&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::wrapping_add&lt;/code&gt;&lt;/a&gt;
+and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_add-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::wrapping_add&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_sub&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::wrapping_sub&lt;/code&gt;&lt;/a&gt;
+and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_sub-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::wrapping_sub&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.slice.html#method.as_mut_ptr&quot;&gt;&lt;code&gt;&amp;lt;[T]&amp;gt;::as_mut_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.slice.html#method.as_ptr_range&quot;&gt;&lt;code&gt;&amp;lt;[T]&amp;gt;::as_ptr_range&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.slice.html#method.as_mut_ptr_range&quot;&gt;&lt;code&gt;&amp;lt;[T]&amp;gt;::as_mut_ptr_range&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.61.0 release. Check out what changed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1610-2022-05-19&quot;&gt;Rust&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-161-2022-05-19&quot;&gt;Cargo&lt;/a&gt;,
+and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-161&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In a future release we&#x27;re planning to increase the baseline requirements for
+the Linux kernel to version 3.2, and for glibc to version 2.17. We&#x27;d love
+your feedback in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/95026&quot;&gt;rust#95026&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1610&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1610&quot;&gt;&lt;/a&gt;Contributors to 1.61.0&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.61.0.
+We couldn&#x27;t have done it without all of you.
+&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.61.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Security advisory: malicious crate rustdecimal</title>
@@ -720,50 +861,6 @@ Crichton for writing the WASI fix, and Mara Bos for reviewing the patches.&lt;/p
 
         <author>
             <name>The Rust Security Response WG</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.58.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/01/20/Rust-1.58.1.html" type="text/html" title="Announcing Rust 1.58.1" />
-        <published>2022-01-20T00:00:00+00:00</published>
-        <updated>2022-01-20T00:00:01+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/01/20/Rust-1.58.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/01/20/Rust-1.58.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.58.1. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.58.1 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1581-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1581-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.58.1 stable&lt;/h2&gt;
-&lt;p&gt;Rust 1.58.1 fixes a race condition in the &lt;code&gt;std::fs::remove_dir_all&lt;/code&gt; standard
-library function. This security vulnerability is tracked as &lt;a href&#x3D;&quot;https://www.cve.org/CVERecord?id&#x3D;CVE-2022-21658&quot;&gt;CVE-2022-21658&lt;/a&gt;,
-and you can read more about it &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/01/20/cve-2022-21658.html&quot;&gt;on the advisory we published earlier
-today&lt;/a&gt;. We recommend all users to update their toolchain immediately
-and rebuild their programs with the updated compiler.&lt;/p&gt;
-&lt;p&gt;Rust 1.58.1 also addresses several regressions in diagnostics and tooling introduced in Rust 1.58.0:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;non_send_fields_in_send_ty&lt;/code&gt; Clippy lint was discovered to have too many
-false positives and has been moved to the experimental lints group (called
-&amp;quot;nursery&amp;quot;).&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;useless_format&lt;/code&gt; Clippy lint has been updated to handle captured
-identifiers in format strings, introduced in Rust 1.58.0.&lt;/li&gt;
-&lt;li&gt;A regression in Rustfmt preventing generated files from being formatted when
-passed through the standard input has been fixed.&lt;/li&gt;
-&lt;li&gt;An incorrect error message displayed by &lt;code&gt;rustc&lt;/code&gt; in some cases has been fixed.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;You can find more detailed information on the specific regressions in the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1581-2022-01-20&quot;&gt;release notes&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1581&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1581&quot;&gt;&lt;/a&gt;Contributors to 1.58.1&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.58.1. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.58.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
