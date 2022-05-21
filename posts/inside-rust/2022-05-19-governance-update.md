@@ -16,7 +16,7 @@ As is noted in the summary, the next steps are to take the findings we have so f
 
 > From: Ryan Levick\
 > To: All members of the Rust project\
-> Date: Mon, 11 Apr 2021 18:27:00 UTC\
+> Date: Mon, 11 Apr 2022 18:27:00 UTC\
 > Subject: Rust Governance Update
 >
 > Hey @all,
