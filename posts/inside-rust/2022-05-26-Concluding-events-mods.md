@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Concluding the events of last November"
-author: Rust Moderation team
+author: Khionu Sybiern
+team: The Moderation Team <https://www.rust-lang.org/governance/teams/moderation>
 ---
 
 [With the moderators' resignation in November](https://blog.rust-lang.org/inside-rust/2021/11/25/in-response-to-the-moderation-team-resignation.html), we (Josh Gould and Khionu Sybiern) had the mantle of the Moderation Team offered to us, and we caught up to speed on what lead up to this conflict. Their resignation became a catalyst, and we commited with the rest of the project leadership to do our best to solve the issues present and going forward.
