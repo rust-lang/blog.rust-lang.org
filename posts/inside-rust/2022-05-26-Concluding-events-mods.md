@@ -15,4 +15,4 @@ After these months, the following update was shared with core and team leaders:
 
 Bringing a close to this situation is a huge relief, but it is also far from the last step on the journey to recovering as a community. While project leadership [continues to work on these issues](https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html), the Moderation Team is working on an RFC to create supporting mechanisms to cover a wider range of issues. We're working with professionals in mediation and other relevant fields to make sure we are prepared. The RFC additionally will better define areas of moderation that were overlooked and improve collaboration and safety.
 
-The number one thing we would like going forward is a stronger two-way relationship between our team and the community. Going forward, we will be asking for your help to make contributing and using Rust as healthy of an experience as possible.
+The number one thing we would like going forward is a stronger two-way relationship between our team and the community. Going forward, we will be asking for your help to make contributing to and using Rust as healthy of an experience as possible.
