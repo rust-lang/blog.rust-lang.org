@@ -111,6 +111,10 @@ impl Blog {
         &self.prefix
     }
 
+    pub(crate) fn path_back_to_root(&self) -> PathBuf {
+        self.prefix.components().map(|_| Path::new("../")).collect()
+    }
+
     pub(crate) fn posts(&self) -> &[Post] {
         &self.posts
     }

@@ -10,7 +10,7 @@
       <p>
       <b>See also:</b>
       {{#each other_blogs}}
-              <a href="{{url}}">{{link_text}}</a>
+              <a href="{{../root}}{{url}}">{{link_text}}</a>
       {{/each}}
       </p>
     </div>
@@ -28,7 +28,7 @@
       </tr>{{/if}}
       <tr>
         <td class="tr o-60 pr4 pr5-l bn">{{month_name month}}&nbsp;{{day}}</td>
-        <td class="bn"><a href="/{{../blog.prefix}}{{url}}">{{title}}</a></td>
+        <td class="bn"><a href="{{url}}">{{title}}</a></td>
       </tr>
     {{/each}}
     </table>
