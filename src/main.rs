@@ -18,6 +18,7 @@ struct Generator<'a> {
     handlebars: Handlebars<'a>,
     blogs: Vec<Blog>,
     out_directory: PathBuf,
+    file_url: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -57,10 +58,23 @@ impl<'a> Generator<'a> {
         handlebars.register_templates_directory(".hbs", "templates")?;
         handlebars.register_helper("month_name", Box::new(hb_month_name_helper));
 
+        let file_url = format!(
+            "file:///{}/",
+            out_directory
+                .as_ref()
+                .canonicalize()
+                .unwrap_or(out_directory.as_ref().to_owned())
+                .display()
+                .to_string()
+                .trim_start_matches('/')
+                .replace(' ', "%20")
+        );
+
         Ok(Generator {
             handlebars,
             blogs: crate::blogs::load(posts_directory.as_ref())?,
             out_directory: out_directory.as_ref().into(),
+            file_url,
         })
     }
 
@@ -103,16 +117,24 @@ impl<'a> Generator<'a> {
     fn render_blog(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
         std::fs::create_dir_all(self.out_directory.join(blog.prefix()))?;
 
-        self.render_index(blog)?;
+        let path = self.render_index(blog)?;
+
+        println!("{}: {}{}", blog.title(), self.file_url, path.display());
+
         self.render_feed(blog)?;
         self.render_releases_feed(blog)?;
-        for post in blog.posts() {
-            self.render_post(blog, post)?;
+
+        for (i, post) in blog.posts().iter().enumerate() {
+            let path = self.render_post(blog, post)?;
+            if i == 0 {
+                println!("└─ Latest post: {}{}\n", self.file_url, path.display());
+            }
         }
+
         Ok(())
     }
 
-    fn render_index(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+    fn render_index(&self, blog: &Blog) -> Result<PathBuf, Box<dyn Error>> {
         let other_blogs: Vec<_> = self
             .blogs
             .iter()
@@ -132,11 +154,12 @@ impl<'a> Generator<'a> {
             "other_blogs": other_blogs,
             "root": blog.path_back_to_root(),
         });
-        self.render_template(blog.prefix().join("index.html"), "index", data)?;
-        Ok(())
+        let path = blog.prefix().join("index.html");
+        self.render_template(&path, "index", data)?;
+        Ok(path)
     }
 
-    fn render_post(&self, blog: &Blog, post: &Post) -> Result<(), Box<dyn Error>> {
+    fn render_post(&self, blog: &Blog, post: &Post) -> Result<PathBuf, Box<dyn Error>> {
         let path = blog
             .prefix()
             .join(format!("{:04}", &post.year))
@@ -156,8 +179,9 @@ impl<'a> Generator<'a> {
             "root": blog.path_back_to_root().join("../../../"),
         });
 
-        self.render_template(path.join(filename), &post.layout, data)?;
-        Ok(())
+        let path = path.join(filename);
+        self.render_template(&path, &post.layout, data)?;
+        Ok(path)
     }
 
     fn render_feed(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
