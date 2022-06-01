@@ -27,7 +27,7 @@ syndrome occurs when we discount what we know and inflate what we think other
 people know, and this effect is often then reinforced by systemic bias for
 those of us who don't get the assumption of competence.
 
-![picture of imposter syndrome, left side shows a large circle saying "What I think others know" and a small circle inside of it saying "What I know", right side shows the same small circle saying "What I know" surrounded by many other equally sized small circles labeled "What others know"](/images/2022-04-19-imposter-syndrome/imposter_syndrome.jpg)
+![picture of imposter syndrome, left side shows a large circle saying "What I think others know" and a small circle inside of it saying "What I know", right side shows the same small circle saying "What I know" surrounded by many other equally sized small circles labeled "What others know"](../../../../images/2022-04-19-imposter-syndrome/imposter_syndrome.jpg)
 
 In reality, we're all specialists within the Rust project. We all have areas
 where we have deep expertise and other large areas where we only have the

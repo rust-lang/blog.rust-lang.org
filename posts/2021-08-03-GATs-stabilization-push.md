@@ -10,7 +10,7 @@ team: the Traits Working Group <https://www.rust-lang.org/governance/teams/compi
 Where to start, where to start...
 
 Let's begin by saying: this is a very exciting post. Some people reading this will be overwhelmingly thrilled; some will have no idea what GATs (generic associated types) are; others might be in disbelief. The [RFC] for this feature did get opened in April of *2016* (and merged about a year and a half later). In fact, this RFC even predates const generics (which an MVP of was [recently stabilized][min_const_generics]). Don't let this fool you though: it is a powerful feature; and the reactions to the tracking issue on Github should maybe give you an idea of its popularity (it is *the* most upvoted issue on the Rust repository):
-![GATs reactions](/images/2021-08-03-GATs-stabilization-push/gats-reactions.png)
+![GATs reactions](../../../images/2021-08-03-GATs-stabilization-push/gats-reactions.png)
 
 If you're not familiar with GATs, they allow you to define type, lifetime, or const generics on associated types. Like so:
 

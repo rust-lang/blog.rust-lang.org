@@ -159,17 +159,17 @@ And we couldn't agree more.  One of the best things about working in Rust is tha
 We'd love to hear your comments and invite you to jump in and participate in the upcoming discussions on ways we can tackle the challenges brought up in this survey.
 
 
-[do-you-use-rust]: /images/2016-06-Survey/do_you_use_rust.png
-[time-using-rust]: /images/2016-06-Survey/time_using_rust.png
-[versions-of-rust]: /images/2016-06-Survey/versions_of_rust.png
-[after_1_0_broke_code]: /images/2016-06-Survey/after_1_0_broke_code.png
-[easy_to_fix]: /images/2016-06-Survey/easy_to_fix.png
-[like_cargo]: /images/2016-06-Survey/like_cargo.png
-[rust_at_work]: /images/2016-06-Survey/rust_at_work.png
-[part_time]: /images/2016-06-Survey/part_time.png
-[full_time]: /images/2016-06-Survey/full_time.png
-[rust_at_work_future]: /images/2016-06-Survey/rust_at_work_future.png
-[demo_areas]: /images/2016-06-Survey/demo_areas.png
-[meetup_locations]: /images/2016-06-Survey/meetup_locations.png
-[what_languages]: /images/2016-06-Survey/what_language.png
-[underrepresented]: /images/2016-06-Survey/underrepresented.png
+[do-you-use-rust]: ../../../images/2016-06-Survey/do_you_use_rust.png
+[time-using-rust]: ../../../images/2016-06-Survey/time_using_rust.png
+[versions-of-rust]: ../../../images/2016-06-Survey/versions_of_rust.png
+[after_1_0_broke_code]: ../../../images/2016-06-Survey/after_1_0_broke_code.png
+[easy_to_fix]: ../../../images/2016-06-Survey/easy_to_fix.png
+[like_cargo]: ../../../images/2016-06-Survey/like_cargo.png
+[rust_at_work]: ../../../images/2016-06-Survey/rust_at_work.png
+[part_time]: ../../../images/2016-06-Survey/part_time.png
+[full_time]: ../../../images/2016-06-Survey/full_time.png
+[rust_at_work_future]: ../../../images/2016-06-Survey/rust_at_work_future.png
+[demo_areas]: ../../../images/2016-06-Survey/demo_areas.png
+[meetup_locations]: ../../../images/2016-06-Survey/meetup_locations.png
+[what_languages]: ../../../images/2016-06-Survey/what_language.png
+[underrepresented]: ../../../images/2016-06-Survey/underrepresented.png

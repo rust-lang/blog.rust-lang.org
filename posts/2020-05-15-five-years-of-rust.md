@@ -393,12 +393,12 @@ To learn more, run the command again with --verbose.
 
 ![A terminal screenshot of the 1.43.0 error message.][borrow-error-1.43.0]
 
-[borrow-error-1.2.0]:  /images/2020-05-15-five-years-of-rust/borrow-error-1.2.0.png
-[borrow-error-1.43.0]: /images/2020-05-15-five-years-of-rust/borrow-error-1.43.0.png
-[help-error-1.2.0]:    /images/2020-05-15-five-years-of-rust/help-error-1.2.0.png
-[help-error-1.43.0]:   /images/2020-05-15-five-years-of-rust/help-error-1.43.0.png
-[trait-error-1.2.0]:   /images/2020-05-15-five-years-of-rust/trait-error-1.2.0.png
-[trait-error-1.43.0]:  /images/2020-05-15-five-years-of-rust/trait-error-1.43.0.png
+[borrow-error-1.2.0]:  ../../../images/2020-05-15-five-years-of-rust/borrow-error-1.2.0.png
+[borrow-error-1.43.0]: ../../../images/2020-05-15-five-years-of-rust/borrow-error-1.43.0.png
+[help-error-1.2.0]:    ../../../images/2020-05-15-five-years-of-rust/help-error-1.2.0.png
+[help-error-1.43.0]:   ../../../images/2020-05-15-five-years-of-rust/help-error-1.43.0.png
+[trait-error-1.2.0]:   ../../../images/2020-05-15-five-years-of-rust/trait-error-1.2.0.png
+[trait-error-1.43.0]:  ../../../images/2020-05-15-five-years-of-rust/trait-error-1.43.0.png
 
 ## Quotes from the teams
 Of course we can't cover every change that has happened. So we reached out and

@@ -31,7 +31,7 @@ The problem though is that it takes a few seconds to look at the message, orient
 the critical pieces. This time loss adds up. What if, instead, we cleared away everything that slows
 down how you read the error message?
 
-<img src="/images/2016-08-09-Errors/new_errors.png" width="500" />
+<img src="../../../images/2016-08-09-Errors/new_errors.png" width="500" />
 
 This is the new error format. It's designed around the fundamental observation that
 errors should **focus on the code you wrote**. By doing so, you can much more easily see the context
@@ -182,10 +182,10 @@ improve the learning curve bit by bit, and we're looking forward to seeing how f
 
 
 
-[old_errors]: /images/2016-08-09-Errors/old_errors.png
-[new_errors]: /images/2016-08-09-Errors/new_errors.png
-[new_errors2]: /images/2016-08-09-Errors/new_errors2.png
-[new_errors3]: /images/2016-08-09-Errors/new_errors3.png
-[new_errors4]: /images/2016-08-09-Errors/new_errors4.png
+[old_errors]: ../../../images/2016-08-09-Errors/old_errors.png
+[new_errors]: ../../../images/2016-08-09-Errors/new_errors.png
+[new_errors2]: ../../../images/2016-08-09-Errors/new_errors2.png
+[new_errors3]: ../../../images/2016-08-09-Errors/new_errors3.png
+[new_errors4]: ../../../images/2016-08-09-Errors/new_errors4.png
 [Dybuk]: https://github.com/ticki/dybuk
 [Elm]: https://elm-lang.org/blog/compiler-errors-for-humans

@@ -15,7 +15,7 @@ It's been two years since Rust 1.0 was released. Happy second birthday, Rust!
 
 *Rustaceans at RustFest Berlin, September 2016. Picture by Fiona Castiñeira*
 
-[group-pic]: /images/2017-05-Second-Birthday/rustfest-berlin.jpeg
+[group-pic]: ../../../images/2017-05-Second-Birthday/rustfest-berlin.jpeg
 
 Over these two years, we have demonstrated stability without stagnation,
 maintaining backwards compatibility with version 1.0 while also making many
@@ -240,7 +240,7 @@ Try out incremental compilation on nightly Rust with
 
 [incrcomp]: https://internals.rust-lang.org/t/incremental-compilation-beta/4721
 [roadmap-4]: https://github.com/rust-lang/rust-roadmap/issues/4
-[incrcomp-svg]: /images/2017-05-Second-Birthday/incremental-compilation.svg
+[incrcomp-svg]: ../../../images/2017-05-Second-Birthday/incremental-compilation.svg
 
 We've also made some progress on the time it takes to do a full compilation. On
 average, compile times have improved by 5-10% in the last year, but some

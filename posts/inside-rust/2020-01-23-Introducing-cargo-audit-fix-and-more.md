@@ -22,7 +22,7 @@ $ cargo install cargo-audit --features=fix
 
 This will perform the same audit process as `cargo audit` initially, and then attempt to apply fixes to your `Cargo.toml`:
 
-![cargo audit fix screenshot](/images/inside-rust/2020-01-23-Introducing-cargo-audit-fix-and-more/cargo-audit-fix.png)
+![cargo audit fix screenshot](../../../../images/inside-rust/2020-01-23-Introducing-cargo-audit-fix-and-more/cargo-audit-fix.png)
 
 Under the hood, it uses [cargo-edit](https://github.com/killercup/cargo-edit) (as a library) to perform modifications to your `Cargo.toml` file, using the fixed version requirements listed in the advisory to try to perform an automatic upgrade to a non-vulnerable version of a dependency for each advisory.
 

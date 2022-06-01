@@ -4,7 +4,7 @@ title: "Increasing Rust’s Reach"
 author: Carol Nichols
 ---
 
-**EDIT: We've heard that Google Forms is not easily accessible in all countries; if that applies to you, please find the [application's questions in this text file](/images/2017-06-Increasing-Rusts-Reach/application.txt) and send the answers via email to carol.nichols@gmail.com.**
+**EDIT: We've heard that Google Forms is not easily accessible in all countries; if that applies to you, please find the [application's questions in this text file](../../../images/2017-06-Increasing-Rusts-Reach/application.txt) and send the answers via email to carol.nichols@gmail.com.**
 
 One of [Rust's 2017 goals](https://blog.rust-lang.org/2017/02/06/roadmap.html) is to make it easier
 to become productive in Rust by reducing its learning curve. We believe Rust has potential as an
@@ -84,7 +84,7 @@ Who should apply for this project:
 - Interest in improving usability of developer-facing documentation and tools
 - Interest in learning in detail about Rust syntax and semantics
 
-<img src="/images/2017-06-Increasing-Rusts-Reach/nrc.jpg" alt="Nick Cameron" class="right-thumbnail">
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/nrc.jpg" alt="Nick Cameron" class="right-thumbnail">
 
 *About Nick Cameron: I'm a Rust core team member and lead the dev-tools team. I work on a bunch of
 tools including Rustdoc, Rustfmt, the Rust Language Server, and the Rust compiler. I want to make
@@ -92,7 +92,7 @@ Rust developer tools awesome, and user experience is a key part of that. I want 
 world (or at least the programming world), and we can't do that without making the Rust language
 and community more accessible to more people.*
 
-<img src="/images/2017-06-Increasing-Rusts-Reach/steveklabnik.jpeg" alt="Steve Klabnik" class="right-thumbnail">
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/steveklabnik.jpeg" alt="Steve Klabnik" class="right-thumbnail">
 
 *About Steve Klabnik: I used to work on Ruby on Rails before Rust, and one of the reasons why I love
 Rust is that as a project, we're committed to helping people learn Rust as their first low-level
@@ -127,7 +127,7 @@ Who should apply for this project:
 - Interest in improving the new Rust developer experience
 - Interest in learning how to improve and create lints
 
-<img src="/images/2017-06-Increasing-Rusts-Reach/manish.png" alt="Manish Goregaokar" class="right-thumbnail">
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/manish.png" alt="Manish Goregaokar" class="right-thumbnail">
 
 *About Manish Goregaokar: I'm a research engineer at Mozilla working on Servo. I care a lot about
 improving workflows and tooling, especially around the newcomer experience.*
@@ -154,7 +154,7 @@ Who should apply for this project:
 - Interest in improving approachability of Rust
 - Interest in investigating the motivations behind visitors to the main website and/or crates.io
 
-<img src="/images/2017-06-Increasing-Rusts-Reach/aturon.jpg" alt="Aaron Turon" class="right-thumbnail">
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/aturon.jpg" alt="Aaron Turon" class="right-thumbnail">
 
 *About Aaron Turon: I'm a Rust core team member, manage the Mozilla Rust team, and currently lead
 the library, infrastructure, and Cargo teams. On the technical side, I'm most driven by language
@@ -181,7 +181,7 @@ Who should apply for this project:
 - Background or interest in creating visual teaching tools like diagrams or drawings a plus
 - Interest in learning Rust concepts and teaching what you learn to others
 
-<img src="/images/2017-06-Increasing-Rusts-Reach/nmatsakis.jpeg" alt="Niko Matsakis" class="right-thumbnail">
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/nmatsakis.jpeg" alt="Niko Matsakis" class="right-thumbnail">
 
 *About Niko Matsakis: I'm a member of the Rust core team as well as the Rust language and compiler
 teams. I focus mainly on the design and implementation of the language itself. I want to do what I
@@ -205,7 +205,7 @@ Who should apply for this project:
 - Experience using a web framework written in some other language
 - Interest in learning how to write web applications in Rust and teaching what you learn to others
 
-<img src="/images/2017-06-Increasing-Rusts-Reach/sgrif.jpeg" alt="Sean Griffin" class="right-thumbnail">
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/sgrif.jpeg" alt="Sean Griffin" class="right-thumbnail">
 
 *About Sean Griffin: In addition to my Rust work, I am one of the maintainers of Ruby on Rails. One
 of the great things about Rails (and web development) is that it has really helped to lower the
@@ -235,7 +235,7 @@ Who should apply for this project:
 - Background in writing, teaching, or documentation
 - Interest in, and opinions about, improving tools for creating and displaying code documentation
 
-<img src="/images/2017-06-Increasing-Rusts-Reach/pnkfelix.jpeg" alt="Felix Klock" class="right-thumbnail">
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/pnkfelix.jpeg" alt="Felix Klock" class="right-thumbnail">
 
 *About Felix Klock: I'm the main developer of tango (as well as a member of the Rust compiler and
 language teams). I actively use tango for authoring my presentation slides about Rust. I
@@ -267,7 +267,7 @@ Who should apply for this project:
 - Interest in learning how to translate an application to Rust
 - Interest in researching and documenting features that libraries have or don’t have
 
-<img src="/images/2017-06-Increasing-Rusts-Reach/burntsushi.jpeg" alt="Andrew Gallant" class="right-thumbnail">
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/burntsushi.jpeg" alt="Andrew Gallant" class="right-thumbnail">
 
 *About Andrew Gallant: I'm a member of the Rust library team that works with Rust in my free time. I
 am very interested in information retrieval, fast text search and generally improving Rust's
@@ -293,7 +293,7 @@ Who should apply for this project:
 - Interest in learning how to write or translate a CLI program to Rust
 - Interest in researching and documenting features that libraries have or don’t have
 
-<img src="/images/2017-06-Increasing-Rusts-Reach/kamalmarhubi.jpeg" alt="Kamal Marhubi" class="right-thumbnail">
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/kamalmarhubi.jpeg" alt="Kamal Marhubi" class="right-thumbnail">
 
 *About Kamal Marhubi: I've been writing Rust for about a year and a half. I help maintain nix, a
 library that gives a Rusty interface to unix systems APIs. I've also contributed to rustfmt, rustup,

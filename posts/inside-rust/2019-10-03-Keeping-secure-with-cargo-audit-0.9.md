@@ -27,7 +27,7 @@ Previously, when `cargo-audit` found a vulnerability in a project, it would disp
 
 The latest release prints an inverse dependency tree (ala the excellent [cargo-tree](https://github.com/sfackler/cargo-tree) crate) for each advisory showing how a vulnerable dependency is included in your project:
 
-![cargo audit with dependency tree](/images/inside-rust/2019-10-03-Keeping-secure-with-cargo-audio-0.9/cargo-audit-dependency-tree.png)
+![cargo audit with dependency tree](../../../../images/inside-rust/2019-10-03-Keeping-secure-with-cargo-audio-0.9/cargo-audit-dependency-tree.png)
 
 In future versions of `cargo-audit` we [hope to add a `cargo audit fix` command](https://github.com/RustSec/cargo-audit/issues/23) ala `npm audit fix` which can either automatically update the necessary dependencies or provide instructions on how to do so. If that feature interests you and you'd like to contribute, [we're looking for help](https://github.com/RustSec/cargo-audit/issues/23)!
 
