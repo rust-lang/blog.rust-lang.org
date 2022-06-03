@@ -1,4 +1,4 @@
-use crate::posts::Post;
+use super::posts::Post;
 use serde_derive::{Deserialize, Serialize};
 use std::error::Error;
 use std::path::{Path, PathBuf};

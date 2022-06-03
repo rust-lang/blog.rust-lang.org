@@ -1,4 +1,4 @@
-use crate::blogs::Manifest;
+use super::blogs::Manifest;
 use comrak::{ComrakExtensionOptions, ComrakOptions, ComrakRenderOptions};
 use regex::Regex;
 use serde_derive::{Deserialize, Serialize};
