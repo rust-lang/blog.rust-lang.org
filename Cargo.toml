@@ -3,6 +3,7 @@ name = "blog"
 version = "0.1.0"
 authors = ["Steve Klabnik <steve@steveklabnik.com>"]
 edition = "2018"
+default-run = "blog"
 
 [dependencies]
 handlebars = { version = "3", features = ["dir_source"] }
