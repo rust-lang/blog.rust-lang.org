@@ -10,8 +10,71 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-05-31T17:44:44+00:00</updated>
+    <updated>2022-06-06T16:40:09+00:00</updated>
 
+    
+    <entry>
+        <title>Rust Compiler June 2022 Steering Cycle</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/06/03/jun-steering-cycle.html" type="text/html" title="Rust Compiler June 2022 Steering Cycle" />
+        <published>2022-06-03T00:00:00+00:00</published>
+        <updated>2022-06-03T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/06/03/jun-steering-cycle.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/06/03/jun-steering-cycle.html">&lt;p&gt;On &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings/topic/.5Bplanning.20meeting.5D.202022-06-03/near/284883023&quot;&gt;Friday, June 3rd&lt;/a&gt;, the Rust Compiler team had a planning meeting for the June 2022 steering cycle.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#t-compiler-june-steering-schedule&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;t-compiler-june-steering-schedule&quot;&gt;&lt;/a&gt;T-compiler June Steering Schedule&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Date&lt;/th&gt;
+&lt;th&gt;Meeting Id&lt;/th&gt;
+&lt;th&gt;Meeting Topic&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/calendar/event?eid&#x3D;Nm8xbGtqbHBzMjdpcTRjcHAybmw4a3Y0ZjEgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;ctz&#x3D;GMT-04:00&quot;&gt;2022-06-10&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/516&quot;&gt;compiler-team#516&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;path sanitisation changes &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/issues/3127&quot;&gt;rfc#3127&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://www.google.com/calendar/event?eid&#x3D;NHY4Y3VmdXZqcWJxOWgzOXVyZWM5a3JjaWUgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;ctz&#x3D;GMT-04:00&quot;&gt;2022-06-17&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/517&quot;&gt;compiler-team#517&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;2022 Q2 P-high review&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/calendar/event?eid&#x3D;MmE2azQyb2ViODQ4NWwxMWViMzJka2g0cjIgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;ctz&#x3D;GMT-04:00&quot;&gt;2022-06-24&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/484&quot;&gt;compiler-team#484&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Compiler Feature Backlog Bonanza&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/calendar/event?eid&#x3D;MDJyYnJ1cGFtdWR1c2lnNjFmcHJ2b3JlODFfMjAyMjA3MDFUMTQwMDAwWiA2dTVycnRjZTZscnR2MDdwZmkzZGFtZ2p1c0Bn&amp;ctz&#x3D;GMT-04:00&quot;&gt;2022-07-01&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;td&gt;(planning for July cycle)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#details&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;details&quot;&gt;&lt;/a&gt;Details&lt;/h3&gt;
+&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
+it is going to use its scheduled steering and design meeting time over the next
+three Fridays.&lt;/p&gt;
+&lt;p&gt;On Friday, 10 June, we will review &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/issues/3127&quot;&gt;RFC PR #3127&lt;/a&gt;, which proposes
+new rustc and Cargo options to allow path sanitisation by default.&lt;/p&gt;
+&lt;p&gt;On Friday, 17 June, we will be doing a quarterly &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/517&quot;&gt;review of the open P-high issues&lt;/a&gt;.
+pnkfelix will do some ahead of time work triaging
+some of the issues, and potentially prepare a meeting document summarizing the
+remainder, to maximize the quality of our synchronous in-meeting time.&lt;/p&gt;
+&lt;p&gt;On Friday, 24 June, we will be having a &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/484&quot;&gt;&amp;quot;backlog bonanza&amp;quot;&lt;/a&gt;, in a
+similar vein to that done by T-lang, to review the list of unimplemented or
+partially-implemented features. pnkfelix and Jack Huey will prepare a document
+to drive the meeting.&lt;/p&gt;
+&lt;p&gt;On Friday, 1 July, we will hold our planning meeting for the next steering cycle in July.&lt;/p&gt;
+&lt;p&gt;Each meeting will run from 2pm to 3pm GMT, and will take place on the
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Felix Klock</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Concluding the events of last November</title>
@@ -670,40 +733,6 @@ with different themes. You can join any breakout room you like and hangout.&lt;/
 
         <author>
             <name>Rust CTCFT Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Lang team April update</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/06/lang-team-april-update.html" type="text/html" title="Lang team April update" />
-        <published>2022-04-06T00:00:00+00:00</published>
-        <updated>2022-04-06T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/04/06/lang-team-april-update.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/06/lang-team-april-update.html">&lt;p&gt;Today, the lang team held its April planning meeting. We hold these meetings on the first Wednesday of every month, and we use them to schedule &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/meetings/design.html&quot;&gt;design meetings&lt;/a&gt; for the remainder of the month.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#upcoming-design-meetings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upcoming-design-meetings&quot;&gt;&lt;/a&gt;Upcoming design meetings&lt;/h2&gt;
-&lt;p&gt;We have planned the following design meetings:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;2021-04-13: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/152&quot;&gt;Implied bounds and perfect derive&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;2021-04-20: &lt;a href&#x3D;&quot;https://github.com/rust-lang/lang-team/issues/155&quot;&gt;Language design research overview&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;2021-04-27: &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/meetings/backlog-bonanza.html&quot;&gt;Backlog Bonanza&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#design-meeting-expectations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-meeting-expectations&quot;&gt;&lt;/a&gt;Design meeting expectations&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;The document for the meeting must be prepared by the triage meeting on Tuesday and posted to the tracking issue.
-&lt;ul&gt;
-&lt;li&gt;If it is not sent out by then, the meeting will be replaced with a &lt;a href&#x3D;&quot;https://lang-team.rust-lang.org/meetings/backlog-bonanza.html&quot;&gt;Backlog Bonanza&lt;/a&gt; session. This gives folks 24 hour notice.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;There is no expectation that people will read the document before the meeting. The meeting will begin with a recap of the document.
-&lt;ul&gt;
-&lt;li&gt;However, there is no rule &lt;strong&gt;against&lt;/strong&gt; reading the document beforehand and providing feedback or advice on how to improve it.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>Josh Triplett</name>
         </author>
     </entry>
     
