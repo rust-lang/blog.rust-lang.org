@@ -32,7 +32,7 @@ Jack's blog post includes a [detailed narrative](https://jackh726.github.io/rust
 
 The next frontier for Rust borrow checking is taking the [polonius](https://github.com/rust-lang/polonius) project and moving it from research experiment to production code. Polonius is a next-generation version of the borrow checker that was "spun off" from the main NLL effort in 2018, as we were getting NLL ready to ship in production. Its most important contribution is fixing a known limitation of the borrow checker, demonstrated by the following example:
 
-```rust=
+```rust
 fn last_or_push<'a>(vec: &'a mut Vec<String>) -> &'a String {
     if let Some(s) = vec.last() { // borrows vec
         // returning s here forces vec to be borrowed
