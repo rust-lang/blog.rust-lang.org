@@ -2,6 +2,7 @@
 layout: post
 title: "Non-lexical lifetimes (NLL) fully stable"
 author: Niko Matsakis
+team: the NLL working group <https://www.rust-lang.org/governance/teams/compiler#Non-Lexical%20Lifetimes%20(NLL)%20working%20group>
 release: true
 ---
 
