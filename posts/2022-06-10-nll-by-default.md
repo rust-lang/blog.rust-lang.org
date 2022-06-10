@@ -24,7 +24,7 @@ The work to remove the old borrow checker has been going on for years. It's been
 * [Rémy Rakic](https://github.com/lqd), for rebasing Matthew's PR as well as doing other independent diagnostics work.
 * [Christopher Vittal](https://github.com/chrisvittal), for removing "compare" mode (don't ask).
 * [Centril](https://github.com/centril), for doing a lot of early work reconciling migration mode and the regular mode.
-* And of course the members of the NLL working group (myself, [Felix Klock](https://github.com/pnkfelix), [Santiago Pastorino](https://github.com/spastorino), [Matthew Jasper](https://github.com/matthewjasper), [Paul Daniel Faria](https://github.com/nashenas88), [Nick Nethercote](https://github.com/nnethercote)) who delivered the feature in the first place.
+* And of course the members of the NLL working group (myself, [Felix Klock](https://github.com/pnkfelix), [Santiago Pastorino](https://github.com/spastorino), [Matthew Jasper](https://github.com/matthewjasper), [David Wood](https://github.com/davidtwco], [Rémy Rakic](https://github.com/lqd), [Paul Daniel Faria](https://github.com/nashenas88), [Nick Nethercote](https://github.com/nnethercote)) who delivered the feature in the first place.
 
 Jack's blog post includes a [detailed narrative](https://jackh726.github.io/rust/2022/06/10/nll-stabilization.html#how-did-we-get-here) of all the work involved if you'd like more details! It's a fun read.
 
