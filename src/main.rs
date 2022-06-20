@@ -63,11 +63,13 @@ impl<'a> Generator<'a> {
             out_directory
                 .as_ref()
                 .canonicalize()
-                .unwrap_or(out_directory.as_ref().to_owned())
+                .unwrap_or_else(|_| out_directory.as_ref().to_owned())
                 .display()
                 .to_string()
                 .trim_start_matches('/')
                 .replace(' ', "%20")
+                .replace("\\\\?\\", "")
+                .replace(std::path::MAIN_SEPARATOR, "/")
         );
 
         Ok(Generator {
