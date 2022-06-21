@@ -10,8 +10,31 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-06-09T20:59:00+00:00</updated>
+    <updated>2022-06-21T08:38:24+00:00</updated>
 
+    
+    <entry>
+        <title>2021 Annual Survey Report</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/06/21/survey-2021-report.html" type="text/html" title="2021 Annual Survey Report" />
+        <published>2022-06-21T00:00:00+00:00</published>
+        <updated>2022-06-21T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/06/21/survey-2021-report.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/06/21/survey-2021-report.html">&lt;p&gt;As usual, we conducted an annual community survey in 2021. We previously shared some some highlights and charts
+in a &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html&quot;&gt;blog post&lt;/a&gt;. This year we would also like to
+make the complete (-ish) dataset available. We have compiled a report which contains data and charts for nearly
+all questions with minimal analysis. We have elided a few sensitive questions and have combined some answers
+or elided some answers where there is any chance of respondents being identified or of sensitive data being released.&lt;/p&gt;
+&lt;p&gt;We intend to produce further small reports with more analysis targetted at specific teams or groups within the
+project. If there is any analysis or processed data you&#x27;d like to see, please get in touch with the survey working group via
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/294169-t-community.2Frust-survey-2021&quot;&gt;Zulip&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Once again, we&#x27;d like to thank all the respondents, our translators, and everyone else who helped to make the survey a success!&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/surveys/raw/main/surveys/2021-annual-survey/2021-annual-survey-summary.pdf&quot;&gt;Download the report&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Nick Cameron</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Rust Compiler June 2022 Steering Cycle</title>
@@ -683,57 +706,6 @@ aforementioned discussion of Salsa 2.0&#x27;s entity design, which would resolve
 
         <author>
             <name>Felix Klock</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>CTCFT 2022-04-18 Agenda</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/12/CTCFT-april.html" type="text/html" title="CTCFT 2022-04-18 Agenda" />
-        <published>2022-04-12T00:00:00+00:00</published>
-        <updated>2022-04-12T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/04/12/CTCFT-april.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/12/CTCFT-april.html">&lt;p&gt;The next &lt;a href&#x3D;&quot;https://rust-lang.github.io/ctcft/&quot;&gt;&amp;quot;Cross Team Collaboration Fun Times&amp;quot; (CTCFT)&lt;/a&gt; meeting will take
-place on Monday, 2022-04-18 at &lt;strong&gt;9pm US Eastern Time&lt;/strong&gt; (&lt;a href&#x3D;&quot;https://everytimezone.com/s/497ef0a9&quot;&gt;click to see in your
-time zone&lt;/a&gt;). You’ll find the full details (along with a calendar
-event, zoom details, etc) &lt;a href&#x3D;&quot;https://rust-lang.github.io/ctcft/meetings/2022-04-18.html&quot;&gt;on the CTCFT website&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#agenda&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;agenda&quot;&gt;&lt;/a&gt;Agenda&lt;/h2&gt;
-&lt;p&gt;The theme of April&#x27;s CTCFT is &amp;quot;learning&amp;quot;. Doc Jones will speak about the Rustc
-Reading Club Phase II, and what was learned from the first iteration of the
-club. Jon Gjengset will talk about teaching advanced Rust concepts.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;(5 min) Opening remarks 👋 (&lt;a href&#x3D;&quot;https://github.com/angelonfira&quot;&gt;angelonfira&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;(20 min) Rustc Reading Club Phase II (&lt;a href&#x3D;&quot;https://github.com/doc-jones&quot;&gt;doc-jones&lt;/a&gt;)
-&lt;ul&gt;
-&lt;li&gt;The Rustc Reading Club has two goals. First, to produce confident new
-contributors to rustc. Second, to deepen understanding of rustc for mid
-level contributors. The structure of RRC enables participants to gain
-experience working with other contributors making their future
-collaborations easier. &lt;a href&#x3D;&quot;https://mojosd.medium.com/rrc-phase-i-retrospective-74141fb246e4&quot;&gt;Phase I of the Rustc Reading Club&lt;/a&gt; is complete and
-now we are ready to launch Phase II based on what we&#x27;ve learned. Phase I
-focused solely on rustc&#x27;s name resolver module. We plan to expand and
-&amp;quot;read&amp;quot; other areas of the compiler in Phase II.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;(20 min) Teaching Advanced Rust (&lt;a href&#x3D;&quot;https://github.com/jonhoo&quot;&gt;jonhoo&lt;/a&gt;)
-&lt;ul&gt;
-&lt;li&gt;Over the past few years I&#x27;ve spent a lot of time trying to teach Rust
-&amp;quot;beyond the basics&amp;quot;, focusing my attention on the problems that developers
-who have read all the introductory materials run into when they sit down
-to actually use Rust &amp;quot;for real&#x27;. In this session I&#x27;ll talk about some
-recurring patterns I&#x27;ve seen while doing this, in the hope that they may
-spawn interesting discussion about possible solutions.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;(5 min) Closing (&lt;a href&#x3D;&quot;https://github.com/angelonfira&quot;&gt;angelonfira&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#afterwards-social-hour&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;afterwards-social-hour&quot;&gt;&lt;/a&gt;Afterwards: Social Hour&lt;/h2&gt;
-&lt;p&gt;Like always, we&#x27;ll be running a social hour after the CTCFT. The idea is really
-simple: for the hour after the meeting, we will create breakout rooms in Zoom
-with different themes. You can join any breakout room you like and hangout.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Rust CTCFT Team</name>
         </author>
     </entry>
     
