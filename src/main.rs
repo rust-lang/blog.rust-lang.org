@@ -18,7 +18,6 @@ struct Generator<'a> {
     handlebars: Handlebars<'a>,
     blogs: Vec<Blog>,
     out_directory: PathBuf,
-    file_url: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -58,26 +57,27 @@ impl<'a> Generator<'a> {
         handlebars.register_templates_directory(".hbs", "templates")?;
         handlebars.register_helper("month_name", Box::new(hb_month_name_helper));
 
-        let file_url = format!(
-            "file:///{}/",
-            out_directory
-                .as_ref()
-                .canonicalize()
-                .unwrap_or_else(|_| out_directory.as_ref().to_owned())
-                .display()
-                .to_string()
-                .trim_start_matches('/')
-                .replace(' ', "%20")
-                .replace("\\\\?\\", "")
-                .replace(std::path::MAIN_SEPARATOR, "/")
-        );
-
         Ok(Generator {
             handlebars,
             blogs: crate::blogs::load(posts_directory.as_ref())?,
             out_directory: out_directory.as_ref().into(),
-            file_url,
         })
+    }
+
+    fn file_url(&self, path: &Path) -> String {
+        format!(
+            "file:///{}/{}",
+            self.out_directory
+                .canonicalize()
+                .unwrap_or_else(|_| self.out_directory.to_owned())
+                .display()
+                .to_string()
+                .trim_start_matches('/')
+                .replace(' ', "%20")
+                .replace("\\\\?\\", ""),
+            path.display()
+        )
+        .replace(std::path::MAIN_SEPARATOR, "/")
     }
 
     fn render(&self) -> Result<(), Box<dyn Error>> {
@@ -121,7 +121,7 @@ impl<'a> Generator<'a> {
 
         let path = self.render_index(blog)?;
 
-        println!("{}: {}{}", blog.title(), self.file_url, path.display());
+        println!("{}: {}", blog.title(), self.file_url(&path));
 
         self.render_feed(blog)?;
         self.render_releases_feed(blog)?;
@@ -129,7 +129,7 @@ impl<'a> Generator<'a> {
         for (i, post) in blog.posts().iter().enumerate() {
             let path = self.render_post(blog, post)?;
             if i == 0 {
-                println!("└─ Latest post: {}{}\n", self.file_url, path.display());
+                println!("└─ Latest post: {}\n", self.file_url(&path));
             }
         }
 
