@@ -64,6 +64,22 @@ impl<'a> Generator<'a> {
         })
     }
 
+    fn file_url(&self, path: &Path) -> String {
+        format!(
+            "file:///{}/{}",
+            self.out_directory
+                .canonicalize()
+                .unwrap_or_else(|_| self.out_directory.to_owned())
+                .display()
+                .to_string()
+                .trim_start_matches('/')
+                .replace(' ', "%20")
+                .replace("\\\\?\\", ""),
+            path.display()
+        )
+        .replace(std::path::MAIN_SEPARATOR, "/")
+    }
+
     fn render(&self) -> Result<(), Box<dyn Error>> {
         // make sure our output directory exists
         fs::create_dir_all(&self.out_directory)?;
@@ -103,16 +119,24 @@ impl<'a> Generator<'a> {
     fn render_blog(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
         std::fs::create_dir_all(self.out_directory.join(blog.prefix()))?;
 
-        self.render_index(blog)?;
+        let path = self.render_index(blog)?;
+
+        println!("{}: {}", blog.title(), self.file_url(&path));
+
         self.render_feed(blog)?;
         self.render_releases_feed(blog)?;
-        for post in blog.posts() {
-            self.render_post(blog, post)?;
+
+        for (i, post) in blog.posts().iter().enumerate() {
+            let path = self.render_post(blog, post)?;
+            if i == 0 {
+                println!("└─ Latest post: {}\n", self.file_url(&path));
+            }
         }
+
         Ok(())
     }
 
-    fn render_index(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+    fn render_index(&self, blog: &Blog) -> Result<PathBuf, Box<dyn Error>> {
         let other_blogs: Vec<_> = self
             .blogs
             .iter()
@@ -132,11 +156,12 @@ impl<'a> Generator<'a> {
             "other_blogs": other_blogs,
             "root": blog.path_back_to_root(),
         });
-        self.render_template(blog.prefix().join("index.html"), "index", data)?;
-        Ok(())
+        let path = blog.prefix().join("index.html");
+        self.render_template(&path, "index", data)?;
+        Ok(path)
     }
 
-    fn render_post(&self, blog: &Blog, post: &Post) -> Result<(), Box<dyn Error>> {
+    fn render_post(&self, blog: &Blog, post: &Post) -> Result<PathBuf, Box<dyn Error>> {
         let path = blog
             .prefix()
             .join(format!("{:04}", &post.year))
@@ -156,8 +181,9 @@ impl<'a> Generator<'a> {
             "root": blog.path_back_to_root().join("../../../"),
         });
 
-        self.render_template(path.join(filename), &post.layout, data)?;
-        Ok(())
+        let path = path.join(filename);
+        self.render_template(&path, &post.layout, data)?;
+        Ok(path)
     }
 
     fn render_feed(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
