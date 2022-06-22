@@ -10,8 +10,66 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-06-22T12:26:49+00:00</updated>
+    <updated>2022-06-22T22:26:52+00:00</updated>
 
+    
+    <entry>
+        <title>Call for testing: Cargo sparse-registry</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/06/22/sparse-registry-testing.html" type="text/html" title="Call for testing: Cargo sparse-registry" />
+        <published>2022-06-22T00:00:00+00:00</published>
+        <updated>2022-06-22T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/06/22/sparse-registry-testing.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/06/22/sparse-registry-testing.html">&lt;p&gt;The Cargo nightly &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#sparse-registry&quot;&gt;&lt;code&gt;sparse-registry&lt;/code&gt;&lt;/a&gt; feature is ready for testing. The
+feature causes Cargo to access the crates.io index over HTTP, rather than git. It can
+provide a significant performance improvement, especially if the local copy of
+the git index is out-of-date or not yet cloned.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#overview&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;overview&quot;&gt;&lt;/a&gt;Overview&lt;/h2&gt;
+&lt;p&gt;To try it out, add the &lt;code&gt;-Z sparse-registry&lt;/code&gt; flag on a recent nightly build of Cargo.
+For example, to update dependencies:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update nightly
+cargo +nightly -Z sparse-registry update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The feature can also be enabled by setting the environment variable
+&lt;code&gt;CARGO_UNSTABLE_SPARSE_REGISTRY&#x3D;true&lt;/code&gt;. Setting this variable will have no effect on stable
+Cargo, making it easy to opt-in for CI jobs.&lt;/p&gt;
+&lt;p&gt;The minimum Cargo version is &lt;code&gt;cargo 2022-06-17&lt;/code&gt;, which is bundled with &lt;code&gt;rustc 2022-06-20&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/call-for-testing-cargo-sparse-registry/16862&quot;&gt;leave feedback on the internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you see any issues &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues&quot;&gt;please report them on the Cargo repo&lt;/a&gt;. The output of Cargo
+with the environment variable &lt;code&gt;CARGO_LOG&#x3D;cargo::sources::registry::http_remote&#x3D;trace&lt;/code&gt; set
+will be helpful in debugging.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#details&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;details&quot;&gt;&lt;/a&gt;Details&lt;/h2&gt;
+&lt;p&gt;Accessing the index over HTTP allows crates.io to continue growing without hampering
+performance. The current git index continues to grow as new crates are published,
+and clients must download the entire index. The HTTP index only requires downloading
+metadata for crates in your dependency tree.&lt;/p&gt;
+&lt;p&gt;The performance improvement for clients should be especially noticeable in CI
+environments, particularly if no local cache of the index exists.&lt;/p&gt;
+&lt;p&gt;On the server side, the HTTP protocol is much simpler to cache on a CDN, which improves
+scalability and reduces server load. Due to this caching, crate updates may take an
+extra minute to appear in the index.&lt;/p&gt;
+&lt;p&gt;The Cargo team plans to eventually make this the default way to access crates.io
+(though the git index will remain for compatibility with older versions of Cargo and
+external tools). &lt;code&gt;Cargo.lock&lt;/code&gt; files will continue to reference the existing crates.io
+index on GitHub to avoid churn.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;-Z sparse-registry&lt;/code&gt; flag also enables alternative registries to be accessed over
+HTTP. For more details, see the &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/9069&quot;&gt;tracking issue&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#thank-you&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thank-you&quot;&gt;&lt;/a&gt;Thank you&lt;/h2&gt;
+&lt;p&gt;This project has been in the works for over 2.5 years with collaboration from the crates.io,
+infra, and Cargo teams.&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/kornelski&quot;&gt;@kornelski&lt;/a&gt; wrote the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2789-sparse-index.html&quot;&gt;sparse-index RFC&lt;/a&gt; and initial
+performance proof of concept. &lt;a href&#x3D;&quot;https://github.com/jonhoo&quot;&gt;@jonhoo&lt;/a&gt; created the initial
+implementation in Cargo and gathered performance data. &lt;a href&#x3D;&quot;https://github.com/arlosi&quot;&gt;@arlosi&lt;/a&gt;
+completed the implementation in Cargo and implemented the changes to crates.io to serve the
+index. &lt;a href&#x3D;&quot;https://github.com/eh2406&quot;&gt;@eh2406&lt;/a&gt; provided numerous reviews and feedback to get
+all the changes landed. Many others from the community helped by providing suggestions,
+feedback, and testing.&lt;/p&gt;
+&lt;p&gt;Thank you to everyone involved!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Arlo Siemsen</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.61.0</title>
@@ -784,83 +842,6 @@ As he&#x27;s focusing on his company and taking on other business obligations, h
 
         <author>
             <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Security advisory for the standard library (CVE-2022-21658)</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/01/20/cve-2022-21658.html" type="text/html" title="Security advisory for the standard library (CVE-2022-21658)" />
-        <published>2022-01-20T00:00:00+00:00</published>
-        <updated>2022-01-20T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/01/20/cve-2022-21658.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/01/20/cve-2022-21658.html">&lt;blockquote&gt;
-&lt;p&gt;This is a cross-post of &lt;a href&#x3D;&quot;https://groups.google.com/g/rustlang-security-announcements/c/R1fZFDhnJVQ&quot;&gt;the official security advisory&lt;/a&gt;. The
-official advisory contains a signed version with our PGP key, as well.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The Rust Security Response WG was notified that the &lt;code&gt;std::fs::remove_dir_all&lt;/code&gt;
-standard library function is vulnerable to a race condition enabling symlink
-following (CWE-363). An attacker could use this security issue to trick a
-privileged program into deleting files and directories the attacker couldn&#x27;t
-otherwise access or delete.&lt;/p&gt;
-&lt;p&gt;This issue has been assigned &lt;a href&#x3D;&quot;https://www.cve.org/CVERecord?id&#x3D;CVE-2022-21658&quot;&gt;CVE-2022-21658&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#overview&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;overview&quot;&gt;&lt;/a&gt;Overview&lt;/h2&gt;
-&lt;p&gt;Let&#x27;s suppose an attacker obtained unprivileged access to a system and needed
-to delete a system directory called &lt;code&gt;sensitive/&lt;/code&gt;, but they didn&#x27;t have the
-permissions to do so. If &lt;code&gt;std::fs::remove_dir_all&lt;/code&gt; followed symbolic links,
-they could find a privileged program that removes a directory they have access
-to (called &lt;code&gt;temp/&lt;/code&gt;), create a symlink from &lt;code&gt;temp/foo&lt;/code&gt; to &lt;code&gt;sensitive/&lt;/code&gt;, and wait
-for the privileged program to delete &lt;code&gt;foo/&lt;/code&gt;. The privileged program would
-follow the symlink from &lt;code&gt;temp/foo&lt;/code&gt; to &lt;code&gt;sensitive/&lt;/code&gt; while recursively deleting,
-resulting in &lt;code&gt;sensitive/&lt;/code&gt; being deleted.&lt;/p&gt;
-&lt;p&gt;To prevent such attacks, &lt;code&gt;std::fs::remove_dir_all&lt;/code&gt; already includes protection
-to avoid recursively deleting symlinks, as described in &lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/fs/fn.remove_dir_all.html&quot;&gt;its documentation&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This function does &lt;strong&gt;not&lt;/strong&gt; follow symbolic links and it will simply remove
-the symbolic link itself.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Unfortunately that check was implemented incorrectly in the standard library,
-resulting in a TOCTOU (Time-of-check Time-of-use) race condition. Instead of
-telling the system not to follow symlinks, the standard library first checked
-whether the thing it was about to delete was a symlink, and otherwise it would
-proceed to recursively delete the directory.&lt;/p&gt;
-&lt;p&gt;This exposed a race condition: an attacker could create a directory and replace
-it with a symlink between the check and the actual deletion. While this attack
-likely won&#x27;t work the first time it&#x27;s attempted, in our experimentation we were
-able to reliably perform it within a couple of seconds.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#affected-versions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;affected-versions&quot;&gt;&lt;/a&gt;Affected Versions&lt;/h2&gt;
-&lt;p&gt;Rust 1.0.0 through Rust 1.58.0 is affected by this vulnerability. We&#x27;re going
-to release Rust 1.58.1 later today, which will include mitigations for this
-vulnerability. Patches to the Rust standard library are also available for
-custom-built Rust toolchains &lt;a href&#x3D;&quot;https://github.com/rust-lang/wg-security-response/tree/master/patches/CVE-2022-21658&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Note that the following targets don&#x27;t have usable APIs to properly mitigate the
-attack, and are thus still vulnerable even with a patched toolchain:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;macOS before version 10.10 (Yosemite)&lt;/li&gt;
-&lt;li&gt;REDOX&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#mitigations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;mitigations&quot;&gt;&lt;/a&gt;Mitigations&lt;/h2&gt;
-&lt;p&gt;We recommend everyone to update to Rust 1.58.1 as soon as possible, especially
-people developing programs expected to run in privileged contexts (including
-system daemons and setuid binaries), as those have the highest risk of being
-affected by this.&lt;/p&gt;
-&lt;p&gt;Note that adding checks in your codebase before calling &lt;code&gt;remove_dir_all&lt;/code&gt; will
-&lt;strong&gt;not&lt;/strong&gt; mitigate the vulnerability, as they would also be vulnerable to race
-conditions like &lt;code&gt;remove_dir_all&lt;/code&gt; itself. The existing mitigation is working as
-intended outside of race conditions.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#acknowledgments&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgments&quot;&gt;&lt;/a&gt;Acknowledgments&lt;/h2&gt;
-&lt;p&gt;We want to thank Hans Kratz for independently discovering and disclosing this
-issue to us according to the &lt;a href&#x3D;&quot;https://www.rust-lang.org/policies/security&quot;&gt;Rust security policy&lt;/a&gt;, for developing the fix
-for UNIX-like targets and for reviewing fixes for other platforms.&lt;/p&gt;
-&lt;p&gt;We also want to thank Florian Weimer for reviewing the UNIX-like fix and for
-reporting the same issue back in 2018, even though the Security Response WG
-didn&#x27;t realize the severity of the issue at the time.&lt;/p&gt;
-&lt;p&gt;Finally we want to thank Pietro Albini for coordinating the security response
-and writing this advisory, Chris Denton for writing the Windows fix, Alex
-Crichton for writing the WASI fix, and Mara Bos for reviewing the patches.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Security Response WG</name>
         </author>
     </entry>
     
