@@ -38,7 +38,7 @@ production [here](https://www.rust-lang.org/en-US/whitepapers.html).)
 
 ![Graphs of Rust team growth][team]
 
-[team]: /images/2018-05-Third-Birthday/team.png
+[team]: ../../../images/2018-05-Third-Birthday/team.png
 
 Finally, the Rust community continues to work on inclusivity, through outreach
 programs like [Rust Reach](https://blog.rust-lang.org/2018/04/02/Increasing-Rusts-Reach-2018.html) and

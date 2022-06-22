@@ -20,7 +20,7 @@ having fun doing it.
 
 And yesterday, Rust turned one year old.
 
-<img src="/images/2016-05-16-rust-at-one-year/cupcakes.jpg" height="300px" width="300px">
+<img src="../../../images/2016-05-16-rust-at-one-year/cupcakes.jpg" height="300px" width="300px">
 
 ### Rust in numbers
 

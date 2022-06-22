@@ -50,7 +50,7 @@ accurate. LLVM’s existing coverage tools ([llvm-profdata] and [llvm-cov])
 generate both coverage summaries and very fine-grained code regions, helping
 you find gaps in your testing coverage. What you do about that is up to you!
 
-[comparison-img]: /images/inside-rust/2020-11-12-source-based-code-coverage/comparison.png
+[comparison-img]: ../../../../images/inside-rust/2020-11-12-source-based-code-coverage/comparison.png
 [llvm-profdata]: https://llvm.org/docs/CommandGuide/llvm-profdata.html
 [llvm-cov]: https://llvm.org/docs/CommandGuide/llvm-cov.html
 

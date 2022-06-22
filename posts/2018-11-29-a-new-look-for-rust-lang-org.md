@@ -9,15 +9,15 @@ basis. By contrast, the website has looked pretty much the same. Here’s the
 first version of rust-lang.org, seven years ago (courtesy of [the WayBack
 Machine](https://web.archive.org/)):
 
-![rust website in 2011](/images/rust-www1.png)
+![rust website in 2011](../../../images/rust-www1.png)
 
 In 2014, three years later:
 
-![rust website in 2014](/images/rust-www2.png)
+![rust website in 2014](../../../images/rust-www2.png)
 
 If you visit <https://rust-lang.org> today, you'll see this:
 
-![rust website in 2018](/images/rust-www3.png)
+![rust website in 2018](../../../images/rust-www3.png)
 
 Over time, we’ve grown to love it. It’s simple. Minimal. Familiar.
 
@@ -27,7 +27,7 @@ But we can always do better. For example, the website suffers from what we
 call “the fireflower problem.” First formulated by [Kathy
 Sierra](http://seriouspony.com/), and made into an image by Samuel Hulick:
 
-![the fireflower](/images/fireflower.png)
+![the fireflower](../../../images/fireflower.png)
 
 We want Mario to use Rust, the fireflower, and turn into the ever-awesome
 Fire Mario. But there’s a corollary here: it’s better to say “we will make
@@ -69,7 +69,7 @@ nice.
 Today, we’d like to announce a beta of the new rust-lang.org. If you go to
 <https://beta.rust-lang.org>, you’ll see this:
 
-![beta rust website](/images/rust-www4.png)
+![beta rust website](../../../images/rust-www4.png)
 
 Its fresh visual design gives us a lot more flexibility in how we get
 information across. It retains the minimalist spirit of the old site, while

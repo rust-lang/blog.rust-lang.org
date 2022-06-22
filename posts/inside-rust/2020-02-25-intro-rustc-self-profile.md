@@ -237,14 +237,14 @@ We've been using these tools extensively ourselves over the last few months and 
 In the future we'll be adding more features and we'll work on making the tooling easier to use.
 If you have questions or would like to get involved with the Self-Profile Working Group, please check out the [measureme repository] or stop by our [Zulip stream].
 
-[chrome profiler img1]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler1.png
-[chrome profiler img2]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png
-[chrome profiler img3]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png
-[chrome profiler img4]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler4.png
-[Click here]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/rustc.svg
+[chrome profiler img1]: ../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler1.png
+[chrome profiler img2]: ../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png
+[chrome profiler img3]: ../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png
+[chrome profiler img4]: ../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler4.png
+[Click here]: ../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/rustc.svg
 [documentation for this feature]: https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/self-profile.html
 [flame graph]: http://www.brendangregg.com/flamegraphs.html
-[flame graph img]: /images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png
+[flame graph img]: ../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png
 [measureme repository]: https://github.com/rust-lang/measureme
 [Self-Profile Working Group]: https://rust-lang.github.io/compiler-team/working-groups/self-profile/
 [Zulip stream]: https://rust-lang.zulipchat.com/#narrow/stream/187831-t-compiler.2Fwg-self-profile
