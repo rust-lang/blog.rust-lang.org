@@ -160,7 +160,7 @@ time with a different value for <code>a</code>. For the first time around, <code
      /     /   \
     a=1   b=2  c=3
 -->
-<p><img src="/images/2016-08-Incremental/algebra-initial.svg" alt="Initial Computation of a+b×c" /></p>
+<p><img src="../../../images/2016-08-Incremental/algebra-initial.svg" alt="Initial Computation of a+b×c" /></p>
 <p>Assume that we &quot;saved&quot; the intermediate results at each step, that is, we
 remember somewhere that <code>b×c</code> is <code>6</code> and <code>a+b×c</code> is <code>7</code>. Now, in the second
 round, we want to know what <code>a+b×c</code> is if we change the value of <code>a</code> to
@@ -176,7 +176,7 @@ entire, tedious multiplication.</p>
      /     /   \
     a=4   b=2  c=3
 -->
-<p><img src="/images/2016-08-Incremental/algebra-update.svg" alt="Updating the Computation" /></p>
+<p><img src="../../../images/2016-08-Incremental/algebra-update.svg" alt="Updating the Computation" /></p>
 <p>Let's see how this scheme translates to the compiler.</p>
 <h1><a href="#an-incremental-compiler" aria-hidden="true" class="anchor" id="an-incremental-compiler"></a>An Incremental Compiler</h1>
 <p>The way we chose to implement incrementality in the Rust compiler is
@@ -200,7 +200,7 @@ produce:</p>
     >===========>===============>===========>===========>
         parse       analysis       codegen     linking
 -->
-<p><img src="/images/2016-08-Incremental/compiler-phases.svg" alt="Compiler Phases and their By-Products" /></p>
+<p><img src="../../../images/2016-08-Incremental/compiler-phases.svg" alt="Compiler Phases and their By-Products" /></p>
 <p>First the compiler will parse the source code into an abstract syntax tree
 (AST). The AST then goes through the analysis phase which produces type
 information and the <a href="https://blog.rust-lang.org/2016/04/19/MIR.html">MIR</a> for each function. After that, if analysis
@@ -247,7 +247,7 @@ practice:</p>
      /    /   \
     a    b     c
 -->
-<p><img src="/images/2016-08-Incremental/algebra-dep-graph.svg" alt="Dependency Graph of a+b×c" /></p>
+<p><img src="../../../images/2016-08-Incremental/algebra-dep-graph.svg" alt="Dependency Graph of a+b×c" /></p>
 <p>As you can see, we have nodes for the inputs <code>a</code>, <code>b</code>, and <code>c</code>, and nodes for
 the intermediate results <code>b×c</code> and <code>a+b×c</code>. The edges should come as no
 surprise: There is one edge from <code>b×c</code> to <code>b</code> and one to <code>c</code> because those are
@@ -263,7 +263,7 @@ add another intermediate result <code>b×c+c</code> to our computation:</p>
      /    /   \ /
     a    b     c
 -->
-<p><img src="/images/2016-08-Incremental/algebra-dep-graph-dag.svg" alt="Example of a non-tree Dependency Graph" /></p>
+<p><img src="../../../images/2016-08-Incremental/algebra-dep-graph-dag.svg" alt="Example of a non-tree Dependency Graph" /></p>
 <p>What makes this data structure really useful is that we can ask it questions
 of the form &quot;if X has changed, is Y still up-to-date?&quot;. We just take the node
 representing <code>Y</code> and collect all the inputs <code>Y</code> depends on by transitively
@@ -295,7 +295,7 @@ have all our data nicely linked up, mostly automatically:</p>
     >===========>===============>===========>===========>
         parse       analysis       codegen     linking
 -->
-<p><img src="/images/2016-08-Incremental/compiler-dep-graph.svg" alt="Dependency Graph of Compilation Data" /></p>
+<p><img src="../../../images/2016-08-Incremental/compiler-dep-graph.svg" alt="Dependency Graph of Compilation Data" /></p>
 <p>This dependency graph is then stored in the incremental compilation cache
 directory along with the cache entries it describes.</p>
 <p>At the beginning of a subsequent compilation session, we detect which inputs
@@ -312,7 +312,7 @@ are not up-to-date anymore and just remove them from the cache:</p>
     >===========>===============>===========>===========>
         parse       analysis       codegen     linking
 -->
-<p><img src="/images/2016-08-Incremental/compiler-cache-purge.svg" alt="Using the Dependency Graph to Validate the Incremental Compilation Cache" /></p>
+<p><img src="../../../images/2016-08-Incremental/compiler-cache-purge.svg" alt="Using the Dependency Graph to Validate the Incremental Compilation Cache" /></p>
 <p>Anything that has survived this cache validation phase can safely be re-used
 during the current compilation session.</p>
 <p>There are a few benefits to the <strong>automated dependency tracking</strong> approach we
@@ -364,7 +364,7 @@ much time is spent in each one on average:</p>
 
 TIME:    5%            20%         **65%**       10%
 -->
-<p><img src="/images/2016-08-Incremental/compiler-phases-cost.svg" alt="Relative Cost of Compilation Phases" /></p>
+<p><img src="../../../images/2016-08-Incremental/compiler-phases-cost.svg" alt="Relative Cost of Compilation Phases" /></p>
 <p>As you can see, the Rust compiler spends most of its time in the optimization
 and codegen passes. Consequently, if this phase can be skipped at least for
 part of a code base, this is where the biggest impact on compile times can be
@@ -387,7 +387,7 @@ situations. First let's take a look at the best case scenario where a 100%
 of a crate's object files can be re-used. This might occur when changing one
 crate in a multi-crate project and downstream crates need to be rebuilt but
 are not really affected.</p>
-<p><img src="/images/2016-08-Incremental/perf-full-re-use.svg" alt="Normalized Incremental Compilation Build Times" /></p>
+<p><img src="../../../images/2016-08-Incremental/perf-full-re-use.svg" alt="Normalized Incremental Compilation Build Times" /></p>
 <p>As you can see, compiling a crate for the first time in incremental mode can be
 slower than compiling it in non-incremental mode. This is because the dependency
 tracking incurs some additional cost when activated. Note that compiling
@@ -407,7 +407,7 @@ compilation makes little difference: It's only 3% faster than compiling from
 scratch.</p>
 <p>The next graph shows which impact various changes made to the <code>regex</code> crate
 have on incremental rebuild times:</p>
-<p><img src="/images/2016-08-Incremental/perf-changes.svg" alt="Build Times After Specific Changes" /></p>
+<p><img src="../../../images/2016-08-Incremental/perf-changes.svg" alt="Build Times After Specific Changes" /></p>
 <p>The numbers show that the effectiveness of incremental compilation indeed depends a
 lot on the type of change applied to the code. For changes with very local
 effect we can get close to optimal re-use (as in the case of <code>Error::cause()</code>,

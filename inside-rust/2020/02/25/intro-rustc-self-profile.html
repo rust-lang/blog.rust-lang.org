@@ -166,8 +166,8 @@ To run the tool, we'll pass just the filename without a file extension like we d
 <pre><code class="language-sh">$ flamegraph regex-17088
 </code></pre>
 <p>This will create a file called <code>rustc.svg</code> in the working directory:</p>
-<p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png" alt="Image of flamegraph output" /></a></p>
-<p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/rustc.svg">Click here</a> to try the interactive svg.</p>
+<p><a href="../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png"><img src="../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/flamegraph_image.png" alt="Image of flamegraph output" /></a></p>
+<p><a href="../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/rustc.svg">Click here</a> to try the interactive svg.</p>
 <h3><a href="#crox" aria-hidden="true" class="anchor" id="crox"></a><code>crox</code></h3>
 <p>This tool processes self-profiling data into the JSON format that the Chromium profiler understands.
 You can use it to create a graphical timeline showing exactly when various traced events occurred.</p>
@@ -187,7 +187,7 @@ To open it, we'll use the regular Chromium performance tools you might already b
 <li>Select the <code>chrome_profiler.json</code> file we created.</li>
 </ol>
 <p>You should now see something similar to this:</p>
-<p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler1.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler1.png" alt="Image of chrome profiler" /></a></p>
+<p><a href="../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler1.png"><img src="../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler1.png" alt="Image of chrome profiler" /></a></p>
 <p>You can use the scroll wheel on a mouse or the appropriate gesture on a touchpad to zoom in or out of the timeline.</p>
 <h4><a href="#filtering-short-events" aria-hidden="true" class="anchor" id="filtering-short-events"></a>Filtering short events</h4>
 <p>If the <code>chrome_profiler.json</code> file gets too large, the normal Chromium performance tools have issues opening the file.
@@ -207,7 +207,7 @@ $ cargo rustc -- -Zself-profile -Zself-profile-events=default,args
 <pre><code class="language-sh">$ crox regex-23649
 </code></pre>
 <p>Now in the Chromium profiler, if you click on a node, you can see additional data about many of the events at the bottom of the screen:</p>
-<p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png" alt="Image of Chrome profiler details" /></a></p>
+<p><a href="../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png"><img src="../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler2.png" alt="Image of Chrome profiler details" /></a></p>
 <p>Which shows this <code>optimized_mir</code> query was processing the <code>regex::compile::{{impl}}::new</code> function body.</p>
 <h4><a href="#profiling-an-entire-crate-graph" aria-hidden="true" class="anchor" id="profiling-an-entire-crate-graph"></a>Profiling an entire crate graph</h4>
 <p>By using the <code>RUSTFLAGS</code> environment variable, we can profile every <code>rustc</code> invocation, not just the final crate's.
@@ -222,9 +222,9 @@ Now, we'll tell <code>crox</code> to combine all of the trace files in the curre
 <pre><code class="language-sh">$ crox --dir profiles
 </code></pre>
 <p>Opening this file shows all of the crates compiled:</p>
-<p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png" alt="Image of Chrome profiler with all crates" /></a></p>
+<p><a href="../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png"><img src="../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler3.png" alt="Image of Chrome profiler with all crates" /></a></p>
 <p>Clicking on a crate will expand it to show the threads and event data inside it:</p>
-<p><a href="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler4.png"><img src="/images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler4.png" alt="Image of Chrome profiler with a crate expanded" /></a></p>
+<p><a href="../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler4.png"><img src="../../../../images/inside-rust/2020-02-25-intro-rustc-self-profile/chrome_profiler4.png" alt="Image of Chrome profiler with a crate expanded" /></a></p>
 <p>Thanks for reading!</p>
 <p>We've been using these tools extensively ourselves over the last few months and they've helped us tremendously in understanding where the compiler spends its time.
 In the future we'll be adding more features and we'll work on making the tooling easier to use.

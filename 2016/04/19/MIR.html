@@ -75,7 +75,7 @@
 compiler internals. Over the past year or so, we have been steadily
 working on a plan to change our internal compiler pipeline, as shown
 here:</p>
-<p><img src="/images/2016-04-MIR/flow.svg" alt="Compiler Flowchart" /></p>
+<p><img src="../../../images/2016-04-MIR/flow.svg" alt="Compiler Flowchart" /></p>
 <p>That is, we are introducing a new intermediate representation (IR) of
 your program that we call <strong>MIR</strong>: MIR stands for <em>mid-level</em> IR, because
 the MIR comes between the existing HIR (&quot;high-level IR&quot;, roughly an
@@ -297,7 +297,7 @@ cycle in the graph, and the <code>break</code> keyword translates into a path ou
 of that cycle.</p>
 <p>Here is the running example from the previous section, expressed as a
 control-flow graph:</p>
-<p><img src="/images/2016-04-MIR/cfg.svg" alt="Control-flow-graph" /></p>
+<p><img src="../../../images/2016-04-MIR/cfg.svg" alt="Control-flow-graph" /></p>
 <p>Building a control-flow graph is typically a first step for any kind
 of flow-sensitive analysis. It's also a natural match for LLVM IR,
 which is also structured into control-flow graph form. The fact that
@@ -364,7 +364,7 @@ break:
 </code></pre>
 <p>Of course, the actual MIR is based on a control-flow-graph, so it
 would look something like this:</p>
-<p><img src="/images/2016-04-MIR/loop-break.svg" alt="Loop-break control-flow graph" /></p>
+<p><img src="../../../images/2016-04-MIR/loop-break.svg" alt="Loop-break control-flow graph" /></p>
 <h3><a href="#explicit-drops-and-panics" aria-hidden="true" class="anchor" id="explicit-drops-and-panics"></a>Explicit drops and panics</h3>
 <p>So now we've seen how we can remove loops, method calls, and matches
 out of the MIR, and replace them with simpler equivalents. But there
@@ -402,12 +402,12 @@ vector). Using the <code>drop</code> operation, we can adjust our MIR
 control-flow-graph to show explicitly where the <code>iterator</code> value gets
 freed. Take a look at the new graph, and in particular what happens
 when a <code>None</code> variant is found:</p>
-<p><img src="/images/2016-04-MIR/drop.svg" alt="Drop control-flow graph" /></p>
+<p><img src="../../../images/2016-04-MIR/drop.svg" alt="Drop control-flow graph" /></p>
 <p>Here we see that, when the loop exits normally, we will drop the
 iterator once it has finished. But what about if a panic occurs? Any
 of the function calls we see here could panic, after all. To account
 for that, we introduce panic edges into the graph:</p>
-<p><img src="/images/2016-04-MIR/drop-unwind.svg" alt="Panic control-flow graph" /></p>
+<p><img src="../../../images/2016-04-MIR/drop-unwind.svg" alt="Panic control-flow graph" /></p>
 <p>Here we have introduced <code>panic</code> edges onto each of the function
 calls. By looking at these edges, you can see that if the call to
 <code>next</code> or <code>process</code> should panic, then we will drop the variable
@@ -506,13 +506,13 @@ generated, we assume that dropping moved data has no effect -- roughly
 like the current overwriting semantics. So this means that the MIR for
 <code>send_if</code> might look like this (for simplicity, I'll ignore unwinding
 edges).</p>
-<p><img src="/images/2016-04-MIR/nzd.svg" alt="Non-zeroing drop example" /></p>
+<p><img src="../../../images/2016-04-MIR/nzd.svg" alt="Non-zeroing drop example" /></p>
 <p>We can then transform this graph by identifying each place where
 <code>data</code> is moved or dropped and checking whether any of those places
 can reach one another. In this case, the <code>send_to_other_thread(data)</code> block can
 reach <code>drop(data)</code>. This indicates that we will need to introduce a
 flag, which can be done rather mechanically:</p>
-<p><img src="/images/2016-04-MIR/nzd-flags.svg" alt="Non-zeroing drop with flags" /></p>
+<p><img src="../../../images/2016-04-MIR/nzd-flags.svg" alt="Non-zeroing drop with flags" /></p>
 <p>Finally, we can apply standard compiler techniques to optimize this
 flag (but in this case, the flag is needed, and so the final result
 would be the same).</p>
@@ -530,16 +530,16 @@ processing. Otherwise, it processes it locally:</p>
 }
 </code></pre>
 <p>This would generate MIR like:</p>
-<p><img src="/images/2016-04-MIR/send_if2.svg" alt="Control-flow graph for send_if2" /></p>
+<p><img src="../../../images/2016-04-MIR/send_if2.svg" alt="Control-flow graph for send_if2" /></p>
 <p>As before, we still generate the drops of <code>data</code> in all cases, at
 least to start. Since there are still moves that can later reach a
 drop, we could now introduce a stack flag variable, just as before:</p>
-<p><img src="/images/2016-04-MIR/send_if2-flags.svg" alt="send_if2 with flags" /></p>
+<p><img src="../../../images/2016-04-MIR/send_if2-flags.svg" alt="send_if2 with flags" /></p>
 <p>But in this case, if we apply constant propagation, we can see that at
 each point where we test <code>data_is_owned</code>, we know statically whether
 it is true or false, which would allow us to remove the stack flag and
 optimize the graph above, yielding this result:</p>
-<p><img src="/images/2016-04-MIR/send_if2-opt.svg" alt="Optimized send_if2" /></p>
+<p><img src="../../../images/2016-04-MIR/send_if2-opt.svg" alt="Optimized send_if2" /></p>
 <h3><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h3>
 <p>I expect the use of MIR to be quite transformative in terms of what
 the compiler can accomplish. By reducing the language to a core set of

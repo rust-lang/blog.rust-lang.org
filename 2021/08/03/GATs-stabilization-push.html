@@ -74,7 +74,7 @@
       <h1><a href="#the-push-for-gats-stabilization" aria-hidden="true" class="anchor" id="the-push-for-gats-stabilization"></a>The push for GATs stabilization</h1>
 <p>Where to start, where to start...</p>
 <p>Let's begin by saying: this is a very exciting post. Some people reading this will be overwhelmingly thrilled; some will have no idea what GATs (generic associated types) are; others might be in disbelief. The <a href="https://github.com/rust-lang/rfcs/pull/1598">RFC</a> for this feature did get opened in April of <em>2016</em> (and merged about a year and a half later). In fact, this RFC even predates const generics (which an MVP of was <a href="https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html#const-generics-mvp">recently stabilized</a>). Don't let this fool you though: it is a powerful feature; and the reactions to the tracking issue on Github should maybe give you an idea of its popularity (it is <em>the</em> most upvoted issue on the Rust repository):
-<img src="/images/2021-08-03-GATs-stabilization-push/gats-reactions.png" alt="GATs reactions" /></p>
+<img src="../../../images/2021-08-03-GATs-stabilization-push/gats-reactions.png" alt="GATs reactions" /></p>
 <p>If you're not familiar with GATs, they allow you to define type, lifetime, or const generics on associated types. Like so:</p>
 <pre><code class="language-rust">trait Foo {
     type Bar&lt;'a&gt;;

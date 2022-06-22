@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-06-22T10:40:08+00:00</updated>
+    <updated>2022-06-22T10:44:13+00:00</updated>
 
     
     <entry>
@@ -261,7 +261,7 @@ rustc binary used to compile your code.&lt;/p&gt;
       Timing report saved to target/cargo-timings/cargo-timing-20220318T174818Z.html
     Finished dev [unoptimized + debuginfo] target(s) in 0.98s
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The report is also copied to &lt;code&gt;target/cargo-timings/cargo-timing.html&lt;/code&gt;. A report on the release build of Cargo has been put up &lt;a href&#x3D;&quot;/images/2022-04-07-timing.html&quot;&gt;here&lt;/a&gt;. These reports can be useful for improving build performance.
+&lt;p&gt;The report is also copied to &lt;code&gt;target/cargo-timings/cargo-timing.html&lt;/code&gt;. A report on the release build of Cargo has been put up &lt;a href&#x3D;&quot;../../../images/2022-04-07-timing.html&quot;&gt;here&lt;/a&gt;. These reports can be useful for improving build performance.
 More information about the timing reports may be found in the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/timings.html&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#new-syntax-for-cargo-features&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;new-syntax-for-cargo-features&quot;&gt;&lt;/a&gt;New syntax for Cargo features&lt;/h3&gt;
 &lt;p&gt;This release introduces two new changes to improve support for &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/features.html&quot;&gt;Cargo features&lt;/a&gt; and how they interact with &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/features.html#optional-dependencies&quot;&gt;optional dependencies&lt;/a&gt;: Namespaced dependencies and weak dependency features.&lt;/p&gt;
@@ -687,15 +687,15 @@ Thanks to the awesome contributors to rustc, clippy, cargo, LSP, IntelliJ Rust, 
 &lt;h2&gt;&lt;a href&#x3D;&quot;#using-rust&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;using-rust&quot;&gt;&lt;/a&gt;Using Rust&lt;/h2&gt;
 &lt;p&gt;The percentage of people using Rust continues to rise. Of those using Rust, 81% are currently using it on at least a weekly basis compared to 72% from last year&#x27;s survey.&lt;/p&gt;
 &lt;p&gt;75% of all Rust users say they can write production ready code, though 27% say that it is at times a struggle.&lt;/p&gt;
-&lt;p&gt;&lt;img src&#x3D;&quot;/images/2022-02-RustSurvey/expertise.png&quot; alt&#x3D;&quot;Rust expertise&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;../../../images/2022-02-RustSurvey/expertise.png&quot; alt&#x3D;&quot;Rust expertise&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;Overall, Rustaceans seem to be having a great time writing Rust with only 1% saying it isn&#x27;t fun to use. Only a quarter of a percent find Rust doesn&#x27;t have any real benefit over other programming languages.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#rust-at-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rust-at-work&quot;&gt;&lt;/a&gt;Rust at Work&lt;/h2&gt;
 &lt;p&gt;Rust can now safely be classified as a language used by people in professional settings. Of those respondents using Rust, 59% use it at least occasionally at work with 23% using Rust for the majority of their coding. This is a large increase over last year where only 42% of respondents used Rust at work.&lt;/p&gt;
-&lt;p&gt;&lt;img src&#x3D;&quot;/images/2022-02-RustSurvey/rust-at-work.png&quot; alt&#x3D;&quot;Do you use Rust at work?&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;../../../images/2022-02-RustSurvey/rust-at-work.png&quot; alt&#x3D;&quot;Do you use Rust at work?&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;Adopting Rust at work seems to follow a long but ultimately worthwhile path for a lot of Rustaceans. First, 83% of those who have adopted Rust at work found it to be &amp;quot;challenging&amp;quot;. How much this is related to Rust itself versus general challenges with adopting a new programming language, however, is unclear. During adoption only 13% of respondents found the language was slowing their team down and 82% found that Rust helped their teams achieve their goals.&lt;/p&gt;
 &lt;p&gt;After adoption, the costs seem to be justified: only 1% of respondents did not find the challenge worth it while 79% said it definitely was. When asked if their teams were likely to use Rust again in the future, 90% agreed. Finally, of respondents using Rust at work, 89% of respondents said their teams found it fun and enjoyable to program.&lt;/p&gt;
 &lt;p&gt;As for why respondents are using Rust at work, the top answer was that it allowed users &amp;quot;to build relatively correct and bug free software&amp;quot; with 96% of respondents agreeing with that statement. After correctness, performance (92%) was the next most popular choice. 89% of respondents agreed that they picked Rust at work because of Rust&#x27;s much-discussed security properties.&lt;/p&gt;
-&lt;p&gt;&lt;img src&#x3D;&quot;/images/2022-02-RustSurvey/rust-adoption.png&quot; alt&#x3D;&quot;Adopting Rust&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;../../../images/2022-02-RustSurvey/rust-adoption.png&quot; alt&#x3D;&quot;Adopting Rust&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;Overall, Rust seems to be a language ready for the challenges of production, with only 3% of respondents saying that Rust was a &amp;quot;risky&amp;quot; choice for production use.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#challenges-ahead&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;challenges-ahead&quot;&gt;&lt;/a&gt;Challenges Ahead&lt;/h2&gt;
 &lt;p&gt;Overall, the annual survey points towards a growing, healthy community of Rustaceans, but this is not to say we don&#x27;t have work ahead of us. Compile times, a historical focus of improvement for the Rust project, continue to not be where they need to be, with 61% of respondents saying work still needs to be done to improve them. Although, to the compiler team&#x27;s credit, 61% found that they improved over the past year.  Other areas indicated as in need of more improvement were disk space (45%), debugging (40%), and GUI development (56%).&lt;/p&gt;

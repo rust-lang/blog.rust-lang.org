@@ -87,11 +87,11 @@ to the new errors, and already many people have jumped in (and thank you to thos
 </code></pre>
 <p>Here we make the error of mutably borrowing the same value twice. This is a classic error in Rust.
 Sure enough, the error the previous compiler gave us says pretty much that:</p>
-<p><img src="/images/2016-08-09-Errors/old_errors.png" alt="Picture of old error style" /></p>
+<p><img src="../../../images/2016-08-09-Errors/old_errors.png" alt="Picture of old error style" /></p>
 <p>The problem though is that it takes a few seconds to look at the message, orient yourself, and find
 the critical pieces. This time loss adds up. What if, instead, we cleared away everything that slows
 down how you read the error message?</p>
-<img src="/images/2016-08-09-Errors/new_errors.png" width="500" />
+<img src="../../../images/2016-08-09-Errors/new_errors.png" width="500" />
 <p>This is the new error format. It's designed around the fundamental observation that
 errors should <strong>focus on the code you wrote</strong>. By doing so, you can much more easily see the context
 of what is going on.</p>
@@ -100,7 +100,7 @@ of what is going on.</p>
 builds on <em>your</em> code.
 By using the code you wrote as the context, we give you an easy way to know at a glance
 where the issue is occurring.</p>
-<p><img src="/images/2016-08-09-Errors/new_errors2.png" alt="Picture of new constant eval error" /></p>
+<p><img src="../../../images/2016-08-09-Errors/new_errors2.png" alt="Picture of new constant eval error" /></p>
 <p><em>Constant evaluation errors</em></p>
 <p>Next, once we know the location, we need to explain what is going wrong. We do this by labeling
 points of interest in the code that helped explain
@@ -111,7 +111,7 @@ problematic code, and a few words about the problem. Since this is the most impo
 first, we give them a bold red look with a
 characteristic <code>^^^</code> underline. You'll notice in the example that the combination allows you
 to quickly spot the error and understand what's going wrong.</p>
-<p><img src="/images/2016-08-09-Errors/new_errors3.png" alt="Picture of new trait mismatch" /></p>
+<p><img src="../../../images/2016-08-09-Errors/new_errors3.png" alt="Picture of new trait mismatch" /></p>
 <p><em>Mismatch with trait requirement error</em></p>
 <p>The source of the error is not the only point of interest.  There are often other points of interest
 that help describe &quot;why&quot; an error is occurring. By reading these secondary labels,
@@ -123,7 +123,7 @@ can see it at the same time and compare the requirement and implementation for y
 focus on the borrow-checker and memory safety, users may see unfamiliar concepts when they
 encounter one of these errors. These labels help to walk them through how even unfamiliar errors,
 like borrow errors, occur.</p>
-<p><img src="/images/2016-08-09-Errors/new_errors4.png" alt="Picture of new type name not found" /></p>
+<p><img src="../../../images/2016-08-09-Errors/new_errors4.png" alt="Picture of new type name not found" /></p>
 <p><em>Name not in scope, with suggestions</em></p>
 <p>Sometimes there's too much information to fit on a label, so the new format also supports attaching
 additional notes. Just like the previous error format, the new format supports warnings,
