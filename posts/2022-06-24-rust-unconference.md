@@ -27,7 +27,7 @@ Discord for folks to communicate and make preliminary, informal plans.
 If you plan to attend, please register as soon as possible to help us plan
 appropriately. If space is limited, project participants and conference
 attendees will be given preference. Registration is free and open to everyone,
-but we require either a rustconf registration ID or a $10 deposit at signup to
+but we require either a RustConf registration ID or a $10 deposit at signup to
 ensure that registrations are an accurate approximation of participants.
 
 **[:rotating_light: Register Now! :rotating_light:]()**
