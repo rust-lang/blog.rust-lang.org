@@ -1,15 +1,19 @@
 ---
 layout: post
-title: "Announcing The Rustconf Day After Unconference"
+title: "Announcing The RustConf PostConf UnConf"
 author: Jane Lusby, on behalf of The Rust Project Teams
 ---
 
 Hello Rust community!
 
 We're excited to announce that the Rust project teams be hosting an
-unconference[^1] the day after RustConf. This unconference will be dedicated to
-the Rust project and will be a fantastic opportunity for users, contributors,
-and maintainers to network and discuss the project's development.
+unconference[^1] the day after RustConf.
+
+![RustConf PostConf UnConf promo image](../../../images/2022-06-24-rust-unconference/Eventbrite_Unconf.jpg)
+
+The PostConf Unconf will be dedicated to the Rust project and will be a
+fantastic opportunity for users, contributors, and maintainers to network and
+discuss the project's development.
 
 There will be no set agenda; instead, attendees will decide what will be
 discussed together and can move freely between sessions to find ones in which
@@ -17,19 +21,16 @@ they can contribute most effectively based on their individual interests and
 needs.
 
 To get the most out of the unconference, jot down your thoughts ahead of time
-and bring them ready to share. We will also setup a Discord channel for folks
-to communicate and make preliminary, informal plans.
+and bring them ready to share. We will also setup a channel in the RustConf
+Discord for folks to communicate and make preliminary, informal plans.
 
-Whether or not you plan to attend, please fill out the extremely short two
-question **[:rotating_light: attendance survey :rotating_light:]()** so we can
-better estimate the number of attendees, especially if you are a project
-member. We have no data to base figures off of because we have never hosted an
-event like this, especially during COVID Times, and completing the survey will
-help us plan appropriately, even if your answer is just "I'm definitely not
-going" or "I'm undecided".
+If you plan to attend, please register as soon as possible to help us plan
+appropriately. If space is limited, project participants and conference
+attendees will be given preference. Registration is free and open to everyone,
+but we require either a rustconf registration ID or a $10 deposit at signup to
+ensure that registrations are an accurate approximation of participants.
 
-Everyone is welcome to register, but if space is limited, registration for
-project participants and conference attendees will be given priority.
+**[:rotating_light: Register Now! :rotating_light:]()**
 
 We hope to see you there!
 
