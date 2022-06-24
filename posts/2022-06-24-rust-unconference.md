@@ -1,13 +1,14 @@
 Hello Rust community!
 
-We're excited to announce that we'll be hosting an unconference[^1] the day after
-RustConf. This unconference will be dedicated to the Rust project and will be a
-fantastic opportunity for users, contributors, and maintainers to network and
-discuss the project's development.
+We're excited to announce that the Rust project teams be hosting an
+unconference[^1] the day after RustConf. This unconference will be dedicated to
+the Rust project and will be a fantastic opportunity for users, contributors,
+and maintainers to network and discuss the project's development.
 
-There will be no set agenda; rather, attendees will decide what will be
-discussed and can move freely between sessions to find ones in which they can
-contribute most effectively based on their individual interests and needs.
+There will be no set agenda; instead, attendees will decide what will be
+discussed together and can move freely between sessions to find ones in which
+they can contribute most effectively based on their individual interests and
+needs.
 
 To get the most out of the unconference, jot down your thoughts ahead of time
 and bring them ready to share. We will also setup a Discord channel for folks
