@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Announcing The Rustconf Day After Unconference"
+author: Jane Lusby, on behalf of The Rust Project Teams
+---
+
 Hello Rust community!
 
 We're excited to announce that the Rust project teams be hosting an
