@@ -6,7 +6,7 @@ author: Jane Lusby, on behalf of The Rust Project Teams
 
 Hello Rust community!
 
-We're excited to announce that the Rust project teams be hosting an
+We're excited to announce that the Rust project teams will be hosting an
 unconference[^1] the day after RustConf.
 
 ![RustConf PostConf UnConf promo image](../../../images/2022-06-24-rust-unconference/Eventbrite_Unconf.jpg)
