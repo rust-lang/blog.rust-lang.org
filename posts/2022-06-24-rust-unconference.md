@@ -21,7 +21,7 @@ they can contribute most effectively based on their individual interests and
 needs.
 
 To get the most out of the unconference, jot down your thoughts ahead of time
-and bring them ready to share. We will also setup a channel in the RustConf
+and bring them ready to share. We will also set up a channel in the RustConf
 Discord for folks to communicate and make preliminary, informal plans.
 
 If you plan to attend, please register as soon as possible to help us plan
