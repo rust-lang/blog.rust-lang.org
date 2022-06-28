@@ -9,7 +9,7 @@ Hello Rust community!
 We're excited to announce that the Rust project teams will be hosting an
 unconference[^1] the day after RustConf.
 
-![RustConf PostConf UnConf promo image](../../../images/2022-06-24-rust-unconference/Eventbrite_Unconf.jpg)
+![RustConf PostConf UnConf promo image](../../../images/2022-06-28-rust-unconference/Eventbrite_Unconf.jpg)
 
 The PostConf Unconf will be dedicated to the Rust project and will be a
 fantastic opportunity for users, contributors, and maintainers to network and
