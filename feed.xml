@@ -10,8 +10,49 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-06-28T09:48:04+00:00</updated>
+    <updated>2022-06-28T19:02:23+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing The RustConf PostConf UnConf</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/06/28/rust-unconference.html" type="text/html" title="Announcing The RustConf PostConf UnConf" />
+        <published>2022-06-28T00:00:00+00:00</published>
+        <updated>2022-06-28T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/06/28/rust-unconference.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/06/28/rust-unconference.html">&lt;p&gt;Hello Rust community!&lt;/p&gt;
+&lt;p&gt;We&#x27;re excited to announce that the Rust project teams will be hosting an
+unconference&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; the day after &lt;a href&#x3D;&quot;https://rustconf.com&quot;&gt;RustConf&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;../../../images/2022-06-28-rust-unconference/Eventbrite_Unconf.jpg&quot; alt&#x3D;&quot;RustConf PostConf UnConf promo image&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The PostConf Unconf will be dedicated to the Rust project and will be a
+fantastic opportunity for users, contributors, and maintainers to network and
+discuss the project&#x27;s development.&lt;/p&gt;
+&lt;p&gt;There will be no set agenda; instead, attendees will decide what will be
+discussed together and can move freely between sessions to find ones in which
+they can contribute most effectively based on their individual interests and
+needs.&lt;/p&gt;
+&lt;p&gt;To get the most out of the unconference, jot down your thoughts ahead of time
+and bring them ready to share. We will also set up a channel in the RustConf
+Discord for folks to communicate and make preliminary, informal plans.&lt;/p&gt;
+&lt;p&gt;If you plan to attend, please register as soon as possible to help us plan
+appropriately. If space is limited, project participants and conference
+attendees will be given preference. Registration is free and open to everyone,
+but we require either a RustConf registration ID or a $10 deposit at signup to
+ensure that registrations are an accurate approximation of participants.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href&#x3D;&quot;https://www.eventbrite.com/e/rustconf-postconf-unconf-registration-373057423797&quot;&gt;🚨Register Now!🚨&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;We hope to see you there!&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn1&quot;&gt;
+&lt;p&gt;If you are unfamiliar with the notion of an unconference, you may find &lt;a href&#x3D;&quot;https://universityinnovation.org/wiki/Resource:How_to_organize_an_unconference&quot;&gt;this informational piece helpful&lt;/a&gt;. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Jane Lusby, on behalf of The Rust Project Teams</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Call for testing: Cargo sparse-registry</title>
@@ -809,39 +850,6 @@ away so that older versions of Cargo will continue to work. See &lt;a href&#x3D;
 
         <author>
             <name>The Crates.io Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Changes in the Core Team</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/01/31/changes-in-the-core-team.html" type="text/html" title="Changes in the Core Team" />
-        <published>2022-01-31T00:00:00+00:00</published>
-        <updated>2022-01-31T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/01/31/changes-in-the-core-team.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/01/31/changes-in-the-core-team.html">&lt;p&gt;We want to say thanks to three people who recently have decided to step back from the Core Team:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Steve Klabnik is leaving the Core Team and the Security Response Working Group.
-Steve started with Rust more than 9 years ago.
-He was the primary author of the Rust Programming Language book and part of the core team since 2014. He has been running the @rustlang Twitter account and as such formed a lot of the “voice” of the project.
-Steve will now be able to focus on &lt;em&gt;using&lt;/em&gt; Rust instead of &lt;em&gt;making&lt;/em&gt; Rust.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Florian Gilcher is stepping back from all of his project positions.&lt;br /&gt;
-He became a Core Team observer in 2019 and a full Core Team member in 2020.
-He also served as a project director on the Rust foundation board.
-Before all of that he was part of the Community Team since 2015.
-As he&#x27;s focusing on his company and taking on other business obligations, he is making space for others in the project.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Pietro Albini is leaving the Core Team to focus on other parts of the project, including the Infrastructure Team and the Security Response Working Group. He joined the Core Team in late 2019, shortly after becoming a co-lead of the Infrastructure Team, but the amount of work in the Core Team made it hard for him to spend enough time on his other roles in the project.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We&#x27;re thankful for Steve&#x27;s, Florian&#x27;s and Pietro&#x27;s contributions to the Core Team &amp;amp; the Rust project in the past and we’re looking forward to any contributions they will still make in the future.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
         </author>
     </entry>
     
