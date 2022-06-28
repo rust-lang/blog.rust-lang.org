@@ -25,10 +25,8 @@ and bring them ready to share. We will also set up a channel in the RustConf
 Discord for folks to communicate and make preliminary, informal plans.
 
 If you plan to attend, please register as soon as possible to help us plan
-appropriately. If space is limited, project participants and conference
-attendees will be given preference. Registration is free and open to everyone,
-but we require either a RustConf registration ID or a $10 deposit at signup to
-ensure that registrations are an accurate approximation of participants.
+appropriately. If we run out of space, project participants will be given preference.
+Registration is free and open to everyone attending RustConf.
 
 **[🚨Register Now!🚨][registration]**
 
