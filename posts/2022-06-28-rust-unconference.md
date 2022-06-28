@@ -7,7 +7,7 @@ author: Jane Lusby, on behalf of The Rust Project Teams
 Hello Rust community!
 
 We're excited to announce that the Rust project teams will be hosting an
-unconference[^1] the day after RustConf.
+unconference[^1] the day after [RustConf].
 
 ![RustConf PostConf UnConf promo image](../../../images/2022-06-28-rust-unconference/Eventbrite_Unconf.jpg)
 
@@ -30,8 +30,11 @@ attendees will be given preference. Registration is free and open to everyone,
 but we require either a RustConf registration ID or a $10 deposit at signup to
 ensure that registrations are an accurate approximation of participants.
 
-**[:rotating_light: Register Now! :rotating_light:]()**
+**[🚨Register Now!🚨][registration]**
 
 We hope to see you there!
 
-[^1]: If you are unfamiliar with the notion of an unconference, you may find this informational piece helpful: https://universityinnovation.org/wiki/Resource:How_to_organize_an_unconference
+[^1]: If you are unfamiliar with the notion of an unconference, you may find [this informational piece helpful](https://universityinnovation.org/wiki/Resource:How_to_organize_an_unconference).
+
+[RustConf]: https://rustconf.com
+[registration]: https://www.eventbrite.com/e/rustconf-postconf-unconf-registration-373057423797
