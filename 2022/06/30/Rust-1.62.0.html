@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.62.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.62.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.62.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.62.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.62.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">June 30, 2022 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.62.0. Rust is a programming language
+empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, you can get 1.62.0 with:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a>
+from the appropriate page on our website, and check out the
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1620-2022-06-30">detailed release notes for 1.62.0</a> on GitHub.</p>
+<p>If you'd like to help us out by testing future releases, you might consider updating locally to use
+the beta channel (<code>rustup default beta</code>) or the nightly channel (<code>rustup default nightly</code>).
+Please <a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you might come across!</p>
+<h2><a href="#whats-in-1620-stable" aria-hidden="true" class="anchor" id="whats-in-1620-stable"></a>What's in 1.62.0 stable</h2>
+<h3><a href="#cargo-add" aria-hidden="true" class="anchor" id="cargo-add"></a><code>cargo add</code></h3>
+<p>You can now add new dependencies directly from the command line using <code>cargo add</code>. This command supports specifying features and versions. It can also be used to modify existing dependencies.</p>
+<p>For example:</p>
+<pre><code class="language-console">cargo add log
+cargo add serde --features derive
+cargo add nom@5
+</code></pre>
+<p>See the <a href="https://doc.rust-lang.org/nightly/cargo/commands/cargo-add.html">cargo documentation</a> for more.</p>
+<h3><a href="#default-enum-variants" aria-hidden="true" class="anchor" id="default-enum-variants"></a><code>#[default]</code> enum variants</h3>
+<p>You can now use <code>#[derive(Default)]</code> on enums if you specify a default variant. For example, until now you would have to manually write a <code>Default</code> impl for this enum:</p>
+<pre><code class="language-rust">#[derive(Default)]
+enum Maybe&lt;T&gt; {
+    #[default]
+    Nothing,
+
+    Something(T),
+}
+</code></pre>
+<p>As of now only &quot;unit&quot; variants (variants that have no fields) are allowed to be marked <code>#[default]</code>. More information is available in the <a href="https://rust-lang.github.io/rfcs/3107-derive-default-enum.html">RFC</a> for this feature.</p>
+<h3><a href="#thinner-faster-mutexes-on-linux" aria-hidden="true" class="anchor" id="thinner-faster-mutexes-on-linux"></a>Thinner, faster mutexes on Linux</h3>
+<p>Previously, <code>Mutex</code>, <code>Condvar</code>, and <code>RwLock</code> were backed by the pthreads library on Linux. The pthreads locks support more features than the Rust APIs themselves do, including runtime configuration, and are designed to be used in languages with fewer static guarantees than Rust provides.</p>
+<p>The mutex implementation, for example, is 40 bytes and cannot be moved. This forced the standard library to allocate a <code>Box</code> behind the scenes for each new mutex for platforms that use pthreads.</p>
+<p>Rust's standard library now ships with a raw futex-based implementation of these locks on Linux, which is very lightweight and doesn't require extra allocation. In 1.62.0 <code>Mutex</code> only needs 5 bytes for its internal state on Linux, though this may change in future versions.</p>
+<p>This is part of a long effort to improve the efficiency of Rust's lock types, which includes previous improvements on Windows such as unboxing its primitives. You can read more about that effort in the <a href="https://github.com/rust-lang/rust/issues/93740">tracking issue</a>.</p>
+<h3><a href="#bare-metal-x86_64-target" aria-hidden="true" class="anchor" id="bare-metal-x86_64-target"></a>Bare metal <code>x86_64</code> target</h3>
+<p>It's now easier to build OS-less binaries for <code>x86_64</code>, for example when writing a kernel. The <a href="https://doc.rust-lang.org/beta/rustc/platform-support/x86_64-unknown-none.html"><code>x86_64-unknown-none</code> target</a> has been promoted to <a href="https://doc.rust-lang.org/rustc/platform-support.html#tier-2">Tier 2</a> and can be installed with rustup.</p>
+<pre><code class="language-console">rustup target add x86_64-unknown-none
+rustc --target x86_64-unknown-none my_no_std_program.rs
+</code></pre>
+<p>You can read more about development using <code>no_std</code> in the <a href="https://docs.rust-embedded.org/book/intro/no-std.html">Embedded Rust book</a>.</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<p>The following methods and trait implementations are now stabilized:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.bool.html#method.then_some"><code>bool::then_some</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f32.html#method.total_cmp"><code>f32::total_cmp</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f64.html#method.total_cmp"><code>f64::total_cmp</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/struct.Stdin.html#method.lines"><code>Stdin::lines</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/process/trait.CommandExt.html#tymethod.raw_arg"><code>windows::CommandExt::raw_arg</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/panic/struct.AssertUnwindSafe.html#impl-Default"><code>impl&lt;T: Default&gt; Default for AssertUnwindSafe&lt;T&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#impl-From%3CRc%3Cstr%3E%3E"><code>From&lt;Rc&lt;str&gt;&gt; for Rc&lt;[u8]&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#impl-From%3CArc%3Cstr%3E%3E"><code>From&lt;Arc&lt;str&gt;&gt; for Arc&lt;[u8]&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/ffi/struct.EncodeWide.html#impl-FusedIterator"><code>FusedIterator for EncodeWide</code></a></li>
+<li><a href="https://github.com/rust-lang/stdarch/pull/1285">RDM intrinsics on aarch64</a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.62.0 release. Check out what changed in
+<a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1620-2022-06-30">Rust</a>,
+<a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-162-2022-06-30">Cargo</a>,
+and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-162">Clippy</a>.</p>
+<h3><a href="#contributors-to-1620" aria-hidden="true" class="anchor" id="contributors-to-1620"></a>Contributors to 1.62.0</h3>
+<p>Many people came together to create Rust 1.62.0.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.62.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>

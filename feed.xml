@@ -10,8 +10,86 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-06-28T21:15:04+00:00</updated>
+    <updated>2022-06-30T16:34:35+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.62.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/06/30/Rust-1.62.0.html" type="text/html" title="Announcing Rust 1.62.0" />
+        <published>2022-06-30T00:00:00+00:00</published>
+        <updated>2022-06-30T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/06/30/Rust-1.62.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/06/30/Rust-1.62.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.62.0. Rust is a programming language
+empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.62.0 with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
+from the appropriate page on our website, and check out the
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1620-2022-06-30&quot;&gt;detailed release notes for 1.62.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider updating locally to use
+the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly channel (&lt;code&gt;rustup default nightly&lt;/code&gt;).
+Please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you might come across!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1620-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1620-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.62.0 stable&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#cargo-add&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargo-add&quot;&gt;&lt;/a&gt;&lt;code&gt;cargo add&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;You can now add new dependencies directly from the command line using &lt;code&gt;cargo add&lt;/code&gt;. This command supports specifying features and versions. It can also be used to modify existing dependencies.&lt;/p&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;cargo add log
+cargo add serde --features derive
+cargo add nom@5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;See the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/commands/cargo-add.html&quot;&gt;cargo documentation&lt;/a&gt; for more.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#default-enum-variants&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;default-enum-variants&quot;&gt;&lt;/a&gt;&lt;code&gt;#[default]&lt;/code&gt; enum variants&lt;/h3&gt;
+&lt;p&gt;You can now use &lt;code&gt;#[derive(Default)]&lt;/code&gt; on enums if you specify a default variant. For example, until now you would have to manually write a &lt;code&gt;Default&lt;/code&gt; impl for this enum:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[derive(Default)]
+enum Maybe&amp;lt;T&amp;gt; {
+    #[default]
+    Nothing,
+
+    Something(T),
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As of now only &amp;quot;unit&amp;quot; variants (variants that have no fields) are allowed to be marked &lt;code&gt;#[default]&lt;/code&gt;. More information is available in the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/3107-derive-default-enum.html&quot;&gt;RFC&lt;/a&gt; for this feature.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#thinner-faster-mutexes-on-linux&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thinner-faster-mutexes-on-linux&quot;&gt;&lt;/a&gt;Thinner, faster mutexes on Linux&lt;/h3&gt;
+&lt;p&gt;Previously, &lt;code&gt;Mutex&lt;/code&gt;, &lt;code&gt;Condvar&lt;/code&gt;, and &lt;code&gt;RwLock&lt;/code&gt; were backed by the pthreads library on Linux. The pthreads locks support more features than the Rust APIs themselves do, including runtime configuration, and are designed to be used in languages with fewer static guarantees than Rust provides.&lt;/p&gt;
+&lt;p&gt;The mutex implementation, for example, is 40 bytes and cannot be moved. This forced the standard library to allocate a &lt;code&gt;Box&lt;/code&gt; behind the scenes for each new mutex for platforms that use pthreads.&lt;/p&gt;
+&lt;p&gt;Rust&#x27;s standard library now ships with a raw futex-based implementation of these locks on Linux, which is very lightweight and doesn&#x27;t require extra allocation. In 1.62.0 &lt;code&gt;Mutex&lt;/code&gt; only needs 5 bytes for its internal state on Linux, though this may change in future versions.&lt;/p&gt;
+&lt;p&gt;This is part of a long effort to improve the efficiency of Rust&#x27;s lock types, which includes previous improvements on Windows such as unboxing its primitives. You can read more about that effort in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/93740&quot;&gt;tracking issue&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#bare-metal-x86_64-target&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;bare-metal-x86_64-target&quot;&gt;&lt;/a&gt;Bare metal &lt;code&gt;x86_64&lt;/code&gt; target&lt;/h3&gt;
+&lt;p&gt;It&#x27;s now easier to build OS-less binaries for &lt;code&gt;x86_64&lt;/code&gt;, for example when writing a kernel. The &lt;a href&#x3D;&quot;https://doc.rust-lang.org/beta/rustc/platform-support/x86_64-unknown-none.html&quot;&gt;&lt;code&gt;x86_64-unknown-none&lt;/code&gt; target&lt;/a&gt; has been promoted to &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/platform-support.html#tier-2&quot;&gt;Tier 2&lt;/a&gt; and can be installed with rustup.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup target add x86_64-unknown-none
+rustc --target x86_64-unknown-none my_no_std_program.rs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can read more about development using &lt;code&gt;no_std&lt;/code&gt; in the &lt;a href&#x3D;&quot;https://docs.rust-embedded.org/book/intro/no-std.html&quot;&gt;Embedded Rust book&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
+&lt;p&gt;The following methods and trait implementations are now stabilized:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.bool.html#method.then_some&quot;&gt;&lt;code&gt;bool::then_some&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.f32.html#method.total_cmp&quot;&gt;&lt;code&gt;f32::total_cmp&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.f64.html#method.total_cmp&quot;&gt;&lt;code&gt;f64::total_cmp&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/io/struct.Stdin.html#method.lines&quot;&gt;&lt;code&gt;Stdin::lines&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/process/trait.CommandExt.html#tymethod.raw_arg&quot;&gt;&lt;code&gt;windows::CommandExt::raw_arg&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/panic/struct.AssertUnwindSafe.html#impl-Default&quot;&gt;&lt;code&gt;impl&amp;lt;T: Default&amp;gt; Default for AssertUnwindSafe&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#impl-From%3CRc%3Cstr%3E%3E&quot;&gt;&lt;code&gt;From&amp;lt;Rc&amp;lt;str&amp;gt;&amp;gt; for Rc&amp;lt;[u8]&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#impl-From%3CArc%3Cstr%3E%3E&quot;&gt;&lt;code&gt;From&amp;lt;Arc&amp;lt;str&amp;gt;&amp;gt; for Arc&amp;lt;[u8]&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/ffi/struct.EncodeWide.html#impl-FusedIterator&quot;&gt;&lt;code&gt;FusedIterator for EncodeWide&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/stdarch/pull/1285&quot;&gt;RDM intrinsics on aarch64&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.62.0 release. Check out what changed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1620-2022-06-30&quot;&gt;Rust&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-162-2022-06-30&quot;&gt;Cargo&lt;/a&gt;,
+and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-162&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1620&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1620&quot;&gt;&lt;/a&gt;Contributors to 1.62.0&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.62.0.
+We couldn&#x27;t have done it without all of you.
+&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.62.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing The RustConf PostConf UnConf</title>
@@ -808,46 +886,6 @@ Thanks to the awesome contributors to rustc, clippy, cargo, LSP, IntelliJ Rust, 
 
         <author>
             <name>The Rust Survey Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Crates.io Index Snapshot Branches Moving</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/02/14/crates-io-snapshot-branches.html" type="text/html" title="Crates.io Index Snapshot Branches Moving" />
-        <published>2022-02-14T00:00:00+00:00</published>
-        <updated>2022-02-14T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/02/14/crates-io-snapshot-branches.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/02/14/crates-io-snapshot-branches.html">&lt;p&gt;Every so often, the &lt;a href&#x3D;&quot;https://github.com/rust-lang/crates.io-index&quot;&gt;crates.io index&lt;/a&gt;&#x27;s Git history
-is &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/cargos-crate-index-upcoming-squash-into-one-commit/8440&quot;&gt;squashed into one
-commit&lt;/a&gt;
-to minimize the history Cargo needs to download. When the index is squashed, we save snapshots
-to preserve the history of crate publishes.&lt;/p&gt;
-&lt;p&gt;Currently, those snapshots are stored as branches in the main index Git repository. Those branches
-are using server resources though, as the server still has to consider their contents whenever
-Cargo asks for the master branch. We will be deleting the snapshot branches from this repository to
-ensure that all objects referenced in the master branch will only be compressed against other
-objects in the master branch, ensuring that the current clone behavior will be much more efficient
-on the server side.&lt;/p&gt;
-&lt;p&gt;Here&#x27;s how this might affect you:&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#if-you-use-cargo&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;if-you-use-cargo&quot;&gt;&lt;/a&gt;If you use Cargo&lt;/h2&gt;
-&lt;p&gt;You should not see any effects from this change. Cargo does not use the snapshot branches, and
-Cargo regularly handles index squashes. If you do see any issues, they are bugs, please &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo&quot;&gt;report
-them on the Cargo repo&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#if-you-use-the-snapshot-branches&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;if-you-use-the-snapshot-branches&quot;&gt;&lt;/a&gt;If you use the snapshot branches&lt;/h2&gt;
-&lt;p&gt;In one week, on 2022-02-21, we will be removing all snapshot branches from the crates.io-index
-repo. All snapshot branches, both historical and in the future, are and will be in the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/crates.io-index-archive&quot;&gt;rust-lang/crates.io-index-archive repo&lt;/a&gt;
-instead. Please update any scripts or tools referencing the snapshot branches by that time.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#in-the-future&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;in-the-future&quot;&gt;&lt;/a&gt;In the future&lt;/h2&gt;
-&lt;p&gt;In the medium term, we&#x27;re working to prioritize the completion of &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/9069&quot;&gt;in-progress
-work&lt;/a&gt; to add a way to serve the index as static
-files on HTTP, which will further ease the server load. The index repository will &lt;em&gt;not&lt;/em&gt; be going
-away so that older versions of Cargo will continue to work. See &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2789&quot;&gt;RFC
-2789&lt;/a&gt; for more details.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Crates.io Team</name>
         </author>
     </entry>
     
