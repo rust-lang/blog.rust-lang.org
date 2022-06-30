@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-06-30T16:34:35+00:00</updated>
+    <updated>2022-06-30T16:46:59+00:00</updated>
 
     
     <entry>
@@ -34,7 +34,7 @@ Please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose
 &lt;h3&gt;&lt;a href&#x3D;&quot;#cargo-add&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargo-add&quot;&gt;&lt;/a&gt;&lt;code&gt;cargo add&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;You can now add new dependencies directly from the command line using &lt;code&gt;cargo add&lt;/code&gt;. This command supports specifying features and versions. It can also be used to modify existing dependencies.&lt;/p&gt;
 &lt;p&gt;For example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;cargo add log
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;cargo add log
 cargo add serde --features derive
 cargo add nom@5
 &lt;/code&gt;&lt;/pre&gt;
