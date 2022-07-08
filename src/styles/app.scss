@@ -270,6 +270,8 @@ h3, .post h2, header h2 {
 }
 
 .post {
+  overflow-wrap: break-word;
+
   h2 {
     font-size: 2em;
   }
