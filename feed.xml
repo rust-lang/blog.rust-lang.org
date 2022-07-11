@@ -10,8 +10,95 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-07-01T14:52:12+00:00</updated>
+    <updated>2022-07-11T19:12:43+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rustup 1.25.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/07/11/Rustup-1.25.0.html" type="text/html" title="Announcing Rustup 1.25.0" />
+        <published>2022-07-11T00:00:00+00:00</published>
+        <updated>2022-07-11T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/07/11/Rustup-1.25.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/07/11/Rustup-1.25.0.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.25.0. &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.25.0 is as easy as stopping any programs which may be using Rustup (e.g. closing your IDE) and running:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup self update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1250&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1250&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.25.0&lt;/h2&gt;
+&lt;p&gt;This version of Rustup involves a significant number of internal cleanups, both in terms
+of the Rustup code and its documentation. In addition to a lot of work on the codebase
+itself, due to the length of time since the last release this one has a record number
+of contributors and we thank you all for your efforts and time.&lt;/p&gt;
+&lt;p&gt;One of the biggest changes in 1.25.0 is the new offer on Windows installs to auto-install
+the Visual Studio 2022 compilers which should simplify the process of getting started for
+people not used to developing on Windows with the MSVC-compatible toolchains.&lt;/p&gt;
+&lt;p&gt;A second important change for 1.25.0 is a number of PRs focussed around startup performance
+for Rustup. While it may not seem all that important to many, Rustup&#x27;s startup time is
+a factor in the time it takes to do builds which involve large numbers of crates on systems
+which do not have large numbers of CPU cores. Hopefully the people for whom this is a common
+activity will notice an improvement; though there&#x27;s more opportunity to speed things up still available.&lt;/p&gt;
+&lt;p&gt;Some, but by no means all, of the rest of this release&#x27;s highlights includes support for
+&lt;code&gt;rustup default none&lt;/code&gt; to unset the default toolchain, support for Windows arm64, inclusion
+of &lt;code&gt;rust-gdbgui&lt;/code&gt; as a proxy so that platforms which support it can use GDB&#x27;s gui mode with Rust,
+and some improvements to &lt;code&gt;rustup-init.sh&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Full details are available in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/blob/stable/CHANGELOG.md&quot;&gt;changelog&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Rustup&#x27;s documentation is also available in &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/&quot;&gt;the rustup book&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
+&lt;p&gt;Thanks again to all the contributors who made rustup 1.25.0 possible!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;二手掉包工程师 (hi-rustin)&lt;/li&gt;
+&lt;li&gt;Brian Bowman (Seeker14491)&lt;/li&gt;
+&lt;li&gt;Jon Gjengset (jonho)&lt;/li&gt;
+&lt;li&gt;pierwill&lt;/li&gt;
+&lt;li&gt;Daniel Silverstone (kinnison)&lt;/li&gt;
+&lt;li&gt;Robert Collins (rbtcollins)&lt;/li&gt;
+&lt;li&gt;Alan Somers (asomers)&lt;/li&gt;
+&lt;li&gt;Brennan Vincent (umanwizard)&lt;/li&gt;
+&lt;li&gt;Joshua Nelson (jyn514)&lt;/li&gt;
+&lt;li&gt;Eric Huss (ehuss)&lt;/li&gt;
+&lt;li&gt;Will Bush (willbush)&lt;/li&gt;
+&lt;li&gt;Thad Guidry (thadguidry)&lt;/li&gt;
+&lt;li&gt;Alexander Lovchin (alovchin91)&lt;/li&gt;
+&lt;li&gt;zoodirector&lt;/li&gt;
+&lt;li&gt;Takayuki Nakata (giraffate)&lt;/li&gt;
+&lt;li&gt;Yusuke Abe (chansuke)&lt;/li&gt;
+&lt;li&gt;Wyatt Carss (wcarss)&lt;/li&gt;
+&lt;li&gt;Sondre Aasemoen (sondr3)&lt;/li&gt;
+&lt;li&gt;facklambda&lt;/li&gt;
+&lt;li&gt;Chad Dougherty (crd477)&lt;/li&gt;
+&lt;li&gt;Noritada Kobayashi (noritada)&lt;/li&gt;
+&lt;li&gt;Milan (mdaverde)&lt;/li&gt;
+&lt;li&gt;Pat Sier (pjsier)&lt;/li&gt;
+&lt;li&gt;Matt Keeter (mkeeter)&lt;/li&gt;
+&lt;li&gt;Alex Macleod (alexendoo)&lt;/li&gt;
+&lt;li&gt;Sathwik Matsa (sathwikmatsa)&lt;/li&gt;
+&lt;li&gt;Kushal Das (kushaldas)&lt;/li&gt;
+&lt;li&gt;Justus Winter (teythoon)&lt;/li&gt;
+&lt;li&gt;k900&lt;/li&gt;
+&lt;li&gt;Nicolas Ambram (nico-abram)&lt;/li&gt;
+&lt;li&gt;Connor Slade (basicprogrammer10)&lt;/li&gt;
+&lt;li&gt;Yerkebulan Tulibergenov (yerke)&lt;/li&gt;
+&lt;li&gt;Caleb Cartwright (calebcartwright)&lt;/li&gt;
+&lt;li&gt;Matthias Beyer (matthiasbeyer)&lt;/li&gt;
+&lt;li&gt;spacemaniac&lt;/li&gt;
+&lt;li&gt;Alex Touchet (atouchet)&lt;/li&gt;
+&lt;li&gt;Guillaume Gomez (guillaumegomez)&lt;/li&gt;
+&lt;li&gt;Chris Denton (chrisdenton)&lt;/li&gt;
+&lt;li&gt;Thomas Orozco (krallin)&lt;/li&gt;
+&lt;li&gt;cui fliter (cuishuang)&lt;/li&gt;
+&lt;li&gt;Martin Nordholts (enselic)&lt;/li&gt;
+&lt;li&gt;Emil Gardström (emilgardis)&lt;/li&gt;
+&lt;li&gt;Arlo Siemsen (arlosi)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>The Rustup Working Group</name>
+        </author>
+    </entry>
     
     <entry>
         <title>RLS Deprecation</title>
@@ -809,69 +896,6 @@ We couldn&#x27;t have done it without all of you.
 
         <author>
             <name>The Rust Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>rust-analyzer joins the Rust organization!</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/02/21/rust-analyzer-joins-rust-org.html" type="text/html" title="rust-analyzer joins the Rust organization!" />
-        <published>2022-02-21T00:00:00+00:00</published>
-        <updated>2022-02-21T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/02/21/rust-analyzer-joins-rust-org.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/02/21/rust-analyzer-joins-rust-org.html">&lt;p&gt;We have an exciting announcement to make!
-The &lt;a href&#x3D;&quot;https://rust-analyzer.github.io&quot;&gt;rust-analyzer&lt;/a&gt; project, a new implementation of the Language Server Protocol (LSP) for Rust, is now officially a part of the wider Rust organization! 🎉&lt;/p&gt;
-&lt;p&gt;We want to start by thanking everyone who has gotten us this far, from contributors, to sponsors, to all the users of rust-analyzer in the Rust community. We could not have done this without you.&lt;/p&gt;
-&lt;p&gt;The immediate impact of this organizational change is limited -- nothing changes for rust-analyzer users or contributors.
-However, this change unblocks technical work to make rust-analyzer the officially recommended language server for Rust in the near future.&lt;/p&gt;
-&lt;p&gt;If you were hesitant to try rust-analyzer before, today is a good opportunity to do so.
-Not only is it a very capable language server for Rust, but according to &lt;a href&#x3D;&quot;https://marketplace.visualstudio.com/search?target&#x3D;VSCode&amp;category&#x3D;Programming%20Languages&amp;sortBy&#x3D;Rating&quot;&gt;VS Code statistics&lt;/a&gt;, it is one of the best rated LSP implementations &lt;em&gt;across&lt;/em&gt; programming languages.
-We highly recommend giving rust-analyzer a spin today, even if it will take some more time for us to complete the due process and switch from the existing officially recommended LSP implementation (RLS) properly.&lt;/p&gt;
-&lt;p&gt;rust-analyzer enjoys excellent support in many editors:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;For VS Code, install the &lt;a href&#x3D;&quot;https://marketplace.visualstudio.com/items?itemName&#x3D;matklad.rust-analyzer&quot;&gt;rust-analyzer&lt;/a&gt; extension from the marketplace.&lt;/li&gt;
-&lt;li&gt;For Neovim, follow the setup instructions &lt;a href&#x3D;&quot;https://sharksforarms.dev/posts/neovim-rust/&quot;&gt;from this post&lt;/a&gt;.
-For Vim, see &lt;a href&#x3D;&quot;https://github.com/fannheyward/coc-rust-analyzer&quot;&gt;coc-rust-analyzer&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;For Emacs, follow the setup instructions &lt;a href&#x3D;&quot;https://robert.kra.hn/posts/2021-02-07_rust-with-emacs/&quot;&gt;from this post&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;For other editors, check &lt;a href&#x3D;&quot;https://rust-analyzer.github.io/manual.html&quot;&gt;the manual&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Finally, if you are using IntelliJ-Platform based IDEs like CLion, IDEA or PyCharm, you don&#x27;t need rust-analyzer.
-You should use the awesome &lt;a href&#x3D;&quot;https://intellij-rust.github.io&quot;&gt;IntelliJ Rust&lt;/a&gt; plugin by JetBrains.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#history-and-future&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;history-and-future&quot;&gt;&lt;/a&gt;History and Future&lt;/h2&gt;
-&lt;p&gt;The rust-analyzer project was started at the very end of 2017 (&lt;a href&#x3D;&quot;https://github.com/rust-analyzer/rust-analyzer/commit/a63222cd240d9b5405826783603f3b391c90885d&quot;&gt;first commit&lt;/a&gt;).
-At that time, the existing LSP implementation, RLS, had been providing IDE support for Rust for several years.
-While it handled well the most important features, it was clearly far from the experience offered by state-of-the-art IDEs for some other languages.&lt;/p&gt;
-&lt;p&gt;Originally, the plan was to just experiment with error-resilient parsing for Rust; but when you have a good parser, it is so tempting &lt;a href&#x3D;&quot;https://github.com/rust-analyzer/rust-analyzer/commit/d7c5a6f3081c2e7266620779d3c32067f947b959&quot;&gt;to add a simple LSP server&lt;/a&gt; on top of it.
-Long story short, it took surprisingly little effort to get to a prototype which was already useful as an IDE, which happened in Autumn 2018.
-At that critical point, the company &lt;a href&#x3D;&quot;https://ferrous-systems.com&quot;&gt;Ferrous Systems&lt;/a&gt; (which was newborn itself) stepped in to fund further development of the prototype.&lt;/p&gt;
-&lt;p&gt;During 2019, the then nascent rust-analyzer community worked hard to build out the foundation of an IDE.
-By 2020, we realized that what we had built was no longer a prototype, but an already tremendously useful tool for day-to-day Rust programming.
-This culminated in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2912&quot;&gt;RFC2912&lt;/a&gt;: &amp;quot;Transition to rust-analyzer as our official LSP (Language Server Protocol) implementation&amp;quot;.
-The RFC was accepted with overwhelming support from the community: it is still the most upvoted Rust RFC ever.
-However, there was a wrinkle in the plan -- rust-analyzer was not an official Rust project!
-That&#x27;s what we are fixing today!&lt;/p&gt;
-&lt;p&gt;Next, we will proceed with the plan outlined in the RFC: advertising rust-analyzer as the very likely future of Rust IDE support, gathering feedback, and, conditioned on the positive outcome of that, sunsetting RLS, the currently recommended language server. So, once again -- do try out rust-analyzer and leave feedback on the &lt;a href&#x3D;&quot;https://github.com/rust-analyzer/rust-analyzer/issues/4224&quot;&gt;tracking issues&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;After the transition, we will double down on the technical side of things.&lt;/p&gt;
-&lt;p&gt;As exciting as rust-analyzer is today, it only scratches the surface of what&#x27;s possible when you bring the compiler&#x27;s intricate understanding of the code right into the text editor.
-The end-game we are aiming for is creating an API to analyze and transform Rust code with full access to semantics.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#funding&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;funding&quot;&gt;&lt;/a&gt;Funding&lt;/h2&gt;
-&lt;p&gt;One of the hardest nuts to crack for the present transition was the question of funding.
-Today, Rust is organized as a set of somewhat independent projects (rustc, cargo, rustup, rustfmt), and there&#x27;s deliberately no way to fund a specific project directly. The new &lt;a href&#x3D;&quot;https://foundation.rust-lang.org&quot;&gt;Rust Foundation&lt;/a&gt; is the official place to sponsor Rust in general, with the Foundation Board overseeing funds allocation. Yet, it has always been encouraged for individuals to seek individual funding. While the Rust project may advertise funding opportunities for individual contributors, it does not officially &lt;em&gt;endorse&lt;/em&gt; these efforts nor does it facilitate the funding of entire teams.&lt;/p&gt;
-&lt;p&gt;rust-analyzer has received a significant share of funds from its OpenCollective and later GitHub Sponsors, managed by Ferrous Systems. This OpenCollective funded efforts by both individual contributors and Ferrous Systems employees. Details of this can be found in their &lt;a href&#x3D;&quot;https://rust-analyzer.github.io/blog/2021/08/03/financial-report-3.html&quot;&gt;transparency reports&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Luckily, the OpenCollective has always been managed in a way that would make it possible to transfer it to a different account holder.
-With this transition, the OpenCollective will be renamed from &amp;quot;rust-analyzer OpenCollective&amp;quot; to &amp;quot;Ferrous Systems OpenCollective (rust-analyzer)&amp;quot;. This allows current sponsors to continue to sponsor and also make it clear that their chosen project will continue to be funded.&lt;/p&gt;
-&lt;p&gt;In a sense, the OpenCollective is handed to Ferrous Systems. All Sponsor credits will move to &lt;a href&#x3D;&quot;https://ferrous-systems.com/open-source/#sponsors&quot;&gt;https://ferrous-systems.com/open-source/#sponsors&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;We would like to thank Ferrous Systems for their openness and flexibility in the process, for their thoughtfulness in making sure the funding situation around rust-analyzer was clear, and for taking on the effort of fundraising.&lt;/p&gt;
-&lt;p&gt;Eventually the &lt;a href&#x3D;&quot;https://github.com/sponsors/rust-analyzer&quot;&gt;rust-analyzer GitHub Sponsors&lt;/a&gt; will also move away from the rust-analyzer GitHub organisation.&lt;/p&gt;
-&lt;p&gt;And of course, another great way for companies to support rust-analyzer development is to hire &lt;a href&#x3D;&quot;https://github.com/rust-analyzer/rust-analyzer/graphs/contributors&quot;&gt;the people working on rust-analyzer&lt;/a&gt; to continue to do so.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
-&lt;p&gt;We&#x27;d like to once again thank everyone who help get rust-analyzer to this point. From experiment to being well on its way to the officially recommended LSP implementation for Rust, we couldn&#x27;t have done it without the help of our contributors, sponsors, and users.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;So that&#x27;s where we are at right now!
-Thanks to the awesome contributors to rustc, clippy, cargo, LSP, IntelliJ Rust, RLS and rust-analyzer, Rust today already enjoys great IDE support, even if it still has a bit of experimental flair to it.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The rust-analyzer Team on behalf of the entire Rust Team</name>
         </author>
     </entry>
     
