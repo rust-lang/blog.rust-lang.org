@@ -10,8 +10,31 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-07-11T19:12:43+00:00</updated>
+    <updated>2022-07-12T17:27:02+00:00</updated>
 
+    
+    <entry>
+        <title>Changes in the Core Team</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/07/12/changes-in-the-core-team.html" type="text/html" title="Changes in the Core Team" />
+        <published>2022-07-12T00:00:00+00:00</published>
+        <updated>2022-07-12T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/07/12/changes-in-the-core-team.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/07/12/changes-in-the-core-team.html">&lt;p&gt;We want to say farewell and thanks to a couple of people who are stepping back from the Core Team:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Aidan Hobson Sayers is leaving the Core Team and other roles. Joining the Core Team in 2018, he started out on the project with fixing CI issues and has been a member of the Infrastructure Team since its inception (moving through lead and co-lead). Aidan wants to dedicate more time to working with the Rust community and growing Rust usage at his company, and is looking forward to doing so from the other side of the fence.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ashley Williams will be stepping down from the Core Team and other roles. She became a member of the Core Team in 2018 and has had impact on many parts of the project, from leading the Community team, to setting up PagerDuty for Infrastructure and Crates.io, to the Wasm working group, to Increasing Rust’s Reach and Rustbridge, to her instrumental work creating the Rust Foundation and serving as its first Executive Director. Ashley is leaving her role in the project to focus on her newly founded company.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Many thanks to both of them for their contributions and we look forward to seeing their future efforts with Rust!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Core Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rustup 1.25.0</title>
@@ -700,202 +723,6 @@ for coordinating the disclosure and writing this advisory.&lt;/p&gt;
 
         <author>
             <name>The Rust Security Response WG</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.59.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/02/24/Rust-1.59.0.html" type="text/html" title="Announcing Rust 1.59.0" />
-        <published>2022-02-24T00:00:00+00:00</published>
-        <updated>2022-02-24T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/02/24/Rust-1.59.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/02/24/Rust-1.59.0.html">&lt;p&gt;The Rust team has published a new version of Rust, 1.59.0. Rust is a programming
-language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;Today&#x27;s release falls on the day in which the world&#x27;s attention is captured by
-the sudden invasion of Ukraine by Putin&#x27;s forces. Before going into the details
-of the new Rust release, we&#x27;d like to state that we stand in solidarity with the
-people of Ukraine and express our support for all people affected by this
-conflict.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.59.0
-with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1590-2022-02-24&quot;&gt;detailed release notes for 1.59.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1590-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1590-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.59.0 stable&lt;/h2&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#inline-assembly&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;inline-assembly&quot;&gt;&lt;/a&gt;Inline assembly&lt;/h3&gt;
-&lt;p&gt;The Rust language now supports inline assembly. This enables many applications
-that need very low-level control over their execution, or access to
-specialized machine instructions.&lt;/p&gt;
-&lt;p&gt;When compiling for x86-64 targets, for instance, you can now write:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::arch::asm;
-
-// Multiply x by 6 using shifts and adds
-let mut x: u64 &#x3D; 4;
-unsafe {
-    asm!(
-        &amp;quot;mov {tmp}, {x}&amp;quot;,
-        &amp;quot;shl {tmp}, 1&amp;quot;,
-        &amp;quot;shl {x}, 2&amp;quot;,
-        &amp;quot;add {x}, {tmp}&amp;quot;,
-        x &#x3D; inout(reg) x,
-        tmp &#x3D; out(reg) _,
-    );
-}
-assert_eq!(x, 4 * 6);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The format string syntax used to name registers in the &lt;code&gt;asm!&lt;/code&gt; and &lt;code&gt;global_asm!&lt;/code&gt;
-macros is the same used in Rust &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/fmt/&quot;&gt;format strings&lt;/a&gt;, so it should feel quite familiar
-to Rust programmers.&lt;/p&gt;
-&lt;p&gt;The assembly language and instructions available with inline assembly vary
-according to the target architecture. Today, the stable Rust compiler supports
-inline assembly on the following architectures:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;x86 and x86-64&lt;/li&gt;
-&lt;li&gt;ARM&lt;/li&gt;
-&lt;li&gt;AArch64&lt;/li&gt;
-&lt;li&gt;RISC-V&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;You can see more examples of inline assembly in &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/rust-by-example/unsafe/asm.html&quot;&gt;Rust By Example&lt;/a&gt;,
-and find more detailed documentation in the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/reference/inline-assembly.html&quot;&gt;reference&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#destructuring-assignments&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;destructuring-assignments&quot;&gt;&lt;/a&gt;Destructuring assignments&lt;/h3&gt;
-&lt;p&gt;You can now use tuple, slice, and struct patterns as the left-hand side of an
-assignment.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let (a, b, c, d, e);
-
-(a, b) &#x3D; (1, 2);
-[c, .., d, _] &#x3D; [1, 2, 3, 4, 5];
-Struct { e, .. } &#x3D; Struct { e: 5, f: 3 };
-
-assert_eq!([1, 2, 1, 4, 5], [a, b, c, d, e]);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This makes assignment more consistent with &lt;code&gt;let&lt;/code&gt; bindings, which have long
-supported the same thing. Note that destructuring assignments with operators
-such as &lt;code&gt;+&#x3D;&lt;/code&gt; are not allowed.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#const-generics-defaults-and-interleaving&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-generics-defaults-and-interleaving&quot;&gt;&lt;/a&gt;Const generics defaults and interleaving&lt;/h3&gt;
-&lt;p&gt;Generic types can now specify default values for their const generics. For
-example, you can now write the following:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct ArrayStorage&amp;lt;T, const N: usize &#x3D; 2&amp;gt; {
-    arr: [T; N],
-}
-
-impl&amp;lt;T&amp;gt; ArrayStorage&amp;lt;T&amp;gt; {
-    fn new(a: T, b: T) -&amp;gt; ArrayStorage&amp;lt;T&amp;gt; {
-        ArrayStorage {
-            arr: [a, b],
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Previously, type parameters were required to come before all const parameters.
-That restriction has been relaxed and you can now interleave them.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn cartesian_product&amp;lt;
-    T, const N: usize,
-    U, const M: usize,
-    V, F
-&amp;gt;(a: [T; N], b: [U; M], f: F) -&amp;gt; [[V; N]; M]
-where
-    F: FnMut(&amp;amp;T, &amp;amp;U) -&amp;gt; V
-{
-    // ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#future-incompatibility-warnings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;future-incompatibility-warnings&quot;&gt;&lt;/a&gt;Future incompatibility warnings&lt;/h3&gt;
-&lt;p&gt;Sometimes bugs in the Rust compiler cause it to accept code that should not
-have been accepted. An example of this was &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/46043&quot;&gt;borrows of packed struct
-fields&lt;/a&gt; being allowed in safe code.&lt;/p&gt;
-&lt;p&gt;While this happens very rarely, it can be quite disruptive when a crate used by
-your project has code that will no longer be allowed. In fact, you might not
-notice until your project inexplicably stops building!&lt;/p&gt;
-&lt;p&gt;Cargo now shows you warnings when a dependency will be rejected by a future
-version of Rust. After running &lt;code&gt;cargo build&lt;/code&gt; or &lt;code&gt;cargo check&lt;/code&gt;, you might see:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;warning: the following packages contain code that will be rejected by a future version of Rust: old_dep v0.1.0
-note: to see what the problems were, use the option &#x60;--future-incompat-report&#x60;, or run &#x60;cargo report future-incompatibilities --id 1&#x60;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can run the &lt;code&gt;cargo report&lt;/code&gt; command mentioned in the warning to see a full
-report of the code that will be rejected. This gives you time to upgrade your
-dependency before it breaks your build.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#creating-stripped-binaries&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;creating-stripped-binaries&quot;&gt;&lt;/a&gt;Creating stripped binaries&lt;/h3&gt;
-&lt;p&gt;It&#x27;s often useful to strip unnecessary information like debuginfo from binaries
-you distribute, making them smaller.&lt;/p&gt;
-&lt;p&gt;While it has always been possible to do this manually after the binary is
-created, cargo and rustc now support stripping when the binary is linked. To
-enable this, add the following to your &lt;code&gt;Cargo.toml&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[profile.release]
-strip &#x3D; &amp;quot;debuginfo&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This causes debuginfo to be stripped from release binaries. You can also supply
-&lt;code&gt;&amp;quot;symbols&amp;quot;&lt;/code&gt; or just &lt;code&gt;true&lt;/code&gt; to strip all symbol information where supported.&lt;/p&gt;
-&lt;p&gt;The standard library typically ships with debug symbols and line-level
-debuginfo, so Rust binaries built without debug symbols enabled still include
-the debug information from the standard library by default. Using the &lt;code&gt;strip&lt;/code&gt;
-option allows you to remove this extra information, producing smaller Rust
-binaries.&lt;/p&gt;
-&lt;p&gt;See &lt;a href&#x3D;&quot;https://doc.rust-lang.org/beta/cargo/reference/profiles.html#strip&quot;&gt;Cargo&#x27;s documentation&lt;/a&gt; for more details.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#incremental-compilation-off-by-default&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;incremental-compilation-off-by-default&quot;&gt;&lt;/a&gt;Incremental compilation off by default&lt;/h3&gt;
-&lt;p&gt;The 1.59.0 release disables incremental by default (unless explicitly asked for
-by via an environment variable: &lt;code&gt;RUSTC_FORCE_INCREMENTAL&#x3D;1&lt;/code&gt;). This mitigates
-the effects of a known bug, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/94124&quot;&gt;#94124&lt;/a&gt;, which can cause deserialization errors (and panics) during compilation
-with incremental compilation turned on.&lt;/p&gt;
-&lt;p&gt;The specific fix for &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/94124&quot;&gt;#94124&lt;/a&gt; has landed and is currently in the 1.60 beta,
-which will ship in six weeks. We are not presently aware of other issues that
-would encourage a decision to disable incremental in 1.60 stable, and if none
-arise it is likely that 1.60 stable will re-enable incremental compilation
-again. Incremental compilation remains on by default in the beta and nightly
-channels.&lt;/p&gt;
-&lt;p&gt;As always, we encourage users to test on the nightly and beta channels and
-report issues you find: particularly for incremental bugs, this is the best way
-to ensure the Rust team can judge whether there is breakage and the number of
-users it affects.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
-&lt;p&gt;The following methods and trait implementations are now stabilized:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/thread/fn.available_parallelism.html&quot;&gt;&lt;code&gt;std::thread::available_parallelism&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.copied&quot;&gt;&lt;code&gt;Result::copied&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.cloned&quot;&gt;&lt;code&gt;Result::cloned&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/arch/macro.asm.html&quot;&gt;&lt;code&gt;arch::asm!&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/arch/macro.global_asm.html&quot;&gt;&lt;code&gt;arch::global_asm!&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ops/enum.ControlFlow.html#method.is_break&quot;&gt;&lt;code&gt;ops::ControlFlow::is_break&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ops/enum.ControlFlow.html#method.is_continue&quot;&gt;&lt;code&gt;ops::ControlFlow::is_continue&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.char.html#impl-TryFrom%3Cchar%3E&quot;&gt;&lt;code&gt;TryFrom&amp;lt;char&amp;gt; for u8&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/char/struct.TryFromCharError.html&quot;&gt;&lt;code&gt;char::TryFromCharError&lt;/code&gt;&lt;/a&gt;
-implementing &lt;code&gt;Clone&lt;/code&gt;, &lt;code&gt;Debug&lt;/code&gt;, &lt;code&gt;Display&lt;/code&gt;, &lt;code&gt;PartialEq&lt;/code&gt;, &lt;code&gt;Copy&lt;/code&gt;, &lt;code&gt;Eq&lt;/code&gt;, &lt;code&gt;Error&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/fn.zip.html&quot;&gt;&lt;code&gt;iter::zip&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/num/struct.NonZeroU8.html#method.is_power_of_two&quot;&gt;&lt;code&gt;NonZeroU8::is_power_of_two&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/num/struct.NonZeroU16.html#method.is_power_of_two&quot;&gt;&lt;code&gt;NonZeroU16::is_power_of_two&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/num/struct.NonZeroU32.html#method.is_power_of_two&quot;&gt;&lt;code&gt;NonZeroU32::is_power_of_two&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/num/struct.NonZeroU64.html#method.is_power_of_two&quot;&gt;&lt;code&gt;NonZeroU64::is_power_of_two&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/num/struct.NonZeroU128.html#method.is_power_of_two&quot;&gt;&lt;code&gt;NonZeroU128::is_power_of_two&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/char/struct.ToLowercase.html#impl-DoubleEndedIterator&quot;&gt;&lt;code&gt;DoubleEndedIterator for ToLowercase&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/char/struct.ToUppercase.html#impl-DoubleEndedIterator&quot;&gt;&lt;code&gt;DoubleEndedIterator for ToUppercase&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/convert/trait.TryFrom.html#impl-TryFrom%3C%26%27_%20mut%20%5BT%5D%3E&quot;&gt;&lt;code&gt;TryFrom&amp;lt;&amp;amp;mut [T]&amp;gt; for [T; N]&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Once.html#impl-UnwindSafe&quot;&gt;&lt;code&gt;UnwindSafe for Once&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Once.html#impl-RefUnwindSafe&quot;&gt;&lt;code&gt;RefUnwindSafe for Once&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/stdarch/pull/1266&quot;&gt;armv8 neon intrinsics for aarch64&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The following previously stable functions are now &lt;code&gt;const&lt;/code&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.as_ptr&quot;&gt;&lt;code&gt;mem::MaybeUninit::as_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.assume_init&quot;&gt;&lt;code&gt;mem::MaybeUninit::assume_init&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.assume_init_ref&quot;&gt;&lt;code&gt;mem::MaybeUninit::assume_init_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/struct.CStr.html#method.from_bytes_with_nul_unchecked&quot;&gt;&lt;code&gt;ffi::CStr::from_bytes_with_nul_unchecked&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.59.0 release. Check out what changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1590-2022-02-24&quot;&gt;Rust&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-159-2022-02-24&quot;&gt;Cargo&lt;/a&gt;,
-and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-159&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1590&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1590&quot;&gt;&lt;/a&gt;Contributors to 1.59.0&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.59.0.
-We couldn&#x27;t have done it without all of you.
-&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.59.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Team</name>
         </author>
     </entry>
     
