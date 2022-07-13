@@ -10,8 +10,56 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-07-12T21:28:44+00:00</updated>
+    <updated>2022-07-13T13:26:07+00:00</updated>
 
+    
+    <entry>
+        <title>Changes at the Clippy Team</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/07/13/clippy-team-changes.html" type="text/html" title="Changes at the Clippy Team" />
+        <published>2022-07-13T00:00:00+00:00</published>
+        <updated>2022-07-13T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/07/13/clippy-team-changes.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/07/13/clippy-team-changes.html">&lt;h2&gt;&lt;a href&#x3D;&quot;#new-members&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;new-members&quot;&gt;&lt;/a&gt;New Members&lt;/h2&gt;
+&lt;p&gt;We are thrilled to publicly announce that &lt;a href&#x3D;&quot;https://github.com/Alexendoo&quot;&gt;Alex
+Macleod&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/dswij&quot;&gt;dswij&lt;/a&gt;, and
+&lt;a href&#x3D;&quot;https://github.com/Jarcho&quot;&gt;Jason Newcomb&lt;/a&gt; have joined the Clippy Team!&lt;/p&gt;
+&lt;p&gt;Jason has been contributing to Clippy since late 2020 and was the most active
+contributor since then. He has contributed in pretty much every area - big
+refactors, bug fixes, and major improvements to our Clippy utils. Having him as
+an additional reviewer will be a great improvement to the team.&lt;/p&gt;
+&lt;p&gt;dswij first started contributing late last summer and has fixed many bugs in
+Clippy as well as implementing some new lints to make Clippy even more helpful.
+With their continued contributions to Clippy and engagement in the project,
+we&#x27;re happy to now have them as a full team member.&lt;/p&gt;
+&lt;p&gt;Alex started contributing to Clippy shortly after and has improved our dev
+tooling quite a bit. Now he wants to continue focusing on our &lt;code&gt;lintcheck&lt;/code&gt; tool,
+which will help detect false positives in new lints before we release them to
+the public. We&#x27;re excited to have Alex on our team and looking forward to all
+the improvements he will bring in the future.&lt;/p&gt;
+&lt;p&gt;With the new additions to the team, we should be able to handle our long PR
+queue better. We currently have over 40 open PRs, which is a good sign for the
+health of the project, but doesn&#x27;t help when we don&#x27;t have the reviewers to
+merge them. Now we do!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#alumni&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;alumni&quot;&gt;&lt;/a&gt;Alumni&lt;/h2&gt;
+&lt;p&gt;At the same time, we recently granted some of our oldest members the
+well-deserved alumni status. We want to thank &lt;a href&#x3D;&quot;https://github.com/killercup&quot;&gt;Pascal
+Hertleif&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/mcarton&quot;&gt;Martin
+Carton&lt;/a&gt; for all their contributions, especially in
+the early days. People joining today probably never worked with them on Clippy,
+but without them, we probably wouldn&#x27;t be here.&lt;/p&gt;
+&lt;p&gt;We also want to thank &lt;a href&#x3D;&quot;https://github.com/phansch&quot;&gt;Philipp Hansch&lt;/a&gt; for their
+contributions to Clippy and all of the review work they&#x27;ve done over the years.
+To this day phansch is one of the most active Clippy contributors (measured by
+the number of commits).&lt;/p&gt;
+&lt;p&gt;And finally, thank you to &lt;a href&#x3D;&quot;https://github.com/mikerite&quot;&gt;mikerite&lt;/a&gt;, who stepped
+down from an active reviewer/team member position but will be staying on as a
+contributor. We&#x27;re looking forward to continue working with them!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Philipp Krones</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.62.0 pre-release testing</title>
@@ -658,30 +706,6 @@ on crater or nightly. &lt;a href&#x3D;&quot;#fnref5&quot; class&#x3D;&quot;footn
 
         <author>
             <name>Jane Lusby, Project Director of Collaboration</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Please welcome Thom and Chris to Library Contributors</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/18/libs-contributors.html" type="text/html" title="Please welcome Thom and Chris to Library Contributors" />
-        <published>2022-04-18T00:00:00+00:00</published>
-        <updated>2022-04-18T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/04/18/libs-contributors.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/18/libs-contributors.html">&lt;p&gt;Please welcome Thom Chiovoloni and Chris Denton to the
-&lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/library#libs-contributors&quot;&gt;Library Contributors&lt;/a&gt; group!&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/thomcc&quot;&gt;Thom&lt;/a&gt; has been working on various improvements to the implementation
-of the standard library, such as &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/87869&quot;&gt;optimizing &lt;code&gt;io::Error&lt;/code&gt;&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/90414&quot;&gt;optimizing &lt;code&gt;Chars::count&lt;/code&gt;&lt;/a&gt;, and has been helping out
-with reviewing various implementation changes.&lt;/p&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/ChrisDenton/&quot;&gt;Chris&lt;/a&gt; has been focusing on the Windows specific parts of the standard library.
-Chris implemented the Windows part of the patch for &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/01/20/cve-2022-21658.html&quot;&gt;CVE-2022-21658&lt;/a&gt;,
-and has done &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pulls?q&#x3D;is%3Apr+author%3Achrisdenton+is%3Aclosed&quot;&gt;a ton of work&lt;/a&gt;
-to improve the Windows side of &lt;code&gt;std::fs&lt;/code&gt;, &lt;code&gt;std::path&lt;/code&gt;, &lt;code&gt;std::process&lt;/code&gt; and other modules.&lt;/p&gt;
-&lt;p&gt;Congratulations Thom and Chris, and thanks for everything you do!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Mara Bos</name>
         </author>
     </entry>
     
