@@ -85,7 +85,7 @@ forward progress has been made. On nightly Rust, you can enable this with
 <code>-Zinsert-sideeffect</code>, which will use some heuristics to insert it where it's
 possibly needed (currently, massively overshooting the minimal set).</p>
 <p>However, recent attempts to enable this intrinsic by default hit a snag: it's
-very expensive on compile times to do so (<a href="https://perf.rust-lang.org/compare.html?start=66b0c97070f422cb82baaaafc79ee94cab4396c5&end=548b5e75afd6bad696920dfdb69c9812ce0488f1">3-30% regressions</a>). There is some runtime effect as well; check builds (which do not
+very expensive on compile times to do so (<a href="https://perf.rust-lang.org/compare.html?start=66b0c97070f422cb82baaaafc79ee94cab4396c5&amp;end=548b5e75afd6bad696920dfdb69c9812ce0488f1">3-30% regressions</a>). There is some runtime effect as well; check builds (which do not
 generate LLVM IR or run LLVM passes) regressed by up to 3-7%.</p>
 <p>The current implementation in rustc emits calls to the side effect intrinsic
 very aggressively; certainly in way more cases than is strictly necessary.

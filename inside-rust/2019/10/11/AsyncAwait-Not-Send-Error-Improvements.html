@@ -213,7 +213,7 @@ which causes the entire future not to implement <code>Send</code>.</p>
 <p>That wasn't obvious from the error: we had to know that futures might implement <code>Send</code> depending
 on the types they capture <em>and</em> find the type which lives across an await point ourselves.</p>
 <p>Fortunately, the Async Foundations WG has been working to improve this error, and
-<a href="https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=7e80a8bc151df8817e0983e55bf2667a">in nightly</a>, we see the following diagnostic instead:</p>
+<a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2018&amp;gist=7e80a8bc151df8817e0983e55bf2667a">in nightly</a>, we see the following diagnostic instead:</p>
 <pre><code>error[E0277]: `std::sync::MutexGuard&lt;'_, u32&gt;` cannot be sent between threads safely
   --&gt; src/main.rs:23:5
    |

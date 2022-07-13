@@ -151,7 +151,7 @@ and what you can do about the warnings if you have them, read <a href="http://bl
 <p>In Rust 1.36.0, the <code>HashMap&lt;K, V&gt;</code> implementation has been <a href="https://github.com/rust-lang/rust/pull/58623">replaced</a>
 with the one in the <a href="https://crates.io/crates/hashbrown"><code>hashbrown</code></a> crate which is based on the <a href="https://abseil.io/blog/20180927-swisstables">SwissTable</a> design.
 While the interface is the same, the <code>HashMap&lt;K, V&gt;</code> implementation is now
-<a href="https://perf.rust-lang.org/compare.html?start=b57fe74a27590289fd657614b8ad1f3eac8a7ad2&end=abade53a649583e40ed07c26ee10652703f09b58&stat=wall-time">faster on average</a> and has lower memory overhead.
+<a href="https://perf.rust-lang.org/compare.html?start=b57fe74a27590289fd657614b8ad1f3eac8a7ad2&amp;end=abade53a649583e40ed07c26ee10652703f09b58&amp;stat=wall-time">faster on average</a> and has lower memory overhead.
 Note that unlike the <code>hashbrown</code> crate,
 the implementation in <code>std</code> still defaults to the SipHash 1-3 hashing algorithm.</p>
 <h3><a href="#--offline-support-in-cargo" aria-hidden="true" class="anchor" id="--offline-support-in-cargo"></a><a href="https://doc.rust-lang.org/cargo/commands/cargo-build.html#cargo_build_manifest_options"><code>--offline</code></a> support in Cargo</h3>
