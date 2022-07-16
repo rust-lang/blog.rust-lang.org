@@ -10,8 +10,30 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-07-13T13:37:08+00:00</updated>
+    <updated>2022-07-16T17:30:40+00:00</updated>
 
+    
+    <entry>
+        <title>1.62.1 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/07/16/1.62.1-prerelease.html" type="text/html" title="1.62.1 pre-release testing" />
+        <published>2022-07-16T00:00:00+00:00</published>
+        <updated>2022-07-16T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/07/16/1.62.1-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/07/16/1.62.1-prerelease.html">&lt;p&gt;The 1.62.1 pre-release is ready for testing. The release is scheduled for
+July 19. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1621-2022-07-19&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2022-07-16/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2022-07-16/index.html&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-62-1-pre-release-testing/17023&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The release team is also thinking about changes to our pre-release process:
+we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Release automation</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Changes at the Clippy Team</title>
@@ -558,154 +580,6 @@ you&#x27;re warmly invited to &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.
 
         <author>
             <name>Mara Bos</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Imposter Syndrome</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/19/imposter-syndrome.html" type="text/html" title="Imposter Syndrome" />
-        <published>2022-04-19T00:00:00+00:00</published>
-        <updated>2022-04-19T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/04/19/imposter-syndrome.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/19/imposter-syndrome.html">&lt;p&gt;&lt;em&gt;Preface: This is in response to some feedback the project directors received
-from the Rust Foundation staff. Some of the contributors they&#x27;d talked to said
-they didn&#x27;t feel justified in applying for Foundation grants even though they&#x27;d
-love the opportunity, because they don&#x27;t feel qualified or deserving of them
-compared to the other amazing contributors they look up to within the Rust
-project. This was a little bit heart breaking to me, because I know exactly
-what that feeling is like&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, and I also know just how wrong they are.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Imposter syndrome is an insidious problem within software communities. Many of
-us, especially members of marginalized communities, struggle to shake the
-feeling that we aren&#x27;t as qualified as our peers. This makes us feel
-unqualified and undeserving compared to those around us. It can make us
-hesitate to join communities in the first place and, for those already
-involved, it can create a sense of impending doom where you constantly feel
-like you&#x27;re going to get found out and expelled from the community. Overall
-it&#x27;s just not great for mental health, 0/10, would not recommend.&lt;/p&gt;
-&lt;p&gt;The thing is though, imposter syndrome is a logical fallacy&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn2&quot; id&#x3D;&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;. Imposter
-syndrome occurs when we discount what we know and inflate what we think other
-people know, and this effect is often then reinforced by systemic bias for
-those of us who don&#x27;t get the assumption of competence.&lt;/p&gt;
-&lt;p&gt;&lt;img src&#x3D;&quot;../../../../images/2022-04-19-imposter-syndrome/imposter_syndrome.jpg&quot; alt&#x3D;&quot;picture of imposter syndrome, left side shows a large circle saying &amp;quot;What I think others know&amp;quot; and a small circle inside of it saying &amp;quot;What I know&amp;quot;, right side shows the same small circle saying &amp;quot;What I know&amp;quot; surrounded by many other equally sized small circles labeled &amp;quot;What others know&amp;quot;&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;In reality, we&#x27;re all specialists within the Rust project. We all have areas
-where we have deep expertise and other large areas where we only have the
-vaguest idea of how things work. &lt;a href&#x3D;&quot;https://github.com/nikomatsakis&quot;&gt;Niko&lt;/a&gt;, one
-of the lang team co-leads, former compiler team lead and core team alumni,
-still comes to me to ask questions about error handling. I frequently need to
-tell my fellow contributors that I have no idea what the acronyms they&#x27;re using
-mean&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn3&quot; id&#x3D;&quot;fnref3&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;. But this doesn&#x27;t mean we don&#x27;t deserve our positions within the
-project. We don&#x27;t expect every contributor to know everything, to be perfect, or
-to make no mistakes. The only thing we expect from our contributors is the
-ability to collaborate effectively with others and a willingness to learn and
-grow over time.&lt;/p&gt;
-&lt;p&gt;The thing that makes the Rust project as good as it is isn&#x27;t a couple of
-prolific contributors lifting mountains by themselves, it&#x27;s everyone working
-together that brought us to where we are today. We all make mistakes. The
-project has layer&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn4&quot; id&#x3D;&quot;fnref4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; after layer&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn5&quot; id&#x3D;&quot;fnref5&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; of safeguards to make sure we have a
-chance to catch and fix them before they affect our users. These incidents are
-unavoidable, expected, and honestly fine! This is the most fundamental
-philosophy of both the Rust language and the Rust project: we don&#x27;t think it&#x27;s
-sufficient to build robust systems by only including people who don&#x27;t make
-mistakes; we think it&#x27;s better to provide tooling and process to catch and
-prevent mistakes. It isn&#x27;t an accident that our motto is &amp;quot;A language empowering
-everyone to build reliable and efficient software.&amp;quot; We want people to feel
-empowered to make changes they&#x27;re not 100% confident in, to make mistakes, to
-learn, and to grow within the Rust project. This is how all of us got to where
-we are today!&lt;/p&gt;
-&lt;p&gt;So, if you look up to people within the Rust project, if the work we do here
-interests you, if you have always wanted to contribute, and &lt;em&gt;especially&lt;/em&gt; if you
-already have contributed, I want you to know that you&#x27;re one of the people we
-want to apply for &lt;a href&#x3D;&quot;https://foundation.rust-lang.org/grants/&quot;&gt;Rust Foundation grants and
-fellowships&lt;/a&gt;. You&#x27;re one of the
-people we want to eventually see join teams. If you&#x27;re already on a team, I
-want you to know that you&#x27;re there for a good reason, and we value your
-judgement. You&#x27;re not an imposter, and I want you to know that I really look
-forward to seeing you around the project.&lt;/p&gt;
-&lt;p&gt;Edit: After I posted this it was brought to my attention that the image I used
-and tweet I cited are not from an original source, and they can actually be
-traced back to a series of blog posts by Alicia Liu. These original sources do
-a much more subtle exploration of what is and isn&#x27;t imposter syndrome, and
-particularly focus on how imposter syndrome impacts members of marginalized
-communities, I highly recommend reading these posts.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://medium.com/counter-intuition/overcoming-impostor-syndrome-bdae04e46ec5&quot;&gt;Overcoming Imposter Syndrome&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://medium.com/counter-intuition/impostor-syndrome-is-not-just-a-confidence-problem-dea670e59f6e&quot;&gt;Impostor Syndrome Is Not Just a Confidence Problem&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://medium.com/counter-intuition/you-don-t-have-impostor-syndrome-126e4c4bdcc&quot;&gt;You don&#x27;t have Imposter Syndrome&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;em&gt;To help reinforce and normalize this, I&#x27;ve gathered a list of times when
-current or past project members have struggled with imposter syndrome, have
-made mistakes, have had to ask &amp;quot;basic&amp;quot; questions, and similar experiences that
-will hopefully help set more reasonable expectations for new and old
-contributors across the project.&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/yaahc/&quot;&gt;Jane Lusby&lt;/a&gt;: &amp;quot;I frequently struggle with imposter
-syndrome and feeling like I don&#x27;t get as much done as my peers. When I do all
-of my work based off of notifications I completely lose track of what I&#x27;ve
-done and end up starving the tasks I wanted to work on. I&#x27;m learning to set
-reasonable expectations for myself, getting better at managing distractions,
-and being intentional about when I respond to github/zulip notifications
-which helps me with keeping track of what I&#x27;ve done and making steady
-progress on my priorities.&amp;quot;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/joshtriplett/&quot;&gt;Josh Triplett&lt;/a&gt;: &amp;quot;I didn&#x27;t fully understand
-&lt;code&gt;Pin&lt;/code&gt; until I read fasterthanlime&#x27;s &lt;a href&#x3D;&quot;https://fasterthanli.me/articles/pin-and-suffering&quot;&gt;&amp;quot;Pin and
-suffering&amp;quot;&lt;/a&gt; blog post and
-I gave a talk in 2016 where my &lt;a href&#x3D;&quot;https://www.youtube.com/watch?v&#x3D;U8Gl3RTXf88#t&#x3D;24m40s&quot;&gt;most important
-point&lt;/a&gt; was that people
-erroneously believe that you have to be an expert to write an RFC or change
-Rust, but that I wasn&#x27;t, and you don&#x27;t need to be one either.&amp;quot;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/ralfjung&quot;&gt;Ralf Jung&lt;/a&gt;: &amp;quot;I am still surprised anyone is
-taking Miri and Stacked Borrows seriously.&amp;quot;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/angelonfira/&quot;&gt;Forest Anderson&lt;/a&gt;: &amp;quot;As someone who just
-learned last week what &lt;code&gt;dyn&lt;/code&gt; does, it still amazes me that I have something to
-give as a team lead. I was immersed in Rust communities by writing weekly
-blogs about Veloren (I took this on because I didn&#x27;t know enough to contribute
-code), which lead to helping with the Rust Gamedev newsletter, which led me to
-helping to run the Cross Team Collaboration Fun Times meetup!&amp;quot;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/pnkfelix&quot;&gt;Felix S Klock II&lt;/a&gt;: &amp;quot;Back in 2015, while I was
-presenting a tutorial on Rust, and explaining &lt;code&gt;&amp;amp;T&lt;/code&gt;, I had someone from the
-audience, a Rust expert, say &amp;quot;ah ah ah! but what about interior mutability&amp;quot;;
-and in my mind I thought &amp;quot;... oh no; what is that?&amp;quot;, followed by &amp;quot;... what am
-I doing, I&#x27;m not qualified to be up here...&amp;quot;. All of us &amp;quot;imposters&amp;quot; must
-strive to prevent such moments from becoming barriers to our own
-participation. I&#x27;ve learned a lot about Rust (and group dynamics, and
-organizational behavior) since then, but I&#x27;m still learning every day;
-re-learning, in some cases.&amp;quot;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;section class&#x3D;&quot;footnotes&quot;&gt;
-&lt;ol&gt;
-&lt;li id&#x3D;&quot;fn1&quot;&gt;
-&lt;p&gt;Quote from &lt;a href&#x3D;&quot;https://yaah.dev/getting-involved&quot;&gt;https://yaah.dev/getting-involved&lt;/a&gt;: &amp;quot;What happened at the
-Google meetup you ask? Manish, our wonderful meetup organizer, walked up to
-me, unprompted, and asked “Hey, you’re Jane right?”. I was shocked, how the
-heck did Manish know who I was? It didn’t feel as though I’d done anything
-worthy of notice, and yet here he was asking for me by name.&amp;quot; &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id&#x3D;&quot;fn2&quot;&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://twitter.com/ithinkwellHugh/status/1175900121097220096&quot;&gt;https://twitter.com/ithinkwellHugh/status/1175900121097220096&lt;/a&gt; &lt;a href&#x3D;&quot;#fnref2&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id&#x3D;&quot;fn3&quot;&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling/issues/34#issuecomment-1092269566&quot;&gt;https://github.com/rust-lang/project-error-handling/issues/34#issuecomment-1092269566&lt;/a&gt; &lt;a href&#x3D;&quot;#fnref3&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id&#x3D;&quot;fn4&quot;&gt;
-&lt;p&gt;Any irreversible changes such as stabilizations require almost everyone
-on the relevant team to approve the change and zero people on the team to
-raise concerns. &lt;a href&#x3D;&quot;#fnref4&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id&#x3D;&quot;fn5&quot;&gt;
-&lt;p&gt;We double check all changes with
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/crater&quot;&gt;crater&lt;/a&gt; before they ever land on stable
-and are careful to &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/88967&quot;&gt;quickly&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/90904&quot;&gt;revert&lt;/a&gt;
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/82913&quot;&gt;changes&lt;/a&gt; that cause problems
-on crater or nightly. &lt;a href&#x3D;&quot;#fnref5&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
-</content>
-
-        <author>
-            <name>Jane Lusby, Project Director of Collaboration</name>
         </author>
     </entry>
     
