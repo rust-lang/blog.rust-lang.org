@@ -29,7 +29,7 @@ Open `site/index.html` in your web browser to view the site.
 You can also run a server, if you need to preview your changes on a different machine:
 
 ```console
-> cargo run --bin serve
+> cargo run -p serve
 Serving on: http://192.168.123.45:8000
 ```
 
