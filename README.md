@@ -26,6 +26,13 @@ Open `site/index.html` in your web browser to view the site.
 > firefox site/index.html
 ```
 
+You can also run a server, if you need to preview your changes on a different machine:
+
+```console
+> cargo run -p serve
+Serving on: http://192.168.123.45:8000
+```
+
 ## Contributing
 
 First of all, thank you!

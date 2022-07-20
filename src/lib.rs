@@ -1,8 +1,8 @@
 mod blogs;
 mod posts;
 
-use crate::blogs::Blog;
-use crate::posts::Post;
+use self::blogs::Blog;
+use self::posts::Post;
 use chrono::Timelike;
 use handlebars::{handlebars_helper, Handlebars};
 use sass_rs::{compile_file, Options};
@@ -59,7 +59,7 @@ impl<'a> Generator<'a> {
 
         Ok(Generator {
             handlebars,
-            blogs: crate::blogs::load(posts_directory.as_ref())?,
+            blogs: self::blogs::load(posts_directory.as_ref())?,
             out_directory: out_directory.as_ref().into(),
         })
     }
@@ -251,7 +251,7 @@ impl<'a> Generator<'a> {
     }
 }
 
-fn main() -> Result<(), Box<dyn Error>> {
+pub fn main() -> Result<(), Box<dyn Error>> {
     let blog = Generator::new("site", "posts")?;
 
     blog.render()?;
