@@ -169,7 +169,7 @@ without it becoming hugely inconvenient for maintainers, contributors, or users:
 <li>Make it easier to port std to a new platform, possibly allowing the relevant code
 to live outside of the <code>rust-lang/rust</code> repository for less popular platforms.</li>
 <li>A better way to allow only parts of <code>std</code> to be available, depending on the platform.
-For example, a <code>where Platform: Unix</code> bound, or something like a <a href="https://rust-lang.github.io/rfcs/1868-portability-lint.html"><code>#[cfg]</code> portibility lint</a>.</li>
+For example, a <code>where Platform: Unix</code> bound, or something like a <a href="https://rust-lang.github.io/rfcs/1868-portability-lint.html"><code>#[cfg]</code> portability lint</a>.</li>
 <li>A way to allow non-portable functionality to be available when on platforms
 that would support it, such as allowing infallible conversion between <code>u64</code> and
 <code>usize</code> in code that declares it only runs on 64-bit platforms.</li>

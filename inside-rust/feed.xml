@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-07-20T00:48:48+00:00</updated>
+    <updated>2022-07-22T05:54:37+00:00</updated>
 
     
     <entry>
@@ -496,7 +496,7 @@ without it becoming hugely inconvenient for maintainers, contributors, or users:
 &lt;li&gt;Make it easier to port std to a new platform, possibly allowing the relevant code
 to live outside of the &lt;code&gt;rust-lang/rust&lt;/code&gt; repository for less popular platforms.&lt;/li&gt;
 &lt;li&gt;A better way to allow only parts of &lt;code&gt;std&lt;/code&gt; to be available, depending on the platform.
-For example, a &lt;code&gt;where Platform: Unix&lt;/code&gt; bound, or something like a &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/1868-portability-lint.html&quot;&gt;&lt;code&gt;#[cfg]&lt;/code&gt; portibility lint&lt;/a&gt;.&lt;/li&gt;
+For example, a &lt;code&gt;where Platform: Unix&lt;/code&gt; bound, or something like a &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/1868-portability-lint.html&quot;&gt;&lt;code&gt;#[cfg]&lt;/code&gt; portability lint&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;A way to allow non-portable functionality to be available when on platforms
 that would support it, such as allowing infallible conversion between &lt;code&gt;u64&lt;/code&gt; and
 &lt;code&gt;usize&lt;/code&gt; in code that declares it only runs on 64-bit platforms.&lt;/li&gt;
