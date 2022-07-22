@@ -124,7 +124,7 @@ without it becoming hugely inconvenient for maintainers, contributors, or users:
 - Make it easier to port std to a new platform, possibly allowing the relevant code
   to live outside of the `rust-lang/rust` repository for less popular platforms.
 - A better way to allow only parts of `std` to be available, depending on the platform.
-  For example, a `where Platform: Unix` bound, or something like a [`#[cfg]` portibility lint](https://rust-lang.github.io/rfcs/1868-portability-lint.html).
+  For example, a `where Platform: Unix` bound, or something like a [`#[cfg]` portability lint](https://rust-lang.github.io/rfcs/1868-portability-lint.html).
 - A way to allow non-portable functionality to be available when on platforms
   that would support it, such as allowing infallible conversion between `u64` and
   `usize` in code that declares it only runs on 64-bit platforms.
