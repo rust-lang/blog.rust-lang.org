@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing the Keyword Generics Initiative | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing the Keyword Generics Initiative | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing the Keyword Generics Initiative | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+<link rel="manifest" href="../../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../../inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing the Keyword Generics Initiative" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing the Keyword Generics Initiative</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">July 27, 2022 &middot; Yoshua Wuyts
+     on behalf of <a href="https://github.com/rust-lang/keyword-generics-initiative">The Keyword Generics Initiative</a> 
+    </div>
+
+    <div class="post">
+      <p>We (<a href="https://github.com/oli-obk">Oli</a>, <a href="https://github.com/nikomatsakis">Niko</a>, and <a href="https://github.com/yoshuawuyts">Yosh</a>) are excited to announce the start of the <a href="https://github.com/rust-lang/keyword-generics-initiative">Keyword
+Generics Initiative</a>, a new initiative <sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup> under the purview of
+the language team. We're officially just a few weeks old now, and in this post
+we want to briefly share why we've started this initiative, and share some
+insight on what we're about.</p>
+<h2><a href="#a-missing-kind-of-generic" aria-hidden="true" class="anchor" id="a-missing-kind-of-generic"></a>A missing kind of generic</h2>
+<p>One of Rust's defining features is the ability to write functions which are
+<em>generic</em> over their input types. That allows us to write a function once,
+leaving it up to the compiler to generate the right implementations for us.</p>
+<p>Rust allows you to be generic over types - it does not allow you to be generic
+over other things that are usually specified by keywords. For example, whether a
+function is async, whether a function can fail or not, whether a function is
+const or not, etc.</p>
+<p>The post <a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">&quot;What color is your function&quot;</a> <sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup> describes what happens
+when a language introduces async functions, but with no way to be generic over
+them:</p>
+<blockquote>
+<p>I will take async-await over bare callbacks or futures any day of the week.
+But we’re lying to ourselves if we think all of our troubles are gone. As soon
+as you start trying to write higher-order functions, or reuse code, you’re
+right back to realizing color is still there, bleeding all over your codebase.</p>
+</blockquote>
+<p>This isn't just limited to async though, it applies to all modifier keywords -
+including ones we may define in the future. So we're looking to fill that gap
+by exploring something we call &quot;keyword generics&quot; <sup class="footnote-ref"><a href="#fn3" id="fnref3">3</a></sup>: the ability to be
+generic over keywords such as <code>const</code> and <code>async</code>.</p>
+<p>To give you a quick taste of what we're working on, this is roughly how we
+imagine you may be able to write a function which is generic over &quot;asyncness&quot;
+in the future:</p>
+<blockquote>
+<p>Please note that this syntax is entirely made up, just so we can use something
+in examples. Before we can work on syntax we need to finalize the semantics,
+and we're not there yet. This means the syntax will likely be subject to
+change over time.</p>
+</blockquote>
+<pre><code class="language-rust">async&lt;A&gt; trait Read {
+    async&lt;A&gt; fn read(&amp;mut self, buf: &amp;mut [u8]) -&gt; Result&lt;usize&gt;;
+    async&lt;A&gt; fn read_to_string(&amp;mut self, buf: &amp;mut String) -&gt; Result&lt;usize&gt; { ... }
+}
+
+/// Read from a reader into a string.
+async&lt;A&gt; fn read_to_string(reader: &amp;mut impl Read * A) -&gt; std::io::Result&lt;String&gt; {
+    let mut string = String::new();
+    reader.read_to_string(&amp;mut string).await?;
+    string
+}
+</code></pre>
+<p>This function introduces a &quot;keyword generic&quot; parameter into the function of <code>A</code>.
+You can think of this as a flag which indicates whether the function is being
+compiled in an async context or not. The parameter <code>A</code> is forwarded to the <code>impl Read</code>, making that conditional on &quot;asyncness&quot; as well.</p>
+<p>In the function body you can see a <code>.await</code> call. Because <a href="https://blog.yoshuawuyts.com/async-cancellation-1/">the <code>.await</code> keyword
+marks cancellation sites</a> we unfortunately can't just infer them
+<sup class="footnote-ref"><a href="#fn4" id="fnref4">4</a></sup>. Instead we require them to be written for when the code is
+compiled in async mode, but are essentially reduced to a no-op in non-async
+mode.</p>
+<p>We still have lots of details left to figure out, but we hope this at least
+shows the general <em>feel</em> of what we're going for.</p>
+<h2><a href="#a-peek-at-the-past-horrors-before-const" aria-hidden="true" class="anchor" id="a-peek-at-the-past-horrors-before-const"></a>A peek at the past: horrors before const</h2>
+<p>Rust didn't always have <code>const fn</code> as part of the language. A long long long long
+long time ago (2018) we had to write a regular function for runtime computations
+and associated const of generic type logic for compile-time computations. As an
+example, to add the number <code>1</code> to a constant provided to you, you had to write
+(<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=50e818b79b8af322ed4384d3c33e9773">playground</a>):</p>
+<pre><code class="language-rust">trait Const&lt;T&gt; {
+    const VAL: T;
+}
+
+/// `42` as a &quot;const&quot; (type) generic:
+struct FourtyTwo;
+impl Const&lt;i32&gt; for FourtyTwo {
+    const VAL: i32 = 42;
+}
+
+/// `C` -&gt; `C + 1` operation:
+struct AddOne&lt;C: Const&lt;i32&gt;&gt;(C);
+impl&lt;C: Const&lt;i32&gt;&gt; Const&lt;i32&gt; for AddOne&lt;C&gt; {
+    const VAL: i32 = C::VAL + 1;
+}
+
+AddOne::&lt;FourtyTwo&gt;::VAL
+</code></pre>
+<p>Today this is as easy as writing a <code>const fn</code>:</p>
+<pre><code class="language-rust">const fn add_one(i: i32) -&gt; i32 {
+    i + 1
+}
+
+add_one(42)
+</code></pre>
+<p>The interesting part here is that you can also just call this function in
+runtime code, which means the implementation is shared between both <code>const</code>
+(CTFE<sup class="footnote-ref"><a href="#fn5" id="fnref5">5</a></sup>) and non-<code>const</code> (runtime) contexts.</p>
+<h2><a href="#memories-of-the-present-async-today" aria-hidden="true" class="anchor" id="memories-of-the-present-async-today"></a>Memories of the present: async today</h2>
+<p>People write duplicate code for async/non-async with the only difference being
+the <code>async</code> keyword. A good example of that code today is <a href="https://docs.rs/async-std/latest/async_std/"><code>async-std</code></a>, which
+duplicates and translates a large part of the stdlib's API surface to be async
+<sup class="footnote-ref"><a href="#fn6" id="fnref6">6</a></sup>. And because the Async WG has made it an explicit goal to <a href="https://rust-lang.github.io/wg-async/vision/how_it_feels.html">bring
+async Rust up to par with non-async Rust</a>, the issue of code
+duplication is particularly relevant for the Async WG as well. Nobody on the
+Async WG seems particularly keen on proposing we add a second instance of just
+about every API currently in the stdlib.</p>
+<p>We're in a similar situation with <code>async</code> today as <code>const</code> was prior to 2018.
+Duplicating entire interfaces and wrapping them in <code>block_on</code> calls is the
+approach taken by e.g. the <code>mongodb</code>
+[<a href="https://docs.rs/mongodb/latest/mongodb/index.html">async</a>,
+<a href="https://docs.rs/mongodb/latest/mongodb/sync/index.html">non-async</a>], <code>postgres</code>
+[<a href="https://docs.rs/tokio-postgres/latest/tokio_postgres/index.html">async</a>,
+<a href="https://docs.rs/postgres/latest/postgres/">non-async</a>], and <code>reqwest</code>
+[<a href="https://docs.rs/reqwest/latest/reqwest/">async</a>,
+<a href="https://docs.rs/reqwest/latest/reqwest/blocking/index.html">non-async</a>] crates:</p>
+<pre><code class="language-rust">// Async functionality like this would typically be exposed from a crate &quot;foo&quot;:
+async fn bar() -&gt; Bar { 
+    // async implementation goes here
+}
+</code></pre>
+<pre><code class="language-rust">// And a sync counterpart would typically be exposed from a crate
+// named &quot;blocking_foo&quot; or a submodule on the original crate as
+// &quot;foo::blocking&quot;. This wraps the async code in a `block_on` call:
+fn bar() -&gt; Bar {
+    futures::executor::block_on(foo::bar())
+}
+</code></pre>
+<p>This situation is not ideal. Instead of using the host's synchronous syscalls,
+we're now going through an async runtime to get the same results - something
+which is often not zero-cost. But more importantly, it's rather hard to
+keep both a sync and async API version of the same crate in, err, sync with each
+other. Without automation it's really easy for the two APIs to get out of sync,
+leading to mismatched functionality.</p>
+<p>The ecosystem has come up with some solutions to this, perhaps most notably the
+proc-macro based <a href="https://docs.rs/maybe-async/0.2.6/maybe_async/"><code>maybe-async</code> crate</a>.  Instead of writing two
+separate copies of <code>foo</code>, it generates a sync and async variant for you:</p>
+<pre><code class="language-rust">#[maybe_async]
+async fn foo() -&gt; Bar { ... }
+</code></pre>
+<p>While being useful, the macro has clear limitations with respect to diagnostics
+and ergonomics. That's absolutely not an issue with the crate, but an inherent
+property of the problem it's trying to solve. Implementing a way to be generic
+over the <code>async</code> keyword is something which will affect the language in many
+ways, and a type system + compiler will be better equipped to handle it than
+proc macros reasonably can.</p>
+<h2><a href="#a-taste-of-trouble-the-sandwich-problem" aria-hidden="true" class="anchor" id="a-taste-of-trouble-the-sandwich-problem"></a>A taste of trouble: the sandwich problem</h2>
+<p>A pervasive issue in existing Rust is the <em>sandwich</em> problem. It occurs when a
+type passed into an operation wants to perform control flow not supported by the
+type it's passed into. Thus creating a <em>sandwich</em> <sup class="footnote-ref"><a href="#fn7" id="fnref7">7</a></sup> The classic example
+is a <code>map</code> operation:</p>
+<pre><code class="language-rust">enum Option&lt;T&gt; {
+    Some(T),
+    None,
+}
+
+impl&lt;T&gt; Option&lt;T&gt; {
+    fn map&lt;J&gt;(self, f: impl FnOnce(T) -&gt; J) -&gt; Option&lt;J&gt; { ... }
+}
+
+my_option.map(|x| x.await)
+</code></pre>
+<p>This will produce a compiler error: the closure <code>f</code> is not an async context, so
+<code>.await</code> cannot be used within it. And we can't just convert the closure to be
+<code>async</code> either, since <code>fn map</code> doesn't know how to call async functions. In
+order to solve this issue, we could provide a new <code>async_map</code> method which
+<em>does</em> provide an async closure. But we may want to repeat those for more
+effects, and that would result in a combinatorial explosion of effects. Take for
+example &quot;can fail&quot; and &quot;can be async&quot;:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>not async</th>
+<th>async</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>infallible</strong></td>
+<td><code>fn map</code></td>
+<td><code>fn async_map</code></td>
+</tr>
+<tr>
+<td><strong>fallible</strong></td>
+<td><code>fn try_map</code></td>
+<td><code>fn async_try_map</code></td>
+</tr>
+</tbody>
+</table>
+<p>That's a lot of API surface for just a single method, and <strong>that problem
+multiplies across the entire API surface in the stdlib</strong>. We expect that once we
+start applying &quot;keyword generics&quot; to traits, we will be able to solve the
+sandwich problem. The type <code>f</code> would be marked generic over a set of effects,
+and the compiler would choose the right variant during compilation.</p>
+<h2><a href="#affecting-all-effects" aria-hidden="true" class="anchor" id="affecting-all-effects"></a>Affecting all effects</h2>
+<p>Both <code>const</code> and <code>async</code> share a very similar issue, and we expect that other
+&quot;effects&quot; will face the same issue. &quot;fallibility&quot; is particularly on our mind here,
+but it isn't the only effect. In order for the language to feel consistent we
+need consistent solutions.</p>
+<h2><a href="#faq" aria-hidden="true" class="anchor" id="faq"></a>FAQ</h2>
+<h3><a href="#q-is-there-an-rfc-available-to-read" aria-hidden="true" class="anchor" id="q-is-there-an-rfc-available-to-read"></a>Q: Is there an RFC available to read?</h3>
+<p>Rust initiatives are intended for <em>exploration</em>. The announcement of the Keyword
+Generics Initiative marks the <em>start</em> of the exploration process. Part of
+exploring is not knowing what the outcomes will be. Right now we're in the
+&quot;pre-RFC&quot; phase of design. What we hope we'll achieve is to enumerate the
+full problem space, design space, find a balanced solution, and eventually
+summarize that in the form of an RFC. Then after the RFC is accepted: implement
+it on nightly, work out the kinks, and eventually move to stabilize.  But we may
+at any point during this process conclude that this initiative is actually
+infeasible and start ramping down.</p>
+<p>But while we can't make any <em>assurances</em> about the outcome of the initiative,
+what we can share is that we're pretty optimistic about the initiative overall.
+We wouldn't be investing the time we are on this if we didn't think we'd be
+actually be able to see it through to completion.</p>
+<h3><a href="#q-will-this-make-the-language-more-complicated" aria-hidden="true" class="anchor" id="q-will-this-make-the-language-more-complicated"></a>Q: Will this make the language more complicated?</h3>
+<p>The goal of keyword generics is not to minimize the complexity of the Rust
+programming language, but to <em>minimize the complexity of programming in Rust.</em>
+These two might sound similar, but they're not. Our reasoning here is that by
+<em>adding</em> a feature, we will actually be able to significantly reduce the surface
+area of the stdlib, crates.io libraries, and user code - leading to a more
+streamlined user experience.</p>
+<p>Choosing between sync or async code is a fundamental choice which needs to be
+made. This is complexity which cannot be avoided, and which needs to exist
+somewhere. Currently in Rust that complexity is thrust entirely on users of
+Rust, making them responsible for choosing whether their code should support
+async Rust or not. But other languages have made diferent choices. For example
+Go doesn't distinguish between &quot;sync&quot; and &quot;async&quot; code, and has a runtime which
+is able to remove that distinction.</p>
+<p>In today's Rust application authors choose whether their application will be sync
+or async, and even after the introduction of keyword generics we don't really
+expect that to change. All generics eventually need to have their types known,
+and keyword generics are no different. What we're targeting is the choice made
+by <em>library</em> authors whether their library supports is sync or async. With
+keyword generics library authors will be able to support both with the help of
+the compiler, and leave it up to application authors to decide how they want to
+compile their code.</p>
+<h3><a href="#q-are-you-building-an-effect-system" aria-hidden="true" class="anchor" id="q-are-you-building-an-effect-system"></a>Q: Are you building an effect system?</h3>
+<p>The short answer is: kind of, but not really. &quot;Effect systems&quot; or &quot;algebraic
+effect systems&quot; generally have a lot of surface area. A common example of what
+effects allow you to do is implement your own <code>try/catch</code> mechanism. What we're
+working on is intentionally limited to built-in keywords only, and wouldn't
+allow you to implement anything like that at all.</p>
+<p>What we do share with effect systems is that we're integrating modifier keywords
+more directly into the type system. Modifier keywords like <code>async</code> are often
+referred to as &quot;effects&quot;, so being able to be conditional over them in
+composable ways effectively gives us an &quot;effect algebra&quot;. But that's very
+different from &quot;generalized effect systems&quot; in other languages.</p>
+<h3><a href="#q-are-you-looking-at-other-keywords-beyond-async-and-const" aria-hidden="true" class="anchor" id="q-are-you-looking-at-other-keywords-beyond-async-and-const"></a>Q: Are you looking at other keywords beyond <code>async</code> and <code>const</code>?</h3>
+<p>For a while we were referring to the initiative as &quot;modifier generics&quot; or
+&quot;modifier keyword generics&quot;, but it never really stuck. We're only really
+interested in keywords which modify how types work. Right now this is <code>const</code>
+and <code>async</code> because that's what's most relevant for the const-generics WG and
+async WG. But we're designing the feature with other keywords in mind as well.</p>
+<p>The one most at the top of our mind is a future keyword for fallibility. There
+is talk about introducing <code>try fn() {}</code> or <code>fn () -&gt; throws</code> syntax. This could
+make it so methods such as <code>Iterator::filter</code> would be able to use <code>?</code> to break
+out of the closure and short-circuit iteration.</p>
+<p>Our main motiviation for this feature is that without it, it's easy for Rust to
+start to feel <em>disjointed</em>. We sometimes joke that Rust is actually 3-5
+languages in a trenchcoat. Between const rust, fallible rust, async rust, unsafe
+rust - it can be easy for common APIs to only be available in one variant of the
+language, but not in others. We hope that with this feature we can start to
+systematically close those gaps, leading to a more consistent Rust experience
+for <em>all</em> Rust users.</p>
+<h3><a href="#q-what-will-the-backwards-compatibility-story-be-like" aria-hidden="true" class="anchor" id="q-what-will-the-backwards-compatibility-story-be-like"></a>Q: What will the backwards compatibility story be like?</h3>
+<p>Rust has pretty strict backwards-compatibility guarantees, and any feature we
+implement needs to adhere to this. Luckily we have some wiggle room because of
+the edition mechanism, but our goal is to shoot for maximal backwards compat. We
+have some ideas of how we're going to make this work though, and we're
+cautiously optimistic we might actually be able to pull this off.</p>
+<p>But to be frank: this is by far one of the hardest aspects of this feature, and
+we're lucky that we're not designing any of this just by ourselves, but have the
+support of the language team as well.</p>
+<h3><a href="#q-arent-implementations-sometimes-fundamentally-different" aria-hidden="true" class="anchor" id="q-arent-implementations-sometimes-fundamentally-different"></a>Q: Aren't implementations sometimes fundamentally different?</h3>
+<p>Const Rust can't make any assumptions about the host it runs on, so it can't do
+anything platform-specific. This includes using more efficient instructions of
+system calls which are only available in one platform but not another. In order
+to work around this, the <a href="https://doc.rust-lang.org/std/intrinsics/fn.const_eval_select.html"><code>const_eval_select</code></a> intrinsic in the standard
+library enables <code>const</code> code to detect whether it's executing during CTFE or
+runtime, and execute different code based on that.</p>
+<p>For async we expect to be able to add a similar intrinsic, allowing library
+authors to detect whether code is being compiled as sync or async, and do
+something different based on that. This includes: using internal concurrency, or
+switching to a different set of system calls. We're not sure whether an
+intrinsic is the right choice for this though; we may want to provide a more
+ergonomic API for this instead. But because keyword generics is being designed
+as a consistent feature, we expect that whatever we end up going with can be used
+consistently by <em>all</em> modifier keywords.</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>In this post we've introduced the new keyword generics initiatve, explained why
+it exists, and shown a brief example of what it might look like in the future.</p>
+<p>The initiative is active on the Rust Zulip under
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/328082-t-lang.2Fkeyword-generics"><code>t-lang/keyword-generics</code></a> - if this seems interesting to you, please
+pop by!</p>
+<p><em>Thanks to everyone who's helped review this post, but in particular:
+<a href="https://github.com/fee1-dead">fee1-dead</a>, <a href="https://github.com/danielhenrymantilla">Daniel Henry-Mantilla</a>, and <a href="https://github.com/rylev">Ryan Levick</a></em></p>
+<section class="footnotes">
+<ol>
+<li id="fn1">
+<p>Rust governance terminology can sometimes get confusing. An
+&quot;initiative&quot; in Rust parlance is different from a &quot;working group&quot; or &quot;team&quot;.
+Initiatives are intentionally limited: they exist to explore, design, and
+implement specific pieces of work - and once that work comes to a close, the
+initiative will wind back down. This is different from, say, the lang team -
+which essentially carries a <code>'static</code> lifetime - and whose work does
+not have a clearly defined end. <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2">
+<p>R. Nystrom, “What Color is Your Function?,” Feb. 01, 2015.
+https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/
+(accessed Apr. 06, 2022). <a href="#fnref2" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn3">
+<p>The longer, more specific name would be: &quot;keyword modifier generics&quot;.
+We've tried calling it that, but it's a bit of a mouthful. So we're just
+sticking with &quot;keyword generics&quot; for now, even if the name for this feature may
+end up being called something more specific in the reference and documentation. <a href="#fnref3" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn4">
+<p>No really, we can't just infer them - and it may not be as
+simple as omitting all <code>.await</code> calls either. The Async WG is working through
+the full spectrum of cancellation sites, async drop, and more. But for now we're
+working under the assumption that <code>.await</code> will remain relevant going forward.
+And even in the off chance that it isn't, fallibility has similar requirements
+at the call site as async does. <a href="#fnref4" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn5">
+<p>CTFE stands for &quot;Compile Time Function Execution&quot;: <code>const</code> functions
+can be evaluated during compilation, which is implemented using a Rust
+interpreter (miri). <a href="#fnref5" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn6">
+<p>Some limitations in <code>async-std</code> apply: async Rust is missing async
+<code>Drop</code>, async traits, and async closures. So not all APIs could be duplicated.
+Also <code>async-std</code> explicitly didn't reimplement any of the collection APIs to be
+async-aware, which means users are subject to the &quot;sandwich problem&quot;. The
+purpose of <code>async-std</code> was to be a proving ground to test whether creating
+an async mirror of the stdlib would be possible: and it's proven that it is, as
+far as was possible with missing language features. <a href="#fnref6" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn7">
+<p>Not to be confused with the higher-order <em>sandwich dilemma</em> which is
+when you look at the sandwich problem and attempt to determine whether the
+sandwich is two slices of bread with a topping in between, or two toppings with
+a slice of bread in between. Imo the operation part of the problem feels more
+<em>bready</em>, but that would make for a weird-looking sandwich. Ergo: sandwich
+dilemma. (yes, you can ignore all of this.) <a href="#fnref7" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../../scripts/highlight.js"></script>
+
+  </body>
+</html>

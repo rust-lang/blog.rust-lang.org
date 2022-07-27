@@ -10,8 +10,365 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-07-22T05:54:37+00:00</updated>
+    <updated>2022-07-27T11:01:15+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing the Keyword Generics Initiative</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/07/27/keyword-generics.html" type="text/html" title="Announcing the Keyword Generics Initiative" />
+        <published>2022-07-27T00:00:00+00:00</published>
+        <updated>2022-07-27T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/07/27/keyword-generics.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/07/27/keyword-generics.html">&lt;p&gt;We (&lt;a href&#x3D;&quot;https://github.com/oli-obk&quot;&gt;Oli&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/nikomatsakis&quot;&gt;Niko&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/yoshuawuyts&quot;&gt;Yosh&lt;/a&gt;) are excited to announce the start of the &lt;a href&#x3D;&quot;https://github.com/rust-lang/keyword-generics-initiative&quot;&gt;Keyword
+Generics Initiative&lt;/a&gt;, a new initiative &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; under the purview of
+the language team. We&#x27;re officially just a few weeks old now, and in this post
+we want to briefly share why we&#x27;ve started this initiative, and share some
+insight on what we&#x27;re about.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#a-missing-kind-of-generic&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-missing-kind-of-generic&quot;&gt;&lt;/a&gt;A missing kind of generic&lt;/h2&gt;
+&lt;p&gt;One of Rust&#x27;s defining features is the ability to write functions which are
+&lt;em&gt;generic&lt;/em&gt; over their input types. That allows us to write a function once,
+leaving it up to the compiler to generate the right implementations for us.&lt;/p&gt;
+&lt;p&gt;Rust allows you to be generic over types - it does not allow you to be generic
+over other things that are usually specified by keywords. For example, whether a
+function is async, whether a function can fail or not, whether a function is
+const or not, etc.&lt;/p&gt;
+&lt;p&gt;The post &lt;a href&#x3D;&quot;https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/&quot;&gt;&amp;quot;What color is your function&amp;quot;&lt;/a&gt; &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn2&quot; id&#x3D;&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; describes what happens
+when a language introduces async functions, but with no way to be generic over
+them:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I will take async-await over bare callbacks or futures any day of the week.
+But we’re lying to ourselves if we think all of our troubles are gone. As soon
+as you start trying to write higher-order functions, or reuse code, you’re
+right back to realizing color is still there, bleeding all over your codebase.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This isn&#x27;t just limited to async though, it applies to all modifier keywords -
+including ones we may define in the future. So we&#x27;re looking to fill that gap
+by exploring something we call &amp;quot;keyword generics&amp;quot; &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn3&quot; id&#x3D;&quot;fnref3&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;: the ability to be
+generic over keywords such as &lt;code&gt;const&lt;/code&gt; and &lt;code&gt;async&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To give you a quick taste of what we&#x27;re working on, this is roughly how we
+imagine you may be able to write a function which is generic over &amp;quot;asyncness&amp;quot;
+in the future:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Please note that this syntax is entirely made up, just so we can use something
+in examples. Before we can work on syntax we need to finalize the semantics,
+and we&#x27;re not there yet. This means the syntax will likely be subject to
+change over time.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;async&amp;lt;A&amp;gt; trait Read {
+    async&amp;lt;A&amp;gt; fn read(&amp;amp;mut self, buf: &amp;amp;mut [u8]) -&amp;gt; Result&amp;lt;usize&amp;gt;;
+    async&amp;lt;A&amp;gt; fn read_to_string(&amp;amp;mut self, buf: &amp;amp;mut String) -&amp;gt; Result&amp;lt;usize&amp;gt; { ... }
+}
+
+/// Read from a reader into a string.
+async&amp;lt;A&amp;gt; fn read_to_string(reader: &amp;amp;mut impl Read * A) -&amp;gt; std::io::Result&amp;lt;String&amp;gt; {
+    let mut string &#x3D; String::new();
+    reader.read_to_string(&amp;amp;mut string).await?;
+    string
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This function introduces a &amp;quot;keyword generic&amp;quot; parameter into the function of &lt;code&gt;A&lt;/code&gt;.
+You can think of this as a flag which indicates whether the function is being
+compiled in an async context or not. The parameter &lt;code&gt;A&lt;/code&gt; is forwarded to the &lt;code&gt;impl Read&lt;/code&gt;, making that conditional on &amp;quot;asyncness&amp;quot; as well.&lt;/p&gt;
+&lt;p&gt;In the function body you can see a &lt;code&gt;.await&lt;/code&gt; call. Because &lt;a href&#x3D;&quot;https://blog.yoshuawuyts.com/async-cancellation-1/&quot;&gt;the &lt;code&gt;.await&lt;/code&gt; keyword
+marks cancellation sites&lt;/a&gt; we unfortunately can&#x27;t just infer them
+&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn4&quot; id&#x3D;&quot;fnref4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;. Instead we require them to be written for when the code is
+compiled in async mode, but are essentially reduced to a no-op in non-async
+mode.&lt;/p&gt;
+&lt;p&gt;We still have lots of details left to figure out, but we hope this at least
+shows the general &lt;em&gt;feel&lt;/em&gt; of what we&#x27;re going for.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#a-peek-at-the-past-horrors-before-const&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-peek-at-the-past-horrors-before-const&quot;&gt;&lt;/a&gt;A peek at the past: horrors before const&lt;/h2&gt;
+&lt;p&gt;Rust didn&#x27;t always have &lt;code&gt;const fn&lt;/code&gt; as part of the language. A long long long long
+long time ago (2018) we had to write a regular function for runtime computations
+and associated const of generic type logic for compile-time computations. As an
+example, to add the number &lt;code&gt;1&lt;/code&gt; to a constant provided to you, you had to write
+(&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;stable&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;50e818b79b8af322ed4384d3c33e9773&quot;&gt;playground&lt;/a&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait Const&amp;lt;T&amp;gt; {
+    const VAL: T;
+}
+
+/// &#x60;42&#x60; as a &amp;quot;const&amp;quot; (type) generic:
+struct FourtyTwo;
+impl Const&amp;lt;i32&amp;gt; for FourtyTwo {
+    const VAL: i32 &#x3D; 42;
+}
+
+/// &#x60;C&#x60; -&amp;gt; &#x60;C + 1&#x60; operation:
+struct AddOne&amp;lt;C: Const&amp;lt;i32&amp;gt;&amp;gt;(C);
+impl&amp;lt;C: Const&amp;lt;i32&amp;gt;&amp;gt; Const&amp;lt;i32&amp;gt; for AddOne&amp;lt;C&amp;gt; {
+    const VAL: i32 &#x3D; C::VAL + 1;
+}
+
+AddOne::&amp;lt;FourtyTwo&amp;gt;::VAL
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Today this is as easy as writing a &lt;code&gt;const fn&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;const fn add_one(i: i32) -&amp;gt; i32 {
+    i + 1
+}
+
+add_one(42)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The interesting part here is that you can also just call this function in
+runtime code, which means the implementation is shared between both &lt;code&gt;const&lt;/code&gt;
+(CTFE&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn5&quot; id&#x3D;&quot;fnref5&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;) and non-&lt;code&gt;const&lt;/code&gt; (runtime) contexts.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#memories-of-the-present-async-today&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;memories-of-the-present-async-today&quot;&gt;&lt;/a&gt;Memories of the present: async today&lt;/h2&gt;
+&lt;p&gt;People write duplicate code for async/non-async with the only difference being
+the &lt;code&gt;async&lt;/code&gt; keyword. A good example of that code today is &lt;a href&#x3D;&quot;https://docs.rs/async-std/latest/async_std/&quot;&gt;&lt;code&gt;async-std&lt;/code&gt;&lt;/a&gt;, which
+duplicates and translates a large part of the stdlib&#x27;s API surface to be async
+&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn6&quot; id&#x3D;&quot;fnref6&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;. And because the Async WG has made it an explicit goal to &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/vision/how_it_feels.html&quot;&gt;bring
+async Rust up to par with non-async Rust&lt;/a&gt;, the issue of code
+duplication is particularly relevant for the Async WG as well. Nobody on the
+Async WG seems particularly keen on proposing we add a second instance of just
+about every API currently in the stdlib.&lt;/p&gt;
+&lt;p&gt;We&#x27;re in a similar situation with &lt;code&gt;async&lt;/code&gt; today as &lt;code&gt;const&lt;/code&gt; was prior to 2018.
+Duplicating entire interfaces and wrapping them in &lt;code&gt;block_on&lt;/code&gt; calls is the
+approach taken by e.g. the &lt;code&gt;mongodb&lt;/code&gt;
+[&lt;a href&#x3D;&quot;https://docs.rs/mongodb/latest/mongodb/index.html&quot;&gt;async&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://docs.rs/mongodb/latest/mongodb/sync/index.html&quot;&gt;non-async&lt;/a&gt;], &lt;code&gt;postgres&lt;/code&gt;
+[&lt;a href&#x3D;&quot;https://docs.rs/tokio-postgres/latest/tokio_postgres/index.html&quot;&gt;async&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://docs.rs/postgres/latest/postgres/&quot;&gt;non-async&lt;/a&gt;], and &lt;code&gt;reqwest&lt;/code&gt;
+[&lt;a href&#x3D;&quot;https://docs.rs/reqwest/latest/reqwest/&quot;&gt;async&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://docs.rs/reqwest/latest/reqwest/blocking/index.html&quot;&gt;non-async&lt;/a&gt;] crates:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// Async functionality like this would typically be exposed from a crate &amp;quot;foo&amp;quot;:
+async fn bar() -&amp;gt; Bar { 
+    // async implementation goes here
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// And a sync counterpart would typically be exposed from a crate
+// named &amp;quot;blocking_foo&amp;quot; or a submodule on the original crate as
+// &amp;quot;foo::blocking&amp;quot;. This wraps the async code in a &#x60;block_on&#x60; call:
+fn bar() -&amp;gt; Bar {
+    futures::executor::block_on(foo::bar())
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This situation is not ideal. Instead of using the host&#x27;s synchronous syscalls,
+we&#x27;re now going through an async runtime to get the same results - something
+which is often not zero-cost. But more importantly, it&#x27;s rather hard to
+keep both a sync and async API version of the same crate in, err, sync with each
+other. Without automation it&#x27;s really easy for the two APIs to get out of sync,
+leading to mismatched functionality.&lt;/p&gt;
+&lt;p&gt;The ecosystem has come up with some solutions to this, perhaps most notably the
+proc-macro based &lt;a href&#x3D;&quot;https://docs.rs/maybe-async/0.2.6/maybe_async/&quot;&gt;&lt;code&gt;maybe-async&lt;/code&gt; crate&lt;/a&gt;.  Instead of writing two
+separate copies of &lt;code&gt;foo&lt;/code&gt;, it generates a sync and async variant for you:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[maybe_async]
+async fn foo() -&amp;gt; Bar { ... }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;While being useful, the macro has clear limitations with respect to diagnostics
+and ergonomics. That&#x27;s absolutely not an issue with the crate, but an inherent
+property of the problem it&#x27;s trying to solve. Implementing a way to be generic
+over the &lt;code&gt;async&lt;/code&gt; keyword is something which will affect the language in many
+ways, and a type system + compiler will be better equipped to handle it than
+proc macros reasonably can.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#a-taste-of-trouble-the-sandwich-problem&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-taste-of-trouble-the-sandwich-problem&quot;&gt;&lt;/a&gt;A taste of trouble: the sandwich problem&lt;/h2&gt;
+&lt;p&gt;A pervasive issue in existing Rust is the &lt;em&gt;sandwich&lt;/em&gt; problem. It occurs when a
+type passed into an operation wants to perform control flow not supported by the
+type it&#x27;s passed into. Thus creating a &lt;em&gt;sandwich&lt;/em&gt; &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn7&quot; id&#x3D;&quot;fnref7&quot;&gt;7&lt;/a&gt;&lt;/sup&gt; The classic example
+is a &lt;code&gt;map&lt;/code&gt; operation:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;enum Option&amp;lt;T&amp;gt; {
+    Some(T),
+    None,
+}
+
+impl&amp;lt;T&amp;gt; Option&amp;lt;T&amp;gt; {
+    fn map&amp;lt;J&amp;gt;(self, f: impl FnOnce(T) -&amp;gt; J) -&amp;gt; Option&amp;lt;J&amp;gt; { ... }
+}
+
+my_option.map(|x| x.await)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will produce a compiler error: the closure &lt;code&gt;f&lt;/code&gt; is not an async context, so
+&lt;code&gt;.await&lt;/code&gt; cannot be used within it. And we can&#x27;t just convert the closure to be
+&lt;code&gt;async&lt;/code&gt; either, since &lt;code&gt;fn map&lt;/code&gt; doesn&#x27;t know how to call async functions. In
+order to solve this issue, we could provide a new &lt;code&gt;async_map&lt;/code&gt; method which
+&lt;em&gt;does&lt;/em&gt; provide an async closure. But we may want to repeat those for more
+effects, and that would result in a combinatorial explosion of effects. Take for
+example &amp;quot;can fail&amp;quot; and &amp;quot;can be async&amp;quot;:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;not async&lt;/th&gt;
+&lt;th&gt;async&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;infallible&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;fn map&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;fn async_map&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;fallible&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;fn try_map&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;fn async_try_map&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;That&#x27;s a lot of API surface for just a single method, and &lt;strong&gt;that problem
+multiplies across the entire API surface in the stdlib&lt;/strong&gt;. We expect that once we
+start applying &amp;quot;keyword generics&amp;quot; to traits, we will be able to solve the
+sandwich problem. The type &lt;code&gt;f&lt;/code&gt; would be marked generic over a set of effects,
+and the compiler would choose the right variant during compilation.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#affecting-all-effects&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;affecting-all-effects&quot;&gt;&lt;/a&gt;Affecting all effects&lt;/h2&gt;
+&lt;p&gt;Both &lt;code&gt;const&lt;/code&gt; and &lt;code&gt;async&lt;/code&gt; share a very similar issue, and we expect that other
+&amp;quot;effects&amp;quot; will face the same issue. &amp;quot;fallibility&amp;quot; is particularly on our mind here,
+but it isn&#x27;t the only effect. In order for the language to feel consistent we
+need consistent solutions.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#faq&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;faq&quot;&gt;&lt;/a&gt;FAQ&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#q-is-there-an-rfc-available-to-read&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;q-is-there-an-rfc-available-to-read&quot;&gt;&lt;/a&gt;Q: Is there an RFC available to read?&lt;/h3&gt;
+&lt;p&gt;Rust initiatives are intended for &lt;em&gt;exploration&lt;/em&gt;. The announcement of the Keyword
+Generics Initiative marks the &lt;em&gt;start&lt;/em&gt; of the exploration process. Part of
+exploring is not knowing what the outcomes will be. Right now we&#x27;re in the
+&amp;quot;pre-RFC&amp;quot; phase of design. What we hope we&#x27;ll achieve is to enumerate the
+full problem space, design space, find a balanced solution, and eventually
+summarize that in the form of an RFC. Then after the RFC is accepted: implement
+it on nightly, work out the kinks, and eventually move to stabilize.  But we may
+at any point during this process conclude that this initiative is actually
+infeasible and start ramping down.&lt;/p&gt;
+&lt;p&gt;But while we can&#x27;t make any &lt;em&gt;assurances&lt;/em&gt; about the outcome of the initiative,
+what we can share is that we&#x27;re pretty optimistic about the initiative overall.
+We wouldn&#x27;t be investing the time we are on this if we didn&#x27;t think we&#x27;d be
+actually be able to see it through to completion.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#q-will-this-make-the-language-more-complicated&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;q-will-this-make-the-language-more-complicated&quot;&gt;&lt;/a&gt;Q: Will this make the language more complicated?&lt;/h3&gt;
+&lt;p&gt;The goal of keyword generics is not to minimize the complexity of the Rust
+programming language, but to &lt;em&gt;minimize the complexity of programming in Rust.&lt;/em&gt;
+These two might sound similar, but they&#x27;re not. Our reasoning here is that by
+&lt;em&gt;adding&lt;/em&gt; a feature, we will actually be able to significantly reduce the surface
+area of the stdlib, crates.io libraries, and user code - leading to a more
+streamlined user experience.&lt;/p&gt;
+&lt;p&gt;Choosing between sync or async code is a fundamental choice which needs to be
+made. This is complexity which cannot be avoided, and which needs to exist
+somewhere. Currently in Rust that complexity is thrust entirely on users of
+Rust, making them responsible for choosing whether their code should support
+async Rust or not. But other languages have made diferent choices. For example
+Go doesn&#x27;t distinguish between &amp;quot;sync&amp;quot; and &amp;quot;async&amp;quot; code, and has a runtime which
+is able to remove that distinction.&lt;/p&gt;
+&lt;p&gt;In today&#x27;s Rust application authors choose whether their application will be sync
+or async, and even after the introduction of keyword generics we don&#x27;t really
+expect that to change. All generics eventually need to have their types known,
+and keyword generics are no different. What we&#x27;re targeting is the choice made
+by &lt;em&gt;library&lt;/em&gt; authors whether their library supports is sync or async. With
+keyword generics library authors will be able to support both with the help of
+the compiler, and leave it up to application authors to decide how they want to
+compile their code.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#q-are-you-building-an-effect-system&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;q-are-you-building-an-effect-system&quot;&gt;&lt;/a&gt;Q: Are you building an effect system?&lt;/h3&gt;
+&lt;p&gt;The short answer is: kind of, but not really. &amp;quot;Effect systems&amp;quot; or &amp;quot;algebraic
+effect systems&amp;quot; generally have a lot of surface area. A common example of what
+effects allow you to do is implement your own &lt;code&gt;try/catch&lt;/code&gt; mechanism. What we&#x27;re
+working on is intentionally limited to built-in keywords only, and wouldn&#x27;t
+allow you to implement anything like that at all.&lt;/p&gt;
+&lt;p&gt;What we do share with effect systems is that we&#x27;re integrating modifier keywords
+more directly into the type system. Modifier keywords like &lt;code&gt;async&lt;/code&gt; are often
+referred to as &amp;quot;effects&amp;quot;, so being able to be conditional over them in
+composable ways effectively gives us an &amp;quot;effect algebra&amp;quot;. But that&#x27;s very
+different from &amp;quot;generalized effect systems&amp;quot; in other languages.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#q-are-you-looking-at-other-keywords-beyond-async-and-const&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;q-are-you-looking-at-other-keywords-beyond-async-and-const&quot;&gt;&lt;/a&gt;Q: Are you looking at other keywords beyond &lt;code&gt;async&lt;/code&gt; and &lt;code&gt;const&lt;/code&gt;?&lt;/h3&gt;
+&lt;p&gt;For a while we were referring to the initiative as &amp;quot;modifier generics&amp;quot; or
+&amp;quot;modifier keyword generics&amp;quot;, but it never really stuck. We&#x27;re only really
+interested in keywords which modify how types work. Right now this is &lt;code&gt;const&lt;/code&gt;
+and &lt;code&gt;async&lt;/code&gt; because that&#x27;s what&#x27;s most relevant for the const-generics WG and
+async WG. But we&#x27;re designing the feature with other keywords in mind as well.&lt;/p&gt;
+&lt;p&gt;The one most at the top of our mind is a future keyword for fallibility. There
+is talk about introducing &lt;code&gt;try fn() {}&lt;/code&gt; or &lt;code&gt;fn () -&amp;gt; throws&lt;/code&gt; syntax. This could
+make it so methods such as &lt;code&gt;Iterator::filter&lt;/code&gt; would be able to use &lt;code&gt;?&lt;/code&gt; to break
+out of the closure and short-circuit iteration.&lt;/p&gt;
+&lt;p&gt;Our main motiviation for this feature is that without it, it&#x27;s easy for Rust to
+start to feel &lt;em&gt;disjointed&lt;/em&gt;. We sometimes joke that Rust is actually 3-5
+languages in a trenchcoat. Between const rust, fallible rust, async rust, unsafe
+rust - it can be easy for common APIs to only be available in one variant of the
+language, but not in others. We hope that with this feature we can start to
+systematically close those gaps, leading to a more consistent Rust experience
+for &lt;em&gt;all&lt;/em&gt; Rust users.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#q-what-will-the-backwards-compatibility-story-be-like&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;q-what-will-the-backwards-compatibility-story-be-like&quot;&gt;&lt;/a&gt;Q: What will the backwards compatibility story be like?&lt;/h3&gt;
+&lt;p&gt;Rust has pretty strict backwards-compatibility guarantees, and any feature we
+implement needs to adhere to this. Luckily we have some wiggle room because of
+the edition mechanism, but our goal is to shoot for maximal backwards compat. We
+have some ideas of how we&#x27;re going to make this work though, and we&#x27;re
+cautiously optimistic we might actually be able to pull this off.&lt;/p&gt;
+&lt;p&gt;But to be frank: this is by far one of the hardest aspects of this feature, and
+we&#x27;re lucky that we&#x27;re not designing any of this just by ourselves, but have the
+support of the language team as well.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#q-arent-implementations-sometimes-fundamentally-different&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;q-arent-implementations-sometimes-fundamentally-different&quot;&gt;&lt;/a&gt;Q: Aren&#x27;t implementations sometimes fundamentally different?&lt;/h3&gt;
+&lt;p&gt;Const Rust can&#x27;t make any assumptions about the host it runs on, so it can&#x27;t do
+anything platform-specific. This includes using more efficient instructions of
+system calls which are only available in one platform but not another. In order
+to work around this, the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/intrinsics/fn.const_eval_select.html&quot;&gt;&lt;code&gt;const_eval_select&lt;/code&gt;&lt;/a&gt; intrinsic in the standard
+library enables &lt;code&gt;const&lt;/code&gt; code to detect whether it&#x27;s executing during CTFE or
+runtime, and execute different code based on that.&lt;/p&gt;
+&lt;p&gt;For async we expect to be able to add a similar intrinsic, allowing library
+authors to detect whether code is being compiled as sync or async, and do
+something different based on that. This includes: using internal concurrency, or
+switching to a different set of system calls. We&#x27;re not sure whether an
+intrinsic is the right choice for this though; we may want to provide a more
+ergonomic API for this instead. But because keyword generics is being designed
+as a consistent feature, we expect that whatever we end up going with can be used
+consistently by &lt;em&gt;all&lt;/em&gt; modifier keywords.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;In this post we&#x27;ve introduced the new keyword generics initiatve, explained why
+it exists, and shown a brief example of what it might look like in the future.&lt;/p&gt;
+&lt;p&gt;The initiative is active on the Rust Zulip under
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/328082-t-lang.2Fkeyword-generics&quot;&gt;&lt;code&gt;t-lang/keyword-generics&lt;/code&gt;&lt;/a&gt; - if this seems interesting to you, please
+pop by!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Thanks to everyone who&#x27;s helped review this post, but in particular:
+&lt;a href&#x3D;&quot;https://github.com/fee1-dead&quot;&gt;fee1-dead&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/danielhenrymantilla&quot;&gt;Daniel Henry-Mantilla&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rylev&quot;&gt;Ryan Levick&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn1&quot;&gt;
+&lt;p&gt;Rust governance terminology can sometimes get confusing. An
+&amp;quot;initiative&amp;quot; in Rust parlance is different from a &amp;quot;working group&amp;quot; or &amp;quot;team&amp;quot;.
+Initiatives are intentionally limited: they exist to explore, design, and
+implement specific pieces of work - and once that work comes to a close, the
+initiative will wind back down. This is different from, say, the lang team -
+which essentially carries a &lt;code&gt;&#x27;static&lt;/code&gt; lifetime - and whose work does
+not have a clearly defined end. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn2&quot;&gt;
+&lt;p&gt;R. Nystrom, “What Color is Your Function?,” Feb. 01, 2015.
+https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/
+(accessed Apr. 06, 2022). &lt;a href&#x3D;&quot;#fnref2&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn3&quot;&gt;
+&lt;p&gt;The longer, more specific name would be: &amp;quot;keyword modifier generics&amp;quot;.
+We&#x27;ve tried calling it that, but it&#x27;s a bit of a mouthful. So we&#x27;re just
+sticking with &amp;quot;keyword generics&amp;quot; for now, even if the name for this feature may
+end up being called something more specific in the reference and documentation. &lt;a href&#x3D;&quot;#fnref3&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn4&quot;&gt;
+&lt;p&gt;No really, we can&#x27;t just infer them - and it may not be as
+simple as omitting all &lt;code&gt;.await&lt;/code&gt; calls either. The Async WG is working through
+the full spectrum of cancellation sites, async drop, and more. But for now we&#x27;re
+working under the assumption that &lt;code&gt;.await&lt;/code&gt; will remain relevant going forward.
+And even in the off chance that it isn&#x27;t, fallibility has similar requirements
+at the call site as async does. &lt;a href&#x3D;&quot;#fnref4&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn5&quot;&gt;
+&lt;p&gt;CTFE stands for &amp;quot;Compile Time Function Execution&amp;quot;: &lt;code&gt;const&lt;/code&gt; functions
+can be evaluated during compilation, which is implemented using a Rust
+interpreter (miri). &lt;a href&#x3D;&quot;#fnref5&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn6&quot;&gt;
+&lt;p&gt;Some limitations in &lt;code&gt;async-std&lt;/code&gt; apply: async Rust is missing async
+&lt;code&gt;Drop&lt;/code&gt;, async traits, and async closures. So not all APIs could be duplicated.
+Also &lt;code&gt;async-std&lt;/code&gt; explicitly didn&#x27;t reimplement any of the collection APIs to be
+async-aware, which means users are subject to the &amp;quot;sandwich problem&amp;quot;. The
+purpose of &lt;code&gt;async-std&lt;/code&gt; was to be a proving ground to test whether creating
+an async mirror of the stdlib would be possible: and it&#x27;s proven that it is, as
+far as was possible with missing language features. &lt;a href&#x3D;&quot;#fnref6&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn7&quot;&gt;
+&lt;p&gt;Not to be confused with the higher-order &lt;em&gt;sandwich dilemma&lt;/em&gt; which is
+when you look at the sandwich problem and attempt to determine whether the
+sandwich is two slices of bread with a topping in between, or two toppings with
+a slice of bread in between. Imo the operation part of the problem feels more
+&lt;em&gt;bready&lt;/em&gt;, but that would make for a weird-looking sandwich. Ergo: sandwich
+dilemma. (yes, you can ignore all of this.) &lt;a href&#x3D;&quot;#fnref7&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Yoshua Wuyts</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.62.1 pre-release testing</title>
@@ -389,197 +746,6 @@ with different themes. You can join any breakout room you like and hangout.&lt;/
 
         <author>
             <name>Rust CTCFT Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Rust Library Team Aspirations</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/20/libs-aspirations.html" type="text/html" title="Rust Library Team Aspirations" />
-        <published>2022-04-20T00:00:00+00:00</published>
-        <updated>2022-04-20T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/04/20/libs-aspirations.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/20/libs-aspirations.html">&lt;p&gt;Over the past years, Rust has grown from a language used by a few dedicated users
-into a well-known language used by lots of highly visible projects and
-successful companies.
-As the Rust user base, the community, and the ecosystem continues to grow,
-we need to look forward and consider how we need to scale to adapt
-to the needs of the ever expanding Rust ecosystem.&lt;/p&gt;
-&lt;p&gt;Recently, the compiler team shared &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html&quot;&gt;their blog post&lt;/a&gt;
-detailing their ambitions for 2022,
-and the language team published &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/04/04/lang-roadmap-2024.html&quot;&gt;a roadmap&lt;/a&gt;
-with their vision for Rust in 2024.&lt;/p&gt;
-&lt;p&gt;In this blog post, we, the Rust library team, will share our perspective
-on the future of the Rust standard library and the library ecosystem.&lt;/p&gt;
-&lt;p&gt;It&#x27;s important to note that
-the role of the team is to coordinate changes and to guide, review and decide.
-The majority of the work itself is done by contributors, like yourself,
-both in and outside the Rust team.
-While we often also participate in design and implementation work,
-we do so as contributors, like everyone else.&lt;/p&gt;
-&lt;p&gt;What follows is an (incomplete) summary of topics we think
-are important and would like to coordinate and guide;
-things that we&#x27;d love to see happen,
-as an invitation and source of inspiration.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#scalability&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;scalability&quot;&gt;&lt;/a&gt;Scalability&lt;/h3&gt;
-&lt;p&gt;As mentioned above, the Rust language, standard library, and ecosystem
-is growing and getting more mature.
-We need to invest in ways to keep evolving these smoothly.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Evolvability of the standard library and fixing mistakes&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The stability guarantee of Rust makes it hard to evolve the standard library.
-Unlike most crates, we cannot release a new major version, as that would effectively be releasing a &#x27;Rust 2.0&#x27;.
-So, once an API is stable, we have to keep it there forever, meaning that we have to be extremely careful
-when stabilizing anything new.&lt;/p&gt;
-&lt;p&gt;While we are very careful with adding new APIs, mistakes can still happen.
-There are a few things we would do differently if we could go back in time, based on current experience.
-There are not a lot of these cases, but over time these can still accumulate to the point that
-it&#x27;d be useful to have a mechanism to correct past mistakes.&lt;/p&gt;
-&lt;p&gt;The Rust language has the concept of &lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/editions/index.html&quot;&gt;editions&lt;/a&gt;
-to be able to make breaking changes in the language itself, without disrupting Rust users.
-The library, however, can make very limited use of editions to correct mistakes.
-We have used them for the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/panic-macro-consistency.html&quot;&gt;&lt;code&gt;panic!()&lt;/code&gt; macro&lt;/a&gt;
-and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/prelude.html&quot;&gt;the prelude&lt;/a&gt;.
-However, in general, it&#x27;s extremely tricky to make use of the edition mechanism for backwards incompatible
-library changes, as crates of different editions can be mixed, while all using the same standard library.&lt;/p&gt;
-&lt;p&gt;There are also cases when adding a new API can subtly break existing Rust code,
-even when not changing any existing API.
-This can happen, for example, when a type gets a new method that was already available through
-a popular trait, such as &lt;code&gt;itertools::Itertools&lt;/code&gt; or &lt;code&gt;num::Integer&lt;/code&gt;.
-Adding a method to the standard library can result in an existing method call resolving differently,
-potentially breaking code.
-This is usually considered &#x27;acceptable&#x27; breakage, but as Rust usage grows,
-the impact of such breakage increases, often making such breakage unacceptable in practice.&lt;/p&gt;
-&lt;p&gt;So, in order to keep evolving the standard library, we&#x27;d like to collaborate on language features
-that alleviate these issues:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3240&quot;&gt;Edition based method disambiguation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;A way to fix the &lt;code&gt;Range&lt;/code&gt; types, such that &lt;code&gt;1..2&lt;/code&gt; can be &lt;code&gt;Copy&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;A way to remove or improve lock poisoning without breaking existing code.&lt;/li&gt;
-&lt;li&gt;General mechanisms to provide for the library what editions provide for the language.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;People and collaboration&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The most important thing to keep Rust and the ecosystem scalable,
-are the people: Rust team members, maintainers of crates in the ecosystem,
-reviewers, contributors, and so on.
-It&#x27;s important we keep working on how we collaborate and make it
-as easy as possible for everyone to get involved in a way that works for them.&lt;/p&gt;
-&lt;p&gt;Concretely, we want to work on:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Better and more complete guidelines for contributors and reviewers; and&lt;/li&gt;
-&lt;li&gt;More interaction with the rest of the ecosystem.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Making &lt;code&gt;std&lt;/code&gt; less special / Empowering other crates in the ecosystem&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The standard library uses a
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/94970&quot;&gt;huge amount of unstable language features&lt;/a&gt;
-that other crates in the ecosystem cannot (or should not) use.
-While this is unavoidable for &lt;code&gt;core&lt;/code&gt;, because it contains everything related
-to Rust&#x27;s built-in types, we should be able to make &lt;code&gt;alloc&lt;/code&gt; and &lt;code&gt;std&lt;/code&gt; less
-dependent on unstable features.
-Maybe some day these libraries could be no different than any other
-popular crate in the ecosystem.&lt;/p&gt;
-&lt;p&gt;A big part of the work here will be in collaboration with the language team,
-to help move the unstable language features we need towards a state where
-they can be stabilized.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Adapting to different platforms&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;As Rust&#x27;s popularity increases, it is used on an increasingly wider variety of platforms.
-The Rust standard library does an okay job at abstracting away some of the
-differences between popular platforms like Linux and Windows,
-through things like &lt;code&gt;File&lt;/code&gt; and &lt;code&gt;TcpStream&lt;/code&gt;,
-but we don&#x27;t do a great job for targets that do not look like those,
-such as Wasm or kernel modules.&lt;/p&gt;
-&lt;p&gt;For example, &lt;code&gt;core&lt;/code&gt; includes &lt;code&gt;f32&lt;/code&gt; and &lt;code&gt;f64&lt;/code&gt;, even if the platform doesn&#x27;t support floating point operations,
-and &lt;code&gt;std&lt;/code&gt; includes &lt;code&gt;File::open&lt;/code&gt;, even if it isn&#x27;t implemented and always fails on the specific platform you&#x27;re targeting.&lt;/p&gt;
-&lt;p&gt;In order to better support the ever growing diversity of platforms Rust is used on,
-we would like to collaborate with the language and compiler teams to make it easier
-for the standard library to properly support targets with very different needs,
-without it becoming hugely inconvenient for maintainers, contributors, or users:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Make it easier to port std to a new platform, possibly allowing the relevant code
-to live outside of the &lt;code&gt;rust-lang/rust&lt;/code&gt; repository for less popular platforms.&lt;/li&gt;
-&lt;li&gt;A better way to allow only parts of &lt;code&gt;std&lt;/code&gt; to be available, depending on the platform.
-For example, a &lt;code&gt;where Platform: Unix&lt;/code&gt; bound, or something like a &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/1868-portability-lint.html&quot;&gt;&lt;code&gt;#[cfg]&lt;/code&gt; portability lint&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;A way to allow non-portable functionality to be available when on platforms
-that would support it, such as allowing infallible conversion between &lt;code&gt;u64&lt;/code&gt; and
-&lt;code&gt;usize&lt;/code&gt; in code that declares it only runs on 64-bit platforms.&lt;/li&gt;
-&lt;li&gt;Make the standard library more modular, allowing to disable e.g. floating point support
-or file system support on certain platforms.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#improving-and-adding-new-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improving-and-adding-new-apis&quot;&gt;&lt;/a&gt;Improving and adding new APIs&lt;/h3&gt;
-&lt;p&gt;A main focus of the library team is and will always be the public interface of the standard library.
-As of last year, we even have a separate team to make the final calls for API changes and additions:
-the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/library#Library%20API%20team&quot;&gt;library API team&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Rust purposely has a minimal standard library. Lots of commonly used functionality is
-found in other crates in the ecosystem, rather than the standard library.&lt;/p&gt;
-&lt;p&gt;Where exactly we draw the line between things that should and shouldn&#x27;t go in the standard library
-can be tricky to define and is somewhat flexible, but there are a few categories we&#x27;re most interested in.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Ergonomics&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;A lot of additions to the standard library are very small ones that increase ergonomics.
-Quite often, these are things that were already possible in some way, just not in an ergonomic way.
-Some recent examples are:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;abs_diff()&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Path::is_symlink&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;iter::from_fn&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;NonZero*::saturating_add&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;While we always have to consider the trade-off for niche features to the already large interface
-on some types and traits, additions like these continue to happen regularly.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Standardizing some bigger features the ecosystem needs&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;As Rust grows into new territories, there is more and more a need
-for certain features to be included in the standard library.
-This is especially true for things where a consistent, standard, interface is
-important.
-Some of the bigger examples are:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Async traits and functions&lt;/li&gt;
-&lt;li&gt;Allocators and fallible allocation&lt;/li&gt;
-&lt;li&gt;Error and panic handling&lt;/li&gt;
-&lt;li&gt;Portable SIMD&lt;/li&gt;
-&lt;li&gt;Benchmarking and custom test/bench frameworks&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Reducing and improving unsafe code&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;By providing the right low level APIs and abstractions, we can greatly minimize
-the amount of complex unsafe code that users need to write. Tools like
-&lt;code&gt;MaybeUninit&lt;/code&gt; guide users to correct unsafe code that&#x27;s easy to follow and
-prove correct. Even better, some APIs can entirely remove the need for unsafe
-code in many situations.
-This includes situations where users tend to reach for &lt;code&gt;unsafe&lt;/code&gt; for performance reasons.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;std::arch&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;std::simd&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Scoped threads&lt;/li&gt;
-&lt;li&gt;More atomic primitives&lt;/li&gt;
-&lt;li&gt;&#x27;&lt;code&gt;Iterator&lt;/code&gt;&#x27; with static length for arrays&lt;/li&gt;
-&lt;li&gt;Improving &lt;code&gt;MaybeUninit&lt;/code&gt; and related methods&lt;/li&gt;
-&lt;li&gt;Extending &lt;code&gt;NonNull&lt;/code&gt; and pointer methods&lt;/li&gt;
-&lt;li&gt;A more complete interface to &lt;code&gt;OsString&lt;/code&gt;, &lt;code&gt;Path&lt;/code&gt;, and &lt;code&gt;CString&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Documentation for &lt;code&gt;Pin&lt;/code&gt; and other &#x27;unsafe&#x27; types&lt;/li&gt;
-&lt;li&gt;File descriptors (&lt;code&gt;OwnedFd&lt;/code&gt;, &lt;code&gt;AsFd&lt;/code&gt;, etc) and handles (&lt;code&gt;OwnedHandle&lt;/code&gt;, &lt;code&gt;AsHandle&lt;/code&gt;, etc)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#improving-implementations-of-things-within-the-standard-library&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improving-implementations-of-things-within-the-standard-library&quot;&gt;&lt;/a&gt;Improving implementations of things within the standard library&lt;/h3&gt;
-&lt;p&gt;Historically, the implementation details of the standard library got less attention
-than its public API.
-Recently, however, we&#x27;re seeing more and more contributions towards improving the implementation
-of various parts of the standard library.&lt;/p&gt;
-&lt;p&gt;These are some parts that we&#x27;re especially interested in seeing improvements in:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;core::fmt&lt;/code&gt; and the implementation of &lt;code&gt;format_args!()&lt;/code&gt; and &lt;code&gt;fmt::Arguments&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/93740&quot;&gt;Synchronization primitives like &lt;code&gt;Mutex&lt;/code&gt;, &lt;code&gt;RwLock&lt;/code&gt;, and &lt;code&gt;Condvar&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Cleanups in platform-specific code in &lt;code&gt;std::sys&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Avoiding allocations wherever possible, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/93668&quot;&gt;such as when calling functions in &lt;code&gt;std::fs&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Making widely used types &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/87869&quot;&gt;such as &lt;code&gt;std::io::Error&lt;/code&gt;&lt;/a&gt; more light-weight&lt;/li&gt;
-&lt;li&gt;Cleaning up all unnecessary &lt;code&gt;SeqCst&lt;/code&gt; memory ordering&lt;/li&gt;
-&lt;li&gt;Optimizing thread local variables&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h3&gt;
-&lt;p&gt;We hope this summary provides a healthy amount of inspiration and excitement,
-and gives you an idea of what direction the library team is headed.
-If you want to help out, whether you want to work on implementation work,
-design, documentation, organisation, or any other kind of helpful work,
-you&#x27;re warmly invited to &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/219381-t-libs&quot;&gt;get involved&lt;/a&gt;!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Mara Bos</name>
         </author>
     </entry>
     
