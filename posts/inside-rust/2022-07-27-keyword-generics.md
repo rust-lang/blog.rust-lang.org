@@ -348,7 +348,7 @@ is talk about introducing `try fn() {}` or `fn () -> throws` syntax. This could
 make it so methods such as `Iterator::filter` would be able to use `?` to break
 out of the closure and short-circuit iteration.
 
-Our main motiviation for this feature is that without it, it's easy for Rust to
+Our main motivation for this feature is that without it, it's easy for Rust to
 start to feel _disjointed_. We sometimes joke that Rust is actually 3-5
 languages in a trenchcoat. Between const rust, fallible rust, async rust, unsafe
 rust - it can be easy for common APIs to only be available in one variant of the
