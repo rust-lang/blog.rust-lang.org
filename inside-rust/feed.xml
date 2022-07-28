@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-07-27T11:01:15+00:00</updated>
+    <updated>2022-07-28T07:57:01+00:00</updated>
 
     
     <entry>
@@ -270,7 +270,7 @@ async WG. But we&#x27;re designing the feature with other keywords in mind as we
 is talk about introducing &lt;code&gt;try fn() {}&lt;/code&gt; or &lt;code&gt;fn () -&amp;gt; throws&lt;/code&gt; syntax. This could
 make it so methods such as &lt;code&gt;Iterator::filter&lt;/code&gt; would be able to use &lt;code&gt;?&lt;/code&gt; to break
 out of the closure and short-circuit iteration.&lt;/p&gt;
-&lt;p&gt;Our main motiviation for this feature is that without it, it&#x27;s easy for Rust to
+&lt;p&gt;Our main motivation for this feature is that without it, it&#x27;s easy for Rust to
 start to feel &lt;em&gt;disjointed&lt;/em&gt;. We sometimes joke that Rust is actually 3-5
 languages in a trenchcoat. Between const rust, fallible rust, async rust, unsafe
 rust - it can be easy for common APIs to only be available in one variant of the

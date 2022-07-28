@@ -322,7 +322,7 @@ async WG. But we're designing the feature with other keywords in mind as well.</
 is talk about introducing <code>try fn() {}</code> or <code>fn () -&gt; throws</code> syntax. This could
 make it so methods such as <code>Iterator::filter</code> would be able to use <code>?</code> to break
 out of the closure and short-circuit iteration.</p>
-<p>Our main motiviation for this feature is that without it, it's easy for Rust to
+<p>Our main motivation for this feature is that without it, it's easy for Rust to
 start to feel <em>disjointed</em>. We sometimes joke that Rust is actually 3-5
 languages in a trenchcoat. Between const rust, fallible rust, async rust, unsafe
 rust - it can be easy for common APIs to only be available in one variant of the
