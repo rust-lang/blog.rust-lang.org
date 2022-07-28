@@ -64,7 +64,7 @@ The following distributions are *not* supported under the new requirements:
 
 * RHEL 6 (glibc 2.12, kernel 2.6.32)
 * SLES 11-SP4 (glibc 2.11.3, kernel 3.0.101)
-* Debian 6 (glibc 2.11, kernel 2.6.32), Debian 7 (glibc 3.12, kernel 3.2.41)
+* Debian 6 (glibc 2.11, kernel 2.6.32), Debian 7 (glibc 2.13, kernel 3.2.41)
 * Ubuntu 12.04 (glibc 2.15, kernel 3.2)
 
 Out of the distributions in the second list, only RHEL 6 still has limited vendor support (ELS).
