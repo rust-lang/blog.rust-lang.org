@@ -71,7 +71,7 @@ The survey itself had two parts: first, a set of "structured" multiple-choice qu
 
 The main reasons I provided the structured questions were two-fold: to make it easy for people to respond (e.g. I expected some ambitions to not require filling out any free-form text at all), and to prime the mindset of the answerer before they entered any free-form answers. I hadn't actually anticipated trying to do formal analysis of the responses.
 
-But, since we *do* have those multiple choice answers available, I took a stab at trying to make a table summarizing them. That table is below. (You may need to zoom out in your web browser to take it all in.)
+But, since we *do* have those multiple choice answers available, I took a stab at trying to make a table summarizing them. That table is below. (You will probably need to zoom out in your web browser to take it all in.)
 
 <table>
 
@@ -105,7 +105,7 @@ But, since we *do* have those multiple choice answers available, I took a stab a
 <tr>                                                       <td style=color:darkblue>                      </td><td style=color:darkblue>improved-understanding</td><td style=color:darkblue>improved-understanding</td><td style=color:darkblue>improved-understanding</td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>improved-understanding</td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>improved-understanding</td><td style=color:darkblue>improved-understanding</td><td style=color:darkblue>improved-understanding</td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>improved-understanding</td><td style=color:darkblue>improved-understanding</td><td style=color:darkblue>improved-understanding</td><td style=color:darkblue>improved-understanding</td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td></tr>
 <tr>                                                       <td style=color:darkblue>now-have-plan         </td><td style=color:darkblue>now-have-plan         </td><td style=color:darkblue>now-have-plan         </td><td style=color:darkblue>now-have-plan         </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>now-have-plan         </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>now-have-plan         </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>now-have-plan         </td><td style=color:darkblue>                      </td><td style=color:darkblue>now-have-plan         </td><td style=color:darkblue>                      </td></tr>
 <tr>                                                       <td style=color:darkblue>now-have-milestones   </td><td style=color:darkblue>now-have-milestones   </td><td style=color:darkblue>now-have-milestones   </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>now-have-milestones   </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>now-have-milestones   </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>now-have-milestones   </td><td style=color:darkblue>now-have-milestones   </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td></tr>
-<tr>                                                       <td style=color:darkblue>have-contributors     </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>                      </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>                      </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>                      </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td></tr>
+<tr>                                                       <td style=color:darkblue>                      </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>                      </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>                      </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>                      </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>have-contributors     </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td></tr>
 <tr>                                                       <td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td></tr>
 <tr>                                                       <td style=color:darkblue>completed-milestones  </td><td style=color:darkblue>                      </td><td style=color:darkblue>completed-milestones  </td><td style=color:darkblue>completed-milestones  </td><td style=color:darkblue>completed-milestones  </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>completed-milestones  </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>completed-milestones  </td><td style=color:darkblue>completed-milestones  </td><td style=color:darkblue>                      </td><td style=color:darkblue>completed-milestones  </td><td style=color:darkblue>completed-milestones  </td><td style=color:darkblue>                      </td><td style=color:darkblue>completed-milestones  </td><td style=color:darkblue>completed-milestones  </td><td style=color:darkblue>                      </td><td style=color:darkblue>completed-milestones  </td><td style=color:darkblue>                      </td></tr>
 <tr>                                                       <td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>implemented-solution  </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>implemented-solution  </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>                      </td><td style=color:darkblue>implemented-solution  </td></tr>
@@ -116,9 +116,60 @@ But, since we *do* have those multiple choice answers available, I took a stab a
 
 Here are some trends I noted from looking at the table:
 
-* The overwhelming majority of our ambitions reported *some* amount of progress. That's great, given that several of those ambitions explicitly had no resources attached to them at the start of the year.
+* The overwhelming majority of our ambitions, 19 out of 22, reported *some*
+  amount of progress. That's great, esepcially given that several of those
+  ambitions were mere aspirations that explicitly had no resources attached to
+  them at the start of the year.
 
-TODO
+* Less than a quarter of the ambitions, 6 out of 22, said that their overall
+  problem would be resolved, or the bulk of the problem addressed, within the
+  next six months. Ten others said they predicted the important components of
+  their solution would be available within the next two years, so that's a total
+  of 16 out of 22 that expect some kind of solution within two years.
+
+  * Note: One respondant noted that the two year threshold embedded in the
+    survey was an "odd timeframe." I do not disagree with that complaint. The
+    reality is that I was trying to find a happy medium between two extremes:
+    short timeframes don't allow enough time for significant work to be
+    accomplished, while excessively long timeframes (e.g. greater than five
+    years) are very difficult to predict realistically.
+
+* Of the nineteen ambitions that reported some progress so far this year,
+  fourteen of them (14/19) also said that at the start of the year, they had
+  either *no goals* or *no plan* to achieve those goals. Ten of those fourteen
+  say they now have a better understanding of the problem, and five of those
+  fourteen say they now have a plan.
+
+  * Here is a question I want to put forward to our communtiy: Do we, as a
+    project, need to put more energy into upfront planning? Or, given our
+    volunteer nature, will that just distract people from "the fun stuff" and
+    potentially burn out contributors? In other words: is this 5/14 a value we
+    should work on growing, or should we just monitor it and not actively try to
+    change it?
+
+  * Note: It is possible that my survey was itself somewhat flawed, so we need
+    to be careful in how we interpret this data. My intention was to try to
+    capture how well structured a given ambition's plan was by asking if it had
+    established milestones and/or a schedule. However, the survey results
+    include cases where the respondant did *not* indicate that they had made a
+    plan, but they *did* say that this year they did establish milestones.
+    Should I have interpreted that as implicitly saying that there *was* a plan
+    established? Maybe we need to restructure future surveys to make these
+    "implied bounds" clearer (ha ha, that's a little Rust type system joke).
+
+* One more thing I want to point out: five of the ambitions checked the box in
+  the survey that said "some of our work has reached Rust programmers, but we do
+  not know if it has improved Rust for them." (This is listed as
+  "need-user-feedback" in the table above.) We should figure out ways to provide
+  such feedback. I know that in one case, the lead for diagnostic improvements
+  scours twitter to see if people are complaining about Rust's error messages
+  (or celebrating them!). That's one approach, but I think we have to figure out
+  something better. Perhaps we could provide an IDE plugin that provide
+  telemetry to the project about the language and compiler features people use.
+  Or maybe you, gentle reader, have a better idea to share with us.
+
+Having said that, here are the concrete survey results, editted slightly for
+presentation here.
 
 ## Concrete Initiatives
 
@@ -286,7 +337,7 @@ we think a solution will be available in the next two years, but not sooner than
 
 **How it started:** At start of 2022, we had a solution or goal in mind, but did not have a plan for how to achieve it.
 
-**How it's going:** We would like help deciding what to do next
+**How it's going:** We would like help deciding what to do next.
 
 **Details:** pnkfelix spent a significant portion of 2021 learning about `rr` and
 `pernos.co`. They had hoped to spend some of 2022 trying to improve the
@@ -705,7 +756,28 @@ The most common thing is people picking up a project that’s too advanced for t
 
 What would make @estebank change their focus to something else? Simply put: Seeing no one complain about how hard Rust is to learn and seeing absolutely no new "confusing errors" complaints.
 
-These complaints have dramatically lowered in the last couple of years, but we're not quite there yet. There's also diminishing returns every time we focus on narrower and narrower cases, but making the experience of hitting an extreme corner case a positive one has a knock down effect on how pleasurable the overall experience is: if you're riding a bike in a segregated bike path for miles, but there are 200mts in the middle where you have to share the road with trucks, the overall experience feels dangerous. Having great E0308 errors is nice for 90% of the cases, but if someone who's trying to push the limits of what can be represented with trait bounds is constantly fighting the compiler (or worse, their users are!), then the experience is soured.
+These complaints have dramatically lowered in the last couple of years, but we're not quite there yet. There's also diminishing returns every time we focus on narrower and narrower cases, but making the experience of hitting an extreme corner case a positive one has a knock down effect on how pleasurable the overall experience is: if you're riding a bike in a segregated bike path for miles, but there are 200 yards in the middle where you have to share the road with trucks, the overall experience feels dangerous. Having great E0308 errors is nice for 90% of the cases, but if someone who's trying to push the limits of what can be represented with trait bounds is constantly fighting the compiler (or worse, their users are!), then the experience is soured.
 
 
 ## Conclusion
+
+So, that's the midyear update for T-compiler.
+
+I have one final thought before I sign off on this blog post: my approach this
+year for describing our ambitions was very "bottom-up": I surveyed all of the
+compiler team and contributors, seeking a full list of everything that was going
+on, and everything that we hoped other people might want to help with.
+
+In hindsight, its a huge list. And I have not provided much guidance as to how
+I would want these items prioritized.
+
+My reasoning at that time was that by going broad with the presentation, we
+would be more likely to attract newcomers who would say "oh, *that* thing sounds
+like something I could help with"; especially by given examples of projects that
+don't actually require deep knowledge of rustc's implementation. But I do not
+think that experiment worked out overall.
+
+I think in the future, I would like to try to get the team and contributors to
+be a little more focused. There are some things, like Async Traits and Generic
+Associated Types, that are hugely important, but nonetheless the implementation
+effort is falling on the shoulders of relatively few people.
