@@ -9,7 +9,7 @@ team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
 # Rust Compiler Midyear Report for 2022
 
 Back in February, the compiler team [posted a collection][ambitions-post] of
-concrete initiaives and hopeful aspirations for this year. This post is a
+concrete initiatives and hopeful aspirations for this year. This post is a
 midyear report summarizing the progress so far on all of those items.
 
 [ambitions-post]: /inside-rust/2022/02/22/compiler-team-ambitions-2022.html
@@ -26,9 +26,12 @@ Eight were "aspirations": work items that, while of interest to the team, had no
 commitment of development resources.
 
 Each work item, regardless of whether it had resources commited or not, had an
-associated owner. To construct this progress report, pnkfelix sent each
-owner a survey (you can see what it looks like [here][survey]); this blog post
-is the compilation (ha ha) of those survey results.
+associated owner.
+To construct this progress report, pnkfelix sent each
+owner a survey (you can see what it looks like [here][survey]).
+In fact, some work items had multiple subprojects, each with its own owner.
+This meant there were actually a total of 22 projects for which we received an update.
+This blog post is the compilation (ha ha) of those survey results.
 
 [survey]: https://hackmd.io/Nfs-UmfpQwCiIRHFR-YQfQ?view
 
@@ -118,35 +121,37 @@ But, since we *do* have those multiple choice answers available, I took a stab a
 
 Here are some trends I noted from looking at the table:
 
-* The overwhelming majority of our ambitions, 19 out of 22, reported *some*
-  amount of progress. That's great, esepcially given that several of those
-  ambitions were mere aspirations that explicitly had no resources attached to
-  them at the start of the year.
+The overwhelming majority of our ambitions, 19 out of 22, reported *some*
+amount of progress. That's great, esepcially given that several of those
+ambitions were mere aspirations that explicitly had no resources attached to
+them at the start of the year.
 
-* Less than a quarter of the ambitions, 6 out of 22, said that their overall
-  problem would be resolved, or the bulk of the problem addressed, within the
-  next six months. Ten others said they predicted the important components of
-  their solution would be available within the next two years, so that's a total
-  of 16 out of 22 that expect some kind of solution within two years.
+Less than a quarter of the ambitions, 6 out of 22, said that their overall
+problem would be resolved, or the bulk of the problem addressed, within the next
+six months. Ten others said they predicted the important components of their
+solution would be available within the next two years, so that's a total of 16
+out of 22 that expect some kind of solution within two years.
 
   * Note: One respondant noted that the two year threshold embedded in the
-    survey was an "odd timeframe." I do not disagree with that complaint. The
+    survey was an "odd timeframe." I do not disagree with that remark. The
     reality is that I was trying to find a happy medium between two extremes:
     short timeframes don't allow enough time for significant work to be
     accomplished, while excessively long timeframes (e.g. greater than five
-    years) are very difficult to predict realistically.
+    years) are very difficult to predict realistically. But the two year
+    time frame was drawn somewhat out of a hat.
 
-* Of the nineteen ambitions that reported some progress so far this year,
-  fourteen of them (14/19) also said that at the start of the year, they had
-  either *no goals* or *no plan* to achieve those goals. Ten of those fourteen
-  say they now have a better understanding of the problem, and five of those
-  fourteen say they now have a plan.
+Of the nineteen ambitions that reported some progress so far this year, fourteen
+of them (14/19) also said that at the start of the year, they had either *no
+goals* or *no plan* to achieve those goals. Ten of those fourteen say they now
+have a better understanding of the problem, and five of those fourteen say they
+now have a plan.
 
   * Here is a question I want to put forward to our communtiy: Do we, as a
     project, need to put more energy into upfront planning? Or, given our
     volunteer nature, will that just distract people from "the fun stuff" and
-    potentially burn out contributors? In other words: is this 5/14 a value we
-    should work on growing, or should we just monitor it and not actively try to
+    potentially burn out contributors? In other words: is this 5/14 "ambitions
+    that spent time making a concrete plan", is that a value we
+    should work on growing? Or should we just monitor it, and not actively try to
     change it?
 
   * Note: It is possible that my survey was itself somewhat flawed, so we need
@@ -159,16 +164,16 @@ Here are some trends I noted from looking at the table:
     established? Maybe we need to restructure future surveys to make these
     "implied bounds" clearer (ha ha, that's a little Rust type system joke).
 
-* One more thing I want to point out: five of the ambitions checked the box in
-  the survey that said "some of our work has reached Rust programmers, but we do
-  not know if it has improved Rust for them." (This is listed as
-  "need-user-feedback" in the table above.) We should figure out ways to provide
-  such feedback. I know that in one case, the lead for diagnostic improvements
-  scours twitter to see if people are complaining about Rust's error messages
-  (or celebrating them!). That's one approach, but I think we have to figure out
-  something better. Perhaps we could provide an IDE plugin that provide
-  telemetry to the project about the language and compiler features people use.
-  Or maybe you, gentle reader, have a better idea to share with us.
+One more thing I want to point out: five of the ambitions checked the box in the
+survey that said "some of our work has reached Rust programmers, but we do not
+know if it has improved Rust for them." (This is listed as "need-user-feedback"
+in the table above.) We should figure out ways to provide such feedback. I know
+that in one case, the lead for diagnostic improvements scours twitter to see if
+people are complaining about Rust's error messages (or celebrating them!).
+That's one approach, but I think we have to figure out something better. Perhaps
+we could provide an IDE plugin that provide telemetry to the project about the
+language and compiler features people use. Or maybe you, gentle reader, have a
+better idea to share with us.
 
 Having said that, here are the concrete survey results, editted slightly for
 presentation here.
@@ -770,8 +775,9 @@ year for describing our ambitions was very "bottom-up": I surveyed all of the
 compiler team and contributors, seeking a full list of everything that was going
 on, and everything that we hoped other people might want to help with.
 
-In hindsight, its a huge list. And I have not provided much guidance as to how
-I would want these items prioritized.
+In hindsight, it is a huge list. Furthermore, I did not provide much guidance as
+to how I would want these items prioritized. (I had my own pet projects, such as
+MCVE reduction, but if anything I *deprioritized* those.)
 
 My reasoning at that time was that by going broad with the presentation, we
 would be more likely to attract newcomers who would say "oh, *that* thing sounds
@@ -779,7 +785,13 @@ like something I could help with"; especially by given examples of projects that
 don't actually require deep knowledge of rustc's implementation. But I do not
 think that experiment worked out overall.
 
-I think in the future, I would like to try to get the team and contributors to
-be a little more focused. There are some things, like Async Traits and Generic
-Associated Types, that are hugely important, but nonetheless the implementation
-effort is falling on the shoulders of relatively few people.
+There are some things, like Async Traits and Generic Associated Types, that are
+hugely important, but nonetheless the implementation effort is falling on the
+shoulders of relatively few people. I think in the future, I would like to try
+to get the team and contributors to be a little more focused. E.g. maybe try to
+convince people to put aside work on ambition A, in order to get more people
+working together on ambition B, and then later there will (hopefully) be more
+ccapacity to address A after B has been addressed. But, since this is open
+source, its very much a matter of how much excitement each ambition can build up
+around its particular project, and how attractive they can make contribution be
+to newcomers.
