@@ -25,7 +25,7 @@ developers committed to contributing their time and making forward progress.
 Eight were "aspirations": work items that, while of interest to the team, had no
 commitment of development resources.
 
-Each work item, regardless of whether it had resources commited or not, had an
+Each work item, regardless of whether it had resources committed or not, had an
 associated owner.
 To construct this progress report, pnkfelix sent each
 owner a survey (you can see what it looks like [here][survey]).
@@ -72,7 +72,7 @@ Diagnostics  (👩‍💻) |                             | [Aspirations][Diagnos
 
 The survey itself had two parts: first, a set of "structured" multiple-choice questions, and second, a set of "unstructured" questions that allowed for free-form answers.
 
-The main reasons I provided the structured questions were two-fold: to make it easy for people to respond (e.g. I expected some ambitions to not require filling out any free-form text at all), and to prime the mindset of the answerer before they entered any free-form answers. I hadn't actually anticipated trying to do formal analysis of the responses.
+The main reasons I provided the structured questions were two-fold: to make it easy for people to respond (e.g. I expected some ambitions to not require filling out any free-form text at all), and to prime the mindset of the respondant before they entered any free-form answers. I hadn't actually anticipated trying to do formal analysis of the responses.
 
 But, since we *do* have those multiple choice answers available, I took a stab at making a table summarizing them.[^1] That table is below. (You will probably need to zoom out in your web browser to take it all in.)
 
@@ -122,7 +122,7 @@ But, since we *do* have those multiple choice answers available, I took a stab a
 Here are some trends I noted from looking at the table:
 
 The overwhelming majority of our ambitions, 19 out of 22, reported *some*
-amount of progress. That's great, esepcially given that several of those
+amount of progress. That's great, especially given that several of those
 ambitions were mere aspirations that explicitly had no resources attached to
 them at the start of the year.
 
@@ -132,7 +132,7 @@ six months. Ten others said they predicted the important components of their
 solution would be available within the next two years, so that's a total of 16
 out of 22 that expect some kind of solution within two years.
 
-  * Note: One respondant noted that the two year threshold embedded in the
+  * Note: One respondent noted that the two year threshold embedded in the
     survey was an "odd timeframe." I do not disagree with that remark. The
     reality is that I was trying to find a happy medium between two extremes:
     short timeframes don't allow enough time for significant work to be
@@ -146,7 +146,7 @@ goals* or *no plan* to achieve those goals. Ten of those fourteen say they now
 have a better understanding of the problem, and five of those fourteen say they
 now have a plan.
 
-  * Here is a question I want to put forward to our communtiy: Do we, as a
+  * Here is a question I want to put forward to our community: Do we, as a
     project, need to put more energy into upfront planning? Or, given our
     volunteer nature, will that just distract people from "the fun stuff" and
     potentially burn out contributors? In other words: is this 5/14 "ambitions
@@ -177,7 +177,7 @@ we could provide an IDE plugin that provide telemetry to the project about the
 language and compiler features people use. Or maybe you, gentle reader, have a
 better idea to share with us.
 
-Having said that, here are the concrete survey results, editted slightly for
+Having said that, here are the concrete survey results, edited slightly for
 presentation here.
 
 ## Concrete Initiatives
@@ -194,13 +194,13 @@ presentation here.
 
 **How it's going:** we have milestones that represent individual units of work for the near term that each make progress towards a solution, we have Rust contributors who have agreed to help with the units of work that we have identified, and we have completed some of our milestones.
 
-**Details:** We have fixed a few (some long standing) soundness bugs. Some of them were easy to fix, which was suprising considering how long they were open.
+**Details:** We have fixed a few (some long standing) soundness bugs. Some of them were easy to fix, which was surprising considering how long they were open.
 
 Working on soundness bugs has a high entry cost, as most work requires either a deeper understanding of the type system or it requires spending a significant amount of time on major refactorings. The work is now being done by existing contributors.
 
 An existing Rust contributor who works on fuzzing for ICEs started fuzzing for soundness bugs. Mentoring capabilities are sufficient, considering the lack of mentees.
 
-**Regarding prioritization and focus:** We're mostly addressing technical debt or miri work, and letting soundness bug fixes fall out of that work instead of targetting soundness directly.
+**Regarding prioritization and focus:** We're mostly addressing technical debt or miri work, and letting soundness bug fixes fall out of that work instead of targeting soundness directly.
 
 Some soundness bugs are notoriously hard to fix, or even impossible in the current compiler.
 
@@ -269,7 +269,7 @@ The two main obstacles are:
 **Progress:** The Rust project has made progress on this ambition since the start of the year
 
 **Goals:** We think this year’s planned goals for this ambition will be achieved in the next six months. (This is based on the "immediate goals" listed in the ambitions blog post.)
-We think a solution will be available in the next two years, but not sooner than six months. In general, there is always more we can do here but wesleywiser thinks we’ll have made significant, noticable progress within the next two years and probably even within this year.
+We think a solution will be available in the next two years, but not sooner than six months. In general, there is always more we can do here but wesleywiser thinks we’ll have made significant, noticeable progress within the next two years and probably even within this year.
 
 **How it started:** At start of 2022, we knew a problem existed, but we did not yet have a specific goal in mind for solving the problem.
 
@@ -307,8 +307,8 @@ Specifically:
 - debuginfo: Fix debuginfo for Box&lt;T&gt; where T is unsized. [#95270](https://github.com/rust-lang/rust/pull/95270)
 - debuginfo: Emit ZST struct debuginfo for unit type when CPP-like debuginfo is enabled [#96316](https://github.com/rust-lang/rust/pull/96316)
 
-Suprises:
-Debuginfo just doesn't have enough test coverage, but that isn't particularly suprising.
+Surprises:
+Debuginfo just doesn't have enough test coverage, but that isn't particularly surprising.
 
 **Regarding prioritization and focus:** debugging in general is a top priority for mw & wesleywiser’s
 team. As pure conjecture, if they were not working on debugging, then they might
@@ -564,7 +564,7 @@ This refactor allowed for faster progress in fixing a few old bugs.
 <!-- https://hackmd.io/zad1BjIoR8S4IfE49z-xYg -->
 <!-- (no survey response as of 2022-07-19) -->
 
-No survey response was provided; we assume no progress has been made. This aspriation may have been abandoned.
+No survey response was provided; we assume no progress has been made. This aspiration may have been abandoned.
 
 ### Expressiveness Aspirations (🦀, 👩‍💻)
 
@@ -793,7 +793,7 @@ shoulders of relatively few people. I think in the future, I would like to try
 to get the team and contributors to be a little more focused. E.g. maybe try to
 convince people to put aside work on ambition A, in order to get more people
 working together on ambition B, and then later there will (hopefully) be more
-ccapacity to address A after B has been addressed. But, since this is open
+capacity to address A after B has been addressed. But, since this is open
 source, its very much a matter of how much excitement each ambition can build up
 around its particular project, and how attractive they can make contribution be
 to newcomers.
