@@ -71,7 +71,9 @@ The survey itself had two parts: first, a set of "structured" multiple-choice qu
 
 The main reasons I provided the structured questions were two-fold: to make it easy for people to respond (e.g. I expected some ambitions to not require filling out any free-form text at all), and to prime the mindset of the answerer before they entered any free-form answers. I hadn't actually anticipated trying to do formal analysis of the responses.
 
-But, since we *do* have those multiple choice answers available, I took a stab at trying to make a table summarizing them. That table is below. (You will probably need to zoom out in your web browser to take it all in.)
+But, since we *do* have those multiple choice answers available, I took a stab at making a table summarizing them.[^1] That table is below. (You will probably need to zoom out in your web browser to take it all in.)
+
+[^1]: Source code for generating the table rows is at this [gist](https://gist.github.com/pnkfelix/dc4b6875dd31fbf4e0864d8b7dba8dc6)
 
 <table>
 
