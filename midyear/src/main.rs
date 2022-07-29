@@ -141,7 +141,7 @@ fn main() {
            HowBig::Other("We had a loosely defined goal of shipping async fn in traits this year. I think we will at least have an implementation landed in nightly of static, and possibly dyn, async fn in traits by the end of the year. Stabilization timeline is unclear."),
            &[Resolve::NextSixMo, Resolve::Other("Major design questions should be resolved or in “resolved to experiment” mode by the end of the year. Nightly-only implementation in the next six months, with part of it possibly moving toward stabilization. Should all be stable in two years or less.")],
            &[NoPlan],
-           &[HighLevelPlan, Milestones, Contributors, CompletedMilestones]),
+           &[HighLevelPlan, Milestones, CompletedMilestones]),
 
           ("diagnostics improvements",
            "https://hackmd.io/@rust-compiler-team/HJ_cgnXd5",
