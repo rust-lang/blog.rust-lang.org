@@ -158,10 +158,12 @@ now have a plan.
     to be careful in how we interpret this data. My intention was to try to
     capture how well structured a given ambition's plan was by asking if it had
     established milestones and/or a schedule. However, the survey results
-    include cases where the respondant did *not* indicate that they had made a
+    include cases where the respondent did *not* indicate that they had made a
     plan, but they *did* say that this year they did establish milestones.
     Should I have interpreted that as implicitly saying that there *was* a plan
-    established? Maybe we need to restructure future surveys to make these
+    established? Or is the respondent saying that something significant was
+    accomplished despite the absence of a plan with concrete milestones?
+    Maybe we need to restructure future surveys to make these
     "implied bounds" clearer (ha ha, that's a little Rust type system joke).
 
 One more thing I want to point out: five of the ambitions checked the box in the
