@@ -47,6 +47,10 @@ accurately track minimum requirements, and they may or may not be affected by th
 `*-linux-musl*` targets are only affected by the kernel requirements, not the glibc requirements.
 Targets which only use libcore and not libstd are unaffected.
 
+A list of supported targets and their requirements can be found on the
+[platform support page][platform-support]. However, the page is not yet up to date with the changes
+announced here.
+
 # Affected systems
 
 The glibc and kernel versions used for the new baseline requirements are already close to a decade
@@ -114,3 +118,4 @@ depending on your situation:
   supports older kernels.
 
 [PR]: https://github.com/rust-lang/rust/pull/95026
+[platform-support]: https://doc.rust-lang.org/nightly/rustc/platform-support.html
