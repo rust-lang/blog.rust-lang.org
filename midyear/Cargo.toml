@@ -1,0 +1,10 @@
+[package]
+name = "midyear"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+enum_index = "0.2"
+enum_index_derive = "0.2"
