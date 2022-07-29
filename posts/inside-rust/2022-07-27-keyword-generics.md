@@ -390,7 +390,7 @@ consistently by _all_ modifier keywords.
 
 ## Conclusion
 
-In this post we've introduced the new keyword generics initiatve, explained why
+In this post we've introduced the new keyword generics initiative, explained why
 it exists, and shown a brief example of what it might look like in the future.
 
 The initiative is active on the Rust Zulip under
