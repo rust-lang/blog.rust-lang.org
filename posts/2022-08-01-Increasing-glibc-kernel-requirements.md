@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Increasing the glibc and kernel requirements"
+title: "Increasing the glibc and Linux kernel requirements"
 author: Nikita Popov
 ---
 
