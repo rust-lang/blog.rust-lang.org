@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Increasing the glibc and Linux kernel requirements | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Increasing the glibc and Linux kernel requirements | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Increasing the glibc and Linux kernel requirements | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Increasing the glibc and Linux kernel requirements" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Increasing the glibc and Linux kernel requirements</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 1, 2022 &middot; Nikita Popov
+    
+    </div>
+
+    <div class="post">
+      <p>The minimum requirements for Rust toolchains targeting Linux will <a href="https://github.com/rust-lang/rust/pull/95026">increase</a> with the
+Rust 1.64.0 release (slated for September 22nd, 2022). The new minimum requirements are:</p>
+<ul>
+<li>glibc &gt;= 2.17 (previously glibc &gt;= 2.11)</li>
+<li>kernel &gt;= 3.2 (previously kernel &gt;= 2.6.32)</li>
+</ul>
+<p>These requirements apply both to running the Rust compiler itself (and other Rust tooling like
+Cargo or Rustup), and to running binaries produced by Rust, if they use the libstd.</p>
+<p>If you are not targeting an old long-term-support distribution, or embedded hardware running
+an old Linux version, this change is unlikely to affect you. Otherwise, read on!</p>
+<h1><a href="#affected-targets" aria-hidden="true" class="anchor" id="affected-targets"></a>Affected targets</h1>
+<p>In principle, the new kernel requirements affect all <code>*-linux-*</code> targets, while the glibc
+requirements affect all <code>*-linux-gnu*</code> targets. In practice, many targets were already requiring
+newer kernel or glibc versions. The requirements for such targets do not change.</p>
+<p>Among targets for which a Rust host toolchain is distributed, the following <em>are</em> affected:</p>
+<ul>
+<li><code>i686-unknown-linux-gnu</code> (Tier 1)</li>
+<li><code>x86_64-unknown-linux-gnu</code> (Tier 1)</li>
+<li><code>x86_64-unknown-linux-musl</code> (Tier 2 with host tools)</li>
+<li><code>powerpc-unknown-linux-gnu</code> (Tier 2 with host tools)</li>
+<li><code>powerpc64-unknown-linux-gnu</code> (Tier 2 with host tools)</li>
+<li><code>s390x-unknown-linux-gnu</code> (Tier 2 with host tools)</li>
+</ul>
+<p>The following are <em>not</em> affected, because they already had higher glibc/kernel requirements:</p>
+<ul>
+<li><code>aarch64-unknown-linux-gnu</code> (Tier 1)</li>
+<li><code>aarch64-unknown-linux-musl</code> (Tier 2 with host tools)</li>
+<li><code>arm-unknown-linux-gnueabi</code> (Tier 2 with host tools)</li>
+<li><code>arm-unknown-linux-gnueabihf</code> (Tier 2 with host tools)</li>
+<li><code>armv7-unknown-linux-gnueabihf</code> (Tier 2 with host tools)</li>
+<li><code>mips-unknown-linux-gnueabihf</code> (Tier 2 with host tools)</li>
+<li><code>powerpc64le-unknown-linux-gnueabihf</code> (Tier 2 with host tools)</li>
+<li><code>riscv64gc-unknown-linux-gnueabihf</code> (Tier 2 with host tools)</li>
+</ul>
+<p>For other tier 2 or tier 3 targets, for which no Rust toolchain is distributed, we do not
+accurately track minimum requirements, and they may or may not be affected by this change.
+<code>*-linux-musl*</code> targets are only affected by the kernel requirements, not the glibc requirements.
+Targets which only use libcore and not libstd are unaffected.</p>
+<p>A list of supported targets and their requirements can be found on the
+<a href="https://doc.rust-lang.org/nightly/rustc/platform-support.html">platform support page</a>. However, the page is not yet up to date with the changes
+announced here.</p>
+<h1><a href="#affected-systems" aria-hidden="true" class="anchor" id="affected-systems"></a>Affected systems</h1>
+<p>The glibc and kernel versions used for the new baseline requirements are already close to a decade
+old. As such, this change should only affect users that either target old long-term-support Linux
+distributions, or embedded hardware running old versions of Linux.</p>
+<p>The following Linux distributions <em>are</em> still supported under the new requirements:</p>
+<ul>
+<li>RHEL 7 (glibc 2.17, kernel 3.10)</li>
+<li>SLES 12-SP5 (glibc 2.22, kernel 4.12.14)</li>
+<li>Debian 8 (glibc 2.19, kernel 3.16.7)</li>
+<li>Ubuntu 14.04 (glibc 2.19, kernel 3.13)</li>
+</ul>
+<p>The following distributions are <em>not</em> supported under the new requirements:</p>
+<ul>
+<li>RHEL 6 (glibc 2.12, kernel 2.6.32)</li>
+<li>SLES 11-SP4 (glibc 2.11.3, kernel 3.0.101)</li>
+<li>Debian 6 (glibc 2.11, kernel 2.6.32), Debian 7 (glibc 2.13, kernel 3.2.41)</li>
+<li>Ubuntu 12.04 (glibc 2.15, kernel 3.2)</li>
+</ul>
+<p>Out of the distributions in the second list, only RHEL 6 still has limited vendor support (ELS).</p>
+<h1><a href="#why-increase-the-requirements" aria-hidden="true" class="anchor" id="why-increase-the-requirements"></a>Why increase the requirements?</h1>
+<p>We want Rust, and binaries produced by Rust, to be as widely usable as possible. At the same time,
+the Rust project only has limited resources to maintain compatibility with old environments.</p>
+<p>There are two parts to the toolchain requirements: The minimum requirements for running the Rust
+compiler on a host system, and the minimum requirements for cross-compiled binaries.</p>
+<p>The minimum requirements for host toolchains affect our build system. Rust CI produces binary
+artifacts for dozens of different targets. Creating binaries that support old glibc versions
+requires either building on an operating system with old glibc (for native builds) or using a
+buildroot with an old glibc version (for cross-compiled builds).</p>
+<p>At the same time, Rust relies on LLVM for optimization and code generation, which regularly
+increases its toolchain requirements. LLVM 16 will require GCC 7.1 or newer (and LLVM 15 supports
+GCC 5.1 in name only). Creating a build environment that has both a very old glibc and a recent
+compiler becomes increasingly hard over time. crosstool-ng (which we use for most cross-compilation
+needs) does not support targeting both glibc 2.11, and using a compiler that satisfies the new LLVM
+requirements.</p>
+<p>The requirements for cross-compiled binaries have a different motivation: They affect which kernel
+versions need to be supported by libstd. Increasing the kernel requirements allows libstd to use
+newer syscalls, without having to maintain and test compatibility with kernels that do not support
+them.</p>
+<p>The new baseline requirements were picked as the least common denominator among long-term-support
+distributions that still have active support. This is currently RHEL 7 with glibc 2.17 and
+kernel 3.10. The kernel requirement is picked as 3.2 instead, because this is the minimum
+requirement of glibc itself, and there is little relevant API difference between these versions.</p>
+<h1><a href="#what-should-i-do" aria-hidden="true" class="anchor" id="what-should-i-do"></a>What should I do?</h1>
+<p>If you or your organization are affected by this change, there are a number of viable options
+depending on your situation:</p>
+<ul>
+<li>Upgrade your target system, or raise the minimum requirements of your software, to satisfy the
+new constraints.</li>
+<li>If you are running the Rust compiler on an old host, consider cross-compiling from a newer host
+instead.</li>
+<li>If you are targeting an old glibc version, consider targeting musl instead.</li>
+<li>If you are targeting an old kernel version and use libstd, you may be out of luck: In this case
+you may have to either freeze your current Rust version, or maintain a fork of libstd that
+supports older kernels.</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>

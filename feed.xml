@@ -10,8 +10,117 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-07-29T12:54:11+00:00</updated>
+    <updated>2022-08-01T14:56:57+00:00</updated>
 
+    
+    <entry>
+        <title>Increasing the glibc and Linux kernel requirements</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/08/01/Increasing-glibc-kernel-requirements.html" type="text/html" title="Increasing the glibc and Linux kernel requirements" />
+        <published>2022-08-01T00:00:00+00:00</published>
+        <updated>2022-08-01T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/08/01/Increasing-glibc-kernel-requirements.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/08/01/Increasing-glibc-kernel-requirements.html">&lt;p&gt;The minimum requirements for Rust toolchains targeting Linux will &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/95026&quot;&gt;increase&lt;/a&gt; with the
+Rust 1.64.0 release (slated for September 22nd, 2022). The new minimum requirements are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;glibc &amp;gt;&#x3D; 2.17 (previously glibc &amp;gt;&#x3D; 2.11)&lt;/li&gt;
+&lt;li&gt;kernel &amp;gt;&#x3D; 3.2 (previously kernel &amp;gt;&#x3D; 2.6.32)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These requirements apply both to running the Rust compiler itself (and other Rust tooling like
+Cargo or Rustup), and to running binaries produced by Rust, if they use the libstd.&lt;/p&gt;
+&lt;p&gt;If you are not targeting an old long-term-support distribution, or embedded hardware running
+an old Linux version, this change is unlikely to affect you. Otherwise, read on!&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#affected-targets&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;affected-targets&quot;&gt;&lt;/a&gt;Affected targets&lt;/h1&gt;
+&lt;p&gt;In principle, the new kernel requirements affect all &lt;code&gt;*-linux-*&lt;/code&gt; targets, while the glibc
+requirements affect all &lt;code&gt;*-linux-gnu*&lt;/code&gt; targets. In practice, many targets were already requiring
+newer kernel or glibc versions. The requirements for such targets do not change.&lt;/p&gt;
+&lt;p&gt;Among targets for which a Rust host toolchain is distributed, the following &lt;em&gt;are&lt;/em&gt; affected:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;i686-unknown-linux-gnu&lt;/code&gt; (Tier 1)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x86_64-unknown-linux-gnu&lt;/code&gt; (Tier 1)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x86_64-unknown-linux-musl&lt;/code&gt; (Tier 2 with host tools)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;powerpc-unknown-linux-gnu&lt;/code&gt; (Tier 2 with host tools)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;powerpc64-unknown-linux-gnu&lt;/code&gt; (Tier 2 with host tools)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s390x-unknown-linux-gnu&lt;/code&gt; (Tier 2 with host tools)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following are &lt;em&gt;not&lt;/em&gt; affected, because they already had higher glibc/kernel requirements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;aarch64-unknown-linux-gnu&lt;/code&gt; (Tier 1)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aarch64-unknown-linux-musl&lt;/code&gt; (Tier 2 with host tools)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;arm-unknown-linux-gnueabi&lt;/code&gt; (Tier 2 with host tools)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;arm-unknown-linux-gnueabihf&lt;/code&gt; (Tier 2 with host tools)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;armv7-unknown-linux-gnueabihf&lt;/code&gt; (Tier 2 with host tools)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mips-unknown-linux-gnueabihf&lt;/code&gt; (Tier 2 with host tools)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;powerpc64le-unknown-linux-gnueabihf&lt;/code&gt; (Tier 2 with host tools)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;riscv64gc-unknown-linux-gnueabihf&lt;/code&gt; (Tier 2 with host tools)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For other tier 2 or tier 3 targets, for which no Rust toolchain is distributed, we do not
+accurately track minimum requirements, and they may or may not be affected by this change.
+&lt;code&gt;*-linux-musl*&lt;/code&gt; targets are only affected by the kernel requirements, not the glibc requirements.
+Targets which only use libcore and not libstd are unaffected.&lt;/p&gt;
+&lt;p&gt;A list of supported targets and their requirements can be found on the
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/rustc/platform-support.html&quot;&gt;platform support page&lt;/a&gt;. However, the page is not yet up to date with the changes
+announced here.&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#affected-systems&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;affected-systems&quot;&gt;&lt;/a&gt;Affected systems&lt;/h1&gt;
+&lt;p&gt;The glibc and kernel versions used for the new baseline requirements are already close to a decade
+old. As such, this change should only affect users that either target old long-term-support Linux
+distributions, or embedded hardware running old versions of Linux.&lt;/p&gt;
+&lt;p&gt;The following Linux distributions &lt;em&gt;are&lt;/em&gt; still supported under the new requirements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RHEL 7 (glibc 2.17, kernel 3.10)&lt;/li&gt;
+&lt;li&gt;SLES 12-SP5 (glibc 2.22, kernel 4.12.14)&lt;/li&gt;
+&lt;li&gt;Debian 8 (glibc 2.19, kernel 3.16.7)&lt;/li&gt;
+&lt;li&gt;Ubuntu 14.04 (glibc 2.19, kernel 3.13)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following distributions are &lt;em&gt;not&lt;/em&gt; supported under the new requirements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RHEL 6 (glibc 2.12, kernel 2.6.32)&lt;/li&gt;
+&lt;li&gt;SLES 11-SP4 (glibc 2.11.3, kernel 3.0.101)&lt;/li&gt;
+&lt;li&gt;Debian 6 (glibc 2.11, kernel 2.6.32), Debian 7 (glibc 2.13, kernel 3.2.41)&lt;/li&gt;
+&lt;li&gt;Ubuntu 12.04 (glibc 2.15, kernel 3.2)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Out of the distributions in the second list, only RHEL 6 still has limited vendor support (ELS).&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#why-increase-the-requirements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;why-increase-the-requirements&quot;&gt;&lt;/a&gt;Why increase the requirements?&lt;/h1&gt;
+&lt;p&gt;We want Rust, and binaries produced by Rust, to be as widely usable as possible. At the same time,
+the Rust project only has limited resources to maintain compatibility with old environments.&lt;/p&gt;
+&lt;p&gt;There are two parts to the toolchain requirements: The minimum requirements for running the Rust
+compiler on a host system, and the minimum requirements for cross-compiled binaries.&lt;/p&gt;
+&lt;p&gt;The minimum requirements for host toolchains affect our build system. Rust CI produces binary
+artifacts for dozens of different targets. Creating binaries that support old glibc versions
+requires either building on an operating system with old glibc (for native builds) or using a
+buildroot with an old glibc version (for cross-compiled builds).&lt;/p&gt;
+&lt;p&gt;At the same time, Rust relies on LLVM for optimization and code generation, which regularly
+increases its toolchain requirements. LLVM 16 will require GCC 7.1 or newer (and LLVM 15 supports
+GCC 5.1 in name only). Creating a build environment that has both a very old glibc and a recent
+compiler becomes increasingly hard over time. crosstool-ng (which we use for most cross-compilation
+needs) does not support targeting both glibc 2.11, and using a compiler that satisfies the new LLVM
+requirements.&lt;/p&gt;
+&lt;p&gt;The requirements for cross-compiled binaries have a different motivation: They affect which kernel
+versions need to be supported by libstd. Increasing the kernel requirements allows libstd to use
+newer syscalls, without having to maintain and test compatibility with kernels that do not support
+them.&lt;/p&gt;
+&lt;p&gt;The new baseline requirements were picked as the least common denominator among long-term-support
+distributions that still have active support. This is currently RHEL 7 with glibc 2.17 and
+kernel 3.10. The kernel requirement is picked as 3.2 instead, because this is the minimum
+requirement of glibc itself, and there is little relevant API difference between these versions.&lt;/p&gt;
+&lt;h1&gt;&lt;a href&#x3D;&quot;#what-should-i-do&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-should-i-do&quot;&gt;&lt;/a&gt;What should I do?&lt;/h1&gt;
+&lt;p&gt;If you or your organization are affected by this change, there are a number of viable options
+depending on your situation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Upgrade your target system, or raise the minimum requirements of your software, to satisfy the
+new constraints.&lt;/li&gt;
+&lt;li&gt;If you are running the Rust compiler on an old host, consider cross-compiling from a newer host
+instead.&lt;/li&gt;
+&lt;li&gt;If you are targeting an old glibc version, consider targeting musl instead.&lt;/li&gt;
+&lt;li&gt;If you are targeting an old kernel version and use libstd, you may be out of luck: In this case
+you may have to either freeze your current Rust version, or maintain a fork of libstd that
+supports older kernels.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Nikita Popov</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.62.1</title>
@@ -576,57 +685,6 @@ We couldn&#x27;t have done it without all of you.
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Security advisory: malicious crate rustdecimal</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/05/10/malicious-crate-rustdecimal.html" type="text/html" title="Security advisory: malicious crate rustdecimal" />
-        <published>2022-05-10T00:00:00+00:00</published>
-        <updated>2022-05-10T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/05/10/malicious-crate-rustdecimal.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/05/10/malicious-crate-rustdecimal.html">&lt;blockquote&gt;
-&lt;p&gt;This is a cross-post of &lt;a href&#x3D;&quot;https://groups.google.com/g/rustlang-security-announcements/c/5DVtC8pgJLw&quot;&gt;the official security advisory&lt;/a&gt;. The
-official advisory contains a signed version with our PGP key, as well.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The Rust Security Response WG and the crates.io team &lt;a href&#x3D;&quot;https://github.com/paupino/rust-decimal/issues/514#issuecomment-1115408888&quot;&gt;were notified&lt;/a&gt; on
-2022-05-02 of the existence of the malicious crate &lt;code&gt;rustdecimal&lt;/code&gt;, which
-contained malware. The crate name was intentionally similar to the name of the
-popular &lt;a href&#x3D;&quot;https://crates.io/crates/rust_decimal&quot;&gt;&lt;code&gt;rust_decimal&lt;/code&gt;&lt;/a&gt; crate, hoping that potential victims would misspell
-its name (an attack called &amp;quot;typosquatting&amp;quot;).&lt;/p&gt;
-&lt;p&gt;To protect the security of the ecosystem, the crates.io team permanently
-removed the crate from the registry as soon as it was made aware of the
-malware. An analysis of all the crates on crates.io was also performed, and no
-other crate with similar code patterns was found.&lt;/p&gt;
-&lt;p&gt;Keep in mind that the &lt;a href&#x3D;&quot;https://crates.io/crates/rust_decimal&quot;&gt;&lt;code&gt;rust_decimal&lt;/code&gt;&lt;/a&gt; crate was &lt;strong&gt;not&lt;/strong&gt; compromised, and it
-is still safe to use.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#analysis-of-the-crate&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;analysis-of-the-crate&quot;&gt;&lt;/a&gt;Analysis of the crate&lt;/h2&gt;
-&lt;p&gt;The crate had less than 500 downloads since its first release on 2022-03-25,
-and no crates on the crates.io registry depended on it.&lt;/p&gt;
-&lt;p&gt;The crate contained identical source code and functionality as the legit
-&lt;code&gt;rust_decimal&lt;/code&gt; crate, except for the &lt;code&gt;Decimal::new&lt;/code&gt; function.&lt;/p&gt;
-&lt;p&gt;When the function was called, it checked whether the &lt;code&gt;GITLAB_CI&lt;/code&gt; environment
-variable was set, and if so it downloaded a binary payload into
-&lt;code&gt;/tmp/git-updater.bin&lt;/code&gt; and executed it. The binary payload supported both Linux
-and macOS, but not Windows.&lt;/p&gt;
-&lt;p&gt;An analysis of the binary payload was not possible, as the download URL didn&#x27;t
-work anymore when the analysis was performed.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#recommendations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;recommendations&quot;&gt;&lt;/a&gt;Recommendations&lt;/h2&gt;
-&lt;p&gt;If your project or organization is running GitLab CI, we strongly recommend
-checking whether your project or one of its dependencies depended on the
-&lt;code&gt;rustdecimal&lt;/code&gt; crate, starting from 2022-03-25. If you notice a dependency on
-that crate, you should consider your CI environment to be compromised.&lt;/p&gt;
-&lt;p&gt;In general, we recommend regularly auditing your dependencies, and only
-depending on crates whose author you trust. If you notice any suspicious
-behavior in a crate&#x27;s source code please follow &lt;a href&#x3D;&quot;https://www.rust-lang.org/policies/security&quot;&gt;the Rust security
-policy&lt;/a&gt; and report it to the Rust Security Response WG.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#acknowledgements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgements&quot;&gt;&lt;/a&gt;Acknowledgements&lt;/h2&gt;
-&lt;p&gt;We want to thank GitHub user &lt;a href&#x3D;&quot;https://github.com/safinaskar&quot;&gt;&lt;code&gt;@safinaskar&lt;/code&gt;&lt;/a&gt; for identifying the
-malicious crate in &lt;a href&#x3D;&quot;https://github.com/paupino/rust-decimal/issues/514#issuecomment-1115408888&quot;&gt;this GitHub issue&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Security Response WG</name>
         </author>
     </entry>
     
