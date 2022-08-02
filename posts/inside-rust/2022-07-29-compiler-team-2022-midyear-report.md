@@ -697,7 +697,7 @@ With regards to the overall problem: In terms of getting cg_clif distributed wit
 
 **Regarding prioritization and focus:** @bjorn3 has kept their focus on `cg_clif` and rustc PR’s that are related to `cg_clif`.
 
-If @bjorn3 hadn’t started working on `cg_clif` they probably wouldn’t have gained as much knowledge of the inner workings of rustc as they have know, nor contributed much to rustc. There are some more architectural changes that they want to make to rustc, but they probably wouldn’t get to them in the near future even if they stopped working on `cg_clif`.
+If @bjorn3 hadn’t started working on `cg_clif` they probably wouldn’t have gained as much knowledge of the inner workings of rustc as they have now, nor contributed much to rustc. There are some more architectural changes that they want to make to rustc, but they probably wouldn’t get to them in the near future even if they stopped working on `cg_clif`.
 
 With the codegen phase of debug mode builds getting faster with cg_clif in most cases, the bottleneck during debug mode compilation shifts away from codegen to the frontend. @bjorn3 wonders if maybe in the future they could try to see if the performance of the frontend can be improved by the same amount that cranelift improves the backend one way or another?
 
