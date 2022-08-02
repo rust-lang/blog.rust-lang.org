@@ -694,7 +694,7 @@ With regards to the overall problem: In terms of getting cg_clif distributed wit
 
 **Regarding new contributors:** There have been a couple minor PR’s. There has also been someone potentially interested in contributing more, but given that most of the low hanging fruit has already been done by @bjorn3, they were not able to help the newcomer find an area to contribute to.
 
-**Regarding prioritization and focus:** @bjorn3 has kept their focus on working on `cg_clif` and rustc PR’s that are part of the time related to `cg_clif`.
+**Regarding prioritization and focus:** @bjorn3 has kept their focus on `cg_clif` and rustc PR’s that are related to `cg_clif`.
 
 If @bjorn3 hadn’t started working on `cg_clif` they probably wouldn’t have gained as much knowledge of the inner workings of rustc as they have know, nor contributed much to rustc. There are some more architectural changes that they want to make to rustc, but they probably wouldn’t get to them in the near future even if they stopped working on `cg_clif`.
 
