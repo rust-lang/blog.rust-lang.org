@@ -758,7 +758,7 @@ and in other cases, what we learn of their usage is informing our plans going fo
 **Regarding new contributors:** @estebank hasn't quantified it, but we've had quite a few new contributors recently. Mentoring capacity isn't depleted, *but* if we wanted to increase the number of people contributing we will need more people. The mentoring needs have been highly variable, depending on the individual (and the complexity of the task they take on).
 
 
-**Regarding prioritization and focus:** @estebank has seen people come contribute a handful of PRs and disapear, but has not digged deeper into their reasons.
+**Regarding prioritization and focus:** @estebank has seen people come contribute a handful of PRs and disappear, but has not dug deeper into their reasons.
 
 The most common thing is people picking up a project that’s too advanced for them, which demotivates them. We try to both steer them away beforehands and to closely mentor them as they work on things. A cleaner codebase with more machinery for non-standard things (like typechecking opportunistically in the parser, to give an example of something impossible to do today) would allow some of the things people have tried to be done by almost anyone.
 
