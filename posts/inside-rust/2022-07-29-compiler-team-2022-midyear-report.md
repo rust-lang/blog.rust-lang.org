@@ -562,7 +562,10 @@ This refactor allowed for faster progress in fixing a few old bugs.
 <!-- https://hackmd.io/zad1BjIoR8S4IfE49z-xYg -->
 <!-- (no survey response as of 2022-07-19) -->
 
-No survey response was provided; we assume no progress has been made. This aspiration may have been abandoned.
+No survey response was provided; after following up, we confirmed with the
+owners that nothing has happened here, and that progress is unlikely in the near
+term because this would almost certainly require changes to Cargo, where changes
+are hard to push forward right now due to lack of reviewing capacity.
 
 ### Expressiveness Aspirations (🦀, 👩‍💻)
 
