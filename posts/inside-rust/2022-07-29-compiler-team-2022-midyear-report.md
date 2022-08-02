@@ -311,9 +311,7 @@ Surprises:
 Debuginfo just doesn't have enough test coverage, but that isn't particularly surprising.
 
 **Regarding prioritization and focus:** debugging in general is a top priority for mw & wesleywiser’s
-team. As pure conjecture, if they were not working on debugging, then they might
-be working on compiler performance or a long tail of random features that are
-either not implemented or unstable.
+team.
 
 ### supporting split debuginfo
 
