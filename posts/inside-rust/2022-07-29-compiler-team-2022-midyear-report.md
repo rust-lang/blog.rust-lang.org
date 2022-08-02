@@ -325,7 +325,7 @@ team.
 
 **How it's going:** As of today, we think we have implemented a solution to the problem, but most of our work has not yet landed in hands of Rust users
 
-**Details:** There hasn't been a lot of progress on split debuginfo in 2022 because most of the big pending work that was in-progress landed in late 2021 (namely integration of [thorin](https://github.com/rust-lang/thorin) into rustc to support cross-crate Split DWARF). Since then, Split DWARF has been basically complete and just simmering on nightly before stabilization is proposed. Split debuginfo on non-DWARF platforms is already complete and stable.
+**Details:** There hasn't been a lot of progress on split debuginfo in 2022 because most of the big pending work that was in-progress landed in late 2021 (namely integration of [thorin](https://github.com/rust-lang/thorin) into rustc to support cross-crate Split DWARF). Since then, Split DWARF has been basically complete and just simmering on nightly; an FCP for stabilization on Linux has completed. Split debuginfo on non-DWARF platforms is already complete and stable.
 
 Progress this year has primarily been some benchmarking of Split DWARF and some work to make split debuginfo an option when bootstrapping rustc (i.e. in `config.toml`), but not a lot else.
 
