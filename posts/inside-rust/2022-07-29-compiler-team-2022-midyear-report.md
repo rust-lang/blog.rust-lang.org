@@ -753,7 +753,7 @@ we have Rust contributors who have agreed to help with the units of work that we
 Further more, some of our work has reached Rust programmers; in some cases, we do not know if it has improved Rust for them,
 and in other cases, what we learn of their usage is informing our plans going forward
 
-**Details:** wg-diagnostics isn't as structured as it could be, which translates to work being taken on piecemeal by individuals as at their own pace and leisure. This affects the size of projects that we can tackle, *but* still relatively big projects, like the [translation machinery](https://hackmd.io/@davidtwco/rkXSbLg95) were started and have enough momentum to make progress going forward.
+**Details:** wg-diagnostics isn't as structured as it could be, which translates to work being taken on piecemeal by individuals at their own pace and leisure. This affects the size of projects that we can tackle, *but* still relatively big projects, like the [translation machinery](https://hackmd.io/@davidtwco/rkXSbLg95) were started and have enough momentum to make progress going forward.
 
 **Regarding new contributors:** @estebank hasn't quantified it, but we've had quite a few new contributors recently. Mentoring capacity isn't depleted, *but* if we wanted to increase the number of people contributing we will need more people. The mentoring needs have been highly variable, depending on the individual (and the complexity of the task they take on).
 
@@ -795,6 +795,6 @@ to get the team and contributors to be a little more focused. E.g. maybe try to
 convince people to put aside work on ambition A, in order to get more people
 working together on ambition B, and then later there will (hopefully) be more
 capacity to address A after B has been addressed. But, since this is open
-source, its very much a matter of how much excitement each ambition can build up
+source, it's very much a matter of how much excitement each ambition can build up
 around its particular project, and how attractive they can make contribution be
 to newcomers.
