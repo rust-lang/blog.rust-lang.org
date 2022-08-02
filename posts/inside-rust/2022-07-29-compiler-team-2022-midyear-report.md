@@ -753,7 +753,7 @@ we have Rust contributors who have agreed to help with the units of work that we
 Further more, some of our work has reached Rust programmers; in some cases, we do not know if it has improved Rust for them,
 and in other cases, what we learn of their usage is informing our plans going forward
 
-**Details:** wg-diagnostics isn't as structured as it could be, which translates to work being taken on piecemeal by individuals as at their own pace and leisure. This affects the size of projects that we can tackle, *but* still relatively big projects, like the [translation machinery](https://hackmd.io/@davidtwco/rkXSbLg95) were started and have enough momentum to .
+**Details:** wg-diagnostics isn't as structured as it could be, which translates to work being taken on piecemeal by individuals as at their own pace and leisure. This affects the size of projects that we can tackle, *but* still relatively big projects, like the [translation machinery](https://hackmd.io/@davidtwco/rkXSbLg95) were started and have enough momentum to make progress going forward.
 
 **Regarding new contributors:** @estebank hasn't quantified it, but we've had quite a few new contributors recently. Mentoring capacity isn't depleted, *but* if we wanted to increase the number of people contributing we will need more people. The mentoring needs have been highly variable, depending on the individual (and the complexity of the task they take on).
 
