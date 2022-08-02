@@ -434,7 +434,7 @@ With the mentoring provided by [@oli-obk](https://github.com/oli-obk) and an inf
 
 **Regarding prioritization and focus:** Personal and professional obligations sapped the capacity of collaborators to contribute. These obligations have been resolved, and progress is being made once again.
 
-@jswrenn's work on as-casting and enum reform has been slowed by my focus on safe transmute. @jswrenn is increasingly able to devote attention to enum reform, but most of my attention remains on project safe transmute. They've allocated most of my attention on safe transmute, because they believe it is critically important to writing safe, performant code.
+@jswrenn's work on as-casting and enum reform has been slowed by their focus on safe transmute. @jswrenn is increasingly able to devote attention to enum reform, but most of their attention remains on project safe transmute; they believe safe transmute is critically important to writing safe, performant code.
 
 
 ### Librarification Initiatives (🛠️)
