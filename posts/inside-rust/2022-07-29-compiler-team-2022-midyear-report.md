@@ -286,14 +286,14 @@ and we have completed some of our milestones. Furthermore, (some of) our work ha
 **Progress:** The Rust project has made progress on this ambition since the start of the year
 
 **Goals:** We had no goals for this ambition planned for this year, but we made ad-hoc progress on the problem itself.
-There’s nearly an unbounded amount of effort that could be spent improving debuginfo quality but wesleywiser thinks we are making significant improvement both over the last 6 months and in the final 6 months of this year as well.
+There’s nearly an unbounded amount of effort that could be spent improving debuginfo quality but @wesleywiser thinks we are making significant improvement both over the last 6 months and in the final 6 months of this year as well.
 
 **How it started:** At start of 2022, we knew a problem existed, but we did not yet have a specific goal in mind for solving the problem.
 
 **How it's going:** We would like help deciding what to do next.
 We understand the problem better than we did at the start of the year,  we have Rust contributors who have agreed to help with the units of work that we have identified,
 Furthermore, (some of) our work has reached Rust programmers. In some cases, we do not know if it has improved Rust for them; in others, what we learn of their usage is informing our plans going forward.
-Much of the work wesleywiser is aware of has landed in 1.60 or 1.61 but there are a few small pieces landing in 1.62 (current beta).
+Much of the work @wesleywiser is aware of has landed in 1.60 or 1.61 but there are a few small pieces landing in 1.62 (current beta).
 
 **Details:**
 We've made concrete improvements/fixes to debuginfo generation.
@@ -310,14 +310,14 @@ Specifically:
 Surprises:
 Debuginfo just doesn't have enough test coverage, but that isn't particularly surprising.
 
-**Regarding prioritization and focus:** debugging in general is a top priority for mw & wesleywiser’s
+**Regarding prioritization and focus:** debugging in general is a top priority for @mw & @wesleywiser’s
 team.
 
 ### supporting split debuginfo
 
 <!-- https://hackmd.io/@rust-compiler-team/ByXfjiXu5 -->
 
-**Progress:** The Rust project has not made any progress on this ambition since the start of the year (pnkfelix: but the free form answer somewhat contradicts this)
+**Progress:** The Rust project has not made any progress on this ambition since the start of the year (@pnkfelix: but the free form answer somewhat contradicts this)
 
 **Goals:** As of today, we think this year’s planned goals for this ambition will be achieved in the next six months, and we think the most important parts of a solution will be available in the next six months.
 
@@ -331,7 +331,7 @@ Progress this year has primarily been some benchmarking of Split DWARF and some 
 
 Future work is basically just stabilization of `-Csplit-debuginfo` on Linux (Split DWARF); and of the currently-default options for the other platforms (for example, `-Csplit-debuginfo=packed` on Windows requires `-Zunstable-options` despite being effectively the default if you don't specify any flags).
 
-The owner of this work, davidtwco, intends to stick with the theme of debugging and contribute to the wg-debugging working group, but has also shifted attention to diagnostic translation they see that as an interesting area where they can have impact (and because the remaining implementation tasks for split debuginfo were completed as noted above).
+The owner of this work, @davidtwco, intends to stick with the theme of debugging and contribute to the wg-debugging working group, but has also shifted attention to diagnostic translation they see that as an interesting area where they can have impact (and because the remaining implementation tasks for split debuginfo were completed as noted above).
 
 ### better integration with trace-based debuggers
 
@@ -346,12 +346,12 @@ we think a solution will be available in the next two years, but not sooner than
 
 **How it's going:** We would like help deciding what to do next.
 
-**Details:** pnkfelix spent a significant portion of 2021 learning about `rr` and
+**Details:** @pnkfelix spent a significant portion of 2021 learning about `rr` and
 `pernos.co`. They had hoped to spend some of 2022 trying to improve the
-experience when using those tools with Rust, but so far pnkfelix has failed to
+experience when using those tools with Rust, but so far @pnkfelix has failed to
 allocate sufficient time to make headway here.
 
-One thing that pnkfelix thinks would be great to deliver would be recreating
+One thing that @pnkfelix thinks would be great to deliver would be recreating
 `pernos.co`'s click-on-terminal behavior, which jumps to the point in the
 control flow where that specific character was emitted to stdout/stderr.
 
@@ -399,9 +399,9 @@ and that the most important parts of a solution will likewise be available in th
 
 **Regarding prioritization and focus:** Since the opening of the stabilization PR and following pushback, progress has been slow. That has, in part, been to try to incorporate work from other projects (NLL, a-mir-formality) into the “stabilization package” - either through direct improvements (from NLL) or a more clear future (through modeling of GATs in a-mir-formality). However, there are other bits of work (writing docs, triaging new issues) that could be done in parallel that have been somewhat partially neglected.
 
-For Jack Huey, switching to getting NLL stabilized was a nice change of pace. In a sense, it was “low-hanging fruit” and was a helpful mental break from pushing so hard on GATs for the past year.
+For @jackh726, switching to getting NLL stabilized was a nice change of pace. In a sense, it was “low-hanging fruit” and was a helpful mental break from pushing so hard on GATs for the past year.
 
-If Jack hadn’t been working on GATs for the past year or so, they would have instead been pushing harder on Chalk and librarifcation. In particular, there are fundamental questions, e.g. associated type normalization, to solve there. Recent work with a-mir-formality has started to help answer those. In the meantime, GATs were at a state that they were “unblocked”, had significant interest, and are a requirement for other language (async fns in traits) and lib (LendingIterator) features.
+If @jackh726 hadn’t been working on GATs for the past year or so, they would have instead been pushing harder on Chalk and librarifcation. In particular, there are fundamental questions, e.g. associated type normalization, to solve there. Recent work with a-mir-formality has started to help answer those. In the meantime, GATs were at a state that they were “unblocked”, had significant interest, and are a requirement for other language (async fns in traits) and lib (LendingIterator) features.
 
 ### safe transmute
 
@@ -422,13 +422,13 @@ Further more, we have completed some of our milestones; we think we have impleme
 
 **Details:** At the start of the year, we opened [PR #92268](https://github.com/rust-lang/rust/pull/92268), *Initial Implementation of Transmutability Trait*, which aimed to provide the basic functionality of a trait implemented for any two types transmutable into each other (as defined by [MCP #411](https://github.com/rust-lang/compiler-team/issues/411)). This PR required additional testing and polish before it would be ready to merge, but progress unfortunately stalled in the spring.
 
-With the mentoring provided by [@oli-obk](https://github.com/oli-obk) and an influx of interest and help from [@m1el](https://github.com/m1el), progress resumed this summer; notably:
+With the mentoring provided by @oli-obk and an influx of interest and help from @m1el, progress resumed this summer; notably:
 - A significant effort in testing revealed flaws in the initial implementation approach. Fortunately, we quickly [discovered](https://rust-lang.zulipchat.com/#narrow/stream/216762-project-safe-transmute/topic/Implementation/near/288584316) and implemented an alternative (and arguably simpler) implementation strategy!
 - The `rustc_transmute` crate now only *optionally* depends on other `rustc_*` dependencies, allowing contributors to edit, build, and test the core implementation using the familiar `cargo` commands, rather than building the entire compiler.
 
 [PR #92268](https://github.com/rust-lang/rust/pull/92268) is now undergoing the final polish required for it to be merged, and [near-future units of follow-up work](https://rust-lang.zulipchat.com/#narrow/stream/216762-project-safe-transmute/topic/Implementation/near/290258987) have been identified.
 
-**Regarding new contributors:** An influx of interest and help from [@m1el](https://github.com/m1el) ([Igor null](https://rust-lang.zulipchat.com/#narrow/stream/216762-project-safe-transmute/sender/498326-user498326) on Zulip) jolted Project Safe Transmute out of its doldrums. Additionally, [@joshlf](https://github.com/joshlf), an early collaborator on Project Safe Transmute, anticipates he will soon be able to rejoin the implementation effort.
+**Regarding new contributors:** An influx of interest and help from @m1el jolted Project Safe Transmute out of its doldrums. Additionally, @joshlf, an early collaborator on Project Safe Transmute, anticipates he will soon be able to rejoin the implementation effort.
 
 **Regarding prioritization and focus:** Personal and professional obligations sapped the capacity of collaborators to contribute. These obligations have been resolved, and progress is being made once again.
 
@@ -548,11 +548,11 @@ Integration of lowering into the query system is still in review. This blocks pr
 
 
 Regarding new contributors:
-The progress has been made in part thanks to Miguel Guarniz (kckeiks).
+The progress has been made in part thanks to @kckeiks.
 
 
 Regarding prioritization and focus:
-One of the owners, cjgillot started a large refactor of lifetime resolution.
+One of the owners, @cjgillot started a large refactor of lifetime resolution.
 This refactor allowed for faster progress in fixing a few old bugs.
 
 
@@ -649,9 +649,9 @@ rylev thinks that the real question here is when this becomes something that’s
 
 **Details:** We’re reporting on a few additional metrics in PRs now (cycles, RSS). It’s not really a surprise, but the significant challenge we’ve definitely run into is our audience has such a diverse set of needs that any single representation or comment is likely to be too information dense to be useful; we’re still figuring out how to make the most of the data we have.
 
-**Regarding new contributors:** We’ve had a few folks return to contributing this year (nnethercote, lqd), and @rylev believes one new person as well (Kobzol). There have been a few others with good contributions but not long-duration tenure.
+**Regarding new contributors:** We’ve had a few folks return to contributing this year (@nnethercote, @lqd), and @rylev believes one new person as well (@Kobzol). There have been a few others with good contributions but not long-duration tenure.
 
-**Regarding prioritization and focus:** Other infrastructure projects have drawn much of Mark’s attention (crater, triagebot) in the last few months.
+**Regarding prioritization and focus:** Other infrastructure projects have drawn much of @Mark-Simulacrum's attention (crater, triagebot) in the last few months.
 We had long-standing debt on Crater and triagebot that needed to be addressed, and performance work was (and is) seeing more investment from other folks so was in less need of direct attention.
 
 @rylev believes that compiler performance remains, in their opinion, the largest and most persistent problem for Rust.
