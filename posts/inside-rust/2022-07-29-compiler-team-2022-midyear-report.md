@@ -14,8 +14,6 @@ midyear report summarizing the progress so far on all of those items.
 
 [ambitions-post]: /inside-rust/2022/02/22/compiler-team-ambitions-2022.html
 
-(The original plan was to have this report out by the end of June, but there
-were extenuating circumstances that delayed the post until now.)
 
 As a reminder, there were three main themes we identified in the work items that
 the team wanted to tackle: Fulfilling Rust's Promise (🦀), Developer Delight
