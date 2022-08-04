@@ -173,7 +173,7 @@ in the table above.) We should figure out ways to provide such feedback. I know
 that in one case, the lead for diagnostic improvements scours twitter to see if
 people are complaining about Rust's error messages (or celebrating them!).
 That's one approach, but I think we have to figure out something better. Perhaps
-we could provide an IDE plugin that provide telemetry to the project about the
+we could provide an opt-in plugin that provide telemetry to the project about the
 language and compiler features people use. Or maybe you, gentle reader, have a
 better idea to share with us.
 
