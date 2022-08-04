@@ -520,21 +520,21 @@ There isn't much focus happening here currently.
 
 <!-- https://hackmd.io/@rust-compiler-team/B1D7CiX_c -->
 
-Progress:
+**Progress:**
 The Rust project has made progress on this ambition since the start of the year
 
-Goals:
+**Goals**:
 we had no goals for this ambition planned for this year, but we made ad-hoc progress on the problem itself.
 we think a solution will be available in the next two years, but not sooner than six months.
 
-How it started:
+**How it started**:
 at start of 2022, we knew a problem existed, but we did not yet have a specific goal in mind for solving the problem.
 
-How it's going:
+**How it's going**:
 we would like help deciding what to do next
 we have Rust contributors who have agreed to help with the units of work that we have identified
 
-Details:
+**Details:**
 
 
 
