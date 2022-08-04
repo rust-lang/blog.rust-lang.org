@@ -142,7 +142,7 @@ out of 22 that expect some kind of solution within two years.
 
 Of the nineteen ambitions that reported some progress so far this year, fourteen
 of them (14/19) also said that at the start of the year, they had either *no
-goals* or *no plan* to achieve those goals. Ten of those fourteen say they now
+specific goals*, or *no plan* to achieve their goals. Ten of those fourteen say they now
 have a better understanding of the problem, and five of those fourteen say they
 now have a plan.
 
