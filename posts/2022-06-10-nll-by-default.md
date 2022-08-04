@@ -3,16 +3,17 @@ layout: post
 title: "Non-lexical lifetimes (NLL) fully stable"
 author: Niko Matsakis
 team: the NLL working group <https://www.rust-lang.org/governance/teams/compiler#Non-Lexical%20Lifetimes%20(NLL)%20working%20group>
-release: true
+release: false
 ---
 
-As of the Rust 1.63, the "non-lexical lifetimes" (NLL) work will be enabled by default. "But," I hear you saying, "wasn't NLL included in [Rust 2018]?" And yes, yes it was! But at that time, NLL was only enabled for Rust 2018 code, while Rust 2015 code ran in "migration mode". When in "migration mode," the compiler would run both the old *and* the new borrow checker and compare the results. This way, we could give warnings for older code that should never have compiled in the first place; we could also limit the impact of any bugs in the new code. Over time, we have limited migration mode to be closer and closer to just running the new-style borrow checker: in the next release, that process completes, and all Rust code will be checked with NLL. 
+As of the Rust 1.63, the "non-lexical lifetimes" (NLL) work will be enabled by default. NLL is the second iteration of Rust's borrow checker. The [RFC] actually does quite a nice job of highlighting some of the motivating examples. "But," I hear you saying, "wasn't NLL included in [Rust 2018]?" And yes, yes it was! But at that time, NLL was only enabled for Rust 2018 code, while Rust 2015 code ran in "migration mode". When in "migration mode," the compiler would run both the old *and* the new borrow checker and compare the results. This way, we could give warnings for older code that should never have compiled in the first place; we could also limit the impact of any bugs in the new code. Over time, we have limited migration mode to be closer and closer to just running the new-style borrow checker: in the next release, that process completes, and all Rust code will be checked with NLL. 
 
+[RFC]: https://rust-lang.github.io/rfcs/2094-nll.html
 [Rust 2018]: https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html
 
 ## How does removing the old borrow checker affect users?
 
-At this point, we have almost completely merged "migration mode" and "regular mode", so switching to NLL will have very little impact on the user experience. A number of diagnostics changed, mostly for the better -- [Jack Huey gives the full details in his blost post](https://jackh726.github.io/rust/2022/06/10/nll-stabilization.html).
+At this point, we have almost completely merged "migration mode" and "regular mode", so switching to NLL will have very little impact on the user experience. A number of diagnostics changed, mostly for the better -- [Jack Huey gives the full details in his blog post](https://jackh726.github.io/rust/2022/06/10/nll-stabilization.html).
 
 ## Credit where credit is due
 
