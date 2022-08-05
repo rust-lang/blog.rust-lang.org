@@ -10,8 +10,61 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-08-01T14:56:57+00:00</updated>
+    <updated>2022-08-05T15:00:55+00:00</updated>
 
+    
+    <entry>
+        <title>Non-lexical lifetimes (NLL) fully stable</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/08/05/nll-by-default.html" type="text/html" title="Non-lexical lifetimes (NLL) fully stable" />
+        <published>2022-08-05T00:00:00+00:00</published>
+        <updated>2022-08-05T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/08/05/nll-by-default.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/08/05/nll-by-default.html">&lt;p&gt;As of Rust 1.63 (releasing next week), the &amp;quot;non-lexical lifetimes&amp;quot; (NLL) work will be enabled by default. NLL is the second iteration of Rust&#x27;s borrow checker. The &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2094-nll.html&quot;&gt;RFC&lt;/a&gt; actually does quite a nice job of highlighting some of the motivating examples. &amp;quot;But,&amp;quot; I hear you saying, &amp;quot;wasn&#x27;t NLL included in &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html&quot;&gt;Rust 2018&lt;/a&gt;?&amp;quot; And yes, yes it was! But at that time, NLL was only enabled for Rust 2018 code, while Rust 2015 code ran in &amp;quot;migration mode&amp;quot;. When in &amp;quot;migration mode,&amp;quot; the compiler would run both the old &lt;em&gt;and&lt;/em&gt; the new borrow checker and compare the results. This way, we could give warnings for older code that should never have compiled in the first place; we could also limit the impact of any bugs in the new code. Over time, we have limited migration mode to be closer and closer to just running the new-style borrow checker: in the next release, that process completes, and all Rust code will be checked with NLL.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#how-does-removing-the-old-borrow-checker-affect-users&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-does-removing-the-old-borrow-checker-affect-users&quot;&gt;&lt;/a&gt;How does removing the old borrow checker affect users?&lt;/h2&gt;
+&lt;p&gt;At this point, we have almost completely merged &amp;quot;migration mode&amp;quot; and &amp;quot;regular mode&amp;quot;, so switching to NLL will have very little impact on the user experience. A number of diagnostics changed, mostly for the better -- &lt;a href&#x3D;&quot;https://jackh726.github.io/rust/2022/06/10/nll-stabilization.html&quot;&gt;Jack Huey gives the full details in his blog post&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#credit-where-credit-is-due&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;credit-where-credit-is-due&quot;&gt;&lt;/a&gt;Credit where credit is due&lt;/h2&gt;
+&lt;p&gt;The work to remove the old borrow checker has been going on for years. It&#x27;s been a long, tedious, and largely thankless process. We&#x27;d like to take a moment to highlight the various people involved and make sure they are recognized for their hard work:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/jackh726/&quot;&gt;Jack Huey&lt;/a&gt; (&lt;a href&#x3D;&quot;https://github.com/sponsors/jackh726&quot;&gt;sponsorship page&lt;/a&gt;), for driving the final details of stabilization (diagnostics, reconciling differences in behavior).&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/marmeladema&quot;&gt;Élie Roudninski&lt;/a&gt;, for refactoring the diagnostics code and doing the painstaking work (along with Jack) of checking each regressed case, one by one.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/Aaron1011&quot;&gt;Aaron Hill&lt;/a&gt;, for numerous improvements to bring NLL diagnostics up to par.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/matthewjasper&quot;&gt;Matthew Jasper&lt;/a&gt;, for reconciling errors around higher-ranked lifetimes and other core diagnostics improvements.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/lqd&quot;&gt;Rémy Rakic&lt;/a&gt;, for rebasing Matthew&#x27;s PR as well as doing other independent diagnostics work.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/chrisvittal&quot;&gt;Christopher Vittal&lt;/a&gt;, for removing &amp;quot;compare&amp;quot; mode (don&#x27;t ask).&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/centril&quot;&gt;Centril&lt;/a&gt;, for doing a lot of early work reconciling migration mode and the regular mode.&lt;/li&gt;
+&lt;li&gt;And of course the members of the NLL working group (myself, &lt;a href&#x3D;&quot;https://github.com/pnkfelix&quot;&gt;Felix Klock&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/spastorino&quot;&gt;Santiago Pastorino&lt;/a&gt; (&lt;a href&#x3D;&quot;https://github.com/sponsors/spastorino&quot;&gt;sponsorship page&lt;/a&gt;), &lt;a href&#x3D;&quot;https://github.com/matthewjasper&quot;&gt;Matthew Jasper&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/davidtwco&quot;&gt;David Wood&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/lqd&quot;&gt;Rémy Rakic&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/nashenas88&quot;&gt;Paul Daniel Faria&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/nnethercote&quot;&gt;Nick Nethercote&lt;/a&gt;) who delivered the feature in the first place.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Jack&#x27;s blog post includes a &lt;a href&#x3D;&quot;https://jackh726.github.io/rust/2022/06/10/nll-stabilization.html#how-did-we-get-here&quot;&gt;detailed narrative&lt;/a&gt; of all the work involved if you&#x27;d like more details! It&#x27;s a fun read.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#looking-forward-what-can-we-expect-for-the-borrow-checker-of-the-future&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;looking-forward-what-can-we-expect-for-the-borrow-checker-of-the-future&quot;&gt;&lt;/a&gt;Looking forward: what can we expect for the &amp;quot;borrow checker of the future&amp;quot;?&lt;/h2&gt;
+&lt;p&gt;The next frontier for Rust borrow checking is taking the &lt;a href&#x3D;&quot;https://github.com/rust-lang/polonius&quot;&gt;polonius&lt;/a&gt; project and moving it from research experiment to production code. Polonius is a next-generation version of the borrow checker that was &amp;quot;spun off&amp;quot; from the main NLL effort in 2018, as we were getting NLL ready to ship in production. Its most important contribution is fixing a known limitation of the borrow checker, demonstrated by the following example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn last_or_push&amp;lt;&#x27;a&amp;gt;(vec: &amp;amp;&#x27;a mut Vec&amp;lt;String&amp;gt;) -&amp;gt; &amp;amp;&#x27;a String {
+    if let Some(s) &#x3D; vec.last() { // borrows vec
+        // returning s here forces vec to be borrowed
+        // for the rest of the function, even though it
+        // shouldn&#x27;t have to be
+        return s; 
+    }
+    
+    // Because vec is borrowed, this call to vec.push gives
+    // an error!
+    vec.push(&amp;quot;&amp;quot;.to_string()); // ERROR
+    vec.last().unwrap()
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This example doesn&#x27;t compile today (&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;stable&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;517ac32f0aab076faa32b9065783bbb4&quot;&gt;try it for yourself&lt;/a&gt;), though there&#x27;s not a good reason for that. You can often workaround the problem by editing the code to introduce a redundant if (&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;stable&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;d9b25963e83201902ecf5c02d79cbc13&quot;&gt;as shown in this example&lt;/a&gt;), but with polonius, it will compile as is. If you&#x27;d like to learn more about how polonius (and the existing borrow checker) works&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, you can &lt;a href&#x3D;&quot;https://www.youtube.com/watch?v&#x3D;_agDeiWek8w&quot;&gt;watch my talk from Rust Belt Rust&lt;/a&gt;.&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn1&quot;&gt;
+&lt;p&gt;Or where the name &amp;quot;polonius&amp;quot; comes from! &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Increasing the glibc and Linux kernel requirements</title>
@@ -544,147 +597,6 @@ feedback, and testing.&lt;/p&gt;
 
         <author>
             <name>Arlo Siemsen</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.61.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/05/19/Rust-1.61.0.html" type="text/html" title="Announcing Rust 1.61.0" />
-        <published>2022-05-19T00:00:00+00:00</published>
-        <updated>2022-05-19T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/05/19/Rust-1.61.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/05/19/Rust-1.61.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.61.0. Rust is a programming language
-empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.61.0 with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1610-2022-05-19&quot;&gt;detailed release notes for 1.61.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider updating locally to use
-the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly channel (&lt;code&gt;rustup default nightly&lt;/code&gt;).
-Please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you might come across!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1610-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1610-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.61.0 stable&lt;/h2&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#custom-exit-codes-from-main&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;custom-exit-codes-from-main&quot;&gt;&lt;/a&gt;Custom exit codes from &lt;code&gt;main&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;In the beginning, Rust &lt;code&gt;main&lt;/code&gt; functions could only return the unit type &lt;code&gt;()&lt;/code&gt; (either implicitly or explicitly), always indicating success
-in the exit status, and if you wanted otherwise you had to call &lt;code&gt;process::exit(code)&lt;/code&gt;. Since Rust
-1.26, &lt;code&gt;main&lt;/code&gt; has been allowed to return a &lt;code&gt;Result&lt;/code&gt;, where &lt;code&gt;Ok&lt;/code&gt; translated to a C &lt;code&gt;EXIT_SUCCESS&lt;/code&gt; and
-&lt;code&gt;Err&lt;/code&gt; to &lt;code&gt;EXIT_FAILURE&lt;/code&gt; (also debug-printing the error). Under the hood, these alternate return
-types were unified by an unstable &lt;code&gt;Termination&lt;/code&gt; trait.&lt;/p&gt;
-&lt;p&gt;In this release, that &lt;code&gt;Termination&lt;/code&gt; trait is finally stable, along with a more general &lt;code&gt;ExitCode&lt;/code&gt;
-type that wraps platform-specific return types. That has &lt;code&gt;SUCCESS&lt;/code&gt; and &lt;code&gt;FAILURE&lt;/code&gt; constants, and also
-implements &lt;code&gt;From&amp;lt;u8&amp;gt;&lt;/code&gt; for more arbitrary values. The &lt;code&gt;Termination&lt;/code&gt; trait can also be implemented for
-your own types, allowing you to customize any kind of reporting before converting to an &lt;code&gt;ExitCode&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;For example, here&#x27;s a type-safe way to write exit codes for a &lt;a href&#x3D;&quot;https://git-scm.com/docs/git-bisect#_bisect_run&quot;&gt;&lt;code&gt;git bisect run&lt;/code&gt;&lt;/a&gt; script:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::process::{ExitCode, Termination};
-
-#[repr(u8)]
-pub enum GitBisectResult {
-    Good &#x3D; 0,
-    Bad &#x3D; 1,
-    Skip &#x3D; 125,
-    Abort &#x3D; 255,
-}
-
-impl Termination for GitBisectResult {
-    fn report(self) -&amp;gt; ExitCode {
-        // Maybe print a message here
-        ExitCode::from(self as u8)
-    }
-}
-
-fn main() -&amp;gt; GitBisectResult {
-    std::panic::catch_unwind(|| {
-        todo!(&amp;quot;test the commit&amp;quot;)
-    }).unwrap_or(GitBisectResult::Abort)
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#more-capabilities-for-const-fn&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;more-capabilities-for-const-fn&quot;&gt;&lt;/a&gt;More capabilities for &lt;code&gt;const fn&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;Several incremental features have been stabilized in this release to enable more functionality in
-&lt;code&gt;const&lt;/code&gt; functions:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Basic handling of &lt;code&gt;fn&lt;/code&gt; pointers&lt;/strong&gt;: You can now create, pass, and cast function pointers in a
-&lt;code&gt;const fn&lt;/code&gt;. For example, this could be useful to build compile-time function tables for an
-interpreter. However, it is still not permitted to call &lt;code&gt;fn&lt;/code&gt; pointers.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Trait bounds&lt;/strong&gt;: You can now write trait bounds on generic parameters to &lt;code&gt;const fn&lt;/code&gt;, such as
-&lt;code&gt;T: Copy&lt;/code&gt;, where previously only &lt;code&gt;Sized&lt;/code&gt; was allowed.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;dyn Trait&lt;/code&gt; types&lt;/strong&gt;: Similarly, &lt;code&gt;const fn&lt;/code&gt; can now deal with trait objects, &lt;code&gt;dyn Trait&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;impl Trait&lt;/code&gt; types&lt;/strong&gt;: Arguments and return values for &lt;code&gt;const fn&lt;/code&gt; can now be opaque &lt;code&gt;impl Trait&lt;/code&gt;
-types.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Note that the trait features do not yet support calling methods from those traits in a &lt;code&gt;const fn&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;See the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/reference/const_eval.html&quot;&gt;Constant Evaluation&lt;/a&gt; section of
-the reference book to learn more about the current capabilities of &lt;code&gt;const&lt;/code&gt; contexts, and future
-capabilities can be tracked in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/57563&quot;&gt;rust#57563&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#static-handles-for-locked-stdio&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;static-handles-for-locked-stdio&quot;&gt;&lt;/a&gt;Static handles for locked stdio&lt;/h3&gt;
-&lt;p&gt;The three standard I/O streams -- &lt;code&gt;Stdin&lt;/code&gt;, &lt;code&gt;Stdout&lt;/code&gt;, and &lt;code&gt;Stderr&lt;/code&gt; -- each have a &lt;code&gt;lock(&amp;amp;self)&lt;/code&gt; to
-allow more control over synchronizing read and writes. However, they returned lock guards with a
-lifetime borrowed from &lt;code&gt;&amp;amp;self&lt;/code&gt;, so they were limited to the scope of the original handle. This was
-determined to be an unnecessary limitation, since the underlying locks were actually in static
-storage, so now the guards are returned with a &lt;code&gt;&#x27;static&lt;/code&gt; lifetime, disconnected from the handle.&lt;/p&gt;
-&lt;p&gt;For example, a common error came from trying to get a handle and lock it in one statement:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// error[E0716]: temporary value dropped while borrowed
-let out &#x3D; std::io::stdout().lock();
-//        ^^^^^^^^^^^^^^^^^       - temporary value is freed at the end of this statement
-//        |
-//        creates a temporary which is freed while still in use
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now the lock guard is &lt;code&gt;&#x27;static&lt;/code&gt;, not borrowing from that temporary, so this works!&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
-&lt;p&gt;The following methods and trait implementations are now stabilized:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/pin/struct.Pin.html#method.static_mut&quot;&gt;&lt;code&gt;Pin::static_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/pin/struct.Pin.html#method.static_ref&quot;&gt;&lt;code&gt;Pin::static_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/vec/struct.Vec.html#method.retain_mut&quot;&gt;&lt;code&gt;Vec::retain_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/collections/struct.VecDeque.html#method.retain_mut&quot;&gt;&lt;code&gt;VecDeque::retain_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/io/struct.Cursor.html#impl-Write-4&quot;&gt;&lt;code&gt;Write&lt;/code&gt; for &lt;code&gt;Cursor&amp;lt;[u8; N]&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/os/unix/net/struct.SocketAddr.html#method.from_pathname&quot;&gt;&lt;code&gt;std::os::unix::net::SocketAddr::from_pathname&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/process/struct.ExitCode.html&quot;&gt;&lt;code&gt;std::process::ExitCode&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/process/trait.Termination.html&quot;&gt;&lt;code&gt;std::process::Termination&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/thread/struct.JoinHandle.html#method.is_finished&quot;&gt;&lt;code&gt;std::thread::JoinHandle::is_finished&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The following previously stable functions are now &lt;code&gt;const&lt;/code&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.offset&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::offset&lt;/code&gt;&lt;/a&gt;
-and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.offset-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::offset&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_offset&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::wrapping_offset&lt;/code&gt;&lt;/a&gt;
-and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_offset-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::wrapping_offset&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.add&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::add&lt;/code&gt;&lt;/a&gt;
-and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.add-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::add&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.sub&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::sub&lt;/code&gt;&lt;/a&gt;
-and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.sub-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::sub&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_add&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::wrapping_add&lt;/code&gt;&lt;/a&gt;
-and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_add-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::wrapping_add&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_sub&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::wrapping_sub&lt;/code&gt;&lt;/a&gt;
-and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.pointer.html#method.wrapping_sub-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::wrapping_sub&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.slice.html#method.as_mut_ptr&quot;&gt;&lt;code&gt;&amp;lt;[T]&amp;gt;::as_mut_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.slice.html#method.as_ptr_range&quot;&gt;&lt;code&gt;&amp;lt;[T]&amp;gt;::as_ptr_range&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/1.61.0/std/primitive.slice.html#method.as_mut_ptr_range&quot;&gt;&lt;code&gt;&amp;lt;[T]&amp;gt;::as_mut_ptr_range&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.61.0 release. Check out what changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1610-2022-05-19&quot;&gt;Rust&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-161-2022-05-19&quot;&gt;Cargo&lt;/a&gt;,
-and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-161&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;In a future release we&#x27;re planning to increase the baseline requirements for
-the Linux kernel to version 3.2, and for glibc to version 2.17. We&#x27;d love
-your feedback in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/95026&quot;&gt;rust#95026&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1610&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1610&quot;&gt;&lt;/a&gt;Contributors to 1.61.0&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.61.0.
-We couldn&#x27;t have done it without all of you.
-&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.61.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     

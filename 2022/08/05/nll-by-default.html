@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Non-lexical lifetimes (NLL) fully stable | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Non-lexical lifetimes (NLL) fully stable | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Non-lexical lifetimes (NLL) fully stable | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Non-lexical lifetimes (NLL) fully stable" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Non-lexical lifetimes (NLL) fully stable</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 5, 2022 &middot; Niko Matsakis
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler#Non-Lexical%20Lifetimes%20(NLL)%20working%20group">the NLL working group</a> 
+    </div>
+
+    <div class="post">
+      <p>As of Rust 1.63 (releasing next week), the &quot;non-lexical lifetimes&quot; (NLL) work will be enabled by default. NLL is the second iteration of Rust's borrow checker. The <a href="https://rust-lang.github.io/rfcs/2094-nll.html">RFC</a> actually does quite a nice job of highlighting some of the motivating examples. &quot;But,&quot; I hear you saying, &quot;wasn't NLL included in <a href="https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html">Rust 2018</a>?&quot; And yes, yes it was! But at that time, NLL was only enabled for Rust 2018 code, while Rust 2015 code ran in &quot;migration mode&quot;. When in &quot;migration mode,&quot; the compiler would run both the old <em>and</em> the new borrow checker and compare the results. This way, we could give warnings for older code that should never have compiled in the first place; we could also limit the impact of any bugs in the new code. Over time, we have limited migration mode to be closer and closer to just running the new-style borrow checker: in the next release, that process completes, and all Rust code will be checked with NLL.</p>
+<h2><a href="#how-does-removing-the-old-borrow-checker-affect-users" aria-hidden="true" class="anchor" id="how-does-removing-the-old-borrow-checker-affect-users"></a>How does removing the old borrow checker affect users?</h2>
+<p>At this point, we have almost completely merged &quot;migration mode&quot; and &quot;regular mode&quot;, so switching to NLL will have very little impact on the user experience. A number of diagnostics changed, mostly for the better -- <a href="https://jackh726.github.io/rust/2022/06/10/nll-stabilization.html">Jack Huey gives the full details in his blog post</a>.</p>
+<h2><a href="#credit-where-credit-is-due" aria-hidden="true" class="anchor" id="credit-where-credit-is-due"></a>Credit where credit is due</h2>
+<p>The work to remove the old borrow checker has been going on for years. It's been a long, tedious, and largely thankless process. We'd like to take a moment to highlight the various people involved and make sure they are recognized for their hard work:</p>
+<ul>
+<li><a href="https://github.com/jackh726/">Jack Huey</a> (<a href="https://github.com/sponsors/jackh726">sponsorship page</a>), for driving the final details of stabilization (diagnostics, reconciling differences in behavior).</li>
+<li><a href="https://github.com/marmeladema">Élie Roudninski</a>, for refactoring the diagnostics code and doing the painstaking work (along with Jack) of checking each regressed case, one by one.</li>
+<li><a href="https://github.com/Aaron1011">Aaron Hill</a>, for numerous improvements to bring NLL diagnostics up to par.</li>
+<li><a href="https://github.com/matthewjasper">Matthew Jasper</a>, for reconciling errors around higher-ranked lifetimes and other core diagnostics improvements.</li>
+<li><a href="https://github.com/lqd">Rémy Rakic</a>, for rebasing Matthew's PR as well as doing other independent diagnostics work.</li>
+<li><a href="https://github.com/chrisvittal">Christopher Vittal</a>, for removing &quot;compare&quot; mode (don't ask).</li>
+<li><a href="https://github.com/centril">Centril</a>, for doing a lot of early work reconciling migration mode and the regular mode.</li>
+<li>And of course the members of the NLL working group (myself, <a href="https://github.com/pnkfelix">Felix Klock</a>, <a href="https://github.com/spastorino">Santiago Pastorino</a> (<a href="https://github.com/sponsors/spastorino">sponsorship page</a>), <a href="https://github.com/matthewjasper">Matthew Jasper</a>, <a href="https://github.com/davidtwco">David Wood</a>, <a href="https://github.com/lqd">Rémy Rakic</a>, <a href="https://github.com/nashenas88">Paul Daniel Faria</a>, <a href="https://github.com/nnethercote">Nick Nethercote</a>) who delivered the feature in the first place.</li>
+</ul>
+<p>Jack's blog post includes a <a href="https://jackh726.github.io/rust/2022/06/10/nll-stabilization.html#how-did-we-get-here">detailed narrative</a> of all the work involved if you'd like more details! It's a fun read.</p>
+<h2><a href="#looking-forward-what-can-we-expect-for-the-borrow-checker-of-the-future" aria-hidden="true" class="anchor" id="looking-forward-what-can-we-expect-for-the-borrow-checker-of-the-future"></a>Looking forward: what can we expect for the &quot;borrow checker of the future&quot;?</h2>
+<p>The next frontier for Rust borrow checking is taking the <a href="https://github.com/rust-lang/polonius">polonius</a> project and moving it from research experiment to production code. Polonius is a next-generation version of the borrow checker that was &quot;spun off&quot; from the main NLL effort in 2018, as we were getting NLL ready to ship in production. Its most important contribution is fixing a known limitation of the borrow checker, demonstrated by the following example:</p>
+<pre><code class="language-rust">fn last_or_push&lt;'a&gt;(vec: &amp;'a mut Vec&lt;String&gt;) -&gt; &amp;'a String {
+    if let Some(s) = vec.last() { // borrows vec
+        // returning s here forces vec to be borrowed
+        // for the rest of the function, even though it
+        // shouldn't have to be
+        return s; 
+    }
+    
+    // Because vec is borrowed, this call to vec.push gives
+    // an error!
+    vec.push(&quot;&quot;.to_string()); // ERROR
+    vec.last().unwrap()
+}
+</code></pre>
+<p>This example doesn't compile today (<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=517ac32f0aab076faa32b9065783bbb4">try it for yourself</a>), though there's not a good reason for that. You can often workaround the problem by editing the code to introduce a redundant if (<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=d9b25963e83201902ecf5c02d79cbc13">as shown in this example</a>), but with polonius, it will compile as is. If you'd like to learn more about how polonius (and the existing borrow checker) works<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>, you can <a href="https://www.youtube.com/watch?v=_agDeiWek8w">watch my talk from Rust Belt Rust</a>.</p>
+<section class="footnotes">
+<ol>
+<li id="fn1">
+<p>Or where the name &quot;polonius&quot; comes from! <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>
