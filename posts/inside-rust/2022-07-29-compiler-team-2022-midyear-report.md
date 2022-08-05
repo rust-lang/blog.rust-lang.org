@@ -138,11 +138,21 @@ out of 22 that expect some kind of solution within two years.
     years) are very difficult to predict realistically. But the two year
     time frame was drawn somewhat out of a hat.
 
-Of the nineteen ambitions that reported some progress so far this year, fourteen
-of them (14/19) also said that at the start of the year, they had either *no
-specific goals*, or *no plan* to achieve their goals. Ten of those fourteen say they now
-have a better understanding of the problem, and five of those fourteen say they
+Of the nine concrete initiatives (i.e. ambitions with development resources attached) that reported some progress so far this year, four said they had no specific goal at the start of the year, and two said they had no plan to achieve their goal.
+Similarly, of the ten aspirations (i.e. ambitions without development resources attached) that reported progress, six had no specific goals, and two said they had no plan to achieve their goals.
+
+&nbsp; | No Specific Goals | No Plan | Other
+--------|-------------------|--------|--------
+Concrete Initiative | 4 | 2 | 3
+Aspiration | 6 | 2 | 2
+ 
+ Four of those six concrete initiatives that lacked either specific goals or a plan say they now
+have a better understanding of the problem; two of them say they
 now have a plan.
+
+Five of the eight aspirations that lacked either specific goals or a plan say they now better understand the problem, and two now have a plan.
+
+I spell this out in this level of detail because I was *expecting* to see some strong correlation between having development resources and having a plan, at least compared to what the aspirations reported. I think the numbers above show that expectation was incorrect. I'm not yet sure what lesson to draw from this, apart from being happy that so many ambitions report that they have a better understanding of their respective problem.
 
   * Here is a question I want to discuss with the [compiler team and  contributors](https://www.rust-lang.org/governance/teams/compiler) in some future [compiler steering meeting](https://rust-lang.github.io/compiler-team/about/steering-meeting/): Do we, as a
     project, need to put more energy into upfront planning? Or, given our
