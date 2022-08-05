@@ -157,7 +157,7 @@ I spell this out in this level of detail because I was *expecting* to see some s
   * Here is a question I want to discuss with the [compiler team and  contributors](https://www.rust-lang.org/governance/teams/compiler) in some future [compiler steering meeting](https://rust-lang.github.io/compiler-team/about/steering-meeting/): Do we, as a
     project, need to put more energy into upfront planning? Or, given our
     volunteer nature, will that just distract people from "the fun stuff" and
-    potentially burn out contributors? In other words: is this 5/14 "ambitions
+    potentially burn out contributors? In other words: is this 4/14 "ambitions
     that spent time making a concrete plan", is that a value we
     should work on growing? Or should we just monitor it, and not actively try to
     change it?
