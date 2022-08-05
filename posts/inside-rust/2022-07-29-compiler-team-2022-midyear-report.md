@@ -144,7 +144,7 @@ specific goals*, or *no plan* to achieve their goals. Ten of those fourteen say 
 have a better understanding of the problem, and five of those fourteen say they
 now have a plan.
 
-  * Here is a question I want to put forward to our community: Do we, as a
+  * Here is a question I want to discuss with the [compiler team and  contributors](https://www.rust-lang.org/governance/teams/compiler) in some future [compiler steering meeting](https://rust-lang.github.io/compiler-team/about/steering-meeting/): Do we, as a
     project, need to put more energy into upfront planning? Or, given our
     volunteer nature, will that just distract people from "the fun stuff" and
     potentially burn out contributors? In other words: is this 5/14 "ambitions
