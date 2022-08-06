@@ -50,6 +50,6 @@ fn last_or_push<'a>(vec: &'a mut Vec<String>) -> &'a String {
 }
 ```
 
-This example doesn't compile today ([try it for yourself](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=517ac32f0aab076faa32b9065783bbb4)), though there's not a good reason for that. You can often workaround the problem by editing the code to introduce a redundant if ([as shown in this example](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=d9b25963e83201902ecf5c02d79cbc13)), but with polonius, it will compile as is. If you'd like to learn more about how polonius (and the existing borrow checker) works[^name], you can [watch my talk from Rust Belt Rust](https://www.youtube.com/watch?v=_agDeiWek8w).
+This example doesn't compile today ([try it for yourself](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=517ac32f0aab076faa32b9065783bbb4)), though there's not a good reason for that. You can often workaround the problem by editing the code to introduce a redundant `let` ([as shown in this example](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=d9b25963e83201902ecf5c02d79cbc13)), but with polonius, it will compile as is. If you'd like to learn more about how polonius (and the existing borrow checker) works[^name], you can [watch my talk from Rust Belt Rust](https://www.youtube.com/watch?v=_agDeiWek8w).
 
 [^name]: Or where the name "polonius" comes from!
