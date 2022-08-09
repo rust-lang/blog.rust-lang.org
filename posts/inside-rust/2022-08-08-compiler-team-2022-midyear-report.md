@@ -188,6 +188,8 @@ presentation here.
 
 ### I-unsound issues (🦀)
 
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#i-unsound-issues-)
+
 <!-- https://hackmd.io/@rust-compiler-team/r1Abdj7uq -->
 
 **Progress:** The Rust project has made progress on this ambition since the start of the year.
@@ -215,6 +217,8 @@ It is not effective to fix bugs that users will never encounter in practice when
 ### Async Rust Initiatives (🦀, 👩‍💻)
 
 ### async traits
+
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#async-traits)
 
 <!-- https://hackmd.io/@rust-compiler-team/H1eW9oXdc -->
 
@@ -247,6 +251,8 @@ We have an async stakeholders group that we use for this kind of input, but have
 
 ### async crashdump dissection
 
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#async-crashdump-dissection)
+
 <!-- https://hackmd.io/@rust-compiler-team/SJYL9iQ_9 -->
 
 **Progress:** The Rust project has made progress on this ambition since the start of the year, but we do not think this year’s planned goals for this ambition will be achieved in the next six months. We think a solution will be available in the next two years, but not sooner than six months.
@@ -268,6 +274,8 @@ The two main obstacles are:
 
 ### wg-debugging
 
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-)
+
 <!-- https://hackmd.io/@rust-compiler-team/HJOtiiQOq -->
 
 **Progress:** The Rust project has made progress on this ambition since the start of the year
@@ -284,6 +292,8 @@ and we have completed some of our milestones. Furthermore, (some of) our work ha
 **Details:** wg-debugging has been spun up. We now are conducting regular status/design and triage meetings. We are working through the backlog of A-debuginfo issues. There is active participation from a number of contributors.
 
 ### improving debuginfo quality
+
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-)
 
 <!-- https://hackmd.io/@rust-compiler-team/HJQ25sXOq -->
 
@@ -319,6 +329,8 @@ team.
 
 ### supporting split debuginfo
 
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-)
+
 <!-- https://hackmd.io/@rust-compiler-team/ByXfjiXu5 -->
 
 **Progress:** The Rust project has not made any progress on this ambition since the start of the year (@pnkfelix: but the free form answer somewhat contradicts this)
@@ -338,6 +350,8 @@ Future work is basically just stabilization of `-Csplit-debuginfo` on Linux (Spl
 The owner of this work, @davidtwco, intends to stick with the theme of debugging and contribute to the wg-debugging working group, but has also shifted attention to diagnostic translation they see that as an interesting area where they can have impact (and because the remaining implementation tasks for split debuginfo were completed as noted above).
 
 ### better integration with trace-based debuggers
+
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-)
 
 <!-- https://hackmd.io/@rust-compiler-team/BkJSsi7d5 -->
 
@@ -360,6 +374,8 @@ One thing that @pnkfelix thinks would be great to deliver would be recreating
 control flow where that specific character was emitted to stdout/stderr.
 
 ### Faster Builds Initiatives (👩‍💻, 🛠️)
+
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#faster-builds-initiatives--%EF%B8%8F)
 
 <!-- https://hackmd.io/@rust-compiler-team/B1O2siXd9 -->
 
@@ -386,6 +402,8 @@ control flow where that specific character was emitted to stdout/stderr.
 
 ### Generic Associated Types
 
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#expressiveness-initiatives--)
+
 <!-- https://hackmd.io/@rust-compiler-team/BkM83iX_9 -->
 
 **Progress:** The Rust project has made progress on this ambition since the start of the year
@@ -408,6 +426,8 @@ For @jackh726, switching to getting NLL stabilized was a nice change of pace. In
 If @jackh726 hadn’t been working on GATs for the past year or so, they would have instead been pushing harder on Chalk and librarifcation. In particular, there are fundamental questions, e.g. associated type normalization, to solve there. Recent work with a-mir-formality has started to help answer those. In the meantime, GATs were at a state that they were “unblocked”, had significant interest, and are a requirement for other language (async fns in traits) and lib (LendingIterator) features.
 
 ### safe transmute
+
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#expressiveness-initiatives--)
 
 <!-- https://hackmd.io/@rust-compiler-team/HJ7Y3s7uq -->
 
@@ -443,6 +463,8 @@ With the mentoring provided by @oli-obk and an influx of interest and help from 
 
 ### Chalk
 
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#chalk)
+
 <!-- https://hackmd.io/@rust-compiler-team/HyVh2sQdq -->
 
 **Progress:** The Rust project has made progress on this ambition since the start of the year
@@ -467,6 +489,8 @@ We have completed some of our milestones.
 
 ### P-high Backlog Processing Aspirations (🦀)
 
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#p-high-aspirations-)
+
 <!-- https://hackmd.io/@rust-compiler-team/SkS1psm_c -->
 
 **Progress:** The Rust project has made progress on this ambition since the start of the year
@@ -489,6 +513,8 @@ We think a solution will be available in the next two years, but not sooner than
 
 
 ### Debugging Aspirations (👩‍💻)
+
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-aspirations-)
 
 <!-- https://hackmd.io/@rust-compiler-team/SyM2poXu9 -->
 
@@ -521,6 +547,8 @@ There isn't much focus happening here currently.
 ### Faster Builds Aspirations (👩‍💻, 🛠️)
 
 ### Incremental Compilation Aspirations
+
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#incremental-compilation-aspirations)
 
 <!-- https://hackmd.io/@rust-compiler-team/B1D7CiX_c -->
 
@@ -563,6 +591,8 @@ This refactor allowed for faster progress in fixing a few old bugs.
 
 ### Inter-crate Sharing Aspirations
 
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#inter-crate-sharing-aspirations)
+
 <!-- https://hackmd.io/zad1BjIoR8S4IfE49z-xYg -->
 <!-- (no survey response as of 2022-07-19) -->
 
@@ -574,6 +604,8 @@ are hard to push forward right now due to lack of reviewing capacity.
 ### Expressiveness Aspirations (🦀, 👩‍💻)
 
 ### const generics and const eval
+
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#expressiveness-aspirations--)
 
 <!-- https://hackmd.io/@rust-compiler-team/HktiComdq -->
 
@@ -594,6 +626,8 @@ are hard to push forward right now due to lack of reviewing capacity.
 ### Librarification Aspirations (🛠️)
 
 ### MIR tooling (stable-mir and ghost-code)
+
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#mir-tooling)
 
 <!-- https://hackmd.io/CWcHnbOWReSUyPv0ZDdWaw -->
 
@@ -617,6 +651,8 @@ Work has not yet started but the we believe that we have a solution.
 
 #### MCVE reduction tooling
 
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#mcve-reduction-tooling)
+
 <!-- https://hackmd.io/@rust-compiler-team/r19rJhmu5 -->
 
 **Progress:** The Rust project has not made any progress on this ambition since the start of the year
@@ -632,6 +668,8 @@ We think a solution will be available in the next two years, but not sooner than
 However, they have not dedicated any time to solving the problem.
 
 #### Performance Dashboard
+
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#performance-dashboard)
 
 <!-- https://hackmd.io/@rust-compiler-team/SyaDJ2X_5 -->
 
@@ -664,6 +702,8 @@ We had long-standing debt on Crater and triagebot that needed to be addressed, a
 
 #### Ease writing new backends via intrinsic MIR fallbacks
 
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#ease-writing-new-backends)
+
 <!-- https://hackmd.io/@rust-compiler-team/HylMg2m_9 -->
 
 **Progress:** The Rust project has made progress on this ambition since the start of the year
@@ -686,6 +726,8 @@ Mentoring instructions, or even steps with minimal details, might help non-exper
 
 #### Cranelift
 
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#cranelift)
+
 <!-- https://hackmd.io/@rust-compiler-team/BJLre2Xu9 -->
 
 **Progress:** The Rust project has made progress on this ambition since the start of the year.
@@ -706,6 +748,8 @@ If @bjorn3 hadn’t started working on `cg_clif` they probably wouldn’t have g
 With the codegen phase of debug mode builds getting faster with cg_clif in most cases, the bottleneck during debug mode compilation shifts away from codegen to the frontend. @bjorn3 wonders if maybe in the future they could try to see if the performance of the frontend can be improved by the same amount that cranelift improves the backend one way or another?
 
 #### GCC backend
+
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#gcc-backend)
 
 <!-- https://hackmd.io/T03Nu92NSLeyyYnnW3XFyg -->
 
@@ -738,6 +782,8 @@ and  we have completed some of our milestones
 When the GCC backend is good enough and when the Rust for Linux project is ready to start experimenting with it, it might be worth it to help other areas support new architectures for Rust: adding the arch specs to rustc, adding the support for those architectures in some crates like `libc` and `object`.
 
 ### Diagnostics Aspirations (👩‍💻)
+
+[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#diagnostics-aspirations-)
 
 <!-- https://hackmd.io/@rust-compiler-team/HJ_cgnXd5 -->
 
