@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-08-09T11:22:58+00:00</updated>
+    <updated>2022-08-09T17:34:47+00:00</updated>
 
     
     <entry>
@@ -247,6 +247,7 @@ better idea to share with us.&lt;/p&gt;
 presentation here.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#concrete-initiatives&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;concrete-initiatives&quot;&gt;&lt;/a&gt;Concrete Initiatives&lt;/h2&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#i-unsound-issues-&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;i-unsound-issues-&quot;&gt;&lt;/a&gt;I-unsound issues (🦀)&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#i-unsound-issues-&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/r1Abdj7uq --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; we do not think this year’s planned goals for this ambition will be achieved in the next six months, but we do think the most important parts of a solution will be available in the next six months.&lt;/p&gt;
@@ -260,6 +261,7 @@ presentation here.&lt;/p&gt;
 &lt;p&gt;It is not effective to fix bugs that users will never encounter in practice when they are encountering soundness bugs due to unsafe code much more frequently. So we’ve expanded the focus on miri usability, too, allowing users to find soundness bugs in library code.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#async-rust-initiatives--&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;async-rust-initiatives--&quot;&gt;&lt;/a&gt;Async Rust Initiatives (🦀, 👩‍💻)&lt;/h3&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#async-traits&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;async-traits&quot;&gt;&lt;/a&gt;async traits&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#async-traits&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/H1eW9oXdc --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We had a loosely defined goal of shipping async fn in traits this year. tmandry thinks we will at least have an implementation landed in nightly of static, and possibly dyn, async fn in traits by the end of the year. Stabilization timeline is unclear. We think the most important parts of a solution will be available in the next six months. Major design questions should be resolved or in “resolved to experiment” mode by the end of the year. Nightly-only implementation in the next six months, with part of it possibly moving toward stabilization. Should all be stable in two years or less.&lt;/p&gt;
@@ -279,6 +281,7 @@ presentation here.&lt;/p&gt;
 then that would lead us to change our focus.&lt;/p&gt;
 &lt;p&gt;We have an async stakeholders group that we use for this kind of input, but haven&#x27;t convened with them in quite some time. We should make an effort to update them and find out where the pain points are again.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#async-crashdump-dissection&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;async-crashdump-dissection&quot;&gt;&lt;/a&gt;async crashdump dissection&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#async-crashdump-dissection&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/SJYL9iQ_9 --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year, but we do not think this year’s planned goals for this ambition will be achieved in the next six months. We think a solution will be available in the next two years, but not sooner than six months.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;How it started:&lt;/strong&gt; At start of 2022, we had a plan for how to achieve a specific goal, but we did not have intermediate progress points (aka “milestones”) established.&lt;/p&gt;
@@ -293,6 +296,7 @@ https://github.com/rust-lang/rust-dbg-ext/tree/main/test-framework/dbt&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#debugging-initiatives-&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;debugging-initiatives-&quot;&gt;&lt;/a&gt;Debugging Initiatives (🦀)&lt;/h3&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#wg-debugging&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;wg-debugging&quot;&gt;&lt;/a&gt;wg-debugging&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/HJOtiiQOq --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We think this year’s planned goals for this ambition will be achieved in the next six months. (This is based on the &amp;quot;immediate goals&amp;quot; listed in the ambitions blog post.)
@@ -303,6 +307,7 @@ We understand the problem better than we did at the start of the year,  we have 
 and we have completed some of our milestones. Furthermore, (some of) our work has reached Rust programmers. In some cases, we do not know if it has improved Rust for them; in others, what we learn of their usage is informing our plans going forward.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Details:&lt;/strong&gt; wg-debugging has been spun up. We now are conducting regular status/design and triage meetings. We are working through the backlog of A-debuginfo issues. There is active participation from a number of contributors.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#improving-debuginfo-quality&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improving-debuginfo-quality&quot;&gt;&lt;/a&gt;improving debuginfo quality&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/HJQ25sXOq --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We had no goals for this ambition planned for this year, but we made ad-hoc progress on the problem itself.
@@ -329,6 +334,7 @@ Debuginfo just doesn&#x27;t have enough test coverage, but that isn&#x27;t parti
 &lt;p&gt;&lt;strong&gt;Regarding prioritization and focus:&lt;/strong&gt; debugging in general is a top priority for @mw &amp;amp; @wesleywiser’s
 team.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#supporting-split-debuginfo&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;supporting-split-debuginfo&quot;&gt;&lt;/a&gt;supporting split debuginfo&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/ByXfjiXu5 --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has not made any progress on this ambition since the start of the year (@pnkfelix: but the free form answer somewhat contradicts this)&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; As of today, we think this year’s planned goals for this ambition will be achieved in the next six months, and we think the most important parts of a solution will be available in the next six months.&lt;/p&gt;
@@ -339,6 +345,7 @@ team.&lt;/p&gt;
 &lt;p&gt;Future work is basically just stabilization of &lt;code&gt;-Csplit-debuginfo&lt;/code&gt; on Linux (Split DWARF); and of the currently-default options for the other platforms (for example, &lt;code&gt;-Csplit-debuginfo&#x3D;packed&lt;/code&gt; on Windows requires &lt;code&gt;-Zunstable-options&lt;/code&gt; despite being effectively the default if you don&#x27;t specify any flags).&lt;/p&gt;
 &lt;p&gt;The owner of this work, @davidtwco, intends to stick with the theme of debugging and contribute to the wg-debugging working group, but has also shifted attention to diagnostic translation they see that as an interesting area where they can have impact (and because the remaining implementation tasks for split debuginfo were completed as noted above).&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#better-integration-with-trace-based-debuggers&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;better-integration-with-trace-based-debuggers&quot;&gt;&lt;/a&gt;better integration with trace-based debuggers&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/BkJSsi7d5 --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has not made any progress on this ambition since the start of the year.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We do not think this year’s planned goals for this ambition will be achieved in the next six months;
@@ -353,6 +360,7 @@ allocate sufficient time to make headway here.&lt;/p&gt;
 &lt;code&gt;pernos.co&lt;/code&gt;&#x27;s click-on-terminal behavior, which jumps to the point in the
 control flow where that specific character was emitted to stdout/stderr.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#faster-builds-initiatives--️&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;faster-builds-initiatives--️&quot;&gt;&lt;/a&gt;Faster Builds Initiatives (👩‍💻, 🛠️)&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#faster-builds-initiatives--%EF%B8%8F&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/B1O2siXd9 --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year, and we think this year’s planned goals for this ambition will be achieved in the next six months. (Note that also we think our chosen problem is never-ending and will never be “resolved”.)&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;How it started:&lt;/strong&gt; at start of 2022, we had a solution or goal in mind, but did not have a plan for how to achieve it.&lt;/p&gt;
@@ -373,6 +381,7 @@ control flow where that specific character was emitted to stdout/stderr.&lt;/p&g
 &lt;p&gt;&lt;strong&gt;Regarding prioritization and focus:&lt;/strong&gt; If finding compiler performance wins gets too difficult, then the owners of this project may shift their focus elsewhere. Its worth noting, however, that one of the owners, @nnethercote, &lt;em&gt;was&lt;/em&gt; harboring those sorts of feelings before @lqd did their analysis identifying new opportunities for big wins. Thus, better data and analysis was sufficient to enable a new round of progress this time, but that may be harder to repeat in the future.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#expressiveness-initiatives--&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;expressiveness-initiatives--&quot;&gt;&lt;/a&gt;Expressiveness Initiatives (👩‍💻, 🦀)&lt;/h3&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#generic-associated-types&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;generic-associated-types&quot;&gt;&lt;/a&gt;Generic Associated Types&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#expressiveness-initiatives--&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/BkM83iX_9 --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We think this year’s planned goals for this ambition will be achieved in the next six months
@@ -385,6 +394,7 @@ and that the most important parts of a solution will likewise be available in th
 &lt;p&gt;For @jackh726, switching to getting NLL stabilized was a nice change of pace. In a sense, it was “low-hanging fruit” and was a helpful mental break from pushing so hard on GATs for the past year.&lt;/p&gt;
 &lt;p&gt;If @jackh726 hadn’t been working on GATs for the past year or so, they would have instead been pushing harder on Chalk and librarifcation. In particular, there are fundamental questions, e.g. associated type normalization, to solve there. Recent work with a-mir-formality has started to help answer those. In the meantime, GATs were at a state that they were “unblocked”, had significant interest, and are a requirement for other language (async fns in traits) and lib (LendingIterator) features.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#safe-transmute&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;safe-transmute&quot;&gt;&lt;/a&gt;safe transmute&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#expressiveness-initiatives--&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/HJ7Y3s7uq --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We think this year’s planned goals for this ambition will be achieved in the next six months;
@@ -407,6 +417,7 @@ Further more, we have completed some of our milestones; we think we have impleme
 &lt;p&gt;@jswrenn&#x27;s work on as-casting and enum reform has been slowed by their focus on safe transmute. @jswrenn is increasingly able to devote attention to enum reform, but most of their attention remains on project safe transmute; they believe safe transmute is critically important to writing safe, performant code.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#librarification-initiatives-️&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;librarification-initiatives-️&quot;&gt;&lt;/a&gt;Librarification Initiatives (🛠️)&lt;/h3&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#chalk&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;chalk&quot;&gt;&lt;/a&gt;Chalk&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#chalk&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/HyVh2sQdq --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We had no goals for this ambition planned for this year, but we made ad-hoc progress on the problem itself.
@@ -421,6 +432,7 @@ We have completed some of our milestones.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Regarding prioritization and focus:&lt;/strong&gt; This project has not been the main focus of anyone involved (this year).&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#aspirations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;aspirations&quot;&gt;&lt;/a&gt;Aspirations&lt;/h2&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#p-high-backlog-processing-aspirations-&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;p-high-backlog-processing-aspirations-&quot;&gt;&lt;/a&gt;P-high Backlog Processing Aspirations (🦀)&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#p-high-aspirations-&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/SkS1psm_c --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We had no goals for this ambition planned for this year, but we made ad-hoc progress on the problem itself
@@ -433,6 +445,7 @@ we have completed some of our milestones&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Details:&lt;/strong&gt; The Compiler team has instituted a policy that we will schedule a review of the P-high issues approximately every six weeks. The primary goal of the review is to ensure that every P-high issue has an owner, preferably in the form of an assigned working-group (and preferably a working-group that has a structured issue triage process), but it is also acceptable for the owner to be an individual, as long as there is evidence that the issue is not forgotten.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Regarding prioritization and focus:&lt;/strong&gt; We deliberately chose a low-frequency event to drive the review so that we would not be distracting from other work with this backlog processing. That is, we are giving this task some priority, but certainly not the highest priority, that is deliberate.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#debugging-aspirations-&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;debugging-aspirations-&quot;&gt;&lt;/a&gt;Debugging Aspirations (👩‍💻)&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-aspirations-&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/SyM2poXu9 --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; we had no goals for this ambition planned for this year, but we made ad-hoc progress on the problem itself
@@ -465,6 +478,7 @@ RFC 3191 was written and implemented by a new contributor (@ridwanabdillahi).&lt
 There isn&#x27;t much focus happening here currently.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#faster-builds-aspirations--️&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;faster-builds-aspirations--️&quot;&gt;&lt;/a&gt;Faster Builds Aspirations (👩‍💻, 🛠️)&lt;/h3&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#incremental-compilation-aspirations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;incremental-compilation-aspirations&quot;&gt;&lt;/a&gt;Incremental Compilation Aspirations&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#incremental-compilation-aspirations&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/B1D7CiX_c --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt;
 The Rust project has made progress on this ambition since the start of the year&lt;/p&gt;
@@ -487,6 +501,7 @@ The progress has been made in part thanks to @kckeiks.&lt;/p&gt;
 One of the owners, @cjgillot started a large refactor of lifetime resolution.
 This refactor allowed for faster progress in fixing a few old bugs.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#inter-crate-sharing-aspirations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;inter-crate-sharing-aspirations&quot;&gt;&lt;/a&gt;Inter-crate Sharing Aspirations&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#inter-crate-sharing-aspirations&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/zad1BjIoR8S4IfE49z-xYg --&gt;
 &lt;!-- (no survey response as of 2022-07-19) --&gt;
 &lt;p&gt;No survey response was provided; after following up, we confirmed with the
@@ -495,6 +510,7 @@ term because this would almost certainly require changes to Cargo, where changes
 are hard to push forward right now due to lack of reviewing capacity.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#expressiveness-aspirations--&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;expressiveness-aspirations--&quot;&gt;&lt;/a&gt;Expressiveness Aspirations (🦀, 👩‍💻)&lt;/h3&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#const-generics-and-const-eval&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-generics-and-const-eval&quot;&gt;&lt;/a&gt;const generics and const eval&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#expressiveness-aspirations--&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/HktiComdq --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We had no goals for this ambition planned for this year, but we made ad-hoc progress on the problem itself. We do not think a solution will be achieved in the next two years, but we do think it is a solvable problem&lt;/p&gt;
@@ -505,6 +521,7 @@ are hard to push forward right now due to lack of reviewing capacity.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Regarding prioritization and focus:&lt;/strong&gt; @lcnr has shifted to looking into general type system cleanups, because they believe that improving both the type system itself, and their understanding of it, will improve the experience of working on const generics and prevent us from making unnecessary mistakes in the future.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#librarification-aspirations-️&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;librarification-aspirations-️&quot;&gt;&lt;/a&gt;Librarification Aspirations (🛠️)&lt;/h3&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#mir-tooling-stable-mir-and-ghost-code&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;mir-tooling-stable-mir-and-ghost-code&quot;&gt;&lt;/a&gt;MIR tooling (stable-mir and ghost-code)&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#mir-tooling&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/CWcHnbOWReSUyPv0ZDdWaw --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year, but we do not think this year’s planned goals for this ambition will be achieved in the next six months.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We think a solution will be available in the next two years, but not sooner than six months.&lt;/p&gt;
@@ -517,6 +534,7 @@ This project has also shown that there are many different (and potentially confl
 Work has not yet started but the we believe that we have a solution.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#compiler-team-operations-aspirations-️&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;compiler-team-operations-aspirations-️&quot;&gt;&lt;/a&gt;Compiler Team Operations Aspirations (🛠️)&lt;/h3&gt;
 &lt;h4&gt;&lt;a href&#x3D;&quot;#mcve-reduction-tooling&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;mcve-reduction-tooling&quot;&gt;&lt;/a&gt;MCVE reduction tooling&lt;/h4&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#mcve-reduction-tooling&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/r19rJhmu5 --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has not made any progress on this ambition since the start of the year&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We had no goals for this ambition planned for this year, and made no progress on the problem it represents
@@ -526,6 +544,7 @@ We think a solution will be available in the next two years, but not sooner than
 &lt;p&gt;&lt;strong&gt;Details:&lt;/strong&gt; @pnkfelix continues to think that Rust-specific tooling to help contributors with MCVE reduction could be a real boon to the project.
 However, they have not dedicated any time to solving the problem.&lt;/p&gt;
 &lt;h4&gt;&lt;a href&#x3D;&quot;#performance-dashboard&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;performance-dashboard&quot;&gt;&lt;/a&gt;Performance Dashboard&lt;/h4&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#performance-dashboard&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/SyaDJ2X_5 --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We had no concrete goals for the dashboard, and representing performance is
@@ -545,6 +564,7 @@ We had long-standing debt on Crater and triagebot that needed to be addressed, a
 &lt;p&gt;@rylev believes that compiler performance remains, in their opinion, the largest and most persistent problem for Rust.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#compiler-backend-aspirations-️-&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;compiler-backend-aspirations-️-&quot;&gt;&lt;/a&gt;Compiler Backend Aspirations (🛠️, 👩‍💻)&lt;/h3&gt;
 &lt;h4&gt;&lt;a href&#x3D;&quot;#ease-writing-new-backends-via-intrinsic-mir-fallbacks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;ease-writing-new-backends-via-intrinsic-mir-fallbacks&quot;&gt;&lt;/a&gt;Ease writing new backends via intrinsic MIR fallbacks&lt;/h4&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#ease-writing-new-backends&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/HylMg2m_9 --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We had no goals for this ambition planned for this year, but we made ad-hoc progress on the problem itself.
@@ -557,6 +577,7 @@ help make progress on this&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Regarding new contributors:&lt;/strong&gt; There are no contributors who have or had committed to making progress on this. A compiler team member did make a step forward on this at one point, but they are unsurprisingly busy with other things.&lt;/p&gt;
 &lt;p&gt;Mentoring instructions, or even steps with minimal details, might help non-experts pick up work in the area.&lt;/p&gt;
 &lt;h4&gt;&lt;a href&#x3D;&quot;#cranelift&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cranelift&quot;&gt;&lt;/a&gt;Cranelift&lt;/h4&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#cranelift&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/BJLre2Xu9 --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; We had no goals for this ambition planned for this year, but we made ad-hoc progress on the problem itself.
@@ -568,6 +589,7 @@ With regards to the overall problem: In terms of getting cg_clif distributed wit
 &lt;p&gt;If @bjorn3 hadn’t started working on &lt;code&gt;cg_clif&lt;/code&gt; they probably wouldn’t have gained as much knowledge of the inner workings of rustc as they have now, nor contributed much to rustc. There are some more architectural changes that they want to make to rustc, but they probably wouldn’t get to them in the near future even if they stopped working on &lt;code&gt;cg_clif&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;With the codegen phase of debug mode builds getting faster with cg_clif in most cases, the bottleneck during debug mode compilation shifts away from codegen to the frontend. @bjorn3 wonders if maybe in the future they could try to see if the performance of the frontend can be improved by the same amount that cranelift improves the backend one way or another?&lt;/p&gt;
 &lt;h4&gt;&lt;a href&#x3D;&quot;#gcc-backend&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;gcc-backend&quot;&gt;&lt;/a&gt;GCC backend&lt;/h4&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#gcc-backend&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/T03Nu92NSLeyyYnnW3XFyg --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; we had no goals for this ambition planned for this year, but we made ad-hoc progress on the problem itself
@@ -592,6 +614,7 @@ and  we have completed some of our milestones&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Regarding prioritization and focus:&lt;/strong&gt; @antoyo says some importants things we&#x27;re not doing because we focus on this project is making the rustc_codegen_ssa API more convenient for the backends other than LLVM. That&#x27;s something they eventually want to work on.&lt;/p&gt;
 &lt;p&gt;When the GCC backend is good enough and when the Rust for Linux project is ready to start experimenting with it, it might be worth it to help other areas support new architectures for Rust: adding the arch specs to rustc, adding the support for those architectures in some crates like &lt;code&gt;libc&lt;/code&gt; and &lt;code&gt;object&lt;/code&gt;.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#diagnostics-aspirations-&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;diagnostics-aspirations-&quot;&gt;&lt;/a&gt;Diagnostics Aspirations (👩‍💻)&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#diagnostics-aspirations-&quot;&gt;Description from February&lt;/a&gt;&lt;/p&gt;
 &lt;!-- https://hackmd.io/@rust-compiler-team/HJ_cgnXd5 --&gt;
 &lt;p&gt;&lt;strong&gt;Progress:&lt;/strong&gt; The Rust project has made progress on this ambition since the start of the year&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Goals:&lt;/strong&gt; we didn’t have “planned goals” for the year, but we did accomplish lots of incremental improvements and started the translation infrastructure which has been in our wishlist for years.
@@ -636,6 +659,173 @@ capacity to address A after B has been addressed. But, since this is open
 source, it&#x27;s very much a matter of how much excitement each ambition can build up
 around its particular project, and how attractive they can make contribution be
 to newcomers.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#faq&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;faq&quot;&gt;&lt;/a&gt;FAQ&lt;/h2&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#how-can-i-contact-an-items-owners-or-sponsor-their-work-on-rust&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-can-i-contact-an-items-owners-or-sponsor-their-work-on-rust&quot;&gt;&lt;/a&gt;How can I contact an item&#x27;s owners or sponsor their work on Rust?&lt;/h4&gt;
+&lt;p&gt;This table lists the item owners mentioned above, their &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/&quot;&gt;Zulip&lt;/a&gt; username and if they are accepting sponsorships to help them work on Rust:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Owner&lt;/th&gt;
+&lt;th&gt;Zulip Username&lt;/th&gt;
+&lt;th&gt;Accepting sponsorships?&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/Aaron1011&quot;&gt;Aaron Hill&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@Aaron Hill&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/antoyo&quot;&gt;antoyo&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@antoyo&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Yes: &lt;a href&#x3D;&quot;https://github.com/sponsors/antoyo&quot;&gt;GitHub Sponsors&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/apiraino&quot;&gt;apiraino&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@apiraino&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/bjorn3&quot;&gt;bjorn3&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@bjorn3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Yes: &lt;a href&#x3D;&quot;https://liberapay.com/bjorn3&quot;&gt;Liberapay&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/cjgillot&quot;&gt;cjgillot&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@cjgillot&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/davidtwco&quot;&gt;davidtwco&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@davidtwco&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No: works on Rust at Huawei R&amp;amp;D UK&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/estebank&quot;&gt;estebank&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@Esteban Küber&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No: works on Rust at Amazon Web Services&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/jackh726&quot;&gt;jackh726&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@Jack Huey&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/jswrenn&quot;&gt;jswrenn&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@Jack Wrenn&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No: works on Rust at Amazon Web Services&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/lcnr&quot;&gt;lcnr&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@lcnr&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Yes: &lt;a href&#x3D;&quot;https://lcnr.de/funding/&quot;&gt;https://lcnr.de/funding/&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/lqd&quot;&gt;lqd&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@lqd&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No: sponsored by the Internet Security Research Group&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/Mark-Simulacrum&quot;&gt;Mark-Simulacrum&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@simulacrum&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/michaelwoerister&quot;&gt;michaelwoerister&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@mw&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No: works on Rust at Microsoft&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/nikomatsakis&quot;&gt;nikomatsakis&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@nikomatsakis&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No: works on Rust at Amazon Web Services&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/nnethercote&quot;&gt;nnethercote&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@nnethercote&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No: works on Rust at Futurewei&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/oli-obk&quot;&gt;oli-obk&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@oli&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No: works on Rust at Amazon Web Services&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/pnkfelix&quot;&gt;pnkfelix&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@pnkfelix&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No: works on Rust at Amazon Web Services&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rylev&quot;&gt;rylev&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@rylev&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No: works on Rust at Microsoft&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/scottmcm&quot;&gt;scottmcm&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@scottmcm&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/tmandry&quot;&gt;tmandry&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@tmandry&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No: works on Rust at Google&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/wesleywiser&quot;&gt;wesleywiser&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@Wesley Wiser&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No: works on Rust at Microsoft&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/xldenis&quot;&gt;xldenis&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@Xavier Denis&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;!-- [antoyo zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/404242-user404242 --&gt; &lt;!-- @**antoyo** --&gt;
+&lt;!-- antoyo sponsorship: https://github.com/sponsors/antoyo --&gt;
+&lt;!-- [Aaron Hill zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116083-user116083 --&gt; &lt;!-- @**Aaron Hill** --&gt;
+&lt;!-- Aaron1011: no affiliation --&gt;
+&lt;!-- [bjorn3 zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/133247-user133247 --&gt; &lt;!-- @**bjorn3**  --&gt;
+&lt;!-- bjorn3 donation page: https://liberapay.com/bjorn3 --&gt;
+&lt;!-- [cjgillot zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/248906-user248906 --&gt; &lt;!-- @**cjgillot**  --&gt;
+&lt;!-- no response from cjgillot re affiliation yet --&gt;
+&lt;!-- [davidtwco zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/248906-user248906 --&gt; &lt;!-- @**davidtwco**  --&gt;
+&lt;!-- davidtwco affiliation: &quot;Huawei R&amp;D UK&quot;--&gt;
+&lt;!-- [estebank zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/119031-user119031 --&gt; &lt;!-- @**Esteban Küber** --&gt;
+&lt;!-- estebank affiliation: AWS --&gt;
+&lt;!-- [lcnr zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/216206-user216206 --&gt; &lt;!-- @**lcnr** --&gt;
+&lt;!-- lcnr sponsorship: https://lcnr.de/funding/ --&gt;
+&lt;!-- [michaelwoerister zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/124287-user124287 --&gt; &lt;!-- @**mw** --&gt;
+&lt;!-- michaelwoerister affiliation: MS --&gt;
+&lt;!-- [nikomatsakis zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116009-user116009 --&gt; &lt;!-- @**nikomatsakis** --&gt;
+&lt;!-- nikomatsakis affiliation: AWS --&gt;
+&lt;!-- [oli-obk zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/124288-user124288 --&gt; &lt;!-- @**oli** --&gt;
+&lt;!-- oli affiliation: AWS --&gt;
+&lt;!-- [jackh726 zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/232957-user232957 --&gt; &lt;!-- @**Jack Huey** --&gt;
+&lt;!-- jackh726: no affiliation --&gt;
+&lt;!-- [lqd zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116113-user116113 --&gt; &lt;!-- @**lqd**  --&gt;
+&lt;!-- lqd affiliation: ISRG --&gt;
+&lt;!-- [nnethercote zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/120989-user120989 --&gt; &lt;!-- @**nnethercote**  --&gt;
+&lt;!-- nnethercote affiliation: Futurewei --&gt;
+&lt;!-- [tmandry zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116883-user116883 --&gt; &lt;!-- @**tmandry**  --&gt;
+&lt;!-- tmandry affiliation: Google (TBD) --&gt;
+&lt;!-- [scottmcm zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/125270-user125270 --&gt; &lt;!-- @**scottmcm**  --&gt;
+&lt;!-- scottmcm: no affiliation --&gt;
+&lt;!-- [pnkfelix zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116083-user116083  --&gt; &lt;!-- @**pnkfelix**  --&gt;
+&lt;!-- pnkfelix affiliation: AWS --&gt;
+&lt;!-- [wesleywiser zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/125250-user125250 --&gt; &lt;!-- @**Wesley Wiser**  --&gt;
+&lt;!-- wesleywiser affiliation: MS --&gt;
+&lt;!-- [jswrenn zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/219211-user219211 --&gt; &lt;!-- @**Jack Wrenn** --&gt;
+&lt;!-- jswrenn affiliation: AWS --&gt;
+&lt;!-- [apiraino zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/250987-user250987 --&gt; &lt;!-- @**apiraino**  --&gt;
+&lt;!-- apiraino: no affiliation --&gt;
+&lt;!-- [simulacrum zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116122-user116122 --&gt; &lt;!-- @**simulacrum**  --&gt;
+&lt;!-- simulacrum sponsorship: https://github.com/sponsors/Mark-Simulacrum --&gt;
+&lt;!-- [rylev zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/224872-user224872 --&gt; &lt;!-- @**rylev**  --&gt;
+&lt;!-- rylev affiliation: MS --&gt;
+&lt;!-- [xldenis zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/312719-user312719 --&gt; &lt;!-- @**Xavier Denis**  --&gt;
 &lt;section class&#x3D;&quot;footnotes&quot;&gt;
 &lt;ol&gt;
 &lt;li id&#x3D;&quot;fn1&quot;&gt;
