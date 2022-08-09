@@ -802,3 +802,101 @@ capacity to address A after B has been addressed. But, since this is open
 source, it's very much a matter of how much excitement each ambition can build up
 around its particular project, and how attractive they can make contribution be
 to newcomers.
+
+## FAQ
+
+#### How can I contact an item's owners or sponsor their work on Rust?
+
+This table lists the item owners mentioned above, their [Zulip] username and if they are accepting sponsorships to help them work on Rust:
+
+Owner | Zulip Username | Accepting sponsorships?
+-|-|-
+[Aaron Hill] | `@Aaron Hill` | No
+[antoyo] | `@antoyo` | Yes: [GitHub Sponsors](https://github.com/sponsors/antoyo)
+[apiraino] | `@apiraino` | No
+[bjorn3] | `@bjorn3` | Yes: [Liberapay](https://liberapay.com/bjorn3)
+[cjgillot] | `@cjgillot` | No
+[davidtwco] | `@davidtwco` | No: works on Rust at Huawei R&D UK
+[estebank] | `@Esteban Küber` | No: works on Rust at Amazon Web Services
+[jackh726] | `@Jack Huey` | No
+[jswrenn] | `@Jack Wrenn` | No: works on Rust at Amazon Web Services
+[lcnr] | `@lcnr` | Yes: [https://lcnr.de/funding/](https://lcnr.de/funding/)
+[lqd] | `@lqd` | No: sponsored by the Internet Security Research Group
+[Mark-Simulacrum] | `@simulacrum` | Yes, [GitHub Sponsors](https://github.com/sponsors/Mark-Simulacrum)
+[michaelwoerister] | `@mw` | No: works on Rust at Microsoft
+[nikomatsakis] | `@nikomatsakis` | No: works on Rust at Amazon Web Services
+[nnethercote] | `@nnethercote` | No: works on Rust at Futurewei
+[oli-obk] | `@oli` | No: works on Rust at Amazon Web Services
+[pnkfelix] | `@pnkfelix` | No: works on Rust at Amazon Web Services
+[rylev] | `@rylev` | No: works on Rust at Microsoft
+[scottmcm] | `@scottmcm` | No
+[tmandry] | `@tmandry` | No: works on Rust at Google
+[wesleywiser] | `@Wesley Wiser` | No: works on Rust at Microsoft
+[xldenis] | `@Xavier Denis` | No
+
+[antoyo]: https://github.com/antoyo
+<!-- [antoyo zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/404242-user404242 --> <!-- @**antoyo** -->
+<!-- antoyo sponsorship: https://github.com/sponsors/antoyo -->
+[Aaron Hill]: https://github.com/Aaron1011
+<!-- [Aaron Hill zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116083-user116083 --> <!-- @**Aaron Hill** -->
+<!-- Aaron1011: no affiliation -->
+[bjorn3]: https://github.com/bjorn3
+<!-- [bjorn3 zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/133247-user133247 --> <!-- @**bjorn3**  -->
+<!-- bjorn3 donation page: https://liberapay.com/bjorn3 -->
+[cjgillot]: https://github.com/cjgillot
+<!-- [cjgillot zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/248906-user248906 --> <!-- @**cjgillot**  -->
+<!-- no response from cjgillot re affiliation yet -->
+[davidtwco]: https://github.com/davidtwco
+<!-- [davidtwco zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/248906-user248906 --> <!-- @**davidtwco**  -->
+<!-- davidtwco affiliation: "Huawei R&D UK"-->
+[estebank]: https://github.com/estebank
+<!-- [estebank zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/119031-user119031 --> <!-- @**Esteban Küber** -->
+<!-- estebank affiliation: AWS -->
+[lcnr]: https://github.com/lcnr
+<!-- [lcnr zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/216206-user216206 --> <!-- @**lcnr** -->
+<!-- lcnr sponsorship: https://lcnr.de/funding/ -->
+[michaelwoerister]: https://github.com/michaelwoerister
+<!-- [michaelwoerister zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/124287-user124287 --> <!-- @**mw** -->
+<!-- michaelwoerister affiliation: MS -->
+[nikomatsakis]: https://github.com/nikomatsakis
+<!-- [nikomatsakis zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116009-user116009 --> <!-- @**nikomatsakis** -->
+<!-- nikomatsakis affiliation: AWS -->
+[oli-obk]: https://github.com/oli-obk
+<!-- [oli-obk zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/124288-user124288 --> <!-- @**oli** -->
+<!-- oli affiliation: AWS -->
+[jackh726]: https://github.com/jackh726
+<!-- [jackh726 zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/232957-user232957 --> <!-- @**Jack Huey** -->
+<!-- jackh726: no affiliation -->
+[lqd]: https://github.com/lqd
+<!-- [lqd zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116113-user116113 --> <!-- @**lqd**  -->
+<!-- lqd affiliation: ISRG -->
+[nnethercote]: https://github.com/nnethercote
+<!-- [nnethercote zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/120989-user120989 --> <!-- @**nnethercote**  -->
+<!-- nnethercote affiliation: Futurewei -->
+[tmandry]: https://github.com/tmandry
+<!-- [tmandry zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116883-user116883 --> <!-- @**tmandry**  -->
+<!-- tmandry affiliation: Google (TBD) -->
+[scottmcm]: https://github.com/scottmcm
+<!-- [scottmcm zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/125270-user125270 --> <!-- @**scottmcm**  -->
+<!-- scottmcm: no affiliation -->
+[pnkfelix]: https://github.com/pnkfelix
+<!-- [pnkfelix zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116083-user116083  --> <!-- @**pnkfelix**  -->
+<!-- pnkfelix affiliation: AWS -->
+[wesleywiser]: https://github.com/wesleywiser
+<!-- [wesleywiser zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/125250-user125250 --> <!-- @**Wesley Wiser**  -->
+<!-- wesleywiser affiliation: MS -->
+[jswrenn]: https://github.com/jswrenn
+<!-- [jswrenn zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/219211-user219211 --> <!-- @**Jack Wrenn** -->
+<!-- jswrenn affiliation: AWS -->
+[apiraino]: https://github.com/apiraino
+<!-- [apiraino zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/250987-user250987 --> <!-- @**apiraino**  -->
+<!-- apiraino: no affiliation -->
+[Mark-Simulacrum]: https://github.com/Mark-Simulacrum
+<!-- [simulacrum zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/116122-user116122 --> <!-- @**simulacrum**  -->
+<!-- simulacrum sponsorship: https://github.com/sponsors/Mark-Simulacrum -->
+[rylev]: https://github.com/rylev
+<!-- [rylev zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/224872-user224872 --> <!-- @**rylev**  -->
+<!-- rylev affiliation: MS -->
+[xldenis]: https://github.com/xldenis
+<!-- [xldenis zulip PM]: https://rust-lang.zulipchat.com/#narrow/pm-with/312719-user312719 --> <!-- @**Xavier Denis**  -->
+
