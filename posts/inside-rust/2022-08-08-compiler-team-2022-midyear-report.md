@@ -855,6 +855,8 @@ to newcomers.
 
 This table lists the item owners mentioned above, their [Zulip] username and if they are accepting sponsorships to help them work on Rust:
 
+[Zulip]: https://rust-lang.zulipchat.com/
+
 Owner | Zulip Username | Accepting sponsorships?
 -|-|-
 [Aaron Hill] | `@Aaron Hill` | No
