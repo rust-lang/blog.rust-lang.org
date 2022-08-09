@@ -218,7 +218,7 @@ It is not effective to fix bugs that users will never encounter in practice when
 
 ### async traits
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#async-traits)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#async-traits)
 
 <!-- https://hackmd.io/@rust-compiler-team/H1eW9oXdc -->
 
@@ -251,7 +251,7 @@ We have an async stakeholders group that we use for this kind of input, but have
 
 ### async crashdump dissection
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#async-crashdump-dissection)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#async-crashdump-dissection)
 
 <!-- https://hackmd.io/@rust-compiler-team/SJYL9iQ_9 -->
 
@@ -274,7 +274,7 @@ The two main obstacles are:
 
 ### wg-debugging
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-)
 
 <!-- https://hackmd.io/@rust-compiler-team/HJOtiiQOq -->
 
@@ -293,7 +293,7 @@ and we have completed some of our milestones. Furthermore, (some of) our work ha
 
 ### improving debuginfo quality
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-)
 
 <!-- https://hackmd.io/@rust-compiler-team/HJQ25sXOq -->
 
@@ -329,7 +329,7 @@ team.
 
 ### supporting split debuginfo
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-)
 
 <!-- https://hackmd.io/@rust-compiler-team/ByXfjiXu5 -->
 
@@ -351,7 +351,7 @@ The owner of this work, @davidtwco, intends to stick with the theme of debugging
 
 ### better integration with trace-based debuggers
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-initiatives-)
 
 <!-- https://hackmd.io/@rust-compiler-team/BkJSsi7d5 -->
 
@@ -375,7 +375,7 @@ control flow where that specific character was emitted to stdout/stderr.
 
 ### Faster Builds Initiatives (👩‍💻, 🛠️)
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#faster-builds-initiatives--%EF%B8%8F)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#faster-builds-initiatives--%EF%B8%8F)
 
 <!-- https://hackmd.io/@rust-compiler-team/B1O2siXd9 -->
 
@@ -402,7 +402,7 @@ control flow where that specific character was emitted to stdout/stderr.
 
 ### Generic Associated Types
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#expressiveness-initiatives--)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#expressiveness-initiatives--)
 
 <!-- https://hackmd.io/@rust-compiler-team/BkM83iX_9 -->
 
@@ -427,7 +427,7 @@ If @jackh726 hadn’t been working on GATs for the past year or so, they would h
 
 ### safe transmute
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#expressiveness-initiatives--)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#expressiveness-initiatives--)
 
 <!-- https://hackmd.io/@rust-compiler-team/HJ7Y3s7uq -->
 
@@ -463,7 +463,7 @@ With the mentoring provided by @oli-obk and an influx of interest and help from 
 
 ### Chalk
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#chalk)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#chalk)
 
 <!-- https://hackmd.io/@rust-compiler-team/HyVh2sQdq -->
 
@@ -489,7 +489,7 @@ We have completed some of our milestones.
 
 ### P-high Backlog Processing Aspirations (🦀)
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#p-high-aspirations-)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#p-high-aspirations-)
 
 <!-- https://hackmd.io/@rust-compiler-team/SkS1psm_c -->
 
@@ -514,7 +514,7 @@ We think a solution will be available in the next two years, but not sooner than
 
 ### Debugging Aspirations (👩‍💻)
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-aspirations-)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#debugging-aspirations-)
 
 <!-- https://hackmd.io/@rust-compiler-team/SyM2poXu9 -->
 
@@ -548,7 +548,7 @@ There isn't much focus happening here currently.
 
 ### Incremental Compilation Aspirations
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#incremental-compilation-aspirations)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#incremental-compilation-aspirations)
 
 <!-- https://hackmd.io/@rust-compiler-team/B1D7CiX_c -->
 
@@ -591,7 +591,7 @@ This refactor allowed for faster progress in fixing a few old bugs.
 
 ### Inter-crate Sharing Aspirations
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#inter-crate-sharing-aspirations)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#inter-crate-sharing-aspirations)
 
 <!-- https://hackmd.io/zad1BjIoR8S4IfE49z-xYg -->
 <!-- (no survey response as of 2022-07-19) -->
@@ -605,7 +605,7 @@ are hard to push forward right now due to lack of reviewing capacity.
 
 ### const generics and const eval
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#expressiveness-aspirations--)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#expressiveness-aspirations--)
 
 <!-- https://hackmd.io/@rust-compiler-team/HktiComdq -->
 
@@ -627,7 +627,7 @@ are hard to push forward right now due to lack of reviewing capacity.
 
 ### MIR tooling (stable-mir and ghost-code)
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#mir-tooling)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#mir-tooling)
 
 <!-- https://hackmd.io/CWcHnbOWReSUyPv0ZDdWaw -->
 
@@ -651,7 +651,7 @@ Work has not yet started but the we believe that we have a solution.
 
 #### MCVE reduction tooling
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#mcve-reduction-tooling)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#mcve-reduction-tooling)
 
 <!-- https://hackmd.io/@rust-compiler-team/r19rJhmu5 -->
 
@@ -669,7 +669,7 @@ However, they have not dedicated any time to solving the problem.
 
 #### Performance Dashboard
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#performance-dashboard)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#performance-dashboard)
 
 <!-- https://hackmd.io/@rust-compiler-team/SyaDJ2X_5 -->
 
@@ -702,7 +702,7 @@ We had long-standing debt on Crater and triagebot that needed to be addressed, a
 
 #### Ease writing new backends via intrinsic MIR fallbacks
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#ease-writing-new-backends)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#ease-writing-new-backends)
 
 <!-- https://hackmd.io/@rust-compiler-team/HylMg2m_9 -->
 
@@ -726,7 +726,7 @@ Mentoring instructions, or even steps with minimal details, might help non-exper
 
 #### Cranelift
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#cranelift)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#cranelift)
 
 <!-- https://hackmd.io/@rust-compiler-team/BJLre2Xu9 -->
 
@@ -749,7 +749,7 @@ With the codegen phase of debug mode builds getting faster with cg_clif in most 
 
 #### GCC backend
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#gcc-backend)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#gcc-backend)
 
 <!-- https://hackmd.io/T03Nu92NSLeyyYnnW3XFyg -->
 
@@ -783,7 +783,7 @@ When the GCC backend is good enough and when the Rust for Linux project is ready
 
 ### Diagnostics Aspirations (👩‍💻)
 
-[Description from Feburary](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#diagnostics-aspirations-)
+[Description from February](https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html#diagnostics-aspirations-)
 
 <!-- https://hackmd.io/@rust-compiler-team/HJ_cgnXd5 -->
 
@@ -870,7 +870,7 @@ Owner | Zulip Username | Accepting sponsorships?
 [jswrenn] | `@Jack Wrenn` | No: works on Rust at Amazon Web Services
 [lcnr] | `@lcnr` | Yes: [https://lcnr.de/funding/](https://lcnr.de/funding/)
 [lqd] | `@lqd` | No: sponsored by the Internet Security Research Group
-[Mark-Simulacrum] | `@simulacrum` | Yes, [GitHub Sponsors](https://github.com/sponsors/Mark-Simulacrum)
+[Mark-Simulacrum] | `@simulacrum` | No
 [michaelwoerister] | `@mw` | No: works on Rust at Microsoft
 [nikomatsakis] | `@nikomatsakis` | No: works on Rust at Amazon Web Services
 [nnethercote] | `@nnethercote` | No: works on Rust at Futurewei
