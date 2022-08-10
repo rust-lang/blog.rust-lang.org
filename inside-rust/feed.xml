@@ -10,8 +10,28 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-08-09T17:34:47+00:00</updated>
+    <updated>2022-08-10T12:15:23+00:00</updated>
 
+    
+    <entry>
+        <title>Please welcome Dan to Library Contributors</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/08/10/libs-contributors.html" type="text/html" title="Please welcome Dan to Library Contributors" />
+        <published>2022-08-10T00:00:00+00:00</published>
+        <updated>2022-08-10T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/08/10/libs-contributors.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/08/10/libs-contributors.html">&lt;p&gt;Please welcome &lt;a href&#x3D;&quot;https://github.com/sunfishcode&quot;&gt;Dan Gohman&lt;/a&gt; to the
+&lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/library#libs-contributors&quot;&gt;Library Contributors&lt;/a&gt; group!&lt;/p&gt;
+&lt;p&gt;You might know Dan from his work on
+&lt;a href&#x3D;&quot;https://wasmtime.dev/&quot;&gt;Wasmtime&lt;/a&gt;, WASI, the recent &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/3128-io-safety.html&quot;&gt;I/O Safety RFC&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://crates.io/crates/cap-std&quot;&gt;cap-std&lt;/a&gt;, &lt;a href&#x3D;&quot;https://crates.io/crates/rustix&quot;&gt;rustix&lt;/a&gt;,
+or one of his many (often WASI or I/O related) contributions to the Rust standard library.&lt;/p&gt;
+&lt;p&gt;Congratulations Dan, and thanks for everything you do!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mara Bos</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.63.0 pre-release testing</title>
@@ -1394,108 +1414,6 @@ to drive the meeting.&lt;/p&gt;
 
         <author>
             <name>Khionu Sybiern</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Governance Update</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html" type="text/html" title="Governance Update" />
-        <published>2022-05-19T00:00:00+00:00</published>
-        <updated>2022-05-19T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html">&lt;p&gt;Last month, the core team, all the leads of top-level teams, the moderators, and the project representatives on the Rust Foundation board jointly sent out an update to all Rust project members on investigations happening into improvements to the governance of the Rust project.&lt;/p&gt;
-&lt;p&gt;As is detailed in the update, this report follows extensive conversations with many inside of the project and will continue as we encourage others in the project to reach out should they have feedback or want to get involved.&lt;/p&gt;
-&lt;p&gt;Since proper governance of the Rust project impacts all users of Rust, we thought it appropriate to also make this summary public. While typos and grammatical fixes have been made since the original post, the text is otherwise unaltered. &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;p&gt;As is noted in the summary, the next steps are to take the findings we have so far and begin crafting proposals for how the Rust project will be governed in the future. This will eventually lead to RFCs or similar documents with concrete proposals.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;From: Ryan Levick&lt;br /&gt;
-To: All members of the Rust project&lt;br /&gt;
-Date: Mon, 11 Apr 2022 18:27:00 UTC&lt;br /&gt;
-Subject: Rust Governance Update&lt;/p&gt;
-&lt;p&gt;Hey @all,&lt;/p&gt;
-&lt;p&gt;We’d like to provide you with an update to our email from December about the issue that led to the resignation of the moderation team in November. In that email, we indicated that we had three high-level goals:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Improve how we handle complex moderation issues.&lt;/li&gt;
-&lt;li&gt;Bring the specific moderation issue at the center of the disagreement to an adequate resolution.&lt;/li&gt;
-&lt;li&gt;Adapt the governance structure of Rust to better handle the needs of our ever growing project.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;In order to accomplish these goals the following actions were taken place:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;We have established better communication channels between the core team, the moderation team, project representatives on the Rust Foundation, and all top-level team leads. Concretely, we’ve established a Zulip chat with everyone for those groups so that we can quickly and confidently reach consensus on how to approach sensitive items related to project management and governance. This has led to better communication around project management issues and allowed for healthy, productive, and good faith collaboration among all project leads. While there are many different ways we can and will improve how project management is done in the Rust project, it was important that we reach a healthy and productive steady state, and we believe we have been able to do so.&lt;/li&gt;
-&lt;li&gt;We have begun exploring possible avenues forward for improving how we handle complex moderation cases including the specific moderation issue in question. While we won’t be diving into detail about this topic in this email, there has been some early progress on better understanding the complexity of this issue. We expect the moderation team in conjunction with project leads to bring forward concrete proposals in the future though this work is somewhat blocked on the next point.&lt;/li&gt;
-&lt;li&gt;In pursuit of the ultimate goal of designing and implementing a revised governance structure for Rust, we have been talking with project members to try to deeply understand the requirements of any such governance structure. This process has started with many different conversations with folks from across the project including over 20 formal interviews of project leaders on the needs of Rust project governance. The remainder of this email will be an attempt to outline our initial findings as well as next steps and opportunities for those who are interested to get more involved.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#your-opportunity-to-participate&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;your-opportunity-to-participate&quot;&gt;&lt;/a&gt;Your opportunity to participate&lt;/h3&gt;
-&lt;p&gt;First, while we believe we are honing in on a clear understanding of the needs for Rust governance, the conversation is not (and likely will never be) over. If you’d like to participate yourself, you can find the interview questions we have used &lt;a href&#x3D;&quot;https://hackmd.io/@ryanlevick/By2RKtMec&quot;&gt;here&lt;/a&gt;. Write your answers in whatever form you wish, and send them back to Mara or me so they can be incorporated into our notes. Please note that your answers will not be shared with anyone and will only be reflected in documents that attempt to summarize overall feedback from project members.&lt;/p&gt;
-&lt;p&gt;We encourage anyone interested in participating to complete the interview before reading the following summary of our findings so far. While every interview brings us closer to a complete understanding of the project management needs of the Rust project, nothing is final yet, and all project members will have the opportunity to provide feedback on any concrete proposals brought forth (most likely in the form of RFCs).&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#requirements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;requirements&quot;&gt;&lt;/a&gt;Requirements&lt;/h2&gt;
-&lt;p&gt;The following is a list of requirements for Rust governance. Some of these requirements are already met by the current governance structure.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Independent and autonomous teams&lt;/strong&gt;: Almost all decision making should be made at the team level. Teams should have the ability to decide their own directions and have the ultimate authority over their respective piece of the project.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Cross team collaboration&lt;/strong&gt;: Collaboration between teams should be very high. This ensures teams can make decisions in the context of the larger project and not just within their own silo.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Accountable teams&lt;/strong&gt;: Teams should be held accountable to each other for their work. There should be mechanisms for ensuring teams are meeting other team’s expectations and fulfilling their obligations to other teams.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Centralized leadership&lt;/strong&gt;: While the majority of decisions are owned by and made by independent teams, some decisions affect the entire project. Any such decisions that are not in the purview of one or more specific teams are made by a centralized, accountable leadership body.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Accountable leadership&lt;/strong&gt;: The leadership body should be a structure that has representation and buy-in from all project teams. Additionally, the membership of this group should be chosen transparently, should have large buy-in from other project members, and should be at least reaffirmed relatively often. Lastly, membership in the leadership group requires participation in the wider project and therefore membership in leadership cannot be the exclusive way for someone to participate in the project.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Explicit and well-defined structure&lt;/strong&gt;: How the project is structured, who the decision makers are, and how decisions are made should be relatively transparent to both project participants and outsiders. While informal relationships and other soft power mechanisms exist, most collaboration happens transparently and openly.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Structures for project management and administration&lt;/strong&gt;: There should be mechanisms independent from decision making that perform functions of project management and administration.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Project leaders are not always technical leaders&lt;/strong&gt;: While it may be preferable for some of those who lead technical matters to hold project management leadership positions, being in a leadership position in the project should not require also being in a technical leadership role. In other words, the best language designers don’t necessarily make the best open source project leaders.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Flexibility&lt;/strong&gt;: Project structure should be fluid enough to account for the fact that project members always contribute on a volunteer basis (even if they are paid by others for their volunteering), and this means that they are free to leave the project and change what they dedicate their time to whenever they want.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Relatively little bureaucracy&lt;/strong&gt;: It’s important that the amount of project governance overhead and bureaucracy be as little as possible.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Approachable by outsiders&lt;/strong&gt;: Many outside of the Rust project (e.g., users, potential users, other projects, press, partners, etc.) may wish to engage with the Rust project for a variety of reasons. This process should be clear and straightforward.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#under-resourced-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;under-resourced-work&quot;&gt;&lt;/a&gt;Under resourced work&lt;/h2&gt;
-&lt;p&gt;The following is a list of work that is not receiving the amount of investment that it should be receiving. Our governance structure should ensure that this work receives the proper attention.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Policy development&lt;/strong&gt;: Individual teams do a decent job of ensuring they have proper policies, but there are a few problems with this:
-&lt;ul&gt;
-&lt;li&gt;Lack of accountability for when a lack of policy might be causing issues&lt;/li&gt;
-&lt;li&gt;Lack of support in writing policies&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Project structure documentation&lt;/strong&gt;: the structure of the project has practical implications. For example, representation in leadership, permissions, inclusion in project communications, etc. No team is in charge of ensuring this structure is properly documented&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Diversity efforts&lt;/strong&gt;: while some teams may take it on themselves to do diversity work, there is no one responsible for this at the project level&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Identifying gaps&lt;/strong&gt;: Teams do a good job of servicing their own existing needs but sometimes lack the context to know if other needs outside of their purview are being taken care of.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Contributor pipeline improvements&lt;/strong&gt;: Teams often do great work to improve their own workflow, but this assumes contributors are able to find the team they want to contribute on.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Conflict resolution&lt;/strong&gt;: Project members don’t always agree and in certain situations a positive outcome cannot be reached without the involvement of those outside that conflict.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Supporting team leads&lt;/strong&gt;: Some leads might be new to leadership and leadership in a vacuum without the support of others is hard. Team leads should not need to rely on personal, private relationships to get the support they need.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Project self-reflection&lt;/strong&gt;: instead of waiting for a crisis to occur before addressing issues, the governance structures should have mechanisms for automatically self correcting (i.e., doing the work that Mara and Ryan are doing now on a more regular basis)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Reporting progress&lt;/strong&gt;: there is a &lt;em&gt;lot&lt;/em&gt; that happens in the Rust project much of which is not reported on. Having some mechanism for better ensuring that everyone has a good overview of what is happening in the project.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Active community management&lt;/strong&gt;: actively fostering the culture of the Rust project&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Marketing&lt;/strong&gt;: the project had previously done more marketing around Rust usage - this work has largely moved to being performed exclusively by individuals&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Public relations&lt;/strong&gt;: The Rust project has obligations to speak to the outside world (i.e., press, companies, educational institutions, other OSS projects, etc.)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;User outreach&lt;/strong&gt;: while PR is a push mechanism, the project also needs some sort of pull mechanism for engaging with users and understanding their needs rather than solely relying on the individual insights that contributors bring.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Vision work&lt;/strong&gt;: establishing high level project wide goals that cross between team boundaries.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#failure-modes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;failure-modes&quot;&gt;&lt;/a&gt;Failure modes&lt;/h2&gt;
-&lt;p&gt;The following are a list of identified failure modes that we want to ensure we avoid when discussing a new governance structure:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Lack of resources for admin/project management work&lt;/strong&gt;: Administrative and project management work is typically less resourced than technical work. Volunteers are typically more drawn towards technical work, and companies tend to fund technical work since they will more easily see a return on that investment. A properly running project is viewed as “table stakes” and thus less likely to see investment without purposeful resource allocation. A failure mode would be not having admin/project management functions be funded and eventually withering away leaving that work not done or done by those who are already busy with other concerns.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Project leadership not held accountable&lt;/strong&gt;: Many teams depend on the work of other teams for their own success. When a team feels another team is not delivering on what they need to succeed, this can lead to cascading failures or even outright conflict. Holding others accountable can be difficult because it requires clear expectations, channels for delivering clear and actionable feedback, consequences for consistently not living up to expectations, and mechanisms for handling conflict should it arise.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Project leadership detached from project&lt;/strong&gt;: As the project grows in complexity so does that admin/project management overhead. It is possible for a project wide decision making body to lose touch with goings-on in the project as they become busy due to this overhead. There are two ways this can manifest itself: the leadership body fails to keep up with what’s happening in the project and/or the project members lose sight of the leadership body leading to degraded authority. A failure mode would be that the project leadership body becomes detached from the project and the two effectively start acting independently.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;An overworked leadership body&lt;/strong&gt;: Many of the requirements described above assume a leadership body with the authority to make decisions. Additionally, the leadership body needs to derive its authority from its members involvement in the rest of the project. A possible failure mode is that the leadership body is tasked with more and more responsibility making it harder for its members to keep up with their responsibilities both inside and outside of that leadership body. The more members begin to focus on their work inside the leadership body, the less they can derive their authority from their work outside that body. Additionally, authority should be largely distributed and so an overworked leadership team is a sign of a failure to properly delegate authority.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Lack of delegated authority&lt;/strong&gt;: Some administration and project management tasks require a combination of both authority and large amounts of time to be completed. If authority can only be derived through involvement in technical matters in the project, there is a risk that those charged with that work will not be able to do the work. For example, in the list of under resourced work items above both “identifying gaps” and “project self reflection” require a certain level of authority to have the findings make an impact. It would be necessary for the groups doing that work to somehow gain the level of authority needed to get that work done.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Lack of transparency&lt;/strong&gt;: Project governance is composed of activities that live on a spectrum of how sensitive in nature they are. Some activities must be kept private as they directly involve the personal matters of individuals. On the other hand, some activities clearly need the involvement of the entire Rust project from the get-go. Many activities live somewhere in between. A potential failure mode is not consistently ensuring that information that can be made public is regularly made so. Even though this can in practice be very difficult and can make it difficult for some to participate in leadership positions, not doing so can lead to diminishing trust in leadership and a growing lack of accountability.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Leadership not consistently held to same standards&lt;/strong&gt;: Those in leadership positions should be held at least to the same standards as those in the rest of the project. What’s more, it can be tempting to revise policies and procedures or interpret underspecified ones while they’re being exercised. A failure mode is that it becomes common practice for leadership to hold themselves to different standards leading to an erosion of trust.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Underspecified processes/policies&lt;/strong&gt;: It can be tempting to write policy assuming participants have the same assumptions, understandings, etc. This is more flexible, requires less bureaucracy, and is easier to change on the fly. However, such processes/policies are easier to abuse (even without intentional malice). Important processes should be applicable even if the entire project membership is switched out.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Changing of delegated decisions&lt;/strong&gt;: A distributed governance structure relies on delegation. However, true delegation means respecting the authority of the party that decision making power has been delegated to. A possible failure mode is constantly second guessing the decisions of teams that have received delegated power. Accountability and oversight are important, but it’s also important that a delegating power not only respect decisions that it would have made itself.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Leadership as popularity contest&lt;/strong&gt;: Some systems of governance favor those who are willing to campaign and/or make themselves most visible. However, those most suitable to lead may not necessarily be those who participate in such activities. A possible failure mode is making project leadership a direct function of how popular/well-known someone is within the community or project.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Diffusion of responsibility&lt;/strong&gt;: If no one is explicitly responsible for a thing then it won’t necessarily get done, even if the thing not getting done is obviously and clearly causing harm. Without an explicit mechanism for understanding the needs of the project and ensuring that those needs are filled, the project is liable to continue to see important work not getting done.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I&#x27;d like to take this opportunity to thank you for reading this very long email. Once again, if you&#x27;d like to participate or give feedback in any form, please do not hesitate to reach out.&lt;/p&gt;
-&lt;p&gt;Cheers,&lt;br /&gt;
-Ryan&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;section class&#x3D;&quot;footnotes&quot;&gt;
-&lt;ol&gt;
-&lt;li id&#x3D;&quot;fn1&quot;&gt;
-&lt;p&gt;See &lt;a href&#x3D;&quot;https://github.com/rust-lang/blog.rust-lang.org/pull/974&quot;&gt;rust-lang/blog.rust-lang.org#974&lt;/a&gt; for the full history of changes to the original email. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
-</content>
-
-        <author>
-            <name>Ryan Levick and Mara Bos</name>
         </author>
     </entry>
     
