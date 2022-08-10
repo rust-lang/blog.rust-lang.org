@@ -48,8 +48,7 @@ accurately track minimum requirements, and they may or may not be affected by th
 Targets which only use libcore and not libstd are unaffected.
 
 A list of supported targets and their requirements can be found on the
-[platform support page][platform-support]. However, the page is not yet up to date with the changes
-announced here.
+[platform support page][platform-support].
 
 # Affected systems
 
