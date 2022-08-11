@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.63.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.63.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.63.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.63.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.63.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 11, 2022 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.63.0. Rust is a programming language
+empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, you can get 1.63.0 with:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a>
+from the appropriate page on our website, and check out the
+<a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1620-2022-06-30">detailed release notes for 1.63.0</a> on GitHub.</p>
+<p>If you'd like to help us out by testing future releases, you might consider updating locally to use
+the beta channel (<code>rustup default beta</code>) or the nightly channel (<code>rustup default nightly</code>).
+Please <a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you might come across!</p>
+<h2><a href="#whats-in-1630-stable" aria-hidden="true" class="anchor" id="whats-in-1630-stable"></a>What's in 1.63.0 stable</h2>
+<h3><a href="#scoped-threads" aria-hidden="true" class="anchor" id="scoped-threads"></a>Scoped threads</h3>
+<p>Rust code could launch new threads with <code>std::thread::spawn</code> since 1.0, but this
+function bounds its closure with <code>'static</code>. Roughly, this means that threads
+currently must have ownership of any arguments passed into their closure; you
+can't pass borrowed data into a thread. In cases where the threads are expected
+to exit by the end of the function (by being <code>join()</code>'d), this isn't strictly
+necessary and can require workarounds like placing the data in an <a href="https://doc.rust-lang.org/stable/std/sync/struct.Arc.html"><code>Arc</code></a>.</p>
+<p>Now, with 1.63.0, the standard library is adding <em>scoped</em> threads, which allow
+spawning a thread borrowing from the local stack frame. The
+<a href="https://doc.rust-lang.org/stable/std/thread/fn.scope.html"><code>std::thread::scope</code></a> API provides the necessary guarantee that any spawned threads
+will have exited prior to itself returning, which allows for safely borrowing
+data. Here's an example:</p>
+<pre><code class="language-rust">let mut a = vec![1, 2, 3];
+let mut x = 0;
+
+std::thread::scope(|s| {
+    s.spawn(|| {
+        println!(&quot;hello from the first scoped thread&quot;);
+        // We can borrow `a` here.
+        dbg!(&amp;a);
+    });
+    s.spawn(|| {
+        println!(&quot;hello from the second scoped thread&quot;);
+        // We can even mutably borrow `x` here,
+        // because no other threads are using it.
+        x += a[0] + a[2];
+    });
+    println!(&quot;hello from the main thread&quot;);
+});
+
+// After the scope, we can modify and access our variables again:
+a.push(4);
+assert_eq!(x, a.len());
+</code></pre>
+<h3><a href="#rust-ownership-for-raw-file-descriptorshandles-io-safety" aria-hidden="true" class="anchor" id="rust-ownership-for-raw-file-descriptorshandles-io-safety"></a>Rust ownership for raw file descriptors/handles (I/O Safety)</h3>
+<p>Previously, Rust code working with platform APIs taking raw file descriptors (on
+unix-style platforms) or handles (on Windows) would typically work directly with
+a platform-specific representation of the descriptor (for example, a <code>c_int</code>, or the alias <code>RawFd</code>).
+For Rust bindings to such native APIs, the type system then failed to encode
+whether the API would take ownership of the file descriptor (e.g., <code>close</code>) or
+merely borrow it (e.g., <code>dup</code>).</p>
+<p>Now, Rust provides wrapper types such as <a href="https://doc.rust-lang.org/stable/std/os/unix/io/struct.BorrowedFd.html"><code>BorrowedFd</code></a> and <a href="https://doc.rust-lang.org/stable/std/os/unix/io/struct.OwnedFd.html"><code>OwnedFd</code></a>, which are marked as
+<code>#[repr(transparent)]</code>, meaning that <code>extern &quot;C&quot;</code> bindings can directly take
+these types to encode the ownership semantics. See the stabilized APIs section
+for the full list of wrapper types stabilized in 1.63, currently, they are
+available on cfg(unix) platforms, Windows, and WASI.</p>
+<p>We recommend that new APIs use these types instead of the previous type aliases
+(like <a href="https://doc.rust-lang.org/stable/std/os/unix/io/type.RawFd.html"><code>RawFd</code></a>).</p>
+<h3><a href="#const-mutex-rwlock-condvar-initialization" aria-hidden="true" class="anchor" id="const-mutex-rwlock-condvar-initialization"></a><code>const</code> Mutex, RwLock, Condvar initialization</h3>
+<p>The <a href="https://doc.rust-lang.org/stable/std/sync/struct.Condvar.html#method.new"><code>Condvar::new</code></a>, <a href="https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html#method.new"><code>Mutex::new</code></a>, and <a href="https://doc.rust-lang.org/stable/std/sync/struct.RwLock.html#method.new"><code>RwLock::new</code></a> functions are now
+callable in <code>const</code> contexts, which allows avoiding the use of crates like
+<code>lazy_static</code> for creating global statics with <code>Mutex</code>, <code>RwLock</code>, or <code>Condvar</code>
+values. This builds on the <a href="https://blog.rust-lang.org/2022/06/30/Rust-1.62.0.html#thinner-faster-mutexes-on-linux">work in 1.62</a> to enable thinner and faster mutexes
+on Linux.</p>
+<h3><a href="#turbofish-for-generics-in-functions-with-impl-trait" aria-hidden="true" class="anchor" id="turbofish-for-generics-in-functions-with-impl-trait"></a>Turbofish for generics in functions with <code>impl Trait</code></h3>
+<p>For a function signature like <code>fn foo&lt;T&gt;(value: T, f: impl Copy)</code>, it was an
+error to specify the concrete type of <code>T</code> via turbofish: <code>foo::&lt;u32&gt;(3, 3)</code>
+would fail with:</p>
+<pre><code class="language-text">error[E0632]: cannot provide explicit generic arguments when `impl Trait` is used in argument position
+ --&gt; src/lib.rs:4:11
+  |
+4 |     foo::&lt;u32&gt;(3, 3);
+  |           ^^^ explicit generic argument not allowed
+  |
+  = note: see issue #83701 &lt;https://github.com/rust-lang/rust/issues/83701&gt; for more information
+</code></pre>
+<p>In 1.63, this restriction is relaxed, and the explicit type of the generic can be specified.
+However, the <code>impl Trait</code> parameter, despite desugaring to a generic, remains
+opaque and cannot be specified via turbofish.</p>
+<h3><a href="#non-lexical-lifetimes-migration-complete" aria-hidden="true" class="anchor" id="non-lexical-lifetimes-migration-complete"></a>Non-lexical lifetimes migration complete</h3>
+<p>As detailed in <a href="https://blog.rust-lang.org/2022/08/05/nll-by-default.html">this blog post</a>, we've fully removed the previous lexical borrow checker
+from rustc across all editions, fully enabling the non-lexical, new, version of the borrow
+checker. Since the borrow checker doesn't affect the output of rustc, this won't change
+the behavior of any programs, but it completes a long-running migration (started in the
+initial stabilization of NLL for the 2018 edition) to deliver the full benefits of the new
+borrow checker across all editions of Rust. For most users, this change will bring
+slightly better diagnostics for some borrow checking errors, but will not otherwise impact
+which code they can write.</p>
+<p>You can read more about non-lexical lifetimes in <a href="https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html#non-lexical-lifetimes">this section of the 2018 edition announcement</a>.</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<p>The following methods and trait implementations are now stabilized:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/array/fn.from_fn.html"><code>array::from_fn</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.into_pin"><code>Box::into_pin</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/struct.BinaryHeap.html#method.try_reserve"><code>BinaryHeap::try_reserve</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/alloc/collections/binary_heap/struct.BinaryHeap.html#method.try_reserve_exact"><code>BinaryHeap::try_reserve_exact</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.OsString.html#method.try_reserve"><code>OsString::try_reserve</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.OsString.html#method.try_reserve_exact"><code>OsString::try_reserve_exact</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/path/struct.PathBuf.html#method.try_reserve"><code>PathBuf::try_reserve</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/path/struct.PathBuf.html#method.try_reserve_exact"><code>PathBuf::try_reserve_exact</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/path/struct.Path.html#method.try_exists"><code>Path::try_exists</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/cell/struct.Ref.html#method.filter_map"><code>Ref::filter_map</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/cell/struct.RefMut.html#method.filter_map"><code>RefMut::filter_map</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ptr/struct.NonNull.html#method.len"><code>NonNull::&lt;[T]&gt;::len</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/borrow/trait.ToOwned.html#method.clone_into"><code>ToOwned::clone_into</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/net/struct.Ipv6Addr.html#method.to_ipv4_mapped"><code>Ipv6Addr::to_ipv4_mapped</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/unix/io/trait.AsFd.html"><code>unix::io::AsFd</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/unix/io/struct.BorrowedFd.html"><code>unix::io::BorrowedFd&lt;'fd&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/unix/io/struct.OwnedFd.html"><code>unix::io::OwnedFd</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsHandle.html"><code>windows::io::AsHandle</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/struct.BorrowedHandle.html"><code>windows::io::BorrowedHandle&lt;'handle&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/struct.OwnedHandle.html"><code>windows::io::OwnedHandle</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/struct.HandleOrInvalid.html"><code>windows::io::HandleOrInvalid</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/struct.HandleOrNull.html"><code>windows::io::HandleOrNull</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/struct.InvalidHandleError.html"><code>windows::io::InvalidHandleError</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/struct.NullHandleError.html"><code>windows::io::NullHandleError</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsSocket.html"><code>windows::io::AsSocket</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/struct.BorrowedSocket.html"><code>windows::io::BorrowedSocket&lt;'handle&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/struct.OwnedSocket.html"><code>windows::io::OwnedSocket</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/thread/fn.scope.html"><code>thread::scope</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/thread/fn.scope.html"><code>thread::Scope</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/thread/struct.ScopedJoinHandle.html"><code>thread::ScopedJoinHandle</code></a></li>
+</ul>
+<p>These APIs are now usable in const contexts:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/array/fn.from_ref.html"><code>array::from_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/slice/fn.from_ref.html"><code>slice::from_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/intrinsics/fn.copy.html"><code>intrinsics::copy</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/intrinsics/fn.copy_nonoverlapping.html"><code>intrinsics::copy_nonoverlapping</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.copy_to"><code>&lt;*const T&gt;::copy_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.copy_to_nonoverlapping"><code>&lt;*const T&gt;::copy_to_nonoverlapping</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.copy_to-1"><code>&lt;*mut T&gt;::copy_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.copy_to_nonoverlapping-1"><code>&lt;*mut T&gt;::copy_to_nonoverlapping</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.copy_from"><code>&lt;*mut T&gt;::copy_from</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.copy_from_nonoverlapping"><code>&lt;*mut T&gt;::copy_from_nonoverlapping</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/str/fn.from_utf8.html"><code>str::from_utf8</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/str/struct.Utf8Error.html#method.error_len"><code>Utf8Error::error_len</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/str/struct.Utf8Error.html#method.valid_up_to"><code>Utf8Error::valid_up_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.Condvar.html#method.new"><code>Condvar::new</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html#method.new"><code>Mutex::new</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.RwLock.html#method.new"><code>RwLock::new</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.63.0 release. Check out what changed in
+<a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1630-2022-08-11">Rust</a>,
+<a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-163-2022-08-11">Cargo</a>,
+and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-163">Clippy</a>.</p>
+<h3><a href="#contributors-to-1630" aria-hidden="true" class="anchor" id="contributors-to-1630"></a>Contributors to 1.63.0</h3>
+<p>Many people came together to create Rust 1.63.0.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.63.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>
