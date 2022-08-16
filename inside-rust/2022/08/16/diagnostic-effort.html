@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Contribute to the diagnostic translation effort! | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Contribute to the diagnostic translation effort! | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Contribute to the diagnostic translation effort! | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+<link rel="manifest" href="../../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../../inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Contribute to the diagnostic translation effort!" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Contribute to the diagnostic translation effort!</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 16, 2022 &middot; David Wood
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">the compiler team</a> 
+    </div>
+
+    <div class="post">
+      <p>The Rust Diagnostics working group is leading an effort to add support for
+internationalization of error messages in the compiler, allowing the compiler
+to produce output in languages other than English.</p>
+<p>For example, consider the following diagnostic where a user has used a colon to
+specify a function's return type instead of an arrow:</p>
+<pre><code class="language-text">error: return types are denoted using `-&gt;`
+ --&gt; src/main.rs:1:21
+  |
+1 | fn meaning_of_life(): u32 { 42 }
+  |                     ^ help: use `-&gt;` instead
+</code></pre>
+<p>We could output that diagnostic in Chinese:</p>
+<pre lang="zh-CN">
+<code class="language-text">错误: 返回类型使用`->`表示
+ --> src/main.rs:1:21
+  |
+1 | fn meaning_of_life(): u32 { 42 }
+  |                     ^ 帮助: 使用`->`来代替
+</code></pre>
+<p>or even in Spanish:</p>
+<pre lang="es">
+<code class="language-text">error: el tipo de retorno se debe indicar mediante `->`
+ --> src/main.rs:1:21
+  |
+1 | fn meaning_of_life(): u32 { 42 }
+  |                     ^ ayuda: utilice `->` en su lugar
+</code></pre>
+<p>Translated error messages will allow non-native speakers of English to use Rust
+in their preferred language.</p>
+<h2><a href="#whats-the-current-status" aria-hidden="true" class="anchor" id="whats-the-current-status"></a>What's the current status?</h2>
+<p>Implementation on diagnostic translation has started, but we're looking for
+help!</p>
+<p>The core infrastructure for diagnostic translation has been implemented in
+<code>rustc</code>; this makes it possible for Rust to emit a diagnostic with translated
+messages. However, every diagnostic in <code>rustc</code> has to be ported to use this new
+infrastructure, otherwise they can't be translated. That's a lot of work, so
+the diagnostics working group has chosen to combine the translation effort with
+a transition to &quot;diagnostic structs&quot; (more on that later) and get both done at
+once.</p>
+<p>Once most diagnostic messages have been ported to the new infrastructure, then
+the diagnostics working group will start creating a workflow for translation
+teams to translate all of the diagnostic messages to different languages.</p>
+<p>Every pull request related to diagnostic translation is listed <a href="https://hackmd.io/@davidtwco/rkXSbLg95">in this
+document</a>.</p>
+<h2><a href="#getting-involved" aria-hidden="true" class="anchor" id="getting-involved"></a>Getting involved</h2>
+<p>There's a lot of work to do on diagnostic translation, but the good news is that
+lots of the work can be done in parallel, and it doesn't require background in
+compiler development or familiarity with <code>rustc</code> to contribute!</p>
+<p>If you are interested, feel free to just get started! You can ask for help in
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/147480-t-compiler.2Fwg-diagnostics"><code>#t-compiler/wg-diagnostics</code></a> or reach out to <a href="https://github.com/davidtwco"><code>@davidtwco</code></a>.</p>
+<p><strong>Note:</strong> This post isn't going to be updated as the working group iterates on
+and improves the workflow for diagnostic translation, so always consult the
+developer guide for the most recent documentation on <a href="https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html">diagnostic
+structs</a> or <a href="https://rustc-dev-guide.rust-lang.org/diagnostics/translation.html">diagnostic translation</a>.</p>
+<h3><a href="#1-setting-up-a-local-development-environment" aria-hidden="true" class="anchor" id="1-setting-up-a-local-development-environment"></a>1. Setting up a local development environment</h3>
+<p>Before helping with the diagnostic translation effort, you'll need to get your
+development environment set up, so <a href="https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html">follow the instructions on the <code>rustc</code> dev
+guide</a>.</p>
+<h3><a href="#2-getting-ready-to-port-your-first-diagnostic" aria-hidden="true" class="anchor" id="2-getting-ready-to-port-your-first-diagnostic"></a>2. Getting ready to port your first diagnostic</h3>
+<p>Almost all diagnostics in <code>rustc</code> are implemented using the traditional
+<code>DiagnosticBuilder</code> APIs, which look something like this:</p>
+<pre><code class="language-rust">self.struct_span_err(self.prev_token.span, &quot;return types are denoted using `-&gt;`&quot;)
+    .span_suggestion_short(
+        self.prev_token.span,
+        &quot;use `-&gt;` instead&quot;,
+        &quot;-&gt;&quot;.to_string(),
+        Applicability::MachineApplicable,
+    )
+    .emit();
+</code></pre>
+<p><code>struct_span_err</code> creates a new diagnostic given two things - a <code>Span</code> and a
+message. <code>struct_span_err</code> isn't the only diagnostic function that you'll
+encounter in the compiler's source, but the others are all pretty similar. You
+can read more about <code>rustc</code>'s diagnostic infrastructure <a href="https://rustc-dev-guide.rust-lang.org/diagnostics.html#error-messages">in the <code>rustc</code> dev
+guide</a>.</p>
+<p><code>Span</code>s just identify some location in the user's source code and you can find
+them used throughout the compiler for diagnostic reporting (for example, the
+location <code>main.rs:1:21</code> from the earlier example would have been
+<code>self.prev_token.span</code>).</p>
+<p>In this example, the message is just a string literal (a <code>&amp;'static str</code>) which
+needs to be replaced by an identifier for the same message in whichever
+language was requested.</p>
+<p>There are two ways that a diagnostic will be ported to the new infrastructure:</p>
+<ol>
+<li>If it's a simple diagnostic, without any logic to decide whether or not to
+add suggestions or notes or helps or labels, like in the example above,
+then...
+<ul>
+<li><a href="#using-a-diagnostic-derive">...use a diagnostic derive</a>.</li>
+</ul>
+</li>
+<li>Otherwise...
+<ul>
+<li><a href="#manually-implementing-sessiondiagnostic">...manually implement <code>SessionDiagnostic</code></a>.</li>
+</ul>
+</li>
+</ol>
+<p>In both cases, diagnostics are represented as types. Representing diagnostics
+using types is a goal of the diagnostic working group as it helps separate
+diagnostic logic from the main code paths.</p>
+<p>Every diagnostic type should implement <code>SessionDiagnostic</code> (either manually or
+automatically). In the <code>SessionDiagnostic</code> trait, there's a member function
+which converts the trait into a <code>Diagnostic</code> to be emitted.</p>
+<h4><a href="#using-a-diagnostic-derive" aria-hidden="true" class="anchor" id="using-a-diagnostic-derive"></a>Using a diagnostic derive...</h4>
+<p>Diagnostic derives (either <code>SessionDiagnostic</code> for whole diagnostics,
+<code>SessionSubdiagnostic</code> for parts of diagnostics, or <code>DecorateLint</code> for lints)
+can be used to automatically implement a diagnostic trait.</p>
+<p>To start, create a new type in the <code>errors</code> module of the current crate (e.g.
+<code>rustc_typeck::errors</code> or <code>rustc_borrowck::errors</code>) named after your
+diagnostic. In our example, that might look like:</p>
+<pre><code class="language-rust">struct ReturnTypeArrow {
+
+}
+</code></pre>
+<p>Next, we'll need to add fields with all the information we need - that's just a
+<code>Span</code> for us:</p>
+<pre><code class="language-rust">struct ReturnTypeArrow {
+    span: Span,
+}
+</code></pre>
+<p>In most cases, this will just be the <code>Span</code>s that are used by the original
+diagnostic emission logic and values that are interpolated into diagnostic
+messages.</p>
+<p>After that, we should add the derive, add our error attribute and annotate the
+primary <code>Span</code> (that was given to <code>struct_span_err</code>).</p>
+<pre><code class="language-rust">#[derive(SessionDiagnostic)]
+#[error(parser::return_type_arrow)]
+struct ReturnTypeArrow {
+    #[primary_span]
+    span: Span,
+}
+</code></pre>
+<p>Each diagnostic should have a unique slug. By convention, these always start
+with the crate that the error is related to (<code>parser</code> in this example). This
+slug will be used to find the actual diagnostic message in our translation
+resources, which we'll see shortly.</p>
+<p>Finally, we need to add any labels, notes, helps or suggestions:</p>
+<pre><code class="language-rust">#[derive(SessionDiagnostic)]
+#[error(parser::return_type_arrow)]
+struct ReturnTypeArrow {
+    #[primary_span]
+    #[suggestion(applicability = &quot;machine-applicable&quot;, code = &quot;-&gt;&quot;)]
+    span: Span,
+}
+</code></pre>
+<p>In this example, there's just a single suggestion - to replace the <code>:</code> with
+a <code>-&gt;</code>.</p>
+<p>Before we're finished, we have to <a href="#adding-translation-resources">add the diagnostic messages to the
+translation resources..</a></p>
+<p>For more documentation on diagnostic derives, see the <a href="https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html">diagnostic structs
+chapter of the <code>rustc</code> dev guide</a>.</p>
+<h4><a href="#manually-implementing-sessiondiagnostic" aria-hidden="true" class="anchor" id="manually-implementing-sessiondiagnostic"></a>Manually implementing <code>SessionDiagnostic</code>...</h4>
+<p>Some diagnostics are too complicated to be generated from a diagnostic type
+using the diagnostic derive. In these cases, <code>SessionDiagnostic</code> can be
+implemented manually.</p>
+<p>Using the same type as in <a href="#using-a-diagnostic-derive">&quot;Using a diagnostic
+derive...&quot;</a>, we can implement <code>SessionDiagnostic</code>
+as below:</p>
+<pre><code class="language-rust">use rustc_errors::{fluent, SessionDiagnostic};
+
+struct ReturnTypeArrow { span: Span }
+
+impl SessionDiagnostic for ReturnTypeArrow {
+    fn into_diagnostic(self, sess: &amp;'_ rustc_session::Session) -&gt; DiagnosticBuilder&lt;'_&gt; {
+        sess.struct_span_err(
+            self.span,
+            fluent::parser::return_type_arrow,
+        )
+        .span_suggestion_short(
+            self.span,
+            fluent::parser::suggestion,
+            &quot;-&gt;&quot;.to_string(),
+            Applicability::MachineApplicable,
+        )
+    }
+}
+</code></pre>
+<p>Instead of using strings for the messages as in the original diagnostic
+emission logic, typed identifiers referring to translation resources are used.
+Now we just have to <a href="#adding-translation-resources">add the diagnostic messages to the translation
+resources..</a>.</p>
+<h4><a href="#examples" aria-hidden="true" class="anchor" id="examples"></a>Examples</h4>
+<p>For more examples of diagnostics ported to use the diagnostic derive or written
+manually, see the following pull requests:</p>
+<ul>
+<li>https://github.com/rust-lang/rust/pull/98353</li>
+<li>https://github.com/rust-lang/rust/pull/98415</li>
+<li>https://github.com/rust-lang/rust/pull/97093</li>
+<li>https://github.com/rust-lang/rust/pull/99213</li>
+</ul>
+<p>For more examples, see the pull requests labelled <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+label%3AA-translation+sort%3Aupdated-desc"><code>A-translation</code></a>.</p>
+<h4><a href="#adding-translation-resources" aria-hidden="true" class="anchor" id="adding-translation-resources"></a>Adding translation resources...</h4>
+<p>Every slug in a diagnostic derive or typed identifier in a manual
+implementation needs to correspond to a message in a translation resource.</p>
+<p><code>rustc</code>'s translations use <a href="http://projectfluent.org/">Fluent</a>, an asymmetric translation system.
+For each crate in the compiler which emits diagnostics, there is a
+corresponding Fluent resource at
+<code>compiler/rustc_error_messages/locales/en-US/$crate.ftl</code>.</p>
+<p>Error messages need to be added to this resource (a macro will then generate
+the typed identifier corresponding to the message).</p>
+<p>For our example, we should add the following Fluent to
+<code>compiler/rustc_error_messages/locales/en-US/parser.ftl</code>:</p>
+<pre><code class="language-fluent">parser_return_type_arrow = return types are denoted using `-&gt;`
+    .suggestion = use `-&gt;` instead
+</code></pre>
+<p><code>parser_return_type_arrow</code> will generate a <code>parser::return_type_arrow</code> type (in
+<code>rustc_errors::fluent</code>) that can be used with diagnostic structs and the
+diagnostic builder.</p>
+<p>Subdiagnostics are &quot;attributes&quot; of the primary Fluent message - by convention,
+the name of attributes are the type of subdiagnostic, such as &quot;suggestion&quot;, but
+this can be changed when there are multiple of one kind of subdiagnostic.</p>
+<p>Now that the Fluent resource contains the message, our diagnostic is ported!
+More complex messages with interpolation will be able to reference other fields
+in a diagnostic type (when implemented manually, those are provided as
+arguments). See the diagnostic translation documentation <a href="https://rustc-dev-guide.rust-lang.org/diagnostics/translation.html">in the <code>rustc</code> dev
+guide</a> for more examples.</p>
+<h3><a href="#3-porting-diagnostics" aria-hidden="true" class="anchor" id="3-porting-diagnostics"></a>3. Porting diagnostics</h3>
+<p>Now that you've got a rough idea what to do, you need to find some diagnostics
+to port. There's lots of diagnostics to port, so the diagnostic working group
+have split the work up to avoid anyone working on the same diagnostic as
+someone else - but right now, there aren't many people involved, so just pick a
+crate and start porting it :)</p>
+<p>Please add the <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+label%3AA-translation+sort%3Aupdated-desc"><code>A-translation</code></a> label to any pull requests that
+you make so we can keep track of who has made a contribution! You can use
+<code>rustbot</code> to label your PR (if it wasn't labelled automatically by
+<code>triagebot</code>):</p>
+<pre><code class="language-text">@rustbot label +A-translation
+</code></pre>
+<p>You can also assign a member of the diagnostics working group to review your PR
+by posting a comment with the following content (or including this in the PR
+description):</p>
+<pre><code class="language-text">r? rust-lang/diagnostics
+</code></pre>
+<p>Even if you aren't sure exactly how to proceed, give it a go and you can ask
+for help in <a href="https://rust-lang.zulipchat.com/#narrow/stream/147480-t-compiler.2Fwg-diagnostics"><code>#t-compiler/wg-diagnostics</code></a> or reach out to <a href="https://github.com/davidtwco"><code>@davidtwco</code></a>.</p>
+<h2><a href="#faq" aria-hidden="true" class="anchor" id="faq"></a>FAQ</h2>
+<h3><a href="#is-this-a-feature-that-anyone-wants" aria-hidden="true" class="anchor" id="is-this-a-feature-that-anyone-wants"></a>Is this a feature that anyone wants?</h3>
+<p>Yes! Some language communities prefer native resources and some don't (and
+preferences will vary within those communities too). For example,
+Chinese-speaking communities have a mature ecosystem of programming language
+resources which don't require knowing any English.</p>
+<h3><a href="#wouldnt-translating-x-be-more-worthwhile" aria-hidden="true" class="anchor" id="wouldnt-translating-x-be-more-worthwhile"></a>Wouldn't translating X be more worthwhile?</h3>
+<p>There are many different areas within the Rust project where
+internationalization would be beneficial. Diagnostics aren't being prioritized
+over any other part of the project, it's just that there is interest within the
+compiler team in supporting this feature.</p>
+<h3><a href="#couldnt-compiler-developer-time-be-better-spent-elsewhere" aria-hidden="true" class="anchor" id="couldnt-compiler-developer-time-be-better-spent-elsewhere"></a>Couldn't compiler developer time be better spent elsewhere?</h3>
+<p>Compiler implementation isn't zero-sum: work on other parts of the compiler
+aren't impacted by these efforts and working on diagnostic translation doesn't
+prevent contributors working on anything else.</p>
+<h3><a href="#will-translations-be-opt-in" aria-hidden="true" class="anchor" id="will-translations-be-opt-in"></a>Will translations be opt-in?</h3>
+<p>Translations will be opt-in, you won't need to use them if you don't want to.</p>
+<h3><a href="#how-will-a-user-select-the-language" aria-hidden="true" class="anchor" id="how-will-a-user-select-the-language"></a>How will a user select the language?</h3>
+<p>Exactly how a user will choose to use translated error messages hasn't been
+decided yet.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../../scripts/highlight.js"></script>
+
+  </body>
+</html>

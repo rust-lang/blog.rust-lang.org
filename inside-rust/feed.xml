@@ -10,8 +10,276 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-08-12T08:27:09+00:00</updated>
+    <updated>2022-08-16T12:35:09+00:00</updated>
 
+    
+    <entry>
+        <title>Contribute to the diagnostic translation effort!</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/08/16/diagnostic-effort.html" type="text/html" title="Contribute to the diagnostic translation effort!" />
+        <published>2022-08-16T00:00:00+00:00</published>
+        <updated>2022-08-16T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/08/16/diagnostic-effort.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/08/16/diagnostic-effort.html">&lt;p&gt;The Rust Diagnostics working group is leading an effort to add support for
+internationalization of error messages in the compiler, allowing the compiler
+to produce output in languages other than English.&lt;/p&gt;
+&lt;p&gt;For example, consider the following diagnostic where a user has used a colon to
+specify a function&#x27;s return type instead of an arrow:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;error: return types are denoted using &#x60;-&amp;gt;&#x60;
+ --&amp;gt; src/main.rs:1:21
+  |
+1 | fn meaning_of_life(): u32 { 42 }
+  |                     ^ help: use &#x60;-&amp;gt;&#x60; instead
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We could output that diagnostic in Chinese:&lt;/p&gt;
+&lt;pre lang&#x3D;&quot;zh-CN&quot;&gt;
+&lt;code class&#x3D;&quot;language-text&quot;&gt;错误: 返回类型使用&#x60;-&gt;&#x60;表示
+ --&gt; src/main.rs:1:21
+  |
+1 | fn meaning_of_life(): u32 { 42 }
+  |                     ^ 帮助: 使用&#x60;-&gt;&#x60;来代替
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or even in Spanish:&lt;/p&gt;
+&lt;pre lang&#x3D;&quot;es&quot;&gt;
+&lt;code class&#x3D;&quot;language-text&quot;&gt;error: el tipo de retorno se debe indicar mediante &#x60;-&gt;&#x60;
+ --&gt; src/main.rs:1:21
+  |
+1 | fn meaning_of_life(): u32 { 42 }
+  |                     ^ ayuda: utilice &#x60;-&gt;&#x60; en su lugar
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Translated error messages will allow non-native speakers of English to use Rust
+in their preferred language.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-the-current-status&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-the-current-status&quot;&gt;&lt;/a&gt;What&#x27;s the current status?&lt;/h2&gt;
+&lt;p&gt;Implementation on diagnostic translation has started, but we&#x27;re looking for
+help!&lt;/p&gt;
+&lt;p&gt;The core infrastructure for diagnostic translation has been implemented in
+&lt;code&gt;rustc&lt;/code&gt;; this makes it possible for Rust to emit a diagnostic with translated
+messages. However, every diagnostic in &lt;code&gt;rustc&lt;/code&gt; has to be ported to use this new
+infrastructure, otherwise they can&#x27;t be translated. That&#x27;s a lot of work, so
+the diagnostics working group has chosen to combine the translation effort with
+a transition to &amp;quot;diagnostic structs&amp;quot; (more on that later) and get both done at
+once.&lt;/p&gt;
+&lt;p&gt;Once most diagnostic messages have been ported to the new infrastructure, then
+the diagnostics working group will start creating a workflow for translation
+teams to translate all of the diagnostic messages to different languages.&lt;/p&gt;
+&lt;p&gt;Every pull request related to diagnostic translation is listed &lt;a href&#x3D;&quot;https://hackmd.io/@davidtwco/rkXSbLg95&quot;&gt;in this
+document&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#getting-involved&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;getting-involved&quot;&gt;&lt;/a&gt;Getting involved&lt;/h2&gt;
+&lt;p&gt;There&#x27;s a lot of work to do on diagnostic translation, but the good news is that
+lots of the work can be done in parallel, and it doesn&#x27;t require background in
+compiler development or familiarity with &lt;code&gt;rustc&lt;/code&gt; to contribute!&lt;/p&gt;
+&lt;p&gt;If you are interested, feel free to just get started! You can ask for help in
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/147480-t-compiler.2Fwg-diagnostics&quot;&gt;&lt;code&gt;#t-compiler/wg-diagnostics&lt;/code&gt;&lt;/a&gt; or reach out to &lt;a href&#x3D;&quot;https://github.com/davidtwco&quot;&gt;&lt;code&gt;@davidtwco&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This post isn&#x27;t going to be updated as the working group iterates on
+and improves the workflow for diagnostic translation, so always consult the
+developer guide for the most recent documentation on &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html&quot;&gt;diagnostic
+structs&lt;/a&gt; or &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/diagnostics/translation.html&quot;&gt;diagnostic translation&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#1-setting-up-a-local-development-environment&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;1-setting-up-a-local-development-environment&quot;&gt;&lt;/a&gt;1. Setting up a local development environment&lt;/h3&gt;
+&lt;p&gt;Before helping with the diagnostic translation effort, you&#x27;ll need to get your
+development environment set up, so &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html&quot;&gt;follow the instructions on the &lt;code&gt;rustc&lt;/code&gt; dev
+guide&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#2-getting-ready-to-port-your-first-diagnostic&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;2-getting-ready-to-port-your-first-diagnostic&quot;&gt;&lt;/a&gt;2. Getting ready to port your first diagnostic&lt;/h3&gt;
+&lt;p&gt;Almost all diagnostics in &lt;code&gt;rustc&lt;/code&gt; are implemented using the traditional
+&lt;code&gt;DiagnosticBuilder&lt;/code&gt; APIs, which look something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;self.struct_span_err(self.prev_token.span, &amp;quot;return types are denoted using &#x60;-&amp;gt;&#x60;&amp;quot;)
+    .span_suggestion_short(
+        self.prev_token.span,
+        &amp;quot;use &#x60;-&amp;gt;&#x60; instead&amp;quot;,
+        &amp;quot;-&amp;gt;&amp;quot;.to_string(),
+        Applicability::MachineApplicable,
+    )
+    .emit();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;struct_span_err&lt;/code&gt; creates a new diagnostic given two things - a &lt;code&gt;Span&lt;/code&gt; and a
+message. &lt;code&gt;struct_span_err&lt;/code&gt; isn&#x27;t the only diagnostic function that you&#x27;ll
+encounter in the compiler&#x27;s source, but the others are all pretty similar. You
+can read more about &lt;code&gt;rustc&lt;/code&gt;&#x27;s diagnostic infrastructure &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/diagnostics.html#error-messages&quot;&gt;in the &lt;code&gt;rustc&lt;/code&gt; dev
+guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Span&lt;/code&gt;s just identify some location in the user&#x27;s source code and you can find
+them used throughout the compiler for diagnostic reporting (for example, the
+location &lt;code&gt;main.rs:1:21&lt;/code&gt; from the earlier example would have been
+&lt;code&gt;self.prev_token.span&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;In this example, the message is just a string literal (a &lt;code&gt;&amp;amp;&#x27;static str&lt;/code&gt;) which
+needs to be replaced by an identifier for the same message in whichever
+language was requested.&lt;/p&gt;
+&lt;p&gt;There are two ways that a diagnostic will be ported to the new infrastructure:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;If it&#x27;s a simple diagnostic, without any logic to decide whether or not to
+add suggestions or notes or helps or labels, like in the example above,
+then...
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#using-a-diagnostic-derive&quot;&gt;...use a diagnostic derive&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Otherwise...
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#manually-implementing-sessiondiagnostic&quot;&gt;...manually implement &lt;code&gt;SessionDiagnostic&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In both cases, diagnostics are represented as types. Representing diagnostics
+using types is a goal of the diagnostic working group as it helps separate
+diagnostic logic from the main code paths.&lt;/p&gt;
+&lt;p&gt;Every diagnostic type should implement &lt;code&gt;SessionDiagnostic&lt;/code&gt; (either manually or
+automatically). In the &lt;code&gt;SessionDiagnostic&lt;/code&gt; trait, there&#x27;s a member function
+which converts the trait into a &lt;code&gt;Diagnostic&lt;/code&gt; to be emitted.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#using-a-diagnostic-derive&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;using-a-diagnostic-derive&quot;&gt;&lt;/a&gt;Using a diagnostic derive...&lt;/h4&gt;
+&lt;p&gt;Diagnostic derives (either &lt;code&gt;SessionDiagnostic&lt;/code&gt; for whole diagnostics,
+&lt;code&gt;SessionSubdiagnostic&lt;/code&gt; for parts of diagnostics, or &lt;code&gt;DecorateLint&lt;/code&gt; for lints)
+can be used to automatically implement a diagnostic trait.&lt;/p&gt;
+&lt;p&gt;To start, create a new type in the &lt;code&gt;errors&lt;/code&gt; module of the current crate (e.g.
+&lt;code&gt;rustc_typeck::errors&lt;/code&gt; or &lt;code&gt;rustc_borrowck::errors&lt;/code&gt;) named after your
+diagnostic. In our example, that might look like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct ReturnTypeArrow {
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, we&#x27;ll need to add fields with all the information we need - that&#x27;s just a
+&lt;code&gt;Span&lt;/code&gt; for us:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct ReturnTypeArrow {
+    span: Span,
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In most cases, this will just be the &lt;code&gt;Span&lt;/code&gt;s that are used by the original
+diagnostic emission logic and values that are interpolated into diagnostic
+messages.&lt;/p&gt;
+&lt;p&gt;After that, we should add the derive, add our error attribute and annotate the
+primary &lt;code&gt;Span&lt;/code&gt; (that was given to &lt;code&gt;struct_span_err&lt;/code&gt;).&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[derive(SessionDiagnostic)]
+#[error(parser::return_type_arrow)]
+struct ReturnTypeArrow {
+    #[primary_span]
+    span: Span,
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Each diagnostic should have a unique slug. By convention, these always start
+with the crate that the error is related to (&lt;code&gt;parser&lt;/code&gt; in this example). This
+slug will be used to find the actual diagnostic message in our translation
+resources, which we&#x27;ll see shortly.&lt;/p&gt;
+&lt;p&gt;Finally, we need to add any labels, notes, helps or suggestions:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[derive(SessionDiagnostic)]
+#[error(parser::return_type_arrow)]
+struct ReturnTypeArrow {
+    #[primary_span]
+    #[suggestion(applicability &#x3D; &amp;quot;machine-applicable&amp;quot;, code &#x3D; &amp;quot;-&amp;gt;&amp;quot;)]
+    span: Span,
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this example, there&#x27;s just a single suggestion - to replace the &lt;code&gt;:&lt;/code&gt; with
+a &lt;code&gt;-&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Before we&#x27;re finished, we have to &lt;a href&#x3D;&quot;#adding-translation-resources&quot;&gt;add the diagnostic messages to the
+translation resources..&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For more documentation on diagnostic derives, see the &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html&quot;&gt;diagnostic structs
+chapter of the &lt;code&gt;rustc&lt;/code&gt; dev guide&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#manually-implementing-sessiondiagnostic&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;manually-implementing-sessiondiagnostic&quot;&gt;&lt;/a&gt;Manually implementing &lt;code&gt;SessionDiagnostic&lt;/code&gt;...&lt;/h4&gt;
+&lt;p&gt;Some diagnostics are too complicated to be generated from a diagnostic type
+using the diagnostic derive. In these cases, &lt;code&gt;SessionDiagnostic&lt;/code&gt; can be
+implemented manually.&lt;/p&gt;
+&lt;p&gt;Using the same type as in &lt;a href&#x3D;&quot;#using-a-diagnostic-derive&quot;&gt;&amp;quot;Using a diagnostic
+derive...&amp;quot;&lt;/a&gt;, we can implement &lt;code&gt;SessionDiagnostic&lt;/code&gt;
+as below:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use rustc_errors::{fluent, SessionDiagnostic};
+
+struct ReturnTypeArrow { span: Span }
+
+impl SessionDiagnostic for ReturnTypeArrow {
+    fn into_diagnostic(self, sess: &amp;amp;&#x27;_ rustc_session::Session) -&amp;gt; DiagnosticBuilder&amp;lt;&#x27;_&amp;gt; {
+        sess.struct_span_err(
+            self.span,
+            fluent::parser::return_type_arrow,
+        )
+        .span_suggestion_short(
+            self.span,
+            fluent::parser::suggestion,
+            &amp;quot;-&amp;gt;&amp;quot;.to_string(),
+            Applicability::MachineApplicable,
+        )
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Instead of using strings for the messages as in the original diagnostic
+emission logic, typed identifiers referring to translation resources are used.
+Now we just have to &lt;a href&#x3D;&quot;#adding-translation-resources&quot;&gt;add the diagnostic messages to the translation
+resources..&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#examples&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;examples&quot;&gt;&lt;/a&gt;Examples&lt;/h4&gt;
+&lt;p&gt;For more examples of diagnostics ported to use the diagnostic derive or written
+manually, see the following pull requests:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;https://github.com/rust-lang/rust/pull/98353&lt;/li&gt;
+&lt;li&gt;https://github.com/rust-lang/rust/pull/98415&lt;/li&gt;
+&lt;li&gt;https://github.com/rust-lang/rust/pull/97093&lt;/li&gt;
+&lt;li&gt;https://github.com/rust-lang/rust/pull/99213&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more examples, see the pull requests labelled &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues?q&#x3D;is%3Aopen+label%3AA-translation+sort%3Aupdated-desc&quot;&gt;&lt;code&gt;A-translation&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#adding-translation-resources&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;adding-translation-resources&quot;&gt;&lt;/a&gt;Adding translation resources...&lt;/h4&gt;
+&lt;p&gt;Every slug in a diagnostic derive or typed identifier in a manual
+implementation needs to correspond to a message in a translation resource.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rustc&lt;/code&gt;&#x27;s translations use &lt;a href&#x3D;&quot;http://projectfluent.org/&quot;&gt;Fluent&lt;/a&gt;, an asymmetric translation system.
+For each crate in the compiler which emits diagnostics, there is a
+corresponding Fluent resource at
+&lt;code&gt;compiler/rustc_error_messages/locales/en-US/$crate.ftl&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Error messages need to be added to this resource (a macro will then generate
+the typed identifier corresponding to the message).&lt;/p&gt;
+&lt;p&gt;For our example, we should add the following Fluent to
+&lt;code&gt;compiler/rustc_error_messages/locales/en-US/parser.ftl&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-fluent&quot;&gt;parser_return_type_arrow &#x3D; return types are denoted using &#x60;-&amp;gt;&#x60;
+    .suggestion &#x3D; use &#x60;-&amp;gt;&#x60; instead
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;parser_return_type_arrow&lt;/code&gt; will generate a &lt;code&gt;parser::return_type_arrow&lt;/code&gt; type (in
+&lt;code&gt;rustc_errors::fluent&lt;/code&gt;) that can be used with diagnostic structs and the
+diagnostic builder.&lt;/p&gt;
+&lt;p&gt;Subdiagnostics are &amp;quot;attributes&amp;quot; of the primary Fluent message - by convention,
+the name of attributes are the type of subdiagnostic, such as &amp;quot;suggestion&amp;quot;, but
+this can be changed when there are multiple of one kind of subdiagnostic.&lt;/p&gt;
+&lt;p&gt;Now that the Fluent resource contains the message, our diagnostic is ported!
+More complex messages with interpolation will be able to reference other fields
+in a diagnostic type (when implemented manually, those are provided as
+arguments). See the diagnostic translation documentation &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/diagnostics/translation.html&quot;&gt;in the &lt;code&gt;rustc&lt;/code&gt; dev
+guide&lt;/a&gt; for more examples.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#3-porting-diagnostics&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;3-porting-diagnostics&quot;&gt;&lt;/a&gt;3. Porting diagnostics&lt;/h3&gt;
+&lt;p&gt;Now that you&#x27;ve got a rough idea what to do, you need to find some diagnostics
+to port. There&#x27;s lots of diagnostics to port, so the diagnostic working group
+have split the work up to avoid anyone working on the same diagnostic as
+someone else - but right now, there aren&#x27;t many people involved, so just pick a
+crate and start porting it :)&lt;/p&gt;
+&lt;p&gt;Please add the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues?q&#x3D;is%3Aopen+label%3AA-translation+sort%3Aupdated-desc&quot;&gt;&lt;code&gt;A-translation&lt;/code&gt;&lt;/a&gt; label to any pull requests that
+you make so we can keep track of who has made a contribution! You can use
+&lt;code&gt;rustbot&lt;/code&gt; to label your PR (if it wasn&#x27;t labelled automatically by
+&lt;code&gt;triagebot&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;@rustbot label +A-translation
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also assign a member of the diagnostics working group to review your PR
+by posting a comment with the following content (or including this in the PR
+description):&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;r? rust-lang/diagnostics
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Even if you aren&#x27;t sure exactly how to proceed, give it a go and you can ask
+for help in &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/147480-t-compiler.2Fwg-diagnostics&quot;&gt;&lt;code&gt;#t-compiler/wg-diagnostics&lt;/code&gt;&lt;/a&gt; or reach out to &lt;a href&#x3D;&quot;https://github.com/davidtwco&quot;&gt;&lt;code&gt;@davidtwco&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#faq&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;faq&quot;&gt;&lt;/a&gt;FAQ&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#is-this-a-feature-that-anyone-wants&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;is-this-a-feature-that-anyone-wants&quot;&gt;&lt;/a&gt;Is this a feature that anyone wants?&lt;/h3&gt;
+&lt;p&gt;Yes! Some language communities prefer native resources and some don&#x27;t (and
+preferences will vary within those communities too). For example,
+Chinese-speaking communities have a mature ecosystem of programming language
+resources which don&#x27;t require knowing any English.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#wouldnt-translating-x-be-more-worthwhile&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;wouldnt-translating-x-be-more-worthwhile&quot;&gt;&lt;/a&gt;Wouldn&#x27;t translating X be more worthwhile?&lt;/h3&gt;
+&lt;p&gt;There are many different areas within the Rust project where
+internationalization would be beneficial. Diagnostics aren&#x27;t being prioritized
+over any other part of the project, it&#x27;s just that there is interest within the
+compiler team in supporting this feature.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#couldnt-compiler-developer-time-be-better-spent-elsewhere&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;couldnt-compiler-developer-time-be-better-spent-elsewhere&quot;&gt;&lt;/a&gt;Couldn&#x27;t compiler developer time be better spent elsewhere?&lt;/h3&gt;
+&lt;p&gt;Compiler implementation isn&#x27;t zero-sum: work on other parts of the compiler
+aren&#x27;t impacted by these efforts and working on diagnostic translation doesn&#x27;t
+prevent contributors working on anything else.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#will-translations-be-opt-in&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;will-translations-be-opt-in&quot;&gt;&lt;/a&gt;Will translations be opt-in?&lt;/h3&gt;
+&lt;p&gt;Translations will be opt-in, you won&#x27;t need to use them if you don&#x27;t want to.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#how-will-a-user-select-the-language&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-will-a-user-select-the-language&quot;&gt;&lt;/a&gt;How will a user select the language?&lt;/h3&gt;
+&lt;p&gt;Exactly how a user will choose to use translated error messages hasn&#x27;t been
+decided yet.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>David Wood</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Please welcome Dan to Library Contributors</title>
@@ -1393,27 +1661,6 @@ to drive the meeting.&lt;/p&gt;
 
         <author>
             <name>Felix Klock</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Concluding the events of last November</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/05/26/Concluding-events-mods.html" type="text/html" title="Concluding the events of last November" />
-        <published>2022-05-26T00:00:00+00:00</published>
-        <updated>2022-05-26T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/05/26/Concluding-events-mods.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/05/26/Concluding-events-mods.html">&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2021/11/25/in-response-to-the-moderation-team-resignation.html&quot;&gt;With the moderators&#x27; resignation in November&lt;/a&gt;, we (Josh Gould and Khionu Sybiern) had the mantle of the Moderation Team offered to us, and we caught up to speed on what led up to this conflict. Their resignation became a catalyst, and we commited with the rest of the project leadership to do our best to solve the issues present and going forward.&lt;/p&gt;
-&lt;p&gt;After these months, the following update was shared with core and team leaders:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The moderation issue has been brought to a resolution. This case was open for an unsually long time, which made this process a considerably worse experience than necessary for all involved. This was caused in part due to the lack of well defined procedures and the underspecified governance structure of the project. Another major factor was the complexity of the situation: it was not a simple case of a CoC violation, but rather a long-standing collaboration and communication issue involving interpersonal conflict and burnout. While we consider this case resolved, we very much recognize the harm that has been done by how the situation was handled, and will continue to work on improving the way we avoid and handle these kind of issues in the future.&lt;/p&gt;
-&lt;p&gt;It should be noted that all involved parties are considered in good standing with the project.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Bringing a close to this situation is a huge relief, but it is also far from the last step on the journey to recovering as a community. While project leadership &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html&quot;&gt;continues to work on these issues&lt;/a&gt;, the Moderation Team is working on an RFC to create supporting mechanisms to cover a wider range of issues. We&#x27;re working with professionals in mediation and other relevant fields to make sure we are prepared. The RFC additionally will better define areas of moderation that were overlooked and improve collaboration and safety.&lt;/p&gt;
-&lt;p&gt;The number one thing we would like going forward is a stronger two-way relationship between our team and the community. Going forward, we will be asking for your help to make contributing to and using Rust as healthy of an experience as possible.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Khionu Sybiern</name>
         </author>
     </entry>
     
