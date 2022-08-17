@@ -232,10 +232,10 @@ resources..](#adding-translation-resources).
 For more examples of diagnostics ported to use the diagnostic derive or written
 manually, see the following pull requests:
 
-- https://github.com/rust-lang/rust/pull/98353
-- https://github.com/rust-lang/rust/pull/98415
-- https://github.com/rust-lang/rust/pull/97093
-- https://github.com/rust-lang/rust/pull/99213
+- [#98353](https://github.com/rust-lang/rust/pull/98353)
+- [#98415](https://github.com/rust-lang/rust/pull/98415)
+- [#97093](https://github.com/rust-lang/rust/pull/97093)
+- [#99213](https://github.com/rust-lang/rust/pull/99213)
 
 For more examples, see the pull requests labelled [`A-translation`][A-translation].
 
