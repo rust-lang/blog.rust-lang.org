@@ -59,15 +59,16 @@ Once most diagnostic messages have been ported to the new infrastructure, then
 the diagnostics working group will start creating a workflow for translation
 teams to translate all of the diagnostic messages to different languages.
 
-Every pull request related to diagnostic translation is listed [in this
-document](https://hackmd.io/@davidtwco/rkXSbLg95).
+Every pull request related to diagnostic translation is tagged with
+[`A-translation`][A-translation].
 
 ## Getting involved
 There's a lot of work to do on diagnostic translation, but the good news is that
 lots of the work can be done in parallel, and it doesn't require background in
 compiler development or familiarity with `rustc` to contribute!
 
-If you are interested, feel free to just get started! You can ask for help in
+**If you are interested in getting involved, take a look at [#100717] to find
+out where to get started!** You can ask for help in
 [`#t-compiler/wg-diagnostics`] or reach out to [`@davidtwco`].
 
 **Note:** This post isn't going to be updated as the working group iterates on
@@ -299,6 +300,7 @@ r? rust-lang/diagnostics
 
 Even if you aren't sure exactly how to proceed, give it a go and you can ask
 for help in [`#t-compiler/wg-diagnostics`] or reach out to [`@davidtwco`].
+Check out [#100717] for guidance on where to get started!
 
 ## FAQ
 
@@ -334,3 +336,4 @@ decided yet.
 [diag_translation]: https://rustc-dev-guide.rust-lang.org/diagnostics/translation.html
 [fluent]: http://projectfluent.org/
 [A-translation]: https://github.com/rust-lang/rust/issues?q=is%3Aopen+label%3AA-translation+sort%3Aupdated-desc
+[#100717]: https://github.com/rust-lang/rust/issues/100717
