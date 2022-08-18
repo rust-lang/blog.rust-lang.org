@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-08-17T10:10:46+00:00</updated>
+    <updated>2022-08-18T14:15:19+00:00</updated>
 
     
     <entry>
@@ -61,13 +61,14 @@ once.&lt;/p&gt;
 &lt;p&gt;Once most diagnostic messages have been ported to the new infrastructure, then
 the diagnostics working group will start creating a workflow for translation
 teams to translate all of the diagnostic messages to different languages.&lt;/p&gt;
-&lt;p&gt;Every pull request related to diagnostic translation is listed &lt;a href&#x3D;&quot;https://hackmd.io/@davidtwco/rkXSbLg95&quot;&gt;in this
-document&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Every pull request related to diagnostic translation is tagged with
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues?q&#x3D;is%3Aopen+label%3AA-translation+sort%3Aupdated-desc&quot;&gt;&lt;code&gt;A-translation&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#getting-involved&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;getting-involved&quot;&gt;&lt;/a&gt;Getting involved&lt;/h2&gt;
 &lt;p&gt;There&#x27;s a lot of work to do on diagnostic translation, but the good news is that
 lots of the work can be done in parallel, and it doesn&#x27;t require background in
 compiler development or familiarity with &lt;code&gt;rustc&lt;/code&gt; to contribute!&lt;/p&gt;
-&lt;p&gt;If you are interested, feel free to just get started! You can ask for help in
+&lt;p&gt;&lt;strong&gt;If you are interested in getting involved, take a look at &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/100717&quot;&gt;#100717&lt;/a&gt; to find
+out where to get started!&lt;/strong&gt; You can ask for help in
 &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/147480-t-compiler.2Fwg-diagnostics&quot;&gt;&lt;code&gt;#t-compiler/wg-diagnostics&lt;/code&gt;&lt;/a&gt; or reach out to &lt;a href&#x3D;&quot;https://github.com/davidtwco&quot;&gt;&lt;code&gt;@davidtwco&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This post isn&#x27;t going to be updated as the working group iterates on
 and improves the workflow for diagnostic translation, so always consult the
@@ -253,7 +254,8 @@ description):&lt;/p&gt;
 &lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;r? rust-lang/diagnostics
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Even if you aren&#x27;t sure exactly how to proceed, give it a go and you can ask
-for help in &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/147480-t-compiler.2Fwg-diagnostics&quot;&gt;&lt;code&gt;#t-compiler/wg-diagnostics&lt;/code&gt;&lt;/a&gt; or reach out to &lt;a href&#x3D;&quot;https://github.com/davidtwco&quot;&gt;&lt;code&gt;@davidtwco&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+for help in &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/147480-t-compiler.2Fwg-diagnostics&quot;&gt;&lt;code&gt;#t-compiler/wg-diagnostics&lt;/code&gt;&lt;/a&gt; or reach out to &lt;a href&#x3D;&quot;https://github.com/davidtwco&quot;&gt;&lt;code&gt;@davidtwco&lt;/code&gt;&lt;/a&gt;.
+Check out &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/100717&quot;&gt;#100717&lt;/a&gt; for guidance on where to get started!&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#faq&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;faq&quot;&gt;&lt;/a&gt;FAQ&lt;/h2&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#is-this-a-feature-that-anyone-wants&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;is-this-a-feature-that-anyone-wants&quot;&gt;&lt;/a&gt;Is this a feature that anyone wants?&lt;/h3&gt;
 &lt;p&gt;Yes! Some language communities prefer native resources and some don&#x27;t (and
