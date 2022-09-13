@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-08-18T14:15:22+00:00</updated>
+    <updated>2022-09-13T17:44:27+00:00</updated>
 
     
     <entry>
@@ -217,7 +217,7 @@ We couldn&#x27;t have done it without all of you.
     vec.last().unwrap()
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This example doesn&#x27;t compile today (&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;stable&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;517ac32f0aab076faa32b9065783bbb4&quot;&gt;try it for yourself&lt;/a&gt;), though there&#x27;s not a good reason for that. You can often workaround the problem by editing the code to introduce a redundant if (&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;stable&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;d9b25963e83201902ecf5c02d79cbc13&quot;&gt;as shown in this example&lt;/a&gt;), but with polonius, it will compile as is. If you&#x27;d like to learn more about how polonius (and the existing borrow checker) works&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, you can &lt;a href&#x3D;&quot;https://www.youtube.com/watch?v&#x3D;_agDeiWek8w&quot;&gt;watch my talk from Rust Belt Rust&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This example doesn&#x27;t compile today (&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;stable&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;517ac32f0aab076faa32b9065783bbb4&quot;&gt;try it for yourself&lt;/a&gt;), though there&#x27;s not a good reason for that. You can often workaround the problem by editing the code to introduce a redundant &lt;code&gt;let&lt;/code&gt; (&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;stable&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;d9b25963e83201902ecf5c02d79cbc13&quot;&gt;as shown in this example&lt;/a&gt;), but with polonius, it will compile as is. If you&#x27;d like to learn more about how polonius (and the existing borrow checker) works&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, you can &lt;a href&#x3D;&quot;https://www.youtube.com/watch?v&#x3D;_agDeiWek8w&quot;&gt;watch my talk from Rust Belt Rust&lt;/a&gt;.&lt;/p&gt;
 &lt;section class&#x3D;&quot;footnotes&quot;&gt;
 &lt;ol&gt;
 &lt;li id&#x3D;&quot;fn1&quot;&gt;

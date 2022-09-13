@@ -103,7 +103,7 @@
     vec.last().unwrap()
 }
 </code></pre>
-<p>This example doesn't compile today (<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=517ac32f0aab076faa32b9065783bbb4">try it for yourself</a>), though there's not a good reason for that. You can often workaround the problem by editing the code to introduce a redundant if (<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=d9b25963e83201902ecf5c02d79cbc13">as shown in this example</a>), but with polonius, it will compile as is. If you'd like to learn more about how polonius (and the existing borrow checker) works<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>, you can <a href="https://www.youtube.com/watch?v=_agDeiWek8w">watch my talk from Rust Belt Rust</a>.</p>
+<p>This example doesn't compile today (<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=517ac32f0aab076faa32b9065783bbb4">try it for yourself</a>), though there's not a good reason for that. You can often workaround the problem by editing the code to introduce a redundant <code>let</code> (<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=d9b25963e83201902ecf5c02d79cbc13">as shown in this example</a>), but with polonius, it will compile as is. If you'd like to learn more about how polonius (and the existing borrow checker) works<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>, you can <a href="https://www.youtube.com/watch?v=_agDeiWek8w">watch my talk from Rust Belt Rust</a>.</p>
 <section class="footnotes">
 <ol>
 <li id="fn1">
