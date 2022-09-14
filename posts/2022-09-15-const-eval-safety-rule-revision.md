@@ -225,14 +225,7 @@ strived to mitigate such breakage *whenever feasible*, via things like
 
 Today, with our current const-eval architecture layered atop Miri, it is not
 feasible to ensure that changes such as the [one that injected][PR #97684] issue
-[#99923][] go through a future-incompat warning cycle. Maybe that is an okay
-state of affairs; it is hard to tell if we will encounter other cases similar to
-this in the future as Miri and const-eval continue to evolve.
-
-[PR #97684]: https://github.com/rust-lang/rust/pull/97684
-
-[stability post]: https://blog.rust-lang.org/2014/10/30/Stability.html
-
+[#99923][] go through a future-incompat warning cycle.
 The compiler team plans to keep our eye on issues in this space. If we see
 evidence that these kinds of changes do cause breakage to a non-trivial number
 of crates, then we will investigate further how we might smooth the transition
@@ -240,6 +233,12 @@ path between compiler releases. However, we need to balance any such goal
 against the fact that Miri has very a limited set of developers: the researchers
 determining how to define the semantics of unsafe languages like Rust. We do not
 want to slow their work down!
+
+
+[PR #97684]: https://github.com/rust-lang/rust/pull/97684
+
+[stability post]: https://blog.rust-lang.org/2014/10/30/Stability.html
+
 
 ## What you can do for safety's sake
 
