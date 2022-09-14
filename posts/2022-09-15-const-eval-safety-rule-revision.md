@@ -72,11 +72,17 @@ to above is trying to reinterpret the memory address `&()` as an integer of type
 associated with at execution time, so it refuses to allow that reinterpretation.
 
 When you write safe Rust, then the compiler is responsible for preventing
-undefined behavior. When you write any unsafe code (be it const or non-const), you are
-responsible for preventing UB. The Rust compiler will protect itself from being
-[adversely affected][const-ub-guide], but other than that there are few
-guarantees. Specifically: If you have UB at const-eval time, there is no
-guarantee that your code will be accepted from one compiler version to another.
+undefined behavior. When you write any unsafe code (be it const or non-const),
+you are responsible for preventing UB, and during const-eval, the rules about
+what unsafe code has defined behavior are even more strict than the analogous
+rules governing Rust's runtime semantics. (In other words, *more* code is
+classified as "UB" than you may have otherwise realized.)
+
+If you hit undefined behavior during const-eval, the Rust compiler will protect
+itself from [adverse effects][const-ub-guide], but there are few guarantees
+other than that. For example, compile-time UB could lead to runtime UB.
+Furthermore, if you have UB at const-eval time, there is no guarantee that your
+code will be accepted from one compiler version to another.
 
 [const-ub-guide]: https://github.com/rust-lang/rfcs/blob/master/text/3016-const-ub.md#guide-level-explanation
 
@@ -173,21 +179,23 @@ pointing out that these tools can pinpoint the injection point more precisely.)
 
 Why not have these extra const-ub checks on by default? Well, the checks
 introduce performance overhead upon Rust compilation time, and we do not know if
-that overhead can be made acceptable. However, [recent debate][perf argument]
+that overhead can be made acceptable. (However, [recent debate][perf argument]
 among Miri developers indicates that the inherent cost here might not be as bad
-as they had originally thought.
+as they had originally thought. Perhaps a future version of the compiler will
+have these extra checks on by default.)
 
 [perf argument]: https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings/topic/.5Bsteering.20meeting.5D.202022-09-02.20const-eval.20and.20future-compa.2E.2E.2E/near/296853344
 
 ## Change is hard
 
 You might well be wondering at this point: "Wait, when *is* it okay to transmute
-a pointer to a `usize` during const evaluation?" And the answer is: "Never."
+a pointer to a `usize` during const evaluation?" And the answer is simple:
+"Never."
 
 Transmuting a pointer to a usize during const-eval has always been undefined behavior,
 ever since const-eval added support for
 `transmute` and `union`. You can read more about this in the
-`const_fn_`{`transmute`,`union`} [stabilization report][cftu report],
+`const_fn_transmute` / `const_fn_union` [stabilization report][cftu report],
 specifically the subsection entitled "Pointer-integer-transmutes".
 
 [cftu report]: https://github.com/rust-lang/rust/pull/85769#issuecomment-854363720
@@ -286,15 +294,18 @@ can say Hello in the [miri zulip][].
 
 ## Conclusion
 
-When you write safe Rust, then the compiler is responsible for preventing
-undefined behavior. When you write any unsafe code, you are responsible for
-preventing undefined behavior. If you have undefined behavior at const-eval
-time, there is no guarantee that your code will be accepted from one compiler
-version to another.
+To sum it all up: When you write safe Rust, then the compiler is responsible for
+preventing undefined behavior. When you write any unsafe code, *you* are
+responsible for preventing undefined behavior. Rust's const-eval system has a
+stricter set of rules governing what unsafe code has defined behavior:
+specifically, reinterpreting (aka "transmuting") a pointer value as a `usize` is
+undefined behavior during const-eval. If you have undefined behavior at
+const-eval time, there is no guarantee that your code will be accepted from one
+compiler version to another.
 
 The compiler team is hoping that issue [#99923][] is an exceptional fluke and
 that the 1.64 stable release will not encounter any other surprises related to
-this change to the const-eval machinery.
+the aforementioned change to the const-eval machinery.
 
 But fluke or not, the issue provided excellent motivation to spend some time
 exploring facets of Rust's const-eval architecture, and the Miri interpreter
