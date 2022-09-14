@@ -182,19 +182,21 @@ as they had originally thought.
 ## Change is hard
 
 You might well be wondering at this point: "Wait, when *is* it okay to transmute
-a pointer to a `usize` during const evaluation?" And the answer is: "Never. It
-has always been undefined behavior, ever since const-eval added support for
-`transmute` and `union`." You can read more about this in the
+a pointer to a `usize` during const evaluation?" And the answer is: "Never."
+
+Transmuting a pointer to a usize during const-eval has always been undefined behavior,
+ever since const-eval added support for
+`transmute` and `union`. You can read more about this in the
 `const_fn_`{`transmute`,`union`} [stabilization report][cftu report],
 specifically the subsection entitled "Pointer-integer-transmutes".
 
 [cftu report]: https://github.com/rust-lang/rust/pull/85769#issuecomment-854363720
 
-Thus, we can see that the classification of this as UB during const evaluation
+Thus, we can see that the classification of the above examples as UB during const evaluation
 is not a new thing at all. The only change here was that Miri had some internal
 changes that made it start detecting the UB rather than silently ignoring it.
 
-So we see that the Rust compiler has a shifting notion of what UB it will
+This means the Rust compiler has a shifting notion of what UB it will
 explicitly catch. We anticipated this: RFC 3016, "const UB", explicitly
 [says](https://github.com/rust-lang/rfcs/blob/master/text/3016-const-ub.md#guide-level-explanation):
 
