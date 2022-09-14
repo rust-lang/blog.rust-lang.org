@@ -66,8 +66,8 @@ error[E0080]: could not evaluate static initializer
   = help: the absolute address of a pointer is not known at compile-time, so such operations are not supported
 ```
 
-As the message says, this operation is not supported: the `transmute` is trying
-to above is trying to reinterpret the memory address `&()` as an integer of type
+As the message says, this operation is not supported: the `transmute`
+above is trying to reinterpret the memory address `&()` as an integer of type
 `usize`. The compiler cannot predict what memory address the `()` would be
 associated with at execution time, so it refuses to allow that reinterpretation.
 
