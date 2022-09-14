@@ -171,6 +171,14 @@ compiler highlights the expression where we can first witness UB: the original
 transmute itself! (Which was stated at the outset of this post; here we are just
 pointing out that these tools can pinpoint the injection point more precisely.)
 
+Why not have these extra const-ub checks on by default? Well, the checks
+introduce performance overhead upon Rust compilation time, and we do not know if
+that overhead can be made acceptable. However, [recent debate][perf argument]
+among Miri developers indicates that the inherent cost here might not be as bad
+as they had originally thought.
+
+[perf argument]: https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings/topic/.5Bsteering.20meeting.5D.202022-09-02.20const-eval.20and.20future-compa.2E.2E.2E/near/296853344
+
 ## Change is hard
 
 You might well be wondering at this point: "Wait, when *is* it okay to transmute
