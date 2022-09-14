@@ -10,8 +10,80 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-09-13T17:44:27+00:00</updated>
+    <updated>2022-09-14T14:03:27+00:00</updated>
 
+    
+    <entry>
+        <title>Security advisories for Cargo (CVE-2022-36113, CVE-2022-36114)</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/09/14/cargo-cves.html" type="text/html" title="Security advisories for Cargo (CVE-2022-36113, CVE-2022-36114)" />
+        <published>2022-09-14T00:00:00+00:00</published>
+        <updated>2022-09-14T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/09/14/cargo-cves.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/09/14/cargo-cves.html">&lt;blockquote&gt;
+&lt;p&gt;This is a cross-post of &lt;a href&#x3D;&quot;https://groups.google.com/g/rustlang-security-announcements/c/ldvsemwk_VY&quot;&gt;the official security advisory&lt;/a&gt;. The
+official advisory contains a signed version with our PGP key, as well.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The Rust Security Response WG was notified that Cargo did not prevent
+extracting some malformed packages downloaded from alternate registries. An
+attacker able to upload packages to an alternate registry could fill the
+filesystem or corrupt arbitary files when Cargo downloaded the package.&lt;/p&gt;
+&lt;p&gt;These issues have been assigned CVE-2022-36113 and CVE-2022-36114. The severity
+of these vulnerabilities is &amp;quot;low&amp;quot; for users of alternate registries. Users
+relying on crates.io are not affected.&lt;/p&gt;
+&lt;p&gt;Note that &lt;strong&gt;by design&lt;/strong&gt; Cargo allows code execution at build time, due to build
+scripts and procedural macros. The vulnerabilities in this advisory allow
+performing a subset of the possible damage in a harder to track down way. Your
+dependencies must still be trusted if you want to be protected from attacks, as
+it&#x27;s possible to perform the same attacks with build scripts and procedural
+macros.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#arbitrary-file-corruption-cve-2022-36113&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;arbitrary-file-corruption-cve-2022-36113&quot;&gt;&lt;/a&gt;Arbitrary file corruption (CVE-2022-36113)&lt;/h2&gt;
+&lt;p&gt;After a package is downloaded, Cargo extracts its source code in the &lt;code&gt;~/.cargo&lt;/code&gt;
+folder on disk, making it available to the Rust projects it builds. To record
+when an extraction is successfull, Cargo writes &amp;quot;ok&amp;quot; to the &lt;code&gt;.cargo-ok&lt;/code&gt; file at
+the root of the extracted source code once it extracted all the files.&lt;/p&gt;
+&lt;p&gt;It was discovered that Cargo allowed packages to contain a &lt;code&gt;.cargo-ok&lt;/code&gt;
+&lt;em&gt;symbolic link&lt;/em&gt;, which Cargo would extract. Then, when Cargo attempted to write
+&amp;quot;ok&amp;quot; into &lt;code&gt;.cargo-ok&lt;/code&gt;, it would actually replace the first two bytes of the
+file the symlink pointed to with &lt;code&gt;ok&lt;/code&gt;. This would allow an attacker to corrupt
+one file on the machine using Cargo to extract the package.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#disk-space-exaustion-cve-2022-36114&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;disk-space-exaustion-cve-2022-36114&quot;&gt;&lt;/a&gt;Disk space exaustion (CVE-2022-36114)&lt;/h2&gt;
+&lt;p&gt;It was discovered that Cargo did not limit the amount of data extracted from
+compressed archives. An attacker could upload to an alternate registry a
+specially crafted package that extracts way more data than its size (also known
+as a &amp;quot;zip bomb&amp;quot;), exhausting the disk space on the machine using Cargo to
+download the package.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#affected-versions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;affected-versions&quot;&gt;&lt;/a&gt;Affected versions&lt;/h2&gt;
+&lt;p&gt;Both vulnerabilities are present in all versions of Cargo. Rust 1.64, to be
+released on September 22nd, will include fixes for both of them.&lt;/p&gt;
+&lt;p&gt;Since these vulnerabilities are just a more limited way to accomplish what a
+malicious build scripts or procedural macros can do, we decided not to publish
+Rust point releases backporting the security fix. Patch files for Rust 1.63.0
+are available &lt;a href&#x3D;&quot;https://github.com/rust-lang/wg-security-response/tree/master/patches&quot;&gt;in the wg-security-response repository&lt;/a&gt; for people building
+their own toolchains.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#mitigations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;mitigations&quot;&gt;&lt;/a&gt;Mitigations&lt;/h2&gt;
+&lt;p&gt;We recommend users of alternate registries to excercise care in which package
+they download, by only including trusted dependencies in their projects. Please
+note that even with these vulnerabilities fixed, by design Cargo allows
+arbitrary code execution at build time thanks to build scripts and procedural
+macros: a malicious dependency will be able to cause damage regardless of these
+vulnerabilities.&lt;/p&gt;
+&lt;p&gt;crates.io implemented server-side checks to reject these kinds of packages
+years ago, and there are no packages on crates.io exploiting these
+vulnerabilities. crates.io users still need to excercise care in choosing their
+dependencies though, as the same concerns about build scripts and procedural
+macros apply here.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#acknowledgements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgements&quot;&gt;&lt;/a&gt;Acknowledgements&lt;/h2&gt;
+&lt;p&gt;We want to thank Ori Hollander from JFrog Security Research for responsibly
+disclosing this to us according to the &lt;a href&#x3D;&quot;https://www.rust-lang.org/policies/security&quot;&gt;Rust security policy&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We also want to thank Josh Triplett for developing the fixes, Weihang Lo for
+developing the tests, and Pietro Albini for writing this advisory. The
+disclosure was coordinated by Pietro Albini and Josh Stone.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Security Response WG</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.63.0</title>
@@ -665,45 +737,6 @@ We couldn&#x27;t have done it without all of you.
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing The RustConf PostConf UnConf</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/06/28/rust-unconference.html" type="text/html" title="Announcing The RustConf PostConf UnConf" />
-        <published>2022-06-28T00:00:00+00:00</published>
-        <updated>2022-06-28T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/06/28/rust-unconference.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/06/28/rust-unconference.html">&lt;p&gt;Hello Rust community!&lt;/p&gt;
-&lt;p&gt;We&#x27;re excited to announce that the Rust project teams will be hosting an
-unconference&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; the day after &lt;a href&#x3D;&quot;https://rustconf.com&quot;&gt;RustConf&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src&#x3D;&quot;../../../images/2022-06-28-rust-unconference/Eventbrite_Unconf.jpg&quot; alt&#x3D;&quot;RustConf PostConf UnConf promo image&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;The PostConf Unconf will be dedicated to the Rust project and will be a
-fantastic opportunity for users, contributors, and maintainers to network and
-discuss the project&#x27;s development.&lt;/p&gt;
-&lt;p&gt;There will be no set agenda; instead, attendees will decide what will be
-discussed together and can move freely between sessions to find ones in which
-they can contribute most effectively based on their individual interests and
-needs.&lt;/p&gt;
-&lt;p&gt;To get the most out of the unconference, jot down your thoughts ahead of time
-and bring them ready to share. We will also set up a channel in the RustConf
-Discord for folks to communicate and make preliminary, informal plans.&lt;/p&gt;
-&lt;p&gt;If you plan to attend, please register as soon as possible to help us plan
-appropriately. If we run out of space, project participants will be given preference.
-Registration is free and open to everyone attending RustConf.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href&#x3D;&quot;https://www.eventbrite.com/e/rustconf-postconf-unconf-registration-373057423797&quot;&gt;🚨Register Now!🚨&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;We hope to see you there!&lt;/p&gt;
-&lt;section class&#x3D;&quot;footnotes&quot;&gt;
-&lt;ol&gt;
-&lt;li id&#x3D;&quot;fn1&quot;&gt;
-&lt;p&gt;If you are unfamiliar with the notion of an unconference, you may find &lt;a href&#x3D;&quot;https://universityinnovation.org/wiki/Resource:How_to_organize_an_unconference&quot;&gt;this informational piece helpful&lt;/a&gt;. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
-</content>
-
-        <author>
-            <name>Jane Lusby, on behalf of The Rust Project Teams</name>
         </author>
     </entry>
     
