@@ -256,7 +256,12 @@ to tease apart within the project community itself.)
 
 If you can test compiling your crate atop the 1.64-beta before the stable
 release goes out on September 22nd, all the better! One easy way to try the beta
-is to use [rustup's override shortand][rustup] for it.
+is to use [rustup's override shortand][rustup] for it:
+
+```shell
+$ rustup update beta
+$ cargo +beta build
+```
 
 [rustup]: https://rust-lang.github.io/rustup/overrides.html#toolchain-override-shorthand
 
