@@ -120,7 +120,7 @@ expect there to always be an integer value would only be caught, if at all, at
 some later point.
 
 For example, the const-eval machinery rejects code that attempts to embed the
-transmuted pointer into a value that could be used by runtime code, like so ([playpen][embed play]):
+transmuted pointer into a value that could be used by runtime code, like so ([playground][embed play]):
 
 [embed play]: https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=48456e8bd028c6aa5c80a1962d7e4fb8
 
