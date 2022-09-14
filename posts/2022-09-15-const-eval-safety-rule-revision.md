@@ -12,6 +12,14 @@ In a recent Rust issue ([#99923][]), a developer noted that the upcoming
 that is run at compile-time but produces values that may end up embedded in the
 final object code that executes at runtime.
 
+Rust's const-eval system supports both safe and unsafe Rust, but the rules for
+what unsafe code is allowed to do during const-eval are even more strict than
+what is allowed for unsafe code at runtime. This post is going to go into detail
+about one of those rules.
+
+(If your `const` code does not use any `unsafe` blocks or call any `const fn`
+with an `unsafe` block, then you do not need to worry about this!)
+
 <!--
 
 (This is distinct from procedural macros, which are Rust code that runs at
@@ -62,6 +70,15 @@ As the message says, this operation is not supported: the `transmute` is trying
 to above is trying to reinterpret the memory address `&()` as an integer of type
 `usize`. The compiler cannot predict what memory address the `()` would be
 associated with at execution time, so it refuses to allow that reinterpretation.
+
+When you write safe Rust, then the compiler is responsible for preventing
+undefined behavior. When you write any unsafe code (be it const or non-const), you are
+responsible for preventing UB. The Rust compiler will protect itself from being
+[adversely affected][const-ub-guide], but other than that there are few
+guarantees. Specifically: If you have UB at const-eval time, there is no
+guarantee that your code will be accepted from one compiler version to another.
+
+[const-ub-guide]: https://github.com/rust-lang/rfcs/blob/master/text/3016-const-ub.md#guide-level-explanation
 
 ## What is new here
 
@@ -258,6 +275,12 @@ can say Hello in the [miri zulip][].
 
 
 ## Conclusion
+
+When you write safe Rust, then the compiler is responsible for preventing
+undefined behavior. When you write any unsafe code, you are responsible for
+preventing undefined behavior. If you have undefined behavior at const-eval
+time, there is no guarantee that your code will be accepted from one compiler
+version to another.
 
 The compiler team is hoping that issue [#99923][] is an exceptional fluke and
 that the 1.64 stable release will not encounter any other surprises related to
