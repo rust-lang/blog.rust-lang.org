@@ -8,8 +8,9 @@ team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
 
 In a recent Rust issue ([#99923][]), a developer noted that the upcoming
 1.64-beta version of Rust had started signalling errors on their crate,
-[`icu4x`][icu4x]. The `icu4x` crate makes heavy use of *const-eval*: Rust code
-that is run at compile-time but produces values that may end up embedded in the
+[`icu4x`][icu4x]. The `icu4x` crate uses unsafe code during const evaluation.
+*Const evaluation*, or just "const-eval",
+runs at compile-time but produces values that may end up embedded in the
 final object code that executes at runtime.
 
 Rust's const-eval system supports both safe and unsafe Rust, but the rules for
@@ -17,7 +18,7 @@ what unsafe code is allowed to do during const-eval are even more strict than
 what is allowed for unsafe code at runtime. This post is going to go into detail
 about one of those rules.
 
-(If your `const` code does not use any `unsafe` blocks or call any `const fn`
+(Note: If your `const` code does not use any `unsafe` blocks or call any `const fn`
 with an `unsafe` block, then you do not need to worry about this!)
 
 <!--
