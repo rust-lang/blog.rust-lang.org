@@ -79,7 +79,8 @@ rules governing Rust's runtime semantics. (In other words, *more* code is
 classified as "UB" than you may have otherwise realized.)
 
 If you hit undefined behavior during const-eval, the Rust compiler will protect
-itself from [adverse effects][const-ub-guide], but there are few guarantees
+itself from [adverse effects][const-ub-guide] such as the undefined
+behavior leaking into the type system, but there are few guarantees
 other than that. For example, compile-time UB could lead to runtime UB.
 Furthermore, if you have UB at const-eval time, there is no guarantee that your
 code will be accepted from one compiler version to another.
