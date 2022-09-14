@@ -182,7 +182,7 @@ explicitly catch. We anticipated this: RFC 3016, "const UB", explicitly
 Having said that: So much of Rust's success has been built around the trust that
 we have earned with our community. Yes, the project has always reserved the
 right to make breaking changes when resolving soundness bugs; but we have also
-strived to avoid such breakage *whenever feasible*, via things like
+strived to mitigate such breakage *whenever feasible*, via things like
 [future-incompatible lints][future-incompat].
 
 [future-incompat]: https://doc.rust-lang.org/rustc/lints/index.html#future-incompatible-lints
