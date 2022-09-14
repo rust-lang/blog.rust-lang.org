@@ -254,6 +254,8 @@ to tease apart within the project community itself.)
 
 -->
 
+We have done a [crater run] for the 1.64-beta and that did not find any other
+instances of this particular problem.
 If you can test compiling your crate atop the 1.64-beta before the stable
 release goes out on September 22nd, all the better! One easy way to try the beta
 is to use [rustup's override shortand][rustup] for it:
@@ -263,6 +265,7 @@ $ rustup update beta
 $ cargo +beta build
 ```
 
+[crater run]: https://github.com/rust-lang/rust/issues/100327
 [rustup]: https://rust-lang.github.io/rustup/overrides.html#toolchain-override-shorthand
 
 [file an issue]: https://github.com/rust-lang/rust/issues/new/choose
