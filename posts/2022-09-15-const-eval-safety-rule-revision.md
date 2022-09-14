@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Const Eval Safety Rules
+title: Const Eval (Un)Safety Rules
 author: Felix Klock
 description: "Various ways const-eval can change between Rust versions"
 team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
