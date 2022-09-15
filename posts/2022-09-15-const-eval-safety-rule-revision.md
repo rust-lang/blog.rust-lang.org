@@ -199,8 +199,12 @@ ever since const-eval added support for
 `transmute` and `union`. You can read more about this in the
 `const_fn_transmute` / `const_fn_union` [stabilization report][cftu report],
 specifically the subsection entitled "Pointer-integer-transmutes".
+(It is also mentioned in the [documentation][doc for transmute] for `transmute`<!--,
+though with less discussion than what you see in the stabilization report -->.)
 
 [cftu report]: https://github.com/rust-lang/rust/pull/85769#issuecomment-854363720
+
+[doc for transmute]: https://doc.rust-lang.org/std/mem/fn.transmute.html
 
 Thus, we can see that the classification of the above examples as UB during const evaluation
 is not a new thing at all. The only change here was that Miri had some internal
