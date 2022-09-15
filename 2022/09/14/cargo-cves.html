@@ -98,7 +98,7 @@ the root of the extracted source code once it extracted all the files.</p>
 &quot;ok&quot; into <code>.cargo-ok</code>, it would actually replace the first two bytes of the
 file the symlink pointed to with <code>ok</code>. This would allow an attacker to corrupt
 one file on the machine using Cargo to extract the package.</p>
-<h2><a href="#disk-space-exaustion-cve-2022-36114" aria-hidden="true" class="anchor" id="disk-space-exaustion-cve-2022-36114"></a>Disk space exaustion (CVE-2022-36114)</h2>
+<h2><a href="#disk-space-exhaustion-cve-2022-36114" aria-hidden="true" class="anchor" id="disk-space-exhaustion-cve-2022-36114"></a>Disk space exhaustion (CVE-2022-36114)</h2>
 <p>It was discovered that Cargo did not limit the amount of data extracted from
 compressed archives. An attacker could upload to an alternate registry a
 specially crafted package that extracts way more data than its size (also known

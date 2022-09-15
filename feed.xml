@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-09-15T15:09:25+00:00</updated>
+    <updated>2022-09-15T16:45:27+00:00</updated>
 
     
     <entry>
@@ -275,7 +275,7 @@ the root of the extracted source code once it extracted all the files.&lt;/p&gt;
 &amp;quot;ok&amp;quot; into &lt;code&gt;.cargo-ok&lt;/code&gt;, it would actually replace the first two bytes of the
 file the symlink pointed to with &lt;code&gt;ok&lt;/code&gt;. This would allow an attacker to corrupt
 one file on the machine using Cargo to extract the package.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#disk-space-exaustion-cve-2022-36114&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;disk-space-exaustion-cve-2022-36114&quot;&gt;&lt;/a&gt;Disk space exaustion (CVE-2022-36114)&lt;/h2&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#disk-space-exhaustion-cve-2022-36114&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;disk-space-exhaustion-cve-2022-36114&quot;&gt;&lt;/a&gt;Disk space exhaustion (CVE-2022-36114)&lt;/h2&gt;
 &lt;p&gt;It was discovered that Cargo did not limit the amount of data extracted from
 compressed archives. An attacker could upload to an alternate registry a
 specially crafted package that extracts way more data than its size (also known
