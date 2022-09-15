@@ -10,8 +10,237 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-09-14T14:03:27+00:00</updated>
+    <updated>2022-09-15T15:09:25+00:00</updated>
 
+    
+    <entry>
+        <title>Const Eval (Un)Safety Rules</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/09/15/const-eval-safety-rule-revision.html" type="text/html" title="Const Eval (Un)Safety Rules" />
+        <published>2022-09-15T00:00:00+00:00</published>
+        <updated>2022-09-15T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/09/15/const-eval-safety-rule-revision.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/09/15/const-eval-safety-rule-revision.html">&lt;p&gt;In a recent Rust issue (&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/99923&quot;&gt;#99923&lt;/a&gt;), a developer noted that the upcoming
+1.64-beta version of Rust had started signalling errors on their crate,
+&lt;a href&#x3D;&quot;https://github.com/unicode-org/icu4x&quot;&gt;&lt;code&gt;icu4x&lt;/code&gt;&lt;/a&gt;. The &lt;code&gt;icu4x&lt;/code&gt; crate uses unsafe code during const evaluation.
+&lt;em&gt;Const evaluation&lt;/em&gt;, or just &amp;quot;const-eval&amp;quot;,
+runs at compile-time but produces values that may end up embedded in the
+final object code that executes at runtime.&lt;/p&gt;
+&lt;p&gt;Rust&#x27;s const-eval system supports both safe and unsafe Rust, but the rules for
+what unsafe code is allowed to do during const-eval are even more strict than
+what is allowed for unsafe code at runtime. This post is going to go into detail
+about one of those rules.&lt;/p&gt;
+&lt;p&gt;(Note: If your &lt;code&gt;const&lt;/code&gt; code does not use any &lt;code&gt;unsafe&lt;/code&gt; blocks or call any &lt;code&gt;const fn&lt;/code&gt;
+with an &lt;code&gt;unsafe&lt;/code&gt; block, then you do not need to worry about this!)&lt;/p&gt;
+&lt;!--
+
+(This is distinct from procedural macros, which are Rust code that runs at
+compile-time to manipulate *program syntax*; syntactic values are not usually
+embedded into the final object code.)
+
+--&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#a-new-diagnostic-to-watch-for&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-new-diagnostic-to-watch-for&quot;&gt;&lt;/a&gt;A new diagnostic to watch for&lt;/h2&gt;
+&lt;p&gt;The problem, reduced over the course of the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/99923#issuecomment-1200284482&quot;&gt;comment thread of #99923&lt;/a&gt;, is that certain static initialization expressions (see below) are
+defined as having undefined behavior (UB) &lt;em&gt;at compile time&lt;/em&gt; (&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;beta&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;67a917fc4f2a4bf2eb72aebf8dad0fe9&quot;&gt;playground&lt;/a&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub static FOO: () &#x3D; unsafe {
+    let illegal_ptr2int: usize &#x3D; std::mem::transmute(&amp;amp;());
+    let _copy &#x3D; illegal_ptr2int;
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(Many thanks to &lt;code&gt;@eddyb&lt;/code&gt; for the minimal reproduction!)&lt;/p&gt;
+&lt;p&gt;The code above was accepted by Rust versions 1.63 and earlier, but in the Rust
+1.64-beta, it now causes a compile time error with the following message:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;error[E0080]: could not evaluate static initializer
+ --&amp;gt; demo.rs:3:17
+  |
+3 |     let _copy &#x3D; illegal_ptr2int;
+  |                 ^^^^^^^^^^^^^^^ unable to turn pointer into raw bytes
+  |
+  &#x3D; help: this code performed an operation that depends on the underlying bytes representing a pointer
+  &#x3D; help: the absolute address of a pointer is not known at compile-time, so such operations are not supported
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As the message says, this operation is not supported: the &lt;code&gt;transmute&lt;/code&gt;
+above is trying to reinterpret the memory address &lt;code&gt;&amp;amp;()&lt;/code&gt; as an integer of type
+&lt;code&gt;usize&lt;/code&gt;. The compiler cannot predict what memory address the &lt;code&gt;()&lt;/code&gt; would be
+associated with at execution time, so it refuses to allow that reinterpretation.&lt;/p&gt;
+&lt;p&gt;When you write safe Rust, then the compiler is responsible for preventing
+undefined behavior. When you write any unsafe code (be it const or non-const),
+you are responsible for preventing UB, and during const-eval, the rules about
+what unsafe code has defined behavior are even more strict than the analogous
+rules governing Rust&#x27;s runtime semantics. (In other words, &lt;em&gt;more&lt;/em&gt; code is
+classified as &amp;quot;UB&amp;quot; than you may have otherwise realized.)&lt;/p&gt;
+&lt;p&gt;If you hit undefined behavior during const-eval, the Rust compiler will protect
+itself from &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/3016-const-ub.md#guide-level-explanation&quot;&gt;adverse effects&lt;/a&gt; such as the undefined
+behavior leaking into the type system, but there are few guarantees
+other than that. For example, compile-time UB could lead to runtime UB.
+Furthermore, if you have UB at const-eval time, there is no guarantee that your
+code will be accepted from one compiler version to another.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-new-here&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-new-here&quot;&gt;&lt;/a&gt;What is new here&lt;/h2&gt;
+&lt;p&gt;You might be thinking: &amp;quot;it &lt;em&gt;used to be&lt;/em&gt; accepted; therefore, there must be some
+value for the memory address that the previous version of the compiler was using
+here.&amp;quot;&lt;/p&gt;
+&lt;p&gt;But such reasoning would be based on an imprecise view of what the Rust compiler
+was doing here.&lt;/p&gt;
+&lt;p&gt;The const-eval machinery of the Rust compiler is built upon the MIR-interpreter
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/miri#readme&quot;&gt;Miri&lt;/a&gt;, which uses an &lt;em&gt;abstract model&lt;/em&gt; of a hypothetical machine as the
+foundation for evaluating such expressions. This abstract model doesn&#x27;t have to
+represent memory addresses as mere integers; in fact, to support Miri&#x27;s
+fine-grained checking for UB, it uses a much richer datatype for
+the values that are held in the abstract memory store.&lt;/p&gt;
+&lt;p&gt;The details of Miri&#x27;s value representation do not matter too much for our
+discussion here. We merely note that earlier versions of the compiler silently
+accepted expressions that &lt;em&gt;seemed to&lt;/em&gt; transmute memory addresses into integers,
+copied them around, and then transmuted them back into addresses; but that was
+not what was acutally happening under the hood. Instead, what was happening was
+that the Miri values were passed around blindly (after all, the whole point of
+transmute is that it does no transformation on its input value, so it is a no-op
+in terms of its operational semantics).&lt;/p&gt;
+&lt;p&gt;The fact that it was passing a memory address into a context where you would
+expect there to always be an integer value would only be caught, if at all, at
+some later point.&lt;/p&gt;
+&lt;p&gt;For example, the const-eval machinery rejects code that attempts to embed the
+transmuted pointer into a value that could be used by runtime code, like so (&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;stable&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;48456e8bd028c6aa5c80a1962d7e4fb8&quot;&gt;playground&lt;/a&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub static FOO: usize &#x3D; unsafe {
+    let illegal_ptr2int: usize &#x3D; std::mem::transmute(&amp;amp;());
+    illegal_ptr2int
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Likewise, it rejects code that attempts to &lt;em&gt;perform arithmetic&lt;/em&gt; on that
+non-integer value, like so (&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;stable&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;74a35dd6ff93c86bd38c1a0006f2fc41&quot;&gt;playground&lt;/a&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub static FOO: () &#x3D; unsafe {
+    let illegal_ptr2int: usize &#x3D; std::mem::transmute(&amp;amp;());
+    let _incremented &#x3D; illegal_ptr2int + 1;
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Both of the latter two variants are rejected in stable Rust, and have been for
+as long as Rust has accepted pointer-to-integer conversions in static
+initializers (see e.g. Rust 1.52).&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#more-similar-than-different&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;more-similar-than-different&quot;&gt;&lt;/a&gt;More similar than different&lt;/h2&gt;
+&lt;p&gt;In fact, &lt;em&gt;all&lt;/em&gt; of the examples provided above are exhibiting &lt;em&gt;undefined
+behavior&lt;/em&gt; according to the semantics of Rust&#x27;s const-eval system.&lt;/p&gt;
+&lt;p&gt;The first example with &lt;code&gt;_copy&lt;/code&gt; was accepted in Rust versions 1.46 through 1.63
+because of Miri implementation artifacts. Miri puts considerable effort into
+detecting UB, but does not catch all instances of it. Furthermore, by default,
+Miri&#x27;s detection can be delayed to a point far after where the actual
+problematic expression is found.&lt;/p&gt;
+&lt;p&gt;But with nightly Rust, we can opt into extra checks for UB that Miri provides,
+by passing the unstable flag &lt;code&gt;-Z extra-const-ub-checks&lt;/code&gt;. If we do that, then for
+&lt;em&gt;all&lt;/em&gt; of the above examples we get the same result:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;error[E0080]: could not evaluate static initializer
+ --&amp;gt; demo.rs:2:34
+  |
+2 |     let illegal_ptr2int: usize &#x3D; std::mem::transmute(&amp;amp;());
+  |                                  ^^^^^^^^^^^^^^^^^^^^^^^^ unable to turn pointer into raw bytes
+  |
+  &#x3D; help: this code performed an operation that depends on the underlying bytes representing a pointer
+  &#x3D; help: the absolute address of a pointer is not known at compile-time, so such operations are not supported
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The earlier examples had diagnostic output that put the blame in a misleading
+place. With the more precise checking &lt;code&gt;-Z extra-const-ub-checks&lt;/code&gt; enabled, the
+compiler highlights the expression where we can first witness UB: the original
+transmute itself! (Which was stated at the outset of this post; here we are just
+pointing out that these tools can pinpoint the injection point more precisely.)&lt;/p&gt;
+&lt;p&gt;Why not have these extra const-ub checks on by default? Well, the checks
+introduce performance overhead upon Rust compilation time, and we do not know if
+that overhead can be made acceptable. (However, &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings/topic/.5Bsteering.20meeting.5D.202022-09-02.20const-eval.20and.20future-compa.2E.2E.2E/near/296853344&quot;&gt;recent debate&lt;/a&gt;
+among Miri developers indicates that the inherent cost here might not be as bad
+as they had originally thought. Perhaps a future version of the compiler will
+have these extra checks on by default.)&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#change-is-hard&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;change-is-hard&quot;&gt;&lt;/a&gt;Change is hard&lt;/h2&gt;
+&lt;p&gt;You might well be wondering at this point: &amp;quot;Wait, when &lt;em&gt;is&lt;/em&gt; it okay to transmute
+a pointer to a &lt;code&gt;usize&lt;/code&gt; during const evaluation?&amp;quot; And the answer is simple:
+&amp;quot;Never.&amp;quot;&lt;/p&gt;
+&lt;p&gt;Transmuting a pointer to a usize during const-eval has always been undefined behavior,
+ever since const-eval added support for
+&lt;code&gt;transmute&lt;/code&gt; and &lt;code&gt;union&lt;/code&gt;. You can read more about this in the
+&lt;code&gt;const_fn_transmute&lt;/code&gt; / &lt;code&gt;const_fn_union&lt;/code&gt; &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/85769#issuecomment-854363720&quot;&gt;stabilization report&lt;/a&gt;,
+specifically the subsection entitled &amp;quot;Pointer-integer-transmutes&amp;quot;.
+(It is also mentioned in the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/mem/fn.transmute.html&quot;&gt;documentation&lt;/a&gt; for &lt;code&gt;transmute&lt;/code&gt;&lt;!--,
+though with less discussion than what you see in the stabilization report --&gt;.)&lt;/p&gt;
+&lt;p&gt;Thus, we can see that the classification of the above examples as UB during const evaluation
+is not a new thing at all. The only change here was that Miri had some internal
+changes that made it start detecting the UB rather than silently ignoring it.&lt;/p&gt;
+&lt;p&gt;This means the Rust compiler has a shifting notion of what UB it will
+explicitly catch. We anticipated this: RFC 3016, &amp;quot;const UB&amp;quot;, explicitly
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/3016-const-ub.md#guide-level-explanation&quot;&gt;says&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[...] there is no guarantee that UB is reliably detected during CTFE. This can
+change from compiler version to compiler version: CTFE code that causes UB
+could build fine with one compiler and fail to build with another. (This is in
+accordance with the general policy that unsound code is not subject to
+stability guarantees.)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Having said that: So much of Rust&#x27;s success has been built around the trust that
+we have earned with our community. Yes, the project has always reserved the
+right to make breaking changes when resolving soundness bugs; but we have also
+strived to mitigate such breakage &lt;em&gt;whenever feasible&lt;/em&gt;, via things like
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/lints/index.html#future-incompatible-lints&quot;&gt;future-incompatible lints&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Today, with our current const-eval architecture layered atop Miri, it is not
+feasible to ensure that changes such as the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/97684&quot;&gt;one that injected&lt;/a&gt; issue
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/99923&quot;&gt;#99923&lt;/a&gt; go through a future-incompat warning cycle.
+The compiler team plans to keep our eye on issues in this space. If we see
+evidence that these kinds of changes do cause breakage to a non-trivial number
+of crates, then we will investigate further how we might smooth the transition
+path between compiler releases. However, we need to balance any such goal
+against the fact that Miri has very a limited set of developers: the researchers
+determining how to define the semantics of unsafe languages like Rust. We do not
+want to slow their work down!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-you-can-do-for-safetys-sake&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-you-can-do-for-safetys-sake&quot;&gt;&lt;/a&gt;What you can do for safety&#x27;s sake&lt;/h2&gt;
+&lt;p&gt;If you observe the &lt;code&gt;could not evaluate static initializer&lt;/code&gt; message on your crate
+atop Rust 1.64, and it was compiling with previous versions of Rust, we want you
+to let us know: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;file an issue&lt;/a&gt;!&lt;/p&gt;
+&lt;!--
+
+(Of course we always want to hear about such cases where a crate regresses
+between Rust releases; this is just a case that was particularly subtle for us
+to tease apart within the project community itself.)
+
+--&gt;
+&lt;p&gt;We have &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/100327#issuecomment-1214457275&quot;&gt;performed&lt;/a&gt; a &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/tests/crater.html&quot;&gt;crater run&lt;/a&gt; for the 1.64-beta and that did not find any other
+instances of this particular problem.
+If you can test compiling your crate atop the 1.64-beta before the stable
+release goes out on September 22nd, all the better! One easy way to try the beta
+is to use &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/overrides.html#toolchain-override-shorthand&quot;&gt;rustup&#x27;s override shortand&lt;/a&gt; for it:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-shell&quot;&gt;$ rustup update beta
+$ cargo +beta build
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As Rust&#x27;s const-eval evolves, we may see another case like this arise again. If
+you want to defend against future instances of const-eval UB, we recommend that
+you set up a continuous integration service to invoke the nightly &lt;code&gt;rustc&lt;/code&gt; with
+the unstable &lt;code&gt;-Z extra-const-ub-checks&lt;/code&gt; flag on your code.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#want-to-help&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;want-to-help&quot;&gt;&lt;/a&gt;Want to help?&lt;/h2&gt;
+&lt;p&gt;As you might imagine, a lot of us are pretty interested in questions such as
+&amp;quot;what should be undefined behavior?&amp;quot;&lt;/p&gt;
+&lt;p&gt;See for example Ralf Jung&#x27;s excellent blog series on why pointers are
+complicated (parts &lt;a href&#x3D;&quot;https://www.ralfj.de/blog/2018/07/24/pointers-and-bytes.html&quot;&gt;I&lt;/a&gt;, &lt;a href&#x3D;&quot;https://www.ralfj.de/blog/2020/12/14/provenance.html&quot;&gt;II&lt;/a&gt;, &lt;a href&#x3D;&quot;https://www.ralfj.de/blog/2022/04/11/provenance-exposed.html&quot;&gt;III&lt;/a&gt;), which contain some of
+the details elided above about Miri&#x27;s representation, and spell out reasons why
+you might want to be concerned about pointer-to-usize transmutes even &lt;em&gt;outside&lt;/em&gt;
+of const-eval.&lt;/p&gt;
+&lt;p&gt;If you are interested in trying to help us figure out answers to those kinds of
+questions, please join us in the &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/136281-t-lang.2Fwg-unsafe-code-guidelines&quot;&gt;unsafe code guidelines zulip&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you are interested in learning more about Miri, or contributing to it, you
+can say Hello in the &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/269128-miri&quot;&gt;miri zulip&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;To sum it all up: When you write safe Rust, then the compiler is responsible for
+preventing undefined behavior. When you write any unsafe code, &lt;em&gt;you&lt;/em&gt; are
+responsible for preventing undefined behavior. Rust&#x27;s const-eval system has a
+stricter set of rules governing what unsafe code has defined behavior:
+specifically, reinterpreting (aka &amp;quot;transmuting&amp;quot;) a pointer value as a &lt;code&gt;usize&lt;/code&gt; is
+undefined behavior during const-eval. If you have undefined behavior at
+const-eval time, there is no guarantee that your code will be accepted from one
+compiler version to another.&lt;/p&gt;
+&lt;p&gt;The compiler team is hoping that issue &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/99923&quot;&gt;#99923&lt;/a&gt; is an exceptional fluke and
+that the 1.64 stable release will not encounter any other surprises related to
+the aforementioned change to the const-eval machinery.&lt;/p&gt;
+&lt;p&gt;But fluke or not, the issue provided excellent motivation to spend some time
+exploring facets of Rust&#x27;s const-eval architecture, and the Miri interpreter
+that underlies it. We hope you enjoyed reading this as much as we did writing
+it.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Felix Klock</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Security advisories for Cargo (CVE-2022-36113, CVE-2022-36114)</title>
@@ -659,84 +888,6 @@ These options would not exist without the tremendous effort of all the contribut
 
         <author>
             <name>The Rust Dev Tools Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.62.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/06/30/Rust-1.62.0.html" type="text/html" title="Announcing Rust 1.62.0" />
-        <published>2022-06-30T00:00:00+00:00</published>
-        <updated>2022-06-30T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/06/30/Rust-1.62.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/06/30/Rust-1.62.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.62.0. Rust is a programming language
-empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.62.0 with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1620-2022-06-30&quot;&gt;detailed release notes for 1.62.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider updating locally to use
-the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly channel (&lt;code&gt;rustup default nightly&lt;/code&gt;).
-Please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you might come across!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1620-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1620-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.62.0 stable&lt;/h2&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#cargo-add&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargo-add&quot;&gt;&lt;/a&gt;&lt;code&gt;cargo add&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;You can now add new dependencies directly from the command line using &lt;code&gt;cargo add&lt;/code&gt;. This command supports specifying features and versions. It can also be used to modify existing dependencies.&lt;/p&gt;
-&lt;p&gt;For example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;cargo add log
-cargo add serde --features derive
-cargo add nom@5
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;See the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/commands/cargo-add.html&quot;&gt;cargo documentation&lt;/a&gt; for more.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#default-enum-variants&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;default-enum-variants&quot;&gt;&lt;/a&gt;&lt;code&gt;#[default]&lt;/code&gt; enum variants&lt;/h3&gt;
-&lt;p&gt;You can now use &lt;code&gt;#[derive(Default)]&lt;/code&gt; on enums if you specify a default variant. For example, until now you would have to manually write a &lt;code&gt;Default&lt;/code&gt; impl for this enum:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[derive(Default)]
-enum Maybe&amp;lt;T&amp;gt; {
-    #[default]
-    Nothing,
-
-    Something(T),
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;As of now only &amp;quot;unit&amp;quot; variants (variants that have no fields) are allowed to be marked &lt;code&gt;#[default]&lt;/code&gt;. More information is available in the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/3107-derive-default-enum.html&quot;&gt;RFC&lt;/a&gt; for this feature.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#thinner-faster-mutexes-on-linux&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thinner-faster-mutexes-on-linux&quot;&gt;&lt;/a&gt;Thinner, faster mutexes on Linux&lt;/h3&gt;
-&lt;p&gt;Previously, &lt;code&gt;Mutex&lt;/code&gt;, &lt;code&gt;Condvar&lt;/code&gt;, and &lt;code&gt;RwLock&lt;/code&gt; were backed by the pthreads library on Linux. The pthreads locks support more features than the Rust APIs themselves do, including runtime configuration, and are designed to be used in languages with fewer static guarantees than Rust provides.&lt;/p&gt;
-&lt;p&gt;The mutex implementation, for example, is 40 bytes and cannot be moved. This forced the standard library to allocate a &lt;code&gt;Box&lt;/code&gt; behind the scenes for each new mutex for platforms that use pthreads.&lt;/p&gt;
-&lt;p&gt;Rust&#x27;s standard library now ships with a raw futex-based implementation of these locks on Linux, which is very lightweight and doesn&#x27;t require extra allocation. In 1.62.0 &lt;code&gt;Mutex&lt;/code&gt; only needs 5 bytes for its internal state on Linux, though this may change in future versions.&lt;/p&gt;
-&lt;p&gt;This is part of a long effort to improve the efficiency of Rust&#x27;s lock types, which includes previous improvements on Windows such as unboxing its primitives. You can read more about that effort in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/93740&quot;&gt;tracking issue&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#bare-metal-x86_64-target&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;bare-metal-x86_64-target&quot;&gt;&lt;/a&gt;Bare metal &lt;code&gt;x86_64&lt;/code&gt; target&lt;/h3&gt;
-&lt;p&gt;It&#x27;s now easier to build OS-less binaries for &lt;code&gt;x86_64&lt;/code&gt;, for example when writing a kernel. The &lt;a href&#x3D;&quot;https://doc.rust-lang.org/beta/rustc/platform-support/x86_64-unknown-none.html&quot;&gt;&lt;code&gt;x86_64-unknown-none&lt;/code&gt; target&lt;/a&gt; has been promoted to &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/platform-support.html#tier-2&quot;&gt;Tier 2&lt;/a&gt; and can be installed with rustup.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup target add x86_64-unknown-none
-rustc --target x86_64-unknown-none my_no_std_program.rs
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can read more about development using &lt;code&gt;no_std&lt;/code&gt; in the &lt;a href&#x3D;&quot;https://docs.rust-embedded.org/book/intro/no-std.html&quot;&gt;Embedded Rust book&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
-&lt;p&gt;The following methods and trait implementations are now stabilized:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.bool.html#method.then_some&quot;&gt;&lt;code&gt;bool::then_some&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.f32.html#method.total_cmp&quot;&gt;&lt;code&gt;f32::total_cmp&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.f64.html#method.total_cmp&quot;&gt;&lt;code&gt;f64::total_cmp&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/io/struct.Stdin.html#method.lines&quot;&gt;&lt;code&gt;Stdin::lines&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/process/trait.CommandExt.html#tymethod.raw_arg&quot;&gt;&lt;code&gt;windows::CommandExt::raw_arg&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/panic/struct.AssertUnwindSafe.html#impl-Default&quot;&gt;&lt;code&gt;impl&amp;lt;T: Default&amp;gt; Default for AssertUnwindSafe&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#impl-From%3CRc%3Cstr%3E%3E&quot;&gt;&lt;code&gt;From&amp;lt;Rc&amp;lt;str&amp;gt;&amp;gt; for Rc&amp;lt;[u8]&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#impl-From%3CArc%3Cstr%3E%3E&quot;&gt;&lt;code&gt;From&amp;lt;Arc&amp;lt;str&amp;gt;&amp;gt; for Arc&amp;lt;[u8]&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/ffi/struct.EncodeWide.html#impl-FusedIterator&quot;&gt;&lt;code&gt;FusedIterator for EncodeWide&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/stdarch/pull/1285&quot;&gt;RDM intrinsics on aarch64&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.62.0 release. Check out what changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1620-2022-06-30&quot;&gt;Rust&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-162-2022-06-30&quot;&gt;Cargo&lt;/a&gt;,
-and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-162&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1620&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1620&quot;&gt;&lt;/a&gt;Contributors to 1.62.0&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.62.0.
-We couldn&#x27;t have done it without all of you.
-&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.62.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     

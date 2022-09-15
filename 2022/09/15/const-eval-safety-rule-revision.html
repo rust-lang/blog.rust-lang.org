@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Const Eval (Un)Safety Rules | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Const Eval (Un)Safety Rules | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Const Eval (Un)Safety Rules | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Const Eval (Un)Safety Rules" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Const Eval (Un)Safety Rules</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 15, 2022 &middot; Felix Klock
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">The Compiler Team</a> 
+    </div>
+
+    <div class="post">
+      <p>In a recent Rust issue (<a href="https://github.com/rust-lang/rust/issues/99923">#99923</a>), a developer noted that the upcoming
+1.64-beta version of Rust had started signalling errors on their crate,
+<a href="https://github.com/unicode-org/icu4x"><code>icu4x</code></a>. The <code>icu4x</code> crate uses unsafe code during const evaluation.
+<em>Const evaluation</em>, or just &quot;const-eval&quot;,
+runs at compile-time but produces values that may end up embedded in the
+final object code that executes at runtime.</p>
+<p>Rust's const-eval system supports both safe and unsafe Rust, but the rules for
+what unsafe code is allowed to do during const-eval are even more strict than
+what is allowed for unsafe code at runtime. This post is going to go into detail
+about one of those rules.</p>
+<p>(Note: If your <code>const</code> code does not use any <code>unsafe</code> blocks or call any <code>const fn</code>
+with an <code>unsafe</code> block, then you do not need to worry about this!)</p>
+<!--
+
+(This is distinct from procedural macros, which are Rust code that runs at
+compile-time to manipulate *program syntax*; syntactic values are not usually
+embedded into the final object code.)
+
+-->
+<h2><a href="#a-new-diagnostic-to-watch-for" aria-hidden="true" class="anchor" id="a-new-diagnostic-to-watch-for"></a>A new diagnostic to watch for</h2>
+<p>The problem, reduced over the course of the <a href="https://github.com/rust-lang/rust/issues/99923#issuecomment-1200284482">comment thread of #99923</a>, is that certain static initialization expressions (see below) are
+defined as having undefined behavior (UB) <em>at compile time</em> (<a href="https://play.rust-lang.org/?version=beta&amp;mode=debug&amp;edition=2021&amp;gist=67a917fc4f2a4bf2eb72aebf8dad0fe9">playground</a>):</p>
+<pre><code class="language-rust">pub static FOO: () = unsafe {
+    let illegal_ptr2int: usize = std::mem::transmute(&amp;());
+    let _copy = illegal_ptr2int;
+};
+</code></pre>
+<p>(Many thanks to <code>@eddyb</code> for the minimal reproduction!)</p>
+<p>The code above was accepted by Rust versions 1.63 and earlier, but in the Rust
+1.64-beta, it now causes a compile time error with the following message:</p>
+<pre><code>error[E0080]: could not evaluate static initializer
+ --&gt; demo.rs:3:17
+  |
+3 |     let _copy = illegal_ptr2int;
+  |                 ^^^^^^^^^^^^^^^ unable to turn pointer into raw bytes
+  |
+  = help: this code performed an operation that depends on the underlying bytes representing a pointer
+  = help: the absolute address of a pointer is not known at compile-time, so such operations are not supported
+</code></pre>
+<p>As the message says, this operation is not supported: the <code>transmute</code>
+above is trying to reinterpret the memory address <code>&amp;()</code> as an integer of type
+<code>usize</code>. The compiler cannot predict what memory address the <code>()</code> would be
+associated with at execution time, so it refuses to allow that reinterpretation.</p>
+<p>When you write safe Rust, then the compiler is responsible for preventing
+undefined behavior. When you write any unsafe code (be it const or non-const),
+you are responsible for preventing UB, and during const-eval, the rules about
+what unsafe code has defined behavior are even more strict than the analogous
+rules governing Rust's runtime semantics. (In other words, <em>more</em> code is
+classified as &quot;UB&quot; than you may have otherwise realized.)</p>
+<p>If you hit undefined behavior during const-eval, the Rust compiler will protect
+itself from <a href="https://github.com/rust-lang/rfcs/blob/master/text/3016-const-ub.md#guide-level-explanation">adverse effects</a> such as the undefined
+behavior leaking into the type system, but there are few guarantees
+other than that. For example, compile-time UB could lead to runtime UB.
+Furthermore, if you have UB at const-eval time, there is no guarantee that your
+code will be accepted from one compiler version to another.</p>
+<h2><a href="#what-is-new-here" aria-hidden="true" class="anchor" id="what-is-new-here"></a>What is new here</h2>
+<p>You might be thinking: &quot;it <em>used to be</em> accepted; therefore, there must be some
+value for the memory address that the previous version of the compiler was using
+here.&quot;</p>
+<p>But such reasoning would be based on an imprecise view of what the Rust compiler
+was doing here.</p>
+<p>The const-eval machinery of the Rust compiler is built upon the MIR-interpreter
+<a href="https://github.com/rust-lang/miri#readme">Miri</a>, which uses an <em>abstract model</em> of a hypothetical machine as the
+foundation for evaluating such expressions. This abstract model doesn't have to
+represent memory addresses as mere integers; in fact, to support Miri's
+fine-grained checking for UB, it uses a much richer datatype for
+the values that are held in the abstract memory store.</p>
+<p>The details of Miri's value representation do not matter too much for our
+discussion here. We merely note that earlier versions of the compiler silently
+accepted expressions that <em>seemed to</em> transmute memory addresses into integers,
+copied them around, and then transmuted them back into addresses; but that was
+not what was acutally happening under the hood. Instead, what was happening was
+that the Miri values were passed around blindly (after all, the whole point of
+transmute is that it does no transformation on its input value, so it is a no-op
+in terms of its operational semantics).</p>
+<p>The fact that it was passing a memory address into a context where you would
+expect there to always be an integer value would only be caught, if at all, at
+some later point.</p>
+<p>For example, the const-eval machinery rejects code that attempts to embed the
+transmuted pointer into a value that could be used by runtime code, like so (<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=48456e8bd028c6aa5c80a1962d7e4fb8">playground</a>):</p>
+<pre><code class="language-rust">pub static FOO: usize = unsafe {
+    let illegal_ptr2int: usize = std::mem::transmute(&amp;());
+    illegal_ptr2int
+};
+</code></pre>
+<p>Likewise, it rejects code that attempts to <em>perform arithmetic</em> on that
+non-integer value, like so (<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=74a35dd6ff93c86bd38c1a0006f2fc41">playground</a>):</p>
+<pre><code class="language-rust">pub static FOO: () = unsafe {
+    let illegal_ptr2int: usize = std::mem::transmute(&amp;());
+    let _incremented = illegal_ptr2int + 1;
+};
+</code></pre>
+<p>Both of the latter two variants are rejected in stable Rust, and have been for
+as long as Rust has accepted pointer-to-integer conversions in static
+initializers (see e.g. Rust 1.52).</p>
+<h2><a href="#more-similar-than-different" aria-hidden="true" class="anchor" id="more-similar-than-different"></a>More similar than different</h2>
+<p>In fact, <em>all</em> of the examples provided above are exhibiting <em>undefined
+behavior</em> according to the semantics of Rust's const-eval system.</p>
+<p>The first example with <code>_copy</code> was accepted in Rust versions 1.46 through 1.63
+because of Miri implementation artifacts. Miri puts considerable effort into
+detecting UB, but does not catch all instances of it. Furthermore, by default,
+Miri's detection can be delayed to a point far after where the actual
+problematic expression is found.</p>
+<p>But with nightly Rust, we can opt into extra checks for UB that Miri provides,
+by passing the unstable flag <code>-Z extra-const-ub-checks</code>. If we do that, then for
+<em>all</em> of the above examples we get the same result:</p>
+<pre><code>error[E0080]: could not evaluate static initializer
+ --&gt; demo.rs:2:34
+  |
+2 |     let illegal_ptr2int: usize = std::mem::transmute(&amp;());
+  |                                  ^^^^^^^^^^^^^^^^^^^^^^^^ unable to turn pointer into raw bytes
+  |
+  = help: this code performed an operation that depends on the underlying bytes representing a pointer
+  = help: the absolute address of a pointer is not known at compile-time, so such operations are not supported
+</code></pre>
+<p>The earlier examples had diagnostic output that put the blame in a misleading
+place. With the more precise checking <code>-Z extra-const-ub-checks</code> enabled, the
+compiler highlights the expression where we can first witness UB: the original
+transmute itself! (Which was stated at the outset of this post; here we are just
+pointing out that these tools can pinpoint the injection point more precisely.)</p>
+<p>Why not have these extra const-ub checks on by default? Well, the checks
+introduce performance overhead upon Rust compilation time, and we do not know if
+that overhead can be made acceptable. (However, <a href="https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings/topic/.5Bsteering.20meeting.5D.202022-09-02.20const-eval.20and.20future-compa.2E.2E.2E/near/296853344">recent debate</a>
+among Miri developers indicates that the inherent cost here might not be as bad
+as they had originally thought. Perhaps a future version of the compiler will
+have these extra checks on by default.)</p>
+<h2><a href="#change-is-hard" aria-hidden="true" class="anchor" id="change-is-hard"></a>Change is hard</h2>
+<p>You might well be wondering at this point: &quot;Wait, when <em>is</em> it okay to transmute
+a pointer to a <code>usize</code> during const evaluation?&quot; And the answer is simple:
+&quot;Never.&quot;</p>
+<p>Transmuting a pointer to a usize during const-eval has always been undefined behavior,
+ever since const-eval added support for
+<code>transmute</code> and <code>union</code>. You can read more about this in the
+<code>const_fn_transmute</code> / <code>const_fn_union</code> <a href="https://github.com/rust-lang/rust/pull/85769#issuecomment-854363720">stabilization report</a>,
+specifically the subsection entitled &quot;Pointer-integer-transmutes&quot;.
+(It is also mentioned in the <a href="https://doc.rust-lang.org/std/mem/fn.transmute.html">documentation</a> for <code>transmute</code><!--,
+though with less discussion than what you see in the stabilization report -->.)</p>
+<p>Thus, we can see that the classification of the above examples as UB during const evaluation
+is not a new thing at all. The only change here was that Miri had some internal
+changes that made it start detecting the UB rather than silently ignoring it.</p>
+<p>This means the Rust compiler has a shifting notion of what UB it will
+explicitly catch. We anticipated this: RFC 3016, &quot;const UB&quot;, explicitly
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/3016-const-ub.md#guide-level-explanation">says</a>:</p>
+<blockquote>
+<p>[...] there is no guarantee that UB is reliably detected during CTFE. This can
+change from compiler version to compiler version: CTFE code that causes UB
+could build fine with one compiler and fail to build with another. (This is in
+accordance with the general policy that unsound code is not subject to
+stability guarantees.)</p>
+</blockquote>
+<p>Having said that: So much of Rust's success has been built around the trust that
+we have earned with our community. Yes, the project has always reserved the
+right to make breaking changes when resolving soundness bugs; but we have also
+strived to mitigate such breakage <em>whenever feasible</em>, via things like
+<a href="https://doc.rust-lang.org/rustc/lints/index.html#future-incompatible-lints">future-incompatible lints</a>.</p>
+<p>Today, with our current const-eval architecture layered atop Miri, it is not
+feasible to ensure that changes such as the <a href="https://github.com/rust-lang/rust/pull/97684">one that injected</a> issue
+<a href="https://github.com/rust-lang/rust/issues/99923">#99923</a> go through a future-incompat warning cycle.
+The compiler team plans to keep our eye on issues in this space. If we see
+evidence that these kinds of changes do cause breakage to a non-trivial number
+of crates, then we will investigate further how we might smooth the transition
+path between compiler releases. However, we need to balance any such goal
+against the fact that Miri has very a limited set of developers: the researchers
+determining how to define the semantics of unsafe languages like Rust. We do not
+want to slow their work down!</p>
+<h2><a href="#what-you-can-do-for-safetys-sake" aria-hidden="true" class="anchor" id="what-you-can-do-for-safetys-sake"></a>What you can do for safety's sake</h2>
+<p>If you observe the <code>could not evaluate static initializer</code> message on your crate
+atop Rust 1.64, and it was compiling with previous versions of Rust, we want you
+to let us know: <a href="https://github.com/rust-lang/rust/issues/new/choose">file an issue</a>!</p>
+<!--
+
+(Of course we always want to hear about such cases where a crate regresses
+between Rust releases; this is just a case that was particularly subtle for us
+to tease apart within the project community itself.)
+
+-->
+<p>We have <a href="https://github.com/rust-lang/rust/issues/100327#issuecomment-1214457275">performed</a> a <a href="https://rustc-dev-guide.rust-lang.org/tests/crater.html">crater run</a> for the 1.64-beta and that did not find any other
+instances of this particular problem.
+If you can test compiling your crate atop the 1.64-beta before the stable
+release goes out on September 22nd, all the better! One easy way to try the beta
+is to use <a href="https://rust-lang.github.io/rustup/overrides.html#toolchain-override-shorthand">rustup's override shortand</a> for it:</p>
+<pre><code class="language-shell">$ rustup update beta
+$ cargo +beta build
+</code></pre>
+<p>As Rust's const-eval evolves, we may see another case like this arise again. If
+you want to defend against future instances of const-eval UB, we recommend that
+you set up a continuous integration service to invoke the nightly <code>rustc</code> with
+the unstable <code>-Z extra-const-ub-checks</code> flag on your code.</p>
+<h2><a href="#want-to-help" aria-hidden="true" class="anchor" id="want-to-help"></a>Want to help?</h2>
+<p>As you might imagine, a lot of us are pretty interested in questions such as
+&quot;what should be undefined behavior?&quot;</p>
+<p>See for example Ralf Jung's excellent blog series on why pointers are
+complicated (parts <a href="https://www.ralfj.de/blog/2018/07/24/pointers-and-bytes.html">I</a>, <a href="https://www.ralfj.de/blog/2020/12/14/provenance.html">II</a>, <a href="https://www.ralfj.de/blog/2022/04/11/provenance-exposed.html">III</a>), which contain some of
+the details elided above about Miri's representation, and spell out reasons why
+you might want to be concerned about pointer-to-usize transmutes even <em>outside</em>
+of const-eval.</p>
+<p>If you are interested in trying to help us figure out answers to those kinds of
+questions, please join us in the <a href="https://rust-lang.zulipchat.com/#narrow/stream/136281-t-lang.2Fwg-unsafe-code-guidelines">unsafe code guidelines zulip</a>.</p>
+<p>If you are interested in learning more about Miri, or contributing to it, you
+can say Hello in the <a href="https://rust-lang.zulipchat.com/#narrow/stream/269128-miri">miri zulip</a>.</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>To sum it all up: When you write safe Rust, then the compiler is responsible for
+preventing undefined behavior. When you write any unsafe code, <em>you</em> are
+responsible for preventing undefined behavior. Rust's const-eval system has a
+stricter set of rules governing what unsafe code has defined behavior:
+specifically, reinterpreting (aka &quot;transmuting&quot;) a pointer value as a <code>usize</code> is
+undefined behavior during const-eval. If you have undefined behavior at
+const-eval time, there is no guarantee that your code will be accepted from one
+compiler version to another.</p>
+<p>The compiler team is hoping that issue <a href="https://github.com/rust-lang/rust/issues/99923">#99923</a> is an exceptional fluke and
+that the 1.64 stable release will not encounter any other surprises related to
+the aforementioned change to the const-eval machinery.</p>
+<p>But fluke or not, the issue provided excellent motivation to spend some time
+exploring facets of Rust's const-eval architecture, and the Miri interpreter
+that underlies it. We hope you enjoyed reading this as much as we did writing
+it.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>
