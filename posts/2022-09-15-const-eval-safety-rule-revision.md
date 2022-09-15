@@ -259,7 +259,7 @@ to tease apart within the project community itself.)
 
 -->
 
-We have done a [crater run] for the 1.64-beta and that did not find any other
+We have [performed][crater results] a [crater run] for the 1.64-beta and that did not find any other
 instances of this particular problem.
 If you can test compiling your crate atop the 1.64-beta before the stable
 release goes out on September 22nd, all the better! One easy way to try the beta
@@ -270,7 +270,8 @@ $ rustup update beta
 $ cargo +beta build
 ```
 
-[crater run]: https://github.com/rust-lang/rust/issues/100327
+[crater results]: https://github.com/rust-lang/rust/issues/100327#issuecomment-1214457275
+[crater run]: https://rustc-dev-guide.rust-lang.org/tests/crater.html
 [rustup]: https://rust-lang.github.io/rustup/overrides.html#toolchain-override-shorthand
 
 [file an issue]: https://github.com/rust-lang/rust/issues/new/choose
