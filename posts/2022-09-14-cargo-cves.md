@@ -38,7 +38,7 @@ It was discovered that Cargo allowed packages to contain a `.cargo-ok`
 file the symlink pointed to with `ok`. This would allow an attacker to corrupt
 one file on the machine using Cargo to extract the package.
 
-## Disk space exaustion (CVE-2022-36114)
+## Disk space exhaustion (CVE-2022-36114)
 
 It was discovered that Cargo did not limit the amount of data extracted from
 compressed archives. An attacker could upload to an alternate registry a
