@@ -97,21 +97,28 @@ here."
 But such reasoning would be based on an imprecise view of what the Rust compiler
 was doing here.
 
-The const-eval machinery of the Rust compiler is built upon the MIR-interpreter
-[Miri][], which uses an *abstract model* of a hypothetical machine as the
+The const-eval machinery of the Rust compiler  (also known as "the [CTFE][] engine")
+is built upon a [MIR][] interpreter which uses an *abstract model* of a hypothetical machine as the
 foundation for evaluating such expressions. This abstract model doesn't have to
-represent memory addresses as mere integers; in fact, to support Miri's
+represent memory addresses as mere integers; in fact, to support
 fine-grained checking for UB, it uses a much richer datatype for
 the values that are held in the abstract memory store.
 
+(The aforementioned MIR interpreter is also the basis for [Miri][], a research
+tool that interprets both const and non-const Rust code, with a focus on
+explicit detection of undefined behavior. The Miri developers are the primary
+contributors to the CTFE engine in the Rust compiler.)
+
+[CTFE]: https://rustc-dev-guide.rust-lang.org/const-eval.html
+[MIR]: https://rustc-dev-guide.rust-lang.org/mir/index.html
 [Miri]: https://github.com/rust-lang/miri#readme
 
-The details of Miri's value representation do not matter too much for our
+The details of the CTFE engine's value representation do not matter too much for our
 discussion here. We merely note that earlier versions of the compiler silently
 accepted expressions that *seemed to* transmute memory addresses into integers,
 copied them around, and then transmuted them back into addresses; but that was
 not what was acutally happening under the hood. Instead, what was happening was
-that the Miri values were passed around blindly (after all, the whole point of
+that the values were passed around blindly (after all, the whole point of
 transmute is that it does no transformation on its input value, so it is a no-op
 in terms of its operational semantics).
 
@@ -153,12 +160,12 @@ In fact, *all* of the examples provided above are exhibiting *undefined
 behavior* according to the semantics of Rust's const-eval system.
 
 The first example with `_copy` was accepted in Rust versions 1.46 through 1.63
-because of Miri implementation artifacts. Miri puts considerable effort into
+because of CTFE implementation artifacts. The CTFE engine puts considerable effort into
 detecting UB, but does not catch all instances of it. Furthermore, by default,
-Miri's detection can be delayed to a point far after where the actual
+such detection can be delayed to a point far after where the actual
 problematic expression is found.
 
-But with nightly Rust, we can opt into extra checks for UB that Miri provides,
+But with nightly Rust, we can opt into extra checks for UB that the engine provides,
 by passing the unstable flag `-Z extra-const-ub-checks`. If we do that, then for
 *all* of the above examples we get the same result:
 
@@ -207,7 +214,7 @@ though with less discussion than what you see in the stabilization report -->.)
 [doc for transmute]: https://doc.rust-lang.org/std/mem/fn.transmute.html
 
 Thus, we can see that the classification of the above examples as UB during const evaluation
-is not a new thing at all. The only change here was that Miri had some internal
+is not a new thing at all. The only change here was that the CTFE engine had some internal
 changes that made it start detecting the UB rather than silently ignoring it.
 
 This means the Rust compiler has a shifting notion of what UB it will
@@ -228,7 +235,7 @@ strived to mitigate such breakage *whenever feasible*, via things like
 
 [future-incompat]: https://doc.rust-lang.org/rustc/lints/index.html#future-incompatible-lints
 
-Today, with our current const-eval architecture layered atop Miri, it is not
+Today, with our current const-eval architecture, it is not
 feasible to ensure that changes such as the [one that injected][PR #97684] issue
 [#99923][] go through a future-incompat warning cycle.
 The compiler team plans to keep our eye on issues in this space. If we see
@@ -288,7 +295,7 @@ As you might imagine, a lot of us are pretty interested in questions such as
 
 See for example Ralf Jung's excellent blog series on why pointers are
 complicated (parts [I][ralf1], [II][ralf2], [III][ralf3]), which contain some of
-the details elided above about Miri's representation, and spell out reasons why
+the details elided above about the representation of pointer values, and spell out reasons why
 you might want to be concerned about pointer-to-usize transmutes even *outside*
 of const-eval.
 
@@ -322,6 +329,5 @@ that the 1.64 stable release will not encounter any other surprises related to
 the aforementioned change to the const-eval machinery.
 
 But fluke or not, the issue provided excellent motivation to spend some time
-exploring facets of Rust's const-eval architecture, and the Miri interpreter
-that underlies it. We hope you enjoyed reading this as much as we did writing
-it.
+exploring facets of Rust's const-eval architecture.
+We hope you enjoyed reading this as much as we did writing it.
