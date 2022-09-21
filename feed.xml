@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-09-19T18:53:56+00:00</updated>
+    <updated>2022-09-21T17:59:51+00:00</updated>
 
     
     <entry>
@@ -80,18 +80,22 @@ value for the memory address that the previous version of the compiler was using
 here.&amp;quot;&lt;/p&gt;
 &lt;p&gt;But such reasoning would be based on an imprecise view of what the Rust compiler
 was doing here.&lt;/p&gt;
-&lt;p&gt;The const-eval machinery of the Rust compiler is built upon the MIR-interpreter
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/miri#readme&quot;&gt;Miri&lt;/a&gt;, which uses an &lt;em&gt;abstract model&lt;/em&gt; of a hypothetical machine as the
+&lt;p&gt;The const-eval machinery of the Rust compiler  (also known as &amp;quot;the &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/const-eval.html&quot;&gt;CTFE&lt;/a&gt; engine&amp;quot;)
+is built upon a &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/mir/index.html&quot;&gt;MIR&lt;/a&gt; interpreter which uses an &lt;em&gt;abstract model&lt;/em&gt; of a hypothetical machine as the
 foundation for evaluating such expressions. This abstract model doesn&#x27;t have to
-represent memory addresses as mere integers; in fact, to support Miri&#x27;s
+represent memory addresses as mere integers; in fact, to support
 fine-grained checking for UB, it uses a much richer datatype for
 the values that are held in the abstract memory store.&lt;/p&gt;
-&lt;p&gt;The details of Miri&#x27;s value representation do not matter too much for our
+&lt;p&gt;(The aforementioned MIR interpreter is also the basis for &lt;a href&#x3D;&quot;https://github.com/rust-lang/miri#readme&quot;&gt;Miri&lt;/a&gt;, a research
+tool that interprets &lt;em&gt;non-const&lt;/em&gt; Rust code, with a focus on
+explicit detection of undefined behavior. The Miri developers are the primary
+contributors to the CTFE engine in the Rust compiler.)&lt;/p&gt;
+&lt;p&gt;The details of the CTFE engine&#x27;s value representation do not matter too much for our
 discussion here. We merely note that earlier versions of the compiler silently
 accepted expressions that &lt;em&gt;seemed to&lt;/em&gt; transmute memory addresses into integers,
 copied them around, and then transmuted them back into addresses; but that was
 not what was acutally happening under the hood. Instead, what was happening was
-that the Miri values were passed around blindly (after all, the whole point of
+that the values were passed around blindly (after all, the whole point of
 transmute is that it does no transformation on its input value, so it is a no-op
 in terms of its operational semantics).&lt;/p&gt;
 &lt;p&gt;The fact that it was passing a memory address into a context where you would
@@ -118,11 +122,11 @@ initializers (see e.g. Rust 1.52).&lt;/p&gt;
 &lt;p&gt;In fact, &lt;em&gt;all&lt;/em&gt; of the examples provided above are exhibiting &lt;em&gt;undefined
 behavior&lt;/em&gt; according to the semantics of Rust&#x27;s const-eval system.&lt;/p&gt;
 &lt;p&gt;The first example with &lt;code&gt;_copy&lt;/code&gt; was accepted in Rust versions 1.46 through 1.63
-because of Miri implementation artifacts. Miri puts considerable effort into
+because of CTFE implementation artifacts. The CTFE engine puts considerable effort into
 detecting UB, but does not catch all instances of it. Furthermore, by default,
-Miri&#x27;s detection can be delayed to a point far after where the actual
+such detection can be delayed to a point far after where the actual
 problematic expression is found.&lt;/p&gt;
-&lt;p&gt;But with nightly Rust, we can opt into extra checks for UB that Miri provides,
+&lt;p&gt;But with nightly Rust, we can opt into extra checks for UB that the engine provides,
 by passing the unstable flag &lt;code&gt;-Z extra-const-ub-checks&lt;/code&gt;. If we do that, then for
 &lt;em&gt;all&lt;/em&gt; of the above examples we get the same result:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;error[E0080]: could not evaluate static initializer
@@ -157,7 +161,7 @@ specifically the subsection entitled &amp;quot;Pointer-integer-transmutes&amp;qu
 (It is also mentioned in the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/mem/fn.transmute.html&quot;&gt;documentation&lt;/a&gt; for &lt;code&gt;transmute&lt;/code&gt;&lt;!--,
 though with less discussion than what you see in the stabilization report --&gt;.)&lt;/p&gt;
 &lt;p&gt;Thus, we can see that the classification of the above examples as UB during const evaluation
-is not a new thing at all. The only change here was that Miri had some internal
+is not a new thing at all. The only change here was that the CTFE engine had some internal
 changes that made it start detecting the UB rather than silently ignoring it.&lt;/p&gt;
 &lt;p&gt;This means the Rust compiler has a shifting notion of what UB it will
 explicitly catch. We anticipated this: RFC 3016, &amp;quot;const UB&amp;quot;, explicitly
@@ -174,7 +178,7 @@ we have earned with our community. Yes, the project has always reserved the
 right to make breaking changes when resolving soundness bugs; but we have also
 strived to mitigate such breakage &lt;em&gt;whenever feasible&lt;/em&gt;, via things like
 &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/lints/index.html#future-incompatible-lints&quot;&gt;future-incompatible lints&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Today, with our current const-eval architecture layered atop Miri, it is not
+&lt;p&gt;Today, with our current const-eval architecture, it is not
 feasible to ensure that changes such as the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/97684&quot;&gt;one that injected&lt;/a&gt; issue
 &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/99923&quot;&gt;#99923&lt;/a&gt; go through a future-incompat warning cycle.
 The compiler team plans to keep our eye on issues in this space. If we see
@@ -212,7 +216,7 @@ the unstable &lt;code&gt;-Z extra-const-ub-checks&lt;/code&gt; flag on your code
 &amp;quot;what should be undefined behavior?&amp;quot;&lt;/p&gt;
 &lt;p&gt;See for example Ralf Jung&#x27;s excellent blog series on why pointers are
 complicated (parts &lt;a href&#x3D;&quot;https://www.ralfj.de/blog/2018/07/24/pointers-and-bytes.html&quot;&gt;I&lt;/a&gt;, &lt;a href&#x3D;&quot;https://www.ralfj.de/blog/2020/12/14/provenance.html&quot;&gt;II&lt;/a&gt;, &lt;a href&#x3D;&quot;https://www.ralfj.de/blog/2022/04/11/provenance-exposed.html&quot;&gt;III&lt;/a&gt;), which contain some of
-the details elided above about Miri&#x27;s representation, and spell out reasons why
+the details elided above about the representation of pointer values, and spell out reasons why
 you might want to be concerned about pointer-to-usize transmutes even &lt;em&gt;outside&lt;/em&gt;
 of const-eval.&lt;/p&gt;
 &lt;p&gt;If you are interested in trying to help us figure out answers to those kinds of
@@ -232,9 +236,9 @@ compiler version to another.&lt;/p&gt;
 that the 1.64 stable release will not encounter any other surprises related to
 the aforementioned change to the const-eval machinery.&lt;/p&gt;
 &lt;p&gt;But fluke or not, the issue provided excellent motivation to spend some time
-exploring facets of Rust&#x27;s const-eval architecture, and the Miri interpreter
-that underlies it. We hope you enjoyed reading this as much as we did writing
-it.&lt;/p&gt;
+exploring facets of Rust&#x27;s const-eval architecture and the interpreter
+that underlies it.
+We hope you enjoyed reading this as much as we did writing it.&lt;/p&gt;
 </content>
 
         <author>
