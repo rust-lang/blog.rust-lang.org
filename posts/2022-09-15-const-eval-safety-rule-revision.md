@@ -105,7 +105,7 @@ fine-grained checking for UB, it uses a much richer datatype for
 the values that are held in the abstract memory store.
 
 (The aforementioned MIR interpreter is also the basis for [Miri][], a research
-tool that interprets both const and non-const Rust code, with a focus on
+tool that interprets *non-const* Rust code, with a focus on
 explicit detection of undefined behavior. The Miri developers are the primary
 contributors to the CTFE engine in the Rust compiler.)
 
@@ -329,5 +329,6 @@ that the 1.64 stable release will not encounter any other surprises related to
 the aforementioned change to the const-eval machinery.
 
 But fluke or not, the issue provided excellent motivation to spend some time
-exploring facets of Rust's const-eval architecture.
+exploring facets of Rust's const-eval architecture and the interpreter
+that underlies it.
 We hope you enjoyed reading this as much as we did writing it.
