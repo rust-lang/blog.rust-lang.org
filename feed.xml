@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-09-22T13:32:41+00:00</updated>
+    <updated>2022-09-22T13:57:39+00:00</updated>
 
     
     <entry>
@@ -138,7 +138,7 @@ can be installed with:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;At this time, to run the rustup-installed version, you need to invoke it this
 way:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup run rust-analyzer
+&lt;pre&gt;&lt;code&gt;rustup run stable rust-analyzer
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The next release of rustup will provide a built-in proxy so that running the
 executable &lt;code&gt;rust-analyzer&lt;/code&gt; will launch the appropriate version.&lt;/p&gt;
