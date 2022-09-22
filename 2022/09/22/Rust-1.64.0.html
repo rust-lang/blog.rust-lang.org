@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.64.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.64.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.64.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.64.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.64.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 22, 2022 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.64.0. Rust is a
+programming language empowering everyone to build reliable and efficient
+software.</p>
+<p>If you have a previous version of Rust installed via rustup, you can get 1.64.0
+with:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get
+<code>rustup</code></a> from the appropriate page on
+our website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1640-2022-09-22">detailed release notes for
+1.64.0</a>
+on GitHub.</p>
+<p>If you'd like to help us out by testing future releases, you might consider
+updating locally to use the beta channel (<code>rustup default beta</code>) or the nightly
+channel (<code>rustup default nightly</code>). Please
+<a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you
+might come across!</p>
+<h2><a href="#whats-in-1640-stable" aria-hidden="true" class="anchor" id="whats-in-1640-stable"></a>What's in 1.64.0 stable</h2>
+<h3><a href="#enhancing-await-with-intofuture" aria-hidden="true" class="anchor" id="enhancing-await-with-intofuture"></a>Enhancing <code>.await</code> with <code>IntoFuture</code></h3>
+<p>Rust 1.64 stabilizes the
+<a href="https://doc.rust-lang.org/std/future/trait.IntoFuture.html"><code>IntoFuture</code></a>
+trait. <code>IntoFuture</code> is a trait similar to
+<a href="https://doc.rust-lang.org/std/iter/trait.IntoIterator.html"><code>IntoIterator</code></a>,
+but rather than supporting <code>for ... in ...</code> loops, <code>IntoFuture</code> changes how
+<code>.await</code> works. With <code>IntoFuture</code>, the <code>.await</code> keyword can await more than
+just futures; it can await <em>anything which can be converted into a <code>Future</code> via
+<code>IntoFuture</code></em> - which can help make your APIs more user-friendly!</p>
+<p>Take for example a builder which constructs requests to some storage provider
+over the network:</p>
+<pre><code class="language-rust">pub struct Error { ... }
+pub struct StorageResponse { ... }:
+pub struct StorageRequest(bool);
+
+impl StorageRequest {
+    /// Create a new instance of `StorageRequest`.
+    pub fn new() -&gt; Self { ... }
+    /// Decide whether debug mode should be enabled.
+    pub fn set_debug(self, b: bool) -&gt; Self { ... }
+    /// Send the request and receive a response.
+    pub async fn send(self) -&gt; Result&lt;StorageResponse, Error&gt; { ... }
+}
+</code></pre>
+<p>Typical usage would likely look something like this:</p>
+<pre><code class="language-rust">let response = StorageRequest::new()  // 1. create a new instance
+    .set_debug(true)                  // 2. set some option
+    .send()                           // 3. construct the future
+    .await?;                          // 4. run the future + propagate errors
+</code></pre>
+<p>This is not bad, but we can do better here. Using <code>IntoFuture</code> we can combine
+<em>&quot;construct the future&quot;</em> (line 3) and <em>&quot;run the future&quot;</em> (line 4) into a single
+step:</p>
+<pre><code class="language-rust">let response = StorageRequest::new()  // 1. create a new instance
+    .set_debug(true)                  // 2. set some option
+    .await?;                          // 3. construct + run the future + propagate errors
+</code></pre>
+<p>We can do this by implementing <code>IntoFuture</code> for <code>StorageRequest</code>. <code>IntoFuture</code>
+requires us to have a named future we can return, which we can do by creating a
+&quot;boxed future&quot; and defining a type alias for it:</p>
+<pre><code class="language-rust">// First we must import some new types into the scope.
+use std::pin::Pin;
+use std::future::{Future, IntoFuture};
+
+pub struct Error { ... }
+pub struct StorageResponse { ... }
+pub struct StorageRequest(bool);
+
+impl StorageRequest {
+    /// Create a new instance of `StorageRequest`.
+    pub fn new() -&gt; Self { ... }
+    /// Decide whether debug mode should be enabled.
+    pub fn set_debug(self, b: bool) -&gt; Self { ... }
+    /// Send the request and receive a response.
+    pub async fn send(self) -&gt; Result&lt;StorageResponse, Error&gt; { ... }
+}
+
+// The new implementations:
+// 1. create a new named future type
+// 2. implement `IntoFuture` for `StorageRequest`
+pub type StorageRequestFuture = Pin&lt;Box&lt;dyn Future&lt;Output = Result&lt;StorageResponse, Error&gt; + Send + 'static&gt;&gt;
+impl IntoFuture for StorageRequest {
+    type IntoFuture = StorageRequestFuture;
+    type Output = &lt;StorageRequestFuture as Future&gt;::Output;
+    fn into_future(self) -&gt; Self::IntoFuture {
+        Box::pin(self.send())
+    }
+}
+</code></pre>
+<p>This takes a bit more code to implement, but provides a simpler API for users.</p>
+<p>In the future, the Rust Async WG hopes to simplify the creating new named
+futures by supporting <a href="https://rust-lang.github.io/impl-trait-initiative/explainer/tait.html"><code>impl Trait</code> in <code>type</code> aliases (Type Alias Impl Trait or
+TAIT)</a>.
+This should make implementing <code>IntoFuture</code> easier by simplifying the type
+alias' signature, and make it more performant by removing the <code>Box</code> from the
+type alias.</p>
+<h3><a href="#c-compatible-ffi-types-in-core-and-alloc" aria-hidden="true" class="anchor" id="c-compatible-ffi-types-in-core-and-alloc"></a>C-compatible FFI types in core and alloc</h3>
+<p>When calling or being called by C ABIs, Rust code can use type aliases like
+<code>c_uint</code> or <code>c_ulong</code> to match the corresponding types from C on any target,
+without requiring target-specific code or conditionals.</p>
+<p>Previously, these type aliases were only available in <code>std</code>, so code written
+for embedded targets and other scenarios that could only use <code>core</code> or <code>alloc</code>
+could not use these types.</p>
+<p>Rust 1.64 now provides all of the <code>c_*</code> type aliases in
+<a href="https://doc.rust-lang.org/core/ffi/index.html"><code>core::ffi</code></a>, as well as
+<a href="https://doc.rust-lang.org/core/ffi/struct.CStr.html"><code>core::ffi::CStr</code></a> for
+working with C strings. Rust 1.64 also provides
+<a href="https://doc.rust-lang.org/alloc/ffi/struct.CString.html"><code>alloc::ffi::CString</code></a>
+for working with owned C strings using only the <code>alloc</code> crate, rather than the
+full <code>std</code> library.</p>
+<h3><a href="#rust-analyzer-is-now-available-via-rustup" aria-hidden="true" class="anchor" id="rust-analyzer-is-now-available-via-rustup"></a>rust-analyzer is now available via rustup</h3>
+<p><a href="https://rust-analyzer.github.io/">rust-analyzer</a> is now included as part of
+the collection of tools included with Rust. This makes it easier to download
+and access rust-analyzer, and makes it available on more platforms. It is
+available as a <a href="https://rust-lang.github.io/rustup/concepts/components.html">rustup
+component</a> which
+can be installed with:</p>
+<pre><code>rustup component add rust-analyzer
+</code></pre>
+<p>At this time, to run the rustup-installed version, you need to invoke it this
+way:</p>
+<pre><code>rustup run rust-analyzer
+</code></pre>
+<p>The next release of rustup will provide a built-in proxy so that running the
+executable <code>rust-analyzer</code> will launch the appropriate version.</p>
+<p>Most users should continue to use the releases provided by the rust-analyzer
+team (available on the <a href="https://github.com/rust-lang/rust-analyzer/releases">rust-analyzer releases
+page</a>), which are
+published more frequently. Users of the <a href="https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer">official VSCode
+extension</a>
+are not affected since it automatically downloads and updates releases in the
+background.</p>
+<h3><a href="#cargo-improvements-workspace-inheritance-and-multi-target-builds" aria-hidden="true" class="anchor" id="cargo-improvements-workspace-inheritance-and-multi-target-builds"></a>Cargo improvements: workspace inheritance and multi-target builds</h3>
+<p>When working with collections of related libraries or binary crates in one
+Cargo workspace, you can now avoid duplication of common field values between
+crates, such as common version numbers, repository URLs, or <code>rust-version</code>.
+This also helps keep these values in sync between crates when updating them.
+For more details, see
+<a href="https://doc.rust-lang.org/cargo/reference/workspaces.html#the-package-table"><code>workspace.package</code></a>,
+<a href="https://doc.rust-lang.org/cargo/reference/workspaces.html#the-dependencies-table"><code>workspace.dependencies</code></a>,
+and <a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#inheriting-a-dependency-from-a-workspace">&quot;inheriting a dependency from a
+workspace&quot;</a>.</p>
+<p>When building for multiple targets, you can now pass multiple <code>--target</code>
+options to <code>cargo build</code>, to build all of those targets at once. You can also
+set
+<a href="https://doc.rust-lang.org/cargo/reference/config.html#buildtarget"><code>build.target</code></a>
+to an array of multiple targets in <code>.cargo/config.toml</code> to build for multiple
+targets by default.</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<p>The following methods and trait implementations are now stabilized:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/future/trait.IntoFuture.html"><code>future::IntoFuture</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.checked_mul"><code>num::NonZero*::checked_mul</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.checked_pow"><code>num::NonZero*::checked_pow</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.saturating_mul"><code>num::NonZero*::saturating_mul</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.saturating_pow"><code>num::NonZero*::saturating_pow</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroIsize.html#method.abs"><code>num::NonZeroI*::abs</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroIsize.html#method.checked_abs"><code>num::NonZeroI*::checked_abs</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroIsize.html#method.overflowing_abs"><code>num::NonZeroI*::overflowing_abs</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroIsize.html#method.saturating_abs"><code>num::NonZeroI*::saturating_abs</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroIsize.html#method.unsigned_abs"><code>num::NonZeroI*::unsigned_abs</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroIsize.html#method.wrapping_abs"><code>num::NonZeroI*::wrapping_abs</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.checked_add"><code>num::NonZeroU*::checked_add</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.checked_next_power_of_two"><code>num::NonZeroU*::checked_next_power_of_two</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.saturating_add"><code>num::NonZeroU*::saturating_add</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/unix/process/trait.CommandExt.html#tymethod.process_group"><code>os::unix::process::CommandExt::process_group</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/fs/trait.FileTypeExt.html#tymethod.is_symlink_dir"><code>os::windows::fs::FileTypeExt::is_symlink_dir</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/fs/trait.FileTypeExt.html#tymethod.is_symlink_file"><code>os::windows::fs::FileTypeExt::is_symlink_file</code></a></li>
+</ul>
+<p>These types were previously stable in <code>std::ffi</code>, but are now also available in
+<code>core</code> and <code>alloc</code>:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/core/ffi/struct.CStr.html"><code>core::ffi::CStr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ffi/struct.FromBytesWithNulError.html"><code>core::ffi::FromBytesWithNulError</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/alloc/ffi/struct.CString.html"><code>alloc::ffi::CString</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/alloc/ffi/struct.FromVecWithNulError.html"><code>alloc::ffi::FromVecWithNulError</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/alloc/ffi/struct.IntoStringError.html"><code>alloc::ffi::IntoStringError</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/alloc/ffi/struct.NulError.html"><code>alloc::ffi::NulError</code></a></li>
+</ul>
+<p>These types were previously stable in <code>std::os::raw</code>, but are now also
+available in <code>core::ffi</code> and <code>std::ffi</code>:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_char.html"><code>ffi::c_char</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_double.html"><code>ffi::c_double</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_float.html"><code>ffi::c_float</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_int.html"><code>ffi::c_int</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_long.html"><code>ffi::c_long</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_longlong.html"><code>ffi::c_longlong</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_schar.html"><code>ffi::c_schar</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_short.html"><code>ffi::c_short</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_uchar.html"><code>ffi::c_uchar</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_uint.html"><code>ffi::c_uint</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_ulong.html"><code>ffi::c_ulong</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_ulonglong.html"><code>ffi::c_ulonglong</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/type.c_ushort.html"><code>ffi::c_ushort</code></a></li>
+</ul>
+<p>We've stabilized some helpers for use with <code>Poll</code>, the low-level implementation
+underneath futures:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/future/fn.poll_fn.html"><code>future::poll_fn</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/task/macro.ready.html"><code>task::ready!</code></a></li>
+</ul>
+<p>In the future, we hope to provide simpler APIs that require less use of
+low-level details like <code>Poll</code> and <code>Pin</code>, but in the meantime, these helpers
+make it easier to write such code.</p>
+<p>These APIs are now usable in const contexts:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/core/slice/fn.from_raw_parts.html"><code>slice::from_raw_parts</code></a></li>
+</ul>
+<h3><a href="#compatibility-notes" aria-hidden="true" class="anchor" id="compatibility-notes"></a>Compatibility notes</h3>
+<ul>
+<li>
+<p>As <a href="https://blog.rust-lang.org/2022/08/01/Increasing-glibc-kernel-requirements.html">previously
+announced</a>,
+<code>linux</code> targets now require at least Linux kernel 3.2 (except for targets which
+already required a newer kernel), and <code>linux-gnu</code> targets now require glibc
+2.17 (except for targets which already required a newer glibc).</p>
+</li>
+<li>
+<p>Rust 1.64.0 changes the memory layout of <code>Ipv4Addr</code>, <code>Ipv6Addr</code>,
+<code>SocketAddrV4</code> and <code>SocketAddrV6</code> to be more compact and memory efficient.
+This internal representation was never exposed, but some crates relied on
+it anyway by using <code>std::mem::transmute</code>, resulting in invalid memory
+accesses. Such internal implementation details of the standard library are
+<em>never</em> considered a stable interface. To limit the damage, we worked with
+the authors of all of the still-maintained crates doing so to release fixed
+versions, which have been out for more than a year. The vast majority of
+impacted users should be able to mitigate with a <code>cargo update</code>.</p>
+</li>
+<li>
+<p>As part of the <a href="https://blog.rust-lang.org/2022/07/01/RLS-deprecation.html">RLS
+deprecation</a>,
+this is also the last release containing a copy of RLS. Starting from Rust
+1.65.0, RLS will be replaced by a small LSP server showing the deprecation
+warning.</p>
+</li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.64 release, including:</p>
+<ul>
+<li>
+<p>Windows builds of the Rust compiler now use profile-guided optimization,
+providing performance improvements of 10-20% for compiling Rust code on
+Windows.</p>
+</li>
+<li>
+<p>If you define a struct containing fields that are never used, rustc will warn
+about the unused fields. Now, in Rust 1.64, you can enable the
+<code>unused_tuple_struct_fields</code> lint to get the same warnings about unused
+fields in a tuple struct. In future versions, we plan to make this lint
+warn by default.  Fields of type unit (<code>()</code>) do not produce this warning,
+to make it easier to migrate existing code without having to change tuple
+indices.</p>
+</li>
+</ul>
+<p>Check out everything that changed in
+<a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1640-2022-09-22">Rust</a>,
+<a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-164-2022-09-22">Cargo</a>,
+and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-164">Clippy</a>.</p>
+<h3><a href="#contributors-to-1640" aria-hidden="true" class="anchor" id="contributors-to-1640"></a>Contributors to 1.64.0</h3>
+<p>Many people came together to create Rust 1.64.0.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.64.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>

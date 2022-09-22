@@ -10,8 +10,282 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-09-21T17:59:51+00:00</updated>
+    <updated>2022-09-22T13:32:41+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.64.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/09/22/Rust-1.64.0.html" type="text/html" title="Announcing Rust 1.64.0" />
+        <published>2022-09-22T00:00:00+00:00</published>
+        <updated>2022-09-22T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/09/22/Rust-1.64.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/09/22/Rust-1.64.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.64.0. Rust is a
+programming language empowering everyone to build reliable and efficient
+software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.64.0
+with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get
+&lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on
+our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1640-2022-09-22&quot;&gt;detailed release notes for
+1.64.0&lt;/a&gt;
+on GitHub.&lt;/p&gt;
+&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider
+updating locally to use the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly
+channel (&lt;code&gt;rustup default nightly&lt;/code&gt;). Please
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you
+might come across!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1640-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1640-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.64.0 stable&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#enhancing-await-with-intofuture&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;enhancing-await-with-intofuture&quot;&gt;&lt;/a&gt;Enhancing &lt;code&gt;.await&lt;/code&gt; with &lt;code&gt;IntoFuture&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Rust 1.64 stabilizes the
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/future/trait.IntoFuture.html&quot;&gt;&lt;code&gt;IntoFuture&lt;/code&gt;&lt;/a&gt;
+trait. &lt;code&gt;IntoFuture&lt;/code&gt; is a trait similar to
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/iter/trait.IntoIterator.html&quot;&gt;&lt;code&gt;IntoIterator&lt;/code&gt;&lt;/a&gt;,
+but rather than supporting &lt;code&gt;for ... in ...&lt;/code&gt; loops, &lt;code&gt;IntoFuture&lt;/code&gt; changes how
+&lt;code&gt;.await&lt;/code&gt; works. With &lt;code&gt;IntoFuture&lt;/code&gt;, the &lt;code&gt;.await&lt;/code&gt; keyword can await more than
+just futures; it can await &lt;em&gt;anything which can be converted into a &lt;code&gt;Future&lt;/code&gt; via
+&lt;code&gt;IntoFuture&lt;/code&gt;&lt;/em&gt; - which can help make your APIs more user-friendly!&lt;/p&gt;
+&lt;p&gt;Take for example a builder which constructs requests to some storage provider
+over the network:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub struct Error { ... }
+pub struct StorageResponse { ... }:
+pub struct StorageRequest(bool);
+
+impl StorageRequest {
+    /// Create a new instance of &#x60;StorageRequest&#x60;.
+    pub fn new() -&amp;gt; Self { ... }
+    /// Decide whether debug mode should be enabled.
+    pub fn set_debug(self, b: bool) -&amp;gt; Self { ... }
+    /// Send the request and receive a response.
+    pub async fn send(self) -&amp;gt; Result&amp;lt;StorageResponse, Error&amp;gt; { ... }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Typical usage would likely look something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let response &#x3D; StorageRequest::new()  // 1. create a new instance
+    .set_debug(true)                  // 2. set some option
+    .send()                           // 3. construct the future
+    .await?;                          // 4. run the future + propagate errors
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is not bad, but we can do better here. Using &lt;code&gt;IntoFuture&lt;/code&gt; we can combine
+&lt;em&gt;&amp;quot;construct the future&amp;quot;&lt;/em&gt; (line 3) and &lt;em&gt;&amp;quot;run the future&amp;quot;&lt;/em&gt; (line 4) into a single
+step:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let response &#x3D; StorageRequest::new()  // 1. create a new instance
+    .set_debug(true)                  // 2. set some option
+    .await?;                          // 3. construct + run the future + propagate errors
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can do this by implementing &lt;code&gt;IntoFuture&lt;/code&gt; for &lt;code&gt;StorageRequest&lt;/code&gt;. &lt;code&gt;IntoFuture&lt;/code&gt;
+requires us to have a named future we can return, which we can do by creating a
+&amp;quot;boxed future&amp;quot; and defining a type alias for it:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// First we must import some new types into the scope.
+use std::pin::Pin;
+use std::future::{Future, IntoFuture};
+
+pub struct Error { ... }
+pub struct StorageResponse { ... }
+pub struct StorageRequest(bool);
+
+impl StorageRequest {
+    /// Create a new instance of &#x60;StorageRequest&#x60;.
+    pub fn new() -&amp;gt; Self { ... }
+    /// Decide whether debug mode should be enabled.
+    pub fn set_debug(self, b: bool) -&amp;gt; Self { ... }
+    /// Send the request and receive a response.
+    pub async fn send(self) -&amp;gt; Result&amp;lt;StorageResponse, Error&amp;gt; { ... }
+}
+
+// The new implementations:
+// 1. create a new named future type
+// 2. implement &#x60;IntoFuture&#x60; for &#x60;StorageRequest&#x60;
+pub type StorageRequestFuture &#x3D; Pin&amp;lt;Box&amp;lt;dyn Future&amp;lt;Output &#x3D; Result&amp;lt;StorageResponse, Error&amp;gt; + Send + &#x27;static&amp;gt;&amp;gt;
+impl IntoFuture for StorageRequest {
+    type IntoFuture &#x3D; StorageRequestFuture;
+    type Output &#x3D; &amp;lt;StorageRequestFuture as Future&amp;gt;::Output;
+    fn into_future(self) -&amp;gt; Self::IntoFuture {
+        Box::pin(self.send())
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This takes a bit more code to implement, but provides a simpler API for users.&lt;/p&gt;
+&lt;p&gt;In the future, the Rust Async WG hopes to simplify the creating new named
+futures by supporting &lt;a href&#x3D;&quot;https://rust-lang.github.io/impl-trait-initiative/explainer/tait.html&quot;&gt;&lt;code&gt;impl Trait&lt;/code&gt; in &lt;code&gt;type&lt;/code&gt; aliases (Type Alias Impl Trait or
+TAIT)&lt;/a&gt;.
+This should make implementing &lt;code&gt;IntoFuture&lt;/code&gt; easier by simplifying the type
+alias&#x27; signature, and make it more performant by removing the &lt;code&gt;Box&lt;/code&gt; from the
+type alias.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#c-compatible-ffi-types-in-core-and-alloc&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;c-compatible-ffi-types-in-core-and-alloc&quot;&gt;&lt;/a&gt;C-compatible FFI types in core and alloc&lt;/h3&gt;
+&lt;p&gt;When calling or being called by C ABIs, Rust code can use type aliases like
+&lt;code&gt;c_uint&lt;/code&gt; or &lt;code&gt;c_ulong&lt;/code&gt; to match the corresponding types from C on any target,
+without requiring target-specific code or conditionals.&lt;/p&gt;
+&lt;p&gt;Previously, these type aliases were only available in &lt;code&gt;std&lt;/code&gt;, so code written
+for embedded targets and other scenarios that could only use &lt;code&gt;core&lt;/code&gt; or &lt;code&gt;alloc&lt;/code&gt;
+could not use these types.&lt;/p&gt;
+&lt;p&gt;Rust 1.64 now provides all of the &lt;code&gt;c_*&lt;/code&gt; type aliases in
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/core/ffi/index.html&quot;&gt;&lt;code&gt;core::ffi&lt;/code&gt;&lt;/a&gt;, as well as
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/core/ffi/struct.CStr.html&quot;&gt;&lt;code&gt;core::ffi::CStr&lt;/code&gt;&lt;/a&gt; for
+working with C strings. Rust 1.64 also provides
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/alloc/ffi/struct.CString.html&quot;&gt;&lt;code&gt;alloc::ffi::CString&lt;/code&gt;&lt;/a&gt;
+for working with owned C strings using only the &lt;code&gt;alloc&lt;/code&gt; crate, rather than the
+full &lt;code&gt;std&lt;/code&gt; library.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#rust-analyzer-is-now-available-via-rustup&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rust-analyzer-is-now-available-via-rustup&quot;&gt;&lt;/a&gt;rust-analyzer is now available via rustup&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://rust-analyzer.github.io/&quot;&gt;rust-analyzer&lt;/a&gt; is now included as part of
+the collection of tools included with Rust. This makes it easier to download
+and access rust-analyzer, and makes it available on more platforms. It is
+available as a &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/concepts/components.html&quot;&gt;rustup
+component&lt;/a&gt; which
+can be installed with:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup component add rust-analyzer
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;At this time, to run the rustup-installed version, you need to invoke it this
+way:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup run rust-analyzer
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The next release of rustup will provide a built-in proxy so that running the
+executable &lt;code&gt;rust-analyzer&lt;/code&gt; will launch the appropriate version.&lt;/p&gt;
+&lt;p&gt;Most users should continue to use the releases provided by the rust-analyzer
+team (available on the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-analyzer/releases&quot;&gt;rust-analyzer releases
+page&lt;/a&gt;), which are
+published more frequently. Users of the &lt;a href&#x3D;&quot;https://marketplace.visualstudio.com/items?itemName&#x3D;rust-lang.rust-analyzer&quot;&gt;official VSCode
+extension&lt;/a&gt;
+are not affected since it automatically downloads and updates releases in the
+background.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#cargo-improvements-workspace-inheritance-and-multi-target-builds&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargo-improvements-workspace-inheritance-and-multi-target-builds&quot;&gt;&lt;/a&gt;Cargo improvements: workspace inheritance and multi-target builds&lt;/h3&gt;
+&lt;p&gt;When working with collections of related libraries or binary crates in one
+Cargo workspace, you can now avoid duplication of common field values between
+crates, such as common version numbers, repository URLs, or &lt;code&gt;rust-version&lt;/code&gt;.
+This also helps keep these values in sync between crates when updating them.
+For more details, see
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/workspaces.html#the-package-table&quot;&gt;&lt;code&gt;workspace.package&lt;/code&gt;&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/workspaces.html#the-dependencies-table&quot;&gt;&lt;code&gt;workspace.dependencies&lt;/code&gt;&lt;/a&gt;,
+and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#inheriting-a-dependency-from-a-workspace&quot;&gt;&amp;quot;inheriting a dependency from a
+workspace&amp;quot;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When building for multiple targets, you can now pass multiple &lt;code&gt;--target&lt;/code&gt;
+options to &lt;code&gt;cargo build&lt;/code&gt;, to build all of those targets at once. You can also
+set
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/config.html#buildtarget&quot;&gt;&lt;code&gt;build.target&lt;/code&gt;&lt;/a&gt;
+to an array of multiple targets in &lt;code&gt;.cargo/config.toml&lt;/code&gt; to build for multiple
+targets by default.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
+&lt;p&gt;The following methods and trait implementations are now stabilized:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/future/trait.IntoFuture.html&quot;&gt;&lt;code&gt;future::IntoFuture&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.checked_mul&quot;&gt;&lt;code&gt;num::NonZero*::checked_mul&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.checked_pow&quot;&gt;&lt;code&gt;num::NonZero*::checked_pow&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.saturating_mul&quot;&gt;&lt;code&gt;num::NonZero*::saturating_mul&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.saturating_pow&quot;&gt;&lt;code&gt;num::NonZero*::saturating_pow&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroIsize.html#method.abs&quot;&gt;&lt;code&gt;num::NonZeroI*::abs&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroIsize.html#method.checked_abs&quot;&gt;&lt;code&gt;num::NonZeroI*::checked_abs&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroIsize.html#method.overflowing_abs&quot;&gt;&lt;code&gt;num::NonZeroI*::overflowing_abs&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroIsize.html#method.saturating_abs&quot;&gt;&lt;code&gt;num::NonZeroI*::saturating_abs&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroIsize.html#method.unsigned_abs&quot;&gt;&lt;code&gt;num::NonZeroI*::unsigned_abs&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroIsize.html#method.wrapping_abs&quot;&gt;&lt;code&gt;num::NonZeroI*::wrapping_abs&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.checked_add&quot;&gt;&lt;code&gt;num::NonZeroU*::checked_add&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.checked_next_power_of_two&quot;&gt;&lt;code&gt;num::NonZeroU*::checked_next_power_of_two&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroUsize.html#method.saturating_add&quot;&gt;&lt;code&gt;num::NonZeroU*::saturating_add&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/unix/process/trait.CommandExt.html#tymethod.process_group&quot;&gt;&lt;code&gt;os::unix::process::CommandExt::process_group&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/fs/trait.FileTypeExt.html#tymethod.is_symlink_dir&quot;&gt;&lt;code&gt;os::windows::fs::FileTypeExt::is_symlink_dir&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/fs/trait.FileTypeExt.html#tymethod.is_symlink_file&quot;&gt;&lt;code&gt;os::windows::fs::FileTypeExt::is_symlink_file&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These types were previously stable in &lt;code&gt;std::ffi&lt;/code&gt;, but are now also available in
+&lt;code&gt;core&lt;/code&gt; and &lt;code&gt;alloc&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/ffi/struct.CStr.html&quot;&gt;&lt;code&gt;core::ffi::CStr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/ffi/struct.FromBytesWithNulError.html&quot;&gt;&lt;code&gt;core::ffi::FromBytesWithNulError&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/alloc/ffi/struct.CString.html&quot;&gt;&lt;code&gt;alloc::ffi::CString&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/alloc/ffi/struct.FromVecWithNulError.html&quot;&gt;&lt;code&gt;alloc::ffi::FromVecWithNulError&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/alloc/ffi/struct.IntoStringError.html&quot;&gt;&lt;code&gt;alloc::ffi::IntoStringError&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/alloc/ffi/struct.NulError.html&quot;&gt;&lt;code&gt;alloc::ffi::NulError&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These types were previously stable in &lt;code&gt;std::os::raw&lt;/code&gt;, but are now also
+available in &lt;code&gt;core::ffi&lt;/code&gt; and &lt;code&gt;std::ffi&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_char.html&quot;&gt;&lt;code&gt;ffi::c_char&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_double.html&quot;&gt;&lt;code&gt;ffi::c_double&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_float.html&quot;&gt;&lt;code&gt;ffi::c_float&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_int.html&quot;&gt;&lt;code&gt;ffi::c_int&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_long.html&quot;&gt;&lt;code&gt;ffi::c_long&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_longlong.html&quot;&gt;&lt;code&gt;ffi::c_longlong&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_schar.html&quot;&gt;&lt;code&gt;ffi::c_schar&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_short.html&quot;&gt;&lt;code&gt;ffi::c_short&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_uchar.html&quot;&gt;&lt;code&gt;ffi::c_uchar&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_uint.html&quot;&gt;&lt;code&gt;ffi::c_uint&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_ulong.html&quot;&gt;&lt;code&gt;ffi::c_ulong&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_ulonglong.html&quot;&gt;&lt;code&gt;ffi::c_ulonglong&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/type.c_ushort.html&quot;&gt;&lt;code&gt;ffi::c_ushort&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We&#x27;ve stabilized some helpers for use with &lt;code&gt;Poll&lt;/code&gt;, the low-level implementation
+underneath futures:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/future/fn.poll_fn.html&quot;&gt;&lt;code&gt;future::poll_fn&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/task/macro.ready.html&quot;&gt;&lt;code&gt;task::ready!&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the future, we hope to provide simpler APIs that require less use of
+low-level details like &lt;code&gt;Poll&lt;/code&gt; and &lt;code&gt;Pin&lt;/code&gt;, but in the meantime, these helpers
+make it easier to write such code.&lt;/p&gt;
+&lt;p&gt;These APIs are now usable in const contexts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/slice/fn.from_raw_parts.html&quot;&gt;&lt;code&gt;slice::from_raw_parts&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#compatibility-notes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;compatibility-notes&quot;&gt;&lt;/a&gt;Compatibility notes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;As &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/08/01/Increasing-glibc-kernel-requirements.html&quot;&gt;previously
+announced&lt;/a&gt;,
+&lt;code&gt;linux&lt;/code&gt; targets now require at least Linux kernel 3.2 (except for targets which
+already required a newer kernel), and &lt;code&gt;linux-gnu&lt;/code&gt; targets now require glibc
+2.17 (except for targets which already required a newer glibc).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Rust 1.64.0 changes the memory layout of &lt;code&gt;Ipv4Addr&lt;/code&gt;, &lt;code&gt;Ipv6Addr&lt;/code&gt;,
+&lt;code&gt;SocketAddrV4&lt;/code&gt; and &lt;code&gt;SocketAddrV6&lt;/code&gt; to be more compact and memory efficient.
+This internal representation was never exposed, but some crates relied on
+it anyway by using &lt;code&gt;std::mem::transmute&lt;/code&gt;, resulting in invalid memory
+accesses. Such internal implementation details of the standard library are
+&lt;em&gt;never&lt;/em&gt; considered a stable interface. To limit the damage, we worked with
+the authors of all of the still-maintained crates doing so to release fixed
+versions, which have been out for more than a year. The vast majority of
+impacted users should be able to mitigate with a &lt;code&gt;cargo update&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;As part of the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/07/01/RLS-deprecation.html&quot;&gt;RLS
+deprecation&lt;/a&gt;,
+this is also the last release containing a copy of RLS. Starting from Rust
+1.65.0, RLS will be replaced by a small LSP server showing the deprecation
+warning.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.64 release, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Windows builds of the Rust compiler now use profile-guided optimization,
+providing performance improvements of 10-20% for compiling Rust code on
+Windows.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you define a struct containing fields that are never used, rustc will warn
+about the unused fields. Now, in Rust 1.64, you can enable the
+&lt;code&gt;unused_tuple_struct_fields&lt;/code&gt; lint to get the same warnings about unused
+fields in a tuple struct. In future versions, we plan to make this lint
+warn by default.  Fields of type unit (&lt;code&gt;()&lt;/code&gt;) do not produce this warning,
+to make it easier to migrate existing code without having to change tuple
+indices.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Check out everything that changed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1640-2022-09-22&quot;&gt;Rust&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-164-2022-09-22&quot;&gt;Cargo&lt;/a&gt;,
+and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-164&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1640&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1640&quot;&gt;&lt;/a&gt;Contributors to 1.64.0&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.64.0.
+We couldn&#x27;t have done it without all of you.
+&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.64.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Const Eval (Un)Safety Rules</title>
@@ -861,37 +1135,6 @@ and some improvements to &lt;code&gt;rustup-init.sh&lt;/code&gt;.&lt;/p&gt;
 
         <author>
             <name>The Rustup Working Group</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>RLS Deprecation</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/07/01/RLS-deprecation.html" type="text/html" title="RLS Deprecation" />
-        <published>2022-07-01T00:00:00+00:00</published>
-        <updated>2022-07-01T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/07/01/RLS-deprecation.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/07/01/RLS-deprecation.html">&lt;p&gt;The Rust Language Server (RLS) is being deprecated in favor of &lt;a href&#x3D;&quot;https://rust-analyzer.github.io/&quot;&gt;rust-analyzer&lt;/a&gt;.
-Current users of RLS should migrate to using rust-analyzer instead.
-Builds of RLS will continue to be released until at least the Rust 1.64 release (2022-09-22), after which no new releases will be made.
-This timeline may change if any issues arise.&lt;/p&gt;
-&lt;p&gt;RLS is an implementation of the &lt;a href&#x3D;&quot;https://microsoft.github.io/language-server-protocol/&quot;&gt;Language Server Protocol&lt;/a&gt; (LSP) which provides enhanced features with any editor that supports the protocol, such as code-checking and refactoring.
-RLS was introduced by &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/1317-ide.html&quot;&gt;RFC 1317&lt;/a&gt; and development was very active from 2016 through 2019.
-However, the architecture of RLS has several limitations that can make it difficult to provide low-latency and high-quality responses needed for an interactive environment.&lt;/p&gt;
-&lt;p&gt;Development of rust-analyzer began near the beginning of 2018 to provide an alternate LSP implementation for Rust.
-rust-analyzer uses a fundamentally different approach that does not rely on using &lt;code&gt;rustc&lt;/code&gt;.
-In &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2912-rust-analyzer.html&quot;&gt;RFC 2912&lt;/a&gt; rust-analyzer was adopted as the official replacement for RLS.&lt;/p&gt;
-&lt;p&gt;How you migrate to rust-analyzer will depend on which editor you are using.
-If you are using VSCode, you should uninstall the &lt;code&gt;rust-lang.rust&lt;/code&gt; extension and install the official &lt;a href&#x3D;&quot;https://marketplace.visualstudio.com/items?itemName&#x3D;rust-lang.rust-analyzer&quot;&gt;&lt;code&gt;rust-lang.rust-analyzer&lt;/code&gt; extension&lt;/a&gt;.
-For other editors, please consult the &lt;a href&#x3D;&quot;https://rust-analyzer.github.io/manual.html&quot;&gt;rust-analyzer manual&lt;/a&gt; for instructions on how to install it.&lt;/p&gt;
-&lt;p&gt;Should you have any issues migrating to rust-analyzer, the &lt;a href&#x3D;&quot;https://users.rust-lang.org/c/ide/14&quot;&gt;Editors and IDEs category&lt;/a&gt; on the Rust Users forum is available for help with installation and usage.&lt;/p&gt;
-&lt;p&gt;We will soon be marking the official &lt;code&gt;rust-lang.rust&lt;/code&gt; VSCode extension as deprecated, and will be implementing notifications that will inform users about the transition.
-After the end of release builds of RLS, we plan to replace the &lt;code&gt;rls&lt;/code&gt; executable in official Rust releases with a small LSP implementation that informs the user that RLS is no longer available.&lt;/p&gt;
-&lt;p&gt;We would like to thank everyone who has worked on RLS and rust-analyzer.
-These options would not exist without the tremendous effort of all the contributors to these projects.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Dev Tools Team</name>
         </author>
     </entry>
     
