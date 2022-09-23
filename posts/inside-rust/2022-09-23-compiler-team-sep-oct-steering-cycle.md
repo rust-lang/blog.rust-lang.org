@@ -25,6 +25,8 @@ On [Friday, September 23rd][sep-23-zulip-archive], the Rust Compiler team had a 
 
 [2022-10-14]: https://calendar.google.com/event?action=TEMPLATE&tmeid=NW52ZGNhYzVrbWJxdG0yOTBpN2Q2ZmExaXIgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com
 
+[2022-10-21]: https://calendar.google.com/event?action=TEMPLATE&tmeid=MDJyYnJ1cGFtdWR1c2lnNjFmcHJ2b3JlODFfMjAyMjEwMjFUMTQwMDAwWiA2dTVycnRjZTZscnR2MDdwZmkzZGFtZ2p1c0Bn&tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&scp=ALL
+
 [compiler-team#559]: https://github.com/rust-lang/compiler-team/issues/559
 [compiler-team#544]: https://github.com/rust-lang/compiler-team/issues/544
 [compiler-team#540]: https://github.com/rust-lang/compiler-team/issues/540
