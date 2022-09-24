@@ -51,7 +51,7 @@ Rust style team, with three goals:
 - Making determinations about styling for new Rust constructs
 - Evolving the existing Rust style
 - Defining mechanisms to evolve the Rust style while taking backwards
-  compatibility into account, such as via Rust editions or similar mechanisms
+  compatibility into account
 
 We don't plan to make any earth-shattering style changes; the look and feel of
 Rust will remain largely the same. Evolutions to the default Rust style will
@@ -60,5 +60,5 @@ or would enable if they were stable.
 
 We expect that the initial work of the style team will focus on clearing a
 backlog of new language constructs that lack formatting guidance. Afterwards,
-we look forward to introducing a few minor style evolutions in the Rust 2024
-edition.
+we will look towards defining and implementing the mechanisms to evolve the
+default Rust style, and then begin introducing style improvements.
