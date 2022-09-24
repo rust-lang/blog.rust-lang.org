@@ -39,7 +39,10 @@ For instance, many people prefer to format their `use` lines in three blocks:
 imports from the standard library, imports from external crates, and then
 imports from modules within the same project. `rustfmt` supports this via the
 option `group_imports = StdExternalCrate`, but cannot make this the default
-without causing CI failures in existing projects.
+without causing CI failures in existing projects. We need a way to evolve the
+default Rust style compatibly, similar in spirit to the mechanisms we use for
+Rust editions: allowing existing style to continue working, and allowing people
+to opt into new style.
 
 To solve both of these problems, [RFC
 3309](https://rust-lang.github.io/rfcs/3309-style-team.html) has revived the
