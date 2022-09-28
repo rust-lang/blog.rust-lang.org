@@ -37,7 +37,7 @@ Every fourth Friday, the Rust compiler team decides how
 it is going to use its scheduled steering and design meeting time over the next
 three Fridays.
 
-On Friday, 10 June, we will do a quarterly [review of the open P-high issues][compiler-team#559].
+On Friday, 30 September, we will do a quarterly [review of the open P-high issues][compiler-team#559].
 pnkfelix will do some ahead of time work [in zulip](https://rust-lang.zulipchat.com/#narrow/stream/131828-t-compiler/topic/reviewing.20P-high.20issues.202022.20.28Q3.29/near/300390068)
 triaging
 some of the issues, and potentially prepare a meeting document summarizing the
