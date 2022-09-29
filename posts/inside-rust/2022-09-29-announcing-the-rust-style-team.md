@@ -14,7 +14,7 @@ guide defines the defaults, and most projects use those defaults.
 
 The standard Rust style resulted from development and discussion within the
 Rust style team, between 2016 and 2018. After publishing the style guide, the
-Rust style team wound up its active work, by design.
+Rust style team concluded its active work, by design.
 
 However, as the Rust language develops, we have a regular need for improvements
 to the style guide, such as to support new language constructs. This includes
