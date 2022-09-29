@@ -149,7 +149,7 @@ impl StorageRequest {
 // The new implementations:
 // 1. create a new named future type
 // 2. implement `IntoFuture` for `StorageRequest`
-pub type StorageRequestFuture = Pin&lt;Box&lt;dyn Future&lt;Output = Result&lt;StorageResponse, Error&gt; + Send + 'static&gt;&gt;
+pub type StorageRequestFuture = Pin&lt;Box&lt;dyn Future&lt;Output = Result&lt;StorageResponse, Error&gt;&gt; + Send + 'static&gt;&gt;
 impl IntoFuture for StorageRequest {
     type IntoFuture = StorageRequestFuture;
     type Output = &lt;StorageRequestFuture as Future&gt;::Output;

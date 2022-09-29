@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-09-29T11:04:41+00:00</updated>
+    <updated>2022-09-29T12:54:12+00:00</updated>
 
     
     <entry>
@@ -97,7 +97,7 @@ impl StorageRequest {
 // The new implementations:
 // 1. create a new named future type
 // 2. implement &#x60;IntoFuture&#x60; for &#x60;StorageRequest&#x60;
-pub type StorageRequestFuture &#x3D; Pin&amp;lt;Box&amp;lt;dyn Future&amp;lt;Output &#x3D; Result&amp;lt;StorageResponse, Error&amp;gt; + Send + &#x27;static&amp;gt;&amp;gt;
+pub type StorageRequestFuture &#x3D; Pin&amp;lt;Box&amp;lt;dyn Future&amp;lt;Output &#x3D; Result&amp;lt;StorageResponse, Error&amp;gt;&amp;gt; + Send + &#x27;static&amp;gt;&amp;gt;
 impl IntoFuture for StorageRequest {
     type IntoFuture &#x3D; StorageRequestFuture;
     type Output &#x3D; &amp;lt;StorageRequestFuture as Future&amp;gt;::Output;
