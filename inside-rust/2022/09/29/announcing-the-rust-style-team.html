@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing the Rust Style Team | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing the Rust Style Team | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing the Rust Style Team | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+<link rel="manifest" href="../../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../../inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing the Rust Style Team" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing the Rust Style Team</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 29, 2022 &middot; Josh Triplett
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang#Style team">The Rust Style Team</a> 
+    </div>
+
+    <div class="post">
+      <p>Rust has a standardized style, and an implementation of that style in the
+<code>rustfmt</code> tool. The standardized style helps Rust developers feel comfortable
+and at home in many different projects, and the tooling support from <code>rustfmt</code>
+makes it easy to maintain and to incorporate in continuous integration.
+<code>rustfmt</code> also provides many options to customize the style, but the style
+guide defines the defaults, and most projects use those defaults.</p>
+<p>The standard Rust style resulted from development and discussion within the
+Rust style team, between 2016 and 2018. After publishing the style guide, the
+Rust style team concluded its active work, by design.</p>
+<p>However, as the Rust language develops, we have a regular need for improvements
+to the style guide, such as to support new language constructs. This includes
+minor language changes, as well as highly anticipated new features such as
+<code>let</code>-chaining (RFC 2497) and <code>let</code>-<code>else</code> (RFC 3137). New constructs like
+these, by default, get ignored and not formatted by rustfmt, and subsequently
+need formatting added. Some of this work has fallen to the rustfmt team in
+recent years, but the rustfmt team would prefer to implement style
+determinations made by another team rather than making such determinations
+itself.</p>
+<p>In addition, rustfmt maintains backwards compatibility guarantees: code that
+has been correctly formatted with rustfmt won't get formatted differently with
+a future version of rustfmt. This avoids churn, and avoids creating CI failures
+when people use rustfmt to check style in CI. However, this also prevents
+evolving the Rust style to take community desires into account and improve
+formatting over time. rustfmt provides various configuration options to change
+its default formatting, and many of those options represent changes that many
+people in the community would like enabled by default.</p>
+<p>For instance, many people prefer to format their <code>use</code> lines in three blocks:
+imports from the standard library, imports from external crates, and then
+imports from modules within the same project. <code>rustfmt</code> supports this via the
+option <code>group_imports = StdExternalCrate</code>, but cannot make this the default
+without causing CI failures in existing projects. We need a way to evolve the
+default Rust style compatibly, similar in spirit to the mechanisms we use for
+Rust editions: allowing existing style to continue working, and allowing people
+to opt into new style.</p>
+<p>To solve both of these problems, <a href="https://rust-lang.github.io/rfcs/3309-style-team.html">RFC
+3309</a> has revived the
+Rust style team, with three goals:</p>
+<ul>
+<li>Making determinations about styling for new Rust constructs</li>
+<li>Evolving the existing Rust style</li>
+<li>Defining mechanisms to evolve the Rust style while taking backwards
+compatibility into account</li>
+</ul>
+<p>We don't plan to make any earth-shattering style changes; the look and feel of
+Rust will remain largely the same. Evolutions to the default Rust style will
+largely consist of established <code>rustfmt</code> options people already widely enable,
+or would enable if they were stable.</p>
+<p>We expect that the initial work of the style team will focus on clearing a
+backlog of new language constructs that lack formatting guidance. Afterwards,
+we will look towards defining and implementing the mechanisms to evolve the
+default Rust style, and then begin introducing style improvements.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../../scripts/highlight.js"></script>
+
+  </body>
+</html>

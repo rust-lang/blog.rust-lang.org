@@ -10,8 +10,72 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-09-28T14:42:10+00:00</updated>
+    <updated>2022-09-29T11:04:38+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing the Rust Style Team</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/09/29/announcing-the-rust-style-team.html" type="text/html" title="Announcing the Rust Style Team" />
+        <published>2022-09-29T00:00:00+00:00</published>
+        <updated>2022-09-29T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/09/29/announcing-the-rust-style-team.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/09/29/announcing-the-rust-style-team.html">&lt;p&gt;Rust has a standardized style, and an implementation of that style in the
+&lt;code&gt;rustfmt&lt;/code&gt; tool. The standardized style helps Rust developers feel comfortable
+and at home in many different projects, and the tooling support from &lt;code&gt;rustfmt&lt;/code&gt;
+makes it easy to maintain and to incorporate in continuous integration.
+&lt;code&gt;rustfmt&lt;/code&gt; also provides many options to customize the style, but the style
+guide defines the defaults, and most projects use those defaults.&lt;/p&gt;
+&lt;p&gt;The standard Rust style resulted from development and discussion within the
+Rust style team, between 2016 and 2018. After publishing the style guide, the
+Rust style team concluded its active work, by design.&lt;/p&gt;
+&lt;p&gt;However, as the Rust language develops, we have a regular need for improvements
+to the style guide, such as to support new language constructs. This includes
+minor language changes, as well as highly anticipated new features such as
+&lt;code&gt;let&lt;/code&gt;-chaining (RFC 2497) and &lt;code&gt;let&lt;/code&gt;-&lt;code&gt;else&lt;/code&gt; (RFC 3137). New constructs like
+these, by default, get ignored and not formatted by rustfmt, and subsequently
+need formatting added. Some of this work has fallen to the rustfmt team in
+recent years, but the rustfmt team would prefer to implement style
+determinations made by another team rather than making such determinations
+itself.&lt;/p&gt;
+&lt;p&gt;In addition, rustfmt maintains backwards compatibility guarantees: code that
+has been correctly formatted with rustfmt won&#x27;t get formatted differently with
+a future version of rustfmt. This avoids churn, and avoids creating CI failures
+when people use rustfmt to check style in CI. However, this also prevents
+evolving the Rust style to take community desires into account and improve
+formatting over time. rustfmt provides various configuration options to change
+its default formatting, and many of those options represent changes that many
+people in the community would like enabled by default.&lt;/p&gt;
+&lt;p&gt;For instance, many people prefer to format their &lt;code&gt;use&lt;/code&gt; lines in three blocks:
+imports from the standard library, imports from external crates, and then
+imports from modules within the same project. &lt;code&gt;rustfmt&lt;/code&gt; supports this via the
+option &lt;code&gt;group_imports &#x3D; StdExternalCrate&lt;/code&gt;, but cannot make this the default
+without causing CI failures in existing projects. We need a way to evolve the
+default Rust style compatibly, similar in spirit to the mechanisms we use for
+Rust editions: allowing existing style to continue working, and allowing people
+to opt into new style.&lt;/p&gt;
+&lt;p&gt;To solve both of these problems, &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/3309-style-team.html&quot;&gt;RFC
+3309&lt;/a&gt; has revived the
+Rust style team, with three goals:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Making determinations about styling for new Rust constructs&lt;/li&gt;
+&lt;li&gt;Evolving the existing Rust style&lt;/li&gt;
+&lt;li&gt;Defining mechanisms to evolve the Rust style while taking backwards
+compatibility into account&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We don&#x27;t plan to make any earth-shattering style changes; the look and feel of
+Rust will remain largely the same. Evolutions to the default Rust style will
+largely consist of established &lt;code&gt;rustfmt&lt;/code&gt; options people already widely enable,
+or would enable if they were stable.&lt;/p&gt;
+&lt;p&gt;We expect that the initial work of the style team will focus on clearing a
+backlog of new language constructs that lack formatting guidance. Afterwards,
+we will look towards defining and implementing the mechanisms to evolve the
+default Rust style, and then begin introducing style improvements.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Josh Triplett</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Rust Compiler Early October 2022 Steering Cycle</title>
@@ -1646,28 +1710,6 @@ contributor. We&#x27;re looking forward to continue working with them!&lt;/p&gt;
 
         <author>
             <name>Philipp Krones</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>1.62.0 pre-release testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/06/28/1.62.0-prerelease.html" type="text/html" title="1.62.0 pre-release testing" />
-        <published>2022-06-28T00:00:00+00:00</published>
-        <updated>2022-06-28T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/06/28/1.62.0-prerelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/06/28/1.62.0-prerelease.html">&lt;p&gt;The 1.62.0 pre-release is ready for testing. The release is scheduled for this
-Thursday, June 30th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1620-2022-06-30&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2022-06-27/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2022-06-27/index.html&lt;/a&gt;. You
-can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-62-0-prerelease-testing/16913&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The release team is also thinking about changes to our pre-release process:
-we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Pietro Albini</name>
         </author>
     </entry>
     
