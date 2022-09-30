@@ -173,7 +173,7 @@ In particular, there have been a ton of people who stepped up to help [convert t
 
 [`javadoc`]: https://www.oracle.com/java/technologies/javase/javadoc-tool.html
 [`rustdoc`]: https://doc.rust-lang.org/rustdoc/
-[Intra-doc links]: https://doc.rust-lang.org/nightly/rustdoc/linking-to-items-by-name.html
+[Intra-doc links]: https://doc.rust-lang.org/rustdoc/write-documentation/linking-to-items-by-name.html
 [items]: https://doc.rust-lang.org/reference/items.html
 [broken-string-links]: https://github.com/rust-lang/rust/issues/32129
 [tracking-issue]: https://github.com/rust-lang/rust/issues/43466
