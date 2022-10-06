@@ -10,8 +10,36 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-10-04T13:08:02+00:00</updated>
+    <updated>2022-10-06T17:15:34+00:00</updated>
 
+    
+    <entry>
+        <title>Governance Update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/10/06/governance-update.html" type="text/html" title="Governance Update" />
+        <published>2022-10-06T00:00:00+00:00</published>
+        <updated>2022-10-06T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/10/06/governance-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/10/06/governance-update.html">&lt;p&gt;As part of ongoing work on governance, Rust leadership jointly established a group, &amp;quot;leadership chat&amp;quot;, consisting of the Core team, leads of all teams on the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance&quot;&gt;governance page&lt;/a&gt;, the Moderation team, and the project directors on the Rust Foundation board. This group has been serving as an interim governing body while efforts to establish the next evolution of Rust project-wide governance are underway.&lt;/p&gt;
+&lt;p&gt;We previously posted &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html&quot;&gt;an update on the future of Rust project-wide governance&lt;/a&gt;. In that post, we promised that the next steps would be to &amp;quot;take the findings we have so far and begin crafting proposals for how the Rust project will be governed in the future.&amp;quot; In this post, we&#x27;d like to provide an update on the status of this work.&lt;/p&gt;
+&lt;p&gt;Late in July, the interim leadership team established an informal working group to conduct further research and draft an RFC for the establishment of a new project-wide governing body. This RFC relies on the requirements document&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; that was compiled as a result of in-depth interviews conducted by Ryan Levick and Mara Bos with team members from across the Rust project. Currently, there are seven people involved in this working group: Ryan Levick (Core Project Director), JT (Core), Mark Rousskov (Core Project Director, Release Lead), Jane Losare-Lusby (Collaboration Project Director), Josh Triplett (Lang Team Lead), Josh Gould (Moderation), and Khionu Sybiern (Moderation).&lt;/p&gt;
+&lt;p&gt;The working group&#x27;s objective is not to completely re-engineer every aspect of Rust&#x27;s governance model — that would require the participation and consent of all the other teams working in the project — but rather to lay the foundation for dynamic project-wide governance by introducing policies and procedures for constraining, monitoring, and adjusting the governance model in response to the project&#x27;s evolving needs. As part of this work, not only is explicit attention being paid to the issues that led to the resignation of the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2021/11/25/in-response-to-the-moderation-team-resignation.html&quot;&gt;former mod team&lt;/a&gt; last November but also additional governance shortfalls identified through Ryan&#x27;s and Mara&#x27;s research. At the same time, we&#x27;re deliberately keeping the scope small in the hope of getting out of the way as soon as possible to let the work continue under the new more representative and accountable governance body.&lt;/p&gt;
+&lt;p&gt;According to our current projections, we are roughly halfway through drafting this RFC since the process began at the end of August. We&#x27;re still making steady progress, and when we have a full draft, we&#x27;ll post it for project-wide review. In the interest of transparency, we will continue to publish updates until the RFC is made available. The goal of keeping the initial discussions private is not to exclude people, but rather to keep the size of the group discussions manageable&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn2&quot; id&#x3D;&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; during the early stages of the RFC drafting process. We are completely open to sharing early drafts and discussing current plans outside of our weekly meetings. Any project participants with questions or concerns are encouraged to get in touch with the working group&#x27;s members.&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn1&quot;&gt;
+&lt;p&gt;Which can be found in the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html&quot;&gt;previous governance update post&lt;/a&gt; &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn2&quot;&gt;
+&lt;p&gt;Even with &amp;quot;only&amp;quot; seven people, having discussions of this magnitude is difficult. &lt;a href&#x3D;&quot;#fnref2&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Ryan Levick</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing the Rust Style Team</title>
@@ -1662,54 +1690,6 @@ we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/
 
         <author>
             <name>Release automation</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Changes at the Clippy Team</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/07/13/clippy-team-changes.html" type="text/html" title="Changes at the Clippy Team" />
-        <published>2022-07-13T00:00:00+00:00</published>
-        <updated>2022-07-13T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/07/13/clippy-team-changes.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/07/13/clippy-team-changes.html">&lt;h2&gt;&lt;a href&#x3D;&quot;#new-members&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;new-members&quot;&gt;&lt;/a&gt;New Members&lt;/h2&gt;
-&lt;p&gt;We are thrilled to publicly announce that &lt;a href&#x3D;&quot;https://github.com/Alexendoo&quot;&gt;Alex
-Macleod&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/dswij&quot;&gt;dswij&lt;/a&gt;, and
-&lt;a href&#x3D;&quot;https://github.com/Jarcho&quot;&gt;Jason Newcomb&lt;/a&gt; have joined the Clippy Team!&lt;/p&gt;
-&lt;p&gt;Jason has been contributing to Clippy since late 2020 and was the most active
-contributor since then. He has contributed in pretty much every area - big
-refactors, bug fixes, and major improvements to our Clippy utils. Having him as
-an additional reviewer will be a great improvement to the team.&lt;/p&gt;
-&lt;p&gt;dswij first started contributing late last summer and has fixed many bugs in
-Clippy as well as implementing some new lints to make Clippy even more helpful.
-With their continued contributions to Clippy and engagement in the project,
-we&#x27;re happy to now have them as a full team member.&lt;/p&gt;
-&lt;p&gt;Alex started contributing to Clippy shortly after and has improved our dev
-tooling quite a bit. Now he wants to continue focusing on our &lt;code&gt;lintcheck&lt;/code&gt; tool,
-which will help detect false positives in new lints before we release them to
-the public. We&#x27;re excited to have Alex on our team and looking forward to all
-the improvements he will bring in the future.&lt;/p&gt;
-&lt;p&gt;With the new additions to the team, we should be able to handle our long PR
-queue better. We currently have over 40 open PRs, which is a good sign for the
-health of the project, but doesn&#x27;t help when we don&#x27;t have the reviewers to
-merge them. Now we do!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#alumni&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;alumni&quot;&gt;&lt;/a&gt;Alumni&lt;/h2&gt;
-&lt;p&gt;At the same time, we recently granted some of our oldest members the
-well-deserved alumni status. We want to thank &lt;a href&#x3D;&quot;https://github.com/killercup&quot;&gt;Pascal
-Hertleif&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/mcarton&quot;&gt;Martin
-Carton&lt;/a&gt; for all their contributions, especially in
-the early days. People joining today probably never worked with them on Clippy,
-but without them, we probably wouldn&#x27;t be here.&lt;/p&gt;
-&lt;p&gt;We also want to thank &lt;a href&#x3D;&quot;https://github.com/phansch&quot;&gt;Philipp Hansch&lt;/a&gt; for their
-contributions to Clippy and all of the review work they&#x27;ve done over the years.
-To this day phansch is one of the most active Clippy contributors (measured by
-the number of commits).&lt;/p&gt;
-&lt;p&gt;And finally, thank you to &lt;a href&#x3D;&quot;https://github.com/mikerite&quot;&gt;mikerite&lt;/a&gt;, who stepped
-down from an active reviewer/team member position but will be staying on as a
-contributor. We&#x27;re looking forward to continue working with them!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Philipp Krones</name>
         </author>
     </entry>
     
