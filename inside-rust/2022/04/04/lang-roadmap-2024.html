@@ -244,7 +244,7 @@ Permit matching types with patterns they can dereference to, such as
 matching a <code>String</code> with a <code>&quot;str&quot;</code>.</li>
 <li>Perfect derive: determine the precise conditions for generic type
 parameters based on the types of a struct fields. For instance,
-<code>#[derive(Clone)] struct MyStruct(Rc&lt;T&gt;)</code> would not require <code>T: Clone</code>,
+<code>#[derive(Clone)] struct MyStruct&lt;T&gt;(Rc&lt;T&gt;)</code> would not require <code>T: Clone</code>,
 because <code>Rc&lt;T&gt;</code> can be cloned without it.</li>
 <li>Autoref, operators, and clones: Generic methods that operate on
 references sometimes necessitate types like <code>&amp;u32</code>; since <code>u32</code> is
