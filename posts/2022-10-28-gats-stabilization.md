@@ -30,7 +30,7 @@ All in all, even if *you* won't need to use GATs directly, it's very possible th
 
 ## When GATs go wrong - a few current bugs and limitations
 
-As alluded to before, this stabilization not without its bugs and limitations. This is not atypical compared to prior large language features. We plan to fix these bugs and remove these limitations as part of ongoing efforts driven by the newly-formed types team. (Stayed tuned for more details in an official annoucement soon!)
+As alluded to before, this stabilization is not without its bugs and limitations. This is not atypical compared to prior large language features. We plan to fix these bugs and remove these limitations as part of ongoing efforts driven by the newly-formed types team. (Stayed tuned for more details in an official announcement soon!)
 
 Here, we'll go over just a couple of the limitations that we've identified that users might run into.
 
@@ -86,7 +86,7 @@ note: due to current limitations in the borrow checker, this implies a `'static`
    |                          ^^^^
 ```
 
-It's not perfect, but it's something. It might not cover all cases, but if have a `for<'a> I::Item<'a>: Trait` bound somewhere and get an error that says something doesn't live long enough, you might be running into this bug. We're actively working to fix this, but it doesn't seem to come up often enough, so we feel the feature is still immensely useful enough even with it around.
+It's not perfect, but it's something. It might not cover all cases, but if have a `for<'a> I::Item<'a>: Trait` bound somewhere and get an error that says something doesn't live long enough, you might be running into this bug. We're actively working to fix this. However, this error doesn't actually come up as often as you might expect while reading this (from our experience), so we feel the feature is still immensely useful enough even with it around.
 
 ### Traits with GATs are not object safe
 
@@ -164,7 +164,7 @@ trait LendingIterator {
 }
 ```
 
-Looks simple enough, but if it really was, would they be here? Let's start by looking at what happens when we try to use `for_each`:
+Looks simple enough, but if it really was, would it be here? Let's start by looking at what happens when we try to use `for_each`:
 
 ```rust
 fn iterate<T, I: for<'a> LendingIterator<Item<'a> = &'a T>>(iter: I) {
@@ -179,9 +179,11 @@ error: `I` does not live long enough
    |                   ^^^^^^^^^^
 ```
 
-Well, that isn't great. Turns out, this is pretty closely related to the first limitation we talked about earlier. But has strong connections to the borrow checker.
+Well, that isn't great. Turns out, this is pretty closely related to the first limitation we talked about earlier, even
+though the borrow checker does play a role here.
 
-But, let's look at something that's very clearly a borrow checker problem, by looking at an implementation of the `Filter` struct returned by the `filter` method:
+On the other hand, let's look at something that's very clearly a borrow checker problem, by looking at an implementation
+of the `Filter` struct returned by the `filter` method:
 
 ```rust
 impl<I: LendingIterator, P> LendingIterator for Filter<I, P>
@@ -226,7 +228,7 @@ This is a known limitation in the current borrow checker and should be solved in
 
 The last limitation we'll talk about today is a bit different than the others; it's not a bug and it shouldn't prevent any programs from compiling. But it all comes back to that `where Self: 'a` clause you've seen in several parts of this post. As mentioned before, if you're interested in digging a bit into why that clause is required, see the [push for stabilization post][stabilization_post].
 
-There is one not-so-ideal about this clause: you must write it on the trait. Like with where clauses on functions, you cannot add clauses to associated types in impls that aren't there in the trait. However, if you *didn't* add this clause, a large set of potential impls of the trait would be disallowed.
+There is one not-so-ideal requirement about this clause: you must write it on the trait. Like with where clauses on functions, you cannot add clauses to associated types in impls that aren't there in the trait. However, if you *didn't* add this clause, a large set of potential impls of the trait would be disallowed.
 
 To help users not fall into the pitfall of accidentally forgetting to add this (or similar clauses that end up with the same effect for a different set of generics), we've implemented a set of rules that must be followed for a trait with GATs to compile. Let's first look at the error without writing the clause:
 
@@ -255,11 +257,11 @@ This error should hopefully be helpful (you can even `cargo fix` it!). But, what
 
 Okay, so how did we end up with the required `Self: 'a` bound. Well, let's take a look at the `next` method. It returns `Self::Item<'a>`, and we have an argument `&'a mut self`. We're getting a bit into the details of the Rust language, but because of that argument, we know that `Self: 'a` must hold. So, we require that bound.
 
-We're requiring these bounds now to leave room in the future to potentially imply these automatically (and of course because it should help users writing traits with GATs). They shouldn't interfere with any real use-cases, but if you do encounter a problem, check out the issue mentioned in the error abovee. And if you want to see a fairly comprehensive testing of different scenarios on what bounds are required and when, check out the relevant [test file](https://github.com/rust-lang/rust/blob/f2702e922ba31e49d6167f5651d4545646dcf22d/src/test/ui/generic-associated-types/self-outlives-lint.rs).
+We're requiring these bounds now to leave room in the future to potentially imply these automatically (and of course because it should help users write traits with GATs). They shouldn't interfere with any real use-cases, but if you do encounter a problem, check out the issue mentioned in the error above. And if you want to see a fairly comprehensive testing of different scenarios on what bounds are required and when, check out the relevant [test file](https://github.com/rust-lang/rust/blob/f2702e922ba31e49d6167f5651d4545646dcf22d/src/test/ui/generic-associated-types/self-outlives-lint.rs).
 
 ## Conclusion
 
-Hopefully the limitations brought up here and explanations thereof don't detract from overall excitement of GATs stabilization. Sure, these limitations do, well, *limit* the number of things you can do with GATs. *However*, we would not be stabilizing GATs if we didn't feel that GATs are not still *very* useful. Additionally, we wouldn't be stabilization GATs if we didn't feel that the limitations weren't solvable (and in a backwards-compatible manner).
+Hopefully the limitations brought up here and explanations thereof don't detract from overall excitement of GATs stabilization. Sure, these limitations do, well, *limit* the number of things you can do with GATs. *However*, we would not be stabilizing GATs if we didn't feel that GATs are not still *very* useful. Additionally, we wouldn't be stabilizing GATs if we didn't feel that the limitations weren't solvable (and in a backwards-compatible manner).
 
 To conclude things, all the various people involved in getting this stabilization to happen deserve the utmost thanks. As said before, it's been 6.5 years coming and it couldn't have happened without everyone's support and dedication. Thanks all!
 
