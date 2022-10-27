@@ -198,7 +198,7 @@ messages.</p>
 <p>After that, we should add the derive, add our error attribute and annotate the
 primary <code>Span</code> (that was given to <code>struct_span_err</code>).</p>
 <pre><code class="language-rust">#[derive(SessionDiagnostic)]
-#[error(parser::return_type_arrow)]
+#[error(parser_return_type_arrow)]
 struct ReturnTypeArrow {
     #[primary_span]
     span: Span,
@@ -210,7 +210,7 @@ slug will be used to find the actual diagnostic message in our translation
 resources, which we'll see shortly.</p>
 <p>Finally, we need to add any labels, notes, helps or suggestions:</p>
 <pre><code class="language-rust">#[derive(SessionDiagnostic)]
-#[error(parser::return_type_arrow)]
+#[error(parser_return_type_arrow)]
 struct ReturnTypeArrow {
     #[primary_span]
     #[suggestion(applicability = &quot;machine-applicable&quot;, code = &quot;-&gt;&quot;)]
@@ -238,11 +238,11 @@ impl SessionDiagnostic for ReturnTypeArrow {
     fn into_diagnostic(self, sess: &amp;'_ rustc_session::Session) -&gt; DiagnosticBuilder&lt;'_&gt; {
         sess.struct_span_err(
             self.span,
-            fluent::parser::return_type_arrow,
+            fluent::parser_return_type_arrow,
         )
         .span_suggestion_short(
             self.span,
-            fluent::parser::suggestion,
+            fluent::suggestion,
             &quot;-&gt;&quot;.to_string(),
             Applicability::MachineApplicable,
         )

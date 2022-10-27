@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-10-24T11:22:45+00:00</updated>
+    <updated>2022-10-27T15:41:06+00:00</updated>
 
     
     <entry>
@@ -330,7 +330,7 @@ messages.&lt;/p&gt;
 &lt;p&gt;After that, we should add the derive, add our error attribute and annotate the
 primary &lt;code&gt;Span&lt;/code&gt; (that was given to &lt;code&gt;struct_span_err&lt;/code&gt;).&lt;/p&gt;
 &lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[derive(SessionDiagnostic)]
-#[error(parser::return_type_arrow)]
+#[error(parser_return_type_arrow)]
 struct ReturnTypeArrow {
     #[primary_span]
     span: Span,
@@ -342,7 +342,7 @@ slug will be used to find the actual diagnostic message in our translation
 resources, which we&#x27;ll see shortly.&lt;/p&gt;
 &lt;p&gt;Finally, we need to add any labels, notes, helps or suggestions:&lt;/p&gt;
 &lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[derive(SessionDiagnostic)]
-#[error(parser::return_type_arrow)]
+#[error(parser_return_type_arrow)]
 struct ReturnTypeArrow {
     #[primary_span]
     #[suggestion(applicability &#x3D; &amp;quot;machine-applicable&amp;quot;, code &#x3D; &amp;quot;-&amp;gt;&amp;quot;)]
@@ -370,11 +370,11 @@ impl SessionDiagnostic for ReturnTypeArrow {
     fn into_diagnostic(self, sess: &amp;amp;&#x27;_ rustc_session::Session) -&amp;gt; DiagnosticBuilder&amp;lt;&#x27;_&amp;gt; {
         sess.struct_span_err(
             self.span,
-            fluent::parser::return_type_arrow,
+            fluent::parser_return_type_arrow,
         )
         .span_suggestion_short(
             self.span,
-            fluent::parser::suggestion,
+            fluent::suggestion,
             &amp;quot;-&amp;gt;&amp;quot;.to_string(),
             Applicability::MachineApplicable,
         )
