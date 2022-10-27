@@ -161,7 +161,7 @@ primary `Span` (that was given to `struct_span_err`).
 
 ```rust
 #[derive(SessionDiagnostic)]
-#[error(parser::return_type_arrow)]
+#[error(parser_return_type_arrow)]
 struct ReturnTypeArrow {
     #[primary_span]
     span: Span,
@@ -177,7 +177,7 @@ Finally, we need to add any labels, notes, helps or suggestions:
 
 ```rust
 #[derive(SessionDiagnostic)]
-#[error(parser::return_type_arrow)]
+#[error(parser_return_type_arrow)]
 struct ReturnTypeArrow {
     #[primary_span]
     #[suggestion(applicability = "machine-applicable", code = "->")]
@@ -212,11 +212,11 @@ impl SessionDiagnostic for ReturnTypeArrow {
     fn into_diagnostic(self, sess: &'_ rustc_session::Session) -> DiagnosticBuilder<'_> {
         sess.struct_span_err(
             self.span,
-            fluent::parser::return_type_arrow,
+            fluent::parser_return_type_arrow,
         )
         .span_suggestion_short(
             self.span,
-            fluent::parser::suggestion,
+            fluent::suggestion,
             "->".to_string(),
             Applicability::MachineApplicable,
         )
