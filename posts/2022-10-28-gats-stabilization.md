@@ -67,7 +67,7 @@ fn main() {
 
 Here, imagine we wanted to have a `LendingIterator` where the items are overlapping slices of an array. We also have a function `print_items` that prints every item of a `LendingIterator`, as long as they implement `Debug`. This all seems innocent enough, but the above code doesn't compile — even though it should. Without going into details here, the `for<'a> I::Item<'a>: Debug` currently implies that `I::Item<'a>` must outlive `'static`.
 
-This is not really a nice bug. And of all the ones we'll mention today, this will likely be the one that is most limiting, annoying, and tough to figure out. This pops up much more often with GATs, but can be found with code that doesn't use GATs at all. Unfortunately, fixing this requires some refactorings to the compiler that isn't a short-term project. It is on the horizon though. The good news is that, in the meantime, we are least working on improving the error message you get from this code. This is what it will look like in the upcoming stabilization:
+This is not really a nice bug. And of all the ones we'll mention today, this will likely be the one that is most limiting, annoying, and tough to figure out. This pops up much more often with GATs, but can be found with code that doesn't use GATs at all. Unfortunately, fixing this requires some refactorings to the compiler that isn't a short-term project. It is on the horizon though. The good news is that, in the meantime, we are at least working on improving the error message you get from this code. This is what it will look like in the upcoming stabilization:
 
 ```rust
 error[E0597]: `array` does not live long enough
