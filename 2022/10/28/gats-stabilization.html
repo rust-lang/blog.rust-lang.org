@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Generic associated types to be stable in Rust 1.65 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Generic associated types to be stable in Rust 1.65 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Generic associated types to be stable in Rust 1.65 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Generic associated types to be stable in Rust 1.65" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Generic associated types to be stable in Rust 1.65</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 28, 2022 &middot; Jack Huey
+     on behalf of <a href="https://github.com/rust-lang/types-team">The Types Team</a> 
+    </div>
+
+    <div class="post">
+      <p>As of Rust 1.65, which is set to release on November 3rd, generic associated types (GATs) will be stable — over six and a half years after the original <a href="https://github.com/rust-lang/rfcs/pull/1598">RFC</a> was opened. This is truly a monumental achievement; however, as with a few of the other monumental features of Rust, like <code>async</code> or const generics, there are limitations in the initial stabilization that we plan to remove in the future.</p>
+<p>The goal of this post is not to teach about GATs, but rather to briefly introduce them to any readers that might not know what they are and to enumerate a few of the limitations in initial stabilization that users are most likely to run into. More detailed information can be found in the <a href="https://github.com/rust-lang/rfcs/pull/1598">RFC</a>, in the <a href="https://rust-lang.github.io/generic-associated-types-initiative/index.html">GATs initiative repository</a>, in the previous <a href="https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html">blog post</a> during the start of the stabilization push, in the <a href="https://doc.rust-lang.org/nightly/reference/items/associated-items.html">associated items section in the nightly reference</a>, or in the <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AF-generic_associated_types">open issues on Github for GATs</a></p>
+<h2><a href="#what-are-gats" aria-hidden="true" class="anchor" id="what-are-gats"></a>What are GATs</h2>
+<p>At its core, generic associated types allow you to have <em>generics</em> (type, lifetime, or const) on <em>associated types</em>. Note that this is really just rounding out the places where you can put generics: for example, you can already have generics on freestanding type aliases and on functions in traits. Now you can just have generics on type aliases in traits (which we just call associated types). Here's an example of what a trait with a GAT would look like:</p>
+<pre><code class="language-rust">trait LendingIterator {
+    type Item&lt;'a&gt; where Self: 'a;
+
+    fn next&lt;'a&gt;(&amp;'a mut self) -&gt; Self::Item&lt;'a&gt;;
+}
+</code></pre>
+<p>Most of this should look familiar; this trait looks <em>very</em> similar to the <a href="https://doc.rust-lang.org/stable/std/iter/trait.Iterator.html"><code>Iterator</code></a> trait from the standard library. Fundamentally, this version of the trait allows the <code>next</code> function to return an item that <em>borrows</em> from <code>self</code>. For more detail about the example, as well as some info on what that <code>where Self: 'a</code> is for, check out the <a href="https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html">push for stabilization post</a>.</p>
+<p>In general, GATs provide a foundational basis for a vast range of patterns and APIs. If you really want to get a feel for how many projects how been blocked on GATs being stable, go scroll through either the <a href="https://github.com/rust-lang/rust/issues/44265">tracking issue</a>: you will find numerous issues from other projects linking to those threads over the years saying something along the lines of &quot;we want the API to look like X, but for that we need GATs&quot; (or see <a href="https://github.com/rust-lang/rust/pull/96709#issuecomment-1173170243">this comment</a> that has some of these put together already). If you're interested in how GATs enable a library to do zero-copy parsing, resulting in nearly a ten-fold performance increase, you might be interested in checking out a <a href="https://smallcultfollowing.com/babysteps/blog/2022/06/27/many-modes-a-gats-pattern/">blog post</a> on it by Niko Matsakis.</p>
+<p>All in all, even if <em>you</em> won't need to use GATs directly, it's very possible that the <em>libraries</em> you use will use GATs either internally or publically for ergonomics, performance, or just because that's the only way the implementation works.</p>
+<h2><a href="#when-gats-go-wrong---a-few-current-bugs-and-limitations" aria-hidden="true" class="anchor" id="when-gats-go-wrong---a-few-current-bugs-and-limitations"></a>When GATs go wrong - a few current bugs and limitations</h2>
+<p>As alluded to before, this stabilization is not without its bugs and limitations. This is not atypical compared to prior large language features. We plan to fix these bugs and remove these limitations as part of ongoing efforts driven by the newly-formed types team. (Stayed tuned for more details in an official announcement soon!)</p>
+<p>Here, we'll go over just a couple of the limitations that we've identified that users might run into.</p>
+<h3><a href="#implied-static-requirement-from-higher-ranked-trait-bounds" aria-hidden="true" class="anchor" id="implied-static-requirement-from-higher-ranked-trait-bounds"></a>Implied <code>'static</code> requirement from higher-ranked trait bounds</h3>
+<p>Consider the following code:</p>
+<pre><code class="language-rust">trait LendingIterator {
+    type Item&lt;'a&gt; where Self: 'a;
+}
+
+pub struct WindowsMut&lt;'x, T&gt; {
+    slice: &amp;'x [T],
+}
+
+impl&lt;'x, T&gt; LendingIterator for WindowsMut&lt;'x, T&gt; {
+    type Item&lt;'a&gt; = &amp;'a mut [T] where Self: 'a;
+}
+
+fn print_items&lt;I&gt;(iter: I)
+where
+    I: LendingIterator,
+    for&lt;'a&gt; I::Item&lt;'a&gt;: Debug,
+{ ... }
+
+fn main() {
+    let mut array = [0; 16];
+    let slice = &amp;mut array;
+    let windows = WindowsMut { slice };
+    print_items::&lt;WindowsMut&lt;'_, usize&gt;&gt;(windows);
+}
+</code></pre>
+<p>Here, imagine we wanted to have a <code>LendingIterator</code> where the items are overlapping slices of an array. We also have a function <code>print_items</code> that prints every item of a <code>LendingIterator</code>, as long as they implement <code>Debug</code>. This all seems innocent enough, but the above code doesn't compile — even though it should. Without going into details here, the <code>for&lt;'a&gt; I::Item&lt;'a&gt;: Debug</code> currently implies that <code>I::Item&lt;'a&gt;</code> must outlive <code>'static</code>.</p>
+<p>This is not really a nice bug. And of all the ones we'll mention today, this will likely be the one that is most limiting, annoying, and tough to figure out. This pops up much more often with GATs, but can be found with code that doesn't use GATs at all. Unfortunately, fixing this requires some refactorings to the compiler that isn't a short-term project. It is on the horizon though. The good news is that, in the meantime, we are least working on improving the error message you get from this code. This is what it will look like in the upcoming stabilization:</p>
+<pre><code class="language-rust">error[E0597]: `array` does not live long enough
+   |
+   |     let slice = &amp;mut array;
+   |                 ^^^^^^^^^^ borrowed value does not live long enough
+   |     let windows = WindowsMut { slice };
+   |     print_items::&lt;WindowsMut&lt;'_, usize&gt;&gt;(windows);
+   |     -------------------------------------------- argument requires that `array` is borrowed for `'static`
+   | }
+   | - `array` dropped here while still borrowed
+   |
+note: due to current limitations in the borrow checker, this implies a `'static` lifetime
+   |
+   |     for&lt;'a&gt; I::Item&lt;'a&gt;: Debug,
+   |                          ^^^^
+</code></pre>
+<p>It's not perfect, but it's something. It might not cover all cases, but if have a <code>for&lt;'a&gt; I::Item&lt;'a&gt;: Trait</code> bound somewhere and get an error that says something doesn't live long enough, you might be running into this bug. We're actively working to fix this. However, this error doesn't actually come up as often as you might expect while reading this (from our experience), so we feel the feature is still immensely useful enough even with it around.</p>
+<h3><a href="#traits-with-gats-are-not-object-safe" aria-hidden="true" class="anchor" id="traits-with-gats-are-not-object-safe"></a>Traits with GATs are not object safe</h3>
+<p>So, this one is a simple one. Making traits with GATs object safe is going to take a little bit of design work for its implementation. To get an idea of the work left to do here, let's start with a bit of code that you could write on stable today:</p>
+<pre><code class="language-rust">fn takes_iter(_: &amp;dyn Iterator) {}
+</code></pre>
+<p>Well, you can write this, but it doesn't compile:</p>
+<pre><code class="language-rust">error[E0191]: the value of the associated type `Item` (from trait `Iterator`) must be specified
+ --&gt; src/lib.rs:1:23
+  |
+1 | fn takes_iter(_: &amp;dyn Iterator) {}
+  |                       ^^^^^^^^ help: specify the associated type: `Iterator&lt;Item = Type&gt;`
+</code></pre>
+<p>For a trait object to be well-formed, it must specify a value for all associated types. For the same reason, we don't want to accept the following:</p>
+<pre><code class="language-rust">fn no_associated_type(_: &amp;dyn LendingIterator) {}
+</code></pre>
+<p>However, GATs introduce an extra bit of complexity. Take this code:</p>
+<pre><code class="language-rust">fn not_fully_generic(_: &amp;dyn LendingIterator&lt;Item&lt;'static&gt; = &amp;'static str&gt;) {}
+</code></pre>
+<p>So, we've specified the value of the associated type for <em>one</em> value of of the <code>Item</code>'s lifetime (<code>'static</code>), but not for <em>any</em> value, like this:</p>
+<pre><code class="language-rust">fn fully_generic(_: &amp;dyn for&lt;'a&gt; LendingIterator&lt;Item&lt;'a&gt; = &amp;'a str&gt;) {}
+</code></pre>
+<p>While we have a solid idea of how to implement requirement in some <em>future</em> iterations of the trait solver (that uses more logical formulations), implementing it in the current trait solver is more difficult. Thus, we've chosen to hold off on this for now.</p>
+<h3><a href="#the-borrow-checker-isnt-perfect-and-it-shows" aria-hidden="true" class="anchor" id="the-borrow-checker-isnt-perfect-and-it-shows"></a>The borrow checker isn't perfect and it shows</h3>
+<p>Keeping with the <code>LendingIterator</code> example, let's start by looking at two methods on <code>Iterator</code>: <code>for_each</code> and <code>filter</code>:</p>
+<pre><code class="language-rust">trait Iterator {
+    type Item;
+
+    fn for_each&lt;F&gt;(self, f: F)
+    where
+        Self: Sized,
+        F: FnMut(Self::Item);
+    
+    fn filter&lt;P&gt;(self, predicate: P) -&gt; Filter&lt;Self, P&gt;
+    where
+        Self: Sized,
+        P: FnMut(&amp;Self::Item) -&gt; bool;
+}
+</code></pre>
+<p>Both of these take a function as an argument. Closures are often used these. Now, let's look at the <code>LendingIterator</code> definitions:</p>
+<pre><code class="language-rust">trait LendingIterator {
+    type Item&lt;'a&gt; where Self: 'a;
+
+    fn for_each&lt;F&gt;(mut self, mut f: F)
+    where
+        Self: Sized,
+        F: FnMut(Self::Item&lt;'_&gt;);
+
+    fn filter&lt;P&gt;(self, predicate: P) -&gt; Filter&lt;Self, P&gt;
+    where
+        Self: Sized,
+        P: FnMut(&amp;Self::Item&lt;'_&gt;) -&gt; bool;
+}
+</code></pre>
+<p>Looks simple enough, but if it really was, would it be here? Let's start by looking at what happens when we try to use <code>for_each</code>:</p>
+<pre><code class="language-rust">fn iterate&lt;T, I: for&lt;'a&gt; LendingIterator&lt;Item&lt;'a&gt; = &amp;'a T&gt;&gt;(iter: I) {
+    iter.for_each(|_: &amp;T| {})
+}
+</code></pre>
+<pre><code class="language-rust">error: `I` does not live long enough
+   |
+   |     iter.for_each(|_: &amp;T| {})
+   |                   ^^^^^^^^^^
+</code></pre>
+<p>Well, that isn't great. Turns out, this is pretty closely related to the first limitation we talked about earlier, even
+though the borrow checker does play a role here.</p>
+<p>On the other hand, let's look at something that's very clearly a borrow checker problem, by looking at an implementation
+of the <code>Filter</code> struct returned by the <code>filter</code> method:</p>
+<pre><code class="language-rust">impl&lt;I: LendingIterator, P&gt; LendingIterator for Filter&lt;I, P&gt;
+where
+    P: FnMut(&amp;I::Item&lt;'_&gt;) -&gt; bool, // &lt;- the bound from above, a function
+{
+    type Item&lt;'a&gt; = I::Item&lt;'a&gt; where Self: 'a; // &lt;- Use the underlying type
+
+    fn next(&amp;mut self) -&gt; Option&lt;I::Item&lt;'_&gt;&gt; {
+        // Loop through each item in the underlying `LendingIterator`...
+        while let Some(item) = self.iter.next() {
+            // ...check if the predicate holds for the item...
+            if (self.predicate)(&amp;item) {
+                // ...and return it if it does
+                return Some(item);
+            }
+        }
+        // Return `None` when we're out of items
+        return None;
+    }
+}
+</code></pre>
+<p>Again, the implementation here shouldn't seem surprising. We, of course, run into a borrow checker error:</p>
+<pre><code class="language-rust">error[E0499]: cannot borrow `self.iter` as mutable more than once at a time
+  --&gt; src/main.rs:28:32
+   |
+27 |     fn next(&amp;mut self) -&gt; Option&lt;I::Item&lt;'_&gt;&gt; {
+   |             - let's call the lifetime of this reference `'1`
+28 |         while let Some(item) = self.iter.next() {
+   |                                ^^^^^^^^^^^^^^^^ `self.iter` was mutably borrowed here in the previous iteration of the loop
+29 |             if (self.predicate)(&amp;item) {
+30 |                 return Some(item);
+   |                        ---------- returning this value requires that `self.iter` is borrowed for `'1`
+</code></pre>
+<p>This is a known limitation in the current borrow checker and should be solved in some future iteration (like <a href="https://github.com/rust-lang/polonius">Polonius</a>).</p>
+<h3><a href="#non-local-requirements-for-where-clauses-on-gats" aria-hidden="true" class="anchor" id="non-local-requirements-for-where-clauses-on-gats"></a>Non-local requirements for where clauses on GATs</h3>
+<p>The last limitation we'll talk about today is a bit different than the others; it's not a bug and it shouldn't prevent any programs from compiling. But it all comes back to that <code>where Self: 'a</code> clause you've seen in several parts of this post. As mentioned before, if you're interested in digging a bit into why that clause is required, see the <a href="https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html">push for stabilization post</a>.</p>
+<p>There is one not-so-ideal requirement about this clause: you must write it on the trait. Like with where clauses on functions, you cannot add clauses to associated types in impls that aren't there in the trait. However, if you <em>didn't</em> add this clause, a large set of potential impls of the trait would be disallowed.</p>
+<p>To help users not fall into the pitfall of accidentally forgetting to add this (or similar clauses that end up with the same effect for a different set of generics), we've implemented a set of rules that must be followed for a trait with GATs to compile. Let's first look at the error without writing the clause:</p>
+<pre><code class="language-rust">trait LendingIterator {
+    type Item&lt;'a&gt;;
+
+    fn next&lt;'a&gt;(&amp;'a mut self) -&gt; Self::Item&lt;'a&gt;;
+}
+</code></pre>
+<pre><code class="language-rust">error: missing required bound on `Item`
+ --&gt; src/lib.rs:2:5
+  |
+2 |     type Item&lt;'a&gt;;
+  |     ^^^^^^^^^^^^^-
+  |                  |
+  |                  help: add the required where clause: `where Self: 'a`
+  |
+  = note: this bound is currently required to ensure that impls have maximum flexibility
+  = note: we are soliciting feedback, see issue #87479 &lt;https://github.com/rust-lang/rust/issues/87479&gt; for more information
+</code></pre>
+<p>This error should hopefully be helpful (you can even <code>cargo fix</code> it!). But, what exactly are these rules? Well, ultimately, they end up being somewhat simple: <em>for methods that use the GAT, any bounds that can be proven must also be present on the GAT itself</em>.</p>
+<p>Okay, so how did we end up with the required <code>Self: 'a</code> bound. Well, let's take a look at the <code>next</code> method. It returns <code>Self::Item&lt;'a&gt;</code>, and we have an argument <code>&amp;'a mut self</code>. We're getting a bit into the details of the Rust language, but because of that argument, we know that <code>Self: 'a</code> must hold. So, we require that bound.</p>
+<p>We're requiring these bounds now to leave room in the future to potentially imply these automatically (and of course because it should help users write traits with GATs). They shouldn't interfere with any real use-cases, but if you do encounter a problem, check out the issue mentioned in the error above. And if you want to see a fairly comprehensive testing of different scenarios on what bounds are required and when, check out the relevant <a href="https://github.com/rust-lang/rust/blob/f2702e922ba31e49d6167f5651d4545646dcf22d/src/test/ui/generic-associated-types/self-outlives-lint.rs">test file</a>.</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>Hopefully the limitations brought up here and explanations thereof don't detract from overall excitement of GATs stabilization. Sure, these limitations do, well, <em>limit</em> the number of things you can do with GATs. <em>However</em>, we would not be stabilizing GATs if we didn't feel that GATs are not still <em>very</em> useful. Additionally, we wouldn't be stabilizing GATs if we didn't feel that the limitations weren't solvable (and in a backwards-compatible manner).</p>
+<p>To conclude things, all the various people involved in getting this stabilization to happen deserve the utmost thanks. As said before, it's been 6.5 years coming and it couldn't have happened without everyone's support and dedication. Thanks all!</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>
