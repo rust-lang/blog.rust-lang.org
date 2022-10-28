@@ -12,7 +12,7 @@ The goal of this post is not to teach about GATs, but rather to briefly introduc
 
 ## What are GATs
 
-At its core, generic associated types allow you to have *generics* (type, lifetime, or const) on *associated types*. Note that this is really just rounding out the places where you can put generics: for example, you can already have generics on freestanding type aliases and on functions in traits. Now you can just have generics on type aliases in traits (which we just call associated types). Here's an example of what trait with a GAT would look like:
+At its core, generic associated types allow you to have *generics* (type, lifetime, or const) on *associated types*. Note that this is really just rounding out the places where you can put generics: for example, you can already have generics on freestanding type aliases and on functions in traits. Now you can just have generics on type aliases in traits (which we just call associated types). Here's an example of what a trait with a GAT would look like:
 
 ```rust
 trait LendingIterator {
