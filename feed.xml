@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-10-29T18:50:36+00:00</updated>
+    <updated>2022-10-29T18:51:23+00:00</updated>
 
     
     <entry>
@@ -63,7 +63,7 @@ fn main() {
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here, imagine we wanted to have a &lt;code&gt;LendingIterator&lt;/code&gt; where the items are overlapping slices of an array. We also have a function &lt;code&gt;print_items&lt;/code&gt; that prints every item of a &lt;code&gt;LendingIterator&lt;/code&gt;, as long as they implement &lt;code&gt;Debug&lt;/code&gt;. This all seems innocent enough, but the above code doesn&#x27;t compile — even though it should. Without going into details here, the &lt;code&gt;for&amp;lt;&#x27;a&amp;gt; I::Item&amp;lt;&#x27;a&amp;gt;: Debug&lt;/code&gt; currently implies that &lt;code&gt;I::Item&amp;lt;&#x27;a&amp;gt;&lt;/code&gt; must outlive &lt;code&gt;&#x27;static&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;This is not really a nice bug. And of all the ones we&#x27;ll mention today, this will likely be the one that is most limiting, annoying, and tough to figure out. This pops up much more often with GATs, but can be found with code that doesn&#x27;t use GATs at all. Unfortunately, fixing this requires some refactorings to the compiler that isn&#x27;t a short-term project. It is on the horizon though. The good news is that, in the meantime, we are least working on improving the error message you get from this code. This is what it will look like in the upcoming stabilization:&lt;/p&gt;
+&lt;p&gt;This is not really a nice bug. And of all the ones we&#x27;ll mention today, this will likely be the one that is most limiting, annoying, and tough to figure out. This pops up much more often with GATs, but can be found with code that doesn&#x27;t use GATs at all. Unfortunately, fixing this requires some refactorings to the compiler that isn&#x27;t a short-term project. It is on the horizon though. The good news is that, in the meantime, we are working on improving the error message you get from this code. This is what it will look like in the upcoming stabilization:&lt;/p&gt;
 &lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;error[E0597]: &#x60;array&#x60; does not live long enough
    |
    |     let slice &#x3D; &amp;amp;mut array;
