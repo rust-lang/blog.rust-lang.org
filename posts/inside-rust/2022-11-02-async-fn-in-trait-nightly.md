@@ -245,10 +245,11 @@ This work was made possible thanks to the efforts of many people, including
 * Oli Scherer
 * Eric Holk
 * Dan Johnson
+* Bryan Garza
 * Niko Matsakis
 * Tyler Mandry
 
-It was built on top of years of compiler work that enabled us to ship [GATs] as well as other fundamental type system improvements.
+In addition it was built on top of years of compiler work that enabled us to ship [GATs] as well as other fundamental type system improvements. Thanks to all those who contributed.
 
 To learn more about this feature and the challenges behind it, check out the [Static async fn in traits RFC][RFC] and [why async fn in traits are hard]. Also stay tuned for a follow-up post where we explore language extensions that make it possible to express `Send` bounds without a special trait.
 
