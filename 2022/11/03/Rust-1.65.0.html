@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.65.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.65.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.65.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.65.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.65.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 3, 2022 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.65.0. Rust is a
+programming language empowering everyone to build reliable and efficient
+software.</p>
+<hr />
+<p>Before going into the details of the new Rust release, we'd like to draw
+attention to the tragic <a href="https://en.wikipedia.org/wiki/Death_of_Mahsa_Amini">death of Mahsa
+Amini</a> and the death and
+violent suppression of many others, by the religious morality police of Iran.
+See <a href="https://en.wikipedia.org/wiki/Mahsa_Amini_protests">https://en.wikipedia.org/wiki/Mahsa_Amini_protests</a> for more details. We
+stand in solidarity with the people in Iran struggling for human rights.</p>
+<hr />
+<p>If you have a previous version of Rust installed via rustup, you can get 1.65.0
+with:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get
+<code>rustup</code></a> from the appropriate page on
+our website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1650-2022-11-03">detailed release notes for
+1.65.0</a>
+on GitHub.</p>
+<p>If you'd like to help us out by testing future releases, you might consider
+updating locally to use the beta channel (<code>rustup default beta</code>) or the nightly
+channel (<code>rustup default nightly</code>). Please
+<a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you
+might come across!</p>
+<h2><a href="#whats-in-1650-stable" aria-hidden="true" class="anchor" id="whats-in-1650-stable"></a>What's in 1.65.0 stable</h2>
+<h3><a href="#generic-associated-types-gats" aria-hidden="true" class="anchor" id="generic-associated-types-gats"></a>Generic associated types (GATs)</h3>
+<p>Lifetime, type, and const generics can now be defined on associated types, like so:</p>
+<pre><code class="language-rust">trait Foo {
+    type Bar&lt;'x&gt;;
+}
+</code></pre>
+<p>It's hard to put into few words just how useful these can be, so here are a
+few example traits, to get a sense of their power:</p>
+<pre><code class="language-rust">/// An `Iterator`-like trait that can borrow from `Self`
+trait LendingIterator {
+    type Item&lt;'a&gt; where Self: 'a;
+
+    fn next&lt;'a&gt;(&amp;'a mut self) -&gt; Option&lt;Self::Item&lt;'a&gt;&gt;;
+}
+
+/// Can be implemented over smart pointers, like `Rc` or `Arc`,
+/// in order to allow being generic over the pointer type
+trait PointerFamily {
+    type Pointer&lt;T&gt;: Deref&lt;Target = T&gt;;
+
+    fn new&lt;T&gt;(value: T) -&gt; Self::Pointer&lt;T&gt;;
+}
+
+/// Allows borrowing an array of items. Useful for
+/// `NdArray`-like types that don't necessarily store
+/// data contiguously.
+trait BorrowArray&lt;T&gt; {
+    type Array&lt;'x, const N: usize&gt; where Self: 'x;
+
+    fn borrow_array&lt;'a, const N: usize&gt;(&amp;'a self) -&gt; Self::Array&lt;'a, N&gt;;
+}
+</code></pre>
+<p>As you can see, GATs are quite versatile and enable a number
+of patterns that are not currently able to be written. For more
+information, check out the post announcing the
+<a href="https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html">push for stabilization</a>
+published last year or the
+<a href="https://blog.rust-lang.org/2022/10/28/gats-stabilization.html">stabilization announcement post</a>
+published last week. The former goes into a bit more depth
+of a couple of the examples above, while the latter talks
+about some of the known limitations of this stabilization.</p>
+<p>More in depth reading can be found in the associated types
+section of the <a href="https://doc.rust-lang.org/nightly/reference/items/associated-items.html#associated-types">nightly reference</a>
+or the <a href="https://rust-lang.github.io/rfcs/1598-generic_associated_types.html">original RFC</a> (which was initially opened over 6.5 years ago!).</p>
+<h3><a href="#let-else-statements" aria-hidden="true" class="anchor" id="let-else-statements"></a><code>let</code>-<code>else</code> statements</h3>
+<p>This introduces a new type of <code>let</code> statement with a refutable pattern and a
+diverging <code>else</code> block that executes when that pattern doesn't match.</p>
+<pre><code>let PATTERN: TYPE = EXPRESSION else {
+    DIVERGING_CODE;
+};
+</code></pre>
+<p>Normal <code>let</code> statements can only use <em>irrefutable</em> patterns, statically known
+to always match. That pattern is often just a single variable binding, but may
+also unpack compound types like structs, tuples, and arrays. However, that was
+not usable for conditional matches, like pulling out a variant of an enum --
+until now! With <code>let</code>-<code>else</code>, a refutable pattern can match and bind variables
+in the surrounding scope like a normal <code>let</code>, or else diverge (e.g. <code>break</code>,
+<code>return</code>, <code>panic!</code>) when the pattern doesn't match.</p>
+<pre><code class="language-rust">fn get_count_item(s: &amp;str) -&gt; (u64, &amp;str) {
+    let mut it = s.split(' ');
+    let (Some(count_str), Some(item)) = (it.next(), it.next()) else {
+        panic!(&quot;Can't segment count item pair: '{s}'&quot;);
+    };
+    let Ok(count) = u64::from_str(count_str) else {
+        panic!(&quot;Can't parse integer: '{count_str}'&quot;);
+    };
+    (count, item)
+}
+assert_eq!(get_count_item(&quot;3 chairs&quot;), (3, &quot;chairs&quot;));
+</code></pre>
+<p>The scope of name bindings is the main thing that makes this different from
+<code>match</code> or <code>if let</code>-<code>else</code> expressions. You could previously approximate these
+patterns with an unfortunate bit of repetition and an outer <code>let</code>:</p>
+<pre><code class="language-rust">    let (count_str, item) = match (it.next(), it.next()) {
+        (Some(count_str), Some(item)) =&gt; (count_str, item),
+        _ =&gt; panic!(&quot;Can't segment count item pair: '{s}'&quot;),
+    };
+    let count = if let Ok(count) = u64::from_str(count_str) {
+        count
+    } else {
+        panic!(&quot;Can't parse integer: '{count_str}'&quot;);
+    };
+</code></pre>
+<h3><a href="#break-from-labeled-blocks" aria-hidden="true" class="anchor" id="break-from-labeled-blocks"></a><code>break</code> from labeled blocks</h3>
+<p>Plain block expressions can now be labeled as a <code>break</code> target, terminating
+that block early. This may sound a little like a <code>goto</code> statement, but it's not
+an arbitrary jump, only from within a block to its end. This was already
+possible with <code>loop</code> blocks, and you may have seen people write loops that
+always execute only once, just to get a labeled <code>break</code>.</p>
+<p>Now there's a language feature specifically for that! Labeled <code>break</code> may also
+include an expression value, just as with loops, letting a multi-statement
+block have an early &quot;return&quot; value.</p>
+<pre><code class="language-rust">let result = 'block: {
+    do_thing();
+    if condition_not_met() {
+        break 'block 1;
+    }
+    do_next_thing();
+    if condition_not_met() {
+        break 'block 2;
+    }
+    do_last_thing();
+    3
+};
+</code></pre>
+<h3><a href="#splitting-linux-debuginfo" aria-hidden="true" class="anchor" id="splitting-linux-debuginfo"></a>Splitting Linux debuginfo</h3>
+<p>Back in Rust 1.51, the compiler team added support for <a href="https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html#splitting-debug-information">split debug
+information</a>
+on macOS, and now this option is stable for use on Linux as well.</p>
+<ul>
+<li><code>-Csplit-debuginfo=unpacked</code> will split debuginfo out into multiple <code>.dwo</code>
+DWARF object files.</li>
+<li><code>-Csplit-debuginfo=packed</code> will produce a single <code>.dwp</code> DWARF package
+alongside your output binary with all the debuginfo packaged together.</li>
+<li><code>-Csplit-debuginfo=off</code> is still the default behavior, which includes DWARF
+data in <code>.debug_*</code> ELF sections of the objects and final binary.</li>
+</ul>
+<p>Split DWARF lets the linker avoid processing the debuginfo (because it isn't in
+the object files being linked anymore), which can speed up link times!</p>
+<p>Other targets now also accept <code>-Csplit-debuginfo</code> as a stable option with their
+platform-specific default value, but specifying other values is still unstable.</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<p>The following methods and trait implementations are now stabilized:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/backtrace/struct.Backtrace.html"><code>std::backtrace::Backtrace</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ops/enum.Bound.html#method.as_ref"><code>Bound::as_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/fn.read_to_string.html"><code>std::io::read_to_string</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.cast_mut"><code>&lt;*const T&gt;::cast_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.cast_const"><code>&lt;*mut T&gt;::cast_const</code></a></li>
+</ul>
+<p>Of particular note, the <code>Backtrace</code> API allows capturing a stack backtrace at
+any time, using the same platform-specific implementation that usually serves
+panic backtraces. This may be useful for adding runtime context to error types,
+for example.</p>
+<p>These APIs are now usable in const contexts:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.offset_from"><code>&lt;*const T&gt;::offset_from</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.offset_from"><code>&lt;*mut T&gt;::offset_from</code></a></li>
+</ul>
+<h3><a href="#compatibility-notes" aria-hidden="true" class="anchor" id="compatibility-notes"></a>Compatibility notes</h3>
+<ul>
+<li>As the final step of the <a href="https://blog.rust-lang.org/2022/07/01/RLS-deprecation.html">RLS
+deprecation</a>,
+this release has replaced RLS with a small LSP server showing a deprecation
+warning, advising users to migrate to <code>rust-analyzer</code>.</li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.65 release, including:</p>
+<ul>
+<li>MIR inlining is now enabled for optimized compilations. This provides a 3-10%
+improvement in compiletimes for real world crates.</li>
+<li>When scheduling builds, Cargo now sorts the queue of pending jobs to improve performance.</li>
+</ul>
+<p>Check out everything that changed in
+<a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1650-2022-11-03">Rust</a>,
+<a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-165-2022-11-03">Cargo</a>,
+and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-165">Clippy</a>.</p>
+<h3><a href="#contributors-to-1650" aria-hidden="true" class="anchor" id="contributors-to-1650"></a>Contributors to 1.65.0</h3>
+<p>Many people came together to create Rust 1.65.0.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.65.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>

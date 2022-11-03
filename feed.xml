@@ -10,8 +10,208 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-10-31T22:44:31+00:00</updated>
+    <updated>2022-11-03T14:12:01+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.65.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html" type="text/html" title="Announcing Rust 1.65.0" />
+        <published>2022-11-03T00:00:00+00:00</published>
+        <updated>2022-11-03T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.65.0. Rust is a
+programming language empowering everyone to build reliable and efficient
+software.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;Before going into the details of the new Rust release, we&#x27;d like to draw
+attention to the tragic &lt;a href&#x3D;&quot;https://en.wikipedia.org/wiki/Death_of_Mahsa_Amini&quot;&gt;death of Mahsa
+Amini&lt;/a&gt; and the death and
+violent suppression of many others, by the religious morality police of Iran.
+See &lt;a href&#x3D;&quot;https://en.wikipedia.org/wiki/Mahsa_Amini_protests&quot;&gt;https://en.wikipedia.org/wiki/Mahsa_Amini_protests&lt;/a&gt; for more details. We
+stand in solidarity with the people in Iran struggling for human rights.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.65.0
+with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get
+&lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on
+our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1650-2022-11-03&quot;&gt;detailed release notes for
+1.65.0&lt;/a&gt;
+on GitHub.&lt;/p&gt;
+&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider
+updating locally to use the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly
+channel (&lt;code&gt;rustup default nightly&lt;/code&gt;). Please
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you
+might come across!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1650-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1650-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.65.0 stable&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#generic-associated-types-gats&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;generic-associated-types-gats&quot;&gt;&lt;/a&gt;Generic associated types (GATs)&lt;/h3&gt;
+&lt;p&gt;Lifetime, type, and const generics can now be defined on associated types, like so:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait Foo {
+    type Bar&amp;lt;&#x27;x&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It&#x27;s hard to put into few words just how useful these can be, so here are a
+few example traits, to get a sense of their power:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;/// An &#x60;Iterator&#x60;-like trait that can borrow from &#x60;Self&#x60;
+trait LendingIterator {
+    type Item&amp;lt;&#x27;a&amp;gt; where Self: &#x27;a;
+
+    fn next&amp;lt;&#x27;a&amp;gt;(&amp;amp;&#x27;a mut self) -&amp;gt; Option&amp;lt;Self::Item&amp;lt;&#x27;a&amp;gt;&amp;gt;;
+}
+
+/// Can be implemented over smart pointers, like &#x60;Rc&#x60; or &#x60;Arc&#x60;,
+/// in order to allow being generic over the pointer type
+trait PointerFamily {
+    type Pointer&amp;lt;T&amp;gt;: Deref&amp;lt;Target &#x3D; T&amp;gt;;
+
+    fn new&amp;lt;T&amp;gt;(value: T) -&amp;gt; Self::Pointer&amp;lt;T&amp;gt;;
+}
+
+/// Allows borrowing an array of items. Useful for
+/// &#x60;NdArray&#x60;-like types that don&#x27;t necessarily store
+/// data contiguously.
+trait BorrowArray&amp;lt;T&amp;gt; {
+    type Array&amp;lt;&#x27;x, const N: usize&amp;gt; where Self: &#x27;x;
+
+    fn borrow_array&amp;lt;&#x27;a, const N: usize&amp;gt;(&amp;amp;&#x27;a self) -&amp;gt; Self::Array&amp;lt;&#x27;a, N&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you can see, GATs are quite versatile and enable a number
+of patterns that are not currently able to be written. For more
+information, check out the post announcing the
+&lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html&quot;&gt;push for stabilization&lt;/a&gt;
+published last year or the
+&lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/10/28/gats-stabilization.html&quot;&gt;stabilization announcement post&lt;/a&gt;
+published last week. The former goes into a bit more depth
+of a couple of the examples above, while the latter talks
+about some of the known limitations of this stabilization.&lt;/p&gt;
+&lt;p&gt;More in depth reading can be found in the associated types
+section of the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/reference/items/associated-items.html#associated-types&quot;&gt;nightly reference&lt;/a&gt;
+or the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/1598-generic_associated_types.html&quot;&gt;original RFC&lt;/a&gt; (which was initially opened over 6.5 years ago!).&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#let-else-statements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;let-else-statements&quot;&gt;&lt;/a&gt;&lt;code&gt;let&lt;/code&gt;-&lt;code&gt;else&lt;/code&gt; statements&lt;/h3&gt;
+&lt;p&gt;This introduces a new type of &lt;code&gt;let&lt;/code&gt; statement with a refutable pattern and a
+diverging &lt;code&gt;else&lt;/code&gt; block that executes when that pattern doesn&#x27;t match.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let PATTERN: TYPE &#x3D; EXPRESSION else {
+    DIVERGING_CODE;
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Normal &lt;code&gt;let&lt;/code&gt; statements can only use &lt;em&gt;irrefutable&lt;/em&gt; patterns, statically known
+to always match. That pattern is often just a single variable binding, but may
+also unpack compound types like structs, tuples, and arrays. However, that was
+not usable for conditional matches, like pulling out a variant of an enum --
+until now! With &lt;code&gt;let&lt;/code&gt;-&lt;code&gt;else&lt;/code&gt;, a refutable pattern can match and bind variables
+in the surrounding scope like a normal &lt;code&gt;let&lt;/code&gt;, or else diverge (e.g. &lt;code&gt;break&lt;/code&gt;,
+&lt;code&gt;return&lt;/code&gt;, &lt;code&gt;panic!&lt;/code&gt;) when the pattern doesn&#x27;t match.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn get_count_item(s: &amp;amp;str) -&amp;gt; (u64, &amp;amp;str) {
+    let mut it &#x3D; s.split(&#x27; &#x27;);
+    let (Some(count_str), Some(item)) &#x3D; (it.next(), it.next()) else {
+        panic!(&amp;quot;Can&#x27;t segment count item pair: &#x27;{s}&#x27;&amp;quot;);
+    };
+    let Ok(count) &#x3D; u64::from_str(count_str) else {
+        panic!(&amp;quot;Can&#x27;t parse integer: &#x27;{count_str}&#x27;&amp;quot;);
+    };
+    (count, item)
+}
+assert_eq!(get_count_item(&amp;quot;3 chairs&amp;quot;), (3, &amp;quot;chairs&amp;quot;));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The scope of name bindings is the main thing that makes this different from
+&lt;code&gt;match&lt;/code&gt; or &lt;code&gt;if let&lt;/code&gt;-&lt;code&gt;else&lt;/code&gt; expressions. You could previously approximate these
+patterns with an unfortunate bit of repetition and an outer &lt;code&gt;let&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;    let (count_str, item) &#x3D; match (it.next(), it.next()) {
+        (Some(count_str), Some(item)) &#x3D;&amp;gt; (count_str, item),
+        _ &#x3D;&amp;gt; panic!(&amp;quot;Can&#x27;t segment count item pair: &#x27;{s}&#x27;&amp;quot;),
+    };
+    let count &#x3D; if let Ok(count) &#x3D; u64::from_str(count_str) {
+        count
+    } else {
+        panic!(&amp;quot;Can&#x27;t parse integer: &#x27;{count_str}&#x27;&amp;quot;);
+    };
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#break-from-labeled-blocks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;break-from-labeled-blocks&quot;&gt;&lt;/a&gt;&lt;code&gt;break&lt;/code&gt; from labeled blocks&lt;/h3&gt;
+&lt;p&gt;Plain block expressions can now be labeled as a &lt;code&gt;break&lt;/code&gt; target, terminating
+that block early. This may sound a little like a &lt;code&gt;goto&lt;/code&gt; statement, but it&#x27;s not
+an arbitrary jump, only from within a block to its end. This was already
+possible with &lt;code&gt;loop&lt;/code&gt; blocks, and you may have seen people write loops that
+always execute only once, just to get a labeled &lt;code&gt;break&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Now there&#x27;s a language feature specifically for that! Labeled &lt;code&gt;break&lt;/code&gt; may also
+include an expression value, just as with loops, letting a multi-statement
+block have an early &amp;quot;return&amp;quot; value.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let result &#x3D; &#x27;block: {
+    do_thing();
+    if condition_not_met() {
+        break &#x27;block 1;
+    }
+    do_next_thing();
+    if condition_not_met() {
+        break &#x27;block 2;
+    }
+    do_last_thing();
+    3
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#splitting-linux-debuginfo&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;splitting-linux-debuginfo&quot;&gt;&lt;/a&gt;Splitting Linux debuginfo&lt;/h3&gt;
+&lt;p&gt;Back in Rust 1.51, the compiler team added support for &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html#splitting-debug-information&quot;&gt;split debug
+information&lt;/a&gt;
+on macOS, and now this option is stable for use on Linux as well.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-Csplit-debuginfo&#x3D;unpacked&lt;/code&gt; will split debuginfo out into multiple &lt;code&gt;.dwo&lt;/code&gt;
+DWARF object files.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-Csplit-debuginfo&#x3D;packed&lt;/code&gt; will produce a single &lt;code&gt;.dwp&lt;/code&gt; DWARF package
+alongside your output binary with all the debuginfo packaged together.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-Csplit-debuginfo&#x3D;off&lt;/code&gt; is still the default behavior, which includes DWARF
+data in &lt;code&gt;.debug_*&lt;/code&gt; ELF sections of the objects and final binary.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Split DWARF lets the linker avoid processing the debuginfo (because it isn&#x27;t in
+the object files being linked anymore), which can speed up link times!&lt;/p&gt;
+&lt;p&gt;Other targets now also accept &lt;code&gt;-Csplit-debuginfo&lt;/code&gt; as a stable option with their
+platform-specific default value, but specifying other values is still unstable.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
+&lt;p&gt;The following methods and trait implementations are now stabilized:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/backtrace/struct.Backtrace.html&quot;&gt;&lt;code&gt;std::backtrace::Backtrace&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ops/enum.Bound.html#method.as_ref&quot;&gt;&lt;code&gt;Bound::as_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/io/fn.read_to_string.html&quot;&gt;&lt;code&gt;std::io::read_to_string&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.cast_mut&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::cast_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.cast_const&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::cast_const&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Of particular note, the &lt;code&gt;Backtrace&lt;/code&gt; API allows capturing a stack backtrace at
+any time, using the same platform-specific implementation that usually serves
+panic backtraces. This may be useful for adding runtime context to error types,
+for example.&lt;/p&gt;
+&lt;p&gt;These APIs are now usable in const contexts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.offset_from&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::offset_from&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.offset_from&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::offset_from&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#compatibility-notes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;compatibility-notes&quot;&gt;&lt;/a&gt;Compatibility notes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;As the final step of the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/07/01/RLS-deprecation.html&quot;&gt;RLS
+deprecation&lt;/a&gt;,
+this release has replaced RLS with a small LSP server showing a deprecation
+warning, advising users to migrate to &lt;code&gt;rust-analyzer&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.65 release, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MIR inlining is now enabled for optimized compilations. This provides a 3-10%
+improvement in compiletimes for real world crates.&lt;/li&gt;
+&lt;li&gt;When scheduling builds, Cargo now sorts the queue of pending jobs to improve performance.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Check out everything that changed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1650-2022-11-03&quot;&gt;Rust&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-165-2022-11-03&quot;&gt;Cargo&lt;/a&gt;,
+and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-165&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1650&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1650&quot;&gt;&lt;/a&gt;Contributors to 1.65.0&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.65.0.
+We couldn&#x27;t have done it without all of you.
+&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.65.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Generic associated types to be stable in Rust 1.65</title>
@@ -1174,80 +1374,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.62
 
         <author>
             <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rustup 1.25.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/07/12/Rustup-1.25.1.html" type="text/html" title="Announcing Rustup 1.25.1" />
-        <published>2022-07-12T00:00:00+00:00</published>
-        <updated>2022-07-12T00:00:01+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/07/12/Rustup-1.25.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/07/12/Rustup-1.25.1.html">&lt;p&gt;The rustup working group is announcing the release of rustup version 1.25.1.
-&lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.25.1 is as
-easy as stopping any programs which may be using Rustup (e.g. closing your IDE)
-and running:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup self update
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain
-update:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup update
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the
-appropriate page on our website.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1251&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1251&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.25.1&lt;/h2&gt;
-&lt;p&gt;This version of rustup fixes a regression introduced in the previous release
-(1.25.0), which caused some workflows to fail.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#regression-in-nested-cargo-invocations-with-different-toolchains&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;regression-in-nested-cargo-invocations-with-different-toolchains&quot;&gt;&lt;/a&gt;Regression in nested Cargo invocations with different toolchains&lt;/h3&gt;
-&lt;p&gt;When you invoke Rust or Cargo installed by rustup, you&#x27;re not running them
-directly. Instead, you run &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/concepts/proxies.html&quot;&gt;rustup &amp;quot;proxy&amp;quot; binaries&lt;/a&gt;, whose job is to
-detect the right toolchain (parsing the &lt;code&gt;+channel&lt;/code&gt; CLI argument or using one of
-the defaults) and run it.&lt;/p&gt;
-&lt;p&gt;Running these proxies is not instantaneous though, and for example a &lt;code&gt;cargo build&lt;/code&gt; invocation might execute several of them (the initial &lt;code&gt;cargo&lt;/code&gt; invocation
-plus one &lt;code&gt;rustc&lt;/code&gt; for every dependency), slowing down the build.&lt;/p&gt;
-&lt;p&gt;To improve performance, rustup 1.25.0 changed the proxies code to set the
-&lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-reads&quot;&gt;&lt;code&gt;RUSTC&lt;/code&gt; and &lt;code&gt;RUSTDOC&lt;/code&gt; environment variables&lt;/a&gt; when missing, which
-instructed Cargo to skip the proxies and invoke the binaries defined in those
-variables directly. This provided a performance gain when building crates with
-lots of dependencies.&lt;/p&gt;
-&lt;p&gt;Unfortunately this change broke some users of rustup, who did something like:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;The first Cargo invocation (for example an extension, an alias or an
-integration test) uses toolchain &lt;code&gt;foo&lt;/code&gt;, setting the &lt;code&gt;RUSTC&lt;/code&gt; and &lt;code&gt;RUSTDOC&lt;/code&gt;
-environment variables pointing to that toolchain.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The first invocation calls Cargo again, but this time using toolchain &lt;code&gt;bar&lt;/code&gt;
-(for example &lt;code&gt;cargo +bar build&lt;/code&gt;). This does &lt;strong&gt;not&lt;/strong&gt; set the &lt;code&gt;RUSTC&lt;/code&gt; and
-&lt;code&gt;RUSTDOC&lt;/code&gt; environment variables pointing to &lt;code&gt;bar&lt;/code&gt;, as those variables are
-already present.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The second invocation of Cargo then invokes rustc by using the &lt;code&gt;RUSTC&lt;/code&gt;
-environment variable and skipping the proxy, which results in the &lt;code&gt;foo&lt;/code&gt;
-toolchain being invoked. Previous versions of rustup invoked the proxy
-instead, which would correctly detect and use the &lt;code&gt;bar&lt;/code&gt; toolchain.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Rustup 1.25.1 fixes this regression by reverting the change. The rustup working
-group is discussing in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/issues/3035&quot;&gt;issue #3035&lt;/a&gt; plans to re-introduce the change in
-a future release while avoiding breakage.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
-&lt;p&gt;Thanks again to all the contributors who made rustup 1.25.1 possible!&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Daniel Silverstone (kinnison)&lt;/li&gt;
-&lt;li&gt;Robert Collins (rbtcollins)&lt;/li&gt;
-&lt;li&gt;Joshua Nelson (jyn514)&lt;/li&gt;
-&lt;li&gt;Pietro Albini (pietroalbini)&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>The Rustup Working Group</name>
         </author>
     </entry>
     
