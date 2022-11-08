@@ -44,7 +44,7 @@ trait LendingIterator {
 }
 
 pub struct WindowsMut<'x, T> {
-    slice: &'x [T],
+    slice: &'x mut [T],
 }
 
 impl<'x, T> LendingIterator for WindowsMut<'x, T> {
