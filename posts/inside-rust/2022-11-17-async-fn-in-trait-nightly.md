@@ -69,7 +69,7 @@ Since you can't name the type constructed by an async block, the only option is 
 
 ### Workarounds available in the stable compiler
 
-So to write an `async fn` in a trait we need a concrete type to specify in our impl, if not our trait. There are a couple ways of achieving this today.
+So to write an `async fn` in a trait we need a concrete type to specify in our impl. There are a couple ways of achieving this today.
 
 #### Runtime type erasure
 
@@ -98,7 +98,7 @@ impl Database for MyDb {
 
 This is an excellent solution for the people who can use it!
 
-Unfortunately, not everyone can. You can't use `Box` in no_std contexts. Dynamic dispatch and allocation come with overhead that can be [crippling][barbara-benchmark] to highly performance-sensitive code. Finally, it bakes a lot of assumptions into the trait itself: allocation with `Box`, dynamic dispatch, and the `Send`-ness of the futures. This makes it unsuitable for many libraries.
+Unfortunately, not everyone can. You can't use `Box` in no_std contexts. Dynamic dispatch and allocation come with overhead that can be [overwhelming][barbara-benchmark] for highly performance-sensitive code. Finally, it bakes a lot of assumptions into the trait itself: allocation with `Box`, dynamic dispatch, and the `Send`-ness of the futures. This makes it unsuitable for many libraries.
 
 Besides, users [expect][alan-async-traits] to be able to write `async fn` in traits, and the experience of adding an external crate dependency is a papercut that gives async Rust a reputation for being difficult to use.
 
@@ -188,7 +188,7 @@ where
 }
 ```
 
-[^actual-error]: The actual error message produced by the compiler is a bit noisier than this, but that can be improved.
+[^actual-error]: The actual error message produced by the compiler is a bit noisier than this, but that will be improved.
 
 You can see that we added an `I: Send` bound in the function signature, but that was not enough. To satisfy this error we need to say that the *future returned by `next()`* is `Send`. But as we saw at the beginning of this post, async functions return anonymous types. There's no way to express bounds on those types.
 
@@ -266,7 +266,7 @@ This work was made possible thanks to the efforts of many people, including
 * Niko Matsakis
 * Tyler Mandry
 
-In addition it was built on top of years of compiler work that enabled us to ship [GATs] as well as other fundamental type system improvements. I'm deeply grateful to all those who contributed; this work would not be possible without you. Thank you!
+In addition it was built on top of years of compiler work that enabled us to ship [GATs] as well as other fundamental type system improvements. We're deeply grateful to all those who contributed; this work would not be possible without you. Thank you!
 
 To learn more about this feature and the challenges behind it, check out the [Static async fn in traits RFC][RFC] and [why async fn in traits are hard]. Also stay tuned for a follow-up post where we explore language extensions that make it possible to express `Send` bounds without a special trait.
 
