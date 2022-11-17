@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Async fn in trait MVP comes to nightly | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Async fn in trait MVP comes to nightly | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Async fn in trait MVP comes to nightly | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+<link rel="manifest" href="../../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../../inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Async fn in trait MVP comes to nightly" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Async fn in trait MVP comes to nightly</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 17, 2022 &middot; Tyler Mandry
+     on behalf of <a href="https://www.rust-lang.org/governance/wgs/wg-async">The Rust Async Working Group</a> 
+    </div>
+
+    <div class="post">
+      <p>The async working group is excited to announce that <code>async fn</code> can now be used in traits in the nightly compiler. You can now write code like this:</p>
+<pre><code class="language-rust">#![feature(async_fn_in_trait)]
+
+trait Database {
+    async fn fetch_data(&amp;self) -&gt; String;
+}
+
+impl Database for MyDb {
+    async fn fetch_data(&amp;self) -&gt; String { ... }
+}
+</code></pre>
+<p>A full working example is available in the <a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=6ffde69ba43c6c5094b7fbdae11774a9">playground</a>. There are some limitations we'll cover, as well as a few known bugs to be worked out, but we think it is ready for some users try. Read on for the specifics.</p>
+<h2><a href="#recap-how-asyncawait-works-in-rust" aria-hidden="true" class="anchor" id="recap-how-asyncawait-works-in-rust"></a>Recap: How async/await works in Rust</h2>
+<p><code>async</code> and <code>.await</code> were a major improvement in the ergonomics of writing async code in Rust. In Rust, an <code>async fn</code> returns a <code>Future</code>, which is some object that represents an ongoing asynchronous computation.</p>
+<p>The type of the future does not actually appear in the signature of an <code>async fn</code>. When you write an async function like this:</p>
+<pre><code class="language-rust">async fn fetch_data(db: &amp;MyDb) -&gt; String { ... }
+</code></pre>
+<p>The compiler rewrites it to something like this:</p>
+<pre><code class="language-rust">fn fetch_data&lt;'a&gt;(db: &amp;'a MyDb) -&gt; impl Future&lt;Output = String&gt; + 'a {
+    async move { ... }
+}
+</code></pre>
+<p>This &quot;desugared&quot; signature is something you can write yourself, and it's useful for examining what goes on under the hood. The <code>impl Future</code> syntax here represents some <em>opaque type</em> that implements <code>Future</code>.</p>
+<p>The future is a state machine responsible for knowing how to continue making progress the next time it wakes up. When you write code in an <code>async</code> block, the compiler generates a future type specific to that async block for you. This future type does not have a name, so we must instead use an opaque type in the function signature.</p>
+<h2><a href="#the-historic-problem-of-async-fn-in-trait" aria-hidden="true" class="anchor" id="the-historic-problem-of-async-fn-in-trait"></a>The historic problem of <code>async fn</code> in trait</h2>
+<p>Traits are the fundamental mechanism of abstraction in Rust. So what happens if you want to put an async method in a trait? Each <code>async</code> block or function creates a unique type, so you would want to express that each implementation can have a different Future for the return type. Thankfully, we have associated types for this:</p>
+<pre><code class="language-rust">trait Database {
+    type FetchData&lt;'a&gt;: Future&lt;Output = String&gt; + 'a where Self: 'a;
+    fn fetch_data(&amp;self) -&gt; FetchData&lt;'a&gt;;
+}
+</code></pre>
+<p>Notice that this associated type is generic. Generic associated types haven't been supported in the language... <a href="https://blog.rust-lang.org/2022/10/28/gats-stabilization.html">until now</a>! Unfortunately though, even with GATs, you still can't write a trait <em>implementation</em> that uses <code>async</code>:</p>
+<pre><code class="language-rust">impl Database for MyDb {
+    type FetchData&lt;'a&gt; = /* what type goes here??? */;
+    fn fetch_data(&amp;self) -&gt; FetchData&lt;'a&gt; { async move { ... } }
+}
+</code></pre>
+<p>Since you can't name the type constructed by an async block, the only option is to use an opaque type (the <code>impl Future</code> we saw earlier). But those are not supported in associated types!<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup></p>
+<h3><a href="#workarounds-available-in-the-stable-compiler" aria-hidden="true" class="anchor" id="workarounds-available-in-the-stable-compiler"></a>Workarounds available in the stable compiler</h3>
+<p>So to write an <code>async fn</code> in a trait we need a concrete type to specify in our impl. There are a couple ways of achieving this today.</p>
+<h4><a href="#runtime-type-erasure" aria-hidden="true" class="anchor" id="runtime-type-erasure"></a>Runtime type erasure</h4>
+<p>First, we can avoid writing the future type by erasing it with <code>dyn</code>. Taking our example from above, you would write your trait like this:</p>
+<pre><code class="language-rust">trait Database {
+    fn fetch_data(&amp;self)
+    -&gt; Pin&lt;Box&lt;dyn Future&lt;Output = String&gt; + Send + '_&gt;&gt;;
+}
+</code></pre>
+<p>This is significantly more verbose, but it achieves the goal of combining async with traits. What's more, the <a href="https://crates.io/crates/async-trait">async-trait</a> proc macro crate rewrites your code for you, allowing you to simply write</p>
+<pre><code class="language-rust">#[async_trait]
+trait Database {
+    async fn fetch_data(&amp;self) -&gt; String;
+}
+
+#[async_trait]
+impl Database for MyDb {
+    async fn fetch_data(&amp;self) -&gt; String { ... }
+}
+</code></pre>
+<p>This is an excellent solution for the people who can use it!</p>
+<p>Unfortunately, not everyone can. You can't use <code>Box</code> in no_std contexts. Dynamic dispatch and allocation come with overhead that can be <a href="https://rust-lang.github.io/wg-async/vision/submitted_stories/status_quo/barbara_benchmarks_async_trait.html">overwhelming</a> for highly performance-sensitive code. Finally, it bakes a lot of assumptions into the trait itself: allocation with <code>Box</code>, dynamic dispatch, and the <code>Send</code>-ness of the futures. This makes it unsuitable for many libraries.</p>
+<p>Besides, users <a href="https://rust-lang.github.io/wg-async/vision/submitted_stories/status_quo/alan_needs_async_in_traits.html">expect</a> to be able to write <code>async fn</code> in traits, and the experience of adding an external crate dependency is a papercut that gives async Rust a reputation for being difficult to use.</p>
+<h4><a href="#manual-poll-implementations" aria-hidden="true" class="anchor" id="manual-poll-implementations"></a>Manual <code>poll</code> implementations</h4>
+<p>Traits that need to work with zero overhead or in no_std contexts have another option: they can take the concept of polling from the <a href="https://doc.rust-lang.org/stable/std/future/trait.Future.html"><code>Future</code> trait</a> and build it directly into their interface. The <code>Future::poll</code> method returns <code>Poll::Ready(Output)</code> if the future is complete and <code>Poll::Pending</code> if the future is waiting on some other event.</p>
+<p>You can see this pattern, for example, in the current version of the unstable <a href="https://doc.rust-lang.org/stable/std/async_iter/trait.AsyncIterator.html">AsyncIterator</a> trait. The signature of <code>AsyncIterator::poll_next</code> is a cross between <code>Future::poll</code> and <code>Iterator::next</code>.</p>
+<pre><code class="language-rust">pub trait AsyncIterator {
+    type Item;
+
+    fn poll_next(
+        self: Pin&lt;&amp;mut Self&gt;,
+        cx: &amp;mut Context&lt;'_&gt;
+    ) -&gt; Poll&lt;Option&lt;Self::Item&gt;&gt;;
+}
+</code></pre>
+<p>Before async/await, it was very common to write manual <code>poll</code> implementations. Unfortunately, they proved challenging to write correctly. In the <a href="https://blog.rust-lang.org/2021/03/18/async-vision-doc.html">vision document</a> process we underwent last year, we received a number of reports on how this was <a href="https://rust-lang.github.io/wg-async/vision/submitted_stories/status_quo/alan_hates_writing_a_stream.html">extremely difficult</a> and a <a href="https://rust-lang.github.io/wg-async/vision/submitted_stories/status_quo/barbara_polls_a_mutex.html">source of bugs</a> for Rust users.</p>
+<p>In fact, the difficulty of writing manual poll implementations was a primary reason for adding async/await to the core language in the first place.</p>
+<h2><a href="#whats-supported-in-nightly" aria-hidden="true" class="anchor" id="whats-supported-in-nightly"></a>What's supported in nightly</h2>
+<p>We've been working to support <code>async fn</code> directly in traits, and an implementation <a href="https://github.com/rust-lang/rust/pull/101224">recently landed</a> in nightly! The feature still has some rough edges, but let's take a look at what you can do with it.</p>
+<p>First, as you might expect, you can write and implement traits just like the above.</p>
+<pre><code class="language-rust">#![feature(async_fn_in_trait)]
+
+trait Database {
+    async fn fetch_data(&amp;self) -&gt; String;
+}
+
+impl Database for MyDb {
+    async fn fetch_data(&amp;self) -&gt; String { ... }
+}
+</code></pre>
+<p>One thing this will allow us to do is standardize new traits we've been waiting on this feature for. For example, the <code>AsyncIterator</code> trait from above is significantly more complicated than its analogue, <code>Iterator</code>. With the new support, we can simply write this instead:</p>
+<pre><code class="language-rust">#![feature(async_fn_in_trait)]
+
+trait AsyncIterator {
+    type Item;
+    async fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt;;
+}
+</code></pre>
+<p>There's a decent chance that the trait in the standard library will end up exactly like this! For now, you can also use the one in the <a href="https://docs.rs/async-iterator/latest/async_iterator/"><code>async_iterator</code> crate</a> and write generic code with it, just like you would normally.</p>
+<pre><code class="language-rust">async fn print_all&lt;I: AsyncIterator&gt;(mut count: I)
+where
+    I::Item: Display,
+{
+    while let Some(x) = count.next().await {
+        println!(&quot;{x}&quot;);
+    }
+}
+</code></pre>
+<h3><a href="#limitation-spawning-from-generics" aria-hidden="true" class="anchor" id="limitation-spawning-from-generics"></a>Limitation: Spawning from generics</h3>
+<p>There is a catch! If you try to <em>spawn</em> from a generic function like <code>print_all</code>, and (like the majority of async users) you use a work stealing executor that requires spawned tasks to be <code>Send</code>, you'll hit an error which is not easily resolved.<sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup></p>
+<pre><code class="language-rust">fn spawn_print_all&lt;I: AsyncIterator + Send + 'static&gt;(mut count: I)
+where
+    I::Item: Display,
+{
+    tokio::spawn(async move {
+        //       ^^^^^^^^^^^^
+        // ERROR: future cannot be sent between threads safely
+        while let Some(x) = count.next().await {
+            //              ^^^^^^^^^^^^
+            // note: future is not `Send` as it awaits another future which is not `Send`
+            println!(&quot;{x}&quot;);
+        }
+    });
+}
+</code></pre>
+<p>You can see that we added an <code>I: Send</code> bound in the function signature, but that was not enough. To satisfy this error we need to say that the <em>future returned by <code>next()</code></em> is <code>Send</code>. But as we saw at the beginning of this post, async functions return anonymous types. There's no way to express bounds on those types.</p>
+<p>There are potential solutions to this problem that we'll be exploring in a follow-up post. But for now, there are a couple things you can do to get out of a situation like this.</p>
+<h4><a href="#hypothesis-this-is-uncommon" aria-hidden="true" class="anchor" id="hypothesis-this-is-uncommon"></a>Hypothesis: This is uncommon</h4>
+<p>First, you <em>may</em> be surprised to find that this situation just doesn't occur that often in practice. For example, we can spawn a task that invokes the above <code>print_all</code> function <a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=6ffde69ba43c6c5094b7fbdae11774a9">without any problem</a>:</p>
+<pre><code class="language-rust">async fn do_something() {
+    let iter = Countdown::new(10);
+    executor::spawn(print_all(iter));
+}
+</code></pre>
+<p>This works without any <code>Send</code> bounds whatsoever! This works because <code>do_something</code> knows the concrete type of our iterator, <code>Countdown</code>. The compiler knows that this type is <code>Send</code>, and that <code>print_all(iter)</code> therefore produces a future that is <code>Send</code>.<sup class="footnote-ref"><a href="#fn3" id="fnref3">3</a></sup></p>
+<p>One hypothesis is that while people will hit this problem, they will encounter it relatively infrequently, because most of the time <code>spawn</code> won't be called in code that's generic over a trait with async functions.</p>
+<p>We would like to start gathering data on people's actual experiences with this. If you have relevant experience to share, <a href="https://github.com/rust-lang/rust/issues/103854">please comment on this issue</a>.</p>
+<h4><a href="#when-it-does-happen" aria-hidden="true" class="anchor" id="when-it-does-happen"></a>When it does happen</h4>
+<p>Eventually you probably <em>will</em> want to spawn from a context that's generic over an async trait that you call. What then!?</p>
+<p>For now it's possible to use another new nightly-only feature, <code>return_position_impl_trait_in_trait</code>, to express the bound you need directly in your trait:</p>
+<pre><code class="language-rust">#![feature(return_position_impl_trait_in_trait)]
+
+trait SpawnAsyncIterator: Send + 'static {
+    type Item;
+    fn next(&amp;mut self) -&gt; impl Future&lt;Output = Option&lt;Self::Item&gt;&gt; + Send + '_;
+}
+</code></pre>
+<p>Here we've <em>desugared</em> our <code>async fn</code> to a regular function returning <code>impl Future + '_</code>, which works just like normal <code>async fn</code>s do. It's more verbose, but it gives us a place to put a <code>+ Send</code> bound! What's more, you can continue to use <code>async fn</code> in an <code>impl</code> of this trait.</p>
+<p>The downside of this approach is that the trait becomes less generic, making it less suitable for library code. If you want to maintain two separate versions of a trait, you can do that, and (perhaps) provide macros to make it easier to implement both.</p>
+<p>This solution is intended to be temporary. We'd like to implement a better solution in the language itself, but since this is a nightly-only feature we prefer to get more people trying it out as soon as possible.</p>
+<h3><a href="#limitation-dynamic-dispatch" aria-hidden="true" class="anchor" id="limitation-dynamic-dispatch"></a>Limitation: Dynamic dispatch</h3>
+<p>There's one final limitation: You can't call an <code>async fn</code> with a <code>dyn Trait</code>. Designs to support this exist<sup class="footnote-ref"><a href="#fn4" id="fnref4">4</a></sup>, but are in the earlier stages. If you need dynamic dispatch from a trait, you're better off using the <code>async_trait</code> macro for now.</p>
+<h2><a href="#path-to-stabilization" aria-hidden="true" class="anchor" id="path-to-stabilization"></a>Path to stabilization</h2>
+<p>The async working group would like to get something useful in the hands of Rust users, even if it doesn't do <em>everything</em> they might want. That's why despite having some limitations, the current version of <code>async fn</code> in traits might not be far off from stabilization.<sup class="footnote-ref"><a href="#fn5" id="fnref5">5</a></sup> You can follow progress by watching the <a href="https://github.com/rust-lang/rust/issues/91611">tracking issue</a>.</p>
+<p>There are two big questions to answer first:</p>
+<ul>
+<li><strong>Do we need to solve the &quot;spawning from generics&quot; (<code>Send</code> bound) problem first?</strong> Please leave feedback on <a href="https://github.com/rust-lang/rust/issues/103854">this issue</a>.</li>
+<li><strong>What other bugs and quality issues exist?</strong> Please file <a href="https://github.com/rust-lang/rust/issues/new/choose">new issues</a> for these. You can view <a href="https://github.com/rust-lang/rust/labels/F-async_fn_in_trait">known issues here</a>.</li>
+</ul>
+<p>If you're an async Rust enthusiast and are willing to try experimental new features, we'd very much appreciate it if you gave it a spin!</p>
+<p>If you use <code>#[async_trait]</code>, you can try removing it from some traits (and their impls) where you don't use dynamic dispatch. Or if you're writing new async code, try using it there. Either way, you can tell us about your experience at the links above.</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>This work was made possible thanks to the efforts of many people, including</p>
+<ul>
+<li>Michael Goulet</li>
+<li>Santiago Pastorino</li>
+<li>Oli Scherer</li>
+<li>Eric Holk</li>
+<li>Dan Johnson</li>
+<li>Bryan Garza</li>
+<li>Niko Matsakis</li>
+<li>Tyler Mandry</li>
+</ul>
+<p>In addition it was built on top of years of compiler work that enabled us to ship <a href="https://blog.rust-lang.org/2022/10/28/gats-stabilization.html">GATs</a> as well as other fundamental type system improvements. We're deeply grateful to all those who contributed; this work would not be possible without you. Thank you!</p>
+<p>To learn more about this feature and the challenges behind it, check out the <a href="https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html">Static async fn in traits RFC</a> and <a href="https://smallcultfollowing.com/babysteps/blog/2019/10/26/async-fn-in-traits-are-hard/">why async fn in traits are hard</a>. Also stay tuned for a follow-up post where we explore language extensions that make it possible to express <code>Send</code> bounds without a special trait.</p>
+<p><em>Thanks to Yoshua Wuyts, Nick Cameron, Dan Johnson, Santiago Pastorino, Eric Holk, and Niko Matsakis for reviewing a draft of this post.</em></p>
+<section class="footnotes">
+<ol>
+<li id="fn1">
+<p>This feature is called <a href="https://rust-lang.github.io/rfcs/2515-type_alias_impl_trait.html">&quot;type alias impl trait&quot;</a>. <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2">
+<p>The actual error message produced by the compiler is a bit noisier than this, but that will be improved. <a href="#fnref2" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn3">
+<p>Auto traits such as <code>Send</code> and <code>Sync</code> are special in this way. The compiler knows that the return type of <code>print_all</code> is <code>Send</code> if and only if the type of its argument <code>Send</code>, and unlike with regular traits, it is allowed to use this knowledge when type checking your program. <a href="#fnref3" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn4">
+<p>See <a href="https://rust-lang.github.io/async-fundamentals-initiative/explainer/async_fn_in_dyn_trait.html">Async fn in dyn trait</a> on the initiative website, as well as posts 8 and 9 in <a href="https://smallcultfollowing.com/babysteps/blog/2022/09/21/dyn-async-traits-part-9-callee-site-selection/">this series</a>. <a href="#fnref4" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn5">
+<p>When? Possibly sometime in the next six months or so. But don't hold me to it :) <a href="#fnref5" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../../scripts/highlight.js"></script>
+
+  </body>
+</html>

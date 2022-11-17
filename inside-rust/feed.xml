@@ -10,8 +10,214 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-11-03T14:11:58+00:00</updated>
+    <updated>2022-11-17T18:15:41+00:00</updated>
 
+    
+    <entry>
+        <title>Async fn in trait MVP comes to nightly</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html" type="text/html" title="Async fn in trait MVP comes to nightly" />
+        <published>2022-11-17T00:00:00+00:00</published>
+        <updated>2022-11-17T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html">&lt;p&gt;The async working group is excited to announce that &lt;code&gt;async fn&lt;/code&gt; can now be used in traits in the nightly compiler. You can now write code like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#![feature(async_fn_in_trait)]
+
+trait Database {
+    async fn fetch_data(&amp;amp;self) -&amp;gt; String;
+}
+
+impl Database for MyDb {
+    async fn fetch_data(&amp;amp;self) -&amp;gt; String { ... }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A full working example is available in the &lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;nightly&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;6ffde69ba43c6c5094b7fbdae11774a9&quot;&gt;playground&lt;/a&gt;. There are some limitations we&#x27;ll cover, as well as a few known bugs to be worked out, but we think it is ready for some users try. Read on for the specifics.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#recap-how-asyncawait-works-in-rust&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;recap-how-asyncawait-works-in-rust&quot;&gt;&lt;/a&gt;Recap: How async/await works in Rust&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;async&lt;/code&gt; and &lt;code&gt;.await&lt;/code&gt; were a major improvement in the ergonomics of writing async code in Rust. In Rust, an &lt;code&gt;async fn&lt;/code&gt; returns a &lt;code&gt;Future&lt;/code&gt;, which is some object that represents an ongoing asynchronous computation.&lt;/p&gt;
+&lt;p&gt;The type of the future does not actually appear in the signature of an &lt;code&gt;async fn&lt;/code&gt;. When you write an async function like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;async fn fetch_data(db: &amp;amp;MyDb) -&amp;gt; String { ... }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The compiler rewrites it to something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn fetch_data&amp;lt;&#x27;a&amp;gt;(db: &amp;amp;&#x27;a MyDb) -&amp;gt; impl Future&amp;lt;Output &#x3D; String&amp;gt; + &#x27;a {
+    async move { ... }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This &amp;quot;desugared&amp;quot; signature is something you can write yourself, and it&#x27;s useful for examining what goes on under the hood. The &lt;code&gt;impl Future&lt;/code&gt; syntax here represents some &lt;em&gt;opaque type&lt;/em&gt; that implements &lt;code&gt;Future&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The future is a state machine responsible for knowing how to continue making progress the next time it wakes up. When you write code in an &lt;code&gt;async&lt;/code&gt; block, the compiler generates a future type specific to that async block for you. This future type does not have a name, so we must instead use an opaque type in the function signature.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#the-historic-problem-of-async-fn-in-trait&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-historic-problem-of-async-fn-in-trait&quot;&gt;&lt;/a&gt;The historic problem of &lt;code&gt;async fn&lt;/code&gt; in trait&lt;/h2&gt;
+&lt;p&gt;Traits are the fundamental mechanism of abstraction in Rust. So what happens if you want to put an async method in a trait? Each &lt;code&gt;async&lt;/code&gt; block or function creates a unique type, so you would want to express that each implementation can have a different Future for the return type. Thankfully, we have associated types for this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait Database {
+    type FetchData&amp;lt;&#x27;a&amp;gt;: Future&amp;lt;Output &#x3D; String&amp;gt; + &#x27;a where Self: &#x27;a;
+    fn fetch_data(&amp;amp;self) -&amp;gt; FetchData&amp;lt;&#x27;a&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice that this associated type is generic. Generic associated types haven&#x27;t been supported in the language... &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/10/28/gats-stabilization.html&quot;&gt;until now&lt;/a&gt;! Unfortunately though, even with GATs, you still can&#x27;t write a trait &lt;em&gt;implementation&lt;/em&gt; that uses &lt;code&gt;async&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;impl Database for MyDb {
+    type FetchData&amp;lt;&#x27;a&amp;gt; &#x3D; /* what type goes here??? */;
+    fn fetch_data(&amp;amp;self) -&amp;gt; FetchData&amp;lt;&#x27;a&amp;gt; { async move { ... } }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Since you can&#x27;t name the type constructed by an async block, the only option is to use an opaque type (the &lt;code&gt;impl Future&lt;/code&gt; we saw earlier). But those are not supported in associated types!&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#workarounds-available-in-the-stable-compiler&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;workarounds-available-in-the-stable-compiler&quot;&gt;&lt;/a&gt;Workarounds available in the stable compiler&lt;/h3&gt;
+&lt;p&gt;So to write an &lt;code&gt;async fn&lt;/code&gt; in a trait we need a concrete type to specify in our impl. There are a couple ways of achieving this today.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#runtime-type-erasure&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;runtime-type-erasure&quot;&gt;&lt;/a&gt;Runtime type erasure&lt;/h4&gt;
+&lt;p&gt;First, we can avoid writing the future type by erasing it with &lt;code&gt;dyn&lt;/code&gt;. Taking our example from above, you would write your trait like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait Database {
+    fn fetch_data(&amp;amp;self)
+    -&amp;gt; Pin&amp;lt;Box&amp;lt;dyn Future&amp;lt;Output &#x3D; String&amp;gt; + Send + &#x27;_&amp;gt;&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is significantly more verbose, but it achieves the goal of combining async with traits. What&#x27;s more, the &lt;a href&#x3D;&quot;https://crates.io/crates/async-trait&quot;&gt;async-trait&lt;/a&gt; proc macro crate rewrites your code for you, allowing you to simply write&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[async_trait]
+trait Database {
+    async fn fetch_data(&amp;amp;self) -&amp;gt; String;
+}
+
+#[async_trait]
+impl Database for MyDb {
+    async fn fetch_data(&amp;amp;self) -&amp;gt; String { ... }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is an excellent solution for the people who can use it!&lt;/p&gt;
+&lt;p&gt;Unfortunately, not everyone can. You can&#x27;t use &lt;code&gt;Box&lt;/code&gt; in no_std contexts. Dynamic dispatch and allocation come with overhead that can be &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/vision/submitted_stories/status_quo/barbara_benchmarks_async_trait.html&quot;&gt;overwhelming&lt;/a&gt; for highly performance-sensitive code. Finally, it bakes a lot of assumptions into the trait itself: allocation with &lt;code&gt;Box&lt;/code&gt;, dynamic dispatch, and the &lt;code&gt;Send&lt;/code&gt;-ness of the futures. This makes it unsuitable for many libraries.&lt;/p&gt;
+&lt;p&gt;Besides, users &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/vision/submitted_stories/status_quo/alan_needs_async_in_traits.html&quot;&gt;expect&lt;/a&gt; to be able to write &lt;code&gt;async fn&lt;/code&gt; in traits, and the experience of adding an external crate dependency is a papercut that gives async Rust a reputation for being difficult to use.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#manual-poll-implementations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;manual-poll-implementations&quot;&gt;&lt;/a&gt;Manual &lt;code&gt;poll&lt;/code&gt; implementations&lt;/h4&gt;
+&lt;p&gt;Traits that need to work with zero overhead or in no_std contexts have another option: they can take the concept of polling from the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/future/trait.Future.html&quot;&gt;&lt;code&gt;Future&lt;/code&gt; trait&lt;/a&gt; and build it directly into their interface. The &lt;code&gt;Future::poll&lt;/code&gt; method returns &lt;code&gt;Poll::Ready(Output)&lt;/code&gt; if the future is complete and &lt;code&gt;Poll::Pending&lt;/code&gt; if the future is waiting on some other event.&lt;/p&gt;
+&lt;p&gt;You can see this pattern, for example, in the current version of the unstable &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/async_iter/trait.AsyncIterator.html&quot;&gt;AsyncIterator&lt;/a&gt; trait. The signature of &lt;code&gt;AsyncIterator::poll_next&lt;/code&gt; is a cross between &lt;code&gt;Future::poll&lt;/code&gt; and &lt;code&gt;Iterator::next&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;pub trait AsyncIterator {
+    type Item;
+
+    fn poll_next(
+        self: Pin&amp;lt;&amp;amp;mut Self&amp;gt;,
+        cx: &amp;amp;mut Context&amp;lt;&#x27;_&amp;gt;
+    ) -&amp;gt; Poll&amp;lt;Option&amp;lt;Self::Item&amp;gt;&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Before async/await, it was very common to write manual &lt;code&gt;poll&lt;/code&gt; implementations. Unfortunately, they proved challenging to write correctly. In the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/03/18/async-vision-doc.html&quot;&gt;vision document&lt;/a&gt; process we underwent last year, we received a number of reports on how this was &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/vision/submitted_stories/status_quo/alan_hates_writing_a_stream.html&quot;&gt;extremely difficult&lt;/a&gt; and a &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/vision/submitted_stories/status_quo/barbara_polls_a_mutex.html&quot;&gt;source of bugs&lt;/a&gt; for Rust users.&lt;/p&gt;
+&lt;p&gt;In fact, the difficulty of writing manual poll implementations was a primary reason for adding async/await to the core language in the first place.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-supported-in-nightly&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-supported-in-nightly&quot;&gt;&lt;/a&gt;What&#x27;s supported in nightly&lt;/h2&gt;
+&lt;p&gt;We&#x27;ve been working to support &lt;code&gt;async fn&lt;/code&gt; directly in traits, and an implementation &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/101224&quot;&gt;recently landed&lt;/a&gt; in nightly! The feature still has some rough edges, but let&#x27;s take a look at what you can do with it.&lt;/p&gt;
+&lt;p&gt;First, as you might expect, you can write and implement traits just like the above.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#![feature(async_fn_in_trait)]
+
+trait Database {
+    async fn fetch_data(&amp;amp;self) -&amp;gt; String;
+}
+
+impl Database for MyDb {
+    async fn fetch_data(&amp;amp;self) -&amp;gt; String { ... }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;One thing this will allow us to do is standardize new traits we&#x27;ve been waiting on this feature for. For example, the &lt;code&gt;AsyncIterator&lt;/code&gt; trait from above is significantly more complicated than its analogue, &lt;code&gt;Iterator&lt;/code&gt;. With the new support, we can simply write this instead:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#![feature(async_fn_in_trait)]
+
+trait AsyncIterator {
+    type Item;
+    async fn next(&amp;amp;mut self) -&amp;gt; Option&amp;lt;Self::Item&amp;gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There&#x27;s a decent chance that the trait in the standard library will end up exactly like this! For now, you can also use the one in the &lt;a href&#x3D;&quot;https://docs.rs/async-iterator/latest/async_iterator/&quot;&gt;&lt;code&gt;async_iterator&lt;/code&gt; crate&lt;/a&gt; and write generic code with it, just like you would normally.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;async fn print_all&amp;lt;I: AsyncIterator&amp;gt;(mut count: I)
+where
+    I::Item: Display,
+{
+    while let Some(x) &#x3D; count.next().await {
+        println!(&amp;quot;{x}&amp;quot;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#limitation-spawning-from-generics&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;limitation-spawning-from-generics&quot;&gt;&lt;/a&gt;Limitation: Spawning from generics&lt;/h3&gt;
+&lt;p&gt;There is a catch! If you try to &lt;em&gt;spawn&lt;/em&gt; from a generic function like &lt;code&gt;print_all&lt;/code&gt;, and (like the majority of async users) you use a work stealing executor that requires spawned tasks to be &lt;code&gt;Send&lt;/code&gt;, you&#x27;ll hit an error which is not easily resolved.&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn2&quot; id&#x3D;&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn spawn_print_all&amp;lt;I: AsyncIterator + Send + &#x27;static&amp;gt;(mut count: I)
+where
+    I::Item: Display,
+{
+    tokio::spawn(async move {
+        //       ^^^^^^^^^^^^
+        // ERROR: future cannot be sent between threads safely
+        while let Some(x) &#x3D; count.next().await {
+            //              ^^^^^^^^^^^^
+            // note: future is not &#x60;Send&#x60; as it awaits another future which is not &#x60;Send&#x60;
+            println!(&amp;quot;{x}&amp;quot;);
+        }
+    });
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can see that we added an &lt;code&gt;I: Send&lt;/code&gt; bound in the function signature, but that was not enough. To satisfy this error we need to say that the &lt;em&gt;future returned by &lt;code&gt;next()&lt;/code&gt;&lt;/em&gt; is &lt;code&gt;Send&lt;/code&gt;. But as we saw at the beginning of this post, async functions return anonymous types. There&#x27;s no way to express bounds on those types.&lt;/p&gt;
+&lt;p&gt;There are potential solutions to this problem that we&#x27;ll be exploring in a follow-up post. But for now, there are a couple things you can do to get out of a situation like this.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#hypothesis-this-is-uncommon&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;hypothesis-this-is-uncommon&quot;&gt;&lt;/a&gt;Hypothesis: This is uncommon&lt;/h4&gt;
+&lt;p&gt;First, you &lt;em&gt;may&lt;/em&gt; be surprised to find that this situation just doesn&#x27;t occur that often in practice. For example, we can spawn a task that invokes the above &lt;code&gt;print_all&lt;/code&gt; function &lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;nightly&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;6ffde69ba43c6c5094b7fbdae11774a9&quot;&gt;without any problem&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;async fn do_something() {
+    let iter &#x3D; Countdown::new(10);
+    executor::spawn(print_all(iter));
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This works without any &lt;code&gt;Send&lt;/code&gt; bounds whatsoever! This works because &lt;code&gt;do_something&lt;/code&gt; knows the concrete type of our iterator, &lt;code&gt;Countdown&lt;/code&gt;. The compiler knows that this type is &lt;code&gt;Send&lt;/code&gt;, and that &lt;code&gt;print_all(iter)&lt;/code&gt; therefore produces a future that is &lt;code&gt;Send&lt;/code&gt;.&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn3&quot; id&#x3D;&quot;fnref3&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;One hypothesis is that while people will hit this problem, they will encounter it relatively infrequently, because most of the time &lt;code&gt;spawn&lt;/code&gt; won&#x27;t be called in code that&#x27;s generic over a trait with async functions.&lt;/p&gt;
+&lt;p&gt;We would like to start gathering data on people&#x27;s actual experiences with this. If you have relevant experience to share, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/103854&quot;&gt;please comment on this issue&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;&lt;a href&#x3D;&quot;#when-it-does-happen&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;when-it-does-happen&quot;&gt;&lt;/a&gt;When it does happen&lt;/h4&gt;
+&lt;p&gt;Eventually you probably &lt;em&gt;will&lt;/em&gt; want to spawn from a context that&#x27;s generic over an async trait that you call. What then!?&lt;/p&gt;
+&lt;p&gt;For now it&#x27;s possible to use another new nightly-only feature, &lt;code&gt;return_position_impl_trait_in_trait&lt;/code&gt;, to express the bound you need directly in your trait:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#![feature(return_position_impl_trait_in_trait)]
+
+trait SpawnAsyncIterator: Send + &#x27;static {
+    type Item;
+    fn next(&amp;amp;mut self) -&amp;gt; impl Future&amp;lt;Output &#x3D; Option&amp;lt;Self::Item&amp;gt;&amp;gt; + Send + &#x27;_;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we&#x27;ve &lt;em&gt;desugared&lt;/em&gt; our &lt;code&gt;async fn&lt;/code&gt; to a regular function returning &lt;code&gt;impl Future + &#x27;_&lt;/code&gt;, which works just like normal &lt;code&gt;async fn&lt;/code&gt;s do. It&#x27;s more verbose, but it gives us a place to put a &lt;code&gt;+ Send&lt;/code&gt; bound! What&#x27;s more, you can continue to use &lt;code&gt;async fn&lt;/code&gt; in an &lt;code&gt;impl&lt;/code&gt; of this trait.&lt;/p&gt;
+&lt;p&gt;The downside of this approach is that the trait becomes less generic, making it less suitable for library code. If you want to maintain two separate versions of a trait, you can do that, and (perhaps) provide macros to make it easier to implement both.&lt;/p&gt;
+&lt;p&gt;This solution is intended to be temporary. We&#x27;d like to implement a better solution in the language itself, but since this is a nightly-only feature we prefer to get more people trying it out as soon as possible.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#limitation-dynamic-dispatch&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;limitation-dynamic-dispatch&quot;&gt;&lt;/a&gt;Limitation: Dynamic dispatch&lt;/h3&gt;
+&lt;p&gt;There&#x27;s one final limitation: You can&#x27;t call an &lt;code&gt;async fn&lt;/code&gt; with a &lt;code&gt;dyn Trait&lt;/code&gt;. Designs to support this exist&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn4&quot; id&#x3D;&quot;fnref4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;, but are in the earlier stages. If you need dynamic dispatch from a trait, you&#x27;re better off using the &lt;code&gt;async_trait&lt;/code&gt; macro for now.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#path-to-stabilization&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;path-to-stabilization&quot;&gt;&lt;/a&gt;Path to stabilization&lt;/h2&gt;
+&lt;p&gt;The async working group would like to get something useful in the hands of Rust users, even if it doesn&#x27;t do &lt;em&gt;everything&lt;/em&gt; they might want. That&#x27;s why despite having some limitations, the current version of &lt;code&gt;async fn&lt;/code&gt; in traits might not be far off from stabilization.&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn5&quot; id&#x3D;&quot;fnref5&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; You can follow progress by watching the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/91611&quot;&gt;tracking issue&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are two big questions to answer first:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Do we need to solve the &amp;quot;spawning from generics&amp;quot; (&lt;code&gt;Send&lt;/code&gt; bound) problem first?&lt;/strong&gt; Please leave feedback on &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/103854&quot;&gt;this issue&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;What other bugs and quality issues exist?&lt;/strong&gt; Please file &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;new issues&lt;/a&gt; for these. You can view &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/labels/F-async_fn_in_trait&quot;&gt;known issues here&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you&#x27;re an async Rust enthusiast and are willing to try experimental new features, we&#x27;d very much appreciate it if you gave it a spin!&lt;/p&gt;
+&lt;p&gt;If you use &lt;code&gt;#[async_trait]&lt;/code&gt;, you can try removing it from some traits (and their impls) where you don&#x27;t use dynamic dispatch. Or if you&#x27;re writing new async code, try using it there. Either way, you can tell us about your experience at the links above.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;This work was made possible thanks to the efforts of many people, including&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Michael Goulet&lt;/li&gt;
+&lt;li&gt;Santiago Pastorino&lt;/li&gt;
+&lt;li&gt;Oli Scherer&lt;/li&gt;
+&lt;li&gt;Eric Holk&lt;/li&gt;
+&lt;li&gt;Dan Johnson&lt;/li&gt;
+&lt;li&gt;Bryan Garza&lt;/li&gt;
+&lt;li&gt;Niko Matsakis&lt;/li&gt;
+&lt;li&gt;Tyler Mandry&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In addition it was built on top of years of compiler work that enabled us to ship &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/10/28/gats-stabilization.html&quot;&gt;GATs&lt;/a&gt; as well as other fundamental type system improvements. We&#x27;re deeply grateful to all those who contributed; this work would not be possible without you. Thank you!&lt;/p&gt;
+&lt;p&gt;To learn more about this feature and the challenges behind it, check out the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html&quot;&gt;Static async fn in traits RFC&lt;/a&gt; and &lt;a href&#x3D;&quot;https://smallcultfollowing.com/babysteps/blog/2019/10/26/async-fn-in-traits-are-hard/&quot;&gt;why async fn in traits are hard&lt;/a&gt;. Also stay tuned for a follow-up post where we explore language extensions that make it possible to express &lt;code&gt;Send&lt;/code&gt; bounds without a special trait.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Thanks to Yoshua Wuyts, Nick Cameron, Dan Johnson, Santiago Pastorino, Eric Holk, and Niko Matsakis for reviewing a draft of this post.&lt;/em&gt;&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn1&quot;&gt;
+&lt;p&gt;This feature is called &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2515-type_alias_impl_trait.html&quot;&gt;&amp;quot;type alias impl trait&amp;quot;&lt;/a&gt;. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn2&quot;&gt;
+&lt;p&gt;The actual error message produced by the compiler is a bit noisier than this, but that will be improved. &lt;a href&#x3D;&quot;#fnref2&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn3&quot;&gt;
+&lt;p&gt;Auto traits such as &lt;code&gt;Send&lt;/code&gt; and &lt;code&gt;Sync&lt;/code&gt; are special in this way. The compiler knows that the return type of &lt;code&gt;print_all&lt;/code&gt; is &lt;code&gt;Send&lt;/code&gt; if and only if the type of its argument &lt;code&gt;Send&lt;/code&gt;, and unlike with regular traits, it is allowed to use this knowledge when type checking your program. &lt;a href&#x3D;&quot;#fnref3&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn4&quot;&gt;
+&lt;p&gt;See &lt;a href&#x3D;&quot;https://rust-lang.github.io/async-fundamentals-initiative/explainer/async_fn_in_dyn_trait.html&quot;&gt;Async fn in dyn trait&lt;/a&gt; on the initiative website, as well as posts 8 and 9 in &lt;a href&#x3D;&quot;https://smallcultfollowing.com/babysteps/blog/2022/09/21/dyn-async-traits-part-9-callee-site-selection/&quot;&gt;this series&lt;/a&gt;. &lt;a href&#x3D;&quot;#fnref4&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn5&quot;&gt;
+&lt;p&gt;When? Possibly sometime in the next six months or so. But don&#x27;t hold me to it :) &lt;a href&#x3D;&quot;#fnref5&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Tyler Mandry</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.65.0 pre-release testing</title>
@@ -1333,363 +1539,6 @@ to newcomers.&lt;/p&gt;
 
         <author>
             <name>Felix Klock, Wesley Wiser</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing the Keyword Generics Initiative</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/07/27/keyword-generics.html" type="text/html" title="Announcing the Keyword Generics Initiative" />
-        <published>2022-07-27T00:00:00+00:00</published>
-        <updated>2022-07-27T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/07/27/keyword-generics.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/07/27/keyword-generics.html">&lt;p&gt;We (&lt;a href&#x3D;&quot;https://github.com/oli-obk&quot;&gt;Oli&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/nikomatsakis&quot;&gt;Niko&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/yoshuawuyts&quot;&gt;Yosh&lt;/a&gt;) are excited to announce the start of the &lt;a href&#x3D;&quot;https://github.com/rust-lang/keyword-generics-initiative&quot;&gt;Keyword
-Generics Initiative&lt;/a&gt;, a new initiative &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; under the purview of
-the language team. We&#x27;re officially just a few weeks old now, and in this post
-we want to briefly share why we&#x27;ve started this initiative, and share some
-insight on what we&#x27;re about.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#a-missing-kind-of-generic&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-missing-kind-of-generic&quot;&gt;&lt;/a&gt;A missing kind of generic&lt;/h2&gt;
-&lt;p&gt;One of Rust&#x27;s defining features is the ability to write functions which are
-&lt;em&gt;generic&lt;/em&gt; over their input types. That allows us to write a function once,
-leaving it up to the compiler to generate the right implementations for us.&lt;/p&gt;
-&lt;p&gt;Rust allows you to be generic over types - it does not allow you to be generic
-over other things that are usually specified by keywords. For example, whether a
-function is async, whether a function can fail or not, whether a function is
-const or not, etc.&lt;/p&gt;
-&lt;p&gt;The post &lt;a href&#x3D;&quot;https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/&quot;&gt;&amp;quot;What color is your function&amp;quot;&lt;/a&gt; &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn2&quot; id&#x3D;&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; describes what happens
-when a language introduces async functions, but with no way to be generic over
-them:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I will take async-await over bare callbacks or futures any day of the week.
-But we’re lying to ourselves if we think all of our troubles are gone. As soon
-as you start trying to write higher-order functions, or reuse code, you’re
-right back to realizing color is still there, bleeding all over your codebase.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;This isn&#x27;t just limited to async though, it applies to all modifier keywords -
-including ones we may define in the future. So we&#x27;re looking to fill that gap
-by exploring something we call &amp;quot;keyword generics&amp;quot; &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn3&quot; id&#x3D;&quot;fnref3&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;: the ability to be
-generic over keywords such as &lt;code&gt;const&lt;/code&gt; and &lt;code&gt;async&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;To give you a quick taste of what we&#x27;re working on, this is roughly how we
-imagine you may be able to write a function which is generic over &amp;quot;asyncness&amp;quot;
-in the future:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Please note that this syntax is entirely made up, just so we can use something
-in examples. Before we can work on syntax we need to finalize the semantics,
-and we&#x27;re not there yet. This means the syntax will likely be subject to
-change over time.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;async&amp;lt;A&amp;gt; trait Read {
-    async&amp;lt;A&amp;gt; fn read(&amp;amp;mut self, buf: &amp;amp;mut [u8]) -&amp;gt; Result&amp;lt;usize&amp;gt;;
-    async&amp;lt;A&amp;gt; fn read_to_string(&amp;amp;mut self, buf: &amp;amp;mut String) -&amp;gt; Result&amp;lt;usize&amp;gt; { ... }
-}
-
-/// Read from a reader into a string.
-async&amp;lt;A&amp;gt; fn read_to_string(reader: &amp;amp;mut impl Read * A) -&amp;gt; std::io::Result&amp;lt;String&amp;gt; {
-    let mut string &#x3D; String::new();
-    reader.read_to_string(&amp;amp;mut string).await?;
-    string
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This function introduces a &amp;quot;keyword generic&amp;quot; parameter into the function of &lt;code&gt;A&lt;/code&gt;.
-You can think of this as a flag which indicates whether the function is being
-compiled in an async context or not. The parameter &lt;code&gt;A&lt;/code&gt; is forwarded to the &lt;code&gt;impl Read&lt;/code&gt;, making that conditional on &amp;quot;asyncness&amp;quot; as well.&lt;/p&gt;
-&lt;p&gt;In the function body you can see a &lt;code&gt;.await&lt;/code&gt; call. Because &lt;a href&#x3D;&quot;https://blog.yoshuawuyts.com/async-cancellation-1/&quot;&gt;the &lt;code&gt;.await&lt;/code&gt; keyword
-marks cancellation sites&lt;/a&gt; we unfortunately can&#x27;t just infer them
-&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn4&quot; id&#x3D;&quot;fnref4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;. Instead we require them to be written for when the code is
-compiled in async mode, but are essentially reduced to a no-op in non-async
-mode.&lt;/p&gt;
-&lt;p&gt;We still have lots of details left to figure out, but we hope this at least
-shows the general &lt;em&gt;feel&lt;/em&gt; of what we&#x27;re going for.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#a-peek-at-the-past-horrors-before-const&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-peek-at-the-past-horrors-before-const&quot;&gt;&lt;/a&gt;A peek at the past: horrors before const&lt;/h2&gt;
-&lt;p&gt;Rust didn&#x27;t always have &lt;code&gt;const fn&lt;/code&gt; as part of the language. A long long long long
-long time ago (2018) we had to write a regular function for runtime computations
-and associated const of generic type logic for compile-time computations. As an
-example, to add the number &lt;code&gt;1&lt;/code&gt; to a constant provided to you, you had to write
-(&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;stable&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;50e818b79b8af322ed4384d3c33e9773&quot;&gt;playground&lt;/a&gt;):&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait Const&amp;lt;T&amp;gt; {
-    const VAL: T;
-}
-
-/// &#x60;42&#x60; as a &amp;quot;const&amp;quot; (type) generic:
-struct FourtyTwo;
-impl Const&amp;lt;i32&amp;gt; for FourtyTwo {
-    const VAL: i32 &#x3D; 42;
-}
-
-/// &#x60;C&#x60; -&amp;gt; &#x60;C + 1&#x60; operation:
-struct AddOne&amp;lt;C: Const&amp;lt;i32&amp;gt;&amp;gt;(C);
-impl&amp;lt;C: Const&amp;lt;i32&amp;gt;&amp;gt; Const&amp;lt;i32&amp;gt; for AddOne&amp;lt;C&amp;gt; {
-    const VAL: i32 &#x3D; C::VAL + 1;
-}
-
-AddOne::&amp;lt;FourtyTwo&amp;gt;::VAL
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Today this is as easy as writing a &lt;code&gt;const fn&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;const fn add_one(i: i32) -&amp;gt; i32 {
-    i + 1
-}
-
-add_one(42)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The interesting part here is that you can also just call this function in
-runtime code, which means the implementation is shared between both &lt;code&gt;const&lt;/code&gt;
-(CTFE&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn5&quot; id&#x3D;&quot;fnref5&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;) and non-&lt;code&gt;const&lt;/code&gt; (runtime) contexts.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#memories-of-the-present-async-today&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;memories-of-the-present-async-today&quot;&gt;&lt;/a&gt;Memories of the present: async today&lt;/h2&gt;
-&lt;p&gt;People write duplicate code for async/non-async with the only difference being
-the &lt;code&gt;async&lt;/code&gt; keyword. A good example of that code today is &lt;a href&#x3D;&quot;https://docs.rs/async-std/latest/async_std/&quot;&gt;&lt;code&gt;async-std&lt;/code&gt;&lt;/a&gt;, which
-duplicates and translates a large part of the stdlib&#x27;s API surface to be async
-&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn6&quot; id&#x3D;&quot;fnref6&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;. And because the Async WG has made it an explicit goal to &lt;a href&#x3D;&quot;https://rust-lang.github.io/wg-async/vision/how_it_feels.html&quot;&gt;bring
-async Rust up to par with non-async Rust&lt;/a&gt;, the issue of code
-duplication is particularly relevant for the Async WG as well. Nobody on the
-Async WG seems particularly keen on proposing we add a second instance of just
-about every API currently in the stdlib.&lt;/p&gt;
-&lt;p&gt;We&#x27;re in a similar situation with &lt;code&gt;async&lt;/code&gt; today as &lt;code&gt;const&lt;/code&gt; was prior to 2018.
-Duplicating entire interfaces and wrapping them in &lt;code&gt;block_on&lt;/code&gt; calls is the
-approach taken by e.g. the &lt;code&gt;mongodb&lt;/code&gt;
-[&lt;a href&#x3D;&quot;https://docs.rs/mongodb/latest/mongodb/index.html&quot;&gt;async&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://docs.rs/mongodb/latest/mongodb/sync/index.html&quot;&gt;non-async&lt;/a&gt;], &lt;code&gt;postgres&lt;/code&gt;
-[&lt;a href&#x3D;&quot;https://docs.rs/tokio-postgres/latest/tokio_postgres/index.html&quot;&gt;async&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://docs.rs/postgres/latest/postgres/&quot;&gt;non-async&lt;/a&gt;], and &lt;code&gt;reqwest&lt;/code&gt;
-[&lt;a href&#x3D;&quot;https://docs.rs/reqwest/latest/reqwest/&quot;&gt;async&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://docs.rs/reqwest/latest/reqwest/blocking/index.html&quot;&gt;non-async&lt;/a&gt;] crates:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// Async functionality like this would typically be exposed from a crate &amp;quot;foo&amp;quot;:
-async fn bar() -&amp;gt; Bar { 
-    // async implementation goes here
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// And a sync counterpart would typically be exposed from a crate
-// named &amp;quot;blocking_foo&amp;quot; or a submodule on the original crate as
-// &amp;quot;foo::blocking&amp;quot;. This wraps the async code in a &#x60;block_on&#x60; call:
-fn bar() -&amp;gt; Bar {
-    futures::executor::block_on(foo::bar())
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This situation is not ideal. Instead of using the host&#x27;s synchronous syscalls,
-we&#x27;re now going through an async runtime to get the same results - something
-which is often not zero-cost. But more importantly, it&#x27;s rather hard to
-keep both a sync and async API version of the same crate in, err, sync with each
-other. Without automation it&#x27;s really easy for the two APIs to get out of sync,
-leading to mismatched functionality.&lt;/p&gt;
-&lt;p&gt;The ecosystem has come up with some solutions to this, perhaps most notably the
-proc-macro based &lt;a href&#x3D;&quot;https://docs.rs/maybe-async/0.2.6/maybe_async/&quot;&gt;&lt;code&gt;maybe-async&lt;/code&gt; crate&lt;/a&gt;.  Instead of writing two
-separate copies of &lt;code&gt;foo&lt;/code&gt;, it generates a sync and async variant for you:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[maybe_async]
-async fn foo() -&amp;gt; Bar { ... }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;While being useful, the macro has clear limitations with respect to diagnostics
-and ergonomics. That&#x27;s absolutely not an issue with the crate, but an inherent
-property of the problem it&#x27;s trying to solve. Implementing a way to be generic
-over the &lt;code&gt;async&lt;/code&gt; keyword is something which will affect the language in many
-ways, and a type system + compiler will be better equipped to handle it than
-proc macros reasonably can.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#a-taste-of-trouble-the-sandwich-problem&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-taste-of-trouble-the-sandwich-problem&quot;&gt;&lt;/a&gt;A taste of trouble: the sandwich problem&lt;/h2&gt;
-&lt;p&gt;A pervasive issue in existing Rust is the &lt;em&gt;sandwich&lt;/em&gt; problem. It occurs when a
-type passed into an operation wants to perform control flow not supported by the
-type it&#x27;s passed into. Thus creating a &lt;em&gt;sandwich&lt;/em&gt; &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn7&quot; id&#x3D;&quot;fnref7&quot;&gt;7&lt;/a&gt;&lt;/sup&gt; The classic example
-is a &lt;code&gt;map&lt;/code&gt; operation:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;enum Option&amp;lt;T&amp;gt; {
-    Some(T),
-    None,
-}
-
-impl&amp;lt;T&amp;gt; Option&amp;lt;T&amp;gt; {
-    fn map&amp;lt;J&amp;gt;(self, f: impl FnOnce(T) -&amp;gt; J) -&amp;gt; Option&amp;lt;J&amp;gt; { ... }
-}
-
-my_option.map(|x| x.await)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This will produce a compiler error: the closure &lt;code&gt;f&lt;/code&gt; is not an async context, so
-&lt;code&gt;.await&lt;/code&gt; cannot be used within it. And we can&#x27;t just convert the closure to be
-&lt;code&gt;async&lt;/code&gt; either, since &lt;code&gt;fn map&lt;/code&gt; doesn&#x27;t know how to call async functions. In
-order to solve this issue, we could provide a new &lt;code&gt;async_map&lt;/code&gt; method which
-&lt;em&gt;does&lt;/em&gt; provide an async closure. But we may want to repeat those for more
-effects, and that would result in a combinatorial explosion of effects. Take for
-example &amp;quot;can fail&amp;quot; and &amp;quot;can be async&amp;quot;:&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;not async&lt;/th&gt;
-&lt;th&gt;async&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;infallible&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;fn map&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;fn async_map&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;fallible&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;fn try_map&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;fn async_try_map&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;That&#x27;s a lot of API surface for just a single method, and &lt;strong&gt;that problem
-multiplies across the entire API surface in the stdlib&lt;/strong&gt;. We expect that once we
-start applying &amp;quot;keyword generics&amp;quot; to traits, we will be able to solve the
-sandwich problem. The type &lt;code&gt;f&lt;/code&gt; would be marked generic over a set of effects,
-and the compiler would choose the right variant during compilation.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#affecting-all-effects&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;affecting-all-effects&quot;&gt;&lt;/a&gt;Affecting all effects&lt;/h2&gt;
-&lt;p&gt;Both &lt;code&gt;const&lt;/code&gt; and &lt;code&gt;async&lt;/code&gt; share a very similar issue, and we expect that other
-&amp;quot;effects&amp;quot; will face the same issue. &amp;quot;fallibility&amp;quot; is particularly on our mind here,
-but it isn&#x27;t the only effect. In order for the language to feel consistent we
-need consistent solutions.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#faq&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;faq&quot;&gt;&lt;/a&gt;FAQ&lt;/h2&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#q-is-there-an-rfc-available-to-read&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;q-is-there-an-rfc-available-to-read&quot;&gt;&lt;/a&gt;Q: Is there an RFC available to read?&lt;/h3&gt;
-&lt;p&gt;Rust initiatives are intended for &lt;em&gt;exploration&lt;/em&gt;. The announcement of the Keyword
-Generics Initiative marks the &lt;em&gt;start&lt;/em&gt; of the exploration process. Part of
-exploring is not knowing what the outcomes will be. Right now we&#x27;re in the
-&amp;quot;pre-RFC&amp;quot; phase of design. What we hope we&#x27;ll achieve is to enumerate the
-full problem space, design space, find a balanced solution, and eventually
-summarize that in the form of an RFC. Then after the RFC is accepted: implement
-it on nightly, work out the kinks, and eventually move to stabilize.  But we may
-at any point during this process conclude that this initiative is actually
-infeasible and start ramping down.&lt;/p&gt;
-&lt;p&gt;But while we can&#x27;t make any &lt;em&gt;assurances&lt;/em&gt; about the outcome of the initiative,
-what we can share is that we&#x27;re pretty optimistic about the initiative overall.
-We wouldn&#x27;t be investing the time we are on this if we didn&#x27;t think we&#x27;d be
-actually be able to see it through to completion.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#q-will-this-make-the-language-more-complicated&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;q-will-this-make-the-language-more-complicated&quot;&gt;&lt;/a&gt;Q: Will this make the language more complicated?&lt;/h3&gt;
-&lt;p&gt;The goal of keyword generics is not to minimize the complexity of the Rust
-programming language, but to &lt;em&gt;minimize the complexity of programming in Rust.&lt;/em&gt;
-These two might sound similar, but they&#x27;re not. Our reasoning here is that by
-&lt;em&gt;adding&lt;/em&gt; a feature, we will actually be able to significantly reduce the surface
-area of the stdlib, crates.io libraries, and user code - leading to a more
-streamlined user experience.&lt;/p&gt;
-&lt;p&gt;Choosing between sync or async code is a fundamental choice which needs to be
-made. This is complexity which cannot be avoided, and which needs to exist
-somewhere. Currently in Rust that complexity is thrust entirely on users of
-Rust, making them responsible for choosing whether their code should support
-async Rust or not. But other languages have made diferent choices. For example
-Go doesn&#x27;t distinguish between &amp;quot;sync&amp;quot; and &amp;quot;async&amp;quot; code, and has a runtime which
-is able to remove that distinction.&lt;/p&gt;
-&lt;p&gt;In today&#x27;s Rust application authors choose whether their application will be sync
-or async, and even after the introduction of keyword generics we don&#x27;t really
-expect that to change. All generics eventually need to have their types known,
-and keyword generics are no different. What we&#x27;re targeting is the choice made
-by &lt;em&gt;library&lt;/em&gt; authors whether their library supports is sync or async. With
-keyword generics library authors will be able to support both with the help of
-the compiler, and leave it up to application authors to decide how they want to
-compile their code.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#q-are-you-building-an-effect-system&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;q-are-you-building-an-effect-system&quot;&gt;&lt;/a&gt;Q: Are you building an effect system?&lt;/h3&gt;
-&lt;p&gt;The short answer is: kind of, but not really. &amp;quot;Effect systems&amp;quot; or &amp;quot;algebraic
-effect systems&amp;quot; generally have a lot of surface area. A common example of what
-effects allow you to do is implement your own &lt;code&gt;try/catch&lt;/code&gt; mechanism. What we&#x27;re
-working on is intentionally limited to built-in keywords only, and wouldn&#x27;t
-allow you to implement anything like that at all.&lt;/p&gt;
-&lt;p&gt;What we do share with effect systems is that we&#x27;re integrating modifier keywords
-more directly into the type system. Modifier keywords like &lt;code&gt;async&lt;/code&gt; are often
-referred to as &amp;quot;effects&amp;quot;, so being able to be conditional over them in
-composable ways effectively gives us an &amp;quot;effect algebra&amp;quot;. But that&#x27;s very
-different from &amp;quot;generalized effect systems&amp;quot; in other languages.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#q-are-you-looking-at-other-keywords-beyond-async-and-const&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;q-are-you-looking-at-other-keywords-beyond-async-and-const&quot;&gt;&lt;/a&gt;Q: Are you looking at other keywords beyond &lt;code&gt;async&lt;/code&gt; and &lt;code&gt;const&lt;/code&gt;?&lt;/h3&gt;
-&lt;p&gt;For a while we were referring to the initiative as &amp;quot;modifier generics&amp;quot; or
-&amp;quot;modifier keyword generics&amp;quot;, but it never really stuck. We&#x27;re only really
-interested in keywords which modify how types work. Right now this is &lt;code&gt;const&lt;/code&gt;
-and &lt;code&gt;async&lt;/code&gt; because that&#x27;s what&#x27;s most relevant for the const-generics WG and
-async WG. But we&#x27;re designing the feature with other keywords in mind as well.&lt;/p&gt;
-&lt;p&gt;The one most at the top of our mind is a future keyword for fallibility. There
-is talk about introducing &lt;code&gt;try fn() {}&lt;/code&gt; or &lt;code&gt;fn () -&amp;gt; throws&lt;/code&gt; syntax. This could
-make it so methods such as &lt;code&gt;Iterator::filter&lt;/code&gt; would be able to use &lt;code&gt;?&lt;/code&gt; to break
-out of the closure and short-circuit iteration.&lt;/p&gt;
-&lt;p&gt;Our main motivation for this feature is that without it, it&#x27;s easy for Rust to
-start to feel &lt;em&gt;disjointed&lt;/em&gt;. We sometimes joke that Rust is actually 3-5
-languages in a trenchcoat. Between const rust, fallible rust, async rust, unsafe
-rust - it can be easy for common APIs to only be available in one variant of the
-language, but not in others. We hope that with this feature we can start to
-systematically close those gaps, leading to a more consistent Rust experience
-for &lt;em&gt;all&lt;/em&gt; Rust users.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#q-what-will-the-backwards-compatibility-story-be-like&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;q-what-will-the-backwards-compatibility-story-be-like&quot;&gt;&lt;/a&gt;Q: What will the backwards compatibility story be like?&lt;/h3&gt;
-&lt;p&gt;Rust has pretty strict backwards-compatibility guarantees, and any feature we
-implement needs to adhere to this. Luckily we have some wiggle room because of
-the edition mechanism, but our goal is to shoot for maximal backwards compat. We
-have some ideas of how we&#x27;re going to make this work though, and we&#x27;re
-cautiously optimistic we might actually be able to pull this off.&lt;/p&gt;
-&lt;p&gt;But to be frank: this is by far one of the hardest aspects of this feature, and
-we&#x27;re lucky that we&#x27;re not designing any of this just by ourselves, but have the
-support of the language team as well.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#q-arent-implementations-sometimes-fundamentally-different&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;q-arent-implementations-sometimes-fundamentally-different&quot;&gt;&lt;/a&gt;Q: Aren&#x27;t implementations sometimes fundamentally different?&lt;/h3&gt;
-&lt;p&gt;Const Rust can&#x27;t make any assumptions about the host it runs on, so it can&#x27;t do
-anything platform-specific. This includes using more efficient instructions of
-system calls which are only available in one platform but not another. In order
-to work around this, the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/intrinsics/fn.const_eval_select.html&quot;&gt;&lt;code&gt;const_eval_select&lt;/code&gt;&lt;/a&gt; intrinsic in the standard
-library enables &lt;code&gt;const&lt;/code&gt; code to detect whether it&#x27;s executing during CTFE or
-runtime, and execute different code based on that.&lt;/p&gt;
-&lt;p&gt;For async we expect to be able to add a similar intrinsic, allowing library
-authors to detect whether code is being compiled as sync or async, and do
-something different based on that. This includes: using internal concurrency, or
-switching to a different set of system calls. We&#x27;re not sure whether an
-intrinsic is the right choice for this though; we may want to provide a more
-ergonomic API for this instead. But because keyword generics is being designed
-as a consistent feature, we expect that whatever we end up going with can be used
-consistently by &lt;em&gt;all&lt;/em&gt; modifier keywords.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;In this post we&#x27;ve introduced the new keyword generics initiative, explained why
-it exists, and shown a brief example of what it might look like in the future.&lt;/p&gt;
-&lt;p&gt;The initiative is active on the Rust Zulip under
-&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/328082-t-lang.2Fkeyword-generics&quot;&gt;&lt;code&gt;t-lang/keyword-generics&lt;/code&gt;&lt;/a&gt; - if this seems interesting to you, please
-pop by!&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Thanks to everyone who&#x27;s helped review this post, but in particular:
-&lt;a href&#x3D;&quot;https://github.com/fee1-dead&quot;&gt;fee1-dead&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/danielhenrymantilla&quot;&gt;Daniel Henry-Mantilla&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rylev&quot;&gt;Ryan Levick&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;section class&#x3D;&quot;footnotes&quot;&gt;
-&lt;ol&gt;
-&lt;li id&#x3D;&quot;fn1&quot;&gt;
-&lt;p&gt;Rust governance terminology can sometimes get confusing. An
-&amp;quot;initiative&amp;quot; in Rust parlance is different from a &amp;quot;working group&amp;quot; or &amp;quot;team&amp;quot;.
-Initiatives are intentionally limited: they exist to explore, design, and
-implement specific pieces of work - and once that work comes to a close, the
-initiative will wind back down. This is different from, say, the lang team -
-which essentially carries a &lt;code&gt;&#x27;static&lt;/code&gt; lifetime - and whose work does
-not have a clearly defined end. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id&#x3D;&quot;fn2&quot;&gt;
-&lt;p&gt;R. Nystrom, “What Color is Your Function?,” Feb. 01, 2015.
-https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/
-(accessed Apr. 06, 2022). &lt;a href&#x3D;&quot;#fnref2&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id&#x3D;&quot;fn3&quot;&gt;
-&lt;p&gt;The longer, more specific name would be: &amp;quot;keyword modifier generics&amp;quot;.
-We&#x27;ve tried calling it that, but it&#x27;s a bit of a mouthful. So we&#x27;re just
-sticking with &amp;quot;keyword generics&amp;quot; for now, even if the name for this feature may
-end up being called something more specific in the reference and documentation. &lt;a href&#x3D;&quot;#fnref3&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id&#x3D;&quot;fn4&quot;&gt;
-&lt;p&gt;No really, we can&#x27;t just infer them - and it may not be as
-simple as omitting all &lt;code&gt;.await&lt;/code&gt; calls either. The Async WG is working through
-the full spectrum of cancellation sites, async drop, and more. But for now we&#x27;re
-working under the assumption that &lt;code&gt;.await&lt;/code&gt; will remain relevant going forward.
-And even in the off chance that it isn&#x27;t, fallibility has similar requirements
-at the call site as async does. &lt;a href&#x3D;&quot;#fnref4&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id&#x3D;&quot;fn5&quot;&gt;
-&lt;p&gt;CTFE stands for &amp;quot;Compile Time Function Execution&amp;quot;: &lt;code&gt;const&lt;/code&gt; functions
-can be evaluated during compilation, which is implemented using a Rust
-interpreter (miri). &lt;a href&#x3D;&quot;#fnref5&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id&#x3D;&quot;fn6&quot;&gt;
-&lt;p&gt;Some limitations in &lt;code&gt;async-std&lt;/code&gt; apply: async Rust is missing async
-&lt;code&gt;Drop&lt;/code&gt;, async traits, and async closures. So not all APIs could be duplicated.
-Also &lt;code&gt;async-std&lt;/code&gt; explicitly didn&#x27;t reimplement any of the collection APIs to be
-async-aware, which means users are subject to the &amp;quot;sandwich problem&amp;quot;. The
-purpose of &lt;code&gt;async-std&lt;/code&gt; was to be a proving ground to test whether creating
-an async mirror of the stdlib would be possible: and it&#x27;s proven that it is, as
-far as was possible with missing language features. &lt;a href&#x3D;&quot;#fnref6&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id&#x3D;&quot;fn7&quot;&gt;
-&lt;p&gt;Not to be confused with the higher-order &lt;em&gt;sandwich dilemma&lt;/em&gt; which is
-when you look at the sandwich problem and attempt to determine whether the
-sandwich is two slices of bread with a topping in between, or two toppings with
-a slice of bread in between. Imo the operation part of the problem feels more
-&lt;em&gt;bready&lt;/em&gt;, but that would make for a weird-looking sandwich. Ergo: sandwich
-dilemma. (yes, you can ignore all of this.) &lt;a href&#x3D;&quot;#fnref7&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
-</content>
-
-        <author>
-            <name>Yoshua Wuyts</name>
         </author>
     </entry>
     
