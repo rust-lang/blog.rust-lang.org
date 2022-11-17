@@ -106,12 +106,10 @@ Besides, users [expect][alan-async-traits] to be able to write `async fn` in tra
 
 Traits that need to work with zero overhead or in no_std contexts have another option: they can take the concept of polling from the [`Future` trait](https://doc.rust-lang.org/stable/std/future/trait.Future.html) and build it directly into their interface. The `Future::poll` method returns `Poll::Ready(Output)` if the future is complete and `Poll::Pending` if the future is waiting on some other event.
 
-You can see this pattern, for example, in the Stream[^stream-futures] trait. The signature of `Stream::poll_next` is a cross between `Future::poll` and `Iterator::next`.
-
-[^stream-futures]: The [`Stream` trait](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) is part of the `futures` crate, not the standard library.
+You can see this pattern, for example, in the current version of the unstable [AsyncIterator](https://doc.rust-lang.org/stable/std/async_iter/trait.AsyncIterator.html) trait. The signature of `AsyncIterator::poll_next` is a cross between `Future::poll` and `Iterator::next`.
 
 ```rust
-pub trait Stream {
+pub trait AsyncIterator {
     type Item;
 
     fn poll_next(
@@ -143,7 +141,7 @@ impl Database for MyDb {
 }
 ```
 
-One thing this will allow us to do is standardize new traits we've been waiting on this feature for. For example, the `Stream` trait from above is significantly more complicated than its analogue, `Iterator`. With the new support, we can simply write this instead:
+One thing this will allow us to do is standardize new traits we've been waiting on this feature for. For example, the `AsyncIterator` trait from above is significantly more complicated than its analogue, `Iterator`. With the new support, we can simply write this instead:
 
 ```rust
 #![feature(async_fn_in_trait)]
@@ -154,7 +152,7 @@ trait AsyncIterator {
 }
 ```
 
-There's a decent chance that exactly this trait will end up in the standard library! For now though, you can use the one in the [`async_iterator` crate](https://docs.rs/async-iterator/latest/async_iterator/) and write generic code with it, just like you would normally.
+There's a decent chance that the trait in the standard library will end up exactly like this! For now, you can also use the one in the [`async_iterator` crate](https://docs.rs/async-iterator/latest/async_iterator/) and write generic code with it, just like you would normally.
 
 ```rust
 async fn print_all<I: AsyncIterator>(mut count: I)
