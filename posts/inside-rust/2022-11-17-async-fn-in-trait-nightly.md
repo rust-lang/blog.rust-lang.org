@@ -19,7 +19,7 @@ impl Database for MyDb {
 }
 ```
 
-A full working example is available in the [playground][play-concrete-spawn]. There are some limitations we'll cover, as well as a few known bugs to be worked out, but we think it is ready for some users try. Read on for the specifics.
+A full working example is available in the [playground][play-concrete-spawn]. There are some limitations we'll cover, as well as a few known bugs to be worked out, but we think it is ready for some users to try. Read on for the specifics.
 
 ## Recap: How async/await works in Rust
 
