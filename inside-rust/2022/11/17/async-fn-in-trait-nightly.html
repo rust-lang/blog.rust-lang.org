@@ -82,7 +82,7 @@ impl Database for MyDb {
     async fn fetch_data(&amp;self) -&gt; String { ... }
 }
 </code></pre>
-<p>A full working example is available in the <a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=6ffde69ba43c6c5094b7fbdae11774a9">playground</a>. There are some limitations we'll cover, as well as a few known bugs to be worked out, but we think it is ready for some users try. Read on for the specifics.</p>
+<p>A full working example is available in the <a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=6ffde69ba43c6c5094b7fbdae11774a9">playground</a>. There are some limitations we'll cover, as well as a few known bugs to be worked out, but we think it is ready for some users to try. Read on for the specifics.</p>
 <h2><a href="#recap-how-asyncawait-works-in-rust" aria-hidden="true" class="anchor" id="recap-how-asyncawait-works-in-rust"></a>Recap: How async/await works in Rust</h2>
 <p><code>async</code> and <code>.await</code> were a major improvement in the ergonomics of writing async code in Rust. In Rust, an <code>async fn</code> returns a <code>Future</code>, which is some object that represents an ongoing asynchronous computation.</p>
 <p>The type of the future does not actually appear in the signature of an <code>async fn</code>. When you write an async function like this:</p>

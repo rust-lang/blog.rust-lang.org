@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-11-17T18:15:41+00:00</updated>
+    <updated>2022-11-21T16:49:24+00:00</updated>
 
     
     <entry>
@@ -30,7 +30,7 @@ impl Database for MyDb {
     async fn fetch_data(&amp;amp;self) -&amp;gt; String { ... }
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A full working example is available in the &lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;nightly&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;6ffde69ba43c6c5094b7fbdae11774a9&quot;&gt;playground&lt;/a&gt;. There are some limitations we&#x27;ll cover, as well as a few known bugs to be worked out, but we think it is ready for some users try. Read on for the specifics.&lt;/p&gt;
+&lt;p&gt;A full working example is available in the &lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;nightly&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;6ffde69ba43c6c5094b7fbdae11774a9&quot;&gt;playground&lt;/a&gt;. There are some limitations we&#x27;ll cover, as well as a few known bugs to be worked out, but we think it is ready for some users to try. Read on for the specifics.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#recap-how-asyncawait-works-in-rust&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;recap-how-asyncawait-works-in-rust&quot;&gt;&lt;/a&gt;Recap: How async/await works in Rust&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;async&lt;/code&gt; and &lt;code&gt;.await&lt;/code&gt; were a major improvement in the ergonomics of writing async code in Rust. In Rust, an &lt;code&gt;async fn&lt;/code&gt; returns a &lt;code&gt;Future&lt;/code&gt;, which is some object that represents an ongoing asynchronous computation.&lt;/p&gt;
 &lt;p&gt;The type of the future does not actually appear in the signature of an &lt;code&gt;async fn&lt;/code&gt;. When you write an async function like this:&lt;/p&gt;
