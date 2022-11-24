@@ -50,7 +50,7 @@ Traits are the fundamental mechanism of abstraction in Rust. So what happens if 
 ```rust
 trait Database {
     type FetchData<'a>: Future<Output = String> + 'a where Self: 'a;
-    fn fetch_data(&self) -> FetchData<'a>;
+    fn fetch_data<'a>(&'a self) -> FetchData<'a>;
 }
 ```
 
@@ -59,7 +59,7 @@ Notice that this associated type is generic. Generic associated types haven't be
 ```rust
 impl Database for MyDb {
     type FetchData<'a> = /* what type goes here??? */;
-    fn fetch_data(&self) -> FetchData<'a> { async move { ... } }
+    fn fetch_data<'a>(&'a self) -> FetchData<'a> { async move { ... } }
 }
 ```
 
