@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-11-30T10:39:16+00:00</updated>
+    <updated>2022-11-30T10:40:11+00:00</updated>
 
     
     <entry>
@@ -242,7 +242,7 @@ We couldn&#x27;t have done it without all of you.
 }
 
 pub struct WindowsMut&amp;lt;&#x27;x, T&amp;gt; {
-    slice: &amp;amp;&#x27;x [T],
+    slice: &amp;amp;&#x27;x mut [T],
 }
 
 impl&amp;lt;&#x27;x, T&amp;gt; LendingIterator for WindowsMut&amp;lt;&#x27;x, T&amp;gt; {

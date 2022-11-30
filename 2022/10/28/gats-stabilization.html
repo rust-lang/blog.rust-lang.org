@@ -94,7 +94,7 @@
 }
 
 pub struct WindowsMut&lt;'x, T&gt; {
-    slice: &amp;'x [T],
+    slice: &amp;'x mut [T],
 }
 
 impl&lt;'x, T&gt; LendingIterator for WindowsMut&lt;'x, T&gt; {
