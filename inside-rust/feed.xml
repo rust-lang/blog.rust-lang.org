@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-11-29T13:49:01+00:00</updated>
+    <updated>2022-11-30T10:39:19+00:00</updated>
 
     
     <entry>
@@ -66,13 +66,13 @@ impl Database for MyDb {
 &lt;p&gt;Traits are the fundamental mechanism of abstraction in Rust. So what happens if you want to put an async method in a trait? Each &lt;code&gt;async&lt;/code&gt; block or function creates a unique type, so you would want to express that each implementation can have a different Future for the return type. Thankfully, we have associated types for this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait Database {
     type FetchData&amp;lt;&#x27;a&amp;gt;: Future&amp;lt;Output &#x3D; String&amp;gt; + &#x27;a where Self: &#x27;a;
-    fn fetch_data(&amp;amp;self) -&amp;gt; FetchData&amp;lt;&#x27;a&amp;gt;;
+    fn fetch_data&amp;lt;&#x27;a&amp;gt;(&amp;amp;&#x27;a self) -&amp;gt; FetchData&amp;lt;&#x27;a&amp;gt;;
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Notice that this associated type is generic. Generic associated types haven&#x27;t been supported in the language... &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/10/28/gats-stabilization.html&quot;&gt;until now&lt;/a&gt;! Unfortunately though, even with GATs, you still can&#x27;t write a trait &lt;em&gt;implementation&lt;/em&gt; that uses &lt;code&gt;async&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;impl Database for MyDb {
     type FetchData&amp;lt;&#x27;a&amp;gt; &#x3D; /* what type goes here??? */;
-    fn fetch_data(&amp;amp;self) -&amp;gt; FetchData&amp;lt;&#x27;a&amp;gt; { async move { ... } }
+    fn fetch_data&amp;lt;&#x27;a&amp;gt;(&amp;amp;&#x27;a self) -&amp;gt; FetchData&amp;lt;&#x27;a&amp;gt; { async move { ... } }
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Since you can&#x27;t name the type constructed by an async block, the only option is to use an opaque type (the &lt;code&gt;impl Future&lt;/code&gt; we saw earlier). But those are not supported in associated types!&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;

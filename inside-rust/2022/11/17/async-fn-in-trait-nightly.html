@@ -99,13 +99,13 @@ impl Database for MyDb {
 <p>Traits are the fundamental mechanism of abstraction in Rust. So what happens if you want to put an async method in a trait? Each <code>async</code> block or function creates a unique type, so you would want to express that each implementation can have a different Future for the return type. Thankfully, we have associated types for this:</p>
 <pre><code class="language-rust">trait Database {
     type FetchData&lt;'a&gt;: Future&lt;Output = String&gt; + 'a where Self: 'a;
-    fn fetch_data(&amp;self) -&gt; FetchData&lt;'a&gt;;
+    fn fetch_data&lt;'a&gt;(&amp;'a self) -&gt; FetchData&lt;'a&gt;;
 }
 </code></pre>
 <p>Notice that this associated type is generic. Generic associated types haven't been supported in the language... <a href="https://blog.rust-lang.org/2022/10/28/gats-stabilization.html">until now</a>! Unfortunately though, even with GATs, you still can't write a trait <em>implementation</em> that uses <code>async</code>:</p>
 <pre><code class="language-rust">impl Database for MyDb {
     type FetchData&lt;'a&gt; = /* what type goes here??? */;
-    fn fetch_data(&amp;self) -&gt; FetchData&lt;'a&gt; { async move { ... } }
+    fn fetch_data&lt;'a&gt;(&amp;'a self) -&gt; FetchData&lt;'a&gt; { async move { ... } }
 }
 </code></pre>
 <p>Since you can't name the type constructed by an async block, the only option is to use an opaque type (the <code>impl Future</code> we saw earlier). But those are not supported in associated types!<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup></p>
