@@ -19,6 +19,7 @@ Completing this survey should take about 5–20 minutes and is anonymous. We wil
 - [Portuguese]
 - [Russian]
 - [Spanish]
+- [Ukrainian]
 
 (If you speak multiple languages, please pick one)
 
@@ -32,14 +33,15 @@ Finally, we wanted to thank everyone who helped develop, polish, and test the su
 [frequently asked questions]: https://github.com/rust-lang/surveys/blob/main/documents/Community-Survey-FAQ.md
 [2021 survey]: https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html
 
-[survey]: https://surveyhero.com/c/jzesmzph
-[English]: https://surveyhero.com/c/dauv4jcd
-[Portuguese]: https://surveyhero.com/c/bhdqz3hj
-[Simplified Chinese]: https://surveyhero.com/c/7rnfv4cf
-[French]: https://surveyhero.com/c/y7hb34nm
-[Korean]: https://surveyhero.com/c/m3bi3nad
-[Spanish]: https://surveyhero.com/c/he7yvafu
-[Russian]: https://surveyhero.com/c/xix7rf7d
-[Traditional Chinese]: https://surveyhero.com/c/h7guatdt
-[German]: https://surveyhero.com/c/pq43azn4
-[Japanese]: https://surveyhero.com/c/9pput3ye
+[survey]: https://surveyhero.com/c/sfhmgxgd
+[English]: https://surveyhero.com/c/sfhmgxgd?lang=en
+[Portuguese]: https://surveyhero.com/c/sfhmgxgd?lang=pt
+[Simplified Chinese]: https://surveyhero.com/c/sfhmgxgd?lang=zh-cn
+[French]: https://surveyhero.com/c/sfhmgxgd?lang=fr
+[Korean]: https://surveyhero.com/c/sfhmgxgd?lang=ko
+[Spanish]: https://surveyhero.com/c/sfhmgxgd?lang=es
+[Russian]: https://surveyhero.com/c/sfhmgxgd?lang=ru
+[Traditional Chinese]: https://surveyhero.com/c/sfhmgxgd?lang=zh-tw
+[German]: https://surveyhero.com/c/sfhmgxgd?lang=de
+[Japanese]: https://surveyhero.com/c/sfhmgxgd?lang=ja
+[Ukrainian]: https://surveyhero.com/c/sfhmgxgd?lang=uk
