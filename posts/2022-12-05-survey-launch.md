@@ -25,8 +25,6 @@ We're happy to be offering the survey in the following languages. If you speak m
 - [Spanish]
 - [Ukrainian]
 
-(If you speak multiple languages, please pick one)
-
 Please help us spread the word by sharing the survey link on your social network feeds, at meetups, around your office, and in other communities.
 
 If you have any questions, please see our [frequently asked questions].
