@@ -10,8 +10,41 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-11-30T10:40:11+00:00</updated>
+    <updated>2022-12-05T18:08:46+00:00</updated>
 
+    
+    <entry>
+        <title>Launching the 2022 State of Rust Survey</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/12/05/survey-launch.html" type="text/html" title="Launching the 2022 State of Rust Survey" />
+        <published>2022-12-05T00:00:00+00:00</published>
+        <updated>2022-12-05T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/12/05/survey-launch.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/12/05/survey-launch.html">&lt;p&gt;The &lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd&quot;&gt;2022 State of Rust Survey&lt;/a&gt; is here!&lt;/p&gt;
+&lt;p&gt;It&#x27;s that time again! Time for us to take a look at who the Rust community is composed of, how the Rust project is doing, and how we can improve the Rust programming experience. The Rust Survey working group is pleased to announce our &lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd&quot;&gt;2022 State of Rust Survey&lt;/a&gt;! Whether or not you use Rust today, we want to know your opinions. Your responses will help the project understand its strengths and weaknesses, and establish development priorities for the future.&lt;/p&gt;
+&lt;p&gt;Completing this survey should take about 5–20 minutes and is anonymous. We will be accepting submissions for the next two weeks (until the 19th of December), and we will share our findings on &lt;a href&#x3D;&quot;https://blog.rust-lang.org&quot;&gt;blog.rust-lang.org&lt;/a&gt; sometime in early 2023. You can also check out &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html&quot;&gt;last year’s results&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We&#x27;re happy to be offering the survey in the following languages. If you speak multiple languages, please pick one.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd?lang&#x3D;en&quot;&gt;English&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd?lang&#x3D;zh-cn&quot;&gt;Simplified Chinese&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd?lang&#x3D;zh-tw&quot;&gt;Traditional Chinese&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd?lang&#x3D;fr&quot;&gt;French&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd?lang&#x3D;de&quot;&gt;German&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd?lang&#x3D;ja&quot;&gt;Japanese&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd?lang&#x3D;ko&quot;&gt;Korean&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd?lang&#x3D;pt&quot;&gt;Portuguese&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd?lang&#x3D;ru&quot;&gt;Russian&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd?lang&#x3D;es&quot;&gt;Spanish&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://surveyhero.com/c/sfhmgxgd?lang&#x3D;uk&quot;&gt;Ukrainian&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Please help us spread the word by sharing the survey link on your social network feeds, at meetups, around your office, and in other communities.&lt;/p&gt;
+&lt;p&gt;If you have any questions, please see our &lt;a href&#x3D;&quot;https://github.com/rust-lang/surveys/blob/main/documents/Community-Survey-FAQ.md&quot;&gt;frequently asked questions&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, we wanted to thank everyone who helped develop, polish, and test the survey.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Survey Working Group</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.65.0</title>
@@ -1351,29 +1384,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.62
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Changes in the Core Team</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/07/12/changes-in-the-core-team.html" type="text/html" title="Changes in the Core Team" />
-        <published>2022-07-12T00:00:00+00:00</published>
-        <updated>2022-07-12T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/07/12/changes-in-the-core-team.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/07/12/changes-in-the-core-team.html">&lt;p&gt;We want to say farewell and thanks to a couple of people who are stepping back from the Core Team:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Aidan Hobson Sayers is leaving the Core Team and other roles. Joining the Core Team in 2018, he started out on the project with fixing CI issues and has been a member of the Infrastructure Team since its inception (moving through lead and co-lead). Aidan wants to dedicate more time to working with the Rust community and growing Rust usage at his company, and is looking forward to doing so from the other side of the fence.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Ashley Williams will be stepping down from the Core Team and other roles. She became a member of the Core Team in 2018 and has had impact on many parts of the project, from leading the Community team, to setting up PagerDuty for Infrastructure and Crates.io, to the Wasm working group, to Increasing Rust’s Reach and Rustbridge, to her instrumental work creating the Rust Foundation and serving as its first Executive Director. Ashley is leaving her role in the project to focus on her newly founded company.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Many thanks to both of them for their contributions and we look forward to seeing their future efforts with Rust!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
         </author>
     </entry>
     
