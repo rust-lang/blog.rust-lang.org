@@ -5,9 +5,13 @@ author: The Rust Survey Working Group
 description: "Hearing from you about the seventh year of Rust"
 ---
 
+The [2022 State of Rust Survey][survey] is here!
+
 It's that time again! Time for us to take a look at who the Rust community is composed of, how the Rust project is doing, and how we can improve the Rust programming experience. The Rust Survey Team is pleased to announce our [2022 State of Rust Survey][survey]! Whether or not you use Rust today, we want to know your opinions. Your responses will help the project understand its strengths and weaknesses, and establish development priorities for the future.
 
-Completing this survey should take about 5–20 minutes and is anonymous. We will be accepting submissions for the next two weeks (until the 19th of December), and we will write up our findings afterwards on [blog.rust-lang.org]. You can also check out [last year’s results][2021 survey].
+Completing this survey should take about 5–20 minutes and is anonymous. We will be accepting submissions for the next two weeks (until the 19th of December), and we will share our findings on [blog.rust-lang.org] sometime in early 2023. You can also check out [last year’s results][2021 survey].
+
+We're happy to be offering the survey in the following languages. If you speak multiple languages, please pick one.
 
 - [English]
 - [Simplified Chinese]
