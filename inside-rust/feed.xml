@@ -10,8 +10,30 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-12-05T18:08:44+00:00</updated>
+    <updated>2022-12-12T21:05:21+00:00</updated>
 
+    
+    <entry>
+        <title>1.66.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/12/12/1.66.0-prerelease.html" type="text/html" title="1.66.0 pre-release testing" />
+        <published>2022-12-12T00:00:00+00:00</published>
+        <updated>2022-12-12T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/12/12/1.66.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/12/12/1.66.0-prerelease.html">&lt;p&gt;The 1.66.0 pre-release is ready for testing. The release is scheduled for
+December 15. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1660-2022-12-15&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2022-12-12/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2022-12-12/index.html&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-66-0-pre-release-testing/17966&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The release team is also thinking about changes to our pre-release process:
+we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Release automation</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Please welcome The 8472 to the Library team</title>
@@ -731,28 +753,6 @@ or one of his many (often WASI or I/O related) contributions to the Rust standar
 
         <author>
             <name>Mara Bos</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>1.63.0 pre-release testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/08/09/1.63.0-prerelease.html" type="text/html" title="1.63.0 pre-release testing" />
-        <published>2022-08-09T00:00:00+00:00</published>
-        <updated>2022-08-09T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/08/09/1.63.0-prerelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/08/09/1.63.0-prerelease.html">&lt;p&gt;The 1.63.0 pre-release is ready for testing. The release is scheduled for
-August 11. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1630-2022-08-11&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2022-08-09/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2022-08-09/index.html&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-63-0-pre-release-testing/17152&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The release team is also thinking about changes to our pre-release process:
-we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Release automation</name>
         </author>
     </entry>
     
