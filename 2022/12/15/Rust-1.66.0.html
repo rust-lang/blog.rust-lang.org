@@ -104,15 +104,11 @@ enum Bar {
     A,
     B,
     C = 42,
+    D,
 }
 </code></pre>
-<p>Here the <code>Bar</code> enum is guaranteed to have the same layout as <code>u8</code>. Each variant will use either the specified discriminant value or default to starting with 0.</p>
-<pre><code class="language-rust">assert_eq!(0, Bar::A as u8);
-assert_eq!(1, Bar::B as u8);
-assert_eq!(42, Bar::C as u8);
-</code></pre>
-<p>You could even add fields to enums with <code>#[repr(Int)]</code>, and they would be laid out in a predictable way. Previously, however, you could not use these features together. That meant that making <code>Foo::C</code>'s discriminant equal to 42 as above would be harder to achieve. You would need to add 41 hidden variants in between as a workaround with implicit discriminants!</p>
-<p>Starting in Rust 1.66.0, the above example compiles, allowing you to use explicit discriminants on any enum with a <code>#[repr(Int)]</code> attribute.</p>
+<p>Here the <code>Bar</code> enum is guaranteed to have the same layout as <code>u8</code>. In addition, the <code>Bar::C</code> variant is guaranteed to have a discriminant of 42. Variants without explicitly-specified values will have discriminants that are automatically assigned according to their order in the source code, so <code>Bar::A</code> will have a discriminant of 0, <code>Bar::B</code> will have a discriminant of 1, and <code>Bar::D</code> will have a discriminant of 43. Without this feature, the only way to set the explicit value of <code>Bar::C</code> would be to add 41 unnecessary variants before it!</p>
+<p>Note: whereas for field-less enums it is possible to inspect a discriminant via <code>as</code> casting (e.g. <code>Bar::C as u8</code>), Rust provides no language-level way to access the raw discriminant of an enum with fields. Instead, currently unsafe code must be used to inspect the discriminant of an enum with fields. Since this feature is intended for use with cross-language FFI where unsafe code is already necessary, this should hopefully not be too much of an extra burden. In the meantime, if all you need is an opaque handle to the discriminant, please see the <code>std::mem::discriminant</code> function.</p>
 <h3><a href="#corehintblack_box" aria-hidden="true" class="anchor" id="corehintblack_box"></a><code>core::hint::black_box</code></h3>
 <p>When benchmarking or examining the machine code produced by a compiler, it's often useful to prevent optimizations from occurring in certain places. In the following example, the function <code>push_cap</code> executes <code>Vec::push</code> 4 times in a loop:</p>
 <pre><code class="language-rust">fn push_cap(v: &amp;mut Vec&lt;i32&gt;) {

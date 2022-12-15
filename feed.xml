@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-12-15T16:12:38+00:00</updated>
+    <updated>2022-12-15T22:57:52+00:00</updated>
 
     
     <entry>
@@ -52,15 +52,11 @@ enum Bar {
     A,
     B,
     C &#x3D; 42,
+    D,
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here the &lt;code&gt;Bar&lt;/code&gt; enum is guaranteed to have the same layout as &lt;code&gt;u8&lt;/code&gt;. Each variant will use either the specified discriminant value or default to starting with 0.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;assert_eq!(0, Bar::A as u8);
-assert_eq!(1, Bar::B as u8);
-assert_eq!(42, Bar::C as u8);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You could even add fields to enums with &lt;code&gt;#[repr(Int)]&lt;/code&gt;, and they would be laid out in a predictable way. Previously, however, you could not use these features together. That meant that making &lt;code&gt;Foo::C&lt;/code&gt;&#x27;s discriminant equal to 42 as above would be harder to achieve. You would need to add 41 hidden variants in between as a workaround with implicit discriminants!&lt;/p&gt;
-&lt;p&gt;Starting in Rust 1.66.0, the above example compiles, allowing you to use explicit discriminants on any enum with a &lt;code&gt;#[repr(Int)]&lt;/code&gt; attribute.&lt;/p&gt;
+&lt;p&gt;Here the &lt;code&gt;Bar&lt;/code&gt; enum is guaranteed to have the same layout as &lt;code&gt;u8&lt;/code&gt;. In addition, the &lt;code&gt;Bar::C&lt;/code&gt; variant is guaranteed to have a discriminant of 42. Variants without explicitly-specified values will have discriminants that are automatically assigned according to their order in the source code, so &lt;code&gt;Bar::A&lt;/code&gt; will have a discriminant of 0, &lt;code&gt;Bar::B&lt;/code&gt; will have a discriminant of 1, and &lt;code&gt;Bar::D&lt;/code&gt; will have a discriminant of 43. Without this feature, the only way to set the explicit value of &lt;code&gt;Bar::C&lt;/code&gt; would be to add 41 unnecessary variants before it!&lt;/p&gt;
+&lt;p&gt;Note: whereas for field-less enums it is possible to inspect a discriminant via &lt;code&gt;as&lt;/code&gt; casting (e.g. &lt;code&gt;Bar::C as u8&lt;/code&gt;), Rust provides no language-level way to access the raw discriminant of an enum with fields. Instead, currently unsafe code must be used to inspect the discriminant of an enum with fields. Since this feature is intended for use with cross-language FFI where unsafe code is already necessary, this should hopefully not be too much of an extra burden. In the meantime, if all you need is an opaque handle to the discriminant, please see the &lt;code&gt;std::mem::discriminant&lt;/code&gt; function.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#corehintblack_box&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;corehintblack_box&quot;&gt;&lt;/a&gt;&lt;code&gt;core::hint::black_box&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;When benchmarking or examining the machine code produced by a compiler, it&#x27;s often useful to prevent optimizations from occurring in certain places. In the following example, the function &lt;code&gt;push_cap&lt;/code&gt; executes &lt;code&gt;Vec::push&lt;/code&gt; 4 times in a loop:&lt;/p&gt;
 &lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn push_cap(v: &amp;amp;mut Vec&amp;lt;i32&amp;gt;) {
