@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.66.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.66.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.66.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.66.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.66.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 15, 2022 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.66.0. Rust is a
+programming language empowering everyone to build reliable and efficient
+software.</p>
+<p>If you have a previous version of Rust installed via rustup, you can get 1.66.0
+with:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get
+<code>rustup</code></a> from the appropriate page on
+our website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1660-2022-12-15">detailed release notes for
+1.66.0</a>
+on GitHub.</p>
+<p>If you'd like to help us out by testing future releases, you might consider
+updating locally to use the beta channel (<code>rustup default beta</code>) or the nightly
+channel (<code>rustup default nightly</code>). Please
+<a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you
+might come across!</p>
+<h2><a href="#whats-in-1660-stable" aria-hidden="true" class="anchor" id="whats-in-1660-stable"></a>What's in 1.66.0 stable</h2>
+<h3><a href="#explicit-discriminants-on-enums-with-fields" aria-hidden="true" class="anchor" id="explicit-discriminants-on-enums-with-fields"></a>Explicit discriminants on enums with fields</h3>
+<p>Enums with integer representations can now use explicit discriminants, even when they have fields.</p>
+<pre><code class="language-rust">#[repr(u8)]
+enum Foo {
+    A(u8),
+    B(i8),
+    C(bool) = 42,
+}
+</code></pre>
+<p>Previously, you could use explicit discriminants on enums with representations, but only if none of their variants had fields. Explicit discriminants are useful when passing values across language boundaries where the representation of the enum needs to match in both languages. For example,</p>
+<pre><code class="language-rust">#[repr(u8)]
+enum Bar {
+    A,
+    B,
+    C = 42,
+}
+</code></pre>
+<p>Here the <code>Bar</code> enum is guaranteed to have the same layout as <code>u8</code>. Each variant will use either the specified discriminant value or default to starting with 0.</p>
+<pre><code class="language-rust">assert_eq!(0, Bar::A as u8);
+assert_eq!(1, Bar::B as u8);
+assert_eq!(42, Bar::C as u8);
+</code></pre>
+<p>You could even add fields to enums with <code>#[repr(Int)]</code>, and they would be laid out in a predictable way. Previously, however, you could not use these features together. That meant that making <code>Foo::C</code>'s discriminant equal to 42 as above would be harder to achieve. You would need to add 41 hidden variants in between as a workaround with implicit discriminants!</p>
+<p>Starting in Rust 1.66.0, the above example compiles, allowing you to use explicit discriminants on any enum with a <code>#[repr(Int)]</code> attribute.</p>
+<h3><a href="#corehintblack_box" aria-hidden="true" class="anchor" id="corehintblack_box"></a><code>core::hint::black_box</code></h3>
+<p>When benchmarking or examining the machine code produced by a compiler, it's often useful to prevent optimizations from occurring in certain places. In the following example, the function <code>push_cap</code> executes <code>Vec::push</code> 4 times in a loop:</p>
+<pre><code class="language-rust">fn push_cap(v: &amp;mut Vec&lt;i32&gt;) {
+    for i in 0..4 {
+        v.push(i);
+    }
+}
+
+pub fn bench_push() -&gt; Duration { 
+    let mut v = Vec::with_capacity(4);
+    let now = Instant::now();
+    push_cap(&amp;mut v);
+    now.elapsed()
+}
+</code></pre>
+<p>If you inspect the optimized output of the compiler on x86_64, you'll notice that it looks rather short:</p>
+<pre><code class="language-asm">example::bench_push:
+  sub rsp, 24
+  call qword ptr [rip + std::time::Instant::now@GOTPCREL]
+  lea rdi, [rsp + 8]
+  mov qword ptr [rsp + 8], rax
+  mov dword ptr [rsp + 16], edx
+  call qword ptr [rip + std::time::Instant::elapsed@GOTPCREL]
+  add rsp, 24
+  ret
+</code></pre>
+<p>In fact, the entire function <code>push_cap</code> we wanted to benchmark has been optimized away!</p>
+<p>We can work around this using the newly stabilized <code>black_box</code> function. Functionally, <code>black_box</code> is not very interesting: it takes the value you pass it and passes it right back. Internally, however, the compiler treats <code>black_box</code> as a function that could do anything with its input and return any value (as its name implies).</p>
+<p>This is very useful for disabling optimizations like the one we see above. For example, we can hint to the compiler that the vector will actually be used for something after every iteration of the for loop.</p>
+<pre><code class="language-rust">use std::hint::black_box;
+
+fn push_cap(v: &amp;mut Vec&lt;i32&gt;) {
+    for i in 0..4 {
+        v.push(i);
+        black_box(v.as_ptr());
+    }
+}
+</code></pre>
+<p>Now we can find the unrolled for loop in our <a href="https://rust.godbolt.org/z/Ws1GGbY6Y">optimized assembly output</a>:</p>
+<pre><code class="language-asm">  mov dword ptr [rbx], 0
+  mov qword ptr [rsp + 8], rbx
+  mov dword ptr [rbx + 4], 1
+  mov qword ptr [rsp + 8], rbx
+  mov dword ptr [rbx + 8], 2
+  mov qword ptr [rsp + 8], rbx
+  mov dword ptr [rbx + 12], 3
+  mov qword ptr [rsp + 8], rbx
+</code></pre>
+<p>You can also see a side effect of calling <code>black_box</code> in this assembly output. The instruction <code>mov qword ptr [rsp + 8], rbx</code> is uselessly repeated after every iteration. This instruction writes the address <code>v.as_ptr()</code> as the first argument of the function, which is never actually called.</p>
+<p>Notice that the generated code is not at all concerned with the possibility of allocations introduced by the <code>push</code> call. This is because the compiler is still using the fact that we called <code>Vec::with_capacity(4)</code> in the <code>bench_push</code> function. You can play around with the placement of <code>black_box</code>, or try using it in multiple places, to see its effects on compiler optimizations.</p>
+<h3><a href="#cargo-remove" aria-hidden="true" class="anchor" id="cargo-remove"></a>cargo remove</h3>
+<p>In Rust 1.62.0 we introduced <code>cargo add</code>, a command line utility to add dependencies to your project. Now you can use <code>cargo remove</code> to remove dependencies.</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/proc_macro/struct.Span.html#method.source_text"><code>proc_macro::Span::source_text</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.u8.html#method.checked_add_signed"><code>u*::{checked_add_signed, overflowing_add_signed, saturating_add_signed, wrapping_add_signed}</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.i8.html#method.checked_add_unsigned"><code>i*::{checked_add_unsigned, overflowing_add_unsigned, saturating_add_unsigned, wrapping_add_unsigned}</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.i8.html#method.checked_sub_unsigned"><code>i*::{checked_sub_unsigned, overflowing_sub_unsigned, saturating_sub_unsigned, wrapping_sub_unsigned}</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/struct.BTreeSet.html#method.first"><code>BTreeSet::{first, last, pop_first, pop_last}</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/struct.BTreeMap.html#method.first_key_value"><code>BTreeMap::{first_key_value, last_key_value, first_entry, last_entry, pop_first, pop_last}</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/101768/">Add <code>AsFd</code> implementations for stdio lock types on WASI.</a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#impl-TryFrom%3CVec%3CT%2C%20Global%3E%3E-for-Box%3C%5BT%3B%20N%5D%2C%20Global%3E"><code>impl TryFrom&lt;Vec&lt;T&gt;&gt; for Box&lt;[T; N]&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/hint/fn.black_box.html"><code>core::hint::black_box</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.try_from_secs_f32"><code>Duration::try_from_secs_{f32,f64}</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.unzip"><code>Option::unzip</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/fd/index.html"><code>std::os::fd</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>There are other changes in the Rust 1.66 release, including:</p>
+<ul>
+<li>You can now use <code>..=X</code> ranges in patterns.</li>
+<li>Linux builds now optimize the rustc frontend and LLVM backend with LTO and BOLT, respectively, improving both runtime performance and memory usage.</li>
+</ul>
+<p>Check out everything that changed in
+<a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1660-2022-12-15">Rust</a>,
+<a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-166-2022-12-15">Cargo</a>,
+and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-166">Clippy</a>.</p>
+<h3><a href="#contributors-to-1660" aria-hidden="true" class="anchor" id="contributors-to-1660"></a>Contributors to 1.66.0</h3>
+<p>Many people came together to create Rust 1.66.0.
+We couldn't have done it without all of you.
+<a href="https://thanks.rust-lang.org/rust/1.66.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>

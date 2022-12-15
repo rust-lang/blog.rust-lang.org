@@ -10,8 +10,144 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2022-12-12T21:05:23+00:00</updated>
+    <updated>2022-12-15T16:12:38+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.66.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2022/12/15/Rust-1.66.0.html" type="text/html" title="Announcing Rust 1.66.0" />
+        <published>2022-12-15T00:00:00+00:00</published>
+        <updated>2022-12-15T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2022/12/15/Rust-1.66.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2022/12/15/Rust-1.66.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.66.0. Rust is a
+programming language empowering everyone to build reliable and efficient
+software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.66.0
+with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get
+&lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on
+our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1660-2022-12-15&quot;&gt;detailed release notes for
+1.66.0&lt;/a&gt;
+on GitHub.&lt;/p&gt;
+&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider
+updating locally to use the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly
+channel (&lt;code&gt;rustup default nightly&lt;/code&gt;). Please
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you
+might come across!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1660-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1660-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.66.0 stable&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#explicit-discriminants-on-enums-with-fields&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;explicit-discriminants-on-enums-with-fields&quot;&gt;&lt;/a&gt;Explicit discriminants on enums with fields&lt;/h3&gt;
+&lt;p&gt;Enums with integer representations can now use explicit discriminants, even when they have fields.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[repr(u8)]
+enum Foo {
+    A(u8),
+    B(i8),
+    C(bool) &#x3D; 42,
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Previously, you could use explicit discriminants on enums with representations, but only if none of their variants had fields. Explicit discriminants are useful when passing values across language boundaries where the representation of the enum needs to match in both languages. For example,&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[repr(u8)]
+enum Bar {
+    A,
+    B,
+    C &#x3D; 42,
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here the &lt;code&gt;Bar&lt;/code&gt; enum is guaranteed to have the same layout as &lt;code&gt;u8&lt;/code&gt;. Each variant will use either the specified discriminant value or default to starting with 0.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;assert_eq!(0, Bar::A as u8);
+assert_eq!(1, Bar::B as u8);
+assert_eq!(42, Bar::C as u8);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You could even add fields to enums with &lt;code&gt;#[repr(Int)]&lt;/code&gt;, and they would be laid out in a predictable way. Previously, however, you could not use these features together. That meant that making &lt;code&gt;Foo::C&lt;/code&gt;&#x27;s discriminant equal to 42 as above would be harder to achieve. You would need to add 41 hidden variants in between as a workaround with implicit discriminants!&lt;/p&gt;
+&lt;p&gt;Starting in Rust 1.66.0, the above example compiles, allowing you to use explicit discriminants on any enum with a &lt;code&gt;#[repr(Int)]&lt;/code&gt; attribute.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#corehintblack_box&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;corehintblack_box&quot;&gt;&lt;/a&gt;&lt;code&gt;core::hint::black_box&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;When benchmarking or examining the machine code produced by a compiler, it&#x27;s often useful to prevent optimizations from occurring in certain places. In the following example, the function &lt;code&gt;push_cap&lt;/code&gt; executes &lt;code&gt;Vec::push&lt;/code&gt; 4 times in a loop:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn push_cap(v: &amp;amp;mut Vec&amp;lt;i32&amp;gt;) {
+    for i in 0..4 {
+        v.push(i);
+    }
+}
+
+pub fn bench_push() -&amp;gt; Duration { 
+    let mut v &#x3D; Vec::with_capacity(4);
+    let now &#x3D; Instant::now();
+    push_cap(&amp;amp;mut v);
+    now.elapsed()
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you inspect the optimized output of the compiler on x86_64, you&#x27;ll notice that it looks rather short:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-asm&quot;&gt;example::bench_push:
+  sub rsp, 24
+  call qword ptr [rip + std::time::Instant::now@GOTPCREL]
+  lea rdi, [rsp + 8]
+  mov qword ptr [rsp + 8], rax
+  mov dword ptr [rsp + 16], edx
+  call qword ptr [rip + std::time::Instant::elapsed@GOTPCREL]
+  add rsp, 24
+  ret
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In fact, the entire function &lt;code&gt;push_cap&lt;/code&gt; we wanted to benchmark has been optimized away!&lt;/p&gt;
+&lt;p&gt;We can work around this using the newly stabilized &lt;code&gt;black_box&lt;/code&gt; function. Functionally, &lt;code&gt;black_box&lt;/code&gt; is not very interesting: it takes the value you pass it and passes it right back. Internally, however, the compiler treats &lt;code&gt;black_box&lt;/code&gt; as a function that could do anything with its input and return any value (as its name implies).&lt;/p&gt;
+&lt;p&gt;This is very useful for disabling optimizations like the one we see above. For example, we can hint to the compiler that the vector will actually be used for something after every iteration of the for loop.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::hint::black_box;
+
+fn push_cap(v: &amp;amp;mut Vec&amp;lt;i32&amp;gt;) {
+    for i in 0..4 {
+        v.push(i);
+        black_box(v.as_ptr());
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can find the unrolled for loop in our &lt;a href&#x3D;&quot;https://rust.godbolt.org/z/Ws1GGbY6Y&quot;&gt;optimized assembly output&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-asm&quot;&gt;  mov dword ptr [rbx], 0
+  mov qword ptr [rsp + 8], rbx
+  mov dword ptr [rbx + 4], 1
+  mov qword ptr [rsp + 8], rbx
+  mov dword ptr [rbx + 8], 2
+  mov qword ptr [rsp + 8], rbx
+  mov dword ptr [rbx + 12], 3
+  mov qword ptr [rsp + 8], rbx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also see a side effect of calling &lt;code&gt;black_box&lt;/code&gt; in this assembly output. The instruction &lt;code&gt;mov qword ptr [rsp + 8], rbx&lt;/code&gt; is uselessly repeated after every iteration. This instruction writes the address &lt;code&gt;v.as_ptr()&lt;/code&gt; as the first argument of the function, which is never actually called.&lt;/p&gt;
+&lt;p&gt;Notice that the generated code is not at all concerned with the possibility of allocations introduced by the &lt;code&gt;push&lt;/code&gt; call. This is because the compiler is still using the fact that we called &lt;code&gt;Vec::with_capacity(4)&lt;/code&gt; in the &lt;code&gt;bench_push&lt;/code&gt; function. You can play around with the placement of &lt;code&gt;black_box&lt;/code&gt;, or try using it in multiple places, to see its effects on compiler optimizations.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#cargo-remove&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargo-remove&quot;&gt;&lt;/a&gt;cargo remove&lt;/h3&gt;
+&lt;p&gt;In Rust 1.62.0 we introduced &lt;code&gt;cargo add&lt;/code&gt;, a command line utility to add dependencies to your project. Now you can use &lt;code&gt;cargo remove&lt;/code&gt; to remove dependencies.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/proc_macro/struct.Span.html#method.source_text&quot;&gt;&lt;code&gt;proc_macro::Span::source_text&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.u8.html#method.checked_add_signed&quot;&gt;&lt;code&gt;u*::{checked_add_signed, overflowing_add_signed, saturating_add_signed, wrapping_add_signed}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i8.html#method.checked_add_unsigned&quot;&gt;&lt;code&gt;i*::{checked_add_unsigned, overflowing_add_unsigned, saturating_add_unsigned, wrapping_add_unsigned}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i8.html#method.checked_sub_unsigned&quot;&gt;&lt;code&gt;i*::{checked_sub_unsigned, overflowing_sub_unsigned, saturating_sub_unsigned, wrapping_sub_unsigned}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/struct.BTreeSet.html#method.first&quot;&gt;&lt;code&gt;BTreeSet::{first, last, pop_first, pop_last}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/struct.BTreeMap.html#method.first_key_value&quot;&gt;&lt;code&gt;BTreeMap::{first_key_value, last_key_value, first_entry, last_entry, pop_first, pop_last}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/101768/&quot;&gt;Add &lt;code&gt;AsFd&lt;/code&gt; implementations for stdio lock types on WASI.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#impl-TryFrom%3CVec%3CT%2C%20Global%3E%3E-for-Box%3C%5BT%3B%20N%5D%2C%20Global%3E&quot;&gt;&lt;code&gt;impl TryFrom&amp;lt;Vec&amp;lt;T&amp;gt;&amp;gt; for Box&amp;lt;[T; N]&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/hint/fn.black_box.html&quot;&gt;&lt;code&gt;core::hint::black_box&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.try_from_secs_f32&quot;&gt;&lt;code&gt;Duration::try_from_secs_{f32,f64}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.unzip&quot;&gt;&lt;code&gt;Option::unzip&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/fd/index.html&quot;&gt;&lt;code&gt;std::os::fd&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.66 release, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You can now use &lt;code&gt;..&#x3D;X&lt;/code&gt; ranges in patterns.&lt;/li&gt;
+&lt;li&gt;Linux builds now optimize the rustc frontend and LLVM backend with LTO and BOLT, respectively, improving both runtime performance and memory usage.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Check out everything that changed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1660-2022-12-15&quot;&gt;Rust&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-166-2022-12-15&quot;&gt;Cargo&lt;/a&gt;,
+and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-166&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1660&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1660&quot;&gt;&lt;/a&gt;Contributors to 1.66.0&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.66.0.
+We couldn&#x27;t have done it without all of you.
+&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.66.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Launching the 2022 State of Rust Survey</title>
@@ -1349,41 +1485,6 @@ supports older kernels.&lt;/li&gt;
 
         <author>
             <name>Nikita Popov</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.62.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/07/19/Rust-1.62.1.html" type="text/html" title="Announcing Rust 1.62.1" />
-        <published>2022-07-19T00:00:00+00:00</published>
-        <updated>2022-07-19T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/07/19/Rust-1.62.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/07/19/Rust-1.62.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.62.1. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.62.1 with:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1621-2022-07-19&quot;&gt;detailed release notes for 1.62.1&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1621-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1621-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.62.1 stable&lt;/h2&gt;
-&lt;p&gt;Rust 1.62.1 addresses a few recent regressions in the compiler and standard
-library, and also mitigates a CPU vulnerability on Intel SGX.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/98608&quot;&gt;The compiler fixed unsound function coercions involving &lt;code&gt;impl Trait&lt;/code&gt; return types.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/98890&quot;&gt;The compiler fixed an incremental compilation bug with &lt;code&gt;async fn&lt;/code&gt; lifetimes.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/98950&quot;&gt;Windows added a fallback for overlapped I/O in synchronous reads and writes.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/98126&quot;&gt;The &lt;code&gt;x86_64-fortanix-unknown-sgx&lt;/code&gt; target added a mitigation for the
-MMIO stale data vulnerability&lt;/a&gt;, advisory &lt;a href&#x3D;&quot;https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-00615.html&quot;&gt;INTEL-SA-00615&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1621&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1621&quot;&gt;&lt;/a&gt;Contributors to 1.62.1&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.62.1. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.62.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
