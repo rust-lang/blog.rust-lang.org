@@ -6,7 +6,7 @@ description: "Modernizing Android support in Rust"
 ---
 
 We are pleased to announce that Android platform support in Rust will be
-modernized in Rust 1.66 as we update the target NDK from r17 to r25.  As a
+modernized in Rust 1.68 as we update the target NDK from r17 to r25.  As a
 consequence the minimum supported API level will increase from 15 (Ice Cream
 Sandwich) to 19 (KitKat).
 
