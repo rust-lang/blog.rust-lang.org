@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-01-10T16:41:02+00:00</updated>
+    <updated>2023-01-10T21:31:39+00:00</updated>
 
     
     <entry>
@@ -54,6 +54,14 @@ public key during the first connection. Instead, Cargo will show an error
 message detailing how to add that public key to the list of trusted keys. Note
 that this might break your automated builds if the hosts you clone dependencies
 or indexes from are not already trusted.&lt;/p&gt;
+&lt;p&gt;If you can&#x27;t upgrade to Rust 1.66.1 yet, we recommend configuring Cargo to use
+the &lt;code&gt;git&lt;/code&gt; CLI instead of its built-in git support. That way, all git network
+operations will be performed by the &lt;code&gt;git&lt;/code&gt; CLI, which is not affected by this
+vulnerability. You can do so by adding this snippet to your &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/config.html&quot;&gt;Cargo
+configuration file&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[net]
+git-fetch-with-cli &#x3D; true
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#acknowledgments&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgments&quot;&gt;&lt;/a&gt;Acknowledgments&lt;/h2&gt;
 &lt;p&gt;Thanks to the Julia Security Team for disclosing this to us according to our
 &lt;a href&#x3D;&quot;https://www.rust-lang.org/policies/security&quot;&gt;security policy&lt;/a&gt;!&lt;/p&gt;
@@ -62,6 +70,7 @@ this issue. Thanks to Eric Huss and Weihang Lo for writing and reviewing the
 patch, Pietro Albini for coordinating the disclosure and writing this advisory,
 and Josh Stone, Josh Triplett and Jacob Finkelman for advising during the
 disclosure.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Updated on 2023-01-10 at 21:30 UTC to include additional mitigations.&lt;/em&gt;&lt;/p&gt;
 </content>
 
         <author>
