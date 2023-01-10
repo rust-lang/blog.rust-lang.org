@@ -10,8 +10,64 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-01-09T16:02:55+00:00</updated>
+    <updated>2023-01-10T16:35:12+00:00</updated>
 
+    
+    <entry>
+        <title>Security advisory for Cargo (CVE-2022-46176)</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2023/01/10/cve-2022-46176.html" type="text/html" title="Security advisory for Cargo (CVE-2022-46176)" />
+        <published>2023-01-10T00:00:00+00:00</published>
+        <updated>2023-01-10T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2023/01/10/cve-2022-46176.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2023/01/10/cve-2022-46176.html">&lt;blockquote&gt;
+&lt;p&gt;This is a cross-post of &lt;a href&#x3D;&quot;https://groups.google.com/g/rustlang-security-announcements/c/v5cFFJ7T0RY&quot;&gt;the official security advisory&lt;/a&gt;. The
+official advisory contains a signed version with our PGP key, as well.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The Rust Security Response WG was notified that Cargo did not perform SSH host
+key verification when cloning indexes and dependencies via SSH. An attacker
+could exploit this to perform man-in-the-middle (MITM) attacks.&lt;/p&gt;
+&lt;p&gt;This vulnerability has been assigned CVE-2022-46176.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#overview&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;overview&quot;&gt;&lt;/a&gt;Overview&lt;/h2&gt;
+&lt;p&gt;When an SSH client establishes communication with a server, to prevent MITM
+attacks the client should check whether it already communicated with that
+server in the past and what the server&#x27;s public key was back then. If the key
+changed since the last connection, the connection must be aborted as a MITM
+attack is likely taking place.&lt;/p&gt;
+&lt;p&gt;It was discovered that Cargo never implemented such checks, and performed no
+validation on the server&#x27;s public key, leaving Cargo users vulnerable to MITM
+attacks.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#affected-versions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;affected-versions&quot;&gt;&lt;/a&gt;Affected Versions&lt;/h2&gt;
+&lt;p&gt;All Rust versions containing Cargo before 1.66.1 are vulnerable.&lt;/p&gt;
+&lt;p&gt;Note that even if you don&#x27;t explicitly use SSH for alternate registry indexes
+or crate dependencies, you might be affected by this vulnerability if you have
+configured git to replace HTTPS connections to GitHub with SSH (through git&#x27;s
+&lt;a href&#x3D;&quot;https://git-scm.com/docs/git-config#Documentation/git-config.txt-urlltbasegtinsteadOf&quot;&gt;&lt;code&gt;url.&amp;lt;base&amp;gt;.insteadOf&lt;/code&gt;&lt;/a&gt; setting), as that&#x27;d cause you to clone the
+crates.io index through SSH.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#mitigations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;mitigations&quot;&gt;&lt;/a&gt;Mitigations&lt;/h2&gt;
+&lt;p&gt;We will be releasing Rust 1.66.1 today, 2023-01-10, changing Cargo to check the
+SSH host key and abort the connection if the server&#x27;s public key is not already
+trusted. We recommend everyone to upgrade as soon as possible.&lt;/p&gt;
+&lt;p&gt;Patch files for Rust 1.66.0 are also available &lt;a href&#x3D;&quot;https://github.com/rust-lang/wg-security-response/tree/main/patches/CVE-2022-46176&quot;&gt;here&lt;/a&gt; for custom-built
+toolchains.&lt;/p&gt;
+&lt;p&gt;For the time being Cargo will not ask the user whether to trust a server&#x27;s
+public key during the first connection. Instead, Cargo will show an error
+message detailing how to add that public key to the list of trusted keys. Note
+that this might break your automated builds if the hosts you clone dependencies
+or indexes from are not already trusted.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#acknowledgments&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgments&quot;&gt;&lt;/a&gt;Acknowledgments&lt;/h2&gt;
+&lt;p&gt;Thanks to the Julia Security Team for disclosing this to us according to our
+&lt;a href&#x3D;&quot;https://git-scm.com/docs/git-config#Documentation/git-config.txt-urlltbasegtinsteadOf&quot;&gt;security policy&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;We also want to thank the members of the Rust project who contributed to fixing
+this issue. Thanks to Eric Huss and Weihang Lo for writing and reviewing the
+patch, Pietro Albini for coordinating the disclosure and writing this advisory,
+and Josh Stone, Josh Triplett and Jacob Finkelman for advising during the
+disclosure.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Security Response WG</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Updating the Android NDK in Rust 1.68</title>
@@ -1353,59 +1409,6 @@ We couldn&#x27;t have done it without all of you.
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Non-lexical lifetimes (NLL) fully stable</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/08/05/nll-by-default.html" type="text/html" title="Non-lexical lifetimes (NLL) fully stable" />
-        <published>2022-08-05T00:00:00+00:00</published>
-        <updated>2022-08-05T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/08/05/nll-by-default.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/08/05/nll-by-default.html">&lt;p&gt;As of Rust 1.63 (releasing next week), the &amp;quot;non-lexical lifetimes&amp;quot; (NLL) work will be enabled by default. NLL is the second iteration of Rust&#x27;s borrow checker. The &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2094-nll.html&quot;&gt;RFC&lt;/a&gt; actually does quite a nice job of highlighting some of the motivating examples. &amp;quot;But,&amp;quot; I hear you saying, &amp;quot;wasn&#x27;t NLL included in &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html&quot;&gt;Rust 2018&lt;/a&gt;?&amp;quot; And yes, yes it was! But at that time, NLL was only enabled for Rust 2018 code, while Rust 2015 code ran in &amp;quot;migration mode&amp;quot;. When in &amp;quot;migration mode,&amp;quot; the compiler would run both the old &lt;em&gt;and&lt;/em&gt; the new borrow checker and compare the results. This way, we could give warnings for older code that should never have compiled in the first place; we could also limit the impact of any bugs in the new code. Over time, we have limited migration mode to be closer and closer to just running the new-style borrow checker: in the next release, that process completes, and all Rust code will be checked with NLL.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#how-does-removing-the-old-borrow-checker-affect-users&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-does-removing-the-old-borrow-checker-affect-users&quot;&gt;&lt;/a&gt;How does removing the old borrow checker affect users?&lt;/h2&gt;
-&lt;p&gt;At this point, we have almost completely merged &amp;quot;migration mode&amp;quot; and &amp;quot;regular mode&amp;quot;, so switching to NLL will have very little impact on the user experience. A number of diagnostics changed, mostly for the better -- &lt;a href&#x3D;&quot;https://jackh726.github.io/rust/2022/06/10/nll-stabilization.html&quot;&gt;Jack Huey gives the full details in his blog post&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#credit-where-credit-is-due&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;credit-where-credit-is-due&quot;&gt;&lt;/a&gt;Credit where credit is due&lt;/h2&gt;
-&lt;p&gt;The work to remove the old borrow checker has been going on for years. It&#x27;s been a long, tedious, and largely thankless process. We&#x27;d like to take a moment to highlight the various people involved and make sure they are recognized for their hard work:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/jackh726/&quot;&gt;Jack Huey&lt;/a&gt; (&lt;a href&#x3D;&quot;https://github.com/sponsors/jackh726&quot;&gt;sponsorship page&lt;/a&gt;), for driving the final details of stabilization (diagnostics, reconciling differences in behavior).&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/marmeladema&quot;&gt;Élie Roudninski&lt;/a&gt;, for refactoring the diagnostics code and doing the painstaking work (along with Jack) of checking each regressed case, one by one.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/Aaron1011&quot;&gt;Aaron Hill&lt;/a&gt;, for numerous improvements to bring NLL diagnostics up to par.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/matthewjasper&quot;&gt;Matthew Jasper&lt;/a&gt;, for reconciling errors around higher-ranked lifetimes and other core diagnostics improvements.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/lqd&quot;&gt;Rémy Rakic&lt;/a&gt;, for rebasing Matthew&#x27;s PR as well as doing other independent diagnostics work.&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/chrisvittal&quot;&gt;Christopher Vittal&lt;/a&gt;, for removing &amp;quot;compare&amp;quot; mode (don&#x27;t ask).&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/centril&quot;&gt;Centril&lt;/a&gt;, for doing a lot of early work reconciling migration mode and the regular mode.&lt;/li&gt;
-&lt;li&gt;And of course the members of the NLL working group (myself, &lt;a href&#x3D;&quot;https://github.com/pnkfelix&quot;&gt;Felix Klock&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/spastorino&quot;&gt;Santiago Pastorino&lt;/a&gt; (&lt;a href&#x3D;&quot;https://github.com/sponsors/spastorino&quot;&gt;sponsorship page&lt;/a&gt;), &lt;a href&#x3D;&quot;https://github.com/matthewjasper&quot;&gt;Matthew Jasper&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/davidtwco&quot;&gt;David Wood&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/lqd&quot;&gt;Rémy Rakic&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/nashenas88&quot;&gt;Paul Daniel Faria&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/nnethercote&quot;&gt;Nick Nethercote&lt;/a&gt;) who delivered the feature in the first place.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Jack&#x27;s blog post includes a &lt;a href&#x3D;&quot;https://jackh726.github.io/rust/2022/06/10/nll-stabilization.html#how-did-we-get-here&quot;&gt;detailed narrative&lt;/a&gt; of all the work involved if you&#x27;d like more details! It&#x27;s a fun read.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#looking-forward-what-can-we-expect-for-the-borrow-checker-of-the-future&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;looking-forward-what-can-we-expect-for-the-borrow-checker-of-the-future&quot;&gt;&lt;/a&gt;Looking forward: what can we expect for the &amp;quot;borrow checker of the future&amp;quot;?&lt;/h2&gt;
-&lt;p&gt;The next frontier for Rust borrow checking is taking the &lt;a href&#x3D;&quot;https://github.com/rust-lang/polonius&quot;&gt;polonius&lt;/a&gt; project and moving it from research experiment to production code. Polonius is a next-generation version of the borrow checker that was &amp;quot;spun off&amp;quot; from the main NLL effort in 2018, as we were getting NLL ready to ship in production. Its most important contribution is fixing a known limitation of the borrow checker, demonstrated by the following example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn last_or_push&amp;lt;&#x27;a&amp;gt;(vec: &amp;amp;&#x27;a mut Vec&amp;lt;String&amp;gt;) -&amp;gt; &amp;amp;&#x27;a String {
-    if let Some(s) &#x3D; vec.last() { // borrows vec
-        // returning s here forces vec to be borrowed
-        // for the rest of the function, even though it
-        // shouldn&#x27;t have to be
-        return s; 
-    }
-    
-    // Because vec is borrowed, this call to vec.push gives
-    // an error!
-    vec.push(&amp;quot;&amp;quot;.to_string()); // ERROR
-    vec.last().unwrap()
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This example doesn&#x27;t compile today (&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;stable&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;517ac32f0aab076faa32b9065783bbb4&quot;&gt;try it for yourself&lt;/a&gt;), though there&#x27;s not a good reason for that. You can often workaround the problem by editing the code to introduce a redundant &lt;code&gt;let&lt;/code&gt; (&lt;a href&#x3D;&quot;https://play.rust-lang.org/?version&#x3D;stable&amp;amp;mode&#x3D;debug&amp;amp;edition&#x3D;2021&amp;amp;gist&#x3D;d9b25963e83201902ecf5c02d79cbc13&quot;&gt;as shown in this example&lt;/a&gt;), but with polonius, it will compile as is. If you&#x27;d like to learn more about how polonius (and the existing borrow checker) works&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, you can &lt;a href&#x3D;&quot;https://www.youtube.com/watch?v&#x3D;_agDeiWek8w&quot;&gt;watch my talk from Rust Belt Rust&lt;/a&gt;.&lt;/p&gt;
-&lt;section class&#x3D;&quot;footnotes&quot;&gt;
-&lt;ol&gt;
-&lt;li id&#x3D;&quot;fn1&quot;&gt;
-&lt;p&gt;Or where the name &amp;quot;polonius&amp;quot; comes from! &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
-</content>
-
-        <author>
-            <name>Niko Matsakis</name>
         </author>
     </entry>
     
