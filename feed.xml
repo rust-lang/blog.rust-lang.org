@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-01-10T21:31:39+00:00</updated>
+    <updated>2023-01-11T00:01:35+00:00</updated>
 
     
     <entry>
@@ -75,6 +75,35 @@ disclosure.&lt;/p&gt;
 
         <author>
             <name>The Rust Security Response WG</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Announcing Rust 1.66.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2023/01/10/Rust-1.66.1.html" type="text/html" title="Announcing Rust 1.66.1" />
+        <published>2023-01-10T00:00:00+00:00</published>
+        <updated>2023-01-10T00:00:01+00:00</updated>
+        <id>https://blog.rust-lang.org/2023/01/10/Rust-1.66.1.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2023/01/10/Rust-1.66.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.66.1. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.66.1 with:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
+from the appropriate page on our website, and check out the
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1661-2023-01-10&quot;&gt;detailed release notes for 1.66.1&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1661-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1661-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.66.1 stable&lt;/h2&gt;
+&lt;p&gt;Rust 1.66.1 fixes Cargo not verifying SSH host keys when cloning dependencies
+or registry indexes with SSH. This security vulnerability is tracked as
+&lt;a href&#x3D;&quot;https://www.cve.org/CVERecord?id&#x3D;CVE-2022-46176&quot;&gt;CVE-2022-46176&lt;/a&gt;, and you &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2023/01/10/cve-2022-46176.html&quot;&gt;can find more details in the advisory&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1661&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1661&quot;&gt;&lt;/a&gt;Contributors to 1.66.1&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.66.1. We couldn&#x27;t have done it
+without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.66.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
         </author>
     </entry>
     
@@ -1252,172 +1281,6 @@ disclosure was coordinated by Pietro Albini and Josh Stone.&lt;/p&gt;
 
         <author>
             <name>The Rust Security Response WG</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.63.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/08/11/Rust-1.63.0.html" type="text/html" title="Announcing Rust 1.63.0" />
-        <published>2022-08-11T00:00:00+00:00</published>
-        <updated>2022-08-11T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/08/11/Rust-1.63.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/08/11/Rust-1.63.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.63.0. Rust is a programming language
-empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.63.0 with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1630-2022-08-11&quot;&gt;detailed release notes for 1.63.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider updating locally to use
-the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly channel (&lt;code&gt;rustup default nightly&lt;/code&gt;).
-Please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you might come across!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1630-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1630-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.63.0 stable&lt;/h2&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#scoped-threads&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;scoped-threads&quot;&gt;&lt;/a&gt;Scoped threads&lt;/h3&gt;
-&lt;p&gt;Rust code could launch new threads with &lt;code&gt;std::thread::spawn&lt;/code&gt; since 1.0, but this
-function bounds its closure with &lt;code&gt;&#x27;static&lt;/code&gt;. Roughly, this means that threads
-currently must have ownership of any arguments passed into their closure; you
-can&#x27;t pass borrowed data into a thread. In cases where the threads are expected
-to exit by the end of the function (by being &lt;code&gt;join()&lt;/code&gt;&#x27;d), this isn&#x27;t strictly
-necessary and can require workarounds like placing the data in an &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Arc.html&quot;&gt;&lt;code&gt;Arc&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Now, with 1.63.0, the standard library is adding &lt;em&gt;scoped&lt;/em&gt; threads, which allow
-spawning a thread borrowing from the local stack frame. The
-&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/thread/fn.scope.html&quot;&gt;&lt;code&gt;std::thread::scope&lt;/code&gt;&lt;/a&gt; API provides the necessary guarantee that any spawned threads
-will have exited prior to itself returning, which allows for safely borrowing
-data. Here&#x27;s an example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;let mut a &#x3D; vec![1, 2, 3];
-let mut x &#x3D; 0;
-
-std::thread::scope(|s| {
-    s.spawn(|| {
-        println!(&amp;quot;hello from the first scoped thread&amp;quot;);
-        // We can borrow &#x60;a&#x60; here.
-        dbg!(&amp;amp;a);
-    });
-    s.spawn(|| {
-        println!(&amp;quot;hello from the second scoped thread&amp;quot;);
-        // We can even mutably borrow &#x60;x&#x60; here,
-        // because no other threads are using it.
-        x +&#x3D; a[0] + a[2];
-    });
-    println!(&amp;quot;hello from the main thread&amp;quot;);
-});
-
-// After the scope, we can modify and access our variables again:
-a.push(4);
-assert_eq!(x, a.len());
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#rust-ownership-for-raw-file-descriptorshandles-io-safety&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rust-ownership-for-raw-file-descriptorshandles-io-safety&quot;&gt;&lt;/a&gt;Rust ownership for raw file descriptors/handles (I/O Safety)&lt;/h3&gt;
-&lt;p&gt;Previously, Rust code working with platform APIs taking raw file descriptors (on
-unix-style platforms) or handles (on Windows) would typically work directly with
-a platform-specific representation of the descriptor (for example, a &lt;code&gt;c_int&lt;/code&gt;, or the alias &lt;code&gt;RawFd&lt;/code&gt;).
-For Rust bindings to such native APIs, the type system then failed to encode
-whether the API would take ownership of the file descriptor (e.g., &lt;code&gt;close&lt;/code&gt;) or
-merely borrow it (e.g., &lt;code&gt;dup&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;Now, Rust provides wrapper types such as &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/unix/io/struct.BorrowedFd.html&quot;&gt;&lt;code&gt;BorrowedFd&lt;/code&gt;&lt;/a&gt; and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/unix/io/struct.OwnedFd.html&quot;&gt;&lt;code&gt;OwnedFd&lt;/code&gt;&lt;/a&gt;, which are marked as
-&lt;code&gt;#[repr(transparent)]&lt;/code&gt;, meaning that &lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt; bindings can directly take
-these types to encode the ownership semantics. See the stabilized APIs section
-for the full list of wrapper types stabilized in 1.63, currently, they are
-available on cfg(unix) platforms, Windows, and WASI.&lt;/p&gt;
-&lt;p&gt;We recommend that new APIs use these types instead of the previous type aliases
-(like &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/unix/io/type.RawFd.html&quot;&gt;&lt;code&gt;RawFd&lt;/code&gt;&lt;/a&gt;).&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#const-mutex-rwlock-condvar-initialization&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-mutex-rwlock-condvar-initialization&quot;&gt;&lt;/a&gt;&lt;code&gt;const&lt;/code&gt; Mutex, RwLock, Condvar initialization&lt;/h3&gt;
-&lt;p&gt;The &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Condvar.html#method.new&quot;&gt;&lt;code&gt;Condvar::new&lt;/code&gt;&lt;/a&gt;, &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html#method.new&quot;&gt;&lt;code&gt;Mutex::new&lt;/code&gt;&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.RwLock.html#method.new&quot;&gt;&lt;code&gt;RwLock::new&lt;/code&gt;&lt;/a&gt; functions are now
-callable in &lt;code&gt;const&lt;/code&gt; contexts, which allows avoiding the use of crates like
-&lt;code&gt;lazy_static&lt;/code&gt; for creating global statics with &lt;code&gt;Mutex&lt;/code&gt;, &lt;code&gt;RwLock&lt;/code&gt;, or &lt;code&gt;Condvar&lt;/code&gt;
-values. This builds on the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/06/30/Rust-1.62.0.html#thinner-faster-mutexes-on-linux&quot;&gt;work in 1.62&lt;/a&gt; to enable thinner and faster mutexes
-on Linux.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#turbofish-for-generics-in-functions-with-impl-trait&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;turbofish-for-generics-in-functions-with-impl-trait&quot;&gt;&lt;/a&gt;Turbofish for generics in functions with &lt;code&gt;impl Trait&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;For a function signature like &lt;code&gt;fn foo&amp;lt;T&amp;gt;(value: T, f: impl Copy)&lt;/code&gt;, it was an
-error to specify the concrete type of &lt;code&gt;T&lt;/code&gt; via turbofish: &lt;code&gt;foo::&amp;lt;u32&amp;gt;(3, 3)&lt;/code&gt;
-would fail with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;error[E0632]: cannot provide explicit generic arguments when &#x60;impl Trait&#x60; is used in argument position
- --&amp;gt; src/lib.rs:4:11
-  |
-4 |     foo::&amp;lt;u32&amp;gt;(3, 3);
-  |           ^^^ explicit generic argument not allowed
-  |
-  &#x3D; note: see issue #83701 &amp;lt;https://github.com/rust-lang/rust/issues/83701&amp;gt; for more information
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In 1.63, this restriction is relaxed, and the explicit type of the generic can be specified.
-However, the &lt;code&gt;impl Trait&lt;/code&gt; parameter, despite desugaring to a generic, remains
-opaque and cannot be specified via turbofish.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#non-lexical-lifetimes-migration-complete&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;non-lexical-lifetimes-migration-complete&quot;&gt;&lt;/a&gt;Non-lexical lifetimes migration complete&lt;/h3&gt;
-&lt;p&gt;As detailed in &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/08/05/nll-by-default.html&quot;&gt;this blog post&lt;/a&gt;, we&#x27;ve fully removed the previous lexical borrow checker
-from rustc across all editions, fully enabling the non-lexical, new, version of the borrow
-checker. Since the borrow checker doesn&#x27;t affect the output of rustc, this won&#x27;t change
-the behavior of any programs, but it completes a long-running migration (started in the
-initial stabilization of NLL for the 2018 edition) to deliver the full benefits of the new
-borrow checker across all editions of Rust. For most users, this change will bring
-slightly better diagnostics for some borrow checking errors, but will not otherwise impact
-which code they can write.&lt;/p&gt;
-&lt;p&gt;You can read more about non-lexical lifetimes in &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html#non-lexical-lifetimes&quot;&gt;this section of the 2018 edition announcement&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
-&lt;p&gt;The following methods and trait implementations are now stabilized:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/array/fn.from_fn.html&quot;&gt;&lt;code&gt;array::from_fn&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.into_pin&quot;&gt;&lt;code&gt;Box::into_pin&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/struct.BinaryHeap.html#method.try_reserve&quot;&gt;&lt;code&gt;BinaryHeap::try_reserve&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/alloc/collections/binary_heap/struct.BinaryHeap.html#method.try_reserve_exact&quot;&gt;&lt;code&gt;BinaryHeap::try_reserve_exact&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/struct.OsString.html#method.try_reserve&quot;&gt;&lt;code&gt;OsString::try_reserve&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/struct.OsString.html#method.try_reserve_exact&quot;&gt;&lt;code&gt;OsString::try_reserve_exact&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/path/struct.PathBuf.html#method.try_reserve&quot;&gt;&lt;code&gt;PathBuf::try_reserve&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/path/struct.PathBuf.html#method.try_reserve_exact&quot;&gt;&lt;code&gt;PathBuf::try_reserve_exact&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/path/struct.Path.html#method.try_exists&quot;&gt;&lt;code&gt;Path::try_exists&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cell/struct.Ref.html#method.filter_map&quot;&gt;&lt;code&gt;Ref::filter_map&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cell/struct.RefMut.html#method.filter_map&quot;&gt;&lt;code&gt;RefMut::filter_map&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ptr/struct.NonNull.html#method.len&quot;&gt;&lt;code&gt;NonNull::&amp;lt;[T]&amp;gt;::len&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/borrow/trait.ToOwned.html#method.clone_into&quot;&gt;&lt;code&gt;ToOwned::clone_into&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/struct.Ipv6Addr.html#method.to_ipv4_mapped&quot;&gt;&lt;code&gt;Ipv6Addr::to_ipv4_mapped&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/unix/io/trait.AsFd.html&quot;&gt;&lt;code&gt;unix::io::AsFd&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/unix/io/struct.BorrowedFd.html&quot;&gt;&lt;code&gt;unix::io::BorrowedFd&amp;lt;&#x27;fd&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/unix/io/struct.OwnedFd.html&quot;&gt;&lt;code&gt;unix::io::OwnedFd&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsHandle.html&quot;&gt;&lt;code&gt;windows::io::AsHandle&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/struct.BorrowedHandle.html&quot;&gt;&lt;code&gt;windows::io::BorrowedHandle&amp;lt;&#x27;handle&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/struct.OwnedHandle.html&quot;&gt;&lt;code&gt;windows::io::OwnedHandle&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/struct.HandleOrInvalid.html&quot;&gt;&lt;code&gt;windows::io::HandleOrInvalid&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/struct.HandleOrNull.html&quot;&gt;&lt;code&gt;windows::io::HandleOrNull&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/struct.InvalidHandleError.html&quot;&gt;&lt;code&gt;windows::io::InvalidHandleError&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/struct.NullHandleError.html&quot;&gt;&lt;code&gt;windows::io::NullHandleError&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsSocket.html&quot;&gt;&lt;code&gt;windows::io::AsSocket&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/struct.BorrowedSocket.html&quot;&gt;&lt;code&gt;windows::io::BorrowedSocket&amp;lt;&#x27;handle&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/struct.OwnedSocket.html&quot;&gt;&lt;code&gt;windows::io::OwnedSocket&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/thread/fn.scope.html&quot;&gt;&lt;code&gt;thread::scope&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/thread/fn.scope.html&quot;&gt;&lt;code&gt;thread::Scope&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/thread/struct.ScopedJoinHandle.html&quot;&gt;&lt;code&gt;thread::ScopedJoinHandle&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These APIs are now usable in const contexts:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/array/fn.from_ref.html&quot;&gt;&lt;code&gt;array::from_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/slice/fn.from_ref.html&quot;&gt;&lt;code&gt;slice::from_ref&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/intrinsics/fn.copy.html&quot;&gt;&lt;code&gt;intrinsics::copy&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/intrinsics/fn.copy_nonoverlapping.html&quot;&gt;&lt;code&gt;intrinsics::copy_nonoverlapping&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.copy_to&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::copy_to&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.copy_to_nonoverlapping&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::copy_to_nonoverlapping&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.copy_to-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::copy_to&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.copy_to_nonoverlapping-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::copy_to_nonoverlapping&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.copy_from&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::copy_from&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.copy_from_nonoverlapping&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::copy_from_nonoverlapping&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/str/fn.from_utf8.html&quot;&gt;&lt;code&gt;str::from_utf8&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/str/struct.Utf8Error.html#method.error_len&quot;&gt;&lt;code&gt;Utf8Error::error_len&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/str/struct.Utf8Error.html#method.valid_up_to&quot;&gt;&lt;code&gt;Utf8Error::valid_up_to&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Condvar.html#method.new&quot;&gt;&lt;code&gt;Condvar::new&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html#method.new&quot;&gt;&lt;code&gt;Mutex::new&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.RwLock.html#method.new&quot;&gt;&lt;code&gt;RwLock::new&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;p&gt;There are other changes in the Rust 1.63.0 release. Check out what changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1630-2022-08-11&quot;&gt;Rust&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-163-2022-08-11&quot;&gt;Cargo&lt;/a&gt;,
-and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-163&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1630&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1630&quot;&gt;&lt;/a&gt;Contributors to 1.63.0&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.63.0.
-We couldn&#x27;t have done it without all of you.
-&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.63.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
