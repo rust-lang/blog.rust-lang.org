@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Officially announcing the types team | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Officially announcing the types team | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Officially announcing the types team | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Officially announcing the types team" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Officially announcing the types team</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 20, 2023 &middot; Jack Huey
+     on behalf of <a href="https://github.com/rust-lang/types-team">The Types Team</a> 
+    </div>
+
+    <div class="post">
+      <p>Oh hey, it's <a href="https://blog.rust-lang.org/inside-rust/2022/09/29/announcing-the-rust-style-team.html">another</a> new team announcement. But I will admit: if you follow the <a href="https://github.com/rust-lang/rfcs/pull/3254">RFCs repository</a>, the <a href="https://rust-lang.zulipchat.com/#narrow/stream/144729-t-types">Rust zulip</a>, or were particularly observant on the <a href="https://blog.rust-lang.org/2022/10/28/gats-stabilization.html">GATs stabilization announcement post</a>, then this <em>might</em> not be a surprise for you. In fact, this &quot;new&quot; team was officially established at the end of May last year.</p>
+<p>There are a few reasons why we're sharing this post now (as opposed to months before or...never). First, the team finished a three day in-person/hybrid meetup at the beginning of December and we'd like to share the purpose and outcomes of that meeting. Second, posting this announcement now is just around 7 months of activity and we'd love to share what we've accomplished within this time. Lastly, as we enter into the new year of 2023, it's a great time to share a bit of where we expect to head in this year and beyond.</p>
+<h2><a href="#background---how-did-we-get-here" aria-hidden="true" class="anchor" id="background---how-did-we-get-here"></a>Background - How did we get here?</h2>
+<p>Rust has grown significantly in the last several years, in many metrics: users, contributors, features, tooling, documentation, and more. As it has grown, the list of <em>things</em> people want to do with it has grown just as quickly. On top of powerful and ergonomic features, the demand for powerful tools such as IDEs or learning tools for the language has become more and more apparent. New compilers (frontend and backend) are being written. And, to top it off, we want Rust to continue to maintain one of its core design principles: safety.</p>
+<p>All of these points highlights some key needs: to be able to <em>know</em> how the Rust language should work, to be able to <em>extend</em> the language and compiler with new features in a relatively painless way, to be able to <em>hook into</em> the compiler and be able to query important information about programs, and finally to be able to <em>maintain</em> the language and compiler in an amenable and robust way. Over the years, considerable effort has been put into these needs, but we haven't <em>quite</em> achieved these key requirements.</p>
+<p>To extend a little, and put some numbers to paper, there are currently around 220 open tracking issues for <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AC-tracking-issue+label%3AT-lang">language</a>, <a href="https://github.com/rust-lang/rust/issues?page=1&amp;q=is%3Aopen+is%3Aissue+label%3AC-tracking-issue+label%3AT-compiler">compiler</a>, or <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AC-tracking-issue+label%3AT-types">types</a> features that have been accepted but are not completely implemented, of which about half are at least 3 years old and many are several years older than that. Many of these tracking issues have been open for so long not solely because of bandwidth, but because working on these features is hard, in large part because putting the relevant semantics in context of the larger language properly is hard; it's not easy for anyone to take a look at them and know what needs to be done to finish them. It's clear that we still need better foundations for making changes to the language and compiler.</p>
+<p>Another number that might shock you: there are currently 62 open <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AI-unsound">unsoundness issues</a>. This sounds <em>much</em> scarier than it really is: nearly all of these are edges of the compiler and language that have been found by people who specifically poke and prod to find them; in practice these will not pop up in the programs you write. Nevertheless, these are edges we want to iron out.</p>
+<h2><a href="#the-types-team" aria-hidden="true" class="anchor" id="the-types-team"></a>The Types Team</h2>
+<p>Moving forward, let's talk about a smaller subset of Rust rather than the entire language and compiler. Specifically, the parts relevant here include the type checker - loosely, defining the semantics and implementation of how variables are assigned their type, trait solving - deciding what traits are defined for which types, and borrow checking - proving that Rust's ownership model always holds. All of these can be thought of cohesively as the &quot;type system&quot;.</p>
+<p>As of <a href="https://rust-lang.github.io/rfcs/3254-types-team.html">RFC 3254</a>, the above subset of the Rust language and compiler are under the purview of the types team. So, what exactly does this entail?</p>
+<p>First, since around 2018, there existed the &quot;traits working group&quot;, which had the primary goal of creating a performant and extensible definition and implementation of Rust's trait system (including the <a href="https://github.com/rust-lang/chalk">Chalk</a> trait-solving library). As time progressed, and particularly in the latter half of 2021 into 2022, the working group's influence and responsibility naturally expanded to the type checker and borrow checker too - they are actually strongly linked and its often hard to disentangle the trait solver from the other two. So, in some ways, the types team essentially subsumes the former traits working group.</p>
+<p>Another relevant working group is the <a href="https://rust-lang.github.io/compiler-team/working-groups/polonius/">polonius working group</a>, which primarily works on the design and implementation of the <a href="https://github.com/rust-lang/polonius">Polonius</a> borrow-checking library. While the working group itself will remain, it is now also under the purview of the types team.</p>
+<p>Now, although the traits working group was essentially folded into the types team, the creation of a <em>team</em> has some benefits. First, like the <a href="https://blog.rust-lang.org/inside-rust/2022/09/29/announcing-the-rust-style-team.html">style team</a> (and many other teams), the types team is not a <em>top level</em> team. It actually, currently uniquely, has <em>two</em> parent teams: the lang and compiler teams. Both teams have decided to delegate decision-making authority covering the type system.</p>
+<p>The language team has delegated the part of the <em>design</em> of type system. However, importantly, this design covers less of the &quot;feel&quot; of the features of type system and more of how it &quot;works&quot;, with the expectation that the types team will advise and bring concerns about new language extensions where required. (This division is not strongly defined, but the expectation is generally to err on the side of more caution). The compiler team, on the other hand, has delegated the responsibility of defining and maintaining the implementation of the trait system.</p>
+<p>One particular responsibility that has traditionally been shared between the language and compiler teams is the assessment and fixing of soundness bugs in the language related to the type system. These often arise from implementation-defined language semantics and have in the past required synchronization and input from both lang and compiler teams. In the majority of cases, the types team now has the authority to assess and implement fixes without the direct input from either parent team. This applies, importantly, for fixes that are <em>technically</em> backwards-incompatible. While fixing safety holes is <a href="https://blog.rust-lang.org/2014/10/30/Stability.html#what-are-the-stability-caveats">not covered under Rust's backwards compatibility guarantees</a>, these decisions are not taken lightly and generally require team signoff and are assessed for potential ecosystem breakage with <a href="https://github.com/rust-lang/crater">crater</a>. However, this can now be done under one team rather than requiring the coordination of two separate teams, which makes closing these soundness holes easier (I will discuss this more later.)</p>
+<h2><a href="#formalizing-the-rust-type-system" aria-hidden="true" class="anchor" id="formalizing-the-rust-type-system"></a>Formalizing the Rust type system</h2>
+<p>As mentioned above, a nearly essential element of the growing Rust language is to know how it <em>should</em> work (and to have this well documented). There are relatively recent efforts pushing for a Rust specification (like <a href="https://github.com/ferrocene/specification">Ferrocene</a> or <a href="https://github.com/rust-lang/rfcs/pull/3355">this open RFC</a>), but it would be hugely beneficial to have a formalized definition of the type system, regardless of its potential integration into a more general specification. In fact the existence of a formalization would allow a better assessment of potential new features or soundness holes, without the subtle intricacies of the rest of the compiler.</p>
+<p>As far back as 2015, not long after the release of Rust 1.0, an experimental Rust trait solver called Chalk began to be written. The core idea of Chalk is to translate the surface syntax and ideas of the Rust trait system (e.g. traits, impls, where clauses) into a set of logic rules that can be solved using a Prolog-like solver. Then, once this set of logic and solving reaches parity with the trait solver within the compiler itself, the plan was to simply replace the existing solver. In the meantime (and continuing forward), this new solver could be used by other tools, such as rust-analyzer, where it is used today.</p>
+<p>Now, given Chalk's age and the promises it had been hoped to be able to deliver on, you might be tempted to ask the question &quot;Chalk, when?&quot; - and plenty have. However, we've learned over the years that Chalk is likely not the correct long-term solution for Rust, for a few reasons. First, as mentioned a few times in this post, the trait solver is only but a part of a larger type system; and modeling how the entire type system fits together gives a more complete picture of its details than trying to model the parts separately. Second, the needs of the <em>compiler</em> are quite different than the needs of a <em>formalization</em>: the compiler needs performant code with the ability to track information required for powerful diagnostics; a good formalization is one that is not only complete, but also easy to maintain, read, and understand. Over the years, Chalk has tried to have both and it has so far ended up with neither.</p>
+<p>So, what are the plans going forward? Well, first the types team has begun working on a formalization of the Rust typesystem, currently coined <a href="https://github.com/nikomatsakis/a-mir-formality/">a-mir-formality</a>. An initial experimental phase was written using <a href="https://redex.racket-lang.org/">PLT redex</a>, but a Rust port is in-progress. There's lot to do still (including modeling more of the trait system, writing an RFC, and moving it into the rust-lang org), but it's already showing great promise.</p>
+<p>Second, we've begun an <a href="https://github.com/rust-lang/types-team/issues/58">initiative</a> for writing a new trait solver in-tree. This new trait solver is more limited in scope than a-mir-formality (i.e. not intending to encompass the entire type system). In many ways, it's expected to be quite similar to Chalk, but leverage bits and pieces of the existing compiler and trait solver in order to make the transition as painless as possible. We do expect it to be pulled out-of-tree at some point, so it's being written to be as modular as possible. During out types team meetup earlier this month, we were able to hash out what we expect the structure of the solver to look like, and we've already gotten that <a href="https://github.com/rust-lang/rust/pull/105661">merged into the source tree</a>.</p>
+<p>Finally, Chalk is no longer going to be a focus of the team. In the short term, it still may remain a useful tool for experimentation. As said before, rust-analyzer uses Chalk as its trait solver. It's also able to be used in rustc under an unstable feature flag. Thus, new ideas currently could be implemented in Chalk and battle-tested in practice. However, this benefit will likely not last long as a-mir-formality and the new in-tree trait solver because more usable and their interfaces becomes more accessible. All this is not to say that Chalk has been a failure. In fact, Chalk has taught us a lot about how to think about the Rust trait solver in a logical way and the current Rust trait solver has evolved over time to more closely model Chalk, even if incompletely. We expect to still support Chalk in some capacity for the time being, for rust-analyzer and potentially for those interested in experimenting with it.</p>
+<h2><a href="#closing-soundness-holes" aria-hidden="true" class="anchor" id="closing-soundness-holes"></a>Closing soundness holes</h2>
+<p>As brought up previously, a big benefit of creating a new types team with delegated authority from both the lang and compiler teams is the authority to assess and fix unsoundness issues mostly independently. However, a secondary benefit has actually just been better procedures and knowledge-sharing that allows the members of the team to get on the same page for what soundness issues there are, why they exist, and what it takes to fix them. For example, during our meetup earlier this month, we were able to go through the full list of soundness issues (focusing on those relevant to the type system), identify their causes, and discuss expected fixes (though most require prerequisite work discussed in the previous section).</p>
+<p>Additionally, the team has already made a number of soundness fixes and has a few more in-progress. I won't go into details, but instead am just opting to putting them in list form:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/99217">Consider unnormalized types for implied bounds</a>: landed in 1.65, no regressions found</li>
+<li><a href="https://github.com/rust-lang/rust/pull/95474">Neither require nor imply lifetime bounds on opaque type for well formedness</a>: landed in 1.66, no regressions found</li>
+<li><a href="https://github.com/rust-lang/rust/pull/105575">Add <code>IMPLIED_BOUNDS_ENTAILMENT</code> lint</a>: landing in 1.68, future-compat lint because many regressions found (of unsoundness)</li>
+<li><a href="https://github.com/rust-lang/rust/pull/105102">Check ADT fields for copy implementations considering regions</a>: currently open, ready to land</li>
+<li><a href="https://github.com/rust-lang/rust/pull/100046">Register wf obligation before normalizing in wfcheck</a>: currently open, regressions found, needs additional work</li>
+<li><a href="https://github.com/rust-lang/rust/pull/100555">Handle projections as uncovered types during coherence check</a>: currently open, some regressions found, future-compat lint suggested</li>
+<li><a href="https://github.com/rust-lang/rust/pull/101947">Don't normalize in AstConv</a>: landing in 1.68, 1 small regression found</li>
+</ul>
+<p>As you can see, we're making progress on closing soundness holes. These sometimes break code, as assessed by crater. However, we do what we can to mitigate this, even when the code being broken is technically unsound.</p>
+<h2><a href="#new-features" aria-hidden="true" class="anchor" id="new-features"></a>New features</h2>
+<p>While it's not technically under the types team purview to <em>propose and design</em> new features (these fall more under lang team proper), there are a few instances where the team is heavily involved (if not driving) feature design.</p>
+<p>These can be small additions, which are close to bug fixes. For example, <a href="https://github.com/rust-lang/rust/pull/104765">this PR</a> allows more permutations of lifetime outlives bounds than what compiled previously. Or, these PRs can be larger, more impactful changes, that don't fit under a &quot;feature&quot;, but instead are tied heavily to the type system. For example, <a href="https://github.com/rust-lang/rust/pull/100386">this PR</a> makes the <code>Sized</code> trait coinductive, which effectively makes more cyclic bounds compile (see <a href="https://github.com/rust-lang/rust/pull/100386/files#diff-7efe7060b98871be57269858d3abd0c9a6f877a6c65fd0fba54ef122cd2d5281">this test</a> for an example).</p>
+<p>There are also a few larger features and feature sets that have been driven by the types team, largely due to the heavy intersection with the type system. Here are a few examples:</p>
+<ul>
+<li>Generic associated types (GATs) - The feature long predates the types team and is the only one in this list that has actually been stabilized so far. But due to heavy type system interaction, the team was able to navigate the issues that came on its final path to stabilization. See <a href="https://blog.rust-lang.org/2022/10/28/gats-stabilization.html">this blog post</a> for much more details.</li>
+<li>Type alias impl trait (TAITs) - Implementing this feature <em>properly</em> requires a thorough understanding of the type checker. This is close to stabilization. For more information, see <a href="https://github.com/rust-lang/rust/issues/63063">the tracking issue</a>.</li>
+<li>Trait upcasting - This one is relatively small, but has some type system interaction. Again, see <a href="https://github.com/rust-lang/rust/issues/65991">the tracking issue</a> for an explanation of the feature.</li>
+<li>Negative impls - This too predates the types team, but has recently been worked on by the team. There are still open bugs and soundness issues, so this is a bit away from stabilization, but you can follow <a href="https://github.com/rust-lang/rust/issues/68318">here</a>.</li>
+<li>Return position impl traits in traits (RPITITs) and async functions in traits (AFITs) - These have only recently been possible with advances made with GATs and TAITs. They are currently tracked under a single <a href="https://github.com/rust-lang/rust/issues/91611">tracking issue</a>.</li>
+</ul>
+<h2><a href="#roadmap" aria-hidden="true" class="anchor" id="roadmap"></a>Roadmap</h2>
+<p>To conclude, let's put all of this onto a roadmap. As always, goals are best when they are specific, measurable, and time-bound. For this, we've decided to split our goals into roughly 4 stages: summer of 2023, end-of-year 2023, end-of-year 2024, and end-of-year 2027 (6 months, 1 year, 2 years, and 5 years). Overall, our goals are to build a platform to maintain a sound, testable, and documented type system that can scale to new features need by the Rust language. Furthermore, we want to cultivate a sustainable and open-source team (the types team) to maintain that platform and type system.</p>
+<p>A quick note: some of the things here have not quite been explained in this post, but they've been included in the spirit of completeness. So, without further ado:</p>
+<p><strong>6 months</strong></p>
+<ul>
+<li>The work-in-progress new trait solver should be testable</li>
+<li>a-mir-formality should be testable against the Rust test suite</li>
+<li>Both TAITs and RPITITs/AFITs should be stabilized or on the path to stabilization.</li>
+</ul>
+<p><strong>EOY 2023</strong></p>
+<ul>
+<li>New trait solver replaces part of existing trait solver, but not used everywhere</li>
+<li>We have an onboarding plan (for the team) and documentation for the new trait solver</li>
+<li>a-mir-formality is integrated into the language design process</li>
+</ul>
+<p><strong>EOY 2024</strong></p>
+<ul>
+<li>New trait solver shared by rustc and rust-analyzer
+<ul>
+<li>Milestone: Type IR shared</li>
+</ul>
+</li>
+<li>We have a clean API for extensible trait errors that is available at least internally</li>
+<li>&quot;Shiny features&quot;
+<ul>
+<li>Polonius in a usable state</li>
+<li>Implied bounds in higher-ranked trait bounds (see <a href="https://github.com/rust-lang/rust/issues/90696">this issue</a> for an example of an issue this would fix)</li>
+<li>Being able to use <code>impl Trait</code> basically anywhere</li>
+</ul>
+</li>
+<li>Potential edition boundary changes</li>
+</ul>
+<p><strong>EOY 2027</strong></p>
+<ul>
+<li>(Types) unsound issues resolved</li>
+<li>Most language extensions are easy to do; large extensions are feasible</li>
+<li>a-mir-formality passes 99.9% of the Rust test suite</li>
+</ul>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>It's an exciting time for Rust. As its userbase and popularity grows, the language does as well. And as the language grows, the need for a sustainable type system to support the language becomes ever more apparent. The project has formed this new types team to address this need and hopefully, in this post, you can see that the team has so far accomplished a lot. And we expect that trend to only continue over the next many years.</p>
+<p>As always, if you'd like to get involved or have questions, please drop by the <a href="https://rust-lang.zulipchat.com/#narrow/stream/144729-t-types">Rust zulip</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>
