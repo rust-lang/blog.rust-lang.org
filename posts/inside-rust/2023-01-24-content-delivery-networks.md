@@ -6,7 +6,7 @@ team: The Rust Infrastructure Team <https://www.rust-lang.org/governance/teams/i
 ---
 
 Over the past few weeks, the [Infrastructure Team] has been working on a setting
-up a second [Content Delivery Network] for releases and crates.
+up a second [Content Delivery Network] (CDN) for releases and crates.
 
 ## What is changing
 
@@ -24,8 +24,8 @@ domains.
 
 ## Timeline
 
-We are planning to start the rollout of the new CDN on Tuesday, January 24rd,
-with `static.crates.io`.
+We are starting the rollout of the new CDN today, on January 24th, with
+`static.crates.io`.
 
 The rollout will happen very gradually over a period of time. We will start to
 send a small percentage of traffic through [Fastly](https://www.fastly.com/),
