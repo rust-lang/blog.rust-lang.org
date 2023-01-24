@@ -24,7 +24,7 @@ domains.
 
 ## Timeline
 
-We are starting the rollout of the new CDN today, on January 24th, with
+We are starting the rollout of the new CDN tomorrow, on January 25th, with
 `static.crates.io`.
 
 The rollout will happen very gradually over a period of time. We will start to
