@@ -10,8 +10,45 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-01-24T13:01:00+00:00</updated>
+    <updated>2023-01-24T16:08:45+00:00</updated>
 
+    
+    <entry>
+        <title>Diversifying our Content Delivery Networks</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/01/24/content-delivery-networks.html" type="text/html" title="Diversifying our Content Delivery Networks" />
+        <published>2023-01-24T00:00:00+00:00</published>
+        <updated>2023-01-24T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2023/01/24/content-delivery-networks.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/01/24/content-delivery-networks.html">&lt;p&gt;Over the past few weeks, the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/infra&quot;&gt;Infrastructure Team&lt;/a&gt; has been working on a setting
+up a second &lt;a href&#x3D;&quot;https://en.wikipedia.org/wiki/Content_delivery_network&quot;&gt;Content Delivery Network&lt;/a&gt; (CDN) for releases and crates.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-changing&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-changing&quot;&gt;&lt;/a&gt;What is changing&lt;/h2&gt;
+&lt;p&gt;Rust releases (&lt;code&gt;static.rust-lang.org&lt;/code&gt;) and crates (&lt;code&gt;static.crates.io&lt;/code&gt;) will be
+served through both &lt;a href&#x3D;&quot;https://aws.amazon.com/cloudfront/&quot;&gt;AWS CloudFront&lt;/a&gt; and
+&lt;a href&#x3D;&quot;https://www.fastly.com&quot;&gt;Fastly&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is a transparent change to the infrastructure that doesn&#x27;t require users or
+developers to take any action. We expect no downtime for Rust users as part of
+the migration.&lt;/p&gt;
+&lt;p&gt;This also covers only the CDNs for releases (&lt;code&gt;static.rust-lang.org&lt;/code&gt;) and
+crates.io (&lt;code&gt;static.crates.io&lt;/code&gt;), no changes are planned for the rest of Rust&#x27;s
+domains.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#timeline&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;timeline&quot;&gt;&lt;/a&gt;Timeline&lt;/h2&gt;
+&lt;p&gt;We are starting the rollout of the new CDN tomorrow, on January 25th, with
+&lt;code&gt;static.crates.io&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The rollout will happen very gradually over a period of time. We will start to
+send a small percentage of traffic through &lt;a href&#x3D;&quot;https://www.fastly.com/&quot;&gt;Fastly&lt;/a&gt;,
+while observing the performance and reliability of the new network. As we gain
+confidence, we will slowly increase the amount of traffic.&lt;/p&gt;
+&lt;p&gt;Once &lt;code&gt;static.crates.io&lt;/code&gt; has been deployed, we will start working on
+&lt;code&gt;static.rust-lang.org&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#report-issues&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;report-issues&quot;&gt;&lt;/a&gt;Report issues&lt;/h2&gt;
+&lt;p&gt;If something &lt;em&gt;does&lt;/em&gt; break, please let the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/infra&quot;&gt;Infrastructure Team&lt;/a&gt; know on
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/t-infra&quot;&gt;#t-infra on Zulip&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Jan David Nose</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.66.0 pre-release testing</title>
@@ -733,26 +770,6 @@ decided yet.&lt;/p&gt;
 
         <author>
             <name>David Wood</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Please welcome Dan to Library Contributors</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/08/10/libs-contributors.html" type="text/html" title="Please welcome Dan to Library Contributors" />
-        <published>2022-08-10T00:00:00+00:00</published>
-        <updated>2022-08-10T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/08/10/libs-contributors.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/08/10/libs-contributors.html">&lt;p&gt;Please welcome &lt;a href&#x3D;&quot;https://github.com/sunfishcode&quot;&gt;Dan Gohman&lt;/a&gt; to the
-&lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/library#libs-contributors&quot;&gt;Library Contributors&lt;/a&gt; group!&lt;/p&gt;
-&lt;p&gt;You might know Dan from his work on
-&lt;a href&#x3D;&quot;https://wasmtime.dev/&quot;&gt;Wasmtime&lt;/a&gt;, WASI, the recent &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/3128-io-safety.html&quot;&gt;I/O Safety RFC&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://crates.io/crates/cap-std&quot;&gt;cap-std&lt;/a&gt;, &lt;a href&#x3D;&quot;https://crates.io/crates/rustix&quot;&gt;rustix&lt;/a&gt;,
-or one of his many (often WASI or I/O related) contributions to the Rust standard library.&lt;/p&gt;
-&lt;p&gt;Congratulations Dan, and thanks for everything you do!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Mara Bos</name>
         </author>
     </entry>
     
