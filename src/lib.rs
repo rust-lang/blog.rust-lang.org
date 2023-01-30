@@ -11,7 +11,7 @@ use serde_json::json;
 use std::convert::AsRef;
 use std::error::Error;
 use std::fs::{self, File};
-use std::io::Write;
+use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 
 struct Generator<'a> {
@@ -224,17 +224,10 @@ impl<'a> Generator<'a> {
     }
 
     fn copy_static_files(&self) -> Result<(), Box<dyn Error>> {
-        use fs_extra::dir::{self, CopyOptions};
-
-        let mut options = CopyOptions::new();
-        options.overwrite = true;
-        options.copy_inside = true;
-
-        dir::copy("static/fonts", &self.out_directory, &options)?;
-        dir::copy("static/images", &self.out_directory, &options)?;
-        dir::copy("static/styles", &self.out_directory, &options)?;
-        dir::copy("static/scripts", &self.out_directory, &options)?;
-
+        copy_dir("static/fonts", &self.out_directory)?;
+        copy_dir("static/images", &self.out_directory)?;
+        copy_dir("static/styles", &self.out_directory)?;
+        copy_dir("static/scripts", &self.out_directory)?;
         Ok(())
     }
 
@@ -249,6 +242,26 @@ impl<'a> Generator<'a> {
         self.handlebars.render_to_write(template, &data, file)?;
         Ok(())
     }
+}
+
+fn copy_dir(source: impl AsRef<Path>, dest: impl AsRef<Path>) -> Result<(), io::Error> {
+    let source = source.as_ref();
+    let dest = dest.as_ref().join(source.file_name().unwrap());
+    assert!(source.is_dir());
+    fn copy_inner(source: &Path, dest: &Path) -> Result<(), io::Error> {
+        fs::create_dir_all(dest)?;
+        for entry in fs::read_dir(source)? {
+            let entry = entry?;
+            let new_dest = dest.join(entry.file_name());
+            if entry.file_type()?.is_dir() {
+                copy_inner(&entry.path(), &new_dest)?;
+            } else {
+                fs::copy(&entry.path(), &new_dest)?;
+            }
+        }
+        Ok(())
+    }
+    copy_inner(source, &dest)
 }
 
 pub fn main() -> Result<(), Box<dyn Error>> {
