@@ -71,7 +71,11 @@
     </div>
 
     <div class="post">
-      <p>The Cargo nightly <a href="https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#sparse-registry"><code>sparse-registry</code></a> feature is ready for testing. The
+      <blockquote>
+<p>Note: Sparse registry support has been stabilized for the 1.68 release.
+See <a href="../../../inside-rust/2023/01/30/cargo-sparse-protocol.html">Help test Cargo's new index protocol</a> for updated information.</p>
+</blockquote>
+<p>The Cargo nightly <a href="https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#sparse-registry"><code>sparse-registry</code></a> feature is ready for testing. The
 feature causes Cargo to access the crates.io index over HTTP, rather than git. It can
 provide a significant performance improvement, especially if the local copy of
 the git index is out-of-date or not yet cloned.</p>
