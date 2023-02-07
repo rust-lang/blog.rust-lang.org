@@ -10,8 +10,30 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-02-06T11:03:58+00:00</updated>
+    <updated>2023-02-07T13:20:34+00:00</updated>
 
+    
+    <entry>
+        <title>1.67.1 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/02/07/1.67.1-prerelease.html" type="text/html" title="1.67.1 pre-release testing" />
+        <published>2023-02-07T00:00:00+00:00</published>
+        <updated>2023-02-07T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2023/02/07/1.67.1-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/02/07/1.67.1-prerelease.html">&lt;p&gt;The 1.67.1 pre-release is ready for testing. The release is scheduled for
+February 09. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1671-2023-02-09&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2023-02-07/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2023-02-07/index.html&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-67-1-pre-release-testing/18289&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The release team is also thinking about changes to our pre-release process:
+we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Release automation</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Help test Cargo&#x27;s new index protocol</title>
@@ -477,76 +499,6 @@ default Rust style, and then begin introducing style improvements.&lt;/p&gt;
 
         <author>
             <name>Josh Triplett</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Rust Compiler Early October 2022 Steering Cycle</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/09/23/compiler-team-sep-oct-steering-cycle.html" type="text/html" title="Rust Compiler Early October 2022 Steering Cycle" />
-        <published>2022-09-23T00:00:00+00:00</published>
-        <updated>2022-09-23T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/09/23/compiler-team-sep-oct-steering-cycle.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/09/23/compiler-team-sep-oct-steering-cycle.html">&lt;p&gt;On &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings/topic/.5Bplanning.20meeting.5D.202022-09-23/near/300372578&quot;&gt;Friday, September 23rd&lt;/a&gt;, the Rust Compiler team had a planning meeting for the September/October 2022 steering cycle.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#t-compiler-june-steering-schedule&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;t-compiler-june-steering-schedule&quot;&gt;&lt;/a&gt;T-compiler June Steering Schedule&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Date&lt;/th&gt;
-&lt;th&gt;Meeting Id&lt;/th&gt;
-&lt;th&gt;Meeting Topic&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/event?action&#x3D;TEMPLATE&amp;amp;tmeid&#x3D;Mm9tM2VzOWszaWw0Z3RudWlhNzF0ZHMwbzMgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;2022-09-30&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/559&quot;&gt;compiler-team#559&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;2022 Q3 P-high review&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/event?action&#x3D;TEMPLATE&amp;amp;tmeid&#x3D;NnA2bWtoaGQ5NnVudGkwdnM5aWZ1YmpqNG0gNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;2022-10-07&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/544&quot;&gt;compiler-team#544&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Survey retrospective&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/event?action&#x3D;TEMPLATE&amp;amp;tmeid&#x3D;NW52ZGNhYzVrbWJxdG0yOTBpN2Q2ZmExaXIgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;2022-10-14&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/540&quot;&gt;compiler-team#540&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Dealing with disabled tests&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/event?action&#x3D;TEMPLATE&amp;amp;tmeid&#x3D;MDJyYnJ1cGFtdWR1c2lnNjFmcHJ2b3JlODFfMjAyMjEwMjFUMTQwMDAwWiA2dTVycnRjZTZscnR2MDdwZmkzZGFtZ2p1c0Bn&amp;amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&amp;amp;scp&#x3D;ALL&quot;&gt;2022-10-21&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;none&lt;/td&gt;
-&lt;td&gt;(planning for October/November cycle)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#details&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;details&quot;&gt;&lt;/a&gt;Details&lt;/h3&gt;
-&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
-it is going to use its scheduled steering and design meeting time over the next
-three Fridays.&lt;/p&gt;
-&lt;p&gt;On Friday, 30 September, we will do a quarterly &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/559&quot;&gt;review of the open P-high issues&lt;/a&gt;.
-pnkfelix will do some ahead of time work &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/131828-t-compiler/topic/reviewing.20P-high.20issues.202022.20.28Q3.29/near/300390068&quot;&gt;in zulip&lt;/a&gt;
-triaging
-some of the issues, and potentially prepare a meeting document summarizing the
-remainder, to maximize the quality of our synchronous in-meeting time.&lt;/p&gt;
-&lt;p&gt;On Friday, 7 October, we will do a &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/544&quot;&gt;retrospective&lt;/a&gt; on the 2022 T-compiler surveys
-that were used to drive the February ambitions post and the midyear update post.
-We will talk about the questions that were asked, what we wish had been asked,
-what value we got from the survey as it went, and what to do the same and/or
-differently in the future. (In principle, this meeting should inform the way
-that we drive the retrospective on how the year as a whole went for the compiler
-team.)&lt;/p&gt;
-&lt;p&gt;On Friday, 14 October, we will discuss how to &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/540&quot;&gt;deal with &amp;quot;disabled tests&amp;quot;&lt;/a&gt;:
-tests that are turned off at some point (e.g. due to failures in a component we
-do not control). We do not currently have any protocols in place to review such
-tests or decide when to try to re-enabling them.&lt;/p&gt;
-&lt;p&gt;On Friday, 21 October, we will hold our planning meeting for the next steering
-cycle in October and November.&lt;/p&gt;
-&lt;p&gt;Each meeting will run from 2pm to 3pm GMT, and will take place on the
-&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Felix Klock</name>
         </author>
     </entry>
     
