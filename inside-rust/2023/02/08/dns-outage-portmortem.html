@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>DNS Outage on 2023-01-25 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="DNS Outage on 2023-01-25 | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="DNS Outage on 2023-01-25 | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+<link rel="manifest" href="../../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../../inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="DNS Outage on 2023-01-25" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>DNS Outage on 2023-01-25</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 8, 2023 &middot; Jan David Nose
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/infra">The Rust Infrastructure Team</a> 
+    </div>
+
+    <div class="post">
+      <p>On Wednesday, 2023-01-25 at 09:15 UTC, we deployed changes to the production
+infrastructure for crates.io. During the deployment, the DNS record for
+<code>static.crates.io</code> failed to resolve for an estimated time of 10-15 minutes.
+Users experienced build failures during this time, because crates could not be
+downloaded. Around 9:30 UTC, the DNS record started to get propagated again and
+by 9:40 UTC traffic had returned to normal levels.</p>
+<h2><a href="#root-cause-of-the-outage" aria-hidden="true" class="anchor" id="root-cause-of-the-outage"></a>Root Cause of the Outage</h2>
+<p>The Rust infrastructure is managed with Terraform, a tool to configure and
+provision infrastructure-as-code. The <a href="https://www.rust-lang.org/governance/teams/infra">Infrastructure team</a> recently made
+changes to this configuration to separate the <code>staging</code> and <code>production</code>
+environments for crates.io so that both can be deployed independently of each
+other.</p>
+<p>This feature was used to develop and test the infrastructure for a second
+Content Delivery Network (CDN) for <code>static.crates.io</code> in the <code>staging</code>
+environment. When the configuration was ready, we
+<a href="https://blog.rust-lang.org/inside-rust/2023/01/24/content-delivery-networks.html">scheduled and announced</a>
+the rollout for January 25th.</p>
+<p>The deployment to <code>production</code> contained two changes that were developed,
+deployed, and tested individually on <code>staging</code>: a new TLS certificate for the
+current Content Delivery Network and updated DNS records.</p>
+<p>When we deployed this configuration to <code>production</code>, Terraform first removed the
+current certificate and DNS records. It then started to issue a new certificate,
+which took around 10 minutes. During this time, there was no DNS record for
+<code>static.crates.io</code> and users experienced build failures. After the new
+certificate was provisioned, Terraform recreated the DNS records.</p>
+<h2><a href="#resolution" aria-hidden="true" class="anchor" id="resolution"></a>Resolution</h2>
+<p>The outage resolved itself after Terraform finished the deployment and created a
+new DNS record for <code>static.crates.io</code>. For some users, the outage lasted a few
+minutes longer due to caches in their DNS server.</p>
+<h2><a href="#postmortem" aria-hidden="true" class="anchor" id="postmortem"></a>Postmortem</h2>
+<p>The outage could have been avoided by deploying the changes to the TLS
+certificate and DNS records individually. We have identified two reasons why
+this did not happen as well as lessons that we are taking from this.</p>
+<p>This was one of the first times that we used the new tooling around environments
+to deploy changes to <code>production</code>. One of its features is that the <code>production</code>
+environment is locked to a specific Git commit. When deploying in the past, we
+set this to the latest commit on <code>master</code>. This was done here as well, with the
+consequence that the deployment applied multiple changes simultaneously.</p>
+<p>Another way to look at this is that <code>production</code> and <code>staging</code> diverged too much
+over time, because we did not deploy the changes when we merged them into the
+main branch. If we had deployed the changes when they were merged into the main
+branch, we would have isolated the DNS change. But given the importance of
+crates.io to the Rust ecosystem, we were hesitant to deploy multiple times
+without announcing the changes to the community first.</p>
+<p>The lessons that we are taking away from this incident are as follows:</p>
+<ul>
+<li>We need to document the process of deploying changes to production, in
+particular how to pick the Git commit and how to review the changeset.
+Defining a process will enable us to iterate and improve it over time, and
+avoid the same issue in the future.</li>
+<li>Changes that have been developed and tested in isolation on <code>staging</code> should
+be deployed individually and in sequence to <code>production</code>. We need to add
+this to the documentation.</li>
+<li>When we merge changes into the main branch, we need to ensure that they get
+deployed to <code>production</code> as well. This avoids a drift between the
+configuration in Git and what is deployed.</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../../scripts/highlight.js"></script>
+
+  </body>
+</html>

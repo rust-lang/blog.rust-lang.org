@@ -10,8 +10,78 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-02-07T13:20:34+00:00</updated>
+    <updated>2023-02-08T13:37:40+00:00</updated>
 
+    
+    <entry>
+        <title>DNS Outage on 2023-01-25</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/02/08/dns-outage-portmortem.html" type="text/html" title="DNS Outage on 2023-01-25" />
+        <published>2023-02-08T00:00:00+00:00</published>
+        <updated>2023-02-08T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2023/02/08/dns-outage-portmortem.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/02/08/dns-outage-portmortem.html">&lt;p&gt;On Wednesday, 2023-01-25 at 09:15 UTC, we deployed changes to the production
+infrastructure for crates.io. During the deployment, the DNS record for
+&lt;code&gt;static.crates.io&lt;/code&gt; failed to resolve for an estimated time of 10-15 minutes.
+Users experienced build failures during this time, because crates could not be
+downloaded. Around 9:30 UTC, the DNS record started to get propagated again and
+by 9:40 UTC traffic had returned to normal levels.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#root-cause-of-the-outage&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;root-cause-of-the-outage&quot;&gt;&lt;/a&gt;Root Cause of the Outage&lt;/h2&gt;
+&lt;p&gt;The Rust infrastructure is managed with Terraform, a tool to configure and
+provision infrastructure-as-code. The &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/infra&quot;&gt;Infrastructure team&lt;/a&gt; recently made
+changes to this configuration to separate the &lt;code&gt;staging&lt;/code&gt; and &lt;code&gt;production&lt;/code&gt;
+environments for crates.io so that both can be deployed independently of each
+other.&lt;/p&gt;
+&lt;p&gt;This feature was used to develop and test the infrastructure for a second
+Content Delivery Network (CDN) for &lt;code&gt;static.crates.io&lt;/code&gt; in the &lt;code&gt;staging&lt;/code&gt;
+environment. When the configuration was ready, we
+&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2023/01/24/content-delivery-networks.html&quot;&gt;scheduled and announced&lt;/a&gt;
+the rollout for January 25th.&lt;/p&gt;
+&lt;p&gt;The deployment to &lt;code&gt;production&lt;/code&gt; contained two changes that were developed,
+deployed, and tested individually on &lt;code&gt;staging&lt;/code&gt;: a new TLS certificate for the
+current Content Delivery Network and updated DNS records.&lt;/p&gt;
+&lt;p&gt;When we deployed this configuration to &lt;code&gt;production&lt;/code&gt;, Terraform first removed the
+current certificate and DNS records. It then started to issue a new certificate,
+which took around 10 minutes. During this time, there was no DNS record for
+&lt;code&gt;static.crates.io&lt;/code&gt; and users experienced build failures. After the new
+certificate was provisioned, Terraform recreated the DNS records.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#resolution&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;resolution&quot;&gt;&lt;/a&gt;Resolution&lt;/h2&gt;
+&lt;p&gt;The outage resolved itself after Terraform finished the deployment and created a
+new DNS record for &lt;code&gt;static.crates.io&lt;/code&gt;. For some users, the outage lasted a few
+minutes longer due to caches in their DNS server.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#postmortem&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;postmortem&quot;&gt;&lt;/a&gt;Postmortem&lt;/h2&gt;
+&lt;p&gt;The outage could have been avoided by deploying the changes to the TLS
+certificate and DNS records individually. We have identified two reasons why
+this did not happen as well as lessons that we are taking from this.&lt;/p&gt;
+&lt;p&gt;This was one of the first times that we used the new tooling around environments
+to deploy changes to &lt;code&gt;production&lt;/code&gt;. One of its features is that the &lt;code&gt;production&lt;/code&gt;
+environment is locked to a specific Git commit. When deploying in the past, we
+set this to the latest commit on &lt;code&gt;master&lt;/code&gt;. This was done here as well, with the
+consequence that the deployment applied multiple changes simultaneously.&lt;/p&gt;
+&lt;p&gt;Another way to look at this is that &lt;code&gt;production&lt;/code&gt; and &lt;code&gt;staging&lt;/code&gt; diverged too much
+over time, because we did not deploy the changes when we merged them into the
+main branch. If we had deployed the changes when they were merged into the main
+branch, we would have isolated the DNS change. But given the importance of
+crates.io to the Rust ecosystem, we were hesitant to deploy multiple times
+without announcing the changes to the community first.&lt;/p&gt;
+&lt;p&gt;The lessons that we are taking away from this incident are as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We need to document the process of deploying changes to production, in
+particular how to pick the Git commit and how to review the changeset.
+Defining a process will enable us to iterate and improve it over time, and
+avoid the same issue in the future.&lt;/li&gt;
+&lt;li&gt;Changes that have been developed and tested in isolation on &lt;code&gt;staging&lt;/code&gt; should
+be deployed individually and in sequence to &lt;code&gt;production&lt;/code&gt;. We need to add
+this to the documentation.&lt;/li&gt;
+&lt;li&gt;When we merge changes into the main branch, we need to ensure that they get
+deployed to &lt;code&gt;production&lt;/code&gt; as well. This avoids a drift between the
+configuration in Git and what is deployed.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Jan David Nose</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.67.1 pre-release testing</title>
@@ -435,70 +505,6 @@ we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/
 
         <author>
             <name>Ryan Levick</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing the Rust Style Team</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/09/29/announcing-the-rust-style-team.html" type="text/html" title="Announcing the Rust Style Team" />
-        <published>2022-09-29T00:00:00+00:00</published>
-        <updated>2022-09-29T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/09/29/announcing-the-rust-style-team.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/09/29/announcing-the-rust-style-team.html">&lt;p&gt;Rust has a standardized style, and an implementation of that style in the
-&lt;code&gt;rustfmt&lt;/code&gt; tool. The standardized style helps Rust developers feel comfortable
-and at home in many different projects, and the tooling support from &lt;code&gt;rustfmt&lt;/code&gt;
-makes it easy to maintain and to incorporate in continuous integration.
-&lt;code&gt;rustfmt&lt;/code&gt; also provides many options to customize the style, but the style
-guide defines the defaults, and most projects use those defaults.&lt;/p&gt;
-&lt;p&gt;The standard Rust style resulted from development and discussion within the
-Rust style team, between 2016 and 2018. After publishing the style guide, the
-Rust style team concluded its active work, by design.&lt;/p&gt;
-&lt;p&gt;However, as the Rust language develops, we have a regular need for improvements
-to the style guide, such as to support new language constructs. This includes
-minor language changes, as well as highly anticipated new features such as
-&lt;code&gt;let&lt;/code&gt;-chaining (RFC 2497) and &lt;code&gt;let&lt;/code&gt;-&lt;code&gt;else&lt;/code&gt; (RFC 3137). New constructs like
-these, by default, get ignored and not formatted by rustfmt, and subsequently
-need formatting added. Some of this work has fallen to the rustfmt team in
-recent years, but the rustfmt team would prefer to implement style
-determinations made by another team rather than making such determinations
-itself.&lt;/p&gt;
-&lt;p&gt;In addition, rustfmt maintains backwards compatibility guarantees: code that
-has been correctly formatted with rustfmt won&#x27;t get formatted differently with
-a future version of rustfmt. This avoids churn, and avoids creating CI failures
-when people use rustfmt to check style in CI. However, this also prevents
-evolving the Rust style to take community desires into account and improve
-formatting over time. rustfmt provides various configuration options to change
-its default formatting, and many of those options represent changes that many
-people in the community would like enabled by default.&lt;/p&gt;
-&lt;p&gt;For instance, many people prefer to format their &lt;code&gt;use&lt;/code&gt; lines in three blocks:
-imports from the standard library, imports from external crates, and then
-imports from modules within the same project. &lt;code&gt;rustfmt&lt;/code&gt; supports this via the
-option &lt;code&gt;group_imports &#x3D; StdExternalCrate&lt;/code&gt;, but cannot make this the default
-without causing CI failures in existing projects. We need a way to evolve the
-default Rust style compatibly, similar in spirit to the mechanisms we use for
-Rust editions: allowing existing style to continue working, and allowing people
-to opt into new style.&lt;/p&gt;
-&lt;p&gt;To solve both of these problems, &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/3309-style-team.html&quot;&gt;RFC
-3309&lt;/a&gt; has revived the
-Rust style team, with three goals:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Making determinations about styling for new Rust constructs&lt;/li&gt;
-&lt;li&gt;Evolving the existing Rust style&lt;/li&gt;
-&lt;li&gt;Defining mechanisms to evolve the Rust style while taking backwards
-compatibility into account&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We don&#x27;t plan to make any earth-shattering style changes; the look and feel of
-Rust will remain largely the same. Evolutions to the default Rust style will
-largely consist of established &lt;code&gt;rustfmt&lt;/code&gt; options people already widely enable,
-or would enable if they were stable.&lt;/p&gt;
-&lt;p&gt;We expect that the initial work of the style team will focus on clearing a
-backlog of new language constructs that lack formatting guidance. Afterwards,
-we will look towards defining and implementing the mechanisms to evolve the
-default Rust style, and then begin introducing style improvements.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Josh Triplett</name>
         </author>
     </entry>
     
