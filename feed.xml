@@ -10,8 +10,46 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-02-08T13:37:37+00:00</updated>
+    <updated>2023-02-09T15:33:37+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.67.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2023/02/09/Rust-1.67.1.html" type="text/html" title="Announcing Rust 1.67.1" />
+        <published>2023-02-09T00:00:00+00:00</published>
+        <updated>2023-02-09T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2023/02/09/Rust-1.67.1.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2023/02/09/Rust-1.67.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.67.1. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.67.1 with:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
+from the appropriate page on our website, and check out the
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1671-2023-02-09&quot;&gt;detailed release notes for 1.67.1&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1671-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1671-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.67.1 stable&lt;/h2&gt;
+&lt;p&gt;Rust 1.67.1 fixes a regression for projects that link to thin archives
+(&lt;code&gt;.a&lt;/code&gt; files that reference external &lt;code&gt;.o&lt;/code&gt; objects). The new
+archive writer in 1.67.0 could not read thin archives as inputs, leading to the
+error &amp;quot;Unsupported archive identifier.&amp;quot; The compiler now uses LLVM&#x27;s archive
+writer again, until that format is supported in the new code.&lt;/p&gt;
+&lt;p&gt;Additionally, the clippy style lint &lt;code&gt;uninlined_format_args&lt;/code&gt; is temporarily
+downgraded to pedantic -- allowed by default. While the compiler has supported
+this format since Rust 1.58, &lt;code&gt;rust-analyzer&lt;/code&gt; does not support it yet, so it&#x27;s
+not necessarily good to use that style everywhere possible.&lt;/p&gt;
+&lt;p&gt;The final change is a soundness fix in Rust&#x27;s own bootstrap code. This had no
+known problematic uses, but it did raise an error when bootstrap was compiled
+with 1.67 itself, rather than the prior 1.66 release as usual.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1671&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1671&quot;&gt;&lt;/a&gt;Contributors to 1.67.1&lt;/h3&gt;
+&lt;p&gt;Many people came together to create Rust 1.67.1. We couldn&#x27;t have done it
+without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.67.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rustup 1.25.2</title>
@@ -739,206 +777,6 @@ We couldn&#x27;t have done it without all of you.
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Generic associated types to be stable in Rust 1.65</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2022/10/28/gats-stabilization.html" type="text/html" title="Generic associated types to be stable in Rust 1.65" />
-        <published>2022-10-28T00:00:00+00:00</published>
-        <updated>2022-10-28T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2022/10/28/gats-stabilization.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2022/10/28/gats-stabilization.html">&lt;p&gt;As of Rust 1.65, which is set to release on November 3rd, generic associated types (GATs) will be stable — over six and a half years after the original &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/1598&quot;&gt;RFC&lt;/a&gt; was opened. This is truly a monumental achievement; however, as with a few of the other monumental features of Rust, like &lt;code&gt;async&lt;/code&gt; or const generics, there are limitations in the initial stabilization that we plan to remove in the future.&lt;/p&gt;
-&lt;p&gt;The goal of this post is not to teach about GATs, but rather to briefly introduce them to any readers that might not know what they are and to enumerate a few of the limitations in initial stabilization that users are most likely to run into. More detailed information can be found in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/1598&quot;&gt;RFC&lt;/a&gt;, in the &lt;a href&#x3D;&quot;https://rust-lang.github.io/generic-associated-types-initiative/index.html&quot;&gt;GATs initiative repository&lt;/a&gt;, in the previous &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html&quot;&gt;blog post&lt;/a&gt; during the start of the stabilization push, in the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/reference/items/associated-items.html&quot;&gt;associated items section in the nightly reference&lt;/a&gt;, or in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues?q&#x3D;is%3Aopen+is%3Aissue+label%3AF-generic_associated_types&quot;&gt;open issues on Github for GATs&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#what-are-gats&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-are-gats&quot;&gt;&lt;/a&gt;What are GATs&lt;/h2&gt;
-&lt;p&gt;At its core, generic associated types allow you to have &lt;em&gt;generics&lt;/em&gt; (type, lifetime, or const) on &lt;em&gt;associated types&lt;/em&gt;. Note that this is really just rounding out the places where you can put generics: for example, you can already have generics on freestanding type aliases and on functions in traits. Now you can just have generics on type aliases in traits (which we just call associated types). Here&#x27;s an example of what a trait with a GAT would look like:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait LendingIterator {
-    type Item&amp;lt;&#x27;a&amp;gt; where Self: &#x27;a;
-
-    fn next&amp;lt;&#x27;a&amp;gt;(&amp;amp;&#x27;a mut self) -&amp;gt; Self::Item&amp;lt;&#x27;a&amp;gt;;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Most of this should look familiar; this trait looks &lt;em&gt;very&lt;/em&gt; similar to the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/trait.Iterator.html&quot;&gt;&lt;code&gt;Iterator&lt;/code&gt;&lt;/a&gt; trait from the standard library. Fundamentally, this version of the trait allows the &lt;code&gt;next&lt;/code&gt; function to return an item that &lt;em&gt;borrows&lt;/em&gt; from &lt;code&gt;self&lt;/code&gt;. For more detail about the example, as well as some info on what that &lt;code&gt;where Self: &#x27;a&lt;/code&gt; is for, check out the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html&quot;&gt;push for stabilization post&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;In general, GATs provide a foundational basis for a vast range of patterns and APIs. If you really want to get a feel for how many projects have been blocked on GATs being stable, go scroll through either the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/44265&quot;&gt;tracking issue&lt;/a&gt;: you will find numerous issues from other projects linking to those threads over the years saying something along the lines of &amp;quot;we want the API to look like X, but for that we need GATs&amp;quot; (or see &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/96709#issuecomment-1173170243&quot;&gt;this comment&lt;/a&gt; that has some of these put together already). If you&#x27;re interested in how GATs enable a library to do zero-copy parsing, resulting in nearly a ten-fold performance increase, you might be interested in checking out a &lt;a href&#x3D;&quot;https://smallcultfollowing.com/babysteps/blog/2022/06/27/many-modes-a-gats-pattern/&quot;&gt;blog post&lt;/a&gt; on it by Niko Matsakis.&lt;/p&gt;
-&lt;p&gt;All in all, even if &lt;em&gt;you&lt;/em&gt; won&#x27;t need to use GATs directly, it&#x27;s very possible that the &lt;em&gt;libraries&lt;/em&gt; you use will use GATs either internally or publically for ergonomics, performance, or just because that&#x27;s the only way the implementation works.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#when-gats-go-wrong---a-few-current-bugs-and-limitations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;when-gats-go-wrong---a-few-current-bugs-and-limitations&quot;&gt;&lt;/a&gt;When GATs go wrong - a few current bugs and limitations&lt;/h2&gt;
-&lt;p&gt;As alluded to before, this stabilization is not without its bugs and limitations. This is not atypical compared to prior large language features. We plan to fix these bugs and remove these limitations as part of ongoing efforts driven by the newly-formed types team. (Stayed tuned for more details in an official announcement soon!)&lt;/p&gt;
-&lt;p&gt;Here, we&#x27;ll go over just a couple of the limitations that we&#x27;ve identified that users might run into.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#implied-static-requirement-from-higher-ranked-trait-bounds&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;implied-static-requirement-from-higher-ranked-trait-bounds&quot;&gt;&lt;/a&gt;Implied &lt;code&gt;&#x27;static&lt;/code&gt; requirement from higher-ranked trait bounds&lt;/h3&gt;
-&lt;p&gt;Consider the following code:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait LendingIterator {
-    type Item&amp;lt;&#x27;a&amp;gt; where Self: &#x27;a;
-}
-
-pub struct WindowsMut&amp;lt;&#x27;x, T&amp;gt; {
-    slice: &amp;amp;&#x27;x mut [T],
-}
-
-impl&amp;lt;&#x27;x, T&amp;gt; LendingIterator for WindowsMut&amp;lt;&#x27;x, T&amp;gt; {
-    type Item&amp;lt;&#x27;a&amp;gt; &#x3D; &amp;amp;&#x27;a mut [T] where Self: &#x27;a;
-}
-
-fn print_items&amp;lt;I&amp;gt;(iter: I)
-where
-    I: LendingIterator,
-    for&amp;lt;&#x27;a&amp;gt; I::Item&amp;lt;&#x27;a&amp;gt;: Debug,
-{ ... }
-
-fn main() {
-    let mut array &#x3D; [0; 16];
-    let slice &#x3D; &amp;amp;mut array;
-    let windows &#x3D; WindowsMut { slice };
-    print_items::&amp;lt;WindowsMut&amp;lt;&#x27;_, usize&amp;gt;&amp;gt;(windows);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here, imagine we wanted to have a &lt;code&gt;LendingIterator&lt;/code&gt; where the items are overlapping slices of an array. We also have a function &lt;code&gt;print_items&lt;/code&gt; that prints every item of a &lt;code&gt;LendingIterator&lt;/code&gt;, as long as they implement &lt;code&gt;Debug&lt;/code&gt;. This all seems innocent enough, but the above code doesn&#x27;t compile — even though it should. Without going into details here, the &lt;code&gt;for&amp;lt;&#x27;a&amp;gt; I::Item&amp;lt;&#x27;a&amp;gt;: Debug&lt;/code&gt; currently implies that &lt;code&gt;I::Item&amp;lt;&#x27;a&amp;gt;&lt;/code&gt; must outlive &lt;code&gt;&#x27;static&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;This is not really a nice bug. And of all the ones we&#x27;ll mention today, this will likely be the one that is most limiting, annoying, and tough to figure out. This pops up much more often with GATs, but can be found with code that doesn&#x27;t use GATs at all. Unfortunately, fixing this requires some refactorings to the compiler that isn&#x27;t a short-term project. It is on the horizon though. The good news is that, in the meantime, we are working on improving the error message you get from this code. This is what it will look like in the upcoming stabilization:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;error[E0597]: &#x60;array&#x60; does not live long enough
-   |
-   |     let slice &#x3D; &amp;amp;mut array;
-   |                 ^^^^^^^^^^ borrowed value does not live long enough
-   |     let windows &#x3D; WindowsMut { slice };
-   |     print_items::&amp;lt;WindowsMut&amp;lt;&#x27;_, usize&amp;gt;&amp;gt;(windows);
-   |     -------------------------------------------- argument requires that &#x60;array&#x60; is borrowed for &#x60;&#x27;static&#x60;
-   | }
-   | - &#x60;array&#x60; dropped here while still borrowed
-   |
-note: due to current limitations in the borrow checker, this implies a &#x60;&#x27;static&#x60; lifetime
-   |
-   |     for&amp;lt;&#x27;a&amp;gt; I::Item&amp;lt;&#x27;a&amp;gt;: Debug,
-   |                          ^^^^
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It&#x27;s not perfect, but it&#x27;s something. It might not cover all cases, but if have a &lt;code&gt;for&amp;lt;&#x27;a&amp;gt; I::Item&amp;lt;&#x27;a&amp;gt;: Trait&lt;/code&gt; bound somewhere and get an error that says something doesn&#x27;t live long enough, you might be running into this bug. We&#x27;re actively working to fix this. However, this error doesn&#x27;t actually come up as often as you might expect while reading this (from our experience), so we feel the feature is still immensely useful enough even with it around.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#traits-with-gats-are-not-object-safe&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;traits-with-gats-are-not-object-safe&quot;&gt;&lt;/a&gt;Traits with GATs are not object safe&lt;/h3&gt;
-&lt;p&gt;So, this one is a simple one. Making traits with GATs object safe is going to take a little bit of design work for its implementation. To get an idea of the work left to do here, let&#x27;s start with a bit of code that you could write on stable today:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn takes_iter(_: &amp;amp;dyn Iterator) {}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Well, you can write this, but it doesn&#x27;t compile:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;error[E0191]: the value of the associated type &#x60;Item&#x60; (from trait &#x60;Iterator&#x60;) must be specified
- --&amp;gt; src/lib.rs:1:23
-  |
-1 | fn takes_iter(_: &amp;amp;dyn Iterator) {}
-  |                       ^^^^^^^^ help: specify the associated type: &#x60;Iterator&amp;lt;Item &#x3D; Type&amp;gt;&#x60;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For a trait object to be well-formed, it must specify a value for all associated types. For the same reason, we don&#x27;t want to accept the following:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn no_associated_type(_: &amp;amp;dyn LendingIterator) {}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;However, GATs introduce an extra bit of complexity. Take this code:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn not_fully_generic(_: &amp;amp;dyn LendingIterator&amp;lt;Item&amp;lt;&#x27;static&amp;gt; &#x3D; &amp;amp;&#x27;static str&amp;gt;) {}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So, we&#x27;ve specified the value of the associated type for &lt;em&gt;one&lt;/em&gt; value of of the &lt;code&gt;Item&lt;/code&gt;&#x27;s lifetime (&lt;code&gt;&#x27;static&lt;/code&gt;), but not for &lt;em&gt;any&lt;/em&gt; value, like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn fully_generic(_: &amp;amp;dyn for&amp;lt;&#x27;a&amp;gt; LendingIterator&amp;lt;Item&amp;lt;&#x27;a&amp;gt; &#x3D; &amp;amp;&#x27;a str&amp;gt;) {}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;While we have a solid idea of how to implement requirement in some &lt;em&gt;future&lt;/em&gt; iterations of the trait solver (that uses more logical formulations), implementing it in the current trait solver is more difficult. Thus, we&#x27;ve chosen to hold off on this for now.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#the-borrow-checker-isnt-perfect-and-it-shows&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-borrow-checker-isnt-perfect-and-it-shows&quot;&gt;&lt;/a&gt;The borrow checker isn&#x27;t perfect and it shows&lt;/h3&gt;
-&lt;p&gt;Keeping with the &lt;code&gt;LendingIterator&lt;/code&gt; example, let&#x27;s start by looking at two methods on &lt;code&gt;Iterator&lt;/code&gt;: &lt;code&gt;for_each&lt;/code&gt; and &lt;code&gt;filter&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait Iterator {
-    type Item;
-
-    fn for_each&amp;lt;F&amp;gt;(self, f: F)
-    where
-        Self: Sized,
-        F: FnMut(Self::Item);
-    
-    fn filter&amp;lt;P&amp;gt;(self, predicate: P) -&amp;gt; Filter&amp;lt;Self, P&amp;gt;
-    where
-        Self: Sized,
-        P: FnMut(&amp;amp;Self::Item) -&amp;gt; bool;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Both of these take a function as an argument. Closures are often used these. Now, let&#x27;s look at the &lt;code&gt;LendingIterator&lt;/code&gt; definitions:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait LendingIterator {
-    type Item&amp;lt;&#x27;a&amp;gt; where Self: &#x27;a;
-
-    fn for_each&amp;lt;F&amp;gt;(mut self, mut f: F)
-    where
-        Self: Sized,
-        F: FnMut(Self::Item&amp;lt;&#x27;_&amp;gt;);
-
-    fn filter&amp;lt;P&amp;gt;(self, predicate: P) -&amp;gt; Filter&amp;lt;Self, P&amp;gt;
-    where
-        Self: Sized,
-        P: FnMut(&amp;amp;Self::Item&amp;lt;&#x27;_&amp;gt;) -&amp;gt; bool;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Looks simple enough, but if it really was, would it be here? Let&#x27;s start by looking at what happens when we try to use &lt;code&gt;for_each&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn iterate&amp;lt;T, I: for&amp;lt;&#x27;a&amp;gt; LendingIterator&amp;lt;Item&amp;lt;&#x27;a&amp;gt; &#x3D; &amp;amp;&#x27;a T&amp;gt;&amp;gt;(iter: I) {
-    iter.for_each(|_: &amp;amp;T| {})
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;error: &#x60;I&#x60; does not live long enough
-   |
-   |     iter.for_each(|_: &amp;amp;T| {})
-   |                   ^^^^^^^^^^
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Well, that isn&#x27;t great. Turns out, this is pretty closely related to the first limitation we talked about earlier, even
-though the borrow checker does play a role here.&lt;/p&gt;
-&lt;p&gt;On the other hand, let&#x27;s look at something that&#x27;s very clearly a borrow checker problem, by looking at an implementation
-of the &lt;code&gt;Filter&lt;/code&gt; struct returned by the &lt;code&gt;filter&lt;/code&gt; method:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;impl&amp;lt;I: LendingIterator, P&amp;gt; LendingIterator for Filter&amp;lt;I, P&amp;gt;
-where
-    P: FnMut(&amp;amp;I::Item&amp;lt;&#x27;_&amp;gt;) -&amp;gt; bool, // &amp;lt;- the bound from above, a function
-{
-    type Item&amp;lt;&#x27;a&amp;gt; &#x3D; I::Item&amp;lt;&#x27;a&amp;gt; where Self: &#x27;a; // &amp;lt;- Use the underlying type
-
-    fn next(&amp;amp;mut self) -&amp;gt; Option&amp;lt;I::Item&amp;lt;&#x27;_&amp;gt;&amp;gt; {
-        // Loop through each item in the underlying &#x60;LendingIterator&#x60;...
-        while let Some(item) &#x3D; self.iter.next() {
-            // ...check if the predicate holds for the item...
-            if (self.predicate)(&amp;amp;item) {
-                // ...and return it if it does
-                return Some(item);
-            }
-        }
-        // Return &#x60;None&#x60; when we&#x27;re out of items
-        return None;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Again, the implementation here shouldn&#x27;t seem surprising. We, of course, run into a borrow checker error:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;error[E0499]: cannot borrow &#x60;self.iter&#x60; as mutable more than once at a time
-  --&amp;gt; src/main.rs:28:32
-   |
-27 |     fn next(&amp;amp;mut self) -&amp;gt; Option&amp;lt;I::Item&amp;lt;&#x27;_&amp;gt;&amp;gt; {
-   |             - let&#x27;s call the lifetime of this reference &#x60;&#x27;1&#x60;
-28 |         while let Some(item) &#x3D; self.iter.next() {
-   |                                ^^^^^^^^^^^^^^^^ &#x60;self.iter&#x60; was mutably borrowed here in the previous iteration of the loop
-29 |             if (self.predicate)(&amp;amp;item) {
-30 |                 return Some(item);
-   |                        ---------- returning this value requires that &#x60;self.iter&#x60; is borrowed for &#x60;&#x27;1&#x60;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This is a known limitation in the current borrow checker and should be solved in some future iteration (like &lt;a href&#x3D;&quot;https://github.com/rust-lang/polonius&quot;&gt;Polonius&lt;/a&gt;).&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#non-local-requirements-for-where-clauses-on-gats&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;non-local-requirements-for-where-clauses-on-gats&quot;&gt;&lt;/a&gt;Non-local requirements for where clauses on GATs&lt;/h3&gt;
-&lt;p&gt;The last limitation we&#x27;ll talk about today is a bit different than the others; it&#x27;s not a bug and it shouldn&#x27;t prevent any programs from compiling. But it all comes back to that &lt;code&gt;where Self: &#x27;a&lt;/code&gt; clause you&#x27;ve seen in several parts of this post. As mentioned before, if you&#x27;re interested in digging a bit into why that clause is required, see the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html&quot;&gt;push for stabilization post&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;There is one not-so-ideal requirement about this clause: you must write it on the trait. Like with where clauses on functions, you cannot add clauses to associated types in impls that aren&#x27;t there in the trait. However, if you &lt;em&gt;didn&#x27;t&lt;/em&gt; add this clause, a large set of potential impls of the trait would be disallowed.&lt;/p&gt;
-&lt;p&gt;To help users not fall into the pitfall of accidentally forgetting to add this (or similar clauses that end up with the same effect for a different set of generics), we&#x27;ve implemented a set of rules that must be followed for a trait with GATs to compile. Let&#x27;s first look at the error without writing the clause:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait LendingIterator {
-    type Item&amp;lt;&#x27;a&amp;gt;;
-
-    fn next&amp;lt;&#x27;a&amp;gt;(&amp;amp;&#x27;a mut self) -&amp;gt; Self::Item&amp;lt;&#x27;a&amp;gt;;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;error: missing required bound on &#x60;Item&#x60;
- --&amp;gt; src/lib.rs:2:5
-  |
-2 |     type Item&amp;lt;&#x27;a&amp;gt;;
-  |     ^^^^^^^^^^^^^-
-  |                  |
-  |                  help: add the required where clause: &#x60;where Self: &#x27;a&#x60;
-  |
-  &#x3D; note: this bound is currently required to ensure that impls have maximum flexibility
-  &#x3D; note: we are soliciting feedback, see issue #87479 &amp;lt;https://github.com/rust-lang/rust/issues/87479&amp;gt; for more information
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This error should hopefully be helpful (you can even &lt;code&gt;cargo fix&lt;/code&gt; it!). But, what exactly are these rules? Well, ultimately, they end up being somewhat simple: &lt;em&gt;for methods that use the GAT, any bounds that can be proven must also be present on the GAT itself&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;Okay, so how did we end up with the required &lt;code&gt;Self: &#x27;a&lt;/code&gt; bound. Well, let&#x27;s take a look at the &lt;code&gt;next&lt;/code&gt; method. It returns &lt;code&gt;Self::Item&amp;lt;&#x27;a&amp;gt;&lt;/code&gt;, and we have an argument &lt;code&gt;&amp;amp;&#x27;a mut self&lt;/code&gt;. We&#x27;re getting a bit into the details of the Rust language, but because of that argument, we know that &lt;code&gt;Self: &#x27;a&lt;/code&gt; must hold. So, we require that bound.&lt;/p&gt;
-&lt;p&gt;We&#x27;re requiring these bounds now to leave room in the future to potentially imply these automatically (and of course because it should help users write traits with GATs). They shouldn&#x27;t interfere with any real use-cases, but if you do encounter a problem, check out the issue mentioned in the error above. And if you want to see a fairly comprehensive testing of different scenarios on what bounds are required and when, check out the relevant &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/f2702e922ba31e49d6167f5651d4545646dcf22d/src/test/ui/generic-associated-types/self-outlives-lint.rs&quot;&gt;test file&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Hopefully the limitations brought up here and explanations thereof don&#x27;t detract from overall excitement of GATs stabilization. Sure, these limitations do, well, &lt;em&gt;limit&lt;/em&gt; the number of things you can do with GATs. &lt;em&gt;However&lt;/em&gt;, we would not be stabilizing GATs if we didn&#x27;t feel that GATs are not still &lt;em&gt;very&lt;/em&gt; useful. Additionally, we wouldn&#x27;t be stabilizing GATs if we didn&#x27;t feel that the limitations weren&#x27;t solvable (and in a backwards-compatible manner).&lt;/p&gt;
-&lt;p&gt;To conclude things, all the various people involved in getting this stabilization to happen deserve the utmost thanks. As said before, it&#x27;s been 6.5 years coming and it couldn&#x27;t have happened without everyone&#x27;s support and dedication. Thanks all!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Jack Huey</name>
         </author>
     </entry>
     
