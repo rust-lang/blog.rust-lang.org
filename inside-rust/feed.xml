@@ -10,8 +10,75 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-02-09T15:33:40+00:00</updated>
+    <updated>2023-02-13T10:11:13+00:00</updated>
 
+    
+    <entry>
+        <title>Rust Compiler February 2023 Steering Cycle</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/02/10/compiler-team-feb-steering-cycle.html" type="text/html" title="Rust Compiler February 2023 Steering Cycle" />
+        <published>2023-02-10T00:00:00+00:00</published>
+        <updated>2023-02-10T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2023/02/10/compiler-team-feb-steering-cycle.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/02/10/compiler-team-feb-steering-cycle.html">&lt;p&gt;On &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings/topic/.5Bplanning.20meeting.5D.202023-02-10/near/327073587&quot;&gt;Friday, February 10th&lt;/a&gt;, the Rust Compiler team had a planning meeting for the February 2023 steering cycle.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#t-compiler-june-steering-schedule&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;t-compiler-june-steering-schedule&quot;&gt;&lt;/a&gt;T-compiler June Steering Schedule&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Date&lt;/th&gt;
+&lt;th&gt;Meeting Id&lt;/th&gt;
+&lt;th&gt;Meeting Topic&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/calendar/event?action&#x3D;TEMPLATE&amp;amp;tmeid&#x3D;Nzk5YW5ybjZhZHI5c243cjllZmdhc2RkMG8gNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;2023-02-17&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/589&quot;&gt;compiler-team#589&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Dealing with PR review latency&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/calendar/event?action&#x3D;TEMPLATE&amp;amp;tmeid&#x3D;MDFpY2NtNmFxbWZ1Y2tpN3Fka2Vqa251YWkgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;2023-02-24&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/583&quot;&gt;compiler-team#583&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Scope and goals of rust-lang/rust optimizations&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/calendar/event?action&#x3D;TEMPLATE&amp;amp;tmeid&#x3D;MDk5ZDhtMjAzcmt2ZDlmMmR0ZWE0cXB2ZjUgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;2023-03-03&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/590&quot;&gt;compiler-team#590&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;P-high review for 2023 Q1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/calendar/event?action&#x3D;TEMPLATE&amp;amp;tmeid&#x3D;MDJyYnJ1cGFtdWR1c2lnNjFmcHJ2b3JlODFfMjAyMzAzMTBUMTUwMDAwWiA2dTVycnRjZTZscnR2MDdwZmkzZGFtZ2p1c0Bn&amp;amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;2023-03-10&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;td&gt;(planning for March cycle)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#details&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;details&quot;&gt;&lt;/a&gt;Details&lt;/h3&gt;
+&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
+it is going to use its scheduled steering and design meeting time over the next
+three Fridays.&lt;/p&gt;
+&lt;p&gt;On Friday, 17 February, we will discuss ways to improve our Pull Request review
+latency. Jack Huey, apiraino, and oli-obk will work on a document to drive the
+meeting, collecting ideas on how to attack the problem.&lt;/p&gt;
+&lt;p&gt;On Friday, 24 February, we will discuss our philosophy about code optimizations
+that are implemented in the rust-lang/rust repository (as opposed to
+optimizations that are implemented in LLVM itself, which is where the bulk of
+our optimization logic currently resides). Jak{e,ob} Degen will author the
+document driving this meeting.&lt;/p&gt;
+&lt;p&gt;On Friday, 3 March, we will do a quarterly &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/590&quot;&gt;review of the open P-high issues&lt;/a&gt;.
+pnkfelix will do some ahead of time work &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/131828-t-compiler/topic/reviewing.20P-high.20issues.202022.20.28Q3.29/near/300390068&quot;&gt;in zulip&lt;/a&gt;
+triaging
+some of the issues, and potentially prepare a meeting document summarizing the
+remainder, to maximize the quality of our synchronous in-meeting time.&lt;/p&gt;
+&lt;p&gt;On Friday, 10 March, we will hold our planning meeting for the next steering
+cycle in March and April.&lt;/p&gt;
+&lt;p&gt;Each meeting will run from 2pm to 3pm GMT, and will take place on the
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Felix Klock</name>
+        </author>
+    </entry>
     
     <entry>
         <title>DNS Outage on 2023-01-25</title>
@@ -477,34 +544,6 @@ we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/
 
         <author>
             <name>Release automation</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Governance Update</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/10/06/governance-update.html" type="text/html" title="Governance Update" />
-        <published>2022-10-06T00:00:00+00:00</published>
-        <updated>2022-10-06T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/10/06/governance-update.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/10/06/governance-update.html">&lt;p&gt;As part of ongoing work on governance, Rust leadership jointly established a group, &amp;quot;leadership chat&amp;quot;, consisting of the Core team, leads of all teams on the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance&quot;&gt;governance page&lt;/a&gt;, the Moderation team, and the project directors on the Rust Foundation board. This group has been serving as an interim governing body while efforts to establish the next evolution of Rust project-wide governance are underway.&lt;/p&gt;
-&lt;p&gt;We previously posted &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html&quot;&gt;an update on the future of Rust project-wide governance&lt;/a&gt;. In that post, we promised that the next steps would be to &amp;quot;take the findings we have so far and begin crafting proposals for how the Rust project will be governed in the future.&amp;quot; In this post, we&#x27;d like to provide an update on the status of this work.&lt;/p&gt;
-&lt;p&gt;Late in July, the interim leadership team established an informal working group to conduct further research and draft an RFC for the establishment of a new project-wide governing body. This RFC relies on the requirements document&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; that was compiled as a result of in-depth interviews conducted by Ryan Levick and Mara Bos with team members from across the Rust project. Currently, there are seven people involved in this working group: Ryan Levick (Core Project Director), JT (Core), Mark Rousskov (Core Project Director, Release Lead), Jane Losare-Lusby (Collaboration Project Director), Josh Triplett (Lang Team Lead), Josh Gould (Moderation), and Khionu Sybiern (Moderation).&lt;/p&gt;
-&lt;p&gt;The working group&#x27;s objective is not to completely re-engineer every aspect of Rust&#x27;s governance model — that would require the participation and consent of all the other teams working in the project — but rather to lay the foundation for dynamic project-wide governance by introducing policies and procedures for constraining, monitoring, and adjusting the governance model in response to the project&#x27;s evolving needs. As part of this work, not only is explicit attention being paid to the issues that led to the resignation of the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2021/11/25/in-response-to-the-moderation-team-resignation.html&quot;&gt;former mod team&lt;/a&gt; last November but also additional governance shortfalls identified through Ryan&#x27;s and Mara&#x27;s research. At the same time, we&#x27;re deliberately keeping the scope small in the hope of getting out of the way as soon as possible to let the work continue under the new more representative and accountable governance body.&lt;/p&gt;
-&lt;p&gt;According to our current projections, we are roughly halfway through drafting this RFC since the process began at the end of August. We&#x27;re still making steady progress, and when we have a full draft, we&#x27;ll post it for project-wide review. In the interest of transparency, we will continue to publish updates until the RFC is made available. The goal of keeping the initial discussions private is not to exclude people, but rather to keep the size of the group discussions manageable&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn2&quot; id&#x3D;&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; during the early stages of the RFC drafting process. We are completely open to sharing early drafts and discussing current plans outside of our weekly meetings. Any project participants with questions or concerns are encouraged to get in touch with the working group&#x27;s members.&lt;/p&gt;
-&lt;section class&#x3D;&quot;footnotes&quot;&gt;
-&lt;ol&gt;
-&lt;li id&#x3D;&quot;fn1&quot;&gt;
-&lt;p&gt;Which can be found in the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html&quot;&gt;previous governance update post&lt;/a&gt; &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id&#x3D;&quot;fn2&quot;&gt;
-&lt;p&gt;Even with &amp;quot;only&amp;quot; seven people, having discussions of this magnitude is difficult. &lt;a href&#x3D;&quot;#fnref2&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
-</content>
-
-        <author>
-            <name>Ryan Levick</name>
         </author>
     </entry>
     

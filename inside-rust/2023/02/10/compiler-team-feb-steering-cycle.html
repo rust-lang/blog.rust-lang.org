@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rust Compiler February 2023 Steering Cycle | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rust Compiler February 2023 Steering Cycle | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rust Compiler February 2023 Steering Cycle | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+<link rel="manifest" href="../../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../../inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rust Compiler February 2023 Steering Cycle" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rust Compiler February 2023 Steering Cycle</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 10, 2023 &middot; Felix Klock
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">The Compiler Team</a> 
+    </div>
+
+    <div class="post">
+      <p>On <a href="https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings/topic/.5Bplanning.20meeting.5D.202023-02-10/near/327073587">Friday, February 10th</a>, the Rust Compiler team had a planning meeting for the February 2023 steering cycle.</p>
+<h3><a href="#t-compiler-june-steering-schedule" aria-hidden="true" class="anchor" id="t-compiler-june-steering-schedule"></a>T-compiler June Steering Schedule</h3>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Meeting Id</th>
+<th>Meeting Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=Nzk5YW5ybjZhZHI5c243cjllZmdhc2RkMG8gNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com">2023-02-17</a></td>
+<td><a href="https://github.com/rust-lang/compiler-team/issues/589">compiler-team#589</a></td>
+<td>Dealing with PR review latency</td>
+</tr>
+<tr>
+<td><a href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=MDFpY2NtNmFxbWZ1Y2tpN3Fka2Vqa251YWkgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com">2023-02-24</a></td>
+<td><a href="https://github.com/rust-lang/compiler-team/issues/583">compiler-team#583</a></td>
+<td>Scope and goals of rust-lang/rust optimizations</td>
+</tr>
+<tr>
+<td><a href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=MDk5ZDhtMjAzcmt2ZDlmMmR0ZWE0cXB2ZjUgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com">2023-03-03</a></td>
+<td><a href="https://github.com/rust-lang/compiler-team/issues/590">compiler-team#590</a></td>
+<td>P-high review for 2023 Q1</td>
+</tr>
+<tr>
+<td><a href="https://calendar.google.com/calendar/event?action=TEMPLATE&amp;tmeid=MDJyYnJ1cGFtdWR1c2lnNjFmcHJ2b3JlODFfMjAyMzAzMTBUMTUwMDAwWiA2dTVycnRjZTZscnR2MDdwZmkzZGFtZ2p1c0Bn&amp;tmsrc=6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com">2023-03-10</a></td>
+<td>none</td>
+<td>(planning for March cycle)</td>
+</tr>
+</tbody>
+</table>
+<h3><a href="#details" aria-hidden="true" class="anchor" id="details"></a>Details</h3>
+<p>Every fourth Friday, the Rust compiler team decides how
+it is going to use its scheduled steering and design meeting time over the next
+three Fridays.</p>
+<p>On Friday, 17 February, we will discuss ways to improve our Pull Request review
+latency. Jack Huey, apiraino, and oli-obk will work on a document to drive the
+meeting, collecting ideas on how to attack the problem.</p>
+<p>On Friday, 24 February, we will discuss our philosophy about code optimizations
+that are implemented in the rust-lang/rust repository (as opposed to
+optimizations that are implemented in LLVM itself, which is where the bulk of
+our optimization logic currently resides). Jak{e,ob} Degen will author the
+document driving this meeting.</p>
+<p>On Friday, 3 March, we will do a quarterly <a href="https://github.com/rust-lang/compiler-team/issues/590">review of the open P-high issues</a>.
+pnkfelix will do some ahead of time work <a href="https://rust-lang.zulipchat.com/#narrow/stream/131828-t-compiler/topic/reviewing.20P-high.20issues.202022.20.28Q3.29/near/300390068">in zulip</a>
+triaging
+some of the issues, and potentially prepare a meeting document summarizing the
+remainder, to maximize the quality of our synchronous in-meeting time.</p>
+<p>On Friday, 10 March, we will hold our planning meeting for the next steering
+cycle in March and April.</p>
+<p>Each meeting will run from 2pm to 3pm GMT, and will take place on the
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings">T-compiler/meetings zulip stream</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../../scripts/highlight.js"></script>
+
+  </body>
+</html>
