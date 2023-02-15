@@ -13,7 +13,7 @@ The initial advisors team consists of the following people:
 
 **Jakob Degen** is one of the authorities around the semantics of unsafe code. He has consistently shown the ability to aggregate opinion, identify the key constraints to respect and those to disregard, and find consensus solutions.
 
-**Mark Rousskov** has been a huge part of the Rust community for many years now, and participates regularly in lang-team meetings. He has a wide knowledge Rust and its nooks and crannies, and often brings key insights to our discussions.
+**Mark Rousskov** has been a huge part of the Rust community for many years now, and participates regularly in lang-team meetings. He has a wide knowledge of Rust and its nooks and crannies, and often brings key insights to our discussions.
 
 **Jack Huey** co-leads the types team, and provides expertise in the workings of Rust's trait and type system, as well as the chalk system.
 
