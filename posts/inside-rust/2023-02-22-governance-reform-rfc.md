@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Governance Reform RFC Announcement Blog Post"
+title: "Governance Reform RFC Announcement"
 author: Jane Losare-Lusby and the Governance Reform WG
 team: leadership chat <https://www.rust-lang.org/governance>
 ---
