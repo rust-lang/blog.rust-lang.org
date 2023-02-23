@@ -10,8 +10,363 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-02-22T23:34:15+00:00</updated>
+    <updated>2023-02-23T13:47:41+00:00</updated>
 
+    
+    <entry>
+        <title>Keyword Generics Progress Report: February 2023</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html" type="text/html" title="Keyword Generics Progress Report: February 2023" />
+        <published>2023-02-23T00:00:00+00:00</published>
+        <updated>2023-02-23T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html">&lt;h2&gt;&lt;a href&#x3D;&quot;#introduction&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;About 9 months ago &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/07/27/keyword-generics.html&quot;&gt;we announced&lt;/a&gt; the creation of the Keyword Generics
+Initiative; a group working under the lang team with the intent to solve the
+&lt;a href&#x3D;&quot;https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/&quot;&gt;function coloring problem&lt;/a&gt; &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; through the type system not just for
+&lt;code&gt;async&lt;/code&gt;, but for &lt;code&gt;const&lt;/code&gt; and all current and future function modifier keywords
+as well.&lt;/p&gt;
+&lt;p&gt;We&#x27;re happy to share that we&#x27;ve made a lot of progress over these last several
+months, and we&#x27;re finally ready to start putting some of our designs forward through
+RFCs. Because it&#x27;s been a while since our last update, and because we&#x27;re excited
+to share what we&#x27;ve been working on, in this post we&#x27;ll be going over some of the things
+we&#x27;re planning to propose.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#an-async-example&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;an-async-example&quot;&gt;&lt;/a&gt;An async example&lt;/h2&gt;
+&lt;p&gt;In our &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/07/27/keyword-generics.html&quot;&gt;previous post&lt;/a&gt; we introduced the placeholder &lt;code&gt;async&amp;lt;A&amp;gt;&lt;/code&gt; syntax to describe the
+concept of a &amp;quot;function which is generic over its asyncness&amp;quot;. We always knew we
+wanted something that felt lighter weight than that, so in for our current design
+we&#x27;ve chosen to drop the notion of a generic parameter for the end-user syntax,
+and instead picked the &lt;code&gt;?async&lt;/code&gt; notation. We&#x27;ve borrowed this from the trait
+system, where for example &lt;code&gt;+ ?Sized&lt;/code&gt; indicates that something may or may not
+implement the &lt;code&gt;Sized&lt;/code&gt; trait. Similarly &lt;code&gt;?async&lt;/code&gt; means a function may or may not be
+async. We also refer to these as &amp;quot;maybe-async&amp;quot; functions.&lt;/p&gt;
+&lt;p&gt;Time for an example. Say we took the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/io/trait.Read.html&quot;&gt;&lt;code&gt;Read&lt;/code&gt; trait&lt;/a&gt; and the
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/io/fn.read_to_string.html&quot;&gt;read_to_string_methods&lt;/a&gt;. In the stdlib their implementations look somewhat
+like this today:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait Read {
+    fn read(&amp;amp;mut self, buf: &amp;amp;mut [u8]) -&amp;gt; Result&amp;lt;usize&amp;gt;;
+    fn read_to_string(&amp;amp;mut self, buf: &amp;amp;mut String) -&amp;gt; Result&amp;lt;usize&amp;gt; { ... }
+}
+
+/// Read from a reader into a string.
+fn read_to_string(reader: &amp;amp;mut impl Read) -&amp;gt; std::io::Result&amp;lt;String&amp;gt; {
+    let mut string &#x3D; String::new();
+    reader.read_to_string(&amp;amp;mut string)?;
+    Ok(string)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, what if we wanted to make these async in the future? Using &lt;code&gt;?async&lt;/code&gt;
+notation we could change them to look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait ?async Read {
+    ?async fn read(&amp;amp;mut self, buf: &amp;amp;mut [u8]) -&amp;gt; Result&amp;lt;usize&amp;gt;;
+    ?async fn read_to_string(&amp;amp;mut self, buf: &amp;amp;mut String) -&amp;gt; Result&amp;lt;usize&amp;gt; { ... }
+}
+
+/// Read from a reader into a string.
+?async fn read_to_string(reader: &amp;amp;mut impl ?async Read) -&amp;gt; std::io::Result&amp;lt;String&amp;gt; {
+    let mut string &#x3D; String::new();
+    reader.read_to_string(&amp;amp;mut string).await?;
+    Ok(string)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The way this would work is that &lt;code&gt;Read&lt;/code&gt; and &lt;code&gt;read_to_string&lt;/code&gt; would become generic over
+their &amp;quot;asyncness&amp;quot;. When compiled for an &lt;code&gt;async&lt;/code&gt; context, they will behave
+asynchronously. When compiled in a non-async context, they will behave
+synchronously. The &lt;code&gt;.await&lt;/code&gt; in the &lt;code&gt;read_to_string&lt;/code&gt; function body is necessary
+to mark the cancellation pointin case the function is compiled as async; but
+when not async would essentially become a no-op &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn2&quot; id&#x3D;&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// &#x60;read_to_string&#x60; is inferred to be &#x60;!async&#x60; because
+// we didn&#x27;t &#x60;.await&#x60; it, nor expected a future of any kind.
+#[test]
+fn sync_call() {
+    let _string &#x3D; read_to_string(&amp;quot;file.txt&amp;quot;)?;
+}
+
+// &#x60;read_to_string&#x60; is inferred to be &#x60;async&#x60; because
+// we &#x60;.await&#x60;ed it.
+#[async_std::test]
+async fn async_call() {
+    let _string &#x3D; read_to_string(&amp;quot;file.txt&amp;quot;).await?;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We expect &lt;code&gt;?async&lt;/code&gt; notation would be most useful for library code which doesn&#x27;t
+do anything particularly specific to async Rust. Think: most of the stdlib, and
+ecosystem libraries such as parsers, encoders, and drivers. We expect most
+applications to choose to be compiled either as async or non-async, making them
+mostly a consumer of &lt;code&gt;?async&lt;/code&gt; APIs.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#a-const-example&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;a-const-example&quot;&gt;&lt;/a&gt;A const example&lt;/h2&gt;
+&lt;p&gt;A main driver of the keywords generics initiative has been our desire to make the
+different modifier keywords in Rust feel consistent with one another. Both the
+const WG and the async WG were thinking about introducing keyword-traits at the
+same time, and we figured we should probably start talking with each other to make
+sure that what we were going to introduce felt like it was part of the same
+language - and could be extended to support more keywords in the future.&lt;/p&gt;
+&lt;p&gt;So with that in mind, it may be unsurprising that for the maybe-&lt;code&gt;const&lt;/code&gt; trait
+bounds and declarations we&#x27;re going to propose using the &lt;code&gt;?const&lt;/code&gt; notation.
+A common source of confusion with &lt;code&gt;const fn&lt;/code&gt; is that it actually doesn&#x27;t
+guarantee compile-time execution; it only means that it&#x27;s &lt;em&gt;possible&lt;/em&gt; to evaluate
+in a &lt;code&gt;const&lt;/code&gt; compile-time context. So in a way &lt;code&gt;const fn&lt;/code&gt; has always been a way
+of declaring a &amp;quot;maybe-const&amp;quot; function, and there isn&#x27;t a way to declare an
+&amp;quot;always-const&amp;quot; function. More on that later in this post.&lt;/p&gt;
+&lt;p&gt;Taking the &lt;code&gt;Read&lt;/code&gt; example we used earlier, we could imagine a &amp;quot;maybe-const&amp;quot; version
+of the &lt;code&gt;Read&lt;/code&gt; trait to look very similar:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait ?const Read {
+    ?const fn read(&amp;amp;mut self, buf: &amp;amp;mut [u8]) -&amp;gt; Result&amp;lt;usize&amp;gt;;
+    ?const fn read_to_string(&amp;amp;mut self, buf: &amp;amp;mut String) -&amp;gt; Result&amp;lt;usize&amp;gt; { ... }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which we could then use use as a bound in the const &lt;code&gt;read_to_string&lt;/code&gt; function,
+like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;const fn read_to_string(reader: &amp;amp;mut impl ?const Read) -&amp;gt; std::io::Result&amp;lt;String&amp;gt; {
+    let mut string &#x3D; String::new();
+    reader.read_to_string(&amp;amp;mut string)?;
+    Ok(string)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Just like with &lt;code&gt;?async&lt;/code&gt; traits, &lt;code&gt;?const&lt;/code&gt; traits would also need to be labeled as
+&lt;code&gt;?const&lt;/code&gt; when used as a bound. This is important to surface at the trait level,
+because it&#x27;s allowed to pass non-const bounds to maybe-const functions, as long
+as no trait methods are called in the function body. This means we need to
+distinguish between &amp;quot;never-const&amp;quot; and &amp;quot;maybe-const&amp;quot;.&lt;/p&gt;
+&lt;p&gt;You may have noticed the &lt;code&gt;?const&lt;/code&gt; on the trait declaration and the extra
+&lt;code&gt;?const&lt;/code&gt; on the trait methods. This is on purpose: it keeps the path open to
+potentially add support for &amp;quot;always-const&amp;quot; or &amp;quot;never-const&amp;quot; methods on traits as
+well. In &lt;code&gt;?async&lt;/code&gt; we know that even if the entire trait is &lt;code&gt;?async&lt;/code&gt;, some
+methods (such as &lt;code&gt;Iterator::size_hint&lt;/code&gt;) will never be async. And this would
+make &lt;code&gt;?const&lt;/code&gt; and &lt;code&gt;?async&lt;/code&gt; traits behave similarly using the same rules.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#combining-const-and-async&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;combining-const-and-async&quot;&gt;&lt;/a&gt;Combining const and async&lt;/h2&gt;
+&lt;p&gt;We&#x27;ve covered &lt;code&gt;?async&lt;/code&gt;, and we&#x27;ve covered &lt;code&gt;?const&lt;/code&gt;. Now what happens if we were
+to use them together? Let&#x27;s take a look at what the &lt;code&gt;Read&lt;/code&gt; trait would look like
+when if we extended it using our designs for &lt;code&gt;?const&lt;/code&gt; and &lt;code&gt;?async&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait ?const ?async Read {
+    ?const ?async fn read(&amp;amp;mut self, buf: &amp;amp;mut [u8]) -&amp;gt; Result&amp;lt;usize&amp;gt;;
+    ?const ?async fn read_to_string(&amp;amp;mut self, buf: &amp;amp;mut String) -&amp;gt; Result&amp;lt;usize&amp;gt; { .. }
+}
+
+/// Read from a reader into a string.
+?const ?async fn read_to_string(reader: &amp;amp;mut impl ?const ?async Read) -&amp;gt; io::Result&amp;lt;String&amp;gt; {
+    let mut string &#x3D; String::new();
+    reader.read_to_string(&amp;amp;mut string).await?;
+    Ok(string)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That&#x27;s sure starting to feel like a lot of keywords, right? We&#x27;ve accurately
+described exactly what&#x27;s going on, but there&#x27;s a lot of repetition. We know that
+if we&#x27;re dealing with a &lt;code&gt;?const ?async fn&lt;/code&gt;, most arguments probably will also
+want to be &lt;code&gt;?const ?async&lt;/code&gt;. But under the syntax rules we&#x27;ve proposed so far,
+you&#x27;d end up repeating that everywhere. And it probably gets worse once we start
+adding in more keywords. Not ideal!&lt;/p&gt;
+&lt;p&gt;So we&#x27;re very eager to make sure that we find a solution to this. And we&#x27;ve been
+thinking about a way we could get out of this, which we&#x27;ve been calling
+&lt;code&gt;effect/.do&lt;/code&gt;-notation. This would allow you to mark a function as &amp;quot;generic over
+all modifier keywords&amp;quot; by annotating it as &lt;code&gt;effect fn&lt;/code&gt;, and it would allow the
+compiler to insert all the right &lt;code&gt;.await&lt;/code&gt;, &lt;code&gt;?&lt;/code&gt;, and &lt;code&gt;yield&lt;/code&gt; keywords in the
+function body by suffixing function calls with &lt;code&gt;.do&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Just to set some expectations: this is the least developed part of our proposal,
+and we don&#x27;t intend to formally propose this until after we&#x27;re done with some of
+the other proposals. But we think it&#x27;s an important part of the entire vision,
+so we wanted to make sure we shared it here. And with that out of the way,
+here&#x27;s the same example we had above, but this time using the &lt;code&gt;effect/.do&lt;/code&gt;-notation:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;trait ?effect Read {
+    ?effect fn read(&amp;amp;mut self, buf: &amp;amp;mut [u8]) -&amp;gt; Result&amp;lt;usize&amp;gt;;
+    ?effect fn read_to_string(&amp;amp;mut self, buf: &amp;amp;mut String) -&amp;gt; Result&amp;lt;usize&amp;gt; { .. }
+}
+
+/// Read from a reader into a string.
+?effect fn read_to_string(reader: &amp;amp;mut impl ?effect Read) -&amp;gt; std::io::Result&amp;lt;String&amp;gt; {
+    let mut string &#x3D; String::new();
+    reader.read_to_string(&amp;amp;mut string).do;  // note the singular &#x60;.do&#x60; here
+    string
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;One of the things we would like to figure out as part of &lt;code&gt;effect/.do&lt;/code&gt; is a way
+to enable writing conditional effect-bounds. For example: there may be a
+function which is always async, may never panic, and is generic over the
+remainder of the effects. Or like we&#x27;re seeing with APIs such as
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/vec/struct.Vec.html#method.reserve&quot;&gt;&lt;code&gt;Vec::reserve&lt;/code&gt;&lt;/a&gt; and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/vec/struct.Vec.html#method.try_reserve&quot;&gt;&lt;code&gt;Vec::try_reserve&lt;/code&gt;&lt;/a&gt;: the ability to panic xor return an
+error. This will take more time and research to figure out, but we believe it
+is something which can be solved.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#adding-support-for-types&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;adding-support-for-types&quot;&gt;&lt;/a&gt;Adding support for types&lt;/h2&gt;
+&lt;p&gt;Something we&#x27;re keen on doing is not just adding support for &lt;code&gt;?async&lt;/code&gt; and to
+apply to functions, traits, and trait bounds. We would like &lt;code&gt;?async&lt;/code&gt; to be
+possible to use with types as well. This would enable the ecosystem to stop
+having to provide both sync and async versions of crates. It would also enable
+the stdlib to gradually &amp;quot;asyncify&amp;quot; just like we have been with const.&lt;/p&gt;
+&lt;p&gt;The challenge with async types, especially in the stdlib, is that their behavior
+will often have to be different when used in async and non-async contexts. At
+the very lowest level async system calls work a bit differently from non-async
+system calls. But we think we may have a solution for that too in the form of
+the &lt;code&gt;is_async&lt;/code&gt; compiler built-in method.&lt;/p&gt;
+&lt;p&gt;Say we wanted to implement &lt;code&gt;?async File&lt;/code&gt; with a single &lt;code&gt;?async open&lt;/code&gt; method. The
+way we expect this to look will be something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;/// A file which may or may not be async
+struct ?async File {
+    file_descriptor: std::os::RawFd,  // shared field in all contexts
+    async waker: Waker,               // field only available in async contexts
+    !async meta: Metadata,            // field only available in non-async contexts
+}
+
+impl ?async File {
+    /// Attempts to open a file in read-only mode.
+    ?async fn open(path: Path) -&amp;gt; io::Result&amp;lt;Self&amp;gt; {
+        if is_async() {   // compiler built-in function
+            // create an async &#x60;File&#x60; here; can use &#x60;.await&#x60;
+        } else {
+            // create a non-async &#x60;File&#x60; here
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This would enable authors to use different fields depending on whether they&#x27;re
+compiling for async or not, while still sharing a common core. And within
+function bodies it would be possible to provide different behaviors depending on
+the context as well. The function body notation would work as a generalization
+of the currently unstable &lt;a href&#x3D;&quot;https://doc.rust-lang.org/std/intrinsics/fn.const_eval_select.html&quot;&gt;&lt;code&gt;const_eval_select&lt;/code&gt;&lt;/a&gt; intrinsic, and at
+least for the function bodies we expect a similar &lt;code&gt;is_const()&lt;/code&gt; compiler built-in
+to be made available as well.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#consistent-syntax&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;consistent-syntax&quot;&gt;&lt;/a&gt;Consistent syntax&lt;/h2&gt;
+&lt;p&gt;As we alluded to earlier in the post: one of the biggest challenges we see in
+language design is adding features in a way that makes them feel like they&#x27;re in
+harmony with the rest of the language - and not something which stands out as
+noticably different. And because we&#x27;re touching on something core to Rust, the
+way we do keywords, we have to pay extra close attention here to make sure Rust
+keeps feeling like a single language.&lt;/p&gt;
+&lt;p&gt;Luckily Rust has the ability to make surface-level changes to the
+language through the edition system. There are many things this doesn&#x27;t let us
+do, but it does allow us to require syntax changes. A possibility we&#x27;re
+exploring is leveraging the edition system to make some minor changes to &lt;code&gt;const&lt;/code&gt;
+and &lt;code&gt;async&lt;/code&gt; so they feel more consistent with one another, and with &lt;code&gt;?const&lt;/code&gt; and
+&lt;code&gt;?async&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For &lt;code&gt;const&lt;/code&gt; this means there should be a syntactic distinction between &lt;code&gt;const&lt;/code&gt;
+declarations and &lt;code&gt;const&lt;/code&gt; uses. Like we mentioned earlier in the post, when you
+write &lt;code&gt;const fn&lt;/code&gt; you get a function which can be evaluated both at runtime and
+during compilation. But when you write &lt;code&gt;const FOO: () &#x3D; ..;&lt;/code&gt; the meaning of
+&lt;code&gt;const&lt;/code&gt; there guarantees compile-time evaluation. One keyword, different
+meanings. So for that reason we&#x27;re wondering whether perhaps it would make more
+sense if we changed &lt;code&gt;const fn&lt;/code&gt; to &lt;code&gt;?const fn&lt;/code&gt;.  This would make it clear that
+it&#x27;s a function which &lt;em&gt;may&lt;/em&gt; be const-evaluated, but doesn&#x27;t necessarily have to -
+and can also be called from non-&lt;code&gt;const&lt;/code&gt; contexts.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;//! Define a function which may be evaluated both at runtime and during
+//! compilation.
+
+// Current
+const fn meow() -&amp;gt; String { .. }
+
+// Proposed
+?const fn meow() -&amp;gt; String { .. }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For &lt;code&gt;async&lt;/code&gt; we&#x27;re considering some similar surface-level changes.  The Async WG
+is in the process of expanding the &amp;quot;async functions in traits&amp;quot; design into an
+design covering &amp;quot;async traits&amp;quot; entirely, largely motivated by the desire to be
+able to add &lt;code&gt;+ Send&lt;/code&gt; bound to anonymous futures. There are more details about
+this in [&amp;quot;Lightweight, Predictable Async Send Bounds&amp;quot;][bounds-post] by Eric
+Holk. But it would roughly become the following notation:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct File { .. }
+impl async Read for File {                                                // async trait declaration
+    async fn read(&amp;amp;mut self, buf: &amp;amp;mut [u8]) -&amp;gt; io::Result&amp;lt;usize&amp;gt; { .. }  // async method
+}
+
+async fn read_to_string(reader: &amp;amp;mut impl async Read) -&amp;gt; io::Result&amp;lt;String&amp;gt; { // async trait bound
+    let mut string &#x3D; String::new();
+    reader.read_to_string(&amp;amp;mut string).await?;
+    Ok(string)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This would make &lt;code&gt;impl ?async Read&lt;/code&gt; and &lt;code&gt;impl async Read&lt;/code&gt; consistent with each
+other. And it would open the door for &lt;code&gt;trait ?async&lt;/code&gt; traits to be passed to
+&lt;code&gt;impl async Read&lt;/code&gt; and be guaranteed to be always interpreted as &lt;code&gt;trait async&lt;/code&gt;.
+Which is another nice consistency gain.&lt;/p&gt;
+&lt;p&gt;The final thing we&#x27;re looking at is &lt;code&gt;async&lt;/code&gt;-notation for types. To implement
+inherent &lt;code&gt;?async&lt;/code&gt; methods on types, our current design requires the type to also
+be marked as &lt;code&gt;?async&lt;/code&gt;. In order to bring &lt;code&gt;?async&lt;/code&gt; and &lt;code&gt;async&lt;/code&gt; closer together,
+we&#x27;re exploring whether it might also make sense to require types to be marked
+as &lt;code&gt;async&lt;/code&gt; as well:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;//! Proposed: define a method on a maybe-async type
+struct ?async File { .. }
+impl ?async File {
+    ?async fn open(path: PathBuf) -&amp;gt; io::Result&amp;lt;Self&amp;gt; { .. }
+}
+
+//! Current: define a method on an always-async type
+struct File { .. }
+impl File {
+    async fn open(path: PathBuf) -&amp;gt; io::Result&amp;lt;Self&amp;gt; { .. }
+}
+
+//! Proposed: define a method on an always-async type
+struct async File { .. }
+impl async File {
+    async fn open(path: PathBuf) -&amp;gt; io::Result&amp;lt;Self&amp;gt; { .. }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We already have something similar going on for &amp;quot;always-const&amp;quot; arguments via the
+const-generics system. These look something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn foo&amp;lt;const N: usize&amp;gt;() {}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Every &amp;quot;always-const&amp;quot; argument to the function must always be marked by &lt;code&gt;const&lt;/code&gt;,
+so it wouldn&#x27;t be entirely without precedent for every &amp;quot;always-async&amp;quot; type to
+always require to be marked using &lt;code&gt;async&lt;/code&gt;. So we&#x27;re exploring some of what might
+be possible here.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#the-tentative-plan&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-tentative-plan&quot;&gt;&lt;/a&gt;The tentative plan&lt;/h2&gt;
+&lt;p&gt;We plan to initially focus our efforts on the &lt;code&gt;async&lt;/code&gt; and &lt;code&gt;const&lt;/code&gt; keywords only.
+We&#x27;re feeling ready to start converting some of our designs into RFCs, and start
+putting them out for review. In the coming months we expect to start writing
+the following proposals (in no particular order):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;?async fn&lt;/code&gt; notation without trait bounds, including an &lt;code&gt;is_async&lt;/code&gt; mechanism.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;trait async&lt;/code&gt;  declarations and bounds.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;trait ?async&lt;/code&gt; declarations and bounds, &lt;code&gt;trait ?const&lt;/code&gt; declarations and bounds.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;?const fn&lt;/code&gt; notation without trait bounds.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;struct async&lt;/code&gt; notation and &lt;code&gt;struct ?const&lt;/code&gt; notation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We&#x27;ll be working closely with the Lang Team, Const WG, and Async WG on these
+proposals, and in some cases (such as &lt;code&gt;trait async&lt;/code&gt;) we may even take an
+advicing role with a WG directly driving the RFC. As usual, these will be going
+through the RFC-nightly-stabilization cycle. And only once we&#x27;re fully confident
+in them will they become available on stable Rust.&lt;/p&gt;
+&lt;p&gt;We&#x27;re intentionally not yet including &lt;code&gt;effect/.do&lt;/code&gt; notation on this roadmap. We
+expect to only be able to start this work once we have &lt;code&gt;?async&lt;/code&gt; on nightly,
+which we don&#x27;t yet have. So for now we&#x27;ll continue work on designing it within
+the iniatiative, and hold off on making plans to introduce it quiet yet.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;And that concludes the 9-month progress report of the Keyword Generics
+Initiative. We hope to be able to provide more exact details about things such
+as desugarings, semantics, and alternatives in the RFCs. We&#x27;re pretty stoked with the
+progress we&#x27;ve made in these past few months! Something which I don&#x27;t think
+we&#x27;ve mentioned yet, but is probably good to share: we&#x27;ve actually prototyped
+much of the work in this post already; so we&#x27;re feeling fairly confident all of
+this may actually &lt;em&gt;actually&lt;/em&gt; work. And that is something we&#x27;re
+incredibly excited for!&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn1&quot;&gt;
+&lt;p&gt;To briefly recap this problem: you can&#x27;t call an &lt;code&gt;async fn&lt;/code&gt; from a
+non-async fn. This makes the &amp;quot;async&amp;quot; notation go viral, as every function that
+calls it also needs to be async. But we believe possibly more importantly: it
+requires a duplication of most stdlib types and ecosystem libraries. Instead we
+suspected we might be able to overcome this issue by introducing a new kind of
+generic which would enable functions and types to be &amp;quot;generic&amp;quot; over whether
+they&#x27;re async or not, const or not, etc. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn2&quot;&gt;
+&lt;p&gt;One restriction &lt;code&gt;?async&lt;/code&gt; contexts have is that they can
+only call other &lt;code&gt;?async&lt;/code&gt; and non-&lt;code&gt;async&lt;/code&gt; functions. Because if we could call an
+always-&lt;code&gt;async&lt;/code&gt; function, there would be no clear right thing to do when compiled
+in non-async mode. So things like async concurrency operations won&#x27;t directly
+work in always-async contexts. But we have a way out of this we talk about later
+in the post: &lt;code&gt;if is_async() .. else ..&lt;/code&gt;. This allows you to branch the body of a
+&lt;code&gt;?async fn&lt;/code&gt; based on which mode it&#x27;s being compiled in, and will allow you to
+write different logic for async and non-async modes. This means you can choose
+to use async concurrency in the async version, but keep things sequential in the
+non-async version. &lt;a href&#x3D;&quot;#fnref2&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Yoshua Wuyts</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Governance Reform RFC Announcement</title>
@@ -332,28 +687,6 @@ confidence, we will slowly increase the amount of traffic.&lt;/p&gt;
 
         <author>
             <name>Jan David Nose</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>1.66.0 pre-release testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/12/12/1.66.0-prerelease.html" type="text/html" title="1.66.0 pre-release testing" />
-        <published>2022-12-12T00:00:00+00:00</published>
-        <updated>2022-12-12T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2022/12/12/1.66.0-prerelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/12/12/1.66.0-prerelease.html">&lt;p&gt;The 1.66.0 pre-release is ready for testing. The release is scheduled for
-December 15. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1660-2022-12-15&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2022-12-12/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2022-12-12/index.html&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-66-0-pre-release-testing/17966&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The release team is also thinking about changes to our pre-release process:
-we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Release automation</name>
         </author>
     </entry>
     

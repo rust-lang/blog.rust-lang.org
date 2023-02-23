@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Keyword Generics Progress Report: February 2023 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Keyword Generics Progress Report: February 2023 | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Keyword Generics Progress Report: February 2023 | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+<link rel="manifest" href="../../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../../inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Keyword Generics Progress Report: February 2023" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Keyword Generics Progress Report: February 2023</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 23, 2023 &middot; Yoshua Wuyts
+     on behalf of <a href="https://github.com/rust-lang/keyword-generics-initiative">The Keyword Generics Initiative</a> 
+    </div>
+
+    <div class="post">
+      <h2><a href="#introduction" aria-hidden="true" class="anchor" id="introduction"></a>Introduction</h2>
+<p>About 9 months ago <a href="https://blog.rust-lang.org/inside-rust/2022/07/27/keyword-generics.html">we announced</a> the creation of the Keyword Generics
+Initiative; a group working under the lang team with the intent to solve the
+<a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">function coloring problem</a> <sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup> through the type system not just for
+<code>async</code>, but for <code>const</code> and all current and future function modifier keywords
+as well.</p>
+<p>We're happy to share that we've made a lot of progress over these last several
+months, and we're finally ready to start putting some of our designs forward through
+RFCs. Because it's been a while since our last update, and because we're excited
+to share what we've been working on, in this post we'll be going over some of the things
+we're planning to propose.</p>
+<h2><a href="#an-async-example" aria-hidden="true" class="anchor" id="an-async-example"></a>An async example</h2>
+<p>In our <a href="https://blog.rust-lang.org/inside-rust/2022/07/27/keyword-generics.html">previous post</a> we introduced the placeholder <code>async&lt;A&gt;</code> syntax to describe the
+concept of a &quot;function which is generic over its asyncness&quot;. We always knew we
+wanted something that felt lighter weight than that, so in for our current design
+we've chosen to drop the notion of a generic parameter for the end-user syntax,
+and instead picked the <code>?async</code> notation. We've borrowed this from the trait
+system, where for example <code>+ ?Sized</code> indicates that something may or may not
+implement the <code>Sized</code> trait. Similarly <code>?async</code> means a function may or may not be
+async. We also refer to these as &quot;maybe-async&quot; functions.</p>
+<p>Time for an example. Say we took the <a href="https://doc.rust-lang.org/std/io/trait.Read.html"><code>Read</code> trait</a> and the
+<a href="https://doc.rust-lang.org/std/io/fn.read_to_string.html">read_to_string_methods</a>. In the stdlib their implementations look somewhat
+like this today:</p>
+<pre><code class="language-rust">trait Read {
+    fn read(&amp;mut self, buf: &amp;mut [u8]) -&gt; Result&lt;usize&gt;;
+    fn read_to_string(&amp;mut self, buf: &amp;mut String) -&gt; Result&lt;usize&gt; { ... }
+}
+
+/// Read from a reader into a string.
+fn read_to_string(reader: &amp;mut impl Read) -&gt; std::io::Result&lt;String&gt; {
+    let mut string = String::new();
+    reader.read_to_string(&amp;mut string)?;
+    Ok(string)
+}
+</code></pre>
+<p>Now, what if we wanted to make these async in the future? Using <code>?async</code>
+notation we could change them to look like this:</p>
+<pre><code class="language-rust">trait ?async Read {
+    ?async fn read(&amp;mut self, buf: &amp;mut [u8]) -&gt; Result&lt;usize&gt;;
+    ?async fn read_to_string(&amp;mut self, buf: &amp;mut String) -&gt; Result&lt;usize&gt; { ... }
+}
+
+/// Read from a reader into a string.
+?async fn read_to_string(reader: &amp;mut impl ?async Read) -&gt; std::io::Result&lt;String&gt; {
+    let mut string = String::new();
+    reader.read_to_string(&amp;mut string).await?;
+    Ok(string)
+}
+</code></pre>
+<p>The way this would work is that <code>Read</code> and <code>read_to_string</code> would become generic over
+their &quot;asyncness&quot;. When compiled for an <code>async</code> context, they will behave
+asynchronously. When compiled in a non-async context, they will behave
+synchronously. The <code>.await</code> in the <code>read_to_string</code> function body is necessary
+to mark the cancellation pointin case the function is compiled as async; but
+when not async would essentially become a no-op <sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup>:</p>
+<pre><code class="language-rust">// `read_to_string` is inferred to be `!async` because
+// we didn't `.await` it, nor expected a future of any kind.
+#[test]
+fn sync_call() {
+    let _string = read_to_string(&quot;file.txt&quot;)?;
+}
+
+// `read_to_string` is inferred to be `async` because
+// we `.await`ed it.
+#[async_std::test]
+async fn async_call() {
+    let _string = read_to_string(&quot;file.txt&quot;).await?;
+}
+</code></pre>
+<p>We expect <code>?async</code> notation would be most useful for library code which doesn't
+do anything particularly specific to async Rust. Think: most of the stdlib, and
+ecosystem libraries such as parsers, encoders, and drivers. We expect most
+applications to choose to be compiled either as async or non-async, making them
+mostly a consumer of <code>?async</code> APIs.</p>
+<h2><a href="#a-const-example" aria-hidden="true" class="anchor" id="a-const-example"></a>A const example</h2>
+<p>A main driver of the keywords generics initiative has been our desire to make the
+different modifier keywords in Rust feel consistent with one another. Both the
+const WG and the async WG were thinking about introducing keyword-traits at the
+same time, and we figured we should probably start talking with each other to make
+sure that what we were going to introduce felt like it was part of the same
+language - and could be extended to support more keywords in the future.</p>
+<p>So with that in mind, it may be unsurprising that for the maybe-<code>const</code> trait
+bounds and declarations we're going to propose using the <code>?const</code> notation.
+A common source of confusion with <code>const fn</code> is that it actually doesn't
+guarantee compile-time execution; it only means that it's <em>possible</em> to evaluate
+in a <code>const</code> compile-time context. So in a way <code>const fn</code> has always been a way
+of declaring a &quot;maybe-const&quot; function, and there isn't a way to declare an
+&quot;always-const&quot; function. More on that later in this post.</p>
+<p>Taking the <code>Read</code> example we used earlier, we could imagine a &quot;maybe-const&quot; version
+of the <code>Read</code> trait to look very similar:</p>
+<pre><code class="language-rust">trait ?const Read {
+    ?const fn read(&amp;mut self, buf: &amp;mut [u8]) -&gt; Result&lt;usize&gt;;
+    ?const fn read_to_string(&amp;mut self, buf: &amp;mut String) -&gt; Result&lt;usize&gt; { ... }
+}
+</code></pre>
+<p>Which we could then use use as a bound in the const <code>read_to_string</code> function,
+like this:</p>
+<pre><code class="language-rust">const fn read_to_string(reader: &amp;mut impl ?const Read) -&gt; std::io::Result&lt;String&gt; {
+    let mut string = String::new();
+    reader.read_to_string(&amp;mut string)?;
+    Ok(string)
+}
+</code></pre>
+<p>Just like with <code>?async</code> traits, <code>?const</code> traits would also need to be labeled as
+<code>?const</code> when used as a bound. This is important to surface at the trait level,
+because it's allowed to pass non-const bounds to maybe-const functions, as long
+as no trait methods are called in the function body. This means we need to
+distinguish between &quot;never-const&quot; and &quot;maybe-const&quot;.</p>
+<p>You may have noticed the <code>?const</code> on the trait declaration and the extra
+<code>?const</code> on the trait methods. This is on purpose: it keeps the path open to
+potentially add support for &quot;always-const&quot; or &quot;never-const&quot; methods on traits as
+well. In <code>?async</code> we know that even if the entire trait is <code>?async</code>, some
+methods (such as <code>Iterator::size_hint</code>) will never be async. And this would
+make <code>?const</code> and <code>?async</code> traits behave similarly using the same rules.</p>
+<h2><a href="#combining-const-and-async" aria-hidden="true" class="anchor" id="combining-const-and-async"></a>Combining const and async</h2>
+<p>We've covered <code>?async</code>, and we've covered <code>?const</code>. Now what happens if we were
+to use them together? Let's take a look at what the <code>Read</code> trait would look like
+when if we extended it using our designs for <code>?const</code> and <code>?async</code>:</p>
+<pre><code class="language-rust">trait ?const ?async Read {
+    ?const ?async fn read(&amp;mut self, buf: &amp;mut [u8]) -&gt; Result&lt;usize&gt;;
+    ?const ?async fn read_to_string(&amp;mut self, buf: &amp;mut String) -&gt; Result&lt;usize&gt; { .. }
+}
+
+/// Read from a reader into a string.
+?const ?async fn read_to_string(reader: &amp;mut impl ?const ?async Read) -&gt; io::Result&lt;String&gt; {
+    let mut string = String::new();
+    reader.read_to_string(&amp;mut string).await?;
+    Ok(string)
+}
+</code></pre>
+<p>That's sure starting to feel like a lot of keywords, right? We've accurately
+described exactly what's going on, but there's a lot of repetition. We know that
+if we're dealing with a <code>?const ?async fn</code>, most arguments probably will also
+want to be <code>?const ?async</code>. But under the syntax rules we've proposed so far,
+you'd end up repeating that everywhere. And it probably gets worse once we start
+adding in more keywords. Not ideal!</p>
+<p>So we're very eager to make sure that we find a solution to this. And we've been
+thinking about a way we could get out of this, which we've been calling
+<code>effect/.do</code>-notation. This would allow you to mark a function as &quot;generic over
+all modifier keywords&quot; by annotating it as <code>effect fn</code>, and it would allow the
+compiler to insert all the right <code>.await</code>, <code>?</code>, and <code>yield</code> keywords in the
+function body by suffixing function calls with <code>.do</code>.</p>
+<p>Just to set some expectations: this is the least developed part of our proposal,
+and we don't intend to formally propose this until after we're done with some of
+the other proposals. But we think it's an important part of the entire vision,
+so we wanted to make sure we shared it here. And with that out of the way,
+here's the same example we had above, but this time using the <code>effect/.do</code>-notation:</p>
+<pre><code class="language-rust">trait ?effect Read {
+    ?effect fn read(&amp;mut self, buf: &amp;mut [u8]) -&gt; Result&lt;usize&gt;;
+    ?effect fn read_to_string(&amp;mut self, buf: &amp;mut String) -&gt; Result&lt;usize&gt; { .. }
+}
+
+/// Read from a reader into a string.
+?effect fn read_to_string(reader: &amp;mut impl ?effect Read) -&gt; std::io::Result&lt;String&gt; {
+    let mut string = String::new();
+    reader.read_to_string(&amp;mut string).do;  // note the singular `.do` here
+    string
+}
+</code></pre>
+<p>One of the things we would like to figure out as part of <code>effect/.do</code> is a way
+to enable writing conditional effect-bounds. For example: there may be a
+function which is always async, may never panic, and is generic over the
+remainder of the effects. Or like we're seeing with APIs such as
+<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.reserve"><code>Vec::reserve</code></a> and <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.try_reserve"><code>Vec::try_reserve</code></a>: the ability to panic xor return an
+error. This will take more time and research to figure out, but we believe it
+is something which can be solved.</p>
+<h2><a href="#adding-support-for-types" aria-hidden="true" class="anchor" id="adding-support-for-types"></a>Adding support for types</h2>
+<p>Something we're keen on doing is not just adding support for <code>?async</code> and to
+apply to functions, traits, and trait bounds. We would like <code>?async</code> to be
+possible to use with types as well. This would enable the ecosystem to stop
+having to provide both sync and async versions of crates. It would also enable
+the stdlib to gradually &quot;asyncify&quot; just like we have been with const.</p>
+<p>The challenge with async types, especially in the stdlib, is that their behavior
+will often have to be different when used in async and non-async contexts. At
+the very lowest level async system calls work a bit differently from non-async
+system calls. But we think we may have a solution for that too in the form of
+the <code>is_async</code> compiler built-in method.</p>
+<p>Say we wanted to implement <code>?async File</code> with a single <code>?async open</code> method. The
+way we expect this to look will be something like this:</p>
+<pre><code class="language-rust">/// A file which may or may not be async
+struct ?async File {
+    file_descriptor: std::os::RawFd,  // shared field in all contexts
+    async waker: Waker,               // field only available in async contexts
+    !async meta: Metadata,            // field only available in non-async contexts
+}
+
+impl ?async File {
+    /// Attempts to open a file in read-only mode.
+    ?async fn open(path: Path) -&gt; io::Result&lt;Self&gt; {
+        if is_async() {   // compiler built-in function
+            // create an async `File` here; can use `.await`
+        } else {
+            // create a non-async `File` here
+        }
+    }
+}
+</code></pre>
+<p>This would enable authors to use different fields depending on whether they're
+compiling for async or not, while still sharing a common core. And within
+function bodies it would be possible to provide different behaviors depending on
+the context as well. The function body notation would work as a generalization
+of the currently unstable <a href="https://doc.rust-lang.org/std/intrinsics/fn.const_eval_select.html"><code>const_eval_select</code></a> intrinsic, and at
+least for the function bodies we expect a similar <code>is_const()</code> compiler built-in
+to be made available as well.</p>
+<h2><a href="#consistent-syntax" aria-hidden="true" class="anchor" id="consistent-syntax"></a>Consistent syntax</h2>
+<p>As we alluded to earlier in the post: one of the biggest challenges we see in
+language design is adding features in a way that makes them feel like they're in
+harmony with the rest of the language - and not something which stands out as
+noticably different. And because we're touching on something core to Rust, the
+way we do keywords, we have to pay extra close attention here to make sure Rust
+keeps feeling like a single language.</p>
+<p>Luckily Rust has the ability to make surface-level changes to the
+language through the edition system. There are many things this doesn't let us
+do, but it does allow us to require syntax changes. A possibility we're
+exploring is leveraging the edition system to make some minor changes to <code>const</code>
+and <code>async</code> so they feel more consistent with one another, and with <code>?const</code> and
+<code>?async</code>.</p>
+<p>For <code>const</code> this means there should be a syntactic distinction between <code>const</code>
+declarations and <code>const</code> uses. Like we mentioned earlier in the post, when you
+write <code>const fn</code> you get a function which can be evaluated both at runtime and
+during compilation. But when you write <code>const FOO: () = ..;</code> the meaning of
+<code>const</code> there guarantees compile-time evaluation. One keyword, different
+meanings. So for that reason we're wondering whether perhaps it would make more
+sense if we changed <code>const fn</code> to <code>?const fn</code>.  This would make it clear that
+it's a function which <em>may</em> be const-evaluated, but doesn't necessarily have to -
+and can also be called from non-<code>const</code> contexts.</p>
+<pre><code class="language-rust">//! Define a function which may be evaluated both at runtime and during
+//! compilation.
+
+// Current
+const fn meow() -&gt; String { .. }
+
+// Proposed
+?const fn meow() -&gt; String { .. }
+</code></pre>
+<p>For <code>async</code> we're considering some similar surface-level changes.  The Async WG
+is in the process of expanding the &quot;async functions in traits&quot; design into an
+design covering &quot;async traits&quot; entirely, largely motivated by the desire to be
+able to add <code>+ Send</code> bound to anonymous futures. There are more details about
+this in [&quot;Lightweight, Predictable Async Send Bounds&quot;][bounds-post] by Eric
+Holk. But it would roughly become the following notation:</p>
+<pre><code class="language-rust">struct File { .. }
+impl async Read for File {                                                // async trait declaration
+    async fn read(&amp;mut self, buf: &amp;mut [u8]) -&gt; io::Result&lt;usize&gt; { .. }  // async method
+}
+
+async fn read_to_string(reader: &amp;mut impl async Read) -&gt; io::Result&lt;String&gt; { // async trait bound
+    let mut string = String::new();
+    reader.read_to_string(&amp;mut string).await?;
+    Ok(string)
+}
+</code></pre>
+<p>This would make <code>impl ?async Read</code> and <code>impl async Read</code> consistent with each
+other. And it would open the door for <code>trait ?async</code> traits to be passed to
+<code>impl async Read</code> and be guaranteed to be always interpreted as <code>trait async</code>.
+Which is another nice consistency gain.</p>
+<p>The final thing we're looking at is <code>async</code>-notation for types. To implement
+inherent <code>?async</code> methods on types, our current design requires the type to also
+be marked as <code>?async</code>. In order to bring <code>?async</code> and <code>async</code> closer together,
+we're exploring whether it might also make sense to require types to be marked
+as <code>async</code> as well:</p>
+<pre><code class="language-rust">//! Proposed: define a method on a maybe-async type
+struct ?async File { .. }
+impl ?async File {
+    ?async fn open(path: PathBuf) -&gt; io::Result&lt;Self&gt; { .. }
+}
+
+//! Current: define a method on an always-async type
+struct File { .. }
+impl File {
+    async fn open(path: PathBuf) -&gt; io::Result&lt;Self&gt; { .. }
+}
+
+//! Proposed: define a method on an always-async type
+struct async File { .. }
+impl async File {
+    async fn open(path: PathBuf) -&gt; io::Result&lt;Self&gt; { .. }
+}
+</code></pre>
+<p>We already have something similar going on for &quot;always-const&quot; arguments via the
+const-generics system. These look something like this:</p>
+<pre><code class="language-rust">fn foo&lt;const N: usize&gt;() {}
+</code></pre>
+<p>Every &quot;always-const&quot; argument to the function must always be marked by <code>const</code>,
+so it wouldn't be entirely without precedent for every &quot;always-async&quot; type to
+always require to be marked using <code>async</code>. So we're exploring some of what might
+be possible here.</p>
+<h2><a href="#the-tentative-plan" aria-hidden="true" class="anchor" id="the-tentative-plan"></a>The tentative plan</h2>
+<p>We plan to initially focus our efforts on the <code>async</code> and <code>const</code> keywords only.
+We're feeling ready to start converting some of our designs into RFCs, and start
+putting them out for review. In the coming months we expect to start writing
+the following proposals (in no particular order):</p>
+<ul>
+<li><code>?async fn</code> notation without trait bounds, including an <code>is_async</code> mechanism.</li>
+<li><code>trait async</code>  declarations and bounds.</li>
+<li><code>trait ?async</code> declarations and bounds, <code>trait ?const</code> declarations and bounds.</li>
+<li><code>?const fn</code> notation without trait bounds.</li>
+<li><code>struct async</code> notation and <code>struct ?const</code> notation.</li>
+</ul>
+<p>We'll be working closely with the Lang Team, Const WG, and Async WG on these
+proposals, and in some cases (such as <code>trait async</code>) we may even take an
+advicing role with a WG directly driving the RFC. As usual, these will be going
+through the RFC-nightly-stabilization cycle. And only once we're fully confident
+in them will they become available on stable Rust.</p>
+<p>We're intentionally not yet including <code>effect/.do</code> notation on this roadmap. We
+expect to only be able to start this work once we have <code>?async</code> on nightly,
+which we don't yet have. So for now we'll continue work on designing it within
+the iniatiative, and hold off on making plans to introduce it quiet yet.</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>And that concludes the 9-month progress report of the Keyword Generics
+Initiative. We hope to be able to provide more exact details about things such
+as desugarings, semantics, and alternatives in the RFCs. We're pretty stoked with the
+progress we've made in these past few months! Something which I don't think
+we've mentioned yet, but is probably good to share: we've actually prototyped
+much of the work in this post already; so we're feeling fairly confident all of
+this may actually <em>actually</em> work. And that is something we're
+incredibly excited for!</p>
+<section class="footnotes">
+<ol>
+<li id="fn1">
+<p>To briefly recap this problem: you can't call an <code>async fn</code> from a
+non-async fn. This makes the &quot;async&quot; notation go viral, as every function that
+calls it also needs to be async. But we believe possibly more importantly: it
+requires a duplication of most stdlib types and ecosystem libraries. Instead we
+suspected we might be able to overcome this issue by introducing a new kind of
+generic which would enable functions and types to be &quot;generic&quot; over whether
+they're async or not, const or not, etc. <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2">
+<p>One restriction <code>?async</code> contexts have is that they can
+only call other <code>?async</code> and non-<code>async</code> functions. Because if we could call an
+always-<code>async</code> function, there would be no clear right thing to do when compiled
+in non-async mode. So things like async concurrency operations won't directly
+work in always-async contexts. But we have a way out of this we talk about later
+in the post: <code>if is_async() .. else ..</code>. This allows you to branch the body of a
+<code>?async fn</code> based on which mode it's being compiled in, and will allow you to
+write different logic for async and non-async modes. This means you can choose
+to use async concurrency in the async version, but keep things sequential in the
+non-async version. <a href="#fnref2" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../../scripts/highlight.js"></script>
+
+  </body>
+</html>
