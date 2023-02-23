@@ -310,7 +310,7 @@ const fn meow() -&gt; String { .. }
 is in the process of expanding the &quot;async functions in traits&quot; design into an
 design covering &quot;async traits&quot; entirely, largely motivated by the desire to be
 able to add <code>+ Send</code> bound to anonymous futures. There are more details about
-this in [&quot;Lightweight, Predictable Async Send Bounds&quot;][bounds-post] by Eric
+this in <a href="https://blog.theincredibleholk.org/blog/2023/02/16/lightweight-predictable-async-send-bounds/">&quot;Lightweight, Predictable Async Send Bounds&quot;</a> by Eric
 Holk. But it would roughly become the following notation:</p>
 <pre><code class="language-rust">struct File { .. }
 impl async Read for File {                                                // async trait declaration

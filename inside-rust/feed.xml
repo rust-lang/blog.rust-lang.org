@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-02-23T13:47:41+00:00</updated>
+    <updated>2023-02-23T15:34:24+00:00</updated>
 
     
     <entry>
@@ -258,7 +258,7 @@ const fn meow() -&amp;gt; String { .. }
 is in the process of expanding the &amp;quot;async functions in traits&amp;quot; design into an
 design covering &amp;quot;async traits&amp;quot; entirely, largely motivated by the desire to be
 able to add &lt;code&gt;+ Send&lt;/code&gt; bound to anonymous futures. There are more details about
-this in [&amp;quot;Lightweight, Predictable Async Send Bounds&amp;quot;][bounds-post] by Eric
+this in &lt;a href&#x3D;&quot;https://blog.theincredibleholk.org/blog/2023/02/16/lightweight-predictable-async-send-bounds/&quot;&gt;&amp;quot;Lightweight, Predictable Async Send Bounds&amp;quot;&lt;/a&gt; by Eric
 Holk. But it would roughly become the following notation:&lt;/p&gt;
 &lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;struct File { .. }
 impl async Read for File {                                                // async trait declaration
