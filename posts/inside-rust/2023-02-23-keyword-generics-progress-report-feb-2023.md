@@ -327,6 +327,8 @@ able to add `+ Send` bound to anonymous futures. There are more details about
 this in ["Lightweight, Predictable Async Send Bounds"][bounds-post] by Eric
 Holk. But it would roughly become the following notation:
 
+[bounds-post]: https://blog.theincredibleholk.org/blog/2023/02/16/lightweight-predictable-async-send-bounds/
+
 ```rust
 struct File { .. }
 impl async Read for File {                                                // async trait declaration
