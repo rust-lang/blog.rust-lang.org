@@ -147,7 +147,7 @@ Which we could then use use as a bound in the const `read_to_string` function,
 like this:
 
 ```rust
-const fn read_to_string(reader: &mut impl ?const Read) -> std::io::Result<String> {
+?const fn read_to_string(reader: &mut impl ?const Read) -> std::io::Result<String> {
     let mut string = String::new();
     reader.read_to_string(&mut string)?;
     Ok(string)
