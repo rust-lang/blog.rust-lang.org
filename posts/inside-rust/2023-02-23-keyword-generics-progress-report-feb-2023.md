@@ -80,7 +80,7 @@ The way this would work is that `Read` and `read_to_string` would become generic
 their "asyncness". When compiled for an `async` context, they will behave
 asynchronously. When compiled in a non-async context, they will behave
 synchronously. The `.await` in the `read_to_string` function body is necessary
-to mark the cancellation pointin case the function is compiled as async; but
+to mark the cancellation point in case the function is compiled as async; but
 when not async would essentially become a no-op [^always-async-maybe]:
 
 [^always-async-maybe]: One restriction `?async` contexts have is that they can
@@ -400,14 +400,14 @@ the following proposals (in no particular order):
 
 We'll be working closely with the Lang Team, Const WG, and Async WG on these
 proposals, and in some cases (such as `trait async`) we may even take an
-advicing role with a WG directly driving the RFC. As usual, these will be going
+advising role with a WG directly driving the RFC. As usual, these will be going
 through the RFC-nightly-stabilization cycle. And only once we're fully confident
 in them will they become available on stable Rust.
 
 We're intentionally not yet including `effect/.do` notation on this roadmap. We
 expect to only be able to start this work once we have `?async` on nightly,
 which we don't yet have. So for now we'll continue work on designing it within
-the iniatiative, and hold off on making plans to introduce it quiet yet.
+the initiative, and hold off on making plans to introduce it quiet yet.
 
 ## Conclusion
 
