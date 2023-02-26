@@ -183,7 +183,7 @@ trait ?const ?async Read {
 }
 
 /// Read from a reader into a string.
-?const ?async fn read_to_string(reader: &mut impl ?const ?async Read) -> io::Result<String> {
+const ?async fn read_to_string(reader: &mut impl ?const ?async Read) -> io::Result<String> {
     let mut string = String::new();
     reader.read_to_string(&mut string).await?;
     Ok(string)
@@ -192,7 +192,7 @@ trait ?const ?async Read {
 
 That's sure starting to feel like a lot of keywords, right? We've accurately
 described exactly what's going on, but there's a lot of repetition. We know that
-if we're dealing with a `?const ?async fn`, most arguments probably will also
+if we're dealing with a `const ?async fn`, most arguments probably will
 want to be `?const ?async`. But under the syntax rules we've proposed so far,
 you'd end up repeating that everywhere. And it probably gets worse once we start
 adding in more keywords. Not ideal!
