@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-02-24T09:10:44+00:00</updated>
+    <updated>2023-02-26T17:11:11+00:00</updated>
 
     
     <entry>
@@ -143,7 +143,7 @@ when if we extended it using our designs for &lt;code&gt;?const&lt;/code&gt; and
 }
 
 /// Read from a reader into a string.
-?const ?async fn read_to_string(reader: &amp;amp;mut impl ?const ?async Read) -&amp;gt; io::Result&amp;lt;String&amp;gt; {
+const ?async fn read_to_string(reader: &amp;amp;mut impl ?const ?async Read) -&amp;gt; io::Result&amp;lt;String&amp;gt; {
     let mut string &#x3D; String::new();
     reader.read_to_string(&amp;amp;mut string).await?;
     Ok(string)
@@ -151,7 +151,7 @@ when if we extended it using our designs for &lt;code&gt;?const&lt;/code&gt; and
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;That&#x27;s sure starting to feel like a lot of keywords, right? We&#x27;ve accurately
 described exactly what&#x27;s going on, but there&#x27;s a lot of repetition. We know that
-if we&#x27;re dealing with a &lt;code&gt;?const ?async fn&lt;/code&gt;, most arguments probably will also
+if we&#x27;re dealing with a &lt;code&gt;const ?async fn&lt;/code&gt;, most arguments probably will
 want to be &lt;code&gt;?const ?async&lt;/code&gt;. But under the syntax rules we&#x27;ve proposed so far,
 you&#x27;d end up repeating that everywhere. And it probably gets worse once we start
 adding in more keywords. Not ideal!&lt;/p&gt;

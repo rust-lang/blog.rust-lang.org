@@ -195,7 +195,7 @@ when if we extended it using our designs for <code>?const</code> and <code>?asyn
 }
 
 /// Read from a reader into a string.
-?const ?async fn read_to_string(reader: &amp;mut impl ?const ?async Read) -&gt; io::Result&lt;String&gt; {
+const ?async fn read_to_string(reader: &amp;mut impl ?const ?async Read) -&gt; io::Result&lt;String&gt; {
     let mut string = String::new();
     reader.read_to_string(&amp;mut string).await?;
     Ok(string)
@@ -203,7 +203,7 @@ when if we extended it using our designs for <code>?const</code> and <code>?asyn
 </code></pre>
 <p>That's sure starting to feel like a lot of keywords, right? We've accurately
 described exactly what's going on, but there's a lot of repetition. We know that
-if we're dealing with a <code>?const ?async fn</code>, most arguments probably will also
+if we're dealing with a <code>const ?async fn</code>, most arguments probably will
 want to be <code>?const ?async</code>. But under the syntax rules we've proposed so far,
 you'd end up repeating that everywhere. And it probably gets worse once we start
 adding in more keywords. Not ideal!</p>
