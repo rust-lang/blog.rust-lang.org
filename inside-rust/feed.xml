@@ -10,8 +10,30 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-02-26T17:11:11+00:00</updated>
+    <updated>2023-03-06T21:18:25+00:00</updated>
 
+    
+    <entry>
+        <title>1.68.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/03/06/1.68.0-prerelease.html" type="text/html" title="1.68.0 pre-release testing" />
+        <published>2023-03-06T00:00:00+00:00</published>
+        <updated>2023-03-06T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2023/03/06/1.68.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/03/06/1.68.0-prerelease.html">&lt;p&gt;The 1.68.0 pre-release is ready for testing. The release is scheduled for
+March 09. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1680-2023-03-09&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2023-03-06/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2023-03-06/index.html&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-68-0-pre-release-testing/18481&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The release team is also thinking about changes to our pre-release process:
+we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Release automation</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Keyword Generics Progress Report: February 2023</title>
@@ -650,43 +672,6 @@ we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/
 
         <author>
             <name>Release automation</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Diversifying our Content Delivery Networks</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/01/24/content-delivery-networks.html" type="text/html" title="Diversifying our Content Delivery Networks" />
-        <published>2023-01-24T00:00:00+00:00</published>
-        <updated>2023-01-24T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2023/01/24/content-delivery-networks.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/01/24/content-delivery-networks.html">&lt;p&gt;Over the past few weeks, the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/infra&quot;&gt;Infrastructure Team&lt;/a&gt; has been working on setting
-up a second &lt;a href&#x3D;&quot;https://en.wikipedia.org/wiki/Content_delivery_network&quot;&gt;Content Delivery Network&lt;/a&gt; (CDN) for releases and crates.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-changing&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-changing&quot;&gt;&lt;/a&gt;What is changing&lt;/h2&gt;
-&lt;p&gt;Rust releases (&lt;code&gt;static.rust-lang.org&lt;/code&gt;) and crates (&lt;code&gt;static.crates.io&lt;/code&gt;) will be
-served through both &lt;a href&#x3D;&quot;https://aws.amazon.com/cloudfront/&quot;&gt;AWS CloudFront&lt;/a&gt; and
-&lt;a href&#x3D;&quot;https://www.fastly.com&quot;&gt;Fastly&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This is a transparent change to the infrastructure that doesn&#x27;t require users or
-developers to take any action. We expect no downtime for Rust users as part of
-the migration.&lt;/p&gt;
-&lt;p&gt;This also covers only the CDNs for releases (&lt;code&gt;static.rust-lang.org&lt;/code&gt;) and
-crates.io (&lt;code&gt;static.crates.io&lt;/code&gt;), no changes are planned for the rest of Rust&#x27;s
-domains.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#timeline&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;timeline&quot;&gt;&lt;/a&gt;Timeline&lt;/h2&gt;
-&lt;p&gt;We are starting the rollout of the new CDN tomorrow, on January 25th, with
-&lt;code&gt;static.crates.io&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The rollout will happen very gradually over a period of time. We will start to
-send a small percentage of traffic through &lt;a href&#x3D;&quot;https://www.fastly.com/&quot;&gt;Fastly&lt;/a&gt;,
-while observing the performance and reliability of the new network. As we gain
-confidence, we will slowly increase the amount of traffic.&lt;/p&gt;
-&lt;p&gt;Once &lt;code&gt;static.crates.io&lt;/code&gt; has been deployed, we will start working on
-&lt;code&gt;static.rust-lang.org&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#report-issues&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;report-issues&quot;&gt;&lt;/a&gt;Report issues&lt;/h2&gt;
-&lt;p&gt;If something &lt;em&gt;does&lt;/em&gt; break, please let the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/infra&quot;&gt;Infrastructure Team&lt;/a&gt; know on
-&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/t-infra&quot;&gt;#t-infra on Zulip&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Jan David Nose</name>
         </author>
     </entry>
     
