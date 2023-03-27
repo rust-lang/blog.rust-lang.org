@@ -10,8 +10,30 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-03-23T14:22:42+00:00</updated>
+    <updated>2023-03-27T11:55:58+00:00</updated>
 
+    
+    <entry>
+        <title>1.68.2 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/03/27/1.68.2-prerelease.html" type="text/html" title="1.68.2 pre-release testing" />
+        <published>2023-03-27T00:00:00+00:00</published>
+        <updated>2023-03-27T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2023/03/27/1.68.2-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/03/27/1.68.2-prerelease.html">&lt;p&gt;The 1.68.2 pre-release is ready for testing. The release is scheduled for
+March 28. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1682-2023-03-28&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2023-03-27/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2023-03-27/index.html&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-68-2-pre-release-testing/18585&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The release team is also thinking about changes to our pre-release process:
+we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Release automation</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.68.1 pre-release testing</title>
@@ -625,53 +647,6 @@ we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/
 
         <author>
             <name>Release automation</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Help test Cargo&#x27;s new index protocol</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/01/30/cargo-sparse-protocol.html" type="text/html" title="Help test Cargo&#x27;s new index protocol" />
-        <published>2023-01-30T00:00:00+00:00</published>
-        <updated>2023-01-30T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2023/01/30/cargo-sparse-protocol.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/01/30/cargo-sparse-protocol.html">&lt;p&gt;Cargo&#x27;s new index protocol will be available starting in Rust 1.68, which will be released on 2023-03-09.
-This new &amp;quot;sparse&amp;quot; protocol should usually provide a significant performance improvement when accessing &lt;a href&#x3D;&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;We would like your help in testing this new feature and infrastructure.
-If you use beta (1.68) or nightly-2023-01-21 or newer, set the environment variable &lt;code&gt;CARGO_REGISTRIES_CRATES_IO_PROTOCOL&#x3D;sparse&lt;/code&gt;, or edit your &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/config.html&quot;&gt;&lt;code&gt;.cargo/config.toml&lt;/code&gt; file&lt;/a&gt; to add:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[registries.crates-io]
-protocol &#x3D; &amp;quot;sparse&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We would like to hear reports on your experience.
-If you run into a problem, please &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/new?assignees&#x3D;&amp;amp;labels&#x3D;C-bug&amp;amp;template&#x3D;bug_report.yml&quot;&gt;open an issue&lt;/a&gt;.
-If you would like to post general feedback, feel free to leave a message on &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/cargo-sparse-protocol-feedback-thread/18234&quot;&gt;this internals thread&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Along with fetching crates and running &lt;code&gt;cargo update&lt;/code&gt;, we&#x27;d also like to hear if you have any issues when running &lt;code&gt;cargo publish&lt;/code&gt;.
-Another data point that may be helpful is to gauge how many users are behind a restrictive firewall, proxy, or other network environment that prevents access to the index.&lt;/p&gt;
-&lt;p&gt;This new service will be opt-in as we roll it out and gather information about how it performs.
-In the near future we intend to switch to this as the default.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#background&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;background&quot;&gt;&lt;/a&gt;Background&lt;/h2&gt;
-&lt;p&gt;In order for Cargo to determine which crates exist on &lt;a href&#x3D;&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt;, it downloads and reads an &amp;quot;index&amp;quot; which lists all versions of all crates.
-The index lives in a &lt;a href&#x3D;&quot;https://github.com/rust-lang/crates.io-index/&quot;&gt;git repository&lt;/a&gt; hosted on GitHub.
-Cargo fetches and stores the index in Cargo&#x27;s home directory.
-This system lets GitHub handle the server-side processing, and provides a convenient way to incrementally fetch new updates.&lt;/p&gt;
-&lt;p&gt;However, as the index has grown considerably over time, this system has started to hit scaling limitations, and initial fetches and updates continue to slow down. You may have noticed a pause when Cargo displays &lt;code&gt;Updating crates.io index&lt;/code&gt; or while going through the &amp;quot;resolving deltas&amp;quot; phase:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Updating crates.io index
-    Fetch [&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&amp;gt;       ]  74.01%, (64415/95919) resolving deltas
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2789-sparse-index.html&quot;&gt;RFC 2789&lt;/a&gt;, we introduced a new protocol to improve the way Cargo accesses the index.
-Instead of using git, it fetches files from the index directly over HTTPS.
-Cargo will only download information about the specific crate dependencies in your project.&lt;/p&gt;
-&lt;p&gt;We have introduced a new service at &lt;code&gt;https://index.crates.io/&lt;/code&gt; for hosting the &lt;a href&#x3D;&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt; index.
-If you are behind a restrictive firewall or proxy, you may need to explicitly allow Cargo to access this site.&lt;/p&gt;
-&lt;p&gt;More information about how the index and this new sparse protocol works can be found in &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/registry-index.html#index-protocols&quot;&gt;the documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The &lt;a href&#x3D;&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt; git repository will continue to be the source of truth for the index, and Cargo will continue to support git indexes indefinitely.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#acknowledgements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;acknowledgements&quot;&gt;&lt;/a&gt;Acknowledgements&lt;/h2&gt;
-&lt;p&gt;We would like to give a huge show of gratitude to &lt;a href&#x3D;&quot;https://github.com/arlosi&quot;&gt;Arlo Siemsen&lt;/a&gt; who implemented this feature and went to great lengths to bring it to completion.
-We would also like to thank the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/crates-io&quot;&gt;crates.io team&lt;/a&gt; and the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/infra&quot;&gt;infrastructure team&lt;/a&gt; for implementing, reviewing, and supporting this endeavor.
-We would also like to acknowledge the generosity of &lt;a href&#x3D;&quot;https://github.com/&quot;&gt;GitHub&lt;/a&gt; for hosting the crates.io index over the past 8 years.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Eric Huss</name>
         </author>
     </entry>
     
