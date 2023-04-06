@@ -10,8 +10,25 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-03-28T13:01:42+00:00</updated>
+    <updated>2023-04-06T23:52:00+00:00</updated>
 
+    
+    <entry>
+        <title>Welcome Arlo and Scott to the Cargo Team</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/04/06/cargo-new-members.html" type="text/html" title="Welcome Arlo and Scott to the Cargo Team" />
+        <published>2023-04-06T00:00:00+00:00</published>
+        <updated>2023-04-06T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2023/04/06/cargo-new-members.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/04/06/cargo-new-members.html">&lt;p&gt;We are excited to welcome &lt;a href&#x3D;&quot;https://github.com/arlosi&quot;&gt;Arlo Siemsen&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/Muscraft&quot;&gt;Scott Schafer&lt;/a&gt; as new members to the Cargo Team!&lt;/p&gt;
+&lt;p&gt;Arlo has been instrumental in bringing Cargo&#x27;s new &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2023/01/30/cargo-sparse-protocol.html&quot;&gt;sparse registry&lt;/a&gt; support to fruition, which significantly improves registry performance. He has been involved with registry design and authentication discussions, and has been closely working with the team over the past year.&lt;/p&gt;
+&lt;p&gt;Scott has been very active in the past year, working on various parts of Cargo, namely implementing &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/workspaces.html#the-package-table&quot;&gt;workspace inheritance&lt;/a&gt;. Since then, he has been helping with maintenance and designing new features.&lt;/p&gt;
+&lt;p&gt;With their help we now have capacity to start thinking about how feature development should be done moving forward. We are still in early discussions of processes for matching feature development with reviewer capacity, and will share more in the future. Thanks to Arlo and Scott for their help, and we are very much looking forward to having them as a part of the team!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Eric Huss</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.68.2 pre-release testing</title>
@@ -625,28 +642,6 @@ configuration in Git and what is deployed.&lt;/li&gt;
 
         <author>
             <name>Jan David Nose</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>1.67.1 pre-release testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/02/07/1.67.1-prerelease.html" type="text/html" title="1.67.1 pre-release testing" />
-        <published>2023-02-07T00:00:00+00:00</published>
-        <updated>2023-02-07T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2023/02/07/1.67.1-prerelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/02/07/1.67.1-prerelease.html">&lt;p&gt;The 1.67.1 pre-release is ready for testing. The release is scheduled for
-February 09. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1671-2023-02-09&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2023-02-07/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2023-02-07/index.html&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-67-1-pre-release-testing/18289&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The release team is also thinking about changes to our pre-release process:
-we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Release automation</name>
         </author>
     </entry>
     
