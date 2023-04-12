@@ -45,7 +45,7 @@ We're committed to learning everything we can from this process and your feedbac
 
 Thank you again to those who have shared their thoughts on the Rust Trademark Policy draft respectfully. A summary of the feedback received will be shared after the consultation period closes. If you have not yet reviewed the draft, we invite you to fill out the [feedback form] by April 16 at 5 PM PDT. We only ask that you treat everyone in this community, including the Rust Foundation team, respectfully when doing so.
 
-Sincerely, (project directors and wg members add your names please)
+Sincerely,
 
 * Ryan Levick, Project Director and trademark working group member
 * Jane Losare-Lusby, Project Director
