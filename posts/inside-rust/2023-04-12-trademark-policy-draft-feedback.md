@@ -2,12 +2,11 @@
 layout: post
 title: "A note on the Trademark Policy Draft"
 author: Ryan Levick, Jane Losare-Lusby, Tyler Mandry, Mark Rousskov, Josh Stone, and Josh Triplett
-team: The Foundation Project Directors and informal Trademark Working Group Members
 ---
 
 # A note on the Trademark Policy Draft
 
-The Rust Foundation Project Directors have been working with the informal Trademark Working Group and the Foundation staff to draft an updated policy and FAQ for the Rust trademark. We'd like to provide some context around this work and address the community response to the [feedback form] for the recently circulated draft.
+For the past eight months, the Rust Foundation Project Directors have been working with the informal Trademark Working Group and the Foundation staff to draft an updated policy and FAQ for the Rust trademark. We'd like to provide some context around this work and address the community response to the [feedback form] for the recently circulated draft.
 
 ## Background
 
