@@ -9,7 +9,7 @@ team: The Foundation Project Directors and informal Trademark Working Group Memb
 
 The Rust Foundation Project Directors have been working with the informal Trademark Working Group and the Foundation staff to draft an updated policy and FAQ for the Rust trademark. We'd like to provide some context around this work and address the community response to the [feedback form] for the recently circulated draft.
 
-### Background
+## Background
 
 Back when the Rust Foundation was created, one of the first things to happen was Mozilla transferring its ownership of the Rust trademark to the newly created foundation. An update to the existing policy[^mozilla-policy] was needed, and project leadership planned for this to be done together with the Foundation.
 
@@ -17,7 +17,7 @@ Back when the Rust Foundation was created, one of the first things to happen was
 
 Since we wanted to incorporate community input to this policy and make it accessible as possible, the board waited until the Foundation was well-staffed to coordinate the effort. That included things like running a [community-wide survey] and discussing the result with a number of stakeholders, including the board, community members, project leadership, as well as legal counsel. The latest state of this process is the draft that was published late last week.
 
-### Our approach
+## Our approach
 
 Since the draft was announced, we've noticed a widespread impression that this policy was created solely by the Foundation and is being imposed on the Rust Project and community. That is not true. The policy draft was created with the input and consent of each of the co-authors of this post, with the intent to clarify existing policies, incorporate community feedback, and preserve the Rust brand for years to come. The Foundation also cannot – and has no interest in – unilaterally adopting such a policy without the agreement and involvement of its Project Directors.
 
@@ -27,7 +27,7 @@ Our answer to the question of whether Rust should be a trademark has been "yes",
 
 We aren't lawyers and we leave the question of *how* to do that to them – and believe us when we say we have gone through *many* rounds of questions with ours, who have extensive experience in open source projects.
 
-### Feedback
+## Feedback
 
 The current proposal is a draft that the Foundation staff, Project Directors, and Trademark Working Group are actively seeking feedback on. We will not ship a trademark policy that Project representatives and the Foundation aren't happy with and proud of after reviewing community feedback.
 
@@ -37,7 +37,7 @@ Unfortunately, in addition to the large volume of thoughtful and respectful feed
 
 Please remember that any and all communication with Foundation staff is subject to the Rust project [Code of Conduct] and will be enforced accordingly. We don't expect this to be an issue for most people participating, but when emotions run high it's always a good idea to check your assumptions and remember the person on the other end of the keyboard.
 
-### Next steps
+## Next steps
 
 We want to thank the community for participating in this process, and for your patience as we learn the best way to navigate it. We recognize that the process and communication around it could have been better. Notably, the wider project was insufficiently included in the process. We were  responsible for that and apologize.
 
