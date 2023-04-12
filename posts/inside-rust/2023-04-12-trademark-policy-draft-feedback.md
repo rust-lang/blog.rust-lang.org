@@ -10,9 +10,7 @@ For the past eight months, the Rust Foundation Project Directors have been worki
 
 ## Background
 
-Back when the Rust Foundation was created, one of the first things to happen was Mozilla transferring its ownership of the Rust trademark to the newly created foundation. An update to the existing policy[^mozilla-policy] was needed, and project leadership planned for this to be done together with the Foundation.
-
-[^mozilla-policy]: https://prev.rust-lang.org/en-US/legal.html
+Back when the Rust Foundation was created, one of the first things to happen was Mozilla transferring its ownership of the Rust trademark to the newly created foundation. An update to the [existing policy] was needed, and project leadership planned for this to be done together with the Foundation.
 
 Since we wanted to incorporate community input to this policy and make it accessible as possible, the board waited until the Foundation was well-staffed to coordinate the effort. That included things like running a [community-wide survey] and discussing the result with a number of stakeholders, including the board, community members, project leadership, as well as legal counsel. The latest state of this process is the draft that was published late last week.
 
@@ -57,6 +55,10 @@ Sincerely,
 
 [^survey]: This was none more apparent than when the community survey got over 1,000 responses, representing a number of popular but fundamentally incompatible views.
 
+[existing policy]: http://web.archive.org/web/20230407100922/https://foundation.rust-lang.org/policies/logo-policy-and-media-guide/
+
 [feedback form]: https://docs.google.com/forms/d/e/1FAIpQLSdaM4pdWFsLJ8GHIUFIhepuq0lfTg_b0mJ-hvwPdHa4UTRaAg/viewform
 
 [Code of Conduct]: https://www.rust-lang.org/policies/code-of-conduct
+
+[community-wide survey]: https://foundation.rust-lang.org/news/2022-08-09-trademark-policy-review-and-survey/
