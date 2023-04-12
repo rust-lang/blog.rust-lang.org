@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Seeking Feedback on a Trademark Policy Draft"
+title: "A note on the Trademark Policy Draft"
 author: Ryan Levick, Jane Losare-Lusby, Tyler Mandry, Mark Rousskov, Josh Stone, and Josh Triplett
 team: The Foundation Project Directors and informal Trademark Working Group Members
 ---
