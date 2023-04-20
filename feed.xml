@@ -10,8 +10,76 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-04-17T09:11:35+00:00</updated>
+    <updated>2023-04-20T14:40:39+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.69.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2023/04/20/Rust-1.69.0.html" type="text/html" title="Announcing Rust 1.69.0" />
+        <published>2023-04-20T00:00:00+00:00</published>
+        <updated>2023-04-20T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2023/04/20/Rust-1.69.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2023/04/20/Rust-1.69.0.html">&lt;p&gt;The Rust team is happy to announce a nice version of Rust, 1.69.0. Rust is a programming language empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.69.0 with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1690-2023-04-20&quot;&gt;detailed release notes for 1.69.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider updating locally to use the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly channel (&lt;code&gt;rustup default nightly&lt;/code&gt;). Please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you might come across!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1690-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1690-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.69.0 stable&lt;/h2&gt;
+&lt;p&gt;Rust 1.69.0 introduces no major new features. However, it contains many small improvements, including over 3,000 commits from over 500 contributors.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#cargo-now-suggests-to-automatically-fix-some-warnings&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargo-now-suggests-to-automatically-fix-some-warnings&quot;&gt;&lt;/a&gt;Cargo now suggests to automatically fix some warnings&lt;/h3&gt;
+&lt;p&gt;Rust 1.29.0 added the &lt;code&gt;cargo fix&lt;/code&gt; subcommand to automatically fix some simple compiler warnings. Since then, the number of warnings that can be fixed automatically continues to steadily increase. In addition, support for automatically fixing some simple Clippy warnings has also been added.&lt;/p&gt;
+&lt;p&gt;In order to draw more attention to these increased capabilities, Cargo will now suggest running &lt;code&gt;cargo fix&lt;/code&gt; or &lt;code&gt;cargo clippy --fix&lt;/code&gt; when it detects warnings that are automatically fixable:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;warning: unused import: &#x60;std::hash::Hash&#x60;
+ --&amp;gt; src/main.rs:1:5
+  |
+1 | use std::hash::Hash;
+  |     ^^^^^^^^^^^^^^^
+  |
+  &#x3D; note: &#x60;#[warn(unused_imports)]&#x60; on by default
+
+warning: &#x60;foo&#x60; (bin &amp;quot;foo&amp;quot;) generated 1 warning (run &#x60;cargo fix --bin &amp;quot;foo&amp;quot;&#x60; to apply 1 suggestion)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that the full Cargo invocation shown above is only necessary if you want to precisely apply fixes to a single crate. If you want to apply fixes to all the default members of a workspace, then a simple &lt;code&gt;cargo fix&lt;/code&gt; (with no additional arguments) will suffice.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#debug-information-is-not-included-in-build-scripts-by-default-anymore&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;debug-information-is-not-included-in-build-scripts-by-default-anymore&quot;&gt;&lt;/a&gt;Debug information is not included in build scripts by default anymore&lt;/h3&gt;
+&lt;p&gt;To improve compilation speed, Cargo now avoids emitting debug information in build scripts by default. There will be no visible effect when build scripts execute successfully, but backtraces in build scripts will contain less information.&lt;/p&gt;
+&lt;p&gt;If you want to debug a build script, you can add this snippet to your &lt;code&gt;Cargo.toml&lt;/code&gt; to emit debug information again:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[profile.dev.build-override]
+debug &#x3D; true
+[profile.release.build-override]
+debug &#x3D; true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/ffi/struct.CStr.html#method.from_bytes_until_nul&quot;&gt;&lt;code&gt;CStr::from_bytes_until_nul&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/ffi/struct.FromBytesUntilNulError.html&quot;&gt;&lt;code&gt;core::ffi::FromBytesUntilNulError&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These APIs are now stable in const contexts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/enum.SocketAddr.html#method.new&quot;&gt;&lt;code&gt;SocketAddr::new&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/enum.SocketAddr.html#method.ip&quot;&gt;&lt;code&gt;SocketAddr::ip&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/enum.SocketAddr.html#method.port&quot;&gt;&lt;code&gt;SocketAddr::port&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/enum.SocketAddr.html#method.is_ipv4&quot;&gt;&lt;code&gt;SocketAddr::is_ipv4&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/enum.SocketAddr.html#method.is_ipv6&quot;&gt;&lt;code&gt;SocketAddr::is_ipv6&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/struct.SocketAddrV4.html#method.new&quot;&gt;&lt;code&gt;SocketAddrV4::new&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/struct.SocketAddrV4.html#method.ip&quot;&gt;&lt;code&gt;SocketAddrV4::ip&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/struct.SocketAddrV4.html#method.port&quot;&gt;&lt;code&gt;SocketAddrV4::port&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/struct.SocketAddrV6.html#method.new&quot;&gt;&lt;code&gt;SocketAddrV6::new&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/struct.SocketAddrV6.html#method.ip&quot;&gt;&lt;code&gt;SocketAddrV6::ip&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/struct.SocketAddrV6.html#method.port&quot;&gt;&lt;code&gt;SocketAddrV6::port&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/struct.SocketAddrV6.html#method.flowinfo&quot;&gt;&lt;code&gt;SocketAddrV6::flowinfo&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/net/struct.SocketAddrV6.html#method.scope_id&quot;&gt;&lt;code&gt;SocketAddrV6::scope_id&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;Check out everything that changed in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1690-2023-04-20&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-169-2023-04-20&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-169&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1690&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1690&quot;&gt;&lt;/a&gt;Contributors to 1.69.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.69.0. We couldn&#x27;t have done it without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.69.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.68.2</title>
@@ -584,39 +652,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.66
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Updating the Android NDK in Rust 1.68</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2023/01/09/android-ndk-update-r25.html" type="text/html" title="Updating the Android NDK in Rust 1.68" />
-        <published>2023-01-09T00:00:00+00:00</published>
-        <updated>2023-01-09T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2023/01/09/android-ndk-update-r25.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2023/01/09/android-ndk-update-r25.html">&lt;p&gt;We are pleased to announce that Android platform support in Rust will be
-modernized in Rust 1.68 as we update the target NDK from r17 to r25.  As a
-consequence the minimum supported API level will increase from 15 (Ice Cream
-Sandwich) to 19 (KitKat).&lt;/p&gt;
-&lt;p&gt;In NDK r23 Android switched to using LLVM&#x27;s &lt;code&gt;libunwind&lt;/code&gt; for all architectures.
-This meant that&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;If a project were to target NDK r23 or newer with previous versions of Rust
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/85806#issuecomment-1096266946&quot;&gt;a workaround&lt;/a&gt;
-would be required to redirect attempts to link against &lt;code&gt;libgcc&lt;/code&gt; to instead
-link against &lt;code&gt;libunwind&lt;/code&gt;.  Following this update this workaround will no
-longer be necessary.&lt;/li&gt;
-&lt;li&gt;If a project uses NDK r22 or older it will need to be updated to use &lt;a href&#x3D;&quot;https://developer.android.com/ndk/downloads&quot;&gt;r23 or
-newer&lt;/a&gt;.  Information about the
-layout of the NDK&#x27;s toolchain can be found
-&lt;a href&#x3D;&quot;https://developer.android.com/ndk/guides/other_build_systems&quot;&gt;here&lt;/a&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Going forward the Android platform will target the most recent LTS NDK, allowing
-Rust developers to access platform features sooner.  These updates should occur
-yearly and will be announced in release notes.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Android Platform Team</name>
         </author>
     </entry>
     
