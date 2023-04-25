@@ -10,8 +10,87 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-04-20T14:40:39+00:00</updated>
+    <updated>2023-04-25T12:30:57+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rustup 1.26.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2023/04/25/Rustup-1.26.0.html" type="text/html" title="Announcing Rustup 1.26.0" />
+        <published>2023-04-25T00:00:00+00:00</published>
+        <updated>2023-04-25T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2023/04/25/Rustup-1.26.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2023/04/25/Rustup-1.26.0.html">&lt;p&gt;The rustup working group is happy to announce the release of rustup version 1.26.0. &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;Rustup&lt;/a&gt; is the recommended tool to install &lt;a href&#x3D;&quot;https://www.rust-lang.org&quot;&gt;Rust&lt;/a&gt;, a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.26.0 is as easy as stopping any programs which may be using Rustup (e.g. closing your IDE) and running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup self update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain update:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://rustup.rs&quot;&gt;get rustup&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1260&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1260&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.26.0&lt;/h2&gt;
+&lt;p&gt;This version of Rustup involves a significant number of internal cleanups, both in terms
+of the Rustup code and its tests. In addition to a lot of work on the codebase
+itself, due to the length of time since the last release this one has a record number
+of contributors and we thank you all for your efforts and time.&lt;/p&gt;
+&lt;p&gt;The headlines for this release are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Add rust-analyzer as a proxy of rustup. Now you can call rust-analyzer and it will be proxied to the rust-analyzer component for the current toolchain.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bump the clap dependency from 2.x to 3.x. It&#x27;s a major version bump, so there are some help text changes, but the command line interface is unchanged.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remove experimental GPG signature validation and the rustup show keys command. Due to its experimental status, validating the integrity of downloaded binaries did not rely on it, and there was no option to abort the installation if a signature mismatch happened. Multiple problems with its implementation were discovered in the recent months, which led to the decision to remove the experimental code. The team is working on the design of a new signature validation scheme, which will be implemented in the future.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Full details are available in the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustup/blob/stable/CHANGELOG.md&quot;&gt;changelog&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Rustup&#x27;s documentation is also available in &lt;a href&#x3D;&quot;https://rust-lang.github.io/rustup/&quot;&gt;the rustup book&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
+&lt;p&gt;Thanks again to all the contributors who made rustup 1.26.0 possible!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Daniel Silverstone (kinnison)&lt;/li&gt;
+&lt;li&gt;Sabrina Jewson (SabrinaJewson)&lt;/li&gt;
+&lt;li&gt;Robert Collins (rbtcollins)&lt;/li&gt;
+&lt;li&gt;chansuke (chansuke)&lt;/li&gt;
+&lt;li&gt;Shamil (shamilsan)&lt;/li&gt;
+&lt;li&gt;Oli Lalonde (olalonde)&lt;/li&gt;
+&lt;li&gt;二手掉包工程师 (hi-rustin)&lt;/li&gt;
+&lt;li&gt;Eric Huss (ehuss)&lt;/li&gt;
+&lt;li&gt;J Balint BIRO (jbalintbiro)&lt;/li&gt;
+&lt;li&gt;Easton Pillay (jedieaston)&lt;/li&gt;
+&lt;li&gt;zhaixiaojuan (zhaixiaojuan)&lt;/li&gt;
+&lt;li&gt;Chris Denton (ChrisDenton)&lt;/li&gt;
+&lt;li&gt;Martin Geisler (mgeisler)&lt;/li&gt;
+&lt;li&gt;Lucio Franco (LucioFranco)&lt;/li&gt;
+&lt;li&gt;Nicholas Bishop (nicholasbishop)&lt;/li&gt;
+&lt;li&gt;SADIK KUZU (sadikkuzu)&lt;/li&gt;
+&lt;li&gt;darkyshiny (darkyshiny)&lt;/li&gt;
+&lt;li&gt;René Dudfield (illume)&lt;/li&gt;
+&lt;li&gt;Noritada Kobayashi (noritada)&lt;/li&gt;
+&lt;li&gt;Mohammad AlSaleh (MoSal)&lt;/li&gt;
+&lt;li&gt;Dustin Martin (dmartin)&lt;/li&gt;
+&lt;li&gt;Ville Skyttä (scop)&lt;/li&gt;
+&lt;li&gt;Tshepang Mbambo (tshepang)&lt;/li&gt;
+&lt;li&gt;Illia Bobyr (ilya-bobyr)&lt;/li&gt;
+&lt;li&gt;Vincent Rischmann (vrischmann)&lt;/li&gt;
+&lt;li&gt;Alexander (Alovchin91)&lt;/li&gt;
+&lt;li&gt;Daniel Brotsky (brotskydotcom)&lt;/li&gt;
+&lt;li&gt;zohnannor (zohnannor)&lt;/li&gt;
+&lt;li&gt;Joshua Nelson (jyn514)&lt;/li&gt;
+&lt;li&gt;Prikshit Gautam (gautamprikshit1)&lt;/li&gt;
+&lt;li&gt;Dylan Thacker-Smith (dylanahsmith)&lt;/li&gt;
+&lt;li&gt;Jan David (jdno)&lt;/li&gt;
+&lt;li&gt;Aurora (lilith13666)&lt;/li&gt;
+&lt;li&gt;Pietro Albini (pietroalbini)&lt;/li&gt;
+&lt;li&gt;Renovate Bot (renovate-bot)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>The Rustup Working Group</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.69.0</title>
@@ -623,35 +702,6 @@ disclosure.&lt;/p&gt;
 
         <author>
             <name>The Rust Security Response WG</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.66.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2023/01/10/Rust-1.66.1.html" type="text/html" title="Announcing Rust 1.66.1" />
-        <published>2023-01-10T00:00:00+00:00</published>
-        <updated>2023-01-10T00:00:01+00:00</updated>
-        <id>https://blog.rust-lang.org/2023/01/10/Rust-1.66.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2023/01/10/Rust-1.66.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.66.1. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.66.1 with:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1661-2023-01-10&quot;&gt;detailed release notes for 1.66.1&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1661-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1661-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.66.1 stable&lt;/h2&gt;
-&lt;p&gt;Rust 1.66.1 fixes Cargo not verifying SSH host keys when cloning dependencies
-or registry indexes with SSH. This security vulnerability is tracked as
-&lt;a href&#x3D;&quot;https://www.cve.org/CVERecord?id&#x3D;CVE-2022-46176&quot;&gt;CVE-2022-46176&lt;/a&gt;, and you &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2023/01/10/cve-2022-46176.html&quot;&gt;can find more details in the advisory&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1661&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1661&quot;&gt;&lt;/a&gt;Contributors to 1.66.1&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.66.1. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.66.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
