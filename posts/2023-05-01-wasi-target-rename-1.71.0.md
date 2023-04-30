@@ -2,7 +2,6 @@
 layout: post
 title: "Renaming the WASI target in Rust 1.71.0"
 author: Yoshua Wuyts
-release: false
 ---
 In Rust 1.71 the existing `wasm32-wasi` target will be renamed
 to `wasm32-wasi-preview1`. This matches the naming introduced in the [WASI
