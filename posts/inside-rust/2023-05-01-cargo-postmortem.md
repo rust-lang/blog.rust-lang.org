@@ -26,4 +26,4 @@ So, without further ado, here is [the postmortem for the aforementioned Cargo in
 
 [rust-lang/cargo#11183]: https://github.com/rust-lang/cargo/pull/11183
 [Five Whys]: https://en.wikipedia.org/wiki/Five_whys
-[postmortem]: https://hackmd.io/@rust-cargo-team/2022-10-28-postmortem
+[postmortem]: https://github.com/rust-lang/cargo/issues/12064
