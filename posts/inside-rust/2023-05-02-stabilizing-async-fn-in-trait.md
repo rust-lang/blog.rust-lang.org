@@ -15,7 +15,7 @@ As of now, all of the functionality described in this blog post is implemented a
 
 ## MVP Part 1: Core support for "async functions in traits"
 
-The easiest way to explain what we are going to stabilize is to use a code example. To start, we will permit the use of `async fn` in traits definitions...
+The easiest way to explain what we are going to stabilize is to use a code example. To start, we will permit the use of `async fn` in trait definitions...
 
 ```rust
 trait HealthCheck {
@@ -84,7 +84,7 @@ where
 }
 ```
 
-Of course, it's kind of unfortunate that we had to rewrite from taking an `impl HealthCheck` to an explicit `HC` type parameter in order to use this notation. RFC #2289, "associated type bounds", introduced a compact notation to address this problem. That RFC is not part of this MVP, but if it were stabilized, then one could simply write:
+Of course, it's kind of unfortunate that we had to rewrite from taking an `impl HealthCheck` to an explicit `HC` type parameter in order to use this notation. [RFC 2289](https://github.com/rust-lang/rfcs/pull/2289), "associated type bounds", introduced a compact notation to address this problem. That RFC is not part of this MVP, but if it were stabilized, then one could simply write:
 
 ```rust
 async fn do_health_check_par(hc: impl HealthCheck<check(): Send> + Send + 'static) {
