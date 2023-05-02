@@ -169,7 +169,7 @@ In the MVP, traits that use async functions are not "dyn safe", meaning that the
 
 At first, this seems like a crucial limitation, since many of the use cases require dynamic dispatch! But it turns out that there is a workaround. One can define an "erased" trait internally to your crate that enables dynamic dispatch. The process was pioneered by crates like [erased serde] and is explained in detail in the [builder-provider case study].
 
-To make this workaround easier in the near term, we hope to provide a proc macro to automate it. In the future, async fn [should work][ugf-dyn] with `dyn Trait` directly.
+To make this workaround easier in the near term, we plan to provide a proc macro to automate it. In the future, async fn [should work][ugf-dyn] with `dyn Trait` directly.
 
 [erased serde]: https://github.com/dtolnay/erased-serde
 [builder-provider case study]: https://rust-lang.github.io/async-fundamentals-initiative/evaluation/case-studies/builder-provider-api.html#dynamic-dispatch-behind-the-api
