@@ -204,7 +204,7 @@ trait HealthCheck {
 }
 ```
 
-In the future, something like [trait transformers] may provide a more concise syntax without a proc macro. But because there are use cases that require the kind of fine-grained control provided by associated return types, we opted to stabilize them first and consider more concise syntaxes later.
+In the future, something like [trait transformers] may provide a more concise syntax without a proc macro. But because there are use cases that require the kind of fine-grained control provided by associated return types, we opted to stabilize them first and consider more concise syntaxes after gaining experience.
 
 [trait transformers]: https://smallcultfollowing.com/babysteps/blog/2023/03/03/trait-transformers-send-bounds-part-3/
 
