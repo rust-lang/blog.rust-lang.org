@@ -9,7 +9,7 @@ The async working group's headline goal for 2023 is to stabilize a "minimum viab
 
 In November, we [blogged about nightly support for async fn in trait][pp] and identified some key next steps, most importantly [support for send bounds to allow spawning in generic functions](https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html#limitation-spawning-from-generics). Since then we've done a significant amount of design exploration and collected a set of case studies evaluating how well the current code works in practice.
 
-As of now, all of the functionality described in this blog post is implemented and available in some form on the nightly compiler. This was done to prove out the viability, but not all of it has been formally RFC'd. We'll link to playground examples and RFCs where appropriate so you can try it for yourself or read about the details.
+As of now, all of the functionality described in this blog post is available on the nightly compiler. Some of this work was implemented using [experimental feature gates](https://lang-team.rust-lang.org/how_to/experiment.html) so that we could conduct case studies and prove out viability; we are in the process of authoring RFCs for those features now (full details below).
 
 [pp]: https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html
 
