@@ -125,9 +125,7 @@ trait LaunchService {
 }
 ```
 
-Since `async fn` is sugar for a regular function returning `impl Future`, these two syntactic forms will work interchangeably.[^afit-rpitit]
-
-[^afit-rpitit]: The ability to satisfy an `async fn` in a trait with a regular function returning `impl Future` in an impl, and vice versa, is part of [RFC 3425]. It was not in the [original RFC][RFC 3185] for `async fn` in traits, simply because `-> impl Trait` in traits was not supported then.
+Since `async fn` is sugar for a regular function returning `impl Future`, these two syntactic forms will work interchangeably.
 
 ```rust
 trait HealthCheck {
