@@ -43,20 +43,22 @@ async fn do_health_check(hc: impl HealthCheck) {
 }
 ```
 
-**Status:** This functionality was described in [RFC 3185], merged on Dec 7, 2021, and was covered in detail in our [previous blog post][pp].
+**Status:** This functionality was described in [RFC 3185], merged on Dec 7, 2021, and is available in nightly. It was covered in detail in our [previous blog post][pp].
+
+[Playground](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=2399715f67d8eb0064efd6c8e47532f7)
 
 [RFC 3185]: https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html
 
 
 ## MVP Part 2: Send bounds and associated return types
 
-There is one complication that arises when using async functions in traits that doesn't arise with sync functions. Many async runtimes -- notably including the default configurations of [Tokio] and [async-std] -- use a workstealing thread scheduler. This means that futures may move between worker threads dynamically to achieve load balancing. As a result, the future must only capture `Send` data.
+There is one complication that arises when using async functions in traits that doesn't arise with sync functions. Many async runtimes -- notably including the default configurations of [Tokio] and [async-std] -- use a work stealing thread scheduler. This means that futures may move between worker threads dynamically to achieve load balancing. As a result, the future must only capture `Send` data.
 
 [Tokio]: https://tokio.rs/
 
 [async-std]: https://async.rs/
 
-If you author a generic async function that spawns tasks on one of those runtimes, however, you will start to get compilation errors ([playground](XXX)):
+If you author a generic async function that spawns tasks on one of those runtimes, however, you will start to get compilation errors ([playground](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=c033cf6174ff7d44e5673ecd254e6e69)):
 
 ```rust
 async fn do_health_check_par(hc: impl HealthCheck) {
@@ -101,9 +103,11 @@ In our [previous post][pp], we [hypothesized](https://blog.rust-lang.org/inside-
  
 **Status:** Associated return types have an experimental implementation and we are currently drafting an RFC. There are several open bugs that will need to be fixed.
 
+[Playground](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=2066934a05cb9eafc0b47af7bdf8c57f)
+
 ## MVP Part 3: "impl trait in traits" (return position)
 
-All across Rust, an async function is "syntactic sugar" for a function that returns an `impl Future` -- and async functions in traits are no exception. As part of the MVP, we plan to stabilize the use of `-> impl Trait` notation in traits.
+In Rust an async function is "syntactic sugar" for a function that returns an `impl Future`, and async functions in traits are no exception. As part of the MVP, we plan to stabilize the use of `-> impl Trait` notation in traits and trait impls.
 
 Impl trait in traits has all kinds of uses, but one common one for async programming is to avoid capturing all of the function arguments by doing some amount of sync work and then returning a future for the rest. For example, this `LaunchService` trait declares a `launch` function that does not capture `self` (similar to the existing Tower [`Service`] trait):
 
@@ -121,15 +125,29 @@ trait LaunchService {
 }
 ```
 
+Since `async fn` is sugar for a regular function returning `impl Future`, these two syntactic forms will work interchangeably.
+
+```rust
+trait HealthCheck {
+    async fn check(&mut self) -> bool;
+}
+
+impl HealthCheck for MyType {
+    fn check(&mut self) -> impl Future<Output = bool> + '_ { ... }
+}
+```
+
 Even though the need for "impl trait in traits" comes up a lot in async, they are a general feature that will be useful in many contexts having nothing to do with async (for example, returning iterators from trait methods).
 
 **Status:** Return-position impl trait in traits have an experimental implementation and are described in the recently opened [RFC 3425].
+
+[Playground](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=75cfc199cc50a111576c2d8e342ae823)
 
 [RFC 3425]: https://github.com/rust-lang/rfcs/pull/3425
 
 ## Evaluating the MVP
 
-To evaluate the utility of this MVP, the working group collected [five case studies][] covering the [builder-provider pattern used in the AWS SDK](https://rust-lang.github.io/async-fundamentals-initiative/evaluation/case-studies/builder-provider-api.html#dynamic-dispatch-behind-the-api); the potential use of async function in traits in [tower][cst] and the actual use in [embassy][cse], the [Fuchsia networking stack][] and [an internal Microsoft tool][]. These studies validated that the above functionality is sufficient to use async function in traits for all kinds of things, though some situations require workarounds (hence the "MVP" title).
+To evaluate the utility of this MVP, the working group collected [five case studies] covering the [builder-provider pattern used in the AWS SDK](https://rust-lang.github.io/async-fundamentals-initiative/evaluation/case-studies/builder-provider-api.html#dynamic-dispatch-behind-the-api); the potential use of async function in traits in [tower][cst] and the actual use in [embassy][cse], the [Fuchsia networking stack] and [an internal Microsoft tool]. These studies validated that the above functionality is sufficient to use async function in traits for all kinds of things, though some situations require workarounds (hence the "MVP" title).
 
 [Fuchsia networking stack]: https://rust-lang.github.io/async-fundamentals-initiative/evaluation/case-studies/socket-handler.html
 
@@ -147,9 +165,11 @@ The case studies revealed two situations that the MVP doesn't support very well,
 
 ### Modeling dynamic dispatch
 
-In the MVP, traits that use async functions are not "dyn safe", meaning that they don't support dynamic dispatch. So e.g. given the `HealthCheck` trait we saw earlier, one could not write `Box<dyn HealthCheck>`. At first, this seems like a crucial limitation, since many of the use cases require dynamic dispatch! But it turns out that there is a workaround. One can define an "erased" trait internally to your crate that enables dynamic dispatch. The process was pioneered by crates like [erased serde][] and is explained in detail in the [builder-provider case study][].
+In the MVP, traits that use async functions are not "dyn safe", meaning that they don't support dynamic dispatch. So e.g. given the `HealthCheck` trait we saw earlier, one could not write `Box<dyn HealthCheck>`.
 
-In the future, async fn should work with `dyn Trait` directly.
+At first, this seems like a crucial limitation, since many of the use cases require dynamic dispatch! But it turns out that there is a workaround. One can define an "erased" trait internally to your crate that enables dynamic dispatch. The process was pioneered by crates like [erased serde] and is explained in detail in the [builder-provider case study].
+
+To make this workaround easier in the near term, we hope to provide a proc macro to automate it. In the future, async fn should work with `dyn Trait` directly.
 
 [erased serde]: https://github.com/dtolnay/erased-serde
 [builder-provider case study]: https://rust-lang.github.io/async-fundamentals-initiative/evaluation/case-studies/builder-provider-api.html#dynamic-dispatch-behind-the-api
@@ -172,7 +192,7 @@ where
 {}
 ```
 
-Using a pattern like this means you can write `T: SendHealthCheck`. In the future, something like [trait transformers][] may provide a more concise syntax.
+Using a pattern like this means you can write `T: SendHealthCheck`. We hope to provide a proc macro to write these trait aliases for you. In the future, something like [trait transformers] may provide a more concise syntax.
 
 [trait transformers]: https://smallcultfollowing.com/babysteps/blog/2023/03/03/trait-transformers-send-bounds-part-3/
 
