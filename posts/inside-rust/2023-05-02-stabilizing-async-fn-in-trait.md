@@ -99,7 +99,7 @@ async fn do_health_check_par(hc: impl HealthCheck<check(): Send> + Send + 'stati
 }
 ```
 
-In our [previous post][pp], we [hypothesized](https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html#hypothesis-this-is-uncommon) that this problem might not occur often in practice. However, our case studies found that it comes up quite frequently, and so we decided that a solution is needed. We explored a number of solutions and concluded that associated return types are the most practical.
+In our [previous post][pp], we [hypothesized](https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html#hypothesis-this-is-uncommon) that this problem might not occur often in practice. However, our case studies found that it comes up quite frequently, and so we decided that a solution is needed. We explored a number of solutions and concluded that associated return types (ARTs) are a flexible and reasonably ergonomic building block, which makes them a good fit for an MVP. However, we also found that in traits with many methods, ARTs become verbose. As discussed later in the post, we expect to ship a proc-macro that can help workaround this in the short term while we gain experience.
  
 **Status:** Associated return types have an experimental implementation and we are currently drafting an RFC. There are several open bugs that will need to be fixed. We are considering more concise syntax for the future (see below).
 
