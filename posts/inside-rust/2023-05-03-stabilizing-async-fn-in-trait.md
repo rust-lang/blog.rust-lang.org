@@ -125,7 +125,9 @@ trait LaunchService {
 }
 ```
 
-Since `async fn` is sugar for a regular function returning `impl Future`, these two syntactic forms will work interchangeably.
+Since `async fn` is sugar for a regular function returning `impl Future`, these two syntactic forms will work interchangeably.[^afit-rpitit]
+
+[^afit-rpitit]: The ability to satisfy an `async fn` in a trait with a regular function returning `impl Future` in an impl, and vice versa, is part of [RFC 3425]. It was not in the [original RFC][RFC 3185] for `async fn` in traits, simply because `-> impl Trait` in traits was not supported then.
 
 ```rust
 trait HealthCheck {
@@ -139,7 +141,7 @@ impl HealthCheck for MyType {
 
 Even though the need for "impl trait in traits" comes up a lot in async, they are a general feature that will be useful in many contexts having nothing to do with async (for example, returning iterators from trait methods).
 
-**Status:** Return-position impl trait in traits have an experimental implementation and are described in the recently opened [RFC 3425].
+**Status:** Return-position impl trait in traits have an experimental implementation and are described in [RFC 3425], which is currently open. This feature can stand on its own, but is an important part of the picture for `async fn` in traits.
 
 [Playground](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=75cfc199cc50a111576c2d8e342ae823)
 
