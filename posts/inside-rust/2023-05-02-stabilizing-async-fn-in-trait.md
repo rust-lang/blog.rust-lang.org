@@ -101,7 +101,7 @@ async fn do_health_check_par(hc: impl HealthCheck<check(): Send> + Send + 'stati
 
 In our [previous post][pp], we [hypothesized](https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html#hypothesis-this-is-uncommon) that this problem might not occur often in practice. However, our case studies found that it comes up quite frequently, and so we decided that a solution is needed. We explored a number of solutions and concluded that associated return types are the most practical.
  
-**Status:** Associated return types have an experimental implementation and we are currently drafting an RFC. There are several open bugs that will need to be fixed.
+**Status:** Associated return types have an experimental implementation and we are currently drafting an RFC. There are several open bugs that will need to be fixed. We are considering more concise syntax for the future (see below).
 
 [Playground](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=2066934a05cb9eafc0b47af7bdf8c57f)
 
@@ -177,7 +177,9 @@ To make this workaround easier in the near term, we hope to provide a proc macro
 
 ### Send bounds are verbose, especially for traits with lots of methods
 
-The associated return type proposal works great for traits with a single method, but it can be annoying for traits that have lots of methods. One convenient solution is to use the "trait alias pattern" (if [RFC 1733](https://github.com/rust-lang/rust/issues/41517) were stabilized, this would be easier):
+The associated return type proposal works great for traits with a single method, but it can be annoying for traits that have lots of methods. One convenient solution is to use the "trait alias pattern":[^trait-alias]
+
+[^trait-alias]: If [RFC 1733](https://github.com/rust-lang/rust/issues/41517) were stabilized, this would be easier.
 
 ```rust
 trait SendHealthCheck
@@ -193,7 +195,16 @@ where
 {}
 ```
 
-Using a pattern like this means you can write `T: SendHealthCheck`. We hope to provide a proc macro to write these trait aliases for you. In the future, something like [trait transformers] may provide a more concise syntax.
+Using a pattern like this means you can write `T: SendHealthCheck`. We plan to provide a proc macro to write these trait aliases for you, so you can write something more like this instead:
+
+```rust
+#[make_alias(Send = "SendHealthCheck")]
+trait HealthCheck {
+    async fn check(&mut self) -> bool;
+}
+```
+
+In the future, something like [trait transformers] may provide a more concise syntax without a proc macro. But because there are use cases that require the kind of fine-grained control provided by associated return types, we opted to stabilize them first and consider more concise syntaxes later.
 
 [trait transformers]: https://smallcultfollowing.com/babysteps/blog/2023/03/03/trait-transformers-send-bounds-part-3/
 
