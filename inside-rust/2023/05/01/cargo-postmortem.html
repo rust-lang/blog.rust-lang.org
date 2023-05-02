@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Postmortem Analysis in Cargo | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Postmortem Analysis in Cargo | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Postmortem Analysis in Cargo | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+<link rel="manifest" href="../../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../../inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Postmortem Analysis in Cargo" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Postmortem Analysis in Cargo</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 1, 2023 &middot; Jon Gjengset and Weihang Lo
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/dev-tools#cargo">The Cargo Team</a> 
+    </div>
+
+    <div class="post">
+      <p>At 01:52 UTC, 2022-10-28, <a href="https://github.com/rust-lang/cargo/pull/11183">rust-lang/cargo#11183</a> was merged into the Cargo master branch. It introduced a bug that caused Cargo to fail to build packages that use a particular, but very common, dependency setup. The change nearly made its way into the next nightly release. If it had, it would have rendered any of the 30k crates with <code>serde_derive</code> as a dependency (one of the most popular crate on crates.io) unbuildable for anyone using the resulting nightly release.</p>
+<p>Following this incident, the Cargo team went through a postmortem analysis, as is appropriate for incidents with (a potential for) broad blast-radius or otherwise significant impact. This time around, we followed a particular structured postmortem template in the hopes that it might make the resulting write-up more thorough, insightful, and actionable, and we ultimately found that it gave us a better understanding of the underlying root causes and failing/missing safe-guards. So, we wanted to share our experience with other Rust teams in case they may find it similarly useful, either in part or as a whole.</p>
+<p>The postmortem template consists of four parts:</p>
+<ul>
+<li><strong>What happened:</strong> a summary that provides context for the event, including metrics or graphs that illustrate the impact of the event if available. This should include a summary of any user-facing impacts or experience during the event.</li>
+<li><strong>How we responded:</strong> a timeline that describes all the events that occurred during the incident including specific date/time to the extent that they are known, as well as answers to the following four questions:
+<ul>
+<li>How was the event detected?</li>
+<li>How could time to detection be improved?</li>
+<li>How did you reach the point where you knew how to mitigate the impact?</li>
+<li>How could time to mitigation be improved?</li>
+</ul>
+</li>
+<li><strong>Why the event happened:</strong> this is the juicy part. Here, we use the <a href="https://en.wikipedia.org/wiki/Five_whys">Five Whys</a> approach to dig deeply down until the incident’s root causes are identified. Each answer is meant to spawn one or more why questions, until you’re confident that the left answers are fundamentally root causes. It’s also worth pointing out explicitly that “operator error” is <strong>never</strong> a root cause, and that this is not a process for assigning blame. Instead, any operator error is a symptom of a missing or broken mechanism, and the answers should focus on identifying those inadequate mechanisms.</li>
+<li><strong>How to fix it:</strong> The outcome of the Five Whys exercise is a list of root causes that should be addressed to reduce the risk of a similar incident in the future. From these root causes, we produce short- and medium-term “action items” along with specific owners wherever possible. Long-term solutions can be discussed too, although the focus of action items should be on more immediate mitigation steps that will be taken relatively soon. Each action item is assigned a priority, and is then generally turned into a GitHub issue where applicable. Any items identified as urgent we start working on immediately, while other action items usually fall into the categories “soon” or “once feasible”.</li>
+</ul>
+<p><em>Note: to ensure the focus stays on mechanisms and processes, not individuals, individuals should not be named unless absolutely necessary. Use terms like &quot;a contributor&quot;, &quot;the maintainer&quot;, &quot;a libs team member&quot;, etc.</em></p>
+<p>So, without further ado, here is <a href="https://github.com/rust-lang/cargo/issues/12064">the postmortem for the aforementioned Cargo incident</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../../scripts/highlight.js"></script>
+
+  </body>
+</html>

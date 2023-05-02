@@ -10,8 +10,39 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-04-25T14:26:16+00:00</updated>
+    <updated>2023-05-02T02:07:03+00:00</updated>
 
+    
+    <entry>
+        <title>Postmortem Analysis in Cargo</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/05/01/cargo-postmortem.html" type="text/html" title="Postmortem Analysis in Cargo" />
+        <published>2023-05-01T00:00:00+00:00</published>
+        <updated>2023-05-01T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2023/05/01/cargo-postmortem.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/05/01/cargo-postmortem.html">&lt;p&gt;At 01:52 UTC, 2022-10-28, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/11183&quot;&gt;rust-lang/cargo#11183&lt;/a&gt; was merged into the Cargo master branch. It introduced a bug that caused Cargo to fail to build packages that use a particular, but very common, dependency setup. The change nearly made its way into the next nightly release. If it had, it would have rendered any of the 30k crates with &lt;code&gt;serde_derive&lt;/code&gt; as a dependency (one of the most popular crate on crates.io) unbuildable for anyone using the resulting nightly release.&lt;/p&gt;
+&lt;p&gt;Following this incident, the Cargo team went through a postmortem analysis, as is appropriate for incidents with (a potential for) broad blast-radius or otherwise significant impact. This time around, we followed a particular structured postmortem template in the hopes that it might make the resulting write-up more thorough, insightful, and actionable, and we ultimately found that it gave us a better understanding of the underlying root causes and failing/missing safe-guards. So, we wanted to share our experience with other Rust teams in case they may find it similarly useful, either in part or as a whole.&lt;/p&gt;
+&lt;p&gt;The postmortem template consists of four parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;What happened:&lt;/strong&gt; a summary that provides context for the event, including metrics or graphs that illustrate the impact of the event if available. This should include a summary of any user-facing impacts or experience during the event.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;How we responded:&lt;/strong&gt; a timeline that describes all the events that occurred during the incident including specific date/time to the extent that they are known, as well as answers to the following four questions:
+&lt;ul&gt;
+&lt;li&gt;How was the event detected?&lt;/li&gt;
+&lt;li&gt;How could time to detection be improved?&lt;/li&gt;
+&lt;li&gt;How did you reach the point where you knew how to mitigate the impact?&lt;/li&gt;
+&lt;li&gt;How could time to mitigation be improved?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Why the event happened:&lt;/strong&gt; this is the juicy part. Here, we use the &lt;a href&#x3D;&quot;https://en.wikipedia.org/wiki/Five_whys&quot;&gt;Five Whys&lt;/a&gt; approach to dig deeply down until the incident’s root causes are identified. Each answer is meant to spawn one or more why questions, until you’re confident that the left answers are fundamentally root causes. It’s also worth pointing out explicitly that “operator error” is &lt;strong&gt;never&lt;/strong&gt; a root cause, and that this is not a process for assigning blame. Instead, any operator error is a symptom of a missing or broken mechanism, and the answers should focus on identifying those inadequate mechanisms.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;How to fix it:&lt;/strong&gt; The outcome of the Five Whys exercise is a list of root causes that should be addressed to reduce the risk of a similar incident in the future. From these root causes, we produce short- and medium-term “action items” along with specific owners wherever possible. Long-term solutions can be discussed too, although the focus of action items should be on more immediate mitigation steps that will be taken relatively soon. Each action item is assigned a priority, and is then generally turned into a GitHub issue where applicable. Any items identified as urgent we start working on immediately, while other action items usually fall into the categories “soon” or “once feasible”.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Note: to ensure the focus stays on mechanisms and processes, not individuals, individuals should not be named unless absolutely necessary. Use terms like &amp;quot;a contributor&amp;quot;, &amp;quot;the maintainer&amp;quot;, &amp;quot;a libs team member&amp;quot;, etc.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;So, without further ado, here is &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/12064&quot;&gt;the postmortem for the aforementioned Cargo incident&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Jon Gjengset and Weihang Lo</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.69.0 pre-release testing</title>
@@ -551,29 +582,6 @@ non-async version. &lt;a href&#x3D;&quot;#fnref2&quot; class&#x3D;&quot;footnote
 &lt;p&gt;Tyler is also a strong implementor. He was a past contributor to the chalk project and understands the intricacies of the trait and type system quite well. He also implemented a number of improvements to async Rust, such as work to reduce the size of futures.&lt;/p&gt;
 &lt;p&gt;Throughout his work on Rust, Tyler has demonstrated his ability to drive discussions towards consensus on a number of occasions. For example, he helped to navigate questions around boxing and auto-traits. He always makes an effort to understand people&#x27;s points, even when he disagrees with their conclusions.&lt;/p&gt;
 &lt;p&gt;Welcome to the team, Tyler!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Josh Triplett, Niko Matsakis</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Language team advisors</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/02/14/lang-advisors.html" type="text/html" title="Language team advisors" />
-        <published>2023-02-14T00:00:00+00:00</published>
-        <updated>2023-02-14T00:00:01+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2023/02/14/lang-advisors.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/02/14/lang-advisors.html">&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3327&quot;&gt;RFC #3327&lt;/a&gt; created a new lang-team subteam, the lang team advisors. The advisors team recognizes people who regularly aid the Rust community and the lang team in particular in language design decisions. We already value their input highly and treat their concerns as blocking on features or proposals. The advisors team gives us a way to acknowledge them officially.&lt;/p&gt;
-&lt;p&gt;The initial advisors team consists of the following people:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Ralf Jung&lt;/strong&gt; is a leader in designing Rust&#x27;s rules for unsafe code as well as, through his work on miri, the semantics of compile-time evaluation. His work on stacked borrows and minirust has moved the state of that conversation forward in major ways, and he has also driven a number of language changes related to that area.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Jakob Degen&lt;/strong&gt; is one of the authorities around the semantics of unsafe code. He has consistently shown the ability to aggregate opinion, identify the key constraints to respect and those to disregard, and find consensus solutions.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Mark Rousskov&lt;/strong&gt; has been a huge part of the Rust community for many years now, and participates regularly in lang-team meetings. He has a wide knowledge of Rust and its nooks and crannies, and often brings key insights to our discussions.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Jack Huey&lt;/strong&gt; co-leads the types team, and provides expertise in the workings of Rust&#x27;s trait and type system, as well as the chalk system.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Amanieu d&#x27;Antras&lt;/strong&gt; leads the design of inline assembly and has been involved as an expert in a number of other areas, such as the &amp;quot;FFI unwind&amp;quot; working group.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Wesley Wiser&lt;/strong&gt; is the co-lead of the compiler team. He&#x27;s been involved in the project for many years and is an expert on the overall compiler architecture as well as several areas within.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Alex Crichton&lt;/strong&gt; is a well-known figure to many Rustaceans. Among other things, he is a former lead of the libs team, a key cargo contributor, and drove extensive work for Rust in WebAssembly. Indeed, it&#x27;s hard to find a part of Rust that Alex hasn&#x27;t had an impact on.&lt;/p&gt;
-&lt;p&gt;Finally, as part of this change, &lt;strong&gt;Taylor Cramer&lt;/strong&gt; will be stepping back as a full-time lang team member and becoming an advisor. In his time on the lang team, Taylor was a core driver for &lt;code&gt;async&lt;/code&gt;/&lt;code&gt;await&lt;/code&gt;, &lt;code&gt;impl Trait&lt;/code&gt;, and a number of other highly impactful language features. We look forward to continuing to have his guidance as an advisor going forward.&lt;/p&gt;
 </content>
 
         <author>
