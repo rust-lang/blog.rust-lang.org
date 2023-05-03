@@ -34,6 +34,7 @@ following commands using [rustup](https://rustup.rs):
 $ rustup +nightly target remove wasm32-wasi
 $ rustup upgrade nightly
 $ rustup +nightly target add wasm32-wasi-preview1
+$ cargo build --target wasm32-wasi-preview1
 ```
 
 Once beta and stable builds are available (expected in ~6 and ~12 weeks
