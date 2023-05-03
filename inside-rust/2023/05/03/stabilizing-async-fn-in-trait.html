@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Stabilizing async fn in traits in 2023 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Stabilizing async fn in traits in 2023 | Inside Rust Blog">
+ <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Stabilizing async fn in traits in 2023 | Inside Rust Blog" />
+<meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+<link rel="manifest" href="../../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../../inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Stabilizing async fn in traits in 2023" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Stabilizing async fn in traits in 2023</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 3, 2023 &middot; Niko Matsakis and Tyler Mandry
+     on behalf of <a href="https://www.rust-lang.org/governance/wgs/wg-async">The Rust Async Working Group</a> 
+    </div>
+
+    <div class="post">
+      <p>The async working group's headline goal for 2023 is to stabilize a &quot;minimum viable product&quot; (MVP) version of async functions in traits. We are currently targeting Rust 1.74 for stabilization. This post lays out the features we plan to ship and the status of each one.</p>
+<p>In November, we <a href="https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html">blogged about nightly support for async fn in trait</a> and identified some key next steps, most importantly <a href="https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html#limitation-spawning-from-generics">support for send bounds to allow spawning in generic functions</a>. Since then we've done a significant amount of design exploration and collected a set of case studies evaluating how well the current code works in practice.</p>
+<p>As of now, all of the functionality described in this blog post is available on the nightly compiler. Some of this work was implemented using <a href="https://lang-team.rust-lang.org/how_to/experiment.html">experimental feature gates</a> so that we could conduct case studies and prove out viability; we are in the process of authoring RFCs for those features now (full details below).</p>
+<h2><a href="#mvp-part-1-core-support-for-async-functions-in-traits" aria-hidden="true" class="anchor" id="mvp-part-1-core-support-for-async-functions-in-traits"></a>MVP Part 1: Core support for &quot;async functions in traits&quot;</h2>
+<p>The easiest way to explain what we are going to stabilize is to use a code example. To start, we will permit the use of <code>async fn</code> in trait definitions...</p>
+<pre><code class="language-rust">trait HealthCheck {
+    async fn check(&amp;mut self) -&gt; bool;
+}
+</code></pre>
+<p>...and you can then use <code>async fn</code> in the corresponding impl:</p>
+<pre><code class="language-rust">impl HealthCheck for MyHealthChecker {
+    async fn check(&amp;mut self) -&gt; bool {
+        do_async_op().await
+    }
+}
+</code></pre>
+<p>Traits with async functions can then be used as you normally would:</p>
+<pre><code class="language-rust">async fn do_health_check(hc: impl HealthCheck) {
+    if !hc.check().await {
+        log_health_check_failure().await;
+    }
+}
+</code></pre>
+<p><strong>Status:</strong> This functionality was described in <a href="https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html">RFC 3185</a>, merged on Dec 7, 2021, and is available in nightly. It was covered in detail in our <a href="https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html">previous blog post</a>.</p>
+<p><a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=2399715f67d8eb0064efd6c8e47532f7">Playground</a></p>
+<h2><a href="#mvp-part-2-send-bounds-and-associated-return-types" aria-hidden="true" class="anchor" id="mvp-part-2-send-bounds-and-associated-return-types"></a>MVP Part 2: Send bounds and associated return types</h2>
+<p>There is one complication that arises when using async functions in traits that doesn't arise with sync functions. Many async runtimes -- notably including the default configurations of <a href="https://tokio.rs/">Tokio</a> and <a href="https://async.rs/">async-std</a> -- use a work stealing thread scheduler. This means that futures may move between worker threads dynamically to achieve load balancing. As a result, the future must only capture <code>Send</code> data.</p>
+<p>If you author a generic async function that spawns tasks on one of those runtimes, however, you will start to get compilation errors (<a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=c033cf6174ff7d44e5673ecd254e6e69">playground</a>):</p>
+<pre><code class="language-rust">async fn do_health_check_par(hc: impl HealthCheck) {
+    tokio::task::spawn(async move {
+        if !hc.check().await {
+            log_health_check_failure().await;
+        }
+    });
+}
+</code></pre>
+<p>The problem is that the future returned by <code>hc.check()</code> isn't guaranteed to be <code>Send</code>. It might access non-Send data. The solution is to add a <code>Send</code> bound, but given that this is an async function, it's not obvious how to do that. How do we talk about the future returned by a call to <code>hc.check()</code>? Associated return types provide the answer. We can convert the above function to use an explicit type parameter <code>HC</code> (instead of <code>impl HealthCheck</code>) and then add a new bound, <code>HC::check(): Send</code>. This says &quot;the value returned by <code>HC::check</code> must be of <code>Send</code> type&quot;:</p>
+<pre><code class="language-rust">async fn do_health_check_par&lt;HC&gt;(hc: HC)
+where
+    HC: HealthCheck + Send + 'static,
+    HC::check(): Send, // &lt;-- associated return type
+{
+    tokio::task::spawn(async move {
+        if !hc.check().await {
+            log_health_check_failure().await;
+        }
+    });
+}
+</code></pre>
+<p>Of course, it's kind of unfortunate that we had to rewrite from taking an <code>impl HealthCheck</code> to an explicit <code>HC</code> type parameter in order to use this notation. <a href="https://github.com/rust-lang/rfcs/pull/2289">RFC 2289</a>, &quot;associated type bounds&quot;, introduced a compact notation to address this problem. That RFC is not part of this MVP, but if it were stabilized, then one could simply write:</p>
+<pre><code class="language-rust">async fn do_health_check_par(hc: impl HealthCheck&lt;check(): Send&gt; + Send + 'static) {
+    //                                            -------------
+    tokio::task::spawn(async move {
+        if !hc.check().await {
+            log_health_check_failure().await;
+        }
+    });
+}
+</code></pre>
+<p>In our <a href="https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html">previous post</a>, we <a href="https://blog.rust-lang.org/inside-rust/2022/11/17/async-fn-in-trait-nightly.html#hypothesis-this-is-uncommon">hypothesized</a> that this problem might not occur often in practice. However, our case studies found that it comes up quite frequently, and so we decided that a solution is needed. We explored a number of solutions and concluded that associated return types (ARTs) are a flexible and reasonably ergonomic building block, which makes them a great fit for an MVP.</p>
+<p><strong>Status:</strong> Associated return types have an experimental implementation and we are currently drafting an RFC. There are several open bugs that will need to be fixed. We also found that in traits with many methods, ARTs become verbose, and in the future may consider more concise syntax (see below).</p>
+<p><a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=2066934a05cb9eafc0b47af7bdf8c57f">Playground</a></p>
+<h2><a href="#mvp-part-3-impl-trait-in-traits-return-position" aria-hidden="true" class="anchor" id="mvp-part-3-impl-trait-in-traits-return-position"></a>MVP Part 3: &quot;impl trait in traits&quot; (return position)</h2>
+<p>In Rust an async function is &quot;syntactic sugar&quot; for a function that returns an <code>impl Future</code>, and async functions in traits are no exception. As part of the MVP, we plan to stabilize the use of <code>-&gt; impl Trait</code> notation in traits and trait impls.</p>
+<p>Impl trait in traits has all kinds of uses, but one common one for async programming is to avoid capturing all of the function arguments by doing some amount of sync work and then returning a future for the rest. For example, this <code>LaunchService</code> trait declares a <code>launch</code> function that does not capture <code>self</code> (similar to the existing Tower <a href="https://docs.rs/tower/latest/tower/trait.Service.html"><code>Service</code></a> trait):</p>
+<pre><code class="language-rust">trait LaunchService {
+    fn launch(
+        &amp;mut self, 
+        request: Request,
+    ) -&gt; impl Future&lt;Output = u32&gt;;
+    //   -------------------------
+    //   Does not capture `self` as it does
+    //   not include a `+ '_`.
+}
+</code></pre>
+<p>Since <code>async fn</code> is sugar for a regular function returning <code>impl Future</code>, these two syntactic forms will work interchangeably.</p>
+<pre><code class="language-rust">trait HealthCheck {
+    async fn check(&amp;mut self) -&gt; bool;
+}
+
+impl HealthCheck for MyType {
+    fn check(&amp;mut self) -&gt; impl Future&lt;Output = bool&gt; + '_ { ... }
+}
+</code></pre>
+<p>Even though the need for &quot;impl trait in traits&quot; comes up a lot in async, they are a general feature that will be useful in many contexts having nothing to do with async (for example, returning iterators from trait methods).</p>
+<p><strong>Status:</strong> Return-position impl trait in traits have an experimental implementation and are described in <a href="https://github.com/rust-lang/rfcs/pull/3425">RFC 3425</a>, which is currently open. This feature can stand on its own, but is an important part of the picture for <code>async fn</code> in traits.</p>
+<p><a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=75cfc199cc50a111576c2d8e342ae823">Playground</a></p>
+<h2><a href="#evaluating-the-mvp" aria-hidden="true" class="anchor" id="evaluating-the-mvp"></a>Evaluating the MVP</h2>
+<p>To evaluate the utility of this MVP, the working group collected <a href="https://rust-lang.github.io/async-fundamentals-initiative/evaluation/case-studies.html">five case studies</a> covering the <a href="https://rust-lang.github.io/async-fundamentals-initiative/evaluation/case-studies/builder-provider-api.html#dynamic-dispatch-behind-the-api">builder-provider pattern used in the AWS SDK</a>; the potential use of async function in traits in <a href="https://rust-lang.github.io/async-fundamentals-initiative/evaluation/case-studies/tower.html">tower</a> and the actual use in <a href="https://rust-lang.github.io/async-fundamentals-initiative/evaluation/case-studies/embassy.html">embassy</a>, the <a href="https://rust-lang.github.io/async-fundamentals-initiative/evaluation/case-studies/socket-handler.html">Fuchsia networking stack</a> and <a href="https://rust-lang.github.io/async-fundamentals-initiative/evaluation/case-studies/microsoft.html">an internal Microsoft tool</a>. These studies validated that the above functionality is sufficient to use async function in traits for all kinds of things, though some situations require workarounds (hence the &quot;MVP&quot; title).</p>
+<h2><a href="#what-the-mvp-will-not-support-or-wont-support-well" aria-hidden="true" class="anchor" id="what-the-mvp-will-not-support-or-wont-support-well"></a>What the MVP will not support or won't support well</h2>
+<p>The case studies revealed two situations that the MVP doesn't support very well, but both of them have workarounds available. These workarounds are mechanical and once the MVP is available on stable it will be possible to automate them via a custom derive or other crates on crates.io.</p>
+<h3><a href="#modeling-dynamic-dispatch" aria-hidden="true" class="anchor" id="modeling-dynamic-dispatch"></a>Modeling dynamic dispatch</h3>
+<p>In the MVP, traits that use async functions are not &quot;dyn safe&quot;, meaning that they don't support dynamic dispatch. So e.g. given the <code>HealthCheck</code> trait we saw earlier, one could not write <code>Box&lt;dyn HealthCheck&gt;</code>.</p>
+<p>At first, this seems like a crucial limitation, since many of the use cases require dynamic dispatch! But it turns out that there is a workaround. One can define an &quot;erased&quot; trait internally to your crate that enables dynamic dispatch. The process was pioneered by crates like <a href="https://github.com/dtolnay/erased-serde">erased serde</a> and is explained in detail in the <a href="https://rust-lang.github.io/async-fundamentals-initiative/evaluation/case-studies/builder-provider-api.html#dynamic-dispatch-behind-the-api">builder-provider case study</a>.</p>
+<p>To make this workaround easier in the near term, we plan to provide a proc macro to automate it. In the future, async fn <a href="https://rust-lang.github.io/async-fundamentals-initiative/explainer/user_guide_future.html#dynamic-dispatch-and-async-functions">should work</a> with <code>dyn Trait</code> directly.</p>
+<h3><a href="#send-bounds-are-verbose-especially-for-traits-with-lots-of-methods" aria-hidden="true" class="anchor" id="send-bounds-are-verbose-especially-for-traits-with-lots-of-methods"></a>Send bounds are verbose, especially for traits with lots of methods</h3>
+<p>The associated return type proposal works great for traits with a single method, but it can be annoying for traits that have lots of methods. One convenient solution is to use the &quot;trait alias pattern&quot;:<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup></p>
+<pre><code class="language-rust">trait SendHealthCheck
+where
+    Self: HealthCheck + Send,
+    Self::check(): Send,
+{}
+
+impl&lt;T&gt; SendHealthCheck for T
+where
+    T: HealthCheck + Send,
+    T::check(): Send,
+{}
+</code></pre>
+<p>Using a pattern like this means you can write <code>T: SendHealthCheck</code>. We plan to provide a proc macro to write these trait aliases for you, so you can write something more like this instead:</p>
+<pre><code class="language-rust">#[make_alias(Send = &quot;SendHealthCheck&quot;)]
+trait HealthCheck {
+    async fn check(&amp;mut self) -&gt; bool;
+}
+</code></pre>
+<p>In the future, something like <a href="https://smallcultfollowing.com/babysteps/blog/2023/03/03/trait-transformers-send-bounds-part-3/">trait transformers</a> may provide a more concise syntax without a proc macro. But because there are use cases that require the kind of fine-grained control provided by associated return types, we opted to stabilize them first and consider more concise syntaxes after gaining experience.</p>
+<h2><a href="#timeline-and-roadmap" aria-hidden="true" class="anchor" id="timeline-and-roadmap"></a>Timeline and roadmap</h2>
+<p>Our goal is to stabilize the MVP for Rust 1.74, which will be released on 2023-11-16. The branch window for this feature opens on July 14 and closes on August 24. To actually stabilize in 1.74, we want to leave room for bug fixes that may arise before the release branch is cut. The key milestones for this goal are as follows:</p>
+<ul>
+<li>[x] MVP implementation</li>
+<li>[x] Case study evaluations complete</li>
+<li>[ ] Accepted RFC for return-position impl trait (target: 2023-05-31)</li>
+<li>[ ] Accepted RFC for associated return types (target: 2023-06-15)</li>
+<li>[ ] Evaluation period and bug fixing (target: 2023-06-30)</li>
+<li>[ ] Stabilization report authored (target: 2023-07-01)</li>
+<li>[ ] Stabilization complete for 1.74.0 (target: 2023-07-21)</li>
+</ul>
+<p>You can find the <a href="https://github.com/orgs/rust-lang/projects/28/views/2">complete timeline in our github project</a>.</p>
+<h2><a href="#what-comes-next" aria-hidden="true" class="anchor" id="what-comes-next"></a>What comes next?</h2>
+<p>So, once this MVP is done, what next? Our next immediate goals are to ship <strong>dynamic dispatch</strong> and <strong>async closures</strong> support in 2024. Together this will complete a solid foundation to tackle future async problems, such as support for async drop, easy async iterators, or portability across runtimes.</p>
+<section class="footnotes">
+<ol>
+<li id="fn1">
+<p>If <a href="https://github.com/rust-lang/rust/issues/41517">RFC 1733</a> were stabilized, this would be easier. <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../../scripts/highlight.js"></script>
+
+  </body>
+</html>
