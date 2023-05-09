@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Updating Rust&#x27;s Linux musl targets | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Updating Rust&#x27;s Linux musl targets | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Updating Rust&#x27;s Linux musl targets | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Updating Rust&#x27;s Linux musl targets" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Updating Rust&#x27;s Linux musl targets</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 9, 2023 &middot; Wesley Wiser
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">The Compiler Team</a> 
+    </div>
+
+    <div class="post">
+      <p>Beginning with Rust 1.71 (slated for stable release on 2023-07-13), the various <code>*-linux-musl</code> targets will <a href="https://github.com/rust-lang/rust/pull/107129">ship</a> with musl 1.2.3.
+These targets currently use musl 1.1.24.
+While musl 1.2.3 introduces some <a href="https://musl.libc.org/releases.html">new features</a>, most notably <a href="https://musl.libc.org/time64.html">64-bit time</a> on all platforms, it is ABI compatible with earlier musl versions.</p>
+<p>As such, this change is unlikely to affect you.</p>
+<h1><a href="#updated-targets" aria-hidden="true" class="anchor" id="updated-targets"></a>Updated targets</h1>
+<p>The following targets will be updated:</p>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th><a href="https://doc.rust-lang.org/nightly/rustc/platform-support.html">Support Tier</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aarch64-unknown-linux-musl</code></td>
+<td>Tier 2 with Host Tools</td>
+</tr>
+<tr>
+<td><code>x86_64-unknown-linux-musl</code></td>
+<td>Tier 2 with Host Tools</td>
+</tr>
+<tr>
+<td><code>arm-unknown-linux-musleabi</code></td>
+<td>Tier 2</td>
+</tr>
+<tr>
+<td><code>arm-unknown-linux-musleabihf</code></td>
+<td>Tier 2</td>
+</tr>
+<tr>
+<td><code>armv5te-unknown-linux-musleabi</code></td>
+<td>Tier 2</td>
+</tr>
+<tr>
+<td><code>armv7-unknown-linux-musleabi</code></td>
+<td>Tier 2</td>
+</tr>
+<tr>
+<td><code>armv7-unknown-linux-musleabihf</code></td>
+<td>Tier 2</td>
+</tr>
+<tr>
+<td><code>i586-unknown-linux-musl</code></td>
+<td>Tier 2</td>
+</tr>
+<tr>
+<td><code>i686-unknown-linux-musl</code></td>
+<td>Tier 2</td>
+</tr>
+<tr>
+<td><code>mips-unknown-linux-musl</code></td>
+<td>Tier 2</td>
+</tr>
+<tr>
+<td><code>mips64-unknown-linux-muslabi64</code></td>
+<td>Tier 2</td>
+</tr>
+<tr>
+<td><code>mips64el-unknown-linux-muslabi64</code></td>
+<td>Tier 2</td>
+</tr>
+<tr>
+<td><code>mipsel-unknown-linux-musl</code></td>
+<td>Tier 2</td>
+</tr>
+<tr>
+<td><code>hexagon-unknown-linux-musl</code></td>
+<td>Tier 3</td>
+</tr>
+<tr>
+<td><code>mips64-openwrt-linux-musl</code></td>
+<td>Tier 3</td>
+</tr>
+<tr>
+<td><code>powerpc-unknown-linux-musl</code></td>
+<td>Tier 3</td>
+</tr>
+<tr>
+<td><code>powerpc64-unknown-linux-musl</code></td>
+<td>Tier 3</td>
+</tr>
+<tr>
+<td><code>powerpc64le-unknown-linux-musl</code></td>
+<td>Tier 3</td>
+</tr>
+<tr>
+<td><code>riscv32gc-unknown-linux-musl</code></td>
+<td>Tier 3</td>
+</tr>
+<tr>
+<td><code>riscv64gc-unknown-linux-musl</code></td>
+<td>Tier 3</td>
+</tr>
+<tr>
+<td><code>s390x-unknown-linux-musl</code></td>
+<td>Tier 3</td>
+</tr>
+<tr>
+<td><code>thumbv7neon-unknown-linux-musleabihf</code></td>
+<td>Tier 3</td>
+</tr>
+</tbody>
+</table>
+<p>Note: musl 1.2.3 does not raise the minimum required Linux kernel version for any target.</p>
+<h1><a href="#will-64-bit-time-break-the-libc-crate-on-32-bit-targets" aria-hidden="true" class="anchor" id="will-64-bit-time-break-the-libc-crate-on-32-bit-targets"></a>Will 64-bit time break the <code>libc</code> crate on 32-bit targets?</h1>
+<p>No, the musl project made this change carefully preserving ABI compatibility.
+The <code>libc</code> crate will continue to function correctly without modification.</p>
+<p>A future version of the <code>libc</code> crate will <a href="https://github.com/rust-lang/libc/pull/3068">update</a> the definitions of time-related structures and functions to be 64-bit on all musl targets however this is blocked on the musl targets themselves first being updated.
+At present, there is no anticipated date when this change will take place and care will be taken to help the Rust ecosystem transition successfully to the updated time-related definitions.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>
