@@ -10,8 +10,29 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-05-03T14:46:05+00:00</updated>
+    <updated>2023-05-09T14:56:07+00:00</updated>
 
+    
+    <entry>
+        <title>API token scopes</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/05/09/api-token-scopes.html" type="text/html" title="API token scopes" />
+        <published>2023-05-09T00:00:00+00:00</published>
+        <updated>2023-05-09T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2023/05/09/api-token-scopes.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/05/09/api-token-scopes.html">&lt;p&gt;Roughly three years ago &lt;a href&#x3D;&quot;https://github.com/pietroalbini&quot;&gt;Pietro Albini&lt;/a&gt; opened an RFC called &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2947&quot;&gt;&amp;quot;crates.io token scopes&amp;quot;&lt;/a&gt;. This RFC described an improvement to the existing API tokens, that everyone is using to publish crates to the &lt;a href&#x3D;&quot;https://crates.io/&quot;&gt;crates.io&lt;/a&gt; package registry. The proposal was to make it possible to restrict API tokens to 1) certain operations and 2) certain crates.&lt;/p&gt;
+&lt;p&gt;Unfortunately, the crates.io team members were quite busy at the time, so it took a while for this proposal to get accepted. To be precise, during the &lt;a href&#x3D;&quot;https://eurorust.eu&quot;&gt;EuroRust&lt;/a&gt; conference in October 2022 we talked about the RFC again and after a few modifications the RFC was moved into FCP status and then finally merged.&lt;/p&gt;
+&lt;p&gt;The implementation was started soon after, but was paused again due to other priorities at the time. Fortunately, I was lucky enough to get one of the software engineering jobs at the &lt;a href&#x3D;&quot;https://rustfoundation.org/&quot;&gt;Rust Foundation&lt;/a&gt;, so in early April the development continued, and I am happy to report:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;API token scopes on crates.io are now in a public beta testing period!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For details on what these token scopes are and how they are supposed to work, I recommend reading through the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/2947&quot;&gt;RFC&lt;/a&gt;. If you want to try them out, you can go to &lt;a href&#x3D;&quot;https://crates.io/settings/tokens/new&quot;&gt;https://crates.io/settings/tokens/new&lt;/a&gt; and create a new API token scoped to the operations and crates you want:&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;../../../../images/inside-rust/2023-05-09-api-token-scopes/screenshot.png&quot; alt&#x3D;&quot;Screenshot of the &amp;quot;New API Token&amp;quot; page&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Please note that this page is currently not reachable from the regular user interface, you have to access it via URL directly while we test it out.&lt;/p&gt;
+&lt;p&gt;Finally, if you notice any issues, or if you have any questions don&#x27;t hesitate to find us on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io/topic/token.20scopes&quot;&gt;Zulip&lt;/a&gt; or open an issue on &lt;a href&#x3D;&quot;https://github.com/rust-lang/crates.io/issues/new/choose&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Tobias Bieniek</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Stabilizing async fn in traits in 2023</title>
@@ -702,22 +723,6 @@ non-async version. &lt;a href&#x3D;&quot;#fnref2&quot; class&#x3D;&quot;footnote
 
         <author>
             <name>Yoshua Wuyts</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Governance Reform RFC Announcement</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/02/22/governance-reform-rfc.html" type="text/html" title="Governance Reform RFC Announcement" />
-        <published>2023-02-22T00:00:00+00:00</published>
-        <updated>2023-02-22T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2023/02/22/governance-reform-rfc.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/02/22/governance-reform-rfc.html">&lt;p&gt;As part of &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/10/06/governance-update.html&quot;&gt;ongoing work on governance&lt;/a&gt;, the &amp;quot;leadership chat&amp;quot; established a smaller &amp;quot;governance reform&amp;quot; working group to create an RFC to establish new project wide governance. This RFC is now live and can found on the RFCs repo: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3392&quot;&gt;https://github.com/rust-lang/rfcs/pull/3392&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;We have set up a &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/369838-rfc-leadership-council-feedback&quot;&gt;Zulip stream&lt;/a&gt; to provide an additional dedicated place for feedback on the RFC. In addition, team leads will be asking their respective teams for feedback directly. However, anyone is welcome to participate and provide feedback directly in the Zulip stream or the RFC PR if they prefer.&lt;/p&gt;
-&lt;p&gt;Again, if you have any questions or concerns, please don&#x27;t hesitate to reach out.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Jane Losare-Lusby and the Governance Reform WG</name>
         </author>
     </entry>
     
