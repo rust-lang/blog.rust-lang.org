@@ -10,8 +10,110 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-05-30T10:08:38+00:00</updated>
+    <updated>2023-06-01T19:10:25+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.70.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2023/06/01/Rust-1.70.0.html" type="text/html" title="Announcing Rust 1.70.0" />
+        <published>2023-06-01T00:00:00+00:00</published>
+        <updated>2023-06-01T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2023/06/01/Rust-1.70.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2023/06/01/Rust-1.70.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.70.0. Rust is a programming language empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.70.0 with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/releases/tag/1.70.0&quot;&gt;detailed release notes for 1.70.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider updating locally to use the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly channel (&lt;code&gt;rustup default nightly&lt;/code&gt;). Please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you might come across!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1700-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1700-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.70.0 stable&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#sparse-by-default-for-cratesio&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;sparse-by-default-for-cratesio&quot;&gt;&lt;/a&gt;Sparse by default for crates.io&lt;/h3&gt;
+&lt;p&gt;Cargo&#x27;s &amp;quot;sparse&amp;quot; protocol is now enabled by default for reading the index from crates.io. This feature was previously stabilized with &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html#cargos-sparse-protocol&quot;&gt;Rust 1.68.0&lt;/a&gt;, but still required configuration to use that with crates.io. The announced plan was to make that the default in 1.70.0, and here it is!&lt;/p&gt;
+&lt;p&gt;You should see substantially improved performance when fetching information from the crates.io index. Users behind a restrictive firewall will need to ensure that access to &lt;code&gt;https://index.crates.io&lt;/code&gt; is available. If for some reason you need to stay with the previous default of using the git index hosted by GitHub, the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/config.html#registriescrates-ioprotocol&quot;&gt;&lt;code&gt;registries.crates-io.protocol&lt;/code&gt;&lt;/a&gt; config setting can be used to change the default.&lt;/p&gt;
+&lt;p&gt;One side-effect to note about changing the access method is that this also changes the path to the crate cache, so dependencies will be downloaded anew. Once you have fully committed to using the sparse protocol, you may want to clear out the old &lt;code&gt;$CARGO_HOME/registry/*/github.com-*&lt;/code&gt; paths.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#oncecell-and-oncelock&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;oncecell-and-oncelock&quot;&gt;&lt;/a&gt;&lt;code&gt;OnceCell&lt;/code&gt; and &lt;code&gt;OnceLock&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Two new types have been stabilized for one-time initialization of shared data, &lt;code&gt;OnceCell&lt;/code&gt; and its thread-safe counterpart &lt;code&gt;OnceLock&lt;/code&gt;. These can be used anywhere that immediate construction is not wanted, and perhaps not even possible like non-&lt;code&gt;const&lt;/code&gt; data in global variables.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::sync::OnceLock;
+
+static WINNER: OnceLock&amp;lt;&amp;amp;str&amp;gt; &#x3D; OnceLock::new();
+
+fn main() {
+    let winner &#x3D; std::thread::scope(|s| {
+        s.spawn(|| WINNER.set(&amp;quot;thread&amp;quot;));
+
+        std::thread::yield_now(); // give them a chance...
+
+        WINNER.get_or_init(|| &amp;quot;main&amp;quot;)
+    });
+
+    println!(&amp;quot;{winner} wins!&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Crates such as &lt;code&gt;lazy_static&lt;/code&gt; and &lt;code&gt;once_cell&lt;/code&gt; have filled this need in the past, but now these building blocks are part of the standard library, ported from &lt;code&gt;once_cell&lt;/code&gt;&#x27;s &lt;code&gt;unsync&lt;/code&gt; and &lt;code&gt;sync&lt;/code&gt; modules. There are still more methods that may be stabilized in the future, as well as companion &lt;code&gt;LazyCell&lt;/code&gt; and &lt;code&gt;LazyLock&lt;/code&gt; types that store their initializing function, but this first step in stabilization should already cover many use cases.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#isterminal&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;isterminal&quot;&gt;&lt;/a&gt;&lt;code&gt;IsTerminal&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;This newly-stabilized trait has a single method, &lt;code&gt;is_terminal&lt;/code&gt;, to determine if a given file descriptor or handle represents a terminal or TTY. This is another case of standardizing functionality that existed in external crates, like &lt;code&gt;atty&lt;/code&gt; and &lt;code&gt;is-terminal&lt;/code&gt;, using the C library &lt;code&gt;isatty&lt;/code&gt; function on Unix targets and similar functionality elsewhere. A common use case is for programs to distinguish between running in scripts or interactive modes, like presenting colors or even a full TUI when interactive.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::io::{stdout, IsTerminal};
+
+fn main() {
+    let use_color &#x3D; stdout().is_terminal();
+    // if so, add color codes to program output...
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#named-levels-of-debug-information&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;named-levels-of-debug-information&quot;&gt;&lt;/a&gt;Named levels of debug information&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;-Cdebuginfo&lt;/code&gt; compiler option has previously only supported numbers 0..&#x3D;2 for increasing amounts of debugging information, where Cargo defaults to 2 in dev and test profiles and 0 in release and bench profiles. These debug levels can now be set by name: &amp;quot;none&amp;quot; (0), &amp;quot;limited&amp;quot; (1), and &amp;quot;full&amp;quot; (2), as well as two new levels, &amp;quot;line-directives-only&amp;quot; and &amp;quot;line-tables-only&amp;quot;.&lt;/p&gt;
+&lt;p&gt;The Cargo and rustc documentation both called level 1 &amp;quot;line tables only&amp;quot; before, but it was more than that with information about all functions, just not types and variables. That level is now called &amp;quot;limited&amp;quot;, and the new &amp;quot;line-tables-only&amp;quot; level is further reduced to the minimum needed for backtraces with filenames and line numbers. This may eventually become the level used for &lt;code&gt;-Cdebuginfo&#x3D;1&lt;/code&gt;. The other &lt;code&gt;line-directives-only&lt;/code&gt; level is intended for NVPTX profiling, and is otherwise not recommended.&lt;/p&gt;
+&lt;p&gt;Note that these named options are not yet available to be used via &lt;code&gt;Cargo.toml&lt;/code&gt;. Support for that will be available in the next release 1.71.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#enforced-stability-in-the-test-cli&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;enforced-stability-in-the-test-cli&quot;&gt;&lt;/a&gt;Enforced stability in the &lt;code&gt;test&lt;/code&gt; CLI&lt;/h3&gt;
+&lt;p&gt;When &lt;code&gt;#[test]&lt;/code&gt; functions are compiled, the executable gets a command-line interface from the &lt;code&gt;test&lt;/code&gt; crate. This CLI has a number of options, including some that are not yet stabilized and require specifying &lt;code&gt;-Zunstable-options&lt;/code&gt; as well, like many other commands in the Rust toolchain. However, while that&#x27;s only intended to be allowed in nightly builds, that restriction wasn&#x27;t active in &lt;code&gt;test&lt;/code&gt; -- until now. Starting with 1.70.0, stable and beta builds of Rust will no longer allow unstable &lt;code&gt;test&lt;/code&gt; options, making them truly nightly-only as documented.&lt;/p&gt;
+&lt;p&gt;There are known cases where unstable options may have been used without direct user knowledge, especially &lt;code&gt;--format json&lt;/code&gt; used in IntelliJ Rust and other IDE plugins. Those projects are already adjusting to this change, and the status of JSON output can be followed in its &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/49359&quot;&gt;tracking issue&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroI8.html#associatedconstant.MIN&quot;&gt;&lt;code&gt;NonZero*::MIN/MAX&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/struct.BinaryHeap.html#method.retain&quot;&gt;&lt;code&gt;BinaryHeap::retain&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/binary_heap/struct.IntoIter.html&quot;&gt;&lt;code&gt;Default for std::collections::binary_heap::IntoIter&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/btree_map/struct.IntoIter.html&quot;&gt;&lt;code&gt;Default for std::collections::btree_map::{IntoIter, Iter, IterMut}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/btree_map/struct.IntoKeys.html&quot;&gt;&lt;code&gt;Default for std::collections::btree_map::{IntoKeys, Keys}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/btree_map/struct.IntoKeys.html&quot;&gt;&lt;code&gt;Default for std::collections::btree_map::{IntoValues, Values}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/btree_map/struct.Range.html&quot;&gt;&lt;code&gt;Default for std::collections::btree_map::Range&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/btree_set/struct.IntoIter.html&quot;&gt;&lt;code&gt;Default for std::collections::btree_set::{IntoIter, Iter}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/btree_set/struct.Range.html&quot;&gt;&lt;code&gt;Default for std::collections::btree_set::Range&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/alloc/collections/linked_list/struct.IntoIter.html&quot;&gt;&lt;code&gt;Default for std::collections::linked_list::{IntoIter, Iter, IterMut}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/alloc/vec/struct.IntoIter.html#impl-Default-for-IntoIter%3CT,+A%3E&quot;&gt;&lt;code&gt;Default for std::vec::IntoIter&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.Chain.html&quot;&gt;&lt;code&gt;Default for std::iter::Chain&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.Cloned.html&quot;&gt;&lt;code&gt;Default for std::iter::Cloned&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.Copied.html&quot;&gt;&lt;code&gt;Default for std::iter::Copied&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.Enumerate.html&quot;&gt;&lt;code&gt;Default for std::iter::Enumerate&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.Flatten.html&quot;&gt;&lt;code&gt;Default for std::iter::Flatten&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.Fuse.html&quot;&gt;&lt;code&gt;Default for std::iter::Fuse&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/iter/struct.Rev.html&quot;&gt;&lt;code&gt;Default for std::iter::Rev&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/slice/struct.Iter.html&quot;&gt;&lt;code&gt;Default for std::slice::Iter&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/slice/struct.IterMut.html&quot;&gt;&lt;code&gt;Default for std::slice::IterMut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/alloc/rc/struct.Rc.html#method.into_inner&quot;&gt;&lt;code&gt;Rc::into_inner&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/alloc/sync/struct.Arc.html#method.into_inner&quot;&gt;&lt;code&gt;Arc::into_inner&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/cell/struct.OnceCell.html&quot;&gt;&lt;code&gt;std::cell::OnceCell&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.is_some_and&quot;&gt;&lt;code&gt;Option::is_some_and&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ptr/struct.NonNull.html#method.slice_from_raw_parts&quot;&gt;&lt;code&gt;NonNull::slice_from_raw_parts&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.is_ok_and&quot;&gt;&lt;code&gt;Result::is_ok_and&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/result/enum.Result.html#method.is_err_and&quot;&gt;&lt;code&gt;Result::is_err_and&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/atomic/struct.AtomicU8.html#method.as_ptr&quot;&gt;&lt;code&gt;std::sync::atomic::Atomic*::as_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/io/trait.IsTerminal.html&quot;&gt;&lt;code&gt;std::io::IsTerminal&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/linux/net/trait.SocketAddrExt.html&quot;&gt;&lt;code&gt;std::os::linux::net::SocketAddrExt&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/unix/net/struct.UnixDatagram.html#method.bind_addr&quot;&gt;&lt;code&gt;std::os::unix::net::UnixDatagram::bind_addr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/unix/net/struct.UnixDatagram.html#method.connect_addr&quot;&gt;&lt;code&gt;std::os::unix::net::UnixDatagram::connect_addr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/unix/net/struct.UnixDatagram.html#method.send_to_addr&quot;&gt;&lt;code&gt;std::os::unix::net::UnixDatagram::send_to_addr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/unix/net/struct.UnixListener.html#method.bind_addr&quot;&gt;&lt;code&gt;std::os::unix::net::UnixListener::bind_addr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/path/struct.Path.html#method.as_mut_os_str&quot;&gt;&lt;code&gt;std::path::Path::as_mut_os_str&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/sync/struct.OnceLock.html&quot;&gt;&lt;code&gt;std::sync::OnceLock&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;Check out everything that changed in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/releases/tag/1.70.0&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-170-2023-06-01&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-170&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1700&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1700&quot;&gt;&lt;/a&gt;Contributors to 1.70.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.70.0. We couldn&#x27;t have done it without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.70.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>On the RustConf keynote</title>
@@ -593,94 +695,6 @@ of the feature will be finished.&lt;/p&gt;
 
         <author>
             <name>The rustup working group</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.67.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2023/01/26/Rust-1.67.0.html" type="text/html" title="Announcing Rust 1.67.0" />
-        <published>2023-01-26T00:00:00+00:00</published>
-        <updated>2023-01-26T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2023/01/26/Rust-1.67.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2023/01/26/Rust-1.67.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.67.0. Rust is a
-programming language empowering everyone to build reliable and efficient
-software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.67.0
-with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get
-&lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on
-our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1670-2023-01-26&quot;&gt;detailed release notes for
-1.67.0&lt;/a&gt;
-on GitHub.&lt;/p&gt;
-&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider
-updating locally to use the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly
-channel (&lt;code&gt;rustup default nightly&lt;/code&gt;). Please
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you
-might come across!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1670-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1670-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.67.0 stable&lt;/h2&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#must_use-effective-on-async-fn&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;must_use-effective-on-async-fn&quot;&gt;&lt;/a&gt;&lt;code&gt;#[must_use]&lt;/code&gt; effective on &lt;code&gt;async fn&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;async&lt;/code&gt; functions annotated with &lt;code&gt;#[must_use]&lt;/code&gt; now apply that attribute to the
-output of the returned &lt;code&gt;impl Future&lt;/code&gt;. The &lt;code&gt;Future&lt;/code&gt; trait itself is already
-annotated with &lt;code&gt;#[must_use]&lt;/code&gt;, so all types implementing &lt;code&gt;Future&lt;/code&gt; are
-automatically &lt;code&gt;#[must_use]&lt;/code&gt;, which meant that previously there was no way to
-indicate that the output of the &lt;code&gt;Future&lt;/code&gt; is itself significant and should be used in some way.&lt;/p&gt;
-&lt;p&gt;With 1.67, the compiler will now warn if the output isn&#x27;t used in some way.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;#[must_use]
-async fn bar() -&amp;gt; u32 { 0 }
-
-async fn caller() {
-    bar().await;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;warning: unused output of future returned by &#x60;bar&#x60; that must be used
- --&amp;gt; src/lib.rs:5:5
-  |
-5 |     bar().await;
-  |     ^^^^^^^^^^^
-  |
-  &#x3D; note: &#x60;#[warn(unused_must_use)]&#x60; on by default
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#stdsyncmpsc-implementation-updated&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stdsyncmpsc-implementation-updated&quot;&gt;&lt;/a&gt;&lt;code&gt;std::sync::mpsc&lt;/code&gt; implementation updated&lt;/h3&gt;
-&lt;p&gt;Rust&#x27;s standard library has had a multi-producer, single-consumer channel since
-before 1.0, but in this release the implementation is switched out to be based
-on &lt;a href&#x3D;&quot;https://crates.io/crates/crossbeam-channel&quot;&gt;&lt;code&gt;crossbeam-channel&lt;/code&gt;&lt;/a&gt;. This
-release contains no API changes, but the new implementation fixes a number of
-bugs and improves the performance and maintainability of the implementation.&lt;/p&gt;
-&lt;p&gt;Users should not notice any significant changes in behavior as of this release.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i32.html#method.checked_ilog&quot;&gt;&lt;code&gt;{integer}::checked_ilog&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i32.html#method.checked_ilog2&quot;&gt;&lt;code&gt;{integer}::checked_ilog2&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i32.html#method.checked_ilog10&quot;&gt;&lt;code&gt;{integer}::checked_ilog10&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i32.html#method.ilog&quot;&gt;&lt;code&gt;{integer}::ilog&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i32.html#method.ilog2&quot;&gt;&lt;code&gt;{integer}::ilog2&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.i32.html#method.ilog10&quot;&gt;&lt;code&gt;{integer}::ilog10&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroU32.html#method.ilog2&quot;&gt;&lt;code&gt;NonZeroU*::ilog2&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroU32.html#method.ilog10&quot;&gt;&lt;code&gt;NonZeroU*::ilog10&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroU32.html#associatedconstant.BITS&quot;&gt;&lt;code&gt;NonZero*::BITS&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These APIs are now stable in const contexts:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.char.html#method.from_u32&quot;&gt;&lt;code&gt;char::from_u32&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.char.html#method.from_digit&quot;&gt;&lt;code&gt;char::from_digit&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.char.html#method.to_digit&quot;&gt;&lt;code&gt;char::to_digit&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/char/fn.from_u32.html&quot;&gt;&lt;code&gt;core::char::from_u32&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/core/char/fn.from_digit.html&quot;&gt;&lt;code&gt;core::char::from_digit&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Check out everything that changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1670-2023-01-26&quot;&gt;Rust&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-167-2023-01-26&quot;&gt;Cargo&lt;/a&gt;,
-and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-167&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1670&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1670&quot;&gt;&lt;/a&gt;Contributors to 1.67.0&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.67.0.
-We couldn&#x27;t have done it without all of you.
-&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.67.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     
