@@ -10,8 +10,45 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-06-03T02:54:22+00:00</updated>
+    <updated>2023-06-20T07:47:44+00:00</updated>
 
+    
+    <entry>
+        <title>Introducing the Rust Leadership Council</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2023/06/20/introducing-leadership-council.html" type="text/html" title="Introducing the Rust Leadership Council" />
+        <published>2023-06-20T00:00:00+00:00</published>
+        <updated>2023-06-20T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2023/06/20/introducing-leadership-council.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2023/06/20/introducing-leadership-council.html">&lt;p&gt;As of today, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3392&quot;&gt;RFC 3392&lt;/a&gt; has been merged, forming the new top level governance body of the Rust Project: the Leadership Council. The creation of this Council marks the end of both the Core Team and the interim Leadership Chat.&lt;/p&gt;
+&lt;p&gt;The Council will assume responsibility for top-level governance concerns while most of the responsibilities of the Rust Project (such as maintenance of the compiler and core tooling, evolution of the language and standard libraries, administration of infrastructure, etc.) remain with the nine top level teams.&lt;/p&gt;
+&lt;p&gt;Each of these top level teams, &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/3392-leadership-council.html#initial-list-of-top-level-teams&quot;&gt;as defined in the RFC&lt;/a&gt;, has chosen a representative who collectively form &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/leadership-council&quot;&gt;the Council&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Compiler: Eric Holk&lt;/li&gt;
+&lt;li&gt;Crates.io: Carol (Nichols || Goulding)&lt;/li&gt;
+&lt;li&gt;Dev Tools: Eric Huss&lt;/li&gt;
+&lt;li&gt;Infrastructure: Ryan Levick&lt;/li&gt;
+&lt;li&gt;Language: Jack Huey&lt;/li&gt;
+&lt;li&gt;Launching Pad&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;: Jonathan Pallant&lt;/li&gt;
+&lt;li&gt;Library: Mara Bos&lt;/li&gt;
+&lt;li&gt;Moderation: Khionu Sybiern&lt;/li&gt;
+&lt;li&gt;Release: Mark Rousskov&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;First, we want to take a moment to thank the Core Team and interim Leadership Chat for the hard work they&#x27;ve put in over the years. Their efforts have been critical for the Rust Project. However, we do recognize that the governance of the Rust Project has had its shortcomings. We hope to build on the successes and improve upon the failures to ultimately lead to greater transparency and accountability.&lt;/p&gt;
+&lt;p&gt;We know that there is a lot of work to do and we are eager to get started. In the coming weeks we will be establishing the basic infrastructure for the group, including creating a plan for regular meetings and a process for raising agenda items, setting up a team repository, and ultimately completing the transition from the former Rust leadership structures.&lt;/p&gt;
+&lt;p&gt;We will post more once this bootstrapping process has been completed.&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn1&quot;&gt;
+&lt;p&gt;The RFC defines the launching pad team as a temporary umbrella team to represent subteams that do not currently have a top-level team. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Leadership Council</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.70.0</title>
@@ -646,55 +683,6 @@ without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.67
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rustup 1.25.2</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2023/02/01/Rustup-1.25.2.html" type="text/html" title="Announcing Rustup 1.25.2" />
-        <published>2023-02-01T00:00:00+00:00</published>
-        <updated>2023-02-01T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2023/02/01/Rustup-1.25.2.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2023/02/01/Rustup-1.25.2.html">&lt;p&gt;The rustup working group is announcing the release of rustup version 1.25.2.
-Rustup is the recommended tool to install Rust, a programming language that is
-empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of rustup installed, getting rustup 1.25.2 is as
-easy as stopping any programs which may be using Rustup (e.g. closing your IDE)
-and running:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup self update
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Rustup will also automatically update itself at the end of a normal toolchain
-update:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup update
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://rustup.rs/&quot;&gt;get rustup&lt;/a&gt; from the
-appropriate page on our website.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-new-in-rustup-1252&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-new-in-rustup-1252&quot;&gt;&lt;/a&gt;What&#x27;s new in rustup 1.25.2&lt;/h2&gt;
-&lt;p&gt;This version of rustup fixes a warning incorrectly saying that signature
-verification failed for Rust releases. The warning was due to a dependency of
-Rustup including a time-based check preventing the use of SHA-1 from February
-1st, 2023 onwards.&lt;/p&gt;
-&lt;p&gt;Unfortunately Rust&#x27;s release signing key uses SHA-1 to sign its subkeys, which
-resulted in all signatures being marked as invalid. Rustup 1.25.2 temporarily
-fixes the problem by allowing again the use of SHA-1.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#why-is-signature-verification-failure-only-a-warning&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;why-is-signature-verification-failure-only-a-warning&quot;&gt;&lt;/a&gt;Why is signature verification failure only a warning?&lt;/h2&gt;
-&lt;p&gt;Signature verification is currently an experimental and incomplete feature
-included in rustup, as it&#x27;s still missing crucial features like key rotation.
-Until the feature is complete and ready for use, its outcomes are only
-displayed as warnings without a way to turn them into errors.&lt;/p&gt;
-&lt;p&gt;This is done to avoid potentially breaking installations of rustup. Signature
-verification will error out on failure only after the design and implementation
-of the feature will be finished.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#thanks&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;thanks&quot;&gt;&lt;/a&gt;Thanks&lt;/h2&gt;
-&lt;p&gt;Thanks again to all the contributors who made rustup 1.25.2 possible!&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Daniel Silverstone (kinnison)&lt;/li&gt;
-&lt;li&gt;Pietro Albini (pietroalbini)&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-
-        <author>
-            <name>The rustup working group</name>
         </author>
     </entry>
     
