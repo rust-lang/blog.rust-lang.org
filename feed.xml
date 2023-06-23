@@ -10,8 +10,55 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-06-22T16:41:30+00:00</updated>
+    <updated>2023-06-23T09:26:30+00:00</updated>
 
+    
+    <entry>
+        <title>Improved API tokens for crates.io</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2023/06/23/improved-api-tokens-for-crates-io.html" type="text/html" title="Improved API tokens for crates.io" />
+        <published>2023-06-23T00:00:00+00:00</published>
+        <updated>2023-06-23T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2023/06/23/improved-api-tokens-for-crates-io.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2023/06/23/improved-api-tokens-for-crates-io.html">&lt;p&gt;If you recently generated a new API token on crates.io, you might have noticed
+our new API token creation page and some of the new features it now supports.&lt;/p&gt;
+&lt;p&gt;Previously, when clicking the &amp;quot;New Token&amp;quot; button on &lt;a href&#x3D;&quot;https://crates.io/settings/tokens&quot;&gt;https://crates.io/settings/tokens&lt;/a&gt;,
+you were only provided with the option to choose a token name, without any
+additional choices. We knew that we wanted to offer our users more flexibility,
+but in the previous user interface that would have been difficult, so our first
+step was to build a proper &amp;quot;New API Token&amp;quot; page.&lt;/p&gt;
+&lt;p&gt;Our roadmap included two essential features known as &amp;quot;token scopes&amp;quot;. The first
+of them allows you to restrict API tokens to specific operations. For instance,
+you can configure a token to solely enable the publishing of new versions for
+existing crates, while disallowing the creation of new crates. The second one
+offers an optional restriction where tokens can be limited to only work for
+specific crate names. If you want to read more about how these features
+were planned and implemented you can take a look at our corresponding
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/crates.io/issues/5443&quot;&gt;tracking issue&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To further enhance the security of crates.io API tokens, we prioritized the
+implementation of expiration dates. Since we had already touched most of the
+token-related code this was relatively straight-forward. We are delighted to
+announce that our &amp;quot;New API Token&amp;quot; page now supports endpoint scopes, crate
+scopes and expiration dates:&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;/images/2023-06-23-improved-api-tokens-for-crates-io/new-api-token-page.png&quot; alt&#x3D;&quot;Screenshot of the &amp;quot;New API Token&amp;quot; page&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Similar to the API token creation process on github.com, you can choose to not
+have any expiration date, use one of the presets, or even choose a custom
+expiration date to suit your requirements.&lt;/p&gt;
+&lt;p&gt;If you come across any issues or have questions, feel free to reach out to us on
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io/topic/token.20scopes&quot;&gt;Zulip&lt;/a&gt;
+or open an issue on &lt;a href&#x3D;&quot;https://github.com/rust-lang/crates.io/issues/new/choose&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Lastly, we, the crates.io team, would like to express our gratitude to the
+&lt;a href&#x3D;&quot;https://openssf.org/community/alpha-omega/&quot;&gt;OpenSSF&#x27;s Alpha-Omega Initiative&lt;/a&gt;
+and &lt;a href&#x3D;&quot;https://jfrog.com/blog/jfrog-joins-rust-foundation-as-platinum-member/&quot;&gt;JFrog&lt;/a&gt;
+for their contributions to the &lt;a href&#x3D;&quot;https://rustfoundation.org&quot;&gt;Rust Foundation&lt;/a&gt;
+security initiative. Their support has been instrumental in enabling us to
+implement these features and undertake extensive security-related work on the
+crates.io codebase over the past few months.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Tobias Bieniek</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Introducing the Rust Leadership Council</title>
@@ -641,44 +688,6 @@ and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/C
 &lt;p&gt;Many people came together to create Rust 1.68.0.
 We couldn&#x27;t have done it without all of you.
 &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.68.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.67.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2023/02/09/Rust-1.67.1.html" type="text/html" title="Announcing Rust 1.67.1" />
-        <published>2023-02-09T00:00:00+00:00</published>
-        <updated>2023-02-09T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2023/02/09/Rust-1.67.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2023/02/09/Rust-1.67.1.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.67.1. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.67.1 with:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1671-2023-02-09&quot;&gt;detailed release notes for 1.67.1&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1671-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1671-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.67.1 stable&lt;/h2&gt;
-&lt;p&gt;Rust 1.67.1 fixes a regression for projects that link to thin archives
-(&lt;code&gt;.a&lt;/code&gt; files that reference external &lt;code&gt;.o&lt;/code&gt; objects). The new
-archive writer in 1.67.0 could not read thin archives as inputs, leading to the
-error &amp;quot;Unsupported archive identifier.&amp;quot; The compiler now uses LLVM&#x27;s archive
-writer again, until that format is supported in the new code.&lt;/p&gt;
-&lt;p&gt;Additionally, the clippy style lint &lt;code&gt;uninlined_format_args&lt;/code&gt; is temporarily
-downgraded to pedantic -- allowed by default. While the compiler has supported
-this format since Rust 1.58, &lt;code&gt;rust-analyzer&lt;/code&gt; does not support it yet, so it&#x27;s
-not necessarily good to use that style everywhere possible.&lt;/p&gt;
-&lt;p&gt;The final change is a soundness fix in Rust&#x27;s own bootstrap code. This had no
-known problematic uses, but it did raise an error when bootstrap was compiled
-with 1.67 itself, rather than the prior 1.66 release as usual.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1671&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1671&quot;&gt;&lt;/a&gt;Contributors to 1.67.1&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.67.1. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.67.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
 </content>
 
         <author>
