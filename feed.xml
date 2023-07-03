@@ -10,8 +10,48 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-06-23T09:26:30+00:00</updated>
+    <updated>2023-07-03T17:56:39+00:00</updated>
 
+    
+    <entry>
+        <title>Rustfmt support for let-else statements</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2023/07/01/rustfmt-supports-let-else-statements.html" type="text/html" title="Rustfmt support for let-else statements" />
+        <published>2023-07-01T00:00:00+00:00</published>
+        <updated>2023-07-01T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2023/07/01/rustfmt-supports-let-else-statements.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2023/07/01/rustfmt-supports-let-else-statements.html">&lt;p&gt;Rustfmt will add support for formatting &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rust-by-example/flow_control/let_else.html&quot;&gt;let-else statements&lt;/a&gt; starting with the nightly 2023-07-02 toolchain, and then let-else formatting support should come to stable Rust as part of the 1.72 release.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#overview&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;overview&quot;&gt;&lt;/a&gt;Overview&lt;/h2&gt;
+&lt;p&gt;let-else statements were &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html#let-else-statements&quot;&gt;stabilized&lt;/a&gt; back in 2022 as part of the 1.65.0 release. However, the current and previous versions of Rustfmt did not have formatting support for let-else statements. When Rustfmt encountered a let-else statement it would leave it alone and maintain the manual styling originally authored by the developer.&lt;/p&gt;
+&lt;p&gt;After updating to one of the toolchains with let-else formatting support, you may notice that &lt;code&gt;cargo fmt&lt;/code&gt;/&lt;code&gt;rustfmt&lt;/code&gt; invocations want to &amp;quot;change&amp;quot; the formatting of your let-else statements. However, this isn&#x27;t actually a &amp;quot;change&amp;quot; in formatting, but instead is simply Rustfmt applying the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/style-guide/statements.html#else-blocks-let-else-statements&quot;&gt;let-else formatting rules&lt;/a&gt; for the very first time.&lt;/p&gt;
+&lt;p&gt;Rustfmt support for let-else statements has been a long standing request, and the Project has taken a number of steps to prevent a recurrence of the delay between feature stabilization and formatting support, as well as putting additional procedures in place which should enable more expeditious formatting support for nightly-only syntax.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#background-and-context&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;background-and-context&quot;&gt;&lt;/a&gt;Background and Context&lt;/h2&gt;
+&lt;p&gt;Rust has an official &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/style-guide/&quot;&gt;Style Guide&lt;/a&gt; that articulates the default formatting style for Rust code. The Style Guide functions as a specification that defines the default formatting behavior for Rustfmt, and Rustfmt&#x27;s primary mission is to provide automated formatting capabilities based around that Style Guide specification. Rustfmt is a direct consumer of the Style Guide, but Rustfmt does not unilaterally dictate what the default formatting style of language constructs should be.&lt;/p&gt;
+&lt;p&gt;The initial Style Guide was developed many years ago (beginning in 2016), and was driven by a Style Team in collaboration with the community through an RFC process. The Style Guide was then made official in 2018 via &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2436-style-guide.html&quot;&gt;RFC 2436&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;That initial Style Team was more akin to a Project Working Group in today&#x27;s terms, as they had a fixed scope with a main goal to simply pull together the initial Style Guide. Accordingly that initial Style Team was disbanded once the Guide was made official.&lt;/p&gt;
+&lt;p&gt;There was subsequently no designated group within the Rust Project that was
+explicitly responsible for the Style Guide, and no group explicitly focused on determining the official Style for new language constructs.&lt;/p&gt;
+&lt;p&gt;The absence of a team/group with ownership of the Style Guide didn&#x27;t really cause problems at first, as the new syntax that came along during the first few years was comparatively non-controversial when it came to default style and formatting. However, over time challenges started to develop when there was increasingly less community consensus and no governing team within the Project to make the final decision about how new language syntax should be styled.&lt;/p&gt;
+&lt;p&gt;This was certainly the case with let-else statements, with lots of varying perspectives on how they should be styled. Without any team/group to make the decision and update the Style Guide with the official rules for let-else statements, Rustfmt was blocked and was unable to proceed.&lt;/p&gt;
+&lt;p&gt;These circumstances around let-else statements resulted in a greater understanding across the Project of the need to establish a team to own and maintain the Style Guide. However, it was also well understood that spinning up a new team and respective processes would take some time, and the decision was made to not block the stabilization of features that were otherwise fully ready to be stabilized, like let-else statements, in the nascency of such a new team and new processes.&lt;/p&gt;
+&lt;p&gt;Accordingly, let-else statements were stabilized and released without formatting support and with an understanding that the new Style Team and then subsequently the Rustfmt Team would later complete the requisite work required to incorporate formatting support.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#steps-taken&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;steps-taken&quot;&gt;&lt;/a&gt;Steps Taken&lt;/h2&gt;
+&lt;p&gt;A number of steps have been taken to improve matters in this space. This includes steps to address the aforementioned issues and deal with some of the &amp;quot;style debt&amp;quot; that accrued over the years in the absence of a Style Team, and also to establish new processes and mechanisms to bring about other formatting/styling improvements.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/3309-style-team.html&quot;&gt;Launched a new, permanent Style Team&lt;/a&gt; that&#x27;s responsible for the Style Guide.&lt;/li&gt;
+&lt;li&gt;Established a mechanism to evolve the default style while still maintaining stability guarantees (&lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/3338-style-evolution.html&quot;&gt;RFC 3338&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Developed a &lt;a href&#x3D;&quot;https://github.com/rust-lang/style-team/blob/468570a02856a6bbe3994164e1a16a13b56b5cf4/nightly-style-procedure.md&quot;&gt;nightly-syntax-policy&lt;/a&gt; that provides clarity around style rules for unstable/nightly-only syntax, and enables Rustfmt to provide earlier support for such syntax.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Furthermore, the Style Team is also continuing to diligently work through the backlog of those &amp;quot;style debt&amp;quot; items, and the Rustfmt team is in turn actively working on respective formatting implementation. The Rustfmt team is also focused on growing the team in order to improve contributor and review capacity.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;We know that many have wanted let-else formatting support for a while, and we&#x27;re sorry it&#x27;s taken this long. We also recognize that Rustfmt now starting to format let-else statements may cause some formatting churn, and that&#x27;s a highly undesirable scenario we strive to avoid.&lt;/p&gt;
+&lt;p&gt;However, we believe the benefits of delivering let-else formatting support outweigh those drawbacks. While it&#x27;s possible there may be another future case or two where we have to do something similar as we work through the style backlog, we&#x27;re hopeful that over time this new team and these new processes will reduce (or eliminate) the possibility of a recurrence by addressing the historical problems that played such an outsize role in the let-else delay, and also bring about various other improvements.&lt;/p&gt;
+&lt;p&gt;Both the Style and Rustfmt teams hang out on Zulip so if you&#x27;d like to get more involved or have any questions please drop by on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/346005-t-style&quot;&gt;T-Style&lt;/a&gt; and/or &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/357797-t-rustfmt&quot;&gt;T-Rustfmt&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Caleb Cartwright</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Improved API tokens for crates.io</title>
@@ -574,120 +614,6 @@ ThinLTO despite compiling to a dylib.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1681&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1681&quot;&gt;&lt;/a&gt;Contributors to 1.68.1&lt;/h3&gt;
 &lt;p&gt;Many people came together to create Rust 1.68.1. We couldn&#x27;t have done it
 without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.68.1/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.68.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html" type="text/html" title="Announcing Rust 1.68.0" />
-        <published>2023-03-09T00:00:00+00:00</published>
-        <updated>2023-03-09T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2023/03/09/Rust-1.68.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.68.0. Rust is a
-programming language empowering everyone to build reliable and efficient
-software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.68.0
-with:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get
-&lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on
-our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1680-2023-03-09&quot;&gt;detailed release notes for
-1.68.0&lt;/a&gt;
-on GitHub.&lt;/p&gt;
-&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider
-updating locally to use the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly
-channel (&lt;code&gt;rustup default nightly&lt;/code&gt;). Please
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you
-might come across!&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1680-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1680-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.68.0 stable&lt;/h2&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#cargos-sparse-protocol&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargos-sparse-protocol&quot;&gt;&lt;/a&gt;Cargo&#x27;s sparse protocol&lt;/h3&gt;
-&lt;p&gt;Cargo&#x27;s &amp;quot;sparse&amp;quot; registry protocol has been stabilized for reading the index of
-crates, along with infrastructure at &lt;code&gt;https://index.crates.io/&lt;/code&gt; for those
-published in the primary crates.io registry. The prior git protocol (which is
-still the default) clones a repository that indexes &lt;em&gt;all&lt;/em&gt; crates available in
-the registry, but this has started to hit scaling limitations, with noticeable
-delays while updating that repository. The new protocol should provide a
-significant performance improvement when accessing crates.io, as it will only
-download information about the subset of crates that you actually use.&lt;/p&gt;
-&lt;p&gt;To use the sparse protocol with crates.io, set the environment variable
-&lt;code&gt;CARGO_REGISTRIES_CRATES_IO_PROTOCOL&#x3D;sparse&lt;/code&gt;, or edit your
-&lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/config.html&quot;&gt;&lt;code&gt;.cargo/config.toml&lt;/code&gt; file&lt;/a&gt;
-to add:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[registries.crates-io]
-protocol &#x3D; &amp;quot;sparse&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The sparse protocol is currently planned to become the default for crates.io in
-the 1.70.0 release in a few months. For more information, please see the prior
-&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2023/01/30/cargo-sparse-protocol.html&quot;&gt;announcement&lt;/a&gt;
-on the Inside Rust Blog, as well as
-&lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/2789-sparse-index.html&quot;&gt;RFC 2789&lt;/a&gt;
-and the current
-&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/cargo/reference/registry-index.html#sparse-protocol&quot;&gt;documentation&lt;/a&gt;
-in the Cargo Book.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#local-pin-construction&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;local-pin-construction&quot;&gt;&lt;/a&gt;Local &lt;code&gt;Pin&lt;/code&gt; construction&lt;/h3&gt;
-&lt;p&gt;The new &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/pin/macro.pin.html&quot;&gt;&lt;code&gt;pin!&lt;/code&gt;&lt;/a&gt; macro
-constructs a &lt;code&gt;Pin&amp;lt;&amp;amp;mut T&amp;gt;&lt;/code&gt; from a &lt;code&gt;T&lt;/code&gt; expression, anonymously captured in local
-state. This is often called stack-pinning, but that &amp;quot;stack&amp;quot; could also be the
-captured state of an &lt;code&gt;async fn&lt;/code&gt; or block. This macro is similar to some crates,
-like &lt;a href&#x3D;&quot;https://docs.rs/tokio/1/tokio/macro.pin.html&quot;&gt;&lt;code&gt;tokio::pin!&lt;/code&gt;&lt;/a&gt;, but the
-standard library can take advantage of &lt;code&gt;Pin&lt;/code&gt; internals and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/reference/destructors.html#temporary-lifetime-extension&quot;&gt;temporary lifetime
-extension&lt;/a&gt;
-for a more expression-like macro.&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;/// Runs a future to completion.
-fn block_on&amp;lt;F: Future&amp;gt;(future: F) -&amp;gt; F::Output {
-    let waker_that_unparks_thread &#x3D; todo!();
-    let mut cx &#x3D; Context::from_waker(&amp;amp;waker_that_unparks_thread);
-    // Pin the future so it can be polled.
-    let mut pinned_future &#x3D; pin!(future);
-    loop {
-        match pinned_future.as_mut().poll(&amp;amp;mut cx) {
-            Poll::Pending &#x3D;&amp;gt; thread::park(),
-            Poll::Ready(result) &#x3D;&amp;gt; return result,
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In this example, the original &lt;code&gt;future&lt;/code&gt; will be moved into a temporary local,
-referenced by the new &lt;code&gt;pinned_future&lt;/code&gt; with type &lt;code&gt;Pin&amp;lt;&amp;amp;mut F&amp;gt;&lt;/code&gt;, and that pin is
-subject to the normal borrow checker to make sure it can&#x27;t outlive that local.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#default-alloc-error-handler&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;default-alloc-error-handler&quot;&gt;&lt;/a&gt;Default &lt;code&gt;alloc&lt;/code&gt; error handler&lt;/h3&gt;
-&lt;p&gt;When allocation fails in Rust, APIs like &lt;code&gt;Box::new&lt;/code&gt; and &lt;code&gt;Vec::push&lt;/code&gt; have no way
-to indicate that failure, so some divergent execution path needs to be taken.
-When using the &lt;code&gt;std&lt;/code&gt; crate, the program will print to &lt;code&gt;stderr&lt;/code&gt; and abort.
-As of Rust 1.68.0, binaries which include &lt;code&gt;std&lt;/code&gt; will continue to have
-this behavior. Binaries which do not include &lt;code&gt;std&lt;/code&gt;, only including &lt;code&gt;alloc&lt;/code&gt;, will now &lt;code&gt;panic!&lt;/code&gt;
-on allocation failure, which may be further adjusted via a &lt;code&gt;#[panic_handler]&lt;/code&gt; if desired.&lt;/p&gt;
-&lt;p&gt;In the future, it&#x27;s likely that the behavior for &lt;code&gt;std&lt;/code&gt; will also be changed to match that of &lt;code&gt;alloc&lt;/code&gt;-only binaries.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/pin/macro.pin.html&quot;&gt;&lt;code&gt;{core,std}::pin::pin!&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.f32.html#impl-From%3Cbool%3E-for-f32&quot;&gt;&lt;code&gt;impl From&amp;lt;bool&amp;gt; for {f32,f64}&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/path/constant.MAIN_SEPARATOR_STR.html&quot;&gt;&lt;code&gt;std::path::MAIN_SEPARATOR_STR&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/path/struct.PathBuf.html#impl-DerefMut-for-PathBuf&quot;&gt;&lt;code&gt;impl DerefMut for PathBuf&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These APIs are now stable in const contexts:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/collections/struct.VecDeque.html#method.new&quot;&gt;&lt;code&gt;VecDeque::new&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;As &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2023/01/09/android-ndk-update-r25.html&quot;&gt;previously announced&lt;/a&gt;,
-Android platform support in Rust is now targeting NDK r25, which corresponds to
-a minimum supported API level of 19 (KitKat).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Check out everything that changed in
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1680-2023-03-09&quot;&gt;Rust&lt;/a&gt;,
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-168-2023-03-09&quot;&gt;Cargo&lt;/a&gt;,
-and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-168&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1680&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1680&quot;&gt;&lt;/a&gt;Contributors to 1.68.0&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.68.0.
-We couldn&#x27;t have done it without all of you.
-&lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.68.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
 </content>
 
         <author>

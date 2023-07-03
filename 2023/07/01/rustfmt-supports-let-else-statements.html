@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rustfmt support for let-else statements | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Rustfmt support for let-else statements | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Rustfmt support for let-else statements | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Rustfmt support for let-else statements" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rustfmt support for let-else statements</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">July 1, 2023 &middot; Caleb Cartwright
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang#Style%20team">the style team</a> 
+    </div>
+
+    <div class="post">
+      <p>Rustfmt will add support for formatting <a href="https://doc.rust-lang.org/rust-by-example/flow_control/let_else.html">let-else statements</a> starting with the nightly 2023-07-02 toolchain, and then let-else formatting support should come to stable Rust as part of the 1.72 release.</p>
+<h2><a href="#overview" aria-hidden="true" class="anchor" id="overview"></a>Overview</h2>
+<p>let-else statements were <a href="https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html#let-else-statements">stabilized</a> back in 2022 as part of the 1.65.0 release. However, the current and previous versions of Rustfmt did not have formatting support for let-else statements. When Rustfmt encountered a let-else statement it would leave it alone and maintain the manual styling originally authored by the developer.</p>
+<p>After updating to one of the toolchains with let-else formatting support, you may notice that <code>cargo fmt</code>/<code>rustfmt</code> invocations want to &quot;change&quot; the formatting of your let-else statements. However, this isn't actually a &quot;change&quot; in formatting, but instead is simply Rustfmt applying the <a href="https://doc.rust-lang.org/nightly/style-guide/statements.html#else-blocks-let-else-statements">let-else formatting rules</a> for the very first time.</p>
+<p>Rustfmt support for let-else statements has been a long standing request, and the Project has taken a number of steps to prevent a recurrence of the delay between feature stabilization and formatting support, as well as putting additional procedures in place which should enable more expeditious formatting support for nightly-only syntax.</p>
+<h2><a href="#background-and-context" aria-hidden="true" class="anchor" id="background-and-context"></a>Background and Context</h2>
+<p>Rust has an official <a href="https://doc.rust-lang.org/nightly/style-guide/">Style Guide</a> that articulates the default formatting style for Rust code. The Style Guide functions as a specification that defines the default formatting behavior for Rustfmt, and Rustfmt's primary mission is to provide automated formatting capabilities based around that Style Guide specification. Rustfmt is a direct consumer of the Style Guide, but Rustfmt does not unilaterally dictate what the default formatting style of language constructs should be.</p>
+<p>The initial Style Guide was developed many years ago (beginning in 2016), and was driven by a Style Team in collaboration with the community through an RFC process. The Style Guide was then made official in 2018 via <a href="https://rust-lang.github.io/rfcs/2436-style-guide.html">RFC 2436</a>.</p>
+<p>That initial Style Team was more akin to a Project Working Group in today's terms, as they had a fixed scope with a main goal to simply pull together the initial Style Guide. Accordingly that initial Style Team was disbanded once the Guide was made official.</p>
+<p>There was subsequently no designated group within the Rust Project that was
+explicitly responsible for the Style Guide, and no group explicitly focused on determining the official Style for new language constructs.</p>
+<p>The absence of a team/group with ownership of the Style Guide didn't really cause problems at first, as the new syntax that came along during the first few years was comparatively non-controversial when it came to default style and formatting. However, over time challenges started to develop when there was increasingly less community consensus and no governing team within the Project to make the final decision about how new language syntax should be styled.</p>
+<p>This was certainly the case with let-else statements, with lots of varying perspectives on how they should be styled. Without any team/group to make the decision and update the Style Guide with the official rules for let-else statements, Rustfmt was blocked and was unable to proceed.</p>
+<p>These circumstances around let-else statements resulted in a greater understanding across the Project of the need to establish a team to own and maintain the Style Guide. However, it was also well understood that spinning up a new team and respective processes would take some time, and the decision was made to not block the stabilization of features that were otherwise fully ready to be stabilized, like let-else statements, in the nascency of such a new team and new processes.</p>
+<p>Accordingly, let-else statements were stabilized and released without formatting support and with an understanding that the new Style Team and then subsequently the Rustfmt Team would later complete the requisite work required to incorporate formatting support.</p>
+<h2><a href="#steps-taken" aria-hidden="true" class="anchor" id="steps-taken"></a>Steps Taken</h2>
+<p>A number of steps have been taken to improve matters in this space. This includes steps to address the aforementioned issues and deal with some of the &quot;style debt&quot; that accrued over the years in the absence of a Style Team, and also to establish new processes and mechanisms to bring about other formatting/styling improvements.</p>
+<ul>
+<li><a href="https://rust-lang.github.io/rfcs/3309-style-team.html">Launched a new, permanent Style Team</a> that's responsible for the Style Guide.</li>
+<li>Established a mechanism to evolve the default style while still maintaining stability guarantees (<a href="https://rust-lang.github.io/rfcs/3338-style-evolution.html">RFC 3338</a>).</li>
+<li>Developed a <a href="https://github.com/rust-lang/style-team/blob/468570a02856a6bbe3994164e1a16a13b56b5cf4/nightly-style-procedure.md">nightly-syntax-policy</a> that provides clarity around style rules for unstable/nightly-only syntax, and enables Rustfmt to provide earlier support for such syntax.</li>
+</ul>
+<p>Furthermore, the Style Team is also continuing to diligently work through the backlog of those &quot;style debt&quot; items, and the Rustfmt team is in turn actively working on respective formatting implementation. The Rustfmt team is also focused on growing the team in order to improve contributor and review capacity.</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>We know that many have wanted let-else formatting support for a while, and we're sorry it's taken this long. We also recognize that Rustfmt now starting to format let-else statements may cause some formatting churn, and that's a highly undesirable scenario we strive to avoid.</p>
+<p>However, we believe the benefits of delivering let-else formatting support outweigh those drawbacks. While it's possible there may be another future case or two where we have to do something similar as we work through the style backlog, we're hopeful that over time this new team and these new processes will reduce (or eliminate) the possibility of a recurrence by addressing the historical problems that played such an outsize role in the let-else delay, and also bring about various other improvements.</p>
+<p>Both the Style and Rustfmt teams hang out on Zulip so if you'd like to get more involved or have any questions please drop by on <a href="https://rust-lang.zulipchat.com/#narrow/stream/346005-t-style">T-Style</a> and/or <a href="https://rust-lang.zulipchat.com/#narrow/stream/357797-t-rustfmt">T-Rustfmt</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>
