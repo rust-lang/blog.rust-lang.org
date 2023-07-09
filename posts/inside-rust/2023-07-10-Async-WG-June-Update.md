@@ -67,20 +67,20 @@ Phase 1 is great, but it doesn't support writing traits that only *sometimes* re
 
 ## Timeline and Roadmap
 
-To provide an overview of our progress and the expected timeline, here is our updated roadmap for stabilizing RPITIT, async functions in traits, and addressing the "send bounds" problem:
+To provide an overview of our progress and the expected timeline, here is our updated roadmap for stabilizing `-> impl Trait` in traits, async functions in traits (AFIT), and addressing the "send bounds" problem (SBP).
 
 - [x] MVP implementation
 - [x] Case study evaluations complete
-- [x] Accepted RFC for RPITIT (target: 2023-05-31)
+- [x] Accepted RFC for `-> impl Trait` in traits (target: 2023-05-31)
 - [x] Triage issues and identify blocks (target: 2023-07-07)
 - [ ] Evaluation period and bug fixing (target: 2023-07-30)
 - [ ] Stabilization report for AFIT authored (target: 2023-08-01)
 - [ ] Stabilization complete for 1.73.0 (target: 2023-08-15, deadline 2023-08-24)
 - [ ] **AFIT/RPITIT available on stable as part of 1.73.0 (release date 2023-10-05)**
-- [ ] Authored RFC for RTN (target: 2023-08-15)
-- [ ] Stabilization report for RTN authored (target: 2023-08-29)
-- [ ] Stabilization complete for RTN in 1.75.0 (target: 2023-10-30)
-- [ ] **RTN available on stable as part of 1.75.0 (release date 2023-12-28)**
+- [ ] Authored RFC addressing SBP (target: 2023-08-15)
+- [ ] Stabilization report for SBP solution authored (target: 2023-08-29)
+- [ ] Stabilization complete for SBP solution 1.75.0 (target: 2023-10-30)
+- [ ] **SBP solution available on stable as part of 1.75.0 (release date 2023-12-28)**
 
 ## Conclusion
 
