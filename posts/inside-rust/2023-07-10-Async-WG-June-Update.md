@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Async Working Group June update"
+title: "Async Working Group July update"
 author: Niko Matsakis and Tyler Mandry
 team: The Rust Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>
 ---
 
-This is the June update from the Async Working Group of the Rust Programming Language. In May, we [laid out our plans for the year][may]. Over the last month, we have gotten a clearer picture of the stabilization strategy. The current plan is to stabilize the full async function in trait MVP in two phases:
+This is the July update from the Async Working Group of the Rust Programming Language. In May, we [laid out our plans for the year][may]. Over the last two months, we have gotten a clearer picture of the stabilization strategy. The current plan is to stabilize the full async function in trait MVP in two phases:
 
 [may]: https://blog.rust-lang.org/inside-rust/2023/05/03/stabilizing-async-fn-in-trait.html
 
@@ -63,7 +63,7 @@ If the async fn is not `Send`, the [compiler would error](https://play.rust-lang
 
 ## What Phase 2 enables: the "send bound" problem
 
-Phase 1 is great, but it doesn't support writing traits that only *sometimes* require `Send` bounds. This is really needed for traits that will be used in highly generic contexts, like the standard library. To support those kinds of cases, we really want a solution to the "send bounds" problem. We currently have an experimental implementation of one proposal, return type notation, and this month a draft RFC was [posted to Zulip](https://rust-lang.zulipchat.com/#narrow/stream/187312-wg-async/topic/associated.20return.20types.20draft.20RFC/near/356796689) and then reviewed in a [lang team design meeting](https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2023-05-24-return-type-notation.md). That conversation turned up a few other ideas that hadn't been considered yet, and we are talking about them before settling on a final direction. The goal is to open an RFC for the final approach, whatever that winds up being, later this month.
+Phase 1 is great, but it doesn't support writing traits that only *sometimes* require `Send` bounds. This is really needed for traits that will be used in highly generic contexts, like the standard library. To support those kinds of cases, we really want a solution to the "send bounds" problem. We currently have an experimental implementation of one proposal, return type notation, and this month a draft RFC was [posted to Zulip](https://rust-lang.zulipchat.com/#narrow/stream/187312-wg-async/topic/associated.20return.20types.20draft.20RFC/near/356796689) and then reviewed in a [lang team design meeting](https://github.com/rust-lang/lang-team/blob/master/design-meeting-minutes/2023-05-24-return-type-notation.md). That conversation turned up a few other ideas that hadn't been considered yet, and we are talking about them before settling on a final direction. The goal is to open an RFC over the next few months.
 
 ## Timeline and Roadmap
 
@@ -72,15 +72,15 @@ To provide an overview of our progress and the expected timeline, here is our up
 - [x] MVP implementation
 - [x] Case study evaluations complete
 - [x] Accepted RFC for RPITIT (target: 2023-05-31)
-- [ ] Evaluation period and bug fixing (target: 2023-06-30)
-- [ ] Stabilization report for AFIT authored (target: 2023-07-01)
-- [ ] Authored RFC for RTN (target: 2023-07-01)
-- [ ] Stabilization complete for 1.73.0 (target: 2023-07-21)
-- [ ] Accepted RFC for RTN (target: 2023-08-01)
+- [x] Triage issues and identify blocks (target: 2023-07-07)
+- [ ] Evaluation period and bug fixing (target: 2023-07-30)
+- [ ] Stabilization report for AFIT authored (target: 2023-08-01)
+- [ ] Stabilization complete for 1.73.0 (target: 2023-08-15, deadline 2023-08-24)
+- [ ] **AFIT/RPITIT available on stable as part of 1.73.0 (release date 2023-10-05)**
+- [ ] Authored RFC for RTN (target: 2023-08-15)
 - [ ] Stabilization report for RTN authored (target: 2023-08-29)
-- [ ] Stabilization complete for RTN in 1.74.0 (target: 2023-09-26)
-
-We are working diligently to meet these targets and ensure a smooth and successful stabilization process.
+- [ ] Stabilization complete for RTN in 1.75.0 (target: 2023-10-30)
+- [ ] **RTN available on stable as part of 1.75.0 (release date 2023-12-28)**
 
 ## Conclusion
 
