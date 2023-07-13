@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.71.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+ <meta name="twitter:card" content="summary">
+ <meta name="twitter:site" content="@rustlang">
+ <meta name="twitter:creator" content="@rustlang">
+ <meta name="twitter:title" content="Announcing Rust 1.71.0 | Rust Blog">
+ <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+<meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+
+<!-- Facebook OpenGraph -->
+<meta property="og:title" content="Announcing Rust 1.71.0 | Rust Blog" />
+<meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+<meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+
+<!-- styles -->
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
+ <!-- atom -->
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+  <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+      <span class="dib ml1 ml0-l">Rust Blog</span>
+    </a>
+  </div>
+
+  <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+    <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+  </ul>
+</nav>
+
+<section id="Announcing Rust 1.71.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.71.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">July 13, 2023 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.71.0. Rust is a programming language empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, you can get 1.71.0 with:</p>
+<pre><code class="language-console">rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/releases/tag/1.71.0">detailed release notes for 1.71.0</a> on GitHub.</p>
+<p>If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (<code>rustup default beta</code>) or the nightly channel (<code>rustup default nightly</code>). Please <a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you might come across!</p>
+<h2><a href="#whats-in-1710-stable" aria-hidden="true" class="anchor" id="whats-in-1710-stable"></a>What's in 1.71.0 stable</h2>
+<h3><a href="#c-unwind-abi" aria-hidden="true" class="anchor" id="c-unwind-abi"></a>C-unwind ABI</h3>
+<p>1.71.0 stabilizes <code>C-unwind</code> (and other <code>-unwind</code> suffixed ABI variants<sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>).</p>
+<p>The behavior for unforced unwinding (the typical case) is specified in <a href="https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md#abi-boundaries-and-unforced-unwinding">this
+table from the RFC which proposed this feature</a>. To summarize:</p>
+<p>Each ABI is mostly equivalent to the same ABI without <code>-unwind</code>, except that
+with <code>-unwind</code> the behavior is defined to be safe when an unwinding operation
+(<code>panic</code> or C++ style exception) crosses the ABI boundary. For <code>panic=unwind</code>,
+this is a valid way to let exceptions from one language unwind the stack in
+another language without terminating the process (as long as the exception is
+caught in the same language from which it originated); for <code>panic=abort</code>, this
+will typically abort the process immediately.</p>
+<p>For this initial stabilization, <em>no change</em> is made to the existing ABIs (e.g.
+<code>&quot;C&quot;</code>), and unwinding across them remains undefined behavior. A future Rust
+release will amend these ABIs to match the behavior specified in the RFC as the
+final part in stabilizing this feature (usually aborting at the boundary).
+Users are encouraged to start using the new unwind ABI variants in their code
+to remain future proof if they need to unwind across the ABI boundary.</p>
+<h3><a href="#debugger-visualization-attributes" aria-hidden="true" class="anchor" id="debugger-visualization-attributes"></a>Debugger visualization attributes</h3>
+<p>1.71.0 stabilizes support for a new attribute, <code>#[debug_visualizer(natvis_file = &quot;...&quot;)]</code> and <code>#[debug_visualizer(gdb_script_file = &quot;...&quot;)]</code>, which allows
+embedding Natviz descriptions and GDB scripts into Rust libraries to
+improve debugger output when inspecting data structures created by those
+libraries. Rust itself has packaged similar scripts for some time for the
+standard library, but this feature makes it possible for library authors to
+provide a similar experience to end users.</p>
+<p>See the <a href="https://doc.rust-lang.org/nightly/reference/attributes/debugger.html#the-debugger_visualizer-attribute">reference</a>
+for details on usage.</p>
+<h3><a href="#raw-dylib-linking" aria-hidden="true" class="anchor" id="raw-dylib-linking"></a>raw-dylib linking</h3>
+<p>On Windows platforms, Rust now supports using functions from dynamic libraries without requiring those libraries to be available at build time, using the new <code>kind=&quot;raw-dylib”</code> option for <code>#[link]</code>.</p>
+<p>This avoids requiring users to install those libraries (particularly difficult for cross-compilation), and avoids having to ship stub versions of libraries in crates to link against. This simplifies crates providing bindings to Windows libraries.</p>
+<p>Rust also supports binding to symbols provided by DLLs by ordinal rather than named symbol, using the new <code>#[link_ordinal]</code> attribute.</p>
+<h3><a href="#upgrade-to-musl-12" aria-hidden="true" class="anchor" id="upgrade-to-musl-12"></a>Upgrade to musl 1.2</h3>
+<p>As <a href="https://blog.rust-lang.org/2023/05/09/Updating-musl-targets.html">previously announced</a>,
+Rust 1.71 updates the musl version to 1.2.3. Most users should not be affected by this change.</p>
+<h3><a href="#const-initialized-thread-locals" aria-hidden="true" class="anchor" id="const-initialized-thread-locals"></a>Const-initialized thread locals</h3>
+<p>Rust 1.59.0 stabilized <code>const</code> initialized thread local support in the standard
+library, which allows for more optimal code generation. However, until now this
+feature was missed in release notes and
+<a href="https://doc.rust-lang.org/stable/std/macro.thread_local.html">documentation</a>.
+Note that this stabilization does not make <code>const { ... }</code> a valid expression
+or syntax in other contexts; that is a separate and currently unstable
+<a href="https://github.com/rust-lang/rust/issues/76001">feature</a>.</p>
+<pre><code class="language-rust">use std::cell::Cell;
+
+thread_local! {
+    pub static FOO: Cell&lt;u32&gt; = const { Cell::new(1) };
+}
+</code></pre>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.CStr.html#method.is_empty"><code>CStr::is_empty</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/hash/trait.BuildHasher.html#method.hash_one"><code>BuildHasher::hash_one</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#method.is_positive"><code>NonZeroI*::is_positive</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#method.is_negative"><code>NonZeroI*::is_negative</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#method.checked_neg"><code>NonZeroI*::checked_neg</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#method.overflowing_neg"><code>NonZeroI*::overflowing_neg</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#method.saturating_neg"><code>NonZeroI*::saturating_neg</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#method.wrapping_neg"><code>NonZeroI*::wrapping_neg</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#impl-Neg-for-NonZeroI32"><code>Neg for NonZeroI*</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#impl-Neg-for-%26NonZeroI32"><code>Neg for &amp;NonZeroI*</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.array.html#impl-From%3C%5BT;+1%5D%3E-for-(T,)"><code>From&lt;[T; N]&gt; for (T...)</code></a>
+(array to N-tuple for N in 1..=12)</li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.array.html#impl-From%3C(T,)%3E-for-%5BT;+1%5D"><code>From&lt;(T...)&gt; for [T; N]</code></a>
+(N-tuple to array for N in 1..=12)</li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsHandle.html#impl-AsHandle-for-Box%3CT%3E"><code>windows::io::AsHandle for Box&lt;T&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsHandle.html#impl-AsHandle-for-Rc%3CT%3E"><code>windows::io::AsHandle for Rc&lt;T&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsHandle.html#impl-AsHandle-for-Arc%3CT%3E"><code>windows::io::AsHandle for Arc&lt;T&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsSocket.html#impl-AsSocket-for-Box%3CT%3E"><code>windows::io::AsSocket for Box&lt;T&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsSocket.html#impl-AsSocket-for-Rc%3CT%3E"><code>windows::io::AsSocket for Rc&lt;T&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsSocket.html#impl-AsSocket-for-Arc%3CT%3E"><code>windows::io::AsSocket for Arc&lt;T&gt;</code></a></li>
+</ul>
+<p>These APIs are now stable in const contexts:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.read"><code>&lt;*const T&gt;::read</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.read_unaligned"><code>&lt;*const T&gt;::read_unaligned</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.read-1"><code>&lt;*mut T&gt;::read</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.read_unaligned-1"><code>&lt;*mut T&gt;::read_unaligned</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ptr/fn.read.html"><code>ptr::read</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ptr/fn.read_unaligned.html"><code>ptr::read_unaligned</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.split_at"><code>&lt;[T]&gt;::split_at</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>Check out everything that changed in <a href="https://github.com/rust-lang/rust/releases/tag/1.71.0">Rust</a>, <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-171-2023-07-13">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-171">Clippy</a>.</p>
+<h2><a href="#contributors-to-1710" aria-hidden="true" class="anchor" id="contributors-to-1710"></a>Contributors to 1.71.0</h2>
+<p>Many people came together to create Rust 1.71.0. We couldn't have done it without all of you. <a href="https://thanks.rust-lang.org/rust/1.71.0/">Thanks!</a></p>
+<section class="footnotes">
+<ol>
+<li id="fn1">
+<p>List of stabilized ABIs can be found in the stabilization report: https://github.com/rust-lang/rust/issues/74990#issuecomment-1363473645 <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+
+    <footer>
+  <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+    <div class="row">
+      <div class="four columns mt3 mt0-l" id="get-help">
+        <h4>Get help!</h4>
+        <ul>
+          <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Terms and policies</h4>
+        <ul>
+          <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+          <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+          <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+          <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+          <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+        </ul>
+      </div>
+      <div class="four columns mt3 mt0-l">
+        <h4>Social</h4>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="attribution">
+      Maintained by the Rust Team. See a typo?
+      <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+    </div>
+  </div>
+</footer>
+
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
+
+  </body>
+</html>

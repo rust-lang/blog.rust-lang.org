@@ -10,8 +10,119 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-07-10T20:00:14+00:00</updated>
+    <updated>2023-07-13T14:05:30+00:00</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.71.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2023/07/13/Rust-1.71.0.html" type="text/html" title="Announcing Rust 1.71.0" />
+        <published>2023-07-13T00:00:00+00:00</published>
+        <updated>2023-07-13T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/2023/07/13/Rust-1.71.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2023/07/13/Rust-1.71.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.71.0. Rust is a programming language empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.71.0 with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website, and check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/releases/tag/1.71.0&quot;&gt;detailed release notes for 1.71.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;p&gt;If you&#x27;d like to help us out by testing future releases, you might consider updating locally to use the beta channel (&lt;code&gt;rustup default beta&lt;/code&gt;) or the nightly channel (&lt;code&gt;rustup default nightly&lt;/code&gt;). Please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new/choose&quot;&gt;report&lt;/a&gt; any bugs you might come across!&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1710-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1710-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.71.0 stable&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#c-unwind-abi&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;c-unwind-abi&quot;&gt;&lt;/a&gt;C-unwind ABI&lt;/h3&gt;
+&lt;p&gt;1.71.0 stabilizes &lt;code&gt;C-unwind&lt;/code&gt; (and other &lt;code&gt;-unwind&lt;/code&gt; suffixed ABI variants&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;).&lt;/p&gt;
+&lt;p&gt;The behavior for unforced unwinding (the typical case) is specified in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/blob/master/text/2945-c-unwind-abi.md#abi-boundaries-and-unforced-unwinding&quot;&gt;this
+table from the RFC which proposed this feature&lt;/a&gt;. To summarize:&lt;/p&gt;
+&lt;p&gt;Each ABI is mostly equivalent to the same ABI without &lt;code&gt;-unwind&lt;/code&gt;, except that
+with &lt;code&gt;-unwind&lt;/code&gt; the behavior is defined to be safe when an unwinding operation
+(&lt;code&gt;panic&lt;/code&gt; or C++ style exception) crosses the ABI boundary. For &lt;code&gt;panic&#x3D;unwind&lt;/code&gt;,
+this is a valid way to let exceptions from one language unwind the stack in
+another language without terminating the process (as long as the exception is
+caught in the same language from which it originated); for &lt;code&gt;panic&#x3D;abort&lt;/code&gt;, this
+will typically abort the process immediately.&lt;/p&gt;
+&lt;p&gt;For this initial stabilization, &lt;em&gt;no change&lt;/em&gt; is made to the existing ABIs (e.g.
+&lt;code&gt;&amp;quot;C&amp;quot;&lt;/code&gt;), and unwinding across them remains undefined behavior. A future Rust
+release will amend these ABIs to match the behavior specified in the RFC as the
+final part in stabilizing this feature (usually aborting at the boundary).
+Users are encouraged to start using the new unwind ABI variants in their code
+to remain future proof if they need to unwind across the ABI boundary.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#debugger-visualization-attributes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;debugger-visualization-attributes&quot;&gt;&lt;/a&gt;Debugger visualization attributes&lt;/h3&gt;
+&lt;p&gt;1.71.0 stabilizes support for a new attribute, &lt;code&gt;#[debug_visualizer(natvis_file &#x3D; &amp;quot;...&amp;quot;)]&lt;/code&gt; and &lt;code&gt;#[debug_visualizer(gdb_script_file &#x3D; &amp;quot;...&amp;quot;)]&lt;/code&gt;, which allows
+embedding Natviz descriptions and GDB scripts into Rust libraries to
+improve debugger output when inspecting data structures created by those
+libraries. Rust itself has packaged similar scripts for some time for the
+standard library, but this feature makes it possible for library authors to
+provide a similar experience to end users.&lt;/p&gt;
+&lt;p&gt;See the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/reference/attributes/debugger.html#the-debugger_visualizer-attribute&quot;&gt;reference&lt;/a&gt;
+for details on usage.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#raw-dylib-linking&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;raw-dylib-linking&quot;&gt;&lt;/a&gt;raw-dylib linking&lt;/h3&gt;
+&lt;p&gt;On Windows platforms, Rust now supports using functions from dynamic libraries without requiring those libraries to be available at build time, using the new &lt;code&gt;kind&#x3D;&amp;quot;raw-dylib”&lt;/code&gt; option for &lt;code&gt;#[link]&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This avoids requiring users to install those libraries (particularly difficult for cross-compilation), and avoids having to ship stub versions of libraries in crates to link against. This simplifies crates providing bindings to Windows libraries.&lt;/p&gt;
+&lt;p&gt;Rust also supports binding to symbols provided by DLLs by ordinal rather than named symbol, using the new &lt;code&gt;#[link_ordinal]&lt;/code&gt; attribute.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#upgrade-to-musl-12&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;upgrade-to-musl-12&quot;&gt;&lt;/a&gt;Upgrade to musl 1.2&lt;/h3&gt;
+&lt;p&gt;As &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2023/05/09/Updating-musl-targets.html&quot;&gt;previously announced&lt;/a&gt;,
+Rust 1.71 updates the musl version to 1.2.3. Most users should not be affected by this change.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#const-initialized-thread-locals&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;const-initialized-thread-locals&quot;&gt;&lt;/a&gt;Const-initialized thread locals&lt;/h3&gt;
+&lt;p&gt;Rust 1.59.0 stabilized &lt;code&gt;const&lt;/code&gt; initialized thread local support in the standard
+library, which allows for more optimal code generation. However, until now this
+feature was missed in release notes and
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/macro.thread_local.html&quot;&gt;documentation&lt;/a&gt;.
+Note that this stabilization does not make &lt;code&gt;const { ... }&lt;/code&gt; a valid expression
+or syntax in other contexts; that is a separate and currently unstable
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/76001&quot;&gt;feature&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;use std::cell::Cell;
+
+thread_local! {
+    pub static FOO: Cell&amp;lt;u32&amp;gt; &#x3D; const { Cell::new(1) };
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#stabilized-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;stabilized-apis&quot;&gt;&lt;/a&gt;Stabilized APIs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ffi/struct.CStr.html#method.is_empty&quot;&gt;&lt;code&gt;CStr::is_empty&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/hash/trait.BuildHasher.html#method.hash_one&quot;&gt;&lt;code&gt;BuildHasher::hash_one&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#method.is_positive&quot;&gt;&lt;code&gt;NonZeroI*::is_positive&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#method.is_negative&quot;&gt;&lt;code&gt;NonZeroI*::is_negative&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#method.checked_neg&quot;&gt;&lt;code&gt;NonZeroI*::checked_neg&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#method.overflowing_neg&quot;&gt;&lt;code&gt;NonZeroI*::overflowing_neg&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#method.saturating_neg&quot;&gt;&lt;code&gt;NonZeroI*::saturating_neg&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#method.wrapping_neg&quot;&gt;&lt;code&gt;NonZeroI*::wrapping_neg&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#impl-Neg-for-NonZeroI32&quot;&gt;&lt;code&gt;Neg for NonZeroI*&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/num/struct.NonZeroI32.html#impl-Neg-for-%26NonZeroI32&quot;&gt;&lt;code&gt;Neg for &amp;amp;NonZeroI*&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.array.html#impl-From%3C%5BT;+1%5D%3E-for-(T,)&quot;&gt;&lt;code&gt;From&amp;lt;[T; N]&amp;gt; for (T...)&lt;/code&gt;&lt;/a&gt;
+(array to N-tuple for N in 1..&#x3D;12)&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.array.html#impl-From%3C(T,)%3E-for-%5BT;+1%5D&quot;&gt;&lt;code&gt;From&amp;lt;(T...)&amp;gt; for [T; N]&lt;/code&gt;&lt;/a&gt;
+(N-tuple to array for N in 1..&#x3D;12)&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsHandle.html#impl-AsHandle-for-Box%3CT%3E&quot;&gt;&lt;code&gt;windows::io::AsHandle for Box&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsHandle.html#impl-AsHandle-for-Rc%3CT%3E&quot;&gt;&lt;code&gt;windows::io::AsHandle for Rc&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsHandle.html#impl-AsHandle-for-Arc%3CT%3E&quot;&gt;&lt;code&gt;windows::io::AsHandle for Arc&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsSocket.html#impl-AsSocket-for-Box%3CT%3E&quot;&gt;&lt;code&gt;windows::io::AsSocket for Box&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsSocket.html#impl-AsSocket-for-Rc%3CT%3E&quot;&gt;&lt;code&gt;windows::io::AsSocket for Rc&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/os/windows/io/trait.AsSocket.html#impl-AsSocket-for-Arc%3CT%3E&quot;&gt;&lt;code&gt;windows::io::AsSocket for Arc&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These APIs are now stable in const contexts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.read&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::read&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.read_unaligned&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::read_unaligned&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.read-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::read&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.read_unaligned-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::read_unaligned&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ptr/fn.read.html&quot;&gt;&lt;code&gt;ptr::read&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/ptr/fn.read_unaligned.html&quot;&gt;&lt;code&gt;ptr::read_unaligned&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/stable/std/primitive.slice.html#method.split_at&quot;&gt;&lt;code&gt;&amp;lt;[T]&amp;gt;::split_at&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#other-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;Check out everything that changed in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/releases/tag/1.71.0&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-171-2023-07-13&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-171&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1710&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1710&quot;&gt;&lt;/a&gt;Contributors to 1.71.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.71.0. We couldn&#x27;t have done it without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.71.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn1&quot;&gt;
+&lt;p&gt;List of stabilized ABIs can be found in the stabilization report: https://github.com/rust-lang/rust/issues/74990#issuecomment-1363473645 &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing regex 1.9</title>
@@ -551,57 +662,6 @@ debug &#x3D; true
 &lt;p&gt;Check out everything that changed in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1690-2023-04-20&quot;&gt;Rust&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-169-2023-04-20&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-169&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;&lt;a href&#x3D;&quot;#contributors-to-1690&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1690&quot;&gt;&lt;/a&gt;Contributors to 1.69.0&lt;/h2&gt;
 &lt;p&gt;Many people came together to create Rust 1.69.0. We couldn&#x27;t have done it without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.69.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.68.2</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2023/03/28/Rust-1.68.2.html" type="text/html" title="Announcing Rust 1.68.2" />
-        <published>2023-03-28T00:00:00+00:00</published>
-        <updated>2023-03-28T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/2023/03/28/Rust-1.68.2.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2023/03/28/Rust-1.68.2.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.68.2. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, you can get 1.68.2 with:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&#x27;t have it already, you can &lt;a href&#x3D;&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt;
-from the appropriate page on our website, and check out the
-&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1682-2023-03-28&quot;&gt;detailed release notes for 1.68.2&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href&#x3D;&quot;#whats-in-1682-stable&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;whats-in-1682-stable&quot;&gt;&lt;/a&gt;What&#x27;s in 1.68.2 stable&lt;/h2&gt;
-&lt;p&gt;Rust 1.68.2 addresses &lt;a href&#x3D;&quot;https://github.blog/2023-03-23-we-updated-our-rsa-ssh-host-key/&quot;&gt;GitHub&#x27;s recent rotation of their RSA SSH host
-key&lt;/a&gt;, which
-happened on March 24th 2023 after their previous key accidentally leaked:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/11883&quot;&gt;GitHub&#x27;s RSA key bundled in Cargo has been
-updated&lt;/a&gt;, to ensure systems
-that haven&#x27;t interacted with GitHub yet won&#x27;t connect trusting the leaked
-key.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/11889&quot;&gt;The leaked key has been hardcoded as revoked in
-Cargo&lt;/a&gt;, to ensure the key
-won&#x27;t be used by Cargo even on systems that still trust the key.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/11635&quot;&gt;Support for &lt;code&gt;@revoked&lt;/code&gt; entries in
-&lt;code&gt;.ssh/known_hosts&lt;/code&gt;&lt;/a&gt; (along with
-a better error message when the unsupported &lt;code&gt;@cert-authority&lt;/code&gt; entries are used)
-is also included in Rust 1.68.2, as that change was a pre-requisite for
-backporting the hardcoded revocation.&lt;/p&gt;
-&lt;p&gt;If you cannot upgrade to Rust 1.68.2, we recommend &lt;a href&#x3D;&quot;https://github.blog/2023-03-23-we-updated-our-rsa-ssh-host-key/#what-you-can-do&quot;&gt;following GitHub&#x27;s
-instructions&lt;/a&gt;
-on updating the trusted keys in your system. Note that the keys bundled in
-Cargo are only used if no trusted key for &lt;code&gt;github.com&lt;/code&gt; is found on the system.&lt;/p&gt;
-&lt;h3&gt;&lt;a href&#x3D;&quot;#contributors-to-1682&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;contributors-to-1682&quot;&gt;&lt;/a&gt;Contributors to 1.68.2&lt;/h3&gt;
-&lt;p&gt;Many people came together to create Rust 1.68.2. We couldn&#x27;t have done it
-without all of you. &lt;a href&#x3D;&quot;https://thanks.rust-lang.org/rust/1.68.2/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
 </content>
 
         <author>
