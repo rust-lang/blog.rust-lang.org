@@ -23,7 +23,7 @@ While there is a significant tail of less common bugs, we currently have two mai
 
 After fixing the currently open issues, we intend to move parts of rustc to the new trait solver implementation in steps, starting by using it in coherence. We expect to move coherence to the new implementation at the end of this year. Moving the type checking of functions to the new trait solver implementation will be a lot more challenging than coherence. This will be the last place where we will use the old implementation. We expect to change the default there in 2024, potentially relying on the new edition to help with migration.
 
-A major challenge will be "incompleteness". We use incompleteness as a technical term used whenever the type system unnecessarily guides type inference. Incompleteness allows code to compile which would otherwise be ambiguous, but it also makes the trait system order dependent and can result in incorrect and weird errors. Consider the following example:
+A major challenge will be "incompleteness". We use incompleteness as a technical term for cases where the type system unnecessarily guides type inference. Incompleteness allows otherwise ambiguous code to compile, but it also makes the trait system order dependent and can result in incorrect and weird errors. Consider the following example:
 ```rust
 fn impl_trait() -> impl Into<u32> {
     0u16
