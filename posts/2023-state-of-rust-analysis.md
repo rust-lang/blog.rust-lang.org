@@ -7,7 +7,7 @@ release: false
 
 Hello, Rustaceans!
 
-For the 6th year in a row, the Rust Project conducted a survey on the Rust programming language, with participation from project maintainers, contributors, and those generally interested in the future of Rust. This edition of the annual State of Rust Survey opened for submissions on December 5 and ran until December 22, 2022. Thank you for your patience as we’ve worked to assemble this analysis of the survey responses. We plan to identify a more expedient and sustainable process going forward. 
+For the 6th year in a row, the Rust Project [conducted a survey on the Rust programming language](https://blog.rust-lang.org/2022/12/05/survey-launch.html), with participation from project maintainers, contributors, and those generally interested in the future of Rust. This edition of the annual State of Rust Survey opened for submissions on December 5 and ran until December 22, 2022. Thank you for your patience as we’ve worked to assemble this analysis of the survey responses. We plan to identify a more expedient and sustainable process going forward. 
 
 The goal of this survey is always to give our wider community a chance to express their opinions about the language we all love and help shape its future. We’re grateful to those of you who took the time to share your voice on the state of Rust last year. 
 
