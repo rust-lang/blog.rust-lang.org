@@ -17,7 +17,7 @@ Before diving into a few highlights, we would like to thank everyone who was inv
 In 2022, we had 9,433 total survey completions and an increased survey completion rate of 82% vs. 76% in 2021. While the goal is always total survey completion for all participants, the survey requires time, energy, and focus – we consider this figure quite high and were pleased by the increase. 
 
 
-We also saw a significant increase in the number of people viewing but not participating in the survey (from 16,457 views in 2021 to 2,5581 – a view increase of over 55%). While this is likely due to a number of different factors, we feel this information speaks to the rising interest in Rust and the growing general audience following its evolution. 
+We also saw a significant increase in the number of people viewing but not participating in the survey (from 16,457 views in 2021 to 25,581 – a view increase of over 55%). While this is likely due to a number of different factors, we feel this information speaks to the rising interest in Rust and the growing general audience following its evolution. 
 
 In 2022, the survey had 11,482 responses, which is a slight decrease of 6.4% from 2021, however, the number of respondents that answered all survey questions has increased year over year. We were interested to see this slight decrease in responses, as this year’s survey was much shorter than in previous years – clearly, survey length is not the only factor driving participation.
 
