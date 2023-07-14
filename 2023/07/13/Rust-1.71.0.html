@@ -97,7 +97,7 @@ Users are encouraged to start using the new unwind ABI variants in their code
 to remain future proof if they need to unwind across the ABI boundary.</p>
 <h3><a href="#debugger-visualization-attributes" aria-hidden="true" class="anchor" id="debugger-visualization-attributes"></a>Debugger visualization attributes</h3>
 <p>1.71.0 stabilizes support for a new attribute, <code>#[debug_visualizer(natvis_file = &quot;...&quot;)]</code> and <code>#[debug_visualizer(gdb_script_file = &quot;...&quot;)]</code>, which allows
-embedding Natviz descriptions and GDB scripts into Rust libraries to
+embedding Natvis descriptions and GDB scripts into Rust libraries to
 improve debugger output when inspecting data structures created by those
 libraries. Rust itself has packaged similar scripts for some time for the
 standard library, but this feature makes it possible for library authors to

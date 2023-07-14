@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-07-13T18:34:50+00:00</updated>
+    <updated>2023-07-14T15:14:21+00:00</updated>
 
     
     <entry>
@@ -45,7 +45,7 @@ Users are encouraged to start using the new unwind ABI variants in their code
 to remain future proof if they need to unwind across the ABI boundary.&lt;/p&gt;
 &lt;h3&gt;&lt;a href&#x3D;&quot;#debugger-visualization-attributes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;debugger-visualization-attributes&quot;&gt;&lt;/a&gt;Debugger visualization attributes&lt;/h3&gt;
 &lt;p&gt;1.71.0 stabilizes support for a new attribute, &lt;code&gt;#[debug_visualizer(natvis_file &#x3D; &amp;quot;...&amp;quot;)]&lt;/code&gt; and &lt;code&gt;#[debug_visualizer(gdb_script_file &#x3D; &amp;quot;...&amp;quot;)]&lt;/code&gt;, which allows
-embedding Natviz descriptions and GDB scripts into Rust libraries to
+embedding Natvis descriptions and GDB scripts into Rust libraries to
 improve debugger output when inspecting data structures created by those
 libraries. Rust itself has packaged similar scripts for some time for the
 standard library, but this feature makes it possible for library authors to
