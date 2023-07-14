@@ -65,8 +65,6 @@ Of those respondents who shared their main worries for the future of Rust, 26% h
 
 While 38% have concerns about Rust “becoming too complex”, only a small number of respondents were concerned about documentation, corporate oversight, or speed of evolution. 34% of respondents are not worried about the future of Rust at all.
 
-
-
 This year’s survey reflects a 21% decrease in fears about Rust’s usage in the industry since the last survey. Faith in Rust’s staying power and general utility is clearly growing as more people find Rust and become lasting members of the community. As always, we are grateful for your honest feedback and dedication to improving this language for everyone. 
 
 
