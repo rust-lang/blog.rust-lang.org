@@ -44,7 +44,7 @@ Similarly, 26% of those who did not identify as Rust users cited the perception 
 ![2](https://github.com/rust-lang/blog.rust-lang.org/assets/45044840/dd27ddff-fd85-43ac-81ef-09a4e65d30ae)
 
 ## Rust Usage at Work
-The growing maturation of Rust can be observed through the increased number of organizations utilizing the language in 2022. In fact, an impressive 29.7% stated that they use Rust for the majority of their coding work at their workplace. This marks a significant 51.8% increase compared to the previous year.
+The growing maturation of Rust can be observed through the increased number of organizations utilizing the language in 2022. In fact, 29.7% stated that they use Rust for the majority of their coding work at their workplace, which is a 51.8% increase compared to the previous year.
 ![3](https://github.com/rust-lang/blog.rust-lang.org/assets/45044840/bae6d0ea-1bc2-4edc-a119-c665ce9abc5e)
 
 There are numerous reasons why we are seeing increased use of Rust in professional environments; 86% of respondents opted to use Rust at work because it enables their teams to build relatively correct and bug-free software, 84% were particularly impressed with its performance advantages, and 69% were most compelled by Rust’s considerable security and safety advantages. While respondents reported many practical benefits to using Rust on professional engineering teams, we were also pleased to find that 76% of respondents continue to use Rust simply because they found it fun and enjoyable.
