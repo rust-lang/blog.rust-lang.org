@@ -6,8 +6,7 @@ on:
   pull_request:
 
 jobs:
-  ci:
-    name: CI
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -43,9 +42,25 @@ jobs:
       - run: cargo run
       - run: cp CNAME ./site/
       - run: touch site/.nojekyll
-      - uses: JamesIves/github-pages-deploy-action@releases/v3
-        if: github.ref == 'refs/heads/master'
+
+      - uses: actions/upload-pages-artifact@v1.0.9
         with:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: site
+          path: site
+
+  deploy:
+    if: ${{ github.ref == 'refs/heads/master' }}
+
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    runs-on: ubuntu-latest
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v2.0.2
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
