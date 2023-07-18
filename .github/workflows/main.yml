@@ -11,33 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Detect the installed Rust version
-        id: rustc
-        run: echo "::set-output name=version::$(rustc -V)"
-
-      - name: Cache Cargo's registry cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.cargo/registry/cache
-          key: cargo-registry-cache-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            cargo-registry-cache-
-
-      - name: Cache Cargo's registry index
-        uses: actions/cache@v2
-        with:
-          path: ~/.cargo/registry/index
-          key: cargo-registry-index-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            cargo-registry-index-
-
-      - name: Cache Cargo's target directory
-        uses: actions/cache@v2
-        with:
-          path: target
-          key: cargo-build-${{ steps.rustc.outputs.version }}-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            cargo-build-${{ steps.rustc.outputs.version }}-
+      - uses: Swatinem/rust-cache@v2.5.0
 
       - run: cargo run
       - run: cp CNAME ./site/
