@@ -10,8 +10,49 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2023-07-14T15:14:23+00:00</updated>
+    <updated>2023-07-18T00:10:36+00:00</updated>
 
+    
+    <entry>
+        <title>Rustc Trait System Refactor Initiative Update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/07/17/trait-system-refactor-initiative.html" type="text/html" title="Rustc Trait System Refactor Initiative Update" />
+        <published>2023-07-17T00:00:00+00:00</published>
+        <updated>2023-07-17T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2023/07/17/trait-system-refactor-initiative.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/07/17/trait-system-refactor-initiative.html">&lt;p&gt;As announced in the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2023/01/20/types-announcement.html&quot;&gt;Types Team announcement post&lt;/a&gt; at the start of this year, the Types Team has started to reimplement the trait solver of rustc. This refactor is similar to &lt;a href&#x3D;&quot;https://github.com/rust-lang/chalk/&quot;&gt;Chalk&lt;/a&gt;, but directly integrated into the existing codebase using the experience gathered over the last few years. Unlike Chalk, the new trait solver has the sole goal of replacing the existing implementation. We are separately working on formalizing the type system in &lt;a href&#x3D;&quot;https://github.com/rust-lang/a-mir-formality&quot;&gt;a-mir-formality&lt;/a&gt;. It has now been half a year since that announcement which matches the first step of &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2023/01/20/types-announcement.html#roadmap&quot;&gt;our roadmap&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;By reimplementing the trait solver of rustc we are able to fix many subtle bugs and inefficiencies of the existing implementation. This should result in faster compilation speed and fewer bugs. The new trait solver implementation should also unblock many future changes, most notably around implied bounds and coinduction. For example, it will allow us to remove many of the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/91693&quot;&gt;current restrictions on GATs&lt;/a&gt; and to fix many long-standing unsound issues, like &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/25860&quot;&gt;#25860&lt;/a&gt;. Some unsound issues will already be fixed at the point of stabilization while others will require additional work afterwards. The new solver will also enable or greatly simplify other, still experimental type system extensions, e.g. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/76560&quot;&gt;generic const expressions&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/108185&quot;&gt;non-lifetime binders&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#the-status-quo&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;the-status-quo&quot;&gt;&lt;/a&gt;The status quo&lt;/h2&gt;
+&lt;p&gt;The new trait solver implementation can be tested on nightly by using the rustc flag &lt;code&gt;-Ztrait-solver&#x3D;next&lt;/code&gt;. To use the new implementation for only coherence checking, &lt;code&gt;-Ztrait-solver&#x3D;next-coherence&lt;/code&gt; can be used. See the current implementation progress of the new trait solver in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/107374&quot;&gt;its tracking issue&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We are now at a point where we exclusively rely on the new implementation when the feature flag is enabled. This is a major step as we&#x27;ve previously still relied on the old solver for &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/113086&quot;&gt;&amp;quot;deep normalization&amp;quot;&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/112869&quot;&gt;&amp;quot;selection&amp;quot;&lt;/a&gt;. When using the new trait solver many crates and most of our existing regression tests successfully compile.&lt;/p&gt;
+&lt;p&gt;While there is a significant tail of less common bugs, we currently have two main failure causes:&lt;/p&gt;
+&lt;p&gt;First, the new solver has a slightly different approach for &lt;code&gt;impl Trait&lt;/code&gt;. The implementation of which is still broken for instances of nested return position impl trait, e.g. &lt;code&gt;fn foo() -&amp;gt; impl Trait&amp;lt;Assoc &#x3D; impl Sized&amp;gt;&lt;/code&gt;. Working on this new approach helped us discover issues of the existing implementation, which allows us to refine its design before the stabilization of the &lt;code&gt;type_alias_impl_trait&lt;/code&gt; feature.&lt;/p&gt;
+&lt;p&gt;Second, the inference of implicit &lt;code&gt;Unsize&lt;/code&gt; coercions, e.g. converting &lt;code&gt;Box&amp;lt;String&amp;gt;&lt;/code&gt; to &lt;code&gt;Box&amp;lt;dyn Display&amp;gt;&lt;/code&gt;, relies on implementation details of the existing trait solver. We&#x27;ve recently started to emulate the existing behavior here and should fix most of the remaining breakage from that over the next few weeks.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#going-forward&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;going-forward&quot;&gt;&lt;/a&gt;Going forward&lt;/h2&gt;
+&lt;p&gt;After fixing the currently open issues, we intend to move parts of rustc to the new trait solver implementation in steps, starting by using it in coherence. We expect to move coherence checking to the new implementation at the end of this year. Moving the type checking of functions to the new trait solver implementation will be a lot more challenging. This will be the last place where we will use the old implementation. We expect to change the default there in 2024, potentially relying on the new edition to help with migration.&lt;/p&gt;
+&lt;p&gt;A major challenge will be &amp;quot;incompleteness&amp;quot;. We use incompleteness as a technical term for cases where the type system unnecessarily guides type inference. Incompleteness allows otherwise ambiguous code to compile, but it also makes the trait system order dependent and can result in incorrect and weird errors. Consider the following example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;fn impl_trait() -&amp;gt; impl Into&amp;lt;u32&amp;gt; {
+    0u16
+}
+
+fn main() {
+    // There are two possible types for &#x60;x&#x60;:
+    // - &#x60;u32&#x60; by using the &amp;quot;alias bound&amp;quot; of &#x60;impl Into&amp;lt;u32&amp;gt;&#x60;
+    // - &#x60;impl Into&amp;lt;u32&amp;gt;&#x60;, i.e. &#x60;u16&#x60;, by using &#x60;impl&amp;lt;T&amp;gt; From&amp;lt;T&amp;gt; for T&#x60;
+    //
+    // We infer the type of &#x60;x&#x60; to be &#x60;u32&#x60; even though this is not
+    // strictly necessary and can even lead to surprising errors.
+    let x &#x3D; impl_trait().into();
+    println!(&amp;quot;{}&amp;quot;, std::mem::size_of_val(&amp;amp;x));
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;How and when we make such inference jumps is quite closely tied to the old trait solver implementation and not something we want to, or even can, copy directly. We have to figure out how to mostly maintain the existing behavior while fitting the rules to the new implementation. The complexity of this issue will only become apparent once the bigger issues are fixed and we start running crater with the new implementation enabled.&lt;/p&gt;
+&lt;p&gt;Another major hurdle will be error diagnostics. We currently rely on many internal details of the old trait solver implementation to emit actionable and useful errors to the user. These diagnostics have been incrementally improved by relying and working around these internal details. We cannot simply reuse them with the new trait solver implementation. Our goal there is to instead optionally emit &amp;quot;proof trees&amp;quot;, an in-memory representation of how trait solving occurred. We intend provide an simplified API in top of these proof trees which will then be used for diagnostics.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>lcnr</name>
+        </author>
+    </entry>
     
     <entry>
         <title>1.71.0 pre-release testing</title>
@@ -362,28 +403,6 @@ March 28. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RE
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2023-03-27/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2023-03-27/index.html&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;You can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-68-2-pre-release-testing/18585&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The release team is also thinking about changes to our pre-release process:
-we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Release automation</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>1.68.1 pre-release testing</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2023/03/20/1.68.1-prerelease.html" type="text/html" title="1.68.1 pre-release testing" />
-        <published>2023-03-20T00:00:00+00:00</published>
-        <updated>2023-03-20T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2023/03/20/1.68.1-prerelease.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2023/03/20/1.68.1-prerelease.html">&lt;p&gt;The 1.68.1 pre-release is ready for testing. The release is scheduled for
-March 23. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1681-2023-03-23&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
-&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2023-03-20/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2023-03-20/index.html&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-68-1-pre-release-testing/18547&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The release team is also thinking about changes to our pre-release process:
 we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
 </content>
