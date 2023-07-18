@@ -13,7 +13,7 @@ By reimplementing the trait solver of rustc we are able to fix many subtle bugs 
 
 The new trait solver implementation can be tested on nightly by using the rustc flag `-Ztrait-solver=next`. To use the new implementation for only coherence checking, `-Ztrait-solver=next-coherence` can be used. See the current implementation progress of the new trait solver in [its tracking issue](https://github.com/rust-lang/rust/issues/107374).
 
-We are now at a point where the we exclusively rely on the new implementation when the feature flag is enabled. This is a major step as we've previously still relied on the old solver for ["deep normalization"](https://github.com/rust-lang/rust/pull/113086) and ["selection"](https://github.com/rust-lang/rust/pull/112869). When using the new trait solver many crates and most of our existing regression tests successfully compile.
+We are now at a point where we exclusively rely on the new implementation when the feature flag is enabled. This is a major step as we've previously still relied on the old solver for ["deep normalization"](https://github.com/rust-lang/rust/pull/113086) and ["selection"](https://github.com/rust-lang/rust/pull/112869). When using the new trait solver many crates and most of our existing regression tests successfully compile.
 
 While there is a significant tail of less common bugs, we currently have two main failure causes:
 
