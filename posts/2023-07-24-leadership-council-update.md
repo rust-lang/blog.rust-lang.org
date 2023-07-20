@@ -19,7 +19,7 @@ We have made progress on each of these things.
 
 For the last month we have been holding weekly meetings and will continue to do so for at least the next month. In the long term, we would like these meetings to become less frequent and rely more on public, asynchronous discussion and decision processes, but in the short term there has been plenty to discuss each week. We publish minutes from each meeting, and these are linked at the [bottom of this post](#meeting-minutes).
 
-We have created committees for two of our most urgent needs: one to create a process for electing Project Directors to serve as our representatives on the foundation board, and one of council librarians to work on processes to document our actions and decisions.
+In order to be able to make progress without needing to involve all Council members, we've decided to establish small groups of people (called "committees") to focus on various specific work items. The committees then bring their work to the full council for discussion and consent. The two committees we've established so far are one to create a process for electing Project Directors to serve as our representatives on the foundation board, and one of council librarians to work on processes to document our actions and decisions.
 
 We have created [a GitHub repository](https://github.com/rust-lang/leadership-council) for all our documentation, including procedures we have decided on and meeting minutes. There are issues for some tasks we hope to complete in the near future.
 
