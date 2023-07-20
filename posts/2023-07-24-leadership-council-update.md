@@ -35,7 +35,9 @@ We've come up with a proposed list of our first three priorities, and we'd like 
 
 The type of feedback we're most interested in is hearing about topics or issues you think are more important or urgent than one or more of the following three priorities, and why we should tackle that topic instead of what we have listed here. If this list sounds good to you, we'd like to hear that as well!
 
-Each team representative on the council will be reaching out to their team specifically for feedback on this list, but we also welcome feedback from the Rust community in this Zulip topic (TODO link) or via email to <council@rust-lang.org>.
+Each team representative on the council will be reaching out to their team specifically for feedback on this list, but we also welcome feedback from the Rust community in [the "#council/Feedback on priorities" Zulip topic][zulip-feedback] or via email to <council@rust-lang.org>.
+
+[zulip-feedback]: https://rust-lang.zulipchat.com/#narrow/stream/392734-council/topic/Feedback.20on.20priorities
 
 The priorities we're proposing we concentrate on first are:
 
