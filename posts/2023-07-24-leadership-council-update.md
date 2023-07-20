@@ -43,7 +43,7 @@ The priorities we're proposing we concentrate on first are:
 
 1. Documenting and improving processes for interaction with the Rust Foundation including formalising the role of project directors in this process (the trademark policy process may be part of this).
 2. Establishing plans for how to strengthen the moderation team (i.e., 2 is not a sustainable number and we currently have no contingent moderators) and strengthen moderation policies.
-3. Figuring out the "shape" of the Rust Porject. The Leadership Council needs to reflect the will of the Rust Project so it is important to know who that includes.
+3. Figuring out the "shape" of the Rust Project. The Leadership Council needs to reflect the will of the Rust Project so it is important to know who that includes.
 
 If you're interested in the items under consideration that we think aren't as high priority as these, you can read the full, unsorted list [in this document](https://hackmd.io/@rust-leadership-council/Skdo7VKK3).
 
