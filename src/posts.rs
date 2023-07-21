@@ -1,7 +1,7 @@
 use super::blogs::Manifest;
 use comrak::{ComrakExtensionOptions, ComrakOptions, ComrakRenderOptions};
 use regex::Regex;
-use serde_derive::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 use std::error::Error;
 use std::path::{Path, PathBuf};
 
@@ -159,7 +159,7 @@ impl Post {
 
 fn build_post_time(year: i32, month: u32, day: u32, seconds: u32) -> String {
     chrono::DateTime::<chrono::Utc>::from_utc(
-        chrono::NaiveDate::from_ymd(year, month, day).and_hms(0, 0, seconds),
+        chrono::NaiveDate::from_ymd_opt(year, month, day).unwrap().and_hms_opt(0, 0, seconds).unwrap(),
         chrono::Utc,
     )
     .to_rfc3339()
