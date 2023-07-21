@@ -4,8 +4,8 @@ mod posts;
 use self::blogs::Blog;
 use self::posts::Post;
 use chrono::Timelike;
+use grass::Options;
 use handlebars::{handlebars_helper, Handlebars};
-use sass_rs::{compile_file, Options};
 use serde::Serialize;
 use serde_json::json;
 use std::convert::AsRef;
@@ -98,7 +98,7 @@ impl<'a> Generator<'a> {
         let scss_file = format!("./src/styles/{}.scss", filename);
         let css_file = format!("./static/styles/{}.css", filename);
 
-        let css = compile_file(&scss_file, Options::default())
+        let css = grass::from_path(&scss_file, &Options::default())
             .expect(&format!("couldn't compile sass: {}", &scss_file));
         let mut file =
             File::create(&css_file).expect(&format!("couldn't make css file: {}", &css_file));
