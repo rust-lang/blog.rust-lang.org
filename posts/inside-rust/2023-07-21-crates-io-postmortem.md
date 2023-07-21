@@ -164,7 +164,7 @@ A previous incident caused crate publishing to not work anymore. The learning fr
 
 ## Lessons learned
 
-- The detection time from deployment to incident notification could have been faster if the symptome was identified earlier to be caused by the cargo retry behavior. The heightened awareness of the deploying developer due to the change in Grafana numbers however contributed to this issue being fixed faster.
+- The detection time from deployment to incident notification could have been faster if the symptom was identified earlier to be caused by the cargo retry behavior. The heightened awareness of the deploying developer due to the change in Grafana numbers however contributed to this issue being fixed faster.
 - The response time from incident notification to rollback and fixing the issue was fast.
 - All code should be structured in a way that makes testing the different code paths easy.
 - We need clearer rules on which pull requests require code reviews.
