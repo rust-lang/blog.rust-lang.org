@@ -48,8 +48,6 @@ error: failed to download from `https://crates.io/api/v1/crates/serde_derive/1.0
 
 <https://github.com/rust-lang/crates.io/issues/6850> was submitted and upvoted 12 times.
 
-We are not aware of any social media posts related to this incident.
-
 ## Detection
 
 The developer triggering the production deployment was monitoring the crates.io Grafana dashboard during the deployment and noticed elevated levels of request-per-second numbers for the download endpoint. This was a symptom of cargo retrying the download multiple times before giving up.
