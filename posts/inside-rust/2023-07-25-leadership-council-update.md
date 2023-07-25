@@ -60,5 +60,6 @@ We publish minutes from all Council meetings to the [Leadership Council repo][co
 * [June 28, 2023](https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2023-06-28.md)
 * [July 6, 2023](https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2023-07-06.md)
 * [July 13, 2023](https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2023-07-13.md)
+* [July 20, 2023](https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2023-07-20.md)
 
 [council-repo]: https://github.com/rust-lang/leadership-council
