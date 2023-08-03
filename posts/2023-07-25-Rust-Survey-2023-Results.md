@@ -41,25 +41,25 @@ More people are using Rust than ever before! Over 90% of survey respondents iden
 
 Of the former Rust users who completed the survey, 30% cited difficulty as the primary reason for giving up while nearly 47% cited factors outside of their control. 
 
-![1](https://github.com/rust-lang/blog.rust-lang.org/assets/45044840/54c56ffc-2a76-4144-9800-94f5e7da0180)
+![Graph: Why did you stop using Rust?](../../../images/2023-08-rust-survey-2022/no-longer-using.png)
 
 Similarly, 26% of those who did not identify as Rust users cited the perception of difficulty as the primary reason for not having used it, (with 62% reporting that they simply haven’t had the chance to prioritize learning Rust yet). 
-![2](https://github.com/rust-lang/blog.rust-lang.org/assets/45044840/dd27ddff-fd85-43ac-81ef-09a4e65d30ae)
+![Graph: Why don't you use Rust?](../../../images/2023-08-rust-survey-2022/dont-use.png)
 
 ## Rust Usage at Work
 
 The growing maturation of Rust can be seen through the increased number of different organizations utilizing the language in 2022. In fact, 29.7% of respondents stated that they use Rust for the majority of their coding work at their workplace, which is a 51.8% increase compared to the previous year.
 
-![3](https://github.com/rust-lang/blog.rust-lang.org/assets/45044840/bae6d0ea-1bc2-4edc-a119-c665ce9abc5e)
+![Graph: Are you using Rust at work?](../../../images/2023-08-rust-survey-2022/rust-work.png)
 
 There are numerous reasons why we are seeing increased use of Rust in professional environments. Top reasons cited for the use of Rust include the perceived ability to write "bug-free software" (86%), Rust's performance characteristics (84%), and Rust's security and safety guarantees (69%). We were also pleased to find that 76% of respondents continue to use Rust simply because they found it fun and enjoyable. (Respondents could select more than one option here, so the numbers don't add up to 100%.)
 
-![4](https://github.com/rust-lang/blog.rust-lang.org/assets/45044840/cb17b676-5904-4dbd-8cc9-31ee7aa94c7f)
+![Graph: Why do you use Rust at work?](../../../images/2023-08-rust-survey-2022/why-at-work.png)
 
 Of those respondents that used Rust at work, 72% reported that it helped their team achieve its goals (a 4% increase from the previous year) and 75% have plans to continue using it on their teams in the future. 
 
 But like any language being applied in the workplace, Rust’s learning curve is an important consideration; 39% of respondents using Rust in a professional capacity reported the process as “challenging” and 9% of respondents said that adopting Rust at work has “slowed down their team”. However, 60% of productive users felt Rust was worth the cost of adoption overall. 
-![5](https://github.com/rust-lang/blog.rust-lang.org/assets/45044840/c533954b-eadc-41c0-ac9e-717d7ebc6e22)
+![Graph: Reasons for using Rust at work](../../../images/2023-08-rust-survey-2022/experiences.png)
 
 It is exciting to see the continued growth of professional Rust usage and the confidence so many users feel in its performance, control, security and safety, enjoyability, and more!
 
@@ -72,6 +72,8 @@ Of those respondents who shared their main worries for the future of Rust, 26% h
 While 38% have concerns about Rust “becoming too complex”, only a small number of respondents were concerned about documentation, corporate oversight, or speed of evolution. 34% of respondents are not worried about the future of Rust at all.
 
 This year’s survey reflects a 21% decrease in fears about Rust’s usage in the industry since the last survey. Faith in Rust’s staying power and general utility is clearly growing as more people find Rust and become lasting members of the community. As always, we are grateful for your honest feedback and dedication to improving this language for everyone. 
+
+![Graph: Worries about the future of Rust](../../../images/2023-08-rust-survey-2022/future.png)
 
 ## Another Round of Thanks
 
