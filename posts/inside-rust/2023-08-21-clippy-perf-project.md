@@ -38,8 +38,10 @@ occasions. This function will be our primary target for this period.
 
 The team held [this Zulip thread](zulip_thread) talking about the whole situation.
 
-From that thread, a lot of optimization opportunities came up. It revived [this issue], and
-[this PR][this_pr] not long after (maybe because of the thread, maybe not) 🎉, resulting in a significant performance boost.
+From that thread, a lot of optimization opportunities came up. It revived
+[this issue][this_issue], and [this PR][this_pr] was open not long
+after (maybe because of the thread, maybe not) 🎉,
+resulting in a significant performance boost.
 
 ## Crafting a cartography of our problem
 
