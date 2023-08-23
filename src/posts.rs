@@ -50,10 +50,15 @@ impl Post {
         let filename = split.next().unwrap().to_string();
 
         let contents = std::fs::read_to_string(path)?;
+        if contents.len() < 5 {
+            return Err(
+                format!("{path:?} is empty, or too short to have valid front matter").into(),
+            );
+        }
 
         // yaml headers.... we know the first four bytes of each file are "---\n"
         // so we need to find the end. we need the fours to adjust for those first bytes
-        let end_of_yaml = contents[4..].find("---").unwrap() + 4;
+        let end_of_yaml = contents[4..].find("---\n").unwrap() + 4;
         let yaml = &contents[..end_of_yaml];
         let YamlHeader {
             author,
