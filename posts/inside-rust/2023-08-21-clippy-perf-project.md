@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Making Clippy blazingly fast by 2024"
+title: "Making Clippy blazingly fast by the end of 2024"
 author: Alejandra González
 team: the Clippy team <https://www.rust-lang.org/governance/teams/dev-tools#Clippy%20team>
 description: This is the start of a series of posts talking about optimizations done on the Clippy codebase. 
