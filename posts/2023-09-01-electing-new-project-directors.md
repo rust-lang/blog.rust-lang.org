@@ -14,6 +14,8 @@ We ask all project members to begin working with their Leadership Council repres
 <!-- TODO: Once we've merged this PR we should link to the final location instead. -->
 [pde-process]: https://github.com/rust-lang/leadership-council/pull/12
 
+## What are Project Directors?
+
 The Rust Foundation Board of Directors has five seats reserved for Project Directors.
 These Project Directors serve as representatives of the Rust project itself on the Board.
 Like all Directors, the Project Directors are elected by the entity they represent, which in the case of the Rust Project means they are elected by the Rust Leadership Council.
@@ -32,7 +34,7 @@ The goal is to bubble these up to the Council through each of the top-level team
 You should be hearing from your Council Representative soon with more details, but if not, feel free to reach out to them directly.
 
 Each team is encouraged to suggest candidates.
-Since we are electing two new directors, it would be ideal for teams to nominate two candidates, but teams can nominate more or fewer as they see fit.
+Since we are electing two new directors, it would be ideal for teams to nominate at least two candidates.
 Nominees can be anyone in the project and do not have to be a member of the team who nominates them.
 
 The candidate gathering process will be open until September 15, at which point each team's Council Representative will share their team's nominations and reasoning with the whole Leadership Council.
