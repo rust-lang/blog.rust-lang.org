@@ -70,3 +70,10 @@ Below are the key dates:
 * Election meeting: Week of October 1
 
 After the election meeting happens, the Rust Leadership Council will announce the results and the new Project Directors will assume their responsibilities.
+
+## Acknowledgements
+
+A number of people have been involved in designing and launching this election process and we wish to extend a heartfelt thanks to all of them!
+We'd especially like to thank the members of the Project Director Election Proposal Committee: Jane Losare-Lusby, Eric Holk, and Ryan Levick.
+Additionally, many members of the Rust Community have provided feedback and thoughtful discussions that led to significant improvements to the process.
+We are grateful for all of your contributions.
