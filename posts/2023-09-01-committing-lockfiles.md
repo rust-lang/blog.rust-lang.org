@@ -62,3 +62,7 @@ they pass CI before being merged.
 
 Since there isn't a universal answer to these situations,
 we felt it was best to leave the choice to developers and give them information they need in making a decision.
+For feedback on this policy change,
+see [rust-lang/cargo#8728](https://github.com/rust-lang/cargo/issues/8728).
+You can also reach out the the Cargo team more generally on
+[Zulip](https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo).
