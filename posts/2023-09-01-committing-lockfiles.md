@@ -61,4 +61,4 @@ They could also have bots regularly update their `Cargo.lock` in PRs, ensuring
 they pass CI before being merged.
 
 Since there isn't a universal answer to these situations,
-we felt it was best to give developers the information they need in making a decision.
+we felt it was best to leave the choice to developers and give them information they need in making a decision.
