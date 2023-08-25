@@ -10,11 +10,11 @@ For years, the Cargo team has encouraged Rust developers to
 We now recommend people
 [do what is best for their project](https://doc.rust-lang.org/nightly/cargo/faq.html#why-have-cargolock-in-version-control).
 To help people make a decision, we do include some considerations and suggest
-committing `Cargo.lock` as a starting point in your decision making.
+committing `Cargo.lock` as a starting point in their decision making.
 To align with that starting point, `cargo new` will no longer ignore
 `Cargo.lock` for libraries as of nightly-2023-08-24.
-Regardless of what decision you make, we encourage regular
-[testing against your latest dependencies](https://doc.rust-lang.org/nightly/cargo/guide/continuous-integration.html#verifying-latest-dependencies).
+Regardless of what decision projects make, we encourage regular
+[testing against their latest dependencies](https://doc.rust-lang.org/nightly/cargo/guide/continuous-integration.html#verifying-latest-dependencies).
 
 ## Background
 
