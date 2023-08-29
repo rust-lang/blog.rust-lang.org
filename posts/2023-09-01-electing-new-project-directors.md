@@ -22,6 +22,9 @@ Like all Directors, the Project Directors are elected by the entity they represe
 Project Directors serve for a term of two years and will have staggered terms.
 This year we will appoint two new directors and next year we will appoint three new directors.
 
+The current project directors are Jane Losare-Lusby, Josh Stone, Mark Rousskov, Ryan Levick and Tyler Mandry.
+This year, Jane Losare-Lusby and Josh Stone will be rotating out of their roles as Project Directors, so the current elections are to fill their seats.
+
 We want to make sure the Project Directors can effectively represent the project as a whole, so we are soliciting input from the whole project.
 The elections process will go through two phases: Candidate Gathering and Election.
 Read on for more detail about how these work.
@@ -29,7 +32,7 @@ Read on for more detail about how these work.
 ## Candidate Gathering
 
 The first phase is beginning right now.
-In this phase, we are inviting the members of the Rust Project to nominate people who will make good project directors.
+In this phase, we are inviting the members of all of the top level Rust teams and their subteams to nominate people who will make good project directors.
 The goal is to bubble these up to the Council through each of the top-level teams.
 You should be hearing from your Council Representative soon with more details, but if not, feel free to reach out to them directly.
 
