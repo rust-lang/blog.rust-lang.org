@@ -35,7 +35,7 @@ dependency is yanked or a new release contains a bug.
 
 ## Why the change
 
-A lot as changed for Rust since the guideline was written.
+A lot has changed for Rust since the guideline was written.
 Rust has shifted from being a language for early adopters to being more mainstream,
 and we need to be mindful of the on-boarding experience of these new-to-Rust developers.
 Also with this wider adoption, it isn't always practical to assume everyone is using
