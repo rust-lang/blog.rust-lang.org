@@ -23,6 +23,7 @@ This year we will appoint two new directors and next year we will appoint three 
 
 The current project directors are Jane Losare-Lusby, Josh Stone, Mark Rousskov, Ryan Levick and Tyler Mandry.
 This year, Jane Losare-Lusby and Josh Stone will be rotating out of their roles as Project Directors, so the current elections are to fill their seats.
+We are grateful for the work the Jane and Josh have put in during their terms as Project Directors!
 
 We want to make sure the Project Directors can effectively represent the project as a whole, so we are soliciting input from the whole project.
 The elections process will go through two phases: Candidate Gathering and Election.
