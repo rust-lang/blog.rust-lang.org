@@ -11,8 +11,7 @@ We will summarize everything here, but if you would like to you can read the [of
 
 We ask all project members to begin working with their Leadership Council representative to nominate potential Project Directors. See the [Candidate Gathering](#candidate-gathering) section for more details. Nominations are due by September 15, 2023.
 
-<!-- TODO: Once we've merged this PR we should link to the final location instead. -->
-[pde-process]: https://github.com/rust-lang/leadership-council/pull/12
+[pde-process]: https://github.com/rust-lang/leadership-council/blob/main/policies/project-director-election-process.md
 
 ## What are Project Directors?
 
