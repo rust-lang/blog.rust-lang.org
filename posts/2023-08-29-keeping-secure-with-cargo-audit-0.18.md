@@ -15,7 +15,7 @@ $ cargo install cargo-audit
 $ cargo audit
 ```
 
-Both `cargo audit` and the [RustSec](https://rustsec.org/) advisory database that powers it are maintaiend by the [Rust Secure Code working group](https://www.rust-lang.org/governance/wgs/wg-secure-code).
+Both `cargo audit` and the [RustSec](https://rustsec.org/) advisory database that powers it are maintained by the [Rust Secure Code working group](https://www.rust-lang.org/governance/wgs/wg-secure-code).
 
 ## What's new in this release
 
