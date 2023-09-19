@@ -68,11 +68,13 @@ This process will continue through all of September and into October.
 Below are the key dates:
 
 * Candidate nominations due: September 15
-* Candidates published: September 19
-* Feedback period: September 19 - 29
+* Candidates published: ~~September 19~~ September 22
+* Feedback period: ~~September 19 - 29~~ September 22 - October 2
 * Election meeting: Week of October 1
 
 After the election meeting happens, the Rust Leadership Council will announce the results and the new Project Directors will assume their responsibilities.
+
+*Edit: we have adjusted the candidate publication date due to delays in getting all the nominees ready.*
 
 ## Acknowledgements
 
