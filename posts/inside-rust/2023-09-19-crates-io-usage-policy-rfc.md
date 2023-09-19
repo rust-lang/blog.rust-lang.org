@@ -15,7 +15,7 @@ We invite you all to review the RFC and let us know if there are still any major
 
 Here is a quick **TL;DR**:
 
-- The current policies are quite vague on a couple of topic, the new policies are more explicit.
+- The current policies are quite vague on a couple of topics. The new policies are more explicit.
 - Name squatting is allowed, but only to a certain degree and if you have a good reason for it.
 - The crates.io team will try to contact crate owners before taking any actions.
 
