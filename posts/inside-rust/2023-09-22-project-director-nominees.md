@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Announcing the Project Director Nominees"
+author: Leadership Council
+team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
+---
+
 # Announcing the Project Director Nominees
 
 Over the past couple weeks, the Rust Leadership Council has been soliciting nominees from the whole Rust project for the role of Project Director.
