@@ -13,15 +13,15 @@ As described in our [last post], we will elect from these people three new Proje
 
 The nominees are:
 
-- Jakob Degen
-- Amanieu
-- Felix Klock
-- lcnr
-- scottmcm
-- Michael Goulet
-- Santiago Pastorino
-- Jubilee
-- Mara Bos
+- [Jakob Degen](https://github.com/JakobDegen)
+- [Amanieu](https://github.com/Amanieu)
+- [Felix Klock](https://github.com/pnkfelix)
+- [lcnr](https://github.com/lcnr)
+- [scottmcm](https://github.com/scottmcm)
+- [Michael Goulet](https://github.com/compiler-errors)
+- [Santiago Pastorino](https://github.com/spastorino)
+- [Jubilee](https://github.com/workingjubilee)
+- [Mara Bos](https://github.com/m-ou-se)
 
 These were all spoken of highly by their nominating teams.
 While several other candidates were suggested, not everyone who was nominated felt like they were in a place where they were able or wanted to accept the role if they were elected.
