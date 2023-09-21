@@ -14,7 +14,8 @@ As described in our [last post], we will elect from these people three new Proje
 The nominees are:
 
 - [Jakob Degen](https://github.com/JakobDegen)
-- [Amanieu](https://github.com/Amanieu)
+- [Amanieu d'Antras](https://github.com/Amanieu)
+
 - [Felix Klock](https://github.com/pnkfelix)
 - [lcnr](https://github.com/lcnr)
 - [scottmcm](https://github.com/scottmcm)
