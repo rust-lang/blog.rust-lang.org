@@ -27,3 +27,6 @@ You may reach out to us either on the public [#council] channel on Zulip, throug
 
 We will be open for feedback through October 2, and elections will take place soon afterwards.
 We will announce the new Project Directors once the election is complete.
+
+[last post]: https://blog.rust-lang.org/2023/08/30/electing-new-project-directors.html
+[#council]: https://rust-lang.zulipchat.com/#narrow/stream/392734-council
