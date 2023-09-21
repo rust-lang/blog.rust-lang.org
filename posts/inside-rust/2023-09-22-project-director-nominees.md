@@ -32,8 +32,13 @@ We hope that most of the feedback will be reasons we may not have considered yet
 
 You may reach out to us either on the public [#council] channel on Zulip or by emailing the Leadership Council at <council@rust-lang.org>.
 
+We would also like to acknowledge the conflict of interest with Mara Bos since she is both a nominee and a member of the Leadership Council.
+In keeping with the Leadership Council's [Conflict of Interest policy], Mara will recuse herself from the election process and instead the Libraries team will send an [alternate representative] to participate in the Project Director election.
+
 We will be open for feedback through October 2, and elections will take place soon afterwards.
 We will announce the new Project Directors once the election is complete.
 
 [last post]: https://blog.rust-lang.org/2023/08/30/electing-new-project-directors.html
 [#council]: https://rust-lang.zulipchat.com/#narrow/stream/392734-council
+[Conflict of Interest policy]: https://rust-lang.github.io/rfcs/3392-leadership-council.html#conflicts-of-interest
+[alternate representative]: https://rust-lang.github.io/rfcs/3392-leadership-council.html#alternates-and-forgoing-representation
