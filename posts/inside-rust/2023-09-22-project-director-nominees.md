@@ -15,7 +15,6 @@ The nominees are:
 
 - [Jakob Degen](https://github.com/JakobDegen)
 - [Amanieu d'Antras](https://github.com/Amanieu)
-
 - [Felix Klock](https://github.com/pnkfelix)
 - [lcnr](https://github.com/lcnr)
 - [scottmcm](https://github.com/scottmcm)
