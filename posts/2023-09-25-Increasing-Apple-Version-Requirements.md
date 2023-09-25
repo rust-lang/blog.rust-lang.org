@@ -6,7 +6,7 @@ author: BlackHoleFox
 description: "Modernizing and improving Apple platform support for Rust"
 ---
 
-As of Rust 1.74 (to be released on November 16th, 2023), the minimum version of Apple's platforms (iOS, macOS, and tvOS) that the Rust toolchain supports will be [increased](https://github.com/rust-lang/rust/pull/104385) to newer minimums. These changes affect both the Rust compiler itself (`rustc`), other host tooling, and most importantly, the standard library and any binaries produced that use it. With these changes in place, any binaries produced will stop loading on older versions or exhibit other, unspecified, behavior.
+As of Rust 1.74 (to be released on November 16th, 2023), the minimum version of Apple's platforms (iOS, macOS, and tvOS) that the Rust toolchain supports will be [increased](https://github.com/rust-lang/rust/pull/104385) to newer baselines. These changes affect both the Rust compiler itself (`rustc`), other host tooling, and most importantly, the standard library and any binaries produced that use it. With these changes in place, any binaries produced will stop loading on older versions or exhibit other, unspecified, behavior.
 
 The new minimum versions are now:
 - macOS: 10.12 Sierra (First released 2016)
@@ -68,12 +68,11 @@ We want Rust to be a first-class option for developing software for and on Apple
 # Do I need to do anything?
 
 If you or an application you develop are affected by this change, there are different options which may be helpful:
-- If possible, raise your minimum supported OS versions. All OS versions discussed in above have no support from the vendor. Not even security updates.
--  If you are running the Rust compiler or other host tools that were previously supported, consider cross-compiling from a newer host instead. You may also no longer be able to depend on the Rust standard library.
-- If none of these options work, you may need to freeze the version of the Rust toolchain your project builds with. Alternatively, you may be able to maintain a custom toolchain that supports your requirements for any sub-component of it.
+- If possible, raise your minimum supported OS version(s). All OS versions discussed in this post have no support from the vendor. Not even security updates.
+-  If you are running the Rust compiler or other previously-supported host tools, consider cross-compiling from a newer host instead. You may also no longer be able to depend on the Rust standard library.
+- If none of these options work, you may need to freeze the version of the Rust toolchain your project builds with. Alternatively, you may be able to maintain a custom toolchain that supports your requirements in any sub-component of it (such as libstd).
 
-If your project does not directly support a specific version, but instead depends on a default previously used by Rust, there are some steps you can take
-to help improve. For example, a number of crates in the ecosystem have hardcoded Rust's default support versions since they haven't changed for a long time:
-- If you use the `cc` crate to include build languages into your project, a [future update](https://github.com/rust-lang/cc-rs/pull/848) will handle this transparently.
-- If you need a minimum OS version for anything else, crates should query the new `rustc --print deployment-target` option for a default, or user-set, value 
-on toolchains using Rust 1.71 or newer going forward. Hardcoded defaults should only be used for older toolchains where this is unavailable.
+If your project does not directly support a specific OS version, but instead depends on a default version previously used by Rust, there are some steps you can take
+to help improve future compatibility. For example, a number of crates in the ecosystem have hardcoded Rust's previously supported OS baseline versions since they haven't changed for a long time:
+- If you use the `cc` crate to include other languages in your project, a [future update](https://github.com/rust-lang/cc-rs/pull/848) will handle this transparently.
+- If you need a minimum OS version for anything else, crates should query the new `rustc --print deployment-target` option for a default, or user-set when available, value on toolchains using Rust 1.71 or newer going forward. Hardcoded defaults should only be used for older toolchains where this is unavailable.
