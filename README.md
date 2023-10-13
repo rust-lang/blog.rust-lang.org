@@ -1,11 +1,11 @@
 # The Rust blog
 
-[![Build Status](https://travis-ci.com/rust-lang/blog.rust-lang.org.svg?branch=master)](https://travis-ci.com/rust-lang/blog.rust-lang.org)
+[![CI](https://github.com/rust-lang/blog.rust-lang.org/actions/workflows/main.yml/badge.svg)](https://github.com/rust-lang/blog.rust-lang.org/actions/workflows/main.yml)
 
 This is the blog of the Rust Programming Language.
 
 It's implemented as a small static site generator, that's deployed to GitHub
-Pages via Travis.
+Pages via GitHub Actions.
 
 ## Building
 
