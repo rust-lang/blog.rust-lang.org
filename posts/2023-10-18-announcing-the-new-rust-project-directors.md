@@ -13,7 +13,8 @@ The new Project Directors are:
 * [Jakob Degen](https://github.com/JakobDegen)
 * [Santiago Pastorino](https://github.com/spastorino)
 
-These will join [Ryan Levick] and [Mark Rousskov] to make up the five members of the Rust Foundation Board of Directors who represent the Rust Project.
+They will join [Ryan Levick] and [Mark Rousskov] to make up the five members of the Rust Foundation Board of Directors who represent the Rust Project.
+
 The board is made up Project Directors, who come from and represent the Rust Project, and Member Directors who represent the corporate members of the Rust Foundation.
 These groups of Directors each, as a block, have equal voting power.
 
@@ -28,7 +29,8 @@ Finally, we want to share our appreciation for the [Project Director Elections S
 
 [pde-subcommittee]: https://github.com/rust-lang/leadership-council/blob/main/committees/project-director-election-process.md
 
-As with any decision like this, this was a challenging decision for a number of reasons.
+This was a challenging decision for a number of reasons.
+
 This was also our first time doing this process and we learned a lot to use to improve it going forward.
 The [Project Director Elections Subcommittee][pde-subcommittee] will be following up with a retrospective outlining how well we achieved our goals with this process and making suggestions for future elections.
 We are expecting another election next year to start a rotating cadence of 2-year terms.
