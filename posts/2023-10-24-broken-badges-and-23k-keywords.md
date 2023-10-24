@@ -11,7 +11,7 @@ Around mid-October of 2023 we, the crates.io team, were [notified](https://githu
 
 Apparently the API response for this specific crate had broken the 20 MB mark and shields.io wasn't particularly happy with this. Interestingly, this crate only had 9 versions published at this point in time. But how do you get to 20 MB with only 9 published versions?
 
-As the quote above already mentions, this crate is using feature… a lot of features… almost 23,000 features to be precise! 😱
+As the quote above already mentions, this crate is using features… a lot of features… almost 23,000 features to be precise! 😱
 
 What crate needs that many features? Well, this crate provides SVG icons for Rust-based web applications… and it uses one feature per icon so that the payload size of the final WebAssembly bundle stays small.
 
@@ -21,15 +21,15 @@ The first problem that was already identified by the crate author: the API respo
 
 The next problem is that the [index file](https://index.crates.io/ic/on/icondata) for this crate is also getting large. With 9 published versions it was also already containing 11 MB of data. And just like the crates.io API, there is currently no pagination built into the package index file format.
 
-Now you may ask, why do the package index and `cargo` need to know about features? Well, the easy answer is: for dependency resolution. Features can enable optional dependencies, so when a dependency feature is used it might influence the dependency resolution. Our initial thought was that we could at least drop all the empty feature declarations from the index file (e.g. `foo = []`), but the cargo team informed us that `cargo` relies on them being available there too, and so for backwards-compatibility reasons this is not an option either.
+Now you may ask, why does the package index and `cargo` need to know about features? Well, the easy answer is: for dependency resolution. Features can enable optional dependencies, so when a dependency feature is used it might influence the dependency resolution. Our initial thought was that we could at least drop all the empty feature declarations from the index file (e.g. `foo = []`), but the cargo team informed us that `cargo` relies on them being available there too, and so for backwards-compatibility reasons this is not an option.
 
-On the bright side, most Rust users are on cargo versions these days that use the sparse package index by default, which only downloads index files for packages that are actually being used. In other words: only users of this icon crate need to pay the price for downloading all the metadata. On the flipside, this means that users who are still using the git-based index are all paying for this one crate using 23,000 features.
+On the bright side, most Rust users are on cargo versions these days that use the sparse package index by default, which only downloads index files for packages actually being used. In other words: only users of this icon crate need to pay the price for downloading all the metadata. On the flipside, this means users who are still using the git-based index are all paying for this one crate using 23,000 features.
 
 So, where do we go from here? 🤔
 
-While we believe that supporting such high numbers of features is conceptually a valid request, with the current implementation details in crates.io and cargo we can not support this. After analyzing all of these downstream effects from a single crate having that many features, we realized that we need some form of restriction on crates.io to keep the system from falling apart.
+While we believe that supporting such high numbers of features is conceptually a valid request, with the current implementation details in crates.io and cargo we can not support this. After analyzing all of these downstream effects from a single crate having that many features, we realized we need some form of restriction on crates.io to keep the system from falling apart.
 
-Now comes the important part: **on 2023-10-16 the crates.io team deployed a change that limits the number of features a crate can have to 300.**
+Now comes the important part: **on 2023-10-16 the crates.io team deployed a change limiting the number of features a crate can have to 300.**
 
 … for now, or at least until we have found solutions for the above problems.
 
