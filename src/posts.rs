@@ -2,8 +2,8 @@ use super::blogs::Manifest;
 use comrak::{ComrakExtensionOptions, ComrakOptions, ComrakRenderOptions};
 use regex::Regex;
 use serde_derive::{Deserialize, Serialize};
-use std::error::Error;
 use std::path::{Path, PathBuf};
+use eyre::eyre;
 
 #[derive(Debug, PartialEq, Deserialize)]
 struct YamlHeader {
@@ -36,7 +36,7 @@ pub(crate) struct Post {
 }
 
 impl Post {
-    pub(crate) fn open(path: &Path, manifest: &Manifest) -> Result<Self, Box<dyn Error>> {
+    pub(crate) fn open(path: &Path, manifest: &Manifest) -> eyre::Result<Self> {
         // yeah this might blow up, but it won't
         let filename = path.file_name().unwrap().to_str().unwrap();
 
@@ -52,7 +52,7 @@ impl Post {
         let contents = std::fs::read_to_string(path)?;
         if contents.len() < 5 {
             return Err(
-                format!("{path:?} is empty, or too short to have valid front matter").into(),
+                eyre!("{path:?} is empty, or too short to have valid front matter")
             );
         }
 
