@@ -12,6 +12,7 @@ use std::convert::AsRef;
 use std::fs::{self, File};
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
+use rayon::prelude::*;
 
 struct Generator<'a> {
     handlebars: Handlebars<'a>,
@@ -125,11 +126,9 @@ impl<'a> Generator<'a> {
         self.render_feed(blog)?;
         self.render_releases_feed(blog)?;
 
-        for (i, post) in blog.posts().iter().enumerate() {
-            let path = self.render_post(blog, post)?;
-            if i == 0 {
-                println!("└─ Latest post: {}\n", self.file_url(&path));
-            }
+        let paths = blog.posts().par_iter().map(|post| self.render_post(blog, post)).collect::<Result<Vec<_>, _>>()?;
+        if let Some(path) = paths.first() {
+            println!("└─ Latest post: {}\n", self.file_url(path));
         }
 
         Ok(())
