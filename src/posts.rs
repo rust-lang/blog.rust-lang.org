@@ -58,7 +58,7 @@ impl Post {
 
         // yaml headers.... we know the first four bytes of each file are "---\n"
         // so we need to find the end. we need the fours to adjust for those first bytes
-        let end_of_yaml = contents[4..].find("---\n").unwrap() + 4;
+        let end_of_yaml = contents[4..].find("---").unwrap() + 4;
         let yaml = &contents[..end_of_yaml];
         let YamlHeader {
             author,
