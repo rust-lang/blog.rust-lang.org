@@ -1,6 +1,5 @@
 use super::posts::Post;
 use serde_derive::{Deserialize, Serialize};
-use std::error::Error;
 use std::path::{Path, PathBuf};
 
 static MANIFEST_FILE: &str = "blog.yml";
@@ -46,7 +45,7 @@ pub(crate) struct Blog {
 }
 
 impl Blog {
-    fn load(prefix: PathBuf, dir: &Path) -> Result<Self, Box<dyn Error>> {
+    fn load(prefix: PathBuf, dir: &Path) -> eyre::Result<Self> {
         let manifest_content = std::fs::read_to_string(dir.join(MANIFEST_FILE))?;
         let manifest: Manifest = serde_yaml::from_str(&manifest_content)?;
 
@@ -122,7 +121,7 @@ impl Blog {
 
 /// Recursively load blogs in a directory. A blog is a directory with a `blog.yml`
 /// file inside it.
-pub(crate) fn load(base: &Path) -> Result<Vec<Blog>, Box<dyn Error>> {
+pub(crate) fn load(base: &Path) -> eyre::Result<Vec<Blog>> {
     let mut blogs = Vec::new();
     load_recursive(base, base, &mut blogs)?;
     Ok(blogs)
@@ -132,7 +131,7 @@ fn load_recursive(
     base: &Path,
     current: &Path,
     blogs: &mut Vec<Blog>,
-) -> Result<(), Box<dyn Error>> {
+) -> eyre::Result<()> {
     for entry in std::fs::read_dir(current)? {
         let path = entry?.path();
         let file_type = path.metadata()?.file_type();

@@ -9,7 +9,6 @@ use sass_rs::{compile_file, Options};
 use serde_derive::Serialize;
 use serde_json::json;
 use std::convert::AsRef;
-use std::error::Error;
 use std::fs::{self, File};
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
@@ -51,7 +50,7 @@ impl<'a> Generator<'a> {
     fn new(
         out_directory: impl AsRef<Path>,
         posts_directory: impl AsRef<Path>,
-    ) -> Result<Self, Box<dyn Error>> {
+    ) -> eyre::Result<Self> {
         let mut handlebars = Handlebars::new();
         handlebars.set_strict_mode(true);
         handlebars.register_templates_directory(".hbs", "templates")?;
@@ -80,7 +79,7 @@ impl<'a> Generator<'a> {
         .replace(std::path::MAIN_SEPARATOR, "/")
     }
 
-    fn render(&self) -> Result<(), Box<dyn Error>> {
+    fn render(&self) -> eyre::Result<()> {
         // make sure our output directory exists
         fs::create_dir_all(&self.out_directory)?;
 
@@ -116,7 +115,7 @@ impl<'a> Generator<'a> {
         fs::write("./static/styles/vendor.css", &concatted).expect("couldn't write vendor css");
     }
 
-    fn render_blog(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+    fn render_blog(&self, blog: &Blog) -> eyre::Result<()> {
         std::fs::create_dir_all(self.out_directory.join(blog.prefix()))?;
 
         let path = self.render_index(blog)?;
@@ -136,7 +135,7 @@ impl<'a> Generator<'a> {
         Ok(())
     }
 
-    fn render_index(&self, blog: &Blog) -> Result<PathBuf, Box<dyn Error>> {
+    fn render_index(&self, blog: &Blog) -> eyre::Result<PathBuf> {
         let other_blogs: Vec<_> = self
             .blogs
             .iter()
@@ -161,7 +160,7 @@ impl<'a> Generator<'a> {
         Ok(path)
     }
 
-    fn render_post(&self, blog: &Blog, post: &Post) -> Result<PathBuf, Box<dyn Error>> {
+    fn render_post(&self, blog: &Blog, post: &Post) -> eyre::Result<PathBuf> {
         let path = blog
             .prefix()
             .join(format!("{:04}", &post.year))
@@ -186,7 +185,7 @@ impl<'a> Generator<'a> {
         Ok(path)
     }
 
-    fn render_feed(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+    fn render_feed(&self, blog: &Blog) -> eyre::Result<()> {
         let posts: Vec<_> = blog.posts().iter().take(10).collect();
         let data = json!({
             "blog": blog,
@@ -198,7 +197,7 @@ impl<'a> Generator<'a> {
         Ok(())
     }
 
-    fn render_releases_feed(&self, blog: &Blog) -> Result<(), Box<dyn Error>> {
+    fn render_releases_feed(&self, blog: &Blog) -> eyre::Result<()> {
         let posts = blog.posts().iter().cloned().collect::<Vec<_>>();
         let is_released: Vec<&Post> = posts.iter().filter(|post| post.release).collect();
         let releases: Vec<ReleasePost> = is_released
@@ -223,7 +222,7 @@ impl<'a> Generator<'a> {
         Ok(())
     }
 
-    fn copy_static_files(&self) -> Result<(), Box<dyn Error>> {
+    fn copy_static_files(&self) -> eyre::Result<()> {
         copy_dir("static/fonts", &self.out_directory)?;
         copy_dir("static/images", &self.out_directory)?;
         copy_dir("static/styles", &self.out_directory)?;
@@ -236,7 +235,7 @@ impl<'a> Generator<'a> {
         name: impl AsRef<Path>,
         template: &str,
         data: serde_json::Value,
-    ) -> Result<(), Box<dyn Error>> {
+    ) -> eyre::Result<()> {
         let out_file = self.out_directory.join(name.as_ref());
         let file = File::create(out_file)?;
         self.handlebars.render_to_write(template, &data, file)?;
@@ -264,7 +263,7 @@ fn copy_dir(source: impl AsRef<Path>, dest: impl AsRef<Path>) -> Result<(), io::
     copy_inner(source, &dest)
 }
 
-pub fn main() -> Result<(), Box<dyn Error>> {
+pub fn main() -> eyre::Result<()> {
     let blog = Generator::new("site", "posts")?;
 
     blog.render()?;

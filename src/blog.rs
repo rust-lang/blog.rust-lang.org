@@ -1,9 +1,9 @@
-use std::error::Error;
-
 #[path = "lib.rs"]
 mod lib;
 
-pub fn main() -> Result<(), Box<dyn Error>> {
+pub fn main() -> eyre::Result<()> {
+    color_eyre::install()?;
+
     lib::main()?;
 
     println!("blog has been generated; you can now serve its content by running\n\
