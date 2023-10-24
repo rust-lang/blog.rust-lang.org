@@ -9,7 +9,7 @@ Around mid-October of 2023 we, the crates.io team, were [notified](https://githu
 
 > This crate makes heavy use of feature flags which bloats the response payload of the API.
 
-Apparently the API response for this specific crate had broken the 20 MB mark and shields.io wasn't particularly happen with this. Interestingly, this crate only had 9 versions published at this point in time. But how do you get to 20 MB with only 9 published versions?
+Apparently the API response for this specific crate had broken the 20 MB mark and shields.io wasn't particularly happy with this. Interestingly, this crate only had 9 versions published at this point in time. But how do you get to 20 MB with only 9 published versions?
 
 As the quote above already mentions, this crate is using feature… a lot of features… almost 23,000 features to be precise! 😱
 
