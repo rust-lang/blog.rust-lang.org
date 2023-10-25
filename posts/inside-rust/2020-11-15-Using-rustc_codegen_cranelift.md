@@ -37,7 +37,7 @@ $ ./build.sh
 ```
 
 Now, we can start using it to compile a project. For demonstration purposes,
-I'll be be using `cargo`, but you can use any Rust project supported by
+I'll be using `cargo`, but you can use any Rust project supported by
 `cg_clif`.
 
 ```
