@@ -29,7 +29,7 @@ So, where do we go from here? 🤔
 
 While we believe that supporting such a high number of features is conceptually a valid request, with the current implementation details in crates.io and cargo we cannot support this. After analyzing all of these downstream effects from a single crate having that many features, we realized we need some form of restriction on crates.io to keep the system from falling apart.
 
-Now comes the important part: **on 2023-10-16 the crates.io team deployed a change limiting the number of features a crate can have to 300.**
+Now comes the important part: **on 2023-10-16 the crates.io team deployed a change limiting the number of features a crate can have to 300 for any new crates/versions being published.**
 
 … for now, or at least until we have found solutions for the above problems.
 
