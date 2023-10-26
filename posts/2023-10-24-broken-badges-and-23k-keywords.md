@@ -5,7 +5,7 @@ author: Tobias Bieniek
 team: the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>
 ---
 
-Around mid-October of 2023 we, the crates.io team, were [notified](https://github.com/rust-lang/crates.io/issues/7269) by one of our users that a [shields.io](https://shields.io) badge for their crate stopped working. The issue reporter was kind enough to already debug the problem and figured out that the API request that shields.io sends to crates.io was most likely the problem. Here is a quote from the original issue:
+Around mid-October of 2023 the crates.io team was [notified](https://github.com/rust-lang/crates.io/issues/7269) by one of our users that a [shields.io](https://shields.io) badge for their crate stopped working. The issue reporter was kind enough to already debug the problem and figured out that the API request that shields.io sends to crates.io was most likely the problem. Here is a quote from the original issue:
 
 > This crate makes heavy use of feature flags which bloats the response payload of the API.
 
