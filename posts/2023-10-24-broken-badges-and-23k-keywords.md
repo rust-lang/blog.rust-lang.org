@@ -11,15 +11,15 @@ Around mid-October of 2023 we, the crates.io team, were [notified](https://githu
 
 Apparently the API response for this specific crate had broken the 20 MB mark and shields.io wasn't particularly happy with this. Interestingly, this crate only had 9 versions published at this point in time. But how do you get to 20 MB with only 9 published versions?
 
-As the quote above already mentions, this crate is using features… a lot of features… almost 23,000 features to be precise! 😱
+As the quote above already mentions, this crate is using features… a lot of features… almost 23,000! 😱
 
 What crate needs that many features? Well, this crate provides SVG icons for Rust-based web applications… and it uses one feature per icon so that the payload size of the final WebAssembly bundle stays small.
 
-At first glance there should be nothing wrong with this. This seems like a reasonable thing to do from a crate author perspective and neither cargo, nor crates.io were showing any warnings about this. Unfortunately, some of the implementation details are not too happy about such high numbers of features though…
+At first glance there should be nothing wrong with this. This seems like a reasonable thing to do from a crate author perspective and neither cargo, nor crates.io, were showing any warnings about this. Unfortunately, some of the implementation details are not too happy about such high numbers of features…
 
-The first problem that was already identified by the crate author: the API responses from crates.io are getting veeeery large. Adding to the problem is the fact that the crates.io API currently does not paginate the list of published versions. Changing this is obviously a breaking change, so our team had been a bit reluctant to changing the behavior of the API in that regard, though this situation has shown that we will likely have to tackle this problem in the near future.
+The first problem that was already identified by the crate author: the API responses from crates.io are getting veeeery large. Adding to the problem is the fact that the crates.io API currently does not paginate the list of published versions. Changing this is obviously a breaking change, so our team had been a bit reluctant to change the behavior of the API in that regard, though this situation has shown that we will likely have to tackle this problem in the near future.
 
-The next problem is that the [index file](https://index.crates.io/ic/on/icondata) for this crate is also getting large. With 9 published versions it was also already containing 11 MB of data. And just like the crates.io API, there is currently no pagination built into the package index file format.
+The next problem is that the [index file](https://index.crates.io/ic/on/icondata) for this crate is also getting large. With 9 published versions it already contains 11 MB of data. And just like the crates.io API, there is currently no pagination built into the package index file format.
 
 Now you may ask, why does the package index and `cargo` need to know about features? Well, the easy answer is: for dependency resolution. Features can enable optional dependencies, so when a dependency feature is used it might influence the dependency resolution. Our initial thought was that we could at least drop all the empty feature declarations from the index file (e.g. `foo = []`), but the cargo team informed us that `cargo` relies on them being available there too, and so for backwards-compatibility reasons this is not an option.
 
