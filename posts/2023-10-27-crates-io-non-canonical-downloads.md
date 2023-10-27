@@ -14,7 +14,7 @@ team: the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>
 
 ## What are "non-canonical downloads"?
 
-The "non-canonical downloads" feature allows everyone to download the `serde_derive` crate from <https://crates.io/api/v1/crates/serde_derive/1.0.189/download>, but also from <https://crates.io/api/v1/crates/serde-derive/1.0.189/download>, where the underscore was replaced with a hyphen (crates.io normalizes underscores and hyphens to be the same for uniqueness purposes, so it isn't possible to publish a crate named `serde-derive` because `serde_derive` exists). The same also works vice versa, if the canonical crate name uses hyphens and the download URL uses underscores instead. It even works with any other combination for crates that have multiple such characters (please don't mix them…!).
+The "non-canonical downloads" feature allows everyone to download the `serde_derive` crate from <https://crates.io/api/v1/crates/serde_derive/1.0.189/download>, but also from <https://crates.io/api/v1/crates/SERDE-derive/1.0.189/download>, where the underscore was replaced with a hyphen (crates.io normalizes underscores and hyphens to be the same for uniqueness purposes, so it isn't possible to publish a crate named `serde-derive` because `serde_derive` exists) and parts of the crate name are using uppercase characters. The same also works vice versa, if the canonical crate name uses hyphens and the download URL uses underscores instead. It even works with any other combination for crates that have multiple such characters (please don't mix them…!).
 
 ## Why remove it?
 
