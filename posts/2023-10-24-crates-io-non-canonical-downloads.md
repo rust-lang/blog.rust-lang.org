@@ -5,16 +5,16 @@ author: Tobias Bieniek
 team: the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>
 ---
 
-## tl;dr
+## TL;DR
 
-- we want to improve the reliability and performance of crate downloads
-- "non-canonical downloads" are blocking these plans
-- on 2023-11-20 support for "non-canonical downloads" will be disabled
-- cargo users are unaffected
+- We want to improve the reliability and performance of crate downloads.
+- "Non-canonical downloads" (that use URLs containing hyphens or underscores where the crate published uses the opposite) are blocking these plans.
+- On 2023-11-20 support for "non-canonical downloads" will be disabled.
+- Cargo users are unaffected.
 
 ## What are "non-canonical downloads"?
 
-The "non-canonical downloads" feature allows everyone to download the `serde_derive` crate from <https://crates.io/api/v1/crates/serde_derive/1.0.189/download>, but also from <https://crates.io/api/v1/crates/serde-derive/1.0.189/download>, where the underscore was replaced with a hyphen. The same also works vice versa, if the canonical crate name uses hyphens and the download URL uses underscores instead. It even works with any other combination for crates that have multiple such characters (please don't mix them…!).
+The "non-canonical downloads" feature allows everyone to download the `serde_derive` crate from <https://crates.io/api/v1/crates/serde_derive/1.0.189/download>, but also from <https://crates.io/api/v1/crates/serde-derive/1.0.189/download>, where the underscore was replaced with a hyphen (Crates.io normalizes underscores and hyphens to be the same for uniqueness purposes, so it isn't possible to publish a crate named `serde-derive` because `serde_derive` exists). The same also works vice versa, if the canonical crate name uses hyphens and the download URL uses underscores instead. It even works with any other combination for crates that have multiple such characters (please don't mix them…!).
 
 ## Why remove it?
 
@@ -38,14 +38,14 @@ Looking at the crates.io request logs, the following user-agents are currently r
 
 Three of these are just generic HTTP client libraries. [GNU Guile](https://www.gnu.org/software/guile/) is apparently a programming language, so most likely this is also a generic user-agent from a custom user program.
 
-`cargo-binstall` refers to https://github.com/cargo-bins/cargo-binstall. The maintainer is already aware of the upcoming change and confirmed that more recent versions of `cargo-binstall` should not be affected by this change.
+[`cargo-binstall`](https://github.com/cargo-bins/cargo-binstall) is a tool enabling installation of binary artifacts of crates. The maintainer is already aware of the upcoming change and confirmed that more recent versions of `cargo-binstall` should not be affected by this change.
 
-We recommend that any scripts relying on non-canonical downloads be adjusted to use the canonical names from the package index, the database dump, or the crates.io API instead. If you don't know which data source is best suited for you, we welcome you to take a look at <https://crates.io/data-access>.
+We recommend that any scripts relying on non-canonical downloads be adjusted to use the canonical names from the package index, the database dump, or the crates.io API instead. If you don't know which data source is best suited for you, we welcome you to take a look at [the crates.io data access page](https://crates.io/data-access).
 
 ## What is the plan?
 
 1. **Today:** Announce the removal of support for non-canonical downloads on the main Rust blog.
-2. **2023-11-20:** Disable support for non-canonical downloads and return a migration error message instead.
+2. **2023-11-20:** Disable support for non-canonical downloads and return a migration error message instead, to alert remaining users of this feature of the need to migrate. This still needs to put load on the application to detect a request is using a non-canonical download URL.
 3. **2023-12-18:** Return a regular 404 error instead of the migration error message, allowing us to get rid of (parts of) the database query.
 
 Note that we will still need the database query for download counting purposes for now. We have plans to remove this requirement as well, but those efforts are blocked by us still supporting non-canonical downloads.
