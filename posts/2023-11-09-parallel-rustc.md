@@ -88,7 +88,7 @@ build.
 
 There are several things worth noting.
 - Front-end execution takes 10.2 seconds.
-- Back-end execution occurs takes 6.2 seconds, and the LLVM threads are running
+- Back-end execution takes 6.2 seconds, and the LLVM threads are running
   for 5.9 seconds of that.
 - The parallel code generation is highly effective. Imagine if all those LLVM
   executed one after another!
