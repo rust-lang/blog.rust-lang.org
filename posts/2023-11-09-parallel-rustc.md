@@ -51,7 +51,7 @@ a machine with 28 virtual cores.
 
 There are 60 horizontal lines, each one representing a distinct process. Their
 durations range from a fraction of a second to multiple seconds. Most of them
-are rustc, and the few orange ones are build scripts. The first twenty run all
+are rustc, and the few orange ones are build scripts. The first twenty processes all
 start at the same time. This is possible because there are no dependencies
 between the relevant crates. But further down the graph, parallelism reduces as
 crate dependencies increase. Although the compiler can overlap compilation of
@@ -117,7 +117,7 @@ get the following Samply profile when compiling the same example as before.
 
 ![Samply output when compiling Cargo, parallel](../../../images/2023-11-09-parallel-rustc/samply-parallel.png)
 
-Again, there are several things worth nothing.
+Again, there are several things worth noting.
 - Front-end execution takes 5.9 seconds (down from 10.2 seconds).
 - Back-end execution takes 5.3 seconds (down from 6.2 seconds), and the LLVM
   threads are running for 4.9 seconds of that (down from 5.9 seconds).
