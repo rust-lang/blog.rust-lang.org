@@ -54,6 +54,15 @@ blockquote {
     }
 }
 
+details > summary {
+    cursor: pointer;
+    font-style: italic;
+}
+
+details > blockquote {
+    font-style: normal;
+}
+
 code {
   overflow: auto;
 }
