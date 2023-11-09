@@ -131,7 +131,7 @@ The specification can have gaps where the prescribed bounds are broader than nec
 Subsequent releases of the specification can tighten those prescribed bounds.
 
 We expect early versions of the spec to focus heavily on delivering the detailed description of the current Rust version.
-Such a specification could be derived heavily from an existing work product, such the Ferrocene specification, since that explicitly focuses on providing a detailed description of a specific Rust version. 
+Such a specification could be derived heavily from an existing work product, such as the Ferrocene specification, since that explicitly focuses on providing a detailed description of a specific Rust version. 
 Feedback on those version-specific descriptions will help us learn how best to craft the prescriptive bounds in the specification.
 
 The prescriptive bounds can start with useful high-level guarantees (e.g. "safe Rust cannot cause undefined behavior"), and then future versions of the specification can incrementally add more details to the prescriptive bounds (e.g. "unsafe Rust cannot cause undefined behaviour under the following conditions: …"), incrementally gaining more details over time.
