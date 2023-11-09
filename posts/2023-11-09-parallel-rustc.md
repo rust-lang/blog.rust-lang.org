@@ -47,7 +47,7 @@ which produces a chart showing how the crates are compiled. The following image
 shows the timeline when building [ripgrep](https://crates.io/crates/ripgrep) on
 a machine with 28 virtual cores.
 
-![`cargo build --timings` output when compiling ripgrep](../../../../images/inside-rust/2023-11-10-parallel-rustc/cargo-build-timings.png)
+![`cargo build --timings` output when compiling ripgrep](../../../images/2023-11-09-parallel-rustc/cargo-build-timings.png)
 
 There are 60 horizontal lines, each one representing a distinct process. Their
 durations range from a fraction of a second to multiple seconds. Most of them
@@ -78,7 +78,7 @@ back-end. The following image shows the output of a profiler called
 release build of the final crate in Cargo. The image is superimposed with
 markers that indicate front-end and back-end execution.
 
-![Samply output when compiling Cargo, serial](../../../../images/inside-rust/2023-11-10-parallel-rustc/samply-serial.png)
+![Samply output when compiling Cargo, serial](../../../images/2023-11-09-parallel-rustc/samply-serial.png)
 
 Each horizontal line represents a thread. The main thread is labelled "rustc"
 and is shown at the bottom. It is busy for most of the execution. The other 16
@@ -115,7 +115,7 @@ front-end code did not need to be changed.
 When the parallel front-end is enabled and configured to use eight threads, we
 get the following Samply profile when compiling the same example as before.
 
-![Samply output when compiling Cargo, parallel](../../../../images/inside-rust/2023-11-10-parallel-rustc/samply-parallel.png)
+![Samply output when compiling Cargo, parallel](../../../images/2023-11-09-parallel-rustc/samply-parallel.png)
 
 Again, there are several things worth nothing.
 - Front-end execution takes 5.9 seconds (down from 10.2 seconds).
