@@ -167,7 +167,7 @@ This list can be expanded over time.
 
 ## Presentation
 
-The Rust Specification will be a publicly accessible document, similar to all other Rust documentation.
+The Rust Specification will be a publicly accessible document, similar to all other Rust documentation (and with the same [licensing](https://github.com/rust-lang/rust/blob/master/LICENSE-MIT) [terms](https://github.com/rust-lang/rust/blob/master/LICENSE-APACHE)).
 The text will be written in English and will only use technical terms that are defined within the specification itself or that have clear definitions in a freely available online dictionary.
 
 Individual items in the specification can each be referenced and named: not just in hyperlinks, but also in human text (e.g. "[syntax.patterns.arm.5]"). When possible, these names/references to items should persist across versions of the specification.
