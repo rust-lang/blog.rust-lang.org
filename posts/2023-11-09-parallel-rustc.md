@@ -198,8 +198,9 @@ quickly.
 
 We recommend eight threads because this is the configuration we have tested the
 most and it is known to give good results. Values lower than eight will see
-smaller benefits. Values greater than eight will give diminishing returns and
-may even give worse performance.
+smaller benefits, but are appropriate if your hardware has fewer than eight
+cores. Values greater than eight will give diminishing returns and may even
+give worse performance.
 
 If a 50% improvement seems low when going from one to eight threads, recall
 from the explanation above that the front-end only accounts for part of compile
