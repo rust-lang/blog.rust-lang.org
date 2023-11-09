@@ -218,6 +218,9 @@ Reliability in single-threaded mode should be high.
 In multi-threaded mode there are some known bugs, including deadlocks. If
 compilation hangs, you have probably hit one of them.
 
+The binaries produced by the compiler are expected to be the same no matter
+which front-end is being used. Any differences will be considered a bug.
+
 ### Feedback
 
 If you have any problems with the parallel front-end, please [check the issues
