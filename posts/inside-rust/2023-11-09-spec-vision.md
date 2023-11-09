@@ -140,7 +140,7 @@ The prescriptive bounds can start with useful high-level guarantees (e.g. "safe 
 
 The specification should cover at least the following areas of Rust's syntax and semantics. Some parts may be inherently coupled to specific backends or target implementation techniques (e.g. inline asm).
 
-* The grammar of Rust, specified via Backus-Naur Form (BMF) or some reasonable extension of BNF.
+* The grammar of Rust, specified via Backus-Naur Form (BNF) or some reasonable extension of BNF.
 * Macro expansion
     * Macro-by-example (`macro_rules`) transcription; Hygiene
     * `cfg` attributes
