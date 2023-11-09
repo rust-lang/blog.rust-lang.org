@@ -37,7 +37,7 @@ Initially, the stakeholders will consist of:
 - One or more representatives from the operational semantics team
 - One or more representatives from Ferrocene (High Assurance/Availability, e.g. Automotive Industry.)
 - One or more representatives from Formal Methods Research and Development
-- Operating System Development (Rust for Linux; Microsoft)
+- One or more representatives from Operating System Development (Rust for Linux; Microsoft)
 
 ## Authority and Approval
 
