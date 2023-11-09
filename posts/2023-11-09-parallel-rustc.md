@@ -117,7 +117,7 @@ get the following Samply profile when compiling the same example as before.
 
 ![Samply output when compiling Cargo, parallel](../../../../images/inside-rust/2023-11-10-parallel-rustc/samply-parallel.png)
 
-Again, there are several things worth nothing.
+Again, there are several things worth noting.
 - Front-end execution takes 5.9 seconds (down from 10.2 seconds).
 - Back-end execution takes 5.3 seconds (down from 6.2 seconds), and the LLVM
   threads are running for 4.9 seconds of that (down from 5.9 seconds).
