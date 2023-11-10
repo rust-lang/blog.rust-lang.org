@@ -182,7 +182,7 @@ While completeness and correctness are the primary priority, we will try our bes
 
 Rust releases continue to proceed independently of the specification approval process.
 
-If a specification has not been approved for a given release, then the release goes out without an associated specification.
+If a specification has not been approved for a given release, then the release will go out without an associated specification.
 (We might still decide to deliver a specification associated with a given release at a later time, however.)
 
 This is by design. The specification effort must not add new hurdles for the project to overcome in order to meet its existing obligations, such as the 6-week release cadence.
