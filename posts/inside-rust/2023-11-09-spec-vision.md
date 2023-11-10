@@ -180,7 +180,7 @@ While completeness and correctness are the primary priority, we will try our bes
 
 ### Release Cadence
 
-Rust releases continue to proceed independently of the specification approval process.
+Rust releases will proceed independently of the specification approval process.
 
 If a specification has not been approved for a given release, then the release will go out without an associated specification.
 (We might still decide to deliver a specification associated with a given release at a later time, however.)
