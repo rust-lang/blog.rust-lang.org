@@ -48,7 +48,7 @@ With the help of some tooling, we will publicly keep track of which items still 
 
 We will categorize all changes as either a minor or a major change.
 Minor changes are items that appear uncontroversial or trivial to the specification team.
-For example, changes that were already approved by the language team team via FCP, typographic and grammar fixes, clarifications where the original intent is clear, and similar unexciting changes.
+For example, changes that were already approved by the language team via FCP, typographic and grammar fixes, clarifications where the original intent is clear, and similar unexciting changes.
 Major changes are those that are potentially questionable, important, or controversial.
 Any member of the specification team and the relevant authoritative team(s) and any specification stakeholder can flag a change as major.
 Major changes to the specification will have to go through the usual approval process (e.g. language FCP) before they may appear in a published (non-draft) version of the specification.
