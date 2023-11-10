@@ -114,7 +114,7 @@ Instead, other teams will be invited to contribute their own detailed descriptio
 Each such document is, like the specification itself, coupled to a specific Rust version.
 Furthermore, each such document is analogous to the detailed descriptions: the scope of each document produced via delegation is intended to be restricted to a specific Rust version.
 
-If a contributing team has input about broader prescriptive rules that should hold beyond the current Rust version, then that should be be part of the Rust specification document itself.
+If a contributing team has input about broader prescriptive rules that should hold beyond the current Rust version, then that should be part of the Rust specification document itself.
 Such prescriptive rules should always be the responsibility of the specification team to incorporate into the document.
 All such prescriptive rules are then subject to the specification approval process.
 
