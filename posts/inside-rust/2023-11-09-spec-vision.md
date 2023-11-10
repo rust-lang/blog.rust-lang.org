@@ -174,7 +174,7 @@ Individual items in the specification can each be referenced and named: not just
 
 Iterations of the specification should include renderings that highlight the differences between versions. (See e.g. Ada Reference Manual.)
 
-The Rust specification will be maintained in a format that that encourages volunteer contribution, even if the specification team expects to have to reauthor each contribution in order to maintain a consistent voice for the specification.
+The Rust specification will be maintained in a format that encourages volunteer contribution, even if the specification team expects to have to reauthor each contribution in order to maintain a consistent voice for the specification.
 
 While completeness and correctness are the primary priority, we will try our best to make the specification as accessible as possible. Ideally, any Rust programmer should be able to dive in and find the answer to any language question they might have, without the need to ask a "language lawyer" who is already deeply familiar with the document.
 
