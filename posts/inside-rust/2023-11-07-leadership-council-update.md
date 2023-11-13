@@ -79,5 +79,6 @@ Links to the minutes since our last update are:
 * [August 3, 2023](https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2023-08-03.md)
 * [August 14, 2023](https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2023-08-14.md)
 * [September 7, 2023](https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2023-09-07.md)
+* [October 27, 2023](https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2023-10-27.md)
 
 [minutes]: https://github.com/rust-lang/leadership-council/tree/main/minutes
