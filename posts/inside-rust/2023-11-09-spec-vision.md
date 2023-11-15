@@ -105,7 +105,7 @@ One can also say, descriptively, that the current version of Rust rejects source
 
 The descriptive definitions tell the reader how a construct will behave with respect to that Rust version; the prescriptive bounds tell the reader what they can and cannot expect to hold true in the future of Rust.
 
-Thus, we conclude that an ideal specification will need to address both the static and dynamic semantics, for both the prescriptive bounds and descriptive details.
+Thus, we conclude that an ideal specification will need to use both prescriptive bounds and descriptive details, for both the static and dynamic semantics.
 
 **"delegates"**: There are broad areas where the questions of what semantics we want, and how they should be specified, are open research topics.
 Examples of such areas include: macros 2.0, the type inference rules, the trait matching rules, and the operational semantics of unsafe code.
