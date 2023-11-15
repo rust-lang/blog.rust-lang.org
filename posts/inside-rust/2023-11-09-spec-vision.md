@@ -13,7 +13,7 @@ With this blog post, we present the steps we have taken so far and our plans for
 
 One of the first steps was to fill the role of "editor" [as laid out in the RFC](https://rust-lang.github.io/rfcs/3355-rust-spec.html#role-of-the-editor). The responsibility of coordination and editing of the specification is purposely delegated to the Rust Foundation, to ensure continuity of the work.
 
-As part of the hiring effort by the Foundation, we interviewed a few interested candidates with relevant experience. After a process in which an offer was eventually rejected by a candidate, the Foundation changed its approach and looked internally instead. The Foundation has given its Director of Technology, Joel, the opportunity to make the role of editor a part of his existing job. Because of his vast experience with industry standards and technical editing together with his already close proximity to the Rust project, Eric, Felix and Mara were quickly on board with having Joel as the editor, who has accepted this role.
+As part of the hiring effort for this role by the Foundation, we interviewed a few interested candidates with relevant experience. Because an offer to a candidate was eventually rejected, the Foundation opted to consider internal options as an alternative. The Foundation's Director of Technology, Joel, came forward as a willing candidate for the position as part of his existing job. Eric, Felix, and Mara were quickly on board with the idea of having Joel as the Specification Editor due to his vast experience with industry standards and technical editing and his proximity to the Rust project.
 
 ## Specification Team
 
