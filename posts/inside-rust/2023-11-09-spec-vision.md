@@ -134,7 +134,7 @@ In the limit, when/if the upper and lower bounds meet, this idealized process yi
 
 In the interim, before we reach that limit, the specification will provide both prescriptive bounds and descriptive details, for both the static and dynamic semantics.
 
-**"delegates"**: There are broad areas where the questions of what semantics we want, and how they should be specified, are open research topics.
+**"delegation"**: There are broad areas where the questions of what semantics we want, and how they should be specified, are open research topics.
 Examples of such areas include: macros 2.0, the type inference rules, the trait matching rules, and the operational semantics of unsafe code.
 It is not reasonable for the specification team to claim authority on such topics.
 Instead, other teams will be invited to contribute their own detailed descriptions, which can be published as their own documents that the specification can reference.
