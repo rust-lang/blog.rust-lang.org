@@ -123,7 +123,7 @@ Example 3: The Rust memory model is still an open research area.
 We are not yet prepared to establish a binary sound/unsound categorization for arbitrary unsafe code and set it in stone for all future versions of Rust.
 
 But, there are some unsafe code patterns that are definitely sound; these can be used as the basis for defining a *lower bound* on what unsafe code is well-defined.
-There are likewise unsafe code anti-patterns that we are certain to be unsound; these can be used as the basis for defining an *upper bound* on what unsafe code *might* be well-defined in Rust's dynamic semantics (or, as an alternative perspective: these provide a lower bound on what unsafe code will always be considered undefined behavior in Rust).
+There are likewise unsafe code anti-patterns that are certain to be unsound; these can be used as the basis for defining an *upper bound* on what unsafe code *might* be well-defined in Rust's dynamic semantics (or, as an alternative perspective: these provide a lower bound on what unsafe code will always be considered undefined behavior in Rust).
 
 Prescriptive bounds allow for the specification to include a middle ground of programs, where we do not commit all future versions of Rust to always make the same decision that the current version makes.
 For example, one can then say, *prescriptively*, that a given grammar provides a lower bound on the set of programs that must be accepted by all future versions of Rust, while still allowing the language to evolve in a backward compatible fashion.
@@ -154,14 +154,15 @@ All such prescriptive rules are then subject to the specification approval proce
 
 It is ambitious to provide both prescriptive bounds for current and future Rust versions and descriptive details of the current Rust version.
 We will maximize the value of our efforts by working iteratively and incrementally.
-The specification can have gaps where the prescribed bounds are broader than necessary.
-Subsequent releases of the specification can tighten those prescribed bounds.
 
 We expect early versions of the spec to focus heavily on delivering the detailed description of the current Rust version.
 Such a specification could be derived heavily from an existing work product, such as the Ferrocene specification, since that explicitly focuses on providing a detailed description of a specific Rust version. 
 Feedback on those version-specific descriptions will help us learn how best to craft the prescriptive bounds in the specification.
 
-The prescriptive bounds can start with useful high-level guarantees (e.g. "safe Rust cannot cause undefined behavior"), and then future versions of the specification can incrementally add more details to the prescriptive bounds (e.g. "unsafe Rust cannot cause undefined behaviour under the following conditions: …"), incrementally gaining more details over time.
+Due to our aforementioned focus on the current Rust version, early versions of the specification may have gaps where the prescriptive bounds are more imprecise than necessary.
+For example, prescribing "unsafe Rust code might cause undefined behavior" provides no guidance on how to write well-defined unsafe code.
+Even with such imprecision, the prescriptive bounds can still provide useful high-level guarantees (e.g. "safe Rust cannot cause undefined behavior").
+Future versions of the specification then add more prescriptive details (e.g. "unsafe Rust code cannot cause undefined behaviour under the following conditions: …") until we reach our desired level of precision.
 
 ## Scope
 
