@@ -76,9 +76,14 @@ The words above have been chosen carefully; it is worth elaborating on those wor
 The static semantics of Rust dictates which programs are accepted in the language, while the dynamic semantics determines which of those accepted programs are well-defined, as well as their respective meanings.
 The word "semantics" in the purpose statement refers to both the static and dynamic semantics of Rust collectively.
 
-**"current", "future"**: The Rust language has been evolving since its inception, and we expect it to continue to evolve going forward.
+**"current and future versions"**: The Rust language has been evolving since its inception, and we expect it to continue to evolve going forward.
 These evolutionary steps represent a traversal over the language design landscape.
 For every Rust release, we expect the current implementation to be standing at one point in that landscape, while the Rust community's idealized goal awaits at some higher point up the mountain.
+
+Rust's evolution follows two axes: release versions (such as Rust 1.73) and editions (such as the 2021 edition).
+Each version of Rust supports its most recent edition and all prior editions.
+The specification will evolve in parallel, with specification releases corresponding to Rust releases.
+Each release of the specification defines the semantics of all editions supported by that Rust release.
 
 **"prescriptive", "descriptive"**: A descriptive dictionary is one that attempts to describe how a word *is* used, while a prescriptive dictionary is one that prescribes how a word *should be* used.
 We take inspiration from that distinction to tease apart two important audience types.
@@ -87,25 +92,47 @@ Rust provides a stability promise: "You should never have to fear upgrading to a
 That raises a natural question: Why does the purpose statement distinguish version-crossing prescriptive definitions from version-specific descriptive definitions?
 
 Our answer:
-That stability promise left a bit of wiggle-room for itself, in terms of what the project considers "fear" vs "reasonable labor associated with a Rust upgrade."
+
+The descriptive definitions tell the reader how a construct will behave with respect to a specific Rust version (e.g. Rust 1.76).
+The prescriptive bounds tell the reader what they can and cannot expect to hold true in future Rust versions.
+
+We treat these as distinct concepts because they serve two distinct audiences.
+
+The statement of Rust's stability promise left a bit of wiggle-room for itself, in terms of what the project considers "fear" vs "reasonable labor associated with a Rust upgrade."
 When defining semantics, one must be more explicit about any such wiggle-room.
 Some Rust users *need* a description of the expected semantics as it stands for the Rust release that sits in their hands; they are the audience for version-specific details.
 But other Rust users, such as some library developers, have a more forward-looking perspective.
 The forward-looking developers may require an assurance that one specific code snippet A will always be accepted, and will also always have a particular meaning.
 They may require an assurance that a different snippet B will *never* be accepted.
 Or they may require an assurance that a third snippet C leveraging Unsafe Rust will always have undefined behavior (e.g. to justify a local transformation by arguing that no *new* undefined behavior is injected by that transformation.)
-These are all cases that call for a prescriptive definition of the semantics; it does not matter in these cases what the compiler currently does -- what matters is what it will do in the future, which is inherently prescriptive.
+These are all cases that call for a prescriptive definition of the semantics.
+Stating what the Rust compiler currently does is not sufficient for these developers; they need to know what future versions of the compiler may do, which is inherently prescriptive.
 
-It would be premature to fix firm definitions in those areas, e.g. categorizing for each input program whether it is accepted or rejected by the type inference system, and then forcing all futures versions of Rust to follow that same categorization.
-Another similar example: If we chose a fixed grammar, and then said all future versions of Rust must strictly categorize all source inputs as accepted or rejected according to that one grammar, then that would restrict our ability to add future backward-compatible language extensions to the grammar.
-Therefore, these kinds of guarantees (especially with respect to details of the type inference rules, or details of what unsafe code is well-defined) are where the prescriptive *bounds* arise.
-Such bounds allow for a middle ground of programs, where we do not commit all future versions of Rust to always make the same decision that the current version makes.
-For example, one can then say, prescriptively, that a given grammar provides a lower bound on the set of programs that must be accepted by all future versions of Rust, while still allowing the language to evolve in a backward compatible fashion.
-One can also say, descriptively, that the current version of Rust rejects source inputs that do not conform to the grammar.
+**"bounds"**: From the perspective of a Rust user, an ideal specification would provide definitions that are both precise and prescriptive.
+However, it is premature for the project to provide prescriptive definitions that are 100% precise in all areas of Rust's semantics.
 
-The descriptive definitions tell the reader how a construct will behave with respect to that Rust version; the prescriptive bounds tell the reader what they can and cannot expect to hold true in the future of Rust.
+Example 1: Rust's type inference rules are not ready to be set in stone for all future versions.
+The rules are still undergoing development; a sound program that is rejected by the type system today may be deemed acceptable tomorrow.
 
-Thus, we conclude that an ideal specification will need to use both prescriptive bounds and descriptive details, for both the static and dynamic semantics.
+Example 2: If we chose a fixed grammar, and then said all future versions of Rust must strictly categorize all source inputs as accepted or rejected according to that one grammar, then that would restrict our ability to add future backward-compatible language extensions to the grammar.
+
+In order to allow prescriptive definitions in the face of such challenges as these, we sacrifice some precision in order to regain flexibility,
+by planning for our prescriptive definitions to be framed as *bounds* on the semantics.
+
+Example 3: The Rust memory model is still an open research area.
+We are not yet prepared to establish a binary sound/unsound categorization for arbitrary unsafe code and set it in stone for all future versions of Rust.
+
+But, there are some unsafe code patterns that are definitely sound; these can be used as the basis for defining a *lower bound* on what unsafe code is well-defined.
+There are likewise unsafe code anti-patterns that we are certain to be unsound; these can be used as the basis for defining an *upper bound* on what unsafe code *might* be well-defined in Rust's dynamic semantics (or, as an alternative perspective: these provide a lower bound on what unsafe code will always be considered undefined behavior in Rust).
+
+Prescriptive bounds allow for the specification to include a middle ground of programs, where we do not commit all future versions of Rust to always make the same decision that the current version makes.
+For example, one can then say, *prescriptively*, that a given grammar provides a lower bound on the set of programs that must be accepted by all future versions of Rust, while still allowing the language to evolve in a backward compatible fashion.
+One can also say, *descriptively*, that the current version of Rust rejects source inputs that do not conform to the grammar.
+
+Over time, the gap between the upper and lower bounds will shrink as the specification evolves and becomes more precise, resolving ambiguities in Rust's semantics.
+In the limit, when/if the upper and lower bounds meet, this idealized process yields a completely precise prescriptive definition.
+
+In the interim, before we reach that limit, the specification will provide both prescriptive bounds and descriptive details, for both the static and dynamic semantics.
 
 **"delegates"**: There are broad areas where the questions of what semantics we want, and how they should be specified, are open research topics.
 Examples of such areas include: macros 2.0, the type inference rules, the trait matching rules, and the operational semantics of unsafe code.
