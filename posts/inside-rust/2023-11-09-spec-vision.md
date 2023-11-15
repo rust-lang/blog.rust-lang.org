@@ -41,7 +41,7 @@ Initially, the stakeholders will consist of:
 
 ## Authority and Approval
 
-While the specification team is in charge of writing and editing the specification, the authority over definition of the Rust language remains with the relevant teams, such as the language team and the library API team. Those teams are expected to engage other teams/subteams to provide their approval when necessary.
+While the specification team is in charge of writing and editing the specification, the authority over definition of the Rust language remains with the relevant teams, such as the language team and the library API team. Those teams are expected to involve other teams/subteams when necessary, such as by filing issues, nominating issues for discussion, and requesting FCP approval on critical decisions.
 
 To allow the specification team to produce content and iterate on it without being blocked by approval processes, we will be working on a draft specification in our work repository.
 With the help of some tooling, we will publicly keep track of which items still require team approval, and which items have open concerns from stakeholders.
