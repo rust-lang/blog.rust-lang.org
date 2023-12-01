@@ -46,7 +46,7 @@ with your MSRV.
 A lockfile is an appropriate way to pin versions for your project so you
 can validate your MSRV but we found people were instead putting upperbounds on their
 version requirements due to the strength of our prior guideline despite
-[likely being a worse solution](https://doc.rust-lang.org/nightly/cargo/reference/specifying-dependencies.html#multiple-requirements).
+[likely being a worse solution](https://doc.rust-lang.org/nightly/cargo/reference/specifying-dependencies.html#multiple-version-requirements).
 
 The wider software development ecosystem has also changed a lot in the
 intervening time.
