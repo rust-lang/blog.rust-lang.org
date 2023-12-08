@@ -6,7 +6,12 @@ team: The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo
 ---
 
 Cargo has recently gained an unstable feature on the nightly channel (starting with nightly-2023-11-17) to perform automatic cleaning of cache content within Cargo's home directory.
-This post includes a description of what this means, a call for help, and an outline of what is planned for the future.
+This post includes:
+
+- A description of what this means ([What is this feature?](#what-is-this-feature))
+- A call for help ([What to watch out for](#what-to-watch-out-for) and [Request for feedback](#request-for-feedback))
+- Implementation details ([Design considerations and implementation details](#design-considerations-and-implementation-details))
+- An outline of what is planned for the future ([Plan for the future](#plan-for-the-future))
 
 In short, we are asking people who use the nightly channel to enable this feature and report any issues you encounter on the [Cargo issue tracker][cargo-issues].
 To enable it, place the following in your Cargo config file (typically located in `~/.cargo/config.toml` or `%USERPROFILE%\.cargo\config.toml` for Windows):
@@ -148,21 +153,27 @@ Since the cache is used by any version of cargo, we have to pay close attention 
 We benefit from SQLite's particularly stable on-disk data format which has been stable since 2004.
 Cargo has support to do schema migrations within the database that stay backwards compatible.
 
-## A journey with SQLite
+## Plan for the future
 
 A major aspect of this endeavor is to gain experience with using SQLite in a wide variety of environments, with a plan to extend its usage in several other parts of cargo.
+
+### Registry index metadata
 
 One place where we are looking to introduce SQLite is for the registry index cache.
 When cargo downloads registry index data, it stores it in a custom-designed binary file format to improve lookup performance.
 However, this index cache uses many small files, which may not perform well on some filesystems.
+
 Additionally, the index cache grows without bound.
 Currently the automatic cache cleaning will only delete an entire index cache if the index itself hasn't been used, which is rarely the case for [crates.io].
 We may also need to consider finer-grained timestamp tracking or some mechanism to periodically purge this data.
+
+### Target directory change tracking and cleaning
 
 Another place we are looking to introduce SQLite is for managing the target directory.
 In cargo's target directory, cargo keeps track of information about each crate that has been built with what is called a *fingerprint*.
 These fingerprints help cargo know if it needs to recompile something.
 Each artifact is tracked with a set of 4 files, using a mixture of custom formats.
+
 We are looking to replace this system with SQLite which will hopefully bring about several improvements.
 A major focus will be to provide cleaning of stale data in the target directory, which tends to use substantial amount of disk space.
 Additionally we are looking to implement other improvements, such as more accurate fingerprint tracking, provide information about why cargo thinks something needed to be recompiled, and to hopefully improve performance.
