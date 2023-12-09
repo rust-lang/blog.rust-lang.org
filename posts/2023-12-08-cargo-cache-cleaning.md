@@ -11,7 +11,7 @@ This post includes:
 - A description of what this means ([What is this feature?](#what-is-this-feature))
 - A call for help ([What to watch out for](#what-to-watch-out-for) and [Request for feedback](#request-for-feedback))
 - Implementation details ([Design considerations and implementation details](#design-considerations-and-implementation-details))
-- An outline of what is planned for the future ([Plan for the future](#plan-for-the-future))
+- An outline of what is planned for the future which includes cleaning of target directories ([Plan for the future](#plan-for-the-future))
 
 In short, we are asking people who use the nightly channel to enable this feature and report any issues you encounter on the [Cargo issue tracker][cargo-issues].
 To enable it, place the following in your Cargo config file (typically located in `~/.cargo/config.toml` or `%USERPROFILE%\.cargo\config.toml` for Windows):
