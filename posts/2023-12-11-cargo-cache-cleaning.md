@@ -11,7 +11,7 @@ This post includes:
 - A description of what this means ([What is this feature?](#what-is-this-feature))
 - A call for help ([What to watch out for](#what-to-watch-out-for) and [Request for feedback](#request-for-feedback))
 - Implementation details ([Design considerations and implementation details](#design-considerations-and-implementation-details))
-- An outline of what is planned for the future which includes cleaning of target directories ([Plan for the future](#plan-for-the-future))
+- An outline of what is planned for the future ([Plan for the future](#plan-for-the-future))
 
 In short, we are asking people who use the nightly channel to enable this feature and report any issues you encounter on the [Cargo issue tracker][cargo-issues].
 To enable it, place the following in your Cargo config file (typically located in `~/.cargo/config.toml` or `%USERPROFILE%\.cargo\config.toml` for Windows):
@@ -43,6 +43,8 @@ This cache includes:
 The new garbage collection ("GC") feature adds tracking of this cache data so that cargo can automatically or manually remove unused files.
 It keeps an SQLite database which tracks the last time the various cache elements have been used.
 Every time you run a cargo command that reads or writes any of this cache data, it will update the database with a timestamp of when that data was last used.
+
+What isn't yet included is cleaning of target directories, see [Plan for the future](#plan-for-the-future).
 
 [crates.io]: https://crates.io/
 [registry index data]: https://doc.rust-lang.org/cargo/reference/registry-index.html
