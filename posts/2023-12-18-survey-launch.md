@@ -2,7 +2,7 @@
 layout: post
 title: "Launching the 2023 State of Rust Survey"
 author: The Rust Survey Working Group
-description: "Share your feedback with the eighth edition of the State of Rust Survey"
+description: "Share your experience using Rust in the eighth edition of the State of Rust Survey"
 ---
 
 It’s time for the [2023 State of Rust Survey](https://www.surveyhero.com/c/4vxempzc)!
@@ -13,12 +13,14 @@ Like last year, the [2023 State of Rust Survey](https://www.surveyhero.com/c/4vx
 
 We invite you to take this year’s survey whether you have just begun using Rust, you consider yourself an intermediate to advanced user, or you have not yet used Rust but intend to one day. Your responses will help us improve Rust over time by shedding light on gaps to fill in the community and development priorities, and more.
 
-**Once again, we will be offering the State of Rust Survey in the following languages (if you speak multiple languages, please pick one on the main survey page):**
+**Once again, we are offering the State of Rust Survey in the following languages (if you speak multiple languages, please pick one). Language options are available on the [main survey page](https://www.surveyhero.com/c/4vxempzc):**
 - English
 - Simplified Chinese
 - French
 - German
 - Japanese
+- Russian
+- Spanish
 
 Please help us spread the word by sharing the [survey link](https://www.surveyhero.com/c/4vxempzc) via your social media networks, at meetups, with colleagues, and in any other community that makes sense to you.
 
