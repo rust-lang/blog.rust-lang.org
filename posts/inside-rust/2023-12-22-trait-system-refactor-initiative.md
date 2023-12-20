@@ -42,7 +42,7 @@ It is important to balance the performance of the trait solver with the expressi
 
 ## Looking forward and asking for testing
 
-As we believe using the new solver for coherence checking to now be in a stabilization ready state, please test the new implementation by enabling the unstable `-Znext-solver=coherence` compiler flag. In case you encounter are any behavior or performance regressions, diagnostics issues, or even unsoundnesses[^1], please [open an issue on GitHub](https://github.com/rust-lang/rust/issues).
+As we believe using the new solver for coherence checking to now be in a stabilization ready state, please test the new implementation by enabling the unstable `-Znext-solver=coherence` compiler flag. In case you encounter any behavior or performance regressions, diagnostics issues, or even unsoundnesses[^1], please [open an issue on GitHub](https://github.com/rust-lang/rust/issues).
 
 Using the new solver during coherence checking will improve the behavior in some edge-cases, fixing at least one - pretty much unexploitable - [unsoundness](https://github.com/rust-lang/rust/issues/102048). It will also allow us to remove support for "intercrate mode" in the existing solver. However, most of the positive impact from using the new solver[^2] will only apply once it is used in more areas.
 
