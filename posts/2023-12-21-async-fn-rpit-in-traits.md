@@ -27,7 +27,7 @@ fn player_names(
 }
 ```
 
-Starting in Rust 1.75, which hits stable next week, you can use **return-position `impl Trait` in traits** (RPITIT) and trait impls. For example, you could use this to write a trait that returns an iterator:
+Starting in Rust 1.75, which hits stable next week, you can use **return-position `impl Trait` in trait** (RPITIT) definitions and in trait impls. For example, you could use this to write a trait that returns an iterator:
 
 ```rust
 trait Container {
@@ -57,7 +57,7 @@ trait HttpService {
 
 The use of `-> impl Trait` is still discouraged for general use in **public** traits, for the reason that users can't use additional bounds on the return type. For example, there is no way to write this function:
 
-```rust!
+```rust
 fn print_in_reverse(container: impl Container) {
     for item in container.items().rev() {
         // ERROR:                 ^^^
@@ -69,7 +69,7 @@ fn print_in_reverse(container: impl Container) {
 }
 ```
 
-In the future we plan to add a solution for this. For now, this feature is best used in internal traits or when you're confident your users won't need additional bounds like this. Otherwise, you should continue using associated types.
+In the future we plan to add a solution for this. For now, this feature is best used in internal traits or when you're confident your users won't need additional bounds like this. Otherwise, you should continue using associated types where possible (note that associated types cannot yet be used when returning types that cannot be named).
 
 ### `async fn` in public traits
 
@@ -91,7 +91,7 @@ help: you can desugar to a normal `fn` that returns `impl Future` and add any de
 
 Of particular interest to users of async are `Send` bounds on the returned future. Since users cannot add bounds later, the error message is saying that you as a trait author need to make a choice: Do you want your trait to work with multithreaded, work-stealing executors?
 
-For public traits, we recommend using the `trait-variant` proc macro to let your users choose. Add it to your project with `cargo add trait-variant`, then use it like so:
+For public traits, we recommend using the [`trait_variant::make`](https://docs.rs/trait-variant/latest/trait_variant/attr.make.html) proc macro to let your users choose. This proc macro is part of the [`trait-variant`](https://crates.io/crates/trait-variant), published by the rust-lang org. Add it to your project with `cargo add trait-variant`, then use it like so:
 
 ```rust
 #[trait_variant::make(HttpService: Send)]
@@ -123,17 +123,17 @@ Traits that use `-> impl Trait` and `async fn` are not object-safe, which means 
 
 In the future we would like to allow users to add their own bounds to `impl Trait` return types, which would make them more generally useful. It would also enable more advanced uses of `async fn`. The syntax might look something like this:
 
-```rust!
+```rust
 trait HttpService = LocalHttpService<fetch(): Send> + Send;
 ```
 
-Since these aliases won't require any support on the part of the trait author, it will technically make the Send variants of async traits unnecessary. Those are still a nice convenience for users, so we expect that most crates will continue to provide them.
+Since these aliases won't require any support on the part of the trait author, it will technically make the `Send` variants of async traits unnecessary. However, those variants will still be a nice convenience for users, so we expect that most crates will continue to provide them.
 
 ## Frequently asked questions
 
 ### Is it okay to use `-> impl Trait` in traits?
 
-For private traits you can use `-> impl Trait` freely. For public traits, it's best to avoid them for now unless you can anticipate all the bounds your users might want (in which case you can use `#[trait_variant]`, as we do for async). We expect to lift this restriction in the future.
+For private traits you can use `-> impl Trait` freely. For public traits, it's best to avoid them for now unless you can anticipate all the bounds your users might want (in which case you can use `#[trait_variant::make]`, as we do for async). We expect to lift this restriction in the future.
 
 ### Should I still use the `#[async_trait]` macro?
 
@@ -142,19 +142,19 @@ There are a couple of reasons you might need to continue using async-trait:
 * You want to support Rust versions older than 1.75.
 * You want dynamic dispatch.
 
-As stated above, we hope to enable dynamic dispatch in a future version of trait-variant.
+As stated above, we hope to enable dynamic dispatch in a future version of the `trait-variant` crate.
 
 ### Is it okay to use `async fn` in traits? What are the limitations?
 
-Assuming you don't need to use `#[async_trait]` for one of the reasons stated above, it's totally fine to use regular `async fn` in traits. Just remember to use `#[trait_variant]` if you want to support multithreaded runtimes.
+Assuming you don't need to use `#[async_trait]` for one of the reasons stated above, it's totally fine to use regular `async fn` in traits. Just remember to use `#[trait_variant::make]` if you want to support multithreaded runtimes.
 
 The biggest limitation is that a type must always decide if it implements the Send or non-Send version of a trait. It cannot implement the Send version *conditionally* on one of its generics. This can come up in the [middleware](https://github.com/tower-rs/tower/blob/master/guides/building-a-middleware-from-scratch.md) pattern, for example, `RequestLimitingService<T>` that is HttpService if `T: HttpService`.
 
-### Why do I need `#[trait_variant]` and Send bounds?
+### Why do I need `#[trait_variant::make]` and `Send` bounds?
 
 In simple cases you may find that your trait appears to work fine with a multithreaded executor. There are some patterns that just won't work, however. Consider the following:
 
-```rust!
+```rust
 fn spawn_task(service: impl HttpService + 'static) {
     tokio::spawn(async move {
         let url = Url::from("https://rust-lang.org");
@@ -169,7 +169,7 @@ Without Send bounds on our trait, this would fail to compile with the error: "fu
 
 Yes, you can freely move between the `async fn` and `-> impl Future` spelling in your traits and impls. This is true even when one form has a Send bound.[^leakage] This makes the traits created by `trait_variant` nicer to use.
 
-```rust!
+```rust
 trait HttpService: Send {
     fn fetch(&self, url: Url)
     -> impl Future<Output = HtmlBody> + Send;
@@ -183,7 +183,7 @@ impl HttpService for MyService {
 }
 ```
 
-[^leakage]: This works because of *auto-trait leakage*, which allows knowledge of auto traits to "leak" outside of an impl signature that does not specify them.
+[^leakage]: This works because of *auto-trait leakage*, which allows knowledge of auto traits to "leak" from an item whose signature does not specify them.
 
 ### Why don't these signatures use `impl Future + '_`?
 
@@ -195,7 +195,7 @@ For `-> impl Trait` in traits we adopted the [2024 Capture Rules] early. This me
 
 If your impl signature includes more detailed information than the trait itself, you'll [get a warning](https://play.rust-lang.org/?version=beta&mode=debug&edition=2021&gist=6248cfe0419a693d1331ef47c729d1fe):
 
-```rust!
+```rust
 pub trait Foo {
     fn foo(self) -> impl Debug;
 }
@@ -211,7 +211,7 @@ impl Foo for u32 {
 
 The reason is that you may be leaking more details of your implementation than you meant to. For instance, should the following code compile?
 
-```rust!
+```rust
 fn main() {
     // Did the implementer mean to allow
     // use of `Display`, or only `Debug` as
@@ -226,4 +226,4 @@ Thanks to [refined trait implementations][3245] it does compile, but the compile
 
 ## Conclusion
 
-The Async Working Group is very happy to end 2023 by announcing the completion of our primary goal for the year! Thank you to everyone who participated in design, implementation, and stabilization discussions. Thanks also to the users of Async Rust who have given great feedback over the years. We're looking forward to seeing what you build, and to delivering continued improvements in the year to come.
+The Async Working Group is excited to end 2023 by announcing the completion of our primary goal for the year! Thank you to everyone who helpfully participated in design, implementation, and stabilization discussions. Thanks also to the users of async Rust who have given great feedback over the years. We're looking forward to seeing what you build, and to delivering continued improvements in the years to come.
