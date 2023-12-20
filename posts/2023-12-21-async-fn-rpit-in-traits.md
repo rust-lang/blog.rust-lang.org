@@ -5,7 +5,7 @@ author: Tyler Mandry
 team: The Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>
 ---
 
-The Rust Async Working Group is excited to announce major progress towards our goal of enabling the use of `async fn` in traits. The next Rust release will include stable support for both `-> impl Trait` notation and `async fn` in traits.
+The Rust Async Working Group is excited to announce major progress towards our goal of enabling the use of `async fn` in traits. Rust 1.75, which hits stable next week, will include support for both `-> impl Trait` notation and `async fn` in traits.
 
 This is a big milestone, and we know many users will be itching to try these out in their own code. However, we are still missing some important features that many users need. Read on for an recommendations on when and how to use the stabilized features.
 
@@ -27,7 +27,7 @@ fn player_names(
 }
 ```
 
-Starting in Rust 1.75, which hits stable next week, you can use **return-position `impl Trait` in trait** (RPITIT) definitions and in trait impls. For example, you could use this to write a trait that returns an iterator:
+Starting in Rust 1.75, you can use **return-position `impl Trait` in trait** (RPITIT) definitions and in trait impls. For example, you could use this to write a trait that returns an iterator:
 
 ```rust
 trait Container {
@@ -41,7 +41,7 @@ impl Container for MyContainer {
 }
 ```
 
-So what does all of this have to do with async functions? Well, async functions are "just sugar" for a function that returns `-> impl Future`. Since that is now permitted in traits, **we also permit you to write traits that use `async fn`**.
+So what does all of this have to do with async functions? Well, async functions are "just sugar" for a function that returns `-> impl Future`. Since that is now permitted in traits, **we also permit you to write traits that use `async fn`**.[^desugar-correct]
 
 ```rust
 trait HttpService {
@@ -50,6 +50,8 @@ trait HttpService {
 //  fn fetch(&self, url: Url) -> impl Future<Output = HtmlBody>;
 }
 ```
+
+[^desugar-correct]: See the FAQ on `impl Future + '_` for why this desugaring is correct.
 
 ## Where the gaps lie
 
@@ -73,7 +75,7 @@ In the future we plan to add a solution for this. For now, this feature is best 
 
 ### `async fn` in public traits
 
-Since `async fn` desugars to `-> impl Future`, the same limitations apply. If you use bare `async fn` in a public trait today, you'll see a warning. Thankfully, we have a solution that allows using `async fn` in public traits today!
+Since `async fn` desugars to `-> impl Future`, the same limitations apply. If you use bare `async fn` in a public trait today, you'll see a warning.
 
 ```
 warning: use of `async fn` in public traits is discouraged as auto trait bounds cannot be specified
@@ -91,7 +93,7 @@ help: you can desugar to a normal `fn` that returns `impl Future` and add any de
 
 Of particular interest to users of async are `Send` bounds on the returned future. Since users cannot add bounds later, the error message is saying that you as a trait author need to make a choice: Do you want your trait to work with multithreaded, work-stealing executors?
 
-For public traits, we recommend using the [`trait_variant::make`](https://docs.rs/trait-variant/latest/trait_variant/attr.make.html) proc macro to let your users choose. This proc macro is part of the [`trait-variant`](https://crates.io/crates/trait-variant), published by the rust-lang org. Add it to your project with `cargo add trait-variant`, then use it like so:
+Thankfully, we have a solution that allows using `async fn` in public traits today! We recommend using the [`trait_variant::make`](https://docs.rs/trait-variant/latest/trait_variant/attr.make.html) proc macro to let your users choose. This proc macro is part of the [`trait-variant`](https://crates.io/crates/trait-variant), published by the rust-lang org. Add it to your project with `cargo add trait-variant`, then use it like so:
 
 ```rust
 #[trait_variant::make(HttpService: Send)]
@@ -164,6 +166,8 @@ fn spawn_task(service: impl HttpService + 'static) {
 ```
 
 Without Send bounds on our trait, this would fail to compile with the error: "future cannot be sent between threads safely". By creating a variant of your trait with Send bounds, you avoid sending your users into this trap.
+
+Note that you won't see a warning if your trait is not public, because if you run into this problem you can always add the Send bounds yourself later.
 
 ### Can I mix async fn and impl trait?
 
