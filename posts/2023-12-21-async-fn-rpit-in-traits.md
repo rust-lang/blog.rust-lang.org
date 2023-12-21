@@ -133,7 +133,7 @@ trait HttpService = LocalHttpService<fetch(): Send> + Send;
 
 Since these aliases won't require any support on the part of the trait author, it will technically make the Send variants of async traits unnecessary. However, those variants will still be a nice convenience for users, so we expect that most crates will continue to provide them.
 
-Of course, the goals of the Async Working Group don't stop with `async fn` in traits. We want to continue building features that enable more reliable and sophisticated use of async Rust, and we intend to publish a more extensive roadmap in the new year.
+Of course, the goals of the Async Working Group don't stop with `async fn` in traits. We want to continue building features on top of it that enable more reliable and sophisticated use of async Rust, and we intend to publish a more extensive roadmap in the new year.
 
 ## Frequently asked questions
 
