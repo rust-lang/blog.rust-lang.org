@@ -93,7 +93,7 @@ help: you can desugar to a normal `fn` that returns `impl Future` and add any de
 
 Of particular interest to users of async are `Send` bounds on the returned future. Since users cannot add bounds later, the error message is saying that you as a trait author need to make a choice: Do you want your trait to work with multithreaded, work-stealing executors?
 
-Thankfully, we have a solution that allows using `async fn` in public traits today! We recommend using the [`trait_variant::make`](https://docs.rs/trait-variant/latest/trait_variant/attr.make.html) proc macro to let your users choose. This proc macro is part of the [`trait-variant`](https://crates.io/crates/trait-variant), published by the rust-lang org. Add it to your project with `cargo add trait-variant`, then use it like so:
+Thankfully, we have a solution that allows using `async fn` in public traits today! We recommend using the `trait_variant::make` proc macro to let your users choose. This proc macro is part of the [`trait-variant`](https://crates.io/crates/trait-variant) crate, published by the rust-lang org. Add it to your project with `cargo add trait-variant`, then use it like so:
 
 ```rust
 #[trait_variant::make(HttpService: Send)]
