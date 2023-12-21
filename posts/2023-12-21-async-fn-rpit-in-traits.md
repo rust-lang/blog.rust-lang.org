@@ -7,7 +7,7 @@ team: The Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async
 
 The Rust Async Working Group is excited to announce major progress towards our goal of enabling the use of `async fn` in traits. Rust 1.75, which hits stable next week, will include support for both `-> impl Trait` notation and `async fn` in traits.
 
-This is a big milestone, and we know many users will be itching to try these out in their own code. However, we are still missing some important features that many users need. Read on for an recommendations on when and how to use the stabilized features.
+This is a big milestone, and we know many users will be itching to try these out in their own code. However, we are still missing some important features that many users need. Read on for recommendations on when and how to use the stabilized features.
 
 ## What's stabilizing
 
@@ -27,7 +27,7 @@ fn player_names(
 }
 ```
 
-Starting in Rust 1.75, you can use **return-position `impl Trait` in trait** (RPITIT) definitions and in trait impls. For example, you could use this to write a trait that returns an iterator:
+Starting in Rust 1.75, you can use **return-position `impl Trait` in trait** (RPITIT) definitions and in trait impls. For example, you could use this to write a trait method that returns an iterator:
 
 ```rust
 trait Container {
@@ -41,7 +41,7 @@ impl Container for MyContainer {
 }
 ```
 
-So what does all of this have to do with async functions? Well, async functions are "just sugar" for a function that returns `-> impl Future`. Since that is now permitted in traits, **we also permit you to write traits that use `async fn`**.[^desugar-correct]
+So what does all of this have to do with async functions? Well, async functions are "just sugar" for functions that return `-> impl Future`. Since these are now permitted in traits, **we also permit you to write traits that use `async fn`**.[^desugar-correct]
 
 ```rust
 trait HttpService {
