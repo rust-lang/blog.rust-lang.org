@@ -123,7 +123,7 @@ This macro works for async because `impl Future` rarely requires additional boun
 
 Traits that use `-> impl Trait` and `async fn` are not object-safe, which means they lack support for dynamic dispatch. We plan to provide utilities that enable dynamic dispatch in an upcoming version of the `trait-variant` crate.
 
-## What we hope to do in the future
+## How we hope to improve in the future
 
 In the future we would like to allow users to add their own bounds to `impl Trait` return types, which would make them more generally useful. It would also enable more advanced uses of `async fn`. The syntax might look something like this:
 
@@ -132,6 +132,8 @@ trait HttpService = LocalHttpService<fetch(): Send> + Send;
 ```
 
 Since these aliases won't require any support on the part of the trait author, it will technically make the Send variants of async traits unnecessary. However, those variants will still be a nice convenience for users, so we expect that most crates will continue to provide them.
+
+Of course, the goals of the Async Working Group don't stop with `async fn` in traits. We want to continue building features that enable more reliable and sophisticated use of async Rust, and we intend to publish a more extensive roadmap in the new year.
 
 ## Frequently asked questions
 
