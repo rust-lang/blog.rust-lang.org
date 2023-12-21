@@ -41,7 +41,7 @@ impl Container for MyContainer {
 }
 ```
 
-So what does all of this have to do with async functions? Well, async functions are "just sugar" for functions that return `-> impl Future`. Since these are now permitted in traits, **we also permit you to write traits that use `async fn`**.[^desugar-correct]
+So what does all of this have to do with async functions? Well, async functions are "just sugar" for functions that return `-> impl Future`. Since these are now permitted in traits, **we also permit you to write traits that use `async fn`**.
 
 ```rust
 trait HttpService {
@@ -50,8 +50,6 @@ trait HttpService {
 //  fn fetch(&self, url: Url) -> impl Future<Output = HtmlBody>;
 }
 ```
-
-[^desugar-correct]: See the FAQ on `impl Future + '_` for why this desugaring is correct.
 
 ## Where the gaps lie
 
