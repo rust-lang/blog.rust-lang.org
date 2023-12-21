@@ -5,9 +5,9 @@ author: lcnr
 team: The Rustc Trait System Refactor Initiative <https://github.com/rust-lang/trait-system-refactor-initiative/>
 ---
 
-It has been nearly half a year since [our last update][prev]. See that update for a description of our work. We have continued to make big progress on the new solver since then, mostly focussing on getting the solver ready for use in coherence. We changed the unstable compiler flag to enable the new solver: you can now use `-Znext-solver=globally` to enable it everywhere and `-Znext-solver=coherence` to enable the new solver only for coherence checking.
+It has been nearly half a year since [our last update][prev]. See that update for a description of our work. We have continued to make big progress on the new solver since then, mostly focusing on getting the solver ready for use in coherence. We changed the unstable compiler flag to enable the new solver: you can now use `-Znext-solver=globally` to enable it everywhere and `-Znext-solver=coherence` to enable the new solver only for coherence checking.
 
-The reimplementation of the trait solver is now ready for use in coherence checking, which is responsible for preventing overlapping trait implementations. All known behavior changes from the old solver are intended and and the quality of error messages should match the existing implementation. However, over the last months the handling of non-fatal overflow has crystallized as one of the most significant and involved issues.
+The reimplementation of the trait solver is now ready for use in coherence checking, which is responsible for preventing overlapping trait implementations. All known behavior changes from the old solver are intended, and the quality of error messages should match the existing implementation. However, over the last months the handling of non-fatal overflow has emerged as one of the most significant and involved issues.
 
 ## Non-fatal overflow
 
