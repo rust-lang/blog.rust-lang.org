@@ -113,9 +113,7 @@ pub trait HttpService: Send {
 }
 ```
 
-This macro works for async because `impl Future` rarely requires additional bounds other than Send, so we can set our users up for success. See [this blog post](https://blog.rust-lang.org/inside-rust/2023/05/03/stabilizing-async-fn-in-trait.html) for a more thorough explanation of the problem.[^cut-scope]
-
-[^cut-scope]: Note that we originally said we would solve the Send bound problem before shipping `async fn` in traits, but we decided to cut that from the scope and ship the `trait-variant` crate instead.
+This macro works for async because `impl Future` rarely requires additional bounds other than Send, so we can set our users up for success. See the FAQ below for an example of where this is needed.
 
 ### Dynamic dispatch
 
@@ -170,6 +168,10 @@ fn spawn_task(service: impl HttpService + 'static) {
 Without Send bounds on our trait, this would fail to compile with the error: "future cannot be sent between threads safely". By creating a variant of your trait with Send bounds, you avoid sending your users into this trap.
 
 Note that you won't see a warning if your trait is not public, because if you run into this problem you can always add the Send bounds yourself later.
+
+For a more thorough explanation of the problem, see [this blog post](https://blog.rust-lang.org/inside-rust/2023/05/03/stabilizing-async-fn-in-trait.html).[^cut-scope]
+
+[^cut-scope]: Note that in that blog post we originally said we would solve the Send bound problem before shipping `async fn` in traits, but we decided to cut that from the scope and ship the `trait-variant` crate instead.
 
 ### Can I mix async fn and impl trait?
 
