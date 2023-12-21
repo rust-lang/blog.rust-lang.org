@@ -11,7 +11,7 @@ This is a big milestone, and we know many users will be itching to try these out
 
 ## What's stabilizing
 
-Ever since [RFC #1522], Rust has allowed users to write `impl Trait` as the return type of functions. This means that the function returns "some type that implements `Trait`". This is commonly used to return iterators, closures, or other types that are complex or even impossible to write explicitly:
+Ever since the stabilization of [RFC #1522] in Rust 1.26, Rust has allowed users to write `impl Trait` as the return type of functions (often called "RPIT"). This means that the function returns "some type that implements `Trait`". This is commonly used to return closures, iterators, and other types that are complex or impossible to write explicitly.
 
 [RFC #1522]: https://rust-lang.github.io/rfcs/1522-conservative-impl-trait.html
 
@@ -57,7 +57,7 @@ trait HttpService {
 
 ### `-> impl Trait` in public traits
 
-The use of `-> impl Trait` is still discouraged for general use in **public** traits, for the reason that users can't use additional bounds on the return type. For example, there is no way to write this function:
+The use of `-> impl Trait` is still discouraged for general use in **public** traits and APIs for the reason that users can't put additional bounds on the return type. For example, there is no way to write this function in a way that is generic over the `Container` trait:
 
 ```rust
 fn print_in_reverse(container: impl Container) {
@@ -71,11 +71,13 @@ fn print_in_reverse(container: impl Container) {
 }
 ```
 
-In the future we plan to add a solution for this. For now, this feature is best used in internal traits or when you're confident your users won't need additional bounds like this. Otherwise, you should continue using associated types where possible (note that associated types cannot yet be used when returning types that cannot be named).
+Even though some implementations might return an iterator that implements `DoubleEndedIterator`, there is no way for generic code to take advantage of this without defining another trait. In the future we plan to add a solution for this. For now, `-> impl Trait` is best used in internal traits or when you're confident your users won't need additional bounds. Otherwise you should consider using an associated type.[^nameable]
+
+[^nameable]: Note that associated types can only be used in cases where the type is nameable. This restriction will be lifted once [`impl_trait_in_assoc_type`](https://github.com/rust-lang/rust/issues/63063) is stabilized.
 
 ### `async fn` in public traits
 
-Since `async fn` desugars to `-> impl Future`, the same limitations apply. If you use bare `async fn` in a public trait today, you'll see a warning.
+Since `async fn` desugars to `-> impl Future`, the same limitations apply. In fact, if you use bare `async fn` in a public trait today, you'll see a warning.
 
 ```
 warning: use of `async fn` in public traits is discouraged as auto trait bounds cannot be specified
@@ -129,7 +131,7 @@ In the future we would like to allow users to add their own bounds to `impl Trai
 trait HttpService = LocalHttpService<fetch(): Send> + Send;
 ```
 
-Since these aliases won't require any support on the part of the trait author, it will technically make the `Send` variants of async traits unnecessary. However, those variants will still be a nice convenience for users, so we expect that most crates will continue to provide them.
+Since these aliases won't require any support on the part of the trait author, it will technically make the Send variants of async traits unnecessary. However, those variants will still be a nice convenience for users, so we expect that most crates will continue to provide them.
 
 ## Frequently asked questions
 
