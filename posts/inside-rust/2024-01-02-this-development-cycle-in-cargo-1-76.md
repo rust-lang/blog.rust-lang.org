@@ -39,7 +39,7 @@ from cargo itself
 ([rust-lang/cargo#12801](https://github.com/rust-lang/cargo/issues/12801)).
 
 Other areas for potentially splitting out of the `cargo` library include:
-- More serde and CLI types into `cargo-util-schemas`
+- Move serde and CLI types into `cargo-util-schemas`
 - Console output
 - Parsing and layer merging for `.cargo/config.toml`
 - Reading from different package sources (git, path, git registry, sparse registry)
