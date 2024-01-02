@@ -49,7 +49,7 @@ Other areas for potentially splitting out of the `cargo` library include:
 A user ran into path-length issues on Windows with `cargo install --git`
 ([rust-lang/cargo#13020](https://github.com/rust-lang/cargo/issues/13020))
 which led to [ChrisDenton](https://github.com/ChrisDenton) to post a PR for 
-[embedding a Windows manifest into the cargo binary](https://github.com/rust-lang/cargo/pull/13131), modeled after rustc.
+[embedding a Windows manifest into the cargo binary](https://github.com/rust-lang/cargo/pull/13131), modeled after `rustc`.
 After some exploration on that PR, it was merged with
 [rust-lang/cargo#13141](https://github.com/rust-lang/cargo/issues/13141)
 being created to track some of the remaining work
@@ -92,9 +92,9 @@ An important consideration being raised is that the users can successfully remap
 ##### `-Zcheck-cfg`
 
 [`-Zcheck-cfg`](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#check-cfg)
-is an unstable feature that will cause rustc to warn on undefined conditional compilation, like `#[cfg(unknown)]` or `#[cfg(feature = "unknown")]`. 
+is an unstable feature that will cause `rustc` to warn on undefined conditional compilation, like `#[cfg(unknown)]` or `#[cfg(feature = "unknown")]`.
 
-[Urgau](https://github.com/Urgau) has been working across rustc and cargo to polish up this feature for stabilization.
+[Urgau](https://github.com/Urgau) has been working across `rustc` and `cargo` to polish up this feature for stabilization.
 Recently, they:
 - Stopped checking names/values on the `rustc --cfg` CLI flag ([rust-lang/rust#117522](https://github.com/rust-lang/rust/pull/117522)) after a [zulip thread](https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/check-cfg.20and.20RUSTFLAGS.20interaction) and some [discussion in the tracking issue](https://github.com/rust-lang/rust/issues/82450#issuecomment-1813687060)
 - Fixed cargo so that it will re-compile packages when features change, avoiding a stale warning status ([rust-lang/cargo#13012](https://github.com/rust-lang/cargo/pull/13012))
@@ -137,7 +137,7 @@ This changed with the introduction of the [`[lints]` table](https://blog.rust-la
 We are tracking cargo warning control (and the lints it can unblock) in
 [rust-lang/cargo#12235](https://github.com/rust-lang/cargo/issues/12235).
 
-The first milestone is for TOML parse errors to match rustc's error style, going from
+The first milestone is for TOML parse errors to match `rustc`'s error style, going from
 ```
 error: failed to parse manifest at `[..]`
 
@@ -156,17 +156,17 @@ error: invalid type: integer `3`, expected a boolean or string
 6 | build = 3
   | ^
 ```
-Rather than writing our own error message renderer that imitates rustc,
+Rather than writing our own error message renderer that imitates `rustc`,
 [Muscraft](https://github.com/Muscraft) resurrected the
 [`annotate-snippets` project](https://github.com/rust-lang/annotate-snippets-rs/)
-with the intention of making it work for cargo and then migrating rustc to it.
+with the intention of making it work for `cargo` and then migrating `rustc` to it.
 They released annotate-snippets [v0.10](https://github.com/rust-lang/annotate-snippets-rs/blob/master/CHANGELOG.md#0100---december-12-2023)
 and created
 [rust-lang/cargo#13172](https://github.com/rust-lang/cargo/pull/13172)
 for integrating it into cargo when parsing `Cargo.toml` files.
 
 We will also need to decide what to do about
-[the differences in colors between rustc and cargo](https://github.com/rust-lang/cargo/issues/12740).
+[the differences in colors between `rustc` and `cargo`](https://github.com/rust-lang/cargo/issues/12740).
 [Muscraft](https://github.com/Muscraft) has been looking into why `rustc`'s colors were chosen and are preparing a proposal for what both programs should use.
 
 ##### `cargo info`
@@ -358,7 +358,7 @@ The `cargo` identifier is referred to as an infostring.
 
 There are two directions we can take the infostring in the long run:
 - Does the parent tool (in this case, cargo) own the definition of the infostring and is allowed whatever identifiers it wants
-- Does rustc own the meaning of the infostring, allowing the Rust Project to add additional types of metadata without concern for breaking tools that rely on custom identifiers
+- Does `rustc` own the meaning of the infostring, allowing the Rust Project to add additional types of metadata without concern for breaking tools that rely on custom identifiers
 
 The embedded manifest syntax RFC was updated with a [new section](https://github.com/epage/rfcs/blob/frontmatter/text/3503-frontmatter.md#optional-or-additional-infostrings),
 side-stepping this discussion by suggesting we hard code support for `cargo` right now and leave the decision to the future when we have more context for how this might be used.
