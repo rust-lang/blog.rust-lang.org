@@ -68,7 +68,7 @@ You could use the `name` field but that can be ambiguous when there are multiple
 [rust-lang/cargo#12914](https://github.com/rust-lang/cargo/pull/12914) proposes we switch `id` to be Package ID Spec and declare it as non-opaque in `cargo metadata`'s output,
 allowing a caller to take the `id` and pass it cargo via the `--package` parameters.
 
-We did find one hurdle: Packaeg ID Specs can sometimes be ambiguous.
+We did find one hurdle: Package ID Specs can sometimes be ambiguous.
 That was resolved in [rust-lang/cargo#12933](https://github.com/rust-lang/cargo/pull/12933).
 
 This is waiting on input from the Cargo team.
