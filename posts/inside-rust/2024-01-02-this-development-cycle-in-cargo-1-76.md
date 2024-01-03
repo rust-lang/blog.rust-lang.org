@@ -492,7 +492,7 @@ or long term and they accept the risks.
 We considered an additional flag for this but pre-release and breaking changes don't need a flag.
 For breaking changes, the flag would be for use outside `--precise` for opting in for all packages.
 There is the possibility we'd want to extend that concept to pre-release and yanked packages.
-For a prepondance of caution, we reached out to a prior cargo team member in case there was context we were missing and they gave the greenlight.
+For a preponderance of caution, we reached out to a prior cargo team member in case there was context we were missing and they gave the greenlight.
 
 [rust-lang/cargo#4225](https://github.com/rust-lang/cargo/issues/4225) is marked as [accepted](https://doc.crates.io/contrib/issues.html#issue-status-labels) and we welcome people to contribute a PR for this.
 
