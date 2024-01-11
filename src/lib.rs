@@ -54,7 +54,7 @@ impl<'a> Generator<'a> {
     ) -> eyre::Result<Self> {
         let mut handlebars = Handlebars::new();
         handlebars.set_strict_mode(true);
-        handlebars.register_templates_directory(".hbs", "templates")?;
+        handlebars.register_templates_directory("templates", Default::default())?;
         handlebars.register_helper("month_name", Box::new(hb_month_name_helper));
 
         Ok(Generator {
