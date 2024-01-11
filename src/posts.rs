@@ -1,5 +1,4 @@
 use super::blogs::Manifest;
-use comrak::{ComrakExtensionOptions, ComrakOptions, ComrakRenderOptions};
 use regex::Regex;
 use serde_derive::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
@@ -68,18 +67,14 @@ impl Post {
             layout,
         } = serde_yaml::from_str(yaml)?;
         // next, the contents. we add + to get rid of the final "---\n\n"
-        let options = ComrakOptions {
-            render: ComrakRenderOptions {
-                unsafe_: true, // Allow rendering of raw HTML
-                ..ComrakRenderOptions::default()
-            },
-            extension: ComrakExtensionOptions {
-                header_ids: Some(String::new()),
-                footnotes: true,
-                table: true,
-                ..ComrakExtensionOptions::default()
-            },
-            ..ComrakOptions::default()
+        let options = comrak::Options {
+            render: comrak::RenderOptionsBuilder::default().unsafe_(true).build()?,
+            extension: comrak::ExtensionOptionsBuilder::default()
+                .header_ids(Some(String::new()))
+                .footnotes(true)
+                .table(true)
+                .build()?,
+            ..comrak::Options::default()
         };
 
         // Content starts after "---\n" (we don't assume an extra newline)
