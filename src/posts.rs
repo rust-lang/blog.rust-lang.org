@@ -1,8 +1,8 @@
 use super::blogs::Manifest;
+use eyre::eyre;
 use regex::Regex;
 use serde_derive::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
-use eyre::eyre;
 
 #[derive(Debug, PartialEq, Deserialize)]
 struct YamlHeader {
@@ -50,9 +50,9 @@ impl Post {
 
         let contents = std::fs::read_to_string(path)?;
         if contents.len() < 5 {
-            return Err(
-                eyre!("{path:?} is empty, or too short to have valid front matter")
-            );
+            return Err(eyre!(
+                "{path:?} is empty, or too short to have valid front matter"
+            ));
         }
 
         // yaml headers.... we know the first four bytes of each file are "---\n"
@@ -68,7 +68,9 @@ impl Post {
         } = serde_yaml::from_str(yaml)?;
         // next, the contents. we add + to get rid of the final "---\n\n"
         let options = comrak::Options {
-            render: comrak::RenderOptionsBuilder::default().unsafe_(true).build()?,
+            render: comrak::RenderOptionsBuilder::default()
+                .unsafe_(true)
+                .build()?,
             extension: comrak::ExtensionOptionsBuilder::default()
                 .header_ids(Some(String::new()))
                 .footnotes(true)
