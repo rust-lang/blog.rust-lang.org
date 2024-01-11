@@ -9,19 +9,19 @@ name = "blog"
 path = "src/blog.rs"
 
 [dependencies]
-color-eyre = "0.6.2"
-eyre = "0.6.8"
-handlebars = { version = "3", features = ["dir_source"] }
-lazy_static = "1.4.0"
-serde = "1.0"
-serde_derive = "1.0"
-serde_yaml = "0.8"
-serde_json = "1.0"
+color-eyre = "=0.6.2"
+eyre = "=0.6.8"
+handlebars = { version = "=3.5.5", features = ["dir_source"] }
+lazy_static = "=1.4.0"
+serde = "=1.0.116"
+serde_derive = "=1.0.116"
+serde_yaml = "=0.8.13"
+serde_json = "=1.0.57"
 comrak = "0.13"
-rayon = "1.8.0"
-regex = "1.10"
-sass-rs = "0.2"
-chrono = "0.4"
+rayon = "=1.8.0"
+regex = "=1.10.2"
+sass-rs = "=0.2.2"
+chrono = "=0.4.19"
 
 [workspace]
 members = ["serve"]
