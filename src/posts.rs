@@ -158,9 +158,7 @@ impl Post {
 }
 
 fn build_post_time(year: i32, month: u32, day: u32, seconds: u32) -> String {
-    chrono::DateTime::<chrono::Utc>::from_utc(
-        chrono::NaiveDate::from_ymd(year, month, day).and_hms(0, 0, seconds),
-        chrono::Utc,
-    )
-    .to_rfc3339()
+    let date = chrono::NaiveDate::from_ymd_opt(year, month, day).unwrap();
+    let date_time = date.and_hms_opt(0, 0, seconds).unwrap();
+    chrono::DateTime::<chrono::Utc>::from_naive_utc_and_offset(date_time, chrono::Utc).to_rfc3339()
 }
