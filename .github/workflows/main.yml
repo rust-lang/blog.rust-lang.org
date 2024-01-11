@@ -10,6 +10,19 @@ env:
   RUST_VERSION: 1.75.0
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - run: rustup override set ${{ env.RUST_VERSION }}
+      - run: rustup component add clippy
+      - run: rustup component add rustfmt
+      - uses: Swatinem/rust-cache@a22603398250b864f7190077025cf752307154dc # v2.7.2
+
+      - run: cargo clippy --workspace -- -D warnings
+      - run: cargo fmt --check --all
+
   build:
     runs-on: ubuntu-latest
     steps:
