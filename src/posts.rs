@@ -40,7 +40,7 @@ impl Post {
         let filename = path.file_name().unwrap().to_str().unwrap();
 
         // we need to get the metadata out of the url
-        let mut split = filename.splitn(4, "-");
+        let mut split = filename.splitn(4, '-');
 
         // we do some unwraps because these need to be valid
         let year = split.next().unwrap().parse::<i32>().unwrap();
