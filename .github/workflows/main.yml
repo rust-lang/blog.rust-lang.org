@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: deployment
-        uses: actions/deploy-pages@ee48c7b82e077d7b8ef30b50a719e6a792a50c9a # v2.0.2
+        uses: actions/deploy-pages@de14547edc9944350dc0481aa5b7afb08e75f254 # v2.0.5
 
     environment:
       name: github-pages
