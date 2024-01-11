@@ -149,7 +149,6 @@ impl<'a> Generator<'a> {
 
         let data = json!({
             "title": blog.index_title(),
-            "parent": "layout",
             "blog": blog,
             "other_blogs": other_blogs,
             "root": blog.path_back_to_root(),
@@ -173,7 +172,6 @@ impl<'a> Generator<'a> {
 
         let data = json!({
             "title": format!("{} | {}", post.title, blog.title()),
-            "parent": "layout",
             "blog": blog,
             "post": post,
             "root": blog.path_back_to_root().join("../../../"),
