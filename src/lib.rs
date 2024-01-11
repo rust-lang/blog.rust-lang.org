@@ -54,7 +54,7 @@ impl<'a> Generator<'a> {
     ) -> eyre::Result<Self> {
         let mut handlebars = Handlebars::new();
         handlebars.set_strict_mode(true);
-        handlebars.register_templates_directory(".hbs", "templates")?;
+        handlebars.register_templates_directory("templates", Default::default())?;
         handlebars.register_helper("month_name", Box::new(hb_month_name_helper));
 
         Ok(Generator {
@@ -149,7 +149,6 @@ impl<'a> Generator<'a> {
 
         let data = json!({
             "title": blog.index_title(),
-            "parent": "layout",
             "blog": blog,
             "other_blogs": other_blogs,
             "root": blog.path_back_to_root(),
@@ -173,7 +172,6 @@ impl<'a> Generator<'a> {
 
         let data = json!({
             "title": format!("{} | {}", post.title, blog.title()),
-            "parent": "layout",
             "blog": blog,
             "post": post,
             "root": blog.path_back_to_root().join("../../../"),
