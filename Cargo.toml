@@ -11,7 +11,7 @@ path = "src/blog.rs"
 [dependencies]
 color-eyre = "=0.6.2"
 eyre = "=0.6.11"
-handlebars = { version = "=5.0.0", features = ["dir_source"] }
+handlebars = { version = "=5.1.0", features = ["dir_source"] }
 lazy_static = "=1.4.0"
 serde = "=1.0.195"
 serde_derive = "=1.0.195"
