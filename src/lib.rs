@@ -195,7 +195,7 @@ impl<'a> Generator<'a> {
     }
 
     fn render_releases_feed(&self, blog: &Blog) -> eyre::Result<()> {
-        let posts = blog.posts().iter().cloned().collect::<Vec<_>>();
+        let posts = blog.posts().to_vec();
         let is_released: Vec<&Post> = posts.iter().filter(|post| post.release).collect();
         let releases: Vec<ReleasePost> = is_released
             .iter()

@@ -154,7 +154,7 @@ fn load_recursive(
     Ok(())
 }
 
-fn add_postfix_slash<S>(path: &PathBuf, serializer: S) -> Result<S::Ok, S::Error>
+fn add_postfix_slash<S>(path: &Path, serializer: S) -> Result<S::Ok, S::Error>
 where
     S: serde::Serializer,
 {
