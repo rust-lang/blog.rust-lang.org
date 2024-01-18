@@ -127,11 +127,7 @@ pub(crate) fn load(base: &Path) -> eyre::Result<Vec<Blog>> {
     Ok(blogs)
 }
 
-fn load_recursive(
-    base: &Path,
-    current: &Path,
-    blogs: &mut Vec<Blog>,
-) -> eyre::Result<()> {
+fn load_recursive(base: &Path, current: &Path, blogs: &mut Vec<Blog>) -> eyre::Result<()> {
     for entry in std::fs::read_dir(current)? {
         let path = entry?.path();
         let file_type = path.metadata()?.file_type();

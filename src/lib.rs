@@ -4,7 +4,9 @@ mod posts;
 use self::blogs::Blog;
 use self::posts::Post;
 use chrono::Timelike;
+use eyre::{eyre, WrapErr};
 use handlebars::{handlebars_helper, Handlebars};
+use rayon::prelude::*;
 use sass_rs::{compile_file, Options};
 use serde_derive::Serialize;
 use serde_json::json;
@@ -12,8 +14,6 @@ use std::convert::AsRef;
 use std::fs::{self, File};
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
-use eyre::{eyre, WrapErr};
-use rayon::prelude::*;
 
 struct Generator<'a> {
     handlebars: Handlebars<'a>,
@@ -102,22 +102,23 @@ impl<'a> Generator<'a> {
         let css = compile_file(&scss_file, Options::default())
             .map_err(|error| eyre!(error))
             .wrap_err_with(|| format!("couldn't compile sass: {}", &scss_file))?;
-        let mut file =
-            File::create(&css_file).wrap_err_with(|| format!("couldn't make css file: {}", &css_file))?;
+        let mut file = File::create(&css_file)
+            .wrap_err_with(|| format!("couldn't make css file: {}", &css_file))?;
         file.write_all(&css.into_bytes())
             .wrap_err_with(|| format!("couldn't write css file: {}", &css_file))?;
 
         Ok(())
     }
 
-    fn concat_vendor_css(&self, files: Vec<&str>)-> eyre::Result<()> {
+    fn concat_vendor_css(&self, files: Vec<&str>) -> eyre::Result<()> {
         let mut concatted = String::new();
         for filestem in files {
             let vendor_path = format!("./static/styles/{}.css", filestem);
             let contents = fs::read_to_string(vendor_path).wrap_err("couldn't read vendor css")?;
             concatted.push_str(&contents);
         }
-        fs::write("./static/styles/vendor.css", &concatted).wrap_err("couldn't write vendor css")?;
+        fs::write("./static/styles/vendor.css", &concatted)
+            .wrap_err("couldn't write vendor css")?;
 
         Ok(())
     }
@@ -132,7 +133,11 @@ impl<'a> Generator<'a> {
         self.render_feed(blog)?;
         self.render_releases_feed(blog)?;
 
-        let paths = blog.posts().par_iter().map(|post| self.render_post(blog, post)).collect::<Result<Vec<_>, _>>()?;
+        let paths = blog
+            .posts()
+            .par_iter()
+            .map(|post| self.render_post(blog, post))
+            .collect::<Result<Vec<_>, _>>()?;
         if let Some(path) = paths.first() {
             println!("└─ Latest post: {}\n", self.file_url(path));
         }
