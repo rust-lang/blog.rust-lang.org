@@ -12,6 +12,7 @@ use std::convert::AsRef;
 use std::fs::{self, File};
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
+use eyre::{eyre, WrapErr};
 use rayon::prelude::*;
 
 struct Generator<'a> {
@@ -87,33 +88,38 @@ impl<'a> Generator<'a> {
         for blog in &self.blogs {
             self.render_blog(blog)?;
         }
-        self.compile_sass("app");
-        self.compile_sass("fonts");
-        self.concat_vendor_css(vec!["skeleton", "tachyons"]);
+        self.compile_sass("app")?;
+        self.compile_sass("fonts")?;
+        self.concat_vendor_css(vec!["skeleton", "tachyons"])?;
         self.copy_static_files()?;
         Ok(())
     }
 
-    fn compile_sass(&self, filename: &str) {
+    fn compile_sass(&self, filename: &str) -> eyre::Result<()> {
         let scss_file = format!("./src/styles/{}.scss", filename);
         let css_file = format!("./static/styles/{}.css", filename);
 
         let css = compile_file(&scss_file, Options::default())
-            .expect(&format!("couldn't compile sass: {}", &scss_file));
+            .map_err(|error| eyre!(error))
+            .wrap_err_with(|| format!("couldn't compile sass: {}", &scss_file))?;
         let mut file =
-            File::create(&css_file).expect(&format!("couldn't make css file: {}", &css_file));
+            File::create(&css_file).wrap_err_with(|| format!("couldn't make css file: {}", &css_file))?;
         file.write_all(&css.into_bytes())
-            .expect(&format!("couldn't write css file: {}", &css_file));
+            .wrap_err_with(|| format!("couldn't write css file: {}", &css_file))?;
+
+        Ok(())
     }
 
-    fn concat_vendor_css(&self, files: Vec<&str>) {
+    fn concat_vendor_css(&self, files: Vec<&str>)-> eyre::Result<()> {
         let mut concatted = String::new();
         for filestem in files {
             let vendor_path = format!("./static/styles/{}.css", filestem);
-            let contents = fs::read_to_string(vendor_path).expect("couldn't read vendor css");
+            let contents = fs::read_to_string(vendor_path).wrap_err("couldn't read vendor css")?;
             concatted.push_str(&contents);
         }
-        fs::write("./static/styles/vendor.css", &concatted).expect("couldn't write vendor css");
+        fs::write("./static/styles/vendor.css", &concatted).wrap_err("couldn't write vendor css")?;
+
+        Ok(())
     }
 
     fn render_blog(&self, blog: &Blog) -> eyre::Result<()> {
