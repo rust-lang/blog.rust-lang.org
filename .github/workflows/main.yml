@@ -6,6 +6,7 @@ on:
   pull_request:
 
 env:
+  # renovate: datasource=github-tags depName=rust lookupName=rust-lang/rust
   RUST_VERSION: 1.75.0
 
 jobs:
