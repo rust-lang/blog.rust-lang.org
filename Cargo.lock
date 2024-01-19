@@ -572,9 +572,9 @@ checksum = "b5320ae4c3782150d900b79807611a59a99fc9a1d61d686faafc24b93fc8d7ca"
 
 [[package]]
 name = "env_logger"
-version = "0.10.1"
+version = "0.10.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "95b3f3e67048839cb0d0781f445682a35113da7121f7c949db0e2be96a4fbece"
+checksum = "4cd405aab171cb85d6735e5c8d9db038c17d3ca007a4d2c25f337935c3d90580"
 dependencies = [
  "humantime",
  "is-terminal",
@@ -2259,9 +2259,9 @@ dependencies = [
 
 [[package]]
 name = "warpy"
-version = "0.3.38"
+version = "0.3.39"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "04f6cc9ff8e0f61390b907ca8c6217a8d2b94d566eb30b675cd1552423217ee6"
+checksum = "ab573201281dd655ec146c90f9549e8027fb8cae157acd81533423c1e1bc652a"
 dependencies = [
  "build_html",
  "chrono",
