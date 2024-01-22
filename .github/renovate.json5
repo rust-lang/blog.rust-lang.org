@@ -6,4 +6,12 @@
         ":semanticCommitsDisabled",
         "regexManagers:githubActionsVersions",
     ],
+    packageRules: [
+        {
+            matchPackageNames: [
+                "warpy",
+            ],
+            extends: ["schedule:weekly"],
+        }
+    ]
 }
