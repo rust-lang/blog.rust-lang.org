@@ -25,7 +25,7 @@ The Cargo team has been working to scale our processes to allow the number of pa
 - We are hoping that we can improve the contributor experience with smaller packages (faster to build and test) with clearer boundaries (easier to reason about)
 
 <!-- source: 2023-11-21 meeting -->
-We've had a couple breakages affecting people over the last while that we reflected on.  Examples include:
+We've had a couple of breakages affecting people over the last year while we reflected on some recent regressions.  Examples include:
 - When making future-incompatible updates to the output of `cargo metadata`, not coordinating with the third-party `cargo_metadata` API ([oli-obk/cargo_metadata#240](https://github.com/oli-obk/cargo_metadata/issues/240))
 - Confusion over dependencies on `cargo-credential` causing non-working dependency trees when building these packages from the crates.io ([rust-lang/cargo#13004](https://github.com/rust-lang/cargo/pull/13004))
 
@@ -301,9 +301,9 @@ But not having dependencies participate would be inconsistent.
 
 Discussing the prior art of `[profile]` also led to a discussion of having more than one set of values you can inherit from.
 We discussed a couple of ideas, including
-- Having named sets of that you inherit all-or-nothing (`inherits = "public-members"`)
+- Having named sets of fields that you inherit all-or-nothing (`inherits = "public-members"`)
 - Having named fields that you can inherit per-field (`rust-version.workspace = "public-members"`)
-- Naming other packages you can to inherit from, either whole or per field
+- Naming other packages you can inherit from, either whole or per field
 
 <!-- source: https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/warnings.20control.20option.20bikeshed -->
 <!-- this was actually in October
