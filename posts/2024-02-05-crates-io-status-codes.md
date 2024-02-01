@@ -5,7 +5,9 @@ author: Tobias Bieniek
 team: the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>
 ---
 
-When cargo and crates.io were first implemented, [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) were ignored. cargo assumed that crates.io would always respond with a "[200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200)" and any error messages are detected from the response JSON body. When crates.io responded with a different status code then cargo was showing the raw JSON body instead of a regular error message:
+Cargo and crates.io were developed in the rush leading up to the Rust 1.0 release to fill the needs for a tool to manage dependencies and a registry that people could use to share code. This rapid work resulted in these tools being connected with an API that initially didn't return the correct [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status). After the Rust 1.0 release, Rust's stability guarantees around backward compatibility made this non-trivial to fix, as we wanted older versions of cargo to continue working with the current crates.io API.
+
+When an old version of cargo receives a non-"[200 OK](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200)" response, it displays the raw JSON body like this:
 
 ```
 error: failed to get a 200 OK response, got 400
@@ -18,9 +20,11 @@ body:
 {"errors":[{"detail":"missing or empty metadata fields: description, license. Please see https://doc.rust-lang.org/cargo/reference/manifest.html for how to upload metadata"}]}
 ```
 
-This was improved in [cargo#6771](https://github.com/rust-lang/cargo/pull/6771), which was released in cargo 1.34 (mid-2019). Since then, cargo has supported [4xx](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#client_error_responses) and [5xx](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses) status codes too and extracts the error message from the JSON response, if available.
+This was improved in pull request [#6771](https://github.com/rust-lang/cargo/pull/6771), which was released in cargo 1.34 (mid-2019). Since then, cargo has supported receiving [4xx](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#client_error_responses) and [5xx](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses) status codes too and extracts the error message from the JSON response, if available.
 
-The crates.io team has decided to phase out these "200 OK" response status codes for error responses to make our API a little more intuitive. Since this can be seen as a breaking change to our API we decided to announce this change publicly, including a cut-off date. On **2024-03-04** we will switch the API from the previous "200 OK" behavior to the new 4xx/5xx behavior, for the endpoints that are used by `cargo`:
+On **2024-03-04** we will switch the API from returning "200 OK" status codes for errors to the new 4xx/5xx behavior. **cargo 1.33 and below will keep working after this change**, but will show the raw JSON body instead of a nicely formatted error message. We feel confident that this degraded error message display will not affect very many users.
+
+This is the list of API endpoints that will be affected by this change:
 
 - `GET /api/v1/crates`
 - `PUT /api/v1/crates/new`
@@ -32,4 +36,4 @@ The crates.io team has decided to phase out these "200 OK" response status codes
 
 All other endpoints have already been using regular HTTP status codes for some time.
 
-**cargo 1.33 and below will keep working after this change**, but will show the raw JSON response body instead of a regular error message. However, we recommend upgrading to a newer version of cargo to get the improved error messages and all the other nice things that the cargo team has built since then.
+If you are still using cargo 1.33 or older, we recommend upgrading to a newer version to get the improved error messages and all the other nice things that the cargo team has built since then.
