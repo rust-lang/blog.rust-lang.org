@@ -22,7 +22,7 @@ body:
 
 This was improved in pull request [#6771](https://github.com/rust-lang/cargo/pull/6771), which was released in Cargo 1.34 (mid-2019). Since then, Cargo has supported receiving [4xx](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#client_error_responses) and [5xx](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses) status codes too and extracts the error message from the JSON response, if available.
 
-On **2024-03-04** we will switch the API from returning "200 OK" status codes for errors to the new 4xx/5xx behavior. **Cargo 1.33 and below will keep working after this change**, but will show the raw JSON body instead of a nicely formatted error message. We feel confident that this degraded error message display will not affect very many users.
+On **2024-03-04** we will switch the API from returning "200 OK" status codes for errors to the new 4xx/5xx behavior. **Cargo 1.33 and below will keep working after this change**, but will show the raw JSON body instead of a nicely formatted error message. We feel confident that this degraded error message display will not affect very many users. According to the [crates.io request logs](https://p.datadoghq.com/sb/3a172e20-e9e1-11ed-80e3-da7ad0900002-973f4c1011257befa8598303217bfe3a) only very few requests are made by Cargo 1.33 and older versions.
 
 This is the list of API endpoints that will be affected by this change:
 
