@@ -39,7 +39,7 @@ Cargo can't be everything to everyone,
 if for no other reason than the compatibility guarantees it must uphold.
 Plugins play an important part of the Cargo ecosystem and we want to celebrate them.
 
-Our plugin for this cycle is [cargo-watch](https://crates.io/crates/cargo-watch) which will re-run cargo commands on source changes.
+Our featured plugin for this cycle is [cargo-watch](https://crates.io/crates/cargo-watch), which will re-run cargo commands on source changes.
 For a discussion on this being merged into cargo,
 see [#9339](https://github.com/rust-lang/cargo/issues/9339).
 
