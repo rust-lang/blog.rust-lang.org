@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Tyler Mandry as Lang Team co-lead"
+title: "Announcing Tyler Mandry as Lang Team co-lead"
 author: Niko Matsakis
 team: the lang design team <https://www.rust-lang.org/governance/teams/lang>
 ---
