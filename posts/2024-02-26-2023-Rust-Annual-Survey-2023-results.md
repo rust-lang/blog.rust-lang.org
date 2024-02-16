@@ -22,7 +22,7 @@ There's a lot of data to go through, so strap in and enjoy!
 |    2022    |      11 482 |         9 433 |               81.3% |    25 581 |
 |    2023    |      11 950 |         9 710 |               82.2% |    16 028 |
 
-As shown above, in 2023, we have received 37% fewer survey views in vs 2022, but saw a slight uptick in starts and completions. There are many reasons why this could have been the case, but it’s possible that because we released the [2022 analysis blog](https://blog.rust-lang.org/2023/08/07/Rust-Survey-2023-Results.html) so late last year, the survey was fresh in many Rustaceans’ minds. This might have prompted fewer people to feel the need to open the most recent survey.
+As shown above, in 2023, we have received 37% fewer survey views in vs 2022, but saw a slight uptick in starts and completions. There are many reasons why this could have been the case, but it’s possible that because we released the [2022 analysis blog](https://blog.rust-lang.org/2023/08/07/Rust-Survey-2023-Results.html) so late last year, the survey was fresh in many Rustaceans’ minds. This might have prompted fewer people to feel the need to open the most recent survey. Therefore, we find it doubly impressive that there were more starts and completions in 2023, despite the lower overall view count.
 
 ## Community
 
@@ -73,7 +73,7 @@ We have asked the group that selected “yes” which specific groups they ident
 </div>
 <!-- Chart which-marginalized-group end -->
 
-As Rust continues to grow, we must acknowledge the diversity, equity, and inclusivity (DEI)-related gaps that exist in the Rust community. Sadly, Rust is not unique in this regard. For instance, only 20% of 2023 respondents to this representation question consider themselves a member of a racial or ethnic minority and only 26% identify as a woman. We would like to see more equitable figures in these and other categories. In 2023, the Rust Foundation formed a diversity, equity, and inclusion subcommittee on its Board of Directors whose members are aware of these results and are actively discussing ways to better support underrepresented groups and also help ensure these numbers improve. We look forward to learning more about the DEI-related initiatives the Rust Foundation will help support. This data is a helpful place to start. [a]
+As Rust continues to grow, we must acknowledge the diversity, equity, and inclusivity (DEI)-related gaps that exist in the Rust community. Sadly, Rust is not unique in this regard. For instance, only 20% of 2023 respondents to this representation question consider themselves a member of a racial or ethnic minority and only 26% identify as a woman. We would like to see more equitable figures in these and other categories. In 2023, the Rust Foundation formed a diversity, equity, and inclusion subcommittee on its Board of Directors whose members are aware of these results and are actively discussing ways that the Foundation might be able to better support underrepresented groups in Rust and help make our ecosystem more globally inclusive. One of the central goals of the Rust Foundation board's subcommittee is to analyze information about our community to find out what gaps exist, so this information is a helpful place to start. This topic deserves much more depth than is possible here, but readers can expect more on the subject in the future.
 
 ## Rust usage
 
@@ -320,9 +320,7 @@ We are immensely grateful to those who participated in the 2023 State of Rust Su
 
 If you’d like to dig into more details, we recommend you to browse through the full [survey report][report].
 
-[report]: ../../../images/2024-02-rust-survey-2023/annual-survey-2023-report.pdf
-
-[a]Gracie to run this by DEI subcommittee
+[report]: https://raw.githubusercontent.com/rust-lang/surveys/main/surveys/2023-annual-survey/report/annual-survey-2023-report.pdf
 
 <!-- Chart scripts -->
 
