@@ -266,6 +266,8 @@ Thank you to all participants for your candid feedback which will go a long way 
 </div>
 <!-- Chart what-are-your-biggest-worries-about-rust end -->
 
+> Closed answers marked with N/A were not present in the previous (2022) version of the survey.
+
 In terms of features that Rust users want to be implemented, stabilized or improved, the most desired improvements are in the areas of traits (trait aliases, associated type defaults, etc.), const execution (generic const expressions, const trait methods, etc.) and async (async closures, coroutines).
 
 <!-- Chart which-features-do-you-want-stabilized start -->
