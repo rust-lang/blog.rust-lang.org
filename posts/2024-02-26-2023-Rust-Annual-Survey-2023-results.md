@@ -324,6 +324,6 @@ If you’d like to dig into more details, we recommend you to browse through the
 
 <!-- Chart scripts -->
 
-<script charset="utf-8" src="https://cdn.plot.ly/plotly-basic-2.29.0.min.js"></script>
+<script charset="utf-8" src="../../../scripts/plotly-basic-2.29.0.min.js"></script>
 
 <script src="../../../scripts/2024-02-rust-survey-2023/charts.js"></script>
