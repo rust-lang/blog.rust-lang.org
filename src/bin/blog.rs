@@ -1,10 +1,7 @@
-#[path = "lib.rs"]
-mod lib;
-
 pub fn main() -> eyre::Result<()> {
     color_eyre::install()?;
 
-    lib::main()?;
+    blog::main()?;
 
     println!(
         "blog has been generated; you can now serve its content by running\n\
