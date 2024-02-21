@@ -12,7 +12,7 @@ As of today, the organizations that have been accepted into the program have bee
 
 We have prepared a [list of project ideas][gsoc repo] that can serve as inspiration for potential GSoC contributors that would like to send a project proposal to the Rust organization. However, applicants can also come up with their own project ideas. You can discuss project ideas or try to find mentors in the [#gsoc][gsoc stream] Zulip stream. We have also prepared a [proposal guide][proposal guide] that should help you with preparing your project proposals.
 
-You can start discussing the project ideas with Rust Project maintainers immediately. The project proposal application period starts on 18. 3. 2024, and ends on 2. 4. 2024 at 18:00 UTC. Take note of that deadline, as there will be no extensions!
+You can start discussing the project ideas with Rust Project maintainers immediately. The project proposal application period starts on March 18, 2024, and ends on April 2, 2024 at 18:00 UTC. Take note of that deadline, as there will be no extensions!
 
 If you are interested in contributing to the Rust Project, we encourage you to check out our project idea list and send us a GSoC project proposal! Of course, you are also free to discuss these projects and/or try to move them forward even if you do not intend to (or cannot) participate in GSoC. We welcome all contributors to Rust, as there is always enough work to do.
 
