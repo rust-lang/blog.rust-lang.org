@@ -76,14 +76,14 @@ we switched from printing a `Created` status at the end to a `Creating` status a
 
 With the previous `Created`:
 ```console
-$ cargo new foo
+cargo new foo
       Adding `foo` as member of workspace at `/home/epage/src/personal/cargo`
 note: see more `Cargo.toml` keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
      Created binary (application) `foo` package
 ```
 With the new `Creating`:
 ```console
-$ cargo new foo
+cargo new foo
     Creating binary (application) `foo` package
       Adding `foo` as member of workspace at `/home/epage/src/personal/cargo`
 note: see more `Cargo.toml` keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
