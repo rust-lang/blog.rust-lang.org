@@ -12,9 +12,9 @@ Pages via GitHub Actions.
 To build the site locally:
 
 ```console
-> git clone https://github.com/rust-lang/blog.rust-lang.org
-> cd blog.rust-lang.org
-> cargo run
+$ git clone https://github.com/rust-lang/blog.rust-lang.org
+$ cd blog.rust-lang.org
+$ cargo run
 ```
 
 You could do it in release mode if you'd like, but it's pretty fast in debug.
@@ -23,13 +23,13 @@ From there, the generated HTML will be in a `site` directory.
 Open `site/index.html` in your web browser to view the site.
 
 ```console
-> firefox site/index.html
+$ firefox site/index.html
 ```
 
 You can also run a server, if you need to preview your changes on a different machine:
 
 ```console
-> cargo run -p serve
+$ cargo run -p serve
 Serving on: http://192.168.123.45:8000
 ```
 

@@ -125,7 +125,7 @@ Please give the steps for how to build your repository (platform, system depende
 <p>
 
 ```bash
-Paste the error the compiler is giving
+$ Paste the error the compiler is giving
 ```
 
 </p></details>
