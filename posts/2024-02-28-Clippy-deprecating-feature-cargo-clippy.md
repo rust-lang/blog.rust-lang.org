@@ -28,12 +28,14 @@ lint levels with tool lint attributes using the `clippy::` prefix:
 ```
 
 The implicit `feature = "cargo-clippy"` has only been kept for backwards
-compatibility, but will now be deprecated.
+compatibility, but will be deprecated in upcoming nightlies and later in
+`1.78.0`.
 
 ## Alternative
 
 As there is a rare [use case] for conditional compilation depending on Clippy,
-we will provide an alternative. So in the future you will be able to use:
+we will provide an alternative. So in the future (`1.78.0`) you will be able to
+use:
 
 ```rust
 #[cfg(clippy)]
@@ -41,10 +43,14 @@ we will provide an alternative. So in the future you will be able to use:
 
 ## Transitioning
 
+> Should you only use stable toolchains, you can wait with the transition until
+> Rust `1.78.0` (2024-05-02) is released.
+
 Should you have instances of `feature = "cargo-clippy"` in your code base, you
 will see a warning from the new Clippy lint
-[`clippy::deprecated_clippy_cfg_attr`][pr-12292]. This lint can automatically fix
-your code. So if you should see this lint triggering, just run:
+[`clippy::deprecated_clippy_cfg_attr`] available in the latest nightly Clippy.
+This lint can automatically fix your code. So if you should see this lint
+triggering, just run:
 
 ```
 cargo clippy --fix -- -Aclippy::all -Wclippy::deprecated_clippy_cfg_attr
@@ -85,6 +91,6 @@ deprecate the implicit `feature = "cargo-clippy"` config and replace it with the
 [`v0.0.97`]: https://github.com/rust-lang/rust-clippy/blob/61daf674eaf17f3b504c51f01b4ee63fac47dfcf/CHANGELOG.md?plain=0#0097--2016-11-03
 [rfc-3013]: https://github.com/rust-lang/rfcs/pull/3013
 [use case]: https://doc.rust-lang.org/clippy/configuration.html#disabling-evaluation-of-certain-code
-[pr-12292]: https://github.com/rust-lang/rust-clippy/pull/12292
+[`clippy::deprecated_clippy_cfg_attr`]: https://rust-lang.github.io/rust-clippy/master/index.html#/deprecated_clippy_cfg_attr
 [cargo-lints]: https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section
 [call for testing]: https://github.com/rust-lang/rfcs/pull/3013#issuecomment-1936648479
