@@ -2,7 +2,6 @@
 layout: post
 title: "Clippy: Deprecating `feature = \"cargo-clippy\"`"
 author: The Clippy Team
-release: true
 ---
 
 Since Clippy [`v0.0.97`] and before it was shipped with `rustup`, Clippy
