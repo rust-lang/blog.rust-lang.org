@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Rustdoc performance improvements"
-author: Joshua Nelson and Guillaume Gomez
+author: Jynn Nelson and Guillaume Gomez
 team: The Rustdoc Team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>
 ---
 

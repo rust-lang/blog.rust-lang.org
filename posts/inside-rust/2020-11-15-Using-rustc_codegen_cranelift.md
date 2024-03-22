@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using rustc_codegen_cranelift for debug builds"
-author: Joshua Nelson
+author: Jynn Nelson
 team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
 ---
 
@@ -80,7 +80,7 @@ EOF
 $ ../rustc_codegen_cranelift/build/cargo.sh build
     Finished dev [unoptimized + debuginfo] target(s) in 7.98s
 $ cargo +nightly-2020-10-31 build
-   Compiling cargo v0.50.0 (/home/joshua/cargo)
+   Compiling cargo v0.50.0 (/home/jyn/cargo)
     Finished dev [unoptimized + debuginfo] target(s) in 5.48s
 ```
 

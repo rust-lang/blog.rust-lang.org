@@ -1,6 +1,6 @@
 layout: post
 title: "Intra-doc links close to stabilization"
-author: Manish Goregaokar and Joshua Nelson
+author: Manish Goregaokar and Jynn Nelson
 team: the rustdoc team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>
 ---
 
@@ -48,7 +48,7 @@ At the time, persisting local scope information so that `rustdoc` invocations on
 
 ## What changed?
 
-Early in June, I (Joshua) got tired of not being able to use intra-doc links. I started investigating the issue to see if there was a fix. It was marked as [`E-hard`], so I wasn't expecting miracles, but I thought I might at least make a start on it.
+Early in June, I (Jynn) got tired of not being able to use intra-doc links. I started investigating the issue to see if there was a fix. It was marked as [`E-hard`], so I wasn't expecting miracles, but I thought I might at least make a start on it.
 
 It turns out there was a simple problem with the implementation - it assumed
 all items were in the current crate! Clearly, that's not always the case. [The fix][resolve-cross-crate] turned out to be easy enough that I could implement it as my first contribution to rustdoc.
@@ -66,7 +66,7 @@ fn main() {
 }
 ```
 ```
-thread 'rustc' panicked at 'called `Option::unwrap()` on a `None` value', /home/joshua/src/rust/src/librustc_hir/definitions.rs:358:9
+thread 'rustc' panicked at 'called `Option::unwrap()` on a `None` value', /home/jyn/src/rust/src/librustc_hir/definitions.rs:358:9
 ```
 
 ## HirIds and DefIds and trees, oh my!

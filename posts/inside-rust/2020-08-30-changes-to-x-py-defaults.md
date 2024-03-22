@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Changes to x.py defaults"
-author: Joshua Nelson
+author: Jynn Nelson
 team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
 ---
 
