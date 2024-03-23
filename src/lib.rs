@@ -10,7 +10,6 @@ use rayon::prelude::*;
 use sass_rs::{compile_file, Options};
 use serde_derive::Serialize;
 use serde_json::json;
-use std::convert::AsRef;
 use std::fs::{self, File};
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
