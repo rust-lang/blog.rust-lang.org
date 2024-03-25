@@ -198,7 +198,7 @@ and make it easier for crates.io to add more features to their frontend
 (e.g. [crates.io#5882](https://github.com/rust-lang/crates.io/issues/5882) 
 and [crates.io#814](https://github.com/rust-lang/crates.io/issues/814)).
 
-We hope to be able to build on that work to defer lints out of manifest parsing, allowing us to skip the lint analysis when its for a transitive dependency
+We hope to be able to build on that work to defer lints out of manifest parsing, allowing us to skip the lint analysis when its for a dependency
 (thanks to [cap-lints](https://doc.rust-lang.org/rustc/lints/levels.html#capping-lints)).
 
 ##### MSRV-aware Cargo
