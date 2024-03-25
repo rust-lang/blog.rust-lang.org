@@ -265,8 +265,9 @@ and in a team meeting, [#13558](https://github.com/rust-lang/cargo/pull/13558) w
 In this specific case, the problem is [Split Index](https://github.com/rust-lang/cargo/issues/10150).
 In particular, this is causing problems with vendoring packages with build scripts because the 
 [default behavior for build scripts is to re-run if any source has changed unless `cargo::rerun-if-changed` is emitted](https://doc.rust-lang.org/cargo/reference/build-scripts.html#rerun-if-changed).
-They are currently working around this by modifying vendored build scripts to emit a `cargo::rerun-if-changed`.
+They are currently working around this by modifying vendored packages to have a `package.include` field which disables Cargo's git walking.
 
+This will also affect `cargo package`.
 In discussing this, another scenario that can come up is any `cargo doc` invocation because `rustdoc`, unlike `rustc`, doesn't tell `cargo doc` what files were looked at, so `cargo doc` has to guess.
 
 One option is to walk the directory manually using the [`ignore`](https://crates.io/crates/ignore) package.
