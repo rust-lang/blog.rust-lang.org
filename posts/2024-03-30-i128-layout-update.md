@@ -2,12 +2,12 @@
 layout: post
 title: "Changes to `u128`/`i128` layout in 1.77 and 1.78"
 author: Trevor Gross
-team: Lang
+team: The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>
 ---
 
-Rust has long had an inconsistency with C regarding the alignment of 128-bit integers.
-This problem has recently been resolved, but the fix comes with some effects that are
-worth being aware of.
+Rust has long had an inconsistency with C regarding the alignment of 128-bit integers
+on the x86-32 and x86-64 architectures. This problem has recently been resolved, but
+the fix comes with some effects that are worth being aware of.
 
 As a user, you most likely do not need to worry about these changes unless you are:
 
@@ -18,9 +18,9 @@ There are also no changes to architectures other than x86-32 and x86-64. If your
 code makes heavy use of 128-bit integers, you may notice runtime performance increases
 at a possible cost of additional memory use.
 
-This post is intended to clarify what changed, why it changed, and what to expect. If
-you are only looking for a compatibility matrix, jump to the
-[Compatibility](#compatibility) section.
+This post documents what the problem was, what changed to fix it, and what to expect
+with the changes. If you are already familiar with the problem and only looking for a
+compatibility matrix, jump to the [Compatibility](#compatibility) section.
 
 # Background
 
@@ -32,13 +32,13 @@ The size of simple types like primitives is usually unambiguous, being the exact
 the data they represent with no padding (unused space). For example, an `i64` always has
 a size of 64 bits or 8 bytes.
 
-Alignment, however, can seem less consistent. An 8-byte integer _could_ reasonably be
-stored at any memory address (1-byte aligned), but most 64-bit computers will get the
-best performance if it is instead stored at a multiple of 8 (8-byte aligned). So, like
-in other languages, primitives in Rust have this most efficient alignment by default.
-The effects of this can be seen when creating composite types: [^composite-playground]
+Alignment, however, can vary. An 8-byte integer _could_ be stored at any memory address
+(1-byte aligned), but most 64-bit computers will get the best performance if it is
+instead stored at a multiple of 8 (8-byte aligned). So, like in other languages,
+primitives in Rust have this most efficient alignment by default. The effects of this
+can be seen when creating composite types ([playground link][composite-playground]):
 
-```rust=
+```rust
 use core::mem::{align_of, offset_of};
 
 #[repr(C)]
@@ -49,7 +49,7 @@ struct Foo {
 
 #[repr(C)]
 struct Bar {
-    a: u8,  // 1=byte aligned
+    a: u8,  // 1-byte aligned
     b: u64, // 8-byte aligned
 }
 
@@ -69,43 +69,44 @@ Alignment of Bar: 8
 ```
 
 We see that within a struct, a type will always be placed such that its offset is a
-multiple of its alignment.
+multiple of its alignment - even if this means unused space (Rust minimizes this by
+default when `repr(C)` is not used).
 
 These numbers are not arbitrary; the application binary interface (ABI) says what they
 should be. In the x86-64 [psABI] (processor-specific ABI) for System V (Unix & Linux),
 _Figure 3.1: Scalar Types_ tells us exactly how primitives should be represented:
 
-| C type           | Rust equivalent | `sizeof` | Alignment (bytes) |
-| ---------------- | --------------- | -------- | ----------------- |
-| `char`           | `i8`            | 1        | 1                 |
-| `unsigned char`  | `u8`            | 1        | 1                 |
-| `short`          | `i16`           | 2        | 2                 |
-| `unsigned short` | `u16`           | 2        | 2                 |
-| `long`           | `i64`           | 8        | 8                 |
-| `unsigned long`  | `u64`           | 8        | 8                 |
+| C type               | Rust equivalent | `sizeof` | Alignment (bytes) |
+| -------------------- | --------------- | -------- | ----------------- |
+| `char`               | `i8`            | 1        | 1                 |
+| `unsigned char`      | `u8`            | 1        | 1                 |
+| `short`              | `i16`           | 2        | 2                 |
+| **`unsigned short`** | **`u16`**       | **2**    | **2**             |
+| `long`               | `i64`           | 8        | 8                 |
+| **`unsigned long`**  | **`u64`**       | **8**    | **8**             |
 
 The ABI only specifies C types, but Rust follows the same definitions both for
 compatibility and for the performance benefits.
 
 # The Incorrect Alignment Problem
 
-It is easy to imagine that if two implementations disagree on the alignment of a data
-type, they would not be able to reliably share data containing that type. Well...
+If two implementations disagree on the alignment of a data type, they cannot reliably
+share data containing that type. Rust had inconsistent alignment for 128-bit types:
 
-```rust=
+```rust
 println!("alignment of i128: {}", align_of::<i128>());
 ```
 
-```text=
+```text
 // rustc 1.76.0
 alignment of i128: 8
 ```
 
-```c=
+```c
 printf("alignment of __int128: %zu\n", _Alignof(__int128));
 ```
 
-```text=
+```text
 // gcc 13.2
 alignment of __int128: 16
 
@@ -113,8 +114,8 @@ alignment of __int128: 16
 alignment of __int128: 16
 ```
 
-Looks like Rust disagrees![^align-godbolt] Looking back at the [psABI], we can see that
-Rust indeed is in the wrong here:
+([Godbolt link][align-godbolt]) Looking back at the [psABI], we can see that Rust has
+the wrong alignment here:
 
 | C type              | Rust equivalent | `sizeof` | Alignment (bytes) |
 | ------------------- | --------------- | -------- | ----------------- |
@@ -125,7 +126,7 @@ It turns out this isn't because of something that Rust is actively doing incorre
 layout of primitives comes from the LLVM codegen backend used by both Rust and Clang,
 among other languages, and it has the alignment for `i128` hardcoded to 8 bytes.
 
-Clang does not have this issue only because of a workaround, where the alignment is
+Clang uses the correct alignment only because of a workaround, where the alignment is
 manually set to 16 bytes before handing the type to LLVM. This fixes the layout issue
 but has been the source of some other minor problems.[^f128-segfault][^va-segfault]
 Rust does no such manual adjustement, hence the issue reported at
@@ -133,13 +134,14 @@ Rust does no such manual adjustement, hence the issue reported at
 
 # The Calling Convention Problem
 
-It happens that there an additional problem: LLVM does not always do the correct thing
-when passing 128-bit integers as function arguments. This was a [known issue in LLVM],
-before its [relevance to Rust was discovered].
+There is an additional problem: LLVM does not always do the correct thing when passing
+128-bit integers as function arguments. This was a [known issue in LLVM], before its
+[relevance to Rust was discovered].
 
-When calling a function, the arguments get passed in registers until there are no more
-slots, then they get "spilled" to the stack. The ABI tells us what to do here as well,
-in the section _3.2.3 Parameter Passing_:
+When calling a function, the arguments get passed in registers (special storage
+locations within the CPU) until there are no more slots, then they get "spilled" to
+the stack (the program's memory). The ABI tells us what to do here as well, in the
+section _3.2.3 Parameter Passing_:
 
 > Arguments of type `__int128` offer the same operations as INTEGERs, yet they do not
 > fit into one general purpose register but require two registers. For classification
@@ -159,12 +161,11 @@ example, inline assembly is used to call `foo(0xaf, val, val, val)` with `val` a
 `0x0x11223344556677889900aabbccddeeff`.
 
 x86-64 uses the registers `rdi`, `rsi`, `rdx`, `rcx`, `r8`, and `r9` to pass function
-arguments, in that order (you guessed it, this is also in the ABI). Each argument
-fits a word (64 bits), and anything that doesn't fit gets `push`ed to the
-stack.
+arguments, in that order (you guessed it, this is also in the ABI). Each register
+fits a word (64 bits), and anything that doesn't fit gets `push`ed to the stack.
 
-```c=
-/* full example at https://godbolt.org/z/zGaK1T96c */
+```c
+/* full example at <https://godbolt.org/z/5c8cb5cxs> */
 
 /* to see the issue, we need a padding value to "mess up" argument alignment */
 void foo(char pad, __int128 a, __int128 b, __int128 c) {
@@ -176,7 +177,9 @@ void foo(char pad, __int128 a, __int128 b, __int128 c) {
 
 int main() {
     asm(
-        "movl    $0xaf, %edi \n\t"                /* 1st slot (edi): padding char */
+        /* load arguments that fit in registers */
+        "movl    $0xaf, %edi \n\t"                /* 1st slot (edi): padding char (`edi` is the
+                                                   * same as `rdi`, just a smaller access size) */
         "movq    $0x9900aabbccddeeff, %rsi \n\t"  /* 2rd slot (rsi): lower half of `a` */
         "movq    $0x1122334455667788, %rdx \n\t"  /* 3nd slot (rdx): upper half of `a` */
         "movq    $0x9900aabbccddeeff, %rcx \n\t"  /* 4th slot (rcx): lower half of `b` */
@@ -187,6 +190,7 @@ int main() {
         /* reuse our stored registers to load the stack */
         "pushq   %rdx \n\t"                       /* upper half of `c` gets passed on the stack */
         "pushq   %rsi \n\t"                       /* lower half of `c` gets passed on the stack */
+
         "call    foo \n\t"                        /* call the function */
         "addq    $16, %rsp \n\t"                  /* reset the stack */
     );
@@ -209,15 +213,17 @@ But running with Clang 17 prints:
 0x11223344556677889900aabbccddeeff
 0x11223344556677889900aabbccddeeff
 0x9900aabbccddeeffdeadbeef4c0ffee0
+//^^^^^^^^^^^^^^^^ this should be the lower half
+//                ^^^^^^^^^^^^^^^^ look familiar?
 ```
 
 Surprise!
 
 This illustrates the second problem: LLVM expects an `i128` to be passed half in a
-register and half on the stack, but this is not allowed by the ABI.
+register and half on the stack when possible, but this is not allowed by the ABI.
 
-Since this comes from LLVM and has no reasonable workaround, this is a problem in
-both Clang and Rust.
+Since the behavior comes from LLVM and has no reasonable workaround, this is a
+problem in both Clang and Rust.
 
 # Solutions
 
@@ -231,17 +237,28 @@ Both of these changes made it into LLVM 18, meaning all relevant ABI issues will
 resolved in both Clang and Rust that use this version (Clang 18 and Rust 1.78 when using
 the bundled LLVM).
 
-However, `rustc` can also use the version of LLVM installed in the system rather than a
-bundled version, which may be older. To mitigate the change of problems from differing
+However, `rustc` can also use the version of LLVM installed on the system rather than a
+bundled version, which may be older. To mitigate the chance of problems from differing
 alignment with the same `rustc` version, [a proposal] was introduced to manually
-correct the alignment, like Clang has been doing. This was implemented by Matthew Maurer
+correct the alignment like Clang has been doing. This was implemented by Matthew Maurer
 in [#11672].
+
+Since these changes, Rust now produces the correct alignment:
+
+```rust
+println!("alignment of i128: {}", align_of::<i128>());
+```
+
+```text
+// rustc 1.77.0
+alignment of i128: 16
+```
 
 As mentioned above, part of the reason for an ABI to specify the alignment of a datatype
 is because it is more efficient on that architecture. We actually got to see that
 firsthand: the [initial performance run] with the manual alignment change showed
 nontrivial improvements to compiler performance (which relies heavily on 128-bit
-integers to store integer literals). The downside of increasing alignment is that
+integers to work with integer literals). The downside of increasing alignment is that
 composite types do not always fit together as nicely in memory, leading to an increase
 in usage. Unfortunately this meant some of the performance wins needed to be sacrificed
 to avoid an increased memory footprint.
@@ -252,7 +269,7 @@ to avoid an increased memory footprint.
 [D28990]: https://reviews.llvm.org/D28990
 [D86310]: https://reviews.llvm.org/D86310
 
-# Compatibilty
+# Compatibility
 
 The most imporant question is how compatibility changed as a result of these fixes. In
 short, `i128` and `u128` with Rust using LLVM 18 (the default version starting with
@@ -279,20 +296,21 @@ are summarized in the table below:
 
 # Effects & Future Steps
 
-As mentioned in the introduction, most users will see no effects of this change
+As mentioned in the introduction, most users will notice no effects of this change
 unless you are already doing something questionable with these types.
 
 Starting with Rust 1.77, it will be reasonably safe to start experimenting with
 128-bit integers in FFI, with some more certainty coming with the LLVM update
 in 1.78. There is [ongoing discussion] about lifting the lint in an upcoming
-version, but it remains to be seen when that will actually happen.
+version, but we want to be cautious and avoid introducing silent breakage for users
+whose Rust compiler may be built with an older LLVM.
 
 [relevance to Rust was discovered]: https://github.com/rust-lang/rust/issues/54341#issuecomment-1064729606
 [initial performance run]: https://github.com/rust-lang/rust/pull/116672/#issuecomment-1858600381
 [known issue in llvm]: https://github.com/llvm/llvm-project/issues/41784
 [psabi]: https://www.uclibc.org/docs/psABI-x86_64.pdf
 [ongoing discussion]: https://github.com/rust-lang/lang-team/issues/255
-[^align-godbolt]: https://godbolt.org/z/h94Ge1vMW
-[^composite-playground]: https://play.rust-lang.org/?version=beta&mode=debug&edition=2021&gist=c263ae121912284d3ba553290caa6778
+[align-godbolt]: https://godbolt.org/z/h94Ge1vMW
+[composite-playground]: https://play.rust-lang.org/?version=beta&mode=debug&edition=2021&gist=52f349bdea92bf724bc453f37dbd32ea
 [^va-segfault]: https://github.com/llvm/llvm-project/issues/20283
 [^f128-segfault]: https://bugs.llvm.org/show_bug.cgi?id=50198
