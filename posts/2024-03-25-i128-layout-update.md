@@ -213,6 +213,8 @@ But running with Clang 17 prints:
 0x11223344556677889900aabbccddeeff
 0x11223344556677889900aabbccddeeff
 0x9900aabbccddeeffdeadbeef4c0ffee0
+//^^^^^^^^^^^^^^^^ this should be the lower half
+//                ^^^^^^^^^^^^^^^^ look familiar?
 ```
 
 Surprise!
