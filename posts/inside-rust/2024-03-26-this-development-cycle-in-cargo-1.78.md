@@ -165,6 +165,9 @@ in Cargo which was merged in
 behind the 
 [`CARGO_LOG_PROFILE` environment variable](https://doc.crates.io/contrib/tests/profiling.html).
 
+![rendering of traces for building cargo](../../../../images/inside-rust/2024-03-26-this-development-cycle-in-cargo-1.78/cargo-profile.png)
+*(rendering of traces for building `cargo`)*
+
 epage tried this out on
 [cargo-nextest](https://crates.io/crates/cargo-nextest)
 and took notes on
