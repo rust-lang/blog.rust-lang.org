@@ -68,6 +68,7 @@ and integrated that into snapbox
 which we use for snapshoting our UI tests.
 
 ![rendering of cargo-add's output using SVG](../../../../images/inside-rust/2024-03-26-this-development-cycle-in-cargo-1.78/stderr.term.svg)
+*(not a screenshot but generated from cargo's output)*
 
 While this verified most of Cargo's terminal styling, we couldn't force styling on within `--help` to snapshot it.
 While we added styling to `--help` in
