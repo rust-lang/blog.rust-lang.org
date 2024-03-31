@@ -241,7 +241,7 @@ However, `rustc` can also use the version of LLVM installed on the system rather
 bundled version, which may be older. To mitigate the chance of problems from differing
 alignment with the same `rustc` version, [a proposal] was introduced to manually
 correct the alignment like Clang has been doing. This was implemented by Matthew Maurer
-in [#11672].
+in [#116672].
 
 Since these changes, Rust now produces the correct alignment:
 
@@ -264,7 +264,7 @@ in usage. Unfortunately this meant some of the performance wins needed to be sac
 to avoid an increased memory footprint.
 
 [a proposal]: https://github.com/rust-lang/compiler-team/issues/683
-[#11672]: https://github.com/rust-lang/rust/pull/116672/
+[#116672]: https://github.com/rust-lang/rust/pull/116672/
 [D158169]: https://reviews.llvm.org/D158169
 [D28990]: https://reviews.llvm.org/D28990
 [D86310]: https://reviews.llvm.org/D86310
