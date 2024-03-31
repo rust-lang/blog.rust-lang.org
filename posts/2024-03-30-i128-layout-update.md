@@ -158,7 +158,7 @@ section _3.2.3 Parameter Passing_:
 
 We can try this out by implementing the calling convention manually. In the below C
 example, inline assembly is used to call `foo(0xaf, val, val, val)` with `val` as
-`0x0x11223344556677889900aabbccddeeff`.
+`0x11223344556677889900aabbccddeeff`.
 
 x86-64 uses the registers `rdi`, `rsi`, `rdx`, `rcx`, `r8`, and `r9` to pass function
 arguments, in that order (you guessed it, this is also in the ABI). Each register
