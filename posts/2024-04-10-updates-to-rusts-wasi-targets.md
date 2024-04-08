@@ -7,9 +7,18 @@ author: Yosh Wuyts
 [WASI 0.2 was recently
 stabilized](https://bytecodealliance.org/articles/WASI-0.2), and Rust has begun
 implementing first-class support for it in the form of a dedicated new target.
-In this post we'll discuss the introduction of the new target, what that means
-for the older targets, and the schedule by which we plan to roll out these
-changes.
+Rust 1.78 will introduce new `wasm32-wasip1` (tier 2) and `wasm32-wasip2` (tier
+3) targets. `wasm32-wasip1` is an effective rename of the existing `wasm32-wasi`
+target, freeing the target name up for an eventual WASI 1.0 release. **Starting
+Rust 1.78 (May 2nd, 2024), users of WASI 0.1 are encouraged to begin migrating
+to the new `wasm32-wasip1` target before the existing `wasm32-wasi` target is
+removed in Rust 1.84 (January 5th, 2025).**
+
+In this post we'll discuss the introduction of the new targets, the motivation
+behind it, what that means for the existing WASI targets, and a detailed
+schedule for these changes. This post is about the WASI targets only; the
+existing `wasm32-unknown-unknown` and `wasm32-unknown-emscripten` targets are
+unaffected by any changes in this post.
 
 ## Introducing `wasm32-wasip2`
 
