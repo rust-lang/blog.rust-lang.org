@@ -57,7 +57,7 @@ between target names, we'll begin rolling out a name change to the existing WASI
 0.1 target. Starting in Rust 1.78 (May 2nd, 2024) a new `wasm32-wasip1` target
 will become available. Starting Rust 1.81 we will begin warning existing users
 of `wasm32-wasi` to migrate to `wasm32-wasip1`. And finally in Rust 1.84
-(January 9th, 2025) the `wasm32-wasi` target will no shipped on the stable
+(January 9th, 2025) the `wasm32-wasi` target will no longer be shipped on the stable
 release channel. This will provide an 8 month transition period for projects to
 switch to the new target name when they update their Rust toolchains.
 
