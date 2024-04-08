@@ -55,11 +55,12 @@ target can just be called `wasm32-wasi`.
 In anticipation of both an eventual WASI 1.0 target, and to preserve consistency
 between target names, we'll begin rolling out a name change to the existing WASI
 0.1 target. Starting in Rust 1.78 (May 2nd, 2024) a new `wasm32-wasip1` target
-will become available. Starting Rust 1.81 we will begin warning existing users
-of `wasm32-wasi` to migrate to `wasm32-wasip1`. And finally in Rust 1.84
-(January 9th, 2025) the `wasm32-wasi` target will no longer be shipped on the stable
-release channel. This will provide an 8 month transition period for projects to
-switch to the new target name when they update their Rust toolchains.
+will become available. Starting Rust 1.81 (September 5th, 2024) we will begin
+warning existing users of `wasm32-wasi` to migrate to `wasm32-wasip1`. And
+finally in Rust 1.84 (January 9th, 2025) the `wasm32-wasi` target will no longer
+be shipped on the stable release channel. This will provide an 8 month
+transition period for projects to switch to the new target name when they update
+their Rust toolchains.
 
 The name `wasip1` can be read as either "WASI (zero) point one" or "WASI preview
 one". The official specification uses the "preview" moniker, however in most
@@ -94,9 +95,10 @@ The tier 3 `wasm32-wasip2` target will also be made available in Rust 1.78.
 
 In this post we've discussed the upcoming updates to Rust's WASI targets. Come
 Rust 1.78 the `wasm32-wasip1` (tier 2) and `wasm32-wasip2` (tier 3) targets will
-be added. In Rust 1.81 we will begin warning if `wasm32-wasi` is being used. And in Rust 1.84, the existing `wasm32-wasi` target will be removed.
-Users will have 8 months to switch to the new target name when they update their
-Rust toolchains.
+be added. In Rust 1.81 we will begin warning if `wasm32-wasi` is being used. And
+in Rust 1.84, the existing `wasm32-wasi` target will be removed. This will free
+up `wasm32-wasi` to eventually be used for a WASI 1.0 target. Users will have 8
+months to switch to the new target name when they update their Rust toolchains.
 
 The `wasm32-wasip2` target marks the start of native support for WASI 0.2. In
 order to target it today from Rust, people are encouraged to use
