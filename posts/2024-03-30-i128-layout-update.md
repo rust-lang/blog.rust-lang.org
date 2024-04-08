@@ -312,5 +312,5 @@ whose Rust compiler may be built with an older LLVM.
 [ongoing discussion]: https://github.com/rust-lang/lang-team/issues/255
 [align-godbolt]: https://godbolt.org/z/h94Ge1vMW
 [composite-playground]: https://play.rust-lang.org/?version=beta&mode=debug&edition=2021&gist=52f349bdea92bf724bc453f37dbd32ea
-[^va-segfault]: https://github.com/llvm/llvm-project/issues/20283
-[^f128-segfault]: https://bugs.llvm.org/show_bug.cgi?id=50198
+[^va-segfault]: <https://github.com/llvm/llvm-project/issues/20283>
+[^f128-segfault]: <https://bugs.llvm.org/show_bug.cgi?id=50198>
