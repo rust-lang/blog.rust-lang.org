@@ -36,7 +36,7 @@ tool. This tool is able to take WASI 0.1 binaries, and transform them to WASI 0.
 Components using a shim. It also provides native support for common cargo
 commands such as `cargo build`, `cargo test`, and `cargo run`. While it
 introduces some inefficiencies because of the additional translation layer, in
-practice this already works really well and people should be enough able to get
+practice this already works really well and people should be able to get
 started with WASI 0.2 development.
 
 We're however keen to begin making that translation layer obsolete. And for
@@ -46,7 +46,7 @@ that with the introduction of the [tier
 target landing in Rust 1.78. **This will initially miss a lot of expected**
 **features such as stdlib support, and we don't recommend people use this target**
 **quite yet.** But as we fill in those missing features over the coming months, we
-aim to eventually hit meet the criteria to become a tier 2 target, at which
+aim to eventually meet the criteria to become a tier 2 target, at which
 point the `wasm32-wasip2` target would be considered ready for general use. This
 work will happen through 2024, and we expect for this to land before the end of
 the calendar year.
@@ -117,4 +117,4 @@ at which point `cargo-component` will be upgraded to support it natively instead
 
 With WASI 0.2 finally stable, it's an exciting time for WebAssembly development.
 We're happy for Rust to begin implementing native support for WASI 0.2, and
-we're excited for what this will enable people to build.
+we're excited about what this will enable people to build.
