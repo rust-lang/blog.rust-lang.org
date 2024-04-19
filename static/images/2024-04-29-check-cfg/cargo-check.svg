@@ -1,0 +1,79 @@
+<svg width="768px" height="506px" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .fg { fill: #AAAAAA }
+    .bg { background: #000000 }
+    .fg-ansi256-012 { fill: #5555FF }
+    .fg-green { fill: #00AA00 }
+    .fg-yellow { fill: #AA5500 }
+    .container {
+      padding: 0 10px;
+      line-height: 18px;
+    }
+    .bold { font-weight: bold; }
+    tspan {
+      font: 14px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+      white-space: pre;
+      line-height: 18px;
+    }
+  </style>
+
+  <rect width="100%" height="100%" y="0" rx="4.5" class="bg" />
+
+  <text xml:space="preserve" class="container fg">
+    <tspan x="10px" y="28px"><tspan class="fg-green bold">    Checking</tspan><tspan> foo v0.0.0 (/tmp/foo)</tspan>
+</tspan>
+    <tspan x="10px" y="46px"><tspan class="fg-yellow bold">warning</tspan><tspan class="bold">: unexpected `cfg` condition value: `monkeys`</tspan>
+</tspan>
+    <tspan x="10px" y="64px"><tspan> </tspan><tspan class="fg-ansi256-012 bold">--&gt; </tspan><tspan>src/lib.rs:5:7</tspan>
+</tspan>
+    <tspan x="10px" y="82px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">|</tspan>
+</tspan>
+    <tspan x="10px" y="100px"><tspan class="fg-ansi256-012 bold">5</tspan><tspan> </tspan><tspan class="fg-ansi256-012 bold">|</tspan><tspan> #[cfg(feature = "monkeys")]</tspan>
+</tspan>
+    <tspan x="10px" y="118px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">| </tspan><tspan>      </tspan><tspan class="fg-yellow bold">^^^^^^^^^^^^^^^^^^^</tspan>
+</tspan>
+    <tspan x="10px" y="136px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">|</tspan>
+</tspan>
+    <tspan x="10px" y="154px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">= </tspan><tspan class="bold">note</tspan><tspan>: expected values for `feature` are: `lasers`, `zapping`</tspan>
+</tspan>
+    <tspan x="10px" y="172px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">= </tspan><tspan class="bold">help</tspan><tspan>: consider adding `monkeys` as a feature in `Cargo.toml`</tspan>
+</tspan>
+    <tspan x="10px" y="190px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">= </tspan><tspan class="bold">note</tspan><tspan>: see &lt;https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#check-cfg&gt;</tspan>
+</tspan>
+    <tspan x="10px" y="208px"><tspan>    for more information about checking conditional configuration</tspan>
+</tspan>
+    <tspan x="10px" y="226px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">= </tspan><tspan class="bold">note</tspan><tspan>: `#[warn(unexpected_cfgs)]` on by default</tspan>
+</tspan>
+    <tspan x="10px" y="244px">
+</tspan>
+    <tspan x="10px" y="262px"><tspan class="fg-yellow bold">warning</tspan><tspan class="bold">: unexpected `cfg` condition name: `windosw`</tspan>
+</tspan>
+    <tspan x="10px" y="280px"><tspan> </tspan><tspan class="fg-ansi256-012 bold">--&gt; </tspan><tspan>src/lib.rs:9:7</tspan>
+</tspan>
+    <tspan x="10px" y="298px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">|</tspan>
+</tspan>
+    <tspan x="10px" y="316px"><tspan class="fg-ansi256-012 bold">9</tspan><tspan> </tspan><tspan class="fg-ansi256-012 bold">|</tspan><tspan> #[cfg(windosw)]</tspan>
+</tspan>
+    <tspan x="10px" y="334px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">| </tspan><tspan>      </tspan><tspan class="fg-yellow bold">^^^^^^^</tspan><tspan> </tspan><tspan class="fg-yellow bold">help: there is a config with a similar name: `windows`</tspan>
+</tspan>
+    <tspan x="10px" y="352px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">|</tspan>
+</tspan>
+    <tspan x="10px" y="370px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">= </tspan><tspan class="bold">help</tspan><tspan>: consider using a Cargo feature instead or adding</tspan>
+</tspan>
+    <tspan x="10px" y="388px"><tspan>    `println!("cargo:rustc-check-cfg=cfg(windosw)");` to the top of a `build.rs`</tspan>
+</tspan>
+    <tspan x="10px" y="406px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">= </tspan><tspan class="bold">note</tspan><tspan>: see &lt;https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#check-cfg&gt;</tspan>
+</tspan>
+    <tspan x="10px" y="424px"><tspan>    for more information about checking conditional configuration</tspan>
+</tspan>
+    <tspan x="10px" y="442px">
+</tspan>
+    <tspan x="10px" y="460px"><tspan class="fg-yellow bold">warning</tspan><tspan class="bold">:</tspan><tspan> `foo` (lib) generated 2 warnings</tspan>
+</tspan>
+    <tspan x="10px" y="478px"><tspan class="fg-green bold">    Finished</tspan><tspan> `dev` profile [unoptimized + debuginfo] target(s) in 0.08s</tspan>
+</tspan>
+    <tspan x="10px" y="496px">
+</tspan>
+  </text>
+
+</svg>
