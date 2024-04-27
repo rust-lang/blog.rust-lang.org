@@ -80,5 +80,14 @@ resource-constrained environments.
 
 rustc will use `rust-lld` on `x86_64-unknown-linux-gnu` nightlies, for much improved linking times.
 Let us know if you encounter problems, by [opening an
-issue](https://github.com/rust-lang/rust/issues/new/choose) on github. If that happens, you can
-revert to the default linker with the `-Z linker-features=-lld` flag.
+issue](https://github.com/rust-lang/rust/issues/new/choose) on GitHub.
+
+If that happens, you can revert to the default linker with the `-Z linker-features=-lld` flag.
+Either by adding it to the usual `RUSTFLAGS` environment variable, or to a project's
+[`.cargo/config.toml`](https://doc.rust-lang.org/cargo/reference/config.html) configuration file,
+like so:
+
+```toml
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-Zlinker-features=-lld"]
+```
