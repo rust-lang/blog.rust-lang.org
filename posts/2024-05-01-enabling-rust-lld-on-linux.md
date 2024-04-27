@@ -2,7 +2,7 @@
 layout: post
 title: Faster linking times on nightly on linux with `rust-lld`
 author: Rémy Rakic
-team: The compiler performance working group <https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance>
+team: the compiler performance working group <https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance>
 ---
 
 TL;DR: rustc will use `rust-lld` by default on `x86_64-unknown-linux-gnu` on nightly to
@@ -48,7 +48,7 @@ benefit is much improved linking times.
 Here are more details from the ripgrep example mentioned above: linking is reduced 7x, resulting in
 a 40% reduction in end-to-end compilation times.
 
-![Before/after comparison of a `ripgrep` debug build](../../../../images/inside-rust/2024-05-01-enabling-rust-lld-on-linux/ripgrep-comparison.png)
+![Before/after comparison of a `ripgrep` debug build](../../../../images/2024-05-01-enabling-rust-lld-on-linux/ripgrep-comparison.png)
 
 Most binaries should see some improvements here, but it's especially significant with e.g. bigger
 binaries, or when involving debuginfo. These usually see bottlenecks in the linker.
@@ -62,7 +62,7 @@ If testing goes well, we can then stabilize using this faster linker by default 
 
 #### Possible drawbacks
 
-From our prior testing, we don't really expect issues to happen in practice. it is a drop-in
+From our prior testing, we don't really expect issues to happen in practice. It is a drop-in
 replacement for the vast majority of cases, but `lld` is not _bug-for-bug_ compatible with GNU ld.
 
 In any case, using `rust-lld` can be disabled if any problem occurs: use the `-Z
