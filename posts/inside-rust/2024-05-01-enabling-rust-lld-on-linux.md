@@ -79,5 +79,6 @@ resource-constrained environments.
 #### Summary
 
 rustc will use `rust-lld` on `x86_64-unknown-linux-gnu` nightlies, for much improved linking times.
-Let us know if you encounter problems, by opening an issue on github. If that happens, you can
+Let us know if you encounter problems, by [opening an
+issue](https://github.com/rust-lang/rust/issues/new/choose) on github. If that happens, you can
 revert to the default linker with the `-Z linker-features=-lld` flag.
