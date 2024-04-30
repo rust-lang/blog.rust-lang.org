@@ -35,8 +35,8 @@ popular targets. This has been discussed for a long time, for example in issues
 [#71515](https://github.com/rust-lang/rust/issues/71515), and rustc already offers nightly flags to
 use `rust-lld`.
 
-By now, we believe we've done all the internal testing that we could, on CI, crater, our
-benchmarking infrastructure, and would like to expand testing and gather real-world feedback and
+By now, we believe we've done all the internal testing that we could, on CI, crater, and our
+benchmarking infrastructure. We would now like to expand testing and gather real-world feedback and
 use-cases. Therefore, we will enable `rust-lld` to be the linker used by default on
 `x86_64-unknown-linux-gnu` for nightly builds.
 
