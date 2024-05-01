@@ -17,9 +17,17 @@ In many cases, we had multiple proposals that aimed to accomplish the same goal.
 In the end, we narrowed the list down to twelve best proposals, which we felt was the maximum amount that we could realistically support with our available mentor pool. We submitted this list and eagerly awaited how many of these twelve proposals would be accepted into GSoC.
 
 ## Selected projects
-On the 1st of May, Google has announced the accepted projects. We are happy to announce that `TODO` of our proposals have been accepted by Google, and will thus participate in Google Summer of Code 2024! Below you can find the list of accepted proposals, along with the names of their authors and the assigned mentor(s):
+On the 1st of May, Google has announced the accepted projects. We are happy to announce that `9` proposals out of the twelve that we have submitted were accepted by Google, and will thus participate in Google Summer of Code 2024! Below you can find the list of accepted proposals (in alphabetical order), along with the names of their authors and the assigned mentor(s):
 
-TODO
+- **Adding lint-level configuration to cargo-semver-checks** by Max Carr, mentored by Predrag Gruevski
+- **Implementation of a Faster Register Allocator For Cranelift** by d-sonuga, mentored by Chris Fallin and Amanieu d'Antras
+- **Improve Rust benchmark suite** by s7tya, mentored by Jakub Beránek
+- **Move cargo shell completions to Rust** by shanmu, mentored by Ed Page
+- **Rewriting Esoteric, Error-Prone Makefile Tests Using Robust Rust Features**	by Julien Robert, mentored by Jieyou Xu
+- **Rewriting the Rewrite trait** by SeoYoung Lee, mentored by Yacin Tmimi
+- **Rust to .NET compiler - add support for compiling & running cargo tests** by Fractal Fir, mentored by Jack Huey
+- **Sandboxed and Deterministic Proc Macro using Wasm** by Apurva Mishra, mentored by David Lattimore
+- **Tokio async support in Miri** by Tiffany Pek Yuan, mentored by Oli Scherer
 
 **Congratulations to all applicants whose project was selected!** The mentors are looking forward to working with you on these exciting projects to improve the Rust ecosystem. You can expect to hear from us soon, so that we can start coordinating the work on your GSoC projects. 
 
