@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Faster linking times on nightly on linux with `rust-lld`
+title: Faster linking times on nightly on Linux using `rust-lld`
 author: Rémy Rakic
 team: the compiler performance working group <https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance>
 ---
@@ -17,14 +17,14 @@ changed on the command-line or by the target for which the code is compiled).
 The linkers do an important job, with concerns about stability, backwards-compatibility and so on.
 For these and other reasons, on the most popular operating systems they usually are older programs,
 designed when computers only had a single core. So, they usually tend to be slow on a modern
-machine. For example, when building ripgrep 13 in debug mode on linux, roughly half of the time is
+machine. For example, when building ripgrep 13 in debug mode on Linux, roughly half of the time is
 actually spent in the linker.
 
 There are different linkers, however, and the usual advice to improve linking times is to use one of
 these newer and faster linkers, like LLVM's [`lld`](https://lld.llvm.org/) or Rui Ueyama's
 [`mold`](https://github.com/rui314/mold).
 
-Some of rust's wasm and aarch64 targets already use `lld` by default. When using rustup, rustc ships
+Some of Rust's wasm and aarch64 targets already use `lld` by default. When using rustup, rustc ships
 with a version of `lld` for this purpose. When CI builds LLVM to use in the compiler, it also builds
 the linker and packages it. It's referred to as `rust-lld` to avoid colliding with any `lld` already
 installed on the user's machine.
