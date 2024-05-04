@@ -60,7 +60,7 @@
 </tspan>
     <tspan x="10px" y="370px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">= </tspan><tspan class="bold">help</tspan><tspan>: consider using a Cargo feature instead or adding</tspan>
 </tspan>
-    <tspan x="10px" y="388px"><tspan>    `println!("cargo:rustc-check-cfg=cfg(windosw)");` to the top of a `build.rs`</tspan>
+    <tspan x="10px" y="388px"><tspan>    `println!("cargo::rustc-check-cfg=cfg(windosw)");` to the top of a `build.rs`</tspan>
 </tspan>
     <tspan x="10px" y="406px"><tspan>  </tspan><tspan class="fg-ansi256-012 bold">= </tspan><tspan class="bold">note</tspan><tspan>: see &lt;https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#check-cfg&gt;</tspan>
 </tspan>
