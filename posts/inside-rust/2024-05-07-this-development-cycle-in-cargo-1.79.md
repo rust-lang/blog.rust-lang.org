@@ -115,6 +115,8 @@ We ended up stripping unused optional dependencies from the published `Cargo.tom
 The way this was done also means they won't show up in `Cargo.lock` like unused `workspace.dependencies`.
 As a side effect, some lints may not run against these dependencies.
 
+![rendering of unused optional dependency lint](../../../../images/inside-rust/2024-05-07-this-development-cycle-in-cargo-1.79/lint.stdout.term.svg)
+
 ##### MSRV-aware Cargo
 
 *[Update from 1.78](https://blog.rust-lang.org/inside-rust/2024/03/26/this-development-cycle-in-cargo-1.78.html#msrv-aware-cargo)*
