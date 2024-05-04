@@ -59,24 +59,24 @@ The deprecations ended up being divided into the following categories:
 
 **Deprecate, remove on next Edition:** including [#13747](https://github.com/rust-lang/cargo/pull/13747), [#13804](https://github.com/rust-lang/cargo/pull/13804), and [#13839](https://github.com/rust-lang/cargo/pull/13839).
 
-**Deprecate but never remove:**  This is targeted on areas like the CLI or `.cargo/config.toml` which don't have an Edition mechanism to evolve them.
+**Deprecate but never remove:**  This is targeted in areas like the CLI or `.cargo/config.toml` which don't have an Edition mechanism to evolve them.
 
-**Remove, breaking compatibility:**  This is focused on bugs with little impact to users.
+**Remove, breaking compatibility:**  This is focused on bugs with minimized impact to users.
 
 An easy example is `badges.workspace = true` allowing inheritance from `package.badges`.
 This was not in the RFC, undocumented, and didn't follow the standard pattern for inheritance making it harder to discover.
-We remove support for this in [#13788](https://github.com/rust-lang/cargo/pull/13788).
+We removed support for this in [#13788](https://github.com/rust-lang/cargo/pull/13788).
 
 <!-- team meeting: 2024-04-30 -->
 Cargo also allowed dependencies without a source (e.g. `dep = {}`).
-This was originally removed 3 years ago in [#9686](https://github.com/rust-lang/cargo/pull/9686).
-This was reverted after it was reported to have broken an old version of the `bit-set` crate which was used by `libusb` which has gone unmaintained ([see #9885](https://github.com/rust-lang/cargo/issues/9885)).
+This was originally removed 3 years ago in [#9686](https://github.com/rust-lang/cargo/pull/9686)
+but was reverted after it was reported to have broken an old version of the `bit-set` crate which was used by `libusb` which has gone unmaintained ([see #9885](https://github.com/rust-lang/cargo/issues/9885)).
 We revisited this and decided to remove support for it again
 (see [#13775](https://github.com/rust-lang/cargo/pull/13775))
 and soon after a user of libusb noticed again
 ([#13824](https://github.com/rust-lang/cargo/issues/13824)).
 After looking at this more carefully, we decided to stick with our original decision.
-Users of libusb have had 3 years and there are two maintained replacement packages
+We broke people 3 years ago, been warning since that it will be removed, and there are two maintained replacement packages
 ([rusb](https://crates.io/crates/rusb) and [nusb](https://crates.io/crates/nusb)).
 
 **Re-evaluate in the future:**  In particular, for [#4797](https://github.com/rust-lang/cargo/pull/4797), we want to wait until there is a stable mechanism to replace it.
@@ -189,6 +189,9 @@ Instead of showing the latest when a version is unspecified,
 Before, that was a version from your lockfile or a MSRV-compatible version.
 With [cargo-information#137](https://github.com/hi-rustin/cargo-information/pull/137),
 we don't just check the lockfile but first check the direct dependencies of the package you are in and then the direct dependencies of all workspace members, making it more likely what will be shown is what you will be using.
+
+![rendering of cargo-info's verbose output using SVG](../../../../images/inside-rust/2024-05-07-this-development-cycle-in-cargo-1.79/info.stdout.term.svg)
+*(verbose output, normally dependencies are hidden)*
 
 At this point, [`cargo-information`](https://crates.io/crates/cargo-information) feels like it could be ready to merge into cargo.
 Please give it a try and [let us know what you think](https://github.com/hi-rustin/cargo-information/issues)!
