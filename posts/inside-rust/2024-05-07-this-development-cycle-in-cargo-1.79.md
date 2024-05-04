@@ -285,7 +285,7 @@ However, the debuginfo analogy falls down in that a project might want both a fi
 If we set aside the future possibilities,
 it is assumed that this will mostly be set by wrapper tools that generate a proper SBOM out of the fragment we generate.
 They will be setting it on a per-run basis and not expect users to enable this setting,
-making the focus be on a environment variale, rather than config.
+making the focus be on a environment variable, rather than config.
 In this framing, we aren't tying it to a specific profile and requiring people to do so could add some extra hurdles.
 
 We could explore having a build setting for now and allow for layering a profile setting in the future.
@@ -324,7 +324,7 @@ As a side note, during the discussion, the idea came up for a new `pub(scope)` t
 [LukeMathWalker](https://github.com/LukeMathWalker) recently announced [cargo autoinherit](https://mainmatter.com/blog/2024/03/18/cargo-autoinherit/) which will consolidate all of your dependency sources to
 [`[workspace.dependencies]`](https://doc.rust-lang.org/cargo/reference/workspaces.html#the-dependencies-table).
 
-While dicussing the announcement,
+While discussing the announcement,
 a [footgun came up with regards to `default-features`](https://www.reddit.com/r/rust/comments/1bjdnne/cargoautoinherit_dry_up_your_workspace/kvr6iq1/).
 If you set `default-features = true` in the workspace dependencies then `default-features = false` in your package dependencies is ignored
 ([#12162](https://github.com/rust-lang/cargo/issues/12162)).
