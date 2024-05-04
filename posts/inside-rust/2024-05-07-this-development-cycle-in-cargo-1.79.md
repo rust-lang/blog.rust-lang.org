@@ -102,14 +102,14 @@ However, rustc considers snake_case to be the canonical form and we decided that
 We can always add a second style later, if we so wished.
 
 <!-- team meeting: 2024-04-16 -->
-Our test case for this functionality is deprecatoing implicit features in Edition 2024.
-We modeled this as a deprecation warning when implicit features exist in all current Editions
-while Edition 2024 would report the optional dependency as unused ([#13778](https://github.com/rust-lang/cargo/pull/13778)).
+Our test case for this functionality is deprecating implicit features in Edition 2024.
+We modeled this as a deprecation warning for implicit features in existing Editions
+while Edition 2024 will report the optional dependency as unused ([#13778](https://github.com/rust-lang/cargo/pull/13778)).
 We discussed how we wanted to model unused optional dependemncies.
-At a high level, the  most direct way is we just change how we generate features based on the edition.
+At a high level, the  most direct way is we change how we internally enumerate features to be based on the edition.
 However, this doesn't play well with registry packages.
 We resolve them off of the Index which doesn't have the full `Cargo.toml`, particularly the Edition,
-and prior versions of Cargo would read these Index entries and generate implicit features, breaking on upgrade without extra care.
+and prior versions of Cargo would read these Index entries and generate implicit features, breaking on upgrade of Cargo without extra care.
 Maybe we should work to support the Edition in the Index but we don't need to do that now.
 We ended up stripping unused optional dependencies from the published `Cargo.toml` and the Index.
 The way this was done also means they won't show up in `Cargo.lock` like unused `workspace.dependencies`.
@@ -134,9 +134,9 @@ We've continued to iterate on the MSRV resolver's behavior, including
 - Avoiding it for `cargo install` ([#13790](https://github.com/rust-lang/cargo/pull/13790))
 
 As for controlling the resolver policy, we've implemented:
-- `--ignore-rust-version` disables it ([#13738](https://github.com/rust-lang/cargo/pull/13738))
+- `--ignore-rust-version` disables MSRV dependency resolution ([#13738](https://github.com/rust-lang/cargo/pull/13738))
 - We added `--ignore-rust-version` to `cargo update` and `cargo generate-lockfile` ([#13742](https://github.com/rust-lang/cargo/pull/13742))
-- We added a placeholder config field so it can be forced on or off ([#13769](https://github.com/rust-lang/cargo/pull/13769))
+- We added a placeholder config field so it can be forced on or off ([#13769](https://github.com/rust-lang/cargo/pull/13769)).  We still need final names for this, see [#13540](https://github.com/rust-lang/cargo/issues/13540).
 - We added `package.resolver = "3"` ([#13776](https://github.com/rust-lang/cargo/pull/13776))
 - We made this the default resolver for Edition 2024 ([#13785](https://github.com/rust-lang/cargo/pull/13785))
 
@@ -183,7 +183,7 @@ There was some recent discussion on an issue for how `cargo add` should render f
 ([#10681](https://github.com/rust-lang/cargo/issues/10681)).
 epage figured `cargo info` could be a good place to try out their proposal
 ([cargo-information#140](https://github.com/hi-rustin/cargo-information/pull/140)).
-A controversial aspect of this was to apply the same rendering to dependencies to distinguish between required, activated-optional, and deactivated-optional dependencies.
+A question aspect of this was to apply the same rendering to dependencies to distinguish between required, activated-optional, and deactivated-optional dependencies.
 
 epage also made the auto-selection of what version to show a little smarter.
 Instead of showing the latest when a version is unspecified,
@@ -256,7 +256,7 @@ Its particularly an issue if the binary name starts with `cargo-` as that would 
 However, this only really happens with non-standard `PATH`s on Linux and Mac (Windows is a separate case) or having too-generic of script names in your `PATH`.
 This lowered the priority for us.
 
-We could possibly take advantage of `AT_EXECFN` so cargo can detect its being run as a `#!` interpreter and bypass the precedence rules.
+We could possibly take advantage of `AT_EXECFN` where supported so cargo can detect its being run as a `#!` interpreter and bypass the precedence rules.
 
 Talking about this brought up a new concern: `cargo <script>` loads the config file based on `<script>`, rather than your current working directory.
 This is like `cargo install` and unlike all other cargo commands.
@@ -314,29 +314,27 @@ The core question to the discussion is "do we expect the benefits to be worth th
 
 An additional use case that came up during the discussion was to combine this with [artifact dependencies](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#artifact-dependencies) so you could have build scripts that were full packages that didn't require the overhead of publishing a full workspace.
 
-This would create a footgun when it comes to workspaces.
+Nested packages would create a footgun when it comes to workspaces.
 If you have a nested package that is a [public dependency](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#public-dependency) of multiple workspace members,
 you could start passing types between the packages.
 This will work locally because they all use the same instance of the nested package as a dependency.
 When you publish, each package will have its own instance of the nested package and the types will become incompatible.
 
-In general, there was unease that this could encourage people to vendor dependencies more often in a way that is less traceable and allows the code to drift in uncontrolled ways while we want to have the workflow encourage people to work directly with upstream.
+In general, there was unease that nested packages could encourage people to vendor dependencies more often in a way that is less traceable and allows the code to drift in uncontrolled ways while we want to have the workflow encourage people to work directly with upstream.
 
 As a side note, during the discussion, the idea came up for a new `pub(scope)` to allow access to private APIs within a [namespace](https://rust-lang.github.io/rfcs/3243-packages-as-optional-namespaces.html#motivation).
 
 #### Workspace inheritance of deps
 
-[LukeMathWalker](https://github.com/LukeMathWalker) recently announced [cargo autoinherit](https://mainmatter.com/blog/2024/03/18/cargo-autoinherit/) which will consolidate all of your dependency sources to
+[LukeMathWalker](https://github.com/LukeMathWalker) recently announced [cargo autoinherit](https://mainmatter.com/blog/2024/03/18/cargo-autoinherit/) which will consolidate your dependencies of workspace members sources to
 [`[workspace.dependencies]`](https://doc.rust-lang.org/cargo/reference/workspaces.html#the-dependencies-table).
 
 While discussing the announcement,
 a [footgun came up with regards to `default-features`](https://www.reddit.com/r/rust/comments/1bjdnne/cargoautoinherit_dry_up_your_workspace/kvr6iq1/).
 If you set `default-features = true` in the workspace dependencies then `default-features = false` in your package dependencies is ignored
 ([#12162](https://github.com/rust-lang/cargo/issues/12162)).
-This might not be too bad except `default-features = true` is the default when you say `dep = "1.0"`.
-You'd then have to explicitly re-enable `default-features when needed`
-
-For example:
+This might not be too bad except `default-features = true` is the default including when using the `dep = "1.0"` syntax.
+You'd then have to explicitly re-enable `default-features` when needed, for example:
 ```toml
 [workspace.dependencies]
 foo = { version = "1.0", default-features = false }
@@ -351,15 +349,15 @@ While discussing workspace inheritance for the
 one thought that epage had was that maybe dependency inheritance should focus exclusively on inheriting the source of the dependency and not anything else.
 When trying to not repeat oneself,
 it can be easy to go overboard and de-duplicate logic that reflects more of the current implementation, and not the requirements.
-As the implementation changes, you then have to shift things in and out of the shared or specific state.
+As the implementation changes, you then have to shift things in and out between the shared and specific state.
 
 Applying that concept to `default-features`,
 maybe we should disallow it in workspace dependencies (on a new Edition),
 and have the package dependencies' `default-features` always win.
 As workspaces don't have an Edition, we could frame this from the package's perspective as it inherits a field, making it so the package's Edition applies.
 
-Going to the full extreme of removing `default-features` and `features` from workspace dependencies might be controversial.
-For example, likely an application would want to share `serde`'s `derive` feature throughoutt the workspace.
+Going to the full extreme of removing `default-features` and `features` from workspace dependencies might be too large of departure from today.
+For example, likely a maintainer would find it convenient to share `serde`'s `derive` feature throughout their workspace.
 An incremental step could be to treat the lack of `default-features` in a  workspace dependency as unset.
 
 <!-- team meeting: 2024-03-26 -->
@@ -389,9 +387,7 @@ this will likely be stuck waiting on the 2027 Edition.
 ## Misc
 
 - Thank to [PaulDance](https://github.com/PaulDance), we are now publishing `cargo-test-support` and `cargo-test-macro` which can be useful for developing tools that integrate with cargo [#13418](https://github.com/rust-lang/cargo/pull/13418).  The focus is on Cargo's needs, making the APIs and documentation a little rough for others to adopt.
-- Thanks for [linyihai](https://github.com/linyihai), we now have unstable support for `cargo update foo --precise <prerelease>`, last discussed in [1.76](https://blog.rust-lang.org/inside-rust/2024/01/03/this-development-cycle-in-cargo-1-76.html#rfc-3493-cargo-update---precise-prerelease).
-
-https://github.com/rust-lang/cargo/pull/13626
+- Thanks for [linyihai](https://github.com/linyihai), we now have unstable support for `cargo update foo --precise <prerelease>` ([#13626](https://github.com/rust-lang/cargo/pull/13626)), last discussed in [1.76](https://blog.rust-lang.org/inside-rust/2024/01/03/this-development-cycle-in-cargo-1-76.html#rfc-3493-cargo-update---precise-prerelease).
 
 ## Focus areas without progress
 
@@ -410,10 +406,10 @@ Ready-to-develop:
 
 Needs design and/or experimentation:
 - [GC](https://github.com/rust-lang/cargo/issues/12633)
-- [cargo info](https://github.com/rust-lang/cargo/issues/948)
 - [Per-user artifact cache](https://github.com/rust-lang/cargo/issues/5931)
 - [Dependency resolution hooks](https://github.com/rust-lang/cargo/issues/7193)
 - [A way to report why crates were rebuilt](https://github.com/rust-lang/cargo/issues/2904)
+<!-- - [cargo info](https://github.com/rust-lang/cargo/issues/948) -->
 
 Planning:
 - [Disabling of default features](https://github.com/rust-lang/cargo/issues/3126)
@@ -422,13 +418,13 @@ Planning:
   - [RFC #3487: visibility](https://github.com/rust-lang/rfcs/pull/3487) (visibility)
   - [RFC #3486: deprecation](https://github.com/rust-lang/rfcs/pull/3486)
   - [Unstable features](https://doc.rust-lang.org/cargo/reference/unstable.html#list-of-unstable-features)
-<!-- - [RFC #3452: Nested packages](https://github.com/rust-lang/rfcs/pull/3452) -->
 - [OS-native config/cache directories (ie XDG support)](https://github.com/rust-lang/cargo/issues/1734)
   - [Phase 1 Pre-RFC](https://internals.rust-lang.org/t/pre-rfc-split-cargo-home/19747)
 - [RFC #3371: CARGO_TARGET_BASE_DIR](https://github.com/rust-lang/rfcs/pull/3371)
 - [Pre-RFC: Global, mutually exclusive features](https://internals.rust-lang.org/t/pre-rfc-mutually-excusive-global-features/19618)
-- <!-- [RFC #3553: Cargo SBOM Fragment](https://github.com/rust-lang/rfcs/pull/3553) -->
-- <!-- Cargo script ([RFC #3502](https://github.com/rust-lang/rfcs/pull/3502), [RFC #3503](https://github.com/rust-lang/rfcs/pull/3503)) -->
+<!-- - [RFC #3452: Nested packages](https://github.com/rust-lang/rfcs/pull/3452) -->
+<!-- - [RFC #3553: Cargo SBOM Fragment](https://github.com/rust-lang/rfcs/pull/3553) -->
+<!-- - Cargo script ([RFC #3502](https://github.com/rust-lang/rfcs/pull/3502), [RFC #3503](https://github.com/rust-lang/rfcs/pull/3503)) -->
 
 ## How you can help
 
