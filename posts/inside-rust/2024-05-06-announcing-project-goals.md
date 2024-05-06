@@ -37,7 +37,7 @@ In exchange for committing energy towards the goal, owners are entrusted with de
 
 > It’s difficult to make predictions, especially about the future.
 
-Project goals will typically describe what the shiny future Rust will look like with the goal accomplished. However, humans are notoriously bad at planning and estimating, and in addition, resource committments may be time-bounded and may require re-evaluation on a regular cadence.
+Project goals will typically describe what the shiny future Rust will look like with the goal accomplished. However, humans are notoriously bad at planning and estimating, and in addition, resource commitments may be time-bounded and may require re-evaluation on a regular cadence.
 
 Thus, project goals should focus primarily on a medium-term goal that can be accomplished within the year, and realistic milestones to be accomplished in that timeframe. Some project goals may be entirely completed within such a timeframe. Other project goals may set out incremental milestones (e.g. shipping an RFC), or even just experiments to determine feasibility.
 
