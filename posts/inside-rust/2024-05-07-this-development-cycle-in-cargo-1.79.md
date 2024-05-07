@@ -396,13 +396,13 @@ These are areas of interest for Cargo team members with no reportable progress f
 Ready-to-develop:
 - [Merge `cargo upgrade` into `cargo update`](https://github.com/rust-lang/cargo/issues/12425)
 - [`cargo publish` for workspaces](https://github.com/rust-lang/cargo/issues/1169)
-- [Auto-generate completions](https://github.com/rust-lang/cargo/issues/6645)
-  - See [clap-rs/clap#3166](https://github.com/clap-rs/clap/issues/3166)
 - Generalize cargo's test assertion code
   - [Add `CARGO_WORKSPACE_DIR`](https://github.com/rust-lang/cargo/issues/3946)
   - [Structured assertions in snapbox](https://github.com/assert-rs/trycmd/issues/92)
   - [Find a solution for order-independent assertions between cargo and snapbox](https://github.com/assert-rs/trycmd/issues/151)
 - [Open namespaces](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#open-namespaces)
+<!-- - [Auto-generate completions](https://github.com/rust-lang/cargo/issues/6645)
+  - See [clap-rs/clap#3166](https://github.com/clap-rs/clap/issues/3166) -->
 
 Needs design and/or experimentation:
 - [GC](https://github.com/rust-lang/cargo/issues/12633)
