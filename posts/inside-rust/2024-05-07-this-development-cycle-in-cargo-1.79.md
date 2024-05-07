@@ -49,7 +49,7 @@ Thanks to [LukeMathWalker](https://github.com/LukeMathWalker) for the suggestion
 
 ##### Deprecations
 
-*[Update from 1.78](https://blog.rust-lang.org/inside-rust/2024/03/26/this-development-cycle-in-cargo-1.78.html#deprecated-cargotoml-fields)
+*[Update from 1.78](https://blog.rust-lang.org/inside-rust/2024/03/26/this-development-cycle-in-cargo-1.78.html#deprecated-cargotoml-fields)*
 
 [weihanglo](https://github.com/weihanglo/) dug into the cargo code base to enumerate official and unofficial deprecations and recorded them in
 [#13629](https://github.com/rust-lang/cargo/issues/13629).
