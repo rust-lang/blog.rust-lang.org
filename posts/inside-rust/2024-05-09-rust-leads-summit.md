@@ -46,7 +46,7 @@ By design, the leads summit was not a place for making final decisions – the R
 
 All of the participants surveyed said that the leads summit served a needed purpose for the project. We hope there will be more events like the leads summit in the future, and that they can grow to include more of the Rust project and its leadership.
 
-For this event to be valuable, it's important for us to follow through on the ideas that we talked about. We've already seen one RFC on [Project Goals] and hope to see similar RFCs in the coming months.
+For this event to be valuable, it's important for us to follow through on the ideas that we talked about. We've already seen one RFC on [Project Goals] and hope to see similar RFCs in the coming months. The Leadership Council has also started offering experimental travel funding to project members.
 
 We also collected some great feedback from attendees. In future events, participants said it would be ideal to identify concrete next steps during the summit discussions. Some also commented on the structured schedule, which was designed to get as much as we could out of a 1.5 day event: Several attendees wished for more time for unstructured "getting to know you" discussions, which we think would be great to include in future, longer events.
 
