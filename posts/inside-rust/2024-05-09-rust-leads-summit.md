@@ -57,7 +57,6 @@ A big thanks to the Rust Foundation and Google and for sponsoring the event,[^em
 A huge thanks to those who helped plan and execute the event and to our guest speakers, including:
 
 * Adam Harvey
-* Eric Holk
 * Santiago Pastorino
 * Philipp Krones
 * Josh Gould
