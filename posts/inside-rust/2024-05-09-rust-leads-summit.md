@@ -71,6 +71,6 @@ Finally, thank you to everyone who made an effort to show up and participate. Th
 
 [^employer]: Tyler Mandry is employed by Google.
 
-[^travel]: This year, we relied on employer- and self-sponsored travel; in future events, we would love to offer sponorships to those who need it.
+[^travel]: This year, we relied on employer- and self-sponsored travel; in future events, we would love to offer sponsorships to those who need it.
 
 [Project Goals]: https://github.com/rust-lang/rfcs/pull/3614
