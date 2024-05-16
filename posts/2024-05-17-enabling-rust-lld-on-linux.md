@@ -48,7 +48,7 @@ benefit is much improved linking times.
 Here are more details from the ripgrep example mentioned above: linking is reduced 7x, resulting in
 a 40% reduction in end-to-end compilation times.
 
-![Before/after comparison of a `ripgrep` debug build](../../../../images/2024-05-01-enabling-rust-lld-on-linux/ripgrep-comparison.png)
+![Before/after comparison of a `ripgrep` debug build](../../../../images/2024-05-17-enabling-rust-lld-on-linux/ripgrep-comparison.png)
 
 Most binaries should see some improvements here, but it's especially significant with e.g. bigger
 binaries, or when involving debuginfo. These usually see bottlenecks in the linker.
