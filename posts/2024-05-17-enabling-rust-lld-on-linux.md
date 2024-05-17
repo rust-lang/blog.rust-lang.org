@@ -78,7 +78,8 @@ resource-constrained environments.
 
 #### Summary
 
-rustc will use `rust-lld` on `x86_64-unknown-linux-gnu` nightlies, for much improved linking times.
+rustc will use `rust-lld` on `x86_64-unknown-linux-gnu` nightlies, for much improved linking times,
+starting in tomorrow's rustup nightly (`nightly-2024-05-18`).
 Let us know if you encounter problems, by [opening an
 issue](https://github.com/rust-lang/rust/issues/new/choose) on GitHub.
 
