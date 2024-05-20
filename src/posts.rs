@@ -73,6 +73,7 @@ impl Post {
                 .build()?,
             extension: comrak::ExtensionOptionsBuilder::default()
                 .header_ids(Some(String::new()))
+                .strikethrough(true)
                 .footnotes(true)
                 .table(true)
                 .build()?,
