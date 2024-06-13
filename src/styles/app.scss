@@ -324,3 +324,55 @@ header h1 {
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  $yellow: #835f00;
+
+  body {
+    background-color: #181a1b;
+    color: #e8e6e3;
+  }
+
+  .nav a {
+    color: #d5cbc6;
+  }
+
+  div.brand a {
+    color: #fff;
+  }
+
+  div.brand img {
+    filter: invert(0.8);
+  }
+
+  .white {
+    color: #fff;
+    .highlight {
+      background-color: $yellow;
+    }
+  }
+
+  .white a {
+    color: #d5cbc6;
+  }
+
+  .white code {
+    color: #fff;
+    background-color: rgba(213, 203, 198, 0.05);
+    border: 1px solid rgba(213, 203, 198, 0.25);
+  }
+
+  .white blockquote {
+    color: #fff;
+    background-color: rgba(213, 203, 198, 0.05);
+    border: 1px solid rgba(213, 203, 198, 0.25);
+    border-left: 8px solid #d5cbc6;
+  }
+
+  .white a.anchor::before {
+    color: #d5cbc6;
+  }
+
+  .publish-date-author {
+    color: #d5cbc6;
+  }
+}
