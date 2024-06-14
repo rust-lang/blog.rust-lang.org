@@ -53,8 +53,8 @@ Thanks to [LukeMathWalker](https://github.com/LukeMathWalker) for the suggestion
 
 As a refresher, this is a rustc feature that checks `#[cfg]`s against a list of known names and values.
 When used with Cargo, the names and values come from:
-- rustc's list of "well known" names (generally first party compilation toolchains)
-- cargo's list of "well known" names (generally first party crates.io ecosystem)
+- rustc's list of "well known" cfgs (generally first party compilation toolchains)
+- cargo's list of "well known" cfgs
 - [`[features]`](https://doc.rust-lang.org/cargo/reference/features.html)
 - [`cargo::rustc-check-cfg` build.rs directive](https://doc.rust-lang.org/nightly/cargo/reference/build-scripts.html#rustc-check-cfg)
 - Passing `--check-cfg` through `RUSTFLAGS`
