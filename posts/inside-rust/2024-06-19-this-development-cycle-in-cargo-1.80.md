@@ -118,7 +118,7 @@ and [urgau](https://github.com/urgau)
 for the implementation in [#13913](https://github.com/rust-lang/cargo/pull/13913).
 
 e.g.
-```toml=
+```toml
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(has_foo)'] }
 ```
