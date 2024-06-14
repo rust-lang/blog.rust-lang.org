@@ -223,7 +223,7 @@ This would be short term and could run into its own issues with being confusing,
 A crater run exposed a couple of bugs with `cargo fix` when migrating implicit features to explicit features ([#14010](https://github.com/rust-lang/cargo/issues/14010)).
 
 <!-- 2024-06-11 -->
-This exposed a misunderstand that `["dep_name/feature_name"]` is not always the same as `["dep:dep_name", "dep_name?/feature_name"]` because the former won't suppress the creation of an implicit feature.
+This exposed a misunderstanding that `["dep_name/feature_name"]` is not always the same as `["dep:dep_name", "dep_name?/feature_name"]` because the former won't suppress the creation of an implicit feature.
 As a side effect of how we prevent implicit features from being created in Edition 2024,
 there are corner cases where the `["dep_name/feature_name"]` syntax will error
 ([#14016](https://github.com/rust-lang/cargo/issues/14016))
