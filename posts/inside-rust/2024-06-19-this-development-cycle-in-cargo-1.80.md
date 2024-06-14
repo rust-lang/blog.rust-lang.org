@@ -441,7 +441,7 @@ However, in Office Hour, one idea for a rustc feature for this would be to permi
 ## Misc
 
 - zstd `.crate` files were briefly discussed on [zulip](https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/zstd.20crate.20files), see also [#2526](https://github.com/rust-lang/cargo/issues/2526).
-- [Daily reports](https://rust-lang.zulipchat.com/#narrow/stream/260232-t-cargo.2FPubGrub/topic/Progress.20report) by [Eh2406](https://github.com/Eh2406) on the progress of the Rust implementation of the PugGrub version solving algorithm
+- [Daily reports](https://rust-lang.zulipchat.com/#narrow/stream/260232-t-cargo.2FPubGrub/topic/Progress.20report) by [Eh2406](https://github.com/Eh2406) on the progress of the Rust implementation of the PubGrub version solving algorithm
 - More progress has been made on [#13709](https://github.com/rust-lang/cargo/pull/13709) for [RFC 3553: SBOM](https://github.com/rust-lang/rfcs/pull/3553)
 - We've identified more corner cases for `cargo update --precise <prerelease>` ([#13290](https://github.com/rust-lang/cargo/issues/13290)) <!-- 2024-05-28 -->
 
