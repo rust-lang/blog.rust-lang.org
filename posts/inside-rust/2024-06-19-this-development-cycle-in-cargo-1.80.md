@@ -63,7 +63,7 @@ At the beginning of May, Cargo's support for `--check-cfg` was stabilized ([#135
 When stabilizing, the team weighed
 the [crater results](https://github.com/rust-lang/rust/issues/120701#issuecomment-1937010106)
 and feedback from the multiple rounds of [Call for Testing](https://github.com/rust-lang/rfcs/pull/3013#issuecomment-1936648479)
-(which included tweaking the layout for This Week in Rust to improve visibility).
+(which included [tweaking the layout](https://github.com/rust-lang/this-week-in-rust/pull/5195) for This Week in Rust to improve visibility).
 Hand-in-hand with stabilization,
 [urgau](https://github.com/urgau) published a
 [blog post](https://blog.rust-lang.org/2024/05/06/check-cfg.html)
