@@ -269,8 +269,12 @@ For more investigation on using this file, see
 
 ##### `cargo publish --workspace`
 
-[torhovland](https://github.com/torhovland) stepped up to break down what it would take to add `--workspace`  in [#1169](https://github.com/rust-lang/cargo/issues/1169) and [#10948](https://github.com/rust-lang/cargo/issues/10948) and
-They then worked with [jneem](https://github.com/jneem) on `cargo package --workspace`.
+[torhovland](https://github.com/torhovland) and
+[jneem](https://github.com/jneem) stepped up to break down what it would take
+to add `--workspace`  in
+[#1169](https://github.com/rust-lang/cargo/issues/1169) and
+[#10948](https://github.com/rust-lang/cargo/issues/10948).
+They started on the milestone of support for `cargo package --workspace`.
 
 The first problem to address is how will we generate a valid lockfile for packages that haven't been uploaded.
 We discussed this in Office Hours and decided to implement an internal-only package-source overlay system in
