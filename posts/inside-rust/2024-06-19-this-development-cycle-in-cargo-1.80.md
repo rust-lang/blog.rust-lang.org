@@ -94,7 +94,7 @@ We worked together to find ways to improve it (e.g.
 [#13937](https://github.com/rust-lang/cargo/pull/13937)
 [rust-lang/rust#124209](https://github.com/rust-lang/rust/pull/124209)
 ).
-One challenge that limied this work was finding a place for Cargo's documentation to live as there isn't a user-focused Cargo feature for this to center the documentation around.
+One challenge that limited this work was finding a place for Cargo's documentation to live as there isn't a user-focused Cargo feature for this to center the documentation around.
 
 As for improving how people interact with this feature,
 longer term we feel
