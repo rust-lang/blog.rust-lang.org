@@ -250,7 +250,7 @@ In [#13979](https://github.com/rust-lang/cargo/pull/13979), [torhovland](https:/
   - Must use `^` version requirement operator (the default)
   - Must not be renamed as those tend to be used to allow multiple versions of the same package and the user likely doesn't want the version changed
   - Can further limit to specific dependencies by naming them
-2. Reconcole the lockfile with these new version requirements
+2. Reconcile the lockfile with these new version requirements
 3. Write out the new version requirements, preserving the precision used in the original requirement (e.g. `1.0` would be upgraded to `2.0`, not `2.0.5`)
 
 This is available to use as of nightly TODO
