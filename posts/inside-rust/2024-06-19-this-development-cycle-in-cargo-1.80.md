@@ -13,7 +13,7 @@ This is a summary of what has been happening around Cargo development for the la
 
 - [Plugin of the cycle](#plugin-of-the-cycle)
 - [Implementation](#implementation)
-  - [check-cfg](#check-cfg)
+  - [`-Zcheck-cfg`](#-zcheck-cfg)
   - [User-controlled cargo diagnostics](#user-controlled-cargo-diagnostics)
   - [`-Ztrim-paths`](#-ztrim-paths)
   - [MSRV-aware Cargo](#msrv-aware-cargo)
@@ -47,7 +47,7 @@ Thanks to [LukeMathWalker](https://github.com/LukeMathWalker) for the suggestion
 
 ## Implementation
 
-##### check-cfg
+##### `-Zcheck-cfg`
 
 *Update from [1.77](https://blog.rust-lang.org/inside-rust/2024/02/13/this-development-cycle-in-cargo-1-77.html#-zcheck-cfg)*
 
