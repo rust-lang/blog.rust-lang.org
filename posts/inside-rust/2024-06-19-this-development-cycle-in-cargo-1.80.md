@@ -253,7 +253,7 @@ In [#13979](https://github.com/rust-lang/cargo/pull/13979), [torhovland](https:/
 2. Reconcile the lockfile with these new version requirements
 3. Write out the new version requirements, preserving the precision used in the original requirement (e.g. `1.0` would be upgraded to `2.0`, not `2.0.5`)
 
-This is available to use as of nightly TODO
+This is available to use as of nightly 2024-06-09.
 
 ##### `.crate` provenance
 
