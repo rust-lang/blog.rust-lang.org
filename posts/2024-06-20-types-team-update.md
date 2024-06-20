@@ -165,7 +165,7 @@ difficult to reason about and necessary to fix many longstanding soundness issue
 * [Polonius on Nightly project goal](https://rust-lang.github.io/rust-project-goals/2024h2/Polonius.html)
 
 We intend to get the internal implementation of opaque types ready for the stabilization
-of TAIT and APTIT this year. We are also hoping to land a significant improvements our
+of TAIT and ATPIT this year. We are also hoping to land a significant improvements our
 handling of associated types in coherence checking this year.
 
 Our other goal is to get [Polonius], the next generation borrow checker, available on nightly, which would put us in a position to stabilize in 2025 once we have time to do more optimization and testing.
@@ -182,7 +182,7 @@ and `dyn`-trait upcasting, which will hopefully get stabilized in the near futur
 - next-generation trait solver
     - stable in coherence
     - used by rust-analyzer
-- TAIT/APTIT stabilized
+- TAIT/ATPIT stabilized
 - a-mir-formality
     - support for fuzzing and testing Rust snippets
     - complete model of coherence and coinductive trait semantics
