@@ -416,7 +416,7 @@ While `build.rs.output` might have helped with check-cfg before we added lint co
 it seems pretty rare that it would be of use.
 
 Embedding rust source in the manifest would allow a cargo-script to have a `build.rs`.
-While having a fully separate `-sys` package is reaosnable for general cases, there can be one-off "I just want a lib for a little bit" use cases.
+While having a fully separate `-sys` package is reasonable for general cases, there can be one-off "I just want a lib for a little bit" use cases.
 We had previously decided that embedding other content in a cargo-script (build script, config, proc-macros, addition source and packages),
 was an anti-feature and we'd need to revisit a lot more than just this.
 Instead, we would want to encourage multi-file packages in these cases.
