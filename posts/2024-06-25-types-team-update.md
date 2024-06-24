@@ -83,7 +83,7 @@ the new implementation.
 ### Async and `impl Trait`
 
 We stabilized `async`-fn in traits (AFIT) and return-position `impl Trait` in
-traits (RPTIIT) in version 1.79 thanks to a significant effort by [@compiler-errors] and
+traits (RPTIIT) in version 1.75 thanks to a significant effort by [@compiler-errors] and
 [@spastorino]. [@cjgillot] greatly improved the way generators, and therefore async functions,
 are represented in the type system[^107421]. This allowed us to support recursive
 `async`-functions without too much additional work[^117703].
@@ -92,9 +92,9 @@ Designing the next-generation trait solver surfaced issues and future-compatabil
 of our type-alias `impl Trait` (TAIT) implementation using the old trait solver. We are
 currently reworking the design and implementation. [@oli-obk] is spear-heading this effort.
 This also impacts RPIT edge-cases, forcing us to be careful to avoid accidental breakage.
-There have also been some new language design questions for TAIT, so we will likely first
+There are some open language design questions for TAIT, so we plan to
 stabilize associated type position `impl Trait` (ATPIT) as it avoids these language design
-issues while still providing the same capabilities.
+questions while still closing the expressiveness gap.
 
 ### `a-mir-formality`
 
@@ -165,7 +165,7 @@ difficult to reason about and necessary to fix many longstanding soundness issue
 * [Polonius on Nightly project goal](https://rust-lang.github.io/rust-project-goals/2024h2/Polonius.html)
 
 We intend to get the internal implementation of opaque types ready for the stabilization
-of TAIT and ATPIT this year. We are also hoping to land a significant improvements our
+of TAIT and ATPIT this year. We are also hoping to land significant improvements to our
 handling of associated types in coherence checking this year.
 
 Our other goal is to get [Polonius], the next generation borrow checker, available on nightly, which would put us in a position to stabilize in 2025 once we have time to do more optimization and testing.
@@ -182,7 +182,7 @@ and `dyn`-trait upcasting, which will hopefully get stabilized in the near futur
 - next-generation trait solver
     - stable in coherence
     - used by rust-analyzer
-- TAIT/ATPIT stabilized
+- ATPIT stabilized
 - a-mir-formality
     - support for fuzzing and testing Rust snippets
     - complete model of coherence and coinductive trait semantics
@@ -191,6 +191,7 @@ and `dyn`-trait upcasting, which will hopefully get stabilized in the near futur
 ### EOY 2025
 
 - next-generation trait solver used everywhere by default
+- TAIT stabilized
 - polonius stabilized
 
 ## EOY 2027
