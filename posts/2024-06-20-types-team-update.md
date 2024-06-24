@@ -141,7 +141,7 @@ We intend to slowly roll out the solver in other areas of the compiler until we'
 to fully remove the existing implementation by the end of 2025. This switch will fix
 multiple unsound issues by itself and will unblock a significant amount of future work.
 It will generally cleanup many rough edges of the type system, such as associated types
-in binders. There are many unsound issues which can only be fixed once we exclusively
+in higher-ranked types. There are many unsound issues which can only be fixed once we exclusively
 use the new implementation. 
 
 ### `a-mir-formality`
@@ -196,7 +196,7 @@ and `dyn`-trait upcasting, which will hopefully get stabilized in the near futur
 ## EOY 2027
 
 - next-generation trait solver
-    - support for coinduction and where-bounds on binders
+    - support for coinduction and (implicit) where-bounds on `for<'a>`
     - enable perfect derive
 - a-mir-formality fully model soundness critical parts of Rust
 - all known type system unsoundnesses fixed
