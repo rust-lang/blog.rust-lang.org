@@ -83,7 +83,7 @@ the new implementation.
 ### Async and `impl Trait`
 
 We stabilized `async`-fn in traits (AFIT) and return-position `impl Trait` in
-traits (RPTIIT) in version 1.75 thanks to a significant effort by [@compiler-errors] and
+traits (RPITIT) in version 1.75 thanks to a significant effort by [@compiler-errors] and
 [@spastorino]. [@cjgillot] greatly improved the way generators, and therefore async functions,
 are represented in the type system[^107421]. This allowed us to support recursive
 `async`-functions without too much additional work[^117703].
@@ -134,7 +134,7 @@ We are also working on extracting its implementation into a separate library
 outside of the compiler itself. We would like to share the trait solver with
 rust-analyzer by the end of this year. They currently use [chalk] which is no longer
 actively maintained. Using the next-generation trait solver in rust-analyzer
-should result in a lot of additional testing for the solver and while also improving
+should result in a lot of additional testing for the solver while also improving
 the IDE experience by positively impacting performance and correctness.
 
 We intend to slowly roll out the solver in other areas of the compiler until we're able
