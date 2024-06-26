@@ -222,5 +222,5 @@ and `dyn`-trait upcasting, which will hopefully get stabilized in the near futur
 [@spastorino]: https://github.com/spastorino
 [@cjgillot]: https://github.com/cjgillot
 
-[^107421]: stabilized in https://github.com/rust-lang/rust/issues/107421
-[^117703]: stabilized in https://github.com/rust-lang/rust/issues/117703
+[^107421]: stabilized in <https://github.com/rust-lang/rust/issues/107421>
+[^117703]: stabilized in <https://github.com/rust-lang/rust/issues/117703>
