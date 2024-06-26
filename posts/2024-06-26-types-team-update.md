@@ -7,7 +7,7 @@ team: The Types Team <https://github.com/rust-lang/types-team>
 
 It has been more than a year since [the initial blog post][TypesAnnouncement] announcing the Types team, and our initial set of goals. For details on what the team is, why it was formed, or our previously-stated overarching goals, go check out that blog post. In short the Types team's purview extends to the parts of the Rust language and compiler that involve the type system, e.g. type checking, trait solving, and borrow checking. Our short and long term goals effectively work to make the type system sound, consistent, extensible, and fast.
 
-Before getting into details, it's worth sharing a quick point: the team over the last year has been very successful. Oftentimes, it's hard to measure impact, particularly when long-term roadmap goals are hard to quantify progress on and various short-term goals either are hit or aren't. But, there is one clear statistic that somewhat indictative of the team's progress: over the last year or so, [more than 50 user-facing changes][FCPs] have landed, each separately approved by Types Team consensus through FCP.
+Before getting into details, it's worth sharing a quick point: the team over the last year has been very successful. Oftentimes, it's hard to measure impact, particularly when long-term roadmap goals are hard to quantify progress on and various short-term goals either are hit or aren't. But, there is one clear statistic that is somewhat indicative of the team's progress: over the last year or so, [more than 50 user-facing changes][FCPs] have landed, each separately approved by Types Team consensus through FCP.
 
 The changes lie at the boundary between language design and implementation, and the Types Team (which is a subteam of both the Language and Compiler Teams) existing means that not only does the Rust Project have the bandwidth to make these decisions but we also have enough people with the knowledge and experience of the type system to make informed decisions that overall make the language better.
 
@@ -76,7 +76,7 @@ we would have liked to [stabilize its use in coherence][StabilizeNS] a few month
 this surfaced additional small behavior regressions and hangs, causing delays. We are working on fixing these issues and intend to merge the stabilization PR soon. We are getting close to compiling the standard library
 and the compiler with the new solver enabled everywhere, after which will be able to run
 crater to figure out the remaining issues. We expect there to be a long tail of minor issues
-and behaviorial differences from the existing implementation, so there's still a lot to do
+and behavioral differences from the existing implementation, so there's still a lot to do
 here. There are also open design questions which we will have to resolve before stabilizing
 the new implementation.
 
@@ -88,7 +88,7 @@ traits (RPTIIT) in version 1.75 thanks to a significant effort by [@compiler-err
 are represented in the type system[^107421]. This allowed us to support recursive
 `async`-functions without too much additional work[^117703].
 
-Designing the next-generation trait solver surfaced issues and future-compatability challenges
+Designing the next-generation trait solver surfaced issues and future-compatibility challenges
 of our type-alias `impl Trait` (TAIT) implementation using the old trait solver. We are
 currently reworking the design and implementation. [@oli-obk] is spear-heading this effort.
 This also impacts RPIT edge-cases, forcing us to be careful to avoid accidental breakage.
@@ -106,7 +106,7 @@ issues.
 
 ### Fixing soundness issues
 
-We fixed multiple long-standing unsound issues, see [the full list of closed issues](https://github.com/rust-lang/rust/issues?q=is%3Aissue+label%3AI-unsound+label%3AT-types+-label%3Arequires-nightly+is%3Aclosed+closed%3A%3C2024-06-20+). The most most notable of which was [#80176](https://github.com/rust-lang/rust/issues/80176). This subtle issue caused us to accept methods in trait implementations whose function signature had outlives requirements not present in the trait definition. These requirements were then never proven when calling the trait method. As there were some crates which relied on this pattern by accident, even if it their usages didn't exploit this unsoundness, we first merged a [future-compatability lint](https://github.com/rust-lang/rust/issues/105572) which we then moved to a hard error after a few versions.
+We fixed multiple long-standing unsound issues, see [the full list of closed issues](https://github.com/rust-lang/rust/issues?q=is%3Aissue+label%3AI-unsound+label%3AT-types+-label%3Arequires-nightly+is%3Aclosed+closed%3A%3C2024-06-20+). The most most notable of which was [#80176](https://github.com/rust-lang/rust/issues/80176). This subtle issue caused us to accept methods in trait implementations whose function signature had outlives requirements not present in the trait definition. These requirements were then never proven when calling the trait method. As there were some crates which relied on this pattern by accident, even if it their usages didn't exploit this unsoundness, we first merged a [future-compatibility lint](https://github.com/rust-lang/rust/issues/105572) which we then moved to a hard error after a few versions.
 
 We've also spent time on [categorizing the remaining open issues][unsoundCat] and integrating
 them into our longterm planning. Most of the remaining ones are blocked on the
@@ -156,7 +156,7 @@ additional confidence in our model of the type system and will guide its future 
 
 We plan to fully formalize some components of the type system this year. Coherence is fairly
 self-contained, very subtle, and soundness-critical. This has prevented us from making significant
-improvents to it in the past. We also intend to formalize coinductive trait semantics, which are
+improvements to it in the past. We also intend to formalize coinductive trait semantics, which are
 difficult to reason about and necessary to fix many longstanding soundness issues.
 
 ### Language changes and polonius
