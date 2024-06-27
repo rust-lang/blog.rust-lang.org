@@ -163,6 +163,11 @@ div.brand {
     color: black;
     background-color: rgba($gray, 0.05);
     border: 1px solid rgba($gray, 0.25);
+    white-space: pre-wrap;
+  }
+
+  pre code {
+    white-space: inherit;
   }
 
   a.anchor::before {
