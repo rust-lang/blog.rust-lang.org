@@ -3,11 +3,16 @@
 $body-font: 'Fira Sans', Helvetica, Arial, sans-serif;
 $header-font: 'Alfa Slab One', serif;
 
-$gray: #2a3439;
-$red: #a72145;
-$green: #0b7261;
-$purple: #2e2459;
-$yellow: #ffc832;
+// Default light theme
+:root {
+  --gray: #2a3439;
+  --red: #a72145;
+  --yellow: #ffc832;
+  --code-bg-color: rgba(42, 52, 57, 0.05);
+  --code-border-color: rgba(42, 52, 57, 0.25);
+  --blockquote-bg-color: rgb(247, 249, 249);
+  --blockquote-left-border-color: rgb(195, 205, 210);
+}
 
 html {
   font-size: 62.5%
@@ -35,8 +40,8 @@ body {
 blockquote {
     font-style: italic;
     position: relative;
-    background-color: lighten($gray, 78%);
-    border-left: 8px solid lighten($gray, 60%);
+    background-color: var(--blockquote-bg-color);
+    border-left: 8px solid var(--blockquote-left-border-color);
     border-radius: 5px;
     margin: 0;
     margin-bottom: 2rem;
@@ -110,7 +115,7 @@ ul.nav, ul.nav li {
 }
 
 .nav a {
-  color: $gray;
+  color: var(--gray);
 }
 
 div.brand {
@@ -141,28 +146,28 @@ div.brand {
 .white {
    color: black;
   .highlight {
-    background-color: $yellow;
+    background-color: var(--yellow);
   }
   a {
-    color: $gray;
+    color: var(--gray);
     text-decoration: underline;
   }
   .button.button-secondary {
-    background-color: $yellow;
-    border: 1px solid $yellow;
-    color: $gray;
+    background-color: var(--yellow);
+    color: var(--gray);
+    border: 1px solid var(--yellow);
     text-decoration: none;
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     &:hover, &:focus {
-      border-color: $gray;
+      border-color: var(--gray);
     }
   }
   code {
     color: black;
-    background-color: rgba($gray, 0.05);
-    border: 1px solid rgba($gray, 0.25);
+    background-color: var(--code-bg-color);
+    border: 1px solid var(--code-border-color);
   }
 
   a.anchor::before {
@@ -173,7 +178,7 @@ div.brand {
     margin-left: -1em;
     text-decoration: none;
     opacity: 0.7;
-    color: $gray;
+    color: var(--gray);
     font-weight: normal;
   }
   :hover > a.anchor::before {
@@ -194,18 +199,18 @@ ul {
 }
 
 .posts {
-  background-color: $gray;
+  background-color: var(--gray);
   color: white;
   .highlight {
-    background-color: $red;
+    background-color: var(--red);
   }
   a {
     color: white;
     text-decoration: underline;
   }
   .button.button-secondary {
-    background-color: $red;
-    border: 1px solid $red;
+    background-color: var(--red);
+    border: 1px solid var(--red);
     color: white;
     text-decoration: none;
     display: block;
@@ -230,7 +235,7 @@ table.post-list a:hover {
 }
 
 .publish-date-author {
-  color: $gray;
+  color: var(--gray);
   margin: -60px 0 60px 0;
 }
 
@@ -245,11 +250,11 @@ footer {
   }
 
   a {
-    color: $yellow;
+    color: var(--yellow);
     text-decoration: none;
 
     &:hover {
-      color: $yellow;
+      color: var(--yellow);
       text-decoration: underline;
     }
   }
@@ -281,7 +286,7 @@ h3, .post h2, header h2 {
   h2 {
     font-size: 2em;
   }
-  
+
   h3 {
     display: block;
   }
@@ -323,4 +328,3 @@ header h1 {
     border-top-left-radius: 0;
   }
 }
-
