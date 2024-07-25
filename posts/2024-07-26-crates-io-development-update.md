@@ -49,7 +49,7 @@ This will allow you to keep track of the latest crate releases and updates in yo
 
 Our crates.io team member [@hi-rustin](https://github.com/hi-rustin) has been very active in improving our API tokens user experience. If you create an API token with an expiry date, you will now receive a notification email three days before the token expires. This will help you to remember to renew your token before it expires and your scripts stop working.
 
-Following this change, he also implemented a way to create API tokens based on existing tokens, which will make it easier to renew tokens without having to reconfigure all the permissions. The user interface on the "API tokens" settings page now shows a "Regenerate" button, which will allow you to copy/clone existing tokens with the same permissions. Similarly, the token expiry notifications will now also contain a link that directly fills in the permissions of the expiring token, so you can easily create a new token with the same permissions.
+Following this change, he also implemented a way to create new API tokens based on the configuration of existing tokens, which will make it much easier to renew tokens without having to reconfigure all the permissions. The user interface on the "API tokens" settings page now shows a "Regenerate" button, which will allow you to copy the permissions of existing tokens. Similarly, the token expiry notifications will now also contain a link that directly fills in the permissions of the expiring token, so you can easily create a new token with the same permissions.
 
 ![Dark Mode Screenshot](../../../images/2024-07-26-crates-io-development-update/regenerate-button.png)
 
