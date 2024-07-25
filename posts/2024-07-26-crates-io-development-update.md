@@ -13,7 +13,7 @@ When looking at crates like [ripgrep](https://crates.io/crates/ripgrep) you will
 
 This change was implemented by analyzing the uploaded crate files when they are published to crates.io. If a crate has binary targets, the names of the binaries will now be saved in our database and then conveniently displayed on the crate page:
 
-> Running the above command will globally install the **rg** binary.
+![Dark Mode Screenshot](../../../images/2024-07-26-crates-io-development-update/cargo-install.png)
 
 After shipping this feature we got notified that some library crates use binaries for local development purposes and the author would prefer to not have the binaries listed on the crate page. The cargo team has been working on a [solution](https://github.com/rust-lang/cargo/pull/13713) for this by using the `exclude` manifest field, which will be shipped soon.
 
@@ -21,6 +21,8 @@ After shipping this feature we got notified that some library crates use binarie
 ## Dark mode
 
 If your operating system is set to dark mode, you may have noticed that crates.io now automatically switches to a dark user interface theme. This change was made to make the website more comfortable to use for users who prefer dark themes. If you don't like the dark theme, you can still switch back to the light theme by clicking the color theme icon in the top right corner of the page. By default, the theme will be set based on your operating system's theme settings, but you can also override this setting manually.
+
+![Dark Mode Screenshot](../../../images/2024-07-26-crates-io-development-update/dark-mode.png)
 
 Similar to GitHub, we now also support dark/light theme support for images in your `README.md` files:
 
@@ -48,6 +50,8 @@ This will allow you to keep track of the latest crate releases and updates in yo
 Our crates.io team member [@hi-rustin](https://github.com/hi-rustin) has been very active in improving our API tokens user experience. If you create an API token with an expiry date, you will now receive a notification email three days before the token expires. This will help you to remember to renew your token before it expires and your scripts stop working.
 
 Following this change, he also implemented a way to create API tokens based on existing tokens, which will make it easier to renew tokens without having to reconfigure all the permissions. The user interface on the "API tokens" settings page now shows a "Regenerate" button, which will allow you to copy/clone existing tokens with the same permissions. Similarly, the token expiry notifications will now also contain a link that directly fills in the permissions of the expiring token, so you can easily create a new token with the same permissions.
+
+![Dark Mode Screenshot](../../../images/2024-07-26-crates-io-development-update/regenerate-button.png)
 
 
 ## Query optimizations
