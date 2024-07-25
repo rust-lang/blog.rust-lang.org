@@ -66,3 +66,8 @@ Our latest addition to the crates.io team, [@eth3lbert](https://github.com/eth3l
 In addition to that, we have recently migrated our database servers to a new provider with more memory and faster storage. This has also improved the performance of the website and allowed us to run more complex queries without running into performance issues. It was previously taking multiple seconds to load e.g. https://crates.io/crates/syn/reverse_dependencies, but now the server usually responds in much less than a second.
 
 Another piece of the puzzle was archiving old data that is no longer needed for the website. We have moved the download counts older than 90 days into JSON files that are stored on S3 and will soon be publicly available for download via our CDNs. This has reduced the size of the database significantly and improved the performance of some of our background jobs.
+
+
+## Feedback
+
+We hope you enjoyed this update on the development of crates.io. If you have any feedback or questions, please let us know on [Zulip](https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io) or [GitHub](https://github.com/rust-lang/crates.io/discussions). We are always happy to hear from you and are looking forward to your feedback!
