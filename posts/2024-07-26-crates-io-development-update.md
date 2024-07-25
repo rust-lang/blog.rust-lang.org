@@ -54,7 +54,7 @@ Following this change, he also implemented a way to create API tokens based on e
 ![Dark Mode Screenshot](../../../images/2024-07-26-crates-io-development-update/regenerate-button.png)
 
 
-## Query optimizations
+## Database performance optimizations
 
 Our latest addition to the crates.io team, [@eth3lbert](https://github.com/eth3lbert), has been working on optimizing the database queries that power crates.io. He has been working on a couple of pull requests that aim to reduce the load on the database server and make the website faster for everyone. Some of the changes he has made include:
 
@@ -63,11 +63,4 @@ Our latest addition to the crates.io team, [@eth3lbert](https://github.com/eth3l
 - [#8734](https://github.com/rust-lang/crates.io/pull/8734): Add partial index on versions table
 - [#8737](https://github.com/rust-lang/crates.io/pull/8737): Improve the performance of reverse dependencies using the `default_versions` table
 
-In some of these cases we have seen a 10-20x performance improvement. We are very happy to have him on the team and look forward to more improvements in the future!
-
-
-## New database server
-
-We have recently migrated our database servers to a new provider with more memory and faster storage. This has improved the performance of the website and allowed us to run more complex queries without running into performance issues.
-
-It was previously taking multiple seconds to load e.g. https://crates.io/crates/syn/reverse_dependencies, but now the server usually responds in significantly less than a second. We are very happy with the new servers and hope that you will notice the improved performance as well.
+In addition to that, we have recently migrated our database servers to a new provider with more memory and faster storage. This has also improved the performance of the website and allowed us to run more complex queries without running into performance issues. It was previously taking multiple seconds to load e.g. https://crates.io/crates/syn/reverse_dependencies, but now the server usually responds in much less than a second.
