@@ -5,13 +5,13 @@ author: Tobias Bieniek
 team: the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>
 ---
 
-Since crates.io does not have releases in the classical sense, there are no release notes either. However, the crates.io team still wants to keep you all updated about the ongoing development of crates.io. This blog post is a summary of the most significant changes that have been made to crates.io in the past months.
+Since crates.io does not have releases in the classical sense, there are no release notes either. However, the crates.io team still wants to keep you all updated about the ongoing development of crates.io. This blog post is a summary of the most significant changes that we have made to crates.io in the past months.
 
 ## `cargo install`
 
-When looking at crates like [ripgrep](https://crates.io/crates/ripgrep) you will notice that the installation instructions now say `cargo install ripgrep` instead of `cargo add ripgrep`. This change was made to make it easier for users to install crates that have binary targets. `cargo add` is still the correct command to use when adding a crate as a dependency to your project, but for binary-only crates like ripgrep, `cargo install` is the way to go.
+When looking at crates like [ripgrep](https://crates.io/crates/ripgrep) you will notice that the installation instructions now say `cargo install ripgrep` instead of `cargo add ripgrep`. We implemented this change to make it easier for users to install crates that have binary targets. `cargo add` is still the correct command to use when adding a crate as a dependency to your project, but for binary-only crates like ripgrep, `cargo install` is the way to go.
 
-This change was implemented by analyzing the uploaded crate files when they are published to crates.io. If a crate has binary targets, the names of the binaries will now be saved in our database and then conveniently displayed on the crate page:
+We achieved this by analyzing the uploaded crate files when they are published to crates.io. If a crate has binary targets, the names of the binaries will now be saved in our database and then conveniently displayed on the crate page:
 
 ![Dark Mode Screenshot](../../../images/2024-07-26-crates-io-development-update/cargo-install.png)
 
@@ -20,11 +20,11 @@ After shipping this feature we got notified that some library crates use binarie
 
 ## Dark mode
 
-If your operating system is set to dark mode, you may have noticed that crates.io now automatically switches to a dark user interface theme. This change was made to make the website more comfortable to use for users who prefer dark themes. If you don't like the dark theme, you can still switch back to the light theme by clicking the color theme icon in the top right corner of the page. By default, the theme will be set based on your operating system's theme settings, but you can also override this setting manually.
+If your operating system is set to dark mode, you may have noticed that crates.io now automatically switches to a dark user interface theme. If you don't like the dark theme, you can still switch back to the light theme by clicking the color theme icon in the top right corner of the page. By default, the theme will be set based on your operating system's theme settings, but you can also override this setting manually.
 
 ![Dark Mode Screenshot](../../../images/2024-07-26-crates-io-development-update/dark-mode.png)
 
-Similar to GitHub, we now also support dark/light theme support for images in your `README.md` files:
+Similar to GitHub, we now also have dark/light theme support for images in your `README.md` files:
 
 ```html
 <picture>
