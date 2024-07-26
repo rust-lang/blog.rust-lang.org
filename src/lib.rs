@@ -262,7 +262,7 @@ fn copy_dir(source: impl AsRef<Path>, dest: impl AsRef<Path>) -> Result<(), io::
             if entry.file_type()?.is_dir() {
                 copy_inner(&entry.path(), &new_dest)?;
             } else {
-                fs::copy(&entry.path(), &new_dest)?;
+                fs::copy(entry.path(), &new_dest)?;
             }
         }
         Ok(())
