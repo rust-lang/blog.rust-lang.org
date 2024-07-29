@@ -39,7 +39,7 @@ Similar to GitHub, we now also have dark/light theme support for images in your 
 Inspired by our friends at the [Python Package Index](https://warehouse.pypa.io/api-reference/feeds.html), we have introduced a couple of experimental RSS feeds for crates.io:
 
 - <https://static.crates.io/rss/crates.xml>: The latest new crates registered on crates.io (the past 60 minutes, but at least 50 new crates).
-- <https://static.crates.io/rss/updates.xml>: The latest version updates on crates.io (the past 60 minutes, but at least 100 version).
+- <https://static.crates.io/rss/updates.xml>: The latest version updates on crates.io (the past 60 minutes, but at least 100 versions).
 - e.g. <https://static.crates.io/rss/crates/serde.xml>: The latest version updates of the `serde` crate (the past 24 hours, but at least 10 versions).
 
 This will allow you to keep track of the latest crate releases and updates in your favorite RSS reader. The original GitHub issue requested a feed for all the crates you "follow" on crates.io, but we decided that per-crate feeds would be more useful for now. If you have any feedback on this feature, please let us know!
