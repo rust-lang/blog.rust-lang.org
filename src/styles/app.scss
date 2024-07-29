@@ -8,14 +8,46 @@ $header-font: 'Alfa Slab One', serif;
   --gray: #2a3439;
   --red: #a72145;
   --yellow: #ffc832;
+  --code-color: black;
   --code-bg-color: rgba(42, 52, 57, 0.05);
   --code-border-color: rgba(42, 52, 57, 0.25);
+  --blockquote-color: black;
   --blockquote-bg-color: rgb(247, 249, 249);
   --blockquote-left-border-color: rgb(195, 205, 210);
+  --body-background-color: white;
+  --body-foreground-color: white;
+  --body-color: rgb(34,34,34);
+  --div-brand-a-color: black;
+  --white-elem-color: black;
+  --white-a: #2a3439;
+  --nav-links-a: #2a3439;
+  --publish-date-author: #2a3439;
+  --section-header-h2-color: black;
+}
+
+// Dark theme
+@media (prefers-color-scheme: dark) {
+  :root {
+    --code-color: white;
+    --code-bg-color: rgba(213, 203, 198, 0.05);
+    --code-border-color: rgba(213, 203, 198, 0.25);
+    --blockquote-color: rgb(195, 205, 210);
+    --blockquote-bg-color: rgba(213, 203, 198, 0.05);
+    --blockquote-left-border-color: rgb(195, 205, 210);
+    --body-background-color: #181a1b;
+    --body-foreground-color: #e8e6e3;
+    --body-color: white;
+    --div-brand-a-color: white;
+    --white-elem-color: white;
+    --white-elem-a: #d5cbc6;
+    --nav-links-a: #d5cbc6;
+    --publish-date-author: #d5cbc6;
+    --section-header-h2-color: white;
+  }
 }
 
 html {
-  font-size: 62.5%
+  font-size: 62.5%;
 }
 
 @media screen and (min-width: 30em) {
@@ -26,14 +58,15 @@ html {
 
 body {
   font-family: $body-font;
-  background-color: white;
+  background-color: var(--body-background-color);
+  color: var(--body-color);
 
   /* Ensure the footer is always at the bottom of the screen */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   & > #main-content {
-      flex: 1;
+    flex: 1;
   }
 }
 
@@ -85,6 +118,7 @@ section {
       margin: 0;
       padding: 0;
       letter-spacing: 1px;
+      color: var(--section-header-h2-color);
     }
   }
 }
@@ -116,6 +150,7 @@ ul.nav, ul.nav li {
 
 .nav a {
   color: var(--gray);
+  color: var(--nav-links-a);
 }
 
 div.brand {
@@ -128,7 +163,7 @@ div.brand {
   margin-top: $v-top;
 
   & a {
-    color: black;
+    color: var(--div-brand-a-color);
     text-decoration: none;
   }
 
@@ -144,12 +179,12 @@ div.brand {
 }
 
 .white {
-   color: black;
+  color: var(--white-elem-color);
   .highlight {
     background-color: var(--yellow);
   }
   a {
-    color: var(--gray);
+    color: var(--white-elem-a);
     text-decoration: underline;
   }
   .button.button-secondary {
@@ -165,7 +200,7 @@ div.brand {
     }
   }
   code {
-    color: black;
+    color: var(--code-color);
     background-color: var(--code-bg-color);
     border: 1px solid var(--code-border-color);
   }
@@ -200,12 +235,12 @@ ul {
 
 .posts {
   background-color: var(--gray);
-  color: white;
+  color: var(--body-foreground-color);
   .highlight {
     background-color: var(--red);
   }
   a {
-    color: white;
+    color: var(--body-foreground-color);
     text-decoration: underline;
   }
   .button.button-secondary {
@@ -235,7 +270,7 @@ table.post-list a:hover {
 }
 
 .publish-date-author {
-  color: var(--gray);
+  color: var(--publish-date-author);
   margin: -60px 0 60px 0;
 }
 
