@@ -5,7 +5,7 @@ author: Niko Matsakis
 team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
 ---
 
-I'm happy to announce that, as of yesterday, [RFC #3672 has been merged](https://github.com/rust-lang/rfcs/pull/3672#issuecomment-2254599176) and so we have our roadmap for 2024h2! This blog post is a brief internal announcement, to be followed by a wider public announcement on the main Rust blog.
+I'm happy to announce that [RFC #3672 has been merged](https://github.com/rust-lang/rfcs/pull/3672#issuecomment-2254599176) and so we have our roadmap for 2024h2! This blog post is a brief internal announcement, to be followed by a wider public announcement on the main Rust blog.
 
 The final slate had 26 goals, with 3 designated as flagship goals:
 
