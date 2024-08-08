@@ -65,7 +65,7 @@ The project goal process began with a [public call for proposals in early May][p
 [pcp]: https://blog.rust-lang.org/inside-rust/2024/05/07/announcing-project-goals.html
 [goal template]: https://rust-lang.github.io/rust-project-goals/TEMPLATE.html
 
-Each goal represents a contract between the **owner** -- the person who will ensure the work gets done, and typically the person opening the PR -- and the **Rust team**. The owner is promising to put their own resources (time, money, expertise) into driving the work forward, and the team is giving their approval and commiting to support the owner in the ways requested (e.g., reviews, meetings, etc).
+Each goal represents a contract between the **owner** -- the person who will ensure the work gets done, and typically the person opening the PR -- and the **Rust team**. The owner is promising to put their own resources (time, money, expertise) into driving the work forward, and the team is giving their approval and committing to support the owner in the ways requested (e.g., reviews, meetings, etc).
 
 The details of who precisely will do what are giving in the ["Ownership and team asks"][] section, which takes the place of the "detailed design" you might find in an RFC. In some cases, the only ask of the team is "discussion and moral support", meaning that the goal owner is mostly looking for official approval that this is something the team would like to see get done. But other goals included asks like "standard reviews" for the resulting implementation work, pre-allocated "design meetings" for the team to review the intended design and give feedback, or "RFC decision" if an RFC will be required. 
 
@@ -75,7 +75,7 @@ As each PR comes in, the goals were socialized with the teams. This process some
 
 ## Project goals: a "front door" for Rust
 
-To me, the most exciting thing about the Project Goals program has been seeing the [goals][1] [coming][2] [from][3] [outside][4] the existing Rust maintainers. My hope is that the Project Goal process can supplement RFCs as an effective "front door" for the project, offering people who have the resources and skill to drive changes a way to float that idea and get feedback from the RUst teams *before* they begin to work on it.
+To me, the most exciting thing about the Project Goals program has been seeing the [goals][1] [coming][2] [from][3] [outside][4] the existing Rust maintainers. My hope is that the Project Goal process can supplement RFCs as an effective "front door" for the project, offering people who have the resources and skill to drive changes a way to float that idea and get feedback from the Rust teams *before* they begin to work on it.
 
 [1]: https://rust-lang.github.io/rust-project-goals/2024h2/cargo-semver-checks.html
 [2]: https://rust-lang.github.io/rust-project-goals/2024h2/Rust-for-SciComp.html
