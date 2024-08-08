@@ -38,7 +38,7 @@ We consider "any two out of the three" to be the right heuristic for projects wh
 
 In addition to the flagship goals, the roadmap defines [23 other goals][]. Here is a subset to give you a flavor:
 
-* [Stabilize cargo-script](https://rust-lang.github.io/rust-project-goals/2024h2/cargo-script.html), allowing singe-file Rust scripts that embed dependencies; owned by [Ed Page](https://github.com/epage).
+* [Stabilize cargo-script](https://rust-lang.github.io/rust-project-goals/2024h2/cargo-script.html), allowing single-file Rust scripts that embed dependencies; owned by [Ed Page](https://github.com/epage).
 * [Scalable Polonius support on nightly](https://rust-lang.github.io/rust-project-goals/2024h2/Polonius.html), improving Rust's borrow checker to [support conditional returns and other patterns](https://blog.rust-lang.org/inside-rust/2023/10/06/polonius-update.html); owned by [Rémy Rakic](https://github.com/lqd).
 * [Move parallel front end closer to stability](https://rust-lang.github.io/rust-project-goals/2024h2/parallel-front-end.html), improving Rust compilation times by as much as 20%; owned by [Sparrow Li](https://github.com/SparrowLii).
 * [Ergonomic ref counting](https://rust-lang.github.io/rust-project-goals/2024h2/ergonomic-rc.html), reducing the syntactic overhead of working with reference-counted data; owned by [Jonathan Kelley](https://github.com/jkelleyrtp).
