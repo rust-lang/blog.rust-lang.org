@@ -12,13 +12,13 @@ With the merging of [RFC #3672][], the Rust project has selected a **slate of 26
 
 ## Rust’s mission
 
-Ultimately, all the goals selected are intended to further Rust's mission of **empowering everyone to build reliable and efficient software**. Rust targets programs that prioritize
+All the goals selected ultimately further Rust's mission of **empowering everyone to build reliable and efficient software**. Rust targets programs that prioritize
 
 * reliability and robustness;
 * performance, memory usage, and resource consumption; and
 * long-term maintenance and extensibility.
 
-We consider "any two out of the three" as the right heuristic for projects where Rust is a strong contender or possibly the best option, and we chose our goals in part so as to help ensure this is true.
+We consider "any two out of the three" to be the right heuristic for projects where Rust is a strong contender or possibly the best option, and we chose our goals in part so as to help ensure this is true.
 
 ## Why these particular flagship goals?
 
