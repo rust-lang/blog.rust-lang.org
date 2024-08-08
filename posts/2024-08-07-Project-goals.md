@@ -18,7 +18,7 @@ Ultimately, all the goals selected are intended to further Rust's mission of **e
 * performance, memory usage, and resource consumption; and
 * long-term maintenance and extensibility.
 
-We consider "any two out of the three" as the right heuristic for projects where Rust is a strong contender or possibly the best option.
+We consider "any two out of the three" as the right heuristic for projects where Rust is a strong contender or possibly the best option, and we chose our goals in part so as to help ensure this is true.
 
 ## Why these particular flagship goals?
 
@@ -50,33 +50,19 @@ Check out [the whole list][23 other goals]! (Go ahead, we'll wait, but come back
 
 ## How to track progress
 
-Each of the proposed project goals has a dedicated tracking issue on the [rust-lang/rust-project-goals][] repository; these tracking issues are collected in the [2024h2 milestone][m]; the assignee of those issues indicates the [owner][] for that particular work. The issues will receive regular status updates from their respective owners, and we will collate these updates into public blog posts.
+As the year progresses, we will be posting regular blog posts summarizing the progress on the various goals. If you'd like to see more detail, the [2024h2 milestone][m] on the [rust-lang/rust-project-goals][] repository has tracking issues for each of the goals. Each issue is assigned to the [owner(s)][o] of that particular goal. You can subscribe to the issue to receive regular updates, or monitor the [#project-goals channel](https://rust-lang.zulipchat.com/#narrow/stream/435869-project-goals) on the [rust-lang Zulip](https://rust-lang.zulipchat.com).
 
 [rust-lang/rust-project-goals]: https://rust-lang.github.io/rust-project-goals/
 [m]: https://github.com/rust-lang/rust-project-goals/milestone/2
-[owner]: https://rust-lang.github.io/rust-project-goals/about/owners.html
+[o]: https://rust-lang.github.io/rust-project-goals/about/owners.html
 
 It's worth stating up front: **we don't expect all of these goals to be completed**. Many of them were proposed and owned by volunteers, and it's normal and expected that things don't always work out as planned. In the event that a goal seems to stall out, we can either look for a new owner or just consider the goal again in the next round of goal planning.
 
 ## How we selected project goals
 
-This **project goal** process started as an experiment, proposed in [RFC #3614][], to be run with nikomatsakis (myself) as the overall owner. Now that we've done it once, my intent is to author a follow-up RFC that describes the process we ended up with and codifies it for the future.
+Each project goal began as a PR against the [rust-lang/rust-project-goals][] repository. As each PR comes in, the goals were socialized with the teams. This process sometimes resulted in edits to the goals or in breaking up larger goals into smaller chunks (e.g., a far-reaching goal for ["higher level Rust"](https://github.com/rust-lang/rust-project-goals/pull/10) was broken into two specific deliverables, a [user-wide build cache](https://rust-lang.github.io/rust-project-goals/2024h2/user-wide-cache.html) and [ergonomic ref counting](https://rust-lang.github.io/rust-project-goals/2024h2/ergonomic-rc.html)). Finally, the goals were collated into [RFC #3672][], which listed each goals as well as all the asks from the team. This RFC was approved by all the teams that are being asked for support or other requests.
 
-The project goal process began with a [public call for proposals in early May][pcp]. Each proposal was phrased as a Pull Request (PR) against the [rust-lang/rust-project-goals][] repository. Goal proposal PRs follow a [goal template][] that describes the motivation and a high level sketch of the work that is planned for 2024; it's kind of like the "first half" of an RFC.
-
-[RFC #3614]: https://github.com/rust-lang/rfcs/pull/3614
-[pcp]: https://blog.rust-lang.org/inside-rust/2024/05/07/announcing-project-goals.html
-[goal template]: https://rust-lang.github.io/rust-project-goals/TEMPLATE.html
-
-Each goal represents a contract between the **owner** -- the person who will ensure the work gets done, and typically the person opening the PR -- and the **Rust team**. The owner is promising to put their own resources (time, money, expertise) into driving the work forward, and the team is giving their approval and committing to support the owner in the ways requested (e.g., reviews, meetings, etc).
-
-The details of who precisely will do what are giving in the ["Ownership and team asks"][] section, which takes the place of the "detailed design" you might find in an RFC. In some cases, the only ask of the team is "discussion and moral support", meaning that the goal owner is mostly looking for official approval that this is something the team would like to see get done. But other goals included asks like "standard reviews" for the resulting implementation work, pre-allocated "design meetings" for the team to review the intended design and give feedback, or "RFC decision" if an RFC will be required. 
-
-["Ownership and team asks"]: https://rust-lang.github.io/rust-project-goals/TEMPLATE.html#ownership-and-team-asks
-
-As each PR comes in, the goals were socialized with the teams. This process sometimes resulted in edits to the goals or in breaking up larger goals into smaller chunks (e.g., a far-reaching goal for ["higher level Rust"](https://github.com/rust-lang/rust-project-goals/pull/10) was broken into two specific deliverables, a [user-wide build cache](https://rust-lang.github.io/rust-project-goals/2024h2/user-wide-cache.html) and [ergonomic ref counting](https://rust-lang.github.io/rust-project-goals/2024h2/ergonomic-rc.html)). Finally, the goals were collated into [RFC #3672][], which listed each goals as well as all the asks from the team. This RFC was approved by all the teams that are being asked for support or other requests.
-
-## Project goals: a "front door" for Rust
+## Conclusion: Project Goals as a "front door" for Rust
 
 To me, the most exciting thing about the Project Goals program has been seeing the [goals][1] [coming][2] [from][3] [outside][4] the existing Rust maintainers. My hope is that the Project Goal process can supplement RFCs as an effective "front door" for the project, offering people who have the resources and skill to drive changes a way to float that idea and get feedback from the Rust teams *before* they begin to work on it.
 
@@ -85,8 +71,5 @@ To me, the most exciting thing about the Project Goals program has been seeing t
 [3]: https://rust-lang.github.io/rust-project-goals/2024h2/user-wide-cache.html
 [4]: https://rust-lang.github.io/rust-project-goals/2024h2/std-verification.html
 
-Project Goals will help ensure the sustainability of the Rust open source community. In the past, it was difficult to tell when starting work on a project whether it would be well-received by the Rust maintainers. This was an obstacle for those who would like to fund efforts to improve Rust, as people only like to fund work if they have some reasonable confidence it will succeed. Project goals are a way for project maintainers to "bless" a particular project and indicate their belief that it will be helpful to Rust. The Rust Foundation is using project goals as one of their criteria when considering [fellowship applications](https://foundation.rust-lang.org/grants/fellowships/), for example, and I expect over time other grant programs will do the same. But project goals are useful for others, too: having an approved project goal can help someone convince their employer to give them time to work on Rust open source efforts, for example, or give contractors the confidence they need to ensure their customer they'll be able to get the work done.
+Project Goals also help ensure the sustainability of the Rust open source community. In the past, it was difficult to tell when starting work on a project whether it would be well-received by the Rust maintainers. This was an obstacle for those who would like to fund efforts to improve Rust, as people don't like to fund work without reasonable confidence it will succeed. Project goals are a way for project maintainers to "bless" a particular project and indicate their belief that it will be helpful to Rust. The Rust Foundation is using project goals as one of their criteria when considering [fellowship applications](https://foundation.rust-lang.org/grants/fellowships/), for example, and I expect over time other grant programs will do the same. But project goals are useful for others, too: having an approved project goal can help someone convince their employer to give them time to work on Rust open source efforts, for example, or give contractors the confidence they need to ensure their customer they'll be able to get the work done.
 
-## Follow progress at whatever level of detail is best with you
-
-As the year progresses, you can follow along with the progress on Rust project goals just by looking for our regular blog posts. If you'd like to see more detail, then subscribe the various [tracking issues for the Project Goals that interest you][m], or monitor the [#project-goals channel](https://rust-lang.zulipchat.com/#narrow/stream/435869-project-goals) on the [rust-lang Zulip](https://rust-lang.zulipchat.com). See you there!
