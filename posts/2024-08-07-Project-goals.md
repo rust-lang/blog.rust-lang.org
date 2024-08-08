@@ -47,10 +47,10 @@ Check out [the whole list][23 other goals]! (Go ahead, we'll wait, but come back
 
 ## How to track progress
 
-Each of the proposed project goals has a dedicated tracking issue on the [rust-lang/rust-project-goals][] repository; these tracking issues are collected in the [2024h2 milestone][]; the assignee of those issues indicates the [owner][] for that particular work. The issues will receive regular status updates from their respective owners, and we will collate these updates into public blog posts.
+Each of the proposed project goals has a dedicated tracking issue on the [rust-lang/rust-project-goals][] repository; these tracking issues are collected in the [2024h2 milestone][m]; the assignee of those issues indicates the [owner][] for that particular work. The issues will receive regular status updates from their respective owners, and we will collate these updates into public blog posts.
 
 [rust-lang/rust-project-goals]: https://rust-lang.github.io/rust-project-goals/
-[2024h2 milestone]: https://github.com/rust-lang/rust-project-goals/milestone/2
+[m]: https://github.com/rust-lang/rust-project-goals/milestone/2
 [owner]: https://rust-lang.github.io/rust-project-goals/about/owners.html
 
 It's worth stating up front: **we don't expect all of these goals to be completed**. Many of them were proposed and owned by volunteers, and it's normal and expected that things don't always work out as planned. In the event that a goal seems to stall out, we can either look for a new owner or just consider the goal again in the next round of goal planning.
