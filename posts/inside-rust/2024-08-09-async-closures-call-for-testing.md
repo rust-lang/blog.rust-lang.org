@@ -57,7 +57,7 @@ RFC 3668 motivates this implementation work in detail, confirming that we need f
 
 ## So how do I help?
 
-We'd love for you to test out these new features!
+We'd love for you to test out these new features! First, on a recently-updated nightly compiler, enable the `#![feature(async_closure)]` (the feature is not pluralized).
 
 For Rust users, in general, async closures are designed to be drop-in compatible with closures returning async blocks:
 
