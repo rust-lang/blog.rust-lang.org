@@ -5,20 +5,20 @@ author: Michael Goulet
 team: The Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>
 ---
 
-The async working group is excited to announce that [RFC 3668] "Async Closures" was recently approved by the Lang team. In this post, we want to briefly motivate why they exist, explain their current shortcomings, and most importantly, announce a call for testing them on nightly Rust.
+The async working group is excited to announce that [RFC 3668] "Async Closures" was recently approved by the Lang team. In this post, we want to briefly motivate why async closures exist, explain their current shortcomings, and most importantly, announce a call for testing them on nightly Rust.
 
 ## The backstory
 
-Async closures were originally proposed in [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html#async--closures) which introduced `async`/`await` to the language. Simple handling of async closures has existed since async-await was implemented [soon thereafter](https://github.com/rust-lang/rust/pull/51580), but until recently async closures simply desugared into closures that returned async blocks:
+Async closures were originally proposed in [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html#async--closures) which introduced `async`/`await` to the language. Simple handling of async closures has existed in nightly since async-await was implemented [soon thereafter](https://github.com/rust-lang/rust/pull/51580), but until recently async closures simply desugared into closures that returned async blocks:
 
 ```rust
 let x = async || {};
 
-// ...is just sugar for:
+// ...was just sugar for:
 let x = || { async {} };
 ```
 
-This had a fundamental limitation that it's impossible to express a closure that returns a future that borrows captured state.
+This had a fundamental limitation that it was impossible to express a closure that returns a future that borrows captured state.
 
 Somewhat relatedly, on the callee side, when users want to take an async closure as an argument, they must express that as a bound of two different generic types, or use boxing:
 
@@ -34,13 +34,13 @@ where
     F: FnOnce() -> Pin<Box<dyn Future<Output = String>>>;
 ```
 
-This led to an additional limitation, that it's impossible to express higher ranked async fn bounds without boxing, since a higher ranked trait bound on `F` cannot lead to a higher-ranked type for `Fut`.
+This led to an additional limitation, that it's impossible to express higher-ranked async fn bounds without boxing, since a higher-ranked trait bound on `F` cannot lead to a higher-ranked type for `Fut`.
 
 These limitations were detailed in [Niko's blog post on async closures and lending](https://smallcultfollowing.com/babysteps/blog/2023/05/09/giving-lending-and-async-closures/#async-closures-are-a-lending-pattern), and later in compiler-errors's blog post on [why async closures are the way they are](https://hackmd.io/@compiler-errors/async-closures).
 
 ## OK, so how does [RFC 3668] help?
 
-Recent [implementation work](https://github.com/rust-lang/rust/pull/120361) has focused on reimplementing async closures to be lending, and to design a set of async fn traits to use in parallel. While async closures already existed as syntax, it introduced a new family of async fn traits which are implemented by async closures (and all other callable types which return futures), and which can be written like:
+Recent [work](https://github.com/rust-lang/rust/pull/120361) has focused on reimplementing async closures to be lending and designing a set of async fn traits. While async closures already existed as syntax, this work introduced a new family of async fn traits which are implemented by async closures (and all other callable types which return futures). They can be written like:
 
 ```rust
 fn test<F>(callback: F)
@@ -57,9 +57,9 @@ RFC 3668 motivates this implementation work in detail, confirming that we need f
 
 ## So how do I help?
 
-We'd love for you to test out these new features! First, on a recently-updated nightly compiler, enable the `#![feature(async_closure)]` (the feature is not pluralized).
+We'd love for you to test out these new features! First, on a recently-updated nightly compiler, enable `#![feature(async_closure)]` (note that, for historical reasons, this feature name is not pluralized).
 
-For Rust users, in general, async closures are designed to be drop-in compatible with closures returning async blocks:
+Async closures are designed to be drop-in compatible (in almost all cases) with closures returning async blocks:
 
 ```rust
 // Instead of writing:
@@ -73,7 +73,7 @@ takes_async_callback(async |arg| {
 });
 ```
 
-And on the callee side, users should write async fn trait bounds instead of writing "regular" fn trait bounds that return futures:
+And on the callee side, write async fn trait bounds instead of writing "regular" fn trait bounds that return futures:
 
 ```rust
 // Instead of writing:
@@ -91,7 +91,7 @@ fn takes_an_async_closure<F: AsyncFnOnce() -> String>() { todo!() }
 
 ## Shortcomings interacting with the async ecosystem
 
-If you're going to try to rewrite your async projects, there are a few shortcomings you may want to be aware of.
+If you're going to try to rewrite your async projects, there are a few shortcomings to be aware of.
 
 ### You can't directly name the output future
 
@@ -113,12 +113,12 @@ We expect to support this in the medium/long term via a [return-type-notation sy
 
 Passing an async closure to a generic `impl Fn(A, B) -> C` bound may not always eagerly infer the closure's arguments to `A` and `B`, leading to strange type errors on occasion. For an example of this, see [`rust-lang/rust#127781`](https://github.com/rust-lang/rust/issues/127781).
 
-We expect to improve async closure signature inference moving forward.
+We expect to improve async closure signature inference as we move forward.
 
 ### Async closures can't be coerced to `fn()` pointers
 
 Some libraries take their callbacks as function *pointers* (`fn()`) rather than generics. Async closures don't currently implement the same coercion from closure to `fn() -> ...`. Some libraries may mitigate this problem by adapting their API to take generic `impl Fn()` instead of `fn()` pointers as an argument.
 
-We don't expect to implement this coercion unless there's a particularly good reason to support, since they can always be replaced with an inner function item.
+We don't expect to implement this coercion unless there's a particularly good reason to support it, since this can always be handled manually by the caller with an inner function item.
 
 [RFC 3668]: https://rust-lang.github.io/rfcs/3668-async-closures.html
