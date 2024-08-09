@@ -47,7 +47,7 @@ fn test<F>(callback: F)
 where
     // Either:
     async Fn(Arg, Arg) -> Ret
-    // or:
+    // Or:
     AsyncFn(Arg, Arg) -> Ret
 ```
 
@@ -85,7 +85,7 @@ where
 
 // Write this:
 fn takes_an_async_closure<F: async FnOnce() -> String>() { todo!() }
-// or this:
+// Or this:
 fn takes_an_async_closure<F: AsyncFnOnce() -> String>() { todo!() }
 ```
 
