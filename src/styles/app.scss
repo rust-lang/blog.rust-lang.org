@@ -3,8 +3,10 @@
 $body-font: 'Fira Sans', Helvetica, Arial, sans-serif;
 $header-font: 'Alfa Slab One', serif;
 
+// Switching theme will only work if JavaScript is enabled as well
+
 // Default light theme
-:root {
+:root, :root:not([data-theme]) {
   --gray: #2a3439;
   --red: #a72145;
   --yellow: #ffc832;
@@ -23,27 +25,38 @@ $header-font: 'Alfa Slab One', serif;
   --nav-links-a: #2a3439;
   --publish-date-author: #2a3439;
   --section-header-h2-color: black;
+  --theme-icon: #43484d;
+  --theme-popup-border: #43484d;
+  --theme-popup-bg: white;
+  --theme-hover: #cacaca;
+  --theme-choice-color: black;
 }
 
 // Dark theme
-@media (prefers-color-scheme: dark) {
-  :root {
-    --code-color: white;
-    --code-bg-color: rgba(213, 203, 198, 0.05);
-    --code-border-color: rgba(213, 203, 198, 0.25);
-    --blockquote-color: rgb(195, 205, 210);
-    --blockquote-bg-color: rgba(213, 203, 198, 0.05);
-    --blockquote-left-border-color: rgb(195, 205, 210);
-    --body-background-color: #181a1b;
-    --body-foreground-color: #e8e6e3;
-    --body-color: white;
-    --div-brand-a-color: white;
-    --white-elem-color: white;
-    --white-elem-a: #d5cbc6;
-    --nav-links-a: #d5cbc6;
-    --publish-date-author: #d5cbc6;
-    --section-header-h2-color: white;
-  }
+:root[data-theme='dark'] {
+  --gray: #2a3439;
+  --red: #a72145;
+  --yellow: #ffc832;
+  --code-color: white;
+  --code-bg-color: rgba(213, 203, 198, 0.05);
+  --code-border-color: rgba(213, 203, 198, 0.25);
+  --blockquote-color: rgb(195, 205, 210);
+  --blockquote-bg-color: rgba(213, 203, 198, 0.05);
+  --blockquote-left-border-color: rgb(195, 205, 210);
+  --body-background-color: #181a1b;
+  --body-foreground-color: #e8e6e3;
+  --body-color: white;
+  --div-brand-a-color: white;
+  --white-elem-color: white;
+  --white-elem-a: #d5cbc6;
+  --nav-links-a: #d5cbc6;
+  --publish-date-author: #d5cbc6;
+  --section-header-h2-color: white;
+  --theme-icon: #43484d;
+  --theme-popup-border: #43484d;
+  --theme-popup-bg: #141617;
+  --theme-hover: #474c51;
+  --theme-choice-color: #d5cbc6;
 }
 
 html {
@@ -362,4 +375,46 @@ header h1 {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
   }
+}
+
+// Theme switch popup
+// theme selector visible only if JavaScript is available
+
+.theme-icon {
+  display: none;
+  line-height: 2em;
+  border: 2px solid var(--theme-icon);
+  border-radius: 5px;
+  padding: 0px 5px;
+  color: var(--theme-choice-color);
+  &:hover {
+    color: var(--theme-choice-color);
+  }
+}
+
+#theme-choice {
+  display: none;
+  border: 2px solid var(--theme-popup-border);
+  border-radius: 5px;
+  color: var(--theme-choice-color);
+  background: var(--theme-popup-bg);
+  position: absolute;
+  list-style: none;
+  font-weight: 400;
+  padding: 0px;
+  // counterbalance vendored skeleton.css
+  margin: 0.2em -0.5em;
+}
+
+.theme-item {
+  padding: 0px 5px;
+}
+
+#theme-choice.showThemeDropdown {
+  display: block;
+  z-index: 1;
+}
+
+li.theme-item:hover {
+  background-color: var(--theme-hover);
 }
