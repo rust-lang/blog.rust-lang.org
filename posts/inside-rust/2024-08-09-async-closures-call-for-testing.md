@@ -119,6 +119,6 @@ We expect to improve async closure signature inference as we move forward.
 
 Some libraries take their callbacks as function *pointers* (`fn()`) rather than generics. Async closures don't currently implement the same coercion from closure to `fn() -> ...`. Some libraries may mitigate this problem by adapting their API to take generic `impl Fn()` instead of `fn()` pointers as an argument.
 
-We don't expect to implement this coercion unless there's a particularly good reason to support it, since this can always be handled manually by the caller with an inner function item.
+We don't expect to implement this coercion unless there's a particularly good reason to support it, since this can usually be handled manually by the caller by using an inner function item.
 
 [RFC 3668]: https://rust-lang.github.io/rfcs/3668-async-closures.html
