@@ -50,7 +50,7 @@ Check out [the whole list][23 other goals]! (Go ahead, we'll wait, but come back
 
 ## How to track progress
 
-As the year progresses, we will be posting regular blog posts summarizing the progress on the various goals. If you'd like to see more detail, the [2024h2 milestone][m] on the [rust-lang/rust-project-goals][] repository has tracking issues for each of the goals. Each issue is assigned to the [owner(s)][o] of that particular goal. You can subscribe to the issue to receive regular updates, or monitor the [#project-goals channel](https://rust-lang.zulipchat.com/#narrow/stream/435869-project-goals) on the [rust-lang Zulip](https://rust-lang.zulipchat.com).
+As the year progresses, we will be posting regular blog posts summarizing the progress on the various goals. If you'd like to see more detail, the [2024h2 milestone][m] on the [rust-lang/rust-project-goals][] repository has tracking issues for each of the goals. Each issue is assigned to the [owner(s)][o] of that particular goal. You can subscribe to the issue to receive regular updates, or monitor the [#project-goals channel](https://rust-lang.zulipchat.com/#narrow/stream/435869-project-goals) on the [rust-lang Zulip](https://rust-lang.zulipchat.com). Over time we will likely create other ways to follow along, such as a page on rust-lang.org to visualize progress (if you'd like to help with that, reach out to @nikomatsakis, thanks!).
 
 [rust-lang/rust-project-goals]: https://rust-lang.github.io/rust-project-goals/
 [m]: https://github.com/rust-lang/rust-project-goals/milestone/2
