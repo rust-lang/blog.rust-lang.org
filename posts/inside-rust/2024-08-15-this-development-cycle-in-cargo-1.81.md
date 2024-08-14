@@ -354,7 +354,7 @@ Concerned about accurately representing where the conversation went
 - [#14224: Note MSRV for features in documentation](https://github.com/rust-lang/cargo/pull/14224)
 - On-going work on [#14058: `cargo:rerun-if-env-changed` doesn't work with env configuration](https://github.com/rust-lang/cargo/pull/14058)
 - On-going work on [#14280: `cargo install --dry-run`](https://github.com/rust-lang/cargo/pull/14280)
-- [Daily reports](https://rust-lang.zulipchat.com/#narrow/stream/260232-t-cargo.2FPubGrub/topic/Progress.20report) by [Eh2406](https://github.com/Eh2406) on the progress of the Rust implementation of the PugGrub version solving algorithm
+- [Daily reports](https://rust-lang.zulipchat.com/#narrow/stream/260232-t-cargo.2FPubGrub/topic/Progress.20report) by [Eh2406](https://github.com/Eh2406) on the progress of the Rust implementation of the PubGrub version solving algorithm
 
 ## Focus areas without progress
 
