@@ -20,21 +20,16 @@ let x = || { async {} };
 
 This had a fundamental limitation that it was impossible to express a closure that returns a future that borrows captured state.
 
-Somewhat relatedly, on the callee side, when users want to take an async closure as an argument, they must express that as a bound of two different generic types, or use boxing:
+Somewhat relatedly, on the callee side, when users want to take an async closure as an argument, they typically express that as a bound of two different generic types:
 
 ```rust
 fn async_callback<F, Fut>(callback: F)
 where
     F: FnOnce() -> Fut,
     Fut: Future<Output = String>;
-
-// Or:
-fn async_callback_boxed<F, Fut>(callback: F)
-where
-    F: FnOnce() -> Pin<Box<dyn Future<Output = String>>>;
 ```
 
-This led to an additional limitation, that it's impossible to express higher-ranked async fn bounds using this without boxing (since a higher-ranked trait bound on `F` cannot lead to a higher-ranked type for `Fut`), leading to unnecessary allocations:
+This also led to an additional limitation that it's impossible to express higher-ranked async fn bounds using this without boxing (since a higher-ranked trait bound on `F` cannot lead to a higher-ranked type for `Fut`), leading to unnecessary allocations:
 
 ```rust
 fn async_callback<F, Fut>(callback: F)
@@ -146,7 +141,7 @@ We expect to improve async closure signature inference as we move forward.
 
 Some libraries take their callbacks as function *pointers* (`fn()`) rather than generics. Async closures don't currently implement the same coercion from closure to `fn() -> ...`. Some libraries may mitigate this problem by adapting their API to take generic `impl Fn()` instead of `fn()` pointers as an argument.
 
-We don't expect to implement this coercion unless there's a particularly good reason to support it, since this can usually be handled manually by the caller by using an inner function item, or by using an `Fn` bound instead: for example:
+We don't expect to implement this coercion unless there's a particularly good reason to support it, since this can usually be handled manually by the caller by using an inner function item, or by using an `Fn` bound instead, for example:
 
 ```rust
 fn needs_fn_pointer<T: Future<Output = ()>>(callback: fn() -> T) { todo!() }
