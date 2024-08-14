@@ -34,7 +34,19 @@ where
     F: FnOnce() -> Pin<Box<dyn Future<Output = String>>>;
 ```
 
-This led to an additional limitation, that it's impossible to express higher-ranked async fn bounds without boxing, since a higher-ranked trait bound on `F` cannot lead to a higher-ranked type for `Fut`.
+This led to an additional limitation, that it's impossible to express higher-ranked async fn bounds using this without boxing (since a higher-ranked trait bound on `F` cannot lead to a higher-ranked type for `Fut`), leading to unnecessary allocations:
+
+```rust
+fn async_callback<F, Fut>(callback: F)
+where
+    F: FnOnce(&str) -> Pin<Box<dyn Future<Output = ()> + '_>>;
+
+async fn do_something(name: &str) {}
+
+async_callback(|name| Box::pin(async {
+    do_something(name).await;
+}));
+```
 
 These limitations were detailed in [Niko's blog post on async closures and lending](https://smallcultfollowing.com/babysteps/blog/2023/05/09/giving-lending-and-async-closures/#async-closures-are-a-lending-pattern), and later in compiler-errors's blog post on [why async closures are the way they are](https://hackmd.io/@compiler-errors/async-closures).
 
