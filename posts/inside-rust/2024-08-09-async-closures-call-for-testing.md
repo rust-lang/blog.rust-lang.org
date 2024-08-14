@@ -46,9 +46,9 @@ Recent [work](https://github.com/rust-lang/rust/pull/120361) has focused on reim
 fn test<F>(callback: F)
 where
     // Either:
-    async Fn(Arg, Arg) -> Ret
+    async Fn(Arg, Arg) -> Ret,
     // Or:
-    AsyncFn(Arg, Arg) -> Ret
+    AsyncFn(Arg, Arg) -> Ret,
 ```
 
 (It's currently an [open question](https://github.com/rust-lang/rust/issues/128129) exactly how to spell this bound, so both syntaxes are implemented in parallel.)
@@ -77,16 +77,31 @@ And on the callee side, write async fn trait bounds instead of writing "regular"
 
 ```rust
 // Instead of writing:
-fn doesnt_exactly_take_an_async_closure<F, Fut>()
+fn doesnt_exactly_take_an_async_closure<F, Fut>(callback: F)
 where
     F: FnOnce() -> Fut,
     Fut: Future<Output = String>
 { todo!() }
 
 // Write this:
-fn takes_an_async_closure<F: async FnOnce() -> String>() { todo!() }
+fn takes_an_async_closure<F: async FnOnce() -> String>(callback: F) { todo!() }
 // Or this:
-fn takes_an_async_closure<F: AsyncFnOnce() -> String>() { todo!() }
+fn takes_an_async_closure<F: AsyncFnOnce() -> String>(callback: F) { todo!() }
+```
+
+Or if you're emulating a higher-ranked async closure with boxing:
+
+```rust
+// Instead of writing:
+fn higher_ranked<F>(callback: F)
+where
+    F: Fn(&Arg) -> Pin<Box<dyn Future<Output = ()> + '_>>
+{ todo!() }
+
+// Write this:
+fn higher_ranked<F: async Fn(&Arg)> { todo!() }
+// Or this:
+fn higher_ranked<F: AsyncFn(&Arg)> { todo!() }
 ```
 
 ## Shortcomings interacting with the async ecosystem
@@ -98,7 +113,7 @@ If you're going to try to rewrite your async projects, there are a few shortcomi
 When you name an async callable bound with the *old* style, before first-class async fn trait bounds, then as a side-effect of needing to use two type parameters, you can put additional bounds (e.g. `+ Send` or `+ 'static`) on the `Future` part of the bound, like:
 
 ```rust
-fn async_callback<F, Fut>()
+fn async_callback<F, Fut>(callback: F)
 where
     F: FnOnce() -> Fut,
     Fut: Future<Output = String> + Send + 'static
@@ -119,6 +134,26 @@ We expect to improve async closure signature inference as we move forward.
 
 Some libraries take their callbacks as function *pointers* (`fn()`) rather than generics. Async closures don't currently implement the same coercion from closure to `fn() -> ...`. Some libraries may mitigate this problem by adapting their API to take generic `impl Fn()` instead of `fn()` pointers as an argument.
 
-We don't expect to implement this coercion unless there's a particularly good reason to support it, since this can usually be handled manually by the caller by using an inner function item.
+We don't expect to implement this coercion unless there's a particularly good reason to support it, since this can usually be handled manually by the caller by using an inner function item, or by using an `Fn` bound instead: for example:
+
+```rust
+fn needs_fn_pointer<T: Future<Output = ()>>(callback: fn() -> T) { todo!() }
+
+fn main() {
+    // Instead of writing:
+    needs_fn_pointer(async || { todo!() });
+    // Since async closures don't currently support coercion to `fn() -> ...`.
+
+    // You can use an inner async fn item:
+    async fn callback() { todo!() }
+    needs_fn_pointer(callback);
+}
+
+// Or if you don't need to take *exactly* a function pointer,
+// you can rewrite `needs_fn_pointer` like:
+fn needs_fn_pointer(callback: impl async Fn()) { todo!() }
+// Or with `AsyncFn`:
+fn needs_fn_pointer(callback: impl AsyncFn()) { todo!() }
+```
 
 [RFC 3668]: https://rust-lang.github.io/rfcs/3668-async-closures.html
