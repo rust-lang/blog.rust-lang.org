@@ -271,7 +271,7 @@ This included adapting the code from being written as a third-party to being wri
 
 There was some discussion on whether to insta-stabilize.
 As a third-party command, we are able to get the testing benefits of nightly-only features.
-If we don't insta-stabilize it, you could only run it as `cargo +nightly -Zsubcommand info` or run the existing `cargo-info` as `cargo info` but `cargo-info info`; `cargo info` would fail.
+If we don't insta-stabilize it, you could only run it as `cargo +nightly -Zsubcommand info` or run the existing `cargo-info` not as `cargo info` but `cargo-info info`; `cargo info` would fail.
 Like with `cargo add` and `cargo remove`, we decided to insta-stabilize.
 
 FCP was started for this command.
