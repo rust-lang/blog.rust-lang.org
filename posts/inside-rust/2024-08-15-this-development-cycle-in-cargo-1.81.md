@@ -226,7 +226,7 @@ They can already do `RUSTFLAGS=-Awarnings`, so no real loss.
 
 [torhovland](https://github.com/torhovland) has been polishing `cargo update --breaking`
 ([14259](https://github.com/rust-lang/cargo/pull/14259))
-and on adding `cargo update --precise <breaking>`
+and working on adding `cargo update --precise <breaking>`
 ([#14140](https://github.com/rust-lang/cargo/pull/14140)).
 This has uncovered a lot of UX decisions that were left unspecified in
 [#12425](https://github.com/rust-lang/cargo/issues/12425)
