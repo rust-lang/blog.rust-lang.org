@@ -32,7 +32,7 @@ where
 This also led to an additional limitation that it's impossible to express higher-ranked async fn bounds using this without boxing (since a higher-ranked trait bound on `F` cannot lead to a higher-ranked type for `Fut`), leading to unnecessary allocations:
 
 ```rust
-fn async_callback<F, Fut>(callback: F)
+fn async_callback<F>(callback: F)
 where
     F: FnOnce(&str) -> Pin<Box<dyn Future<Output = ()> + '_>>;
 
