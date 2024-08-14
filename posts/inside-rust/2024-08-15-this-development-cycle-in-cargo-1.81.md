@@ -230,7 +230,7 @@ and working on adding `cargo update --precise <breaking>`
 ([#14140](https://github.com/rust-lang/cargo/pull/14140)).
 This has uncovered a lot of UX decisions that were left unspecified in
 [#12425](https://github.com/rust-lang/cargo/issues/12425)
-that juxtopose different workflows against each other and against the non-breaking behavior of `cargo update`, including
+that juxtapose different workflows against each other and against the non-breaking behavior of `cargo update`, including
 - Should `cargo update --precise <breaking>` only apply to direct dependencies or also to transitive dependencies (which would error)?  This gets strange when you have both a direct and transitive path to a dependency.  Should we only update one of them or error?
 - How free should cargo be to updating other dependencies to allow a breaking update to occur?  Currently, `--precise` only allows the dependency you specified to be updated unless you pass `--recursive`.  Its likely that a breaking change will have a cascading effect.
 
