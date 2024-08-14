@@ -299,7 +299,8 @@ you are asking for dependencies of that instance of the project and an ephemeral
 <!-- 2024-07-16 -->
 One proposed compromise was a
 [`--lockfile-path`](https://github.com/rust-lang/cargo/issues/5707)
-flag that allowed callers to move the lockfile generation to a writeable location.
+flag that allowed callers to override the lockfile location used by the project,
+allowing callers to use a writeable location.
 [Ifropc](https://github.com/Ifropc) drove the conversation on this and we discussed it further among the Cargo team.
 
 For the design, we decided to be consistent in behavior with `--manifest-path`
