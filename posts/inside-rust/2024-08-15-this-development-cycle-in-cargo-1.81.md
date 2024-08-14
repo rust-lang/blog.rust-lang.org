@@ -300,7 +300,7 @@ you are asking for dependencies of that instance of the project and an ephemeral
 One proposed compromise was a
 [`--lockfile-path`](https://github.com/rust-lang/cargo/issues/5707)
 flag that allowed callers to move the lockfile generation to a writeable location.
-[Ifropc](https://github.com/Ifropc) drove the conversation on this and we discussed it further amonmg the Cargo team.
+[Ifropc](https://github.com/Ifropc) drove the conversation on this and we discussed it further among the Cargo team.
 
 For the design, we decided to be consistent in behavior with `--manifest-path`
 - CLI flag, not in the manifest or in config
