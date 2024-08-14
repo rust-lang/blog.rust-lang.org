@@ -52,14 +52,14 @@ Thanks to [LukeMathWalker](https://github.com/LukeMathWalker) for the suggestion
 While there isn't a technical discussion to note, we felt it was important to call out the hard work of the people who participated in porting almost all of Cargo's 3000+ tests from the besoke assertions to `snapbox` as tracked in [#14039](https://github.com/rust-lang/cargo/issues/14039).
 
 - [Muscraft](https://github.com/Muscraft)
-- [weihanglo](https://github.com/weihanglo)
-- [heisen-li](https://github.com/heisen-li)
-- [eth3lbert](https://github.com/eth3lbert)
-- [dieterplex](https://github.com/dieterplex)
 - [choznerol](https://github.com/choznerol)
-- [rami3l](https://github.com/rami3l)
-- [linyihai](https://github.com/linyihai)
+- [dieterplex](https://github.com/dieterplex)
+- [eth3lbert](https://github.com/eth3lbert)
+- [heisen-li](https://github.com/heisen-li)
 - [henry40408](https://github.com/henry40408)
+- [linyihai](https://github.com/linyihai)
+- [rami3l](https://github.com/rami3l)
+- [weihanglo](https://github.com/weihanglo)
 
 We still have a few spots left for the initial pass and then to dig into the corner cases we deferred.
 
