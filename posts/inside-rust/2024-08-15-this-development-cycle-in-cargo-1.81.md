@@ -291,7 +291,7 @@ When discussing that problem, the main perspectives were
 - `cargo metadata` should be consistent in its output which can only happen if we can write a `Cargo.lock` to the filesystem
 - `cargo metadata` should always let me query information, even it means the information changes due to outside changes (e.g. a new version of a dependency is published so it gets selected)
 
-The problem I see with the latter is user intention.
+The problem with the latter is user intention.
 Today, you can run `cargo metadata --no-deps` and no `Cargo.lock` gets generated so there isn't a problem.
 Once you ask for dependencies,
 you are asking for dependencies of that instance of the project and an ephemeral state. 
