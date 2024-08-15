@@ -14,7 +14,7 @@ We're envisioning three use cases for metrics within rustc.
 * Guiding improvements to User Experience,
     * e.g., knowing which compiler errors are causing the most confusion or are hit the most frequently, focusing on improving those first, and verifying that the improvements help
 * Improving perf feedback loops and insight,
-    * e.g., helping identify pathological edge cases, similar to work @nnethercote has done manually in the past
+    * e.g., helping identify pathological edge cases, similar to [work](https://nnethercote.github.io/2022/02/25/how-to-speed-up-the-rust-compiler-in-2022.html) @nnethercote has done manually in the past
 
 We're at the point of the initiative where we would like to inform the project members about it and start implementing the metrics infrastructure in collaboration with their real-world needs.
 
