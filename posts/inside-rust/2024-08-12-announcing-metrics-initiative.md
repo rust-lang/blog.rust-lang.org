@@ -5,7 +5,7 @@ author: Jane Losare-Lusby and Esteban Kuber
 team: The Rust Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
 ---
 
-We ([Jane](https://github.com/yaahc/) and [Esteban](https://github.com/estebank)) are excited to announce the start of the Metrics initiative.
+We ([Jane](https://github.com/yaahc/) and [Esteban](https://github.com/estebank)) are excited to announce the start of the Metrics initiative, an **opt-in** and privacy-preserving system for recording various metrics and metadata from Rust compiler invocations. These metrics can then be optionally uploaded by Rust users to provide us with useful information about how Rust is being used in the wild.
 
 We're envisioning three use cases for metrics within rustc.
 
