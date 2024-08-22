@@ -27,7 +27,7 @@ the adoption of Rust for these systems.
 Please help us spread the word by sharing the [survey link][2024 Community Micro Survey] via your social networks,
 at meetups, with colleagues, and in any other community that makes sense to you.
 
-This survey would not be possible without the time, resources, and attention of members of the Survey Working Group,
+This survey would not be possible without the time, resources, and attention of members of the Survey Team,
 the Embedded Working Group, the Rust Foundation, and other collaborators. Thank you!
 
 We appreciate your participation!
