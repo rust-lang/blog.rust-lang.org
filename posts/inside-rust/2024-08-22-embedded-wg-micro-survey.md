@@ -5,13 +5,13 @@ author: James Munns
 team: Embedded Devices Working Group <https://www.rust-lang.org/governance/wgs/embedded>
 ---
 
-The [Embedded devices working group] has launched the [2024 Community Micro Survey] starting
+The [Embedded devices working group] has launched the [2024 Embedded Community Micro Survey] starting
 today, and running until **September 19th, 2024**.
 
-**You can take the survey now by [clicking here][2024 Community Micro Survey].**
+**You can take the survey now by [clicking here][2024 Embedded Community Micro Survey].**
 
 [Embedded devices working group]: https://www.rust-lang.org/governance/wgs/embedded
-[2024 Community Micro Survey]: https://www.surveyhero.com/c/uenp3ydt
+[2024 Embedded Community Micro Survey]: https://www.surveyhero.com/c/uenp3ydt
 
 This survey is aimed at gathering information about the community of users who use the Rust Programming Language
 for Embedded Systems, including on microcontrollers. It is being run as a [Micro Survey], run by the same
@@ -24,7 +24,7 @@ We invite you to take this survey even if you have only just begun with Rust on 
 or have only experimented with it informally. Your responses will help us gather data over time towards
 the adoption of Rust for these systems.
 
-Please help us spread the word by sharing the [survey link][2024 Community Micro Survey] via your social networks,
+Please help us spread the word by sharing the [survey link][2024 Embedded Community Micro Survey] via your social networks,
 at meetups, with colleagues, and in any other community that makes sense to you.
 
 This survey would not be possible without the time, resources, and attention of members of the Survey Team,
