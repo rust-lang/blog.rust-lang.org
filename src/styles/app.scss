@@ -30,6 +30,7 @@ $header-font: 'Alfa Slab One', serif;
   --theme-popup-bg: white;
   --theme-hover: #cacaca;
   --theme-choice-color: black;
+  --rust-logo-filter: initial;
 }
 
 // Dark theme
@@ -57,6 +58,7 @@ $header-font: 'Alfa Slab One', serif;
   --theme-popup-bg: #141617;
   --theme-hover: #474c51;
   --theme-choice-color: #d5cbc6;
+  --rust-logo-filter: drop-shadow(1px 0 0px #fff) drop-shadow(0 1px 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 -1px 0 #fff);
 }
 
 html {
@@ -79,7 +81,7 @@ body {
   display: flex;
   flex-direction: column;
   & > #main-content {
-    flex: 1;
+      flex: 1;
   }
 }
 
@@ -192,7 +194,7 @@ div.brand {
 }
 
 .white {
-  color: var(--white-elem-color);
+   color: var(--white-elem-color);
   .highlight {
     background-color: var(--yellow);
   }
@@ -334,7 +336,7 @@ h3, .post h2, header h2 {
   h2 {
     font-size: 2em;
   }
-
+  
   h3 {
     display: block;
   }
@@ -417,4 +419,8 @@ header h1 {
 
 li.theme-item:hover {
   background-color: var(--theme-hover);
+}
+
+.rust-logo {
+    filter: var(--rust-logo-filter);
 }

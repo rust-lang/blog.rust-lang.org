@@ -21,6 +21,7 @@
   --nav-links-a: #2a3439;
   --publish-date-author: #2a3439;
   --section-header-h2-color: black;
+  --rust-logo-filter: initial;
 }
 
 // Dark theme (probed from user prefs)
@@ -44,6 +45,7 @@
     --nav-links-a: #d5cbc6;
     --publish-date-author: #d5cbc6;
     --section-header-h2-color: white;
+    --rust-logo-filter: drop-shadow(1px 0 0px #fff) drop-shadow(0 1px 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 -1px 0 #fff);
   }
 }
 
