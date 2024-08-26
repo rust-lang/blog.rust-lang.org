@@ -37,7 +37,7 @@ disabled.
 
 There is a loose coupling between the name of a proposal (often the name of the
 github repository of the proposal) and the feature name LLVM/Rust use. For
-example there is the [`multi-value`
+example there is the [multi-value
 proposal](https://github.com/webAssembly/multi-value) but a `multivalue`
 feature.
 
@@ -64,7 +64,8 @@ host-defined GC resource that WebAssembly cannot access but can pass around.
 Rust does not have support for the WebAssembly `externref` type and LLVM 19 does
 not change that. WebAssembly modules produced from Rust will continue to not use
 the `externref` type nor have a means of being able to do so. This may be
-enabled in the future, but it will mostly likely only be done on an opt-in basis
+enabled in the future (e.g. a hypothetical `core::arch::wasm32::Externref` type
+or similar), but it will mostly likely only be done on an opt-in basis
 and will not affect preexisting code by default.
 
 Also included in the reference-types proposal, however, was the ability to have
@@ -81,7 +82,7 @@ was encoded with a fixed zero byte in its instruction (required to be exactly
 0x00). This fixed zero byte was relaxed to a 32-bit [LEB] to indicate which
 table the `call_indirect` instruction was using. For those unfamiliar [LEB] is a
 way of encoding multi-byte integers in a smaller number of bytes for smaller
-integers. For example the 32-gbit integer 0 can be encoded as `0x00` with a
+integers. For example the 32-bit integer 0 can be encoded as `0x00` with a
 [LEB]. [LEB]s are flexible to additionally allow "overlong" encodings so the
 integer 0 can additionally be encoded as `0x80 0x00`.
 
@@ -102,7 +103,7 @@ do not support the reference-types proposal. It is expected that this change
 will have a low impact due to the age of the reference-types proposal and
 breadth of implementation in engines. Given the multitude of WebAssembly
 engines, however, it's recommended that any WebAssembly users test out
-Nightly Rust and see if the produced module still runs on the engine of
+Nightly Rust and see if the produced module still runs on their engine of
 choice.
 
 ### LLVM, Rust, and Multiple Tables
@@ -144,9 +145,11 @@ original MVP and has been implemented in many engines for quite some time.
 The consequences of enabling this feature by default in LLVM are more minor for
 Rust, however, than enabling the `reference-types` feature by default. LLVM's
 default C ABI for WebAssembly code is not changing even when `multivalue` is
-enabled.  Additionally Rust's `extern "C"` ABI is not changing either and
-continues to match LLVM's. Despite this though the change has the possibility
-of still affecting Nightly users of Rust.
+enabled.  Additionally Rust's `extern "C"` ABI for WebAssembly is not changing
+either and continues to match LLVM's (or strives to, [differences to
+LLVM](https://github.com/rust-lang/rust/issues/115666) are considered bugs to
+fix). Despite this though the change has the possibility of still affecting
+Nightly users of Rust.
 
 Rust for some time has supported an `extern "wasm"` ABI on Nightly which was an
 experimental means of exposing the ability of defining a function in Rust which
@@ -166,11 +169,11 @@ from suitably motivated contributors.
 
 ### Aside: ABI Stability and WebAssembly
 
-While on the topics of ABIs and the `multi-value` feature it's perhaps worth
+While on the topic of ABIs and the `multivalue` feature it's perhaps worth
 also going over a bit what ABIs mean for WebAssembly. Currently there's
 effectively only one ABI implemented by LLVM and the Rust compiler meaning that
 at the WebAssembly module level `extern "C"` and `extern "Rust"` are
-more-or-less the same. Despite this though there's no need for this to be true.
+more-or-less the same. It is **not** guaranteed for the ABIs to match, however.
 
 The `extern "C"` ABI, what C code uses by default as well, is difficult to
 change because stability is often required across different compiler versions.
@@ -180,12 +183,14 @@ task that requires version fields, explicit markers, etc, to help prevent
 mismatches.
 
 The `extern "Rust"` ABI, however, is entirely within the control of the Rust
-compiler and can change from version to version. Just because it happens to work
-like `extern "C"` today doesn't mean it will continue to do so in the future. A
-great example of this is that when the `multi-value` feature is enabled the
+compiler and can change from version to version (there are no stability
+guarantees across compiler versions and this is applicable to all platforms, not
+just WebAssembly). Just because `extern "Rust"` happens to work like `extern
+"C"` in WebAssembly today doesn't mean it will continue to do so in the future.
+A great example of this is that when the `multivalue` feature is enabled the
 `extern "Rust"` ABI could be redefined to use the multiple-return-values that
-WebAssembly would then support. This would enable much more efficient returns of
-values larger than 64-bits. Implementing this would require support in LLVM
+WebAssembly would then support. This would enable much more efficient returns
+of values larger than 64-bits. Implementing this would require support in LLVM
 though which is not currently present.
 
 ## Enabling Future Proposals to WebAssembly
@@ -226,9 +231,9 @@ For a variety of reasons you might be motivated to disable on-by-default
 WebAssembly features: for example maybe your engine is difficult to update or
 doesn't support a new feature. Disabling on-by-default features is unfortunately
 not the easiest task. It is notably not sufficient to use
-`-Ctarget-features=-foo` to disable features for just your own project's
+`-Ctarget-features=-sign-ext` to disable a feature for just your own project's
 compilation because the Rust standard library, shipped in precompiled form, is
-compiled with this features enabled.
+still compiled with the feature enabled.
 
 To disable on-by-default WebAssembly proposal it's required that you use Cargo's
 [`-Zbuild-std`](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#build-std)
