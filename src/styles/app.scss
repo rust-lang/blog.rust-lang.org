@@ -3,14 +3,66 @@
 $body-font: 'Fira Sans', Helvetica, Arial, sans-serif;
 $header-font: 'Alfa Slab One', serif;
 
-$gray: #2a3439;
-$red: #a72145;
-$green: #0b7261;
-$purple: #2e2459;
-$yellow: #ffc832;
+// Switching theme will only work if JavaScript is enabled as well
+
+// Default light theme
+:root, :root:not([data-theme]) {
+  --gray: #2a3439;
+  --red: #a72145;
+  --yellow: #ffc832;
+  --code-color: black;
+  --code-bg-color: rgba(42, 52, 57, 0.05);
+  --code-border-color: rgba(42, 52, 57, 0.25);
+  --blockquote-color: black;
+  --blockquote-bg-color: rgb(247, 249, 249);
+  --blockquote-left-border-color: rgb(195, 205, 210);
+  --body-background-color: white;
+  --body-foreground-color: white;
+  --body-color: rgb(34,34,34);
+  --div-brand-a-color: black;
+  --white-elem-color: black;
+  --white-a: #2a3439;
+  --nav-links-a: #2a3439;
+  --publish-date-author: #2a3439;
+  --section-header-h2-color: black;
+  --theme-icon: #43484d;
+  --theme-popup-border: #43484d;
+  --theme-popup-bg: white;
+  --theme-hover: #cacaca;
+  --theme-choice-color: black;
+  --rust-logo-filter: initial;
+}
+
+// Dark theme
+:root[data-theme='dark'] {
+  --gray: #2a3439;
+  --red: #a72145;
+  --yellow: #ffc832;
+  --code-color: white;
+  --code-bg-color: rgba(213, 203, 198, 0.05);
+  --code-border-color: rgba(213, 203, 198, 0.25);
+  --blockquote-color: rgb(195, 205, 210);
+  --blockquote-bg-color: rgba(213, 203, 198, 0.05);
+  --blockquote-left-border-color: rgb(195, 205, 210);
+  --body-background-color: #181a1b;
+  --body-foreground-color: #e8e6e3;
+  --body-color: white;
+  --div-brand-a-color: white;
+  --white-elem-color: white;
+  --white-elem-a: #d5cbc6;
+  --nav-links-a: #d5cbc6;
+  --publish-date-author: #d5cbc6;
+  --section-header-h2-color: white;
+  --theme-icon: #43484d;
+  --theme-popup-border: #43484d;
+  --theme-popup-bg: #141617;
+  --theme-hover: #474c51;
+  --theme-choice-color: #d5cbc6;
+  --rust-logo-filter: drop-shadow(1px 0 0px #fff) drop-shadow(0 1px 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 -1px 0 #fff);
+}
 
 html {
-  font-size: 62.5%
+  font-size: 62.5%;
 }
 
 @media screen and (min-width: 30em) {
@@ -21,7 +73,8 @@ html {
 
 body {
   font-family: $body-font;
-  background-color: white;
+  background-color: var(--body-background-color);
+  color: var(--body-color);
 
   /* Ensure the footer is always at the bottom of the screen */
   min-height: 100vh;
@@ -35,8 +88,8 @@ body {
 blockquote {
     font-style: italic;
     position: relative;
-    background-color: lighten($gray, 78%);
-    border-left: 8px solid lighten($gray, 60%);
+    background-color: var(--blockquote-bg-color);
+    border-left: 8px solid var(--blockquote-left-border-color);
     border-radius: 5px;
     margin: 0;
     margin-bottom: 2rem;
@@ -80,6 +133,7 @@ section {
       margin: 0;
       padding: 0;
       letter-spacing: 1px;
+      color: var(--section-header-h2-color);
     }
   }
 }
@@ -110,7 +164,8 @@ ul.nav, ul.nav li {
 }
 
 .nav a {
-  color: $gray;
+  color: var(--gray);
+  color: var(--nav-links-a);
 }
 
 div.brand {
@@ -123,7 +178,7 @@ div.brand {
   margin-top: $v-top;
 
   & a {
-    color: black;
+    color: var(--div-brand-a-color);
     text-decoration: none;
   }
 
@@ -139,30 +194,30 @@ div.brand {
 }
 
 .white {
-   color: black;
+   color: var(--white-elem-color);
   .highlight {
-    background-color: $yellow;
+    background-color: var(--yellow);
   }
   a {
-    color: $gray;
+    color: var(--white-elem-a);
     text-decoration: underline;
   }
   .button.button-secondary {
-    background-color: $yellow;
-    border: 1px solid $yellow;
-    color: $gray;
+    background-color: var(--yellow);
+    color: var(--gray);
+    border: 1px solid var(--yellow);
     text-decoration: none;
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     &:hover, &:focus {
-      border-color: $gray;
+      border-color: var(--gray);
     }
   }
   code {
-    color: black;
-    background-color: rgba($gray, 0.05);
-    border: 1px solid rgba($gray, 0.25);
+    color: var(--code-color);
+    background-color: var(--code-bg-color);
+    border: 1px solid var(--code-border-color);
   }
 
   a.anchor::before {
@@ -173,7 +228,7 @@ div.brand {
     margin-left: -1em;
     text-decoration: none;
     opacity: 0.7;
-    color: $gray;
+    color: var(--gray);
     font-weight: normal;
   }
   :hover > a.anchor::before {
@@ -194,18 +249,18 @@ ul {
 }
 
 .posts {
-  background-color: $gray;
-  color: white;
+  background-color: var(--gray);
+  color: var(--body-foreground-color);
   .highlight {
-    background-color: $red;
+    background-color: var(--red);
   }
   a {
-    color: white;
+    color: var(--body-foreground-color);
     text-decoration: underline;
   }
   .button.button-secondary {
-    background-color: $red;
-    border: 1px solid $red;
+    background-color: var(--red);
+    border: 1px solid var(--red);
     color: white;
     text-decoration: none;
     display: block;
@@ -230,7 +285,7 @@ table.post-list a:hover {
 }
 
 .publish-date-author {
-  color: $gray;
+  color: var(--publish-date-author);
   margin: -60px 0 60px 0;
 }
 
@@ -245,11 +300,11 @@ footer {
   }
 
   a {
-    color: $yellow;
+    color: var(--yellow);
     text-decoration: none;
 
     &:hover {
-      color: $yellow;
+      color: var(--yellow);
       text-decoration: underline;
     }
   }
@@ -324,3 +379,48 @@ header h1 {
   }
 }
 
+// Theme switch popup
+// theme selector visible only if JavaScript is available
+
+.theme-icon {
+  display: none;
+  line-height: 2em;
+  border: 2px solid var(--theme-icon);
+  border-radius: 5px;
+  padding: 0px 5px;
+  color: var(--theme-choice-color);
+  &:hover {
+    color: var(--theme-choice-color);
+  }
+}
+
+#theme-choice {
+  display: none;
+  border: 2px solid var(--theme-popup-border);
+  border-radius: 5px;
+  color: var(--theme-choice-color);
+  background: var(--theme-popup-bg);
+  position: absolute;
+  list-style: none;
+  font-weight: 400;
+  padding: 0px;
+  // counterbalance vendored skeleton.css
+  margin: 0.2em -0.5em;
+}
+
+.theme-item {
+  padding: 0px 5px;
+}
+
+#theme-choice.showThemeDropdown {
+  display: block;
+  z-index: 1;
+}
+
+li.theme-item:hover {
+  background-color: var(--theme-hover);
+}
+
+.rust-logo {
+    filter: var(--rust-logo-filter);
+}

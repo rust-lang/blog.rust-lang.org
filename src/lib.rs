@@ -88,6 +88,7 @@ impl<'a> Generator<'a> {
             self.render_blog(blog)?;
         }
         self.compile_sass("app")?;
+        self.compile_sass("noscript")?;
         self.compile_sass("fonts")?;
         self.concat_vendor_css(vec!["skeleton", "tachyons"])?;
         self.copy_static_files()?;
