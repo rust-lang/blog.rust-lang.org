@@ -170,10 +170,14 @@ from suitably motivated contributors.
 ### Aside: ABI Stability and WebAssembly
 
 While on the topic of ABIs and the `multivalue` feature it's perhaps worth
-also going over a bit what ABIs mean for WebAssembly. Currently there's
-effectively only one ABI implemented by LLVM and the Rust compiler meaning that
-at the WebAssembly module level `extern "C"` and `extern "Rust"` are
-more-or-less the same. It is **not** guaranteed for the ABIs to match, however.
+also going over a bit what ABIs mean for WebAssembly. The current definition of
+the `extern "C"` ABI for WebAssembly is documented in the [tool-conventions
+repository](https://github.com/WebAssembly/tool-conventions/blob/main/BasicCABI.md)
+and this is what Clang implements for C code as well. LLVM implements enough
+support for lowering to WebAssembly as well to support all of this. The `extern
+"Rust` ABI is not stable on WebAssembly, as is the case for all Rust targets,
+and is subject to change over time. There is no reference documentation at this
+time for what `extern "Rust"` is on WebAssembly.
 
 The `extern "C"` ABI, what C code uses by default as well, is difficult to
 change because stability is often required across different compiler versions.
@@ -182,16 +186,20 @@ with code compiled by LLVM 20. This means that changing the ABI is a daunting
 task that requires version fields, explicit markers, etc, to help prevent
 mismatches.
 
-The `extern "Rust"` ABI, however, is entirely within the control of the Rust
-compiler and can change from version to version (there are no stability
-guarantees across compiler versions and this is applicable to all platforms, not
-just WebAssembly). Just because `extern "Rust"` happens to work like `extern
-"C"` in WebAssembly today doesn't mean it will continue to do so in the future.
-A great example of this is that when the `multivalue` feature is enabled the
+The `extern "Rust"` ABI, however, is subject to change over time. A great
+example of this could be that when the `multivalue` feature is enabled the
 `extern "Rust"` ABI could be redefined to use the multiple-return-values that
 WebAssembly would then support. This would enable much more efficient returns
 of values larger than 64-bits. Implementing this would require support in LLVM
 though which is not currently present.
+
+This all means that actually using multiple-returns in functions, or the
+WebAssembly feature that the `multivalue` enables, is still out on the horizon
+and not implemented. First LLVM will need to implement complete lowering support
+to generate WebAssembly functions with multiple returns, and then `extern
+"Rust"` can be change to use this when fully supported. In the yet-further-still
+future C code might be able to change, but that will take quite some time due to
+its cross-version-compatibility story.
 
 ## Enabling Future Proposals to WebAssembly
 
