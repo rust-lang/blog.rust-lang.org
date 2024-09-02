@@ -5,7 +5,7 @@ author: Leadership Council
 team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
 ---
 
-Today we are launching the process to elect two Project Directors to the Rust Foundation Board of Directors. This is the second time we have done this - [here](https://blog.rust-lang.org/2023/08/30/electing-new-project-directors.html) is the blog post from last year.
+Today we are launching the process to elect two Project Directors to the Rust Foundation Board of Directors. This is the second round of slots, following from [last year's election](https://blog.rust-lang.org/2023/08/30/electing-new-project-directors.html).
 
 We will briefly explain the goals and procedures here, but this is mostly copy-pasted from [last year's post](https://blog.rust-lang.org/2023/08/30/electing-new-project-directors.html) and the [official process documentation][pde-process].
 
