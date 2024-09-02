@@ -81,6 +81,4 @@ After the election meeting happens, the Rust Leadership Council will announce th
 ## Acknowledgements
 
 A number of people have been involved in designing and launching this election process and we wish to extend a heartfelt thanks to all of them!
-We'd especially like to thank the members of the Project Director Election Proposal Committee: Jane Losare-Lusby, Eric Holk, and Ryan Levick.
-Additionally, many members of the Rust Community have provided feedback and thoughtful discussions that led to significant improvements to the process.
-We are grateful for all of your contributions.
+We'd especially like to thank Eric Holk and Ryan Levick for helping to improve our process.
