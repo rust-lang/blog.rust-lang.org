@@ -2,7 +2,7 @@
 layout: post
 title: "Changes to impl Trait in Rust 2024"
 author: Niko Matsakis
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
+team: the language team <https://www.rust-lang.org/governance/teams/lang>
 ---
 This blog post describes some small but significant changes with (return position) `impl Trait` capture rules that are coming in Rust 2024. The goal of these changes is to simplify how `impl Trait` works to better match what people want while also giving a flexible syntax that allows users to have full control when needed.
 
