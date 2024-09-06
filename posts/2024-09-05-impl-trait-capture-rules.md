@@ -33,7 +33,7 @@ fn process_data(
 
 The use of `-> impl Iterator` in return position here means that the function returns "some kind of iterator". The actual type will be determined by the compiler based on the function body. It is called the "hidden type" because callers do not get to know exactly what it is; they have to code against the `Iterator` trait. However, at code generation time, the compiler will generate code based on the actual precise type, which ensures that callers are fully optimized.
 
-Although callers don't know the exact type, they do need to know that it will continue to borrow the `datums` argument so that they can ensure that the `datums` reference remains valid while iteration occurs. Further, callers must be able to figure this out based solely on the type signature, without looking at the function body.
+Although callers don't know the exact type, they do need to know that it will continue to borrow the `data` argument so that they can ensure that the `data` reference remains valid while iteration occurs. Further, callers must be able to figure this out based solely on the type signature, without looking at the function body.
 
 Rust's current rules are that a return-position `impl Trait` value can only use a reference if the lifetime of that reference appears in the `impl Trait` itself. In this example, `impl Iterator<Item = ProcessedDatum>` does not reference any lifetimes, and therefore capturing `datums` is illegal. You can see this for yourself [on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=2448fc4ec9e763c538aaba897433f9b5).
 
