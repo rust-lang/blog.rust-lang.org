@@ -224,7 +224,7 @@ This implementation limitation is only temporary and will hopefully be lifted so
 fn indices<'s, T>(
     slice: &'s [T],
 ) -> impl Iterator<Item = usize> + 'static {
-    //                             -----
+    //                             -------
     //             Return type does not capture references.
     0 .. slice.len()
 }
