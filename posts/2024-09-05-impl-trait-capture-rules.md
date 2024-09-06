@@ -216,7 +216,7 @@ fn indices<T>(
 }
 ```
 
-This implementation limitation is only temporary and will hopefully be lifted soon! You can follow the current status at [tracking issue #123](XXX).
+This implementation limitation is only temporary and will hopefully be lifted soon! You can follow the current status at [tracking issue #130031](https://github.com/rust-lang/rust/issues/130031).
 
 **Alternative: `'static` bounds.** For the special case of capturing **no** references at all, it is also possible to use a `'static` bound, like so ([try it yourself](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=3054bbf64652cb4890d56ac03b47a35c)):
 
@@ -241,3 +241,8 @@ Thanks to editions, we are able to address that without breaking existing code. 
 * most code will "just work" in Rust 2024, avoiding confusing errors;
 * for the code where annotations are required, we now have a more powerful annotation mechanism that can let you say exactly what you need to say.
 
+## Appendix: Relevant links
+
+* Precise capture was proposed in [RFC #3617](https://github.com/rust-lang/rfcs/pull/3617), which left an unresolved question regarding syntax, and its tracking issue was [#123432](https://github.com/rust-lang/rust/issues/123432).
+* The unresolved syntax question was resolved in [issue #125836](https://github.com/rust-lang/rust/issues/125836), which introduced the `+ use<>` notation used in this post.
+* The implementation limitation is tracked in [#130031](https://github.com/rust-lang/rust/issues/130031).
