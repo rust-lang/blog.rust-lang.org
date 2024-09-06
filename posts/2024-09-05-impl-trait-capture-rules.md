@@ -4,7 +4,7 @@ title: "Changes to `impl Trait` in Rust 2024"
 author: Niko Matsakis
 team: the language team <https://www.rust-lang.org/governance/teams/lang>
 ---
-This blog post describes some small but significant changes with (return-position) `impl Trait` that are coming in Rust 2024. The goal of these changes is to simplify how `impl Trait` works to better match the most common usage patterns while also giving a flexible syntax that allows users to have full control when needed.
+The default way `impl Trait` works in return position is changing in Rust 2024. These changes are meant to simplify `impl Trait` to better match what people want most of the time. We're also adding a flexible syntax that gives you full control when you need it.
 
 ## TL;DR
 
