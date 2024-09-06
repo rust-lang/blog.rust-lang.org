@@ -234,8 +234,10 @@ fn indices<'s, T>(
 
 ## Conclusion
 
-This example demonstrates the way that editions can help us to remove complexity from Rust. The new `impl Trait` capture rules mean that:
+This example demonstrates the way that editions can help us to remove complexity from Rust. In Rust 2021, the default rules for when lifetime parameters can be used in `impl Trait` had not aged well. They frequently didn't express what users needed and led to obscure workarounds being required. They led to other inconsistencies, such as between `-> impl Future` and `async fn`, or between the semantics of return-position `impl Trait` in top-level functions and trait functions. 
 
-* Most code will "just work" in Rust 2024, avoiding confusing errors.
-* For the code where annotations are required, we now have a more powerful annotation mechanism that can let you say exactly what you need to say.
+Thanks to editions, we are able to address that without breaking existing code. With the newer rules coming in Rust 2024,
+
+* most code will "just work" in Rust 2024, avoiding confusing errors;
+* for the code where annotations are required, we now have a more powerful annotation mechanism that can let you say exactly what you need to say.
 
