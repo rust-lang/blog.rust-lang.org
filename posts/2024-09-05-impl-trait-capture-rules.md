@@ -35,7 +35,7 @@ The use of `-> impl Iterator` in return position here means that the function re
 
 Although callers don't know the exact type, they do need to know that it will continue to borrow the `data` argument so that they can ensure that the `data` reference remains valid while iteration occurs. Further, callers must be able to figure this out based solely on the type signature, without looking at the function body.
 
-Rust's current rules are that a return-position `impl Trait` value can only use a reference if the lifetime of that reference appears in the `impl Trait` itself. In this example, `impl Iterator<Item = ProcessedDatum>` does not reference any lifetimes, and therefore capturing `datums` is illegal. You can see this for yourself [on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=2448fc4ec9e763c538aaba897433f9b5).
+Rust's current rules are that a return-position `impl Trait` value can only use a reference if the lifetime of that reference appears in the `impl Trait` itself. In this example, `impl Iterator<Item = ProcessedDatum>` does not reference any lifetimes, and therefore capturing `data` is illegal. You can see this for yourself [on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=2448fc4ec9e763c538aaba897433f9b5).
 
 The error message ("hidden type captures lifetime") you get in this scenario is not the most intuitive, but it does come with a useful suggestion for how to fix it:
 
@@ -53,21 +53,21 @@ Following a slightly more explicit version of this advice, the function signatur
 
 
 ```rust
-fn process_datums<'d>(
-    datums: &'d [Datum]
+fn process_data<'d>(
+    data: &'d [Datum]
 ) -> impl Iterator<Item = ProcessedDatum> + 'd {
-    datums
+    data
         .iter()
         .map(|datum| datum.process())
 }
 ```
 
-In this version, the lifetime `'d` of the datums is explicitly referenced in the `impl Trait` type, and so it is allowed to be used. This is also a signal to the caller that the borrow for `datums` must last as long as the iterator is in use, which means that it (correctly) flags an error in an example like this ([try it on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=afd9278ac887c0b2fc08bc868200808f)):
+In this version, the lifetime `'d` of the data is explicitly referenced in the `impl Trait` type, and so it is allowed to be used. This is also a signal to the caller that the borrow for `data` must last as long as the iterator is in use, which means that it (correctly) flags an error in an example like this ([try it on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=afd9278ac887c0b2fc08bc868200808f)):
 
 ```rust
-let mut datums: Vec<Datum> = vec![Datum::default()];
-let iter = process_datums(&datums);
-datums.push(Datum::default()); // <-- Error!
+let mut data: Vec<Datum> = vec![Datum::default()];
+let iter = process_data(&data);
+data.push(Datum::default()); // <-- Error!
 iter.next();
 ```
 
@@ -94,17 +94,17 @@ Adding a `+ '_` argument to `impl Trait` may be confusing, but it's not terribly
 ```rust
 fn process<'c, T> {
     context: &'c Context,
-    datums: Vec<T>,
+    data: Vec<T>,
 ) -> impl Iterator<Item = ()> + 'c {
-    datums
+    data
         .into_iter()
         .map(|datum| context.process(datum))
 }
 ```
 
-Here the `process` function applies `context.process` to each of the elements in `datums` (of type `T`). Because the return value uses `context`, it is declared as `+ 'c`. Our real goal here is to allow the return type to use `'c`; writing `+ 'c` achieves that goal because `'c` not appears in the bound listing. However, while writing `+ 'c` is a convenient way to make `'c` appear in the bounds, also means that the hidden type must outlive `'c`. This requirement is not needed and will in fact lead to a compilation error in this example ([try it on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=b742fbf9b083a6e837db0b170489f34a)).
+Here the `process` function applies `context.process` to each of the elements in `data` (of type `T`). Because the return value uses `context`, it is declared as `+ 'c`. Our real goal here is to allow the return type to use `'c`; writing `+ 'c` achieves that goal because `'c` not appears in the bound listing. However, while writing `+ 'c` is a convenient way to make `'c` appear in the bounds, also means that the hidden type must outlive `'c`. This requirement is not needed and will in fact lead to a compilation error in this example ([try it on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=b742fbf9b083a6e837db0b170489f34a)).
 
-The reason that this error occurs is a bit subtle. The hidden type is an iterator type based on the result of `datums.into_iter()`, which will include the type `T`. Because of the `+ 'c` bound, the hidden type must outlive `'c`, which in turn means that `T` must outlive `'c`. But `T` is a generic parameter, so the compiler requires a where-clause like `where T: 'c`. This where-clause means "it is safe to create a reference with lifetime `'c` to the type `T`". But in fact we don't create any such reference, so the where-clause should not be needed. It is only needed because used the convenient-but-sometimes-incorrect workaround of adding `+ 'c` to the bounds of our `impl Trait`.
+The reason that this error occurs is a bit subtle. The hidden type is an iterator type based on the result of `data.into_iter()`, which will include the type `T`. Because of the `+ 'c` bound, the hidden type must outlive `'c`, which in turn means that `T` must outlive `'c`. But `T` is a generic parameter, so the compiler requires a where-clause like `where T: 'c`. This where-clause means "it is safe to create a reference with lifetime `'c` to the type `T`". But in fact we don't create any such reference, so the where-clause should not be needed. It is only needed because used the convenient-but-sometimes-incorrect workaround of adding `+ 'c` to the bounds of our `impl Trait`.
 
 Just as before, this error is obscure, touching on the more complex aspects of Rust's type system. Unlike before, there is no easy fix! This problem in fact occurred frequently in the compiler, leading to an [obscure workaround called the `Captures` trait](https://github.com/rust-lang/rust/issues/34511#issuecomment-373423999). Gross!
 
@@ -154,10 +154,10 @@ The new explicit syntax is called a "use bound": `impl Trait + use<'x, T>`, for 
 In Rust 2024, the default is that the hidden type for a return-position `impl Trait` values use **any** generic parameter that is in scope, whether it is a type or a lifetime. This means that the initial example of this blog post will compile just fine in Rust 2024 ([try it yourself by setting the Edition in the Playground to 2024](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=d366396da2fbd5334b7560c3dfb3290b)):
 
 ```rust
-fn process_datums(
-    datums: &[Datum]
+fn process_data(
+    data: &[Datum]
 ) -> impl Iterator<Item = ProcessedDatum> {
-    datums
+    data
         .iter()
         .map(|datum| datum.process())
 }
