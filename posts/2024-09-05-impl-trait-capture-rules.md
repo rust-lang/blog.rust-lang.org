@@ -1,19 +1,25 @@
 ---
 layout: post
-title: "Changes to impl Trait in Rust 2024"
+title: "Changes to `impl Trait` in Rust 2024"
 author: Niko Matsakis
 team: the language team <https://www.rust-lang.org/governance/teams/lang>
 ---
-This blog post describes some small but significant changes with (return position) `impl Trait` capture rules that are coming in Rust 2024. The goal of these changes is to simplify how `impl Trait` works to better match what people want while also giving a flexible syntax that allows users to have full control when needed.
+This blog post describes some small but significant changes with (return-position) `impl Trait` that are coming in Rust 2024. The goal of these changes is to simplify how `impl Trait` works to better match the most common usage patterns while also giving a flexible syntax that allows users to have full control when needed.
 
 ## TL;DR
 
-* Return-position impl Trait in Rust 2024 can now reference all fn arguments by default.
-* We are introducing a new syntax (`+ use<>`) that you can use to specify precisely which generic parameters can appear in the hidden type.
+Starting in Rust 2024, we are changing the rules for when a generic parameter can be used in the hidden type of a return-position `impl Trait`:
 
-## Background: return position impl trait
+* a new default that the hidden types for a return-position `impl Trait` can use **any** generic parameter in scope, instead of only types (applicable only in Rust 2024);
+* a syntax to declare explicitly what types may be used (usable in any edition).
 
-This blog post concerns *return position `impl Trait`*, such as the following example:
+The new explicit syntax is called a "use bound": `impl Trait + use<'x, T>`, for example, would indicate that the hidden type is allowed to use `'x` and `T` (but not any other generic parameters in scope).
+
+Read on for the details!
+
+## Background: return-position `impl Trait`
+
+This blog post concerns *return-position `impl Trait`*, such as the following example:
 
 ```rust
 fn process_datums(
@@ -29,7 +35,7 @@ The use of `-> impl Iterator` in return position here means that the functions "
 
 Although callers don't know the exact type, they do need to know that it will continue to borrow the `datums` argument so that they can ensure that the `datums` reference remains valid while iteration occurs. Further, callers must be able to figure this out based solely on the type signature, without looking at the function body.
 
-Rust's current rules are that a return-position `impl Trait` can only capture references if the lifetime of that reference appears in the `impl Trait` itself. In this example, `impl Iterator<Item = ProcessedDatum>` does not reference any lifetimes, and therefore capturing `datums` is illegal. You can see this for yourself [on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=2448fc4ec9e763c538aaba897433f9b5).
+Rust's current rules are that a return-position `impl Trait` value can only use a reference if the lifetime of that reference appears in the `impl Trait` itself. In this example, `impl Iterator<Item = ProcessedDatum>` does not reference any lifetimes, and therefore capturing `datums` is illegal. You can see this for yourself [on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=2448fc4ec9e763c538aaba897433f9b5).
 
 The error message ("hidden type captures lifetime") you get in this scenario is not the most intuitive, but it does come with a useful suggestion for how to fix it:
 
@@ -56,7 +62,7 @@ fn process_datums<'d>(
 }
 ```
 
-In this version, the lifetime `'d` of the datums is explicitly referenced in the `impl Trait` type, and so capture is allowed. This is also a signal to the caller that the borrow for `datums` must last as long as the iterator is in use, which means that it (correctly) flags an error in an example like this ([try it on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=afd9278ac887c0b2fc08bc868200808f)):
+In this version, the lifetime `'d` of the datums is explicitly referenced in the `impl Trait` type, and so it is allowed to be used. This is also a signal to the caller that the borrow for `datums` must last as long as the iterator is in use, which means that it (correctly) flags an error in an example like this ([try it on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=afd9278ac887c0b2fc08bc868200808f)):
 
 ```rust
 let mut datums: Vec<Datum> = vec![Datum::default()];
@@ -67,15 +73,15 @@ iter.next();
 
 ## Usability problems with this design
 
-The capture rules for `impl Trait` were decided early on based on a limited set of examples. Over time we have noticed a number of problems with them.
+The rules for what generic parameters can be used in an `impl Trait` were decided early on based on a limited set of examples. Over time we have noticed a number of problems with them.
 
 ### not the right default
 
-Surveys of major codebases (both the compiler and crates on crates.io) found that the vast majority of return-position impl trait values need to capture lifetimes, so the default behavior of not capturing is not helpful.
+Surveys of major codebases (both the compiler and crates on crates.io) found that the vast majority of return-position impl trait values need to use lifetimes, so the default behavior of not capturing is not helpful.
 
 ### not sufficiently flexible
 
-The current rule is that return-position impl trait *always* captures type parameters and *sometimes* captures lifetime parameters (if they appear in the bounds). As noted above, this default is wrong because most functions actually DO want to capture lifetime parameters: that at least has a workaround (modulo some details we'll not below). But the default is also wrong because some functions do NOT want to capture type parameters, and there is no way to override that right now. The original intention was that [type alias impl trait](https://rust-lang.github.io/impl-trait-initiative/explainer/tait.html) would solve this use case, but that would be a very non-ergonomic solution (and stabilizing type alias impl trait is taking longer than anticipated due to other complications).
+The current rule is that return-position impl trait *always* allows using type parameters and *sometimes* allows using lifetime parameters (if they appear in the bounds). As noted above, this default is wrong because most functions actually DO want their return type to be allowed to use lifetime parameters: that at least has a workaround (modulo some details we'll note below). But the default is also wrong because some functions want to explicitly state that they do NOT use type parameters in the return type, and there is no way to override that right now. The original intention was that [type alias impl trait](https://rust-lang.github.io/impl-trait-initiative/explainer/tait.html) would solve this use case, but that would be a very non-ergonomic solution (and stabilizing type alias impl trait is taking longer than anticipated due to other complications).
 
 ### hard to explain
 
@@ -86,17 +92,17 @@ Because the defaults are wrong, these errors are encountered by users fairly reg
 Adding a `+ '_` argument to `impl Trait` may be confusing, but it's not terribly difficult. Unfortunately, it's often the wrong annotation, leading to unnecessary compiler errors -- and the *right* fix is either complex or sometimes not even possible. Consider an example like this:
 
 ```rust
-fn process<T> {
-    context: &Context,
+fn process<'c, T> {
+    context: &'c Context,
     datums: Vec<T>,
-) -> impl Iterator<Item = ()> + '_ {
+) -> impl Iterator<Item = ()> + 'c {
     datums
         .into_iter()
         .map(|datum| context.process(datum))
 }
 ```
 
-Here the `process` function applies `context.process` to each of the elements in `datums` (of type `T`). Because it captures `context`, it is declared as `+ '_`. This tells the compiler that the hidden type must outlive `'_`. Because this hidden type includes the `Vec<T>`, this in turn means that `T` must outlive `'_` -- but this is not true. So you get a compilation error ([try it on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=b742fbf9b083a6e837db0b170489f34a)). 
+Here the `process` function applies `context.process` to each of the elements in `datums` (of type `T`). Because the return value uses `context`, it is declared as `+ 'c`. Our real goal here is to allow the return type to use `'c`; writing `+ 'c` achieves that goal because `'c` not appears in the bound listing. However, writing `+ 'c` *also* means that the hidden type must outlive `'c` -- and in this case, that is not strictly necessary! The hidden type is going to be a wrapper around `std::vec::IntoIter<T>`, and for this type to outlive `'c`, we would need a where clause `T: 'c`. But that where-clause should only be required if we use a value of type `&'c T`, and we don't. The result is that this example doe snot compile ([try it on the playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=b742fbf9b083a6e837db0b170489f34a)), even though it should.
 
 Just as before, this error is obscure, touching on the more complex aspects of Rust's type system. Unlike before, there is no easy fix! This problem in fact occurred frequently in the compiler, leading to an [obscure workaround called the `Captures` trait](https://github.com/rust-lang/rust/issues/34511#issuecomment-373423999). Gross!
 
@@ -126,24 +132,24 @@ fn process(
 }
 ```
 
-In practice, because of the problems with lifetime capture, this is not the actual desugaring. The actual desugaring is to a special kind of `impl Trait` that is allowed to capture all lifetimes. But that form of `impl Trait` was not exposed to end-users.
+In practice, because of the problems with the rules around which lifetimes can be used, this is not the actual desugaring. The actual desugaring is to a special kind of `impl Trait` that is allowed to use all lifetimes. But that form of `impl Trait` was not exposed to end-users.
 
 #### impl trait in traits
 
-As we pursued the design for impl trait in traits ([RFC 3425](https://rust-lang.github.io/rfcs/3425-return-position-impl-trait-in-traits.html)), we encountered a number of challenges related to the capturing of lifetimes. [In order to get the symmetries that we wanted to work](https://hackmd.io/zgairrYRSACgTeZHP1x0Zg) (e.g., that one can write `-> impl Future` in a trait and impl with the expected effect), we had to change the capture rules to capture all lifetime parameters uniformly.
+As we pursued the design for impl trait in traits ([RFC 3425](https://rust-lang.github.io/rfcs/3425-return-position-impl-trait-in-traits.html)), we encountered a number of challenges related to the capturing of lifetimes. [In order to get the symmetries that we wanted to work](https://hackmd.io/zgairrYRSACgTeZHP1x0Zg) (e.g., that one can write `-> impl Future` in a trait and impl with the expected effect), we had to change the rules to allow hidden types to use *all* generic parameters (type and lifetime) uniformly.
 
 ## Rust 2024 design
 
 The above problems motivated us to take a new approach in Rust 2024. The approach is a combination of two things:
 
-* a new default, applicable only in Rust 2024;
-* a syntax for explicit capture, usably in any edition, written like 
+* a new default that the hidden types for a return-position `impl Trait` can use **any** generic parameter in scope, instead of only types (applicable only in Rust 2024);
+* a syntax to declare explicitly what types may be used (usable in any edition).
 
-We cover each in turn.
+The new explicit syntax is called a "use bound": `impl Trait + use<'x, T>`, for example, would indicate that the hidden type is allowed to use `'x` and `T` (but not any other generic parameters in scope).
 
-### Impl Traits now capture lifetimes by default
+### Lifetimes can now be used by default
 
-In Rust 2024, the default is that return-position impl Trait values can capture all the references that are in scope. Therefore the initial example of this blog post will compile just fine in Rust 2024 ([try it yourself](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=d366396da2fbd5334b7560c3dfb3290b)):
+In Rust 2024, the default is that the hidden type for a return-position `impl Trait` values use **any** generic parameter that is in scope, whether it is a type or a lifetime. This means that the initial example of this blog post will compile just fine in Rust 2024 ([try it yourself by setting the Edition in the Playground to 2024](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=d366396da2fbd5334b7560c3dfb3290b)):
 
 ```rust
 fn process_datums(
@@ -159,40 +165,46 @@ Yay!
 
 ### Impl Traits can include a `use<>` bound to specify precisely which generic types and lifetimes they use
 
-There are however times where it is useful not to capture lifetime parameters. Consider this example, which takes a slice of type T `&[T]` and returns an iterator over its indices:
+As a side-effect of this change, if you move code to Rust 2024 by hand (without `cargo fix`), you may start getting errors in the callers of functions with an `impl Trait` return type. This is because those `impl Trait` types are now assumed to potentially use input lifetimes and not only types. To control this, you can use the new `use<>` bound syntax that explicitly declares what generic parameters can be used by the hidden type. Our experience porting the compiler suggests that it is very rare to need changes -- most code actually works better with the new default.
 
-```rust!
-fn indices<T>(
-    slice: &[T],
+The exception to the above is when the function takes in a reference parameter that is only used to read values and doesn't get included in the return value. One such example is the following function `indices()`: it takes in a slice of type `&[T]` but the only thing it does is read the length, which is used to create an iterator. The slice itself is not needed in the return value:
+
+```rust
+fn indices<'s, T>(
+    slice: &'s [T],
 ) -> impl Iterator<Item = usize> {
     0 .. slice.len()
 }
 ```
 
-If you look closely, you can see that it only needs to read the length of the slice and doesn't hold a reference to `slice` afterwards. Nonetheless, callers today will assume that the return value *may* hold a reference to `slice`, which means that this caller for example would get an error:
+In Rust 2021, this declaration implicitly says that `slice` is not used in the return type. But in Rust 2024, the default is the opposite. That means that callers like this will stop compiling in Rust 2024, since they now assume that `data` is borrowed until iteration completes:
 
 ```rust
 fn main() {
     let mut data = vec![1, 2, 3];
     let i = indices(&data);
-    data.push(4); // <-- error!
-    i.next();
+    data.push(4); // <-- Error!
+    i.next(); // <-- assumed to access `&data`
 }
 ```
 
-This may actually be what you want: it gives you room to modify `indices` later and have it actually make use of `slice` in the returned iterator, for example. Put another way, the new default continues the `impl Trait` tradition of retaining flexibility for the function to change its implementation without breaking callers.
+This may actually be what you want! It means you can modify the definition of `indices()` later so that it actually *does* include `slice` in the result. Put another way, the new default continues the `impl Trait` tradition of retaining flexibility for the function to change its implementation without breaking callers.
 
-But what if it's *not* what you want? What if you want to guarantee that `indices` will not retain a reference to `data` in its return value? You can do that now with the new `use` bounds. The idea is that your `impl Trait` can include a bound written `use<...>` which lists out the generic parameters that the return value may use. If you include `+ use<>`, then, this means "do not capture anything". So changing `indices` to be written as follows will allow `main` to compile:
+But what if it's *not* what you want? What if you want to guarantee that `indices()` will not retain a reference to its argument `slice` in its return value? You now do that by including a `use<>` bound in the return type to say explicitly which generic parameters may be included in the return type. 
+
+In the case of `indices()`, the return type actually uses **none** of the generics, so we would ideally write `use<>`:
 
 ```rust
-fn indices<T>(
-    slice: &[T],
+fn indices<'s, T>(
+    slice: &'s [T],
 ) -> impl Iterator<Item = usize> + use<> {
+    //                             -----
+    //             Return type does not use `'s` or `T`
     0 .. slice.len()
 }
 ```
 
-**Implementation limitation.** Unfortunately, if you actually try the above example on nightly today, you'll see that it doesn't compile ([try it for yourself](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=1d6d23ef3813da05ac78a4b97b418f21)). That's because `use<>` bounds have only partially been implemented: currently, they must always include at least the type parameters. This corresponds to the limitations of impl trait in earlier editions, which always *must* capture type parameters. In this case, that means we can write the following, which also avoids the compilation error, but is still more conservative than necessary ([try it yourself](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=7965043f4686d5a89b47aa5bfc4f996f)):
+**Implementation limitation.** Unfortunately, if you actually try the above example on nightly today, you'll see that it doesn't compile ([try it for yourself](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=1d6d23ef3813da05ac78a4b97b418f21)). That's because `use<>` bounds have only partially been implemented: currently, they must always include at least the type parameters. This corresponds to the limitations of `impl Trait` in earlier editions, which always *must* capture type parameters. In this case, that means we can write the following, which also avoids the compilation error, but is still more conservative than necessary ([try it yourself](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=7965043f4686d5a89b47aa5bfc4f996f)):
 
 ```rust
 fn indices<T>(
@@ -201,6 +213,22 @@ fn indices<T>(
     0 .. slice.len()
 }
 ```
+
+This implementation limitation is only temporary and will hopefully be lifted soon! You can follow the current status at [tracking issue #123](XXX).
+
+**Alternative: `'static` bounds.** For the special case of capturing **no** references at all, it is also possible to use a `'static` bound, like so ([try it yourself](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=3054bbf64652cb4890d56ac03b47a35c)):
+
+```rust
+fn indices<'s, T>(
+    slice: &'s [T],
+) -> impl Iterator<Item = usize> + 'static {
+    //                             -----
+    //             Return type does not capture references.
+    0 .. slice.len()
+}
+```
+
+`'static` bounds are convenient in this case, particularly given the current implementation limitations around `use<>` bounds, but `use<>` bound are more flexible overall, and so we expect them to be used more often. (As an example, the compiler has a variant of `indices` that returns newtype'd indices `I` instead of `usize` values, and it therefore includes a `use<I>` declaration.)
 
 ## Conclusion
 
