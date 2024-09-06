@@ -22,10 +22,10 @@ Read on for the details!
 This blog post concerns *return-position `impl Trait`*, such as the following example:
 
 ```rust
-fn process_datums(
-    datums: &[Datum]
+fn process_data(
+    data: &[Datum]
 ) -> impl Iterator<Item = ProcessedDatum> {
-    datums
+    data
         .iter()
         .map(|datum| datum.process())
 }
