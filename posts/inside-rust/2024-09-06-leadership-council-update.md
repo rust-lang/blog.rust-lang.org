@@ -46,7 +46,7 @@ And a few other items:
 * Approved to have Rust included in [Discourse's 10-year anniversary post](https://blog.discourse.org/2024/08/celebrating-a-decade-of-discourse/).
 * Coordinated with the [gcc licensing approval](https://github.com/rust-lang/rust/pull/125419). We are still interested in establishing a better process for managing license work ([leadership-council#24](https://github.com/rust-lang/leadership-council/issues/24)), but have not had the capacity to make progress.
 * Coordinated with the [archival of the WASM working group](https://github.com/rust-lang/team/pull/1489).
-* Started the Project Director elections.
+* Started the [Project Director elections](https://blog.rust-lang.org/inside-rust/2024/09/06/electing-new-project-directors.html).
 * Started the [September Council member selections](https://blog.rust-lang.org/inside-rust/2024/08/20/leadership-council-repr-selection.html).
 * Added more details about Project Director requirements (<https://github.com/rust-lang/leadership-council/pull/86>).
 * Approved an update to streamline the travel grant process.
