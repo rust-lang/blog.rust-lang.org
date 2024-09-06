@@ -63,7 +63,8 @@ This process repeats until we find two nominees who the Council can unanimously 
 The Council will then confirm these nominees through an official vote.
 
 Once this is done, we will announce the new Project Directors.
-In addition, we will contact each of the nominees, including those who were not elected, to tell them a little bit more about what we saw as their strengths and opportunities for growth to help them serve better in similar roles in the future.
+In addition, we will contact each of the nominees, including those who were not elected, to offer feedback.
+For those who accept feedback we will follow up to tell them a little bit more about what we saw as their strengths and opportunities for growth to help them serve better in similar roles in the future.
 
 ## Timeline
 
