@@ -54,15 +54,21 @@ RFL on Rust CI is implemented but still waiting on documented policy. The first 
 
 ## Selected updates
 
-### Begin resolving cargo-semver-checks blockers for merging into cargo (#104)
+### Begin resolving cargo-semver-checks blockers for merging into cargo (tracked in [#104])
+
+[#104]: https://github.com/rust-lang/rust-project-goals/issues/104
 
 *@obi1kenobi has been working on laying the groundwork to enable manifest linting in their project. They have set up the ability to test how CLI invocations are interpreted internally, and can now snapshot the output of any CLI invocation over a given workspace. They have also designed the expansion of the CLI and the necessary Trustfall schema changes to support manifest linting. As of the latest update, they have a working prototype of manifest querying, which enables SemVer lints such as detecting the accidental removal of features between releases. This work is not blocked on anything, and while there are no immediate opportunities to contribute, they indicate there will be some in future updates.*
 
-### Expose experimental LLVM features for automatic differentiation and GPU offloading (#109)
+### Expose experimental LLVM features for automatic differentiation and GPU offloading (tracked in [#109])
+
+[#109]: https://github.com/rust-lang/rust-project-goals/issues/104
 
 *ZuseZ4 has been focusing on automatic differentiation in Rust, with their first two upstreaming PRs for the rustc frontend and backend merged, and a third PR covering changes to rustc_codegen_llvm currently under review. They are especially proud of getting a detailed LLVM-IR reproducer from a Rust developer for an Enzyme core issue, which will help with debugging. On the GPU side, ZuseZ4 is taking advantage of recent LLVM updates to rustc that enable more GPU/offloading work. ZuseZ4 also had a talk about "When unsafe code is slow - Automatic Differentiation in Rust" accepted for the upcoming LLVM dev meeting, where they'll present benchmarks and analysis comparing Rust-Enzyme to the C++ Enzyme frontend.*
 
-### Extend pubgrub to match cargo's dependency resolution (#110)
+### Extend pubgrub to match cargo's dependency resolution (tracked in [#110])
+
+[#110]: https://github.com/rust-lang/rust-project-goals/issues/110
 
 *@Eh2406 has achieved the milestone of having the new PubGrub resolver and the existing Cargo resolver accept each other's solutions for all crate versions on crates.io, which involved fixing many bugs related to optional dependencies. Significant progress has also been made in speeding up the resolution process, with over 30% improvements to the average performance of the new resolver, and important changes to allow the existing Cargo resolver to run in parallel. They have also addressed some corner cases where the existing resolver would not accept certain records, and added a check for cyclic dependencies. The latest updates focus on further performance improvements, with the new resolver now taking around 3 hours to process all of crates.io, down from 4.3 hours previously, and a 27% improvement in verifying lock files for non-pathological cases.*
 
