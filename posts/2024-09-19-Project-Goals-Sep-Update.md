@@ -56,7 +56,7 @@ RFL on Rust CI is implemented but still waiting on documented policy. The first 
 
 ### Begin resolving cargo-semver-checks blockers for merging into cargo (#104)
 
-*@obi1kenobi has been working on laying the groundwork to enable manifest linting in their project. They have set up the ability to test how CLI invocations are interpreted internally, and can now snapshot the output of any CLI invocation over a given workspace. They have also designed the expansion of the CLI and the necessary Trustfall schema changes to support manifest linting. As of the latest update, they have a working prototype of manifest querying, which enables SemVer lints such as detecting the removal of non-nightly, non-underscore-prefixed features between releases. This work is not blocked on anything, and while there are no immediate opportunities to contribute, they indicate there will be some in future updates.*
+*@obi1kenobi has been working on laying the groundwork to enable manifest linting in their project. They have set up the ability to test how CLI invocations are interpreted internally, and can now snapshot the output of any CLI invocation over a given workspace. They have also designed the expansion of the CLI and the necessary Trustfall schema changes to support manifest linting. As of the latest update, they have a working prototype of manifest querying, which enables SemVer lints such as detecting the accidental removal of features between releases. This work is not blocked on anything, and while there are no immediate opportunities to contribute, they indicate there will be some in future updates.*
 
 ### Expose experimental LLVM features for automatic differentiation and GPU offloading (#109)
 
