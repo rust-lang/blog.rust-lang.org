@@ -39,8 +39,14 @@ Keep in mind, there will be items that are currently tracked for the edition tha
 [#105]: https://github.com/rust-lang/rust-project-goals/issues/105
 [#129629]: https://github.com/rust-lang/rust/issues/129629
 
-We are generally on track with our marquee features: (1) Support for *async closures* is available on Nightly and the lang team arrived at a tentative consensus to keep the existing syntax (written rationale and formal decision are in progress). We issued a [call for testing](https://blog.rust-lang.org/inside-rust/2024/08/09/async-closures-call-for-testing.html) as well which has so far uncovered no issues. (2) Partial support for *Return Type Notation* is available on Nightly with the remainder under review. In addition, *dynamic dispatch for async functions* and *experimental async drop work* both made implementation progress. Async WG reorganization has made no progress. [Read the full details on the tracking issue.](https://github.com/rust-lang/rust-project-goals/issues/105#issuecomment-2361474377)
+We are generally on track with our marquee features: 
 
+1. Support for *async closures* is available on Nightly and the lang team arrived at a tentative consensus to keep the existing syntax (written rationale and formal decision are in progress). We issued a [call for testing](https://blog.rust-lang.org/inside-rust/2024/08/09/async-closures-call-for-testing.html) as well which has so far uncovered no issues.
+2. Partial support for *Return Type Notation* is available on Nightly with the remainder under review. 
+
+In addition, *dynamic dispatch for async functions* and *experimental async drop work* both made implementation progress. Async WG reorganization has made no progress. 
+
+[Read the full details on the tracking issue.](https://github.com/rust-lang/rust-project-goals/issues/105#issuecomment-2361474377)
 
 ### Stabilize features needed by Rust for Linux (tracked in [#116])
 
