@@ -50,7 +50,7 @@ We have stabilized [extended `offset_of` syntax](https://github.com/rust-lang/ru
 
 Implementation work proceeds for [arbitrary self types v2](https://github.com/rust-lang/rust/issues/44874#issuecomment-2314739657), [derive smart](https://github.com/rust-lang/rust/pull/125048) [pointer](https://github.com/rust-lang/rust/pull/129467), and [sanitizer support](https://github.com/rust-lang/rust/pull/128348).
 
-RFL on Rust CI is implemented but still waiting on documented policy. The first breakage was detected (and fixed) in [#129416](https://github.com/rust-lang/rust/pull/129416). This is the mechanism working as intended, although it is also clear that we need to better what to do when breakage occurs.
+RFL on Rust CI is implemented but still waiting on documented policy. The first breakage was detected (and fixed) in [#129416](https://github.com/rust-lang/rust/pull/129416). This is the mechanism working as intended, although it would also be useful to better define what to do when breakage occurs.
 
 ## Selected updates
 
