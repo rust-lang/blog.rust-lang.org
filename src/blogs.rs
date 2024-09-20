@@ -7,7 +7,7 @@ static POSTS_EXT: &str = "md";
 
 #[derive(Deserialize)]
 #[serde(rename_all = "kebab-case", deny_unknown_fields)]
-pub(crate) struct Manifest {
+pub struct Manifest {
     /// Title to display in the "top row".
     pub(crate) title: String,
 
@@ -32,7 +32,7 @@ pub(crate) struct Manifest {
 }
 
 #[derive(Serialize)]
-pub(crate) struct Blog {
+pub struct Blog {
     title: String,
     index_title: String,
     link_text: String,
@@ -121,7 +121,7 @@ impl Blog {
 
 /// Recursively load blogs in a directory. A blog is a directory with a `blog.yml`
 /// file inside it.
-pub(crate) fn load(base: &Path) -> eyre::Result<Vec<Blog>> {
+pub fn load(base: &Path) -> eyre::Result<Vec<Blog>> {
     let mut blogs = Vec::new();
     load_recursive(base, base, &mut blogs)?;
     Ok(blogs)

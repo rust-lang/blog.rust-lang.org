@@ -15,7 +15,7 @@ struct YamlHeader {
 }
 
 #[derive(Debug, Clone, Serialize)]
-pub(crate) struct Post {
+pub struct Post {
     pub(crate) filename: String,
     pub(crate) layout: String,
     pub(crate) title: String,
