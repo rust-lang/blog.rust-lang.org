@@ -5,7 +5,7 @@ use self::blogs::Blog;
 use self::posts::Post;
 use chrono::Timelike;
 use eyre::{eyre, WrapErr};
-use handlebars::{handlebars_helper, Handlebars};
+use handlebars::{handlebars_helper, DirectorySourceOptions, Handlebars};
 use rayon::prelude::*;
 use sass_rs::{compile_file, Options};
 use serde_derive::Serialize;
@@ -54,7 +54,7 @@ impl<'a> Generator<'a> {
     ) -> eyre::Result<Self> {
         let mut handlebars = Handlebars::new();
         handlebars.set_strict_mode(true);
-        handlebars.register_templates_directory("templates", Default::default())?;
+        handlebars.register_templates_directory("templates", DirectorySourceOptions::default())?;
         handlebars.register_helper("month_name", Box::new(hb_month_name_helper));
 
         Ok(Generator {
