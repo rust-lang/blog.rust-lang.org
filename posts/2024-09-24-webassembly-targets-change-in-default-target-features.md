@@ -7,7 +7,7 @@ team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
 
 The Rust compiler has [recently upgraded to using LLVM 19][llvm19] and this
 change accompanies some updates to the default set of target features enabled
-for WebAssembly targets of the Rust compiler. Nightly Rust today, which will
+for WebAssembly targets of the Rust compiler. Beta Rust today, which will
 become Rust 1.82 on 2024-10-17, reflects all of these changes and can be
 used for testing.
 
@@ -103,7 +103,7 @@ do not support the reference-types proposal. It is expected that this change
 will have a low impact due to the age of the reference-types proposal and
 breadth of implementation in engines. Given the multitude of WebAssembly
 engines, however, it's recommended that any WebAssembly users test out
-Nightly Rust and see if the produced module still runs on their engine of
+Rust 1.82 beta and see if the produced module still runs on their engine of
 choice.
 
 ### LLVM, Rust, and Multiple Tables
@@ -149,7 +149,7 @@ enabled.  Additionally Rust's `extern "C"` ABI for WebAssembly is not changing
 either and continues to match LLVM's (or strives to, [differences to
 LLVM](https://github.com/rust-lang/rust/issues/115666) are considered bugs to
 fix). Despite this though the change has the possibility of still affecting
-Nightly users of Rust.
+Rust users.
 
 Rust for some time has supported an `extern "wasm"` ABI on Nightly which was an
 experimental means of exposing the ability of defining a function in Rust which
@@ -214,7 +214,7 @@ with strict criteria in mind (e.g. N engines must have this implemented for M
 years), and there may be breakage that happens.
 
 If you're using a WebAssembly engine that does not support the modules emitted
-by Nightly Rust and LLVM 19 then your options are:
+by Rust 1.82 beta and LLVM 19 then your options are:
 
 * Try seeing if the engine you're using has any updates available to it. You
   might be using an older version which didn't support a feature but a newer
