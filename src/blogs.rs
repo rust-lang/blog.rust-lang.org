@@ -140,8 +140,7 @@ fn load_recursive(base: &Path, current: &Path, blogs: &mut Vec<Blog>) -> eyre::R
                 if file_name == MANIFEST_FILE {
                     let prefix = parent
                         .strip_prefix(base)
-                        .map(|p| p.to_path_buf())
-                        .unwrap_or_else(|_| PathBuf::new());
+                        .map_or_else(|_| PathBuf::new(), Path::to_path_buf);
                     blogs.push(Blog::load(prefix, parent)?);
                 }
             }
