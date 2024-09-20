@@ -119,12 +119,11 @@ impl Post {
                 lazy_static::lazy_static! {
                     static ref R: Regex = Regex::new(r"(?P<name>[^<]*) <(?P<url>[^>]+)>").unwrap();
                 }
-                let captures = match R.captures(&s) {
-                    Some(c) => c,
-                    None => panic!(
+                let Some(captures) = R.captures(&s) else {
+                    panic!(
                         "team from path `{}` should have format `$name <$url>`",
                         path.display()
-                    ),
+                    )
                 };
                 (
                     Some(captures["name"].to_string()),
