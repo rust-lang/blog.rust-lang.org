@@ -28,7 +28,7 @@ Over the last month, all the "lang team priority items" have landed and are full
 
 Overall:
 
-* [13 items](https://github.com/rust-lang/rust/issues?q=label%3AS-tracking-ready-for-edition+is%3Aclosed) are fully read ready for Rust 2024.
+* [13 items](https://github.com/rust-lang/rust/issues?q=label%3AS-tracking-ready-for-edition+is%3Aclosed) are fully ready for Rust 2024.
 * [10 items](https://github.com/rust-lang/rust/issues?q=label%3AA-edition-2024%20label%3AC-tracking-issue%20-label%3AS-tracking-ready-for-edition%2CS-tracking-impl-incomplete%20-label%3At-libs%20) are fully implemented but still require documentation.
 * [6 items](https://github.com/rust-lang/rust/issues?q=label%3AA-edition-2024%20label%3AC-tracking-issue%20-label%3AS-tracking-ready-for-edition%20label%3AS-tracking-impl-incomplete%20-label%3At-libs%20) still need implementation work.
 
