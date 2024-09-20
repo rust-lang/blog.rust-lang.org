@@ -96,8 +96,8 @@ impl<'a> Generator<'a> {
     }
 
     fn compile_sass(&self, filename: &str) -> eyre::Result<()> {
-        let scss_file = format!("./src/styles/{}.scss", filename);
-        let css_file = format!("./static/styles/{}.css", filename);
+        let scss_file = format!("./src/styles/{filename}.scss");
+        let css_file = format!("./static/styles/{filename}.css");
 
         let css = compile_file(&scss_file, Options::default())
             .map_err(|error| eyre!(error))
@@ -113,7 +113,7 @@ impl<'a> Generator<'a> {
     fn concat_vendor_css(&self, files: Vec<&str>) -> eyre::Result<()> {
         let mut concatted = String::new();
         for filestem in files {
-            let vendor_path = format!("./static/styles/{}.css", filestem);
+            let vendor_path = format!("./static/styles/{filestem}.css");
             let contents = fs::read_to_string(vendor_path).wrap_err("couldn't read vendor css")?;
             concatted.push_str(&contents);
         }
