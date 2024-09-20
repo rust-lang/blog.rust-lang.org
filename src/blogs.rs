@@ -82,7 +82,7 @@ impl Blog {
             }
         }
 
-        Ok(Blog {
+        Ok(Self {
             title: manifest.title,
             index_title: manifest.index_title,
             description: manifest.description,
