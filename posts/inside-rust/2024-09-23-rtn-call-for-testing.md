@@ -87,7 +87,9 @@ These restrictions are described in further detail in [RFC 3654].
 
 ## How do I help?
 
-We'd love for you to test out this new feature!
+We'd love for you to test out this feature on the latest Rust nightly compiler[^nightly].
+
+[^nightly]: Make sure to run `rustup update nightly` or however manage your Rust releases, since the feature is very new and is still unstable!
 
 Specifically, we'd like for you to identify traits where you're unnecessarily restricting your trait definitions with `+ Send` or similar bounds:
 
