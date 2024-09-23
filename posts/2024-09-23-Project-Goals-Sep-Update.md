@@ -86,7 +86,7 @@ RFL on Rust CI is implemented but still waiting on documented policy. The first 
 
 The following goals have been completed:
 
-* [Implement "merged doctests" to save doctest time](https://github.com/rust-lang/rust-project-goals/issues/103)
+* [Implement "merged doctests" to save doctest time](https://github.com/rust-lang/rust-project-goals/issues/111)
 
 ## Stalled or orphaned goals
 
