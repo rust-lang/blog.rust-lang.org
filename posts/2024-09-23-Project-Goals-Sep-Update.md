@@ -68,7 +68,7 @@ RFL on Rust CI is implemented but still waiting on documented policy. The first 
 
 ### Expose experimental LLVM features for automatic differentiation and GPU offloading (tracked in [#109])
 
-[#109]: https://github.com/rust-lang/rust-project-goals/issues/104
+[#109]: https://github.com/rust-lang/rust-project-goals/issues/109
 
 @ZuseZ4 has been focusing on automatic differentiation in Rust, with their first two upstreaming PRs for the rustc frontend and backend merged, and a third PR covering changes to rustc_codegen_llvm currently under review. They are especially proud of getting a detailed LLVM-IR reproducer from a Rust developer for an Enzyme core issue, which will help with debugging. On the GPU side, @ZuseZ4 is taking advantage of recent LLVM updates to rustc that enable more GPU/offloading work. @ZuseZ4 also had a talk about "When unsafe code is slow - Automatic Differentiation in Rust" accepted for the upcoming LLVM dev meeting, where they'll present benchmarks and analysis comparing Rust-Enzyme to the C++ Enzyme frontend.
 
