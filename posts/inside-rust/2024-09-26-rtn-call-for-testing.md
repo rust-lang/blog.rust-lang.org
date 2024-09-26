@@ -5,7 +5,7 @@ author: Michael Goulet
 team: The Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>
 ---
 
-The async working group is excited to announce that [RFC 3654] return type notation (RTN) is ready for testing. In this post, we want to briefly describe the feature and announce a call for testing on nightly Rust.
+The async working group is excited to announce that [RFC 3654] return type notation (RTN) is ready for testing on nightly Rust. In this post, we'll briefly describe the feature.
 
 ## The backstory
 
@@ -24,7 +24,8 @@ trait Foo {
 
 fn needs_sendable_future<T: Foo>()
 where
-    // How do we further restrict `T::method()` to be `Send + 'static`?
+    // How do we further restrict `T::method()`
+    // to be `Send + 'static`?
 {
     spawn(T::method());
     //~^ ERROR: `impl Future<Output = ()>` is not `Send`!
@@ -69,7 +70,7 @@ In [RFC 3654] we introduced return type notation (RTN). This will allow us to wr
 ```rust
 fn needs_sendable_future<T: Foo>()
 where
-    T::method(..): Send + 'static // ✨
+    T::method(..): Send + 'static // Yay!
 {
     spawn(T::method());
     //~^ Works!
@@ -80,8 +81,8 @@ where
 
 Currently, RTN is only allowed for trait associated functions and methods with lifetime generics (not const or type generics) that use:
 
-* async fn in traits (AFIT)
-* return-position impl Trait in traits (RPITIT) where the impl Trait is the outermost return type, i.e. `-> impl Trait`, but not `-> Box<impl Trait>`
+* async fn in traits (AFIT) or
+* return-position impl Trait in traits (RPITIT) where the impl Trait is the outermost return type, i.e. `-> impl Trait`, but not `-> Box<impl Trait>`.
 
 These restrictions are described in further detail in [RFC 3654].
 
@@ -89,7 +90,7 @@ These restrictions are described in further detail in [RFC 3654].
 
 We'd love for you to test out this feature on the latest Rust nightly compiler[^nightly].
 
-[^nightly]: Make sure to run `rustup update nightly` or however you manage your Rust releases, since the feature is very new and is still unstable!
+[^nightly]: Make sure to run `rustup update nightly` (or however you manage your Rust releases), since the feature is very new and is still unstable!
 
 Specifically, we'd like for you to identify traits where you're unnecessarily restricting your trait definitions with `+ Send` or similar bounds:
 
