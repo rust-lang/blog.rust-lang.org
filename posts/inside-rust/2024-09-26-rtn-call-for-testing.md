@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Return Type Notation MVP: Call for Testing!"
+title: "Return type notation MVP: Call for testing!"
 author: Michael Goulet
 team: The Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>
 ---
