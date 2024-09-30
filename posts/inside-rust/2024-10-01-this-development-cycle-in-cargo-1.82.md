@@ -84,7 +84,7 @@ we put out a new round of [call-for-testing](https://github.com/rust-lang/cargo/
 We're grateful for the feedback we've received!
 
 A particularly confusing aspect of the `fallback` strategy is that Cargo may select a dependency that is either
-- Too new for your `package.rust-version` because no MSRV-compatible version was available and so we did a `fallback` to an MSRV-incompatible one
+- Too new for your `package.rust-version` because no MSRV-compatible version was available and so Cargo did a `fallback` to an MSRV-incompatible one
 - Older than is needed by your package if your version requirement is too liberal and your package doesn't set `package.rust-version` but something else in your workspace does
 
 After several tweaks to Cargo's locking output (
@@ -95,8 +95,8 @@ After several tweaks to Cargo's locking output (
 [#14459](https://github.com/rust-lang/cargo/pull/14459).
 [#14461](https://github.com/rust-lang/cargo/pull/14461).
 [#14471](https://github.com/rust-lang/cargo/pull/14471).
-), we now report to users
-- when Cargo selected a dependency version that is incompatible with the MSRV of workspace members that transitively depend on it
+), Cargo now report to users
+- when it selected a dependency version that is incompatible with the MSRV of workspace members that transitively depend on it
 - when a newer version of a package is available that is compatible with the MSRV of workspace members that transitively depend on it
 
 ![rendering of cargo update](../../../../images/inside-rust/2024-10-01-this-development-cycle-in-cargo-1.82/update.stderr.term.svg)
@@ -104,12 +104,12 @@ After several tweaks to Cargo's locking output (
 <!-- team meeting: 2024-08-20 -->
 <!-- team meeting: 2024-08-27 -->
 The testing feedback was more than `fallback` behavior being confusing but that it can fail to provide the benefits of an MSRV-aware resolver when in a workspace with multiple MSRVs ([#14414](https://github.com/rust-lang/cargo/issues/14414)).
-The ideal state would be that when resolving a dependency, we only consider the MSRVs of the workspace members that transitively depend on it.
-The problem is that we don't know every path to a dependency until the resolve is done.
-We select a version of a dependency when we first come across it and then only try another version if the selected version is rejected by another path to it.
+The ideal state would be that when resolving a dependency, Cargo only consider the MSRVs of the workspace members that transitively depend on it.
+The problem is that Cargo doesn't know every path to a dependency until the resolve is done.
+Cargo selects a version of a dependency when it first comes across it and then only tries another version if the selected version is rejected by another path to it.
 If we `deny`d dependency versions with an incompatible MSRV, with enough work we could hit the ideal case.
 The problem is how much work this would take and that there are times packages intentionally select MSRV-incompatible dependencies (e.g. features with a different MSRV, not caring about MSRV for dev-dependencies, etc).
-Our `fallback` strategy requires that we pick a "good enough" version when we come across a dependency version because another path to it cannot reject it and cause a new version to be selected.
+Our `fallback` strategy requires that Cargo pick a "good enough" version when it come across a dependency version because another path to it cannot reject it and cause a new version to be selected.
 Currently, the "good enough" version is the lowest of all `package.rust-version`s in a workspace.
 For any package in a workspace with a higher MSRV, this puts users in the situation of either intentionally holding back their dependency versions to make up for Cargo's shortcomings or they lose out on an MSRV-aware resolver.
 
@@ -342,9 +342,9 @@ Rustc has the ability to "silently" emit the lint in json
 ([compiler-team#674](https://github.com/rust-lang/compiler-team/issues/674))
 so that Cargo can aggregate the results and report the lint to the user.
 Cargo still won't have enough information if you build `cargo check --bin foo` as all build targets need to run.
-To handle this, we planned to not emit the lint unless all relevant build-targets are built.
-`build.rs` is always built, so we can always emit for `build-dependencies`.
-If all `bin` and `lib` build-targets are built, then we can emit for normal `dependencies.`
+To handle this, we planned for Cargo to not emit the lint unless all relevant build-targets are built.
+`build.rs` is always built, so Cargo can always emit for `build-dependencies`.
+If all `bin` and `lib` build-targets are built, then Cargo can emit for normal `dependencies.`
 That just leaves `dev-dependencies` as there currently isn't any way to build `bench`, `test`, `example`, and doc tests all at once as `--all-targets` excludes doc tests.
 
 Once we figure out `--all-targets` and doc tests, we can [upstream `cargo-udeps` into Cargo](https://github.com/est31/cargo-udeps/issues/276#issuecomment-2328510760).
@@ -377,7 +377,7 @@ As we are working to add `--doc` to these commands, we can then add `--all-targe
 
 <!-- 2024-07-30 -->
 [RFC #3371](https://github.com/rust-lang/rfcs/pull/3371) makes the `target-dir` config field and `--target-dir` flag templated so users can easily move all `target-dir`s out of their source directories while keeping them separate.
-We've also had a long outstanding unstable feature to specify where the write build artifacts to with `--artifact-dir`, formerly `--out-dir`
+Cargo also has a long outstanding unstable feature to specify where the write build artifacts to with `--artifact-dir`, formerly `--out-dir`
 ([#6790](https://github.com/rust-lang/cargo/issues/6790)).
 
 [kornelski](https://github.com/kornelski) shared a counter-proposal in
@@ -401,7 +401,7 @@ As a team we discussed these two plans:
 #14125's approach does simplify the problem a lot but loses one of the benefits of `--artifact-dir`: users being able to specify a predictable path,
 rather than having to track a location inside.
 Users will also likely want to define the location for intermediate build artifacts,
-even once we have a separate `CARGO_CACHE_HOME`
+even once Cargo has a separate `CARGO_CACHE_HOME`
 ([#1734](https://github.com/rust-lang/cargo/issues/1734))
 as build artifacts can be significantly larger than other caches
 or may want to optimize for other properties like file IO speed.
