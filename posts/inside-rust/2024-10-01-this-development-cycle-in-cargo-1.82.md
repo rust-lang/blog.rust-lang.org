@@ -109,7 +109,7 @@ The problem is that we don't know every path to a dependency until the resolve i
 We select a version of a dependency when we first come across it and then only try another version if the selected version is rejected by another path to it.
 If we `deny`d dependency versions with an incompatible MSRV, with enough work we could hit the ideal case.
 The problem is how much work this would take and that there are times packages intentionally select MSRV-incompatible dependencies (e.g. features with a different MSRV, not caring about MSRV for dev-dependencies, etc).
-Our `fallback` strategy requires that we pick a "good enough" version when we version come across a dependency because another path to it cannot reject it and cause a new version to be selected.
+Our `fallback` strategy requires that we pick a "good enough" version when we come across a dependency version because another path to it cannot reject it and cause a new version to be selected.
 Currently, the "good enough" version is the lowest of all `package.rust-version`s in a workspace.
 For any package in a workspace with a higher MSRV, this puts users in the situation of either intentionally holding back their dependency versions to make up for Cargo's shortcomings or they lose out on an MSRV-aware resolver.
 
