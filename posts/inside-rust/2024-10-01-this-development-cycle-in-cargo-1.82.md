@@ -448,7 +448,7 @@ version reqs would "just work".
 However, there is value in libraries allowing the minimal-most version of a dependency as possible ([#14372](https://github.com/rust-lang/cargo/issues/14372)).
 This gives application authors the flexibility to hold back versions to workaround bugs or control the cadence of dependency updates so their are fewer dependency versions to audit.
 
-We are continuing this discussion on [Internals](https://internals.rust-lang.org/t/zminimal-versions-cargo-update-and-cargo-upgrade/21335/19).
+We are continuing this discussion on [Internals](https://internals.rust-lang.org/t/zminimal-versions-cargo-update-and-cargo-upgrade/21335).
 
 ## Misc
 
@@ -456,7 +456,7 @@ We are continuing this discussion on [Internals](https://internals.rust-lang.org
 - [Ifropc](https://github.com/Ifropc) added initial support for `--lockfile-path` in [#14326](https://github.com/rust-lang/cargo/pull/14326) (tracking issue: [#14421](https://github.com/rust-lang/cargo/issues/14421))
 - [dpaoliello](https://github.com/dpaoliello) added initial support for `path-bases` ([#14360](https://github.com/rust-lang/cargo/pull/14360)) along with `cargo add` support ([#14427](https://github.com/rust-lang/cargo/pull/14427)) (tracking issue: [#14355](https://github.com/rust-lang/cargo/issues/14355))
 - [arlosi](https://github.com/arlosi) started another attempt on a way to turn warnings into errors in [#14388](https://github.com/rust-lang/cargo/pull/14388) (issue: [#8424](https://github.com/rust-lang/cargo/issues/8424))
-- [Daily reports](https://rust-lang.zulipchat.com/#narrow/stream/260232-t-cargo.2FPubGrub/topic/Progress.20report) by [Eh2406](https://github.com/Eh2406) on the progress of the Rust implementation of the PugGrub version solving algorithm
+- [Daily reports](https://rust-lang.zulipchat.com/#narrow/stream/260232-t-cargo.2FPubGrub/topic/Progress.20report) by [Eh2406](https://github.com/Eh2406) on the progress of the Rust implementation of the PubGrub version solving algorithm
 
 ## Focus areas without progress
 
