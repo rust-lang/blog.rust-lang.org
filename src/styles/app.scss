@@ -163,6 +163,11 @@ ul.nav, ul.nav li {
   margin-bottom: 0;
 }
 
+// TODO:  remove when switching to Tachyons -- these are overrides for Skeleton.
+.column, .columns {
+  margin-left: 4%;
+}
+
 .nav a {
   color: var(--gray);
   color: var(--nav-links-a);
