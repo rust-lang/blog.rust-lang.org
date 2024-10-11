@@ -15,7 +15,7 @@ struct YamlHeader {
 }
 
 #[derive(Debug, Clone, Serialize)]
-pub(crate) struct Post {
+pub struct Post {
     pub(crate) filename: String,
     pub(crate) layout: String,
     pub(crate) title: String,
@@ -114,26 +114,21 @@ impl Post {
         }
 
         // If they supplied team, it should look like `team-text <team-url>`
-        let (team, team_url) = match team_string {
-            Some(s) => {
-                lazy_static::lazy_static! {
-                    static ref R: Regex = Regex::new(r"(?P<name>[^<]*) <(?P<url>[^>]+)>").unwrap();
-                }
-                let captures = match R.captures(&s) {
-                    Some(c) => c,
-                    None => panic!(
-                        "team from path `{}` should have format `$name <$url>`",
-                        path.display()
-                    ),
-                };
-                (
-                    Some(captures["name"].to_string()),
-                    Some(captures["url"].to_string()),
-                )
+        let (team, team_url) = team_string.map_or((None, None), |s| {
+            lazy_static::lazy_static! {
+                static ref R: Regex = Regex::new(r"(?P<name>[^<]*) <(?P<url>[^>]+)>").unwrap();
             }
-
-            None => (None, None),
-        };
+            let Some(captures) = R.captures(&s) else {
+                panic!(
+                    "team from path `{}` should have format `$name <$url>`",
+                    path.display()
+                )
+            };
+            (
+                Some(captures["name"].to_string()),
+                Some(captures["url"].to_string()),
+            )
+        });
 
         Ok(Self {
             filename,

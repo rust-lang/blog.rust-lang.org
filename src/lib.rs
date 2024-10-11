@@ -5,7 +5,7 @@ use self::blogs::Blog;
 use self::posts::Post;
 use chrono::Timelike;
 use eyre::{eyre, WrapErr};
-use handlebars::{handlebars_helper, Handlebars};
+use handlebars::{handlebars_helper, DirectorySourceOptions, Handlebars};
 use rayon::prelude::*;
 use sass_rs::{compile_file, Options};
 use serde_derive::Serialize;
@@ -54,7 +54,7 @@ impl<'a> Generator<'a> {
     ) -> eyre::Result<Self> {
         let mut handlebars = Handlebars::new();
         handlebars.set_strict_mode(true);
-        handlebars.register_templates_directory("templates", Default::default())?;
+        handlebars.register_templates_directory("templates", DirectorySourceOptions::default())?;
         handlebars.register_helper("month_name", Box::new(hb_month_name_helper));
 
         Ok(Generator {
@@ -96,8 +96,8 @@ impl<'a> Generator<'a> {
     }
 
     fn compile_sass(&self, filename: &str) -> eyre::Result<()> {
-        let scss_file = format!("./src/styles/{}.scss", filename);
-        let css_file = format!("./static/styles/{}.css", filename);
+        let scss_file = format!("./src/styles/{filename}.scss");
+        let css_file = format!("./static/styles/{filename}.css");
 
         let css = compile_file(&scss_file, Options::default())
             .map_err(|error| eyre!(error))
@@ -113,7 +113,7 @@ impl<'a> Generator<'a> {
     fn concat_vendor_css(&self, files: Vec<&str>) -> eyre::Result<()> {
         let mut concatted = String::new();
         for filestem in files {
-            let vendor_path = format!("./static/styles/{}.css", filestem);
+            let vendor_path = format!("./static/styles/{filestem}.css");
             let contents = fs::read_to_string(vendor_path).wrap_err("couldn't read vendor css")?;
             concatted.push_str(&contents);
         }
