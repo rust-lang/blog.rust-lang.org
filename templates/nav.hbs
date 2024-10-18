@@ -1,7 +1,7 @@
 <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
     <a href="{{root}}{{blog.prefix}}">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="{{root}}images/rust-logo-blk.svg">
+      <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="{{root}}images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">{{blog.title}}</span>
     </a>
   </div>
@@ -13,5 +13,11 @@
     <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
     <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
     <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+    <button class="theme-icon" onclick="dropdown();">🖌
+      <ul id="theme-choice">
+        <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+        <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+      </ul>
+    </button>
   </ul>
 </nav>

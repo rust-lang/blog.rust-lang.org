@@ -25,7 +25,7 @@ The following is a list of changes we are tracking for inclusion in the Edition.
 - Public/private dependencies. This is partially implemented, though there are some changes needed on the rules for determining visibility. See [RFC #3516](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html).
 - Rustfmt: Enable `overflow_delimited_expr` by default. This is not yet implemented. See [#114764](https://github.com/rust-lang/rust/pull/114764).
 
-[docs-static-mut]: https://doc.rust-lang.org/nightly/edition-guide/rust-2024/static-mut-reference.html
+[docs-static-mut]: https://doc.rust-lang.org/nightly/edition-guide/rust-2024/static-mut-references.html
 [docs-future]: https://doc.rust-lang.org/nightly/edition-guide/rust-2024/prelude.html
 [docs-unsafe]: https://doc.rust-lang.org/nightly/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html
 [`unsafe_op_in_unsafe_fn`]: https://doc.rust-lang.org/nightly/rustc/lints/listing/allowed-by-default.html#unsafe-op-in-unsafe-fn

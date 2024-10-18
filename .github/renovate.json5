@@ -1,17 +1,19 @@
 {
     extends: [
-        "config:best-practices",
-        ":pinAllExceptPeerDependencies",
-        ":maintainLockFilesWeekly",
-        ":semanticCommitsDisabled",
-        "regexManagers:githubActionsVersions",
+        'config:best-practices',
+        ':pinAllExceptPeerDependencies',
+        ':maintainLockFilesWeekly',
+        ':semanticCommitsDisabled',
+        'customManagers:githubActionsVersions',
     ],
     packageRules: [
         {
             matchPackageNames: [
-                "warpy",
+                'warpy',
             ],
-            extends: ["schedule:weekly"],
-        }
-    ]
+            extends: [
+                'schedule:weekly',
+            ],
+        },
+    ],
 }

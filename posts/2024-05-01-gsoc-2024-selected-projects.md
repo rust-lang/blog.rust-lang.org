@@ -19,15 +19,15 @@ In the end, we narrowed the list down to twelve best proposals, which we felt wa
 ## Selected projects
 On the 1st of May, Google has announced the accepted projects. We are happy to announce that `9` proposals out of the twelve that we have submitted were accepted by Google, and will thus participate in Google Summer of Code 2024! Below you can find the list of accepted proposals (in alphabetical order), along with the names of their authors and the assigned mentor(s):
 
-- **Adding lint-level configuration to cargo-semver-checks** by Max Carr, mentored by Predrag Gruevski
-- **Implementation of a Faster Register Allocator For Cranelift** by d-sonuga, mentored by Chris Fallin and Amanieu d'Antras
-- **Improve Rust benchmark suite** by s7tya, mentored by Jakub Beránek
-- **Move cargo shell completions to Rust** by shanmu, mentored by Ed Page
-- **Rewriting Esoteric, Error-Prone Makefile Tests Using Robust Rust Features**	by Julien Robert, mentored by Jieyou Xu
-- **Rewriting the Rewrite trait** by SeoYoung Lee, mentored by Yacin Tmimi
-- **Rust to .NET compiler - add support for compiling & running cargo tests** by Fractal Fir, mentored by Jack Huey
-- **Sandboxed and Deterministic Proc Macro using Wasm** by Apurva Mishra, mentored by David Lattimore
-- **Tokio async support in Miri** by Tiffany Pek Yuan, mentored by Oli Scherer
+- **[Adding lint-level configuration to cargo-semver-checks](https://summerofcode.withgoogle.com/programs/2024/projects/hADSyIDV)** by Max Carr, mentored by Predrag Gruevski
+- **[Implementation of a Faster Register Allocator For Cranelift](https://summerofcode.withgoogle.com/programs/2024/projects/zxxeGZMt)** by d-sonuga, mentored by Chris Fallin and Amanieu d'Antras
+- **[Improve Rust benchmark suite](https://summerofcode.withgoogle.com/programs/2024/projects/MeyNanKI)** by s7tya, mentored by Jakub Beránek
+- **[Move cargo shell completions to Rust](https://summerofcode.withgoogle.com/programs/2024/projects/jjnidpgn)** by shanmu, mentored by Ed Page
+- **[Rewriting Esoteric, Error-Prone Makefile Tests Using Robust Rust Features](https://summerofcode.withgoogle.com/programs/2024/projects/P5BC91Hr)** by Julien Robert, mentored by Jieyou Xu
+- **[Rewriting the Rewrite trait](https://summerofcode.withgoogle.com/programs/2024/projects/gHEu3vxc)** by SeoYoung Lee, mentored by Yacin Tmimi
+- **[Rust to .NET compiler - add support for compiling & running cargo tests](https://summerofcode.withgoogle.com/programs/2024/projects/IIHP5ozV)** by Fractal Fir, mentored by Jack Huey
+- **[Sandboxed and Deterministic Proc Macro using Wasm](https://summerofcode.withgoogle.com/programs/2024/projects/kXG0mZoj)** by Apurva Mishra, mentored by David Lattimore
+- **[Tokio async support in Miri](https://summerofcode.withgoogle.com/programs/2024/projects/rk1Ey4hN)** by Tiffany Pek Yuan, mentored by Oli Scherer
 
 **Congratulations to all applicants whose project was selected!** The mentors are looking forward to working with you on these exciting projects to improve the Rust ecosystem. You can expect to hear from us soon, so that we can start coordinating the work on your GSoC projects. 
 

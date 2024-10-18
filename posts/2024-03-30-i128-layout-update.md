@@ -180,8 +180,8 @@ int main() {
         /* load arguments that fit in registers */
         "movl    $0xaf, %edi \n\t"                /* 1st slot (edi): padding char (`edi` is the
                                                    * same as `rdi`, just a smaller access size) */
-        "movq    $0x9900aabbccddeeff, %rsi \n\t"  /* 2rd slot (rsi): lower half of `a` */
-        "movq    $0x1122334455667788, %rdx \n\t"  /* 3nd slot (rdx): upper half of `a` */
+        "movq    $0x9900aabbccddeeff, %rsi \n\t"  /* 2nd slot (rsi): lower half of `a` */
+        "movq    $0x1122334455667788, %rdx \n\t"  /* 3rd slot (rdx): upper half of `a` */
         "movq    $0x9900aabbccddeeff, %rcx \n\t"  /* 4th slot (rcx): lower half of `b` */
         "movq    $0x1122334455667788, %r8  \n\t"  /* 5th slot (r8):  upper half of `b` */
         "movq    $0xdeadbeef4c0ffee0, %r9  \n\t"  /* 6th slot (r9):  should be unused, but
@@ -312,5 +312,5 @@ whose Rust compiler may be built with an older LLVM.
 [ongoing discussion]: https://github.com/rust-lang/lang-team/issues/255
 [align-godbolt]: https://godbolt.org/z/h94Ge1vMW
 [composite-playground]: https://play.rust-lang.org/?version=beta&mode=debug&edition=2021&gist=52f349bdea92bf724bc453f37dbd32ea
-[^va-segfault]: https://github.com/llvm/llvm-project/issues/20283
-[^f128-segfault]: https://bugs.llvm.org/show_bug.cgi?id=50198
+[^va-segfault]: <https://github.com/llvm/llvm-project/issues/20283>
+[^f128-segfault]: <https://bugs.llvm.org/show_bug.cgi?id=50198>
