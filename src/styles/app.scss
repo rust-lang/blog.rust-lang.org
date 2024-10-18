@@ -225,6 +225,10 @@ div.brand {
     white-space: inherit;
   }
 
+  ul code {
+    display: block;
+  }
+
   a.anchor::before {
     content: "§";
     display: none;
