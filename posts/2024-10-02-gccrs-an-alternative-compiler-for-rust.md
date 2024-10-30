@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "gccrs: An alternative compiler for Rust"
-author: "Arthur Cohen on behalf of the GCC Rust project"
+author: "Arthur Cohen on behalf of the gccrs project"
 ---
 
 `gccrs` is a work-in-progress alternative compiler for Rust, being developed as part of the [GCC project](https://gcc.gnu.org/). GCC is a collection of compilers for various programming languages that all share a common compilation framework. You may have heard about `gccgo`, `gfortran`, or `g++`, which are all binaries within that project, the [GNU Compiler Collection](https://gcc.gnu.org/). The aim of `gccrs` is to add support for the Rust programming language to that collection.
