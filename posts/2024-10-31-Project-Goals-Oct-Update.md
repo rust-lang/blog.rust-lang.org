@@ -21,9 +21,9 @@ repository](https://github.com/rust-lang/rust-project-goals/milestone/2).
 
 The biggest elements of our goal are solving the ["send bound" problem][sbp] via [return-type notation][RTN] (RTN) and adding support for async closures. This month we made progress towards both. For RTN, @compiler-errors extended the return-type notation landed support for using RTN in self-types like `where Self::method(): Send`. He also authored a [blog post with a call for testing](https://blog.rust-lang.org/inside-rust/2024/09/26/rtn-call-for-testing.html) explaining what RTN is and how it works. For async closures, the lang team reached a preliminary consensus on the `async Fn` syntax, with the understanding that it will also include some "async type" syntax. This rationale was documented in [RFC #3710](https://github.com/rust-lang/rfcs/pull/3710), which is now open for feedback. The team held a [design meeting on Oct 23](https://hackmd.io/@rust-lang-team/ryxu3YLx1e) and @nikomatsakis will be updating the RFC with the conclusions.
 
-[sbp]: 
+[sbp]: https://rust-lang.github.io/rust-project-goals/2024h2/async.html#resolve-the-send-bound-problem
 
-[RTN]: 
+[RTN]: https://github.com/rust-lang/rfcs/pull/3654
 
 We have also been working towards a release of the `dynosaur` crate that enables dynamic dispatch for traits with async functions. This is intended as a transitionary step before we implement true dynamic dispatch. The next steps are to polish the implementation and issue a public call for testing.
 
