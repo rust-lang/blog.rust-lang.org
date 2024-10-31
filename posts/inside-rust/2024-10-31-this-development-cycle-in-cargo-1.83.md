@@ -146,7 +146,7 @@ some tool authors were discussing with the Cargo team how to optimize `cargo met
 One of the concerns raised was with the serialization / deserialization time of json.
 In considering supporting another format, there has to be enough of a difference from json to be worth the effort, it must have a good compatibility story, and we should consider the interoperability of the format.
 For example, CBOR was brought up.
-While it has an IETFC RFC,
+While it has an IETF RFC,
 the Rust implementations have had some incompatibilities between them and the deserialization time seems to be on par with json
 ([source](https://github.com/djkoloski/rust_serialization_benchmark)) though real world benchmarks with `cargo metadata` would be needed to tell if it will make a difference.
 
