@@ -30,7 +30,7 @@ Cargo can't be everything to everyone,
 if for no other reason than the compatibility guarantees it must uphold.
 Plugins play an important part of the Cargo ecosystem and we want to celebrate them.
 
-Our plugin for this cycle is [`cargo-bloat`](https://crates.io/crates/cargo-bloat) what is taking up space in your binary.
+Our plugin for this cycle is [`cargo-bloat`](https://crates.io/crates/cargo-bloat) which shows what is taking up space in your binary.
 
 Thanks to [epage](https://github.com/epage) for the suggestion!
 
