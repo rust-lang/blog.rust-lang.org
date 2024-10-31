@@ -54,7 +54,7 @@ and wrote down the lessons learned on choosing an MSRV from the RFC process
 Previous, we discussed suboptimal results when resolving dependencies with multiple distinct MSRVs in a workspace.
 We were resolving for the lowest MSRV in the workspace.
 For a workspace member with any other MSRV,
-they would either get a version older than needed for too new.
+they would either get a version older than needed or too new.
 We proposed resolving for compatibility with the most MSRVs in the workspace.
 We made reporting improvements to better communicate this.
 However, there was still concerns over newer users unintentionally ending up in this situation and being confused.
