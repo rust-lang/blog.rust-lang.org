@@ -280,7 +280,7 @@ to officially accept a build script API package.
 
 - [Daily reports](https://rust-lang.zulipchat.com/#narrow/stream/260232-t-cargo.2FPubGrub/topic/Progress.20report) by [Eh2406](https://github.com/Eh2406) on the progress of the Rust implementation of the PugGrub version solving algorithm
 - [Flowrey](https://github.com/Flowrey) finished their work on a `--dry-run` flag for `cargo install` ([#14280](https://github.com/rust-lang/cargo/pull/14280))
-- [ahaoboy](https://github.com/ahaoboy) added dark mode to `--iming` ([#](https://github.com/rust-lang/cargo/pull/14588))
+- [ahaoboy](https://github.com/ahaoboy) added dark mode to `--timings` ([#14588](https://github.com/rust-lang/cargo/pull/14588))
 - [Xaeroxe](https://github.com/Xaeroxe) added unstable support using checksums, instead of mtimes, to determine when to rebuild ([#14137](https://github.com/rust-lang/cargo/pull/14137))
 - [epage](https://github.com/epage) posted [RFC 3692](https://github.com/rust-lang/rfcs/pull/3692) which came about from several conversations people had with the Cargo team at RustConf
 - In response to [#14555](https://github.com/rust-lang/cargo/issues/14555), the Cargo team decided to put the responsibility for mixing programmatic and human output on wrapper tools for now <!-- 2024-10-08 -->
