@@ -188,8 +188,8 @@ announcing and recognising the contributions of the compiler team's membership:
 - [spastorino](https://github.com/spastorino), maintainer
     - spastorino is another alum of the non-lexical lifetimes working group, starting to contribute
       in late 2017. Since NLL, spastorino has implemented negative impls in coherence, refactored
-      return position impl trait in trait code to lower as a GAT, and has done a lot of bugfixes
-      to the compiler in general and with to the type system as a member of the types team.
+      return position impl trait in trait code to lower as a GAT, and has done a lot of refactors/bugfixes
+      to the compiler.
 - [TaKO8Ki](https://github.com/TaKO8Ki), team member
     - TaKO8Ki has made lots of diagnostic improvements, helped the team keep on top of regressions
       by adding plenty of regression tests, done lots of refactorings and cleanup, fixed a bunch of
