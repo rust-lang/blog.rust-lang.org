@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "October Project Goals Update"
+title: "October project goals update"
 author: Niko Matsakis
 team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
 ---
 The Rust project is currently working towards a [slate of 26 project
-goals](https://rust-lang.github.io/rust-project-goals/2024h2/goals.html), with 3 of them designed as [Flagship
-Goals](https://rust-lang.github.io/rust-project-goals/2024h2/goals.html#flagship-goals). This post provides selected
+goals](https://rust-lang.github.io/rust-project-goals/2024h2/goals.html), with 3 of them designed as [flagship
+goals](https://rust-lang.github.io/rust-project-goals/2024h2/goals.html#flagship-goals). This post provides selected
 updates on our progress towards these goals (or, in some cases, lack thereof). The full details for any particular goal
 are available in its associated [tracking issue on the rust-project-goals
 repository](https://github.com/rust-lang/rust-project-goals/milestone/2).
@@ -14,7 +14,7 @@ repository](https://github.com/rust-lang/rust-project-goals/milestone/2).
 ## Flagship goals
 
 <div style="display: flex;" class="mt2 mb3">
-    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/105'><strong>Bring the Async Rust experience closer to parity with sync Rust</strong></a></div>
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/105'><strong>Bring the async Rust experience closer to parity with sync Rust</strong></a></div>
     <div style="flex: initial;"><progress value="15" max="37"></progress>
 </div>
 </div>
@@ -39,14 +39,14 @@ Finally, no progress has been made towards async WG reorganization. A meeting wa
 
 We have made significant progress on resolving blockers to Linux building on stable. Support for struct fields in the `offset_of!` macro has been stabilized. The final naming for the "derive-smart-pointer" feature has been decided as `#[derive(CoercePointee)]`; @dingxiangfei2009 prepared [PR #131284](https://github.com/rust-lang/rust/pull/131284) for the rename and is working on modifying the rust-for-linux repository to use the new name. Once that is complete, we will be able to stabilize. We decided to stabilize [support for references to statics in constants pointers-refs-to-static feature](https://github.com/rust-lang/rust/issues/128183) and are now awaiting a stabilization PR from @dingxiangfei2009.
 
-RFL is one of the major users of the asm-goto feature (and inline assembly in general) and we have been examining various extensions. @nbdd0121 authored a [hackmd document](https://hackmd.io/@nbdd0121/BJlVrepa0) detailing RFL's experiences and identifying areas for improvement. This led to two immediate action items: making target blocks safe-by-default ([rust-lang/rust#119364](https://github.com/rust-lang/rust/issues/119364)) and extending `const` to support embedded pointers ([rust-lang/rust#128464](https://github.com/rust-lang/rust/issues/128464)).
+Rust for Linux (RfL) is one of the major users of the asm-goto feature (and inline assembly in general) and we have been examining various extensions. @nbdd0121 authored a [hackmd document](https://hackmd.io/@nbdd0121/BJlVrepa0) detailing RfL's experiences and identifying areas for improvement. This led to two immediate action items: making target blocks safe-by-default ([rust-lang/rust#119364](https://github.com/rust-lang/rust/issues/119364)) and extending `const` to support embedded pointers ([rust-lang/rust#128464](https://github.com/rust-lang/rust/issues/128464)).
 
 Finally, we have been finding an increasing number of stabilization requests at the compiler level, and so @wesleywiser and @davidtwco from the compiler team have started attending meetings to create a faster response. One of the results of that collaboration is [RFC #3716], authored by Alice Ryhl, which proposes a method to manage compiler flags that modify the target ABI. Our previous approach has been to create distinct targets for each combination of flags, but the number of flags needed by the kernel make that impractical. Authoring the RFC revealed more such flags than previously recognized, including those that modify LLVM behavior.
 
 [RFC #3716]: https://github.com/rust-lang/rfcs/pull/3716
 
 <div style="display: flex;" class="mt2 mb3">
-    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/117'><strong>Rust 2024 Edition</strong></a></div>
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/117'><strong>Rust 2024 edition</strong></a></div>
     <div style="flex: initial;"><progress value="16" max="30"></progress>
 </div>
 </div>
