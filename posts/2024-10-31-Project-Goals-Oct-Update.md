@@ -57,7 +57,9 @@ The priorities for this edition have been to ensure its success without requirin
 
 All priority language items for Rust 2024 have been completed and are ready for release. These include several key issues and enhancements. Additionally, there are three changes to the standard library, several updates to Cargo, and an exciting improvement to `rustdoc` that will significantly speed up doctests.
 
-This edition also introduces a new style edition for `rustfmt`, which includes several formatting changes. The only remaining task is the completion of a PR for one item, after which final quality assurance crater runs will be conducted. Once these are triaged, the nightly beta for Rust 2024 will be announced, and wider testing will be solicited.
+This edition also introduces a new style edition for `rustfmt`, which includes several formatting changes.
+
+The team is preparing to start final quality assurance crater runs. Once these are triaged, the nightly beta for Rust 2024 will be announced, and wider testing will be solicited.
 
 Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on January 3, 2025, and officially released on February 20, 2025. More details about the edition items can be found in the [Edition Guide](https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html).
 
