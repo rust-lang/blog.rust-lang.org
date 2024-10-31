@@ -69,7 +69,7 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * camlid has started working on using the new lowering schema for more than just const parameters, which once done will allow the introduction of a `min_generic_const_args` feature gate.
+ * camelid has started working on using the new lowering schema for more than just const parameters, which once done will allow the introduction of a `min_generic_const_args` feature gate.
 * compiler-errors has been working on removing the `eval_x` methods on `Const` that do not perform proper normalization and are incompatible with this feature.
 
 
