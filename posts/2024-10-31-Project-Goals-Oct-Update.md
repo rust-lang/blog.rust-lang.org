@@ -55,7 +55,7 @@ Finally, we have been finding an increasing number of stabilization requests at 
 
 The priorities for this edition have been to ensure its success without requiring excessive effort from any individual. The team is pleased with the progress, noting that this edition will be the largest since Rust 2015, introducing many new and exciting features. The process has been carefully managed to maintain high standards without the need for high-stress heroics that were common in past editions. Notably, the team has managed to avoid cutting many items from the edition late in the development process, which helps prevent wasted work and burnout.
 
-All priority language items for Rust 2024 have been completed and are ready for release. These include several key issues and enhancements. Additionally, there are three changes to the standard library, two updates to Cargo, and an exciting improvement to `rustdoc` that will significantly speed up doctests.
+All priority language items for Rust 2024 have been completed and are ready for release. These include several key issues and enhancements. Additionally, there are three changes to the standard library, several updates to Cargo, and an exciting improvement to `rustdoc` that will significantly speed up doctests.
 
 This edition also introduces a new style edition for `rustfmt`, which includes several formatting changes. The only remaining task is the completion of a PR for one item, after which final quality assurance crater runs will be conducted. Once these are triaged, the nightly beta for Rust 2024 will be announced, and wider testing will be solicited.
 
