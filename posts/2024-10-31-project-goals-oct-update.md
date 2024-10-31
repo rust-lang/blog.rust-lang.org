@@ -51,7 +51,7 @@ Finally, we have been finding an increasing number of stabilization requests at 
 </div>
 </div>
 
- The Rust 2024 edition is progressing well and is on track to be released on schedule. The major milestones include preparing to stabilize the edition by November 22, 2024, with the actual stabilization occurring on November 28, 2024. The edition will then be cut to beta on January 3, 2025, followed by an announcement on January 9, 2025, indicating that Rust 2024 is pending release. The final release is scheduled for February 20, 2025.
+The Rust 2024 edition is progressing well and is on track to be released on schedule. The major milestones include preparing to stabilize the edition by November 22, 2024, with the actual stabilization occurring on November 28, 2024. The edition will then be cut to beta on January 3, 2025, followed by an announcement on January 9, 2025, indicating that Rust 2024 is pending release. The final release is scheduled for February 20, 2025.
 
 The priorities for this edition have been to ensure its success without requiring excessive effort from any individual. The team is pleased with the progress, noting that this edition will be the largest since Rust 2015, introducing many new and exciting features. The process has been carefully managed to maintain high standards without the need for high-stress heroics that were common in past editions. Notably, the team has managed to avoid cutting many items from the edition late in the development process, which helps prevent wasted work and burnout.
 
@@ -71,9 +71,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * camelid has started working on using the new lowering schema for more than just const parameters, which once done will allow the introduction of a `min_generic_const_args` feature gate.
+* camelid has started working on using the new lowering schema for more than just const parameters, which once done will allow the introduction of a `min_generic_const_args` feature gate.
 * compiler-errors has been working on removing the `eval_x` methods on `Const` that do not perform proper normalization and are incompatible with this feature.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/102'><strong>Assemble project goal slate</strong></a></div>
@@ -81,9 +80,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * Posted the September update.
+* Posted the September update.
 * Created more automated infrastructure to prepare the October update, utilizing an LLM to summarize updates into one or two sentences for a concise table.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/103'><strong>Associated type position impl trait</strong></a></div>
@@ -91,9 +89,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * No progress has been made on this goal.
+* No progress has been made on this goal.
 * The goal will be closed as consensus indicates stabilization will not be achieved in this period; it will be revisited in the next goal period.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/104'><strong>Begin resolving &#x60;cargo-semver-checks&#x60; blockers for merging into cargo</strong></a></div>
@@ -101,9 +98,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * No major updates to report.
+* No major updates to report.
 * Preparing a talk for next week's EuroRust has taken away most of the free time.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/106'><strong>Const traits</strong></a></div>
@@ -111,9 +107,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * Key developments: With the PR for supporting implied super trait bounds landed ([#129499](https://github.com/rust-lang/rust/pull/129499)), the current implementation is mostly complete in that it allows most code that should compile, and should reject all code that shouldn't.
+* Key developments: With the PR for supporting implied super trait bounds landed ([#129499](https://github.com/rust-lang/rust/pull/129499)), the current implementation is mostly complete in that it allows most code that should compile, and should reject all code that shouldn't.
 * Further testing is required, with the next steps being improving diagnostics ([#131152](https://github.com/rust-lang/rust/pull/131152)), and fixing more holes before const traits are added back to core.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/108'><strong>Explore sandboxed build scripts</strong></a></div>
@@ -121,9 +116,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * A working-in-process pull request is available at <https://github.com/weihanglo/cargo/pull/66>.
+* A working-in-process pull request is available at <https://github.com/weihanglo/cargo/pull/66>.
 * The use of `wasm32-wasip1` as a default sandbox environment is unlikely due to its lack of support for POSIX process spawning, which is essential for various build script use cases.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/109'><strong>Expose experimental LLVM features for automatic differentiation and GPU offloading</strong></a></div>
@@ -131,9 +125,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * The Autodiff frontend was merged, including over 2k LoC and 30 files, making the remaining diff much smaller.
+* The Autodiff frontend was merged, including over 2k LoC and 30 files, making the remaining diff much smaller.
 * The Autodiff middle-end is likely getting a redesign, moving from a library-based to a pass-based approach for LLVM.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/110'><strong>Extend pubgrub to match cargo&#x27;s dependency resolution</strong></a></div>
@@ -141,9 +134,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * Significant progress was made with contributions by @x-hgg-x, improving the resolver test suite in Cargo to check feature unification against a SAT solver.
+* Significant progress was made with contributions by @x-hgg-x, improving the resolver test suite in Cargo to check feature unification against a SAT solver.
 * This was followed by porting the test cases that tripped up PubGrub to Cargo's test suite, laying the groundwork to prevent regression on important behaviors when Cargo switches to PubGrub and preparing for fuzzing of features in dependency resolution.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/112'><strong>Make Rustdoc Search easier to learn</strong></a></div>
@@ -151,8 +143,7 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * The team is working on a consensus for handling generic parameters, with both PRs currently blocked on this issue.
-
+* The team is working on a consensus for handling generic parameters, with both PRs currently blocked on this issue.
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/113'><strong>Next-generation trait solver</strong></a></div>
@@ -160,9 +151,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * Attempted stabilization of `-Znext-solver=coherence` was reverted due to a hang in nalgebra, with subsequent fixes improving but not fully resolving performance issues.
+* Attempted stabilization of `-Znext-solver=coherence` was reverted due to a hang in nalgebra, with subsequent fixes improving but not fully resolving performance issues.
 * No significant changes to the new solver have been made in the last month.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/114'><strong>Optimizing Clippy &amp; linting</strong></a></div>
@@ -170,9 +160,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * GnomedDev pushed rust-lang/rust#130553, which replaced an old Clippy infrastructure with a faster one (string matching into symbol matching).
+* GnomedDev pushed rust-lang/rust#130553, which replaced an old Clippy infrastructure with a faster one (string matching into symbol matching).
 * Inspections into Clippy's type sizes and cache alignment are being started, but nothing fruitful yet.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/115'><strong>Patterns of empty types</strong></a></div>
@@ -180,9 +169,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * The linting behavior was reverted until an unspecified date.  
+* The linting behavior was reverted until an unspecified date.
 * The next steps are to decide on the future of linting and to write the never patterns RFC.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/101'><strong>Provided reasons for yanked crates</strong></a></div>
@@ -190,9 +178,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * The PR https://github.com/rust-lang/crates.io/pull/9423 has been merged.
+* The PR https://github.com/rust-lang/crates.io/pull/9423 has been merged.
 * Work on the frontend feature is in progress.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/118'><strong>Scalable Polonius support on nightly</strong></a></div>
@@ -200,9 +187,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * Key developments in the 'Scalable Polonius support on nightly' project include fixing test failures due to off-by-one errors from old mid-points, and ongoing debugging of test failures with a focus on automating the tracing work.
+* Key developments in the 'Scalable Polonius support on nightly' project include fixing test failures due to off-by-one errors from old mid-points, and ongoing debugging of test failures with a focus on automating the tracing work.
 * Efforts have been made to accept variations of [issue #47680](https://github.com/rust-lang/rust/issues/47680), with potential adjustments to active loans computation and locations of effects. Amanda has been cleaning up placeholders in the work-in-progress [PR #130227](https://github.com/rust-lang/rust/pull/130227).
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/119'><strong>Stabilize cargo-script</strong></a></div>
@@ -210,9 +196,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * rust-lang/cargo#14404 and rust-lang/cargo#14591 have been addressed.
+* rust-lang/cargo#14404 and rust-lang/cargo#14591 have been addressed.
 * Waiting on time to focus on this in a couple of weeks.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/121'><strong>Stabilize parallel front end</strong></a></div>
@@ -220,10 +205,9 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * Key developments: Added the cases in the [issue list](https://github.com/rust-lang/rust/labels/WG-compiler-parallel) to the UI test to reproduce the bug or verify the non-reproducibility.
+* Key developments: Added the cases in the [issue list](https://github.com/rust-lang/rust/labels/WG-compiler-parallel) to the UI test to reproduce the bug or verify the non-reproducibility.
 * Blockers: null.
 * Help wanted: Help test the deadlock code in the [issue list](https://github.com/rust-lang/rust/labels/WG-compiler-parallel) and try to reproduce the issue.
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/126'><strong>Survey tools suitability for Std safety verification</strong></a></div>
@@ -231,9 +215,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * Students from the CMU Practicum Project have started writing function contracts that include safety conditions for some unsafe functions in the core library, and verifying that safe abstractions respect those pre-conditions and are indeed safe.
+* Students from the CMU Practicum Project have started writing function contracts that include safety conditions for some unsafe functions in the core library, and verifying that safe abstractions respect those pre-conditions and are indeed safe.
 * Help is needed to write more contracts, integrate new tools, review [pull requests](https://github.com/model-checking/verify-rust-std/pulls), or participate in the [repository discussions](https://github.com/model-checking/verify-rust-std/discussions).
-
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/123'><strong>Use annotate-snippets for rustc diagnostic output</strong></a></div>
@@ -241,10 +224,8 @@ Rust 2024 will be stabilized in nightly in late November 2024, cut to beta on Ja
 </div>
 </div>
 
- * Progress has been made in matching `rustc` suggestion output within `annotate-snippets`, with most cases now aligned.
+* Progress has been made in matching `rustc` suggestion output within `annotate-snippets`, with most cases now aligned.
 * The focus has been on understanding and adapting different rendering styles for suggestions to fit within `annotate-snippets`.
-
-
 
 ## Goals without updates
 
