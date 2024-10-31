@@ -75,7 +75,7 @@ announcing and recognising the contributions of the compiler team's membership:
     - DianQK has been contributing for over a year and has focused on improving the compiler's MIR
       optimisations and fixing and improving our use of LLVM.
 - [durin42](https://github.com/durin42), team member
-    - durin42 has been a strong contributor to the compiler's llvm backend, debuginfo and general
+    - durin42 has been a strong contributor to the compiler's LLVM backend, debuginfo and general
       code generation infrastructure since they started contributing in 2021.
 - [eholk](https://github.com/eholk), team member + council representative
     - eholk is active in the compiler team and async working group, contributing to the design and
