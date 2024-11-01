@@ -48,7 +48,7 @@ announcing and recognising the contributions of the compiler team's membership:
       more challenging and technical areas in the compiler. Boxy is a member of the types team and
       has contributed heavily to the implementation and design of constant generics.
 - [camelid](https://github.com/camelid), team member
-    - camelid has contributed for many years, improving project documentation, compiler diagnostics
+    - camelid has contributed for many years, improving constant generics, project documentation, and compiler diagnostics
       and making many refactorings and cleanups on the compiler codebase. 
 - [chenyukang](https://github.com/chenyukang), maintainer
     - Since 2021, yukang has been tirelessly improving the compiler's diagnostics. It would be hard
