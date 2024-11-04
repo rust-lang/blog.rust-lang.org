@@ -43,6 +43,7 @@ The current round has shown positive results so far. Of the 26 total goals, the 
 Here are some quotes from goal owners and Rust maintainers talking about the program:
 
 * "Thank you for leading this goals initiative, I feel like this is blowing a bit of life back into rust as a project."
+* "The project goals provided two benefits for me. First, I could show people not involved in Rust that my work had some support from the Rust Project (e.g., helpful for applications/grants). Second, I got some new contributors from people following my updates and the requests for help I added there."
 
 Many in the Rust community have commented that they appreciate the visibility into what the project is doing. Some quotes extracted from Reddit threads:
 
