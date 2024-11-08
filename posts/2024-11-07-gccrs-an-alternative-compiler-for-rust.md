@@ -4,6 +4,8 @@ title: "gccrs: An alternative compiler for Rust"
 author: "Arthur Cohen on behalf of the gccrs project"
 ---
 
+*This is a guest post from the gccrs project, at the invitation of Rust Project, to clarify the relationship with the Rust Project and the opportunities for collaboration.*
+
 `gccrs` is a work-in-progress alternative compiler for Rust being developed as part of the [GCC project](https://gcc.gnu.org/). GCC is a collection of compilers for various programming languages that all share a common compilation framework. You may have heard about `gccgo`, `gfortran`, or `g++`, which are all binaries within that project, the [GNU Compiler Collection](https://gcc.gnu.org/). The aim of `gccrs` is to add support for the Rust programming language to that collection, with the goal of having the exact same behavior as `rustc`.
 
 First and foremost, `gccrs` was started as a project because it is fun. Compilers are incredibly rewarding pieces of software, and are great fun to put together. The project was started back in 2014, before Rust 1.0 was released, but was quickly put aside due to the shifting nature of the language back then. Around 2019, work on the compiler started again, led by [Philip Herron](https://github.com/philberty) and funded by [Open Source Security](https://opensrcsec.com/) and [Embecosm](https://www.embecosm.com/). Since then, we have kept steadily progressing towards support for the Rust language as a whole, and our team has kept growing with around a dozen contributors working regularly on the project. We have participated in the Google Summer of Code program for the past four years, and multiple students have joined the effort.
