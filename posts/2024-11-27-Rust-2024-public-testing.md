@@ -1,26 +1,28 @@
 ---
 layout: post
 title: "Rust 2024 call for testing"
-author: Eric Huss
-team: the Edition 2024 Project Group <https://github.com/rust-lang/team/blob/f4a9c02d725256b064a18003ffd3e496dfed4b1b/teams/project-edition-2024.toml>
+author: "Eric Huss & TC"
+team: the Edition 2024 Project Group <https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html>
 ---
 
 # Rust 2024 call for testing
 
-We are happy to announce that the Rust 2024 edition is entering its **public testing period**. All of the planned features for the edition are now available on nightly builds along with migrations that should move your code from Rust 2021 to Rust 2024. If you'd like to learn more about the changes that are part of Rust 2024, check out the [nightly version of the Edition Guide](https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html).
+We've been hard at work on Rust 2024. We're thrilled about how it has turned out. It's going to be the largest edition since Rust 2015. It has a great many improvements that make the language more consistent and ergonomic, that further upon our relentless commitment to safety, and that will open the door to long-awaited features such as `gen` blocks, `let` chains, and the never (`!`) type. For more on the changes, see the nightly [Edition Guide](https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html).
 
-### Public testing period
+As planned, we recently merged the feature-complete Rust 2024 edition [to the release train](https://github.com/rust-lang/rust/pull/133349) for Rust 1.85. It has now entered **nightly beta**.
 
-We are asking for the public to help test the 2024 edition by trying out the migration in your projects using the nightly channel. As always, we expect this to be a largely automated process. The steps to try out the Rust 2024 Edition as follows ([more detailed directions can be found here](https://doc.rust-lang.org/nightly/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html)):
+You can help right now to make this edition a success by testing Rust 2024 on your own projects using nightly Rust. Migrating your projects to the new edition is straightforward and mostly automated. Here's how:
 
-1. Install the most recent nightly: `rustup update nightly`.
-2. Run `cargo +nightly fix --edition`.
+1. Install the most recent nightly with `rustup update nightly`.
+2. In your project, run `cargo +nightly fix --edition`.
 3. Edit `Cargo.toml` and change the edition field to say `edition = "2024"`.
-4. Run `cargo +nightly check` to verify it now works in the new edition.
-5. Run some tests and kick the tires on the new features!
+4. Run `cargo +nightly check` to verify your project now works in the new edition.
+5. Run some tests, and try out the new features!
 
-If you encounter any problems or find areas where quality could be improved (missing documentation, confusing error messages, etc) please [file an issue](https://github.com/rust-lang/rust/issues/new/choose) and tell us about it! Thank you!
+(More details on how to migrate can be found [here](https://doc.rust-lang.org/nightly/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html) and within each of the [chapters](https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html) describing the changes in Rust 2024.)
 
-### What comes next
+If you encounter any problems or see areas where we could make the experience better, tell us about it by [filing an issue](https://github.com/rust-lang/rust/issues/new/choose).
 
-Rust 2024 is scheduled to hit stable in Rust 1.85, which will be released on February 20th, 2025.
+### Coming next
+
+Rust 2024 will enter the beta channel on 2025-01-09, and will be released to stable Rust with Rust 1.85 on 2025-02-20.
