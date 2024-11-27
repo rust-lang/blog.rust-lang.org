@@ -15,7 +15,7 @@ You can help right now to make this edition a success by testing Rust 2024 on yo
 
 1. Install the most recent nightly with `rustup update nightly`.
 2. In your project, run `cargo +nightly fix --edition`.
-3. Edit `Cargo.toml` and change the edition field to say `edition = "2024"`.
+3. Edit `Cargo.toml` and change the edition field to say `edition = "2024"` and, if you have a `rust-version` specified, set `rust-version = "1.85"`.
 4. Run `cargo +nightly check` to verify your project now works in the new edition.
 5. Run some tests, and try out the new features!
 
