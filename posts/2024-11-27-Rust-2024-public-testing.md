@@ -7,7 +7,7 @@ team: the Edition 2024 Project Group <https://doc.rust-lang.org/nightly/edition-
 
 # Rust 2024 call for testing
 
-We've been hard at work on Rust 2024. We're thrilled about how it has turned out. It's going to be the largest edition since Rust 2015. It has a great many improvements that make the language more consistent and ergonomic, that further improve upon our relentless commitment to safety, and that will open the door to long-awaited features such as `gen` blocks, `let` chains, and the never (`!`) type. For more on the changes, see the nightly [Edition Guide](https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html).
+We've been hard at work on Rust 2024. We're thrilled about how it has turned out. It's going to be the largest edition since Rust 2015. It has a great many improvements that make the language more consistent and ergonomic, that further our relentless commitment to safety, and that will open the door to long-awaited features such as `gen` blocks, `let` chains, and the never (`!`) type. For more on the changes, see the nightly [Edition Guide](https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html).
 
 As planned, we recently merged the feature-complete Rust 2024 edition [to the release train](https://github.com/rust-lang/rust/pull/133349) for Rust 1.85. It has now entered **nightly beta**[^1].
 
