@@ -19,7 +19,7 @@ We then moved our focus to [bootstrap using exclusively the new solver](https://
 
 ### Looking ahead
 
-To unblock the stabilization of the next-generation trait solver we're required to fix [multiple](https://github.com/rust-lang/rust/pull/133501) [issues](https://rust.godbolt.org/z/aoseYzMx9) which also affect the current implementation. This is due to subtle differences between the implementations causing the new solver to trigger bugs which are avoided by the old solver. The cases where the new implementation works correctly while the old one does not are unfortunately far less relevant as nobody has written code while relies on the behavior of the next-generation trait solver yet.
+To unblock the stabilization of the next-generation trait solver we're required to fix [multiple](https://github.com/rust-lang/rust/pull/133501) [issues](https://rust.godbolt.org/z/aoseYzMx9) which also affect the current implementation. This is due to subtle differences between the implementations causing the new solver to trigger bugs which are avoided by the old solver. The cases where the new implementation works correctly while the old one does not are unfortunately far less relevant as nobody has written code which relies on the behavior of the next-generation trait solver yet.
 
 We will also have to spend a significant effort towards improving error messages when using the new trait solver. There are still many cases where they are significantly worse than the status quo.
 
