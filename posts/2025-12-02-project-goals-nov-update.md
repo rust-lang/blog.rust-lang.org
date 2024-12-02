@@ -70,7 +70,7 @@ Rust 2024 has now entered the nightly beta and is expected to stabilize as part 
 </div>
 
 * Support for cargo manifest linting is [now merged](https://github.com/obi1kenobi/cargo-semver-checks/pull/1007), making it possible to catch breakage caused by _manifest_ (`Cargo.toml`) changes, not just source code changes. An example of such breakage is the removal of a package feature: any crates that enabled the removed feature will no longer build.
-* Partial schema design and implementation of type information in lints, enabling the creation of breaking-change lints and improving diagnostic quality for type-related breaking changes.
+* Partial schema design and implementation of type information in lints, enabling the creation of breaking-change lints and improving diagnostic quality for a subset of type-related breaking changes.
 * Resolved multi-team questions that were blocking cross-crate checking, with the compiler team MCP merged and rustdoc improvements discussed and agreed upon.
 
 
