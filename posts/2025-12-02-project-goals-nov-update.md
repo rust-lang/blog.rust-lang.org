@@ -100,8 +100,7 @@ Rust 2024 has now entered the nightly beta and is expected to stabilize as part 
 </div>
 </div>
 
-* No significant progress has been made on the sandboxed build scripts project.
-* Feedback on the previous experiment was received, with Alex expressing interest in adding POSIX process support to WASI, though this is unlikely in the near future.
+* The sandboxed build scripts exploration is complete. We are unlikely to continue this work in next year but the research may be useful in other areas, such as the possible addition of POSIX process support to WASI or a declarative system dependency configuration in Cargo.
 
 
 <div style="display: flex;" class="mt2 mb3">
