@@ -137,8 +137,8 @@ Rust 2024 has now entered the nightly beta and is expected to stabilize as part 
 </div>
 </div>
 
-* The `-Znext-solver=coherence` flag has been stabilized again in PR #130654, indicating potential final stabilization.
-* Refactoring of the current "typing mode" tracking is underway, linked to issue #128, to address issue #106, with an FCP initiated for merging candidates in trait goals, expected to resolve related issues in the new solver.
+* We stabilized `-Znext-solver=coherence`  again in https://github.com/rust-lang/rust/pull/130654. It's looking like the stabilization will actually go through this time.
+* We're currently refactoring the way the current "typing mode" is tracked, working to fix [trait-system-refactoring#106](https://github.com/rust-lang/trait-system-refactor-initiative/issues/106). An [FCP was started](https://github.com/rust-lang/rust/pull/132325) to clean up the way we merge candidates when proving trait goals. 
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/114'><strong>Optimizing Clippy &amp; linting</strong></a></div>
