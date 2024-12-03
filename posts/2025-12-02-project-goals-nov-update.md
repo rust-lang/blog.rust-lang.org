@@ -148,6 +148,8 @@ Rust 2024 has now entered the nightly beta and is expected to stabilize as part 
 
 * rust-lang/rust#125116 has been merged, marking half of the goal as formally completed.
 * Discussions on [using `cargo cache` on CI](https://github.com/rust-lang/rust-clippy/issues/13033#issuecomment-2501279515) are beginning to take form.
+* rust-lang/rust#125116 may be contested in results. The impact may not be as large as expected, even on Clippy.
+* We've been experimenting with Clippy using `rustc_driver` as a static library, instead of dynamic linking. This would be us both a way to check the performance impact of `rustc_driver` as a shared library, **and** a way to profile Clippy without filtering between `dl_*` calls.
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/115'><strong>Patterns of empty types</strong></a></div>
