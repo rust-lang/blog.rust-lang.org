@@ -27,7 +27,20 @@ We invite you to take this year’s survey whether you have just begun using Rus
 
 Please help us spread the word by sharing the [survey link][survey-link] via your social media networks, at meetups, with colleagues, and in any other community that makes sense to you.
 
-This survey would not be possible without the time, resources, and attention of members of the Survey Working Group, the Rust Foundation, and other collaborators. Thank you!
+This survey would not be possible without the time, resources, and attention of members of the Survey Working Group, the Rust Foundation, and other collaborators. We would also like to thank the following contributors who helped with translating the survey (in no particular order):
+
+- @albertlarsan68
+- @GuillaumeGomez
+- @Urgau
+- @Jieyou Xu
+- @llogiq
+- @avrong
+- @YohDeadfall
+- @tanakakz
+- @ZuseZ4
+- @igaray
+
+Thank you!
 
 If you have any questions, please see our [frequently asked questions](https://github.com/rust-lang/surveys/blob/main/documents/Community-Survey-FAQ.md).
 
