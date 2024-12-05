@@ -9,7 +9,7 @@ It’s time for the [2024 State of Rust Survey][survey-link]!
 
 Since 2016, the Rust Project has collected valuable information and feedback from the Rust programming language community through our annual [State of Rust Survey][survey-link]. This tool allows us to more deeply understand how the Rust Project is performing, how we can better serve the global Rust community, and who our community is composed of.
 
-Like last year, the [2024 State of Rust Survey][survey-link] will likely take you between 10 and 25 minutes, and responses are anonymous. We will accept submissions until Sunday, December 22nd, 2024. Trends and key insights will be shared on [blog.rust-lang.org](https://blog.rust-lang.org) as soon as possible.
+Like last year, the [2024 State of Rust Survey][survey-link] will likely take you between 10 and 25 minutes, and responses are anonymous. We will accept submissions until Monday, December 23rd, 2024. Trends and key insights will be shared on [blog.rust-lang.org](https://blog.rust-lang.org) as soon as possible.
 
 We invite you to take this year’s survey whether you have just begun using Rust, you consider yourself an intermediate to advanced user, or you have not yet used Rust but intend to one day. Your responses will help us improve Rust over time by shedding light on gaps to fill in the community and development priorities, and more.
 
@@ -35,5 +35,5 @@ We appreciate your participation!
 
 _Click [here][last-survey-link] to read a summary of last year's survey findings._
 
-[survey-link]: TODO
+[survey-link]: https://www.surveyhero.com/c/rust-annual-survey-2024
 [last-survey-link]: https://blog.rust-lang.org/2024/02/19/2023-Rust-Annual-Survey-2023-results.html
