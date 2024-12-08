@@ -7,7 +7,7 @@ on:
 
 env:
   # renovate: datasource=github-tags depName=rust lookupName=rust-lang/rust
-  RUST_VERSION: 1.80.0
+  RUST_VERSION: 1.83.0
 
 jobs:
   lint:
