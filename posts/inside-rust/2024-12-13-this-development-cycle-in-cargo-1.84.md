@@ -172,7 +172,7 @@ However, we missed removing an assertion and epage removed it in [#14759](https:
 [#14781](https://github.com/rust-lang/cargo/pull/14781) and
 [#14785](https://github.com/rust-lang/cargo/pull/14785) saw us migrate the last of our "unordered lines" assertion tests.
 [#14785](https://github.com/rust-lang/cargo/pull/14785) took some investigation to figure out the best way to migrate.
-Cargo's custom assertions redacted fewwer values and allowed a test author to ignore a value redaction by using the raw value in the expected result.
+Cargo's custom assertions redacted fewer values and allowed a test author to ignore a value redaction by using the raw value in the expected result.
 `snapbox` applies redactions earlier in the process, requiring them to always be used.
 This made it so Cargo would lose test coverage in switching to snapbox as we wouldn't be verifying as much of `cargo`s output.
 However, in consulting with the test author, coverage of those redacted values was not intended by them, bypassing this problem for now.
