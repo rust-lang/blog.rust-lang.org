@@ -254,7 +254,7 @@ Looking at the [Rust 2023 survey results](https://blog.rust-lang.org/2024/02/19/
 improving compilation times and the debugging experience is neck and neck.
 The question is which debugging experience are they referring to?
 Those on the call mostly used "printf"-style debugging and would get benefit out of improving compilation time.
-Even if we surveyed people and found this representative of the Rust community (which [davidlattimore](https://github.com/davidlattimore/) did for a subset of the community on [Mastadon](https://mas.to/@davidlattimore/113484821980790635)),
+Even if we surveyed people and found this representative of the Rust community (which [davidlattimore](https://github.com/davidlattimore/) did for a subset of the community on [Fediverse](https://mas.to/@davidlattimore/113484821980790635)),
 how much of this is survivorship bias from the quality of the debugger experience?
 How much would even existing community members behavior change with an improved debugger experience?
 
