@@ -112,7 +112,7 @@ Cargo's [build fingerprinting](https://doc.rust-lang.org/nightly/nightly-rustc/c
 - Making symbol names unique so you can't unintentionally use a type in an ABI-incompatible context, called [`-Cmetadata`](https://doc.rust-lang.org/rustc/codegen-options/index.html#metadata)
 
 `RUSTFLAGS` is a way to bypass Cargo's abstractions and directly control the behavior of `rustc`.
-Cargo includes `RUSTFLAGS` in the fingerprint hash but no in the `-Cextra-filename` hash,
+Cargo includes `RUSTFLAGS` in the fingerprint hash but not in the `-Cextra-filename` hash,
 causing a full rebuild when they change.
 This can be especially problematic when `RUSTFLAGS` differs between the user and their editor running `cargo`.
 For example, some users report they set `--cfg test` in their editor so all `#[cfg(test)]`s are enabled in rust-analyzer.
