@@ -194,7 +194,7 @@ Rust 2024 has now entered the nightly beta and is expected to stabilize as part 
 </div>
 
 * Still in the process of determining the cause of the deadlock through local testing and compiler code analysis.
-* **Help wanted:** Help test the deadlock code in the [issue list](https://github.com/rust-lang/rust/labels/WG-compiler-parallel) and try to reproduce the issue.
+* **Help wanted:** Try to reproduce deadlocks described in the [issue list](https://github.com/rust-lang/rust/labels/WG-compiler-parallel).
 
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/126'><strong>Survey tools suitability for Std safety verification</strong></a></div>
