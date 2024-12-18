@@ -218,6 +218,15 @@ div.brand {
     color: var(--code-color);
     background-color: var(--code-bg-color);
     border: 1px solid var(--code-border-color);
+    white-space: pre-wrap;
+  }
+
+  pre code {
+    white-space: inherit;
+  }
+
+  ul code {
+    display: block;
   }
 
   a.anchor::before {
