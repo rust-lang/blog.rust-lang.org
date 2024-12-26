@@ -1,10 +1,18 @@
 "use strict";
 
 function changeThemeTo(val) {
-    document.documentElement.setAttribute("data-theme", val);
-    // save theme prefs in the browser
-    if (storageAvailable("localStorage")) {
-        localStorage.setItem("blog-rust-lang-org-theme", val);
+    if (val === "system") {
+        setThemeToSystemPref();
+        // delete explicit theme pref from browser storage
+        if (storageAvailable("localStorage")) {
+            localStorage.removeItem("blog-rust-lang-org-theme");
+        }
+    } else {
+        document.documentElement.setAttribute("data-theme", val);
+        // save theme prefs in the browser
+        if (storageAvailable("localStorage")) {
+            localStorage.setItem("blog-rust-lang-org-theme", val);
+        }
     }
     // the theme dropdown will close itself when returning to the dropdown() caller
 }
@@ -44,6 +52,14 @@ function handleBlur(event) {
     }
 }
 
+function setThemeToSystemPref() {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+}
+
 // close the theme dropdown if clicking somewhere else
 document.querySelector('.theme-icon').onblur = handleBlur;
 
@@ -54,9 +70,8 @@ if (storageAvailable("localStorage")) {
 }
 if (savedTheme) {
     document.documentElement.setAttribute("data-theme", savedTheme);
-} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    document.documentElement.setAttribute("data-theme", "dark");
-    localStorage.setItem("blog-rust-lang-org-theme", "dark");
+} else {
+    setThemeToSystemPref();
 }
 
 // show the theme selector only if JavaScript is enabled/available
