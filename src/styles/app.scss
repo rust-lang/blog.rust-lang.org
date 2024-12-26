@@ -6,7 +6,7 @@ $header-font: 'Alfa Slab One', serif;
 // Switching theme will only work if JavaScript is enabled as well
 
 // Default light theme
-:root, :root:not([data-theme]) {
+:root {
   --gray: #2a3439;
   --red: #a72145;
   --yellow: #ffc832;
@@ -33,32 +33,89 @@ $header-font: 'Alfa Slab One', serif;
   --rust-logo-filter: initial;
 }
 
-// Dark theme
+// Dark theme variables
+:root {
+  --dark-theme-gray: #2a3439;
+  --dark-theme-red: #a72145;
+  --dark-theme-yellow: #ffc832;
+  --dark-theme-code-color: white;
+  --dark-theme-code-bg-color: rgba(213, 203, 198, 0.05);
+  --dark-theme-code-border-color: rgba(213, 203, 198, 0.25);
+  --dark-theme-blockquote-color: rgb(195, 205, 210);
+  --dark-theme-blockquote-bg-color: rgba(213, 203, 198, 0.05);
+  --dark-theme-blockquote-left-border-color: rgb(195, 205, 210);
+  --dark-theme-body-background-color: #181a1b;
+  --dark-theme-body-foreground-color: #e8e6e3;
+  --dark-theme-body-color: white;
+  --dark-theme-div-brand-a-color: white;
+  --dark-theme-white-elem-color: white;
+  --dark-theme-white-elem-a: #d5cbc6;
+  --dark-theme-nav-links-a: #d5cbc6;
+  --dark-theme-publish-date-author: #d5cbc6;
+  --dark-theme-section-header-h2-color: white;
+  --dark-theme-theme-icon: #43484d;
+  --dark-theme-theme-popup-border: #43484d;
+  --dark-theme-theme-popup-bg: #141617;
+  --dark-theme-theme-hover: #474c51;
+  --dark-theme-theme-choice-color: #d5cbc6;
+  --dark-theme-rust-logo-filter: drop-shadow(1px 0 0px #fff) drop-shadow(0 1px 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 -1px 0 #fff);
+}
+
+// Obey dark theme system preference unless data-theme is set explicitly
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --gray: var(--dark-theme-gray);
+    --red: var(--dark-theme-red);
+    --yellow: var(--dark-theme-yellow);
+    --code-color: var(--dark-theme-code-color);
+    --code-bg-color: var(--dark-theme-code-bg-color);
+    --code-border-color: var(--dark-theme-code-border-color);
+    --blockquote-color: var(--dark-theme-blockquote-color);
+    --blockquote-bg-color: var(--dark-theme-blockquote-bg-color);
+    --blockquote-left-border-color: var(--dark-theme-blockquote-left-border-color);
+    --body-background-color: var(--dark-theme-body-background-color);
+    --body-foreground-color: var(--dark-theme-body-foreground-color);
+    --body-color: var(--dark-theme-body-color);
+    --div-brand-a-color: var(--dark-theme-div-brand-a-color);
+    --white-elem-color: var(--dark-theme-white-elem-color);
+    --white-elem-a: var(--dark-theme-white-elem-a);
+    --nav-links-a: var(--dark-theme-nav-links-a);
+    --publish-date-author: var(--dark-theme-publish-date-author);
+    --section-header-h2-color: var(--dark-theme-section-header-h2-color);
+    --theme-icon: var(--dark-theme-theme-icon);
+    --theme-popup-border: var(--dark-theme-theme-popup-border);
+    --theme-popup-bg: var(--dark-theme-theme-popup-bg);
+    --theme-hover: var(--dark-theme-theme-hover);
+    --theme-choice-color: var(--dark-theme-theme-choice-color);
+    --rust-logo-filter: var(--dark-theme-rust-logo-filter);
+  }
+}
+// Set dark theme based on explicit data-theme setting
 :root[data-theme='dark'] {
-  --gray: #2a3439;
-  --red: #a72145;
-  --yellow: #ffc832;
-  --code-color: white;
-  --code-bg-color: rgba(213, 203, 198, 0.05);
-  --code-border-color: rgba(213, 203, 198, 0.25);
-  --blockquote-color: rgb(195, 205, 210);
-  --blockquote-bg-color: rgba(213, 203, 198, 0.05);
-  --blockquote-left-border-color: rgb(195, 205, 210);
-  --body-background-color: #181a1b;
-  --body-foreground-color: #e8e6e3;
-  --body-color: white;
-  --div-brand-a-color: white;
-  --white-elem-color: white;
-  --white-elem-a: #d5cbc6;
-  --nav-links-a: #d5cbc6;
-  --publish-date-author: #d5cbc6;
-  --section-header-h2-color: white;
-  --theme-icon: #43484d;
-  --theme-popup-border: #43484d;
-  --theme-popup-bg: #141617;
-  --theme-hover: #474c51;
-  --theme-choice-color: #d5cbc6;
-  --rust-logo-filter: drop-shadow(1px 0 0px #fff) drop-shadow(0 1px 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 -1px 0 #fff);
+  --gray: var(--dark-theme-gray);
+  --red: var(--dark-theme-red);
+  --yellow: var(--dark-theme-yellow);
+  --code-color: var(--dark-theme-code-color);
+  --code-bg-color: var(--dark-theme-code-bg-color);
+  --code-border-color: var(--dark-theme-code-border-color);
+  --blockquote-color: var(--dark-theme-blockquote-color);
+  --blockquote-bg-color: var(--dark-theme-blockquote-bg-color);
+  --blockquote-left-border-color: var(--dark-theme-blockquote-left-border-color);
+  --body-background-color: var(--dark-theme-body-background-color);
+  --body-foreground-color: var(--dark-theme-body-foreground-color);
+  --body-color: var(--dark-theme-body-color);
+  --div-brand-a-color: var(--dark-theme-div-brand-a-color);
+  --white-elem-color: var(--dark-theme-white-elem-color);
+  --white-elem-a: var(--dark-theme-white-elem-a);
+  --nav-links-a: var(--dark-theme-nav-links-a);
+  --publish-date-author: var(--dark-theme-publish-date-author);
+  --section-header-h2-color: var(--dark-theme-section-header-h2-color);
+  --theme-icon: var(--dark-theme-theme-icon);
+  --theme-popup-border: var(--dark-theme-theme-popup-border);
+  --theme-popup-bg: var(--dark-theme-theme-popup-bg);
+  --theme-hover: var(--dark-theme-theme-hover);
+  --theme-choice-color: var(--dark-theme-theme-choice-color);
+  --rust-logo-filter: var(--dark-theme-rust-logo-filter);
 }
 
 html {

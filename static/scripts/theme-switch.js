@@ -2,7 +2,7 @@
 
 function changeThemeTo(val) {
     if (val === "system") {
-        setThemeToSystemPref();
+        document.documentElement.removeAttribute("data-theme");
         // delete explicit theme pref from browser storage
         if (storageAvailable("localStorage")) {
             localStorage.removeItem("blog-rust-lang-org-theme");
@@ -52,26 +52,15 @@ function handleBlur(event) {
     }
 }
 
-function setThemeToSystemPref() {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-        document.documentElement.setAttribute("data-theme", "light");
-    }
-}
-
 // close the theme dropdown if clicking somewhere else
 document.querySelector('.theme-icon').onblur = handleBlur;
 
 // Check for saved user preference on load, else check and save user agent prefs
-let savedTheme = null;
 if (storageAvailable("localStorage")) {
-    savedTheme = localStorage.getItem("blog-rust-lang-org-theme");
-}
-if (savedTheme) {
-    document.documentElement.setAttribute("data-theme", savedTheme);
-} else {
-    setThemeToSystemPref();
+    const savedTheme = localStorage.getItem("blog-rust-lang-org-theme");
+    if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    }
 }
 
 // show the theme selector only if JavaScript is enabled/available
