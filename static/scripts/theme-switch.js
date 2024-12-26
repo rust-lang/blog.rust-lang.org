@@ -60,9 +60,6 @@ function setThemeToSystemPref() {
     }
 }
 
-// close the theme dropdown if clicking somewhere else
-document.querySelector('.theme-icon').onblur = handleBlur;
-
 // Check for saved user preference on load, else check and save user agent prefs
 let savedTheme = null;
 if (storageAvailable("localStorage")) {
@@ -73,6 +70,3 @@ if (savedTheme) {
 } else {
     setThemeToSystemPref();
 }
-
-// show the theme selector only if JavaScript is enabled/available
-document.querySelector('.theme-icon').style.display = 'block';
