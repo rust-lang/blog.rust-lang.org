@@ -197,7 +197,7 @@ we are more free to design Index related features.
 ### Project goals
 
 Cargo-related goals that have been proposed for 2025h1 include
-- [build-std](https://rust-lang.github.io/rust-project-goals/2025h1/build-std.html): led by [davidtwco](https://github.com/davidtwco)
+- [build-std](https://rust-lang.github.io/rust-project-goals/2025h1/build-std.html): led by [AdamGemmell](https://github.com/AdamGemmell) and the Rust team at Arm
 - [Continue resolving cargo-semver-checks blockers for merging into cargo](https://rust-lang.github.io/rust-project-goals/2025h1/cargo-semver-checks.html): led by [obi1kenobi](https://github.com/obi1kenobi) 
 - [Extend pubgrub to match cargo's dependency resolution](https://rust-lang.github.io/rust-project-goals/2025h1/pubgrub-in-cargo.html): led by [eh2406](https://github.com/eh2406)
 - [Finish the libtest json output experiment](https://rust-lang.github.io/rust-project-goals/2025h1/libtest-json.html): led by [epage](https://github.com/epage)
