@@ -71,7 +71,7 @@ picked up work on [ConEmu's](https://conemu.github.io/en/AnsiEscapeCodes.html#Co
 ([#14615](https://github.com/rust-lang/cargo/pull/14615)).
 Support for reporting this has extended to applications like systemd
 ([systemd#34929](https://github.com/systemd/systemd/pull/34929))
-while support for reporting this has extended to applications like
+while support for reporting this has extended to terminals like
 [Ptyxis](https://blogs.gnome.org/chergert/2024/12/03/ptyxis-progress-support/).
 
 <!-- 2024-12-17 -->
