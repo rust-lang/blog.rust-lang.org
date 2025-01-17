@@ -78,7 +78,7 @@ while support for reporting this has extended to applications like
 With an FCP started, the team briefly discussed whether this needs to be added to `.cargo/config.toml`.
 We previously added configuration control for other terminal features,
 like unicode and hyperlinks.
-We don't exclusively turn on these features because not all terminals gracefully degrade in their precessence.
+We don't exclusively turn on these features because not all terminals gracefully degrade in their presence.
 In particular for the Taskbar escape code, 
 Kitty had made their own feature using OSC 9,
 causing a poor experience with OSC 9;4
