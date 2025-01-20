@@ -176,8 +176,8 @@ In addition, we fleshed out a design sketch for the changes in rustdoc's JSON su
 </div>
 </div>
 
-* Amanda has made progress on removing placeholders, focusing on lazy constraints and early error reporting, as well as investigating issues with rewriting type tests; a few tests are still failing, and it seems error reporting and diagnostics will be hard to keep exactly as today.
-* The prototype is working well enough that it's worthwhile to land, with most of the progress done on the prototype now available; there is still a lot of work left to do, but it's a good milestone.
+* [Amanda](https://github.com/amandasystems) has made progress on removing placeholders, focusing on lazy constraints and early error reporting, as well as investigating issues with rewriting type tests; a few tests are still failing, and it seems error reporting and diagnostics will be hard to keep exactly as today.
+* [@lqd](https://github.com/lqd) has opened PRs to land the prototype of the location-sensitive analysis. It's working well enough that it's worthwhile to land; there is still a lot of work left to do, but it's a major milestone, which we hoped to achieve with this project goal.
 
 
 <div style="display: flex;" class="mt2 mb3">
