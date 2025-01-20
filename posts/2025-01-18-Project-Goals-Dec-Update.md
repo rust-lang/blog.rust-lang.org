@@ -130,7 +130,7 @@ In addition, we fleshed out a design sketch for the changes in rustdoc's JSON su
 </div>
 
 * Significant speedups have been achieved, reducing the slowest crate resolution time from over 120 seconds to 11 seconds, and decreasing the time to check all crates from 178 minutes to 71.42 minutes.
-* Performance improvements have been made to both the existing resolver and the new implementation, with the lock file verification time reduced from 44.90 minutes to 32.77 minutes for most crates.
+* Performance improvements have been made to both the existing resolver and the new implementation, with the lock file verification time for all crates reduced from 44.90 minutes to 32.77 minutes (excluding some of the hardest cases).
 
 
 <div style="display: flex;" class="mt2 mb3">
