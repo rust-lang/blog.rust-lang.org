@@ -68,15 +68,13 @@ impl Post {
         } = serde_yaml::from_str(yaml)?;
         // next, the contents. we add + to get rid of the final "---\n\n"
         let options = comrak::Options {
-            render: comrak::RenderOptionsBuilder::default()
-                .unsafe_(true)
-                .build()?,
-            extension: comrak::ExtensionOptionsBuilder::default()
-                .header_ids(Some(String::new()))
+            render: comrak::RenderOptions::builder().unsafe_(true).build(),
+            extension: comrak::ExtensionOptions::builder()
+                .header_ids(String::new())
                 .strikethrough(true)
                 .footnotes(true)
                 .table(true)
-                .build()?,
+                .build(),
             ..comrak::Options::default()
         };
 
