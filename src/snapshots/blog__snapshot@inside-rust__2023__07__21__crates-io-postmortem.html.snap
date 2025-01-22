@@ -1,0 +1,303 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2023/07/21/crates-io-postmortem.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>crates.io Postmortem: Broken Crate Downloads | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="crates.io Postmortem: Broken Crate Downloads | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="crates.io Postmortem: Broken Crate Downloads | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="crates.io Postmortem: Broken Crate Downloads" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>crates.io Postmortem: Broken Crate Downloads</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">July 21, 2023 &middot; Tobias Bieniek
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/crates-io">the crates.io team</a> 
+    </div>
+
+    <div class="post">
+      <p>(based on https://www.atlassian.com/incident-management/postmortem/templates)</p>
+<h2><a href="#summary" aria-hidden="true" class="anchor" id="summary"></a>Summary</h2>
+<p>On 2023-07-20 between 12:17 and 12:30 UTC all crate downloads from crates.io were broken due to a deployment that contained a bug in the download URL generation.</p>
+<p>During this time we had an average of 4.71K requests per second to crates.io, resulting in about 3.7M failed requests, including the retry attempts from cargo.</p>
+<p>The incident was noticed by the developer triggering the production deployment after seeing elevated request-per-second numbers in our monitoring dashboard after the deployment. At this point the root cause for the elevated numbers was not clear yet, but a community member notified the developer via <a href="https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io/topic/deployments/near/376960060">Zulip</a>.</p>
+<p>Immediately after the notification, the broken deployment was rolled back to the previous deployment, fixing the downloads again.</p>
+<h2><a href="#leadup" aria-hidden="true" class="anchor" id="leadup"></a>Leadup</h2>
+<p>At 17:41 UTC on 2023-07-19 a <a href="https://github.com/rust-lang/crates.io/pull/6834">pull request</a> to crates.io was merged, finishing the migration of the crates.io codebase to use the <a href="https://crates.io/crates/object_store">object_store</a> crate for AWS S3 access, instead of our previous custom solution.</p>
+<p>This pull request refactored the way the crate and readme download endpoints generated redirect URLs.</p>
+<h2><a href="#fault" aria-hidden="true" class="anchor" id="fault"></a>Fault</h2>
+<p>The pull request introduced a few tests for the previously untested functionality, though unfortunately it was using values different from the environment variable content that is used by crates.io in production. This led to the production code path not being tested properly.</p>
+<p>The production code path contained a bug where the URL generated from the &quot;CDN prefix&quot; and &quot;path&quot; components was missing a slash (<code>/</code>) separator.</p>
+<p>This led to <a href="https://crates.io/api/v1/crates/smallvec/1.10.0/download">https://crates.io/api/v1/crates/smallvec/1.10.0/download</a> redirecting to <a href="https://static.crates.iocrates/smallvec/smallvec-1.10.0.crate">https://static.crates.iocrates/smallvec/smallvec-1.10.0.crate</a> instead of <a href="https://static.crates.io/crates/smallvec/smallvec-1.10.0.crate">https://static.crates.io/crates/smallvec/smallvec-1.10.0.crate</a>.</p>
+<h2><a href="#impact" aria-hidden="true" class="anchor" id="impact"></a>Impact</h2>
+<p>For about 13 minutes, between 12:17 and 12:30 UTC on 2023-07-20, our users experienced this incident.</p>
+<p>This incident affected all users trying to download crate files from crates.io during that time.</p>
+<p>The issue manifest in our users seeing errors like this when running <code>cargo</code>:</p>
+<pre><code class="language-text">warning: spurious network error (3 tries remaining): [6] Couldn't resolve host name (Could not resolve host: static.crates.iocrates)
+warning: spurious network error (2 tries remaining): [6] Couldn't resolve host name (Could not resolve host: static.crates.iocrates)
+warning: spurious network error (1 tries remaining): [6] Couldn't resolve host name (Could not resolve host: static.crates.iocrates)
+error: failed to download from `https://crates.io/api/v1/crates/serde_derive/1.0.173/download`
+</code></pre>
+<p><a href="https://github.com/rust-lang/crates.io/issues/6850">https://github.com/rust-lang/crates.io/issues/6850</a> was submitted and upvoted 12 times.</p>
+<h2><a href="#detection" aria-hidden="true" class="anchor" id="detection"></a>Detection</h2>
+<p>The developer triggering the production deployment was monitoring the crates.io Grafana dashboard during the deployment and noticed elevated levels of request-per-second numbers for the download endpoint. This was a symptom of cargo retrying the download multiple times before giving up.</p>
+<p>About 11 minutes after the deployment, a community member notified the crates.io team via <a href="https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io/topic/deployments/near/376960060">Zulip</a> about the <a href="https://github.com/rust-lang/crates.io/issues/6850">GitHub issue</a> that was opened, describing the failing downloads.</p>
+<h2><a href="#response" aria-hidden="true" class="anchor" id="response"></a>Response</h2>
+<p>After the incident was detected, the deploying developer immediately initiated a rollback to the previous deployment through the Heroku user interface. This process took about one minute due to the login procedure and ensuring that the right buttons in the user interface are used.</p>
+<h2><a href="#recovery" aria-hidden="true" class="anchor" id="recovery"></a>Recovery</h2>
+<p>After rolling back to the previous deployment the system immediately recovered itself and produced correct redirect URLs again.</p>
+<p>A fix for the broken pull request was subsequently developed and merged, including more tests for the broken code path with more real-world values. The fix was then tested on the staging environment before it got deployed to production too.</p>
+<h2><a href="#timeline" aria-hidden="true" class="anchor" id="timeline"></a>Timeline</h2>
+<h3><a href="#2023-07-19" aria-hidden="true" class="anchor" id="2023-07-19"></a>2023-07-19</h3>
+<ul>
+<li>12:32 UTC – <a href="https://github.com/rust-lang/crates.io/pull/6834">https://github.com/rust-lang/crates.io/pull/6834</a> (Migrate remaining <code>Uploaders</code> code into <code>Storage</code> system) was opened</li>
+<li>17:41 UTC – <a href="https://github.com/rust-lang/crates.io/pull/6834">https://github.com/rust-lang/crates.io/pull/6834</a> (Migrate remaining <code>Uploaders</code> code into <code>Storage</code> system) was merged, automatically deploying to the staging environment</li>
+</ul>
+<h3><a href="#2023-07-20" aria-hidden="true" class="anchor" id="2023-07-20"></a>2023-07-20</h3>
+<ul>
+<li>10:00 UTC – <a href="https://github.com/rust-lang/crates.io/pull/6848">https://github.com/rust-lang/crates.io/pull/6848</a> (Fix <code>readme</code> field parsing of <code>Cargo.toml</code> files) was opened</li>
+<li>10:13 UTC – <a href="https://github.com/rust-lang/crates.io/pull/6848">https://github.com/rust-lang/crates.io/pull/6848</a> (Fix <code>readme</code> field parsing of <code>Cargo.toml</code> files) was merged, automatically deploying to the staging environment</li>
+<li>12:08 UTC – <a href="https://staging.crates.io/crates/crates-staging-test-tb/0.69.30">https://staging.crates.io/crates/crates-staging-test-tb/0.69.30</a> was published to the staging environment to smoke test the publish process and the <code>Cargo.toml</code> parsing fix</li>
+<li>12:16 UTC – A <a href="https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io/topic/deployments/near/376956537">message</a> was sent to the <code>deployments</code> topic of the <code>t-crates-io</code> Zulip stream, notifying users of the upcoming deployment.</li>
+<li>12:17 UTC – The staging deployment was promoted to the production environment</li>
+<li>12:18 UTC – Another <a href="https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io/topic/deployments/near/376957223">message</a> was sent to the Zulip stream, notifying users that the deployment was completed.</li>
+<li>12:24 UTC – <a href="https://github.com/rust-lang/crates.io/issues/6850">https://github.com/rust-lang/crates.io/issues/6850</a> (Crates.io crate download API is redirecting to invalid URL) was opened</li>
+<li>12:25 UTC – The continuing request-per-second anomaly was deemed unusual enough to trigger another <a href="https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io/topic/deployments/near/376959143">message</a> to the Zulip stream.</li>
+<li>12:28 UTC – A community member notified the crates.io team on the <a href="https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io/topic/deployments/near/376960060">Zulip stream</a> about the GitHub issue and the deploying developer acknowledged the incident.</li>
+<li>12:30 UTC – The deployment was rolled back, temporarily fixing the issue for our users.</li>
+<li>13:38 UTC – <a href="https://github.com/rust-lang/crates.io/pull/6851">https://github.com/rust-lang/crates.io/pull/6851</a> (Fix download URL generation) was opened</li>
+<li>13:49 UTC – <a href="https://github.com/rust-lang/crates.io/pull/6851">https://github.com/rust-lang/crates.io/pull/6851</a> (Fix download URL generation) was merged, automatically deploying to the staging environment</li>
+<li>14:08 UTC – <a href="https://staging.crates.io/crates/crates-staging-test-tb/0.69.31">https://staging.crates.io/crates/crates-staging-test-tb/0.69.31</a> was published to the staging environment to smoke test the publish process and check that the download URL generation fix was working correctly</li>
+<li>14:10 UTC – The staging deployment was promoted to the production environment</li>
+</ul>
+<h2><a href="#root-cause-identification-the-five-whys" aria-hidden="true" class="anchor" id="root-cause-identification-the-five-whys"></a>Root cause identification: The Five Whys</h2>
+<ul>
+<li>
+<p>The redirect URLs for crate and readme downloads were broken in production.</p>
+<p><strong>Why were the redirect URLs broken?</strong></p>
+<ul>
+<li>
+<p>There was a bug introduced in pull request <a href="https://github.com/rust-lang/crates.io/pull/6834">#6834</a> which made it all the way into our production environment.</p>
+<p><strong>Why was there a bug introduced in this pull request?</strong></p>
+<ul>
+<li>
+<p>The pull request introduced tests, but did not test all code paths.</p>
+<p><strong>Why did the pull request not test all code paths?</strong></p>
+<ul>
+<li>
+<p>The code was structured in a way that made testing with different &quot;CDN prefix&quot; values complicated.</p>
+<p><strong>Why was the code structured in a way that made testing different values complicated?</strong></p>
+<ul>
+<li>
+<p>The code had not been unit tested before and the refactoring stopped at a point where the code could at least be tested with a hardcoded value.</p>
+<p><strong>Why did the refactoring stop at that point?</strong></p>
+<ul>
+<li>It was deemed &quot;good enough for now&quot; by the developer.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>The pull request was not reviewed by another developer.</p>
+<p><strong>Why was the pull request not reviewed by another developer?</strong></p>
+<ul>
+<li>
+<p>The developer creating the pull request misjudged the potential impact of a bug in the pull request. They did not explicitly request a review from the crates.io team and merged it themselves after a few hours.</p>
+<p><strong>Why was no code review requested from the crates.io team?</strong></p>
+<ul>
+<li>The number of active team members in the <a href="https://www.rust-lang.org/governance/teams/crates-io">crates.io team</a> is quite small. Reviewing dozens of pull requests per months from the one developer who is employed to work fulltime on crates.io would be a recipe for burnout for the other members of the crates.io team. For that employed fulltime developer it would also not work well if they were blocked on waiting for reviews for the majority of their time. The current way of working is that code reviews are only requested for high-impact pull requests.</li>
+</ul>
+<p><strong>Why was the potential impact misjudged?</strong></p>
+<ul>
+<li>
+<p>The developer forgot to think about the fact that this change affected the crate download endpoint of crates.io, which is the endpoint that handles 99% of the traffic to the server.</p>
+<p><strong>Why did the developer forget to check if a high-priority endpoint is affected?</strong></p>
+<ul>
+<li>There is no checklist or guide describing in which case a pull request should be seen as having a high potential impact and thus needing explicit code review from the crates.io team.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Why did the bug make it into production?</strong></p>
+<ul>
+<li>
+<p>The crate download endpoint was not tested on the staging environment before promoting it to production.</p>
+<p><strong>Why was the crate download not tested?</strong></p>
+<ul>
+<li>
+<p>The test plan for the staging environment only includes publishing a new version and seeing that reflected on the website and in the package index repository.</p>
+<p><strong>Why does the test plan not include crate downloads?</strong></p>
+<ul>
+<li>
+<p>Since 99% of all requests to crates.io are for crate downloads, the test plan definitely should include this process. There is intentionally no download button on the webpage though, so the URL for the download has to be constructed manually.</p>
+<p><strong>Why does the download URL need to be constructed manually?</strong></p>
+<ul>
+<li>Because the smoke test procedure on our staging environment is currently a completely manual process without any automation.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2><a href="#root-causes" aria-hidden="true" class="anchor" id="root-causes"></a>Root causes</h2>
+<ul>
+<li>The failing code was structured in a way that made it hard to test different variants and code paths.</li>
+<li>There is no checklist describing which pull requests should be seen as high-impact.</li>
+<li>The smoke test procedure on the staging environment does not include crate downloads and is a manual process.</li>
+</ul>
+<h2><a href="#backlog-check" aria-hidden="true" class="anchor" id="backlog-check"></a>Backlog check</h2>
+<p>There are no specific items in the backlog that could have prevented this incident.</p>
+<h2><a href="#recurrence" aria-hidden="true" class="anchor" id="recurrence"></a>Recurrence</h2>
+<p>A previous incident caused crate publishing to not work anymore. The learning from this incident was to ensure that the smoke testing procedure includes the publishing process. Unfortunately, this did not include the crate file download though.</p>
+<h2><a href="#lessons-learned" aria-hidden="true" class="anchor" id="lessons-learned"></a>Lessons learned</h2>
+<ul>
+<li>The detection time from deployment to incident notification could have been faster if the symptom was identified earlier to be caused by the cargo retry behavior. The heightened awareness of the deploying developer due to the change in Grafana numbers however contributed to this issue being fixed faster.</li>
+<li>The response time from incident notification to rollback and fixing the issue was fast.</li>
+<li>All code should be structured in a way that makes testing the different code paths easy.</li>
+<li>We need clearer rules on which pull requests require code reviews.</li>
+<li>The smoke test procedure should include crate downloads.</li>
+<li>The smoke test procedure should be automated as much as possible.</li>
+</ul>
+<h2><a href="#corrective-actions" aria-hidden="true" class="anchor" id="corrective-actions"></a>Corrective actions</h2>
+<ul>
+<li><strong>HIGH</strong> Include crate downloads in the smoke test plan for the staging environment</li>
+<li><strong>MEDIUM</strong> Automate the staging environment smoke tests</li>
+<li><strong>MEDIUM</strong> Develop rules on which pull requests require explicit code review</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

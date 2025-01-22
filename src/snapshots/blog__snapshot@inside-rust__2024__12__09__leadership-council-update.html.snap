@@ -1,0 +1,207 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2024/12/09/leadership-council-update.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>December 2024 Leadership Council Update | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="December 2024 Leadership Council Update | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="December 2024 Leadership Council Update | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="December 2024 Leadership Council Update" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>December 2024 Leadership Council Update</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 9, 2024 &middot; Eric Huss
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/leadership-council">Leadership Council</a> 
+    </div>
+
+    <div class="post">
+      <p>Hello again from the Rust Leadership Council!
+We wanted to share an update on what the Council has been working on since <a href="https://blog.rust-lang.org/inside-rust/2024/09/06/leadership-council-update.html">our last update</a>.</p>
+<h2><a href="#accomplishments-so-far" aria-hidden="true" class="anchor" id="accomplishments-so-far"></a>Accomplishments so far</h2>
+<h3><a href="#welcome-oli-scherer-and-tc-to-the-council" aria-hidden="true" class="anchor" id="welcome-oli-scherer-and-tc-to-the-council"></a>Welcome Oli Scherer and TC to the Council</h3>
+<p>As <a href="https://blog.rust-lang.org/inside-rust/2024/09/27/leadership-council-repr-selection.html">announced in September</a>, Oli Scherer and TC joined the Council representing the moderation team and lang team respectively.</p>
+<h3><a href="#foundation-updates" aria-hidden="true" class="anchor" id="foundation-updates"></a>Foundation updates</h3>
+<p>In November we wrapped up the election process for the Project Directors of the Rust Foundation. Ryan Levick is continuing for another term with Carol Nichols joining the board (<a href="https://foundation.rust-lang.org/news/announcing-the-rust-foundation-s-newest-project-director-carol-nichols/">see announcement</a>). We'd like to thank TC for facilitating the election process.</p>
+<p>We tried to further clarify the definition of employment which is used for determining Director eligibility (<a href="https://github.com/rust-lang/leadership-council/pull/111">rust-lang/leadership-council#111</a>).</p>
+<p>We reviewed our processes for how the Council interacts with the Directors and the Foundation. We identified some concerns about maintaining good communication with the Directors since Mark Rousskov, the only Council member who was also a Director, is stepping down as Director. We also looked at our communication processes with the Foundation, and didn't have specific changes to recommend other than documenting the current status (<a href="https://github.com/rust-lang/leadership-council/issues/41">rust-lang/leadership-council#41</a>).</p>
+<p>In November we also coordinated with the directors on a project-wide request for the annual feedback on the Foundation executive director.</p>
+<h2><a href="#travel-grant-policy" aria-hidden="true" class="anchor" id="travel-grant-policy"></a>Travel grant policy</h2>
+<p>In April we started a Travel Grant program which provides funds for project members to travel to Rust-related events. We have followed up on that program to publicly <a href="https://github.com/rust-lang/leadership-council/blob/main/policies/spending/travel.md">document the policy</a>. We are also looking to <a href="https://github.com/rust-lang/leadership-council/pull/122">remove the experimental status</a> of the policy, as we feel like we have been happy with how the program has been working, and expect to keep it funded in the near term.</p>
+<p>We'd like to remind all project members that they are welcome to take advantage of this program, and to reach out to your representative if you have any questions.</p>
+<h2><a href="#compiler-operations" aria-hidden="true" class="anchor" id="compiler-operations"></a>Compiler operations</h2>
+<p>We approved funding for a compiler operations position (<a href="https://github.com/rust-lang/leadership-council/issues/114">rust-lang/leadership-council#114</a>). This role is intended to help ensure the effectiveness of the compiler team. The specifics are being coordinated between the compiler team leads and the Foundation.</p>
+<h2><a href="#project-grants" aria-hidden="true" class="anchor" id="project-grants"></a>Project Grants</h2>
+<p>We approved the use of a portion of the Council's budget to extend one-year grants to several of the candidates of the <a href="https://foundation.rust-lang.org/grants/fellowships/">Fellowship Program</a> (<a href="https://github.com/rust-lang/leadership-council/issues/112">rust-lang/leadership-council#112</a>). We had more excellent applications to the program than the existing funding would cover, and we had the opportunity to divert some of the Council's budget toward this program.</p>
+<h3><a href="#additional-items" aria-hidden="true" class="anchor" id="additional-items"></a>Additional items</h3>
+<p>And a few other items:</p>
+<ul>
+<li>Approved distribution of GSoC award funds (<a href="https://github.com/rust-lang/leadership-council/issues/116">rust-lang/leadership-council#116</a>).</li>
+<li>Set up a document to help us track the <a href="https://hackmd.io/@rust-leadership-council/ryBmBnFCC">Council's budget</a>.</li>
+<li>Approved a Foundation board meeting substitute for the December board meeting (<a href="https://github.com/rust-lang/leadership-council/issues/117">rust-lang/leadership-council#117</a>).</li>
+<li>Various updates to the Council's own meeting process:
+<ul>
+<li>Enacted some improvements for how meeting minutes are approved to help streamline the process while still allowing members time to review (<a href="https://github.com/rust-lang/leadership-council/blob/687946a596e65b8f6fd524bcc0afa4ab497581c5/minutes/sync-meeting/2024-11-22.md#review-of-minutes-process">notes</a>).</li>
+<li>Switched to an issue-oriented process for managing the Council's meeting agenda.</li>
+<li>Decided to stop video recordings of Council meetings (<a href="https://github.com/rust-lang/leadership-council/pull/102">rust-lang/leadership-council#102</a>).</li>
+</ul>
+</li>
+<li>Eric Holk gave a <a href="https://www.youtube.com/live/ZNK4aSv-krI?t=528s">presentation at the Ubuntu Summit</a> about the Rust Project.</li>
+<li>Approved the <a href="https://blog.rust-lang.org/2024/11/07/gccrs-an-alternative-compiler-for-rust.html">gccrs blog post</a>.</li>
+</ul>
+<h2><a href="#ongoing-work" aria-hidden="true" class="anchor" id="ongoing-work"></a>Ongoing work</h2>
+<p>There are various efforts underway on projects that have had significant discussions since the last update, but have not concluded with any decisions, yet.
+They are:</p>
+<h3><a href="#shape-of-rust" aria-hidden="true" class="anchor" id="shape-of-rust"></a>Shape of Rust</h3>
+<p>Work continues to define the shape of the structure of the Rust project (<a href="https://github.com/rust-lang/leadership-council/issues/33">rust-lang/leadership-council#33</a>) and to determine how to organize the teams in the <a href="https://forge.rust-lang.org/governance/council.html#the-launching-pad-top-level-team">Launching Pad</a>. James Munns has been working to better understand the current status of the Launching Pad teams, and to work on plans for what to do with those teams (<a href="https://github.com/rust-lang/leadership-council/issues/118">rust-lang/leadership-council#118</a>).</p>
+<h3><a href="#foundation-budget" aria-hidden="true" class="anchor" id="foundation-budget"></a>Foundation budget</h3>
+<p>We are continuously looking for ways to effectively use the Council's budget (<a href="https://github.com/rust-lang/leadership-council/issues/103">rust-lang/leadership-council#103</a>). Although we have approved several programs, we still have a significant portion of the budget to spend. James Munns <a href="https://rust-lang.zulipchat.com/#narrow/channel/392734-council/topic/Discussion.20regarding.20a.20Council.20RFQ.20process/near/476426031">suggested an RFQ process</a> for soliciting quotes on potential projects.</p>
+<h3><a href="#license-and-copyright" aria-hidden="true" class="anchor" id="license-and-copyright"></a>License and copyright</h3>
+<p>We continue to look at how we can tackle the backlog of issues and concerns regarding the licensing and copyright handling throughout the Rust project (<a href="https://github.com/rust-lang/leadership-council/issues/24">rust-lang/leadership-council#24</a>). We <a href="https://rust-lang.zulipchat.com/#narrow/channel/392734-council/topic/license.2Fcopyright.20support">opened a topic</a> to try to get more input on different approaches we can take.</p>
+<p>Jonathan Pallant has been working on improving the copyright notices shipped with Rust (<a href="https://github.com/rust-lang/leadership-council/issues/120">rust-lang/leadership-council#120</a>), and has asked the Council to help approve this change.</p>
+<h3><a href="#additional-items-1" aria-hidden="true" class="anchor" id="additional-items-1"></a>Additional items</h3>
+<ul>
+<li>Work continues to prepare for the all-hands event in May 2025 at <a href="https://rustweek.org/">RustWeek 2025</a> which corresponds with Rust's 10-year anniversary.</li>
+<li>We have been looking to change the policy for meeting observers (<a href="https://github.com/rust-lang/leadership-council/pull/110">rust-lang/leadership-council#110</a>).</li>
+<li>We have been asked to review the obligation for the Council and the Project as a whole for approval of <a href="https://github.com/rust-lang/rfcs/pull/3724">The Update Framework RFC</a>, but no conclusion has been reached.</li>
+<li>We have been reviewing the <a href="https://github.com/rust-lang/leadership-council/issues">open tasks</a> for the Council and trying to identify what is needed to move them forward.</li>
+<li>Niko Matsakis has reached out to the Council for <a href="https://rust-lang.zulipchat.com/#narrow/channel/392734-council/topic/A.20Rust.203-5.20YP/near/480932967">establishing a 3-5 year plan for the project</a>, which is in the initial stages of discussion.</li>
+<li>We have been working on a coordinated analysis of the <a href="https://github.com/rust-lang/rust/issues/127343">inference breakage</a> that happened in the Rust 1.80 release, since the issue involved many teams throughout the project.</li>
+</ul>
+<h2><a href="#meeting-minutes" aria-hidden="true" class="anchor" id="meeting-minutes"></a>Meeting minutes</h2>
+<p>We publish minutes from all Council meetings to the <a href="https://github.com/rust-lang/leadership-council/tree/main/minutes">Leadership Council repo</a>.
+Links to the minutes since our last update are:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2024-09-27.md">September 27, 2024</a></li>
+<li><a href="https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2024-10-11.md">October 11, 2024</a></li>
+<li><a href="https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2024-10-25.md">October 25, 2024</a></li>
+<li><a href="https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2024-11-08.md">November 8, 2024</a></li>
+<li><a href="https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2024-11-22.md">November 22, 2024</a></li>
+</ul>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

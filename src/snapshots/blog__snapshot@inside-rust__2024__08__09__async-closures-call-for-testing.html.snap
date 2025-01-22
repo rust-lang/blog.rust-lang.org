@@ -1,0 +1,257 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2024/08/09/async-closures-call-for-testing.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Async Closures MVP: Call for Testing! | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Async Closures MVP: Call for Testing! | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Async Closures MVP: Call for Testing! | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Async Closures MVP: Call for Testing!" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Async Closures MVP: Call for Testing!</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 9, 2024 &middot; Michael Goulet
+     on behalf of <a href="https://www.rust-lang.org/governance/wgs/wg-async">The Async Working Group</a> 
+    </div>
+
+    <div class="post">
+      <p>The async working group is excited to announce that <a href="https://rust-lang.github.io/rfcs/3668-async-closures.html">RFC 3668</a> &quot;Async Closures&quot; was recently approved by the Lang team. In this post, we want to briefly motivate why async closures exist, explain their current shortcomings, and most importantly, announce a call for testing them on nightly Rust.</p>
+<h2><a href="#the-backstory" aria-hidden="true" class="anchor" id="the-backstory"></a>The backstory</h2>
+<p>Async closures were originally proposed in <a href="https://rust-lang.github.io/rfcs/2394-async_await.html#async--closures">RFC 2394</a> which introduced <code>async</code>/<code>await</code> to the language. Simple handling of async closures has existed in nightly since async-await was implemented <a href="https://github.com/rust-lang/rust/pull/51580">soon thereafter</a>, but until recently async closures simply desugared into closures that returned async blocks:</p>
+<pre><code class="language-rust">let x = async || {};
+
+// ...was just sugar for:
+let x = || { async {} };
+</code></pre>
+<p>This had a fundamental limitation that it was impossible to express a closure that returns a future that borrows captured state.</p>
+<p>Somewhat relatedly, on the callee side, when users want to take an async closure as an argument, they typically express that as a bound of two different generic types:</p>
+<pre><code class="language-rust">fn async_callback&lt;F, Fut&gt;(callback: F)
+where
+    F: FnOnce() -&gt; Fut,
+    Fut: Future&lt;Output = String&gt;;
+</code></pre>
+<p>This also led to an additional limitation that it's impossible to express higher-ranked async fn bounds using this without boxing (since a higher-ranked trait bound on <code>F</code> cannot lead to a higher-ranked type for <code>Fut</code>), leading to unnecessary allocations:</p>
+<pre><code class="language-rust">fn async_callback&lt;F&gt;(callback: F)
+where
+    F: FnOnce(&amp;str) -&gt; Pin&lt;Box&lt;dyn Future&lt;Output = ()&gt; + '_&gt;&gt;;
+
+async fn do_something(name: &amp;str) {}
+
+async_callback(|name| Box::pin(async {
+    do_something(name).await;
+}));
+</code></pre>
+<p>These limitations were detailed in <a href="https://smallcultfollowing.com/babysteps/blog/2023/05/09/giving-lending-and-async-closures/#async-closures-are-a-lending-pattern">Niko's blog post on async closures and lending</a>, and later in compiler-errors's blog post on <a href="https://hackmd.io/@compiler-errors/async-closures">why async closures are the way they are</a>.</p>
+<h2><a href="#ok-so-how-does-rfc-3668-help" aria-hidden="true" class="anchor" id="ok-so-how-does-rfc-3668-help"></a>OK, so how does <a href="https://rust-lang.github.io/rfcs/3668-async-closures.html">RFC 3668</a> help?</h2>
+<p>Recent <a href="https://github.com/rust-lang/rust/pull/120361">work</a> has focused on reimplementing async closures to be lending and designing a set of async fn traits. While async closures already existed as syntax, this work introduced a new family of async fn traits which are implemented by async closures (and all other callable types which return futures). They can be written like:</p>
+<pre><code class="language-rust">fn test&lt;F&gt;(callback: F)
+where
+    // Either:
+    async Fn(Arg, Arg) -&gt; Ret,
+    // Or:
+    AsyncFn(Arg, Arg) -&gt; Ret,
+</code></pre>
+<p>(It's currently an <a href="https://github.com/rust-lang/rust/issues/128129">open question</a> exactly how to spell this bound, so both syntaxes are implemented in parallel.)</p>
+<p>RFC 3668 motivates this implementation work in detail, confirming that we need first-class async closures and async fn traits which allow us to express the <em>lending</em> capability of async closures -- read the RFC if you're interested in the whole story!</p>
+<h2><a href="#so-how-do-i-help" aria-hidden="true" class="anchor" id="so-how-do-i-help"></a>So how do I help?</h2>
+<p>We'd love for you to test out these new features! First, on a recently-updated nightly compiler, enable <code>#![feature(async_closure)]</code> (note that, for historical reasons, this feature name is not pluralized).</p>
+<p>Async closures are designed to be drop-in compatible (in almost all cases) with closures returning async blocks:</p>
+<pre><code class="language-rust">// Instead of writing:
+takes_async_callback(|arg| async {
+    // Do things here...
+});
+
+// Write this:
+takes_async_callback(async |arg| {
+    // Do things here...
+});
+</code></pre>
+<p>And on the callee side, write async fn trait bounds instead of writing &quot;regular&quot; fn trait bounds that return futures:</p>
+<pre><code class="language-rust">// Instead of writing:
+fn doesnt_exactly_take_an_async_closure&lt;F, Fut&gt;(callback: F)
+where
+    F: FnOnce() -&gt; Fut,
+    Fut: Future&lt;Output = String&gt;
+{ todo!() }
+
+// Write this:
+fn takes_an_async_closure&lt;F: async FnOnce() -&gt; String&gt;(callback: F) { todo!() }
+// Or this:
+fn takes_an_async_closure&lt;F: AsyncFnOnce() -&gt; String&gt;(callback: F) { todo!() }
+</code></pre>
+<p>Or if you're emulating a higher-ranked async closure with boxing:</p>
+<pre><code class="language-rust">// Instead of writing:
+fn higher_ranked&lt;F&gt;(callback: F)
+where
+    F: Fn(&amp;Arg) -&gt; Pin&lt;Box&lt;dyn Future&lt;Output = ()&gt; + '_&gt;&gt;
+{ todo!() }
+
+// Write this:
+fn higher_ranked&lt;F: async Fn(&amp;Arg)&gt; { todo!() }
+// Or this:
+fn higher_ranked&lt;F: AsyncFn(&amp;Arg)&gt; { todo!() }
+</code></pre>
+<h2><a href="#shortcomings-interacting-with-the-async-ecosystem" aria-hidden="true" class="anchor" id="shortcomings-interacting-with-the-async-ecosystem"></a>Shortcomings interacting with the async ecosystem</h2>
+<p>If you're going to try to rewrite your async projects, there are a few shortcomings to be aware of.</p>
+<h3><a href="#you-cant-directly-name-the-output-future" aria-hidden="true" class="anchor" id="you-cant-directly-name-the-output-future"></a>You can't directly name the output future</h3>
+<p>When you name an async callable bound with the <em>old</em> style, before first-class async fn trait bounds, then as a side-effect of needing to use two type parameters, you can put additional bounds (e.g. <code>+ Send</code> or <code>+ 'static</code>) on the <code>Future</code> part of the bound, like:</p>
+<pre><code class="language-rust">fn async_callback&lt;F, Fut&gt;(callback: F)
+where
+    F: FnOnce() -&gt; Fut,
+    Fut: Future&lt;Output = String&gt; + Send + 'static
+{ todo!() }
+</code></pre>
+<p>There isn't currently a way to put similar bounds on the future returned by calling an async closure, so if you need to constrain your callback futures like this, then you won't be able to use async closures just yet.</p>
+<p>We expect to support this in the medium/long term via a <a href="https://rust-lang.github.io/rfcs/3668-async-closures.html#interaction-with-return-type-notation-naming-the-future-returned-by-calling">return-type-notation syntax</a>.</p>
+<h3><a href="#subtle-differences-in-closure-signature-inference" aria-hidden="true" class="anchor" id="subtle-differences-in-closure-signature-inference"></a>Subtle differences in closure signature inference</h3>
+<p>Passing an async closure to a generic <code>impl Fn(A, B) -&gt; C</code> bound may not always eagerly infer the closure's arguments to <code>A</code> and <code>B</code>, leading to strange type errors on occasion. For an example of this, see <a href="https://github.com/rust-lang/rust/issues/127781"><code>rust-lang/rust#127781</code></a>.</p>
+<p>We expect to improve async closure signature inference as we move forward.</p>
+<h3><a href="#async-closures-cant-be-coerced-to-fn-pointers" aria-hidden="true" class="anchor" id="async-closures-cant-be-coerced-to-fn-pointers"></a>Async closures can't be coerced to <code>fn()</code> pointers</h3>
+<p>Some libraries take their callbacks as function <em>pointers</em> (<code>fn()</code>) rather than generics. Async closures don't currently implement the same coercion from closure to <code>fn() -&gt; ...</code>. Some libraries may mitigate this problem by adapting their API to take generic <code>impl Fn()</code> instead of <code>fn()</code> pointers as an argument.</p>
+<p>We don't expect to implement this coercion unless there's a particularly good reason to support it, since this can usually be handled manually by the caller by using an inner function item, or by using an <code>Fn</code> bound instead, for example:</p>
+<pre><code class="language-rust">fn needs_fn_pointer&lt;T: Future&lt;Output = ()&gt;&gt;(callback: fn() -&gt; T) { todo!() }
+
+fn main() {
+    // Instead of writing:
+    needs_fn_pointer(async || { todo!() });
+    // Since async closures don't currently support coercion to `fn() -&gt; ...`.
+
+    // You can use an inner async fn item:
+    async fn callback() { todo!() }
+    needs_fn_pointer(callback);
+}
+
+// Or if you don't need to take *exactly* a function pointer,
+// you can rewrite `needs_fn_pointer` like:
+fn needs_fn_pointer(callback: impl async Fn()) { todo!() }
+// Or with `AsyncFn`:
+fn needs_fn_pointer(callback: impl AsyncFn()) { todo!() }
+</code></pre>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

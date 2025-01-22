@@ -1,0 +1,499 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/03/30/i128-layout-update.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Changes to &#x60;u128&#x60;/&#x60;i128&#x60; layout in 1.77 and 1.78 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Changes to &#x60;u128&#x60;/&#x60;i128&#x60; layout in 1.77 and 1.78 | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Changes to &#x60;u128&#x60;/&#x60;i128&#x60; layout in 1.77 and 1.78 | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Changes to &#x60;u128&#x60;/&#x60;i128&#x60; layout in 1.77 and 1.78" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Changes to &#x60;u128&#x60;/&#x60;i128&#x60; layout in 1.77 and 1.78</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 30, 2024 &middot; Trevor Gross
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang">The Rust Lang Team</a> 
+    </div>
+
+    <div class="post">
+      <p>Rust has long had an inconsistency with C regarding the alignment of 128-bit integers
+on the x86-32 and x86-64 architectures. This problem has recently been resolved, but
+the fix comes with some effects that are worth being aware of.</p>
+<p>As a user, you most likely do not need to worry about these changes unless you are:</p>
+<ol>
+<li>Assuming the alignment of <code>i128</code>/<code>u128</code> rather than using <code>align_of</code></li>
+<li>Ignoring the <code>improper_ctypes*</code> lints and using these types in FFI</li>
+</ol>
+<p>There are also no changes to architectures other than x86-32 and x86-64. If your
+code makes heavy use of 128-bit integers, you may notice runtime performance increases
+at a possible cost of additional memory use.</p>
+<p>This post documents what the problem was, what changed to fix it, and what to expect
+with the changes. If you are already familiar with the problem and only looking for a
+compatibility matrix, jump to the <a href="#compatibility">Compatibility</a> section.</p>
+<h1><a href="#background" aria-hidden="true" class="anchor" id="background"></a>Background</h1>
+<p>Data types have two intrinsic values that relate to how they can be arranged in memory;
+size and alignment. A type's size is the amount of space it takes up in memory, and its
+alignment specifies which addresses it is allowed to be placed at.</p>
+<p>The size of simple types like primitives is usually unambiguous, being the exact size of
+the data they represent with no padding (unused space). For example, an <code>i64</code> always has
+a size of 64 bits or 8 bytes.</p>
+<p>Alignment, however, can vary. An 8-byte integer <em>could</em> be stored at any memory address
+(1-byte aligned), but most 64-bit computers will get the best performance if it is
+instead stored at a multiple of 8 (8-byte aligned). So, like in other languages,
+primitives in Rust have this most efficient alignment by default. The effects of this
+can be seen when creating composite types (<a href="https://play.rust-lang.org/?version=beta&amp;mode=debug&amp;edition=2021&amp;gist=52f349bdea92bf724bc453f37dbd32ea">playground link</a>):</p>
+<pre><code class="language-rust">use core::mem::{align_of, offset_of};
+
+#[repr(C)]
+struct Foo {
+    a: u8,  // 1-byte aligned
+    b: u16, // 2-byte aligned
+}
+
+#[repr(C)]
+struct Bar {
+    a: u8,  // 1-byte aligned
+    b: u64, // 8-byte aligned
+}
+
+println!(&quot;Offset of b (u16) in Foo: {}&quot;, offset_of!(Foo, b));
+println!(&quot;Alignment of Foo: {}&quot;, align_of::&lt;Foo&gt;());
+println!(&quot;Offset of b (u64) in Bar: {}&quot;, offset_of!(Bar, b));
+println!(&quot;Alignment of Bar: {}&quot;, align_of::&lt;Bar&gt;());
+</code></pre>
+<p>Output:</p>
+<pre><code class="language-text">Offset of b (u16) in Foo: 2
+Alignment of Foo: 2
+Offset of b (u64) in Bar: 8
+Alignment of Bar: 8
+</code></pre>
+<p>We see that within a struct, a type will always be placed such that its offset is a
+multiple of its alignment - even if this means unused space (Rust minimizes this by
+default when <code>repr(C)</code> is not used).</p>
+<p>These numbers are not arbitrary; the application binary interface (ABI) says what they
+should be. In the x86-64 <a href="https://www.uclibc.org/docs/psABI-x86_64.pdf">psABI</a> (processor-specific ABI) for System V (Unix &amp; Linux),
+<em>Figure 3.1: Scalar Types</em> tells us exactly how primitives should be represented:</p>
+<table>
+<thead>
+<tr>
+<th>C type</th>
+<th>Rust equivalent</th>
+<th><code>sizeof</code></th>
+<th>Alignment (bytes)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>char</code></td>
+<td><code>i8</code></td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>unsigned char</code></td>
+<td><code>u8</code></td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td><code>i16</code></td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong><code>unsigned short</code></strong></td>
+<td><strong><code>u16</code></strong></td>
+<td><strong>2</strong></td>
+<td><strong>2</strong></td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td><code>i64</code></td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td><strong><code>unsigned long</code></strong></td>
+<td><strong><code>u64</code></strong></td>
+<td><strong>8</strong></td>
+<td><strong>8</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The ABI only specifies C types, but Rust follows the same definitions both for
+compatibility and for the performance benefits.</p>
+<h1><a href="#the-incorrect-alignment-problem" aria-hidden="true" class="anchor" id="the-incorrect-alignment-problem"></a>The Incorrect Alignment Problem</h1>
+<p>If two implementations disagree on the alignment of a data type, they cannot reliably
+share data containing that type. Rust had inconsistent alignment for 128-bit types:</p>
+<pre><code class="language-rust">println!(&quot;alignment of i128: {}&quot;, align_of::&lt;i128&gt;());
+</code></pre>
+<pre><code class="language-text">// rustc 1.76.0
+alignment of i128: 8
+</code></pre>
+<pre><code class="language-c">printf(&quot;alignment of __int128: %zu\n&quot;, _Alignof(__int128));
+</code></pre>
+<pre><code class="language-text">// gcc 13.2
+alignment of __int128: 16
+
+// clang 17.0.1
+alignment of __int128: 16
+</code></pre>
+<p>(<a href="https://godbolt.org/z/h94Ge1vMW">Godbolt link</a>) Looking back at the <a href="https://www.uclibc.org/docs/psABI-x86_64.pdf">psABI</a>, we can see that Rust has
+the wrong alignment here:</p>
+<table>
+<thead>
+<tr>
+<th>C type</th>
+<th>Rust equivalent</th>
+<th><code>sizeof</code></th>
+<th>Alignment (bytes)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__int128</code></td>
+<td><code>i128</code></td>
+<td>16</td>
+<td>16</td>
+</tr>
+<tr>
+<td><code>unsigned __int128</code></td>
+<td><code>u128</code></td>
+<td>16</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p>It turns out this isn't because of something that Rust is actively doing incorrectly:
+layout of primitives comes from the LLVM codegen backend used by both Rust and Clang,
+among other languages, and it has the alignment for <code>i128</code> hardcoded to 8 bytes.</p>
+<p>Clang uses the correct alignment only because of a workaround, where the alignment is
+manually set to 16 bytes before handing the type to LLVM. This fixes the layout issue
+but has been the source of some other minor problems.<sup class="footnote-ref"><a href="#fn-f128-segfault" id="fnref-f128-segfault" data-footnote-ref>1</a></sup><sup class="footnote-ref"><a href="#fn-va-segfault" id="fnref-va-segfault" data-footnote-ref>2</a></sup>
+Rust does no such manual adjustement, hence the issue reported at
+<a href="https://github.com/rust-lang/rust/issues/54341">https://github.com/rust-lang/rust/issues/54341</a>.</p>
+<h1><a href="#the-calling-convention-problem" aria-hidden="true" class="anchor" id="the-calling-convention-problem"></a>The Calling Convention Problem</h1>
+<p>There is an additional problem: LLVM does not always do the correct thing when passing
+128-bit integers as function arguments. This was a <a href="https://github.com/llvm/llvm-project/issues/41784">known issue in LLVM</a>, before its
+<a href="https://github.com/rust-lang/rust/issues/54341#issuecomment-1064729606">relevance to Rust was discovered</a>.</p>
+<p>When calling a function, the arguments get passed in registers (special storage
+locations within the CPU) until there are no more slots, then they get &quot;spilled&quot; to
+the stack (the program's memory). The ABI tells us what to do here as well, in the
+section <em>3.2.3 Parameter Passing</em>:</p>
+<blockquote>
+<p>Arguments of type <code>__int128</code> offer the same operations as INTEGERs, yet they do not
+fit into one general purpose register but require two registers. For classification
+purposes <code>__int128</code> is treated as if it were implemented as:</p>
+<pre><code class="language-c">typedef struct {
+    long low, high;
+} __int128;
+</code></pre>
+<p>with the exception that arguments of type <code>__int128</code> that are stored in memory must be
+aligned on a 16-byte boundary.</p>
+</blockquote>
+<p>We can try this out by implementing the calling convention manually. In the below C
+example, inline assembly is used to call <code>foo(0xaf, val, val, val)</code> with <code>val</code> as
+<code>0x11223344556677889900aabbccddeeff</code>.</p>
+<p>x86-64 uses the registers <code>rdi</code>, <code>rsi</code>, <code>rdx</code>, <code>rcx</code>, <code>r8</code>, and <code>r9</code> to pass function
+arguments, in that order (you guessed it, this is also in the ABI). Each register
+fits a word (64 bits), and anything that doesn't fit gets <code>push</code>ed to the stack.</p>
+<pre><code class="language-c">/* full example at &lt;https://godbolt.org/z/5c8cb5cxs&gt; */
+
+/* to see the issue, we need a padding value to &quot;mess up&quot; argument alignment */
+void foo(char pad, __int128 a, __int128 b, __int128 c) {
+    printf(&quot;%#x\n&quot;, pad &amp; 0xff);
+    print_i128(a);
+    print_i128(b);
+    print_i128(c);
+}
+
+int main() {
+    asm(
+        /* load arguments that fit in registers */
+        &quot;movl    $0xaf, %edi \n\t&quot;                /* 1st slot (edi): padding char (`edi` is the
+                                                   * same as `rdi`, just a smaller access size) */
+        &quot;movq    $0x9900aabbccddeeff, %rsi \n\t&quot;  /* 2nd slot (rsi): lower half of `a` */
+        &quot;movq    $0x1122334455667788, %rdx \n\t&quot;  /* 3rd slot (rdx): upper half of `a` */
+        &quot;movq    $0x9900aabbccddeeff, %rcx \n\t&quot;  /* 4th slot (rcx): lower half of `b` */
+        &quot;movq    $0x1122334455667788, %r8  \n\t&quot;  /* 5th slot (r8):  upper half of `b` */
+        &quot;movq    $0xdeadbeef4c0ffee0, %r9  \n\t&quot;  /* 6th slot (r9):  should be unused, but
+                                                   * let's trick clang! */
+
+        /* reuse our stored registers to load the stack */
+        &quot;pushq   %rdx \n\t&quot;                       /* upper half of `c` gets passed on the stack */
+        &quot;pushq   %rsi \n\t&quot;                       /* lower half of `c` gets passed on the stack */
+
+        &quot;call    foo \n\t&quot;                        /* call the function */
+        &quot;addq    $16, %rsp \n\t&quot;                  /* reset the stack */
+    );
+}
+</code></pre>
+<p>Running the above with GCC prints the following expected output:</p>
+<pre><code>0xaf
+0x11223344556677889900aabbccddeeff
+0x11223344556677889900aabbccddeeff
+0x11223344556677889900aabbccddeeff
+</code></pre>
+<p>But running with Clang 17 prints:</p>
+<pre><code>0xaf
+0x11223344556677889900aabbccddeeff
+0x11223344556677889900aabbccddeeff
+0x9900aabbccddeeffdeadbeef4c0ffee0
+//^^^^^^^^^^^^^^^^ this should be the lower half
+//                ^^^^^^^^^^^^^^^^ look familiar?
+</code></pre>
+<p>Surprise!</p>
+<p>This illustrates the second problem: LLVM expects an <code>i128</code> to be passed half in a
+register and half on the stack when possible, but this is not allowed by the ABI.</p>
+<p>Since the behavior comes from LLVM and has no reasonable workaround, this is a
+problem in both Clang and Rust.</p>
+<h1><a href="#solutions" aria-hidden="true" class="anchor" id="solutions"></a>Solutions</h1>
+<p>Getting these problems resolved was a lengthy effort by many people, starting with a
+patch by compiler team member Simonas Kazlauskas in 2017: <a href="https://reviews.llvm.org/D28990">D28990</a>. Unfortunately,
+this wound up reverted. It was later attempted again in <a href="https://reviews.llvm.org/D86310">D86310</a> by LLVM contributor
+Harald van Dijk, which is the version that finally landed in October 2023.</p>
+<p>Around the same time, Nikita Popov fixed the calling convention issue with <a href="https://reviews.llvm.org/D158169">D158169</a>.
+Both of these changes made it into LLVM 18, meaning all relevant ABI issues will be
+resolved in both Clang and Rust that use this version (Clang 18 and Rust 1.78 when using
+the bundled LLVM).</p>
+<p>However, <code>rustc</code> can also use the version of LLVM installed on the system rather than a
+bundled version, which may be older. To mitigate the chance of problems from differing
+alignment with the same <code>rustc</code> version, <a href="https://github.com/rust-lang/compiler-team/issues/683">a proposal</a> was introduced to manually
+correct the alignment like Clang has been doing. This was implemented by Matthew Maurer
+in <a href="https://github.com/rust-lang/rust/pull/116672/">#116672</a>.</p>
+<p>Since these changes, Rust now produces the correct alignment:</p>
+<pre><code class="language-rust">println!(&quot;alignment of i128: {}&quot;, align_of::&lt;i128&gt;());
+</code></pre>
+<pre><code class="language-text">// rustc 1.77.0
+alignment of i128: 16
+</code></pre>
+<p>As mentioned above, part of the reason for an ABI to specify the alignment of a datatype
+is because it is more efficient on that architecture. We actually got to see that
+firsthand: the <a href="https://github.com/rust-lang/rust/pull/116672/#issuecomment-1858600381">initial performance run</a> with the manual alignment change showed
+nontrivial improvements to compiler performance (which relies heavily on 128-bit
+integers to work with integer literals). The downside of increasing alignment is that
+composite types do not always fit together as nicely in memory, leading to an increase
+in usage. Unfortunately this meant some of the performance wins needed to be sacrificed
+to avoid an increased memory footprint.</p>
+<h1><a href="#compatibility" aria-hidden="true" class="anchor" id="compatibility"></a>Compatibility</h1>
+<p>The most imporant question is how compatibility changed as a result of these fixes. In
+short, <code>i128</code> and <code>u128</code> with Rust using LLVM 18 (the default version starting with
+1.78) will be completely compatible with any version of GCC, as well as Clang 18 and
+above (released March 2024). All other combinations have some incompatible cases, which
+are summarized in the table below:</p>
+<table>
+<thead>
+<tr>
+<th>Compiler 1</th>
+<th>Compiler 2</th>
+<th>status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rust ≥ 1.78 with bundled LLVM (18)</td>
+<td>GCC (any version)</td>
+<td>Fully compatible</td>
+</tr>
+<tr>
+<td>Rust ≥ 1.78 with bundled LLVM (18)</td>
+<td>Clang ≥ 18</td>
+<td>Fully compatible</td>
+</tr>
+<tr>
+<td>Rust ≥ 1.77 with LLVM ≥ 18</td>
+<td>GCC (any version)</td>
+<td>Fully compatible</td>
+</tr>
+<tr>
+<td>Rust ≥ 1.77 with LLVM ≥ 18</td>
+<td>Clang ≥ 18</td>
+<td>Fully compatible</td>
+</tr>
+<tr>
+<td>Rust ≥ 1.77 with LLVM ≥ 18</td>
+<td>Clang &lt; 18</td>
+<td>Storage compatible, has calling bug</td>
+</tr>
+<tr>
+<td>Rust ≥ 1.77 with LLVM &lt; 18</td>
+<td>GCC (any version)</td>
+<td>Storage compatible, has calling bug</td>
+</tr>
+<tr>
+<td>Rust ≥ 1.77 with LLVM &lt; 18</td>
+<td>Clang (any version)</td>
+<td>Storage compatible, has calling bug</td>
+</tr>
+<tr>
+<td>Rust &lt; 1.77<sup class="footnote-ref"><a href="#fn-l" id="fnref-l" data-footnote-ref>3</a></sup></td>
+<td>GCC (any version)</td>
+<td>Incompatible</td>
+</tr>
+<tr>
+<td>Rust &lt; 1.77<sup class="footnote-ref"><a href="#fn-l" id="fnref-l-2" data-footnote-ref>3</a></sup></td>
+<td>Clang (any version)</td>
+<td>Incompatible</td>
+</tr>
+<tr>
+<td>GCC (any version)</td>
+<td>Clang ≥ 18</td>
+<td>Fully compatible</td>
+</tr>
+<tr>
+<td>GCC (any version)</td>
+<td>Clang &lt; 18</td>
+<td>Storage compatible with calling bug</td>
+</tr>
+</tbody>
+</table>
+<h1><a href="#effects--future-steps" aria-hidden="true" class="anchor" id="effects--future-steps"></a>Effects &amp; Future Steps</h1>
+<p>As mentioned in the introduction, most users will notice no effects of this change
+unless you are already doing something questionable with these types.</p>
+<p>Starting with Rust 1.77, it will be reasonably safe to start experimenting with
+128-bit integers in FFI, with some more certainty coming with the LLVM update
+in 1.78. There is <a href="https://github.com/rust-lang/lang-team/issues/255">ongoing discussion</a> about lifting the lint in an upcoming
+version, but we want to be cautious and avoid introducing silent breakage for users
+whose Rust compiler may be built with an older LLVM.</p>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-f128-segfault">
+<p><a href="https://bugs.llvm.org/show_bug.cgi?id=50198">https://bugs.llvm.org/show_bug.cgi?id=50198</a> <a href="#fnref-f128-segfault" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-va-segfault">
+<p><a href="https://github.com/llvm/llvm-project/issues/20283">https://github.com/llvm/llvm-project/issues/20283</a> <a href="#fnref-va-segfault" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+<li id="fn-l">
+<p>Rust &lt; 1.77 with LLVM 18 will have some degree of compatibility, this is just
+an uncommon combination. <a href="#fnref-l" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="3" aria-label="Back to reference 3">↩</a> <a href="#fnref-l-2" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="3-2" aria-label="Back to reference 3-2">↩<sup class="footnote-ref">2</sup></a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

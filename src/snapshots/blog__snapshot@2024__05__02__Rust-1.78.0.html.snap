@@ -1,0 +1,259 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/05/02/Rust-1.78.0.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.78.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Announcing Rust 1.78.0 | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Announcing Rust 1.78.0 | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Announcing Rust 1.78.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.78.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 2, 2024 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.78.0. Rust is a programming language empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via <code>rustup</code>, you can get 1.78.0 with:</p>
+<pre><code class="language-console">$ rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website, and check out the <a href="https://doc.rust-lang.org/nightly/releases.html#version-1780-2024-05-02">detailed release notes for 1.78.0</a>.</p>
+<p>If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (<code>rustup default beta</code>) or the nightly channel (<code>rustup default nightly</code>). Please <a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you might come across!</p>
+<h2><a href="#whats-in-1780-stable" aria-hidden="true" class="anchor" id="whats-in-1780-stable"></a>What's in 1.78.0 stable</h2>
+<h3><a href="#diagnostic-attributes" aria-hidden="true" class="anchor" id="diagnostic-attributes"></a>Diagnostic attributes</h3>
+<p>Rust now supports a <code>#[diagnostic]</code> attribute namespace to influence compiler error messages. These are treated as hints which the compiler is not <em>required</em> to use, and it is also not an error to provide a diagnostic that the compiler doesn't recognize. This flexibility allows source code to provide diagnostics even when they're not supported by all compilers, whether those are different versions or entirely different implementations.</p>
+<p>With this namespace comes the first supported attribute, <code>#[diagnostic::on_unimplemented]</code>, which can be placed on a trait to customize the message when that trait is required but hasn't been implemented on a type. Consider the example given in the <a href="https://github.com/rust-lang/rust/pull/119888/">stabilization pull request</a>:</p>
+<pre><code class="language-rust">#[diagnostic::on_unimplemented(
+    message = &quot;My Message for `ImportantTrait&lt;{A}&gt;` is not implemented for `{Self}`&quot;,
+    label = &quot;My Label&quot;,
+    note = &quot;Note 1&quot;,
+    note = &quot;Note 2&quot;
+)]
+trait ImportantTrait&lt;A&gt; {}
+
+fn use_my_trait(_: impl ImportantTrait&lt;i32&gt;) {}
+
+fn main() {
+    use_my_trait(String::new());
+}
+</code></pre>
+<p>Previously, the compiler would give a builtin error like this:</p>
+<pre><code>error[E0277]: the trait bound `String: ImportantTrait&lt;i32&gt;` is not satisfied
+  --&gt; src/main.rs:12:18
+   |
+12 |     use_my_trait(String::new());
+   |     ------------ ^^^^^^^^^^^^^ the trait `ImportantTrait&lt;i32&gt;` is not implemented for `String`
+   |     |
+   |     required by a bound introduced by this call
+   |
+</code></pre>
+<p>With <code>#[diagnostic::on_unimplemented]</code>, its custom message fills the primary error line, and its custom label is placed on the source output. The original label is still written as help output, and any custom notes are written as well. (These exact details are subject to change.)</p>
+<pre><code>error[E0277]: My Message for `ImportantTrait&lt;i32&gt;` is not implemented for `String`
+  --&gt; src/main.rs:12:18
+   |
+12 |     use_my_trait(String::new());
+   |     ------------ ^^^^^^^^^^^^^ My Label
+   |     |
+   |     required by a bound introduced by this call
+   |
+   = help: the trait `ImportantTrait&lt;i32&gt;` is not implemented for `String`
+   = note: Note 1
+   = note: Note 2
+</code></pre>
+<p>For trait authors, this kind of diagnostic is more useful if you can provide a better hint than just talking about the missing implementation itself. For example, this is an abridged sample from the standard library:</p>
+<pre><code class="language-rust">#[diagnostic::on_unimplemented(
+    message = &quot;the size for values of type `{Self}` cannot be known at compilation time&quot;,
+    label = &quot;doesn't have a size known at compile-time&quot;
+)]
+pub trait Sized {}
+</code></pre>
+<p>For more information, see the reference section on <a href="https://doc.rust-lang.org/nightly/reference/attributes/diagnostics.html#the-diagnostic-tool-attribute-namespace">the <code>diagnostic</code> tool attribute namespace</a>.</p>
+<h3><a href="#asserting-unsafe-preconditions" aria-hidden="true" class="anchor" id="asserting-unsafe-preconditions"></a>Asserting <code>unsafe</code> preconditions</h3>
+<p>The Rust standard library has a number of assertions for the preconditions of <code>unsafe</code> functions, but historically they have only been enabled in <code>#[cfg(debug_assertions)]</code> builds of the standard library to avoid affecting release performance. However, since the standard library is usually compiled and distributed in release mode, most Rust developers weren't ever executing these checks at all.</p>
+<p>Now, the condition for these assertions is delayed until code generation, so they will be checked depending on the user's own setting for debug assertions -- enabled by default in debug and test builds. This change helps users catch undefined behavior in their code, though the details of how much is checked are generally not stable.</p>
+<p>For example, <a href="https://doc.rust-lang.org/std/slice/fn.from_raw_parts.html"><code>slice::from_raw_parts</code></a> requires an aligned non-null pointer. The following use of a purposely-misaligned pointer has undefined behavior, and while if you were unlucky it may have <em>appeared</em> to &quot;work&quot; in the past, the debug assertion can now catch it:</p>
+<pre><code class="language-rust">fn main() {
+    let slice: &amp;[u8] = &amp;[1, 2, 3, 4, 5];
+    let ptr = slice.as_ptr();
+
+    // Create an offset from `ptr` that will always be one off from `u16`'s correct alignment
+    let i = usize::from(ptr as usize &amp; 1 == 0);
+    
+    let slice16: &amp;[u16] = unsafe { std::slice::from_raw_parts(ptr.add(i).cast::&lt;u16&gt;(), 2) };
+    dbg!(slice16);
+}
+</code></pre>
+<pre><code>thread 'main' panicked at library/core/src/panicking.rs:220:5:
+unsafe precondition(s) violated: slice::from_raw_parts requires the pointer to be aligned and non-null, and the total size of the slice not to exceed `isize::MAX`
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+thread caused non-unwinding panic. aborting.
+</code></pre>
+<h3><a href="#deterministic-realignment" aria-hidden="true" class="anchor" id="deterministic-realignment"></a>Deterministic realignment</h3>
+<p>The standard library has a few functions that change the alignment of pointers and slices, but they previously had caveats that made them difficult to rely on in practice, if you followed their documentation precisely. Those caveats primarily existed as a hedge against <code>const</code> evaluation, but they're only stable for non-<code>const</code> use anyway. They are now promised to have consistent runtime behavior according to their actual inputs.</p>
+<ul>
+<li>
+<p><a href="https://doc.rust-lang.org/std/primitive.pointer.html#method.align_offset"><code>pointer::align_offset</code></a> computes the offset needed to change a pointer to the given alignment. It returns <code>usize::MAX</code> if that is not possible, but it was previously permitted to <em>always</em> return <code>usize::MAX</code>, and now that behavior is removed.</p>
+</li>
+<li>
+<p><a href="https://doc.rust-lang.org/std/primitive.slice.html#method.align_to"><code>slice::align_to</code></a> and <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.align_to_mut"><code>slice::align_to_mut</code></a> both transmute slices to an aligned middle slice and the remaining unaligned head and tail slices. These methods now promise to return the largest possible middle part, rather than allowing the implementation to return something less optimal like returning everything as the head slice.</p>
+</li>
+</ul>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/io/struct.Stdin.html#impl-Read-for-%26Stdin"><code>impl Read for &amp;Stdin</code></a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/113833/">Accept non <code>'static</code> lifetimes for several <code>std::error::Error</code> related implementations</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/114655/">Make <code>impl&lt;Fd: AsFd&gt;</code> impl take <code>?Sized</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/struct.Error.html#impl-From%3CTryReserveError%3E-for-Error"><code>impl From&lt;TryReserveError&gt; for io::Error</code></a></li>
+</ul>
+<p>These APIs are now stable in const contexts:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.Barrier.html#method.new"><code>Barrier::new()</code></a></li>
+</ul>
+<h3><a href="#compatibility-notes" aria-hidden="true" class="anchor" id="compatibility-notes"></a>Compatibility notes</h3>
+<ul>
+<li>As <a href="https://blog.rust-lang.org/2024/02/26/Windows-7.html">previously announced</a>, Rust 1.78 has increased its minimum requirement to Windows 10 for the following targets:
+<ul>
+<li><code>x86_64-pc-windows-msvc</code></li>
+<li><code>i686-pc-windows-msvc</code></li>
+<li><code>x86_64-pc-windows-gnu</code></li>
+<li><code>i686-pc-windows-gnu</code></li>
+<li><code>x86_64-pc-windows-gnullvm</code></li>
+<li><code>i686-pc-windows-gnullvm</code></li>
+</ul>
+</li>
+<li>Rust 1.78 has upgraded its bundled LLVM to version 18, completing the announced <a href="https://blog.rust-lang.org/2024/03/30/i128-layout-update.html"><code>u128</code>/<code>i128</code> ABI change</a> for x86-32 and x86-64 targets. Distributors that use their own LLVM older than 18 may still face the calling convention bugs mentioned in that post.</li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>Check out everything that changed in <a href="https://github.com/rust-lang/rust/releases/tag/1.78.0">Rust</a>, <a href="https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-178-2024-05-02">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-178">Clippy</a>.</p>
+<h2><a href="#contributors-to-1780" aria-hidden="true" class="anchor" id="contributors-to-1780"></a>Contributors to 1.78.0</h2>
+<p>Many people came together to create Rust 1.78.0. We couldn't have done it without all of you. <a href="https://thanks.rust-lang.org/rust/1.78.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,183 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2024/11/04/project-goals-2025h1-call-for-proposals.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Call for proposals: Rust 2025h1 project goals | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Call for proposals: Rust 2025h1 project goals | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Call for proposals: Rust 2025h1 project goals | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Call for proposals: Rust 2025h1 project goals" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Call for proposals: Rust 2025h1 project goals</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 4, 2024 &middot; Niko Matsakis
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/leadership-council">Leadership Council</a> 
+    </div>
+
+    <div class="post">
+      <p><strong>As of today, we are officially accepting proposals for Rust Project Goals targeting 2025H1 (the first half of 2025).</strong> If you'd like to participate in the process, or just to follow along, please check out the <a href="https://rust-lang.github.io/rust-project-goals/2025h1/index.html">2025h1 goal page</a>. It includes listings of the goals currently under consideration, more details about the goals program, and instructions for how to submit a goal.</p>
+<h2><a href="#what-is-the-project-goals-program-and-how-does-it-work" aria-hidden="true" class="anchor" id="what-is-the-project-goals-program-and-how-does-it-work"></a>What is the project goals program and how does it work?</h2>
+<p>Every six months, the Rust project commits to a set of goals for the upcoming half-year. The process involves:</p>
+<ul>
+<li>the owner of the goal program (currently me) posts a call for proposals (this post);</li>
+<li>would-be goal owners <a href="https://rust-lang.github.io/rust-project-goals/how_to/propose_a_goal.html">open PRs</a> against the <a href="https://rust-lang.github.io/rust-project-goals/">rust-project-goals</a> repository;</li>
+<li>the goal-program owner gathers feedback on these goals and chooses some of them to be included in the RFC proposing the final slate of goals.</li>
+</ul>
+<p>To get an idea what the final slate of goals looks like, check out <a href="https://github.com/rust-lang/rfcs/pull/3672#issuecomment-2254599176">RFC 3672</a>. The RFC describes a set of goals, designates a few of them as flagship goals, and summarizes the work expected from each team. The RFC is approved by (at least) the leads of each team, effectively committing their team to prove the support that is described.</p>
+<h2><a href="#should-i-submit-a-goal" aria-hidden="true" class="anchor" id="should-i-submit-a-goal"></a>Should I submit a goal?</h2>
+<p>Opening a goal is an indication that you (or your company, etc) is willing to put up the resources needed to make it happen, at least if you get the indicated support from the teams. These resources are typically development time and effort, but they could be funding (in that case, we'd want to identify someone to take up the goal). If you pass that bar, then by all means, yes, open a goal.</p>
+<p>Note though that controversial goals are likely to not be accepted. If you have an idea that you think people won't like, then you should find ways to lower the ask of the teams. For example, maybe the goal should be to perform experiments to help make the case for the idea, rather than jumping straight to implementation.</p>
+<h2><a href="#can-i-still-do-x-even-if-i-dont-submit-a-goal-for-it" aria-hidden="true" class="anchor" id="can-i-still-do-x-even-if-i-dont-submit-a-goal-for-it"></a>Can I still do X, even if I don't submit a goal for it?</h2>
+<p>Yes. Goals are not mandatory for work to proceed. They are a tracking mechanism to help stay on course.</p>
+<h2><a href="#what-have-the-experiences-with-the-goals-program-so-far" aria-hidden="true" class="anchor" id="what-have-the-experiences-with-the-goals-program-so-far"></a>What have the experiences with the goals program so far?</h2>
+<p>The current round has shown positive results so far. Of the 26 total goals, the vast majority have made progress, with only 1 (an orphaned goal) receiving no updates at all. Most goals are still ongoing with 1 completed and 1 not yet complete.</p>
+<p>Here are some quotes from goal owners and Rust maintainers talking about the program:</p>
+<ul>
+<li>&quot;Thank you for leading this goals initiative, I feel like this is blowing a bit of life back into rust as a project.&quot;</li>
+<li>&quot;The project goals provided two benefits for me. First, I could show people not involved in Rust that my work had some support from the Rust Project (e.g., helpful for applications/grants). Second, I got some new contributors from people following my updates and the requests for help I added there.&quot;</li>
+</ul>
+<p>Many in the Rust community have commented that they appreciate the visibility into what the project is doing. Some quotes extracted from Reddit threads:</p>
+<ul>
+<li>&quot;I really appreciate these kinds of little progress updates on the big changes coming to Rust. I personally don't like Zulip and can find the GitHub hard to wade through (so much good work being done!).&quot;</li>
+<li>&quot;[Referring to cargo script] I have vague awareness of having seen the above, but it's not until just now (an confluence of having just seen it again and then wrestling with convenience command scripting) that I'm realizing <strong>how amazing this is</strong>! &quot;</li>
+<li>&quot;Lovely to see this in place, and I'm really thrilled to see that all of the teams have their own smaller goals.&quot;</li>
+</ul>
+<p>Areas for improvement include:</p>
+<ul>
+<li>We have not been effective at finding contributors for the orphaned goal.</li>
+<li>In some cases established owners have not really contributed to the goal or the work to drive the goal and post updates has been done by others. We don't have a clear mechanism for how to address this.</li>
+<li>Goals with multiple owners feels like an anti-pattern; it makes it hard to know who to contact.</li>
+<li>The lang team found that several of the goals to which we promised design meetings have not wound up using them or making much progress. This is not necessarily bad but may also indicate the team overestimated their capacity or that more focus would be useful.</li>
+</ul>
+<h2><a href="#is-the-goals-program-permanent" aria-hidden="true" class="anchor" id="is-the-goals-program-permanent"></a>Is the goals program permanent?</h2>
+<p>Not yet. It's still considered experimental. Presuming that the process we derived the first time around continues to work well, I plan to propose an RFC documenting it and making it a permanent fixture.</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>The Rust Project Goals program is driving progress, increasing transparency, and energizing the community. As we enter the second round, we invite you to contribute your ideas and help shape Rust's future. Whether you're proposing a goal or following along, your engagement is vital to Rust's continued growth and success. Join us in making Rust even better in 2025!</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

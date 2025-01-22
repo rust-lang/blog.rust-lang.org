@@ -1,0 +1,201 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2023/08/30/electing-new-project-directors.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Electing New Project Directors | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Electing New Project Directors | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Electing New Project Directors | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Electing New Project Directors" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Electing New Project Directors</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 30, 2023 &middot; Leadership Council
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/leadership-council">Leadership Council</a> 
+    </div>
+
+    <div class="post">
+      <p>Today we are launching the process to elect new Project Directors to the Rust Foundation Board of Directors.
+As we begin the process, we wanted to spend some time explaining the goals and procedures we will follow.
+We will summarize everything here, but if you would like to you can read the <a href="https://github.com/rust-lang/leadership-council/blob/main/policies/project-director-election-process.md">official process documentation</a>.</p>
+<p>We ask all project members to begin working with their Leadership Council representative to nominate potential Project Directors. See the <a href="#candidate-gathering">Candidate Gathering</a> section for more details. Nominations are due by September 15, 2023.</p>
+<h2><a href="#what-are-project-directors" aria-hidden="true" class="anchor" id="what-are-project-directors"></a>What are Project Directors?</h2>
+<p>The Rust Foundation Board of Directors has five seats reserved for Project Directors.
+These Project Directors serve as representatives of the Rust project itself on the Board.
+Like all Directors, the Project Directors are elected by the entity they represent, which in the case of the Rust Project means they are elected by the Rust Leadership Council.
+Project Directors serve for a term of two years and will have staggered terms.
+This year we will appoint two new directors and next year we will appoint three new directors.</p>
+<p>The current project directors are Jane Losare-Lusby, Josh Stone, Mark Rousskov, Ryan Levick and Tyler Mandry.
+This year, Jane Losare-Lusby and Josh Stone will be rotating out of their roles as Project Directors, so the current elections are to fill their seats.
+We are grateful for the work the Jane and Josh have put in during their terms as Project Directors!</p>
+<p>We want to make sure the Project Directors can effectively represent the project as a whole, so we are soliciting input from the whole project.
+The elections process will go through two phases: Candidate Gathering and Election.
+Read on for more detail about how these work.</p>
+<h2><a href="#candidate-gathering" aria-hidden="true" class="anchor" id="candidate-gathering"></a>Candidate Gathering</h2>
+<p>The first phase is beginning right now.
+In this phase, we are inviting the members of all of the top level Rust teams and their subteams to nominate people who will make good project directors.
+The goal is to bubble these up to the Council through each of the top-level teams.
+You should be hearing from your Council Representative soon with more details, but if not, feel free to reach out to them directly.</p>
+<p>Each team is encouraged to suggest candidates.
+Since we are electing two new directors, it would be ideal for teams to nominate at least two candidates.
+Nominees can be anyone in the project and do not have to be a member of the team who nominates them.</p>
+<p>The candidate gathering process will be open until September 15, at which point each team's Council Representative will share their team's nominations and reasoning with the whole Leadership Council.
+At this point, the Council will confirm with each of the nominees that they are willing to accept the nomination and fill the role of Project Director.
+Then the Council will publish the set of candidates.</p>
+<p>This then starts a ten day period where members of the Rust Project are invited to share feedback on the nominees with the Council.
+This feedback can include reasons why a nominee would make a good project director, or concerns the Council should be aware of.</p>
+<p>The Council will announce the set of nominees by September 19 and the ten day feedback period will last until September 29.
+Once this time has passed, we will move on to the election phase.</p>
+<h2><a href="#election" aria-hidden="true" class="anchor" id="election"></a>Election</h2>
+<p>The Council will meet during the week of October 1 to complete the election process.
+In this meeting we will discuss each candidate and once we have done this the facilitator will propose a set of two of them to be the new Project Directors.
+The facilitator puts this to a vote, and if the Council unanimously agrees with the proposed pair of candidates then the process is completed.
+Otherwise, we will give another opportunity for council members to express their objections and we will continue with another proposal.
+This process repeats until we find two nominees who the Council can unanimously consent to.
+The Council will then confirm these nominees through an official vote.</p>
+<p>Once this is done, we will announce the new Project Directors.
+In addition, we will contact each of the nominees, including those who were not elected, to tell them a little bit more about what we saw as their strengths and opportunities for growth to help them serve better in similar roles in the future.</p>
+<h2><a href="#timeline" aria-hidden="true" class="anchor" id="timeline"></a>Timeline</h2>
+<p>This process will continue through all of September and into October.
+Below are the key dates:</p>
+<ul>
+<li>Candidate nominations due: September 15</li>
+<li>Candidates published: <del>September 19</del> September 22</li>
+<li>Feedback period: <del>September 19 - 29</del> September 22 - October 2</li>
+<li>Election meeting: Week of October 1</li>
+</ul>
+<p>After the election meeting happens, the Rust Leadership Council will announce the results and the new Project Directors will assume their responsibilities.</p>
+<p><em>Edit: we have adjusted the candidate publication date due to delays in getting all the nominees ready.</em></p>
+<h2><a href="#acknowledgements" aria-hidden="true" class="anchor" id="acknowledgements"></a>Acknowledgements</h2>
+<p>A number of people have been involved in designing and launching this election process and we wish to extend a heartfelt thanks to all of them!
+We'd especially like to thank the members of the Project Director Election Proposal Committee: Jane Losare-Lusby, Eric Holk, and Ryan Levick.
+Additionally, many members of the Rust Community have provided feedback and thoughtful discussions that led to significant improvements to the process.
+We are grateful for all of your contributions.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

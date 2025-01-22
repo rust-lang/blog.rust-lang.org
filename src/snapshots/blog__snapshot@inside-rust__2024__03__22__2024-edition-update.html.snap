@@ -1,0 +1,163 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2024/03/22/2024-edition-update.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>2024 Edition Update | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="2024 Edition Update | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="2024 Edition Update | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="2024 Edition Update" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>2024 Edition Update</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 22, 2024 &middot; Eric Huss
+     on behalf of <a href="https://github.com/rust-lang/team/blob/15e99829ee2124b07f740b8befd41c55a46fee91/teams/project-edition-2024.toml">Edition 2024 Project Group</a> 
+    </div>
+
+    <div class="post">
+      <p>This is a reminder to the teams working on the 2024 Edition that implementation work should be <strong>finished by the end of May</strong>. If you have any questions, please let us know on the <a href="https://rust-lang.zulipchat.com/#narrow/stream/268952-edition"><code>#edition</code></a> Zulip stream.</p>
+<h2><a href="#what-we-are-tracking-for-the-edition" aria-hidden="true" class="anchor" id="what-we-are-tracking-for-the-edition"></a>What we are tracking for the Edition</h2>
+<p>The following is a list of changes we are tracking for inclusion in the Edition. This list is not final, and may change in the future.</p>
+<ul>
+<li>Change the <a href="https://doc.rust-lang.org/nightly/rustc/lints/listing/allowed-by-default.html#unsafe-op-in-unsafe-fn"><code>unsafe_op_in_unsafe_fn</code></a> lint to be warn-by-default. This is implemented, see <a href="https://doc.rust-lang.org/nightly/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html">docs</a>.</li>
+<li>Remove <code>RustcEncodable</code> &amp; <code>RustcDecodable</code> from the 2024 prelude. This is waiting for the implementation to be approved, and for automatic migration. See <a href="https://github.com/rust-lang/rust/pull/116016">#116016</a>.</li>
+<li>Include <code>Future</code> and <code>IntoFuture</code> in the 2024 prelude. This is implemented, and waiting for automatic migration support. See <a href="https://doc.rust-lang.org/nightly/edition-guide/rust-2024/prelude.html">docs</a> and <a href="https://github.com/rust-lang/rust/issues/121042#issuecomment-1942181209">#121042</a>.</li>
+<li>Reserve the <code>gen</code> keyword. This is waiting for final approval, and the implementation review. See <a href="https://github.com/rust-lang/rfcs/pull/3513">RFC #3513</a>.</li>
+<li>RPIT lifetime capture. This is partially implemented, but is waiting on final design for precise capturing. See <a href="https://rust-lang.github.io/rfcs/3498-lifetime-capture-rules-2024.html">RFC #3498</a> and <a href="https://github.com/rust-lang/rust/issues/117587">#117587</a>.</li>
+<li>Macro matcher fragment specifier policy. This is a policy change and does not have an implementation. See <a href="https://rust-lang.github.io/rfcs/3531-macro-fragment-policy.html">RFC #3531</a>.</li>
+<li>Disallow references to <code>static mut</code>. This is implemented, though there is uncertainty about how migration should work, how to communicate to users how to update their code, and whether or not this should cover hidden references. See <a href="https://doc.rust-lang.org/nightly/edition-guide/rust-2024/static-mut-references.html">docs</a> and <a href="https://github.com/rust-lang/rust/issues/114447">#114447</a>.</li>
+<li>New range types. This is waiting on the design considerations for migration. See <a href="https://github.com/rust-lang/rfcs/pull/3550">RFC #3550</a>.</li>
+<li>Cargo: Remove implicit features. Development of this is underway. See <a href="https://rust-lang.github.io/rfcs/3491-remove-implicit-features.html">RFC #3491</a>.</li>
+<li>Public/private dependencies. This is partially implemented, though there are some changes needed on the rules for determining visibility. See <a href="https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html">RFC #3516</a>.</li>
+<li>Rustfmt: Enable <code>overflow_delimited_expr</code> by default. This is not yet implemented. See <a href="https://github.com/rust-lang/rust/pull/114764">#114764</a>.</li>
+</ul>
+<h2><a href="#what-is-an-edition" aria-hidden="true" class="anchor" id="what-is-an-edition"></a>What is an Edition?</h2>
+<p>Editions are a mechanism to introduce changes that would otherwise be backwards incompatible while still retaining compatibility with older releases. Editions are opt-in and designed to allow projects on different Editions to remain compatible with one another. More information may be found in the <a href="https://doc.rust-lang.org/nightly/edition-guide/editions/index.html">Edition Guide</a>.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

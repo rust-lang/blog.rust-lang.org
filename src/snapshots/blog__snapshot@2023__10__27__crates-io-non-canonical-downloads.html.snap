@@ -1,0 +1,179 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2023/10/27/crates-io-non-canonical-downloads.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>crates.io: Dropping support for non-canonical downloads | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="crates.io: Dropping support for non-canonical downloads | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="crates.io: Dropping support for non-canonical downloads | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="crates.io: Dropping support for non-canonical downloads" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>crates.io: Dropping support for non-canonical downloads</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 27, 2023 &middot; Tobias Bieniek
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/crates-io">the crates.io team</a> 
+    </div>
+
+    <div class="post">
+      <h2><a href="#tldr" aria-hidden="true" class="anchor" id="tldr"></a>TL;DR</h2>
+<ul>
+<li>We want to improve the reliability and performance of crate downloads.</li>
+<li>&quot;Non-canonical downloads&quot; (that use URLs containing hyphens or underscores where the crate published uses the opposite) are blocking these plans.</li>
+<li>On 2023-11-20 support for &quot;non-canonical downloads&quot; will be disabled.</li>
+<li>cargo users are unaffected.</li>
+</ul>
+<h2><a href="#what-are-non-canonical-downloads" aria-hidden="true" class="anchor" id="what-are-non-canonical-downloads"></a>What are &quot;non-canonical downloads&quot;?</h2>
+<p>The &quot;non-canonical downloads&quot; feature allows everyone to download the <code>serde_derive</code> crate from <a href="https://crates.io/api/v1/crates/serde_derive/1.0.189/download">https://crates.io/api/v1/crates/serde_derive/1.0.189/download</a>, but also from <a href="https://crates.io/api/v1/crates/SERDE-derive/1.0.189/download">https://crates.io/api/v1/crates/SERDE-derive/1.0.189/download</a>, where the underscore was replaced with a hyphen (crates.io normalizes underscores and hyphens to be the same for uniqueness purposes, so it isn't possible to publish a crate named <code>serde-derive</code> because <code>serde_derive</code> exists) and parts of the crate name are using uppercase characters. The same also works vice versa, if the canonical crate name uses hyphens and the download URL uses underscores instead. It even works with any other combination for crates that have multiple such characters (please don't mix them…!).</p>
+<h2><a href="#why-remove-it" aria-hidden="true" class="anchor" id="why-remove-it"></a>Why remove it?</h2>
+<p>Supporting such non-canonical download requests means that the crates.io server needs to perform a database lookup for every download request to figure out the canonical crate name. The canonical crate name is then used to construct a download URL and the client is HTTP-redirected to that URL.</p>
+<p>While we have introduced a caching layer some time ago to address some of the performance concerns, having all download requests go through our backend servers has still started to become problematic and at the current rate of growth will not become any easier in the future.</p>
+<p>Having to support &quot;non-canonical downloads&quot; however prevents us from using CDNs directly for the download requests, so if we can remove support for non-canonical download requests, it will unlock significant performance and reliability gains.</p>
+<h2><a href="#who-is-using-non-canonical-downloads" aria-hidden="true" class="anchor" id="who-is-using-non-canonical-downloads"></a>Who is using &quot;non-canonical downloads&quot;?</h2>
+<p><code>cargo</code> always uses the canonical crate name from the package index to construct the corresponding download URLs. If support was removed for this on the crates.io side then cargo would still work exactly the same as before.</p>
+<p>Looking at the crates.io request logs, the following user-agents are currently relying on &quot;non-canonical downloads&quot; support:</p>
+<ul>
+<li>cargo-binstall/1.1.2</li>
+<li>Faraday v0.17.6</li>
+<li>Go-http-client/2.0</li>
+<li>GNU Guile</li>
+<li>python-requests/2.31.0</li>
+</ul>
+<p>Three of these are just generic HTTP client libraries. <a href="https://www.gnu.org/software/guile/">GNU Guile</a> is apparently a programming language, so most likely this is also a generic user-agent from a custom user program.</p>
+<p><a href="https://github.com/cargo-bins/cargo-binstall"><code>cargo-binstall</code></a> is a tool enabling installation of binary artifacts of crates. The maintainer is already aware of the upcoming change and confirmed that more recent versions of <code>cargo-binstall</code> should not be affected by this change.</p>
+<p>We recommend that any scripts relying on non-canonical downloads be adjusted to use the canonical names from the package index, the database dump, or the crates.io API instead. If you don't know which data source is best suited for you, we welcome you to take a look at <a href="https://crates.io/data-access">the crates.io data access page</a>.</p>
+<h2><a href="#what-is-the-plan" aria-hidden="true" class="anchor" id="what-is-the-plan"></a>What is the plan?</h2>
+<ol>
+<li><strong>Today:</strong> Announce the removal of support for non-canonical downloads on the main Rust blog.</li>
+<li><strong>2023-11-20:</strong> Disable support for non-canonical downloads and return a migration error message instead, to alert remaining users of this feature of the need to migrate. This still needs to put load on the application to detect a request is using a non-canonical download URL.</li>
+<li><strong>2023-12-18:</strong> Return a regular 404 error instead of the migration error message, allowing us to get rid of (parts of) the database query.</li>
+</ol>
+<p>Note that we will still need the database query for download counting purposes for now. We have plans to remove this requirement as well, but those efforts are blocked by us still supporting non-canonical downloads.</p>
+<p>If you want to follow the progress on implementing these changes or if you have comments you can subscribe to the corresponding <a href="https://github.com/rust-lang/crates.io/issues/7341">tracking issue</a>. Related discussions are also happening on the <a href="https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io/topic/non-canonical.20downloads">crates.io Zulip stream</a>.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

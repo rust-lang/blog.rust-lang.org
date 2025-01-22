@@ -1,0 +1,347 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2023/11/09/parallel-rustc.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Faster compilation with the parallel front-end in nightly | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Faster compilation with the parallel front-end in nightly | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Faster compilation with the parallel front-end in nightly | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Faster compilation with the parallel front-end in nightly" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Faster compilation with the parallel front-end in nightly</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 9, 2023 &middot; Nicholas Nethercote
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler#Parallel%20rustc%20working%20group">The Parallel Rustc Working Group</a> 
+    </div>
+
+    <div class="post">
+      <p>The Rust compiler's front-end can now use parallel execution to significantly
+reduce compile times. To try it, run the nightly compiler with the <code>-Z threads=8</code> option. This feature is currently experimental, and we aim to ship
+it in the stable compiler in 2024.</p>
+<p>Keep reading to learn why a parallel front-end is needed and how it works, or
+just skip ahead to the <a href="parallel-rustc.html#how-to-use-it">How to use it</a>
+section.</p>
+<h2><a href="#compile-times-and-parallelism" aria-hidden="true" class="anchor" id="compile-times-and-parallelism"></a>Compile times and parallelism</h2>
+<p>Rust compile times are a perennial concern. The <a href="https://www.rust-lang.org/governance/teams/compiler#Compiler%20performance%20working%20group">Compiler Performance Working
+Group</a>
+has continually improved compiler performance for several years. For example,
+in the first 10 months of 2023, there were mean reductions in compile time of
+<a href="https://perf.rust-lang.org/compare.html?start=2023-01-01&amp;end=2023-10-31&amp;stat=wall-time&amp;nonRelevant=true">13%</a>,
+in peak memory use of
+<a href="https://perf.rust-lang.org/compare.html?start=2023-01-01&amp;end=2023-10-31&amp;stat=max-rss&amp;nonRelevant=true">15%</a>,
+and in binary size of
+<a href="https://perf.rust-lang.org/compare.html?start=2023-01-01&amp;end=2023-10-31&amp;stat=size%3Alinked_artifact&amp;nonRelevant=true">7%</a>,
+as measured by our performance suite.</p>
+<p>However, at this point the compiler has been heavily optimized and new
+improvements are hard to find. There is no low-hanging fruit remaining.</p>
+<p>But there is one piece of large but high-hanging fruit: parallelism. Current
+Rust compiler users benefit from two kinds of parallelism, and the newly
+parallel front-end adds a third kind.</p>
+<h3><a href="#existing-interprocess-parallelism" aria-hidden="true" class="anchor" id="existing-interprocess-parallelism"></a>Existing interprocess parallelism</h3>
+<p>When you compile a Rust program, Cargo launches multiple rustc processes,
+compiling multiple crates in parallel. This works well. Try compiling a large
+Rust program with the <code>-j1</code> flag to disable this parallelization and it will
+take a lot longer than normal.</p>
+<p>You can visualise this parallelism if you build with Cargo's
+<a href="https://doc.rust-lang.org/cargo/reference/timings.html"><code>--timings</code></a> flag,
+which produces a chart showing how the crates are compiled. The following image
+shows the timeline when building <a href="https://crates.io/crates/ripgrep">ripgrep</a> on
+a machine with 28 virtual cores.</p>
+<p><img src="../../../images/2023-11-09-parallel-rustc/cargo-build-timings.png" alt="cargo build --timings output when compiling ripgrep" /></p>
+<p>There are 60 horizontal lines, each one representing a distinct process. Their
+durations range from a fraction of a second to multiple seconds. Most of them
+are rustc, and the few orange ones are build scripts. The first twenty processes all
+start at the same time. This is possible because there are no dependencies
+between the relevant crates. But further down the graph, parallelism reduces as
+crate dependencies increase. Although the compiler can overlap compilation of
+dependent crates somewhat thanks to a feature called <a href="https://github.com/rust-lang/rust/issues/60988">pipelined
+compilation</a>, there is much
+less parallel execution happening towards the end of compilation, and this is
+typical for large Rust programs. Interprocess parallelism is not enough to take
+full advantage of many cores. For more speed, we need parallelism within each process.</p>
+<h3><a href="#existing-intraprocess-parallelism-the-back-end" aria-hidden="true" class="anchor" id="existing-intraprocess-parallelism-the-back-end"></a>Existing intraprocess parallelism: the back-end</h3>
+<p>The compiler is split into two halves: the front-end and the back-end.</p>
+<p>The front-end does many things, including parsing, type checking, and borrow
+checking. Until this week, it could not use parallel execution.</p>
+<p>The back-end performs code generation. It generates code in chunks called
+&quot;codegen units&quot; and then LLVM processes these in parallel. This is a form of
+coarse-grained parallelism.</p>
+<p>We can visualize the difference between the serial front-end and the parallel
+back-end. The following image shows the output of a profiler called
+<a href="https://github.com/mstange/samply/">Samply</a> measuring rustc as it does a
+release build of the final crate in Cargo. The image is superimposed with
+markers that indicate front-end and back-end execution.</p>
+<p><img src="../../../images/2023-11-09-parallel-rustc/samply-serial.png" alt="Samply output when compiling Cargo, serial" /></p>
+<p>Each horizontal line represents a thread. The main thread is labelled &quot;rustc&quot;
+and is shown at the bottom. It is busy for most of the execution. The other 16
+threads are LLVM threads, labelled &quot;opt cgu.00&quot; through to &quot;opt cgu.15&quot;. There
+are 16 threads because 16 is the default number of codegen units for a release
+build.</p>
+<p>There are several things worth noting.</p>
+<ul>
+<li>Front-end execution takes 10.2 seconds.</li>
+<li>Back-end execution takes 6.2 seconds, and the LLVM threads are running
+for 5.9 seconds of that.</li>
+<li>The parallel code generation is highly effective. Imagine if all those LLVM
+executed one after another!</li>
+<li>Even though there are 16 LLVM threads, at no point are all 16 executing at
+the same time, despite this being run on a machine with 28 cores. (The peak
+is 14 or 15.) This is because the main thread translates its internal code
+representation (MIR) to LLVM's code representation (LLVM IR) in serial. This
+takes a brief period for each codegen unit, and explains the staircase shape
+on the left-hand side of the code generation threads. There is some room for
+improvement here.</li>
+<li>The front-end is entirely serial. There is a lot of room for improvement
+here.</li>
+</ul>
+<h3><a href="#new-intraprocess-parallelism-the-front-end" aria-hidden="true" class="anchor" id="new-intraprocess-parallelism-the-front-end"></a>New intraprocess parallelism: the front-end</h3>
+<p>The front-end is now capable of parallel execution. It uses
+<a href="https://crates.io/crates/rayon">Rayon</a> to perform compilation tasks using
+fine-grained parallelism. Many data structures are synchronized by mutexes and
+read-write locks, atomic types are used where appropriate, and many front-end
+operations are made parallel. The addition of parallelism was done by modifying
+a relatively small number of key points in the code. The vast majority of the
+front-end code did not need to be changed.</p>
+<p>When the parallel front-end is enabled and configured to use eight threads, we
+get the following Samply profile when compiling the same example as before.</p>
+<p><img src="../../../images/2023-11-09-parallel-rustc/samply-parallel.png" alt="Samply output when compiling Cargo, parallel" /></p>
+<p>Again, there are several things worth noting.</p>
+<ul>
+<li>Front-end execution takes 5.9 seconds (down from 10.2 seconds).</li>
+<li>Back-end execution takes 5.3 seconds (down from 6.2 seconds), and the LLVM
+threads are running for 4.9 seconds of that (down from 5.9 seconds).</li>
+<li>There are seven additional threads labelled &quot;rustc&quot; operating in the
+front-end. The reduced front-end time shows they are reasonably effective,
+but the thread utilization is patchy, with the eight threads all having
+periods of inactivity. There is room for significant improvement here.</li>
+<li>Eight of the LLVM threads start at the same time. This is because the eight
+&quot;rustc&quot; threads create the LLVM IR for eight codegen units in parallel. (For
+seven of those threads that is the only work they do in the back-end.) After
+that, the staircase effect returns because only one &quot;rustc&quot; thread does LLVM
+IR generation while seven or more LLVM threads are active. If the number of
+threads used by the front-end was changed to 16 the staircase shape would
+disappear entirely, though in this case the final execution time would barely
+change.</li>
+</ul>
+<h3><a href="#putting-it-all-together" aria-hidden="true" class="anchor" id="putting-it-all-together"></a>Putting it all together</h3>
+<p>Rust compilation has long benefited from interprocess parallelism, via Cargo,
+and from intraprocess parallelism in the back-end. It can now also benefit from
+intraprocess parallelism in the front-end.</p>
+<p>You might wonder how interprocess parallelism and intraprocess parallelism
+interact. If we have 20 parallel rustc invocations and each one can have up to
+16 threads running, could we end up with hundreds of threads on a machine with
+only tens of cores, resulting in inefficient execution as the OS tries its best
+to schedule them?</p>
+<p>Fortunately no. The compiler uses the <a href="https://www.gnu.org/software/make/manual/html_node/POSIX-Jobserver.html">jobserver
+protocol</a>
+to limit the number of threads it creates. If a lot of interprocess parallelism
+is occuring, intraprocess parallelism will be limited appropriately, and
+the number of threads will not exceed the number of cores.</p>
+<h2><a href="#how-to-use-it" aria-hidden="true" class="anchor" id="how-to-use-it"></a>How to use it</h2>
+<p>The nightly compiler is now <a href="https://github.com/rust-lang/rust/pull/117435">shipping with the parallel front-end
+enabled</a>. However, <strong>by default
+it runs in single-threaded mode</strong> and won't reduce compile times.</p>
+<p>Keen users can opt into multi-threaded mode with the <code>-Z threads</code> option. For
+example:</p>
+<pre><code>$ RUSTFLAGS=&quot;-Z threads=8&quot; cargo build --release
+</code></pre>
+<p>Alternatively, to opt in from a
+<a href="https://doc.rust-lang.org/cargo/reference/config.html">config.toml</a> file (for
+one or more projects), add these lines:</p>
+<pre><code>[build]
+rustflags = [&quot;-Z&quot;, &quot;threads=8&quot;]
+</code></pre>
+<p>It may be surprising that single-threaded mode is the default. Why parallelize
+the front-end and then run it in single-threaded mode? The answer is simple:
+caution. This is a big change! The parallel front-end has a lot of new code.
+Single-threaded mode exercises most of the new code, but excludes the
+possibility of threading bugs such as deadlocks that can affect multi-threaded
+mode. Even in Rust, parallel programs are harder to write correctly than serial
+programs. For this reason the parallel front-end also won't be shipped in beta
+or stable releases for some time.</p>
+<h3><a href="#performance-effects" aria-hidden="true" class="anchor" id="performance-effects"></a>Performance effects</h3>
+<p>When the parallel front-end is run in single-threaded mode, compilation times
+are typically 0% to 2% slower than with the serial front-end. This should be
+barely noticeable.</p>
+<p>When the parallel front-end is run in multi-threaded mode with <code>-Z threads=8</code>,
+our <a href="https://github.com/rust-lang/compiler-team/issues/681">measurements on real-world
+code</a> show that compile
+times can be reduced by up to 50%, though the effects vary widely and depend on
+the characteristics of the code and its build configuration. For example, dev
+builds are likely to see bigger improvements than release builds because
+release builds usually spend more time doing optimizations in the back-end. A
+small number of cases compile more slowly in multi-threaded mode than
+single-threaded mode. These are mostly tiny programs that already compile
+quickly.</p>
+<p>We recommend eight threads because this is the configuration we have tested the
+most and it is known to give good results. Values lower than eight will see
+smaller benefits, but are appropriate if your hardware has fewer than eight
+cores. Values greater than eight will give diminishing returns and may even
+give worse performance.</p>
+<p>If a 50% improvement seems low when going from one to eight threads, recall
+from the explanation above that the front-end only accounts for part of compile
+times, and the back-end is already parallel. You can't beat <a href="https://en.wikipedia.org/wiki/Amdahl%27s_law">Amdahl's
+Law</a>.</p>
+<p>Memory usage can increase significantly in multi-threaded mode. We have seen
+increases of up to 35%. This is unsurprising given that various parts of
+compilation, each of which requires a certain amount of memory, are now
+executing in parallel.</p>
+<h3><a href="#correctness" aria-hidden="true" class="anchor" id="correctness"></a>Correctness</h3>
+<p>Reliability in single-threaded mode should be high.</p>
+<p>In multi-threaded mode there are some known bugs, including deadlocks. If
+compilation hangs, you have probably hit one of them.</p>
+<p>The binaries produced by the compiler are expected to be the same no matter
+which front-end is being used. Any differences will be considered a bug.</p>
+<h3><a href="#feedback" aria-hidden="true" class="anchor" id="feedback"></a>Feedback</h3>
+<p>If you have any problems with the parallel front-end, please <a href="https://github.com/rust-lang/rust/labels/WG-compiler-parallel">check the issues
+marked with the &quot;WG-compiler-parallel&quot;
+label</a>.
+If your problem does not match any of the existing issues, please file a new
+issue.</p>
+<p>For more general feedback, please start a discussion on the <a href="https://rust-lang.zulipchat.com/#narrow/stream/187679-t-compiler.2Fwg-parallel-rustc">wg-parallel-rustc
+Zulip
+channel</a>.
+We are particularly interested to hear the performance effects on the code you
+care about.</p>
+<h1><a href="#future-work" aria-hidden="true" class="anchor" id="future-work"></a>Future work</h1>
+<p>We are working to improve the performance of the parallel front-end. As the
+graphs above showed, there is room to improve the utilization of the threads in
+the front-end. We are also ironing out the remaining bugs in multi-threaded
+mode.</p>
+<p>We aim to stabilize the <code>-Z threads</code> option and ship the parallel front-end
+running by default in multi-threaded mode on stable releases in 2024.</p>
+<h1><a href="#acknowledgments" aria-hidden="true" class="anchor" id="acknowledgments"></a>Acknowledgments</h1>
+<p>The parallel front-end has been under development for a long time. It was
+started by <a href="https://github.com/Zoxc/">@Zoxc</a>, who also did most of the work for
+several years. After a period of inactivity, the project was revived this year
+by <a href="https://github.com/sparrowlii/">@SparrowLii</a>, who led the effort to get it
+shipped. Other members of the Parallel Rustc Working Group have also been
+involved with reviews and other activities. Many thanks to everyone involved.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

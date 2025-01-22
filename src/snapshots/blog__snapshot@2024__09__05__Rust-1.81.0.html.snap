@@ -1,0 +1,267 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/09/05/Rust-1.81.0.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.81.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Announcing Rust 1.81.0 | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Announcing Rust 1.81.0 | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Announcing Rust 1.81.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.81.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 5, 2024 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.81.0. Rust is a programming language empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via <code>rustup</code>, you can get 1.81.0 with:</p>
+<pre><code class="language-console">$ rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website, and check out the <a href="https://doc.rust-lang.org/nightly/releases.html#version-1810-2024-09-05">detailed release notes for 1.81.0</a>.</p>
+<p>If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (<code>rustup default beta</code>) or the nightly channel (<code>rustup default nightly</code>). Please <a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you might come across!</p>
+<h2><a href="#whats-in-1810-stable" aria-hidden="true" class="anchor" id="whats-in-1810-stable"></a>What's in 1.81.0 stable</h2>
+<h3><a href="#coreerrorerror" aria-hidden="true" class="anchor" id="coreerrorerror"></a><code>core::error::Error</code></h3>
+<p>1.81 stabilizes the <code>Error</code> trait in <code>core</code>, allowing usage of the trait in
+<code>#![no_std]</code> libraries. This primarily enables the wider Rust ecosystem to
+standardize on the same Error trait, regardless of what environments the
+library targets.</p>
+<h3><a href="#new-sort-implementations" aria-hidden="true" class="anchor" id="new-sort-implementations"></a>New sort implementations</h3>
+<p>Both the stable and unstable sort implementations in the standard library have
+been updated to new algorithms, improving their runtime performance and
+compilation time.</p>
+<p>Additionally, both of the new sort algorithms try to detect incorrect
+implementations of <code>Ord</code> that prevent them from being able to produce a
+meaningfully sorted result, and will now panic on such cases rather than
+returning effectively randomly arranged data.  Users encountering these panics
+should audit their ordering implementations to ensure they satisfy the
+requirements documented in <a href="https://doc.rust-lang.org/nightly/std/cmp/trait.PartialOrd.html">PartialOrd</a> and <a href="https://doc.rust-lang.org/nightly/std/cmp/trait.Ord.html">Ord</a>.</p>
+<h3><a href="#expectlint" aria-hidden="true" class="anchor" id="expectlint"></a><code>#[expect(lint)]</code></h3>
+<p>1.81 stabilizes a new lint level, <code>expect</code>, which allows explicitly noting that
+a particular lint <em>should</em> occur, and warning if it doesn't.  The intended use
+case for this is temporarily silencing a lint, whether due to lint
+implementation bugs or ongoing refactoring, while wanting to know when the lint
+is no longer required.</p>
+<p>For example, if you're moving a code base to comply with a new restriction
+enforced via a Clippy lint like
+<a href="https://rust-lang.github.io/rust-clippy/stable/index.html#/undocumented_unsafe_blocks"><code>undocumented_unsafe_blocks</code></a>,
+you can use <code>#[expect(clippy::undocumented_unsafe_blocks)]</code> as you transition,
+ensuring that once all unsafe blocks are documented you can opt into denying
+the lint to enforce it.</p>
+<p>Clippy also has two lints to enforce the usage of this feature and help with
+migrating existing attributes:</p>
+<ul>
+<li><a href="https://rust-lang.github.io/rust-clippy/master/index.html#/allow_attributes"><code>clippy::allow_attributes</code></a> to restrict allow attributes in favor of <code>#[expect]</code> or to migrate <code>#[allow]</code> attributes to <code>#[expect]</code></li>
+<li><a href="https://rust-lang.github.io/rust-clippy/master/index.html#/allow_attributes_without_reason"><code>clippy::allow_attributes_without_reason</code></a> To require a reason for <code>#[allow]</code> attributes</li>
+</ul>
+<h3><a href="#lint-reasons" aria-hidden="true" class="anchor" id="lint-reasons"></a>Lint reasons</h3>
+<p>Changing the lint level is often done for some particular reason. For example,
+if code runs in an environment without floating point support, you could use
+Clippy to lint on such usage with <code>#![deny(clippy::float_arithmetic)]</code>.
+However, if a new developer to the project sees this lint fire, they need to
+look for (hopefully) a comment on the deny explaining why it was added. With
+Rust 1.81, they can be informed directly in the compiler message:</p>
+<pre><code class="language-text">error: floating-point arithmetic detected
+ --&gt; src/lib.rs:4:5
+  |
+4 |     a + b
+  |     ^^^^^
+  |
+  = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#float_arithmetic
+  = note: no hardware float support
+note: the lint level is defined here
+ --&gt; src/lib.rs:1:9
+  |
+1 | #![deny(clippy::float_arithmetic, reason = &quot;no hardware float support&quot;)]
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^
+</code></pre>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/core/error/index.html"><code>core::error</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/hint/fn.assert_unchecked.html"><code>hint::assert_unchecked</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/fs/fn.exists.html"><code>fs::exists</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicBool.html#method.fetch_not"><code>AtomicBool::fetch_not</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/time/struct.Duration.html#method.abs_diff"><code>Duration::abs_diff</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/struct.IoSlice.html#method.advance"><code>IoSlice::advance</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/struct.IoSlice.html#method.advance_slices"><code>IoSlice::advance_slices</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/struct.IoSliceMut.html#method.advance"><code>IoSliceMut::advance</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/struct.IoSliceMut.html#method.advance_slices"><code>IoSliceMut::advance_slices</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/panic/struct.PanicHookInfo.html"><code>PanicHookInfo</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/panic/struct.PanicInfo.html#method.message"><code>PanicInfo::message</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/panic/struct.PanicMessage.html"><code>PanicMessage</code></a></li>
+</ul>
+<p>These APIs are now stable in const contexts:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/core/char/fn.from_u32_unchecked.html"><code>char::from_u32_unchecked</code></a> (function)</li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.char.html#method.from_u32_unchecked"><code>char::from_u32_unchecked</code></a> (method)</li>
+<li><a href="https://doc.rust-lang.org/stable/core/ffi/c_str/struct.CStr.html#method.count_bytes"><code>CStr::count_bytes</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ffi/c_str/struct.CStr.html#method.from_ptr"><code>CStr::from_ptr</code></a></li>
+</ul>
+<h3><a href="#compatibility-notes" aria-hidden="true" class="anchor" id="compatibility-notes"></a>Compatibility notes</h3>
+<h4><a href="#split-panic-hook-and-panic-handler-arguments" aria-hidden="true" class="anchor" id="split-panic-hook-and-panic-handler-arguments"></a>Split panic hook and panic handler arguments</h4>
+<p>We have renamed <a href="https://doc.rust-lang.org/stable/std/panic/type.PanicInfo.html"><code>std::panic::PanicInfo</code></a> to <a href="https://doc.rust-lang.org/stable/std/panic/struct.PanicHookInfo.html"><code>std::panic::PanicHookInfo</code></a>. The old
+name will continue to work as an alias, but will result in a deprecation
+warning starting in Rust 1.82.0.</p>
+<p><code>core::panic::PanicInfo</code> will remain unchanged, however, as this is now a
+<em>different type</em>.</p>
+<p>The reason is that these types have different roles:
+<code>std::panic::PanicHookInfo</code> is the argument to the <a href="https://doc.rust-lang.org/stable/std/panic/fn.set_hook.html">panic hook</a> in std
+context (where panics can have an arbitrary payload), while
+<code>core::panic::PanicInfo</code> is the argument to the
+<a href="https://doc.rust-lang.org/nomicon/panic-handler.html"><code>#[panic_handler]</code></a> in
+<code>#![no_std]</code> context (where panics always carry a formatted <em>message</em>). Separating
+these types allows us to add more useful methods to these types, such as
+<a href="https://doc.rust-lang.org/stable/std/panic/struct.PanicHookInfo.html#method.payload_as_str"><code>std::panic::PanicHookInfo::payload_as_str()</code></a> and
+<a href="https://doc.rust-lang.org/stable/core/panic/struct.PanicInfo.html#method.message"><code>core::panic::PanicInfo::message()</code></a>.</p>
+<h4><a href="#abort-on-uncaught-panics-in-extern-c-functions" aria-hidden="true" class="anchor" id="abort-on-uncaught-panics-in-extern-c-functions"></a>Abort on uncaught panics in <code>extern &quot;C&quot;</code> functions</h4>
+<p>This completes the transition started in <a href="https://blog.rust-lang.org/2023/07/13/Rust-1.71.0.html#c-unwind-abi">1.71</a>,
+which added dedicated <code>&quot;C-unwind&quot;</code> (amongst other <code>-unwind</code> variants) ABIs for
+when unwinding across the ABI boundary is expected. As of 1.81, the non-unwind
+ABIs (e.g., <code>&quot;C&quot;</code>) will now abort on uncaught unwinds, closing the longstanding
+soundness problem.</p>
+<p>Programs relying on unwinding should transition to using <code>-unwind</code> suffixed ABI
+variants.</p>
+<h4><a href="#wasi-01-target-naming-changed" aria-hidden="true" class="anchor" id="wasi-01-target-naming-changed"></a>WASI 0.1 target naming changed</h4>
+<p>Usage of the <code>wasm32-wasi</code> target (which targets WASI 0.1) will now issue a
+compiler warning and request users switch to the <code>wasm32-wasip1</code> target
+instead. Both targets are the same, <code>wasm32-wasi</code> is only being renamed, and
+this <a href="https://blog.rust-lang.org/2024/04/09/updates-to-rusts-wasi-targets.html">change to the WASI target</a>
+is being done to enable removing <code>wasm32-wasi</code> in January 2025.</p>
+<h4><a href="#fixes-cve-2024-43402" aria-hidden="true" class="anchor" id="fixes-cve-2024-43402"></a>Fixes CVE-2024-43402</h4>
+<p><code>std::process::Command</code> now correctly escapes arguments when invoking batch
+files on Windows in the presence of trailing whitespace or periods (which are
+ignored and stripped by Windows).</p>
+<p>See more details in the previous <a href="https://blog.rust-lang.org/2024/09/04/cve-2024-43402.html">announcement of this change</a>.</p>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>Check out everything that changed in <a href="https://github.com/rust-lang/rust/releases/tag/1.81.0">Rust</a>, <a href="https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-181-2024-09-05">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-181">Clippy</a>.</p>
+<h2><a href="#contributors-to-1810" aria-hidden="true" class="anchor" id="contributors-to-1810"></a>Contributors to 1.81.0</h2>
+<p>Many people came together to create Rust 1.81.0. We couldn't have done it without all of you. <a href="https://thanks.rust-lang.org/rust/1.81.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

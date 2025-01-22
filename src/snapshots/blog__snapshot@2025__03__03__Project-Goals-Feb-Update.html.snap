@@ -1,0 +1,1171 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2025/03/03/Project-Goals-Feb-Update.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>February Project Goals Update | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="February Project Goals Update | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="February Project Goals Update | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="February Project Goals Update" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>February Project Goals Update</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 3, 2025 &middot; Rémy Rakic, Niko Matsakis, Santiago Pastorino
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/goals">Goals Team</a> 
+    </div>
+
+    <div class="post">
+      <p>This is the first Project Goals update for the new 2025h1 period. For the first 6 months of 2025, the Rust project will work towards a <a href="https://rust-lang.github.io/rust-project-goals/2025h1/goals.html">slate of 39 project goals</a>, with 3 of them designed as <a href="https://rust-lang.github.io/rust-project-goals/2025h1/goals.html#flagship-goals">Flagship Goals</a>. This post provides selected updates on our progress towards these goals (or, in some cases, lack thereof). The full details for any particular goal are available in its associated <a href="https://github.com/rust-lang/rust-project-goals/issues?q=is%3Aissue%20state%3Aopen%20label%3AC-tracking-issue">tracking issue on the rust-project-goals repository</a>.</p>
+<h2><a href="#flagship-goals" aria-hidden="true" class="anchor" id="flagship-goals"></a>Flagship goals</h2>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/105'><strong>Bring the Async Rust experience closer to parity with sync Rust</strong></a></div>
+    <div style="flex: initial;"><progress value="5" max="34"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<p><strong>Why this goal?</strong> This work continues our drive to improve support for async programming in Rust. In 2024H2 we stabilized async closures; explored the generator design space; and began work on the <code>dynosaur</code> crate, an experimental proc-macro to provide dynamic dispatch for async functions in traits. In 2025H1 <a href="https://rust-lang.github.io/rust-project-goals/2025h1/async.html">our plan</a> is to deliver (1) improved support for async-fn-in-traits, completely subsuming the functionality of the <a href="https://crates.io/crates/async-trait"><code>async-trait</code> crate</a>; (2) progress towards sync and async generators, simplifying the creation of iterators and async data streams; (3) and improve the ergonomics of <code>Pin</code>, making lower-level async coding more approachable. These items together start to unblock the creation of the next generation of async libraries in the wider ecosystem, as progress there has been blocked on a stable solution for async traits and streams.</p>
+<p><strong>What has happened?</strong> The biggest news is that Rust 1.85 is stable and includes two major features that impact Async Rust. The first is <a href="https://blog.rust-lang.org/inside-rust/2024/08/09/async-closures-call-for-testing.html">async closures</a>, which has been on many people's wish lists for a long time and was expertly moved forward by <a href="https://github.com/compiler-errors">@compiler-errors</a> over the last year.</p>
+<p>The second feature included in 1.85 is the new <a href="https://doc.rust-lang.org/edition-guide/rust-2024/rpit-lifetime-capture.html">lifetime capture rules</a> as part of Rust 2024 edition. This should substantially improve the experience of using async Rust anytime a user writes <code>-&gt; impl Future</code>, as it removes the need for <code>+ '_</code> or similar bounds in most cases. It will also lead to an easier to understand language, since those bounds only worked by exploiting the more subtle rules of <code>impl Trait</code> in a way that runs contrary to their actual semantic role in the language. In the 2024 Edition, the subtle rule is gone and we capture all input lifetimes by default, with the ability to use <code>+ use&lt;&gt;</code> syntax to opt out. See <a href="https://blog.rust-lang.org/2024/09/05/impl-trait-capture-rules.html">this blog post</a> for more.</p>
+<p><strong>Generators.</strong> The lang team also held a design meeting to review the design for generators, with the outcome of the last one being that we will implement a <code>std::iter::iter!</code> macro (exact path TBD) in the compiler, as a lang team experiment that allows the use of the <code>yield</code> syntax. We decided to go in this direction because we want to reserve <code>gen</code> for self-borrowing and perhaps lending generators, and aren't yet decided on which subset of features to expose under that syntax. This decision interacts with ongoing compiler development that isn't ready yet to enable experimentation with lending.</p>
+<p>Our hope is that in the meantime, by shipping <code>iter!</code> we will give people the chance to start using generators in their own code and better understand which limitations people hit in practice.</p>
+<p>As you may have noticed, I'm not talking about async generators here. Those are the ultimate goal for the async initiative, but we felt the first step should be clarifying the state of synchronous generators so we can build on that when talking about async ones.</p>
+<p><strong>Dynosaur.</strong> <a href="https://github.com/spastorino/dynosaur/releases/tag/0.1.3">dynosaur v0.1.3</a> was released, with another release in the works. We think we are approaching a 1.0 release real soon now (tm). At this point you should be able to try it on your crate to enable dyn dispatch for traits with <code>async fn</code> and other <code>-&gt; impl Trait</code> methods. If you need to use it together with <code>#[trait_variant]</code>, you may need to wait until the next release when <a href="https://github.com/spastorino/dynosaur/issues/55">#55</a> is fixed.</p>
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/105#issuecomment-2686259726">Comment by @tmandry posted on 2025-02-26:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<h2><a href="#rust-185" aria-hidden="true" class="anchor" id="rust-185"></a>Rust 1.85</h2>
+<p>The first update is the release of Rust 1.85, which had at least two major features that impact Async Rust. The first is <a href="https://blog.rust-lang.org/inside-rust/2024/08/09/async-closures-call-for-testing.html">async closures</a>, which has been on many people's wish lists for a long time and was expertly moved forward by @compiler-errors over the last year.</p>
+<p>The second is the new <a href="https://doc.rust-lang.org/edition-guide/rust-2024/rpit-lifetime-capture.html">lifetime capture rules</a> as part of Rust 2024 edition. This should substantially improve the experience of using async Rust anytime a user writes <code>-&gt; impl Future</code>, as it removes the need for <code>+ '_</code> or similar bounds in most cases. It will also lead to an easier to understand language, since those bounds only worked by exploiting the more subtle rules of <code>impl Trait</code> in a way that runs contrary to their actual semantic role in the language. In the 2024 Edition, the subtle rule is gone and we capture all input lifetimes by default, with the ability to use <code>+ use&lt;&gt;</code> syntax to opt out. See <a href="https://blog.rust-lang.org/2024/09/05/impl-trait-capture-rules.html">this blog post</a> for more.</p>
+<h2><a href="#generators" aria-hidden="true" class="anchor" id="generators"></a>Generators</h2>
+<p>The lang team held two design meetings on generators, with the outcome of the last one being that we will implement a <code>std::iter::iter!</code> macro (exact path TBD) in the compiler, as a lang team experiment that allows the use of the <code>yield</code> syntax. We decided to go in this direction because we want to reserve <code>gen</code> for self-borrowing and perhaps lending generators, and aren't yet decided on which subset of features to expose under that syntax. This decision interacts with ongoing compiler development that isn't ready yet to enable experimentation with lending.</p>
+<p>Our hope is that in the meantime, by shipping <code>iter!</code> we will give people the chance to start using generators in their own code and better understand which limitations people hit in practice.</p>
+<p>As you may have noticed, I'm not talking about async generators here. Those are the ultimate goal for the async initiative, but we felt the first step should be clarifying the state of synchronous generators so we can build on that when talking about async ones.</p>
+<h2><a href="#dynosaur" aria-hidden="true" class="anchor" id="dynosaur"></a>dynosaur</h2>
+<p><a href="https://github.com/spastorino/dynosaur/releases/tag/0.1.3">dynosaur v0.1.3</a> was released, with another release in the works. We think we are approaching a 1.0 release real soon now (tm). At this point you should be able to try it on your crate to enable dyn dispatch for traits with <code>async fn</code> and other <code>-&gt; impl Trait</code> methods. If you need to use it together with <code>#[trait_variant]</code>, you may need to wait until the next release when <a href="https://github.com/spastorino/dynosaur/issues/55">#55</a> is fixed.</p>
+<h2><a href="#other" aria-hidden="true" class="anchor" id="other"></a>Other</h2>
+<p>The async project goal was accepted for 2025H1!</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<br>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/263'><strong>Organize Rust All-Hands 2025</strong></a></div>
+    <div style="flex: initial;"><progress value="9" max="28"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<p><strong>Why this goal?</strong> May 15, 2025 marks the 10-year anniversary of Rust's 1.0 release; it also marks 10 years since the <a href="https://internals.rust-lang.org/t/announcing-the-subteams/2042">creation of the Rust subteams</a>. At the time <a href="http://web.archive.org/web/20150517235608/http://www.rust-lang.org/team.html">there were 6 Rust teams with 24 people in total</a>. There are now 57 teams with 166 people. In-person All Hands meetings are an effective way to help these maintainers get to know one another with high-bandwidth discussions. This year, the Rust project will be coming together for <a href="https://2025.rustweek.org">RustWeek 2025</a>, a joint event organized with <a href="https://2025.rustweek.org/about/">RustNL</a>. Participating project teams will use the time to share knowledge, make plans, or just get to know one another better. One particular goal for the All Hands is reviewing a draft of the <a href="./rust-vision-doc.md">Rust Vision Doc</a>, a document that aims to take stock of where Rust is and lay out high-level goals for the next few years.</p>
+<p><strong>What has happened?</strong> Planning is proceeding well. In addition to Rust maintainers, we are inviting all project goal owners to attend the All Hands (note that the accompanying <a href="https://rustweek.org/">RustWeek conference</a> is open to the public, it's just the <a href="https://rustweek.org/all-hands/">All Hands</a> portion that is invitation only). There are currently over 100 project members signed up to attend.</p>
+<p>For those invited to the All Hands:</p>
+<ul>
+<li>Travel funds may be available if you are unable to finance travel through your employer. Get in touch for details.</li>
+<li>Please participate in the brainstorm for how best to use the All Hands time in the all-hands-2025 Zulip stream.</li>
+<li>If you do plan to attend,  please purchase your travel + <a href="https://rustweek.org/hotels-all-hands/">hotels</a> in a timely fashion as the discount rates will expire.</li>
+</ul>
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/263#issuecomment-2690795898">Comment by @m-ou-se posted on 2025-02-28:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>What happened so far:</p>
+<ul>
+<li>Allocated a budget for the event.</li>
+<li>Funds have been transferred from the Rust Foundation to RustNL.</li>
+<li>Booked the venue, including lunch and snacks.</li>
+<li>Remaining budget from last year's travel grant programme added to this year's, to help cover the travel costs.</li>
+<li>Announcement published: https://blog.rust-lang.org/inside-rust/2024/09/02/all-hands.html</li>
+<li>After sending many reminders to teams and individuals, about 110 project members signed up. (And a few cancelled.)</li>
+<li>Formal invitations sent out to all those who registered.</li>
+<li>Information on the all-hands: https://rustweek.org/all-hands/</li>
+<li>Hotel reservations available: https://rustweek.org/hotels-all-hands/</li>
+<li>Created a public and a private zulip channel.</li>
+<li>About 65 people confirmed they booked their hotel.</li>
+<li>Opened up discussion on what to discuss at the all-hands.</li>
+<li>Invited guests: project goal (task) owners who aren't a project member (12 people in total). 4 of those signed up so far.</li>
+<li>Acquired 150 secret gifts for the pre-all-hands day.</li>
+</ul>
+<p>Next up:</p>
+<ul>
+<li>Remind folks to get a ticket for the RustWeek conference (tuesday+wednesday) if they want to join that as well.</li>
+<li>Invite more guests, after deciding on who else to invite. (To be discussed today in the council meeting.)</li>
+<li>Figure out if we can fund the travel+hotel costs for guests too. (To be discussed today in the council meeting.)</li>
+<li>Organise all the ideas for topics at the all-hands, so we can turn them into a consistent schedule later.</li>
+<li>Draft an allocation of the rooms depending on the teams and topics.</li>
+<li>Open the call for proposals for talks for the Project Track (on wednesday) as part of the RustWeek conference.</li>
+</ul>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<br>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/116'><strong>Stabilize tooling needed by Rust for Linux</strong></a></div>
+    <div style="flex: initial;"><progress value="8" max="22"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<p><strong>Why this goal?</strong> This goal continues our work from 2024H2 in supporting the <a href="https://rust-for-linux.com/">experimental support for Rust development in the Linux kernel</a>. Whereas in 2024H2 we were focused on stabilizing required language features, our focus in 2025H1 is stabilizing compiler flags and tooling options. We will (1) implement <a href="https://github.com/rust-lang/rfcs/pull/3716">RFC #3716</a> which lays out a design for ABI-modifying flags; (2) take the first step towards stabilizing <a href="https://doc.rust-lang.org/cargo/reference/unstable.html#build-std"><code>build-std</code></a> by <a href="https://rust-lang.github.io/rust-project-goals/2025h1/build-std.html">creating a stable way to rebuild core with specific compiler options</a>; (3) extending rustdoc, clippy, and the compiler with features that extract metadata for integration into other build systems (in this case, the kernel's build system).</p>
+<p><strong>What has happened?</strong> We established the precise set of 2025H1 deliverables and we have been tracking them and have begun making progress towards them. Rustdoc has been updated to support extracting doc tests so that the Kernel can execute them in a special environment (this was previously done with a big hack) and RFL is in the process of trying to use that new support. The first PR towards the implementation of <a href="https://github.com/rust-lang/rfcs/pull/3716">RFC #3716</a> has landed and the ARM team has begun reading early drafts of the design doc for <code>-Zbuild-core</code> with the cargo team.</p>
+<p>We are also working to finalize the stabilization of the language features that were developed in 2024H2, as two late-breaking complications arose. The first (an interaction between casting of raw pointers and arbitrary self types) is expected to be resolved by limiting the casts of raw pointers, which previously accepted some surprising code. We identified that only a very small set of crates relied on this bug/misfeature; we expect nonetheless to issue a forwards compatibility warning. We are also resolving an issue where <code>derive(CoercePointee)</code> was found to reveal the existence of some unstable impls in the stdlib.</p>
+<!-- markdown separator --> 
+<details>
+<summary>3 detailed updates availabled.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-2593828706">Comment by @nikomatsakis posted on 2025-01-15:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>In our meeting today we reviewed the plans for the <a href="https://rust-lang.github.io/rust-project-goals/2025h1/rfl.html">2025H1 project goal</a>...</p>
+<p><strong>&quot;Almost done&quot; stuff from before</strong></p>
+<ul>
+<li>re-stabilize CoercePointee -- Alice is looking at this, it's a good opportunity to try out the new template that is being discussed</li>
+<li>stabilize arbitrary self types v2 -- @adetaylor <a href="https://github.com/rust-lang/rust/issues/44874">left a comment 3 weeks ago</a> indicating that everything was more-or-less landed. RFL is <a href="https://github.com/Rust-for-Linux/linux/commit/c95bbb59a9b2">already using it</a>, providing evidence that it works reasonably well. Next steps are then sorting out documentation and moving to stabilize.</li>
+<li>asm-goto -- ready for stabilization, not been merged yet, still doing some work on the Rust reference (PRs https://github.com/rust-lang/rust/pull/133870, https://github.com/rust-lang/reference/pull/1693)</li>
+</ul>
+<p><strong>ABI-modifying flags</strong></p>
+<p>The rust-lang/rfcs#3716 is now in Final Comment Period (FCP). There is a preliminary implementation in #133138 that @petrochenkov is going to be reviewing. Some more work will be needed to test, cleanup, etc after that lands.</p>
+<p><strong>Other flags from <a href="https://github.com/Rust-for-Linux/linux/issues/2">RFL#2</a></strong></p>
+<p>We went through a series of flags from that RFL uses and looking into what might be blocking each of them. The process to stabilize one of these is basically to prepare the stabilization PR (minimal, but we need to rename the flag from <code>-Z</code> to <code>-C</code>) with a stabilization report and proper docs and then cc @davidtwco or @wesleywiser to prepare stabilization. In most cases we need to document how the flags can be misused, most commonly by linking against std or other crates not built with the same flags. If there are major correctness concerns as a result we likely want to consider the flag as &quot;ABI-modifying&quot;.</p>
+<ul>
+<li>ability to extract dependency info, currently using <code>-Zbinary_dep_depinfo=y</code> -- basically ready to stabilize
+* tmandry: Do you want toolchain runtimes (libstd, compiler-rt) in your dep info? In my experience this features does 90% of what I want it to do, but removing the inclusion of runtimes is the only question I have before stabilizing.</li>
+<li>-Zcrate-attr, used to configure no-std without requiring it in the source file -- no real concerns</li>
+<li><code>-Zunpretty=expanded</code> -- have to clearly document that the output is not stable, much like we did for emitting MIR. This is already &quot;de facto&quot; stable because in practice <code>cargo expand</code> uses <code>RUSTC_BOOTSTRAP=1</code> and everybody uses it.</li>
+<li><code>-Zno-jump-tables</code> -- this should be considered an ABI-modifying flag because we believe it is needed for CFI and therefore there is a risk if incompatible modules are linked.</li>
+<li><code>-Zdwarf-version</code>, <code>-Zdebuginfo-compression</code> -- this should be ready to stabilize, so long as we document that you should expect a mix of debuginfo etc when mixing things compiled with different versions (notably libstd, which uses DWARF4). Debuggers are already prepared for this scenario. zstd compression is supported as of Rust 1.82.0.</li>
+</ul>
+<p><strong>stable rustdoc features allowing the RFL project to extract and customize rustdoc tests (<code>--extract-doctests</code>)</strong></p>
+<p>@imperio authored https://github.com/rust-lang/rust/pull/134531, which is now up for review. Once PR lands, RFL will validate the design, and it can proceed to stabilization.</p>
+<p><strong>clippy configuration (possibly <code>.clippy.toml</code> and <code>CLIPPY_CONF_DIR</code>)</strong></p>
+<p>We discussed with clippy team, seems like this is not a big deal, mostly a doc change, one concern was whether clippy should accept options it doesn't recognize (because they may come from some future version of clippy). Not a big deal as of now, RFL only uses (msrv, check-private-items=true, disallowed-macros).</p>
+<p><strong>rebuild libcore</strong></p>
+<p>ARM team is working on this as part of <a href="https://rust-lang.github.io/rust-project-goals/2025h1/build-std.html">this project goal</a>, expect updates. 🎉</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-2623263974">Comment by @nikomatsakis posted on 2025-01-30:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Updates:</p>
+<h2><a href="#2024h2-cleanup" aria-hidden="true" class="anchor" id="2024h2-cleanup"></a>2024H2 cleanup</h2>
+<ul>
+<li>Arbitrary self types v2: Stabilization PR is open (rust-lang/rust#135881).</li>
+<li>Stabilize CoercePointee: RFL is using it now; we are making progress towards completing the stabilization.</li>
+</ul>
+<h2><a href="#2025h1" aria-hidden="true" class="anchor" id="2025h1"></a>2025H1</h2>
+<ul>
+<li>ABI-modifying flags RFC (rust-lang/rfcs#3716) has <a href="https://github.com/rust-lang/rfcs/pull/3716#issuecomment-2614078103">completed FCP</a> and needs to be merged. Implementation PR <a href="https://github.com/rust-lang/rust/pull/133138">#133138</a> authored by @azhogin remains under review.</li>
+<li>Other compiler flags, we made a prioritized list. One easy next step would be to rename all <code>-Z</code> flags in this list to something stabilizable (e.g., <code>-C</code>) that requires <code>-Zunstable-features</code>.
+<ul>
+<li>[ ] <code>-Zdwarf-version</code> -- wesley wiser</li>
+<li>[ ] <code>-Zdebuginfo-compression</code>, unblocked</li>
+<li>[ ] <code>-Zcrate-attr</code>, used to configure no-std without requiring it in the source file, no real concerns</li>
+<li>[ ] <code>-Zunpretty=expanded</code>, unblocked, maybe needs a PR that says &quot;don't rely on this&quot;, Linux only uses it for debugging macros (i.e. not in the normal build, so it is less critical). Needs a stable name, e.g., <code>--emit macro-expanded</code>, and we should make sure output cannot be piped to rustc. <code>rustfmt</code> told us (Rust for Linux) that they will try their best to keep <code>rustfmt</code> able to format the output of the expansion.</li>
+<li>[ ] <code>-Zno-jump-tables</code>, considered an ABI-modifying flag</li>
+<li>[ ] <code>-Zbinary_dep_depinfo=y</code> -- basically ready to stabilize (@tmandry asked &quot;Do you want toolchain runtimes (libstd, compiler-rt) in your dep info? In my experience this features does 90% of what I want it to do, but removing the inclusion of runtimes is the only question I have before stabilizing&quot;, but we don't understand this point yet, as they were not present in the meeting).</li>
+</ul>
+</li>
+<li>stable rustdoc: PR rust-lang/rust#134531 is under review, should land soon, then next step will be for RFL folks to try it out.</li>
+<li>Clippy configuration: no progress, discussed some new options and posted in thread, very minimal work required here.</li>
+<li>rebuild libcore: @davidtwco wasn't present so no update, but we know progress is being made</li>
+</ul>
+<h3><a href="#publicizing-this-work" aria-hidden="true" class="anchor" id="publicizing-this-work"></a>Publicizing this work</h3>
+<p>We discussed briefly how to better get the word out about this collaboration. Some points:</p>
+<ul>
+<li>@Darksonn will be speaking at Rust Nation</li>
+<li>We could author a Rust-lang blog post, perhaps once the language items are done done done?</li>
+<li>LWN article might be an option</li>
+</ul>
+<h3><a href="#general-regs-only" aria-hidden="true" class="anchor" id="general-regs-only"></a>general-regs-only</h3>
+<p>We discussed the possibility of a flag to avoid use of floating point registers, no firm conclusion yet reached.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-2672338598">Comment by @nikomatsakis posted on 2025-02-20:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Updates from our <a href="https://hackmd.io/AkNBW942SoacLayPXHthCg">2025-02-12 meeting</a>:</p>
+<p>Given the recent controversy about Rust usage in the Kernel, the RFL group wrote up a <a href="https://rust-for-linux.com/rust-kernel-policy">policy document explainer</a> to explain the policy, and there was a <a href="https://lwn.net/SubscriberLink/1007921/9020dbb12585d48f/">write-up on LWN</a>.</p>
+<p>Regarding arbitary self types and coerce pointee, we are waiting on rust-lang/rust#136764 and rust-lang/rust#136776. The former is on lang team FCP. The latter has received approval from lang team and is awaiting further impl work by @BoxyUwU.</p>
+<p>@ojeda is looking into how to manage dependency information and configure no-std externally.</p>
+<p>@GuillaumeGomez's impl of rustdoc features has landed and we are waiting on RFL to experiment with it.</p>
+<p>@davidtwco's team at ARM has authored a document regarding a blessed way to build-std and are collecting feedback.</p>
+<p>@wesleywiser is preparing a PR to add <code>-Zdwarf-version</code> to help advance compiler flags.</p>
+<p>There is an annoying issue related to <code>cfg(no_global_oom_handling)</code>, which is no longer used by RFL but which remains in an older branch of the kernel (6.12, LTS).</p>
+<p>As a set of &quot;leaf crates&quot; that evolve together in a mono-repo-like fashion,  RFL would like to have a solution for disabling the orphan rule.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<br>
+<h2><a href="#goals-looking-for-help" aria-hidden="true" class="anchor" id="goals-looking-for-help"></a>Goals looking for help</h2>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/256'><strong>Implement Open API Namespace Support</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="3"></progress>
+</div>
+</div>
+<p><em>Help wanted:</em> this project goal needs a compiler developer to move forward. If you'd like to help, please post in <a href="https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Implement.20Open.20API.20Namespace.20Support.20.28goals.23256.29">this goal's dedicated zulip topic</a>.</p>
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/256#issuecomment-2672709987">Comment by @epage posted on 2025-02-20:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Help wanted: this project goal needs a compiler developer to move forward.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<br>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/264'><strong>Prototype a new set of Cargo &quot;plumbing&quot; commands</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="4"></progress>
+</div>
+</div>
+<p><em>Help wanted:</em> this project goal needs someone to work on the implementation. If you'd like to help, please post in <a href="https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Prototype.20a.20new.20set.20of.20Cargo.20.22plumbing.22.20.28goals.23264.29">this goal's dedicated zulip topic</a>.</p>
+<details>
+<summary>2 detailed updates availabled.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/264#issuecomment-2672710683">Comment by @epage posted on 2025-02-20:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Help wanted: this project goal needs someone to work on the implementation</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/264#issuecomment-2676759836">Comment by @ashiskumarnaik posted on 2025-02-23:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Hi @epage I am very interested to collaborate in this implementation work. Let's talk on Zulip, Check DM.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<br>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/266'><strong>Publish first version of StableMIR on crates.io</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="6"></progress>
+</div>
+</div>
+<p><em>Help wanted:</em> looking for people that want to help do a bit of refactoring. Please reach out through the project-stable-mir <a href="https://rust-lang.zulipchat.com/#narrow/channel/320896-project-stable-mir">zulip channel</a> or <a href="https://github.com/rust-lang/project-stable-mir">repository</a>.</p>
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/266#issuecomment-2683064894">Comment by @celinval posted on 2025-02-25:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>No progress yet.</p>
+<p><strong>Help Wanted:</strong> Looking for people that want to help do a bit of refactoring. Please reach out through the project-stable-mir <a href="https://rust-lang.zulipchat.com/#narrow/channel/320896-project-stable-mir">zulip channel</a> or <a href="https://github.com/rust-lang/project-stable-mir">repository</a>.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<br>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/272'><strong>Stabilize public/private dependencies</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="5"></progress>
+</div>
+</div>
+<p><em>Help wanted:</em> this project goal needs a compiler developer to move forward. If you'd like to help, please post in <a href="https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Stabilize.20public.2Fprivate.20dependencies.20.28goals.23272.29">this goal's dedicated zulip topic</a>.</p>
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/272#issuecomment-2672709551">Comment by @epage posted on 2025-02-20:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Help wanted: this project goal needs a compiler developer to move forward.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<br>
+<h2><a href="#other-goal-updates" aria-hidden="true" class="anchor" id="other-goal-updates"></a>Other goal updates</h2>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/100'><strong>&quot;Stabilizable&quot; prototype for expanded const generics</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="4"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/100#issuecomment-2688795182">Comment by @BoxyUwU posted on 2025-02-27:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>camelid has a PR up which is ~fully finished + reviewed which enables resolving and lowering all paths under <code>min_generic_const_args</code>. It's taken a while to get this bit finished as we had to take care not to make parts of the compiler unmaintainable by duplicating all the logic for type and const path lowering.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/274'><strong>build-std</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="4"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/274#issuecomment-2668390281">Comment by @davidtwco posted on 2025-02-19:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>An initial update on what we've been up to and some background:</p>
+<ul>
+<li>This goal is submitted on behalf of the Rust team at Arm, but primarily worked on by @AdamGemmell. Anyone interested can always contact me for updates and I'll keep this issue up-to-date.</li>
+<li>Our team has been trying to make progress on build-std by completing the issues in <a href="https://github.com/rust-lang/wg-cargo-std-aware">rust-lang/wg-cargo-std-aware</a> but found this wasn't especially effective as there wasn't a clearly defined scope or desired outcome for most issues and the relevant teams were lacking in the necessary context to evaluate any proposals.</li>
+<li>We've since had discussions with the Cargo team and agreed to draft a document describing the use cases, motivations and prior art for build-std such that the Cargo team can feel confident in reviewing any further proposals.
+<ul>
+<li>@AdamGemmell shared an initial draft of this <a href="https://rust-lang.zulipchat.com/#narrow/channel/246057-t-cargo/topic/build-std.20goal/near/496782452">in #t-cargo on Zulip</a> and <strong>it is undergoing further revisions following feedback</strong>.</li>
+<li>Following reaching a shared understanding of the context of the feature, @AdamGemmell will then draft a complete proposal for build-std that could feasibly be stabilised. It will describe the use cases which are and are not considered in-scope for build-std, and which will feature in an initial implementation.</li>
+</ul>
+</li>
+<li>@davidtwco is ensuring that whatever mechanism that is eventually proposed to enable build-std to work on stable toolchains will also be suitable for the Rust for Linux project to use when building core themselves.</li>
+</ul>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/104'><strong>Continue resolving &#x60;cargo-semver-checks&#x60; blockers for merging into cargo</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="5"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/104#issuecomment-2667282957">Comment by @obi1kenobi posted on 2025-02-19:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Thanks, Niko! Copying in the new tasks from the 2025h1 period:</p>
+<ul>
+<li>[ ] Prototype cross-crate linting using workarounds (@obi1kenobi)</li>
+<li>[ ] Allow linting generic types, lifetimes, bounds (@obi1kenobi)</li>
+<li>[ ] Handle &quot;special cases&quot; like <code>'static</code> and <code>?Sized</code> (@obi1kenobi)</li>
+<li>[ ] Handle <code>#[doc(hidden)]</code> in sealed trait analysis (@obi1kenobi)</li>
+<li>[x] Discussion and moral support (<a href="https://github.com/rust-lang/cargo">cargo</a>, [rustdoc]</li>
+</ul>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/252'><strong>Declarative (&#x60;macro_rules!&#x60;) macro improvements</strong></a></div>
+    <div style="flex: initial;"><progress value="3" max="29"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<details>
+<summary>No detailed updates available.</summary>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/253'><strong>Evaluate approaches for seamless interop between C++ and Rust</strong></a></div>
+    <div style="flex: initial;"><progress value="2" max="6"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/253#issuecomment-2686189141">Comment by @tmandry posted on 2025-02-26:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>We had a lang team design meeting about C++ interop today. The outcome was very positive, with enthusiasm for supporting an ambitious vision of C++ interop: One where a large majority of real-world C++ code can have automated bindings to Rust and vice-versa.</p>
+<p>At the same time, the team expressed a desire to do so in a way that remains in line with Rust's values. In particular, we would not make Rust a superset of Rust+C++, but instead would define extension points that can be used to express language interop boundaries that go beyond what Rust itself allows. As an example, we could allow template instantiation via a Rust &quot;plugin&quot; without adding templates to Rust itself. Similarly, we could allow calling overloaded C++ methods without adding function overloading to Rust itself. Other interop needs are more natural to enable with features in the Rust language, like custom reference types.</p>
+<p>In either case, anything we do to support interop will need to be considered on its merits. Interop is a reason to support a feature, but it is never a &quot;blank check&quot; to add anything we might consider useful.</p>
+<p>The discussion so far has been at a high level. Next steps will be:</p>
+<ul>
+<li>Discuss what significant-but-realistic milestones we might pursue as part of upcoming project goals, and what it would take to make them happen. Whether this happens as part of another lang team meeting or a more dedicated kickoff meeting for interested parties, I'll be sure to keep the lang team in the loop and will continue posting updates here.</li>
+<li>Dive into more specific proposals for use cases we would like to enable in meetings with the language, library, and compiler teams.</li>
+</ul>
+<p>Notes: https://hackmd.io/2Ar_7CNoRkeXk1AARyOL7A?view</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/107'><strong>Experiment with ergonomic ref-counting</strong></a></div>
+    <div style="flex: initial;"><progress value="2" max="4"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/107#issuecomment-2685478012">Comment by @spastorino posted on 2025-02-26:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>There's a PR up https://github.com/rust-lang/rust/pull/134797 which implements the proposed RFC without the optimizations.
+The PR is not yet merged and we need to continue now working on addressing comments to the PR until is merged and then start implementing optimizations.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/109'><strong>Expose experimental LLVM features for GPU offloading</strong></a></div>
+    <div style="flex: initial;"><progress value="2" max="4"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/109#issuecomment-2569888810">Comment by @ZuseZ4 posted on 2025-01-03:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Happy New Year everyone! After a few more rounds of feedback, the next autodiff PR recently got merged: https://github.com/rust-lang/rust/pull/130060
+With that, I only have one last PR open to have a fully working autodiff MVP upstream. A few features had to be removed during upstreaming to simplify the reviewing process, but they should be easier to bring back as single PRs.</p>
+<p>Beginning next week, I will also work on an MVP for the <code>batching</code> feature of LLVM/Enzyme, which enables some AoS and SoA vectorization. It mostly re-uses the existing autodiff infrastructure, so I expect the PRs for it to be much smaller.</p>
+<p>On the GPU side, there has been a recent push by another developer to add a new AMD GPU target to the Rust compiler. This is something that I would have needed for the llvm offload project anyway, so I'm very happy to see movement here: https://github.com/rust-lang/compiler-team/issues/823</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/110'><strong>Extend pubgrub to match cargo&#x27;s dependency resolution</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="2"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/110#issuecomment-2685771231">Comment by @Eh2406 posted on 2025-02-26:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>The major update so far is the release of <a href="https://github.com/pubgrub-rs/pubgrub/releases/tag/v0.3.0">PubGrub 0.3</a>. This makes available the critical improvements made to allow the functionality and performance demanded by Cargo and UV. The other production users can now take advantage of the past few years of improvements. Big thanks to @konstin for making the release happen.</p>
+<p>Other progress is been stymied by being sick with Covid for a week in January and the resulting brain fog, followed by several high-priority projects for $DAY_JOB. It is unclear when the demands of  work will allow me to  return focus to this project.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/254'><strong>Externally Implementable Items</strong></a></div>
+    <div style="flex: initial;"><progress value="2" max="9"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/254#issuecomment-2690848867">Comment by @m-ou-se posted on 2025-02-28:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Now that https://github.com/rust-lang/rust/pull/135726 is merged, @jdonszelmann and I will be working on implementing EII.</p>
+<p>We have the design for the implementation worked out on our whiteboard. We don't expect any significant blockers at this point. We'll know more once we start writing the code next week.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/255'><strong>Finish the libtest json output experiment</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="4"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/255#issuecomment-2672713599">Comment by @epage posted on 2025-02-20:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>This is on pause until the implementation for #92 is finished.  The rustc side of #92 is under review and then some additional r-a and cargo work before implementation is done and its waiting on testing and stabilization.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/257'><strong>Implement restrictions, prepare for stabilization</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="8"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/257#issuecomment-2683781126">Comment by @jhpratt posted on 2025-02-26:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>First status update:</p>
+<p>No progress. I will be reviewing the existing PR this weekend to see the feasibility of rebasing it versus reapplying patches by hand. My suspicion is that the latter will be preferable.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/258'><strong>Improve state machine codegen</strong></a></div>
+    <div style="flex: initial;"><progress value="1" max="6"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/258#issuecomment-2683622470">Comment by @traviscross posted on 2025-02-26:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>This is, I believe, mostly waiting on us on the lang team to have a look, probably in a design meeting, to feel out what's in the realm of possibility for us to accept.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/126'><strong>Instrument the Rust standard library with safety contracts</strong></a></div>
+    <div style="flex: initial;"><progress value="1" max="8"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/126#issuecomment-2568584011">Comment by @celinval posted on 2025-01-03:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><strong>Key developments:</strong> We have written and verified around 220 safety contracts in the <a href="https://github.com/model-checking/verify-rust-std">verify-rust-std fork</a>. 3 out of 14 challenges have been solved. We have successfully integrated Kani in the repository CI, and we are working on the integration of 2 other verification tools: VeriFast and Goto-transcoder (ESBMC)</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/259'><strong>Making compiletest more maintainable: reworking directive handling</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="5"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>2 detailed updates availabled.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/259#issuecomment-2668468138">Comment by @jieyouxu posted on 2025-02-19:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Update (2025-02-19):</p>
+<ul>
+<li>To make it easier to follow bootstrap's test flow going into running compiletest-managed test suites, I've added more tracing to bootstrap in https://github.com/rust-lang/rust/pull/137080.</li>
+<li>There are some prerequisite cleanups/improvements that I'm working on first to make it easier to read bootstrap + compiletest's codebase for reference: https://github.com/rust-lang/rust/pull/137224, https://github.com/rust-lang/rust/pull/136474, https://github.com/rust-lang/rust/pull/136542</li>
+<li>I'm thinking for the prototype I'm going to experiment with a branch off of rust-lang/rust instead of completely separately, so I can experiment under the context of bootstrap and tests that we actually have, instead of trying to experiment with it in a complete vacuum (esp. with respect to staging and dependency licenses).
+<ul>
+<li>Onur is working on <a href="https://github.com/rust-lang/rust/pull/137215">stabilize stage management for rustc tools #137215</a> which I will wait on to match <code>ToolStd</code> behavior as used by compiletest.</li>
+</ul>
+</li>
+</ul>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/259#issuecomment-2688071048">Comment by @jieyouxu posted on 2025-02-27:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Update (2025-02-27):</p>
+<ul>
+<li>Cleanups still waiting to be merged (some PRs are blocked on changes from others making this slow).</li>
+</ul>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/260'><strong>Metrics Initiative</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="6"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>2 detailed updates availabled.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/260#issuecomment-2683346208">Comment by @yaahc posted on 2025-02-25:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>I'm very excited to see that this got accepted as a project goal 🥰 🎉</p>
+<p>Let me go ahead and start by giving an initial status update of where I'm at right now.</p>
+<ul>
+<li>We've already landed the initial implementation for configuring the directory where metrics should be stored which also acts as the enable flag for a default set of metrics, right now that includes ICE reports and unstable feature usage metrics</li>
+<li>Implemented basic unstable feature usage metrics, which currently dumps a json file per crate that is compiled showing which metrics are enabled. (example below)</li>
+<li>Implemented <code>rust-lang/rust/src/tools/features-status-dump</code> which dumps the status information for all unstable, stable, and removed features as a json file</li>
+<li>setup an extremely minimal initial Proof of Concept implementation locally on my laptop using InfluxDB 3.0 Alpha and Graphana (image below)
+<ul>
+<li>I have a small program I wrote that converts the json files into <a href="https://docs.influxdata.com/influxdb/cloud/reference/syntax/line-protocol/">influxdb's line protocol</a> for both the usage info and the status info (snippets shown below)
+<ul>
+<li>The timestamps are made up, since they all need to be distinct or else influxdb will treat them all as updates to the same row, I'd like to preserve this information from when the metrics were originally dumped, either in the json or by changing rustc to dump via influxdb's line format directly, or some equivalent protocol. (note this is probably only necessary for the usage metrics, but for the status metrics I'd have to change the line format schema from the example below to avoid the same problem, this has to do with how influxdb treats tags vs fields)</li>
+</ul>
+</li>
+<li>I gathered a minimal dataset by compiling rustc with <code>RUSTFLAGS_NOT_BOOTSTRAP=&quot;-Zmetrics-dir=$HOME/tmp/metrics&quot; ./x build --stage 2</code> and <code>./x run src/tools/features-status-dump/</code>, save the output to the filesystem, and convert the output to the line protocol with the aforementioned program</li>
+<li>Write the two resulting files to influxdb</li>
+<li>I then setup the table two different ways, once by directly querying the database using influxdb's cli (query shown below), then again by trying to setup an equivalent query in graphana (there's definitely some kinks to work out here, I'm not an expert on graphana by any means.)</li>
+</ul>
+</li>
+</ul>
+<p>from <code>unstable_feature_usage_metrics-rustc_hir-3bc1eef297abaa83.json</code></p>
+<pre><code class="language-json">{&quot;lib_features&quot;:[{&quot;symbol&quot;:&quot;variant_count&quot;}],&quot;lang_features&quot;:[{&quot;symbol&quot;:&quot;associated_type_defaults&quot;,&quot;since&quot;:null},{&quot;symbol&quot;:&quot;closure_track_caller&quot;,&quot;since&quot;:null},{&quot;symbol&quot;:&quot;let_chains&quot;,&quot;since&quot;:null},{&quot;symbol&quot;:&quot;never_type&quot;,&quot;since&quot;:null},{&quot;symbol&quot;:&quot;rustc_attrs&quot;,&quot;since&quot;:null}]}
+</code></pre>
+<p><img src="https://github.com/user-attachments/assets/e6e560f8-b06d-4843-a46f-a83e7a3e49c0" alt="Image" /></p>
+<p>Snippet of unstable feature usage metrics post conversion to line protocol</p>
+<pre><code>featureUsage,crateID=&quot;bc8fb5c22ba7eba3&quot; feature=&quot;let_chains&quot; 1739997597429030911
+featureUsage,crateID=&quot;439ccecea0122a52&quot; feature=&quot;assert_matches&quot; 1739997597429867374
+featureUsage,crateID=&quot;439ccecea0122a52&quot; feature=&quot;extract_if&quot; 1739997597429870052
+featureUsage,crateID=&quot;439ccecea0122a52&quot; feature=&quot;iter_intersperse&quot; 1739997597429870855
+featureUsage,crateID=&quot;439ccecea0122a52&quot; feature=&quot;box_patterns&quot; 1739997597429871639
+</code></pre>
+<p>Snippet of feature status metrics post conversion to line protocol</p>
+<pre><code>featureStatus,kind=lang status=&quot;unstable&quot;,since=&quot;1.5.0&quot;,has_gate_test=false,file=&quot;/home/jlusby/git/rust-lang/rust/compiler/rustc_feature/src/unstable.rs&quot;,line=228,name=&quot;omit_gdb_pretty_printer_section&quot; 1739478396884006508
+featureStatus,kind=lang status=&quot;accepted&quot;,since=&quot;1.83.0&quot;,has_gate_test=false,tracking_issue=&quot;123742&quot;,file=&quot;/home/jlusby/git/rust-lang/rust/compiler/rustc_feature/src/accepted.rs&quot;,line=197,name=&quot;expr_fragment_specifier_2024&quot; 1739478396884040564
+featureStatus,kind=lang status=&quot;accepted&quot;,since=&quot;1.0.0&quot;,has_gate_test=false,file=&quot;/home/jlusby/git/rust-lang/rust/compiler/rustc_feature/src/accepted.rs&quot;,line=72,name=&quot;associated_types&quot; 1739478396884042777
+featureStatus,kind=lang status=&quot;unstable&quot;,since=&quot;1.79.0&quot;,has_gate_test=false,tracking_issue=&quot;123646&quot;,file=&quot;/home/jlusby/git/rust-lang/rust/compiler/rustc_feature/src/unstable.rs&quot;,line=232,name=&quot;pattern_types&quot; 1739478396884043914
+featureStatus,kind=lang status=&quot;accepted&quot;,since=&quot;1.27.0&quot;,has_gate_test=false,tracking_issue=&quot;48848&quot;,file=&quot;/home/jlusby/git/rust-lang/rust/compiler/rustc_feature/src/accepted.rs&quot;,line=223,name=&quot;generic_param_attrs&quot; 1739478396884045054
+featureStatus,kind=lang status=&quot;removed&quot;,since=&quot;1.81.0&quot;,has_gate_test=false,tracking_issue=&quot;83788&quot;,file=&quot;/home/jlusby/git/rust-lang/rust/compiler/rustc_feature/src/removed.rs&quot;,line=245,name=&quot;wasm_abi&quot; 1739478396884046179
+</code></pre>
+<p>Run with <code>influxdb3 query --database=unstable-feature-metrics --file query.sql</code></p>
+<pre><code class="language-SQL">SELECT
+  COUNT(*) TotalCount, &quot;featureStatus&quot;.name
+FROM
+  &quot;featureStatus&quot;
+INNER JOIN &quot;featureUsage&quot; ON
+  &quot;featureUsage&quot;.feature = &quot;featureStatus&quot;.name
+GROUP BY
+  &quot;featureStatus&quot;.name
+ORDER BY
+    TotalCount DESC
+</code></pre>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/260#issuecomment-2683396064">Comment by @yaahc posted on 2025-02-25:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>My next step is to revisit the output format, currently a direct json serialization of the data as it is represented internally within the compiler. This is already proven to be inadequate by personal experience, given the need for additional ad-hoc conversion into another format with faked timestamp data that wasn't present in the original dump, and by conversation with @badboy (Jan-Erik), where he recommended we explicitly avoid ad-hoc definitions of telemetry schemas which can lead to difficult to manage chaos.</p>
+<p>I'm currently evaluating what options are available to me, such as a custom system built around influxdb's line format, or opentelemetry's metrics API.</p>
+<p>Either way I want to use firefox's telemetry system as inspiration / a basis for requirements when evaluating the output format options</p>
+<p>Relevant notes from my conversation w/ Jan-Erik</p>
+<ul>
+<li>firefox telemetry starts w/ the question, what is it we want to answer by collecting this data? has to be explicitly noted by whoever added new telemetry, there's a whole process around adding new telemetry
+<ul>
+<li>defining metric</li>
+<li>description</li>
+<li>owner</li>
+<li>term limit (expires automatically, needs manual extension)</li>
+<li>data stewards
+<ul>
+<li>do data review</li>
+<li>checks that telemetry makes sense</li>
+<li>check that everything adheres to standards</li>
+</ul>
+</li>
+<li>can have downside of increasing overhead to add metrics</li>
+<li>helps w/ tooling, we can show all this info as documentation</li>
+<li>schema is generated from definitions</li>
+</ul>
+</li>
+</ul>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/122'><strong>Model coherence in a-mir-formality</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="6"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/122#issuecomment-2686403694">Comment by @nikomatsakis posted on 2025-02-26:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>I have established some regular &quot;office hour&quot; time slots where I am available on jitsi. We landed a few minor PRs and improvements to the parser and oli-obk and tif have been working on modeling of effects for the const generics work. I'm planning to start digging more into the modeling of coherence now that the basic merging is done.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/113'><strong>Next-generation trait solver</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="4"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/113#issuecomment-2688118450">Comment by @lcnr posted on 2025-02-27:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>We've stabilized <code>-Znext-solver=coherence</code> <a href="https://blog.rust-lang.org/2025/01/09/Rust-1.84.0.html#migration-to-the-new-trait-solver-begins">in version 1.84</a> and started to track the remaining issues in <a href="https://github.com/orgs/rust-lang/projects/61">a project board</a>.</p>
+<p>Fixing the opaque types issue breaking <code>wg-grammar</code> is difficult and requires a more in-depth change for which there is now an <a href="https://github.com/rust-lang/types-team/issues/129">accepted Types MCP</a>. This likely also unblocks the TAIT stabilization using the old solver.</p>
+<p>While waiting on the MCP I've started to look into the errors when compiling <code>nalgebra</code>. @lqd minimized the failures. They have been caused by insufficiencies in our cycle handling. With https://github.com/rust-lang/rust/pull/136824 and https://github.com/rust-lang/rust/pull/137314 cycles should now be fully supported.</p>
+<p>We also fully triaged all UI tests with the new solver enabled with @compiler-errors, @BoxyUwU, and myself fixing multiple less involved issues.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/261'><strong>Nightly support for ergonomic SIMD multiversioning</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="5"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/261#issuecomment-2681824358">Comment by @veluca93 posted on 2025-02-25:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Key developments: Further discussions on implementation details of the three major proposed ways forward. Requested a design meeting in https://github.com/rust-lang/lang-team/issues/309.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/262'><strong>Null and enum-discriminant runtime checks in debug builds</strong></a></div>
+    <div style="flex: initial;"><progress value="1" max="3"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/262#issuecomment-2667943769">Comment by @1c3t3a posted on 2025-02-19:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Status update: The null-checks landed in <a href="https://github.com/rust-lang/rust/pull/134424">rust#134424</a>. Next up are the enum discriminant checks.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/114'><strong>Optimizing Clippy &amp; linting</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="2"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/114#issuecomment-2684969001">Comment by @blyxyas posted on 2025-02-26:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>As a monthly update (previously posted on Zulip): We have some big progress!</p>
+<ul>
+<li>
+<p><a href="https://github.com/rust-lang/rust-clippy/issues/13821">rust-clippy#13821</a> has been open and is currently being reviewed. It moves the MSRV logic out of lint-individualistic attribute extraction and into Clippy-wide MSRV (with a very good optimization, taking into account that only a small percentage of crates use.</p>
+</li>
+<li>
+<p>A Clippy-exclusive benchmarker has arrived, powered by the existing lintcheck infrastructure and perf. So it's compatible with flamegraph and other such tools. <a href="https://github.com/rust-lang/rust-clippy/issues/14194">rust-clippy#14194</a> We can later expand this into CI or a dedicated bot.</p>
+</li>
+<li>
+<p>As you probably know, <a href="https://github.com/rust-lang/rust/issues/125116">rust#125116</a> has been merged, just as a reminder of how that big goal was slayed like a dragon :dragon:.</p>
+</li>
+</ul>
+<p>We now know what functions to optimize (or, at least have a basic knowledge of where Clippy spends its time).
+As some future functionality, I'd love to have a functionality to build cargo and rust with debug symbols and hook it up to Clippy, but that may be harder. It's not perfect, but it's a good start!</p>
+<p><img src="https://rust-lang.zulipchat.com/user_uploads/4715/1Ph9uNvqBfGDLGC55UXUhAw1/2025-02-17-000451_1918x582_scrot.png" alt="clippy benchmark perf.data report" /></p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/106'><strong>Prepare const traits for stabilization</strong></a></div>
+    <div style="flex: initial;"><progress value="5" max="14"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<details>
+<summary>No detailed updates available.</summary>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/121'><strong>Promoting Parallel Front End</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="3"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<details>
+<summary>No detailed updates available.</summary>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/265'><strong>Publish first rust-lang-owned release of &quot;FLS&quot;</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="5"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/265#issuecomment-2679552595">Comment by @JoelMarcey posted on 2025-02-24:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Last week at the Safety Critical Rust Consortium meeting in London, Ferrous systems publicly announced to consortium members that they have committed to contributing the FLS to the Rust Project. We are finalizing the details of that process, but we can start FLS integration testing in parallel, in anticipation.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/267'><strong>Research: How to achieve safety when linking separately compiled code</strong></a></div>
+    <div style="flex: initial;"><progress value="3" max="11"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>2 detailed updates availabled.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/267#issuecomment-2690860706">Comment by @m-ou-se posted on 2025-02-28:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>We started the collaboration with the Delft University of Technology. We assembled a small research team with a professor and a MSc student who will be working on this as part of his MSc thesis. We meet weekly in person.</p>
+<p>The project kicked off two weeks ago and is now in the literature research phase.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/267#issuecomment-2690864244">Comment by @m-ou-se posted on 2025-02-28:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>And related to this, someone else is working on an implementation of my <code>#[export]</code> rfc: https://github.com/rust-lang/rust/pull/134767 This will hopefully provide meaningful input for the research project.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/268'><strong>Run the 2025H1 project goal program</strong></a></div>
+    <div style="flex: initial;"><progress value="6" max="13"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/268#issuecomment-2668673602">Comment by @nikomatsakis posted on 2025-02-19:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Update: We are running behind schedule, but we are up and running nonetheless! Bear with us. The <a href="https://github.com/rust-lang/rfcs/pull/3764">goals RFC</a> finished <a href="https://github.com/rust-lang/rfcs/pull/3764#issuecomment-2645799451">FCP</a> on Feb 18. The new project goals team has been approved and we've updated the tracking issues for the new milestone.</p>
+<p>Project goal owners are encouraged to update the issue body to reflect the actual tasks as they go with github checkboxes or other notation <a href="https://rust-lang.github.io/rust-project-goals/how_to/report_status.html#updating-the-progress-bar">as described here</a>. We're going to start pinging for our first status update soon!</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/269'><strong>Rust Vision Document</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="4"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/269#issuecomment-2669078146">Comment by @nikomatsakis posted on 2025-02-19:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Update so far: I put out a call for volunteers on Zulip (<a href="https://hackmd.io/@nikomatsakis/HJQOpqRwke">hackmd</a>) and a number of folks responded. We had an initial meeting on Jan 30 (<a href="https://hackmd.io/@nikomatsakis/H11FxVFOyx">notes here</a>). We have created a Zulip stream for this project goal (<code>vision-doc-2025</code>) and I also did some experimenting in the https://github.com/nikomatsakis/farsight repository for what the table of contents might look like.</p>
+<p>Next milestone is to layout a plan. We are somewhat behind schedule but not impossibly so!</p>
+<p><img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzIxOWQ3bW5lb25obW04Y2lnMDkxa2Z0ZmZwcWw0N2h6cHU5ZWY2ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/IazdAV1zjaGbBaGPgF/giphy.gif" alt="Believe!" /></p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/275'><strong>rustc-perf improvements</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="7"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/275#issuecomment-2668399213">Comment by @davidtwco posted on 2025-02-19:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>An initial update on what we've been up to and some background:</p>
+<ul>
+<li>This goal is submitted on behalf of the Rust team at Arm, but primarily worked on by @Jamesbarford. Anyone interested can always contact me for updates and I'll keep this issue up-to-date.</li>
+<li>We've scheduled a regular call with @Kobzol to discuss the constraints and requirements of any changes to rust-perf (see <a href="https://github.com/rust-lang/calendar">the t-infra calendar</a>) and have drafted a document describing a proposed high-level architecture for the service following our changes.
+<ul>
+<li>This has been shared in the <a href="https://rust-lang.zulipchat.com/#narrow/channel/478771-project-goals.2F2025h1.2Frustc-perf-improvements/topic/architecture.20proposal/near/499201831">#project-goals/2025h1/rustc-perf-improvements Zulip channel</a> to collect feedback.</li>
+<li>Once we've reached an agreement on the high-level architecture, we'll prepare a more detailed plan with details like proposed changes to the database schema, before proceeding with the implementation.</li>
+</ul>
+</li>
+</ul>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/118'><strong>Scalable Polonius support on nightly</strong></a></div>
+    <div style="flex: initial;"><progress value="10" max="18"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/118#issuecomment-2627779557">Comment by @lqd posted on 2025-01-31:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>Key developments from this month:</p>
+<ul>
+<li>@amandasystems has continued working on the Sisyphean https://github.com/rust-lang/rust/pull/130227 and has made progress on rewriting type tests, diagnostics issues, fixing bugs, kept up with changes on master, and more.</li>
+<li>big thanks to @jackh726 and @matthewjasper on reviews: with their help, all the PRs from the previous update have landed on nightly.</li>
+<li>I've opened a couple of PRs on the analysis itself (https://github.com/rust-lang/rust/pull/135290, https://github.com/rust-lang/rust/pull/136299) as well as a few cleanups. With these, there are only around 4 failing tests that still need investigation, and 8-10 diagnostics differences to iron out. This is my current focus, but we'll also need to expand test coverage.</li>
+<li>I've also opened a handful of PRs gradually expanding the polonius MIR dump with visualizations. I'll next add the interactive &quot;tool&quot; I've been using to help debug the test failures.</li>
+<li>on organization and collaboration:
+<ul>
+<li>we've met with one of Amanda's students for a possible Master's thesis on the more engineer-y side of polonius (perf &lt;3)</li>
+<li>and have also discussed, with @ralfjung's team, the related topic of modeling the borrowck in <a href="https://github.com/rust-lang/a-mir-formality/"><code>a-mir-formality</code></a></li>
+</ul>
+</li>
+</ul>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/271'><strong>Secure quorum-based cryptographic verification and mirroring for crates.io</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="12"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<details>
+<summary>No detailed updates available.</summary>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/270'><strong>SVE and SME on AArch64</strong></a></div>
+    <div style="flex: initial;"><progress value="2" max="16"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/270#issuecomment-2668362595">Comment by @davidtwco posted on 2025-02-19:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p>An initial update on what we've been up to and some background:</p>
+<ul>
+<li>This goal is submitted on behalf of the Rust team at Arm, but primarily worked on by myself (@davidtwco) and @JamieCunliffe. Anyone interested can always contact me for updates and I'll keep this issue up-to-date.</li>
+<li>@JamieCunliffe been working on supporting Arm's scalable vector extension (SVE) for a couple years - primarily in rust-lang/rfcs#3268 and its implementation rust-lang/rust#118917.
+<ul>
+<li>Through this work, we've discovered other changes to the language necessary to be able to support these types without special cases in the type system, which we're also working on (see below).</li>
+<li>Jamie is still resolving feedback on this RFC and its implementation, and keeping it rebased. We hope that it can be landed experimentally now that there's a feasible path to remove the special cases in the type system (see below).</li>
+<li><strong>The next steps for this RFC and implementation are..</strong>
+<ul>
+<li>..to continue to respond to feedback on the RFC and implementation.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>I've (@davidtwco) been working on rust-lang/rfcs#3729 which improves Rust's support for exotically sized types, and would allow scalable vectors to be represented in the type system without special cases.
+<ul>
+<li>We've had two design meetings with the language team about the RFC and had a broadly positive reception.
+<ul>
+<li>There is a non-strict dependency on const traits (rust-lang/rfcs#3762) which has created uncertainty as to whether this RFC could be accepted without the specifics of const traits being nailed down.</li>
+</ul>
+</li>
+<li>I've been working on <a href="https://github.com/davidtwco/rust/activity?ref=sized-hierarchy">implementing the RFC</a>: an initial implementation of the non-const traits has been completed and adding the const traits is in-progress.
+<ul>
+<li>The language team have indicated interest in seeing this land experimentally, but this will depend on whether the implementors of const traits are okay with this, as it would add to the work they need to do to make any syntactic changes requested by the language team in rust-lang/rfcs#3762.</li>
+</ul>
+</li>
+<li><strong>I'm continuing to respond to feedback on the RFC, but as this has largely trailed off, the next steps for this RFC are</strong>..
+<ul>
+<li>..for the language team to decide to accept, reject, or request further changes to the RFC.</li>
+<li>..for progress on the implementation to continue.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/273'><strong>Unsafe Fields</strong></a></div>
+    <div style="flex: initial;"><progress value="1" max="7"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<details>
+<summary>1 detailed update available.</summary>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><a href="https://github.com/rust-lang/rust-project-goals/issues/273#issuecomment-2684902356">Comment by @jswrenn posted on 2025-02-26:</a><br></p>
+<blockquote>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<p><strong>Key developments:</strong> In a <a href="https://hackmd.io/@jswrenn/Bkp8l4BtJg">Feb 19 Lang Team Design Meeting</a>, we reached consensus that the MVP for unsafe fields should be limited to additive invariants.</p>
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+</blockquote>
+</details>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/123'><strong>Use annotate-snippets for rustc diagnostic output</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="13"></progress>
+</div>
+</div>
+<!-- markdown separator --> 
+<!-- markdown separator --> 
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+<details>
+<summary>No detailed updates available.</summary>
+</details>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

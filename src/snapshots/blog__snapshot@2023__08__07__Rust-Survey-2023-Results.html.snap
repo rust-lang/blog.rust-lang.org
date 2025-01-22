@@ -1,0 +1,183 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2023/08/07/Rust-Survey-2023-Results.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>2022 Annual Rust Survey Results | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="2022 Annual Rust Survey Results | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="2022 Annual Rust Survey Results | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="2022 Annual Rust Survey Results" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>2022 Annual Rust Survey Results</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 7, 2023 &middot; The Rust Survey Working Group in partnership with the Rust Foundation
+    
+    </div>
+
+    <div class="post">
+      <p>Hello, Rustaceans!</p>
+<p>For the 6th year in a row, the Rust Project <a href="https://blog.rust-lang.org/2022/12/05/survey-launch.html">conducted a survey on the Rust programming language</a>, with participation from project maintainers, contributors, and those generally interested in the future of Rust. This edition of the annual State of Rust Survey opened for submissions on December 5 and ran until December 22, 2022.</p>
+<p>First, we'd like to thank you for your patience on these long delayed results. We hope to identify a more expedient and sustainable process going forward so that the results come out more quickly and have even more actionable insights for the community.</p>
+<p>The goal of this survey is always to give our wider community a chance to express their opinions about the language we all love and help shape its future. We’re grateful to those of you who took the time to share your voice on the state of Rust last year.</p>
+<p>Before diving into a few highlights, we would like to thank everyone who was involved in creating the State of Rust survey with special acknowledgment to the translators whose work allowed us to offer the survey in English, Simplified Chinese, Traditional Chinese, French, German, Japanese, Korean, Portuguese, Russian, Spanish, and Ukrainian.</p>
+<h2><a href="#participation" aria-hidden="true" class="anchor" id="participation"></a>Participation</h2>
+<p>In 2022, we had 9,433 total survey completions and an increased survey completion rate of 82% vs. 76% in 2021. While the goal is always total survey completion for all participants, the survey requires time, energy, and focus – we consider this figure quite high and were pleased by the increase.</p>
+<p>We also saw a significant increase in the number of people viewing but not participating in the survey (from 16,457 views in 2021 to 25,581 – a view increase of over 55%). While this is likely due to a number of different factors, we feel this information speaks to the rising interest in Rust and the growing general audience following its evolution.</p>
+<p>In 2022, the survey had 11,482 responses, which is a slight decrease of 6.4% from 2021, however, the number of respondents that answered all survey questions has increased year over year. We were interested to see this slight decrease in responses, as this year’s survey was much shorter than in previous years – clearly, survey length is not the only factor driving participation.</p>
+<h2><a href="#community" aria-hidden="true" class="anchor" id="community"></a>Community</h2>
+<p>We were pleased to offer the survey in 11 languages – more than ever before, with the addition of a Ukrainian translation in 2022. 77% of respondents took this year’s survey in English, 5% in Chinese (simplified), 4% in German and French, 2% in Japanese, Spanish, and Russian, and 1% in Chinese (traditional), Korean, Portuguese, and Ukrainian. This is our lowest percentage of respondents taking the survey in English to date, which is an exciting indication of the growing global nature of our community!</p>
+<p>The vast majority of our respondents reported being most comfortable communicating on technical topics in English (93%), followed by Chinese (7%).</p>
+<p>Rust user respondents were asked which country they live in. The top 13 countries represented were as follows: United States (25%), Germany (12%), China (7%), United Kingdom (6%), France (5%), Canada (4%), Russia (4%), Japan (3%), Netherlands (3%), Sweden (2%), Australia (2%), Poland (2%), India (2%). Nearly 72.5% of respondents elected to answer this question.</p>
+<p>While we see global access to Rust education as a critical goal for our community, we are proud to say that Rust was used all over the world in 2022!</p>
+<h2><a href="#rust-usage" aria-hidden="true" class="anchor" id="rust-usage"></a>Rust Usage</h2>
+<p>More people are using Rust than ever before! Over 90% of survey respondents identified as Rust users, and of those using Rust, 47% do so on a daily basis – an increase of 4% from the previous year.</p>
+<p>30% of Rust user respondents can write simple programs in Rust, 27% can write production-ready code, and 42% consider themselves productive using Rust.</p>
+<p>Of the former Rust users who completed the survey, 30% cited difficulty as the primary reason for giving up while nearly 47% cited factors outside of their control.</p>
+<p><img src="../../../images/2023-08-rust-survey-2022/no-longer-using.png" alt="Graph: Why did you stop using Rust?" /></p>
+<p>Similarly, 26% of those who did not identify as Rust users cited the perception of difficulty as the primary reason for not having used it, (with 62% reporting that they simply haven’t had the chance to prioritize learning Rust yet).
+<img src="../../../images/2023-08-rust-survey-2022/dont-use.png" alt="Graph: Why don't you use Rust?" /></p>
+<h2><a href="#rust-usage-at-work" aria-hidden="true" class="anchor" id="rust-usage-at-work"></a>Rust Usage at Work</h2>
+<p>The growing maturation of Rust can be seen through the increased number of different organizations utilizing the language in 2022. In fact, 29.7% of respondents stated that they use Rust for the majority of their coding work at their workplace, which is a 51.8% increase compared to the previous year.</p>
+<p><img src="../../../images/2023-08-rust-survey-2022/rust-work.png" alt="Graph: Are you using Rust at work?" /></p>
+<p>There are numerous reasons why we are seeing increased use of Rust in professional environments. Top reasons cited for the use of Rust include the perceived ability to write &quot;bug-free software&quot; (86%), Rust's performance characteristics (84%), and Rust's security and safety guarantees (69%). We were also pleased to find that 76% of respondents continue to use Rust simply because they found it fun and enjoyable. (Respondents could select more than one option here, so the numbers don't add up to 100%.)</p>
+<p><img src="../../../images/2023-08-rust-survey-2022/why-at-work.png" alt="Graph: Why do you use Rust at work?" /></p>
+<p>Of those respondents that used Rust at work, 72% reported that it helped their team achieve its goals (a 4% increase from the previous year) and 75% have plans to continue using it on their teams in the future.</p>
+<p>But like any language being applied in the workplace, Rust’s learning curve is an important consideration; 39% of respondents using Rust in a professional capacity reported the process as “challenging” and 9% of respondents said that adopting Rust at work has “slowed down their team”. However, 60% of productive users felt Rust was worth the cost of adoption overall.
+<img src="../../../images/2023-08-rust-survey-2022/experiences.png" alt="Graph: Reasons for using Rust at work" /></p>
+<p>It is exciting to see the continued growth of professional Rust usage and the confidence so many users feel in its performance, control, security and safety, enjoyability, and more!</p>
+<h2><a href="#supporting-the-future-of-rust" aria-hidden="true" class="anchor" id="supporting-the-future-of-rust"></a>Supporting the Future of Rust</h2>
+<p>A key goal of the State of Rust survey is to shed light on challenges, concerns, and priorities Rustaceans are currently sitting with.</p>
+<p>Of those respondents who shared their main worries for the future of Rust, 26% have concerns that the developers and maintainers behind Rust are not properly supported – a decrease of more than 30% from the previous year’s findings. One area of focus in the future may be to see how the Project in conjunction with the Rust Foundation can continue to push that number towards 0%.</p>
+<p>While 38% have concerns about Rust “becoming too complex”, only a small number of respondents were concerned about documentation, corporate oversight, or speed of evolution. 34% of respondents are not worried about the future of Rust at all.</p>
+<p>This year’s survey reflects a 21% decrease in fears about Rust’s usage in the industry since the last survey. Faith in Rust’s staying power and general utility is clearly growing as more people find Rust and become lasting members of the community. As always, we are grateful for your honest feedback and dedication to improving this language for everyone.</p>
+<p><img src="../../../images/2023-08-rust-survey-2022/future.png" alt="Graph: Worries about the future of Rust" /></p>
+<h2><a href="#another-round-of-thanks" aria-hidden="true" class="anchor" id="another-round-of-thanks"></a>Another Round of Thanks</h2>
+<p>To quote an anonymous survey respondent, “Thanks for all your hard work making Rust awesome!” – Rust wouldn’t exist or continue to evolve for the better without the many Project members and the wider Rust community. Thank you to those who took the time to share their thoughts on the State of Rust in 2022!</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

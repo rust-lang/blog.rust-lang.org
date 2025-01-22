@@ -1,0 +1,292 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2025/01/10/test-infra-dec-2024.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>This Month in Our Test Infra: December 2024 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="This Month in Our Test Infra: December 2024 | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="This Month in Our Test Infra: December 2024 | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="This Month in Our Test Infra: December 2024" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>This Month in Our Test Infra: December 2024</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 10, 2025 &middot; Jieyou Xu
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/infra#team-bootstrap">the Bootstrap Team</a> 
+    </div>
+
+    <div class="post">
+      <h1><a href="#this-month-in-our-test-infra-december-2024" aria-hidden="true" class="anchor" id="this-month-in-our-test-infra-december-2024"></a>This Month in Our Test Infra: December 2024</h1>
+<!-- time period: 2024-12-04 through 2025-01-05 -->
+<p>Happy new year, dear reader! This is the last <em>This Month in Our Test Infra</em> issue for 2024.</p>
+<p>This is a quick summary of the changes in the test infrastructure for the <a href="https://github.com/rust-lang/rust">rust-lang/rust</a> repository<sup class="footnote-ref"><a href="#fn-scope" id="fnref-scope" data-footnote-ref>1</a></sup> for <strong>December 2024</strong>.</p>
+<p>As usual, if you encounter bugs or UX issues when using our test infrastructure, please <a href="https://github.com/rust-lang/rust/issues/new">file an issue</a>. Bugs and papercuts can't be fixed if we don't know about them!</p>
+<p><strong>Thanks to everyone who contributed to our test infra!</strong></p>
+<h2><a href="#highlights" aria-hidden="true" class="anchor" id="highlights"></a>Highlights</h2>
+<h3><a href="#rustc-dev-guide-is-now-a-josh-subtree" aria-hidden="true" class="anchor" id="rustc-dev-guide-is-now-a-josh-subtree"></a><code>rustc-dev-guide</code> is now a <code>josh</code> subtree!</h3>
+<p>Previously, <a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a> was a submodule inside <a href="https://github.com/rust-lang/rust">rust-lang/rust</a>, and updates to <a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a> had to be done in a separate PR against the <a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a> repository.</p>
+<p>Now, thanks to <a href="https://github.com/Kobzol">@Kobzol</a>'s efforts (which included overcoming many unforeseen obstacles), <a href="https://github.com/rust-lang/rust/pull/134907"><code>rustc-dev-guide</code> is now a <code>josh</code> subtree</a>. This is a significant improvement for contribution workflows because it means that documentation updates to <a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a> can accompany the implementation change in <a href="https://github.com/rust-lang/rust">rust-lang/rust</a> in the same PR. The reduction in contribution friction also encourages <a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a> updates because you no longer have to author and maintain two separate PRs.</p>
+<h3><a href="#compiletest-will-now-show-the-difference-between-normalized-output-and-actual-output-for-differing-lines" aria-hidden="true" class="anchor" id="compiletest-will-now-show-the-difference-between-normalized-output-and-actual-output-for-differing-lines"></a>compiletest will now show the difference between normalized output and actual output for differing lines</h3>
+<p>Previously, it can be very difficult to tell when a ui test fails what the actual output is pre-normalization, as you would have to resort to <code>--nocapture</code> or similar.</p>
+<p>Now, <a href="https://github.com/rust-lang/rust/pull/133733">compiletest will also show the pre-normalization mismatched output lines on failure to make this easier to tell</a>. Example output:</p>
+<pre><code class="language-text">failures:
+
+---- [ui] tests/ui/layout/enum.rs stdout ----
+diff of stderr:
+
+-	error: align: AbiAndPrefAlign { abi: Align(2 bytes), pref: $PREF_ALIGN }
++	error: align: AbiAndPrefAlign { abi: Align(2 bytes), pref: $PREF_ALIN }
+2	  --&gt; $DIR/enum.rs:9:1
+3	   |
+4	LL | enum UninhabitedVariantAlign {
+
+Note: some mismatched output was normalized before being compared
+-	error: align: AbiAndPrefAlign { abi: Align(2 bytes), pref: Align(8 bytes) }
+-	  --&gt; /home/jyn/src/rust2/tests/ui/layout/enum.rs:9:1
++	error: align: AbiAndPrefAlign { abi: Align(2 bytes), pref: $PREF_ALIN }
+</code></pre>
+<h3><a href="#compiletest-now-allows-using-a-specific-debugger-when-running-debuginfo-tests" aria-hidden="true" class="anchor" id="compiletest-now-allows-using-a-specific-debugger-when-running-debuginfo-tests"></a>compiletest now allows using a specific debugger when running debuginfo tests</h3>
+<p>For a long time, the <code>tests/debuginfo</code> test suite could only be successfully run if you had all the tested debuggers (being <code>lldb</code>, <code>gdb</code>, <code>cdb</code>). This is very annoying locally if:</p>
+<ul>
+<li>One or more of these debuggers are not available or don't work locally<sup class="footnote-ref"><a href="#fn-lldb" id="fnref-lldb" data-footnote-ref>2</a></sup>.</li>
+<li>You just wanted to look at the test failures for a given debugger.</li>
+</ul>
+<p>Now, you are able to run the <code>tests/debuginfo</code> test suite with a <em>specific</em> debugger, to only run the tests against that specified debugger. Example usage:</p>
+<pre><code class="language-bash">$ ./x test tests/debuginfo -- --debugger gdb
+</code></pre>
+<h3><a href="#ui-tests-now-support--forbid-output" aria-hidden="true" class="anchor" id="ui-tests-now-support--forbid-output"></a><code>ui</code> tests now support <code>//@ forbid-output</code></h3>
+<p><code>ui</code> tests can now use the <code>//@ forbid-output: REGEX</code> directive to check for a pattern which must not appear in the stderr. If the <code>REGEX</code> pattern is matched, then the <code>ui</code> test will fail.</p>
+<p>Please consult <a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a> for more details.</p>
+<h3><a href="#x-test-now-accepts-a---no-capture-flag-which-will-be-forwarded-to-compiletest-and-thus-libtest" aria-hidden="true" class="anchor" id="x-test-now-accepts-a---no-capture-flag-which-will-be-forwarded-to-compiletest-and-thus-libtest"></a><code>./x test</code> now accepts a <code>--no-capture</code> flag which will be forwarded to compiletest (and thus libtest)</h3>
+<p>Previously, if you wanted to pass the <code>--nocapture</code> flag through <a href="https://github.com/rust-lang/rust/tree/master/src/bootstrap">bootstrap</a>, through <a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>, to the underlying <a href="https://github.com/rust-lang/rust/tree/master/library/test">libtest</a> runner, on Linux you have to write:</p>
+<pre><code class="language-bash">$ ./x test tests/ui -- --nocapture
+</code></pre>
+<p>On native Windows msvc it's even worse, I recall having to write</p>
+<pre><code class="language-powershell">PS&gt; ./x test tests/ui -- -- --nocapture
+</code></pre>
+<p>Which is hard to discover and a contributor papercut<sup class="footnote-ref"><a href="#fn-nocapture" id="fnref-nocapture" data-footnote-ref>3</a></sup>.</p>
+<p>Now, you can just write</p>
+<pre><code class="language-bash">$ ./x test tests/ui --no-capture
+</code></pre>
+<p>and bootstrap will forward this flag as <code>--nocapture</code> to the underlying <a href="https://github.com/rust-lang/rust/tree/master/library/test">libtest</a>.</p>
+<h2><a href="#notable-changes" aria-hidden="true" class="anchor" id="notable-changes"></a>Notable changes</h2>
+<p>This section is intended to be like a &quot;compatibility notes&quot; but for human test writers.</p>
+<h3><a href="#filecheck-based-test-suites-no-longer-predefine-msvc-and-nonmsvc-filecheck-prefixes" aria-hidden="true" class="anchor" id="filecheck-based-test-suites-no-longer-predefine-msvc-and-nonmsvc-filecheck-prefixes"></a><code>FileCheck</code>-based test suites no longer predefine <code>MSVC</code> and <code>NONMSVC</code> <code>FileCheck</code> prefixes</h3>
+<p>In the <em>current</em> setup, compiletest will register a <a href="https://llvm.org/docs/CommandGuide/FileCheck.html"><code>FileCheck</code></a> custom prefix for each compiletest <code>//@ revision</code>. However, for historical reasons compiletest also predefined <code>MSVC</code> and <code>NONMSVC</code> <code>FileCheck</code> prefixes depending on the <em>host</em>. But this is very surprising for two reasons:</p>
+<ol>
+<li>It's &quot;spooky action in a distance&quot; because the user never declared these custom prefixes, and these prefixes are conditionally set based on the host. It's hard to debug too.</li>
+<li>If the user also wants to add their own <code>//@ revision: MSVC NONMSVC</code> revisions, because compiletest would pass <code>--check-prefix</code> for those names twice, this will cause <code>FileCheck</code> to report an error about duplicate prefixes.</li>
+</ol>
+<p>Therefore, in <a href="https://github.com/rust-lang/rust/pull/134463">compiletest: don't register predefined <code>MSVC</code>/<code>NONMSVC</code> <code>FileCheck</code> prefixes #134463</a> we no longer predefine these two <code>FileCheck</code> prefixes.</p>
+<p>If you want the previous <code>MSVC</code> vs <code>NONMSVC</code> behavior, you will need to explicitly write out</p>
+<pre><code class="language-rs">//@ revisions: MSVC NONMSVC
+//@[MSVC] only-windows-msvc
+//@[NONMSVC] ignore-windows-msvc
+</code></pre>
+<h3><a href="#normalize-stderrstdout-test-directives-are-renamed-to-normalize-stderrstdout" aria-hidden="true" class="anchor" id="normalize-stderrstdout-test-directives-are-renamed-to-normalize-stderrstdout"></a><code>normalize-{stderr,stdout}-test</code> directives are renamed to <code>normalize-{stderr,stdout}</code></h3>
+<p>Mostly a cleanup, the <code>-test</code> suffixes provide no additionally useful information, and only make these two <code>normalize-*</code> directives hard to discover.</p>
+<p><code>normalize-{stderr,stdout}-test</code> directives are now <a href="https://github.com/rust-lang/rust/pull/134759">renamed to <code>normalize-{stderr,stdout}</code></a>. <code>normalize-{stderr,stdout}-{32,64}bit</code> directives remain unaffected.</p>
+<h3><a href="#compiletest-will-now-deny-usages-of-builtin-filecheck-suffixes-as-revision-names-for-filecheck-based-test-suites" aria-hidden="true" class="anchor" id="compiletest-will-now-deny-usages-of-builtin-filecheck-suffixes-as-revision-names-for-filecheck-based-test-suites"></a>compiletest will now deny usages of builtin <code>FileCheck</code> suffixes as revision names (for <code>FileCheck</code>-based test suites)</h3>
+<p>For <a href="https://llvm.org/docs/CommandGuide/FileCheck.html"><code>FileCheck</code></a>-based test suites (<code>assembly</code>, <code>codegen</code>, <code>mir-opt</code>), compiletest will register a custom <code>FileCheck</code> prefix for each compiletest <code>//@ revision</code>. However, <code>FileCheck</code> also has some <a href="https://llvm.org/docs/CommandGuide/FileCheck.html#the-check-next-directive">builtin suffixes</a> such as:</p>
+<pre><code class="language-rust">// COM:
+// CHECK:
+// CHECK-NEXT:
+// CHECK-SAME:
+// CHECK-EMPTY:
+// CHECK-NOT:
+// CHECK-COUNT:
+// CHECK-DAG:
+// CHECK-LABEL:
+</code></pre>
+<p>When combined, this previously meant that the compiletest revision + builtin <code>FileCheck</code> suffix constructions such as</p>
+<pre><code class="language-rust">// next:
+// same-SAME:
+// not-NOT:
+// next-NEXT:
+// not-SAME:
+</code></pre>
+<p>are permitted by compiletest, which are incredibly confusing.</p>
+<p>As such, compiletest will now reject <code>CHECK</code>, <code>COM</code>, <code>NEXT</code>, <code>SAME</code>, <code>EMPTY</code>, <code>NOT</code>, <code>COUNT</code>, <code>DAG</code>, <code>LABEL</code> as revision names in <code>FileCheck</code>-based test suites.</p>
+<h2><a href="#pr-listing" aria-hidden="true" class="anchor" id="pr-listing"></a>PR listing</h2>
+<h3><a href="#improvements" aria-hidden="true" class="anchor" id="improvements"></a>Improvements</h3>
+<ul>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rust/pull/134907">Turn <code>rustc-dev-guide</code> into a <code>josh</code> subtree #134907</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/133733">Show the difference between the normalized output and the actual output for lines which didn't match #133733</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/133813">Explain that UI tests are expected not to compile by default #133813</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/134629">Allow using a specific debugger when running <code>debuginfo</code> tests #134629</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>, <a href="https://github.com/rust-lang/rust/tree/master/src/tools/run-make-support">run-make-support</a>: <a href="https://github.com/rust-lang/rust/pull/134659">Improve <code>compiletest</code> and <code>run-make-support</code> symlink handling</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/134738">Support <code>forbid-output</code> in UI tests #134738</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/bootstrap">bootstrap</a>: <a href="https://github.com/rust-lang/rust/pull/134809">Add <code>--no-capture</code>/<code>--nocapture</code> as bootstrap arguments #134809</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/bootstrap">bootstrap</a>: <a href="https://github.com/rust-lang/rust/pull/134848">Allow <code>./x check compiletest</code> #134848</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/134925">Deny usage of special <code>FileCheck</code> suffixes as revision names #134925</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/tidy">tidy</a>: <a href="https://github.com/rust-lang/rust/pull/134964">Run Python formatting check in <code>tidy</code> on CI #134964</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/tidy">tidy</a>: <a href="https://github.com/rust-lang/rust/pull/134968">Print how to rebless Python formatting in <code>tidy</code> #134968</a></li>
+</ul>
+<h3><a href="#fixes" aria-hidden="true" class="anchor" id="fixes"></a>Fixes</h3>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/134111">Fix <code>--nocapture</code> for <code>run-make</code> tests #134111</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/134808">Remove empty 'expected' files when blessing #134808</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/tests/run-make">run-make</a>: <a href="https://github.com/rust-lang/rust/pull/134113">Fix <code>assert_stderr_not_contains_regex</code> #134113</a><sup class="footnote-ref"><a href="#fn-oops" id="fnref-oops" data-footnote-ref>4</a></sup></li>
+</ul>
+<h3><a href="#cleanups" aria-hidden="true" class="anchor" id="cleanups"></a>Cleanups</h3>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/134463">Don't register predefined <code>MSVC</code>/<code>NONMSVC</code> <code>FileCheck</code> prefixes</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/134759">Remove the <code>-test</code> suffix from <code>normalize-*</code> directives #134759</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/134840">Only pass the post-colon value to <code>parse_normalize_rule</code> #134840</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/134849">Slightly simplify the handling of debugger directive prefixes #134849</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/bootstrap">bootstrap</a>: <a href="https://github.com/rust-lang/rust/pull/134876">Consolidate the macros for declaring compiletest test suites #134876</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/tidy">tidy</a>: <a href="https://github.com/rust-lang/rust/pull/133821">Replace <code>black</code> with <code>ruff</code> in <code>tidy</code> #133821</a></li>
+</ul>
+<h3><a href="#documentation-updates" aria-hidden="true" class="anchor" id="documentation-updates"></a>Documentation updates</h3>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/134894">Document how to run the split Docker pipelines #134894</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/134669">Document the <code>--dev</code> flag for <code>src/ci/docker/run.sh</code> #134669</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rustc-dev-guide/pull/2170"><code>compiletest</code>: Document the <code>--debugger</code> flag #2170</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rustc-dev-guide/pull/2171">Document <code>forbid-output</code> for UI tests #2171</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rustc-dev-guide/pull/2172">Remove the <code>-test</code> suffix from normalize directives #2172</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rustc-dev-guide/pull/2174">Document <code>x test --no-capture</code> #2174</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rustc-dev-guide/pull/2191">Describe how to use rust-analyzer with <code>rmake.rs</code> #2191</a></li>
+</ul>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-scope">
+<p>The test infra here refers to the test harness <a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a> and supporting components in our build system <a href="https://github.com/rust-lang/rust/tree/master/src/bootstrap">bootstrap</a>. This test infra is used mainly by rustc and rustdoc. Other tools like cargo, miri or rustfmt maintain their own test infra. <a href="#fnref-scope" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-lldb">
+<p>For example, I keep having to debug the debugger like <code>lldb</code> when the older <code>lldb</code> versions keep complaining about <code>ModuleNotFoundError: No module named '_lldb'</code>. <a href="#fnref-lldb" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+<li id="fn-nocapture">
+<p>I don't know about you, but I can never for the life of me remember what the flag is called. I keep thinking it's <code>--no-capture</code> when currently libtest only accepts <code>--nocapture</code>. Thankfully T-testing-devex FCP'd to add the more conventional version <code>--no-capture</code>, looking forward to that. I can also never figure out how many <code>--</code> dashes I need, I keep finding myself having to add more <code>--</code> until it starts working. <a href="#fnref-nocapture" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="3" aria-label="Back to reference 3">↩</a></p>
+</li>
+<li id="fn-oops">
+<p>Nyehehehe <a href="#fnref-oops" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="4" aria-label="Back to reference 4">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

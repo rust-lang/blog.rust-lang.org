@@ -1,0 +1,216 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/11/26/wasip2-tier-2.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The wasm32-wasip2 Target Has Reached Tier 2 Support | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="The wasm32-wasip2 Target Has Reached Tier 2 Support | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="The wasm32-wasip2 Target Has Reached Tier 2 Support | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="The wasm32-wasip2 Target Has Reached Tier 2 Support" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>The wasm32-wasip2 Target Has Reached Tier 2 Support</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 26, 2024 &middot; Yosh Wuyts
+    
+    </div>
+
+    <div class="post">
+      <h2><a href="#introduction" aria-hidden="true" class="anchor" id="introduction"></a>Introduction</h2>
+<p>In April of this year we posted an update about <a href="https://blog.rust-lang.org/2024/04/09/updates-to-rusts-wasi-targets.html">Rust's WASI
+targets</a>
+to the main Rust blog. In it we covered the rename of the <code>wasm32-wasi</code> target
+to <code>wasm32-wasip1</code>, and the introduction of the new <code>wasm32-wasip2</code> target as a
+&quot;tier 3&quot; target. This meant that while the target was available as part of
+<code>rust-lang/rustc</code>, it was not guaranteed to build. We're pleased to announce
+that this has changed in Rust 1.82.</p>
+<p>For those unfamiliar with WebAssembly (Wasm) components and WASI 0.2, here is a quick, simplified primer:</p>
+<ul>
+<li><strong>Wasm</strong> is a (virtual) instruction format for programs to be compiled into (think: x86).</li>
+<li><strong>Wasm Components</strong> are a container format and type system that wrap Core Wasm instructions into typed, hermetic binaries and libraries (think: ELF).</li>
+<li><strong>WASI</strong> is a reserved namespace for a collection of standardized Wasm component interfaces (think: POSIX header files).</li>
+</ul>
+<p>For a more detailed explanation see the <a href="https://bytecodealliance.org/articles/WASI-0.2">WASI 0.2 announcement post</a> on the Bytecode Alliance blog.</p>
+<h2><a href="#whats-new" aria-hidden="true" class="anchor" id="whats-new"></a>What's new?</h2>
+<p>Starting Rust 1.82 (2024-10-17) the <code>wasm32-wasip2</code> (WASI 0.2) target has
+reached tier-2 platform support in the Rust compiler. Among other things this
+now means it is guaranteed to build, and is now available to install via Rustup
+using the following command:</p>
+<pre><code class="language-bash">rustup target add wasm32-wasip2
+</code></pre>
+<p>Up until now Rust users writing <a href="https://component-model.bytecodealliance.org">Wasm
+Components</a> would always have to rely on tools (such as
+<a href="https://github.com/bytecodealliance/cargo-component">cargo-component</a>) which target the WASI 0.1 target (<code>wasm32-wasip1</code>) and
+package it into a WASI 0.2 Component via a post-processing step invoked. Now
+that <code>wasm32-wasip2</code> is available to everyone via Rustup, tooling can
+begin to directly target WASI 0.2 without the need for additional post-processing.</p>
+<p>What this also means is that ecosystem crates can begin targeting WASI 0.2
+directly for platform-specific code. WASI 0.1 did not have support for sockets.
+Now that we have a stable tier 2 platform available, crate authors should be
+able to finally start writing WASI-compatible network code. To target WASI 0.2
+from Rust, authors can use the following <code>cfg</code> attribute:</p>
+<pre><code class="language-rust">#[cfg(all(target_os = &quot;wasi&quot;, target_env = &quot;p2&quot;))]
+mod wasip2 {
+    // items go here
+}
+</code></pre>
+<p>To target the older WASI 0.1 target, Rust also accepts <code>target_env = &quot;p1&quot;</code>.</p>
+<h2><a href="#standard-library-support" aria-hidden="true" class="anchor" id="standard-library-support"></a>Standard Library Support</h2>
+<p>The WASI 0.2 Rust target reaching tier 2 platform support is in a way just the
+beginning. means it's supported and stable. While the platform itself is now
+stable, support in the stdlib for WASI 0.2 APIs is still limited. While the WASI
+0.2 specification specifies APIs for example for timers, files, and sockets - if
+you try and use the stdlib APIs for these today, you'll find they don't yet
+work.</p>
+<p>We expect to gradually extend the Rust stdlib with support for WASI 0.2 APIs
+throughout the remainder of this year into the next. That work has already
+started, with
+<a href="https://github.com/rust-lang/rust/pull/129638">rust-lang/rust#129638</a> adding
+native support for <code>std::net</code> in Rust 1.83. We expect more of these PRs to land
+through the remainder of the year.</p>
+<p>Though this doesn't need to stop users from using WASI 0.2 today. The stdlib is
+great because it provides <em>portable</em> abstractions, usually built on top of an
+operating system's <code>libc</code> or equivalent. If you want to use WASI 0.2 APIs
+directly today, you can either use the
+<a href="https://docs.rs/wasi/latest/wasi/">wasi</a> crate directly. Or generate your own
+WASI bindings from the <a href="https://github.com/WebAssembly/WASI/tree/main/wasip2">WASI
+specification's</a> interface
+types using <a href="https://github.com/bytecodealliance/wit-bindgen/">wit-bindgen</a>.</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>The <code>wasm32-wasip2</code> target is now installable via Rustup. This makes it possible
+for the Rust compiler to directly compile to the Wasm Components format
+targeting the WASI 0.2 interfaces. There is now also a way for crates to compile
+add WASI 0.2 platform support by writing:</p>
+<pre><code class="language-rust">#[cfg(all(target_os = &quot;wasi&quot;, target_env = &quot;p2&quot;))]
+mod wasip2 {}
+</code></pre>
+<p>We're excited for Wasm Components and WASI 0.2 to have reached this milestone
+within the Rust project, and are excited to see what folks in the community will
+be building with it!</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

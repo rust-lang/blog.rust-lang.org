@@ -1,0 +1,386 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2025/01/23/Project-Goals-Dec-Update.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>December Project Goals Update | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="December Project Goals Update | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="December Project Goals Update | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="December Project Goals Update" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>December Project Goals Update</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 23, 2025 &middot; David Wood and Niko Matsakis
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/leadership-council">Leadership Council</a> 
+    </div>
+
+    <div class="post">
+      <p>Over the last six months, the Rust project has been working towards a <a href="https://rust-lang.github.io/rust-project-goals/2024h2/goals.html">slate of 26 project
+goals</a>, with 3 of them designated
+as <a href="https://rust-lang.github.io/rust-project-goals/2024h2/goals.html#flagship-goals">Flagship Goals</a>.
+This post provides a final update on our progress towards these goals (or, in some cases, lack
+thereof). We are currently <a href="https://rust-lang.github.io/rust-project-goals/2025h1/index.html">finalizing plans for the next round of project goals, which will cover
+2025H1</a>. The full details for any
+particular goal are available in its associated <a href="https://github.com/rust-lang/rust-project-goals/milestone/2">tracking issue on the rust-project-goals
+repository</a>.</p>
+<h2><a href="#flagship-goals" aria-hidden="true" class="anchor" id="flagship-goals"></a>Flagship goals</h2>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/105'><strong>Bring the Async Rust experience closer to parity with sync Rust</strong></a></div>
+    <div style="flex: initial;"><progress value="26" max="28"></progress>
+</div>
+</div>
+<p>Our big goal for this period was async closures, and we are excited to announce that work there is done! Stable support for async closures <a href="https://github.com/rust-lang/rust/pull/132706#issuecomment-2540470500">landed on nightly on Dec 12</a> and it will be included in Rust 1.85, which ships on Feb 20. Big kudos to <a href="https://github.com/compiler-errors">compiler-errors</a> for driving that.</p>
+<p>For our other goals, we made progress, but there remains work to be done:</p>
+<ul>
+<li><strong>Return Type Notation (RTN)</strong> is implemented and we had a <a href="https://blog.rust-lang.org/inside-rust/2024/09/26/rtn-call-for-testing.html">call for experimentation</a> but it has not yet reached stable. This will be done as part of our 2025H1 goal.</li>
+<li>Async Functions in Traits (and Return Position Impl Trait in Trait) are currently not consided <code>dyn</code> compatible. We would eventually like to have first-class <code>dyn</code> support, but as an intermediate step we created a procedural macro crate <a href="https://crates.io/crates/dynosaur"><code>dynosaur</code></a><sup class="footnote-ref"><a href="#fn-names" id="fnref-names" data-footnote-ref>1</a></sup> that can create wrappers that enable <strong>dynamic dispatch</strong>. We are planning a comprehensive blog post in 2025H1 that shows how to use this crate and lays out the overall plan for async functions in traits.</li>
+<li>Work was done to prototype an <strong>implementation for async drop</strong> but we didn't account for reviewing bandwidth. <a href="https://github.com/nikomatsakis">nikomatsakis</a> has done initial reads and is working with PR author to get this done in 2025H1. To be clear though the scope of this is an experiment with the goal of uncovering implementation hurdles. There remains significant language design work before this feature would be considered for stabilization (we don't even have an RFC, and there are lots of unknowns remaining).</li>
+<li>We have had fruitful discussions about the trait for <strong>async iteration</strong> but do not have widespread consensus, that's on the docket for 2025H1.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/116'><strong>Resolve the biggest blockers to Linux building on stable Rust</strong></a></div>
+    <div style="flex: initial;"><progress value="40" max="55"></progress>
+</div>
+</div>
+<p>We largely completed our goal to stabilize the language features used by the Rust for Linux project. In some cases a small amount of work remains. Over the last six months, we...</p>
+<ul>
+<li>stabilized the <code>offset_of!</code> macro to get the offset of fields;</li>
+<li><em>almost</em> stabilized the <code>CoercePointee</code> trait -- but <a href="https://github.com/rust-lang/rust/pull/133820#issuecomment-2559379796">discovered that the current implementaton was revealing unstable details</a>, which is currently being resolved;</li>
+<li><code>asm_goto</code> stabilization PR and reference updates are up, excluding the &quot;output&quot; feature.</li>
+<li>completed the majority of the work for arbitrary self types, which is being used by RfL and just needs documentation before stabilisation</li>
+</ul>
+<p>We also began work on compiler flag stabilization with <a href="https://github.com/rust-lang/rfcs/pull/3716">RFC 3716</a>, which outlines a scheme for stabilizing flags that modify the target ABI.</p>
+<p>Big shout-outs to <a href="https://github.com/dingxiangfei2009">Ding Xiang Fei</a>, <a href="https://github.com/Darksonn/">Alice Ryhl</a>,  <a href="https://github.com/adetaylor">Adrian Taylor</a>, and <a href="https://github.com/nbdd0121">Gary Guo</a> for doing the lion's share of the work here.</p>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/117'><strong>Rust 2024 Edition</strong></a></div>
+    <div style="flex: initial;"><progress value="30" max="30"></progress>
+</div>
+</div>
+<p>The final release of Rust 2024 is confirmed for February 20, 2025 as part of Rust 1.85. Rust 1.85 is currently in beta. Feedback from the nightly beta and crater runs has been actively addressed, with adjustments to migrations and documentation to enhance user experience.</p>
+<p>Big shout-outs to <a href="https://github.com/traviscross">TC</a> and  <a href="https://github.com/ehuss/">Eric Huss</a> for their hard work driving this program forward.</p>
+<h2><a href="#final-goal-updates" aria-hidden="true" class="anchor" id="final-goal-updates"></a>Final goal updates</h2>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/100'><strong>&quot;Stabilizable&quot; prototype for expanded const generics</strong></a></div>
+    <div style="flex: initial;"><progress value="2" max="5"></progress>
+</div>
+</div>
+<p>Over the last six months a number of internal refactorings have taken place that are necessary to support a <code>min_generic_const_args</code> prototype.</p>
+<p>One refactoring is that we have changed how we represent const arguments in the compiler to allow for adding a separate representation for the kinds of const arguments that <code>min_generic_const_args</code> will add.</p>
+<p>Another big refactoring is that we have changed the API surface for our representation of const arguments in the type system layer, there is no longer a way to evaluate a const argument without going through our general purpose type system logic. This was necessary to ensure that we correctly handle equality of the kinds of const arguments that <code>min_generic_const_args</code> will support.</p>
+<p>With all of these pre-requisite refactorings completed, a feature gate has been added to the compiler (<code>feature(min_generic_const_args)</code>) that uses the new internal representation of const arguments. We are now beginning to implement the actual language changes under this feature gate.</p>
+<p>Shout-out to <a href="https://github.com/camelid">camelid</a>, <a href="https://github.com/boxy">boxy</a> and <a href="https://github.com/compiler-errors">compiler-errors</a>.</p>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/104'><strong>Begin resolving &#x60;cargo-semver-checks&#x60; blockers for merging into cargo</strong></a></div>
+    <div style="flex: initial;"><progress value="2" max="4"></progress>
+</div>
+</div>
+<p>Over the course of the last six months...</p>
+<ul>
+<li>cargo semver-checks began to include generic parameters and bounds in its schema, allowing for more precise lints;</li>
+<li>cargo manifest linting was implemented and merged, allowing for lints that look at the cargo manifest;</li>
+<li>building on cargo manifest linting, the <code>feature_missing</code> lint was added, which identifies breakage caused by the removal of a package feature.</li>
+</ul>
+<p>In addition, we fleshed out a design sketch for the changes in rustdoc's JSON support that are needed to support cross-crate item linting. This in turn requires compiler extensions to supply that information to rustdoc.</p>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/106'><strong>Const traits</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="2"></progress>
+</div>
+</div>
+<ul>
+<li>Progress was made on adding const traits and implementation in the compiler, with improvements being carefully considered. <code>Add</code> was constified in <a href="https://github.com/rust-lang/rust/pull/133237">rust#133237</a> and <code>Deref</code>/<code>DerefMut</code> in <a href="https://github.com/rust-lang/rust/pull/133260">rust#133260</a>.</li>
+<li>Further progress was made on implementing stability for the const traits feature in <a href="https://github.com/rust-lang/rust/pull/132823">rust#132823</a> and <a href="https://github.com/rust-lang/rust/pull/133999">rust#133999</a>, with additional PRs constifying more traits open at <a href="https://github.com/rust-lang/rust/pull/133995">rust#133995</a> and <a href="https://github.com/rust-lang/rust/pull/134628">rust#134628</a>.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/107'><strong>Ergonomic ref-counting</strong></a></div>
+    <div style="flex: initial;"><progress value="1" max="6"></progress>
+</div>
+</div>
+<ul>
+<li>Over the last six months, we created a lang-team experiment devoted to this issue and <a href="https://github.com/spastorino">spastorino</a> began work on an experimental implementation. <a href="https://github.com/joshtriplett">joshtriplett</a> authored <a href="https://github.com/rust-lang/rfcs/pull/3680">RFC 3680</a>, which has received substantial feedback. The current work is focused on identifying &quot;cheaply cloneable&quot; types and making it easy to create closures that clone them instead of moving them.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/108'><strong>Explore sandboxed build scripts</strong></a></div>
+    <div style="flex: initial;"><progress value="4" max="10"></progress>
+</div>
+</div>
+<ul>
+<li>Alternatives to sandboxed build scripts are going to be investigated instead of continuing this project goal into 2025h1 - namely, declaratively configuring system dependencies with <a href="https://crates.io/crates/system-deps"><code>system-deps</code></a>, using an approach similar to code-checker <a href="https://crates.io/crates/cargo-acl">Cackle</a> and its sandbox environment <a href="https://github.com/containers/bubblewrap">Bubblewrap</a>, or fully-sandboxed build environments like Docker or Nix.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/110'><strong>Extend pubgrub to match cargo&#x27;s dependency resolution</strong></a></div>
+    <div style="flex: initial;"><progress value="2" max="2"></progress>
+</div>
+</div>
+<ul>
+<li>Significant speedups have been achieved, reducing the slowest crate resolution time from over 120 seconds to 11 seconds, and decreasing the time to check all crates from 178 minutes to 71.42 minutes.</li>
+<li>Performance improvements have been made to both the existing resolver and the new implementation, with the lock file verification time for all crates reduced from 44.90 minutes to 32.77 minutes (excluding some of the hardest cases).</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/112'><strong>Make Rustdoc Search easier to learn</strong></a></div>
+    <div style="flex: initial;"><progress value="2" max="9"></progress>
+</div>
+</div>
+<ul>
+<li>Our pull request adding example searches and adding a search button has been added to the agenda for the rustdoc team next meeting.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/113'><strong>Next-generation trait solver</strong></a></div>
+    <div style="flex: initial;"><progress value="10" max="13"></progress>
+</div>
+</div>
+<ul>
+<li>The <code>-Znext-solver=coherence</code> stabilization is now stable in version 1.84, with a new update blogpost published.</li>
+<li>Significant progress was made on bootstrap with <code>-Znext-solver=globally</code>. We're now able to compile rustc and cargo, enabling try-builds and perf runs.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/114'><strong>Optimizing Clippy &amp; linting</strong></a></div>
+    <div style="flex: initial;"><progress value="1" max="2"></progress>
+</div>
+</div>
+<ul>
+<li>An optimisation for the <code>#[clippy::msrv]</code> lint is open, benchmarked, and currently under review.</li>
+<li>Help is needed on any issue marked with <code>performance-project</code>, especially on issue #13714.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/115'><strong>Patterns of empty types</strong></a></div>
+    <div style="flex: initial;"><progress value="3" max="8"></progress>
+</div>
+</div>
+<ul>
+<li>Over the course of this goal, Nadrieril wrote and posted the never patterns RFC as an attempt to make progress without figuring out the whole picture, and the general feedback was &quot;we want to see the whole picture&quot;. Next step will be to write up an RFC that includes a clear proposal for which empty patterns can and cannot be omitted. This is 100% bottlenecked on my own writing bandwidth (reach out if you want to help!). Work will continue but the goal won't be resubmitted for 2025h1.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/118'><strong>Scalable Polonius support on nightly</strong></a></div>
+    <div style="flex: initial;"><progress value="7" max="18"></progress>
+</div>
+</div>
+<ul>
+<li><a href="https://github.com/amandasystems">Amanda</a> has made progress on removing placeholders, focusing on lazy constraints and early error reporting, as well as investigating issues with rewriting type tests; a few tests are still failing, and it seems error reporting and diagnostics will be hard to keep exactly as today.</li>
+<li><a href="https://github.com/lqd">@lqd</a> has opened PRs to land the prototype of the location-sensitive analysis. It's working well enough that it's worthwhile to land; there is still a lot of work left to do, but it's a major milestone, which we hoped to achieve with this project goal.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/119'><strong>Stabilize cargo-script</strong></a></div>
+    <div style="flex: initial;"><progress value="28" max="36"></progress>
+</div>
+</div>
+<ul>
+<li>A fix stopping cargo-script from overriding the release profile was posted and merged.</li>
+<li>Help is wanted for writing frontmatter support in rustc, as rustfmt folks are requesting it to be represented in the AST.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/120'><strong>Stabilize doc_cfg</strong></a></div>
+    <div style="flex: initial;"><progress value="2" max="3"></progress>
+</div>
+</div>
+<ul>
+<li>RFC is done, waiting for all rustdoc team members to take a look before implementation can start.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/121'><strong>Stabilize parallel front end</strong></a></div>
+    <div style="flex: initial;"><progress value="1" max="3"></progress>
+</div>
+</div>
+<ul>
+<li><a href="https://github.com/SparrowLii">SparrowLii</a> proposed a 2025H1 project goal to continue stabilizing the parallel front end, focusing on solving reproducible deadlock issues and improving parallel compilation performance.</li>
+<li>The team discussed solutions to avoid potential deadlocks, finding that disabling work-stealing in rayon's subloops is effective, and will incorporate related modifications in a PR.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/123'><strong>Use annotate-snippets for rustc diagnostic output</strong></a></div>
+    <div style="flex: initial;"><progress value="5" max="15"></progress>
+</div>
+</div>
+<ul>
+<li>Progress on <code>annotate-snippets</code> continued despite a busy schedule, with a focus on improving suggestions and addressing architectural challenges.</li>
+<li>A new API was designed in collaboration with <a href="https://github.com/epage">epage</a>, aiming to align <code>annotate-snippets</code> more closely with <code>rustc</code> for easier contribution and integration.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/102'><strong>Assemble project goal slate</strong></a></div>
+    <div style="flex: initial;"><progress value="7" max="8"></progress>
+</div>
+</div>
+<ul>
+<li>The project goal slate for 2025h1 has been posted <a href="https://github.com/rust-lang/rfcs/pull/3764#issuecomment-2593395122">as an RFC</a> and is waiting on approval from project team leads.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/109'><strong>Expose experimental LLVM features for automatic differentiation and GPU offloading</strong></a></div>
+    <div style="flex: initial;"><progress value="5" max="9"></progress>
+</div>
+</div>
+<ul>
+<li>Another pull request was merged with only one remaining until a working MVP is available on nightly.</li>
+<li>Some features were removed to simplify upstreaming and will be added back as single PRs.</li>
+<li>Will start work on <code>batching</code> feature of LLVM/Enzyme which allows Array of Struct and Struct of Array vectorisation.</li>
+<li>There's been a push to add a AMD GPU target to the compiler which would have been needed for the LLVM offload project.</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/126'><strong>Survey tools suitability for Std safety verification</strong></a></div>
+    <div style="flex: initial;"><progress value="4" max="6"></progress>
+</div>
+</div>
+<ul>
+<li>We have written and verified around 220 safety contracts in the verify-rust-std fork.</li>
+<li>3 out of 14 challenges have been solved.</li>
+<li>We have successfully integrated Kani in the repository CI, and we are working on the integration of 2 other verification tools: VeriFast and Goto-transcoder (ESBMC)</li>
+</ul>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/122'><strong>Testing infra + contributors for a-mir-formality</strong></a></div>
+    <div style="flex: initial;"><img src="https://img.shields.io/badge/Status-Will%20not%20complete%20%3A%28-yellow" alt="Will not complete"></img>
+</div>
+</div>
+<ul>
+<li>There wasn't any progress on this goal, but building a community around a-mir-formality is still a goal and future plans are coming.</li>
+</ul>
+<h2><a href="#goals-without-updates" aria-hidden="true" class="anchor" id="goals-without-updates"></a>Goals without updates</h2>
+<p>The following goals have not received updates in the last month:</p>
+</div><div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/103'><strong>Associated type position impl trait</strong></a></div>
+    <div style="flex: initial;"><img src="https://img.shields.io/badge/Status-Will%20not%20complete%20%3A%28-yellow" alt="Will not complete"></img>
+</div>
+</div><div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/111'><strong>Implement &quot;merged doctests&quot; to save doctest time</strong></a></div>
+    <div style="flex: initial;"><img src="https://img.shields.io/badge/Status-Completed%20%3D%29-green" alt="Completed"></img>
+</div>
+</div><div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/101'><strong>Provided reasons for yanked crates</strong></a></div>
+    <div style="flex: initial;"><progress value="2" max="9"></progress>
+</div>
+</div><div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/124'><strong>User-wide build cache</strong></a></div>
+    <div style="flex: initial;"><img src="https://img.shields.io/badge/Status-Will%20not%20complete%20%3A%28-yellow" alt="Will not complete"></img>
+</div>
+</div>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-names">
+<p>As everyone knows, the hardest part of computer-science is naming. I think we rocked this one. <a href="#fnref-names" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

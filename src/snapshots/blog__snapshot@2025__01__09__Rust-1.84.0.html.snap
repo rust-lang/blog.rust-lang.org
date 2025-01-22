@@ -1,0 +1,283 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2025/01/09/Rust-1.84.0.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.84.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Announcing Rust 1.84.0 | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Announcing Rust 1.84.0 | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Announcing Rust 1.84.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.84.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Jan. 9, 2025 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.84.0. Rust is a programming language empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via <code>rustup</code>, you can get 1.84.0 with:</p>
+<pre><code class="language-console">$ rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website, and check out the <a href="https://doc.rust-lang.org/stable/releases.html#version-1840-2025-01-09">detailed release notes for 1.84.0</a>.</p>
+<p>If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (<code>rustup default beta</code>) or the nightly channel (<code>rustup default nightly</code>). Please <a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you might come across!</p>
+<h2><a href="#whats-in-1840-stable" aria-hidden="true" class="anchor" id="whats-in-1840-stable"></a>What's in 1.84.0 stable</h2>
+<h3><a href="#cargo-considers-rust-versions-for-dependency-version-selection" aria-hidden="true" class="anchor" id="cargo-considers-rust-versions-for-dependency-version-selection"></a>Cargo considers Rust versions for dependency version selection</h3>
+<p>1.84.0 stabilizes the minimum supported Rust version (MSRV) aware resolver,
+which prefers dependency versions compatible with the project's declared
+<a href="https://doc.rust-lang.org/cargo/reference/rust-version.html">MSRV</a>.
+With MSRV-aware version selection, the toil is reduced for maintainers to
+support older toolchains by not needing to manually select older versions for
+each dependency.</p>
+<p>You can opt-in to the MSRV-aware resolver via <a href="https://doc.rust-lang.org/cargo/reference/config.html#resolverincompatible-rust-versions"><code>.cargo/config.toml</code></a>:</p>
+<pre><code class="language-toml">[resolver]
+incompatible-rust-versions = &quot;fallback&quot;
+</code></pre>
+<p>Then when adding a dependency:</p>
+<pre><code class="language-console">$ cargo add clap
+    Updating crates.io index
+warning: ignoring clap@4.5.23 (which requires rustc 1.74) to maintain demo's rust-version of 1.60
+      Adding clap v4.0.32 to dependencies
+    Updating crates.io index
+     Locking 33 packages to latest Rust 1.60 compatible versions
+      Adding clap v4.0.32 (available: v4.5.23, requires Rust 1.74)
+</code></pre>
+<p>When <a href="https://doc.rust-lang.org/cargo/guide/continuous-integration.html#verifying-latest-dependencies">verifying the latest dependencies in CI</a>, you can override this:</p>
+<pre><code class="language-console">$ CARGO_RESOLVER_INCOMPATIBLE_RUST_VERSIONS=allow cargo update
+    Updating crates.io index
+     Locking 12 packages to latest compatible versions
+    Updating clap v4.0.32 -&gt; v4.5.23
+</code></pre>
+<p>You can also opt-in by setting <a href="https://doc.rust-lang.org/cargo/reference/resolver.html#resolver-versions"><code>package.resolver = &quot;3&quot;</code></a> in the Cargo.toml manifest file though that will require raising your MSRV to 1.84.  The new resolver will be enabled by default for projects using the 2024 edition
+(which will stabilize in 1.85).</p>
+<p>This gives library authors more flexibility when deciding
+their policy on adopting new Rust toolchain features. Previously, a library
+adopting features from a new Rust toolchain would force downstream users of
+that library who have an older Rust version to either upgrade their toolchain
+or manually select an old version of the library compatible with their
+toolchain (and avoid running <code>cargo update</code>). Now, those users will be able to
+automatically use older library versions compatible with their older toolchain.</p>
+<p>See the <a href="https://doc.rust-lang.org/cargo/reference/rust-version.html#setting-and-updating-rust-version">documentation</a> for more considerations when deciding on an MSRV policy.</p>
+<h3><a href="#migration-to-the-new-trait-solver-begins" aria-hidden="true" class="anchor" id="migration-to-the-new-trait-solver-begins"></a>Migration to the new trait solver begins</h3>
+<p>The Rust compiler is in the process of moving to a new implementation for the
+trait solver. The next-generation trait solver is a reimplementation of a core
+component of Rust's type system. It is not only responsible for checking
+whether trait-bounds - e.g. <code>Vec&lt;T&gt;: Clone</code> - hold, but is also used by many
+other parts of the type system, such as normalization - figuring out the
+underlying type of <code>&lt;Vec&lt;T&gt; as IntoIterator&gt;::Item</code> - and equating types
+(checking whether <code>T</code> and <code>U</code> are the same).</p>
+<p>In 1.84, the new solver is used for checking coherence of trait impls. At a
+high level, coherence is responsible for ensuring that there is at most one
+implementation of a trait for a given type while considering not yet written
+or visible code from other crates.</p>
+<p>This stabilization fixes a few mostly theoretical correctness issues of the
+old implementation, resulting in potential &quot;conflicting implementations of trait ...&quot;
+errors that were not previously reported. We expect the affected patterns to be
+very rare based on evaluation of available code through <a href="https://github.com/rust-lang/crater/">Crater</a>. The stabilization
+also improves our ability to prove that impls do <em>not</em> overlap, allowing more code
+to be written in some cases.</p>
+<p>For more details, see a <a href="https://blog.rust-lang.org/inside-rust/2024/12/04/trait-system-refactor-initiative.html">previous blog post</a>
+and the <a href="https://github.com/rust-lang/rust/pull/130654">stabilization report</a>.</p>
+<h3><a href="#strict-provenance-apis" aria-hidden="true" class="anchor" id="strict-provenance-apis"></a>Strict provenance APIs</h3>
+<p>In Rust, <a href="https://rust-lang.github.io/rfcs/3559-rust-has-provenance.html">pointers are not simply an &quot;integer&quot; or
+&quot;address&quot;</a>. For
+instance, a &quot;use after free&quot; is undefined behavior even if you &quot;get lucky&quot; and the freed memory gets
+reallocated before your read/write. As another example, writing
+through a pointer derived from an <code>&amp;i32</code> reference is undefined behavior, even
+if writing to the same address via a different pointer is legal. The underlying
+pattern here is that <em>the way a pointer is computed matters</em>, not just the
+address that results from this computation. For this reason, we say that
+pointers have <strong>provenance</strong>: to fully characterize pointer-related undefined
+behavior in Rust, we have to know not only the address the pointer points to,
+but also track which other pointer(s) it is &quot;derived from&quot;.</p>
+<p>Most of the time, programmers do not need to worry much about provenance, and
+it is very clear how a pointer got derived. However, when casting pointers to
+integers and back, the provenance of the resulting pointer is underspecified.
+With this release, Rust is adding a set of APIs that can in many cases replace
+the use of integer-pointer-casts, and therefore avoid the ambiguities inherent
+to such casts. In particular, the pattern of using the lowest bits of an
+aligned pointer to store extra information can now be implemented without ever
+casting a pointer to an integer or back. This makes the code easier to reason
+about, easier to analyze for the compiler, and also benefits tools like
+<a href="https://github.com/rust-lang/miri">Miri</a> and architectures like
+<a href="https://www.cl.cam.ac.uk/research/security/ctsrd/cheri/">CHERI</a> that aim to
+detect and diagnose pointer misuse.</p>
+<p>For more details, see the standard library <a href="https://doc.rust-lang.org/std/ptr/index.html#provenance">documentation on provenance</a>.</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/core/net/struct.Ipv6Addr.html#method.is_unique_local"><code>Ipv6Addr::is_unique_local</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/net/struct.Ipv6Addr.html#method.is_unicast_link_local"><code>Ipv6Addr::is_unicast_link_local</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/fn.with_exposed_provenance.html"><code>core::ptr::with_exposed_provenance</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/fn.with_exposed_provenance_mut.html"><code>core::ptr::with_exposed_provenance_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.addr"><code>&lt;ptr&gt;::addr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.expose_provenance"><code>&lt;ptr&gt;::expose_provenance</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.with_addr"><code>&lt;ptr&gt;::with_addr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.map_addr"><code>&lt;ptr&gt;::map_addr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.i32.html#method.isqrt"><code>&lt;int&gt;::isqrt</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.i32.html#method.checked_isqrt"><code>&lt;int&gt;::checked_isqrt</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.u32.html#method.isqrt"><code>&lt;uint&gt;::isqrt</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/num/struct.NonZero.html#impl-NonZero%3Cu128%3E/method.isqrt"><code>NonZero::isqrt</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/fn.without_provenance.html"><code>core::ptr::without_provenance</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/fn.without_provenance_mut.html"><code>core::ptr::without_provenance_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/fn.dangling.html"><code>core::ptr::dangling</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/fn.dangling_mut.html"><code>core::ptr::dangling_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/pin/struct.Pin.html#method.as_deref_mut"><code>Pin::as_deref_mut</code></a></li>
+</ul>
+<p>These APIs are now stable in const contexts</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicBool.html#method.from_ptr"><code>AtomicBool::from_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicPtr.html#method.from_ptr"><code>AtomicPtr::from_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicU8.html#method.from_ptr"><code>AtomicU8::from_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicU16.html#method.from_ptr"><code>AtomicU16::from_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicU32.html#method.from_ptr"><code>AtomicU32::from_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicU64.html#method.from_ptr"><code>AtomicU64::from_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicUsize.html#method.from_ptr"><code>AtomicUsize::from_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicI8.html#method.from_ptr"><code>AtomicI8::from_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicI16.html#method.from_ptr"><code>AtomicI16::from_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicI32.html#method.from_ptr"><code>AtomicI32::from_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicI64.html#method.from_ptr"><code>AtomicI64::from_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/sync/atomic/struct.AtomicIsize.html#method.from_ptr"><code>AtomicIsize::from_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.is_null-1"><code>&lt;ptr&gt;::is_null</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.as_ref-1"><code>&lt;ptr&gt;::as_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.as_mut"><code>&lt;ptr&gt;::as_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/pin/struct.Pin.html#method.new"><code>Pin::new</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/pin/struct.Pin.html#method.new_unchecked"><code>Pin::new_unchecked</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/pin/struct.Pin.html#method.get_ref"><code>Pin::get_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/pin/struct.Pin.html#method.into_ref"><code>Pin::into_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/pin/struct.Pin.html#method.get_mut"><code>Pin::get_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/pin/struct.Pin.html#method.get_unchecked_mut"><code>Pin::get_unchecked_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/pin/struct.Pin.html#method.static_ref"><code>Pin::static_ref</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/pin/struct.Pin.html#method.static_mut"><code>Pin::static_mut</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>Check out everything that changed in <a href="https://github.com/rust-lang/rust/releases/tag/1.84.0">Rust</a>, <a href="https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-184-2025-01-09">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-184">Clippy</a>.</p>
+<h2><a href="#contributors-to-1840" aria-hidden="true" class="anchor" id="contributors-to-1840"></a>Contributors to 1.84.0</h2>
+<p>Many people came together to create Rust 1.84.0. We couldn't have done it without all of you. <a href="https://thanks.rust-lang.org/rust/1.84.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

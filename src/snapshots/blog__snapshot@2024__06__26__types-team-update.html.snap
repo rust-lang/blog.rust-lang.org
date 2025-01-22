@@ -1,0 +1,318 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/06/26/types-team-update.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Types Team Update and Roadmap | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Types Team Update and Roadmap | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Types Team Update and Roadmap | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Types Team Update and Roadmap" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Types Team Update and Roadmap</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">June 26, 2024 &middot; lcnr
+     on behalf of <a href="https://github.com/rust-lang/types-team">The Types Team</a> 
+    </div>
+
+    <div class="post">
+      <p>It has been more than a year since <a href="https://blog.rust-lang.org/2023/01/20/types-announcement.html">the initial blog post</a> announcing the Types team, and our initial set of goals. For details on what the team is, why it was formed, or our previously-stated overarching goals, go check out that blog post. In short the Types team's purview extends to the parts of the Rust language and compiler that involve the type system, e.g. type checking, trait solving, and borrow checking. Our short and long term goals effectively work to make the type system sound, consistent, extensible, and fast.</p>
+<p>Before getting into details, it's worth sharing a quick point: the team over the last year has been very successful. Oftentimes, it's hard to measure impact, particularly when long-term roadmap goals are hard to quantify progress on and various short-term goals either are hit or aren't. But, there is one clear statistic that is somewhat indicative of the team's progress: over the last year or so, <a href="https://github.com/rust-lang/rust/pulls?q=is%3Apr+label%3AT-types+label%3Adisposition-merge+is%3Amerged+closed%3A%3E2023-01-20+sort%3Acreated-asc+">more than 50 user-facing changes</a> have landed, each separately approved by Types Team consensus through FCP.</p>
+<p>The changes lie at the boundary between language design and implementation, and the Types Team (which is a subteam of both the Language and Compiler Teams) existing means that not only does the Rust Project have the bandwidth to make these decisions but we also have enough people with the knowledge and experience of the type system to make informed decisions that overall make the language better.</p>
+<h2><a href="#the-priorities-of-the-types-team" aria-hidden="true" class="anchor" id="the-priorities-of-the-types-team"></a>The priorities of the types team</h2>
+<p>To evaluate our progress over the last year and our roadmap going forward,
+lets start with our main priorities in order of importance. We will refer
+to them during the remainder of this post. To reach our goals, we need a
+a healthy group of maintainers which have the expertise and capacity to
+react to issues and to implement complex changes.</p>
+<h3><a href="#the-type-system-should-be-sound" aria-hidden="true" class="anchor" id="the-type-system-should-be-sound"></a>The type system should be Sound</h3>
+<p>One of the main promises of Rust is that there cannot be undefined behavior when using
+only safe code. It might surprise you that there are currently <a href="https://github.com/orgs/rust-lang/projects/44/views/1">known type system
+bugs</a> which break these guarantees. Most of these issues were found by people familiar with
+the inner workings of the compiler by explicitly looking for them and we generally do not expect
+users to encounter these bugs by accident. Regardless, we deeply care about fixing them
+and are working towards a fully sound and ideally verified type system.</p>
+<h3><a href="#the-type-system-should-be-consistent" aria-hidden="true" class="anchor" id="the-type-system-should-be-consistent"></a>The type system should be Consistent</h3>
+<p>The type system should be easy to reason about. We should avoid rough edges and
+special-cases if possible. We want to keep both the implementation and user-facing behavior
+as simple as possible. Where possible we want to consider the overall design instead of
+providing local targeted fixes. This is necessary to build trust in the soundness of the
+type system and allows for a simpler mental model of Rust.</p>
+<h3><a href="#the-type-system-should-be-extensible" aria-hidden="true" class="anchor" id="the-type-system-should-be-extensible"></a>The type system should be Extensible</h3>
+<p>Rust is still evolving and we will be required to extend the type system to enable new
+language features going forward. This requires the type system to be extensible and
+approachable. The design of the language should not be adapted to work around
+short-comings of its current type system implementation. We should collaborate with
+other teams and users to make sure we're aware of their problems and consider possible
+future extensions in our implementation and design.</p>
+<h3><a href="#the-type-system-should-be-fast" aria-hidden="true" class="anchor" id="the-type-system-should-be-fast"></a>The type system should be Fast</h3>
+<p>We care about the compile times of Rust and want to consider the impact on compile times
+of our designs. We should look for effective approaches to speed up the existing implementation,
+by improving caching or adding fast paths where applicable. We should also be aware of the
+compile time impact of future additions to the type system and suggest more performant
+solutions where possible.</p>
+<h2><a href="#updates" aria-hidden="true" class="anchor" id="updates"></a>Updates</h2>
+<p>We have been very active over the last year and made some significant progress. There
+are also a few non-technical updates we would like to share.</p>
+<h2><a href="#organizational-updates" aria-hidden="true" class="anchor" id="organizational-updates"></a>Organizational updates</h2>
+<p>First, a huge welcome to the two new members to team since the announcement post: <a href="https://github.com/boxyuwu">@BoxyUwU</a> and <a href="https://github.com/aliemjay">@aliemjay</a>. <a href="https://github.com/boxyuwu">@BoxyUwU</a> has been doing a lot of work on const generics and made significant contributions to the design of the next generation trait solver. <a href="https://github.com/aliemjay">@aliemjay</a> has been working on some very subtle improvements to opaque types - <code>impl Trait</code> - and to borrow checking. They are both invaluable additions to the team.</p>
+<p>We also organized another in-person Types Team meetup last October, immediately prior to EuroRust. We discussed the state of the team, looked at current implementation challenges and in-progress work, and reviewed and updated <a href="https://blog.rust-lang.org/2023/01/20/types-announcement.html#roadmap">the roadmap from the previous meetup</a>. Most of this will be covered in this blog post.</p>
+<p>Finally, as discussed in the <a href="https://rust-lang.github.io/rfcs/3254-types-team.html">RFC</a>, we would like to have leads rotate out regularly, largely to help share the burden and experience of leads' work. So with that being said, <a href="https://github.com/nikomatsakis">@nikomatsakis</a> is rotating out and <a href="https://github.com/lcnr">@lcnr</a> is joining to co-lead alongside <a href="https://github.com/jackh726/">@jackh726</a>.</p>
+<h2><a href="#roadmap-progress-and-major-milestones" aria-hidden="true" class="anchor" id="roadmap-progress-and-major-milestones"></a>Roadmap progress and major milestones</h2>
+<h3><a href="#the-next-generation-trait-solver" aria-hidden="true" class="anchor" id="the-next-generation-trait-solver"></a>The next-generation trait solver</h3>
+<p>There has been <a href="https://github.com/rust-lang/rust/pulls?q=is%3Apr+label%3AWG-trait-system-refactor+-label%3Arollup+is%3Amerged+closed%3A%3E2023-01-20+sort%3Acreated-asc+">a lot of work</a> on the <a href="https://github.com/rust-lang/trait-system-refactor-initiative/">next-generation trait solver</a>.
+The initiative posted <a href="https://blog.rust-lang.org/inside-rust/2023/12/22/trait-system-refactor-initiative.html">a separate update</a> at the end of last year. While
+we would have liked to <a href="https://github.com/rust-lang/rust/pull/121848">stabilize its use in coherence</a> a few months ago,
+this surfaced additional small behavior regressions and hangs, causing delays. We are working on fixing these issues and intend to merge the stabilization PR soon. We are getting close to compiling the standard library
+and the compiler with the new solver enabled everywhere, after which will be able to run
+crater to figure out the remaining issues. We expect there to be a long tail of minor issues
+and behavioral differences from the existing implementation, so there's still a lot to do
+here. There are also open design questions which we will have to resolve before stabilizing
+the new implementation.</p>
+<h3><a href="#async-and-impl-trait" aria-hidden="true" class="anchor" id="async-and-impl-trait"></a>Async and <code>impl Trait</code></h3>
+<p>We stabilized <code>async</code>-fn in traits (AFIT) and return-position <code>impl Trait</code> in
+traits (RPITIT) in version 1.75 thanks to a significant effort by <a href="https://github.com/compiler-errors">@compiler-errors</a> and
+<a href="https://github.com/spastorino">@spastorino</a>. <a href="https://github.com/cjgillot">@cjgillot</a> greatly improved the way generators, and therefore async functions,
+are represented in the type system<sup class="footnote-ref"><a href="#fn-107421" id="fnref-107421" data-footnote-ref>1</a></sup>. This allowed us to support recursive
+<code>async</code>-functions without too much additional work<sup class="footnote-ref"><a href="#fn-117703" id="fnref-117703" data-footnote-ref>2</a></sup>.</p>
+<p>Designing the next-generation trait solver surfaced issues and future-compatibility challenges
+of our type-alias <code>impl Trait</code> (TAIT) implementation using the old trait solver. We are
+currently reworking the design and implementation. <a href="https://github.com/oli-obk">@oli-obk</a> is spear-heading this effort.
+This also impacts RPIT edge-cases, forcing us to be careful to avoid accidental breakage.
+There are some open language design questions for TAIT, so we plan to
+stabilize associated type position <code>impl Trait</code> (ATPIT) as it avoids these language design
+questions while still closing the expressiveness gap.</p>
+<h3><a href="#a-mir-formality" aria-hidden="true" class="anchor" id="a-mir-formality"></a><code>a-mir-formality</code></h3>
+<p>We made limited progress on <a href="https://github.com/rust-lang/a-mir-formality"><code>a-mir-formality</code></a> over the last year, mostly
+because we were able to allocate less time than expected towards this work.
+We have used it as the foundation towards an intuitive approach to
+coinductive traits which are necessary for many of the remaining unsound
+issues.</p>
+<h3><a href="#fixing-soundness-issues" aria-hidden="true" class="anchor" id="fixing-soundness-issues"></a>Fixing soundness issues</h3>
+<p>We fixed multiple long-standing unsound issues, see <a href="https://github.com/rust-lang/rust/issues?q=is%3Aissue+label%3AI-unsound+label%3AT-types+-label%3Arequires-nightly+is%3Aclosed+closed%3A%3C2024-06-20+">the full list of closed issues</a>. The most most notable of which was <a href="https://github.com/rust-lang/rust/issues/80176">#80176</a>. This subtle issue caused us to accept methods in trait implementations whose function signature had outlives requirements not present in the trait definition. These requirements were then never proven when calling the trait method. As there were some crates which relied on this pattern by accident, even if it their usages didn't exploit this unsoundness, we first merged a <a href="https://github.com/rust-lang/rust/issues/105572">future-compatibility lint</a> which we then moved to a hard error after a few versions.</p>
+<p>We've also spent time on <a href="https://github.com/orgs/rust-lang/projects/44/views/1">categorizing the remaining open issues</a> and integrating
+them into our longterm planning. Most of the remaining ones are blocked on the
+next-generation trait solver as fixing them relies on coinductive trait semantics
+and improvements to implied bounds. There are some remaining issues which can be at
+least partially fixed right now, and we intend to work through them as we go.
+Finally, there are some issues for which we still haven't figured out the best
+approach and which require some further considerations.</p>
+<h2><a href="#going-forward" aria-hidden="true" class="anchor" id="going-forward"></a>Going forward</h2>
+<p>We made significant progress during the last year but we are not done! This section covers our goals for the rest of 2024. For each item we also link to the project goals that we have proposed as part of the Rust Project's <a href="https://blog.rust-lang.org/inside-rust/2024/05/07/announcing-project-goals.html">experimental new roadmap process</a>.</p>
+<h3><a href="#-znext-solver" aria-hidden="true" class="anchor" id="-znext-solver"></a><code>-Znext-solver</code></h3>
+<ul>
+<li><a href="https://rust-lang.github.io/rust-project-goals/2024h2/next-solver.html">Next-generation trait solver project goal</a></li>
+</ul>
+<p>Our biggest goal is to use the <a href="https://github.com/rust-lang/trait-system-refactor-initiative/">next-generation trait solver</a>
+everywhere by default and to fully replace the existing implementation. We are currently
+finalizing the stabilization of <a href="https://github.com/rust-lang/rust/pull/121848">its use in coherence checking</a>. This should
+already fix multiple unsound issues and fix a lot of smaller issues and inconsistencies of
+the current implementation. See the stabilization report for more details.</p>
+<p>We are also working on extracting its implementation into a separate library
+outside of the compiler itself. We would like to share the trait solver with
+rust-analyzer by the end of this year. They currently use <a href="https://github.com/rust-lang/chalk/">chalk</a> which is no longer
+actively maintained. Using the next-generation trait solver in rust-analyzer
+should result in a lot of additional testing for the solver while also improving
+the IDE experience by positively impacting performance and correctness.</p>
+<p>We intend to slowly roll out the solver in other areas of the compiler until we're able
+to fully remove the existing implementation by the end of 2025. This switch will fix
+multiple unsound issues by itself and will unblock a significant amount of future work.
+It will generally cleanup many rough edges of the type system, such as associated types
+in higher-ranked types. There are many unsound issues which can only be fixed once we exclusively
+use the new implementation.</p>
+<h3><a href="#a-mir-formality-1" aria-hidden="true" class="anchor" id="a-mir-formality-1"></a><code>a-mir-formality</code></h3>
+<ul>
+<li><a href="https://rust-lang.github.io/rust-project-goals/2024h2/a-mir-formality.html"><code>a-mir-formality</code> project goal</a></li>
+</ul>
+<p>We intend to more actively develop <code>a-mir-formality</code> this year to use it in our design process.
+Using it to model parts of the type system has already been incredibly impactful and we want
+to build on that. We are working on more effective testing of <code>a-mir-formality</code> by enabling its
+use for actual Rust code snippets and by adding fuzzing support. This will allow us to gain
+additional confidence in our model of the type system and will guide its future development.</p>
+<p>We plan to fully formalize some components of the type system this year. Coherence is fairly
+self-contained, very subtle, and soundness-critical. This has prevented us from making significant
+improvements to it in the past. We also intend to formalize coinductive trait semantics, which are
+difficult to reason about and necessary to fix many longstanding soundness issues.</p>
+<h3><a href="#language-changes-and-polonius" aria-hidden="true" class="anchor" id="language-changes-and-polonius"></a>Language changes and polonius</h3>
+<ul>
+<li><a href="https://rust-lang.github.io/rust-project-goals/2024h2/ATPIT.html">Associated Type Position Impl Trait (ATPIT) project goal</a></li>
+<li><a href="https://rust-lang.github.io/rust-project-goals/2024h2/Polonius.html">Polonius on Nightly project goal</a></li>
+</ul>
+<p>We intend to get the internal implementation of opaque types ready for the stabilization
+of TAIT and ATPIT this year. We are also hoping to land significant improvements to our
+handling of associated types in coherence checking this year.</p>
+<p>Our other goal is to get <a href="https://blog.rust-lang.org/inside-rust/2023/10/06/polonius-update.html">Polonius</a>, the next generation borrow checker, available on nightly, which would put us in a position to stabilize in 2025 once we have time to do more optimization and testing.</p>
+<p>We also intend to support the development of other language features, such as <code>async</code>-closures, which are part of the <a href="https://rust-lang.github.io/rust-project-goals/2024h2/async.html">async project goal</a>,
+and <code>dyn</code>-trait upcasting, which will hopefully get stabilized in the near future.</p>
+<h2><a href="#roadmap" aria-hidden="true" class="anchor" id="roadmap"></a>Roadmap</h2>
+<h3><a href="#eoy-2024" aria-hidden="true" class="anchor" id="eoy-2024"></a>EOY 2024</h3>
+<ul>
+<li>next-generation trait solver
+<ul>
+<li>stable in coherence</li>
+<li>used by rust-analyzer</li>
+</ul>
+</li>
+<li>ATPIT stabilized</li>
+<li>a-mir-formality
+<ul>
+<li>support for fuzzing and testing Rust snippets</li>
+<li>complete model of coherence and coinductive trait semantics</li>
+</ul>
+</li>
+<li>full polonius implementation available on nightly</li>
+</ul>
+<h3><a href="#eoy-2025" aria-hidden="true" class="anchor" id="eoy-2025"></a>EOY 2025</h3>
+<ul>
+<li>next-generation trait solver used everywhere by default</li>
+<li>TAIT stabilized</li>
+<li>polonius stabilized</li>
+</ul>
+<h2><a href="#eoy-2027" aria-hidden="true" class="anchor" id="eoy-2027"></a>EOY 2027</h2>
+<ul>
+<li>next-generation trait solver
+<ul>
+<li>support for coinduction and (implicit) where-bounds on <code>for&lt;'a&gt;</code></li>
+<li>enable perfect derive</li>
+</ul>
+</li>
+<li>a-mir-formality fully model soundness critical parts of Rust</li>
+<li>all known type system unsoundnesses fixed</li>
+</ul>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-107421">
+<p>stabilized in <a href="https://github.com/rust-lang/rust/issues/107421">https://github.com/rust-lang/rust/issues/107421</a> <a href="#fnref-107421" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-117703">
+<p>stabilized in <a href="https://github.com/rust-lang/rust/issues/117703">https://github.com/rust-lang/rust/issues/117703</a> <a href="#fnref-117703" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

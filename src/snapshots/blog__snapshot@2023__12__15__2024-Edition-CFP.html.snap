@@ -1,0 +1,240 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2023/12/15/2024-Edition-CFP.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>A Call for Proposals for the Rust 2024 Edition | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="A Call for Proposals for the Rust 2024 Edition | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="A Call for Proposals for the Rust 2024 Edition | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="A Call for Proposals for the Rust 2024 Edition" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>A Call for Proposals for the Rust 2024 Edition</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 15, 2023 &middot; Ben Striegel on behalf of the Edition 2024 Project Group
+    
+    </div>
+
+    <div class="post">
+      <p>The year 2024 is soon to be upon us, and as long-time Rust aficionados know,
+that means that a new Edition of Rust is on the horizon!</p>
+<h2><a href="#what-is-an-edition" aria-hidden="true" class="anchor" id="what-is-an-edition"></a>What is an Edition?</h2>
+<p>You may be aware that a new <em>version</em> of Rust is released every six weeks.
+New versions of the language can both add things as well as change things,
+but only in backwards-compatible ways, according to Rust's
+<a href="https://blog.rust-lang.org/2014/10/30/Stability.html">1.0 stability guarantee</a>.</p>
+<p>But does that mean that Rust can <em>never</em> make backwards-incompatible changes?
+Not quite! This is what an Edition is:
+Rust's mechanism for introducing backwards-incompatible changes in a backwards-compatible way.
+If that sounds like a contradiction,
+there are three key properties of Editions that preserve the stability guarantee:</p>
+<ol>
+<li>
+<p>Editions are <em>opt-in</em>;
+crates only receive breaking changes if its authors explicitly ask for them.</p>
+</li>
+<li>
+<p>Crates that use older editions <em>never get left behind</em>;
+a crate written for the original Rust 2015 Edition is still supported by every Rust release,
+and can still make use of all the new goodies that accompany each new version,
+e.g. new library APIs, compiler optimizations, etc.</p>
+</li>
+<li>
+<p>An Edition <em>never splits the library ecosystem</em>;
+crates using new Editions can depend on crates using old Editions (and vice-versa!),
+so nobody ever has to worry about Edition-related incompatibility.</p>
+</li>
+</ol>
+<p>In order to keep churn to a minimum, a new Edition of Rust is only released once every three years.
+We've had the <a href="https://doc.rust-lang.org/edition-guide/rust-2015/index.html">2015 Edition</a>, the <a href="https://doc.rust-lang.org/edition-guide/rust-2018/index.html">2018 Edition</a>, the <a href="https://doc.rust-lang.org/edition-guide/rust-2021/index.html">2021 Edition</a>,
+and soon, the 2024 Edition. And we could use your help!</p>
+<h2><a href="#a-call-for-proposals-for-the-rust-2024-edition" aria-hidden="true" class="anchor" id="a-call-for-proposals-for-the-rust-2024-edition"></a>A call for proposals for the Rust 2024 Edition</h2>
+<p>We know how much you love Rust, but let's be honest, no language is perfect,
+and Rust is no exception.
+So if you've got ideas for how Rust could be better if only that pesky stability guarantee
+weren't around, now's the time to share!
+Also note that potential Edition-related changes aren't just limited to the language itself:
+we'll also consider changes to both Cargo and rustfmt as well.</p>
+<p>Please keep in mind that the following criteria determine the sort of changes we're looking for:</p>
+<ol>
+<li>A change must be possible to implement without violating the strict properties
+listed in the prior section.
+Specifically, the ability of crates to have cross-Edition dependencies imposes restrictions
+on changes that would take effect across crate boundaries, e.g. the signatures of public APIs.
+However, we will occasionally discover that an Edition-related change
+<a href="https://doc.rust-lang.org/edition-guide/rust-2021/IntoIterator-for-arrays.html">that was once thought to be impossible actually turns out to be feasible</a>,
+so hope is not lost if you're not sure if your idea meets this standard;
+propose it just to be safe!</li>
+</ol>
+<ol start="2">
+<li>
+<p>We strive to ensure that <em>nearly all</em> Edition-related changes can be applied
+to existing codebases automatically (via tools like <code>cargo fix</code>),
+in order to make upgrading to a new Edition as painless as possible.</p>
+</li>
+<li>
+<p>Even if an Edition <em>could</em> make any given change, <a href="https://www.youtube.com/watch?v=9nazm3_OXac">that doesn't mean that it should</a>.
+We're not looking for hugely-invasive changes or things that would fundamentally
+alter the character of the language.
+Please focus your proposals on things like fixing obvious bugs, changing annoying behavior,
+unblocking future feature development, and making the language easier and more consistent.</p>
+</li>
+</ol>
+<p>To spark your imagination, here's a real-world example.
+In the 2015 and 2018 Editions, iterating over a fixed-length array via <code>[foo].into_iter()</code>
+will yield <em>references</em> to the iterated elements;
+this is is surprising because, on other types, calling <code>.into_iter()</code> produces an iterator
+<a href="https://doc.rust-lang.org/std/iter/#the-three-forms-of-iteration">that yields owned values rather than references</a>.
+This limitation existed because older versions of Rust lacked the ability to implement
+traits for all possible fixed-length arrays in a generic way.
+Once Rust finally <a href="https://blog.rust-lang.org/2021/06/17/Rust-1.53.0.html#intoiterator-for-arrays">became able to express this</a>,
+<em>all</em> Editions at last gained the ability to iterate over owned values in fixed-length arrays;
+however, in the specific case of <code>[foo].into_iter()</code>,
+altering the existing behavior would have broken lots of code in the wild.
+Therefore, we used the 2021 Edition to fix this inconsistency
+for the specific case of <code>[foo].into_iter()</code>,
+allowing us to address <a href="https://github.com/rust-lang/rust/issues/25725">this long-standing issue</a> while
+preserving Rust's stability guarantees.</p>
+<h2><a href="#how-to-contribute" aria-hidden="true" class="anchor" id="how-to-contribute"></a>How to contribute</h2>
+<p>Just like other changes to Rust, Edition-related proposals follow the RFC process,
+as documented in <a href="https://github.com/rust-lang/rfcs/#rust-rfcs---rfc-book---active-rfc-list">the Rust RFCs repository</a>.
+Please follow the process documented there, and please consider <a href="https://github.com/rust-lang/rfcs/#before-creating-an-rfc">publicizing a draft of your RFC</a> to collect preliminary feedback before officially submitting it, in order to expedite the RFC process once you've filed it for real! (And in addition to the venues mentioned in the prior link, please feel free to announce your pre-RFC to <a href="https://rust-lang.zulipchat.com/#narrow/stream/268952-edition">our Zulip channel</a>.)</p>
+<p>Please file your RFCs as soon as possible!
+Our goal is to release the 2024 Edition in the second half of 2024,
+which means we would like to get everything <em>implemented</em>
+(not only the features themselves, but also all the Edition-related migration tooling)
+by the end of May, which means that RFCs should be accepted by the end of February.
+And since RFCs take time to discuss and consider,
+we strongly encourage you to have your RFC filed by the end of December,
+or the first week of January at the very latest.</p>
+<p>We hope to have periodic updates on the ongoing development of the 2024 Edition.
+In the meantime, if you have any questions or
+if you would like to help us make the new Edition a reality,
+we invite you to come chat in <a href="https://rust-lang.zulipchat.com/#narrow/stream/268952-edition">the <code>#edition</code> channel in the Rust Zulip</a>.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

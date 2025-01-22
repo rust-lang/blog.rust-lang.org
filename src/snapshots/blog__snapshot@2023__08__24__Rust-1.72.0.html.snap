@@ -1,0 +1,241 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2023/08/24/Rust-1.72.0.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.72.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Announcing Rust 1.72.0 | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Announcing Rust 1.72.0 | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Announcing Rust 1.72.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.72.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 24, 2023 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.72.0. Rust is a programming language empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, you can get 1.72.0 with:</p>
+<pre><code class="language-console">$ rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/releases/tag/1.72.0">detailed release notes for 1.72.0</a> on GitHub.</p>
+<p>If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (<code>rustup default beta</code>) or the nightly channel (<code>rustup default nightly</code>). Please <a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you might come across!</p>
+<h2><a href="#whats-in-1720-stable" aria-hidden="true" class="anchor" id="whats-in-1720-stable"></a>What's in 1.72.0 stable</h2>
+<h3><a href="#rust-reports-potentially-useful-cfg-disabled-items-in-errors" aria-hidden="true" class="anchor" id="rust-reports-potentially-useful-cfg-disabled-items-in-errors"></a>Rust reports potentially useful <code>cfg</code>-disabled items in errors</h3>
+<p>You can conditionally enable Rust code using <code>cfg</code>, such as to provide certain
+functions only with certain crate features, or only on particular platforms.
+Previously, items disabled in this way would be effectively invisible to the
+compiler. Now, though, the compiler will remember the name and <code>cfg</code> conditions
+of those items, so it can report (for example) if a function you tried to call
+is unavailable because you need to enable a crate feature.</p>
+<pre><code>   Compiling my-project v0.1.0 (/tmp/my-project)
+error[E0432]: unresolved import `rustix::io_uring`
+   --&gt; src/main.rs:1:5
+    |
+1   | use rustix::io_uring;
+    |     ^^^^^^^^^^^^^^^^ no `io_uring` in the root
+    |
+note: found an item that was configured out
+   --&gt; /home/username/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rustix-0.38.8/src/lib.rs:213:9
+    |
+213 | pub mod io_uring;
+    |         ^^^^^^^^
+    = note: the item is gated behind the `io_uring` feature
+
+For more information about this error, try `rustc --explain E0432`.
+error: could not compile `my-project` (bin &quot;my-project&quot;) due to previous error
+</code></pre>
+<h3><a href="#const-evaluation-time-is-now-unlimited" aria-hidden="true" class="anchor" id="const-evaluation-time-is-now-unlimited"></a>Const evaluation time is now unlimited</h3>
+<p>To prevent user-provided const evaluation from getting into a compile-time
+infinite loop or otherwise taking unbounded time at compile time, Rust
+previously limited the maximum number of <em>statements</em> run as part of any given
+constant evaluation. However, especially creative Rust code could hit these
+limits and produce a compiler error. Worse, whether code hit the limit could
+vary wildly based on libraries invoked by the user; if a library you invoked
+split a statement into two within one of its functions, your code could then
+fail to compile.</p>
+<p>Now, you can do an unlimited amount of const evaluation at compile time. To
+avoid having long compilations without feedback, the compiler will always emit
+a message after your compile-time code has been running for a while, and repeat
+that message after a period that doubles each time. By default, the compiler
+will also emit a deny-by-default lint (<code>const_eval_long_running</code>) after a large
+number of steps to catch infinite loops, but you can
+<code>allow(const_eval_long_running)</code> to permit especially long const evaluation.</p>
+<h3><a href="#uplifted-lints-from-clippy" aria-hidden="true" class="anchor" id="uplifted-lints-from-clippy"></a>Uplifted lints from Clippy</h3>
+<p>Several lints from Clippy have been pulled into <code>rustc</code>:</p>
+<ul>
+<li>
+<p><a href="https://rust-lang.github.io/rust-clippy/rust-1.71.0/index.html#undropped_manually_drops"><code>clippy::undropped_manually_drops</code></a> to <a href="https://doc.rust-lang.org/1.72.0/rustc/lints/listing/deny-by-default.html#undropped-manually-drops"><code>undropped_manually_drops</code></a> (deny)</p>
+<ul>
+<li><code>ManuallyDrop</code> does not drop its inner value, so calling <code>std::mem::drop</code> on it does nothing. Instead, the lint will suggest <code>ManuallyDrop::into_inner</code> first, or you may use the unsafe <code>ManuallyDrop::drop</code> to run the destructor in-place. This lint is denied by default.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://rust-lang.github.io/rust-clippy/rust-1.71.0/index.html#invalid_utf8_in_unchecked"><code>clippy::invalid_utf8_in_unchecked</code></a> to <a href="https://doc.rust-lang.org/1.72.0/rustc/lints/listing/deny-by-default.html#invalid-from-utf8-unchecked"><code>invalid_from_utf8_unchecked</code></a> (deny) and <a href="https://doc.rust-lang.org/1.72.0/rustc/lints/listing/warn-by-default.html#invalid-from-utf8"><code>invalid_from_utf8</code></a> (warn)</p>
+<ul>
+<li>The first checks for calls to <code>std::str::from_utf8_unchecked</code> and <code>std::str::from_utf8_unchecked_mut</code> with an invalid UTF-8 literal, which violates their safety pre-conditions, resulting in undefined behavior. This lint is denied by default.</li>
+<li>The second checks for calls to <code>std::str::from_utf8</code> and <code>std::str::from_utf8_mut</code> with an invalid UTF-8 literal, which will always return an error. This lint is a warning by default.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://rust-lang.github.io/rust-clippy/rust-1.71.0/index.html#cmp_nan"><code>clippy::cmp_nan</code></a> to <a href="https://doc.rust-lang.org/1.72.0/rustc/lints/listing/warn-by-default.html#invalid-nan-comparisons"><code>invalid_nan_comparisons</code></a> (warn)</p>
+<ul>
+<li>This checks for comparisons with <code>f32::NAN</code> or <code>f64::NAN</code> as one of the operands. NaN does not compare meaningfully to anything – not even itself – so those comparisons are always false. This lint is a warning by default, and will suggest calling the <code>is_nan()</code> method instead.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://rust-lang.github.io/rust-clippy/rust-1.71.0/index.html#cast_ref_to_mut"><code>clippy::cast_ref_to_mut</code></a> to <a href="https://doc.rust-lang.org/1.72.0/rustc/lints/listing/allowed-by-default.html#invalid-reference-casting"><code>invalid_reference_casting</code></a> (allow)</p>
+<ul>
+<li>This checks for casts of <code>&amp;T</code> to <code>&amp;mut T</code> without using interior mutability, which is immediate undefined behavior, even if the reference is unused. This lint is currently allowed by default due to potential false positives, but it is planned to be denied by default in 1.73 after implementation improvements.</li>
+</ul>
+</li>
+</ul>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/mpsc/struct.Sender.html#impl-Sync-for-Sender%3CT%3E"><code>impl&lt;T: Send&gt; Sync for mpsc::Sender&lt;T&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.str.html#impl-TryFrom%3C%26&#x27;a+OsStr%3E-for-%26&#x27;a+str"><code>impl TryFrom&lt;&amp;OsStr&gt; for &amp;str</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/alloc/string/struct.String.html#method.leak"><code>String::leak</code></a></li>
+</ul>
+<p>These APIs are now stable in const contexts:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.CStr.html#method.from_bytes_with_nul"><code>CStr::from_bytes_with_nul</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.CStr.html#method.to_bytes"><code>CStr::to_bytes</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.CStr.html#method.to_bytes_with_nul"><code>CStr::to_bytes_with_nul</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.CStr.html#method.to_str"><code>CStr::to_str</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>Check out everything that changed in <a href="https://github.com/rust-lang/rust/releases/tag/1.72.0">Rust</a>, <a href="https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-172-2023-08-24">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-172">Clippy</a>.</p>
+<h3><a href="#future-windows-compatibility" aria-hidden="true" class="anchor" id="future-windows-compatibility"></a>Future Windows compatibility</h3>
+<p>In a future release we're planning to increase the minimum supported Windows version to 10. The accepted proposal in compiler <a href="https://github.com/rust-lang/compiler-team/issues/651">MCP 651</a> is that Rust 1.75 will be the last to officially support Windows 7, 8, and 8.1. When Rust 1.76 is released in February 2024, only Windows 10 and later will be supported as tier-1 targets. This change will apply both as a host compiler and as a compilation target.</p>
+<p><strong>Update</strong>: The planned increase to Windows' minimum support level has been delayed until Rust 1.78, due to be released in May 2024.</p>
+<h2><a href="#contributors-to-1720" aria-hidden="true" class="anchor" id="contributors-to-1720"></a>Contributors to 1.72.0</h2>
+<p>Many people came together to create Rust 1.72.0. We couldn't have done it without all of you. <a href="https://thanks.rust-lang.org/rust/1.72.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

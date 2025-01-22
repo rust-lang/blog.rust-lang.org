@@ -1,0 +1,358 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/09/24/webassembly-targets-change-in-default-target-features.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>WebAssembly targets: change in default target-features | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="WebAssembly targets: change in default target-features | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="WebAssembly targets: change in default target-features | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="WebAssembly targets: change in default target-features" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>WebAssembly targets: change in default target-features</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 24, 2024 &middot; Alex Crichton
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">The Compiler Team</a> 
+    </div>
+
+    <div class="post">
+      <p>The Rust compiler has <a href="https://github.com/rust-lang/rust/pull/127513">recently upgraded to using LLVM 19</a> and this
+change accompanies some updates to the default set of target features enabled
+for WebAssembly targets of the Rust compiler. Beta Rust today, which will
+become Rust 1.82 on 2024-10-17, reflects all of these changes and can be
+used for testing.</p>
+<p>WebAssembly is an evolving standard where extensions are being added over
+time through a <a href="https://github.com/WebAssembly/proposals">proposals process</a>. WebAssembly proposals reach
+maturity, get merged into the specification itself, get implemented in engines,
+and remain this way for quite some time before producer toolchains (e.g. LLVM)
+update to <strong>enable these sufficiently-mature proposals by default</strong>. In LLVM 19
+this has happened with the <a href="https://github.com/llvm/llvm-project/pull/80923">multi-value and reference-types
+proposals</a> for the LLVM/Rust target features <code>multivalue</code> and
+<code>reference-types</code>. These are now enabled by default in LLVM and transitively
+means that it's enabled by default for Rust as well.</p>
+<p>WebAssembly targets for Rust now <a href="https://github.com/rust-lang/rust/pull/128511">have improved
+documentation</a> about WebAssembly
+proposals and their corresponding target features. This post is going to review
+these changes and go into depth about what's changing in LLVM.</p>
+<h2><a href="#webassembly-proposals-and-compiler-target-features" aria-hidden="true" class="anchor" id="webassembly-proposals-and-compiler-target-features"></a>WebAssembly Proposals and Compiler Target Features</h2>
+<p>WebAssembly proposals are the formal means by which the WebAssembly standard
+itself is evolved over time. Most proposals need toolchain integration in one
+form or another, for example new flags in LLVM or the Rust compiler. The
+<code>-Ctarget-feature=...</code> mechanism is used to implement this today. This is a
+signal to LLVM and the Rust compiler which WebAssembly proposals are enabled or
+disabled.</p>
+<p>There is a loose coupling between the name of a proposal (often the name of the
+github repository of the proposal) and the feature name LLVM/Rust use. For
+example there is the <a href="https://github.com/webAssembly/multi-value">multi-value
+proposal</a> but a <code>multivalue</code>
+feature.</p>
+<p>The lifecycle of the implementation of a feature in Rust/LLVM typically looks
+like:</p>
+<ol>
+<li>A new WebAssembly proposal is created in a new repository, for example
+WebAssembly/foo.</li>
+<li>Eventually Rust/LLVM implement the proposal under <code>-Ctarget-feature=+foo</code></li>
+<li>Eventually the upstream proposal is merged into the specification, and
+WebAssembly/foo becomes an archived repository</li>
+<li>Rust/LLVM enable the <code>-Ctarget-feature=+foo</code> feature by default but typically
+retain the ability to disable it as well.</li>
+</ol>
+<p>The <code>reference-types</code> and <code>multivalue</code> target features in Rust are at step (4)
+here now and this post is explaining the consequences of doing so.</p>
+<h2><a href="#enabling-reference-types-by-default" aria-hidden="true" class="anchor" id="enabling-reference-types-by-default"></a>Enabling Reference Types by Default</h2>
+<p>The <a href="https://github.com/webAssembly/reference-types">reference-types proposal to
+WebAssembly</a> introduced a few
+new concepts to WebAssembly, notably the <code>externref</code> type which is a
+host-defined GC resource that WebAssembly cannot access but can pass around.
+Rust does not have support for the WebAssembly <code>externref</code> type and LLVM 19 does
+not change that. WebAssembly modules produced from Rust will continue to not use
+the <code>externref</code> type nor have a means of being able to do so. This may be
+enabled in the future (e.g. a hypothetical <code>core::arch::wasm32::Externref</code> type
+or similar), but it will mostly likely only be done on an opt-in basis
+and will not affect preexisting code by default.</p>
+<p>Also included in the reference-types proposal, however, was the ability to have
+multiple WebAssembly tables in a single module. In the original version of the
+WebAssembly specification only a single table was allowed and this restriction
+was relaxed with the reference-types proposal. WebAssembly tables are used by
+LLVM and Rust to implement indirect function calls. For example function
+pointers in WebAssembly are actually table indices and indirect function calls
+are a WebAssembly <code>call_indirect</code> instruction with this table index.</p>
+<p>With the reference-types proposal the binary encoding of <code>call_indirect</code>
+instructions was updated. Prior to the reference-types proposal <code>call_indirect</code>
+was encoded with a fixed zero byte in its instruction (required to be exactly
+0x00). This fixed zero byte was relaxed to a 32-bit <a href="https://en.wikipedia.org/wiki/LEB128">LEB</a> to indicate which
+table the <code>call_indirect</code> instruction was using. For those unfamiliar <a href="https://en.wikipedia.org/wiki/LEB128">LEB</a> is a
+way of encoding multi-byte integers in a smaller number of bytes for smaller
+integers. For example the 32-bit integer 0 can be encoded as <code>0x00</code> with a
+<a href="https://en.wikipedia.org/wiki/LEB128">LEB</a>. <a href="https://en.wikipedia.org/wiki/LEB128">LEB</a>s are flexible to additionally allow &quot;overlong&quot; encodings so the
+integer 0 can additionally be encoded as <code>0x80 0x00</code>.</p>
+<p>LLVM's support of separate compilation of source code to a WebAssembly binary
+means that when an object file is emitted it does not know the final index of
+the table that is going to be used in the final binary. Before reference-types
+there was only one option, table 0, so <code>0x00</code> was always used when encoding
+<code>call_indirect</code> instructions. After reference-types, however, LLVM will emit an
+over-long <a href="https://en.wikipedia.org/wiki/LEB128">LEB</a> of the form <code>0x80 0x80 0x80 0x80 0x00</code> which is the maximal
+length of a 32-bit <a href="https://en.wikipedia.org/wiki/LEB128">LEB</a>. This <a href="https://en.wikipedia.org/wiki/LEB128">LEB</a> is then filled in by the linker with a
+relocation to the actual table index that is used by the final module.</p>
+<p>When putting all of this together, it means that with LLVM 19, which has
+the <code>reference-types</code> feature enabled by default, any WebAssembly module with an
+indirect function call (which is almost always the case for Rust code) will
+produce a WebAssembly binary that cannot be decoded by engines and tooling that
+do not support the reference-types proposal. It is expected that this change
+will have a low impact due to the age of the reference-types proposal and
+breadth of implementation in engines. Given the multitude of WebAssembly
+engines, however, it's recommended that any WebAssembly users test out
+Rust 1.82 beta and see if the produced module still runs on their engine of
+choice.</p>
+<h3><a href="#llvm-rust-and-multiple-tables" aria-hidden="true" class="anchor" id="llvm-rust-and-multiple-tables"></a>LLVM, Rust, and Multiple Tables</h3>
+<p>One interesting point worth mentioning is that despite the reference-types
+proposal enabling multiple tables in WebAssembly modules this is not actually
+taken advantage of at this time by either LLVM or Rust. WebAssembly modules
+emitted will still have at most one table of functions. This means that the
+over-long 5-byte encoding of index 0 as <code>0x80 0x80 0x80 0x80 0x00</code> is not
+actually necessary at this time. LLD, LLVM's linker for WebAssembly, wants to
+process all <a href="https://en.wikipedia.org/wiki/LEB128">LEB</a> relocations in a similar manner which currently forces this
+5-byte encoding of zero. For example when a function calls another function the
+<code>call</code> instruction encodes the target function index as a 5-byte <a href="https://en.wikipedia.org/wiki/LEB128">LEB</a> which is
+filled in by the linker. There is quite often more than one function so the
+5-byte encoding enables all possible function indices to be encoded.</p>
+<p>In the future LLVM might start using multiple tables as well. For example LLVM
+may have a mode in the future where there's a table-per-function type instead of
+a single heterogenous table. This can enable engines to implement
+<code>call_indirect</code> more efficiently. This is not implemented at this time, however.</p>
+<p>For users who want a minimally-sized WebAssembly module (e.g. if you're in a web
+context and sending bytes over the wire) it's recommended to use an optimization
+tool such as <a href="https://github.com/WebAssembly/binaryen"><code>wasm-opt</code></a> to shrink the size of the output of LLVM. Even before
+this change with reference-types it's recommended to do this as <a href="https://github.com/WebAssembly/binaryen"><code>wasm-opt</code></a> can
+typically optimize LLVM's default output even further. When optimizing a module
+through <a href="https://github.com/WebAssembly/binaryen"><code>wasm-opt</code></a> these 5-byte encodings of index 0 are all shrunk to a
+single byte.</p>
+<h2><a href="#enabling-multi-value-by-default" aria-hidden="true" class="anchor" id="enabling-multi-value-by-default"></a>Enabling Multi-Value by Default</h2>
+<p>The second feature enabled by default in LLVM 19 is <code>multivalue</code>. The
+<a href="https://github.com/webAssembly/multi-value">multi-value proposal to WebAssembly</a> enables functions to have
+more than one return value for example. WebAssembly instructions are
+additionally allowed to have more than one return value as well. This proposal
+is one of the first to get merged into the WebAssembly specification after the
+original MVP and has been implemented in many engines for quite some time.</p>
+<p>The consequences of enabling this feature by default in LLVM are more minor for
+Rust, however, than enabling the <code>reference-types</code> feature by default. LLVM's
+default C ABI for WebAssembly code is not changing even when <code>multivalue</code> is
+enabled.  Additionally Rust's <code>extern &quot;C&quot;</code> ABI for WebAssembly is not changing
+either and continues to match LLVM's (or strives to, <a href="https://github.com/rust-lang/rust/issues/115666">differences to
+LLVM</a> are considered bugs to
+fix). Despite this though the change has the possibility of still affecting
+Rust users.</p>
+<p>Rust for some time has supported an <code>extern &quot;wasm&quot;</code> ABI on Nightly which was an
+experimental means of exposing the ability of defining a function in Rust which
+returned multiple values (e.g. used the multi-value proposal). Due to
+infrastructural changes and refactorings in LLVM itself this feature of Rust has
+<a href="https://github.com/rust-lang/rust/pull/127605">been removed</a> and is no longer
+supported on Nightly at all. As a result there is no longer any possible method
+of writing a function in Rust that returns multiple values at the WebAssembly
+function type level.</p>
+<p>In summary this change is expected to not affect any Rust code in the wild
+unless you were using the Nightly feature of <code>extern &quot;wasm&quot;</code> in which case
+you'll be forced to drop support for that and use <code>extern &quot;C&quot;</code> instead.
+Supporting WebAssembly multi-return functions in Rust is a broader topic than
+this post can cover, but at this time it's an area that's ripe for contribution
+from suitably motivated contributors.</p>
+<h3><a href="#aside-abi-stability-and-webassembly" aria-hidden="true" class="anchor" id="aside-abi-stability-and-webassembly"></a>Aside: ABI Stability and WebAssembly</h3>
+<p>While on the topic of ABIs and the <code>multivalue</code> feature it's perhaps worth
+also going over a bit what ABIs mean for WebAssembly. The current definition of
+the <code>extern &quot;C&quot;</code> ABI for WebAssembly is documented in the <a href="https://github.com/WebAssembly/tool-conventions/blob/main/BasicCABI.md">tool-conventions
+repository</a>
+and this is what Clang implements for C code as well. LLVM implements enough
+support for lowering to WebAssembly as well to support all of this. The <code>extern &quot;Rust</code> ABI is not stable on WebAssembly, as is the case for all Rust targets,
+and is subject to change over time. There is no reference documentation at this
+time for what <code>extern &quot;Rust&quot;</code> is on WebAssembly.</p>
+<p>The <code>extern &quot;C&quot;</code> ABI, what C code uses by default as well, is difficult to
+change because stability is often required across different compiler versions.
+For example WebAssembly code compiled with LLVM 18 might be expected to work
+with code compiled by LLVM 20. This means that changing the ABI is a daunting
+task that requires version fields, explicit markers, etc, to help prevent
+mismatches.</p>
+<p>The <code>extern &quot;Rust&quot;</code> ABI, however, is subject to change over time. A great
+example of this could be that when the <code>multivalue</code> feature is enabled the
+<code>extern &quot;Rust&quot;</code> ABI could be redefined to use the multiple-return-values that
+WebAssembly would then support. This would enable much more efficient returns
+of values larger than 64-bits. Implementing this would require support in LLVM
+though which is not currently present.</p>
+<p>This all means that actually using multiple-returns in functions, or the
+WebAssembly feature that the <code>multivalue</code> enables, is still out on the horizon
+and not implemented. First LLVM will need to implement complete lowering support
+to generate WebAssembly functions with multiple returns, and then <code>extern &quot;Rust&quot;</code> can be change to use this when fully supported. In the yet-further-still
+future C code might be able to change, but that will take quite some time due to
+its cross-version-compatibility story.</p>
+<h2><a href="#enabling-future-proposals-to-webassembly" aria-hidden="true" class="anchor" id="enabling-future-proposals-to-webassembly"></a>Enabling Future Proposals to WebAssembly</h2>
+<p>This is not the first time that a WebAssembly proposal has gone from
+off-by-default to on-by-default in LLVM, nor will it be the last. For example
+LLVM already enables the <a href="https://github.com/webAssembly/sign-extension-ops">sign-extension proposal</a> by default which
+MVP WebAssembly did not have. It's expected that in the not-too-distant future
+the
+<a href="https://github.com/WebAssembly/nontrapping-float-to-int-conversions">nontrapping-fp-to-int</a>
+proposal will likely be enabled by default. These changes are currently not made
+with strict criteria in mind (e.g. N engines must have this implemented for M
+years), and there may be breakage that happens.</p>
+<p>If you're using a WebAssembly engine that does not support the modules emitted
+by Rust 1.82 beta and LLVM 19 then your options are:</p>
+<ul>
+<li>Try seeing if the engine you're using has any updates available to it. You
+might be using an older version which didn't support a feature but a newer
+version supports the feature.</li>
+<li>Open an issue to raise awareness that a change is causing breakage. This could
+either be done on your engine's repository, the Rust repository, or the
+WebAssembly
+<a href="https://github.com/WebAssembly/tool-conventions">tool-conventions</a>
+repository. It's recommended to first search to confirm there isn't already an
+open issue though.</li>
+<li>Recompile your code with features disabled, more on this in the next section.</li>
+</ul>
+<p>The general assumption behind enabling new features by default is that it's a
+relatively hassle-free operation for end users while bringing performance
+benefits for everyone (e.g. nontrapping-fp-to-int will make float-to-int
+conversions more optimal). If updates end up causing hassle it's best to flag
+that early on so rollout plans can be adjusted if needed.</p>
+<h2><a href="#disabling-on-by-default-webassembly-proposals" aria-hidden="true" class="anchor" id="disabling-on-by-default-webassembly-proposals"></a>Disabling on-by-default WebAssembly proposals</h2>
+<p>For a variety of reasons you might be motivated to disable on-by-default
+WebAssembly features: for example maybe your engine is difficult to update or
+doesn't support a new feature. Disabling on-by-default features is unfortunately
+not the easiest task. It is notably not sufficient to use
+<code>-Ctarget-features=-sign-ext</code> to disable a feature for just your own project's
+compilation because the Rust standard library, shipped in precompiled form, is
+still compiled with the feature enabled.</p>
+<p>To disable on-by-default WebAssembly proposal it's required that you use Cargo's
+<a href="https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#build-std"><code>-Zbuild-std</code></a>
+feature. For example:</p>
+<pre><code class="language-shell">$ export RUSTFLAGS=-Ctarget-cpu=mvp
+$ cargo +nightly build -Zbuild-std=panic_abort,std --target wasm32-unknown-unknown
+</code></pre>
+<p>This will recompiled the Rust standard library in addition to your own code with
+the &quot;MVP CPU&quot; which is LLVM's placeholder for all WebAssembly proposals
+disabled. This will disable sign-ext, reference-types, multi-value, etc.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

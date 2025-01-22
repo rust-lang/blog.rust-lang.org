@@ -1,0 +1,261 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2023/11/16/Rust-1.74.0.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.74.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Announcing Rust 1.74.0 | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Announcing Rust 1.74.0 | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Announcing Rust 1.74.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.74.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 16, 2023 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.74.0. Rust is a programming language empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via rustup, you can get 1.74.0 with:</p>
+<pre><code class="language-console">$ rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/releases/tag/1.74.0">detailed release notes for 1.74.0</a> on GitHub.</p>
+<p>If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (<code>rustup default beta</code>) or the nightly channel (<code>rustup default nightly</code>). Please <a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you might come across!</p>
+<h2><a href="#whats-in-1740-stable" aria-hidden="true" class="anchor" id="whats-in-1740-stable"></a>What's in 1.74.0 stable</h2>
+<h3><a href="#lint-configuration-through-cargo" aria-hidden="true" class="anchor" id="lint-configuration-through-cargo"></a>Lint configuration through Cargo</h3>
+<p>As proposed in <a href="https://rust-lang.github.io/rfcs/3389-manifest-lint.html">RFC 3389</a>,
+the <code>Cargo.toml</code> manifest now supports a <code>[lints]</code> table to configure the
+reporting level (forbid, deny, warn, allow) for lints from the compiler and
+other tools. So rather than setting <code>RUSTFLAGS</code> with <code>-F</code>/<code>-D</code>/<code>-W</code>/<code>-A</code>, which
+would affect the entire build, or using crate-level attributes like:</p>
+<pre><code class="language-rust">#![forbid(unsafe_code)]
+#![deny(clippy::enum_glob_use)]
+</code></pre>
+<p>You can now write those in your package manifest for Cargo to handle:</p>
+<pre><code class="language-toml">[lints.rust]
+unsafe_code = &quot;forbid&quot;
+
+[lints.clippy]
+enum_glob_use = &quot;deny&quot;
+</code></pre>
+<p>These can also be configured in a <code>[workspace.lints]</code> table, then inherited by
+<code>[lints] workspace = true</code> like many other workspace settings. Cargo will also
+track changes to these settings when deciding which crates need to be rebuilt.</p>
+<p>For more information, see the <a href="https://doc.rust-lang.org/stable/cargo/reference/manifest.html#the-lints-section"><code>lints</code></a> and <a href="https://doc.rust-lang.org/stable/cargo/reference/workspaces.html#the-lints-table"><code>workspace.lints</code></a> sections of the
+Cargo reference manual.</p>
+<h3><a href="#cargo-registry-authentication" aria-hidden="true" class="anchor" id="cargo-registry-authentication"></a>Cargo Registry Authentication</h3>
+<p>Two more related Cargo features are included in this release: credential
+providers and authenticated private registries.</p>
+<p>Credential providers allow configuration of how Cargo gets credentials for a
+registry. Built-in providers are included for OS-specific secure secret storage
+on Linux, macOS, and Windows. Additionally, custom providers can be written to
+support arbitrary methods of storing or generating tokens. Using a secure
+credential provider reduces risk of registry tokens leaking.</p>
+<p>Registries can now optionally require authentication for all operations, not
+just publishing. This enables private Cargo registries to offer more secure
+hosting of crates. Use of private registries requires the configuration of a
+credential provider.</p>
+<p>For further information, see the
+<a href="https://doc.rust-lang.org/beta/cargo/reference/registry-authentication.html">Cargo docs</a>.</p>
+<h3><a href="#projections-in-opaque-return-types" aria-hidden="true" class="anchor" id="projections-in-opaque-return-types"></a>Projections in opaque return types</h3>
+<p>If you have ever received the error that a &quot;return type cannot contain a
+projection or <code>Self</code> that references lifetimes from a parent scope,&quot; you may
+now rest easy! The compiler now allows mentioning <code>Self</code> and
+associated types in opaque return types, like <code>async fn</code> and <code>-&gt; impl Trait</code>.
+This is the kind of feature that gets Rust closer to how you might just
+<em>expect</em> it to work, even if you have no idea about jargon like &quot;projection&quot;.</p>
+<p>This functionality had an unstable feature gate because its implementation
+originally didn't properly deal with captured lifetimes, and once that was
+fixed it was given time to make sure it was sound. For more technical details,
+see the <a href="https://github.com/rust-lang/rust/pull/115659">stabilization pull request</a>, which describes the following
+examples that are all now allowed:</p>
+<pre><code class="language-rust">struct Wrapper&lt;'a, T&gt;(&amp;'a T);
+
+// Opaque return types that mention `Self`:
+impl Wrapper&lt;'_, ()&gt; {
+    async fn async_fn() -&gt; Self { /* ... */ }
+    fn impl_trait() -&gt; impl Iterator&lt;Item = Self&gt; { /* ... */ }
+}
+
+trait Trait&lt;'a&gt; {
+    type Assoc;
+    fn new() -&gt; Self::Assoc;
+}
+impl Trait&lt;'_&gt; for () {
+    type Assoc = ();
+    fn new() {}
+}
+
+// Opaque return types that mention an associated type:
+impl&lt;'a, T: Trait&lt;'a&gt;&gt; Wrapper&lt;'a, T&gt; {
+    async fn mk_assoc() -&gt; T::Assoc { /* ... */ }
+    fn a_few_assocs() -&gt; impl Iterator&lt;Item = T::Assoc&gt; { /* ... */ }
+}
+</code></pre>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/num/struct.Saturating.html"><code>core::num::Saturating</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/process/struct.Stdio.html#impl-From%3CStdout%3E-for-Stdio"><code>impl From&lt;io::Stdout&gt; for std::process::Stdio</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/process/struct.Stdio.html#impl-From%3CStderr%3E-for-Stdio"><code>impl From&lt;io::Stderr&gt; for std::process::Stdio</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/process/struct.Stdio.html#impl-From%3CStderr%3E-for-Stdio"><code>impl From&lt;OwnedHandle&gt; for std::process::Child{Stdin, Stdout, Stderr}</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/process/struct.Stdio.html#impl-From%3CStderr%3E-for-Stdio"><code>impl From&lt;OwnedFd&gt; for std::process::Child{Stdin, Stdout, Stderr}</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.OsString.html#method.from_encoded_bytes_unchecked"><code>std::ffi::OsString::from_encoded_bytes_unchecked</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.OsString.html#method.into_encoded_bytes"><code>std::ffi::OsString::into_encoded_bytes</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.OsStr.html#method.from_encoded_bytes_unchecked"><code>std::ffi::OsStr::from_encoded_bytes_unchecked</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ffi/struct.OsStr.html#method.as_encoded_bytes"><code>std::ffi::OsStr::as_encoded_bytes</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/struct.Error.html#method.other"><code>std::io::Error::other</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.u16.html#impl-TryFrom%3Cchar%3E-for-u16"><code>impl TryFrom&lt;char&gt; for u16</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#impl-From%3C%26%5BT;+N%5D%3E-for-Vec%3CT,+Global%3E"><code>impl&lt;T: Clone, const N: usize&gt; From&lt;&amp;[T; N]&gt; for Vec&lt;T&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#impl-From%3C%26mut+%5BT;+N%5D%3E-for-Vec%3CT,+Global%3E"><code>impl&lt;T: Clone, const N: usize&gt; From&lt;&amp;mut [T; N]&gt; for Vec&lt;T&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#impl-From%3C%5BT;+N%5D%3E-for-Arc%3C%5BT%5D,+Global%3E"><code>impl&lt;T, const N: usize&gt; From&lt;[T; N]&gt; for Arc&lt;[T]&gt;</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#impl-From%3C%5BT;+N%5D%3E-for-Rc%3C%5BT%5D,+Global%3E"><code>impl&lt;T, const N: usize&gt; From&lt;[T; N]&gt; for Rc&lt;[T]&gt;</code></a></li>
+</ul>
+<p>These APIs are now stable in const contexts:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/fn.transmute_copy.html"><code>core::mem::transmute_copy</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.str.html#method.is_ascii"><code>str::is_ascii</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.is_ascii"><code>[u8]::is_ascii</code></a></li>
+</ul>
+<h3><a href="#compatibility-notes" aria-hidden="true" class="anchor" id="compatibility-notes"></a>Compatibility notes</h3>
+<ul>
+<li>As <a href="https://blog.rust-lang.org/2023/09/25/Increasing-Apple-Version-Requirements.html">previously announced</a>, Rust 1.74 has increased its
+requirements on Apple platforms. The minimum versions are now:
+<ul>
+<li>macOS: 10.12 Sierra (First released 2016)</li>
+<li>iOS: 10 (First released 2016)</li>
+<li>tvOS: 10 (First released 2016)</li>
+</ul>
+</li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>Check out everything that changed in <a href="https://github.com/rust-lang/rust/releases/tag/1.74.0">Rust</a>, <a href="https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-174-2023-11-16">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-174">Clippy</a>.</p>
+<h2><a href="#contributors-to-1740" aria-hidden="true" class="anchor" id="contributors-to-1740"></a>Contributors to 1.74.0</h2>
+<p>Many people came together to create Rust 1.74.0. We couldn't have done it without all of you. <a href="https://thanks.rust-lang.org/rust/1.74.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

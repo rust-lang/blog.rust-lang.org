@@ -1,0 +1,491 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2024/12/13/this-development-cycle-in-cargo-1.84.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>This Development-cycle in Cargo: 1.84 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="This Development-cycle in Cargo: 1.84 | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="This Development-cycle in Cargo: 1.84 | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="This Development-cycle in Cargo: 1.84" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>This Development-cycle in Cargo: 1.84</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 13, 2024 &middot; Ed Page
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/dev-tools#cargo">The Cargo Team</a> 
+    </div>
+
+    <div class="post">
+      <h1><a href="#this-development-cycle-in-cargo-184" aria-hidden="true" class="anchor" id="this-development-cycle-in-cargo-184"></a>This Development-cycle in Cargo: 1.84</h1>
+<p>This is a summary of what has been happening around Cargo development for the last 6 weeks which is approximately the merge window for Rust 1.84.</p>
+<!-- time period: 2024-10-18 through 2024-11-28 -->
+<ul>
+<li><a href="#plugin-of-the-cycle">Plugin of the cycle</a></li>
+<li><a href="#implementation">Implementation</a>
+<ul>
+<li><a href="#simple-english-in-documentation">Simple english in documentation</a></li>
+<li><a href="#build-script-api">Build Script API</a></li>
+<li><a href="#replacing-mtimes-with-checksums">Replacing mtimes with checksums</a></li>
+<li><a href="#rustflags-and-caching">Rustflags and caching</a></li>
+<li><a href="#snapshot-testing">Snapshot testing</a></li>
+<li><a href="#json-schema-files">JSON schema files</a></li>
+</ul>
+</li>
+<li><a href="#design-discussions">Design discussions</a>
+<ul>
+<li><a href="#improving-the-built-in-profiles">Improving the built-in profiles</a></li>
+<li><a href="#avoid-building-production-code-when-changing-tests">Avoid building production code when changing tests</a></li>
+</ul>
+</li>
+<li><a href="#misc">Misc</a></li>
+<li><a href="#focus-areas-without-progress">Focus areas without progress</a></li>
+</ul>
+<h2><a href="#plugin-of-the-cycle" aria-hidden="true" class="anchor" id="plugin-of-the-cycle"></a>Plugin of the cycle</h2>
+<p>Cargo can't be everything to everyone,
+if for no other reason than the compatibility guarantees it must uphold.
+Plugins play an important part of the Cargo ecosystem and we want to celebrate them.</p>
+<p>Our plugin for this cycle is <a href="https://crates.io/crates/cargo-hack">cargo-hack</a> makes it easy to verify different feature combinations work together and that you can build for all supported Rust versions.</p>
+<p>Thanks to <a href="https://github.com/epage">epage</a> for the suggestion!</p>
+<p><a href="https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/Plugin.20of.20the.20Dev.20Cycle/near/420703211">Please submit your suggestions for the next post.</a></p>
+<h2><a href="#implementation" aria-hidden="true" class="anchor" id="implementation"></a>Implementation</h2>
+<h3><a href="#simple-english-in-documentation" aria-hidden="true" class="anchor" id="simple-english-in-documentation"></a>Simple english in documentation</h3>
+<p>trot approached the Cargo team on
+<a href="https://rust-lang.zulipchat.com/#narrow/channel/246057-t-cargo/topic/Difficult.20ESL.20words.20Cargo.20Book/near/482282496">zulip</a>
+about making the
+<a href="https://doc.rust-lang.org/cargo/">Cargo book</a>
+more approachable for people for whom English is a second language.
+After some discussion, we decided to start with simplifying the language used in the Cargo book.</p>
+<p><a href="https://github.com/KGrewal1">KGrewal1</a> took the lead on this and posted <a href="https://github.com/rust-lang/cargo/pull/14825">#14825</a>.
+They also made the language more consistent in <a href="https://github.com/rust-lang/cargo/pull/14829">#14829</a>.</p>
+<h3><a href="#build-script-api" aria-hidden="true" class="anchor" id="build-script-api"></a>Build Script API</h3>
+<p><em>Update from <a href="https://blog.rust-lang.org/inside-rust/2024/10/31/this-development-cycle-in-cargo-1.83.html#build-script-api">1.83</a></em></p>
+<p>With the Cargo team approving owning <code>build-rs</code>,
+<a href="https://github.com/epage">epage</a>
+worked with
+<a href="https://github.com/CAD97/">CAD97</a>
+and
+<a href="https://github.com/pietroalbini">pietroalbini</a>
+to transfer publish rights for <a href="https://crates.io/crates/build-rs">build-rs</a> to the Rust Project.</p>
+<p>CAD97 then did a first-pass review and update to <code>build-rs</code> and epage merging it into cargo (<a href="https://github.com/rust-lang/cargo/pull/14786">#14786</a>).
+epage then did a pass to update <code>build-rs</code> in <a href="https://github.com/rust-lang/cargo/pull/14817">#14817</a>.</p>
+<p>On <a href="https://rust-lang.zulipchat.com/#narrow/channel/246057-t-cargo/topic/Where.20.60build-rs.60.20shoud.20live/near/480798285">zulip</a>,
+<a href="https://github.com/Turbo87">Turbo87</a> raised concernd about <code>build-rs</code> (and Cargo-maintained crates more generally) being in the Cargo repo and tied to the Cargo release process.
+This means that there is a 6-12 week delay between a bug fix being merged and bein released, projects that need access to unstable functionality must use a git dependency, the MSRV is infectious which puts pressure on the Cargo team to bump it regularly, and the issues are mixed together.
+On the other hand, Cargo support, documentation, and APIs are able to developed hand-in-hand.
+It would be great if we could improve the release process within the Cargo repo (e.g. <a href="https://github.com/rust-lang/cargo/issues/14538">#14538</a>)
+but keeping that in sync with 3 parallel release channels (stable, beta, nightly), including leaving space to patch an arbitrary number of crate releases for each release channel,
+makes this difficult.</p>
+<h3><a href="#replacing-mtimes-with-checksums" aria-hidden="true" class="anchor" id="replacing-mtimes-with-checksums"></a>Replacing mtimes with checksums</h3>
+<p><em>Update from <a href="https://blog.rust-lang.org/inside-rust/2024/10/31/this-development-cycle-in-cargo-1.83.html#misc">1.83</a></em></p>
+<!-- 2024-10-22 -->
+<p>With unstable support for using <a href="https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#checksum-freshness">checksums, rather than mtime, to determine when a build is dirty</a>,
+the Cargo team discussed the path for stabilization.</p>
+<p>One hole in the current design is that Cargo doesn't checksum inputs to build scripts.
+If Cargo did the checksum on the user's behalf,
+then it might see a different version of the file than the build script.
+However, requiring build scripts to checksum the files and report that to Cargo adds a significant complexity to build scripts, including coordinating with Cargo on what hash algorithm is used.
+This would also require build scripts to pull in a hasher dependency, increasing their build times.
+However, it is unclear if checksumming for build scripts is a requirement.
+Also, if we could develop a plan to reduce the need for build scripts, we reduce the scope of the problem.</p>
+<p>Another concern is with performance.
+The overhead of checksumming will be most noticeable on builds without any changes as otherwise compile times will dominate.
+We are further tracking this in <a href="https://github.com/rust-lang/cargo/issues/14722">#14722</a>.</p>
+<p>There is the question of what this will look like.
+Do we exclusively switch to checksums or give people the choice?
+At minimum, we'd need to give people a temporary escape hatch as we transition Cargo to checksums in case they are somehow relying on the mtime behavior.
+Whether Cargo would need a permanent config field is unclear.</p>
+<p>We reached out to some build system owners on
+<a href="https://rust-lang.zulipchat.com/#narrow/channel/334885-t-cargo.2Fbuild-integration/topic/Call.20for.20testing.3A.20use.20of.20checksums.20over.20mtime/near/478311654">zulip</a>
+to do a call-for-testing.
+So far, we've only heard from the Rust Project itself where this made build time testing more difficult because touching files to force rebuilds is a much easier option than trying to carefully make repeated edits to files.</p>
+<h3><a href="#rustflags-and-caching" aria-hidden="true" class="anchor" id="rustflags-and-caching"></a>Rustflags and caching</h3>
+<p>Cargo's <a href="https://doc.rust-lang.org/nightly/nightly-rustc/cargo/core/compiler/fingerprint/index.html">build fingerprinting</a> has to satisfy several needs, including</p>
+<ul>
+<li>Detecting when the existing build cache has to be thrown away and re-built, called the fingerprint</li>
+<li>Segregating the build cache so it gets preserved across unrelated commands (e.g. alternating <code>cargo check</code> and <code>cargo test</code> without rebuilding dependencies), called <a href="https://doc.rust-lang.org/rustc/codegen-options/index.html#extra-filename"><code>-Cextra-filename</code></a></li>
+<li>Making symbol names unique so you can't unintentionally use a type in an ABI-incompatible context, called <a href="https://doc.rust-lang.org/rustc/codegen-options/index.html#metadata"><code>-Cmetadata</code></a></li>
+</ul>
+<p><code>RUSTFLAGS</code> is a way to bypass Cargo's abstractions and directly control the behavior of <code>rustc</code>.
+Cargo includes <code>RUSTFLAGS</code> in the fingerprint hash but not in the <code>-Cextra-filename</code> hash,
+causing a full rebuild when they change.
+This can be especially problematic when <code>RUSTFLAGS</code> differs between the user and their editor running <code>cargo</code>.
+For example, some users report they set <code>--cfg test</code> in their editor so all <code>#[cfg(test)]</code>s are enabled in rust-analyzer.</p>
+<p>A previous attempt was made to segregate the cache for <code>RUSTFLAGS</code> in
+<a href="https://github.com/rust-lang/cargo/pull/6503">#6503</a>.
+However, Cargo uses the same hash for <code>-Cextra-filename</code> and <code>-Cmetadata</code>
+so by segregating the cache, the symbol names also become unique.
+In theory, this is a good thing as <code>RUSTFLAGS</code> can affect the ABI.
+However, not all <code>RUSTFLAGS</code> affect the ABI.</p>
+<p>Take <a href="https://doc.rust-lang.org/rustc/command-line-arguments.html#--remap-path-prefix-remap-source-names-in-output"><code>--remap-path-prefix</code></a> which is suppose to make builds of binaries more reproducible by stripping information specific to a specific build.
+By including this in <code>-Cmetadata</code>,
+the binary changes (<a href="https://github.com/rust-lang/cargo/issues/6914">#6914</a>).
+A special case for this was added <a href="https://github.com/rust-lang/cargo/pull/6966">#6966</a>.</p>
+<p>Another case we ran into was <a href="https://doc.rust-lang.org/rustc/profile-guided-optimization.html">PGO</a>.
+With PGO, you create a build with
+<a href="https://doc.rust-lang.org/rustc/codegen-options/index.html#profile-generate"><code>-Cprofile-generate</code></a>
+and then run it against a benchmark.
+You then feed this back into the build with
+<a href="https://doc.rust-lang.org/rustc/codegen-options/index.html#profile-use"><code>-Cprofile-use</code></a>
+to improve the optimizations the compiler performs.
+At this point, we reverted
+<a href="https://github.com/rust-lang/cargo/pull/6503">#6503</a>
+in
+<a href="https://github.com/rust-lang/cargo/pull/7417">#7417</a>.</p>
+<p>In <a href="https://github.com/rust-lang/cargo/issues/8716">#8716</a>,
+<a href="https://github.com/ehuss">ehuss</a> proposed Cargo track <code>-Cextra-filename</code> and <code>-Cmetadata</code> separately and only include <code>RUSTFLAGS</code> in <code>-Cextra-filename</code>.</p>
+<p>After some refactoring
+(<a href="https://github.com/rust-lang/cargo/pull/14826">#14826</a>)
+and test improvements
+(
+<a href="https://github.com/rust-lang/cargo/pull/14848">#14848</a>,
+<a href="https://github.com/rust-lang/cargo/pull/14846">#14846</a>,
+<a href="https://github.com/rust-lang/cargo/pull/14859">#14859</a>
+)
+by <a href="https://github.com/epage">epage</a> and <a href="https://github.com/weihanglo/">weihanglo</a>,
+epage posted <a href="https://github.com/rust-lang/cargo/pull/14830">#14830</a>.
+However, weihanglo found there are still problems with <code>--remap-path-prefix</code>: even when using <code>profile.dev.split-debuginfo=&quot;packed&quot;</code>, the binaries are different because the binary includes <code>DW_AT_GNU_dwo_name</code> which points to the debug file which exists per-rlib with <code>-Cextra-filename</code> included.</p>
+<p>Merging of <a href="https://github.com/rust-lang/cargo/pull/14830">#14830</a> is blocked until the problem with <code>--remap-path-prefix</code> is resolved.</p>
+<h3><a href="#snapshot-testing" aria-hidden="true" class="anchor" id="snapshot-testing"></a>Snapshot testing</h3>
+<p><em>Update from <a href="https://blog.rust-lang.org/inside-rust/2024/10/01/this-development-cycle-in-cargo-1.82.html#snapshot-testing">1.82</a></em></p>
+<p><a href="https://github.com/epage">epage</a> finalized the work for moving off of Cargo's custom assertions.</p>
+<p>In removing the core of the custom assertions,
+we were relying on <code>dead_code</code> warnings as we removed assertions
+that were no longer used.
+However, we missed removing an assertion and epage removed it in <a href="https://github.com/rust-lang/cargo/pull/14759">#14759</a>.</p>
+<p><a href="https://github.com/rust-lang/cargo/pull/14781">#14781</a> and
+<a href="https://github.com/rust-lang/cargo/pull/14785">#14785</a> saw us migrate the last of our &quot;unordered lines&quot; assertion tests.
+<a href="https://github.com/rust-lang/cargo/pull/14785">#14785</a> took some investigation to figure out the best way to migrate.
+Cargo's custom assertions redacted fewer values and allowed a test author to ignore a value redaction by using the raw value in the expected result.
+<code>snapbox</code> applies redactions earlier in the process, requiring them to always be used.
+This made it so Cargo would lose test coverage in switching to snapbox as we wouldn't be verifying as much of <code>cargo</code>s output.
+However, in consulting with the test author, coverage of those redacted values was not intended by them, bypassing this problem for now.</p>
+<p>This still left &quot;contains&quot;, &quot;does not contain&quot;, and &quot;contains x but not y&quot; assertions.
+Rather than trying to design out how these should fit into snapbox,
+epage left them after switching to <code>snapbox</code>'s redactions in <a href="https://github.com/rust-lang/cargo/pull/14790">#14790</a>.</p>
+<p>As this point, epage documented lessons learned through this effort in <a href="https://github.com/rust-lang/cargo/pull/14793">#14793</a> and we now consider this migration complete, closing out <a href="https://github.com/rust-lang/cargo/issues/14039">#14039</a>.</p>
+<h3><a href="#json-schema-files" aria-hidden="true" class="anchor" id="json-schema-files"></a>JSON schema files</h3>
+<p>In <a href="https://github.com/rust-lang/cargo/issues/12883">#12883</a>,
+we got a request for JSON schema support for <code>.cargo/config.toml</code> files.
+We already have to duplicate the schema between the source and the documentation, we didn't want to duplicate it with a hand-maintained JSON schema representation.
+Thankfully there is <a href="https://crates.io/crates/schemars">schemars</a> to generate JSON schema from serde types.</p>
+<p>To experiment with JSON schema generation,
+<a href="https://github.com/dacianpascu06">dacianpascu06</a> added support for JSON schema generation for <code>Cargo.toml</code> in
+<a href="https://github.com/rust-lang/cargo/pull/14683">#14683</a>,
+see <a href="https://github.com/rust-lang/cargo/blob/master/crates/cargo-util-schemas/manifest.schema.json">manifest.schema.json</a>.</p>
+<p>Generating a JSON schema for <code>.cargo/config.toml</code> will take a bit more investigation.
+<code>Cargo.toml</code> has a single top-level definition with specific extension points within the schema.
+<code>.cargo/config.toml</code> does not have a single top-level definition but instead the schema is defined per table or field.
+This is because config layering operates on the specific path that is looked up.
+The types for the schema are scattered throughout the Cargo code base and will take work to collect them all together to create a top-level definition solely for JSON schema generation.</p>
+<h2><a href="#design-discussions" aria-hidden="true" class="anchor" id="design-discussions"></a>Design discussions</h2>
+<h3><a href="#improving-the-built-in-profiles" aria-hidden="true" class="anchor" id="improving-the-built-in-profiles"></a>Improving the built-in profiles</h3>
+<!-- 2024-10-29 -->
+<p>Hand-in-hand with benchmarking is profiling yet the <code>bench</code> profile does not include the relevant debug information for profiling,
+requiring users to tweak their profiles in every repo (or in their home directory).
+<a href="https://github.com/CraftSpider">CraftSpider</a> proposed in
+<a href="https://github.com/rust-lang/cargo/issues/14032">#14032</a>
+that we update the <code>bench</code> profile to make this easier.
+However, benchmarks also need fidelity with <code>release</code> builds to ensure your numbers match what users will see.
+We decided we should keep the <code>bench</code> profile matching <code>release</code> though we recognize there is room to explore improving user workflows for profiling.</p>
+<p><a href="https://github.com/foxtran">foxtran</a> restarted the conversation on changing the defaults for <code>release</code> to improve runtime performance in
+<a href="https://github.com/rust-lang/cargo/issues/11298">#11298</a>.</p>
+<p>Potential changes include</p>
+<ul>
+<li>Enabling LTO, whether thin or fat</li>
+<li>Reducing the codegen-units</li>
+<li>Increasing the opt-level</li>
+</ul>
+<p>While <code>release</code> builds aren't focused on fast compile-times,
+there is still a point of diminishing returns in trading off compile-time for runtime performance.
+While <code>release</code> is generally geared towards production builds,
+there are cases where <code>dev</code> is too slow for development.
+<a href="https://github.com/weihanglo">weihanglo</a> ran the numbers of LTO and codegen-units for Cargo in
+<a href="https://github.com/rust-lang/cargo/issues/14719">#14719</a>.
+From those numbers, it seems like thin LTO is an easy win.</p>
+<p>One option is for a <code>release-fast</code> or <code>release-heavy</code> to be made.
+Adding new profiles may be a breaking change though and we'd have to carefully approach doing so.
+We also already have discoverability problems with <code>release</code> and it has a dedicated flag (<code>--release</code>).
+Without some kind of built-in integration, it seems like these policies would be best left for users.</p>
+<p>Whatever profile is used, one problem with LTO is that there are miscompilations which might prevent it from being a safe default (e.g. <a href="https://github.com/rust-lang/rust/issues/115344">#115344</a>).</p>
+<!-- 2024-11-05 -->
+<p>On the other end of the spectrum is the <code>dev</code> profile.
+This profile serves two roles</p>
+<ul>
+<li>Fast iteration time</li>
+<li>Running code through a debugger</li>
+</ul>
+<p>It turns out that these can be at odds with each other.
+When running through a debugger, you often want the binary to behave like the source code and optimizations can get in the way.
+However, optimizations can reduce the amount of IR being processed, speeding up codegen.
+They can then also speed up proc macros, build scripts, and test runs.
+Maybe we can even design a optimization level focused on improving compile times at the cost of the debugger experience.
+Similarly, how much debug information you carry around in your binary can affect your build times.</p>
+<p>Looking at the <a href="https://blog.rust-lang.org/2024/02/19/2023-Rust-Annual-Survey-2023-results.html#challenges">Rust 2023 survey results</a>,
+improving compilation times and the debugging experience is neck and neck.
+The question is which debugging experience are they referring to?
+Those on the call mostly used &quot;printf&quot;-style debugging and would get benefit out of improving compilation time.
+Even if we surveyed people and found this representative of the Rust community (which <a href="https://github.com/davidlattimore/">davidlattimore</a> did for a subset of the community on <a href="https://mas.to/@davidlattimore/113484821980790635">Fediverse</a>),
+how much of this is survivorship bias from the quality of the debugger experience?
+How much would even existing community members behavior change with an improved debugger experience?</p>
+<p>However, this may not be all-or-nothing.
+We could split the <code>dev</code> profile into separate iteration-time and debugger profiles so there is a low friction way of access the non-default workflow.
+There would still be friction.
+If iteration-time were the default and enough people use debuggers through their IDEs and those IDEs are pre-configured,
+then working with IDE vendors to change their defaults would reduce a lot of the friction.
+This would likely require a long transition period.</p>
+<p>We could split one of the two workflows out into a whole new profile which runs into the same problems as <code>release-fast</code> and <code>release-heavy</code>.</p>
+<p>One idea for address the potential breakage is that we move the built-in profiles into a <code>cargo::</code> namespace and make them immutable.
+We would switch the reserved profiles to just inheriting a namespaced profile by default.
+There are open questions on whether this would be a breaking change and more analysis would be needed.</p>
+<p>Instead of reserving a new profile name, what if Cargo used the reserved <code>debug</code> name?
+<code>debug</code> is already a reserved profile name and in several user-facing locations the <code>dev</code> profile is referred to as <code>debug</code> (<code>--debug</code>, <code>target/debug</code>).
+We could make <code>dev</code> (<code>--dev</code>) focused on iteration time and <code>debug</code> (<code>--debug</code>) on debuggers.
+There is the question of <code>target/debug</code> as changing users to <code>target/dev</code> might be too disruptive.</p>
+<p>It will take work to finish a plan and figuring out if its too disruptive.
+If can move forward with it, it will likely require a long transition time and support across multiple projects.</p>
+<p>Is this change worth it?
+<a href="https://github.com/joshtriplett">joshtriplett</a> ran a survey on
+<a href="https://internals.rust-lang.org/t/feedback-request-performance-improvements-from-reducing-debug-info/21825">Internals</a>
+on the affect of just
+<a href="https://doc.rust-lang.org/cargo/reference/profiles.html#debug"><code>CARGO_PROFILE_DEV_DEBUG=line-tables-only</code></a>
+on compilation time
+with some follow up conversation on <a href="https://rust-lang.zulipchat.com/#narrow/channel/246057-t-cargo/topic/Debug.20information.20and.20build.20time/near/481165988">zulip</a>.</p>
+<p>Another angle for improving iteration time for <code>dev</code> is to make it easier to speed up dependencies in the hot path.
+Cargo allows you to set different optimization levels for different dependencies and some projects encourage this, like <a href="https://github.com/launchbadge/sqlx/tree/42ce24dab87aad98f041cafb35cf9a7d5b2b09a7?tab=readme-ov-file#compile-time-verification">sqlx</a>:</p>
+<pre><code class="language-toml">[profile.dev.package.sqlx-macros]
+opt-level = 3
+</code></pre>
+<p>What if packages could provide a
+<a href="https://doc.rust-lang.org/cargo/reference/profiles.html#overrides">package override</a>
+for when they are used as a dependency?</p>
+<p>Another potential use case for dependency-specified profile overrides is for mir-only rlibs.
+Cargo performs codegen for each rlib in your dependency tree and relies on the linker to remove anything unused.
+Mir-only rlibs would defer all codegen to the very end, allowing less codegen to be performed, potentially speeding up builds.
+This has the potential to replace the need for <code>[features]</code> for a large number of use cases.
+One problem is if there is a lot of shared mir between test binaries as that will lead to redundant codegen, slowing down builds.
+One way to experiment with this is to allow enabling mir-only rlibs on a per-package basis through profiles.
+With dependency-specified profile overrides, large packages like
+<a href="https://crates.io/crates/windows-sys">windows-sys</a>
+could opt-in to being a mir-only rlib.</p>
+<p>Dependency-specified profile overrides would be a hidden interaction that would need careful consideration.</p>
+<h3><a href="#avoid-building-production-code-when-changing-tests" aria-hidden="true" class="anchor" id="avoid-building-production-code-when-changing-tests"></a>Avoid building production code when changing tests</h3>
+<p><a href="https://github.com/milianw">milianw</a> posted on
+<a href="https://rust-lang.zulipchat.com/#narrow/channel/246057-t-cargo/topic/upstream.20test-only.20code.20change.20triggers.20downstream.20rebuilds/near/478396625">zulip</a>
+about their library and all dependents rebuild when changing a unit test.</p>
+<p>When a <code>#[test]</code> inside of a library changes,
+the timestamp for the file changes and Cargo rebuilds the file.
+One way to avoid that is by
+<a href="https://matklad.github.io/2021/02/27/delete-cargo-integration-tests.html#Assorted-Tricks">moving tests to dedicated files</a>.
+The rust repo does this with <a href="https://github.com/rust-lang/rust/blob/HEAD/src/tools/tidy/src/unit_tests.rs">a tool</a> to enforce the practice.
+<a href="github.com/epage">epage</a> proposed a clippy lint for this in <a href="https://github.com/rust-lang/rust-clippy/issues/13589">rust-clippy#13589</a>.</p>
+<p>When a library changes, Cargo always rebuilds dependents.
+Previously, <a href="https://github.com/Osiewicz">Osiewicz</a> proposed on
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/Dynamically.20pruning.20jobs.20from.20the.20work.20queue">zulip</a>
+that rustc hash the API of a crate, allowing Cargo to only rebuild dependents when the API hash changes.
+This is being tracked in
+<a href="https://github.com/rust-lang/cargo/issues/14604">#14604</a>.</p>
+<h2><a href="#misc" aria-hidden="true" class="anchor" id="misc"></a>Misc</h2>
+<ul>
+<li><a href="https://rust-lang.zulipchat.com/#narrow/stream/260232-t-cargo.2FPubGrub/topic/Progress.20report">Daily reports</a> by <a href="https://github.com/Eh2406">Eh2406</a> on the progress of the Rust implementation of the PugGrub version solving algorithm</li>
+<li>Building on <a href="github.com/epage">epage</a>'s work in <a href="https://github.com/rust-lang/cargo/pull/14750">#14750</a>, <a href="https://github.com/linyihai">linyihai</a> diagnostics with extraneous details in <a href="https://github.com/rust-lang/cargo/pull/14497">#14497</a>.</li>
+<li><a href="https://github.com/Rustin170506">Rustin170506</a> updated how config files are loaded for cargo script in <a href="https://github.com/rust-lang/cargo/pull/14749">#14749</a></li>
+<li><a href="github.com/epage">epage</a> updated frontmatter parsing for cargo script in <a href="https://github.com/rust-lang/cargo/pull/14792">#14792</a> and got manifest-editing commands updated to support cargo script in <a href="https://github.com/rust-lang/cargo/pull/14857">#14857</a> and <a href="https://github.com/rust-lang/cargo/pull/14864">#14864</a></li>
+<li><a href="https://github.com/arlosi">arlosi</a> wrapped up work on <code>CARGO_BUILD_WARNINGS=deny</code> in <a href="https://github.com/rust-lang/cargo/pull/14388">#14388</a> (update from <a href="https://blog.rust-lang.org/inside-rust/2024/08/15/this-development-cycle-in-cargo-1.81.html#turn-all-warnings-into-errors">1.81</a>)</li>
+</ul>
+<h2><a href="#focus-areas-without-progress" aria-hidden="true" class="anchor" id="focus-areas-without-progress"></a>Focus areas without progress</h2>
+<p>These are areas of interest for Cargo team members with no reportable progress for this development-cycle.</p>
+<p>Ready-to-develop:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/cargo/issues/14774">Config control over feature unification</a></li>
+<li><a href="https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#open-namespaces">Open namespaces</a></li>
+<li><a href="https://github.com/rust-lang/cargo/issues/14125">Split CARGO_TARGET_DIR</a></li>
+<li><a href="https://github.com/rust-lang/cargo/issues/6645">Auto-generate completions</a>
+<ul>
+<li>See <a href="https://github.com/clap-rs/clap/issues/3166">clap-rs/clap#3166</a></li>
+</ul>
+</li>
+</ul>
+<!--
+- Cargo script ([RFC #3502](https://github.com/rust-lang/rfcs/pull/3502), [RFC #3503](https://github.com/rust-lang/rfcs/pull/3503))
+-->
+<p>Needs design and/or experimentation:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/cargo/issues/5931">Per-user artifact cache</a></li>
+<li><a href="https://github.com/rust-lang/cargo/issues/7193">Dependency resolution hooks</a></li>
+<li><a href="https://github.com/rust-lang/cargo/issues/2904">A way to report why crates were rebuilt</a></li>
+<li><a href="https://github.com/rust-lang/cargo/issues/12633">GC</a></li>
+</ul>
+<p>Planning:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/cargo/issues/3126">Disabling of default features</a></li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/3416">RFC #3416: <code>features</code> metadata</a>
+<ul>
+<li><a href="https://github.com/rust-lang/rfcs/pull/3487">RFC #3487: visibility</a> (visibility)</li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/3486">RFC #3486: deprecation</a></li>
+<li><a href="https://doc.rust-lang.org/cargo/reference/unstable.html#list-of-unstable-features">Unstable features</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/rust-lang/cargo/issues/1734">OS-native config/cache directories (ie XDG support)</a>
+<ul>
+<li><a href="https://internals.rust-lang.org/t/pre-rfc-split-cargo-home/19747">Phase 1 Pre-RFC</a></li>
+</ul>
+</li>
+<li><a href="https://internals.rust-lang.org/t/pre-rfc-mutually-excusive-global-features/19618">Pre-RFC: Global, mutually exclusive features</a></li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/3553">RFC #3553: Cargo SBOM Fragment</a></li>
+</ul>
+<h2><a href="#how-you-can-help" aria-hidden="true" class="anchor" id="how-you-can-help"></a>How you can help</h2>
+<p>If you have ideas for improving cargo,
+we recommend first checking <a href="https://github.com/rust-lang/cargo/issues/">our backlog</a>
+and then exploring the idea on <a href="https://internals.rust-lang.org/c/tools-and-infrastructure/cargo/15">Internals</a>.</p>
+<p>If there is a particular issue that you are wanting resolved that wasn't discussed here,
+some steps you can take to help move it along include:</p>
+<ul>
+<li>Summarizing the existing conversation (example:
+<a href="https://github.com/rust-lang/cargo/issues/2644#issuecomment-1489371226">Better support for docker layer caching</a>,
+<a href="https://github.com/rust-lang/cargo/issues/8728#issuecomment-1610265047">Change in <code>Cargo.lock</code> policy</a>,
+<a href="https://github.com/rust-lang/cargo/issues/9930#issuecomment-1489089277">MSRV-aware resolver</a>
+)</li>
+<li>Document prior art from other ecosystems so we can build on the work others have done and make something familiar to users, where it makes sense</li>
+<li>Document related problems and solutions within Cargo so we see if we are solving to the right layer of abstraction</li>
+<li>Building on those posts, propose a solution that takes into account the above information and cargo's compatibility requirements (<a href="https://github.com/rust-lang/cargo/issues/9930#issuecomment-1489269471">example</a>)</li>
+</ul>
+<p>We are available to help mentor people for
+<a href="https://doc.crates.io/contrib/issues.html#issue-status-labels">S-accepted issues</a>
+on
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo">zulip</a>
+and you can talk to us in real-time during
+<a href="https://github.com/rust-lang/cargo/wiki/Office-Hours">Contributor Office Hours</a>.
+If you are looking to help with one of the bigger projects mentioned here and are just starting out,
+<a href="https://doc.crates.io/contrib/process/index.html#working-on-issues">fixing some issues</a>
+will help familiarize yourself with the process and expectations,
+making things go more smoothly.
+If you'd like to tackle something
+<a href="https://doc.crates.io/contrib/issues.html#issue-status-labels">without a mentor</a>,
+the expectations will be higher on what you'll need to do on your own.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

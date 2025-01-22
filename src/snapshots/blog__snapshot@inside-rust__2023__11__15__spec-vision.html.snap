@@ -1,0 +1,324 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2023/11/15/spec-vision.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Our Vision for the Rust Specification | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Our Vision for the Rust Specification | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Our Vision for the Rust Specification | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Our Vision for the Rust Specification" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Our Vision for the Rust Specification</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 15, 2023 &middot; Eric, Felix, Joel and Mara
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang#Specification%20team">the specification team</a> 
+    </div>
+
+    <div class="post">
+      <p>A few months ago, by accepting <a href="https://rust-lang.github.io/rfcs/3355-rust-spec.html">RFC 3355</a>, the decision was made to start working on an official specification for the Rust language. Eric (maintainer of the Rust Reference), Felix (Rust language team), Joel (Rust Foundation) and Mara (author of the RFC) have been working together to get this effort started.</p>
+<p>With this blog post, we present the steps we have taken so far and our plans for approaching the rest of this big task.</p>
+<h2><a href="#editor" aria-hidden="true" class="anchor" id="editor"></a>Editor</h2>
+<p>One of the first steps was to fill the role of &quot;editor&quot; <a href="https://rust-lang.github.io/rfcs/3355-rust-spec.html#role-of-the-editor">as laid out in the RFC</a>. The responsibility of coordination and editing of the specification is purposely delegated to the Rust Foundation, to ensure continuity of the work.</p>
+<p>As part of the hiring effort for this role by the Foundation, we interviewed a few interested candidates with relevant experience. Because an offer to a candidate was eventually rejected, the Foundation opted to consider internal options as an alternative. The Foundation's Director of Technology, Joel, came forward as a willing candidate for the position as part of his existing job. Eric, Felix, and Mara were quickly on board with the idea of having Joel as the Specification Editor due to his vast experience with industry standards and technical editing and his proximity to the Rust project.</p>
+<h2><a href="#specification-team" aria-hidden="true" class="anchor" id="specification-team"></a>Specification Team</h2>
+<p>Since the editor will not be doing the work alone, we are forming a team around the specification work, the Specification Team, as a subteam of the language team.</p>
+<p>Initially, its members are:</p>
+<ul>
+<li>Felix Klock (team lead)</li>
+<li>Mara Bos (team lead)</li>
+<li>Joel Marcey (team member, editor)</li>
+<li>Eric Huss (team member)</li>
+</ul>
+<h2><a href="#stakeholders" aria-hidden="true" class="anchor" id="stakeholders"></a>Stakeholders</h2>
+<p>We will select and maintain a list of <em>stakeholders</em>, a selection of both experts and consumers of the specification, who will serve as advisors and reviewers.</p>
+<p>Initially, the stakeholders will consist of:</p>
+<ul>
+<li>All members of the Rust language team</li>
+<li>One or more representatives from the types team</li>
+<li>One or more representatives from the operational semantics team</li>
+<li>One or more representatives from Ferrocene (High Assurance/Availability, e.g. Automotive Industry.)</li>
+<li>One or more representatives from Formal Methods Research and Development</li>
+<li>One or more representatives from Operating System Development (Rust for Linux; Microsoft)</li>
+</ul>
+<h2><a href="#authority-and-approval" aria-hidden="true" class="anchor" id="authority-and-approval"></a>Authority and Approval</h2>
+<p>While the specification team is in charge of writing and editing the specification, the authority over definition of the Rust language remains with the relevant teams, such as the language team and the library API team. Those teams are expected to involve other teams/subteams when necessary, such as by filing issues, nominating issues for discussion, and requesting FCP approval on critical decisions.</p>
+<p>To allow the specification team to produce content and iterate on it without being blocked by approval processes, we will be working on a draft specification in our work repository.
+With the help of some tooling, we will publicly keep track of which items still require team approval, and which items have open concerns from stakeholders.</p>
+<p>We will categorize all changes as either a minor or a major change.
+Minor changes are items that appear uncontroversial or trivial to the specification team.
+For example, changes that were already approved by the language team via FCP, typographic and grammar fixes, clarifications where the original intent is clear, and similar unexciting changes.
+Major changes are those that are potentially questionable, important, or controversial.
+Any member of the specification team and the relevant authoritative team(s) and any specification stakeholder can flag a change as major.
+Major changes to the specification will have to go through the usual approval process (e.g. language FCP) before they may appear in a published (non-draft) version of the specification.</p>
+<p>The language and specification teams should strive to have at least one shared member (e.g. Felix), acting as a liaison to help ensure that the understanding of what we consider a minor versus a major change remains in sync.</p>
+<h2><a href="#goal" aria-hidden="true" class="anchor" id="goal"></a>Goal</h2>
+<p>The goal of the specification team is to create and maintain the Rust specification.</p>
+<p>The purpose of the Rust specification is to provide an authoritative resource for determining what source texts are valid Rust programs, and how such programs behave.</p>
+<p>An ideal specification both (1.) defines <em>prescriptive bounds</em> on the semantics of a given Rust program for current and future Rust versions, and (2.) provides <em>descriptive details</em> of the semantics that are specific to the Rust version coupled with that instance of the specification.</p>
+<p>The provision of the version-specific details can be provided directly in the specification, or can be indirectly provided via delegation to other documents owned by the relevant Rust teams.</p>
+<details><summary>Explanation of the terms</summary>
+<blockquote>
+<p>The words above have been chosen carefully; it is worth elaborating on those words and the overall phrasing:</p>
+<p><strong>&quot;defines&quot;</strong>: The utility of a specification comes from (1.) forcing authors to define things and (2.) its value of those definitions to the readers of the specification.</p>
+<p><strong>&quot;semantics&quot;</strong>: Rust has a static and dynamic semantics.
+The static semantics of Rust dictates which programs are accepted in the language, while the dynamic semantics determines which of those accepted programs are well-defined, as well as their respective meanings.
+The word &quot;semantics&quot; in the purpose statement refers to both the static and dynamic semantics of Rust collectively.</p>
+<p><strong>&quot;current and future versions&quot;</strong>: The Rust language has been evolving since its inception, and we expect it to continue to evolve going forward.
+These evolutionary steps represent a traversal over the language design landscape.
+For every Rust release, we expect the current implementation to be standing at one point in that landscape, while the Rust community's idealized goal awaits at some higher point up the mountain.</p>
+<p>Rust's evolution follows two axes: release versions (such as Rust 1.73) and editions (such as the 2021 edition).
+Each version of Rust supports its most recent edition and all prior editions.
+The specification will evolve in parallel, with specification releases corresponding to Rust releases.
+Each release of the specification defines the semantics of all editions supported by that Rust release.</p>
+<p><strong>&quot;prescriptive&quot;, &quot;descriptive&quot;</strong>: A descriptive dictionary is one that attempts to describe how a word <em>is</em> used, while a prescriptive dictionary is one that prescribes how a word <em>should be</em> used.
+We take inspiration from that distinction to tease apart two important audience types.</p>
+<p>Rust provides a stability promise: &quot;You should never have to fear upgrading to a new version of stable Rust.&quot;
+That raises a natural question: Why does the purpose statement distinguish version-crossing prescriptive definitions from version-specific descriptive definitions?</p>
+<p>Our answer:</p>
+<p>The descriptive definitions tell the reader how a construct will behave with respect to a specific Rust version (e.g. Rust 1.76).
+The prescriptive bounds tell the reader what they can and cannot expect to hold true in future Rust versions.</p>
+<p>We treat these as distinct concepts because they serve two distinct audiences.</p>
+<p>The statement of Rust's stability promise left a bit of wiggle-room for itself, in terms of what the project considers &quot;fear&quot; vs &quot;reasonable labor associated with a Rust upgrade.&quot;
+When defining semantics, one must be more explicit about any such wiggle-room.
+Some Rust users <em>need</em> a description of the expected semantics as it stands for the Rust release that sits in their hands; they are the audience for version-specific details.
+But other Rust users, such as some library developers, have a more forward-looking perspective.
+The forward-looking developers may require an assurance that one specific code snippet A will always be accepted, and will also always have a particular meaning.
+They may require an assurance that a different snippet B will <em>never</em> be accepted.
+Or they may require an assurance that a third snippet C leveraging Unsafe Rust will always have undefined behavior (e.g. to justify a local transformation by arguing that no <em>new</em> undefined behavior is injected by that transformation.)
+These are all cases that call for a prescriptive definition of the semantics.
+Stating what the Rust compiler currently does is not sufficient for these developers; they need to know what future versions of the compiler may do, which is inherently prescriptive.</p>
+<p><strong>&quot;bounds&quot;</strong>: From the perspective of a Rust user, an ideal specification would provide definitions that are both precise and prescriptive.
+However, it is premature for the project to provide prescriptive definitions that are 100% precise in all areas of Rust's semantics.</p>
+<p>Example 1: Rust's type inference rules are not ready to be set in stone for all future versions.
+The rules are still undergoing development; a sound program that is rejected by the type system today may be deemed acceptable tomorrow.</p>
+<p>Example 2: If we chose a fixed grammar, and then said all future versions of Rust must strictly categorize all source inputs as accepted or rejected according to that one grammar, then that would restrict our ability to add future backward-compatible language extensions to the grammar.</p>
+<p>In order to allow prescriptive definitions in the face of such challenges as these, we sacrifice some precision in order to regain flexibility,
+by planning for our prescriptive definitions to be framed as <em>bounds</em> on the semantics.</p>
+<p>Example 3: The Rust memory model is still an open research area.
+We are not yet prepared to establish a binary sound/unsound categorization for arbitrary unsafe code and set it in stone for all future versions of Rust.</p>
+<p>But, there are some unsafe code patterns that are definitely sound; these can be used as the basis for defining a <em>lower bound</em> on what unsafe code is well-defined.
+There are likewise unsafe code anti-patterns that are certain to be unsound; these can be used as the basis for defining an <em>upper bound</em> on what unsafe code <em>might</em> be well-defined in Rust's dynamic semantics (or, as an alternative perspective: these provide a lower bound on what unsafe code will always be considered undefined behavior in Rust).</p>
+<p>Prescriptive bounds allow for the specification to include a middle ground of programs, where we do not commit all future versions of Rust to always make the same decision that the current version makes.
+For example, one can then say, <em>prescriptively</em>, that a given grammar provides a lower bound on the set of programs that must be accepted by all future versions of Rust, while still allowing the language to evolve in a backward compatible fashion.
+One can also say, <em>descriptively</em>, that the current version of Rust rejects source inputs that do not conform to the grammar.</p>
+<p>Over time, the gap between the upper and lower bounds will shrink as the specification evolves and becomes more precise, resolving ambiguities in Rust's semantics.
+In the limit, when/if the upper and lower bounds meet, this idealized process yields a completely precise prescriptive definition.</p>
+<p>In the interim, before we reach that limit, the specification will provide both prescriptive bounds and descriptive details, for both the static and dynamic semantics.</p>
+<p><strong>&quot;delegation&quot;</strong>: There are broad areas where the questions of what semantics we want, and how they should be specified, are open research topics.
+Examples of such areas include: macros 2.0, the type inference rules, the trait matching rules, and the operational semantics of unsafe code.
+It is not reasonable for the specification team to claim authority on such topics.
+Instead, other teams will be invited to contribute their own detailed descriptions, which can be published as their own documents that the specification can reference.
+Each such document is, like the specification itself, coupled to a specific Rust version.
+Furthermore, each such document is analogous to the detailed descriptions: the scope of each document produced via delegation is intended to be restricted to a specific Rust version.</p>
+<p>If a contributing team has input about broader prescriptive rules that should hold beyond the current Rust version, then that should be part of the Rust specification document itself.
+Such prescriptive rules should always be the responsibility of the specification team to incorporate into the document.
+All such prescriptive rules are then subject to the specification approval process.</p>
+</blockquote>
+</details>
+<p></p>
+<h2><a href="#incremental-development" aria-hidden="true" class="anchor" id="incremental-development"></a>Incremental Development</h2>
+<p>It is ambitious to provide both prescriptive bounds for current and future Rust versions and descriptive details of the current Rust version.
+We will maximize the value of our efforts by working iteratively and incrementally.</p>
+<p>We expect early versions of the spec to focus heavily on delivering the detailed description of the current Rust version.
+Such a specification could be derived heavily from an existing work product, such as the Ferrocene specification, since that explicitly focuses on providing a detailed description of a specific Rust version.
+Feedback on those version-specific descriptions will help us learn how best to craft the prescriptive bounds in the specification.</p>
+<p>Due to our aforementioned focus on the current Rust version, early versions of the specification may have gaps where the prescriptive bounds are more imprecise than necessary.
+For example, prescribing &quot;unsafe Rust code might cause undefined behavior&quot; provides no guidance on how to write well-defined unsafe code.
+Even with such imprecision, the prescriptive bounds can still provide useful high-level guarantees (e.g. &quot;safe Rust cannot cause undefined behavior&quot;).
+Future versions of the specification then add more prescriptive details (e.g. &quot;unsafe Rust code cannot cause undefined behaviour under the following conditions: …&quot;) until we reach our desired level of precision.</p>
+<h2><a href="#scope" aria-hidden="true" class="anchor" id="scope"></a>Scope</h2>
+<p>The specification should cover at least the following areas of Rust's syntax and semantics. Some parts may be inherently coupled to specific backends or target implementation techniques (e.g. inline asm).</p>
+<ul>
+<li>The grammar of Rust, specified via Backus-Naur Form (BNF) or some reasonable extension of BNF.</li>
+<li>Macro expansion
+<ul>
+<li>Macro-by-example (<code>macro_rules</code>) transcription; Hygiene</li>
+<li><code>cfg</code> attributes</li>
+<li>Procedural macros; attributes and derive</li>
+</ul>
+</li>
+<li>Path and identifier resolution
+<ul>
+<li>Modules</li>
+</ul>
+</li>
+<li>Static semantics
+<ul>
+<li>Type definitions; type expressions; layout</li>
+<li>Type inference and type-checking; subtyping</li>
+<li>Lifetimes and borrow-checking</li>
+</ul>
+</li>
+<li>Generics; Associated item resolution and Trait solving</li>
+<li>Operational semantics of safe Rust
+<ul>
+<li>binding forms; match expressions; drop glue</li>
+<li>moving and copying of values; borrows</li>
+<li>field projection; method dispatch</li>
+<li>operator overloading</li>
+</ul>
+</li>
+<li>Operational semantics of unsafe Rust
+<ul>
+<li>memory model</li>
+<li>inline assembly</li>
+</ul>
+</li>
+<li>Const evaluation</li>
+<li>Crates and crate linkage</li>
+</ul>
+<p>This list can be expanded over time.</p>
+<h2><a href="#presentation" aria-hidden="true" class="anchor" id="presentation"></a>Presentation</h2>
+<p>The Rust Specification will be a publicly accessible document, similar to all other Rust documentation (and with the same <a href="https://github.com/rust-lang/rust/blob/master/LICENSE-MIT">licensing</a> <a href="https://github.com/rust-lang/rust/blob/master/LICENSE-APACHE">terms</a>).
+The text will be written in English and will only use technical terms that are defined within the specification itself or that have clear definitions in a freely available online dictionary.</p>
+<p>Individual items in the specification can each be referenced and named: not just in hyperlinks, but also in human text (e.g. &quot;[syntax.patterns.arm.5]&quot;). When possible, these names/references to items should persist across versions of the specification.</p>
+<p>Iterations of the specification should include renderings that highlight the differences between versions. (See e.g. Ada Reference Manual.)</p>
+<p>The Rust specification will be maintained in a format that encourages volunteer contribution, even if the specification team expects to have to reauthor each contribution in order to maintain a consistent voice for the specification.</p>
+<p>While completeness and correctness are the primary priority, we will try our best to make the specification as accessible as possible. Ideally, any Rust programmer should be able to dive in and find the answer to any language question they might have, without the need to ask a &quot;language lawyer&quot; who is already deeply familiar with the document.</p>
+<h3><a href="#release-cadence" aria-hidden="true" class="anchor" id="release-cadence"></a>Release Cadence</h3>
+<p>Rust releases will proceed independently of the specification approval process.</p>
+<p>If a specification has not been approved for a given release, then the release will go out without an associated specification.
+(We might still decide to deliver a specification associated with a given release at a later time, however.)</p>
+<p>This is by design. The specification effort must not add new hurdles for the project to overcome in order to meet its existing obligations, such as the 6-week release cadence.</p>
+<p>Our aspiration is that we will <em>eventually</em> reach a point where delivering an updated specification is automatic and can be done according to the project's 6-week release cadence.
+But, for the short and medium term, we want to have the freedom to lag behind that 6-week release cadence.
+The ability to lag behind the Rust release schedule may be especially useful when the specification team is incrementally adding new content for previously unaddressed areas, or significantly narrowing the prescriptive bounds in the current version of the specification.</p>
+<p>While the specification development process will not block releases, changes to <em>language features</em> should be coupled with relevant updates to the specification.
+Once we have begun publishing a specification coupled to specific releases, then changes to the language features that are documented in the current specification cannot be stabilized without a corresponding pull request approved by the specification team to the current draft specification.
+Changes to language features that are not documented in the specification can be stabilized without an update to the specification, but require a specification team member's acknowledgement that the corresponding feature is undocumented.</p>
+<p>By enforcing this rule that new features must be part of the specification before they are stabilized, we will hopefully eliminate the main source of potential lag between the specification and the Rust release.</p>
+<h2><a href="#next-steps" aria-hidden="true" class="anchor" id="next-steps"></a>Next Steps</h2>
+<p>Now that we have taken the initial steps of selecting an editor, forming the initial team, and documenting our vision in this blog post, the next steps are:</p>
+<ul>
+<li>Setting up a regular meeting schedule for the team.</li>
+<li>Establishing the list of stakeholders.</li>
+<li>Making a first &quot;demo product&quot;, to be reviewed by the stakeholders. That is, setting up our tooling and picking a small slice of Rust to fully document (including cross references, etc.), to give an accurate first impression of what the full specification will look like.</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

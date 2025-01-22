@@ -1,0 +1,281 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2024/11/04/test-infra-oct-2024-2.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>This Month in Our Test Infra: October 2024 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="This Month in Our Test Infra: October 2024 | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="This Month in Our Test Infra: October 2024 | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="This Month in Our Test Infra: October 2024" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>This Month in Our Test Infra: October 2024</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 4, 2024 &middot; Jieyou Xu
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/infra#team-bootstrap">the Bootstrap Team</a> 
+    </div>
+
+    <div class="post">
+      <h1><a href="#this-month-in-our-test-infra-october-2024" aria-hidden="true" class="anchor" id="this-month-in-our-test-infra-october-2024"></a>This Month in Our Test Infra: October 2024</h1>
+<!-- time period: 2024-10-09 through 2024-11-04 -->
+<p>This is a quick summary of the changes in the test infrastructure for the <a href="https://github.com/rust-lang/rust">rust-lang/rust</a>
+repository<sup class="footnote-ref"><a href="#fn-scope" id="fnref-scope" data-footnote-ref>1</a></sup> for <strong>October 2024</strong><sup class="footnote-ref"><a href="#fn-spec-date" id="fnref-spec-date" data-footnote-ref>2</a></sup>. It also includes brief descriptions of on-going
+work.</p>
+<p>As usual, if you encounter bugs or UX issues when using our test infrastructure, please <a href="https://github.com/rust-lang/rust/issues/new">file an
+issue</a>. Bugs and papercuts can't be fixed if we don't know about them!</p>
+<p><strong>Thanks to everyone who contributed to our test infra!</strong></p>
+<h2><a href="#highlights" aria-hidden="true" class="anchor" id="highlights"></a>Highlights</h2>
+<h3><a href="#compiletest-now-supports-bringing-your-own-custom-diff-tool" aria-hidden="true" class="anchor" id="compiletest-now-supports-bringing-your-own-custom-diff-tool"></a><code>compiletest</code> now supports bringing your own custom diff tool</h3>
+<p><a href="https://github.com/rust-lang/rust/pull/131181"><code>compiletest</code> (and bootstrap) now supports bringing your own custom diff tool
+(#131181)</a>.</p>
+<p><img src="../../../../images/2024-11-04-test-infra-oct-2024-2/compiletest-custom-differ.png" alt="A ui test failure showing stderr snapshot diff produced by a custom differ" /></p>
+<p>This only affects the <em>visual</em> diff generation (i.e. maybe you like a different visual style). The
+<code>.stderr</code> snapshots and such are not affected.</p>
+<p>If you want to use your favorite diff tool for generating the visual diffs, you can modify
+<code>config.toml</code>'s <code>build.compiletest-diff-tool</code> option:</p>
+<pre><code class="language-toml">[build]
+# What custom diff tool to use for displaying compiletest tests.
+#compiletest-diff-tool = &lt;none&gt;
+</code></pre>
+<p>Thanks to <a href="https://github.com/dev-ardi"><code>@dev-ardi</code></a> for the implementation!</p>
+<h3><a href="#minicore-test-auxiliary-and--add-core-stubs-directive" aria-hidden="true" class="anchor" id="minicore-test-auxiliary-and--add-core-stubs-directive"></a><code>minicore</code> test auxiliary and <code>//@ add-core-stubs</code> directive</h3>
+<p><a href="https://github.com/rust-lang/rust/pull/130693"><code>ui</code>, <code>assembly</code> and <code>codegen</code> tests can now use the <code>//@ add-core-stubs</code> directive to
+conditionally build a <code>minicore</code> test auxiliary which provides <code>core</code> stubs
+(#130693)</a>. This is so that we can share <code>core</code> stubs
+between cross-compiling tests that only need to <em>build</em> for the cross-compile target and avoid
+having to reinvent and maintain duplicate <code>minicore</code> copies in each of such test<sup class="footnote-ref"><a href="#fn-multicore" id="fnref-multicore" data-footnote-ref>3</a></sup>.</p>
+<p>Previously, having to reinvent a <code>minicore</code> every time you want to add a distinct
+<code>ui</code>/<code>assembly</code>/<code>codegen</code> test (for checking e.g. cross-compile ABI) is a significant source of
+contributor friction and makes it more prone to introduce mistakes in the <code>minicore</code> copies. This is
+also particularly annoying for compiler contributors who want to introduce new lang items, as they
+found themselves having to update multiple copies of such <code>core</code> stubs.</p>
+<p>Note that currently, the shared <a href="https://github.com/rust-lang/rust/blob/master/tests/auxiliary/minicore.rs"><code>tests/auxiliary/minicore.rs</code></a> test auxiliary is still
+quite minimal. The plan is to land the test infrastructure first, then we can incrementally add more
+<code>core</code> stubs to the shared test auxiliary.</p>
+<p>Example usage:</p>
+<pre><code class="language-rs">// tests/ui/abi/my-abi-test.rs
+
+//@ add-core-stubs
+//@ compile-flags: --target x86_64-pc-windows-msvc
+//@ needs-llvm-components: x86
+
+#![crate_type = &quot;lib&quot;]
+#![feature(no_core)]
+#![no_std]
+#![no_core]
+
+extern crate minicore;
+use minicore::*;
+
+struct Meow;
+impl Copy for Meow {} // `Copy` is provided by `minicore`!
+</code></pre>
+<p>See the <a href="https://github.com/rust-lang/rust/issues/130375">context issue</a>, <a href="https://github.com/rust-lang/compiler-team/issues/786">MCP</a> and <a href="https://github.com/rust-lang/rust/issues/131485">tracking issue</a>
+for more info on the original motivations. See the <a href="https://rustc-dev-guide.rust-lang.org/tests/minicore.html">rustc-dev-guide</a> chapter for
+example usage.</p>
+<h2><a href="#pr-listing" aria-hidden="true" class="anchor" id="pr-listing"></a>PR listing</h2>
+<h3><a href="#improvements" aria-hidden="true" class="anchor" id="improvements"></a>Improvements</h3>
+<ul>
+<li>General test infra: <a href="https://github.com/rust-lang/rust/pull/130693">Add <code>minicore</code> test auxiliary and support <code>//@ add-core-stubs</code> directive in <code>ui</code>/<code>assembly</code>/<code>codegen</code> tests #130693</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131470">Add test infra to explicitly test rustc with <code>autodiff</code>/<code>enzyme</code> disabled #131470</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131642">Special case error message for a <code>build-fail</code> test that failed check build #131642</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131679">Document various parts of compiletest's lib.rs #131679</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131764">Fix unnecessary nesting in run-make test output directories #131764</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131925">Warn on redundant --cfg directive when revisions are used #131925</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131941">Disambiguate html-tidy from rust tidy tool #131941</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131181">Custom differ #131181</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131930">Don't allow test revisions that conflict with built in <code>cfg</code>s #131930</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/132225">Dynamically link run-make support #132225</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/132315">Improve robustness of LLVM version handling #132315</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131382">Add &quot;reference&quot; as a known compiletest header #131382</a><sup class="footnote-ref"><a href="#fn-spec" id="fnref-spec" data-footnote-ref>4</a></sup></li>
+<li><code>tests/run-make</code>, CI: <a href="https://github.com/rust-lang/rust/pull/131207">Add <code>aarch64-gnu-debug</code> job #131207</a></li>
+<li>meta: <a href="https://github.com/rust-lang/rust/pull/131682">Tag PRs affecting compiletest with A-compiletest #131682</a></li>
+</ul>
+<h3><a href="#fixes" aria-hidden="true" class="anchor" id="fixes"></a>Fixes</h3>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131681">Fix up-to-date checking for run-make tests #131681</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/132093">Suppress Windows Error Reporting (WER) for run-make tests</a><sup class="footnote-ref"><a href="#fn-wer-fun" id="fnref-wer-fun" data-footnote-ref>5</a></sup></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131614">Error on trying to use revisions in run-make tests #131614</a></li>
+<li><code>tests/run-make</code>, CI: <a href="https://github.com/rust-lang/rust/pull/131917">Run the full stage 2 <code>run-make</code> test suite in <code>x86_64-gnu-debug</code> #131917</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/bootstrap">bootstrap</a>, <code>tests/run-make</code>: <a href="https://github.com/rust-lang/rust/pull/132006">Don't stage-off to previous compiler when CI rustc is available #132006</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/bootstrap">bootstrap</a>, <code>tests/mir-opt</code>: <a href="https://github.com/rust-lang/rust/pull/131442">Match std <code>RUSTFLAGS</code> for host and target for <code>mir-opt</code> test suite to fix double std build/rebuilds #131442</a></li>
+<li>emscripten: Fix <a href="https://github.com/rust-lang/rust/tree/master/src/bootstrap">bootstrap</a> and <a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a> handling of emscripten target tests as part of <a href="https://github.com/rust-lang/rust/pull/131705">Fix most ui tests on emscripten target #131705</a></li>
+</ul>
+<h3><a href="#cleanups" aria-hidden="true" class="anchor" id="cleanups"></a>Cleanups</h3>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131541">Extract auxiliary-crate properties to their own module/struct #131541</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131429">Rename directive <code>needs-profiler-support</code> to <code>needs-profiler-runtime</code> #131429</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131638">Move debugger setup code out of lib.rs #131638</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131585">Remove the one thing that was checking a directive's original_line #131585</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131870">Store test collection context/state in two structs #131870</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131961">Tidy up how tidy and tidy (html version) are disambiguated #131961</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/132033">Make <code>line_directive</code> return a <code>DirectiveLine</code> #132033</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/132313">Rename <code>command-list.rs</code> to <code>directive-list.rs</code> #132313</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131524">Remove the magic hacks for finding output with <code>lto=thin</code> #131524</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131525">Simplify the choice of <code>--emit</code> mode for assembly tests #131525</a></li>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>: <a href="https://github.com/rust-lang/rust/pull/131638">Move debugger setup code out of lib.rs #131638</a></li>
+</ul>
+<h3><a href="#documentation-updates" aria-hidden="true" class="anchor" id="documentation-updates"></a>Documentation updates</h3>
+<ul>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rustc-dev-guide/pull/2094">Document compiletest directives <code>ignore-coverage-map</code> and <code>ignore-coverage-run</code> #2094</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rustc-dev-guide/pull/2095">Rename <code>needs-profiler-support</code> to <code>needs-profiler-runtime</code> #2095</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rustc-dev-guide/pull/2085">Fix and update docs for <code>needs-force-clang-based-tests</code> #2085</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rustc-dev-guide/pull/2092">Add redirects for integration-testing and headers #2092</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rustc-dev-guide/pull/2097">Describe minicore test auxiliary and directive #2097</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rustc-dev-guide/pull/2122">Fix minicore.rs link #2122</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>: <a href="https://github.com/rust-lang/rustc-dev-guide/pull/2096">Add a link for the <code>reference</code> compiletest header #2096</a></li>
+</ul>
+<h2><a href="#on-going-efforts" aria-hidden="true" class="anchor" id="on-going-efforts"></a>On-going efforts</h2>
+<p>Note: there are certainly many more spontaneous efforts, this is more what I know is &quot;planned&quot;.</p>
+<ul>
+<li><a href="https://rust-lang.zulipchat.com/#narrow/channel/326414-t-infra.2Fbootstrap/topic/.28Rubberducking.29.20compiletest.20test.20discovery.20.2F.20directives">Reworking <code>compiletest</code> directive handling to be more robust and improve test coverage</a></li>
+</ul>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-scope">
+<p>The test infra here refers to the test harness <a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a> and supporting components in
+our build system <a href="https://github.com/rust-lang/rust/tree/master/src/bootstrap">bootstrap</a>. This test infra is used mainly by rustc and rustdoc. Other tools like
+cargo, miri or rustfmt maintain their own test infra. <a href="#fnref-scope" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-spec-date">
+<p>specifically 2024-10-09 to 2024-11-04. Note that the previous issue incorrectly used
+October in the filename and thus URL, but is actually the September issue. <a href="#fnref-spec-date" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+<li id="fn-multicore">
+<p>You can say we currently have more of a... &quot;multicore&quot; situation, heh. <a href="#fnref-multicore" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="3" aria-label="Back to reference 3">↩</a></p>
+</li>
+<li id="fn-spec">
+<p>This is part of T-spec efforts to associate tests with Reference rules. <a href="#fnref-spec" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="4" aria-label="Back to reference 4">↩</a></p>
+</li>
+<li id="fn-wer-fun">
+<p>If you want to see what unsuppressed Windows Errors Reporting looks like for the <code>run-make</code> test suite, see <a href="https://github.com/rust-lang/rust/issues/132092#issuecomment-2436615833">https://github.com/rust-lang/rust/issues/132092#issuecomment-2436615833</a>. <a href="#fnref-wer-fun" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="5" aria-label="Back to reference 5">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

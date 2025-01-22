@@ -1,0 +1,168 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/03/11/crates-io-download-changes.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>crates.io: Download changes | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="crates.io: Download changes | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="crates.io: Download changes | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="crates.io: Download changes" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>crates.io: Download changes</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Mar. 11, 2024 &middot; Tobias Bieniek
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/crates-io">the crates.io team</a> 
+    </div>
+
+    <div class="post">
+      <p>Like the rest of the Rust community, <a href="https://crates.io">crates.io</a> has been growing rapidly, with download and package counts increasing 2-3x year-on-year. This growth doesn't come without problems, and we have made some changes to download handling on crates.io to ensure we can keep providing crates for a long time to come.</p>
+<h2><a href="#the-problem" aria-hidden="true" class="anchor" id="the-problem"></a>The Problem</h2>
+<p>This growth has brought with it some challenges. The most significant of these is that all download requests currently go through the crates.io API, occasionally causing scaling issues. If the API is down or slow, it affects all download requests too. In fact, the number one cause of waking up our crates.io on-call team is &quot;slow downloads&quot; due to the API having performance issues.</p>
+<p>Additionally, this setup is also problematic for users outside of North America, where download requests are slow due to the distance to the crates.io API servers.</p>
+<h2><a href="#the-solution" aria-hidden="true" class="anchor" id="the-solution"></a>The Solution</h2>
+<p>To address these issues, over the last year we have decided to make some changes:</p>
+<p><strong>Starting from 2024-03-12, <code>cargo</code> will begin to download crates directly from our static.crates.io <a href="https://en.wikipedia.org/wiki/Content_delivery_network">CDN</a> servers.</strong></p>
+<p>This change will be facilitated by modifying the <a href="https://github.com/rust-lang/crates.io-index/blob/master/config.json"><code>config.json</code></a> file on the package index. In other words: no changes to <code>cargo</code> or your own system are needed for the changes to take effect. The <code>config.json</code> file is used by <code>cargo</code> to determine the download URLs for crates, and we will update it to point directly to the CDN servers, instead of the crates.io API.</p>
+<p>Over the past few months, we have made several changes to the crates.io backend to enable this:</p>
+<ul>
+<li>
+<p>We <a href="https://blog.rust-lang.org/2023/10/27/crates-io-non-canonical-downloads.html">announced the deprecation of &quot;non-canonical&quot; downloads</a>, which would be harder to support when downloading directly from the CDN.</p>
+</li>
+<li>
+<p>We changed how downloads are counted. Previously, downloads were counted directly on the crates.io API servers. Now, we analyze the log files from the CDN servers to count the download requests.</p>
+</li>
+</ul>
+<p><img src="../../../images/2024-03-11-crates-io-download-changes/download-graph.png" alt="crates.io download graph of an arbitrary crate showing that on 2024-02-16, download numbers increased" /></p>
+<p>The latter change has caused the download numbers of most crates to increase, as some download requests were not counted before. Specifically, crates.io mirrors were often downloading directly from the CDN servers already, and those downloads had previously not been counted. For crates with a lot of downloads these changes will be barely noticeable, but for smaller crates, the download numbers have increased quite a bit over the past few weeks since we enabled this change.</p>
+<h2><a href="#expected-outcomes" aria-hidden="true" class="anchor" id="expected-outcomes"></a>Expected Outcomes</h2>
+<p>We expect these changes to significantly improve the reliability and speed of downloads, as the performance of the crates.io API servers will no longer affect the download requests. Over the next few weeks, we will monitor the performance of the system to ensure that the changes have the expected effects.</p>
+<p>We have noticed that some non-cargo build systems are not using the <code>config.json</code> file of the index to build the download URLs. We will reach out to the maintainers of those build systems to ensure that they are aware of the change and to help them update their systems to use the new download URLs. The old download URLs will continue to work, but these systems will be missing out on the potential performance improvement.</p>
+<p>We are excited about these changes and believe they will greatly improve the reliability of crates.io. We look forward to hearing your feedback!</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

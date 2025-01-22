@@ -1,0 +1,1435 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/feed.xml
+snapshot_kind: text
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <generator uri="https://blog.rust-lang.org/inside-rust/" version="0.1.0">Inside Rust Blog</generator>
+    <link href="https://blog.rust-lang.org/inside-rust/feed.xml" rel="self" type="application/atom+xml" />
+    <link href="https://blog.rust-lang.org/inside-rust/" rel="alternate" type="text/html" />
+    <id>https://blog.rust-lang.org/inside-rust/</id>
+    <title>Inside Rust Blog</title>
+    <subtitle>Want to follow along with Rust development? Curious how you might get involved? Take a look!</subtitle>
+    <author>
+        <name>Maintained by the Rust Teams.</name>
+        <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
+    </author>
+    <updated>2025-01-22T22:40:37+00:00</updated>
+
+    <entry>
+        <title>This Development-cycle in Cargo: 1.85</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2025/01/17/this-development-cycle-in-cargo-1.85.html" type="text/html" title="This Development-cycle in Cargo: 1.85" />
+        <published>2025-01-17T00:00:00+00:00</published>
+        <updated>2025-01-17T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2025/01/17/this-development-cycle-in-cargo-1.85.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2025/01/17/this-development-cycle-in-cargo-1.85.html">&lt;h1&gt;&lt;a href&#x3D;&quot;#this-development-cycle-in-cargo-185&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;this-development-cycle-in-cargo-185&quot;&gt;&lt;/a&gt;This Development-cycle in Cargo: 1.85&lt;/h1&gt;
+&lt;p&gt;This is a summary of what has been happening around Cargo development for the last 6 weeks which is approximately the merge window for Rust 1.85.&lt;/p&gt;
+&lt;!-- time period: 2024-11-29 through 2025-01-09 --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#plugin-of-the-cycle&quot;&gt;Plugin of the cycle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#implementation&quot;&gt;Implementation&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#rustflags-and-caching&quot;&gt;Rustflags and caching&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#report-progress-in-the-taskbar&quot;&gt;Report progress in the taskbar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#cargo-publish-dirty-check-performance&quot;&gt;&lt;code&gt;cargo publish&lt;/code&gt; dirty-check performance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#future-proofing-the-index&quot;&gt;Future-proofing the Index&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#design-discussions&quot;&gt;Design discussions&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#project-goals&quot;&gt;Project goals&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#automatic-retry-for-cargo-publish&quot;&gt;Automatic retry for &lt;code&gt;cargo publish&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#cargo-publish-verify-behavior&quot;&gt;&lt;code&gt;cargo publish&lt;/code&gt; verify behavior&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#codifying-build-script-patterns&quot;&gt;Codifying build script patterns&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#misc&quot;&gt;Misc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#focus-areas-without-progress&quot;&gt;Focus areas without progress&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#plugin-of-the-cycle&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;plugin-of-the-cycle&quot;&gt;&lt;/a&gt;Plugin of the cycle&lt;/h2&gt;
+&lt;p&gt;Cargo can&#x27;t be everything to everyone,
+if for no other reason than the compatibility guarantees it must uphold.
+Plugins play an important part of the Cargo ecosystem and we want to celebrate them.&lt;/p&gt;
+&lt;p&gt;Our choice for this cycle is &lt;a href&#x3D;&quot;https://crates.io/crates/clippy-sarif&quot;&gt;clippy-sarif&lt;/a&gt;.  While not a plugin, it wraps &lt;code&gt;cargo clippy&lt;/code&gt;, converting the lint output into &lt;a href&#x3D;&quot;https://sarifweb.azurewebsites.net&quot;&gt;Static Analysis Results Interchange Format (SARIF)&lt;/a&gt; which GitHub can use to post comments on a PR review for lints, making them easier to access than reading a log file.&lt;/p&gt;
+&lt;p&gt;Thanks to &lt;a href&#x3D;&quot;https://github.com/epage&quot;&gt;epage&lt;/a&gt; for the suggestion!&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/Plugin.20of.20the.20Dev.20Cycle/near/420703211&quot;&gt;Please submit your suggestions for the next post.&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#implementation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;implementation&quot;&gt;&lt;/a&gt;Implementation&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#rustflags-and-caching&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rustflags-and-caching&quot;&gt;&lt;/a&gt;Rustflags and caching&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Update from &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2024/12/13/this-development-cycle-in-cargo-1.84.html#rustflags-and-caching&quot;&gt;1.84&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;As a recap, Cargo throws out the cache on changes to &lt;code&gt;RUSTFLAGS&lt;/code&gt;,
+instead of creating separate entries in the cache.
+The problem is &lt;code&gt;RUSTFLAGS&lt;/code&gt; is opaque to Cargo and different flags have different caching needs.
+The remaining problem is &lt;code&gt;--remap-path-prefix&lt;/code&gt; which is used to make two different builds look the same.
+The parameters to the flag are unique to each build and the cache key ends up in the final binary,
+preventing &lt;code&gt;--remap-path-prefix&lt;/code&gt; from serving its purpose.&lt;/p&gt;
+&lt;!-- 2024-12-03 --&gt;
+&lt;p&gt;We talked about this a Cargo team meeting.
+Once we have built-in support for &lt;code&gt;--remap-path-prefix&lt;/code&gt; through
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#profile-trim-paths-option&quot;&gt;trim-paths&lt;/a&gt;,
+we could just point people to that instead.
+However, there are open issues with trim-paths and its unclear how long that will take to become available.
+We also could go back to the fix for this from the previous attempt and parse &lt;code&gt;RUSTFLAGS&lt;/code&gt;
+(see &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/6966&quot;&gt;#6966&lt;/a&gt;)
+but we&#x27;re uncomfortable with that because parsing of command-lines is context-sensitive.
+We ended up with a middle-ground where we apply a rough heuristic where if something looks like &lt;code&gt;--remap-path-prefix&lt;/code&gt;,
+we do not include &lt;code&gt;RUSTFLAGS&lt;/code&gt; in our cache key.&lt;/p&gt;
+&lt;p&gt;This was merged in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14830&quot;&gt;#14830&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#report-progress-in-the-taskbar&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;report-progress-in-the-taskbar&quot;&gt;&lt;/a&gt;Report progress in the taskbar&lt;/h3&gt;
+&lt;p&gt;Previously, &lt;a href&#x3D;&quot;https://github.com/Gordon01&quot;&gt;Gordon01&lt;/a&gt;
+picked up work on &lt;a href&#x3D;&quot;https://conemu.github.io/en/AnsiEscapeCodes.html#ConEmu_specific_OSC&quot;&gt;ConEmu&#x27;s&lt;/a&gt; OSC 9;4 which is an ANSI escape code they defined to report progress through the Windows taskbar icon
+(&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14615&quot;&gt;#14615&lt;/a&gt;).
+Support for reporting this has extended to applications like systemd
+(&lt;a href&#x3D;&quot;https://github.com/systemd/systemd/pull/34929&quot;&gt;systemd#34929&lt;/a&gt;)
+while support for reporting this has extended to terminals like
+&lt;a href&#x3D;&quot;https://blogs.gnome.org/chergert/2024/12/03/ptyxis-progress-support/&quot;&gt;Ptyxis&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- 2024-12-17 --&gt;
+&lt;p&gt;With an FCP started, the team briefly discussed whether this needs to be added to &lt;code&gt;.cargo/config.toml&lt;/code&gt;.
+We previously added configuration control for other terminal features,
+like unicode and hyperlinks.
+We don&#x27;t exclusively turn on these features because not all terminals gracefully degrade in their presence.
+In particular for the Taskbar escape code,
+Kitty had made their own feature using OSC 9,
+causing a poor experience with OSC 9;4
+(&lt;a href&#x3D;&quot;https://github.com/kovidgoyal/kitty/issues/8011&quot;&gt;kitty#8011&lt;/a&gt;).
+This gives us a way for users to test the feature in case their terminal isn&#x27;t in our allow list or to turn it off if they don&#x27;t like the results.&lt;/p&gt;
+&lt;p&gt;The discussion then moved to
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14615#discussion_r1888730634&quot;&gt;#14615&lt;/a&gt;,
+particularly focusing on what to name the config field.
+Currently, the field is proposed to go in the &lt;code&gt;term.progress&lt;/code&gt; table.
+As these are de facto standards, there is no officially defined name for this feature.
+We could name it for the escape code (&lt;code&gt;term.progress.osc9_4&lt;/code&gt;),
+the original intent (&lt;code&gt;term.progress.taskbar&lt;/code&gt;),
+how progress is being reported (e.g. &lt;code&gt;term.progress.ansi&lt;/code&gt;),
+or one of a myriad of options.&lt;/p&gt;
+&lt;p&gt;Ideally, the config field would be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Easy discover for people wanting to change this behavior&lt;/li&gt;
+&lt;li&gt;Clear meaning when looking at a config or config docs&lt;/li&gt;
+&lt;li&gt;Consistent with the wider community&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;At this time, we have not come to a consensus on a name.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#cargo-publish-dirty-check-performance&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargo-publish-dirty-check-performance&quot;&gt;&lt;/a&gt;&lt;code&gt;cargo publish&lt;/code&gt; dirty-check performance&lt;/h3&gt;
+&lt;p&gt;When running &lt;code&gt;cargo package&lt;/code&gt; or &lt;code&gt;cargo publish&lt;/code&gt;,
+Cargo records the git commit hash and path within the repo into a file in the &lt;code&gt;.crate&lt;/code&gt; file.
+This was skipped if &lt;code&gt;--allow-dirty&lt;/code&gt; was used which changed in Cargo 1.81
+to help with efforts in auditing published packages
+(&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/13960&quot;&gt;#13960&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/landonxjames&quot;&gt;landonxjames&lt;/a&gt; reported that this change caused a significant perfornce regression when publishing the
+&lt;a href&#x3D;&quot;https://github.com/awslabs/aws-sdk-rust&quot;&gt;aws-sdk-rust repo&lt;/a&gt;.
+Cargo went from skipping its dirty file check with &lt;code&gt;--allow-dirty&lt;/code&gt; to always running it.
+The check has not been optimized for publishing over 400 packages at once.
+For example, Cargo checks if any file in the repo is dirty.
+&lt;a href&#x3D;&quot;https://github.com/weihanglo&quot;&gt;weihanglo&lt;/a&gt; reduced the scope of this check to just the package directory in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14962&quot;&gt;#14962&lt;/a&gt;
+but we held off on that change as this drew attention to shortcomings in the dirty check
+(&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14967&quot;&gt;#14967&lt;/a&gt;)
+and we were concerned that fixing those problems would conflict with the performance improvement.&lt;/p&gt;
+&lt;p&gt;weihanglo set out to test that theory by fixing several of the problems in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14962&quot;&gt;#14962&lt;/a&gt;,
+particularly for files that Cargo copies into the package root
+(
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14981&quot;&gt;#14981&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14966&quot;&gt;#14966&lt;/a&gt;
+).
+They tried to further optimize this in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14985&quot;&gt;#14985&lt;/a&gt;
+though it didn&#x27;t seem worth the complexity.&lt;/p&gt;
+&lt;p&gt;With the approach taken above,
+path filtering isn&#x27;t an issue so we moved forward with it in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14997&quot;&gt;#14997&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We are waiting to hear back to see if more work is needed for optimizing this.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#future-proofing-the-index&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;future-proofing-the-index&quot;&gt;&lt;/a&gt;Future-proofing the Index&lt;/h3&gt;
+&lt;p&gt;When discussing new features for Cargo,
+changes to the Index come up.
+The Index is a collection of basic metadata (called Summaries)
+for every package version in a registry to allow dependency resolution without downloading a &lt;code&gt;.crate&lt;/code&gt; file and parsing the &lt;code&gt;Cargo.toml&lt;/code&gt;.
+Purely additive changes to a Summary are fine,
+like adding &lt;code&gt;package.rust-version&lt;/code&gt;.
+We can extend existing fields or change the interpretation of them but the experience isn&#x27;t ideal for old versions of Cargo.&lt;/p&gt;
+&lt;p&gt;Back when Cargo 1.60 was released,
+users on older versions of Cargo started to see errors like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;error: failed to select a version for the requirement &#x60;libgit2-sys &#x3D; &amp;quot;^0.13.3&amp;quot;&#x60;
+candidate versions found which didn&#x27;t match: 0.13.2+1.4.2, 0.13.1+1.4.2, 0.13.0+1.4.1, ...
+location searched: crates.io index
+required by package &#x60;git2 v0.14.3&#x60;
+    ... which satisfies dependency &#x60;git2 &#x3D; &amp;quot;^0.14&amp;quot;&#x60; (locked to 0.14.3) of package &#x60;repor v0.1.0 (/home/epage/src/personal/repro)&#x60;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When you go on crates.io, version &lt;code&gt;0.13.3&lt;/code&gt; exists.
+The problem is &lt;code&gt;0.13.3&lt;/code&gt; used the new &lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/features.html#dependency-features&quot;&gt;weak dependency feature syntax&lt;/a&gt; (&lt;code&gt;dep?/feature&lt;/code&gt;) which older Cargos do not understand.
+This error message is a poor user experience for weak dependency features and any future extensions of the Summary schema.
+We&#x27;ve been tracking this usability problem in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/10623&quot;&gt;#10623&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/epage&quot;&gt;epage&lt;/a&gt; did some recent work (
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14897&quot;&gt;#14897&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14921&quot;&gt;#14921&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14923&quot;&gt;#14923&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14927&quot;&gt;#14927&lt;/a&gt;
+) so Cargo can extract as much information as it can from unsupported Summaries, without losing this information through caching, and report it to the user.&lt;/p&gt;
+&lt;p&gt;The following output shows three different ways we might report an unsupported Summary, depending on how much context we have:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[UPDATING] &#x60;dummy-registry&#x60; index
+[ERROR] failed to select a version for the requirement &#x60;foo &#x3D; &amp;quot;^0.1.1&amp;quot;&#x60;
+  version 0.1.3 requires cargo 1.2345
+  version 0.1.4 requires a Cargo version that supports index version 1000000000
+  version 0.1.5&#x27;s index entry is invalid
+location searched: &#x60;dummy-registry&#x60; index (which is replacing registry &#x60;crates-io&#x60;)
+required by package &#x60;a v0.5.0 ([ROOT]/foo)&#x60;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We also report yanked versions now:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[UPDATING] &#x60;dummy-registry&#x60; index
+[ERROR] failed to select a version for the requirement &#x60;baz &#x3D; &amp;quot;&#x3D;0.0.2&amp;quot;&#x60;
+  version 0.0.2 is yanked
+location searched: &#x60;dummy-registry&#x60; index (which is replacing registry &#x60;crates-io&#x60;)
+required by package &#x60;bar v0.0.1&#x60;
+    ... which satisfies dependency &#x60;bar &#x3D; &amp;quot;*&amp;quot;&#x60; of package &#x60;foo v0.0.1 ([ROOT]/foo)&#x60;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With the improved error reporting,
+we are more free to design Index related features.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#design-discussions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-discussions&quot;&gt;&lt;/a&gt;Design discussions&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#project-goals&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;project-goals&quot;&gt;&lt;/a&gt;Project goals&lt;/h3&gt;
+&lt;p&gt;Cargo-related goals that have been proposed for 2025h1 include&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2025h1/build-std.html&quot;&gt;build-std&lt;/a&gt;: led by &lt;a href&#x3D;&quot;https://github.com/AdamGemmell&quot;&gt;AdamGemmell&lt;/a&gt; and the Rust team at Arm&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2025h1/cargo-semver-checks.html&quot;&gt;Continue resolving cargo-semver-checks blockers for merging into cargo&lt;/a&gt;: led by &lt;a href&#x3D;&quot;https://github.com/obi1kenobi&quot;&gt;obi1kenobi&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2025h1/pubgrub-in-cargo.html&quot;&gt;Extend pubgrub to match cargo&#x27;s dependency resolution&lt;/a&gt;: led by &lt;a href&#x3D;&quot;https://github.com/eh2406&quot;&gt;eh2406&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2025h1/libtest-json.html&quot;&gt;Finish the libtest json output experiment&lt;/a&gt;: led by &lt;a href&#x3D;&quot;https://github.com/epage&quot;&gt;epage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2025h1/cargo-plumbing.html&quot;&gt;Prototype a new set of Cargo &amp;quot;plumbing&amp;quot; commands&lt;/a&gt;: in need of a task owner for Cargo work&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2025h1/pub-priv.html&quot;&gt;Stabilize public/private dependencies&lt;/a&gt;: in need of a task owner for compiler work&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2025h1/open-namespaces.html&quot;&gt;Implement Open API Namespace Support&lt;/a&gt;: in need of a task owner for compiler work&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#automatic-retry-for-cargo-publish&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;automatic-retry-for-cargo-publish&quot;&gt;&lt;/a&gt;Automatic retry for &lt;code&gt;cargo publish&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/ijackson&quot;&gt;ijackson&lt;/a&gt; proposed that cargo automatically backoff and retry when hitting crates.io rate limits in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/13530&quot;&gt;#13530&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- 2024-12-10 --&gt;
+&lt;p&gt;The two main concerns we had were:&lt;/p&gt;
+&lt;p&gt;Does this follow the intent of crates.io in setting a rate limit?
+We reached out and they said they are fine with it from a technical perspective.&lt;/p&gt;
+&lt;p&gt;Is this the user experience we want?
+The retry times are quite long and users might be unhappy with &lt;code&gt;cargo publish&lt;/code&gt; unexpectedly &amp;quot;hanging&amp;quot; for several minutes,
+even worse if they are publishing a workspace
+(&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/1169&quot;&gt;#1169&lt;/a&gt;).
+If the user decided to cancel a workspace publish with ctrl-c,
+they could be left in a half-published state.
+Having an &lt;code&gt;--idempotent&lt;/code&gt; flag to skip versions already published
+(&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/13397&quot;&gt;#13397&lt;/a&gt;)
+could help.
+If this is part of a larger release process,
+like with &lt;a href&#x3D;&quot;https://crates.io/crates/cargo-release&quot;&gt;&lt;code&gt;cargo-release&lt;/code&gt;&lt;/a&gt;,
+then recovery on failure can be messy.
+In &lt;code&gt;cargo-release&lt;/code&gt;&#x27;s case,
+it guesses whether an operation will be rate limited and blocks the user,
+requiring them to override it.
+We did not look into what canceling a CI-based release,
+like with &lt;a href&#x3D;&quot;https://github.com/MarcoIeni/release-plz&quot;&gt;&lt;code&gt;release-plz&lt;/code&gt;&lt;/a&gt;,
+would look like.
+Instead of &lt;code&gt;cargo-release&lt;/code&gt; guessing whether the rate limit would be hit,
+crates.io could provide an API to query this
+however the crates.io team is worried about the compatibility burden this may put on them to further evolve the rate limits.&lt;/p&gt;
+&lt;p&gt;When crates.io came back with their feedback on this,
+they did bring up the idea of adjusting the crate-version rate limit from being scoped per-user to being per-crate.
+This is being tracked in &lt;a href&#x3D;&quot;https://github.com/rust-lang/crates.io/issues/10396&quot;&gt;crates.io#10396&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#cargo-publish-verify-behavior&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cargo-publish-verify-behavior&quot;&gt;&lt;/a&gt;&lt;code&gt;cargo publish&lt;/code&gt; verify behavior&lt;/h3&gt;
+&lt;p&gt;When testing &lt;code&gt;cargo publish --workspace&lt;/code&gt; (&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/1169&quot;&gt;#1169&lt;/a&gt;),
+&lt;a href&#x3D;&quot;https://github.com/epage&quot;&gt;epage&lt;/a&gt; realized that the verify step is running &lt;code&gt;cargo build&lt;/code&gt;, rather than &lt;code&gt;cargo check&lt;/code&gt;.
+While this likely doesn&#x27;t matter for publishing,
+it can have a dramatic effect when iterating on a release process with the &lt;code&gt;--dry-run&lt;/code&gt; flag.
+They proposed this get changed in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14930&quot;&gt;#14930&lt;/a&gt;
+but after some back and forth,
+it turned out there might be more nuance in this and the discussion shifted to
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14941&quot;&gt;#14941&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Something to keep in mind is that &lt;code&gt;cargo check&lt;/code&gt; is not guaranteed to find every compiler error that &lt;code&gt;cargo build&lt;/code&gt; may find (see &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3477&quot;&gt;RFC #3477&lt;/a&gt;).
+More specifically, these cover post-monomorphizaton errors which includes linker errors.&lt;/p&gt;
+&lt;!-- 2024-12-17 --&gt;
+&lt;p&gt;We discussed this in the recent Cargo team meeting.
+Already someone has asked for verification support to be configurable so it can run tests
+(&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14685&quot;&gt;#14685&lt;/a&gt;).
+If cargo had that, this only becomes a question of defaults.
+Without it, we would be locking people into an answer which puts more pressure on the decision.
+However, there are several questions to work out for
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14685&quot;&gt;#14685&lt;/a&gt;
+that could slow down this issue if we block on it.&lt;/p&gt;
+&lt;p&gt;An important question for us to answer is what the default purpose of the verify step should be&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Sanity check packaging (e.g. were all needed files included)
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;If&lt;/em&gt; you consider testing of a &lt;code&gt;.crate&lt;/code&gt; file important, then running tests is the only way to sanity check it because they can rely on data files, see #14685 for more details&lt;/li&gt;
+&lt;li&gt;For &lt;code&gt;-sys&lt;/code&gt; crates, there is the possibility of a missing file causing linker errors&lt;/li&gt;
+&lt;li&gt;Only checking one combination of features or one profile could also mask problems with missing files&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Last-ditch baseline quality check
+&lt;ul&gt;
+&lt;li&gt;In case no CI&lt;/li&gt;
+&lt;li&gt;In case changes were made locally before publishing, particularly with &lt;code&gt;--allow-dirty&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If its a last-ditch baseline quality check, then running &lt;code&gt;build&lt;/code&gt; adds extra assurances in light of
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3477&quot;&gt;RFC #3477&lt;/a&gt;.
+The question then becomes, what is the right default baseline?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A fast &amp;quot;most build problems&amp;quot; check&lt;/li&gt;
+&lt;li&gt;Current: The default feature on a &lt;code&gt;dev&lt;/code&gt; profile on the current platform&lt;/li&gt;
+&lt;li&gt;Different feature combinations?&lt;/li&gt;
+&lt;li&gt;Different platform combinations?&lt;/li&gt;
+&lt;li&gt;Different profile combinations?&lt;/li&gt;
+&lt;li&gt;Linting, testing, unsafe checking, or formal proofs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Whether the differences between &lt;code&gt;cargo check&lt;/code&gt; and &lt;code&gt;cargo build&lt;/code&gt; are relevant depends on factors like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Our general assumption of what users do before publishing (&lt;code&gt;cargo test&lt;/code&gt;? run all of CI?)&lt;/li&gt;
+&lt;li&gt;The likelihood that a step from above is missed before release&lt;/li&gt;
+&lt;li&gt;The likelihood of post-monomorphization errors being introduced in that gap&lt;/li&gt;
+&lt;li&gt;The number of affected users if a problem does slip through (are more popular crates likely to have more rigorous processes?)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The scariest part of rust-lang/rfcs#3477 is that a crate that builds with &lt;code&gt;cargo check&lt;/code&gt; is not subject to Rust&#x27;s stability guarantees, only &lt;code&gt;cargo build&lt;/code&gt;.  However, a crate that can only be checked and not built is of little use and is unlikely people could depend on that.&lt;/p&gt;
+&lt;p&gt;We decided to reach out on
+&lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/performance-of-cargo-package-cargo-publish-and-the-purpose-of-the-verify-step/22135&quot;&gt;Internals&lt;/a&gt;
+to get more feedback on the role of verify and the impact of its performance.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#codifying-build-script-patterns&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;codifying-build-script-patterns&quot;&gt;&lt;/a&gt;Codifying build script patterns&lt;/h3&gt;
+&lt;p&gt;Inspired by our interest in finding abstractions for &lt;code&gt;RUSTFLAGS&lt;/code&gt;
+(&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/12739&quot;&gt;#12739&lt;/a&gt;),
+&lt;a href&#x3D;&quot;https://github.com/epage&quot;&gt;epage&lt;/a&gt; started tracking uses of &lt;code&gt;build.rs&lt;/code&gt;
+in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14948&quot;&gt;#14948&lt;/a&gt;
+so we can explore what are gaps in Rust and Cargo that need filling&lt;/p&gt;
+&lt;p&gt;If nothing else, we can use
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#metabuild&quot;&gt;metabuild&lt;/a&gt;
+for custom declarative build scripts.
+To simplify the design and to align with other features,
+epage &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14903#issuecomment-2523803041&quot;&gt;posted a counter proposal&lt;/a&gt; that builds on
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#artifact-dependencies&quot;&gt;artifact dependencies&lt;/a&gt;.
+Compared to the current design, this avoids duplicate build and linking of build script binaries
+and allows finer grained tracking of when to re-run them.
+This might even allow the running of build scripts to be conditioned on features.
+&lt;a href&#x3D;&quot;https://github.com/joshtriplett&quot;&gt;joshtriplett&lt;/a&gt; suggested consolidating the ways to pass data to build scripts, which epage agreed with.
+Whats left unclear is whether the data should be low level (literal environment variables) or abstracted (some configuration that gets converted to environment variables).&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#misc&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;misc&quot;&gt;&lt;/a&gt;Misc&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/260232-t-cargo.2FPubGrub/topic/Progress.20report&quot;&gt;Daily reports&lt;/a&gt; by &lt;a href&#x3D;&quot;https://github.com/Eh2406&quot;&gt;Eh2406&lt;/a&gt; on the progress of the Rust implementation of the PugGrub version solving algorithm&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/ranger-ross&quot;&gt;ranger-ross&lt;/a&gt; improved build detection fingerprinting in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14973&quot;&gt;#14973&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/ranger-ross&quot;&gt;ranger-ross&lt;/a&gt; improved diagnostics with Index update failures in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/15014&quot;&gt;#14973&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/epage&quot;&gt;epage&lt;/a&gt; added &lt;code&gt;CARGO_CFG_FEATURE&lt;/code&gt; to build scripts in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14902&quot;&gt;#14902&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/carloskiki&quot;&gt;carloskiki&lt;/a&gt; posted &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3759&quot;&gt;RFC #3759&lt;/a&gt; for specifying targets required for building a package after hosting a &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/pre-rfc-allow-packages-to-specify-a-set-of-supported-targets/21979/39&quot;&gt;Pre-RFC on Internals&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#focus-areas-without-progress&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;focus-areas-without-progress&quot;&gt;&lt;/a&gt;Focus areas without progress&lt;/h2&gt;
+&lt;p&gt;These are areas of interest for Cargo team members with no reportable progress for this development-cycle.&lt;/p&gt;
+&lt;p&gt;Ready-to-develop:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14774&quot;&gt;Config control over feature unification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#open-namespaces&quot;&gt;Open namespaces&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14125&quot;&gt;Split CARGO_TARGET_DIR&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/6645&quot;&gt;Auto-generate completions&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;See &lt;a href&#x3D;&quot;https://github.com/clap-rs/clap/issues/3166&quot;&gt;clap-rs/clap#3166&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!--
+- Cargo script ([RFC #3502](https://github.com/rust-lang/rfcs/pull/3502), [RFC #3503](https://github.com/rust-lang/rfcs/pull/3503))
+--&gt;
+&lt;p&gt;Needs design and/or experimentation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/5931&quot;&gt;Per-user artifact cache&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/7193&quot;&gt;Dependency resolution hooks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/2904&quot;&gt;A way to report why crates were rebuilt&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/12633&quot;&gt;GC&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Planning:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/3126&quot;&gt;Disabling of default features&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3416&quot;&gt;RFC #3416: &lt;code&gt;features&lt;/code&gt; metadata&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3487&quot;&gt;RFC #3487: visibility&lt;/a&gt; (visibility)&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3486&quot;&gt;RFC #3486: deprecation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/unstable.html#list-of-unstable-features&quot;&gt;Unstable features&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/1734&quot;&gt;OS-native config/cache directories (ie XDG support)&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/pre-rfc-split-cargo-home/19747&quot;&gt;Phase 1 Pre-RFC&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/pre-rfc-mutually-excusive-global-features/19618&quot;&gt;Pre-RFC: Global, mutually exclusive features&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3553&quot;&gt;RFC #3553: Cargo SBOM Fragment&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#how-you-can-help&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-you-can-help&quot;&gt;&lt;/a&gt;How you can help&lt;/h2&gt;
+&lt;p&gt;If you have ideas for improving cargo,
+we recommend first checking &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/&quot;&gt;our backlog&lt;/a&gt;
+and then exploring the idea on &lt;a href&#x3D;&quot;https://internals.rust-lang.org/c/tools-and-infrastructure/cargo/15&quot;&gt;Internals&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If there is a particular issue that you are wanting resolved that wasn&#x27;t discussed here,
+some steps you can take to help move it along include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Summarizing the existing conversation (example:
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/2644#issuecomment-1489371226&quot;&gt;Better support for docker layer caching&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/8728#issuecomment-1610265047&quot;&gt;Change in &lt;code&gt;Cargo.lock&lt;/code&gt; policy&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/9930#issuecomment-1489089277&quot;&gt;MSRV-aware resolver&lt;/a&gt;
+)&lt;/li&gt;
+&lt;li&gt;Document prior art from other ecosystems so we can build on the work others have done and make something familiar to users, where it makes sense&lt;/li&gt;
+&lt;li&gt;Document related problems and solutions within Cargo so we see if we are solving to the right layer of abstraction&lt;/li&gt;
+&lt;li&gt;Building on those posts, propose a solution that takes into account the above information and cargo&#x27;s compatibility requirements (&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/9930#issuecomment-1489269471&quot;&gt;example&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We are available to help mentor people for
+&lt;a href&#x3D;&quot;https://doc.crates.io/contrib/issues.html#issue-status-labels&quot;&gt;S-accepted issues&lt;/a&gt;
+on
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo&quot;&gt;zulip&lt;/a&gt;
+and you can talk to us in real-time during
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/wiki/Office-Hours&quot;&gt;Contributor Office Hours&lt;/a&gt;.
+If you are looking to help with one of the bigger projects mentioned here and are just starting out,
+&lt;a href&#x3D;&quot;https://doc.crates.io/contrib/process/index.html#working-on-issues&quot;&gt;fixing some issues&lt;/a&gt;
+will help familiarize yourself with the process and expectations,
+making things go more smoothly.
+If you&#x27;d like to tackle something
+&lt;a href&#x3D;&quot;https://doc.crates.io/contrib/issues.html#issue-status-labels&quot;&gt;without a mentor&lt;/a&gt;,
+the expectations will be higher on what you&#x27;ll need to do on your own.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Ed Page</name>
+        </author>
+    </entry>
+    <entry>
+        <title>This Month in Our Test Infra: December 2024</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2025/01/10/test-infra-dec-2024.html" type="text/html" title="This Month in Our Test Infra: December 2024" />
+        <published>2025-01-10T00:00:00+00:00</published>
+        <updated>2025-01-10T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2025/01/10/test-infra-dec-2024.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2025/01/10/test-infra-dec-2024.html">&lt;h1&gt;&lt;a href&#x3D;&quot;#this-month-in-our-test-infra-december-2024&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;this-month-in-our-test-infra-december-2024&quot;&gt;&lt;/a&gt;This Month in Our Test Infra: December 2024&lt;/h1&gt;
+&lt;!-- time period: 2024-12-04 through 2025-01-05 --&gt;
+&lt;p&gt;Happy new year, dear reader! This is the last &lt;em&gt;This Month in Our Test Infra&lt;/em&gt; issue for 2024.&lt;/p&gt;
+&lt;p&gt;This is a quick summary of the changes in the test infrastructure for the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust&quot;&gt;rust-lang/rust&lt;/a&gt; repository&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-scope&quot; id&#x3D;&quot;fnref-scope&quot; data-footnote-ref&gt;1&lt;/a&gt;&lt;/sup&gt; for &lt;strong&gt;December 2024&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;As usual, if you encounter bugs or UX issues when using our test infrastructure, please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new&quot;&gt;file an issue&lt;/a&gt;. Bugs and papercuts can&#x27;t be fixed if we don&#x27;t know about them!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Thanks to everyone who contributed to our test infra!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#highlights&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;highlights&quot;&gt;&lt;/a&gt;Highlights&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#rustc-dev-guide-is-now-a-josh-subtree&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rustc-dev-guide-is-now-a-josh-subtree&quot;&gt;&lt;/a&gt;&lt;code&gt;rustc-dev-guide&lt;/code&gt; is now a &lt;code&gt;josh&lt;/code&gt; subtree!&lt;/h3&gt;
+&lt;p&gt;Previously, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt; was a submodule inside &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust&quot;&gt;rust-lang/rust&lt;/a&gt;, and updates to &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt; had to be done in a separate PR against the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt; repository.&lt;/p&gt;
+&lt;p&gt;Now, thanks to &lt;a href&#x3D;&quot;https://github.com/Kobzol&quot;&gt;@Kobzol&lt;/a&gt;&#x27;s efforts (which included overcoming many unforeseen obstacles), &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134907&quot;&gt;&lt;code&gt;rustc-dev-guide&lt;/code&gt; is now a &lt;code&gt;josh&lt;/code&gt; subtree&lt;/a&gt;. This is a significant improvement for contribution workflows because it means that documentation updates to &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt; can accompany the implementation change in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust&quot;&gt;rust-lang/rust&lt;/a&gt; in the same PR. The reduction in contribution friction also encourages &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt; updates because you no longer have to author and maintain two separate PRs.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#compiletest-will-now-show-the-difference-between-normalized-output-and-actual-output-for-differing-lines&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;compiletest-will-now-show-the-difference-between-normalized-output-and-actual-output-for-differing-lines&quot;&gt;&lt;/a&gt;compiletest will now show the difference between normalized output and actual output for differing lines&lt;/h3&gt;
+&lt;p&gt;Previously, it can be very difficult to tell when a ui test fails what the actual output is pre-normalization, as you would have to resort to &lt;code&gt;--nocapture&lt;/code&gt; or similar.&lt;/p&gt;
+&lt;p&gt;Now, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/133733&quot;&gt;compiletest will also show the pre-normalization mismatched output lines on failure to make this easier to tell&lt;/a&gt;. Example output:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-text&quot;&gt;failures:
+
+---- [ui] tests/ui/layout/enum.rs stdout ----
+diff of stderr:
+
+-	error: align: AbiAndPrefAlign { abi: Align(2 bytes), pref: $PREF_ALIGN }
++	error: align: AbiAndPrefAlign { abi: Align(2 bytes), pref: $PREF_ALIN }
+2	  --&amp;gt; $DIR/enum.rs:9:1
+3	   |
+4	LL | enum UninhabitedVariantAlign {
+
+Note: some mismatched output was normalized before being compared
+-	error: align: AbiAndPrefAlign { abi: Align(2 bytes), pref: Align(8 bytes) }
+-	  --&amp;gt; /home/jyn/src/rust2/tests/ui/layout/enum.rs:9:1
++	error: align: AbiAndPrefAlign { abi: Align(2 bytes), pref: $PREF_ALIN }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#compiletest-now-allows-using-a-specific-debugger-when-running-debuginfo-tests&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;compiletest-now-allows-using-a-specific-debugger-when-running-debuginfo-tests&quot;&gt;&lt;/a&gt;compiletest now allows using a specific debugger when running debuginfo tests&lt;/h3&gt;
+&lt;p&gt;For a long time, the &lt;code&gt;tests/debuginfo&lt;/code&gt; test suite could only be successfully run if you had all the tested debuggers (being &lt;code&gt;lldb&lt;/code&gt;, &lt;code&gt;gdb&lt;/code&gt;, &lt;code&gt;cdb&lt;/code&gt;). This is very annoying locally if:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One or more of these debuggers are not available or don&#x27;t work locally&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-lldb&quot; id&#x3D;&quot;fnref-lldb&quot; data-footnote-ref&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+&lt;li&gt;You just wanted to look at the test failures for a given debugger.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now, you are able to run the &lt;code&gt;tests/debuginfo&lt;/code&gt; test suite with a &lt;em&gt;specific&lt;/em&gt; debugger, to only run the tests against that specified debugger. Example usage:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-bash&quot;&gt;$ ./x test tests/debuginfo -- --debugger gdb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#ui-tests-now-support--forbid-output&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;ui-tests-now-support--forbid-output&quot;&gt;&lt;/a&gt;&lt;code&gt;ui&lt;/code&gt; tests now support &lt;code&gt;//@ forbid-output&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;ui&lt;/code&gt; tests can now use the &lt;code&gt;//@ forbid-output: REGEX&lt;/code&gt; directive to check for a pattern which must not appear in the stderr. If the &lt;code&gt;REGEX&lt;/code&gt; pattern is matched, then the &lt;code&gt;ui&lt;/code&gt; test will fail.&lt;/p&gt;
+&lt;p&gt;Please consult &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#x-test-now-accepts-a---no-capture-flag-which-will-be-forwarded-to-compiletest-and-thus-libtest&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;x-test-now-accepts-a---no-capture-flag-which-will-be-forwarded-to-compiletest-and-thus-libtest&quot;&gt;&lt;/a&gt;&lt;code&gt;./x test&lt;/code&gt; now accepts a &lt;code&gt;--no-capture&lt;/code&gt; flag which will be forwarded to compiletest (and thus libtest)&lt;/h3&gt;
+&lt;p&gt;Previously, if you wanted to pass the &lt;code&gt;--nocapture&lt;/code&gt; flag through &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/bootstrap&quot;&gt;bootstrap&lt;/a&gt;, through &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;, to the underlying &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/library/test&quot;&gt;libtest&lt;/a&gt; runner, on Linux you have to write:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-bash&quot;&gt;$ ./x test tests/ui -- --nocapture
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;On native Windows msvc it&#x27;s even worse, I recall having to write&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-powershell&quot;&gt;PS&amp;gt; ./x test tests/ui -- -- --nocapture
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which is hard to discover and a contributor papercut&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-nocapture&quot; id&#x3D;&quot;fnref-nocapture&quot; data-footnote-ref&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;Now, you can just write&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-bash&quot;&gt;$ ./x test tests/ui --no-capture
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and bootstrap will forward this flag as &lt;code&gt;--nocapture&lt;/code&gt; to the underlying &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/library/test&quot;&gt;libtest&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#notable-changes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;notable-changes&quot;&gt;&lt;/a&gt;Notable changes&lt;/h2&gt;
+&lt;p&gt;This section is intended to be like a &amp;quot;compatibility notes&amp;quot; but for human test writers.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#filecheck-based-test-suites-no-longer-predefine-msvc-and-nonmsvc-filecheck-prefixes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;filecheck-based-test-suites-no-longer-predefine-msvc-and-nonmsvc-filecheck-prefixes&quot;&gt;&lt;/a&gt;&lt;code&gt;FileCheck&lt;/code&gt;-based test suites no longer predefine &lt;code&gt;MSVC&lt;/code&gt; and &lt;code&gt;NONMSVC&lt;/code&gt; &lt;code&gt;FileCheck&lt;/code&gt; prefixes&lt;/h3&gt;
+&lt;p&gt;In the &lt;em&gt;current&lt;/em&gt; setup, compiletest will register a &lt;a href&#x3D;&quot;https://llvm.org/docs/CommandGuide/FileCheck.html&quot;&gt;&lt;code&gt;FileCheck&lt;/code&gt;&lt;/a&gt; custom prefix for each compiletest &lt;code&gt;//@ revision&lt;/code&gt;. However, for historical reasons compiletest also predefined &lt;code&gt;MSVC&lt;/code&gt; and &lt;code&gt;NONMSVC&lt;/code&gt; &lt;code&gt;FileCheck&lt;/code&gt; prefixes depending on the &lt;em&gt;host&lt;/em&gt;. But this is very surprising for two reasons:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;It&#x27;s &amp;quot;spooky action in a distance&amp;quot; because the user never declared these custom prefixes, and these prefixes are conditionally set based on the host. It&#x27;s hard to debug too.&lt;/li&gt;
+&lt;li&gt;If the user also wants to add their own &lt;code&gt;//@ revision: MSVC NONMSVC&lt;/code&gt; revisions, because compiletest would pass &lt;code&gt;--check-prefix&lt;/code&gt; for those names twice, this will cause &lt;code&gt;FileCheck&lt;/code&gt; to report an error about duplicate prefixes.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Therefore, in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134463&quot;&gt;compiletest: don&#x27;t register predefined &lt;code&gt;MSVC&lt;/code&gt;/&lt;code&gt;NONMSVC&lt;/code&gt; &lt;code&gt;FileCheck&lt;/code&gt; prefixes #134463&lt;/a&gt; we no longer predefine these two &lt;code&gt;FileCheck&lt;/code&gt; prefixes.&lt;/p&gt;
+&lt;p&gt;If you want the previous &lt;code&gt;MSVC&lt;/code&gt; vs &lt;code&gt;NONMSVC&lt;/code&gt; behavior, you will need to explicitly write out&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rs&quot;&gt;//@ revisions: MSVC NONMSVC
+//@[MSVC] only-windows-msvc
+//@[NONMSVC] ignore-windows-msvc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#normalize-stderrstdout-test-directives-are-renamed-to-normalize-stderrstdout&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;normalize-stderrstdout-test-directives-are-renamed-to-normalize-stderrstdout&quot;&gt;&lt;/a&gt;&lt;code&gt;normalize-{stderr,stdout}-test&lt;/code&gt; directives are renamed to &lt;code&gt;normalize-{stderr,stdout}&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Mostly a cleanup, the &lt;code&gt;-test&lt;/code&gt; suffixes provide no additionally useful information, and only make these two &lt;code&gt;normalize-*&lt;/code&gt; directives hard to discover.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;normalize-{stderr,stdout}-test&lt;/code&gt; directives are now &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134759&quot;&gt;renamed to &lt;code&gt;normalize-{stderr,stdout}&lt;/code&gt;&lt;/a&gt;. &lt;code&gt;normalize-{stderr,stdout}-{32,64}bit&lt;/code&gt; directives remain unaffected.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#compiletest-will-now-deny-usages-of-builtin-filecheck-suffixes-as-revision-names-for-filecheck-based-test-suites&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;compiletest-will-now-deny-usages-of-builtin-filecheck-suffixes-as-revision-names-for-filecheck-based-test-suites&quot;&gt;&lt;/a&gt;compiletest will now deny usages of builtin &lt;code&gt;FileCheck&lt;/code&gt; suffixes as revision names (for &lt;code&gt;FileCheck&lt;/code&gt;-based test suites)&lt;/h3&gt;
+&lt;p&gt;For &lt;a href&#x3D;&quot;https://llvm.org/docs/CommandGuide/FileCheck.html&quot;&gt;&lt;code&gt;FileCheck&lt;/code&gt;&lt;/a&gt;-based test suites (&lt;code&gt;assembly&lt;/code&gt;, &lt;code&gt;codegen&lt;/code&gt;, &lt;code&gt;mir-opt&lt;/code&gt;), compiletest will register a custom &lt;code&gt;FileCheck&lt;/code&gt; prefix for each compiletest &lt;code&gt;//@ revision&lt;/code&gt;. However, &lt;code&gt;FileCheck&lt;/code&gt; also has some &lt;a href&#x3D;&quot;https://llvm.org/docs/CommandGuide/FileCheck.html#the-check-next-directive&quot;&gt;builtin suffixes&lt;/a&gt; such as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// COM:
+// CHECK:
+// CHECK-NEXT:
+// CHECK-SAME:
+// CHECK-EMPTY:
+// CHECK-NOT:
+// CHECK-COUNT:
+// CHECK-DAG:
+// CHECK-LABEL:
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When combined, this previously meant that the compiletest revision + builtin &lt;code&gt;FileCheck&lt;/code&gt; suffix constructions such as&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rust&quot;&gt;// next:
+// same-SAME:
+// not-NOT:
+// next-NEXT:
+// not-SAME:
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;are permitted by compiletest, which are incredibly confusing.&lt;/p&gt;
+&lt;p&gt;As such, compiletest will now reject &lt;code&gt;CHECK&lt;/code&gt;, &lt;code&gt;COM&lt;/code&gt;, &lt;code&gt;NEXT&lt;/code&gt;, &lt;code&gt;SAME&lt;/code&gt;, &lt;code&gt;EMPTY&lt;/code&gt;, &lt;code&gt;NOT&lt;/code&gt;, &lt;code&gt;COUNT&lt;/code&gt;, &lt;code&gt;DAG&lt;/code&gt;, &lt;code&gt;LABEL&lt;/code&gt; as revision names in &lt;code&gt;FileCheck&lt;/code&gt;-based test suites.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#pr-listing&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;pr-listing&quot;&gt;&lt;/a&gt;PR listing&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#improvements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improvements&quot;&gt;&lt;/a&gt;Improvements&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134907&quot;&gt;Turn &lt;code&gt;rustc-dev-guide&lt;/code&gt; into a &lt;code&gt;josh&lt;/code&gt; subtree #134907&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/133733&quot;&gt;Show the difference between the normalized output and the actual output for lines which didn&#x27;t match #133733&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/133813&quot;&gt;Explain that UI tests are expected not to compile by default #133813&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134629&quot;&gt;Allow using a specific debugger when running &lt;code&gt;debuginfo&lt;/code&gt; tests #134629&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/run-make-support&quot;&gt;run-make-support&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134659&quot;&gt;Improve &lt;code&gt;compiletest&lt;/code&gt; and &lt;code&gt;run-make-support&lt;/code&gt; symlink handling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134738&quot;&gt;Support &lt;code&gt;forbid-output&lt;/code&gt; in UI tests #134738&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/bootstrap&quot;&gt;bootstrap&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134809&quot;&gt;Add &lt;code&gt;--no-capture&lt;/code&gt;/&lt;code&gt;--nocapture&lt;/code&gt; as bootstrap arguments #134809&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/bootstrap&quot;&gt;bootstrap&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134848&quot;&gt;Allow &lt;code&gt;./x check compiletest&lt;/code&gt; #134848&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134925&quot;&gt;Deny usage of special &lt;code&gt;FileCheck&lt;/code&gt; suffixes as revision names #134925&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/tidy&quot;&gt;tidy&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134964&quot;&gt;Run Python formatting check in &lt;code&gt;tidy&lt;/code&gt; on CI #134964&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/tidy&quot;&gt;tidy&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134968&quot;&gt;Print how to rebless Python formatting in &lt;code&gt;tidy&lt;/code&gt; #134968&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#fixes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;fixes&quot;&gt;&lt;/a&gt;Fixes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134111&quot;&gt;Fix &lt;code&gt;--nocapture&lt;/code&gt; for &lt;code&gt;run-make&lt;/code&gt; tests #134111&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134808&quot;&gt;Remove empty &#x27;expected&#x27; files when blessing #134808&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/tests/run-make&quot;&gt;run-make&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134113&quot;&gt;Fix &lt;code&gt;assert_stderr_not_contains_regex&lt;/code&gt; #134113&lt;/a&gt;&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-oops&quot; id&#x3D;&quot;fnref-oops&quot; data-footnote-ref&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#cleanups&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cleanups&quot;&gt;&lt;/a&gt;Cleanups&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134463&quot;&gt;Don&#x27;t register predefined &lt;code&gt;MSVC&lt;/code&gt;/&lt;code&gt;NONMSVC&lt;/code&gt; &lt;code&gt;FileCheck&lt;/code&gt; prefixes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134759&quot;&gt;Remove the &lt;code&gt;-test&lt;/code&gt; suffix from &lt;code&gt;normalize-*&lt;/code&gt; directives #134759&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134840&quot;&gt;Only pass the post-colon value to &lt;code&gt;parse_normalize_rule&lt;/code&gt; #134840&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134849&quot;&gt;Slightly simplify the handling of debugger directive prefixes #134849&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/bootstrap&quot;&gt;bootstrap&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134876&quot;&gt;Consolidate the macros for declaring compiletest test suites #134876&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/tidy&quot;&gt;tidy&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/133821&quot;&gt;Replace &lt;code&gt;black&lt;/code&gt; with &lt;code&gt;ruff&lt;/code&gt; in &lt;code&gt;tidy&lt;/code&gt; #133821&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#documentation-updates&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;documentation-updates&quot;&gt;&lt;/a&gt;Documentation updates&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134894&quot;&gt;Document how to run the split Docker pipelines #134894&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/134669&quot;&gt;Document the &lt;code&gt;--dev&lt;/code&gt; flag for &lt;code&gt;src/ci/docker/run.sh&lt;/code&gt; #134669&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2170&quot;&gt;&lt;code&gt;compiletest&lt;/code&gt;: Document the &lt;code&gt;--debugger&lt;/code&gt; flag #2170&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2171&quot;&gt;Document &lt;code&gt;forbid-output&lt;/code&gt; for UI tests #2171&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2172&quot;&gt;Remove the &lt;code&gt;-test&lt;/code&gt; suffix from normalize directives #2172&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2174&quot;&gt;Document &lt;code&gt;x test --no-capture&lt;/code&gt; #2174&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2191&quot;&gt;Describe how to use rust-analyzer with &lt;code&gt;rmake.rs&lt;/code&gt; #2191&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;section class&#x3D;&quot;footnotes&quot; data-footnotes&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn-scope&quot;&gt;
+&lt;p&gt;The test infra here refers to the test harness &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt; and supporting components in our build system &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/bootstrap&quot;&gt;bootstrap&lt;/a&gt;. This test infra is used mainly by rustc and rustdoc. Other tools like cargo, miri or rustfmt maintain their own test infra. &lt;a href&#x3D;&quot;#fnref-scope&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;1&quot; aria-label&#x3D;&quot;Back to reference 1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-lldb&quot;&gt;
+&lt;p&gt;For example, I keep having to debug the debugger like &lt;code&gt;lldb&lt;/code&gt; when the older &lt;code&gt;lldb&lt;/code&gt; versions keep complaining about &lt;code&gt;ModuleNotFoundError: No module named &#x27;_lldb&#x27;&lt;/code&gt;. &lt;a href&#x3D;&quot;#fnref-lldb&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;2&quot; aria-label&#x3D;&quot;Back to reference 2&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-nocapture&quot;&gt;
+&lt;p&gt;I don&#x27;t know about you, but I can never for the life of me remember what the flag is called. I keep thinking it&#x27;s &lt;code&gt;--no-capture&lt;/code&gt; when currently libtest only accepts &lt;code&gt;--nocapture&lt;/code&gt;. Thankfully T-testing-devex FCP&#x27;d to add the more conventional version &lt;code&gt;--no-capture&lt;/code&gt;, looking forward to that. I can also never figure out how many &lt;code&gt;--&lt;/code&gt; dashes I need, I keep finding myself having to add more &lt;code&gt;--&lt;/code&gt; until it starts working. &lt;a href&#x3D;&quot;#fnref-nocapture&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;3&quot; aria-label&#x3D;&quot;Back to reference 3&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-oops&quot;&gt;
+&lt;p&gt;Nyehehehe &lt;a href&#x3D;&quot;#fnref-oops&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;4&quot; aria-label&#x3D;&quot;Back to reference 4&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Jieyou Xu</name>
+        </author>
+    </entry>
+    <entry>
+        <title>December 2024 Project Director Update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2024/12/17/project-director-update.html" type="text/html" title="December 2024 Project Director Update" />
+        <published>2024-12-17T00:00:00+00:00</published>
+        <updated>2024-12-17T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2024/12/17/project-director-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2024/12/17/project-director-update.html">&lt;p&gt;Hello and welcome to the inaugural Rust Foundation Project Director update! I’m Carol Nichols, I’m
+one of the authors on The Rust Programming Language book and a member of the crates.io team, and &lt;a href&#x3D;&quot;https://foundation.rust-lang.org/news/announcing-the-rust-foundation-s-newest-project-director-carol-nichols/&quot;&gt;I
+was recently selected by the Leadership Council to represent the Rust Project on the board of the
+Rust Foundation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;One of my personal goals for my term as a Project Director is to communicate more and in different
+ways with the Rust Project and the wider Rust community about what it’s like being a Project
+Director and what the Rust Foundation is working on. This update post is one experiment along those
+lines.&lt;/p&gt;
+&lt;p&gt;In this post, you’ll find the highlights, from my perspective, of last month’s board meeting now
+that the minutes have been posted publicly. I might cover other topics in the future, and I hope to
+encourage other Project Directors to write as well, but recapping Foundation Board meetings is
+where I’ve decided to start.&lt;/p&gt;
+&lt;p&gt;The full board meeting minutes are &lt;a href&#x3D;&quot;https://foundation.rust-lang.org/resources/&quot;&gt;posted on the Foundation’s website&lt;/a&gt; after
+the following month’s board meeting where the minutes are approved. The &lt;a href&#x3D;&quot;https://foundation.rust-lang.org/static/minutes/2024-11-12-minutes.pdf&quot;&gt;meeting on November 12,
+2024&lt;/a&gt;, was the first board meeting I attended, and here’s what I
+thought were the most interesting parts.&lt;/p&gt;
+&lt;p&gt;The Foundation staff gave the board updates on their recent work:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bec Rumbul, in the Executive Director update, covered that the reworked Trademark Policy draft
+was in public comment. The Foundation is pursuing funding from the Sovereign Tech Fund and
+&lt;a href&#x3D;&quot;https://alpha-omega.dev/&quot;&gt;Alpha-Omega&lt;/a&gt;. The Foundation is monitoring the situation with a few Linux maintainers’
+permissions being removed due to US sanctions: there’s no similar situation involving Rust at
+this time but Bec is preparing for the possibility.&lt;/li&gt;
+&lt;li&gt;Joel Marcey gave the Infrastructure/Technology update: Foundation employees are working on
+reducing Rust’s CI costs, and there was progress on a number of other technical initiatives.&lt;/li&gt;
+&lt;li&gt;Paul Lenz’s Finance and Grants update included a draft 2025 budget, and a proposal for spending
+$10,000 on a trial of an internship program which the board voted to approve.&lt;/li&gt;
+&lt;li&gt;Gracie Gregory gave a Communications update that included the securing of a venue for RustConf
+2025 that will be publicly announced soon, and that the Foundation’s new website was almost ready
+to launch.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ryan Levick gave the Project Director update, which included discussion of the Project Goals
+Initiative working to define the Project’s priorities for the near future.&lt;/p&gt;
+&lt;p&gt;The main item of business in the meeting was discussion of &lt;a href&#x3D;&quot;https://www.darpa.mil/research/programs/translating-all-c-to-rust&quot;&gt;DARPA’s Translating All C To Rust (aka
+TRACTOR) program&lt;/a&gt; and the Rust Foundation’s possible involvement in the evaluation
+portion of the contest. Us Project Directors have some questions and thoughts surrounding this
+contest, and we’re continuing these discussions with the rest of the board and the DARPA
+representative. No final decisions have been made; more details will be presented for the board’s
+approval in early 2025.&lt;/p&gt;
+&lt;p&gt;That’s it for this month’s update! If you have any comments, questions, or suggestions, please
+email all of the project directors via project-directors at rust-lang.org or join us in &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/335408-foundation&quot;&gt;the
+#foundation channel on the Rust Zulip&lt;/a&gt;. Have a great holiday season; I’ll post
+again in 2025!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Carol Nichols</name>
+        </author>
+    </entry>
+    <entry>
+        <title>This Development-cycle in Cargo: 1.84</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2024/12/13/this-development-cycle-in-cargo-1.84.html" type="text/html" title="This Development-cycle in Cargo: 1.84" />
+        <published>2024-12-13T00:00:00+00:00</published>
+        <updated>2024-12-13T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2024/12/13/this-development-cycle-in-cargo-1.84.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2024/12/13/this-development-cycle-in-cargo-1.84.html">&lt;h1&gt;&lt;a href&#x3D;&quot;#this-development-cycle-in-cargo-184&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;this-development-cycle-in-cargo-184&quot;&gt;&lt;/a&gt;This Development-cycle in Cargo: 1.84&lt;/h1&gt;
+&lt;p&gt;This is a summary of what has been happening around Cargo development for the last 6 weeks which is approximately the merge window for Rust 1.84.&lt;/p&gt;
+&lt;!-- time period: 2024-10-18 through 2024-11-28 --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#plugin-of-the-cycle&quot;&gt;Plugin of the cycle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#implementation&quot;&gt;Implementation&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#simple-english-in-documentation&quot;&gt;Simple english in documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#build-script-api&quot;&gt;Build Script API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#replacing-mtimes-with-checksums&quot;&gt;Replacing mtimes with checksums&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#rustflags-and-caching&quot;&gt;Rustflags and caching&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#snapshot-testing&quot;&gt;Snapshot testing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#json-schema-files&quot;&gt;JSON schema files&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#design-discussions&quot;&gt;Design discussions&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#improving-the-built-in-profiles&quot;&gt;Improving the built-in profiles&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#avoid-building-production-code-when-changing-tests&quot;&gt;Avoid building production code when changing tests&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#misc&quot;&gt;Misc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;#focus-areas-without-progress&quot;&gt;Focus areas without progress&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#plugin-of-the-cycle&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;plugin-of-the-cycle&quot;&gt;&lt;/a&gt;Plugin of the cycle&lt;/h2&gt;
+&lt;p&gt;Cargo can&#x27;t be everything to everyone,
+if for no other reason than the compatibility guarantees it must uphold.
+Plugins play an important part of the Cargo ecosystem and we want to celebrate them.&lt;/p&gt;
+&lt;p&gt;Our plugin for this cycle is &lt;a href&#x3D;&quot;https://crates.io/crates/cargo-hack&quot;&gt;cargo-hack&lt;/a&gt; makes it easy to verify different feature combinations work together and that you can build for all supported Rust versions.&lt;/p&gt;
+&lt;p&gt;Thanks to &lt;a href&#x3D;&quot;https://github.com/epage&quot;&gt;epage&lt;/a&gt; for the suggestion!&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/Plugin.20of.20the.20Dev.20Cycle/near/420703211&quot;&gt;Please submit your suggestions for the next post.&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#implementation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;implementation&quot;&gt;&lt;/a&gt;Implementation&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#simple-english-in-documentation&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;simple-english-in-documentation&quot;&gt;&lt;/a&gt;Simple english in documentation&lt;/h3&gt;
+&lt;p&gt;trot approached the Cargo team on
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/246057-t-cargo/topic/Difficult.20ESL.20words.20Cargo.20Book/near/482282496&quot;&gt;zulip&lt;/a&gt;
+about making the
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/&quot;&gt;Cargo book&lt;/a&gt;
+more approachable for people for whom English is a second language.
+After some discussion, we decided to start with simplifying the language used in the Cargo book.&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/KGrewal1&quot;&gt;KGrewal1&lt;/a&gt; took the lead on this and posted &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14825&quot;&gt;#14825&lt;/a&gt;.
+They also made the language more consistent in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14829&quot;&gt;#14829&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#build-script-api&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;build-script-api&quot;&gt;&lt;/a&gt;Build Script API&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Update from &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2024/10/31/this-development-cycle-in-cargo-1.83.html#build-script-api&quot;&gt;1.83&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;With the Cargo team approving owning &lt;code&gt;build-rs&lt;/code&gt;,
+&lt;a href&#x3D;&quot;https://github.com/epage&quot;&gt;epage&lt;/a&gt;
+worked with
+&lt;a href&#x3D;&quot;https://github.com/CAD97/&quot;&gt;CAD97&lt;/a&gt;
+and
+&lt;a href&#x3D;&quot;https://github.com/pietroalbini&quot;&gt;pietroalbini&lt;/a&gt;
+to transfer publish rights for &lt;a href&#x3D;&quot;https://crates.io/crates/build-rs&quot;&gt;build-rs&lt;/a&gt; to the Rust Project.&lt;/p&gt;
+&lt;p&gt;CAD97 then did a first-pass review and update to &lt;code&gt;build-rs&lt;/code&gt; and epage merging it into cargo (&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14786&quot;&gt;#14786&lt;/a&gt;).
+epage then did a pass to update &lt;code&gt;build-rs&lt;/code&gt; in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14817&quot;&gt;#14817&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;On &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/246057-t-cargo/topic/Where.20.60build-rs.60.20shoud.20live/near/480798285&quot;&gt;zulip&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/Turbo87&quot;&gt;Turbo87&lt;/a&gt; raised concernd about &lt;code&gt;build-rs&lt;/code&gt; (and Cargo-maintained crates more generally) being in the Cargo repo and tied to the Cargo release process.
+This means that there is a 6-12 week delay between a bug fix being merged and bein released, projects that need access to unstable functionality must use a git dependency, the MSRV is infectious which puts pressure on the Cargo team to bump it regularly, and the issues are mixed together.
+On the other hand, Cargo support, documentation, and APIs are able to developed hand-in-hand.
+It would be great if we could improve the release process within the Cargo repo (e.g. &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14538&quot;&gt;#14538&lt;/a&gt;)
+but keeping that in sync with 3 parallel release channels (stable, beta, nightly), including leaving space to patch an arbitrary number of crate releases for each release channel,
+makes this difficult.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#replacing-mtimes-with-checksums&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;replacing-mtimes-with-checksums&quot;&gt;&lt;/a&gt;Replacing mtimes with checksums&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Update from &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2024/10/31/this-development-cycle-in-cargo-1.83.html#misc&quot;&gt;1.83&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;!-- 2024-10-22 --&gt;
+&lt;p&gt;With unstable support for using &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#checksum-freshness&quot;&gt;checksums, rather than mtime, to determine when a build is dirty&lt;/a&gt;,
+the Cargo team discussed the path for stabilization.&lt;/p&gt;
+&lt;p&gt;One hole in the current design is that Cargo doesn&#x27;t checksum inputs to build scripts.
+If Cargo did the checksum on the user&#x27;s behalf,
+then it might see a different version of the file than the build script.
+However, requiring build scripts to checksum the files and report that to Cargo adds a significant complexity to build scripts, including coordinating with Cargo on what hash algorithm is used.
+This would also require build scripts to pull in a hasher dependency, increasing their build times.
+However, it is unclear if checksumming for build scripts is a requirement.
+Also, if we could develop a plan to reduce the need for build scripts, we reduce the scope of the problem.&lt;/p&gt;
+&lt;p&gt;Another concern is with performance.
+The overhead of checksumming will be most noticeable on builds without any changes as otherwise compile times will dominate.
+We are further tracking this in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14722&quot;&gt;#14722&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There is the question of what this will look like.
+Do we exclusively switch to checksums or give people the choice?
+At minimum, we&#x27;d need to give people a temporary escape hatch as we transition Cargo to checksums in case they are somehow relying on the mtime behavior.
+Whether Cargo would need a permanent config field is unclear.&lt;/p&gt;
+&lt;p&gt;We reached out to some build system owners on
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/334885-t-cargo.2Fbuild-integration/topic/Call.20for.20testing.3A.20use.20of.20checksums.20over.20mtime/near/478311654&quot;&gt;zulip&lt;/a&gt;
+to do a call-for-testing.
+So far, we&#x27;ve only heard from the Rust Project itself where this made build time testing more difficult because touching files to force rebuilds is a much easier option than trying to carefully make repeated edits to files.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#rustflags-and-caching&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rustflags-and-caching&quot;&gt;&lt;/a&gt;Rustflags and caching&lt;/h3&gt;
+&lt;p&gt;Cargo&#x27;s &lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/nightly-rustc/cargo/core/compiler/fingerprint/index.html&quot;&gt;build fingerprinting&lt;/a&gt; has to satisfy several needs, including&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Detecting when the existing build cache has to be thrown away and re-built, called the fingerprint&lt;/li&gt;
+&lt;li&gt;Segregating the build cache so it gets preserved across unrelated commands (e.g. alternating &lt;code&gt;cargo check&lt;/code&gt; and &lt;code&gt;cargo test&lt;/code&gt; without rebuilding dependencies), called &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/codegen-options/index.html#extra-filename&quot;&gt;&lt;code&gt;-Cextra-filename&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Making symbol names unique so you can&#x27;t unintentionally use a type in an ABI-incompatible context, called &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/codegen-options/index.html#metadata&quot;&gt;&lt;code&gt;-Cmetadata&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;RUSTFLAGS&lt;/code&gt; is a way to bypass Cargo&#x27;s abstractions and directly control the behavior of &lt;code&gt;rustc&lt;/code&gt;.
+Cargo includes &lt;code&gt;RUSTFLAGS&lt;/code&gt; in the fingerprint hash but not in the &lt;code&gt;-Cextra-filename&lt;/code&gt; hash,
+causing a full rebuild when they change.
+This can be especially problematic when &lt;code&gt;RUSTFLAGS&lt;/code&gt; differs between the user and their editor running &lt;code&gt;cargo&lt;/code&gt;.
+For example, some users report they set &lt;code&gt;--cfg test&lt;/code&gt; in their editor so all &lt;code&gt;#[cfg(test)]&lt;/code&gt;s are enabled in rust-analyzer.&lt;/p&gt;
+&lt;p&gt;A previous attempt was made to segregate the cache for &lt;code&gt;RUSTFLAGS&lt;/code&gt; in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/6503&quot;&gt;#6503&lt;/a&gt;.
+However, Cargo uses the same hash for &lt;code&gt;-Cextra-filename&lt;/code&gt; and &lt;code&gt;-Cmetadata&lt;/code&gt;
+so by segregating the cache, the symbol names also become unique.
+In theory, this is a good thing as &lt;code&gt;RUSTFLAGS&lt;/code&gt; can affect the ABI.
+However, not all &lt;code&gt;RUSTFLAGS&lt;/code&gt; affect the ABI.&lt;/p&gt;
+&lt;p&gt;Take &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/command-line-arguments.html#--remap-path-prefix-remap-source-names-in-output&quot;&gt;&lt;code&gt;--remap-path-prefix&lt;/code&gt;&lt;/a&gt; which is suppose to make builds of binaries more reproducible by stripping information specific to a specific build.
+By including this in &lt;code&gt;-Cmetadata&lt;/code&gt;,
+the binary changes (&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/6914&quot;&gt;#6914&lt;/a&gt;).
+A special case for this was added &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/6966&quot;&gt;#6966&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Another case we ran into was &lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/profile-guided-optimization.html&quot;&gt;PGO&lt;/a&gt;.
+With PGO, you create a build with
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/codegen-options/index.html#profile-generate&quot;&gt;&lt;code&gt;-Cprofile-generate&lt;/code&gt;&lt;/a&gt;
+and then run it against a benchmark.
+You then feed this back into the build with
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/rustc/codegen-options/index.html#profile-use&quot;&gt;&lt;code&gt;-Cprofile-use&lt;/code&gt;&lt;/a&gt;
+to improve the optimizations the compiler performs.
+At this point, we reverted
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/6503&quot;&gt;#6503&lt;/a&gt;
+in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/7417&quot;&gt;#7417&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/8716&quot;&gt;#8716&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/ehuss&quot;&gt;ehuss&lt;/a&gt; proposed Cargo track &lt;code&gt;-Cextra-filename&lt;/code&gt; and &lt;code&gt;-Cmetadata&lt;/code&gt; separately and only include &lt;code&gt;RUSTFLAGS&lt;/code&gt; in &lt;code&gt;-Cextra-filename&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;After some refactoring
+(&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14826&quot;&gt;#14826&lt;/a&gt;)
+and test improvements
+(
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14848&quot;&gt;#14848&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14846&quot;&gt;#14846&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14859&quot;&gt;#14859&lt;/a&gt;
+)
+by &lt;a href&#x3D;&quot;https://github.com/epage&quot;&gt;epage&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/weihanglo/&quot;&gt;weihanglo&lt;/a&gt;,
+epage posted &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14830&quot;&gt;#14830&lt;/a&gt;.
+However, weihanglo found there are still problems with &lt;code&gt;--remap-path-prefix&lt;/code&gt;: even when using &lt;code&gt;profile.dev.split-debuginfo&#x3D;&amp;quot;packed&amp;quot;&lt;/code&gt;, the binaries are different because the binary includes &lt;code&gt;DW_AT_GNU_dwo_name&lt;/code&gt; which points to the debug file which exists per-rlib with &lt;code&gt;-Cextra-filename&lt;/code&gt; included.&lt;/p&gt;
+&lt;p&gt;Merging of &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14830&quot;&gt;#14830&lt;/a&gt; is blocked until the problem with &lt;code&gt;--remap-path-prefix&lt;/code&gt; is resolved.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#snapshot-testing&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;snapshot-testing&quot;&gt;&lt;/a&gt;Snapshot testing&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Update from &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2024/10/01/this-development-cycle-in-cargo-1.82.html#snapshot-testing&quot;&gt;1.82&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/epage&quot;&gt;epage&lt;/a&gt; finalized the work for moving off of Cargo&#x27;s custom assertions.&lt;/p&gt;
+&lt;p&gt;In removing the core of the custom assertions,
+we were relying on &lt;code&gt;dead_code&lt;/code&gt; warnings as we removed assertions
+that were no longer used.
+However, we missed removing an assertion and epage removed it in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14759&quot;&gt;#14759&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14781&quot;&gt;#14781&lt;/a&gt; and
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14785&quot;&gt;#14785&lt;/a&gt; saw us migrate the last of our &amp;quot;unordered lines&amp;quot; assertion tests.
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14785&quot;&gt;#14785&lt;/a&gt; took some investigation to figure out the best way to migrate.
+Cargo&#x27;s custom assertions redacted fewer values and allowed a test author to ignore a value redaction by using the raw value in the expected result.
+&lt;code&gt;snapbox&lt;/code&gt; applies redactions earlier in the process, requiring them to always be used.
+This made it so Cargo would lose test coverage in switching to snapbox as we wouldn&#x27;t be verifying as much of &lt;code&gt;cargo&lt;/code&gt;s output.
+However, in consulting with the test author, coverage of those redacted values was not intended by them, bypassing this problem for now.&lt;/p&gt;
+&lt;p&gt;This still left &amp;quot;contains&amp;quot;, &amp;quot;does not contain&amp;quot;, and &amp;quot;contains x but not y&amp;quot; assertions.
+Rather than trying to design out how these should fit into snapbox,
+epage left them after switching to &lt;code&gt;snapbox&lt;/code&gt;&#x27;s redactions in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14790&quot;&gt;#14790&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;As this point, epage documented lessons learned through this effort in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14793&quot;&gt;#14793&lt;/a&gt; and we now consider this migration complete, closing out &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14039&quot;&gt;#14039&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#json-schema-files&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;json-schema-files&quot;&gt;&lt;/a&gt;JSON schema files&lt;/h3&gt;
+&lt;p&gt;In &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/12883&quot;&gt;#12883&lt;/a&gt;,
+we got a request for JSON schema support for &lt;code&gt;.cargo/config.toml&lt;/code&gt; files.
+We already have to duplicate the schema between the source and the documentation, we didn&#x27;t want to duplicate it with a hand-maintained JSON schema representation.
+Thankfully there is &lt;a href&#x3D;&quot;https://crates.io/crates/schemars&quot;&gt;schemars&lt;/a&gt; to generate JSON schema from serde types.&lt;/p&gt;
+&lt;p&gt;To experiment with JSON schema generation,
+&lt;a href&#x3D;&quot;https://github.com/dacianpascu06&quot;&gt;dacianpascu06&lt;/a&gt; added support for JSON schema generation for &lt;code&gt;Cargo.toml&lt;/code&gt; in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14683&quot;&gt;#14683&lt;/a&gt;,
+see &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/blob/master/crates/cargo-util-schemas/manifest.schema.json&quot;&gt;manifest.schema.json&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Generating a JSON schema for &lt;code&gt;.cargo/config.toml&lt;/code&gt; will take a bit more investigation.
+&lt;code&gt;Cargo.toml&lt;/code&gt; has a single top-level definition with specific extension points within the schema.
+&lt;code&gt;.cargo/config.toml&lt;/code&gt; does not have a single top-level definition but instead the schema is defined per table or field.
+This is because config layering operates on the specific path that is looked up.
+The types for the schema are scattered throughout the Cargo code base and will take work to collect them all together to create a top-level definition solely for JSON schema generation.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#design-discussions&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;design-discussions&quot;&gt;&lt;/a&gt;Design discussions&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#improving-the-built-in-profiles&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improving-the-built-in-profiles&quot;&gt;&lt;/a&gt;Improving the built-in profiles&lt;/h3&gt;
+&lt;!-- 2024-10-29 --&gt;
+&lt;p&gt;Hand-in-hand with benchmarking is profiling yet the &lt;code&gt;bench&lt;/code&gt; profile does not include the relevant debug information for profiling,
+requiring users to tweak their profiles in every repo (or in their home directory).
+&lt;a href&#x3D;&quot;https://github.com/CraftSpider&quot;&gt;CraftSpider&lt;/a&gt; proposed in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14032&quot;&gt;#14032&lt;/a&gt;
+that we update the &lt;code&gt;bench&lt;/code&gt; profile to make this easier.
+However, benchmarks also need fidelity with &lt;code&gt;release&lt;/code&gt; builds to ensure your numbers match what users will see.
+We decided we should keep the &lt;code&gt;bench&lt;/code&gt; profile matching &lt;code&gt;release&lt;/code&gt; though we recognize there is room to explore improving user workflows for profiling.&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/foxtran&quot;&gt;foxtran&lt;/a&gt; restarted the conversation on changing the defaults for &lt;code&gt;release&lt;/code&gt; to improve runtime performance in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/11298&quot;&gt;#11298&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Potential changes include&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Enabling LTO, whether thin or fat&lt;/li&gt;
+&lt;li&gt;Reducing the codegen-units&lt;/li&gt;
+&lt;li&gt;Increasing the opt-level&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;While &lt;code&gt;release&lt;/code&gt; builds aren&#x27;t focused on fast compile-times,
+there is still a point of diminishing returns in trading off compile-time for runtime performance.
+While &lt;code&gt;release&lt;/code&gt; is generally geared towards production builds,
+there are cases where &lt;code&gt;dev&lt;/code&gt; is too slow for development.
+&lt;a href&#x3D;&quot;https://github.com/weihanglo&quot;&gt;weihanglo&lt;/a&gt; ran the numbers of LTO and codegen-units for Cargo in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14719&quot;&gt;#14719&lt;/a&gt;.
+From those numbers, it seems like thin LTO is an easy win.&lt;/p&gt;
+&lt;p&gt;One option is for a &lt;code&gt;release-fast&lt;/code&gt; or &lt;code&gt;release-heavy&lt;/code&gt; to be made.
+Adding new profiles may be a breaking change though and we&#x27;d have to carefully approach doing so.
+We also already have discoverability problems with &lt;code&gt;release&lt;/code&gt; and it has a dedicated flag (&lt;code&gt;--release&lt;/code&gt;).
+Without some kind of built-in integration, it seems like these policies would be best left for users.&lt;/p&gt;
+&lt;p&gt;Whatever profile is used, one problem with LTO is that there are miscompilations which might prevent it from being a safe default (e.g. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/115344&quot;&gt;#115344&lt;/a&gt;).&lt;/p&gt;
+&lt;!-- 2024-11-05 --&gt;
+&lt;p&gt;On the other end of the spectrum is the &lt;code&gt;dev&lt;/code&gt; profile.
+This profile serves two roles&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fast iteration time&lt;/li&gt;
+&lt;li&gt;Running code through a debugger&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It turns out that these can be at odds with each other.
+When running through a debugger, you often want the binary to behave like the source code and optimizations can get in the way.
+However, optimizations can reduce the amount of IR being processed, speeding up codegen.
+They can then also speed up proc macros, build scripts, and test runs.
+Maybe we can even design a optimization level focused on improving compile times at the cost of the debugger experience.
+Similarly, how much debug information you carry around in your binary can affect your build times.&lt;/p&gt;
+&lt;p&gt;Looking at the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2024/02/19/2023-Rust-Annual-Survey-2023-results.html#challenges&quot;&gt;Rust 2023 survey results&lt;/a&gt;,
+improving compilation times and the debugging experience is neck and neck.
+The question is which debugging experience are they referring to?
+Those on the call mostly used &amp;quot;printf&amp;quot;-style debugging and would get benefit out of improving compilation time.
+Even if we surveyed people and found this representative of the Rust community (which &lt;a href&#x3D;&quot;https://github.com/davidlattimore/&quot;&gt;davidlattimore&lt;/a&gt; did for a subset of the community on &lt;a href&#x3D;&quot;https://mas.to/@davidlattimore/113484821980790635&quot;&gt;Fediverse&lt;/a&gt;),
+how much of this is survivorship bias from the quality of the debugger experience?
+How much would even existing community members behavior change with an improved debugger experience?&lt;/p&gt;
+&lt;p&gt;However, this may not be all-or-nothing.
+We could split the &lt;code&gt;dev&lt;/code&gt; profile into separate iteration-time and debugger profiles so there is a low friction way of access the non-default workflow.
+There would still be friction.
+If iteration-time were the default and enough people use debuggers through their IDEs and those IDEs are pre-configured,
+then working with IDE vendors to change their defaults would reduce a lot of the friction.
+This would likely require a long transition period.&lt;/p&gt;
+&lt;p&gt;We could split one of the two workflows out into a whole new profile which runs into the same problems as &lt;code&gt;release-fast&lt;/code&gt; and &lt;code&gt;release-heavy&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;One idea for address the potential breakage is that we move the built-in profiles into a &lt;code&gt;cargo::&lt;/code&gt; namespace and make them immutable.
+We would switch the reserved profiles to just inheriting a namespaced profile by default.
+There are open questions on whether this would be a breaking change and more analysis would be needed.&lt;/p&gt;
+&lt;p&gt;Instead of reserving a new profile name, what if Cargo used the reserved &lt;code&gt;debug&lt;/code&gt; name?
+&lt;code&gt;debug&lt;/code&gt; is already a reserved profile name and in several user-facing locations the &lt;code&gt;dev&lt;/code&gt; profile is referred to as &lt;code&gt;debug&lt;/code&gt; (&lt;code&gt;--debug&lt;/code&gt;, &lt;code&gt;target/debug&lt;/code&gt;).
+We could make &lt;code&gt;dev&lt;/code&gt; (&lt;code&gt;--dev&lt;/code&gt;) focused on iteration time and &lt;code&gt;debug&lt;/code&gt; (&lt;code&gt;--debug&lt;/code&gt;) on debuggers.
+There is the question of &lt;code&gt;target/debug&lt;/code&gt; as changing users to &lt;code&gt;target/dev&lt;/code&gt; might be too disruptive.&lt;/p&gt;
+&lt;p&gt;It will take work to finish a plan and figuring out if its too disruptive.
+If can move forward with it, it will likely require a long transition time and support across multiple projects.&lt;/p&gt;
+&lt;p&gt;Is this change worth it?
+&lt;a href&#x3D;&quot;https://github.com/joshtriplett&quot;&gt;joshtriplett&lt;/a&gt; ran a survey on
+&lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/feedback-request-performance-improvements-from-reducing-debug-info/21825&quot;&gt;Internals&lt;/a&gt;
+on the affect of just
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/profiles.html#debug&quot;&gt;&lt;code&gt;CARGO_PROFILE_DEV_DEBUG&#x3D;line-tables-only&lt;/code&gt;&lt;/a&gt;
+on compilation time
+with some follow up conversation on &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/246057-t-cargo/topic/Debug.20information.20and.20build.20time/near/481165988&quot;&gt;zulip&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Another angle for improving iteration time for &lt;code&gt;dev&lt;/code&gt; is to make it easier to speed up dependencies in the hot path.
+Cargo allows you to set different optimization levels for different dependencies and some projects encourage this, like &lt;a href&#x3D;&quot;https://github.com/launchbadge/sqlx/tree/42ce24dab87aad98f041cafb35cf9a7d5b2b09a7?tab&#x3D;readme-ov-file#compile-time-verification&quot;&gt;sqlx&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[profile.dev.package.sqlx-macros]
+opt-level &#x3D; 3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What if packages could provide a
+&lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/profiles.html#overrides&quot;&gt;package override&lt;/a&gt;
+for when they are used as a dependency?&lt;/p&gt;
+&lt;p&gt;Another potential use case for dependency-specified profile overrides is for mir-only rlibs.
+Cargo performs codegen for each rlib in your dependency tree and relies on the linker to remove anything unused.
+Mir-only rlibs would defer all codegen to the very end, allowing less codegen to be performed, potentially speeding up builds.
+This has the potential to replace the need for &lt;code&gt;[features]&lt;/code&gt; for a large number of use cases.
+One problem is if there is a lot of shared mir between test binaries as that will lead to redundant codegen, slowing down builds.
+One way to experiment with this is to allow enabling mir-only rlibs on a per-package basis through profiles.
+With dependency-specified profile overrides, large packages like
+&lt;a href&#x3D;&quot;https://crates.io/crates/windows-sys&quot;&gt;windows-sys&lt;/a&gt;
+could opt-in to being a mir-only rlib.&lt;/p&gt;
+&lt;p&gt;Dependency-specified profile overrides would be a hidden interaction that would need careful consideration.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#avoid-building-production-code-when-changing-tests&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;avoid-building-production-code-when-changing-tests&quot;&gt;&lt;/a&gt;Avoid building production code when changing tests&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/milianw&quot;&gt;milianw&lt;/a&gt; posted on
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/246057-t-cargo/topic/upstream.20test-only.20code.20change.20triggers.20downstream.20rebuilds/near/478396625&quot;&gt;zulip&lt;/a&gt;
+about their library and all dependents rebuild when changing a unit test.&lt;/p&gt;
+&lt;p&gt;When a &lt;code&gt;#[test]&lt;/code&gt; inside of a library changes,
+the timestamp for the file changes and Cargo rebuilds the file.
+One way to avoid that is by
+&lt;a href&#x3D;&quot;https://matklad.github.io/2021/02/27/delete-cargo-integration-tests.html#Assorted-Tricks&quot;&gt;moving tests to dedicated files&lt;/a&gt;.
+The rust repo does this with &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/HEAD/src/tools/tidy/src/unit_tests.rs&quot;&gt;a tool&lt;/a&gt; to enforce the practice.
+&lt;a href&#x3D;&quot;github.com/epage&quot;&gt;epage&lt;/a&gt; proposed a clippy lint for this in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-clippy/issues/13589&quot;&gt;rust-clippy#13589&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When a library changes, Cargo always rebuilds dependents.
+Previously, &lt;a href&#x3D;&quot;https://github.com/Osiewicz&quot;&gt;Osiewicz&lt;/a&gt; proposed on
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/Dynamically.20pruning.20jobs.20from.20the.20work.20queue&quot;&gt;zulip&lt;/a&gt;
+that rustc hash the API of a crate, allowing Cargo to only rebuild dependents when the API hash changes.
+This is being tracked in
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14604&quot;&gt;#14604&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#misc&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;misc&quot;&gt;&lt;/a&gt;Misc&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/260232-t-cargo.2FPubGrub/topic/Progress.20report&quot;&gt;Daily reports&lt;/a&gt; by &lt;a href&#x3D;&quot;https://github.com/Eh2406&quot;&gt;Eh2406&lt;/a&gt; on the progress of the Rust implementation of the PugGrub version solving algorithm&lt;/li&gt;
+&lt;li&gt;Building on &lt;a href&#x3D;&quot;github.com/epage&quot;&gt;epage&lt;/a&gt;&#x27;s work in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14750&quot;&gt;#14750&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/linyihai&quot;&gt;linyihai&lt;/a&gt; diagnostics with extraneous details in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14497&quot;&gt;#14497&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/Rustin170506&quot;&gt;Rustin170506&lt;/a&gt; updated how config files are loaded for cargo script in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14749&quot;&gt;#14749&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;github.com/epage&quot;&gt;epage&lt;/a&gt; updated frontmatter parsing for cargo script in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14792&quot;&gt;#14792&lt;/a&gt; and got manifest-editing commands updated to support cargo script in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14857&quot;&gt;#14857&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14864&quot;&gt;#14864&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/arlosi&quot;&gt;arlosi&lt;/a&gt; wrapped up work on &lt;code&gt;CARGO_BUILD_WARNINGS&#x3D;deny&lt;/code&gt; in &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/pull/14388&quot;&gt;#14388&lt;/a&gt; (update from &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2024/08/15/this-development-cycle-in-cargo-1.81.html#turn-all-warnings-into-errors&quot;&gt;1.81&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#focus-areas-without-progress&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;focus-areas-without-progress&quot;&gt;&lt;/a&gt;Focus areas without progress&lt;/h2&gt;
+&lt;p&gt;These are areas of interest for Cargo team members with no reportable progress for this development-cycle.&lt;/p&gt;
+&lt;p&gt;Ready-to-develop:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14774&quot;&gt;Config control over feature unification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#open-namespaces&quot;&gt;Open namespaces&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/14125&quot;&gt;Split CARGO_TARGET_DIR&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/6645&quot;&gt;Auto-generate completions&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;See &lt;a href&#x3D;&quot;https://github.com/clap-rs/clap/issues/3166&quot;&gt;clap-rs/clap#3166&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!--
+- Cargo script ([RFC #3502](https://github.com/rust-lang/rfcs/pull/3502), [RFC #3503](https://github.com/rust-lang/rfcs/pull/3503))
+--&gt;
+&lt;p&gt;Needs design and/or experimentation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/5931&quot;&gt;Per-user artifact cache&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/7193&quot;&gt;Dependency resolution hooks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/2904&quot;&gt;A way to report why crates were rebuilt&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/12633&quot;&gt;GC&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Planning:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/3126&quot;&gt;Disabling of default features&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3416&quot;&gt;RFC #3416: &lt;code&gt;features&lt;/code&gt; metadata&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3487&quot;&gt;RFC #3487: visibility&lt;/a&gt; (visibility)&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3486&quot;&gt;RFC #3486: deprecation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://doc.rust-lang.org/cargo/reference/unstable.html#list-of-unstable-features&quot;&gt;Unstable features&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/1734&quot;&gt;OS-native config/cache directories (ie XDG support)&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/pre-rfc-split-cargo-home/19747&quot;&gt;Phase 1 Pre-RFC&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/pre-rfc-mutually-excusive-global-features/19618&quot;&gt;Pre-RFC: Global, mutually exclusive features&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3553&quot;&gt;RFC #3553: Cargo SBOM Fragment&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#how-you-can-help&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;how-you-can-help&quot;&gt;&lt;/a&gt;How you can help&lt;/h2&gt;
+&lt;p&gt;If you have ideas for improving cargo,
+we recommend first checking &lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/&quot;&gt;our backlog&lt;/a&gt;
+and then exploring the idea on &lt;a href&#x3D;&quot;https://internals.rust-lang.org/c/tools-and-infrastructure/cargo/15&quot;&gt;Internals&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If there is a particular issue that you are wanting resolved that wasn&#x27;t discussed here,
+some steps you can take to help move it along include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Summarizing the existing conversation (example:
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/2644#issuecomment-1489371226&quot;&gt;Better support for docker layer caching&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/8728#issuecomment-1610265047&quot;&gt;Change in &lt;code&gt;Cargo.lock&lt;/code&gt; policy&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/9930#issuecomment-1489089277&quot;&gt;MSRV-aware resolver&lt;/a&gt;
+)&lt;/li&gt;
+&lt;li&gt;Document prior art from other ecosystems so we can build on the work others have done and make something familiar to users, where it makes sense&lt;/li&gt;
+&lt;li&gt;Document related problems and solutions within Cargo so we see if we are solving to the right layer of abstraction&lt;/li&gt;
+&lt;li&gt;Building on those posts, propose a solution that takes into account the above information and cargo&#x27;s compatibility requirements (&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/issues/9930#issuecomment-1489269471&quot;&gt;example&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We are available to help mentor people for
+&lt;a href&#x3D;&quot;https://doc.crates.io/contrib/issues.html#issue-status-labels&quot;&gt;S-accepted issues&lt;/a&gt;
+on
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo&quot;&gt;zulip&lt;/a&gt;
+and you can talk to us in real-time during
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/cargo/wiki/Office-Hours&quot;&gt;Contributor Office Hours&lt;/a&gt;.
+If you are looking to help with one of the bigger projects mentioned here and are just starting out,
+&lt;a href&#x3D;&quot;https://doc.crates.io/contrib/process/index.html#working-on-issues&quot;&gt;fixing some issues&lt;/a&gt;
+will help familiarize yourself with the process and expectations,
+making things go more smoothly.
+If you&#x27;d like to tackle something
+&lt;a href&#x3D;&quot;https://doc.crates.io/contrib/issues.html#issue-status-labels&quot;&gt;without a mentor&lt;/a&gt;,
+the expectations will be higher on what you&#x27;ll need to do on your own.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Ed Page</name>
+        </author>
+    </entry>
+    <entry>
+        <title>This Month in Our Test Infra: November 2024</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2024/12/09/test-infra-nov-2024.html" type="text/html" title="This Month in Our Test Infra: November 2024" />
+        <published>2024-12-09T00:00:00+00:00</published>
+        <updated>2024-12-09T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2024/12/09/test-infra-nov-2024.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2024/12/09/test-infra-nov-2024.html">&lt;h1&gt;&lt;a href&#x3D;&quot;#this-month-in-our-test-infra-november-2024&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;this-month-in-our-test-infra-november-2024&quot;&gt;&lt;/a&gt;This Month in Our Test Infra: November 2024&lt;/h1&gt;
+&lt;!-- time period: 2024-11-05 through 2024-12-03 --&gt;
+&lt;p&gt;This is a quick summary of the changes in the test infrastructure for the
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust&quot;&gt;rust-lang/rust&lt;/a&gt; repository&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-scope&quot; id&#x3D;&quot;fnref-scope&quot; data-footnote-ref&gt;1&lt;/a&gt;&lt;/sup&gt; for &lt;strong&gt;November 2024&lt;/strong&gt;. It also
+includes brief descriptions of on-going work.&lt;/p&gt;
+&lt;p&gt;As usual, if you encounter bugs or UX issues when using our test infrastructure,
+please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new&quot;&gt;file an issue&lt;/a&gt;. Bugs and papercuts can&#x27;t be fixed if we don&#x27;t
+know about them!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Thanks to everyone who contributed to our test infra!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#highlights&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;highlights&quot;&gt;&lt;/a&gt;Highlights&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#compiletest-add-proc-macro-auxiliary-build-directive&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;compiletest-add-proc-macro-auxiliary-build-directive&quot;&gt;&lt;/a&gt;compiletest: Add &lt;code&gt;proc-macro&lt;/code&gt; auxiliary build directive&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/ehuss&quot;&gt;@ehuss&lt;/a&gt; added a &lt;code&gt;//@ proc-macro&lt;/code&gt; directive that
+behaves like &lt;code&gt;//@ aux-build&lt;/code&gt;, but it packages the usual &lt;code&gt;//@ force-host&lt;/code&gt; and
+&lt;code&gt;//@ no-prefer-dynamic&lt;/code&gt; boilerplate that previously was needed by proc-macro
+auxiliaries. If the main test file also uses a sufficiently new edition (i.e.
+Edition 2018 onwards), the proc-macro auxiliary is also made available via
+extern prelude.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Before&lt;/strong&gt;: test writer need to write &lt;code&gt;//@ force-host&lt;/code&gt; and &lt;code&gt;//@ no-prefer-dynamic&lt;/code&gt; for each and every proc-macro auxiliary.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rs&quot;&gt;// tests/ui/foo/my-main-test.rs
+//@ aux-build: my-proc-macro.rs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rs&quot;&gt;// tests/ui/foo/auxiliary/my-proc-macro.rs
+//@ no-prefer-dynamic
+//@ force-host
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;After&lt;/strong&gt;: only &lt;code&gt;//@ proc-macro&lt;/code&gt; directive is needed in main test file.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rs&quot;&gt;// tests/ui/foo/my-main-test.rs
+//@ proc-macro: my-proc-macro.rs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rs&quot;&gt;// tests/ui/foo/auxiliary/my-proc-macro.rs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Thanks Eric!&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#rustc-make-rustc-consider-itself-a-stable-compiler-when-rustc_bootstrap-1-is-set&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;rustc-make-rustc-consider-itself-a-stable-compiler-when-rustc_bootstrap-1-is-set&quot;&gt;&lt;/a&gt;rustc: make &lt;code&gt;rustc&lt;/code&gt; consider itself a stable compiler when &lt;code&gt;RUSTC_BOOTSTRAP&#x3D;-1&lt;/code&gt; is set&lt;/h3&gt;
+&lt;p&gt;In &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/132993&quot;&gt;#132993&lt;/a&gt;, I modified
+&lt;code&gt;rustc&lt;/code&gt;&#x27;s stability checking logic to also now recognize &lt;code&gt;RUSTC_BOOTSTRAP&#x3D;-1&lt;/code&gt; to
+force any &lt;code&gt;rustc&lt;/code&gt; to consider itself a stable compiler, regardless of which
+channel it is from (e.g. beta or dev or nightly or stable)&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-disclaimer&quot; id&#x3D;&quot;fnref-disclaimer&quot; data-footnote-ref&gt;2&lt;/a&gt;&lt;/sup&gt;. This is
+useful for e.g. diagnostics that differ between nightly and stable, and also
+provides a way to make the &lt;code&gt;rustc&lt;/code&gt; under test behave &lt;em&gt;as if&lt;/em&gt; it was a stable
+compiler.&lt;/p&gt;
+&lt;p&gt;In tests, the &lt;code&gt;//@ rustc-env&lt;/code&gt; directive may be used with
+&lt;code&gt;RUSTC_BOOTSTRAP&#x3D;-1&lt;/code&gt;&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-known-bug&quot; id&#x3D;&quot;fnref-known-bug&quot; data-footnote-ref&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rs&quot;&gt;//@ rustc-env:RUSTC_BOOTSTRAP&#x3D;-1
+//@ compile-flags: -Z unstable-options
+//@ regex-error-pattern: error: the option &#x60;Z&#x60; is only accepted on the nightly compiler
+// This will fail because the &#x60;rustc&#x60; under test rejects the &#x60;-Z unstable-options&#x60; unstable flag.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#pr-listing&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;pr-listing&quot;&gt;&lt;/a&gt;PR listing&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#improvements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improvements&quot;&gt;&lt;/a&gt;Improvements&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131913&quot;&gt;Add &lt;code&gt;{ignore,needs}-{rustc,std}-debug-assertions&lt;/code&gt; directive support #131913&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/132310&quot;&gt;Add &lt;code&gt;max-llvm-major-version&lt;/code&gt; directive #132310&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/132657&quot;&gt;Add AIX run-make support #132657&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/132995&quot;&gt;Add &lt;code&gt;exact-llvm-major-version&lt;/code&gt; directive #132995&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/133540&quot;&gt;Add &lt;code&gt;proc-macro&lt;/code&gt; directive #133540&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;rustc:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/132993&quot;&gt;Make rustc consider itself a stable compiler when &lt;code&gt;RUSTC_BOOTSTRAP&#x3D;-1&lt;/code&gt; #132993&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#cleanups&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cleanups&quot;&gt;&lt;/a&gt;Cleanups&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/133470&quot;&gt;Delete &lt;code&gt;//@ pretty-expanded&lt;/code&gt; directive #133470&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#documentation-updates&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;documentation-updates&quot;&gt;&lt;/a&gt;Documentation updates&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2149&quot;&gt;Update &lt;code&gt;//@ proc-macro&lt;/code&gt; aux build directive docs #2149&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2147&quot;&gt;Remove &lt;code&gt;pretty-expanded&lt;/code&gt; as it no longer exists #2147&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2145&quot;&gt;Add instructions to test error code docs #2145&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2137&quot;&gt;Document how to acquire cdb.exe #2137&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2136&quot;&gt;Mention &lt;code&gt;RUSTC_BOOTSTRAP&lt;/code&gt; for misc testing #2136&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2135&quot;&gt;Document &lt;code&gt;exact-llvm-major-version&lt;/code&gt; directive #2135&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2129&quot;&gt;Document &lt;code&gt;max-llvm-major-version&lt;/code&gt; directive #2129&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2101&quot;&gt;Rename &lt;code&gt;{ignore,only}-debug&lt;/code&gt; -&amp;gt; &lt;code&gt;{ignore,needs}-{rustc,std}-debug-assertions&lt;/code&gt; #2101&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#on-going-efforts&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;on-going-efforts&quot;&gt;&lt;/a&gt;On-going efforts&lt;/h2&gt;
+&lt;p&gt;Note: there are certainly many more spontaneous efforts, this is more what I
+know is &amp;quot;planned&amp;quot;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust-project-goals/pull/148&quot;&gt;Proposed a 2025H1 project goal: compiletest directive handling rework #148&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;section class&#x3D;&quot;footnotes&quot; data-footnotes&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn-scope&quot;&gt;
+&lt;p&gt;The test infra here refers to the test harness &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt; and
+supporting components in our build system &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/bootstrap&quot;&gt;bootstrap&lt;/a&gt;. This test infra is used
+mainly by rustc and rustdoc. Other tools like cargo, miri or rustfmt maintain
+their own test infra. &lt;a href&#x3D;&quot;#fnref-scope&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;1&quot; aria-label&#x3D;&quot;Back to reference 1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-disclaimer&quot;&gt;
+&lt;p&gt;This is &lt;em&gt;only&lt;/em&gt; for internal testing usages. Anything else that
+relies on this that breaks will be considered PEBKAC. &lt;a href&#x3D;&quot;#fnref-disclaimer&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;2&quot; aria-label&#x3D;&quot;Back to reference 2&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-known-bug&quot;&gt;
+&lt;p&gt;The &lt;code&gt;//@ rustc-env&lt;/code&gt; directive handling has a bug where it&#x27;s
+white-space sensitive between the colon and the value, so avoid whitespace
+for now. &lt;a href&#x3D;&quot;#fnref-known-bug&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;3&quot; aria-label&#x3D;&quot;Back to reference 3&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Jieyou Xu</name>
+        </author>
+    </entry>
+    <entry>
+        <title>December 2024 Leadership Council Update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2024/12/09/leadership-council-update.html" type="text/html" title="December 2024 Leadership Council Update" />
+        <published>2024-12-09T00:00:00+00:00</published>
+        <updated>2024-12-09T00:00:01+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2024/12/09/leadership-council-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2024/12/09/leadership-council-update.html">&lt;p&gt;Hello again from the Rust Leadership Council!
+We wanted to share an update on what the Council has been working on since &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2024/09/06/leadership-council-update.html&quot;&gt;our last update&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#accomplishments-so-far&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;accomplishments-so-far&quot;&gt;&lt;/a&gt;Accomplishments so far&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#welcome-oli-scherer-and-tc-to-the-council&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;welcome-oli-scherer-and-tc-to-the-council&quot;&gt;&lt;/a&gt;Welcome Oli Scherer and TC to the Council&lt;/h3&gt;
+&lt;p&gt;As &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2024/09/27/leadership-council-repr-selection.html&quot;&gt;announced in September&lt;/a&gt;, Oli Scherer and TC joined the Council representing the moderation team and lang team respectively.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#foundation-updates&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;foundation-updates&quot;&gt;&lt;/a&gt;Foundation updates&lt;/h3&gt;
+&lt;p&gt;In November we wrapped up the election process for the Project Directors of the Rust Foundation. Ryan Levick is continuing for another term with Carol Nichols joining the board (&lt;a href&#x3D;&quot;https://foundation.rust-lang.org/news/announcing-the-rust-foundation-s-newest-project-director-carol-nichols/&quot;&gt;see announcement&lt;/a&gt;). We&#x27;d like to thank TC for facilitating the election process.&lt;/p&gt;
+&lt;p&gt;We tried to further clarify the definition of employment which is used for determining Director eligibility (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/pull/111&quot;&gt;rust-lang/leadership-council#111&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;We reviewed our processes for how the Council interacts with the Directors and the Foundation. We identified some concerns about maintaining good communication with the Directors since Mark Rousskov, the only Council member who was also a Director, is stepping down as Director. We also looked at our communication processes with the Foundation, and didn&#x27;t have specific changes to recommend other than documenting the current status (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/issues/41&quot;&gt;rust-lang/leadership-council#41&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;In November we also coordinated with the directors on a project-wide request for the annual feedback on the Foundation executive director.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#travel-grant-policy&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;travel-grant-policy&quot;&gt;&lt;/a&gt;Travel grant policy&lt;/h2&gt;
+&lt;p&gt;In April we started a Travel Grant program which provides funds for project members to travel to Rust-related events. We have followed up on that program to publicly &lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/blob/main/policies/spending/travel.md&quot;&gt;document the policy&lt;/a&gt;. We are also looking to &lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/pull/122&quot;&gt;remove the experimental status&lt;/a&gt; of the policy, as we feel like we have been happy with how the program has been working, and expect to keep it funded in the near term.&lt;/p&gt;
+&lt;p&gt;We&#x27;d like to remind all project members that they are welcome to take advantage of this program, and to reach out to your representative if you have any questions.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#compiler-operations&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;compiler-operations&quot;&gt;&lt;/a&gt;Compiler operations&lt;/h2&gt;
+&lt;p&gt;We approved funding for a compiler operations position (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/issues/114&quot;&gt;rust-lang/leadership-council#114&lt;/a&gt;). This role is intended to help ensure the effectiveness of the compiler team. The specifics are being coordinated between the compiler team leads and the Foundation.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#project-grants&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;project-grants&quot;&gt;&lt;/a&gt;Project Grants&lt;/h2&gt;
+&lt;p&gt;We approved the use of a portion of the Council&#x27;s budget to extend one-year grants to several of the candidates of the &lt;a href&#x3D;&quot;https://foundation.rust-lang.org/grants/fellowships/&quot;&gt;Fellowship Program&lt;/a&gt; (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/issues/112&quot;&gt;rust-lang/leadership-council#112&lt;/a&gt;). We had more excellent applications to the program than the existing funding would cover, and we had the opportunity to divert some of the Council&#x27;s budget toward this program.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#additional-items&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;additional-items&quot;&gt;&lt;/a&gt;Additional items&lt;/h3&gt;
+&lt;p&gt;And a few other items:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Approved distribution of GSoC award funds (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/issues/116&quot;&gt;rust-lang/leadership-council#116&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Set up a document to help us track the &lt;a href&#x3D;&quot;https://hackmd.io/@rust-leadership-council/ryBmBnFCC&quot;&gt;Council&#x27;s budget&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Approved a Foundation board meeting substitute for the December board meeting (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/issues/117&quot;&gt;rust-lang/leadership-council#117&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Various updates to the Council&#x27;s own meeting process:
+&lt;ul&gt;
+&lt;li&gt;Enacted some improvements for how meeting minutes are approved to help streamline the process while still allowing members time to review (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/blob/687946a596e65b8f6fd524bcc0afa4ab497581c5/minutes/sync-meeting/2024-11-22.md#review-of-minutes-process&quot;&gt;notes&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Switched to an issue-oriented process for managing the Council&#x27;s meeting agenda.&lt;/li&gt;
+&lt;li&gt;Decided to stop video recordings of Council meetings (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/pull/102&quot;&gt;rust-lang/leadership-council#102&lt;/a&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Eric Holk gave a &lt;a href&#x3D;&quot;https://www.youtube.com/live/ZNK4aSv-krI?t&#x3D;528s&quot;&gt;presentation at the Ubuntu Summit&lt;/a&gt; about the Rust Project.&lt;/li&gt;
+&lt;li&gt;Approved the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2024/11/07/gccrs-an-alternative-compiler-for-rust.html&quot;&gt;gccrs blog post&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#ongoing-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;ongoing-work&quot;&gt;&lt;/a&gt;Ongoing work&lt;/h2&gt;
+&lt;p&gt;There are various efforts underway on projects that have had significant discussions since the last update, but have not concluded with any decisions, yet.
+They are:&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#shape-of-rust&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;shape-of-rust&quot;&gt;&lt;/a&gt;Shape of Rust&lt;/h3&gt;
+&lt;p&gt;Work continues to define the shape of the structure of the Rust project (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/issues/33&quot;&gt;rust-lang/leadership-council#33&lt;/a&gt;) and to determine how to organize the teams in the &lt;a href&#x3D;&quot;https://forge.rust-lang.org/governance/council.html#the-launching-pad-top-level-team&quot;&gt;Launching Pad&lt;/a&gt;. James Munns has been working to better understand the current status of the Launching Pad teams, and to work on plans for what to do with those teams (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/issues/118&quot;&gt;rust-lang/leadership-council#118&lt;/a&gt;).&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#foundation-budget&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;foundation-budget&quot;&gt;&lt;/a&gt;Foundation budget&lt;/h3&gt;
+&lt;p&gt;We are continuously looking for ways to effectively use the Council&#x27;s budget (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/issues/103&quot;&gt;rust-lang/leadership-council#103&lt;/a&gt;). Although we have approved several programs, we still have a significant portion of the budget to spend. James Munns &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/392734-council/topic/Discussion.20regarding.20a.20Council.20RFQ.20process/near/476426031&quot;&gt;suggested an RFQ process&lt;/a&gt; for soliciting quotes on potential projects.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#license-and-copyright&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;license-and-copyright&quot;&gt;&lt;/a&gt;License and copyright&lt;/h3&gt;
+&lt;p&gt;We continue to look at how we can tackle the backlog of issues and concerns regarding the licensing and copyright handling throughout the Rust project (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/issues/24&quot;&gt;rust-lang/leadership-council#24&lt;/a&gt;). We &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/392734-council/topic/license.2Fcopyright.20support&quot;&gt;opened a topic&lt;/a&gt; to try to get more input on different approaches we can take.&lt;/p&gt;
+&lt;p&gt;Jonathan Pallant has been working on improving the copyright notices shipped with Rust (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/issues/120&quot;&gt;rust-lang/leadership-council#120&lt;/a&gt;), and has asked the Council to help approve this change.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#additional-items-1&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;additional-items-1&quot;&gt;&lt;/a&gt;Additional items&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Work continues to prepare for the all-hands event in May 2025 at &lt;a href&#x3D;&quot;https://rustweek.org/&quot;&gt;RustWeek 2025&lt;/a&gt; which corresponds with Rust&#x27;s 10-year anniversary.&lt;/li&gt;
+&lt;li&gt;We have been looking to change the policy for meeting observers (&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/pull/110&quot;&gt;rust-lang/leadership-council#110&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;We have been asked to review the obligation for the Council and the Project as a whole for approval of &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3724&quot;&gt;The Update Framework RFC&lt;/a&gt;, but no conclusion has been reached.&lt;/li&gt;
+&lt;li&gt;We have been reviewing the &lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/issues&quot;&gt;open tasks&lt;/a&gt; for the Council and trying to identify what is needed to move them forward.&lt;/li&gt;
+&lt;li&gt;Niko Matsakis has reached out to the Council for &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/392734-council/topic/A.20Rust.203-5.20YP/near/480932967&quot;&gt;establishing a 3-5 year plan for the project&lt;/a&gt;, which is in the initial stages of discussion.&lt;/li&gt;
+&lt;li&gt;We have been working on a coordinated analysis of the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/127343&quot;&gt;inference breakage&lt;/a&gt; that happened in the Rust 1.80 release, since the issue involved many teams throughout the project.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#meeting-minutes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;meeting-minutes&quot;&gt;&lt;/a&gt;Meeting minutes&lt;/h2&gt;
+&lt;p&gt;We publish minutes from all Council meetings to the &lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/tree/main/minutes&quot;&gt;Leadership Council repo&lt;/a&gt;.
+Links to the minutes since our last update are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2024-09-27.md&quot;&gt;September 27, 2024&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2024-10-11.md&quot;&gt;October 11, 2024&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2024-10-25.md&quot;&gt;October 25, 2024&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2024-11-08.md&quot;&gt;November 8, 2024&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2024-11-22.md&quot;&gt;November 22, 2024&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Eric Huss</name>
+        </author>
+    </entry>
+    <entry>
+        <title>Rustc Trait System Refactor Initiative Update: Stabilizing &#x60;-Znext-solver&#x3D;coherence&#x60;</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2024/12/04/trait-system-refactor-initiative.html" type="text/html" title="Rustc Trait System Refactor Initiative Update: Stabilizing &#x60;-Znext-solver&#x3D;coherence&#x60;" />
+        <published>2024-12-04T00:00:00+00:00</published>
+        <updated>2024-12-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2024/12/04/trait-system-refactor-initiative.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2024/12/04/trait-system-refactor-initiative.html">&lt;p&gt;It&#x27;s been half a year since we last summarized our progress in the &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2024/06/26/types-team-update.html&quot;&gt;Types Team update blog post&lt;/a&gt;. With the next-generation trait solver now getting used by default in coherence checking on beta&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-2&quot; id&#x3D;&quot;fnref-2&quot; data-footnote-ref&gt;1&lt;/a&gt;&lt;/sup&gt;, it&#x27;s time for another update. The next-generation trait solver is intended to fully replace the existing type system components responsible for proving trait bounds, normalizing associated types, and much more. This should fix many long-standing (soundness) bugs, enable future type system improvements, and improve compile-times. See &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2023/07/17/trait-system-refactor-initiative.html&quot;&gt;this previous blog post&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;p&gt;The FCP to stabilize the use of the new solver in coherence already passed in April. Checking auto-trait bounds of deeply recursive types unfortunately caused exponential blowup with the new implementation, resulting in a hang caught by CI. Fixing this hang required us to add a &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/128828&quot;&gt;complex caching optimization&lt;/a&gt; to efficiently handle cycles while still being correct&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-1&quot; id&#x3D;&quot;fnref-1&quot; data-footnote-ref&gt;2&lt;/a&gt;&lt;/sup&gt;. We  then merged the stabilization PR only to revert it 5 days later as it resulted in &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/130056&quot;&gt;a separate hang in &lt;code&gt;nalgebra&lt;/code&gt;&lt;/a&gt;. Luckily the fix this time was a lot simpler, which allowed us to &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/130654&quot;&gt;stabilize &lt;code&gt;-Znext-solver&#x3D;coherence&lt;/code&gt; again&lt;/a&gt; soon after.&lt;/p&gt;
+&lt;p&gt;While the new solver will only be used in coherence checking for now, this already removes some inconsistencies and theoretical soundness issues, see &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/130654&quot;&gt;the stabilization report&lt;/a&gt; for a complete summary. In case you encounter any weird hangs, unexpected overlap errors, or unhelpful diagnostics, please open a &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues&quot;&gt;GitHub issue&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We then moved our focus to &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/133502&quot;&gt;bootstrap using exclusively the new solver&lt;/a&gt; again. We&#x27;ve made significant progress here and are able to fully compile &lt;code&gt;rustc&lt;/code&gt; and &lt;code&gt;cargo&lt;/code&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/133502#issuecomment-2505183120&quot;&gt;allowing &lt;code&gt;try&lt;/code&gt;-builds to succeed&lt;/a&gt;. We are currently looking into the &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/364551-t-types.2Ftrait-system-refactor/topic/help.20getting.20some.20rough.20perf.20numbers/near/485121929&quot;&gt;remaining compile-time benchmark failures&lt;/a&gt;. We intend to start to optimize the new implementation and to test more and more crates until a full &lt;a href&#x3D;&quot;https://github.com/rust-lang/crater&quot;&gt;&lt;code&gt;crater&lt;/code&gt; run&lt;/a&gt; will be useful.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#looking-ahead&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;looking-ahead&quot;&gt;&lt;/a&gt;Looking ahead&lt;/h3&gt;
+&lt;p&gt;To unblock the stabilization of the next-generation trait solver we&#x27;re required to fix &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/133501&quot;&gt;multiple&lt;/a&gt; &lt;a href&#x3D;&quot;https://rust.godbolt.org/z/aoseYzMx9&quot;&gt;issues&lt;/a&gt; which also affect the current implementation. This is due to subtle differences between the implementations causing the new solver to trigger bugs which are avoided by the old solver. The cases where the new implementation works correctly while the old one does not are unfortunately far less relevant as nobody has written code which relies on the behavior of the next-generation trait solver yet.&lt;/p&gt;
+&lt;p&gt;We will also have to spend a significant effort towards improving error messages when using the new trait solver. There are still many cases where they are significantly worse than the status quo.&lt;/p&gt;
+&lt;p&gt;We are still working towards our first crater run and are aware of multiple significant issues. We expect to resolve most of them during the next few months. So while we&#x27;re not quite at the point where bug reports are useful, we intend to explicitly ask for testing of &lt;code&gt;-Znext-solver&#x3D;globally&lt;/code&gt; soon. To follow our progress, check out the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/107374&quot;&gt;&lt;code&gt;-Znext-solver&lt;/code&gt; tracking issue&lt;/a&gt; or join us &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/364551-t-types.2Ftrait-system-refactor&quot;&gt;on zulip&lt;/a&gt;.&lt;/p&gt;
+&lt;section class&#x3D;&quot;footnotes&quot; data-footnotes&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn-2&quot;&gt;
+&lt;p&gt;Which will get stabilized as version 1.84. &lt;a href&#x3D;&quot;#fnref-2&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;1&quot; aria-label&#x3D;&quot;Back to reference 1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-1&quot;&gt;
+&lt;p&gt;The old implementation avoids these hangs by &lt;a href&#x3D;&quot;https://github.com/rust-lang/trait-system-refactor-initiative/issues/119&quot;&gt;incorrectly reusing cache-entries even if they should not be applicable&lt;/a&gt;. Due to subtle reasons™ we believe this to not be an exploitable soundness issue. &lt;a href&#x3D;&quot;#fnref-1&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;2&quot; aria-label&#x3D;&quot;Back to reference 2&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>lcnr</name>
+        </author>
+    </entry>
+    <entry>
+        <title>Announcing four new members of the compiler team</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2024/11/12/compiler-team-new-members.html" type="text/html" title="Announcing four new members of the compiler team" />
+        <published>2024-11-12T00:00:00+00:00</published>
+        <updated>2024-11-12T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2024/11/12/compiler-team-new-members.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2024/11/12/compiler-team-new-members.html">&lt;p&gt;Its been no time at all since &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2024/11/01/compiler-team-reorg.html&quot;&gt;we restructured the team and recognised our existing and new
+members&lt;/a&gt;, but we&#x27;ve already got new compiler team members to announce and recognise:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/ChrisDenton&quot;&gt;ChrisDenton&lt;/a&gt;, team member
+&lt;ul&gt;
+&lt;li&gt;ChrisDenton is a go-to Windows expert for much of the compiler team and is regularly helpful in
+resolving all sorts of tricky issues related to linkage, debuginfo, syscalls and Windows.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/m-ou-se&quot;&gt;Mara Bos&lt;/a&gt;, team member
+&lt;ul&gt;
+&lt;li&gt;Mara needs no introduction - in addition to co-leading the library team, and being a member
+of the leadership council, Mara makes various contributions to the compiler in her various
+projects to improve the language and its standard library, including recent improvements to the
+compiler&#x27;s format string handling, but also diagnostic improvements and edition changes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rcvalle&quot;&gt;rcvalle&lt;/a&gt;, team member
+&lt;ul&gt;
+&lt;li&gt;rcvalle has been working on improving Rust&#x27;s support for exploit mitigations and sanitizers
+for a few years and has led the exploit mitigations project group, including writing the
+compiler&#x27;s exploit mitigation documentation and implementing Control Flow Integrity support in
+the compiler.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/workingjubilee&quot;&gt;workingjubilee&lt;/a&gt;, team member
+&lt;ul&gt;
+&lt;li&gt;workingjubilee is another prolific contributor, weighing in on nearly every discussion about
+low-level language semantics. They have made many varied contributions to the compiler
+improving our layout computation, understanding of ABIs, codegen, interop with C/C++ and wasm.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thanks to all of our new members for their contributions!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>davidtwco and wesleywiser</name>
+        </author>
+    </entry>
+    <entry>
+        <title>This Month in Our Test Infra: October 2024</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2024/11/04/test-infra-oct-2024-2.html" type="text/html" title="This Month in Our Test Infra: October 2024" />
+        <published>2024-11-04T00:00:00+00:00</published>
+        <updated>2024-11-04T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2024/11/04/test-infra-oct-2024-2.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2024/11/04/test-infra-oct-2024-2.html">&lt;h1&gt;&lt;a href&#x3D;&quot;#this-month-in-our-test-infra-october-2024&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;this-month-in-our-test-infra-october-2024&quot;&gt;&lt;/a&gt;This Month in Our Test Infra: October 2024&lt;/h1&gt;
+&lt;!-- time period: 2024-10-09 through 2024-11-04 --&gt;
+&lt;p&gt;This is a quick summary of the changes in the test infrastructure for the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust&quot;&gt;rust-lang/rust&lt;/a&gt;
+repository&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-scope&quot; id&#x3D;&quot;fnref-scope&quot; data-footnote-ref&gt;1&lt;/a&gt;&lt;/sup&gt; for &lt;strong&gt;October 2024&lt;/strong&gt;&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-spec-date&quot; id&#x3D;&quot;fnref-spec-date&quot; data-footnote-ref&gt;2&lt;/a&gt;&lt;/sup&gt;. It also includes brief descriptions of on-going
+work.&lt;/p&gt;
+&lt;p&gt;As usual, if you encounter bugs or UX issues when using our test infrastructure, please &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/new&quot;&gt;file an
+issue&lt;/a&gt;. Bugs and papercuts can&#x27;t be fixed if we don&#x27;t know about them!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Thanks to everyone who contributed to our test infra!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#highlights&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;highlights&quot;&gt;&lt;/a&gt;Highlights&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#compiletest-now-supports-bringing-your-own-custom-diff-tool&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;compiletest-now-supports-bringing-your-own-custom-diff-tool&quot;&gt;&lt;/a&gt;&lt;code&gt;compiletest&lt;/code&gt; now supports bringing your own custom diff tool&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131181&quot;&gt;&lt;code&gt;compiletest&lt;/code&gt; (and bootstrap) now supports bringing your own custom diff tool
+(#131181)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;../../../../images/2024-11-04-test-infra-oct-2024-2/compiletest-custom-differ.png&quot; alt&#x3D;&quot;A ui test failure showing stderr snapshot diff produced by a custom differ&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;This only affects the &lt;em&gt;visual&lt;/em&gt; diff generation (i.e. maybe you like a different visual style). The
+&lt;code&gt;.stderr&lt;/code&gt; snapshots and such are not affected.&lt;/p&gt;
+&lt;p&gt;If you want to use your favorite diff tool for generating the visual diffs, you can modify
+&lt;code&gt;config.toml&lt;/code&gt;&#x27;s &lt;code&gt;build.compiletest-diff-tool&lt;/code&gt; option:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-toml&quot;&gt;[build]
+# What custom diff tool to use for displaying compiletest tests.
+#compiletest-diff-tool &#x3D; &amp;lt;none&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Thanks to &lt;a href&#x3D;&quot;https://github.com/dev-ardi&quot;&gt;&lt;code&gt;@dev-ardi&lt;/code&gt;&lt;/a&gt; for the implementation!&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#minicore-test-auxiliary-and--add-core-stubs-directive&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;minicore-test-auxiliary-and--add-core-stubs-directive&quot;&gt;&lt;/a&gt;&lt;code&gt;minicore&lt;/code&gt; test auxiliary and &lt;code&gt;//@ add-core-stubs&lt;/code&gt; directive&lt;/h3&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/130693&quot;&gt;&lt;code&gt;ui&lt;/code&gt;, &lt;code&gt;assembly&lt;/code&gt; and &lt;code&gt;codegen&lt;/code&gt; tests can now use the &lt;code&gt;//@ add-core-stubs&lt;/code&gt; directive to
+conditionally build a &lt;code&gt;minicore&lt;/code&gt; test auxiliary which provides &lt;code&gt;core&lt;/code&gt; stubs
+(#130693)&lt;/a&gt;. This is so that we can share &lt;code&gt;core&lt;/code&gt; stubs
+between cross-compiling tests that only need to &lt;em&gt;build&lt;/em&gt; for the cross-compile target and avoid
+having to reinvent and maintain duplicate &lt;code&gt;minicore&lt;/code&gt; copies in each of such test&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-multicore&quot; id&#x3D;&quot;fnref-multicore&quot; data-footnote-ref&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;Previously, having to reinvent a &lt;code&gt;minicore&lt;/code&gt; every time you want to add a distinct
+&lt;code&gt;ui&lt;/code&gt;/&lt;code&gt;assembly&lt;/code&gt;/&lt;code&gt;codegen&lt;/code&gt; test (for checking e.g. cross-compile ABI) is a significant source of
+contributor friction and makes it more prone to introduce mistakes in the &lt;code&gt;minicore&lt;/code&gt; copies. This is
+also particularly annoying for compiler contributors who want to introduce new lang items, as they
+found themselves having to update multiple copies of such &lt;code&gt;core&lt;/code&gt; stubs.&lt;/p&gt;
+&lt;p&gt;Note that currently, the shared &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/master/tests/auxiliary/minicore.rs&quot;&gt;&lt;code&gt;tests/auxiliary/minicore.rs&lt;/code&gt;&lt;/a&gt; test auxiliary is still
+quite minimal. The plan is to land the test infrastructure first, then we can incrementally add more
+&lt;code&gt;core&lt;/code&gt; stubs to the shared test auxiliary.&lt;/p&gt;
+&lt;p&gt;Example usage:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-rs&quot;&gt;// tests/ui/abi/my-abi-test.rs
+
+//@ add-core-stubs
+//@ compile-flags: --target x86_64-pc-windows-msvc
+//@ needs-llvm-components: x86
+
+#![crate_type &#x3D; &amp;quot;lib&amp;quot;]
+#![feature(no_core)]
+#![no_std]
+#![no_core]
+
+extern crate minicore;
+use minicore::*;
+
+struct Meow;
+impl Copy for Meow {} // &#x60;Copy&#x60; is provided by &#x60;minicore&#x60;!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;See the &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/130375&quot;&gt;context issue&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/786&quot;&gt;MCP&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/131485&quot;&gt;tracking issue&lt;/a&gt;
+for more info on the original motivations. See the &lt;a href&#x3D;&quot;https://rustc-dev-guide.rust-lang.org/tests/minicore.html&quot;&gt;rustc-dev-guide&lt;/a&gt; chapter for
+example usage.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#pr-listing&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;pr-listing&quot;&gt;&lt;/a&gt;PR listing&lt;/h2&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#improvements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improvements&quot;&gt;&lt;/a&gt;Improvements&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;General test infra: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/130693&quot;&gt;Add &lt;code&gt;minicore&lt;/code&gt; test auxiliary and support &lt;code&gt;//@ add-core-stubs&lt;/code&gt; directive in &lt;code&gt;ui&lt;/code&gt;/&lt;code&gt;assembly&lt;/code&gt;/&lt;code&gt;codegen&lt;/code&gt; tests #130693&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131470&quot;&gt;Add test infra to explicitly test rustc with &lt;code&gt;autodiff&lt;/code&gt;/&lt;code&gt;enzyme&lt;/code&gt; disabled #131470&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131642&quot;&gt;Special case error message for a &lt;code&gt;build-fail&lt;/code&gt; test that failed check build #131642&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131679&quot;&gt;Document various parts of compiletest&#x27;s lib.rs #131679&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131764&quot;&gt;Fix unnecessary nesting in run-make test output directories #131764&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131925&quot;&gt;Warn on redundant --cfg directive when revisions are used #131925&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131941&quot;&gt;Disambiguate html-tidy from rust tidy tool #131941&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131181&quot;&gt;Custom differ #131181&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131930&quot;&gt;Don&#x27;t allow test revisions that conflict with built in &lt;code&gt;cfg&lt;/code&gt;s #131930&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/132225&quot;&gt;Dynamically link run-make support #132225&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/132315&quot;&gt;Improve robustness of LLVM version handling #132315&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131382&quot;&gt;Add &amp;quot;reference&amp;quot; as a known compiletest header #131382&lt;/a&gt;&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-spec&quot; id&#x3D;&quot;fnref-spec&quot; data-footnote-ref&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tests/run-make&lt;/code&gt;, CI: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131207&quot;&gt;Add &lt;code&gt;aarch64-gnu-debug&lt;/code&gt; job #131207&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;meta: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131682&quot;&gt;Tag PRs affecting compiletest with A-compiletest #131682&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#fixes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;fixes&quot;&gt;&lt;/a&gt;Fixes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131681&quot;&gt;Fix up-to-date checking for run-make tests #131681&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/132093&quot;&gt;Suppress Windows Error Reporting (WER) for run-make tests&lt;/a&gt;&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn-wer-fun&quot; id&#x3D;&quot;fnref-wer-fun&quot; data-footnote-ref&gt;5&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131614&quot;&gt;Error on trying to use revisions in run-make tests #131614&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tests/run-make&lt;/code&gt;, CI: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131917&quot;&gt;Run the full stage 2 &lt;code&gt;run-make&lt;/code&gt; test suite in &lt;code&gt;x86_64-gnu-debug&lt;/code&gt; #131917&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/bootstrap&quot;&gt;bootstrap&lt;/a&gt;, &lt;code&gt;tests/run-make&lt;/code&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/132006&quot;&gt;Don&#x27;t stage-off to previous compiler when CI rustc is available #132006&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/bootstrap&quot;&gt;bootstrap&lt;/a&gt;, &lt;code&gt;tests/mir-opt&lt;/code&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131442&quot;&gt;Match std &lt;code&gt;RUSTFLAGS&lt;/code&gt; for host and target for &lt;code&gt;mir-opt&lt;/code&gt; test suite to fix double std build/rebuilds #131442&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;emscripten: Fix &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/bootstrap&quot;&gt;bootstrap&lt;/a&gt; and &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt; handling of emscripten target tests as part of &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131705&quot;&gt;Fix most ui tests on emscripten target #131705&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#cleanups&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;cleanups&quot;&gt;&lt;/a&gt;Cleanups&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131541&quot;&gt;Extract auxiliary-crate properties to their own module/struct #131541&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131429&quot;&gt;Rename directive &lt;code&gt;needs-profiler-support&lt;/code&gt; to &lt;code&gt;needs-profiler-runtime&lt;/code&gt; #131429&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131638&quot;&gt;Move debugger setup code out of lib.rs #131638&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131585&quot;&gt;Remove the one thing that was checking a directive&#x27;s original_line #131585&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131870&quot;&gt;Store test collection context/state in two structs #131870&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131961&quot;&gt;Tidy up how tidy and tidy (html version) are disambiguated #131961&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/132033&quot;&gt;Make &lt;code&gt;line_directive&lt;/code&gt; return a &lt;code&gt;DirectiveLine&lt;/code&gt; #132033&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/132313&quot;&gt;Rename &lt;code&gt;command-list.rs&lt;/code&gt; to &lt;code&gt;directive-list.rs&lt;/code&gt; #132313&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131524&quot;&gt;Remove the magic hacks for finding output with &lt;code&gt;lto&#x3D;thin&lt;/code&gt; #131524&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131525&quot;&gt;Simplify the choice of &lt;code&gt;--emit&lt;/code&gt; mode for assembly tests #131525&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/131638&quot;&gt;Move debugger setup code out of lib.rs #131638&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#documentation-updates&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;documentation-updates&quot;&gt;&lt;/a&gt;Documentation updates&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2094&quot;&gt;Document compiletest directives &lt;code&gt;ignore-coverage-map&lt;/code&gt; and &lt;code&gt;ignore-coverage-run&lt;/code&gt; #2094&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2095&quot;&gt;Rename &lt;code&gt;needs-profiler-support&lt;/code&gt; to &lt;code&gt;needs-profiler-runtime&lt;/code&gt; #2095&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2085&quot;&gt;Fix and update docs for &lt;code&gt;needs-force-clang-based-tests&lt;/code&gt; #2085&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2092&quot;&gt;Add redirects for integration-testing and headers #2092&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2097&quot;&gt;Describe minicore test auxiliary and directive #2097&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2122&quot;&gt;Fix minicore.rs link #2122&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide&quot;&gt;rustc-dev-guide&lt;/a&gt;: &lt;a href&#x3D;&quot;https://github.com/rust-lang/rustc-dev-guide/pull/2096&quot;&gt;Add a link for the &lt;code&gt;reference&lt;/code&gt; compiletest header #2096&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#on-going-efforts&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;on-going-efforts&quot;&gt;&lt;/a&gt;On-going efforts&lt;/h2&gt;
+&lt;p&gt;Note: there are certainly many more spontaneous efforts, this is more what I know is &amp;quot;planned&amp;quot;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/channel/326414-t-infra.2Fbootstrap/topic/.28Rubberducking.29.20compiletest.20test.20discovery.20.2F.20directives&quot;&gt;Reworking &lt;code&gt;compiletest&lt;/code&gt; directive handling to be more robust and improve test coverage&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;section class&#x3D;&quot;footnotes&quot; data-footnotes&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn-scope&quot;&gt;
+&lt;p&gt;The test infra here refers to the test harness &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/tools/compiletest&quot;&gt;compiletest&lt;/a&gt; and supporting components in
+our build system &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/tree/master/src/bootstrap&quot;&gt;bootstrap&lt;/a&gt;. This test infra is used mainly by rustc and rustdoc. Other tools like
+cargo, miri or rustfmt maintain their own test infra. &lt;a href&#x3D;&quot;#fnref-scope&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;1&quot; aria-label&#x3D;&quot;Back to reference 1&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-spec-date&quot;&gt;
+&lt;p&gt;specifically 2024-10-09 to 2024-11-04. Note that the previous issue incorrectly used
+October in the filename and thus URL, but is actually the September issue. &lt;a href&#x3D;&quot;#fnref-spec-date&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;2&quot; aria-label&#x3D;&quot;Back to reference 2&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-multicore&quot;&gt;
+&lt;p&gt;You can say we currently have more of a... &amp;quot;multicore&amp;quot; situation, heh. &lt;a href&#x3D;&quot;#fnref-multicore&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;3&quot; aria-label&#x3D;&quot;Back to reference 3&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-spec&quot;&gt;
+&lt;p&gt;This is part of T-spec efforts to associate tests with Reference rules. &lt;a href&#x3D;&quot;#fnref-spec&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;4&quot; aria-label&#x3D;&quot;Back to reference 4&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn-wer-fun&quot;&gt;
+&lt;p&gt;If you want to see what unsuppressed Windows Errors Reporting looks like for the &lt;code&gt;run-make&lt;/code&gt; test suite, see &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/132092#issuecomment-2436615833&quot;&gt;https://github.com/rust-lang/rust/issues/132092#issuecomment-2436615833&lt;/a&gt;. &lt;a href&#x3D;&quot;#fnref-wer-fun&quot; class&#x3D;&quot;footnote-backref&quot; data-footnote-backref data-footnote-backref-idx&#x3D;&quot;5&quot; aria-label&#x3D;&quot;Back to reference 5&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Jieyou Xu</name>
+        </author>
+    </entry>
+    <entry>
+        <title>Call for proposals: Rust 2025h1 project goals</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2024/11/04/project-goals-2025h1-call-for-proposals.html" type="text/html" title="Call for proposals: Rust 2025h1 project goals" />
+        <published>2024-11-04T00:00:00+00:00</published>
+        <updated>2024-11-04T00:00:01+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2024/11/04/project-goals-2025h1-call-for-proposals.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2024/11/04/project-goals-2025h1-call-for-proposals.html">&lt;p&gt;&lt;strong&gt;As of today, we are officially accepting proposals for Rust Project Goals targeting 2025H1 (the first half of 2025).&lt;/strong&gt; If you&#x27;d like to participate in the process, or just to follow along, please check out the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/2025h1/index.html&quot;&gt;2025h1 goal page&lt;/a&gt;. It includes listings of the goals currently under consideration, more details about the goals program, and instructions for how to submit a goal.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-is-the-project-goals-program-and-how-does-it-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-is-the-project-goals-program-and-how-does-it-work&quot;&gt;&lt;/a&gt;What is the project goals program and how does it work?&lt;/h2&gt;
+&lt;p&gt;Every six months, the Rust project commits to a set of goals for the upcoming half-year. The process involves:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the owner of the goal program (currently me) posts a call for proposals (this post);&lt;/li&gt;
+&lt;li&gt;would-be goal owners &lt;a href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/how_to/propose_a_goal.html&quot;&gt;open PRs&lt;/a&gt; against the &lt;a href&#x3D;&quot;https://rust-lang.github.io/rust-project-goals/&quot;&gt;rust-project-goals&lt;/a&gt; repository;&lt;/li&gt;
+&lt;li&gt;the goal-program owner gathers feedback on these goals and chooses some of them to be included in the RFC proposing the final slate of goals.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To get an idea what the final slate of goals looks like, check out &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3672#issuecomment-2254599176&quot;&gt;RFC 3672&lt;/a&gt;. The RFC describes a set of goals, designates a few of them as flagship goals, and summarizes the work expected from each team. The RFC is approved by (at least) the leads of each team, effectively committing their team to prove the support that is described.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#should-i-submit-a-goal&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;should-i-submit-a-goal&quot;&gt;&lt;/a&gt;Should I submit a goal?&lt;/h2&gt;
+&lt;p&gt;Opening a goal is an indication that you (or your company, etc) is willing to put up the resources needed to make it happen, at least if you get the indicated support from the teams. These resources are typically development time and effort, but they could be funding (in that case, we&#x27;d want to identify someone to take up the goal). If you pass that bar, then by all means, yes, open a goal.&lt;/p&gt;
+&lt;p&gt;Note though that controversial goals are likely to not be accepted. If you have an idea that you think people won&#x27;t like, then you should find ways to lower the ask of the teams. For example, maybe the goal should be to perform experiments to help make the case for the idea, rather than jumping straight to implementation.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#can-i-still-do-x-even-if-i-dont-submit-a-goal-for-it&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;can-i-still-do-x-even-if-i-dont-submit-a-goal-for-it&quot;&gt;&lt;/a&gt;Can I still do X, even if I don&#x27;t submit a goal for it?&lt;/h2&gt;
+&lt;p&gt;Yes. Goals are not mandatory for work to proceed. They are a tracking mechanism to help stay on course.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#what-have-the-experiences-with-the-goals-program-so-far&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;what-have-the-experiences-with-the-goals-program-so-far&quot;&gt;&lt;/a&gt;What have the experiences with the goals program so far?&lt;/h2&gt;
+&lt;p&gt;The current round has shown positive results so far. Of the 26 total goals, the vast majority have made progress, with only 1 (an orphaned goal) receiving no updates at all. Most goals are still ongoing with 1 completed and 1 not yet complete.&lt;/p&gt;
+&lt;p&gt;Here are some quotes from goal owners and Rust maintainers talking about the program:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;quot;Thank you for leading this goals initiative, I feel like this is blowing a bit of life back into rust as a project.&amp;quot;&lt;/li&gt;
+&lt;li&gt;&amp;quot;The project goals provided two benefits for me. First, I could show people not involved in Rust that my work had some support from the Rust Project (e.g., helpful for applications/grants). Second, I got some new contributors from people following my updates and the requests for help I added there.&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Many in the Rust community have commented that they appreciate the visibility into what the project is doing. Some quotes extracted from Reddit threads:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;quot;I really appreciate these kinds of little progress updates on the big changes coming to Rust. I personally don&#x27;t like Zulip and can find the GitHub hard to wade through (so much good work being done!).&amp;quot;&lt;/li&gt;
+&lt;li&gt;&amp;quot;[Referring to cargo script] I have vague awareness of having seen the above, but it&#x27;s not until just now (an confluence of having just seen it again and then wrestling with convenience command scripting) that I&#x27;m realizing &lt;strong&gt;how amazing this is&lt;/strong&gt;! &amp;quot;&lt;/li&gt;
+&lt;li&gt;&amp;quot;Lovely to see this in place, and I&#x27;m really thrilled to see that all of the teams have their own smaller goals.&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Areas for improvement include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We have not been effective at finding contributors for the orphaned goal.&lt;/li&gt;
+&lt;li&gt;In some cases established owners have not really contributed to the goal or the work to drive the goal and post updates has been done by others. We don&#x27;t have a clear mechanism for how to address this.&lt;/li&gt;
+&lt;li&gt;Goals with multiple owners feels like an anti-pattern; it makes it hard to know who to contact.&lt;/li&gt;
+&lt;li&gt;The lang team found that several of the goals to which we promised design meetings have not wound up using them or making much progress. This is not necessarily bad but may also indicate the team overestimated their capacity or that more focus would be useful.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#is-the-goals-program-permanent&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;is-the-goals-program-permanent&quot;&gt;&lt;/a&gt;Is the goals program permanent?&lt;/h2&gt;
+&lt;p&gt;Not yet. It&#x27;s still considered experimental. Presuming that the process we derived the first time around continues to work well, I plan to propose an RFC documenting it and making it a permanent fixture.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The Rust Project Goals program is driving progress, increasing transparency, and energizing the community. As we enter the second round, we invite you to contribute your ideas and help shape Rust&#x27;s future. Whether you&#x27;re proposing a goal or following along, your engagement is vital to Rust&#x27;s continued growth and success. Join us in making Rust even better in 2025!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
+</feed>

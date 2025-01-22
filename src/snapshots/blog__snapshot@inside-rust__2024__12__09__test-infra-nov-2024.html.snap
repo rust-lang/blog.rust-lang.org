@@ -1,0 +1,258 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2024/12/09/test-infra-nov-2024.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>This Month in Our Test Infra: November 2024 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="This Month in Our Test Infra: November 2024 | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="This Month in Our Test Infra: November 2024 | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="This Month in Our Test Infra: November 2024" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>This Month in Our Test Infra: November 2024</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 9, 2024 &middot; Jieyou Xu
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/infra#team-bootstrap">the Bootstrap Team</a> 
+    </div>
+
+    <div class="post">
+      <h1><a href="#this-month-in-our-test-infra-november-2024" aria-hidden="true" class="anchor" id="this-month-in-our-test-infra-november-2024"></a>This Month in Our Test Infra: November 2024</h1>
+<!-- time period: 2024-11-05 through 2024-12-03 -->
+<p>This is a quick summary of the changes in the test infrastructure for the
+<a href="https://github.com/rust-lang/rust">rust-lang/rust</a> repository<sup class="footnote-ref"><a href="#fn-scope" id="fnref-scope" data-footnote-ref>1</a></sup> for <strong>November 2024</strong>. It also
+includes brief descriptions of on-going work.</p>
+<p>As usual, if you encounter bugs or UX issues when using our test infrastructure,
+please <a href="https://github.com/rust-lang/rust/issues/new">file an issue</a>. Bugs and papercuts can't be fixed if we don't
+know about them!</p>
+<p><strong>Thanks to everyone who contributed to our test infra!</strong></p>
+<h2><a href="#highlights" aria-hidden="true" class="anchor" id="highlights"></a>Highlights</h2>
+<h3><a href="#compiletest-add-proc-macro-auxiliary-build-directive" aria-hidden="true" class="anchor" id="compiletest-add-proc-macro-auxiliary-build-directive"></a>compiletest: Add <code>proc-macro</code> auxiliary build directive</h3>
+<p><a href="https://github.com/ehuss">@ehuss</a> added a <code>//@ proc-macro</code> directive that
+behaves like <code>//@ aux-build</code>, but it packages the usual <code>//@ force-host</code> and
+<code>//@ no-prefer-dynamic</code> boilerplate that previously was needed by proc-macro
+auxiliaries. If the main test file also uses a sufficiently new edition (i.e.
+Edition 2018 onwards), the proc-macro auxiliary is also made available via
+extern prelude.</p>
+<p><strong>Before</strong>: test writer need to write <code>//@ force-host</code> and <code>//@ no-prefer-dynamic</code> for each and every proc-macro auxiliary.</p>
+<pre><code class="language-rs">// tests/ui/foo/my-main-test.rs
+//@ aux-build: my-proc-macro.rs
+</code></pre>
+<pre><code class="language-rs">// tests/ui/foo/auxiliary/my-proc-macro.rs
+//@ no-prefer-dynamic
+//@ force-host
+</code></pre>
+<p><strong>After</strong>: only <code>//@ proc-macro</code> directive is needed in main test file.</p>
+<pre><code class="language-rs">// tests/ui/foo/my-main-test.rs
+//@ proc-macro: my-proc-macro.rs
+</code></pre>
+<pre><code class="language-rs">// tests/ui/foo/auxiliary/my-proc-macro.rs
+</code></pre>
+<p>Thanks Eric!</p>
+<h3><a href="#rustc-make-rustc-consider-itself-a-stable-compiler-when-rustc_bootstrap-1-is-set" aria-hidden="true" class="anchor" id="rustc-make-rustc-consider-itself-a-stable-compiler-when-rustc_bootstrap-1-is-set"></a>rustc: make <code>rustc</code> consider itself a stable compiler when <code>RUSTC_BOOTSTRAP=-1</code> is set</h3>
+<p>In <a href="https://github.com/rust-lang/rust/pull/132993">#132993</a>, I modified
+<code>rustc</code>'s stability checking logic to also now recognize <code>RUSTC_BOOTSTRAP=-1</code> to
+force any <code>rustc</code> to consider itself a stable compiler, regardless of which
+channel it is from (e.g. beta or dev or nightly or stable)<sup class="footnote-ref"><a href="#fn-disclaimer" id="fnref-disclaimer" data-footnote-ref>2</a></sup>. This is
+useful for e.g. diagnostics that differ between nightly and stable, and also
+provides a way to make the <code>rustc</code> under test behave <em>as if</em> it was a stable
+compiler.</p>
+<p>In tests, the <code>//@ rustc-env</code> directive may be used with
+<code>RUSTC_BOOTSTRAP=-1</code><sup class="footnote-ref"><a href="#fn-known-bug" id="fnref-known-bug" data-footnote-ref>3</a></sup>.</p>
+<pre><code class="language-rs">//@ rustc-env:RUSTC_BOOTSTRAP=-1
+//@ compile-flags: -Z unstable-options
+//@ regex-error-pattern: error: the option `Z` is only accepted on the nightly compiler
+// This will fail because the `rustc` under test rejects the `-Z unstable-options` unstable flag.
+</code></pre>
+<h2><a href="#pr-listing" aria-hidden="true" class="anchor" id="pr-listing"></a>PR listing</h2>
+<h3><a href="#improvements" aria-hidden="true" class="anchor" id="improvements"></a>Improvements</h3>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>:
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/131913">Add <code>{ignore,needs}-{rustc,std}-debug-assertions</code> directive support #131913</a>.</li>
+<li><a href="https://github.com/rust-lang/rust/pull/132310">Add <code>max-llvm-major-version</code> directive #132310</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/132657">Add AIX run-make support #132657</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/132995">Add <code>exact-llvm-major-version</code> directive #132995</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/133540">Add <code>proc-macro</code> directive #133540</a></li>
+</ul>
+</li>
+<li>rustc:
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/132993">Make rustc consider itself a stable compiler when <code>RUSTC_BOOTSTRAP=-1</code> #132993</a></li>
+</ul>
+</li>
+</ul>
+<h3><a href="#cleanups" aria-hidden="true" class="anchor" id="cleanups"></a>Cleanups</h3>
+<ul>
+<li><a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a>:
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/133470">Delete <code>//@ pretty-expanded</code> directive #133470</a></li>
+</ul>
+</li>
+</ul>
+<h3><a href="#documentation-updates" aria-hidden="true" class="anchor" id="documentation-updates"></a>Documentation updates</h3>
+<ul>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide">rustc-dev-guide</a>:
+<ul>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide/pull/2149">Update <code>//@ proc-macro</code> aux build directive docs #2149</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide/pull/2147">Remove <code>pretty-expanded</code> as it no longer exists #2147</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide/pull/2145">Add instructions to test error code docs #2145</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide/pull/2137">Document how to acquire cdb.exe #2137</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide/pull/2136">Mention <code>RUSTC_BOOTSTRAP</code> for misc testing #2136</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide/pull/2135">Document <code>exact-llvm-major-version</code> directive #2135</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide/pull/2129">Document <code>max-llvm-major-version</code> directive #2129</a></li>
+<li><a href="https://github.com/rust-lang/rustc-dev-guide/pull/2101">Rename <code>{ignore,only}-debug</code> -&gt; <code>{ignore,needs}-{rustc,std}-debug-assertions</code> #2101</a></li>
+</ul>
+</li>
+</ul>
+<h2><a href="#on-going-efforts" aria-hidden="true" class="anchor" id="on-going-efforts"></a>On-going efforts</h2>
+<p>Note: there are certainly many more spontaneous efforts, this is more what I
+know is &quot;planned&quot;.</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust-project-goals/pull/148">Proposed a 2025H1 project goal: compiletest directive handling rework #148</a></li>
+</ul>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-scope">
+<p>The test infra here refers to the test harness <a href="https://github.com/rust-lang/rust/tree/master/src/tools/compiletest">compiletest</a> and
+supporting components in our build system <a href="https://github.com/rust-lang/rust/tree/master/src/bootstrap">bootstrap</a>. This test infra is used
+mainly by rustc and rustdoc. Other tools like cargo, miri or rustfmt maintain
+their own test infra. <a href="#fnref-scope" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-disclaimer">
+<p>This is <em>only</em> for internal testing usages. Anything else that
+relies on this that breaks will be considered PEBKAC. <a href="#fnref-disclaimer" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+<li id="fn-known-bug">
+<p>The <code>//@ rustc-env</code> directive handling has a bug where it's
+white-space sensitive between the colon and the value, so avoid whitespace
+for now. <a href="#fnref-known-bug" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="3" aria-label="Back to reference 3">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

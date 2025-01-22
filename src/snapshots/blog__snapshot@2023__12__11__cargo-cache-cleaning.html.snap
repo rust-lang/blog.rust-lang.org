@@ -1,0 +1,263 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2023/12/11/cargo-cache-cleaning.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cargo cache cleaning | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Cargo cache cleaning | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Cargo cache cleaning | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Cargo cache cleaning" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Cargo cache cleaning</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 11, 2023 &middot; Eric Huss
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/dev-tools#cargo">The Cargo Team</a> 
+    </div>
+
+    <div class="post">
+      <p>Cargo has recently gained an unstable feature on the nightly channel (starting with nightly-2023-11-17) to perform automatic cleaning of cache content within Cargo's home directory.
+This post includes:</p>
+<ul>
+<li>A description of what this means (<a href="#what-is-this-feature">What is this feature?</a>)</li>
+<li>A call for help (<a href="#what-to-watch-out-for">What to watch out for</a> and <a href="#request-for-feedback">Request for feedback</a>)</li>
+<li>Implementation details (<a href="#design-considerations-and-implementation-details">Design considerations and implementation details</a>)</li>
+<li>An outline of what is planned for the future (<a href="#plan-for-the-future">Plan for the future</a>)</li>
+</ul>
+<p>In short, we are asking people who use the nightly channel to enable this feature and report any issues you encounter on the <a href="https://github.com/rust-lang/cargo/issues/">Cargo issue tracker</a>.
+To enable it, place the following in your Cargo config file (typically located in <code>~/.cargo/config.toml</code> or <code>%USERPROFILE%\.cargo\config.toml</code> for Windows):</p>
+<pre><code class="language-toml">[unstable]
+gc = true
+</code></pre>
+<p>Or set the <code>CARGO_UNSTABLE_GC=true</code> environment variable or use the <code>-Zgc</code> CLI flag to turn it on for individual commands.</p>
+<p>We'd particularly like people who use unusual filesystems or environments to give it a try, since there are some parts of the implementation which are sensitive and need battle testing before we turn it on for everyone.</p>
+<h2><a href="#what-is-this-feature" aria-hidden="true" class="anchor" id="what-is-this-feature"></a>What is this feature?</h2>
+<p>Cargo keeps a variety of cached data within the Cargo home directory.
+This cache can grow unbounded and can get quite large (easily reaching many gigabytes).
+Community members have developed tools to manage this cache, such as <a href="https://crates.io/crates/cargo-cache"><code>cargo-cache</code></a>, but cargo itself never exposed any ability to manage it.</p>
+<p>This cache includes:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/cargo/reference/registry-index.html">Registry index data</a>, such as package dependency metadata from <a href="https://crates.io/">crates.io</a>.</li>
+<li>Compressed <code>.crate</code> files downloaded from a registry.</li>
+<li>The uncompressed contents of those <code>.crate</code> files, which <code>rustc</code> uses to read the source and compile dependencies.</li>
+<li>Clones of git repositories used by git dependencies.</li>
+</ul>
+<p>The new garbage collection (&quot;GC&quot;) feature adds tracking of this cache data so that cargo can automatically or manually remove unused files.
+It keeps an SQLite database which tracks the last time the various cache elements have been used.
+Every time you run a cargo command that reads or writes any of this cache data, it will update the database with a timestamp of when that data was last used.</p>
+<p>What isn't yet included is cleaning of target directories, see <a href="#plan-for-the-future">Plan for the future</a>.</p>
+<h3><a href="#automatic-cleaning" aria-hidden="true" class="anchor" id="automatic-cleaning"></a>Automatic cleaning</h3>
+<p>When you run cargo, once a day it will inspect the last-use cache tracker, and determine if any cache elements have not been used in a while.
+If they have not, then they will be automatically deleted.
+This happens with most commands that would normally perform significant work, like <code>cargo build</code> or <code>cargo fetch</code>.</p>
+<p>The default is to delete data that can be locally recreated if it hasn't been used for 1 month, and to delete data that has to be re-downloaded after 3 months.</p>
+<p>Automatic deletion is disabled if cargo is offline such as with <code>--offline</code> or <code>--frozen</code> to avoid deleting artifacts that may need to be used if you are offline for a long period of time.</p>
+<p>The initial implementation has exposed a variety of configuration knobs to control how automatic cleaning works.
+However, it is unlikely we will expose too many low-level details when it is stabilized, so this may change in the future (see issue <a href="https://github.com/rust-lang/cargo/issues/13061">#13061</a>).
+See the <a href="https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#automatic-garbage-collection">Automatic garbage collection</a> section for more details on this configuration.</p>
+<h3><a href="#manual-cleaning" aria-hidden="true" class="anchor" id="manual-cleaning"></a>Manual cleaning</h3>
+<p>If you want to manually delete data from the cache, several options have been added under the <code>cargo clean gc</code> subcommand.
+This subcommand can be used to perform the normal automatic daily cleaning, or to specify different options on which data to remove.
+There are several options for specifying the age of data to delete (such as <code>--max-download-age=3days</code>) or specifying the maximum size of the cache (such as <code>--max-download-size=1GiB</code>).
+See the <a href="https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#manual-garbage-collection-with-cargo-clean">Manual garbage collection</a> section or run <code>cargo clean gc --help</code> for more details on which options are supported.</p>
+<p>This CLI design is only preliminary, and we are looking at determining what the final design will look like when it is stabilized, see issue <a href="https://github.com/rust-lang/cargo/issues/13060">#13060</a>.</p>
+<h2><a href="#what-to-watch-out-for" aria-hidden="true" class="anchor" id="what-to-watch-out-for"></a>What to watch out for</h2>
+<p>After enabling the gc feature, just go about your normal business of using cargo.
+You should be able to observe the SQLite database stored in your cargo home directory at <code>~/.cargo/.global-cache</code>.</p>
+<p>After the first time you use cargo, it will populate the database tracking all the data that already exists in your cargo home directory.
+Then, after 1 month, cargo should start deleting old data, and after 3 months will delete even more data.</p>
+<p>The end result is that after that period of time you should start to notice the home directory using less space overall.</p>
+<p>You can also try out the <code>cargo clean gc</code> command and explore some of its options if you want to try to manually delete some data.</p>
+<p>If you run into problems, you can disable the gc feature and cargo should return to its previous behavior.
+Please let us know on the <a href="https://github.com/rust-lang/cargo/issues/">issue tracker</a> if this happens.</p>
+<h2><a href="#request-for-feedback" aria-hidden="true" class="anchor" id="request-for-feedback"></a>Request for feedback</h2>
+<p>We'd like to hear from you about your experience using this feature.
+Some of the things we are interested in are:</p>
+<ul>
+<li>Have you run into any bugs, errors, issues, or confusing problems?
+Please file an issue over at <a href="https://github.com/rust-lang/cargo/issues/">https://github.com/rust-lang/cargo/issues/</a>.</li>
+<li>The first time that you use cargo with GC enabled, is there an unreasonably long delay?
+Cargo may need to scan your existing cache data once to detect what already exists from previous versions.</li>
+<li>Do you notice unreasonable delays when it performs automatic cleaning once a day?</li>
+<li>Do you have use cases where you need to do cleaning based on the size of the cache?
+If so, please share them at <a href="https://github.com/rust-lang/cargo/issues/13062">#13062</a>.</li>
+<li>If you think you would make use of manually deleting cache data, what are your use cases for doing that?
+Sharing them on <a href="https://github.com/rust-lang/cargo/issues/13060">#13060</a> about the CLI interface might help guide us on the overall design.</li>
+<li>Does the default of deleting 3 month old data seem like a good balance for your use cases?</li>
+</ul>
+<p>Or if you would prefer to share your experiences on Zulip, head over to the <a href="https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo">#t-cargo</a> stream.</p>
+<h2><a href="#design-considerations-and-implementation-details" aria-hidden="true" class="anchor" id="design-considerations-and-implementation-details"></a>Design considerations and implementation details</h2>
+<p>(These sections are only for the intently curious among you.)</p>
+<p>The implementation of this feature had to consider several constraints to try to ensure that it works in nearly all environments, and doesn't introduce a negative experience for users.</p>
+<h3><a href="#performance" aria-hidden="true" class="anchor" id="performance"></a>Performance</h3>
+<p>One big focus was to make sure that the performance of each invocation of <code>cargo</code> is not significantly impacted.
+Cargo needs to potentially save a large chunk of data every time it runs.
+The performance impact will heavily depend on the number of dependencies and your filesystem.
+Preliminary testing shows the impact can be anywhere from 0 to about 50ms.</p>
+<p>In order to minimize the performance impact of actually deleting files, the automatic GC runs only once a day.
+This is intended to balance keeping the cache clean without impacting the performance of daily use.</p>
+<h3><a href="#locking" aria-hidden="true" class="anchor" id="locking"></a>Locking</h3>
+<p>Another big focus is dealing with cache locking.
+Previously, cargo had a single lock on the package cache, which cargo would hold while downloading registry data and performing dependency resolution.
+When cargo is actually running <code>rustc</code>, it previously did not hold a lock under the assumption that existing cache data will not be modified.</p>
+<p>However, now that cargo can modify or delete existing cache data, it needs to be careful to coordinate with anything that might be reading from the cache, such as if multiple cargo commands are run simultaneously.
+To handle this, cargo now has two separate locks, which are used together to provide three separate locking states.
+There is a shared read lock, which allows multiple builds to run in parallel and read from the cache.
+There is a write lock held while downloading registry data, which is independent of the read lock which allows concurrent builds to still run while new packages are downloaded.
+The third state is a write lock that prevents either of the two previous locks from being held, and ensures exclusive access while cleaning the cache.</p>
+<p>Versions of cargo before 1.75 don't know about the exclusive write lock.
+We are hoping that in practice it will be rare to concurrently run old and new cargo versions, and that it is unlikely that the automatic GC will need to delete data that is concurrently in use by an older version.</p>
+<h3><a href="#error-handling-and-filesystems" aria-hidden="true" class="anchor" id="error-handling-and-filesystems"></a>Error handling and filesystems</h3>
+<p>Because we do not want problems with GC from disrupting users, the implementation silently skips the GC if it is unable to acquire an exclusive lock on the package cache.
+Similarly, when cargo saves the timestamp data on every command, it will silently ignore errors if it is unable to open the database, such as if it is on a read-only filesystem, or it is unable to acquire a write lock.
+This may result in the last-use timestamps becoming stale, but hopefully this should not impact most usage scenarios.
+For locking, we are paying special attention to scenarios such as Docker container mounts and network filesystems with questionable locking support.</p>
+<h3><a href="#backwards-compatibility" aria-hidden="true" class="anchor" id="backwards-compatibility"></a>Backwards compatibility</h3>
+<p>Since the cache is used by any version of cargo, we have to pay close attention to forwards and backwards compatibility.
+We benefit from SQLite's particularly stable on-disk data format which has been stable since 2004.
+Cargo has support to do schema migrations within the database that stay backwards compatible.</p>
+<h2><a href="#plan-for-the-future" aria-hidden="true" class="anchor" id="plan-for-the-future"></a>Plan for the future</h2>
+<p>A major aspect of this endeavor is to gain experience with using SQLite in a wide variety of environments, with a plan to extend its usage in several other parts of cargo.</p>
+<h3><a href="#registry-index-metadata" aria-hidden="true" class="anchor" id="registry-index-metadata"></a>Registry index metadata</h3>
+<p>One place where we are looking to introduce SQLite is for the registry index cache.
+When cargo downloads registry index data, it stores it in a custom-designed binary file format to improve lookup performance.
+However, this index cache uses many small files, which may not perform well on some filesystems.</p>
+<p>Additionally, the index cache grows without bound.
+Currently the automatic cache cleaning will only delete an entire index cache if the index itself hasn't been used, which is rarely the case for <a href="https://crates.io/">crates.io</a>.
+We may also need to consider finer-grained timestamp tracking or some mechanism to periodically purge this data.</p>
+<h3><a href="#target-directory-change-tracking-and-cleaning" aria-hidden="true" class="anchor" id="target-directory-change-tracking-and-cleaning"></a>Target directory change tracking and cleaning</h3>
+<p>Another place we are looking to introduce SQLite is for managing the target directory.
+In cargo's target directory, cargo keeps track of information about each crate that has been built with what is called a <em>fingerprint</em>.
+These fingerprints help cargo know if it needs to recompile something.
+Each artifact is tracked with a set of 4 files, using a mixture of custom formats.</p>
+<p>We are looking to replace this system with SQLite which will hopefully bring about several improvements.
+A major focus will be to provide cleaning of stale data in the target directory, which tends to use substantial amount of disk space.
+Additionally we are looking to implement other improvements, such as more accurate fingerprint tracking, provide information about why cargo thinks something needed to be recompiled, and to hopefully improve performance.
+This will be important for the <a href="https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#script">script feature</a>, which uses a global cache for build artifacts, and the future implementation of a globally-shared build cache.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

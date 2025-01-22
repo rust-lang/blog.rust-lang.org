@@ -1,0 +1,272 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2024/09/26/rtn-call-for-testing.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Return type notation MVP: Call for testing! | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Return type notation MVP: Call for testing! | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Return type notation MVP: Call for testing! | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Return type notation MVP: Call for testing!" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Return type notation MVP: Call for testing!</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 26, 2024 &middot; Michael Goulet
+     on behalf of <a href="https://www.rust-lang.org/governance/wgs/wg-async">The Async Working Group</a> 
+    </div>
+
+    <div class="post">
+      <p>The async working group is excited to announce that <a href="https://rust-lang.github.io/rfcs/3654-return-type-notation.html">RFC 3654</a> return type notation (RTN) is ready for testing on nightly Rust. In this post, we'll briefly describe the feature.</p>
+<h2><a href="#the-backstory" aria-hidden="true" class="anchor" id="the-backstory"></a>The backstory</h2>
+<p>Rust 1.75 <a href="https://blog.rust-lang.org/2023/12/21/async-fn-rpit-in-traits.html">stabilized</a> async fn in traits (AFIT) and return-position impl Trait in traits (RPITIT). These desugar to anonymous generic associated types (GATs). However, unlike GATs, users of these types cannot use <code>where</code> clauses to further restrict these return types. This is known as the <a href="https://smallcultfollowing.com/babysteps/blog/2023/02/01/async-trait-send-bounds-part-1-intro/">&quot;send bound&quot;</a> problem, since it often affects <code>Send</code> bounds on futures in the async ecosystem.</p>
+<h3><a href="#an-example" aria-hidden="true" class="anchor" id="an-example"></a>An example</h3>
+<p>Consider a trait <code>Foo</code> with a <code>method</code> that returns a type of <code>impl Future&lt;Output = ()&gt;</code>. We want to write a function that calls <code>method</code> and spawns the future on another thread:</p>
+<pre><code class="language-rust">fn spawn&lt;T&gt;(f: impl Future&lt;Output = T&gt; + Send + 'static) {}
+
+trait Foo {
+    fn method() -&gt; impl Future&lt;Output = ()&gt;; // &lt;-- RPITIT.
+}
+
+fn needs_sendable_future&lt;T: Foo&gt;()
+where
+    // How do we further restrict `T::method()`
+    // to be `Send + 'static`?
+{
+    spawn(T::method());
+    //~^ ERROR: `impl Future&lt;Output = ()&gt;` is not `Send`!
+}
+</code></pre>
+<p>Specifically, we may not want to restrict the <em>declaration</em> of <code>Foo</code>, since changing it in the declaration would restrict <em>all</em> implementations of <code>Foo</code>.</p>
+<pre><code class="language-rust">trait Foo {
+    fn method() -&gt; impl Future&lt;Output = ()&gt; + Send + 'static;
+    //                                      ~~~~~~~~~~~~~~~~
+    //                                      Not what we want.
+}
+</code></pre>
+<p>So, on stable Rust, we have no way of expressing this restriction when using AFIT or RPITIT. In contrast, we can express this today if we were to use a GAT directly:</p>
+<pre><code class="language-rust">trait Foo {
+    type MethodFuture: Future&lt;Output = ()&gt;;
+    fn method() -&gt; Self::MethodFuture;
+}
+
+fn needs_sendable_future&lt;T: Foo&gt;()
+where
+    // We can restrict this to only implementors of `Foo`
+    // whose `MethodFuture` is `Send + 'static`, so we can
+    // call `spawn` below:
+    T::MethodFuture: Send + 'static
+{
+    spawn(T::method());
+}
+</code></pre>
+<p>However, using GATs means that implementors of <code>Foo</code> have to write out the return type explicitly, <code>type MethodFuture = ...</code>, which doesn't (<a href="https://github.com/rust-lang/rust/pull/120700">yet</a>) work if we have an anonymous, unnameable <code>Future</code> type!</p>
+<h2><a href="#the-solution" aria-hidden="true" class="anchor" id="the-solution"></a>The solution</h2>
+<p>In <a href="https://rust-lang.github.io/rfcs/3654-return-type-notation.html">RFC 3654</a> we introduced return type notation (RTN). This will allow us to write <code>where</code> clause bounds that restrict the return types of functions and methods that use async fn in traits (AFIT) and return-position impl Trait in traits (RPITIT). Extending the example above, RTN lets us write:</p>
+<pre><code class="language-rust">fn needs_sendable_future&lt;T: Foo&gt;()
+where
+    T::method(..): Send + 'static // Yay!
+{
+    spawn(T::method());
+    //~^ Works!
+}
+</code></pre>
+<h2><a href="#restrictions" aria-hidden="true" class="anchor" id="restrictions"></a>Restrictions</h2>
+<p>Currently, RTN is only allowed for trait associated functions and methods with lifetime generics (not const or type generics) that use:</p>
+<ul>
+<li>async fn in traits (AFIT) or</li>
+<li>return-position impl Trait in traits (RPITIT) where the impl Trait is the outermost return type, i.e. <code>-&gt; impl Trait</code>, but not <code>-&gt; Box&lt;impl Trait&gt;</code>.</li>
+</ul>
+<p>These restrictions are described in further detail in <a href="https://rust-lang.github.io/rfcs/3654-return-type-notation.html">RFC 3654</a>.</p>
+<h2><a href="#how-do-i-help" aria-hidden="true" class="anchor" id="how-do-i-help"></a>How do I help?</h2>
+<p>We'd love for you to test out this feature on the latest Rust nightly compiler<sup class="footnote-ref"><a href="#fn-nightly" id="fnref-nightly" data-footnote-ref>1</a></sup>.</p>
+<p>Specifically, we'd like for you to identify traits where you're unnecessarily restricting your trait definitions with <code>+ Send</code> or similar bounds:</p>
+<pre><code class="language-rust">// Instead of writing a trait like:
+
+trait Foo {
+    fn method() -&gt; impl Future&lt;Output = ()&gt; + Send + 'static;
+}
+
+// Write this:
+
+trait Foo {
+    async fn method();
+}
+
+// And then at the call site, add:
+
+fn use_foo&lt;T: Foo&gt;()
+where
+    T::method(..): Send + 'static,
+{}
+</code></pre>
+<p>Similarly, we'd like for you to identify traits that currently are returning GATs for the same reason:</p>
+<pre><code class="language-rust">// Instead of writing this in the trait and call site:
+
+trait Foo {
+    type MethodFuture: Future&lt;Output = ()&gt;;
+    fn method() -&gt; Self::MethodFuture;
+}
+
+fn use_foo&lt;T: Foo&gt;()
+where
+    T::MethodFuture: Send + 'static,
+{}
+
+// Write this:
+
+trait Foo {
+    async fn method();
+}
+
+fn use_foo&lt;T: Foo&gt;()
+where
+    T::method(..): Send + 'static,
+{}
+</code></pre>
+<p>Note, however, that we don't yet support RTN in type position. So while, with the first version, you can write:</p>
+<pre><code class="language-rust">struct Bar&lt;T: Foo&gt; {
+    field: T::MethodFuture,
+}
+</code></pre>
+<p>You can't yet, with the second version, write:</p>
+<pre><code class="language-rust">struct Bar&lt;T: Foo&gt; {
+    field: T::method(..),
+}
+</code></pre>
+<p>We'd be interested in hearing about any places where you would run into this limitation.</p>
+<p>We're excited for RTN to make it easier to use async fn in traits (AFIT) in <code>Send</code>-bound-heavy async Rust ecosystems.</p>
+<p>As always, take a look at the <a href="https://rust-lang.github.io/rfcs/3654-return-type-notation.html">RFC</a> itself for a detailed explanation for why we settled on this design, in particular the <a href="https://rust-lang.github.io/rfcs/3654-return-type-notation.html#rationale-and-alternatives">frequently-asked questions and rationale</a>.</p>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-nightly">
+<p>Make sure to run <code>rustup update nightly</code> (or however you manage your Rust releases), since the feature is very new and is still unstable! <a href="#fnref-nightly" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

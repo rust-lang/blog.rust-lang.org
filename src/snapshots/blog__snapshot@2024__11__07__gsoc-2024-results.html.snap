@@ -1,0 +1,267 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/11/07/gsoc-2024-results.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Google Summer of Code 2024 results | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Google Summer of Code 2024 results | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Google Summer of Code 2024 results | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Google Summer of Code 2024 results" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Google Summer of Code 2024 results</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 7, 2024 &middot; Jakub Beránek, Jack Huey and Paul Lenz
+    
+    </div>
+
+    <div class="post">
+      <p>As we have previously <a href="https://blog.rust-lang.org/2024/05/01/gsoc-2024-selected-projects.html">announced</a>, the Rust Project participated
+in <a href="https://summerofcode.withgoogle.com">Google Summer of Code (GSoC)</a> for the first time this year. Nine contributors have been tirelessly working on their exciting projects
+for several months. The projects had various durations; some of them have ended in August, while the last one has been
+concluded in the middle of October. Now that the final reports of all the projects have been submitted, we can happily
+announce that all nine contributors have passed the final review! That means that we have deemed all of their projects to be successful,
+even though they might not have fulfilled all of their original goals (but that was expected).</p>
+<p>We had a lot of great interactions with our GSoC contributors, and based on their feedback, it seems that they were also
+quite happy with the GSoC program and that they had learned a lot. We are of course also incredibly grateful for all their
+contributions - some of them have even continued contributing after their project has ended, which is really awesome.
+In general, we think that Google Summer of Code 2024 was a success for the Rust Project, and we are looking forward to
+participating in GSoC (or similar programs) again in the near future. If you are interested in becoming a (GSoC) contributor,
+check out our <a href="https://github.com/rust-lang/google-summer-of-code">project idea list</a>.</p>
+<p>Below you can find a brief summary of each of our GSoC 2024 projects, including feedback
+from the contributors and mentors themselves. You can find more information about the projects
+<a href="https://github.com/rust-lang/google-summer-of-code/blob/main/gsoc/past/2024.md">here</a>.</p>
+<h3><a href="#adding-lint-level-configuration-to-cargo-semver-checks" aria-hidden="true" class="anchor" id="adding-lint-level-configuration-to-cargo-semver-checks"></a>Adding lint-level configuration to cargo-semver-checks</h3>
+<ul>
+<li>Contributor: <a href="https://github.com/suaviloquence/">Max Carr</a></li>
+<li>Mentor: <a href="https://github.com/obi1kenobi">Predrag Gruevski</a></li>
+<li><a href="https://blog.mcarr.one/gsoc-final/">Final report</a></li>
+</ul>
+<p><a href="https://github.com/obi1kenobi/cargo-semver-checks">cargo-semver-checks</a> is a tool designed for automatically detecting semantic versioning conflicts, which is planned to one day become a part of Cargo itself. The goal of this project was to enable cargo-semver-checks to ship additional <em>opt-in</em> lints by allowing users to configure which lints run in which cases, and whether their findings are reported as errors or warnings. Max achieved this goal by implementing a <a href="https://github.com/obi1kenobi/cargo-semver-checks?tab=readme-ov-file#lint-level-configuration">comprehensive system</a> for configuring <code>cargo-semver-checks</code> lints directly in the <code>Cargo.toml</code> manifest file. He also extensively discussed the design with the Cargo team to ensure that it is compatible with how other Cargo lints are configured, and won't present a future compatibility problem for merging cargo-semver-checks into Cargo.</p>
+<p>Predrag, who is the author of <code>cargo-semver-checks</code> and who mentored Max on this project, was very happy with his contributions that even went beyond his original project scope:</p>
+<blockquote>
+<p>He designed and built one of our most-requested features, and produced design prototypes of several more features our users would love. He also observed that writing quality CLI and functional tests was hard, so he overhauled our test system to make better tests easier to make. Future work on cargo-semver-checks will be much easier thanks to the work Max put in this summer.</p>
+</blockquote>
+<p>Great work, Max!</p>
+<h3><a href="#implementation-of-a-faster-register-allocator-for-cranelift" aria-hidden="true" class="anchor" id="implementation-of-a-faster-register-allocator-for-cranelift"></a>Implementation of a faster register allocator for Cranelift</h3>
+<ul>
+<li>Contributor: <a href="https://github.com/d-sonuga">Demilade Sonuga</a></li>
+<li>Mentors: <a href="https://github.com/cfallin">Chris Fallin</a> and <a href="https://github.com/Amanieu">Amanieu d'Antras</a></li>
+<li><a href="https://d-sonuga.netlify.app/gsoc/regalloc-iii/">Final report</a></li>
+</ul>
+<p>The Rust compiler can use various <em>backends</em> for generating executable code. The main one is of course the LLVM backend, but there are other backends, such as <a href="https://github.com/rust-lang/rustc_codegen_gcc">GCC</a>, <a href="#rust-to-net-compiler---add-support-for-compiling--running-cargo-tests">.NET</a> or <a href="https://github.com/rust-lang/rustc_codegen_cranelift">Cranelift</a>. Cranelift is a code generator for various hardware targets, essentially something similar to LLVM. The Cranelift backend uses Cranelift to compile Rust code into executable code, with the goal of improving compilation performance, especially for debug (unoptimized) builds. Even though this backend can already be faster than the LLVM backend, we have identified that it was slowed down by the register allocator used by Cranelift.</p>
+<p>Register allocation is a well-known compiler task where the compiler decides which registers should hold variables and temporary expressions of a program. Usually, the goal of register allocation is to perform the register assignment in a way that maximizes the runtime performance of the compiled program. However, for unoptimized builds, we often care more about the compilation speed instead.</p>
+<p>Demilade has thus proposed to implement a new Cranelift register allocator called <code>fastalloc</code>, with the goal of making it as fast as possible, at the cost of the quality of the generated code. He was very well-prepared, in fact he had a prototype implementation ready even before his GSoC project has started! However, register allocation is a complex problem, and thus it then took several months to finish the implementation and also optimize it as much as possible. Demilade also made extensive use of fuzzing to make sure that his allocator is robust even in the presence of various edge cases.</p>
+<p>Once the allocator was ready, Demilade benchmarked the Cranelift backend both with the original and his new register allocator using our compiler <a href="https://github.com/rust-lang/rustc-perf">benchmark suite</a>. And the performance results look awesome! With his faster register allocator, the Rust compiler executes up to 18% less instructions across several benchmarks, including complex ones like performing a debug build of Cargo itself. Note that this is an <em>end-to-end</em> performance improvement of the time needed to compile a whole crate, which is really impressive. If you would like to examine the results in more detail or even run the benchmark yourself, check out Demilade's <a href="https://d-sonuga.netlify.app/gsoc/regalloc-iii/">final report</a>, which includes detailed instructions on how to reproduce the benchmark.</p>
+<p>Apart from having the potential to speed up compilation of Rust code, the new register allocator can be also useful for other use-cases, as it can be used in Cranelift on its own (outside the Cranelift codegen backend). What can we can say other than we are very happy with Demilade's work! Note that the new register allocator is not yet available in the Cranelift codegen backend out-of-the-box, but we expect that it will eventually become the default choice for debug builds and that it will thus make compilation of Rust crates using the Cranelift backend faster in the future.</p>
+<h3><a href="#improve-rust-benchmark-suite" aria-hidden="true" class="anchor" id="improve-rust-benchmark-suite"></a>Improve Rust benchmark suite</h3>
+<ul>
+<li>Contributor: <a href="https://github.com/s7tya">Eitaro Kubotera</a></li>
+<li>Mentor: <a href="https://github.com/kobzol">Jakub Beránek</a></li>
+<li><a href="https://gist.github.com/s7tya/96dc1cae4ca9e59841a95f0f48d023d6">Final report</a></li>
+</ul>
+<p>This project was relatively loosely defined, with the overarching goal of improving the user interface of the <a href="https://github.com/rust-lang/rustc-perf">Rust compiler benchmark suite</a>. Eitaro tackled this challenge from various angles at once. He improved the visualization of runtime benchmarks, which were previously a second-class citizen in the benchmark suite, by adding them to our <a href="https://perf.rust-lang.org/dashboard.html">dashboard</a> and by implementing <a href="https://github.com/rust-lang/rustc-perf/pull/1922">historical charts</a> of runtime benchmark results, which help us figure out how is a given benchmark behaving over a longer time span.</p>
+<p>Another improvement that he has worked on was embedding a profiler trace visualizer directly within the <code>rustc-perf</code> website. This was a challenging task, which required him to evaluate several visualizers and figure out a way how to include them within the source code of the benchmark suite in a non-disruptive way. In the end, he managed to integrate <a href="https://ui.perfetto.dev/">Perfetto</a> within the suite website, and also performed various <a href="https://github.com/rust-lang/rustc-perf/pull/1968">optimizations</a> to improve the performance of loading compilation profiles.</p>
+<p>Last, but not least, Eitaro also created a completely new user interface for the benchmark suite, which runs entirely in the <a href="https://github.com/rust-lang/rustc-perf/pull/1955">terminal</a>. Using this interface, Rust compiler contributors can examine the performance of the compiler without having to start the rustc-perf website, which can be challenging to deploy locally.</p>
+<p>Apart from the mentioned contributions, Eitaro also made a lot of other smaller improvements to various parts of the benchmark suite. Thank you for all your work!</p>
+<h3><a href="#move-cargo-shell-completions-to-rust" aria-hidden="true" class="anchor" id="move-cargo-shell-completions-to-rust"></a>Move cargo shell completions to Rust</h3>
+<ul>
+<li>Contributor: <a href="https://github.com/shannmu">shanmu</a></li>
+<li>Mentor: <a href="https://github.com/epage">Ed Page</a></li>
+<li><a href="https://hackmd.io/@PthRWaPvSmS_2Yu_GLbGpg/Hk-ficKpC">Final report</a></li>
+</ul>
+<p>Cargo's completion scripts have been hand maintained and frequently broken when changed. The goal for this effort was to have the completions automatically generated from the definition of Cargo's command-line, with extension points for dynamically generated results.</p>
+<p>shanmu took the prototype for dynamic completions in <a href="https://github.com/clap-rs/clap">clap</a> (the command-line parser used by Cargo), got it working and tested for common shells, as well as extended the parser to cover more cases. They then added extension points for CLI's to provide custom completion results that can be generated on the fly.</p>
+<p>In the next phase, shanmu added this to nightly Cargo and added different custom completers to match what the handwritten completions do. As an example, with this feature enabled, when you type <code>cargo test --test=</code> and hit the Tab key, your shell will autocomplete all the test targets in your current Rust crate! If you are interested, see the <a href="https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#native-completions">instructions</a> for trying this out. The link also lists where you can provide feedback.</p>
+<p>You can also check out the following issues to find out what is left before this can be stabilized:</p>
+<ul>
+<li><a href="https://github.com/clap-rs/clap/issues/3166">clap#3166</a></li>
+<li><a href="https://github.com/rust-lang/cargo/issues/14520">cargo#14520</a></li>
+</ul>
+<h3><a href="#rewriting-esoteric-error-prone-makefile-tests-using-robust-rust-features" aria-hidden="true" class="anchor" id="rewriting-esoteric-error-prone-makefile-tests-using-robust-rust-features"></a>Rewriting esoteric, error-prone makefile tests using robust Rust features</h3>
+<ul>
+<li>Contributor: <a href="https://github.com/Oneirical">Julien Robert</a></li>
+<li>Mentor: <a href="https://github.com/jieyouxu">Jieyou Xu</a></li>
+<li><a href="https://oneirical.github.io/gsocfinal/">Final report</a></li>
+</ul>
+<p>The Rust compiler has several test suites that make sure that it is working correctly under various conditions. One of these suites is the <a href="https://github.com/rust-lang/rust/tree/master/tests/run-make"><code>run-make</code> test suite</a>, whose tests were previously written using <code>Makefile</code>s. However, this setup <a href="https://github.com/rust-lang/rust/issues/40713">posed several problems</a>. It was not possible to run the suite on the Tier 1 Windows MSVC target (<code>x86_64-pc-windows-msvc</code>) and getting it running on Windows at all was quite challenging. Furthermore, the syntax of <code>Makefile</code>s is quite esoteric, which frequently caused mistakes to go unnoticed even when reviewed by multiple people.</p>
+<p>Julien helped to convert the <code>Makefile</code>-based <code>run-make</code> tests into plain Rust-based tests, supported by a test support library called <a href="https://github.com/rust-lang/rust/tree/master/src/tools/run-make-support"><code>run_make_support</code></a>. However, it was not a trivial &quot;rewrite this in Rust&quot; kind of deal. In this project, Julien:</p>
+<ul>
+<li>Significantly improved the test documentation;</li>
+<li>Fixed multiple bugs that were present in the <code>Makefile</code> versions that had gone unnoticed for <em>years</em> -- some tests were never testing anything or silently ignored failures, so even if the subject being tested regressed, these tests would not have caught that.</li>
+<li>Added to and improved the test support library API and implementation; and</li>
+<li>Improved code organization within the tests to make them easier to understand and maintain.</li>
+</ul>
+<p>Just to give you an idea of the scope of his work, he has ported almost <a href="https://github.com/rust-lang/rust/pulls?q=is%3Apr+author%3Aoneirical+is%3Amerged">250</a> Makefile tests over the span of his GSoC project! If you like puns, check out the branch names of Julien's PRs, as they are simply <em>fantestic</em>.</p>
+<p>As a result, Julien has significantly improved the robustness of the <code>run-make</code> test suite, and improved the ergonomics of modifying existing <code>run-make</code> tests and authoring new <code>run-make</code> tests. Multiple contributors have expressed that they were more willing to work with the Rust-based <code>run-make</code> tests over the previous <code>Makefile</code> versions.</p>
+<p>The vast majority of <code>run-make</code> tests <a href="https://github.com/rust-lang/rust/issues/121876">now use the Rust-based test infrastructure</a>, with a few holdouts remaining due to various quirks. After these are resolved, we can finally rip out the legacy <code>Makefile</code> test infrastructure.</p>
+<h3><a href="#rewriting-the-rewrite-trait" aria-hidden="true" class="anchor" id="rewriting-the-rewrite-trait"></a>Rewriting the Rewrite trait</h3>
+<ul>
+<li>Contributor: <a href="https://github.com/ding-young">SeoYoung Lee</a></li>
+<li>Mentor: <a href="https://github.com/ytmimi">Yacin Tmimi</a></li>
+<li><a href="https://ding-young.github.io/posts/gsoc-final/">Final report</a></li>
+</ul>
+<p><a href="https://github.com/rust-lang/rustfmt">rustfmt</a> is a Rust code formatter that is widely used across the Rust ecosystem thanks to its direct integration within Cargo. Usually, you just run <code>cargo fmt</code> and you can immediately enjoy a properly formatted Rust project. However, there are edge cases in which <code>rustfmt</code> can fail to format your code. That is not such an issue on its own, but it becomes more problematic when it fails <em>silently</em>, without giving the user any context about what went wrong. This is what was happening in <code>rustfmt</code>, as many functions simply returned an <code>Option</code> instead of a <code>Result</code>, which made it difficult to add proper error reporting.</p>
+<p>The goal of SeoYoung's project was to perform a large internal refactoring of <code>rustfmt</code> that would allow tracking context about what went wrong during reformatting. In turn, this would enable turning silent failures into proper error messages that could help users examine and debug what went wrong, and could even allow <code>rustfmt</code> to retry formatting in more situations.</p>
+<p>At first, this might sound like an easy task, but performing such large-scale refactoring within a complex project such as <code>rustfmt</code> is not so simple. SeoYoung needed to come up with an approach to incrementally apply these refactors, so that they would be easy to review and wouldn't impact the entire code base at once. She introduced a new trait that enhanced the original <code>Rewrite</code> trait, and modified existing implementations to align with it. She also had to deal with various edge cases that we hadn't anticipated before the project started. SeoYoung was meticulous and systematic with her approach, and made sure that no formatting functions or methods were missed.</p>
+<p>Ultimately, the refactor was a success! Internally, rustfmt now keeps track of more information related to formatting failures, including errors that it could not possibly report before, such as issues with macro formatting. It also has the ability to provide information about source code spans, which helps identify parts of code that require spacing adjustments when exceeding the maximum line width. We don't yet propagate that additional failure context as user facing error messages, as that was a stretch goal that we didn't have time to complete, but SeoYoung has expressed interest in continuing to work on that as a future improvement!</p>
+<p>Apart from working on error context propagation, SeoYoung also made various other improvements that enhanced the overall quality of the codebase, and she was also helping other contributors understand <code>rustfmt</code>. Thank you for making the foundations of formatting better for everyone!</p>
+<h3><a href="#rust-to-net-compiler---add-support-for-compiling--running-cargo-tests" aria-hidden="true" class="anchor" id="rust-to-net-compiler---add-support-for-compiling--running-cargo-tests"></a>Rust to .NET compiler - add support for compiling &amp; running cargo tests</h3>
+<ul>
+<li>Contributor: <a href="https://github.com/FractalFir">Michał Kostrubiec</a></li>
+<li>Mentor: <a href="https://github.com/jackh726">Jack Huey</a></li>
+<li><a href="https://fractalfir.github.io/generated_html/rustc_codegen_clr_v0_2_0.html">Final report</a></li>
+</ul>
+<p>As was already mentioned above, the Rust compiler can be used with various codegen backends. One of these is the <a href="https://github.com/FractalFir/rustc_codegen_clr">.NET backend</a>, which compiles Rust code to the Common Intermediate Language (CIL), which can then be executed by the .NET Common Language Runtime (CLR). This backend allows interoperability of Rust and .NET (e.g. C#) code, in an effort to bring these two ecosystems closer together.</p>
+<p>At the start of this year, the .NET backend was already able to compile complex Rust programs, but it was still lacking certain crucial features. The goal of this GSoC project, implemented by Michał, who is in fact the sole author of the backend, was to extend the functionality of this backend in various areas. As a target goal, he set out to extend the backend so that it could be used to run tests using the <code>cargo test</code> command. Even though it might sound trivial, properly compiling and running the Rust test harness is non-trivial, as it makes use of complex features such as dynamic trait objects, atomics, panics, unwinding or multithreading. These features were especially tricky to implement in this codegen backend, because the LLVM intermediate representation (IR) and CIL have fundamental differences, and not all LLVM intrinsics have .NET equivalents.</p>
+<p>However, this did not stop Michał. He has been working on this project tirelessly, implementing new features, fixing various issues and learning more about the compiler's internals every new day. He has also been documenting his journey with (almost) daily <a href="https://rust-lang.zulipchat.com/#narrow/channel/421156-gsoc/topic/Project.3A.20Rust.20to.20.2ENET.20compiler">updates on Zulip</a>, which were fascinating to read. Once he has reached his original goal, he moved the goalpost up to another level and attempted to run the compiler's own test suite using the .NET backend. This helped him uncover additional edge cases and also led to a refactoring of the whole backend that resulted in significant performance improvements.</p>
+<p>By the end of the GSoC project, the .NET backend was able to properly compile and run almost 90% of the standard library <code>core</code> and <code>std</code> test suite. That is an incredibly impressive number, since the suite contains thousands of tests, some of which are quite <em>arcane</em>. Michał's pace has not slowed down even after the project has ended and he is still continuously improving the backend. Oh, and did we already mention that his backend also has experimental support for emitting <em>C</em> code, effectively acting as a <em>C</em> codegen backend?! Michał has been very busy over the summer.</p>
+<p>We thank Michał for all his work on the .NET backend, as it was truly inspirational, and led to fruitful discussions that were relevant also to other codegen backends. Michał's next goal is to get his backend upstreamed and create an official .NET compilation target, which could open up the doors to Rust becoming a first-class citizen in the .NET ecosystem.</p>
+<h3><a href="#sandboxed-and-deterministic-proc-macro-using-webassembly" aria-hidden="true" class="anchor" id="sandboxed-and-deterministic-proc-macro-using-webassembly"></a>Sandboxed and deterministic proc macro using WebAssembly</h3>
+<ul>
+<li>Contributor: <a href="https://github.com/mav3ri3k">Apurva Mishra</a></li>
+<li>Mentor: <a href="https://github.com/davidlattimore">David Lattimore</a></li>
+<li><a href="https://github.com/mav3ri3k/rust/blob/gsoc24/gsoc24.md">Final report</a></li>
+</ul>
+<p>Rust procedural (proc) macros are currently run as native code that gets compiled to a shared object which is loaded directly into the process of the Rust compiler. Because of this design, these macros can do whatever they want, for example arbitrarily access the filesystem or communicate through a network. This has not only obvious security implications, but it also affects performance, as this design makes it difficult to cache proc macro invocations. Over the years, there have been various discussions about making proc macros more <em>hermetic</em>, for example by compiling them to WebAssembly modules, which can be easily executed in a sandbox. This would also open the possibility of distributing precompiled versions of proc macros via crates.io, to speed up fresh builds of crates that depend on proc macros.</p>
+<p>The goal of this project was to examine what would it take to implement WebAssembly module support for proc macros and create a prototype of this idea. We knew this would be a very ambitious project, especially since Apurva did not have prior experience with contributing to the Rust compiler, and because proc macro internals are very complex. Nevertheless, some progress was made. With the help of his mentor, David, Apurva was able to create a prototype that can load WebAssembly code into the compiler via a shared object. Some work was also done to make use of the existing <code>TokenStream</code> serialization and deserialization code in the compiler's <code>proc_macro</code> crate.</p>
+<p>Even though this project did not fulfill its original goals and more work will be needed in the future to get a functional prototype of WebAssembly proc macros, we are thankful for Apurva's contributions. The WebAssembly loading prototype is a good start, and Apurva's exploration of proc macro internals should serve as a useful reference for anyone working on this feature in the future. Going forward, we will try to describe more incremental steps for our GSoC projects, as this project was perhaps too ambitious from the start.</p>
+<h3><a href="#tokio-async-support-in-miri" aria-hidden="true" class="anchor" id="tokio-async-support-in-miri"></a>Tokio async support in Miri</h3>
+<ul>
+<li>Contributor: <a href="https://github.com/tiif">Tiffany Pek Yuan</a></li>
+<li>Mentor: <a href="https://github.com/oli-obk">Oli Scherer</a></li>
+<li><a href="https://gist.github.com/tiif/3e08ba6e8cfb1d078e6155410108ae48">Final report</a></li>
+</ul>
+<p><a href="https://github.com/rust-lang/miri">miri</a> is an interpreter that can find possible instances of undefined behavior in Rust code. It is being used across the Rust ecosystem, but previously it was not possible to run it on any non-trivial programs (those that ever <code>await</code> on anything) that use <a href="https://tokio.rs/">tokio</a>, due a to a fundamental missing feature: support for the <code>epoll</code> syscall on Linux (and similar APIs on other major platforms).</p>
+<p>Tiffany implemented the basic <code>epoll</code> operations needed to cover the majority of the tokio test suite, by crafting pure <code>libc</code> code examples that exercised those <code>epoll</code> operations, and then implementing their emulation in miri itself. At times, this required refactoring core miri components like file descriptor handling, as they were originally not created with syscalls like <code>epoll</code> in mind.</p>
+<p>Surprising to everyone (though probably not tokio-internals experts), once these core <code>epoll</code> operations were finished, operations like async file reading and writing started working in miri out of the box! Due to limitations of non-blocking file operations offered by operating systems, tokio is wrapping these file operations in dedicated threads, which was already supported by miri.</p>
+<p>Once Tiffany has finished the project, including stretch goals like implementing async file operations, she proceeded to contact tokio maintainers and worked with them to run miri on most tokio tests in CI. And we have good news: so far no soundness problems have been discovered! Tiffany has become a regular contributor to miri, focusing on continuing to expand the set of supported file descriptor operations. We thank her for all her contributions!</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>We are grateful that we could have been a part of the Google Summer of Code 2024 program, and we would also like to extend our gratitude to all our contributors! We are looking forward to joining the GSoC program again next year.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

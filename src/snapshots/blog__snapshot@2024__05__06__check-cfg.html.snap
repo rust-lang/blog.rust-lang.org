@@ -1,0 +1,267 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/05/06/check-cfg.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Automatic checking of cfgs at compile-time | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Automatic checking of cfgs at compile-time | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Automatic checking of cfgs at compile-time | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Automatic checking of cfgs at compile-time" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Automatic checking of cfgs at compile-time</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 6, 2024 &middot; Urgau
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/dev-tools#cargo">The Cargo Team</a> 
+    </div>
+
+    <div class="post">
+      <p>The Cargo and Compiler team are delighted to announce that starting with Rust 1.80 (or nightly-2024-05-05) every <em>reachable</em> <code>#[cfg]</code> will be <strong>automatically checked</strong> that they match the <strong>expected config names and values</strong>.</p>
+<p>This can help with verifying that the crate is correctly handling conditional compilation for different target platforms or features. It ensures that the cfg settings are consistent between what is intended and what is used, helping to catch potential bugs or errors early in the development process.</p>
+<p>This addresses a common pitfall for new and advanced users.</p>
+<p>This is another step to our commitment to provide user-focused tooling and we are eager and excited to finally see it fixed, after more than two years since the original <a href="https://github.com/rust-lang/rfcs/pull/3013">RFC 3013</a><sup class="footnote-ref"><a href="#fn-1" id="fnref-1" data-footnote-ref>1</a></sup>.</p>
+<h2><a href="#a-look-at-the-feature" aria-hidden="true" class="anchor" id="a-look-at-the-feature"></a>A look at the feature</h2>
+<p>Every time a Cargo feature is declared that feature is transformed into a config that is passed to <code>rustc</code> (the Rust compiler) so it can verify with it along with <a href="https://doc.rust-lang.org/nightly/rustc/check-cfg.html#well-known-names-and-values">well known cfgs</a> if any of the <code>#[cfg]</code>, <code>#![cfg_attr]</code> and <code>cfg!</code> have unexpected configs and report a warning with the <code>unexpected_cfgs</code> lint.</p>
+<p><em><code>Cargo.toml</code></em>:</p>
+<pre><code class="language-toml">[package]
+name = &quot;foo&quot;
+
+[features]
+lasers = []
+zapping = []
+</code></pre>
+<p><em><code>src/lib.rs</code>:</em></p>
+<pre><code class="language-rust">#[cfg(feature = &quot;lasers&quot;)]  // This condition is expected
+                            // as &quot;lasers&quot; is an expected value
+                            // of the `feature` cfg
+fn shoot_lasers() {}
+
+#[cfg(feature = &quot;monkeys&quot;)] // This condition is UNEXPECTED
+                            // as &quot;monkeys&quot; is NOT an expected
+                            // value of the `feature` cfg
+fn write_shakespeare() {}
+
+#[cfg(windosw)]             // This condition is UNEXPECTED
+                            // it's supposed to be `windows`
+fn win() {}
+</code></pre>
+<p><em><code>cargo check</code></em>:</p>
+<p><img src="../../../../images/2024-05-06-check-cfg/cargo-check.svg" alt="cargo-check" /></p>
+<h2><a href="#expecting-custom-cfgs" aria-hidden="true" class="anchor" id="expecting-custom-cfgs"></a>Expecting custom cfgs</h2>
+<p><em>UPDATE: This section was added with the release of nightly-2024-05-19.</em></p>
+<blockquote>
+<p>In Cargo point-of-view: a custom cfg is one that is neither defined by <code>rustc</code> nor by a Cargo feature. Think of <code>tokio_unstable</code>, <code>has_foo</code>, ... but not <code>feature = &quot;lasers&quot;</code>, <code>unix</code> or <code>debug_assertions</code></p>
+</blockquote>
+<p>Some crates might use custom cfgs, like <code>loom</code>, <code>fuzzing</code> or <code>tokio_unstable</code> that they expected from the environment (<code>RUSTFLAGS</code> or other means) and which are always statically known at compile time. For those cases, Cargo provides via the <code>[lints]</code> table a way to statically declare those cfgs as expected.</p>
+<p>Defining those custom cfgs as expected is done through the special <code>check-cfg</code> config under <code>[lints.rust.unexpected_cfgs]</code>:</p>
+<p><em><code>Cargo.toml</code></em></p>
+<pre><code class="language-toml">[lints.rust]
+unexpected_cfgs = { level = &quot;warn&quot;, check-cfg = ['cfg(loom)', 'cfg(fuzzing)'] }
+</code></pre>
+<h2><a href="#custom-cfgs-in-build-scripts" aria-hidden="true" class="anchor" id="custom-cfgs-in-build-scripts"></a>Custom cfgs in build scripts</h2>
+<p>On the other hand some crates use custom cfgs that are enabled by some logic in the crate <code>build.rs</code>. For those crates Cargo provides a new instruction: <a href="https://doc.rust-lang.org/nightly/cargo/reference/build-scripts.html#rustc-check-cfg"><code>cargo::rustc-check-cfg</code></a><sup class="footnote-ref"><a href="#fn-2" id="fnref-2" data-footnote-ref>2</a></sup> (or <code>cargo:rustc-check-cfg</code> for older Cargo version).</p>
+<p>The syntax to use is described in the <a href="https://doc.rust-lang.org/nightly/rustc/">rustc book</a> section <a href="https://doc.rust-lang.org/nightly/rustc/check-cfg.html">checking configuration</a>, but in a nutshell the basic syntax of <code>--check-cfg</code> is:</p>
+<pre><code>cfg(name, values(&quot;value1&quot;, &quot;value2&quot;, ..., &quot;valueN&quot;))
+</code></pre>
+<p>Note that every custom cfgs must always be expected, regardless if the cfg is active or not!</p>
+<h3><a href="#buildrs-example" aria-hidden="true" class="anchor" id="buildrs-example"></a><code>build.rs</code> example</h3>
+<p><code>build.rs</code>:</p>
+<pre><code class="language-rust">fn main() {
+    println!(&quot;cargo::rustc-check-cfg=cfg(has_foo)&quot;);
+    //        ^^^^^^^^^^^^^^^^^^^^^^ new with Cargo 1.80
+    if has_foo() {
+        println!(&quot;cargo::rustc-cfg=has_foo&quot;);
+    }
+}
+</code></pre>
+<blockquote>
+<p>Each <code>cargo::rustc-cfg</code> should have an accompanying <strong>unconditional</strong> <code>cargo::rustc-check-cfg</code> directive to avoid warnings like this: <code>unexpected cfg condition name: has_foo</code>.</p>
+</blockquote>
+<h3><a href="#equivalence-table" aria-hidden="true" class="anchor" id="equivalence-table"></a>Equivalence table</h3>
+<table>
+<thead>
+<tr>
+<th><code>cargo::rustc-cfg</code></th>
+<th><code>cargo::rustc-check-cfg</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>foo</code></td>
+<td><code>cfg(foo)</code> or <code>cfg(foo, values(none()))</code></td>
+</tr>
+<tr>
+<td><code>foo=&quot;&quot;</code></td>
+<td><code>cfg(foo, values(&quot;&quot;))</code></td>
+</tr>
+<tr>
+<td><code>foo=&quot;bar&quot;</code></td>
+<td><code>cfg(foo, values(&quot;bar&quot;))</code></td>
+</tr>
+<tr>
+<td><code>foo=&quot;1&quot;</code> and <code>foo=&quot;2&quot;</code></td>
+<td><code>cfg(foo, values(&quot;1&quot;, &quot;2&quot;))</code></td>
+</tr>
+<tr>
+<td><code>foo=&quot;1&quot;</code> and <code>bar=&quot;2&quot;</code></td>
+<td><code>cfg(foo, values(&quot;1&quot;))</code> and <code>cfg(bar, values(&quot;2&quot;))</code></td>
+</tr>
+<tr>
+<td><code>foo</code> and <code>foo=&quot;bar&quot;</code></td>
+<td><code>cfg(foo, values(none(), &quot;bar&quot;))</code></td>
+</tr>
+</tbody>
+</table>
+<p>More details can be found in the <a href="https://doc.rust-lang.org/nightly/rustc/check-cfg.html"><code>rustc</code> book</a>.</p>
+<h2><a href="#frequently-asked-questions" aria-hidden="true" class="anchor" id="frequently-asked-questions"></a>Frequently asked questions</h2>
+<h3><a href="#can-it-be-disabled" aria-hidden="true" class="anchor" id="can-it-be-disabled"></a>Can it be disabled?</h3>
+<p>For Cargo users, the feature is <strong>always on</strong> and <em>cannot</em> be disabled, but like any other lints it can be controlled: <code>#![warn(unexpected_cfgs)]</code>.</p>
+<h3><a href="#does-the-lint-affect-dependencies" aria-hidden="true" class="anchor" id="does-the-lint-affect-dependencies"></a>Does the lint affect dependencies?</h3>
+<p>No, like most lints, <code>unexpected_cfgs</code> will only be reported for local packages thanks to <a href="https://doc.rust-lang.org/rustc/lints/levels.html#capping-lints">cap-lints</a>.</p>
+<h3><a href="#how-does-it-interact-with-the-rustflags-env" aria-hidden="true" class="anchor" id="how-does-it-interact-with-the-rustflags-env"></a>How does it interact with the <code>RUSTFLAGS</code> env?</h3>
+<p>You should be able to use the <code>RUSTFLAGS</code> environment variable like it was before.
+<em>Currently <code>--cfg</code> arguments are not checked, only usage in code are.</em></p>
+<p>This means that doing <code>RUSTFLAGS=&quot;--cfg tokio_unstable&quot; cargo check</code> will not report any warnings, unless <code>tokio_unstable</code> is used within your local crates, in which case crate author will need to make sure that that custom cfg is expected with <code>cargo::rustc-check-cfg</code> in the <code>build.rs</code> of that crate.</p>
+<h3><a href="#how-to-expect-custom-cfgs-without-a-buildrs" aria-hidden="true" class="anchor" id="how-to-expect-custom-cfgs-without-a-buildrs"></a>How to expect custom cfgs without a <code>build.rs</code>?</h3>
+<p><em>UPDATE: Cargo with nightly-2024-05-19 now provides the <code>[lints.rust.unexpected_cfgs.check-cfg]</code> config to address the statically known custom cfgs.</em></p>
+<p><del>There is <strong>currently no way</strong> to expect a custom cfg other than with <code>cargo::rustc-check-cfg</code> in a <code>build.rs</code>.</del></p>
+<p>Crate authors that don't want to use a <code>build.rs</code> and cannot use <code>[lints.rust.unexpected_cfgs.check-cfg]</code>, are encouraged to use Cargo features instead.</p>
+<h3><a href="#how-does-it-interact-with-other-build-systems" aria-hidden="true" class="anchor" id="how-does-it-interact-with-other-build-systems"></a>How does it interact with other build systems?</h3>
+<p>Non-Cargo based build systems are not affected by the lint by default. Build system authors that wish to have the same functionality should look at the <code>rustc</code> documentation for the <a href="https://doc.rust-lang.org/nightly/rustc/check-cfg.html"><code>--check-cfg</code></a> flag for a detailed explanation of how to achieve the same functionality.</p>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-1">
+<p>The stabilized implementation and RFC 3013 diverge significantly, in particular there is only one form for <code>--check-cfg</code>: <code>cfg()</code> (instead of <code>values()</code> and <code>names()</code> being incomplete and subtlety incompatible with each other). <a href="#fnref-1" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-2">
+<p><code>cargo::rustc-check-cfg</code> will start working in Rust 1.80 (or nightly-2024-05-05). From Rust 1.77 to Rust 1.79 <em>(inclusive)</em> it is silently ignored. In Rust 1.76 and below a warning is emitted when used without the unstable Cargo flag <code>-Zcheck-cfg</code>. <a href="#fnref-2" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

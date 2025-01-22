@@ -1,0 +1,340 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2025/02/20/Rust-1.85.0.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.85.0 and Rust 2024 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Announcing Rust 1.85.0 and Rust 2024 | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Announcing Rust 1.85.0 and Rust 2024 | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Announcing Rust 1.85.0 and Rust 2024" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.85.0 and Rust 2024</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 20, 2025 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.85.0. This stabilizes the 2024 edition as well.
+Rust is a programming language empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via <code>rustup</code>, you can get 1.85.0 with:</p>
+<pre><code class="language-console">$ rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website, and check out the <a href="https://doc.rust-lang.org/stable/releases.html#version-1850-2025-02-20">detailed release notes for 1.85.0</a>.</p>
+<p>If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (<code>rustup default beta</code>) or the nightly channel (<code>rustup default nightly</code>). Please <a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you might come across!</p>
+<h2><a href="#whats-in-1850-stable" aria-hidden="true" class="anchor" id="whats-in-1850-stable"></a>What's in 1.85.0 stable</h2>
+<h3><a href="#rust-2024" aria-hidden="true" class="anchor" id="rust-2024"></a>Rust 2024</h3>
+<p>We are excited to announce that the Rust 2024 Edition is now stable!
+Editions are a mechanism for opt-in changes that may otherwise pose a backwards compatibility risk. See <a href="https://doc.rust-lang.org/edition-guide/editions/index.html">the edition guide</a> for details on how this is achieved, and detailed instructions on how to migrate.</p>
+<p>This is the largest edition we have released. The <a href="https://doc.rust-lang.org/edition-guide/rust-2024/index.html">edition guide</a> contains detailed information about each change, but as a summary, here are all the changes:</p>
+<ul>
+<li>Language
+<ul>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/rpit-lifetime-capture.html">RPIT lifetime capture rules</a> — Changes the default capturing of parameters by <code>impl Trait</code> types when <code>use&lt;..&gt;</code> is not present.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/temporary-if-let-scope.html"><code>if let</code> temporary scope</a> — Changes the scope of temporaries for <code>if let</code> expressions.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/temporary-tail-expr-scope.html">Tail expression temporary scope</a> — Changes the scope of temporaries for the tail expression in a block.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html">Match ergonomics reservations</a> — Disallow some pattern combinations to avoid confusion and allow for future improvements.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html">Unsafe <code>extern</code> blocks</a> — <code>extern</code> blocks now require the <code>unsafe</code> keyword.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-attributes.html">Unsafe attributes</a> — The <code>export_name</code>, <code>link_section</code>, and <code>no_mangle</code> attributes must now be marked as <code>unsafe</code>.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html"><code>unsafe_op_in_unsafe_fn</code> warning</a> — The <a href="https://doc.rust-lang.org/rustc/lints/listing/allowed-by-default.html#unsafe-op-in-unsafe-fn"><code>unsafe_op_in_unsafe_fn</code></a> lint now warns by default, requiring explicit <code>unsafe {}</code> blocks in <code>unsafe</code> functions.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/static-mut-references.html">Disallow references to <code>static mut</code></a> — References to <code>static mut</code> items now generate a deny-by-default error.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/never-type-fallback.html">Never type fallback change</a> — Changes to how the never type <code>!</code> coerces, and changes the <a href="https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html#never-type-fallback-flowing-into-unsafe"><code>never_type_fallback_flowing_into_unsafe</code></a> lint level to &quot;deny&quot;.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/macro-fragment-specifiers.html">Macro fragment specifiers</a> — The <code>expr</code> macro fragment specifier in <code>macro_rules!</code> macros now also matches <code>const</code> and <code>_</code> expressions.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/missing-macro-fragment-specifiers.html">Missing macro fragment specifiers</a> — The <a href="https://doc.rust-lang.org/rustc/lints/listing/deny-by-default.html#missing-fragment-specifier"><code>missing_fragment_specifier</code></a> lint is now a hard error, rejecting macro meta variables without a fragment specifier kind.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/gen-keyword.html"><code>gen</code> keyword</a> — Reserves the <code>gen</code> keyword in anticipation of adding generator blocks in the future.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/reserved-syntax.html">Reserved syntax</a> — Reserves <code>#&quot;foo&quot;#</code> style strings and <code>##</code> tokens in anticipation of changing how guarded string literals may be parsed in the future.</li>
+</ul>
+</li>
+<li>Standard library
+<ul>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/prelude.html">Changes to the prelude</a> — Adds <code>Future</code> and <code>IntoFuture</code> to the prelude.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/intoiterator-box-slice.html">Add <code>IntoIterator</code> for <code>Box&lt;[T]&gt;</code></a> — Changes how iterators work with boxed slices.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/newly-unsafe-functions.html">Newly unsafe functions</a> — <code>std::env::set_var</code>, <code>std::env::remove_var</code>, and <code>std::os::unix::process::CommandExt::before_exec</code> are now unsafe functions.</li>
+</ul>
+</li>
+<li>Cargo
+<ul>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/cargo-resolver.html">Cargo: Rust-version aware resolver</a> — Changes the default dependency resolver behavior to consider the <code>rust-version</code> field.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/cargo-table-key-names.html">Cargo: Table and key name consistency</a> — Removes some outdated <code>Cargo.toml</code> keys.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/cargo-inherited-default-features.html">Cargo: Reject unused inherited default-features</a> — Changes how <code>default-features = false</code> works with inherited workspace dependencies.</li>
+</ul>
+</li>
+<li>Rustdoc
+<ul>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/rustdoc-doctests.html">Rustdoc combined tests</a> — Doctests are now combined into a single executable, significantly improving performance.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/rustdoc-nested-includes.html">Rustdoc nested <code>include!</code> change</a> — Changes to the relative path behavior of nested <code>include!</code> files.</li>
+</ul>
+</li>
+<li>Rustfmt
+<ul>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/rustfmt-style-edition.html">Rustfmt: Style edition</a> — Introduces the concept of &quot;style editions&quot;, which allow you to independently control the formatting edition from the Rust edition.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/rustfmt-formatting-fixes.html">Rustfmt: Formatting fixes</a> — A large number of fixes to formatting various situations.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/rustfmt-raw-identifier-sorting.html">Rustfmt: Raw identifier sorting</a> — Changes to how <code>r#foo</code> identifiers are sorted.</li>
+<li><a href="https://doc.rust-lang.org/edition-guide/rust-2024/rustfmt-version-sorting.html">Rustfmt: Version sorting</a> — Changes to how identifiers that contain integers are sorted.</li>
+</ul>
+</li>
+</ul>
+<h4><a href="#migrating-to-2024" aria-hidden="true" class="anchor" id="migrating-to-2024"></a>Migrating to 2024</h4>
+<p>The guide includes migration instructions for all new features, and in general
+<a href="https://doc.rust-lang.org/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html">transitioning an existing project to a new edition</a>.
+In many cases <code>cargo fix</code> can automate the necessary changes. You may even find that no changes in your code are needed at all for 2024!</p>
+<p>Note that automatic fixes via <code>cargo fix</code> are very conservative to avoid ever changing the semantics of your code. In many cases you may wish to keep your code the same and use the new semantics of Rust 2024; for instance, continuing to use the <code>expr</code> macro matcher, and ignoring the conversions of conditionals because you want the new 2024 drop order semantics. The result of <code>cargo fix</code> should not be considered a recommendation, just a conservative conversion that preserves behavior.</p>
+<p><em>Many</em> people came together to create this edition. We'd like to thank them all for their hard work!</p>
+<h3><a href="#async-closures" aria-hidden="true" class="anchor" id="async-closures"></a><code>async</code> closures</h3>
+<p>Rust now supports asynchronous closures like <code>async || {}</code> which return futures when called. This works like an <code>async fn</code> which can also capture values from the local environment, just like the difference between regular closures and functions. This also comes with 3 analogous traits in the standard library prelude: <code>AsyncFn</code>, <code>AsyncFnMut</code>, and <code>AsyncFnOnce</code>.</p>
+<p>In some cases, you could already approximate this with a regular closure and an asynchronous block, like <code>|| async {}</code>. However, the future returned by such an inner block is not able to borrow from the closure captures, but this does work with <code>async</code> closures:</p>
+<pre><code class="language-rust">let mut vec: Vec&lt;String&gt; = vec![];
+
+let closure = async || {
+    vec.push(ready(String::from(&quot;&quot;)).await);
+};
+</code></pre>
+<p>It also has not been possible to properly express higher-ranked function signatures with the <code>Fn</code> traits returning a <code>Future</code>, but you can write this with the <code>AsyncFn</code> traits:</p>
+<pre><code class="language-rust">use core::future::Future;
+async fn f&lt;Fut&gt;(_: impl for&lt;'a&gt; Fn(&amp;'a u8) -&gt; Fut)
+where
+    Fut: Future&lt;Output = ()&gt;,
+{ todo!() }
+
+async fn f2(_: impl for&lt;'a&gt; AsyncFn(&amp;'a u8))
+{ todo!() }
+
+async fn main() {
+    async fn g(_: &amp;u8) { todo!() }
+    f(g).await;
+    //~^ ERROR mismatched types
+    //~| ERROR one type is more general than the other
+
+    f2(g).await; // ok!
+}
+</code></pre>
+<p>So <code>async</code> closures provide first-class solutions to both of these problems! See <a href="https://rust-lang.github.io/rfcs/3668-async-closures.html">RFC 3668</a> and the <a href="https://github.com/rust-lang/rust/pull/132706">stabilization report</a> for more details.</p>
+<h3><a href="#hiding-trait-implementations-from-diagnostics" aria-hidden="true" class="anchor" id="hiding-trait-implementations-from-diagnostics"></a>Hiding trait implementations from diagnostics</h3>
+<p>The new <code>#[diagnostic::do_not_recommend]</code> attribute is a hint to the compiler to not show the annotated trait implementation as part of a diagnostic message. For library authors, this is a way to keep the compiler from making suggestions that may be unhelpful or misleading. For example:</p>
+<pre><code class="language-rust">pub trait Foo {}
+pub trait Bar {}
+
+impl&lt;T: Foo&gt; Bar for T {}
+
+struct MyType;
+
+fn main() {
+    let _object: &amp;dyn Bar = &amp;MyType;
+}
+</code></pre>
+<pre><code class="language-text">error[E0277]: the trait bound `MyType: Bar` is not satisfied
+ --&gt; src/main.rs:9:29
+  |
+9 |     let _object: &amp;dyn Bar = &amp;MyType;
+  |                             ^^^^ the trait `Foo` is not implemented for `MyType`
+  |
+note: required for `MyType` to implement `Bar`
+ --&gt; src/main.rs:4:14
+  |
+4 | impl&lt;T: Foo&gt; Bar for T {}
+  |         ---  ^^^     ^
+  |         |
+  |         unsatisfied trait bound introduced here
+  = note: required for the cast from `&amp;MyType` to `&amp;dyn Bar`
+</code></pre>
+<p>For some APIs, it might make good sense for you to implement <code>Foo</code>, and get <code>Bar</code> indirectly by that blanket implementation. For others, it might be expected that most users should implement <code>Bar</code> directly, so that <code>Foo</code> suggestion is a red herring. In that case, adding the diagnostic hint will change the error message like so:</p>
+<pre><code class="language-rust">#[diagnostic::do_not_recommend]
+impl&lt;T: Foo&gt; Bar for T {}
+</code></pre>
+<pre><code class="language-text">error[E0277]: the trait bound `MyType: Bar` is not satisfied
+  --&gt; src/main.rs:10:29
+   |
+10 |     let _object: &amp;dyn Bar = &amp;MyType;
+   |                             ^^^^ the trait `Bar` is not implemented for `MyType`
+   |
+   = note: required for the cast from `&amp;MyType` to `&amp;dyn Bar`
+</code></pre>
+<p>See <a href="https://rust-lang.github.io/rfcs/2397-do-not-recommend.html">RFC 2397</a> for the original motivation, and the current <a href="https://doc.rust-lang.org/reference/attributes/diagnostics.html#the-diagnosticdo_not_recommend-attribute">reference</a> for more details.</p>
+<h3><a href="#fromiterator-and-extend-for-tuples" aria-hidden="true" class="anchor" id="fromiterator-and-extend-for-tuples"></a><code>FromIterator</code> and <code>Extend</code> for tuples</h3>
+<p>Earlier versions of Rust implemented convenience traits for iterators of <code>(T, U)</code> tuple pairs to behave like <code>Iterator::unzip</code>, with <code>Extend</code> in 1.56 and <code>FromIterator</code> in 1.79. These have now been <em>extended</em> to more tuple lengths, from singleton <code>(T,)</code> through to 12 items long, <code>(T1, T2, .., T11, T12)</code>. For example, you can now use <code>collect()</code> to fanout into multiple collections at once:</p>
+<pre><code class="language-rust">use std::collections::{LinkedList, VecDeque};
+fn main() {
+    let (squares, cubes, tesseracts): (Vec&lt;_&gt;, VecDeque&lt;_&gt;, LinkedList&lt;_&gt;) =
+        (0i32..10).map(|i| (i * i, i.pow(3), i.pow(4))).collect();
+    println!(&quot;{squares:?}&quot;);
+    println!(&quot;{cubes:?}&quot;);
+    println!(&quot;{tesseracts:?}&quot;);
+}
+</code></pre>
+<pre><code class="language-text">[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+[0, 1, 8, 27, 64, 125, 216, 343, 512, 729]
+[0, 1, 16, 81, 256, 625, 1296, 2401, 4096, 6561]
+</code></pre>
+<h3><a href="#updates-to-stdenvhome_dir" aria-hidden="true" class="anchor" id="updates-to-stdenvhome_dir"></a>Updates to <code>std::env::home_dir()</code></h3>
+<p><code>std::env::home_dir()</code> has been deprecated for years, because it can give surprising results in some Windows configurations if the <code>HOME</code> environment variable is set (which is not the normal configuration on Windows). We had previously avoided changing its behavior, out of concern for compatibility with code depending on this non-standard configuration. Given how long this function has been deprecated, we're now updating its behavior as a bug fix, and a subsequent release will remove the deprecation for this function.</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/hash/struct.BuildHasherDefault.html#method.new"><code>BuildHasherDefault::new</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/ptr/fn.fn_addr_eq.html"><code>ptr::fn_addr_eq</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.QuotaExceeded"><code>io::ErrorKind::QuotaExceeded</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.CrossesDevices"><code>io::ErrorKind::CrossesDevices</code></a></li>
+<li><a href="https://doc.rust-lang.org/core/primitive.f32.html#method.midpoint"><code>{float}::midpoint</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/primitive.u64.html#method.midpoint">Unsigned <code>{integer}::midpoint</code></a></li>
+<li><a href="https://doc.rust-lang.org/std/num/type.NonZeroU32.html#method.midpoint"><code>NonZeroU*::midpoint</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/iter/trait.Extend.html#impl-Extend%3C(A,)%3E-for-(EA,)">impl <code>std::iter::Extend</code> for tuples with arity 1 through 12</a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/iter/trait.FromIterator.html#impl-FromIterator%3C(EA,)%3E-for-(A,)"><code>FromIterator&lt;(A, ...)&gt;</code> for tuples with arity 1 through 12</a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/task/struct.Waker.html#method.noop"><code>std::task::Waker::noop</code></a></li>
+</ul>
+<p>These APIs are now stable in const contexts</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/fn.size_of_val.html"><code>mem::size_of_val</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/fn.align_of_val.html"><code>mem::align_of_val</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.for_value"><code>Layout::for_value</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.align_to"><code>Layout::align_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.pad_to_align"><code>Layout::pad_to_align</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.extend"><code>Layout::extend</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/alloc/struct.Layout.html#method.array"><code>Layout::array</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/fn.swap.html"><code>std::mem::swap</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ptr/fn.swap.html"><code>std::ptr::swap</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/ptr/struct.NonNull.html#method.new"><code>NonNull::new</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/struct.HashMap.html#method.with_hasher"><code>HashMap::with_hasher</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/struct.HashSet.html#method.with_hasher"><code>HashSet::with_hasher</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/hash/struct.BuildHasherDefault.html#method.new"><code>BuildHasherDefault::new</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f32.html#method.recip"><code>&lt;float&gt;::recip</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f32.html#method.to_degrees"><code>&lt;float&gt;::to_degrees</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f32.html#method.to_radians"><code>&lt;float&gt;::to_radians</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f32.html#method.max"><code>&lt;float&gt;::max</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f32.html#method.min"><code>&lt;float&gt;::min</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f32.html#method.clamp"><code>&lt;float&gt;::clamp</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f32.html#method.abs"><code>&lt;float&gt;::abs</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f32.html#method.signum"><code>&lt;float&gt;::signum</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/primitive.f32.html#method.copysign"><code>&lt;float&gt;::copysign</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html#method.write"><code>MaybeUninit::write</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>Check out everything that changed in <a href="https://github.com/rust-lang/rust/releases/tag/1.85.0">Rust</a>, <a href="https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-185-2025-02-20">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-185">Clippy</a>.</p>
+<h2><a href="#contributors-to-1850" aria-hidden="true" class="anchor" id="contributors-to-1850"></a>Contributors to 1.85.0</h2>
+<p>Many people came together to create Rust 1.85.0. We couldn't have done it without all of you. <a href="https://thanks.rust-lang.org/rust/1.85.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,187 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2023/11/13/leadership-council-update.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>November 2023 Leadership Council Update | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="November 2023 Leadership Council Update | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="November 2023 Leadership Council Update | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="November 2023 Leadership Council Update" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>November 2023 Leadership Council Update</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 13, 2023 &middot; Leadership Council
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/leadership-council">Leadership Council</a> 
+    </div>
+
+    <div class="post">
+      <p>Hello again from the Rust Leadership Council!
+We wanted to share an update on what the Council has been working on since <a href="https://blog.rust-lang.org/inside-rust/2023/07/25/leadership-council-update.html">our last update</a>.</p>
+<h2><a href="#accomplishments-so-far" aria-hidden="true" class="anchor" id="accomplishments-so-far"></a>Accomplishments so far</h2>
+<p>We have elected new project directors!
+Through the great work of the <a href="https://github.com/rust-lang/leadership-council/blob/main/committees/project-director-election-process.md">Project Director Election Process Committee</a>,
+we have defined a <a href="https://github.com/rust-lang/leadership-council/blob/main/policies/project-director-election-process.md">process</a> for selecting Project Directors for the Rust Foundation Board of Directors.
+We carried out the process, and <a href="https://blog.rust-lang.org/2023/10/19/announcing-the-new-rust-project-directors.html">recently announced</a> the new directors.
+We will be following up with a retrospective to identify what went well and what can be improved,
+and feed those improvements back into the process for next year.</p>
+<p>We have established a new home for Project governance documentation at <a href="https://forge.rust-lang.org/governance/index.html">https://forge.rust-lang.org/governance/index.html</a>.
+As changes to the governance policies are accepted via the RFC process,
+we intend to update this documentation so that there is a single place for the current policy.
+Additionally, we plan to grow this documentation to include more Project-wide policies,
+and to possibly include information about the teams within the Project.</p>
+<p>Additionally, the <a href="https://forge.rust-lang.org/">Rust Forge</a> has been updated to grant merge permissions to anyone on the teams hosting content there.
+Any team that wants to include their own content on the Forge is welcome to add themselves to the <a href="https://github.com/rust-lang/team/blob/master/repos/rust-lang/rust-forge.toml">permissions list</a>.</p>
+<p>The documentation at <a href="https://github.com/rust-lang/leadership-council">https://github.com/rust-lang/leadership-council</a> has been updated with some more information about how the Council itself works internally.
+The Council issue backlog is now being tracked at <a href="https://github.com/rust-lang/leadership-council/issues">https://github.com/rust-lang/leadership-council/issues</a>,
+along with <a href="https://github.com/rust-lang/leadership-council/blob/main/procedures/issues.md">documentation</a> on how Council issue tracking is intended to work.
+Anyone is welcome to open an issue if you have a question or have a proposal for some new policy or process.</p>
+<p>Additionally, we are now tracking a <a href="https://github.com/rust-lang/leadership-council/blob/main/procedures/schedule.md">schedule</a> of upcoming and recurring events and deadlines for the Council.
+Although this is a somewhat primitive system, it can be helpful to keep an eye on tasks.</p>
+<p>We have added a process for having <a href="https://github.com/rust-lang/leadership-council/blob/main/procedures/meeting-observers.md">observers join the Council meetings</a>.
+If a Rust Project team member is interested in joining the meeting, just let us know on Zulip or contact a Council member.</p>
+<p>We have accepted <a href="https://github.com/rust-lang/rfcs/pull/3501">RFC 3501</a> to start the process to release the 2024 Edition next year, to set up a <a href="https://github.com/rust-lang/team/blob/3f4b22485abf0179a79b5ca37154ac5e0ab940e6/teams/project-edition-2024.toml">group</a> to make that happen, and to set a regular cadence moving forward.
+We are looking forward to getting this process underway.
+If you are interested in helping with the 2024 Edition, please join us on the <a href="https://rust-lang.zulipchat.com/#narrow/stream/268952-edition">#edition</a> Zulip stream.</p>
+<p>Thanks to the help of the infrastructure team,
+there is now an official Mastodon server currently hosting the <a href="https://social.rust-lang.org/@rust">@rust@social.rust-lang.org</a> account.
+This account will be posting the same as the <a href="https://twitter.com/rustlang">@rustlang</a> Twitter/X account.</p>
+<p>The beginning steps have started with defining the <a href="https://blog.rust-lang.org/inside-rust/2023/08/25/leadership-initiatives.html">&quot;shape of the Rust Project&quot;</a> initiative.
+We hope to have more to share on this in the coming months as we start ramping up.
+For anyone that is interested in participating, please join us on Zulip in the <a href="https://rust-lang.zulipchat.com/#narrow/stream/392734-council/topic/.22Shape.22.20discussions">#council</a> stream.</p>
+<h2><a href="#meeting-minutes" aria-hidden="true" class="anchor" id="meeting-minutes"></a>Meeting Minutes</h2>
+<p>We publish minutes from all Council meetings to the <a href="https://github.com/rust-lang/leadership-council/tree/main/minutes">Leadership Council repo</a>.
+Links to the minutes since our last update are:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2023-08-03.md">August 3, 2023</a></li>
+<li><a href="https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2023-08-14.md">August 14, 2023</a></li>
+<li><a href="https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2023-09-07.md">September 7, 2023</a></li>
+<li><a href="https://github.com/rust-lang/leadership-council/blob/main/minutes/sync-meeting/2023-10-27.md">October 27, 2023</a></li>
+</ul>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,309 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/09/05/impl-trait-capture-rules.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Changes to &#x60;impl Trait&#x60; in Rust 2024 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Changes to &#x60;impl Trait&#x60; in Rust 2024 | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Changes to &#x60;impl Trait&#x60; in Rust 2024 | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Changes to &#x60;impl Trait&#x60; in Rust 2024" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Changes to &#x60;impl Trait&#x60; in Rust 2024</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 5, 2024 &middot; Niko Matsakis
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang">the language team</a> 
+    </div>
+
+    <div class="post">
+      <p>The default way <code>impl Trait</code> works in return position is changing in Rust 2024. These changes are meant to simplify <code>impl Trait</code> to better match what people want most of the time. We're also adding a flexible syntax that gives you full control when you need it.</p>
+<h2><a href="#tldr" aria-hidden="true" class="anchor" id="tldr"></a>TL;DR</h2>
+<p>Starting in Rust 2024, we are changing the rules for when a generic parameter can be used in the hidden type of a return-position <code>impl Trait</code>:</p>
+<ul>
+<li>a new default that the hidden types for a return-position <code>impl Trait</code> can use <strong>any</strong> generic parameter in scope, instead of only types (applicable only in Rust 2024);</li>
+<li>a syntax to declare explicitly what types may be used (usable in any edition).</li>
+</ul>
+<p>The new explicit syntax is called a &quot;use bound&quot;: <code>impl Trait + use&lt;'x, T&gt;</code>, for example, would indicate that the hidden type is allowed to use <code>'x</code> and <code>T</code> (but not any other generic parameters in scope).</p>
+<p>Read on for the details!</p>
+<h2><a href="#background-return-position-impl-trait" aria-hidden="true" class="anchor" id="background-return-position-impl-trait"></a>Background: return-position <code>impl Trait</code></h2>
+<p>This blog post concerns <em>return-position <code>impl Trait</code></em>, such as the following example:</p>
+<pre><code class="language-rust">fn process_data(
+    data: &amp;[Datum]
+) -&gt; impl Iterator&lt;Item = ProcessedDatum&gt; {
+    data
+        .iter()
+        .map(|datum| datum.process())
+}
+</code></pre>
+<p>The use of <code>-&gt; impl Iterator</code> in return position here means that the function returns &quot;some kind of iterator&quot;. The actual type will be determined by the compiler based on the function body. It is called the &quot;hidden type&quot; because callers do not get to know exactly what it is; they have to code against the <code>Iterator</code> trait. However, at code generation time, the compiler will generate code based on the actual precise type, which ensures that callers are fully optimized.</p>
+<p>Although callers don't know the exact type, they do need to know that it will continue to borrow the <code>data</code> argument so that they can ensure that the <code>data</code> reference remains valid while iteration occurs. Further, callers must be able to figure this out based solely on the type signature, without looking at the function body.</p>
+<p>Rust's current rules are that a return-position <code>impl Trait</code> value can only use a reference if the lifetime of that reference appears in the <code>impl Trait</code> itself. In this example, <code>impl Iterator&lt;Item = ProcessedDatum&gt;</code> does not reference any lifetimes, and therefore capturing <code>data</code> is illegal. You can see this for yourself <a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=2448fc4ec9e763c538aaba897433f9b5">on the playground</a>.</p>
+<p>The error message (&quot;hidden type captures lifetime&quot;) you get in this scenario is not the most intuitive, but it does come with a useful suggestion for how to fix it:</p>
+<pre><code>help: to declare that
+      `impl Iterator&lt;Item = ProcessedDatum&gt;`
+      captures `'_`, you can add an
+      explicit `'_` lifetime bound
+  |
+5 | ) -&gt; impl Iterator&lt;Item = ProcessedDatum&gt; + '_ {
+  |                                           ++++
+</code></pre>
+<p>Following a slightly more explicit version of this advice, the function signature becomes:</p>
+<pre><code class="language-rust">fn process_data&lt;'d&gt;(
+    data: &amp;'d [Datum]
+) -&gt; impl Iterator&lt;Item = ProcessedDatum&gt; + 'd {
+    data
+        .iter()
+        .map(|datum| datum.process())
+}
+</code></pre>
+<p>In this version, the lifetime <code>'d</code> of the data is explicitly referenced in the <code>impl Trait</code> type, and so it is allowed to be used. This is also a signal to the caller that the borrow for <code>data</code> must last as long as the iterator is in use, which means that it (correctly) flags an error in an example like this (<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=afd9278ac887c0b2fc08bc868200808f">try it on the playground</a>):</p>
+<pre><code class="language-rust">let mut data: Vec&lt;Datum&gt; = vec![Datum::default()];
+let iter = process_data(&amp;data);
+data.push(Datum::default()); // &lt;-- Error!
+iter.next();
+</code></pre>
+<h2><a href="#usability-problems-with-this-design" aria-hidden="true" class="anchor" id="usability-problems-with-this-design"></a>Usability problems with this design</h2>
+<p>The rules for what generic parameters can be used in an <code>impl Trait</code> were decided early on based on a limited set of examples. Over time we have noticed a number of problems with them.</p>
+<h3><a href="#not-the-right-default" aria-hidden="true" class="anchor" id="not-the-right-default"></a>not the right default</h3>
+<p>Surveys of major codebases (both the compiler and crates on crates.io) found that the vast majority of return-position impl trait values need to use lifetimes, so the default behavior of not capturing is not helpful.</p>
+<h3><a href="#not-sufficiently-flexible" aria-hidden="true" class="anchor" id="not-sufficiently-flexible"></a>not sufficiently flexible</h3>
+<p>The current rule is that return-position impl trait <em>always</em> allows using type parameters and <em>sometimes</em> allows using lifetime parameters (if they appear in the bounds). As noted above, this default is wrong because most functions actually DO want their return type to be allowed to use lifetime parameters: that at least has a workaround (modulo some details we'll note below). But the default is also wrong because some functions want to explicitly state that they do NOT use type parameters in the return type, and there is no way to override that right now. The original intention was that <a href="https://rust-lang.github.io/impl-trait-initiative/explainer/tait.html">type alias impl trait</a> would solve this use case, but that would be a very non-ergonomic solution (and stabilizing type alias impl trait is taking longer than anticipated due to other complications).</p>
+<h3><a href="#hard-to-explain" aria-hidden="true" class="anchor" id="hard-to-explain"></a>hard to explain</h3>
+<p>Because the defaults are wrong, these errors are encountered by users fairly regularly, and yet they are also subtle and hard to explain (as evidenced by this post!). Adding the compiler hint to suggest <code>+ '_</code> helps, but it's not great that users have to follow a hint they don't fully understand.</p>
+<h3><a href="#incorrect-suggestion" aria-hidden="true" class="anchor" id="incorrect-suggestion"></a>incorrect suggestion</h3>
+<p>Adding a <code>+ '_</code> argument to <code>impl Trait</code> may be confusing, but it's not terribly difficult. Unfortunately, it's often the wrong annotation, leading to unnecessary compiler errors -- and the <em>right</em> fix is either complex or sometimes not even possible. Consider an example like this:</p>
+<pre><code class="language-rust">fn process&lt;'c, T&gt; {
+    context: &amp;'c Context,
+    data: Vec&lt;T&gt;,
+) -&gt; impl Iterator&lt;Item = ()&gt; + 'c {
+    data
+        .into_iter()
+        .map(|datum| context.process(datum))
+}
+</code></pre>
+<p>Here the <code>process</code> function applies <code>context.process</code> to each of the elements in <code>data</code> (of type <code>T</code>). Because the return value uses <code>context</code>, it is declared as <code>+ 'c</code>. Our real goal here is to allow the return type to use <code>'c</code>; writing <code>+ 'c</code> achieves that goal because <code>'c</code> now appears in the bound listing. However, while writing <code>+ 'c</code> is a convenient way to make <code>'c</code> appear in the bounds, also means that the hidden type must outlive <code>'c</code>. This requirement is not needed and will in fact lead to a compilation error in this example (<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=b742fbf9b083a6e837db0b170489f34a">try it on the playground</a>).</p>
+<p>The reason that this error occurs is a bit subtle. The hidden type is an iterator type based on the result of <code>data.into_iter()</code>, which will include the type <code>T</code>. Because of the <code>+ 'c</code> bound, the hidden type must outlive <code>'c</code>, which in turn means that <code>T</code> must outlive <code>'c</code>. But <code>T</code> is a generic parameter, so the compiler requires a where-clause like <code>where T: 'c</code>. This where-clause means &quot;it is safe to create a reference with lifetime <code>'c</code> to the type <code>T</code>&quot;. But in fact we don't create any such reference, so the where-clause should not be needed. It is only needed because we used the convenient-but-sometimes-incorrect workaround of adding <code>+ 'c</code> to the bounds of our <code>impl Trait</code>.</p>
+<p>Just as before, this error is obscure, touching on the more complex aspects of Rust's type system. Unlike before, there is no easy fix! This problem in fact occurred frequently in the compiler, leading to an <a href="https://github.com/rust-lang/rust/issues/34511#issuecomment-373423999">obscure workaround called the <code>Captures</code> trait</a>. Gross!</p>
+<p>We surveyed crates on crates.io and found that the vast majority of cases involving return-position impl trait and generics had bounds that were too strong and which could lead to unnecessary errors (though often they were used in simple ways that didn't trigger an error).</p>
+<h3><a href="#inconsistencies-with-other-parts-of-rust" aria-hidden="true" class="anchor" id="inconsistencies-with-other-parts-of-rust"></a>inconsistencies with other parts of Rust</h3>
+<p>The current design was also introducing inconsistencies with other parts of Rust.</p>
+<h4><a href="#async-fn-desugaring" aria-hidden="true" class="anchor" id="async-fn-desugaring"></a>async fn desugaring</h4>
+<p>Rust defines an <code>async fn</code> as desugaring to a normal <code>fn</code> that returns <code>-&gt; impl Future</code>. You might therefore expect that a function like <code>process</code>:</p>
+<pre><code class="language-rust">async fn process(data: &amp;Data) { .. }
+</code></pre>
+<p>...would be (roughly) desugared to:</p>
+<pre><code class="language-rust">fn process(
+    data: &amp;Data
+) -&gt; impl Future&lt;Output = ()&gt; {
+    async move {
+        ..
+    }
+}
+</code></pre>
+<p>In practice, because of the problems with the rules around which lifetimes can be used, this is not the actual desugaring. The actual desugaring is to a special kind of <code>impl Trait</code> that is allowed to use all lifetimes. But that form of <code>impl Trait</code> was not exposed to end-users.</p>
+<h4><a href="#impl-trait-in-traits" aria-hidden="true" class="anchor" id="impl-trait-in-traits"></a>impl trait in traits</h4>
+<p>As we pursued the design for impl trait in traits (<a href="https://rust-lang.github.io/rfcs/3425-return-position-impl-trait-in-traits.html">RFC 3425</a>), we encountered a number of challenges related to the capturing of lifetimes. <a href="https://hackmd.io/zgairrYRSACgTeZHP1x0Zg">In order to get the symmetries that we wanted to work</a> (e.g., that one can write <code>-&gt; impl Future</code> in a trait and impl with the expected effect), we had to change the rules to allow hidden types to use <em>all</em> generic parameters (type and lifetime) uniformly.</p>
+<h2><a href="#rust-2024-design" aria-hidden="true" class="anchor" id="rust-2024-design"></a>Rust 2024 design</h2>
+<p>The above problems motivated us to take a new approach in Rust 2024. The approach is a combination of two things:</p>
+<ul>
+<li>a new default that the hidden types for a return-position <code>impl Trait</code> can use <strong>any</strong> generic parameter in scope, instead of only types (applicable only in Rust 2024);</li>
+<li>a syntax to declare explicitly what types may be used (usable in any edition).</li>
+</ul>
+<p>The new explicit syntax is called a &quot;use bound&quot;: <code>impl Trait + use&lt;'x, T&gt;</code>, for example, would indicate that the hidden type is allowed to use <code>'x</code> and <code>T</code> (but not any other generic parameters in scope).</p>
+<h3><a href="#lifetimes-can-now-be-used-by-default" aria-hidden="true" class="anchor" id="lifetimes-can-now-be-used-by-default"></a>Lifetimes can now be used by default</h3>
+<p>In Rust 2024, the default is that the hidden type for a return-position <code>impl Trait</code> values use <strong>any</strong> generic parameter that is in scope, whether it is a type or a lifetime. This means that the initial example of this blog post will compile just fine in Rust 2024 (<a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2024&amp;gist=d366396da2fbd5334b7560c3dfb3290b">try it yourself by setting the Edition in the Playground to 2024</a>):</p>
+<pre><code class="language-rust">fn process_data(
+    data: &amp;[Datum]
+) -&gt; impl Iterator&lt;Item = ProcessedDatum&gt; {
+    data
+        .iter()
+        .map(|datum| datum.process())
+}
+</code></pre>
+<p>Yay!</p>
+<h3><a href="#impl-traits-can-include-a-use-bound-to-specify-precisely-which-generic-types-and-lifetimes-they-use" aria-hidden="true" class="anchor" id="impl-traits-can-include-a-use-bound-to-specify-precisely-which-generic-types-and-lifetimes-they-use"></a>Impl Traits can include a <code>use&lt;&gt;</code> bound to specify precisely which generic types and lifetimes they use</h3>
+<p>As a side-effect of this change, if you move code to Rust 2024 by hand (without <code>cargo fix</code>), you may start getting errors in the callers of functions with an <code>impl Trait</code> return type. This is because those <code>impl Trait</code> types are now assumed to potentially use input lifetimes and not only types. To control this, you can use the new <code>use&lt;&gt;</code> bound syntax that explicitly declares what generic parameters can be used by the hidden type. Our experience porting the compiler suggests that it is very rare to need changes -- most code actually works better with the new default.</p>
+<p>The exception to the above is when the function takes in a reference parameter that is only used to read values and doesn't get included in the return value. One such example is the following function <code>indices()</code>: it takes in a slice of type <code>&amp;[T]</code> but the only thing it does is read the length, which is used to create an iterator. The slice itself is not needed in the return value:</p>
+<pre><code class="language-rust">fn indices&lt;'s, T&gt;(
+    slice: &amp;'s [T],
+) -&gt; impl Iterator&lt;Item = usize&gt; {
+    0 .. slice.len()
+}
+</code></pre>
+<p>In Rust 2021, this declaration implicitly says that <code>slice</code> is not used in the return type. But in Rust 2024, the default is the opposite. That means that callers like this will stop compiling in Rust 2024, since they now assume that <code>data</code> is borrowed until iteration completes:</p>
+<pre><code class="language-rust">fn main() {
+    let mut data = vec![1, 2, 3];
+    let i = indices(&amp;data);
+    data.push(4); // &lt;-- Error!
+    i.next(); // &lt;-- assumed to access `&amp;data`
+}
+</code></pre>
+<p>This may actually be what you want! It means you can modify the definition of <code>indices()</code> later so that it actually <em>does</em> include <code>slice</code> in the result. Put another way, the new default continues the <code>impl Trait</code> tradition of retaining flexibility for the function to change its implementation without breaking callers.</p>
+<p>But what if it's <em>not</em> what you want? What if you want to guarantee that <code>indices()</code> will not retain a reference to its argument <code>slice</code> in its return value? You now do that by including a <code>use&lt;&gt;</code> bound in the return type to say explicitly which generic parameters may be included in the return type.</p>
+<p>In the case of <code>indices()</code>, the return type actually uses <strong>none</strong> of the generics, so we would ideally write <code>use&lt;&gt;</code>:</p>
+<pre><code class="language-rust">fn indices&lt;'s, T&gt;(
+    slice: &amp;'s [T],
+) -&gt; impl Iterator&lt;Item = usize&gt; + use&lt;&gt; {
+    //                             -----
+    //             Return type does not use `'s` or `T`
+    0 .. slice.len()
+}
+</code></pre>
+<p><strong>Implementation limitation.</strong> Unfortunately, if you actually try the above example on nightly today, you'll see that it doesn't compile (<a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2024&amp;gist=1d6d23ef3813da05ac78a4b97b418f21">try it for yourself</a>). That's because <code>use&lt;&gt;</code> bounds have only partially been implemented: currently, they must always include at least the type parameters. This corresponds to the limitations of <code>impl Trait</code> in earlier editions, which always <em>must</em> capture type parameters. In this case, that means we can write the following, which also avoids the compilation error, but is still more conservative than necessary (<a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2024&amp;gist=7965043f4686d5a89b47aa5bfc4f996f">try it yourself</a>):</p>
+<pre><code class="language-rust">fn indices&lt;T&gt;(
+    slice: &amp;[T],
+) -&gt; impl Iterator&lt;Item = usize&gt; + use&lt;T&gt; {
+    0 .. slice.len()
+}
+</code></pre>
+<p>This implementation limitation is only temporary and will hopefully be lifted soon! You can follow the current status at <a href="https://github.com/rust-lang/rust/issues/130031">tracking issue #130031</a>.</p>
+<p><strong>Alternative: <code>'static</code> bounds.</strong> For the special case of capturing <strong>no</strong> references at all, it is also possible to use a <code>'static</code> bound, like so (<a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2024&amp;gist=3054bbf64652cb4890d56ac03b47a35c">try it yourself</a>):</p>
+<pre><code class="language-rust">fn indices&lt;'s, T&gt;(
+    slice: &amp;'s [T],
+) -&gt; impl Iterator&lt;Item = usize&gt; + 'static {
+    //                             -------
+    //             Return type does not capture references.
+    0 .. slice.len()
+}
+</code></pre>
+<p><code>'static</code> bounds are convenient in this case, particularly given the current implementation limitations around <code>use&lt;&gt;</code> bounds, but <code>use&lt;&gt;</code> bound are more flexible overall, and so we expect them to be used more often. (As an example, the compiler has a variant of <code>indices</code> that returns newtype'd indices <code>I</code> instead of <code>usize</code> values, and it therefore includes a <code>use&lt;I&gt;</code> declaration.)</p>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>This example demonstrates the way that editions can help us to remove complexity from Rust. In Rust 2021, the default rules for when lifetime parameters can be used in <code>impl Trait</code> had not aged well. They frequently didn't express what users needed and led to obscure workarounds being required. They led to other inconsistencies, such as between <code>-&gt; impl Future</code> and <code>async fn</code>, or between the semantics of return-position <code>impl Trait</code> in top-level functions and trait functions.</p>
+<p>Thanks to editions, we are able to address that without breaking existing code. With the newer rules coming in Rust 2024,</p>
+<ul>
+<li>most code will &quot;just work&quot; in Rust 2024, avoiding confusing errors;</li>
+<li>for the code where annotations are required, we now have a more powerful annotation mechanism that can let you say exactly what you need to say.</li>
+</ul>
+<h2><a href="#appendix-relevant-links" aria-hidden="true" class="anchor" id="appendix-relevant-links"></a>Appendix: Relevant links</h2>
+<ul>
+<li>Precise capture was proposed in <a href="https://github.com/rust-lang/rfcs/pull/3617">RFC #3617</a>, which left an unresolved question regarding syntax, and its tracking issue was <a href="https://github.com/rust-lang/rust/issues/123432">#123432</a>.</li>
+<li>The unresolved syntax question was resolved in <a href="https://github.com/rust-lang/rust/issues/125836">issue #125836</a>, which introduced the <code>+ use&lt;&gt;</code> notation used in this post.</li>
+<li>The implementation limitation is tracked in <a href="https://github.com/rust-lang/rust/issues/130031">#130031</a>.</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,199 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2023/08/29/committing-lockfiles.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Change in Guidance on Committing Lockfiles | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Change in Guidance on Committing Lockfiles | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Change in Guidance on Committing Lockfiles | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Change in Guidance on Committing Lockfiles" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Change in Guidance on Committing Lockfiles</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Aug. 29, 2023 &middot; Ed Page
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/dev-tools#cargo">The Cargo Team</a> 
+    </div>
+
+    <div class="post">
+      <p>For years, the Cargo team has encouraged Rust developers to
+<a href="https://doc.rust-lang.org/1.71.1/cargo/faq.html#why-do-binaries-have-cargolock-in-version-control-but-not-libraries">commit their <code>Cargo.lock</code> file for packages with binaries but not libraries</a>.
+We now recommend people
+<a href="https://doc.rust-lang.org/nightly/cargo/faq.html#why-have-cargolock-in-version-control">do what is best for their project</a>.
+To help people make a decision, we do include some considerations and suggest
+committing <code>Cargo.lock</code> as a starting point in their decision making.
+To align with that starting point, <code>cargo new</code> will no longer ignore
+<code>Cargo.lock</code> for libraries as of nightly-2023-08-24.
+Regardless of what decision projects make, we encourage regular
+<a href="https://doc.rust-lang.org/nightly/cargo/guide/continuous-integration.html#verifying-latest-dependencies">testing against their latest dependencies</a>.</p>
+<h2><a href="#background" aria-hidden="true" class="anchor" id="background"></a>Background</h2>
+<p>The old guidelines ensured libraries tested their latest dependencies which
+helped us keep quality high within Rust's package ecosystem by ensuring issues,
+especially backwards compatibility issues,
+were quickly found and addressed.
+While this extra testing was not exhaustive,
+We believe it helped foster a culture of quality in this nascent ecosystem.</p>
+<p>This hasn't been without its downsides though.
+This has removed an important piece of history from code bases,
+making bisecting to find the root cause of a bug harder for maintainers.
+For contributors,
+especially newer ones,
+this is another potential source of confusion and frustration from an unreliable CI whenever a
+dependency is yanked or a new release contains a bug.</p>
+<h2><a href="#why-the-change" aria-hidden="true" class="anchor" id="why-the-change"></a>Why the change</h2>
+<p>A lot has changed for Rust since the guideline was written.
+Rust has shifted from being a language for early adopters to being more mainstream,
+and we need to be mindful of the on-boarding experience of these new-to-Rust developers.
+Also with this wider adoption, it isn't always practical to assume everyone is using
+the latest Rust release and the community has been working through how to
+manage support for minimum-supported Rust versions (MSRV).
+Part of this is maintaining an instance of your dependency tree that can build
+with your MSRV.
+A lockfile is an appropriate way to pin versions for your project so you
+can validate your MSRV but we found people were instead putting upperbounds on their
+version requirements due to the strength of our prior guideline despite
+<a href="https://doc.rust-lang.org/nightly/cargo/reference/specifying-dependencies.html#multiple-requirements">likely being a worse solution</a>.</p>
+<p>The wider software development ecosystem has also changed a lot in the
+intervening time.
+CI has become easier to setup and maintain.
+We also have products like
+<a href="https://docs.github.com/en/code-security/dependabot/working-with-dependabot">Dependabot</a>
+and
+<a href="https://docs.renovatebot.com/">Renovate</a>.
+This has opened up options besides having version control ignore <code>Cargo.lock</code> to test newer dependencies.
+Developers could have a scheduled job that first runs <code>cargo update</code>.
+They could also have bots regularly update their <code>Cargo.lock</code> in PRs, ensuring
+they pass CI before being merged.</p>
+<p>Since there isn't a universal answer to these situations,
+we felt it was best to leave the choice to developers and give them information they need in making a decision.
+For feedback on this policy change,
+see <a href="https://github.com/rust-lang/cargo/issues/8728">rust-lang/cargo#8728</a>.
+You can also reach out the the Cargo team more generally on
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo">Zulip</a>.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

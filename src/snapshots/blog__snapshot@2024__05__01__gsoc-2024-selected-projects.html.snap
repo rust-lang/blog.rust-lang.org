@@ -1,0 +1,168 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/05/01/gsoc-2024-selected-projects.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Google Summer of Code 2024 selected projects | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Announcing Google Summer of Code 2024 selected projects | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Announcing Google Summer of Code 2024 selected projects | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Announcing Google Summer of Code 2024 selected projects" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Google Summer of Code 2024 selected projects</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 1, 2024 &middot; Jakub Beránek, Jack Huey and Paul Lenz
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust Project is <a href="https://blog.rust-lang.org/2024/02/21/Rust-participates-in-GSoC-2024.html">participating</a> in <a href="https://summerofcode.withgoogle.com">Google Summer of Code (GSoC) 2024</a>, a global program organized by Google which is designed to bring new contributors to the world of open-source.</p>
+<p>In February, we published a list of <a href="https://github.com/rust-lang/google-summer-of-code">GSoC project ideas</a>, and started discussing these projects with potential GSoC applicants on our <a href="https://rust-lang.zulipchat.com/#narrow/stream/421156-gsoc">Zulip</a>. We were pleasantly surprised by the amount of people that wanted to participate in these projects and that led to many fruitful discussions with members of various Rust teams. Some of them even immediately began contributing to various repositories of the Rust Project, even before GSoC officially started!</p>
+<p>After the initial discussions, GSoC applicants prepared and submitted their project proposals. We received 65 (!) proposals in total. We are happy to see that there was so much interest, given that this is the first time the Rust Project is participating in GSoC.</p>
+<p>A team of mentors primarily composed of Rust Project contributors then thoroughly examined the submitted proposals. GSoC required us to produce a ranked list of the best proposals, which was a challenging task in itself since Rust is a big project with many priorities! We went through many rounds of discussions and had to consider many factors, such as prior conversations with the given applicant, the quality and scope of their proposal, the importance of the proposed project for the Rust Project and its wider community, but also the availability of mentors, who are often volunteers and thus have limited time available for mentoring.</p>
+<p>In many cases, we had multiple proposals that aimed to accomplish the same goal. Therefore, we had to pick only one per project topic despite receiving several high-quality proposals from people we'd love to work with. We also often had to choose between great proposals targeting different work within the same Rust component to avoid overloading a single mentor with multiple projects.</p>
+<p>In the end, we narrowed the list down to twelve best proposals, which we felt was the maximum amount that we could realistically support with our available mentor pool. We submitted this list and eagerly awaited how many of these twelve proposals would be accepted into GSoC.</p>
+<h2><a href="#selected-projects" aria-hidden="true" class="anchor" id="selected-projects"></a>Selected projects</h2>
+<p>On the 1st of May, Google has announced the accepted projects. We are happy to announce that <code>9</code> proposals out of the twelve that we have submitted were accepted by Google, and will thus participate in Google Summer of Code 2024! Below you can find the list of accepted proposals (in alphabetical order), along with the names of their authors and the assigned mentor(s):</p>
+<ul>
+<li><strong><a href="https://summerofcode.withgoogle.com/programs/2024/projects/hADSyIDV">Adding lint-level configuration to cargo-semver-checks</a></strong> by Max Carr, mentored by Predrag Gruevski</li>
+<li><strong><a href="https://summerofcode.withgoogle.com/programs/2024/projects/zxxeGZMt">Implementation of a Faster Register Allocator For Cranelift</a></strong> by d-sonuga, mentored by Chris Fallin and Amanieu d'Antras</li>
+<li><strong><a href="https://summerofcode.withgoogle.com/programs/2024/projects/MeyNanKI">Improve Rust benchmark suite</a></strong> by s7tya, mentored by Jakub Beránek</li>
+<li><strong><a href="https://summerofcode.withgoogle.com/programs/2024/projects/jjnidpgn">Move cargo shell completions to Rust</a></strong> by shanmu, mentored by Ed Page</li>
+<li><strong><a href="https://summerofcode.withgoogle.com/programs/2024/projects/P5BC91Hr">Rewriting Esoteric, Error-Prone Makefile Tests Using Robust Rust Features</a></strong> by Julien Robert, mentored by Jieyou Xu</li>
+<li><strong><a href="https://summerofcode.withgoogle.com/programs/2024/projects/gHEu3vxc">Rewriting the Rewrite trait</a></strong> by SeoYoung Lee, mentored by Yacin Tmimi</li>
+<li><strong><a href="https://summerofcode.withgoogle.com/programs/2024/projects/IIHP5ozV">Rust to .NET compiler - add support for compiling &amp; running cargo tests</a></strong> by Fractal Fir, mentored by Jack Huey</li>
+<li><strong><a href="https://summerofcode.withgoogle.com/programs/2024/projects/kXG0mZoj">Sandboxed and Deterministic Proc Macro using Wasm</a></strong> by Apurva Mishra, mentored by David Lattimore</li>
+<li><strong><a href="https://summerofcode.withgoogle.com/programs/2024/projects/rk1Ey4hN">Tokio async support in Miri</a></strong> by Tiffany Pek Yuan, mentored by Oli Scherer</li>
+</ul>
+<p><strong>Congratulations to all applicants whose project was selected!</strong> The mentors are looking forward to working with you on these exciting projects to improve the Rust ecosystem. You can expect to hear from us soon, so that we can start coordinating the work on your GSoC projects.</p>
+<p>We would also like to thank all the applicants whose proposal was sadly not accepted, for their interactions with the Rust community and contributions to various Rust projects. There were some great proposals that did not make the cut, in large part because of limited review capacity. However, even if your proposal was not accepted, we would be happy if you would consider contributing to the projects that got you interested, even outside GSoC! Our <a href="https://github.com/rust-lang/google-summer-of-code">project idea list</a> is still actual, and could serve as a general entry point for contributors that would like to work on projects that would help the Rust Project maintainers and the Rust ecosystem.</p>
+<p>Assuming our involvement in GSoC 2024 is successful, there's a good chance we'll participate next year as well (though we can't promise anything yet) and we hope to receive your proposals again in the future! We also are planning to participate in similar programs in the very near future. Those announcements will come in separate blog posts, so make sure to subscribe to this blog so that you don't miss anything.</p>
+<p>The accepted GSoC projects will run for several months. After GSoC 2024 finishes (in autumn of 2024), we plan to publish a blog post in which we will summarize the outcome of the accepted projects.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

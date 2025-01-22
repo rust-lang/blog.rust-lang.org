@@ -1,0 +1,603 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2025/02/27/this-development-cycle-in-cargo-1.86.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>This Development-cycle in Cargo: 1.86 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="This Development-cycle in Cargo: 1.86 | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="This Development-cycle in Cargo: 1.86 | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="This Development-cycle in Cargo: 1.86" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>This Development-cycle in Cargo: 1.86</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 27, 2025 &middot; Ed Page
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/dev-tools#cargo">The Cargo Team</a> 
+    </div>
+
+    <div class="post">
+      <h1><a href="#this-development-cycle-in-cargo-186" aria-hidden="true" class="anchor" id="this-development-cycle-in-cargo-186"></a>This Development-cycle in Cargo: 1.86</h1>
+<p>This is a summary of what has been happening around Cargo development for the last 6 weeks which is approximately the merge window for Rust 1.86.</p>
+<!-- time period: 2025-01-09 through 2025-02-20 -->
+<ul>
+<li><a href="#plugin-of-the-cycle">Plugin of the cycle</a></li>
+<li><a href="#implementation">Implementation</a>
+<ul>
+<li><a href="#polishing-diagnostics">Polishing diagnostics</a></li>
+<li><a href="#cargo-package-vcs-dirty-checks"><code>cargo package</code> VCS dirty checks</a></li>
+<li><a href="#cargo-script">Cargo script</a></li>
+<li><a href="#identifying-unused-tests">Identifying unused <code>#[test]</code>s</a></li>
+</ul>
+</li>
+<li><a href="#design-discussions">Design discussions</a>
+<ul>
+<li><a href="#cargo-environment-variable"><code>CARGO</code> environment variable</a></li>
+<li><a href="#specifying-supported-platforms-in-packages">Specifying supported platforms in packages</a></li>
+<li><a href="#implicitly-insert-workspace-members-into-workspacedependencies">Implicitly insert workspace members into <code>workspace.dependencies</code></a></li>
+</ul>
+</li>
+<li><a href="#misc">Misc</a></li>
+<li><a href="#focus-areas-without-progress">Focus areas without progress</a></li>
+</ul>
+<h2><a href="#plugin-of-the-cycle" aria-hidden="true" class="anchor" id="plugin-of-the-cycle"></a>Plugin of the cycle</h2>
+<p>Cargo can't be everything to everyone,
+if for no other reason than the compatibility guarantees it must uphold.
+Plugins play an important part of the Cargo ecosystem and we want to celebrate them.</p>
+<p>Our plugin for this cycle is <a href="https://crates.io/crates/cargo-update">cargo install-update (crate name <code>cargo-update</code>)</a> which checks for and applies updates for <code>cargo install</code>ed binaries.  Built-in support for this is being tracked in <a href="https://github.com/rust-lang/cargo/issues/4101">#4101</a>.</p>
+<p>Thanks to <a href="https://github.com/Muscraft">Muscraft</a> for the suggestion!</p>
+<p><a href="https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/Plugin.20of.20the.20Dev.20Cycle/near/420703211">Please submit your suggestions for the next post.</a></p>
+<h2><a href="#implementation" aria-hidden="true" class="anchor" id="implementation"></a>Implementation</h2>
+<h3><a href="#polishing-diagnostics" aria-hidden="true" class="anchor" id="polishing-diagnostics"></a>Polishing diagnostics</h3>
+<p>Cargo's errors and warnings saw a surprising number of improvements recently.</p>
+<p>New diagnostics include:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/cargo/pull/15014">#15014</a>, by <a href="https://github.com/ranger-ross">ranger-ross</a>, which warns users that something is preventing the caching of the registry index.</li>
+<li><a href="https://github.com/rust-lang/cargo/pull/15071">#15071</a>, by <a href="https://github.com/linyihai">linyihai</a>, ensures <code>cargo check --workspace --package invalid</code> errors just like <code>cargo check --package invalid</code>.</li>
+</ul>
+<p>Improvements to existing diagnostics:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/cargo/pull/15093">#15093</a>, by <a href="https://github.com/kornelski">kornelski</a>, which extends workspace-member-load errors with which glob was being expanded.</li>
+<li><a href="https://github.com/rust-lang/cargo/pull/15133">#15133</a>, by <a href="https://github.com/DJMcNab">DJMcNab</a>, which extends invalid-feature errors with a suggestion of a similar looking feature name.</li>
+<li><a href="https://github.com/rust-lang/cargo/pull/15185">#15185</a>, by <a href="https://github.com/bk2204">bk2204</a>, which detects a common invalid git URL and suggests a correction.</li>
+<li><a href="https://github.com/rust-lang/cargo/pull/15138">#15138</a>, by <a href="https://github.com/epage">epage</a>, switches the wording on similar suggestions to more closely match rustc.</li>
+<li><a href="https://github.com/rust-lang/cargo/pull/15199">#15199</a>, by <a href="https://github.com/linyihai">linyihai</a>, will extend invalid-bin errors from <code>cargo run</code> with additional context to understand how to fix them.</li>
+</ul>
+<h3><a href="#cargo-package-vcs-dirty-checks" aria-hidden="true" class="anchor" id="cargo-package-vcs-dirty-checks"></a><code>cargo package</code> VCS dirty checks</h3>
+<p><em>Update from <a href="https://blog.rust-lang.org/inside-rust/2025/01/17/this-development-cycle-in-cargo-1.85.html#cargo-publish-dirty-check-performance">1.85</a></em></p>
+<p>When investigating the performance regression in <code>cargo package</code>,
+we found corner cases where a file packaged into a <code>.crate</code> could have uncommitted changes while being overlooked in the VCS dirty check.
+After <a href="https://github.com/weihanglo">weihanglo</a>
+filled several holes last development cycle,
+the remaining piece of
+<a href="https://github.com/rust-lang/cargo/issues/14967">#14967</a>
+was workspace inheritance and related features.</p>
+<!-- 2025-02-11 -->
+<p>If you have the workspace:</p>
+<pre><code class="language-toml">[workspace]
+resolver = &quot;3&quot;
+
+[workspace.package]
+version = &quot;10.0.0&quot;
+
+[profile]
+codegen-units = 1
+lto = true
+debug = &quot;line-tables-only&quot;
+</code></pre>
+<p>and a package</p>
+<pre><code class="language-toml">[package]
+name = &quot;foo&quot;
+version.workspace = true
+</code></pre>
+<p>then the published version will be</p>
+<pre><code class="language-toml">[package]
+name = &quot;foo&quot;
+version = &quot;10.0.0&quot;
+resolver = &quot;3&quot;
+</code></pre>
+<p>(see <a href="https://github.com/rust-lang/cargo/issues/8264">#8264</a> for a discussion on whether <code>profile</code> should be copied over)</p>
+<p>However, the workspace <code>Cargo.toml</code> is not checked for dirty status.
+There are a wide range of approaches we can take:</p>
+<ul>
+<li>Check every inheritable field in the package in case workspace inheritance and <code>workspace.resolver</code> copying will happen</li>
+<li>Re-generate the packaged <code>Cargo.toml</code> from a previous commit in git and diff the two (<a href="https://github.com/rust-lang/cargo/pull/15089">#15089</a>)</li>
+<li>Always consider the workspace <code>Cargo.toml</code> to be relevant</li>
+<li>Always consider every file in the repo to be relevant, reducing the chance we'll miss other files as well in the future (e.g. <code>Cargo.lock</code>)</li>
+</ul>
+<p>After explaining these options to the team,
+we decided to start with taking the middle road and checking if the workspace <code>Cargo.toml</code> or <code>Cargo.lock</code> files are dirty
+as this balances complexity and brittleness against maintaining precision in what is checked.</p>
+<h3><a href="#cargo-script" aria-hidden="true" class="anchor" id="cargo-script"></a>Cargo script</h3>
+<p><em>Update from <a href="https://blog.rust-lang.org/inside-rust/2024/12/13/this-development-cycle-in-cargo-1.84.html#misc">1.84</a></em></p>
+<p><a href="https://github.com/Rustin170506">Rustin170506</a>
+finished designing and implementing support for
+<a href="https://doc.rust-lang.org/cargo/reference/pkgid-spec.html">Package ID Specifications</a>
+for cargo scripts.
+Package ID Specifications aren't relevant for cargo scripts in most places they show up.
+For example, cargo scripts can't be workspace members yet where the <code>--package</code> flag becomes important.
+However, implementing support for this now is important because a package's Package ID Specification can show up in the output of <code>cargo metadata</code>
+and we need to have the format defined before stabilization.</p>
+<p>In a prior PR, we found a gap between rustc and cargo's shebang parsing.
+Shebang's are ambiguous with attributes.
+A normal shebang may look like:</p>
+<pre><code class="language-rust">#!/usr/bin/env cargo
+#![allow(dead_code)]
+</code></pre>
+<p>Rustc considers a <code>#!</code> at the start of a file that is followed by a <code>[</code> to be an attribute, rather than a shebang.</p>
+<p>However, rustc allows &quot;whitespace&quot; between <code>#!</code> and <code>[allow(dead_code)]</code>, like:</p>
+<pre><code class="language-rust">#!/usr/bin/env cargo
+#! [allow(dead_code)]
+</code></pre>
+<p>So more precisely, the <code>#!</code> can have whitespace before the <code>[</code> and still be considered an attribute instead of a shebang</p>
+<p>What we overlooked is that the comments in rustc's lexer describing this meant to include comments with whitespace, so the following is a valid attribute and not a shebang followed by invalid syntax:</p>
+<pre><code class="language-rust">#!//usr/bin/env cargo
+[allow(dead_code)]
+</code></pre>
+<p>Following rustc's rules for shebangs would require every frontmatter parser to also understand Rust's grammar for comments.
+As this is a new feature, we felt we had some flexibility in how closely we followed rustc and decided to punt on parsing comments which we documented in
+<a href="https://github.com/rust-lang/cargo/pull/15173">#15173</a>.
+Note that decisions like this are not finalized, just implemented proposals, until stabilization.</p>
+<p><a href="https://github.com/epage">epage</a> posted <a href="https://github.com/rust-lang/rust/pull/137193">rust#137193</a>
+which adds frontmatter syntax support to <code>rustc</code> thanks to the guidance of
+<a href="https://github.com/bjorn3">bjorn3</a>,
+<a href="https://github.com/jyn514">jyn514</a>,
+<a href="https://github.com/Noratrieb">Noratrieb</a>,
+and <a href="https://github.com/ytmimi">ytmimi</a>.</p>
+<p>Once that PR is merged, the remaining tasks before stabilization are:</p>
+<ol>
+<li>Add frontmatter syntax support to rust-analyzer</li>
+<li>Remove cargo's hack around rustc's lack of frontmatter support</li>
+<li>Improve error reporting in cargo's frontmatter parser</li>
+<li>Call of testing</li>
+</ol>
+<p>Along the way,
+epage refactored some code
+in <a href="https://github.com/rust-lang/cargo/pull/15168">#15168</a>
+and <a href="https://github.com/rust-lang/cargo/pull/15172">#15172</a>
+to make it less likely for contributors to make mistakes in the future.</p>
+<p>epage also started a discussion on <a href="https://rust-lang.zulipchat.com/#narrow/channel/246057-t-cargo/topic/rustc.20frontmatter.20extraction.20crate.3F/near/500516745">zulip</a> on making Cargo's frontmatter parser reusable.</p>
+<h3><a href="#identifying-unused-tests" aria-hidden="true" class="anchor" id="identifying-unused-tests"></a>Identifying unused <code>#[test]</code>s</h3>
+<p><em>Update from <a href="https://blog.rust-lang.org/inside-rust/2024/06/19/this-development-cycle-in-cargo-1.80.html#-zcheck-cfg">1.80</a></em></p>
+<p>With <code>check-cfg</code> stable,
+<a href="https://github.com/Urgau">Urgau</a> started investigating a gap in the lint reported on
+<a href="https://users.rust-lang.org/t/cargo-what-is-the-purpose-of-lib-test-false/102361">Users</a>.
+<a href="https://github.com/jplatte">jplatte</a> wanted to exclusively use integration tests over unit tests.
+They set <code>lib.test = false</code> and hoped that rustc would report any unused
+tests in their <code>[lib]</code> through the <code>check-cfg</code> lint.
+However, <code>test</code> is considered an always-present, built-in cfg by rustc.</p>
+<p>Several solutions were discussed,
+including allowing people to mark built-in cfg's as unknown
+<a href="https://github.com/rust-lang/rust/issues/117778">rust#117778</a>.
+Urgau proposed in <a href="https://github.com/rust-lang/compiler-team/issues/785">compiler-team#785</a> for the responsibility of marking <code>test</code> as a known config to be on the caller.
+When rustc receives <code>--test</code>, it implies <code>--cfg test</code>.
+This enables tests to run as <code>#[test]</code> expands to include <code>#[cfg(test)]</code>.
+In cargo when <a href="https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-harness-field"><code>lib.harness = false</code></a>,
+<code>--test</code> is not passed to rustc and so cargo is responsible to pass <code>--cfg test</code>.
+So the responsibility for <code>--cfg test</code> is shared by rustc and the caller.
+This was implemented in <a href="https://github.com/rust-lang/rust/pull/131729">rust#131729</a> and <a href="https://github.com/rust-lang/cargo/pull/15007">#15007</a>.</p>
+<p>This lead to false positives in <a href="https://doc.rust-lang.org/core/"><code>core</code></a> because it sets <code>lib.test = false</code> but includes code via <code>#[path]</code> with <code>#[test]</code>s (<a href="https://rust-lang.zulipchat.com/#narrow/channel/246057-t-cargo/topic/.60test.60.20well.20known.20cfg.20error/near/497171227">zulip</a>).
+This can be worked around by setting <code>lints.rust.unexpected_cfgs.check-cfg = ['cfg(test)']</code>.</p>
+<p>Later on that thread and in <a href="https://github.com/rust-lang/cargo/issues/15131">#15131</a>,
+<a href="https://github.com/kpreid">kpreid</a> called out more significant false positives:
+<a href="https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-test-field"><code>lib.test</code></a> doesn't mean there are never tests but that tests aren't built and run by default.
+In this case, it is fully valid to use <code>#[test]</code> or <code>#[cfg(test)]</code>.</p>
+<p>To give us more time, we decided to revert the change in
+<a href="https://github.com/rust-lang/cargo/pull/15132">#15132</a>.
+This is being further discussed in <a href="https://github.com/rust-lang/cargo/issues/15131">#15131</a>.</p>
+<h2><a href="#design-discussions" aria-hidden="true" class="anchor" id="design-discussions"></a>Design discussions</h2>
+<h3><a href="#cargo-environment-variable" aria-hidden="true" class="anchor" id="cargo-environment-variable"></a><code>CARGO</code> environment variable</h3>
+<p>Cargo passes the path for itself to child processes via <code>CARGO</code> in case they need to launch the same version of Cargo
+(e.g. in a <code>build.rs</code> or an <a href="https://github.com/matklad/cargo-xtask">xtask</a>).
+Several years ago,
+<a href="https://github.com/jonhoo">jonhoo</a> ran into some corner cases with this:</p>
+<p>A binary that uses <code>cargo</code>-the-library to launch child processes would set <code>CARGO</code> to this custom binary that may not be meant to act as a substitute for <code>cargo</code>-the-binary
+(<a href="https://github.com/rust-lang/cargo/issues/10119">#10119</a>).
+Depending on the binary's intent,
+there is either no correct answer for what <code>CARGO</code> should be for child processes or it should be the value of <code>CARGO</code> set on the binary.</p>
+<p>When invoking <code>cargo</code>-the-binary through <code>ld</code> for tight control of the shared library path without propagating it, Cargo looks up its path and gets back the path to <code>ld</code>
+(<a href="https://github.com/rust-lang/cargo/issues/10113">#10113</a>).
+The correct answer is in <code>argv[0]</code> but that has lower precedence than
+<a href="https://doc.rust-lang.org/std/env/fn.current_exe.html"><code>current_exe</code></a>.
+Otherwise, there is no correct answer as the <code>CARGO</code> set on <code>cargo</code>-the-binary may or may not be related.</p>
+<p>In <a href="https://github.com/rust-lang/cargo/pull/11285">#11285</a>,
+we gave higher precedence to passing along <code>CARGO</code> set on the current process over discovering the current process' path.
+This is rightfully causing problems because
+a process spawned by one toolchain that itself was spawned by another toolchain
+will have <code>CARGO</code> set to the outer-most toolchain path,
+rather than the inner-most (<a href="https://github.com/rust-lang/cargo/issues/15099">#15099</a>).</p>
+<!-- 2025-02-18 -->
+<p>Some options that were discussed on <a href="https://github.com/rust-lang/cargo/issues/15099">#15099</a> and among the team include:</p>
+<ul>
+<li><code>cargo</code>-the-binary opting in to always override <code>CARGO</code> but this misses the <code>ld</code> case</li>
+<li>The <code>cargo</code> rustup proxy overriding <code>CARGO</code> to the path it is about to launch but this does not affect situations outside of rustup, like a cargo script invoking a deb build that invokes the Debian-built <code>cargo</code></li>
+<li>Callers are responsible for unsetting <code>CARGO</code> when calling into a different toolchain version but this is non-obvious to do ahead of time and difficult to debug and determine to do when someone runs into this problem.</li>
+</ul>
+<p>The proposal we came away with is for <code>cargo</code>-the-binary to opt-in to overriding <code>CARGO</code> <em>if</em> <code>current_exe</code> is <code>cargo{EXE_SUFFIX}</code>.
+While there are still corner cases this can run into problems with
+(e.g. custom names for <code>cargo</code>-the-binary directly or through symlinks),
+this at least shrinks the window for people to be hitting the corner cases.</p>
+<h3><a href="#specifying-supported-platforms-in-packages" aria-hidden="true" class="anchor" id="specifying-supported-platforms-in-packages"></a>Specifying supported platforms in packages</h3>
+<p><em>Update from <a href="https://blog.rust-lang.org/inside-rust/2025/01/17/this-development-cycle-in-cargo-1.85.html#misc">1.85</a></em></p>
+<!-- 2025-01-28 -->
+<p>Conversation on <a href="https://github.com/rust-lang/rfcs/pull/3759">RFC #3759</a> was settling down,
+so we reviewed this as a team.</p>
+<p>After some initial discussion on the <a href="https://github.com/rust-lang/rfcs/pull/3759#discussion_r1909195446">options for names for the field</a>,
+the conversation focused on use cases:</p>
+<p><strong>Build-target filtering (in-scope):</strong>
+like <a href="https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-required-features-field"><code>required-features</code></a>,
+automatically filter out any build-target that is not compatible with the selected platform <code>--target</code>.</p>
+<p>In the Cargo repo, we have <code>cargo-credential-libsecret</code>, <code>cargo-credential-wincred</code>, and <code>cargo-credential-macos-keychain</code>.
+To allow <code>cargo check --workspace</code>, we've <code>#[cfg]</code>ed the implementation of each package so they build on all platforms.
+If we had a <code>required-target</code> field, we could remove the <code>#[cfg]</code>s.</p>
+<p>This is in-scope for the RFC as it has the smallest scope to design and implement on top of the definition of the field.</p>
+<p><strong>Error on incorrect use (deferred):</strong>
+Potential error cases include:</p>
+<ul>
+<li>I'm building for <code>--target x86_64-unknown-linux-gnu</code> but have a <code>dependencies.windows-sys</code> dependency</li>
+<li>I have <code>required-target = 'cfg(target_os=&quot;linux&quot;)'</code> but have a <code>dependencies.windows-sys</code> dependency</li>
+<li>I have a <code>target.cfg(target_os=&quot;linux&quot;).dependencies.windows-sys</code> dependency,
+we could report this as an error.</li>
+</ul>
+<p>Say <code>cargo-credential-wincred</code> only had an implementation for <code>#[cfg(windows)]</code>,
+trying to use it on another platform would be reported with an error that <code>WindowsCredential</code> could not be found, with a hint that <code>cfg(windows)</code> is required.
+That is not the friendliest error and would only be found if you validate every supported platform.
+Instead, Cargo could report before building anything that this will fail on some of your supported platforms.</p>
+<p>The first error case is easy to implement and has precedence for its behavior when building with a dependency with a <code>package.rust-version</code> that is older than the current toolchain.
+The other two require some work to figure out the intersection of <code>cfg</code>s.
+In either case, there has been less interest expressed in the use case and there is concern people will be over-zealous in applying the <code>required-target</code> field to their packages, preventing their use.
+Deferring gives us more time to analyze that problem and more of a tradition of setting the field without extra connotations.</p>
+<p><strong>Vendor only relevant packages (deferred):</strong>
+When you run <code>cargo vendor</code>, it saves the content of every <code>.crate</code> file in your <code>Cargo.lock</code>, even if its not needed for the platforms you build on.
+When generating or validating <code>Cargo.lock</code>,
+we could exclude any <code>target.*.dependencies</code> that is not compatible with your <code>required-target</code>, avoiding the need to vendor them.</p>
+<p>Having <code>required-target</code> affect dependency resolution would allow a Linux application to not vendor <code>windows-sys</code> (<a href="https://github.com/rust-lang/cargo/issues/7058">#7058</a>).
+However, a new field would not be needed for a <code>target.cfg(target_os= &quot;linux&quot;).dependencies</code>
+to exclude any transitive dependencies in a <code>target.cfg(target_os=&quot;windows&quot;).dependencies</code>.
+if we supported that,
+someone could emulate <code>required-target</code> by putting all dependencies behind <code>target.cfg(...).dependencies</code>.</p>
+<p>There has been a lot of interest in this idea but it adds a lot of complications,
+so we initially deferred it out so we could focus on a subset of the conversation.</p>
+<p>Tracking all of the <code>cfg</code>s that lead to a dependency could get complicated in the dependency resolver.
+A 70% solution is we only compare <code>target.cfg(...).dependencies</code> against <code>required-target</code>,
+ignoring any <code>target.cfg(...).dependencies</code> along the way that could further narrow things.</p>
+<p>This feature could also run up against a general rule of Cargo:
+running <code>cargo check</code> from a different toolchain version should not modify your <code>Cargo.lock</code>:</p>
+<ul>
+<li>Any improvement to the algorithm for evaluating <code>cfg</code>s, <code>Cargo.lock</code> can change it.  We'd need to keep every implementation and have it selected by either the <code>Cargo.lock</code> version field or <code>workspace.resolver</code>.</li>
+<li>Any change in the data for <code>cfg</code>s could change it.  There is not much we can do about this.</li>
+</ul>
+<p>This use case is different than the others in that its mostly focused on application developers.
+Vendoring of dependencies is specific to upstream pre-built binaries in which they know the full set of platform tuples being built for.
+For downstream distributions,
+they will already be decoupling the package from vendored dependencies and could disable this somehow.
+If it is that specialized, maybe we should decouple <code>cargo vendor</code> / <code>Cargo.lock</code> filtering from <code>required-target</code> and have the user explicitly enumerate each platform tuple.
+This bypasses the <code>cfg</code> set logic but still runs into changing definitions of platform tuples.
+Presuming a more limited audience,
+maybe that level of volatility will be acceptable to them.
+This <code>resolver.targets</code> could be a config field.
+The downside is that your <code>Cargo.lock</code> would be dependent on transient or context-sensitive settings but maybe that is fine with the more limited use case.
+We might want to record the <code>resolver.targets</code> in <code>Cargo.lock</code> so that unexpected changes from missing or changed config are clear.
+Maybe more important is that if this config were used when running <code>cargo publish</code>,
+then <code>cargo install --locked</code> could end up failing.</p>
+<p>Another direction we discussed was for <code>required-target</code> to be a subset of <code>cfg</code> functionality, like only <code>target_os</code>.
+This might allow us to make some simplifying assumptions but we'd need to work closely with T-compiler to ensure those assumptions are upheld.</p>
+<p>We didn't end up reaching a specific conclusion and will need to consider this further.</p>
+<h3><a href="#implicitly-insert-workspace-members-into-workspacedependencies" aria-hidden="true" class="anchor" id="implicitly-insert-workspace-members-into-workspacedependencies"></a>Implicitly insert workspace members into <code>workspace.dependencies</code></h3>
+<!-- 2025-02-11 -->
+<p>We discussed a proposal by <a href="https://github.com/CinchBlue">CinchBlue</a> to act as if workspace members were added to <code>workspace.dependencies</code>
+(<a href="https://github.com/rust-lang/cargo/issues/13453">#13453</a>).
+Since Cargo already needs to discover the location of packages,
+this would remove the need to give Cargo information it already has,
+reducing friction when moving packages in a repo.</p>
+<p>In effect, this would treat:</p>
+<pre><code class="language-toml"># Cargo.toml
+[workspace]
+members = [&quot;crates/*&quot;]
+
+# crates/foo/Cargo.toml
+[package]
+name = &quot;foo&quot;
+[dependencies]
+bar.workspace = true
+
+# crates/bar/Cargo.toml
+[package]
+name = &quot;bar&quot;
+</code></pre>
+<p>like</p>
+<pre><code class="language-toml"># Cargo.toml
+[workspace]
+members = [&quot;crates/*&quot;]
+[workspace.dependencies]
+foo.path = &quot;crates/foo&quot;
+bar.path = &quot;crates/bar&quot;
+
+# crates/foo/Cargo.toml
+[package]
+name = &quot;foo&quot;
+[dependencies]
+bar.workspace = true
+
+# crates/bar/Cargo.toml
+[package]
+name = &quot;bar&quot;
+</code></pre>
+<p>The first challenge is determining what the <code>workspace.dependencies</code> entry should look like.
+For example, the <code>version</code> field is generally required to publish a package.
+One exception is when user intentionally leave off <code>version</code> for dev-dependencies to workaround
+<a href="https://github.com/rust-lang/cargo/issues/4242">publish cycles</a>.
+However, we don't know if packages are intended to be published or not
+because packages default to <code>package.publish = true</code>,
+Tracking all of that to determine how to implicitly fill <code>workspace.dependencies</code> would also be complicated.
+Likewise, we'd need to figure out how to handle <code>registry</code> and <code>default-features</code> fields.</p>
+<p>Speaking of complicated designs,
+consider the following example:</p>
+<pre><code class="language-toml"># Cargo.toml
+[workspace]
+members = [&quot;crates/*&quot;]
+[workspace.package]
+version = &quot;2.0.0&quot;
+[package]
+name = &quot;foo&quot;
+version.workspace = true
+[dependencies]
+bar.workspace = true
+
+# crates/bar/Cargo.toml
+[package]
+name = &quot;bar&quot;
+version.workspace = true
+</code></pre>
+<p>To load <code>Cargo.toml</code>, we'd need to</p>
+<ol>
+<li>Parse <code>Cargo.toml</code></li>
+<li>Discover and parse <code>crates/bar/Cargo.toml</code></li>
+<li>Apply <code>Cargo.toml</code>s <code>workspace.package</code> to <code>crates/bar/Cargo.toml</code> to ensure <code>version</code> is set if needed</li>
+<li>Add <code>crates/bar/Cargo.toml</code> to <code>Cargo.toml</code>s <code>workspace.dependencies</code></li>
+<li>Apply <code>Cargo.toml</code>s <code>workspace.dependencies</code> to <code>Cargo.toml</code></li>
+</ol>
+<p>Or put another way,
+we'd need to load the workspace members in multiple passes,
+ensuring we are only operating on initialized data in each pass.</p>
+<p>Already we feel that we are at the limits of our complexity budget for parsing <code>Cargo.toml</code> and this would exceed that.</p>
+<p>Weighing all of that against the workaround of manually populating <code>workspace.dependencies</code>,
+the latter doesn't seem so bad.
+We could even smooth that out by having <code>cargo new</code> inject new workspace members into <code>workspace.dependencies</code> (<a href="https://github.com/rust-lang/cargo/issues/15180">#15180</a>).
+A user would then be free to edit the entries to suit their needs.</p>
+<p>With <code>cargo new</code> automatically populating <code>workspace.dependencies</code> and <code>cargo add</code> automatically using it,
+this would shift the ecosystem over to using it and the question came up on whether <code>workspace.dependencies</code> is mature enough for this.
+There are caveats with the feature itself, like <a href="https://github.com/rust-lang/cargo/issues/12162">known issues with <code>default-features</code></a>.
+There are also caveats with the workflows around it, like tracking breaking changes.
+Without <code>workspace.dependencies</code>,
+you can look at every commit in a directory to look for breaking changes
+(tools like <a href="https://github.com/crate-ci/cargo-release"><code>cargo release changes</code></a> help with that).
+However, that won't be the case in the following scenario:</p>
+<pre><code class="language-toml"># Cargo.toml
+[workspace]
+members = [&quot;crates/*&quot;]
+[workspace.dependencies]
+dep = { path = &quot;crates/dep&quot;, version = &quot;1.0.0&quot; }
+
+# lib/Cargo.toml
+cargo-features = [&quot;public-dependency&quot;]
+[package]
+name = &quot;lib&quot;
+[dependencies]
+dep = { workspace = true, public = true }
+</code></pre>
+<p>You could bump <code>dep</code>s version to <code>2.0.0</code>, breaking users of <code>lib</code> and not be able to tell by looking at <code>git log lib/</code>.
+<a href="https://github.com/obi1kenobi/cargo-semver-checks">cargo semver-checks</a>
+might be able to help with this today but stabilization of <code>public-dependency</code> would make this trivial to add such a check but that is blocked on some bugs in the rustc lint (
+<a href="https://github.com/rust-lang/rust/issues/71043">rust#71043</a>,
+<a href="https://github.com/rust-lang/rust/issues/119428">rust#119428</a>
+).</p>
+<h2><a href="#misc" aria-hidden="true" class="anchor" id="misc"></a>Misc</h2>
+<ul>
+<li><a href="https://github.com/pubgrub-rs/pubgrub/releases/tag/v0.3.0">pubgrub v0.3</a> was released by <a href="https://github.com/Eh2406">Eh2406</a></li>
+<li>Support for <code>resolver.feature-unification = &quot;workspace&quot;</code> was implemented in <a href="https://github.com/rust-lang/cargo/pull/15157">#15157</a> by <a href="https://github.com/aliu">aliu</a> <em>(update from <a href="https://blog.rust-lang.org/inside-rust/2024/10/31/this-development-cycle-in-cargo-1.83.html#misc">1.83</a>)</em></li>
+<li><a href="https://github.com/epage">epage</a> posted <a href="https://github.com/rust-lang/rfcs/pull/3772">RFC #3772</a> to deprecate non-package <code>edition</code> fields, like <code>lib.edition</code> <!-- 2025-02-11 --></li>
+<li><a href="https://github.com/ranger-ross">ranger-ross</a> started work on splitting out <code>build-dir</code> from <code>target-dir</code> in <a href="https://github.com/rust-lang/cargo/pull/15104">#15104</a> <em>(update from <a href="https://blog.rust-lang.org/inside-rust/2024/10/01/this-development-cycle-in-cargo-1.82.html#target-dir-and-artifact-dir">1.82</a>)</em></li>
+<li><a href="https://github.com/osiewicz">osiewicz</a>'s <a href="https://github.com/rust-lang/compiler-team/issues/790">MCP</a> for avoiding rebuilds when a dependency's implementation changes was accepted and on <a href="https://rust-lang.zulipchat.com/#narrow/channel/246057-t-cargo/topic/Support.20for.20.22Relink.20Don&#x27;t.20Rebuild.22.20in.20Cargo/near/495600409">zulip</a> there was some discussion on how to handle line number changes when diagnostics show output from dependencies.</li>
+</ul>
+<h2><a href="#focus-areas-without-progress" aria-hidden="true" class="anchor" id="focus-areas-without-progress"></a>Focus areas without progress</h2>
+<p>These are areas of interest for Cargo team members with no reportable progress for this development-cycle.</p>
+<p>Project goals in need of owners</p>
+<ul>
+<li><a href="https://rust-lang.github.io/rust-project-goals/2025h1/open-namespaces.html">Open namespaces</a></li>
+<li><a href="https://rust-lang.github.io/rust-project-goals/2025h1/pub-priv.html">Stabilize public/private dependencies</a></li>
+<li><a href="https://rust-lang.github.io/rust-project-goals/2025h1/cargo-plumbing.html">Prototype a new set of plumbing commands</a></li>
+</ul>
+<p>Ready-to-develop:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#open-namespaces">Open namespaces</a></li>
+</ul>
+<!--
+- [Auto-generate completions](https://github.com/rust-lang/cargo/issues/6645)
+  - See [clap-rs/clap#3166](https://github.com/clap-rs/clap/issues/3166)
+- [Split CARGO_TARGET_DIR](https://github.com/rust-lang/cargo/issues/14125)
+- Cargo script ([RFC #3502](https://github.com/rust-lang/rfcs/pull/3502), [RFC #3503](https://github.com/rust-lang/rfcs/pull/3503))
+- [Config control over feature unification](https://github.com/rust-lang/cargo/issues/14774)
+-->
+<p>Needs design and/or experimentation:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/cargo/issues/5931">Per-user artifact cache</a></li>
+<li><a href="https://github.com/rust-lang/cargo/issues/7193">Dependency resolution hooks</a></li>
+<li><a href="https://github.com/rust-lang/cargo/issues/2904">A way to report why crates were rebuilt</a></li>
+<li><a href="https://github.com/rust-lang/cargo/issues/12633">GC</a></li>
+</ul>
+<p>Planning:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/cargo/issues/3126">Disabling of default features</a></li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/3416">RFC #3416: <code>features</code> metadata</a>
+<ul>
+<li><a href="https://github.com/rust-lang/rfcs/pull/3487">RFC #3487: visibility</a> (visibility)</li>
+<li><a href="https://github.com/rust-lang/rfcs/pull/3486">RFC #3486: deprecation</a></li>
+<li><a href="https://doc.rust-lang.org/cargo/reference/unstable.html#list-of-unstable-features">Unstable features</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/rust-lang/cargo/issues/1734">OS-native config/cache directories (ie XDG support)</a>
+<ul>
+<li><a href="https://internals.rust-lang.org/t/pre-rfc-split-cargo-home/19747">Phase 1 Pre-RFC</a></li>
+</ul>
+</li>
+<li><a href="https://internals.rust-lang.org/t/pre-rfc-mutually-excusive-global-features/19618">Pre-RFC: Global, mutually exclusive features</a></li>
+</ul>
+<!--
+- [RFC #3553: Cargo SBOM Fragment](https://github.com/rust-lang/rfcs/pull/3553)
+-->
+<h2><a href="#how-you-can-help" aria-hidden="true" class="anchor" id="how-you-can-help"></a>How you can help</h2>
+<p>If you have ideas for improving cargo,
+we recommend first checking <a href="https://github.com/rust-lang/cargo/issues/">our backlog</a>
+and then exploring the idea on <a href="https://internals.rust-lang.org/c/tools-and-infrastructure/cargo/15">Internals</a>.</p>
+<p>If there is a particular issue that you are wanting resolved that wasn't discussed here,
+some steps you can take to help move it along include:</p>
+<ul>
+<li>Summarizing the existing conversation (example:
+<a href="https://github.com/rust-lang/cargo/issues/2644#issuecomment-1489371226">Better support for docker layer caching</a>,
+<a href="https://github.com/rust-lang/cargo/issues/8728#issuecomment-1610265047">Change in <code>Cargo.lock</code> policy</a>,
+<a href="https://github.com/rust-lang/cargo/issues/9930#issuecomment-1489089277">MSRV-aware resolver</a>
+)</li>
+<li>Document prior art from other ecosystems so we can build on the work others have done and make something familiar to users, where it makes sense</li>
+<li>Document related problems and solutions within Cargo so we see if we are solving to the right layer of abstraction</li>
+<li>Building on those posts, propose a solution that takes into account the above information and cargo's compatibility requirements (<a href="https://github.com/rust-lang/cargo/issues/9930#issuecomment-1489269471">example</a>)</li>
+</ul>
+<p>We are available to help mentor people for
+<a href="https://doc.crates.io/contrib/issues.html#issue-status-labels">S-accepted issues</a>
+on
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo">zulip</a>
+and you can talk to us in real-time during
+<a href="https://github.com/rust-lang/cargo/wiki/Office-Hours">Contributor Office Hours</a>.
+If you are looking to help with one of the bigger projects mentioned here and are just starting out,
+<a href="https://doc.crates.io/contrib/process/index.html#working-on-issues">fixing some issues</a>
+will help familiarize yourself with the process and expectations,
+making things go more smoothly.
+If you'd like to tackle something
+<a href="https://doc.crates.io/contrib/issues.html#issue-status-labels">without a mentor</a>,
+the expectations will be higher on what you'll need to do on your own.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,324 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/11/28/Rust-1.83.0.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Announcing Rust 1.83.0 | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Announcing Rust 1.83.0 | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Announcing Rust 1.83.0 | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Announcing Rust 1.83.0" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Announcing Rust 1.83.0</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 28, 2024 &middot; The Rust Release Team
+    
+    </div>
+
+    <div class="post">
+      <p>The Rust team is happy to announce a new version of Rust, 1.83.0. Rust is a programming language empowering everyone to build reliable and efficient software.</p>
+<p>If you have a previous version of Rust installed via <code>rustup</code>, you can get 1.83.0 with:</p>
+<pre><code class="language-console">$ rustup update stable
+</code></pre>
+<p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website, and check out the <a href="https://doc.rust-lang.org/stable/releases.html#version-1830-2024-11-28">detailed release notes for 1.83.0</a>.</p>
+<p>If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (<code>rustup default beta</code>) or the nightly channel (<code>rustup default nightly</code>). Please <a href="https://github.com/rust-lang/rust/issues/new/choose">report</a> any bugs you might come across!</p>
+<h2><a href="#whats-in-1830-stable" aria-hidden="true" class="anchor" id="whats-in-1830-stable"></a>What's in 1.83.0 stable</h2>
+<h3><a href="#new-const-capabilities" aria-hidden="true" class="anchor" id="new-const-capabilities"></a>New const capabilities</h3>
+<p>This release includes several large extensions to what code running in const contexts can do. This refers to all code that the compiler has to evaluate at compile-time: the initial value of <code>const</code> and <code>static</code> items, array lengths, enum discriminant values, const generic arguments, and functions callable from such contexts (<code>const fn</code>).</p>
+<p><strong>References to statics.</strong>
+So far, const contexts except for the initializer expression of a <code>static</code> item were forbidden from referencing <code>static</code> items.
+This limitation has now been lifted:</p>
+<pre><code class="language-rust">static S: i32 = 25;
+const C: &amp;i32 = &amp;S;
+</code></pre>
+<p>Note, however, that reading the value of a mutable or interior mutable static is still not permitted in const contexts. Furthermore, the final value of a constant may not reference any mutable or interior mutable statics:</p>
+<pre><code class="language-rust">static mut S: i32 = 0;
+
+const C1: i32 = unsafe { S };
+// error: constant accesses mutable global memory
+
+const C2: &amp;i32 = unsafe { &amp;S };
+// error: encountered reference to mutable memory in `const`
+</code></pre>
+<p>These limitations ensure that constants are still &quot;constant&quot;: the value they evaluate to, and their meaning as a pattern (which can involve dereferencing references), will be the same throughout the entire program execution.</p>
+<p>That said, a constant is permitted to evaluate to a raw pointer that points to a mutable or interior mutable static:</p>
+<pre><code class="language-rust">static mut S: i32 = 64;
+const C: *mut i32 = &amp;raw mut S;
+</code></pre>
+<p><strong>Mutable references and pointers.</strong>
+It is now possible to use mutable references in const contexts:</p>
+<pre><code class="language-rust">const fn inc(x: &amp;mut i32) {
+    *x += 1;
+}
+
+const C: i32 = {
+    let mut c = 41;
+    inc(&amp;mut c);
+    c
+};
+</code></pre>
+<p>Mutable raw pointers and interior mutability are also supported:</p>
+<pre><code class="language-rust">use std::cell::UnsafeCell;
+
+const C: i32 = {
+    let c = UnsafeCell::new(41);
+    unsafe { *c.get() += 1 };
+    c.into_inner()
+};
+</code></pre>
+<p>However, mutable references and pointers can only be used <em>inside</em> the computation of a constant, they cannot become a part of the final value of the constant:</p>
+<pre><code class="language-rust">const C: &amp;mut i32 = &amp;mut 4;
+// error[E0764]: mutable references are not allowed in the final value of constants
+</code></pre>
+<p>This release also ships with a whole bag of new functions that are now stable in const contexts (see the end of the &quot;Stabilized APIs&quot; section).</p>
+<p>These new capabilities and stabilized APIs unblock an entire new category of code to be executed inside const contexts, and we are excited to see how the Rust ecosystem will make use of this!</p>
+<h3><a href="#stabilized-apis" aria-hidden="true" class="anchor" id="stabilized-apis"></a>Stabilized APIs</h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/std/io/trait.BufRead.html#method.skip_until"><code>BufRead::skip_until</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ops/enum.ControlFlow.html#method.break_value"><code>ControlFlow::break_value</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ops/enum.ControlFlow.html#method.continue_value"><code>ControlFlow::continue_value</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ops/enum.ControlFlow.html#method.map_break"><code>ControlFlow::map_break</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ops/enum.ControlFlow.html#method.map_continue"><code>ControlFlow::map_continue</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/fmt/struct.DebugList.html#method.finish_non_exhaustive"><code>DebugList::finish_non_exhaustive</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/fmt/struct.DebugMap.html#method.finish_non_exhaustive"><code>DebugMap::finish_non_exhaustive</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/fmt/struct.DebugSet.html#method.finish_non_exhaustive"><code>DebugSet::finish_non_exhaustive</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/fmt/struct.DebugTuple.html#method.finish_non_exhaustive"><code>DebugTuple::finish_non_exhaustive</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.ArgumentListTooLong"><code>ErrorKind::ArgumentListTooLong</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.Deadlock"><code>ErrorKind::Deadlock</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.DirectoryNotEmpty"><code>ErrorKind::DirectoryNotEmpty</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.ExecutableFileBusy"><code>ErrorKind::ExecutableFileBusy</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.FileTooLarge"><code>ErrorKind::FileTooLarge</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.HostUnreachable"><code>ErrorKind::HostUnreachable</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.IsADirectory"><code>ErrorKind::IsADirectory</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.NetworkDown"><code>ErrorKind::NetworkDown</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.NetworkUnreachable"><code>ErrorKind::NetworkUnreachable</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.NotADirectory"><code>ErrorKind::NotADirectory</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.NotSeekable"><code>ErrorKind::NotSeekable</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.ReadOnlyFilesystem"><code>ErrorKind::ReadOnlyFilesystem</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.ResourceBusy"><code>ErrorKind::ResourceBusy</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.StaleNetworkFileHandle"><code>ErrorKind::StaleNetworkFileHandle</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.StorageFull"><code>ErrorKind::StorageFull</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/io/enum.ErrorKind.html#variant.TooManyLinks"><code>ErrorKind::TooManyLinks</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/option/enum.Option.html#method.get_or_insert_default"><code>Option::get_or_insert_default</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/task/struct.Waker.html#method.data"><code>Waker::data</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/task/struct.Waker.html#method.new"><code>Waker::new</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/task/struct.Waker.html#method.vtable"><code>Waker::vtable</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.char.html#associatedconstant.MIN"><code>char::MIN</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/hash_map/enum.Entry.html#method.insert_entry"><code>hash_map::Entry::insert_entry</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/std/collections/hash_map/struct.VacantEntry.html#method.insert_entry"><code>hash_map::VacantEntry::insert_entry</code></a></li>
+</ul>
+<p>These APIs are now stable in const contexts:</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/core/cell/struct.Cell.html#method.into_inner"><code>Cell::into_inner</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/time/struct.Duration.html#method.as_secs_f32"><code>Duration::as_secs_f32</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/time/struct.Duration.html#method.as_secs_f64"><code>Duration::as_secs_f64</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/time/struct.Duration.html#method.div_duration_f32"><code>Duration::div_duration_f32</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/time/struct.Duration.html#method.div_duration_f64"><code>Duration::div_duration_f64</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/mem/union.MaybeUninit.html#method.as_mut_ptr"><code>MaybeUninit::as_mut_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/struct.NonNull.html#method.as_mut"><code>NonNull::as_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/struct.NonNull.html#method.copy_from"><code>NonNull::copy_from</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/struct.NonNull.html#method.copy_from_nonoverlapping"><code>NonNull::copy_from_nonoverlapping</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/struct.NonNull.html#method.copy_to"><code>NonNull::copy_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/struct.NonNull.html#method.copy_to_nonoverlapping"><code>NonNull::copy_to_nonoverlapping</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/struct.NonNull.html#method.slice_from_raw_parts"><code>NonNull::slice_from_raw_parts</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/struct.NonNull.html#method.write"><code>NonNull::write</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/struct.NonNull.html#method.write_bytes"><code>NonNull::write_bytes</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/struct.NonNull.html#method.write_unaligned"><code>NonNull::write_unaligned</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/cell/struct.OnceCell.html#method.into_inner"><code>OnceCell::into_inner</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/option/enum.Option.html#method.as_mut"><code>Option::as_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/option/enum.Option.html#method.expect"><code>Option::expect</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/option/enum.Option.html#method.replace"><code>Option::replace</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/option/enum.Option.html#method.take"><code>Option::take</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/option/enum.Option.html#method.unwrap"><code>Option::unwrap</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/option/enum.Option.html#method.unwrap_unchecked"><code>Option::unwrap_unchecked</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/option/enum.Option.html#method.copied"><code>Option::&lt;&amp;_&gt;::copied</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/option/enum.Option.html#method.copied-1"><code>Option::&lt;&amp;mut _&gt;::copied</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/option/enum.Option.html#method.flatten"><code>Option::&lt;Option&lt;_&gt;&gt;::flatten</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/option/enum.Option.html#method.transpose"><code>Option::&lt;Result&lt;_, _&gt;&gt;::transpose</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/cell/struct.RefCell.html#method.into_inner"><code>RefCell::into_inner</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/result/enum.Result.html#method.as_mut"><code>Result::as_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/result/enum.Result.html#method.copied"><code>Result::&lt;&amp;_, _&gt;::copied</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/result/enum.Result.html#method.copied-1"><code>Result::&lt;&amp;mut _, _&gt;::copied</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/result/enum.Result.html#method.transpose"><code>Result::&lt;Option&lt;_&gt;, _&gt;::transpose</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/cell/struct.UnsafeCell.html#method.get_mut"><code>UnsafeCell::get_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/cell/struct.UnsafeCell.html#method.into_inner"><code>UnsafeCell::into_inner</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/array/fn.from_mut.html"><code>array::from_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.char.html#method.encode_utf8"><code>char::encode_utf8</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.classify"><code>{float}::classify</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.is_finite"><code>{float}::is_finite</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.is_infinite"><code>{float}::is_infinite</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.is_nan"><code>{float}::is_nan</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.is_normal"><code>{float}::is_normal</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.is_sign_negative"><code>{float}::is_sign_negative</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.is_sign_positive"><code>{float}::is_sign_positive</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.is_subnormal"><code>{float}::is_subnormal</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.from_bits"><code>{float}::from_bits</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.from_be_bytes"><code>{float}::from_be_bytes</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.from_le_bytes"><code>{float}::from_le_bytes</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.from_ne_bytes"><code>{float}::from_ne_bytes</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.to_bits"><code>{float}::to_bits</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.to_be_bytes"><code>{float}::to_be_bytes</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.to_le_bytes"><code>{float}::to_le_bytes</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.f64.html#method.to_ne_bytes"><code>{float}::to_ne_bytes</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/mem/fn.replace.html"><code>mem::replace</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/fn.replace.html"><code>ptr::replace</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/fn.slice_from_raw_parts_mut.html"><code>ptr::slice_from_raw_parts_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/fn.write.html"><code>ptr::write</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/ptr/fn.write_unaligned.html"><code>ptr::write_unaligned</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.copy_to"><code>&lt;*const _&gt;::copy_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.copy_to_nonoverlapping"><code>&lt;*const _&gt;::copy_to_nonoverlapping</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.copy_from"><code>&lt;*mut _&gt;::copy_from</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.copy_from_nonoverlapping"><code>&lt;*mut _&gt;::copy_from_nonoverlapping</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.copy_to-1"><code>&lt;*mut _&gt;::copy_to</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.copy_to_nonoverlapping-1"><code>&lt;*mut _&gt;::copy_to_nonoverlapping</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.write"><code>&lt;*mut _&gt;::write</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.write_bytes"><code>&lt;*mut _&gt;::write_bytes</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.pointer.html#method.write_unaligned"><code>&lt;*mut _&gt;::write_unaligned</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/slice/fn.from_mut.html"><code>slice::from_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/slice/fn.from_raw_parts_mut.html"><code>slice::from_raw_parts_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.slice.html#method.first_mut"><code>&lt;[_]&gt;::first_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.slice.html#method.last_mut"><code>&lt;[_]&gt;::last_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.slice.html#method.first_chunk_mut"><code>&lt;[_]&gt;::first_chunk_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.slice.html#method.last_chunk_mut"><code>&lt;[_]&gt;::last_chunk_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.slice.html#method.split_at_mut"><code>&lt;[_]&gt;::split_at_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.slice.html#method.split_at_mut_checked"><code>&lt;[_]&gt;::split_at_mut_checked</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.slice.html#method.split_at_mut_unchecked"><code>&lt;[_]&gt;::split_at_mut_unchecked</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.slice.html#method.split_first_mut"><code>&lt;[_]&gt;::split_first_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.slice.html#method.split_last_mut"><code>&lt;[_]&gt;::split_last_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.slice.html#method.split_first_chunk_mut"><code>&lt;[_]&gt;::split_first_chunk_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.slice.html#method.split_last_chunk_mut"><code>&lt;[_]&gt;::split_last_chunk_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.str.html#method.as_bytes_mut"><code>str::as_bytes_mut</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/primitive.str.html#method.as_mut_ptr"><code>str::as_mut_ptr</code></a></li>
+<li><a href="https://doc.rust-lang.org/stable/core/str/fn.from_utf8_unchecked_mut.html"><code>str::from_utf8_unchecked_mut</code></a></li>
+</ul>
+<h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
+<p>Check out everything that changed in <a href="https://github.com/rust-lang/rust/releases/tag/1.83.0">Rust</a>, <a href="https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-183-2024-11-28">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-183">Clippy</a>.</p>
+<h2><a href="#contributors-to-1830" aria-hidden="true" class="anchor" id="contributors-to-1830"></a>Contributors to 1.83.0</h2>
+<p>Many people came together to create Rust 1.83.0. We couldn't have done it without all of you. <a href="https://thanks.rust-lang.org/rust/1.83.0/">Thanks!</a></p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

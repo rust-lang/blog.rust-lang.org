@@ -1,0 +1,535 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2024/11/01/compiler-team-reorg.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Re-organising the compiler team and recognising our team members | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Re-organising the compiler team and recognising our team members | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Re-organising the compiler team and recognising our team members | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Re-organising the compiler team and recognising our team members" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Re-organising the compiler team and recognising our team members</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 1, 2024 &middot; davidtwco and wesleywiser
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/compiler">the compiler team</a> 
+    </div>
+
+    <div class="post">
+      <p>Back in June, the compiler team merged <a href="https://github.com/rust-lang/rfcs/pull/3599">RFC 3599</a> which re-structured the team to ensure the
+team's policies and processes can support the maintenance of the Rust compiler going forward.</p>
+<p>Since the last change to the structure of the compiler team, the project has grown a lot -  the
+compiler receives roughly twice as many contributions, more team members regularly take on
+additional responsibilities such as performance triage or backport reviews, and many contributors
+are now paid to work on the project.</p>
+<p>It is imperative that the compiler team and its procedures are able to scale to meet the demands
+on the project, both to ensure that the compiler team's outputs remain high-quality, but also to
+avoid over-working and burning out our team members.</p>
+<p>RFC 3599 aims to recognise all of the ways that team members are currently contributing, to ensure
+that the team's processes remain efficient as the team grows, and to strike a balance between team
+membership enabling work efficiency and team membership being a form of status and recognition. Team
+members who have been contributing for a year or more and want to participate in the maintenance
+activities that keep the team going can choose to be maintainers as well as team members. See <a href="https://github.com/rust-lang/rfcs/pull/3599">the
+full RFC</a> for more detailed motivations.</p>
+<p>With RFC 3599 merged, we're now implementing the compiler team's new structure and with this post,
+announcing and recognising the contributions of the compiler team's membership:</p>
+<ul>
+<li><a href="https://github.com/alexcrichton">alexcrichton</a>, team member
+<ul>
+<li>alexcrichton has been a prolific contributor since 2013 and has over 2500 merged pull
+requests. Recently they have been working to improve Rust's WASM support for emerging
+standards.</li>
+</ul>
+</li>
+<li><a href="https://github.com/apiraino">apiraino</a>, team member
+<ul>
+<li>apiraino is an invaluable member of the compiler team, handily tackling the team's
+operational work (agenda preparation, meeting notes, automation, etc) so that the team's work
+progresses smoothly each week.</li>
+</ul>
+</li>
+<li><a href="https://github.com/b-naber">b-naber</a>, team member
+<ul>
+<li>b-naber has been contributing to the compiler since 2020 and has worked on the compiler's
+constant evaluation, on constant generics and on generic associated types in that time.</li>
+</ul>
+</li>
+<li><a href="https://github.com/bjorn3">bjorn3</a>, team member
+<ul>
+<li>bjorn3 has been an active contributor to the compiler since 2017, becoming a compiler team
+contributor in 2020. bjorn has been instrumental in the compiler's support for multiple
+codegen backends and is the primary author of the Cranelift codegen backend.</li>
+</ul>
+</li>
+<li><a href="https://github.com/BoxyUwU">BoxyUwU</a>, maintainer
+<ul>
+<li>BoxyUwU has been contributing relentlessly since 2020, immediately jumping into some of the
+more challenging and technical areas in the compiler. Boxy is a member of the types team and
+has contributed heavily to the implementation and design of constant generics.</li>
+</ul>
+</li>
+<li><a href="https://github.com/camelid">camelid</a>, team member
+<ul>
+<li>camelid has contributed for many years, improving constant generics, project documentation, and compiler diagnostics
+and making many refactorings and cleanups on the compiler codebase.</li>
+</ul>
+</li>
+<li><a href="https://github.com/chenyukang">chenyukang</a>, maintainer
+<ul>
+<li>Since 2021, yukang has been tirelessly improving the compiler's diagnostics. It would be hard
+to find a part of the compiler which hasn't had a diagnostic improved by yukang.</li>
+</ul>
+</li>
+<li><a href="https://github.com/cjgillot">cjgillot</a>, maintainer
+<ul>
+<li>cjgillot is another reliable and consistent contributor who has made countless improvements
+to the compiler since they started contributing, notably to the MIR and its optimisations,
+the query system and the HIR.</li>
+</ul>
+</li>
+<li><a href="https://github.com/compiler-errors">compiler-errors</a>, maintainer
+<ul>
+<li>compiler-errors is a prolific contributor and prominent member of the types team. They have
+authored numerous improvements to compiler diagnostics, resolved countless ICEs and made
+large refactorings and improvements to the compiler frontend. compiler-errors has worked to
+stabilize many recent features for T-types and WG-async, like async functions in traits. It
+would be difficult to find a contributor who hasn't been helped out or had a patch reviewed by
+compiler-errors.</li>
+</ul>
+</li>
+<li><a href="https://github.com/cuviper">cuviper</a>, team member
+<ul>
+<li>cuviper regularly contributes to the compiler's build system, driver and LLVM backend, and
+regularly performs backports.</li>
+</ul>
+</li>
+<li><a href="https://github.com/davidtwco">davidtwco</a>, maintainer + team co-lead
+<ul>
+<li>davidtwco co-leads the compiler team and has been contributing since 2017, making patches to
+various parts of the compiler, contributing to various working groups such as non-lexical
+lifetimes, and implementing features such as the non-exhaustive attribute and split debuginfo.</li>
+</ul>
+</li>
+<li><a href="https://github.com/DianQK">DianQK</a>, team member
+<ul>
+<li>DianQK has been contributing for over a year and has focused on improving the compiler's MIR
+optimisations and fixing and improving our use of LLVM.</li>
+</ul>
+</li>
+<li><a href="https://github.com/durin42">durin42</a>, team member
+<ul>
+<li>durin42 has been a strong contributor to the compiler's LLVM backend, debuginfo and general
+code generation infrastructure since they started contributing in 2021.</li>
+</ul>
+</li>
+<li><a href="https://github.com/eholk">eholk</a>, team member + council representative
+<ul>
+<li>eholk is active in the compiler team and async working group, contributing to the design and
+implementation of the proposed <em>dyn*</em> types, <em>generator functions</em> and <em>for await</em> loops.
+Eric also represents the compiler team in the project's leadership council.</li>
+</ul>
+</li>
+<li><a href="https://github.com/est31">est31</a>, team member
+<ul>
+<li>est31 has been a frequent contributor for almost eight years, making lots of helpful fixes
+and refactorings throughout the compiler. est31 can often be found providing helpful reviews
+and suggestions to Rust's open PRs.</li>
+</ul>
+</li>
+<li><a href="https://github.com/estebank">estebank</a>, maintainer
+<ul>
+<li>estebank is almost synonymous with better compiler diagnostics - over eight years and a
+thousand pull requests later, it would be hard to find a Rust user who hasn't seen a
+diagnostic improved by estebank.</li>
+</ul>
+</li>
+<li><a href="https://github.com/fee1-dead">fee1-dead</a>, maintainer
+<ul>
+<li>fee1-dead has made many impactful contributions since starting to contribute in 2021,
+including C string literals, keyword generic/effect experiments, const trait design &amp;
+implementation and many bug fixes and diagnostic improvements.</li>
+</ul>
+</li>
+<li><a href="https://github.com/flodiebold">flodiebold</a>, team member
+<ul>
+<li>flodiebold is a long-time prolific contributor to rust-analyzer, making over 300 pull
+requests since starting to contribute to the language server in 2018.</li>
+</ul>
+</li>
+<li><a href="https://github.com/fmease">fmease</a>, team member
+<ul>
+<li>fmease has been contributing since 2022, making various improvements to the compiler to
+support rustdoc, as well as refactorings, bug fixes and diagnostic improvements.</li>
+</ul>
+</li>
+<li><a href="https://github.com/jackh726">jackh726</a>, maintainer
+<ul>
+<li>jackh726 co-leads the types team and has made numerous improvements to the implementation of
+the type system, most notably enabling the stabilization of generic associated types.</li>
+</ul>
+</li>
+<li><a href="https://github.com/jieyouxu">jieyouxu</a>, team member
+<ul>
+<li>jieyouxu does invaluable work in helping maintain bootstrap, compiletest and the new
+<code>run_make_support</code> library for <code>run-make</code> tests, as well as fixing ICEs and improving
+diagnostics.</li>
+</ul>
+</li>
+<li><a href="https://github.com/jswrenn">jswrenn</a>, team member
+<ul>
+<li>jswrenn has been a stalwart member of the safe transmute project group for years and has
+made various contributions implementing the fruits of the group's efforts.</li>
+</ul>
+</li>
+<li><a href="https://github.com/lcnr">lcnr</a>, maintainer
+<ul>
+<li>lcnr co-leads the types team and is one of the team's foremost experts on the language's
+type system and the compiler's implementation of it. lcnr's recent work has been focused on
+implementing and stabilizing the compiler's next-generation trait solver.</li>
+</ul>
+</li>
+<li><a href="https://github.com/lqd">lqd</a>, maintainer
+<ul>
+<li>lqd started out in the non-lexical lifetimes working group back in 2018 and has been part
+of the fabric of the project since. Compiler performance has seen significant improvements
+thanks to lqd's work on enabling LTO for the compiler and supporting lld. lqd is currently
+leading work on Polonius, the next generation of Rust's borrow checker.</li>
+</ul>
+</li>
+<li><a href="https://github.com/lukas-code">lukas-code</a>, team member
+<ul>
+<li>lukas-code has been contributing regularly since 2022, making improvements and fixing bugs
+throughout the compiler's codebase.</li>
+</ul>
+</li>
+<li><a href="https://github.com/Mark-Simulacrum">Mark-Simulacrum</a>, maintainer
+<ul>
+<li>Mark-Simulacrum has been working on the Rust project for almost a decade and frequently
+contributes to the team through backports, reverts and patches throughout the codebase. For
+many years, they have helped maintain critical compiler infrastructure such as bootstrap and
+the compiler test harness.</li>
+</ul>
+</li>
+<li><a href="https://github.com/matthewjasper">matthewjasper</a>, maintainer
+<ul>
+<li>matthewjasper has been contributing since 2017 and was a key contributor to the non-lexical
+lifetimes working group. They have since made significant improvements to the MIR, progress
+on specialization and stabilizing the THIR unsafeck.</li>
+</ul>
+</li>
+<li><a href="https://github.com/Nadrieril">Nadrieril</a>, maintainer
+<ul>
+<li>Nadrieril is the compiler team's expert on exhaustiveness checking, pattern analysis and
+match lowering, their significant refactoring and improvement work have enabled progress on
+previously blocked features such as slice patterns, or-patterns, exhaustive patterns and
+deref patterns.</li>
+</ul>
+</li>
+<li><a href="https://github.com/nagisa">nagisa</a>, team member
+<ul>
+<li>nagisa has been a compiler team member for many years, with their initial work on Rust
+dating back to 2014. nagisa improves the compiler's LLVM backend and everything to do with
+our MIR, codegen, debuginfo and the compiler backends in general.</li>
+</ul>
+</li>
+<li><a href="https://github.com/nikic">nikic</a>, team member
+<ul>
+<li>nikic is the team's LLVM expert and helps ensure the compiler is keeping pace with changes
+in LLVM upstream. nikic is also the lead maintainer of LLVM and has made many improvements
+in LLVM to better support Rust.</li>
+</ul>
+</li>
+<li><a href="https://github.com/nikomatsakis">nikomatsakis</a>, team member
+<ul>
+<li>nikomatsakis needs no introduction, as one of the original members of the Rust project and
+former lead of the compiler team. nikomatsakis has worked on crucial parts of the compiler
+since their initial implementation.</li>
+</ul>
+</li>
+<li><a href="https://github.com/Noratrieb">Noratrieb</a>, maintainer
+<ul>
+<li>Noratrieb has been a staple of the contributor community since they started in 2021,
+working on a swathe of refactorings, bug fixes, features and improvements throughout the
+compiler. Prolific contributors like Nora have an outsized impact across the codebase. Nora
+can often be found answering questions and helping other contributors on Zulip!</li>
+</ul>
+</li>
+<li><a href="https://github.com/nnethercote">nnethercote</a>, maintainer
+<ul>
+<li>nnethercote has been working on compiler performance since 2016, including the benchmarking
+and profiling infrastructure. He has also cleaned up a lot of old crufty code across many
+parts of the compiler.</li>
+</ul>
+</li>
+<li><a href="https://github.com/oli-obk">oli-obk</a>, maintainer
+<ul>
+<li>oli-obk is a long-time compiler team member whose prolific contribution history is a
+challenge to summarize, but include constant evaluation, constant generics, pattern types,
+MIR optimisations, diagnostics, clippy improvements, and existential types.</li>
+</ul>
+</li>
+<li><a href="https://github.com/petrochenkov">petrochenkov</a>, maintainer
+<ul>
+<li>petrochenkov is another long-time compiler team member who primarily maintains the compiler's
+name resolution and macro expansion, notoriously tricky and nuanced subsystems of the
+compiler.</li>
+</ul>
+</li>
+<li><a href="https://github.com/pnkfelix">pnkfelix</a>, maintainer
+<ul>
+<li>Former compiler team co-lead, pnkfelix is yet another long-time team member has made
+contributions throughout the compiler and made significant contributions to the borrow
+checker, early MIR, and early compiler architecture.</li>
+</ul>
+</li>
+<li><a href="https://github.com/ralfjung">RalfJung</a>, team member
+<ul>
+<li>Known for his work on Miri and Stacked Borrows, an operational semantics for memory accesses
+in the language, RalfJ is the team's foremost expert on the operational semantics of the
+language and also deeply involved in const evaluation. He has been working on achieving sound
+semantics down to lowest levels of the compiler.</li>
+</ul>
+</li>
+<li><a href="https://github.com/saethlin">saethlin</a>, maintainer
+<ul>
+<li>saethlin has made significant improvements to MIR, Miri, and codegen in their contributions
+since starting in 2021 and has become an invaluable source of knowledge on the language's
+operational semantics/unsafe code guidelines.</li>
+</ul>
+</li>
+<li><a href="https://github.com/scottmcm">scottmcm</a>, team member
+<ul>
+<li>scottmcm is a member of the language team who also regularly implements improvements in the
+compiler, particularly in the MIR and compiler's codegen, always trying to get to the perfect
+machine code.</li>
+</ul>
+</li>
+<li><a href="https://github.com/sparrowlii">SparrowLii</a>, maintainer
+<ul>
+<li>SparrowLii is a relatively new member of the team who has resurrected and led the effort to
+parallelize the compiler and has been responsible for the great strides that effort has made
+alongside members of the parallel rustc and compiler performance working groups.</li>
+</ul>
+</li>
+<li><a href="https://github.com/spastorino">spastorino</a>, maintainer
+<ul>
+<li>spastorino is another alum of the non-lexical lifetimes working group, starting to contribute
+in late 2017. Since NLL, spastorino has implemented negative impls in coherence, refactored
+return position impl trait in trait code to lower as a GAT, and has done a lot of refactors/bugfixes
+to the compiler.</li>
+</ul>
+</li>
+<li><a href="https://github.com/TaKO8Ki">TaKO8Ki</a>, team member
+<ul>
+<li>TaKO8Ki has made lots of diagnostic improvements, helped the team keep on top of regressions
+by adding plenty of regression tests, done lots of refactorings and cleanup, fixed a bunch of
+ICEs in their time contributing.</li>
+</ul>
+</li>
+<li><a href="https://github.com/tgross35">tgross35</a>, team member
+<ul>
+<li>tgross35 has been contributing for two years and has been leading the implementation of the
+new <code>f16</code> and <code>f128</code> types.</li>
+</ul>
+</li>
+<li><a href="https://github.com/the8472">the8472</a>, team member
+<ul>
+<li>the8472 has been a contributor since 2020 and has helped to improve the quality of code
+generated by the compiler via changes to the Rust standard library.</li>
+</ul>
+</li>
+<li><a href="https://github.com/tmandry">tmandry</a>, team member
+<ul>
+<li>tmandry has been leading the async working group since its inception and has made remarkable
+contributions to pushing forward the async support in the compiler.</li>
+</ul>
+</li>
+<li><a href="https://github.com/tmiasko">tmiasko</a>, team member
+<ul>
+<li>tmiasko has been contributing for almost four years and has reliably completed invaluable
+work on the compiler's MIR representation, optimisations and LLVM code generation, becoming
+one of the team's experts in these areas.</li>
+</ul>
+</li>
+<li><a href="https://github.com/Urgau">Urgau</a>, team member
+<ul>
+<li>Urgau has worked on a wide variety of improvements in their time contributing, from
+<code>check-cfg</code> to range patterns, <code>black_box</code> to lints, and much more.</li>
+</ul>
+</li>
+<li><a href="https://github.com/WaffleLapkin">WaffleLapkin</a>, team member
+<ul>
+<li>WaffleLapkin has been another staple of the contributor community since 2020, doing a
+variety of essential refactors, bug fixes and performance improvements. Like Nora above,
+Waffle is a prolific contributor whose improvements across the compiler have a major impact.</li>
+</ul>
+</li>
+<li><a href="https://github.com/wesleywiser">wesleywiser</a>, maintainer + team co-lead
+<ul>
+<li>wesleywiser is co-lead of the compiler team and has been contributing since 2015 while
+working on various parts of the compiler including self-profiling, incremental compilation,
+MIR optimizations and Windows &amp; Linux debugging support.</li>
+</ul>
+</li>
+<li><a href="https://github.com/Zalathar">Zalathar</a>, team member
+<ul>
+<li>Zalathar has been contributing for a little over a year and has had a massive impact,
+working on significant and widespread refactorings to the compiler's support for code
+coverage instrumentation.</li>
+</ul>
+</li>
+</ul>
+<p>There are also some team members choosing to become alumni who have made valuable contributions
+during their time as team members:</p>
+<ul>
+<li><a href="https://github.com/Aaron1011">Aaron1011</a>
+<ul>
+<li>Aaron1011 contributed widely since 2017, touching basically every part of the compiler,
+fixing bugs, making improvements and doing important refactorings wherever they went.</li>
+</ul>
+</li>
+<li><a href="https://github.com/eddyb">eddyb</a>
+<ul>
+<li>eddyb is a prolific and incredibly knowledgable member of the compiler team who has made
+widespread improvements throughout the compiler for many years. Much of their work has
+focused on the LLVM backend, the initial implementation and improvements to MIR, the v0 Rust
+name mangling scheme, and a huge number of bug fixes and architectural improvements to the
+compiler.</li>
+</ul>
+</li>
+<li><a href="https://github.com/michaelwoerister">michaelwoerister</a>
+<ul>
+<li>Another long-time compiler team member, michaelwoerister has been responsible for huge
+improvements and progress in the project's debuginfo, codegen, incremental compilation, LTO
+and PGO, going back to 2013.</li>
+</ul>
+</li>
+</ul>
+<p>Thank you to our past, current and future compiler team members and maintainers!</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

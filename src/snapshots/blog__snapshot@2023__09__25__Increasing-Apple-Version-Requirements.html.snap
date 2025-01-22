@@ -1,0 +1,202 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2023/09/25/Increasing-Apple-Version-Requirements.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Increasing the minimum supported Apple platform versions | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Increasing the minimum supported Apple platform versions | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Increasing the minimum supported Apple platform versions | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Increasing the minimum supported Apple platform versions" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Increasing the minimum supported Apple platform versions</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 25, 2023 &middot; BlackHoleFox
+    
+    </div>
+
+    <div class="post">
+      <p>As of Rust 1.74 (to be released on November 16th, 2023), the minimum version of Apple's platforms (iOS, macOS, and tvOS) that the Rust toolchain supports will be <a href="https://github.com/rust-lang/rust/pull/104385">increased</a> to newer baselines. These changes affect both the Rust compiler itself (<code>rustc</code>), other host tooling, and most importantly, the standard library and any binaries produced that use it. With these changes in place, any binaries produced will stop loading on older versions or exhibit other, unspecified, behavior.</p>
+<p>The new minimum versions are now:</p>
+<ul>
+<li>macOS: 10.12 Sierra (First released 2016)</li>
+<li>iOS: 10 (First released 2016)</li>
+<li>tvOS: 10 (First released 2016)</li>
+</ul>
+<p>If your application does not target or support macOS 10.7-10.11 or iOS 7-9 already these changes most likely do not affect you.</p>
+<h1><a href="#affected-targets" aria-hidden="true" class="anchor" id="affected-targets"></a>Affected targets</h1>
+<p>The following contains each affected target, and the comprehensive effects on it:</p>
+<ul>
+<li><code>x86_64-apple-darwin</code> (Minimum OS raised)</li>
+<li><code>aarch64-apple-ios</code> (Minimum OS raised)</li>
+<li><code>aarch64-apple-ios-sim</code> (Minimum iOS <em>and macOS</em> version raised.)</li>
+<li><code>x86_64-apple-ios</code> (Minimum iOS <em>and macOS</em> version raised. This is also a simulator target.)</li>
+<li><code>aarch64-apple-tvos</code> (Minimum OS raised)</li>
+<li><code>armv7-apple-ios</code> (Target removed. The oldest iOS 10-compatible device uses ARMv7s.)</li>
+<li><code>armv7s-apple-ios</code> (Minimum OS raised)</li>
+<li><code>i386-apple-ios</code> (Minimum OS raised)</li>
+<li><code>i686-apple-darwin</code> (Minimum OS raised)</li>
+<li><code>x86_64-apple-tvos</code> (Minimum tvOS <em>and macOS</em> version raised. This is also a simulator target.)</li>
+</ul>
+<p>From these changes, only one target has been removed entirely: <code>armv7-apple-ios</code>. It was a tier 3 target.</p>
+<p>Note that Mac Catalyst and M1/M2 (<code>aarch64</code>) Mac targets are not affected, as their minimum OS version already has a higher baseline. Refer to the <a href="https://doc.rust-lang.org/nightly/rustc/platform-support.html">Platform Support Guide</a> for more information.</p>
+<h1><a href="#affected-systems" aria-hidden="true" class="anchor" id="affected-systems"></a>Affected systems</h1>
+<p>These changes remove support for multiple older mobile devices (iDevices) and many more Mac systems. Thanks to <code>@madsmtm</code> for <a href="https://github.com/rust-lang/rust/pull/104385#issuecomment-1317830217">compiling the list</a>.</p>
+<p>As of this update, the following device models are no longer supported by the latest Rust toolchain:</p>
+<h3><a href="#ios" aria-hidden="true" class="anchor" id="ios"></a>iOS</h3>
+<ul>
+<li>iPhone 4S (Released in 2011)</li>
+<li>iPad 2 (Released in 2011)</li>
+<li>iPad, 3rd generation (Released in 2012)</li>
+<li>iPad Mini, 1st generation (Released in 2012)</li>
+<li>iPod Touch, 5th generation (Released in 2012)</li>
+</ul>
+<h3><a href="#macos" aria-hidden="true" class="anchor" id="macos"></a>macOS</h3>
+<p>A total of 27 Mac system models, released between 2007 and 2009, are no longer supported.</p>
+<p>The affected systems are not comprehensively listed here, but external resources exist which contain lists of the exact models. They can be found <a href="https://support.apple.com/kb/SP742?locale=en_US">from Apple</a> and <a href="https://yama-mac.com/en/macos_correspondence_table/#toc4">Yama-Mac</a>, for example.</p>
+<h3><a href="#tvos" aria-hidden="true" class="anchor" id="tvos"></a>tvOS</h3>
+<p>The third generation AppleTV (released 2012-2013) is no longer supported.</p>
+<h1><a href="#why-are-the-requirements-being-changed" aria-hidden="true" class="anchor" id="why-are-the-requirements-being-changed"></a>Why are the requirements being changed?</h1>
+<p>Prior to now, Rust claimed support for very old Apple OS versions, but many never even received passive testing or support. This is a rough place to be for a toolchain, as it hinders opportunities for improvement in exchange for a support level many people, or everyone, will never utilize. For Apple's mobile platforms, many of the old versions are now even unable to receive new software due to App Store publishing restrictions.</p>
+<p>Additionally, the past two years have clearly indicated that Apple, which has tight control over toolchains for these targets, is making it difficult-to-impossible to support them anymore. As of XCode 14, last year's toolchain release, building for many old OS versions <a href="https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes">became unsupported</a>. XCode 15 continues this trend. After enough time, continuing to use an older toolchain can even lead to breaking build issues for others.</p>
+<p>We want Rust to be a first-class option for developing software for and on Apple's platforms, but to continue this goal we have to set an easier, and more realistic compatibility baseline. The new requirements were determined after surveying what Apple and third-party statistics are available to us and picking a middle ground that balances compatibility with Rusts's needs and limitations.</p>
+<h1><a href="#do-i-need-to-do-anything" aria-hidden="true" class="anchor" id="do-i-need-to-do-anything"></a>Do I need to do anything?</h1>
+<p>If you or an application you develop are affected by this change, there are different options which may be helpful:</p>
+<ul>
+<li>If possible, raise your minimum supported OS version(s). All OS versions discussed in this post have no support from the vendor. Not even security updates.</li>
+<li>If you are running the Rust compiler or other previously-supported host tools, consider cross-compiling from a newer host instead. You may also no longer be able to depend on the Rust standard library.</li>
+<li>If none of these options work, you may need to freeze the version of the Rust toolchain your project builds with. Alternatively, you may be able to maintain a custom toolchain that supports your requirements in any sub-component of it (such as libstd).</li>
+</ul>
+<p>If your project does not directly support a specific OS version, but instead depends on a default version previously used by Rust, there are some steps you can take
+to help improve future compatibility. For example, a number of crates in the ecosystem have hardcoded Rust's previously supported OS baseline versions since they haven't changed for a long time:</p>
+<ul>
+<li>If you use the <code>cc</code> crate to include other languages in your project, a <a href="https://github.com/rust-lang/cc-rs/pull/848">future update</a> will handle this transparently.</li>
+<li>If you need a minimum OS version for anything else, crates should query the new <code>rustc --print deployment-target</code> option for a default, or user-set when available, value on toolchains using Rust 1.71 or newer going forward. Hardcoded defaults should only be used for older toolchains where this is unavailable.</li>
+</ul>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

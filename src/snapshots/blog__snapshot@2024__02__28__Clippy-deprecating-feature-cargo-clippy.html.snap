@@ -1,0 +1,207 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/02/28/Clippy-deprecating-feature-cargo-clippy.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Clippy: Deprecating &#x60;feature &#x3D; &quot;cargo-clippy&quot;&#x60; | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Clippy: Deprecating &#x60;feature &#x3D; &quot;cargo-clippy&quot;&#x60; | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Clippy: Deprecating &#x60;feature &#x3D; &quot;cargo-clippy&quot;&#x60; | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Clippy: Deprecating &#x60;feature &#x3D; &quot;cargo-clippy&quot;&#x60;" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Clippy: Deprecating &#x60;feature &#x3D; &quot;cargo-clippy&quot;&#x60;</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 28, 2024 &middot; The Clippy Team
+    
+    </div>
+
+    <div class="post">
+      <p>Since Clippy <a href="https://github.com/rust-lang/rust-clippy/blob/61daf674eaf17f3b504c51f01b4ee63fac47dfcf/CHANGELOG.md?plain=0#0097--2016-11-03"><code>v0.0.97</code></a> and before it was shipped with <code>rustup</code>, Clippy
+implicitly added a <code>feature = &quot;cargo-clippy&quot;</code> config<sup class="footnote-ref"><a href="#fn-1" id="fnref-1" data-footnote-ref>1</a></sup> when linting your code
+with <code>cargo clippy</code>.</p>
+<p>Back in the day (2016) this was necessary to allow, warn or deny Clippy lints
+using attributes:</p>
+<pre><code class="language-rust">#[cfg_attr(feature = &quot;cargo-clippy&quot;, allow(clippy_lint_name))]
+</code></pre>
+<p>Doing this hasn't been necessary for a long time. Today, Clippy users will set
+lint levels with tool lint attributes using the <code>clippy::</code> prefix:</p>
+<pre><code class="language-rust">#[allow(clippy::lint_name)]
+</code></pre>
+<p>The implicit <code>feature = &quot;cargo-clippy&quot;</code> has only been kept for backwards
+compatibility, but will be deprecated in upcoming nightlies and later in
+<code>1.78.0</code>.</p>
+<h2><a href="#alternative" aria-hidden="true" class="anchor" id="alternative"></a>Alternative</h2>
+<p>As there is a rare <a href="https://doc.rust-lang.org/clippy/configuration.html#disabling-evaluation-of-certain-code">use case</a> for conditional compilation depending on Clippy,
+we will provide an alternative. So in the future (<code>1.78.0</code>) you will be able to
+use:</p>
+<pre><code class="language-rust">#[cfg(clippy)]
+</code></pre>
+<h2><a href="#transitioning" aria-hidden="true" class="anchor" id="transitioning"></a>Transitioning</h2>
+<blockquote>
+<p>Should you only use stable toolchains, you can wait with the transition until
+Rust <code>1.78.0</code> (2024-05-02) is released.</p>
+</blockquote>
+<p>Should you have instances of <code>feature = &quot;cargo-clippy&quot;</code> in your code base, you
+will see a warning from the new Clippy lint
+<a href="https://rust-lang.github.io/rust-clippy/master/index.html#/deprecated_clippy_cfg_attr"><code>clippy::deprecated_clippy_cfg_attr</code></a> available in the latest nightly Clippy.
+This lint can automatically fix your code. So if you should see this lint
+triggering, just run:</p>
+<pre><code>cargo clippy --fix -- -Aclippy::all -Wclippy::deprecated_clippy_cfg_attr
+</code></pre>
+<p>This will fix all instances in your code.</p>
+<p>In addition, check your <code>.cargo/config</code> file for:</p>
+<pre><code class="language-toml">[target.'cfg(feature = &quot;cargo-clippy&quot;)']
+rustflags = [&quot;-Aclippy::...&quot;]
+</code></pre>
+<p>If you have this config, you will have to update it yourself, by either changing
+it to <code>cfg(clippy)</code> or taking this opportunity to transition to <a href="https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section">setting lint
+levels in <code>Cargo.toml</code></a> directly.</p>
+<h2><a href="#motivation-for-deprecation" aria-hidden="true" class="anchor" id="motivation-for-deprecation"></a>Motivation for Deprecation</h2>
+<p>Currently, there's a <a href="https://github.com/rust-lang/rfcs/pull/3013#issuecomment-1936648479">call for testing</a>, in order to stabilize <a href="https://github.com/rust-lang/rfcs/pull/3013">checking
+conditional compilation at compile time</a>, aka <code>cargo check -Zcheck-cfg</code>. If we were to keep the <code>feature = &quot;cargo-clippy&quot;</code> config, users
+would start seeing a lot of warnings on their <code>feature = &quot;cargo-clippy&quot;</code>
+conditions. To work around this, they would either need to allow the lint or
+have to add a dummy feature to their <code>Cargo.toml</code> in order to silence those
+warnings:</p>
+<pre><code class="language-toml">[features]
+cargo-clippy = []
+</code></pre>
+<p>We didn't think this would be user friendly, and decided that instead we want to
+deprecate the implicit <code>feature = &quot;cargo-clippy&quot;</code> config and replace it with the
+<code>clippy</code> config.</p>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-1">
+<p>It's likely that you didn't even know that Clippy implicitly sets this
+config (which was not a Cargo feature). This is intentional, as we stopped
+advertising and documenting this a long time ago. <a href="#fnref-1" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

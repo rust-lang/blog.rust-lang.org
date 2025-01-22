@@ -1,0 +1,174 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/11/07/gccrs-an-alternative-compiler-for-rust.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>gccrs: An alternative compiler for Rust | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="gccrs: An alternative compiler for Rust | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="gccrs: An alternative compiler for Rust | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="gccrs: An alternative compiler for Rust" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>gccrs: An alternative compiler for Rust</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Nov. 7, 2024 &middot; Arthur Cohen on behalf of the gccrs project
+    
+    </div>
+
+    <div class="post">
+      <p><em>This is a guest post from the gccrs project, at the invitation of the Rust Project, to clarify the relationship with the Rust Project and the opportunities for collaboration.</em></p>
+<p><code>gccrs</code> is a work-in-progress alternative compiler for Rust being developed as part of the <a href="https://gcc.gnu.org/">GCC project</a>. GCC is a collection of compilers for various programming languages that all share a common compilation framework. You may have heard about <code>gccgo</code>, <code>gfortran</code>, or <code>g++</code>, which are all binaries within that project, the <a href="https://gcc.gnu.org/">GNU Compiler Collection</a>. The aim of <code>gccrs</code> is to add support for the Rust programming language to that collection, with the goal of having the exact same behavior as <code>rustc</code>.</p>
+<p>First and foremost, <code>gccrs</code> was started as a project because it is fun. Compilers are incredibly rewarding pieces of software, and are great fun to put together. The project was started back in 2014, before Rust 1.0 was released, but was quickly put aside due to the shifting nature of the language back then. Around 2019, work on the compiler started again, led by <a href="https://github.com/philberty">Philip Herron</a> and funded by <a href="https://opensrcsec.com/">Open Source Security</a> and <a href="https://www.embecosm.com/">Embecosm</a>. Since then, we have kept steadily progressing towards support for the Rust language as a whole, and our team has kept growing with around a dozen contributors working regularly on the project. We have participated in the Google Summer of Code program for the past four years, and multiple students have joined the effort.</p>
+<p>The main goal of <code>gccrs</code> is to provide an alternative option for compiling Rust. GCC is an old project, as it was first released in 1987. Over the years, it has accumulated numerous contributions and support for multiple targets, including some not supported by LLVM, the main backend used by <code>rustc</code>. A practical example of that reach is the homebrew Dreamcast scene, where passionate engineers develop games for the Dreamcast console. Its processor architecture, SuperH, is supported by GCC but not by LLVM. This means that Rust is not able to be used on those platforms, except through efforts like <code>gccrs</code> or the <code>rustc-codegen-gcc</code> backend - whose main differences will be explained later.</p>
+<p>GCC also benefits from the decades of software written in unsafe languages. As such, a high amount of safety features have been developed for the project as external plugins, or even within the project as static analyzers. These analyzers and plugins are executed on GCC's internal representations, meaning that they are language-agnostic, and can thus be used on all the programming languages supported by GCC. Likewise, many GCC plugins are used for increasing the safety of critical projects such as the Linux kernel, which has recently gained support for the Rust programming language. This makes <code>gccrs</code> a useful tool for analyzing unsafe Rust code, and more generally Rust code which has to interact with existing C code. We also want <code>gccrs</code> to be a useful tool for <code>rustc</code> itself by helping pan out the Rust specification effort with a unique viewpoint - that of a tool trying to replicate another's functionality, oftentimes through careful experimentation and source reading where the existing documentation did not go into enough detail. We are also in the process of developing various tools around <code>gccrs</code> and <code>rustc</code>, for the sole purpose of ensuring <code>gccrs</code> is as correct as <code>rustc</code> - which could help in discovering surprising behavior, unexpected functionality, or unspoken assumptions.</p>
+<p>We would like to point out that our goal in aiding the Rust specification effort is not to turn it into a document for certifying alternative compilers as &quot;Rust compilers&quot; - while we believe that the specification will be useful to <code>gccrs</code>, our main goal is to contribute to it, by reviewing and adding to it as much as possible.</p>
+<p>Furthermore, the project is still &quot;young&quot;, and still requires a huge amount of work. There are a lot of places to make your mark, and a lot of easy things to work on for contributors interested in compilers. We have strived to create a safe, fun, and interesting space for all of our team and our GSoC students. We encourage anyone interested to come chat with us on our <a href="https://rust-gcc.github.io/#get-involved">various communication platforms</a>, and offer mentorship for you to learn how to contribute to the project and to compilers in general.</p>
+<p>Maybe more importantly however, there is a number of things that <code>gccrs</code> is NOT for. The project has multiple explicit non-goals, which we value just as highly as our goals.</p>
+<p>The most crucial of these non-goals is for <code>gccrs</code> not to become a gateway for an alternative or extended Rust-like programming language. We do not wish to create a GNU-specific version of Rust, with different semantics or slightly different functionality. <code>gccrs</code> is not a way to introduce new Rust features, and will not be used to circumvent the RFC process - which we will be using, should we want to see something introduced to Rust. Rust is not C, and we do not intend to introduce subtle differences in standard by making some features available only to <code>gccrs</code> users. We know about the pain caused by compiler-specific standards, and have learned from the history of older programming languages.</p>
+<p>We do not want <code>gccrs</code> to be a competitor to the <code>rustc_codegen_gcc</code> backend. While both projects will effectively achieve the same goal, which is to compile Rust code using the GCC compiler framework, there are subtle differences in what each of these projects will unlock for the language. For example, <code>rustc_codegen_gcc</code> makes it easy to benefit from all of <code>rustc</code>'s amazing diagnostics and helpful error messages, and makes Rust easily usable on GCC-specific platforms. On the other hand, it requires <code>rustc</code> to be available in the first place, whereas <code>gccrs</code> is part of a separate project entirely. This is important for some users and core Linux developers for example, who believe that having the ability to compile the entire kernel (C and Rust parts) using a single compiler is essential. <code>gccrs</code> can also offer more plugin entrypoints by virtue of it being its own separate GCC frontend. It also allows Rust to be used on GCC-specific platforms with an older GCC where <code>libgccjit</code> is not available. Nonetheless, we are very good friends with the folks working on <code>rustc_codegen_gcc</code>, and have helped each other multiple times, especially in dealing with the patch-based contribution process that GCC uses.</p>
+<p>All of this ties into a much more global goal, which we could summarize as the following: We do not want to split the Rust ecosystem. We want <code>gccrs</code> to help the language reach even more people, and even more platforms.</p>
+<p>To ensure that, we have taken multiple measures to make sure the values of the Rust project are respected and exposed properly. One of the features we feel most strongly about is the addition of a very annoying command line flag to the compiler, <code>-frust-incomplete-and-experimental-compiler-do-not-use</code>. Without it, you are not able to compile any code with <code>gccrs</code>, and the compiler will output the following error message:</p>
+<blockquote>
+<p>crab1: fatal error: gccrs is not yet able to compile Rust code properly. Most of the errors produced will be the fault of gccrs and not the crate you are trying to compile. Because of this, please report errors directly to us instead of opening issues on said crate's repository.</p>
+<p>Our github repository: https://github.com/rust-gcc/gccrs</p>
+<p>Our bugzilla tracker: https://gcc.gnu.org/bugzilla/buglist.cgi?bug_status=__open__&amp;component=rust&amp;product=gcc</p>
+<p>If you understand this, and understand that the binaries produced might not behave accordingly, you may attempt to use gccrs in an experimental manner by passing the following flag:</p>
+<p><code>-frust-incomplete-and-experimental-compiler-do-not-use</code></p>
+<p>or by defining the following environment variable (any value will do)</p>
+<p>GCCRS_INCOMPLETE_AND_EXPERIMENTAL_COMPILER_DO_NOT_USE</p>
+<p>For cargo-gccrs, this means passing</p>
+<p>GCCRS_EXTRA_ARGS=&quot;-frust-incomplete-and-experimental-compiler-do-not-use&quot;</p>
+<p>as an environment variable.</p>
+</blockquote>
+<p>Until the compiler can compile correct Rust and, most importantly, reject incorrect Rust, we will be keeping this command line option in the compiler. The hope is that it will prevent users from potentially annoying existing Rust crate maintainers with issues about code not compiling, when it is most likely our fault for not having implemented part of the language yet. Our goal of creating an alternative compiler for the Rust language must not have a negative effect on any member of the Rust community. Of course, this command line flag is not to the taste of everyone, and there has been significant pushback to its presence... but we believe it to be a good representation of our main values.</p>
+<p>In a similar vein, <code>gccrs</code> separates itself from the rest of the GCC project by not using a mailing list as its main mode of communication. The compiler we are building will be used by the Rust community, and we believe we should make it easy for that community to get in touch with us and report the problems they encounter. Since Rustaceans are used to GitHub, this is also the development platform we have been using for the past five years. Similarly, we use a <a href="https://gcc-rust.zulipchat.com/">Zulip instance</a> as our main communication platform, and encourage anyone wanting to chat with us to join it. Note that we still have a mailing list, as well as an IRC channel (gcc-rust@gcc.gnu.org and #gccrust on <a href="https://oftc.net">oftc.net</a>), where all are welcome.</p>
+<p>To further ensure that gccrs does not create friction in the ecosystem, we want to be extremely careful about the finer details of the compiler, which to us means reusing <code>rustc</code> components where possible, sharing effort on those components, and communicating extensively with Rust experts in the community. Two Rust components are already in use by <code>gccrs</code>: a slightly older version of <code>polonius</code>, the next-generation Rust borrow-checker, and the <a href="https://github.com/rust-lang/rust/tree/master/compiler/rustc_parse_format"><code>rustc_parse_format</code></a> crate of the compiler. There are multiple reasons for reusing these crates, with the main one being correctness. Borrow checking is a complex topic and a pillar of the Rust programming language. Having subtle differences between <code>rustc</code> and <code>gccrs</code> regarding the borrow rules would be annoying and unproductive to users - but by making an effort to start integrating <code>polonius</code> into our compilation pipeline, we help ensure that the results we produce will be equivalent to <code>rustc</code>. You can read more about the various components we use, and we plan to reuse even more <a href="https://rust-gcc.github.io/2024/09/20/reusing-rustc-components.html">here</a>. We would also like to contribute to the <code>polonius</code> project itself and help make it better if possible. This cross-pollination of components will obviously benefit us, but we believe it will also be useful for the Rust project and ecosystem as a whole, and will help strengthen these implementations.</p>
+<p>Reusing <code>rustc</code> components could also be extended to other areas of the compiler: Various components of the type system, such as the trait solver, an essential and complex piece of software, could be integrated into <code>gccrs</code>. Simpler things such as parsing, as we have done for the format string parser and inline assembly parser, also make sense to us. They will help ensure that the internal representation we deal with will correspond to the one expected by the Rust standard library.</p>
+<p>On a final note, we believe that one of the most important steps we could take to prevent breakage within the Rust ecosystem is to further improve our relationship with the Rust community. The amount of help we have received from Rust folks is great, and we think <code>gccrs</code> can be an interesting project for a wide range of users. We would love to hear about your hopes for the project and your ideas for reducing ecosystem breakage or lowering friction with the crates you have published. We had a great time chatting about <code>gccrs</code> at RustConf 2024, and everyone's interest in the project was heartwarming. Please get in touch with us if you have any ideas on how we could further contribute to Rust.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

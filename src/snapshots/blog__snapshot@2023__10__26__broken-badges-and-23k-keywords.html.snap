@@ -1,0 +1,164 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2023/10/26/broken-badges-and-23k-keywords.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>A tale of broken badges and 23,000 features | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="A tale of broken badges and 23,000 features | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="A tale of broken badges and 23,000 features | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="A tale of broken badges and 23,000 features" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>A tale of broken badges and 23,000 features</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 26, 2023 &middot; Tobias Bieniek
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/crates-io">the crates.io team</a> 
+    </div>
+
+    <div class="post">
+      <p>Around mid-October of 2023 the crates.io team was <a href="https://github.com/rust-lang/crates.io/issues/7269">notified</a> by one of our users that a <a href="https://shields.io">shields.io</a> badge for their crate stopped working. The issue reporter was kind enough to already debug the problem and figured out that the API request that shields.io sends to crates.io was most likely the problem. Here is a quote from the original issue:</p>
+<blockquote>
+<p>This crate makes heavy use of feature flags which bloat the response payload of the API.</p>
+</blockquote>
+<p>Apparently the API response for this specific crate had broken the 20 MB mark and shields.io wasn't particularly happy with this. Interestingly, this crate only had 9 versions published at this point in time. But how do you get to 20 MB with only 9 published versions?</p>
+<p>As the quote above already mentions, this crate is using features… a lot of features… almost 23,000! 😱</p>
+<p>What crate needs that many features? Well, this crate provides SVG icons for Rust-based web applications… and it uses one feature per icon so that the payload size of the final WebAssembly bundle stays small.</p>
+<p>At first glance there should be nothing wrong with this. This seems like a reasonable thing to do from a crate author perspective and neither cargo, nor crates.io, were showing any warnings about this. Unfortunately, some of the internals are not too happy about such a high number of features…</p>
+<p>The first problem that was already identified by the crate author: the API responses from crates.io are getting veeeery large. Adding to the problem is the fact that the crates.io API currently does not paginate the list of published versions. Changing this is obviously a breaking change, so our team had been a bit reluctant to change the behavior of the API in that regard, though this situation has shown that we will likely have to tackle this problem in the near future.</p>
+<p>The next problem is that the <a href="https://index.crates.io/ic/on/icondata">index file</a> for this crate is also getting large. With 9 published versions it already contains 11 MB of data. And just like the crates.io API, there is currently no pagination built into the package index file format.</p>
+<p>Now you may ask, why do the package index and cargo need to know about features? Well, the easy answer is: for dependency resolution. Features can enable optional dependencies, so when a dependency feature is used it might influence the dependency resolution. Our initial thought was that we could at least drop all empty feature declarations from the index file (e.g. <code>foo = []</code>), but the cargo team informed us that cargo relies on them being available there too, and so for backwards-compatibility reasons this is not an option.</p>
+<p>On the bright side, most Rust users are on cargo versions these days that use the sparse package index by default, which only downloads index files for packages actually being used. In other words: only users of this icon crate need to pay the price for downloading all the metadata. On the flipside, this means users who are still using the git-based index are all paying for this one crate using 23,000 features.</p>
+<p>So, where do we go from here? 🤔</p>
+<p>While we believe that supporting such a high number of features is conceptually a valid request, with the current implementation details in crates.io and cargo we cannot support this. After analyzing all of these downstream effects from a single crate having that many features, we realized we need some form of restriction on crates.io to keep the system from falling apart.</p>
+<p>Now comes the important part: <strong>on 2023-10-16 the crates.io team deployed a change limiting the number of features a crate can have to 300 for any new crates/versions being published.</strong></p>
+<p>… for now, or at least until we have found solutions for the above problems.</p>
+<p>We are aware of a couple of crates that also have legitimate reasons for having more than 300 features, and we have granted them appropriate exceptions to this rule, but we would like to ask everyone to be mindful of these limitations of our current systems.</p>
+<p>We also invite everyone to participate in finding solutions to the above problems. The best place to discuss ideas is the <a href="https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io/">crates.io Zulip stream</a>, and once an idea is a bit more fleshed out it will then be transformed into an <a href="https://github.com/rust-lang/rfcs/">RFC</a>.</p>
+<p>Finally, we would like to thank <a href="https://github.com/Carlosted">Charles Edward Gagnon</a> for making us aware of this problem. We also want to reiterate that the author and their crate are not to blame for this. It is hard to know of these crates.io implementation details when developing crates, so if anything, the blame would be on us, the crates.io team, for not having limits on this earlier. Anyway, we have them now, and now you all know why! 👋</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,186 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2025/02/05/crates-io-development-update.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>crates.io: development update | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="crates.io: development update | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="crates.io: development update | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="crates.io: development update" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>crates.io: development update</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Feb. 5, 2025 &middot; Tobias Bieniek
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/crates-io">the crates.io team</a> 
+    </div>
+
+    <div class="post">
+      <p>Back in July 2024, we published a <a href="https://blog.rust-lang.org/2024/07/29/crates-io-development-update.html">blog post</a> about the ongoing development of crates.io. Since then, we have made a lot of progress and shipped a few new features. In this blog post, we want to give you an update on the latest changes that we have made to crates.io.</p>
+<h2><a href="#crate-deletions" aria-hidden="true" class="anchor" id="crate-deletions"></a>Crate deletions</h2>
+<p>In <a href="https://rust-lang.github.io/rfcs/3660-crates-io-crate-deletions.html">RFC #3660</a> we proposed a new feature that allows crate owners to delete their crates from crates.io under certain conditions. This can be useful if you have published a crate by mistake or if you want to remove a crate that is no longer maintained. After the RFC was accepted by all team members at the end of August, we began implementing the feature.</p>
+<p>We created a new API endpoint <code>DELETE /api/v1/crates/:name</code> that allows crate owners to delete their crates and then created the corresponding user interface. If you are the owner of a crate, you can now go to the crate page, open the &quot;Settings&quot; tab, and find the &quot;Delete this crate&quot; button at the bottom. Clicking this button will lead you to a confirmation page telling you about the potential impact of the deletion and requirements that need to be met in order to delete the crate:</p>
+<p><img src="../../../images/2025-02-05-crates-io-development-update/delete-page.png" alt="Delete Page Screenshot" /></p>
+<p>As you can see from the screenshot above, a crate can only be deleted if either: the crate has been published for less than 72 hours or the crate only has a single owner, and the crate has been downloaded less than 500 times for each month it has been published, and the crate is not depended upon by any other crate on crates.io.</p>
+<p>These requirements were put in place to prevent abuse of the deletion feature and to ensure that crates that are widely used by the community are not deleted accidentally. If you have any feedback on this feature, please let us know!</p>
+<h2><a href="#openapi-description" aria-hidden="true" class="anchor" id="openapi-description"></a>OpenAPI description</h2>
+<p>Around the holiday season we started experimenting with generating an <a href="https://www.openapis.org/">OpenAPI</a> description for the crates.io API. This was a long-standing request from the community, and we are happy to announce that we now have an experimental OpenAPI description available at <a href="https://crates.io/api/openapi.json">https://crates.io/api/openapi.json</a>!</p>
+<p>Please note that this is still considered work-in-progress and e.g. the stability guarantees for the endpoints are not written down and the response schemas are also not fully documented yet.</p>
+<p>You can view the OpenAPI description in e.g. a Swagger UI at <a href="https://petstore.swagger.io/">https://petstore.swagger.io/</a> by putting <code>https://crates.io/api/openapi.json</code> in the top input field. We decided to not ship a viewer ourselves for now due to security concerns with running it on the same domain as crates.io itself. We may reconsider whether to offer it on a dedicated subdomain in the future if there is enough interest.</p>
+<p><img src="../../../images/2025-02-05-crates-io-development-update/swagger-ui.png" alt="Swagger UI Screenshot" /></p>
+<p>The OpenAPI description is generated by the <a href="https://github.com/juhaku/utoipa">utoipa</a> crate, which is a tool that can be integrated with the <a href="https://github.com/tokio-rs/axum">axum</a> web framework to automatically generate OpenAPI descriptions for all of your endpoints. We would like to thank <a href="https://github.com/juhaku">Juha Kukkonen</a> for his great work on this tool!</p>
+<h2><a href="#support-form-and-report-crate-button" aria-hidden="true" class="anchor" id="support-form-and-report-crate-button"></a>Support form and &quot;Report Crate&quot; button</h2>
+<p>Since the crates.io team is small and mostly consists of volunteers, we do not have the capacity to manually monitor all publishes. Instead, we rely on you, the Rust community, to help us catch malicious crates and users. To make it easier for you to report suspicious crates, we added a &quot;Report Crate&quot; button to all the crate pages. If you come across a crate that you think is malicious or violates the <a href="https://www.rust-lang.org/policies/code-of-conduct">code of conduct</a> or our <a href="https://crates.io/policies">usage policy</a>, you can now click the &quot;Report Crate&quot; button and fill out the form that appears. This will send an email to the crates.io team, who will then review the crate and take appropriate action if necessary. Thank you to crates.io team member <a href="https://github.com/eth3lbert">@eth3lbert</a> who worked on the majority of this.</p>
+<p>If you have any issues with the support form or the &quot;Report Crate&quot; button, please let us know. You can also always email us directly at <a href="mailto:help@crates.io">help@crates.io</a> if you prefer not to use the form.</p>
+<h2><a href="#publish-notifications" aria-hidden="true" class="anchor" id="publish-notifications"></a>Publish notifications</h2>
+<p>We have added a new feature that allows you to receive email notifications when a new version of your crate is published. This can be useful in detecting unauthorized publishes of your crate or simply to keep track of publishes from other members of your team.</p>
+<p><img src="../../../images/2025-02-05-crates-io-development-update/publish-notification.png" alt="Publish Notification Screenshot" /></p>
+<p>This feature was another <a href="https://github.com/rust-lang/crates.io/issues/815">long-standing feature request</a> from our community, and we were happy to finally implement it. If you'd prefer not to receive publish notifications, then you can go to your account settings on crates.io and disable these notifications.</p>
+<h2><a href="#miscellaneous" aria-hidden="true" class="anchor" id="miscellaneous"></a>Miscellaneous</h2>
+<p>These were some of the more visible changes to crates.io over the past couple of months, but a lot has happened &quot;under the hood&quot; as well.</p>
+<ul>
+<li>
+<p><a href="https://rust-lang.github.io/rfcs/3691-trusted-publishing-cratesio.html">RFC #3691</a> was opened and accepted to implement &quot;Trusted Publishing&quot; support on crates.io, similar to other ecosystems that adopted it. This will allow you to specify on crates.io which repository/system is allowed to publish new releases of your crate, allowing you to publish crates from CI systems without having to deal with API tokens anymore.</p>
+</li>
+<li>
+<p>Slightly related to the above: API tokens created on crates.io now expire after 90 days by default. It is still possible to disable the expiry or choose other expiry durations though.</p>
+</li>
+<li>
+<p>The crates.io team was one of the first projects to use the <a href="https://diesel.rs/">diesel</a> database access library, but since that only supported synchronous execution it was sometimes a little awkward to use in our codebase, which was increasingly moving into an async direction after our migration to <a href="https://github.com/tokio-rs/axum">axum</a> a while ago. The maintainer of diesel, <a href="https://github.com/weiznich">Georg Semmler</a>, did a lot of work to make it possible to use diesel in an async way, resulting in the <a href="https://github.com/weiznich/diesel_async">diesel-async</a> library. Over the past couple of months we incrementally ported crates.io over to <code>diesel-async</code> queries, which now allows us to take advantage of the internal query pipelining in <code>diesel-async</code> that resulted in some of our API endpoints getting a 10-15% performance boost. Thank you, Georg, for your work on these crates!</p>
+</li>
+<li>
+<p>Whenever you publish a new version or yank/unyank existing versions a couple of things need to be updated. Our internal database is immediately updated, and then we synchronize the sparse and git index in background worker jobs. Previously, yanking and unyanking a high number of versions would each queue up another synchronization background job. We have now implemented automatic deduplication of redundant background jobs, making our background worker a bit more efficient.</p>
+</li>
+<li>
+<p>The final big, internal change that was just merged last week is related to the testing of our frontend code. In the past we used a tool called <a href="https://miragejs.com/">Mirage</a> to implement a mock version of our API, which allowed us to run our frontend test suite without having to spin up a full backend server. Unfortunately, the maintenance situation around Mirage had lately forced us to look into alternatives, and we are happy to report that we have now fully migrated to the &quot;Industry standard API mocking&quot; package <a href="https://mswjs.io/">msw</a>. If you want to know more, you can find the details in the &quot;small&quot; <a href="https://github.com/rust-lang/crates.io/pull/10393">migration pull request</a>.</p>
+</li>
+</ul>
+<h2><a href="#feedback" aria-hidden="true" class="anchor" id="feedback"></a>Feedback</h2>
+<p>We hope you enjoyed this update on the development of crates.io. If you have any feedback or questions, please let us know on <a href="https://rust-lang.zulipchat.com/#narrow/stream/318791-t-crates-io">Zulip</a> or <a href="https://github.com/rust-lang/crates.io/discussions">GitHub</a>. We are always happy to hear from you and are looking forward to your feedback!</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

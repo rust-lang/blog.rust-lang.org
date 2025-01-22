@@ -1,0 +1,187 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2023/12/22/trait-system-refactor-initiative.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rustc Trait System Refactor Initiative Update: A call for testing | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Rustc Trait System Refactor Initiative Update: A call for testing | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Rustc Trait System Refactor Initiative Update: A call for testing | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Rustc Trait System Refactor Initiative Update: A call for testing" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Rustc Trait System Refactor Initiative Update: A call for testing</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Dec. 22, 2023 &middot; lcnr
+     on behalf of <a href="https://github.com/rust-lang/trait-system-refactor-initiative/">The Rustc Trait System Refactor Initiative</a> 
+    </div>
+
+    <div class="post">
+      <p>It has been nearly half a year since <a href="https://blog.rust-lang.org/inside-rust/2023/07/17/trait-system-refactor-initiative.html">our last update</a>. We are reimplementing the trait solver of rustc with the goal of completely replacing the existing systems. This should allow us to fix some long-standing bugs, enable future type system improvements, and reduce compile times. See the previous update for a more detailed introduction. We have continued to make big progress on the new solver, mostly focusing on getting the solver ready for use in coherence. We changed the unstable compiler flag to enable the new solver: you can now use <code>-Znext-solver=globally</code> to enable it everywhere and <code>-Znext-solver=coherence</code> to enable the new solver only for coherence checking.</p>
+<p>The reimplementation of the trait solver is now ready for use in coherence checking, which is responsible for preventing overlapping trait implementations. All known behavior changes from the old solver are intended, and the quality of error messages should match the existing implementation. However, over the last months the handling of non-fatal overflow has emerged as one of the most significant and involved issues.</p>
+<h2><a href="#non-fatal-overflow" aria-hidden="true" class="anchor" id="non-fatal-overflow"></a>Non-fatal overflow</h2>
+<p>Unlike the existing trait solver, the new solver does not immediately abort compilation when hitting the recursion limit:</p>
+<pre><code class="language-rust">struct Wrapper&lt;T&gt;(T);
+
+trait Overflow {}
+impl&lt;T&gt; Overflow for Wrapper&lt;Wrapper&lt;T&gt;&gt; where Wrapper&lt;T&gt;: Overflow {}
+impl Overflow for Wrapper&lt;u32&gt; {}
+
+// Checking whether these two implementations overlap
+// tries to prove that either `Wrapper&lt;_&gt;: Overflow` or
+// `Wrapper&lt;_&gt;: Copy` do not hold.
+//
+// The existing solver first checks `Wrapper&lt;_&gt;: Overflow`,
+// resulting in overflow and aborting compilation.
+//
+// The new solver does not abort compilation on overflow and
+// considers the implementations to be disjoint, given that
+// `Wrapper&lt;_&gt;: Copy` does not hold.
+trait MayOverlap {}
+impl&lt;T: Overflow + Copy&gt; MayOverlap for T {}
+impl&lt;T&gt; MayOverlap for Wrapper&lt;T&gt; {}
+</code></pre>
+<p>This change is necessary as popular crates, e.g. <a href="https://github.com/rust-lang/trait-system-refactor-initiative/issues/73">typenum</a>, now reach the recursion limit with the new solver and would therefore break if overflow remains fatal. This is caused by <a href="https://github.com/rust-lang/trait-system-refactor-initiative/issues/56">the removal of a heuristic present in the old solver</a>. It is also desirable as the compilation result is otherwise order dependent. This order dependence complicates future changes to the type system, e.g. <a href="https://github.com/rust-lang/rust/pull/96912">an attempt to switch to deferred projection equality in the old solver</a> also ended up causing an overflow error in typenum, preventing it from getting merged. It is also observable by users, e.g. switching the order of where-clauses in the above example to <code>T: Copy + Overflow</code> causes this snippet to compile with the old solver.</p>
+<p>The new solver now returns overflow when hitting the recursion limit. However, this change by itself causes the solver to very easily hang due to exponential blowup. We therefore greatly limit the available recursion depth for later goals after encountering overflow and also discard some of the inference constraints from goals resulting in overflow.</p>
+<p>It is important to balance the performance of the trait solver with the expressiveness of the trait system. While we're fairly happy with the approach we've settled on for now, getting this right is more art than science. We believe our current approach to be performant in most cases and to allow for further significant performance optimizations in the future. We also expect it to provide the necessary expressiveness to be backwards compatible with the old solver and to behave as expected by users.</p>
+<h2><a href="#looking-forward-and-asking-for-testing" aria-hidden="true" class="anchor" id="looking-forward-and-asking-for-testing"></a>Looking forward and asking for testing</h2>
+<p>As we believe using the new solver for coherence checking to now be in a stabilization ready state, please try out the new implementation by enabling the unstable <code>-Znext-solver=coherence</code> compiler flag. In case you encounter any behavior or performance regressions, diagnostics issues, or even unsoundnesses<sup class="footnote-ref"><a href="#fn-1" id="fnref-1" data-footnote-ref>1</a></sup>, please <a href="https://github.com/rust-lang/rust/issues">open an issue on GitHub</a>.</p>
+<p>Using the new solver during coherence checking will improve the behavior in some edge-cases, fixing at least one, pretty much unexploitable, <a href="https://github.com/rust-lang/rust/issues/102048">unsoundness</a>. It will also allow us to remove support for &quot;intercrate mode&quot; in the existing solver. However, most of the positive impact from using the new solver<sup class="footnote-ref"><a href="#fn-2" id="fnref-2" data-footnote-ref>2</a></sup> will only apply once it is used in more areas.</p>
+<p>We therefore intend to slightly delay the stabilization of its use in coherence to make sure our design choices will not cause complications down the road. Going forward we will refocus our work on enabling the new solver everywhere. By fixing more of the remaining issues with <code>-Znext-solver=globally</code>, we should get additional confidence in our approach to overflow handling. We expect to actually stabilize the use of the new solver in coherence in March of 2024 and intend to provide additional learning materials and documentation before then.</p>
+<p>In case there are any questions or thoughts about the new solver, please reach out to us on <a href="https://rust-lang.zulipchat.com/#narrow/stream/364551-t-types.2Ftrait-system-refactor">zulip</a>.</p>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-1">
+<p>i.e. we do not emit an error even though there are overlapping impls <a href="#fnref-1" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-2">
+<p>see the <a href="https://blog.rust-lang.org/inside-rust/2023/07/17/trait-system-refactor-initiative.html">introduction of the previous update</a> <a href="#fnref-2" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

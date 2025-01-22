@@ -1,0 +1,308 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/2024/04/09/updates-to-rusts-wasi-targets.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Changes to Rust&#x27;s WASI targets | Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Changes to Rust&#x27;s WASI targets | Rust Blog">
+     <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Changes to Rust&#x27;s WASI targets | Rust Blog" />
+    <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+    <link rel="manifest" href="../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/feed.xml" title="Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Changes to Rust&#x27;s WASI targets" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Changes to Rust&#x27;s WASI targets</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Apr. 9, 2024 &middot; Yosh Wuyts
+    
+    </div>
+
+    <div class="post">
+      <p><a href="https://bytecodealliance.org/articles/WASI-0.2">WASI 0.2 was recently
+stabilized</a>, and Rust has begun
+implementing first-class support for it in the form of a dedicated new target.
+Rust 1.78 will introduce new <code>wasm32-wasip1</code> (tier 2) and <code>wasm32-wasip2</code> (tier
+3) targets. <code>wasm32-wasip1</code> is an effective rename of the existing <code>wasm32-wasi</code>
+target, freeing the target name up for an eventual WASI 1.0 release. <strong>Starting
+Rust 1.78 (May 2nd, 2024), users of WASI 0.1 are encouraged to begin migrating
+to the new <code>wasm32-wasip1</code> target before the existing <code>wasm32-wasi</code> target is
+removed in Rust 1.84 (January 5th, 2025).</strong></p>
+<p>In this post we'll discuss the introduction of the new targets, the motivation
+behind it, what that means for the existing WASI targets, and a detailed
+schedule for these changes. This post is about the WASI targets only; the
+existing <code>wasm32-unknown-unknown</code> and <code>wasm32-unknown-emscripten</code> targets are
+unaffected by any changes in this post.</p>
+<h2><a href="#introducing-wasm32-wasip2" aria-hidden="true" class="anchor" id="introducing-wasm32-wasip2"></a>Introducing <code>wasm32-wasip2</code></h2>
+<p>After nearly five years of work the <a href="https://wasi.dev">WASI 0.2 specification</a>
+was recently stabilized. This work builds on <a href="https://component-model.bytecodealliance.org">WebAssembly
+Components</a> (think: strongly-typed
+ABI for Wasm), providing standard interfaces for things like asynchronous IO,
+networking, and HTTP. This will finally make it possible to write asynchronous
+networked services on top of WASI, something which wasn't possible using WASI
+0.1.</p>
+<p>People interested in compiling Rust code to WASI 0.2 today are able to do so
+using the <a href="https://github.com/bytecodealliance/cargo-component">cargo-component</a>
+tool. This tool is able to take WASI 0.1 binaries, and transform them to WASI 0.2
+Components using a shim. It also provides native support for common cargo
+commands such as <code>cargo build</code>, <code>cargo test</code>, and <code>cargo run</code>. While it
+introduces some inefficiencies because of the additional translation layer, in
+practice this already works really well and people should be able to get
+started with WASI 0.2 development.</p>
+<p>We're however keen to begin making that translation layer obsolete. And for
+that reason we're happy to share that Rust has made its first steps towards
+that with the introduction of the <a href="https://doc.rust-lang.org/rustc/platform-support.html#tier-3">tier
+3</a> <code>wasm32-wasip2</code>
+target landing in Rust 1.78. <strong>This will initially miss a lot of expected</strong>
+<strong>features such as stdlib support, and we don't recommend people use this target</strong>
+<strong>quite yet.</strong> But as we fill in those missing features over the coming months, we
+aim to eventually meet the criteria to become a tier 2 target, at which
+point the <code>wasm32-wasip2</code> target would be considered ready for general use. This
+work will happen through 2024, and we expect for this to land before the end of
+the calendar year.</p>
+<h2><a href="#renaming-wasm32-wasi-to-wasm32-wasip1" aria-hidden="true" class="anchor" id="renaming-wasm32-wasi-to-wasm32-wasip1"></a>Renaming <code>wasm32-wasi</code> to <code>wasm32-wasip1</code></h2>
+<p>The original name for what we now call WASI 0.1 was &quot;WebAssembly System
+Interface, snapshot 1&quot;. Rust shipped support for this in 2019, and we did so
+knowing the target would likely undergo significant changes in the future. With
+the knowledge we have today though, we would not have chosen to introduce the
+&quot;WASI, snapshot 1&quot; target as <code>wasm32-wasi</code>. We should have instead chosen to add
+some suffix to the initial target triple so that the eventual stable WASI 1.0
+target can just be called <code>wasm32-wasi</code>.</p>
+<p>In anticipation of both an eventual WASI 1.0 target, and to preserve consistency
+between target names, we'll begin rolling out a name change to the existing WASI
+0.1 target. Starting in Rust 1.78 (May 2nd, 2024) a new <code>wasm32-wasip1</code> target
+will become available. Starting Rust 1.81 (September 5th, 2024) we will begin
+warning existing users of <code>wasm32-wasi</code> to migrate to <code>wasm32-wasip1</code>. And
+finally in Rust 1.84 (January 9th, 2025) the <code>wasm32-wasi</code> target will no longer
+be shipped on the stable release channel. This will provide an 8 month
+transition period for projects to switch to the new target name when they update
+their Rust toolchains.</p>
+<p>The name <code>wasip1</code> can be read as either &quot;WASI (zero) point one&quot; or &quot;WASI preview
+one&quot;. The official specification uses the &quot;preview&quot; moniker, however in most
+communication the form &quot;WASI 0.1&quot; is now preferred. This target triple was
+chosen because it not only maps to both terms, but also more closely resembles
+the target terminology used in <a href="https://go.dev/blog/wasi">other programming
+languages</a>. This is something the WASI Preview 2
+specification <a href="https://github.com/WebAssembly/WASI/tree/f45e72e5294e990c23d548eea32fd35c80525fd6/preview2#introduction">also makes note
+of</a>.</p>
+<h2><a href="#timeline" aria-hidden="true" class="anchor" id="timeline"></a>Timeline</h2>
+<p>This table provides the dates and cut-offs for the target rename from
+<code>wasm32-wasi</code> to <code>wasm32-wasip1</code>. The dates in this table do not apply to the
+newly-introduced <code>wasm32-wasi-preview1-threads</code> target; this will be renamed to
+<code>wasm32-wasip1-threads</code> in Rust 1.78 without going through a transition period.
+The tier 3 <code>wasm32-wasip2</code> target will also be made available in Rust 1.78.</p>
+<table>
+<thead>
+<tr>
+<th>date</th>
+<th>Rust Stable</th>
+<th>Rust Beta</th>
+<th>Rust Nightly</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024-02-08</td>
+<td>1.76</td>
+<td>1.77</td>
+<td>1.78</td>
+<td><code>wasm32-wasip1</code> available on nightly</td>
+</tr>
+<tr>
+<td>2024-03-21</td>
+<td>1.77</td>
+<td>1.78</td>
+<td>1.79</td>
+<td><code>wasm32-wasip1</code> available on beta</td>
+</tr>
+<tr>
+<td>2024-05-02</td>
+<td>1.78</td>
+<td>1.79</td>
+<td>1.80</td>
+<td><code>wasm32-wasip1</code> available on stable</td>
+</tr>
+<tr>
+<td>2024-06-13</td>
+<td>1.79</td>
+<td>1.80</td>
+<td>1.81</td>
+<td>warn if <code>wasm32-wasi</code> is used on nightly</td>
+</tr>
+<tr>
+<td>2024-07-25</td>
+<td>1.80</td>
+<td>1.81</td>
+<td>1.82</td>
+<td>warn if <code>wasm32-wasi</code> is used on beta</td>
+</tr>
+<tr>
+<td>2024-09-05</td>
+<td>1.81</td>
+<td>1.82</td>
+<td>1.83</td>
+<td>warn if <code>wasm32-wasi</code> is used on stable</td>
+</tr>
+<tr>
+<td>2024-10-17</td>
+<td>1.82</td>
+<td>1.83</td>
+<td>1.84</td>
+<td><code>wasm32-wasi</code> unavailable on nightly</td>
+</tr>
+<tr>
+<td>2024-11-28</td>
+<td>1.83</td>
+<td>1.84</td>
+<td>1.85</td>
+<td><code>wasm32-wasi</code> unavailable on beta</td>
+</tr>
+<tr>
+<td>2025-01-09</td>
+<td>1.84</td>
+<td>1.85</td>
+<td>1.86</td>
+<td><code>wasm32-wasi</code> unavailable on stable</td>
+</tr>
+</tbody>
+</table>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
+<p>In this post we've discussed the upcoming updates to Rust's WASI targets. Come
+Rust 1.78 the <code>wasm32-wasip1</code> (tier 2) and <code>wasm32-wasip2</code> (tier 3) targets will
+be added. In Rust 1.81 we will begin warning if <code>wasm32-wasi</code> is being used. And
+in Rust 1.84, the existing <code>wasm32-wasi</code> target will be removed. This will free
+up <code>wasm32-wasi</code> to eventually be used for a WASI 1.0 target. Users will have 8
+months to switch to the new target name when they update their Rust toolchains.</p>
+<p>The <code>wasm32-wasip2</code> target marks the start of native support for WASI 0.2. In
+order to target it today from Rust, people are encouraged to use
+<a href="https://github.com/bytecodealliance/cargo-component">cargo-component</a> tool
+instead. The plan is to eventually graduate <code>wasm32-wasip2</code> to a tier-2 target,
+at which point <code>cargo-component</code> will be upgraded to support it natively instead.</p>
+<p>With WASI 0.2 finally stable, it's an exciting time for WebAssembly development.
+We're happy for Rust to begin implementing native support for WASI 0.2, and
+we're excited about what this will enable people to build.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../scripts/highlight.js"></script>
+  </body>
+</html>

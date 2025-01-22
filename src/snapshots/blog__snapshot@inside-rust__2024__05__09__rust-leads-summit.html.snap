@@ -1,0 +1,203 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2024/05/09/rust-leads-summit.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Recap: Rust Leads Summit 2024 | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Recap: Rust Leads Summit 2024 | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Recap: Rust Leads Summit 2024 | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Recap: Rust Leads Summit 2024" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Recap: Rust Leads Summit 2024</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">May 9, 2024 &middot; Tyler Mandry and Eric Holk
+    
+    </div>
+
+    <div class="post">
+      <h2><a href="#what-happened" aria-hidden="true" class="anchor" id="what-happened"></a>What happened?</h2>
+<p>This March, thirty-one people from Rust Project leadership and the Rust Foundation came to the Google London office for a two-day summit. The summit included notable appearances by:</p>
+<ul>
+<li>Niko Matsakis, Language Design Team Co-lead, who presented an idea called &quot;Project Goals&quot; for the purpose of coordinating resources on shared goals between the Rust maintainers and outside contributors from companies or other organizations,</li>
+<li>Bec Rumbul, Rust Foundation CEO and Executive Director, who led a reflective discussion about the Foundation's mission to support the Rust Project and ways it could improve in the future,</li>
+<li>Alice Ryhl, Tokio maintainer, who spoke about the Rust for Linux Kernel effort and its use in Android.</li>
+</ul>
+<p>The schedule included a mix of scheduled roundtable discussions, invited talks, and a handful of &quot;unconference&quot; discussions whose topics were decided at the summit.</p>
+<h2><a href="#why-did-it-happen" aria-hidden="true" class="anchor" id="why-did-it-happen"></a>Why did it happen?</h2>
+<p>The Rust Project has not had an in-person gathering that spans across teams since the last Rust All Hands at Mozilla Berlin in early 2019. Since then there have been major changes to Rust. The Rust Foundation was formed in early 2021 and now has a staff of ten. The Rust Core Team was dissolved in favor of a new Leadership Council. The open source project has grown and many new faces have joined its leadership ranks.</p>
+<p>The Rust Project itself has also grown, which has made the prospect of another Rust All Hands less feasible. Holding a smaller event focused on Project leadership allowed us to bring people together from across the project on a much smaller budget.</p>
+<h2><a href="#key-takeaways" aria-hidden="true" class="anchor" id="key-takeaways"></a>Key Takeaways</h2>
+<p>One of the primary goals of the summit was building trust: between leads, between different parts of the project, and between the project and the foundation. By many reports, this was a smashing success. Many of the attendees had not met face-to-face before, and there's something about sitting in a room and talking about common interests that isn't easily replicated online.</p>
+<p>There were productive discussions around a number of topics, including how the Rust Project can better leverage the Foundation's resources to support its work. A full list of sessions is presented below.</p>
+<p>Finally, it's said that the first step to finding a solution is identifying the problem. There was broad agreement around some of the biggest challenges the Rust project faces, like its ability to make project-wide decisions. The group built consensus around <a href="https://github.com/rust-lang/rfcs/pull/3614">Project Goals</a> as a way to make some important kinds of decisions.</p>
+<p>By design, the leads summit was not a place for making final decisions – the Rust Project already has mechanisms like RFCs for that. However, it was intended as a place to share ideas and build consensus that will be used to accelerate future RFCs.</p>
+<h2><a href="#sessions" aria-hidden="true" class="anchor" id="sessions"></a>Sessions</h2>
+<ul>
+<li>Shape of the Project</li>
+<li>Decision making process</li>
+<li>Rust for Linux</li>
+<li>2023 Rust Survey</li>
+<li>Leveraging Foundation resources</li>
+<li>Achieving the Foundation's mission</li>
+<li>The purpose, structure, and workings of teams</li>
+<li>Project goals</li>
+<li>Team-building sharing session</li>
+</ul>
+<h2><a href="#looking-forward" aria-hidden="true" class="anchor" id="looking-forward"></a>Looking forward</h2>
+<p>All of the participants surveyed said that the leads summit served a needed purpose for the project. We hope there will be more events like the leads summit in the future, and that they can grow to include more of the Rust project and its leadership.</p>
+<p>For this event to be valuable, it's important for us to follow through on the ideas that we talked about. We've already seen one RFC on <a href="https://github.com/rust-lang/rfcs/pull/3614">Project Goals</a> and hope to see similar RFCs in the coming months. The Leadership Council has also started offering experimental travel funding to project members.</p>
+<p>We also collected some great feedback from attendees. In future events, participants said it would be ideal to identify concrete next steps during the summit discussions. Some also commented on the structured schedule, which was designed to get as much as we could out of a 1.5 day event: Several attendees wished for more time for unstructured &quot;getting to know you&quot; discussions, which we think would be great to include in future, longer events.</p>
+<h2><a href="#thank-you" aria-hidden="true" class="anchor" id="thank-you"></a>Thank you</h2>
+<p>A big thanks to the Rust Foundation and Google and for sponsoring the event,<sup class="footnote-ref"><a href="#fn-employer" id="fnref-employer" data-footnote-ref>1</a></sup> as well as to every employer who paid for travel to the conference.<sup class="footnote-ref"><a href="#fn-travel" id="fnref-travel" data-footnote-ref>2</a></sup></p>
+<p>A huge thanks to those who helped plan and execute the event and to our guest speakers, including:</p>
+<ul>
+<li>Adam Harvey</li>
+<li>Santiago Pastorino</li>
+<li>Philipp Krones</li>
+<li>Josh Gould</li>
+<li>Jonathan Pallant</li>
+<li>Alice Ryhl</li>
+<li>Bec Rumbul</li>
+<li>Gracie Gregory</li>
+<li>Niko Matsakis</li>
+<li>Paul Lenz</li>
+</ul>
+<p>Finally, thank you to everyone who made an effort to show up and participate. This event would not have been successful without you.</p>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-employer">
+<p>Tyler Mandry is employed by Google. <a href="#fnref-employer" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-travel">
+<p>This year, we relied on employer- and self-sponsored travel; in future events, we would love to offer sponsorships to those who need it. <a href="#fnref-travel" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>

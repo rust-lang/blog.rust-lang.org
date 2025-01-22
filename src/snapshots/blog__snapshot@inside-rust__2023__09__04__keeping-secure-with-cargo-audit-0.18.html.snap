@@ -1,0 +1,181 @@
+---
+source: src/lib.rs
+expression: content
+input_file: site/inside-rust/2023/09/04/keeping-secure-with-cargo-audit-0.18.html
+snapshot_kind: text
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Keeping Rust projects secure with cargo-audit 0.18: performance, compatibility and security improvements | Inside Rust Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     <!-- Twitter card -->
+     <meta name="twitter:card" content="summary">
+     <meta name="twitter:site" content="@rustlang">
+     <meta name="twitter:creator" content="@rustlang">
+     <meta name="twitter:title" content="Keeping Rust projects secure with cargo-audit 0.18: performance, compatibility and security improvements | Inside Rust Blog">
+     <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
+    
+    <!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Keeping Rust projects secure with cargo-audit 0.18: performance, compatibility and security improvements | Inside Rust Blog" />
+    <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
+    <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- styles -->
+    <link rel="stylesheet" href="../../../../styles/vendor.css"/>
+    <link rel="stylesheet" href="../../../../styles/fonts.css"/>
+    <link rel="stylesheet" href="../../../../styles/app.css"/>
+    <link rel="stylesheet" href="../../../../styles/highlight.css"/>
+    
+    <!-- stylesheet for user agents without js -->
+    <noscript>
+        <link rel="stylesheet" href="../../../../styles/noscript.css">
+    </noscript>
+    
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    
+     <!-- atom -->
+     <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/inside-rust/feed.xml" title="Inside Rust Blog" />
+    
+    <!-- theme switcher -->
+    <script src="../../../../scripts/theme-switch.js"></script>
+  </head>
+  <body>
+    <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
+      <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
+        <a href="../../../../inside-rust/">
+          <img class="v-mid ml0-l rust-logo" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
+          <span class="dib ml1 ml0-l">Inside Rust Blog</span>
+        </a>
+      </div>
+    
+      <ul class="nav list w-100 w-auto-l flex flex-none flex-row flex-wrap justify-center justify-end-l items-center pv2 ph0 ph4-ns">
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org">Rust</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools/install">Install</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/learn">Learn</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/tools">Tools</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/governance">Governance</a></li>
+        <li class="tc pv2 ph2 ph4-ns flex-20-s"><a href="https://www.rust-lang.org/community">Community</a></li>
+        <button class="theme-icon" onclick="dropdown();">🖌
+          <ul id="theme-choice">
+            <li class="theme-item" onclick="changeThemeTo('light');">Light</li>
+            <li class="theme-item" onclick="changeThemeTo('dark');">Dark</li>
+            <li class="theme-item" onclick="changeThemeTo('system');">System</li>
+          </ul>
+        </button>
+        <script src="../../../../scripts/theme-switch-post.js"></script>
+      </ul>
+    </nav>
+<section id="Keeping Rust projects secure with cargo-audit 0.18: performance, compatibility and security improvements" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Keeping Rust projects secure with cargo-audit 0.18: performance, compatibility and security improvements</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">Sept. 4, 2023 &middot; Sergey &quot;Shnatsel&quot; Davidoff
+     on behalf of <a href="https://www.rust-lang.org/governance/wgs/wg-secure-code">the Secure Code WG</a> 
+    </div>
+
+    <div class="post">
+      <p><a href="https://crates.io/crates/cargo-audit"><code>cargo audit</code></a> checks your project's dependencies for known security vulnerabilites.</p>
+<p>By default <code>cargo audit</code> checks on your <code>Cargo.lock</code> file, but it can also <a href="https://github.com/rustsec/rustsec/tree/main/cargo-audit#cargo-audit-bin-subcommand">scan compiled binaries</a>. You can install <code>cargo-audit</code> and run it against your project with the following commands:</p>
+<pre><code>$ cargo install cargo-audit
+$ cargo audit
+</code></pre>
+<p>Both <code>cargo audit</code> and the <a href="https://rustsec.org/">RustSec</a> advisory database that powers it are maintained by the <a href="https://www.rust-lang.org/governance/wgs/wg-secure-code">Rust Secure Code working group</a>.</p>
+<h2><a href="#whats-new-in-this-release" aria-hidden="true" class="anchor" id="whats-new-in-this-release"></a>What's new in this release</h2>
+<h3><a href="#performance" aria-hidden="true" class="anchor" id="performance"></a>Performance</h3>
+<p><code>cargo audit</code> now uses the <a href="https://blog.rust-lang.org/inside-rust/2023/01/30/cargo-sparse-protocol.html">sparse crates.io index</a> when checking for yanked crates. This dramatically speeds up the scanning process because <code>cargo audit</code> no longer needs to download the entire crates.io index, which could take up to several minutes.</p>
+<p>Sparse index is used by default if you are running Rust 1.70 or later, same as in Cargo itself. <code>cargo audit</code> honors <a href="https://doc.rust-lang.org/cargo/reference/config.html#registriescrates-ioprotocol">the Cargo settings for the use of sparse index</a>, should you need to opt out for any reason.</p>
+<h3><a href="#security" aria-hidden="true" class="anchor" id="security"></a>Security</h3>
+<p><code>cargo audit</code> previously relied on <a href="https://en.wikipedia.org/wiki/OpenSSL">OpenSSL</a> on all platforms. In this release we have switched to <a href="https://crates.io/crates/rustls">rustls</a> - a high-quality, memory-safe TLS implementation in Rust.</p>
+<p>In contrast to OpenSSL's <a href="https://www.openssl.org/news/vulnerabilities.html">history</a> of high-severity vulnerabilities, rustls has a stellar track record and eliminates entire classes vulnerabilities by construction. It has passed an independent audit with flying colors; the auditors even <a href="https://github.com/rustls/rustls/blob/main/audit/TLS-01-report.pdf">noted</a> that they &quot;had the rare pleasure of being impressed with the exceptional quality of the presented software&quot;.</p>
+<p>Since TLS constitutes the vast majority of the attack surface of <code>cargo audit</code>, we are very excited to use a more secure TLS implementation!</p>
+<h3><a href="#compatibility" aria-hidden="true" class="anchor" id="compatibility"></a>Compatibility</h3>
+<p>A number of long-standing issues are resolved thanks to switching from <a href="https://github.com/libgit2/libgit2">libgit2</a> to <a href="https://github.com/Byron/gitoxide">gitoxide</a> as our git implementation:</p>
+<ol>
+<li><a href="https://github.com/rustsec/rustsec/issues/466"><code>cargo audit</code> can now run in Alpine Linux containers</a>.</li>
+<li><a href="https://github.com/rustsec/rustsec/issues/490">Several instances of <code>cargo audit</code> running in parallel can now fetch Git repositories without issue</a>.</li>
+<li><a href="https://github.com/rustsec/rustsec/issues/292">Accessing Git repositories over SSH is now supported</a>.</li>
+<li><a href="https://github.com/rustsec/rustsec/issues/555">Credential helpers to access private repositories are now supported</a>.</li>
+</ol>
+<h2><a href="#known-issues" aria-hidden="true" class="anchor" id="known-issues"></a>Known issues</h2>
+<h3><a href="#limited-cpu-architecture-support" aria-hidden="true" class="anchor" id="limited-cpu-architecture-support"></a>Limited CPU architecture support</h3>
+<p>CPU architectures other than x86 and ARM are not supported by this release. This is due to <a href="https://github.com/briansmith/ring">ring</a>, the cryptographic library used by rustls, not supporting other CPU architectures yet.</p>
+<p>rustls is <a href="https://github.com/rustls/rustls/issues/521">in the process</a> of adding support for other cryptographic libraries. We will consider adding support for another TLS implementation if no portable cryptographic library for rustls materializes in the near future.</p>
+<p>In the meantime we recommend using the previous release on uncommon CPU architectures. You may also consider other tools that read <code>Cargo.lock</code> files and the RustSec advisory database, such as <a href="https://github.com/aquasecurity/trivy">Trivy</a>, <a href="https://github.com/google/osv-scanner">osv-scanner</a> or <a href="https://docs.github.com/en/code-security/dependabot/dependabot-alerts/about-dependabot-alerts">Dependabot</a>.</p>
+<h3><a href="#cargo-audit-fix-is-not-converted" aria-hidden="true" class="anchor" id="cargo-audit-fix-is-not-converted"></a><code>cargo audit fix</code> is not converted</h3>
+<p>The experimental subcommand <code>cargo audit fix</code> to automatically upgrade vulnerable dependencies has existed for a while but has been disabled by default. It has <strong>not</strong> been converted to use gitoxide and rustls in this release, and has not benefited from any of these improvements.</p>
+<p>We will likely <a href="https://github.com/rustsec/rustsec/issues/938">rewrite this feature from the ground up</a> before enabling it by default in subsequent releases.</p>
+<h2><a href="#reporting-issues" aria-hidden="true" class="anchor" id="reporting-issues"></a>Reporting issues</h2>
+<p>Due to the sweeping changes to the libraries <code>cargo audit</code> relies on for git protocol and networking there are bound to be subtle differences in behavior compared to previous versions.</p>
+<p>If you encounter issues with this latest release, please <a href="https://github.com/rustsec/rustsec/issues/new">report it to us on Github</a>. Thank you!</p>
+<h2><a href="#acknowledgements" aria-hidden="true" class="anchor" id="acknowledgements"></a>Acknowledgements</h2>
+<p>Thanks to <a href="https://github.com/Jake-Shadle">Jake Shadle</a> who did most of the work in this release, as well as for creating the <a href="https://github.com/EmbarkStudios/tame-index"><code>tame-index</code></a> crate that enabled sparse registry support in <code>cargo audit</code>.</p>
+<p>Thanks to <a href="https://github.com/Byron">Sebastian Thiel</a> for creating <a href="https://github.com/Byron/gitoxide"><code>gitoxide</code></a> and improving it to accommodate the <code>cargo audit</code> requirements, as well as helping review the changes.</p>
+
+    </div>
+  </div>
+</section>
+    <footer>
+      <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
+        <div class="row">
+          <div class="four columns mt3 mt0-l" id="get-help">
+            <h4>Get help!</h4>
+            <ul>
+              <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
+              <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Terms and policies</h4>
+            <ul>
+              <li><a href="https://www.rust-lang.org/policies/code-of-conduct">Code of Conduct</a></li>
+              <li><a href="https://www.rust-lang.org/policies/licenses">Licenses</a></li>
+              <li><a href="https://www.rust-lang.org/policies/media-guide">Logo Policy and Media Guide</a></li>
+              <li><a href="https://www.rust-lang.org/policies/security">Security Disclosures</a></li>
+              <li><a href="https://www.rust-lang.org/policies">All Policies</a></li>
+            </ul>
+          </div>
+          <div class="four columns mt3 mt0-l">
+            <h4>Social</h4>
+            <div class="flex flex-row flex-wrap">
+              <a rel="me" href="https://social.rust-lang.org/@rust" target="_blank" rel="noopener" alt="mastodon link"><img src="../../../../images/mastodon.svg" alt="mastodon logo" title="Mastodon"/></a>
+              <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+              <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+              <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+              <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+            </div>
+            <h4 class="mt4 mb3">RSS</h4>
+            <ul>
+              <li><a href="../../../../feed.xml">Main Blog</a></li>
+              <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+            </ul>
+          </div>
+    
+        </div>
+        <div class="attribution">
+          Maintained by the Rust Team. See a typo?
+          <a href="https://github.com/rust-lang/blog.rust-lang.org" target="_blank" rel="noopener">Send a fix here</a>!
+        </div>
+      </div>
+    </footer>
+    
+    <!-- scripts -->
+    <script src="../../../../scripts/highlight.js"></script>
+  </body>
+</html>
