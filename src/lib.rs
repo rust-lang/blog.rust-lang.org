@@ -47,7 +47,7 @@ handlebars_helper!(hb_month_name_helper: |month_num: u64| match month_num {
     _ => "Error!",
 });
 
-impl<'a> Generator<'a> {
+impl Generator<'_> {
     fn new(
         out_directory: impl AsRef<Path>,
         posts_directory: impl AsRef<Path>,
