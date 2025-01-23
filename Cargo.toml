@@ -11,8 +11,8 @@ handlebars = { version = "=6.3.0", features = ["dir_source"] }
 lazy_static = "=1.5.0"
 serde = "=1.0.217"
 serde_derive = "=1.0.217"
-serde_yaml = "=0.9.33"
 serde_json = "=1.0.138"
+serde_yaml = "=0.9.34-deprecated"
 comrak = { version = "=0.35.0", features = ["bon"] }
 rayon = "=1.10.0"
 regex = "=1.11.1"
