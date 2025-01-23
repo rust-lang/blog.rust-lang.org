@@ -148,8 +148,8 @@ In addition, we fleshed out a design sketch for the changes in rustdoc's JSON su
 </div>
 </div>
 
-* The `-Znext-solver=coherence` stabilization encountered no issues and is now on beta, with a new update blogpost published.
-* Significant progress was made on bootstrap with `-Znext-solver=globally`, including finishing the core of the "typing mode" refactor and unblocking bootstrap.
+* The `-Znext-solver=coherence` stabilization is now stable in version 1.84, with a new update blogpost published.
+* Significant progress was made on bootstrap with `-Znext-solver=globally`. We're now able to compile rustc and cargo, enabling try-builds and perf runs.
 
 
 <div style="display: flex;" class="mt2 mb3">
