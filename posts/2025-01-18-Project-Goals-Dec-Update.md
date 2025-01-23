@@ -111,7 +111,7 @@ In addition, we fleshed out a design sketch for the changes in rustdoc's JSON su
 </div>
 </div>
 
-* Over the last six months, we created a lang-team experiment devoted to this issue and [spastorino](https://github.com/spastorino) began work on an experimental implementation. [joshtriplett](https://github.com/joshtriplett) authored [RFC 3680](https://github.com/rust-lang/rfcs/3680), which has received substantial feedback. The current work is focused on identifying "cheaply cloneable" types and making it easy to create closures that clone them instead of moving them.
+* Over the last six months, we created a lang-team experiment devoted to this issue and [spastorino](https://github.com/spastorino) began work on an experimental implementation. [joshtriplett](https://github.com/joshtriplett) authored [RFC 3680](https://github.com/rust-lang/rfcs/pull/3680), which has received substantial feedback. The current work is focused on identifying "cheaply cloneable" types and making it easy to create closures that clone them instead of moving them.
 
 
 <div style="display: flex;" class="mt2 mb3">
