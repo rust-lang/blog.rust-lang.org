@@ -29,7 +29,7 @@ For our other goals, we made progress, but there remains work to be done:
 * **Return Type Notation (RTN)** is implemented and we had a [call for experimentation](https://blog.rust-lang.org/inside-rust/2024/09/26/rtn-call-for-testing.html) but it has not yet reached stable. This will be done as part of our 2025H1 goal.
 * Async Functions in Traits (and Return Position Impl Trait in Trait) are currently not consided `dyn` compatible. We would eventually like to have first-class `dyn` support, but as an intermediate step we created a procedural macro crate [`dynosaur`](https://crates.io/crates/dynosaur)[^names] that can create wrappers that enable **dynamic dispatch**. We are planning a comprehensive blog post in 2025H1 that shows how to use this crate and lays out the overall plan for async functions in traits.
 * Work was done to prototype an **implementation for async drop** but we didn't account for reviewing bandwidth. [nikomatsakis](https://github.com/nikomatsakis) has done initial reads and is working with PR author to get this done in 2025H1. To be clear though the scope of this is an experiment with the goal of uncovering implementation hurdles. There remains significant language design work before this feature would be considered for stabilization (we don't even have an RFC, and there are lots of unknowns remaining).
-* We have had fruitful discussions about the trait for **async iteration** but do not have widespread consensus, that's on the docker for 2025H1.
+* We have had fruitful discussions about the trait for **async iteration** but do not have widespread consensus, that's on the docket for 2025H1.
 
 [^names]: As everyone knows, the hardest part of computer-science is naming. I think we rocked this one.
 
