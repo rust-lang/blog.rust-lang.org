@@ -110,7 +110,7 @@ This was skipped if `--allow-dirty` was used which changed in Cargo 1.81
 to help with efforts in auditing published packages
 ([#13960](https://github.com/rust-lang/cargo/pull/13960)).
 
-[landonxjames](https://github.com/landonxjames) reported that this change caused a significant perfornce regression when publishing the
+[landonxjames](https://github.com/landonxjames) reported that this change caused a significant performance regression when publishing the
 [aws-sdk-rust repo](https://github.com/awslabs/aws-sdk-rust).
 Cargo went from skipping its dirty file check with `--allow-dirty` to always running it.
 The check has not been optimized for publishing over 400 packages at once.
