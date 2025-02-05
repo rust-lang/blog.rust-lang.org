@@ -225,6 +225,14 @@ div.brand {
     white-space: pre-wrap;
   }
 
+  pre code {
+    white-space: inherit;
+  }
+
+  ul code {
+    display: block;
+  }
+
   a.anchor::before {
     content: "§";
     display: none;
