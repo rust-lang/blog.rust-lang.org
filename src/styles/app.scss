@@ -120,6 +120,10 @@ code {
   overflow: auto;
 }
 
+ul a code {
+  word-break: break-word;
+}
+
 section {
   padding: 30px 0 60px 0;
 
@@ -219,14 +223,6 @@ div.brand {
     background-color: var(--code-bg-color);
     border: 1px solid var(--code-border-color);
     white-space: pre-wrap;
-  }
-
-  pre code {
-    white-space: inherit;
-  }
-
-  ul code {
-    display: block;
   }
 
   a.anchor::before {
