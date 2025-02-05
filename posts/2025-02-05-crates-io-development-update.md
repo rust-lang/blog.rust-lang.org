@@ -46,7 +46,7 @@ We have added a new feature that allows you to receive email notifications when 
 
 ![Publish Notification Screenshot](../../../images/2025-02-05-crates-io-development-update/publish-notification.png)
 
-This feature was another [long-standing feature request](https://github.com/rust-lang/crates.io/issues/815) from our community, and we were happy to finally implement it. After some initial pushback from a few vocal community members we also implemented a way to opt out of these notifications. If you'd prefer not to receive publish notifications, then you can go to your account settings on crates.io and disable these notifications.
+This feature was another [long-standing feature request](https://github.com/rust-lang/crates.io/issues/815) from our community, and we were happy to finally implement it. If you'd prefer not to receive publish notifications, then you can go to your account settings on crates.io and disable these notifications.
 
 
 ## Miscellaneous
