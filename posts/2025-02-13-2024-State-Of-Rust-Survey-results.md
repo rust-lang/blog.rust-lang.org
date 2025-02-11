@@ -336,7 +336,7 @@ Other coveted features are generators (both sync and async) and more powerful ge
 </div>
 <!-- Chart which-features-do-you-want-stabilized end -->
 
-In the open answers to this question, people were really helpful and tried hard pointing the most notable issues limiting their productivity. We have seen mentions of struggles with async programming (an all-time favourite), debuggability of errors (which people generally love, but they are not perfect for everyone) or Rust tooling being slow or resource intensive (rust-analyzer and rustfmt). Some users also want a better IDE story and improved interoperability with other languages.
+In the open answers to this question, people were really helpful and tried hard to describe the most notable issues limiting their productivity. We have seen mentions of struggles with async programming (an all-time favourite), debuggability of errors (which people generally love, but they are not perfect for everyone) or Rust tooling being slow or resource intensive (rust-analyzer and rustfmt). Some users also want a better IDE story and improved interoperability with other languages.
 
 This year, we have also included a new question about the speed of Rust's evolution. While most people seem to be content with the status quo, more than a quarter of people who responded to this question would like Rust to stabilize and/or add features more quickly, and only 7% of respondents would prefer Rust to slow down or completely stop adding new features.
 
