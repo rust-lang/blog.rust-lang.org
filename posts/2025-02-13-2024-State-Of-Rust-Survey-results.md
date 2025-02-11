@@ -101,7 +101,7 @@ Of the former Rust users who participated in the 2024 survey, 36% cited factors 
 
 > Closed answers marked with N/A were not present in the previous version(s) of the survey.
 
-Those not using Rust anymore told us that it is because they don't really need it (or the goals of their company changed) or because (like above) it was not the right tool for the job. A few reported being overwhelmed by the language or its ecosystem in general or that switching or introducing Rust would have been too expensive in terms of human effort.
+Those not using Rust anymore told us that it is because they don't really need it (or the goals of their company changed) or because it was not the right tool for the job. A few reported being overwhelmed by the language or its ecosystem in general or that switching to or introducing Rust would have been too expensive in terms of human effort.
 
 Of those who used Rust in 2024, 53% did so on a daily (or nearly daily) basis — an increase of 4pp from the previous year. We can observe an upward trend in the frequency of Rust usage over the past few years, which suggests that Rust is being increasingly used at work. This is also confirmed by other answers mentioned in the Rust at Work section later below.
 
@@ -171,7 +171,7 @@ To use Rust, programmers first have to learn it, so we are always interested in 
 
 In terms of answers belonging to the "Other" category, they can be clustered into three categories: people using LLM (large language model) assistants (Copilot, ChatGPT, Claude, etc.), reading the official Rust forums (Discord, [URLO][urlo]) or being mentored while contributing to Rust projects. We would like to extend a big thank you to those making our spaces friendly and welcoming for newcomers, as it is important work and it pays off. Interestingly, a non-trivial number of people "learned by doing" and used rustc error messages and clippy as a guide, which is a good indicator of the quality of Rust diagnostics.
 
-In terms of formal education, it seems that Rust has not yet penetrated university curriculums, as this is typically a very slowly moving area. Only a very small number of respondents (around 3%) have taken a university Rust course or use university learning materials.
+In terms of formal education, it seems that Rust has not yet penetrated university curriculums, as this is typically a very slowly moving area. Only a very small number of respondents (around 3%) have taken a university Rust course or used university learning materials.
 
 <!-- Chart have-you-taken-a-rust-course start -->
 <div>
@@ -325,8 +325,6 @@ In terms of specific unstable (or missing) features that Rust users want to be s
 
 Other coveted features are generators (both sync and async) and more powerful generic const expressions. You can follow the [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/2025h1/goals.html) to track the progress of these (and other) features.
 
-People were really helpful and tried hard pointing their most notable issues limiting productivity in the open answers to this question. We have seen mentions of struggles with async programming (an all-time favourite), debuggability of errors (which people generally love, but they are not perfect for everyone) or Rust tooling being slow or resource intensive (rust-analyzer and rustfmt). Some users also want a better IDE story and improved interoperability with other languages.
-
 <!-- Chart which-features-do-you-want-stabilized start -->
 <div>
     <div class="matrix-chart" id="which-features-do-you-want-stabilized" style="height:800px; width:100%;"><noscript>
@@ -337,6 +335,8 @@ People were really helpful and tried hard pointing their most notable issues lim
     </div>
 </div>
 <!-- Chart which-features-do-you-want-stabilized end -->
+
+In the open answers to this question, people were really helpful and tried hard pointing the most notable issues limiting their productivity. We have seen mentions of struggles with async programming (an all-time favourite), debuggability of errors (which people generally love, but they are not perfect for everyone) or Rust tooling being slow or resource intensive (rust-analyzer and rustfmt). Some users also want a better IDE story and improved interoperability with other languages.
 
 This year, we have also included a new question about the speed of Rust's evolution. While most people seem to be content with the status quo, more than a quarter of people who responded to this question would like Rust to stabilize and/or add features more quickly, and only 7% of respondents would prefer Rust to slow down or completely stop adding new features.
 
