@@ -65,7 +65,7 @@ function relayoutCharts() {
         layout.autosize = false;
         layout.width = "100%";
         Plotly.relayout(chart, layout);
-        Plotly.restyle(chart, {textangle: -90});
+        Plotly.restyle(chart, {textangle: 90});
     }
     var matrix_charts = document.getElementsByClassName("matrix-chart");
     for (var i = 0; i < matrix_charts.length; i++) {
