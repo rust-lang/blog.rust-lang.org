@@ -229,7 +229,7 @@ We cannot of course forget the favourite topic of many programmers: which IDE (d
 </div>
 <!-- Chart what-ide-do-you-use end -->
 
-> You can also take a look at the linked [wordcloud](../../../images/2025-01-rust-survey-2024/what-ide-do-you-use-wordcloud.png) that summarizes open answers to this question (the "Other" category), to see what other editors are also popular.
+> You can also take a look at the linked [wordcloud](../../../images/2025-02-13-rust-survey-2024/what-ide-do-you-use-wordcloud.png) that summarizes open answers to this question (the "Other" category), to see what other editors are also popular.
 
 ## Rust at Work
 
