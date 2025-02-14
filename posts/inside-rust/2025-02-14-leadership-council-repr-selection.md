@@ -30,7 +30,6 @@ See [candidate criteria] for a description of what makes a good representative.
 
 There is a limit of at most two people affiliated with the same company or other legal entity being on the council [^affiliates].
 During the selection process, the council will consider the affiliation of candidates to decide if all choices will be compatible with that constraint.
-Note that the council is currently investigating clarifications and changes to affiliation limits, but we do not expect these changes to be ready before this selection process is over.
 
 Representatives may serve multiple terms if the team decides to choose the same representative again.
 There is a soft limit of three terms.[^limit]
