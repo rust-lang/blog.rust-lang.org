@@ -13,7 +13,7 @@ This is a summary of what has been happening around Cargo development for the la
 
 - [Plugin of the cycle](#plugin-of-the-cycle)
 - [Implementation](#implementation)
-  - [Polishing diagnoxtics](#polishing-diagnostics)
+  - [Polishing diagnostics](#polishing-diagnostics)
   - [`cargo package` VCS dirty checks](#cargo-package-vcs-dirty-checks)
   - [Cargo script](#cargo-script)
   - [Identifying unused `#[test]`s](#identifying-unused-tests)
