@@ -90,7 +90,7 @@ then the published version will be
 [package]
 name = "foo"
 version = "10.0.0"
-resoler = "3"
+resolver = "3"
 ```
 (see [#8264](https://github.com/rust-lang/cargo/issues/8264) for a discussion on whether `profile` should be copied over)
 
