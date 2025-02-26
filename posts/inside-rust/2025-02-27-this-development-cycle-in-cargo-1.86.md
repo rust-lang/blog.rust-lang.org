@@ -30,7 +30,7 @@ Cargo can't be everything to everyone,
 if for no other reason than the compatibility guarantees it must uphold.
 Plugins play an important part of the Cargo ecosystem and we want to celebrate them.
 
-Our plugin for this cycle is [cargo-update](https://crates.io/crates/cargo-update) which checks for and applies updates for `cargo install`ed binaries.  Built-in support for this is being tracked in [#4101](https://github.com/rust-lang/cargo/issues/4101).
+Our plugin for this cycle is [cargo install-update (crate name `cargo-update`)](https://crates.io/crates/cargo-update) which checks for and applies updates for `cargo install`ed binaries.  Built-in support for this is being tracked in [#4101](https://github.com/rust-lang/cargo/issues/4101).
 
 Thanks to [Muscraft](https://github.com/Muscraft) for the suggestion!
 
