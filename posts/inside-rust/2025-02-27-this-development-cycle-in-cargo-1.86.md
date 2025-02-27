@@ -442,7 +442,7 @@ might be able to help with this today but stabilization of `public-dependency` w
 
 ## Misc
 
-- [Daily reports](https://rust-lang.zulipchat.com/#narrow/stream/260232-t-cargo.2FPubGrub/topic/Progress.20report) by [Eh2406](https://github.com/Eh2406) on the progress of the Rust implementation of the PugGrub version solving algorithm
+- [pubgrub v0.3](https://github.com/pubgrub-rs/pubgrub/releases/tag/v0.3.0) was released by [Eh2406](https://github.com/Eh2406)
 - Support for `resolver.feature-unification = "workspace"` was implemented in [#15157](https://github.com/rust-lang/cargo/pull/15157) by [aliu](https://github.com/aliu) *(update from [1.83](https://blog.rust-lang.org/inside-rust/2024/10/31/this-development-cycle-in-cargo-1.83.html#misc))*
 - [epage](https://github.com/epage) posted [RFC #3772](https://github.com/rust-lang/rfcs/pull/3772) to deprecate non-package `edition` fields, like `lib.edition` <!-- 2025-02-11 -->
 - [ranger-ross](https://github.com/ranger-ross) started work on splitting out `build-dir` from `target-dir` in [#15104](https://github.com/rust-lang/cargo/pull/15104) *(update from [1.82](https://blog.rust-lang.org/inside-rust/2024/10/01/this-development-cycle-in-cargo-1.82.html#target-dir-and-artifact-dir))*
