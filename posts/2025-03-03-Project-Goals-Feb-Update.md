@@ -290,7 +290,7 @@ Regarding arbitary self types and coerce pointee, we are waiting on rust-lang/ru
 
 @wesleywiser is preparing a PR to add `-Zdwarf-version` to help advance compiler flags.
 
-There is an annoying issue related to `cfg(no_fp_fmt_parse)`, which is no longer used by RFL but which remains in an older branch of the kernel (6.12, LTS). 
+There is an annoying issue related to `cfg(no_global_oom_handling)`, which is no longer used by RFL but which remains in an older branch of the kernel (6.12, LTS). 
 
 As a set of "leaf crates" that evolve together in a mono-repo-like fashion,  RFL would like to have a solution for disabling the orphan rule.
 
