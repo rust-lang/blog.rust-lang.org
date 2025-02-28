@@ -300,8 +300,7 @@ As a set of "leaf crates" that evolve together in a mono-repo-like fashion,  RFL
 
 </details>
 
-
-
+<br>
 
 ## Goals looking for help
 
@@ -310,18 +309,8 @@ As a set of "leaf crates" that evolve together in a mono-repo-like fashion,  RFL
     <div style="flex: initial;"><progress value="0" max="3"></progress>
 </div>
 </div>
-<!-- markdown separator --> 
 
-<!-- markdown separator --> 
-
-
-<!-- markdown separator --> 
-![Help wanted](https://img.shields.io/badge/Help%20wanted-yellow) this project goal needs a compiler developer to move forward.
-<!-- markdown separator --> 
-
-
-<!-- markdown separator --> 
-
+*Help wanted:* this project goal needs a compiler developer to move forward. If you'd like to help, please post in [this goal's dedicated zulip topic](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Implement.20Open.20API.20Namespace.20Support.20.28goals.23256.29).
 
 <details>
 <summary>1 detailed update available.</summary>
@@ -352,18 +341,8 @@ Help wanted: this project goal needs a compiler developer to move forward.
     <div style="flex: initial;"><progress value="0" max="4"></progress>
 </div>
 </div>
-<!-- markdown separator --> 
 
-<!-- markdown separator --> 
-
-
-<!-- markdown separator --> 
-![Help wanted](https://img.shields.io/badge/Help%20wanted-yellow) this project goal needs someone to work on the implementation
-<!-- markdown separator --> 
-
-
-<!-- markdown separator --> 
-
+*Help wanted:* this project goal needs someone to work on the implementation. If you'd like to help, please post in [this goal's dedicated zulip topic](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Prototype.20a.20new.20set.20of.20Cargo.20.22plumbing.22.20.28goals.23264.29).
 
 <details>
 <summary>2 detailed updates availabled.</summary>
@@ -409,18 +388,8 @@ Hi @epage I am very interested to collaborate in this implementation work. Let's
     <div style="flex: initial;"><progress value="0" max="6"></progress>
 </div>
 </div>
-<!-- markdown separator --> 
 
-<!-- markdown separator --> 
-
-
-<!-- markdown separator --> 
-![Help wanted](https://img.shields.io/badge/Help%20wanted-yellow) Looking for people that want to help do a bit of refactoring. Please reach out through the project-stable-mir [zulip channel](https://rust-lang.zulipchat.com/#narrow/channel/320896-project-stable-mir) or [repository](https://github.com/rust-lang/project-stable-mir).
-<!-- markdown separator --> 
-
-
-<!-- markdown separator --> 
-
+*Help wanted:* looking for people that want to help do a bit of refactoring. Please reach out through the project-stable-mir [zulip channel](https://rust-lang.zulipchat.com/#narrow/channel/320896-project-stable-mir) or [repository](https://github.com/rust-lang/project-stable-mir).
 
 <details>
 <summary>1 detailed update available.</summary>
@@ -453,18 +422,8 @@ No progress yet.
     <div style="flex: initial;"><progress value="0" max="5"></progress>
 </div>
 </div>
-<!-- markdown separator --> 
 
-<!-- markdown separator --> 
-
-
-<!-- markdown separator --> 
-![Help wanted](https://img.shields.io/badge/Help%20wanted-yellow) this project goal needs a compiler developer to move forward.
-<!-- markdown separator --> 
-
-
-<!-- markdown separator --> 
-
+*Help wanted:* this project goal needs a compiler developer to move forward. If you'd like to help, please post in [this goal's dedicated zulip topic](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Stabilize.20public.2Fprivate.20dependencies.20.28goals.23272.29).
 
 <details>
 <summary>1 detailed update available.</summary>
