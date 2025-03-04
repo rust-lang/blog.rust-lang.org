@@ -5,17 +5,18 @@ use self::blogs::Blog;
 use self::posts::Post;
 use chrono::Timelike;
 use eyre::{eyre, WrapErr};
-use handlebars::{handlebars_helper, DirectorySourceOptions, Handlebars};
 use rayon::prelude::*;
 use sass_rs::{compile_file, Options};
 use serde_derive::Serialize;
-use serde_json::json;
+use serde_json::{json, Value};
+use std::collections::HashMap;
 use std::fs::{self, File};
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
+use tera::Tera;
 
-struct Generator<'a> {
-    handlebars: Handlebars<'a>,
+struct Generator {
+    tera: Tera,
     blogs: Vec<Blog>,
     out_directory: PathBuf,
 }
@@ -31,34 +32,56 @@ struct ReleasePost {
     title: String,
     url: String,
 }
-handlebars_helper!(hb_month_name_helper: |month_num: u64| match month_num {
-    1 => "Jan.",
-    2 => "Feb.",
-    3 => "Mar.",
-    4 => "Apr.",
-    5 => "May",
-    6 => "June",
-    7 => "July",
-    8 => "Aug.",
-    9 => "Sept.",
-    10 => "Oct.",
-    11 => "Nov.",
-    12 => "Dec.",
-    _ => "Error!",
-});
 
-impl Generator<'_> {
+fn month_name(month_num: &Value, _args: &HashMap<String, Value>) -> tera::Result<Value> {
+    let month_num = month_num
+        .as_u64()
+        .expect("month_num should be an unsigned integer");
+    let name = match month_num {
+        1 => "Jan.",
+        2 => "Feb.",
+        3 => "Mar.",
+        4 => "Apr.",
+        5 => "May",
+        6 => "June",
+        7 => "July",
+        8 => "Aug.",
+        9 => "Sept.",
+        10 => "Oct.",
+        11 => "Nov.",
+        12 => "Dec.",
+        _ => panic!("invalid month! ({month_num})"),
+    };
+    Ok(name.into())
+}
+
+// Tera and Handlebars escape HTML differently by default.
+// Tera:       &<>"'/
+// Handlebars: &<>"'`=
+// To make the transition testable, this function escapes just like Handlebars.
+fn escape_hbs(input: &Value, _args: &HashMap<String, Value>) -> tera::Result<Value> {
+    let input = input.as_str().expect("input should be a string");
+    Ok(input
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace("\"", "&quot;")
+        .replace("'", "&#x27;")
+        .replace("`", "&#x60;")
+        .replace("=", "&#x3D;")
+        .into())
+}
+
+impl Generator {
     fn new(
         out_directory: impl AsRef<Path>,
         posts_directory: impl AsRef<Path>,
     ) -> eyre::Result<Self> {
-        let mut handlebars = Handlebars::new();
-        handlebars.set_strict_mode(true);
-        handlebars.register_templates_directory("templates", DirectorySourceOptions::default())?;
-        handlebars.register_helper("month_name", Box::new(hb_month_name_helper));
-
+        let mut tera = Tera::new("templates/*")?;
+        tera.register_filter("month_name", month_name);
+        tera.register_filter("escape_hbs", escape_hbs);
         Ok(Generator {
-            handlebars,
+            tera,
             blogs: self::blogs::load(posts_directory.as_ref())?,
             out_directory: out_directory.as_ref().into(),
         })
@@ -165,7 +188,7 @@ impl Generator<'_> {
             "root": blog.path_back_to_root(),
         });
         let path = blog.prefix().join("index.html");
-        self.render_template(&path, "index", data)?;
+        self.render_template(&path, "index.tera", data)?;
         Ok(path)
     }
 
@@ -189,7 +212,7 @@ impl Generator<'_> {
         });
 
         let path = path.join(filename);
-        self.render_template(&path, &post.layout, data)?;
+        self.render_template(&path, &format!("{}.tera", post.layout), data)?;
         Ok(path)
     }
 
@@ -201,7 +224,7 @@ impl Generator<'_> {
             "feed_updated": chrono::Utc::now().with_nanosecond(0).unwrap().to_rfc3339(),
         });
 
-        self.render_template(blog.prefix().join("feed.xml"), "feed", data)?;
+        self.render_template(blog.prefix().join("feed.xml"), "feed.tera", data)?;
         Ok(())
     }
 
@@ -242,11 +265,12 @@ impl Generator<'_> {
         &self,
         name: impl AsRef<Path>,
         template: &str,
-        data: serde_json::Value,
+        data: Value,
     ) -> eyre::Result<()> {
         let out_file = self.out_directory.join(name.as_ref());
         let file = File::create(out_file)?;
-        self.handlebars.render_to_write(template, &data, file)?;
+        self.tera
+            .render_to(template, &tera::Context::from_value(data)?, file)?;
         Ok(())
     }
 }
