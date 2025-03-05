@@ -1,0 +1,19 @@
+{% extends "layout.tera" %}
+{% block page %}
+<section id="{{post.title | escape_hbs}}" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>{{ post.title | escape_hbs }}</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">{{post.month | month_name}} {{post.day}}, {{post.year}} &middot; {{post.author | escape_hbs}}
+    {% if post.has_team %} on behalf of <a href="{{post.team_url}}">{{post.team}}</a> {% endif %}
+    </div>
+
+    <div class="post">
+      {{ post.contents }}
+    </div>
+  </div>
+</section>
+{%- endblock page %}

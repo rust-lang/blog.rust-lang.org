@@ -12,18 +12,18 @@
     </author>
     <updated>{{feed_updated}}</updated>
 
-    {{#each posts}}
+    {% for post in posts %}
     <entry>
-        <title>{{title}}</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/{{../blog.prefix}}{{url}}" type="text/html" title="{{title}}" />
-        <published>{{published}}</published>
-        <updated>{{updated}}</updated>
-        <id>https://blog.rust-lang.org/{{../blog.prefix}}{{url}}</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/{{../blog.prefix}}{{url}}">{{contents}}</content>
+        <title>{{post.title}}</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/{{blog.prefix}}{{post.url}}" type="text/html" title="{{post.title}}" />
+        <published>{{post.published}}</published>
+        <updated>{{post.updated}}</updated>
+        <id>https://blog.rust-lang.org/{{blog.prefix}}{{post.url}}</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/{{blog.prefix}}{{post.url}}">{{post.contents}}</content>
 
         <author>
-            <name>{{author}}</name>
+            <name>{{post.author}}</name>
         </author>
     </entry>
-    {{/each}}
+    {% endfor %}
 </feed>
