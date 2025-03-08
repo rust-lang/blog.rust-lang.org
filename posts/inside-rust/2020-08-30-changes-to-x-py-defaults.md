@@ -1,9 +1,9 @@
----
-layout: post
-title: "Changes to x.py defaults"
-author: Jynn Nelson
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Changes to x.py defaults"
+author = "Jynn Nelson"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 Recently, the defaults for [`x.py`], the tool used to [bootstrap] the Rust compiler from source, changed. If you regularly contribute to Rust, this might affect your workflow.
 

@@ -1,10 +1,10 @@
----
-layout: post
-title: "Lang team design meeting: well-formedness and type aliases"
-author: Niko Matsakis
-description: "Well-formedness and type aliases meeting report"
-team: the lang team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "Lang team design meeting: well-formedness and type aliases"
+author = "Niko Matsakis"
+description = "Well-formedness and type aliases meeting report"
+team = "the lang team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 Hello! Did you know that the [lang team] now has regular design
 meetings? We use these meetings to dig deeper into the output of

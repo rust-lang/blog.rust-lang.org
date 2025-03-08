@@ -1,8 +1,8 @@
----
-layout: post
-title: "2024 State of Rust Survey Results"
-author: The Rust Survey Team
----
++++
+layout = "post"
+title = "2024 State of Rust Survey Results"
+author = "The Rust Survey Team"
++++
 
 Hello, Rustaceans!
 

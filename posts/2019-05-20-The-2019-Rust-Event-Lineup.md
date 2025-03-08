@@ -1,9 +1,9 @@
----
-layout: post
-title: "The 2019 Rust Event Lineup"
-author: Rust Community Team
-description: "Lots of Rust events are happening this year; join us at one near you!"
----
++++
+layout = "post"
+title = "The 2019 Rust Event Lineup"
+author = "Rust Community Team"
+description = "Lots of Rust events are happening this year; join us at one near you!"
++++
 
 We're excited for the 2019 conference season, which we're actually late in writing up. Some
 incredible events have already happened! Read on to learn more about all the events occurring

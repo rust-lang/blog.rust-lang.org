@@ -1,10 +1,10 @@
----
-layout: post
-title: Const Eval (Un)Safety Rules
-author: Felix Klock
-description: "Various ways const-eval can change between Rust versions"
-team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Const Eval (Un)Safety Rules"
+author = "Felix Klock"
+description = "Various ways const-eval can change between Rust versions"
+team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 In a recent Rust issue ([#99923][]), a developer noted that the upcoming
 1.64-beta version of Rust had started signalling errors on their crate,

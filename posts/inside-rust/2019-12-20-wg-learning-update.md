@@ -1,9 +1,9 @@
----
-layout: post
-title: "An Update from WG-Learning"
-author: mark-i-m
-team: the Rustc Dev Guide Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>
----
++++
+layout = "post"
+title = "An Update from WG-Learning"
+author = "mark-i-m"
+team = "the Rustc Dev Guide Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>"
++++
 
 # An update from WG-Learning
 

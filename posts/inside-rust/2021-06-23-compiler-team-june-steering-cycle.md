@@ -1,10 +1,10 @@
----
-layout: post
-title: Rust Compiler June Steering Cycle
-author: Felix Klock
-description: "The compiler team's June steering cycle"
-team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Rust Compiler June Steering Cycle"
+author = "Felix Klock"
+description = "The compiler team's June steering cycle"
+team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 On [Friday, June 4th][jun-4-zulip-archive], the Rust Compiler team had a planning meeting for the June steering cycle.
 

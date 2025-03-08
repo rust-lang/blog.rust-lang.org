@@ -1,8 +1,8 @@
----
-layout: post
-title: "Increasing Rust’s Reach 2018"
-author: Ashley Williams
----
++++
+layout = "post"
+title = "Increasing Rust’s Reach 2018"
+author = "Ashley Williams"
++++
 
 The Rust team is happy to announce that we're running our Increasing Rust's Reach
 program [again] this year. Increasing Rust's Reach is one of several programs run by

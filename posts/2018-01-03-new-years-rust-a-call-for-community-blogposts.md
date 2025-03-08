@@ -1,8 +1,8 @@
----
-title: "New Year's Rust: A Call for Community Blogposts"
-author: "The Rust Core Team"
-layout: post
----
++++
+title = "New Year's Rust: A Call for Community Blogposts"
+author = "The Rust Core Team"
+layout = "post"
++++
 
 'Tis the season for people and communities to reflect and set goals- and the Rust team is
 no different. Last month, we published [a blogpost about our accomplishments in 2017],

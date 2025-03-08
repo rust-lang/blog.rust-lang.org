@@ -1,9 +1,9 @@
----
-layout: post
-title: "Launching the 2023 State of Rust Survey"
-author: The Rust Survey Working Group
-description: "Share your experience using Rust in the eighth edition of the State of Rust Survey"
----
++++
+layout = "post"
+title = "Launching the 2023 State of Rust Survey"
+author = "The Rust Survey Working Group"
+description = "Share your experience using Rust in the eighth edition of the State of Rust Survey"
++++
 
 It’s time for the [2023 State of Rust Survey](https://www.surveyhero.com/c/4vxempzc)!
 

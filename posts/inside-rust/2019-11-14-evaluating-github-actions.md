@@ -1,9 +1,9 @@
----
-layout: post
-title: Evaluating GitHub Actions
-author: Pietro Albini
-team: the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>
----
++++
+layout = "post"
+title = "Evaluating GitHub Actions"
+author = "Pietro Albini"
+team = "the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>"
++++
 
 The Rust Infrastructure team is happy to announce that we’re starting an
 evaluation of [GitHub Actions](https://github.com/features/actions) as a

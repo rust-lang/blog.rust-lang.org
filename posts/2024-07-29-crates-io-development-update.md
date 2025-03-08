@@ -1,9 +1,9 @@
----
-layout: post
-title: "crates.io: development update"
-author: Tobias Bieniek
-team: the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>
----
++++
+layout = "post"
+title = "crates.io: development update"
+author = "Tobias Bieniek"
+team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
++++
 
 Since crates.io does not have releases in the classical sense, there are no release notes either. However, the crates.io team still wants to keep you all updated about the ongoing development of crates.io. This blog post is a summary of the most significant changes that we have made to crates.io in the past months.
 

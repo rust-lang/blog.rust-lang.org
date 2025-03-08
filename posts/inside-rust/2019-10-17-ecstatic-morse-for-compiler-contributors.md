@@ -1,10 +1,10 @@
----
-layout: post
-title: "Please welcome ecstatic-morse to compiler-contributors"
-author: Niko Matsakis
-description: "Please welcome ecstatic-morse to compiler-contributors"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Please welcome ecstatic-morse to compiler-contributors"
+author = "Niko Matsakis"
+description = "Please welcome ecstatic-morse to compiler-contributors"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 Please welcome [@ecstatic-morse] to the [compiler contributors] group!
 They're working to make compile-time evaluation more expressive by

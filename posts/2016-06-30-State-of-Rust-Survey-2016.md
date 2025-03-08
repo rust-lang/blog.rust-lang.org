@@ -1,8 +1,8 @@
----
-layout: post
-title: "State of Rust Survey 2016"
-author: Jonathan Turner
----
++++
+layout = "post"
+title = "State of Rust Survey 2016"
+author = "Jonathan Turner"
++++
 
 We recently wrapped up with a survey for the Rust community.  Little did we know that it would grow to be one of the largest language community surveys.  A *huge* thank you to the **3,086** people who responded!  We're humbled by the response, and we're thankful for all the great feedback.
 

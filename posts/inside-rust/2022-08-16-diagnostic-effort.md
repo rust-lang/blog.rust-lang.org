@@ -1,9 +1,9 @@
----
-layout: post
-title: "Contribute to the diagnostic translation effort!"
-author: David Wood
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Contribute to the diagnostic translation effort!"
+author = "David Wood"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 The Rust Diagnostics working group is leading an effort to add support for
 internationalization of error messages in the compiler, allowing the compiler

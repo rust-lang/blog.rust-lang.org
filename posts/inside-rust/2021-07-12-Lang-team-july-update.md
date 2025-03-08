@@ -1,10 +1,10 @@
----
-layout: post
-title: "Lang team July update"
-author: Niko Matsakis
-description: "Lang team July update"
-team: the lang team <https://lang-team.rust-lang.org/>
----
++++
+layout = "post"
+title = "Lang team July update"
+author = "Niko Matsakis"
+description = "Lang team July update"
+team = "the lang team <https://lang-team.rust-lang.org/>"
++++
 
 On 2021-07-07, the lang team held its July planning meeting ([minutes]). These meetings are tyically held the first Wednesday of every month.
 

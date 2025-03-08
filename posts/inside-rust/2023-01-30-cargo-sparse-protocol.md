@@ -1,9 +1,9 @@
----
-layout: post
-title: Help test Cargo's new index protocol
-author: Eric Huss
-team: The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>
----
++++
+layout = "post"
+title = "Help test Cargo's new index protocol"
+author = "Eric Huss"
+team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
++++
 
 Cargo's new index protocol will be available starting in Rust 1.68, which will be released on 2023-03-09.
 This new "sparse" protocol should usually provide a significant performance improvement when accessing [crates.io].

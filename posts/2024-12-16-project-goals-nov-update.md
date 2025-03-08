@@ -1,9 +1,9 @@
----
-layout: post
-title: "November project goals update"
-author: Niko Matsakis
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "November project goals update"
+author = "Niko Matsakis"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 The Rust project is currently working towards a [slate of 26 project
 goals](https://rust-lang.github.io/rust-project-goals/2024h2/goals.html), with 3 of them designed as [Flagship
 Goals](https://rust-lang.github.io/rust-project-goals/2024h2/goals.html#flagship-goals). This post provides selected

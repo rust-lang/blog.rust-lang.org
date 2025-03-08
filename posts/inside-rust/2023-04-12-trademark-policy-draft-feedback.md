@@ -1,8 +1,8 @@
----
-layout: post
-title: "A note on the Trademark Policy Draft"
-author: Ryan Levick, Jane Losare-Lusby, Tyler Mandry, Mark Rousskov, Josh Stone, and Josh Triplett
----
++++
+layout = "post"
+title = "A note on the Trademark Policy Draft"
+author = "Ryan Levick, Jane Losare-Lusby, Tyler Mandry, Mark Rousskov, Josh Stone, and Josh Triplett"
++++
 
 # A note on the Trademark Policy Draft
 

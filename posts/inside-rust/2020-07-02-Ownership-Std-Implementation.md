@@ -1,9 +1,9 @@
----
-layout: post
-title: "Ownership of the standard library implementation"
-author: Ashley Mannix
-team: The Libs team <https://www.rust-lang.org/governance/teams/library>
----
++++
+layout = "post"
+title = "Ownership of the standard library implementation"
+author = "Ashley Mannix"
+team = "The Libs team <https://www.rust-lang.org/governance/teams/library>"
++++
 
 Our Rust project is a large and diverse one. Its activities are broadly coordinated by teams that give the community space to find and contribute to the things that matter to them.
 We’re trialing a reorganization of standard library activities between the Libs and Compiler teams.

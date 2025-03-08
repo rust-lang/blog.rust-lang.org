@@ -1,9 +1,9 @@
----
-layout: post
-title: "Core Team Update: May 2021"
-author: Steve Klabnik
-team: The Core Team <https://www.rust-lang.org/governance/teams/core>
----
++++
+layout = "post"
+title = "Core Team Update: May 2021"
+author = "Steve Klabnik"
+team = "The Core Team <https://www.rust-lang.org/governance/teams/core>"
++++
 
 Hey everyone!  Back in August of last year, the core team wrote a blog post
 titled "[Laying the foundation for Rust's Future][future]." Ever since then,

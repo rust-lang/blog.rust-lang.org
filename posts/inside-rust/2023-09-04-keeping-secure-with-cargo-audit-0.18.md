@@ -1,10 +1,10 @@
----
-layout: post
-title: "Keeping Rust projects secure with cargo-audit 0.18: performance, compatibility and security improvements"
-author: Sergey "Shnatsel" Davidoff
-description: "A look at the new features in cargo-audit 0.18 for ensuring dependencies are free of known vulnerabilities"
-team: the Secure Code WG <https://www.rust-lang.org/governance/wgs/wg-secure-code>
----
++++
+layout = "post"
+title = "Keeping Rust projects secure with cargo-audit 0.18: performance, compatibility and security improvements"
+author = """Sergey "Shnatsel" Davidoff"""
+description = "A look at the new features in cargo-audit 0.18 for ensuring dependencies are free of known vulnerabilities"
+team = "the Secure Code WG <https://www.rust-lang.org/governance/wgs/wg-secure-code>"
++++
 
 [`cargo audit`](https://crates.io/crates/cargo-audit) checks your project's dependencies for known security vulnerabilites.
 

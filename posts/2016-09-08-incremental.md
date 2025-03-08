@@ -1,9 +1,9 @@
----
-layout: post
-title: "Incremental Compilation"
-author: Michael Woerister
-description: "Incremental compilation for exponential joy and happiness."
----
++++
+layout = "post"
+title = "Incremental Compilation"
+author = "Michael Woerister"
+description = "Incremental compilation for exponential joy and happiness."
++++
 
 I remember when, during the 1.0 anniversary presentation at the
 [Bay Area Meetup][meetup], Aaron Turon talked about Dropbox so far having been

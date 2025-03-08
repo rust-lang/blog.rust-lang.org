@@ -1,8 +1,8 @@
----
-layout: post
-title: "Core team membership updates"
-author: The Rust Core Team
----
++++
+layout = "post"
+title = "Core team membership updates"
+author = "The Rust Core Team"
++++
 
 The Rust Core team is excited to announce the first of a series of changes to
 its structure we’ve been planning for 2021, starting today by adding several new

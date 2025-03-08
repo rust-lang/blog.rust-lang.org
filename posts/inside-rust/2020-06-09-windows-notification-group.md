@@ -1,10 +1,10 @@
----
-layout: post
-title: "Announcing the Windows and ARM notification groups"
-author: Niko Matsakis
-description: "Announcing the Windows and ARM notification groups"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Announcing the Windows and ARM notification groups"
+author = "Niko Matsakis"
+description = "Announcing the Windows and ARM notification groups"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 We are forming two new groups in the compiler team:
 

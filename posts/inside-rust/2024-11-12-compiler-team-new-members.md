@@ -1,9 +1,9 @@
----
-layout: post
-title: Announcing four new members of the compiler team
-author: davidtwco and wesleywiser
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Announcing four new members of the compiler team"
+author = "davidtwco and wesleywiser"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 Its been no time at all since [we restructured the team and recognised our existing and new
 members][blog_reorg], but we've already got new compiler team members to announce and recognise:
 

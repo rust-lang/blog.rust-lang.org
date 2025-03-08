@@ -1,9 +1,9 @@
----
-layout: post
-title: "Embedded Working Group Community Micro Survey"
-author: James Munns
-team: Embedded Devices Working Group <https://www.rust-lang.org/governance/wgs/embedded>
----
++++
+layout = "post"
+title = "Embedded Working Group Community Micro Survey"
+author = "James Munns"
+team = "Embedded Devices Working Group <https://www.rust-lang.org/governance/wgs/embedded>"
++++
 
 The [Embedded devices working group] has launched the [2024 Embedded Community Micro Survey] starting
 today, and running until **September 19th, 2024**.

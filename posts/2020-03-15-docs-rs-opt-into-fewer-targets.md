@@ -1,9 +1,9 @@
----
-layout: post
-title: "docs.rs now allows you to choose your build targets"
-author: Jynn Nelson
-team: the docs.rs team <https://www.rust-lang.org/governance/teams/dev-tools#docs-rs>
----
++++
+layout = "post"
+title = "docs.rs now allows you to choose your build targets"
+author = "Jynn Nelson"
+team = "the docs.rs team <https://www.rust-lang.org/governance/teams/dev-tools#docs-rs>"
++++
 
 Recently, [docs.rs] added a feature that allows crates to opt-out of building on all targets.
 If you don't need to build on all targets, you can enable this feature to reduce your build times.

@@ -1,9 +1,9 @@
----
-layout: post
-title: "Announcing `async fn` and return-position `impl Trait` in traits"
-author: Tyler Mandry
-team: The Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>
----
++++
+layout = "post"
+title = "Announcing `async fn` and return-position `impl Trait` in traits"
+author = "Tyler Mandry"
+team = "The Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>"
++++
 
 The Rust Async Working Group is excited to announce major progress towards our goal of enabling the use of `async fn` in traits. Rust 1.75, which hits stable next week, will include support for both `-> impl Trait` notation and `async fn` in traits.
 

@@ -1,9 +1,9 @@
----
-layout: post
-title: "Call for proposals: Rust 2025h1 project goals"
-author: Niko Matsakis
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "Call for proposals: Rust 2025h1 project goals"
+author = "Niko Matsakis"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 **As of today, we are officially accepting proposals for Rust Project Goals targeting 2025H1 (the first half of 2025).** If you'd like to participate in the process, or just to follow along, please check out the [2025h1 goal page][2025h1]. It includes listings of the goals currently under consideration, more details about the goals program, and instructions for how to submit a goal.
 

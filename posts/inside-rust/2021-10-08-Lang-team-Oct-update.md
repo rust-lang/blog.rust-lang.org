@@ -1,10 +1,10 @@
----
-layout: post
-title: "Lang team October update"
-author: Niko Matsakis
-description: "Lang team October update"
-team: the lang team <https://lang-team.rust-lang.org/>
----
++++
+layout = "post"
+title = "Lang team October update"
+author = "Niko Matsakis"
+description = "Lang team October update"
+team = "the lang team <https://lang-team.rust-lang.org/>"
++++
 
 This week the lang team held its October planning meeting ([minutes]). We hold these meetings on the first Wednesday of every month. 
 

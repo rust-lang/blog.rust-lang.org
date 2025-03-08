@@ -1,10 +1,10 @@
----
-layout: post
-title: "Please welcome Thom and Chris to Library Contributors"
-author: Mara Bos
-description: "Please welcome Thom and Chris to Library Contributors"
-team: the library team <https://www.rust-lang.org/governance/teams/library>
----
++++
+layout = "post"
+title = "Please welcome Thom and Chris to Library Contributors"
+author = "Mara Bos"
+description = "Please welcome Thom and Chris to Library Contributors"
+team = "the library team <https://www.rust-lang.org/governance/teams/library>"
++++
 
 Please welcome Thom Chiovoloni and Chris Denton to the
 [Library Contributors](https://www.rust-lang.org/governance/teams/library#libs-contributors) group!

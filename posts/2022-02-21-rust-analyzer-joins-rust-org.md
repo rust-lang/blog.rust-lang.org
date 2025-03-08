@@ -1,8 +1,8 @@
----
-layout: post
-title: "rust-analyzer joins the Rust organization!"
-author: The rust-analyzer Team on behalf of the entire Rust Team
----
++++
+layout = "post"
+title = "rust-analyzer joins the Rust organization!"
+author = "The rust-analyzer Team on behalf of the entire Rust Team"
++++
 
 We have an exciting announcement to make!
 The [rust-analyzer](https://rust-analyzer.github.io) project, a new implementation of the Language Server Protocol (LSP) for Rust, is now officially a part of the wider Rust organization! 🎉

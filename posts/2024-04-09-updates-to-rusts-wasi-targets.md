@@ -1,8 +1,8 @@
----
-layout: post
-title: Changes to Rust's WASI targets
-author: Yosh Wuyts
----
++++
+layout = "post"
+title = "Changes to Rust's WASI targets"
+author = "Yosh Wuyts"
++++
 
 [WASI 0.2 was recently
 stabilized](https://bytecodealliance.org/articles/WASI-0.2), and Rust has begun

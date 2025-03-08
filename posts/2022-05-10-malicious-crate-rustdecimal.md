@@ -1,8 +1,8 @@
----
-layout: post
-title: "Security advisory: malicious crate rustdecimal"
-author: The Rust Security Response WG
----
++++
+layout = "post"
+title = "Security advisory: malicious crate rustdecimal"
+author = "The Rust Security Response WG"
++++
 
 > This is a cross-post of [the official security advisory][advisory]. The
 > official advisory contains a signed version with our PGP key, as well.

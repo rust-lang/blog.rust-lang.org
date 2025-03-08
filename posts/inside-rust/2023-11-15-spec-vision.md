@@ -1,9 +1,9 @@
----
-layout: post
-title: "Our Vision for the Rust Specification"
-author: Eric, Felix, Joel and Mara
-team: the specification team <https://www.rust-lang.org/governance/teams/lang#Specification%20team>
----
++++
+layout = "post"
+title = "Our Vision for the Rust Specification"
+author = "Eric, Felix, Joel and Mara"
+team = "the specification team <https://www.rust-lang.org/governance/teams/lang#Specification%20team>"
++++
 
 A few months ago, by accepting [RFC 3355](https://rust-lang.github.io/rfcs/3355-rust-spec.html), the decision was made to start working on an official specification for the Rust language. Eric (maintainer of the Rust Reference), Felix (Rust language team), Joel (Rust Foundation) and Mara (author of the RFC) have been working together to get this effort started.
 

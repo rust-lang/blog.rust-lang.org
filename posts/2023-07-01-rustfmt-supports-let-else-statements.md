@@ -1,9 +1,9 @@
----
-layout: post
-title: Rustfmt support for let-else statements
-author: Caleb Cartwright
-team: the style team <https://www.rust-lang.org/governance/teams/lang#Style%20team> and the rustfmt team <https://www.rust-lang.org/governance/teams/dev-tools#Rustfmt%20team>
----
++++
+layout = "post"
+title = "Rustfmt support for let-else statements"
+author = "Caleb Cartwright"
+team = "the style team <https://www.rust-lang.org/governance/teams/lang#Style%20team> and the rustfmt team <https://www.rust-lang.org/governance/teams/dev-tools#Rustfmt%20team>"
++++
 
 Rustfmt will add support for formatting [let-else statements] starting with the nightly 2023-07-02 toolchain, and then let-else formatting support should come to stable Rust as part of the 1.72 release.
 

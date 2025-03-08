@@ -1,8 +1,8 @@
----
-layout: post
-title: "Increasing the glibc and Linux kernel requirements"
-author: Nikita Popov
----
++++
+layout = "post"
+title = "Increasing the glibc and Linux kernel requirements"
+author = "Nikita Popov"
++++
 
 The minimum requirements for Rust toolchains targeting Linux will [increase][PR] with the
 Rust 1.64.0 release (slated for September 22nd, 2022). The new minimum requirements are:

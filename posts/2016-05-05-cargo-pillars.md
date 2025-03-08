@@ -1,9 +1,9 @@
----
-layout: post
-title: "Cargo: predictable dependency management"
-author: Yehuda Katz
-description: "Cargo makes dependency management in Rust easy and predictable"
----
++++
+layout = "post"
+title = "Cargo: predictable dependency management"
+author = "Yehuda Katz"
+description = "Cargo makes dependency management in Rust easy and predictable"
++++
 
 Cargo's goal is to make modern application package management a core value of
 the Rust programming language.

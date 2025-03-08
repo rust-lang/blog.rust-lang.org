@@ -1,10 +1,10 @@
----
-layout: post
-title: "Async Foundations Update: Time for polish!"
-author: Niko Matsakis
-description: "A new blog where the Rust team can post updates on the latest developments"
-team: the Async Foundations WG <https://rust-lang.github.io/compiler-team/working-groups/async-await/>
----
++++
+layout = "post"
+title = "Async Foundations Update: Time for polish!"
+author = "Niko Matsakis"
+description = "A new blog where the Rust team can post updates on the latest developments"
+team = "the Async Foundations WG <https://rust-lang.github.io/compiler-team/working-groups/async-await/>"
++++
 
 As you've perhaps heard, recently the async-await feature [landed on
 the Rust beta branch][blog]. This marks a big turning point in the

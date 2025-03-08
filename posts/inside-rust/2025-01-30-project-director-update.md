@@ -1,9 +1,9 @@
----
-layout: post
-title: "January 2025 Project Director Update"
-author: Carol Nichols
-team: Rust Foundation Project Directors <https://foundation.rust-lang.org/about/>
----
++++
+layout = "post"
+title = "January 2025 Project Director Update"
+author = "Carol Nichols"
+team = "Rust Foundation Project Directors <https://foundation.rust-lang.org/about/>"
++++
 
 Happy New Year everyone! Welcome to the second blog post in [the series started last month](https://blog.rust-lang.org/inside-rust/2024/12/17/project-director-update.html) where us Rust Foundation Project Directors will be sharing the highlights from last month’s Rust Foundation Board meeting. You’ll find the [full December 2024 meeting minutes](https://rustfoundation.org/resource/december-board-minutes/) on the Rust Foundation’s [beautiful new site](https://rustfoundation.org/policies-resources/#minutes)!
 

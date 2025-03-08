@@ -1,10 +1,10 @@
----
-layout: post
-title: "Jacob Hoffman-Andrews joins the Rustdoc team"
-author: Guillaume Gomez
-description: "new rustdoc team member"
-team: the rustdoc team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>
----
++++
+layout = "post"
+title = "Jacob Hoffman-Andrews joins the Rustdoc team"
+author = "Guillaume Gomez"
+description = "new rustdoc team member"
+team = "the rustdoc team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>"
++++
 
 Hello everyone, please welcome [Jacob Hoffman-Andrews][@jsha] to the rustdoc team!
 

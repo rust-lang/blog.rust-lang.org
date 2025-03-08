@@ -1,9 +1,9 @@
----
-layout: post
-title: "Electing New Project Directors 2024"
-author: Leadership Council
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "Electing New Project Directors 2024"
+author = "Leadership Council"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 Today we are launching the process to elect two Project Directors to the Rust Foundation Board of Directors. This is the second round of slots, following from [last year's election](https://blog.rust-lang.org/2023/08/30/electing-new-project-directors.html).
 

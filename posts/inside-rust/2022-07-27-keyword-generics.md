@@ -1,9 +1,9 @@
----
-layout: post
-title: "Announcing the Keyword Generics Initiative"
-author: Yoshua Wuyts
-team: The Keyword Generics Initiative <https://github.com/rust-lang/keyword-generics-initiative>
----
++++
+layout = "post"
+title = "Announcing the Keyword Generics Initiative"
+author = "Yoshua Wuyts"
+team = "The Keyword Generics Initiative <https://github.com/rust-lang/keyword-generics-initiative>"
++++
 
 We ([Oli], [Niko], and [Yosh]) are excited to announce the start of the [Keyword
 Generics Initiative][kwi], a new initiative [^initiative] under the purview of

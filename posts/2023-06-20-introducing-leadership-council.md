@@ -1,9 +1,9 @@
----
-layout: post
-title: "Introducing the Rust Leadership Council"
-author: Leadership Council
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "Introducing the Rust Leadership Council"
+author = "Leadership Council"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 As of today, [RFC 3392] has been merged, forming the new top level governance body of the Rust Project: the Leadership Council. The creation of this Council marks the end of both the Core Team and the interim Leadership Chat.
 

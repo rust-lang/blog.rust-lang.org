@@ -1,10 +1,10 @@
----
-layout: post
-title: "Announcing the Error Handling Project Group"
-author: Sean Chen
-description: "Announcing the Error Handling Project Group"
-team: the library team <https://www.rust-lang.org/governance/teams/library>
----
++++
+layout = "post"
+title = "Announcing the Error Handling Project Group"
+author = "Sean Chen"
+description = "Announcing the Error Handling Project Group"
+team = "the library team <https://www.rust-lang.org/governance/teams/library>"
++++
 
 Today we are announcing the formation of a new project group under 
 the libs team, focused on error handling!

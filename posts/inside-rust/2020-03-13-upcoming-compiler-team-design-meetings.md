@@ -1,10 +1,10 @@
----
-layout: post
-title: "Upcoming compiler-team design meetings"
-author: Niko Matsakis
-description: "Upcoming compiler-team design meetings"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Upcoming compiler-team design meetings"
+author = "Niko Matsakis"
+description = "Upcoming compiler-team design meetings"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 In our [planning meeting today], the [compiler team] has scheduled our
 next batch of upcoming design meetings. You can find the exact times

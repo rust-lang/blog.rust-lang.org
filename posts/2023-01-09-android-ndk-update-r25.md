@@ -1,9 +1,9 @@
----
-layout: post
-title: "Updating the Android NDK in Rust 1.68"
-author: Android Platform Team
-description: "Modernizing Android support in Rust"
----
++++
+layout = "post"
+title = "Updating the Android NDK in Rust 1.68"
+author = "Android Platform Team"
+description = "Modernizing Android support in Rust"
++++
 
 We are pleased to announce that Android platform support in Rust will be
 modernized in Rust 1.68 as we update the target NDK from r17 to r25.  As a

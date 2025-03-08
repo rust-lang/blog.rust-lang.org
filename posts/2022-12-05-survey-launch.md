@@ -1,9 +1,9 @@
----
-layout: post
-title: "Launching the 2022 State of Rust Survey"
-author: The Rust Survey Working Group
-description: "Hearing from you about the seventh year of Rust"
----
++++
+layout = "post"
+title = "Launching the 2022 State of Rust Survey"
+author = "The Rust Survey Working Group"
+description = "Hearing from you about the seventh year of Rust"
++++
 
 The [2022 State of Rust Survey][survey] is here!
 

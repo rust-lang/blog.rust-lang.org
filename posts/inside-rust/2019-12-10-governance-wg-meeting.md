@@ -1,9 +1,9 @@
----
-layout: post
-title: "Governance Working Group Update"
-author: Niko Matsakis
-team: the Governance WG <https://github.com/rust-lang/wg-governance>
----
++++
+layout = "post"
+title = "Governance Working Group Update"
+author = "Niko Matsakis"
+team = "the Governance WG <https://github.com/rust-lang/wg-governance>"
++++
 
 Hello everyone! The governance working group met last week to discuss
 writing out a policy for access privileges on our Github

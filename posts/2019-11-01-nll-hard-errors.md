@@ -1,8 +1,8 @@
----
-layout: post
-title: "Completing the transition to the new borrow checker"
-author: Niko Matsakis
----
++++
+layout = "post"
+title = "Completing the transition to the new borrow checker"
+author = "Niko Matsakis"
++++
 
 For most of 2018, we've been issuing warnings about various bugs in the
 borrow checker that we plan to fix -- about two months ago, in the

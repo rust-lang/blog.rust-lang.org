@@ -1,9 +1,9 @@
----
-layout: post
-title: "Please welcome Dan to Library Contributors"
-author: Mara Bos
-team: the library team <https://www.rust-lang.org/governance/teams/library>
----
++++
+layout = "post"
+title = "Please welcome Dan to Library Contributors"
+author = "Mara Bos"
+team = "the library team <https://www.rust-lang.org/governance/teams/library>"
++++
 
 Please welcome [Dan Gohman](https://github.com/sunfishcode) to the
 [Library Contributors](https://www.rust-lang.org/governance/teams/library#libs-contributors) group!

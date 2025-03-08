@@ -1,10 +1,10 @@
----
-layout: post
-title: Rust Compiler February 2023 Steering Cycle
-author: Felix Klock
-description: "The compiler team's Feburary 2023 steering cycle"
-team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Rust Compiler February 2023 Steering Cycle"
+author = "Felix Klock"
+description = "The compiler team's Feburary 2023 steering cycle"
+team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 On [Friday, February 10th][feb-10-zulip-archive], the Rust Compiler team had a planning meeting for the February 2023 steering cycle.
 

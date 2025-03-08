@@ -1,9 +1,9 @@
----
-layout: post
-title: "Core Team updates"
-author: Pietro Albini
-team: the Rust Core Team <https://www.rust-lang.org/governance/teams/core>
----
++++
+layout = "post"
+title = "Core Team updates"
+author = "Pietro Albini"
+team = "the Rust Core Team <https://www.rust-lang.org/governance/teams/core>"
++++
 
 Niko Matsakis is [stepping back][niko-blog] from the [Core Team][team-core],
 focusing his energy on leading the [Language Team][team-lang]. Amongst the many

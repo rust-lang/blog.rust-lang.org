@@ -1,8 +1,8 @@
----
-layout: post
-title: "Procedural Macros in Rust 2018"
-author: Alex Crichton
----
++++
+layout = "post"
+title = "Procedural Macros in Rust 2018"
+author = "Alex Crichton"
++++
 
 Perhaps my favorite feature in the Rust 2018 edition is [procedural macros].
 Procedural macros have had a long and storied history in Rust (and will continue

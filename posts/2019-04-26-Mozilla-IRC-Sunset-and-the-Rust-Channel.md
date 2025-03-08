@@ -1,8 +1,8 @@
----
-layout: post
-title: "Mozilla IRC Sunset and the Rust Channel"
-author: The Rust Core Team
----
++++
+layout = "post"
+title = "Mozilla IRC Sunset and the Rust Channel"
+author = "The Rust Core Team"
++++
 
 The Rust community has had a presence on Mozilla’s IRC network almost since Rust’s inception. Over time, the single channel grew into a set of pretty active channels where folks would come to ask Rust questions, coordinate work on Rust itself, and just in general chat about Rust.
 

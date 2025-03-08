@@ -1,10 +1,10 @@
----
-layout: post
-title: "Lang team April update"
-author: Josh Triplett
-description: "Lang team April update"
-team: The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "Lang team April update"
+author = "Josh Triplett"
+description = "Lang team April update"
+team = "The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 Today, the lang team held its April planning meeting. We hold these meetings on the first Wednesday of every month, and we use them to schedule [design meetings](https://lang-team.rust-lang.org/meetings/design.html) for the remainder of the month.
 

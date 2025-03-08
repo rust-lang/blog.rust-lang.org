@@ -1,9 +1,9 @@
----
-layout: post
-title: "`if` and `match` in constants on nightly rust"
-author: Dylan MacKenzie
-team: WG const-eval <https://github.com/rust-lang/const-eval>
----
++++
+layout = "post"
+title = "`if` and `match` in constants on nightly rust"
+author = "Dylan MacKenzie"
+team = "WG const-eval <https://github.com/rust-lang/const-eval>"
++++
 
 **TLDR; `if` and `match` are now usable in constants on the latest nightly.**
 

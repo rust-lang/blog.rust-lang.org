@@ -1,9 +1,9 @@
----
-layout: post
-title: "This Development-cycle in Cargo: 1.77"
-author: Ed Page
-team: The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>
----
++++
+layout = "post"
+title = "This Development-cycle in Cargo: 1.77"
+author = "Ed Page"
+team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
++++
 
 # This Development-cycle in Cargo: 1.77
 

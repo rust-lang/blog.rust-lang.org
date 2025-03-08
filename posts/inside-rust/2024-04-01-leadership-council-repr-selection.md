@@ -1,9 +1,9 @@
----
-layout: post
-title: "Leadership Council March Representative Selections"
-author: Eric Huss
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "Leadership Council March Representative Selections"
+author = "Eric Huss"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 The March 2024 selections for [Leadership Council] representatives have been finalized. All teams chose their existing representatives to continue for a second term. The representatives are:
 

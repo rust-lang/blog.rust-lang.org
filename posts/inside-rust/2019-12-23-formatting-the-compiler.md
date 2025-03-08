@@ -1,10 +1,10 @@
----
-layout: post
-title: "Formatting the compiler tree"
-author: Mark Rousskov
-description: "How to rebase and what happened"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Formatting the compiler tree"
+author = "Mark Rousskov"
+description = "How to rebase and what happened"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 ## What happened
 

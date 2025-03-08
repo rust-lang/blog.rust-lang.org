@@ -1,8 +1,8 @@
----
-layout: post
-title: "Changes in the core team"
-author: The Rust Core Team
----
++++
+layout = "post"
+title = "Changes in the core team"
+author = "The Rust Core Team"
++++
 
 Just a quick update: You may have noticed that, in the last month or
 so, a number of [Rust core team] members have changed their jobs

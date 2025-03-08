@@ -1,9 +1,9 @@
----
-layout: post
-title: "Traits working group 2020 sprint 2 summary"
-author: Jack Huey
-team: The Traits WG <https://rust-lang.github.io/wg-traits/>
----
++++
+layout = "post"
+title = "Traits working group 2020 sprint 2 summary"
+author = "Jack Huey"
+team = "The Traits WG <https://rust-lang.github.io/wg-traits/>"
++++
 
 It's that time of year again: another traits working group sprint summary. And ohh boy, it was a busy sprint.
 

@@ -1,9 +1,9 @@
----
-layout: post
-title: "Leadership change in the Rust Infrastructure Team"
-author: Pietro Albini
-team: the infrastructure team <https://www.rust-lang.org/governance/teams/infra>
----
++++
+layout = "post"
+title = "Leadership change in the Rust Infrastructure Team"
+author = "Pietro Albini"
+team = "the infrastructure team <https://www.rust-lang.org/governance/teams/infra>"
++++
 
 After almost four years leading the Rust Infrastructure Team, in late July I
 [expressed my intent to step down as lead of the team][resign] to focus back on

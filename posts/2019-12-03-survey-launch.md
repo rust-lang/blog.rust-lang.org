@@ -1,9 +1,9 @@
----
-layout: post
-title: "Launching the 2019 State of Rust Survey"
-author: The Rust Community Team
-description: "Hearing from you about the fourth year of Rust"
----
++++
+layout = "post"
+title = "Launching the 2019 State of Rust Survey"
+author = "The Rust Community Team"
+description = "Hearing from you about the fourth year of Rust"
++++
 
 It's that time again! Time for us to take a look at how the Rust project is doing, and what we should plan for the future. The Rust Community Team is pleased to announce our [2019 State of Rust Survey][survey]! Whether or not you use Rust today, we want to know your opinions. Your responses will help the project understand its strengths and weaknesses and establish development priorities for the future.
 

@@ -1,10 +1,10 @@
----
-layout: post
-title: "Improving async-await's \"Future is not Send\" diagnostic"
-author: David Wood
-description: "Highlighting a diagnostic improvement for async-await"
-team: the Async Foundations WG <https://rust-lang.github.io/compiler-team/working-groups/async-await/>
----
++++
+layout = "post"
+title = "Improving async-await's \"Future is not Send\" diagnostic"
+author = "David Wood"
+description = "Highlighting a diagnostic improvement for async-await"
+team = "the Async Foundations WG <https://rust-lang.github.io/compiler-team/working-groups/async-await/>"
++++
 
 Async-await is due to hit stable in the 1.39 release (only a month away!), and as announced in the
 ["Async Foundations Update: Time for polish!"][previous_post] post last month, the Async

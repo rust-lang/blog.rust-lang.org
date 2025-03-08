@@ -1,10 +1,10 @@
----
-layout: post
-title: "Clippy is removing its plugin interface"
-author: Philipp Krones
-description: "Now that compiler plugins are deprecated, Clippy is removing its deprecated plugin interface"
-team: the Dev tools team (Clippy) <https://www.rust-lang.org/governance/teams/dev-tools#clippy>
----
++++
+layout = "post"
+title = "Clippy is removing its plugin interface"
+author = "Philipp Krones"
+description = "Now that compiler plugins are deprecated, Clippy is removing its deprecated plugin interface"
+team = "the Dev tools team (Clippy) <https://www.rust-lang.org/governance/teams/dev-tools#clippy>"
++++
 
 Today, we're announcing that Clippy will completely remove its plugin interface.
 Using the plugin interface has been deprecated for about one and a half year now

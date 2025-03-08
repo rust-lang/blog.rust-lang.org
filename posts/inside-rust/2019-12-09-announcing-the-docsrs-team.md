@@ -1,9 +1,9 @@
----
-layout: post
-title: "Announcing the Docs.rs Team"
-author: QuietMisdreavus
-team: The Rustdoc Team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>
----
++++
+layout = "post"
+title = "Announcing the Docs.rs Team"
+author = "QuietMisdreavus"
+team = "The Rustdoc Team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>"
++++
 
 Today we're announcing a brand new team: The Docs.rs Team!
 

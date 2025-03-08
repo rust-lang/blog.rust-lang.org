@@ -1,10 +1,10 @@
----
-layout: post
-title: Rust Compiler June 2022 Steering Cycle
-author: Felix Klock
-description: "The compiler team's June 2022 steering cycle"
-team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Rust Compiler June 2022 Steering Cycle"
+author = "Felix Klock"
+description = "The compiler team's June 2022 steering cycle"
+team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 On [Friday, June 3rd][jun-03-zulip-archive], the Rust Compiler team had a planning meeting for the June 2022 steering cycle.
 
 [jun-03-zulip-archive]: https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings/topic/.5Bplanning.20meeting.5D.202022-06-03/near/284883023

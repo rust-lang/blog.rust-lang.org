@@ -1,9 +1,9 @@
----
-layout: post
-title: "Leadership Council Membership Changes"
-author: Carol Nichols
-team: the leadership council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "Leadership Council Membership Changes"
+author = "Carol Nichols"
+team = "the leadership council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 As of today, Khionu Sybiern will no longer be the representative of the Moderation team on the
 Leadership Council, and she is also stepping down from the Moderation Team entirely, for personal

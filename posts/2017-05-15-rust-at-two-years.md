@@ -1,9 +1,9 @@
----
-layout: post
-title: "Two years of Rust"
-author: Carol (Nichols || Goulding)
-description: "Rust, two years after 1.0"
----
++++
+layout = "post"
+title = "Two years of Rust"
+author = "Carol (Nichols || Goulding)"
+description = "Rust, two years after 1.0"
++++
 
 Rust is a language for confident, productive systems programming. It aims to
 make systems programming accessible to a wider audience, and to raise the

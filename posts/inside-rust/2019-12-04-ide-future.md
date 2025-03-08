@@ -1,9 +1,9 @@
----
-layout: post
-title: "2019-11-18 IDE team meeting"
-author: Aleksey Kladov, Igor Matuszewski
-team: the IDE team <https://www.rust-lang.org/governance/teams/dev-tools#ides>
----
++++
+layout = "post"
+title = "2019-11-18 IDE team meeting"
+author = "Aleksey Kladov, Igor Matuszewski"
+team = "the IDE team <https://www.rust-lang.org/governance/teams/dev-tools#ides>"
++++
 
 Meeting run by nikomatsakis. Minutes written by nikomatsakis.
 Attending: nikomatsakis, pnkfelix, Xanewok, matklad

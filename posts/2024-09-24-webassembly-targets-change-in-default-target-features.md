@@ -1,9 +1,9 @@
----
-layout: post
-title: "WebAssembly targets: change in default target-features"
-author: Alex Crichton
-team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "WebAssembly targets: change in default target-features"
+author = "Alex Crichton"
+team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 The Rust compiler has [recently upgraded to using LLVM 19][llvm19] and this
 change accompanies some updates to the default set of target features enabled

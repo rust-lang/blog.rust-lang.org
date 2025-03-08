@@ -1,9 +1,9 @@
----
-layout: post
-title: "Changes to `impl Trait` in Rust 2024"
-author: Niko Matsakis
-team: the language team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "Changes to `impl Trait` in Rust 2024"
+author = "Niko Matsakis"
+team = "the language team <https://www.rust-lang.org/governance/teams/lang>"
++++
 The default way `impl Trait` works in return position is changing in Rust 2024. These changes are meant to simplify `impl Trait` to better match what people want most of the time. We're also adding a flexible syntax that gives you full control when you need it.
 
 ## TL;DR

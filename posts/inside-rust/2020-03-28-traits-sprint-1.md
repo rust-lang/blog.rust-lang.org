@@ -1,9 +1,9 @@
----
-layout: post
-title: "Traits working group 2020 sprint 1 summary"
-author: Jack Huey
-team: The Traits WG <https://rust-lang.github.io/wg-traits/>
----
++++
+layout = "post"
+title = "Traits working group 2020 sprint 1 summary"
+author = "Jack Huey"
+team = "The Traits WG <https://rust-lang.github.io/wg-traits/>"
++++
 
 This Tuesday, the traits working group finished our first sprint of 2020, last 6 weeks from February 11th through March 24th. The last sprint was about a year ago, but we decided to resurrect the format in order to help push forward traits-related work in [Chalk] and rustc.
 

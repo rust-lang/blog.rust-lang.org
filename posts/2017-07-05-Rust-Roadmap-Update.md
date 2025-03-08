@@ -1,8 +1,8 @@
----
-layout: post
-title: "Rust's 2017 roadmap, six months in"
-author: Nicholas Matsakis
----
++++
+layout = "post"
+title = "Rust's 2017 roadmap, six months in"
+author = "Nicholas Matsakis"
++++
 
 In January of this year, we adopted the [2017 Rust Roadmap][rr], which
 laid out our plans for 2017. As part of the roadmap process, we plan

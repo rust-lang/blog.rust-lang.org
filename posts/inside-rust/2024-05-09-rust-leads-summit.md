@@ -1,8 +1,8 @@
----
-layout: post
-title: "Recap: Rust Leads Summit 2024"
-author: Tyler Mandry and Eric Holk
----
++++
+layout = "post"
+title = "Recap: Rust Leads Summit 2024"
+author = "Tyler Mandry and Eric Holk"
++++
 
 ## What happened?
 

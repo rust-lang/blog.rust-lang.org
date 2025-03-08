@@ -1,10 +1,10 @@
----
-layout: post
-title: "Marking issues as regressions"
-description: "Now anyone can mark issues as regressions!"
-author: Camelid
-team: the release team <https://www.rust-lang.org/governance/teams/operations#release>
----
++++
+layout = "post"
+title = "Marking issues as regressions"
+description = "Now anyone can mark issues as regressions!"
+author = "Camelid"
+team = "the release team <https://www.rust-lang.org/governance/teams/operations#release>"
++++
 
 The Rust project gets many issues filed every day, and we need to keep track
 of them all to make sure we don't miss anything. To do that we use GitHub's

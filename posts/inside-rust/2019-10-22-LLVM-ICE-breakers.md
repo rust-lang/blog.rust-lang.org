@@ -1,10 +1,10 @@
----
-layout: post
-title: "Announcing the LLVM ICE-breaker group"
-author: Niko Matsakis
-description: "A new blog where the Rust team can post updates on the latest developments"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Announcing the LLVM ICE-breaker group"
+author = "Niko Matsakis"
+description = "A new blog where the Rust team can post updates on the latest developments"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 Today I'm announcing a new experiment in the compiler team, the **LLVM ICE-breaker group**. If you're familiar with LLVM and would like to contribute to rustc -- but without taking on a large commitment -- then the LLVM ICE-breaker group might well be for you!
 

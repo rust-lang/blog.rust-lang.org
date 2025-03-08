@@ -1,10 +1,10 @@
----
-layout: post
-title: Rust Library Team Aspirations
-author: Mara Bos
-description: Rust Library Team Aspirations
-team: The Rust Library Team <https://www.rust-lang.org/governance/teams/library>
----
++++
+layout = "post"
+title = "Rust Library Team Aspirations"
+author = "Mara Bos"
+description = "Rust Library Team Aspirations"
+team = "The Rust Library Team <https://www.rust-lang.org/governance/teams/library>"
++++
 
 Over the past years, Rust has grown from a language used by a few dedicated users
 into a well-known language used by lots of highly visible projects and

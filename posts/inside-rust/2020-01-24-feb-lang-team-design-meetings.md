@@ -1,10 +1,10 @@
----
-layout: post
-title: "February Lang Team Design Meetings"
-author: Niko Matsakis
-description: "Lang Team Design Meetings scheduled for February"
-team: the language team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "February Lang Team Design Meetings"
+author = "Niko Matsakis"
+description = "Lang Team Design Meetings scheduled for February"
+team = "the language team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 We've scheduled our **language team design meetings** for February. The current plans are as follows:
 

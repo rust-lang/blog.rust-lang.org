@@ -1,8 +1,8 @@
----
-layout: post
-title: "Fearless Concurrency in Firefox Quantum"
-author: "Manish Goregaokar"
----
++++
+layout = "post"
+title = "Fearless Concurrency in Firefox Quantum"
+author = "Manish Goregaokar"
++++
 
 These days, Rust is used for [all kinds of things][friends]. But its founding application was
 [Servo], an experimental browser engine. 

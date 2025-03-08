@@ -1,8 +1,8 @@
----
-layout: post
-title: "Five Years of Rust"
-author: The Rust Core Team
----
++++
+layout = "post"
+title = "Five Years of Rust"
+author = "The Rust Core Team"
++++
 
 With all that's going on in the world you'd be forgiven for forgetting that as
 of today, it has been five years since we released 1.0! Rust has changed

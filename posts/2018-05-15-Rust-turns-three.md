@@ -1,9 +1,9 @@
----
-layout: post
-title: "Rust turns three"
-author: Aaron Turon
-description: "Three years ago today, the Rust community released Rust 1.0 to the world, with our initial vision of fearless systems programming."
----
++++
+layout = "post"
+title = "Rust turns three"
+author = "Aaron Turon"
+description = "Three years ago today, the Rust community released Rust 1.0 to the world, with our initial vision of fearless systems programming."
++++
 
 Three years ago today, the Rust community released [Rust 1.0] to the world, with
 our initial vision of fearless systems programming. As per tradition, we’ll

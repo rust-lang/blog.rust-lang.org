@@ -1,9 +1,9 @@
----
-layout: post
-title: Source-based code coverage in nightly
-author: Tyler Mandry
-team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Source-based code coverage in nightly"
+author = "Tyler Mandry"
+team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 
 Support has landed in the nightly compiler for source-based code coverage,

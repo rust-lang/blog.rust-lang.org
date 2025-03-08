@@ -1,10 +1,10 @@
----
-layout: post
-title: "cargo-audit v0.11: Introducing the `fix` feature, yanked crate detection, and more"
-author: Tony Arcieri
-description: "Release announcement for cargo-audit v0.11 describing the new features"
-team: the Secure Code WG <https://www.rust-lang.org/governance/wgs/wg-secure-code>
----
++++
+layout = "post"
+title = "cargo-audit v0.11: Introducing the `fix` feature, yanked crate detection, and more"
+author = "Tony Arcieri"
+description = "Release announcement for cargo-audit v0.11 describing the new features"
+team = "the Secure Code WG <https://www.rust-lang.org/governance/wgs/wg-secure-code>"
++++
 
 [cargo-audit](https://github.com/rustsec/cargo-audit) is a command-line utility which inspects `Cargo.lock` files and compares them against the [RustSec Advisory Database](https://rustsec.org), a community database of security vulnerabilities maintained by the [Rust Secure Code Working Group](https://github.com/rust-secure-code/wg).
 

@@ -1,9 +1,9 @@
----
-layout: post
-title: "Rust Once, Run Everywhere"
-author: Alex Crichton
-description: "Zero-cost and safe FFI in Rust"
----
++++
+layout = "post"
+title = "Rust Once, Run Everywhere"
+author = "Alex Crichton"
+description = "Zero-cost and safe FFI in Rust"
++++
 
 Rust's quest for world domination was never destined to happen overnight, so
 Rust needs to be able to interoperate with the existing world just as easily as

@@ -1,8 +1,8 @@
----
-layout: post
-title: "Upcoming docs.rs changes"
-author: The Rust Infrastructure Team
----
++++
+layout = "post"
+title = "Upcoming docs.rs changes"
+author = "The Rust Infrastructure Team"
++++
 
 On September 30th breaking changes will be deployed to the [docs.rs] build
 environment. [docs.rs] is a free service building and hosting documentation for

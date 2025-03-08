@@ -1,9 +1,9 @@
----
-layout: post
-title: "Rustc Trait System Refactor Initiative Update: Stabilizing `-Znext-solver=coherence`"
-author: lcnr
-team: The Rustc Trait System Refactor Initiative <https://github.com/rust-lang/trait-system-refactor-initiative/>
----
++++
+layout = "post"
+title = "Rustc Trait System Refactor Initiative Update: Stabilizing `-Znext-solver=coherence`"
+author = "lcnr"
+team = "The Rustc Trait System Refactor Initiative <https://github.com/rust-lang/trait-system-refactor-initiative/>"
++++
 
 It's been half a year since we last summarized our progress in the [Types Team update blog post](https://blog.rust-lang.org/2024/06/26/types-team-update.html). With the next-generation trait solver now getting used by default in coherence checking on beta[^2], it's time for another update. The next-generation trait solver is intended to fully replace the existing type system components responsible for proving trait bounds, normalizing associated types, and much more. This should fix many long-standing (soundness) bugs, enable future type system improvements, and improve compile-times. See [this previous blog post](https://blog.rust-lang.org/inside-rust/2023/07/17/trait-system-refactor-initiative.html) for more details.
 

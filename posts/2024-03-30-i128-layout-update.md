@@ -1,9 +1,9 @@
----
-layout: post
-title: "Changes to `u128`/`i128` layout in 1.77 and 1.78"
-author: Trevor Gross
-team: The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "Changes to `u128`/`i128` layout in 1.77 and 1.78"
+author = "Trevor Gross"
+team = "The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 Rust has long had an inconsistency with C regarding the alignment of 128-bit integers
 on the x86-32 and x86-64 architectures. This problem has recently been resolved, but

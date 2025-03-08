@@ -1,8 +1,8 @@
----
-layout: post
-title: "Async-await hits beta!"
-author: Niko Matsakis
----
++++
+layout = "post"
+title = "Async-await hits beta!"
+author = "Niko Matsakis"
++++
 
 Big news! As of this writing, **syntactic support for async-await is
 available in the Rust beta channel!** It will be available in the 1.39

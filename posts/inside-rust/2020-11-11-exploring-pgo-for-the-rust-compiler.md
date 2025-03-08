@@ -1,10 +1,10 @@
----
-layout: post
-title: "Exploring PGO for the Rust compiler"
-author: Michael Woerister
-description: "Investigate the effects that profile guided optimization has on rustc's performance"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Exploring PGO for the Rust compiler"
+author = "Michael Woerister"
+description = "Investigate the effects that profile guided optimization has on rustc's performance"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 **TLDR** -- PGO makes the compiler [faster](#final-numbers-and-a-benchmarking-plot-twist) but is [not straightforward](#where-to-go-from-here) to realize in CI.
 

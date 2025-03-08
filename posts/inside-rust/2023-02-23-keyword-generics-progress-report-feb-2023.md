@@ -1,9 +1,9 @@
----
-layout: post
-title: "Keyword Generics Progress Report: February 2023"
-author: Yoshua Wuyts
-team: The Keyword Generics Initiative <https://github.com/rust-lang/keyword-generics-initiative>
----
++++
+layout = "post"
+title = "Keyword Generics Progress Report: February 2023"
+author = "Yoshua Wuyts"
+team = "The Keyword Generics Initiative <https://github.com/rust-lang/keyword-generics-initiative>"
++++
 
 ## Introduction
 

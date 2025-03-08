@@ -1,10 +1,10 @@
----
-layout: post
-title: "Officially announcing the types team"
-author: Jack Huey
-description: "An overview of the new types team"
-team: The Types Team <https://github.com/rust-lang/types-team>
----
++++
+layout = "post"
+title = "Officially announcing the types team"
+author = "Jack Huey"
+description = "An overview of the new types team"
+team = "The Types Team <https://github.com/rust-lang/types-team>"
++++
 
 Oh hey, it's [another](https://blog.rust-lang.org/inside-rust/2022/09/29/announcing-the-rust-style-team.html) new team announcement. But I will admit: if you follow the [RFCs repository](https://github.com/rust-lang/rfcs/pull/3254), the [Rust zulip](https://rust-lang.zulipchat.com/#narrow/stream/144729-t-types), or were particularly observant on the [GATs stabilization announcement post](https://blog.rust-lang.org/2022/10/28/gats-stabilization.html), then this *might* not be a surprise for you. In fact, this "new" team was officially established at the end of May last year.
 

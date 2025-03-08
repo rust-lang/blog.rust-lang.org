@@ -1,10 +1,10 @@
----
-layout: post
-title: "Congrats to compiler team members matthewjasper and wesleywiser"
-author: Felix S. Klock II
-description: "Congrats to compiler team members matthewjasper and wesleywiser"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Congrats to compiler team members matthewjasper and wesleywiser"
+author = "Felix S. Klock II"
+description = "Congrats to compiler team members matthewjasper and wesleywiser"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 I am pleased to announce that [@matthewjasper][] and [@wesleywiser][]
 have been made full members of the [compiler team][].

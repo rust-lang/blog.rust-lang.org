@@ -1,8 +1,8 @@
----
-layout: post
-title: "Async-await on stable Rust!"
-author: Niko Matsakis
----
++++
+layout = "post"
+title = "Async-await on stable Rust!"
+author = "Niko Matsakis"
++++
 
 **On this coming Thursday, November 7, async-await syntax hits stable
 Rust, as part of the 1.39.0 release.** This work has been a long time

@@ -1,8 +1,8 @@
----
-layout: post
-title: "Announcing the Inside Rust blog"
-author: Niko Matsakis
----
++++
+layout = "post"
+title = "Announcing the Inside Rust blog"
+author = "Niko Matsakis"
++++
 
 Today we're happy to announce that we're starting a second blog, the
 [**Inside Rust** blog][irb]. This blog will be used to post regular

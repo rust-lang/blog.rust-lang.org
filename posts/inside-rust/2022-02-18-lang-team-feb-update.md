@@ -1,10 +1,10 @@
----
-layout: post
-title: "Lang team February update"
-author: Sean Chen
-description: "Lang team February update"
-team: the lang team <https://lang-team.rust-lang.org/>
----
++++
+layout = "post"
+title = "Lang team February update"
+author = "Sean Chen"
+description = "Lang team February update"
+team = "the lang team <https://lang-team.rust-lang.org/>"
++++
 Two weeks ago, the lang team held its February planning meeting ([minutes]). We hold these meetings on the first Wednesday of every month.
 
 The planning meeting is used for:

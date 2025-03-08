@@ -1,8 +1,8 @@
----
-layout: post
-title: "gccrs: An alternative compiler for Rust"
-author: "Arthur Cohen on behalf of the gccrs project"
----
++++
+layout = "post"
+title = "gccrs: An alternative compiler for Rust"
+author = "Arthur Cohen on behalf of the gccrs project"
++++
 
 *This is a guest post from the gccrs project, at the invitation of the Rust Project, to clarify the relationship with the Rust Project and the opportunities for collaboration.*
 

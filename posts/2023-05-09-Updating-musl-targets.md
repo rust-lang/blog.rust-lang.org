@@ -1,10 +1,10 @@
----
-layout: post
-title: "Updating Rust's Linux musl targets"
-author: Wesley Wiser
-description: "musl targets will soon ship with musl 1.2"
-team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Updating Rust's Linux musl targets"
+author = "Wesley Wiser"
+description = "musl targets will soon ship with musl 1.2"
+team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 Beginning with Rust 1.71 (slated for stable release on 2023-07-13), the various `*-linux-musl` targets will [ship][PR] with musl 1.2.3.
 These targets currently use musl 1.1.24.

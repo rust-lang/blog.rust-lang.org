@@ -1,10 +1,10 @@
----
-layout: post
-title: "Disk space and LTO improvements"
-author: Eric Huss
-description: "Disk space and LTO improvements"
-team: the Cargo team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>
----
++++
+layout = "post"
+title = "Disk space and LTO improvements"
+author = "Eric Huss"
+description = "Disk space and LTO improvements"
+team = "the Cargo team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
++++
 
 Thanks to the work of [Nicholas Nethercote] and [Alex Crichton], there have been some recent improvements that reduce the size of compiled libraries, and improves the compile-time performance, particularly when using LTO. This post dives into some of the details of what changed, and an estimation of the benefits.
 

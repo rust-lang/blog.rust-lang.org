@@ -1,9 +1,9 @@
----
-layout: post
-title: "Async Closures MVP: Call for Testing!"
-author: Michael Goulet
-team: The Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>
----
++++
+layout = "post"
+title = "Async Closures MVP: Call for Testing!"
+author = "Michael Goulet"
+team = "The Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>"
++++
 
 The async working group is excited to announce that [RFC 3668] "Async Closures" was recently approved by the Lang team. In this post, we want to briefly motivate why async closures exist, explain their current shortcomings, and most importantly, announce a call for testing them on nightly Rust.
 
