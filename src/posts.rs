@@ -31,7 +31,17 @@ pub struct Post {
 impl Post {
     pub(crate) fn open(path: &Path, manifest: &Manifest) -> eyre::Result<Self> {
         // yeah this might blow up, but it won't
-        let filename = path.file_name().unwrap().to_str().unwrap().into();
+        let filename = {
+            let filename = path.file_name().unwrap().to_str().unwrap().to_string();
+            // '@' is used as a disambiguator between file names that were
+            // previously identical except for the date prefix (which was
+            // removed). The URL doesn't need the disambiguator, because it has
+            // the date in it. Also, we must remove it to preserve permalinks.
+            match filename.split_once('@') {
+                Some((pre, _)) => format!("{pre}.md"),
+                None => filename,
+            }
+        };
 
         let contents = std::fs::read_to_string(path)?;
 
