@@ -1,8 +1,14 @@
+[workspace]
+members = ["serve"]
+
+[workspace.package]
+edition = "2024"
+
 [package]
 name = "blog"
 version = "0.1.0"
+edition.workspace = true
 authors = ["The Rust Project Developers"]
-edition = "2021"
 
 [dependencies]
 color-eyre = "=0.6.3"
@@ -17,9 +23,6 @@ sass-rs = "=0.2.2"
 chrono = "=0.4.40"
 tera = "=1.20.0"
 toml = "=0.8.20"
-
-[workspace]
-members = ["serve"]
 
 [dev-dependencies]
 insta = { version = "=1.42.2", features = ["filters", "glob"] }
