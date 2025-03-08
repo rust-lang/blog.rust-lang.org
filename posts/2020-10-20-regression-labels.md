@@ -1,8 +1,8 @@
 +++
 layout = "post"
 title = "Marking issues as regressions"
-description = "Now anyone can mark issues as regressions!"
 author = "Camelid"
+description = "Now anyone can mark issues as regressions!"
 team = "the release team <https://www.rust-lang.org/governance/teams/operations#release>"
 +++
 

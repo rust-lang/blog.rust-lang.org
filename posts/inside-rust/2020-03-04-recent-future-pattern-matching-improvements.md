@@ -1,7 +1,7 @@
 +++
 layout = "post"
 title = "Recent and future pattern matching improvements"
-author = """Mazdak "Centril" Farrokhzad"""
+author = 'Mazdak "Centril" Farrokhzad'
 description = "Reviewing recent pattern matching improvements"
 team = "the language team <https://www.rust-lang.org/governance/teams/lang>"
 +++

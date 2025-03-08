@@ -2,7 +2,6 @@
 layout = "post"
 title = "The Foundation Conversation"
 author = "The Rust Core Team"
-release = false
 +++
 
 In August, we on the Core Team [announced our plans to create a Foundation](https://blog.rust-lang.org/2020/08/18/laying-the-foundation-for-rusts-future.html) by the end of the year. Since that time, we’ve been doing a lot of work but it has been difficult to share many details, and we know that a lot of you have questions.

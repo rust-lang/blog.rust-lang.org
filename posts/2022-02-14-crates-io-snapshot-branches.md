@@ -2,7 +2,6 @@
 layout = "post"
 title = "Crates.io Index Snapshot Branches Moving"
 author = "The Crates.io Team"
-release = false
 +++
 
 Every so often, the [crates.io index](https://github.com/rust-lang/crates.io-index)'s Git history

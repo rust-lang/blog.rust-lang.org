@@ -2,7 +2,6 @@
 layout = "post"
 title = "The Governance WG is going public"
 author = "The Rust Governance WG"
-release = false
 +++
 
 
