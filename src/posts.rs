@@ -50,6 +50,7 @@ impl Post {
                 release,
                 team: team_string,
                 layout,
+                ..
             },
             contents,
         ) = front_matter::parse(&contents)?;
