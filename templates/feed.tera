@@ -14,16 +14,16 @@
 
     {% for post in posts %}
     <entry>
-        <title>{{post.title}}</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/{{blog.prefix}}{{post.url}}" type="text/html" title="{{post.title}}" />
-        <published>{{post.published}}</published>
-        <updated>{{post.updated}}</updated>
-        <id>https://blog.rust-lang.org/{{blog.prefix}}{{post.url}}</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/{{blog.prefix}}{{post.url}}">{{post.contents}}</content>
+        <title>{{post.title | escape_hbs}}</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/{{blog.prefix}}{{post.url | escape_hbs}}" type="text/html" title="{{post.title | escape_hbs}}" />
+        <published>{{post.published | escape_hbs}}</published>
+        <updated>{{post.updated | escape_hbs}}</updated>
+        <id>https://blog.rust-lang.org/{{blog.prefix}}{{post.url | escape_hbs}}</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/{{blog.prefix}}{{post.url | escape_hbs}}">{{post.contents | escape_hbs}}</content>
 
         <author>
-            <name>{{post.author}}</name>
+            <name>{{post.author | escape_hbs}}</name>
         </author>
     </entry>
-    {% endfor %}
+    {%- endfor %}
 </feed>
