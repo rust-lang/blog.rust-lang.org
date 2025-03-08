@@ -1,3 +1,4 @@
+---
 layout: post
 title: "Intra-doc links close to stabilization"
 author: Manish Goregaokar and Jynn Nelson

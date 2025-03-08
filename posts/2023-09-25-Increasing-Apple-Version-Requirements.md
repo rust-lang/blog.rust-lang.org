@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: "Increasing the minimum supported Apple platform versions"
