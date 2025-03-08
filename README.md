@@ -54,3 +54,28 @@ author: Blog post author (or on behalf of which team)
 release: true (to be only used for official posts about Rust releases announcements)
 ---
 ```
+
+### Snapshot testing
+
+If you're making changes to how the site is generated, you may want to check the impact your changes have on the output.
+For this purpose, there is a setup to do snapshot testing over the entire output directory.
+It's not run in CI, because the number of snapshots is too large.
+But you can run these tests locally as needed.
+
+- Make sure you have [cargo-insta](https://insta.rs/docs/quickstart/) installed.
+
+- Generate the good snapshots to compare against, usually based off the master branch:
+  ```sh
+  cargo insta test --accept --include-ignored
+  ```
+  Consider making a commit with these snapshots, so you can always check the diff of your changes with git:
+  ```sh
+  git add --force src/snapshots # snapshots are ignored by default
+  git commit --message "WIP add good snapshots"
+  ```
+  Since we can't merge the snapshots to main, don't forget to drop this commit when opening a pull request.
+
+- Compare the output of the branch you're working on with the good snapshots:
+  ```sh
+  cargo insta test --review --include-ignored
+  ```

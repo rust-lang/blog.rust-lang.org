@@ -21,3 +21,6 @@ tera = "=1.20.0"
 
 [workspace]
 members = ["serve"]
+
+[dev-dependencies]
+insta = { version = "1.42.0", features = ["filters", "glob"] }
