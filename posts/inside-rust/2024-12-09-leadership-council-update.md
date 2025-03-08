@@ -1,9 +1,9 @@
----
-layout: post
-title: "December 2024 Leadership Council Update"
-author: Eric Huss
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "December 2024 Leadership Council Update"
+author = "Eric Huss"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 Hello again from the Rust Leadership Council!
 We wanted to share an update on what the Council has been working on since [our last update][update].

@@ -1,9 +1,9 @@
----
-layout: post
-title: "Call for testing: Cargo sparse-registry"
-author: Arlo Siemsen
-team: The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>
----
++++
+layout = "post"
+title = "Call for testing: Cargo sparse-registry"
+author = "Arlo Siemsen"
+team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
++++
 
 > Note: Sparse registry support has been stabilized for the 1.68 release.
 > See [Help test Cargo's new index protocol](../../../inside-rust/2023/01/30/cargo-sparse-protocol.html) for updated information.

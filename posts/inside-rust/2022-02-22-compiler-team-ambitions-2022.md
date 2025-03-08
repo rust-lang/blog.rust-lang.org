@@ -1,10 +1,10 @@
----
-layout: post
-title: Rust Compiler Ambitions for 2022
-author: Felix Klock, Wesley Wiser
-description: "The compiler team's concrete initiatives and hopeful aspirations for this year."
-team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Rust Compiler Ambitions for 2022"
+author = "Felix Klock, Wesley Wiser"
+description = "The compiler team's concrete initiatives and hopeful aspirations for this year."
+team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 # Rust Compiler Ambitions for 2022
 

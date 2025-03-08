@@ -1,10 +1,10 @@
----
-layout: post
-title: "Recent and future pattern matching improvements"
-author: Mazdak "Centril" Farrokhzad
-description: "Reviewing recent pattern matching improvements"
-team: the language team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "Recent and future pattern matching improvements"
+author = """Mazdak "Centril" Farrokhzad"""
+description = "Reviewing recent pattern matching improvements"
+team = "the language team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 [ch_6]: https://doc.rust-lang.org/book/ch06-00-enums.html
 [ch_18]: https://doc.rust-lang.org/book/ch18-00-patterns.html

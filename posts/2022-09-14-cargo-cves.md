@@ -1,8 +1,8 @@
----
-layout: post
-title: "Security advisories for Cargo (CVE-2022-36113, CVE-2022-36114)"
-author: The Rust Security Response WG
----
++++
+layout = "post"
+title = "Security advisories for Cargo (CVE-2022-36113, CVE-2022-36114)"
+author = "The Rust Security Response WG"
++++
 
 > This is a cross-post of [the official security advisory][advisory]. The
 > official advisory contains a signed version with our PGP key, as well.

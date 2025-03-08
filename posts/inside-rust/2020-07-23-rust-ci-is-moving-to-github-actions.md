@@ -1,9 +1,9 @@
----
-layout: post
-title: "Rust's CI is moving to GitHub Actions"
-author: Pietro Albini
-team: the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>
----
++++
+layout = "post"
+title = "Rust's CI is moving to GitHub Actions"
+author = "Pietro Albini"
+team = "the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>"
++++
 
 The Rust Infrastructure Team is happy to announce that, as part of the
 [evaluation we started last year][eval], most of Rust’s CI is moving to GitHub

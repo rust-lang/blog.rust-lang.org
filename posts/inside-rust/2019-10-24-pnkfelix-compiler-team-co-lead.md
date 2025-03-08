@@ -1,10 +1,10 @@
----
-layout: post
-title: "Please welcome pnkfelix as compiler team co-lead!"
-author: Niko Matsakis
-description: "pnkfelix added as compiler-team co-lead"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Please welcome pnkfelix as compiler team co-lead!"
+author = "Niko Matsakis"
+description = "pnkfelix added as compiler-team co-lead"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 I'm happy to announce that [pnkfelix] will be joining me as compiler
 team co-lead. Felix was a "founding member" of the compiler team when

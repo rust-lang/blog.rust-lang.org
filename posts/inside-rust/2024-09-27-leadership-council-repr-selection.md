@@ -1,9 +1,9 @@
----
-layout: post
-title: "Leadership Council September 2024 Representative Selections"
-author: Eric Huss
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "Leadership Council September 2024 Representative Selections"
+author = "Eric Huss"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 The September 2024 selections for [Leadership Council] representatives have been finalized. The Lang Team has chosen [TC] as their new representative, and the Moderation Team has chosen [Oliver Scherer]. Oli is currently on leave, so the current representative, [Josh Gould], will substitute until he returns. Thank you to the outgoing representatives [Jack Huey] and [Josh Gould] for your amazing support on the Council.
 

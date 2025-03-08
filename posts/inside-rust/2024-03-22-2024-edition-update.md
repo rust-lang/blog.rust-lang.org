@@ -1,9 +1,9 @@
----
-layout: post
-title: "2024 Edition Update"
-author: Eric Huss
-team: Edition 2024 Project Group <https://github.com/rust-lang/team/blob/15e99829ee2124b07f740b8befd41c55a46fee91/teams/project-edition-2024.toml>
----
++++
+layout = "post"
+title = "2024 Edition Update"
+author = "Eric Huss"
+team = "Edition 2024 Project Group <https://github.com/rust-lang/team/blob/15e99829ee2124b07f740b8befd41c55a46fee91/teams/project-edition-2024.toml>"
++++
 
 This is a reminder to the teams working on the 2024 Edition that implementation work should be **finished by the end of May**. If you have any questions, please let us know on the [`#edition`][zulip] Zulip stream.
 

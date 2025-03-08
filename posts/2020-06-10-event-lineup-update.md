@@ -1,9 +1,9 @@
----
-layout: post
-title: "2020 Event Lineup - Update"
-author: The Rust Community Team
-description: "Join Rust events online"
----
++++
+layout = "post"
+title = "2020 Event Lineup - Update"
+author = "The Rust Community Team"
+description = "Join Rust events online"
++++
 
 In 2020 the way we can do events suddenly changed.
 In the past we had in-person events all around the world, with some major conferences throughout the year.

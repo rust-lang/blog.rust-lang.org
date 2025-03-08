@@ -1,9 +1,9 @@
----
-layout: post
-title: "The Rust Libz Blitz"
-author: Brian Anderson, David Tolnay, and Aaron Turon
-description: "Improving the quality and maturity of Rust's core ecosystem"
----
++++
+layout = "post"
+title = "The Rust Libz Blitz"
+author = "Brian Anderson, David Tolnay, and Aaron Turon"
+description = "Improving the quality and maturity of Rust's core ecosystem"
++++
 
 To help bring our [2017 vision for Rust] to fruition, the Rust subteams are
 launching initiatives targeted at specific roadmap goals. **This post covers the

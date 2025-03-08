@@ -1,9 +1,9 @@
----
-layout: post
-title: "Traits working group 2020 sprint 3 summary"
-author: Jack Huey
-team: The Traits WG <https://rust-lang.github.io/wg-traits/>
----
++++
+layout = "post"
+title = "Traits working group 2020 sprint 3 summary"
+author = "Jack Huey"
+team = "The Traits WG <https://rust-lang.github.io/wg-traits/>"
++++
 
 Again? It feels like we just had one of these...6 weeks ago 😉. Anyways, much of this sprint was a continuation of the previous two: working towards making Chalk feature-complete and eventually using it in rustc for trait solving.
 

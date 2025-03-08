@@ -1,9 +1,9 @@
----
-layout: post
-title: "Announcing the Rust Style Team"
-author: Josh Triplett
-team: The Rust Style Team <https://www.rust-lang.org/governance/teams/lang#Style team>
----
++++
+layout = "post"
+title = "Announcing the Rust Style Team"
+author = "Josh Triplett"
+team = "The Rust Style Team <https://www.rust-lang.org/governance/teams/lang#Style team>"
++++
 
 Rust has a standardized style, and an implementation of that style in the
 `rustfmt` tool. The standardized style helps Rust developers feel comfortable

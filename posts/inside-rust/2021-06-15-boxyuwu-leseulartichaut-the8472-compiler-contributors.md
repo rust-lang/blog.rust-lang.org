@@ -1,10 +1,10 @@
----
-layout: post
-title: "Please welcome Boxy, Léo Lanteri Thauvin and the8472 to compiler-contributors"
-author: Wesley Wiser
-description: "Please welcome Boxy, Léo Lanteri Thauvin and the8472 to compiler-contributors"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Please welcome Boxy, Léo Lanteri Thauvin and the8472 to compiler-contributors"
+author = "Wesley Wiser"
+description = "Please welcome Boxy, Léo Lanteri Thauvin and the8472 to compiler-contributors"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 Please welcome [Boxy], [Léo Lanteri Thauvin] and [the8472] to the [compiler-contributors] group!
 

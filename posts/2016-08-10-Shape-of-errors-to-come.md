@@ -1,8 +1,8 @@
----
-layout: post
-title: "Shape of errors to come"
-author: Sophia June Turner
----
++++
+layout = "post"
+title = "Shape of errors to come"
+author = "Sophia June Turner"
++++
 
 There are changes afoot in the Rust world. If you've tried out the latest nightly, you'll notice
 something is *a little different*. For the past few months we've been working on new way of

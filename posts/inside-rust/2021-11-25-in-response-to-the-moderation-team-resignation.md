@@ -1,8 +1,8 @@
----
-layout: post
-title: "In response to the moderation team resignation"
-author: The undersigned
----
++++
+layout = "post"
+title = "In response to the moderation team resignation"
+author = "The undersigned"
++++
 
 As top-level team leads, project directors to the Foundation, and core team
 members, we are actively collaborating to establish next steps after the

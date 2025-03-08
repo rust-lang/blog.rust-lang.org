@@ -1,10 +1,10 @@
----
-layout: post
-title: "Lang Team Design Meetings"
-author: Niko Matsakis
-description: "Lang Team Design Meetings"
-team: the language team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "Lang Team Design Meetings"
+author = "Niko Matsakis"
+description = "Lang Team Design Meetings"
+team = "the language team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 Hi all! I wanted to give a quick update about the lang team. We're
 starting something new this year: a regular **design meeting**.  The

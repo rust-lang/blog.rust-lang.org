@@ -1,9 +1,9 @@
----
-layout: post
-title: "crates.io Postmortem: Broken Crate Downloads"
-author: Tobias Bieniek
-team: the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>
----
++++
+layout = "post"
+title = "crates.io Postmortem: Broken Crate Downloads"
+author = "Tobias Bieniek"
+team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
++++
 
 (based on https://www.atlassian.com/incident-management/postmortem/templates)
 

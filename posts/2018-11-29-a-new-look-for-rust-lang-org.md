@@ -1,8 +1,8 @@
----
-layout: post
-title: "A new look for rust-lang.org"
-author: The Rust Core Team
----
++++
+layout = "post"
+title = "A new look for rust-lang.org"
+author = "The Rust Core Team"
++++
 
 Before 1.0, Rust had a reputation for changing the language on a near-daily
 basis. By contrast, the website has looked pretty much the same. Here’s the

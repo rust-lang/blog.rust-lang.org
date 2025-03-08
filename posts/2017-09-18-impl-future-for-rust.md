@@ -1,9 +1,9 @@
----
-layout: post
-title: "impl Future for Rust"
-author: Aaron Turon
-description: "The Rust community is going to finish out its 2017 roadmap with a bang—and we want your help!"
----
++++
+layout = "post"
+title = "impl Future for Rust"
+author = "Aaron Turon"
+description = "The Rust community is going to finish out its 2017 roadmap with a bang—and we want your help!"
++++
 
 The Rust community has been hard at work on our [2017 roadmap], but as we come
 up on the final quarter of the year, we're going to kick it into high gear—and

@@ -1,9 +1,9 @@
----
-layout: post
-title: "Mixing matching, mutation, and moves in Rust"
-author: Felix S. Klock II
-description: "A tour of matching and enums in Rust."
----
++++
+layout = "post"
+title = "Mixing matching, mutation, and moves in Rust"
+author = "Felix S. Klock II"
+description = "A tour of matching and enums in Rust."
++++
 
 One of the primary goals of the Rust project is to enable safe systems
 programming. Systems programming usually implies imperative

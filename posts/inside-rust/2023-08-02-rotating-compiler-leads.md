@@ -1,9 +1,9 @@
----
-layout: post
-title: "Rotating Rust compiler team leadership"
-author: Wesley Wiser
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Rotating Rust compiler team leadership"
+author = "Wesley Wiser"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 As initiated in [late 2020] and ratified by [RFC 3262], the Rust compiler team uses a rotating system of co-leads.
 After two and a half years, we've decided its time to rotate the leadership again!

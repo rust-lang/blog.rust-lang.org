@@ -2,7 +2,7 @@ use super::posts::Post;
 use serde_derive::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 
-static MANIFEST_FILE: &str = "blog.yml";
+static MANIFEST_FILE: &str = "blog.toml";
 static POSTS_EXT: &str = "md";
 
 #[derive(Deserialize)]
@@ -47,7 +47,7 @@ pub struct Blog {
 impl Blog {
     fn load(prefix: PathBuf, dir: &Path) -> eyre::Result<Self> {
         let manifest_content = std::fs::read_to_string(dir.join(MANIFEST_FILE))?;
-        let manifest: Manifest = serde_yaml::from_str(&manifest_content)?;
+        let manifest: Manifest = toml::from_str(&manifest_content)?;
 
         let mut posts = Vec::new();
         for entry in std::fs::read_dir(dir)? {
@@ -119,7 +119,7 @@ impl Blog {
     }
 }
 
-/// Recursively load blogs in a directory. A blog is a directory with a `blog.yml`
+/// Recursively load blogs in a directory. A blog is a directory with a `blog.toml`
 /// file inside it.
 pub fn load(base: &Path) -> eyre::Result<Vec<Blog>> {
     let mut blogs = Vec::new();

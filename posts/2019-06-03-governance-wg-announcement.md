@@ -1,9 +1,9 @@
----
-layout: post
-title: "The Governance WG is going public"
-author: The Rust Governance WG
-release: false
----
++++
+layout = "post"
+title = "The Governance WG is going public"
+author = "The Rust Governance WG"
+release = false
++++
 
 
 Hey all! Today we're happy to announce the [Governance Working Group](https://internals.rust-lang.org/t/governance-working-group-announcement/9637) is going public. We've been spending the last couple weeks finding our bearings and structuring the working group.

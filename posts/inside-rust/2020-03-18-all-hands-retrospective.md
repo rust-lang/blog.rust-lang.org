@@ -1,9 +1,9 @@
----
-layout: post
-title: "All Hands Retrospective"
-author: Erin Power
-team: The All Hands Organisers <https://www.rust-lang.org/governance/teams/core>
----
++++
+layout = "post"
+title = "All Hands Retrospective"
+author = "Erin Power"
+team = "The All Hands Organisers <https://www.rust-lang.org/governance/teams/core>"
++++
 
 If you're not already aware, the Rust All Hands event, originally scheduled for
 March 16th–20th in Thessaloníki, Greece was cancelled in January. The All Hands'

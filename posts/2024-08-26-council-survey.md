@@ -1,8 +1,8 @@
----
-layout: post
-title: "2024 Leadership Council Survey"
-author: The Leadership Council
----
++++
+layout = "post"
+title = "2024 Leadership Council Survey"
+author = "The Leadership Council"
++++
 
 One of the responsibilities of the [leadership council](https://www.rust-lang.org/governance/teams/leadership-council),
 formed by [RFC 3392], is to solicit feedback on a yearly basis from the Project

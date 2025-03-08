@@ -1,9 +1,9 @@
----
-layout: post
-title: "Language team advisors"
-author: Josh Triplett, Niko Matsakis
-team: The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "Language team advisors"
+author = "Josh Triplett, Niko Matsakis"
+team = "The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 [RFC #3327](https://github.com/rust-lang/rfcs/pull/3327) created a new lang-team subteam, the lang team advisors. The advisors team recognizes people who regularly aid the Rust community and the lang team in particular in language design decisions. We already value their input highly and treat their concerns as blocking on features or proposals. The advisors team gives us a way to acknowledge them officially.
 

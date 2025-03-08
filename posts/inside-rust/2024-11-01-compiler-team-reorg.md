@@ -1,9 +1,9 @@
----
-layout: post
-title: Re-organising the compiler team and recognising our team members
-author: davidtwco and wesleywiser
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Re-organising the compiler team and recognising our team members"
+author = "davidtwco and wesleywiser"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 Back in June, the compiler team merged [RFC 3599][rfc] which re-structured the team to ensure the
 team's policies and processes can support the maintenance of the Rust compiler going forward.
 

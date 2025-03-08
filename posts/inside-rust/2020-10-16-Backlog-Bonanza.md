@@ -1,9 +1,9 @@
----
-layout: post
-title: "Lang team Backlog Bonanza and Project Proposals"
-author: Nicholas Matsakis
-team: the lang team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "Lang team Backlog Bonanza and Project Proposals"
+author = "Nicholas Matsakis"
+team = "the lang team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 A month or two back, the lang team embarked on a new initiative that
 we call the "Backlog Bonanza". The idea is simple: we are holding a

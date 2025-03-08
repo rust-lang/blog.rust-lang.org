@@ -46,13 +46,13 @@ something big, please open an issue before working on it, so we can make sure
 that it's something that will eventually be accepted.
 
 When writing a new blog post, keep in mind the file headers:
-```
----
-layout: post
-title: Title of the blog post
-author: Blog post author (or on behalf of which team)
-release: true (to be only used for official posts about Rust releases announcements)
----
+```md
++++
+layout = "post"
+title = "Title of the blog post"
+author = "Blog post author (or on behalf of which team)"
+release = true # (to be only used for official posts about Rust releases announcements)
++++
 ```
 
 ### Snapshot testing

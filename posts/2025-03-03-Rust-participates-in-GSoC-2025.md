@@ -1,8 +1,8 @@
----
-layout: post
-title: "Rust participates in Google Summer of Code 2025"
-author: Jakub Beránek, Jack Huey and Paul Lenz
----
++++
+layout = "post"
+title = "Rust participates in Google Summer of Code 2025"
+author = "Jakub Beránek, Jack Huey and Paul Lenz"
++++
 
 We are happy to announce that the Rust Project will again be participating in [Google Summer of Code (GSoC) 2025][gsoc], same as [last year][gsoc announcement 2024]. If you're not eligible or interested in participating in GSoC, then most of this post likely isn't relevant to you; if you are, this should contain some useful information and links.
 

@@ -1,8 +1,9 @@
-layout: post
-title: "Intra-doc links close to stabilization"
-author: Manish Goregaokar and Jynn Nelson
-team: the rustdoc team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>
----
++++
+layout = "post"
+title = "Intra-doc links close to stabilization"
+author = "Manish Goregaokar and Jynn Nelson"
+team = "the rustdoc team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>"
++++
 
 We're excited to share that intra-doc links are stabilizing soon!
 

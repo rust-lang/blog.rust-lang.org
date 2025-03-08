@@ -1,10 +1,10 @@
----
-layout: post
-title: "Building a shared vision for Async Rust"
-author: Niko Matsakis
-description: "Building a shared vision for Async Rust"
-team: the Async Foundations Working Group <https://rust-lang.github.io/wg-async-foundations/>
----
++++
+layout = "post"
+title = "Building a shared vision for Async Rust"
+author = "Niko Matsakis"
+description = "Building a shared vision for Async Rust"
+team = "the Async Foundations Working Group <https://rust-lang.github.io/wg-async-foundations/>"
++++
 
 [wg]: https://rust-lang.github.io/wg-async-foundations/
 [vd]: https://rust-lang.github.io/wg-async-foundations/vision.html#-the-vision

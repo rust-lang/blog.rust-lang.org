@@ -1,9 +1,9 @@
----
-layout: post
-title: "Rust's language ergonomics initiative"
-author: Aaron Turon
-description: "Ergonomics, learnability, and the fact that sometimes implicit is better"
----
++++
+layout = "post"
+title = "Rust's language ergonomics initiative"
+author = "Aaron Turon"
+description = "Ergonomics, learnability, and the fact that sometimes implicit is better"
++++
 
 To help bring our [2017 vision for Rust] to fruition, the Rust subteams are
 launching initiatives targeted at specific roadmap goals. **This post covers the

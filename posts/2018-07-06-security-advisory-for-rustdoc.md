@@ -1,8 +1,8 @@
----
-layout: post
-title: "Security Advisory for rustdoc"
-author: "The Rust Core Team"
----
++++
+layout = "post"
+title = "Security Advisory for rustdoc"
+author = "The Rust Core Team"
++++
 
 ## Quick overview
 

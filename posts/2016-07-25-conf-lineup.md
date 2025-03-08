@@ -1,9 +1,9 @@
----
-layout: post
-title: "The 2016 Rust Conference Lineup"
-author: Rust Community
-description: "Three Rust conferences are coming up soon; join us at one near you!"
----
++++
+layout = "post"
+title = "The 2016 Rust Conference Lineup"
+author = "Rust Community"
+description = "Three Rust conferences are coming up soon; join us at one near you!"
++++
 
 The Rust Community is holding three major conferences in the near future, and we
 wanted to give a shout-out to each, now that all of the lineups are fully

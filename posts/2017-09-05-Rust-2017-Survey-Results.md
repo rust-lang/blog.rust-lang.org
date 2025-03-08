@@ -1,8 +1,8 @@
----
-layout: post
-title: "Rust 2017 Survey Results"
-author: Jonathan Turner
----
++++
+layout = "post"
+title = "Rust 2017 Survey Results"
+author = "Jonathan Turner"
++++
 
 It's that time of the year, where we take a good look at how things are going by asking the community at large -- both Rust users and non-users.  And wow, did you respond!
 

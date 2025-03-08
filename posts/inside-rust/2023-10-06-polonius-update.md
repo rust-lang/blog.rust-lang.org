@@ -1,9 +1,9 @@
----
-layout: post
-title: "Polonius update"
-author: Rémy Rakic and Niko Matsakis
-team: The Polonius Working Group <https://www.rust-lang.org/governance/teams/compiler#Polonius%20working%20group>
----
++++
+layout = "post"
+title = "Polonius update"
+author = "Rémy Rakic and Niko Matsakis"
+team = "The Polonius Working Group <https://www.rust-lang.org/governance/teams/compiler#Polonius%20working%20group>"
++++
 
 This post lays out a roadmap to try to get Polonius on stable by Rust 2024. It identifies some high-level milestones and summarizes the key goals, as well as the recent progress.
 

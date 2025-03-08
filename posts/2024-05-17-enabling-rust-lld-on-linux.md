@@ -1,9 +1,9 @@
----
-layout: post
-title: Faster linking times on nightly on Linux using `rust-lld`
-author: Rémy Rakic
-team: the compiler performance working group <https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance>
----
++++
+layout = "post"
+title = "Faster linking times on nightly on Linux using `rust-lld`"
+author = "Rémy Rakic"
+team = "the compiler performance working group <https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance>"
++++
 
 TL;DR: rustc will use `rust-lld` by default on `x86_64-unknown-linux-gnu` on nightly to
 significantly reduce linking times.

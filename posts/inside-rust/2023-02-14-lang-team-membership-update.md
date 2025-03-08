@@ -1,9 +1,9 @@
----
-layout: post
-title: "Welcome Tyler Mandry to the Rust language team!"
-author: Josh Triplett, Niko Matsakis
-team: The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "Welcome Tyler Mandry to the Rust language team!"
+author = "Josh Triplett, Niko Matsakis"
+team = "The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 We are happy to announce that [Tyler Mandry][tmandry] is joining the Rust language design team as a full member!
 

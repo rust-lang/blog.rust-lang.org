@@ -1,9 +1,9 @@
----
-layout: post
-title: "Imposter Syndrome"
-author: Jane Lusby, Project Director of Collaboration
-team: Rust Foundation Project Directors <https://foundation.rust-lang.org/about/>
----
++++
+layout = "post"
+title = "Imposter Syndrome"
+author = "Jane Lusby, Project Director of Collaboration"
+team = "Rust Foundation Project Directors <https://foundation.rust-lang.org/about/>"
++++
 
 *Preface: This is in response to some feedback the project directors received
 from the Rust Foundation staff. Some of the contributors they'd talked to said

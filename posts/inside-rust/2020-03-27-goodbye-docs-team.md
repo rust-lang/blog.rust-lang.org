@@ -1,10 +1,10 @@
----
-layout: post
-title: "Goodbye, docs team"
-author: Steve Klabnik
-description: "The docs team is winding down"
-team: the core team <https://www.rust-lang.org/governance/teams/core>
----
++++
+layout = "post"
+title = "Goodbye, docs team"
+author = "Steve Klabnik"
+description = "The docs team is winding down"
+team = "the core team <https://www.rust-lang.org/governance/teams/core>"
++++
 
 I'll cut right to the chase: the docs team no longer exists.
 

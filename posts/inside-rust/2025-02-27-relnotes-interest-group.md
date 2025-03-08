@@ -1,9 +1,9 @@
----
-layout: post
-title: "Relnotes PR and release blog post ping group"
-author: Jieyou Xu
-team: The Release Team <https://www.rust-lang.org/governance/teams/infra#team-release>
----
++++
+layout = "post"
+title = "Relnotes PR and release blog post ping group"
+author = "Jieyou Xu"
+team = "The Release Team <https://www.rust-lang.org/governance/teams/infra#team-release>"
++++
 
 # Relnotes PR and release blog post ping group is now available
 

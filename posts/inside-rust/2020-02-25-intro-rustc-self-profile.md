@@ -1,10 +1,10 @@
----
-layout: post
-title: "Intro to rustc's self profiler"
-author: Wesley Wiser
-description: "Learn how to use the -Zself-profile rustc flag"
-team: the self-profile working group <https://rust-lang.github.io/compiler-team/working-groups/self-profile/>
----
++++
+layout = "post"
+title = "Intro to rustc's self profiler"
+author = "Wesley Wiser"
+description = "Learn how to use the -Zself-profile rustc flag"
+team = "the self-profile working group <https://rust-lang.github.io/compiler-team/working-groups/self-profile/>"
++++
 
 Over the last year, the [Self-Profile Working Group] has been building tools to profile `rustc` because we often hear requests to know where compilation time is being spent.
 This is useful when optimizing the compiler, one of the Compiler Team's ongoing efforts to improve compile times, but it's also useful to users who want to refactor their crate so that it will compile faster.

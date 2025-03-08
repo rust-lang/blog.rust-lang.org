@@ -1,8 +1,8 @@
----
-layout: post
-title: "RLS Deprecation"
-author: The Rust Dev Tools Team
----
++++
+layout = "post"
+title = "RLS Deprecation"
+author = "The Rust Dev Tools Team"
++++
 
 The Rust Language Server (RLS) is being deprecated in favor of [rust-analyzer](https://rust-analyzer.github.io/).
 Current users of RLS should migrate to using rust-analyzer instead.

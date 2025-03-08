@@ -1,9 +1,9 @@
----
-layout: post
-title: "Please welcome The 8472 to the Library team"
-author: Mara Bos
-team: the library team <https://www.rust-lang.org/governance/teams/library>
----
++++
+layout = "post"
+title = "Please welcome The 8472 to the Library team"
+author = "Mara Bos"
+team = "the library team <https://www.rust-lang.org/governance/teams/library>"
++++
 
 We're very excited to announce that [The 8472](https://github.com/the8472)
 has joined [the Library team](https://www.rust-lang.org/governance/teams/library)!

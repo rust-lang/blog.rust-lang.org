@@ -1,9 +1,9 @@
----
-layout: post
-title: "This Development-cycle in Cargo: 1.76"
-author: Ed Page
-team: The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>
----
++++
+layout = "post"
+title = "This Development-cycle in Cargo: 1.76"
+author = "Ed Page"
+team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
++++
 
 We wanted to share what has been happening for the last 6 weeks to better keep the community informed and involved.
 For work that was merged before branching for 1.76 beta, it will be in the Beta channel for the next 6 weeks after which it will be generally available.

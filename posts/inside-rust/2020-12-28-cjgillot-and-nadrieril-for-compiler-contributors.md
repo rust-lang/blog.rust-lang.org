@@ -1,10 +1,10 @@
----
-layout: post
-title: "Please welcome cjgillot and Nadrieril to compiler-contributors"
-author: Wesley Wiser
-description: "Please welcome cjgillot and Nadrieril to compiler-contributors"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Please welcome cjgillot and Nadrieril to compiler-contributors"
+author = "Wesley Wiser"
+description = "Please welcome cjgillot and Nadrieril to compiler-contributors"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 Please welcome [@cjgillot] and [@Nadrieril] to the [compiler-contributors] group!
 

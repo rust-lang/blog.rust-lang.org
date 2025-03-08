@@ -1,9 +1,9 @@
----
-layout: post
-title: "Cargo changes how arrays in config are merged"
-author: Arlo Siemsen
-team: the Cargo team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>
----
++++
+layout = "post"
+title = "Cargo changes how arrays in config are merged"
+author = "Arlo Siemsen"
+team = "the Cargo team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
++++
 
 Cargo will be changing the order of merged configuration arrays, and we are looking for people to help test this change and provide feedback.
 

@@ -1,10 +1,10 @@
----
-layout: post
-title: "Resolving Rust's forward progress guarantees"
-author: Mark Rousskov
-description: "Should side-effect be the fix?"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Resolving Rust's forward progress guarantees"
+author = "Mark Rousskov"
+description = "Should side-effect be the fix?"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 There has been a longstanding miscompilation in Rust: programs that do not make
 [forward progress]. Note that the previous link is to the C++ definition; Rust

@@ -1,9 +1,9 @@
----
-layout: post
-title: "What the Error Handling Project Group is Working Towards"
-author: Jane Lusby
-team: the library team <https://www.rust-lang.org/governance/teams/library>
----
++++
+layout = "post"
+title = "What the Error Handling Project Group is Working Towards"
+author = "Jane Lusby"
+team = "the library team <https://www.rust-lang.org/governance/teams/library>"
++++
 
 This blog post is a follow up of our [previous](https://blog.rust-lang.org/inside-rust/2020/11/23/What-the-error-handling-project-group-is-working-on.html) post detailing what we're working on now. We've been iterating for a while now on some of the challenges that we see with error handling today and have reached the point where we want to describe some of the new changes we're working towards. But first we need to describe the main challenges we've identified.
 

@@ -1,9 +1,9 @@
----
-layout: post
-title: "Change in Guidance on Committing Lockfiles"
-author: Ed Page
-team: The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>
----
++++
+layout = "post"
+title = "Change in Guidance on Committing Lockfiles"
+author = "Ed Page"
+team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
++++
 
 For years, the Cargo team has encouraged Rust developers to
 [commit their `Cargo.lock` file for packages with binaries but not libraries](https://doc.rust-lang.org/1.71.1/cargo/faq.html#why-do-binaries-have-cargolock-in-version-control-but-not-libraries).

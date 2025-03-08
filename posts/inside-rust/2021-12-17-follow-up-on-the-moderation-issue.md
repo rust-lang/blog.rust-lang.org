@@ -1,9 +1,9 @@
----
-layout: post
-title: "Follow-up on the moderation issue"
-author: Ryan Levick and Mara Bos
-team: the Rust Project <https://www.rust-lang.org/>
----
++++
+layout = "post"
+title = "Follow-up on the moderation issue"
+author = "Ryan Levick and Mara Bos"
+team = "the Rust Project <https://www.rust-lang.org/>"
++++
 
 Last week, the following e-mail was sent to all members of the Rust project
 (including all working groups) to follow up on the moderation issue.

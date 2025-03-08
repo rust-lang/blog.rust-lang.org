@@ -1,9 +1,9 @@
----
-layout: post
-title: "Welcome TC to the Rust language design team!"
-author: Niko Matsakis and Tyler Mandry
-team: The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "Welcome TC to the Rust language design team!"
+author = "Niko Matsakis and Tyler Mandry"
+team = "The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 Please join us in welcoming TC as a new member of the Rust language design team. TC has been a valuable contributor to the Rust project, serving as the lead of the lang-ops team and overseeing the Rust 2024 edition.
 

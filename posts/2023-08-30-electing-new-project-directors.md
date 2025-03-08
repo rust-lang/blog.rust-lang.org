@@ -1,9 +1,9 @@
----
-layout: post
-title: "Electing New Project Directors"
-author: Leadership Council
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "Electing New Project Directors"
+author = "Leadership Council"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 Today we are launching the process to elect new Project Directors to the Rust Foundation Board of Directors.
 As we begin the process, we wanted to spend some time explaining the goals and procedures we will follow.

@@ -1,9 +1,9 @@
----
-layout: post
-title: "December Project Goals Update"
-author: David Wood and Niko Matsakis
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "December Project Goals Update"
+author = "David Wood and Niko Matsakis"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 Over the last six months, the Rust project has been working towards a [slate of 26 project
 goals](https://rust-lang.github.io/rust-project-goals/2024h2/goals.html), with 3 of them designated

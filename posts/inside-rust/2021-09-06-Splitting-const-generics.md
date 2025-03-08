@@ -1,10 +1,10 @@
----
-layout: post
-title: "Splitting the const generics features"
-author: lcnr
-description: "Splitting the const generics features"
-team: The Const Generics Project Group <https://rust-lang.github.io/project-const-generics/>
----
++++
+layout = "post"
+title = "Splitting the const generics features"
+author = "lcnr"
+description = "Splitting the const generics features"
+team = "The Const Generics Project Group <https://rust-lang.github.io/project-const-generics/>"
++++
 
 After the stabilization of the const generics MVP in version 1.51, the const generics project group has continued to
 work on const generics. Large parts of this work were gated behind the feature gates `const_generics` and `const_evaluatable_checked`. As time went on, the

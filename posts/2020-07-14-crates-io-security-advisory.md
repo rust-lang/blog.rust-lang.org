@@ -1,8 +1,8 @@
----
-layout: post
-title: crates.io security advisory
-author: Rust Security Response WG
----
++++
+layout = "post"
+title = "crates.io security advisory"
+author = "Rust Security Response WG"
++++
 
 This is a cross-post of [the official security advisory][ml]. The official post
 contains a signed version with our PGP key, as well.

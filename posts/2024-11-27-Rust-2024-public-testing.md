@@ -1,9 +1,9 @@
----
-layout: post
-title: "Rust 2024 call for testing"
-author: "Eric Huss & TC"
-team: the Edition 2024 Project Group <https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html>
----
++++
+layout = "post"
+title = "Rust 2024 call for testing"
+author = "Eric Huss & TC"
+team = "the Edition 2024 Project Group <https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html>"
++++
 
 # Rust 2024 call for testing
 

@@ -1,8 +1,8 @@
----
-layout: post
-title: "Governance Update"
-author: Ryan Levick and Mara Bos
----
++++
+layout = "post"
+title = "Governance Update"
+author = "Ryan Levick and Mara Bos"
++++
 
 Last month, the core team, all the leads of top-level teams, the moderators, and the project representatives on the Rust Foundation board jointly sent out an update to all Rust project members on investigations happening into improvements to the governance of the Rust project. 
 

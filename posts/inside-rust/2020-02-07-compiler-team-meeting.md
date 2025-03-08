@@ -1,10 +1,10 @@
----
-layout: post
-title: "2020-02-06 Compiler Team Triage Meeting"
-author: "Wesley Wiser"
-description: "2019-02-06 Compiler Team Triage Meeting"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "2020-02-06 Compiler Team Triage Meeting"
+author = "Wesley Wiser"
+description = "2019-02-06 Compiler Team Triage Meeting"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 The compiler team had our weekly triage meeting on 2020-02-06.
 You can find the [minutes] on the [compiler-team repository].

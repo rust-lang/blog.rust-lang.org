@@ -1,8 +1,8 @@
----
-layout: post
-title: "Announcing The RustConf PostConf UnConf"
-author: Jane Lusby, on behalf of The Rust Project Teams
----
++++
+layout = "post"
+title = "Announcing The RustConf PostConf UnConf"
+author = "Jane Lusby, on behalf of The Rust Project Teams"
++++
 
 Hello Rust community!
 

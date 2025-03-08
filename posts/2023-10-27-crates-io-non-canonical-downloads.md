@@ -1,9 +1,9 @@
----
-layout: post
-title: "crates.io: Dropping support for non-canonical downloads"
-author: Tobias Bieniek
-team: the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>
----
++++
+layout = "post"
+title = "crates.io: Dropping support for non-canonical downloads"
+author = "Tobias Bieniek"
+team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
++++
 
 ## TL;DR
 

@@ -1,9 +1,9 @@
----
-layout: post
-title: "December 2024 Project Director Update"
-author: Carol Nichols
-team: Rust Foundation Project Directors <https://foundation.rust-lang.org/about/>
----
++++
+layout = "post"
+title = "December 2024 Project Director Update"
+author = "Carol Nichols"
+team = "Rust Foundation Project Directors <https://foundation.rust-lang.org/about/>"
++++
 
 Hello and welcome to the inaugural Rust Foundation Project Director update! I’m Carol Nichols, I’m
 one of the authors on The Rust Programming Language book and a member of the crates.io team, and [I

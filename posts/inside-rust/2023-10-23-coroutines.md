@@ -1,8 +1,8 @@
----
-layout: post
-title: Generators are dead, long live coroutines, generators are back
-author: oli-obk
----
++++
+layout = "post"
+title = "Generators are dead, long live coroutines, generators are back"
+author = "oli-obk"
++++
 
 We have renamed the unstable `Generator` trait to `Coroutine` and adjusted all terminology accordingly.
 If you want to see all 3800 modified lines of code, you can find the PR [here](https://github.com/rust-lang/rust/pull/116958).

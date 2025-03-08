@@ -1,9 +1,9 @@
----
-layout: post
-title: DNS Outage on 2023-01-25
-author: Jan David Nose
-team: The Rust Infrastructure Team <https://www.rust-lang.org/governance/teams/infra>
----
++++
+layout = "post"
+title = "DNS Outage on 2023-01-25"
+author = "Jan David Nose"
+team = "The Rust Infrastructure Team <https://www.rust-lang.org/governance/teams/infra>"
++++
 
 On Wednesday, 2023-01-25 at 09:15 UTC, we deployed changes to the production
 infrastructure for crates.io. During the deployment, the DNS record for

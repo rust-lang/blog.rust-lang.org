@@ -1,9 +1,9 @@
----
-layout: post
-title: "Changes at the Cargo Team"
-author: Eric Huss
-team: The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>
----
++++
+layout = "post"
+title = "Changes at the Cargo Team"
+author = "Eric Huss"
+team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
++++
 
 We are thrilled to publicly announce that [Weihang
 Lo](https://github.com/weihanglo) and [Ed Page](https://github.com/epage/)

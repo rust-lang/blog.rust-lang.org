@@ -1,9 +1,9 @@
----
-layout: post
-title: "Stability as a Deliverable"
-author: Aaron Turon and Niko Matsakis
-description: "The upcoming Rust 1.0 release means a lot, but most fundamentally it is a commitment to stability, alongside our long-running commitment to safety."
----
++++
+layout = "post"
+title = "Stability as a Deliverable"
+author = "Aaron Turon and Niko Matsakis"
+description = "The upcoming Rust 1.0 release means a lot, but most fundamentally it is a commitment to stability, alongside our long-running commitment to safety."
++++
 
 The upcoming Rust 1.0 release means
 [a lot](https://blog.rust-lang.org/2014/09/15/Rust-1.0.html), but most

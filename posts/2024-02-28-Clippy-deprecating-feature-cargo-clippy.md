@@ -1,8 +1,8 @@
----
-layout: post
-title: "Clippy: Deprecating `feature = \"cargo-clippy\"`"
-author: The Clippy Team
----
++++
+layout = "post"
+title = "Clippy: Deprecating `feature = \"cargo-clippy\"`"
+author = "The Clippy Team"
++++
 
 Since Clippy [`v0.0.97`] and before it was shipped with `rustup`, Clippy
 implicitly added a `feature = "cargo-clippy"` config[^1] when linting your code

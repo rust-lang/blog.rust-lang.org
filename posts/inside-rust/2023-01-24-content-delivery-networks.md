@@ -1,9 +1,9 @@
----
-layout: post
-title: Diversifying our Content Delivery Networks
-author: Jan David Nose
-team: The Rust Infrastructure Team <https://www.rust-lang.org/governance/teams/infra>
----
++++
+layout = "post"
+title = "Diversifying our Content Delivery Networks"
+author = "Jan David Nose"
+team = "The Rust Infrastructure Team <https://www.rust-lang.org/governance/teams/infra>"
++++
 
 Over the past few weeks, the [Infrastructure Team] has been working on setting
 up a second [Content Delivery Network] (CDN) for releases and crates.

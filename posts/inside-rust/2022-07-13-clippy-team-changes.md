@@ -1,9 +1,9 @@
----
-layout: post
-title: "Changes at the Clippy Team"
-author: Philipp Krones
-team: The Clippy Team <https://www.rust-lang.org/governance/teams/dev-tools#clippy>
----
++++
+layout = "post"
+title = "Changes at the Clippy Team"
+author = "Philipp Krones"
+team = "The Clippy Team <https://www.rust-lang.org/governance/teams/dev-tools#clippy>"
++++
 
 ## New Members
 

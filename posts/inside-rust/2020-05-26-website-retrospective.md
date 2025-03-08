@@ -1,9 +1,9 @@
----
-layout: post
-title: "A retrospective on the 2018 rust-lang.org redesign"
-author: Nick Cameron
-team: the core team <https://www.rust-lang.org/governance/teams/core>
----
++++
+layout = "post"
+title = "A retrospective on the 2018 rust-lang.org redesign"
+author = "Nick Cameron"
+team = "the core team <https://www.rust-lang.org/governance/teams/core>"
++++
 
 We released our second 'edition' of Rust at the end of 2018. Part of that release was a revamp of the [Rust website](https://www.rust-lang.org). That work was completed on time, but there was some controversy when it was released, and the project itself was difficult and draining for those involved. This retrospective is an attempt to record the lessons learned from the project, and to put the project into context for those interested but not directly involved.
 

@@ -1,9 +1,9 @@
----
-layout: post
-title: "Bisecting Rust Compiler Regressions with cargo-bisect-rustc"
-author: Santiago Pastorino
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Bisecting Rust Compiler Regressions with cargo-bisect-rustc"
+author = "Santiago Pastorino"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 Let's say that you've just updated the Rust compiler version and have
 tried to compile your application and see a failure that wasn't there

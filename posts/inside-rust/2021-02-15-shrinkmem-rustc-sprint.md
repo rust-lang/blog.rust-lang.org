@@ -1,9 +1,9 @@
----
-layout: post
-title: "March Sprint for rustc: Shrink Memory Usage"
-author: Felix Klock
-team: The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "March Sprint for rustc: Shrink Memory Usage"
+author = "Felix Klock"
+team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 I am very excited about the compiler team's upcoming sprint, and
 I want to share that excitement with all of you.

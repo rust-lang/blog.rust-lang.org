@@ -1,9 +1,9 @@
----
-layout: post
-title: "Stabilizing async fn in traits in 2023"
-author: Niko Matsakis and Tyler Mandry
-team: The Rust Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>
----
++++
+layout = "post"
+title = "Stabilizing async fn in traits in 2023"
+author = "Niko Matsakis and Tyler Mandry"
+team = "The Rust Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>"
++++
 
 The async working group's headline goal for 2023 is to stabilize a "minimum viable product" (MVP) version of async functions in traits. We are currently targeting Rust 1.74 for stabilization. This post lays out the features we plan to ship and the status of each one.
 

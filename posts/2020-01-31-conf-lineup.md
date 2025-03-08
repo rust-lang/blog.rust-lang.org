@@ -1,9 +1,9 @@
----
-layout: post
-title: "The 2020 Rust Event Lineup"
-author: Rust Community
-description: "Welcome to 2020; We are excited about the Rust conferences coming up; join us at one near you!"
----
++++
+layout = "post"
+title = "The 2020 Rust Event Lineup"
+author = "Rust Community"
+description = "Welcome to 2020; We are excited about the Rust conferences coming up; join us at one near you!"
++++
 
 
 A new decade has started, and we are excited about the Rust conferences coming up. Each conference is an opportunity to learn about Rust, share your knowledge, and to have a good time with your fellow Rustaceans. Read on to learn more about the events we know about so far.

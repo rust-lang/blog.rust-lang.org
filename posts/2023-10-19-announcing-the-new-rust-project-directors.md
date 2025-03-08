@@ -1,9 +1,9 @@
----
-layout: post
-title: "Announcing the New Rust Project Directors"
-author: Leadership Council
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "Announcing the New Rust Project Directors"
+author = "Leadership Council"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 We are happy to announce that we have completed the process to elect new Project Directors.
 

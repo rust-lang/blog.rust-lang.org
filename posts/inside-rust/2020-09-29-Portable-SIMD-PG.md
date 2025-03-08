@@ -1,10 +1,10 @@
----
-layout: post
-title: "Announcing the Portable SIMD Project Group"
-author: Jubilee and Lokathor
-description: "Announcing the Portable SIMD Project Group"
-team: the library team <https://www.rust-lang.org/governance/teams/library>
----
++++
+layout = "post"
+title = "Announcing the Portable SIMD Project Group"
+author = "Jubilee and Lokathor"
+description = "Announcing the Portable SIMD Project Group"
+team = "the library team <https://www.rust-lang.org/governance/teams/library>"
++++
 
 We're announcing the start of the _Portable SIMD Project Group_ within the Libs team. This group is dedicated to making a portable SIMD API available to stable Rust users.
 

@@ -1,9 +1,9 @@
----
-layout: post
-title: "The push for GATs stabilization"
-author: Jack Huey
-team: the Traits Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-traits>
----
++++
+layout = "post"
+title = "The push for GATs stabilization"
+author = "Jack Huey"
+team = "the Traits Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-traits>"
++++
 
 # The push for GATs stabilization
 

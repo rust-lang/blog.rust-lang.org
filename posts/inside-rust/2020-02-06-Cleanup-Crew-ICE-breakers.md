@@ -1,10 +1,10 @@
----
-layout: post
-title: "Announcing the Cleanup Crew ICE-breaker group"
-author: Santiago Pastorino
-description: "A new blog where the Rust team can post updates on the latest developments"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Announcing the Cleanup Crew ICE-breaker group"
+author = "Santiago Pastorino"
+description = "A new blog where the Rust team can post updates on the latest developments"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 Following Niko Matsakis' announcement of the [**LLVM ICE-breaker
 group**](https://blog.rust-lang.org/inside-rust/2019/10/22/LLVM-ICE-breakers.html),

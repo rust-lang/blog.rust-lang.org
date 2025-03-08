@@ -1,10 +1,10 @@
----
-layout: post
-title: "Changes to the Rustdoc team"
-author: Guillaume Gomez
-description: "leadership and membership additions"
-team: the rustdoc team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>
----
++++
+layout = "post"
+title = "Changes to the Rustdoc team"
+author = "Guillaume Gomez"
+description = "leadership and membership additions"
+team = "the rustdoc team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>"
++++
 
 Recently, there have been a lot of improvements in rustdoc. It was possible thanks to our new contributors. In light of these recent contributions, a few changes were made in the rustdoc team.
 

@@ -1,10 +1,10 @@
----
-layout: post
-title: "rustc-dev-guide Overview"
-author: "Chris Simpkins"
-description: "2020-03-26 rustc-dev-guide Overview"
-team: the Rustc Dev Guide Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>
----
++++
+layout = "post"
+title = "rustc-dev-guide Overview"
+author = "Chris Simpkins"
+description = "2020-03-26 rustc-dev-guide Overview"
+team = "the Rustc Dev Guide Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>"
++++
 
 The `rustc` compiler includes over 380,000 lines of source across more than 40 crates<sup>1</sup> to support the lexing through binary linking stages of the Rust compile process. It is daunting for newcomers, and we recognize that a high-level survey of the pipeline is warranted.
 

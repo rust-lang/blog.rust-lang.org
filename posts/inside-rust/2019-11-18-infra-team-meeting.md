@@ -1,9 +1,9 @@
----
-layout: post
-title: "2019-11-12 Infrastructure Team Meeting"
-author: Pietro Albini
-team: the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>
----
++++
+layout = "post"
+title = "2019-11-12 Infrastructure Team Meeting"
+author = "Pietro Albini"
+team = "the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>"
++++
 
 Meeting run by pietroalbini. Minutes written by pietroalbini.
 Attending: alexcrichton, kennytm, Mark-Simulacrum, pietroalbini, sgrif, shepmaster

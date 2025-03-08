@@ -1,9 +1,9 @@
----
-layout: post
-title: "Governance WG Call For Participation"
-author: Erin Power
-team: The Governance WG <https://github.com/rust-lang/wg-governance>
----
++++
+layout = "post"
+title = "Governance WG Call For Participation"
+author = "Erin Power"
+team = "The Governance WG <https://github.com/rust-lang/wg-governance>"
++++
 
 Hello everyone, the governance working group has been working a few efforts, but
 we haven't made as much progress as we would have liked over the past few

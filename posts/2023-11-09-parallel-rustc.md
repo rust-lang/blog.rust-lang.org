@@ -1,9 +1,9 @@
----
-layout: post
-title: Faster compilation with the parallel front-end in nightly
-author: Nicholas Nethercote
-team: The Parallel Rustc Working Group <https://www.rust-lang.org/governance/teams/compiler#Parallel%20rustc%20working%20group>
----
++++
+layout = "post"
+title = "Faster compilation with the parallel front-end in nightly"
+author = "Nicholas Nethercote"
+team = "The Parallel Rustc Working Group <https://www.rust-lang.org/governance/teams/compiler#Parallel%20rustc%20working%20group>"
++++
 
 The Rust compiler's front-end can now use parallel execution to significantly
 reduce compile times. To try it, run the nightly compiler with the `-Z

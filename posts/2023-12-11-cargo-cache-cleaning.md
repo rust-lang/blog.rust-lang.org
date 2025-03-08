@@ -1,9 +1,9 @@
----
-layout: post
-title: "Cargo cache cleaning"
-author: Eric Huss
-team: The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>
----
++++
+layout = "post"
+title = "Cargo cache cleaning"
+author = "Eric Huss"
+team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
++++
 
 Cargo has recently gained an unstable feature on the nightly channel (starting with nightly-2023-11-17) to perform automatic cleaning of cache content within Cargo's home directory.
 This post includes:

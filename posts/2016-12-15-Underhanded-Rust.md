@@ -1,8 +1,8 @@
----
-layout: post
-title: "Announcing the First Underhanded Rust Contest"
-author: The Rust Community Team
----
++++
+layout = "post"
+title = "Announcing the First Underhanded Rust Contest"
+author = "The Rust Community Team"
++++
 
 The [Rust Community Team](https://community.rs) is pleased to announce the
 first annual Underhanded Rust Contest, inspired by the [Underhanded

@@ -1,9 +1,9 @@
----
-layout: post
-title: "Opening up the Core Team agenda"
-author: Pietro Albini
-team: the Core Team <https://www.rust-lang.org/governance/teams/core>
----
++++
+layout = "post"
+title = "Opening up the Core Team agenda"
+author = "Pietro Albini"
+team = "the Core Team <https://www.rust-lang.org/governance/teams/core>"
++++
 
 The Core Team works on project-wide policy questions on all sorts of matters,
 as well as generally monitoring the overall health of the project. While some

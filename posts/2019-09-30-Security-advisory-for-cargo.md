@@ -1,8 +1,8 @@
----
-layout: post
-title: "Security advisory for Cargo"
-author: The Rust Security Team
----
++++
+layout = "post"
+title = "Security advisory for Cargo"
+author = "The Rust Security Team"
++++
 
 > **Note**: This is a cross-post of the [official security advisory]. The official
 > post contains a signed version with our PGP key, as well.

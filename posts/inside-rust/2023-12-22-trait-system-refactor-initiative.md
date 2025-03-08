@@ -1,9 +1,9 @@
----
-layout: post
-title: "Rustc Trait System Refactor Initiative Update: A call for testing"
-author: lcnr
-team: The Rustc Trait System Refactor Initiative <https://github.com/rust-lang/trait-system-refactor-initiative/>
----
++++
+layout = "post"
+title = "Rustc Trait System Refactor Initiative Update: A call for testing"
+author = "lcnr"
+team = "The Rustc Trait System Refactor Initiative <https://github.com/rust-lang/trait-system-refactor-initiative/>"
++++
 
 It has been nearly half a year since [our last update][prev]. We are reimplementing the trait solver of rustc with the goal of completely replacing the existing systems. This should allow us to fix some long-standing bugs, enable future type system improvements, and reduce compile times. See the previous update for a more detailed introduction. We have continued to make big progress on the new solver, mostly focusing on getting the solver ready for use in coherence. We changed the unstable compiler flag to enable the new solver: you can now use `-Znext-solver=globally` to enable it everywhere and `-Znext-solver=coherence` to enable the new solver only for coherence checking.
 

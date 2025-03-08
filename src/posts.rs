@@ -5,7 +5,7 @@ use serde_derive::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 
 #[derive(Debug, PartialEq, Deserialize)]
-struct YamlHeader {
+struct TomlHeader {
     title: String,
     author: String,
     #[serde(default)]
@@ -55,18 +55,18 @@ impl Post {
             ));
         }
 
-        // yaml headers.... we know the first four bytes of each file are "---\n"
+        // toml headers.... we know the first four bytes of each file are "+++\n"
         // so we need to find the end. we need the fours to adjust for those first bytes
-        let end_of_yaml = contents[4..].find("---").unwrap() + 4;
-        let yaml = &contents[..end_of_yaml];
-        let YamlHeader {
+        let end_of_toml = contents[4..].find("+++").unwrap() + 4;
+        let toml = &contents[4..end_of_toml];
+        let TomlHeader {
             author,
             title,
             release,
             team: team_string,
             layout,
-        } = serde_yaml::from_str(yaml)?;
-        // next, the contents. we add + to get rid of the final "---\n\n"
+        } = toml::from_str(toml)?;
+
         let options = comrak::Options {
             render: comrak::RenderOptions::builder().unsafe_(true).build(),
             extension: comrak::ExtensionOptions::builder()
@@ -78,8 +78,8 @@ impl Post {
             ..comrak::Options::default()
         };
 
-        // Content starts after "---\n" (we don't assume an extra newline)
-        let contents = comrak::markdown_to_html(&contents[end_of_yaml + 4..], &options);
+        // Content starts after "+++\n" (we don't assume an extra newline)
+        let contents = comrak::markdown_to_html(&contents[end_of_toml + 4..], &options);
 
         // finally, the url.
         let mut url = PathBuf::from(&*filename);

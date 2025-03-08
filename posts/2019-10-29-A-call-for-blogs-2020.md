@@ -1,8 +1,8 @@
----
-layout: post
-title: "A call for blogs 2020"
-author: The Rust Core Team
----
++++
+layout = "post"
+title = "A call for blogs 2020"
+author = "The Rust Core Team"
++++
 
 What will Rust development look like in 2020? That's partially up to you! Here's how it works:
 

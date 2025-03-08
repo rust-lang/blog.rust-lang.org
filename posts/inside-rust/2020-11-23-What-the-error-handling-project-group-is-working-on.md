@@ -1,9 +1,9 @@
----
-layout: post
-title: "What the Error Handling Project Group is Working On"
-author: Sean Chen
-team: the library team <https://www.rust-lang.org/governance/teams/library>
----
++++
+layout = "post"
+title = "What the Error Handling Project Group is Working On"
+author = "Sean Chen"
+team = "the library team <https://www.rust-lang.org/governance/teams/library>"
++++
 
 The Rust community takes its error handling seriously. There’s already a strong culture in place for emphasizing helpful error handling and reporting, with multiple libraries each offering their own take (see Jane Lusby’s thorough [survey][error_ecosystem_vid] of Rust error handling/reporting libraries).
 

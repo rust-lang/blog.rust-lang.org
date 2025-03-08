@@ -1,10 +1,10 @@
----
-layout: post
-title: "2019-11-14 and 2019-11-21 Lang Team Triage Meetings"
-author: Niko Matsakis
-description: "2019-11-14 and 2019-11-21 Lang Team Triage Meetings"
-team: the lang team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "2019-11-14 and 2019-11-21 Lang Team Triage Meetings"
+author = "Niko Matsakis"
+description = "2019-11-14 and 2019-11-21 Lang Team Triage Meetings"
+team = "the lang team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 Since I apparently forgot to post a blog post last week, this blog
 post covers two lang-team triage meetings: [2019-11-14] and

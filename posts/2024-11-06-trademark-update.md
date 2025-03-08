@@ -1,8 +1,8 @@
----
-layout: post
-title: "Next Steps on the Rust Trademark Policy"
-author: the Leadership Council
----
++++
+layout = "post"
+title = "Next Steps on the Rust Trademark Policy"
+author = "the Leadership Council"
++++
 
 As many of you know, the Rust language trademark policy has been the subject of
 an extended revision process dating back to 2022. In 2023, the Rust Foundation

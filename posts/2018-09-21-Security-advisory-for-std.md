@@ -1,8 +1,8 @@
----
-layout: post
-title: "Security advisory for the standard library"
-author: The Rust Core Team
----
++++
+layout = "post"
+title = "Security advisory for the standard library"
+author = "The Rust Core Team"
++++
 
 The Rust team was recently notified of a security vulnerability affecting
 the standard library's `str::repeat` function. When passed a large number this

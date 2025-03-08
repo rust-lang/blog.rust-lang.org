@@ -1,9 +1,9 @@
----
-layout: post
-title: "Governance Working Group Update: Meeting 17 December 2019"
-author: Val Grimm
-team: The Governance WG <https://github.com/rust-lang/wg-governance>
----
++++
+layout = "post"
+title = "Governance Working Group Update: Meeting 17 December 2019"
+author = "Val Grimm"
+team = "The Governance WG <https://github.com/rust-lang/wg-governance>"
++++
 
 Hello everyone! 
 

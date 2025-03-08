@@ -1,10 +1,10 @@
----
-layout: post
-title: "New inline assembly syntax available in nightly"
-author: Josh Triplett
-description: "Rust has a new inline assembly syntax in nightly, please test"
-team: the language team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "New inline assembly syntax available in nightly"
+author = "Josh Triplett"
+description = "Rust has a new inline assembly syntax in nightly, please test"
+team = "the language team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 In the course of optimization, OS or embedded development, or other kinds of
 low-level programming, you may sometimes need to write native assembly code for

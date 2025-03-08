@@ -1,10 +1,10 @@
----
-layout: post
-title: "Please welcome The 8472 and Ashley Mannix to Library Contributors"
-author: Mara Bos
-description: "Please welcome The 8472 and Ashley Mannix to Library Contributors"
-team: the library team <https://www.rust-lang.org/governance/teams/library>
----
++++
+layout = "post"
+title = "Please welcome The 8472 and Ashley Mannix to Library Contributors"
+author = "Mara Bos"
+description = "Please welcome The 8472 and Ashley Mannix to Library Contributors"
+team = "the library team <https://www.rust-lang.org/governance/teams/library>"
++++
 
 Please welcome The 8472 and Ashley Mannix to the
 [Library Contributors](https://www.rust-lang.org/governance/teams/library#libs-contributors) group!

@@ -1,9 +1,9 @@
----
-layout: post
-title: "docs.rs outage postmortem"
-author: Pietro Albini
-team: the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>
----
++++
+layout = "post"
+title = "docs.rs outage postmortem"
+author = "Pietro Albini"
+team = "the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>"
++++
 
 At 2019-10-21 01:38 UTC the docs.rs website went down because no available disk
 space was left on the server hosting the application. Crate builds were failing

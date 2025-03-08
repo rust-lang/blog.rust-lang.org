@@ -1,10 +1,10 @@
----
-layout: post
-title: "Lang team August update"
-author: Josh Triplett
-description: "Lang team August update"
-team: the lang team <https://lang-team.rust-lang.org/>
----
++++
+layout = "post"
+title = "Lang team August update"
+author = "Josh Triplett"
+description = "Lang team August update"
+team = "the lang team <https://lang-team.rust-lang.org/>"
++++
 
 This week the lang team held its August planning meeting. We normally hold
 these meetings on the first Wednesday of every month.

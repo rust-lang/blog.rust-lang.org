@@ -1,10 +1,10 @@
----
-layout: post
-title: "2019-10-10 Lang Team Triage Meeting"
-author: Niko Matsakis
-description: "2019-10-10 Lang Team Triage Meeting"
-team: the lang team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "2019-10-10 Lang Team Triage Meeting"
+author = "Niko Matsakis"
+description = "2019-10-10 Lang Team Triage Meeting"
+team = "the lang team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 We had our [weekly triage meeting] on 2019-10-10. You can find the
 [minutes] on the [lang-team] repository; there is also a [video

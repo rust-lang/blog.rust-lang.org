@@ -1,9 +1,9 @@
----
-layout: post
-title: "November 2023 Leadership Council Update"
-author: Leadership Council
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "November 2023 Leadership Council Update"
+author = "Leadership Council"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 Hello again from the Rust Leadership Council!
 We wanted to share an update on what the Council has been working on since [our last update][update].

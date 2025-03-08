@@ -1,9 +1,9 @@
----
-layout: post
-title: "Rustdoc performance improvements"
-author: Jynn Nelson and Guillaume Gomez
-team: The Rustdoc Team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>
----
++++
+layout = "post"
+title = "Rustdoc performance improvements"
+author = "Jynn Nelson and Guillaume Gomez"
+team = "The Rustdoc Team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>"
++++
 
 Hi everyone! [**@GuillaumeGomez**] recently tweeted about the rustdoc performance improvements and suggested that we write a blog post about it:
 

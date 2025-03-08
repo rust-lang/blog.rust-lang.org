@@ -1,10 +1,10 @@
----
-layout: post
-title: "Lang Team meetings moving to new time slots"
-author: Josh Triplett
-description: "The Rust language team design and triage meetings have moved to new time slots"
-team: the language team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "Lang Team meetings moving to new time slots"
+author = "Josh Triplett"
+description = "The Rust language team design and triage meetings have moved to new time slots"
+team = "the language team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 The Rust language team holds two weekly meetings:
 

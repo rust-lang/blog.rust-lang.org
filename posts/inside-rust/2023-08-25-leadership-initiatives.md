@@ -1,9 +1,9 @@
----
-layout: post
-title: "Seeking help for initial Leadership Council initiatives"
-author: Mark Rousskov
-team: the leadership council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "Seeking help for initial Leadership Council initiatives"
+author = "Mark Rousskov"
+team = "the leadership council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 Having not heard any significant disagreement with the first set of [proposed priorities],
 we are moving ahead with forming subgroups that will work towards defining and

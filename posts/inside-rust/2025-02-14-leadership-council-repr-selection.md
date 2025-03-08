@@ -1,9 +1,9 @@
----
-layout: post
-title: "Leadership Council March 2025 Representative Selections"
-author: Eric Huss
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "Leadership Council March 2025 Representative Selections"
+author = "Eric Huss"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 The selection process for representatives on the [Leadership Council] is starting today.
 

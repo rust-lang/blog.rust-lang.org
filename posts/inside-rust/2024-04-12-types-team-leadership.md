@@ -1,9 +1,9 @@
----
-layout: post
-title: "Announcing lcnr as Types Team co-lead"
-author: Niko Matsakis
-team: the types team <https://www.rust-lang.org/governance/teams/compiler#types-team>
----
++++
+layout = "post"
+title = "Announcing lcnr as Types Team co-lead"
+author = "Niko Matsakis"
+team = "the types team <https://www.rust-lang.org/governance/teams/compiler#types-team>"
++++
 
 It is my great privilege to announce that [lcnr][] will be serving as the new types team co-lead. The types team has adopted the ["rolling leadership" model](https://rust-lang.github.io/rfcs/3262-compiler-team-rolling-leads.html) pioneered by the compiler team, and so [lcnr][] is joining as the new "junior lead". The senior lead will be [Jack Huey][]. I ([Niko Matsakis][]) am going to be stepping back and I will continue to be active as a types team member.
 

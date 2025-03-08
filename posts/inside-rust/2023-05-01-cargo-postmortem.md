@@ -1,9 +1,9 @@
----
-layout: post
-title: Postmortem Analysis in Cargo
-author: Jon Gjengset and Weihang Lo
-team: The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>
----
++++
+layout = "post"
+title = "Postmortem Analysis in Cargo"
+author = "Jon Gjengset and Weihang Lo"
+team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
++++
 
 At 01:52 UTC, 2022-10-28, [rust-lang/cargo#11183] was merged into the Cargo master branch. It introduced a bug that caused Cargo to fail to build packages that use a particular, but very common, dependency setup. The change nearly made its way into the next nightly release. If it had, it would have rendered any of the 30k crates with `serde_derive` as a dependency (one of the most popular crate on crates.io) unbuildable for anyone using the resulting nightly release.
 

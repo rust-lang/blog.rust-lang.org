@@ -1,9 +1,9 @@
----
-layout: post
-title: "Announcing Tyler Mandry as Lang Team co-lead"
-author: Niko Matsakis
-team: the lang design team <https://www.rust-lang.org/governance/teams/lang>
----
++++
+layout = "post"
+title = "Announcing Tyler Mandry as Lang Team co-lead"
+author = "Niko Matsakis"
+team = "the lang design team <https://www.rust-lang.org/governance/teams/lang>"
++++
 
 It gives me great pleasure to announce (rather belatedly[^b]) that Tyler Mandry has been chosen as the new lang-team co-lead. Tyler is a great choice for lead, as he always brings a balanced, thoughtful perspective to discussions, but is also willing to take strong positions when he believes he knows the right path forward. And he usually does.
 

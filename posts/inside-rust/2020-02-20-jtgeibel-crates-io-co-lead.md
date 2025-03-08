@@ -1,10 +1,10 @@
----
-layout: post
-title: "Please welcome jtgeibel as crates.io team co-lead!"
-author: Sean Griffin
-description: "jtgeibel added as crates.io team co-lead"
-team: the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>
----
++++
+layout = "post"
+title = "Please welcome jtgeibel as crates.io team co-lead!"
+author = "Sean Griffin"
+description = "jtgeibel added as crates.io team co-lead"
+team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
++++
 
 I'm happy to announce some changes in the leadership of the crates.io
 team. Justin Geibel ([jtgeibel]) will be joining me as co-lead. Justin

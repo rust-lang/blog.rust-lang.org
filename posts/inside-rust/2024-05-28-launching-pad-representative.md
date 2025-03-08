@@ -1,9 +1,9 @@
----
-layout: post
-title: "Welcome James Munns to the Leadership Council"
-author: Eric Huss
-team: Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>
----
++++
+layout = "post"
+title = "Welcome James Munns to the Leadership Council"
+author = "Eric Huss"
+team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
++++
 
 The Leadership Council would like to welcome [James Munns] as the new representative of the Launching Pad. [JP] will be stepping down for personal reasons. We are very grateful for JP being a part of the Leadership Council since its beginning.
 

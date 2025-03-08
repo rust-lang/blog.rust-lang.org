@@ -1,9 +1,9 @@
----
-layout: post
-title: Improved API tokens for crates.io
-author: Tobias Bieniek
-team: the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>
----
++++
+layout = "post"
+title = "Improved API tokens for crates.io"
+author = "Tobias Bieniek"
+team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
++++
 
 If you recently generated a new API token on crates.io, you might have noticed
 our new API token creation page and some of the new features it now supports.

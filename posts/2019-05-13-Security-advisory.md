@@ -1,8 +1,8 @@
----
-layout: post
-title: "Security advisory for the standard library"
-author: The Rust Core Team
----
++++
+layout = "post"
+title = "Security advisory for the standard library"
+author = "The Rust Core Team"
++++
 
 This is a cross-post of the [official security advisory][official]. The
 official post contains a signed version with our PGP key, as well.

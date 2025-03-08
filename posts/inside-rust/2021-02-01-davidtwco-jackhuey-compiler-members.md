@@ -1,10 +1,10 @@
----
-layout: post
-title: "Welcoming David Wood to compiler team and Jack Huey to compiler-contributors"
-author: Wesley Wiser
-description: "Please welcome David Wood to the compiler team and Jack Huey to compiler-contributors"
-team: the compiler team <https://www.rust-lang.org/governance/teams/compiler>
----
++++
+layout = "post"
+title = "Welcoming David Wood to compiler team and Jack Huey to compiler-contributors"
+author = "Wesley Wiser"
+description = "Please welcome David Wood to the compiler team and Jack Huey to compiler-contributors"
+team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
++++
 
 Please welcome [David Wood] to the compiler team and [Jack Huey] to the [compiler-contributors] group!
 

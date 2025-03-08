@@ -1,9 +1,9 @@
----
-layout: post
-title: "One year of Rust"
-author: Aaron Turon
-description: "Rust's trajectory one year after 1.0"
----
++++
+layout = "post"
+title = "One year of Rust"
+author = "Aaron Turon"
+description = "Rust's trajectory one year after 1.0"
++++
 
 Rust is a language that gives you:
 
