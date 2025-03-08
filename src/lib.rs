@@ -7,7 +7,7 @@ use chrono::Timelike;
 use eyre::{eyre, WrapErr};
 use rayon::prelude::*;
 use sass_rs::{compile_file, Options};
-use serde_derive::Serialize;
+use serde::Serialize;
 use serde_json::{json, Value};
 use std::collections::HashMap;
 use std::fs::{self, File};

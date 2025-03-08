@@ -1,7 +1,7 @@
 use super::blogs::Manifest;
 use eyre::eyre;
 use regex::Regex;
-use serde_derive::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 
 #[derive(Debug, PartialEq, Deserialize)]

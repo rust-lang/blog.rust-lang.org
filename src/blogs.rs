@@ -1,5 +1,5 @@
 use super::posts::Post;
-use serde_derive::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 
 static MANIFEST_FILE: &str = "blog.toml";
