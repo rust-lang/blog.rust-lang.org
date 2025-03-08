@@ -4,6 +4,6 @@ version = "0.1.0"
 edition.workspace = true
 
 [dependencies]
-blog = { path = ".." }
-warpy = "=0.3.68"
-tokio = "=1.44.0"
+blog.workspace = true
+warpy.workspace = true
+tokio.workspace = true
