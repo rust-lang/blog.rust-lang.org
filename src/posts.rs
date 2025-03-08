@@ -6,6 +6,7 @@ use std::{
     path::{Path, PathBuf},
     sync::LazyLock,
 };
+use toml::value::Date;
 
 #[derive(Debug, Clone, Serialize)]
 pub struct Post {
@@ -13,10 +14,10 @@ pub struct Post {
     pub(crate) layout: String,
     pub(crate) title: String,
     pub(crate) author: String,
-    pub(crate) year: i32,
+    pub(crate) year: u16,
     pub(crate) show_year: bool,
-    pub(crate) month: u32,
-    pub(crate) day: u32,
+    pub(crate) month: u8,
+    pub(crate) day: u8,
     pub(crate) contents: String,
     pub(crate) url: String,
     pub(crate) published: String,
@@ -30,16 +31,7 @@ pub struct Post {
 impl Post {
     pub(crate) fn open(path: &Path, manifest: &Manifest) -> eyre::Result<Self> {
         // yeah this might blow up, but it won't
-        let filename = path.file_name().unwrap().to_str().unwrap();
-
-        // we need to get the metadata out of the url
-        let mut split = filename.splitn(4, '-');
-
-        // we do some unwraps because these need to be valid
-        let year = split.next().unwrap().parse::<i32>().unwrap();
-        let month = split.next().unwrap().parse::<u32>().unwrap();
-        let day = split.next().unwrap().parse::<u32>().unwrap();
-        let filename = split.next().unwrap().to_string();
+        let filename = path.file_name().unwrap().to_str().unwrap().into();
 
         let contents = std::fs::read_to_string(path)?;
 
@@ -50,6 +42,7 @@ impl Post {
                 release,
                 team: team_string,
                 layout,
+                date: Date { year, month, day },
                 ..
             },
             contents,
@@ -69,7 +62,7 @@ impl Post {
         let contents = comrak::markdown_to_html(contents, &options);
 
         // finally, the url.
-        let mut url = PathBuf::from(&*filename);
+        let mut url = PathBuf::from(&filename);
         url.set_extension("html");
 
         // this is fine
@@ -139,8 +132,8 @@ impl Post {
     }
 }
 
-fn build_post_time(year: i32, month: u32, day: u32, seconds: u32) -> String {
-    let date = chrono::NaiveDate::from_ymd_opt(year, month, day).unwrap();
+fn build_post_time(year: u16, month: u8, day: u8, seconds: u32) -> String {
+    let date = chrono::NaiveDate::from_ymd_opt(year.into(), month.into(), day.into()).unwrap();
     let date_time = date.and_hms_opt(0, 0, seconds).unwrap();
     chrono::DateTime::<chrono::Utc>::from_naive_utc_and_offset(date_time, chrono::Utc).to_rfc3339()
 }
