@@ -2,7 +2,10 @@ use super::blogs::Manifest;
 use eyre::eyre;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
-use std::path::{Path, PathBuf};
+use std::{
+    path::{Path, PathBuf},
+    sync::LazyLock,
+};
 
 #[derive(Debug, PartialEq, Deserialize)]
 struct TomlHeader {
@@ -113,9 +116,8 @@ impl Post {
 
         // If they supplied team, it should look like `team-text <team-url>`
         let (team, team_url) = team_string.map_or((None, None), |s| {
-            lazy_static::lazy_static! {
-                static ref R: Regex = Regex::new(r"(?P<name>[^<]*) <(?P<url>[^>]+)>").unwrap();
-            }
+            static R: LazyLock<Regex> =
+                LazyLock::new(|| Regex::new(r"(?P<name>[^<]*) <(?P<url>[^>]+)>").unwrap());
             let Some(captures) = R.captures(&s) else {
                 panic!(
                     "team from path `{}` should have format `$name <$url>`",
