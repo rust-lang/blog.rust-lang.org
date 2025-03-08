@@ -1,0 +1,18 @@
+{% import "headers.tera" as headers %}
+{% import "nav.tera" as nav %}
+{% import "footer.tera" as footer %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title | escape_hbs }}</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Empowering everyone to build reliable and efficient software.">
+     {{ headers::headers(root=root, title=title, blog=blog) | indent(prefix="    ", blank=true) }}
+  </head>
+  <body>
+    {{ nav::nav(root=root, blog=blog) | indent(prefix="    ", blank=true) }}
+    {%- block page %}{% endblock page %}
+    {{ footer::footer(root=root) | indent(prefix="    ", blank=true) }}
+  </body>
+</html>
