@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-02-22
 title = "Governance Reform RFC Announcement"
 author = "Jane Losare-Lusby and the Governance Reform WG"
 team = "leadership chat <https://www.rust-lang.org/governance>"

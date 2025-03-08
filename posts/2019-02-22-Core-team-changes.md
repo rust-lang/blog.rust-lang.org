@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-02-22
 title = "Changes in the core team"
 author = "The Rust Core Team"
 +++

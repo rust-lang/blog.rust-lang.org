@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2017-09-05
 title = "Rust 2017 Survey Results"
 author = "Jonathan Turner"
 +++

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2016-09-08
 title = "Incremental Compilation"
 author = "Michael Woerister"
 description = "Incremental compilation for exponential joy and happiness."

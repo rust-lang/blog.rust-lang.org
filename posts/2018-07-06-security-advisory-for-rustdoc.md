@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2018-07-06
 title = "Security Advisory for rustdoc"
 author = "The Rust Core Team"
 +++

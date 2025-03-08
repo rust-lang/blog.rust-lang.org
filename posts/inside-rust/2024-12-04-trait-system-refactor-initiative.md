@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-12-04
 title = "Rustc Trait System Refactor Initiative Update: Stabilizing `-Znext-solver=coherence`"
 author = "lcnr"
 team = "The Rustc Trait System Refactor Initiative <https://github.com/rust-lang/trait-system-refactor-initiative/>"

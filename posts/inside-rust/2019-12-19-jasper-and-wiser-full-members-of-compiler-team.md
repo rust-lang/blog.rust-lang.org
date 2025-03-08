@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-12-19
 title = "Congrats to compiler team members matthewjasper and wesleywiser"
 author = "Felix S. Klock II"
 description = "Congrats to compiler team members matthewjasper and wesleywiser"

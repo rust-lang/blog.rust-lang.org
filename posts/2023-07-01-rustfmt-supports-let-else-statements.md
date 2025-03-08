@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-07-01
 title = "Rustfmt support for let-else statements"
 author = "Caleb Cartwright"
 team = "the style team <https://www.rust-lang.org/governance/teams/lang#Style%20team> and the rustfmt team <https://www.rust-lang.org/governance/teams/dev-tools#Rustfmt%20team>"

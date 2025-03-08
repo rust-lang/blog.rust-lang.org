@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-05-17
 title = "Faster linking times on nightly on Linux using `rust-lld`"
 author = "Rémy Rakic"
 team = "the compiler performance working group <https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance>"

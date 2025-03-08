@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-05-01
 title = "Postmortem Analysis in Cargo"
 author = "Jon Gjengset and Weihang Lo"
 team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"

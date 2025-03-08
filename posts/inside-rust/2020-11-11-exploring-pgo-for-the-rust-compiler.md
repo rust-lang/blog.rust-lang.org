@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-11-11
 title = "Exploring PGO for the Rust compiler"
 author = "Michael Woerister"
 description = "Investigate the effects that profile guided optimization has on rustc's performance"

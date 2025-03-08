@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-03-18
 title = "Building a shared vision for Async Rust"
 author = "Niko Matsakis"
 description = "Building a shared vision for Async Rust"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-03-13
 title = "The rustc-guide is now rustc-dev-guide"
 author = "mark-i-m"
 description = "the guide has been renamed"

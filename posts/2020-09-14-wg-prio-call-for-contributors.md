@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-09-14
 title = "A call for contributors from the WG-prioritization team"
 author = "The Rust WG-Prioritization Team"
 +++

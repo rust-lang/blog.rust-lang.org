@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-10-11
 title = '''Improving async-await's "Future is not Send" diagnostic'''
 author = "David Wood"
 description = "Highlighting a diagnostic improvement for async-await"

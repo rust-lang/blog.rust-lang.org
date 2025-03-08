@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-12-22
 title = "Rustc Trait System Refactor Initiative Update: A call for testing"
 author = "lcnr"
 team = "The Rustc Trait System Refactor Initiative <https://github.com/rust-lang/trait-system-refactor-initiative/>"

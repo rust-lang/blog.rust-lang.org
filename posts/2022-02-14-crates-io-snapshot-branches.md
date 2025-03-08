@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-02-14
 title = "Crates.io Index Snapshot Branches Moving"
 author = "The Crates.io Team"
 +++

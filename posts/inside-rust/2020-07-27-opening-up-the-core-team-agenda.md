@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-07-27
 title = "Opening up the Core Team agenda"
 author = "Pietro Albini"
 team = "the Core Team <https://www.rust-lang.org/governance/teams/core>"

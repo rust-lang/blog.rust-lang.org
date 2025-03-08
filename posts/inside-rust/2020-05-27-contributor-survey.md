@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-05-27
 title = "2020 Contributor Survey"
 author = "Niko Matsakis and @mark-i-m"
 description = "We announce a new survey about the code contribution experience."

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-05-26
 title = "A retrospective on the 2018 rust-lang.org redesign"
 author = "Nick Cameron"
 team = "the core team <https://www.rust-lang.org/governance/teams/core>"

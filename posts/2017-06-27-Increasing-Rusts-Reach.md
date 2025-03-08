@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2017-06-27
 title = "Increasing Rust’s Reach"
 author = "Carol Nichols"
 +++

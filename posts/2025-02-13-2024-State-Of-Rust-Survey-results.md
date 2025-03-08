@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2025-02-13
 title = "2024 State of Rust Survey Results"
 author = "The Rust Survey Team"
 +++

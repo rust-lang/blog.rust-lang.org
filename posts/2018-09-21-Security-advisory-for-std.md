@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2018-09-21
 title = "Security advisory for the standard library"
 author = "The Rust Core Team"
 +++

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2017-03-02
 title = "Rust's language ergonomics initiative"
 author = "Aaron Turon"
 description = "Ergonomics, learnability, and the fact that sometimes implicit is better"

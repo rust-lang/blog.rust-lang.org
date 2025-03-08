@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-08-22
 title = "Embedded Working Group Community Micro Survey"
 author = "James Munns"
 team = "Embedded Devices Working Group <https://www.rust-lang.org/governance/wgs/embedded>"

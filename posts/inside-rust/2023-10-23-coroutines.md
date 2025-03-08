@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-10-23
 title = "Generators are dead, long live coroutines, generators are back"
 author = "oli-obk"
 +++

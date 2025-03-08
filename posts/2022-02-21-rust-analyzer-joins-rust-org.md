@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-02-21
 title = "rust-analyzer joins the Rust organization!"
 author = "The rust-analyzer Team on behalf of the entire Rust Team"
 +++

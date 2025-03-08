@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-02-22
 title = "Rust Compiler Ambitions for 2022"
 author = "Felix Klock, Wesley Wiser"
 description = "The compiler team's concrete initiatives and hopeful aspirations for this year."

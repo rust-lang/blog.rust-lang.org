@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-11-12
 title = "Source-based code coverage in nightly"
 author = "Tyler Mandry"
 team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"

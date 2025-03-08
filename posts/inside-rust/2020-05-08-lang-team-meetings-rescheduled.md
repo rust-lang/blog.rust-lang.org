@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-05-08
 title = "Lang Team meetings moving to new time slots"
 author = "Josh Triplett"
 description = "The Rust language team design and triage meetings have moved to new time slots"

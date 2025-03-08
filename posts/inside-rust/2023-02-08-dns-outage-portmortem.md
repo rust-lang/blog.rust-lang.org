@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-02-08
 title = "DNS Outage on 2023-01-25"
 author = "Jan David Nose"
 team = "The Rust Infrastructure Team <https://www.rust-lang.org/governance/teams/infra>"

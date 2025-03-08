@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-07-17
 title = "Traits working group 2020 sprint 3 summary"
 author = "Jack Huey"
 team = "The Traits WG <https://rust-lang.github.io/wg-traits/>"

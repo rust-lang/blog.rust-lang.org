@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-05-10
 title = "Security advisory: malicious crate rustdecimal"
 author = "The Rust Security Response WG"
 +++

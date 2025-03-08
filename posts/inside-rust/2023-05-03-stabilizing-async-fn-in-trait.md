@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-05-03
 title = "Stabilizing async fn in traits in 2023"
 author = "Niko Matsakis and Tyler Mandry"
 team = "The Rust Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>"

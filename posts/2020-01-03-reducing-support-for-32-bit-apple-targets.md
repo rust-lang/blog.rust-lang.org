@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-01-03
 title = "Reducing support for 32-bit Apple targets"
 author = "Pietro Albini"
 +++

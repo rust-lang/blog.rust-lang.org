@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-04-03
 title = "Core Team updates"
 author = "Pietro Albini"
 team = "the Rust Core Team <https://www.rust-lang.org/governance/teams/core>"

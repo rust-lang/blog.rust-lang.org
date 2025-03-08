@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-02-25
 title = "Intro to rustc's self profiler"
 author = "Wesley Wiser"
 description = "Learn how to use the -Zself-profile rustc flag"

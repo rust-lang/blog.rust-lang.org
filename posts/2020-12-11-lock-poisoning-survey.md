@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-12-11
 title = "Launching the Lock Poisoning Survey"
 author = "Ashley Mannix"
 team = "The Libs team <https://www.rust-lang.org/governance/teams/library>"

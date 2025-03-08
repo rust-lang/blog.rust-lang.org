@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-06-08
 title = "New inline assembly syntax available in nightly"
 author = "Josh Triplett"
 description = "Rust has a new inline assembly syntax in nightly, please test"

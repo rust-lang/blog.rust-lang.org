@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2025-03-05
 title = "Inferred const generic arguments: Call for Testing!"
 author = "BoxyUwU"
 team = "The Const Generics Project Group <https://rust-lang.github.io/project-const-generics/>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-06-15
 title = "Please welcome Boxy, Léo Lanteri Thauvin and the8472 to compiler-contributors"
 author = "Wesley Wiser"
 description = "Please welcome Boxy, Léo Lanteri Thauvin and the8472 to compiler-contributors"

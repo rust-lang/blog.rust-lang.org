@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-01-26
 title = "Rust & the case of the disappearing stack frames"
 author = "Kyle Strand"
 description = "introducing an exploration of how `longjmp` and similar functions can be handled in Rust"

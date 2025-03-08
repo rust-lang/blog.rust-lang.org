@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2016-05-16
 title = "One year of Rust"
 author = "Aaron Turon"
 description = "Rust's trajectory one year after 1.0"

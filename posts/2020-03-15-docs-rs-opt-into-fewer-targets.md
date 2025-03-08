@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-03-15
 title = "docs.rs now allows you to choose your build targets"
 author = "Jynn Nelson"
 team = "the docs.rs team <https://www.rust-lang.org/governance/teams/dev-tools#docs-rs>"

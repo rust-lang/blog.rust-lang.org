@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-11-04
 title = "Call for proposals: Rust 2025h1 project goals"
 author = "Niko Matsakis"
 team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"

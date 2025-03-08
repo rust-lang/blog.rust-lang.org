@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-10-23
 title = "Core team membership changes"
 author = "Mark Rousskov"
 team = "The Core Team <https://www.rust-lang.org/governance/teams/core>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-04-19
 title = "Imposter Syndrome"
 author = "Jane Lusby, Project Director of Collaboration"
 team = "Rust Foundation Project Directors <https://foundation.rust-lang.org/about/>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-05-07
 title = "Rust Project Goals Submission Period"
 author = "Niko Matsakis and Josh Triplett"
 team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"

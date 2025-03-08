@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-08-03
 title = "The push for GATs stabilization"
 author = "Jack Huey"
 team = "the Traits Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-traits>"

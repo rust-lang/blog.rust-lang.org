@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-10-27
 title = "crates.io: Dropping support for non-canonical downloads"
 author = "Tobias Bieniek"
 team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"

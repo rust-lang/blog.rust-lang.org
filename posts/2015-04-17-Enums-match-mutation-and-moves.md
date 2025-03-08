@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2015-04-17
 title = "Mixing matching, mutation, and moves in Rust"
 author = "Felix S. Klock II"
 description = "A tour of matching and enums in Rust."

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-12-17
 title = "Follow-up on the moderation issue"
 author = "Ryan Levick and Mara Bos"
 team = "the Rust Project <https://www.rust-lang.org/>"

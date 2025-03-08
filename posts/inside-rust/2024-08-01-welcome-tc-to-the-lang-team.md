@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-08-01
 title = "Welcome TC to the Rust language design team!"
 author = "Niko Matsakis and Tyler Mandry"
 team = "The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>"

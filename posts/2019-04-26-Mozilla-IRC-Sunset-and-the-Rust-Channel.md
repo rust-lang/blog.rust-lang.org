@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-04-26
 title = "Mozilla IRC Sunset and the Rust Channel"
 author = "The Rust Core Team"
 +++

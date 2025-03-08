@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-11-25
 title = "`if` and `match` in constants on nightly rust"
 author = "Dylan MacKenzie"
 team = "WG const-eval <https://github.com/rust-lang/const-eval>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-05-01
 title = "Announcing Google Summer of Code 2024 selected projects"
 author = "Jakub Beránek, Jack Huey and Paul Lenz"
 +++

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-12-18
 title = "Bisecting Rust Compiler Regressions with cargo-bisect-rustc"
 author = "Santiago Pastorino"
 team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"

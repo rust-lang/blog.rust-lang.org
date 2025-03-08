@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-10-26
 title = "A tale of broken badges and 23,000 features"
 author = "Tobias Bieniek"
 team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"

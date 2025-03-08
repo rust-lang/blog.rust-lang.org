@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-09-06
 title = "Electing New Project Directors 2024"
 author = "Leadership Council"
 team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"

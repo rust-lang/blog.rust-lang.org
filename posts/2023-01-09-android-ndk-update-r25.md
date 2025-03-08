@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-01-09
 title = "Updating the Android NDK in Rust 1.68"
 author = "Android Platform Team"
 description = "Modernizing Android support in Rust"

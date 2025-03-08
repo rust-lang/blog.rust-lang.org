@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2017-05-05
 title = "The Rust Libz Blitz"
 author = "Brian Anderson, David Tolnay, and Aaron Turon"
 description = "Improving the quality and maturity of Rust's core ecosystem"

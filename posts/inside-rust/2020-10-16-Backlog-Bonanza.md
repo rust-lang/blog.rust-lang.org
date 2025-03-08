@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-10-16
 title = "Lang team Backlog Bonanza and Project Proposals"
 author = "Nicholas Matsakis"
 team = "the lang team <https://www.rust-lang.org/governance/teams/lang>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-06-29
 title = "Disk space and LTO improvements"
 author = "Eric Huss"
 description = "Disk space and LTO improvements"

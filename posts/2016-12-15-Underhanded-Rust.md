@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2016-12-15
 title = "Announcing the First Underhanded Rust Contest"
 author = "The Rust Community Team"
 +++

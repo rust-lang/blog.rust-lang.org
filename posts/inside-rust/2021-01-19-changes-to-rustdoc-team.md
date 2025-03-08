@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-01-19
 title = "Changes to the Rustdoc team"
 author = "Guillaume Gomez"
 description = "leadership and membership additions"

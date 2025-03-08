@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-04-14
 title = "Brainstorming Async Rust's Shiny Future"
 author = "Niko Matsakis"
 description = "Brainstorming Async Rust's Shiny Future"

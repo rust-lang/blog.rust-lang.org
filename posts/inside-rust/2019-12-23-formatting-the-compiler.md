@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-12-23
 title = "Formatting the compiler tree"
 author = "Mark Rousskov"
 description = "How to rebase and what happened"

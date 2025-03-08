@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-10-17
 title = "Please welcome ecstatic-morse to compiler-contributors"
 author = "Niko Matsakis"
 description = "Please welcome ecstatic-morse to compiler-contributors"

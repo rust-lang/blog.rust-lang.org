@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-09-29
 title = "Announcing the Rust Style Team"
 author = "Josh Triplett"
 team = "The Rust Style Team <https://www.rust-lang.org/governance/teams/lang#Style team>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-11-07
 title = "Async-await on stable Rust!"
 author = "Niko Matsakis"
 +++

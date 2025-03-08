@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-09-15
 title = "Const Eval (Un)Safety Rules"
 author = "Felix Klock"
 description = "Various ways const-eval can change between Rust versions"

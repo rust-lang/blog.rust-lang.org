@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2018-12-21
 title = "Procedural Macros in Rust 2018"
 author = "Alex Crichton"
 +++

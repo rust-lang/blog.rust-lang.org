@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-08-09
 title = "Async Closures MVP: Call for Testing!"
 author = "Michael Goulet"
 team = "The Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>"

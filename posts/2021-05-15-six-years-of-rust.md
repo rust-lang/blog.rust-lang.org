@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-05-15
 title = "Six Years of Rust"
 author = "The Rust Team"
 +++

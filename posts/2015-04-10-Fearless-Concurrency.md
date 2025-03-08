@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2015-04-10
 title = "Fearless Concurrency with Rust"
 author = "Aaron Turon"
 description = "Rust's vision for concurrency"

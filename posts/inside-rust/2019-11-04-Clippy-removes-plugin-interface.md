@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-11-04
 title = "Clippy is removing its plugin interface"
 author = "Philipp Krones"
 description = "Now that compiler plugins are deprecated, Clippy is removing its deprecated plugin interface"

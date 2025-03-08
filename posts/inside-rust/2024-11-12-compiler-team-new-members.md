@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-11-12
 title = "Announcing four new members of the compiler team"
 author = "davidtwco and wesleywiser"
 team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"

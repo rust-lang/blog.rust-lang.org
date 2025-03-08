@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-09-14
 title = "Security advisories for Cargo (CVE-2022-36113, CVE-2022-36114)"
 author = "The Rust Security Response WG"
 +++

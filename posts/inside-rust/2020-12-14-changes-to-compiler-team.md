@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-12-14
 title = "Changes to Rust compiler team"
 author = "Felix S. Klock II"
 description = "recent leadership and membership changes"

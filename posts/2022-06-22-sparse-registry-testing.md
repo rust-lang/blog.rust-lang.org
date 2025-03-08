@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-06-22
 title = "Call for testing: Cargo sparse-registry"
 author = "Arlo Siemsen"
 team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"

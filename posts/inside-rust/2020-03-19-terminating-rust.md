@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-03-19
 title = "Resolving Rust's forward progress guarantees"
 author = "Mark Rousskov"
 description = "Should side-effect be the fix?"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-11-09
 title = "Faster compilation with the parallel front-end in nightly"
 author = "Nicholas Nethercote"
 team = "The Parallel Rustc Working Group <https://www.rust-lang.org/governance/teams/compiler#Parallel%20rustc%20working%20group>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-11-15
 title = "Our Vision for the Rust Specification"
 author = "Eric, Felix, Joel and Mara"
 team = "the specification team <https://www.rust-lang.org/governance/teams/lang#Specification%20team>"

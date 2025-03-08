@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-08-30
 title = "Changes to x.py defaults"
 author = "Jynn Nelson"
 team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"

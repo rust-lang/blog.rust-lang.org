@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-09-30
 title = "Security advisory for Cargo"
 author = "The Rust Security Team"
 +++

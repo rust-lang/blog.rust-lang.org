@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-03-27
 title = "Goodbye, docs team"
 author = "Steve Klabnik"
 description = "The docs team is winding down"

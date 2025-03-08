@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-02-26
 title = "crates.io incident report for 2020-02-20"
 author = "Pietro Albini"
 team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"

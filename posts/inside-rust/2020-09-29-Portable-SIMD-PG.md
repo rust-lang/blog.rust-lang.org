@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-09-29
 title = "Announcing the Portable SIMD Project Group"
 author = "Jubilee and Lokathor"
 description = "Announcing the Portable SIMD Project Group"

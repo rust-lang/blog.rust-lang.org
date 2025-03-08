@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-08-25
 title = "Seeking help for initial Leadership Council initiatives"
 author = "Mark Rousskov"
 team = "the leadership council <https://www.rust-lang.org/governance/teams/leadership-council>"

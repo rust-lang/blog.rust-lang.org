@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-04-12
 title = "A note on the Trademark Policy Draft"
 author = "Ryan Levick, Jane Losare-Lusby, Tyler Mandry, Mark Rousskov, Josh Stone, and Josh Triplett"
 +++

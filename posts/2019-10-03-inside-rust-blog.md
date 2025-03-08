@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-10-03
 title = "Announcing the Inside Rust blog"
 author = "Niko Matsakis"
 +++

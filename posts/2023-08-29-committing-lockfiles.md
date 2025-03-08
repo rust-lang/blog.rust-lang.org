@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-08-29
 title = "Change in Guidance on Committing Lockfiles"
 author = "Ed Page"
 team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"

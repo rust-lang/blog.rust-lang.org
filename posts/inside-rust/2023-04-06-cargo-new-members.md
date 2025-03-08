@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-04-06
 title = "Welcome Arlo and Scott to the Cargo Team"
 author = "Eric Huss"
 team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"

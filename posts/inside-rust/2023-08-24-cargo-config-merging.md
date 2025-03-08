@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-08-24
 title = "Cargo changes how arrays in config are merged"
 author = "Arlo Siemsen"
 team = "the Cargo team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2025-02-27
 title = "Relnotes PR and release blog post ping group"
 author = "Jieyou Xu"
 team = "The Release Team <https://www.rust-lang.org/governance/teams/infra#team-release>"

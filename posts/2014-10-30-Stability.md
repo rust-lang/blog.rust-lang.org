@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2014-10-30
 title = "Stability as a Deliverable"
 author = "Aaron Turon and Niko Matsakis"
 description = "The upcoming Rust 1.0 release means a lot, but most fundamentally it is a commitment to stability, alongside our long-running commitment to safety."

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2025-03-03
 title = "February Project Goals Update"
 author = "Rémy Rakic, Niko Matsakis, Santiago Pastorino"
 team = "Goals Team <https://www.rust-lang.org/governance/teams/goals>"

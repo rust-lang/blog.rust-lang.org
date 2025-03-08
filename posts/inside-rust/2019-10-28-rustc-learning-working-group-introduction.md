@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-10-28
 title = "The Rustc Dev Guide Working Group - An Introduction"
 author = "Amanjeev Sethi"
 description = "introduction rustc dev guide working group useful links"

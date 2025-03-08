@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-11-27
 title = "Rust 2024 call for testing"
 author = "Eric Huss & TC"
 team = "the Edition 2024 Project Group <https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html>"

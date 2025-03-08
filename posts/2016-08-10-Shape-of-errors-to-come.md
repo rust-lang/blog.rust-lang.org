@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2016-08-10
 title = "Shape of errors to come"
 author = "Sophia June Turner"
 +++

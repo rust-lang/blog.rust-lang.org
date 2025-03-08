@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2016-06-30
 title = "State of Rust Survey 2016"
 author = "Jonathan Turner"
 +++

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-11-01
 title = "Completing the transition to the new borrow checker"
 author = "Niko Matsakis"
 +++

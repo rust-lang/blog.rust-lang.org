@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-02-28
 title = 'Clippy: Deprecating `feature = "cargo-clippy"`'
 author = "The Clippy Team"
 +++

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2018-04-02
 title = "Increasing Rust’s Reach 2018"
 author = "Ashley Williams"
 +++

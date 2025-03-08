@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-02-13
 title = "Announcing Tyler Mandry as Lang Team co-lead"
 author = "Niko Matsakis"
 team = "the lang design team <https://www.rust-lang.org/governance/teams/lang>"

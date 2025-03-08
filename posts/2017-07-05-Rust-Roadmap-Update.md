@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2017-07-05
 title = "Rust's 2017 roadmap, six months in"
 author = "Nicholas Matsakis"
 +++

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-12-17
 title = "December 2024 Project Director Update"
 author = "Carol Nichols"
 team = "Rust Foundation Project Directors <https://foundation.rust-lang.org/about/>"

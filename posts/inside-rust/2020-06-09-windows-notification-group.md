@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-06-09
 title = "Announcing the Windows and ARM notification groups"
 author = "Niko Matsakis"
 description = "Announcing the Windows and ARM notification groups"

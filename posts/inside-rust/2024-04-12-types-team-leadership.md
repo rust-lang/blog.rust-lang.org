@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-04-12
 title = "Announcing lcnr as Types Team co-lead"
 author = "Niko Matsakis"
 team = "the types team <https://www.rust-lang.org/governance/teams/compiler#types-team>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-12-05
 title = "Launching the 2024 State of Rust Survey"
 author = "The Rust Survey Working Group"
 description = "Share your experience using Rust in the ninth edition of the State of Rust Survey"

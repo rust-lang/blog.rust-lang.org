@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-01-20
 title = "Officially announcing the types team"
 author = "Jack Huey"
 description = "An overview of the new types team"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2015-04-24
 title = "Rust Once, Run Everywhere"
 author = "Alex Crichton"
 description = "Zero-cost and safe FFI in Rust"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-02-01
 title = "Welcoming David Wood to compiler team and Jack Huey to compiler-contributors"
 author = "Wesley Wiser"
 description = "Please welcome David Wood to the compiler team and Jack Huey to compiler-contributors"

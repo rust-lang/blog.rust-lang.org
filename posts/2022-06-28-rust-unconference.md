@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-06-28
 title = "Announcing The RustConf PostConf UnConf"
 author = "Jane Lusby, on behalf of The Rust Project Teams"
 +++

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-10-22
 title = "Announcing the LLVM ICE-breaker group"
 author = "Niko Matsakis"
 description = "A new blog where the Rust team can post updates on the latest developments"

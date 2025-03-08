@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-07-02
 title = "Ownership of the standard library implementation"
 author = "Ashley Mannix"
 team = "The Libs team <https://www.rust-lang.org/governance/teams/library>"

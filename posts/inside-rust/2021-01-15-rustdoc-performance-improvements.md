@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-01-15
 title = "Rustdoc performance improvements"
 author = "Jynn Nelson and Guillaume Gomez"
 team = "The Rustdoc Team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-06-20
 title = "Introducing the Rust Leadership Council"
 author = "Leadership Council"
 team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"

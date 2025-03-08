@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-10-07
 title = "Async Foundations Update: Time for polish!"
 author = "Niko Matsakis"
 description = "A new blog where the Rust team can post updates on the latest developments"

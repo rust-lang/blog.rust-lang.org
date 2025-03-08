@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-12-09
 title = "Announcing the Docs.rs Team"
 author = "QuietMisdreavus"
 team = "The Rustdoc Team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>"

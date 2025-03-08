@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-12-02
 title = "Constant propagation is now on by default in nightly"
 author = "Wesley Wiser"
 description = "Constant propagation is now on by default in nightly"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-12-04
 title = "2019-11-18 IDE team meeting"
 author = "Aleksey Kladov, Igor Matuszewski"
 team = "the IDE team <https://www.rust-lang.org/governance/teams/dev-tools#ides>"

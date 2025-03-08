@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-10-31
 title = "October project goals update"
 author = "Niko Matsakis"
 team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"

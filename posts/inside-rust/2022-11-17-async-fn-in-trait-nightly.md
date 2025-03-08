@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-11-17
 title = "Async fn in trait MVP comes to nightly"
 author = "Tyler Mandry"
 team = "The Rust Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>"

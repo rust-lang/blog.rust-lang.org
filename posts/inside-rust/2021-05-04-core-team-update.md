@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-05-04
 title = "Core Team Update: May 2021"
 author = "Steve Klabnik"
 team = "The Core Team <https://www.rust-lang.org/governance/teams/core>"

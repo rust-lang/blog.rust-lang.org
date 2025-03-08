@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-09-22
 title = "Announcing the Project Director Nominees"
 author = "Leadership Council"
 team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"

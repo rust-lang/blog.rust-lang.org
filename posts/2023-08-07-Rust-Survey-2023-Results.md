@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-08-07
 title = "2022 Annual Rust Survey Results"
 author = "The Rust Survey Working Group in partnership with the Rust Foundation"
 +++

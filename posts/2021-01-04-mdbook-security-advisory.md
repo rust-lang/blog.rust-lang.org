@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-01-04
 title = "mdBook security advisory"
 author = "Rust Security Response WG"
 +++

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-10-03
 title = "Keeping Rust projects secure with cargo-audit 0.9: dependency trees, core advisories, unmaintained crates"
 author = "Tony Arcieri"
 description = "A look at the new features in cargo-audit 0.9 for ensuring dependencies are free of security advisories"

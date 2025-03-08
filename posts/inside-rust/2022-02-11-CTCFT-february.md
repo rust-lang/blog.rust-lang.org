@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-02-11
 title = "CTCFT 2022-02-21 Agenda"
 author = "Rust CTCFT Team"
 +++

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-03-18
 title = "All Hands Retrospective"
 author = "Erin Power"
 team = "The All Hands Organisers <https://www.rust-lang.org/governance/teams/core>"

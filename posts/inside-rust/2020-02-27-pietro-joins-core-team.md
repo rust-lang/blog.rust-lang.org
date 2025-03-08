@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-02-27
 title = "Pietro Albini has joined the core team"
 author = "Nick Cameron"
 team = "the core team <https://www.rust-lang.org/governance/teams/core>"

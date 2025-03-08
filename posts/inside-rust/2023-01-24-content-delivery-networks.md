@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-01-24
 title = "Diversifying our Content Delivery Networks"
 author = "Jan David Nose"
 team = "The Rust Infrastructure Team <https://www.rust-lang.org/governance/teams/infra>"

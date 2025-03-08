@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-01-14
 title = "Governance Working Group Update: Meeting 14 January 2020"
 author = "Val Grimm"
 team = "The Governance WG <https://github.com/rust-lang/wg-governance>"

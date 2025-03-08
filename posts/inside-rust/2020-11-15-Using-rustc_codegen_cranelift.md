@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-11-15
 title = "Using rustc_codegen_cranelift for debug builds"
 author = "Jynn Nelson"
 team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-05-09
 title = "Updating Rust's Linux musl targets"
 author = "Wesley Wiser"
 description = "musl targets will soon ship with musl 1.2"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-11-22
 title = "Upcoming compiler-team design meetings"
 author = "Niko Matsakis"
 description = "Upcoming compiler-team design meetings"

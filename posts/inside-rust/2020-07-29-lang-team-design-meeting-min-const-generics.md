@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-07-29
 title = "Lang team design meeting: minimal const generics"
 author = "Niko Matsakis"
 description = "Minimal const generics meeting report"

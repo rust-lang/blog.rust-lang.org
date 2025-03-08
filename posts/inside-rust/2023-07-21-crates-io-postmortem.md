@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-07-21
 title = "crates.io Postmortem: Broken Crate Downloads"
 author = "Tobias Bieniek"
 team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-09-17
 title = "Intra-doc links close to stabilization"
 author = "Manish Goregaokar and Jynn Nelson"
 team = "the rustdoc team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>"

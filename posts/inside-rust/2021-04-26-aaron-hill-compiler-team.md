@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-04-26
 title = "Congrats to compiler team member Aaron Hill"
 author = "Wesley Wiser"
 description = "Congrats to compiler team member Aaron Hill"

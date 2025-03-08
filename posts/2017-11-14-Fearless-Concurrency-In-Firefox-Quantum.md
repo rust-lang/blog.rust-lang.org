@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2017-11-14
 title = "Fearless Concurrency in Firefox Quantum"
 author = "Manish Goregaokar"
 +++

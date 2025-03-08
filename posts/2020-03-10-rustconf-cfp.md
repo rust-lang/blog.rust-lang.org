@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-03-10
 title = "The 2020 RustConf CFP is Now Open!"
 author = "Rust Community"
 description = "The call for proposals for RustConf 202 is open; We want to hear from you!"

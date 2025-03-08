@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-10-20
 title = "Marking issues as regressions"
 author = "Camelid"
 description = "Now anyone can mark issues as regressions!"

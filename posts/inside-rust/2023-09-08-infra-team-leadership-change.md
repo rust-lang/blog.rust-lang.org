@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-09-08
 title = "Leadership change in the Rust Infrastructure Team"
 author = "Pietro Albini"
 team = "the infrastructure team <https://www.rust-lang.org/governance/teams/infra>"

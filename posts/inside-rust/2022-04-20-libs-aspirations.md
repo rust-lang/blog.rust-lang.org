@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-04-20
 title = "Rust Library Team Aspirations"
 author = "Mara Bos"
 description = "Rust Library Team Aspirations"

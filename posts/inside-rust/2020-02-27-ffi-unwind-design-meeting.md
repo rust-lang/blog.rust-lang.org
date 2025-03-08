@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-02-27
 title = "Announcing the first FFI-unwind project design meeting"
 author = "Kyle Strand, Niko Matsakis, and Amanieu d'Antras"
 description = "First design meeting for the FFI-unwind project"

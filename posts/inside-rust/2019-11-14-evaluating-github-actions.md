@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-11-14
 title = "Evaluating GitHub Actions"
 author = "Pietro Albini"
 team = "the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>"

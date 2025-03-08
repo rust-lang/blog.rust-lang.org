@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-09-06
 title = "Splitting the const generics features"
 author = "lcnr"
 description = "Splitting the const generics features"

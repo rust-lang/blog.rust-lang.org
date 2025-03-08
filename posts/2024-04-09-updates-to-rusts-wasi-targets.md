@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-04-09
 title = "Changes to Rust's WASI targets"
 author = "Yosh Wuyts"
 +++

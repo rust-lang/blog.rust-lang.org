@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-02-06
 title = "Announcing the Cleanup Crew ICE-breaker group"
 author = "Santiago Pastorino"
 description = "A new blog where the Rust team can post updates on the latest developments"

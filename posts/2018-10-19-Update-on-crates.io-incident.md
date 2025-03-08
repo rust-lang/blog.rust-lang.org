@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2018-10-19
 title = "Update on the October 15, 2018 incident on crates.io"
 author = "The Crates.io Team"
 +++

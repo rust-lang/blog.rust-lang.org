@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-09-25
 title = "Increasing the minimum supported Apple platform versions"
 author = "BlackHoleFox"
 description = "Modernizing and improving Apple platform support for Rust"

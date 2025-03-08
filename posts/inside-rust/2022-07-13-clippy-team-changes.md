@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-07-13
 title = "Changes at the Clippy Team"
 author = "Philipp Krones"
 team = "The Clippy Team <https://www.rust-lang.org/governance/teams/dev-tools#clippy>"

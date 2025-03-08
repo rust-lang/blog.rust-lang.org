@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-03-11
 title = "Rust Compiler March 2022 Steering Cycle"
 author = "Felix Klock"
 description = "The compiler team's March 2022 steering cycle"

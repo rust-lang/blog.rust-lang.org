@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-09-24
 title = "WebAssembly targets: change in default target-features"
 author = "Alex Crichton"
 team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"

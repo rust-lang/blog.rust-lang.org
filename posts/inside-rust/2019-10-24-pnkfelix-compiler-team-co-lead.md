@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-10-24
 title = "Please welcome pnkfelix as compiler team co-lead!"
 author = "Niko Matsakis"
 description = "pnkfelix added as compiler-team co-lead"

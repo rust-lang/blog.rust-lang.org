@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-11-13
 title = "November 2023 Leadership Council Update"
 author = "Leadership Council"
 team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"

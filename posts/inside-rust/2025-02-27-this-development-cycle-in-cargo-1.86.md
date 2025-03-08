@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2025-02-27
 title = "This Development-cycle in Cargo: 1.86"
 author = "Ed Page"
 team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"

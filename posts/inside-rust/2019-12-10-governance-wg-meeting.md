@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-12-10
 title = "Governance Working Group Update"
 author = "Niko Matsakis"
 team = "the Governance WG <https://github.com/rust-lang/wg-governance>"

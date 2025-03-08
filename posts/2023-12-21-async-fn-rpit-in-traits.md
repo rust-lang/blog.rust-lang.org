@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-12-21
 title = "Announcing `async fn` and return-position `impl Trait` in traits"
 author = "Tyler Mandry"
 team = "The Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>"

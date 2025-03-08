@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-10-06
 title = "Polonius update"
 author = "Rémy Rakic and Niko Matsakis"
 team = "The Polonius Working Group <https://www.rust-lang.org/governance/teams/compiler#Polonius%20working%20group>"

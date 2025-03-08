@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2016-05-05
 title = "Cargo: predictable dependency management"
 author = "Yehuda Katz"
 description = "Cargo makes dependency management in Rust easy and predictable"

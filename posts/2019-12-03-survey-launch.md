@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-12-03
 title = "Launching the 2019 State of Rust Survey"
 author = "The Rust Community Team"
 description = "Hearing from you about the fourth year of Rust"

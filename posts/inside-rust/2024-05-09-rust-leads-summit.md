@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-05-09
 title = "Recap: Rust Leads Summit 2024"
 author = "Tyler Mandry and Eric Holk"
 +++

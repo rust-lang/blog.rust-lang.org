@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-11-23
 title = "What the Error Handling Project Group is Working On"
 author = "Sean Chen"
 team = "the library team <https://www.rust-lang.org/governance/teams/library>"

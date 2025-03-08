@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-09-22
 title = "crates.io Policy Update RFC"
 author = "Tobias Bieniek"
 team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"

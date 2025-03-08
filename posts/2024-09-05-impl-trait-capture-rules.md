@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-09-05
 title = "Changes to `impl Trait` in Rust 2024"
 author = "Niko Matsakis"
 team = "the language team <https://www.rust-lang.org/governance/teams/lang>"

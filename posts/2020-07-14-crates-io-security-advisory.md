@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-07-14
 title = "crates.io security advisory"
 author = "Rust Security Response WG"
 +++

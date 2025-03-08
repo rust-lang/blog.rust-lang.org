@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-08-26
 title = "2024 Leadership Council Survey"
 author = "The Leadership Council"
 +++

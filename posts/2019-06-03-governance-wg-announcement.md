@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-06-03
 title = "The Governance WG is going public"
 author = "The Rust Governance WG"
 +++

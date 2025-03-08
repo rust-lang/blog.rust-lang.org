@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-07-21
 title = "Rust 2021 public testing period"
 author = "Niko Matsakis"
 team = "the Edition 2021 Project Group <https://www.rust-lang.org/governance/teams/core#project-edition-2021>"

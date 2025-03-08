@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-10-28
 title = "Generic associated types to be stable in Rust 1.65"
 author = "Jack Huey"
 description = "Generic associated types will stabilize in Rust 1.65"

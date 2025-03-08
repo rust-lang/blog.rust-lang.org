@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-07-29
 title = "Lang team design meeting: well-formedness and type aliases"
 author = "Niko Matsakis"
 description = "Well-formedness and type aliases meeting report"

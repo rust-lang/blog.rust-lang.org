@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-11-13
 title = "Governance WG Call For Participation"
 author = "Erin Power"
 team = "The Governance WG <https://github.com/rust-lang/wg-governance>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-02-20
 title = "Please welcome jtgeibel as crates.io team co-lead!"
 author = "Sean Griffin"
 description = "jtgeibel added as crates.io team co-lead"

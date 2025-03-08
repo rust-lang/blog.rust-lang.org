@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2018-01-31
 title = "The 2018 Rust Event Lineup"
 author = "Rust Community"
 description = "Lots of Rust events are happening this year; join us at one near you!"

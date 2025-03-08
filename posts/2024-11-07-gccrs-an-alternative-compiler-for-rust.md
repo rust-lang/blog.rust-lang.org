@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-11-07
 title = "gccrs: An alternative compiler for Rust"
 author = "Arthur Cohen on behalf of the gccrs project"
 +++

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-05-26
 title = "Concluding the events of last November"
 author = "Khionu Sybiern"
 team = "The Moderation Team <https://www.rust-lang.org/governance/teams/moderation>"

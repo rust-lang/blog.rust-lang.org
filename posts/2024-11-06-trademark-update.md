@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-11-06
 title = "Next Steps on the Rust Trademark Policy"
 author = "the Leadership Council"
 +++

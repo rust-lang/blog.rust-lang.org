@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-12-09
 title = "December 2024 Leadership Council Update"
 author = "Eric Huss"
 team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"

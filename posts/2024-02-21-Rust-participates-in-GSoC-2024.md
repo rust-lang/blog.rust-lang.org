@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-02-21
 title = "Rust participates in Google Summer of Code 2024"
 author = "Jakub Beránek, Jack Huey and Paul Lenz"
 +++

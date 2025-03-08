@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-07-01
 title = "RLS Deprecation"
 author = "The Rust Dev Tools Team"
 +++

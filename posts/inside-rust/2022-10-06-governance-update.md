@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-10-06
 title = "Governance Update"
 author = "Ryan Levick"
 team = "leadership chat <https://www.rust-lang.org/governance>"

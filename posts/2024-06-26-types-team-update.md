@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-06-26
 title = "Types Team Update and Roadmap"
 author = "lcnr"
 team = "The Types Team <https://github.com/rust-lang/types-team>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-03-26
 title = "rustc-dev-guide Overview"
 author = "Chris Simpkins"
 description = "2020-03-26 rustc-dev-guide Overview"

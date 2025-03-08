@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2024-03-22
 title = "2024 Edition Update"
 author = "Eric Huss"
 team = "Edition 2024 Project Group <https://github.com/rust-lang/team/blob/15e99829ee2124b07f740b8befd41c55a46fee91/teams/project-edition-2024.toml>"

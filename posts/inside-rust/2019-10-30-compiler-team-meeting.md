@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2019-10-30
 title = "2019-10-24 Compiler Team Triage Meeting"
 author = "Wesley Wiser"
 description = "2019-10-24 Compiler Team Triage Meeting"

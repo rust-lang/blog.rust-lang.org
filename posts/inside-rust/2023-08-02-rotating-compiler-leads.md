@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-08-02
 title = "Rotating Rust compiler team leadership"
 author = "Wesley Wiser"
 team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"

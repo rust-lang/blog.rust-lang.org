@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-08-16
 title = "Contribute to the diagnostic translation effort!"
 author = "David Wood"
 team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"

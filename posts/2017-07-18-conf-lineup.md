@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2017-07-18
 title = "The 2017 Rust Conference Lineup"
 author = "Rust Community"
 description = "Three Rust conferences are coming up soon; join us at one near you!"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-06-23
 title = "Improved API tokens for crates.io"
 author = "Tobias Bieniek"
 team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"

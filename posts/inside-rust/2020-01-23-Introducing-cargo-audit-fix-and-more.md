@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-01-23
 title = "cargo-audit v0.11: Introducing the `fix` feature, yanked crate detection, and more"
 author = "Tony Arcieri"
 description = "Release announcement for cargo-audit v0.11 describing the new features"

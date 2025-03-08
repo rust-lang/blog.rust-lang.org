@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-08-04
 title = "Lang team August update"
 author = "Josh Triplett"
 description = "Lang team August update"

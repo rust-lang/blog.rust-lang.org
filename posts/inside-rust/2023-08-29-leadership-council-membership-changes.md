@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2023-08-29
 title = "Leadership Council Membership Changes"
 author = "Carol Nichols"
 team = "the leadership council <https://www.rust-lang.org/governance/teams/leadership-council>"

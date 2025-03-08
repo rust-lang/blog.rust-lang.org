@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2021-04-20
 title = "Jacob Hoffman-Andrews joins the Rustdoc team"
 author = "Guillaume Gomez"
 description = "new rustdoc team member"

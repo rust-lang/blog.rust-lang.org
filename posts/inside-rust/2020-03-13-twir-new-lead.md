@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2020-03-13
 title = "This Week in Rust is looking for a new maintainer."
 author = "Erin Power"
 team = "the community team <https://www.rust-lang.org/governance/teams/community>"

@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2022-11-29
 title = "Please welcome The 8472 to the Library team"
 author = "Mara Bos"
 team = "the library team <https://www.rust-lang.org/governance/teams/library>"

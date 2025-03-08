@@ -1,5 +1,6 @@
 +++
 layout = "post"
+date = 2017-05-15
 title = "Two years of Rust"
 author = "Carol (Nichols || Goulding)"
 description = "Rust, two years after 1.0"
