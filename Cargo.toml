@@ -23,4 +23,4 @@ tera = "=1.20.0"
 members = ["serve"]
 
 [dev-dependencies]
-insta = { version = "1.42.0", features = ["filters", "glob"] }
+insta = { version = "=1.42.2", features = ["filters", "glob"] }
