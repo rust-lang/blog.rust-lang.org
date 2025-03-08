@@ -1,5 +1,5 @@
 [workspace]
-members = ["serve"]
+members = ["front_matter", "serve"]
 
 [workspace.package]
 edition = "2024"
@@ -10,6 +10,7 @@ chrono = "=0.4.40"
 color-eyre = "=0.6.3"
 comrak = "=0.36.0"
 eyre = "=0.6.12"
+front_matter = { path = "front_matter" }
 insta = "=1.42.2"
 rayon = "=1.10.0"
 regex = "=1.11.1"
@@ -32,6 +33,7 @@ chrono.workspace = true
 color-eyre.workspace = true
 comrak = { workspace = true, features = ["bon"] }
 eyre.workspace = true
+front_matter.workspace = true
 rayon.workspace = true
 regex.workspace = true
 sass-rs.workspace = true
