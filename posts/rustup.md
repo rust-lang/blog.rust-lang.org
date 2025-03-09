@@ -86,25 +86,55 @@ Let's start with something simple: installing multiple Rust toolchains. In this
 example I create a new library, 'hello', then test it using rustc 1.8, then use
 rustup to install and test that same crate on the 1.9 beta.
 
-<div style="height:420px;margin:20px;">
-<script type="text/javascript"
-	src="https://asciinema.org/a/37cr19qny7451wenmpb113s1r.js"
-	id="asciicast-37cr19qny7451wenmpb113s1r"
-	async
-	data-speed="2"
-></script>
-</div>
-
-<!--
-```
+```console
 $ cargo new hello && cd hello
 $ rustc --version
+rustc 1.8.0 (db2939409 2016-04-11)
 $ cargo test
+   Compiling hello v0.1.0 (file:///home/user/hello)
+     Running target/debug/hello-b4f774924ded32e4
+
+running 1 test
+test tests::it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests hello
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
 $ rustup install beta
+info: syncing channel updates for 'beta-x86_64-unknown-linux-gnu'
+info: latest update on 2016-04-11, rust version 1.9.0-beta (e4e8b6668 2016-04-11)
+info: downloading component 'cargo'
+info: downloading component 'rust-docs'
+info: downloading component 'rust-std'
+info: downloading component 'rustc'
+info: installing component 'cargo'
+info: installing component 'rust-docs'
+info: installing component 'rust-std'
+info: installing component 'rustc'
+
+  beta-x86_64-unknown-linux-gnu installed - rustc 1.9.0-beta (e4e8b6668 2016-04-11)
+
 $ rustup run beta rustc --version
+rustc 1.9.0-beta (e4e8b6668 2016-04-11)
 $ rustup run beta cargo test
+   Compiling hello v0.1.0 (file:///home/user/hello)
+     Running target/debug/hello-f4f25bc615ec63f5
+
+running 1 test
+test tests::it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests hello
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
 ```
--->
 
 That's an easy way to verify your code works on the next Rust release. That's
 good Rust citizenship!
@@ -112,14 +142,32 @@ good Rust citizenship!
 We can use `rustup show` to show us the installed toolchains, and `rustup
 update` to keep them up to date with Rust's releases.
 
-<div style="height:420px;margin:20px;">
-<script type="text/javascript"
-	src="https://asciinema.org/a/ek7vdmfltncmgnip8cnuc6ua4.js"
-	id="asciicast-ek7vdmfltncmgnip8cnuc6ua4"
-	async
-	data-speed="2"
-></script>
-</div>
+```console
+$ rustup show
+Default host: x86_64-unknown-linux-gnu
+rustup home:  /home/user/.rustup
+
+installed toolchains
+--------------------
+
+stable-x86_64-unknown-linux-gnu (default)
+beta-x86_64-unknown-linux-gnu
+
+active toolchain
+----------------
+
+stable-x86_64-unknown-linux-gnu (default)
+rustc 1.8.0 (db2939409 2016-04-11)
+
+$ rustup update
+info: syncing channel updates for 'stable-x86_64-unknown-linux-gnu'
+info: syncing channel updates for 'beta-x86_64-unknown-linux-gnu'
+
+   stable-x86_64-unknown-linux-gnu unchanged - rustc 1.8.0 (db2939409 2016-04-11)
+     beta-x86_64-unknown-linux-gnu unchanged - rustc 1.9.0-beta (e4e8b6668 2016-04-11)
+
+info: cleaning up downloads & tmp directories
+```
 
 Finally, rustup can also change the default toolchain with `rustup default`:
 
