@@ -1,18 +1,11 @@
 use super::blogs::Manifest;
-use eyre::eyre;
+use front_matter::FrontMatter;
 use regex::Regex;
-use serde_derive::{Deserialize, Serialize};
-use std::path::{Path, PathBuf};
-
-#[derive(Debug, PartialEq, Deserialize)]
-struct TomlHeader {
-    title: String,
-    author: String,
-    #[serde(default)]
-    release: bool,
-    team: Option<String>,
-    layout: String,
-}
+use serde::Serialize;
+use std::{
+    path::{Path, PathBuf},
+    sync::LazyLock,
+};
 
 #[derive(Debug, Clone, Serialize)]
 pub struct Post {
@@ -49,23 +42,18 @@ impl Post {
         let filename = split.next().unwrap().to_string();
 
         let contents = std::fs::read_to_string(path)?;
-        if contents.len() < 5 {
-            return Err(eyre!(
-                "{path:?} is empty, or too short to have valid front matter"
-            ));
-        }
 
-        // toml headers.... we know the first four bytes of each file are "+++\n"
-        // so we need to find the end. we need the fours to adjust for those first bytes
-        let end_of_toml = contents[4..].find("+++").unwrap() + 4;
-        let toml = &contents[4..end_of_toml];
-        let TomlHeader {
-            author,
-            title,
-            release,
-            team: team_string,
-            layout,
-        } = toml::from_str(toml)?;
+        let (
+            FrontMatter {
+                author,
+                title,
+                release,
+                team: team_string,
+                layout,
+                ..
+            },
+            contents,
+        ) = front_matter::parse(&contents)?;
 
         let options = comrak::Options {
             render: comrak::RenderOptions::builder().unsafe_(true).build(),
@@ -78,8 +66,7 @@ impl Post {
             ..comrak::Options::default()
         };
 
-        // Content starts after "+++\n" (we don't assume an extra newline)
-        let contents = comrak::markdown_to_html(&contents[end_of_toml + 4..], &options);
+        let contents = comrak::markdown_to_html(contents, &options);
 
         // finally, the url.
         let mut url = PathBuf::from(&*filename);
@@ -113,9 +100,8 @@ impl Post {
 
         // If they supplied team, it should look like `team-text <team-url>`
         let (team, team_url) = team_string.map_or((None, None), |s| {
-            lazy_static::lazy_static! {
-                static ref R: Regex = Regex::new(r"(?P<name>[^<]*) <(?P<url>[^>]+)>").unwrap();
-            }
+            static R: LazyLock<Regex> =
+                LazyLock::new(|| Regex::new(r"(?P<name>[^<]*) <(?P<url>[^>]+)>").unwrap());
             let Some(captures) = R.captures(&s) else {
                 panic!(
                     "team from path `{}` should have format `$name <$url>`",

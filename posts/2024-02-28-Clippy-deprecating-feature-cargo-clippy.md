@@ -1,6 +1,6 @@
 +++
 layout = "post"
-title = "Clippy: Deprecating `feature = \"cargo-clippy\"`"
+title = 'Clippy: Deprecating `feature = "cargo-clippy"`'
 author = "The Clippy Team"
 +++
 

@@ -1,6 +1,6 @@
 +++
 layout = "post"
-title = "Improving async-await's \"Future is not Send\" diagnostic"
+title = '''Improving async-await's "Future is not Send" diagnostic'''
 author = "David Wood"
 description = "Highlighting a diagnostic improvement for async-await"
 team = "the Async Foundations WG <https://rust-lang.github.io/compiler-team/working-groups/async-await/>"
