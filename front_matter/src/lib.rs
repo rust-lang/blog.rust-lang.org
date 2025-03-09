@@ -1,10 +1,12 @@
 use eyre::bail;
 use serde::{Deserialize, Serialize};
+use toml::value::Date;
 
 /// The front matter of a markdown blog post.
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct FrontMatter {
     pub layout: String,
+    pub date: Date,
     pub title: String,
     pub author: String,
     pub description: Option<String>,

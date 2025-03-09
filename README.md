@@ -49,6 +49,7 @@ When writing a new blog post, keep in mind the file headers:
 ```md
 +++
 layout = "post"
+date = 2015-03-15
 title = "Title of the blog post"
 author = "Blog post author (or on behalf of which team)"
 release = true # (to be only used for official posts about Rust releases announcements)
