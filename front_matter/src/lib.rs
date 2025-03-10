@@ -1,4 +1,4 @@
-use eyre::bail;
+use eyre::{ContextCompat, bail};
 use serde::{Deserialize, Serialize};
 use toml::value::Date;
 
@@ -21,12 +21,12 @@ pub struct FrontMatter {
 /// the tuple.
 pub fn parse(markdown: &str) -> eyre::Result<(FrontMatter, &str)> {
     if !markdown.starts_with("+++\n") {
-        bail!("markdown file must start with the line `+++`");
+        bail!("missing start of TOML front matter (+++)");
     }
     let (front_matter, content) = markdown
         .trim_start_matches("+++\n")
         .split_once("\n+++\n")
-        .expect("couldn't find the end of the front matter: `+++`");
+        .context("missing end of TOML front matter (+++)")?;
 
     Ok((toml::from_str(front_matter)?, content))
 }
@@ -63,7 +63,9 @@ mod tests {
 
         for post in posts {
             let content = fs::read_to_string(&post).unwrap();
-            let normalized = normalize(&content).unwrap();
+            let normalized = normalize(&content).unwrap_or_else(|err| {
+                panic!("failed to normalize {:?}: {err}", post.file_name().unwrap());
+            });
 
             if content != normalized {
                 if env::var("FIX_FRONT_MATTER").is_ok() {
