@@ -63,7 +63,9 @@ mod tests {
 
         for post in posts {
             let content = fs::read_to_string(&post).unwrap();
-            let normalized = normalize(&content).unwrap();
+            let normalized = normalize(&content).unwrap_or_else(|err| {
+                panic!("failed to normalize {:?}: {err}", post.file_name().unwrap());
+            });
 
             if content != normalized {
                 if env::var("FIX_FRONT_MATTER").is_ok() {
