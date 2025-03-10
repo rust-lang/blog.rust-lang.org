@@ -14,7 +14,7 @@ If you have a previous version of Rust installed via `rustup`, you can get 1.82.
 $ rustup update stable
 ```
 
-If you don't have it already, you can [get `rustup`](https://www.rust-lang.org/install.html) from the appropriate page on our website, and check out the [detailed release notes for 1.82.0](https://doc.rust-lang.org/nightly/releases.html#version-1820-2024-10-17).
+If you don't have it already, you can [get `rustup`](https://www.rust-lang.org/install.html) from the appropriate page on our website, and check out the [detailed release notes for 1.82.0](https://doc.rust-lang.org/stable/releases.html#version-1820-2024-10-17).
 
 If you'd like to help us out by testing future releases, you might consider updating locally to use the beta channel (`rustup default beta`) or the nightly channel (`rustup default nightly`). Please [report](https://github.com/rust-lang/rust/issues/new/choose) any bugs you might come across!
 
@@ -22,7 +22,7 @@ If you'd like to help us out by testing future releases, you might consider upda
 
 ### `cargo info`
 
-Cargo now has an [`info` subcommand](https://doc.rust-lang.org/nightly/cargo/commands/cargo-info.html) to display information about a package in the registry, fulfilling a [long standing request](https://github.com/rust-lang/cargo/issues/948) just shy of its tenth anniversary! Several third-party extensions like this have been written over the years, and this implementation was developed as [cargo-information](https://crates.io/crates/cargo-information) before merging into Cargo itself.
+Cargo now has an [`info` subcommand](https://doc.rust-lang.org/stable/cargo/commands/cargo-info.html) to display information about a package in the registry, fulfilling a [long standing request](https://github.com/rust-lang/cargo/issues/948) just shy of its tenth anniversary! Several third-party extensions like this have been written over the years, and this implementation was developed as [cargo-information](https://crates.io/crates/cargo-information) before merging into Cargo itself.
 
 For example, here's what you could see for `cargo info cc`:
 
@@ -56,7 +56,7 @@ The Rust target `aarch64-apple-darwin` for macOS on 64-bit ARM (M1-family or lat
 
 [Mac Catalyst](https://developer.apple.com/mac-catalyst/) is a technology by Apple that allows running iOS applications natively on the Mac. This is especially useful when testing iOS-specific code, as `cargo test --target=aarch64-apple-ios-macabi --target=x86_64-apple-ios-macabi` mostly just works (in contrast to the usual iOS targets, which need to be bundled using external tooling before they can be run on a native device or in the simulator).
 
-[The targets](https://doc.rust-lang.org/nightly/rustc/platform-support/apple-ios-macabi.html) are now tier 2, and can be downloaded with `rustup target add aarch64-apple-ios-macabi x86_64-apple-ios-macabi`, so now is an excellent time to update your CI pipeline to test that your code also runs in iOS-like environments.
+[The targets](https://doc.rust-lang.org/stable/rustc/platform-support/apple-ios-macabi.html) are now tier 2, and can be downloaded with `rustup target add aarch64-apple-ios-macabi x86_64-apple-ios-macabi`, so now is an excellent time to update your CI pipeline to test that your code also runs in iOS-like environments.
 
 ### Precise capturing `use<..>` syntax
 
@@ -133,7 +133,7 @@ There are some limitations to what we're stabilizing today.  The `use<..>` synta
 
 Note that in Rust 2024, the examples above will "just work" without needing `use<..>` syntax (or any tricks).  This is because in the new edition, opaque types will automatically capture all lifetime parameters in scope.  This is a better default, and we've seen a lot of evidence about how this cleans up code.  In Rust 2024, `use<..>` syntax will serve as an important way of opting-out of that default.
 
-For more details about `use<..>` syntax, capturing, and how this applies to Rust 2024, see the ["RPIT lifetime capture rules"](https://doc.rust-lang.org/nightly/edition-guide/rust-2024/rpit-lifetime-capture.html) chapter of the edition guide.  For details about the overall direction, see our recent blog post, ["Changes to `impl Trait` in Rust 2024"](https://blog.rust-lang.org/2024/09/05/impl-trait-capture-rules.html).
+For more details about `use<..>` syntax, capturing, and how this applies to Rust 2024, see the ["RPIT lifetime capture rules"](https://doc.rust-lang.org/stable/edition-guide/rust-2024/rpit-lifetime-capture.html) chapter of the edition guide.  For details about the overall direction, see our recent blog post, ["Changes to `impl Trait` in Rust 2024"](https://blog.rust-lang.org/2024/09/05/impl-trait-capture-rules.html).
 
 ### Native syntax for creating a raw pointer
 
@@ -189,7 +189,7 @@ One benefit of this is that items within an `unsafe extern` block can be marked 
 
 In future releases, we'll be encouraging the use of `unsafe extern` with lints.  Starting in Rust 2024, using `unsafe extern` will be required.
 
-For further details, see [RFC 3484](https://github.com/rust-lang/rfcs/blob/master/text/3484-unsafe-extern-blocks.md) and the ["Unsafe extern blocks"](https://doc.rust-lang.org/nightly/edition-guide/rust-2024/unsafe-extern.html) chapter of the edition guide.
+For further details, see [RFC 3484](https://github.com/rust-lang/rfcs/blob/master/text/3484-unsafe-extern-blocks.md) and the ["Unsafe extern blocks"](https://doc.rust-lang.org/stable/edition-guide/rust-2024/unsafe-extern.html) chapter of the edition guide.
 
 ### Unsafe attributes
 
@@ -207,7 +207,7 @@ This affects the following attributes:
 - `link_section`
 - `export_name`
 
-For further details, see the ["Unsafe attributes"](https://doc.rust-lang.org/nightly/edition-guide/rust-2024/unsafe-attributes.html) chapter of the edition guide.
+For further details, see the ["Unsafe attributes"](https://doc.rust-lang.org/stable/edition-guide/rust-2024/unsafe-attributes.html) chapter of the edition guide.
 
 ### Omitting empty types in pattern matching
 
@@ -333,36 +333,36 @@ A future version of Rust is expected to generalize this to other expressions whi
 ### Stabilized APIs
 
 - [`std::thread::Builder::spawn_unchecked`](https://doc.rust-lang.org/stable/std/thread/struct.Builder.html#method.spawn_unchecked)
-- [`std::str::CharIndices::offset`](https://doc.rust-lang.org/nightly/std/str/struct.CharIndices.html#method.offset)
-- [`std::option::Option::is_none_or`](https://doc.rust-lang.org/nightly/std/option/enum.Option.html#method.is_none_or)
-- [`[T]::is_sorted`](https://doc.rust-lang.org/nightly/std/primitive.slice.html#method.is_sorted)
-- [`[T]::is_sorted_by`](https://doc.rust-lang.org/nightly/std/primitive.slice.html#method.is_sorted_by)
-- [`[T]::is_sorted_by_key`](https://doc.rust-lang.org/nightly/std/primitive.slice.html#method.is_sorted_by_key)
-- [`Iterator::is_sorted`](https://doc.rust-lang.org/nightly/std/iter/trait.Iterator.html#method.is_sorted)
-- [`Iterator::is_sorted_by`](https://doc.rust-lang.org/nightly/std/iter/trait.Iterator.html#method.is_sorted_by)
-- [`Iterator::is_sorted_by_key`](https://doc.rust-lang.org/nightly/std/iter/trait.Iterator.html#method.is_sorted_by_key)
-- [`std::future::Ready::into_inner`](https://doc.rust-lang.org/nightly/std/future/struct.Ready.html#method.into_inner)
-- [`std::iter::repeat_n`](https://doc.rust-lang.org/nightly/std/iter/fn.repeat_n.html)
-- [`impl<T: Clone> DoubleEndedIterator for Take<Repeat<T>>`](https://doc.rust-lang.org/nightly/std/iter/struct.Take.html#impl-DoubleEndedIterator-for-Take%3CRepeat%3CT%3E%3E)
-- [`impl<T: Clone> ExactSizeIterator for Take<Repeat<T>>`](https://doc.rust-lang.org/nightly/std/iter/struct.Take.html#impl-ExactSizeIterator-for-Take%3CRepeat%3CT%3E%3E)
-- [`impl<T: Clone> ExactSizeIterator for Take<RepeatWith<T>>`](https://doc.rust-lang.org/nightly/std/iter/struct.Take.html#impl-ExactSizeIterator-for-Take%3CRepeatWith%3CF%3E%3E)
-- [`impl Default for std::collections::binary_heap::Iter`](https://doc.rust-lang.org/nightly/std/collections/binary_heap/struct.Iter.html#impl-Default-for-Iter%3C'_,+T%3E)
-- [`impl Default for std::collections::btree_map::RangeMut`](https://doc.rust-lang.org/nightly/std/collections/btree_map/struct.RangeMut.html#impl-Default-for-RangeMut%3C'_,+K,+V%3E)
-- [`impl Default for std::collections::btree_map::ValuesMut`](https://doc.rust-lang.org/nightly/std/collections/btree_map/struct.ValuesMut.html#impl-Default-for-ValuesMut%3C'_,+K,+V%3E)
-- [`impl Default for std::collections::vec_deque::Iter`](https://doc.rust-lang.org/nightly/std/collections/vec_deque/struct.Iter.html#impl-Default-for-Iter%3C'_,+T%3E)
-- [`impl Default for std::collections::vec_deque::IterMut`](https://doc.rust-lang.org/nightly/std/collections/vec_deque/struct.IterMut.html#impl-Default-for-IterMut%3C'_,+T%3E)
-- [`Rc<T>::new_uninit`](https://doc.rust-lang.org/nightly/std/rc/struct.Rc.html#method.new_uninit)
-- [`Rc<MaybeUninit<T>>::assume_init`](https://doc.rust-lang.org/nightly/std/rc/struct.Rc.html#method.assume_init)
-- [`Rc<[T]>::new_uninit_slice`](https://doc.rust-lang.org/nightly/std/rc/struct.Rc.html#method.new_uninit_slice)
-- [`Rc<[MaybeUninit<T>]>::assume_init`](https://doc.rust-lang.org/nightly/std/rc/struct.Rc.html#method.assume_init-1)
-- [`Arc<T>::new_uninit`](https://doc.rust-lang.org/nightly/std/sync/struct.Arc.html#method.new_uninit)
-- [`Arc<MaybeUninit<T>>::assume_init`](https://doc.rust-lang.org/nightly/std/sync/struct.Arc.html#method.assume_init)
-- [`Arc<[T]>::new_uninit_slice`](https://doc.rust-lang.org/nightly/std/sync/struct.Arc.html#method.new_uninit_slice)
-- [`Arc<[MaybeUninit<T>]>::assume_init`](https://doc.rust-lang.org/nightly/std/sync/struct.Arc.html#method.assume_init-1)
-- [`Box<T>::new_uninit`](https://doc.rust-lang.org/nightly/std/boxed/struct.Box.html#method.new_uninit)
-- [`Box<MaybeUninit<T>>::assume_init`](https://doc.rust-lang.org/nightly/std/boxed/struct.Box.html#method.assume_init)
-- [`Box<[T]>::new_uninit_slice`](https://doc.rust-lang.org/nightly/std/boxed/struct.Box.html#method.new_uninit_slice)
-- [`Box<[MaybeUninit<T>]>::assume_init`](https://doc.rust-lang.org/nightly/std/boxed/struct.Box.html#method.assume_init-1)
+- [`std::str::CharIndices::offset`](https://doc.rust-lang.org/stable/std/str/struct.CharIndices.html#method.offset)
+- [`std::option::Option::is_none_or`](https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.is_none_or)
+- [`[T]::is_sorted`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.is_sorted)
+- [`[T]::is_sorted_by`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.is_sorted_by)
+- [`[T]::is_sorted_by_key`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.is_sorted_by_key)
+- [`Iterator::is_sorted`](https://doc.rust-lang.org/stable/std/iter/trait.Iterator.html#method.is_sorted)
+- [`Iterator::is_sorted_by`](https://doc.rust-lang.org/stable/std/iter/trait.Iterator.html#method.is_sorted_by)
+- [`Iterator::is_sorted_by_key`](https://doc.rust-lang.org/stable/std/iter/trait.Iterator.html#method.is_sorted_by_key)
+- [`std::future::Ready::into_inner`](https://doc.rust-lang.org/stable/std/future/struct.Ready.html#method.into_inner)
+- [`std::iter::repeat_n`](https://doc.rust-lang.org/stable/std/iter/fn.repeat_n.html)
+- [`impl<T: Clone> DoubleEndedIterator for Take<Repeat<T>>`](https://doc.rust-lang.org/stable/std/iter/struct.Take.html#impl-DoubleEndedIterator-for-Take%3CRepeat%3CT%3E%3E)
+- [`impl<T: Clone> ExactSizeIterator for Take<Repeat<T>>`](https://doc.rust-lang.org/stable/std/iter/struct.Take.html#impl-ExactSizeIterator-for-Take%3CRepeat%3CT%3E%3E)
+- [`impl<T: Clone> ExactSizeIterator for Take<RepeatWith<T>>`](https://doc.rust-lang.org/stable/std/iter/struct.Take.html#impl-ExactSizeIterator-for-Take%3CRepeatWith%3CF%3E%3E)
+- [`impl Default for std::collections::binary_heap::Iter`](https://doc.rust-lang.org/stable/std/collections/binary_heap/struct.Iter.html#impl-Default-for-Iter%3C'_,+T%3E)
+- [`impl Default for std::collections::btree_map::RangeMut`](https://doc.rust-lang.org/stable/std/collections/btree_map/struct.RangeMut.html#impl-Default-for-RangeMut%3C'_,+K,+V%3E)
+- [`impl Default for std::collections::btree_map::ValuesMut`](https://doc.rust-lang.org/stable/std/collections/btree_map/struct.ValuesMut.html#impl-Default-for-ValuesMut%3C'_,+K,+V%3E)
+- [`impl Default for std::collections::vec_deque::Iter`](https://doc.rust-lang.org/stable/std/collections/vec_deque/struct.Iter.html#impl-Default-for-Iter%3C'_,+T%3E)
+- [`impl Default for std::collections::vec_deque::IterMut`](https://doc.rust-lang.org/stable/std/collections/vec_deque/struct.IterMut.html#impl-Default-for-IterMut%3C'_,+T%3E)
+- [`Rc<T>::new_uninit`](https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#method.new_uninit)
+- [`Rc<MaybeUninit<T>>::assume_init`](https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#method.assume_init)
+- [`Rc<[T]>::new_uninit_slice`](https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#method.new_uninit_slice)
+- [`Rc<[MaybeUninit<T>]>::assume_init`](https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#method.assume_init-1)
+- [`Arc<T>::new_uninit`](https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.new_uninit)
+- [`Arc<MaybeUninit<T>>::assume_init`](https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.assume_init)
+- [`Arc<[T]>::new_uninit_slice`](https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.new_uninit_slice)
+- [`Arc<[MaybeUninit<T>]>::assume_init`](https://doc.rust-lang.org/stable/std/sync/struct.Arc.html#method.assume_init-1)
+- [`Box<T>::new_uninit`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.new_uninit)
+- [`Box<MaybeUninit<T>>::assume_init`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.assume_init)
+- [`Box<[T]>::new_uninit_slice`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.new_uninit_slice)
+- [`Box<[MaybeUninit<T>]>::assume_init`](https://doc.rust-lang.org/stable/std/boxed/struct.Box.html#method.assume_init-1)
 - [`core::arch::x86_64::_bextri_u64`](https://doc.rust-lang.org/stable/core/arch/x86_64/fn._bextri_u64.html)
 - [`core::arch::x86_64::_bextri_u32`](https://doc.rust-lang.org/stable/core/arch/x86_64/fn._bextri_u32.html)
 - [`core::arch::x86::_mm_broadcastsi128_si256`](https://doc.rust-lang.org/stable/core/arch/x86/fn._mm_broadcastsi128_si256.html)
@@ -375,42 +375,42 @@ A future version of Rust is expected to generalize this to other expressions whi
 - [`core::arch::x86::_mm_storeu_si64`](https://doc.rust-lang.org/stable/core/arch/x86/fn._mm_storeu_si64.html)
 - [`core::arch::x86::_mm_loadu_si16`](https://doc.rust-lang.org/stable/core/arch/x86/fn._mm_loadu_si16.html)
 - [`core::arch::x86::_mm_loadu_si32`](https://doc.rust-lang.org/stable/core/arch/x86/fn._mm_loadu_si32.html)
-- [`core::arch::wasm32::u8x16_relaxed_swizzle`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.u8x16_relaxed_swizzle.html)
-- [`core::arch::wasm32::i8x16_relaxed_swizzle`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.i8x16_relaxed_swizzle.html)
-- [`core::arch::wasm32::i32x4_relaxed_trunc_f32x4`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.i32x4_relaxed_trunc_f32x4.html)
-- [`core::arch::wasm32::u32x4_relaxed_trunc_f32x4`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.u32x4_relaxed_trunc_f32x4.html)
-- [`core::arch::wasm32::i32x4_relaxed_trunc_f64x2_zero`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.i32x4_relaxed_trunc_f64x2_zero.html)
-- [`core::arch::wasm32::u32x4_relaxed_trunc_f64x2_zero`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.u32x4_relaxed_trunc_f64x2_zero.html)
-- [`core::arch::wasm32::f32x4_relaxed_madd`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.f32x4_relaxed_madd.html)
-- [`core::arch::wasm32::f32x4_relaxed_nmadd`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.f32x4_relaxed_nmadd.html)
-- [`core::arch::wasm32::f64x2_relaxed_madd`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.f64x2_relaxed_madd.html)
-- [`core::arch::wasm32::f64x2_relaxed_nmadd`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.f64x2_relaxed_nmadd.html)
-- [`core::arch::wasm32::i8x16_relaxed_laneselect`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.i8x16_relaxed_laneselect.html)
-- [`core::arch::wasm32::u8x16_relaxed_laneselect`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.u8x16_relaxed_laneselect.html)
-- [`core::arch::wasm32::i16x8_relaxed_laneselect`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.i16x8_relaxed_laneselect.html)
-- [`core::arch::wasm32::u16x8_relaxed_laneselect`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.u16x8_relaxed_laneselect.html)
-- [`core::arch::wasm32::i32x4_relaxed_laneselect`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.i32x4_relaxed_laneselect.html)
-- [`core::arch::wasm32::u32x4_relaxed_laneselect`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.u32x4_relaxed_laneselect.html)
-- [`core::arch::wasm32::i64x2_relaxed_laneselect`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.i64x2_relaxed_laneselect.html)
-- [`core::arch::wasm32::u64x2_relaxed_laneselect`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.u64x2_relaxed_laneselect.html)
-- [`core::arch::wasm32::f32x4_relaxed_min`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.f32x4_relaxed_min.html)
-- [`core::arch::wasm32::f32x4_relaxed_max`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.f32x4_relaxed_max.html)
-- [`core::arch::wasm32::f64x2_relaxed_min`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.f64x2_relaxed_min.html)
-- [`core::arch::wasm32::f64x2_relaxed_max`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.f64x2_relaxed_max.html)
-- [`core::arch::wasm32::i16x8_relaxed_q15mulr`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.i16x8_relaxed_q15mulr.html)
-- [`core::arch::wasm32::u16x8_relaxed_q15mulr`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.u16x8_relaxed_q15mulr.html)
-- [`core::arch::wasm32::i16x8_relaxed_dot_i8x16_i7x16`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.i16x8_relaxed_dot_i8x16_i7x16.html)
-- [`core::arch::wasm32::u16x8_relaxed_dot_i8x16_i7x16`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.u16x8_relaxed_dot_i8x16_i7x16.html)
-- [`core::arch::wasm32::i32x4_relaxed_dot_i8x16_i7x16_add`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.i32x4_relaxed_dot_i8x16_i7x16_add.html)
-- [`core::arch::wasm32::u32x4_relaxed_dot_i8x16_i7x16_add`](https://doc.rust-lang.org/nightly/core/arch/wasm32/fn.u32x4_relaxed_dot_i8x16_i7x16_add.html)
+- [`core::arch::wasm32::u8x16_relaxed_swizzle`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.u8x16_relaxed_swizzle.html)
+- [`core::arch::wasm32::i8x16_relaxed_swizzle`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.i8x16_relaxed_swizzle.html)
+- [`core::arch::wasm32::i32x4_relaxed_trunc_f32x4`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.i32x4_relaxed_trunc_f32x4.html)
+- [`core::arch::wasm32::u32x4_relaxed_trunc_f32x4`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.u32x4_relaxed_trunc_f32x4.html)
+- [`core::arch::wasm32::i32x4_relaxed_trunc_f64x2_zero`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.i32x4_relaxed_trunc_f64x2_zero.html)
+- [`core::arch::wasm32::u32x4_relaxed_trunc_f64x2_zero`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.u32x4_relaxed_trunc_f64x2_zero.html)
+- [`core::arch::wasm32::f32x4_relaxed_madd`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.f32x4_relaxed_madd.html)
+- [`core::arch::wasm32::f32x4_relaxed_nmadd`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.f32x4_relaxed_nmadd.html)
+- [`core::arch::wasm32::f64x2_relaxed_madd`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.f64x2_relaxed_madd.html)
+- [`core::arch::wasm32::f64x2_relaxed_nmadd`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.f64x2_relaxed_nmadd.html)
+- [`core::arch::wasm32::i8x16_relaxed_laneselect`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.i8x16_relaxed_laneselect.html)
+- [`core::arch::wasm32::u8x16_relaxed_laneselect`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.u8x16_relaxed_laneselect.html)
+- [`core::arch::wasm32::i16x8_relaxed_laneselect`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.i16x8_relaxed_laneselect.html)
+- [`core::arch::wasm32::u16x8_relaxed_laneselect`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.u16x8_relaxed_laneselect.html)
+- [`core::arch::wasm32::i32x4_relaxed_laneselect`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.i32x4_relaxed_laneselect.html)
+- [`core::arch::wasm32::u32x4_relaxed_laneselect`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.u32x4_relaxed_laneselect.html)
+- [`core::arch::wasm32::i64x2_relaxed_laneselect`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.i64x2_relaxed_laneselect.html)
+- [`core::arch::wasm32::u64x2_relaxed_laneselect`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.u64x2_relaxed_laneselect.html)
+- [`core::arch::wasm32::f32x4_relaxed_min`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.f32x4_relaxed_min.html)
+- [`core::arch::wasm32::f32x4_relaxed_max`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.f32x4_relaxed_max.html)
+- [`core::arch::wasm32::f64x2_relaxed_min`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.f64x2_relaxed_min.html)
+- [`core::arch::wasm32::f64x2_relaxed_max`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.f64x2_relaxed_max.html)
+- [`core::arch::wasm32::i16x8_relaxed_q15mulr`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.i16x8_relaxed_q15mulr.html)
+- [`core::arch::wasm32::u16x8_relaxed_q15mulr`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.u16x8_relaxed_q15mulr.html)
+- [`core::arch::wasm32::i16x8_relaxed_dot_i8x16_i7x16`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.i16x8_relaxed_dot_i8x16_i7x16.html)
+- [`core::arch::wasm32::u16x8_relaxed_dot_i8x16_i7x16`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.u16x8_relaxed_dot_i8x16_i7x16.html)
+- [`core::arch::wasm32::i32x4_relaxed_dot_i8x16_i7x16_add`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.i32x4_relaxed_dot_i8x16_i7x16_add.html)
+- [`core::arch::wasm32::u32x4_relaxed_dot_i8x16_i7x16_add`](https://doc.rust-lang.org/stable/core/arch/wasm32/fn.u32x4_relaxed_dot_i8x16_i7x16_add.html)
 
 These APIs are now stable in const contexts:
 
-- [`std::task::Waker::from_raw`](https://doc.rust-lang.org/nightly/std/task/struct.Waker.html#method.from_raw)
-- [`std::task::Context::from_waker`](https://doc.rust-lang.org/nightly/std/task/struct.Context.html#method.from_waker)
-- [`std::task::Context::waker`](https://doc.rust-lang.org/nightly/std/task/struct.Context.html#method.waker)
-- [`$integer::from_str_radix`](https://doc.rust-lang.org/nightly/std/primitive.u32.html#method.from_str_radix)
-- [`std::num::ParseIntError::kind`](https://doc.rust-lang.org/nightly/std/num/struct.ParseIntError.html#method.kind)
+- [`std::task::Waker::from_raw`](https://doc.rust-lang.org/stable/std/task/struct.Waker.html#method.from_raw)
+- [`std::task::Context::from_waker`](https://doc.rust-lang.org/stable/std/task/struct.Context.html#method.from_waker)
+- [`std::task::Context::waker`](https://doc.rust-lang.org/stable/std/task/struct.Context.html#method.waker)
+- [`$integer::from_str_radix`](https://doc.rust-lang.org/stable/std/primitive.u32.html#method.from_str_radix)
+- [`std::num::ParseIntError::kind`](https://doc.rust-lang.org/stable/std/num/struct.ParseIntError.html#method.kind)
 
 ### Other changes
 
