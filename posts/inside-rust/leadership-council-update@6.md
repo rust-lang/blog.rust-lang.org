@@ -15,28 +15,28 @@ We wanted to share an update on what the Council has been working on since [our 
 
 ### Team structure updates
 
-There have been several updated and new teams added. Some of this is part of the ongoing work described in the [Shape of Rust](#shape-of-rust) section below.
+We have moved several teams and added some new ones. Some of this is part of the ongoing work described in the [Shape of Rust](#shape-of-rust) section below.
 
 The book team (which is responsible for [The Rust Programming Language book](https://doc.rust-lang.org/book/)) and the [Rust By Example](https://doc.rust-lang.org/rust-by-example/) team have been moved from the Launching Pad to subteams of the [lang-docs](https://www.rust-lang.org/governance/teams/lang#team-lang-docs) team. This is in effort to clean up the organization of the Launching Pad. [leadership-council#123](https://github.com/rust-lang/leadership-council/issues/123), [leadership-council#139](https://github.com/rust-lang/leadership-council/issues/139).
 
 The Edition 2024 Project Group has been converted to the Edition Team as part of the Launching Pad. This new team has a charter of clearer responsibilities for running the edition process on an ongoing basis. [leadership-council#149](https://github.com/rust-lang/leadership-council/issues/149).
 
-We approved the creation of the Mentorship Programs team as a subteam of the Launching Pad. This new team is responsible for the Rust organization's participation in programs like [Google Summer of Code](https://summerofcode.withgoogle.com/). Details about Rust's participation in GSoC 2025 was [recently announced](https://blog.rust-lang.org/2025/03/03/Rust-participates-in-GSoC-2025.html). [leadership-council#153](https://github.com/rust-lang/leadership-council/issues/153), [leadership-council#146](https://github.com/rust-lang/leadership-council/issues/146).
+We approved the creation of the Mentorship team as a subteam of the Launching Pad. This new team is responsible for the Rust organization's participation in programs like [Google Summer of Code](https://summerofcode.withgoogle.com/). Details about Rust's participation in GSoC 2025 was [recently announced](https://blog.rust-lang.org/2025/03/03/Rust-participates-in-GSoC-2025.html). [leadership-council#153](https://github.com/rust-lang/leadership-council/issues/153), [leadership-council#146](https://github.com/rust-lang/leadership-council/issues/146).
 
-We approved the creation of the [Project Goals team](https://rust-lang.github.io/rust-project-goals/admin/team.html) as a subteam of the Launching Pad. This team is responsible for running the project goals program. [leadership-council#150](https://github.com/rust-lang/leadership-council/issues/150)
+We approved the creation of the [Goals team](https://rust-lang.github.io/rust-project-goals/admin/team.html) as a subteam of the Launching Pad. This team is responsible for running the project goals program. [leadership-council#150](https://github.com/rust-lang/leadership-council/issues/150)
 
 ### Program management
 
-We approved reserving $200k (USD) of the Council's budget to hire for the [Program Management position](https://hackmd.io/VGauVVEyTN2M7pS6d9YTEA) ([leadership-council#151](https://github.com/rust-lang/leadership-council/issues/151)). This is initially intended to support the Program Goals and Edition programs. The Foundation is assisting with this process, and initial steps for advertising the position have started.
+We approved reserving $200k (USD) of the Council's budget to hire for the [Program Management position](https://hackmd.io/VGauVVEyTN2M7pS6d9YTEA) ([leadership-council#151](https://github.com/rust-lang/leadership-council/issues/151)). This is initially intended to support the Goals and Edition programs. The Foundation is assisting with this process, and initial steps for advertising the position have started.
 
 ### All hands
 
-Work continues to for preparation of the all-hands event in May 2025 at [RustWeek 2025] which corresponds with Rust's 10-year anniversary. We discussed and approved several requests:
+Work continues for preparation of the all-hands event in May 2025 at [RustWeek 2025] which corresponds with Rust's 10-year anniversary. We discussed and approved several requests:
 
-- Setting up the invitations. [leadership-council#135](https://github.com/rust-lang/leadership-council/issues/135)
+- We approved how to handle the invitations. [leadership-council#135](https://github.com/rust-lang/leadership-council/issues/135)
 - We agreed to raise the cap for travel grants that the Foundation may automatically accept due to the expected higher costs of this event. [leadership-council#148](https://github.com/rust-lang/leadership-council/issues/148)
 - We agreed that COVID safety should be a priority, and set up several expectations for the event. [leadership-council#147](https://github.com/rust-lang/leadership-council/issues/147)
-- Approved guidelines for guest invites to the all-hands [leadership-council#158](https://github.com/rust-lang/leadership-council/issues/158)
+- We approved guidelines for guest invites to the all-hands [leadership-council#158](https://github.com/rust-lang/leadership-council/issues/158)
 
 [RustWeek 2025]: https://rustweek.org/
 
@@ -49,7 +49,7 @@ And a few other items:
 - Started the [March 2025 representative selection process](https://blog.rust-lang.org/inside-rust/2025/02/14/leadership-council-repr-selection.html)
 - Finalized removal of core team infrastructure pieces [leadership-council#29](https://github.com/rust-lang/leadership-council/issues/29)
 - Added clarifications for the Project Director selection process [leadership-council#121](https://github.com/rust-lang/leadership-council/pull/121), [leadership-council#134](https://github.com/rust-lang/leadership-council/pull/134)
-- Approved the council's ask in the [cryptographic verification and mirroring goal](https://rust-lang.github.io/rust-project-goals/2025h1/verification-and-mirroring.html) and the [all-hands goal](https://rust-lang.github.io/rust-project-goals/2025h1/all-hands.html).
+- Clarified and approved the ask of the council in the [cryptographic verification and mirroring goal](https://rust-lang.github.io/rust-project-goals/2025h1/verification-and-mirroring.html) and the [all-hands goal](https://rust-lang.github.io/rust-project-goals/2025h1/all-hands.html).
 
 ## Ongoing work
 
