@@ -1,4 +1,5 @@
 use super::blogs::Manifest;
+use eyre::Context;
 use front_matter::FrontMatter;
 use regex::Regex;
 use serde::Serialize;
@@ -56,7 +57,8 @@ impl Post {
                 ..
             },
             contents,
-        ) = front_matter::parse(&contents)?;
+        ) = front_matter::parse(&contents)
+            .with_context(|| format!("failed to parse {filename}"))?;
 
         let options = comrak::Options {
             render: comrak::RenderOptions::builder().unsafe_(true).build(),
