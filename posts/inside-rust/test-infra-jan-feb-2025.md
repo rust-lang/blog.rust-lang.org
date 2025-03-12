@@ -26,7 +26,7 @@ As usual, if you encounter bugs or UX issues when using our test infrastructure,
 
 The old `ci.py` Python script used to orchestrate CI jobs was unmaintainable. Any changes to the python script risked bringing down the entire queue or bypass testing entirely. There was practically no test coverage. CI UX improvements were hard to implement and difficult to review.
 
-So, Jakub decided enough was enough and [rewritten `src/ci/github-actions/ci.py` as `src/ci/citool`](https://github.com/rust-lang/rust/pull/136864), a proper Rust CLI tool. This allowed the job definitions to be properly parsed and handled, and also enabled adding unit tests. It also allowed improving some error messages. Furthermore, it improved the UX of running the CI jobs locally (on Linux). Consult the [`rustc-dev-guide` docs in `rust-lang/rust`](https://github.com/rust-lang/rust/blob/master/src/doc/rustc-dev-guide/src/tests/ci.md#docker) for updated running instructions (at the time of writing, this hasn't been synced back to [rust-lang/rustc-dev-guide] yet).
+So, Jakub decided enough was enough and [rewritten `src/ci/github-actions/ci.py` as `src/ci/citool`](https://github.com/rust-lang/rust/pull/136864), a proper Rust CLI tool. This allowed the job definitions to be properly parsed and handled, and also enabled adding unit tests. It also allowed improving some error messages. Furthermore, it improved the UX of running the CI jobs locally (on Linux). Consult the [`rustc-dev-guide` docs in `rust-lang/rust`](https://github.com/rust-lang/rust/blob/master/src/doc/rustc-dev-guide/src/tests/ci.md#docker) for updated running instructions (at the time of writing, this hasn't been synced back to [rustc-dev-guide] yet).
 
 ### `try-job`s now supports glob patterns for job names
 
@@ -97,7 +97,7 @@ The migration effort took around a year, until we were finally able to declare a
 
 <https://github.com/rust-lang/rust/pull/137077> implemented postprocessing logic for bootstrap test and build metrics to convert them into [GitHub job summaries][github-job-summaries].
 
-![Sample job summary](../../../../images/2025-03-11-test-infra-jan-feb-2025/example-ci-job-summary.png)
+![Sample job summary](../../../../images/inside-rust/test-infra-jan-feb-2025/example-ci-job-summary.png)
 
 [github-job-summaries]: https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/
 
