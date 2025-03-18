@@ -24,9 +24,9 @@ appropriate page on our website.
 
 ## What's in 1.85.1
 
-### Fixed 2024 Edition doctests
+### Fixed combined doctest compilation
 
-Due to a bug in the implementation, [combined doctests](https://doc.rust-lang.org/edition-guide/rust-2024/rustdoc-doctests.html) did not work as intended in the stable 2024 Edition. Internal errors with feature stability caused rustdoc to automatically use its "unmerged" fallback method instead, like previous editions.
+Due to a bug in the implementation, [combined doctests](https://doc.rust-lang.org/edition-guide/rust-2024/rustdoc-doctests.html) did not work as intended in the stable 2024 Edition. Internal errors with feature stability caused rustdoc to automatically use its "unmerged" fallback method instead, like in previous editions.
 
 Those errors are now fixed in 1.85.1, realizing the performance improvement of combined doctest compilation as intended! See the [backport issue](https://github.com/rust-lang/rust/issues/138418) for more details, including the risk analysis of making this behavioral change in a point release.
 
