@@ -230,6 +230,12 @@ you. There are a few options at your disposal but they all have their downsides:
    stable Rust. The downside of this, however, is that you may not be able to
    easily change or update your C ABI in some situations.
 
+4. Update to Rust nightly as your compiler and pass `-Zwasm-c-abi=legacy`. This
+   will silence compiler warnings for now but be aware that the ABI will still
+   change in the future and the `-Zwasm-c-abi=legacy` option will be removed
+   entirely. When the `-Zwasm-c-abi=legacy` option is removed the only option
+   will be the standard C ABI, what `-Zwasm-c-abi=spec` today enables.
+
 If you have uncertainties, questions, or difficulties, feel free to reach out on
 [the tracking issue for the future-incompat warning][tracking] or on Zulip.
 
