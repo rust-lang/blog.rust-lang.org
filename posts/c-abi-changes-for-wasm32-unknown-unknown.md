@@ -12,6 +12,10 @@ additionally [leaks internal compiler implementation details][leak-details] of
 both the Rust compiler and LLVM. This will change in a future version of the
 Rust compiler and the [official C ABI][tool-conventions] will be used instead.
 
+This post details some history behind this change and the rationale for why it's
+being announced here, but you can skip straight to ["Am I
+affected?"](#am-i-affected) as well.
+
 [tool-conventions]: https://github.com/WebAssembly/tool-conventions/blob/main/BasicCABI.md
 [leak-details]: https://github.com/rust-lang/rust/issues/115666
 
@@ -98,7 +102,7 @@ This will generate the following WebAssembly function:
 
 Notably you can see here that the struct `Pair` was "splatted" into its two
 components so the actual `$pair_add` function takes two arguments, the `x` and
-`y` fields. The [tool-conventions], however [specifically says] that "other
+`y` fields. The [tool-conventions], however specifically says that "other
 struct[s] or union[s]" are passed indirectly, notably through memory. We can see
 this by compiling this C code:
 
