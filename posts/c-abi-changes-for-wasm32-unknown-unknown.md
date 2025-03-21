@@ -151,7 +151,7 @@ in-memory.
 
 At the time this was discovered it was found to be significantly difficult to
 fix `wasm-bindgen` to not rely on this splatting behavior. At the time it also
-wasn't though to be a widespread issue nor was it costly for the compiler to
+wasn't thought to be a widespread issue nor was it costly for the compiler to
 have a non-standard ABI. Over the years though the pressure has mounted. The
 Rust compiler is carrying an [ever-growing list of hacks][leak-details] to work
 around the non-standard C ABI on `wasm32-unknown-unknown`. Additionally more
