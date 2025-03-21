@@ -34,7 +34,7 @@ the non-standard definition remained in use for `wasm32-unknown-unknown`.
 The time has now come to correct this historical mistake and the Rust compiler
 will soon be using a correct ABI definition for the `wasm32-unknown-unknown`
 target. This means, however, that generated WebAssembly binaries will be
-different than before?
+different than before.
 
 ## What is a WebAssembly C ABI?
 
@@ -128,6 +128,10 @@ which yields the generated function:
 Here we can see, sure enough, that `pair` is passed in linear memory and this
 function only has a single argument, not two. This argument is a pointer into
 linear memory which stores the `x` and `y` fields.
+
+The Diplomat project has [compiled a much more comprehensive overview][quirks]
+than this and it's recommended to check that out if you're curious for an even
+deeper dive.
 
 ## What hasn't this been fixed?
 
@@ -256,3 +260,4 @@ can be removed.
 [conventions-struct]: https://github.com/WebAssembly/tool-conventions/blob/main/BasicCABI.md#function-arguments-and-return-values
 [wasm-bindgen]: https://github.com/rustwasm/wasm-bindgen
 [tracking]: https://github.com/rust-lang/rust/issues/138762
+[quirks]: https://github.com/rust-diplomat/diplomat/blob/main/docs/wasm_abi_quirks.md
