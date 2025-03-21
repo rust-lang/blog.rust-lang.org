@@ -18,8 +18,8 @@ Rust compiler and the [official C ABI][tool-conventions] will be used instead.
 ## History of `wasm32-unknown-unknown`'s C ABI
 
 When the `wasm32-unknown-unknown` target [was originally added][inception] in
-2017 not much care was given to the exact definition of the `extern "C"` ABI at
-the time. In 2018 [an ABI definition wasm added just for wasm][orig-abi] and the
+2017, not much care was given to the exact definition of the `extern "C"` ABI at
+the time. In 2018 [an ABI definition was added just for wasm][orig-abi] and the
 target is still using this definition [to this day][current-abi]. This
 definitions has become more and more problematic over time and while some issues
 have been fixed, the root cause still remains.
@@ -27,7 +27,7 @@ have been fixed, the root cause still remains.
 Notably this ABI definition does not match the [tool-conventions] definition of
 the C API, which is the current standard for how WebAssembly toolchains should
 talk to one another. Originally this non-standard definition was used for all
-WebAssembly based target except Emscripten, but [this changed in 2021][fix-wasi]
+WebAssembly based targets except Emscripten, but [this changed in 2021][fix-wasi]
 where the WASI targets for Rust use a corrected ABI definition. Still, however,
 the non-standard definition remained in use for `wasm32-unknown-unknown`.
 
@@ -48,7 +48,7 @@ The definition of an ABI answers questions along the lines of:
 * What is the size and alignment of a type in memory?
 
 For WebAssembly these answers are a little different than native platforms.
-WebAssembly does not have physical registers for example and functions must all
+For example, WebAssembly does not have physical registers and functions must all
 be annotated with a type. What WebAssembly does have is types such as `i32`,
 `i64`, `f32`, and `f64`. This means that for WebAssembly an ABI needs to define
 how to represent values in these types.
@@ -61,14 +61,14 @@ is passed directly as a parameter as a function argument. If the Rust structure
 `#[repr(C)] struct Pair(f32, f64)` is returned from a function then a return
 pointer is used which must have alignment 8 and size of 16 bytes.
 
-In essence the WebAssembly C ABI is acting as a bridge between C's type system
+In essence, the WebAssembly C ABI is acting as a bridge between C's type system
 and the WebAssembly type system. This includes details such as in-memory layouts
 and translations of a C function signature to a WebAssembly function signature.
 
 ## How is `wasm32-unknown-unknown` non-standard?
 
-Despite the ABI definition today being non-standard many aspects of it are
-still the same as what [tool-conventions] specifies. For example size/alignment
+Despite the ABI definition today being non-standard, many aspects of it are
+still the same as what [tool-conventions] specifies. For example, size/alignment
 of types is the same as it is in C. The main difference is how function
 signatures are calculated. An example (where you can follow along on [godbolt])
 is:
@@ -133,17 +133,17 @@ The Diplomat project has [compiled a much more comprehensive overview][quirks]
 than this and it's recommended to check that out if you're curious for an even
 deeper dive.
 
-## What hasn't this been fixed?
+## Why hasn't this been fixed long ago already?
 
 For `wasm32-unknown-unknown` it was well-known at the time in 2021 when WASI's
-ABI was updated that the ABI was non-standard. Why then, in the 4 years within
-that duration and 4 years afterward has the ABI not been fixed like with WASI?
+ABI was updated that the ABI was non-standard. Why then has the ABI not been
+fixed like with WASI?
 The main reason originally for this was the [wasm-bindgen
 project][wasm-bindgen].
 
 In `wasm-bindgen` the goal is to make it easy to integrate Rust into a web
 browser with WebAssembly. JavaScript is used to interact with host APIs and the
-Rust module itself. Naturally this communication touches on a lot of ABI
+Rust module itself. Naturally, this communication touches on a lot of ABI
 details! The problem was that `wasm-bindgen` relied on the above example,
 specifically having `Pair` "splatted" across arguments instead of passed
 indirectly. The generated JS wouldn't work correctly if the argument was passed
@@ -160,7 +160,7 @@ gotten greater that there are more unknown projects relying on the non-standard
 behavior.
 
 In late 2023 [the wasm-bindgen project fixed bindings generation][wbgfix] to be
-compatible with the standard definition of `extern "C"`. In the following months
+unaffected by the transition to the standard definition of `extern "C"`. In the following months
 a [future-incompat lint was added to rustc][fcw1] to specifically migrate users
 of old `wasm-bindgen` versions to a "fixed" version. This was in anticipation of
 changing the ABI of `wasm32-unknown-unknown` once enough time had passed. Since
