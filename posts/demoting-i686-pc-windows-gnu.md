@@ -1,17 +1,17 @@
 +++
 layout = "post"
 date = 2025-03-12
-title = "Demoting i686-pc-windows-gnu"
+title = "Demoting i686-pc-windows-gnu to Tier 2"
 author = "Noratrieb"
 team = "Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
 +++
 
 In Rust 1.87.0, the Tier 1 target `i686-pc-windows-gnu` will be demoted to Tier 2.
-As a Tier 2 Target, builds will continue to be distributed for both the standard library and the compiler for now.
+As a Tier 2 Target, builds will continue to be distributed for both the standard library and the compiler.
 
 ## Background
 
-Rust has supported Windows for a long time, with two different flavors of Windows targets: MSVC-based and GNU-based. MSVC-based targets (for example the most popular Windows target `x86_64-pc-windows-msvc`) use Microsoft’s native linker and libraries, while GNU-based targets (like `i686-pc-windows-gnu`) are built entirely from free software components like `gcc`, `ld`, and MinGW.
+Rust has supported Windows for a long time, with two different flavors of Windows targets: MSVC-based and GNU-based. MSVC-based targets (for example the most popular Windows target `x86_64-pc-windows-msvc`) use Microsoft’s native linker and libraries, while GNU-based targets (like `i686-pc-windows-gnu`) are built entirely from free software components like `gcc`, `ld`, and mingw-w64.
 
 The major reason to use a GNU-based toolchain instead of the native MSVC-based one is cross-compilation and licensing. `link.exe` only runs on Windows (barring Wine hacks) and requires a license for commercial usage.
 
@@ -22,12 +22,12 @@ This is the highest level of support we have, and is only used for the most high
 The `*-windows-gnu` targets currently do not have any dedicated target maintainers.
 We do not have a lot of expertise for this toolchain, and issues often aren't fixed and cause problems in CI that we have a hard time to debug.
 
-The 32-bit version of this target is especially problematic and has significantly less usage than `x86_64-pc-windows-gnu`, which is why it's being demoted to Tier 2.
+The 32-bit version of this target is especially problematic and has significantly less usage than `x86_64-pc-windows-gnu`, which is why `i686-pc-windows-gnu` is being demoted to Tier 2.
 
 ## What is changed?
 
 After Rust 1.87.0, `i686-pc-windows-gnu` will now be Tier 2 with host tools.
-For users, nothing will change immediately. Builds of both the standard library and the compiler will still be distributed by the Rust Project for use via `rustup` or alterantive installation methods.
+For users, nothing will change immediately. Builds of both the standard library and the compiler will still be distributed by the Rust Project for use via `rustup` or alternative installation methods.
 
 This does mean that in the future, this target will likely accumulate bugs faster because of the reduced testing.
 
