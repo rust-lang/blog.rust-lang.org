@@ -305,7 +305,7 @@ pub fn main() -> eyre::Result<()> {
 
 #[test]
 fn snapshot() {
-    std::fs::remove_dir_all(concat!(env!("CARGO_MANIFEST_DIR"), "/site")).unwrap();
+    let _ = std::fs::remove_dir_all(concat!(env!("CARGO_MANIFEST_DIR"), "/site"));
     main().unwrap();
     let timestamped_files = ["releases.json", "feed.xml"];
     let inexplicably_non_deterministic_files = ["images/2023-08-rust-survey-2022/experiences.png"];
