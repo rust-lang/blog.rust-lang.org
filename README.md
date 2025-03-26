@@ -60,8 +60,9 @@ release = true # (to be only used for official posts about Rust releases announc
 
 If you're making changes to how the site is generated, you may want to check the impact your changes have on the output.
 For this purpose, there is a setup to do snapshot testing over the entire output directory.
-It's not run in CI, because the number of snapshots is too large.
-But you can run these tests locally as needed.
+
+To run these tests in CI, add the string `RUN_SNAPSHOT_TESTS` to the PR description.
+You can also run these tests locally for a faster feedback cycle:
 
 - Make sure you have [cargo-insta](https://insta.rs/docs/quickstart/) installed.
 
