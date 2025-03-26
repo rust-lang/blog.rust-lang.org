@@ -8,7 +8,7 @@ team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadershi
 
 The March 2025 selections for [Leadership Council] representatives have been finalized. The compiler team has chosen [Josh Stone] as their new representative. [Eric Huss] and [James Munns] will continue to represent [Devtools] and [Launching Pad] respectively.
 
-We'd like to give our thanks to the outgoing representative [Eric Holk] for his many substantial and valuable contributions.
+We'd like to give our thanks to the outgoing representative [Eric Holk] for his many substantial and valuable contributions since the foundation of the Council. Eric helped to establish some of the core values of the Council, including transparency and accessibility of Council members. He drove the initial Project Director elections, and also strongly supported using project resources to advance the project, such as through project grants and developing support staff.
 
 [Leadership Council]: https://www.rust-lang.org/governance/teams/leadership-council
 [compiler]: https://www.rust-lang.org/governance/teams/compiler
