@@ -297,7 +297,7 @@ fn copy_dir(source: impl AsRef<Path>, dest: impl AsRef<Path>) -> Result<(), io::
 }
 
 pub fn main() -> eyre::Result<()> {
-    let blog = Generator::new("site", "content")?;
+    let blog = Generator::new("public", "content")?;
 
     blog.render()?;
 
@@ -306,11 +306,11 @@ pub fn main() -> eyre::Result<()> {
 
 #[test]
 fn snapshot() {
-    let _ = std::fs::remove_dir_all(concat!(env!("CARGO_MANIFEST_DIR"), "/site"));
+    let _ = std::fs::remove_dir_all(concat!(env!("CARGO_MANIFEST_DIR"), "/public"));
     main().unwrap();
     let timestamped_files = ["releases.json", "feed.xml"];
     let inexplicably_non_deterministic_files = ["images/2023-08-rust-survey-2022/experiences.png"];
-    insta::glob!("..", "site/**/*", |path| {
+    insta::glob!("..", "public/**/*", |path| {
         if path.is_dir() {
             return;
         }
@@ -335,7 +335,7 @@ fn snapshot() {
         (r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+\d{2}:\d{2}", "(filtered timestamp)"),
     ]}, {
         for file in timestamped_files {
-            let content = fs::read(format!("site/{file}")).unwrap();
+            let content = fs::read(format!("public/{file}")).unwrap();
             let content = String::from_utf8_lossy(&content).into_owned();
             insta::assert_snapshot!(content);
         }
