@@ -80,6 +80,7 @@ impl Generator {
         let mut tera = Tera::new("templates/*")?;
         tera.register_filter("month_name", month_name);
         tera.register_filter("escape_hbs", escape_hbs);
+        tera.autoescape_on(vec![]); // disable auto-escape for .html templates
         Ok(Generator {
             tera,
             blogs: self::blogs::load(posts_directory.as_ref())?,
@@ -188,7 +189,7 @@ impl Generator {
             "root": blog.path_back_to_root(),
         });
         let path = blog.prefix().join("index.html");
-        self.render_template(&path, "index.tera", data)?;
+        self.render_template(&path, "index.html", data)?;
         Ok(path)
     }
 
@@ -212,7 +213,7 @@ impl Generator {
         });
 
         let path = path.join(filename);
-        self.render_template(&path, &format!("{}.tera", post.layout), data)?;
+        self.render_template(&path, &format!("{}.html", post.layout), data)?;
         Ok(path)
     }
 
@@ -224,7 +225,7 @@ impl Generator {
             "feed_updated": chrono::Utc::now().with_nanosecond(0).unwrap().to_rfc3339(),
         });
 
-        self.render_template(blog.prefix().join("feed.xml"), "feed.tera", data)?;
+        self.render_template(blog.prefix().join("feed.xml"), "feed.xml", data)?;
         Ok(())
     }
 
