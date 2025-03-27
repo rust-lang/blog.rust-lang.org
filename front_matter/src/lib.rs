@@ -55,9 +55,9 @@ mod tests {
     fn front_matter_is_normalized() {
         let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("..");
 
-        let posts = fs::read_dir(repo_root.join("posts"))
+        let posts = fs::read_dir(repo_root.join("content"))
             .unwrap()
-            .chain(fs::read_dir(repo_root.join("posts/inside-rust")).unwrap())
+            .chain(fs::read_dir(repo_root.join("content/inside-rust")).unwrap())
             .map(|p| p.unwrap().path())
             .filter(|p| p.extension() == Some("md".as_ref()));
 

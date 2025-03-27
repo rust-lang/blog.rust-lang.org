@@ -19,11 +19,11 @@ $ cargo run
 
 You could do it in release mode if you'd like, but it's pretty fast in debug.
 
-From there, the generated HTML will be in a `site` directory.
-Open `site/index.html` in your web browser to view the site.
+From there, the generated HTML will be in a `public` directory.
+Open `public/index.html` in your web browser to view the site.
 
 ```console
-$ firefox site/index.html
+$ firefox public/index.html
 ```
 
 You can also run a server, if you need to preview your changes on a different machine:

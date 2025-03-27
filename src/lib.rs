@@ -80,6 +80,7 @@ impl Generator {
         let mut tera = Tera::new("templates/*")?;
         tera.register_filter("month_name", month_name);
         tera.register_filter("escape_hbs", escape_hbs);
+        tera.autoescape_on(vec![]); // disable auto-escape for .html templates
         Ok(Generator {
             tera,
             blogs: self::blogs::load(posts_directory.as_ref())?,
@@ -119,7 +120,7 @@ impl Generator {
     }
 
     fn compile_sass(&self, filename: &str) -> eyre::Result<()> {
-        let scss_file = format!("./src/styles/{filename}.scss");
+        let scss_file = format!("./sass/{filename}.scss");
         let css_file = format!("./static/styles/{filename}.css");
 
         let css = compile_file(&scss_file, Options::default())
@@ -188,7 +189,7 @@ impl Generator {
             "root": blog.path_back_to_root(),
         });
         let path = blog.prefix().join("index.html");
-        self.render_template(&path, "index.tera", data)?;
+        self.render_template(&path, "index.html", data)?;
         Ok(path)
     }
 
@@ -212,7 +213,7 @@ impl Generator {
         });
 
         let path = path.join(filename);
-        self.render_template(&path, &format!("{}.tera", post.layout), data)?;
+        self.render_template(&path, &format!("{}.html", post.layout), data)?;
         Ok(path)
     }
 
@@ -224,7 +225,7 @@ impl Generator {
             "feed_updated": chrono::Utc::now().with_nanosecond(0).unwrap().to_rfc3339(),
         });
 
-        self.render_template(blog.prefix().join("feed.xml"), "feed.tera", data)?;
+        self.render_template(blog.prefix().join("feed.xml"), "feed.xml", data)?;
         Ok(())
     }
 
@@ -296,7 +297,7 @@ fn copy_dir(source: impl AsRef<Path>, dest: impl AsRef<Path>) -> Result<(), io::
 }
 
 pub fn main() -> eyre::Result<()> {
-    let blog = Generator::new("site", "posts")?;
+    let blog = Generator::new("public", "content")?;
 
     blog.render()?;
 
@@ -305,11 +306,11 @@ pub fn main() -> eyre::Result<()> {
 
 #[test]
 fn snapshot() {
-    let _ = std::fs::remove_dir_all(concat!(env!("CARGO_MANIFEST_DIR"), "/site"));
+    let _ = std::fs::remove_dir_all(concat!(env!("CARGO_MANIFEST_DIR"), "/public"));
     main().unwrap();
     let timestamped_files = ["releases.json", "feed.xml"];
     let inexplicably_non_deterministic_files = ["images/2023-08-rust-survey-2022/experiences.png"];
-    insta::glob!("..", "site/**/*", |path| {
+    insta::glob!("..", "public/**/*", |path| {
         if path.is_dir() {
             return;
         }
@@ -334,7 +335,7 @@ fn snapshot() {
         (r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+\d{2}:\d{2}", "(filtered timestamp)"),
     ]}, {
         for file in timestamped_files {
-            let content = fs::read(format!("site/{file}")).unwrap();
+            let content = fs::read(format!("public/{file}")).unwrap();
             let content = String::from_utf8_lossy(&content).into_owned();
             insta::assert_snapshot!(content);
         }
