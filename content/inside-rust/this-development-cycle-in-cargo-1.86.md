@@ -20,11 +20,11 @@ This is a summary of what has been happening around Cargo development for the la
   - [Polishing diagnostics](#polishing-diagnostics)
   - [`cargo package` VCS dirty checks](#cargo-package-vcs-dirty-checks)
   - [Cargo script](#cargo-script)
-  - [Identifying unused `#[test]`s](#identifying-unused-tests)
+  - [Identifying unused `#[test]`s](#identifying-unused-test-s)
 - [Design discussions](#design-discussions)
   - [`CARGO` environment variable](#cargo-environment-variable)
   - [Specifying supported platforms in packages](#specifying-supported-platforms-in-packages)
-  - [Implicitly insert workspace members into `workspace.dependencies`](#implicitly-insert-workspace-members-into-workspacedependencies)
+  - [Implicitly insert workspace members into `workspace.dependencies`](#implicitly-insert-workspace-members-into-workspace-dependencies)
 - [Misc](#misc)
 - [Focus areas without progress](#focus-areas-without-progress)
 

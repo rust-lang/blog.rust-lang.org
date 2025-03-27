@@ -22,7 +22,7 @@ Much of writing software revolves around checking if some data has some shape ("
 
 Pattern matching in Rust works by checking if a [*place*][ref_place] in memory (the "data") matches a certain *pattern*. In this post, we will look at some recent improvements to patterns soon available in stable Rust as well as some more already available in nightly.
 
-If you are familiar with the nightly features discussed and would like to help out with the efforts to drive them to stable, jump ahead to [*How can I help?](#how-can-i-help?).
+If you are familiar with the nightly features discussed and would like to help out with the efforts to drive them to stable, jump ahead to [*How can I help?](#how-can-i-help).
 
 ## Subslice patterns, `[head, tail @ ..]`
 

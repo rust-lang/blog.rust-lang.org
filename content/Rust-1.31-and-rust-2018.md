@@ -44,7 +44,7 @@ post, so here's a table of contents:
 * [New website](#new-website)
 * [Library stabilizations](#library-stabilizations)
 * [Cargo features](#cargo-features)
-* [Contributors](#contributors-to-131.0)
+* [Contributors](#contributors-to-1-31-0)
 
 ### Rust 2018
 

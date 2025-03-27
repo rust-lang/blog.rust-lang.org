@@ -19,7 +19,7 @@ This is a summary of what has been happening around Cargo development for the la
 - [Implementation](#implementation)
   - [MSRV-aware Cargo](#msrv-aware-cargo)
   - [Shell completions](#shell-completions)
-  - [Public/private dependencies](#publicprivate-dependencies)
+  - [Public/private dependencies](#public-private-dependencies)
   - [Optimizing cargo](#optimizing-cargo)
 - [Design discussions](#design-discussions)
   - [Target and target](#target-and-target)
