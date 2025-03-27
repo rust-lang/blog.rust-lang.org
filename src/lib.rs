@@ -296,7 +296,7 @@ fn copy_dir(source: impl AsRef<Path>, dest: impl AsRef<Path>) -> Result<(), io::
 }
 
 pub fn main() -> eyre::Result<()> {
-    let blog = Generator::new("site", "posts")?;
+    let blog = Generator::new("site", "content")?;
 
     blog.render()?;
 
