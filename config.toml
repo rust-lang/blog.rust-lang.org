@@ -1,0 +1,13 @@
+# https://www.getzola.org/documentation/getting-started/configuration/
+
+base_url = "https://blog.rust-lang.org"
+compile_sass = true
+build_search_index = false
+
+[markdown]
+highlight_code = true
+highlight_theme = "boron"
+bottom_footnotes = true
+
+[extra]
+# Put all your custom variables here
