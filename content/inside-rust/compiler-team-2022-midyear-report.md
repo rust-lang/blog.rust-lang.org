@@ -53,22 +53,22 @@ Backend (🛠️, 👩‍💻) |                             | [Aspirations][Bac
 Diagnostics  (👩‍💻) |                             | [Aspirations][Diagnostics Aspirations]
 
 [Concrete Initiatives]: #concrete-initiatives
-[I-unsound Issues]: #i-unsound-issues-
-[Async Initiatives]: #async-rust-initiatives--
-[Debugging Initiatives]: #debugging-initiatives-
-[Faster Builds Initiatives]: #faster-builds-initiatives--%EF%B8%8F
-[Expressiveness Initiatives]: #expressiveness-initiatives--
-[Librarification Initiatives]: #librarification-initiatives-%EF%B8%8F
+[I-unsound Issues]: #i-unsound-issues-crab
+[Async Initiatives]: #async-rust-initiatives-crab-woman-computer
+[Debugging Initiatives]: #debugging-initiatives-crab
+[Faster Builds Initiatives]: #faster-builds-initiatives-woman-computer-tools
+[Expressiveness Initiatives]: #expressiveness-initiatives-woman-computer-crab
+[Librarification Initiatives]: #librarification-initiatives-tools
 
 [Aspirations]: #aspirations
-[P-high Aspirations]: #p-high-aspirations-
-[Debugging Aspirations]: #debugging-aspirations-
-[Faster Builds Aspirations]: #faster-builds-aspirations--%EF%B8%8F
-[Expressiveness Aspirations]: #expressiveness-aspirations--
-[Librarification Aspirations]: #librarification-aspirations-%EF%B8%8F
-[Team Operations]: #compiler-team-operations-aspirations-%EF%B8%8F
-[Backend Aspirations]: #compiler-backend-aspirations-%EF%B8%8F-
-[Diagnostics Aspirations]: #diagnostics-aspirations-
+[P-high Aspirations]: #p-high-backlog-processing-aspirations-crab
+[Debugging Aspirations]: #debugging-aspirations-woman-computer
+[Faster Builds Aspirations]: #faster-builds-aspirations-woman-computer-tools
+[Expressiveness Aspirations]: #expressiveness-aspirations-crab-woman-computer
+[Librarification Aspirations]: #librarification-aspirations-tools
+[Team Operations]: #compiler-team-operations-aspirations-tools
+[Backend Aspirations]: #compiler-backend-aspirations-tools-woman-computer
+[Diagnostics Aspirations]: #diagnostics-aspirations-woman-computer
 
 ## Overall Survey Results
 

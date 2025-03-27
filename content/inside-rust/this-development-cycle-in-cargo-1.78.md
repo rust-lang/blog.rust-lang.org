@@ -32,7 +32,7 @@ This is an experiment in finding better ways to be engaged with the community an
   - [Default Edition](#default-edition)
   - [Open namespaces](#open-namespaces)
 - [Design discussions](#design-discussions)
-  - [Deprecated `Cargo.toml` fields](#deprecated-cargotoml-fields)
+  - [Deprecated `Cargo.toml` fields](#deprecated-cargo-toml-fields)
   - [RFC #3452: Nested packages](#rfc-3452-nested-packages)
   - [Why is this yanked?](#why-is-this-yanked)
   - [Weak feature syntax](#weak-feature-syntax)

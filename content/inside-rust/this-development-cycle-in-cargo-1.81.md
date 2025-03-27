@@ -24,11 +24,11 @@ This is a summary of what has been happening around Cargo development for the me
   - [Garbage collection](#garbage-collection)
   - [Turn all warnings into errors](#turn-all-warnings-into-errors)
   - [Merging `cargo upgrade` into `cargo update`](#merging-cargo-upgrade-into-cargo-update)
-  - [`cargo publish --workspace`](#cargo-publish---workspace)
+  - [`cargo publish --workspace`](#cargo-publish-workspace)
   - [Fingerprinting builds](#fingerprinting-builds)
   - [`cargo info`](#cargo-info)
 - [Design discussions](#design-discussions)
-  - [`--lockfile-path`](#--lockfile-path)
+  - [`--lockfile-path`](#lockfile-path)
   - [`path-bases`](#path-bases)
 - [Misc](#misc)
 - [Focus areas without progress](#focus-areas-without-progress)
@@ -242,7 +242,7 @@ Some of these are being worked out on those PRs while others are being left to t
 
 ##### `cargo publish --workspace`
 
-*Update from [1.80](https://blog.rust-lang.org/inside-rust/2024/06/19/this-development-cycle-in-cargo-1.80.html#cargo-publish---workspace)*
+*Update from [1.80](https://blog.rust-lang.org/inside-rust/2024/06/19/this-development-cycle-in-cargo-1.80.html#cargo-publish-workspace)*
 
 [jneem](https://github.com/jneem) continued work on `cargo package --workspace`.
 The first step was to switch `cargo package` to run in stages, first packaging the `.crate` files and then verifying them
