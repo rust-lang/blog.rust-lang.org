@@ -23,7 +23,7 @@ If you'd like to help us out by testing future releases, you might consider upda
 ### Trait upcasting
 
 This release includes a long awaited feature — the ability to upcast trait objects.
-If a trait has a [supertrait](https://doc.rust-lang.org/reference/items/traits.html#supertraits) you can coerce a reference to said trait object to a reference to a trait object of the super trait:
+If a trait has a [supertrait](https://doc.rust-lang.org/reference/items/traits.html#supertraits) you can coerce a reference to said trait object to a reference to a trait object of the supertrait:
 
 ```rust
 trait Trait: Supertrait {}
@@ -34,13 +34,13 @@ fn upcast(x: &dyn Trait) -> &dyn Supertrait {
 }
 ```
 
-The same would work with any other kind of (smart)-pointer, like `Arc<dyn Trait> -> Arc<dyn Supertrait>` or `*const dyn Trait -> *const dyn Supertrait`.
+The same would work with any other kind of (smart-)pointer, like `Arc<dyn Trait> -> Arc<dyn Supertrait>` or `*const dyn Trait -> *const dyn Supertrait`.
 
-Previously this would require a workaround in the form of an `upcast` method in the `Trait` itself (and that would work only for one kind of reference/pointer). Such workarounds are not necessary anymore. 
+Previously this would have required a workaround in the form of an `upcast` method in the `Trait` itself, for example `fn as_supertrait(&self) -> &dyn Supertrait`, and this would work only for one kind of reference/pointer. Such workarounds are not necessary anymore. 
 
-Note that this adds a new _safety invariant_  to raw pointers — if a pointer points to a trait object, vtable must be valid for that trait. This means that "leaking" a raw pointer to a trait object with an invalid vtable into safe code may lead to undefined behavior.
+Note that this means that raw pointers to trait objects carry a non-trivial invariant: "leaking" a raw pointer to a trait object with an invalid vtable into safe code may lead to undefined behavior. It is not decided yet whether creating such a raw pointer temporarily in well-controlled circumstances causes immediate undefined behavior, so code should refrain from creating such pointers under any conditions (and Miri enforces that).
 
-Trait upcasting may be especially useful with the `Any` trait, as it allows upcasting your trait object to `dyn Any` to call the downcast methods. Whereas before you'd have to write workarounds for this or use external crates.
+Trait upcasting may be especially useful with the `Any` trait, as it allows upcasting your trait object to `dyn Any` to call `Any`'s downcast methods, without adding any trait methods or using external crates.
 
 ```rust
 use std::any::Any;
@@ -58,7 +58,7 @@ You can [learn more about trait upcasting in the Rust reference](https://doc.rus
 
 ### `HashMap`s and slices now support indexing multiple elements mutably
 
-The borrow checker will prevent simaltaneous usage of references returned from `get_mut` methods. To get around this the standard library now provides a `get_disjoint_mut` helper on slices and `HashMap` to retrieve mutable references to multiple elements simaltaneously. See the following example taken from the API docs of [`slice::get_disjoint_mut`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.get_disjoint_mut):
+The borrow checker prevents simultaneous usage of references obtained from repeated calls to `get_mut` methods. To safely support this pattern the standard library now provides a `get_disjoint_mut` helper on slices and `HashMap` to retrieve mutable references to multiple elements simultaneously. See the following example taken from the API docs of [`slice::get_disjoint_mut`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.get_disjoint_mut):
 ```rust
 let v = &mut [1, 2, 3];
 if let Ok([a, b]) = v.get_disjoint_mut([0, 2]) {
@@ -82,7 +82,7 @@ if let Ok([a, b]) = v.get_disjoint_mut([1..=2, 0..=0]) {
 assert_eq!(v, &[1, 11, 111]);
 ```
 
-### Allow safe functions to be marked with the #[target_feature] attribute.
+### Allow safe functions to be marked with the `#[target_feature]` attribute.
 
 Functions marked with `#[target_feature]` are generally considered as unsafe functions: they are unsafe to call, cannot *generally* be assigned to safe function pointers, and don't implement the `Fn*` traits.
 
@@ -108,7 +108,7 @@ fn bar() {
 }
 ```
 
-### Debug assert pointers are non-null when required for soundness
+### Debug assertions that pointers are non-null when required for soundness
 
 The compiler will now insert checks that a pointer is not null upon non-zero-sized reads and writes, and also when the pointer is reborrowed into a reference. For example, the following code will now produce a non-unwinding panic:
 ```rust
@@ -117,13 +117,19 @@ let _x = &*std::ptr::null::<u8>();
 ```
 Trivial examples like this have produced a warning since Rust 1.53.0, the new runtime check will detect these scenarios regardless of complexity.
 
+These assertions only take place when debug assertions are enabled which means that they **must not** be relied upon for soundness. This also means that dependencies which have been compiled with debug assertions disabled (e.g. the standard library) will not trigger the assertions even when called by code with debug assertions enabled.
+
 ### Make `missing_abi` lint warn by default
 
 Omitting the ABI in extern blocks and functions (e.g. `extern {}` and `extern fn`) will now result in a warning (via the `missing_abi` lint). Omitting the ABI after the `extern` keyword has always implicitly resulted in the `"C"` ABI. It is now recommended to explicitly specify the `"C"` ABI (e.g. `extern "C" {}` and `extern "C" fn`).
 
+You can check the [Explicit Extern ABIs RFC](https://rust-lang.github.io/rfcs/3722-explicit-extern-abis.html) for more information.
+
 ### Target deprecation warning for 1.87.0
 
-The target `i586-pc-windows-msvc` will be removed in the next version of Rust, 1.87.0. This is because this target is effectively useless. Its difference to the much more popular `i686-pc-windows-msvc` is that it does not require SSE2 instruction support, but Windows 10, the minimum required OS version of all `windows` targets (except the `win7` targets), requires SSE2 instructions itself, so this target does not fulfill a purpose.
+The target `i586-pc-windows-msvc` will be removed in the next version of Rust, 1.87.0. Its difference to the much more popular `i686-pc-windows-msvc` is that it does not require SSE2 instruction support, but Windows 10, the minimum required OS version of all `windows` targets (except the `win7` targets), requires SSE2 instructions itself.
+
+If SSE2 instructions are supported then users currently targeting `i586-pc-windows-msvc` should migrate to `i686-pc-windows-gnu` before the `1.87.0` release.
 
 You can check the [Major Change Proposal](https://github.com/rust-lang/compiler-team/issues/840) for more information.
 
