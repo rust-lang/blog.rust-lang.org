@@ -143,23 +143,23 @@ Team Operations (🛠️) |                             | [Aspirations][Team Ope
 Backend (🛠️, 👩‍💻) |                             | [Aspirations][Backend Aspirations]
 Diagnostics  (👩‍💻) |                             | [Aspirations][Diagnostics Aspirations]
 
-[Concrete Initiatives]: #concrete-initiatives
-[I-unsound Issues]: #i-unsound-issues-
-[Async Initiatives]: #async-rust-initiatives--
-[Debugging Initiatives]: #debugging-initiatives-
-[Faster Builds Initiatives]: #faster-builds-initiatives--%EF%B8%8F
-[Expressiveness Initiatives]: #expressiveness-initiatives--
-[Librarification Initiatives]: #librarification-initiatives-%EF%B8%8F
+[Concrete Initiatives]: #overall-themes
+[I-unsound Issues]: #overall-themes
+[Async Initiatives]: #overall-themes
+[Debugging Initiatives]: #overall-themes
+[Faster Builds Initiatives]: #overall-themes
+[Expressiveness Initiatives]: #overall-themes
+[Librarification Initiatives]: #overall-themes
 
-[Aspirations]: #aspirations
-[P-high Aspirations]: #p-high-aspirations-
-[Debugging Aspirations]: #debugging-aspirations-
-[Faster Builds Aspirations]: #faster-builds-aspirations--%EF%B8%8F
-[Expressiveness Aspirations]: #expressiveness-aspirations--
-[Librarification Aspirations]: #librarification-aspirations-%EF%B8%8F
-[Team Operations]: #compiler-team-operations-aspirations-%EF%B8%8F
-[Backend Aspirations]: #compiler-backend-aspirations-%EF%B8%8F-
-[Diagnostics Aspirations]: #diagnostics-aspirations-
+[Aspirations]: #overall-themes
+[P-high Aspirations]: #overall-themes
+[Debugging Aspirations]: #overall-themes
+[Faster Builds Aspirations]: #overall-themes
+[Expressiveness Aspirations]: #overall-themes
+[Librarification Aspirations]: #overall-themes
+[Team Operations]: #overall-themes
+[Backend Aspirations]: #overall-themes
+[Diagnostics Aspirations]: #overall-themes
 
 <!-- end of manually made [toc] -->
 

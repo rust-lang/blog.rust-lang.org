@@ -49,23 +49,23 @@ Team Operations (🛠️) |                             | [Aspirations][Team Ope
 Backend (🛠️, 👩‍💻) |                             | [Aspirations][Backend Aspirations]
 Diagnostics  (👩‍💻) |                             | [Aspirations][Diagnostics Aspirations]
 
-[Concrete Initiatives]: #concrete-initiatives
-[I-unsound Issues]: #i-unsound-issues-
-[Async Initiatives]: #async-rust-initiatives--
-[Debugging Initiatives]: #debugging-initiatives-
-[Faster Builds Initiatives]: #faster-builds-initiatives--%EF%B8%8F
-[Expressiveness Initiatives]: #expressiveness-initiatives--
-[Librarification Initiatives]: #librarification-initiatives-%EF%B8%8F
+[Concrete Initiatives]: #work-items
+[I-unsound Issues]: #work-items
+[Async Initiatives]: #work-items
+[Debugging Initiatives]: #work-items
+[Faster Builds Initiatives]: #work-items
+[Expressiveness Initiatives]: #work-items
+[Librarification Initiatives]: #work-items
 
-[Aspirations]: #aspirations
-[P-high Aspirations]: #p-high-aspirations-
-[Debugging Aspirations]: #debugging-aspirations-
-[Faster Builds Aspirations]: #faster-builds-aspirations--%EF%B8%8F
-[Expressiveness Aspirations]: #expressiveness-aspirations--
-[Librarification Aspirations]: #librarification-aspirations-%EF%B8%8F
-[Team Operations]: #compiler-team-operations-aspirations-%EF%B8%8F
-[Backend Aspirations]: #compiler-backend-aspirations-%EF%B8%8F-
-[Diagnostics Aspirations]: #diagnostics-aspirations-
+[Aspirations]: #work-items
+[P-high Aspirations]: #work-items
+[Debugging Aspirations]: #work-items
+[Faster Builds Aspirations]: #work-items
+[Expressiveness Aspirations]: #work-items
+[Librarification Aspirations]: #work-items
+[Team Operations]: #work-items
+[Backend Aspirations]: #work-items
+[Diagnostics Aspirations]: #work-items
 
 ## Overall Survey Results
 
