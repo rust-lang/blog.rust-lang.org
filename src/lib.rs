@@ -119,7 +119,7 @@ impl Generator {
     }
 
     fn compile_sass(&self, filename: &str) -> eyre::Result<()> {
-        let scss_file = format!("./src/styles/{filename}.scss");
+        let scss_file = format!("./sass/{filename}.scss");
         let css_file = format!("./static/styles/{filename}.css");
 
         let css = compile_file(&scss_file, Options::default())
