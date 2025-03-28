@@ -1,15 +1,15 @@
-{% macro headers(title, blog) -%}
+{% macro headers(title, section) -%}
  <!-- Twitter card -->
  <meta name="twitter:card" content="summary">
  <meta name="twitter:site" content="@rustlang">
  <meta name="twitter:creator" content="@rustlang">
  <meta name="twitter:title" content="{{ macros::escape_hbs(input=title) }}">
- <meta name="twitter:description" content="{{blog.description}}">
+ <meta name="twitter:description" content="{{ section.description }}">
 <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
 
 <!-- Facebook OpenGraph -->
 <meta property="og:title" content="{{ macros::escape_hbs(input=title) }}" />
-<meta property="og:description" content="{{blog.description}}">
+<meta property="og:description" content="{{ section.description }}">
 <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
@@ -36,7 +36,7 @@
 <meta name="theme-color" content="#ffffff">
 
  <!-- atom -->
- <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/{{blog.prefix}}feed.xml" title="{{blog.title}}" />
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/{{ section.path }}feed.xml" title="{{ section.title }}" />
 
 <!-- theme switcher -->
 <script src="/scripts/theme-switch.js"></script>

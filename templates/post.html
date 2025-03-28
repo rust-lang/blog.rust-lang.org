@@ -1,19 +1,19 @@
 {% import "macros.html" as macros %}
 {% extends "layout.html" %}
 {% block page %}
-<section id="{{ macros::escape_hbs(input=post.title) }}" class="white">
+<section id="{{ macros::escape_hbs(input=page.title) }}" class="white">
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
-      <h2>{{ macros::escape_hbs(input=post.title) }}</h2>
+      <h2>{{ macros::escape_hbs(input=page.title) }}</h2>
       <div class="highlight mt2 mb3"></div>
     </header>
 
-    <div class="publish-date-author">{{ macros::month_name(num=post.month) }} {{post.day}}, {{post.year}} &middot; {{ macros::escape_hbs(input=post.author) }}
-    {% if post.has_team %} on behalf of <a href="{{post.team_url}}">{{post.team}}</a> {% endif %}
+    <div class="publish-date-author">{{ macros::month_name(num=page.month) }} {{ page.day }}, {{ page.year }} &middot; {{ macros::escape_hbs(input=page.author) }}
+    {% if page.has_team %} on behalf of <a href="{{ page.team_url }}">{{ page.team }}</a> {% endif %}
     </div>
 
     <div class="post">
-      {{ post.contents }}
+      {{ page.contents }}
     </div>
   </div>
 </section>
