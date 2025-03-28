@@ -186,7 +186,6 @@ impl Generator {
             "title": blog.index_title(),
             "blog": blog,
             "other_blogs": other_blogs,
-            "root": blog.path_back_to_root(),
         });
         let path = blog.prefix().join("index.html");
         self.render_template(&path, "index.html", data)?;
@@ -209,7 +208,6 @@ impl Generator {
             "title": format!("{} | {}", post.title, blog.title()),
             "blog": blog,
             "post": post,
-            "root": blog.path_back_to_root().join("../../../"),
         });
 
         let path = path.join(filename);

@@ -11,7 +11,7 @@
       <p>
       <b>See also:</b>
       {%- for other in other_blogs %}
-              <a href="{{root}}{{other.url}}">{{other.link_text | escape_hbs}}</a>
+              <a href="/{{other.url}}">{{other.link_text | escape_hbs}}</a>
       {%- endfor %}
       </p>
     </div>
