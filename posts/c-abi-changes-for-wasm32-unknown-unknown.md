@@ -1,6 +1,6 @@
 +++
 layout = "post"
-date = 2024-03-20
+date = 2025-03-28
 title = "C ABI Changes for `wasm32-unknown-unknown`"
 author = "Alex Crichton"
 +++
