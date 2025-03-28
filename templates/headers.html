@@ -3,12 +3,12 @@
  <meta name="twitter:card" content="summary">
  <meta name="twitter:site" content="@rustlang">
  <meta name="twitter:creator" content="@rustlang">
- <meta name="twitter:title" content="{{title | escape_hbs}}">
+ <meta name="twitter:title" content="{{ macros::escape_hbs(input=title) }}">
  <meta name="twitter:description" content="{{blog.description}}">
 <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
 
 <!-- Facebook OpenGraph -->
-<meta property="og:title" content="{{title | escape_hbs}}" />
+<meta property="og:title" content="{{ macros::escape_hbs(input=title) }}" />
 <meta property="og:description" content="{{blog.description}}">
 <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
 <meta property="og:type" content="website" />

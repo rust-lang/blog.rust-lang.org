@@ -1,3 +1,4 @@
+{% import "macros.html" as macros %}
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <generator uri="https://blog.rust-lang.org/{{blog.prefix}}" version="0.1.0">{{blog.title}}</generator>
@@ -14,15 +15,15 @@
 
     {% for post in posts %}
     <entry>
-        <title>{{post.title | escape_hbs}}</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/{{blog.prefix}}{{post.url | escape_hbs}}" type="text/html" title="{{post.title | escape_hbs}}" />
-        <published>{{post.published | escape_hbs}}</published>
-        <updated>{{post.updated | escape_hbs}}</updated>
-        <id>https://blog.rust-lang.org/{{blog.prefix}}{{post.url | escape_hbs}}</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/{{blog.prefix}}{{post.url | escape_hbs}}">{{post.contents | escape_hbs}}</content>
+        <title>{{ macros::escape_hbs(input=post.title) }}</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/{{blog.prefix}}{{ macros::escape_hbs(input=post.url) }}" type="text/html" title="{{ macros::escape_hbs(input=post.title) }}" />
+        <published>{{ macros::escape_hbs(input=post.published) }}</published>
+        <updated>{{ macros::escape_hbs(input=post.updated) }}</updated>
+        <id>https://blog.rust-lang.org/{{blog.prefix}}{{ macros::escape_hbs(input=post.url) }}</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/{{blog.prefix}}{{ macros::escape_hbs(input=post.url) }}">{{ macros::escape_hbs(input=post.contents) }}</content>
 
         <author>
-            <name>{{post.author | escape_hbs}}</name>
+            <name>{{ macros::escape_hbs(input=post.author) }}</name>
         </author>
     </entry>
     {%- endfor %}

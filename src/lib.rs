@@ -9,7 +9,6 @@ use rayon::prelude::*;
 use sass_rs::{Options, compile_file};
 use serde::Serialize;
 use serde_json::{Value, json};
-use std::collections::HashMap;
 use std::fs::{self, File};
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
@@ -33,53 +32,12 @@ struct ReleasePost {
     url: String,
 }
 
-fn month_name(month_num: &Value, _args: &HashMap<String, Value>) -> tera::Result<Value> {
-    let month_num = month_num
-        .as_u64()
-        .expect("month_num should be an unsigned integer");
-    let name = match month_num {
-        1 => "Jan.",
-        2 => "Feb.",
-        3 => "Mar.",
-        4 => "Apr.",
-        5 => "May",
-        6 => "June",
-        7 => "July",
-        8 => "Aug.",
-        9 => "Sept.",
-        10 => "Oct.",
-        11 => "Nov.",
-        12 => "Dec.",
-        _ => panic!("invalid month! ({month_num})"),
-    };
-    Ok(name.into())
-}
-
-// Tera and Handlebars escape HTML differently by default.
-// Tera:       &<>"'/
-// Handlebars: &<>"'`=
-// To make the transition testable, this function escapes just like Handlebars.
-fn escape_hbs(input: &Value, _args: &HashMap<String, Value>) -> tera::Result<Value> {
-    let input = input.as_str().expect("input should be a string");
-    Ok(input
-        .replace("&", "&amp;")
-        .replace("<", "&lt;")
-        .replace(">", "&gt;")
-        .replace("\"", "&quot;")
-        .replace("'", "&#x27;")
-        .replace("`", "&#x60;")
-        .replace("=", "&#x3D;")
-        .into())
-}
-
 impl Generator {
     fn new(
         out_directory: impl AsRef<Path>,
         posts_directory: impl AsRef<Path>,
     ) -> eyre::Result<Self> {
         let mut tera = Tera::new("templates/*")?;
-        tera.register_filter("month_name", month_name);
-        tera.register_filter("escape_hbs", escape_hbs);
         tera.autoescape_on(vec![]); // disable auto-escape for .html templates
         Ok(Generator {
             tera,
