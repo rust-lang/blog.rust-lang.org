@@ -194,8 +194,8 @@ To determine the impact to your project there are a few tools at your disposal:
   Code can use `-Zwasm-c-abi=spec` to use the standard definition of the C ABI
   for a crate to test out if changes work.
 
-The best way to test your crate is to compile with a `nightly-2025-03-27`
-compiler, ensure there are no warnings, and then test your project still works
+The best way to test your crate is to compile with `nightly-2025-03-27`
+or later, ensure there are no warnings, and then test your project still works
 with `-Zwasm-c-abi=spec`. If all that passes then you're good to go and the
 upcoming change to the C ABI will not affect your project.
 
