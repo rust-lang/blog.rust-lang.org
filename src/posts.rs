@@ -1,4 +1,3 @@
-use super::blogs::Manifest;
 use eyre::Context;
 use front_matter::FrontMatter;
 use regex::Regex;
@@ -30,7 +29,7 @@ pub struct Post {
 }
 
 impl Post {
-    pub(crate) fn open(path: &Path, manifest: &Manifest) -> eyre::Result<Self> {
+    pub(crate) fn open(path: &Path) -> eyre::Result<Self> {
         // yeah this might blow up, but it won't
         let filename = {
             let filename = path.file_name().unwrap().to_str().unwrap().to_string();
@@ -97,11 +96,6 @@ impl Post {
                 path.display()
             ),
         };
-
-        // Enforce extra conditions
-        if manifest.requires_team && team_string.is_none() {
-            panic!("blog post at path `{}` lacks team metadata", path.display());
-        }
 
         // If they supplied team, it should look like `team-text <team-url>`
         let (team, team_url) = team_string.map_or((None, None), |s| {
