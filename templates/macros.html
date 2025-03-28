@@ -31,5 +31,13 @@
         | replace(from="'", to="&#x27;")
         | replace(from="`", to="&#x60;")
         | replace(from="=", to="&#x3D;")
+        | safe
     }}
 {%- endmacro escape_hbs %}
+
+{% macro show_year(year) -%}
+      <tr>
+        <td class="bn"></td>
+        <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">Posts in {{ year }}</h3></td>
+      </tr>
+{%- endmacro show_year %}
