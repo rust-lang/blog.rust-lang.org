@@ -1,10 +1,11 @@
++++
 title = "Rust Blog"
-index-title = "The Rust Programming Language Blog"
-link-text = "the main Rust blog"
+index_title = "The Rust Programming Language Blog"
+link_text = "the main Rust blog"
 description = "Empowering everyone to build reliable and efficient software."
-index-html = """
+index_html = """
 This is the <b>main Rust blog</b>. \
 <a href="https://www.rust-lang.org/governance/">Rust teams</a> \
 use this blog to announce major developments in the world of Rust."""
-maintained-by = "the Rust Teams"
-requires-team = false
+maintained_by = "the Rust Teams"
++++

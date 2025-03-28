@@ -2,11 +2,11 @@ use super::posts::Post;
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 
-static MANIFEST_FILE: &str = "blog.toml";
+static MANIFEST_FILE: &str = "_index.md";
 static POSTS_EXT: &str = "md";
 
 #[derive(Deserialize)]
-#[serde(rename_all = "kebab-case", deny_unknown_fields)]
+#[serde(deny_unknown_fields)]
 pub struct Manifest {
     /// Title to display in the "top row".
     pub(crate) title: String,
@@ -22,9 +22,6 @@ pub struct Manifest {
 
     /// Raw html describing the blog to insert into the index page.
     pub(crate) index_html: String,
-
-    /// If true, posts require a `team` in their metadata.
-    pub(crate) requires_team: bool,
 
     /// What text to use when linking to this blog in the "see also"
     /// section from other blogs.
@@ -46,15 +43,23 @@ pub struct Blog {
 
 impl Blog {
     fn load(prefix: PathBuf, dir: &Path) -> eyre::Result<Self> {
-        let manifest_content = std::fs::read_to_string(dir.join(MANIFEST_FILE))?;
+        let manifest_content = std::fs::read_to_string(dir.join(MANIFEST_FILE))?
+            .strip_prefix("+++\n")
+            .unwrap()
+            .strip_suffix("+++\n")
+            .unwrap()
+            .to_string();
         let manifest: Manifest = toml::from_str(&manifest_content)?;
 
         let mut posts = Vec::new();
         for entry in std::fs::read_dir(dir)? {
             let path = entry?.path();
+            if path.ends_with("_index.md") {
+                continue; // blog manifest is not a post
+            }
             let ext = path.extension().and_then(|e| e.to_str());
             if path.metadata()?.file_type().is_file() && ext == Some(POSTS_EXT) {
-                posts.push(Post::open(&path, &manifest)?);
+                posts.push(Post::open(&path)?);
             }
         }
 
@@ -115,8 +120,8 @@ impl Blog {
     }
 }
 
-/// Recursively load blogs in a directory. A blog is a directory with a `blog.toml`
-/// file inside it.
+/// Recursively load blogs in a directory. A blog is a directory with a
+/// `_index.md` file inside it.
 pub fn load(base: &Path) -> eyre::Result<Vec<Blog>> {
     let mut blogs = Vec::new();
     load_recursive(base, base, &mut blogs)?;
