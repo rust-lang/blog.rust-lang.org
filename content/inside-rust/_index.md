@@ -10,5 +10,6 @@ to follow along with Rust development. The various \
 use this blog to post status updates, calls for help, and other \
 similar announcements."""
 maintained_by = "the Rust Teams"
-see_also_html = """<a href="/index.html">the main Rust blog</a>"""
+see_also_path = ""
+see_also_text = "the main Rust blog"
 +++

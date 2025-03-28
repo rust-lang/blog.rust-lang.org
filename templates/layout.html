@@ -2,6 +2,13 @@
 {% import "headers.html" as headers %}
 {% import "nav.html" as nav %}
 {% import "footer.html" as footer %}
+
+{% if page %}
+  {% set section = get_section(path=(page.ancestors | last)) %}
+  {% set title = page.title ~ " | " ~ section.title %}
+{% else %}
+  {% set title = section.extra.index_title %}
+{% endif %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,11 +16,11 @@
     <title>{{ macros::escape_hbs(input=title) }}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Empowering everyone to build reliable and efficient software.">
-     {{ headers::headers(title=title, section=section, root=root) | indent(prefix="    ", blank=true) }}
+     {{ headers::headers(title=title, section=section) | indent(prefix="    ", blank=true) | safe }}
   </head>
   <body>
-    {{ nav::nav(section=section, root=root) | indent(prefix="    ", blank=true) }}
+    {{ nav::nav(section=section) | indent(prefix="    ", blank=true) | safe }}
     {%- block page %}{% endblock page %}
-    {{ footer::footer(root=root) | indent(prefix="    ", blank=true) }}
+    {{ footer::footer() | indent(prefix="    ", blank=true) | safe }}
   </body>
 </html>
