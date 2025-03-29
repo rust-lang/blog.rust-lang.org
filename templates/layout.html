@@ -1,3 +1,4 @@
+{% import "macros.html" as macros %}
 {% import "headers.html" as headers %}
 {% import "nav.html" as nav %}
 {% import "footer.html" as footer %}
@@ -5,13 +6,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{ title | escape_hbs }}</title>
+    <title>{{ macros::escape_hbs(input=title) }}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Empowering everyone to build reliable and efficient software.">
-     {{ headers::headers(title=title, blog=blog) | indent(prefix="    ", blank=true) }}
+     {{ headers::headers(title=title, section=section) | indent(prefix="    ", blank=true) }}
   </head>
   <body>
-    {{ nav::nav(blog=blog) | indent(prefix="    ", blank=true) }}
+    {{ nav::nav(section=section) | indent(prefix="    ", blank=true) }}
     {%- block page %}{% endblock page %}
     {{ footer::footer() | indent(prefix="    ", blank=true) }}
   </body>

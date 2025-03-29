@@ -1,0 +1,35 @@
+{% macro month_name(num) %}
+    {%- if     num == 1 %}Jan.
+    {%- elif num == 2 %}Feb.
+    {%- elif num == 3 %}Mar.
+    {%- elif num == 4 %}Apr.
+    {%- elif num == 5 %}May
+    {%- elif num == 6 %}June
+    {%- elif num == 7 %}July
+    {%- elif num == 8 %}Aug.
+    {%- elif num == 9 %}Sept.
+    {%- elif num == 10 %}Oct.
+    {%- elif num == 11 %}Nov.
+    {%- elif num == 12 %}Dec.
+    {%- else %}{{ throw(message="invalid month! " ~ num) }}
+    {%- endif %}
+{%- endmacro month_name %}
+
+{#
+    The blog templates used to be written in Handlebars, but Tera and Handlebars
+    escape HTML differently by default:
+    Tera:       &<>"'/
+    Handlebars: &<>"'`=
+    To keep the output identical, this macro matches the behavior of Handlebars.
+#}
+{% macro escape_hbs(input) -%}
+    {{ input
+        | replace(from="&", to="&amp;")
+        | replace(from="<", to="&lt;")
+        | replace(from=">", to="&gt;")
+        | replace(from='"', to="&quot;")
+        | replace(from="'", to="&#x27;")
+        | replace(from="`", to="&#x60;")
+        | replace(from="=", to="&#x3D;")
+    }}
+{%- endmacro escape_hbs %}

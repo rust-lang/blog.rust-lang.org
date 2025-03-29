@@ -9,7 +9,6 @@ use rayon::prelude::*;
 use sass_rs::{Options, compile_file};
 use serde::Serialize;
 use serde_json::{Value, json};
-use std::collections::HashMap;
 use std::fs::{self, File};
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
@@ -33,53 +32,12 @@ struct ReleasePost {
     url: String,
 }
 
-fn month_name(month_num: &Value, _args: &HashMap<String, Value>) -> tera::Result<Value> {
-    let month_num = month_num
-        .as_u64()
-        .expect("month_num should be an unsigned integer");
-    let name = match month_num {
-        1 => "Jan.",
-        2 => "Feb.",
-        3 => "Mar.",
-        4 => "Apr.",
-        5 => "May",
-        6 => "June",
-        7 => "July",
-        8 => "Aug.",
-        9 => "Sept.",
-        10 => "Oct.",
-        11 => "Nov.",
-        12 => "Dec.",
-        _ => panic!("invalid month! ({month_num})"),
-    };
-    Ok(name.into())
-}
-
-// Tera and Handlebars escape HTML differently by default.
-// Tera:       &<>"'/
-// Handlebars: &<>"'`=
-// To make the transition testable, this function escapes just like Handlebars.
-fn escape_hbs(input: &Value, _args: &HashMap<String, Value>) -> tera::Result<Value> {
-    let input = input.as_str().expect("input should be a string");
-    Ok(input
-        .replace("&", "&amp;")
-        .replace("<", "&lt;")
-        .replace(">", "&gt;")
-        .replace("\"", "&quot;")
-        .replace("'", "&#x27;")
-        .replace("`", "&#x60;")
-        .replace("=", "&#x3D;")
-        .into())
-}
-
 impl Generator {
     fn new(
         out_directory: impl AsRef<Path>,
         posts_directory: impl AsRef<Path>,
     ) -> eyre::Result<Self> {
         let mut tera = Tera::new("templates/*")?;
-        tera.register_filter("month_name", month_name);
-        tera.register_filter("escape_hbs", escape_hbs);
         tera.autoescape_on(vec![]); // disable auto-escape for .html templates
         Ok(Generator {
             tera,
@@ -148,7 +106,7 @@ impl Generator {
     }
 
     fn render_blog(&self, blog: &Blog) -> eyre::Result<()> {
-        std::fs::create_dir_all(self.out_directory.join(blog.prefix()))?;
+        std::fs::create_dir_all(self.out_directory.join(blog.path()))?;
 
         let path = self.render_index(blog)?;
 
@@ -177,24 +135,24 @@ impl Generator {
             .map(|other_blog| {
                 json!({
                     "link_text": other_blog.link_text(),
-                    "url": other_blog.prefix().join("index.html"),
+                    "url": other_blog.path().join("index.html"),
                 })
             })
             .collect();
 
         let data = json!({
             "title": blog.index_title(),
-            "blog": blog,
+            "section": blog,
             "other_blogs": other_blogs,
         });
-        let path = blog.prefix().join("index.html");
+        let path = blog.path().join("index.html");
         self.render_template(&path, "index.html", data)?;
         Ok(path)
     }
 
     fn render_post(&self, blog: &Blog, post: &Post) -> eyre::Result<PathBuf> {
         let path = blog
-            .prefix()
+            .path()
             .join(format!("{:04}", &post.year))
             .join(format!("{:02}", &post.month))
             .join(format!("{:02}", &post.day));
@@ -206,8 +164,8 @@ impl Generator {
 
         let data = json!({
             "title": format!("{} | {}", post.title, blog.title()),
-            "blog": blog,
-            "post": post,
+            "section": blog,
+            "page": post,
         });
 
         let path = path.join(filename);
@@ -218,12 +176,12 @@ impl Generator {
     fn render_feed(&self, blog: &Blog) -> eyre::Result<()> {
         let posts: Vec<_> = blog.posts().iter().take(10).collect();
         let data = json!({
-            "blog": blog,
-            "posts": posts,
+            "section": blog,
+            "pages": posts,
             "feed_updated": chrono::Utc::now().with_nanosecond(0).unwrap().to_rfc3339(),
         });
 
-        self.render_template(blog.prefix().join("feed.xml"), "feed.xml", data)?;
+        self.render_template(blog.path().join("feed.xml"), "feed.xml", data)?;
         Ok(())
     }
 
@@ -235,8 +193,8 @@ impl Generator {
             .map(|post| ReleasePost {
                 title: post.title.clone(),
                 url: blog
-                    .prefix()
-                    .join(post.url.clone())
+                    .path()
+                    .join(post.path.clone())
                     .to_string_lossy()
                     .to_string(),
             })
@@ -246,7 +204,7 @@ impl Generator {
             feed_updated: chrono::Utc::now().with_nanosecond(0).unwrap().to_rfc3339(),
         };
         fs::write(
-            self.out_directory.join(blog.prefix()).join("releases.json"),
+            self.out_directory.join(blog.path()).join("releases.json"),
             serde_json::to_string(&data)?,
         )?;
         Ok(())

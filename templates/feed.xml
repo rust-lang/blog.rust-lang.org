@@ -1,28 +1,29 @@
+{% import "macros.html" as macros %}
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-    <generator uri="https://blog.rust-lang.org/{{blog.prefix}}" version="0.1.0">{{blog.title}}</generator>
-    <link href="https://blog.rust-lang.org/{{blog.prefix}}feed.xml" rel="self" type="application/atom+xml" />
-    <link href="https://blog.rust-lang.org/{{blog.prefix}}" rel="alternate" type="text/html" />
-    <id>https://blog.rust-lang.org/{{blog.prefix}}</id>
-    <title>{{blog.title}}</title>
-    <subtitle>{{blog.description}}</subtitle>
+    <generator uri="https://blog.rust-lang.org/{{ section.path }}" version="0.1.0">{{ section.title }}</generator>
+    <link href="https://blog.rust-lang.org/{{ section.path }}feed.xml" rel="self" type="application/atom+xml" />
+    <link href="https://blog.rust-lang.org/{{ section.path }}" rel="alternate" type="text/html" />
+    <id>https://blog.rust-lang.org/{{ section.path }}</id>
+    <title>{{ section.title }}</title>
+    <subtitle>{{ section.description }}</subtitle>
     <author>
-        <name>Maintained by {{blog.maintained_by}}.</name>
+        <name>Maintained by {{ section.maintained_by }}.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
     <updated>{{feed_updated}}</updated>
 
-    {% for post in posts %}
+    {% for page in pages %}
     <entry>
-        <title>{{post.title | escape_hbs}}</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/{{blog.prefix}}{{post.url | escape_hbs}}" type="text/html" title="{{post.title | escape_hbs}}" />
-        <published>{{post.published | escape_hbs}}</published>
-        <updated>{{post.updated | escape_hbs}}</updated>
-        <id>https://blog.rust-lang.org/{{blog.prefix}}{{post.url | escape_hbs}}</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/{{blog.prefix}}{{post.url | escape_hbs}}">{{post.contents | escape_hbs}}</content>
+        <title>{{ macros::escape_hbs(input=page.title) }}</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/{{ section.path }}{{ macros::escape_hbs(input=page.path) }}" type="text/html" title="{{ macros::escape_hbs(input=page.title) }}" />
+        <published>{{ macros::escape_hbs(input=page.published) }}</published>
+        <updated>{{ macros::escape_hbs(input=page.updated) }}</updated>
+        <id>https://blog.rust-lang.org/{{ section.path }}{{ macros::escape_hbs(input=page.path) }}</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/{{ section.path }}{{ macros::escape_hbs(input=page.path) }}">{{ macros::escape_hbs(input=page.contents) }}</content>
 
         <author>
-            <name>{{post.author | escape_hbs}}</name>
+            <name>{{ macros::escape_hbs(input=page.author) }}</name>
         </author>
     </entry>
     {%- endfor %}
