@@ -37,12 +37,12 @@ pub struct Blog {
     maintained_by: String,
     index_html: String,
     #[serde(serialize_with = "add_postfix_slash")]
-    prefix: PathBuf,
-    posts: Vec<Post>,
+    path: PathBuf,
+    pages: Vec<Post>,
 }
 
 impl Blog {
-    fn load(prefix: PathBuf, dir: &Path) -> eyre::Result<Self> {
+    fn load(path: PathBuf, dir: &Path) -> eyre::Result<Self> {
         let manifest_content = std::fs::read_to_string(dir.join(MANIFEST_FILE))?
             .strip_prefix("+++\n")
             .unwrap()
@@ -94,8 +94,8 @@ impl Blog {
             maintained_by: manifest.maintained_by,
             index_html: manifest.index_html,
             link_text: manifest.link_text,
-            prefix,
-            posts,
+            path,
+            pages: posts,
         })
     }
 
@@ -111,12 +111,12 @@ impl Blog {
         &self.index_title
     }
 
-    pub(crate) fn prefix(&self) -> &Path {
-        &self.prefix
+    pub(crate) fn path(&self) -> &Path {
+        &self.path
     }
 
     pub(crate) fn posts(&self) -> &[Post] {
-        &self.posts
+        &self.pages
     }
 }
 
@@ -139,10 +139,10 @@ fn load_recursive(base: &Path, current: &Path, blogs: &mut Vec<Blog>) -> eyre::R
             let file_name = path.file_name().and_then(|n| n.to_str());
             if let (Some(file_name), Some(parent)) = (file_name, path.parent()) {
                 if file_name == MANIFEST_FILE {
-                    let prefix = parent
+                    let path = parent
                         .strip_prefix(base)
                         .map_or_else(|_| PathBuf::new(), Path::to_path_buf);
-                    blogs.push(Blog::load(prefix, parent)?);
+                    blogs.push(Blog::load(path, parent)?);
                 }
             }
         }
