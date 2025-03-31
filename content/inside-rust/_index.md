@@ -2,6 +2,8 @@
 title = "Inside Rust Blog"
 index_title = 'The "Inside Rust" Blog'
 description = "Want to follow along with Rust development? Curious how you might get involved? Take a look!"
+sort_by = "weight"
+[extra]
 index_html = """
 This is the <b>"Inside Rust"</b> blog. This blog is aimed at those who wish \
 to follow along with Rust development. The various \
