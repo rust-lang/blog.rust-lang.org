@@ -23,16 +23,15 @@ pub struct Manifest {
     /// Raw html describing the blog to insert into the index page.
     pub(crate) index_html: String,
 
-    /// What text to use when linking to this blog in the "see also"
-    /// section from other blogs.
-    pub(crate) link_text: String,
+    /// What to show in the "see also" section of this blog.
+    pub(crate) see_also_html: String,
 }
 
 #[derive(Serialize)]
 pub struct Blog {
     title: String,
     index_title: String,
-    link_text: String,
+    see_also_html: String,
     description: String,
     maintained_by: String,
     index_html: String,
@@ -93,7 +92,7 @@ impl Blog {
             description: manifest.description,
             maintained_by: manifest.maintained_by,
             index_html: manifest.index_html,
-            link_text: manifest.link_text,
+            see_also_html: manifest.see_also_html,
             path,
             pages: posts,
         })
@@ -101,10 +100,6 @@ impl Blog {
 
     pub(crate) fn title(&self) -> &str {
         &self.title
-    }
-
-    pub(crate) fn link_text(&self) -> &str {
-        &self.link_text
     }
 
     pub(crate) fn index_title(&self) -> &str {
