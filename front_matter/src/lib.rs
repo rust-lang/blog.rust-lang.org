@@ -59,7 +59,7 @@ mod tests {
             .unwrap()
             .chain(fs::read_dir(repo_root.join("content/inside-rust")).unwrap())
             .map(|p| p.unwrap().path())
-            .filter(|p| p.extension() == Some("md".as_ref()));
+            .filter(|p| p.is_file() && p.file_name() != Some("_index.md".as_ref()));
 
         for post in posts {
             let content = fs::read_to_string(&post).unwrap();
