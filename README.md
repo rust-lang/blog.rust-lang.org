@@ -48,10 +48,14 @@ that it's something that will eventually be accepted.
 When writing a new blog post, keep in mind the file headers:
 ```md
 +++
-layout = "post"
-date = 2015-03-15
+path = "2015/03/15/some-slug"
 title = "Title of the blog post"
-author = "Blog post author (or on behalf of which team)"
+authors = ["Blog post author (or on behalf of which team)"]
+description = "(optional)"
+
+[extra] # optional section
+team = "Team Name" # if post is made on behalf of a team
+team_url = "https://www.rust-lang.org/governance/teams/..." # required if team is set
 release = true # (to be only used for official posts about Rust releases announcements)
 +++
 ```
