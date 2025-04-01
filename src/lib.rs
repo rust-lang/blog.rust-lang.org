@@ -128,22 +128,9 @@ impl Generator {
     }
 
     fn render_index(&self, blog: &Blog) -> eyre::Result<PathBuf> {
-        let other_blogs: Vec<_> = self
-            .blogs
-            .iter()
-            .filter(|b| b.index_title() != blog.index_title())
-            .map(|other_blog| {
-                json!({
-                    "link_text": other_blog.link_text(),
-                    "url": other_blog.path().join("index.html"),
-                })
-            })
-            .collect();
-
         let data = json!({
             "title": blog.index_title(),
             "section": blog,
-            "other_blogs": other_blogs,
         });
         let path = blog.path().join("index.html");
         self.render_template(&path, "index.html", data)?;

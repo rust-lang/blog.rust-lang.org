@@ -11,9 +11,7 @@
     <div class="mw8-l">
       <p>
       <b>See also:</b>
-      {%- for other in other_blogs %}
-              <a href="/{{other.url}}">{{ macros::escape_hbs(input=other.link_text) }}</a>
-      {%- endfor %}
+              {{ section.see_also_html }}
       </p>
     </div>
   </div>
