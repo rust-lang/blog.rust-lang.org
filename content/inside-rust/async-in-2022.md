@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-02-03
+path = "inside-rust/2022/02/03/async-in-2022"
 title = "Async Rust in 2022"
-author = "Niko Matsakis and Tyler Mandry"
+authors = ["Niko Matsakis and Tyler Mandry"]
 description = "The async working group's goals in 2022"
-team = "Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>"
+aliases = ["inside-rust/2022/02/03/async-in-2022.html"]
+
+[extra]
+team = "Async Working Group"
+team_url = "https://www.rust-lang.org/governance/wgs/wg-async"
 +++
 
 Almost a year ago, the Async Working Group[^name] [embarked on a collaborative effort][ce] to write a [shared async vision document][avd]. As we enter 2022, we wanted to give an update on the results from that process along with the progress we are making towards realizing that vision.

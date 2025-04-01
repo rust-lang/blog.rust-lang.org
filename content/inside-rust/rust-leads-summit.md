@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2024-05-09
+path = "inside-rust/2024/05/09/rust-leads-summit"
 title = "Recap: Rust Leads Summit 2024"
-author = "Tyler Mandry and Eric Holk"
+authors = ["Tyler Mandry and Eric Holk"]
+aliases = ["inside-rust/2024/05/09/rust-leads-summit.html"]
 +++
 
 ## What happened?

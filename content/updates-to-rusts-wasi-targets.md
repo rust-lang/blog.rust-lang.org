@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2024-04-09
+path = "2024/04/09/updates-to-rusts-wasi-targets"
 title = "Changes to Rust's WASI targets"
-author = "Yosh Wuyts"
+authors = ["Yosh Wuyts"]
+aliases = ["2024/04/09/updates-to-rusts-wasi-targets.html"]
 +++
 
 [WASI 0.2 was recently

@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-01-10
+path = "inside-rust/2020/01/10/lang-team-design-meetings"
 title = "Lang Team Design Meetings"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "Lang Team Design Meetings"
-team = "the language team <https://www.rust-lang.org/governance/teams/lang>"
+aliases = ["inside-rust/2020/01/10/lang-team-design-meetings.html"]
+
+[extra]
+team = "the language team"
+team_url = "https://www.rust-lang.org/governance/teams/lang"
 +++
 
 Hi all! I wanted to give a quick update about the lang team. We're

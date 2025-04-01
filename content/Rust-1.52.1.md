@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2021-05-10
+path = "2021/05/10/Rust-1.52.1"
 title = "Announcing Rust 1.52.1"
-author = "Felix Klock, Mark Rousskov"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+authors = ["Felix Klock, Mark Rousskov"]
+aliases = ["2021/05/10/Rust-1.52.1.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 release = true
 +++
 

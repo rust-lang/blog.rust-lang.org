@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2021-01-04
+path = "2021/01/04/mdbook-security-advisory"
 title = "mdBook security advisory"
-author = "Rust Security Response WG"
+authors = ["Rust Security Response WG"]
+aliases = ["2021/01/04/mdbook-security-advisory.html"]
 +++
 
 > This is a cross-post of [the official security advisory][ml]. The official post

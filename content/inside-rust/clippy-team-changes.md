@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2022-07-13
+path = "inside-rust/2022/07/13/clippy-team-changes"
 title = "Changes at the Clippy Team"
-author = "Philipp Krones"
-team = "The Clippy Team <https://www.rust-lang.org/governance/teams/dev-tools#clippy>"
+authors = ["Philipp Krones"]
+aliases = ["inside-rust/2022/07/13/clippy-team-changes.html"]
+
+[extra]
+team = "The Clippy Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#clippy"
 +++
 
 ## New Members

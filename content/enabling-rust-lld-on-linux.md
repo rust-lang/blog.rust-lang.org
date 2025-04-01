@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-05-17
+path = "2024/05/17/enabling-rust-lld-on-linux"
 title = "Faster linking times on nightly on Linux using `rust-lld`"
-author = "Rémy Rakic"
-team = "the compiler performance working group <https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance>"
+authors = ["Rémy Rakic"]
+aliases = ["2024/05/17/enabling-rust-lld-on-linux.html"]
+
+[extra]
+team = "the compiler performance working group"
+team_url = "https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance"
 +++
 
 TL;DR: rustc will use `rust-lld` by default on `x86_64-unknown-linux-gnu` on nightly to

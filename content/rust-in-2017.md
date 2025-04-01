@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2017-12-21
+path = "2017/12/21/rust-in-2017"
 title = "Rust in 2017: what we achieved"
-author = "Aaron Turon"
+authors = ["Aaron Turon"]
+aliases = ["2017/12/21/rust-in-2017.html"]
 +++
 
 Rust’s development in 2017 fit into a single overarching theme: **increasing productivity, especially for newcomers to Rust**. From tooling to libraries to documentation to the core language, we wanted to make it easier to get things done with Rust. That desire led to [a roadmap](https://blog.rust-lang.org/2017/02/06/roadmap.html) for the year, setting out 8 high-level objectives that would guide the work of the team.

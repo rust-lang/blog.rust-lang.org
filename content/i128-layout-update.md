@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-03-30
+path = "2024/03/30/i128-layout-update"
 title = "Changes to `u128`/`i128` layout in 1.77 and 1.78"
-author = "Trevor Gross"
-team = "The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>"
+authors = ["Trevor Gross"]
+aliases = ["2024/03/30/i128-layout-update.html"]
+
+[extra]
+team = "The Rust Lang Team"
+team_url = "https://www.rust-lang.org/governance/teams/lang"
 +++
 
 Rust has long had an inconsistency with C regarding the alignment of 128-bit integers

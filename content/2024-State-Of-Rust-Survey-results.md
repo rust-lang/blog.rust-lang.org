@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2025-02-13
+path = "2025/02/13/2024-State-Of-Rust-Survey-results"
 title = "2024 State of Rust Survey Results"
-author = "The Rust Survey Team"
+authors = ["The Rust Survey Team"]
+aliases = ["2025/02/13/2024-State-Of-Rust-Survey-results.html"]
 +++
 
 Hello, Rustaceans!

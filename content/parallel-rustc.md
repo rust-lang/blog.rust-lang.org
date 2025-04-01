@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-11-09
+path = "2023/11/09/parallel-rustc"
 title = "Faster compilation with the parallel front-end in nightly"
-author = "Nicholas Nethercote"
-team = "The Parallel Rustc Working Group <https://www.rust-lang.org/governance/teams/compiler#Parallel%20rustc%20working%20group>"
+authors = ["Nicholas Nethercote"]
+aliases = ["2023/11/09/parallel-rustc.html"]
+
+[extra]
+team = "The Parallel Rustc Working Group"
+team_url = "https://www.rust-lang.org/governance/teams/compiler#Parallel%20rustc%20working%20group"
 +++
 
 The Rust compiler's front-end can now use parallel execution to significantly

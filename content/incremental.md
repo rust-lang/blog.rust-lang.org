@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2016-09-08
+path = "2016/09/08/incremental"
 title = "Incremental Compilation"
-author = "Michael Woerister"
+authors = ["Michael Woerister"]
 description = "Incremental compilation for exponential joy and happiness."
+aliases = ["2016/09/08/incremental.html"]
 +++
 
 I remember when, during the 1.0 anniversary presentation at the

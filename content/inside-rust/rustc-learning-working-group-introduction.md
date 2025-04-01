@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2019-10-28
+path = "inside-rust/2019/10/28/rustc-learning-working-group-introduction"
 title = "The Rustc Dev Guide Working Group - An Introduction"
-author = "Amanjeev Sethi"
+authors = ["Amanjeev Sethi"]
 description = "introduction rustc dev guide working group useful links"
-team = "the rustc dev guide working group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>"
+aliases = ["inside-rust/2019/10/28/rustc-learning-working-group-introduction.html"]
+
+[extra]
+team = "the rustc dev guide working group"
+team_url = "https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide"
 +++
 
 The [Rustc Dev Guide Working Group], formed in April 2019, is focused on making the

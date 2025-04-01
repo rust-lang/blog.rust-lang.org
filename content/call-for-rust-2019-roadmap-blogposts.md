@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-12-06
+path = "2018/12/06/call-for-rust-2019-roadmap-blogposts"
 title = "A call for Rust 2019 Roadmap blog posts"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2018/12/06/call-for-rust-2019-roadmap-blogposts.html"]
 +++
 
 It's almost 2019! As such, the Rust team needs to create a roadmap for Rust's

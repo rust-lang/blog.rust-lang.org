@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-07-29
+path = "inside-rust/2020/07/29/lang-team-design-meeting-min-const-generics"
 title = "Lang team design meeting: minimal const generics"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "Minimal const generics meeting report"
-team = "the lang team <https://www.rust-lang.org/governance/teams/lang>"
+aliases = ["inside-rust/2020/07/29/lang-team-design-meeting-min-const-generics.html"]
+
+[extra]
+team = "the lang team"
+team_url = "https://www.rust-lang.org/governance/teams/lang"
 +++
 
 Hello! Did you know that the [lang team] now has regular design

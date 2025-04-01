@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-07-27
+path = "inside-rust/2020/07/27/opening-up-the-core-team-agenda"
 title = "Opening up the Core Team agenda"
-author = "Pietro Albini"
-team = "the Core Team <https://www.rust-lang.org/governance/teams/core>"
+authors = ["Pietro Albini"]
+aliases = ["inside-rust/2020/07/27/opening-up-the-core-team-agenda.html"]
+
+[extra]
+team = "the Core Team"
+team_url = "https://www.rust-lang.org/governance/teams/core"
 +++
 
 The Core Team works on project-wide policy questions on all sorts of matters,

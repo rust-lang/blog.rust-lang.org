@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-02-20
+path = "inside-rust/2020/02/20/jtgeibel-crates-io-co-lead"
 title = "Please welcome jtgeibel as crates.io team co-lead!"
-author = "Sean Griffin"
+authors = ["Sean Griffin"]
 description = "jtgeibel added as crates.io team co-lead"
-team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
+aliases = ["inside-rust/2020/02/20/jtgeibel-crates-io-co-lead.html"]
+
+[extra]
+team = "the crates.io team"
+team_url = "https://www.rust-lang.org/governance/teams/crates-io"
 +++
 
 I'm happy to announce some changes in the leadership of the crates.io

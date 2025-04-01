@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2025-03-03
+path = "2025/03/03/Rust-participates-in-GSoC-2025"
 title = "Rust participates in Google Summer of Code 2025"
-author = "Jakub Beránek, Jack Huey and Paul Lenz"
+authors = ["Jakub Beránek, Jack Huey and Paul Lenz"]
+aliases = ["2025/03/03/Rust-participates-in-GSoC-2025.html"]
 +++
 
 We are happy to announce that the Rust Project will again be participating in [Google Summer of Code (GSoC) 2025][gsoc], same as [last year][gsoc announcement 2024]. If you're not eligible or interested in participating in GSoC, then most of this post likely isn't relevant to you; if you are, this should contain some useful information and links.

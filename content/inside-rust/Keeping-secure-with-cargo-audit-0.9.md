@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2019-10-03
+path = "inside-rust/2019/10/03/Keeping-secure-with-cargo-audit-0.9"
 title = "Keeping Rust projects secure with cargo-audit 0.9: dependency trees, core advisories, unmaintained crates"
-author = "Tony Arcieri"
+authors = ["Tony Arcieri"]
 description = "A look at the new features in cargo-audit 0.9 for ensuring dependencies are free of security advisories"
-team = "the Secure Code WG <https://www.rust-lang.org/governance/wgs/wg-secure-code>"
+aliases = ["inside-rust/2019/10/03/Keeping-secure-with-cargo-audit-0.9.html"]
+
+[extra]
+team = "the Secure Code WG"
+team_url = "https://www.rust-lang.org/governance/wgs/wg-secure-code"
 +++
 
 [cargo-audit](https://github.com/rustsec/cargo-audit) is a command-line utility which inspects `Cargo.lock` files and compares them against the [RustSec Advisory Database](https://rustsec.org), a community database of security vulnerabilities maintained by the [Rust Secure Code Working Group](https://github.com/rust-secure-code/wg).

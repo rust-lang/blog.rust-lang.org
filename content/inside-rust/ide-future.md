@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2019-12-04
+path = "inside-rust/2019/12/04/ide-future"
 title = "2019-11-18 IDE team meeting"
-author = "Aleksey Kladov, Igor Matuszewski"
-team = "the IDE team <https://www.rust-lang.org/governance/teams/dev-tools#ides>"
+authors = ["Aleksey Kladov, Igor Matuszewski"]
+aliases = ["inside-rust/2019/12/04/ide-future.html"]
+
+[extra]
+team = "the IDE team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#ides"
 +++
 
 Meeting run by nikomatsakis. Minutes written by nikomatsakis.

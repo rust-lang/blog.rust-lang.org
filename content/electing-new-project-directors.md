@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-08-30
+path = "2023/08/30/electing-new-project-directors"
 title = "Electing New Project Directors"
-author = "Leadership Council"
-team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["Leadership Council"]
+aliases = ["2023/08/30/electing-new-project-directors.html"]
+
+[extra]
+team = "Leadership Council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
 Today we are launching the process to elect new Project Directors to the Rust Foundation Board of Directors.

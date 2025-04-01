@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2021-11-15
+path = "inside-rust/2021/11/15/libs-contributors-the8472-kodraus"
 title = "Please welcome The 8472 and Ashley Mannix to Library Contributors"
-author = "Mara Bos"
+authors = ["Mara Bos"]
 description = "Please welcome The 8472 and Ashley Mannix to Library Contributors"
-team = "the library team <https://www.rust-lang.org/governance/teams/library>"
+aliases = ["inside-rust/2021/11/15/libs-contributors-the8472-kodraus.html"]
+
+[extra]
+team = "the library team"
+team_url = "https://www.rust-lang.org/governance/teams/library"
 +++
 
 Please welcome The 8472 and Ashley Mannix to the

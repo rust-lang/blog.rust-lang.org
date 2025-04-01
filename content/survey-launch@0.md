@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2019-12-03
+path = "2019/12/03/survey-launch"
 title = "Launching the 2019 State of Rust Survey"
-author = "The Rust Community Team"
+authors = ["The Rust Community Team"]
 description = "Hearing from you about the fourth year of Rust"
+aliases = ["2019/12/03/survey-launch.html"]
 +++
 
 It's that time again! Time for us to take a look at how the Rust project is doing, and what we should plan for the future. The Rust Community Team is pleased to announce our [2019 State of Rust Survey][survey]! Whether or not you use Rust today, we want to know your opinions. Your responses will help the project understand its strengths and weaknesses and establish development priorities for the future.

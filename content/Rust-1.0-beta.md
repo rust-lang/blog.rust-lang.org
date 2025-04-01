@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2015-04-03
+path = "2015/04/03/Rust-1.0-beta"
 title = "Announcing Rust 1.0 Beta"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2015/04/03/Rust-1.0-beta.html"]
 +++
 
 Today we are excited to announce the [release of Rust 1.0 beta][ru]!

@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2023-12-28
+path = "2023/12/28/Rust-1.75.0"
 title = "Announcing Rust 1.75.0"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2023/12/28/Rust-1.75.0.html"]
+
+[extra]
 release = true
 +++
 

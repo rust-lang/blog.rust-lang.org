@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-11-15
+path = "inside-rust/2020/11/15/Using-rustc_codegen_cranelift"
 title = "Using rustc_codegen_cranelift for debug builds"
-author = "Jynn Nelson"
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+authors = ["Jynn Nelson"]
+aliases = ["inside-rust/2020/11/15/Using-rustc_codegen_cranelift.html"]
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 ## What is `rustc_codegen_cranelift`?

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2017-06-27
+path = "2017/06/27/Increasing-Rusts-Reach"
 title = "Increasing Rust’s Reach"
-author = "Carol Nichols"
+authors = ["Carol Nichols"]
+aliases = ["2017/06/27/Increasing-Rusts-Reach.html"]
 +++
 
 **EDIT: We've heard that Google Forms is not easily accessible in all countries; if that applies to you, please find the [application's questions in this text file](../../../images/2017-06-Increasing-Rusts-Reach/application.txt) and send the answers via email to carol.nichols@gmail.com.**

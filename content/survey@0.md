@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2016-05-09
+path = "2016/05/09/survey"
 title = "Launching the 2016 State of Rust Survey"
-author = "The Rust Community Team"
+authors = ["The Rust Community Team"]
 description = "Hearing from you about the first year of Rust"
+aliases = ["2016/05/09/survey.html"]
 +++
 
 Rust's first birthday is upon us (on May 15th, 2016), and we want to take this

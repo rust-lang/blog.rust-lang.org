@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-05-19
+path = "inside-rust/2022/05/19/governance-update"
 title = "Governance Update"
-author = "Ryan Levick and Mara Bos"
+authors = ["Ryan Levick and Mara Bos"]
+aliases = ["inside-rust/2022/05/19/governance-update.html"]
 +++
 
 Last month, the core team, all the leads of top-level teams, the moderators, and the project representatives on the Rust Foundation board jointly sent out an update to all Rust project members on investigations happening into improvements to the governance of the Rust project. 

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-12-17
+path = "2018/12/17/Rust-2018-dev-tools"
 title = "Tools in the 2018 edition"
-author = "The Dev-tools team"
+authors = ["The Dev-tools team"]
+aliases = ["2018/12/17/Rust-2018-dev-tools.html"]
 +++
 
 Tooling is an important part of what makes a programming language practical and

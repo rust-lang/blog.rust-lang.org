@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-02-06
+path = "2024/02/06/crates-io-status-codes"
 title = "crates.io: API status code changes"
-author = "Tobias Bieniek"
-team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
+authors = ["Tobias Bieniek"]
+aliases = ["2024/02/06/crates-io-status-codes.html"]
+
+[extra]
+team = "the crates.io team"
+team_url = "https://www.rust-lang.org/governance/teams/crates-io"
 +++
 
 Cargo and crates.io were developed in the rush leading up to the Rust 1.0 release to fill the needs for a tool to manage dependencies and a registry that people could use to share code. This rapid work resulted in these tools being connected with an API that initially didn't return the correct [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status). After the Rust 1.0 release, Rust's stability guarantees around backward compatibility made this non-trivial to fix, as we wanted older versions of Cargo to continue working with the current crates.io API.

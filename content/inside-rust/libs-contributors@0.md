@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-04-18
+path = "inside-rust/2022/04/18/libs-contributors"
 title = "Please welcome Thom and Chris to Library Contributors"
-author = "Mara Bos"
+authors = ["Mara Bos"]
 description = "Please welcome Thom and Chris to Library Contributors"
-team = "the library team <https://www.rust-lang.org/governance/teams/library>"
+aliases = ["inside-rust/2022/04/18/libs-contributors.html"]
+
+[extra]
+team = "the library team"
+team_url = "https://www.rust-lang.org/governance/teams/library"
 +++
 
 Please welcome Thom Chiovoloni and Chris Denton to the

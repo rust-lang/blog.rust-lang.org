@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2019-05-20
+path = "2019/05/20/The-2019-Rust-Event-Lineup"
 title = "The 2019 Rust Event Lineup"
-author = "Rust Community Team"
+authors = ["Rust Community Team"]
 description = "Lots of Rust events are happening this year; join us at one near you!"
+aliases = ["2019/05/20/The-2019-Rust-Event-Lineup.html"]
 +++
 
 We're excited for the 2019 conference season, which we're actually late in writing up. Some

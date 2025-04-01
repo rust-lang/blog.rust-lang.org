@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-07-29
+path = "2024/07/29/crates-io-development-update"
 title = "crates.io: development update"
-author = "Tobias Bieniek"
-team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
+authors = ["Tobias Bieniek"]
+aliases = ["2024/07/29/crates-io-development-update.html"]
+
+[extra]
+team = "the crates.io team"
+team_url = "https://www.rust-lang.org/governance/teams/crates-io"
 +++
 
 Since crates.io does not have releases in the classical sense, there are no release notes either. However, the crates.io team still wants to keep you all updated about the ongoing development of crates.io. This blog post is a summary of the most significant changes that we have made to crates.io in the past months.

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-08-29
+path = "2023/08/29/committing-lockfiles"
 title = "Change in Guidance on Committing Lockfiles"
-author = "Ed Page"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Ed Page"]
+aliases = ["2023/08/29/committing-lockfiles.html"]
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 For years, the Cargo team has encouraged Rust developers to

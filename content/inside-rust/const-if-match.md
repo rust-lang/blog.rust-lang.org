@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2019-11-25
+path = "inside-rust/2019/11/25/const-if-match"
 title = "`if` and `match` in constants on nightly rust"
-author = "Dylan MacKenzie"
-team = "WG const-eval <https://github.com/rust-lang/const-eval>"
+authors = ["Dylan MacKenzie"]
+aliases = ["inside-rust/2019/11/25/const-if-match.html"]
+
+[extra]
+team = "WG const-eval"
+team_url = "https://github.com/rust-lang/const-eval"
 +++
 
 **TLDR; `if` and `match` are now usable in constants on the latest nightly.**

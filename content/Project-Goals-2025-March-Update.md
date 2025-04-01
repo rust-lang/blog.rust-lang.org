@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-04-08
+path = "2025/04/08/Project-Goals-2025-March-Update"
 title = "March Project Goals Update"
-author = "Rémy Rakic"
-team = "Goals Team <https://www.rust-lang.org/governance/teams/goals>"
+authors = ["Rémy Rakic"]
+aliases = ["2025/04/08/Project-Goals-2025-March-Update.html"]
+
+[extra]
+team = "Goals Team"
+team_url = "https://www.rust-lang.org/governance/teams/goals"
 +++
 
 The Rust project is currently working towards a [slate of 40 project goals](https://rust-lang.github.io/rust-project-goals/2025h1/goals.html), with 3 of them designated as [Flagship Goals](https://rust-lang.github.io/rust-project-goals/2025h1/goals.html#flagship-goals). This post provides selected updates on our progress towards these goals (or, in some cases, lack thereof). The full details for any particular goal are available in its associated [tracking issue on the rust-project-goals repository](https://github.com/rust-lang/rust-project-goals/issues?q=is%3Aissue%20state%3Aopen%20label%3AC-tracking-issue).

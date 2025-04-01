@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2021-05-15
+path = "2021/05/15/six-years-of-rust"
 title = "Six Years of Rust"
-author = "The Rust Team"
+authors = ["The Rust Team"]
+aliases = ["2021/05/15/six-years-of-rust.html"]
 +++
 
 Today marks [Rust]'s sixth birthday since it went 1.0 in 2015. A lot has changed since then and especially over the past year, and Rust was no different. In 2020, there was no foundation yet, no const generics, and a lot of organisations were still wondering whether Rust was production ready. 

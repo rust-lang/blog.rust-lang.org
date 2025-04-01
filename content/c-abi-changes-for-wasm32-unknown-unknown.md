@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2025-04-04
+path = "2025/04/04/c-abi-changes-for-wasm32-unknown-unknown"
 title = "C ABI Changes for `wasm32-unknown-unknown`"
-author = "Alex Crichton"
+authors = ["Alex Crichton"]
+aliases = ["2025/04/04/c-abi-changes-for-wasm32-unknown-unknown.html"]
 +++
 
 The `extern "C"` ABI for the `wasm32-unknown-unknown` target has been using a

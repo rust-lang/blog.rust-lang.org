@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-06-08
+path = "inside-rust/2020/06/08/new-inline-asm"
 title = "New inline assembly syntax available in nightly"
-author = "Josh Triplett"
+authors = ["Josh Triplett"]
 description = "Rust has a new inline assembly syntax in nightly, please test"
-team = "the language team <https://www.rust-lang.org/governance/teams/lang>"
+aliases = ["inside-rust/2020/06/08/new-inline-asm.html"]
+
+[extra]
+team = "the language team"
+team_url = "https://www.rust-lang.org/governance/teams/lang"
 +++
 
 In the course of optimization, OS or embedded development, or other kinds of

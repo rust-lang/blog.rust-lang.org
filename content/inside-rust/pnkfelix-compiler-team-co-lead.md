@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2019-10-24
+path = "inside-rust/2019/10/24/pnkfelix-compiler-team-co-lead"
 title = "Please welcome pnkfelix as compiler team co-lead!"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "pnkfelix added as compiler-team co-lead"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2019/10/24/pnkfelix-compiler-team-co-lead.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 I'm happy to announce that [pnkfelix] will be joining me as compiler

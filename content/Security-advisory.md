@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2019-05-13
+path = "2019/05/13/Security-advisory"
 title = "Security advisory for the standard library"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2019/05/13/Security-advisory.html"]
 +++
 
 This is a cross-post of the [official security advisory][official]. The

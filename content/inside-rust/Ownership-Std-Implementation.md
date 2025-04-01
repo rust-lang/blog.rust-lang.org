@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-07-02
+path = "inside-rust/2020/07/02/Ownership-Std-Implementation"
 title = "Ownership of the standard library implementation"
-author = "Ashley Mannix"
-team = "The Libs team <https://www.rust-lang.org/governance/teams/library>"
+authors = ["Ashley Mannix"]
+aliases = ["inside-rust/2020/07/02/Ownership-Std-Implementation.html"]
+
+[extra]
+team = "The Libs team"
+team_url = "https://www.rust-lang.org/governance/teams/library"
 +++
 
 Our Rust project is a large and diverse one. Its activities are broadly coordinated by teams that give the community space to find and contribute to the things that matter to them.

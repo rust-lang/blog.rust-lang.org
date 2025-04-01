@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-05-07
+path = "inside-rust/2024/05/07/announcing-project-goals"
 title = "Rust Project Goals Submission Period"
-author = "Niko Matsakis and Josh Triplett"
-team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["Niko Matsakis and Josh Triplett"]
+aliases = ["inside-rust/2024/05/07/announcing-project-goals.html"]
+
+[extra]
+team = "Leadership Council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
 We're happy to announce the start of an experimental roadmapping effort dubbed **Rust project goals**. As described in [RFC 3614][], the plan is to establish a slate of **project goals** for the second half of 2024 (2024H2). **We need your help!** We are currently seeking ideas for project goals, particularly those that have motivated owners who have time and resources to drive the goal to completion. [If you'd like to propose a goal, read more about the process here!][propose]

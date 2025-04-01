@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-04-20
+path = "inside-rust/2022/04/20/libs-aspirations"
 title = "Rust Library Team Aspirations"
-author = "Mara Bos"
+authors = ["Mara Bos"]
 description = "Rust Library Team Aspirations"
-team = "The Rust Library Team <https://www.rust-lang.org/governance/teams/library>"
+aliases = ["inside-rust/2022/04/20/libs-aspirations.html"]
+
+[extra]
+team = "The Rust Library Team"
+team_url = "https://www.rust-lang.org/governance/teams/library"
 +++
 
 Over the past years, Rust has grown from a language used by a few dedicated users

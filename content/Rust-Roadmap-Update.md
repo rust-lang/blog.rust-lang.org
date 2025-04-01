@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2017-07-05
+path = "2017/07/05/Rust-Roadmap-Update"
 title = "Rust's 2017 roadmap, six months in"
-author = "Nicholas Matsakis"
+authors = ["Nicholas Matsakis"]
+aliases = ["2017/07/05/Rust-Roadmap-Update.html"]
 +++
 
 In January of this year, we adopted the [2017 Rust Roadmap][rr], which

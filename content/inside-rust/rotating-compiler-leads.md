@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-08-02
+path = "inside-rust/2023/08/02/rotating-compiler-leads"
 title = "Rotating Rust compiler team leadership"
-author = "Wesley Wiser"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+authors = ["Wesley Wiser"]
+aliases = ["inside-rust/2023/08/02/rotating-compiler-leads.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 As initiated in [late 2020] and ratified by [RFC 3262], the Rust compiler team uses a rotating system of co-leads.

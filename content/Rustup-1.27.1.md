@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2024-05-06
+path = "2024/05/06/Rustup-1.27.1"
 title = "Announcing Rustup 1.27.1"
-author = "The Rustup Team"
+authors = ["The Rustup Team"]
+aliases = ["2024/05/06/Rustup-1.27.1.html"]
 +++
 
 The Rustup team is happy to announce the release of Rustup version 1.27.1.

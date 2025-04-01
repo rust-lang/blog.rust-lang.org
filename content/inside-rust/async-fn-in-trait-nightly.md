@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2022-11-17
+path = "inside-rust/2022/11/17/async-fn-in-trait-nightly"
 title = "Async fn in trait MVP comes to nightly"
-author = "Tyler Mandry"
-team = "The Rust Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>"
+authors = ["Tyler Mandry"]
+aliases = ["inside-rust/2022/11/17/async-fn-in-trait-nightly.html"]
+
+[extra]
+team = "The Rust Async Working Group"
+team_url = "https://www.rust-lang.org/governance/wgs/wg-async"
 +++
 
 The async working group is excited to announce that `async fn` can now be used in traits in the nightly compiler. You can now write code like this:

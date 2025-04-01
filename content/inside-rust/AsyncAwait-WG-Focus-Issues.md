@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2019-10-07
+path = "inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues"
 title = "Async Foundations Update: Time for polish!"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "A new blog where the Rust team can post updates on the latest developments"
-team = "the Async Foundations WG <https://rust-lang.github.io/compiler-team/working-groups/async-await/>"
+aliases = ["inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues.html"]
+
+[extra]
+team = "the Async Foundations WG"
+team_url = "https://rust-lang.github.io/compiler-team/working-groups/async-await/"
 +++
 
 As you've perhaps heard, recently the async-await feature [landed on

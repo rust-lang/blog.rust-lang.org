@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2024-11-07
+path = "2024/11/07/gccrs-an-alternative-compiler-for-rust"
 title = "gccrs: An alternative compiler for Rust"
-author = "Arthur Cohen on behalf of the gccrs project"
+authors = ["Arthur Cohen on behalf of the gccrs project"]
+aliases = ["2024/11/07/gccrs-an-alternative-compiler-for-rust.html"]
 +++
 
 *This is a guest post from the gccrs project, at the invitation of the Rust Project, to clarify the relationship with the Rust Project and the opportunities for collaboration.*

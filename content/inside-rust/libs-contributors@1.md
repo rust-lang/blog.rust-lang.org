@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2022-08-10
+path = "inside-rust/2022/08/10/libs-contributors"
 title = "Please welcome Dan to Library Contributors"
-author = "Mara Bos"
-team = "the library team <https://www.rust-lang.org/governance/teams/library>"
+authors = ["Mara Bos"]
+aliases = ["inside-rust/2022/08/10/libs-contributors.html"]
+
+[extra]
+team = "the library team"
+team_url = "https://www.rust-lang.org/governance/teams/library"
 +++
 
 Please welcome [Dan Gohman](https://github.com/sunfishcode) to the

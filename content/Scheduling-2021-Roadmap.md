@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2020-09-21
+path = "2020/09/21/Scheduling-2021-Roadmap"
 title = "Call for 2021 Roadmap Blogs Ending Soon"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2020/09/21/Scheduling-2021-Roadmap.html"]
 +++
 
 We will be closing the collection of blog posts on **October 5th**. As a reminder, we plan to close the [survey](https://blog.rust-lang.org/2020/09/10/survey-launch.html) on **September 24th**, later this week.

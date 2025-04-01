@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-11-29
+path = "2018/11/29/a-new-look-for-rust-lang-org"
 title = "A new look for rust-lang.org"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2018/11/29/a-new-look-for-rust-lang-org.html"]
 +++
 
 Before 1.0, Rust had a reputation for changing the language on a near-daily

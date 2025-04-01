@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-03-11
+path = "inside-rust/2025/03/11/test-infra-jan-feb-2025"
 title = "This Month in Our Test Infra: January and February 2025"
-author = "Jieyou Xu"
-team = "the Bootstrap Team <https://www.rust-lang.org/governance/teams/infra#team-bootstrap>"
+authors = ["Jieyou Xu"]
+aliases = ["inside-rust/2025/03/11/test-infra-jan-feb-2025.html"]
+
+[extra]
+team = "the Bootstrap Team"
+team_url = "https://www.rust-lang.org/governance/teams/infra#team-bootstrap"
 +++
 
 # This Month in Our Test Infra: January and February 2025

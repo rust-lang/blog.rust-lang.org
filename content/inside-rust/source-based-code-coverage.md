@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-11-12
+path = "inside-rust/2020/11/12/source-based-code-coverage"
 title = "Source-based code coverage in nightly"
-author = "Tyler Mandry"
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+authors = ["Tyler Mandry"]
+aliases = ["inside-rust/2020/11/12/source-based-code-coverage.html"]
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 

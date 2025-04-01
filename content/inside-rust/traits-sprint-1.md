@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-03-28
+path = "inside-rust/2020/03/28/traits-sprint-1"
 title = "Traits working group 2020 sprint 1 summary"
-author = "Jack Huey"
-team = "The Traits WG <https://rust-lang.github.io/wg-traits/>"
+authors = ["Jack Huey"]
+aliases = ["inside-rust/2020/03/28/traits-sprint-1.html"]
+
+[extra]
+team = "The Traits WG"
+team_url = "https://rust-lang.github.io/wg-traits/"
 +++
 
 This Tuesday, the traits working group finished our first sprint of 2020, last 6 weeks from February 11th through March 24th. The last sprint was about a year ago, but we decided to resurrect the format in order to help push forward traits-related work in [Chalk] and rustc.

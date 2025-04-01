@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-02-22
+path = "inside-rust/2022/02/22/compiler-team-ambitions-2022"
 title = "Rust Compiler Ambitions for 2022"
-author = "Felix Klock, Wesley Wiser"
+authors = ["Felix Klock, Wesley Wiser"]
 description = "The compiler team's concrete initiatives and hopeful aspirations for this year."
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2022/02/22/compiler-team-ambitions-2022.html"]
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 # Rust Compiler Ambitions for 2022

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2021-01-15
+path = "inside-rust/2021/01/15/rustdoc-performance-improvements"
 title = "Rustdoc performance improvements"
-author = "Jynn Nelson and Guillaume Gomez"
-team = "The Rustdoc Team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>"
+authors = ["Jynn Nelson and Guillaume Gomez"]
+aliases = ["inside-rust/2021/01/15/rustdoc-performance-improvements.html"]
+
+[extra]
+team = "The Rustdoc Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#rustdoc"
 +++
 
 Hi everyone! [**@GuillaumeGomez**] recently tweeted about the rustdoc performance improvements and suggested that we write a blog post about it:

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-09-22
+path = "inside-rust/2023/09/22/project-director-nominees"
 title = "Announcing the Project Director Nominees"
-author = "Leadership Council"
-team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["Leadership Council"]
+aliases = ["inside-rust/2023/09/22/project-director-nominees.html"]
+
+[extra]
+team = "Leadership Council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
 # Announcing the Project Director Nominees

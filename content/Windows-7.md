@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2024-02-26
+path = "2024/02/26/Windows-7"
 title = "Updated baseline standards for Windows targets"
-author = "Chris Denton on behalf of the Compiler Team"
+authors = ["Chris Denton on behalf of the Compiler Team"]
+aliases = ["2024/02/26/Windows-7.html"]
 +++
 
 The minimum requirements for Tier 1 toolchains targeting Windows will increase with the 1.78 release (scheduled for May 02, 2024).

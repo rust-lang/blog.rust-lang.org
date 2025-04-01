@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-06-26
+path = "2024/06/26/types-team-update"
 title = "Types Team Update and Roadmap"
-author = "lcnr"
-team = "The Types Team <https://github.com/rust-lang/types-team>"
+authors = ["lcnr"]
+aliases = ["2024/06/26/types-team-update.html"]
+
+[extra]
+team = "The Types Team"
+team_url = "https://github.com/rust-lang/types-team"
 +++
 
 It has been more than a year since [the initial blog post][TypesAnnouncement] announcing the Types team, and our initial set of goals. For details on what the team is, why it was formed, or our previously-stated overarching goals, go check out that blog post. In short the Types team's purview extends to the parts of the Rust language and compiler that involve the type system, e.g. type checking, trait solving, and borrow checking. Our short and long term goals effectively work to make the type system sound, consistent, extensible, and fast.

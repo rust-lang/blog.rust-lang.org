@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-07-06
+path = "2018/07/06/security-advisory-for-rustdoc"
 title = "Security Advisory for rustdoc"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2018/07/06/security-advisory-for-rustdoc.html"]
 +++
 
 ## Quick overview

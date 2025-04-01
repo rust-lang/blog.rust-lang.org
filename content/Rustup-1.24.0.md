@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2021-04-27
+path = "2021/04/27/Rustup-1.24.0"
 title = "Announcing Rustup 1.24.0"
-author = "The Rustup Working Group"
+authors = ["The Rustup Working Group"]
+aliases = ["2021/04/27/Rustup-1.24.0.html"]
 +++
 
 > Shortly after publishing the release we got reports of [a regression][2737]

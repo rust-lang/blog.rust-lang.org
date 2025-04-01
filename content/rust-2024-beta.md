@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-01-22
+path = "2025/01/22/rust-2024-beta"
 title = "Rust 2024 in beta channel"
-author = "TC & Eric Huss"
-team = "the Edition 2024 Project Group <https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html>"
+authors = ["TC & Eric Huss"]
+aliases = ["2025/01/22/rust-2024-beta.html"]
+
+[extra]
+team = "the Edition 2024 Project Group"
+team_url = "https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html"
 +++
 
 # Rust 2024 in beta channel

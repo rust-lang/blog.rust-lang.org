@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2020-12-14
+path = "2020/12/14/Next-steps-for-the-foundation-conversation"
 title = "Next steps for the Foundation Conversation"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2020/12/14/Next-steps-for-the-foundation-conversation.html"]
 +++
 
 Last week we kicked off the [Foundation Conversation](https://blog.rust-lang.org/2020/12/07/the-foundation-conversation.html), a week-long period of Q&A forums and live broadcasts with the goal of explaining our vision for the Foundation and finding out what sorts of questions people had. We used those questions to help build a [draft Foundation FAQ](https://github.com/rust-lang/foundation-faq-2020/blob/main/FAQ.md), and if you’ve not seen it yet, you should definitely take a look -- it’s chock full of good information. Thanks to everyone for asking such great questions!

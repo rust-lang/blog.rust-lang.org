@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-05-08
+path = "inside-rust/2020/05/08/lang-team-meetings-rescheduled"
 title = "Lang Team meetings moving to new time slots"
-author = "Josh Triplett"
+authors = ["Josh Triplett"]
 description = "The Rust language team design and triage meetings have moved to new time slots"
-team = "the language team <https://www.rust-lang.org/governance/teams/lang>"
+aliases = ["inside-rust/2020/05/08/lang-team-meetings-rescheduled.html"]
+
+[extra]
+team = "the language team"
+team_url = "https://www.rust-lang.org/governance/teams/lang"
 +++
 
 The Rust language team holds two weekly meetings:

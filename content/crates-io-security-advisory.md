@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2020-07-14
+path = "2020/07/14/crates-io-security-advisory"
 title = "crates.io security advisory"
-author = "Rust Security Response WG"
+authors = ["Rust Security Response WG"]
+aliases = ["2020/07/14/crates-io-security-advisory.html"]
 +++
 
 This is a cross-post of [the official security advisory][ml]. The official post

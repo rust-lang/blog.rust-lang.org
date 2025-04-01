@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-10-30
+path = "2018/10/30/help-test-rust-2018"
 title = "Help test Rust 2018"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2018/10/30/help-test-rust-2018.html"]
 +++
 
 Back in July, we talked about ["Rust 2018"]. In short, we are launching a

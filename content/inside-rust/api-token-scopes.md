@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-05-09
+path = "inside-rust/2023/05/09/api-token-scopes"
 title = "API token scopes"
-author = "Tobias Bieniek"
-team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
+authors = ["Tobias Bieniek"]
+aliases = ["inside-rust/2023/05/09/api-token-scopes.html"]
+
+[extra]
+team = "the crates.io team"
+team_url = "https://www.rust-lang.org/governance/teams/crates-io"
 +++
 
 Roughly three years ago [Pietro Albini](https://github.com/pietroalbini) opened an RFC called ["crates.io token scopes"](https://github.com/rust-lang/rfcs/pull/2947). This RFC described an improvement to the existing API tokens, that everyone is using to publish crates to the [crates.io](https://crates.io/) package registry. The proposal was to make it possible to restrict API tokens to 1) certain operations and 2) certain crates.

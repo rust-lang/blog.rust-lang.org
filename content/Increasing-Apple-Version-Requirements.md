@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2023-09-25
+path = "2023/09/25/Increasing-Apple-Version-Requirements"
 title = "Increasing the minimum supported Apple platform versions"
-author = "BlackHoleFox"
+authors = ["BlackHoleFox"]
 description = "Modernizing and improving Apple platform support for Rust"
+aliases = ["2023/09/25/Increasing-Apple-Version-Requirements.html"]
 +++
 
 As of Rust 1.74 (to be released on November 16th, 2023), the minimum version of Apple's platforms (iOS, macOS, and tvOS) that the Rust toolchain supports will be [increased](https://github.com/rust-lang/rust/pull/104385) to newer baselines. These changes affect both the Rust compiler itself (`rustc`), other host tooling, and most importantly, the standard library and any binaries produced that use it. With these changes in place, any binaries produced will stop loading on older versions or exhibit other, unspecified, behavior.

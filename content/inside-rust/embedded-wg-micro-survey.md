@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-08-22
+path = "inside-rust/2024/08/22/embedded-wg-micro-survey"
 title = "Embedded Working Group Community Micro Survey"
-author = "James Munns"
-team = "Embedded Devices Working Group <https://www.rust-lang.org/governance/wgs/embedded>"
+authors = ["James Munns"]
+aliases = ["inside-rust/2024/08/22/embedded-wg-micro-survey.html"]
+
+[extra]
+team = "Embedded Devices Working Group"
+team_url = "https://www.rust-lang.org/governance/wgs/embedded"
 +++
 
 The [Embedded devices working group] has launched the [2024 Embedded Community Micro Survey] starting

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2020-05-15
+path = "2020/05/15/five-years-of-rust"
 title = "Five Years of Rust"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2020/05/15/five-years-of-rust.html"]
 +++
 
 With all that's going on in the world you'd be forgiven for forgetting that as

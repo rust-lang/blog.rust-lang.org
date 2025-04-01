@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2019-12-23
+path = "inside-rust/2019/12/23/formatting-the-compiler"
 title = "Formatting the compiler tree"
-author = "Mark Rousskov"
+authors = ["Mark Rousskov"]
 description = "How to rebase and what happened"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2019/12/23/formatting-the-compiler.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 ## What happened

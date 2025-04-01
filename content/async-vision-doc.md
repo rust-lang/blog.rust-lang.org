@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2021-03-18
+path = "2021/03/18/async-vision-doc"
 title = "Building a shared vision for Async Rust"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "Building a shared vision for Async Rust"
-team = "the Async Foundations Working Group <https://rust-lang.github.io/wg-async-foundations/>"
+aliases = ["2021/03/18/async-vision-doc.html"]
+
+[extra]
+team = "the Async Foundations Working Group"
+team_url = "https://rust-lang.github.io/wg-async-foundations/"
 +++
 
 [wg]: https://rust-lang.github.io/wg-async-foundations/

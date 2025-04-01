@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-05-10
+path = "2022/05/10/malicious-crate-rustdecimal"
 title = "Security advisory: malicious crate rustdecimal"
-author = "The Rust Security Response WG"
+authors = ["The Rust Security Response WG"]
+aliases = ["2022/05/10/malicious-crate-rustdecimal.html"]
 +++
 
 > This is a cross-post of [the official security advisory][advisory]. The

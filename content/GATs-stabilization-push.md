@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2021-08-03
+path = "2021/08/03/GATs-stabilization-push"
 title = "The push for GATs stabilization"
-author = "Jack Huey"
-team = "the Traits Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-traits>"
+authors = ["Jack Huey"]
+aliases = ["2021/08/03/GATs-stabilization-push.html"]
+
+[extra]
+team = "the Traits Working Group"
+team_url = "https://www.rust-lang.org/governance/teams/compiler#wg-traits"
 +++
 
 # The push for GATs stabilization

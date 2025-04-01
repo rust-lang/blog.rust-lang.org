@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-09-15
+path = "2022/09/15/const-eval-safety-rule-revision"
 title = "Const Eval (Un)Safety Rules"
-author = "Felix Klock"
+authors = ["Felix Klock"]
 description = "Various ways const-eval can change between Rust versions"
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["2022/09/15/const-eval-safety-rule-revision.html"]
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 In a recent Rust issue ([#99923][]), a developer noted that the upcoming

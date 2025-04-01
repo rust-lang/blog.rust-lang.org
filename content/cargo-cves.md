@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-09-14
+path = "2022/09/14/cargo-cves"
 title = "Security advisories for Cargo (CVE-2022-36113, CVE-2022-36114)"
-author = "The Rust Security Response WG"
+authors = ["The Rust Security Response WG"]
+aliases = ["2022/09/14/cargo-cves.html"]
 +++
 
 > This is a cross-post of [the official security advisory][advisory]. The

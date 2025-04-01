@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2020-06-10
+path = "2020/06/10/event-lineup-update"
 title = "2020 Event Lineup - Update"
-author = "The Rust Community Team"
+authors = ["The Rust Community Team"]
 description = "Join Rust events online"
+aliases = ["2020/06/10/event-lineup-update.html"]
 +++
 
 In 2020 the way we can do events suddenly changed.

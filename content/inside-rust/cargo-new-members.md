@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-04-06
+path = "inside-rust/2023/04/06/cargo-new-members"
 title = "Welcome Arlo and Scott to the Cargo Team"
-author = "Eric Huss"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Eric Huss"]
+aliases = ["inside-rust/2023/04/06/cargo-new-members.html"]
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 We are excited to welcome [Arlo Siemsen](https://github.com/arlosi) and [Scott Schafer](https://github.com/Muscraft) as new members to the Cargo Team!

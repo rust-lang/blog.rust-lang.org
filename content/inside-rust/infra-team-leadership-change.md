@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-09-08
+path = "inside-rust/2023/09/08/infra-team-leadership-change"
 title = "Leadership change in the Rust Infrastructure Team"
-author = "Pietro Albini"
-team = "the infrastructure team <https://www.rust-lang.org/governance/teams/infra>"
+authors = ["Pietro Albini"]
+aliases = ["inside-rust/2023/09/08/infra-team-leadership-change.html"]
+
+[extra]
+team = "the infrastructure team"
+team_url = "https://www.rust-lang.org/governance/teams/infra"
 +++
 
 After almost four years leading the Rust Infrastructure Team, in late July I

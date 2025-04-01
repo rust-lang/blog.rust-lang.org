@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-01-23
+path = "2025/01/23/Project-Goals-Dec-Update"
 title = "December Project Goals Update"
-author = "David Wood and Niko Matsakis"
-team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["David Wood and Niko Matsakis"]
+aliases = ["2025/01/23/Project-Goals-Dec-Update.html"]
+
+[extra]
+team = "Leadership Council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
 Over the last six months, the Rust project has been working towards a [slate of 26 project

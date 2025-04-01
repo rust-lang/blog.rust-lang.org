@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2021-04-03
+path = "inside-rust/2021/04/03/core-team-updates"
 title = "Core Team updates"
-author = "Pietro Albini"
-team = "the Rust Core Team <https://www.rust-lang.org/governance/teams/core>"
+authors = ["Pietro Albini"]
+aliases = ["inside-rust/2021/04/03/core-team-updates.html"]
+
+[extra]
+team = "the Rust Core Team"
+team_url = "https://www.rust-lang.org/governance/teams/core"
 +++
 
 Niko Matsakis is [stepping back][niko-blog] from the [Core Team][team-core],

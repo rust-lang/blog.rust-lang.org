@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-07-01
+path = "2023/07/01/rustfmt-supports-let-else-statements"
 title = "Rustfmt support for let-else statements"
-author = "Caleb Cartwright"
-team = "the style team <https://www.rust-lang.org/governance/teams/lang#Style%20team> and the rustfmt team <https://www.rust-lang.org/governance/teams/dev-tools#Rustfmt%20team>"
+authors = ["Caleb Cartwright"]
+aliases = ["2023/07/01/rustfmt-supports-let-else-statements.html"]
+
+[extra]
+team = "the style team"
+team_url = "https://www.rust-lang.org/governance/teams/lang#Style%20team> and the rustfmt team <https://www.rust-lang.org/governance/teams/dev-tools#Rustfmt%20team"
 +++
 
 Rustfmt will add support for formatting [let-else statements] starting with the nightly 2023-07-02 toolchain, and then let-else formatting support should come to stable Rust as part of the 1.72 release.

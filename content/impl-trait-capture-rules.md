@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-09-05
+path = "2024/09/05/impl-trait-capture-rules"
 title = "Changes to `impl Trait` in Rust 2024"
-author = "Niko Matsakis"
-team = "the language team <https://www.rust-lang.org/governance/teams/lang>"
+authors = ["Niko Matsakis"]
+aliases = ["2024/09/05/impl-trait-capture-rules.html"]
+
+[extra]
+team = "the language team"
+team_url = "https://www.rust-lang.org/governance/teams/lang"
 +++
 The default way `impl Trait` works in return position is changing in Rust 2024. These changes are meant to simplify `impl Trait` to better match what people want most of the time. We're also adding a flexible syntax that gives you full control when you need it.
 

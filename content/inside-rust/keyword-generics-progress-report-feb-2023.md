@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-02-23
+path = "inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023"
 title = "Keyword Generics Progress Report: February 2023"
-author = "Yoshua Wuyts"
-team = "The Keyword Generics Initiative <https://github.com/rust-lang/keyword-generics-initiative>"
+authors = ["Yoshua Wuyts"]
+aliases = ["inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html"]
+
+[extra]
+team = "The Keyword Generics Initiative"
+team_url = "https://github.com/rust-lang/keyword-generics-initiative"
 +++
 
 ## Introduction

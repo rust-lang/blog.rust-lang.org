@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2021-11-01
+path = "2021/11/01/Rust-1.56.1"
 title = "Announcing Rust 1.56.1"
-author = "The Rust Security Response WG"
+authors = ["The Rust Security Response WG"]
+aliases = ["2021/11/01/Rust-1.56.1.html"]
+
+[extra]
 release = true
 +++
 

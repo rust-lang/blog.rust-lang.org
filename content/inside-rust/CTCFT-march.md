@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-03-16
+path = "inside-rust/2022/03/16/CTCFT-march"
 title = "CTCFT 2022-03-21 Agenda"
-author = "Rust CTCFT Team"
+authors = ["Rust CTCFT Team"]
+aliases = ["inside-rust/2022/03/16/CTCFT-march.html"]
 +++
 
 The next ["Cross Team Collaboration Fun Times" (CTCFT)][CTCFT] meeting will take

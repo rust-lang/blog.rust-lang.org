@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-08-08
+path = "inside-rust/2022/08/08/compiler-team-2022-midyear-report"
 title = "Rust Compiler Midyear Report for 2022"
-author = "Felix Klock, Wesley Wiser"
+authors = ["Felix Klock, Wesley Wiser"]
 description = "The compiler team's midyear report on its ambitions for 2022."
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2022/08/08/compiler-team-2022-midyear-report.html"]
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 # Rust Compiler Midyear Report for 2022

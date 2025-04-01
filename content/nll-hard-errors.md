@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2019-11-01
+path = "2019/11/01/nll-hard-errors"
 title = "Completing the transition to the new borrow checker"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
+aliases = ["2019/11/01/nll-hard-errors.html"]
 +++
 
 For most of 2018, we've been issuing warnings about various bugs in the

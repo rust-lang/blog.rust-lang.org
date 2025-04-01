@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2019-10-11
+path = "inside-rust/2019/10/11/AsyncAwait-Not-Send-Error-Improvements"
 title = '''Improving async-await's "Future is not Send" diagnostic'''
-author = "David Wood"
+authors = ["David Wood"]
 description = "Highlighting a diagnostic improvement for async-await"
-team = "the Async Foundations WG <https://rust-lang.github.io/compiler-team/working-groups/async-await/>"
+aliases = ["inside-rust/2019/10/11/AsyncAwait-Not-Send-Error-Improvements.html"]
+
+[extra]
+team = "the Async Foundations WG"
+team_url = "https://rust-lang.github.io/compiler-team/working-groups/async-await/"
 +++
 
 Async-await is due to hit stable in the 1.39 release (only a month away!), and as announced in the

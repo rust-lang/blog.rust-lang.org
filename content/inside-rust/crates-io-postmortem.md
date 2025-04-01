@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-07-21
+path = "inside-rust/2023/07/21/crates-io-postmortem"
 title = "crates.io Postmortem: Broken Crate Downloads"
-author = "Tobias Bieniek"
-team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
+authors = ["Tobias Bieniek"]
+aliases = ["inside-rust/2023/07/21/crates-io-postmortem.html"]
+
+[extra]
+team = "the crates.io team"
+team_url = "https://www.rust-lang.org/governance/teams/crates-io"
 +++
 
 (based on https://www.atlassian.com/incident-management/postmortem/templates)

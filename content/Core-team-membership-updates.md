@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2021-09-27
+path = "2021/09/27/Core-team-membership-updates"
 title = "Core team membership updates"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2021/09/27/Core-team-membership-updates.html"]
 +++
 
 The Rust Core team is excited to announce the first of a series of changes to

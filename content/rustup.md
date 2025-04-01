@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2016-05-13
+path = "2016/05/13/rustup"
 title = "Taking Rust everywhere with rustup"
-author = "Brian Anderson"
+authors = ["Brian Anderson"]
 description = "The rustup toolchain manager makes cross-compilation in Rust a breeze"
+aliases = ["2016/05/13/rustup.html"]
 +++
 
 *Cross-compilation* is an imposing term for a common kind of desire:

@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-03-19
+path = "inside-rust/2020/03/19/terminating-rust"
 title = "Resolving Rust's forward progress guarantees"
-author = "Mark Rousskov"
+authors = ["Mark Rousskov"]
 description = "Should side-effect be the fix?"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2020/03/19/terminating-rust.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 There has been a longstanding miscompilation in Rust: programs that do not make

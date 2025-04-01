@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2019-10-29
+path = "2019/10/29/A-call-for-blogs-2020"
 title = "A call for blogs 2020"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2019/10/29/A-call-for-blogs-2020.html"]
 +++
 
 What will Rust development look like in 2020? That's partially up to you! Here's how it works:

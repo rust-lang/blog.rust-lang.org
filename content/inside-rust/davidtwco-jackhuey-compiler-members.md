@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2021-02-01
+path = "inside-rust/2021/02/01/davidtwco-jackhuey-compiler-members"
 title = "Welcoming David Wood to compiler team and Jack Huey to compiler-contributors"
-author = "Wesley Wiser"
+authors = ["Wesley Wiser"]
 description = "Please welcome David Wood to the compiler team and Jack Huey to compiler-contributors"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2021/02/01/davidtwco-jackhuey-compiler-members.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 Please welcome [David Wood] to the compiler team and [Jack Huey] to the [compiler-contributors] group!

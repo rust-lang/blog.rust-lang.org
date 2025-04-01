@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2021-06-23
+path = "inside-rust/2021/06/23/compiler-team-june-steering-cycle"
 title = "Rust Compiler June Steering Cycle"
-author = "Felix Klock"
+authors = ["Felix Klock"]
 description = "The compiler team's June steering cycle"
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2021/06/23/compiler-team-june-steering-cycle.html"]
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 On [Friday, June 4th][jun-4-zulip-archive], the Rust Compiler team had a planning meeting for the June steering cycle.

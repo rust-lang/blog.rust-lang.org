@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-04-04
+path = "2025/04/04/vision-doc-survey"
 title = "Help us create a vision for Rust's future"
-author = "Jack Huey"
-team = "Vision Doc Team <https://rust-lang.zulipchat.com/#narrow/channel/486265-vision-doc-2025>"
+authors = ["Jack Huey"]
+aliases = ["2025/04/04/vision-doc-survey.html"]
+
+[extra]
+team = "Vision Doc Team"
+team_url = "https://rust-lang.zulipchat.com/#narrow/channel/486265-vision-doc-2025"
 +++
 
 tl;dr: Please take our [survey here][survey]

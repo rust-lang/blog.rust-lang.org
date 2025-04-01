@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-09-18
+path = "inside-rust/2020/09/18/error-handling-wg-announcement"
 title = "Announcing the Error Handling Project Group"
-author = "Sean Chen"
+authors = ["Sean Chen"]
 description = "Announcing the Error Handling Project Group"
-team = "the library team <https://www.rust-lang.org/governance/teams/library>"
+aliases = ["inside-rust/2020/09/18/error-handling-wg-announcement.html"]
+
+[extra]
+team = "the library team"
+team_url = "https://www.rust-lang.org/governance/teams/library"
 +++
 
 Today we are announcing the formation of a new project group under 

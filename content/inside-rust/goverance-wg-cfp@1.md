@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2019-11-13
+path = "inside-rust/2019/11/13/goverance-wg-cfp"
 title = "Governance WG Call For Participation"
-author = "Erin Power"
-team = "The Governance WG <https://github.com/rust-lang/wg-governance>"
+authors = ["Erin Power"]
+aliases = ["inside-rust/2019/11/13/goverance-wg-cfp.html"]
+
+[extra]
+team = "The Governance WG"
+team_url = "https://github.com/rust-lang/wg-governance"
 +++
 
 Hello everyone, the governance working group has been working a few efforts, but

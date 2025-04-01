@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-04-11
+path = "2025/04/11/crates-io-security-session-cookies"
 title = "crates.io security incident: improperly stored session cookies"
-author = "Adam Harvey"
-team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
+authors = ["Adam Harvey"]
+aliases = ["2025/04/11/crates-io-security-session-cookies.html"]
+
+[extra]
+team = "the crates.io team"
+team_url = "https://www.rust-lang.org/governance/teams/crates-io"
 +++
 
 Today the crates.io team discovered that the contents of the `cargo_session`

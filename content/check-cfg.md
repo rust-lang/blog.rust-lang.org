@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-05-06
+path = "2024/05/06/check-cfg"
 title = "Automatic checking of cfgs at compile-time"
-author = "Urgau"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Urgau"]
+aliases = ["2024/05/06/check-cfg.html"]
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 The Cargo and Compiler team are delighted to announce that starting with Rust 1.80 (or nightly-2024-05-05) every _reachable_ `#[cfg]` will be **automatically checked** that they match the **expected config names and values**.

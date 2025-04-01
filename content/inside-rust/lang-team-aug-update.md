@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2021-08-04
+path = "inside-rust/2021/08/04/lang-team-aug-update"
 title = "Lang team August update"
-author = "Josh Triplett"
+authors = ["Josh Triplett"]
 description = "Lang team August update"
-team = "the lang team <https://lang-team.rust-lang.org/>"
+aliases = ["inside-rust/2021/08/04/lang-team-aug-update.html"]
+
+[extra]
+team = "the lang team"
+team_url = "https://lang-team.rust-lang.org/"
 +++
 
 This week the lang team held its August planning meeting. We normally hold

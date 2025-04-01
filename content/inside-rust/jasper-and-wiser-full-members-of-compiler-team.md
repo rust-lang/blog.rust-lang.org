@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2019-12-19
+path = "inside-rust/2019/12/19/jasper-and-wiser-full-members-of-compiler-team"
 title = "Congrats to compiler team members matthewjasper and wesleywiser"
-author = "Felix S. Klock II"
+authors = ["Felix S. Klock II"]
 description = "Congrats to compiler team members matthewjasper and wesleywiser"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2019/12/19/jasper-and-wiser-full-members-of-compiler-team.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 I am pleased to announce that [@matthewjasper][] and [@wesleywiser][]

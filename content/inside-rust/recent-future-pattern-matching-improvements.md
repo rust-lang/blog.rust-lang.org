@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-03-04
+path = "inside-rust/2020/03/04/recent-future-pattern-matching-improvements"
 title = "Recent and future pattern matching improvements"
-author = 'Mazdak "Centril" Farrokhzad'
+authors = ['Mazdak "Centril" Farrokhzad']
 description = "Reviewing recent pattern matching improvements"
-team = "the language team <https://www.rust-lang.org/governance/teams/lang>"
+aliases = ["inside-rust/2020/03/04/recent-future-pattern-matching-improvements.html"]
+
+[extra]
+team = "the language team"
+team_url = "https://www.rust-lang.org/governance/teams/lang"
 +++
 
 [ch_6]: https://doc.rust-lang.org/book/ch06-00-enums.html

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2020-01-03
+path = "2020/01/03/reducing-support-for-32-bit-apple-targets"
 title = "Reducing support for 32-bit Apple targets"
-author = "Pietro Albini"
+authors = ["Pietro Albini"]
+aliases = ["2020/01/03/reducing-support-for-32-bit-apple-targets.html"]
 +++
 
 The Rust team regrets to announce that Rust 1.41.0 (to be released on January

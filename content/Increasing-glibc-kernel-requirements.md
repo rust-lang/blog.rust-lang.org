@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-08-01
+path = "2022/08/01/Increasing-glibc-kernel-requirements"
 title = "Increasing the glibc and Linux kernel requirements"
-author = "Nikita Popov"
+authors = ["Nikita Popov"]
+aliases = ["2022/08/01/Increasing-glibc-kernel-requirements.html"]
 +++
 
 The minimum requirements for Rust toolchains targeting Linux will [increase][PR] with the

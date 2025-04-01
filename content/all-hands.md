@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-04-06
+path = "2018/04/06/all-hands"
 title = "The Rust Team All Hands in Berlin: a Recap"
-author = "Aaron Turon"
+authors = ["Aaron Turon"]
+aliases = ["2018/04/06/all-hands.html"]
 +++
 
 Last week we held an "All Hands" event in Berlin, which drew more than 50 people

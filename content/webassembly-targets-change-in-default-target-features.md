@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-09-24
+path = "2024/09/24/webassembly-targets-change-in-default-target-features"
 title = "WebAssembly targets: change in default target-features"
-author = "Alex Crichton"
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+authors = ["Alex Crichton"]
+aliases = ["2024/09/24/webassembly-targets-change-in-default-target-features.html"]
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 The Rust compiler has [recently upgraded to using LLVM 19][llvm19] and this

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-07-01
+path = "2022/07/01/RLS-deprecation"
 title = "RLS Deprecation"
-author = "The Rust Dev Tools Team"
+authors = ["The Rust Dev Tools Team"]
+aliases = ["2022/07/01/RLS-deprecation.html"]
 +++
 
 The Rust Language Server (RLS) is being deprecated in favor of [rust-analyzer](https://rust-analyzer.github.io/).

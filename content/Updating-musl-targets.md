@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2023-05-09
+path = "2023/05/09/Updating-musl-targets"
 title = "Updating Rust's Linux musl targets"
-author = "Wesley Wiser"
+authors = ["Wesley Wiser"]
 description = "musl targets will soon ship with musl 1.2"
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["2023/05/09/Updating-musl-targets.html"]
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 Beginning with Rust 1.71 (slated for stable release on 2023-07-13), the various `*-linux-musl` targets will [ship][PR] with musl 1.2.3.

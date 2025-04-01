@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-12-28
+path = "inside-rust/2020/12/28/cjgillot-and-nadrieril-for-compiler-contributors"
 title = "Please welcome cjgillot and Nadrieril to compiler-contributors"
-author = "Wesley Wiser"
+authors = ["Wesley Wiser"]
 description = "Please welcome cjgillot and Nadrieril to compiler-contributors"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2020/12/28/cjgillot-and-nadrieril-for-compiler-contributors.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 Please welcome [@cjgillot] and [@Nadrieril] to the [compiler-contributors] group!

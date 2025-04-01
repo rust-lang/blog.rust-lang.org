@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-09-17
+path = "inside-rust/2020/09/17/stabilizing-intra-doc-links"
 title = "Intra-doc links close to stabilization"
-author = "Manish Goregaokar and Jynn Nelson"
-team = "the rustdoc team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>"
+authors = ["Manish Goregaokar and Jynn Nelson"]
+aliases = ["inside-rust/2020/09/17/stabilizing-intra-doc-links.html"]
+
+[extra]
+team = "the rustdoc team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#rustdoc"
 +++
 
 We're excited to share that intra-doc links are stabilizing soon!
