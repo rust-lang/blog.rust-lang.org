@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-12-14
+path = "2020/12/14/changes-to-compiler-team.html"
 title = "Changes to Rust compiler team"
-author = "Felix S. Klock II"
+authors = ["Felix S. Klock II"]
 description = "recent leadership and membership changes"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+weight = 1
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 There have been important changes recently to the Rust compiler team.

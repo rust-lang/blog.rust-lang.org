@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-08-25
+path = "2023/08/25/leadership-initiatives.html"
 title = "Seeking help for initial Leadership Council initiatives"
-author = "Mark Rousskov"
-team = "the leadership council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["Mark Rousskov"]
+weight = 1
+
+[extra]
+team = "the leadership council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
 Having not heard any significant disagreement with the first set of [proposed priorities],

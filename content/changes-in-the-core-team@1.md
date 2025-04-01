@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-07-12
+path = "2022/07/12/changes-in-the-core-team.html"
 title = "Changes in the Core Team"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+weight = 1
 +++
 
 We want to say farewell and thanks to a couple of people who are stepping back from the Core Team:

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2024-11-07
+path = "2024/11/07/gsoc-2024-results.html"
 title = "Google Summer of Code 2024 results"
-author = "Jakub Beránek, Jack Huey and Paul Lenz"
+authors = ["Jakub Beránek, Jack Huey and Paul Lenz"]
+weight = 1
 +++
 
 As we have previously [announced][gsoc-blog-post], the Rust Project participated

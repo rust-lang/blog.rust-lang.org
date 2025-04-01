@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-07-12
+path = "2022/07/12/Rustup-1.25.1.html"
 title = "Announcing Rustup 1.25.1"
-author = "The Rustup Working Group"
+authors = ["The Rustup Working Group"]
+weight = 1
 +++
 
 The rustup working group is announcing the release of rustup version 1.25.1.

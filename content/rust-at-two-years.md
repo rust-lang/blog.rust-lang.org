@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2017-05-15
+path = "2017/05/15/rust-at-two-years.html"
 title = "Two years of Rust"
-author = "Carol (Nichols || Goulding)"
+authors = ["Carol (Nichols || Goulding)"]
 description = "Rust, two years after 1.0"
+weight = 1
 +++
 
 Rust is a language for confident, productive systems programming. It aims to

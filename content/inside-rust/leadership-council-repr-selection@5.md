@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-03-26
+path = "2025/03/26/leadership-council-repr-selection.html"
 title = "Leadership Council March 2025 Representative Selections"
-author = "Eric Huss"
-team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["Eric Huss"]
+weight = 1
+
+[extra]
+team = "Leadership Council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
 The March 2025 selections for [Leadership Council] representatives have been finalized. The compiler team has chosen [Josh Stone] as their new representative. [Eric Huss] and [James Munns] will continue to represent [Devtools] and [Launching Pad] respectively.

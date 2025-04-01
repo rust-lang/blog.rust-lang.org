@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-04-03
+path = "2025/04/03/project-director-update.html"
 title = "March 2025 Project Director Update"
-author = "Carol Nichols"
-team = "Rust Foundation Project Directors <https://foundation.rust-lang.org/about/>"
+authors = ["Carol Nichols"]
+weight = 1
+
+[extra]
+team = "Rust Foundation Project Directors"
+team_url = "https://foundation.rust-lang.org/about/"
 +++
 
 This is the fourth blog post in [the series started December

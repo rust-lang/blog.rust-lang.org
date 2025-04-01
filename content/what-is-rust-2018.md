@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-07-27
+path = "2018/07/27/what-is-rust-2018.html"
 title = "What is Rust 2018?"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+weight = 1
 +++
 
 Back in March, [we announced](https://blog.rust-lang.org/2018/03/12/roadmap.html) something new:

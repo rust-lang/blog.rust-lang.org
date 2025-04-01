@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-07-23
+path = "2020/07/23/rust-ci-is-moving-to-github-actions.html"
 title = "Rust's CI is moving to GitHub Actions"
-author = "Pietro Albini"
-team = "the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>"
+authors = ["Pietro Albini"]
+weight = 1
+
+[extra]
+team = "the infrastructure team"
+team_url = "https://www.rust-lang.org/governance/teams/operations#infra"
 +++
 
 The Rust Infrastructure Team is happy to announce that, as part of the

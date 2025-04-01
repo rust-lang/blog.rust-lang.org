@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2022-11-29
+path = "2022/11/29/libs-member.html"
 title = "Please welcome The 8472 to the Library team"
-author = "Mara Bos"
-team = "the library team <https://www.rust-lang.org/governance/teams/library>"
+authors = ["Mara Bos"]
+weight = 1
+
+[extra]
+team = "the library team"
+team_url = "https://www.rust-lang.org/governance/teams/library"
 +++
 
 We're very excited to announce that [The 8472](https://github.com/the8472)

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-09-02
+path = "2024/09/02/all-hands.html"
 title = "Save the Date: Rust All Hands 2025"
-author = "Mara Bos"
-team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["Mara Bos"]
+weight = 1
+
+[extra]
+team = "Leadership Council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
 We are very excited to announce that, after six years, we will finally have another Rust All Hands event in 2025!

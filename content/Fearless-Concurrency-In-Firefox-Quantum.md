@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2017-11-14
+path = "2017/11/14/Fearless-Concurrency-In-Firefox-Quantum.html"
 title = "Fearless Concurrency in Firefox Quantum"
-author = "Manish Goregaokar"
+authors = ["Manish Goregaokar"]
+weight = 1
 +++
 
 These days, Rust is used for [all kinds of things][friends]. But its founding application was

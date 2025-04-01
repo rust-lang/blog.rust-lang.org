@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2019-05-15
+path = "2019/05/15/4-Years-Of-Rust.html"
 title = "4 years of Rust"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+weight = 1
 +++
 
 On May 15th, 2015, [Rust][rust-release] was released to the world! After 5 years of open development (and a couple of years of sketching before that), we finally hit the button on making the attempt to create a new systems programming language a serious effort!

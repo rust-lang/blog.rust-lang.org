@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2016-08-10
+path = "2016/08/10/Shape-of-errors-to-come.html"
 title = "Shape of errors to come"
-author = "Sophia June Turner"
+authors = ["Sophia June Turner"]
+weight = 1
 +++
 
 There are changes afoot in the Rust world. If you've tried out the latest nightly, you'll notice

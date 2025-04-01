@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-04-07
+path = "2020/04/07/update-on-the-github-actions-evaluation.html"
 title = "Update on the GitHub Actions evaluation"
-author = "Pietro Albini"
-team = "the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>"
+authors = ["Pietro Albini"]
+weight = 1
+
+[extra]
+team = "the infrastructure team"
+team_url = "https://www.rust-lang.org/governance/teams/operations#infra"
 +++
 
 The infrastructure team is happy to report that [the evaluation we started last

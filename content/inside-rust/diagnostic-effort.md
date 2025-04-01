@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2022-08-16
+path = "2022/08/16/diagnostic-effort.html"
 title = "Contribute to the diagnostic translation effort!"
-author = "David Wood"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+authors = ["David Wood"]
+weight = 1
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 The Rust Diagnostics working group is leading an effort to add support for

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-03-16
+path = "2022/03/16/CTCFT-march.html"
 title = "CTCFT 2022-03-21 Agenda"
-author = "Rust CTCFT Team"
+authors = ["Rust CTCFT Team"]
+weight = 1
 +++
 
 The next ["Cross Team Collaboration Fun Times" (CTCFT)][CTCFT] meeting will take

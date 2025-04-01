@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2015-12-10
+path = "2015/12/10/Rust-1.5.html"
 title = "Announcing Rust 1.5"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+weight = 1
+
+[extra]
 release = true
 +++
 

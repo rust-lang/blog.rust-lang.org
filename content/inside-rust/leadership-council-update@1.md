@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-11-13
+path = "2023/11/13/leadership-council-update.html"
 title = "November 2023 Leadership Council Update"
-author = "Leadership Council"
-team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["Leadership Council"]
+weight = 1
+
+[extra]
+team = "Leadership Council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
 Hello again from the Rust Leadership Council!

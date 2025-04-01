@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-08-15
+path = "2024/08/15/this-development-cycle-in-cargo-1.81.html"
 title = "This Development-cycle in Cargo: 1.81"
-author = "Ed Page"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Ed Page"]
+weight = 1
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 # This Development-cycle in Cargo: 1.81

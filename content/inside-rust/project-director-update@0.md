@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-12-17
+path = "2024/12/17/project-director-update.html"
 title = "December 2024 Project Director Update"
-author = "Carol Nichols"
-team = "Rust Foundation Project Directors <https://foundation.rust-lang.org/about/>"
+authors = ["Carol Nichols"]
+weight = 1
+
+[extra]
+team = "Rust Foundation Project Directors"
+team_url = "https://foundation.rust-lang.org/about/"
 +++
 
 Hello and welcome to the inaugural Rust Foundation Project Director update! I’m Carol Nichols, I’m

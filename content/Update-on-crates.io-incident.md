@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-10-19
+path = "2018/10/19/Update-on-crates.io-incident.html"
 title = "Update on the October 15, 2018 incident on crates.io"
-author = "The Crates.io Team"
+authors = ["The Crates.io Team"]
+weight = 1
 +++
 
 On Monday, Oct 15, starting at approximately 20:00 UTC, crates.io sustained

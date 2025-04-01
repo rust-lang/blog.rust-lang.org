@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-02-27
+path = "2025/02/27/relnotes-interest-group.html"
 title = "Relnotes PR and release blog post ping group"
-author = "Jieyou Xu"
-team = "The Release Team <https://www.rust-lang.org/governance/teams/infra#team-release>"
+authors = ["Jieyou Xu"]
+weight = 1
+
+[extra]
+team = "The Release Team"
+team_url = "https://www.rust-lang.org/governance/teams/infra#team-release"
 +++
 
 # Relnotes PR and release blog post ping group is now available

@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-02-07
+path = "2020/02/07/compiler-team-meeting.html"
 title = "2020-02-06 Compiler Team Triage Meeting"
-author = "Wesley Wiser"
+authors = ["Wesley Wiser"]
 description = "2019-02-06 Compiler Team Triage Meeting"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+weight = 1
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 The compiler team had our weekly triage meeting on 2020-02-06.

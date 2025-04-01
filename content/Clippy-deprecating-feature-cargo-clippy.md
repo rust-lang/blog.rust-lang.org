@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2024-02-28
+path = "2024/02/28/Clippy-deprecating-feature-cargo-clippy.html"
 title = 'Clippy: Deprecating `feature = "cargo-clippy"`'
-author = "The Clippy Team"
+authors = ["The Clippy Team"]
+weight = 1
 +++
 
 Since Clippy [`v0.0.97`] and before it was shipped with `rustup`, Clippy

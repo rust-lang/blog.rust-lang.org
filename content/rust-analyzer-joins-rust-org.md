@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-02-21
+path = "2022/02/21/rust-analyzer-joins-rust-org.html"
 title = "rust-analyzer joins the Rust organization!"
-author = "The rust-analyzer Team on behalf of the entire Rust Team"
+authors = ["The rust-analyzer Team on behalf of the entire Rust Team"]
+weight = 1
 +++
 
 We have an exciting announcement to make!

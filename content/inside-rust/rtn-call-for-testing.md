@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-09-26
+path = "2024/09/26/rtn-call-for-testing.html"
 title = "Return type notation MVP: Call for testing!"
-author = "Michael Goulet"
-team = "The Async Working Group <https://www.rust-lang.org/governance/wgs/wg-async>"
+authors = ["Michael Goulet"]
+weight = 1
+
+[extra]
+team = "The Async Working Group"
+team_url = "https://www.rust-lang.org/governance/wgs/wg-async"
 +++
 
 The async working group is excited to announce that [RFC 3654] return type notation (RTN) is ready for testing on nightly Rust. In this post, we'll briefly describe the feature.

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2020-12-07
+path = "2020/12/07/the-foundation-conversation.html"
 title = "The Foundation Conversation"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+weight = 1
 +++
 
 In August, we on the Core Team [announced our plans to create a Foundation](https://blog.rust-lang.org/2020/08/18/laying-the-foundation-for-rusts-future.html) by the end of the year. Since that time, we’ve been doing a lot of work but it has been difficult to share many details, and we know that a lot of you have questions.

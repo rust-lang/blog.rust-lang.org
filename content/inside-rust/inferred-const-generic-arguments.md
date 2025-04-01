@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-03-05
+path = "2025/03/05/inferred-const-generic-arguments.html"
 title = "Inferred const generic arguments: Call for Testing!"
-author = "BoxyUwU"
-team = "The Const Generics Project Group <https://rust-lang.github.io/project-const-generics/>"
+authors = ["BoxyUwU"]
+weight = 1
+
+[extra]
+team = "The Const Generics Project Group"
+team_url = "https://rust-lang.github.io/project-const-generics/"
 +++
 
 We are excited to announce that `feature(generic_arg_infer)` is nearing the point of stabilization. In this post we'd like to talk a bit about what this feature does, and what comes next for it.

@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2014-11-20
+path = "2014/11/20/Cargo.html"
 title = "Cargo: Rust's community crate host"
-author = "Alex Crichton"
+authors = ["Alex Crichton"]
 description = "Today it is my pleasure to announce that crates.io is online and ready for action."
+weight = 1
 +++
 
 Today it is my pleasure to announce that [crates.io](https://crates.io/) is

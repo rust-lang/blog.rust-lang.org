@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2019-09-18
+path = "2019/09/18/upcoming-docsrs-changes.html"
 title = "Upcoming docs.rs changes"
-author = "The Rust Infrastructure Team"
+authors = ["The Rust Infrastructure Team"]
+weight = 1
 +++
 
 On September 30th breaking changes will be deployed to the [docs.rs] build

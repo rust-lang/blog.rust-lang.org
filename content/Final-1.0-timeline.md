@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2015-02-13
+path = "2015/02/13/Final-1.0-timeline.html"
 title = "Rust 1.0: status report and final timeline"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+weight = 1
 +++
 
 It's been five weeks since we released Rust 1.0-alpha! Before this

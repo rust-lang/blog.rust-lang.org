@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2019-12-03
+path = "2019/12/03/governance-wg-meeting.html"
 title = "Governance Working Group Update"
-author = "Nell Shamrell-Harrington"
-team = "the Governance WG <https://github.com/rust-lang/wg-governance>"
+authors = ["Nell Shamrell-Harrington"]
+weight = 1
+
+[extra]
+team = "the Governance WG"
+team_url = "https://github.com/rust-lang/wg-governance"
 +++
 
 Hello everyone! Two weeks ago the governance working group met. Here are the large issues we discussed and information on our next meeting.

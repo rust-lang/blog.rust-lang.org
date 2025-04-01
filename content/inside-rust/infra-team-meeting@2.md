@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2019-10-29
+path = "2019/10/29/infra-team-meeting.html"
 title = "2019-10-29 Infrastructure Team Meeting"
-author = "Pietro Albini"
-team = "the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>"
+authors = ["Pietro Albini"]
+weight = 1
+
+[extra]
+team = "the infrastructure team"
+team_url = "https://www.rust-lang.org/governance/teams/operations#infra"
 +++
 
 Meeting run by Mark-Simulacrum. Minutes written by pietroalbini.  

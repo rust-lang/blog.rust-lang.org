@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2023-08-07
+path = "2023/08/07/Rust-Survey-2023-Results.html"
 title = "2022 Annual Rust Survey Results"
-author = "The Rust Survey Working Group in partnership with the Rust Foundation"
+authors = ["The Rust Survey Working Group in partnership with the Rust Foundation"]
+weight = 1
 +++
 
 Hello, Rustaceans!

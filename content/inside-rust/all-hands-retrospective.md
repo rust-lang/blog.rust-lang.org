@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-03-18
+path = "2020/03/18/all-hands-retrospective.html"
 title = "All Hands Retrospective"
-author = "Erin Power"
-team = "The All Hands Organisers <https://www.rust-lang.org/governance/teams/core>"
+authors = ["Erin Power"]
+weight = 1
+
+[extra]
+team = "The All Hands Organisers"
+team_url = "https://www.rust-lang.org/governance/teams/core"
 +++
 
 If you're not already aware, the Rust All Hands event, originally scheduled for

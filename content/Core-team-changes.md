@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2019-02-22
+path = "2019/02/22/Core-team-changes.html"
 title = "Changes in the core team"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+weight = 1
 +++
 
 Just a quick update: You may have noticed that, in the last month or

@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2021-04-20
+path = "2021/04/20/jsha-rustdoc-member.html"
 title = "Jacob Hoffman-Andrews joins the Rustdoc team"
-author = "Guillaume Gomez"
+authors = ["Guillaume Gomez"]
 description = "new rustdoc team member"
-team = "the rustdoc team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>"
+weight = 1
+
+[extra]
+team = "the rustdoc team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#rustdoc"
 +++
 
 Hello everyone, please welcome [Jacob Hoffman-Andrews][@jsha] to the rustdoc team!

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-04-23
+path = "2020/04/23/Governance-wg.html"
 title = "Governance Working Group Update: Meeting 23 April 2020"
-author = "Val Grimm"
-team = "The Governance WG <https://github.com/rust-lang/wg-governance>"
+authors = ["Val Grimm"]
+weight = 1
+
+[extra]
+team = "The Governance WG"
+team_url = "https://github.com/rust-lang/wg-governance"
 +++
 
 Greetings Rustaceans!

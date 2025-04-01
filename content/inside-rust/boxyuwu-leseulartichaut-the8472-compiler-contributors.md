@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2021-06-15
+path = "2021/06/15/boxyuwu-leseulartichaut-the8472-compiler-contributors.html"
 title = "Please welcome Boxy, Léo Lanteri Thauvin and the8472 to compiler-contributors"
-author = "Wesley Wiser"
+authors = ["Wesley Wiser"]
 description = "Please welcome Boxy, Léo Lanteri Thauvin and the8472 to compiler-contributors"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+weight = 1
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 Please welcome [Boxy], [Léo Lanteri Thauvin] and [the8472] to the [compiler-contributors] group!

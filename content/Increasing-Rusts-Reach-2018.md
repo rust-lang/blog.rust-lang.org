@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-04-02
+path = "2018/04/02/Increasing-Rusts-Reach-2018.html"
 title = "Increasing Rust’s Reach 2018"
-author = "Ashley Williams"
+authors = ["Ashley Williams"]
+weight = 1
 +++
 
 The Rust team is happy to announce that we're running our Increasing Rust's Reach

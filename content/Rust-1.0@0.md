@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2014-09-15
+path = "2014/09/15/Rust-1.0.html"
 title = "Road to Rust 1.0"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "Rust 1.0 is on its way! We have nailed down a concrete list of features and are hard at work on implementing them."
+weight = 1
 +++
 
 Rust 1.0 is on its way! We have nailed down a concrete list of

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-02-08
+path = "2023/02/08/dns-outage-portmortem.html"
 title = "DNS Outage on 2023-01-25"
-author = "Jan David Nose"
-team = "The Rust Infrastructure Team <https://www.rust-lang.org/governance/teams/infra>"
+authors = ["Jan David Nose"]
+weight = 1
+
+[extra]
+team = "The Rust Infrastructure Team"
+team_url = "https://www.rust-lang.org/governance/teams/infra"
 +++
 
 On Wednesday, 2023-01-25 at 09:15 UTC, we deployed changes to the production

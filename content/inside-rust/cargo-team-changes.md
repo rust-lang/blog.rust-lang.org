@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2022-03-31
+path = "2022/03/31/cargo-team-changes.html"
 title = "Changes at the Cargo Team"
-author = "Eric Huss"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Eric Huss"]
+weight = 1
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 We are thrilled to publicly announce that [Weihang

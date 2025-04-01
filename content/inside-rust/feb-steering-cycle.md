@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-02-17
+path = "2022/02/17/feb-steering-cycle.html"
 title = "Rust Compiler February 2022 Steering Cycle"
-author = "Felix Klock"
+authors = ["Felix Klock"]
 description = "The compiler team's February 2022 steering cycle"
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+weight = 1
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 On [Friday, February 11th][feb-11-zulip-archive], the Rust Compiler team had a planning meeting for the February steering cycle.

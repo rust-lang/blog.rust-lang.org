@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2023-04-12
+path = "2023/04/12/trademark-policy-draft-feedback.html"
 title = "A note on the Trademark Policy Draft"
-author = "Ryan Levick, Jane Losare-Lusby, Tyler Mandry, Mark Rousskov, Josh Stone, and Josh Triplett"
+authors = ["Ryan Levick, Jane Losare-Lusby, Tyler Mandry, Mark Rousskov, Josh Stone, and Josh Triplett"]
+weight = 1
 +++
 
 # A note on the Trademark Policy Draft

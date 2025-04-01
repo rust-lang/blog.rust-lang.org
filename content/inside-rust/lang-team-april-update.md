@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-04-06
+path = "2022/04/06/lang-team-april-update.html"
 title = "Lang team April update"
-author = "Josh Triplett"
+authors = ["Josh Triplett"]
 description = "Lang team April update"
-team = "The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>"
+weight = 1
+
+[extra]
+team = "The Rust Lang Team"
+team_url = "https://www.rust-lang.org/governance/teams/lang"
 +++
 
 Today, the lang team held its April planning meeting. We hold these meetings on the first Wednesday of every month, and we use them to schedule [design meetings](https://lang-team.rust-lang.org/meetings/design.html) for the remainder of the month.

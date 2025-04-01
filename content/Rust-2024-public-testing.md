@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-11-27
+path = "2024/11/27/Rust-2024-public-testing.html"
 title = "Rust 2024 call for testing"
-author = "Eric Huss & TC"
-team = "the Edition 2024 Project Group <https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html>"
+authors = ["Eric Huss & TC"]
+weight = 1
+
+[extra]
+team = "the Edition 2024 Project Group"
+team_url = "https://doc.rust-lang.org/nightly/edition-guide/rust-2024/index.html"
 +++
 
 # Rust 2024 call for testing

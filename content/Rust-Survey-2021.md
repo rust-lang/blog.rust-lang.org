@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-02-15
+path = "2022/02/15/Rust-Survey-2021.html"
 title = "Rust Survey 2021 Results"
-author = "The Rust Survey Team"
+authors = ["The Rust Survey Team"]
+weight = 1
 +++
 
 Greetings Rustaceans!

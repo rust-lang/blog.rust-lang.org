@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-02-25
+path = "2020/02/25/intro-rustc-self-profile.html"
 title = "Intro to rustc's self profiler"
-author = "Wesley Wiser"
+authors = ["Wesley Wiser"]
 description = "Learn how to use the -Zself-profile rustc flag"
-team = "the self-profile working group <https://rust-lang.github.io/compiler-team/working-groups/self-profile/>"
+weight = 1
+
+[extra]
+team = "the self-profile working group"
+team_url = "https://rust-lang.github.io/compiler-team/working-groups/self-profile/"
 +++
 
 Over the last year, the [Self-Profile Working Group] has been building tools to profile `rustc` because we often hear requests to know where compilation time is being spent.

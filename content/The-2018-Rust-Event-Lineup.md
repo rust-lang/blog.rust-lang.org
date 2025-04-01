@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2018-01-31
+path = "2018/01/31/The-2018-Rust-Event-Lineup.html"
 title = "The 2018 Rust Event Lineup"
-author = "Rust Community"
+authors = ["Rust Community"]
 description = "Lots of Rust events are happening this year; join us at one near you!"
+weight = 1
 +++
 
 Every year there are multiple Rust events around the world, bringing together the community.

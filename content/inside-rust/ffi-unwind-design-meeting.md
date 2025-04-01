@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-02-27
+path = "2020/02/27/ffi-unwind-design-meeting.html"
 title = "Announcing the first FFI-unwind project design meeting"
-author = "Kyle Strand, Niko Matsakis, and Amanieu d'Antras"
+authors = ["Kyle Strand, Niko Matsakis, and Amanieu d'Antras"]
 description = "First design meeting for the FFI-unwind project"
-team = "the FFI-unwind project group <https://www.rust-lang.org/governance/teams/lang#wg-ffi-unwind>"
+weight = 1
+
+[extra]
+team = "the FFI-unwind project group"
+team_url = "https://www.rust-lang.org/governance/teams/lang#wg-ffi-unwind"
 +++
 
 The FFI-unwind project group, announced in [this RFC][rfc-announcement], is

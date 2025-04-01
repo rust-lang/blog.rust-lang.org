@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2016-05-05
+path = "2016/05/05/cargo-pillars.html"
 title = "Cargo: predictable dependency management"
-author = "Yehuda Katz"
+authors = ["Yehuda Katz"]
 description = "Cargo makes dependency management in Rust easy and predictable"
+weight = 1
 +++
 
 Cargo's goal is to make modern application package management a core value of

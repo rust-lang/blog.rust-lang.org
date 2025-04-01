@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2024-11-06
+path = "2024/11/06/trademark-update.html"
 title = "Next Steps on the Rust Trademark Policy"
-author = "the Leadership Council"
+authors = ["the Leadership Council"]
+weight = 1
 +++
 
 As many of you know, the Rust language trademark policy has been the subject of

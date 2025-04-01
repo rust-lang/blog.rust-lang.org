@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-01-24
+path = "2023/01/24/content-delivery-networks.html"
 title = "Diversifying our Content Delivery Networks"
-author = "Jan David Nose"
-team = "The Rust Infrastructure Team <https://www.rust-lang.org/governance/teams/infra>"
+authors = ["Jan David Nose"]
+weight = 1
+
+[extra]
+team = "The Rust Infrastructure Team"
+team_url = "https://www.rust-lang.org/governance/teams/infra"
 +++
 
 Over the past few weeks, the [Infrastructure Team] has been working on setting

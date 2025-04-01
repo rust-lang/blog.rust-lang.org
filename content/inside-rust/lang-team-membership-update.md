@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-02-14
+path = "2023/02/14/lang-team-membership-update.html"
 title = "Welcome Tyler Mandry to the Rust language team!"
-author = "Josh Triplett, Niko Matsakis"
-team = "The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>"
+authors = ["Josh Triplett, Niko Matsakis"]
+weight = 1
+
+[extra]
+team = "The Rust Lang Team"
+team_url = "https://www.rust-lang.org/governance/teams/lang"
 +++
 
 We are happy to announce that [Tyler Mandry][tmandry] is joining the Rust language design team as a full member!

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-08-24
+path = "2023/08/24/cargo-config-merging.html"
 title = "Cargo changes how arrays in config are merged"
-author = "Arlo Siemsen"
-team = "the Cargo team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Arlo Siemsen"]
+weight = 1
+
+[extra]
+team = "the Cargo team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 Cargo will be changing the order of merged configuration arrays, and we are looking for people to help test this change and provide feedback.

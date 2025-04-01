@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2017-02-06
+path = "2017/02/06/roadmap.html"
 title = "Rust's 2017 roadmap"
-author = "Aaron Turon"
+authors = ["Aaron Turon"]
 description = "What the Rust community hopes to get done in 2017"
+weight = 1
 +++
 
 Starting with 2017, Rust is following an [open roadmap process] for setting our

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-03-18
+path = "2025/03/18/hiring-for-program-management.html"
 title = "Hiring for Rust program management"
-author = "TC"
-team = "the Edition & Goals teams <https://www.rust-lang.org/governance#teams>"
+authors = ["TC"]
+weight = 1
+
+[extra]
+team = "the Edition & Goals teams"
+team_url = "https://www.rust-lang.org/governance#teams"
 +++
 
 # Hiring for Rust program management

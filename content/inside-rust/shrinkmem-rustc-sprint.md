@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2021-02-15
+path = "2021/02/15/shrinkmem-rustc-sprint.html"
 title = "March Sprint for rustc: Shrink Memory Usage"
-author = "Felix Klock"
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+authors = ["Felix Klock"]
+weight = 1
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 I am very excited about the compiler team's upcoming sprint, and

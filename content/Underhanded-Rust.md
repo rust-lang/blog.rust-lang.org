@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2016-12-15
+path = "2016/12/15/Underhanded-Rust.html"
 title = "Announcing the First Underhanded Rust Contest"
-author = "The Rust Community Team"
+authors = ["The Rust Community Team"]
+weight = 1
 +++
 
 The [Rust Community Team](https://community.rs) is pleased to announce the

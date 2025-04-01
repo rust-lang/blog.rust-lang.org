@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2024-12-05
+path = "2024/12/05/annual-survey-2024-launch.html"
 title = "Launching the 2024 State of Rust Survey"
-author = "The Rust Survey Working Group"
+authors = ["The Rust Survey Working Group"]
 description = "Share your experience using Rust in the ninth edition of the State of Rust Survey"
+weight = 1
 +++
 
 It’s time for the [2024 State of Rust Survey][survey-link]!

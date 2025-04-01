@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2015-02-20
+path = "2015/02/20/Rust-1.0-alpha2.html"
 title = "Announcing Rust 1.0.0.alpha.2"
-author = "Steve Klabnik"
+authors = ["Steve Klabnik"]
 description = "Rust 1.0.0.alpha.2 has been released."
+weight = 1
 +++
 
 Today, we are happy to announce the release of Rust 1.0.0.alpha.2! Rust is a

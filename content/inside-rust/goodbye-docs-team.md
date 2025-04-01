@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-03-27
+path = "2020/03/27/goodbye-docs-team.html"
 title = "Goodbye, docs team"
-author = "Steve Klabnik"
+authors = ["Steve Klabnik"]
 description = "The docs team is winding down"
-team = "the core team <https://www.rust-lang.org/governance/teams/core>"
+weight = 1
+
+[extra]
+team = "the core team"
+team_url = "https://www.rust-lang.org/governance/teams/core"
 +++
 
 I'll cut right to the chase: the docs team no longer exists.

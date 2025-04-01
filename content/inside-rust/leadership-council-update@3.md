@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-05-14
+path = "2024/05/14/leadership-council-update.html"
 title = "May 2024 Leadership Council Update"
-author = "Eric Huss"
-team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["Eric Huss"]
+weight = 1
+
+[extra]
+team = "Leadership Council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
 Hello again from the Rust Leadership Council!

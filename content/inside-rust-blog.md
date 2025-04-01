@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2019-10-03
+path = "2019/10/03/inside-rust-blog.html"
 title = "Announcing the Inside Rust blog"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
+weight = 1
 +++
 
 Today we're happy to announce that we're starting a second blog, the

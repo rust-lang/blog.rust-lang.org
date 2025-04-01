@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2020-11-27
+path = "2020/11/27/Rustup-1.23.0.html"
 title = "Announcing Rustup 1.23.0"
-author = "The Rustup Working Group"
+authors = ["The Rustup Working Group"]
+weight = 1
 +++
 
 The rustup working group is happy to announce the release of rustup version 1.23.0. [Rustup][install] is the recommended tool to install [Rust][rust], a programming language that is empowering everyone to build reliable and efficient software.

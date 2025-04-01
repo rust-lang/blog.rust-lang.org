@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-09-21
+path = "2018/09/21/Security-advisory-for-std.html"
 title = "Security advisory for the standard library"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+weight = 1
 +++
 
 The Rust team was recently notified of a security vulnerability affecting

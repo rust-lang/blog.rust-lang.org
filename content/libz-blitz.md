@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2017-05-05
+path = "2017/05/05/libz-blitz.html"
 title = "The Rust Libz Blitz"
-author = "Brian Anderson, David Tolnay, and Aaron Turon"
+authors = ["Brian Anderson, David Tolnay, and Aaron Turon"]
 description = "Improving the quality and maturity of Rust's core ecosystem"
+weight = 1
 +++
 
 To help bring our [2017 vision for Rust] to fruition, the Rust subteams are

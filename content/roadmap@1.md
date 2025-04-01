@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-03-12
+path = "2018/03/12/roadmap.html"
 title = "Rust's 2018 roadmap"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+weight = 1
 +++
 
 Each year the Rust community [comes together][roadmap-process] to set out a

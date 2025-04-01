@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-03-26
+path = "2025/03/26/adopting-the-fls.html"
 title = "Adopting the FLS"
-author = "TC"
-team = "the Spec Team <https://www.rust-lang.org/governance/teams/lang#team-spec>"
+authors = ["TC"]
+weight = 1
+
+[extra]
+team = "the Spec Team"
+team_url = "https://www.rust-lang.org/governance/teams/lang#team-spec"
 +++
 
 # Adopting the FLS

@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2024-04-09
+path = "2024/04/09/Rust-1.77.2.html"
 title = "Announcing Rust 1.77.2"
-author = "The Rust Security Response WG"
+authors = ["The Rust Security Response WG"]
+weight = 1
+
+[extra]
 release = true
 +++
 

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2024-11-26
+path = "2024/11/26/wasip2-tier-2.html"
 title = "The wasm32-wasip2 Target Has Reached Tier 2 Support"
-author = "Yosh Wuyts"
+authors = ["Yosh Wuyts"]
+weight = 1
 +++
 
 ## Introduction
