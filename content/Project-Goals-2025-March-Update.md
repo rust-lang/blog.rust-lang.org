@@ -212,7 +212,7 @@ Updates from [today's meeting](https://hackmd.io/@rust-lang-team/H1hZmpW6ke):
 
 
 <!-- markdown separator --> 
-*Help wanted:* Help test the deadlock code in the [issue list](https://github.com/rust-lang/rust/labels/WG-compiler-parallel) and try to reproduce the issue
+*Help wanted:* Help test the deadlock code in the [issue list](https://github.com/rust-lang/rust/labels/WG-compiler-parallel) and try to reproduce the issues. If you'd like to help, please post in [this goal's dedicated zulip topic](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Promoting.20Parallel.20Front.20End.20.28goals.23121.29/with/506292058).
 <!-- markdown separator --> 
 
 
@@ -257,7 +257,7 @@ The new test suit for parallel front end is being improved
 
 
 <!-- markdown separator --> 
-*Help wanted:* T-compiler people to work on those above issues.
+*Help wanted:* T-compiler people to work on the blocking issues [#119428](https://github.com/rust-lang/rust/issues/119428) and [#71043](https://github.com/rust-lang/rust/issues/71043). If you'd like to help, please post in [this goal's dedicated zulip topic](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Stabilize.20public.2Fprivate.20dependencies.20.28goals.23272.29).
 <!-- markdown separator --> 
 
 
