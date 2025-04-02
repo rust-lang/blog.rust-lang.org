@@ -1142,7 +1142,7 @@ Key developments: Started investigating how the proposed SIMD multiversioning op
 
 Monthly update!
 
-- https://github.com/rust-lang/rust-clippy/issues/13821 has been merged. This has succesfully optimized the MSRV extraction from the source code.
+- https://github.com/rust-lang/rust-clippy/issues/13821 has been merged. This has successfully optimized the MSRV extraction from the source code.
 
 On the old MSRV extraction,`Symbol::intern` use was sky high being about 3.5 times higher than the rest of the compilation combined. Now, it's at normal levels. Note that `Symbol::intern` is a very expensive and locking function, so this is very notable. Thanks to @Alexendoo for this incredible work!
 
