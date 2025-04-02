@@ -130,15 +130,19 @@ Other areas of progress:
 
 Update from our 2025-03-12 meeting ([full minutes](https://hackmd.io/@rust-lang-team/S181TSknyl)):
 
-* RFL team requests someone to look at #138368 which is needed by kernel, @davidtwco to do so.
+* RFL team requests someone to look at [#138368](https://github.com/rust-lang/rust/pull/138368) which is needed by kernel, [@davidtwco] to do so.
 * `-Zbinary-dep-info` may not be needed; RFL may be able to emulate it.
-* `rustdoc` changes for exporting doctests are being incorporated. @imperio is working on the kernel side of the feature too. @ojeda thinks it would be a good idea to do it in a way that does not tie both projects too much, so that `rustdoc` has more flexibility to change the output later on.
+* `rustdoc` changes for exporting doctests are being incorporated. [@GuillaumeGomez] is working on the kernel side of the feature too. [@ojeda] thinks it would be a good idea to do it in a way that does not tie both projects too much, so that `rustdoc` has more flexibility to change the output later on.
 * [Pre-RFC](https://hackmd.io/@flip1995/By87NXIc1g) authored for clippy stabilization.
 * Active iteration on the build-std design; feedback being provided by cargo team.
-* @wesleywiser sent a [PR to stabilize `-Zdwarf-version`](https://github.com/rust-lang/rust/pull/136926).
+* [@wesleywiser] sent a [PR to stabilize `-Zdwarf-version`](https://github.com/rust-lang/rust/pull/136926).
 * RfL doesn't use `cfg(no_global_oom_handling)` anymore. Soon, stable/LTS kernels that support several Rust versions will not use it either. Thus upstream Rust could potentially remove the `cfg` without breaking Linux, though other users like Windows may be still using it ([#**t-libs>no_global_oom_handling removal**](https://rust-lang.zulipchat.com/#narrow/channel/219381-t-libs/topic/no_global_oom_handling.20removal/with/498600545)).
 * Some discussion about best way forward for disabling orphan rule to allow experimentation with no firm conclusion.
 
+[@davidtwco]: https://github.com/davidtwco
+[@GuillaumeGomez]: https://github.com/GuillaumeGomez
+[@ojeda]: https://github.com/ojeda
+[@wesleywiser]: https://github.com/wesleywiser
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -162,12 +166,12 @@ Updates from [today's meeting](https://hackmd.io/@rust-lang-team/H1hZmpW6ke):
 * While not used in RFL, `naked_asm` is not on the list but it will be moving forward for stabilization. It suffers from the same LLVM bug as `global_asm` forgetting target feature flags.
 
 ### ABI-modifying compiler flags
-* Andrew Zhogin has opened a draft PR (https://github.com/rust-lang/rust/pull/138736) following Alice's issue about which santisers should be modifiers (https://github.com/rust-lang/rust/issues/138453)
+* Andrew Zhogin has opened a draft PR (<https://github.com/rust-lang/rust/pull/138736>) following Alice's issue about which santisers should be modifiers (<https://github.com/rust-lang/rust/issues/138453>)
 
 ### Extract dependency information, configure no-std externally (-Zcrate-attr)
 
 * We decided we don't need to be able to extract dependency information
-* `-Zcrate-attr` has an RFC from jyn: https://github.com/rust-lang/rfcs/pull/3791
+* `-Zcrate-attr` has an RFC from jyn: <https://github.com/rust-lang/rfcs/pull/3791>
 
 ### Rustdoc features to extract doc tests
 
@@ -175,9 +179,9 @@ Updates from [today's meeting](https://hackmd.io/@rust-lang-team/H1hZmpW6ke):
 
 ### Clippy configuration
 
-* [Pre-RFC](https://hackmd.io/@flip1995/By87NXIc1g) was published but hasn't (to our knowledge) made progress. Would be good to sync up on next steps with @flip1995.
+* [Pre-RFC](https://hackmd.io/@flip1995/By87NXIc1g) was published but hasn't (to our knowledge) made progress. Would be good to sync up on next steps with [@flip1995](https://github.com/flip1995).
 
-### Build-std (https://github.com/rust-lang/rust-project-goals/issues/274)
+### [Build-std](https://github.com/rust-lang/rust-project-goals/issues/274)
 
 * No update. Progress will resume next week when the contributor working on this returns from holiday.
 
