@@ -46,14 +46,15 @@ The Rust project is currently working towards a [slate of 40 project goals](http
 
 **Why this goal?** May 15, 2025 marks the 10-year anniversary of Rust's 1.0 release; it also marks 10 years since the [creation of the Rust subteams](https://internals.rust-lang.org/t/announcing-the-subteams/2042). At the time [there were 6 Rust teams with 24 people in total](http://web.archive.org/web/20150517235608/http://www.rust-lang.org/team.html). There are now 57 teams with 166 people. In-person All Hands meetings are an effective way to help these maintainers get to know one another with high-bandwidth discussions. This year, the Rust project will be coming together for [RustWeek 2025](https://2025.rustweek.org), a joint event organized with [RustNL](https://2025.rustweek.org/about/). Participating project teams will use the time to share knowledge, make plans, or just get to know one another better. One particular goal for the All Hands is reviewing a draft of the [Rust Vision Doc](./rust-vision-doc.md), a document that aims to take stock of where Rust is and lay out high-level goals for the next few years.
 
-**What has happened?** > - Invite more guests, after deciding on who else to invite. (To be discussed today in the council meeting.)
+**What has happened?**
+> - Invite more guests, after deciding on who else to invite. (To be discussed today in the council meeting.)
 > - Figure out if we can fund the travel+hotel costs for guests too. (To be discussed today in the council meeting.)
 
 [Mara] has asked all attendees for suggestions for guests to invite. Based on that, [Mara] has invited roughly 20 guests so far. Only two of them needed funding for their travel, which we can cover from the same travel budget.
 
 > - Open the call for proposals for talks for the Project Track (on wednesday) as part of the RustWeek conference.
 
-The Rust Project Track at RustWeek has been published: https://rustweek.org/schedule/wednesday/
+The Rust Project Track at RustWeek has been published: <https://rustweek.org/schedule/wednesday/>
 
 This track is filled with talks that are relevant to folks attending the all-hands afterwards.
 
