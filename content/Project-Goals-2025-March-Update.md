@@ -197,8 +197,7 @@ Updates from [today's meeting](https://hackmd.io/@rust-lang-team/H1hZmpW6ke):
 
 </details>
 
-
-
+<br>
 
 ## Goals looking for help
 
