@@ -8,17 +8,17 @@ team = "the Spec Team <https://www.rust-lang.org/governance/teams/lang#team-spec
 
 # Adopting the FLS
 
-Some years ago, Ferrous Systems assembled a description of Rust called the FLS[^fls].  They've since been faithfully maintaining and updating this document for new versions of Rust, and they've successfully used it to qualify toolchains based on Rust for use in safety-critical industries.  Seeing this success, others have also begun to rely on the FLS for their own qualification efforts when building with Rust.
+Some years ago, Ferrous Systems and AdaCore worked together to assemble a description of Rust called the FLS[^fls].  Ferrous Systems has since been faithfully maintaining and updating this document for new versions of Rust, and they've successfully used it to qualify toolchains based on Rust for use in safety-critical industries.  Seeing this success, others have also begun to rely on the FLS for their own qualification efforts when building with Rust.
 
 [^fls]: The FLS stood for the "Ferrocene Language Specification".  The minimal fork of Rust that Ferrous Systems qualifies and ships to their customers is called "Ferrocene", hence the name.  We'll be dropping the expansion and just calling it the FLS within the Project.
 
 The members of the Rust Project are passionate about shipping high quality tools that enable people to build reliable software at scale.  Such software is exactly the kind needed by those in safety-critical industries, and consequently we've become increasingly interested in better understanding and serving the needs of these customers of our language and of our tools.
 
-It's in that light that we're pleased to announce that we'll be adopting the FLS into the Rust Project as part of our ongoing specification efforts.  This adoption is being made possible by the gracious donation of the FLS by Ferrous Systems.  We're grateful to them for the work they've done in assembling the FLS, in making it fit for qualification purposes, in promoting its use and the use of Rust generally in safety-critical industries, and now, for working with us to take the next step and to bring the FLS into the Project.
+It's in that light that we're pleased to announce that we'll be adopting the FLS into the Rust Project as part of our ongoing specification efforts.  This adoption is being made possible by Ferrous Systems.  We're grateful to them for the work they've done in making the FLS fit for qualification purposes, in promoting its use and the use of Rust generally in safety-critical industries, and now, for working with us to take the next step and to bring it into the Project.
 
 With this adoption, we look forward to better integrating the FLS with the processes of the Project and to providing ongoing and increased assurances to all those who use Rust in safety-critical industries and, in particular, to those who use the FLS as part of their qualification efforts.
 
-This adoption and donation would not have been possible without the efforts of the Rust Foundation, and in particular of Joel Marcey, the Director of Technology at the Foundation, who has worked tirelessly to facilitate this on our behalf.  We're grateful to him and to the Foundation for this support.  The Foundation has published its own [post] about this adoption.
+This adoption would not have been possible without the efforts of the Rust Foundation, and in particular of Joel Marcey, the Director of Technology at the Foundation, who has worked tirelessly to facilitate this on our behalf.  We're grateful to him and to the Foundation for this support.  The Foundation has published its own [post] about this adoption.
 
 [post]: https://rustfoundation.org/media/ferrous-systems-donates-ferrocene-language-specification-to-rust-project/
 
