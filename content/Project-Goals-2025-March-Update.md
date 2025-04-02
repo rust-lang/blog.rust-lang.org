@@ -49,13 +49,15 @@ The Rust project is currently working towards a [slate of 40 project goals](http
 **What has happened?** > - Invite more guests, after deciding on who else to invite. (To be discussed today in the council meeting.)
 > - Figure out if we can fund the travel+hotel costs for guests too. (To be discussed today in the council meeting.)
 
-I've asked all attendees for suggestions for guests to invite. Based on that, I've invited roughly 20 guests so far. Only two of them needed funding for their travel, which we can cover from the same travel budget.
+[Mara] has asked all attendees for suggestions for guests to invite. Based on that, [Mara] has invited roughly 20 guests so far. Only two of them needed funding for their travel, which we can cover from the same travel budget.
 
 > - Open the call for proposals for talks for the Project Track (on wednesday) as part of the RustWeek conference.
 
 The Rust Project Track at RustWeek has been published: https://rustweek.org/schedule/wednesday/
 
 This track is filled with talks that are relevant to folks attending the all-hands afterwards.
+
+[Mara]: https://github.com/m-ou-se
 
 <!-- markdown separator --> 
 
