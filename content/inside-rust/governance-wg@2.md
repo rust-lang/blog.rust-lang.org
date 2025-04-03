@@ -1,9 +1,10 @@
----
-layout: post
-title: "Governance Working Group Update: Meeting 21 May 2020"
-author: Val Grimm
-team: The Governance WG <https://github.com/rust-lang/wg-governance>
----
++++
+layout = "post"
+date = 2020-05-21
+title = "Governance Working Group Update: Meeting 21 May 2020"
+author = "Val Grimm"
+team = "The Governance WG <https://github.com/rust-lang/wg-governance>"
++++
 
 Hello everyone! 
 
@@ -25,7 +26,7 @@ on the [wg-governance](https://github.com/rust-lang/wg-governance) repository, b
 
 ## Next meeting
 * Our next meeting will be 4 June 2020 via [Zulip](https://rust-lang.zulipchat.com/#narrow/stream/223182-wg-governance) 18-19 CET / 1pm-2pm EST / 10-11am PST.
-* In 2020 the agenda is always at https://hackmd.io/ATj1rZJaRimaIfIWfAOYfQ
+* In 2020 the agenda is always at <https://hackmd.io/ATj1rZJaRimaIfIWfAOYfQ>
 * Current agenda is:
     1. Domain Working Group changes
     2. Pre-RFC RFC 
@@ -33,5 +34,3 @@ on the [wg-governance](https://github.com/rust-lang/wg-governance) repository, b
 [wg-governance]: https://github.com/rust-lang/wg-governance/
 [detailed minutes]: https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.03.12.md
 [Zulip thread]: https://rust-lang.zulipchat.com/#narrow/stream/223182-wg-governance/topic/meeting.202020-03-12
-
-
