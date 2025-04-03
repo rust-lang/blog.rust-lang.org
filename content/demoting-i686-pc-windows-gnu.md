@@ -6,7 +6,7 @@ author = "Noratrieb"
 team = "Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
 +++
 
-In Rust 1.87.0, the Tier 1 target `i686-pc-windows-gnu` will be demoted to Tier 2.
+In Rust 1.88.0, the Tier 1 target `i686-pc-windows-gnu` will be demoted to Tier 2.
 As a Tier 2 Target, builds will continue to be distributed for both the standard library and the compiler.
 
 ## Background
@@ -26,7 +26,7 @@ The 32-bit version of this target is especially problematic and has significantl
 
 ## What is changed?
 
-After Rust 1.87.0, `i686-pc-windows-gnu` will now be Tier 2 with host tools.
+After Rust 1.88.0, `i686-pc-windows-gnu` will now be Tier 2 with host tools.
 For users, nothing will change immediately. Builds of both the standard library and the compiler will still be distributed by the Rust Project for use via `rustup` or alternative installation methods.
 
 This does mean that in the future, this target will likely accumulate bugs faster because of the reduced testing.
