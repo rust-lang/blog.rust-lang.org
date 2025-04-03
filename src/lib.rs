@@ -131,6 +131,7 @@ impl Generator {
         let data = json!({
             "title": blog.index_title(),
             "section": blog,
+            "root": blog.path_back_to_root(),
         });
         let path = blog.path().join("index.html");
         self.render_template(&path, "index.html", data)?;
@@ -153,6 +154,7 @@ impl Generator {
             "title": format!("{} | {}", post.title, blog.title()),
             "section": blog,
             "page": post,
+            "root": blog.path_back_to_root().join("../../../"),
         });
 
         let path = path.join(filename);
