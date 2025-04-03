@@ -98,7 +98,7 @@ fn requires_avx2() {
 
 #[target_feature(enable = "avx2")]
 fn safe_callsite() {
-    // Calling `requires_avx2` here is safe as `bar`
+    // Calling `requires_avx2` here is safe as `safe_callsite`
     // requires the `avx2` feature itself.
     requires_avx2();
 }
