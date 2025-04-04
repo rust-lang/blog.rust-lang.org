@@ -1,4 +1,4 @@
-{% macro headers(title, section) -%}
+{% macro headers(title, section, root) -%}
  <!-- Twitter card -->
  <meta name="twitter:card" content="summary">
  <meta name="twitter:site" content="@rustlang">
@@ -15,23 +15,23 @@
 <meta property="og:locale" content="en_US" />
 
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
-<link rel="stylesheet" href="/styles/highlight.css"/>
+<link rel="stylesheet" href="{{ root }}styles/vendor.css"/>
+<link rel="stylesheet" href="{{ root }}styles/fonts.css"/>
+<link rel="stylesheet" href="{{ root }}styles/app.css"/>
+<link rel="stylesheet" href="{{ root }}styles/highlight.css"/>
 
 <!-- stylesheet for user agents without js -->
 <noscript>
-    <link rel="stylesheet" href="/styles/noscript.css">
+    <link rel="stylesheet" href="{{ root }}styles/noscript.css">
 </noscript>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ root }}images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ root }}images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ root }}images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="{{ root }}images/favicon.svg">
+<link rel="manifest" href="{{ root }}images/site.webmanifest">
+<link rel="mask-icon" href="{{ root }}images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -39,5 +39,5 @@
  <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/{{ section.path }}feed.xml" title="{{ section.title }}" />
 
 <!-- theme switcher -->
-<script src="/scripts/theme-switch.js"></script>
+<script src="{{ root }}scripts/theme-switch.js"></script>
 {% endmacro %}
