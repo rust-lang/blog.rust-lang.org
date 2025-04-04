@@ -33,7 +33,7 @@ The scope of the vision RFC is not limited to the technical design of Rust. It w
 
 To answer the questions we have set, we need to gather data - we want to do our best *not* to speculate. This is going to come in two main formats:
 
-1) **A [survey]** about peoples' experiences with Rust (see below). Unlike the Annual Rust survey, the questions are open-ended and free-form, and cover somewhat different topics. This also us to gather a list of people to potentially interview:
+1) **A [survey]** about peoples' experiences with Rust (see below). Unlike the Annual Rust survey, the questions are open-ended and free-form, and cover somewhat different topics. This also allows us to gather a list of people to potentially interview.
 2) **Interviews** of people from various backgrounds and domains. In an ideal world, we would interview everyone who wants to be interviewed, but in reality we're going to try to interview as many people as we can to form a diverse and representative set.
 
 While we have some idea of who we want to talk to, we may be missing some! We're hoping that the survey will not only help us connect to the people that we want to talk to, but also potentially help us uncover people we haven't yet thought of. We are currently planning to talk to
