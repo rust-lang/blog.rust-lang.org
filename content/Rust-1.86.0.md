@@ -88,7 +88,7 @@ Previously only `unsafe` functions could be marked with the `#[target_feature]` 
 
 Safe functions marked with the target feature attribute can only be safely called from other functions marked with the target feature attribute. However, they cannot be passed to functions accepting generics bounded by the `Fn*` traits and only support being coerced to function pointers inside of functions marked with the `target_feature` attribute.
 
-Inside of functions not marked with the target feature attribute they can be called inside of an `unsafe` block, however it is the callers responsibility to ensure that the target feature is available.
+Inside of functions not marked with the target feature attribute they can be called inside of an `unsafe` block, however it is the caller's responsibility to ensure that the target feature is available.
 
 ```rust
 #[target_feature(enable = "avx2")]
