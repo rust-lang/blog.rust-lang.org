@@ -1,9 +1,9 @@
 [package]
 name = "front_matter"
 version = "0.1.0"
-edition.workspace = true
+edition = "2024"
 
 [dependencies]
-eyre.workspace = true
-serde = { workspace = true, features = ["derive"] }
-toml.workspace = true
+eyre = "=0.6.12"
+serde = { version = "=1.0.219", features = ["derive"] }
+toml = "=0.8.20"
