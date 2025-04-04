@@ -4,34 +4,19 @@
 
 This is the blog of the Rust Programming Language.
 
-It's implemented as a small static site generator, that's deployed to GitHub
-Pages via GitHub Actions.
+It uses [Zola](https://www.getzola.org/) and is deployed to GitHub Pages via GitHub Actions.
 
 ## Building
 
-To build the site locally:
+To serve the site locally, first install Zola: (takes a couple minutes)
 
-```console
-$ git clone https://github.com/rust-lang/blog.rust-lang.org
-$ cd blog.rust-lang.org
-$ cargo run
+```sh
+# using a fork because we rely on a few patches that haven't landed yet
+cargo install --locked --git https://github.com/senekor/zola --rev 620bf3c46a39b41db30b1e91756a995bbff84d3a
 ```
 
-You could do it in release mode if you'd like, but it's pretty fast in debug.
-
-From there, the generated HTML will be in a `public` directory.
-Open `public/index.html` in your web browser to view the site.
-
-```console
-$ firefox public/index.html
-```
-
-You can also run a server, if you need to preview your changes on a different machine:
-
-```console
-$ cargo run -p serve
-Serving on: http://192.168.123.45:8000
-```
+Now run `zola serve --open`.
+The site will be reloaded automatically when you make any changes.
 
 ## Contributing
 
@@ -41,9 +26,7 @@ Like everything in Rust, the blog is licensed MIT/Apache 2.0. See the two
 `LICENSE-*` files for more details. We're also governed by the Rust
 Code of Conduct, see `CODE_OF_CONDUCT.md` for more.
 
-Please send pull requests to the master branch. If you're trying to do
-something big, please open an issue before working on it, so we can make sure
-that it's something that will eventually be accepted.
+### Writing a new blog post
 
 When writing a new blog post, keep in mind the file headers:
 ```md
@@ -76,7 +59,7 @@ You can also run these tests locally for a faster feedback cycle:
   ```
   Consider making a commit with these snapshots, so you can always check the diff of your changes with git:
   ```sh
-  git add --force src/snapshots # snapshots are ignored by default
+  git add --force snapshot/src/snapshots # snapshots are ignored by default
   git commit --message "WIP add good snapshots"
   ```
   Since we can't merge the snapshots to main, don't forget to drop this commit when opening a pull request.
