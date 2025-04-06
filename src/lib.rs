@@ -139,25 +139,28 @@ impl Generator {
     }
 
     fn render_post(&self, blog: &Blog, post: &Post) -> eyre::Result<PathBuf> {
+        let mut filename = PathBuf::from(&post.filename);
+        filename.set_extension("html");
+
+        // This directory path is a compatiblity thing with a planned migration
+        // to Zola. Zola insists on rendering pages at ../index.html, but we
+        // mustn't break existing permalinks. So, ../slug.html/index.html it is.
         let path = blog
             .path()
             .join(format!("{:04}", &post.year))
             .join(format!("{:02}", &post.month))
-            .join(format!("{:02}", &post.day));
+            .join(format!("{:02}", &post.day))
+            .join(filename);
         fs::create_dir_all(self.out_directory.join(&path))?;
-
-        // then, we render the page in that path
-        let mut filename = PathBuf::from(&post.filename);
-        filename.set_extension("html");
 
         let data = json!({
             "title": format!("{} | {}", post.title, blog.title()),
             "section": blog,
             "page": post,
-            "root": blog.path_back_to_root().join("../../../"),
+            "root": blog.path_back_to_root().join("../../../../"),
         });
 
-        let path = path.join(filename);
+        let path = path.join("index.html");
         self.render_template(&path, &format!("{}.html", post.layout), data)?;
         Ok(path)
     }
