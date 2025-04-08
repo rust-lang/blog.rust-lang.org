@@ -1,6 +1,6 @@
 +++
 layout = "post"
-date = 2025-04-04
+date = 2025-04-08
 title = "March Goals Update"
 author = "Rémy Rakic"
 team = "Goals Team <https://www.rust-lang.org/governance/teams/goals>"
