@@ -1,6 +1,7 @@
 +++
 title = "Rust Blog"
 description = "Empowering everyone to build reliable and efficient software."
+generate_feeds = true
 [extra]
 index_title = "The Rust Programming Language Blog"
 index_html = """

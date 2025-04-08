@@ -2,6 +2,8 @@
 
 base_url = "https://blog.rust-lang.org"
 compile_sass = true
+generate_feeds = true
+feed_filenames = ["feed.xml", "releases.json"]
 build_search_index = false
 
 [markdown]

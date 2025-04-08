@@ -1,6 +1,7 @@
 +++
 title = "Inside Rust Blog"
 description = "Want to follow along with Rust development? Curious how you might get involved? Take a look!"
+generate_feeds = true
 [extra]
 index_title = 'The "Inside Rust" Blog'
 index_html = """
