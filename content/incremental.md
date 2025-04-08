@@ -29,7 +29,7 @@ time since implementation started towards the end of last year, all of the
 [basic components][incr-comp-rfc] are in place, the bulk of the groundwork has
 been done. You can give it a try in the nightly version of the compiler:
 
-```console
+```
 $ rustc -Zincremental=<path> ./main.rs
 ```
 

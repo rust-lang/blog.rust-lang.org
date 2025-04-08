@@ -15,7 +15,7 @@ efficient software.
 If you have a previous version of Rust installed via rustup, getting Rust
 1.45.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -49,7 +49,7 @@ pub fn cast(x: f32) -> u8 {
 The Rust compiler in Rust 1.44.0 and before would produce LLVM-IR that looks
 like this:
 
-```llvm-ir
+```
 define i8 @_ZN10playground4cast17h1bdf307357423fcfE(float %x) unnamed_addr #0 {
 start:
   %0 = fptoui float %x to i8
@@ -129,7 +129,7 @@ fn main() {
 
 This will print:
 
-```text
+```
 too_big_casted = 255
 too_small_casted = 0
 not_a_number_casted = 0

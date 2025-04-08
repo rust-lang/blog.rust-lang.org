@@ -16,7 +16,7 @@ to produce output in languages other than English.
 For example, consider the following diagnostic where a user has used a colon to
 specify a function's return type instead of an arrow:
 
-```text
+```
 error: return types are denoted using `->`
  --> src/main.rs:1:21
   |
@@ -259,7 +259,7 @@ the typed identifier corresponding to the message).
 For our example, we should add the following Fluent to
 `compiler/rustc_error_messages/locales/en-US/parser.ftl`:
 
-```fluent
+```
 parser_return_type_arrow = return types are denoted using `->`
     .suggestion = use `->` instead
 ```
@@ -290,7 +290,7 @@ you make so we can keep track of who has made a contribution! You can use
 `rustbot` to label your PR (if it wasn't labelled automatically by
 `triagebot`):
 
-```text
+```
 @rustbot label +A-translation
 ```
 
@@ -298,7 +298,7 @@ You can also assign a member of the diagnostics working group to review your PR
 by posting a comment with the following content (or including this in the PR
 description):
 
-```text
+```
 r? rust-lang/diagnostics
 ```
 

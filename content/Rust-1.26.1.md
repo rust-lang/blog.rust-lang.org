@@ -126,7 +126,7 @@ component, but this should be a one-time problem.
 This was unfortunately fixed too late to make it into 1.26 stable, so we added
 the patch for 1.26.1 to permit users to install Rust on these platforms.
 
-```console
+```
 $ rustup update
 info: syncing channel updates for 'stable-x86_64-unknown-freebsd'
 info: latest update on 2018-05-10, rust version 1.26.0 (a77568041 2018-05-07)

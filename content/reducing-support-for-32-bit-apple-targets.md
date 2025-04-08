@@ -101,7 +101,7 @@ To pin a nightly version you need to use "nightly" followed by the day the
 nightly was released, as the toolchain name. For example, to install the nightly
 released on December 1st, 2019 and to use it you can run:
 
-```plain
+```
 rustup toolchain install nightly-2019-12-01
 
 # Default to this nightly system-wide...

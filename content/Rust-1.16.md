@@ -34,7 +34,7 @@ What does it do? Let's take a step back and talk about how `rustc` compiles your
 to producing the final binary. You can see each of these steps (and how much time and memory they take)
 by passing `-Z time-passes` to a nightly compiler:
 
- ```text
+ ```
  rustc +nightly hello.rs -Z time-passes
 time: 0.003; rss: 16MB  parsing
 time: 0.000; rss: 16MB  recursion limit
@@ -195,7 +195,7 @@ println!("{}", ffo);
 
 Would give this error:
 
-```text
+```
 error[E0425]: cannot find value `ffo` in this scope
  --> foo.rs:4:20
   |
@@ -277,7 +277,7 @@ When slicing a `&str`, [you'll see better errors]. For example, this code:
 
 Is incorrect. It generates this error:
 
-```text
+```
 thread 'str::test_slice_fail_boundary_1' panicked at 'byte index 4 is not
 a char boundary; it is inside 'α' (bytes 3..5) of `abcαβγ`'
 ```

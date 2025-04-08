@@ -9,13 +9,13 @@ The rustup working group is happy to announce the release of rustup version 1.26
 
 If you have a previous version of rustup installed, getting rustup 1.26.0 is as easy as stopping any programs which may be using Rustup (e.g. closing your IDE) and running:
 
-```console
+```
 $ rustup self update
 ```
 
 Rustup will also automatically update itself at the end of a normal toolchain update:
 
-```console
+```
 $ rustup update
 ```
 

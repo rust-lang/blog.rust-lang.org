@@ -15,7 +15,7 @@ software.
 If you have a previous version of Rust installed via rustup, you can get 1.66.0
 with:
 
-```console
+```
 $ rustup update stable
 ```
 

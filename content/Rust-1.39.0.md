@@ -12,7 +12,7 @@ The Rust team is happy to announce a new version of Rust, 1.39.0. Rust is a prog
 
 If you have a previous version of Rust installed via rustup, getting Rust 1.39.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 

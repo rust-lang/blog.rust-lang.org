@@ -65,7 +65,7 @@ fn main() {
 
 In previous versions of Rust, this would fail to compile:
 
-```text
+```
 error[E0597]: borrowed value does not live long enough
   --> src/main.rs:4:14
    |

@@ -14,7 +14,7 @@ to build reliable and efficient software.
 If you have a previous version of Rust installed via rustup, getting Rust
 1.54.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 

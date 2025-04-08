@@ -15,7 +15,7 @@ efficient software.
 If you have a previous version of Rust installed via rustup, getting Rust
 1.33.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 

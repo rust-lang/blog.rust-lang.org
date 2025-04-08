@@ -98,13 +98,13 @@ if you're just interested! The reason this isn't the recommended way to build
 
 First, download the Rust repository.
 
-```console
+```
 $ git clone https://github.com/rust-lang/rust
 ```
 
 Now, let's set up the build system to use `cg_clif`.
 
-```text
+```
 $ cat > config.toml <<EOF
 [rust]
 codegen-backends = ["cranelift"]
@@ -113,7 +113,7 @@ EOF
 
 Finally, let's run the build. This can take a long time, over a half-hour in some cases.
 
-```console
+```
 $ ./x.py build
 ```
 

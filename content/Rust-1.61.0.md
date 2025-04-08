@@ -13,7 +13,7 @@ empowering everyone to build reliable and efficient software.
 
 If you have a previous version of Rust installed via rustup, you can get 1.61.0 with:
 
-```console
+```
 $ rustup update stable
 ```
 

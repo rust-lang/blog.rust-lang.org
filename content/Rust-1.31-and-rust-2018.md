@@ -71,7 +71,7 @@ We'll be covering all of this and more in this post.
 
 Let's create a new project with Cargo:
 
-```console
+```
 $ cargo new foo
 ```
 
@@ -131,7 +131,7 @@ fn main() {
 
 In older Rust, this is a compile-time error:
 
-```text
+```
 error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
  --> src/main.rs:5:18
   |
@@ -164,7 +164,7 @@ fn main() {
 
 Older Rust will give you this error:
 
-```text
+```
 error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
  --> src/main.rs:5:18
   |
@@ -179,7 +179,7 @@ error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immuta
 
 With Rust 2018, this error changes for the better:
 
-```text
+```
 error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
  --> src/main.rs:5:13
   |

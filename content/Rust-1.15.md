@@ -78,7 +78,7 @@ fn main() {
 
 This will output:
 
-```text
+```
 serialized = {"name":"Ferris"}
 deserialized = Pet { name: "Ferris" }
 ```

@@ -44,13 +44,13 @@ This release contains the following fixes:
 If you have a previous version of rustup installed, getting rustup 1.28.1 is as easy as stopping
 any programs which may be using Rustup (e.g. closing your IDE) and running:
 
-```console
+```
 $ rustup self update
 ```
 
 Rustup will also automatically update itself at the end of a normal toolchain update:
 
-```console
+```
 $ rustup update
 ```
 
@@ -71,7 +71,7 @@ As such, we recommend paying attention to the following potential issues in part
   This is a [known issue](https://github.com/rust-lang/rustup/issues/3709),
   and in the case where this issue does occur, we recommend applying the following workaround at the beginning of your workflow:
 
-  ```console
+  ```
   $ rustup set auto-self-update disable
   ```
 

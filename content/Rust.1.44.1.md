@@ -13,7 +13,7 @@ Rust is a programming language that is empowering everyone to build reliable and
 
 If you have a previous version of Rust installed via rustup, getting Rust 1.44.1 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 

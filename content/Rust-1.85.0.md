@@ -13,7 +13,7 @@ Rust is a programming language empowering everyone to build reliable and efficie
 
 If you have a previous version of Rust installed via `rustup`, you can get 1.85.0 with:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -126,7 +126,7 @@ fn main() {
 }
 ```
 
-```text
+```
 error[E0277]: the trait bound `MyType: Bar` is not satisfied
  --> src/main.rs:9:29
   |
@@ -150,7 +150,7 @@ For some APIs, it might make good sense for you to implement `Foo`, and get `Bar
 impl<T: Foo> Bar for T {}
 ```
 
-```text
+```
 error[E0277]: the trait bound `MyType: Bar` is not satisfied
   --> src/main.rs:10:29
    |
@@ -177,7 +177,7 @@ fn main() {
 }
 ```
 
-```text
+```
 [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 [0, 1, 8, 27, 64, 125, 216, 343, 512, 729]
 [0, 1, 16, 81, 256, 625, 1296, 2401, 4096, 6561]

@@ -14,7 +14,7 @@ systems programming language focused on safety, speed, and concurrency.
 If you have a previous version of Rust installed via rustup, getting Rust
 1.29.1 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 

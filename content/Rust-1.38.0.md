@@ -12,7 +12,7 @@ The Rust team is happy to announce a new version of Rust, 1.38.0. Rust is a prog
 
 If you have a previous version of Rust installed via rustup, getting Rust 1.38.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -80,7 +80,7 @@ fn main() {
 
 This prints:
 
-```text
+```
 Initializing an instance of i32
 Initializing an instance of alloc::string::String
 ```

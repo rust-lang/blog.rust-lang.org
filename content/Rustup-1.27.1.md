@@ -10,13 +10,13 @@ The Rustup team is happy to announce the release of Rustup version 1.27.1.
 
 If you have a previous version of Rustup installed, getting Rustup 1.27.1 is as easy as stopping any programs which may be using Rustup (e.g. closing your IDE) and running:
 
-```console
+```
 $ rustup self update
 ```
 
 Rustup will also automatically update itself at the end of a normal toolchain update:
 
-```console
+```
 $ rustup update
 ```
 

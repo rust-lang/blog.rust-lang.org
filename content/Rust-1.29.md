@@ -54,7 +54,7 @@ fn main() {
 Here, we're calling `do_something` a hundred times. But we never use the variable `i`.
 And so Rust warns:
 
-```console
+```
 $ cargo build
    Compiling myprogram v0.1.0 (file:///path/to/myprogram)
 warning: unused variable: `i`
@@ -71,7 +71,7 @@ warning: unused variable: `i`
 See how it suggests that we use `_i` as a name instead? We can automatically
 apply that suggestion with `cargo fix`:
 
-```console
+```
 $ cargo fix
     Checking myprogram v0.1.0 (file:///C:/Users/steve/tmp/fix)
       Fixing src\main.rs (1 fix)
@@ -122,13 +122,13 @@ a reference is a no-op, and so this is almost certainly a bug.
 
 We can get the preview of Clippy from Rustup:
 
-```console
+```
 $ rustup component add clippy-preview
 ```
 
 and then run it:
 
-```console
+```
 $ cargo clippy
 error: calls to `std::mem::drop` with a reference instead of an owned value. Dropping a reference does nothing.
  --> src\main.rs:5:5

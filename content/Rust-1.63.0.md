@@ -13,7 +13,7 @@ empowering everyone to build reliable and efficient software.
 
 If you have a previous version of Rust installed via rustup, you can get 1.63.0 with:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -113,7 +113,7 @@ For a function signature like `fn foo<T>(value: T, f: impl Copy)`, it was an
 error to specify the concrete type of `T` via turbofish: `foo::<u32>(3, 3)`
 would fail with:
 
-```text
+```
 error[E0632]: cannot provide explicit generic arguments when `impl Trait` is used in argument position
  --> src/lib.rs:4:11
   |

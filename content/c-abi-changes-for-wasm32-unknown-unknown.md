@@ -92,7 +92,7 @@ pub extern "C" fn pair_add(pair: Pair) -> u32 {
 
 This will generate the following WebAssembly function:
 
-```wasm
+```
 (func $pair_add (param i32 i32) (result i32)
   local.get 1
   local.get 0
@@ -119,7 +119,7 @@ unsigned pair_add(struct Pair pair) {
 
 which yields the generated function:
 
-```wasm
+```
 (func (param i32) (result i32)
   local.get 0
   i32.load offset=4

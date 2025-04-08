@@ -81,7 +81,7 @@ Finally, one major Cargo improvement: [`cargo update` will now print extra
 information about what it is
 changing.](https://github.com/rust-lang/cargo/pull/1931) For example:
 
-```console
+```
 $ cargo update
     Updating registry `https://github.com/rust-lang/crates.io-index`
     Updating libc v0.1.8 -> v0.1.10

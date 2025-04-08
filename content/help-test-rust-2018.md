@@ -35,14 +35,14 @@ helping us make Rust even better. <3
 First things first, you'll need to install the beta release channel of Rust.
 With [Rustup], it's as easy as:
 
-```console
+```
 $ rustup install beta
 ```
 
 To use this channel of Rust instead of your default, you can append a `+beta`
 to any `rustc` or cargo commands:
 
-```console
+```
 $ rustc +beta --version
 $ cargo +beta build
 ```
@@ -56,7 +56,7 @@ experiments.
 
 To start a new project with Rust 2018:
 
-```console
+```
 $ cargo +beta new my-sample-project
 ```
 
@@ -84,7 +84,7 @@ interoperate seamlessly!
 
 The first step is to run `cargo fix`:
 
-```console
+```
 $ cargo fix --edition
 ```
 

@@ -12,7 +12,7 @@ The Rust team is happy to announce a nice version of Rust, 1.69.0. Rust is a pro
 
 If you have a previous version of Rust installed via rustup, you can get 1.69.0 with:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -30,7 +30,7 @@ Rust 1.29.0 added the `cargo fix` subcommand to automatically fix some simple co
 
 In order to draw more attention to these increased capabilities, Cargo will now suggest running `cargo fix` or `cargo clippy --fix` when it detects warnings that are automatically fixable:
 
-```text
+```
 warning: unused import: `std::hash::Hash`
  --> src/main.rs:1:5
   |

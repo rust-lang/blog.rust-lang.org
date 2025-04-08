@@ -24,7 +24,7 @@ conflict.
 If you have a previous version of Rust installed via rustup, you can get 1.59.0
 with:
 
-```console
+```
 $ rustup update stable
 ```
 

@@ -163,7 +163,7 @@ struct Demo {
 
 used to give this error:
 
-```text
+```
 error[E0277]: the trait bound `std::thread::Thread: _IMPL_SERIALIZE_FOR_Demo::_serde::Serialize` is not satisfied
  --> src/main.rs:3:10
   |
@@ -173,7 +173,7 @@ error[E0277]: the trait bound `std::thread::Thread: _IMPL_SERIALIZE_FOR_Demo::_s
 
 Now it will give this one:
 
-```text
+```
 error[E0277]: the trait bound `std::thread::Thread: serde::Serialize` is not satisfied
  --> src/main.rs:7:5
   |

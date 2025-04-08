@@ -79,14 +79,14 @@ so in [#13367](https://github.com/rust-lang/cargo/pull/13367)
 we switched from printing a `Created` status at the end to a `Creating` status at the beginning.
 
 With the previous `Created`:
-```console
+```
 $ cargo new foo
       Adding `foo` as member of workspace at `/home/epage/src/personal/cargo`
 note: see more `Cargo.toml` keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
      Created binary (application) `foo` package
 ```
 With the new `Creating`:
-```console
+```
 $ cargo new foo
     Creating binary (application) `foo` package
       Adding `foo` as member of workspace at `/home/epage/src/personal/cargo`
@@ -349,12 +349,12 @@ We have tried to raise awareness of these tools by calling the, out in our
 
 There is also the issue that sharing a package name between a binary and a library is more convenient.
 For example, compare
-```console
+```
 $ cargo add pulldown-cmark
 cargo add typos
 ```
 with
-```console
+```
 $ cargo install pulldown-cmark
 cargo install typos-cli
 ```

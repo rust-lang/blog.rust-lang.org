@@ -13,7 +13,7 @@ Rust is a programming language empowering everyone to build reliable and efficie
 
 If you have a previous version of Rust installed via rustup, getting Rust 1.58.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 

@@ -12,7 +12,7 @@ The Rust team is happy to announce a new version of Rust, 1.76.0. Rust is a prog
 
 If you have a previous version of Rust installed via rustup, you can get 1.76.0 with:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -49,7 +49,7 @@ fn main() {
 
 This currently prints:
 
-```text
+```
 The sum of the `core::array::iter::IntoIter<i32, 3>` is 6.
 ```
 

@@ -86,7 +86,7 @@ Let's start with something simple: installing multiple Rust toolchains. In this
 example I create a new library, 'hello', then test it using rustc 1.8, then use
 rustup to install and test that same crate on the 1.9 beta.
 
-```console
+```
 $ cargo new hello && cd hello
 $ rustc --version
 rustc 1.8.0 (db2939409 2016-04-11)
@@ -142,7 +142,7 @@ good Rust citizenship!
 We can use `rustup show` to show us the installed toolchains, and `rustup
 update` to keep them up to date with Rust's releases.
 
-```console
+```
 $ rustup show
 Default host: x86_64-unknown-linux-gnu
 rustup home:  /home/user/.rustup
@@ -193,7 +193,7 @@ stable toolchain that targets the 64-bit, MSVC ABI.
 
 [abi]: https://www.rust-lang.org/downloads.html#win-foot
 
-```console
+```
 $ rustup default stable-x86_64-pc-windows-msvc
 info: syncing channel updates for 'stable-x86_64-pc-windows-msvc'
 info: downloading component 'rustc'

@@ -43,7 +43,7 @@ This incident affected all users trying to download crate files from crates.io d
 
 The issue manifest in our users seeing errors like this when running `cargo`:
 
-```text
+```
 warning: spurious network error (3 tries remaining): [6] Couldn't resolve host name (Could not resolve host: static.crates.iocrates)
 warning: spurious network error (2 tries remaining): [6] Couldn't resolve host name (Could not resolve host: static.crates.iocrates)
 warning: spurious network error (1 tries remaining): [6] Couldn't resolve host name (Could not resolve host: static.crates.iocrates)

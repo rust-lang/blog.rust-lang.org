@@ -65,7 +65,7 @@ println!("Alignment of Bar: {}", align_of::<Bar>());
 
 Output:
 
-```text
+```
 Offset of b (u16) in Foo: 2
 Alignment of Foo: 2
 Offset of b (u64) in Bar: 8
@@ -101,7 +101,7 @@ share data containing that type. Rust had inconsistent alignment for 128-bit typ
 println!("alignment of i128: {}", align_of::<i128>());
 ```
 
-```text
+```
 // rustc 1.76.0
 alignment of i128: 8
 ```
@@ -110,7 +110,7 @@ alignment of i128: 8
 printf("alignment of __int128: %zu\n", _Alignof(__int128));
 ```
 
-```text
+```
 // gcc 13.2
 alignment of __int128: 16
 
@@ -253,7 +253,7 @@ Since these changes, Rust now produces the correct alignment:
 println!("alignment of i128: {}", align_of::<i128>());
 ```
 
-```text
+```
 // rustc 1.77.0
 alignment of i128: 16
 ```

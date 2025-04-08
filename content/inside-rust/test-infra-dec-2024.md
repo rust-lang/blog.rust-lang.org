@@ -39,7 +39,7 @@ Previously, it can be very difficult to tell when a ui test fails what the actua
 
 Now, [compiletest will also show the pre-normalization mismatched output lines on failure to make this easier to tell][pr-133733]. Example output:
 
-```text
+```
 failures:
 
 ---- [ui] tests/ui/layout/enum.rs stdout ----

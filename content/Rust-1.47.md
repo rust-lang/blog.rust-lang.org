@@ -15,7 +15,7 @@ efficient software.
 If you have a previous version of Rust installed via rustup, getting Rust
 1.47.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -62,7 +62,7 @@ fn main() {
 
 you'd get this error:
 
-```text
+```
 error[E0277]: arrays only have std trait implementations for lengths 0..=32
  --> src/main.rs:4:22
   |
@@ -100,7 +100,7 @@ fn main() {
 
 would give you a backtrace that looks like this:
 
-```text
+```
 thread 'main' panicked at 'explicit panic', src/main.rs:2:5
 stack backtrace:
    0: backtrace::backtrace::libunwind::trace
@@ -150,7 +150,7 @@ stack backtrace:
 
 Now, in Rust 1.47.0, you'll see this instead:
 
-```text
+```
 thread 'main' panicked at 'explicit panic', src/main.rs:2:5
 stack backtrace:
    0: std::panicking::begin_panic
