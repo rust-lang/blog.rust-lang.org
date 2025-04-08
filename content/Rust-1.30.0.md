@@ -153,7 +153,7 @@ is made stable, which gives you the needed APIs to write these sorts of macros.
 It also has significantly improved the APIs for errors, and crates like `syn` and
 `quote` are already using them. For example, before:
 
-```rust,ignore
+```rust
 #[derive(Serialize)]
 struct Demo {
     ok: String,
@@ -202,7 +202,7 @@ let json = serde_json::from_str("...");
 The trick here is that the 'old' style wasn't always needed, due to the way Rust's
 module system worked:
 
-```rust,ignore
+```rust
 extern crate serde_json;
 
 fn main() {

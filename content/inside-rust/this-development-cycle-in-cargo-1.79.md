@@ -227,7 +227,7 @@ We could add `cargo --release <script>`.
 This runs into a common challenge of `#!` processing being limited in processing of interpreter arguments which can't be resolved in a fully cross-platform way.
 
 Unfortunately, you can't just do:
-```toml=
+```toml
 [profile.dev]
 inherits = "release"
 ```

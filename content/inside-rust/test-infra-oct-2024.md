@@ -86,7 +86,7 @@ so we can remove it as it was causing friction in adding new directives and
 authoring tests. For example, the [Specification Team][t-spec] wanted to add a
 `//@ reference` directive, but the legacy directive check would trigger on:
 
-```rust,no_run
+```rust
 // So what if we added a
 // reference to the           <- `reference` is a known directive, and
 //                               `// reference` looks suspcious!

@@ -104,12 +104,12 @@ context would return true, which is a bug; now, this comparison returns false.
 In some cases that may mean that the behavior of code will change, but we
 expect this to be relatively unlikely.
 
-```rust,ignore
+```rust
 use std::f64::NAN;
 const FOO: bool = ::std::f64::NAN >= ::std::f64::NAN;
-# On 1.26.0
+// On 1.26.0
 assert_eq!(FOO, true);
-# On 1.26.1
+// On 1.26.1
 assert_eq!(FOO, false);
 ```
 

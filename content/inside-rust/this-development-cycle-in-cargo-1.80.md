@@ -187,7 +187,7 @@ Discussion is still on-going.
 <!-- 2024-06-04 -->
 As far as we are aware, the last remaining step before stabilization is
 renaming the configuration ([#13540](https://github.com/rust-lang/cargo/issues/13540)):
-```toml=
+```toml
 [resolver]
 something-like-precedence = "something-like-rust-version"
 ```
