@@ -23,15 +23,16 @@
     <table class="post-list collapse w-100 f2-l f2-m f3-s">
     {%- set rev_pages = section.pages | reverse %}
     {%- for page in rev_pages %}
-      {%- set year = page.components[0] | int %}
-      {%- set month = page.components[1] | int %}
-      {%- set day = page.components[2] | int %}
+      {%- set num_comps = page.components | length %}
+      {%- set year = page.components | nth(n=num_comps - 4) | int %}
+      {%- set month = page.components | nth(n=num_comps - 3) | int %}
+      {%- set day = page.components | nth(n=num_comps - 2) | int %}
 
       {%- if loop.index0 == 0 %}
       {{ macros::show_year(year=year) }}
       {%- else %}
         {%- set prev_idx = loop.index0 - 1 %}
-        {%- set prev_year = rev_pages[prev_idx].components[0] | int %}
+        {%- set prev_year = rev_pages[prev_idx].components | nth(n=num_comps - 4) | int %}
         {%- if prev_year != year %}
       {{ macros::show_year(year=year) }}
         {%- endif %}

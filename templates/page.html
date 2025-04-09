@@ -1,9 +1,10 @@
 {% import "macros.html" as macros -%}
 {% extends "layout.html" -%}
 {% block page -%}
-{% set year = page.components[0] | int -%}
-{% set month = page.components[1] | int -%}
-{% set day = page.components[2] | int -%}
+{% set num_comps = page.components | length -%}
+{% set year = page.components | nth(n=num_comps - 4) | int -%}
+{% set month = page.components | nth(n=num_comps - 3) | int -%}
+{% set day = page.components | nth(n=num_comps - 2) | int -%}
 <section id="{{ macros::escape_hbs(input=page.title) }}" class="white">
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
