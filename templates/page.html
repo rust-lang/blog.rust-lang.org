@@ -1,6 +1,6 @@
-{% import "macros.html" as macros %}
-{% extends "layout.html" %}
-{% block page %}
+{% import "macros.html" as macros -%}
+{% extends "layout.html" -%}
+{% block page -%}
 {% set year = page.components[0] | int -%}
 {% set month = page.components[1] | int -%}
 {% set day = page.components[2] | int -%}
@@ -12,7 +12,7 @@
     </header>
 
     <div class="publish-date-author">{{ macros::month_name(num=month) }} {{ day }}, {{ year }} &middot; {{ macros::escape_hbs(input=page.authors | join(sep=", ")) }}
-    {% if page.extra is containing("team") %} on behalf of <a href="{{ page.extra.team_url }}">{{ page.extra.team }}</a> {% endif %}
+    {% if page.extra is containing("team") %} on behalf of <a href="{{ page.extra.team_url | safe }}">{{ page.extra.team }}</a> {% endif %}
     </div>
 
     <div class="post">

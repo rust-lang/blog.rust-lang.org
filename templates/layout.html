@@ -1,14 +1,14 @@
-{% import "macros.html" as macros %}
-{% import "headers.html" as headers %}
-{% import "nav.html" as nav %}
-{% import "footer.html" as footer %}
+{% import "macros.html" as macros -%}
+{% import "headers.html" as headers -%}
+{% import "nav.html" as nav -%}
+{% import "footer.html" as footer -%}
 
-{% if page %}
-  {% set section = get_section(path=(page.ancestors | last)) %}
-  {% set title = page.title ~ " | " ~ section.title %}
-{% else %}
-  {% set title = section.extra.index_title %}
-{% endif %}
+{% if page -%}
+  {% set section = get_section(path=(page.ancestors | last)) -%}
+  {% set title = page.title ~ " | " ~ section.title -%}
+{% else -%}
+  {% set title = section.extra.index_title -%}
+{% endif -%}
 <!DOCTYPE html>
 <html lang="en">
   <head>

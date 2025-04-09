@@ -36,7 +36,7 @@
 <meta name="theme-color" content="#ffffff">
 
  <!-- atom -->
- <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org/{{ section.path }}feed.xml" title="{{ section.title }}" />
+ <link type="application/atom+xml" rel="alternate" href="https://blog.rust-lang.org{{ section.path | safe }}feed.xml" title="{{ section.title }}" />
 
 <!-- theme switcher -->
 <script src="{{ config.base_url | safe }}/scripts/theme-switch.js"></script>
