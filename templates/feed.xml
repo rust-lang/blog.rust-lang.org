@@ -18,18 +18,20 @@
     {% for page in section.pages | reverse %}
     <entry>
         <title>{{ macros::escape_hbs(input=page.title) | safe }}</title>
-        <link rel="alternate" href="https://blog.rust-lang.org{{ section.path | trim_end_matches(pat="/") }}{{ macros::escape_hbs(input=page.path) | safe }}" type="text/html" title="{{ macros::escape_hbs(input=page.title) | safe }}" />
-        {%- set year = page.components[0] | int %}
-        {%- set month = page.components[1] | int %}
-        {%- set day = page.components[2] | int %}
+        <link rel="alternate" href="https://blog.rust-lang.org{{ macros::escape_hbs(input=page.path) | safe }}" type="text/html" title="{{ macros::escape_hbs(input=page.title) | safe }}" />
+        {%- set num_comps = page.components | length %}
+        {%- set year = page.components | nth(n=num_comps - 4) %}
+        {%- set month = page.components | nth(n=num_comps - 3) %}
+        {%- set day = page.components | nth(n=num_comps - 2) %}
         <published>{{ year }}-{{ month }}-{{ day }}T00:00:00+00:00</published>
         <updated>{{ year }}-{{ month }}-{{ day }}T00:00:00+00:00</updated>
-        <id>https://blog.rust-lang.org{{ section.path | trim_end_matches(pat="/") }}{{ macros::escape_hbs(input=page.path) | safe }}</id>
-        <content type="html" xml:base="https://blog.rust-lang.org{{ section.path | trim_end_matches(pat="/") }}{{ macros::escape_hbs(input=page.path) | safe }}">{{ macros::escape_hbs(input=page.content) }}</content>
+        <id>https://blog.rust-lang.org{{ macros::escape_hbs(input=page.path) | safe }}</id>
+        <content type="html" xml:base="https://blog.rust-lang.org{{ macros::escape_hbs(input=page.path) | safe }}">{{ macros::escape_hbs(input=page.content) }}</content>
 
         <author>
             <name>{{ macros::escape_hbs(input=page.authors | join(sep=", ")) }}</name>
         </author>
     </entry>
+    {%- if loop.index == 10 %}{% break %}{% endif %}
     {%- endfor %}
 </feed>
