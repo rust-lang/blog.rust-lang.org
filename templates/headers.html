@@ -19,12 +19,13 @@
 <link rel="stylesheet" href="{{ config.base_url | safe }}/styles/tachyons.css"/>
 <link rel="stylesheet" href="{{ config.base_url | safe }}/styles/fonts.css"/>
 <link rel="stylesheet" href="{{ config.base_url | safe }}/styles/app.css"/>
-<link rel="stylesheet" type="text/css" href="/styles/syntax-theme-dark.css" media="(prefers-color-scheme: dark)" />
-<link rel="stylesheet" type="text/css" href="/styles/syntax-theme-light.css" media="(prefers-color-scheme: light)" />
+<link rel="stylesheet" type="text/css" id="syntax-theme" />
 
 <!-- stylesheet for user agents without js -->
 <noscript>
     <link rel="stylesheet" href="{{ config.base_url | safe }}/styles/noscript.css">
+    <link rel="stylesheet" type="text/css" href="/styles/syntax-theme-dark.css" media="(prefers-color-scheme: dark)" />
+    <link rel="stylesheet" type="text/css" href="/styles/syntax-theme-light.css" media="(prefers-color-scheme: light)" />
 </noscript>
 
 <!-- favicon -->
