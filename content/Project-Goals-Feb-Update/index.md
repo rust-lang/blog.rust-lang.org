@@ -1298,7 +1298,7 @@ As a monthly update (previously posted on Zulip): We have some big progress!
 We now know what functions to optimize (or, at least have a basic knowledge of where Clippy spends its time).
 As some future functionality, I'd love to have a functionality to build cargo and rust with debug symbols and hook it up to Clippy, but that may be harder. It's not perfect, but it's a good start!
 
-![clippy benchmark perf.data report](https://rust-lang.zulipchat.com/user_uploads/4715/1Ph9uNvqBfGDLGC55UXUhAw1/2025-02-17-000451_1918x582_scrot.png)
+![clippy benchmark perf.data report](clippy_benchmark_report.png)
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
