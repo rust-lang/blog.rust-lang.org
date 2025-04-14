@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2019-12-18
+path = "inside-rust/2019/12/18/bisecting-rust-compiler"
 title = "Bisecting Rust Compiler Regressions with cargo-bisect-rustc"
-author = "Santiago Pastorino"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+authors = ["Santiago Pastorino"]
+aliases = ["inside-rust/2019/12/18/bisecting-rust-compiler.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 Let's say that you've just updated the Rust compiler version and have

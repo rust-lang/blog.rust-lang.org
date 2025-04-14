@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-12-16
+path = "2024/12/16/project-goals-nov-update"
 title = "November project goals update"
-author = "Niko Matsakis"
-team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["Niko Matsakis"]
+aliases = ["2024/12/16/project-goals-nov-update.html"]
+
+[extra]
+team = "Leadership Council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 The Rust project is currently working towards a [slate of 26 project
 goals](https://rust-lang.github.io/rust-project-goals/2024h2/goals.html), with 3 of them designed as [Flagship

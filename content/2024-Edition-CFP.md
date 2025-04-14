@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2023-12-15
+path = "2023/12/15/2024-Edition-CFP"
 title = "A Call for Proposals for the Rust 2024 Edition"
-author = "Ben Striegel on behalf of the Edition 2024 Project Group"
+authors = ["Ben Striegel on behalf of the Edition 2024 Project Group"]
+aliases = ["2023/12/15/2024-Edition-CFP.html"]
 +++
 
 The year 2024 is soon to be upon us, and as long-time Rust aficionados know,

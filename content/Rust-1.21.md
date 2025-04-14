@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2017-10-12
+path = "2017/10/12/Rust-1.21"
 title = "Announcing Rust 1.21"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2017/10/12/Rust-1.21.html"]
+
+[extra]
 release = true
 +++
 
@@ -63,7 +65,7 @@ fn main() {
 
 In previous versions of Rust, this would fail to compile:
 
-```text
+```
 error[E0597]: borrowed value does not live long enough
   --> src/main.rs:4:14
    |

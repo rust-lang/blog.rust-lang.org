@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2022-06-30
+path = "2022/06/30/Rust-1.62.0"
 title = "Announcing Rust 1.62.0"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2022/06/30/Rust-1.62.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -11,7 +13,7 @@ empowering everyone to build reliable and efficient software.
 
 If you have a previous version of Rust installed via rustup, you can get 1.62.0 with:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -35,7 +37,7 @@ You can now add new dependencies directly from the command line using `cargo add
 
 For example:
 
-```text
+```
 cargo add log
 cargo add serde --features derive
 cargo add nom@5
@@ -74,7 +76,7 @@ This is part of a long effort to improve the efficiency of Rust's lock types, wh
 
 It's now easier to build OS-less binaries for `x86_64`, for example when writing a kernel. The [`x86_64-unknown-none` target](https://doc.rust-lang.org/beta/rustc/platform-support/x86_64-unknown-none.html) has been promoted to [Tier 2](https://doc.rust-lang.org/rustc/platform-support.html#tier-2) and can be installed with rustup.
 
-```console
+```
 $ rustup target add x86_64-unknown-none
 $ rustc --target x86_64-unknown-none my_no_std_program.rs
 ```

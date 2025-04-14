@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-05-27
+path = "inside-rust/2020/05/27/contributor-survey"
 title = "2020 Contributor Survey"
-author = "Niko Matsakis and @mark-i-m"
+authors = ["Niko Matsakis and @mark-i-m"]
 description = "We announce a new survey about the code contribution experience."
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2020/05/27/contributor-survey.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 

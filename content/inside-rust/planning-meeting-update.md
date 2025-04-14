@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2019-10-25
+path = "inside-rust/2019/10/25/planning-meeting-update"
 title = "Planning meeting update"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "Planning meeting update"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2019/10/25/planning-meeting-update.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 In our planning meeting today, the compiler team has scheduled our

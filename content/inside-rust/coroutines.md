@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2023-10-23
+path = "inside-rust/2023/10/23/coroutines"
 title = "Generators are dead, long live coroutines, generators are back"
-author = "oli-obk"
+authors = ["oli-obk"]
+aliases = ["inside-rust/2023/10/23/coroutines.html"]
 +++
 
 We have renamed the unstable `Generator` trait to `Coroutine` and adjusted all terminology accordingly.

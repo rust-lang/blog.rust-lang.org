@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-10-10
+path = "inside-rust/2024/10/10/test-infra-oct-2024"
 title = "This Month in Our Test Infra: September 2024"
-author = "Jieyou Xu"
-team = "the Bootstrap Team <https://www.rust-lang.org/governance/teams/infra#team-bootstrap>"
+authors = ["Jieyou Xu"]
+aliases = ["inside-rust/2024/10/10/test-infra-oct-2024.html"]
+
+[extra]
+team = "the Bootstrap Team"
+team_url = "https://www.rust-lang.org/governance/teams/infra#team-bootstrap"
 +++
 
 # This Month in Our Test Infra: September 2024
@@ -83,7 +86,7 @@ so we can remove it as it was causing friction in adding new directives and
 authoring tests. For example, the [Specification Team][t-spec] wanted to add a
 `//@ reference` directive, but the legacy directive check would trigger on:
 
-```rust,no_run
+```rust
 // So what if we added a
 // reference to the           <- `reference` is a known directive, and
 //                               `// reference` looks suspcious!

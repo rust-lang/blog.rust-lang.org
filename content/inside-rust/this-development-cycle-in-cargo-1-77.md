@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-02-13
+path = "inside-rust/2024/02/13/this-development-cycle-in-cargo-1-77"
 title = "This Development-cycle in Cargo: 1.77"
-author = "Ed Page"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Ed Page"]
+aliases = ["inside-rust/2024/02/13/this-development-cycle-in-cargo-1-77.html"]
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 # This Development-cycle in Cargo: 1.77
@@ -16,17 +19,17 @@ This is a summary of what has been happening around Cargo development for the la
 - [Implementation](#implementation)
   - [Polishing `cargo new`](#polishing-cargo-new)
   - [Merging `cargo upgrade` into `cargo update`](#merging-cargo-upgrade-into-cargo-update)
-  - [`cargo update --precise <yanked>`](#cargo-update---precise-yanked)
-  - [`-Zcheck-cfg`](#-zcheck-cfg)
+  - [`cargo update --precise <yanked>`](#cargo-update-precise-yanked)
+  - [`-Zcheck-cfg`](#zcheck-cfg)
   - [User-controlled diagnostics](#user-controlled-cargo-diagnostics)
-  - [Strip `std`'s debuginfo when debuginfo is not requested](#strip-stds-debuginfo-when-debuginfo-is-not-requested)
-  - [Stabilizing `cargo metadata`'s `id` field](#stabilizing-cargo-metadatas-id-field)
+  - [Strip `std`'s debuginfo when debuginfo is not requested](#strip-std-s-debuginfo-when-debuginfo-is-not-requested)
+  - [Stabilizing `cargo metadata`'s `id` field](#stabilizing-cargo-metadata-s-id-field)
 - [Design discussions](#design-discussions)
   - [Being-less-surprising-when-people-benchmark-debug-builds](#being-less-surprising-when-people-benchmark-debug-builds)
   - [Cargo script](#cargo-script)
   - [When to use packages or workspaces?](#when-to-use-packages-or-workspaces)
   - [RFC #3537: Make Cargo respect minimum supported Rust version (MSRV) when selecting dependencies](#rfc-3537-make-cargo-respect-minimum-supported-rust-version-msrv-when-selecting-dependencies)
-  - [RFC #3516 (public/private dependencies)](#rfc-3516-publicprivate-dependencies)
+  - [RFC #3516 (public/private dependencies)](#rfc-3516-public-private-dependencies)
   - [Fallback dependencies](#fallback-dependencies)
   - [Build script directives](#build-script-directives)
   - [Cargo and rustup](#cargo-and-rustup)
@@ -76,14 +79,14 @@ so in [#13367](https://github.com/rust-lang/cargo/pull/13367)
 we switched from printing a `Created` status at the end to a `Creating` status at the beginning.
 
 With the previous `Created`:
-```console
+```
 $ cargo new foo
       Adding `foo` as member of workspace at `/home/epage/src/personal/cargo`
 note: see more `Cargo.toml` keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
      Created binary (application) `foo` package
 ```
 With the new `Creating`:
-```console
+```
 $ cargo new foo
     Creating binary (application) `foo` package
       Adding `foo` as member of workspace at `/home/epage/src/personal/cargo`
@@ -346,12 +349,12 @@ We have tried to raise awareness of these tools by calling the, out in our
 
 There is also the issue that sharing a package name between a binary and a library is more convenient.
 For example, compare
-```console
+```
 $ cargo add pulldown-cmark
 cargo add typos
 ```
 with
-```console
+```
 $ cargo install pulldown-cmark
 cargo install typos-cli
 ```

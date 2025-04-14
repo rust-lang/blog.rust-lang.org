@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2017-08-31
+path = "2017/08/31/Rust-1.20"
 title = "Announcing Rust 1.20"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2017/08/31/Rust-1.20.html"]
+
+[extra]
 release = true
 +++
 
@@ -184,7 +186,7 @@ Stability is a property of sorting algorithms that may or may not matter to you,
 but now you have both options! Here's a brief summary: imagine we had a list
 of words like this:
 
-```text
+```
 rust
 crate
 package
@@ -194,7 +196,7 @@ cargo
 Two of these words, `cargo` and `crate`, both start with the letter `c`. A stable
 sort that sorts only on the first letter must produce this result:
 
-```text
+```
 crate
 cargo
 package
@@ -205,7 +207,7 @@ That is, because `crate` came before `cargo` in the original list, it must also 
 before it in the final list. An unstable sort could provide that result, but could
 also give this answer too:
 
-```text
+```
 cargo
 crate
 package

@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2017-09-18
+path = "2017/09/18/impl-future-for-rust"
 title = "impl Future for Rust"
-author = "Aaron Turon"
+authors = ["Aaron Turon"]
 description = "The Rust community is going to finish out its 2017 roadmap with a bang—and we want your help!"
+aliases = ["2017/09/18/impl-future-for-rust.html"]
 +++
 
 The Rust community has been hard at work on our [2017 roadmap], but as we come

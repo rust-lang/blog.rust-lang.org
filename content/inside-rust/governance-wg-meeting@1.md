@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2019-12-10
+path = "inside-rust/2019/12/10/governance-wg-meeting"
 title = "Governance Working Group Update"
-author = "Niko Matsakis"
-team = "the Governance WG <https://github.com/rust-lang/wg-governance>"
+authors = ["Niko Matsakis"]
+aliases = ["inside-rust/2019/12/10/governance-wg-meeting.html"]
+
+[extra]
+team = "the Governance WG"
+team_url = "https://github.com/rust-lang/wg-governance"
 +++
 
 Hello everyone! The governance working group met last week to discuss

@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-06-09
+path = "inside-rust/2020/06/09/windows-notification-group"
 title = "Announcing the Windows and ARM notification groups"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "Announcing the Windows and ARM notification groups"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2020/06/09/windows-notification-group.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 We are forming two new groups in the compiler team:

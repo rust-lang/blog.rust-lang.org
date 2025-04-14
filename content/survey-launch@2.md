@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2021-12-08
+path = "2021/12/08/survey-launch"
 title = "Launching the 2021 State of Rust Survey"
-author = "The Rust Community Team"
+authors = ["The Rust Community Team"]
 description = "Hearing from you about the sixth year of Rust"
+aliases = ["2021/12/08/survey-launch.html"]
 +++
 
 It's that time again! Time for us to take a look at who the Rust community is composed of, how the Rust project is doing, and how we can improve the Rust programming experience. The Rust Community Team is pleased to announce our [2021 State of Rust Survey][survey]! Whether or not you use Rust today, we want to know your opinions. Your responses will help the project understand its strengths and weaknesses, and establish development priorities for the future.

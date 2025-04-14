@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-03-11
+path = "inside-rust/2025/03/11/test-infra-jan-feb-2025"
 title = "This Month in Our Test Infra: January and February 2025"
-author = "Jieyou Xu"
-team = "the Bootstrap Team <https://www.rust-lang.org/governance/teams/infra#team-bootstrap>"
+authors = ["Jieyou Xu"]
+aliases = ["inside-rust/2025/03/11/test-infra-jan-feb-2025.html"]
+
+[extra]
+team = "the Bootstrap Team"
+team_url = "https://www.rust-lang.org/governance/teams/infra#team-bootstrap"
 +++
 
 # This Month in Our Test Infra: January and February 2025
@@ -34,7 +37,7 @@ As part of CI efficiency efforts, many CI jobs have been split into multiple job
 
 <https://github.com/rust-lang/rust/pull/138307> permits the contributor to write **glob patterns** to match on job names (up to 20 matching jobs, see next highlight). For instance, if you wanted to run *all* `msvc`-related jobs as part of `try-job`s, you no longer have to specify a whole bunch of e.g. `try-job: x86_64-msvc-1`, `try-job: x86_64-msvc-2`, `try-job: dist-x86_64-msvc`, `try-job: i686-msvc-1`, `try-job: i686-msvc-2`. Instead, you are now able to write
 
-```text
+```
 try-job: `*msvc*`
 ```
 

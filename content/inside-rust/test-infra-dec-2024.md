@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-01-10
+path = "inside-rust/2025/01/10/test-infra-dec-2024"
 title = "This Month in Our Test Infra: December 2024"
-author = "Jieyou Xu"
-team = "the Bootstrap Team <https://www.rust-lang.org/governance/teams/infra#team-bootstrap>"
+authors = ["Jieyou Xu"]
+aliases = ["inside-rust/2025/01/10/test-infra-dec-2024.html"]
+
+[extra]
+team = "the Bootstrap Team"
+team_url = "https://www.rust-lang.org/governance/teams/infra#team-bootstrap"
 +++
 
 # This Month in Our Test Infra: December 2024
@@ -36,7 +39,7 @@ Previously, it can be very difficult to tell when a ui test fails what the actua
 
 Now, [compiletest will also show the pre-normalization mismatched output lines on failure to make this easier to tell][pr-133733]. Example output:
 
-```text
+```
 failures:
 
 ---- [ui] tests/ui/layout/enum.rs stdout ----

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2020-09-14
+path = "2020/09/14/wg-prio-call-for-contributors"
 title = "A call for contributors from the WG-prioritization team"
-author = "The Rust WG-Prioritization Team"
+authors = ["The Rust WG-Prioritization Team"]
+aliases = ["2020/09/14/wg-prio-call-for-contributors.html"]
 +++
 
 Are you looking for opportunities to contribute to the Rust community? Have some spare time to donate? And maybe learn something interesting along the way?

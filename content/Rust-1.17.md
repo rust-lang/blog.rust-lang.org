@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2017-04-27
+path = "2017/04/27/Rust-1.17"
 title = "Announcing Rust 1.17"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2017/04/27/Rust-1.17.html"]
+
+[extra]
 release = true
 +++
 
@@ -232,7 +234,7 @@ your preferences.
 Backtraces [now have nicer formatting](https://github.com/rust-lang/rust/pull/38165), eliding
 some things by default. For example, the full backtrace:
 
-```text
+```
 thread 'main' panicked at 'explicit panic', foo.rs:2
 stack backtrace:
    1:     0x55c39a23372c - std::sys::imp::backtrace::tracing::imp::write::hf33ae72d0baa11ed
@@ -259,7 +261,7 @@ stack backtrace:
 
 is now instead
 
-```text
+```
 thread 'main' panicked at 'explicit panic', foo.rs:2
 stack backtrace:
    0: std::sys::imp::backtrace::tracing::imp::unwind_backtrace

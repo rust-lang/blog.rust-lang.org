@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2019-06-03
+path = "2019/06/03/governance-wg-announcement"
 title = "The Governance WG is going public"
-author = "The Rust Governance WG"
+authors = ["The Rust Governance WG"]
+aliases = ["2019/06/03/governance-wg-announcement.html"]
 +++
 
 

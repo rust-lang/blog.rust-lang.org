@@ -1,0 +1,16 @@
+# https://www.getzola.org/documentation/getting-started/configuration/
+
+base_url = "https://blog.rust-lang.org"
+compile_sass = true
+generate_feeds = true
+feed_filenames = ["feed.xml", "releases.json"]
+build_search_index = false
+
+[markdown]
+highlight_code = true
+highlight_theme = "boron"
+bottom_footnotes = true
+insert_anchor_links = "left"
+
+[extra]
+# Put all your custom variables here

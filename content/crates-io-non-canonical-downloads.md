@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-10-27
+path = "2023/10/27/crates-io-non-canonical-downloads"
 title = "crates.io: Dropping support for non-canonical downloads"
-author = "Tobias Bieniek"
-team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
+authors = ["Tobias Bieniek"]
+aliases = ["2023/10/27/crates-io-non-canonical-downloads.html"]
+
+[extra]
+team = "the crates.io team"
+team_url = "https://www.rust-lang.org/governance/teams/crates-io"
 +++
 
 ## TL;DR

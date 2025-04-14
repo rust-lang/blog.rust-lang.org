@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2018-12-06
+path = "2018/12/06/Rust-1.31-and-rust-2018"
 title = "Announcing Rust 1.31 and Rust 2018"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2018/12/06/Rust-1.31-and-rust-2018.html"]
+
+[extra]
 release = true
 +++
 
@@ -42,7 +44,7 @@ post, so here's a table of contents:
 * [New website](#new-website)
 * [Library stabilizations](#library-stabilizations)
 * [Cargo features](#cargo-features)
-* [Contributors](#contributors-to-131.0)
+* [Contributors](#contributors-to-1-31-0)
 
 ### Rust 2018
 
@@ -69,7 +71,7 @@ We'll be covering all of this and more in this post.
 
 Let's create a new project with Cargo:
 
-```console
+```
 $ cargo new foo
 ```
 
@@ -129,7 +131,7 @@ fn main() {
 
 In older Rust, this is a compile-time error:
 
-```text
+```
 error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
  --> src/main.rs:5:18
   |
@@ -162,7 +164,7 @@ fn main() {
 
 Older Rust will give you this error:
 
-```text
+```
 error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
  --> src/main.rs:5:18
   |
@@ -177,7 +179,7 @@ error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immuta
 
 With Rust 2018, this error changes for the better:
 
-```text
+```
 error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
  --> src/main.rs:5:13
   |

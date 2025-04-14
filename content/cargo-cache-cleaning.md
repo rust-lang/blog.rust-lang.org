@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-12-11
+path = "2023/12/11/cargo-cache-cleaning"
 title = "Cargo cache cleaning"
-author = "Eric Huss"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Eric Huss"]
+aliases = ["2023/12/11/cargo-cache-cleaning.html"]
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 Cargo has recently gained an unstable feature on the nightly channel (starting with nightly-2023-11-17) to perform automatic cleaning of cache content within Cargo's home directory.

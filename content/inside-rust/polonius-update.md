@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-10-06
+path = "inside-rust/2023/10/06/polonius-update"
 title = "Polonius update"
-author = "Rémy Rakic and Niko Matsakis"
-team = "The Polonius Working Group <https://www.rust-lang.org/governance/teams/compiler#Polonius%20working%20group>"
+authors = ["Rémy Rakic and Niko Matsakis"]
+aliases = ["inside-rust/2023/10/06/polonius-update.html"]
+
+[extra]
+team = "The Polonius Working Group"
+team_url = "https://www.rust-lang.org/governance/teams/compiler#Polonius%20working%20group"
 +++
 
 This post lays out a roadmap to try to get Polonius on stable by Rust 2024. It identifies some high-level milestones and summarizes the key goals, as well as the recent progress.
@@ -14,7 +17,7 @@ Polonius refers to a few things. It is a [new formulation](http://smallcultfollo
 
 The motivating example for Polonius is the so-called ["Problem Case #3: conditional control flow across functions"](https://github.com/rust-lang/rfcs/blob/master/text/2094-nll.md#problem-case-3-conditional-control-flow-across-functions): here, returning a reference out of a function, from a conditional.
 
-```rust=
+```rust
 fn get_default<'r, K: Hash + Eq + Copy, V: Default>(
     map: &'r mut HashMap<K, V>,
     key: K,
@@ -34,7 +37,7 @@ Returning the mutable reference `value` in the `Some` path requires the mutable 
 
 Fixing this borrowck issue requires more precision about flow-sensitivity. It also hints at limitations in our modeling of lifetimes, which appear more clearly in cases with only slightly more complicated control flow, like [issue #47680](https://github.com/rust-lang/rust/issues/47680):
 
-```rust=
+```rust
 struct Thing;
 
 impl Thing {

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-03-15
+path = "2020/03/15/docs-rs-opt-into-fewer-targets"
 title = "docs.rs now allows you to choose your build targets"
-author = "Jynn Nelson"
-team = "the docs.rs team <https://www.rust-lang.org/governance/teams/dev-tools#docs-rs>"
+authors = ["Jynn Nelson"]
+aliases = ["2020/03/15/docs-rs-opt-into-fewer-targets.html"]
+
+[extra]
+team = "the docs.rs team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#docs-rs"
 +++
 
 Recently, [docs.rs] added a feature that allows crates to opt-out of building on all targets.

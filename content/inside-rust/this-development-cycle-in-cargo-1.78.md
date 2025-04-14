@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-03-26
+path = "inside-rust/2024/03/26/this-development-cycle-in-cargo-1.78"
 title = "This Development-cycle in Cargo: 1.78"
-author = "Ed Page"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Ed Page"]
+aliases = ["inside-rust/2024/03/26/this-development-cycle-in-cargo-1.78.html"]
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 # This Development-cycle in Cargo: 1.78
@@ -29,7 +32,7 @@ This is an experiment in finding better ways to be engaged with the community an
   - [Default Edition](#default-edition)
   - [Open namespaces](#open-namespaces)
 - [Design discussions](#design-discussions)
-  - [Deprecated `Cargo.toml` fields](#deprecated-cargotoml-fields)
+  - [Deprecated `Cargo.toml` fields](#deprecated-cargo-toml-fields)
   - [RFC #3452: Nested packages](#rfc-3452-nested-packages)
   - [Why is this yanked?](#why-is-this-yanked)
   - [Weak feature syntax](#weak-feature-syntax)

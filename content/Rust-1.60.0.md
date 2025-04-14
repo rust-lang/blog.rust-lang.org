@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2022-04-07
+path = "2022/04/07/Rust-1.60.0"
 title = "Announcing Rust 1.60.0"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2022/04/07/Rust-1.60.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -10,7 +12,7 @@ The Rust team is happy to announce a new version of Rust, 1.60.0. Rust is a prog
 
 If you have a previous version of Rust installed via rustup, you can get 1.60.0 with:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -30,7 +32,7 @@ the beta channel (`rustup default beta`) or the nightly channel (`rustup default
 
 Support for LLVM-based coverage instrumentation has been stabilized in rustc. You can try this out on your code by rebuilding your code with `-Cinstrument-coverage`, for example like this:
 
-```shell=
+```sh
 RUSTFLAGS="-C instrument-coverage" cargo build
 ```
 
@@ -46,7 +48,7 @@ for report generation. `llvm-cov` combines the processed output, from
 `llvm-profdata`, and the binary itself, because the binary embeds a mapping from
 counters to actual source code regions.
 
-```shell=
+```sh
 rustup component add llvm-tools-preview
 $(rustc --print sysroot)/lib/rustlib/x86_64-unknown-linux-gnu/bin/llvm-profdata merge -sparse default.profraw -o default.profdata
 $(rustc --print sysroot)/lib/rustlib/x86_64-unknown-linux-gnu/bin/llvm-cov show -Xdemangler=rustfilt target/debug/coverage-testing \
@@ -75,7 +77,7 @@ rustc binary used to compile your code.
 
 Cargo has stabilized support for collecting information on build with the `--timings` flag.
 
-```shell
+```sh
 $ cargo build --timings
    Compiling hello-world v0.1.0 (hello-world)
       Timing report saved to target/cargo-timings/cargo-timing-20220318T174818Z.html

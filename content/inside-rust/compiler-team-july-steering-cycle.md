@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2021-07-02
+path = "inside-rust/2021/07/02/compiler-team-july-steering-cycle"
 title = "Rust Compiler July Steering Cycle"
-author = "Felix Klock"
+authors = ["Felix Klock"]
 description = "The compiler team's July steering cycle"
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2021/07/02/compiler-team-july-steering-cycle.html"]
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 On [Friday, July 2nd][jul-02-zulip-archive], the Rust Compiler team had a planning meeting for the July steering cycle, followed by a continuation of an ongoing discussion of the 1.52.0 fingerprint event.
 

@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-02-22
+path = "inside-rust/2022/02/22/compiler-team-ambitions-2022"
 title = "Rust Compiler Ambitions for 2022"
-author = "Felix Klock, Wesley Wiser"
+authors = ["Felix Klock, Wesley Wiser"]
 description = "The compiler team's concrete initiatives and hopeful aspirations for this year."
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2022/02/22/compiler-team-ambitions-2022.html"]
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 # Rust Compiler Ambitions for 2022
@@ -144,22 +147,22 @@ Backend (🛠️, 👩‍💻) |                             | [Aspirations][Bac
 Diagnostics  (👩‍💻) |                             | [Aspirations][Diagnostics Aspirations]
 
 [Concrete Initiatives]: #concrete-initiatives
-[I-unsound Issues]: #i-unsound-issues-
-[Async Initiatives]: #async-rust-initiatives--
-[Debugging Initiatives]: #debugging-initiatives-
-[Faster Builds Initiatives]: #faster-builds-initiatives--%EF%B8%8F
-[Expressiveness Initiatives]: #expressiveness-initiatives--
-[Librarification Initiatives]: #librarification-initiatives-%EF%B8%8F
+[I-unsound Issues]: #i-unsound-issues-crab
+[Async Initiatives]: #async-rust-initiatives-crab-woman-computer
+[Debugging Initiatives]: #debugging-initiatives-crab
+[Faster Builds Initiatives]: #faster-builds-initiatives-woman-computer-tools
+[Expressiveness Initiatives]: #expressiveness-initiatives-woman-computer-crab
+[Librarification Initiatives]: #librarification-initiatives-tools
 
 [Aspirations]: #aspirations
-[P-high Aspirations]: #p-high-aspirations-
-[Debugging Aspirations]: #debugging-aspirations-
-[Faster Builds Aspirations]: #faster-builds-aspirations--%EF%B8%8F
-[Expressiveness Aspirations]: #expressiveness-aspirations--
-[Librarification Aspirations]: #librarification-aspirations-%EF%B8%8F
-[Team Operations]: #compiler-team-operations-aspirations-%EF%B8%8F
-[Backend Aspirations]: #compiler-backend-aspirations-%EF%B8%8F-
-[Diagnostics Aspirations]: #diagnostics-aspirations-
+[P-high Aspirations]: #p-high-aspirations-crab
+[Debugging Aspirations]: #debugging-aspirations-woman-computer
+[Faster Builds Aspirations]: #faster-builds-aspirations-woman-computer-tools
+[Expressiveness Aspirations]: #expressiveness-aspirations-crab-woman-computer
+[Librarification Aspirations]: #librarification-aspirations-tools
+[Team Operations]: #compiler-team-operations-aspirations-tools
+[Backend Aspirations]: #compiler-backend-aspirations-tools-woman-computer
+[Diagnostics Aspirations]: #diagnostics-aspirations-woman-computer
 
 <!-- end of manually made [toc] -->
 

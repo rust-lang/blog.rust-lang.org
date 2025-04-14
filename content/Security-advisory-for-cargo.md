@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2019-09-30
+path = "2019/09/30/Security-advisory-for-cargo"
 title = "Security advisory for Cargo"
-author = "The Rust Security Team"
+authors = ["The Rust Security Team"]
+aliases = ["2019/09/30/Security-advisory-for-cargo.html"]
 +++
 
 > **Note**: This is a cross-post of the [official security advisory]. The official

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-02-14
+path = "2022/02/14/crates-io-snapshot-branches"
 title = "Crates.io Index Snapshot Branches Moving"
-author = "The Crates.io Team"
+authors = ["The Crates.io Team"]
+aliases = ["2022/02/14/crates-io-snapshot-branches.html"]
 +++
 
 Every so often, the [crates.io index](https://github.com/rust-lang/crates.io-index)'s Git history

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2019-09-30
+path = "2019/09/30/Async-await-hits-beta"
 title = "Async-await hits beta!"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
+aliases = ["2019/09/30/Async-await-hits-beta.html"]
 +++
 
 Big news! As of this writing, **syntactic support for async-await is

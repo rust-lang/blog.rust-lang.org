@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2019-09-25
+path = "inside-rust/2019/09/25/Welcome"
 title = "Welcome to the Inside Rust blog!"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "A new blog where the Rust team can post updates on the latest developments"
-team = "the core team <https://www.rust-lang.org/governance/teams/core>"
+aliases = ["inside-rust/2019/09/25/Welcome.html"]
+
+[extra]
+team = "the core team"
+team_url = "https://www.rust-lang.org/governance/teams/core"
 +++
 
 Welcome to the inaugural post of the **Inside Rust** blog! This is a

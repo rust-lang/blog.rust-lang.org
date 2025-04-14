@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-01-03
+path = "2018/01/03/new-years-rust-a-call-for-community-blogposts"
 title = "New Year's Rust: A Call for Community Blogposts"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2018/01/03/new-years-rust-a-call-for-community-blogposts.html"]
 +++
 
 'Tis the season for people and communities to reflect and set goals- and the Rust team is

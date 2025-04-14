@@ -1,0 +1,24 @@
+{% import "macros.html" as macros -%}
+{% extends "layout.html" -%}
+{% block page -%}
+{% set num_comps = page.components | length -%}
+{% set year = page.components | nth(n=num_comps - 4) | int -%}
+{% set month = page.components | nth(n=num_comps - 3) | int -%}
+{% set day = page.components | nth(n=num_comps - 2) | int -%}
+<section id="{{ macros::escape_hbs(input=page.title) }}" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>{{ macros::escape_hbs(input=page.title) }}</h2>
+      <div class="highlight mt2 mb3"></div>
+    </header>
+
+    <div class="publish-date-author">{{ macros::month_name(num=month) }} {{ day }}, {{ year }} &middot; {{ macros::escape_hbs(input=page.authors | join(sep=", ")) }}
+    {% if page.extra is containing("team") %} on behalf of <a href="{{ page.extra.team_url | safe }}">{{ page.extra.team }}</a> {% endif %}
+    </div>
+
+    <div class="post">
+      {{ page.content | safe }}
+    </div>
+  </div>
+</section>
+{%- endblock page %}

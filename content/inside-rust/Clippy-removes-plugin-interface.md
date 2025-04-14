@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2019-11-04
+path = "inside-rust/2019/11/04/Clippy-removes-plugin-interface"
 title = "Clippy is removing its plugin interface"
-author = "Philipp Krones"
+authors = ["Philipp Krones"]
 description = "Now that compiler plugins are deprecated, Clippy is removing its deprecated plugin interface"
-team = "the Dev tools team (Clippy) <https://www.rust-lang.org/governance/teams/dev-tools#clippy>"
+aliases = ["inside-rust/2019/11/04/Clippy-removes-plugin-interface.html"]
+
+[extra]
+team = "the Dev tools team (Clippy)"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#clippy"
 +++
 
 Today, we're announcing that Clippy will completely remove its plugin interface.

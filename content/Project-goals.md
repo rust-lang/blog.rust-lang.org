@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-08-12
+path = "2024/08/12/Project-goals"
 title = "Rust Project goals for 2024"
-author = "Niko Matsakis"
-team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["Niko Matsakis"]
+aliases = ["2024/08/12/Project-goals.html"]
+
+[extra]
+team = "Leadership Council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
 With the merging of [RFC #3672][], the Rust project has selected a **slate of 26 Project Goals** for the second half of 2024 (2024H2). This is our first time running an [experimental new roadmapping process][RFC #3614]; assuming all goes well, we expect to be running the process roughly every six months. Of these goals, we have designated three of them as our **flagship goals**, representing our most ambitious and most impactful efforts: (1) finalize preparations for the Rust 2024 edition; (2) bring the Async Rust experience closer to parity with sync Rust; and (3) resolve the biggest blockers to the Linux kernel building on stable Rust. As the year progresses we'll be posting regular updates on these 3 flagship goals along with the 23 others.

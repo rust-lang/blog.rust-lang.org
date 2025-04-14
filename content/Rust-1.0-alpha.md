@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2015-01-09
+path = "2015/01/09/Rust-1.0-alpha"
 title = "Announcing Rust 1.0 Alpha"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2015/01/09/Rust-1.0-alpha.html"]
 +++
 
 Today, we're excited to [release](https://www.rust-lang.org/install.html) the alpha version of Rust 1.0, a systems programming language with a focus on safety, performance and concurrency.

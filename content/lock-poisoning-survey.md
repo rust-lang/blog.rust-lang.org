@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-12-11
+path = "2020/12/11/lock-poisoning-survey"
 title = "Launching the Lock Poisoning Survey"
-author = "Ashley Mannix"
-team = "The Libs team <https://www.rust-lang.org/governance/teams/library>"
+authors = ["Ashley Mannix"]
+aliases = ["2020/12/11/lock-poisoning-survey.html"]
+
+[extra]
+team = "The Libs team"
+team_url = "https://www.rust-lang.org/governance/teams/library"
 +++
 
 The Libs team is looking at how we can improve the `std::sync` module, by potentially splitting it up into new modules and making some changes to APIs along the way.

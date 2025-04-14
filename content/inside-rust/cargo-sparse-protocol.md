@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-01-30
+path = "inside-rust/2023/01/30/cargo-sparse-protocol"
 title = "Help test Cargo's new index protocol"
-author = "Eric Huss"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Eric Huss"]
+aliases = ["inside-rust/2023/01/30/cargo-sparse-protocol.html"]
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 Cargo's new index protocol will be available starting in Rust 1.68, which will be released on 2023-03-09.

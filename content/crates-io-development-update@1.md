@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2025-02-05
+path = "2025/02/05/crates-io-development-update"
 title = "crates.io: development update"
-author = "Tobias Bieniek"
-team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
+authors = ["Tobias Bieniek"]
+aliases = ["2025/02/05/crates-io-development-update.html"]
+
+[extra]
+team = "the crates.io team"
+team_url = "https://www.rust-lang.org/governance/teams/crates-io"
 +++
 
 Back in July 2024, we published a [blog post](https://blog.rust-lang.org/2024/07/29/crates-io-development-update.html) about the ongoing development of crates.io. Since then, we have made a lot of progress and shipped a few new features. In this blog post, we want to give you an update on the latest changes that we have made to crates.io.

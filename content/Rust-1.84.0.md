@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2025-01-09
+path = "2025/01/09/Rust-1.84.0"
 title = "Announcing Rust 1.84.0"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2025/01/09/Rust-1.84.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -10,7 +12,7 @@ The Rust team is happy to announce a new version of Rust, 1.84.0. Rust is a prog
 
 If you have a previous version of Rust installed via `rustup`, you can get 1.84.0 with:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -38,7 +40,7 @@ incompatible-rust-versions = "fallback"
 
 Then when adding a dependency:
 
-```console
+```
 $ cargo add clap
     Updating crates.io index
 warning: ignoring clap@4.5.23 (which requires rustc 1.74) to maintain demo's rust-version of 1.60
@@ -50,7 +52,7 @@ warning: ignoring clap@4.5.23 (which requires rustc 1.74) to maintain demo's rus
 
 When [verifying the latest dependencies in CI](https://doc.rust-lang.org/cargo/guide/continuous-integration.html#verifying-latest-dependencies), you can override this:
 
-```console
+```
 $ CARGO_RESOLVER_INCOMPATIBLE_RUST_VERSIONS=allow cargo update
     Updating crates.io index
      Locking 12 packages to latest compatible versions

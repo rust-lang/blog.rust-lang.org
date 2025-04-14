@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2021-05-10
+path = "2021/05/10/Rust-1.52.1"
 title = "Announcing Rust 1.52.1"
-author = "Felix Klock, Mark Rousskov"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+authors = ["Felix Klock, Mark Rousskov"]
+aliases = ["2021/05/10/Rust-1.52.1.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 release = true
 +++
 
@@ -16,7 +19,7 @@ to do so is available below.
 If you have a previous version of Rust installed via rustup, getting Rust
 1.52.1 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -66,7 +69,7 @@ This post is going to:
 The error message looks something like this, with the key piece being the "found
 unstable fingerprints" text.
 
-```text
+```
 thread 'rustc' panicked at 'assertion failed: `(left == right)`
   left: `Some(Fingerprint(4565771098143344972, 7869445775526300234))`,
   right: `Some(Fingerprint(14934403843752251060, 623484215826468126))`: found unstable fingerprints for <massive text describing rustc internals elided>
@@ -134,7 +137,7 @@ Essentially, for some crates, certain sequences of edit-compile cycles will caus
 
 Another recent example looks [like this](https://github.com/rust-lang/rust/issues/85039):
 
-```text
+```
 thread 'rustc' panicked at 'found unstable fingerprints for predicates_of(<massive text describing rustc internals elided>)', /rustc/.../compiler/rustc_query_system/src/query/plumbing.rs:593:5
 ```
 

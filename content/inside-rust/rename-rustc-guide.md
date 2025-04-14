@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-03-13
+path = "inside-rust/2020/03/13/rename-rustc-guide"
 title = "The rustc-guide is now rustc-dev-guide"
-author = "mark-i-m"
+authors = ["mark-i-m"]
 description = "the guide has been renamed"
-team = "the rustc dev guide working group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>"
+aliases = ["inside-rust/2020/03/13/rename-rustc-guide.html"]
+
+[extra]
+team = "the rustc dev guide working group"
+team_url = "https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide"
 +++
 
 You may or may not be aware of two similarly named resources:

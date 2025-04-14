@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2022-06-28
+path = "2022/06/28/rust-unconference"
 title = "Announcing The RustConf PostConf UnConf"
-author = "Jane Lusby, on behalf of The Rust Project Teams"
+authors = ["Jane Lusby, on behalf of The Rust Project Teams"]
+aliases = ["2022/06/28/rust-unconference.html"]
 +++
 
 Hello Rust community!

@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2021-09-09
+path = "2021/09/09/Rust-1.55.0"
 title = "Announcing Rust 1.55.0"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2021/09/09/Rust-1.55.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -12,7 +14,7 @@ to build reliable and efficient software.
 If you have a previous version of Rust installed via rustup, getting Rust
 1.55.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 

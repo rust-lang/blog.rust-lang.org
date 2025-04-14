@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2016-09-08
+path = "2016/09/08/incremental"
 title = "Incremental Compilation"
-author = "Michael Woerister"
+authors = ["Michael Woerister"]
 description = "Incremental compilation for exponential joy and happiness."
+aliases = ["2016/09/08/incremental.html"]
 +++
 
 I remember when, during the 1.0 anniversary presentation at the
@@ -29,7 +29,7 @@ time since implementation started towards the end of last year, all of the
 [basic components][incr-comp-rfc] are in place, the bulk of the groundwork has
 been done. You can give it a try in the nightly version of the compiler:
 
-```console
+```
 $ rustc -Zincremental=<path> ./main.rs
 ```
 

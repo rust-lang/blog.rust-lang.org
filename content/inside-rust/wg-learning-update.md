@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2019-12-20
+path = "inside-rust/2019/12/20/wg-learning-update"
 title = "An Update from WG-Learning"
-author = "mark-i-m"
-team = "the Rustc Dev Guide Working Group <https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide>"
+authors = ["mark-i-m"]
+aliases = ["inside-rust/2019/12/20/wg-learning-update.html"]
+
+[extra]
+team = "the Rustc Dev Guide Working Group"
+team_url = "https://www.rust-lang.org/governance/teams/compiler#wg-rustc-dev-guide"
 +++
 
 # An update from WG-Learning

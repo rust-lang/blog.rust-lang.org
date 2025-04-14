@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2021-07-21
+path = "2021/07/21/Rust-2021-public-testing"
 title = "Rust 2021 public testing period"
-author = "Niko Matsakis"
-team = "the Edition 2021 Project Group <https://www.rust-lang.org/governance/teams/core#project-edition-2021>"
+authors = ["Niko Matsakis"]
+aliases = ["2021/07/21/Rust-2021-public-testing.html"]
+
+[extra]
+team = "the Edition 2021 Project Group"
+team_url = "https://www.rust-lang.org/governance/teams/core#project-edition-2021"
 +++
 
 # Rust 2021 public testing period

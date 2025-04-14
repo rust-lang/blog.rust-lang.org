@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2021-02-26
+path = "2021/02/26/const-generics-mvp-beta"
 title = "Const generics MVP hits beta!"
-author = "The const generics project group"
+authors = ["The const generics project group"]
+aliases = ["2021/02/26/const-generics-mvp-beta.html"]
 +++
 
 After more than 3 years since the [original RFC for const generics](https://github.com/rust-lang/rfcs/blob/master/text/2000-const-generics.md) was accepted, **the first version of const generics is now available in the Rust beta channel!** It will be available in the 1.51 release, which is expected to be released on **March 25th, 2021**. Const generics is one of the [most highly anticipated](https://blog.rust-lang.org/2020/12/16/rust-survey-2020.html) features coming to Rust, and we're excited for people to start taking advantage of the increased power of the language following this addition.
@@ -30,7 +30,7 @@ impl<T: Debug, const N: usize> Debug for ArrayPair<T, N> {
 
 ### Current restrictions
 
-The first iteration of const generics has been deliberately constrained: in other words, this version is the MVP (minimal viable product) for const generics. This decision is motivated both by the additional complexity of general const generics (the implementation for general const generics is not yet complete, but we feel const generics in 1.51 are already very useful), as well as by the desire to introduce a large feature gradually, to gain experience with any potential shortcomings and difficulties. We intend to lift these in future versions of Rust: see [what's next](#whats-next).
+The first iteration of const generics has been deliberately constrained: in other words, this version is the MVP (minimal viable product) for const generics. This decision is motivated both by the additional complexity of general const generics (the implementation for general const generics is not yet complete, but we feel const generics in 1.51 are already very useful), as well as by the desire to introduce a large feature gradually, to gain experience with any potential shortcomings and difficulties. We intend to lift these in future versions of Rust: see [what's next](#what-s-next).
 
 #### Only integral types are permitted for const generics
 

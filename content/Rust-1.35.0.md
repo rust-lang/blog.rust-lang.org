@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2019-05-23
+path = "2019/05/23/Rust-1.35.0"
 title = "Announcing Rust 1.35.0"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2019/05/23/Rust-1.35.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -11,7 +13,7 @@ programming language that is empowering everyone to build reliable and efficient
 
 If you have a previous version of Rust installed via rustup, getting Rust 1.35.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 

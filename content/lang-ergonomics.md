@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2017-03-02
+path = "2017/03/02/lang-ergonomics"
 title = "Rust's language ergonomics initiative"
-author = "Aaron Turon"
+authors = ["Aaron Turon"]
 description = "Ergonomics, learnability, and the fact that sometimes implicit is better"
+aliases = ["2017/03/02/lang-ergonomics.html"]
 +++
 
 To help bring our [2017 vision for Rust] to fruition, the Rust subteams are

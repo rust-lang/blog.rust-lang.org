@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-10-20
+path = "2020/10/20/regression-labels"
 title = "Marking issues as regressions"
-author = "Camelid"
+authors = ["Camelid"]
 description = "Now anyone can mark issues as regressions!"
-team = "the release team <https://www.rust-lang.org/governance/teams/operations#release>"
+aliases = ["2020/10/20/regression-labels.html"]
+
+[extra]
+team = "the release team"
+team_url = "https://www.rust-lang.org/governance/teams/operations#release"
 +++
 
 The Rust project gets many issues filed every day, and we need to keep track

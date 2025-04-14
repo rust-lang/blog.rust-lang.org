@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2021-10-21
+path = "2021/10/21/Rust-1.56.0"
 title = "Announcing Rust 1.56.0 and Rust 2021"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2021/10/21/Rust-1.56.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -11,7 +13,7 @@ Rust is a programming language empowering everyone to build reliable and efficie
 
 If you have a previous version of Rust installed via rustup, getting Rust 1.56.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 

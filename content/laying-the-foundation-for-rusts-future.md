@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2020-08-18
+path = "2020/08/18/laying-the-foundation-for-rusts-future"
 title = "Laying the foundation for Rust's future"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2020/08/18/laying-the-foundation-for-rusts-future.html"]
 +++
 
 The Rust project was originally [conceived in 2010][2010] (depending on how you count, you might even say [2006][2006]!) as a [Mozilla Research] project, but the long term goal has always been to establish Rust as a self-sustaining project. In 2015, [with the launch of Rust 1.0][onepointoh], Rust established its project direction and governance independent of the Mozilla organization. Since then, Rust has been operating as an autonomous organization, with Mozilla being a prominent and consistent financial and legal sponsor.

@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2018-12-21
+path = "2018/12/21/Procedural-Macros-in-Rust-2018"
 title = "Procedural Macros in Rust 2018"
-author = "Alex Crichton"
+authors = ["Alex Crichton"]
+aliases = ["2018/12/21/Procedural-Macros-in-Rust-2018.html"]
 +++
 
 Perhaps my favorite feature in the Rust 2018 edition is [procedural macros].

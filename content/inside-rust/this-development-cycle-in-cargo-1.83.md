@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-10-31
+path = "inside-rust/2024/10/31/this-development-cycle-in-cargo-1.83"
 title = "This Development-cycle in Cargo: 1.83"
-author = "Ed Page"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Ed Page"]
+aliases = ["inside-rust/2024/10/31/this-development-cycle-in-cargo-1.83.html"]
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 # This Development-cycle in Cargo: 1.83
@@ -16,7 +19,7 @@ This is a summary of what has been happening around Cargo development for the la
 - [Implementation](#implementation)
   - [MSRV-aware Cargo](#msrv-aware-cargo)
   - [Shell completions](#shell-completions)
-  - [Public/private dependencies](#publicprivate-dependencies)
+  - [Public/private dependencies](#public-private-dependencies)
   - [Optimizing cargo](#optimizing-cargo)
 - [Design discussions](#design-discussions)
   - [Target and target](#target-and-target)

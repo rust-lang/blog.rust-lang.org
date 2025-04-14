@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2019-12-02
+path = "inside-rust/2019/12/02/const-prop-on-by-default"
 title = "Constant propagation is now on by default in nightly"
-author = "Wesley Wiser"
+authors = ["Wesley Wiser"]
 description = "Constant propagation is now on by default in nightly"
-team = "the MIR Optimizations WG <https://rust-lang.github.io/compiler-team/working-groups/mir-opt/>"
+aliases = ["inside-rust/2019/12/02/const-prop-on-by-default.html"]
+
+[extra]
+team = "the MIR Optimizations WG"
+team_url = "https://rust-lang.github.io/compiler-team/working-groups/mir-opt/"
 +++
 
 I'm pleased to announce that the [Mid-level IR][mir] (MIR) constant propagation pass has been [switched on][pr] by default on Rust nightly which will eventually become Rust 1.41!

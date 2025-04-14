@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2015-04-10
+path = "2015/04/10/Fearless-Concurrency"
 title = "Fearless Concurrency with Rust"
-author = "Aaron Turon"
+authors = ["Aaron Turon"]
 description = "Rust's vision for concurrency"
+aliases = ["2015/04/10/Fearless-Concurrency.html"]
 +++
 
 The Rust project was initiated to solve two thorny problems:

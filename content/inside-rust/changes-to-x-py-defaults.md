@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-08-30
+path = "inside-rust/2020/08/30/changes-to-x-py-defaults"
 title = "Changes to x.py defaults"
-author = "Jynn Nelson"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+authors = ["Jynn Nelson"]
+aliases = ["inside-rust/2020/08/30/changes-to-x-py-defaults.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 Recently, the defaults for [`x.py`], the tool used to [bootstrap] the Rust compiler from source, changed. If you regularly contribute to Rust, this might affect your workflow.

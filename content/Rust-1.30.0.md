@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2018-10-25
+path = "2018/10/25/Rust-1.30.0"
 title = "Announcing Rust 1.30"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2018/10/25/Rust-1.30.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -151,7 +153,7 @@ is made stable, which gives you the needed APIs to write these sorts of macros.
 It also has significantly improved the APIs for errors, and crates like `syn` and
 `quote` are already using them. For example, before:
 
-```rust,ignore
+```rust
 #[derive(Serialize)]
 struct Demo {
     ok: String,
@@ -161,7 +163,7 @@ struct Demo {
 
 used to give this error:
 
-```text
+```
 error[E0277]: the trait bound `std::thread::Thread: _IMPL_SERIALIZE_FOR_Demo::_serde::Serialize` is not satisfied
  --> src/main.rs:3:10
   |
@@ -171,7 +173,7 @@ error[E0277]: the trait bound `std::thread::Thread: _IMPL_SERIALIZE_FOR_Demo::_s
 
 Now it will give this one:
 
-```text
+```
 error[E0277]: the trait bound `std::thread::Thread: serde::Serialize` is not satisfied
  --> src/main.rs:7:5
   |
@@ -200,7 +202,7 @@ let json = serde_json::from_str("...");
 The trick here is that the 'old' style wasn't always needed, due to the way Rust's
 module system worked:
 
-```rust,ignore
+```rust
 extern crate serde_json;
 
 fn main() {

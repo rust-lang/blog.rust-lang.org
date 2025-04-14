@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2019-12-09
+path = "inside-rust/2019/12/09/announcing-the-docsrs-team"
 title = "Announcing the Docs.rs Team"
-author = "QuietMisdreavus"
-team = "The Rustdoc Team <https://www.rust-lang.org/governance/teams/dev-tools#rustdoc>"
+authors = ["QuietMisdreavus"]
+aliases = ["inside-rust/2019/12/09/announcing-the-docsrs-team.html"]
+
+[extra]
+team = "The Rustdoc Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#rustdoc"
 +++
 
 Today we're announcing a brand new team: The Docs.rs Team!

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-10-01
+path = "inside-rust/2024/10/01/this-development-cycle-in-cargo-1.82"
 title = "This Development-cycle in Cargo: 1.82"
-author = "Ed Page"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Ed Page"]
+aliases = ["inside-rust/2024/10/01/this-development-cycle-in-cargo-1.82.html"]
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 # This Development-cycle in Cargo: 1.82
@@ -17,17 +20,17 @@ This is a summary of what has been happening around Cargo development for the me
   - [`cargo info`](#cargo-info)
   - [Shell completions](#shell-completions)
   - [MSRV-aware Cargo](#msrv-aware-cargo)
-  - [`cargo publish --workspace`](#cargo-publish---workspace)
-  - [`cargo::error` build script directive](#cargoerror-build-script-directive)
-  - [`cargo update --precise <prerelease>`](#cargo-update---precise-prerelease)
+  - [`cargo publish --workspace`](#cargo-publish-workspace)
+  - [`cargo::error` build script directive](#cargo-error-build-script-directive)
+  - [`cargo update --precise <prerelease>`](#cargo-update-precise-prerelease)
   - [Snapshot testing](#snapshot-testing)
 - [Design discussions](#design-discussions)
   - [`time`](#time)
   - [Build probes](#build-probes)
   - [Detecting unused dependencies](#detecting-unused-dependencies)
-  - [`--all-targets` and doctests](#--all-targets-and-doc-tests)
+  - [`--all-targets` and doctests](#all-targets-and-doc-tests)
   - [`target-dir` and `artifact-dir`](#target-dir-and-artifact-dir)
-  - [`cargo update --save`](#cargo-update---save-and--zminimal-versions)
+  - [`cargo update --save`](#cargo-update-save-and-zminimal-versions)
 - [Misc](#misc)
 - [Focus areas without progress](#focus-areas-without-progress)
 
@@ -175,7 +178,7 @@ For individual tests, one thing holding back the migration was how json comparis
 Cargo's programmatic API generally uses [jsonlines](https://jsonlines.org/) but that doesn't work so well for humans reading and editing the content.
 Switching to snapbox adds an extra complexity because it highlights a failure by diffing the expected and actual test results and
 diffing works best with line-oriented content.
-```jsonld=
+```json
 {"executable":"[ROOT]/foo/target/debug/007bar[EXE]","features":[],"filenames":"{...}","fresh":false,"manifest_path":"[ROOT]/foo/Cargo.toml","package_id":"path+[ROOTURL]/foo#0.0.1","profile":"{...}","reason":"compiler-artifact","target":"{...}"}
 {"reason":"build-finished","success":true}
 ```
@@ -202,7 +205,7 @@ It would run counter to snapbox's model to implicitly store data in a format con
 We solved this in [snapbox#348](https://github.com/assert-rs/snapbox/issues/348) by allow making it explicit, by allowing the the test author to declare the format of the expected data and what it will be compared to.
 
 This allowed us to replace
-```rust=
+```rust
         .with_stdout_data(str![[r#"
 {"executable":"[ROOT]/foo/target/debug/007bar[EXE]","features":[],"filenames":"{...}","fresh":false,"manifest_path":"[ROOT]/foo/Cargo.toml","package_id":"path+[ROOTURL]/foo#0.0.1","profile":"{...}","reason":"compiler-artifact","target":"{...}"}
 {"reason":"build-finished","success":true}
@@ -210,7 +213,7 @@ This allowed us to replace
 "#]].json_lines())
 ```
 with
-```rust=
+```rust
         .with_stdout_data(
             str![[r#"
 [

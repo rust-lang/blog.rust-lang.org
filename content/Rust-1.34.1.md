@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2019-04-25
+path = "2019/04/25/Rust-1.34.1"
 title = "Announcing Rust 1.34.1"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2019/04/25/Rust-1.34.1.html"]
+
+[extra]
 release = true
 +++
 
@@ -12,7 +14,7 @@ Rust is a programming language that is empowering everyone to build reliable and
 If you have a previous version of Rust installed via rustup,
 getting Rust 1.34.1 and rustup 1.18.1 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 

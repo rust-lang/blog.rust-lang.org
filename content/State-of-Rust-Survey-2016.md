@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2016-06-30
+path = "2016/06/30/State-of-Rust-Survey-2016"
 title = "State of Rust Survey 2016"
-author = "Jonathan Turner"
+authors = ["Jonathan Turner"]
+aliases = ["2016/06/30/State-of-Rust-Survey-2016.html"]
 +++
 
 We recently wrapped up with a survey for the Rust community.  Little did we know that it would grow to be one of the largest language community surveys.  A *huge* thank you to the **3,086** people who responded!  We're humbled by the response, and we're thankful for all the great feedback.

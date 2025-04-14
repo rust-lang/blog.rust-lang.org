@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2018-12-20
+path = "2018/12/20/Rust-1.31.1"
 title = "Announcing Rust 1.31.1"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2018/12/20/Rust-1.31.1.html"]
+
+[extra]
 release = true
 +++
 
@@ -12,7 +14,7 @@ systems programming language focused on safety, speed, and concurrency.
 If you have a previous version of Rust installed via rustup, getting Rust
 1.31.1 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -44,12 +46,12 @@ pub struct MyStruct { /* ... */ }
 [Go to definition was fixed for std types](https://github.com/rust-lang/rls/pull/1171):
 Before, using the RLS on `HashMap`, for example, tried to open this file
 
-```text
+```
 ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/libstd/collections/hash/map.rs
 ```
 
 and now RLS goes to the correct location (for Rust 1.31, note the extra `src`):
 
-```text
+```
 ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libstd/collections/hash/map.rs
 ```

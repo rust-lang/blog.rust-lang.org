@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-11-12
+path = "inside-rust/2024/11/12/compiler-team-new-members"
 title = "Announcing four new members of the compiler team"
-author = "davidtwco and wesleywiser"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+authors = ["davidtwco and wesleywiser"]
+aliases = ["inside-rust/2024/11/12/compiler-team-new-members.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 Its been no time at all since [we restructured the team and recognised our existing and new
 members][blog_reorg], but we've already got new compiler team members to announce and recognise:

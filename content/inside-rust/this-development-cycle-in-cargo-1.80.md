@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-06-19
+path = "inside-rust/2024/06/19/this-development-cycle-in-cargo-1.80"
 title = "This Development-cycle in Cargo: 1.80"
-author = "Ed Page"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Ed Page"]
+aliases = ["inside-rust/2024/06/19/this-development-cycle-in-cargo-1.80.html"]
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 # This Development-cycle in Cargo: 1.80
@@ -14,19 +17,19 @@ This is a summary of what has been happening around Cargo development for the la
 
 - [Plugin of the cycle](#plugin-of-the-cycle)
 - [Implementation](#implementation)
-  - [`-Zcheck-cfg`](#-zcheck-cfg)
+  - [`-Zcheck-cfg`](#zcheck-cfg)
   - [User-controlled cargo diagnostics](#user-controlled-cargo-diagnostics)
-  - [`-Ztrim-paths`](#-ztrim-paths)
+  - [`-Ztrim-paths`](#ztrim-paths)
   - [MSRV-aware Cargo](#msrv-aware-cargo)
   - [Removing implicit features](#removing-implicit-features)
   - [Normalizing published manifest files](#normalizing-published-manifest-files)
   - [Merging `cargo upgrade` into `cargo update`](#merging-cargo-upgrade-into-cargo-update)
   - [`.crate` provenance](#crate-provenance)
-  - [`cargo publish --workspace`](#cargo-publish---workspace)
+  - [`cargo publish --workspace`](#cargo-publish-workspace)
   - [Snapshot testing](#snapshot-testing)
 - [Design discussions](#design-discussions)
   - [RFC triage](#rfc-triage)
-  - [Custom test harnesses and `panic = "abort"`](#custom-test-harnesses-and-panic--abort)
+  - [Custom test harnesses and `panic = "abort"`](#custom-test-harnesses-and-panic-abort)
   - [Short-hand manifest syntaxes](#short-hand-manifest-syntaxes)
   - [Leaky abstractions of rustc](#leaky-abstractions-of-rustc)
 - [Misc](#misc)
@@ -184,7 +187,7 @@ Discussion is still on-going.
 <!-- 2024-06-04 -->
 As far as we are aware, the last remaining step before stabilization is
 renaming the configuration ([#13540](https://github.com/rust-lang/cargo/issues/13540)):
-```toml=
+```toml
 [resolver]
 something-like-precedence = "something-like-rust-version"
 ```

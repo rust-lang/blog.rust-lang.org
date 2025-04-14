@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2025-04-04
+path = "2025/04/04/c-abi-changes-for-wasm32-unknown-unknown"
 title = "C ABI Changes for `wasm32-unknown-unknown`"
-author = "Alex Crichton"
+authors = ["Alex Crichton"]
+aliases = ["2025/04/04/c-abi-changes-for-wasm32-unknown-unknown.html"]
 +++
 
 The `extern "C"` ABI for the `wasm32-unknown-unknown` target has been using a
@@ -92,7 +92,7 @@ pub extern "C" fn pair_add(pair: Pair) -> u32 {
 
 This will generate the following WebAssembly function:
 
-```wasm
+```
 (func $pair_add (param i32 i32) (result i32)
   local.get 1
   local.get 0
@@ -119,7 +119,7 @@ unsigned pair_add(struct Pair pair) {
 
 which yields the generated function:
 
-```wasm
+```
 (func (param i32) (result i32)
   local.get 0
   i32.load offset=4

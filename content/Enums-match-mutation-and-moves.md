@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2015-04-17
+path = "2015/04/17/Enums-match-mutation-and-moves"
 title = "Mixing matching, mutation, and moves in Rust"
-author = "Felix S. Klock II"
+authors = ["Felix S. Klock II"]
 description = "A tour of matching and enums in Rust."
+aliases = ["2015/04/17/Enums-match-mutation-and-moves.html"]
 +++
 
 One of the primary goals of the Rust project is to enable safe systems

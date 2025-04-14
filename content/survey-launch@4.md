@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2023-12-18
+path = "2023/12/18/survey-launch"
 title = "Launching the 2023 State of Rust Survey"
-author = "The Rust Survey Working Group"
+authors = ["The Rust Survey Working Group"]
 description = "Share your experience using Rust in the eighth edition of the State of Rust Survey"
+aliases = ["2023/12/18/survey-launch.html"]
 +++
 
 It’s time for the [2023 State of Rust Survey](https://www.surveyhero.com/c/4vxempzc)!

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-07-05
+path = "2023/07/05/regex-1.9"
 title = "Announcing regex 1.9"
-author = "Andrew Gallant"
-team = "The regex crate team <https://www.rust-lang.org/governance/teams/library#Regex%20crate%20team>"
+authors = ["Andrew Gallant"]
+aliases = ["2023/07/05/regex-1.9.html"]
+
+[extra]
+team = "The regex crate team"
+team_url = "https://www.rust-lang.org/governance/teams/library#Regex%20crate%20team"
 +++
 
 The regex sub-team is announcing the release of `regex 1.9`. The `regex` crate

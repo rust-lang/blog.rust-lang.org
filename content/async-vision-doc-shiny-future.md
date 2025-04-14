@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2021-04-14
+path = "2021/04/14/async-vision-doc-shiny-future"
 title = "Brainstorming Async Rust's Shiny Future"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "Brainstorming Async Rust's Shiny Future"
-team = "the Async Foundations Working Group <https://rust-lang.github.io/wg-async-foundations/>"
+aliases = ["2021/04/14/async-vision-doc-shiny-future.html"]
+
+[extra]
+team = "the Async Foundations Working Group"
+team_url = "https://rust-lang.github.io/wg-async-foundations/"
 +++
 
 On March 18th, we [announced the start of the Async Vision Doc][announce] process. Since then, we've landed [24 "status quo" stories][sq] and we have [4 more stories in open PRs][prs]; [Ryan Levick] and [I] have also hosted more than ten collaborative writing sessions over the course of the last few weeks, and we have [more scheduled for this week][cws].

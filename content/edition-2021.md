@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2021-05-11
+path = "2021/05/11/edition-2021"
 title = "The Plan for the Rust 2021 Edition"
-author = "Mara Bos"
-team = "The Rust 2021 Edition Working Group <https://www.rust-lang.org/governance/teams/core#project-edition-2021>"
+authors = ["Mara Bos"]
+aliases = ["2021/05/11/edition-2021.html"]
+
+[extra]
+team = "The Rust 2021 Edition Working Group"
+team_url = "https://www.rust-lang.org/governance/teams/core#project-edition-2021"
 +++
 
 We are happy to announce that the third edition of the Rust language, Rust 2021,

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-03-11
+path = "2024/03/11/crates-io-download-changes"
 title = "crates.io: Download changes"
-author = "Tobias Bieniek"
-team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
+authors = ["Tobias Bieniek"]
+aliases = ["2024/03/11/crates-io-download-changes.html"]
+
+[extra]
+team = "the crates.io team"
+team_url = "https://www.rust-lang.org/governance/teams/crates-io"
 +++
 
 Like the rest of the Rust community, [crates.io](https://crates.io) has been growing rapidly, with download and package counts increasing 2-3x year-on-year. This growth doesn't come without problems, and we have made some changes to download handling on crates.io to ensure we can keep providing crates for a long time to come.

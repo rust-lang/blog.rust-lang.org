@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2022-12-15
+path = "2022/12/15/Rust-1.66.0"
 title = "Announcing Rust 1.66.0"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2022/12/15/Rust-1.66.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -13,7 +15,7 @@ software.
 If you have a previous version of Rust installed via rustup, you can get 1.66.0
 with:
 
-```console
+```
 $ rustup update stable
 ```
 

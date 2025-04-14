@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-02-18
+path = "inside-rust/2022/02/18/lang-team-feb-update"
 title = "Lang team February update"
-author = "Sean Chen"
+authors = ["Sean Chen"]
 description = "Lang team February update"
-team = "the lang team <https://lang-team.rust-lang.org/>"
+aliases = ["inside-rust/2022/02/18/lang-team-feb-update.html"]
+
+[extra]
+team = "the lang team"
+team_url = "https://lang-team.rust-lang.org/"
 +++
 Two weeks ago, the lang team held its February planning meeting ([minutes]). We hold these meetings on the first Wednesday of every month.
 

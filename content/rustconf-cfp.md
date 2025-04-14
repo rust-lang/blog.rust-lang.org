@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2020-03-10
+path = "2020/03/10/rustconf-cfp"
 title = "The 2020 RustConf CFP is Now Open!"
-author = "Rust Community"
+authors = ["Rust Community"]
 description = "The call for proposals for RustConf 202 is open; We want to hear from you!"
+aliases = ["2020/03/10/rustconf-cfp.html"]
 +++
 
 Greetings fellow Rustaceans!

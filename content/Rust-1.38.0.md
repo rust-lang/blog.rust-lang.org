@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2019-09-26
+path = "2019/09/26/Rust-1.38.0"
 title = "Announcing Rust 1.38.0"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2019/09/26/Rust-1.38.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -10,7 +12,7 @@ The Rust team is happy to announce a new version of Rust, 1.38.0. Rust is a prog
 
 If you have a previous version of Rust installed via rustup, getting Rust 1.38.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -78,7 +80,7 @@ fn main() {
 
 This prints:
 
-```text
+```
 Initializing an instance of i32
 Initializing an instance of alloc::string::String
 ```

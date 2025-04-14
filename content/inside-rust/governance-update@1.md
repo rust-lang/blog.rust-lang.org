@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2022-10-06
+path = "inside-rust/2022/10/06/governance-update"
 title = "Governance Update"
-author = "Ryan Levick"
-team = "leadership chat <https://www.rust-lang.org/governance>"
+authors = ["Ryan Levick"]
+aliases = ["inside-rust/2022/10/06/governance-update.html"]
+
+[extra]
+team = "leadership chat"
+team_url = "https://www.rust-lang.org/governance"
 +++
 
 As part of ongoing work on governance, Rust leadership jointly established a group, "leadership chat", consisting of the Core team, leads of all teams on the [governance page], the Moderation team, and the project directors on the Rust Foundation board. This group has been serving as an interim governing body while efforts to establish the next evolution of Rust project-wide governance are underway.

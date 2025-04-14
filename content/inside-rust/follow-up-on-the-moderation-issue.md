@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2021-12-17
+path = "inside-rust/2021/12/17/follow-up-on-the-moderation-issue"
 title = "Follow-up on the moderation issue"
-author = "Ryan Levick and Mara Bos"
-team = "the Rust Project <https://www.rust-lang.org/>"
+authors = ["Ryan Levick and Mara Bos"]
+aliases = ["inside-rust/2021/12/17/follow-up-on-the-moderation-issue.html"]
+
+[extra]
+team = "the Rust Project"
+team_url = "https://www.rust-lang.org/"
 +++
 
 Last week, the following e-mail was sent to all members of the Rust project

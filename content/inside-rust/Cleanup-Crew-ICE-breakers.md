@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2020-02-06
+path = "inside-rust/2020/02/06/Cleanup-Crew-ICE-breakers"
 title = "Announcing the Cleanup Crew ICE-breaker group"
-author = "Santiago Pastorino"
+authors = ["Santiago Pastorino"]
 description = "A new blog where the Rust team can post updates on the latest developments"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2020/02/06/Cleanup-Crew-ICE-breakers.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 Following Niko Matsakis' announcement of the [**LLVM ICE-breaker

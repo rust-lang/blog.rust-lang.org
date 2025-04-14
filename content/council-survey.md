@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2024-08-26
+path = "2024/08/26/council-survey"
 title = "2024 Leadership Council Survey"
-author = "The Leadership Council"
+authors = ["The Leadership Council"]
+aliases = ["2024/08/26/council-survey.html"]
 +++
 
 One of the responsibilities of the [leadership council](https://www.rust-lang.org/governance/teams/leadership-council),

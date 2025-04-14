@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-10-23
+path = "inside-rust/2020/10/23/Core-team-membership"
 title = "Core team membership changes"
-author = "Mark Rousskov"
-team = "The Core Team <https://www.rust-lang.org/governance/teams/core>"
+authors = ["Mark Rousskov"]
+aliases = ["inside-rust/2020/10/23/Core-team-membership.html"]
+
+[extra]
+team = "The Core Team"
+team_url = "https://www.rust-lang.org/governance/teams/core"
 +++
 
 The core team has had a few membership updates in the last month, and we wanted to provide an update.

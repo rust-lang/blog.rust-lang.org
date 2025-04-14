@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2016-07-25
+path = "2016/07/25/conf-lineup"
 title = "The 2016 Rust Conference Lineup"
-author = "Rust Community"
+authors = ["Rust Community"]
 description = "Three Rust conferences are coming up soon; join us at one near you!"
+aliases = ["2016/07/25/conf-lineup.html"]
 +++
 
 The Rust Community is holding three major conferences in the near future, and we

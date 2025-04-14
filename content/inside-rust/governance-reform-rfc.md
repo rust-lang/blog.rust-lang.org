@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-02-22
+path = "inside-rust/2023/02/22/governance-reform-rfc"
 title = "Governance Reform RFC Announcement"
-author = "Jane Losare-Lusby and the Governance Reform WG"
-team = "leadership chat <https://www.rust-lang.org/governance>"
+authors = ["Jane Losare-Lusby and the Governance Reform WG"]
+aliases = ["inside-rust/2023/02/22/governance-reform-rfc.html"]
+
+[extra]
+team = "leadership chat"
+team_url = "https://www.rust-lang.org/governance"
 +++
 
 As part of [ongoing work on governance](https://blog.rust-lang.org/inside-rust/2022/10/06/governance-update.html), the "leadership chat" established a smaller "governance reform" working group to create an RFC to establish new project wide governance. This RFC is now live and can found on the RFCs repo: <https://github.com/rust-lang/rfcs/pull/3392>

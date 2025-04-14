@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2021-07-29
+path = "2021/07/29/Rust-1.54.0"
 title = "Announcing Rust 1.54.0"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2021/07/29/Rust-1.54.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -12,7 +14,7 @@ to build reliable and efficient software.
 If you have a previous version of Rust installed via rustup, getting Rust
 1.54.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -30,7 +32,7 @@ from the appropriate page on our website, and check out the
 Rust 1.54 supports invoking function-like macros inside attributes. Function-like macros can be either `macro_rules!` based or procedural macros which are invoked like `macro!(...)`. One notable use case for this is including documentation from other files into Rust doc comments. For example, if your project's README represents a good documentation comment, you can use `include_str!` to directly incorporate the contents. Previously, various workarounds allowed similar functionality, but from 1.54 this is much more ergonomic.
 
 
-```rust=
+```rust
 #![doc = include_str!("README.md")]
 ```
 

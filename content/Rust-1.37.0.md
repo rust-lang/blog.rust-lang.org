@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2019-08-15
+path = "2019/08/15/Rust-1.37.0"
 title = "Announcing Rust 1.37.0"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2019/08/15/Rust-1.37.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -10,7 +12,7 @@ The Rust team is happy to announce a new version of Rust, 1.37.0. Rust is a prog
 
 If you have a previous version of Rust installed via rustup, getting Rust 1.37.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 

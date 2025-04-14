@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2024-08-20
+path = "inside-rust/2024/08/20/leadership-council-repr-selection"
 title = "Leadership Council September Representative Selections"
-author = "Eric Huss"
-team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["Eric Huss"]
+aliases = ["inside-rust/2024/08/20/leadership-council-repr-selection.html"]
+
+[extra]
+team = "Leadership Council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
 The selection process for representatives on the [Leadership Council] is starting today.

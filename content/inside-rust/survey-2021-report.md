@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-06-21
+path = "inside-rust/2022/06/21/survey-2021-report"
 title = "2021 Annual Survey Report"
-author = "Nick Cameron"
+authors = ["Nick Cameron"]
 description = "Download a data report on the 2021 annual community survey."
-team = "The Survey Working Group <https://www.rust-lang.org/governance/teams/community#Survey%20team>"
+aliases = ["inside-rust/2022/06/21/survey-2021-report.html"]
+
+[extra]
+team = "The Survey Working Group"
+team_url = "https://www.rust-lang.org/governance/teams/community#Survey%20team"
 +++
 As usual, we conducted an annual community survey in 2021. We previously shared some some highlights and charts
 in a [blog post](https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html). This year we would also like to

@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-07-17
+path = "inside-rust/2023/07/17/trait-system-refactor-initiative"
 title = "Rustc Trait System Refactor Initiative Update"
-author = "lcnr"
-team = "The Rustc Trait System Refactor Initiative <https://github.com/rust-lang/trait-system-refactor-initiative/>"
+authors = ["lcnr"]
+aliases = ["inside-rust/2023/07/17/trait-system-refactor-initiative.html"]
+
+[extra]
+team = "The Rustc Trait System Refactor Initiative"
+team_url = "https://github.com/rust-lang/trait-system-refactor-initiative/"
 +++
 
 As announced in the [Types Team announcement post](https://blog.rust-lang.org/2023/01/20/types-announcement.html) at the start of this year, the Types Team has started to reimplement the trait solver of rustc. This refactor is similar to [Chalk](https://github.com/rust-lang/chalk/), but directly integrated into the existing codebase using the experience gathered over the last few years. Unlike Chalk, the new trait solver has the sole goal of replacing the existing implementation. We are separately working on formalizing the type system in [a-mir-formality](https://github.com/rust-lang/a-mir-formality). It has now been half a year since that announcement which matches the first step of [our roadmap][roadmap].

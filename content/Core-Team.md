@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2014-12-12
+path = "2014/12/12/Core-Team"
 title = "Yehuda Katz and Steve Klabnik are joining the Rust Core Team"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "I'm pleased to announce that Yehuda Katz and Steve Klabnik are joining the Rust core team."
+aliases = ["2014/12/12/Core-Team.html"]
 +++
 
 I'm pleased to announce that Yehuda Katz and Steve Klabnik are joining

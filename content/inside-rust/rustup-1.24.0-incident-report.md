@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2021-04-28
+path = "inside-rust/2021/04/28/rustup-1.24.0-incident-report"
 title = "Rustup 1.24.0 release incident report for 2021-04-27"
-author = "Daniel Silverstone"
-team = "the Rustup team <https://www.rust-lang.org/governance/teams/dev-tools#wg-rustup>"
+authors = ["Daniel Silverstone"]
+aliases = ["inside-rust/2021/04/28/rustup-1.24.0-incident-report.html"]
+
+[extra]
+team = "the Rustup team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#wg-rustup"
 +++
 
 On 2021-04-27 at 15:09 UTC we released a new version of Rustup (1.24.0). At

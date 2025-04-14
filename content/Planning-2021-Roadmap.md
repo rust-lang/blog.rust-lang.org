@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2020-09-03
+path = "2020/09/03/Planning-2021-Roadmap"
 title = "Planning the 2021 Roadmap"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2020/09/03/Planning-2021-Roadmap.html"]
 +++
 
 The core team is beginning to think about the 2021 Roadmap, and we want to hear from the community. We’re going to be running two parallel efforts over the next several weeks: the 2020 Rust Survey, to be announced next week, and a call for blog posts.

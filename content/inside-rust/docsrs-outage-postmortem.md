@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2019-10-24
+path = "inside-rust/2019/10/24/docsrs-outage-postmortem"
 title = "docs.rs outage postmortem"
-author = "Pietro Albini"
-team = "the infrastructure team <https://www.rust-lang.org/governance/teams/operations#infra>"
+authors = ["Pietro Albini"]
+aliases = ["inside-rust/2019/10/24/docsrs-outage-postmortem.html"]
+
+[extra]
+team = "the infrastructure team"
+team_url = "https://www.rust-lang.org/governance/teams/operations#infra"
 +++
 
 At 2019-10-21 01:38 UTC the docs.rs website went down because no available disk

@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2019-01-17
+path = "2019/01/17/Rust-1.32.0"
 title = "Announcing Rust 1.32.0"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2019/01/17/Rust-1.32.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -13,7 +15,7 @@ efficient software.
 If you have a previous version of Rust installed via rustup, getting Rust
 1.32.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -65,7 +67,7 @@ fn main() {
 
 If you run this program, you'll see:
 
-```text
+```
 [src/main.rs:4] x = 5
 ```
 
@@ -109,7 +111,7 @@ fn factorial(n: u32) -> u32 {
 We want to log `n` on each iteration, as well as have some kind of context
 for each of the branches. We see this output for `factorial(4)`:
 
-```text
+```
 n: 4
 n: 3
 n: 2
@@ -139,7 +141,7 @@ fn factorial(n: u32) -> u32 {
 We simply wrap each of the various expressions we want to print with the macro. We
 get this output instead:
 
-```text
+```
 [src/main.rs:3] n <= 1 = false
 [src/main.rs:3] n <= 1 = false
 [src/main.rs:3] n <= 1 = false

@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2019-05-14
+path = "2019/05/14/Rust-1.34.2"
 title = "Announcing Rust 1.34.2"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2019/05/14/Rust-1.34.2.html"]
+
+[extra]
 release = true
 +++
 
@@ -13,7 +15,7 @@ efficient software.
 If you have a previous version of Rust installed via rustup, getting Rust
 1.34.2 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 

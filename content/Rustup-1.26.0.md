@@ -1,21 +1,21 @@
 +++
-layout = "post"
-date = 2023-04-25
+path = "2023/04/25/Rustup-1.26.0"
 title = "Announcing Rustup 1.26.0"
-author = "The Rustup Working Group"
+authors = ["The Rustup Working Group"]
+aliases = ["2023/04/25/Rustup-1.26.0.html"]
 +++
 
 The rustup working group is happy to announce the release of rustup version 1.26.0. [Rustup][install] is the recommended tool to install [Rust][rust], a programming language that is empowering everyone to build reliable and efficient software.
 
 If you have a previous version of rustup installed, getting rustup 1.26.0 is as easy as stopping any programs which may be using Rustup (e.g. closing your IDE) and running:
 
-```console
+```
 $ rustup self update
 ```
 
 Rustup will also automatically update itself at the end of a normal toolchain update:
 
-```console
+```
 $ rustup update
 ```
 

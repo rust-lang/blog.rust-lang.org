@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2018-05-29
+path = "2018/05/29/Rust-1.26.1"
 title = "Announcing Rust 1.26.1"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2018/05/29/Rust-1.26.1.html"]
+
+[extra]
 release = true
 +++
 
@@ -102,12 +104,12 @@ context would return true, which is a bug; now, this comparison returns false.
 In some cases that may mean that the behavior of code will change, but we
 expect this to be relatively unlikely.
 
-```rust,ignore
+```rust
 use std::f64::NAN;
 const FOO: bool = ::std::f64::NAN >= ::std::f64::NAN;
-# On 1.26.0
+// On 1.26.0
 assert_eq!(FOO, true);
-# On 1.26.1
+// On 1.26.1
 assert_eq!(FOO, false);
 ```
 
@@ -124,7 +126,7 @@ component, but this should be a one-time problem.
 This was unfortunately fixed too late to make it into 1.26 stable, so we added
 the patch for 1.26.1 to permit users to install Rust on these platforms.
 
-```console
+```
 $ rustup update
 info: syncing channel updates for 'stable-x86_64-unknown-freebsd'
 info: latest update on 2018-05-10, rust version 1.26.0 (a77568041 2018-05-07)

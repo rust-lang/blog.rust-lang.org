@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2022-04-19
+path = "inside-rust/2022/04/19/imposter-syndrome"
 title = "Imposter Syndrome"
-author = "Jane Lusby, Project Director of Collaboration"
-team = "Rust Foundation Project Directors <https://foundation.rust-lang.org/about/>"
+authors = ["Jane Lusby, Project Director of Collaboration"]
+aliases = ["inside-rust/2022/04/19/imposter-syndrome.html"]
+
+[extra]
+team = "Rust Foundation Project Directors"
+team_url = "https://foundation.rust-lang.org/about/"
 +++
 
 *Preface: This is in response to some feedback the project directors received

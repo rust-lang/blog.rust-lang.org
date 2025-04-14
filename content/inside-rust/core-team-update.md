@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2021-05-04
+path = "inside-rust/2021/05/04/core-team-update"
 title = "Core Team Update: May 2021"
-author = "Steve Klabnik"
-team = "The Core Team <https://www.rust-lang.org/governance/teams/core>"
+authors = ["Steve Klabnik"]
+aliases = ["inside-rust/2021/05/04/core-team-update.html"]
+
+[extra]
+team = "The Core Team"
+team_url = "https://www.rust-lang.org/governance/teams/core"
 +++
 
 Hey everyone!  Back in August of last year, the core team wrote a blog post

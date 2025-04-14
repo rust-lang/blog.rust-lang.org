@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-04-04
+path = "inside-rust/2022/04/04/lang-roadmap-2024"
 title = "Rust Lang Roadmap for 2024"
-author = "Josh Triplett, Niko Matsakis"
+authors = ["Josh Triplett, Niko Matsakis"]
 description = "The language team's concrete initiatives and hopeful aspirations for the Rust 2024 edition."
-team = "The Rust Lang Team <https://www.rust-lang.org/governance/teams/lang>"
+aliases = ["inside-rust/2022/04/04/lang-roadmap-2024.html"]
+
+[extra]
+team = "The Rust Lang Team"
+team_url = "https://www.rust-lang.org/governance/teams/lang"
 +++
 
 Note: this blog post is a snapshot of the living roadmap at

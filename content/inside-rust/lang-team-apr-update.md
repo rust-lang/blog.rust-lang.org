@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2021-04-17
+path = "inside-rust/2021/04/17/lang-team-apr-update"
 title = "Lang team April update"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "Lang team April update"
-team = "the lang team <https://lang-team.rust-lang.org/>"
+aliases = ["inside-rust/2021/04/17/lang-team-apr-update.html"]
+
+[extra]
+team = "the lang team"
+team_url = "https://lang-team.rust-lang.org/"
 +++
 
 This week the lang team held its April planning meeting ([minutes]). We normally hold these meetings on the first Wednesday of every month, but this month we were delayed by one week due to scheduling conflicts.

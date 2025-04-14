@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2024-05-06
+path = "2024/05/06/Rustup-1.27.1"
 title = "Announcing Rustup 1.27.1"
-author = "The Rustup Team"
+authors = ["The Rustup Team"]
+aliases = ["2024/05/06/Rustup-1.27.1.html"]
 +++
 
 The Rustup team is happy to announce the release of Rustup version 1.27.1.
@@ -10,13 +10,13 @@ The Rustup team is happy to announce the release of Rustup version 1.27.1.
 
 If you have a previous version of Rustup installed, getting Rustup 1.27.1 is as easy as stopping any programs which may be using Rustup (e.g. closing your IDE) and running:
 
-```console
+```
 $ rustup self update
 ```
 
 Rustup will also automatically update itself at the end of a normal toolchain update:
 
-```console
+```
 $ rustup update
 ```
 

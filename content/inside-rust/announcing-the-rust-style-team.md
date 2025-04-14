@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2022-09-29
+path = "inside-rust/2022/09/29/announcing-the-rust-style-team"
 title = "Announcing the Rust Style Team"
-author = "Josh Triplett"
-team = "The Rust Style Team <https://www.rust-lang.org/governance/teams/lang#Style team>"
+authors = ["Josh Triplett"]
+aliases = ["inside-rust/2022/09/29/announcing-the-rust-style-team.html"]
+
+[extra]
+team = "The Rust Style Team"
+team_url = "https://www.rust-lang.org/governance/teams/lang#Style team"
 +++
 
 Rust has a standardized style, and an implementation of that style in the

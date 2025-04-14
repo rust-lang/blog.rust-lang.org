@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2019-11-07
+path = "2019/11/07/Async-await-stable"
 title = "Async-await on stable Rust!"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
+aliases = ["2019/11/07/Async-await-stable.html"]
 +++
 
 **On this coming Thursday, November 7, async-await syntax hits stable

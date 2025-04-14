@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2019-10-17
+path = "inside-rust/2019/10/17/ecstatic-morse-for-compiler-contributors"
 title = "Please welcome ecstatic-morse to compiler-contributors"
-author = "Niko Matsakis"
+authors = ["Niko Matsakis"]
 description = "Please welcome ecstatic-morse to compiler-contributors"
-team = "the compiler team <https://www.rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2019/10/17/ecstatic-morse-for-compiler-contributors.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 Please welcome [@ecstatic-morse] to the [compiler contributors] group!

@@ -1,0 +1,3 @@
+{% set section_path = feed_url | trim_start_matches(pat=config.base_url ~ "/") | trim_end_matches(pat="releases.json") -%}
+{% set section = get_section(path=section_path ~ "_index.md") -%}
+{"releases":[{% filter trim_end_matches(pat=",") %}{%- for page in section.pages | reverse -%}{% if page.extra is containing("release") %}{"title":"{{ page.title }}","url":"{{ page.path | trim_start_matches(pat="/") }}"},{% endif %}{% endfor %}{% endfilter %}],"feed_updated":"{{ now() | date(format="%Y-%m-%dT%H:%M:%S+00:00") }}"}

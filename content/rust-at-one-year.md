@@ -1,9 +1,9 @@
 +++
-layout = "post"
-date = 2016-05-16
+path = "2016/05/16/rust-at-one-year"
 title = "One year of Rust"
-author = "Aaron Turon"
+authors = ["Aaron Turon"]
 description = "Rust's trajectory one year after 1.0"
+aliases = ["2016/05/16/rust-at-one-year.html"]
 +++
 
 Rust is a language that gives you:

@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2022-10-28
+path = "2022/10/28/gats-stabilization"
 title = "Generic associated types to be stable in Rust 1.65"
-author = "Jack Huey"
+authors = ["Jack Huey"]
 description = "Generic associated types will stabilize in Rust 1.65"
-team = "The Types Team <https://github.com/rust-lang/types-team>"
+aliases = ["2022/10/28/gats-stabilization.html"]
+
+[extra]
+team = "The Types Team"
+team_url = "https://github.com/rust-lang/types-team"
 +++
 
 As of Rust 1.65, which is set to release on November 3rd, generic associated types (GATs) will be stable — over six and a half years after the original [RFC] was opened. This is truly a monumental achievement; however, as with a few of the other monumental features of Rust, like `async` or const generics, there are limitations in the initial stabilization that we plan to remove in the future.

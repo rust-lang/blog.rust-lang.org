@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2022-06-22
+path = "2022/06/22/sparse-registry-testing"
 title = "Call for testing: Cargo sparse-registry"
-author = "Arlo Siemsen"
-team = "The Cargo Team <https://www.rust-lang.org/governance/teams/dev-tools#cargo>"
+authors = ["Arlo Siemsen"]
+aliases = ["2022/06/22/sparse-registry-testing.html"]
+
+[extra]
+team = "The Cargo Team"
+team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 > Note: Sparse registry support has been stabilized for the 1.68 release.

@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2020-12-31
+path = "2020/12/31/Rust-1.49.0"
 title = "Announcing Rust 1.49.0"
-author = "The Rust Release Team"
+authors = ["The Rust Release Team"]
+aliases = ["2020/12/31/Rust-1.49.0.html"]
+
+[extra]
 release = true
 +++
 
@@ -13,7 +15,7 @@ efficient software.
 If you have a previous version of Rust installed via rustup, getting Rust
 1.49.0 is as easy as:
 
-```console
+```
 $ rustup update stable
 ```
 
@@ -93,7 +95,7 @@ fn thready_pass() {
 
 Here's what running this test looks like before Rust 1.49.0:
 
-```text
+```
 ❯ cargo +1.48.0 test
    Compiling threadtest v0.1.0 (C:\threadtest)
     Finished test [unoptimized + debuginfo] target(s) in 0.38s
@@ -118,7 +120,7 @@ from the output of the test framework itself. Wouldn't it be nice
 if every `println!` worked like that one that prints "`fum`?" Well, [that's
 the behavior in Rust 1.49.0](https://github.com/rust-lang/rust/pull/78227):
 
-```text
+```
 ❯ cargo test
    Compiling threadtest v0.1.0 (C:\threadtest)
     Finished test [unoptimized + debuginfo] target(s) in 0.52s
@@ -140,7 +142,7 @@ But don't worry; if the test were to fail, you'll still see all of the
 output. By adding a `panic!` to the end of the test, we can see what failure
 looks like:
 
-```text
+```
 ❯ cargo test
    Compiling threadtest v0.1.0 (C:\threadtest)
     Finished test [unoptimized + debuginfo] target(s) in 0.52s

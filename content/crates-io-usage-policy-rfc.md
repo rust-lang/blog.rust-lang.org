@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-09-22
+path = "2023/09/22/crates-io-usage-policy-rfc"
 title = "crates.io Policy Update RFC"
-author = "Tobias Bieniek"
-team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
+authors = ["Tobias Bieniek"]
+aliases = ["2023/09/22/crates-io-usage-policy-rfc.html"]
+
+[extra]
+team = "the crates.io team"
+team_url = "https://www.rust-lang.org/governance/teams/crates-io"
 +++
 
 Around the end of July the crates.io team opened an [RFC](https://github.com/rust-lang/rfcs/pull/3463) to update the current crates.io usage policies. This policy update addresses operational concerns of the crates.io community service that have arisen since the last significant policy update in 2017, particularly related to name squatting and spam. The RFC has caused considerable discussion, and most of the suggested improvements have since been integrated into the proposal.

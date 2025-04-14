@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2024-02-19
+path = "2024/02/19/2023-Rust-Annual-Survey-2023-results"
 title = "2023 Annual Rust Survey Results"
-author = "The Rust Survey Team"
+authors = ["The Rust Survey Team"]
+aliases = ["2024/02/19/2023-Rust-Annual-Survey-2023-results.html"]
 +++
 
 Hello, Rustaceans!

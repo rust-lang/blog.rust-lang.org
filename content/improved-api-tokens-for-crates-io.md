@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-06-23
+path = "2023/06/23/improved-api-tokens-for-crates-io"
 title = "Improved API tokens for crates.io"
-author = "Tobias Bieniek"
-team = "the crates.io team <https://www.rust-lang.org/governance/teams/crates-io>"
+authors = ["Tobias Bieniek"]
+aliases = ["2023/06/23/improved-api-tokens-for-crates-io.html"]
+
+[extra]
+team = "the crates.io team"
+team_url = "https://www.rust-lang.org/governance/teams/crates-io"
 +++
 
 If you recently generated a new API token on crates.io, you might have noticed

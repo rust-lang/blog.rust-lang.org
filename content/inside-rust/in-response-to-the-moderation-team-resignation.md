@@ -1,8 +1,8 @@
 +++
-layout = "post"
-date = 2021-11-25
+path = "inside-rust/2021/11/25/in-response-to-the-moderation-team-resignation"
 title = "In response to the moderation team resignation"
-author = "The undersigned"
+authors = ["The undersigned"]
+aliases = ["inside-rust/2021/11/25/in-response-to-the-moderation-team-resignation.html"]
 +++
 
 As top-level team leads, project directors to the Foundation, and core team

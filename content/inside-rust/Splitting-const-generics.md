@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2021-09-06
+path = "inside-rust/2021/09/06/Splitting-const-generics"
 title = "Splitting the const generics features"
-author = "lcnr"
+authors = ["lcnr"]
 description = "Splitting the const generics features"
-team = "The Const Generics Project Group <https://rust-lang.github.io/project-const-generics/>"
+aliases = ["inside-rust/2021/09/06/Splitting-const-generics.html"]
+
+[extra]
+team = "The Const Generics Project Group"
+team_url = "https://rust-lang.github.io/project-const-generics/"
 +++
 
 After the stabilization of the const generics MVP in version 1.51, the const generics project group has continued to

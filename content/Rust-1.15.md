@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2017-02-02
+path = "2017/02/02/Rust-1.15"
 title = "Announcing Rust 1.15"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2017/02/02/Rust-1.15.html"]
+
+[extra]
 release = true
 +++
 
@@ -76,7 +78,7 @@ fn main() {
 
 This will output:
 
-```text
+```
 serialized = {"name":"Ferris"}
 deserialized = Pet { name: "Ferris" }
 ```

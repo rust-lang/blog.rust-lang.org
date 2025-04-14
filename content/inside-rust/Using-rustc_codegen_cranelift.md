@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2020-11-15
+path = "inside-rust/2020/11/15/Using-rustc_codegen_cranelift"
 title = "Using rustc_codegen_cranelift for debug builds"
-author = "Jynn Nelson"
-team = "The Compiler Team <https://www.rust-lang.org/governance/teams/compiler>"
+authors = ["Jynn Nelson"]
+aliases = ["inside-rust/2020/11/15/Using-rustc_codegen_cranelift.html"]
+
+[extra]
+team = "The Compiler Team"
+team_url = "https://www.rust-lang.org/governance/teams/compiler"
 +++
 
 ## What is `rustc_codegen_cranelift`?
@@ -95,13 +98,13 @@ if you're just interested! The reason this isn't the recommended way to build
 
 First, download the Rust repository.
 
-```console
+```
 $ git clone https://github.com/rust-lang/rust
 ```
 
 Now, let's set up the build system to use `cg_clif`.
 
-```text
+```
 $ cat > config.toml <<EOF
 [rust]
 codegen-backends = ["cranelift"]
@@ -110,7 +113,7 @@ EOF
 
 Finally, let's run the build. This can take a long time, over a half-hour in some cases.
 
-```console
+```
 $ ./x.py build
 ```
 

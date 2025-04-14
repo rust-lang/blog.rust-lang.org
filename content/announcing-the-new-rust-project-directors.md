@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2023-10-19
+path = "2023/10/19/announcing-the-new-rust-project-directors"
 title = "Announcing the New Rust Project Directors"
-author = "Leadership Council"
-team = "Leadership Council <https://www.rust-lang.org/governance/teams/leadership-council>"
+authors = ["Leadership Council"]
+aliases = ["2023/10/19/announcing-the-new-rust-project-directors.html"]
+
+[extra]
+team = "Leadership Council"
+team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 +++
 
 We are happy to announce that we have completed the process to elect new Project Directors.

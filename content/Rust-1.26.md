@@ -1,8 +1,10 @@
 +++
-layout = "post"
-date = 2018-05-10
+path = "2018/05/10/Rust-1.26"
 title = "Announcing Rust 1.26"
-author = "The Rust Core Team"
+authors = ["The Rust Core Team"]
+aliases = ["2018/05/10/Rust-1.26.html"]
+
+[extra]
 release = true
 +++
 
@@ -153,7 +155,7 @@ fn foo() {
 
 when compiled, gives this error:
 
-```text
+```
 error[E0308]: mismatched types
  --> src/main.rs:5:5
   |
@@ -239,7 +241,7 @@ fn hello(arg: &Option<String>) {
 
 If you tried to compile this in Rust 1.25, you'd get this error:
 
-```text
+```
 error[E0658]: non-reference pattern used to match a reference (see issue #42640)
  --> src/main.rs:6:9
   |
@@ -266,7 +268,7 @@ fn hello(arg: &Option<String>) {
 
 We added the `&`s the compiler complained about. Let's try to compile again:
 
-```text
+```
 error[E0507]: cannot move out of borrowed content
  --> src/main.rs:6:9
   |
@@ -419,7 +421,7 @@ fn main() {
 What does this program do? The answer: nothing. The warning we get when
 compiling has a hint:
 
-```text
+```
 warning: literal out of range for u8
  --> src/main.rs:6:17
   |

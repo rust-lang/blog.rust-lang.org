@@ -1,9 +1,12 @@
 +++
-layout = "post"
-date = 2022-07-27
+path = "inside-rust/2022/07/27/keyword-generics"
 title = "Announcing the Keyword Generics Initiative"
-author = "Yoshua Wuyts"
-team = "The Keyword Generics Initiative <https://github.com/rust-lang/keyword-generics-initiative>"
+authors = ["Yoshua Wuyts"]
+aliases = ["inside-rust/2022/07/27/keyword-generics.html"]
+
+[extra]
+team = "The Keyword Generics Initiative"
+team_url = "https://github.com/rust-lang/keyword-generics-initiative"
 +++
 
 We ([Oli], [Niko], and [Yosh]) are excited to announce the start of the [Keyword

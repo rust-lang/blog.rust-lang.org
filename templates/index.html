@@ -1,17 +1,17 @@
-{% import "macros.html" as macros %}
-{% extends "layout.html" %}
-{% block page %}
+{% import "macros.html" as macros -%}
+{% extends "layout.html" -%}
+{% block page -%}
 <header class="mt3 mt0-ns mb4-ns">
   <div class="container flex flex-column flex-row-l justify-between-l">
     <div class="mw6-l">
-      <p>{{ section.index_html }}</p>
+      <p>{{ section.extra.index_html | safe }}</p>
     </div>
   </div>    
   <div class="container flex flex-column flex-row-l justify-between-l">
     <div class="mw8-l">
       <p>
       <b>See also:</b>
-              {{ section.see_also_html }}
+        <a href="{{ config.base_url | safe }}{{ section.extra.see_also_path | safe }}">{{ section.extra.see_also_text }}</a>
       </p>
     </div>
   </div>
@@ -21,14 +21,29 @@
    <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
 
     <table class="post-list collapse w-100 f2-l f2-m f3-s">
-    {%- for page in section.pages %}
+    {%- set rev_pages = section.pages | reverse %}
+    {%- for page in rev_pages %}
+      {%- set num_comps = page.components | length %}
+      {%- set year = page.components | nth(n=num_comps - 4) | int %}
+      {%- set month = page.components | nth(n=num_comps - 3) | int %}
+      {%- set day = page.components | nth(n=num_comps - 2) | int %}
+
+      {%- if loop.index0 == 0 %}
+      {{ macros::show_year(year=year) }}
+      {%- else %}
+        {%- set prev_idx = loop.index0 - 1 %}
+        {%- set prev_year = rev_pages[prev_idx].components | nth(n=num_comps - 4) | int %}
+        {%- if prev_year != year %}
+      {{ macros::show_year(year=year) }}
+        {%- endif %}
+      {%- endif %}
       {% if page.show_year %}<tr>
         <td class="bn"></td>
-        <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">Posts in {{ page.year }}</h3></td>
+        <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">Posts in {{ year }}</h3></td>
       </tr>{% endif %}
       <tr>
-        <td class="tr o-60 pr4 pr5-l bn">{{ macros::month_name(num=page.month) }}&nbsp;{{ page.day }}</td>
-        <td class="bn"><a href="{{ page.path }}">{{ macros::escape_hbs(input=page.title) }}</a></td>
+        <td class="tr o-60 pr4 pr5-l bn">{{ macros::month_name(num=month) }}&nbsp;{{ day }}</td>
+        <td class="bn"><a href="{{ config.base_url | safe }}{{ page.path | safe }}">{{ macros::escape_hbs(input=page.title) }}</a></td>
       </tr>
     {%- endfor %}
     </table>

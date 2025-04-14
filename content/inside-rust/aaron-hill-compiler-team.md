@@ -1,10 +1,13 @@
 +++
-layout = "post"
-date = 2021-04-26
+path = "inside-rust/2021/04/26/aaron-hill-compiler-team"
 title = "Congrats to compiler team member Aaron Hill"
-author = "Wesley Wiser"
+authors = ["Wesley Wiser"]
 description = "Congrats to compiler team member Aaron Hill"
-team = "the compiler team <https://rust-lang.org/governance/teams/compiler>"
+aliases = ["inside-rust/2021/04/26/aaron-hill-compiler-team.html"]
+
+[extra]
+team = "the compiler team"
+team_url = "https://rust-lang.org/governance/teams/compiler"
 +++
 
 I am pleased to announce that [Aaron Hill] has been made a full member of the [compiler team].
