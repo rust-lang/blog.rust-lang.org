@@ -28,7 +28,12 @@ Code of Conduct, see `CODE_OF_CONDUCT.md` for more.
 
 ### Writing a new blog post
 
-When writing a new blog post, keep in mind the file headers:
+If you want to include images in your post, please store them in the repository.
+You can store your main blog post in `content/<some-slug>/index.md`.
+Images go into the same directory: `content/<some-slug>/my_image.png`.
+Now you can reference that image with a simple relative path: `![alt text](my_image.png)`.
+
+Here is an example of the front matter format:
 ```md
 +++
 path = "2015/03/15/some-slug"
