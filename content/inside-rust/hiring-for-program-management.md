@@ -21,4 +21,4 @@ If you know of someone who might be great for this, please encourage that person
 
 [Editions]: https://doc.rust-lang.org/nightly/edition-guide/
 [Project Goals]: https://rust-lang.github.io/rust-project-goals/
-[Rust 2024]: ../../../../2025/02/20/Rust-1.85.0.html
+[Rust 2024]: /2025/02/20/Rust-1.85.0/

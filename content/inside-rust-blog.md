@@ -11,5 +11,5 @@ updates by the various Rust teams and working groups. If you're
 interested in following along with the "nitty gritty" of Rust
 development, then you should take a look!
 
-[irb]: ../../../inside-rust/index.html
+[irb]: /inside-rust/
 

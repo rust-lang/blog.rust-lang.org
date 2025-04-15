@@ -10,7 +10,7 @@ team_url = "https://www.rust-lang.org/governance/teams/dev-tools#cargo"
 +++
 
 > Note: Sparse registry support has been stabilized for the 1.68 release.
-> See [Help test Cargo's new index protocol](../../../inside-rust/2023/01/30/cargo-sparse-protocol.html) for updated information.
+> See [Help test Cargo's new index protocol](/inside-rust/2023/01/30/cargo-sparse-protocol/) for updated information.
 
 The Cargo nightly [`sparse-registry`][sparse-registry] feature is ready for testing. The
 feature causes Cargo to access the crates.io index over HTTP, rather than git. It can

@@ -9,7 +9,7 @@ aliases = ["2015/02/20/Rust-1.0-alpha2.html"]
 Today, we are happy to announce the release of Rust 1.0.0.alpha.2! Rust is a
 systems programming language pursuing the trifecta: safe, fast, and concurrent.
 
-In accordance with our [status report](../../../2015/02/13/Final-1.0-timeline.html)
+In accordance with our [status report](/2015/02/13/Final-1.0-timeline/)
 last week, this is a second alpha release, rather than a first beta release.
 The beta release will be six weeks from today, with the final coming six weeks
 after that.
@@ -18,7 +18,7 @@ We’ve managed to land almost all of the features previously expected for this
 cycle. **The big headline here is that all major API revisions are finished**:
 path and IO reform have landed. At this point, all modules shipping for 1.0 are
 in what we expect to be their final form, modulo minor tweaks during the alpha2
-cycle. See the [previous post](../../../2015/02/13/Final-1.0-timeline.html) for more
+cycle. See the [previous post](/2015/02/13/Final-1.0-timeline/) for more
 details.
 
 This coming release cycle is crucial to Rust, as this will be the last cycle

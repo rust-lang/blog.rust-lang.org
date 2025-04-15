@@ -26,7 +26,7 @@ them. This requires us to mix up how the [Async Foundations WG][wg] is
 operating.
 
 [wg]: https://rust-lang.github.io/compiler-team/working-groups/async-await/
-[blog]: ../../../../2019/09/30/Async-await-hits-beta.html
+[blog]: /2019/09/30/Async-await-hits-beta/
 
 ### Announcing: focus issues
 

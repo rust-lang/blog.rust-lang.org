@@ -125,7 +125,7 @@ done under the assumption that the new verification would ship in 1.53, not
 
 It turns out `verify-ich` was turned on in version 1.52.0, which was [released recently][].
 
-[released recently]: ../../../2021/05/06/Rust-1.52.0.html
+[released recently]: /2021/05/06/Rust-1.52.0/
 
 Today's new release, 1.52.1, works around the breakage caused by the newly added
 verification by temporarily changing the defaults in the Rust compiler to disable
