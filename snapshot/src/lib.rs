@@ -9,7 +9,8 @@ fn snapshot() {
     assert!(status.success(), "failed to build site");
 
     let timestamped_files = ["releases.json", "feed.xml"];
-    let inexplicably_non_deterministic_files = ["images/2023-08-rust-survey-2022/experiences.png"];
+    let inexplicably_non_deterministic_files =
+        ["2023/08/07/Rust-Survey-2023-Results/experiences.png"];
     insta::glob!("../..", "public/**/*", |path| {
         if path.is_dir() {
             return;
