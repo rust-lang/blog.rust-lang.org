@@ -28,8 +28,8 @@ pub struct FrontMatter {
     #[serde(default)]
     pub authors: Vec<String>,
     pub description: Option<String>,
-    /// Used to generate redirects from the old URL scheme to preserve
-    /// permalinks.
+    /// Used for `releases/X.XX.X` redirects and ones from the old URL scheme to
+    /// preserve permalinks (e.g. slug.html => slug/).
     #[serde(default)]
     pub aliases: Vec<String>,
     /// Moved to the `extra` table.
@@ -113,10 +113,24 @@ pub fn normalize(
         bail!("extra.team and extra.team_url must always come in a pair");
     }
 
+    if front_matter.extra.release && !front_matter.aliases.iter().any(|a| a.contains("releases")) {
+        // Make sure release posts have a matching `releases/X.XX.X` alias.
+        let version = guess_version_from_path(&front_matter.path).unwrap_or("?.??.?".into());
+        front_matter.aliases.push(format!("releases/{version}"));
+    }
+
     let serialized = toml::to_string_pretty(&front_matter)?;
     let deserialized = toml::from_str(&serialized)?;
 
     Ok(deserialized)
+}
+
+fn guess_version_from_path(path: &str) -> Option<String> {
+    let mut iter = path.split(['-', '.']).filter_map(|s| s.parse::<u32>().ok());
+    let major = iter.next()?;
+    let minor = iter.next()?;
+    let patch = iter.next().unwrap_or(0); // some posts omit the patch version
+    Some(format!("{major}.{minor}.{patch}"))
 }
 
 #[cfg(test)]
