@@ -2,7 +2,10 @@
 path = "2017/07/20/Rust-1.19"
 title = "Announcing Rust 1.19"
 authors = ["The Rust Core Team"]
-aliases = ["2017/07/20/Rust-1.19.html"]
+aliases = [
+    "2017/07/20/Rust-1.19.html",
+    "releases/1.19.0",
+]
 
 [extra]
 release = true
