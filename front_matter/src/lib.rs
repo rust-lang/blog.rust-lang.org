@@ -108,7 +108,6 @@ pub fn normalize(
             slug = slug.split_once('@').map(|(s, _)| s).unwrap_or(slug),
         );
     }
-    front_matter.aliases = vec![format!("{}.html", front_matter.path)];
 
     if front_matter.extra.team.is_some() ^ front_matter.extra.team_url.is_some() {
         bail!("extra.team and extra.team_url must always come in a pair");
