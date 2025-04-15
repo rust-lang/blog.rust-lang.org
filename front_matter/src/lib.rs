@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use toml::value::Date;
 
 /// The front matter of a markdown blog post.
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FrontMatter {
     /// Deprecated. The plan was probably to have more specialized templates
     /// at some point. That didn't materialize, all posts are rendered with the
@@ -42,7 +42,7 @@ pub struct FrontMatter {
     pub extra: Extra,
 }
 
-#[derive(Debug, Default, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct Extra {
     pub team: Option<String>,
     pub team_url: Option<String>,
@@ -73,8 +73,12 @@ pub fn parse(markdown: &str) -> eyre::Result<(FrontMatter, &str)> {
 }
 
 /// Normalizes the front matter of a markdown file.
-pub fn normalize(markdown: &str, slug: &str, inside_rust: bool) -> eyre::Result<String> {
-    let (mut front_matter, content) = parse(markdown)?;
+pub fn normalize(
+    front_matter: &FrontMatter,
+    slug: &str,
+    inside_rust: bool,
+) -> eyre::Result<FrontMatter> {
+    let mut front_matter = front_matter.clone();
 
     // migrate "author" to "authors" key
     if let Some(author) = front_matter.author.take() {
@@ -110,14 +114,10 @@ pub fn normalize(markdown: &str, slug: &str, inside_rust: bool) -> eyre::Result<
         bail!("extra.team and extra.team_url must always come in a pair");
     }
 
-    Ok(format!(
-        "\
-+++
-{}\
-+++
-{content}",
-        toml::to_string_pretty(&front_matter)?
-    ))
+    let serialized = toml::to_string_pretty(&front_matter)?;
+    let deserialized = toml::from_str(&serialized)?;
+
+    Ok(deserialized)
 }
 
 #[cfg(test)]
@@ -146,11 +146,21 @@ mod tests {
                 .contains("content/inside-rust/");
 
             let content = fs::read_to_string(&post).unwrap();
-            let normalized = normalize(&content, slug, inside_rust).unwrap_or_else(|err| {
+            let (front_matter, rest) = parse(&content).unwrap();
+            let normalized = normalize(&front_matter, slug, inside_rust).unwrap_or_else(|err| {
                 panic!("failed to normalize {:?}: {err}", post.file_name().unwrap());
             });
 
-            if content != normalized {
+            if front_matter != normalized {
+                let normalized = format!(
+                    "\
+                    +++\n\
+                    {}\
+                    +++\n\
+                    {rest}\
+                    ",
+                    toml::to_string_pretty(&normalized).unwrap(),
+                );
                 if env::var("FIX_FRONT_MATTER").is_ok() {
                     fs::write(post, normalized).unwrap();
                     continue;
