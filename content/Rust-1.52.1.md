@@ -2,7 +2,10 @@
 path = "2021/05/10/Rust-1.52.1"
 title = "Announcing Rust 1.52.1"
 authors = ["Felix Klock, Mark Rousskov"]
-aliases = ["2021/05/10/Rust-1.52.1.html"]
+aliases = [
+    "2021/05/10/Rust-1.52.1.html",
+    "releases/1.52.1",
+]
 
 [extra]
 team = "the compiler team"
