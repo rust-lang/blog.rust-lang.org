@@ -22,6 +22,7 @@ jobs:
 
       - run: cargo clippy --workspace -- -D warnings
       - run: cargo fmt --check --all
+      - run: cargo test --package front_matter
 
   build:
     runs-on: ubuntu-latest
