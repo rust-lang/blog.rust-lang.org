@@ -124,7 +124,7 @@ from a repository where the default branch is called `main`.
 
 ### Incremental Compilation remains off by default
 
-As previously discussed on the [blog post for version 1.52.1](../../../2021/05/10/Rust-1.52.1.html), incremental compilation has been turned off by default on the stable Rust release channel. The feature remains available on the beta and nightly release channels. For the 1.53.0 stable release, the method for reenabling incremental is unchanged from 1.52.1.
+As previously discussed on the [blog post for version 1.52.1](/2021/05/10/Rust-1.52.1/), incremental compilation has been turned off by default on the stable Rust release channel. The feature remains available on the beta and nightly release channels. For the 1.53.0 stable release, the method for reenabling incremental is unchanged from 1.52.1.
 
 ### Stabilized APIs
 
