@@ -40,6 +40,7 @@ path = "2015/03/15/some-slug"
 title = "Title of the blog post"
 authors = ["Blog post author (or on behalf of which team)"]
 description = "(optional)"
+aliases = ["releases/X.XX.X"] # only if the post is a release
 
 [extra] # optional section
 team = "Team Name" # if post is made on behalf of a team
