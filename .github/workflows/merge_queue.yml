@@ -1,0 +1,61 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+env:
+  # renovate: datasource=github-tags depName=rust lookupName=rust-lang/rust
+  RUST_VERSION: 1.86.0
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - run: rustup override set ${{ env.RUST_VERSION }}
+      - run: rustup component add clippy
+      - run: rustup component add rustfmt
+      - uses: Swatinem/rust-cache@9d47c6ad4b02e050fd481d890b2ea34778fd09d6 # v2.7.8
+
+      - run: cargo clippy --workspace -- -D warnings
+      - run: cargo fmt --check --all
+      - run: cargo test --package front_matter
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - run: rustup override set ${{ env.RUST_VERSION }}
+      - uses: Swatinem/rust-cache@9d47c6ad4b02e050fd481d890b2ea34778fd09d6 # v2.7.8
+
+      - name: Install Zola
+        run: cargo install --locked --git https://github.com/senekor/zola --rev 620bf3c46a39b41db30b1e91756a995bbff84d3a
+      - run: zola build
+      - run: cp CNAME ./public/
+      - run: touch public/.nojekyll
+
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: public
+
+  deploy:
+    if: ${{ github.ref == 'refs/heads/master' }}
+
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    runs-on: ubuntu-latest
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}

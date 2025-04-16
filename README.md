@@ -33,10 +33,15 @@ You can store your main blog post in `content/<some-slug>/index.md`.
 Images go into the same directory: `content/<some-slug>/my_image.png`.
 Now you can reference that image with a simple relative path: `![alt text](my_image.png)`.
 
+A post's date of publication is embedded in the `path` key of the front matter.
+Keep the placeholder (`9999/12/99`) until the post is about to be merged.
+You can easily do so by adding a comment containing the string `publish=today` on the PR.
+Don't worry, there's a merge queue check to make sure you don't forget.
+
 Here is an example of the front matter format:
 ```md
 +++
-path = "2015/03/15/some-slug"
+path = "9999/12/99/some-slug"
 title = "Title of the blog post"
 authors = ["Blog post author (or on behalf of which team)"]
 description = "(optional)"
