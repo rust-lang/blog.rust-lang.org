@@ -16,17 +16,6 @@
       </p>
     </div>
   </div>
-  <div class="container flex flex-column flex-row-l justify-between-l">
-    <div class="mw8-l">
-      <p>
-      <b>See also:</b>
-      {% for see_also in section.extra.see_also -%}
-      {% if loop.index0 != 0 %},{% endif %}
-        <a href="{{ config.base_url | safe }}{{ see_also.path | safe }}">{{ see_also.text }}</a>
-      {%- endfor -%}
-      </p>
-    </div>
-  </div>
 </header>
 
 {% set section = get_section(path="_index.md") -%}
