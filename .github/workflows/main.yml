@@ -42,10 +42,23 @@ jobs:
         with:
           path: public
 
+  pub_date:
+    name: Check publication date for placeholder
+    if: ${{ github.ref == 'refs/heads/master' }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - run: rustup override set ${{ env.RUST_VERSION }}
+      - uses: Swatinem/rust-cache@9d47c6ad4b02e050fd481d890b2ea34778fd09d6 # v2.7.8
+
+      - run: cargo test -p front_matter -- --include-ignored date_is_set
+
   deploy:
     if: ${{ github.ref == 'refs/heads/master' }}
 
-    needs: build
+    needs: [pub_date, build]
 
     permissions:
       pages: write
