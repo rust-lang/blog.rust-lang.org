@@ -1,0 +1,8 @@
+{% set section = get_section(path="_index.md") -%}
+{%- for page in section.pages | reverse -%}{% if page.extra is containing("release") -%}
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Redirect</title>
+<meta http-equiv="refresh" content="0; url={{ page.path | safe }}">
+<p><a href="{{ page.path | safe }}">Click here</a> to be redirected to the latest Rust release annoucement.</p>
+{% break %}{% endif %}{% endfor -%}
