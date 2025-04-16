@@ -20,7 +20,10 @@
     <div class="mw8-l">
       <p>
       <b>See also:</b>
-        <a href="{{ config.base_url | safe }}{{ section.extra.see_also_path | safe }}">{{ section.extra.see_also_text }}</a>
+      {% for see_also in section.extra.see_also -%}
+      {% if loop.index0 != 0 %},{% endif %}
+        <a href="{{ config.base_url | safe }}{{ see_also.path | safe }}">{{ see_also.text }}</a>
+      {%- endfor -%}
       </p>
     </div>
   </div>
