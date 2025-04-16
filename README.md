@@ -33,10 +33,14 @@ You can store your main blog post in `content/<some-slug>/index.md`.
 Images go into the same directory: `content/<some-slug>/my_image.png`.
 Now you can reference that image with a simple relative path: `![alt text](my_image.png)`.
 
+A post's date of publication is embedded in the `path` key of the front matter.
+Unless the exact date is known in advance, keep the placeholder (`9999/12/31`) until the post is about to be published.
+Don't worry, there's a CI check to prevent a post with a placeholder date from being deployed.
+
 Here is an example of the front matter format:
 ```md
 +++
-path = "2015/03/15/some-slug"
+path = "9999/12/31/some-slug"
 title = "Title of the blog post"
 authors = ["Blog post author (or on behalf of which team)"]
 description = "(optional)"

@@ -141,15 +141,7 @@ mod tests {
 
     #[test]
     fn front_matter_is_normalized() {
-        let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("..");
-
-        let posts = fs::read_dir(repo_root.join("content"))
-            .unwrap()
-            .chain(fs::read_dir(repo_root.join("content/inside-rust")).unwrap())
-            .map(|p| p.unwrap().path())
-            .filter(|p| p.is_file() && p.file_name() != Some("_index.md".as_ref()));
-
-        for post in posts {
+        for post in all_posts() {
             let slug = post.file_stem().unwrap().to_str().unwrap();
 
             let inside_rust = post
@@ -211,5 +203,37 @@ The post {post} has abnormal front matter.
                 )
             };
         }
+    }
+
+    /// This test is run by the merge queue check to make sure a blog post isn't
+    /// merged before its date of publication is set. The date of a blog post
+    /// is usually a placeholder (path = "9999/12/31/...") until shortly before
+    /// it's published.
+    #[test]
+    #[ignore]
+    fn date_is_set() {
+        for post in all_posts() {
+            let content = fs::read_to_string(&post).unwrap();
+            let (front_matter, _) = parse(&content).unwrap();
+
+            if front_matter.path.starts_with("9999/12/31") {
+                panic!(
+                    "\n\
+                    The post {slug} has a placeholder publication date.\n\
+                    If you're about to publish it, please set it to today.\n\
+                    ",
+                    slug = post.file_stem().unwrap().to_str().unwrap(),
+                );
+            }
+        }
+    }
+
+    fn all_posts() -> impl Iterator<Item = PathBuf> {
+        let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("..");
+        fs::read_dir(repo_root.join("content"))
+            .unwrap()
+            .chain(fs::read_dir(repo_root.join("content/inside-rust")).unwrap())
+            .map(|p| p.unwrap().path())
+            .filter(|p| p.is_file() && p.file_name() != Some("_index.md".as_ref()))
     }
 }
