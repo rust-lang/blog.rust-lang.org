@@ -35,9 +35,9 @@
     }}
 {%- endmacro escape_hbs %}
 
-{% macro show_year(year) -%}
+{% macro show_year(year, post_name="Posts") -%}
       <tr>
         <td class="bn"></td>
-        <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">Posts in {{ year }}</h3></td>
+        <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">{{ post_name }} in {{ year }}</h3></td>
       </tr>
 {%- endmacro show_year %}

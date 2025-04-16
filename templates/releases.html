@@ -4,22 +4,21 @@
 <header class="mt3 mt0-ns mb4-ns">
   <div class="container flex flex-column flex-row-l justify-between-l">
     <div class="mw6-l">
-      <p>{{ section.extra.index_html | safe }}</p>
-    </div>
-  </div>    
-  <div class="container flex flex-column flex-row-l justify-between-l">
-    <div class="mw8-l">
       <p>
-      <b>See also:</b>
-      {% for see_also in section.extra.see_also -%}
-      {% if loop.index0 != 0 %},{% endif %}
-        <a href="{{ config.base_url | safe }}{{ see_also.path | safe }}">{{ see_also.text }}</a>
-      {%- endfor -%}
+        This is a subset of the <a href="/">main Rust blog</a>
+        listing only official release annoucement posts.
+      </p>
+      <p>
+        Did you know? There are convenient redirects for
+        the latest and specific release posts:
+        <br/>• <a href="/releases/latest">/releases/latest</a>
+        <br/>• <a href="/releases/1.85.0">/releases/1.85.0</a>
       </p>
     </div>
   </div>
 </header>
 
+{% set section = get_section(path="_index.md") -%}
 <section id="posts" class="posts">
    <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
 
@@ -30,14 +29,16 @@
       {%- set year = page.components | nth(n=num_comps - 4) | int %}
       {%- set month = page.components | nth(n=num_comps - 3) | int %}
       {%- set day = page.components | nth(n=num_comps - 2) | int %}
-
       {%- if loop.index0 == 0 %}
-      {{ macros::show_year(year=year) }}
-      {%- else %}
+      {{ macros::show_year(year=year, post_name="Releases") }}
+      {%- endif %}
+
+      {%- if page.extra is containing("release") %}
+      {%- if loop.index0 != 0 %}
         {%- set prev_idx = loop.index0 - 1 %}
         {%- set prev_year = rev_pages[prev_idx].components | nth(n=num_comps - 4) | int %}
         {%- if prev_year != year %}
-      {{ macros::show_year(year=year) }}
+      {{ macros::show_year(year=year, post_name="Releases") }}
         {%- endif %}
       {%- endif %}
       {% if page.show_year %}<tr>
@@ -48,9 +49,9 @@
         <td class="tr o-60 pr4 pr5-l bn">{{ macros::month_name(num=month) }}&nbsp;{{ day }}</td>
         <td class="bn"><a href="{{ config.base_url | safe }}{{ page.path | safe }}">{{ macros::escape_hbs(input=page.title) }}</a></td>
       </tr>
+      {%- endif %}
     {%- endfor %}
     </table>
-
   </div>
 </section>
 {%- endblock page %}
