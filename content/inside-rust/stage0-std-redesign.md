@@ -19,7 +19,7 @@ We are reworking how the stage 0 bootstrap sequence works (the sequence used to 
 Notably, this means:
 
 - `./x {build,test,check} library --stage 0` becomes no-op, as stage 0 std is no longer the built in-tree std, and the minimum supported stage to build std is now `1`.
-    - Consequently, default (test, check, bench) stage values in the library profile are no longer `0`.
+    - Consequently, default (test, check, bench) stage values in the library profile are no longer `0`, but instead defaults to `1`.
 - `cfg(bootstrap)` is no longer needed for library development. In (very) rare cases, `cfg(bootstrap)` may be needed in the compiler for dogfooding unstable library features.
 
 ## Motivation
@@ -31,7 +31,7 @@ This was [originally proposed by @jyn514 in the MCP rust-lang/compiler-team#619]
 ## What does this mean for a typical library workflow?
 
 - Crucially, `./x {build,test,check} library --stage 0` becomes no-op and are no longer supported. Building the in-tree std now requires a stage 1 compiler.
-    - Consequently, library contributors are **strongly** encouraged to enable `rust.download-rustc = "if-unchanged"` to avoid having to build a stage 1 compiler.
+    - Consequently, library contributors are *strongly* encouraged to enable `rust.download-rustc = "if-unchanged"` to avoid having to build a stage 1 compiler. Note that this is the default for `profile = "library"`, but you may need to specify it manually if you don't use a `profile`.
 - `cfg(bootstrap)` should no longer be needed for library sources.
 
 ### Caveat: `libtest` changes
