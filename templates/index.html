@@ -27,6 +27,7 @@
     {%- set rev_pages = section.pages | reverse %}
     {%- for page in rev_pages %}
       {%- set num_comps = page.components | length %}
+      {%- if num_comps < 4 %}{{ throw(message="Missing date in 'path' key, required format: '[inside-rust/]YYYY/MM/DD/slug-of-your-choice'") }}{% endif %}
       {%- set year = page.components | nth(n=num_comps - 4) | int %}
       {%- set month = page.components | nth(n=num_comps - 3) | int %}
       {%- set day = page.components | nth(n=num_comps - 2) | int %}

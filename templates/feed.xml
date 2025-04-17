@@ -20,6 +20,7 @@
         <title>{{ macros::escape_hbs(input=page.title) | safe }}</title>
         <link rel="alternate" href="https://blog.rust-lang.org{{ macros::escape_hbs(input=page.path) | safe }}" type="text/html" title="{{ macros::escape_hbs(input=page.title) | safe }}" />
         {%- set num_comps = page.components | length %}
+        {%- if num_comps < 4 %}{{ throw(message="Missing date in 'path' key, required format: '[inside-rust/]YYYY/MM/DD/slug-of-your-choice'") }}{% endif %}
         {%- set year = page.components | nth(n=num_comps - 4) %}
         {%- set month = page.components | nth(n=num_comps - 3) %}
         {%- set day = page.components | nth(n=num_comps - 2) %}
