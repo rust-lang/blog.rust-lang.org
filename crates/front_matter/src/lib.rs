@@ -255,7 +255,7 @@ The post {post} has abnormal front matter.
     }
 
     fn all_posts() -> impl Iterator<Item = PathBuf> {
-        walkdir::WalkDir::new(concat!(env!("CARGO_MANIFEST_DIR"), "/../content"))
+        walkdir::WalkDir::new(concat!(env!("CARGO_MANIFEST_DIR"), "/../../content"))
             .into_iter()
             .filter_map(|e| e.ok().map(|e| e.into_path()))
             .filter(|p| {

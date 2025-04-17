@@ -65,16 +65,16 @@ You can also run these tests locally for a faster feedback cycle:
 
 - Generate the good snapshots to compare against, usually based off the master branch:
   ```sh
-  cargo insta test --accept --include-ignored
+  cargo insta test -p snapshot --accept --include-ignored
   ```
   Consider making a commit with these snapshots, so you can always check the diff of your changes with git:
   ```sh
-  git add --force snapshot/src/snapshots # snapshots are ignored by default
+  git add --force crates/snapshot/src/snapshots # snapshots are ignored by default
   git commit --message "WIP add good snapshots"
   ```
   Since we can't merge the snapshots to main, don't forget to drop this commit when opening a pull request.
 
 - Compare the output of the branch you're working on with the good snapshots:
   ```sh
-  cargo insta test --review --include-ignored
+  cargo insta test -p snapshot --review --include-ignored
   ```
