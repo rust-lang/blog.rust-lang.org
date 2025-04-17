@@ -1,4 +1,5 @@
 +++
+path = "inside-rust/9999/12/31/redesigning-stage-0-std"
 title = "Redesigning stage 0 std"
 authors = ["Jieyou Xu"]
 
