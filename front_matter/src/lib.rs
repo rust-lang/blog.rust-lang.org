@@ -253,11 +253,14 @@ The post {post} has abnormal front matter.
     }
 
     fn all_posts() -> impl Iterator<Item = PathBuf> {
-        let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("..");
-        fs::read_dir(repo_root.join("content"))
-            .unwrap()
-            .chain(fs::read_dir(repo_root.join("content/inside-rust")).unwrap())
-            .map(|p| p.unwrap().path())
-            .filter(|p| p.is_file() && p.file_name() != Some("_index.md".as_ref()))
+        walkdir::WalkDir::new(concat!(env!("CARGO_MANIFEST_DIR"), "/../content"))
+            .into_iter()
+            .filter_map(|e| e.ok().map(|e| e.into_path()))
+            .filter(|p| {
+                p.is_file()
+                    && p.extension() == Some("md".as_ref())
+                    && p.file_name() != Some("_index.md".as_ref())
+                    && p.file_name() != Some("latest.md".as_ref())
+            })
     }
 }
