@@ -175,9 +175,11 @@ mod tests {
                 .contains("content/inside-rust/");
 
             let content = fs::read_to_string(&post).unwrap();
-            let (front_matter, rest) = parse(&content).unwrap();
+            let (front_matter, rest) = parse(&content).unwrap_or_else(|err| {
+                panic!("failed to parse {:?}: {err}", post.display());
+            });
             let normalized = normalize(&front_matter, slug, inside_rust).unwrap_or_else(|err| {
-                panic!("failed to normalize {:?}: {err}", post.file_name().unwrap());
+                panic!("failed to normalize {:?}: {err}", post.display());
             });
 
             if front_matter != normalized {
