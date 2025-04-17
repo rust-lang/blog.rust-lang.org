@@ -32,7 +32,7 @@ pub struct FrontMatter {
     pub description: Option<String>,
     /// Used for `releases/X.XX.X` redirects and ones from the old URL scheme to
     /// preserve permalinks (e.g. slug.html => slug/).
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub aliases: Vec<String>,
     /// Moved to the `extra` table.
     #[serde(default, skip_serializing)]
