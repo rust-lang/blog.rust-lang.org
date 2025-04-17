@@ -109,6 +109,30 @@ pub fn normalize(
         );
     }
 
+    // validate format of 'path'
+    {
+        let mut path = front_matter.path.as_str();
+        let mut rq_fmt = "YYYY/MM/DD/slug-of-your-choice";
+        if inside_rust {
+            rq_fmt = "inside-rust/YYYY/MM/DD/slug-of-your-choice";
+            if !path.starts_with("inside-rust/") {
+                bail!("the path of inside-rust posts must start with 'inside-rust/'");
+            }
+            path = path.trim_start_matches("inside-rust/");
+        }
+        let components = path.split('/').collect::<Vec<_>>();
+        if components.len() != 4
+            || components[0].len() != 4
+            || components[0].parse::<u32>().is_err()
+            || components[1].len() != 2
+            || components[1].parse::<u8>().is_err()
+            || components[2].len() != 2
+            || components[2].parse::<u8>().is_err()
+        {
+            bail!("invalid 'path' key in front matter, required format: {rq_fmt}");
+        }
+    }
+
     if front_matter.extra.team.is_some() ^ front_matter.extra.team_url.is_some() {
         bail!("extra.team and extra.team_url must always come in a pair");
     }
