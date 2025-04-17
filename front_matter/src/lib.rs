@@ -175,9 +175,11 @@ mod tests {
                 .contains("content/inside-rust/");
 
             let content = fs::read_to_string(&post).unwrap();
-            let (front_matter, rest) = parse(&content).unwrap();
+            let (front_matter, rest) = parse(&content).unwrap_or_else(|err| {
+                panic!("failed to parse {:?}: {err}", post.display());
+            });
             let normalized = normalize(&front_matter, slug, inside_rust).unwrap_or_else(|err| {
-                panic!("failed to normalize {:?}: {err}", post.file_name().unwrap());
+                panic!("failed to normalize {:?}: {err}", post.display());
             });
 
             if front_matter != normalized {
@@ -253,11 +255,14 @@ The post {post} has abnormal front matter.
     }
 
     fn all_posts() -> impl Iterator<Item = PathBuf> {
-        let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("..");
-        fs::read_dir(repo_root.join("content"))
-            .unwrap()
-            .chain(fs::read_dir(repo_root.join("content/inside-rust")).unwrap())
-            .map(|p| p.unwrap().path())
-            .filter(|p| p.is_file() && p.file_name() != Some("_index.md".as_ref()))
+        walkdir::WalkDir::new(concat!(env!("CARGO_MANIFEST_DIR"), "/../content"))
+            .into_iter()
+            .filter_map(|e| e.ok().map(|e| e.into_path()))
+            .filter(|p| {
+                p.is_file()
+                    && p.extension() == Some("md".as_ref())
+                    && p.file_name() != Some("_index.md".as_ref())
+                    && p.file_name() != Some("latest.md".as_ref())
+            })
     }
 }
