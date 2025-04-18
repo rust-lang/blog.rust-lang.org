@@ -20,6 +20,6 @@ jobs:
       - run: git fetch --depth 2
       - run: git checkout origin/master
       - name: Generate good snapshots
-        run: INSTA_OUTPUT=none INSTA_UPDATE=always cargo test -- --include-ignored
+        run: INSTA_OUTPUT=none INSTA_UPDATE=always cargo test -p snapshot -- --include-ignored
       - run: git checkout $GITHUB_SHA # merge of master+branch
-      - run: cargo test -- --include-ignored
+      - run: INSTA_OUTPUT=none INSTA_UPDATE=no cargo test -p snapshot -- --include-ignored

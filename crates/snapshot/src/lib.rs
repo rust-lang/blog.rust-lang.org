@@ -1,6 +1,6 @@
 #[test]
 fn snapshot() {
-    std::env::set_current_dir(concat!(env!("CARGO_MANIFEST_DIR"), "/..")).unwrap();
+    std::env::set_current_dir(concat!(env!("CARGO_MANIFEST_DIR"), "/../..")).unwrap();
     let _ = std::fs::remove_dir_all("public");
     let status = std::process::Command::new("zola")
         .arg("build")
@@ -11,7 +11,7 @@ fn snapshot() {
     let timestamped_files = ["releases.json", "feed.xml"];
     let inexplicably_non_deterministic_files =
         ["2023/08/07/Rust-Survey-2023-Results/experiences.png"];
-    insta::glob!("../..", "public/**/*", |path| {
+    insta::glob!("../../..", "public/**/*", |path| {
         if path.is_dir() {
             return;
         }
