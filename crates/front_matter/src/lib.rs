@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use toml::value::Date;
 
 /// The front matter of a markdown blog post.
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct FrontMatter {
     /// Deprecated. The plan was probably to have more specialized templates
     /// at some point. That didn't materialize, all posts are rendered with the
@@ -137,6 +137,11 @@ pub fn normalize(
 
     if front_matter.extra.team.is_some() ^ front_matter.extra.team_url.is_some() {
         bail!("extra.team and extra.team_url must always come in a pair");
+    }
+
+    // the crate generate_blog may create this placeholder
+    if front_matter.aliases.iter().any(|a| a == "releases/?.??.?") {
+        bail!("invalid release alias: releases/?.??.?");
     }
 
     if front_matter.extra.release && !front_matter.aliases.iter().any(|a| a.contains("releases")) {
