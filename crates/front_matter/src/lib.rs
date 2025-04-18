@@ -27,6 +27,8 @@ pub struct FrontMatter {
     pub author: Option<String>,
     #[serde(default)]
     pub authors: Vec<String>,
+    /// Deprecated. Post descriptions are not used anywhere in the templates.
+    /// (only section descriptions)
     pub description: Option<String>,
     /// Used for `releases/X.XX.X` redirects and ones from the old URL scheme to
     /// preserve permalinks (e.g. slug.html => slug/).
