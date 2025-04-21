@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use toml::value::Date;
 
 /// The front matter of a markdown blog post.
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct FrontMatter {
     /// Deprecated. The plan was probably to have more specialized templates
     /// at some point. That didn't materialize, all posts are rendered with the
@@ -27,10 +27,12 @@ pub struct FrontMatter {
     pub author: Option<String>,
     #[serde(default)]
     pub authors: Vec<String>,
+    /// Deprecated. Post descriptions are not used anywhere in the templates.
+    /// (only section descriptions)
     pub description: Option<String>,
     /// Used for `releases/X.XX.X` redirects and ones from the old URL scheme to
     /// preserve permalinks (e.g. slug.html => slug/).
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub aliases: Vec<String>,
     /// Moved to the `extra` table.
     #[serde(default, skip_serializing)]
@@ -135,6 +137,11 @@ pub fn normalize(
 
     if front_matter.extra.team.is_some() ^ front_matter.extra.team_url.is_some() {
         bail!("extra.team and extra.team_url must always come in a pair");
+    }
+
+    // the crate generate_blog may create this placeholder
+    if front_matter.aliases.iter().any(|a| a == "releases/?.??.?") {
+        bail!("invalid release alias: releases/?.??.?");
     }
 
     if front_matter.extra.release && !front_matter.aliases.iter().any(|a| a.contains("releases")) {
@@ -255,7 +262,7 @@ The post {post} has abnormal front matter.
     }
 
     fn all_posts() -> impl Iterator<Item = PathBuf> {
-        walkdir::WalkDir::new(concat!(env!("CARGO_MANIFEST_DIR"), "/../content"))
+        walkdir::WalkDir::new(concat!(env!("CARGO_MANIFEST_DIR"), "/../../content"))
             .into_iter()
             .filter_map(|e| e.ok().map(|e| e.into_path()))
             .filter(|p| {
