@@ -25,6 +25,10 @@ Notably, this means that after [redesign stage 0 std #119899](https://github.com
     - Consequently, default (test, check, bench) stage values in the library profile are no longer `0`, but instead defaults to `1`.
 - Some additional `cfg(bootstrap)` usages may be needed in the compiler sources for dogfooding unstable library features.
 
+If you have questions, or run into bugs/issues related to the stage 0 std redesign, please discuss them in the [stage 0 std redesign support thread][support-thread] or open a new issue.
+
+[support-thread]: https://rust-lang.zulipchat.com/#narrow/channel/326414-t-infra.2Fbootstrap/topic/Stage.200.20std.20redesign.20support.20thread/with/515096924
+
 ## Comparison of common invocations
 
 For `profile = "library"`:
