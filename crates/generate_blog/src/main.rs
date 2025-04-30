@@ -1,10 +1,24 @@
 use std::{error::Error, fmt::Display, fs, path::PathBuf, process::Command};
 
 use front_matter::FrontMatter;
-use inquire::{Confirm, Select, Text, validator::Validation};
+use inquire::autocompletion::Replacement;
+use inquire::{Autocomplete, Confirm, CustomUserError, Select, Text, validator::Validation};
+use rust_team_data::v1::{Team, Teams};
+
+const BASE_TEAM_WEBSITE_URL: &str = "https://www.rust-lang.org/governance/teams/";
 
 fn main() -> Result<(), Box<dyn Error>> {
     println!("\nHi, thanks for writing a post for the Rust blog!\n");
+
+    // If we cannot load teams, we won't provide any autocompletion, but the generate
+    // command should still work.
+    let team_data = match load_teams() {
+        Ok(teams) => Some(teams),
+        Err(error) => {
+            eprintln!("Cannot download team data: {error}");
+            None
+        }
+    };
 
     let title = Text::new("What's the title of your post?")
         .with_validator(|input: &str| {
@@ -73,9 +87,20 @@ fn main() -> Result<(), Box<dyn Error>> {
         {
             break 'team_prompt (None, None);
         }
-        let team = Text::new("What is the team?").prompt()?;
+        let mut team_prompt = Text::new("What is the team?");
+        if let Some(ref teams) = team_data {
+            team_prompt = team_prompt.with_autocomplete(TeamNames::from_teams(teams));
+        }
+
+        let team = team_prompt.prompt()?;
+
+        let prefilled_url = team_data
+            .as_ref()
+            .and_then(|teams| find_team_url(teams, &team))
+            .unwrap_or_else(|| BASE_TEAM_WEBSITE_URL.to_string());
+
         let url = Text::new("At what URL can people find the team?")
-            .with_initial_value("https://www.rust-lang.org/governance/teams/")
+            .with_initial_value(&prefilled_url)
             .prompt()?;
         (Some(team), Some(url))
     };
@@ -150,6 +175,66 @@ being published - CI checks against the placeholder.
     );
 
     Ok(())
+}
+
+fn load_teams() -> Result<Teams, String> {
+    let url = format!("{}/teams.json", rust_team_data::v1::BASE_URL);
+    let response = ureq::get(url).call().map_err(|e| e.to_string())?;
+    if response.status() != 200 {
+        return Err(format!("Cannot download teams data: {}", response.status()));
+    }
+    let teams: Teams = response
+        .into_body()
+        .read_json()
+        .map_err(|e| e.to_string())?;
+    Ok(teams)
+}
+
+fn find_team_url(teams: &Teams, team_name: &str) -> Option<String> {
+    let team = teams.teams.get(team_name)?;
+    let top_level_team = find_top_level_team(teams, team);
+
+    // E.g. <BASE>compiler#team-miri
+    Some(format!(
+        "{}{}#team-{team_name}",
+        BASE_TEAM_WEBSITE_URL, top_level_team.name
+    ))
+}
+
+fn find_top_level_team<'a>(teams: &'a Teams, team: &'a Team) -> &'a Team {
+    if team.top_level.unwrap_or(false) {
+        return team;
+    }
+    if let Some(parent) = team.subteam_of.as_ref().and_then(|t| teams.teams.get(t)) {
+        return find_top_level_team(teams, parent);
+    }
+    team
+}
+
+#[derive(Clone)]
+struct TeamNames(Vec<String>);
+
+impl TeamNames {
+    fn from_teams(teams: &Teams) -> Self {
+        let names = teams.teams.keys().cloned().collect();
+        Self(names)
+    }
+}
+
+impl Autocomplete for TeamNames {
+    fn get_suggestions(&mut self, input: &str) -> Result<Vec<String>, CustomUserError> {
+        let mut names = self.0.clone();
+        names.retain(|n| n.contains(input));
+        Ok(names)
+    }
+
+    fn get_completion(
+        &mut self,
+        _input: &str,
+        highlighted_suggestion: Option<String>,
+    ) -> Result<Replacement, CustomUserError> {
+        Ok(highlighted_suggestion)
+    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
