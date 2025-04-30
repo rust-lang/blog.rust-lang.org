@@ -96,11 +96,12 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         let url = if let Some(url) = team_data
             .as_ref()
-            .and_then(|teams| find_team_url(teams, &team)) {
+            .and_then(|teams| find_team_url(teams, &team))
+        {
             url
         } else {
             Text::new("At what URL can people find the team?")
-                .with_initial_value(&BASE_TEAM_WEBSITE_URL)
+                .with_initial_value(BASE_TEAM_WEBSITE_URL)
                 .prompt()?
         };
         (Some(team), Some(url))
@@ -194,11 +195,15 @@ fn load_teams() -> Result<Teams, String> {
 fn find_team_url(teams: &Teams, team_name: &str) -> Option<String> {
     let team = teams.teams.get(team_name)?;
     let top_level_team = find_top_level_team(teams, team);
+    let top_level_page = top_level_team
+        .website_data
+        .as_ref()
+        .map(|w| w.page.as_str())
+        .unwrap_or_else(|| top_level_team.name.as_str());
 
     // E.g. <BASE>compiler#team-miri
     Some(format!(
-        "{}{}#team-{team_name}",
-        BASE_TEAM_WEBSITE_URL, top_level_team.name
+        "{BASE_TEAM_WEBSITE_URL}{top_level_page}#team-{team_name}"
     ))
 }
 
