@@ -94,14 +94,15 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         let team = team_prompt.prompt()?;
 
-        let prefilled_url = team_data
+        let url = if let Some(url) = team_data
             .as_ref()
-            .and_then(|teams| find_team_url(teams, &team))
-            .unwrap_or_else(|| BASE_TEAM_WEBSITE_URL.to_string());
-
-        let url = Text::new("At what URL can people find the team?")
-            .with_initial_value(&prefilled_url)
-            .prompt()?;
+            .and_then(|teams| find_team_url(teams, &team)) {
+            url
+        } else {
+            Text::new("At what URL can people find the team?")
+                .with_initial_value(&BASE_TEAM_WEBSITE_URL)
+                .prompt()?
+        };
         (Some(team), Some(url))
     };
 
