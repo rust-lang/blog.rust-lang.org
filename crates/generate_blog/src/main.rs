@@ -191,7 +191,7 @@ fn try_parse_version_from_title(title: &str) -> Option<String> {
 fn guess_author_from_git() -> Option<String> {
     String::from_utf8(
         Command::new("git")
-            .args(["config", "get", "user.name"])
+            .args(["config", "user.name"])
             .output()
             .ok()?
             .stdout,
