@@ -8,8 +8,6 @@ use rust_team_data::v1::{Team, Teams};
 const BASE_TEAM_WEBSITE_URL: &str = "https://www.rust-lang.org/governance/teams/";
 
 fn main() -> Result<(), Box<dyn Error>> {
-    println!("\nHi, thanks for writing a post for the Rust blog!\n");
-
     // If we cannot load teams, we won't provide any autocompletion, but the generate
     // command should still work.
     let team_data = match load_teams() {
@@ -19,6 +17,8 @@ fn main() -> Result<(), Box<dyn Error>> {
             None
         }
     };
+
+    println!("\nHi, thanks for writing a post for the Rust blog!\n");
 
     let title = Text::new("What's the title of your post?")
         .with_validator(|input: &str| {
