@@ -12,7 +12,7 @@ To serve the site locally, first install Zola: (takes a couple minutes)
 
 ```sh
 # using a fork because we rely on a few patches that haven't landed yet
-cargo install --locked --git https://github.com/senekor/zola --rev 620bf3c46a39b41db30b1e91756a995bbff84d3a
+cargo install --locked --git https://github.com/senekor/zola --rev 79410eea82f837e4de9b1e4c3905287060b69255
 ```
 
 Now run `zola serve --open`.
