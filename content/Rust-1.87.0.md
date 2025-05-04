@@ -28,30 +28,29 @@ If you'd like to help us out by testing future releases, you might consider upda
 ### Anonymous pipes
 
 1.87 adds access to anonymous pipes to the standard library. This includes
-integration with `std::process::Command`'s input/output methods.
-
-As a toy example, this program uses pipes to stream data into `cat` and read the output:
+integration with `std::process::Command`'s input/output methods. For example,
+joining the stdout and stderr streams into one is now relatively
+straightforward, as shown below, while it used to require either extra threads
+or platform-specific functions.
 
 ```rust
 use std::process::Command;
-use std::io::{pipe, Read, Write};
+use std::io::Read;
 
-let (ping_rx, mut ping_tx) = pipe()?;
-let (mut pong_rx, pong_tx) = pipe()?;
+let (mut recv, send) = std::io::pipe()?;
 
-// Spawn a process that echoes its input.
-let mut echo_server = Command::new("cat").stdin(ping_rx).stdout(pong_tx).spawn()?;
+let mut command = Command::new("path/to/bin")
+    // Both stdout and stderr will write to the same pipe, combining the two.
+    .stdout(send.try_clone()?)
+    .stderr(send)
+    .spawn()?;
 
-ping_tx.write_all(b"hello")?;
-// Close to unblock echo_server's reader.
-drop(ping_tx);
+let mut output = Vec::new();
+recv.read_to_end(&mut output)?;
 
-let mut buf = String::new();
-// Block until echo_server's writer is closed.
-pong_rx.read_to_string(&mut buf)?;
-assert_eq!(&buf, "hello");
-
-echo_server.wait()?;
+// It's important that we read from the pipe before the process exits, to avoid
+// filling the OS buffers if the program emits too much output.
+assert!(command.wait()?.success());
 ```
 
 ### Safe architecture intrinsics
