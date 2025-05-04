@@ -226,7 +226,7 @@ These APIs are now stable in const contexts:
 - [`String::is_empty`](https://doc.rust-lang.org/nightly/std/string/struct.String.html#method.is_empty)
 - [`String::as_mut_str`](https://doc.rust-lang.org/nightly/std/string/struct.String.html#method.as_mut_str)
 - [`String::as_mut_vec`](https://doc.rust-lang.org/nightly/std/string/struct.String.html#method.as_mut_vec)
-- [`Vec::as_ptr`](https://doc.rust-lang.org/nightly/std/vec/struct.Vec.html#method.as_ptr-1)
+- [`Vec::as_ptr`](https://doc.rust-lang.org/nightly/std/vec/struct.Vec.html#method.as_ptr)
 - [`Vec::as_slice`](https://doc.rust-lang.org/nightly/std/vec/struct.Vec.html#method.as_slice)
 - [`Vec::capacity`](https://doc.rust-lang.org/nightly/std/vec/struct.Vec.html#method.capacity)
 - [`Vec::len`](https://doc.rust-lang.org/nightly/std/vec/struct.Vec.html#method.len)
