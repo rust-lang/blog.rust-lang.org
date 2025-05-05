@@ -92,12 +92,23 @@ fn main() -> Result<(), Box<dyn Error>> {
             team_prompt = team_prompt.with_autocomplete(TeamNames::from_teams(teams));
         }
 
-        let team = team_prompt.prompt()?;
+        let mut team = team_prompt.prompt()?;
 
         let url = if let Some(url) = team_data
             .as_ref()
             .and_then(|teams| find_team_url(teams, &team))
         {
+            // At this point, a canonical team has been selected, and we have a URL for it.
+            // This should be the common "happy path".
+            // However, displaying the canonical team name in the blog heading is not ideal, usually
+            // users will want to modify it slightly, so give them the option.
+            let normalized = normalize_team_name(team);
+            let team_label = format!("the {normalized} team");
+            let team_label = Text::new("What text should be used after 'on behalf of'?")
+                .with_initial_value(&team_label)
+                .prompt()?;
+            team = team_label;
+
             url
         } else {
             Text::new("At what URL can people find the team?")
@@ -177,6 +188,22 @@ being published - CI checks against the placeholder.
     );
 
     Ok(())
+}
+
+/// Normalizes team name to be human readable, e.g. `leadership-council` => `Leadership Council`.
+fn normalize_team_name(name: String) -> String {
+    name.split("-")
+        .map(|part| {
+            // Capitalize the string
+            part.chars()
+                .next()
+                .into_iter()
+                .flat_map(|c| c.to_uppercase())
+                .chain(part.chars().skip(1))
+                .collect::<String>()
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
 }
 
 fn load_teams() -> Result<Teams, String> {
