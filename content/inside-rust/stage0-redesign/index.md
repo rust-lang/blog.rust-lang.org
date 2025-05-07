@@ -1,70 +1,123 @@
 +++
-path = "inside-rust/9999/12/31/redesigning-stage-0-std"
-title = "Redesigning stage 0 std"
+path = "inside-rust/9999/12/31/redesigning-the-initial-bootstrap-sequence"
+title = "Redesigning the Initial Bootstrap Sequence"
 authors = ["Jieyou Xu"]
 
 [extra]
-team = "Bootstrap"
+team = "the Bootstrap team"
 team_url = "https://www.rust-lang.org/governance/teams/infra#team-bootstrap"
 +++
 
-# Redesigning stage 0 std
+This blog post accompanies an [upcoming major change to the `bootstrap` build system][stage0-redesign-pr] (see also [Major Change Proposal 619][redesign-stage0-mcp]), which is expected to affect contributors who works on the `rustc` compiler, the standard library, tools, and the distributors of rust toolchains.
 
-## Summary
+# TL;DR: What is being changed?
 
-We are reworking how the stage 0 bootstrap sequence works (the sequence used to build a stage 1 compiler).
+We are [redesigning the stage 0 bootstrap sequence][stage0-redesign-pr] so that the standard library will now only support one compiler version. Building the stage 1 compiler will no longer involve building the in-tree standard library. Instead, the pre-built beta standard library will be used.
 
-- Before: a stage 0 (beta by default) compiler is used to build the in-tree std, which in turn is used to build the stage 1 compiler.
-- After: a stage 0 (beta by default) compiler and a precompiled stage 0 std is instead used to build the stage 1 compiler.
+The following section is a quick primer on the concept of bootstrapping and the terminology we use in this blog post.
 
-![Difference in stage 0 bootstrap sequence](stage0-redesign-diff.svg)
+# A quick primer on bootstrapping and terminology used in this blog post {#preliminary}
 
-Notably, this means that after [redesign stage 0 std #119899](https://github.com/rust-lang/rust/pull/119899) PR lands:
+This section is intended to explain some basic bootstrapping concepts to make it easier for contributors to understand the upcoming bootstrap changes. You can skip this section if you are already familiar with [the `bootstrap` build system][bootstrap] itself.
 
-- `./x {build,test,check} library --stage 0` becomes no-op, as stage 0 std is no longer the built in-tree std, and the minimum supported stage to build std is now `1`.
-    - Consequently, default (test, check, bench) stage values in the library profile are no longer `0`, but instead defaults to `1`.
-- Some additional `cfg(bootstrap)` usages may be needed in the compiler sources for dogfooding unstable library features.
+## What is bootstrapping? {#intro-to-bootstrapping}
 
-If you have questions, or run into bugs/issues related to the stage 0 std redesign, please discuss them in the [stage 0 std redesign support thread][support-thread] or open a new issue.
+[*Bootstrapping*][compiler-bootstrapping] is the process of producing a newer version of a compiler with an older version of itself. Usually, bootstrap processes involve the concept of *stages*, where a compiler and associated artifacts from a stage is used to build the compiler of the next stage. For example, a stage 2 compiler is built from a stage 1 compiler and associated stage 1 artifacts. The stage number is named after the compiler in question.
 
-[support-thread]: https://rust-lang.zulipchat.com/#narrow/channel/326414-t-infra.2Fbootstrap/topic/Stage.200.20std.20redesign.20support.20thread/with/515096924
+## Bootstrapping `rustc` {#bootstrapping-rust}
 
-## Comparison of common invocations
+C compilers like [`gcc`][gcc-bootstrap] or [`clang`][clang-bootstrap] do not build their standard libraries from source, but instead links against the same specified standard library across all bootstrap stages. Typically, this specified standard library is the system standard library.[^adapted]
 
-For `profile = "library"`:
+In the context of `rustc`, this is not the case, as the compiler and standard library are tightly coupled through *intrinsics* and *lang items*. Bootstrapping `rustc` involves building the standard library from source. Building a stage `N` `rustc` requires building or acquiring the stage `N - 1` `rustc`, as well as the stage `N - 1` standard library built by the stage `N - 1` `rustc`.
 
-| Invocation                                 | Before stage 0 std redesign                                 | After stage 0 std redesign                               |
-|--------------------------------------------|-------------------------------------------------------------|----------------------------------------------------------|
-| `./x {check,build,test} library`           | Checks/builds/tests in-tree library                         | Check/build/tests stage 1 library                        |
-| `./x {check,build,test} library --stage 0` | Checks/builds/tests in-tree library                         | No-op in case of build, checks/tests precompiled library |
-| `./x {check,build,test} library --stage 1` | Builds in-tree library, checks/builds/tests stage 1 library | Check/build/tests stage 1 library                        |
+![Naive bootstrap stage](./naive-bootstrap-stage.svg)
 
-For `profile = "compiler"`:
+Let us call these *intra*-stage steps of stage `N - 1` compiler building stage `N - 1` standard library a **bootstrap sequence**, i.e. the sequence of intra-stage steps involved in producing stage `N - 1` artifacts required to build the stage `N` compiler.
 
-| Invocation                                 | Before stage 0 std redesign                                 | After stage 0 std redesign                               |
-|--------------------------------------------|-------------------------------------------------------------|----------------------------------------------------------|
-| `./x check library`                        | Checks in-tree library                                      | Check/build/tests stage 1 library                        |
-| `./x {build,test} library`                 | Builds in-tree library, builds/tests stage 1 library        | Check/build/tests stage 1 library                        |
-| `./x {check,build,test} library --stage 0` | Checks/builds/tests in-tree library                         | No-op in case of build, checks/tests precompiled library |
-| `./x {check,build,test} library --stage 1` | Builds in-tree library, checks/builds/tests stage 1 library | Check/build/tests stage 1 library                        |
+![Bootstrap sequence](./naive-bootstrap-stage-bootstrap-sequence.svg)
 
-For `profile = "tools"`, by default not affected if `download-rustc` is enabled.
+We must also have a base case, a starting compiler, to build newer compilers with. Indeed, the *initial* compiler is also called the *stage 0 compiler*. The *initial* bootstrap stage is called *stage 0*.
 
-## What does this mean for a typical library workflow?
+# Motivation {#motivation}
 
-- Crucially, `./x {build,test,check} library --stage 0` becomes no-op and are no longer supported. Building the in-tree std now requires a stage 1 compiler.
-    - Consequently, library contributors are *strongly* encouraged to enable `rust.download-rustc = "if-unchanged"` to avoid having to build a stage 1 compiler. Note that this is the default for `profile = "library"`, but you may need to specify it manually if you don't use a `profile`.
-- `cfg(bootstrap)` should no longer be needed for library sources.
+But the naive model we presented above isn't complete.
 
-## What does this mean for a typical compiler workflow?
+*Rust* has elected a design choice where the compiler, `rustc`, and the standard library ("std") are tightly coupled. *Intrinsics* and *lang items* form a broad interface between the compiler and the standard library. When intrinsics or lang items are modified, both sides need to be adjusted.
 
-- If unstable library features are being dogfooded, some additional `cfg(bootstrap)` usages may now be needed in compiler sources.
+Currently, the standard library currently must support being built with two different compilers, the in-tree compiler and the initial stage 0 compiler[^initial-compiler]. All such changes to intrinsics and lang items thus need to use `cfg(bootstrap)` to gate code that can be built by the in-tree compiler vs the stage 0 compiler. This causes a lot of churn for contributors wanting to introduce, modify or remove intrinsics and lang items (particularly when creating new releases).
 
-## Why are we making this change?
+The [stage 0 bootstrap sequence redesign][stage0-redesign-pr] aims to mitigate such churn and implementation complexity in the standard library by having the standard library only support *one* version of the compiler.
 
-The previous stage 0 bootstrapping sequence was a source of endless confusion for compiler, library and bootstrap contributors alike, because std had to support being built by *both* a previous beta rustc and in-tree rustc, with `cfg(bootstrap)` in std sources necessary to distinguish between them. By adjusting the stage 0 bootstrap sequence to instead use a precompiled stage 0 std instead of building the in-tree std, we hope to:
+To better understand this redesign, we will:
 
-1. Simplify library development workflow to no longer need `cfg(bootstrap)`, and
-2. Enable simplifying some bootstrap logic related to building in-tree std in stage 0.
+1. [Explain how the current stage 0 bootstrapping sequence works](#current-model), and
+2. [Explain how the new stage 0 bootstrapping sequence works after the redesign](#new-model), and
+3. [Discuss why the redesigned stage 0 bootstrapping sequence is more preferable](#better).
 
-This was [originally proposed by @jyn514 in the MCP rust-lang/compiler-team#619](https://github.com/rust-lang/compiler-team/issues/619).
+# The current stage 0 bootstrap sequence {#current-model}
+
+![Current stage 0 bootstrap sequence](./stage0-current.svg)
+
+Currently, [bootstrap] downloads a pre-built beta rustc as the initial compiler (stage 0 rustc).
+
+- To produce a stage 1 rustc, we need to produce a stage 0 std. This stage 0 std is built from in-tree standard library sources with `cfg(bootstrap)` active.
+- To produce a stage 2 rustc, we need to produce a stage 1 std. However, this is where things get weird. The stage 1 std is built from the *same* in-tree standard library sources (but with `cfg(bootstrap)` inactive). This is what we meant by "the standard library has to support being buildable by two compiler versions."
+
+# The redesigned stage 0 bootstrap sequence {#new-model}
+
+![Redesigned stage 0 bootstrap sequence](./stage0-next.svg)
+
+In the [redesigned stage 0 bootstrapping sequence][stage0-redesign-pr] we instead download *both* the pre-built beta rustc as the stage 0 compiler, and the pre-built beta std as the stage 0 std, *instead* of building stage 0 std from in-tree sources.
+
+- When producing a stage 1 rustc, we already have the stage 0 std (as it is the pre-built std).
+- When producing a stage 2 rustc, the stage 1 std is then the std built from in-tree std sources with the stage 1 rustc.
+
+# Why is the redesigned stage 0 bootstrap sequence better? {#better}
+
+There are several benefits of the redesigned stage 0 bootstrap sequence:
+
+1. We no longer have to use `cfg(bootstrap)` in the standard library sources for intrinsics and lang items to distinguish when being built by the beta rustc vs the in-tree rustc, because the standard library now only has to be buildable by exactly one compiler version (the current stage rustc).
+2. It significantly reduces cognitive complexity, as the redesigned bootstrap sequence is much more coherent and aligns better with how contributors expect the staging to work. We no longer have a "strange" setup where the stage 1 compiler was built from a *beta* rustc with an *in-tree* std. Now, the stage 1 compiler is built from a beta rustc and a beta std.
+
+# In terms of bootstrap invocations and bootstrap config, what does this redesign mean?
+
+The minimum stage to check, build and test the standard library is now stage 1. `./x {check,build,test} library --stage=0` are now no-ops.
+
+For `profile = "library"` users, like aforementioned, the default check, build and test stage are now bumped to 1. `download-rustc = "if-unchanged"` is enabled by default so a pre-built CI rustc is used to help you avoid needing to rebuild the compiler while working on the standard library if there are no compiler changes.
+
+# What does this mean for contributors working on the standard library and the compiler?
+
+- Contributors will now no longer need to use `cfg(bootstrap)` for intrinsics and lang items.
+- Contributors may (rarely) need to use `cfg(bootstrap)` in compiler code if they wish to experiment with unstable library features [^dogfood-unstable-lib-features]
+
+# Frequently asked questions (FAQs) {#faqs}
+
+## Doesn't this just shift `cfg(bootstrap)` from library code to compiler code? {#faqs-shift-cfg-bootstrap}
+
+Not quite. `cfg(bootstrap)` usage in standard library code for using new intrinsics / lang items (as in the current bootstrap sequence) is much more common than potential `cfg(bootstrap)` usage in compiler code for experimenting with unstable library features (as in the redesigned bootstrap sequence). This is because the standard library need to depend on compiler-provided lang items and intrinsics, but the compiler does not (need to) depend on standard library implementation details.
+
+# Questions, feedback, bugs?
+
+You can leave a comment in the [zulip support thread for the initial bootstrap sequence redesign effort][zulip-support-thread]
+
+
+[^initial-compiler]: For the vast majority of contributors, the stage 0 "initial" compiler is going to be the beta compiler. However, it is possible to override the initial compiler, such as when further optimizing a compiler through PGO/BOLT. In this blog post, we make a simplifying assumption that the stage 0 compiler is the beta compiler, even though this is not universally true.
+[^dogfood-unstable-lib-features]: Newly added unstable library feature may need to wait until a beta bump before it is usable by the compiler.
+[^adapted]: Much of this is adapted from Jyn's excellent blog post [*Why is Rust's build system uniquely hard to use?*][hard-to-use-blog-post].
+
+[rust-lang/rust]: https://github.com/rust-lang/rust
+[bootstrap]: https://github.com/rust-lang/rust/tree/master/src/bootstrap
+[compiler-bootstrapping]: https://en.wikipedia.org/wiki/Bootstrapping_(compilers)
+[redesign-stage0-mcp]: https://github.com/rust-lang/compiler-team/issues/619
+[hard-to-use-blog-post]: https://jyn.dev/bootstrapping-rust-in-2023/
+[gcc-bootstrap]: https://gcc.gnu.org/install/build.html
+[clang-bootstrap]: https://llvm.org/docs/AdvancedBuilds.html#bootstrap-builds
+[zulip-support-thread]: https://rust-lang.zulipchat.com/#narrow/channel/326414-t-infra.2Fbootstrap/topic/Stage.200.20std.20redesign.20support.20thread/with/515096924
+[stage0-redesign-pr]: https://github.com/rust-lang/rust/pull/119899
+
+<!--
+*compiler*<sub>initial</sub>
+*compiler*<sub>dev</sub>
+*compiler*<sub>dist</sub>
+*compiler*<sub>reproducible</sub>
+-->
