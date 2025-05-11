@@ -236,7 +236,7 @@ These previously stable APIs are now stable in const contexts:
 
 ### `i586-pc-windows-msvc` target removal
 
-The tier-2 target `i586-pc-windows-msvc` has been removed. Its difference to the much more popular `i686-pc-windows-msvc` is that it does not require SSE2 instruction support, but Windows 10, the minimum required OS version of all `windows` targets (except the `win7` targets), requires SSE2 instructions itself.
+The Tier 2 target `i586-pc-windows-msvc` has been removed. `i586-pc-windows-msvc`'s difference to the much more popular Tier 1 target `i686-pc-windows-msvc` is that `i586-pc-windows-msvc` does not require SSE2 instruction support. But Windows 10, the minimum required OS version of all `windows` targets (except the `win7` targets), requires SSE2 instructions itself.
 
 All users currently targeting `i586-pc-windows-msvc` should migrate to `i686-pc-windows-msvc`.
 
