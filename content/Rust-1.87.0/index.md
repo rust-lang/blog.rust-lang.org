@@ -14,7 +14,7 @@ release = true
 Live from the [10 Years of Rust celebration](https://2025.rustweek.org/celebration/) in Utrecht, Netherlands,
 the Rust team is happy to announce a new version of Rust, 1.87.0!
 
-![placeholder](https://placehold.co/800x500)
+![picture of Rustaceans at the release party](party.jpg)
 
 Today's release day happens to fall exactly on the 10 year anniversary of
 [Rust 1.0](https://blog.rust-lang.org/2015/05/15/Rust-1.0/)!
