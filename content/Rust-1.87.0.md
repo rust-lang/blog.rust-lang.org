@@ -1,6 +1,6 @@
 +++
 path = "2025/05/15/Rust-1.87.0"
-title = "Announcing Rust 1.87.0"
+title = "Announcing Rust 1.87.0 and ten years of Rust!"
 authors = ["The Rust Release Team"]
 aliases = [
     "2025/05/15/Rust-1.87.0.html",
@@ -11,7 +11,21 @@ aliases = [
 release = true
 +++
 
-The Rust team is happy to announce a new version of Rust, 1.87.0. Rust is a programming language empowering everyone to build reliable and efficient software.
+Live from the [10 Years of Rust celebration](https://2025.rustweek.org/celebration/) in Utrecht, Netherlands,
+the Rust team is happy to announce a new version of Rust, 1.87.0!
+
+![placeholder](https://placehold.co/800x500)
+
+Today's release day happens to fall exactly on the 10 year anniversary of
+[Rust 1.0](https://blog.rust-lang.org/2015/05/15/Rust-1.0/)!
+
+Thank you to the myriad contributors who have worked on Rust, past and present.
+Here's to many more decades of Rust! 🎉
+
+---
+
+As usual, the new version includes all the changes that have been part of the beta version in the
+past six weeks, following the consistent regular release cycle that we have followed since Rust 1.0.
 
 If you have a previous version of Rust installed via `rustup`, you can get 1.87.0 with:
 
