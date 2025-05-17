@@ -51,20 +51,25 @@ or platform-specific functions.
 use std::process::Command;
 use std::io::Read;
 
-let (mut recv, send) = std::io::pipe()?;
+let (mut reader, writer) = std::io::pipe()?;
 
-let mut command = Command::new("path/to/bin")
-    // Both stdout and stderr will write to the same pipe, combining the two.
-    .stdout(send.try_clone()?)
-    .stderr(send)
-    .spawn()?;
+let mut command = Command::new("path/to/bin");
+// Both stdout and stderr will write to the same pipe, combining the two.
+command.stdout(writer.try_clone()?);
+command.stderr(writer);
+let mut child = command.spawn()?;
+
+// .read_to_end() will block until all pipe writers are closed, but the Command
+// object is still holding two of them. Dropping it closes those writers and
+// prevents a deadlock.
+drop(command);
 
 let mut output = Vec::new();
-recv.read_to_end(&mut output)?;
+reader.read_to_end(&mut output)?;
 
 // It's important that we read from the pipe before the process exits, to avoid
 // filling the OS buffers if the program emits too much output.
-assert!(command.wait()?.success());
+assert!(child.wait()?.success());
 ```
 
 ### Safe architecture intrinsics
