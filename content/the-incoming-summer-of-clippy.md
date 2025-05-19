@@ -30,13 +30,13 @@ the same risk for false positives as it has been until now. We hope that by
 upping the standard for lints all around the project we can allow users to
 expect even more from the already great linter.
 
-If you have a lint which you want to be implemented, you can still open and
+If you have a lint which you want to be implemented, you can still open an
 issue for it, but no one will implement it (also, lint-adding pull requests
-opened after the starting date will be blocked for the duration of the period)
+opened after the starting date will be blocked for the duration of the period).
 
 Note that pull requests opened before the starting date can still be reviewed
 and merged, but unless they are already in a very advanced state they will not
-be priorized over bugfixes.
+be prioritized over bugfixes.
 
 ## Can I help?
 
