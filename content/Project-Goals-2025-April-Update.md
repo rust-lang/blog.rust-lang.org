@@ -23,6 +23,12 @@ The Rust project is currently working towards a [slate of 40 project goals](http
 
 **What has happened?** 
 
+**Async fn in traits.** An FCP proposal to stabilize return type notation was started in <https://github.com/rust-lang/rust/pull/138424>. However, it is currently blocked on concerns that stabilizing it now will make it more difficult to ship Rust's next-generation trait solver.
+
+**Async fn in dyn trait.** There have been discussions around next steps to support this in the language. More experimentation is needed, along with an initial RFC.
+
+**dynosaur.** More breaking changes have landed and we expect to release v0.3 soon.
+
 <!-- markdown separator --> 
 
 
