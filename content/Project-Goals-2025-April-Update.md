@@ -70,7 +70,7 @@ The Rust project is currently working towards a [slate of 40 project goals](http
 
 **Why this goal?** May 15, 2025 marks the 10-year anniversary of Rust's 1.0 release; it also marks 10 years since the [creation of the Rust subteams](https://internals.rust-lang.org/t/announcing-the-subteams/2042). At the time [there were 6 Rust teams with 24 people in total](http://web.archive.org/web/20150517235608/http://www.rust-lang.org/team.html). There are now 57 teams with 166 people. In-person All Hands meetings are an effective way to help these maintainers get to know one another with high-bandwidth discussions. This year, the Rust project will be coming together for [RustWeek 2025](https://2025.rustweek.org), a joint event organized with [RustNL](https://2025.rustweek.org/about/). Participating project teams will use the time to share knowledge, make plans, or just get to know one another better. One particular goal for the All Hands is reviewing a draft of the [Rust Vision Doc](./rust-vision-doc.md), a document that aims to take stock of where Rust is and lay out high-level goals for the next few years.
 
-**What has happened?** 
+**What has happened?** Things have been progressing smoothly. The work to prepare the schedule for the "pre all hands" and all hands has started with the teams. The COVID policy has been posted. Self-tests and CO₂ sensors have been received, as well as speaker-microphones to allow for remote participation.
 
 <!-- markdown separator --> 
 
