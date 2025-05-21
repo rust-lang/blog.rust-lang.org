@@ -46,7 +46,7 @@ The Rust project is currently working towards a [slate of 40 project goals](http
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-**Async fn in traits.** An FCP proposal to stabilize return type notation was started in https://github.com/rust-lang/rust/pull/138424. However, it is currently blocked on concerns that stabilizing it now will make it more difficult to ship Rust's next-generation trait solver.
+**Async fn in traits.** An FCP proposal to stabilize return type notation was started in <https://github.com/rust-lang/rust/pull/138424>. However, it is currently blocked on concerns that stabilizing it now will make it more difficult to ship Rust's next-generation trait solver.
 
 **Async fn in dyn trait.** There have been discussions around next steps to support this in the language. More experimentation is needed, along with an initial RFC.
 
@@ -114,7 +114,7 @@ The last day has a lot of empty slots for now. I'm still working on filling thos
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-I published our covid policy: https://rustweek.org/covid-policy-all-hands-and-unconf/
+I published our covid policy: <https://rustweek.org/covid-policy-all-hands-and-unconf/>
 
 And got us a ton of covid self-tests and Aranet4 CO₂ sensors:
 
@@ -162,9 +162,11 @@ I'll put them near the entrance for anyone to borrow for any of the meeting room
 [RFL.com]: https://rust-for-linux.com/
 [RFL#2]: https://github.com/Rust-for-Linux/linux/issues/2
 
-**What has happened?** The primary focus for this year is compiled flags, and we are continuing to push on the various compiler flags and things that are needed to support building RFL on stable (e.g., RFC #3791 proposed adding `--crate-attr`, which permits injecting attributes into crates externally to allow the Kernel's build process to add things like `#![no_std]` so they don't have to be inserted manually into every file; MCPs for ABI flags like [`retpoline`](https://github.com/rust-lang/compiler-team/issues/868) and [`harden-sls`](https://github.com/rust-lang/compiler-team/issues/869) and [implementation of `-Zindirect-branch-cs-prefix`](https://github.com/rust-lang/rust/pull/140740)). A number of issues had minor design questions (how to manage clippy configuration; best approach for rustdoc tests) and we plan to use the RustWeek time to hash those out.
+**What has happened?** The primary focus for this year is compiled flags, and we are continuing to push on the various compiler flags and things that are needed to support building RFL on stable (e.g., [RFC #3791] proposed adding `--crate-attr`, which permits injecting attributes into crates externally to allow the Kernel's build process to add things like `#![no_std]` so they don't have to be inserted manually into every file; MCPs for ABI flags like [`retpoline`](https://github.com/rust-lang/compiler-team/issues/868) and [`harden-sls`](https://github.com/rust-lang/compiler-team/issues/869) and [implementation of `-Zindirect-branch-cs-prefix`](https://github.com/rust-lang/rust/pull/140740)). A number of issues had minor design questions (how to manage clippy configuration; best approach for rustdoc tests) and we plan to use the RustWeek time to hash those out.
 
 We are also finishing up some of the work on language items. We have had one stabilization of lang features needed by Rust for Linux ([`asm_goto` syntax](https://blog.rust-lang.org/2025/05/15/Rust-1.87.0/#asm-jumps-to-rust-code)). The trickiest bit here is arbitrary self types, where we encountered a concern relating to pin and are still [discussing the best resolution](https://rust-lang.zulipchat.com/#narrow/channel/425075-rust-for-linux/topic/2025-05-07.20meeting/near/516734641).
+
+[RFC #3791]: https://github.com/rust-lang/rfcs/pull/3791
 
 <!-- markdown separator --> 
 
@@ -187,17 +189,17 @@ Update from our 2025-04-09 meeting ([full minutes](https://hackmd.io/@rust-lang-
 
   - Some progress on `arbitrary_self_types`. In particular, decided to do with respect to pin and other related cases.
   
-  - `asm_goto` is solved, apart from output operands. For `asm_const`, https://github.com/rust-lang/rust/pull/138618 is nominated.
+  - `asm_goto` is solved, apart from output operands. For `asm_const`, <https://github.com/rust-lang/rust/pull/138618> is nominated.
 
-  - ABI-modifying compiler flags: some PRs waiting review, e.g. https://github.com/rust-lang/rust/pull/138736.
+  - ABI-modifying compiler flags: some PRs waiting review, e.g. <https://github.com/rust-lang/rust/pull/138736>.
 
-  - `--crate-attr` RFC is up: https://github.com/rust-lang/rfcs/pull/3791.
+  - `--crate-attr` RFC is up: <https://github.com/rust-lang/rfcs/pull/3791>.
 
-  - `-Zsanitize-kcfi-arity`'s implementation PR got merged: https://github.com/rust-lang/rust/pull/138368. If all is good from the Linux side, a stabilization PR will be sent.
+  - `-Zsanitize-kcfi-arity`'s implementation PR got merged: <https://github.com/rust-lang/rust/pull/138368>. If all is good from the Linux side, a stabilization PR will be sent.
 
-  - CFI `core::fmt` issue: https://github.com/rust-lang/rust/issues/115199.
+  - CFI `core::fmt` issue: <https://github.com/rust-lang/rust/issues/115199>.
 
-  - Discussion around `bindgen`, `repr(align)` and packed types. RFC nominated for lang discussion: https://github.com/rust-lang/rfcs/pull/3718#issuecomment-2790654254.
+  - Discussion around `bindgen`, `repr(align)` and packed types. RFC nominated for lang discussion: <https://github.com/rust-lang/rfcs/pull/3718#issuecomment-2790654254>.
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -218,9 +220,9 @@ Update from our 2025-04-23 meeting ([full minutes](https://hackmd.io/@rust-lang-
 
   - Lang discussed `#[repr(align)]` (the kernel is interested in, at least, the global one, i.e. `-Zmin-function-alignment=N`).
 
-  - `asm_const`: @nbdd0121 will reply on the latest review comments in the implementation PR: https://github.com/rust-lang/rust/issues/128464.
+  - `asm_const`: @nbdd0121 will reply on the latest review comments in the implementation PR: <https://github.com/rust-lang/rust/issues/128464>.
 
-  - `--crate-attr`: the author of the RFC (https://github.com/rust-lang/rfcs/pull/3791) is looking for a new owner. The RFC is in proposed FCP. Small updates to the text may be needed. Otherwise compiler probably wants to merge it. @Mark-Simulacrum to be pinged.
+  - `--crate-attr`: the author of the RFC (<https://github.com/rust-lang/rfcs/pull/3791>) is looking for a new owner. The RFC is in proposed FCP. Small updates to the text may be needed. Otherwise compiler probably wants to merge it. @Mark-Simulacrum to be pinged.
 
   - Clippy configuration etc.: @flip1995 will be at RustWeek, the plan is to discuss it there.
 
@@ -228,7 +230,7 @@ Update from our 2025-04-23 meeting ([full minutes](https://hackmd.io/@rust-lang-
 
   - `-Zsanitize-kcfi-arity`: waiting on the kernel side (`tc-build` support sent).
 
-  - CFI `core::fmt` issue: PR submitted: https://github.com/rust-lang/rust/pull/139632.
+  - CFI `core::fmt` issue: PR submitted: <https://github.com/rust-lang/rust/pull/139632>.
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -460,7 +462,7 @@ There are some good news as well, though! While looking at the `#[target_feature
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-In reviewing https://github.com/rust-lang/rust/pull/138628, we realized that the tests were not behaving as expected because they were running in Rust 2015 which had distinct capture rules. My [suggestion](https://github.com/rust-lang/rust/pull/138628#pullrequestreview-2750344682) was to limit the `use` keyword (or at least use closures...) to Rust 2021 so as to avoid having to think about how it interacts with earlier capture rules (as well as potential migrations). I believe this follows from the Edition axiom that [Editions are meant to be adopted](https://rust-lang.github.io/rfcs/3085-edition-2021.html#editions-are-meant-to-be-adopted).
+In reviewing <https://github.com/rust-lang/rust/pull/138628>, we realized that the tests were not behaving as expected because they were running in Rust 2015 which had distinct capture rules. My [suggestion](https://github.com/rust-lang/rust/pull/138628#pullrequestreview-2750344682) was to limit the `use` keyword (or at least use closures...) to Rust 2021 so as to avoid having to think about how it interacts with earlier capture rules (as well as potential migrations). I believe this follows from the Edition axiom that [Editions are meant to be adopted](https://rust-lang.github.io/rfcs/3085-edition-2021.html#editions-are-meant-to-be-adopted).
 
 There is an interesting tension with [Rust should feel like one language](https://rust-lang.github.io/rfcs/3085-edition-2021.html#rust-should-feel-like-one-language). My feeling is that there is a missing tenet: the reason we do editions and not fine-grained features is because we wish to avoid combianotoric explosion, where odd combinations of features can lead to untested scenarios. But that is exactly what would be happening here if we allow `use` on older editions. So I think the rule should be that you make new features available on older editions *up until the point where they interact with something that changed* -- in this case, `use` closures interact with the closure capture rules which changed in Rust 2021, so we should limit this feature to Rust 2021 and newer.
 
@@ -631,7 +633,7 @@ I will be giving [a talk at Rust-Week](https://rustweek.org/talks/jacob/) about 
 
 @b-naber and I have been working on the rustc side of the implementation for this feature.
 
-I merged https://github.com/rust-lang/rust/pull/139647, which adds the unstables `-Z namespaced-crates` option to the compiler and enables parsing of externs like `--extern foo::bar=libbar.rlib`. @b-naber has led the resolver changes and has a draft PR up at https://github.com/rust-lang/rust/pull/140271.
+I merged <https://github.com/rust-lang/rust/pull/139647>, which adds the unstables `-Z namespaced-crates` option to the compiler and enables parsing of externs like `--extern foo::bar=libbar.rlib`. @b-naber has led the resolver changes and has a draft PR up at <https://github.com/rust-lang/rust/pull/140271>.
 
 The implementation work has raised some [new concerns](https://github.com/rust-lang/rust/issues/122349#issuecomment-2832241624) about the overall direction, so work is ongoing to resolve those while continuing to make progress in the meantime.
 
@@ -706,7 +708,7 @@ The implementation work has raised some [new concerns](https://github.com/rust-l
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-We fixed issue https://github.com/rust-lang/rust/issues/136925 that was blocking contract annotations on constant functions, which unblocks the initial PR to add some contract annotations in the standard library (https://github.com/rust-lang/rust/pull/136578). The PR currently triggers a CI failure which we are investigating.
+We fixed issue <https://github.com/rust-lang/rust/issues/136925> that was blocking contract annotations on constant functions, which unblocks the initial PR to add some contract annotations in the standard library (<https://github.com/rust-lang/rust/pull/136578>). The PR currently triggers a CI failure which we are investigating.
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -787,7 +789,7 @@ following the plan mentioned above plus some extra bits, I've implemented the fo
 * changed the file naming to ensure uniqueness and not overwrite metrics for the same crate when built with different configurations
   * previously I was piggybacking on the hash used to name artifacts in the `.cargo` or `build` directories, which in the compiler is known as `extra_filename` and is configured by cargo, but it turns out this doesn't guarantee uniqueness
   * I've replaced this with the ["Strict Version Hash"](https://rustc-dev-guide.rust-lang.org/backend/libs-and-metadata.html?highlight=stable%20version%20hash#strict-version-hash) (SVH)
-    * Doing so introduced an ICE when compiling some crates with incremental compilation enabled. I've since resolved this in https://github.com/rust-lang/rust/pull/139502 and tested this version against the top 100 crates in the ecosystem and their dependencies to verify its working
+    * Doing so introduced an ICE when compiling some crates with incremental compilation enabled. I've since resolved this in <https://github.com/rust-lang/rust/pull/139502> and tested this version against the top 100 crates in the ecosystem and their dependencies to verify its working
 * I've been working with the infra team and they've setup a cloud instance of influxdb 3.0 and grafana, influxdb is setup, grafana in progress
 * I met with both libs and lang to discuss their needs related to the unstable feature usage metrics and metrics in general
 
@@ -796,7 +798,7 @@ Next Steps:
 * update locally hosted PoC impl to work with recent changes to metrics files and naming and validate that it's working as expected
 * work on the queries for the grafana instance to setup a graph per feature showing usage over time
   * probably going to create fake usage data to with for this
-* on the side I'm also looking into how much work it would be to track relative usage of various library APIs under a single feature flag (e.g. https://github.com/rust-lang/rust/issues/139911 tracking the specific functions used)
+* on the side I'm also looking into how much work it would be to track relative usage of various library APIs under a single feature flag (e.g. <https://github.com/rust-lang/rust/issues/139911> tracking the specific functions used)
 * develop a better understanding of the expected cost of running an influxdb server
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
@@ -870,11 +872,11 @@ With this I should be ready to just upload the data once we've gathered it from 
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-We've made a lot of progress over the last 1.5 months. My change to opaque types in borrowck is pretty much done now: https://github.com/rust-lang/rust/pull/139587. It still needs some cleanup and an FCP to actually merge. We've already merged multiple cleanups on the way here.
+We've made a lot of progress over the last 1.5 months. My change to opaque types in borrowck is pretty much done now: <https://github.com/rust-lang/rust/pull/139587>. It still needs some cleanup and an FCP to actually merge. We've already merged multiple cleanups on the way here.
 
-We then started to test crater with the `-Znext-solver=globally`. @compiler-errors and me encountered and merged the fixes for 13 issues since then: https://github.com/rust-lang/rust/pull/139791 https://github.com/rust-lang/rust/pull/139798 https://github.com/rust-lang/rust/pull/140236 https://github.com/rust-lang/rust/pull/139900 https://github.com/rust-lang/rust/pull/139828 https://github.com/rust-lang/rust/pull/139774 https://github.com/rust-lang/rust/pull/139762 https://github.com/rust-lang/rust/pull/139789 https://github.com/rust-lang/rust/pull/138845 https://github.com/rust-lang/rust/pull/140306 https://github.com/rust-lang/rust/pull/140305 https://github.com/rust-lang/rust/pull/140276 https://github.com/rust-lang/rust/pull/140302. @Nadrieril was also helpful by minimizing an encountered issue.
+We then started to test crater with the `-Znext-solver=globally`. @compiler-errors and me encountered and merged the fixes for 13 issues since then: <https://github.com/rust-lang/rust/pull/139791> <https://github.com/rust-lang/rust/pull/139798> <https://github.com/rust-lang/rust/pull/140236> <https://github.com/rust-lang/rust/pull/139900> <https://github.com/rust-lang/rust/pull/139828> <https://github.com/rust-lang/rust/pull/139774> <https://github.com/rust-lang/rust/pull/139762> <https://github.com/rust-lang/rust/pull/139789> <https://github.com/rust-lang/rust/pull/138845> <https://github.com/rust-lang/rust/pull/140306> <https://github.com/rust-lang/rust/pull/140305> <https://github.com/rust-lang/rust/pull/140276 <https://github.com/rust-lang/rust/pull/140302>. @Nadrieril was also helpful by minimizing an encountered issue.
 
-With these improvements and multiple in-flight changes we're now at significantly less than 100 remaining regressions in the top 10000 crates and have started the first complete crater run today. We are using a single PR for all crater runs. Check out https://github.com/rust-lang/rust/pull/133502 for the current status and the stack of in-flight changes. 
+With these improvements and multiple in-flight changes we're now at significantly less than 100 remaining regressions in the top 10000 crates and have started the first complete crater run today. We are using a single PR for all crater runs. Check out <https://github.com/rust-lang/rust/pull/133502> for the current status and the stack of in-flight changes. 
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -965,11 +967,11 @@ Key developments: nothing substantial.
 
 Monthly update!
 
-- In [the last monthly update](https://github.com/rust-lang/rust-project-goals/issues/114#issuecomment-2730435572) we saw the impact that [interning symbols](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_span/symbol/struct.Symbol.html#method.intern) had on the program's performance. An effort to minimize this via a pre-interning symbol mechanism has been implemented in https://github.com/rust-lang/rust-clippy/pull/14650 and https://github.com/rust-lang/rust/pull/138682
+- In [the last monthly update](https://github.com/rust-lang/rust-project-goals/issues/114#issuecomment-2730435572) we saw the impact that [interning symbols](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_span/symbol/struct.Symbol.html#method.intern) had on the program's performance. An effort to minimize this via a pre-interning symbol mechanism has been implemented in <https://github.com/rust-lang/rust-clippy/pull/14650> and <https://github.com/rust-lang/rust/pull/138682>
 
-- We're phasing out the old ["str path"](https://doc.rust-lang.org/nightly/nightly-rustc/clippy_utils/fn.match_def_path.html) infrastructure into a new lazy alternative. https://github.com/rust-lang/rust-clippy/pull/14705
+- We're phasing out the old ["str path"](https://doc.rust-lang.org/nightly/nightly-rustc/clippy_utils/fn.match_def_path.html) infrastructure into a new lazy alternative. <https://github.com/rust-lang/rust-clippy/pull/14705>
 
-- We're currently in the effort to optimize some documentation lints that took up to 15% of the Clippy runtime (depending on how much documentation for each line of code you had.) See https://github.com/rust-lang/rust-clippy/pull/14693
+- We're currently in the effort to optimize some documentation lints that took up to 15% of the Clippy runtime (depending on how much documentation for each line of code you had.) See <https://github.com/rust-lang/rust-clippy/pull/14693>
 
 - We've also been experimenting with lots of new possibilities, mainly on parallel lints. Althought they currently are not performance improvements, there are some great hope put into them.
 
@@ -1137,7 +1139,7 @@ Hi @epage  , I am interested in working on this project. If you are still lookin
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-Key Developments: The FLS repo has officially been transferred from Ferrous to the Rust Project. https://github.com/rust-lang/fls is now live. 
+Key Developments: The FLS repo has officially been transferred from Ferrous to the Rust Project. <https://github.com/rust-lang/fls> is now live. 
 
 Next step: Integrate the FLS with the Rust build system in order to support publishing within project processes.
 
@@ -1308,7 +1310,7 @@ Here are the key developments for the month of April
 
 - @amandasystems
    - extracted a handful of PRs out of the gigantic placeholder rewrite PR, to make it easier to review and land
-   - https://github.com/rust-lang/rust/pull/139960, https://github.com/rust-lang/rust/pull/139965, and https://github.com/rust-lang/rust/pull/140466
+   - <https://github.com/rust-lang/rust/pull/139960>, <https://github.com/rust-lang/rust/pull/139965>, and <https://github.com/rust-lang/rust/pull/140466>
 - Tage
    - continued experimenting and making progress with the early phase of the process, and making building constraints, and traversing them per loan, lazy
    - started extracting some of that work for discussion, review, PRs, as well as writing reports for his masters thesis
