@@ -170,7 +170,7 @@ We are also finishing up some of the work on language items. We have had one sta
 
 
 <details>
-<summary>3 detailed updates available.</summary>
+<summary>2 detailed updates available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -229,37 +229,6 @@ Update from our 2025-04-23 meeting ([full minutes](https://hackmd.io/@rust-lang-
   - `-Zsanitize-kcfi-arity`: waiting on the kernel side (`tc-build` support sent).
 
   - CFI `core::fmt` issue: PR submitted: https://github.com/rust-lang/rust/pull/139632.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-2894319024">Comment by @ojeda posted on 2025-05-20:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-Update from our 2025-05-07 meeting ([full minutes](https://hackmd.io/@rust-lang-team/S1Y3l7Kxel)):
-
-  - Enthusiasm and plans for RustWeek.
-
-  - `arbitrary_self_types`: update from @dingxiangfei2009 at https://rust-lang.zulipchat.com/#narrow/channel/425075-rust-for-linux/topic/2025-05-07.20meeting/near/516734641 -- he plans to talk to types in order to find a solution. @davidtwco will ping @petrochenkov about `rustc_resolve`.
-
-  - Sanitizer support and `#[sanitize(off)]`: discussed by lang at https://github.com/rust-lang/rust/pull/123617#issuecomment-2859621119. Discussion about allowing to disable particular sanitizers. Older concern from compiler at https://github.com/rust-lang/rust/pull/123617#issuecomment-2192330122.
-
-  - `asm_const` with pointers support: lang talked about it -- lang will want an RFC: https://github.com/rust-lang/rust/issues/128464#issuecomment-2861515372.
-
-  - ABI-modifying compiler flags: two MCPs filled: https://github.com/rust-lang/compiler-team/issues/868 (`-Zretpoline` and `-Zretpoline-external-thunk`) and https://github.com/rust-lang/compiler-team/issues/869 (`-Zharden-sls`).
-
-    Implementation PR for `-Zindirect-branch-cs-prefix` at https://github.com/rust-lang/rust/pull/140740 that goes on top of https://github.com/rust-lang/rust/pull/135927.
-
-    @davidtwco agreed there is likely no need for a separate MCP for this last one, i.e. it could go into the `-Zretpoline*` one. @azhogin pinged about this at https://github.com/rust-lang/rust/pull/135927#issuecomment-2859906060.
-  
-  - `--crate-attr`: @Mark-Simulacrum was pinged and he is OK to adopt the RFC (https://github.com/rust-lang/rfcs/pull/3791).
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
