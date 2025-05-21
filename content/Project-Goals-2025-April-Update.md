@@ -268,10 +268,42 @@ Update from our 2025-05-07 meeting ([full minutes](https://hackmd.io/@rust-lang-
 </details>
 
 
-
+<br>
 
 ## Goals looking for help
 
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/121'><strong>Promoting Parallel Front End</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="3"></progress>
+</div>
+</div>
+<!-- markdown separator -->
+<!-- markdown separator -->
+
+
+<!-- markdown separator -->
+*Help wanted:* Help test the deadlock code in the [issue list](https://github.com/rust-lang/rust/labels/WG-compiler-parallel) and try to reproduce the issues. If you'd like to help, please post in [this goal's dedicated zulip topic](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Promoting.20Parallel.20Front.20End.20.28goals.23121.29/with/506292058).
+<!-- markdown separator -->
+
+
+<!-- markdown separator -->
+
+<br>
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/272'><strong>Stabilize public/private dependencies</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="5"></progress>
+</div>
+</div>
+<!-- markdown separator -->
+<!-- markdown separator -->
+
+
+<!-- markdown separator -->
+*Help wanted:* T-compiler people to work on the blocking issues [#119428](https://github.com/rust-lang/rust/issues/119428) and [#71043](https://github.com/rust-lang/rust/issues/71043). If you'd like to help, please post in [this goal's dedicated zulip topic](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Stabilize.20public.2Fprivate.20dependencies.20.28goals.23272.29).
+<!-- markdown separator -->
+
+
+<!-- markdown separator -->
 
 ## Other goal updates
 
