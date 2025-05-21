@@ -18,9 +18,8 @@ We need to care for the Clippy project the same way that Clippy cares about our
 code, and note that every single one of them needs maintaining and accounting
 for current and future changes in the compiler as a whole.
 
-As a team we’ll focus on making contributing the best it can be, we’ll try to
-bisect all the issues possible and mark the issues that could be great as a
-starting point to get familiar with the project.
+As a team we’ll focus on making contributing the best it can be, and mark the
+issues that could be great as a starting point to get familiar with the project.
 
 ## What can I expect as a user?
 
@@ -41,7 +40,7 @@ be prioritized over bugfixes.
 ## Can I help?
 
 As always, any help on the project is very appreciated. Apart from opening bug
-reports, you can follow our [contributing guidelines] and check [our suggested
+reports, you can follow [our contributing guidelines] and check [our suggested
 good first issues] for opening pull requests . Everything from fixing diagnostic
 issues and improving documentation, to fixing application-wide crashes
 really helps Clippy get into the excellent state that our users deserve.
@@ -56,7 +55,7 @@ Thanks a lot for all these years of supporting Clippy, we hope that via this
 little feature hiatus we can achieve the excellence that the Rust user base
 deserves (if that's even possible).
 
-[contributing guidelines]: https://github.com/rust-lang/rust-clippy/blob/master/CONTRIBUTING.md
+[our contributing guidelines]: https://github.com/rust-lang/rust-clippy/blob/master/CONTRIBUTING.md
 [our suggested good first issues]: <!-- ADD HERE OUR TRACKING ISSUE -->
 
 
