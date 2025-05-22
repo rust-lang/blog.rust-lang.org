@@ -973,7 +973,7 @@ Monthly update!
 
 - We're currently in the effort to optimize some documentation lints that took up to 15% of the Clippy runtime (depending on how much documentation for each line of code you had.) See <https://github.com/rust-lang/rust-clippy/pull/14693>
 
-- We've also been experimenting with lots of new possibilities, mainly on parallel lints. Althought they currently are not performance improvements, there are some great hope put into them.
+- We've also been experimenting with lots of new possibilities, mainly on parallel lints. Although they currently are not performance improvements, there are some great hope put into them.
 
 - Memory consumption and branch mispredictions are being monitored, they do not seem out of the ordinary.
 
