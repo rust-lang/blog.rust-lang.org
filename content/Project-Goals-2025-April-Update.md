@@ -481,7 +481,7 @@ Put another way, you should never have to go back and modify an edition migratio
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-We've modified codegen so that we guarantee that `x.use` will do a copy if `X: Copy` is true after monomorphization. Before this change the desugaring to `clone` occured only before monomorphization and hence it would call the `clone` method even for those instances where `X` is a `Copy` type. So with this modification we avoid such situation.
+We've modified codegen so that we guarantee that `x.use` will do a copy if `X: Copy` is true after monomorphization. Before this change the desugaring to `clone` occurred only before monomorphization and hence it would call the `clone` method even for those instances where `X` is a `Copy` type. So with this modification we avoid such situation.
 
 We are not working on convert `x.use` to a move rather than a clone if this is a last-use.
 
