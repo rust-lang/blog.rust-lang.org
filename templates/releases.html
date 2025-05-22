@@ -32,14 +32,14 @@
       {%- set day = page.components | nth(n=num_comps - 2) | int %}
       {%- if loop.index0 == 0 %}
       {{ macros::show_year(year=year, post_name="Releases") }}
+      {%- set_global prev_year = year %}
       {%- endif %}
 
       {%- if page.extra is containing("release") %}
       {%- if loop.index0 != 0 %}
-        {%- set prev_idx = loop.index0 - 1 %}
-        {%- set prev_year = rev_pages[prev_idx].components | nth(n=num_comps - 4) | int %}
         {%- if prev_year != year %}
       {{ macros::show_year(year=year, post_name="Releases") }}
+        {%- set_global prev_year = year %}
         {%- endif %}
       {%- endif %}
       {% if page.show_year %}<tr>
