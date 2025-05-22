@@ -8,9 +8,9 @@ team = "the Clippy team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#team-clippy"
 +++
 
-We are currently working on a feature freeze for the Clippy project. This
-period would be 12 weeks long, starting on the introduction of 1.89 to beta
-on the 26 of June, and ending on the 18th of September.
+The Clippy project will be on feature-freeze for 12 weeks, starting from Rust
+1.89.0 beta (June 26th 2025) to September 18th 2025 (Rust 1.89.0 stable
+release). During this time no new features will be accepted, only bug fixes.
 
 This *summer of Clippy* comes from a lack of the necessary capacity needed
 to maintain all the current lints (about 750 of them 😱) and still add new ones.
