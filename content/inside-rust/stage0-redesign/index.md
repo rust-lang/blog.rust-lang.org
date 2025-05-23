@@ -114,10 +114,3 @@ You can leave a comment in the [zulip support thread for the initial bootstrap s
 [clang-bootstrap]: https://llvm.org/docs/AdvancedBuilds.html#bootstrap-builds
 [zulip-support-thread]: https://rust-lang.zulipchat.com/#narrow/channel/326414-t-infra.2Fbootstrap/topic/Stage.200.20std.20redesign.20support.20thread/with/515096924
 [stage0-redesign-pr]: https://github.com/rust-lang/rust/pull/119899
-
-<!--
-*compiler*<sub>initial</sub>
-*compiler*<sub>dev</sub>
-*compiler*<sub>dist</sub>
-*compiler*<sub>reproducible</sub>
--->
