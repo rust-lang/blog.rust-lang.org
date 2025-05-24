@@ -8,11 +8,19 @@ team = "the Bootstrap team"
 team_url = "https://www.rust-lang.org/governance/teams/infra#team-bootstrap"
 +++
 
-This blog post accompanies an [upcoming major change to the `bootstrap` build system][stage0-redesign-pr] (see also [Major Change Proposal 619][redesign-stage0-mcp]), which is expected to affect contributors who works on the `rustc` compiler, the standard library, tools, and the distributors of rust toolchains.
+This blog post accompanies an [upcoming major change to the `rust-lang/rust` build system][stage0-redesign-pr] (see also [Major Change Proposal 619][redesign-stage0-mcp]). This will have no impact on the distributed artifacts from [rust-lang/rust], but the way we build those artifacts is changing.
 
 # TL;DR: What is being changed?
 
-We are [redesigning the stage 0 bootstrap sequence][stage0-redesign-pr] so that the standard library will now only support one compiler version. Building the stage 1 compiler will no longer involve building the in-tree standard library. Instead, the pre-built beta standard library will be used.
+We are [redesigning the initial bootstrap sequence][stage0-redesign-pr] so that the standard library will now only support one compiler version. Building the in-tree compiler will no longer involve building the in-tree standard library. Instead, the pre-built beta standard library will be used.
+
+**Current bootstrap sequence**
+
+![Current stage 0 bootstrap sequence](./stage0-current.svg)
+
+**Redesigned  bootstrap sequence**
+
+![Redesigned stage 0 bootstrap sequence](./stage0-next.svg)
 
 The following section is a quick primer on the concept of bootstrapping and the terminology we use in this blog post.
 
@@ -26,7 +34,7 @@ This section is intended to explain some basic bootstrapping concepts to make it
 
 ## Bootstrapping `rustc` {#bootstrapping-rust}
 
-C compilers like [`gcc`][gcc-bootstrap] or [`clang`][clang-bootstrap] do not build their standard libraries from source, but instead links against the same specified standard library across all bootstrap stages. Typically, this specified standard library is the system standard library.[^adapted]
+Building a C++ compiler toolchain like [`gcc`][gcc-bootstrap] or [`clang`][clang-bootstrap] doesn't usually involving building their stand libraries from source, but instead will link against a pre-built standard library across all bootstrap stages. Typically, this specified standard library is the system standard library.[^adapted]
 
 In the context of `rustc`, this is not the case, as the compiler and standard library are tightly coupled through *intrinsics* and *lang items*. Bootstrapping `rustc` involves building the standard library from source. Building a stage `N` `rustc` requires building or acquiring the stage `N - 1` `rustc`, as well as the stage `N - 1` standard library built by the stage `N - 1` `rustc`.
 
@@ -52,7 +60,7 @@ To better understand this redesign, we will:
 
 1. [Explain how the current stage 0 bootstrapping sequence works](#current-model), and
 2. [Explain how the new stage 0 bootstrapping sequence works after the redesign](#new-model), and
-3. [Discuss why the redesigned stage 0 bootstrapping sequence is more preferable](#better).
+3. [Explain the benefits of the redesigned stage 0 bootstrapping sequence is more preferable](#better).
 
 # The current stage 0 bootstrap sequence {#current-model}
 
@@ -96,9 +104,9 @@ For `profile = "library"` users, like aforementioned, the default check, build, 
 
 ## Doesn't this just shift `cfg(bootstrap)` from library code to compiler code? {#faqs-shift-cfg-bootstrap}
 
-Not quite. `cfg(bootstrap)` usage in standard library code for using new intrinsics / lang items (as in the current bootstrap sequence) is much more common than potential `cfg(bootstrap)` usage in compiler code for experimenting with unstable library features (as in the redesigned bootstrap sequence). This is because the standard library need to depend on compiler-provided lang items and intrinsics, but the compiler does not (need to) depend on standard library implementation details.
+Not quite. `cfg(bootstrap)` usage in standard library code for using new intrinsics / lang items (as in the current bootstrap sequence) is much more common than potential `cfg(bootstrap)` usage in compiler code for experimenting with unstable library features (as in the redesigned bootstrap sequence). This is because the standard library must be changed for new compiler-provided lang items and intrinsics, but the compiler does not (need to) depend on recently added standard library APIs.
 
-Additionally, the compiler only needs to add `cfg(bootstrap)` for unstable library features *not yet on beta*. By our count, the compiler has not used a feature added that recently since before 1.61.
+Additionally, the compiler only needs to add `cfg(bootstrap)` for anything in the standard library that has changed its unstable API and which is used in the compiler.
 
 > *Example: Implementing a trait solving feature which requires adding core lang items*
 >
