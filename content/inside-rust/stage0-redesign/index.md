@@ -18,7 +18,7 @@ The following section is a quick primer on the concept of bootstrapping and the 
 
 # A quick primer on bootstrapping and terminology used in this blog post {#preliminary}
 
-This section is intended to explain some basic bootstrapping concepts to make it easier for contributors to understand the upcoming bootstrap changes. You can skip this section if you are already familiar with [the `bootstrap` build system][bootstrap] itself.
+This section is intended to explain some basic bootstrapping concepts to make it easier for contributors to understand the upcoming bootstrap changes. You can [skip this section](#motivation) if you are already familiar with [the `bootstrap` build system][bootstrap] itself.
 
 ## What is bootstrapping? {#intro-to-bootstrapping}
 
@@ -77,13 +77,15 @@ In the [redesigned stage 0 bootstrapping sequence][stage0-redesign-pr] we instea
 There are several benefits of the redesigned stage 0 bootstrap sequence:
 
 1. We no longer have to use `cfg(bootstrap)` in the standard library sources for intrinsics and lang items to distinguish when being built by the beta rustc vs the in-tree rustc, because the standard library now only has to be buildable by exactly one compiler version (the current stage rustc).
-2. It significantly reduces cognitive complexity, as the redesigned bootstrap sequence is much more coherent and aligns better with how contributors expect the staging to work. We no longer have a "strange" setup where the stage 1 compiler was built from a *beta* rustc with an *in-tree* std. Now, the stage 1 compiler is built from a beta rustc and a beta std.
+2. Rebasing no longer has to rebuild everything. As the standard library is now built *after* the compiler instead of before, all dependencies and compiler crates that are unmodified can be cached when switching `git` branches. It's only necessarily to rebuild everything after bootstrap bumps every 6 weeks as part of the release cycle.
+3. Modifying the standard library no longer has to rebuild everything. After the redesign, it is now possible to add documentation comments to functions in the standard library without having to rebuild the compiler and then also rebuild std a second time. `--keep-stage-std=0` is no longer needed.
+4. It aligns better with how other rust programs are built. We no longer have a "strange" setup where the stage 1 compiler was built from a *beta* rustc with an *in-tree* std. Now, the stage 1 compiler is built from a beta rustc and a beta std.
 
 # In terms of bootstrap invocations and bootstrap config, what does this redesign mean?
 
-The minimum stage to check, build and test the standard library is now stage 1. `./x {check,build,test} library --stage=0` are now no-ops.
+The minimum stage to check, build and test the standard library is now stage 1. `./x {check,build,test} library --stage=0` are now no-ops; switch to `--stage 1` instead. `--keep-stage-std=0` is a no-op.
 
-For `profile = "library"` users, like aforementioned, the default check, build and test stage are now bumped to 1. `download-rustc = "if-unchanged"` is enabled by default so a pre-built CI rustc is used to help you avoid needing to rebuild the compiler while working on the standard library if there are no compiler changes.
+For `profile = "library"` users, like aforementioned, the default check, build, and test stage are now bumped to 1. `download-rustc = "if-unchanged"` is enabled by default, which downloads a pre-built CI rustc instead of building the compiler if there are no compiler changes, allowing you to build the standard library without building the compiler.
 
 # What does this mean for contributors working on the standard library and the compiler?
 
@@ -96,6 +98,14 @@ For `profile = "library"` users, like aforementioned, the default check, build a
 
 Not quite. `cfg(bootstrap)` usage in standard library code for using new intrinsics / lang items (as in the current bootstrap sequence) is much more common than potential `cfg(bootstrap)` usage in compiler code for experimenting with unstable library features (as in the redesigned bootstrap sequence). This is because the standard library need to depend on compiler-provided lang items and intrinsics, but the compiler does not (need to) depend on standard library implementation details.
 
+Additionally, the compiler only needs to add `cfg(bootstrap)` for unstable library features *not yet on beta*. By our count, the compiler has not used a feature added that recently since before 1.61.
+
+> *Example: Implementing a trait solving feature which requires adding core lang items*
+>
+> This will involve adding a new lang item in the compiler (e.g. [`compiler/rustc_hir/src/lang_items.rs`](https://github.com/rust-lang/rust/blob/5af801b687e6e8b860ae970e725c8b9a3820d0ce/compiler/rustc_hir/src/lang_items.rs#L165)) and the standard library. Prior to the redesign, the usage of the lang item in the standard library requires `cfg(not(bootstrap))` since the beta compiler does not know about the new lang item. Recall that the standard library has to support being built by both the beta compiler and the in-tree compiler! After the redesign, `cfg(not(bootstrap))` usage of the lang item in the standard library is not needed since the standard library is only buildable by the in-tree compiler that adds the new lang item.
+>
+> A stage 2 compiler is **not** required to test the new feature, as the stage 1 library using the lang item is built by the stage 1 compiler, which is the compiler where the new lang item is added!
+
 # Questions, feedback, bugs?
 
 You can leave a comment in the [zulip support thread for the initial bootstrap sequence redesign effort][zulip-support-thread]
@@ -103,10 +113,10 @@ You can leave a comment in the [zulip support thread for the initial bootstrap s
 
 [^initial-compiler]: For the vast majority of contributors, the stage 0 "initial" compiler is going to be the beta compiler. However, it is possible to override the initial compiler, such as when further optimizing a compiler through PGO/BOLT. In this blog post, we make a simplifying assumption that the stage 0 compiler is the beta compiler, even though this is not universally true.
 [^dogfood-unstable-lib-features]: Newly added unstable library feature may need to wait until a beta bump before it is usable by the compiler.
-[^adapted]: Much of this is adapted from Jyn's excellent blog post [*Why is Rust's build system uniquely hard to use?*][hard-to-use-blog-post].
+[^adapted]: Much of this is adapted from jyn's excellent blog post [*Why is Rust's build system uniquely hard to use?*][hard-to-use-blog-post].
 
 [rust-lang/rust]: https://github.com/rust-lang/rust
-[bootstrap]: https://github.com/rust-lang/rust/tree/master/src/bootstrap
+[bootstrap]: https://rustc-dev-guide.rust-lang.org/building/bootstrapping/intro.html
 [compiler-bootstrapping]: https://en.wikipedia.org/wiki/Bootstrapping_(compilers)
 [redesign-stage0-mcp]: https://github.com/rust-lang/compiler-team/issues/619
 [hard-to-use-blog-post]: https://jyn.dev/bootstrapping-rust-in-2023/
