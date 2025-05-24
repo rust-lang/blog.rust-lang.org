@@ -10,6 +10,8 @@ team_url = "https://www.rust-lang.org/governance/teams/infra#team-bootstrap"
 
 This blog post accompanies an [upcoming major change to the `rust-lang/rust` build system][stage0-redesign-pr] (see also [Major Change Proposal 619][redesign-stage0-mcp]). This will have no impact on the distributed artifacts from [rust-lang/rust], but the way we build those artifacts is changing.
 
+This blog post focuses on motivation for the change and attempts to build a mental model for how the system works, rather than deep diving on workflow changes. See the [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html) for details on how you might need to change your workflow with these changes.
+
 # TL;DR: What is being changed?
 
 We are [redesigning the initial bootstrap sequence][stage0-redesign-pr] so that the standard library will now only support one compiler version. Building the in-tree compiler will no longer involve building the in-tree standard library. Instead, the pre-built beta standard library will be used.
