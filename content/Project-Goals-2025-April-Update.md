@@ -253,7 +253,7 @@ Update from our 2025-04-23 meeting ([full minutes](https://hackmd.io/@rust-lang-
 
 
 <!-- markdown separator -->
-*Help wanted:* Help test the deadlock code in the [issue list](https://github.com/rust-lang/rust/labels/WG-compiler-parallel) and try to reproduce the issues. If you'd like to help, please post in [this goal's dedicated zulip topic](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Promoting.20Parallel.20Front.20End.20.28goals.23121.29/with/506292058).
+*Help wanted:* Help test the deadlock code in the [issue list](https://github.com/rust-lang/rust/issues?q=is%3Aopen%20label%3AA-parallel-compiler) and try to reproduce the issues. If you'd like to help, please post in [this goal's dedicated zulip topic](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Promoting.20Parallel.20Front.20End.20.28goals.23121.29/with/506292058).
 <!-- markdown separator -->
 
 
