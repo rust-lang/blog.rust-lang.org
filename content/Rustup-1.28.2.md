@@ -2,7 +2,6 @@
 path = "2025/05/05/Rustup-1.28.2"
 title = "Announcing rustup 1.28.2"
 authors = ["The Rustup Team"]
-aliases = ["2025/05/05/Rustup-1.28.2.html"]
 +++
 
 The rustup team is happy to announce the release of rustup version 1.28.2.
