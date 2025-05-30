@@ -2,7 +2,6 @@
 path = "inside-rust/2025/04/22/project-director-update"
 title = "April 2025 Project Director Update"
 authors = ["Carol Nichols"]
-aliases = ["inside-rust/2025/04/22/project-director-update.html"]
 
 [extra]
 team = "Rust Foundation Project Directors"

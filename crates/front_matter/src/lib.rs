@@ -135,6 +135,31 @@ pub fn normalize(
         }
     }
 
+    let path = front_matter.path.as_str();
+    let date = path.strip_prefix("inside-rust/").unwrap_or(path);
+    if date > "2025/04/14" {
+        // Make sure that posts created after the migration to Zola don't have
+        // the alias for preserving permalinks.
+        //
+        // Blog authors would often copy-paste an old post, reusing the
+        // boilerplate for a new one. In that process, they'd usually preserve
+        // that alias as well, probably not knowing what it's for. Technically
+        // such an alias doesn't hurt much, it's just a redirect that isn't
+        // referenced anywhere. So these aliases were allowed, preferring not to
+        // bother blog authors with such unimportant stuff.
+        //
+        // However, there was a situation where a blog post was merged with
+        // the wrong publication date because of this. Shortly before merging,
+        // the date was updated, but it was accidentally changed in the useless
+        // alias instead of the authoritative `path` key. Because of this
+        // footgun, we don't allow creating these new aliases anymore.
+        //
+        // Blog authors who copy-paste old boilerplate will run into failed CI
+        // and have to fix it by removing the alias. It's annoying, but better
+        // than publishing a post with the wrong publication date.
+        front_matter.aliases.retain(|a| !a.contains(".html"));
+    }
+
     if front_matter.extra.team.is_some() ^ front_matter.extra.team_url.is_some() {
         bail!("extra.team and extra.team_url must always come in a pair");
     }
