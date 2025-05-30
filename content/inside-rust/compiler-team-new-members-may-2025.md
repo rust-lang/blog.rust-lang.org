@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2025/05/27/compiler-team-new-members"
+path = "inside-rust/2025/05/30/compiler-team-new-members"
 title = "Announcing five new members of the compiler team"
 authors = ["davidtwco and wesleywiser"]
 aliases = ["inside-rust/2025/05/30/compiler-team-new-members.html"]
