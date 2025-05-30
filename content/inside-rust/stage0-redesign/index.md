@@ -8,6 +8,10 @@ team = "the Bootstrap team"
 team_url = "https://www.rust-lang.org/governance/teams/infra#team-bootstrap"
 +++
 
+> Revisions:
+>
+> - (2025-05-30) This blog post was edited to clarify distribution packagers will not be observably impacted (i.e. distribution packages will still be able to build `N + 1` version of Rust using version `N` of Rust).
+
 This blog post accompanies an [upcoming major change to the `rust-lang/rust` build system][stage0-redesign-pr] (see also [Major Change Proposal 619][redesign-stage0-mcp]). This will have no impact on the distributed artifacts from [rust-lang/rust], but the way we build those artifacts is changing.
 
 This blog post focuses on motivation for the change and attempts to build a mental model for how the system works, rather than deep diving on workflow changes. See the [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html) for details on how you might need to change your workflow with these changes. Note that rustc-dev-guide pages will have updated content once the implementation PR merges.
@@ -15,6 +19,10 @@ This blog post focuses on motivation for the change and attempts to build a ment
 # TL;DR: What is being changed?
 
 We are [redesigning the bootstrap sequence for the Rust toolchain][stage0-redesign-pr]. The standard library will move from supporting being built by both the previous toolchain version and the current version to only supporting the current version. This does not change the artifacts we distribute to end users of Rust.
+
+> The Rust toolchain as a whole, both currently and after this change, supports being built with just two minor versions of Rust: the previous version and its own version. For example, Rust 1.85.1 requires one of 1.84.0, 1.85.0, or 1.85.1 toolchains to build its source code into the 1.85.1 distributed artifacts.
+>
+> In other words, distribution packagers are not observably affected, it is only the workflows of contributors who work on the compiler and standard library that will be impacted.
 
 **Current bootstrap sequence**
 
@@ -121,6 +129,10 @@ Additionally, the compiler only needs to add `cfg(bootstrap)` for anything in th
 > This will involve adding a new lang item in the compiler (e.g. [`compiler/rustc_hir/src/lang_items.rs`](https://github.com/rust-lang/rust/blob/5af801b687e6e8b860ae970e725c8b9a3820d0ce/compiler/rustc_hir/src/lang_items.rs#L165)) and the standard library. Prior to the redesign, the usage of the lang item in the standard library requires `cfg(not(bootstrap))` since the beta compiler does not know about the new lang item. Recall that the standard library has to support being built by both the beta compiler and the in-tree compiler! After the redesign, `cfg(not(bootstrap))` usage of the lang item in the standard library is not needed since the standard library is only buildable by the in-tree compiler that adds the new lang item.
 >
 > A stage 2 compiler is **not** required to test the new feature, as the stage 1 library using the lang item is built by the stage 1 compiler, which is the compiler where the new lang item is added!
+
+## Will this affect distribution packagers?
+
+No, this change will not have observable changes for distribution packagers. Distribution packagers will still be able to build e.g. 1.85.0 distribution artifacts with a 1.84.0, 1.84.1 or 1.85.0 toolchain.
 
 # Questions, feedback, bugs?
 
