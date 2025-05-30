@@ -68,7 +68,7 @@ But the naive model we presented above isn't complete.
 
 *Rust* has elected a design choice where the compiler, `rustc`, and the standard library ("std") are tightly coupled. *Intrinsics* and *lang items* form a broad interface between the compiler and the standard library. When intrinsics or lang items are modified, both sides need to be adjusted.
 
-Currently, the standard library currently must support being built with two different compilers, the in-tree compiler and the initial stage 0 compiler[^initial-compiler]. All such changes to intrinsics and lang items thus need to use `cfg(bootstrap)` to gate code that can be built by the in-tree compiler vs the stage 0 compiler. This causes a lot of churn for contributors wanting to introduce, modify or remove intrinsics and lang items (particularly when creating new releases).
+Currently, the standard library must support being built with two different compilers, the in-tree compiler and the initial stage 0 compiler[^initial-compiler]. All such changes to intrinsics and lang items thus need to use `cfg(bootstrap)` to gate code that can be built by the in-tree compiler vs the stage 0 compiler. This causes a lot of churn for contributors wanting to introduce, modify or remove intrinsics and lang items (particularly when creating new releases).
 
 The [stage 0 bootstrap sequence redesign][stage0-redesign-pr] aims to mitigate such churn and implementation complexity in the standard library by having the standard library only support *one* version of the compiler.
 
