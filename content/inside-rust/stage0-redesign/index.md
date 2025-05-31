@@ -76,7 +76,7 @@ To better understand this redesign, we will:
 
 1. [Explain how the current stage 0 bootstrapping sequence works](#current-model), and
 2. [Explain how the new stage 0 bootstrapping sequence works after the redesign](#new-model), and
-3. [Explain the benefits of the redesigned stage 0 bootstrapping sequence is more preferable](#better).
+3. [Explain the benefits of the redesigned stage 0 bootstrapping sequence](#better).
 
 # The current stage 0 bootstrap sequence {#current-model}
 
