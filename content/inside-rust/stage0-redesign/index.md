@@ -101,7 +101,7 @@ In the [redesigned stage 0 bootstrapping sequence][stage0-redesign-pr] we instea
 There are several benefits of the redesigned stage 0 bootstrap sequence:
 
 1. We no longer have to use `cfg(bootstrap)` in the standard library sources for intrinsics and lang items to distinguish when being built by the beta rustc vs the in-tree rustc, because the standard library now only has to be buildable by exactly one compiler version (the current stage rustc).
-2. Rebasing no longer has to rebuild everything. As the standard library is now built *after* the compiler instead of before, all dependencies and compiler crates that are unmodified can be cached when switching `git` branches. It's only necessarily to rebuild everything after bootstrap bumps every 6 weeks as part of the release cycle.
+2. Rebasing no longer has to rebuild everything. As the standard library is now built *after* the compiler instead of before, all dependencies and compiler crates that are unmodified can be cached when switching `git` branches. It's only necessary to rebuild everything after bootstrap bumps every 6 weeks as part of the release cycle.
 3. Modifying the standard library no longer has to rebuild everything. After the redesign, it is now possible to add documentation comments to functions in the standard library without having to rebuild the compiler and then also rebuild std a second time. `--keep-stage-std=0` is no longer needed.
 4. It aligns better with how other rust programs are built. We no longer have a "strange" setup where the stage 1 compiler was built from a *beta* rustc with an *in-tree* std. Now, the stage 1 compiler is built from a beta rustc and a beta std.
 
