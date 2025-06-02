@@ -1,2 +1,3 @@
 [alias]
 blog = ["run", "--package", "generate_blog"]
+zola = ["run", "--manifest-path", "zola/Cargo.toml", "--"]
