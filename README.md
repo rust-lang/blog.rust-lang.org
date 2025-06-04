@@ -8,14 +8,14 @@ It uses [Zola](https://www.getzola.org/) and is deployed to GitHub Pages via Git
 
 ## Building
 
-To serve the site locally, first install Zola: (takes a couple minutes)
+To serve the site locally, first make sure the zola submodule is initialized:
 
 ```sh
-# using a fork because we rely on a few patches that haven't landed yet
-cargo install --locked --git https://github.com/senekor/zola --rev 79410eea82f837e4de9b1e4c3905287060b69255
+git submodule update --init --recursive
 ```
 
-Now run `zola serve --open`.
+Now run `cargo zola serve --open`.
+(The first run takes a while to compile Zola.)
 The site will be reloaded automatically when you make any changes.
 
 ## Contributing
