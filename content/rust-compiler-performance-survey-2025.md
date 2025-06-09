@@ -1,5 +1,5 @@
 +++
-path = "9999/12/31/rust-compiler-performance-survey-2025"
+path = "2025/06/16/rust-compiler-performance-survey-2025"
 title = "Rust compiler performance survey 2025"
 authors = ["Jakub Beránek"]
 
@@ -16,7 +16,7 @@ In order to better understand these workflows, we have prepared a [Rust Compiler
 
 **You can fill out the survey [here][survey-link].**
 
-Filling the survey will likely take you approximately 10 minutes, and the survey is fully anonymous. We will accept submissions until Monday, June 23rd, 2025. After the survey ends, we will evaluate the results and post key insights on this blog.
+Filling the survey will likely take you approximately 10 minutes, and the survey is fully anonymous. We will accept submissions until Monday, July 7th, 2025. After the survey ends, we will evaluate the results and post key insights on this blog.
 
 We invite you to fill the survey, as your responses will help us improve Rust compilation performance. Thank you!
 
