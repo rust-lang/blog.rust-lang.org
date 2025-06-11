@@ -29,7 +29,7 @@ We've seen a lot of returns from good Project-directed program management. In su
 
 More than 150 people attended the all-hands event in May at [RustWeek 2025] in the Netherlands. We've received a lot of positive feedback about the event, as it was a great opportunity to get people from across the org to have focused discussions.
 
-The project was able to sponsor this event with $100,000 in funding for the event, with an additional $117,000 for travel and tickets. We are looking to see if we can secure funding to be able to continue these events in the future.
+The project was able to sponsor this event with $100,000 in funding for the event, with an additional $90,000 for travel and tickets. We are looking to see if we can secure funding to be able to continue these events in the future.
 
 Many thanks to [Mara Bos] who was instrumental in organizing this event and making it a success.
 
@@ -72,8 +72,8 @@ One idea for how this might shape up is to re-charter the launching pad to be so
 As part of [Microsoft's donation], the Council has had $650k available to spend at its discretion. There are three recent budget items that the Council has been considering:
 
 - Renewing the Compiler Ops contract for another six months. In the past six months we have spent about $20k out of the initial $30k that we reserved for this position. [leadership-council#181](https://github.com/rust-lang/leadership-council/issues/181)
-- Planning for spending of the [travel budget]. We reserved $75k per year for travel expenses and event tickets. In 2024 we only spent about $16k, but due to the larger all-hands event this year we have spent $117k in the first half of the year. Combining those means there is only about $17k left for the remainder of the year. We'll need to decide if we want to stick to our budgeted cap, or if we want to consider extending it. Additionally we are considering whether or not we want to reserve what remains for 2026. [leadership-council#182](https://github.com/rust-lang/leadership-council/issues/182)
-- Planning for 2026. At present the Council only has about $67k left unreserved. We could consider holding that for the travel budget next year, or to fund other things. We'll be having some discussions with the Foundation about other funding possibilities.
+- Planning for spending of the [travel budget]. We reserved $75k per year for travel expenses and event tickets. In 2024 we only spent about $16k, but due to the larger all-hands event this year we have spent $90k in the first half of the year. Combining those means there is about $44k left for the remainder of the year. We are considering what this means for the rest of the year, and how we can plan for what we can reserve in 2026. [leadership-council#182](https://github.com/rust-lang/leadership-council/issues/182)
+- Planning for 2026. At present the Council only has about $50k left unreserved. We could consider holding that for the travel budget next year, or to fund other things. We'll be having some discussions with the Foundation about other funding possibilities.
 
 [Microsoft's donation]: https://rustfoundation.org/media/1m-microsoft-donation-to-fund-key-rust-foundation-project-priorities/
 [travel budget]: https://github.com/rust-lang/leadership-council/blob/main/policies/spending/travel.md
