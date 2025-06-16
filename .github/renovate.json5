@@ -2,7 +2,6 @@
     extends: [
         'config:best-practices',
         ':pinAllExceptPeerDependencies',
-        ':maintainLockFilesWeekly',
         ':semanticCommitsDisabled',
         'customManagers:githubActionsVersions',
     ],
