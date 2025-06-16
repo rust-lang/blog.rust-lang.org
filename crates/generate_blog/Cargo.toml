@@ -9,4 +9,4 @@ inquire = "=0.7.5"
 serde = "=1.0.219"
 toml = "=0.8.23"
 rust_team_data = { git = "https://github.com/rust-lang/team" }
-ureq = { version = "=3.0.11", features = ["rustls", "json"] }
+ureq = { version = "=3.0.12", features = ["rustls", "json"] }
