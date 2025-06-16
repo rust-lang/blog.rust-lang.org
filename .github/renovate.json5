@@ -6,14 +6,4 @@
         ':semanticCommitsDisabled',
         'customManagers:githubActionsVersions',
     ],
-    packageRules: [
-        {
-            matchPackageNames: [
-                'warpy',
-            ],
-            extends: [
-                'schedule:weekly',
-            ],
-        },
-    ],
 }
