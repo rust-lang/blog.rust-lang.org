@@ -1,7 +1,6 @@
 {
     extends: [
         'config:best-practices',
-        ':pinAllExceptPeerDependencies',
         ':semanticCommitsDisabled',
         'customManagers:githubActionsVersions',
     ],
