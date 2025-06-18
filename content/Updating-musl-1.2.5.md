@@ -3,7 +3,6 @@ path = "2025/07/01/Updating-musl-1.2.5"
 title = "Updating Rust's Linux musl targets to 1.2.5"
 authors = ["Aria Desires"]
 description = "musl targets will soon ship with musl 1.2.5"
-aliases = ["2025/07/01/Updating-musl-1.2.5.html"]
 
 [extra]
 team = "The Compiler Team"
@@ -22,7 +21,7 @@ A crater run in July 2024 (a year ago) [found only about 2% of rust projects wer
 
 # Updated targets
 
-The following targets will be updated (this is just "all musl targets except [`loongarch64-unknown-linux-musl`](https://doc.rust-lang.org/rustc/platform-support/loongarch-linux.html) which already was on 1.2.5"):
+The following targets will be updated (this is just "all musl targets except [`loongarch64-unknown-linux-musl`](https://doc.rust-lang.org/rustc/platform-support/loongarch-linux.html) which already was on 1.2.5, and [WALI](https://github.com/arjunr2/WALI) which doesn't use our bundled musl"):
 
 
 ## Tier 2 with Host Tools
@@ -65,5 +64,4 @@ target | std | host | notes
 `riscv32gc-unknown-linux-musl` | ? |   | RISC-V Linux (kernel 5.4, musl 1.2.3 + RISCV32 support patches)
 [`s390x-unknown-linux-musl`](https://doc.rust-lang.org/rustc/platform-support/s390x-unknown-linux-musl.html) | ✓ |  | S390x Linux (kernel 3.2, musl 1.2.3)
 `thumbv7neon-unknown-linux-musleabihf` | ? |  | Thumb2-mode Armv7-A Linux with NEON, musl 1.2.3
-[`wasm32-wali-linux-musl`](https://doc.rust-lang.org/rustc/platform-support/wasm32-wali-linux.html) | ? |  | WebAssembly with [WALI](https://github.com/arjunr2/WALI)
 [`x86_64-unikraft-linux-musl`](https://doc.rust-lang.org/rustc/platform-support/unikraft-linux-musl.html) | ✓ |   | 64-bit Unikraft with musl 1.2.3
