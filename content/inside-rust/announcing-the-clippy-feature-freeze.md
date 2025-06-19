@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/announcing-the-clippy-feature-freeze"
+path = "inside-rust/2025/06/19/announcing-the-clippy-feature-freeze"
 title = "Announcing the Clippy feature freeze"
 authors = ["blyxyas"]
 
