@@ -33,6 +33,8 @@ jobs:
 
       - run: rustup override set ${{ env.RUST_VERSION }}
       - uses: Swatinem/rust-cache@9d47c6ad4b02e050fd481d890b2ea34778fd09d6 # v2.7.8
+        with:
+          workspaces: ".\nzola" # needed to cache build of zola in ./zola/target
 
       - run: cargo zola build
       - run: cp CNAME ./public/
