@@ -3,5 +3,6 @@
         'config:best-practices',
         ':semanticCommitsDisabled',
         'customManagers:githubActionsVersions',
+        ":preserveSemverRanges",
     ],
 }
