@@ -1,19 +1,7 @@
 {
     extends: [
         'config:best-practices',
-        ':pinAllExceptPeerDependencies',
-        ':maintainLockFilesWeekly',
         ':semanticCommitsDisabled',
         'customManagers:githubActionsVersions',
-    ],
-    packageRules: [
-        {
-            matchPackageNames: [
-                'warpy',
-            ],
-            extends: [
-                'schedule:weekly',
-            ],
-        },
     ],
 }
