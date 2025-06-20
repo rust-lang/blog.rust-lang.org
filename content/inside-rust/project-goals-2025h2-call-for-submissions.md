@@ -5,8 +5,8 @@ authors = ["Niko Matsakis"]
 aliases = ["inside-rust/2025/06/23/project-goals-2025h2-call-for-submissions.html"]
 
 [extra]
-team = "Leadership Council"
-team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
+team = "the Project Goals Team"
+team_url = "https://www.rust-lang.org/governance/teams/goals"
 +++
 
 The Rust Project Goals program for 2025H2 is now open for submissions! If you've been thinking about tackling a significant improvement to Rust, now's the time to propose it. **The deadline for goal submissions is July 18th**.
