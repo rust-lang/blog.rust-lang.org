@@ -270,6 +270,204 @@ The main bottleneck is the customization of the dependent `rustc-rayon` library.
 
 <!-- markdown separator -->
 
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/109'><strong>Expose experimental LLVM features for GPU offloading</strong></a></div>
+    <div style="flex: initial;"><progress value="2" max="4"></progress>
+</div>
+</div>
+<!-- markdown separator -->
+
+*Help wanted:* [@ZuseZ4](https://github.com/ZuseZ4): there is only really one issue left which I'd like to see fixed before enabling autodiff on nightly, and that is MacOS support.
+
+Most of the MacOS CI already works, we can now build Enzyme, LLVM, and rustc, but later fail when we build Cranelift due to linker flag issues. The person who was looking into it got busy with other things, so I would really appreciate it if someone could pick it up! Otherwise I can also just start by shipping autodiff on Linux only, but given how close we are to MacOS support, I feel like it would be a shame.
+
+Since it's only an issue in CI, you don't need an own Mac to help with this. If anyone has time, I'm happy to chat here [here](https://github.com/rust-lang/rust/issues/140137) or on Zulip/Discord.
+
+
+<!-- markdown separator -->
+
+
+<details>
+<summary>3 detailed updates available.</summary>
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+<a href="https://github.com/rust-lang/rust-project-goals/issues/109#issuecomment-2907603375">Comment by @ZuseZ4 posted on 2025-05-25:</a><br>
+
+<blockquote>
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+And another round of updates. First of all, Google approved two GSoC projects for the summer, where @Sa4dUs will work on the autodiff frontend and @KMJ-007 will work on the backend. The frontend project is about improving our ABI handling to remove corner-cases around specific types that we currently can not differentiate. If time permits he might also get to re-model our frontend to lower our autodiff macro to a proper rustc intrinsic, which should allow us to simplify our logic a lot.
+The backend project will look at how Enzyme uses TypeTrees, and create those during the lowering to LLVM-IR. This should allow autodiff to become more reliable, work on debug builds, and generally compile a lot faster.
+
+
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+</blockquote>
+
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+<a href="https://github.com/rust-lang/rust-project-goals/issues/109#issuecomment-2907625166">Comment by @ZuseZ4 posted on 2025-05-25:</a><br>
+
+<blockquote>
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+The last weeks were focused on enabling autodiff in a lot more locations, as well as doing a lot of CI and Cmake work to be able to ship it on nightly. At the same time, autodiff is also gaining increasingly more contributors. That should help a lot with the uptick in issues, which I expect once we enable autodiff in nightly builds.
+
+**Key developments:**
+1. @Shourya742 added support for applying autodiff inside of `inherent impl blocks`. https://github.com/rust-lang/rust/pull/140104
+2. @haenoe added support for applying autodiff to generic functions. https://github.com/rust-lang/rust/pull/140049
+3. @Shourya742 added an optimization to inline the generated function, removing one layer of indirection. That should improve performance when differentiating tiny functions. https://github.com/rust-lang/rust/pull/139308
+4. @haenoe added support for applying autodiff to inner (nested) functions. https://github.com/rust-lang/rust/pull/138314
+5. I have found a bugfix for building rustc with both debug and autodiff enabled. This previously failed during bootstrap. This bugfix also solved the last remaining (compile time) performance regression of the autodiff feature. That means that if we now enable autodiff on nightly, it won't affect compile times for people not using it. https://github.com/rust-lang/rust/pull/140030
+6. After a hint from Onur I also fixed autodiff check builds:https://github.com/rust-lang/rust/pull/140000, which makes contributing to autodiff easier.
+7. I ran countless experiments on improving and fixing Enzyme's CMake and merged a few PRs into Enzyme. We don't fully support the macos dist runners yet and some of my CMake improvements only live in our Enzyme fork and aren't accepted by upstream yet, but the CI is now able to run longer before failing with the next bug, which should hopefully be easy to fix. At least I already received a hint on how to solve it.
+8. @Shourya742 also helped with an experiment on how to bundle Enzyme with the Rust compiler. We ended up selecting a different distribution path, but the PR was helpful to discuss solutions with Infra contributors. https://github.com/rust-lang/rust/pull/140244
+9. @Sa4dUs implemented a PR to split our `#[autodiff]` macro into `autodiff_forward` and `autodiff_reverse`. They behave quite differently in some ways that might surprise users, so I decided it's best for now to have them separated, which also will make teaching and documenting easier. https://github.com/rust-lang/rust/pull/140697
+
+**Help Wanted:**
+There are two or three smaller issues remaining to distribute Enzyme/autodiff. If anyone is open to help, either with bootstrap, CI, or CMake issues, I'd appreciate any support. Please feel free to ping me on Discord, Zulip, or in https://github.com/rust-lang/rust/pull/140064 to discuss what's left to do.
+
+
+In general, we solved most of the distribution issues over the last weeks, and autodiff can now be applied to almost all functions. That's a pretty good base, so I will now start to look again more into the GPU support for rustc.
+
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+</blockquote>
+
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+<a href="https://github.com/rust-lang/rust-project-goals/issues/109#issuecomment-2973570029">Comment by @ZuseZ4 posted on 2025-06-15:</a><br>
+
+<blockquote>
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+The last three weeks I had success in shifting away from autodiff, towards my other projects.
+
+**Key developments:**
+1) I forgot to mention it in a previous update, but I have added support for sret (struct return) handling to std::autodiff, so we now can differentiate a lot more functions reliably. https://github.com/rust-lang/rust/pull/139465
+
+2) I added more support for batched autodiff in: https://github.com/rust-lang/rust/pull/139351
+
+3) I have started working on a std::batching PR, which just allows fusing multiple function calls into one. https://github.com/rust-lang/rust/pull/141637. I am still not fully sure on how to design the frontend, but in general it will allow Array-of-Struct and Struct-of-Array vectorization. Based on a popular feedback I received it's now also generating SIMD types. So you can write your function in a scalar way, and just use the macro to generate a vectorized version which accepts and generates SIMD types.
+
+4) My first PR to handle automatic data movement to and from a GPU is up! https://github.com/rust-lang/rust/pull/142097 It can handle data movements for almost arbitrary functions, as long as your function is named `kernel_{num}`, and each of your arguments is a pointer to exactly 256 f32 values. As the next step, I will probably work on the backend to generate the actual kernel launches, so people can run their Rust code on the GPU. Once I have that tested and working I will go back to develop a frontend, to remove the input type limitations and give users a way to manually schedule data transfers. The gpu/offload frontend will likely be very simple compared to my autodiff frontend, so I don't expect many complications and therefore leave it to the end.
+
+
+**Help Wanted:**
+
+There is only really one issue left which I'd like to see fixed before enabling autodiff on nightly, and that is MacOS support.
+Most of the MacOS CI already works, we can now build Enzyme, LLVM, and rustc, but later fail when we build Cranelift due to linker flag issues. The person who was looking into it got busy with other things, so I would really appreciate it if someone could pick it up! Otherwise I can also just start by shipping autodiff on Linux only, but given how close we are to MacOS support, I feel like it would be a shame. Since it's only an issue in CI, you don't need an own Mac to help with this. If anyeone has time, I'm happy to chat here [here](https://github.com/rust-lang/rust/issues/140137) or on Zulip/Discord.
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+</blockquote>
+
+</details>
+
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/262'><strong>Null and enum-discriminant runtime checks in debug builds</strong></a></div>
+    <div style="flex: initial;"><progress value="1" max="3"></progress>
+</div>
+</div>
+<!-- markdown separator -->
+
+*Help wanted*: [1c3t3a](https://github.com/1c3t3a): happy to join forces on general checks and for advice what other UB would be great to check!! :).
+
+<!-- markdown separator -->
+
+
+<details>
+<summary>1 detailed update available.</summary>
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+<a href="https://github.com/rust-lang/rust-project-goals/issues/262#issuecomment-2900165635">Comment by @1c3t3a posted on 2025-05-22:</a><br>
+
+<blockquote>
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+Upps, giving another status update here:
+
+**Key developments**: Landed an extension of the alignment check to include (mutable) borrows in [rust#137940](https://github.com/rust-lang/rust/pull/137940). Working on the enums check (no draft PR yet). Hope to open a PR by mid next week.
+
+**Blockers**: None so far.
+
+**Help wanted**: Happy to join forces on general checks and for advice what other UB would be great to check!! :)
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+</blockquote>
+
+</details>
+
+<div style="display: flex;" class="mt2 mb3">
+    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/114'><strong>Optimizing Clippy &amp; linting</strong></a></div>
+    <div style="flex: initial;"><progress value="0" max="2"></progress>
+</div>
+</div>
+<!-- markdown separator -->
+
+*Help wanted:* Help is appreciated in anything with the [`performance-project` label](https://github.com/rust-lang/rust-clippy/issues?q=is%3Aissue%20state%3Aopen%20label%3Aperformance-project) in the Clippy repository.
+
+
+<!-- markdown separator -->
+
+
+<details>
+<summary>1 detailed update available.</summary>
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+<a href="https://github.com/rust-lang/rust-project-goals/issues/114#issuecomment-2907744144">Comment by @blyxyas posted on 2025-05-25:</a><br>
+
+<blockquote>
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+Monthly update!
+
+**Key developments:**
+
+- Documentation lints have been optimized greatly, giving us up to a 13.5% decrease in documentation-heavy crates. See https://github.com/rust-lang/rust-clippy/pull/14693 and https://github.com/rust-lang/rust-clippy/pull/14870
+
+- The efforts on getting Clippy benchmarked on the official \@rust-timer bot account are getting started by the infra team. This allows us to do per-PR benchmarking instead of fixing performance problems ad-hoc.
+
+- We need to do further testing on the **early parallel lints effort**. While I have a working patch, no performance improvement has yet been proven.
+
+- Work on making an interface for a single-lint Clippy, for denoising benchmarks is getting in the works.
+
+**Blockers**
+The query system not being parallelized. Currently working on a work-around but a parallel query system would make things a lot easier.
+
+**Help wanted:**
+Help is appreciated in anything with the [`performance-project` label](https://github.com/rust-lang/rust-clippy/issues?q=is%3Aissue%20state%3Aopen%20label%3Aperformance-project) in the Clippy repository.
+
+
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+</blockquote>
+
+</details>
+
 
 
 <br>
@@ -420,105 +618,6 @@ Speaking for myself from the Rust Project side, it was a real pleasure to meet s
 </details>
 
 
-<div style="display: flex;" class="mt2 mb3">
-    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/109'><strong>Expose experimental LLVM features for GPU offloading</strong></a></div>
-    <div style="flex: initial;"><progress value="2" max="4"></progress>
-</div>
-</div>
-<!-- markdown separator -->
-
-
-
-<!-- markdown separator -->
-
-
-<details>
-<summary>3 detailed updates available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/109#issuecomment-2907603375">Comment by @ZuseZ4 posted on 2025-05-25:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-And another round of updates. First of all, Google approved two GSoC projects for the summer, where @Sa4dUs will work on the autodiff frontend and @KMJ-007 will work on the backend. The frontend project is about improving our ABI handling to remove corner-cases around specific types that we currently can not differentiate. If time permits he might also get to re-model our frontend to lower our autodiff macro to a proper rustc intrinsic, which should allow us to simplify our logic a lot.
-The backend project will look at how Enzyme uses TypeTrees, and create those during the lowering to LLVM-IR. This should allow autodiff to become more reliable, work on debug builds, and generally compile a lot faster.
-
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/109#issuecomment-2907625166">Comment by @ZuseZ4 posted on 2025-05-25:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-The last weeks were focused on enabling autodiff in a lot more locations, as well as doing a lot of CI and Cmake work to be able to ship it on nightly. At the same time, autodiff is also gaining increasingly more contributors. That should help a lot with the uptick in issues, which I expect once we enable autodiff in nightly builds.
-
-**Key developments:**
-1. @Shourya742 added support for applying autodiff inside of `inherent impl blocks`. https://github.com/rust-lang/rust/pull/140104
-2. @haenoe added support for applying autodiff to generic functions. https://github.com/rust-lang/rust/pull/140049
-3. @Shourya742 added an optimization to inline the generated function, removing one layer of indirection. That should improve performance when differentiating tiny functions. https://github.com/rust-lang/rust/pull/139308
-4. @haenoe added support for applying autodiff to inner (nested) functions. https://github.com/rust-lang/rust/pull/138314
-5. I have found a bugfix for building rustc with both debug and autodiff enabled. This previously failed during bootstrap. This bugfix also solved the last remaining (compile time) performance regression of the autodiff feature. That means that if we now enable autodiff on nightly, it won't affect compile times for people not using it. https://github.com/rust-lang/rust/pull/140030
-6. After a hint from Onur I also fixed autodiff check builds:https://github.com/rust-lang/rust/pull/140000, which makes contributing to autodiff easier.
-7. I ran countless experiments on improving and fixing Enzyme's CMake and merged a few PRs into Enzyme. We don't fully support the macos dist runners yet and some of my CMake improvements only live in our Enzyme fork and aren't accepted by upstream yet, but the CI is now able to run longer before failing with the next bug, which should hopefully be easy to fix. At least I already received a hint on how to solve it.
-8. @Shourya742 also helped with an experiment on how to bundle Enzyme with the Rust compiler. We ended up selecting a different distribution path, but the PR was helpful to discuss solutions with Infra contributors. https://github.com/rust-lang/rust/pull/140244
-9. @Sa4dUs implemented a PR to split our `#[autodiff]` macro into `autodiff_forward` and `autodiff_reverse`. They behave quite differently in some ways that might surprise users, so I decided it's best for now to have them separated, which also will make teaching and documenting easier. https://github.com/rust-lang/rust/pull/140697
-
-**Help Wanted:**
-There are two or three smaller issues remaining to distribute Enzyme/autodiff. If anyone is open to help, either with bootstrap, CI, or CMake issues, I'd appreciate any support. Please feel free to ping me on Discord, Zulip, or in https://github.com/rust-lang/rust/pull/140064 to discuss what's left to do.
-
-
-In general, we solved most of the distribution issues over the last weeks, and autodiff can now be applied to almost all functions. That's a pretty good base, so I will now start to look again more into the GPU support for rustc.
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/109#issuecomment-2973570029">Comment by @ZuseZ4 posted on 2025-06-15:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-The last three weeks I had success in shifting away from autodiff, towards my other projects.
-
-**Key developments:**
-1) I forgot to mention it in a previous update, but I have added support for sret (struct return) handling to std::autodiff, so we now can differentiate a lot more functions reliably. https://github.com/rust-lang/rust/pull/139465
-
-2) I added more support for batched autodiff in: https://github.com/rust-lang/rust/pull/139351
-
-3) I have started working on a std::batching PR, which just allows fusing multiple function calls into one. https://github.com/rust-lang/rust/pull/141637. I am still not fully sure on how to design the frontend, but in general it will allow Array-of-Struct and Struct-of-Array vectorization. Based on a popular feedback I received it's now also generating SIMD types. So you can write your function in a scalar way, and just use the macro to generate a vectorized version which accepts and generates SIMD types.
-
-4) My first PR to handle automatic data movement to and from a GPU is up! https://github.com/rust-lang/rust/pull/142097 It can handle data movements for almost arbitrary functions, as long as your function is named `kernel_{num}`, and each of your arguments is a pointer to exactly 256 f32 values. As the next step, I will probably work on the backend to generate the actual kernel launches, so people can run their Rust code on the GPU. Once I have that tested and working I will go back to develop a frontend, to remove the input type limitations and give users a way to manually schedule data transfers. The gpu/offload frontend will likely be very simple compared to my autodiff frontend, so I don't expect many complications and therefore leave it to the end.
-
-
-**Help Wanted:**
-
-There is only really one issue left which I'd like to see fixed before enabling autodiff on nightly, and that is MacOS support.
-Most of the MacOS CI already works, we can now build Enzyme, LLVM, and rustc, but later fail when we build Cranelift due to linker flag issues. The person who was looking into it got busy with other things, so I would really appreciate it if someone could pick it up! Otherwise I can also just start by shipping autodiff on Linux only, but given how close we are to MacOS support, I feel like it would be a shame. Since it's only an issue in CI, you don't need an own Mac to help with this. If anyeone has time, I'm happy to chat here [here](https://github.com/rust-lang/rust/issues/140137) or on Zulip/Discord.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
-</details>
 
 
 <div style="display: flex;" class="mt2 mb3">
@@ -903,99 +1002,6 @@ Key developments: https://github.com/rust-lang/rust/issues/139368 was opened, wh
 
 </details>
 
-
-<div style="display: flex;" class="mt2 mb3">
-    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/262'><strong>Null and enum-discriminant runtime checks in debug builds</strong></a></div>
-    <div style="flex: initial;"><progress value="1" max="3"></progress>
-</div>
-</div>
-<!-- markdown separator -->
-
-
-
-<!-- markdown separator -->
-
-
-<details>
-<summary>1 detailed update available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/262#issuecomment-2900165635">Comment by @1c3t3a posted on 2025-05-22:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-Upps, giving another status update here:
-
-**Key developments**: Landed an extension of the alignment check to include (mutable) borrows in [rust#137940](https://github.com/rust-lang/rust/pull/137940). Working on the enums check (no draft PR yet). Hope to open a PR by mid next week.
-
-**Blockers**: None so far.
-
-**Help wanted**: Happy to join forces on general checks and for advice what other UB would be great to check!! :)
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
-</details>
-
-
-<div style="display: flex;" class="mt2 mb3">
-    <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/114'><strong>Optimizing Clippy &amp; linting</strong></a></div>
-    <div style="flex: initial;"><progress value="0" max="2"></progress>
-</div>
-</div>
-<!-- markdown separator -->
-
-
-
-<!-- markdown separator -->
-
-
-<details>
-<summary>1 detailed update available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/114#issuecomment-2907744144">Comment by @blyxyas posted on 2025-05-25:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-Monthly update!
-
-**Key developments:**
-
-- Documentation lints have been optimized greatly, giving us up to a 13.5% decrease in documentation-heavy crates. See https://github.com/rust-lang/rust-clippy/pull/14693 and https://github.com/rust-lang/rust-clippy/pull/14870
-
-- The efforts on getting Clippy benchmarked on the official \@rust-timer bot account are getting started by the infra team. This allows us to do per-PR benchmarking instead of fixing performance problems ad-hoc.
-
-- We need to do further testing on the **early parallel lints effort**. While I have a working patch, no performance improvement has yet been proven.
-
-- Work on making an interface for a single-lint Clippy, for denoising benchmarks is getting in the works.
-
-**Blockers**
-The query system not being parallelized. Currently working on a work-around but a parallel query system would make things a lot easier.
-
-**Help wanted:**
-Help is appreciated in anything with the [`performance-project` label](https://github.com/rust-lang/rust-clippy/issues?q=is%3Aissue%20state%3Aopen%20label%3Aperformance-project) in the Clippy repository.
-
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
-</details>
 
 
 <div style="display: flex;" class="mt2 mb3">
