@@ -83,7 +83,7 @@ We celebrated the 10 year birthday of Rust 1.0. With over 300 people, we celebra
 
 ![Image](https://github.com/user-attachments/assets/c78c208c-a87a-46a3-8ee5-7086bca38b5a)
 
-The feedback from the participants was overwhelmingly positive with an average score of 9.5/10. 🎉 The vast majority would like this to be a yearly event -- which @m-ou-se started working on.
+The feedback from the participants was overwhelmingly positive with an average score of 9.5/10. 🎉 The vast majority would like this to be a yearly event -- which Mara started working on.
 
 <details>
 <summary>1 detailed update available.</summary>
