@@ -25,31 +25,17 @@ The Rust project is currently working towards a [slate of 40 project goals](http
 
 <!-- markdown separator -->
 
+**Generators.** Experimental support for an `iter!` macro has landed in nightly. This is intended for nightly-only experimentation and will still need an RFC before it can stabilize. Tracking issue is [rust-lang/rust#142269](https://github.com/rust-lang/rust/issues/142269).
+
+**Async book.** @nrc has been hard at work filling out the official Async Rust book, recently adding chapters on [concurrency primitives](https://rust-lang.github.io/async-book/part-guide/concurrency-primitives.html), structured concurrency, and pinning.
+
+**dynosaur.** A [dynosaur RFC](https://github.com/spastorino/dynosaur/issues/78) was opened describing what blanket impls we think the proc macro should generate for a trait, to make the trait usable as `impl Trait` in argument position in other traits. This is the last remaining open design question before we release dynosaur 0.3 as a candidate for 1.0. Please chime in on the RFC if you have thoughts.
+
 
 <details>
-<summary>2 detailed updates available.</summary>
+<summary>1 detailed update available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/105#issuecomment-2896086972">Comment by @tmandry posted on 2025-05-20:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-**Async fn in traits.** An FCP proposal to stabilize return type notation was started in https://github.com/rust-lang/rust/pull/138424. However, it is currently blocked on concerns that stabilizing it now will make it more difficult to ship Rust's next-generation trait solver.
-
-**Async fn in dyn trait.** There have been discussions around next steps to support this in the language. More experimentation is needed, along with an initial RFC.
-
-**dynosaur.** More breaking changes have landed and we expect to release v0.3 soon.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -76,7 +62,7 @@ The Rust project is currently working towards a [slate of 40 project goals](http
 <br>
 <div style="display: flex;" class="mt2 mb3">
     <div style="flex: auto;"><a href='https://github.com/rust-lang/rust-project-goals/issues/263'><strong>Organize Rust All-Hands 2025</strong></a></div>
-    <div style="flex: initial;"><img src="https://img.shields.io/badge/Status-Will%20not%20complete%20%3A%28-yellow" alt="Will not complete"></img>
+    <div style="flex: initial;"><img src="https://img.shields.io/badge/Status-Completed%20%3D%29-green" alt="Status: Completed!"></img>
 </div>
 </div>
 <!-- markdown separator -->
@@ -87,6 +73,17 @@ The Rust project is currently working towards a [slate of 40 project goals](http
 
 <!-- markdown separator -->
 
+The **All-Hands** did!
+
+![picture](https://github.com/user-attachments/assets/1da0da5c-3cb0-48b5-91ae-6f043550969c)
+
+More than 150 project members and invited guests attended, making this the largest in-person collaborative event in the history of the Rust project.
+
+We celebrated the 10 year birthday of Rust 1.0. With over 300 people, we celebrated, listened to speeches from various former and current team members and contributors, and watched the live [release of Rust 1.87.0](https://blog.rust-lang.org/2025/05/15/Rust-1.87.0/) on stage.
+
+![Image](https://github.com/user-attachments/assets/c78c208c-a87a-46a3-8ee5-7086bca38b5a)
+
+The feedback from the participants was overwhelmingly positive with an average score of 9.5/10. 🎉 The vast majority would like this to be a yearly event -- which @m-ou-se started working on.
 
 <details>
 <summary>1 detailed update available.</summary>
@@ -162,11 +159,11 @@ Thank you all for attending! See you all next year! 🎊
 [RFL.com]: https://rust-for-linux.com/
 [RFL#2]: https://github.com/Rust-for-Linux/linux/issues/2
 
-**What has happened?** May saw significant progress on compiler flags, with MCPs for `-Zharden-sls` and `-Zretpoline*` being accepted. Several PRs were in progress (#135927, #140733, #140740) that could potentially be combined, with the implementation approach matching clang's flag naming conventions for consistency. The RFC for configuring no-std externally (#3791) entered T-compiler FCP with positive signals, and build-std discussions at the All Hands produced some consensus between libs and compiler teams, though more Cargo team involvement was needed.
+**What has happened?** May saw significant progress on compiler flags, with MCPs for `-Zharden-sls` and `-Zretpoline*` being accepted. Several PRs were in progress ([#135927](https://github.com/rust-lang/rust/pull/135927), [#140733](https://github.com/rust-lang/rust/pull/140733), [#140740](https://github.com/rust-lang/rust/pull/140740)) that could potentially be combined, with the implementation approach matching clang's flag naming conventions for consistency. The RFC for configuring no-std externally [#3791](https://github.com/rust-lang/rfcs/pull/3791) entered T-compiler FCP with positive signals, and build-std discussions at the All Hands produced some consensus between libs and compiler teams, though more Cargo team involvement was needed.
 
 The Rust for Linux team had strong participation at Rust Week, with many team members attending (Alice, Benno, Björn, Boqun, Gary, Miguel, Trevor). During the All Hands, attendees participated in a fun exercise predicting what percentage of the kernel will be written in Rust by 2035 - currently only about 0.1% of the kernel's 40M total lines are in Rust.
 
-On language features, during May we continued work on arbitrary self types v2, where Ding focused on resolving the dichotomy between `Deref::Target` vs `Receiver::Target`. One potential approach discussed was splitting the feature gate to allow arbitrary self types only for types implementing `Deref`, which would cover the kernel use case. For `derive(CoercePointee)`, we continued waiting on PRs #136764 and #136776, with the latter needing diagnostic work.
+On language features, during May we continued work on arbitrary self types v2, where Ding focused on resolving the dichotomy between `Deref::Target` vs `Receiver::Target`. One potential approach discussed was splitting the feature gate to allow arbitrary self types only for types implementing `Deref`, which would cover the kernel use case. For `derive(CoercePointee)`, we continued waiting on PRs [#136764](https://github.com/rust-lang/rust/pull/136764) and [#136776](https://github.com/rust-lang/rust/pull/136776), with the latter needing diagnostic work.
 
 The All Hands meeting also produced interesting developments on field projections, with Benno working on an approach that reuses borrow checker logic to extend what we do for `&` and `&mut` to custom types using the `->` syntax. Alice also presented a new proposal for AFIDT/RPITIDT and placement ([discussed here](https://rust-lang.zulipchat.com/#narrow/channel/486433-all-hands-2025/topic/Placement.20new.20in.20Rust/near/518803523)).
 
@@ -174,70 +171,9 @@ The All Hands meeting also produced interesting developments on field projection
 
 
 <details>
-<summary>4 detailed updates available.</summary>
+<summary>2 detailed updates available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-2894303032">Comment by @ojeda posted on 2025-05-20:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-Update from our 2025-04-09 meeting ([full minutes](https://hackmd.io/@rust-lang-team/rkqdLEER1l)):
-
-  - Some progress on `arbitrary_self_types`. In particular, decided to do with respect to pin and other related cases.
-
-  - `asm_goto` is solved, apart from output operands. For `asm_const`, https://github.com/rust-lang/rust/pull/138618 is nominated.
-
-  - ABI-modifying compiler flags: some PRs waiting review, e.g. https://github.com/rust-lang/rust/pull/138736.
-
-  - `--crate-attr` RFC is up: https://github.com/rust-lang/rfcs/pull/3791.
-
-  - `-Zsanitize-kcfi-arity`'s implementation PR got merged: https://github.com/rust-lang/rust/pull/138368. If all is good from the Linux side, a stabilization PR will be sent.
-
-  - CFI `core::fmt` issue: https://github.com/rust-lang/rust/issues/115199.
-
-  - Discussion around `bindgen`, `repr(align)` and packed types. RFC nominated for lang discussion: https://github.com/rust-lang/rfcs/pull/3718#issuecomment-2790654254.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-2894308715">Comment by @ojeda posted on 2025-05-20:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-Update from our 2025-04-23 meeting ([full minutes](https://hackmd.io/@rust-lang-team/BJZ69jLkgx)):
-
-  - Naked functions were stabilized, which could see some use in the kernel.
-
-  - Lang discussed `#[repr(align)]` (the kernel is interested in, at least, the global one, i.e. `-Zmin-function-alignment=N`).
-
-  - `asm_const`: @nbdd0121 will reply on the latest review comments in the implementation PR: https://github.com/rust-lang/rust/issues/128464.
-
-  - `--crate-attr`: the author of the RFC (https://github.com/rust-lang/rfcs/pull/3791) is looking for a new owner. The RFC is in proposed FCP. Small updates to the text may be needed. Otherwise compiler probably wants to merge it. @Mark-Simulacrum to be pinged.
-
-  - Clippy configuration etc.: @flip1995 will be at RustWeek, the plan is to discuss it there.
-
-  - `rustdoc` extract doctests: @GuillaumeGomez and @ojeda plan to discuss it at RustWeek.
-
-  - `-Zsanitize-kcfi-arity`: waiting on the kernel side (`tc-build` support sent).
-
-  - CFI `core::fmt` issue: PR submitted: https://github.com/rust-lang/rust/pull/139632.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -306,38 +242,16 @@ We are also finishing up some of the work on language items. We have had two sta
 
 <!-- markdown separator -->
 
+The main bottleneck is the customization of the dependent `rustc-rayon` library. @oli-obk and @Zoxc are helping to move this forward.
 
 <!-- markdown separator -->
-*Help wanted:* Help test the deadlock code in the [issue list](https://github.com/rust-lang/rust/issues?q=is%3Aopen%20label%3AA-parallel-compiler) and try to reproduce the issue
-<!-- markdown separator -->
-
-
+*Help wanted:* Help test the deadlock code in the [issue list](https://github.com/rust-lang/rust/issues?q=is%3Aopen%20label%3AA-parallel-compiler) and try to reproduce the issues. If you'd like to help, please post in [this goal's dedicated zulip topic](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Promoting.20Parallel.20Front.20End.20.28goals.23121.29/with/506292058).
 <!-- markdown separator -->
 
 
-<details>
-<summary>1 detailed update available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
+<!-- markdown separator -->
 
 
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/121#issuecomment-2899565009">Comment by @SparrowLii posted on 2025-05-22:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-* **Key developments:** The main bottleneck is the customization of the dependent `rustc-rayon` library. @oli-obk and @Zoxc are helping to move this forward.
-* **Blockers:** null
-* **Help wanted:** Help test the deadlock code in the [issue list](https://github.com/rust-lang/rust/issues?q=is%3Aopen%20label%3AA-parallel-compiler) and try to reproduce the issue
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
-</details>
 
 
 <br>
@@ -352,34 +266,10 @@ We are also finishing up some of the work on language items. We have had two sta
 
 
 <!-- markdown separator -->
-*Help wanted:* this project goal needs a compiler developer to move forward.
-<!-- markdown separator -->
-
+*Help wanted:* T-compiler people to work on the blocking issues [#119428](https://github.com/rust-lang/rust/issues/119428) and [#71043](https://github.com/rust-lang/rust/issues/71043). If you'd like to help, please post in [this goal's dedicated zulip topic](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Stabilize.20public.2Fprivate.20dependencies.20.28goals.23272.29).
 
 <!-- markdown separator -->
 
-
-<details>
-<summary>1 detailed update available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/272#issuecomment-2898700698">Comment by @epage posted on 2025-05-21:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-Help wanted: this project goal needs a compiler developer to move forward.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
-</details>
 
 
 <br>
@@ -434,49 +324,7 @@ We should now be correctly deferring evaluation of type system constants making 
 
 
 <details>
-<summary>2 detailed updates available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/274#issuecomment-2857981933">Comment by @davidtwco posted on 2025-05-07:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-- We've started a regular biweekly sync call with upstream stakeholders in build-std from the lang, compiler and cargo teams where we discuss aspects of our tentative design or clarify constraints.
-- @adamgemmell has continued to draft our proposal for build-std, which we're discussing in our regular sync calls.
-- We're hosting a session at the All Hands next week to discuss build-std.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/274#issuecomment-2988870822">Comment by @wesleywiser posted on 2025-06-19:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-- @adamgemmell and @davidtwco hosted a session on build-std at the All Hands with members from various teams discussing some of the design questions.
-- We've continued our biweekly sync call with lang, compiler and cargo team members.
-- @davidtwco and @adamgemmell have been hard at work preparing a compendium detailing the history of build-std and the wg-cargo-std-aware repo.
-  - Reviewing and editing this document is ongoing and a continuing topic of discussion for the sync call.
-- In the last sync call, we discussed:
-  - Renewing the project goal for another cycle: enthusiastic agreement from many participants.
-  - Posting updates to the project goal page biweekly after each sync call.
-  - Discussion on the content and format of the compendium. Most of the content appears to be done but further editing and restructuring will make it clearer and more easily digestible.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
+<summary>No detailed updates available.</summary>
 </details>
 
 
@@ -487,42 +335,8 @@ We should now be correctly deferring evaluation of type system constants making 
 </div>
 <!-- markdown separator -->
 
-
-
-<!-- markdown separator -->
-
-
 <details>
-<summary>1 detailed update available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/104#issuecomment-2848816055">Comment by @obi1kenobi posted on 2025-05-03:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-We encountered some speedbumps this month.
-
-TL;DR:
-- While working on `'static` and "outlives" bounds, we discovered Rust's ability to _imply_ bounds that are not stated explicitly at the definition site.
-- Implied bounds are load-bearing for SemVer; failure to take them into account will produce _both_ false-positives _and_ false-negatives.
-- While technical limitations make it infeasible for `cargo-semver-checks` to correctly deduce implied bounds, `rustc` has this capability internally.
-- We have [asked the rustdoc team](https://rust-lang.zulipchat.com/#narrow/channel/266220-t-rustdoc/topic/Show.20implied.20bounds.20in.20rustdoc.20JSON/near/515146429) to expose implied bounds in rustdoc JSON by using those `rustc` internal APIs.
-
-There are some good news as well, though! While looking at the `#[target_feature]` attribute:
-- We discovered previously-undocumented SemVer hazards.
-- We [discovered a case of unsoundness](https://github.com/rust-lang/rust/issues/139368) when that attribute is used on trait methods.
-- With the help of contributors and the rustdoc team, rustdoc JSON began including additional information that will help future `cargo-semver-checks` versions catch those SemVer hazards.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
+<summary>No detailed updates available.</summary>
 </details>
 
 
@@ -720,25 +534,7 @@ Most of the MacOS CI already works, we can now build Enzyme, LLVM, and rustc, bu
 
 
 <details>
-<summary>2 detailed updates available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/110#issuecomment-2848617679">Comment by @Eh2406 posted on 2025-05-03:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-I will be giving [a talk at Rust-Week](https://rustweek.org/talks/jacob/) about the history that brought us to this project/goal. Aside from preparing for that talk I have not had time for this effort.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
+<summary>1 detailed update available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -935,28 +731,7 @@ https://github.com/rust-lang/rust/pull/141754 has been opened to parse `impl` re
 
 
 <details>
-<summary>1 detailed update available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/259#issuecomment-2843934346">Comment by @jieyouxu posted on 2025-05-01:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-Update (2025-05-01):
-
-- Not much updates, recent compiletest changes were surrounding error annotation strictness/canonicalization and landing a new executor that doesn't depend on libtest, and I've mostly been involved in reviewing those.
-- Next planned changes are first to introduce some discipline into compiletest's error handling and contributor-facing diagnostics, because configuration and directive handling currently still has a ton of random panics all over the place.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
+<summary>No detailed updates available.</summary>
 </details>
 
 
@@ -1052,29 +827,7 @@ Another issue that came up is that the influxdb cloud serverless free instance t
 
 
 <details>
-<summary>3 detailed updates available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/113#issuecomment-2846022991">Comment by @lcnr posted on 2025-05-01:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-We've made a lot of progress over the last 1.5 months. My change to opaque types in borrowck is pretty much done now: https://github.com/rust-lang/rust/pull/139587. It still needs some cleanup and an FCP to actually merge. We've already merged multiple cleanups on the way here.
-
-We then started to test crater with the `-Znext-solver=globally`. @compiler-errors and me encountered and merged the fixes for 13 issues since then: https://github.com/rust-lang/rust/pull/139791 https://github.com/rust-lang/rust/pull/139798 https://github.com/rust-lang/rust/pull/140236 https://github.com/rust-lang/rust/pull/139900 https://github.com/rust-lang/rust/pull/139828 https://github.com/rust-lang/rust/pull/139774 https://github.com/rust-lang/rust/pull/139762 https://github.com/rust-lang/rust/pull/139789 https://github.com/rust-lang/rust/pull/138845 https://github.com/rust-lang/rust/pull/140306 https://github.com/rust-lang/rust/pull/140305 https://github.com/rust-lang/rust/pull/140276 https://github.com/rust-lang/rust/pull/140302. @Nadrieril was also helpful by minimizing an encountered issue.
-
-With these improvements and multiple in-flight changes we're now at significantly less than 100 remaining regressions in the top 10000 crates and have started the first complete crater run today. We are using a single PR for all crater runs. Check out https://github.com/rust-lang/rust/pull/133502 for the current status and the stack of in-flight changes.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
+<summary>2 detailed updates available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -1293,42 +1046,11 @@ No updates on my side, but we may be going back to the original proposal (modulo
 
 
 <details>
-<summary>3 detailed updates available.</summary>
+<summary>1 detailed update available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
 
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/264#issuecomment-2851032075">Comment by @ojuschugh1 posted on 2025-05-05:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-Hi @epage  , I am interested in working on this project. If you are still looking for someone.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/264#issuecomment-2852224902">Comment by @epage posted on 2025-05-05:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-@ojuschugh1 iirc there is a GSoC proposal for this and we are waiting to hear whether it was accepted.  If it was, it would likely involve coordinating with them on tasks.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
 
 <a href="https://github.com/rust-lang/rust-project-goals/issues/264#issuecomment-2910844619">Comment by @epage posted on 2025-05-27:</a><br>
 
@@ -1358,29 +1080,7 @@ This has been [approved as a GSoC project](https://blog.rust-lang.org/2025/05/08
 
 
 <details>
-<summary>2 detailed updates available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/265#issuecomment-2847874500">Comment by @JoelMarcey posted on 2025-05-02:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-Key Developments: The FLS repo has officially been transferred from Ferrous to the Rust Project. https://github.com/rust-lang/fls is now live.
-
-Next step: Integrate the FLS with the Rust build system in order to support publishing within project processes.
-
-Blockers: None yet. The build system integration could create some support requests, however.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
+<summary>1 detailed update available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -1492,26 +1192,7 @@ Blockers: Potential blocker around the [(re)naming / rebranding of the FLS](http
 
 
 <details>
-<summary>3 detailed updates available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/275#issuecomment-2857992478">Comment by @davidtwco posted on 2025-05-07:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-- @Jamesbarford has been working with @Kobzol to implement a database-backed job queueing mechanism, which will better scale to support multiple collectors and ends up being the key part of rustc-perf needing adapted to support multiple collectors.
-- @Jamesbarford has also upstreamed tests for the existing queue ordering (rust-lang/rustc-perf#2072).
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
+<summary>2 detailed updates available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -1571,35 +1252,7 @@ Blockers: Potential blocker around the [(re)naming / rebranding of the FLS](http
 
 
 <details>
-<summary>2 detailed updates available.</summary>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<a href="https://github.com/rust-lang/rust-project-goals/issues/118#issuecomment-2850719303">Comment by @lqd posted on 2025-05-05:</a><br>
-
-<blockquote>
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-Here are the key developments for the month of April
-
-- @amandasystems
-   - extracted a handful of PRs out of the gigantic placeholder rewrite PR, to make it easier to review and land
-   - https://github.com/rust-lang/rust/pull/139960, https://github.com/rust-lang/rust/pull/139965, and https://github.com/rust-lang/rust/pull/140466
-- Tage
-   - continued experimenting and making progress with the early phase of the process, and making building constraints, and traversing them per loan, lazy
-   - started extracting some of that work for discussion, review, PRs, as well as writing reports for his masters thesis
-- @lqd
-   - continued on improving the algorithm. We're now at a point where we have an approximation of the datalog algorithm, which handles our UI tests -- except one where control flow in a loop connects to regions that are live before and after the loop: this causes a false positive that our datalog implementation used to accept (via a more comprehensive but slower approach).
-   - we're currently discussing whether we can cut scope *here*, as this formulation accepts NLL problem case 3. We'll need to evaluate what limits this formulation imposes on expressiveness outside NLL problem case 3 and streaming iterators -- and whether it indeed has an easier path to becoming production ready. We'll also still try to see if it's possible to still improve the algorithm and avoid emitting errors on [issue 46589](https://github.com/rust-lang/rust/issues/46589), since we initially hoped to fix this one as well.
-
-<!-- this comment helps to convince the markdown parser to do the right thing -->
-
-</blockquote>
-
+<summary>1 detailed update available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -1701,7 +1354,7 @@ Help wanted:
 
 
 <details>
-<summary>2 detailed updates available.</summary>
+<summary>1 detailed update available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
