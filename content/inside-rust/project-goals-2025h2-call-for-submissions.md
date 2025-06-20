@@ -2,7 +2,6 @@
 path = "inside-rust/2025/06/23/project-goals-2025h2-call-for-submissions"
 title = "Now accepting Project Goal proposals for 2025H2"
 authors = ["Niko Matsakis"]
-aliases = ["inside-rust/2025/06/23/project-goals-2025h2-call-for-submissions.html"]
 
 [extra]
 team = "the Project Goals Team"
