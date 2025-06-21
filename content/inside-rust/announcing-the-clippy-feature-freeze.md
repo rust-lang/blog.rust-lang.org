@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2025/06/19/announcing-the-clippy-feature-freeze"
+path = "inside-rust/2025/06/21/announcing-the-clippy-feature-freeze"
 title = "Announcing the Clippy feature freeze"
 authors = ["blyxyas"]
 
@@ -56,6 +56,6 @@ little feature hiatus we can achieve the excellence that the Rust user base
 deserves. 
 
 [our contributing guidelines]: https://github.com/rust-lang/rust-clippy/blob/master/CONTRIBUTING.md
-[our suggested good first issues]: <!-- ADD HERE OUR TRACKING ISSUE -->
+[our suggested good first issues]: https://github.com/rust-lang/rust-clippy/issues/15086
 [Zulip]: https://rust-lang.zulipchat.com/#narrow/channel/257328-clippy
 
