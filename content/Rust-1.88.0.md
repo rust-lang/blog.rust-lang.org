@@ -67,7 +67,7 @@ Look for a more detailed post on this soon!
 
 The `cfg` predicate language now supports boolean literals, `true` and `false`, acting as a configuration that is always enabled or disabled, respectively. This works in Rust [conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) with `cfg` and `cfg_attr` attributes and the built-in `cfg!` macro, and also in Cargo `[target]` tables in both [configuration](https://doc.rust-lang.org/cargo/reference/config.html#target) and [manifests](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#platform-specific-dependencies).
 
-If you are familiar with set theory, you might already be using empty sets like `cfg(all())` for enabled and `cfg(any())` for disabled, but this meaning is rather implicit and easy to get backwards. `cfg(true)` and `cfg(false)` offer a more direct way to say what you mean.
+Previously, empty predicate lists could be used for unconditional configuration, like `cfg(all())` for enabled and `cfg(any())` for disabled, but this meaning is rather implicit and easy to get backwards. `cfg(true)` and `cfg(false)` offer a more direct way to say what you mean.
 
 See [RFC 3695](https://rust-lang.github.io/rfcs/3695-cfg-boolean-literals.html) for more background!
 
