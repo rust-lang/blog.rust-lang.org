@@ -36,18 +36,16 @@ For more information, see the original [unstable announcement](https://blog.rust
 
 This feature allows `&&`-chaining `let` statements inside `if` and `while` conditions, even intermingling with boolean expressions, so there is less distinction between `if`/`if let` and `while`/`while let`. The patterns inside the `let` sub-expressions can be irrefutable or refutable, and bindings are usable in later parts of the chain as well as the body.
 
-For example, [this actual snippet](https://github.com/rust-lang/rust/blob/28f1c807911c63f08d98e7b468cfcf15a441e34b/compiler/rustc_ast_passes/src/feature_gate.rs#L327-L338) from the compiler combines multiple conditions which would have required nesting `if let` and `if` blocks before:
+For example, this snippet combines multiple conditions which would have required nesting `if let` and `if` blocks before:
 
 ```rust
-    fn visit_generic_args(&mut self, args: &'a ast::GenericArgs) {
-        if let ast::GenericArgs::Parenthesized(generic_args) = args
-            && let ast::FnRetTy::Ty(ref ty) = generic_args.output
-            && matches!(ty.kind, ast::TyKind::Never)
-        {
-            gate!(&self, never_type, ty.span, "the `!` type is experimental");
-        }
-        visit::walk_generic_args(self, args);
-    }
+if let Channel::Stable(v) = release_info()
+    && let Semver { major, minor, .. } = v
+    && major == 1
+    && minor == 88
+{
+    println!("`let_chains` was stabilized in this version");
+}
 ```
 
 Let chains are only available in the Rust 2024 edition, as this feature depends on the [`if let` temporary scope](https://doc.rust-lang.org/edition-guide/rust-2024/temporary-if-let-scope.html) change for more consistent drop order.
