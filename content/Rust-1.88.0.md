@@ -108,6 +108,8 @@ These previously stable APIs are now stable in const contexts:
 
 ### Other changes
 
+The `i686-pc-windows-gnu` target has been demoted to Tier 2, as mentioned in an [earlier post](https://blog.rust-lang.org/2025/05/26/demoting-i686-pc-windows-gnu/). This won't have any immediate effect for users, since both the compiler and standard library tools will still be distributed by `rustup` for this target. However, with less testing than it had at Tier 1, it has more chance of accumulating bugs in the future.
+
 Check out everything that changed in [Rust](https://github.com/rust-lang/rust/releases/tag/1.88.0), [Cargo](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-188-2025-06-26), and [Clippy](https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-188).
 
 ## Contributors to 1.88.0
