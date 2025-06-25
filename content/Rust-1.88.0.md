@@ -49,11 +49,13 @@ if let Channel::Stable(v) = release_info()
 ```
 
 Let chains are only available in the Rust 2024 edition, as this feature depends on the [`if let` temporary scope](https://doc.rust-lang.org/edition-guide/rust-2024/temporary-if-let-scope.html) change for more consistent drop order.
+
 Earlier efforts tried to work with all editions, but some difficult edge cases threatened the integrity of the implementation. 2024 made it feasible, so please upgrade your crate's edition if you'd like to use this feature!
 
 ### Naked functions
 
 Rust now supports writing naked functions with no compiler-generated epilogue and prologue, allowing full control over the generated assembly for a particular function. This is a more ergonomic alternative to defining functions in a `global_asm!` block. A naked function is marked with the `#[unsafe(naked)]` attribute, and its body consists of a single `naked_asm!` call.
+
 For example:
 
 ```rust
