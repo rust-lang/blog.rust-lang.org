@@ -22,16 +22,6 @@ If you'd like to help us out by testing future releases, you might consider upda
 
 ## What's in 1.88.0 stable
 
-### Cargo automatic cache cleaning
-
-Starting in 1.88.0, Cargo will automatically run garbage collection on the cache in its home directory!
-
-When building, Cargo downloads and caches crates needed as dependencies. Historically, these downloaded files would never be cleaned up, leading to an unbounded amount of disk usage in Cargo's home directory. In this version, Cargo introduces a garbage collection mechanism to automatically clean up old files (e.g. `.crate` files). Cargo will remove files downloaded from the network if not accessed in 3 months, and files obtained from the local system if not accessed in 1 month. Note that this automatic garbage collection will not take place if running offline (using `--offline` or `--frozen`).
-
-Cargo 1.78 and newer track the access information needed for this garbage collection. This was introduced well before the actual cleanup that's starting now, in order to reduce cache churn for those that still use prior versions. If you regularly use versions of Cargo even older than 1.78, in addition to running current versions of Cargo, and you expect to have some crates accessed exclusively by the older versions of Cargo and don't want to re-download those crates every ~3 months, you may wish to set `cache.auto-clean-frequency = "never"` in the Cargo configuration, as described in the [docs](https://doc.rust-lang.org/nightly/cargo/reference/config.html#cache).
-
-For more information, see the original [unstable announcement](https://blog.rust-lang.org/2023/12/11/cargo-cache-cleaning/) of this feature. Some parts of that design remain unstable, like the `gc` subcommand tracked in [cargo#13060](https://github.com/rust-lang/cargo/issues/13060), so there's still more to look forward to!
-
 ### Let chains
 
 This feature allows `&&`-chaining `let` statements inside `if` and `while` conditions, even intermingling with boolean expressions, so there is less distinction between `if`/`if let` and `while`/`while let`. The patterns inside the `let` sub-expressions can be irrefutable or refutable, and bindings are usable in later parts of the chain as well as the body.
@@ -80,6 +70,16 @@ The `cfg` predicate language now supports boolean literals, `true` and `false`, 
 If you are familiar with set theory, you might already be using empty sets like `cfg(all())` for enabled and `cfg(any())` for disabled, but this meaning is rather implicit and easy to get backwards. `cfg(true)` and `cfg(false)` offer a more direct way to say what you mean.
 
 See [RFC 3695](https://rust-lang.github.io/rfcs/3695-cfg-boolean-literals.html) for more background!
+
+### Cargo automatic cache cleaning
+
+Starting in 1.88.0, Cargo will automatically run garbage collection on the cache in its home directory!
+
+When building, Cargo downloads and caches crates needed as dependencies. Historically, these downloaded files would never be cleaned up, leading to an unbounded amount of disk usage in Cargo's home directory. In this version, Cargo introduces a garbage collection mechanism to automatically clean up old files (e.g. `.crate` files). Cargo will remove files downloaded from the network if not accessed in 3 months, and files obtained from the local system if not accessed in 1 month. Note that this automatic garbage collection will not take place if running offline (using `--offline` or `--frozen`).
+
+Cargo 1.78 and newer track the access information needed for this garbage collection. This was introduced well before the actual cleanup that's starting now, in order to reduce cache churn for those that still use prior versions. If you regularly use versions of Cargo even older than 1.78, in addition to running current versions of Cargo, and you expect to have some crates accessed exclusively by the older versions of Cargo and don't want to re-download those crates every ~3 months, you may wish to set `cache.auto-clean-frequency = "never"` in the Cargo configuration, as described in the [docs](https://doc.rust-lang.org/nightly/cargo/reference/config.html#cache).
+
+For more information, see the original [unstable announcement](https://blog.rust-lang.org/2023/12/11/cargo-cache-cleaning/) of this feature. Some parts of that design remain unstable, like the `gc` subcommand tracked in [cargo#13060](https://github.com/rust-lang/cargo/issues/13060), so there's still more to look forward to!
 
 ### Stabilized APIs
 
