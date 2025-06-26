@@ -53,7 +53,7 @@ For example:
 pub unsafe extern "sysv64" fn wrapping_add(a: u64, b: u64) -> u64 {
     // Equivalent to `a.wrapping_add(b)`.
     core::arch::naked_asm!(
-        "add rax, rdi, rsi",
+        "lea rax, [rdi + rsi]",
         "ret"
     );
 }
