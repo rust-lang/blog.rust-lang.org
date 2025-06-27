@@ -522,7 +522,29 @@ We should now be correctly deferring evaluation of type system constants making 
 
 
 <details>
-<summary>No detailed updates available.</summary>
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+<a href="https://github.com/rust-lang/rust-project-goals/issues/274#issuecomment-2988870822">Comment by @wesleywiser posted on 2025-06-19:</a><br>
+
+<blockquote>
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+- @adamgemmell and @davidtwco hosted a session on build-std at the All Hands with members from various teams discussing some of the design questions.
+- We've continued our biweekly sync call with lang, compiler and cargo team members.
+- @davidtwco and @adamgemmell have been hard at work preparing a compendium detailing the history of build-std and the wg-cargo-std-aware repo.
+  - Reviewing and editing this document is ongoing and a continuing topic of discussion for the sync call.
+- In the last sync call, we discussed:
+  - Renewing the project goal for another cycle: enthusiastic agreement from many participants.
+  - Posting updates to the project goal page biweekly after each sync call.
+  - Discussion on the content and format of the compendium. Most of the content appears to be done but further editing and restructuring will make it clearer and more easily digestible.
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+</blockquote>
+
+<summary>1 detailed update available.</summary>
 </details>
 
 
