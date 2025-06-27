@@ -113,7 +113,9 @@ I've invited the authors of the paper (Alexis Engelke, Tobias Schwarz and Tobias
 
 Right now, stable Rust doesn't allow building the standard library for your project. This has been desired in many different contexts: using tier-3 targets (for which Rust doesn't ship a standard library), optimising it for a particular architecture (useful in embedded), patching things in and out, changing its configuration and so on.
 
-It is of particular interest to the Rust for Linux effort, too.
+It is of particular interest to the [Rust for Linux effort][rfl], too.
+
+[rfl]: https://rust-for-linux.com/
 
 The list of use cases is almost as long as the number of RFCs that tried to solve this over the years.
 
@@ -121,9 +123,7 @@ This year, the Project has committed to building the standard library as as [one
 
 [buildstd-goal]: https://rust-lang.github.io/rust-project-goals/2025h1/build-std.html
 
-I've caught up on what what happened so far, join the meetnings the build-std folks have with team representatives.
-
-I've explained the need to update the tracking issues as well, clarified the teams' expectations if we propose a new goal for the second half of 2025 and hopefully started a relationship that will make it easier for us all to communicate going forward.
+I've caught up on what what happened so far and started attending the build-std meetings. A lot of good work was already underway, but I've explained the need to update the tracking issues, clarified the teams' expectations if we propose a new goal for the second half of 2025 and hopefully started a relationship that will make it easier for us all to communicate going forward.
 
 ### Retpoline flags PR
 
@@ -181,7 +181,7 @@ The May update is here:
 
 <https://blog.rust-lang.org/2025/06/20/may-project-goals-update/>
 
-This is one of those things I'll be happy to mostly take over.
+This is one of those things I'll be happy to mostly (or completely) take over.
 
 ### This Post
 
