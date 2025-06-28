@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/2025-leadership-council-survey"
+path = "inside-rust/2025/06/30/2025-leadership-council-survey"
 title = "2025 Leadership Council Survey"
 authors = ["Leadership Council"]
 
@@ -30,5 +30,5 @@ This survey is anonymous. The Council will go through all answers and release a
 summary after the survey is complete, similar to the one published
 [last year](https://blog.rust-lang.org/2024/08/26/council-survey/).
 
-Please fill out the survey [here](TODO). It will be open for 3 weeks, closing
+Please fill out the survey [here](https://www.surveyhero.com/c/rust-leadership-council-2025). It will be open for 3 weeks, closing
 on 2025-07-21.
