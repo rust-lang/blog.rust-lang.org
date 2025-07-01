@@ -16,7 +16,7 @@ I feel grateful for having been brought on &mdash; I started at the beginning of
 
 ## Why a Rust program manager?
 
-The June 2025 [Council update] summarizes well why the Project hired this for role:
+The June 2025 [Council update] summarizes well why the Project hired for this role:
 
 > We've seen a lot of returns from good Project-directed program management. In support of this valuable work — so that we can do more with it while making it more sustainable — we allocated funds to the Edition and Goals teams to hire a program manager. [...] Going forward, we're expecting this work to help us and our teams across the Project better manage the many ongoing initiatives that are of importance to us.
 
