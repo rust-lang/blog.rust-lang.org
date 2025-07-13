@@ -17,7 +17,7 @@ future.
 Some crates provide comprehensive APIs with a very large surface area, yet many
 of their users need only a few entry points. In such cases, the compiler
 currently spends time generating code for the entire crate, and then ends up
-throwing most of that code away.
+throwing most of that code away as unused.
 
 This can waste a substantial amount of compile time. Some large crates can take
 minutes to compile, and when you use these large crates as dependencies, they
