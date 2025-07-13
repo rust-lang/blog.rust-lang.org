@@ -46,6 +46,9 @@ especially for release builds.
 
 ## How does this perform?
 
+Some build timings for clean release builds of a crate depending on various
+specific large API crates:
+
 | **Dependency Crate** | **Before** | **`hint-mostly-unused`** | **Delta** |
 | :- | -: | -: | -: |
 | `windows`, all Graphics/UI features | 18.3s | 10.7s | -42% |
@@ -63,6 +66,9 @@ every crate. Using it for crates whose API surface is mostly used, and/or used
 in multiple different crates or binaries (e.g. multiple test binaries that each
 test a substantial swath of the API), may result in redoing code generation for
 the same items repeatedly.
+
+Also note that this only provides a performance win if you are rebuilding the
+dependency. If you're only rebuilding the top-level crate, this won't help.
 
 ## Plumbing this through Cargo with profiles
 
