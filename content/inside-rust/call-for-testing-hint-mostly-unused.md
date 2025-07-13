@@ -71,6 +71,10 @@ substantial swath of the API). Always do performance analysis when considering
 this hint, and only apply it if it applies obvious and substantial wins for
 your users.
 
+If most of the items in your crate are polymorphic (generic), this hint may be
+redundant, as Rust already defers compilation of polymorphic items until they
+get monomorphized with specific types.
+
 Also note that this only provides a performance win if you are rebuilding the
 dependency. If you're only rebuilding the top-level crate, this won't help.
 
