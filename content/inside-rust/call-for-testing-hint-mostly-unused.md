@@ -70,9 +70,11 @@ every crate; if used when not applicable, this option can make builds much
 code generation for those items repeatedly. In particular, avoid using this
 hint for crates whose API surface is mostly used, and/or used in multiple
 different crates or binaries (e.g. multiple test binaries that each test a
-substantial swath of the API). Always do performance analysis when considering
-this hint, and only apply it if it applies obvious and substantial wins for
-your users.
+substantial swath of the API).
+
+Always do performance analysis when considering this hint, and only apply it if
+it applies obvious and substantial wins for your users. Never apply it across
+the board to all your dependencies.
 
 If most of the items in your crate are polymorphic (generic), this hint may be
 redundant, as Rust already defers compilation of polymorphic items until they
