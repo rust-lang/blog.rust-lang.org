@@ -157,9 +157,30 @@ your crate, with and without this hint set, using nightly Cargo:
 noticeable performance improvement, consider setting it in your published
 crate.
 
+If you're building atop a crate that you only use a small fraction of, you can
+try setting the profile option in your own crate:
+
+```toml
+[profile.dev.package.huge-mostly-unused-dependency]
+hint-mostly-unused = true
+
+[profile.release.package.huge-mostly-unused-dependency]
+hint-mostly-unused = true
+```
+
 Please report any performance improvements, or unexpected performance issues,
 or *especially* any failures you observe, to the [tracking issue for
 profile-hint-mostly-unused](https://github.com/rust-lang/cargo/issues/15644).
+When reporting, please tell us:
+- What hints or profile settings you added
+- What crates you added them to
+- What top-level crate you're building
+- What features you set when building
+- What build profile you're using (e.g. the default dev profile, or the release
+  profile)
+- Whether you did a clean build or an incremental rebuild
+- What performance numbers you got with and without the option you added
+
 We'll take this feedback into account to fix any issues with either the rustc
 compiler feature or the Cargo features, and to evaluate when those features
 have seen enough testing to be ready to stabilize.
