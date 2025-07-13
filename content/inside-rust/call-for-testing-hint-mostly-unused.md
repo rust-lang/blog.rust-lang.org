@@ -62,10 +62,14 @@ instance, the `windows` crate in the first example goes from building in 15.1s
 of which 49% is codegen, to building in 7.5s of which 1% is codegen.
 
 Note that this option does not provide a universal performance improvement for
-every crate. Using it for crates whose API surface is mostly used, and/or used
-in multiple different crates or binaries (e.g. multiple test binaries that each
-test a substantial swath of the API), may result in redoing code generation for
-the same items repeatedly.
+every crate; if used when not applicable, this option can make builds much
+*slower*. Deferring compilation of the items in a crate can lead to redoing
+code generation for those items repeatedly. In particular, avoid using this
+hint for crates whose API surface is mostly used, and/or used in multiple
+different crates or binaries (e.g. multiple test binaries that each test a
+substantial swath of the API). Always do performance analysis when considering
+this hint, and only apply it if it applies obvious and substantial wins for
+your users.
 
 Also note that this only provides a performance win if you are rebuilding the
 dependency. If you're only rebuilding the top-level crate, this won't help.
