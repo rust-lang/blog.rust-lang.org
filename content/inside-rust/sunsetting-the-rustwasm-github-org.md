@@ -21,7 +21,7 @@ archiving the organization is going to happen September 2025.
 
 The [rustwasm] organization has historically been under the purview of the Rust
 and WebAssembly Working Group, and given the historical prominence of some
-projects it contained this post is serving as an announcement of upcoming plans
+projects it contained, this post is serving as an announcement of upcoming plans
 for repositories in the organization.
 
 [archive]: https://github.com/rust-lang/team/pull/1489
@@ -125,5 +125,5 @@ such.
 [`wasm-bindgen`]: https://github.com/rustwasm/wasm-bindgen
 [`wasm-pack`]: https://github.com/rustwasm/wasm-pack
 [@alexcrichton]: https://github.com/alexcrichton
-[wasm-bindgen-help]: TODO
+[wasm-bindgen-help]: https://github.com/rustwasm/wasm-bindgen/issues/4533
 
