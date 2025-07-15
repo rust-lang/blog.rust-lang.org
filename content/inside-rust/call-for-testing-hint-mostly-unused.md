@@ -15,12 +15,12 @@ future.
 ## Background
 
 When building a Rust library crate, the compiler generates compiled code for as
-much of the crate as it can (everything that isn't generic and isn't inlined),
-which gets linked into later crates into the dependency graph. However, some
-crates provide comprehensive APIs with a very large surface area, yet many of
-their users need only a few entry points. In such cases, the compiler currently
-spends time generating code for the entire crate, and the linker then ends up
-throwing most of that code away as unused.
+much of the crate as it can (everything that isn't generic and isn't marked as
+`#[inline]`), which gets linked into later crates into the dependency graph.
+However, some crates provide comprehensive APIs with a very large surface area,
+yet many of their users need only a few entry points. In such cases, the
+compiler currently spends time generating code for the entire crate, and the
+linker then ends up throwing most of that code away as unused.
 
 This can waste a substantial amount of compile time. Some large crates can take
 minutes to compile, and when you use these large crates as dependencies, they
