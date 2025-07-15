@@ -80,7 +80,7 @@ If most of the items in your crate are polymorphic (generic), this hint may be
 redundant, as Rust already defers compilation of polymorphic items until they
 get monomorphized with specific types.
 
-Also note that this only provides a performance win if you are rebuilding the
+Also note that this only provides a performance win if you are building the
 dependency. If you're only rebuilding the top-level crate, this won't help.
 
 ## Plumbing this through Cargo with profiles
