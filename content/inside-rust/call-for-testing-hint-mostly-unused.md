@@ -67,14 +67,14 @@ of which 49% is codegen, to building in 7.5s of which 1% is codegen.
 Note that this option does not provide a universal performance improvement for
 every crate; if used when not applicable, this option can make builds much
 *slower*. Deferring compilation of the items in a crate can lead to redoing
-code generation for those items repeatedly. In particular, avoid using this
-hint for crates whose API surface is mostly used, and/or used in multiple
-different crates or binaries (e.g. multiple test binaries that each test a
-substantial swath of the API).
+code generation for those items repeatedly. In particular, this hint will
+probably regress compile time if applied to crates whose API surface is mostly
+used, and/or used in multiple different crates or binaries (e.g. multiple test
+binaries that each test a substantial swath of the API).
 
 Always do performance analysis when considering this hint, and only apply it if
-it applies obvious and substantial wins for your users. Never apply it across
-the board to all your dependencies.
+it applies obvious and substantial wins for your users. Applying it across the
+board to all your dependencies will likely regress compilation time.
 
 If most of the items in your crate are polymorphic (generic), this hint may be
 redundant, as Rust already defers compilation of polymorphic items until they
