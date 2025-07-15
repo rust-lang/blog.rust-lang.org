@@ -7,8 +7,8 @@ authors = ["Josh Triplett"]
 I'm pleased to announce, and call for testing of, the nightly-only `rustc`
 `-Zhint-mostly-unused` option, and the corresponding nightly Cargo features
 `profile.hint-mostly-unused` and `hints.mostly-unused`. These options can help
-accelerate your Rust compile time in some cases, by avoiding compilation of
-items from your dependencies that you aren't using. Your feedback will help
+accelerate your Rust compile time in some cases, by avoiding code generation
+for items from your dependencies that you aren't using. Your feedback will help
 evaluate these features and make progress towards stabilizing them in the
 future.
 
