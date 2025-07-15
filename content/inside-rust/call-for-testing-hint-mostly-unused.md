@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2025/07/14/call-for-testing-hint-mostly-unused"
+path = "inside-rust/2025/07/15/call-for-testing-hint-mostly-unused"
 title = "Call for Testing: Speeding up compilation with `hint-mostly-unused`"
 authors = ["Josh Triplett"]
 +++
