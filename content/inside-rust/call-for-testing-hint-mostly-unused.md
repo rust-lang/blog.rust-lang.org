@@ -151,7 +151,7 @@ allow the top-level crate to override.
 
 ## How do I help?
 
-We'd love for you to test out this feature on the latest Rust nightly compiler[^nightly].
+We'd love for you to test out this feature on the latest nightly Rust and Cargo (2025-07-16 or newer)[^nightly].
 
 [^nightly]: Make sure to run `rustup update nightly` (or however you manage your Rust releases).
 
