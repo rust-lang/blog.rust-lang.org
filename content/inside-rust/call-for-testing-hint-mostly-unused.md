@@ -45,7 +45,12 @@ possible.
 
 Applying this option to key crates you depend on (and use only a small subset
 of) can provide a substantial reduction in compile time, for debug builds and
-especially for release builds.
+especially for release builds. The remainder of this post shows how to apply
+this option selectively using Cargo, when to use it, and how it performs.
+
+(Note that this option should *not* be applied to all crates, e.g. using
+`RUSTFLAGS`. See the rest of this post for guidance on when to apply it, and
+why it shouldn't be applied across the board.)
 
 ## How does this perform?
 
