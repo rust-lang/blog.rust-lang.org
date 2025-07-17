@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2025/07/21/sunsetting-the-rustwasm-github-org"
+path = "inside-rust/2025/07/18/sunsetting-the-rustwasm-github-org"
 title = "Sunsetting the rustwasm GitHub org"
 authors = ["Alex Crichton"]
 aliases = []
