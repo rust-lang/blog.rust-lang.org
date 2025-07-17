@@ -87,6 +87,13 @@ The current plan at this time is to archive all other repositories in the
 * https://github.com/rustwasm/weedle
 * (see https://github.com/orgs/rustwasm/repositories for the full list)
 
+> **Note**: wasm-bindgen depends on crates such as `walrus` and `weedle` at this
+> time and won't depend on archived repositories. Depending on how maintainers
+> would like to organize it these dependencies may be inlined into the
+> wasm-bindgen repository for wasm-bindgen's needs or they may be transferred to
+> the new wasm-bindgen organization. Regardless wasm-bindgen will not be using
+> unmaintained dependencies.
+
 If you are an preexisting maintainer of one of these repositories please reach
 out to have the repository transferred to you. Otherwise it's not clear at this
 time whether these repositories are still actively in use or how much they're
