@@ -32,7 +32,7 @@ June meeting highlights include:
   strategy for 2026-28.
 - The Foundation secured continued funding from [Alpha-Omega](https://alpha-omega.dev/) and the
   [Sovereign Tech Agency](https://www.sovereign.tech/), but general economic uncertainty has caused
-  some Silver members to choose not to renew,. The Foundation is always looking for
+  some Silver members to choose not to renew. The Foundation is always looking for
   [more member companies](https://rustfoundation.org/get-involved/)!
 - The Board voted to approve an increase in the Platinum Member fees from $300,000/year to $325,000/year.
 
