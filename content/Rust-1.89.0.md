@@ -36,9 +36,11 @@ Similar to the rules for when `_` is permitted as a type, `_` is not permitted a
 
 ```rust
 // This is not allowed
-pub fn make_bitset<const LEN: usize>() -> [bool; _] {
+pub const fn make_bitset<const LEN: usize>() -> [bool; _] {
   [false; LEN]
 }
+// Neither is this
+pub const MY_BITSET: [bool; _] = make_bitset::<10>();
 ```
 
 ### Mismatched lifetimes syntax lint
