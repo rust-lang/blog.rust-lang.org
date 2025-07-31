@@ -10,25 +10,25 @@ team_url = "https://www.rust-lang.org/governance/teams/"
 
 Welcome to the second Rust PM update!
 
-Things were a bit busy in the personal life. We had to temporarily move to a smaller apartment which was quite time-consuming and energy-draining. And after that, I took a week off and we spent it in the mountains.
+Things were a bit busy in personal life. We had to temporarily move to a smaller apartment which was quite time-consuming and energy-draining. And after that, I took a week off and we spent it in the mountains.
 
-So things were a bit slower in July. In addition to meetings, what clearly dominated was the Project Goals work.
+So things were slower in July. What dominated was the Project Goals work.
 
 ## Wrapping up 2025 H1 goals
 
 As we entered the second half of the year, it was time to wrap up the current Project Goals and get the new ones going. In the spirit of helping people focus on other things, I took this over.
 
-First, I've sent a couple requests for goal updates. This lead me to noticing and fixing an issue with the triagebot. See [the `ping-goals` section](#ping-goals-retry-issue).
+First, I've sent a couple requests for goal updates. This lead me to noticing and filing an issue with the triagebot. More details in the [`ping-goals` retry section](#ping-goals-retry-issue).
 
 After people provided their final messages, I've published the final 2025H1 Project Goals update:
 
-https://example.com/july-project-goals-update/
+https://github.com/rust-lang/blog.rust-lang.org/pull/1667
 
-(**TODO** write and publish the July final goal update)
+(**TODO** change the link to the published blog if it's merged in time)
 
 With that done, I've closed most of the tracking issues. Some goals are being renewed for the H2 period so we're keeping those open.
 
-(**TODO**: again, make sure we've actually closed the issues before publishing the blog.)
+(**TODO**: again, make sure we've actually closed the issues before publishing this post.)
 
 ## Starting 2025 H2 goals
 
@@ -36,11 +36,11 @@ With all of that out of the way, Niko published the [call for 2025 H2 goal propo
 
 [2025H2CFP]: /inside-rust/2025/06/23/project-goals-2025h2-call-for-submissions/
 
-Based on the feedback we've received, we've made some changes:
+Based on the feedback we've received, we've made some changes in this period:
 
 * We're getting the proposals in front of the Teams and their leads earlier (well before the final RFC is written) so they are aware and have input into what's being proposed.
 * We're asking them to suggest what they'd like to see as a flagship goal before the final selection is made.
-* For each proposed goal, we've asked each team with asks mentioned in the goal to select a "champion" who commits to making sure the goal is not blocked by that team.
+* For each proposed goal, we've requsted each team with asks mentioned in the goal to select a "champion" who commits to making sure the goal is not blocked by that team.
 
 Once all the champions are selected, we'll meet with the team leads, go over the goals and figure out which ones we want to accept.
 
@@ -51,16 +51,47 @@ As the goals were being proposed, Niko, Rémy and I looked at the PRs, fixed any
 
 For each team, I've opened a call for champions Zulip thread listing goals that requested their support. [Here's an example for the Lang team](https://rust-lang.zulipchat.com/#narrow/channel/213817-t-lang/topic/2025H2.20Goal.20Review).
 
-As with any new process, people had questions. I was there to help clarify we're asking for, the overall plan and next steps. When there were specific questions for a goal, I made sure to connect the right people.
+As with any new process, people had questions. I was there to help clarify what we're asking for, the overall plan and next steps. When there were specific questions for a goal, I made sure to connect the right people.
 
-### Rust for Linux
+## Verification and Secure Mirroring for crates.io
 
-Continuing the Rust for Linux effort, I'll be the point of contact for the two goals they're proposed ([compiler][rfl-compiler] and [language][rfl-lang] features for getting Rust for Linux into stable Rust).
+We now have a detailed update on the crates.io code signing program and its status.
+
+Quick summary:
+
+* We've settled on using TAP-16 Merkle Tree implementation of [TUF (The Update Framework)][tuf] for crates.io.
+* We've settled on maintaining a top-level quorum but removing immediate levels for simplicity.
+* We've reached a consensus with the Infrastructure team for deployment planning.
+* A public MVP implementation is coming Soon™ (by the end of August).
+* We will test various optimizations to settle on something that works for our tooling (Rustup, releases, crates.io, update, signing etc.).
+* Role keys will live in KMS (Key Management Service).
+
+Open Questions and Next Steps:
+
+* Which specific optimizations will fit our needs.
+* How to implement the Merkle tree to reduce round-trips.
+* Stand up infrastructure to host this.
+
+
+For more details, read this [goal update for more details](https://github.com/rust-lang/rust-project-goals/issues/271#issuecomment-3133590786) and/or reach out to @walterhpearce.
+
+One of the things on my radar is to start publishing more frequent and detailed updates. I've joined the signing meetings to be more aware of what's happening.
+
+[tuf]: https://theupdateframework.io/
+
+## Rust for Linux
+
+I took over running the Rust for Linux effort from the Rust Project side.
+
+I helped Miguel propose two 2025 H2 goals ([compiler][rfl-compiler] and [language][rfl-lang] features for getting Rust for Linux into stable Rust) and should they be accepted I will be the point of contact for them.
 
 [rfl-compiler]: https://rust-lang.github.io/rust-project-goals/2025h2/Rust-for-Linux-compiler.html
 [rfl-lang]: https://rust-lang.github.io/rust-project-goals/2025h2/Rust-for-Linux-language.html
 
-I will set up the agenda, run the meetings and keep the tracking issues up-to-date.
+I took over running the meetings, preparing the agenda, and making sure the tracking issues are up-to-date and bringing any requests or concerns to the relevant Project teams or people.
+
+This let Niko disengage from the program completely.
+
 
 ## Misc
 
@@ -68,120 +99,85 @@ I will set up the agenda, run the meetings and keep the tracking issues up-to-da
 
 The request for updates is done by the `ping-goals` command of the @triagebot. This returned an error ("Failed to await at this time: connection closed before message completed"), but did actually ping everyone.
 
-Multiple time, in fact:
+[Multiple times][goals-spam], in fact.
 
-https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Prepare.20const.20traits.20for.20stabilization.20.28goals.23106.29
+[goals-spam]: https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Prepare.20const.20traits.20for.20stabilization.20.28goals.23106.29
 
-As you can see in the thread, this wasn't a new behavior either. Precisely the sort of thing I can and should look for improving:
+As you can see in the thread, this wasn't a new behavior either. Precisely the sort of paper cut I care about improving for everyone:
 
-https://github.com/rust-lang/triagebot/issues/2108
+<https://github.com/rust-lang/triagebot/issues/2108>
 
-Urgau https://github.com/Urgau looked into it and found out this is because rustbot was sending the pings one-by-one and taking some time to finish.
+[Urgau][urgau] looked into it and found out this is because rustbot was sending the pings one-by-one and taking some time to finish.
+
+[urgau]: https://github.com/Urgau
 
 Zulip interpreted this as a timeout and retried the requests a few times.
 
-Here's the fix he opened: https://github.com/rust-lang/triagebot/pull/2109.
+[Here's the fix he opened][ping-goals-fix]. 
+
+[ping-goals-fix]: https://github.com/rust-lang/triagebot/pull/2109
 
 Thank you Urgau!
 
 ### Leadership Council Minutes
 
-Having taken over the minutes for the Leadership Council meetings in June, I've now closed the loop by cleaning them up and publishing them in [the leadership-council repository][leadership-council-minutes].
+Having taken over the minutes for the Leadership Council meetings in June, I've now closed the loop by making them more readable and publishing them in [the leadership-council repository][leadership-council-minutes].
 
 [leadership-council-minutes]: https://github.com/rust-lang/leadership-council/tree/main/minutes/sync-meeting
 
-### Meeting Minutes Upload
+## Fun Stats
 
-uploaded all the other project meeting notes I took (where relevant) TODO
+I've collected a few numbers to show some of the regular work that's happening.
 
+Total words of meeting minutes written: 92.6k (June + July). That's more than [the novel I'm currently reading][bjones]!
 
-## Stats
+[bjones]: https://en.wikipedia.org/wiki/Bridget_Jones%27s_Diary_(novel)
 
-meetings attended:
+### The current month (July 2025)
 
-word count for minutes
+Meetings attended: 24
 
-note the dubiousness of these stats and that they're not a target metric.
+Total words written: 51.5k
 
-NOTE: count total minuted words. (note: includes people names but I did type those too):
+Average (mean) word count per team meeting:
+* Cargo: 1.6k
+* Lang triage: 2.2k
+* Libs: 4.7k
+* Leadership council: 2.9k
 
-	$ grep --no-filename '^\w\+: ' -r . | wc --words -
-77269
+In contrast, this is the week when I was away:
+* Cargo: 600
+* Lang triage: 604
+* Libs: 705
 
-WHOA: that's almost the length of a novel! (what am I doing with my life‽)
+### The previous month (June 2025)
 
+Meetings attended: 39
 
-## NOTE: July stats
+Total words written: 41.1k
 
-* cargo
-  * 2025-07-29: 1531
-  * 2025-07-22: 1335
-  * 2025-07-15: 600 (I was absent then)
-  * 2025-07-08: 1919
-  * 2025-07-01: 1616
-* lang triage:
-  * 2025-07-02: 2023
-  * 2025-07-09: 2815
-* libs (api and mcp)
-  * 2025-07-01: 5774
-  * 2025-07-08: 5783
-  * 2025-07-15: 705
-  * 2025-07-22: 4981
-* spec
-* leadership council
-  * 2025-07-04: 1792
-  * 2025-07-18: 2228
-* total across the board
-$ grep --no-filename '^\w\+: ' -r 2025-07-* | wc --words -
-42680
+Average word count:
+* cargo: 1.3k
+* Lang triage: 1.8k
+* Libs: 3.9k
+* Leadership council: 1.9k
 
+### May 2025
 
-### NOTE: June stats
+I wasn't here in May so these can serve as a comparison.
 
+Meetings attended: 0
 
+Average word count:
+* cargo: 857
+* Lang triage: 1.4k
+* Libs: 1.3k
+* Leadership council: 1.5k
 
-* cargo
-  * 2025-06-24: 1316
-  * 2025-06-17: 1362
-  * 2025-06-10: 1470
-  * 2025-06-03: 925
-* lang
-  * 2025-06-04: 1717
-  * 2025-06-11: 2251
-  * 2025-06-18: 2028
-  * 2025-06-25: 1597
-* libs (api and mcp)
-  * 2025-06-10: 5098
-  * 2025-06-03: 4412
-* spec
-* leadership council
-  * 2025-06-20: 1787
-  * 2025-06-06: 2073
-* total across the board
-$ grep --no-filename '^\w\+: ' -r 2025-06-* | wc --words -
-34589
+### Caveat emptor
 
-### For comparison, some May stats
+More words doesn't necessarily mean better and there are other aspects that affect this: number of people in the meeting, how much discussion a topic needs, etc. And this is not a target I or anyone else is holding me to.
 
-* cargo
-  * 2025-05-27: 786
-  * 2025-05-20: 891
-  * 2025-05-13: 0 (skipped for RustWeek)
-  * 2025-05-06: 936
-  * 2025-04-29: 816
-* lang triage
-  * 2025-05-21: 990
-  * 2025-05-07: 3145
-  * 2025-04-30: 1000
-  * 2025-04-23: 507
-* libs (api and mcp)
-  * 2025-05-27: 1341
-* spec
-* leadership council
-  * 2025-05-23: 1263
-  * 2025-05-09: 1344
-  * 2025-04-25: 2023
-  * 2025-04-11: 1256
+But it is kind of interesting to see.
 
-
-TODO: pick up some small wins? (publish meeting notes, reach out to folks)
+If you have an idea for any more useful things to track, please let me know!
