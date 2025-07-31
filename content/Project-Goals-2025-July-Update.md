@@ -141,8 +141,8 @@ I'm excited by the lineup of goals we have for this next cycle. See you on the o
 
 **What has happened?**
 
-* [@Ding](https://github.com/dingxiangfei2009) opened a [PR#142518](https://github.com/rust-lang/rust/pull/142518) that implements the [in-place initialization experiment](https://github.com/rust-lang/lang-team/issues/336).
-* @Ding is working on an experimental implementation ([PR#143527](https://github.com/rust-lang/rust/pull/143527)) for `arbitrary_self_types`.
+* [Ding](https://github.com/dingxiangfei2009) opened a [PR#142518](https://github.com/rust-lang/rust/pull/142518) that implements the [in-place initialization experiment](https://github.com/rust-lang/lang-team/issues/336).
+* Ding is working on an experimental implementation ([PR#143527](https://github.com/rust-lang/rust/pull/143527)) for `arbitrary_self_types`.
 * Ding opened a PR to Clang (a C frontend for LLVM): [Queries on GCC-style inline assembly statements](https://github.com/llvm/llvm-project/pull/143424) and got it merged.
 * [@ojeda](https://github.com/ojeda) opened two Rust for Linux goals for the next period:
     * <https://github.com/rust-lang/rust-project-goals/pull/347>
@@ -604,8 +604,7 @@ Current status:
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
 Current status:
-- @joshtriplett authored RFCs for both [attribute macros](https://github.com/rust-lang/rfcs/pull/3697) and [derive macros](https://github.com/rust-lang/rfcs/pull/3698).
-- After some further iteration with the lang team, both RFCs were accepted and merged.
+- @joshtriplett authored RFCs for both [attribute macros](https://github.com/rust-lang/rfcs/pull/3697) and [derive macros](https://github.com/rust-lang/rfcs/pull/3698). Both were accepted and merged.
 - @joshtriplett, @eholk, and @vincenzopalazzo did some successful group-spelunking into the implementation of macros in rustc.
 - @joshtriplett [rewrote the `macro_rules!` parser](https://github.com/rust-lang/rust/pull/143070/), which enabled future extensibility *and* resulted in better error messages. This then enabled several follow-up refactors and simplifications.
 - @joshtriplett wrote a PR implementing attribute macros (review in progress).
@@ -755,18 +754,18 @@ The last update for this project-goal period! I have continued to work on the gp
 
 **Key developments:**
 
-1) My memory-movement PR got reviewed and after a few iterations landed in nightly. That means you can now don't even have to build your own rustc to move data to and from a GPU (with the limitations mentioned in my previous post). As part of my PR, I also updated the rustc-dev-guide: https://rustc-dev-guide.rust-lang.org/offload/installation.html
+1) My memory-movement PR got reviewed and after a few iterations landed in nightly. That means you now don't even have to build your own rustc to move data to and from a GPU (with the limitations mentioned in my previous post). As part of my PR, I also updated the rustc-dev-guide: <https://rustc-dev-guide.rust-lang.org/offload/installation.html>.
 
-2) Now that the host (CPU) code landed, I looked into compiling rust kernels to GPUs. When experimenting with the amdgcn target for rustc I noticed a regression, due to which all examples for that target failed. I submitted a small patch to fix it. It landed a few days ago, and prevents rustc from generating f128 types on AMD GPUs: https://github.com/rust-lang/rust/pull/144383
+2) Now that the host (CPU) code landed, I looked into compiling rust kernels to GPUs. When experimenting with the amdgcn target for rustc I noticed a regression, due to which all examples for that target failed. I submitted a small patch to fix it. It landed a few days ago, and prevents rustc from generating f128 types on AMD GPUs: <https://github.com/rust-lang/rust/pull/144383>.
 
-3) I looked into HIP and OpenMP (managed/kernel-mode) examples to see what's needed to launch the kernels. I should already have most of the code upstream, since it landed as part of my host PR, so I think I should soon be able to add the remaining glue code to start running Rust code on GPUs. https://github.com/rust-lang/rust/pull/142696.
+3) I looked into HIP and OpenMP (managed/kernel-mode) examples to see what's needed to launch the kernels. I should already have most of the code upstream, since it landed as part of my host PR, so I think I should soon be able to add the remaining glue code to start running Rust code on GPUs. <https://github.com/rust-lang/rust/pull/142696>.
 
-4) The main PR of @KMJ-007 is up, to start generating typetrees for Enzyme, the backend of our std::autodiff module. Enzyme sometimes wants more information about a type than it can get from LLVM, so it either needs to deduce it (slow), or it will fail to compile (bad). In the future we hope to lower MIR information to Enzyme, and this is the first step for it. I just submitted the first round of reviews: https://github.com/rust-lang/rust/pull/142640
+4) The main PR of @KMJ-007 is up, to start generating typetrees for Enzyme, the backend of our std::autodiff module. Enzyme sometimes wants more information about a type than it can get from LLVM, so it either needs to deduce it (slow), or it will fail to compile (bad). In the future we hope to lower MIR information to Enzyme, and this is the first step for it. I just submitted the first round of reviews: <https://github.com/rust-lang/rust/pull/142640>
 
 5) The main PR of @Sa4dUs is up, it replaces my historically grown middle-end with a proper rustc-autodiff-intrinsic. This allows us to remove a few hacks and thus makes it easier to maintain. It will also handle more corner-cases, and reduces the amount of autodiff related code in rustc by ~400 lines. I also gave it a first review pass.
 
 
-I also submitted an updated project-goal to finish the `std::offload` module, to the point where we can write an interesting amount of kernels in pure (nightly) Rust and launch them to GPUs. All new project goals are supposed to have "champions" from the teams they are related to, which in the case of my autodiff/batching/offload work would be t-compiler and t-lang (see Niko's blog post for more details). Since I joined the compiler team a while ago I can now champion for it myself on the compiler side, and @traviscross volunteered to continue the support on the language side, thank you!
+I also submitted an updated project-goal to finish the `std::offload` module, to the point where we can write an interesting amount of kernels in pure (nightly) Rust and launch them to GPUs. All new project goals are supposed to have "champions" from the teams they are related to, which in the case of my autodiff/batching/offload work would be t-compiler and t-lang (see [Niko's blog post for more details](/inside-rust/2025/06/23/project-goals-2025h2-call-for-submissions/)). Since I joined the compiler team a while ago I can now champion for it myself on the compiler side, and @traviscross volunteered to continue the support on the language side, thank you!
 
 
 <!-- markdown separator -->
@@ -1285,9 +1284,9 @@ Key developments: https://github.com/rust-lang/rust/issues/143352 proposes an ex
 
 **Final monthly update!**
 
-- Even more optimizations have been achieved on the documentation lints front. https://github.com/rust-lang/rust-clippy/pull/15030. (-6.7% on `bumpalo`).
+- Even more optimizations have been achieved on the documentation lints front. <https://github.com/rust-lang/rust-clippy/pull/15030> (-6.7% on `bumpalo`).
 
-- The 3rd heaviest function was optimized away by 99.75%, along with the [`strlen_on_c_strings`](https://rust-lang.github.io/rust-clippy/master/index.html#strlen_on_c_strings) lint. This gives us about a 15% optimization on `tokio`. https://github.com/rust-lang/rust-clippy/pull/15043
+- The 3rd heaviest function was optimized away by 99.75%, along with the [`strlen_on_c_strings`](https://rust-lang.github.io/rust-clippy/master/index.html#strlen_on_c_strings) lint. This gives us about a 15% optimization on `tokio`. <https://github.com/rust-lang/rust-clippy/pull/15043>.
 
 - As a minor improvement, we now instantiate a lot less types on `unit_return_expecting_ord` (89% less calls in some benchmarks). This saves us a lot of locks on the type interner.
 
@@ -1494,7 +1493,7 @@ Key developments:
 
 Key Developments: **Goal Complete.** 
 
-The FLS is now an independent repository within the Rust Project, not relying on imported Ferrocene packages for building (we have brought them in locally). A version of the FLS has been published at https://rust-lang.github.io/fls using the new build process. The content changes were mostly non-normative at this point, but we have officially published the first rust-lang owned release of the FLS.
+The FLS is now an independent repository within the Rust Project, not relying on imported Ferrocene packages for building (we have brought them in locally). A version of the FLS has been published at <https://rust-lang.github.io/fls> using the new build process. The content changes were mostly non-normative at this point, but we have officially published the first rust-lang owned release of the FLS.
 
 Next steps: Continue adding/modifying appropriate content for the FLS moving forward. Determine any potential H2 2025 spec-related project goals.
 
@@ -1537,9 +1536,10 @@ Next steps: Continue adding/modifying appropriate content for the FLS moving for
 <!-- markdown separator -->
 
 
-We're almost done with the refactoring thanks again to @makai410 who is part of the GSoC. We are now considering renaming the crate before publishing, if you have any suggestion, please post it in https://rust-lang.zulipchat.com/#narrow/channel/320896-project-stable-mir/topic/Renaming.20StableMIR/with/520505712.
 
-Finally, we're designing the test and release automation.
+We're almost done with the refactoring thanks again to @makai410 who is part of the GSoC.
+
+The `stable_mir` crate is now `rustc_public`. We are now finalizing the infrastructure and working on a compiler MCP. We should be ready to publish version 0.1 in the second half of the year. Thanks to everyone who helped, especially @makai410, who did most of the work.
 
 
 <!-- markdown separator -->
@@ -1558,10 +1558,9 @@ Finally, we're designing the test and release automation.
 <blockquote>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
+We're almost done with the refactoring thanks again to @makai410 who is part of the GSoC. We are now considering renaming the crate before publishing, if you have any suggestion, please post it in https://rust-lang.zulipchat.com/#narrow/channel/320896-project-stable-mir/topic/Renaming.20StableMIR/with/520505712.
 
-We're almost done with the refactoring thanks again to @makai410 who is part of the GSoC.
-
-The `stable_mir` crate is now `rustc_public`. We are now finalizing the infrastructure and working on a compiler MCP. We should be ready to publish version 0.1 in the second half of the year. Thanks to everyone who helped, especially @makai410, who did most of the work.
+Finally, we're designing the test and release automation.
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -1652,9 +1651,9 @@ The `stable_mir` crate is now `rustc_public`. We are now finalizing the infrastr
 We made further progress on the new benchmarking scheme. The side of the website is nearing MVP status, currently we are switching focus on the side of the collector tha truns the benchmarks.
 
 Some notable PRs:
-- Benchmark request queue for try builds and release artifacts (https://github.com/rust-lang/rustc-perf/pull/2166, https://github.com/rust-lang/rustc-perf/pull/2192, https://github.com/rust-lang/rustc-perf/pull/2197, https://github.com/rust-lang/rustc-perf/pull/2201).
-- Splitting of benchmark requests into benchmark jobs, including backfilling (https://github.com/rust-lang/rustc-perf/pull/2207).
-- Benchmark sets (https://github.com/rust-lang/rustc-perf/pull/2206).
+- Benchmark request queue for try builds and release artifacts (<https://github.com/rust-lang/rustc-perf/pull/2166>, <https://github.com/rust-lang/rustc-perf/pull/2192>, <https://github.com/rust-lang/rustc-perf/pull/2197>, <https://github.com/rust-lang/rustc-perf/pull/2201>).
+- Splitting of benchmark requests into benchmark jobs, including backfilling (<https://github.com/rust-lang/rustc-perf/pull/2207>).
+- Benchmark sets (<https://github.com/rust-lang/rustc-perf/pull/2206>).
 
 
 <!-- markdown separator -->
