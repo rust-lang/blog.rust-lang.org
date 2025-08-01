@@ -81,16 +81,33 @@ One of the things on my radar is to start publishing more frequent and detailed 
 
 ## Rust for Linux
 
-I took over running the Rust for Linux effort from the Rust Project side. Miguel will continue to be the point of contact on the Linux side.
+[Rust for Linux][rfl] is an ongoing effort (started in 2020) to add support for Rust to the Linux kernel. This will let you write kernel drivers in a memory safe language, with hopefully fewer bugs and nicer tooling. And empower people outside of the traditional low-level C background to write kernel code.
 
-I helped Miguel propose two 2025 H2 goals ([compiler][rfl-compiler] and [language][rfl-lang] features for getting Rust for Linux into stable Rust) and should they be accepted I will be the point of contact for them.
+[rfl]: https://rust-for-linux.com/
+
+The project currently has to rely on unsafe Rust. This makes it less appealing for companies and individuals as unstable features can by definition change or even be removed. We want there to be minimal (ideally zero) churn on Rust code that's been accepted to the kernel.
+
+There's been an ongoing collaboration with the Rust Project to get the language, compiler and tooling to a point where it can be completely compiled on stable Rust.
+
+[This was one of the Flagship goals in the first half of 2025][rflh1].
+
+
+[rflh1]: https://rust-lang.github.io/rust-project-goals/2025h1/rfl.html
+
+This effort requires close collaboration with the Lang and Compiler teams and someone who can bridge the gap between the two projects. Until now, that was done by Niko Matsakis.
+
+One of the hopes of the PM role was to be able to step in and bring the communication between efforts like these closer and free up the Project members' time.
+
+I am now running the meetings, preparing the agenda, and making sure the tracking issues are up-to-date and bringing any requests or concerns to the relevant Project teams or people.
+
+Miguel Ojeda will continue to be the point of contact on the Linux side.
+
+I helped Miguel propose two 2025 H2 goals ([compiler][rfl-compiler] and [language][rfl-lang] features for getting Rust for Linux into stable Rust) and should they be accepted I will be the Point of contact for them.
 
 [rfl-compiler]: https://rust-lang.github.io/rust-project-goals/2025h2/Rust-for-Linux-compiler.html
 [rfl-lang]: https://rust-lang.github.io/rust-project-goals/2025h2/Rust-for-Linux-language.html
 
-I took over running the meetings, preparing the agenda, and making sure the tracking issues are up-to-date and bringing any requests or concerns to the relevant Project teams or people.
-
-This let Niko disengage from the program completely.
+This lets Niko disengage from the program completely and focus on the many other things he's doing across the Project.
 
 
 ## Misc
