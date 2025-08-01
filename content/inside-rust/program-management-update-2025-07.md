@@ -121,7 +121,19 @@ Thank you Urgau!
 
 ### Leadership Council Minutes
 
-Having taken over the minutes for the Leadership Council meetings in June, I've now closed the loop by making them more readable and publishing them in [the leadership-council repository][leadership-council-minutes].
+The [Leadership Council][council] is a team charged with the success of the Project as a whole. They're composed of members of the top-level Rust teams.
+
+The Council meets every two weeks and after each meeting they publish minutes to [the leadership-council repository][leadership-council-minutes].
+
+This makes them accountable to the teams they represent and transparent to the Project and the community as a whole. It also helps show if they're missing anything important to the teams who can then bring it to the Council's attention.
+
+As with every other meeting, when an active participant has to take minutes, this results in diminishing their attention to the topic as well as the quality of their notes (most people can't speak or fully consider what other people said and write at the same time).
+
+And similarly, going through the minutes, making them legible and publishing them takes additional effort and attention. When these things pile up, they can even lead to burning out.
+
+Having taken over the minutes for the Leadership Council meetings in June, I've now closed the loop by taking over the clean-up and publishing as well.
+
+[council]: https://www.rust-lang.org/governance/teams/leadership-council
 
 [leadership-council-minutes]: https://github.com/rust-lang/leadership-council/tree/main/minutes/sync-meeting
 
