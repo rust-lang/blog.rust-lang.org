@@ -146,7 +146,7 @@ I'm excited by the lineup of goals we have for this next cycle. See you on the o
 * Ding opened a PR to Clang (a C frontend for LLVM): [Queries on GCC-style inline assembly statements](https://github.com/llvm/llvm-project/pull/143424) and got it merged.
 * [@ojeda](https://github.com/ojeda) opened two Rust for Linux goals for the next period:
     * <https://github.com/rust-lang/rust-project-goals/pull/347>
-	* <https://github.com/rust-lang/rust-project-goals/pull/346>
+    * <https://github.com/rust-lang/rust-project-goals/pull/346>
 
 <!-- markdown separator -->
 
@@ -185,7 +185,7 @@ We've discussed whether this needs to be a separate target feature vs. a modifie
 
 Ultimately, this is a compiler question and should be resolved here: https://github.com/rust-lang/rust/pull/140740
 
-Note: `-Cmin-function-alignment` will be another similar case.
+The team was asked to submit an [MCP (Major Change Proposal)](https://forge.rust-lang.org/compiler/proposals-and-stabilization.html#how-do-i-submit-an-mcp) for `-Cmin-function-alignment` will be another similar case. @ojeda opened it here: <https://github.com/rust-lang/compiler-team/issues/899>, @davidtwco seconded it and it's in the Final Comment Period (FCP) now.
 
 ## Stabilizing `AddressSanitizer` and `LeakSanitizer`:
 
