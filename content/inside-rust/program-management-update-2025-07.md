@@ -81,7 +81,7 @@ One of the things on my radar is to start publishing more frequent and detailed 
 
 ## Rust for Linux
 
-I took over running the Rust for Linux effort from the Rust Project side.
+I took over running the Rust for Linux effort from the Rust Project side. Miguel will continue to be the point of contact on the Linux side.
 
 I helped Miguel propose two 2025 H2 goals ([compiler][rfl-compiler] and [language][rfl-lang] features for getting Rust for Linux into stable Rust) and should they be accepted I will be the point of contact for them.
 
