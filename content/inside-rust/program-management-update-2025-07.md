@@ -89,10 +89,12 @@ The project currently has to rely on unstable Rust. This makes it less appealing
 
 There's been an ongoing collaboration with the Rust Project to get the language, compiler and tooling to a point where it can be completely compiled on stable Rust.
 
-[This was one of the Flagship goals in the first half of 2025][rflh1].
+Rust for Linux was a Flagship goal the [second half of 2024][rfl2024h2] as well as the [first half of 2025][rfl2025h1].
+
+[rfl2024h2]: https://github.com/rust-lang/rust-project-goals/blob/main/src/2024h2/rfl_stable.md
 
 
-[rflh1]: https://rust-lang.github.io/rust-project-goals/2025h1/rfl.html
+[rfl2025h1]: https://rust-lang.github.io/rust-project-goals/2025h1/rfl.html
 
 This effort requires close collaboration with the Lang and Compiler teams, among others, and contact points on both sides to bridge the gap between the two projects. Until now, that was done by Niko Matsakis et al. on the Rust side and Miguel Ojeda et al. on the Rust for Linux side.
 
