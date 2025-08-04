@@ -94,7 +94,7 @@ There's been an ongoing collaboration with the Rust Project to get the language,
 
 [rflh1]: https://rust-lang.github.io/rust-project-goals/2025h1/rfl.html
 
-This effort requires close collaboration with the Lang and Compiler teams and someone who can bridge the gap between the two projects. Until now, that was done by Niko Matsakis.
+This effort requires close collaboration with the Lang and Compiler teams, among others, and contact points on both sides to bridge the gap between the two projects. Until now, that was done by Niko Matsakis et al. on the Rust side and Miguel Ojeda et al. on the Rust for Linux side.
 
 One of the hopes of the PM role was to be able to step in and bring the communication between efforts like these closer and free up the Project members' time.
 
