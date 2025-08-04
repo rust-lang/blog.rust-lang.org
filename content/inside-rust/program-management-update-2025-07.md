@@ -85,7 +85,7 @@ One of the things on my radar is to start publishing more frequent and detailed 
 
 [rfl]: https://rust-for-linux.com/
 
-The project currently has to rely on unsafe Rust. This makes it less appealing for companies and individuals as unstable features can by definition change or even be removed. We want there to be minimal (ideally zero) churn on Rust code that's been accepted to the kernel.
+The project currently has to rely on unstable Rust. This makes it less appealing for companies and individuals as unstable features can by definition change or even be removed. We want there to be minimal (ideally zero) churn on Rust code that's been accepted to the kernel.
 
 There's been an ongoing collaboration with the Rust Project to get the language, compiler and tooling to a point where it can be completely compiled on stable Rust.
 
