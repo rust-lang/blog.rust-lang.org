@@ -112,16 +112,11 @@ I'm excited by the lineup of goals we have for this next cycle. See you on the o
 
 **Why this goal?** May 15, 2025 marks the 10-year anniversary of Rust's 1.0 release; it also marks 10 years since the [creation of the Rust subteams](https://internals.rust-lang.org/t/announcing-the-subteams/2042). At the time [there were 6 Rust teams with 24 people in total](http://web.archive.org/web/20150517235608/http://www.rust-lang.org/team.html). There are now 57 teams with 166 people. In-person All Hands meetings are an effective way to help these maintainers get to know one another with high-bandwidth discussions. This year, the Rust project will be coming together for [RustWeek 2025](https://2025.rustweek.org), a joint event organized with [RustNL](https://2025.rustweek.org/about/). Participating project teams will use the time to share knowledge, make plans, or just get to know one another better. One particular goal for the All Hands is reviewing a draft of the [Rust Vision Doc](./rust-vision-doc.md), a document that aims to take stock of where Rust is and lay out high-level goals for the next few years.
 
-**What has happened?**
 
 <!-- markdown separator -->
 
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
-
-<details>
-<summary>No detailed updates available.</summary>
-</details>
 
 
 
@@ -883,9 +878,6 @@ Even after the issue is closed, the work here *can* be picked up -- we'll just n
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-<details>
-<summary>No detailed updates available.</summary>
-</details>
 
 
 <div style="display: flex;" class="mt2 mb3">
@@ -996,9 +988,6 @@ Chiming in for @epage here since further progress is still blocked on the compil
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-<details>
-<summary>No detailed updates available.</summary>
-</details>
 
 
 <div style="display: flex;" class="mt2 mb3">
@@ -1015,9 +1004,6 @@ Chiming in for @epage here since further progress is still blocked on the compil
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-<details>
-<summary>No detailed updates available.</summary>
-</details>
 
 
 <div style="display: flex;" class="mt2 mb3">
@@ -1084,9 +1070,6 @@ Unfortunately, we didn't make much progress since April except for a very useful
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-<details>
-<summary>No detailed updates available.</summary>
-</details>
 
 
 <div style="display: flex;" class="mt2 mb3">
@@ -1138,9 +1121,6 @@ No update for this month beyond the previous finalish update. I still intend to 
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-<details>
-<summary>No detailed updates available.</summary>
-</details>
 
 
 <div style="display: flex;" class="mt2 mb3">
@@ -1598,9 +1578,6 @@ The `stable_mir` crate is now `rustc_public`. We are now finalizing the infrastr
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-<details>
-<summary>No detailed updates available.</summary>
-</details>
 
 
 <div style="display: flex;" class="mt2 mb3">
@@ -1617,9 +1594,6 @@ The `stable_mir` crate is now `rustc_public`. We are now finalizing the infrastr
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-<details>
-<summary>No detailed updates available.</summary>
-</details>
 
 
 <div style="display: flex;" class="mt2 mb3">
@@ -1636,9 +1610,6 @@ The `stable_mir` crate is now `rustc_public`. We are now finalizing the infrastr
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-<details>
-<summary>No detailed updates available.</summary>
-</details>
 
 
 <div style="display: flex;" class="mt2 mb3">
@@ -1958,9 +1929,6 @@ Next Steps
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-<details>
-<summary>No detailed updates available.</summary>
-</details>
 
 
 <div style="display: flex;" class="mt2 mb3">
