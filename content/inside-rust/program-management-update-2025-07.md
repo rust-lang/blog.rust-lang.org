@@ -81,7 +81,7 @@ One of the things on my radar is to start publishing more frequent and detailed 
 
 ## Rust for Linux
 
-[Rust for Linux][rfl] is an ongoing effort (started in 2020) to add support for Rust to the Linux kernel. This will let you write kernel drivers in a memory safe language, with hopefully fewer bugs and nicer tooling. And empower people outside of the traditional low-level C background to write kernel code.
+[Rust for Linux][rfl] is an ongoing effort (started in 2020) to add support for Rust to the Linux kernel. The project allows to write kernel code, such as drivers and other modules, in a memory safe language, with hopefully fewer bugs and nicer tooling. In addition, [one of its goals](https://lore.kernel.org/lkml/20210414184604.23473-1-ojeda@kernel.org/) it to allow more people get involved overall in developing the kernel thanks to the usage of a modern language.
 
 [rfl]: https://rust-for-linux.com/
 
