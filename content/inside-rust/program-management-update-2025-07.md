@@ -53,29 +53,44 @@ For each team, I've opened a call for champions Zulip thread listing goals that 
 
 As with any new process, people had questions. I was there to help clarify what we're asking for, the overall plan and next steps. When there were specific questions for a goal, I made sure to connect the right people.
 
-## Verification and Secure Mirroring for crates.io
+## Secure quorum-based cryptographic verification and mirroring for crates.io
 
-We now have a detailed update on the crates.io code signing program and its status.
+In 2021, the Rust Foundation created the [Security Initiative][sec-initiative]. Their focus is on improving the security of the Rust ecosystem by building security tools, conducting audits and threat models and developing security expertise.
 
-Quick summary:
+[sec-initiative]: https://rustfoundation.org/security-initiative/
 
-* We've settled on using TAP-16 Merkle Tree implementation of [TUF (The Update Framework)][tuf] for crates.io.
-* We've settled on maintaining a top-level quorum but removing immediate levels for simplicity.
-* We've reached a consensus with the Infrastructure team for deployment planning.
-* A public MVP implementation is coming Soon™ (by the end of August).
-* We will test various optimizations to settle on something that works for our tooling (Rustup, releases, crates.io, update, signing etc.).
+At the beginning of the year, they opened a goal to provide [crates.io verification and mirroring][crates-io-mirroring]:
+
+> Rustaceans need to be able to download crates and know that they're getting the crate files that were published to crates.io without modification. Rustaceans everywhere should be able to use local mirrors of crates.io, such as geographically distributed mirrors or mirrors within infrastructure (e.g. CI) that they're using.
+
+[crates-io-mirroring]: https://rust-lang.github.io/rust-project-goals/2025h1/verification-and-mirroring.html
+
+There's a good analog to this with Linux packaging (e.g. apt or dnf): when you install a package (or upgrade your system), your computer will rarely talk directly to the main package registry.
+
+It's far more likely that it will reach a mirror hosted by a university, scientific institution, your ISP or in the case of CI, its provider. This lets people install their packages more quickly while saving on the upstream bandwidth and other costs.
+
+You can do all this today, with a crucial difference: how do you know that the host (or someone in-between) didn't tamper with the code? How do you know you're getting the exact same bits as if you were to reach crates.io directly?
+
+That's broadly what the goal is about and it involved investigations of the signing algorithms, key rotations, CI integration, releases, logging and much more. And all of this must meet the scale and performance requirements of crates.io.
+
+Walter Pearce and Josh Triplett did most of the work (investigation, experimentation, looking into what other package managers are doing) and talked to Cargo, Infra, Release, Bootstrap and crates.io representatives.
+
+Last week, [Walter posted a final update on the goal's tracking issue](https://github.com/rust-lang/rust-project-goals/issues/271#issuecomment-3133590786).
+
+The goal owners along with the team representatives agreed on the following to build an experimental MVP implementation:
+
+* Use TAP-16 Merkle Tree implementation of [TUF (The Update Framework)][tuf] for crates.io.
+* Maintain a top-level quorum but removing immediate levels for simplicity.
+* Reached a consensus with the Infrastructure team for deployment planning.
 * Role keys will live in KMS (Key Management Service).
 
-Open Questions and Next Steps:
+They plan for the MVP to be ready by the end of August and they'll use it to test various optimizations to make sure it works for our tooling (rustup, releases, crates.io, update, signing etc.).
 
-* Which specific optimizations will fit our needs.
-* How to implement the Merkle tree to reduce round-trips.
-* Stand up infrastructure to host this.
+This will answer some of the open questions (which specific optimizations will fit our needs, how to implement the Merkle tree to reduce round-trips and details on hosting infrastructure) and provide enough information to write the RFC and make this fully supported and available.
 
+These discussions and decisions happened in meetings and there was little public communication to the rest of the Project. One of my goals is to start publishing more frequent and detailed updates on this and similar initiatives.
 
-For more details, read this [goal update for more details](https://github.com/rust-lang/rust-project-goals/issues/271#issuecomment-3133590786) and/or reach out to @walterhpearce.
-
-One of the things on my radar is to start publishing more frequent and detailed updates. I've joined the signing meetings to be more aware of what's happening.
+I've joined the signing meetings to be more aware of what's happening within this initiative.
 
 [tuf]: https://theupdateframework.io/
 
