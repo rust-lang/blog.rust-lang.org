@@ -182,7 +182,7 @@ It seems that `-Cmin-function-alignment` will be another similar case.
 
 Ultimately, this is a compiler question and should be resolved here: <https://github.com/rust-lang/rust/pull/140740>
 
-The team was asked to submit an [MCP (Major Change Proposal)](https://forge.rust-lang.org/compiler/proposals-and-stabilization.html#how-do-i-submit-an-mcp) for `-Zindirect-branch-cs-prefix`. @ojeda opened it here: <https://github.com/rust-lang/compiler-team/issues/899> and it's now been accepted.
+The Rust for Linux team [was asked](https://github.com/rust-lang/rust/pull/140740#issuecomment-3050376762) to submit a new [MCP (Major Change Proposal)](https://forge.rust-lang.org/compiler/proposals-and-stabilization.html#how-do-i-submit-an-mcp) for the `-Zindirect-branch-cs-prefix` flag. @ojeda opened it here: <https://github.com/rust-lang/compiler-team/issues/899> and it's now been accepted.
 
 ## Stabilizing `AddressSanitizer` and `LeakSanitizer`:
 
