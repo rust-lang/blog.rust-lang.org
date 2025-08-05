@@ -1,14 +1,14 @@
 +++
-path = "9999/12/31/july-project-goals-update"
-title = "July Project Goals Update"
+path = "2025/08/05/july-project-goals-update"
+title = "Project goals update — July 2025"
 authors = ["Tomas Sedovic"]
 
 [extra]
-team = "the Goals team"
+team = "the Goals Team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-goals"
 +++
 
-The Rust project is currently working towards a [slate of 40 project goals](https://rust-lang.github.io/rust-project-goals/2025h1/goals.html), with 3 of them designated as [Flagship Goals](https://rust-lang.github.io/rust-project-goals/2025h1/goals.html#flagship-goals). This post provides selected updates on our progress towards these goals (or, in some cases, lack thereof). The full details for any particular goal are available in its associated [tracking issue on the rust-project-goals repository](https://github.com/rust-lang/rust-project-goals/issues?q=is%3Aissue%20state%3Aopen%20label%3AC-tracking-issue).
+The Rust Project is currently working towards a [slate of 40 project goals](https://rust-lang.github.io/rust-project-goals/2025h1/goals.html), with 3 of them designated as [flagship goals](https://rust-lang.github.io/rust-project-goals/2025h1/goals.html#flagship-goals). This post provides selected updates on our progress towards these goals (or, in some cases, lack thereof). The full details for any particular goal are available in its associated [tracking issue on the rust-project-goals repository](https://github.com/rust-lang/rust-project-goals/issues?q=is%3Aissue%20state%3Aopen%20label%3AC-tracking-issue).
 
 This is the final update for the first half of 2025. We're in the process of selecting goals for the second half of the year.
 
@@ -110,7 +110,7 @@ I'm excited by the lineup of goals we have for this next cycle. See you on the o
 </div>
 <!-- markdown separator -->
 
-**Why this goal?** May 15, 2025 marks the 10-year anniversary of Rust's 1.0 release; it also marks 10 years since the [creation of the Rust subteams](https://internals.rust-lang.org/t/announcing-the-subteams/2042). At the time [there were 6 Rust teams with 24 people in total](http://web.archive.org/web/20150517235608/http://www.rust-lang.org/team.html). There are now 57 teams with 166 people. In-person All Hands meetings are an effective way to help these maintainers get to know one another with high-bandwidth discussions. This year, the Rust project will be coming together for [RustWeek 2025](https://2025.rustweek.org), a joint event organized with [RustNL](https://2025.rustweek.org/about/). Participating project teams will use the time to share knowledge, make plans, or just get to know one another better. One particular goal for the All Hands is reviewing a draft of the [Rust Vision Doc](./rust-vision-doc.md), a document that aims to take stock of where Rust is and lay out high-level goals for the next few years.
+**Why this goal?** May 15, 2025 marks the 10-year anniversary of Rust's 1.0 release; it also marks 10 years since the [creation of the Rust subteams](https://internals.rust-lang.org/t/announcing-the-subteams/2042). At the time [there were 6 Rust teams with 24 people in total](http://web.archive.org/web/20150517235608/http://www.rust-lang.org/team.html). There are now 57 teams with 166 people. In-person All Hands meetings are an effective way to help these maintainers get to know one another with high-bandwidth discussions. This year, the Rust Project will be coming together for [RustWeek 2025](https://2025.rustweek.org), a joint event organized with [RustNL](https://2025.rustweek.org/about/). Participating project teams will use the time to share knowledge, make plans, or just get to know one another better. One particular goal for the All Hands is reviewing a draft of the [Rust Vision Doc](./rust-vision-doc.md), a document that aims to take stock of where Rust is and lay out high-level goals for the next few years.
 
 
 <!-- markdown separator -->
@@ -641,7 +641,7 @@ This project goals cycle was important for C++ interop. With the language team w
 
 One thing I think we can say with certainty is that interop is a vast problem space, and that any two groups who want interop are very likely to have different specific needs. I'm excited about the project goal proposal by @baumanj to begin [mapping this problem space](https://rust-lang.github.io/rust-project-goals/2025h2/interop-problem-map.html) out in the open, so that as we refer to problems we can better understand where our needs overlap and diverge.
 
-Despite the diversity of needs, we've noticed that there is quite a bit of overlap when it comes to language evolution. This includes many features requested by Rust for Linux, a flagship customer of the Rust project. In retrospect, this is not surprising: Rust for Linux needs fine-grained interop with C APIs, which is roughly a subset of the needs for interop with C++ APIs. Often the need runs deeper than interop, and is more about supporting patterns in Rust that existing systems languages already support as a first-class feature.
+Despite the diversity of needs, we've noticed that there is quite a bit of overlap when it comes to language evolution. This includes many features requested by Rust for Linux, a flagship customer of the Rust Project. In retrospect, this is not surprising: Rust for Linux needs fine-grained interop with C APIs, which is roughly a subset of the needs for interop with C++ APIs. Often the need runs deeper than interop, and is more about supporting patterns in Rust that existing systems languages already support as a first-class feature.
 
 I'm looking forward to tackling areas where we can "extend the fundamentals" of Rust in a way that makes these, and other use cases, possible. This includes H2 project goal proposals like [pin ergonomics](https://rust-lang.github.io/rust-project-goals/2025h2/pin-ergonomics.html), [reborrowing](https://rust-lang.github.io/rust-project-goals/2025h2/autoreborrow-traits.html), [field projections](https://rust-lang.github.io/rust-project-goals/2025h2/field-projections.html), and [in-place initialization](https://rust-lang.github.io/rust-project-goals/2025h2/in-place-initialization.html).
 
@@ -690,7 +690,7 @@ This project goals cycle was important for C++ interop. With the language team w
 
 One thing I think we can say with certainty is that interop is a vast problem space, and that any two groups who want interop are very likely to have different specific needs. I'm excited about the project goal proposal by @baumanj to begin [mapping this problem space](https://rust-lang.github.io/rust-project-goals/2025h2/interop-problem-map.html) out in the open, so that as we refer to problems we can better understand where our needs overlap and diverge.
 
-Despite the diversity of needs, we've noticed that there is quite a bit of overlap when it comes to language evolution. This includes many features requested by Rust for Linux, a flagship customer of the Rust project. In retrospect, this is not surprising: Rust for Linux needs fine-grained interop with C APIs, which is roughly a subset of the needs for interop with C++ APIs. Often the need runs deeper than interop, and is more about supporting patterns in Rust that existing systems languages already support as a first-class feature.
+Despite the diversity of needs, we've noticed that there is quite a bit of overlap when it comes to language evolution. This includes many features requested by Rust for Linux, a flagship customer of the Rust Project. In retrospect, this is not surprising: Rust for Linux needs fine-grained interop with C APIs, which is roughly a subset of the needs for interop with C++ APIs. Often the need runs deeper than interop, and is more about supporting patterns in Rust that existing systems languages already support as a first-class feature.
 
 I'm looking forward to tackling areas where we can "extend the fundamentals" of Rust in a way that makes these, and other use cases, possible. This includes H2 project goal proposals like [pin ergonomics](https://rust-lang.github.io/rust-project-goals/2025h2/pin-ergonomics.html), [reborrowing](https://rust-lang.github.io/rust-project-goals/2025h2/autoreborrow-traits.html), [field projections](https://rust-lang.github.io/rust-project-goals/2025h2/field-projections.html), and [in-place initialization](https://rust-lang.github.io/rust-project-goals/2025h2/in-place-initialization.html).
 
@@ -1470,10 +1470,10 @@ Key developments:
     <div style="flex: initial;"><img src="https://img.shields.io/badge/Status-Completed%20%3D%29-green" alt="Status: Completed!"></img>
 </div>
 </div>
-<!-- markdown separator --> 
+<!-- markdown separator -->
 
 
-Key Developments: **Goal Complete.** 
+Key Developments: **Goal Complete.**
 
 The FLS is now an independent repository within the Rust Project, not relying on imported Ferrocene packages for building (we have brought them in locally). A version of the FLS has been published at <https://rust-lang.github.io/fls> using the new build process. The content changes were mostly non-normative at this point, but we have officially published the first rust-lang owned release of the FLS.
 
