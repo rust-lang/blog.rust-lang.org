@@ -170,17 +170,19 @@ Ding is working on an experimental implementation ([PR#143527](https://github.co
 
 ## Queries on GCC-style inline assembly statements:
 
-Ding opened a PR to Clang (a C frontend for LLVM): https://github.com/llvm/llvm-project/pull/143424 and got it merged.
+Ding opened a PR to Clang (a C frontend for LLVM): <https://github.com/llvm/llvm-project/pull/143424> and got it merged.
 
-This is part of the LLVM/Clang issues the Rust for Linux project needs: https://github.com/Rust-for-Linux/linux/issues/1132.
+This is part of the LLVM/Clang issues the Rust for Linux project needs: <https://github.com/Rust-for-Linux/linux/issues/1132>.
 
 ## `-Zindirect-branch-cs-prefix`:
 
 We've discussed whether this needs to be a separate target feature vs. a modifier on the existing `retpoline` one. Josh argued that since having this enabled without retpoline doesn't make sense, it should be a modifier. On the other hand, Miguel mentioned that it would be clearer on the user's side (easier to map the names from GCC and Clang to `rustc` when they're the same and see that we're enabling the same thing in Rust and Linux kernel's `Makefiles`).
 
-Ultimately, this is a compiler question and should be resolved here: https://github.com/rust-lang/rust/pull/140740
+It seems that `-Cmin-function-alignment` will be another similar case.
 
-The team was asked to submit an [MCP (Major Change Proposal)](https://forge.rust-lang.org/compiler/proposals-and-stabilization.html#how-do-i-submit-an-mcp) for `-Cmin-function-alignment` will be another similar case. @ojeda opened it here: <https://github.com/rust-lang/compiler-team/issues/899>, @davidtwco seconded it and it's in the Final Comment Period (FCP) now.
+Ultimately, this is a compiler question and should be resolved here: <https://github.com/rust-lang/rust/pull/140740>
+
+The team was asked to submit an [MCP (Major Change Proposal)](https://forge.rust-lang.org/compiler/proposals-and-stabilization.html#how-do-i-submit-an-mcp) for `-Zindirect-branch-cs-prefix`. @ojeda opened it here: <https://github.com/rust-lang/compiler-team/issues/899> and it's now been accepted.
 
 ## Stabilizing `AddressSanitizer` and `LeakSanitizer`:
 
