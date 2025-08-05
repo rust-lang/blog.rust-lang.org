@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/program-management-update-2025-07"
+path = "inside-rust/2025/08/05/program-management-update-2025-07"
 title = "Program management update — July 2025"
 authors = ["Tomas Sedovic"]
 
@@ -18,17 +18,13 @@ So things were slower in July. What dominated was the Project Goals work.
 
 As we entered the second half of the year, it was time to wrap up the current Project Goals and get the new ones going. In the spirit of helping people focus on other things, I took this over.
 
-First, I've sent a couple requests for goal updates. This lead me to noticing and filing an issue with the triagebot. More details in the [`ping-goals` retry section](#ping-goals-retry-issue).
+First, I've sent a couple requests for goal updates. This lead me to noticing and filing an issue with triagebot. More details in the [`ping-goals` retry section](#ping-goals-retry-issue).
 
 After people provided their final messages, I've published the final 2025H1 Project Goals update:
 
-https://github.com/rust-lang/blog.rust-lang.org/pull/1667
-
-(**TODO** change the link to the published blog if it's merged in time)
+<https://blog.rust-lang.org/2025/08/05/july-project-goals-update/>
 
 With that done, I've closed most of the tracking issues. Some goals are being renewed for the H2 period so we're keeping those open.
-
-(**TODO**: again, make sure we've actually closed the issues before publishing this post.)
 
 ## Starting 2025 H2 goals
 
@@ -38,24 +34,23 @@ With all of that out of the way, Niko published the [call for 2025 H2 goal propo
 
 Based on the feedback we've received, we've made some changes in this period:
 
-* We're getting the proposals in front of the Teams and their leads earlier (well before the final RFC is written) so they are aware and have input into what's being proposed.
+* We're getting the proposals in front of the teams and their leads earlier (well before the final RFC is written) so they are aware and have input into what's being proposed.
 * We're asking them to suggest what they'd like to see as a flagship goal before the final selection is made.
-* For each proposed goal, we've requsted each team with asks mentioned in the goal to select a "champion" who commits to making sure the goal is not blocked by that team.
+* For each proposed goal, we've requested each team with asks mentioned in the goal to select a "champion" who commits to making sure the goal is not blocked by that team.
 
 Once all the champions are selected, we'll meet with the team leads, go over the goals and figure out which ones we want to accept.
 
 Similarly, we'll take their input regarding flagship goals.
 
+As the goals were being proposed, Niko, Rémy, and I looked at the PRs, fixed any CI issues, and merged them.
 
-As the goals were being proposed, Niko, Rémy and I looked at the PRs, fixed any CI issues and merged them.
+For each team, I've opened a "call for champions" Zulip thread listing the goals that requested their support. [Here's an example for the Lang team](https://rust-lang.zulipchat.com/#narrow/channel/213817-t-lang/topic/2025H2.20Goal.20Review).
 
-For each team, I've opened a call for champions Zulip thread listing goals that requested their support. [Here's an example for the Lang team](https://rust-lang.zulipchat.com/#narrow/channel/213817-t-lang/topic/2025H2.20Goal.20Review).
-
-As with any new process, people had questions. I was there to help clarify what we're asking for, the overall plan and next steps. When there were specific questions for a goal, I made sure to connect the right people.
+As with any new process, people had questions. I was there to help clarify what we're asking for, the overall plan, and next steps. When there were specific questions for a goal, I made sure to connect the right people.
 
 ## Secure quorum-based cryptographic verification and mirroring for crates.io
 
-In 2021, the Rust Foundation created the [Security Initiative][sec-initiative]. Their focus is on improving the security of the Rust ecosystem by building security tools, conducting audits and threat models and developing security expertise.
+In 2021, the Rust Foundation created the [Security Initiative][sec-initiative]. Their focus is on improving the security of the Rust ecosystem by building security tools, conducting audits, creating threat models, and developing security expertise.
 
 [sec-initiative]: https://rustfoundation.org/security-initiative/
 
@@ -65,30 +60,27 @@ At the beginning of the year, they opened a goal to provide [crates.io verificat
 
 [crates-io-mirroring]: https://rust-lang.github.io/rust-project-goals/2025h1/verification-and-mirroring.html
 
-There's a good analog to this with Linux packaging (e.g. apt or dnf): when you install a package (or upgrade your system), your computer will rarely talk directly to the main package registry.
+There's a good analog to this with Linux packaging (e.g. apt or dnf): when you install a package (or upgrade your system), your computer will rarely talk directly to the main package registry. It's far more likely that it will reach a mirror hosted by a university, scientific institution, your ISP, or, in the case of CI, its provider. This lets people install their packages more quickly while saving on the upstream bandwidth and other costs.
 
-It's far more likely that it will reach a mirror hosted by a university, scientific institution, your ISP or in the case of CI, its provider. This lets people install their packages more quickly while saving on the upstream bandwidth and other costs.
+You can do all this today with a crucial difference: how do you know that the host (or someone in-between) didn't tamper with the code? How do you know you're getting the exact same bits as if you were to reach crates.io directly?
 
-You can do all this today, with a crucial difference: how do you know that the host (or someone in-between) didn't tamper with the code? How do you know you're getting the exact same bits as if you were to reach crates.io directly?
+That's broadly what the goal is about, and it involved investigations of the signing algorithms, key rotations, CI integration, releases, logging, and much more. And all of this must meet the scale and performance requirements of crates.io.
 
-That's broadly what the goal is about and it involved investigations of the signing algorithms, key rotations, CI integration, releases, logging and much more. And all of this must meet the scale and performance requirements of crates.io.
-
-Walter Pearce and Josh Triplett did most of the work (investigation, experimentation, looking into what other package managers are doing) and talked to Cargo, Infra, Release, Bootstrap and crates.io representatives.
+Walter Pearce and Josh Triplett did most of the work (investigation, experimentation, looking into what other package managers are doing) and talked to Cargo, Infra, Release, Bootstrap, and crates.io representatives.
 
 Last week, [Walter posted a final update on the goal's tracking issue](https://github.com/rust-lang/rust-project-goals/issues/271#issuecomment-3133590786).
 
 The goal owners along with the team representatives agreed on the following to build an experimental MVP implementation:
 
 * Use TAP-16 Merkle Tree implementation of [TUF (The Update Framework)][tuf] for crates.io.
-* Maintain a top-level quorum but removing immediate levels for simplicity.
-* Reached a consensus with the Infrastructure team for deployment planning.
-* Role keys will live in KMS (Key Management Service).
+* Maintain a top-level quorum but remove intermediate levels for simplicity.
+* Role keys will live in AWS KMS (Key Management Service).
 
-They plan for the MVP to be ready by the end of August and they'll use it to test various optimizations to make sure it works for our tooling (rustup, releases, crates.io, update, signing etc.).
+They also reached a consensus with the Infrastructure team for deployment planning. The plan is for the MVP to be ready by the end of August, and they'll use it to test various optimizations to make sure it works for our tooling (rustup, releases, crates.io, etc.).
 
-This will answer some of the open questions (which specific optimizations will fit our needs, how to implement the Merkle tree to reduce round-trips and details on hosting infrastructure) and provide enough information to write the RFC and make this fully supported and available.
+This will answer some of the open questions (which specific optimizations will fit our needs, how to implement the Merkle tree to reduce round trips, and details on hosting infrastructure) and provide enough information to write the RFC and make this fully supported and available.
 
-These discussions and decisions happened in meetings and there was little public communication to the rest of the Project. One of my goals is to start publishing more frequent and detailed updates on this and similar initiatives.
+These discussions and decisions happened in meetings, and there was little public communication to the rest of the Project. One of my goals is to start publishing more frequent and detailed updates on this and similar initiatives.
 
 I've joined the signing meetings to be more aware of what's happening within this initiative.
 
@@ -96,26 +88,25 @@ I've joined the signing meetings to be more aware of what's happening within thi
 
 ## Rust for Linux
 
-[Rust for Linux][rfl] is an ongoing effort (started in 2020) to add support for Rust to the Linux kernel. The project allows to write kernel code, such as drivers and other modules, in a memory safe language, with hopefully fewer bugs and nicer tooling. In addition, [one of its goals](https://lore.kernel.org/lkml/20210414184604.23473-1-ojeda@kernel.org/) it to allow more people get involved overall in developing the kernel thanks to the usage of a modern language.
+[Rust for Linux][rfl] is an ongoing effort (started in 2020) to add support for Rust to the Linux kernel. The project allows people to write kernel code, such as drivers and other modules, in a memory safe language, with hopefully fewer bugs and nicer tooling. In addition, [one of its goals](https://lore.kernel.org/lkml/20210414184604.23473-1-ojeda@kernel.org/) is to allow more people get involved overall in developing the kernel thanks to the use of a modern language.
 
 [rfl]: https://rust-for-linux.com/
 
 The project currently has to rely on unstable Rust. This makes it less appealing for companies and individuals as unstable features can by definition change or even be removed. We want there to be minimal (ideally zero) churn on Rust code that's been accepted to the kernel.
 
-There's been an ongoing collaboration with the Rust Project to get the language, compiler and tooling to a point where it can be completely compiled on stable Rust.
+There's been an ongoing collaboration with the Rust Project to get the language, compiler, and tooling to a point where it can be completely compiled on stable Rust.
 
-Rust for Linux was a Flagship goal the [second half of 2024][rfl2024h2] as well as the [first half of 2025][rfl2025h1].
+Rust for Linux was a flagship goal the [second half of 2024][rfl2024h2] as well as the [first half of 2025][rfl2025h1].
 
 [rfl2024h2]: https://github.com/rust-lang/rust-project-goals/blob/main/src/2024h2/rfl_stable.md
 
-
 [rfl2025h1]: https://rust-lang.github.io/rust-project-goals/2025h1/rfl.html
 
-This effort requires close collaboration with the Lang and Compiler teams, among others, and contact points on both sides to bridge the gap between the two projects. Until now, that was done by Niko Matsakis et al. on the Rust side and Miguel Ojeda et al. on the Rust for Linux side.
+This effort requires close collaboration with the Lang and Compiler teams, among others, and contact points on both sides to bridge the gap between the two projects. Until now, that was done by Niko Matsakis, TC, et al. on the Rust side and Miguel Ojeda et al. on the Rust for Linux side.
 
-One of the hopes of the PM role was to be able to step in and bring the communication between efforts like these closer and free up the Project members' time.
+One of the hopes of the PM role was to be able to step in and improve the communication between efforts like these and free up the Project members' time.
 
-I am now running the meetings, preparing the agenda, and making sure the tracking issues are up-to-date and bringing any requests or concerns to the relevant Project teams or people.
+I am now running the meetings, preparing the agenda, making sure the tracking issues are up-to-date, and bringing any requests or concerns to the relevant Project teams or people.
 
 Miguel Ojeda will continue to be the point of contact on the Linux side.
 
@@ -126,14 +117,11 @@ I helped Miguel propose two 2025 H2 goals ([compiler][rfl-compiler] and [languag
 
 This lets Niko disengage from the program completely and focus on the many other things he's doing across the Project.
 
-
 ## Misc
 
 ### `ping-goals` retry issue
 
-The request for updates is done by the `ping-goals` command of the @triagebot. This returned an error ("Failed to await at this time: connection closed before message completed"), but did actually ping everyone.
-
-[Multiple times][goals-spam], in fact.
+The request for updates is done by the `ping-goals` command of `@triagebot`. This returned an error ("Failed to await at this time: connection closed before message completed"), but did actually ping everyone. [Multiple times][goals-spam], in fact.
 
 [goals-spam]: https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Prepare.20const.20traits.20for.20stabilization.20.28goals.23106.29
 
@@ -147,7 +135,7 @@ As you can see in the thread, this wasn't a new behavior either. Precisely the s
 
 Zulip interpreted this as a timeout and retried the requests a few times.
 
-[Here's the fix he opened][ping-goals-fix]. 
+[Here's the fix he opened][ping-goals-fix].
 
 [ping-goals-fix]: https://github.com/rust-lang/triagebot/pull/2109
 
@@ -159,11 +147,11 @@ The [Leadership Council][council] is a team charged with the success of the Proj
 
 The Council meets every two weeks and after each meeting they publish minutes to [the leadership-council repository][leadership-council-minutes].
 
-This makes them accountable to the teams they represent and transparent to the Project and the community as a whole. It also helps show if they're missing anything important to the teams who can then bring it to the Council's attention.
+This makes them accountable to the teams they represent and transparent to the Project and the community as a whole. It also helps others find if they're missing something important so it can be brought to their attention.
 
-As with every other meeting, when an active participant has to take minutes, this results in diminishing their attention to the topic as well as the quality of their notes (most people can't speak or fully consider what other people said and write at the same time).
+As with every other meeting, when an active participant has to take minutes, this results in diminishing that person's attention to the topic as well as the quality of the notes (most people can't speak or fully consider what other people said and write at the same time).
 
-And similarly, going through the minutes, making them legible and publishing them takes additional effort and attention. When these things pile up, they can even lead to burning out.
+And similarly, going through the minutes, making them legible and publishing them takes additional effort and attention. When these things pile up, they can even lead to burning out valuable contributors.
 
 Having taken over the minutes for the Leadership Council meetings in June, I've now closed the loop by taking over the clean-up and publishing as well.
 
