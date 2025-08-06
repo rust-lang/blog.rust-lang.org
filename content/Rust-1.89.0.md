@@ -136,7 +136,7 @@ pub fn cool_simd_code(/* .. */) -> /* ... */ {
 
 Doctests will now be tested when running `cargo test --doc --target other_target`, this may result in some amount of breakage due to would-be-failing doctests now being tested.
 
-Failing tests can be disabled by annotating the doctest with `ignore-<target>`:
+Failing tests can be disabled by annotating the doctest with `ignore-<target>` ([docs](https://doc.rust-lang.org/stable/rustdoc/write-documentation/documentation-tests.html#ignoring-targets)):
 ```rust
 /// ```ignore-x86_64
 /// panic!("something")
@@ -156,13 +156,13 @@ This is the last bit of follow up to the layout changes from last year: https://
 
 ### Demoting `x86_64-apple-darwin` to Tier 2 with host tools
 
-GitHub will soon [discontinue][gha-sunset] providing free macOS x86\_64 runners for public repositories. Apple has also announced their [plans][apple] for discontinuing support for the x86\_86 architecture.
+GitHub will soon [discontinue][gha-sunset] providing free macOS x86\_64 runners for public repositories. Apple has also announced their [plans][apple] for discontinuing support for the x86\_64 architecture.
 
-In accordance with these changes, the Rust project is in the [process of demoting the `x86_64-apple-darwin` target][rfc] from Tier 1 to Tier 2 with host tools. This means that the target, including tools like `rustc` and `cargo`, will be guaranteed to build but is not guaranteed to pass our automated test suite.
+In accordance with these changes, the Rust project is in the [process of demoting the `x86_64-apple-darwin` target][rfc] from [Tier 1 with host tools](https://doc.rust-lang.org/stable/rustc/platform-support.html#tier-1-with-host-tools) to [Tier 2 with host tools](https://doc.rust-lang.org/stable/rustc/platform-support.html#tier-2-with-host-tools). This means that the target, including tools like `rustc` and `cargo`, will be guaranteed to build but is not guaranteed to pass our automated test suite.
 
 We expect that the RFC for the demotion to Tier 2 with host tools will be accepted between the releases of Rust 1.89 and 1.90, which means that Rust 1.89 will be the last release of Rust where `x86_64-apple-darwin` is a Tier 1 target.
 
-For users, nothing will change. Builds of both the standard library and the compiler will still be distributed by the Rust Project for use via `rustup` or alternative installation methods.
+For users, this change will not immediately cause impact. Builds of both the standard library and the compiler will still be distributed by the Rust Project for use via `rustup` or alternative installation methods while the target remains at Tier 2.
 
 [apple]: https://en.wikipedia.org/wiki/Mac_transition_to_Apple_silicon#Timeline
 [gha-sunset]: https://github.blog/changelog/2025-07-11-upcoming-changes-to-macos-hosted-runners-macos-latest-migration-and-xcode-support-policy-updates/#macos-13-is-closing-down
