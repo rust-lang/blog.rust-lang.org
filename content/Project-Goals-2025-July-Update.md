@@ -984,6 +984,29 @@ Chiming in for @epage here since further progress is still blocked on the compil
 <!-- markdown separator -->
 
 
+<details>
+<summary>1 detailed update available.</summary>
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+<a href="https://github.com/rust-lang/rust-project-goals/issues/257#issuecomment-3155934755">Comment by @jhpratt posted on 2025-08-05:</a><br>
+
+<blockquote>
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+Implementation remains in progress; I'll be able to land a couple PRs soon getting it largely implemented. Progress was slower than expected due to me having a fair amount going on. As I still very much want this feature, I will continue work on it even with the goal having formally lapsed.
+
+Additionally, I think that after it's fully implemented it may be feasible to leverage the crate-local knowledge of `impl` restrictions to optimize `dyn` in an `enum_dispatch`-like manner. I haven't investigated the feasibility of that in the compiler — it's merely a suspicion.
+
+<!-- this comment helps to convince the markdown parser to do the right thing -->
+
+</blockquote>
+
+</details>
 
 <!-- markdown separator -->
 
