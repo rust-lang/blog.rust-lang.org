@@ -162,7 +162,7 @@ In accordance with these changes, the Rust project is in the [process of demotin
 
 We expect that the RFC for the demotion to Tier 2 with host tools will be accepted between the releases of Rust 1.89 and 1.90, which means that Rust 1.89 will be the last release of Rust where `x86_64-apple-darwin` is a Tier 1 target.
 
-For users, this change will not immediately cause impact. Builds of both the standard library and the compiler will still be distributed by the Rust Project for use via `rustup` or alternative installation methods while the target remains at Tier 2.
+For users, this change will not immediately cause impact. Builds of both the standard library and the compiler will still be distributed by the Rust Project for use via `rustup` or alternative installation methods while the target remains at Tier 2. Over time, it's likely that reduced test coverage for this target will cause things to break or fall out of compatibility with no further announcements.
 
 [apple]: https://en.wikipedia.org/wiki/Mac_transition_to_Apple_silicon#Timeline
 [gha-sunset]: https://github.blog/changelog/2025-07-11-upcoming-changes-to-macos-hosted-runners-macos-latest-migration-and-xcode-support-policy-updates/#macos-13-is-closing-down
