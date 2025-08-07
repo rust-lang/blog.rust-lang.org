@@ -152,7 +152,7 @@ pub fn my_function() { }
 * On platforms where `__int128` is not available, `i128` and `u128` do not necessarily align with any C type.
 * `i128` is _not_ necessarily compatible with `_BitInt(128)` on any platform, because `_BitInt(128)` and `__int128` may not have the same ABI (as is the case on x86-64).
 
-This is the last bit of follow up to the layout changes from last year: https://blog.rust-lang.org/2024/03/30/i128-layout-update/.
+This is the last bit of follow up to the layout changes from last year: [https://blog.rust-lang.org/2024/03/30/i128-layout-update](https://blog.rust-lang.org/2024/03/30/i128-layout-update).
 
 ### Demoting `x86_64-apple-darwin` to Tier 2 with host tools
 
@@ -170,7 +170,7 @@ For users, this change will not immediately cause impact. Builds of both the sta
 
 ### Standards Compliant C ABI on the `wasm32-unknown-unknown` target
 
-`extern "C"` functions on the `wasm32-unknown-unknown` target now have a standards compliant ABI. See this blog post for more information: https://blog.rust-lang.org/2025/04/04/c-abi-changes-for-wasm32-unknown-unknown.
+`extern "C"` functions on the `wasm32-unknown-unknown` target now have a standards compliant ABI. See this blog post for more information: [https://blog.rust-lang.org/2025/04/04/c-abi-changes-for-wasm32-unknown-unknown](https://blog.rust-lang.org/2025/04/04/c-abi-changes-for-wasm32-unknown-unknown).
 
 ### Platform Support
 
