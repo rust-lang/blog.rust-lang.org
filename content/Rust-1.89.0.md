@@ -32,7 +32,7 @@ pub fn all_false<const LEN: usize>() -> [bool; LEN] {
 }
 ```
 
-Similar to the rules for when `_` is permitted as a type, `_` is not permitted as an argument to const generics when in a signature:
+Similar to the rules for when `_` is permitted as a type, `_` is now permitted as an argument to const generics when in a signature:
 
 ```rust
 // This is not allowed
