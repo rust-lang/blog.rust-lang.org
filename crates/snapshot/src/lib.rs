@@ -2,8 +2,8 @@
 fn snapshot() {
     std::env::set_current_dir(concat!(env!("CARGO_MANIFEST_DIR"), "/../..")).unwrap();
     let _ = std::fs::remove_dir_all("public");
-    let status = std::process::Command::new("cargo")
-        .args(["zola", "build"])
+    let status = std::process::Command::new("zola")
+        .arg("build")
         .status()
         .unwrap();
     assert!(status.success(), "failed to build site");

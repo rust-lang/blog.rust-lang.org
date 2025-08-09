@@ -6,16 +6,28 @@ This is the blog of the Rust Programming Language.
 
 It uses [Zola](https://www.getzola.org/) and is deployed to GitHub Pages via GitHub Actions.
 
-## Building
+## Installing Zola
 
-To serve the site locally, first make sure the zola submodule is initialized:
+You need at least zola v0.21.0 to render the blog.
+
+Compile from source:
 
 ```sh
-git submodule update --init --recursive
+cargo install --locked --git https://github.com/getzola/zola --rev 45d3f8d6285f0b47013c5fa31eb405332118af8b
 ```
 
-Now run `cargo zola serve --open`.
-(The first run takes a while to compile Zola.)
+You can also find a list of package managers that provide zola [here](https://www.getzola.org/documentation/getting-started/installation/).
+Prebuilt binaries are available for download [here](https://github.com/getzola/zola/releases/tag/v0.21.0).
+If you use [mise](https://mise.jdx.dev), you can run the pinned version of zola directly with `mise run zola`.
+
+## Building
+
+To serve the site locally, run the following:
+
+```sh
+zola serve --open
+```
+
 The site will be reloaded automatically when you make any changes.
 
 ## Contributing
