@@ -13,7 +13,7 @@ You need at least zola v0.21.0 to render the blog.
 Compile from source:
 
 ```sh
-cargo install --locked --git https://github.com/getzola/zola --rev 45d3f8d6285f0b47013c5fa31eb405332118af8b
+cargo install --debug --locked --git https://github.com/getzola/zola --rev 45d3f8d6285f0b47013c5fa31eb405332118af8b
 ```
 
 You can also find a list of package managers that provide zola [here](https://www.getzola.org/documentation/getting-started/installation/).
@@ -25,7 +25,7 @@ If you use [mise](https://mise.jdx.dev), you can run the pinned version of zola 
 To serve the site locally, run the following:
 
 ```sh
-zola serve --open
+zola serve --fast --open
 ```
 
 The site will be reloaded automatically when you make any changes.
