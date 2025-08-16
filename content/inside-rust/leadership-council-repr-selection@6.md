@@ -53,7 +53,7 @@ A detailed description of the role may be found at the [Representative Role Desc
 
 ## How should teams make their selection?
 
-The Leadership Council has put together a recommended [Representative Selection Guide][guide] for how teams should choose their representative.
+The Leadership Council has put together a [Representative Selection Guide][guide] with recommendations for teams on how to go about choosing a representative.
 It is not a requirement that teams follow this guide; top-level teams may choose their own process.
 
 [guide]: https://github.com/rust-lang/leadership-council/blob/main/guides/representative-selection.md
