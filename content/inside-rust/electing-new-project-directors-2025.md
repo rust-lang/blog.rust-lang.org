@@ -53,7 +53,7 @@ This process will continue through all of September and into October. Below are 
 
 * Candidate nominations due: September 18
 * Candidates published: September 19
-* Feedback period: October 19 - October 2
+* Feedback period: September 19 - October 2
 * Election meeting: October 3
 * First board meeting starting the new term: October 14
 
