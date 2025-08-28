@@ -1,6 +1,6 @@
 +++
 path = "2025/08/29/rust-lld-on-1.90.0-stable"
-title = "Faster linking times with 1.90.0 stable on Linux using `rust-lld`"
+title = "Faster linking times with 1.90.0 stable on Linux using the LLD linker"
 authors = ["Rémy Rakic"]
 
 [extra]
@@ -8,7 +8,7 @@ team = "the compiler performance working group"
 team_url = "https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance"
 +++
 
-TL;DR: rustc will use `rust-lld` by default on `x86_64-unknown-linux-gnu` on stable, starting in 1.90.0, to significantly reduce linking times. Test it out on beta now, and please report issues if you encounter any.
+TL;DR: rustc will start using the LLD linker by default on the `x86_64-unknown-linux-gnu` target starting with the Rust 1.90.0 stable release, which should significantly reduce linking times. Test it out on beta now, and please report any encountered issues.
 
 #### Some context
 
@@ -38,8 +38,6 @@ Most binaries should see some improvements here, but it's especially significant
 
 Here's [a link](https://perf.rust-lang.org/compare.html?start=b3e117044c7f707293edc040edb93e7ec5f7040a&end=baed03c51a68376c1789cc373581eea0daf89967&stat=instructions%3Au&tab=compile) to the complete results from our benchmarks.
 
-This testing period did go well indeed, and we can stabilize using this faster linker by default for `x86_64-unknown-linux-gnu` users.
-
 #### Possible drawbacks
 
 From our prior testing, we don't really expect issues to happen in practice. It is a drop-in replacement for the vast majority of cases, but `lld` is not _bug-for-bug_ compatible with GNU ld.
@@ -52,7 +50,7 @@ Some of the big gains in performance come from parallelism, which could be undes
 
 #### Summary, and call for testing
 
-rustc will use `rust-lld` on `x86_64-unknown-linux-gnu`, starting with the 1.90.0 stable release, for much improved linking times. This version 1.90.0 will be released next month, on the 18th of September 2025.
+rustc will use `rust-lld` on `x86_64-unknown-linux-gnu`, starting with the 1.90.0 stable release, for much improved linking times. Rust 1.90.0 will be released next month, on the 18th of September 2025.
 
 This linker change is already available on the current beta (`1.90.0-beta.6`). To help everyone prepare for this landing on stable, please test your projects on beta and let us know if you encounter problems, by [opening an issue](https://github.com/rust-lang/rust/issues/new/choose) on GitHub.
 
