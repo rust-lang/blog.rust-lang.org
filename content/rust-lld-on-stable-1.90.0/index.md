@@ -8,7 +8,7 @@ team = "the compiler performance working group"
 team_url = "https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance"
 +++
 
-TL;DR: rustc will start using the LLD linker by default on the `x86_64-unknown-linux-gnu` target starting with the Rust 1.90.0 stable release, which should significantly reduce linking times. Test it out on beta now, and please report any encountered issues.
+TL;DR: rustc will start using the LLD linker by default on the `x86_64-unknown-linux-gnu` target starting with the next stable release (1.90.0, scheduled for 2025-09-18), which should significantly reduce linking times. Test it out on beta now, and please report any encountered issues.
 
 #### Some context
 
