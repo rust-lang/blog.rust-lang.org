@@ -1,5 +1,5 @@
 +++
-path = "2025/08/29/rust-lld-on-1.90.0-stable"
+path = "2025/09/01/rust-lld-on-1.90.0-stable"
 title = "Faster linking times with 1.90.0 stable on Linux using the LLD linker"
 authors = ["Rémy Rakic"]
 
