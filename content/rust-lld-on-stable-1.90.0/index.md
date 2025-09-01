@@ -44,7 +44,7 @@ From our prior testing, we don't really expect issues to happen in practice. It 
 
 In any case, using `rust-lld` can be disabled if any problem occurs: use the `-C linker-features=-lld` flag to revert to using the system's default linker.
 
-Some crates somehow relying on these differences could need additional link args, though we also expect this to be quite rare.
+Some crates somehow relying on these differences could need additional link args, though we also expect this to be quite rare. Let us know if you encounter problems, by [opening an issue](https://github.com/rust-lang/rust/issues/new/choose) on GitHub.
 
 Some of the big gains in performance come from parallelism, which could be undesirable in resource-constrained environments, or for heavy projects that are already reaching hardware limits.
 
