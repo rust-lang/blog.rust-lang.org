@@ -75,6 +75,32 @@ but in the meantime we would like to thank these contributors in this post:
 - [whitequark](https://github.com/whitequark)
 - [zaharidichev](https://github.com/zaharidichev)
 
+## Hidden teams
+
+Some Rust teams, such as marker teams and some working groups are not shown in
+the website's governance page.
+
+We would like to thank the contributors who only belong to these teams in this
+post:
+
+- [adamgreig](https://github.com/adamgreig)
+- [AlexEne](https://github.com/AlexEne)
+- [andre-richter](https://github.com/andre-richter)
+- [AngelOnFira](https://github.com/AngelOnFira)
+- [Dajamante](https://github.com/Dajamante)
+- [eldruin](https://github.com/eldruin)
+- [hargoniX](https://github.com/hargoniX)
+- [korken89](https://github.com/korken89)
+- [kvark](https://github.com/kvark)
+- [levex](https://github.com/levex)
+- [luqmana](https://github.com/luqmana)
+- [Nashenas88](https://github.com/Nashenas88)
+- [retep998](https://github.com/retep998)
+- [ryankurte](https://github.com/ryankurte)
+- [thejpster](https://github.com/thejpster)
+- [therealprof](https://github.com/therealprof)
+- [tromey](https://github.com/tromey)
+
 ## Members without contact
 
 Some past members are not listed in the [rust-lang/team](https://github.com/rust-lang/team) repo, so we
