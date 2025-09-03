@@ -72,17 +72,17 @@ Both have been requested for a long time and the interest is much broader than j
 
 Reflection is a mechanism that lets your program look at any type and understand it: getting its name, fields and *their names and types* while your program is running. This is in contrast to the `derive` macro or trait bounds that are processed at compile time.
 
-Projects like Bevy currently rely on the `derive` macros. For example, any component in its [ECS (Entity Component System)](https://bevy.org/learn/quick-start/getting-started/ecs/) must be annotated with `#[derive(Component)]`. While the usage is simple, these macros are difficult to write and debug. And the language has limitations on where they can be applied.
+Projects like Bevy currently rely on the `derive` macros. For example, pretty much all its types have `derive(Reflect)` to provide dynamic field access and type inspection, serialization/deserialization and scripting. While the usage is simple, these macros are difficult to write and debug. And the language has limitations on where they can be applied.
 
 You can only implement a trait for a type (which is what `derive` does, under the hood) if either the trait or type is *defined* in the crate you're implementing it in (this is the [orphan rule](https://doc.rust-lang.org/book/ch10-02-traits.html#implementing-a-trait-on-a-type)).
 
-So if you're writing your game and want to implement `Component` (defined in Bevy, not your crate) you could derive it for your custom type, but not e.g. for [`Duration`](https://doc.rust-lang.org/std/time/struct.Duration.html) or `[f32; 2]` because they're defined in the standard library. You have to [resort to wrapping those in your own type](https://docs.rs/bevy/latest/bevy/ecs/component/trait.Component.html#implementing-the-trait-for-foreign-types).
+So if want to implement `Reflect` (defined in [bevy_reflect](https://crates.io/crates/bevy_reflect), not your crate) you could derive it for your custom type, but not e.g. for [`Duration`](https://doc.rust-lang.org/std/time/struct.Duration.html) or `[f32; 2]` because they're defined in the standard library.
 
-This all gets very complex very quickly and no good solution exists right now. In reality, projects like Serde and Bevy often provide implementations for common standard library types (including tuples up to a limited size).
+You have to create a new `enum`/`struct` that wraps that type and implement the trait yourself. This all gets very complex very quickly and no good solution exists right now.
 
-But when a new crate comes up, it either has to implement all the useful traits in the ecosystem, convince to the ecosystem to provide the implementations for its types or be immediately less useful than the existing crates. This can lead to ecosystem stagnation.
+In practice, projects like Serde and Bevy often provide implementations for common standard library types (including tuples up to a limited size). But when a new crate comes up, it either has to implement all the useful traits in the ecosystem, convince to the ecosystem to provide the implementations for its types or be immediately less useful than the existing crates. This can lead to ecosystem stagnation.
 
-With reflection, any type could be used as a `Component` with none of the third parties (Bevy or std) having to opt in explicitly.
+With reflection, a lot of this machinery would just be available on every type everywhere and everyone could use it.
 
 [oli-obk](https://github.com/oli-obk) opened the [reflection and comptime goal](https://rust-lang.github.io/rust-project-goals/2025h2/reflection-and-comptime.html) for the 2025H2 period that will build the initial functionality and extend it later on.
 
@@ -137,7 +137,7 @@ Some of the efforts blocking this in the past have either been resolved or are g
 
 I've done a lot of background reading (which made me appreciate the complexity), talked to Olivier and [Alice Cecile](https://github.com/alice-i-cecile) and [opened a design meeting on the Lang side](https://github.com/rust-lang/lang-team/issues/348) as there is a way forward now.
 
-Olivier plans to write an RFC in the next month or so and then we'll discuss it. I'm again on the lookout for other people interested in the space (either with proposals of their own or usecases we want to make sure are heard) so I can point them to the design issue and the meeting.
+The next steps are getting an RFC written and scheduling the design meeting. I'm again on the lookout for other people interested in the space (either with proposals of their own or usecases we want to make sure are heard) so I can point them to this space.
 
 
 ## Lori Lorusso: Foundation Director of Outreach
@@ -204,7 +204,7 @@ This is now ready for feedback from the Lang team so I've opened a [design issue
 
 [field-projections]: https://rust-lang.github.io/rust-project-goals/2025h2/field-projections.html
 
-We also had a design meeting on [Field Projections][field-projections]. When you have a type behind e.g. `Box` or `Rc`, you can access its field "directly" as if the wrapper/pointer type wasn't there:
+We also had a design meeting on [Field Projections][field-projections]. When you have a type behind a `&` or `&mut` reference, you can access its field "directly" as if the pointer type wasn't there:
 
 ```rust
 struct Position {
@@ -212,18 +212,18 @@ struct Position {
     y: f32,
 }
 
-fn main() {
-    let pos = Position{ x: 0.0, y: 0.0 };
-    let boxed = Box::new(pos);
-    println!("x: {}, y: {}", boxed.x, boxed.y);
+impl Position {
+	fn get_x(&self) -> &f32 {
+	    &self.x
+	}
 }
 ```
 
-This is so common that we take it for granted, but when you write `boxed.x`, we first need to dereference `boxed` (follow the pointer to the `Position` struct in the memory) and then get its `x` field.
+The language understands `Position` is behind a pointer, calculates an offset to the field `x` and gives you that pointer back.
 
-And while this works for references and some pointer types, there's a long list of wrapper types where field access makes sense but it's not implemented because the semantics or limitations are different from the regular `Deref/DerefMut` traits. For example: `MaybeUninit<T>`, `Pin<T>`, `Cell<T>`, or the raw pointers `*const T`/`*mut T`. And of course custom types.
+But there's a long list of wrapper types where field access makes sense, but it's not implemented because the semantics or limitations are different from the regular `Deref/DerefMut` traits. For example: `MaybeUninit<T>`, `Pin<P>`, `Cell<T>`, or the raw pointers `*const T`/`*mut T`. And of course custom types.
 
-Linux uses pinned values (`Pin<T>`, values that can't move around in memory) all over the place and there are several crates that provide access to the underlying fields of a pinned struct (e.g. [pin-project](https://crates.io/crates/pin-project)).
+Linux uses pinned values (`Pin<P>`, values that can't move around in memory), raw pointers and `MaybeUninit` all over the place in addition to many custom fields that would greatly benefit from field projections.
 
 [Benno Lossin](https://github.com/BennoLossin) who owns the [Field Projection goal][field-projections] prepared a [design](https://hackmd.io/@rust-lang-team/S1I1aEc_lx) to move this forward as a lang experiment. This was approved, we now have a [Field Projection tracking issue](https://github.com/rust-lang/rust/issues/145383) as well as an [initial implementation](https://github.com/BennoLossin/rust/tree/field-projections).
 
