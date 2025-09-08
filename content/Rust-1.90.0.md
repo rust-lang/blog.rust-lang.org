@@ -22,15 +22,19 @@ If you'd like to help us out by testing future releases, you might consider upda
 
 ## What's in 1.90.0 stable
 
-### `lld` by default on `x86_64-unknown-linux-gnu`
+# LLD is now the default linker on `x86_64-unknown-linux-gnu`
 
-As [previously announced](https://blog.rust-lang.org/2025/09/01/rust-lld-on-1.90.0-stable/),
-1.90 brings a change in the default linker to `lld` on
-`x86_64-unknown-linux-gnu`. As discussed in that blog, for the vast majority of
-users this change should just be a compile time reduction. In some edge cases,
-`lld` may have different behavior: please file
-[issues](https://github.com/rust-lang/rust/issues/new/choose) if you run into
-problems as part of the migration.
+The `x86_64-unknown-linux-gnu` target will now use the LLD linker for linking Rust crates by default. This should result in improved linking performance vs the default Linux linker (BFD), particularly for large binaries, binaries with a lot of debug information, and for incremental rebuilds.
+
+In the vast majority of cases, LLD should be backwards compatible with BFD, and you should not see any difference other than reduced compilation time. However, if you do run into any new linker issues, you can always opt out using the `-C linker-features=-lld` compiler flag. Either by adding it to the usual `RUSTFLAGS` environment variable, or to a project's [`.cargo/config.toml`](https://doc.rust-lang.org/cargo/reference/config.html) configuration file,
+like so:
+
+```toml
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-Clinker-features=-lld"]
+```
+
+If you encounter any issues with the LLD linker, please [let us know](https://github.com/rust-lang/rust/issues/new/choose). You can read more about the switch to LLD, some benchmark numbers and the opt out mechanism [here](https://blog.rust-lang.org/2025/09/01/rust-lld-on-1.90.0-stable/).
 
 ### Cargo adds native support for workspace publishing
 
