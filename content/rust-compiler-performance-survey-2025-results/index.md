@@ -1,5 +1,5 @@
 +++
-path = "9999/12/31/rust-compiler-performance-survey-2025-results"
+path = "2025/09/10/rust-compiler-performance-survey-2025-results"
 title = "Rust compiler performance survey 2025 results"
 authors = ["Jakub Beránek"]
 
@@ -8,7 +8,7 @@ team = "the compiler performance working group"
 team_url = "https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler-performance"
 +++
 
-Two months ago, we launched the first [Rust Compiler Performance Survey](../rust-compiler-performance-survey-2025.md), with the goal of helping us understand the biggest pain points of Rust developers related to build performance. It is clear that this topic is very important for the Rust community, as the survey received over 3 700 responses! We would like to thank everyone who participated in the survey, and especially those who described their workflows and challenges with an open answer. We plan to run this survey annually, so that we can observe long-term trends in Rust build performance and its perception.
+Two months ago, we launched the first [Rust Compiler Performance Survey][rust-compiler-performance-survey], with the goal of helping us understand the biggest pain points of Rust developers related to build performance. It is clear that this topic is very important for the Rust community, as the survey received over 3 700 responses! We would like to thank everyone who participated in the survey, and especially those who described their workflows and challenges with an open answer. We plan to run this survey annually, so that we can observe long-term trends in Rust build performance and its perception.
 
 In this post, we'll show some interesting results and insights that we got from the survey and promote work that we have already done recently or that we plan to do to improve the build performance of Rust code. If you would like to examine the complete results of the survey, you can find them [here][report].
 
@@ -38,7 +38,7 @@ To understand the overall sentiment, we asked our respondents to rate their sati
 </div>
 <!-- Chart satisfaction end -->
 
-To help us understand the overall build experience in more detail, we also analyzed all open answers (almost six hundred of them) written by our respondents, to help us identify several recurring themes, which we will discuss in this post.
+To help us understand the overall build experience in more detail, we also analyzed all open answers (over a thousand of them) written by our respondents, to help us identify several recurring themes, which we will discuss in this post.
 
 One thing that is clear from both the satisfaction rating and the open answers is that the build experience differs wildly across users and workflows, and it is not as clear-cut as "Rust builds are slow". We actually received many positive comments about users being happy with Rust build performance, and appreciation for it being improved vastly over the past several years to the point where it stopped being a problem.
 
@@ -78,7 +78,7 @@ We can see that all the workflows that we asked about cause significant problems
 </div>
 <!-- Chart problems end -->
 
-Based on the answers to these two questions, and other experiences shared in the open answers, we identifified three groups of workflows that we will discuss next:
+Based on the answers to these two questions and other experiences shared in the open answers, we identified three groups of workflows that we will discuss next:
 
 - Incremental rebuilds after making a small change
 - Type checking using `cargo check` or with a code editor
@@ -88,13 +88,13 @@ Based on the answers to these two questions, and other experiences shared in the
 
 Waiting too long for an incremental rebuild after making a small source code change was by far the most common complaint in the open answers that we received, and it was also the most common problem that respondents said they struggle with. Based on our respondents' answers, this comes down to three main bottlenecks:
 
-- **Changes in workspaces trigger unneccessary rebuilds.** If you modify a crate in a workspace that has several dependent crates and perform a rebuild, all those dependent crates will currently have to be recompiled. This can cause a lot of unnecessary work and dramatically increase the latency of rebuilds in large (or deep) workspaces. We have some ideas about how to improve this workflow, such as the ["Relink, don't rebuild"][project-goal-rdr] proposal, but these are currently in a very experimental stage.
-- **The linking phase is too slow.** This was a very common complaint, and it is indeed a real issue, because unlike the rest of the compilation process, linking is always performed "from scratch". The Rust compiler usually delegates linking to an external/system linker, so its performance is not completely within our hands. However, we are attempting to switch to faster linkers by default. For example, the most popular target (`x86_64-unknown-linux-gnu`) has recently switched to the [LLD linker][rust-lld-blog-post], which provides significant performance wins. Long-term, it is possible that some linkers (e.g. [wild]) will allow us to perform even linking incrementally.
+- **Changes in workspaces trigger unnecessary rebuilds.** If you modify a crate in a workspace that has several dependent crates and perform a rebuild, all those dependent crates will currently have to be recompiled. This can cause a lot of unnecessary work and dramatically increase the latency of rebuilds in large (or deep) workspaces. We have some ideas about how to improve this workflow, such as the ["Relink, don't rebuild"][project-goal-rdr] proposal, but these are currently in a very experimental stage.
+- **The linking phase is too slow.** This was a very common complaint, and it is indeed a real issue, because unlike the rest of the compilation process, linking is always performed "from scratch". The Rust compiler usually delegates linking to an external/system linker, so its performance is not completely within our hands. However, we are attempting to switch to faster linkers by default. For example, the most popular target (`x86_64-unknown-linux-gnu`) will very soon switch to the [LLD linker][rust-lld-blog-post], which provides significant performance wins. Long-term, it is possible that some linkers (e.g. [wild]) will allow us to perform even linking incrementally.
 - **Incremental rebuild of a single crate is too slow.** The performance of this workflow depends on the cleverness of the incremental engine of the Rust compiler. While it is already very sophisticated, there are some parts of the compilation process that are not incremental yet or that are not cached in an optimal way. For example, expansion of derive proc macros is not currently cached, although work is underway to [change that][cache-proc-macros].
 
 Several users have mentioned that they would like to see Rust perform hot-patching (such as the `subsecond` system used by the Dioxus UI framwork or similar approaches used e.g. by the Bevy game engine). While these hot-patching systems are very exciting and can produce truly near-instant rebuild times for specialized use-cases, it should be noted that they also come with many limitations and edge-cases, and it does not seem that a solution that would allow hot-patching to work in a robust way has been found yet.
 
-To gauge how long is the typical rebuild latency, we asked our respondents to pick a single Rust project that they work on and which causes them to struggle with build times the most, and tell us how longthey have to wait for it to be rebuilt after making a code change.
+To gauge how long is the typical rebuild latency, we asked our respondents to pick a single Rust project that they work on and which causes them to struggle with build times the most, and tell us how long they have to wait for it to be rebuilt after making a code change.
 
 <!-- Chart rebuild-wait-time start -->
 <div>
@@ -154,7 +154,7 @@ Approximately 60% of respondents say that they use `cargo` terminal commands to 
 
 While the performance of `cargo check` does not seem to be as big of a blocker as e.g. incremental rebuilds, it also causes some pain points. One of the most common ones present in the survey responses is the fact that `cargo check` does not share the build cache with `cargo build`. This causes additional compilation to happen when you run e.g. `cargo check` several times to find all type errors, and when it succeeds, you follow up with `cargo build` to actually produce a built artifact. This workflow is an example of competing trade-offs, because sharing the build cache between these two commands by unifying them more would likely make `cargo check` itself slightly slower, which might be undesirable to some users. It is possible that we might be able to find some middle ground to improve the status quo though. You can follow updates to this work in [this issue][cargo-check-build-reuse-issue].
 
-A related aspect is the latency of type checking in code editors and IDEs. Around 87% of respondents say that they use inline annotations in their editor as the primary mechanism of inspecting compiler errors, and around 30% of respondents consider waiting for these annotations to be a big blocker. In the open answers, we also received many reports of Rust Analyzer's performance and memory usage being a limiting factor.
+A related aspect is the latency of type checking in code editors and IDEs. Around 87% of respondents say that they use inline annotations in their editor as the primary mechanism of inspecting compiler errors, and around 33% of them consider waiting for these annotations to be a big blocker. In the open answers, we also received many reports of Rust Analyzer's performance and memory usage being a limiting factor.
 
 The maintainers of Rust Analyzer are working hard on improving its performance. Its caching system is [being improved][ra-talk-rustweek] to reduce analysis latency, the distributed builds of the editor are now [optimized with PGO][ra-pgo], which provided 15-20% performance wins, and work is underway to integrate the compiler's [new trait solver][ra-new-trait-solver] into Rust Analyzer, which could eventually also result in increased performance.
 
@@ -236,7 +236,7 @@ Build performance of Rust is affected by many different aspects, including the c
 </div>
 <!-- Chart compile-time-improvement-mechanisms end -->
 
-It seems that the most popular (and effective) mechanisms for improving build performance are reducing the number of dependencies and their activated features, and splitting larger crates into smaller crates. The most common way of improving build performance without making source code changes seems to be the usage of an alternative linker. It seems that especially the `mold` and `lld` linkers are very popular:
+It seems that the most popular (and effective) mechanisms for improving build performance are reducing the number of dependencies and their activated features, and splitting larger crates into smaller crates. The most common way of improving build performance without making source code changes seems to be the usage of an alternative linker. It seems that especially the mold and LLD linkers are very popular:
 
 <!-- Chart alternative-linker start -->
 <div>
@@ -249,7 +249,7 @@ It seems that the most popular (and effective) mechanisms for improving build pe
 </div>
 <!-- Chart alternative-linker end -->
 
-We have good news here! After many years, we have finally switched the most popular `x86_64-unknown-linux-gnu` Linux target to use the `lld` linker, resulting in faster link times *by default*. Over time, we will be able to evaluate how disruptive is this change to the overall Rust ecosystem, and whether we could e.g. switch to a different (even faster) linker.
+We have good news here! The most popular `x86_64-unknown-linux-gnu` Linux target will start using the LLD linker in the next Rust stable release, resulting in faster link times *by default*. Over time, we will be able to evaluate how disruptive is this change to the overall Rust ecosystem, and whether we could e.g. switch to a different (even faster) linker.
 
 ### Build performance guide
 
@@ -290,12 +290,13 @@ There are more interesting things in the survey results, for example how do answ
 
 We would like to thank once more everyone who has participated in our survey. It helped us understand which workflows are the most painful for Rust developers, and especially the open answers provided several great suggestions that we tried to act upon.
 
-Even though the Rust compiler is getting increasingly faster every year, we understand that many Rust developers require truly significant improvements to improve their productivity, rather than "just" incremental performance wins. Our goal for the future is to finally stabilize long-standing initiatives that could improve build performance a lot, such as the [Cranelift codegen backend][project-goal-cranelift] or the [parallel compiler frontend][project-goal-parallel-frontend]. One such initiative (using a [faster linker by default][rust-lld-blog-post]) has finally landed recently, but the fact that it took many years shows how difficult it is to make such large cutting changes to the compilation process.
+Even though the Rust compiler is getting increasingly faster every year, we understand that many Rust developers require truly significant improvements to improve their productivity, rather than "just" incremental performance wins. Our goal for the future is to finally stabilize long-standing initiatives that could improve build performance a lot, such as the [Cranelift codegen backend][project-goal-cranelift] or the [parallel compiler frontend][project-goal-parallel-frontend]. One such initiative (using a [faster linker by default][rust-lld-blog-post]) will finally land soon, but the fact that it took many years shows how difficult it is to make such large cutting changes to the compilation process.
 
 There are other ambitious ideas for reducing (re)build times, such as [avoiding unnecessary workspace rebuilds][project-goal-rdr] or e.g. using some form of [incremental linking][wild], but these will require a lot of work and design discussions.
 
-We know that some people are wondering why it takes so much time to achieve progress in improving the build performance of Rust. The answer is relatively simple. These changes require a lot of work, domain knowledge (that takes a relatively long time to acquire) and many discussions and code reviews, and the pool of people that have time and motivation to work on them or review these changes is very limited. Current compiler maintainers and contributors (many of whom work on the compiler as volunteers, without any funding) work very hard to keep up with maintaining the compiler and keeping it working with a high-quality bar that Rust developers expect, across many targets, platforms and operating systems. Introducing large structural changes, which are likely needed to reach massive performance improvements, would require a lot of concentrated effort and funding.
+We know that some people are wondering why it takes so much time to achieve progress in improving the build performance of Rust. The answer is relatively simple. These changes require a lot of work, domain knowledge (that takes a relatively long time to acquire) and many discussions and code reviews, and the pool of people that have time and motivation to work on them or review these changes is very limited. Current compiler maintainers and contributors (many of whom work on the compiler as volunteers, without any funding) work very hard to keep up with maintaining the compiler and keeping it working with the high-quality bar that Rust developers expect, across many targets, platforms and operating systems. Introducing large structural changes, which are likely needed to reach massive performance improvements, would require a lot of concentrated effort and funding.
 
+[rust-compiler-performance-survey]: https://blog.rust-lang.org/2025/06/16/rust-compiler-performance-survey-2025
 [report]: https://raw.githubusercontent.com/rust-lang/surveys/main/surveys/2025/compiler-performance-survey/report/compiler-performance-2025-report.pdf
 [perf-debug-line-tables-only]: https://perf.rust-lang.org/compare.html?start=0d0f4eac8b98133e5da6d3604d86a8f3b5a67844&end=71ea9a0cacc3473c7b6852c17453259f74635c62&stat=cycles%3Au&doc=false&check=false&opt=false
 [perf-debug-false]: https://perf.rust-lang.org/compare.html?start=bea625f3275e3c897dc965ed97a1d19ef7831f01&end=87c3e1ecd699573f7cb4c9074b8727956bd37a74&stat=cycles%3Au&check=false&opt=false&doc=false
