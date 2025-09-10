@@ -48,7 +48,7 @@ itself.
 
 GitHub will soon [discontinue][gha-sunset] providing free macOS x86\_64 runners for public repositories. Apple has also announced their [plans][apple] for discontinuing support for the x86\_64 architecture.
 
-In accordance with these changes, as of Rust 1.90, the project has [demoted the `x86_64-apple-darwin` target][rfc] from [Tier 1 with host tools](https://doc.rust-lang.org/stable/rustc/platform-support.html#tier-1-with-host-tools) to [Tier 2 with host tools](https://doc.rust-lang.org/stable/rustc/platform-support.html#tier-2-with-host-tools). This means that the target, including tools like `rustc` and `cargo`, will be guaranteed to build but is not guaranteed to pass our automated test suite.
+In accordance with these changes, as of Rust 1.90, we have [demoted the `x86_64-apple-darwin` target][rfc] from [Tier 1 with host tools](https://doc.rust-lang.org/stable/rustc/platform-support.html#tier-1-with-host-tools) to [Tier 2 with host tools](https://doc.rust-lang.org/stable/rustc/platform-support.html#tier-2-with-host-tools). This means that the target, including tools like `rustc` and `cargo`, will be guaranteed to build but is not guaranteed to pass our automated test suite.
 
 For users, this change will not immediately cause impact. Builds of both the standard library and the compiler will still be distributed by the Rust Project for use via `rustup` or alternative installation methods while the target remains at Tier 2. Over time, it's likely that reduced test coverage for this target will cause things to break or fall out of compatibility with no further announcements.
 
