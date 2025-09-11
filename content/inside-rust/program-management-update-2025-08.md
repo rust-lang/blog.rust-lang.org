@@ -125,7 +125,7 @@ Even in the Rust standard library, traits like this are [only implemented for tu
 
 This is, again, keenly felt by anyone writing an entity component system (ECS) or object-relational mapping (ORM) and in particular their query systems.
 
-Some time ago, Olivier Faune took up the mantle and drove the discussions at the last two RustWeek conferences (read the [2024](https://poignardazur.github.io/2024/05/25/report-on-rustnl-variadics/) and [2025](https://poignardazur.github.io/2025/06/07/report-on-variadics-rustweek/) reports).
+Some time ago, Olivier Faure took up the mantle and drove the discussions at the last two RustWeek conferences (read the [2024](https://poignardazur.github.io/2024/05/25/report-on-rustnl-variadics/) and [2025](https://poignardazur.github.io/2025/06/07/report-on-variadics-rustweek/) reports).
 
 Olivier also wrote ["Variadic Generics ideas that won't work for Rust"](https://poignardazur.github.io/2025/07/09/variadic-generics-dead-ends/) which highlights the many pitfals even the simplest "why don't we just..." ideas inevitably run into. This is a complex feature that touches a lot of Rust's machinery, and it can't be added in easily.
 
