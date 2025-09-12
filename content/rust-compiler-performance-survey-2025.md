@@ -10,6 +10,8 @@ team_url = "https://www.rust-lang.org/governance/teams/compiler#team-wg-compiler
 
 We're launching a [Rust Compiler Performance Survey][survey-link].
 
+> The results of the survey can be found [here](https://blog.rust-lang.org/2025/09/10/rust-compiler-performance-survey-2025-results/).
+
 Long compile times of Rust code are frequently being cited as one of the biggest [challenges][annual-survey] limiting the productivity of Rust developers. Rust compiler contributors are of course aware of that, and they are continuously working to improve the situation, by finding [new ways][how-to-speed-up-the-compiler] of speeding up the compiler, [triaging performance regressions][performance-triage] and [measuring][perf-dashboard] our long-term performance improvements. Recently, we also made progress on some [large changes][stabilize-lld] that have been in the making for a long time, which could significantly improve compiler performance by default.
 
 When we talk about compilation performance, it is important to note that it is not always so simple as determining how long does it take `rustc` to compile a crate. There are many diverse development workflows that might have competing trade-offs, and that can be bottlenecked by various factors, such as the integration of the compiler with the used build system.
