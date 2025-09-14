@@ -40,9 +40,15 @@ If you encounter any issues with the LLD linker, please [let us know](https://gi
 
 `cargo publish --workspace` is now supported, automatically publishing all of
 the crates in a workspace in the right order (following any dependencies
-between them). This has long been possible with external tooling or manual
-ordering of individual publishes, but this brings the functionality into Cargo
-itself.
+between them).
+
+This has long been possible with external tooling or manual ordering of
+individual publishes, but this brings the functionality into Cargo itself.
+
+Native integration allows Cargo's publish verification to run a build across
+the full set of to-be-published crates *as if* they were published, including
+during dry-runs. Note that publishes are still not atomic -- network errors or
+server-side failures can still lead to a partially published workspace.
 
 ### Demoting `x86_64-apple-darwin` to Tier 2 with host tools
 
