@@ -29,8 +29,8 @@ To understand the overall sentiment, we asked our respondents to rate their sati
 
 <!-- Chart satisfaction start -->
 <div>
-    <div class="bar-chart" id="satisfaction" style="height:400px; width:100%;"><noscript>
-<img alt="satisfaction" height="600" src="satisfaction.png"/>
+    <div class="bar-chart" id="satisfaction"><noscript>
+<img alt="satisfaction" src="satisfaction.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="satisfaction.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="satisfaction.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
@@ -56,8 +56,8 @@ It is difficult to enumerate all possible build workflows, but we at least tried
 
 <!-- Chart limiting-workflows start -->
 <div>
-    <div class="matrix-chart" id="limiting-workflows" style="height:500px; width:100%;"><noscript>
-<img alt="limiting-workflows" height="500" src="limiting-workflows.png"/>
+    <div class="matrix-chart" id="limiting-workflows"><noscript>
+<img alt="limiting-workflows" src="limiting-workflows.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="limiting-workflows.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="limiting-workflows.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
@@ -69,8 +69,8 @@ We can see that all the workflows that we asked about cause significant problems
 
 <!-- Chart problems start -->
 <div>
-    <div class="matrix-chart" id="problems" style="height:650px; width:100%;"><noscript>
-<img alt="problems" height="650" src="problems.png"/>
+    <div class="matrix-chart" id="problems"><noscript>
+<img alt="problems" src="problems.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="problems.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="problems.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
@@ -98,8 +98,8 @@ To gauge how long is the typical rebuild latency, we asked our respondents to pi
 
 <!-- Chart rebuild-wait-time start -->
 <div>
-    <div class="bar-chart" id="rebuild-wait-time" style="height:400px; width:100%;"><noscript>
-<img alt="rebuild-wait-time" height="400" src="rebuild-wait-time.png"/>
+    <div class="bar-chart" id="rebuild-wait-time"><noscript>
+<img alt="rebuild-wait-time" src="rebuild-wait-time.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="rebuild-wait-time.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="rebuild-wait-time.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
@@ -113,8 +113,8 @@ If we partition these results based on answers to other questions, it is clear t
 
 <!-- Chart rebuild-wait-time-code-size start -->
 <div>
-    <div class id="rebuild-wait-time-code-size" style="height:600px; width:100%;"><noscript>
-<img alt="rebuild-wait-time-code-size" height="600" src="rebuild-wait-time-code-size.png"/>
+    <div class id="rebuild-wait-time-code-size"><noscript>
+<img alt="rebuild-wait-time-code-size" src="rebuild-wait-time-code-size.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="rebuild-wait-time-code-size.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="rebuild-wait-time-code-size.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
@@ -126,8 +126,8 @@ And to a lesser factor also on the number of used dependencies:
 
 <!-- Chart rebuild-wait-time-dep-count start -->
 <div>
-    <div class id="rebuild-wait-time-dep-count" style="height:800px; width:100%;"><noscript>
-<img alt="rebuild-wait-time-dep-count" height="800" src="rebuild-wait-time-dep-count.png"/>
+    <div class id="rebuild-wait-time-dep-count"><noscript>
+<img alt="rebuild-wait-time-dep-count" src="rebuild-wait-time-dep-count.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="rebuild-wait-time-dep-count.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="rebuild-wait-time-dep-count.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
@@ -143,8 +143,8 @@ Approximately 60% of respondents say that they use `cargo` terminal commands to 
 
 <!-- Chart cargo-commands start -->
 <div>
-    <div class="matrix-chart" id="cargo-commands" style="height:500px; width:100%;"><noscript>
-<img alt="cargo-commands" height="500" src="cargo-commands.png"/>
+    <div class="matrix-chart" id="cargo-commands"><noscript>
+<img alt="cargo-commands" src="cargo-commands.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="cargo-commands.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="cargo-commands.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
@@ -178,8 +178,8 @@ However, if Rust developers debug their code after most builds, then this cost m
 
 <!-- Chart debugger start -->
 <div>
-    <div class="bar-chart" id="debugger" style="height:500px; width:100%;"><noscript>
-<img alt="debugger" height="500" src="debugger.png"/>
+    <div class="bar-chart" id="debugger"><noscript>
+<img alt="debugger" src="debugger.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="debugger.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="debugger.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
@@ -195,8 +195,8 @@ However, when we asked people if they require debuginfo to be generated by defau
 
 <!-- Chart required-debuginfo start -->
 <div>
-    <div class="bar-chart" id="required-debuginfo" style="height:400px; width:100%;"><noscript>
-<img alt="required-debuginfo" height="400" src="required-debuginfo.png"/>
+    <div class="bar-chart" id="required-debuginfo"><noscript>
+<img alt="required-debuginfo" src="required-debuginfo.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="required-debuginfo.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="required-debuginfo.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
@@ -208,8 +208,8 @@ This is the problem with changing defaults: it is challenging to improve the wor
 
 <!-- Chart required-debuginfo-debugger start -->
 <div>
-    <div class id="required-debuginfo-debugger" style="height:400px; width:100%;"><noscript>
-<img alt="required-debuginfo-debugger" height="400" src="required-debuginfo-debugger.png"/>
+    <div class id="required-debuginfo-debugger"><noscript>
+<img alt="required-debuginfo-debugger" src="required-debuginfo-debugger.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="required-debuginfo-debugger.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="required-debuginfo-debugger.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
@@ -227,8 +227,8 @@ Build performance of Rust is affected by many different aspects, including the c
 
 <!-- Chart compile-time-improvement-mechanisms start -->
 <div>
-    <div class="matrix-chart" id="compile-time-improvement-mechanisms" style="height:800px; width:100%;"><noscript>
-<img alt="compile-time-improvement-mechanisms" height="600" src="compile-time-improvement-mechanisms.png"/>
+    <div class="matrix-chart" id="compile-time-improvement-mechanisms"><noscript>
+<img alt="compile-time-improvement-mechanisms" src="compile-time-improvement-mechanisms.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="compile-time-improvement-mechanisms.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="compile-time-improvement-mechanisms.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
@@ -240,8 +240,8 @@ It seems that the most popular (and effective) mechanisms for improving build pe
 
 <!-- Chart alternative-linker start -->
 <div>
-    <div class="bar-chart" id="alternative-linker" style="height:500px; width:100%;"><noscript>
-<img alt="alternative-linker" height="500" src="alternative-linker.png"/>
+    <div class="bar-chart" id="alternative-linker"><noscript>
+<img alt="alternative-linker" src="alternative-linker.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="alternative-linker.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="alternative-linker.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>&nbsp;<span>[<a href="alternative-linker-wordcloud.png" target="_href_" title="Download open answers as wordcloud PNG">Wordcloud of open answers</a>]</span>
@@ -267,8 +267,8 @@ When Rust developers experience slow builds, it can be challenging to identify w
 
 <!-- Chart profiling-tools start -->
 <div>
-    <div class="matrix-chart" id="profiling-tools" style="height:450px; width:100%;"><noscript>
-<img alt="profiling-tools" height="450" src="profiling-tools.png"/>
+    <div class="matrix-chart" id="profiling-tools"><noscript>
+<img alt="profiling-tools" src="profiling-tools.png"/>
 </noscript></div>
     <div style="display: flex; margin-bottom: 10px;">
         <span>[<a href="profiling-tools.png" target="_href_" title="Download chart as PNG">PNG</a>]</span>&nbsp;<span>[<a href="profiling-tools.svg" target="_href_" title="Download chart as SVG">SVG</a>]</span>
