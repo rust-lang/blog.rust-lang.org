@@ -134,7 +134,7 @@ pub fn cool_simd_code(/* .. */) -> /* ... */ {
 
 ### Cross-compiled doctests
 
-Doctests will now be tested when running `cargo test --doc --target other_target`, this may result in some amount of breakage due to would-be-failing doctests now being tested.
+Doctests will now be tested when running `cargo test --doc --target other_target`. This may result in some amount of breakage due to would-be-failing doctests now being tested.
 
 Failing tests can be disabled by annotating the doctest with `ignore-<target>` ([docs](https://doc.rust-lang.org/stable/rustdoc/write-documentation/documentation-tests.html#ignoring-targets)):
 ```rust
