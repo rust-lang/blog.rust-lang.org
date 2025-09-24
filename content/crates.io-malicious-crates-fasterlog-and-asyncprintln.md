@@ -27,7 +27,7 @@ The deletion was performed at 15:34 UTC on September 24, 2025.
 
 ## Analysis
 
-Both crates were copies of a crate which provided logging functionality, and the logging implementation remained functional in the malicious crates. The original crate had a feature which performed log file packing, which iterated an associated directories files.
+Both crates were copies of a crate which provided logging functionality, and the logging implementation remained functional in the malicious crates. The original crate had a feature which performed log file packing, which iterated over an associated directories files.
 
 The attacker inserted code to perform the malicious action during a log packing operation, which searched the log files being processed from that directory for:
 
