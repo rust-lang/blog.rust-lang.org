@@ -16,7 +16,7 @@ These crates were:
 - `faster_log` - Published on May 25th, 2025, downloaded 7181 times
 - `async_println` - Published on May 25th, 2025, downloaded 1243 times
 
-The malicious code was executed at runtime, when running or testing a project depending on them. Notably, they did not execute any malicious code at build time. Except for their malicious payload, these crates copied the source code, features, documentation of legitimate crates, using a similiar name to them (a case of typosquatting[^typosquatting]).
+The malicious code was executed at runtime, when running or testing a project depending on them. Notably, they did not execute any malicious code at build time. Except for their malicious payload, these crates copied the source code, features, and documentation of legitimate crates, using a similiar name to them (a case of typosquatting[^typosquatting]).
 
 
 ## Actions taken
