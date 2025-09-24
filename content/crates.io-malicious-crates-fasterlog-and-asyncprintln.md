@@ -21,7 +21,7 @@ The malicious code was executed at runtime, when running or testing a project de
 
 ## Actions taken
 
-The user in question was immediately disabled, and the crates in question were deleted[^deletion] from crates.io shortly after. We have retained copies of all logs associated with the users and the malicious crate files for further analysis.
+The users in question were immediately disabled, and the crates in question were deleted[^deletion] from crates.io shortly after. We have retained copies of all logs associated with the users and the malicious crate files for further analysis.
 
 The deletion was performed at 15:34 UTC on September 24, 2025.
 
