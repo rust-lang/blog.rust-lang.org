@@ -37,7 +37,7 @@ The attacker inserted code to perform the malicious action during a log packing 
 
 The crates then proceeded to exfiltrate the results of this search to `https://mainnet[.]solana-rpc-pool[.]workers[.]dev/`.
 
-These crates had no dependenant downstream crates on crates.io.
+These crates had no dependent downstream crates on crates.io.
 
 The malicious users associated with these crates had no other crates or publishes, and the team is actively investigating associative actions in our retained[^retention] logs.
 
