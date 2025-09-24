@@ -43,7 +43,7 @@ The malicious users associated with these crates had no other crates or publishe
 
 ## Thanks
 
-Our thanks to Kirill Boychenko from the [Socket Threat Research Team][socket] for reporting the crates. We also want to thank Carol Nichols from the crates.io team, Pietro Albini from the Rust Security Response WG and Walter Pearce from the [Rust Foundation](foundation) for aiding in the response.
+Our thanks to Kirill Boychenko from the [Socket Threat Research Team][socket] for reporting the crates. We also want to thank Carol Nichols from the crates.io team, Pietro Albini from the Rust Security Response WG and Walter Pearce from the [Rust Foundation][foundation] for aiding in the response.
 
 [^deletion]: The crates were preserved for future analysis should there be other attacks, and to inform scanning efforts in the future.
 [^retention]: One year of logs are retained on crates.io, but only 30 days are immediately available on our log platform. We chose not to go further back in our analysis, since IP address based analysis is limited by the use of dynamic IP addresses in the wild, and the relevant IP address being part of an allocation to a residential ISP.
