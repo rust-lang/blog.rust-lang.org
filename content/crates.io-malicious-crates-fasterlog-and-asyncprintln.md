@@ -10,24 +10,24 @@ team_url = "https://www.rust-lang.org/governance/teams/dev-tools#team-crates-io"
 
 ## Summary
 
-On September 24th, the crates.io team was notified by Kirill Boychenko from the [Socket Threat Research Team][socket] of two malicious crates which were actively searching file contents for Etherum private keys, Solona private keys, and arbitrary byte arrays for exflitration. 
+On September 24th, the crates.io team was notified by Kirill Boychenko from the [Socket Threat Research Team][socket] of two malicious crates which were actively searching file contents for Etherum private keys, Solana private keys, and arbitrary byte arrays for exfiltration.
 
 These crates were:
 - `faster_log` - Published on May 25th, 2025, downloaded 7181 times
 - `async_println` - Published on May 25th, 2025, downloaded 1243 times
 
-The malicious code was executed at runtime, when running or testing a project depending on them. Notably, they did not execute any malicious code at build time. Except for their malicious payload, these crates copied the source code, features, documentation of legitimate crates, using a similiar name to them (a case of typosquatting[^typosquatting]).
+The malicious code was executed at runtime, when running or testing a project depending on them. Notably, they did not execute any malicious code at build time. Except for their malicious payload, these crates copied the source code, features, and documentation of legitimate crates, using a similiar name to them (a case of typosquatting[^typosquatting]).
 
 
 ## Actions taken
 
-The user in question was immediately disabled, and the crates in question were deleted[^deletion] from crates.io shortly after. We have retained copies of all logs associated with the users and the malicious crate files for further analysis.
+The users in question were immediately disabled, and the crates in question were deleted[^deletion] from crates.io shortly after. We have retained copies of all logs associated with the users and the malicious crate files for further analysis.
 
-The deletion was performed at 15:34 UTC on September 24, 2025. 
+The deletion was performed at 15:34 UTC on September 24, 2025.
 
 ## Analysis
 
-Both crates were copies of a crate which provided logging functionality, and the logging implementation remained functional in the malicious crates. The original crate had a feature which performed log file packing, which iterated an associated directories files.
+Both crates were copies of a crate which provided logging functionality, and the logging implementation remained functional in the malicious crates. The original crate had a feature which performed log file packing, which iterated over an associated directories files.
 
 The attacker inserted code to perform the malicious action during a log packing operation, which searched the log files being processed from that directory for:
 
@@ -35,11 +35,11 @@ The attacker inserted code to perform the malicious action during a log packing 
 - Solana-style Base58 secrets
 - Bracketed byte arrays
 
-The crates then proceeded to exflitrate the results of this search to `https://mainnet[.]solana-rpc-pool[.]workers[.]dev/`. 
+The crates then proceeded to exfiltrate the results of this search to `https://mainnet[.]solana-rpc-pool[.]workers[.]dev/`.
 
-These crates had no dependenant downstream crates on crates.io.
+These crates had no dependent downstream crates on crates.io.
 
-The malicious users associated with these crates had no other crates or publishes, and the team is actively investigating associative actions in our retained[^retention] logs. 
+The malicious users associated with these crates had no other crates or publishes, and the team is actively investigating associative actions in our retained[^retention] logs.
 
 ## Thanks
 
