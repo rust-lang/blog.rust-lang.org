@@ -8,6 +8,8 @@ team = "the crates.io team"
 team_url = "https://www.rust-lang.org/governance/teams/dev-tools#team-crates-io"
 +++
 
+**Updated September 24th, 2025 17:34:38 UTC** - Socket has also published their own [accompanying blog post][socket-blog] about the attack.
+
 ## Summary
 
 On September 24th, the crates.io team was notified by Kirill Boychenko from the [Socket Threat Research Team][socket] of two malicious crates which were actively searching file contents for Etherum private keys, Solana private keys, and arbitrary byte arrays for exfiltration.
@@ -17,7 +19,6 @@ These crates were:
 - `async_println` - Published on May 25th, 2025, downloaded 1243 times
 
 The malicious code was executed at runtime, when running or testing a project depending on them. Notably, they did not execute any malicious code at build time. Except for their malicious payload, these crates copied the source code, features, and documentation of legitimate crates, using a similiar name to them (a case of typosquatting[^typosquatting]).
-
 
 ## Actions taken
 
@@ -52,3 +53,4 @@ Our thanks to Kirill Boychenko from the [Socket Threat Research Team][socket] fo
 [foundation]: https://foundation.rust-lang.org/
 [init]: https://foundation.rust-lang.org/news/2022-09-13-rust-foundation-establishes-security-team/
 [socket]: https://www.socket.dev/
+[socket-blog]: https://socket.dev/blog/two-malicious-rust-crates-impersonate-popular-logger-to-steal-wallet-keys
