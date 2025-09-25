@@ -57,7 +57,7 @@ You can also run these tests locally for a faster feedback cycle:
 
 - Make sure you have [cargo-insta](https://insta.rs/docs/quickstart/) installed.
 
-- Generate the good snapshots to compare against, usually based off the master branch:
+- Generate the good snapshots to compare against, usually based off the main branch:
   ```sh
   cargo insta test -p snapshot --accept --include-ignored
   ```

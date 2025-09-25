@@ -2,7 +2,7 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
 
 env:
@@ -44,7 +44,7 @@ jobs:
 
   pub_date:
     name: Check publication date for placeholder
-    if: ${{ github.ref == 'refs/heads/master' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
 
     runs-on: ubuntu-latest
     steps:
@@ -56,7 +56,7 @@ jobs:
       - run: cargo test -p front_matter -- --include-ignored date_is_set
 
   deploy:
-    if: ${{ github.ref == 'refs/heads/master' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
 
     needs: [pub_date, build]
 
