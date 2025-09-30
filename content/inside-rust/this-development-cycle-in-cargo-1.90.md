@@ -544,7 +544,7 @@ though we didn't feel strongly whether those needed to be resolved before implem
 <!-- team meeting 2025-03-11 -->
 `cargo fix` and `cargo clippy --fix` will apply suggested fixes from lints.
 However, the output is not always pretty and making it so would be difficult.
-If you are like me, its easy to not notice that `cargo fmt` is needed until you see CI fail.
+If you are like me, it's easy to not notice that `cargo fmt` is needed until you see CI fail.
 It would help if `cargo fix` also handled formatting
 ([#12608](https://github.com/rust-lang/cargo/issues/12608)).
 
@@ -633,7 +633,7 @@ We could have a `workspace.new-files` that `cargo new` will copy in.
 It's hard to evaluate a solution like this without better understanding
 where we might go with templateing ([#5151](https://github.com/rust-lang/cargo/issues/5151)).
 
-We could have a `package.extra-files` which `cargo publish` will copy into the `.crate` file like it does `package.readme` when its outside of the package root.
+We could have a `package.extra-files` which `cargo publish` will copy into the `.crate` file like it does `package.readme` when it's outside of the package root.
 If we made it this general,
 we'd need to also allow users to specify where the files would go.
 
