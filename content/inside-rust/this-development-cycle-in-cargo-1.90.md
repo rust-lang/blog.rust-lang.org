@@ -285,8 +285,8 @@ The rest of the mechanics are more program specific.
 We talked a bit about Cargo's transition.
 We still plan to do this in two phases, (1) make the more granular paths configurable and then (2) change the defaults to OS native paths.
 The change to OS native paths might not even need to happen in one go so long as we've solve the policy questions (particularly for Mac).
-For config, we can read from both locations.
-For caches, we can abandon the old location though there is a question of how to handle the cache garbage collection database,
+For config, Cargo can read from both locations.
+For caches, Cargo can abandon the old location though there is a question of how to handle the cache garbage collection database,
 whether to have them be distinct or not.
 There is a question on how to transition the bin path.
 
@@ -364,7 +364,7 @@ The Testing DevEx team has done some brainstorming on this problem
 - Building doctest support into the compiler,
   parsing `#[doc]` attributes and generating `#[test]` functions for them
   - Allows doctests on internal items and binary targets
-  - Doesn't allow for the "pubic interface" testing unless we also link to the original lib or do some import path hackery
+  - Doesn't allow for the "pubic interface" testing unless Rustc also links to the original lib or do some import path hackery
   - Has issues with features like `compile_fail` and per-doctest Editions
 - Using `rustdoc --output-format=doctest` to extract doctests, generate test files, build, and then run those ([rust#134529](https://github.com/rust-lang/rust/issues/134529))
 
@@ -554,12 +554,12 @@ and having `cargo fix` apply it for the first time could be unwanted on its own 
 A way to reduce unwanted edits is if we had an interface to tell `cargo fmt` to only re-format the parts changed by `cargo fix`.
 The exact interaction for these would have to be carefully considered and may still produce unwanted reformatting.
 
-At the next level, we could have a [`.cargo/config.toml`](https://doc.rust-lang.org/cargo/reference/config.html) field
+At the next level, Cargo could have a [`.cargo/config.toml`](https://doc.rust-lang.org/cargo/reference/config.html) field
 ```
 [fix]
 rustfmt = true
 ```
-If we did this, we may want to run `cargo fmt --check` first,
+If we did this, we may want to have Cargo run `cargo fmt --check` first,
 similar to our "VCS dirty" check.
 
 At a minimum, `cargo fix` could recommend running `cargo fmt` if changes were made.
@@ -609,7 +609,7 @@ This likely wouldn't be reconsidered until at least
 is addressed.
 We talked about the idea of caching the relative path inside of the `Cargo.lock`.
 If the package is no longer at that path (update of `git` dependency, user edited the layout at `path`),
-we would re-scan for the package.
+Cargo would re-scan for the package.
 The big hurdle would be plumbing this advisory information from one lockfile, through the resolve, to the next lockfile.
 
 ### Include workspace license files with `cargo new`
@@ -619,7 +619,7 @@ When you run `cargo new` in a workspace,
 it will automatically inherit `workspace.package` fields
 and the `workspace.lints` table.
 Commonly, license files need to be copied into a package for distribution via `cargo publish`
-and it would help if symlinked any license files we found in the workspace root into the package
+and it would help if symlinked any license files Cargo found in the workspace root into the package
 ([13328](https://github.com/rust-lang/cargo/issues/13328)).
 
 On a mechanics side,
