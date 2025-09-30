@@ -139,7 +139,7 @@ and your package can access their `OUT_DIR`s as `env!("windows-manifest_OUT_DIR"
 ([documentation](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#metabuild)).
 
 The next phase is static parameters being defined in `Cargo.toml`
-and then specifying dependencies using [artifact-dependencies](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#artifact-dependencies)
+and then specifying dependencies using [artifact-dependencies](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#artifact-dependencies).
 
 ### `--target host`
 
