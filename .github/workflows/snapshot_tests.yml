@@ -18,8 +18,8 @@ jobs:
         run: cargo install --locked --git https://github.com/getzola/zola --rev 45d3f8d6285f0b47013c5fa31eb405332118af8b
 
       - run: git fetch --depth 2
-      - run: git checkout origin/master
+      - run: git checkout origin/main
       - name: Generate good snapshots
         run: INSTA_OUTPUT=none INSTA_UPDATE=always cargo test -p snapshot -- --include-ignored
-      - run: git checkout $GITHUB_SHA # merge of master+branch
+      - run: git checkout $GITHUB_SHA # merge of main+branch
       - run: INSTA_OUTPUT=none INSTA_UPDATE=no cargo test -p snapshot -- --include-ignored
