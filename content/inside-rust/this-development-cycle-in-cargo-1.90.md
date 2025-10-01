@@ -110,7 +110,7 @@ preventing callers from being able to edit them to get specific behavior out of 
 - `locate-manifest`
 - `read-manifest`
 - `read-lockfile`
-- `resolve-dependencies`
+- `lock-dependencies`
 - `write-lockfile`
 - `resolve-features`
 - `plan-build` ([cargo-plumbing#96](https://github.com/crate-ci/cargo-plumbing/pull/96))
