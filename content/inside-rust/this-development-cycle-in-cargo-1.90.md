@@ -64,7 +64,7 @@ and adopting of new lints in a code base.
 However, `cargo fix`
 - Can be slow ([#13214](https://github.com/rust-lang/cargo/issues/13214))
 - Only applies a subset of possible lints
-- You can't be selective of which lints are fixed without a lot of mucking with `RUSTFLAGS` which was important with the 2024 Edition migration because some lints still had a lot of false positives at first
+- Can't be selective of which lints are fixed without a lot of mucking with `RUSTFLAGS` which was important with the 2024 Edition migration because some lints still had a lot of false positives at first
 
 A problem with addressing these is the current architecture.
 `cargo fix` is implemented as a variant of `cargo check` that replaces `rustc` with `cargo` being run in a special mode that will call `rustc` in a loop, applying fixes until there are none.
