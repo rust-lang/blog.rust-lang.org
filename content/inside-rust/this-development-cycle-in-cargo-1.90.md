@@ -171,7 +171,7 @@ are unstable features that have tried to address this.
 
 In [#13051](https://github.com/rust-lang/cargo/issues/13051),
 [kpreid](https://github.com/kpreid)
-suggested a related feature to `target-applies-host`,
+suggested a related feature to `target-applies-to-host`,
 a platform-tuple placeholder where the following mean the same thing:
 ```console
 $ cargo build --target host
