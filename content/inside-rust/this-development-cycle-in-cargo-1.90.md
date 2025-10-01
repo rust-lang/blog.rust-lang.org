@@ -364,7 +364,7 @@ The Testing DevEx team has done some brainstorming on this problem
 - Building doctest support into the compiler,
   parsing `#[doc]` attributes and generating `#[test]` functions for them
   - Allows doctests on internal items and binary targets
-  - Doesn't allow for the "pubic interface" testing unless Rustc also links to the original lib or do some import path hackery
+  - Doesn't allow for the "public interface" testing unless Rustc also links to the original lib or do some import path hackery
   - Has issues with features like `compile_fail` and per-doctest Editions
 - Using `rustdoc --output-format=doctest` to extract doctests, generate test files, build, and then run those ([rust#134529](https://github.com/rust-lang/rust/issues/134529))
 
