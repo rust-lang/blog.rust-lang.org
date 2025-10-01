@@ -80,7 +80,7 @@ With this design,
 determining which build targets are safe to fix in this pass,
 and applying the suggestions.
 This puts the top-level program in charge of what fixes get applied,
-making it easier to coordinate, allowing the lockin to be removed and opening the door to an interactive mode.
+making it easier to coordinate, allowing the locking to be removed and opening the door to an interactive mode.
 This comes at the cost that fixes in packages lower in the dependency tree can cause later packages to rebuild multiple times,
 slowing things down.
 
