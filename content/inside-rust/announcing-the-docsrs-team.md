@@ -22,7 +22,7 @@ the new Docs.rs Team, leaving [@GuillaumeGomez] to lead the Rustdoc Team.
 
 Joining QuietMisdreavus on the Docs.rs Team is GuillaumeGomez, coordinating work between Rustdoc and
 Docs.rs; [@onur], the original creator of Docs.rs; [@pietroalbini], who has coordinated work in
-Docs.rs from the perspective of the Infrastrucure Team; and introducing [@jyn514], who has worked to
+Docs.rs from the perspective of the Infrastructure Team; and introducing [@jyn514], who has worked to
 improve the developer experience of contributing to Docs.rs by converting the local development
 configuration to use `docker-compose`!
 

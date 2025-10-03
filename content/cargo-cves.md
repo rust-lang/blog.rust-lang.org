@@ -13,7 +13,7 @@ aliases = ["2022/09/14/cargo-cves.html"]
 The Rust Security Response WG was notified that Cargo did not prevent
 extracting some malformed packages downloaded from alternate registries. An
 attacker able to upload packages to an alternate registry could fill the
-filesystem or corrupt arbitary files when Cargo downloaded the package.
+filesystem or corrupt arbitrary files when Cargo downloaded the package.
 
 These issues have been assigned CVE-2022-36113 and CVE-2022-36114. The severity
 of these vulnerabilities is "low" for users of alternate registries. Users
@@ -30,7 +30,7 @@ macros.
 
 After a package is downloaded, Cargo extracts its source code in the `~/.cargo`
 folder on disk, making it available to the Rust projects it builds. To record
-when an extraction is successfull, Cargo writes "ok" to the `.cargo-ok` file at
+when an extraction is successful, Cargo writes "ok" to the `.cargo-ok` file at
 the root of the extracted source code once it extracted all the files.
 
 It was discovered that Cargo allowed packages to contain a `.cargo-ok`
@@ -60,7 +60,7 @@ their own toolchains.
 
 ## Mitigations
 
-We recommend users of alternate registries to excercise care in which package
+We recommend users of alternate registries to exercise care in which package
 they download, by only including trusted dependencies in their projects. Please
 note that even with these vulnerabilities fixed, by design Cargo allows
 arbitrary code execution at build time thanks to build scripts and procedural
@@ -69,7 +69,7 @@ vulnerabilities.
 
 crates.io implemented server-side checks to reject these kinds of packages
 years ago, and there are no packages on crates.io exploiting these
-vulnerabilities. crates.io users still need to excercise care in choosing their
+vulnerabilities. crates.io users still need to exercise care in choosing their
 dependencies though, as the same concerns about build scripts and procedural
 macros apply here.
 

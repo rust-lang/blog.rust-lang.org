@@ -26,7 +26,7 @@ Route53, but AWS only supports CNAMEs on the apex pointing to other AWS
 resources. Because of that, the crates.io DNS was managed on a different
 service until today, causing maintenance issues on our end.
 
-The solution we’re working torwards is to put CloudFront in front of crates.io,
+The solution we’re working towards is to put CloudFront in front of crates.io,
 and that will finally allow us to migrate the crates.io domain to AWS.
 pietroalbini is finishing the last infra touches, and we expect to deploy the
 changes in the coming days.

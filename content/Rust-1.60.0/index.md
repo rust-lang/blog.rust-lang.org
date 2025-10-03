@@ -41,7 +41,7 @@ RUSTFLAGS="-C instrument-coverage" cargo build
 
 After that, you can run the resulting binary, which will produce a
 `default.profraw` file in the current directory. (The path and filename can be
-overriden by an environment variable; see
+overridden by an environment variable; see
 [documentation](https://doc.rust-lang.org/stable/rustc/instrument-coverage.html#running-the-instrumented-binary-to-generate-raw-coverage-profiling-data)
 for details).
 

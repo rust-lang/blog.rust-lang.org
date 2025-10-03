@@ -20,7 +20,7 @@ The agenda included:
 
 You can find the [detailed minutes](https://github.com/rust-lang/wg-governance/blob/master/minutes/2020.04.09.md) on the [wg-governance](https://github.com/rust-lang/wg-governance) repository, but here is a quick summary: 
 * Follow up on the [Project Group RFC](https://github.com/rust-lang/rfcs/pull/2856)
-  * Defined roles of "lead" and "liason" 
+  * Defined roles of "lead" and "liaison" 
 * Discussed the initial Pre-RFC process draft
 * We ran out of time before getting to the Domain Working Group retrospective, but look forward to covering it at the next meeting!
 

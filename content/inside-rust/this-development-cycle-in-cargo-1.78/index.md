@@ -69,7 +69,7 @@ to render ANSI escape codes as styles in an SVG
 (credit goes to [`term-transcript` for the original idea](https://crates.io/crates/term-transcript))
 and integrated that into snapbox
 ([trycmd#256](https://github.com/assert-rs/trycmd/pull/256))
-which we use for snapshoting our UI tests.
+which we use for snapshotting our UI tests.
 
 ![rendering of cargo-add's output using SVG](stderr.term.svg)
 *(not a screenshot but generated from cargo's output)*

@@ -22,7 +22,7 @@ three (3) months, from mid-May to mid-August. Each partnership agrees to a commi
 3-5 hours per week collaborating on a Rust project.
 
 By way of thanks for participating in the program, we offer a fully paid conference ticket,
-travel, and accomodations for every participant to a Rust Conference of their choice:
+travel, and accommodations for every participant to a Rust Conference of their choice:
 
 - May 26-27: [RustFest Paris]
 - August 16-17: [RustConf]

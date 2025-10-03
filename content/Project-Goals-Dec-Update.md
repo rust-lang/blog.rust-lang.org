@@ -47,7 +47,7 @@ For our other goals, we made progress, but there remains work to be done:
 We largely completed our goal to stabilize the language features used by the Rust for Linux project. In some cases a small amount of work remains. Over the last six months, we...
 
 * stabilized the `offset_of!` macro to get the offset of fields;
-* *almost* stabilized the `CoercePointee` trait -- but [discovered that the current implementaton was revealing unstable details](https://github.com/rust-lang/rust/pull/133820#issuecomment-2559379796), which is currently being resolved;
+* *almost* stabilized the `CoercePointee` trait -- but [discovered that the current implementation was revealing unstable details](https://github.com/rust-lang/rust/pull/133820#issuecomment-2559379796), which is currently being resolved;
 * `asm_goto` stabilization PR and reference updates are up, excluding the "output" feature.
 * completed the majority of the work for arbitrary self types, which is being used by RfL and just needs documentation before stabilisation
 

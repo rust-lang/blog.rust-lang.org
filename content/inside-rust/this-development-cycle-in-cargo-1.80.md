@@ -203,7 +203,7 @@ For the rest, we are talking about the following modes:
 | mode                                 | MSRV     | yanked   | prerelease |
 |--------------------------------------|----------|----------|----------|
 | this is yet another candidate        | Required | Never?   | Never?   |
-| de-priorize this over other versions | Required | Likely   | Likely   |
+| de-prioritize this over other versions | Required | Likely   | Likely   |
 | don't resolve to if already in use   | Likely   | Required | Required |
 
 This helped to show that we probably want to name the field `incompatible-rust-version` to clarify that we are talking about how we are handling those packages and to leave room for `resolver.rust-version` to override what version is used when resolving dependencies.

@@ -45,7 +45,7 @@ In the following snippet, the method `required` expects `dep: &D` but the actual
 dependencies.iter().filter(|dep| dep.required());
 ```
 
-Clippy erronously suggested `.filter(Dependency::required)`,
+Clippy erroneously suggested `.filter(Dependency::required)`,
 which is rejected by the compiler due to the difference in borrows.
 
 ### False positive in `clippy::missing_const_for_fn`

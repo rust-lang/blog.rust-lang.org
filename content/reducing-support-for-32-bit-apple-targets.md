@@ -88,7 +88,7 @@ foreseeable future (as we do with all the releases shipped so far).
 The code implementing the targets won’t be removed from the compiler codebase,
 so you’ll also be able to build future releases from source on your own
 (keeping in mind they might have bugs or be broken, as that code will be
-completly untested).
+completely untested).
 
 # What about the nightly channel?
 

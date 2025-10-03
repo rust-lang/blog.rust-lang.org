@@ -75,7 +75,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let (team, team_url) = 'team_prompt: {
         if release {
-            // For official release annoucement posts, the whole
+            // For official release announcement posts, the whole
             // "Rust Release Team" is usually the author.
             break 'team_prompt (None, None);
         }
@@ -140,7 +140,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .with_help_message(
             "
   To include images in a post, the post will be stored in <slug>/index.md,
-  instead of the usualy <slug>.md. Images can then be stored in the directory
+  instead of the usually <slug>.md. Images can then be stored in the directory
   <slug>/ right next to the post itself. They can be included with a relative
   link, e.g. ![alt text](my_impage.png).
 ",

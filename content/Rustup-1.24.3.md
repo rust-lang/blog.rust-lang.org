@@ -26,7 +26,7 @@ If you don't have it already, you can [get rustup][install] from the appropriate
 
 ## What's new in rustup 1.24.3
 
-This patch release focusses around resolving some regressions in behaviour in
+This patch release focuses around resolving some regressions in behaviour in
 the 1.24.x series, in either low tier platforms, or unusual situations around
 very old toolchains.
 

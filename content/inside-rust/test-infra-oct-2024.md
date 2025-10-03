@@ -20,7 +20,7 @@ supporting components in our build system [bootstrap]. This test infra is used
 mainly by rustc and rustdoc. Other tools like cargo, miri or rustfmt maintain
 their own test infra.
 
-As usual, if you encounter bugs or UX issues when using our test infrastrucutre,
+As usual, if you encounter bugs or UX issues when using our test infrastructure,
 please [file an issue][new-issue]. Bugs and papercuts can't be fixed if we don't
 know about them!
 

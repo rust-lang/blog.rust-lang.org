@@ -25,7 +25,7 @@ unwind"`, so one option is to simply wind down the project group. While
 drafting the `"C unwind"` RFC, however, we discovered that the existing
 guarantees around `longjmp` and similar functions could be improved. Although
 this is not strictly related to unwinding<sup>[1](#longjmp-unwind)</sup>, they
-are closesly related: they are both "non-local" control-flow mechanisms that
+are closely related: they are both "non-local" control-flow mechanisms that
 prevent functions from returning normally. Because one of the goals of the Rust
 project is for Rust to interoperate with existing C-like languages, and these
 control-flow mechanisms are widely used in practice, we believe that Rust must

@@ -197,7 +197,7 @@ these instances of undefined behavior could be detected at runtime, but the
 code to do so would impose an undesirable code-size penalty, entirely negating
 the optimizations made possible by using `panic=unwind` or the non-unwinding
 `"C"` ABI. This code would therefore only be appropriate for debug builds.
-Additionally, the complexity of implementing such checks may outweight their
+Additionally, the complexity of implementing such checks may outweigh their
 benefits.
 
 Note that unwinding through a frame that has destructors without running those

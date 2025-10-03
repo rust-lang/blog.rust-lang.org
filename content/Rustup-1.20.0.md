@@ -46,7 +46,7 @@ To change the rustup profile you can use the `rustup set profile` command. For e
 rustup set profile minimal
 ```
 
-It's also possible to choose the profile when installing rustup for the first time, either interactively by choosing the "Customize installation" option or programmaticaly by passing the `--profile=<name>` flag. Profiles will only affect newly installed toolchains: as usual it will be possible to install individual components later with: `rustup component add`.
+It's also possible to choose the profile when installing rustup for the first time, either interactively by choosing the "Customize installation" option or programmatically by passing the `--profile=<name>` flag. Profiles will only affect newly installed toolchains: as usual it will be possible to install individual components later with: `rustup component add`.
 
 ### Installing the latest compatible nightly
 

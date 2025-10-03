@@ -125,7 +125,7 @@ n: 6
 n: 24
 ```
 
-This is servicable, but not particularly great. Maybe we could work on how we
+This is serviceable, but not particularly great. Maybe we could work on how we
 print out the context to make it more clear, but now we're not debugging our code,
 we're figuring out how to make our debugging code better.
 
@@ -161,7 +161,7 @@ Because the `dbg!` macro returns the value of what it's debugging, instead of
 of our code. Additionally, we have *vastly* more useful output.
 
 That's a lot to say about a little macro, but we hope it improves your
-debugging experience! We are contining to work on support for `gdb` and
+debugging experience! We are continuing to work on support for `gdb` and
 friends as well, of course.
 
 #### `jemalloc` is removed by default

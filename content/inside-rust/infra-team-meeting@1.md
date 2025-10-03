@@ -9,7 +9,7 @@ team = "the infrastructure team"
 team_url = "https://www.rust-lang.org/governance/teams/operations#infra"
 +++
 
-Meeting run by pietroalbini. Mintues written by pietroalbini.  
+Meeting run by pietroalbini. Minutes written by pietroalbini.  
 Attending: aidanhs, alexcrichton, kennytm, Mark-Simulacrum, pietroalbini,
 shepmaster  
 [Start of the conversation][discord]

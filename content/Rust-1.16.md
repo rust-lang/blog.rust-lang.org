@@ -52,7 +52,7 @@ There's a lot of them. However, you can think of this process in two big steps: 
 all of its safety checks, makes sure your syntax is correct, all that stuff. Second, once it's satisfied
 that everything is in order, it produces the actual binary code that you end up executing.
 
-It turns out that that second step takes a lot of time. And most of the time, it's not neccesary. That is,
+It turns out that that second step takes a lot of time. And most of the time, it's not necessary. That is,
 when you're working on some Rust code, many developers will get into a workflow like this:
 
  1. Write some code.

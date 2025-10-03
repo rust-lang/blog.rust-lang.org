@@ -177,7 +177,7 @@ part of our toolbox!
 
 We can use this tool to look at a [graph] of performance over the 1.13
 development cycle, shown below. This cycle covered the dates from August 16
-through September 29 (the graph begins from Augest 25th though and is filtered
+through September 29 (the graph begins from August 25th though and is filtered
 in a few ways to eliminate bogus, incomplete, or confusing results). There
 appear to be some big reductions, which are quantified on the corresponding
 [statistics] page.

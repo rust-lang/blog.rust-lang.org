@@ -84,17 +84,17 @@ We landed initial support for `impl Trait` during this sprint. It doesn't yet su
 
 ### Progress towards removing the leak check in rustc
 
-In the rustc trait solver, there is currently a special check done in regards to lifetimes called the "leak check". Without going into the techinical details, there are some design flaws with this approach and it being there blocks features such lazy normalization (which is required for features such const generics and GATs). However, removing the leak check completely has some backward-compatiblity concerns. But [some progress] was made.
+In the rustc trait solver, there is currently a special check done in regards to lifetimes called the "leak check". Without going into the technical details, there are some design flaws with this approach and it being there blocks features such lazy normalization (which is required for features such const generics and GATs). However, removing the leak check completely has some backward-compatibility concerns. But [some progress] was made.
 
 ### Adding a recursive solver to Chalk
 
 When Chalk was first written, it used a stateful recursive solver. It was then changed to use a prolog-solving approach called SLG. SLG uses a more stateless approach where answers to subgoals can be reused.
 
-While SLG is more complete, there are some design tradeoffs. One example in particular is related to how we handle associated types. It's completely possible that we can and will resolve these design problems in the future. In the meantime, however, we ressurected the old recursive solver. [Rust-analyzer] has switched to using it and results have been positive.
+While SLG is more complete, there are some design tradeoffs. One example in particular is related to how we handle associated types. It's completely possible that we can and will resolve these design problems in the future. In the meantime, however, we resurrected the old recursive solver. [Rust-analyzer] has switched to using it and results have been positive.
 
 For now, we'll continue to work on resolving design problems with the SLG solver. Eventually, we expect that we'll evaluate the two and pick one to stick with.
 
-### Creating reproducable Chalk test files
+### Creating reproducible Chalk test files
 
 Oftentimes we'll get a bug report where Chalk doesn't report the result one would expect. And as anyone who has maintained a piece of software knows, getting a minimal reproduction is difficult. What makes it even more difficult is that the goals and programs that Chalk understands are a "lowered" form of actual Rust code, which means not only do we have to make a minimal *Rust* example, but also a minimal *Chalk* example.
 

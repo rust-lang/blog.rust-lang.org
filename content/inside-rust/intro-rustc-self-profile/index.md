@@ -50,7 +50,7 @@ $ rustup update nightly
 ## Profiling the compiler
 
 Now we can build it and tell `rustc` to profile the build of the `regex` crate.
-This will cause three new files to be created in the working directory which contain the profling data.
+This will cause three new files to be created in the working directory which contain the profiling data.
 
 ```sh
 $ cargo rustc -- -Zself-profile

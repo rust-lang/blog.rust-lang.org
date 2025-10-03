@@ -17,7 +17,7 @@ Our first few meetings saw us setting a number of short- and long-term goals. Th
 
 ## One Standardized `Error` Trait 
 
-The `Error` trait has been around since 1.0, and exposed two methods: `Error::description` and `Error::cause`. As it was originally constructed, it was too restictive for a number of reasons<sup>1</sup>. The `Failure` crate addressed many of the `Error` trait's shortcomings by exporting the `Fail` trait, which informs many of changes that are being made to improve the `Error` trait. 
+The `Error` trait has been around since 1.0, and exposed two methods: `Error::description` and `Error::cause`. As it was originally constructed, it was too restrictive for a number of reasons<sup>1</sup>. The `Failure` crate addressed many of the `Error` trait's shortcomings by exporting the `Fail` trait, which informs many of changes that are being made to improve the `Error` trait. 
 
 On that note, bolstering the `std::error::Error` trait such that it could be adopted across the Rust community as _the_ `Error` trait has been an ongoing process since [RFC 2504][rfc2504] was merged in August 2018. 
 

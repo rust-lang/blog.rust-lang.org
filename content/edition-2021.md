@@ -244,7 +244,7 @@ will be the only way to panic with something other than a formatted string.
 
 In addition, `core::panic!()` and `std::panic!()` will be identical in Rust 2021.
 Currently, there are some historical differences between those two,
-which can be noticable when switching `#![no_std]` on or off.
+which can be noticeable when switching `#![no_std]` on or off.
 
 ### Reserving syntax
 

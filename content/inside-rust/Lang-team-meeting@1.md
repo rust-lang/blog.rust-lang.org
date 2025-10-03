@@ -34,7 +34,7 @@ tracking, along with weekly updates on the latest developments.
       permit unwinding by default
     - trying to get measurements of the impact on code size
     - prototyped the plan in a rustc branch, but needs a few updates and to be executed
-      on a representative code base (likely Fuschia)
+      on a representative code base (likely Fuchsia)
 * [Coherence can be bypassed by an indirect impl for a trait object](https://github.com/rust-lang/rust/issues/57893)
     - did a [crater run of the proposal](https://github.com/rust-lang/rust/pull/66037#issuecomment-549575983) but have only partially analyzed the impact
 * grammar working group — qmx
