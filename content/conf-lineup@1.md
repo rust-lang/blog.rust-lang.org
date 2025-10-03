@@ -21,7 +21,7 @@ The second day is the main event, with [talks][rc-talks] at every
 level of expertise, covering basic and advanced techniques, experience
 reports, guidance on teaching, and interesting libraries.
 
-[Tickets are still on sale!][rc-ticks] We offer a [scholarship][rc-schol] for those
+[Tickets are still on sale!][rc-ticks] We offer a [scholarship][rc-scholar] for those
 who would otherwise find it difficult to attend. Join us in lovely Portland and
 hear about the latest developments in the Rust world!
 
@@ -29,7 +29,7 @@ Follow us on Twitter [@rustconf](https://twitter.com/rustconf).
 
  [rc-talks]: http://rustconf.com/program.html
  [rc-ticks]: http://rustconf.com/register.html
- [rc-schol]: https://tilde.wufoo.com/forms/rustconf-scholarships/
+ [rc-scholar]: https://tilde.wufoo.com/forms/rustconf-scholarships/
 
 ### April 29-30th & Sept 30-01: Rust Fest
 

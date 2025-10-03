@@ -1644,7 +1644,7 @@ The `stable_mir` crate is now `rustc_public`. We are now finalizing the infrastr
 </div>
 <!-- markdown separator -->
 
-We made further progress on the new benchmarking scheme. The side of the website is nearing MVP status, currently we are switching focus on the side of the collector tha truns the benchmarks.
+We made further progress on the new benchmarking scheme. The side of the website is nearing MVP status, currently we are switching focus on the side of the collector that runs the benchmarks.
 
 Some notable PRs:
 - Benchmark request queue for try builds and release artifacts (<https://github.com/rust-lang/rustc-perf/pull/2166>, <https://github.com/rust-lang/rustc-perf/pull/2192>, <https://github.com/rust-lang/rustc-perf/pull/2197>, <https://github.com/rust-lang/rustc-perf/pull/2201>).
@@ -1669,7 +1669,7 @@ Some notable PRs:
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
-We made further progress on the new benchmarking scheme. The side of the website is nearing MVP status, currently we are switching focus on the side of the collector tha truns the benchmarks.
+We made further progress on the new benchmarking scheme. The side of the website is nearing MVP status, currently we are switching focus on the side of the collector that runs the benchmarks.
 
 Some notable PRs:
 - Benchmark request queue for try builds and release artifacts (https://github.com/rust-lang/rustc-perf/pull/2166, https://github.com/rust-lang/rustc-perf/pull/2192, https://github.com/rust-lang/rustc-perf/pull/2197, https://github.com/rust-lang/rustc-perf/pull/2201).
