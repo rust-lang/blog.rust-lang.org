@@ -1,0 +1,41 @@
+## See also docs: https://github.com/crate-ci/typos/blob/v1.28.2/docs/reference.md
+
+[files]
+extend-exclude = [
+]
+
+[default.extend-words]
+## Add exclusions here, lines should be like `x = "x"`, where `x` is excluded word.
+moreso = "moreso"
+
+[default.extend-identifiers]
+## Add exclusions here, lines should be like `x = "x"`, where `x` is excluded word.
+# Package name
+flate2 = "flate2"
+# People's names
+Schol = "Schol"
+Theis = "Theis"
+Cornel = "Cornel"
+Signes = "Signes"
+Wirth = "Wirth"
+fliter = "fliter"
+# User names
+durin42 = "durin42"
+# Don't break file links
+platforms_targetted = "platforms_targetted"
+
+[default]
+extend-ignore-words-re = [
+    # words with length <= 4 chars is likely noise
+    '^[a-zA-Z]{1,4}$',
+]
+
+extend-ignore-re = [
+    '1\.53\.0-prelease.md',  # don't break links
+]
+
+[type.svg]
+check-file = false  # not likely to have relevant typos but false positives
+
+[type.minified]
+check-file = false  # generated content
