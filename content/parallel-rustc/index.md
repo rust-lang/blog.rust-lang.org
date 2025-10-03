@@ -153,7 +153,7 @@ to schedule them?
 Fortunately no. The compiler uses the [jobserver
 protocol](https://www.gnu.org/software/make/manual/html_node/POSIX-Jobserver.html)
 to limit the number of threads it creates. If a lot of interprocess parallelism
-is occuring, intraprocess parallelism will be limited appropriately, and
+is occurring, intraprocess parallelism will be limited appropriately, and
 the number of threads will not exceed the number of cores.
 
 ## How to use it

@@ -210,7 +210,7 @@ The Rust compiler's end-to-end latency is known to be a problem.
 ### Expressiveness Initiatives (👩‍💻, 🦀)
 
 A common refrain we hear is: "I need feature X, but it's not implemented in rustc or stable."
-In Rust, we use an open Request-for-Comment (RFC) process for designing new features. Currently, we have [this set of RFCs approved][RFC tracking issue list]; here are some imporant features with dedicated owners that we expect forward movement on.
+In Rust, we use an open Request-for-Comment (RFC) process for designing new features. Currently, we have [this set of RFCs approved][RFC tracking issue list]; here are some important features with dedicated owners that we expect forward movement on.
 
 [RFC tracking issue list]: https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AC-tracking-issue++label%3AB-RFC-approved+
 
@@ -309,7 +309,7 @@ Reach out to [xldenis], from the LMF at the University of Paris-Saclay (and co-l
 
 #### MCVE reduction tooling
 
-One common task for compiler developers is to create a [minimal complete verifiable example][E-needs-mcve]. This task is largely mechanical; pnkfelix has a [blog post][mcve blog post] about Rust source-to-source tranformations that accomplish this. But despite its mechanical nature, the current state of the art in automating this task is in tools like [creduce](https://github.com/csmith-project/creduce), which have some big limitations (such as only working on a single file at a time).
+One common task for compiler developers is to create a [minimal complete verifiable example][E-needs-mcve]. This task is largely mechanical; pnkfelix has a [blog post][mcve blog post] about Rust source-to-source transformations that accomplish this. But despite its mechanical nature, the current state of the art in automating this task is in tools like [creduce](https://github.com/csmith-project/creduce), which have some big limitations (such as only working on a single file at a time).
 
 This is an area where you do not need any knowledge of the `rustc` source code at all. Anyone with an interest in programming language technology can get involved; e.g. one might consider adding IDE commands for certain code reducing transformations.
 
@@ -355,7 +355,7 @@ If you are interested in helping out with this project, reach out to [antoyo] an
 
 ### Diagnostics Aspirations (👩‍💻)
 
-The Rust compiler has pretty good diagnotics. But the good news is, there's a [full employment theorem](https://en.wikipedia.org/wiki/Full_employment_theorem) for diagnostics engineers which is supported by the 1,500+ [open diagnostics issues](https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AA-diagnostics) we have.
+The Rust compiler has pretty good diagnostics. But the good news is, there's a [full employment theorem](https://en.wikipedia.org/wiki/Full_employment_theorem) for diagnostics engineers which is supported by the 1,500+ [open diagnostics issues](https://github.com/rust-lang/rust/issues?q=is%3Aopen+is%3Aissue+label%3AA-diagnostics) we have.
 
 Diagnostics improvements are an *excellent* first step for learning about how to contribute to the Rust compiler. If you're interested in helping out but don't have any idea where to start, fixing diagnostic bugs is a great jumping off point, and you can reach out to [estebank] to find out more about how to help.
 
@@ -364,7 +364,7 @@ Diagnostics improvements are an *excellent* first step for learning about how to
 
 Reading over this list, the number of items on it seems quite daunting! We believe these initiatives will provide the highest impact to the Rust community by helping to fulfill Rust's promise, delighting Rust developers and improving our contributor workflows and aligns well with the results of the [2021 Rust Survey](https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html).
 
-While we think we will be able to make signficant progress on these initiatives this year, project estimation is a difficult and inexact science, especially for open source projects. What we will achieve is ultimately a result of who decides to contribute. Our aspirational goals are currently just that: aspirations.
+While we think we will be able to make significant progress on these initiatives this year, project estimation is a difficult and inexact science, especially for open source projects. What we will achieve is ultimately a result of who decides to contribute. Our aspirational goals are currently just that: aspirations.
 
 This is where you all, the Rust community (including *future members* of that community) come into the picture. Each item has one or two people listed with it; if you're feeling inspired, please do contact us!
 

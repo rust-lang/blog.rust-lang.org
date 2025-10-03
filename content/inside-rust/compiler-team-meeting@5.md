@@ -25,7 +25,7 @@ Each week, we have general announcements from the team followed by check-ins fro
 - [@cjgillot] replaced a lot of TypeFoldable impls with a derive [#66384](https://github.com/rust-lang/rust/pull/66384)
 
 - The Infra team has finished evaluating GitHub Actions and we're switching!
-  - This will have a signficant, positive impact on CI build time.
+  - This will have a significant, positive impact on CI build time.
 
 - [@centril] is fixing useless `<std macros>` spans [#66364](https://github.com/rust-lang/rust/pull/66364)
 
@@ -83,7 +83,7 @@ This week we heard from three working groups because we ran out of time in the p
 
 ### [wg-rls-2.0](https://rust-lang.github.io/compiler-team/working-groups/rls-2.0/)
 
-- Work is procedding on splitting core of rust-analyzer into crates.
+- Work is proceeding on splitting core of rust-analyzer into crates.
 
 - Find usages is implemented.
 

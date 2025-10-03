@@ -46,7 +46,7 @@ were spun up, shut down, and changed, we haven't always done a good job of
 making it clear where the boundaries of responsibility lie in each team.
 Part of the magic in Rust's governance structure is that individual teams are
 given significant authority to do as they see fit, but that also means that
-we have to be concious about scope. We'll have more to report on this process
+we have to be conscious about scope. We'll have more to report on this process
 as it continues to unfold, but the end goal is stated in the roadmap:
 
 > The Rust teams, in concert with the core team, will work to establish a
@@ -74,7 +74,7 @@ on crates.io. We are conducting a full audit of these packages, making sure that
 they're things that should be owned by the project, making sure that they have
 appropriate permissions, making sure that they have people taking care of them,
 all of that kind of thing. Historically, we've been fairly ad-hoc about this sort
-of thing, but as we grow, it is very imporant to be deliberate. An
+of thing, but as we grow, it is very important to be deliberate. An
 [RFC][crate-ownership-rfc] was just opened to create a policy here.
 
 ## Thanks!

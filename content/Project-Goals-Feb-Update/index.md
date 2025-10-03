@@ -173,7 +173,7 @@ We are also working to finalize the stabilization of the language features that 
 
 
 <details>
-<summary>3 detailed updates availabled.</summary>
+<summary>3 detailed updates available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -284,7 +284,7 @@ Updates from our [2025-02-12 meeting](https://hackmd.io/AkNBW942SoacLayPXHthCg):
 
 Given the recent controversy about Rust usage in the Kernel, the RFL group wrote up a [policy document explainer](https://rust-for-linux.com/rust-kernel-policy) to explain the policy, and there was a [write-up on LWN](https://lwn.net/SubscriberLink/1007921/9020dbb12585d48f/).
 
-Regarding arbitary self types and coerce pointee, we are waiting on rust-lang/rust#136764 and rust-lang/rust#136776. The former is on lang team FCP. The latter has received approval from lang team and is awaiting further impl work by @BoxyUwU.
+Regarding arbitrary self types and coerce pointee, we are waiting on rust-lang/rust#136764 and rust-lang/rust#136776. The former is on lang team FCP. The latter has received approval from lang team and is awaiting further impl work by @BoxyUwU.
 
 @ojeda is looking into how to manage dependency information and configure no-std externally.
 
@@ -349,7 +349,7 @@ Help wanted: this project goal needs a compiler developer to move forward.
 *Help wanted:* this project goal needs someone to work on the implementation. If you'd like to help, please post in [this goal's dedicated zulip topic](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/Prototype.20a.20new.20set.20of.20Cargo.20.22plumbing.22.20.28goals.23264.29).
 
 <details>
-<summary>2 detailed updates availabled.</summary>
+<summary>2 detailed updates available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -947,7 +947,7 @@ This is, I believe, mostly waiting on us on the lang team to have a look, probab
 
 
 <details>
-<summary>2 detailed updates availabled.</summary>
+<summary>2 detailed updates available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -1004,7 +1004,7 @@ Update (2025-02-27):
 
 
 <details>
-<summary>2 detailed updates availabled.</summary>
+<summary>2 detailed updates available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 
@@ -1393,7 +1393,7 @@ Last week at the Safety Critical Rust Consortium meeting in London, Ferrous syst
 
 
 <details>
-<summary>2 detailed updates availabled.</summary>
+<summary>2 detailed updates available.</summary>
 
 <!-- this comment helps to convince the markdown parser to do the right thing -->
 

@@ -77,7 +77,7 @@ As a long term goal, we hope to one day have a shared type library between Chalk
 
 ### Writing a `.chalk` file for debugging
 
-As part of Chalk tests, we can write Rust-like "programs" that get parsed into Chalk types. Importantly, these programs are much more succint than the types they get lowered to. As part of an effort to better enable debugging, we implemented a system to go in the opposite direction: to be able to generate the Rust-like programs from the underlying types. This is extremely useful to, for example, debug a bug for a given bit of code that rustc tries to compile. Additionally, this could be used to generate programs for cases with performance problems.
+As part of Chalk tests, we can write Rust-like "programs" that get parsed into Chalk types. Importantly, these programs are much more succinct than the types they get lowered to. As part of an effort to better enable debugging, we implemented a system to go in the opposite direction: to be able to generate the Rust-like programs from the underlying types. This is extremely useful to, for example, debug a bug for a given bit of code that rustc tries to compile. Additionally, this could be used to generate programs for cases with performance problems.
 
 ### Improving `impl Trait` support
 

@@ -166,7 +166,7 @@ step back we want to regretfully inform you about. On Windows, Visual
 Studio 2017 has been released, and Microsoft has changed the structure
 of how the software is installed. [Rust cannot automatically detect this
 location](https://github.com/rust-lang/rust/issues/38584), and while we
-were working on the neccesary changes, they did not make it in time for
+were working on the necessary changes, they did not make it in time for
 this release. Until then, Visual Studio 2015 still works fine, or you
 can run `vcvars.bat` on the command line. We hope to make this work
 in a seamless fashion soon.
@@ -319,7 +319,7 @@ tools = []
 ```
 
 The `tools` feature allows us to include extra tooling, and the `postgres` and `sqlite`
-features control which databses we want to support.
+features control which databases we want to support.
 
 Previously, `cargo build` would attempt to build all targets, which is normally what
 you want. But what if we had a `src/bin/postgres-tool.rs`, that would only really

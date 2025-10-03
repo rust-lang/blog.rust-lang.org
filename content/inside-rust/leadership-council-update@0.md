@@ -35,7 +35,7 @@ And we've been discussing all of this work in the [public council stream on Zuli
 
 We have a lot of ideas on problems of the Rust Project we _could_ work on, but we know we, as a council, can only realistically make progress on a few topics at the same time.
 
-We've come up with a proposed list of our first three priorities, and we'd like the project's feedback on whether this matches your expectations. This is a starting place for iterative improvement over time; we're planning on re-evaluating whether these priorties are still the right ones about every two months or so.
+We've come up with a proposed list of our first three priorities, and we'd like the project's feedback on whether this matches your expectations. This is a starting place for iterative improvement over time; we're planning on re-evaluating whether these priorities are still the right ones about every two months or so.
 
 The type of feedback we're most interested in is hearing about topics or issues you think are more important or urgent than one or more of the following three priorities, and why we should tackle that topic instead of what we have listed here. If this list sounds good to you, we'd like to hear that as well!
 

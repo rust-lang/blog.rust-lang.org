@@ -21,7 +21,7 @@ our duties.
 > listed in this RFC and any subsequent revisions thereof to determine if the
 > Council is meeting its duties and obligations.
 
-We are runnning a quick annual survey, primarily for Rust project members to
+We are running a quick annual survey, primarily for Rust project members to
 provide feedback on the Leadership Council. However, even if you are not a
 member, feel free to fill out the survey too -- we welcome input from those
 interacting with the Council in other capacities.

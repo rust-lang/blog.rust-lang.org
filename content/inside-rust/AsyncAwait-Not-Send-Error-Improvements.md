@@ -44,7 +44,7 @@ fn main() {
 }
 ```
 
-When we try to compile this, we'll get an unwieldly and hard-to-follow diagnostic:
+When we try to compile this, we'll get an unwieldy and hard-to-follow diagnostic:
 
 ```
 error[E0277]: `std::sync::MutexGuard<'_, u32>` cannot be sent between threads safely

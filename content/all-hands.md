@@ -121,7 +121,7 @@ process].
 ### WG: network services
 
 - [WG overview slides](https://gist.github.com/withoutboats/6d4c4639b286d3da19d89d8af82d82d7).
-- **Launching the WG**: determined goals for the WG, including async/await, documentaiton, mid-level HTTP libraries, and the [Tower](https://github.com/tower-rs/tower) ecosystem.
+- **Launching the WG**: determined goals for the WG, including async/await, documentation, mid-level HTTP libraries, and the [Tower](https://github.com/tower-rs/tower) ecosystem.
   Kickoff announcement coming soon!
 - **Async/await**: finalized design and stabilization approach for RFCs (blog post and links to RFCs [here](https://boats.gitlab.io/blog/post/2018-04-06-async-await-final/)).
 

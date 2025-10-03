@@ -54,7 +54,7 @@ in 1.24.0, you'll need to revert it for now.  While we still plan to introduce
 this behavior eventually, we will be rolling it out more slowly and with a new
 implementation strategy.
 
-Quoting [the 1.24 annoucement](https://blog.rust-lang.org/2018/02/15/Rust-1.24.html):
+Quoting [the 1.24 announcement](https://blog.rust-lang.org/2018/02/15/Rust-1.24.html):
 
 > There’s one other change we’d like to talk about here: undefined behavior.
 > Rust generally strives to minimize undefined behavior, having none of it in
@@ -120,7 +120,7 @@ into Lua is [wrapped with `lua_pcall`](https://www.lua.org/pil/24.3.2.html):
 So, the question becomes: Why does this break? And why does it break on
 Windows?
 
-When we talked about `setjmp`/`longjmp` inititally, a key phrase here wasn't
+When we talked about `setjmp`/`longjmp` initially, a key phrase here wasn't
 highlighted. Here it is:
 
 > After digging in, the culpurit was found: `setjmp`/`longjmp`. These functions
@@ -192,7 +192,7 @@ we may backport, otherwise, this functionality will be back in 1.26.
 TL;DR: `rustc` stopped working for some Windows users in edge-case situations.
 If it's been working for you, you were not affected by this bug.
 
-In constrast with the previous bug, which is very complex and tough to understand,
+In contrast with the previous bug, which is very complex and tough to understand,
 this bug's impact is simple: if you have non-ASCII paths in the directory where
 you invoke `rustc`, in 1.24, it would incorrectly error with a message like
 

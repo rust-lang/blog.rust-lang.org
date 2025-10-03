@@ -124,8 +124,8 @@ trait Const<T> {
 }
 
 /// `42` as a "const" (type) generic:
-struct FourtyTwo;
-impl Const<i32> for FourtyTwo {
+struct FortyTwo;
+impl Const<i32> for FortyTwo {
     const VAL: i32 = 42;
 }
 
@@ -135,7 +135,7 @@ impl<C: Const<i32>> Const<i32> for AddOne<C> {
     const VAL: i32 = C::VAL + 1;
 }
 
-AddOne::<FourtyTwo>::VAL
+AddOne::<FortyTwo>::VAL
 ```
 
 Today this is as easy as writing a `const fn`:
@@ -312,7 +312,7 @@ Choosing between sync or async code is a fundamental choice which needs to be
 made. This is complexity which cannot be avoided, and which needs to exist
 somewhere. Currently in Rust that complexity is thrust entirely on users of
 Rust, making them responsible for choosing whether their code should support
-async Rust or not. But other languages have made diferent choices. For example
+async Rust or not. But other languages have made different choices. For example
 Go doesn't distinguish between "sync" and "async" code, and has a runtime which
 is able to remove that distinction.
 

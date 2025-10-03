@@ -37,7 +37,7 @@ Did you know that you can see the lang team's active projects on our [project bo
     * min const generics will be stable in 1.51 
     * we are looking at various small extensions
     * there is now a weekly meeting to look into improvements
-* declarative macro repitition counts:
+* declarative macro repetition counts:
     * there is an [open RFC](https://github.com/rust-lang/rfcs/pull/3086) with proposed FCP
 * instruction set attribute:
     * exploration continues, the interaction of instruction set attribute with inline is not great, but it's not clear how to improve

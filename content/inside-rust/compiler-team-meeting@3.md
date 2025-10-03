@@ -16,7 +16,7 @@ Each week, we have general announcements from the team followed by check-ins fro
 
 # 2019-10-31
 
-## Announcments
+## Announcements
 
 Rust 1.39 ships on Thursday!
 

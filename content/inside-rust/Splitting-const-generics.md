@@ -47,7 +47,7 @@ While allowing such things is desired, it adds additional complications exceedin
 
 There are still two major blockers for stabilization: 
 
-The first being the [transition to valtrees](https://github.com/rust-lang/rust/pull/83234). Valtrees are a representation of values as trees with integer nodes, simplifiying the way we interact with more complex types.
+The first being the [transition to valtrees](https://github.com/rust-lang/rust/pull/83234). Valtrees are a representation of values as trees with integer nodes, simplifying the way we interact with more complex types.
 
 Additionally, we have to figure out which types we *even want* to allow as const parameter types. This ties into the discussion
 about ["structural match"](https://github.com/rust-lang/rust/issues/74446), which is still ongoing.

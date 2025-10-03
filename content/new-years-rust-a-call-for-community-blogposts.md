@@ -20,7 +20,7 @@ for ideas of what the goals should be.
 
 As open source software becomes more and more ubiquitous and popular, the Rust team is
 interested in exploring new and innovative ways to solicit community feedback and
-participation. We're commited to extending and improving our community organization and
+participation. We're committed to extending and improving our community organization and
 outreach- and this effort is just the first of what we hope to be many iterations of new kinds of
 community feedback mechanisms.
 

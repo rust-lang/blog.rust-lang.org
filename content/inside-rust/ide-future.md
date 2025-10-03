@@ -37,7 +37,7 @@ It is an unstable format which rustc uses to record information about the compil
 It contains a pretty high-level information.
 For example, for each identifier in the source-crate, save-analyzer will map this identifier to a definition and list of usages.
 `env RUSTFLAGS="-Zunstable-options -Zsave-analysis" cargo check` can be used to instruct `rustc` to produce save-analysis files (in JSON format).
-Because save-analysis is produced directly from rustc iternal data structures, it is guaranteed to be correct (modulo bugs in rustc itself).
+Because save-analysis is produced directly from rustc internal data structures, it is guaranteed to be correct (modulo bugs in rustc itself).
 
 # Query model
 
@@ -59,5 +59,5 @@ If this approach works, we will consider freezing RLS and focusing fully on rust
 Long term, the plan is to unify the save-analysis fallback path and the lazy analysis.
 
 In parallel to this RLS/rust-analyzer unification effort, we continue to pursue rustc library-ification, with a specific focus on traits solving (via chalk) and type inference.
-"Library-ification" is a term we've been using for the process of extracting code out of rustc into re-usable libaries which can be shared by both rustc and rust-analyzer.
+"Library-ification" is a term we've been using for the process of extracting code out of rustc into re-usable libraries which can be shared by both rustc and rust-analyzer.
 The goal is to use library-ification to gradually reduce the amount of duplicated code between rustc and rust-analyzer, with the goal of eventually either having a single code-base, or having the vast majority of the logic be shared.

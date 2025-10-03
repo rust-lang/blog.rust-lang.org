@@ -15,7 +15,7 @@ make the complete (-ish) dataset available. We have compiled a report which cont
 all questions with minimal analysis. We have elided a few sensitive questions and have combined some answers
 or elided some answers where there is any chance of respondents being identified or of sensitive data being released.
 
-We intend to produce further small reports with more analysis targetted at specific teams or groups within the
+We intend to produce further small reports with more analysis targeted at specific teams or groups within the
 project. If there is any analysis or processed data you'd like to see, please get in touch with the survey working group via
 [Zulip](https://rust-lang.zulipchat.com/#narrow/stream/294169-t-community.2Frust-survey-2021).
 

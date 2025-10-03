@@ -10,7 +10,7 @@ team = "the Secure Code WG"
 team_url = "https://www.rust-lang.org/governance/wgs/wg-secure-code"
 +++
 
-[`cargo audit`](https://crates.io/crates/cargo-audit) checks your project's dependencies for known security vulnerabilites.
+[`cargo audit`](https://crates.io/crates/cargo-audit) checks your project's dependencies for known security vulnerabilities.
 
 By default `cargo audit` checks on your `Cargo.lock` file, but it can also [scan compiled binaries](https://github.com/rustsec/rustsec/tree/main/cargo-audit#cargo-audit-bin-subcommand). You can install `cargo-audit` and run it against your project with the following commands:
 

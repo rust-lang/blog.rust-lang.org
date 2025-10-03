@@ -30,7 +30,7 @@ Most of this should look familiar; this trait looks *very* similar to the [`Iter
 
 In general, GATs provide a foundational basis for a vast range of patterns and APIs. If you really want to get a feel for how many projects have been blocked on GATs being stable, go scroll through either the [tracking issue]: you will find numerous issues from other projects linking to those threads over the years saying something along the lines of "we want the API to look like X, but for that we need GATs" (or see [this comment](https://github.com/rust-lang/rust/pull/96709#issuecomment-1173170243) that has some of these put together already). If you're interested in how GATs enable a library to do zero-copy parsing, resulting in nearly a ten-fold performance increase, you might be interested in checking out a [blog post][chumsky_blog_post] on it by Niko Matsakis.
 
-All in all, even if *you* won't need to use GATs directly, it's very possible that the *libraries* you use will use GATs either internally or publically for ergonomics, performance, or just because that's the only way the implementation works.
+All in all, even if *you* won't need to use GATs directly, it's very possible that the *libraries* you use will use GATs either internally or publicly for ergonomics, performance, or just because that's the only way the implementation works.
 
 ## When GATs go wrong - a few current bugs and limitations
 

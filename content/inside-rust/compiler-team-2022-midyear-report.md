@@ -814,7 +814,7 @@ and in other cases, what we learn of their usage is informing our plans going fo
 
 **Regarding prioritization and focus:** @estebank has seen people come contribute a handful of PRs and disappear, but has not dug deeper into their reasons.
 
-The most common thing is people picking up a project that’s too advanced for them, which demotivates them. We try to both steer them away beforehands and to closely mentor them as they work on things. A cleaner codebase with more machinery for non-standard things (like typechecking opportunistically in the parser, to give an example of something impossible to do today) would allow some of the things people have tried to be done by almost anyone.
+The most common thing is people picking up a project that’s too advanced for them, which demotivates them. We try to both steer them away beforehand and to closely mentor them as they work on things. A cleaner codebase with more machinery for non-standard things (like typechecking opportunistically in the parser, to give an example of something impossible to do today) would allow some of the things people have tried to be done by almost anyone.
 
 @estebank believes that diagnostics are super important and everyone's concern. Efforts like librarification could unblock very powerful heuristics to massively improve our user experience here, but such a project *shouldn't* be started *only* for diagnostics improvements (as there's plenty of things to do already).
 

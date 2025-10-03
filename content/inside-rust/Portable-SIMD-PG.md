@@ -45,7 +45,7 @@ The details of what's available depend on the build target.
 
 We intend to release the Portable SIMD API as `std::simd`.
 We will cover as many use cases as we can, but it might still be appropriate for you to use `std::arch` directly.
-For that reason the `std::simd` types will also be easily convertable to `std::arch` types where needed.
+For that reason the `std::simd` types will also be easily convertible to `std::arch` types where needed.
 
 ## How can I get involved?
 

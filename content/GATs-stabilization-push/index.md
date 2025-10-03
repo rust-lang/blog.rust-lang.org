@@ -171,7 +171,7 @@ Ok, so now comes the part that nobody likes hearing about: the limitations. Fort
 fn takes_iter(_: &mut dyn for<'a> LendingIterator<Item<'a> = &'a i32>) {}
 ```
 
-The biggest reason for this decision is that there's still a bit of design and implementation work to actually make this usable. And while this is a nice feature, adding this in the future would be a backward-compatible change. We feel that it's better to get *most* of GATs stabilized and then come back and try to tackle this later than to block GATs for even longer. Also, GATs without object safety are still very powerful, so we don't lose much by defering this.
+The biggest reason for this decision is that there's still a bit of design and implementation work to actually make this usable. And while this is a nice feature, adding this in the future would be a backward-compatible change. We feel that it's better to get *most* of GATs stabilized and then come back and try to tackle this later than to block GATs for even longer. Also, GATs without object safety are still very powerful, so we don't lose much by deferring this.
 
 As was mentioned earlier in this post, there are still a couple remaining diagnostics [issues](https://github.com/rust-lang/rust/labels/F-generic_associated_types). If you do find bugs though, please file issues!
 

@@ -2,7 +2,7 @@
 path = "inside-rust/2023/02/10/compiler-team-feb-steering-cycle"
 title = "Rust Compiler February 2023 Steering Cycle"
 authors = ["Felix Klock"]
-description = "The compiler team's Feburary 2023 steering cycle"
+description = "The compiler team's February 2023 steering cycle"
 aliases = ["inside-rust/2023/02/10/compiler-team-feb-steering-cycle.html"]
 
 [extra]

@@ -36,7 +36,7 @@ to a dedicated pool of 8-core VMs GitHub generously prepared for us.
 
 Another technical change is that we’re now running most CI builds on the
 [rust-lang-ci/rust] fork. This should only impact team members that want to get
-a list of all the past builds, and should be completly transparent to everyone
+a list of all the past builds, and should be completely transparent to everyone
 else thanks to our integration bot [@bors].
 
 ## What configuration is the project using?

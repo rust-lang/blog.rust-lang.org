@@ -35,7 +35,7 @@ Did you know that you can see the lang team's active initiatives on our [project
 - [FFI Unwind:](https://github.com/rust-lang/lang-team/issues/19#issuecomment-875772875)
   - There is a pending PR that, when landed, closes all remaining issues with "C-unwind", clearing the way for possible stabilization.
 - [Inline assembly:](https://github.com/rust-lang/lang-team/issues/20)
-  - There are still a few active blockers, but there is also some discusison on the thread of a "minimum inline assembly" stabilization that could proceed in the near future!
+  - There are still a few active blockers, but there is also some discussions on the thread of a "minimum inline assembly" stabilization that could proceed in the near future!
 - [`#[instruction_set]` attribute:](https://github.com/rust-lang/rust/issues/74727)
   - The implementation is complete but doesn't produce optimal code. We are considering whether to stabilize in its current form, since it may be of use. **We are actively seeking feedback and experimentation from folks who might be interested in using this feature, which allows you to specify the instruction set for a particular function.**
 

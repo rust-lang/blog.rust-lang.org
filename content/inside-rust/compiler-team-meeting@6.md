@@ -41,7 +41,7 @@ Each week, we have general announcements from the team followed by check-ins fro
 ### [wg-self-profile]
 
 - The ["Minimum Viable Product"][sp_mvp] has been completed!
-  - Self-profling is enabled for all perf.rust-lang.org runs and we automatically publish the data. ([Example][sp_example])
+  - Self-profiling is enabled for all perf.rust-lang.org runs and we automatically publish the data. ([Example][sp_example])
 
 - [@mw] implemented query-key recording so queries can now be attributed to individual query invocations.
 

@@ -121,7 +121,7 @@ The details of the CTFE engine's value representation do not matter too much for
 discussion here. We merely note that earlier versions of the compiler silently
 accepted expressions that *seemed to* transmute memory addresses into integers,
 copied them around, and then transmuted them back into addresses; but that was
-not what was acutally happening under the hood. Instead, what was happening was
+not what was actually happening under the hood. Instead, what was happening was
 that the values were passed around blindly (after all, the whole point of
 transmute is that it does no transformation on its input value, so it is a no-op
 in terms of its operational semantics).
@@ -274,7 +274,7 @@ We have [performed][crater results] a [crater run] for the 1.64-beta and that di
 instances of this particular problem.
 If you can test compiling your crate atop the 1.64-beta before the stable
 release goes out on September 22nd, all the better! One easy way to try the beta
-is to use [rustup's override shortand][rustup] for it:
+is to use [rustup's override shorthand][rustup] for it:
 
 ```sh
 $ rustup update beta

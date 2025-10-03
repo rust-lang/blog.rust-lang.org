@@ -133,7 +133,7 @@ among other languages, and it has the alignment for `i128` hardcoded to 8 bytes.
 Clang uses the correct alignment only because of a workaround, where the alignment is
 manually set to 16 bytes before handing the type to LLVM. This fixes the layout issue
 but has been the source of some other minor problems.[^f128-segfault][^va-segfault]
-Rust does no such manual adjustement, hence the issue reported at
+Rust does no such manual adjustment, hence the issue reported at
 <https://github.com/rust-lang/rust/issues/54341>.
 
 # The Calling Convention Problem
@@ -275,7 +275,7 @@ to avoid an increased memory footprint.
 
 # Compatibility
 
-The most imporant question is how compatibility changed as a result of these fixes. In
+The most important question is how compatibility changed as a result of these fixes. In
 short, `i128` and `u128` with Rust using LLVM 18 (the default version starting with
 1.78) will be completely compatible with any version of GCC, as well as Clang 18 and
 above (released March 2024). All other combinations have some incompatible cases, which

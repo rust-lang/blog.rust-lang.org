@@ -504,7 +504,7 @@ to run *C++* code on the web by converting LLVM IR to JavaScript (or the asm.js
 subset of JavaScript). And the upcoming [WebAssembly][] (wasm) standard will
 cement the web platform as a first-class target for programming languages.
 
-*Rust is uniquely-positioned to be the most powerful and usable wasm-targetting
+*Rust is uniquely-positioned to be the most powerful and usable wasm-targeting
 language for the immediate future.* The same properties that make Rust so
 portable to real hardware makes it nearly trivial to port Rust to wasm. The same
 can't be said for languages with complex runtimes that include garbage

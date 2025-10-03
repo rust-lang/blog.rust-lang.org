@@ -366,7 +366,7 @@ day before RustConf in Portland!
 The Mozilla Rust folks are going to have [Outreachy] and [GSoC] interns this
 summer working on a variety of projects.
 
-We've also had success involving contributors when there are low-committment,
+We've also had success involving contributors when there are low-commitment,
 high impact tasks to be done. One of those efforts was [improving the format of
 error messages]-- check out the [82 participants on this issue]! The Libz Blitz
 mentioned in a previous section is set up specifically to be another source of

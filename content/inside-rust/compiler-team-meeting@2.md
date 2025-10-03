@@ -14,7 +14,7 @@ The compiler team had our weekly triage meeting on 2019-10-24.
 You can find the [minutes](https://rust-lang.github.io/compiler-team/minutes/triage-meeting/2019-10-24/) on the [compiler-team](https://github.com/rust-lang/compiler-team) repository.
 Each week, we have general announcements from the team followed by check-ins from two fo the compiler team working groups.
 
-## Announcments
+## Announcements
 
 - [@simulacrum](https://github.com/Mark-Simulacrum) landed the rust-std split PR which decreases the size of the rustc-dev rustup component [#65474](https://github.com/rust-lang/rust/pull/65474)
 

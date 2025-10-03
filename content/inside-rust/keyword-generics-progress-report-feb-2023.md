@@ -292,7 +292,7 @@ to be made available as well.
 As we alluded to earlier in the post: one of the biggest challenges we see in
 language design is adding features in a way that makes them feel like they're in
 harmony with the rest of the language - and not something which stands out as
-noticably different. And because we're touching on something core to Rust, the
+noticeably different. And because we're touching on something core to Rust, the
 way we do keywords, we have to pay extra close attention here to make sure Rust
 keeps feeling like a single language.
 

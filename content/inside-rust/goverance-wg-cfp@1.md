@@ -29,7 +29,7 @@ topic. To help do this we're going to extend our current meeting duration from
 
 The current goals are to documenting the de-facto governance structure, provide
 the result as a RFC and then if merged provide a version on
-[forge.rust-lang.org](https://forge.rust-lang.org/) so that it has greater visbility. We also want to
+[forge.rust-lang.org](https://forge.rust-lang.org/) so that it has greater visibility. We also want to
 schedule people involved in Rust and other governance structures to come and
 talk about their experiences.
 

@@ -24,13 +24,13 @@ The overarching goal of the [traits working group][wg-traits] is to create a per
 
 [wg-traits]: https://rust-lang.github.io/wg-traits/
 
-As if that weren't enough, we'd like the implementaton to be **reusable**, too -- meaning that it can be used by rustc, yes, but also rust-analyzer and potentially other contexts as well. 
+As if that weren't enough, we'd like the implementation to be **reusable**, too -- meaning that it can be used by rustc, yes, but also rust-analyzer and potentially other contexts as well. 
 
 This effort is part of one of the big, longer term goals for the compiler team: **library-ification**. This refers to the idea of breaking apart the compiler into independent libraries that can be learned, tested, and developed independently.
 
 In order to achieve these and future features, our work is split into two parts: 1) Improving rustc's existing trait solver. 2) Design and implement the [Chalk] trait solver, work towards integration into rustc. The Chalk trait solver, briefly, is a logic-based trait solver, designed to be independent of rustc internals. In addition to it being more powerful than the current rustc trait solving implementation, Chalk can be used as a library for compiler-related work, such as IDE integration (e.g. [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)).
 
-Coming into 2020, we — the traits working group — knew we wanted to get more organized and start to push more on getting Chalk fully integrated into rustc, by cleaning up the Chalk codebase itself, fixing bugs, implementing new features, and ultimately integrating Chalk into rustc itself. In addition, we are committed to documenting design considerations and decisions for better accesibility now and in the future. For example, we now publish a Chalk [book] which, while incomplete, attempts to document the Chalk internals somewhat akin to the [rustc dev guide](https://rustc-dev-guide.rust-lang.org/).
+Coming into 2020, we — the traits working group — knew we wanted to get more organized and start to push more on getting Chalk fully integrated into rustc, by cleaning up the Chalk codebase itself, fixing bugs, implementing new features, and ultimately integrating Chalk into rustc itself. In addition, we are committed to documenting design considerations and decisions for better accessibility now and in the future. For example, we now publish a Chalk [book] which, while incomplete, attempts to document the Chalk internals somewhat akin to the [rustc dev guide](https://rustc-dev-guide.rust-lang.org/).
 
 #### A note about Chalk integration in rustc
 An experimental integration of Chalk was in rustc (under the `-Z chalk` flag) for over a year, but since its initial implementation, little work had been done while much work had been done on Chalk itself. This ultimately meant that the initial implementation based on the older Chalk version looks very different from what an implementation based on the current Chalk would and should look like. Under this reasoning, that experimental implementation has been removed.
@@ -156,7 +156,7 @@ We expect to land basic support for `impl Trait` fairly early in the next sprint
 ### Exploratory implementations and research
 
 In addition to the more concrete goals, there is also some exploratory work being done:
-* [Implementating a recursive solver][chalk#351]
+* [Implementing a recursive solver][chalk#351]
 * [Converting semantic to syntactic equality][chalk#364]
 * [Outputting a file for reproducing bugs][chalk#365]
 
@@ -166,7 +166,7 @@ In addition to the more concrete goals, there is also some exploratory work bein
 
 ### Chalk performance work
 
-Most of the work on Chalk has been focused on design, and *not much* has been done to optimize performance. While the particular "end goal" isn't clear here, we hope to start by createing a set of memory, cpu, and time benchmarks for Chalk. With this framework, we can diagnose specific performance issues and monitor future changes for regressions. Part of this will be to [land][chalk#337] `tracing` support.
+Most of the work on Chalk has been focused on design, and *not much* has been done to optimize performance. While the particular "end goal" isn't clear here, we hope to start by creating a set of memory, cpu, and time benchmarks for Chalk. With this framework, we can diagnose specific performance issues and monitor future changes for regressions. Part of this will be to [land][chalk#337] `tracing` support.
 
 [chalk#337]: https://github.com/rust-lang/chalk/issues/337
 

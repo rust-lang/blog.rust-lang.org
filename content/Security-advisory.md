@@ -82,7 +82,7 @@ resolve this in the standard library soon.
 ## Timeline of events
 
 * Thu, May  9, 2019 at 14:07 PM - Bug reported to security@rust-lang.org
-* Thu, May  9, 2019 at 15:10 PM - Alex reponds, confirming the bug
+* Thu, May  9, 2019 at 15:10 PM - Alex responds, confirming the bug
 * Fri, May 10, 2019 - Plan for mitigation developed and implemented
 * Mon, May 13, 2019 - PRs posted to GitHub for [stable][3]/[beta][4]/[master][5] branches
 * Mon, May 13, 2019 - Security list informed of this issue

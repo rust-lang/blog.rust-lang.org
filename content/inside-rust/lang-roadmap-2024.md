@@ -86,7 +86,7 @@ you learn how the Rust borrow checker works, there remain a lot of "small
 details" that you have to get just right to get your Rust program to compile.
 
 For Rust 2024, we will identify and eliminate many of those patterns and
-idiosyncracies that one must learn to use Rust; our goal is to let you focus
+idiosyncrasies that one must learn to use Rust; our goal is to let you focus
 squarely on the "inherent complexity" of your problem domain and avoid
 "accidental complexity" from Rust as much as possible.
 
