@@ -353,7 +353,7 @@ This runs counter to the way the rest of Cargo works which creates warts in beha
 Some examples of problems with doctests are:
 - inability to run `cargo check` or `cargo clippy` on them
 - `cargo test --workspace` rebuilding doctests when there was no change
-- cargo can't collect "unused depednency" messages from rustc to identify which dependencies are unused across all dev-dependencies
+- cargo can't collect "unused dependency" messages from rustc to identify which dependencies are unused across all dev-dependencies
 
 This also affects future plans including:
 - Coverage reporting ([#13040](https://github.com/rust-lang/cargo/issues/13040))
