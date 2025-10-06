@@ -34,9 +34,7 @@ All of that is listed in the [Project Director Candidate Nominations 2025 hackmd
 
 [pd-hackmd]: https://hackmd.io/Q6PxtJhmQVOgN3RjTT3xqA
 
-The feedback period is still open so if you have any comments on any of the candidates, please add it either to the link above or (if it's sensitive or a concern you have) [DM me on Zulip][tomas-zulip].
-
-The elections will happen on Friday 2025-10-03 where the Leadership Council will select the three new Project Directors in accordance with the [election process][election-process].
+The elections were scheduled on Friday 2025-10-03 where the Leadership Council were selected the three new Project Directors in accordance with the [election process][election-process] (be on the lookout for the official announcement!).
 
 [election-process]: https://github.com/rust-lang/leadership-council/blob/main/policies/project-directorship/election-process.md
 
