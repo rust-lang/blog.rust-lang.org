@@ -12,7 +12,7 @@ team_url = "https://www.rust-lang.org/governance/teams/leadership-council"
 
 TL;DR: The **Rust All Hands 2026** happens **21–23 May** in **Utrecht, Netherlands**.
 
-**Register [here][form]**.
+**[Register here][form]**.
 
 </div>
 
@@ -20,23 +20,25 @@ TL;DR: The **Rust All Hands 2026** happens **21–23 May** in **Utrecht, Netherl
 
 Last May, more than 150 project members and invited guests came together at the largest in-person collaborative event in the history of the Rust project: the Rust All Hands 2025.
 
-![picture](https://github.com/user-attachments/assets/1da0da5c-3cb0-48b5-91ae-6f043550969c)
+![A large room full of Rustaceans smiling and cheering](https://github.com/user-attachments/assets/1da0da5c-3cb0-48b5-91ae-6f043550969c)
 
 
-During two full days, spread over 10 different meeting rooms, both [pre-planned](https://docs.google.com/spreadsheets/d/1G07-f2pwAzEztZMpuxcCW3EWFS1pEX4ShNbsg91Qqjw/edit?gid=0#gid=0) and ad-hoc [discussions][notes] took place on a very wide range of topics.
+During two full days, spread over 10 different meeting rooms, both
+pre-planned and ad-hoc discussions took place on a very wide range of topics. (See [schedule] and [meeting notes].)
 
 Many many long standing issues have been unblocked. Many new ideas were discussed, both small and big. Conflicts were resolved. Plans were made. And many personal connections were formed and improved. ❤
 
-[notes]: https://rust-lang.zulipchat.com/#narrow/channel/486433-all-hands-2025/topic/Meeting.20notes!/with/518928628
+[schedule]: https://docs.google.com/spreadsheets/d/1G07-f2pwAzEztZMpuxcCW3EWFS1pEX4ShNbsg91Qqjw/edit?gid=0#gid=0
+[meeting notes]: https://rust-lang.zulipchat.com/#narrow/channel/486433-all-hands-2025/topic/Meeting.20notes!/with/518928628
 
-![Image](https://github.com/user-attachments/assets/7e5c42bc-2cf0-4e15-b69c-450264ef6e1d)
+![Jyn hosting a discussion in an open space with plants and some TVs on the wall](https://github.com/user-attachments/assets/7e5c42bc-2cf0-4e15-b69c-450264ef6e1d)
 
 
 Additionally, several Rust project members gave [talks] to other project members and contributors, as part of the "Rust Project Track" at the RustWeek conference.
 
 [talks]: https://www.youtube.com/playlist?list=PL8Q1w7Ff68DBJsobwUVTr_vbb2MbxisAF
 
-![Image](https://github.com/user-attachments/assets/b4287c7f-5813-4ec0-bf7f-bde4fd17202d)
+![Michael Goulet (aka compiler-errors) giving a talk with a large projection of a code editor behind](https://github.com/user-attachments/assets/b4287c7f-5813-4ec0-bf7f-bde4fd17202d)
 
 The feedback from the participants was overwhelmingly positive with an average score of 9.5/10. The vast majority would like this to happen again next year, which is exactly what is happening!
 
