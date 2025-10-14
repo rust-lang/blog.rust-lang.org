@@ -18,13 +18,15 @@ Like last year, the [2025 State of Rust Survey][survey-link] will likely take yo
 
 **We are offering the State of Rust Survey in the following languages (if you speak multiple languages, please pick one). Language options are available on the [main survey page][survey-link]:**
 - English
-- Simplified Chinese
+- Chinese (Simplified)
+- Chinese (Mandarin)
 - French
 - German
 - Japanese
 - Ukrainian
 - Russian
 - Spanish
+- Portuguese (Brazil)
 
 > Note: the non-English translations of the survey are provided in a best-effort manner. If you find any issues with the
 > translations, we would be glad if you could send us a [pull request](https://github.com/rust-lang/surveys/tree/main/surveys/2025/annual-survey/translations) to improve the quality of the translations!
