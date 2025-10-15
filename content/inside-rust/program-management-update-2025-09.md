@@ -103,6 +103,8 @@ info!("Window resized to: {width}x{height}");
 
 across the codebase. Across all such `format!`-like invocations, parameters etc. And taking care to not interpolate field accesses or function calls (which are currently not allowed in the "format strings").
 
+Tathagata Roy ran the workshop for us. We tested Coccinelle out on some pre-existing examples, including the one above. The evening after, I ran it on all my repos. I'm really excited about this.
+
 **Clippy**
 
 There was a really good status update on Clippy work specifically for Rust for Linux by Alejandra González. I had no idea that was happening, but it makes perfect sense. Clippy can highlight code that's not desirable even if it's allowed by the Rust compiler.
@@ -131,7 +133,7 @@ The "front-end" here means that GCCRS reads Rust code and transforms it into an 
 
 [ir]: https://en.wikipedia.org/wiki/Intermediate_representation
 
-Pierre highlighted the difficulties of compiling even a "simple" `for` loop: to do that you need to be able to resolve traits and handle iterators and macros.
+Pierre-Emmanuel highlighted the difficulties of compiling even a "simple" `for` loop: to do that you need to be able to resolve traits and handle iterators and macros.
 
 Their main target is to compile Rust's [core library][core].
 
@@ -139,7 +141,7 @@ Their main target is to compile Rust's [core library][core].
 
 After that, they've set their sights on compiling the Linux kernel (including the Rust part). Linux can currently be built with either GCC or LLVM, but it is strongly recommended that everything use one or the other. This will be beneficial to some projects that are required to use the GCC toolchain.
 
-Interestingly, the project is completely ignoring a borrow checker for now. Instead, their goal is to compile *correct* Rust programs &mdash; i.e. only those that `rustc` itself would compile. In the future, they plan to look into [Polonius][polonius], but it would be premature at this point.
+Interestingly, the main effort is not going into the borrow-checker at all. They're using [Polonius][polonius] right now and the compiler is only handling *correct* Rust programs. In the future they're looking to integrate the next-gen borrow checker, but that's some ways off (and would require it being moved to its own crate).
 
 [polonius]: https://github.com/rust-lang/polonius
 
