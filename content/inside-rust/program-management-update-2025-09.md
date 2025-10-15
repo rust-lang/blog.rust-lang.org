@@ -103,6 +103,8 @@ info!("Window resized to: {width}x{height}");
 
 across the codebase. Across all such `format!`-like invocations, parameters etc. And taking care to not interpolate field accesses or function calls (which are currently not allowed in the "format strings").
 
+Tathagata Roy ran the workshop for us. We tested Coccinelle out on some pre-existing examples, including the one above. The evening after, I ran it on all my repos. I'm really excited about this.
+
 **Clippy**
 
 There was a really good status update on Clippy work specifically for Rust for Linux by Alejandra González. I had no idea that was happening, but it makes perfect sense. Clippy can highlight code that's not desirable even if it's allowed by the Rust compiler.
