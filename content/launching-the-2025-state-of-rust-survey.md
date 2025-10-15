@@ -49,4 +49,4 @@ _Click [here][last-survey-results] to read a summary of last year's survey findi
 
 [survey-link]: TODO
 [last-survey-results]: https://blog.rust-lang.org/2025/02/13/2024-State-Of-Rust-Survey-results
-[survey-team-zulip]: https://rust-lang.zulipchat.com/#narrow/channel/402479-t-community.2Frust-survey/topic/2025.20Annual.20Survey.20translations/with/542646281
+[survey-team-zulip]: https://rust-lang.zulipchat.com/#narrow/channel/402479-t-community.2Frust-survey
