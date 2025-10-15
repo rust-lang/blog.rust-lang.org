@@ -1,5 +1,5 @@
 +++
-path = "2025/10/14/announcing-the-new-rust-project-directors-2025"
+path = "2025/10/15/announcing-the-new-rust-project-directors-2025"
 title = "Announcing the New Rust Project Directors"
 authors = ["Leadership Council"]
 
