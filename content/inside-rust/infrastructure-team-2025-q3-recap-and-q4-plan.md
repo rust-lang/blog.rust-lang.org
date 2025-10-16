@@ -114,7 +114,7 @@ Looking ahead to Q4, we have planned the following initiatives:
 [JD](https://github.com/jdno), one of the two Infrastructure Engineers employed full-time by the Rust Foundation, resigned to start his own company.
 JD is staying on the team as a volunteer, but he will be able to dedicate less time than before.
 This quarter, we want to hire a new Infrastructure Engineer to restore the previous capacity of the team.
-Follow the Foundation's social media and [careers page](https://rustfoundation.org/careers/) if you want to know when the position is posted.
+If you are interested, check the Rust Foundation [careers page](https://rustfoundation.org/careers/).
 
 We would like to take this opportunity to thank JD for his three years of
 invaluable contributions and support to the Rust Infrastructure Team and the Rust community.
