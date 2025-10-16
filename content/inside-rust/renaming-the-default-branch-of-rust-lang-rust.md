@@ -8,7 +8,7 @@ team = "the Infra team"
 team_url = "https://www.rust-lang.org/governance/teams/infra#team-infra"
 +++
 
-We will be renaming the default branch of the [rust-lang/rust repository](https://github.com/rust-lang/rust) from `master` to `main` on 2025-11-10. We've chosen `main` specifically as it's the [new default in git][git-change] and the renaming will leverage the [GitHub tooling][github-tooling] built to make this easier.
+We will be renaming the default branch of the [rust-lang/rust repository](https://github.com/rust-lang/rust) from `master` to `main` on 2025-11-10. We've chosen `main` specifically as it's the default for newly-created repositories [in GitHub][github-change] and the renaming will leverage the [GitHub tooling][github-tooling] built to make this easier.
 
 If you maintain a tool that currently assumes the default branch of `rust-lang/rust` is named `master`, using `HEAD` instead will work both before and after the rename.
 
@@ -26,7 +26,7 @@ git remote prune origin
 
 If you have a fork of the `rust-lang/rust` repository on GitHub and would like to rename your default branch to match, you can follow [GitHub's instructions][github-how-to-rename].
 
-[git-change]: https://lore.kernel.org/git/pull.656.v4.git.1593009996.gitgitgadget@gmail.com/
+[github-change]: https://github.blog/changelog/2020-10-01-the-default-branch-for-newly-created-repositories-is-now-main/
 
 [github-tooling]: https://github.com/github/renaming
 
