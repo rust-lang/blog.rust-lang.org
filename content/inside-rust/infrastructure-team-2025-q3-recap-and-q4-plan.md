@@ -77,6 +77,28 @@ GitHub PR: [rust-lang/bors#352](https://github.com/rust-lang/bors/pull/352)
 
 The GSoC project for implementing merge functionality in Bors has concluded (we will post a blog post in the upcoming weeks that will describe the results of all our GSoC projects). We plan to deploy bors to production and fully replace homu by it in the upcoming months.
 
+### Improving rebase force-push review experience with a range-diff for GitHub PRs
+
+The [triagebot](https://rust-lang.org/governance/teams/infra/#team-triagebot)
+team has worked on implementing an emulated [`git range-diff`](https://git-scm.com/docs/git-range-diff) for GitHub PRs.
+
+The feature is enabled on `rust-lang/rust`[^range-diff-enable] and automatically posts a comment when a force-push with a rebase is detected, containing a link to the comparison.
+
+[^range-diff-enable]: See the docs on the [Forge](https://forge.rust-lang.org/triagebot/range-diff.html).
+
+An example of the same push shown by [GitHub](https://github.com/rust-lang/rust/compare/0c8f814fa3d35c1aa7f8ce933e88c82d94a6cd39..304c51d7eae3) and shown by our [`range-diff`](https://triage.rust-lang.org/gh-range-diff/rust-lang/rust/0c8f814fa3d35c1aa7f8ce933e88c82d94a6cd39..304c51d7eae38698ae90e3b40afc6300aea76f25).
+
+See [\#t-compiler \> Experimental range-diff for force-push](https://rust-lang.zulipchat.com/#narrow/channel/131828-t-compiler/topic/Experimental.20range-diff.20for.20force-push/near/534646361) for more details.
+
+### Improving reviewing experience on GitHub PRs
+
+Following the `range-diff` feature the [triagebot](https://rust-lang.org/governance/teams/infra/#team-triagebot)
+team has worked on improving the experience of reviewing GitHub PRs in particular focusing on changes since the last review.
+
+This new feature is enabled on `rust-lang/rust`[^changes-since-enable] and automatically adds a comparison link to every top-level review comment.
+
+[^changes-since-enable]: See the docs on the [Forge](https://forge.rust-lang.org/triagebot/review-changes-since.html).
+
 ### Support optional CI jobs
 
 Until now, CI only had jobs that ran on PRs or when a merge to the default branch was attempted (i.e., the auto build).
