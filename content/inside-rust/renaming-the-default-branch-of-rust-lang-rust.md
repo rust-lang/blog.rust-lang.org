@@ -1,7 +1,8 @@
 +++
-path = "inside-rust/2025/10/16/renaming-the-default-branch-of-rust-langrust"
+path = "inside-rust/2025/10/16/renaming-the-default-branch-of-rust-lang-rust"
 title = "Renaming the default branch of rust-lang/rust"
 authors = ["Jake Goulding"]
+aliases = ["inside-rust/2025/10/16/renaming-the-default-branch-of-rust-langrust"]
 
 [extra]
 team = "the Infra team"
