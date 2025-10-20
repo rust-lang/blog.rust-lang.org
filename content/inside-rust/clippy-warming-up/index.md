@@ -12,7 +12,7 @@ team_url = "https://www.rust-lang.org/governance/teams/dev-tools#team-clippy"
 The [feature freeze affecting Clippy][feature-freeze] has reached its end date. This means that the Clippy project has been accepting pull
 requests that add new features (and new lints) for a while.
 
-The Clippy has reviewed the results, and we can say that it's been a success 🎉. It has been so great that we managed
+The Clippy team has reviewed the results, and we can say that it's been a success 🎉. It has been so great that we managed
 to create an all-time peak in the number of pull requests opened in a week.
 
 In this plot we can observe that peak (the red lines mark the start and end of the feature freeze)
