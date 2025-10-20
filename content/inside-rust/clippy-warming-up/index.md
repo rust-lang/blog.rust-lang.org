@@ -20,7 +20,7 @@ In this plot we can observe that peak (the red lines mark the start and end of t
 ![Plot of PRs per week, we can see an all-time peak when the feature freeze happens](/inside-rust/clippy-warming-up/prs_per_week.png)
 
 After some data crunching of those pull requests opened after June 26th, we had 18 pull requests open in that period
-that added lints. With 326 pull requests open by both and old contributors, we want to highlight all the new people
+that added lints. With 326 pull requests open by both new and old contributors, we want to highlight all the new people
 that started contributing to Clippy, 47 new contributors who opened a total of 195 pull requests.
 
 On a team meeting, we concluded that the results of the feature freeze were positive enough to warrant a future one.
