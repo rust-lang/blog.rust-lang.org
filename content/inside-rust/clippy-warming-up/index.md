@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/clippys-feature-warming-up"
+path = "inside-rust/2025/10/22/clippys-feature-warming-up"
 title = "What we learned with Clippy's feature freeze"
 authors = ["blyxyas"]
 
@@ -26,8 +26,7 @@ that started contributing to Clippy, 47 new contributors who opened a total of 1
 On a team meeting, we concluded that the results of the feature freeze were positive enough to warrant a future one.
 The cadence and duration of these is still being decided.
 
-58% of all pull requests by new contributors were opened by the same person. This single contributor opened 114 pull requests of the
-total 195. We held a meeting with her ([ada4a] on Github) to iron out some of the details of
+58% of all pull requests by new contributors (114 out of the total 195) were opened by the same person. We held a meeting with her ([ada4a] on Github) to iron out some of the details of
 the codebase and our procedures for new contributors. We are currently analyzing that meeting in order to improve
 the experience for future and current contributors.
 
@@ -38,7 +37,7 @@ We also asked some questions to Ada (ada4a) to include as a mini Q&A, here are s
 > Why do you like contributing to Clippy? What's so fun about it?
 
 I came to enjoy improving the suggestions that Clippy makes: they are
-fascinating in how they point out of the exact part of code that is
+fascinating in how they point out the exact part of code that is
 problematic, and show the (sometimes pretty complex) manipulations required to
 fix it. Also, It has been empowering to learn the machinery behind the
 compiler, and use that knowledge to refine these diagnostics even further.
