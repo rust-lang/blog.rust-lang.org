@@ -10,7 +10,7 @@ team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-goals"
 
 On Sep 9, we merged [RFC 3849](https://github.com/rust-lang/rfcs/pull/3849), declaring our goals for the "second half" of 2025H2 -- well, the last 3 months, at least, since "yours truly" ran a bit behind getting goals program organized.
 
-## Flagship goals
+## Flagship themes
 
 In prior goals programs we had a few major flagship goals, but since many of these goals were multi-year programs, it made it hard to see what progress had been made. This time we decided to organize things a bit differently. We established four flagship *themes*, each of which covers a number of more specific goals. These themes cover the goals we expect to be the most impactful and constitute our major focus as a project for the remainder of the year. The four themes identified in the RFC are as follows:
 
@@ -40,6 +40,7 @@ The "Beyond the `&`" initiative aims to share `&`'s special capabilities, allowi
 | [In-place initialization](https://rust-lang.github.io/rust-project-goals/2025h2/in-place-initialization.html)   | [Alice Ryhl][] | [lang] ([Taylor Cramer][])                                             |
 | [Next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2025h2/next-solver.html)          | [lcnr][]     | [types] ([lcnr][])                                                |
 | [Stabilizable Polonius support on nightly](https://rust-lang.github.io/rust-project-goals/2025h2/polonius.html) | [Rémy Rakic][]      | [types] ([Jack Huey][])                                            |
+| [SVE and SME on AArch64](https://rust-lang.github.io/rust-project-goals/2025h2/scalable-vectors.html) | [David Wood][]       | [compiler] ([David Wood][]), [lang] ([Niko Matsakis][]), [libs] ([Amanieu d'Antras][]), [types]           |
 
 
 Rust's trait system is one of its most powerful features, but it has a number of longstanding limitations that are preventing us from adopting new patterns. The goals in this category unblock a number of new capabilities:
