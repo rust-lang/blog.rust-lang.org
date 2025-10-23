@@ -170,7 +170,7 @@ Learn more about Dev Desktops in the [Rust Forge](https://forge.rust-lang.org/in
 
 ### Conferences
 
-Some members of the Infrastructure team will attend [EuroRust](https://www.eurorust.eu/) and [RustLab](https://rustlab.org/).
+Some members of the Infrastructure team will attend [EuroRust](https://www.eurorust.eu/) and [RustLab](https://rustlab.it/).
 Feel free to reach out to us if you want to meet in person!
 
 In particular, on November 4th, [Marco](https://github.com/marcoieni) is giving a talk at RustLab titled *“1.5 years in the infra team: what we cooked and what’s next”*.
