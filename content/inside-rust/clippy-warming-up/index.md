@@ -17,7 +17,7 @@ to create an all-time peak in the number of pull requests opened in a week.
 
 In this plot we can observe that peak (the red lines mark the start and end of the feature freeze)
 
-![Plot of PRs per week, we can see an all-time peak when the feature freeze happens](/inside-rust/clippy-warming-up/prs_per_week.png)
+![Plot of PRs per week, we can see an all-time peak when the feature freeze happens](./prs_per_week.png)
 
 After some data crunching of those pull requests opened after June 26th, we had 18 pull requests open in that period
 that added lints. With 326 pull requests open by both new and old contributors, we want to highlight all the new people
