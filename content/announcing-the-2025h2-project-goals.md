@@ -82,7 +82,7 @@ People generally start using Rust for foundational use cases, where the requirem
 
 For the remainder of 2025 you can expect monthly blog posts covering the major progress on the project goals.
 
-Looking at the broader picture, we have now done 3 iterations of the goals program and we want to judge how it should be run going forward. To start, Nandini Sharma from CMU has been conducting interviews with various project members to help us see what's working with the goals program and what could be improved. We expect to spend some time discussing what we should do and to be launching the next iteration of the goals program next year. Whatever form that winds up taking, Tomas Sedovic, the [Rust program manager](https://blog.rust-lang.org/inside-rust/2025/06/30/program-management-update-2025-06/) hired by the Leadership Council will take over running the program. It's been a pleasure y'all!
+Looking at the broader picture, we have now done 3 iterations of the goals program and we want to judge how it should be run going forward. To start, Nandini Sharma from CMU has been conducting interviews with various project members to help us see what's working with the goals program and what could be improved. We expect to spend some time discussing what we should do and to be launching the next iteration of the goals program next year. Whatever form that winds up taking, Tomas Sedovic, the [Rust program manager](https://blog.rust-lang.org/inside-rust/2025/06/30/program-management-update-2025-06/) hired by the Leadership Council will join me in running the program.
 
  # Appendix: Full list of project goals.
 
