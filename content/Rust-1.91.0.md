@@ -73,10 +73,10 @@ warning: a dangling pointer will be produced because the local variable `x` will
   = note: `#[warn(dangling_pointers_from_locals)]` on by default
 ```
 
-Note that the code above is not itself unsafe, as it doesn't perform any dangerous
-operations itself. Only dereferencing the raw pointer would be unsafe. We expect future
-releases of Rust to add more functionality helping authors to safely interact with raw
-pointers, and unsafe code more generally.
+Note that the code above is not unsafe, as it itself doesn't perform any dangerous
+operations. Only dereferencing the raw pointer after the function returns would be
+unsafe. We expect future releases of Rust to add more functionality helping authors
+to safely interact with raw pointers, and with unsafe code more generally.
 
 ### Stabilized APIs
 
