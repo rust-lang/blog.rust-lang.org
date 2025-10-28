@@ -8,11 +8,11 @@ team = "the Goals team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-goals"
 +++
 
-On Sep 9, we merged [RFC 3849](https://github.com/rust-lang/rfcs/pull/3849), declaring our goals for the "second half" of 2025H2 -- well, the last 3 months, at least, since "yours truly" ran a bit behind getting goals program organized.
+On Sep 9, we merged [RFC 3849](https://github.com/rust-lang/rfcs/pull/3849), declaring our goals for the "second half" of 2025H2 -- well, the last 3 months, at least, since "yours truly" ran a bit behind getting the goals program organized.
 
 ## Flagship themes
 
-In prior goals programs we had a few major flagship goals, but since many of these goals were multi-year programs, it made it hard to see what progress had been made. This time we decided to organize things a bit differently. We established four flagship *themes*, each of which covers a number of more specific goals. These themes cover the goals we expect to be the most impactful and constitute our major focus as a project for the remainder of the year. The four themes identified in the RFC are as follows:
+In prior goals programs, we had a few major flagship goals, but since many of these goals were multi-year programs, it was hard to see what progress had been made. This time we decided to organize things a bit differently. We established four flagship *themes*, each of which covers a number of more specific goals. These themes cover the goals we expect to be the most impactful and constitute our major focus as a Project for the remainder of the year. The four themes identified in the RFC are as follows:
 
 * **Beyond the `&`**, making it possible to create user-defined smart pointers that are as ergonomic as Rust's built-in references `&`.
 * **Unblocking dormant traits**, extending the core capabilities of Rust's trait system to unblock long-desired features for language interop, lending iteration, and more.
@@ -30,7 +30,7 @@ In prior goals programs we had a few major flagship goals, but since many of the
 
 One of Rust's core value propositions is that it's a "library-based language"—libraries can build abstractions that feel built-in to the language even when they're not. Smart pointer types like `Rc` and `Arc` are prime examples, implemented purely in the standard library yet feeling like native language features. However, Rust's built-in reference types (`&T` and `&mut T`) have special capabilities that user-defined smart pointers cannot replicate. This creates a "second-class citizen" problem where custom pointer types can't provide the same ergonomic experience as built-in references.
 
-The "Beyond the `&`" initiative aims to share `&`'s special capabilities, allowing library authors to create smart pointers that are truly indistinguishable from built-in references in terms of syntax and ergonomics. This will enable more ergonomic smart pointers for use in cross-language interop (e.g., references to objects in other languages like C++ or Python) and for low-level projects like Rust for Linux which use smart pointers to express particular data structures.
+The "Beyond the `&`" initiative aims to share the special capabilities of `&`, allowing library authors to create smart pointers that are truly indistinguishable from built-in references in terms of syntax and ergonomics. This will enable more ergonomic smart pointers for use in cross-language interop (e.g., references to objects in other languages like C++ or Python) and for low-level projects like Rust for Linux that use smart pointers to express particular data structures.
 
 ### "Unblocking dormant traits"
 
@@ -45,11 +45,11 @@ The "Beyond the `&`" initiative aims to share `&`'s special capabilities, allowi
 
 Rust's trait system is one of its most powerful features, but it has a number of longstanding limitations that are preventing us from adopting new patterns. The goals in this category unblock a number of new capabilities:
 
-* [Polonius](https://rust-lang.github.io/rust-project-goals/2025h2/./polonius.html) will enable new borrowing patterns, and in particular [unblock "lending iterators"](https://github.com/rust-lang/rust/issues/92985). Over the last few goal periods we have identified an "alpha" version of polonius that addresses the most important cases while being relatively simple and optimizable. Our goal for 2025H2 is to implement this algorithm in a form that is ready for stabilization in 2026.
-* The [next gen trait solver](https://rust-lang.github.io/rust-project-goals/2025h2/./next-solver.html) is a refactored trait solver that unblocks better support for numerous language features (implied bounds, negative impls, the list goes on) in addition to closing a number of existing bugs and unsoundnesses. Over the last few goal periods, the trait solver went from early prototype to being production use in coherence. The goal for 2025H2 is to prepare it for stabilization.
-* The work on [evolving trait hierarchies](https://rust-lang.github.io/rust-project-goals/2025h2/./evolving-traits.html) will make it possible to refactor some parts of an existing trait out into a new supertrait so they can be used on their own. This unblocks a number of features where the existing trait is insufficiently general, in particular stabilizing support for custom receiver types, a prior project goal that wound up blocking on this refactoring. This will also make it safer to provide stable traits in the standard library, while preserving the ability to evolve them in the future.
-* The work to [expand Rust's `Sized` hierarchy](https://rust-lang.github.io/rust-project-goals/2025h2/./scalable-vectors.html) will permit us to express types that are neither `Sized` nor `?Sized`, such as extern types (which have no size) or Arm's Scalable Vector Extension (which have a size that is known at runtime, but not compilation time). This goal builds on [RFC #3729](https://github.com/rust-lang/rfcs/pull/3729) and [RFC #3838](https://github.com/rust-lang/rfcs/pull/3838), authored in previous project goal periods.
-* [In-place initialization](https://rust-lang.github.io/rust-project-goals/2025h2/./in-place-initialization.html) allows creating structs and values that are tied to a particular place in memory. While useful directly for projects doing advanced C interop, it also unblocks expanding `dyn Trait` to support for `async fn` and `-> impl Trait` methods, as compiling such methods requires the ability for the callee to return a future whose size is not known to the caller.
+* [Polonius](https://rust-lang.github.io/rust-project-goals/2025h2/./polonius.html) will enable new borrowing patterns, and in particular [unblock "lending iterators"](https://github.com/rust-lang/rust/issues/92985). Over the last few goal periods, we have identified an "alpha" version of Polonius that addresses the most important cases while being relatively simple and optimizable. Our goal for 2025H2 is to implement this algorithm in a form that is ready for stabilization in 2026.
+* The [next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2025h2/./next-solver.html) is a refactored trait solver that unblocks better support for numerous language features (implied bounds, negative impls, the list goes on) in addition to closing a number of existing bugs and sources of unsoundness. Over the last few goal periods, the trait solver went from being an early prototype to being in production use for coherence checking. The goal for 2025H2 is to prepare it for stabilization.
+* The work on [evolving trait hierarchies](https://rust-lang.github.io/rust-project-goals/2025h2/./evolving-traits.html) will make it possible to refactor some parts of an existing trait into a new supertrait so they can be used on their own. This unblocks a number of features where the existing trait is insufficiently general, in particular stabilizing support for custom receiver types, a prior Project goal that wound up blocked on this refactoring. This will also make it safer to provide stable traits in the standard library while preserving the ability to evolve them in the future.
+* The work to [expand Rust's `Sized` hierarchy](https://rust-lang.github.io/rust-project-goals/2025h2/./scalable-vectors.html) will permit us to express types that are neither `Sized` nor `?Sized`, such as extern types (which have no size) or Arm's Scalable Vector Extension (which have a size that is known at runtime but not at compilation time). This goal builds on [RFC #3729](https://github.com/rust-lang/rfcs/pull/3729) and [RFC #3838](https://github.com/rust-lang/rfcs/pull/3838), authored in previous Project goal periods.
+* [In-place initialization](https://rust-lang.github.io/rust-project-goals/2025h2/./in-place-initialization.html) allows creating structs and values that are tied to a particular place in memory. While useful directly for projects doing advanced C interop, it also unblocks expanding `dyn Trait` to support `async fn` and `-> impl Trait` methods, as compiling such methods requires the ability for the callee to return a future whose size is not known to the caller.
 
 ### "Flexible, fast(er) compilation"
 
@@ -63,7 +63,7 @@ Rust's trait system is one of its most powerful features, but it has a number of
 The "Flexible, fast(er) compilation" initiative focuses on improving Rust's build system to better serve both specialized use cases and everyday development workflows:
 
 * We are improving compilation performance through (1) [parallel compilation in the compiler front-end](https://rust-lang.github.io/rust-project-goals/2025h2/./parallel-front-end.html), which delivers 20-30% faster builds, and (2) [making the Cranelift backend production-ready for development use](https://rust-lang.github.io/rust-project-goals/2025h2/./production-ready-cranelift.html), offering roughly 20% faster code generation compared to LLVM for debug builds.
-* We are working to [stabilize a core MVP of the `-Zbuild-std` feature](https://rust-lang.github.io/rust-project-goals/2025h2/./build-std.html), which allows developers to rebuild the standard library from source with custom compiler flags. This unblocks critical use cases for embedded developers and low-level projects like Rust for Linux, while also enabling improvements like using sanitizers with the standard library or building `std` with debug information.
+* We are working to [stabilize a core MVP of the `-Zbuild-std` feature](https://rust-lang.github.io/rust-project-goals/2025h2/./build-std.html), which allows developers to rebuild the standard library from source with custom compiler flags. This unblocks critical use cases for embedded developers and low-level projects like Rust for Linux while also enabling improvements like using sanitizers with the standard library or building `std` with debug information.
 
 ### "Higher-level Rust"
 
@@ -76,22 +76,22 @@ The "Flexible, fast(er) compilation" initiative focuses on improving Rust's buil
 People generally start using Rust for foundational use cases, where the requirements for performance or reliability make it an obvious choice. But once they get used to it, they often find themselves turning to Rust even for higher-level use cases, like scripting, web services, or even GUI applications. Rust is often "surprisingly tolerable" for these high-level use cases -- except for some specific pain points that, while they impact everyone using Rust, hit these use cases particularly hard. We plan two flagship goals this period in this area:
 
 * We aim to stabilize [cargo script](https://rust-lang.github.io/rust-project-goals/2025h2/./cargo-script.html), a feature that allows single-file Rust programs that embed their dependencies, making it much easier to write small utilities, share code examples, and create reproducible bug reports without the overhead of full Cargo projects.
-* We aim to finalize the design of [ergonomic ref-counting](https://rust-lang.github.io/rust-project-goals/2025h2/./ergonomic-rc.html) and to finalize the experimental impl feature so it is ready for beta testing. Ergonomic ref counting makes it less cumbersome to work with ref-counted types like `Rc` and `Arc`, particularly in closures.
+* We aim to finalize the design of [ergonomic ref-counting](https://rust-lang.github.io/rust-project-goals/2025h2/./ergonomic-rc.html) and to finalize the experimental impl feature so it is ready for beta testing. Ergonomic ref-counting makes it less cumbersome to work with ref-counted types like `Rc` and `Arc`, particularly in closures.
 
 ## What to expect next
 
-For the remainder of 2025 you can expect monthly blog posts covering the major progress on the project goals.
+For the remainder of 2025 you can expect monthly blog posts covering the major progress on the Project goals.
 
-Looking at the broader picture, we have now done 3 iterations of the goals program and we want to judge how it should be run going forward. To start, Nandini Sharma from CMU has been conducting interviews with various project members to help us see what's working with the goals program and what could be improved. We expect to spend some time discussing what we should do and to be launching the next iteration of the goals program next year. Whatever form that winds up taking, Tomas Sedovic, the [Rust program manager](https://blog.rust-lang.org/inside-rust/2025/06/30/program-management-update-2025-06/) hired by the Leadership Council will join me in running the program.
+Looking at the broader picture, we have now done three iterations of the goals program, and we want to judge how it should be run going forward. To start, Nandini Sharma from CMU has been conducting interviews with various Project members to help us see what's working with the goals program and what could be improved. We expect to spend some time discussing what we should do and to be launching the next iteration of the goals program next year. Whatever form that winds up taking, Tomas Sedovic, the [Rust program manager](https://blog.rust-lang.org/inside-rust/2025/06/30/program-management-update-2025-06/) hired by the Leadership Council, will join me in running the program.
 
- # Appendix: Full list of project goals.
+ # Appendix: Full list of Project goals.
 
 <details>
-<summary>Read the full slate of Rust project goals.</summary>
+<summary>Read the full slate of Rust Project goals.</summary>
 
-The full slate of project goals are as follows. These goals all have identified points of contact who will drive the work forward as well as a viable work plan. 
+The full slate of Project goals is as follows. These goals all have identified points of contact who will drive the work forward as well as a viable work plan.
 
-**Invited goals.** Some goals of the goals below are "invited goals", meaning that for that goal to happen we need someone to step up and serve as a point of contact. To find the invited goals, look for the **"Help wanted"** badge in the table below. Invited goals have reserved capacity for teams and a mentor, so if you are someone looking to help Rust progress, they are a great way to get involved.
+**Invited goals.** Some of the goals below are "invited goals", meaning that for that goal to happen we need someone to step up and serve as a point of contact. To find the invited goals, look for the **"Help wanted"** badge in the table below. Invited goals have reserved capacity for teams and a mentor, so if you are someone looking to help Rust progress, they are a great way to get involved.
 
 | Goal                                                                                                       | Point of contact | Team(s) and Champion(s)                                                               |
 | :--                                                                                                        | :--              | :--                                                                                   |
@@ -349,4 +349,3 @@ The full slate of project goals are as follows. These goals all have identified 
 [Not funded]: https://img.shields.io/badge/Not%20yet%20funded-red
 [TBD]: https://img.shields.io/badge/TBD-red
 [Team]: https://img.shields.io/badge/Team%20ask-red
-
