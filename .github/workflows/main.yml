@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
-      - uses: crate-ci/typos@7436548694def3314aacd93ed06c721b1f91ea04 # v1.37.2
+      - uses: crate-ci/typos@07d900b8fa1097806b8adb6391b0d3e0ac2fdea7 # v1.39.0
 
   build:
     runs-on: ubuntu-latest
