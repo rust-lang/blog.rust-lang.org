@@ -27,7 +27,7 @@ git remote prune origin
 
 If you have a fork of the `rust-lang/rust` repository on GitHub and would like to rename your default branch to match, you can follow [GitHub's instructions][github-how-to-rename].
 
-**We recommend you to rename the default branch of your fork.** If you do not do it, and you will some day type `git checkout master` from muscle memory, git will create a fresh `master` branch based on your fork's `master` branch, which will be outdated. This behavior can be quite confusing.
+**We recommend renaming the default branch of your fork.** If you do not rename it and later run `git checkout master`, git will create a`master` branch based on your fork's outdated `master` branch. This behavior can be confusing.
 
 [github-change]: https://github.blog/changelog/2020-10-01-the-default-branch-for-newly-created-repositories-is-now-main/
 
