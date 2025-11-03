@@ -13,7 +13,7 @@ We will be renaming the default branch of the [rust-lang/rust repository](https:
 
 If you maintain a tool that currently assumes the default branch of `rust-lang/rust` is named `master`, using `HEAD` instead will work both before and after the rename.
 
-After the rename, contributors will need to run the following commands in their local checkout of the repository, assuming that your remote registry is called `origin`:
+After the rename, contributors will need to run the following commands in their local checkout of the repository, assuming that your upstream remote is called `origin`:
 
 ```bash
 git branch -m master main
@@ -26,6 +26,8 @@ git remote prune origin
 ```
 
 If you have a fork of the `rust-lang/rust` repository on GitHub and would like to rename your default branch to match, you can follow [GitHub's instructions][github-how-to-rename].
+
+**We recommend renaming the default branch of your fork.** If you do not rename it and later run `git checkout master`, git will create a`master` branch based on your fork's outdated `master` branch. This behavior can be confusing.
 
 [github-change]: https://github.blog/changelog/2020-10-01-the-default-branch-for-newly-created-repositories-is-now-main/
 
