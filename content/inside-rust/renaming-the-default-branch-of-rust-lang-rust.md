@@ -59,4 +59,4 @@ git remote prune upstream
 
 [github-tooling]: https://github.com/github/renaming
 
-[infra-help-zulip]: (https://rust-lang.zulipchat.com/#narrow/channel/242791-t-infra/topic/Help.20with.20updating.20rust-lang.2Frust.20default.20branch/with/554127642)
+[infra-help-zulip]: https://rust-lang.zulipchat.com/#narrow/channel/242791-t-infra/topic/Help.20with.20updating.20rust-lang.2Frust.20default.20branch/with/554127642
