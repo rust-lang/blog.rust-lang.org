@@ -1,5 +1,5 @@
 +++
-path = "9999/12/31/launching-the-2025-state-of-rust-survey"
+path = "2025/11/17/launching-the-2025-state-of-rust-survey"
 title = "Launching the 2025 State of Rust Survey"
 authors = ["apiraino", "Jakub Beránek"]
 
@@ -14,7 +14,7 @@ The Rust Project has been collecting valuable information about the Rust program
 
 We invite you to take this year’s survey whether you have just begun using Rust, you consider yourself an intermediate to advanced user, or you have not yet used Rust but intend to one day. The results will allow us to more deeply understand the global Rust community and how it evolves over time. 
 
-Like last year, the [2025 State of Rust Survey][survey-link] will likely take you between 10 and 25 minutes, and responses are anonymous. We will accept submissions until TODO. Trends and key insights will be shared on [blog.rust-lang.org](https://blog.rust-lang.org) as soon as possible.
+Like last year, the [2025 State of Rust Survey][survey-link] will likely take you between 10 and 25 minutes, and responses are anonymous. We will accept submissions until December 17. Trends and key insights will be shared on [blog.rust-lang.org](https://blog.rust-lang.org) as soon as possible.
 
 **We are offering the State of Rust Survey in the following languages (if you speak multiple languages, please pick one). Language options are available on the [main survey page][survey-link]:**
 - English
@@ -35,7 +35,18 @@ Please help us spread the word by sharing the [survey link][survey-link] via you
 
 This survey would not be possible without the time, resources, and attention of the Rust Survey Team, the Rust Foundation, and other collaborators. We would also like to thank the following contributors who helped with translating the survey (in no particular order):
 
-- TODO
+- [@jieyouxu](https://github.com/jieyouxu)
+- [@adriantombu](https://github.com/adriantombu)
+- [@illogiq](https://github.com/illogiq)
+- [@Marcono1234](https://github.com/Marcono1234)
+- [@tanakakz](https://github.com/tanakakz)
+- [@YohDeadFall](https://github.com/YohDeadFall)
+- [@Kivooeo](https://github.com/Kivooeo)
+- [@avrong](https://github.com/avrong)
+- [@igarai](https://github.com/igarai)
+- [@weihanglo](https://github.com/weihanglo)
+- [@tyranron](https://github.com/tyranron)
+- [@leandrobbraga](https://github.com/leandrobbraga)
 
 Thank you!
 
