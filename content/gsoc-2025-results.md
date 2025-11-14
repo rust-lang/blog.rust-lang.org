@@ -22,7 +22,7 @@ Below you can find a brief summary of each of our GSoC 2025 projects. You can fi
 - [Add safety contracts](#add-safety-contracts) by [Dawid Lachowicz](https://github.com/dawidl022)
 - [Bootstrap of rustc with rustc_codegen_gcc](#bootstrap-of-rustc-with-rustc-codegen-gcc) by [Michał Kostrubiec](https://github.com/FractalFir)
 - [Cargo: Build script delegation](#cargo-build-script-delegation) by [Naman Garg](https://github.com/namanlp)
-- [Distributed and resource-efficient verification](#distributed-and-resource-efficient-verification) by [Zhou Jiping](https://github.com/zjp-CN)
+- [Distributed and resource-efficient verification](#distributed-and-resource-efficient-verification) by [Jiping Zhou](https://github.com/zjp-CN)
 - [Enable Witness Generation in cargo-semver-checks](#enable-witness-generation-in-cargo-semver-checks) by [Talyn Veugelers](https://github.com/GlitchlessCode)
 - [Extend behavioural testing of std::arch intrinsics](#extend-behavioural-testing-of-std-arch-intrinsics) by [Madhav Madhusoodanan](https://github.com/madhav-madhusoodanan)
 - [Implement merge functionality in bors](#implement-merge-functionality-in-bors) by [Sakibul Islam](https://github.com/Sakib25800)
@@ -60,7 +60,17 @@ Beyond autodiff work, Marcelo also initiated work on GPU offloading intrinsics, 
 - Mentor: [Michael Tautschnig](https://github.com/tautschnig)
 - [Final report](https://gist.github.com/dawidl022/e7ec4e1674156dd43c58e76e05267abe)
 
-TODO
+The Rust Project has an ambitious goal to [instrument the Rust standard library with safety contracts](https://rust-lang.github.io/rust-project-goals/2025h1/std-contracts.html), moving from informal comments that specify safety requirements of `unsafe` functions to executable Rust code. This transformation represents a significant step toward making Rust's safety guarantees more explicit and verifiable. To prioritize which functions should receive contracts first, there is a [verification contest](https://github.com/model-checking/verify-rust-std) ongoing.
+
+Given that Rust contracts are still in their [early stages](https://github.com/rust-lang/rust/issues/128044), Dawid's project was intentionally open-ended in scope and direction. This flexibility allowed Dawid to identify and tackle several key areas that would add substantial value to the contracts ecosystem. His contributions were in the following three main areas:
+
+- **Pragmatic Contracts Integration**: Refactoring [contract HIR lowering](https://github.com/rust-lang/rust/pull/144438) to ensure no contract code is executed when contract-checks are disabled. This has major impact as it ensures that contracts do not have runtime cost when contract checks are disabled.
+
+- **Variable Reference Capability**: Adding the ability to [refer](https://github.com/rust-lang/rust/pull/144444) to variables from preconditions within postconditions. This fundamental enhancement to the contracts system has been fully implemented and merged into the compiler. This feature provides developers with much more expressive power when writing contracts, allowing them to establish relationships between input and output states.
+
+- **Separation Logic Integration**: The bulk of Dawid's project involved identifying, understanding, and planning the introduction of owned and block ownership predicates for separation-logic style reasoning in contracts for unsafe Rust code. This work required extensive research and collaboration with experts in the field. Dawid engaged in multiple discussions with authors of Rust validation tools and Miri developers, both in person and through Zulip discussion threads. The culmination of this research is captured in a comprehensive MCP (Major Change Proposal) that Dawid [created](https://github.com/rust-lang/compiler-team/issues/942).
+
+Dawid's work represents crucial foundational progress for Rust's safety contracts initiative. By successfully implementing variable reference capabilities and laying the groundwork for separation logic integration, he has positioned the contracts feature for significant future development. His research and design work will undoubtedly influence the direction of this important safety feature as it continues to mature. Thank you very much!
 
 ### Bootstrap of rustc with rustc_codegen_gcc
 - Contributor: [Michał Kostrubiec](https://github.com/FractalFir)
@@ -102,11 +112,20 @@ As future work, we would like to implement the ability to pass parameters to bui
 We would like to thank Naman for helping improving Cargo and laying the groundwork for a feature that could have compile-time benefits across the Rust ecosystem!
 
 ### Distributed and resource-efficient verification
-- Contributor: [Zhou Jiping](https://github.com/zjp-CN)
+- Contributor: [Jiping Zhou](https://github.com/zjp-CN)
 - Mentor: [Michael Tautschnig](https://github.com/tautschnig)
 - [Final report](https://github.com/os-checker/distributed-verification/blob/f480981dbf529a25ae50e4cc799e5398165fc325/GSoC2025.md)
 
-TODO
+The goal of this project was to address critical scalability challenges of formally verifying Rust's standard library by developing a distributed verification system that intelligently manages computational resources and minimizes redundant work. The [Rust standard library verification project](https://github.com/model-checking/verify-rust-std) faces significant computational overhead when verifying large codebases, as traditional approaches re-verify unchanged code components. With Rust's standard library containing thousands of functions and continuous development cycles, this inefficiency becomes a major bottleneck for practical formal verification adoption.
+
+Jiping implemented a distributed verification system with several key innovations:
+
+- **Intelligent Change Detection**: The system uses hash-based analysis to identify which parts of the codebase have actually changed, allowing verification to focus only on modified components and their dependencies.
+- **Multi-Tool Orchestration**: The project coordinates multiple verification backends including Kani model checker, with careful version pinning and compatibility management.
+- **Distributed Architecture**: The verification workload is distributed across multiple compute nodes, with intelligent scheduling that considers both computational requirements and dependency graphs.
+- **Real-time Visualization**: Jiping built a comprehensive web interface that provides live verification status, interactive charts, and detailed proof results. You can check it out [here](https://os-checker.github.io/distributed-verification/chart)!
+
+You can find the created distributed verification tool in [this](https://github.com/os-checker/distributed-verification) repository. Jiping's work established a foundation for scalable formal verification that can adapt to the growing complexity of Rust's ecosystem, while maintaining verification quality and completeness, which will go a long way towards ensuring that Rust's standard library remains safe and sound. Thank you for your great work!
 
 ### Enable Witness Generation in cargo-semver-checks
 - Contributor: [Talyn Veugelers](https://github.com/GlitchlessCode)
