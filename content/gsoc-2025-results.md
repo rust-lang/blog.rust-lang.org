@@ -329,7 +329,13 @@ We would like to appreciate your meticulous work, Julien! Thank you very much.
 - Mentor: [Trevor Gross](https://github.com/tgross35)
 - [Final report](https://github.com/mbyx/gsoc25_blog/blob/5fd32d35ea4237b2f586f0d8abceeb2dabd86139/_posts/2025-09-01-work_submission.markdown)
 
-TODO
+[`libc`](https://github.com/rust-lang/libc) is a crucial crate in the Rust ecosystem (on average, it has ~1.5 million *daily* downloads), providing bindings to system C API. This GSoC project had two goals: improve testing for what we currently have, and make progress toward a stable 1.0 release of `libc`.
+
+Test generation is handled by the `ctest` crate, which creates unit tests that compare properties of Rust API to properties of the C interfaces it binds. Prior to the project, `ctest` used an obsolete Rust parser that had stopped receiving major updates about eight years ago, meaning `libc` could not easily use any syntax newer than that. Abdul completely rewrote `ctest` to use `syn` as its parser and make it much easier to add new tests, then went through and switched everything over to the more modern `ctest`. After this change, we were able to remove a number of hacks that had been needed to work with the old parser.
+
+The other part of the project was to make progress toward the 1.0 release of `libc`. Abdul helped with this by going through and addressing a number of issues that need to be resolved before the release, many of which were made possible with all the `ctest` changes.
+
+While there is still a lot of work left to do before `libc` can reach 1.0, Abdul's improvements will go a long way towards making that work easier, as they give us more confidence in the test suite, which is now much easier to modify and extend. Thank you very much for all your work!
 
 ### New proc-macro Server API for Rust-Analyzer
 - Contributor: [Neil Wang](https://github.com/DriedYellowPeach)
