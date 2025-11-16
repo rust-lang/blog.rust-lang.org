@@ -29,7 +29,7 @@ Below you can find a brief summary of each of our GSoC 2025 projects. You can fi
 - [Improve bootstrap](#improve-bootstrap) by [Shourya Sharma](https://github.com/Shourya742)
 - [Improve Wild linker test suites](#improve-wild-linker-test-suites) by [Kei Akiyama](https://github.com/lapla-cogito)
 - [Improving the Rustc Parallel Frontend: Parallel Macro Expansion](#improving-the-rustc-parallel-frontend-parallel-macro-expansion) by [Lorrens](https://github.com/LorrensP-2158466)
-- [Make cargo-semver-checks faster](#make-cargo-semver-checks-faster) by [JosephC](https://github.com/CLIDragon)
+- [Make cargo-semver-checks faster](#make-cargo-semver-checks-faster) by [Joseph Chung](https://github.com/CLIDragon)
 - [Make Rustup Concurrent](#make-rustup-concurrent) by [Francisco Gouveia](https://github.com/FranciscoTGouveia)
 - [Mapping the Maze of Rust's UI Test Suite with Established Continuous Integration Practices](#mapping-the-maze-of-rust-s-ui-test-suite-with-established-continuous-integration-practices) by [Julien Robert](https://github.com/oneirical)
 - [Modernising the libc Crate](#modernising-the-libc-crate) by [Abdul Muiz](https://github.com/mbyx)
@@ -250,7 +250,7 @@ These refactorings allowed him to implement something called ["batched import re
 Lorrens laid an important groundwork for fixing potential correctness issues around name resolution and macro expansion, which unblocks further work on parallelizing these compiler passes, which is exciting. His work also helped unblock some [library](https://github.com/rust-lang/rust/pull/137487) [improvements](https://github.com/rust-lang/rust/pull/139493) that were stuck for a long time. We are grateful for your hard work on improving tricky parts of Rust and its compiler, Lorrens. Thank you!
 
 ### Make cargo-semver-checks faster
-- Contributor: [JosephC](https://github.com/CLIDragon)
+- Contributor: [Joseph Chung](https://github.com/CLIDragon)
 - Mentor: [Predrag Gruevski](https://github.com/obi1kenobi)
 - [Final report](https://clidragon.github.io/blog/gsoc-2025)
 
