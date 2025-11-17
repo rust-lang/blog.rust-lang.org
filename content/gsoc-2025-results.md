@@ -9,13 +9,13 @@ team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-mentor
 +++
 
 As we have [announced][gsoc-blog-post] previously this year, the Rust Project participated
-in [Google Summer of Code (GSoC)][gsoc] for the second time. Almost twenty contributors have been working very hard on their projects for several months. Same as last year, the projects had various durations, so some of them have ended in September, while the last ones have been concluded in the middle of November. Now that the final reports of all projects have been submitted, we are happy to announce that 18 out of the total 19 contributors have passed the final review! We had a very large number of projects this year, so we consider this number of successfully finished projects to be a great result.
+in [Google Summer of Code (GSoC)][gsoc] for the second time. Almost twenty contributors have been working very hard on their projects for several months. Same as last year, the projects had various durations, so some of them have ended in September, while the last ones have been concluded in the middle of November. Now that the final reports of all projects have been submitted, we are happy to announce that 18 out of 19 projects have been successful! We had a very large number of projects this year, so we consider this number of successfully finished projects to be a great result.
 
 We had awesome interactions with our GSoC contributors over the summer, and through a video call, we also had a chance to see each other and discuss the accepted GSoC projects. Our contributors have learned a lot of new things and collaborated with us on making Rust better for everyone, and we are very grateful for all their contributions! Some of them have even continued contributing after their project has ended, and we hope to keep working with them in the future, to further improve open-source Rust software. **We would like to thank all our Rust GSoC 2025 contributors. You did a great job!**
 
 Same as last year, Google Summer of Code 2025 was overall a success for the Rust Project, this time with more than double the number of projects. We think that GSoC is a great way of introducing new contributors to our community, and we are looking forward to participating in GSoC (or similar programs) again in the near future. If you are interested in becoming a (GSoC) contributor, check out our [GSoC project idea list](https://github.com/rust-lang/google-summer-of-code) and our [guide for new contributors][contributor-guide].
 
-Below you can find a brief summary of each of our GSoC 2025 projects. You can find more information about the original goals of the projects [here][gsoc-project-list]. For easier navigation, here is an index of all the project descriptions in alphabetical order:
+Below you can find a brief summary of our GSoC 2025 projects. You can find more information about the original goals of the projects [here][gsoc-project-list]. For easier navigation, here is an index of the project descriptions in alphabetical order:
 
 
 - [ABI/Layout handling for the automatic differentiation feature](#abi-layout-handling-for-the-automatic-differentiation-feature) by [Marcelo Domínguez](https://github.com/sa4dus)
@@ -33,7 +33,6 @@ Below you can find a brief summary of each of our GSoC 2025 projects. You can fi
 - [Make Rustup Concurrent](#make-rustup-concurrent) by [Francisco Gouveia](https://github.com/FranciscoTGouveia)
 - [Mapping the Maze of Rust's UI Test Suite with Established Continuous Integration Practices](#mapping-the-maze-of-rust-s-ui-test-suite-with-established-continuous-integration-practices) by [Julien Robert](https://github.com/oneirical)
 - [Modernising the libc Crate](#modernising-the-libc-crate) by [Abdul Muiz](https://github.com/mbyx)
-- [New proc-macro Server API for Rust-Analyzer](#new-proc-macro-server-api-for-rust-analyzer) by [Neil Wang](https://github.com/DriedYellowPeach)
 - [Prepare stable_mir crate for publishing](#prepare-stable-mir-crate-for-publishing) by [Makai](https://github.com/makai410)
 - [Prototype an alternative architecture for cargo fix using cargo check](#prototype-an-alternative-architecture-for-cargo-fix-using-cargo-check) by [Glen Thalakottur](https://github.com/Pyr0de)
 - [Prototype Cargo Plumbing Commands](#prototype-cargo-plumbing-commands) by [Vito Secona](https://github.com/secona)
@@ -336,20 +335,6 @@ Test generation is handled by the `ctest` crate, which creates unit tests that c
 The other part of the project was to make progress toward the 1.0 release of `libc`. Abdul helped with this by going through and addressing a number of issues that need to be resolved before the release, many of which were made possible with all the `ctest` changes.
 
 While there is still a lot of work left to do before `libc` can reach 1.0, Abdul's improvements will go a long way towards making that work easier, as they give us more confidence in the test suite, which is now much easier to modify and extend. Thank you very much for all your work!
-
-### New proc-macro Server API for Rust-Analyzer
-- Contributor: [Neil Wang](https://github.com/DriedYellowPeach)
-- Mentor: [Lukas Wirth](https://github.com/veykril)
-
-> Note: this project was marked as *failed* in the midterm evaluation in July.
-
-The goal of this project was to implement a new API for the proc-macro server, which is used by IDEs such as RustRover or Rust Analyzer to expand macros in Rust crates, with the goal of making it more performant and remove some existing limitations.
-
-Neil started working on the project in June, and even submitted a [draft PR](https://github.com/rust-lang/rust-analyzer/pull/19978) with a sketch of the implementation. However, soon after the project started, Neil stopped responding to their mentor, and we were thus unable to establish communication, which is problematic for a GSoC project. This situation did not improve for a few weeks, and we thus decided to mark the project as failed during the midterm evaluation, as recommended by Google in similar circumstances. Later we learned from Neil that the lack of communication was caused by a combination of being used to work independently, lack of time and also a lack of motivation caused by issues with receiving the GSoC stipend.
-
-We are sorry that this project was not realized, but it sometimes happens. Nevertheless, we thank Neil for submitting the draft implementation and for enrolling for GSoC.
-
-> We might enlist this project topic again in the next edition of GSoC, although that has not been decided yet.
 
 ### Prepare stable_mir crate for publishing
 - Contributor: [Makai](https://github.com/makai410)
