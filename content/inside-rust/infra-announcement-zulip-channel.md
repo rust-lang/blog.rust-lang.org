@@ -32,22 +32,18 @@ We will subscribe:
 - `gsoc-contributors`, `ospp-contributors` and `cloud-compute` marker team
   members
 
-with registered Zulip IDs[^team-repo] to the dedicated [`#infra/announcements`
-zulip channel][`#infra/announcements`].[^mute]
+with registered Zulip IDs to the dedicated [`#infra/announcements` zulip
+channel][`#infra/announcements`].[^mute]
 
 For project team members without registered Zulip IDs, you are encouraged to do
 so by updating your `people/<handle>.toml` entry in the [rust-lang/team]
 repository so that the Infrastructure Team can consistently announce project
 infrastructure changes that may impact you. 
 
-
-[^team-repo]: In the [rust-lang/team] repo. If your `people/<handle>.toml` entry
-    does not already have a `zulip-id` field, you can send a PR against the
-    [rust-lang/team] repo to update your `people/` entry with your Zulip ID.
 [^mute]: Note that you can mute specific topics that do not concern you
     specifically. We adopted this "blanket" announce approach because in our
     experience, not reaching impacted project team members and [Dev
-    Desktop][dev-desktop] user is significantly more problematic.
+    Desktop][dev-desktop] users is significantly more problematic.
 
 
 [infra-team]: https://rust-lang.org/governance/teams/infra/#team-infra
