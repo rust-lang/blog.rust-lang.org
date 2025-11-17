@@ -28,7 +28,7 @@ Below you can find a brief summary of each of our GSoC 2025 projects. You can fi
 - [Implement merge functionality in bors](#implement-merge-functionality-in-bors) by [Sakibul Islam](https://github.com/Sakib25800)
 - [Improve bootstrap](#improve-bootstrap) by [Shourya Sharma](https://github.com/Shourya742)
 - [Improve Wild linker test suites](#improve-wild-linker-test-suites) by [Kei Akiyama](https://github.com/lapla-cogito)
-- [Improving the Rustc Parallel Frontend: Parallel Macro Expansion](#improving-the-rustc-parallel-frontend-parallel-macro-expansion) by [Lorrens](https://github.com/LorrensP-2158466)
+- [Improving the Rustc Parallel Frontend: Parallel Macro Expansion](#improving-the-rustc-parallel-frontend-parallel-macro-expansion) by [Lorrens Pantelis](https://github.com/LorrensP-2158466)
 - [Make cargo-semver-checks faster](#make-cargo-semver-checks-faster) by [Joseph Chung](https://github.com/CLIDragon)
 - [Make Rustup Concurrent](#make-rustup-concurrent) by [Francisco Gouveia](https://github.com/FranciscoTGouveia)
 - [Mapping the Maze of Rust's UI Test Suite with Established Continuous Integration Practices](#mapping-the-maze-of-rust-s-ui-test-suite-with-established-continuous-integration-practices) by [Julien Robert](https://github.com/oneirical)
@@ -230,7 +230,7 @@ In addition to this core work, Kei also undertook numerous other changes to Wild
 Kei has continued to contribute to Wild even after the GSoC project finished and has now contributed over [sixty PRs](https://github.com/davidlattimore/wild/pulls?q=is%3Apr+author%3Alapla-cogito+is%3Amerged+). We thank Kei for all the hard work and look forward to continued collaboration in the future!
 
 ### Improving the Rustc Parallel Frontend: Parallel Macro Expansion
-- Contributor: [Lorrens](https://github.com/LorrensP-2158466)
+- Contributor: [Lorrens Pantelis](https://github.com/LorrensP-2158466)
 - Mentors: [Sparrow Li](https://github.com/sparrowlii), [Vadim Petrochenkov](https://github.com/petrochenkov)
 - [Final report](https://lorrens.me/2025/10/26/GSoC-Parallel-Macro-Expansion.html)
 
