@@ -37,7 +37,7 @@ This survey would not be possible without the time, resources, and attention of 
 
 - [@jieyouxu](https://github.com/jieyouxu)
 - [@adriantombu](https://github.com/adriantombu)
-- [@illogiq](https://github.com/illogiq)
+- [@llogiq](https://github.com/llogiq)
 - [@Marcono1234](https://github.com/Marcono1234)
 - [@tanakakz](https://github.com/tanakakz)
 - [@YohDeadFall](https://github.com/YohDeadFall)
