@@ -85,7 +85,7 @@ target | std | notes
 `armv7-unknown-linux-musleabihf` | ✓ | Armv7-A Linux with musl 1.2.5, hardfloat
 `i586-unknown-linux-musl` | ✓ | 32-bit Linux (musl 1.2.5, original Pentium)
 `i686-unknown-linux-musl` | ✓ | 32-bit Linux with musl 1.2.5 (Pentium 4)
-[`riscv64gc-unknown-linux-musl`](https://doc.rust-lang.org/rustc/platform-support/riscv64gc-unknown-linux-musl.html) | RISC-V Linux (kernel 4.20+, musl 1.2.5)
+[`riscv64gc-unknown-linux-musl`](https://doc.rust-lang.org/rustc/platform-support/riscv64gc-unknown-linux-musl.html) | ✓ | RISC-V Linux (kernel 4.20+, musl 1.2.5)
 
 ## Tier 3
 
