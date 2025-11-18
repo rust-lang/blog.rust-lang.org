@@ -226,7 +226,7 @@ Kei’s project was to leverage the test suite of one of the other Linux linkers
 
 In addition to this core work, Kei also undertook numerous other changes to Wild during GSoC. Of particular note was the reworking of argument parsing to support `--help`, which we had wanted for some time. Kei also fixed a number of bugs and implemented various previously missing features. This work has helped to expand the range of projects that can use Wild to build executables.
 
-Kei has continued to contribute to Wild even after the GSoC project finished and has now contributed over [sixty PRs](https://github.com/davidlattimore/wild/pulls?q=is%3Apr+author%3Alapla-cogito+is%3Amerged+). We thank Kei for all the hard work and look forward to continued collaboration in the future!
+Kei has continued to contribute to Wild even after the GSoC project finished and has now contributed over [seventy PRs](https://github.com/davidlattimore/wild/pulls?q=is%3Apr+author%3Alapla-cogito+is%3Amerged+). We thank Kei for all the hard work and look forward to continued collaboration in the future!
 
 ### Improving the Rustc Parallel Frontend: Parallel Macro Expansion
 - Contributor: [Lorrens Pantelis](https://github.com/LorrensP-2158466)
