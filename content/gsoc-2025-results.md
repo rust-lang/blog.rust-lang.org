@@ -97,7 +97,7 @@ We were really impressed with what Michał was able to achieve, and we really ap
 
 Cargo build scripts come at a compile-time cost, because even to run `cargo check`, they must be built as if you ran `cargo build`, so that they can be executed during compilation. Even though we try to identify ways to reduce the [need](https://github.com/rust-lang/cargo/issues/14948) to write build scripts in the first place, that may not always be doable. However, if we could shift build scripts from being defined in every package that needs them, into a few core build script packages, we could both reduce the compile-time overhead, and also improve their auditability and transparency. You can find more information about this idea [here](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#metabuild).
 
-The first step required to delegate build scripts to packages is to be able to run multiple build scripts per crate, so that is what Naman was primarily working on. He introduced a new unstable `multiple-build-scripts` feature to Cargo, implemented support for parsing an array of build scripts in `Cargo.toml`, and extended Cargo so that it can now execute multiple build scripts while building a single crate. He also added a set of tests to ensure that this feature will work as we expect it to.
+The first step required to delegate build scripts to packages is to be able to run multiple build scripts per crate, so that is what Naman was primarily working on. He introduced a new unstable [`multiple-build-scripts`](https://github.com/rust-lang/cargo/pull/15704) feature to Cargo, implemented support for parsing an array of build scripts in `Cargo.toml`, and extended Cargo so that it can now execute multiple build scripts while building a single crate. He also added a set of tests to ensure that this feature will work as we expect it to.
 
 Then he worked on ensuring that the execution of builds scripts is performed in a deterministic order, and that crates can access the output of each build script separately. For example, if you have the following configuration:
 ```toml
@@ -330,7 +330,7 @@ We would like to appreciate your meticulous work, Julien! Thank you very much.
 
 [`libc`](https://github.com/rust-lang/libc) is a crucial crate in the Rust ecosystem (on average, it has ~1.5 million *daily* downloads), providing bindings to system C API. This GSoC project had two goals: improve testing for what we currently have, and make progress toward a stable 1.0 release of `libc`.
 
-Test generation is handled by the `ctest` crate, which creates unit tests that compare properties of Rust API to properties of the C interfaces it binds. Prior to the project, `ctest` used an obsolete Rust parser that had stopped receiving major updates about eight years ago, meaning `libc` could not easily use any syntax newer than that. Abdul completely rewrote `ctest` to use `syn` as its parser and make it much easier to add new tests, then went through and switched everything over to the more modern `ctest`. After this change, we were able to remove a number of hacks that had been needed to work with the old parser.
+Test generation is handled by the [`ctest`](https://github.com/rust-lang/libc/tree/main/ctest) crate, which creates unit tests that compare properties of Rust API to properties of the C interfaces it binds. Prior to the project, `ctest` used an obsolete Rust parser that had stopped receiving major updates about eight years ago, meaning `libc` could not easily use any syntax newer than that. Abdul completely rewrote `ctest` to use `syn` as its parser and make it much easier to add new tests, then went through and switched everything over to the more modern `ctest`. After this change, we were able to remove a number of hacks that had been needed to work with the old parser.
 
 The other part of the project was to make progress toward the 1.0 release of `libc`. Abdul helped with this by going through and addressing a number of issues that need to be resolved before the release, many of which were made possible with all the `ctest` changes.
 
@@ -342,7 +342,7 @@ While there is still a lot of work left to do before `libc` can reach 1.0, Abdul
 - [Final report](https://makai410.dev/posts/gsoc-25-final/)
 
 This project's goal was to prepare the Rust compiler's `stable_mir`
-crate (eventually renamed to `rustc_public`), which provides a way to interface
+crate (eventually renamed to [`rustc_public`](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_public/index.html)), which provides a way to interface
 with the Rust compiler for analyzing Rust code, for publication on crates.io. While the
 existing crate provided easier APIs for tool developers, it lacked proper
 versioning and was tightly coupled with compiler versions. The goal was to
