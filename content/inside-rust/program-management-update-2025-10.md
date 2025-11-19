@@ -48,7 +48,7 @@ Niko wrote the [blog post announcing the 2025 H2 goals](https://blog.rust-lang.o
 
 Niko also added a [Reports section](https://rust-lang.github.io/rust-project-goals/2025h2/reports.html) to the [Rust Project Goals website](https://rust-lang.github.io/rust-project-goals/). The reports are automatically populated from the comments in [goal tracking issues](https://github.com/rust-lang/rust-project-goals/issues?q=is%3Aissue%20state%3Aopen%20label%3AC-tracking-issue).
 
-We're meeting regularly and have mapped out the next steps: I'll keep publishing the monthly updates (the September one slipped, but [we have the PR open now](https://github.com/rust-lang/blog.rust-lang.org/pull/1731)), and we came up with a few ideas for running the program next year that [Niko will write up. We'll then discuss it with people who are interested](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/2026.20plans/with/553239242).
+We're meeting regularly and have mapped out the next steps: I'll keep publishing the monthly updates (the September one slipped, but [it is now up](https://blog.rust-lang.org/2025/11/19/Project-Goals-2025-September-Update/)), and we came up with a few ideas for running the program next year that [Niko will write up. We'll then discuss it with people who are interested](https://rust-lang.zulipchat.com/#narrow/channel/435869-project-goals/topic/2026.20plans/with/553239242).
 
 We're thinking about either switching to an annual cadence or shifting the goal periods to start in April and October, with planning happening six weeks prior and the RFC being opened at the beginning of April or October. We'll bring this up to the Project and listen to its suggestions and any other feedback.
 
