@@ -24,7 +24,7 @@ Continue Experimentation with Pin Ergonomics <a href='https://github.com/rust-la
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--body-background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="4"></progress>
@@ -53,14 +53,14 @@ Continue Experimentation with Pin Ergonomics <a href='https://github.com/rust-la
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/389#issuecomment-3430872050" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @frank-king posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>Status update:</p>
 <p>Regarding the TODO list in <a href="https://rust-lang.github.io/rust-project-goals/2025h2/pin-ergonomics.html#the-next-6-months">the next 6 months</a>, here is the current status:</p>
 <h2>Introduce <code>&amp;pin mut|const place</code> borrowing syntax</h2>
@@ -107,7 +107,7 @@ Design a language feature to solve Field Projections <a href='https://github.com
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="3" max="7"></progress>
@@ -131,7 +131,7 @@ Design a language feature to solve Field Projections <a href='https://github.com
 </table>
 
 <!-- TL;DR Section -->
-<div style="padding: 12px 16px; background: #f8f9fa; border-bottom: 1px solid #eee;">
+<div style="padding: 12px 16px; background: var(--blockquote-bg-color); border-bottom: 1px solid #eee;">
 <strong>TL;DR.</strong> <p>There have been lots of internal developments since the last update:</p>
 <ul>
 <li><a href="https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-3438476150">field representing types and chained projections</a> have received a fundamental overhaul: disallowing field paths and requiring projections to decompose. Additionally we explored how const generics could emulate FRTs.</li>
@@ -152,14 +152,14 @@ Design a language feature to solve Field Projections <a href='https://github.com
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>4 detailed updates available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-3438476150" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @BennoLossin posted on 2025-10-23:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <h3>Decomposing Projections</h3>
 <p>A chained projection operation should naturally decompose, so <code>foo.[Ber Clausen][].[Baz Shkara][]</code> should be the same as writing <code>(foo.[Ber Clausen][]).[Baz Shkara][]</code>. Until now, the different parenthesizing would have allowed different outcomes. This behavior is confusing and also makes many implementation details more complicated than they need to be.</p>
 <h3>Field Representing Types</h3>
@@ -182,7 +182,7 @@ let my_field = project_free_standing(field_of!(MyStruct, my_field), &amp;my_stru
 </div>
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-3438481368" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @BennoLossin posted on 2025-10-23:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <h3>Single Project Operator &amp; Trait via <strong>Exclusive Decay</strong></h3>
 <p>It would be great if we only had to add a single operator and trait and could obtain the same features as we have with two. The current reason for having two operators is to allow both shared and exclusive projections. If we could have another operation that <em>decays</em> an exclusive reference (or custom, exclusive smart-pointer type) into a shared reference (or the custom, shared version of the smart pointer). This decay operation would need borrow checker support in order to have simultaneous projections of one field exclusively and another field shared (and possibly multiple times).</p>
 <p>This goes into a similar direction as the reborrowing project goal https://github.com/rust-lang/rust-project-goals/issues/399, however, it needs extra borrow checker support.</p>
@@ -221,7 +221,7 @@ fn example(p: cell::RefMut&lt;'_, Point&gt;) {
 </div>
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-3438552573" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @BennoLossin posted on 2025-10-23:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <h3>Simplifying the <code>Project</code> trait</h3>
 <p>There have been some developments in pin ergonomics <a href="https://github.com/rust-lang/rust/issues/130494">https://github.com/rust-lang/rust/issues/130494</a>: &quot;alternative B&quot; is now the main approach which means that <code>Pin&lt;&amp;mut T&gt;</code> has <em>linear</em> projections, which means that it doesn't change its output type depending on the concrete field (really depending on the <strong>field</strong>, not only its type). So it falls into the general projection pattern <code>Pin&lt;&amp;mut Struct&gt;</code> -&gt; <code>Pin&lt;&amp;mut Field&gt;</code> which means that <code>Pin</code> doesn't need any <code>where</code> clauses when implementing <code>Project</code>.</p>
 <p>Additionally we have found out that RCU also doesn't need <code>where</code> clauses, as we can also make its projections linear by introducing a <code>MutexRef&lt;'_, T&gt;</code> smart pointer that always allows projections and only has special behavior for <code>T = Rcu&lt;U&gt;</code>. Discussed on zulip after <a href="https://rust-lang.zulipchat.com/#narrow/channel/144729-t-types/topic/field.20representing.20values.20.26.20.60Field.3Cconst.20F.3A.20.3F.3F.3F.3E.60.20trait/near/541874520">this message</a>.</p>
@@ -345,7 +345,7 @@ assert!(queue.enqueue(my_driver.clone(), field_of!(MyDriver, aux_work)).is_err()
 </div>
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-3438584812" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @BennoLossin posted on 2025-10-23:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <h3>Making <code>Project::project</code> safe</h3>
 <p>In the current proposal the <code>Project::project</code> function is <code>unsafe</code>, because it takes a raw pointer as an argument. This is pretty unusual for an operator trait (it would be the first). <a href="https://github.com/tmandry">Tyler Mandry</a> thought about a way of making it safe by introducing &quot;partial struct types&quot;. This new type is spelled <code>Struct.F</code> where <code>F</code> is an FRT of that struct. It's like <code>Struct</code>, but with the restriction that only the field represented by <code>F</code> can be accessed. So for example <code>&amp;Struct.F</code> would point to <code>Struct</code>, but only allow one to read that single field. This way we could design the <code>Project</code> trait in a safe manner:</p>
 <pre><code class="language-rust">// governs conversion of `Self` to `Narrowed&lt;F&gt;` &amp; replaces Projectable
@@ -385,7 +385,7 @@ Reborrow traits <a href='https://github.com/rust-lang/rust-project-goals/issues/
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="4"></progress>
@@ -414,14 +414,14 @@ Reborrow traits <a href='https://github.com/rust-lang/rust-project-goals/issues/
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/399#issuecomment-3432955570" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @aapoalas posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>Initial implementation of a Reborrow trait for types with only lifetimes with exclusive reference semantics is working but not yet upstreamed not in review. CoerceShared implementation is not yet started.</p>
 <p>Proper composable implementation will likely require a different tactic than the current one. Safety and validity checks are currently absent as well and will require more work.</p>
 
@@ -444,7 +444,7 @@ build-std <a href='https://github.com/rust-lang/rust-project-goals/issues/274' s
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="10"></progress>
@@ -473,14 +473,14 @@ build-std <a href='https://github.com/rust-lang/rust-project-goals/issues/274' s
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/274#issuecomment-3472806299" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @davidtwco posted on 2025-10-31:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>We've now opened our first batch of RFCs: rust-lang/rfcs#3873, rust-lang/rfcs#3874 and rust-lang/rfcs#3875</p>
 
 </div>
@@ -498,7 +498,7 @@ Production-ready cranelift backend <a href='https://github.com/rust-lang/rust-pr
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="5"></progress>
@@ -527,7 +527,7 @@ Production-ready cranelift backend <a href='https://github.com/rust-lang/rust-pr
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -542,7 +542,7 @@ Promoting Parallel Front End <a href='https://github.com/rust-lang/rust-project-
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="6"></progress>
@@ -566,7 +566,7 @@ Promoting Parallel Front End <a href='https://github.com/rust-lang/rust-project-
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -581,7 +581,7 @@ Relink don&#x27;t Rebuild <a href='https://github.com/rust-lang/rust-project-goa
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="8"></progress>
@@ -610,7 +610,7 @@ Relink don&#x27;t Rebuild <a href='https://github.com/rust-lang/rust-project-goa
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -629,7 +629,7 @@ Ergonomic ref-counting: RFC decision and preview <a href='https://github.com/rus
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="6" max="13"></progress>
@@ -658,14 +658,14 @@ Ergonomic ref-counting: RFC decision and preview <a href='https://github.com/rus
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>3 detailed updates available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/107#issuecomment-3377116274" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @nikomatsakis posted on 2025-10-07:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>I posted <a href="https://smallcultfollowing.com/babysteps/blog/2025/10/07/the-handle-trait/">this blog post</a> that proposes that we ought to name the trait <code>Handle</code> and define it as a trait where clone produces an &quot;entangled&quot; value -- i.e., a second handle to the same underlying value.</p>
 <p>Before that, there's been a LOT of conversation that hasn't made its way onto this tracking issue. Trying to fix that! Here is a brief summary, in any case:</p>
 <ul>
@@ -683,7 +683,7 @@ Ergonomic ref-counting: RFC decision and preview <a href='https://github.com/rus
 </div>
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/107#issuecomment-3385854917" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @nikomatsakis posted on 2025-10-09:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>I wrote up a brief summary of my <a href="https://rust-lang.zulipchat.com/#narrow/channel/410673-t-lang.2Fmeetings/topic/Design.20meeting.202025-08-27.3A.20Ergonomic.20RC/near/543956015">current thoughts on Zulip</a>; I plan to move this content into a series of blog posts, but I figured it was worth laying it out here too for those watching this space:</p>
 <blockquote>
 <p><a href="https://rust-lang.zulipchat.com/#narrow/channel/410673-t-lang.2Fmeetings/topic/Design.20meeting.202025-08-27.3A.20Ergonomic.20RC/near/543956370"> 09:11</a>
@@ -707,7 +707,7 @@ Ergonomic ref-counting: RFC decision and preview <a href='https://github.com/rus
 </div>
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/107#issuecomment-3432669824" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @nikomatsakis posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>Update:</p>
 <p>There has been more discussion about the Handle trait on Zulip and elsewhere. Some of the notable comments:</p>
 <ul>
@@ -766,7 +766,7 @@ Stabilize cargo-script <a href='https://github.com/rust-lang/rust-project-goals/
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="36" max="50"></progress>
@@ -795,7 +795,7 @@ Stabilize cargo-script <a href='https://github.com/rust-lang/rust-project-goals/
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -814,7 +814,7 @@ Evolving trait hierarchies <a href='https://github.com/rust-lang/rust-project-go
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="1" max="7"></progress>
@@ -843,7 +843,7 @@ Evolving trait hierarchies <a href='https://github.com/rust-lang/rust-project-go
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -858,7 +858,7 @@ In-place initialization <a href='https://github.com/rust-lang/rust-project-goals
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="6"></progress>
@@ -887,14 +887,14 @@ In-place initialization <a href='https://github.com/rust-lang/rust-project-goals
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/395#issuecomment-3433019959" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @Darksonn posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>This is our first update we’re posting for the in-place init work. Overall things are progressing well, with lively discussion happening on the newly minted <code>t-lang/in-place-init</code> Zulip channel. Here are the highlights since the lang team design meeting at the end of July:</p>
 <ul>
 <li><strong>Zulip</strong>: we now have a dedicated zulip channel that includes all topics surrounding in-place initialization: <a href="https://rust-lang.zulipchat.com/#narrow/channel/528918-t-lang.2Fin-place-init">#t-lang/in-place-init</a>.</li>
@@ -921,7 +921,7 @@ Next-generation trait solver <a href='https://github.com/rust-lang/rust-project-
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="8"></progress>
@@ -950,14 +950,14 @@ Next-generation trait solver <a href='https://github.com/rust-lang/rust-project-
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/113#issuecomment-3436473908" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @lcnr posted on 2025-10-23:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>Since the last update we've fixed the hang in rayon in https://github.com/rust-lang/rust/pull/144991 and https://github.com/rust-lang/rust/pull/144732 which relied on https://github.com/rust-lang/rust/pull/143054 https://github.com/rust-lang/rust/pull/144955 https://github.com/rust-lang/rust/pull/144405 https://github.com/rust-lang/rust/pull/145706. This introduced some search graph bugs which we fixed in https://github.com/rust-lang/rust/pull/147061 https://github.com/rust-lang/rust/pull/147266.</p>
 <p>We're mostly done with the opaque type support now. Doing so required a lot of quite involved changes:</p>
 <ul>
@@ -989,7 +989,7 @@ Stabilizable Polonius support on nightly <a href='https://github.com/rust-lang/r
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="10" max="21"></progress>
@@ -1018,14 +1018,14 @@ Stabilizable Polonius support on nightly <a href='https://github.com/rust-lang/r
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/118#issuecomment-3433251687" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @lqd posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>Here's another summary of the most interesting developments since the last update:</p>
 <ul>
 <li>reviews and updates have been done on the polonius alpha, and it has since landed</li>
@@ -1061,7 +1061,7 @@ Add a team charter for rustdoc team <a href='https://github.com/rust-lang/rust-p
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="1"></progress>
@@ -1085,7 +1085,7 @@ Add a team charter for rustdoc team <a href='https://github.com/rust-lang/rust-p
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -1100,7 +1100,7 @@ Borrow checking in a-mir-formality <a href='https://github.com/rust-lang/rust-pr
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="12"></progress>
@@ -1129,7 +1129,7 @@ Borrow checking in a-mir-formality <a href='https://github.com/rust-lang/rust-pr
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -1144,7 +1144,7 @@ C++/Rust Interop Problem Space Mapping <a href='https://github.com/rust-lang/rus
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="2"></progress>
@@ -1173,7 +1173,7 @@ C++/Rust Interop Problem Space Mapping <a href='https://github.com/rust-lang/rus
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -1188,7 +1188,7 @@ Comprehensive niche checks for Rust <a href='https://github.com/rust-lang/rust-p
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="1" max="7"></progress>
@@ -1217,7 +1217,7 @@ Comprehensive niche checks for Rust <a href='https://github.com/rust-lang/rust-p
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -1232,7 +1232,7 @@ Const Generics <a href='https://github.com/rust-lang/rust-project-goals/issues/1
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="7"></progress>
@@ -1261,14 +1261,14 @@ Const Generics <a href='https://github.com/rust-lang/rust-project-goals/issues/1
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/100#issuecomment-3432925171" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @nikomatsakis posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>We had a design meeting on 2025-09-10, <a href="https://hackmd.io/a4Ds5Ec0QlaOzPeyoPQE8w">minutes available here</a>, aiming at these questions:</p>
 <blockquote>
 <p>There are a few concrete things I would like to get out of this meeting, listed sequentially in order of most to least important:</p>
@@ -1322,7 +1322,7 @@ Continue resolving &#x60;cargo-semver-checks&#x60; blockers for merging into car
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="2" max="10"></progress>
@@ -1351,7 +1351,7 @@ Continue resolving &#x60;cargo-semver-checks&#x60; blockers for merging into car
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -1366,7 +1366,7 @@ Develop the capabilities to keep the FLS up to date <a href='https://github.com/
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="5"></progress>
@@ -1395,21 +1395,21 @@ Develop the capabilities to keep the FLS up to date <a href='https://github.com/
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>2 detailed updates available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/391#issuecomment-3432696119" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @nikomatsakis posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>After much discussion, we have decided to charter this team as a t-spec subteam. <a href="https://github.com/PLeVasseur">Pete LeVasseur</a> and I are working to make that happen now.</p>
 
 </div>
 </div>
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/391#issuecomment-3432855906" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @nikomatsakis posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>PR with charters:</p>
 <p>https://github.com/rust-lang/team/pull/2028</p>
 
@@ -1428,7 +1428,7 @@ Emit Retags in Codegen <a href='https://github.com/rust-lang/rust-project-goals/
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="1" max="7"></progress>
@@ -1457,14 +1457,14 @@ Emit Retags in Codegen <a href='https://github.com/rust-lang/rust-project-goals/
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/392#issuecomment-3446674680" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @icmccorm posted on 2025-10-25:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>Here's our first status update!</p>
 <ul>
 <li>
@@ -1493,7 +1493,7 @@ Expand the Rust Reference to specify more aspects of the Rust language <a href='
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="4"></progress>
@@ -1522,14 +1522,14 @@ Expand the Rust Reference to specify more aspects of the Rust language <a href='
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/394#issuecomment-3431110401" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @joshtriplett posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>The work on this goal has led to many ongoing discussions on the current status of the Reference. Those discussions are still in progress.</p>
 <p>Meanwhile, many people working on this goal have successfully written outlines or draft chapters, at various stages of completeness. There's a broken-out status report at https://github.com/rust-lang/project-goal-reference-expansion/issues/11 .</p>
 
@@ -1548,7 +1548,7 @@ Finish the libtest json output experiment <a href='https://github.com/rust-lang/
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="8"></progress>
@@ -1577,7 +1577,7 @@ Finish the libtest json output experiment <a href='https://github.com/rust-lang/
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -1592,7 +1592,7 @@ Finish the std::offload module <a href='https://github.com/rust-lang/rust-projec
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="3" max="8"></progress>
@@ -1621,14 +1621,14 @@ Finish the std::offload module <a href='https://github.com/rust-lang/rust-projec
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/109#issuecomment-3433494189" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @ZuseZ4 posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>A longer update of the changes over the fall. We had two gsoc contributors and a lot of smaller improvements for std::autodiff. The first two improvements were already mentioned as draft PRs in the previous update, but got merged since. I also upstreamed more std::offload changes.</p>
 <ol>
 <li><a href="https://github.com/Sa4dUs">Marcelo Domínguez</a> refactored the autodiff frontend to be a proper rustc intrinsic, rather than just hackend into the frontend like I first implemented it. This already solved multiple open issues, reduced the code size, and made it generally easier to maintain going forward.</li>
@@ -1659,7 +1659,7 @@ Getting Rust for Linux into stable Rust: compiler features <a href='https://gith
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="29"></progress>
@@ -1688,21 +1688,21 @@ Getting Rust for Linux into stable Rust: compiler features <a href='https://gith
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>3 detailed updates available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/407#issuecomment-3385530348" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @tomassedovic posted on 2025-10-09:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>I've updated the top-level description to show everything we're tracking here (please let me know if anything's missing or incorrect!).</p>
 
 </div>
 </div>
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/407#issuecomment-3390674922" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @tomassedovic posted on 2025-10-10:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <ul>
 <li>[merged] Sanitizers target modificators / https://github.com/rust-lang/rust/pull/138736</li>
 <li>[merged] Add assembly test for -Zreg-struct-return option / https://github.com/rust-lang/rust/pull/145382</li>
@@ -1728,7 +1728,7 @@ Getting Rust for Linux into stable Rust: compiler features <a href='https://gith
 </div>
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/407#issuecomment-3442005789" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @tomassedovic posted on 2025-10-24:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <h3><code>-Cunsigned-char</code></h3>
 <p>We've discussed adding an option analogous to <code>-funsigned-char</code> in GCC and Clang, that would allow you to set whether <code>std::ffi::c_char</code> is represented by <code>i8</code> or <code>u8</code>. Right now, this is platform-specific and should map onto whatever <code>char</code> is in C on the same platform. However, Linux explicitly sets <code>char</code> to be unsigned and then our Rust code conflicts with that. And isn this case the sign is significant.</p>
 <p>Rust for Linux works around this this with their <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/rust/ffi.rs">rust::ffi module</a>, but now that they've switched to the standard library's <code>CStr</code> type, they're running into it again with the <a href="https://doc.rust-lang.org/std/ffi/struct.CStr.html#method.as_ptr"><code>as_ptr</code> method</a>.</p>
@@ -1755,7 +1755,7 @@ Getting Rust for Linux into stable Rust: language features <a href='https://gith
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="17" max="53"></progress>
@@ -1784,21 +1784,21 @@ Getting Rust for Linux into stable Rust: language features <a href='https://gith
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>3 detailed updates available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-3385528657" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @tomassedovic posted on 2025-10-09:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>I've updated the top-level description to show everything we're tracking here (please let me know if anything's missing or incorrect!).</p>
 
 </div>
 </div>
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-3390645417" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @tomassedovic posted on 2025-10-10:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <h3><code>Deref</code>/<code>Receiver</code></h3>
 <ul>
 <li><a href="https://github.com/dingxiangfei2009">Ding Xiang Fei</a>  keeps updating the PR: https://github.com/rust-lang/rust/pull/146095</li>
@@ -1841,7 +1841,7 @@ Getting Rust for Linux into stable Rust: language features <a href='https://gith
 </div>
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/116#issuecomment-3442107142" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @tomassedovic posted on 2025-10-24:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <h3>Layout of <a href="https://doc.rust-lang.org/stable/core/any/struct.TypeId.html"><code>core::any::TypeId</code></a></h3>
 <p>Danilo asked about the layout of <code>TypeId</code> -- specifically its size and whether they can rely on it because they want to store it in a C <code>struct</code>. The struct's size is currently 16 bytes, but that's an implementation detail.</p>
 <p>As a vibe check, <a href="https://github.com/joshtriplett">Josh Triplett</a> and <a href="https://github.com/tmandry">Tyler Mandry</a> were open to guaranteeing that it's going to be at most 16 bytes, but they wanted to reserve the option to reduce the size at some point. The next step is to have the full Lang and Libs teams discuss the proposal.</p>
@@ -1885,7 +1885,7 @@ Implement Open API Namespace Support <a href='https://github.com/rust-lang/rust-
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="6"></progress>
@@ -1914,7 +1914,7 @@ Implement Open API Namespace Support <a href='https://github.com/rust-lang/rust-
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -1929,7 +1929,7 @@ MIR move elimination <a href='https://github.com/rust-lang/rust-project-goals/is
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="5"></progress>
@@ -1958,7 +1958,7 @@ MIR move elimination <a href='https://github.com/rust-lang/rust-project-goals/is
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -1973,7 +1973,7 @@ Prototype a new set of Cargo &quot;plumbing&quot; commands <a href='https://gith
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="8"></progress>
@@ -1997,7 +1997,7 @@ Prototype a new set of Cargo &quot;plumbing&quot; commands <a href='https://gith
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -2012,7 +2012,7 @@ Prototype Cargo build analysis <a href='https://github.com/rust-lang/rust-projec
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="1" max="4"></progress>
@@ -2041,14 +2041,14 @@ Prototype Cargo build analysis <a href='https://github.com/rust-lang/rust-projec
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/398#issuecomment-3368323977" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @weihanglo posted on 2025-10-04:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>Cargo tracking issue: <a href="https://github.com/rust-lang/cargo/issues/15844">https://github.com/rust-lang/cargo/issues/15844</a>.
 The first implementation was <a href="https://github.com/rust-lang/cargo/pull/15845">https://github.com/rust-lang/cargo/pull/15845</a> in August that added <code>build.analysis.enabled = true</code> to unconditionally generate timing HTML. Further implementations tasks is listed in <a href="https://github.com/rust-lang/cargo/issues/15844#issuecomment-3192779748">https://github.com/rust-lang/cargo/issues/15844#issuecomment-3192779748</a>.</p>
 <p>Haven't yet got any progress in September.</p>
@@ -2068,7 +2068,7 @@ reflection and comptime <a href='https://github.com/rust-lang/rust-project-goals
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="7"></progress>
@@ -2097,14 +2097,14 @@ reflection and comptime <a href='https://github.com/rust-lang/rust-project-goals
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/406#issuecomment-3431174687" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @oli-obk posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>I implemented an initial MVP supporting only tuples and primitives (tho those are just opaque things you can't interact with further), and getting offsets for the tuple fields as well as the size of the tuple: https://github.com/rust-lang/rust/pull/146923</p>
 <p>There are two designs of how to expose this from a libs perspective, but after a sync meeting with scottmcm yesterday we came to the conclusion that neither is objectively better at this stage so we're just going to go with the nice end-user UX version for now. For details see the PR description.</p>
 <p>Once the MVP lands, I will mentor various interested contributors who will keep adding fields to the Type struct and variants the TypeKind enum.</p>
@@ -2125,7 +2125,7 @@ Rework Cargo Build Dir Layout <a href='https://github.com/rust-lang/rust-project
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="2"></progress>
@@ -2154,14 +2154,14 @@ Rework Cargo Build Dir Layout <a href='https://github.com/rust-lang/rust-project
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/401#issuecomment-3371889062" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @ranger-ross posted on 2025-10-06:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <h3>Status update October 6, 2025</h3>
 <p>The <code>build-dir</code> was split out of <code>target-dir</code> as part of https://github.com/rust-lang/cargo/issues/14125 and <a href="https://github.com/rust-lang/cargo/pull/15833">scheduled for stabilization</a> in Rust <code>1.91.0</code>. 🎉</p>
 <p>Before re-organizing the <code>build-dir</code> layout we wanted to improve the existing layout tests to make sure we do not make any unexpected changes. This testing harness improvement was merged in https://github.com/rust-lang/cargo/pull/15874.</p>
@@ -2182,7 +2182,7 @@ Run more tests for GCC backend in the Rust&#x27;s CI <a href='https://github.com
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="3"></progress>
@@ -2211,7 +2211,7 @@ Run more tests for GCC backend in the Rust&#x27;s CI <a href='https://github.com
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -2226,7 +2226,7 @@ Rust Stabilization of MemorySanitizer and ThreadSanitizer Support <a href='https
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="5"></progress>
@@ -2250,7 +2250,7 @@ Rust Stabilization of MemorySanitizer and ThreadSanitizer Support <a href='https
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -2265,7 +2265,7 @@ Rust Vision Document <a href='https://github.com/rust-lang/rust-project-goals/is
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="10"></progress>
@@ -2289,14 +2289,14 @@ Rust Vision Document <a href='https://github.com/rust-lang/rust-project-goals/is
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/269#issuecomment-3432798929" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @jackh726 posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>Update:</p>
 <p>Niko and I gave a talk at RustConf 2025 (and I represented that talk at RustChinaConf 2025) where we gave an update on this (and some intermediate insights).</p>
 <p>We have started to seriously plan the shape of the final doc. We have some &quot;blind spots&quot; that we'd like to cover before finishing up, but overall we're feeling close to the finish line on interviews.</p>
@@ -2316,7 +2316,7 @@ rustc-perf improvements <a href='https://github.com/rust-lang/rust-project-goals
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="14"></progress>
@@ -2345,14 +2345,14 @@ rustc-perf improvements <a href='https://github.com/rust-lang/rust-project-goals
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/275#issuecomment-3427936137" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @Kobzol posted on 2025-10-21:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <p>We moved forward with the implementation, and the new job queue system is now being tested in production on a single test pull request. Most things seem to be working, but there are a few things to iron out and some profiling to be done. I expect that within a few weeks we could be ready to switch to the new system fully in production.</p>
 
 </div>
@@ -2370,7 +2370,7 @@ Stabilize public/private dependencies <a href='https://github.com/rust-lang/rust
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="10"></progress>
@@ -2399,7 +2399,7 @@ Stabilize public/private dependencies <a href='https://github.com/rust-lang/rust
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -2414,7 +2414,7 @@ Stabilize rustdoc &#x60;doc_cfg&#x60; feature <a href='https://github.com/rust-l
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="4"></progress>
@@ -2443,7 +2443,7 @@ Stabilize rustdoc &#x60;doc_cfg&#x60; feature <a href='https://github.com/rust-l
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -2458,7 +2458,7 @@ SVE and SME on AArch64 <a href='https://github.com/rust-lang/rust-project-goals/
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="2" max="27"></progress>
@@ -2487,14 +2487,14 @@ SVE and SME on AArch64 <a href='https://github.com/rust-lang/rust-project-goals/
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;" open>
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
 </summary>
-<div style="padding: 12px 16px; background: white;">
+<div style="padding: 12px 16px; background: var(--background-color);">
 <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
 <a href="https://github.com/rust-lang/rust-project-goals/issues/270#issuecomment-3432823824" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @nikomatsakis posted on 2025-10-22:</a>
-<div style="margin-top: 8px; padding: 12px; background: #f8f9fa; border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <h1>Sized hierarchy</h1>
 <p>The focus right now is on the &quot;non-const&quot; parts of the proposal, as the &quot;const&quot; parts are blocked on the new trait solver (https://github.com/rust-lang/rust-project-goals/issues/113). Now that the types team FCP https://github.com/rust-lang/rust/pull/144064 has completed, work can proceed to land the implementation PRs. <a href="https://github.com/davidtwco">David Wood</a> plans to split the RFC to separate out the &quot;non-const&quot; parts of the proposal so it can move independently, which will enable extern types.</p>
 <p>To that end, there are three interesting T-lang design questions to be considered.</p>
@@ -2561,7 +2561,7 @@ Type System Documentation <a href='https://github.com/rust-lang/rust-project-goa
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="0" max="4"></progress>
@@ -2590,7 +2590,7 @@ Type System Documentation <a href='https://github.com/rust-lang/rust-project-goa
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
@@ -2605,7 +2605,7 @@ Unsafe Fields <a href='https://github.com/rust-lang/rust-project-goals/issues/27
 
 <!-- Goal Information Table -->
 
-<table style="width: 100%; border-collapse: collapse; background: white;">
+<table style="width: 100%; border-collapse: collapse; background: var(--background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
 <td style="padding: 8px 16px;"><progress value="1" max="13"></progress>
@@ -2634,7 +2634,7 @@ Unsafe Fields <a href='https://github.com/rust-lang/rust-project-goals/issues/27
 
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
-<summary style="padding: 10px 16px; background: #f5f5f5; cursor: pointer; list-style: none; outline: none;">
+<summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;">No detailed updates available.</span>
 </summary>
 </details>
