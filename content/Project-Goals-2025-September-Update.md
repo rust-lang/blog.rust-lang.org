@@ -794,6 +794,7 @@ Stabilizable Polonius support on nightly <a href='https://github.com/rust-lang/r
 
 ## Goals looking for help
 
+No goals listed.
 
 ## Other goal updates
 
