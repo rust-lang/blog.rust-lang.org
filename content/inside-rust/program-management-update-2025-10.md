@@ -230,7 +230,7 @@ The Infra team posted its quarterly update and plan:
 
 <https://blog.rust-lang.org/inside-rust/2025/10/16/infrastructure-team-q3-recap-and-q4-plan/>
 
-There are lots of interesting bits there: the infrastructure got more robust (critical data backups on two cloud providers, alerts set up for CDN issues), developer experience improved, and https://rust-lang.org/ is now a static website.
+There are lots of interesting bits there: the infrastructure got more robust (critical data backups on two cloud providers, alerts set up for CDN issues), developer experience improved, and <https://rust-lang.org/> is now a static website.
 
 Give it a look!
 
