@@ -643,7 +643,6 @@ Evolving trait hierarchies <a href='https://github.com/rust-lang/rust-project-go
 <h2>Whether to require impls to opt-out of <code>auto impl</code>s</h2>
 <p>The current RFC proposes that</p>
 <pre><code class="language-rust">impl Supertrait for MyType {}
-
 impl Subtrait for MyType {
     // Required in order to manually write `Supertrait` for MyType.
     extern impl Supertrait;
