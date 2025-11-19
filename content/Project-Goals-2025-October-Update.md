@@ -165,8 +165,7 @@ Design a language feature to solve Field Projections <a href='https://github.com
 <h3>Field Representing Types</h3>
 <p>Since projections now decompose, we have no need from a design perspective for multi-level FRTs. So <code>field_of!(Foo, bar.baz)</code> is no longer required to work. Thus we have decided to restrict FRTs to only a single field and get rid of the path. This simplifies the implementation in the compiler and also avoids certain difficult questions such as the locality of FRTs (if we had a path, we would have to walk the path and it is local, if all structs included in the path are local). Now with only a single field, the FRT is local if the struct is.</p>
 <p>We also discovered that it is a good idea to make FRTs inhabited (they still are ZSTs), since then it allows the following pattern to work:</p>
-<pre><code class="language-rust">fn project_free_standing&lt;F: Field&gt;(_: Field, r: &amp;F::Base) -&gt; &amp;F::Type { ... }
-
+<pre><code class="language-rust">fn project_free_standing&lt;F: Field&gt;(_: Field, r: &amp;F::Base) -&gt; &amp;F::Type { ... }<br>
 // can now call the function without turbofish:
 let my_field = project_free_standing(field_of!(MyStruct, my_field), &amp;my_struct);
 </code></pre>
@@ -188,13 +187,11 @@ let my_field = project_free_standing(field_of!(MyStruct, my_field), &amp;my_stru
 <p>This goes into a similar direction as the reborrowing project goal https://github.com/rust-lang/rust-project-goals/issues/399, however, it needs extra borrow checker support.</p>
 <pre><code class="language-rust">fn add(x: cell::RefMut&lt;'_, i32&gt;, step: i32) {
     *x = *x + step;
-}
-
+}<br>
 struct Point {
     x: i32,
     y: i32,
-}
-
+}<br>
 fn example(p: cell::RefMut&lt;'_, Point&gt;) {
     let y: cell::Ref&lt;'_, i32&gt; = coerce_shared!(p.[@y][]);
     let y2 = coerce_shared!(p.[@y][]); // can project twice if both are coerced
@@ -229,11 +226,9 @@ fn example(p: cell::RefMut&lt;'_, Point&gt;) {
 <pre><code class="language-rust">// still need a common super trait for `Project` &amp; `ProjectMut`
 pub trait Projectable {
     type Target: ?Sized;
-}
-
+}<br>
 pub unsafe trait Project: Projectable {
-    type Output&lt;F: Field&lt;Base = Self::Target&gt;&gt;;
-
+    type Output&lt;F: Field&lt;Base = Self::Target&gt;&gt;;<br>
     unsafe fn project&lt;F: Field&lt;Base = Self::Target&gt;&gt;(
         this: *const Self,
     ) -&gt; Self::Output&lt;F&gt;;
@@ -242,8 +237,7 @@ pub unsafe trait Project: Projectable {
 <h4>Are FRTs even necessary?</h4>
 <p>With this change we can also think about getting rid of FRTs entirely. For example we could have the following <code>Project</code> trait:</p>
 <pre><code class="language-rust">pub unsafe trait Project: Projectable {
-    type Output&lt;F&gt;;
-
+    type Output&lt;F&gt;;<br>
     unsafe fn project&lt;const OFFSET: usize, F&gt;(
         this: *const Self,
     ) -&gt; Self::Output&lt;F&gt;;
@@ -260,42 +254,32 @@ pub unsafe trait Project: Projectable {
     main_work: Work&lt;Self, 0&gt;,
     aux_work: Work&lt;Self, 1&gt;,
     // more fields ...
-}
-
+}<br>
 // Then you call a macro to implement the unsafe `HasWork` trait safely.
 // It asserts that there is a field of type `Work&lt;MyDriver, 0&gt;` at the given field
 // (and also exposes its offset).
 impl_has_work!(impl HasWork&lt;MyDriver, 0&gt; for MyDriver { self.main_work });
-impl_has_work!(impl HasWork&lt;MyDriver, 1&gt; for MyDriver { self.aux_work });
-
-// Then you implement `WorkItem` twice:
-
+impl_has_work!(impl HasWork&lt;MyDriver, 1&gt; for MyDriver { self.aux_work });<br>
+// Then you implement `WorkItem` twice:<br>
 impl WorkItem&lt;0&gt; for MyDriver {
-    type Pointer = Arc&lt;Self&gt;;
-    
+    type Pointer = Arc&lt;Self&gt;;<br>
     fn run(this: Self::Pointer) {
         println!(&quot;doing the main work here&quot;);
     }
-}
-
+}<br>
 impl WorkItem&lt;1&gt; for MyDriver {
-    type Pointer = Arc&lt;Self&gt;;
-    
+    type Pointer = Arc&lt;Self&gt;;<br>
     fn run(this: Self::Pointer) {
         println!(&quot;doing the aux work here&quot;);
     }
-}
-
-// And finally you can call `enqueue` on a `Queue`:
-
+}<br>
+// And finally you can call `enqueue` on a `Queue`:<br>
 let my_driver = Arc::new(MyDriver::new());
 let queue: &amp;'static Queue = kernel::workqueue::system_highpri();
-queue.enqueue::&lt;_, 0&gt;(my_driver.clone()).expect(&quot;my_driver is not yet enqueued for id 0&quot;);
-
+queue.enqueue::&lt;_, 0&gt;(my_driver.clone()).expect(&quot;my_driver is not yet enqueued for id 0&quot;);<br>
 // there are different queues
 let queue = kernel::workqueue::system_long();
-queue.enqueue::&lt;_, 1&gt;(my_driver.clone()).expect(&quot;my_driver is not yet enqueued for id 1&quot;);
-
+queue.enqueue::&lt;_, 1&gt;(my_driver.clone()).expect(&quot;my_driver is not yet enqueued for id 1&quot;);<br>
 // cannot insert multiple times:
 assert!(queue.enqueue::&lt;_, 1&gt;(my_driver.clone()).is_err());
 </code></pre>
@@ -305,36 +289,29 @@ assert!(queue.enqueue::&lt;_, 1&gt;(my_driver.clone()).is_err());
     main_work: Work&lt;field_of!(Self, main_work)&gt;,
     aux_work: Work&lt;field_of!(Self, aux_work)&gt;,
     // more fields ...
-}
-
+}<br>
 impl WorkItem&lt;field_of!(MyDriver, main_work)&gt; for MyDriver {
-    type Pointer = Arc&lt;Self&gt;;
-    
+    type Pointer = Arc&lt;Self&gt;;<br>
     fn run(this: Self::Pointer) {
         println!(&quot;doing the main work here&quot;);
     }
-}
-
+}<br>
 impl WorkItem&lt;field_of!(MyDriver, aux_work)&gt; for MyDriver {
-    type Pointer = Arc&lt;Self&gt;;
-    
+    type Pointer = Arc&lt;Self&gt;;<br>
     fn run(this: Self::Pointer) {
         println!(&quot;doing the aux work here&quot;);
     }
-}
-
+}<br>
 let my_driver = Arc::new(MyDriver::new());
 let queue: &amp;'static Queue = kernel::workqueue::system_highpri();
 queue
     .enqueue(my_driver.clone(), field_of!(MyDriver, main_work))
     //                          ^ using Gary's idea to avoid turbofish
-    .expect(&quot;my_driver is not yet enqueued for main_work&quot;);
-
+    .expect(&quot;my_driver is not yet enqueued for main_work&quot;);<br>
 let queue = kernel::workqueue::system_long();
 queue
     .enqueue(my_driver.clone(), field_of!(MyDriver, aux_work))
-    .expect(&quot;my_driver is not yet enqueued for aux_work&quot;);
-
+    .expect(&quot;my_driver is not yet enqueued for aux_work&quot;);<br>
 assert!(queue.enqueue(my_driver.clone(), field_of!(MyDriver, aux_work)).is_err());
 </code></pre>
 <p>This makes it overall a lot more readable (by providing sensible names instead of magic numbers), and maintainable (we can add a new variant without worrying about which IDs are unused). It also avoids the <code>unsafe</code> <code>HasWork</code> trait and the need to write the <code>impl_has_work!</code> macro for each <code>Work</code> field.</p>
@@ -350,14 +327,11 @@ assert!(queue.enqueue(my_driver.clone(), field_of!(MyDriver, aux_work)).is_err()
 <p>In the current proposal the <code>Project::project</code> function is <code>unsafe</code>, because it takes a raw pointer as an argument. This is pretty unusual for an operator trait (it would be the first). <a href="https://github.com/tmandry">Tyler Mandry</a> thought about a way of making it safe by introducing &quot;partial struct types&quot;. This new type is spelled <code>Struct.F</code> where <code>F</code> is an FRT of that struct. It's like <code>Struct</code>, but with the restriction that only the field represented by <code>F</code> can be accessed. So for example <code>&amp;Struct.F</code> would point to <code>Struct</code>, but only allow one to read that single field. This way we could design the <code>Project</code> trait in a safe manner:</p>
 <pre><code class="language-rust">// governs conversion of `Self` to `Narrowed&lt;F&gt;` &amp; replaces Projectable
 pub unsafe trait NarrowPointee {
-    type Target;
-
+    type Target;<br>
     type Narrowed&lt;F: Field&lt;Base = Self::Target&gt;&gt;;
-}
-
+}<br>
 pub trait Project: NarrowPointee {
-    type Output&lt;F: Field&lt;Base = Self::Type&gt;&gt;;
-
+    type Output&lt;F: Field&lt;Base = Self::Type&gt;&gt;;<br>
     fn project(narrowed: Self::Narrowed&lt;F&gt;) -&gt; Self::Output&lt;F&gt;;
 }
 </code></pre>
