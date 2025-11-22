@@ -47,7 +47,7 @@ A builtin linter for Cargo is being tracked in
 [#12235](https://github.com/rust-lang/cargo/issues/12235)
 along with [ideas for lints](https://github.com/rust-lang/cargo/issues?q=is%3Aissue%20state%3Aopen%20label%3AA-new-lint).
 
-Thanks to [krpeid](https://github.com/kpreid) for the suggestion!
+Thanks to [kpreid](https://github.com/kpreid) for the suggestion!
 
 [Please submit your suggestions for the next post.](https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/Plugin.20of.20the.20Dev.20Cycle/near/420703211)
 
