@@ -86,7 +86,7 @@ https://github.com/rust-lang/cargo/pull/15991
 [epage](https://github.com/epage/) posted the [stabilization report](https://github.com/rust-lang/rust/pull/148051)
 for the Rust frontmatter syntax,
 the first step towards stabilizing Cargo script.
-Cargo's frontmatter parser was also updated to better match rustc's include functionality
+Cargo's frontmatter parser was also updated to better match rustc's whitespace handling
 ([#15975](https://github.com/rust-lang/cargo/pull/15975))
 and error messages (
 [#15952](https://github.com/rust-lang/cargo/pull/15952),
@@ -94,7 +94,7 @@ and error messages (
 ).
 
 `build-dir` ([docs](https://doc.rust-lang.org/cargo/reference/build-cache.html)),
-split out of `target-dir` in Cargo 1.91,
+which split out of `target-dir` in Cargo 1.91,
 was modeled off of Cargo script but implemented independently.
 In [#16073](https://github.com/rust-lang/cargo/pull/16073),
 Cargo script switched to using `build-dir = "{cargo-cache-home}/build/{workspace-path-hash}"`
@@ -122,8 +122,8 @@ When we discussed this as a team, we were interested in people being able to get
 We were also concerned about platform support for setting `arg[0]` and [`current_exe`](https://doc.rust-lang.org/std/env/fn.current_exe.html).
 Granted, shebang support is also not supported on every platform.
 Python and Ruby report `arg[0]` as the script but they have more control over the behavior.
-In the end, we decided on setting `arg[0]` and it being a best-effort.
-We will leave `current_exe` alone to be the way to access the binary path.
+In the end, we decided on setting `arg[0]` where possible, on a best-effort basis.
+We will leave `current_exe` untouched to serve as the way to access the binary path.
 We would be open to people contributing support for more platforms,
 likely through contributing it to `std`.
 Setting of `arg[0]` was implemented in
@@ -161,14 +161,14 @@ We decided to do the bare minimum sanitization needed for general Cargo commands
 During the implementation of
 [#16120](https://github.com/rust-lang/cargo/pull/16120),
 [epage](https://github.com/epage/)
-felt it was too premature to freely allow names that match directory names inside the binary's directory.
-Users can just now move some of those directories out in Rust 1.91
+felt it was too premature to freely allow names that would collide with directory names from `build-dir` being overlaid with `target-dir`.
+Users can now move `build-dir` out in Rust 1.91
 ([#15833](https://github.com/rust-lang/cargo/pull/15833)).
 Changing this to be the default in Cargo is still under discussion
 ([#16147](https://github.com/rust-lang/cargo/issues/16147))
 and users could still move it back.
-Instead of sanitizing,
-epage let this fall back to existing validation rules that will error.
+Instead of sanitizing to avoid conflicts with `build-dir` content,
+epage let this fall back to existing validation rules that will error for now.
 
 ### Public dependencies
 
@@ -238,7 +238,7 @@ If we had a new locking scheme
 we could reduce path lengths on Windows
 and allow intermediate artifact reuse between profiles and even platforms (e.g. build script builds).
 As I said earlier, the locking scheme is also blocked on the new layout.
-We either have to do implement and stabilize them together or have two transitions.
+We either have to implement and stabilize them together or have two transitions.
 It doesn't stop there.
 A new locking scheme may be benefited by us moving away from mutable intermediate artifacts
 which could balloon disk usage as each build for each edit of your source would have a distinct artifact.
@@ -268,7 +268,7 @@ Even once we change the `build-dir` location
 ([#16147](https://github.com/rust-lang/cargo/issues/16147)),
 users will be able to opt-out.
 Should we do similar for the new layout itself?
-If we made the flag a proper config,
+If we made the flag a proper [config](https://doc.rust-lang.org/cargo/reference/config.html),
 this would give the `build-dir` layout more of a semblance of stability than is meant.
 This is also a maintenance burden.
 Supporting the two layouts already complicates things and has limited our changes to the new layout.
