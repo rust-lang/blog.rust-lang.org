@@ -364,7 +364,7 @@ some steps you can take to help move it along include:
 We are available to help mentor people for
 [S-accepted issues](https://doc.crates.io/contrib/issues.html#issue-status-labels)
 on
-[zulip](https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo)
+[Zulip](https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo)
 and you can talk to us in real-time during
 [Contributor Office Hours](https://github.com/rust-lang/cargo/wiki/Office-Hours).
 If you are looking to help with one of the bigger projects mentioned here and are just starting out,
