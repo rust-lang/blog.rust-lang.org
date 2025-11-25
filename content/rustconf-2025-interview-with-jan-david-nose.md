@@ -8,7 +8,7 @@ team = "Content Team"
 team_url = "https://rust-lang.org/governance/teams/launching-pad/#team-content"
 +++
 
-We had our first whirlwind outing as the [Content Team] at RustConf 2025 in Seattle, Washington, USA. There we had a chance to speak with folks about interesting things happening in the Project and the wider community.
+On the [Content Team], we had our first whirlwind outing at RustConf 2025 in Seattle, Washington, USA. There we had a chance to speak with folks about interesting things happening in the Project and the wider community.
 
 # Jan David Nose, Infrastructure Team
 
