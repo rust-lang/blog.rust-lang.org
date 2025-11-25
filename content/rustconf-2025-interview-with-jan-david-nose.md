@@ -12,7 +12,7 @@ We had our first whirlwind outing as the [Content Team] at RustConf 2025 in Seat
 
 # Jan David Nose, Infrastructure Team
 
-In this interview, [Xander Cesari] sits down with [Jan David Nose], one of the full-time engineers on the [Infrastructure Team]. JD and the team maintain and develop the infrastructure upon which Rust is developed and deployed, including a whole host of CI/CD tooling for developing the language itself as well as the infra behind crates.io that serves the community and users. We're releasing this video on an accelerated timeline in light of the recent software supply chain attacks, but the interview was conducted prior to the recent news of compromised packages in other languages and ecosystems.
+In this interview, [Xander Cesari] sits down with [Jan David Nose], one of the full-time engineers on the [Infrastructure Team]. JD and the team maintain and develop the infrastructure upon which Rust is developed and deployed, including a whole host of CI/CD tooling for developing the language itself as well as the infra behind crates.io that serves the community and users. We released this video on an accelerated timeline, some weeks ago, in light of the recent software supply chain attacks, but the interview was conducted prior to the news of compromised packages in other languages and ecosystems.
 
 Check out the [interview here] or click below.
 
