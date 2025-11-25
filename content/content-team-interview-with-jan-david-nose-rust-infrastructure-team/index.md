@@ -1,6 +1,6 @@
 +++
 path = "2025/11/22/content-team-interview-with-jan-david-nose-rust-infrastructure-team"
-title = "Content Team: Interview with Jan David Nose, Rust Infrastructure Team"
+title = "Interview with Jan David Nose"
 authors = ["Pete LeVasseur"]
 
 [extra]
