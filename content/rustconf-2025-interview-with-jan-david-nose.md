@@ -1,5 +1,5 @@
 +++
-path = "2025/11/22/content-team-interview-with-jan-david-nose-rust-infrastructure-team"
+path = "2025/11/25/interview-with-jan-david-nose"
 title = "Interview with Jan David Nose"
 authors = ["Pete LeVasseur"]
 
