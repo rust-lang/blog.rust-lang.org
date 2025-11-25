@@ -4,7 +4,7 @@ title = "Interview with Jan David Nose"
 authors = ["Pete LeVasseur"]
 
 [extra]
-team = "Content Team"
+team = "the Content Team"
 team_url = "https://rust-lang.org/governance/teams/launching-pad/#team-content"
 +++
 
