@@ -827,4 +827,4 @@ running.
 [Xander Cesari]: https://github.com/MerrimanInd
 [Jan David Nose]: https://github.com/jdno
 [Infrastructure Team]: https://rust-lang.org/governance/teams/infra/
-[interview here]: https://youtu.be/r7i-2wHtNjw
+[interview here]: https://www.youtube.com/watch?v=r7i-2wHtNjw
