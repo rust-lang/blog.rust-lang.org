@@ -183,7 +183,7 @@ similarly use the `-Csymbol-mangling-version=v0` flag today via
 rustflags = ["-Csymbol-mangling-version=v0"]
 ```
 
-[`.cargo/config.toml`]: (https://doc.rust-lang.org/cargo/reference/config.html)
+[`.cargo/config.toml`]: https://doc.rust-lang.org/cargo/reference/config.html
 [rfcs#2603]: https://rust-lang.github.io/rfcs/2603-rust-symbol-name-mangling-v0.html
 [itanium-mangling]: https://refspecs.linuxbase.org/cxxabi-1.86.html#mangling
 [v0-mangling]: https://doc.rust-lang.org/nightly/rustc/symbol-mangling/v0.html
