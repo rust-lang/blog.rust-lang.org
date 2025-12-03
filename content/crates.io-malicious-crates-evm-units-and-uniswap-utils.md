@@ -31,7 +31,7 @@ These crates had no dependent downstream crates on crates.io.
 
 ## Thanks
 
-Our thanks to Olivia Brown from the [Socket Threat Research Team][socket] for reporting the crates. We also want to thank Carol Nichols from the crates.io team and Walter Pearce and Adam Harvey from the [Rust Foundation](foundation) for aiding in the response.
+Our thanks to Olivia Brown from the [Socket Threat Research Team][socket] for reporting the crates. We also want to thank Carol Nichols from the crates.io team and Walter Pearce and Adam Harvey from the [Rust Foundation][foundation] for aiding in the response.
 
 [foundation]: https://foundation.rust-lang.org/
 [socket]: https://www.socket.dev/
