@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/want-to-propose-a-2026-rust-project-goal-we-are-here-to-help"
+path = "inside-rust/2025/12/04/want-to-propose-a-2026-rust-project-goal-we-are-here-to-help"
 title = "Want to propose a 2026 Rust project goal? We are here to help!"
 authors = ["Niko Matsakis"]
 
