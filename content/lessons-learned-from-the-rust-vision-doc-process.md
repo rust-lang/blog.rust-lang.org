@@ -1,5 +1,5 @@
 +++
-path = "9999/12/31/lessons-learned-from-the-rust-vision-doc-process"
+path = "2025/12/03/lessons-learned-from-the-rust-vision-doc-process"
 title = "Lessons learned from the Rust Vision Doc process"
 authors = ["Niko Matsakis"]
 
