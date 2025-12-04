@@ -38,5 +38,5 @@ For 2026, we are shifting to annual project goals (though a goal doesn't have to
 
 ## Want to open a goal pre-proposal?
 
-Great! Reach out on Zulip in [#project-goals/2026-workshop](https://rust-lang.zulipchat.com/#channels/546987/project-goals.2F2026-workshop/general).
+Great! Reach out on Zulip in [#project-goals/2026-workshop](https://rust-lang.zulipchat.com/#narrow/channel/546987-project-goals.2F2026-workshop).
 
