@@ -1,6 +1,6 @@
 +++
 path = "inside-rust/2025/12/02/project-director-update"
-title = "Fall 2025 Project Director Update"
+title = "Late 2025 Project Director Update"
 authors = ["Carol Nichols and David Wood"]
 
 [extra]
