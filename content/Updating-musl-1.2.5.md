@@ -1,5 +1,5 @@
 +++
-path = "2025/07/01/Updating-musl-1.2.5"
+path = "2025/12/05/Updating-musl-1.2.5"
 title = "Updating Rust's Linux musl targets to 1.2.5"
 authors = ["Aria Desires"]
 description = "musl targets will soon ship with musl 1.2.5"
