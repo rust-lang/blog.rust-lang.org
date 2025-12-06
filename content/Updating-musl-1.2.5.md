@@ -21,7 +21,7 @@ A crater run in July 2024 found only about 2.4% of Rust projects were still affe
 
 At this point we expect there will be minimal breakage, and most breakage should be resolved by a `cargo update`. We believe this update shouldn't be held back any longer, as it contains critical fixes for the musl target.
 
-Manual inspection of some of the affected projects indicates they largely haven't run `cargo update` in 2 years, often because they haven't had any changes in 2 years. Analysis suggests this Rust release will be a devastating blow to the thriving ecosystem of Rust gamedev projects that you started 3 years ago and will definitely get back to this year.
+Manual inspection of some of the affected projects indicates they largely haven't run `cargo update` in 2 years, often because they haven't had any changes in 2 years. Fixing these crates is as easy as `cargo update`.
 
 Build failures from this change will typically look like "some \`extern\` functions couldn't be found; some native libraries may need to be installed or have their path specified", often specifically for "undefined reference to \`open64'", often while trying to build very old versions of the `getrandom` crate (hence the decimation of abandoned gamedev projects in particular):
 
