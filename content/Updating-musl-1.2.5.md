@@ -23,7 +23,7 @@ At this point we expect there will be minimal breakage, and most breakage should
 
 Manual inspection of some of the affected projects indicates they largely haven't run `cargo update` in 2 years, often because they haven't had any changes in 2 years. Fixing these crates is as easy as `cargo update`.
 
-Build failures from this change will typically look like "some \`extern\` functions couldn't be found; some native libraries may need to be installed or have their path specified", often specifically for "undefined reference to \`open64'", often while trying to build very old versions of the `getrandom` crate (hence the decimation of abandoned gamedev projects in particular):
+Build failures from this change will typically look like "some \`extern\` functions couldn't be found; some native libraries may need to be installed or have their path specified", often specifically for "undefined reference to \`open64'", often while trying to build very old versions of the `getrandom` crate (hence the outsized impact on gamedev projects that haven't updated their dependencies in several years in particular):
 
 <details><summary>Example Build Failure</summary>
 
