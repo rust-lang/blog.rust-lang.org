@@ -83,7 +83,9 @@ David Wood has proposed a clarification of Project Director responsibilities, wh
 
 As you can see from the many links above, the work of the Council happens mostly in public on GitHub issues posted in [our repository](https://github.com/rust-lang/leadership-council/issues). The items on our meeting agendas are drawn from these. After discussing an item, we summarize that discussion and any shared [rationales](https://aturon.github.io/tech/2018/05/25/listening-part-1/) on the issue. When we make decisions, we propose on the issue a "final comment period" (FCP), and as with all FCPs in the Project, we're interested in and review any feedback that people have before or during this final comment period.
 
-To follow our work in real time, watch our repository.
+To follow our work in real time, watch our repository. You can also see meeting summaries posted on Zulip in [`#council > Meeting minutes & summaries`][summaries].
+
+[summaries]: https://rust-lang.zulipchat.com/#narrow/channel/392734-council/topic/Meeting.20minutes.20.26.20summaries/with/561198432
 
 ## Meeting minutes
 
