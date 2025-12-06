@@ -40,12 +40,35 @@ We coordinated with the Foundation on the [announcement of the Rust Innovation L
 
 ### Shape of Rust
 
-We have implemented changes to the team structure to further clarify the status of teams in the Launching Pad. In particular:
+We have implemented changes to the team structure to further clarify the status of teams in the Launching Pad. The following teams have been moved or archived:
 
-- The Async Working Group has moved under the lang team. [#137](https://github.com/rust-lang/leadership-council/issues/137)
-- The Community Content team has been archived. [#129](https://github.com/rust-lang/leadership-council/issues/129)
+| Team                          | Tracking Issue                                                | Outcome?                                  |
+| :---                          | :---                                                          | :---                                      |
+| Community Content Team        | [#129](https://github.com/rust-lang/leadership-council/issues/129)    | Archived                                  |
+| Community Rustbridge Team     | [#132](https://github.com/rust-lang/leadership-council/issues/132)    | Archived                                  |
+| Book Team                     | [#123](https://github.com/rust-lang/leadership-council/issues/123)    | Moved to lang-docs                        |
+| Docker Team                   | [#124](https://github.com/rust-lang/leadership-council/issues/124)    | Moved to T-Infra                          |
+| Async WG                      | [#137](https://github.com/rust-lang/leadership-council/issues/137)    | Moved to T-Lang                           |
+| Rust By Example WG            | [#139](https://github.com/rust-lang/leadership-council/issues/139)    | Moved to lang-docs                        |
 
-Progress has been made with other Launching Pad teams, though these efforts have not yet concluded. In particular, we have looked at the Secure Code Working Group [#140](https://github.com/rust-lang/leadership-council/issues/140), Embedded Working Group [#127](https://github.com/rust-lang/leadership-council/issues/127), CLI Working Group [#138](https://github.com/rust-lang/leadership-council/issues/138), and Gamedev Working Group [#126](https://github.com/rust-lang/leadership-council/issues/126). While undecided, these teams may eventually join the proposed Rust Society or become cross-cutting teams within an updated Launching Pad.
+The following teams have confirmed that they will stay in the Launching Pad, which will likely be rechartered in the future to cover cross-cutting teams:
+
+| Team                          | Tracking Issue                                                | Outcome?                                  |
+| :---                          | :---                                                          | :---                                      |
+| This Week In Rust             | [#125](https://github.com/rust-lang/leadership-council/issues/125)    | Stay in Launching Pad                     |
+| Community Survey Team         | [#133](https://github.com/rust-lang/leadership-council/issues/133)    | Renamed, Stay in Launching Pad            |
+| Security Response WG          | [#141](https://github.com/rust-lang/leadership-council/issues/141)    | Renamed, Stay in Launching Pad            |
+| Triage WG                     | [#142](https://github.com/rust-lang/leadership-council/issues/142)    | Renamed, Stay in Launching Pad            |
+
+
+Progress has been made with other Launching Pad teams, though these efforts have not yet concluded. The following teams are still under discussion:
+
+| Team                          | Tracking Issue                                                |
+| :---                          | :---                                                          |
+| Secure Code Working Group     | [#140](https://github.com/rust-lang/leadership-council/issues/140) |
+| Embedded Working Group        | [#127](https://github.com/rust-lang/leadership-council/issues/127) |
+| CLI Working Group             | [#138](https://github.com/rust-lang/leadership-council/issues/138) |
+| Gamedev Working Group         | [#126](https://github.com/rust-lang/leadership-council/issues/126) |
 
 [James Munns] submitted [a proposal](https://github.com/rust-lang/leadership-council/issues/159#issuecomment-3237633417) detailing the vision and operational structure of the Rust Society.
 
