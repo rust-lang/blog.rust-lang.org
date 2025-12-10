@@ -92,7 +92,7 @@ In Rust 1.92 unwind tables will be emitted by default even when `-Cpanic=abort` 
 
 Over the past few releases, many changes were made to the way built-in attributes are processed in the compiler. This should greatly improve the error messages and warnings Rust gives for built-in attributes and especially make these diagnostics more consistent among all of the over 100 built-in attributes.
 
-To give a small example, in this release specifically, Rust became stricter in checking what arguments are allowed to `macro_export` by [upgrading that check to a "deny-by-default lint" that will be reported in dependencies.](https://github.com/rust-lang/rust/pull/143857). 
+To give a small example, in this release specifically, Rust became stricter in checking what arguments are allowed to `macro_export` by [upgrading that check to a "deny-by-default lint" that will be reported in dependencies](https://github.com/rust-lang/rust/pull/143857). 
 
 ### Stabilized APIs
 
