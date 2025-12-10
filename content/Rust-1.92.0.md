@@ -26,7 +26,11 @@ If you'd like to help us out by testing future releases, you might consider upda
 
 The language and compiler teams continue to work on stabilization of the [never type](https://doc.rust-lang.org/stable/std/primitive.never.html). In this release the [`never_type_fallback_flowing_into_unsafe`](https://doc.rust-lang.org/beta/rustc/lints/listing/deny-by-default.html#dependency-on-unit-never-type-fallback) and [`dependency_on_unit_never_type_fallback`](https://doc.rust-lang.org/beta/rustc/lints/listing/deny-by-default.html#dependency-on-unit-never-type-fallback) future compatibility lints were made deny-by-default, meaning they will cause a compilation error when detected.
 
-These lints detect code which is likely to be broken by the never type stabilization. It is highly advised to fix them if they are reported in your crate.
+It's worth noting that while this can result in compileration errors, it is still a *lint*, these lints can all be `#[allow`'d. These lints also will only fire when building the affected crates directly, not when built as a dependency (though a warning will be reported by Cargo in such cases).
+
+These lints detect code which is likely to be broken by the never type stabilization. It is highly advised to fix them if they are reported in your crate graph.
+
+We believe there to be approximately ~500 crates affected by this lint. Despite that we believe this to be acceptable as lints are not a breaking change and it will allow for stabilizing the never type in the future. For more in depth justification the Language Team's assessement can be read here: [rust-lang/rust#146167#issuecomment-3363795006](https://github.com/rust-lang/rust/pull/146167#issuecomment-3363795006).
 
 ### `unused_must_use` no longer warns about `Result<(), UninhabitedType>`
 
@@ -34,16 +38,17 @@ Rust's `unused_must_use` lint warns when ignoring the return value of a function
 
 However, some functions return `Result`, but the error type they use is not actually "inhabited", meaning it can never exist in real code (e.g. the [`!`](https://doc.rust-lang.org/std/primitive.never.html) or [`Infallible`](https://doc.rust-lang.org/std/convert/enum.Infallible.html) types).
 
-The `unused_must_use` lint now no longer warns on `Result<(), UninhabitedType>`, or on `ControlFlow<UninhabitedType, ()>`. For instance, it will not warn on `Result<(), !>`. This avoids having to check for an error that can never happen.
+The `unused_must_use` lint now no longer warns on `Result<(), UninhabitedType>`, or on `ControlFlow<UninhabitedType, ()>`. For instance, it will not warn on `Result<(), Infallible>`. This avoids having to check for an error that can never happen.
 
 ```rust
-fn can_never_fail() -> Result<(), !> {
+use core::convert::Infallible;
+fn can_never_fail() -> Result<(), Infallible> {
     // ...
     Ok(())
 }
 
 fn main() {
-    can_never_fail()
+    can_never_fail();
 }
 ```
 
@@ -57,7 +62,7 @@ trait UsesAssocErrorType {
 
 struct CannotFail;
 impl UsesAssocErrorType for CannotFail {
-    type Error = !;
+    type Error = core::convert::Infallible;
     fn method(&self) -> Result<(), Self::Error> {
         Ok(())
     }
@@ -72,8 +77,8 @@ impl UsesAssocErrorType for CanFail {
 }
 
 fn main() {
-    CannotFail.method(); // No error
-    CanFail.method(); // Error: unused `Result` that must be used
+    CannotFail.method(); // No warning
+    CanFail.method(); // Warning: unused `Result` that must be used
 }
 ```
 
@@ -85,13 +90,9 @@ In Rust 1.92 unwind tables will be emitted by default even when `-Cpanic=abort` 
 
 ### Validate input to `#[macro_export]`
 
-Over the past few releases, many changes were made to the way built-in attributes are processed in the compiler. This should greatly improve the error messages and warnings rust gives for built-in attributes and especially make these diagnostics more consistent among all of the over 100 built-in attributes.
+Over the past few releases, many changes were made to the way built-in attributes are processed in the compiler. This should greatly improve the error messages and warnings Rust gives for built-in attributes and especially make these diagnostics more consistent among all of the over 100 built-in attributes.
 
 To give a small example, in this release specifically, Rust became stricter in checking what arguments are allowed to `macro_export` by [upgrading that check to a "deny-by-default lint" that will be reported in dependencies.](https://github.com/rust-lang/rust/pull/143857). 
-
-### Restrictions on user code impls of `DerefMut` for `Pin`
-
-A soundness issue with `Pin` has been solved by preventing third-party crates from implementing `DerefMut` for `Pin<T>` when `T` is a local type that doesn't implement `DerefMut<Target: Unpin>`.
 
 ### Stabilized APIs
 
@@ -100,10 +101,6 @@ A soundness issue with `Pin` has been solved by preventing third-party crates fr
 These previously stable APIs are now stable in const contexts:
 
 ...
-
-### Platform Support
-
-Refer to Rust’s [platform support page][platform-support] for more information on Rust’s tiered platform support.
 
 ### Other changes
 
