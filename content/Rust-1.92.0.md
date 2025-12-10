@@ -30,7 +30,7 @@ It's worth noting that while this can result in compileration errors, it is stil
 
 These lints detect code which is likely to be broken by the never type stabilization. It is highly advised to fix them if they are reported in your crate graph.
 
-We believe there to be approximately ~500 crates affected by this lint. Despite that we believe this to be acceptable as lints are not a breaking change and it will allow for stabilizing the never type in the future. For more in depth justification the Language Team's assessement can be read here: [rust-lang/rust#146167#issuecomment-3363795006](https://github.com/rust-lang/rust/pull/146167#issuecomment-3363795006).
+We believe there to be approximately ~500 crates affected by this lint. Despite that we believe this to be acceptable as lints are not a breaking change and it will allow for stabilizing the never type in the future. For more in depth justification the Language Team's assessment can be read here: [rust-lang/rust#146167#issuecomment-3363795006](https://github.com/rust-lang/rust/pull/146167#issuecomment-3363795006).
 
 ### `unused_must_use` no longer warns about `Result<(), UninhabitedType>`
 
