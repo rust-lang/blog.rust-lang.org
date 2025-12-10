@@ -26,7 +26,7 @@ If you'd like to help us out by testing future releases, you might consider upda
 
 The language and compiler teams continue to work on stabilization of the [never type](https://doc.rust-lang.org/stable/std/primitive.never.html). In this release the [`never_type_fallback_flowing_into_unsafe`](https://doc.rust-lang.org/beta/rustc/lints/listing/deny-by-default.html#dependency-on-unit-never-type-fallback) and [`dependency_on_unit_never_type_fallback`](https://doc.rust-lang.org/beta/rustc/lints/listing/deny-by-default.html#dependency-on-unit-never-type-fallback) future compatibility lints were made deny-by-default, meaning they will cause a compilation error when detected.
 
-It's worth noting that while this can result in compileration errors, it is still a *lint*, these lints can all be `#[allow`'d. These lints also will only fire when building the affected crates directly, not when built as a dependency (though a warning will be reported by Cargo in such cases).
+It's worth noting that while this can result in compileration errors, it is still a *lint*, these lints can all be `#[allow]`'d. These lints also will only fire when building the affected crates directly, not when built as a dependency (though a warning will be reported by Cargo in such cases).
 
 These lints detect code which is likely to be broken by the never type stabilization. It is highly advised to fix them if they are reported in your crate graph.
 
