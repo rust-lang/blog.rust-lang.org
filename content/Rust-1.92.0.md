@@ -36,7 +36,7 @@ We believe there to be approximately 500 crates affected by this lint. Despite t
 
 Rust's `unused_must_use` lint warns when ignoring the return value of a function, if the function or its return type is annotated with `#[must_use]`. For instance, this warns if ignoring a return type of `Result`, to remind you to use `?`, or something like `.expect("...")`.
 
-However, some functions return `Result`, but the error type they use is not actually "inhabited", meaning it can never exist in real code (e.g. the [`!`](https://doc.rust-lang.org/std/primitive.never.html) or [`Infallible`](https://doc.rust-lang.org/std/convert/enum.Infallible.html) types).
+However, some functions return `Result`, but the error type they use is not actually "inhabited", meaning you cannot construct any values of that type (e.g. the [`!`](https://doc.rust-lang.org/std/primitive.never.html) or [`Infallible`](https://doc.rust-lang.org/std/convert/enum.Infallible.html) types).
 
 The `unused_must_use` lint now no longer warns on `Result<(), UninhabitedType>`, or on `ControlFlow<UninhabitedType, ()>`. For instance, it will not warn on `Result<(), Infallible>`. This avoids having to check for an error that can never happen.
 
