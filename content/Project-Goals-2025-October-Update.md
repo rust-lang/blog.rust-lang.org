@@ -52,7 +52,7 @@ Continue Experimentation with Pin Ergonomics <a href='https://github.com/rust-la
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -65,7 +65,7 @@ Continue Experimentation with Pin Ergonomics <a href='https://github.com/rust-la
 <p>Regarding the TODO list in <a href="https://rust-lang.github.io/rust-project-goals/2025h2/pin-ergonomics.html#the-next-6-months">the next 6 months</a>, here is the current status:</p>
 <h2>Introduce <code>&amp;pin mut|const place</code> borrowing syntax</h2>
 <ul>
-<li>[x] parsing: <a href="https://github.com/rust-lang/rust/issues/135731">#135731</a>, merged.</li>
+<li>[x] parsing: <a href="https://github.com/rust-lang/rust/issues/135731">#135731</a>(https://github.com/rust-lang/rust/pull/135731), merged.</li>
 <li>[ ] lowering and borrowck: not started yet.</li>
 </ul>
 <p>I've got some primitive ideas about borrowck, and I probably need to confirm with someone who is familiar with MIR/borrowck before starting to implement.</p>
@@ -78,11 +78,11 @@ Continue Experimentation with Pin Ergonomics <a href='https://github.com/rust-la
 <h2>Pattern matching of <code>&amp;pin mut|const T</code> types</h2>
 <p>In the past few months, I have struggled with the <code>!Unpin</code> stuffs (the original design sketch <em>Alternative A</em>), trying implementing it, refactoring, discussing on zulips, and was constantly confused; luckily, we have finally reached a new agreement of the <em>Alternative B</em> version.</p>
 <ul>
-<li>[ ] <a href="https://github.com/rust-lang/rust/issues/139751">#139751</a> under review (reimplemented regarding <em>Alternative B</em>).</li>
+<li>[ ] <a href="https://github.com/rust-lang/rust/issues/139751">#139751</a>(https://github.com/rust-lang/rust/pull/139751) under review (reimplemented regarding <em>Alternative B</em>).</li>
 </ul>
 <h2>Support <code>drop(&amp;pin mut self)</code> for structurally pinned types</h2>
 <ul>
-<li>[ ] adding a new <code>Drop::pin_drop(&amp;pin mut self)</code> method: draft PR <a href="https://github.com/rust-lang/rust/issues/144537">#144537</a></li>
+<li>[ ] adding a new <code>Drop::pin_drop(&amp;pin mut self)</code> method: draft PR <a href="https://github.com/rust-lang/rust/issues/144537">#144537</a>(https://github.com/rust-lang/rust/pull/144537)</li>
 </ul>
 <p>Supporting both <code>Drop::drop(&amp;mut self)</code> and <code>Drop::drop(&amp;pin mut self)</code> seems to introduce method-overloading to Rust, which I think might need some more general ways to handle (maybe by a rustc attribute?). So instead, I'd like to implemenent this via a new method <code>Drop::pin_drop(&amp;pin mut self)</code> first.</p>
 <h2>Introduce <code>&amp;pin pat</code> pattern syntax</h2>
@@ -151,7 +151,7 @@ Design a language feature to solve Field Projections <a href='https://github.com
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>4 detailed updates available.</p>
 </span>
@@ -161,11 +161,14 @@ Design a language feature to solve Field Projections <a href='https://github.com
 <a href="https://github.com/rust-lang/rust-project-goals/issues/390#issuecomment-3438476150" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @BennoLossin posted on 2025-10-23:</a>
 <div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <h3>Decomposing Projections</h3>
-<p>A chained projection operation should naturally decompose, so <code>foo.[Ber Clausen][].[Baz Shkara][]</code> should be the same as writing <code>(foo.[Ber Clausen][]).[Baz Shkara][]</code>. Until now, the different parenthesizing would have allowed different outcomes. This behavior is confusing and also makes many implementation details more complicated than they need to be.</p>
+<p>A chained projection operation should naturally decompose, so <code>foo.@bar.@baz</code> should be the same as writing <code>(foo.@bar).@baz</code>. Until now, the different parenthesizing would have allowed different outcomes. This behavior is confusing and also makes many implementation details more complicated than they need to be.</p>
 <h3>Field Representing Types</h3>
 <p>Since projections now decompose, we have no need from a design perspective for multi-level FRTs. So <code>field_of!(Foo, bar.baz)</code> is no longer required to work. Thus we have decided to restrict FRTs to only a single field and get rid of the path. This simplifies the implementation in the compiler and also avoids certain difficult questions such as the locality of FRTs (if we had a path, we would have to walk the path and it is local, if all structs included in the path are local). Now with only a single field, the FRT is local if the struct is.</p>
 <p>We also discovered that it is a good idea to make FRTs inhabited (they still are ZSTs), since then it allows the following pattern to work:</p>
-<pre><code class="language-rust">fn project_free_standing&lt;F: Field&gt;(_: Field, r: &amp;F::Base) -&gt; &amp;F::Type { ... }<br>
+
+
+<pre><code class="language-rust">fn project_free_standing&lt;F: Field&gt;(_: Field, r: &amp;F::Base) -&gt; &amp;F::Type { ... }
+
 // can now call the function without turbofish:
 let my_field = project_free_standing(field_of!(MyStruct, my_field), &amp;my_struct);
 </code></pre>
@@ -185,18 +188,22 @@ let my_field = project_free_standing(field_of!(MyStruct, my_field), &amp;my_stru
 <h3>Single Project Operator &amp; Trait via <strong>Exclusive Decay</strong></h3>
 <p>It would be great if we only had to add a single operator and trait and could obtain the same features as we have with two. The current reason for having two operators is to allow both shared and exclusive projections. If we could have another operation that <em>decays</em> an exclusive reference (or custom, exclusive smart-pointer type) into a shared reference (or the custom, shared version of the smart pointer). This decay operation would need borrow checker support in order to have simultaneous projections of one field exclusively and another field shared (and possibly multiple times).</p>
 <p>This goes into a similar direction as the reborrowing project goal https://github.com/rust-lang/rust-project-goals/issues/399, however, it needs extra borrow checker support.</p>
+
+
 <pre><code class="language-rust">fn add(x: cell::RefMut&lt;'_, i32&gt;, step: i32) {
     *x = *x + step;
-}<br>
+}
+
 struct Point {
     x: i32,
     y: i32,
-}<br>
+}
+
 fn example(p: cell::RefMut&lt;'_, Point&gt;) {
-    let y: cell::Ref&lt;'_, i32&gt; = coerce_shared!(p.[@y][]);
-    let y2 = coerce_shared!(p.[@y][]); // can project twice if both are coerced
-    add(p.[Devon Peticolas][], *y);
-    add(p.[Devon Peticolas][], *y2);
+    let y: cell::Ref&lt;'_, i32&gt; = coerce_shared!(p.@y);
+    let y2 = coerce_shared!(p.@y); // can project twice if both are coerced
+    add(p.@x, *y);
+    add(p.@x, *y2);
     assert_eq!(*y, *y2); // can still use them afterwards
 }
 </code></pre>
@@ -223,12 +230,16 @@ fn example(p: cell::RefMut&lt;'_, Point&gt;) {
 <p>There have been some developments in pin ergonomics <a href="https://github.com/rust-lang/rust/issues/130494">https://github.com/rust-lang/rust/issues/130494</a>: &quot;alternative B&quot; is now the main approach which means that <code>Pin&lt;&amp;mut T&gt;</code> has <em>linear</em> projections, which means that it doesn't change its output type depending on the concrete field (really depending on the <strong>field</strong>, not only its type). So it falls into the general projection pattern <code>Pin&lt;&amp;mut Struct&gt;</code> -&gt; <code>Pin&lt;&amp;mut Field&gt;</code> which means that <code>Pin</code> doesn't need any <code>where</code> clauses when implementing <code>Project</code>.</p>
 <p>Additionally we have found out that RCU also doesn't need <code>where</code> clauses, as we can also make its projections linear by introducing a <code>MutexRef&lt;'_, T&gt;</code> smart pointer that always allows projections and only has special behavior for <code>T = Rcu&lt;U&gt;</code>. Discussed on zulip after <a href="https://rust-lang.zulipchat.com/#narrow/channel/144729-t-types/topic/field.20representing.20values.20.26.20.60Field.3Cconst.20F.3A.20.3F.3F.3F.3E.60.20trait/near/541874520">this message</a>.</p>
 <p>For this reason we can get rid of the generic argument to <code>Project</code> and mandate that all types that support projections support them for <em>all</em> fields. So the new <code>Project</code> trait looks like this:</p>
+
+
 <pre><code class="language-rust">// still need a common super trait for `Project` &amp; `ProjectMut`
 pub trait Projectable {
     type Target: ?Sized;
-}<br>
+}
+
 pub unsafe trait Project: Projectable {
-    type Output&lt;F: Field&lt;Base = Self::Target&gt;&gt;;<br>
+    type Output&lt;F: Field&lt;Base = Self::Target&gt;&gt;;
+
     unsafe fn project&lt;F: Field&lt;Base = Self::Target&gt;&gt;(
         this: *const Self,
     ) -&gt; Self::Output&lt;F&gt;;
@@ -236,8 +247,11 @@ pub unsafe trait Project: Projectable {
 </code></pre>
 <h4>Are FRTs even necessary?</h4>
 <p>With this change we can also think about getting rid of FRTs entirely. For example we could have the following <code>Project</code> trait:</p>
+
+
 <pre><code class="language-rust">pub unsafe trait Project: Projectable {
-    type Output&lt;F&gt;;<br>
+    type Output&lt;F&gt;;
+
     unsafe fn project&lt;const OFFSET: usize, F&gt;(
         this: *const Self,
     ) -&gt; Self::Output&lt;F&gt;;
@@ -246,72 +260,95 @@ pub unsafe trait Project: Projectable {
 <p>There are other applications for FRTs that are very useful for Rust-for-Linux. For example, storing field information for intrusive data structures directly in that structure as a generic.</p>
 <!-- raw HTML omitted -->
 <p>More concretely, in the kernel there are workqueues that allow you to run code in parallel to the currently running thread. In order to insert an item into a workqueue, an intrusive linked list is used. However, we need to be able to insert the same item into multiple lists. This is done by storing multiple instances of the <code>Work</code> struct. Its definition is:</p>
+
+
 <pre><code class="language-rust">pub struct Work&lt;T, const ID: u64&gt; { ... }
 </code></pre>
 <p>Where the <code>ID</code> generic must be unique inside of the struct.</p>
+
+
 <pre><code class="language-rust">struct MyDriver {
     data: Arc&lt;MyData&gt;,
     main_work: Work&lt;Self, 0&gt;,
     aux_work: Work&lt;Self, 1&gt;,
     // more fields ...
-}<br>
+}
+
 // Then you call a macro to implement the unsafe `HasWork` trait safely.
 // It asserts that there is a field of type `Work&lt;MyDriver, 0&gt;` at the given field
 // (and also exposes its offset).
 impl_has_work!(impl HasWork&lt;MyDriver, 0&gt; for MyDriver { self.main_work });
-impl_has_work!(impl HasWork&lt;MyDriver, 1&gt; for MyDriver { self.aux_work });<br>
-// Then you implement `WorkItem` twice:<br>
+impl_has_work!(impl HasWork&lt;MyDriver, 1&gt; for MyDriver { self.aux_work });
+
+// Then you implement `WorkItem` twice:
+
 impl WorkItem&lt;0&gt; for MyDriver {
-    type Pointer = Arc&lt;Self&gt;;<br>
+    type Pointer = Arc&lt;Self&gt;;
+    
     fn run(this: Self::Pointer) {
         println!(&quot;doing the main work here&quot;);
     }
-}<br>
+}
+
 impl WorkItem&lt;1&gt; for MyDriver {
-    type Pointer = Arc&lt;Self&gt;;<br>
+    type Pointer = Arc&lt;Self&gt;;
+    
     fn run(this: Self::Pointer) {
         println!(&quot;doing the aux work here&quot;);
     }
-}<br>
-// And finally you can call `enqueue` on a `Queue`:<br>
+}
+
+// And finally you can call `enqueue` on a `Queue`:
+
 let my_driver = Arc::new(MyDriver::new());
 let queue: &amp;'static Queue = kernel::workqueue::system_highpri();
-queue.enqueue::&lt;_, 0&gt;(my_driver.clone()).expect(&quot;my_driver is not yet enqueued for id 0&quot;);<br>
+queue.enqueue::&lt;_, 0&gt;(my_driver.clone()).expect(&quot;my_driver is not yet enqueued for id 0&quot;);
+
 // there are different queues
 let queue = kernel::workqueue::system_long();
-queue.enqueue::&lt;_, 1&gt;(my_driver.clone()).expect(&quot;my_driver is not yet enqueued for id 1&quot;);<br>
+queue.enqueue::&lt;_, 1&gt;(my_driver.clone()).expect(&quot;my_driver is not yet enqueued for id 1&quot;);
+
 // cannot insert multiple times:
 assert!(queue.enqueue::&lt;_, 1&gt;(my_driver.clone()).is_err());
 </code></pre>
 <p>FRTs could be used instead of this id, making the definition be <code>Work&lt;F: Field&gt;</code> (also merging the <code>T</code> parameter).</p>
+
+
 <pre><code class="language-rust">struct MyDriver {
     data: Arc&lt;MyData&gt;,
     main_work: Work&lt;field_of!(Self, main_work)&gt;,
     aux_work: Work&lt;field_of!(Self, aux_work)&gt;,
     // more fields ...
-}<br>
+}
+
 impl WorkItem&lt;field_of!(MyDriver, main_work)&gt; for MyDriver {
-    type Pointer = Arc&lt;Self&gt;;<br>
+    type Pointer = Arc&lt;Self&gt;;
+    
     fn run(this: Self::Pointer) {
         println!(&quot;doing the main work here&quot;);
     }
-}<br>
+}
+
 impl WorkItem&lt;field_of!(MyDriver, aux_work)&gt; for MyDriver {
-    type Pointer = Arc&lt;Self&gt;;<br>
+    type Pointer = Arc&lt;Self&gt;;
+    
     fn run(this: Self::Pointer) {
         println!(&quot;doing the aux work here&quot;);
     }
-}<br>
+}
+
 let my_driver = Arc::new(MyDriver::new());
 let queue: &amp;'static Queue = kernel::workqueue::system_highpri();
 queue
     .enqueue(my_driver.clone(), field_of!(MyDriver, main_work))
     //                          ^ using Gary's idea to avoid turbofish
-    .expect(&quot;my_driver is not yet enqueued for main_work&quot;);<br>
+    .expect(&quot;my_driver is not yet enqueued for main_work&quot;);
+
 let queue = kernel::workqueue::system_long();
 queue
     .enqueue(my_driver.clone(), field_of!(MyDriver, aux_work))
-    .expect(&quot;my_driver is not yet enqueued for aux_work&quot;);<br>
+    .expect(&quot;my_driver is not yet enqueued for aux_work&quot;);
+
 assert!(queue.enqueue(my_driver.clone(), field_of!(MyDriver, aux_work)).is_err());
 </code></pre>
 <p>This makes it overall a lot more readable (by providing sensible names instead of magic numbers), and maintainable (we can add a new variant without worrying about which IDs are unused). It also avoids the <code>unsafe</code> <code>HasWork</code> trait and the need to write the <code>impl_has_work!</code> macro for each <code>Work</code> field.</p>
@@ -325,17 +362,24 @@ assert!(queue.enqueue(my_driver.clone(), field_of!(MyDriver, aux_work)).is_err()
 <div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
 <h3>Making <code>Project::project</code> safe</h3>
 <p>In the current proposal the <code>Project::project</code> function is <code>unsafe</code>, because it takes a raw pointer as an argument. This is pretty unusual for an operator trait (it would be the first). <a href="https://github.com/tmandry">Tyler Mandry</a> thought about a way of making it safe by introducing &quot;partial struct types&quot;. This new type is spelled <code>Struct.F</code> where <code>F</code> is an FRT of that struct. It's like <code>Struct</code>, but with the restriction that only the field represented by <code>F</code> can be accessed. So for example <code>&amp;Struct.F</code> would point to <code>Struct</code>, but only allow one to read that single field. This way we could design the <code>Project</code> trait in a safe manner:</p>
+
+
 <pre><code class="language-rust">// governs conversion of `Self` to `Narrowed&lt;F&gt;` &amp; replaces Projectable
 pub unsafe trait NarrowPointee {
-    type Target;<br>
+    type Target;
+
     type Narrowed&lt;F: Field&lt;Base = Self::Target&gt;&gt;;
-}<br>
+}
+
 pub trait Project: NarrowPointee {
-    type Output&lt;F: Field&lt;Base = Self::Type&gt;&gt;;<br>
+    type Output&lt;F: Field&lt;Base = Self::Type&gt;&gt;;
+
     fn project(narrowed: Self::Narrowed&lt;F&gt;) -&gt; Self::Output&lt;F&gt;;
 }
 </code></pre>
 <p>The <code>NarrowPointee</code> trait allows a type to declare that it supports conversions of its <code>Target</code> type to <code>Target.F</code>. For example, we would implement it for <code>RefMut</code> like this:</p>
+
+
 <pre><code class="language-rust">unsafe impl&lt;'a, T&gt; NarrowPointee for RefMut&lt;'a, T&gt; {
     type Target = T;
     type Narrowed&lt;F: Field&lt;Base = T&gt;&gt; = RefMut&lt;'a, T.F&gt;;
@@ -387,7 +431,7 @@ Reborrow traits <a href='https://github.com/rust-lang/rust-project-goals/issues/
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -446,7 +490,7 @@ build-std <a href='https://github.com/rust-lang/rust-project-goals/issues/274' s
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -631,7 +675,7 @@ Ergonomic ref-counting: RFC decision and preview <a href='https://github.com/rus
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>3 detailed updates available.</p>
 </span>
@@ -695,6 +739,8 @@ Ergonomic ref-counting: RFC decision and preview <a href='https://github.com/rus
 <p>https://smallcultfollowing.com/babysteps/blog/2025/10/13/ergonomic-explicit-handles/</p>
 <p>The point of this post is to argue that, whatever else we do, Rust should have a way to create handles/clones (and closures that work with them) which is at once explicit <em>and</em> ergonomic.</p>
 <p>To give a preview of my current thinking, I am working now on the next post which will discuss how we should add an explicit capture clause syntax. This is somewhat orthogonal but not really, in that an explicit syntax would make closures that clone more ergonomic (but only mildly). I don't have a proposal I fully like for this syntax though and there are a lot of interesting questions to work out. As a strawperson, though, you might imagine [this older proposal I wrote up](https://hackmd.io/<a href="https://github.com/nikomatsakis">Niko Matsakis</a>/SyI0eMFXO?type=view), which would mean something like this:</p>
+
+
 <pre><code class="language-rust">let actor1 = async move(reply_tx.handle()) {
     reply_tx.send(...);
 };
@@ -703,6 +749,8 @@ let actor2 = async move(reply_tx.handle()) {
 };
 </code></pre>
 <p>This is an improvement on</p>
+
+
 <pre><code class="language-rust">let actor1 = {
     let reply_tx = reply_tx.handle();
     async move(reply_tx.handle()) {
@@ -712,12 +760,16 @@ let actor2 = async move(reply_tx.handle()) {
 </code></pre>
 <p>but only mildly.</p>
 <p>The next post I intend to write would be a variant on &quot;use, use everywhere&quot; that recommends <em>method call syntax</em> and permitting the compiler to elide handle/clone calls, so that the example becomes</p>
+
+
 <pre><code class="language-rust">let actor1 = async move {
     reply_tx.handle().send(...);
     //       -------- due to optimizations, this would capture the handle creation to happen only when future is *created*
 };
 </code></pre>
 <p>This would mean that cloning of strings and things might benefit from the same behavior:</p>
+
+
 <pre><code class="language-rust">let actor1 = async move {
     reply_tx.handle().send(some_id.clone());
     //                     -------- the `some_id.clone()` would occur at future creation time
@@ -860,7 +912,7 @@ In-place initialization <a href='https://github.com/rust-lang/rust-project-goals
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -923,7 +975,7 @@ Next-generation trait solver <a href='https://github.com/rust-lang/rust-project-
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -991,7 +1043,7 @@ Stabilizable Polonius support on nightly <a href='https://github.com/rust-lang/r
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -1023,6 +1075,8 @@ Stabilizable Polonius support on nightly <a href='https://github.com/rust-lang/r
 
 ## Goals looking for help
 
+
+<br>
 
 ## Other goal updates
 
@@ -1234,7 +1288,7 @@ Const Generics <a href='https://github.com/rust-lang/rust-project-goals/issues/1
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -1368,7 +1422,7 @@ Develop the capabilities to keep the FLS up to date <a href='https://github.com/
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>2 detailed updates available.</p>
 </span>
@@ -1430,7 +1484,7 @@ Emit Retags in Codegen <a href='https://github.com/rust-lang/rust-project-goals/
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -1495,7 +1549,7 @@ Expand the Rust Reference to specify more aspects of the Rust language <a href='
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -1594,7 +1648,7 @@ Finish the std::offload module <a href='https://github.com/rust-lang/rust-projec
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -1661,7 +1715,7 @@ Getting Rust for Linux into stable Rust: compiler features <a href='https://gith
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>3 detailed updates available.</p>
 </span>
@@ -1757,7 +1811,7 @@ Getting Rust for Linux into stable Rust: language features <a href='https://gith
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>3 detailed updates available.</p>
 </span>
@@ -1822,15 +1876,21 @@ Getting Rust for Linux into stable Rust: language features <a href='https://gith
 <p>Danilo will open a PR to get that discussion started.</p>
 <h3>rustfmt</h3>
 <p>Miguel brought up the &quot;trailing empty comment&quot; workaround for the formatting issue that made the rounds on the Linux kernel a few weeks ago. The kernel style places each import on a single line:</p>
+
+
 <pre><code class="language-rust">    use crate::{
         fmt,
         page::AsPageIter,
     };
 </code></pre>
 <p>rustfmt compresses this to:</p>
+
+
 <pre><code class="language-rust">    use crate::{fmt, page::AsPageIter};
 </code></pre>
 <p>The workaround is to put an empty trailing comment at the end</p>
+
+
 <pre><code class="language-rust">    use crate::{
         fmt,
         page::AsPageIter, //
@@ -2014,7 +2074,7 @@ Prototype Cargo build analysis <a href='https://github.com/rust-lang/rust-projec
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -2070,7 +2130,7 @@ reflection and comptime <a href='https://github.com/rust-lang/rust-project-goals
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -2127,7 +2187,7 @@ Rework Cargo Build Dir Layout <a href='https://github.com/rust-lang/rust-project
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -2262,7 +2322,7 @@ Rust Vision Document <a href='https://github.com/rust-lang/rust-project-goals/is
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -2318,7 +2378,7 @@ rustc-perf improvements <a href='https://github.com/rust-lang/rust-project-goals
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -2460,7 +2520,7 @@ SVE and SME on AArch64 <a href='https://github.com/rust-lang/rust-project-goals/
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -2492,9 +2552,13 @@ SVE and SME on AArch64 <a href='https://github.com/rust-lang/rust-project-goals/
 <p>To help us get a feel for it, I'll use <code>T: =Foo</code> throughout this post.</p>
 <h2>Implicit trait supertrait bounds, edition interaction</h2>
 <p>In Rust 2024, a trait is implicitly <code>?Sized</code> which gets mapped to <code>=SizeOfVal</code>:</p>
+
+
 <pre><code class="language-rust">trait Marker {} // cannot be implemented by extern types
 </code></pre>
 <p>This is not desirable but changing it would be backwards incompatible if traits have default methods that take advantage of this bound:</p>
+
+
 <pre><code class="language-rust">trait NotQuiteMarker {
     fn dummy(&amp;self) {
         let s = size_of_val(self);

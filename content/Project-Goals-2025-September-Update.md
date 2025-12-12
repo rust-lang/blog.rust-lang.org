@@ -96,7 +96,7 @@ Design a language feature to solve Field Projections <a href='https://github.com
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -139,7 +139,7 @@ Design a language feature to solve Field Projections <a href='https://github.com
 <p>We want users to be able to have two different types of projections analogous to <code>&amp;T</code> and <code>&amp;mut T</code>. Each field can be projected independently and a single field can only be projected multiple times in a shared way. The current design uses two different traits to model this. The two traits are almost identical, except for their safety documentation.</p>
 <p>We were thinking if it is possible to unify them into a single trait and have coercions similar to autoreborrowing that would allow the borrow checker to change the behavior depending on which type is projected.</p>
 <h3>Syntax</h3>
-<p>There are lots of different possibilities for which syntax we can choose, here are a couple options: <code>[Devon Peticolas][]-&gt;f</code>/<code>[Andrea D'Angelo][] x-&gt;f</code>, <code>[Devon Peticolas][].f</code>/<code>[Andrea D'Angelo][] x.f</code>, <code>x.[Fatih Kadir Akın][]</code>/<code>x.mut[Fatih Kadir Akın][]</code>, <code>x.ref.[Fatih Kadir Akın][]</code>/<code>x.[Fatih Kadir Akın][]</code>. Also many alternatives for the sigils used: <code>x[Fatih Kadir Akın][]</code>, <code>x~f</code>, <code>x.@.f</code>.</p>
+<p>There are lots of different possibilities for which syntax we can choose, here are a couple options: <code>@x-&gt;f</code>/<code>@mut x-&gt;f</code>, <code>@x.f</code>/<code>@mut x.f</code>, <code>x.@f</code>/<code>x.mut@f</code>, <code>x.ref.@f</code>/<code>x.@f</code>. Also many alternatives for the sigils used: <code>x@f</code>, <code>x~f</code>, <code>x.@.f</code>.</p>
 <p>We have yet to decide on a direction we want to go in. If we are able to merge the two project traits, we can also settle on a single syntax which would be great.</p>
 <h3>Splitting Projections into Containers &amp; Pointers</h3>
 <p>There are two categories of projections: Containers and Pointers:</p>
@@ -281,7 +281,7 @@ build-std <a href='https://github.com/rust-lang/rust-project-goals/issues/274' s
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -379,7 +379,7 @@ Promoting Parallel Front End <a href='https://github.com/rust-lang/rust-project-
 </div>
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -529,7 +529,7 @@ Stabilize cargo-script <a href='https://github.com/rust-lang/rust-project-goals/
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -620,7 +620,7 @@ Evolving trait hierarchies <a href='https://github.com/rust-lang/rust-project-go
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -633,6 +633,8 @@ Evolving trait hierarchies <a href='https://github.com/rust-lang/rust-project-go
 <p>The major open questions currently are:</p>
 <h2>Syntax</h2>
 <p>The current RFC proposes:</p>
+
+
 <pre><code class="language-rust">trait Subtrait: Supertrait {
     auto impl Supertrait {
         // Supertrait items defined in terms of Subtrait items, if any
@@ -642,7 +644,10 @@ Evolving trait hierarchies <a href='https://github.com/rust-lang/rust-project-go
 <p>Additionally, there is an open question around the syntax of <code>auto impl</code> for unsafe supertraits. The current proposal is to require <code>unsafe auto impl Supertrait</code>.</p>
 <h2>Whether to require impls to opt-out of <code>auto impl</code>s</h2>
 <p>The current RFC proposes that</p>
+
+
 <pre><code class="language-rust">impl Supertrait for MyType {}
+
 impl Subtrait for MyType {
     // Required in order to manually write `Supertrait` for MyType.
     extern impl Supertrait;
@@ -1049,7 +1054,7 @@ Continue resolving &#x60;cargo-semver-checks&#x60; blockers for merging into car
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -1235,7 +1240,7 @@ Finish the libtest json output experiment <a href='https://github.com/rust-lang/
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -1528,7 +1533,7 @@ Prototype a new set of Cargo &quot;plumbing&quot; commands <a href='https://gith
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
@@ -1848,7 +1853,7 @@ rustc-perf improvements <a href='https://github.com/rust-lang/rust-project-goals
 <!-- Help Wanted Section -->
 
 <!-- Updates Section -->
-<details style="border-top: 1px solid #eee;" open>
+<details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
 <span style="font-weight: bold;"><p>1 detailed update available.</p>
 </span>
