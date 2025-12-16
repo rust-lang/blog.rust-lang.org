@@ -28,5 +28,4 @@ There are four levels: `Vibes` (does the team like this?), `Small` (the team onl
 
 This clarifies the need for champions (only for medium/large support levels) and should make the team approval easier as they can clearly see what is actually requested here and compare it to their capacity.
 
-
 Want to talk to us? Drop by our Zulip in [#project-goals/2026-workshop](https://rust-lang.zulipchat.com/#narrow/channel/546987-project-goals.2F2026-workshop). We can answer any questions you have, discuss the goal before you commit and help you put it together.
