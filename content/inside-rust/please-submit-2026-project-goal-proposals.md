@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/9999/12/31/please-submit-2026-project-goal-proposals"
+path = "inside-rust/2025/12/16/please-submit-2026-project-goal-proposals"
 title = "Please submit 2026 Project goal proposals!"
 authors = ["Tomas Sedovic"]
 
