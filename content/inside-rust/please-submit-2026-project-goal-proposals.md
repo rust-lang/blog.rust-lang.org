@@ -1,6 +1,6 @@
 +++
 path = "inside-rust/2025/12/16/please-submit-2026-project-goal-proposals"
-title = "Please submit 2026 Project goal proposals!"
+title = "Please submit 2026 Project goal proposals"
 authors = ["Tomas Sedovic"]
 
 [extra]
@@ -8,9 +8,9 @@ team = "the Goals team"
 team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-goals"
 +++
 
-# Please submit 2026 Project goal proposals!
+# Please submit 2026 Project goal proposals
 
-The proposals for the 2026 goal period are open, you can **submit yours right now**.
+The proposals for the 2026 goal period are open, you can submit yours right now.
 
 We are accepting proposals **until the end of January 2026**.
 
@@ -18,7 +18,7 @@ Go to the [Propose a new goal](https://rust-lang.github.io/rust-project-goals/ho
 
 [template]: https://github.com/rust-lang/rust-project-goals/blob/main/src/TEMPLATE.md
 
-We're now running the whole program **throughout the full year**: getting the nominations and writing the RFC at the beginning, with the RFC and official start in April and publish check-ins in July and October.
+We're now running the whole program throughout the full year: getting the nominations and writing the RFC at the beginning, with the RFC and official start in April and publish check-ins in July and October.
 
 But if you're a Project member and have all the team asks (reviews, design bandwidth etc.) sorted out, you can propose and start a goal at any time.
 
