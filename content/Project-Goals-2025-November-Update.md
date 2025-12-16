@@ -1,5 +1,5 @@
 +++
-path = "9999/12/31/Project-Goals-2025-November-Update.md"
+path = "2025/12/16/Project-Goals-2025-November-Update.md"
 title = "Project goals update — November 2025"
 authors = ["Tomas Sedovic"]
 
