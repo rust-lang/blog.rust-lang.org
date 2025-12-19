@@ -33,7 +33,7 @@ And finally, we want to align goals closer with the Editions (which we also want
 
 ### rust-project-goals
 
-To support this, Niko made changes to the `rust-project-goals` repo which I reviewed and followed up with a small fix.
+To support this, Niko made changes to the [`rust-project-goals` repo](https://github.com/rust-lang/rust-project-goals) which I reviewed and followed up with a small fix.
 
 After that, I addressed some of the issues with how we were generating reports and blog posts:
 
@@ -69,7 +69,7 @@ If we can't get there, we'll look at changing the format and/or posting them les
 
 ### Timeline / next steps
 
-We're accepting suggestions for new goals until January 2026. After that, we'll publish the first draft of what the 2026 goals look like, and we'll keep refining them throughout February.
+We're accepting suggestions for new goals until the end of January 2026. After that, we'll publish the first draft of what the 2026 goals look like, and we'll keep refining them throughout February.
 
 We plan to publish the RFC in March and start the 2026 goal season officially in April.
 
@@ -192,9 +192,7 @@ We track all our videos on the [Interview Inventory board](https://github.com/or
 
 Many Rust contributors have individual sponsorships set up. Jakub Beránek (Kobzol) set up the [Funding](https://rust-lang.org/funding/) page that lists people you can sponsor directly.
 
-You can read more in this blog post:
-
-<https://blog.rust-lang.org/2025/12/08/making-it-easier-to-sponsor-rust-contributors/>
+You can read more in the blog post [Making it easier to sponsor Rust contributors](https://blog.rust-lang.org/2025/12/08/making-it-easier-to-sponsor-rust-contributors/).
 
 
 ### Rust Foundation Maintainer Fund
