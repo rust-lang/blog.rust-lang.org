@@ -1,5 +1,5 @@
 +++
-path = "9999/12/31/what-do-people-love-about-rust"
+path = "2025/12/19/what-do-people-love-about-rust"
 title = "What do people love about Rust?"
 authors = ["Niko Matsakis"]
 
