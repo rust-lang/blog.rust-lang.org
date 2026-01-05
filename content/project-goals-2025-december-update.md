@@ -843,8 +843,38 @@ Stabilizable Polonius support on nightly <a href='https://github.com/rust-lang/r
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
-<span style="font-weight: bold;">No detailed updates available.</span>
+<span style="font-weight: bold;"><p>2 detailed updates available.</p>
+</span>
 </summary>
+<div style="padding: 12px 16px; background: var(--body-background-color);">
+<div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
+<a href="https://github.com/rust-lang/rust-project-goals/issues/118#issuecomment-3699751576" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @lqd posted on 2025-12-30:</a>
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<p>This month's key developments were:</p>
+<ul>
+<li>borrowck support in <code>a-mir-formality</code> has been progressing steadily — it has its own dedicated updates in https://github.com/rust-lang/rust-project-goals/issues/122 for more details</li>
+<li>we were also able to find a suitable project for the master's student project on a-mir-formality (and they accepted and should start around February) and which will help expand our testing coverage for the polonius alpha as well.</li>
+<li>tiif has kept making progress on fixing opaque type soundness issue https://github.com/rust-lang/trait-system-refactor-initiative/issues/159. It is the one remaining blocker for passing all tests. By itself it will not immediately fix the two remaining (soundness) issues with opaque type region liveness, but we'll able to use the same supporting code to ensure the regions are indeed live where they need to be.</li>
+<li>I quickly cleaned up some <a href="https://github.com/rust-lang/rust/pull/149639">inefficiencies in constraint conversion</a>, it hasn't landed yet but it maybe won't need to because of the next item</li>
+<li>but most of the time this month was spent on this final item: we have the first interesting results from the rewriting effort. After a handful of wrong starts, I have a branch almost ready to switch the constraint graph to be lazy and computed during traversal. It removes the need to index the numerous list of constraints, or to convert liveness data to a different shape. It thus greatly reduces the current alpha overhead (some rare cases look faster than NLLs but I don't yet know why, maybe due to being able to better use the sparseness, low connectivity of the constraint graph, and a small number of loans). The overhead wasn't entirely removed of course: the worst offending benchmark has a +5% wall-time regression, but icounts are worse looking (+13%). This was also only benchmarking the algorithm itself, without the improvements to the rest of borrowck mentioned in previous updates. I should be able to open a PR in the next couple days, once I figure out how to best convert the polonius mermaid graph dump to the new lazy localized constraint generation.</li>
+<li>and finally, happy holidays everyone!</li>
+</ul>
+
+</div>
+</div>
+<div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
+<a href="https://github.com/rust-lang/rust-project-goals/issues/118#issuecomment-3702561875" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @lqd posted on 2025-12-31:</a>
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<blockquote>
+<ul>
+<li>I should be able to open a PR in the next couple days</li>
+</ul>
+</blockquote>
+<p>done in https://github.com/rust-lang/rust/pull/150551</p>
+
+</div>
+</div>
+</div>
 </details>
 
 </div>
@@ -1081,7 +1111,7 @@ Const Generics <a href='https://github.com/rust-lang/rust-project-goals/issues/1
 <table style="width: 100%; border-collapse: collapse; background: var(--body-background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
-<td style="padding: 8px 16px;"><progress value="1" max="7"></progress>
+<td style="padding: 8px 16px;"><progress value="2" max="7"></progress>
 </td>
 </tr>
 <tr style="border-bottom: 1px solid #eee;">
@@ -1108,8 +1138,74 @@ Const Generics <a href='https://github.com/rust-lang/rust-project-goals/issues/1
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
-<span style="font-weight: bold;">No detailed updates available.</span>
+<span style="font-weight: bold;"><p>3 detailed updates available.</p>
+</span>
 </summary>
+<div style="padding: 12px 16px; background: var(--body-background-color);">
+<div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
+<a href="https://github.com/rust-lang/rust-project-goals/issues/100#issuecomment-3698333757" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @BoxyUwU posted on 2025-12-30:</a>
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<p>Since the last update both of my PRs I mentioned have landed, allowing for constructing ADTs in const arguments while making use of generic parameters. This makes MGCA effectively a &quot;full&quot; prototype where it can now fully demonstrate the core concept of the feature. There's still a lot of work left to do but now we're at the point of finishing out the feature :)</p>
+<p>Once again huge thanks to camelid for sticking with me throughout this. Also thanks to errs, oli and lcnr for reviewing some of the work and chatting with me about possible impl decisions.</p>
+<p>Some examples of what is possible with MGCA as of the end of this goal cycle:</p>
+
+
+<pre><code class="language-rust">#![feature(const_default, const_trait_impl, min_generic_const_args)]
+
+trait Trait {
+    #[type_const]
+    const ASSOC: usize;
+}
+
+fn mk_array&lt;T: const Default + Trait&gt;() -&gt; [T; T::ASSOC] {
+    [const { T::default() }; _]
+}
+</code></pre>
+
+
+<pre><code class="language-rust">#![feature(adt_const_params, min_generic_const_args)]
+
+fn foo&lt;const N: Option&lt;u32&gt;&gt;() {}
+
+trait Trait {
+    #[type_const]
+    const ASSOC: usize;
+}
+
+fn bar&lt;T: Trait, const N: u32&gt;() {
+    // the initializer of `_0` is a `N` which is a legal const argument
+    // so this is ok.
+    foo::&lt;{ Some::&lt;u32&gt; { 0: N } }&gt;();
+
+    // this is allowed as mgca supports uses of assoc consts in the
+    // type system. ie `&lt;T as Trait&gt;::ASSOC` is a legal const argument
+    foo::&lt;{ Some::&lt;u32&gt; { 0: &lt;T as Trait&gt;::ASSOC } }&gt;();
+
+    // this on the other hand is not allowed as `N + 1` is not a legal
+    // const argument
+    foo::&lt;{ Some::&lt;u32&gt; { 0: N + 1 } }&gt;(); // ERROR
+}
+</code></pre>
+<p>As for <code>adt_const_params</code> we now have a zulip stream specifically for discussion of the upcoming RFC and the drafting of the RFC: <a href="https://rust-lang.zulipchat.com/#narrow/channel/551659-project-const-generics.2Fadt_const_params-rfc">#project-const-generics/adt_const_params-rfc</a>. I've gotten part of the way through actually writing the RFC itself though it's gone slower than I had originally hoped as I've also been spending more time thinking through the implications of allowing private data in const generics.</p>
+<p>I've debugged the remaining two ICEs making <code>adt_const_params</code> not fully ready for stabilization and written some brief instructions on how to resolve them. One ICE has been incidentally fixed (though more <em>masked</em>) by some work that <a href="https://github.com/Kivooeo">Kivooeo</a> has been doing on MGCA. The other has been picked up by someone I'm not sure the github handle of so that will also be getting fixed soon.</p>
+
+</div>
+</div>
+<div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
+<a href="https://github.com/rust-lang/rust-project-goals/issues/100#issuecomment-3698351163" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @BoxyUwU posted on 2025-12-30:</a>
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<p>Ah I forgot to mention, even though MGCA has a tonne of work left to do I expect it should be somewhat approachable for people to help out with. So if people are interested in getting involved now is a good time :)</p>
+
+</div>
+</div>
+<div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
+<a href="https://github.com/rust-lang/rust-project-goals/issues/100#issuecomment-3700029422" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @BoxyUwU posted on 2025-12-30:</a>
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<p>Ah another thing I forgot to mention. <a href="https://github.com/davidtwco">David Wood</a> spent some time looking into the name mangling scheme for <code>adt_const_params</code> stuff to make sure it would be fine to stabilize and it seems it is so that's another step closer to <code>adt_const_params</code> being stabilizable</p>
+
+</div>
+</div>
+</div>
 </details>
 
 </div>
@@ -2422,7 +2518,7 @@ Type System Documentation <a href='https://github.com/rust-lang/rust-project-goa
 <table style="width: 100%; border-collapse: collapse; background: var(--body-background-color);">
 <tr style="border-bottom: 1px solid #eee;">
 <td style="padding: 8px 16px; font-weight: bold; width: 80px; color: #666;">Progress</td>
-<td style="padding: 8px 16px;"><progress value="1" max="4"></progress>
+<td style="padding: 8px 16px;"><progress value="2" max="4"></progress>
 </td>
 </tr>
 <tr style="border-bottom: 1px solid #eee;">
@@ -2449,8 +2545,18 @@ Type System Documentation <a href='https://github.com/rust-lang/rust-project-goa
 <!-- Updates Section -->
 <details style="border-top: 1px solid #eee;">
 <summary style="padding: 10px 16px; background: var(--blockquote-bg-color); cursor: pointer; list-style: none; outline: none;">
-<span style="font-weight: bold;">No detailed updates available.</span>
+<span style="font-weight: bold;"><p>1 detailed update available.</p>
+</span>
 </summary>
+<div style="padding: 12px 16px; background: var(--body-background-color);">
+<div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;">
+<a href="https://github.com/rust-lang/rust-project-goals/issues/405#issuecomment-3698337880" style="color: #0366d6; font-weight: 500; text-decoration: none;">Comment by @BoxyUwU posted on 2025-12-30:</a>
+<div style="margin-top: 8px; padding: 12px; background: var(--blockquote-bg-color); border-left: 4px solid #e1e4e8; border-radius: 0 6px 6px 0;">
+<p>This month I've written some documentation for how Const Generics is implemented in the compiler. This mostly covers the implementation of the stable functionality as the unstable features are quite in flux right now. These docs can be found here: https://rustc-dev-guide.rust-lang.org/const-generics.html</p>
+
+</div>
+</div>
+</div>
 </details>
 
 </div>
