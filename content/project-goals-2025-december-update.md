@@ -1,6 +1,6 @@
 +++
-path = "9999/12/31/project-goals-2025-december-update"
-title = "Project-Goals-2025-December-Update"
+path = "2026/01/05/project-goals-2025-december-update"
+title = "Project goals update — December 2025"
 authors = ["Tomas Sedovic"]
 
 [extra]
