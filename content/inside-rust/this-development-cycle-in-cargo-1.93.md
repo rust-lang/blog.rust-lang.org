@@ -47,7 +47,7 @@ Thanks to [eopb](https://github.com/eopb) for the suggestion!
 
 *Update from [1.92](https://blog.rust-lang.org/inside-rust/2025/11/24/this-development-cycle-in-cargo-1.92/#misc)*
 
-[jneem](https://github.com/jneem) continued the work of migrating to [annotate-snippets](https://github.com/rust-lang/annotate-snippets-rs/) in [#16143](https://github.com/rust-lang/cargo/pull/16143)).
+[jneem](https://github.com/jneem) continued the work of migrating to [annotate-snippets](https://github.com/rust-lang/annotate-snippets-rs/) in [#16143](https://github.com/rust-lang/cargo/pull/16143).
 This effort is being tracked in [#15944](https://github.com/rust-lang/cargo/issues/15944).
 
 A compiler major change proposal (or MCP) was posted to switch nightly rustc over to using
