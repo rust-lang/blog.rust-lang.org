@@ -3,21 +3,21 @@ path = "inside-rust/9999/12/31/what-is-maintenance-anyway"
 title = "What is maintenance, anyway?"
 authors = ["Jakub Beránek"]
 +++
-
+  
 Recently, the Rust Foundation has announced the [Rust Foundation Maintainer Fund][rfmf], whose goal is to support Rust Project maintainers. We are currently cooperating with the Foundation to define the [guidelines][rfmf-doc] of this Fund, such as what kind of work to fund, how to select maintainers to fund and others. One of the questions that keeps coming up is this: *Who exactly is a maintainer, and what work can be considered as being maintenance?* This post provides some observations that might help answer these questions.
 
 Wikipedia defines [software maintenance](https://en.wikipedia.org/wiki/Software_maintenance) as "modification of software after delivery", but that does not correspond very well to how maintenance works in open-source or in Rust. There is no single delivery of Rust after which it would switch to "maintenance mode"; we deliver a new nightly version of Rust every day, and a new stable version every six weeks. And if someone contributes a pull request to the compiler, they clearly modify it, but as much as we treasure contributions to Rust, that does not immediately make them a maintainer. Instead, let us try to describe how we understand maintenance in the Rust Project.
 
 ## Keeping the lights on
 
-We could interpret the word "maintain" literally, in the sense of keeping something in a specific (hopefully working) state over a long time period. And that is indeed a large part of what maintainers do: they ensure that things that work today will still continue working tomorrow. There are many ways in which a software project might stop working properly, so this work is naturally very diverse. It includes activities such as issue triaging, investigating and fixing bugs, dealing with CI failures, responding to security incidents, resolving performance regressions, updating dependencies, making sure that documentation is up-to-date, and many others.
+We could interpret the word "maintain" literally, in the sense of keeping something in a specific (hopefully working) state over a long time period. And that is indeed a large part of what maintainers do: they ensure that things that work today will still continue working tomorrow. There are many ways in which a software project might stop working properly, so this work is naturally very diverse. It includes activities such as issue triaging, investigating and fixing bugs, dealing with CI failures, responding to security incidents, resolving performance regressions, updating dependencies, making sure that documentation is up to date, and many others.
 
 This kind of "janitorial" work is quite challenging for several reasons:
 
 - It can be difficult to demonstrate the positive effects of this work on a given software project. Users sometimes assume that if something works now, it will keep working indefinitely. Furthermore, Rust has a very high bar for being reliable (in many aspects of that word), so people are used to the fact that the compiler works correctly, that critical bugs are resolved as quickly as possible, that new releases are published every six weeks, etc. But all that takes considerable effort, even without considering shipping any new features. Therefore, a successful report of maintenance work can be simply "things still work as they used to", and consistent maintenance over time manifests as an *absence* of noteworthy incidents.
 - It can be very unpredictable, because it is hard to estimate in advance what things will break next. This also makes it difficult to plan this work ahead and make promises about what kind of work will get done in a given time period.
 - Finding motivation for performing a lot of maintenance work can be a struggle. It is often not work that someone *wants* to do, but work that *has to be done*. That can be draining, especially if that work is done by volunteers.
-- Maintenance is often not on a roadmap, and often not viewed as high-status work that gets someone recognized or promoted. (This relates to it being characterized by an absence of noteworthy incidents.)
+- Maintenance is often not on a roadmap, and often not viewed as high-status work that gets someone recognized or promoted.
 
 ## Enabling evolution
 
