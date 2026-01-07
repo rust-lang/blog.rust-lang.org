@@ -37,7 +37,7 @@ This enablement work of course requires having a deep knowledge of the codebase,
 
 ## Conclusion
 
-Based on the observations presented above, we could define a maintainer as someone who continuously ensures that a software project keeps working, but who also does a lot of hard (and often invisible) work to enable other contributors to evolve and improve the project.
+Based on the observations presented above, we could say that a maintainer is someone who continuously ensures that a software project keeps working, but who also does a lot of hard (and often invisible) work to enable other contributors to evolve and improve the project.
 
 You probably already guessed that maintenance work is not easy, and maybe that is one of the reasons why there seems to be a perpetual imbalance. There are often many people who want to contribute to open source, by making improvements and implementing new features, as it is often seen as being fun, and implementing a new feature is also a very visible achievement that may help meet someone's needs or give them something obvious to be proud of. But there are far fewer people who want to continuously maintain a codebase (especially if they are not paid for it!), as the results of good maintenance are much more difficult to demonstrate, and it often more closely resembles work rather than pure fun.
 
@@ -45,7 +45,7 @@ While being a maintainer can be challenging, *becoming* one is even more difficu
 
 We are incredibly happy that we have so many awesome maintainers in the Rust Project, who pour their souls into ensuring that Rust becomes better every day, and who invest enormous amounts of time into becoming experts in certain Rust projects so that they can effectively maintain them. However, many of those maintainers are volunteers, and when so much maintenance burden falls on someone who still has to work another job to pay the bills, it can lead to burnout. This is something that we want to prevent.
 
-People who do open-source maintenance deserve to be supported and rewarded for it, which is where maintainer funding comes in. We are currently seeking mechanisms for supporting people who maintain various Rust Project codebases, in a way that provides stability and enables them to focus on what they do best: improving Rust. We also want to publicize their great work—which is otherwise often near-invisible—both to give them something to be proud of, and to attract more support and funding for this critical work. With the Rust Foundation Maintainer Fund and other similar initiatives, we hope to improve the long-term sustainability of Rust maintainership. Stay tuned for more updates.
+People who do open-source maintenance deserve to be [supported](https://rust-lang.org/funding/) and rewarded for it, which is where maintainer funding comes in. We are currently seeking mechanisms for supporting people who maintain various Rust Project codebases, in a way that provides stability and enables them to focus on what they do best: improving Rust. We also want to publicize their great work—which is otherwise often near-invisible—both to give them something to be proud of, and to attract more support and funding for this critical work. With the Rust Foundation Maintainer Fund and other similar initiatives, we hope to improve the long-term sustainability of Rust maintainership. Stay tuned for more updates.
 
 [rfmf]: https://rustfoundation.org/media/announcing-the-rust-foundation-maintainers-fund/
 [rfmf-doc]: https://github.com/rust-lang/funding/blob/main/design-docs/exploration.md
