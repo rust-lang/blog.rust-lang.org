@@ -1,9 +1,13 @@
 +++
-path = "inside-rust/9999/12/31/what-is-maintenance-anyway"
+path = "inside-rust/2026/01/12/what-is-maintenance-anyway"
 title = "What is maintenance, anyway?"
 authors = ["Jakub Beránek"]
+
+[extra]
+team = "the Rust Foundation Maintainer Fund Design Committee"
+team_url = "https://github.com/rust-lang/leadership-council/blob/main/committees/maintainer-fund-design-group.md"
 +++
-  
+
 Recently, the Rust Foundation has announced the [Rust Foundation Maintainer Fund][rfmf], whose goal is to support Rust Project maintainers. We are currently cooperating with the Foundation to define the [guidelines][rfmf-doc] of this Fund, such as what kind of work to fund, how to select maintainers to fund and others. One of the questions that keeps coming up is this: *Who exactly is a maintainer, and what work can be considered as being maintenance?* This post provides some observations that might help answer these questions.
 
 Wikipedia defines [software maintenance](https://en.wikipedia.org/wiki/Software_maintenance) as "modification of software after delivery", but that does not correspond very well to how maintenance works in open-source or in Rust. There is no single delivery of Rust after which it would switch to "maintenance mode"; we deliver a new nightly version of Rust every day, and a new stable version every six weeks. And if someone contributes a pull request to the compiler, they clearly modify it, but as much as we treasure contributions to Rust, that does not immediately make them a maintainer. Instead, let us try to describe how we understand maintenance in the Rust Project.
