@@ -39,7 +39,7 @@ This enablement work of course requires having a deep knowledge of the codebase,
 
 Based on the observations presented above, we could say that a maintainer is someone who continuously ensures that a software project keeps working, but who also does a lot of hard (and often invisible) work to enable other contributors to evolve and improve the project.
 
-<aside style="float: right; width: 30%; min-width: 30rem; margin: 1.5rem 0 1.5rem 1.5rem; padding: 1em; border-top: solid; border-bottom: solid; font-family: serif;">
+<aside style="float: right; width: 30%; min-width: 32rem; margin: 1.5rem 0 1.5rem 1.5rem; padding: 1em; border-top: solid; border-bottom: solid; font-family: serif;">
   <span style="display: block; line-height: 1; font-size: 10rem; margin-bottom: -5rem; margin-top: -2rem; margin-left: -2rem;">&ldquo;</span>
   <p style="margin: 0; font-size: 1.5rem; font-style: italic; line-height: 1.5;">
     We see the work of maintainers as work that has a multiplicative effect on the Rust Project.
