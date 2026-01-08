@@ -39,6 +39,15 @@ This enablement work of course requires having a deep knowledge of the codebase,
 
 Based on the observations presented above, we could say that a maintainer is someone who continuously ensures that a software project keeps working, but who also does a lot of hard (and often invisible) work to enable other contributors to evolve and improve the project.
 
+<aside style="float: right; width: 30%; min-width: 30rem; margin: 1.5rem 0 1.5rem 1.5rem; padding: 1em; border-top: solid; border-bottom: solid; font-family: serif;">
+  <span style="display: block; line-height: 1; font-size: 10rem; margin-bottom: -5rem; margin-top: -2rem; margin-left: -2rem;">&ldquo;</span>
+  <p style="margin: 0; font-size: 1.5rem; font-style: italic; line-height: 1.5;">
+    We see the work of maintainers as work that has a multiplicative effect on the Rust Project.
+  </p>
+</aside>
+
+These are some examples of the kinds of things we see as needing additional support, including from efforts like the proposed Rust Foundation Maintainers' Fund. We see the work of maintainers as work that has a multiplicative effect on the Rust Project. We have an interest in supporting other types of work with a similar multiplicative effect.
+
 You probably already guessed that maintenance work is not easy, and maybe that is one of the reasons why there seems to be a perpetual imbalance. There are often many people who want to contribute to open source, by making improvements and implementing new features, as it is often seen as being fun, and implementing a new feature is also a very visible achievement that may help meet someone's needs or give them something obvious to be proud of. But there are far fewer people who want to continuously maintain a codebase (especially if they are not paid for it!), as the results of good maintenance are much more difficult to demonstrate, and it often more closely resembles work rather than pure fun.
 
 While being a maintainer can be challenging, *becoming* one is even more difficult. It is not really possible to become a maintainer overnight, as it takes time to not only gain deep expertise in parts of a codebase, but also to gain trust of other maintainers and contributors. All while regularly doing work that many others aren't enthusiastic about doing.
