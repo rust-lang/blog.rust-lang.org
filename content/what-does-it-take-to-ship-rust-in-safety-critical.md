@@ -1,5 +1,5 @@
 +++
-path = "2026/01/12/what-does-it-take-to-ship-rust-in-safety-critical"
+path = "2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical"
 title = "What does it take to ship Rust in safety-critical?"
 authors = ["Pete LeVasseur"]
 
