@@ -130,15 +130,21 @@ Async is not "just a language feature" in safety-critical contexts. It pulls in 
 
 ## Recommendations
 
-Rather than a generic wish list, here are concrete pressure points that came directly out of these conversations. Each is something we heard teams doing already, but in an ad hoc way.
+Before diving in, it is worth noting a pattern: open source helps those who help themselves. We have seen this play out already. The Ferrocene Language Specification (FLS) started as an industry effort to create a specification suitable for safety-critical certification. Last year, that work moved under the Rust Project with the creation of the FLS team, and the team is now actively maintaining the specification.[^fls] This happened because companies invested in the work and engaged with the Rust Project to find a sustainable home for it.
 
-**Turn "target tier policy" into a safety-critical onramp.** The friction we heard is not about the policy being unclear, it is about translating "tier" into practical decisions. A short, target-focused readiness checklist would help: Which targets exist? Which ones are `no_std` only? What is the last known tested OS version? What are the top blockers? The raw ingredients exist in rustc docs, release notes, and issue trackers, but pulling them together in one place would lower the barrier. This could be a collaboration between the compiler team, platform maintainers, and the Safety-Critical Rust Consortium.
+Contrast this with MC/DC coverage support in rustc. Earlier efforts stalled due to lack of sustained engagement from safety-critical companies.[^mcdc] The technical work was there, but without industry involvement to help define requirements, validate the implementation, and commit to maintaining it, the effort lost momentum. A major concern was that the MC/DC code added maintenance burden to the rest of the coverage infrastructure without a clear owner. Now in 2026, there is renewed interest in doing this the right way: companies are working through the Safety-Critical Rust Consortium to collaborate with the Rust Project on MC/DC support by shaping up a 2026 Rust Project Goal. The model is shared ownership of requirements, with primary implementation and maintenance done by companies with a vested interest in safety-critical, done in a way that does not impede maintenance of the rest of the coverage code.
+
+The recommendations below follow this pattern: the Safety-Critical Rust Consortium can help the community organize requirements and drive work, with the Rust Project providing the deep technical knowledge of Rust Project artifacts needed for successful collaboration. This path can work when both sides show up.
+
+**Establish ecosystem-wide MSRV conventions.** The dependency drift problem is real: teams pin their Rust toolchain for stability, but crates targeting the latest compiler make this difficult to sustain. An LTS release scheme, combined with encouraging libraries to maintain MSRV compatibility with LTS releases, could reduce this friction. This would require coordination between the Rust Project (potentially the release team) and the broader ecosystem, with the Safety-Critical Rust Consortium helping to articulate requirements and adoption patterns.
+
+**Turn "target tier policy" into a safety-critical onramp.** The friction we heard is not about the policy being unclear, it is about translating "tier" into practical decisions. A short, target-focused readiness checklist would help: Which targets exist? Which ones are `no_std` only? What is the last known tested OS version? What are the top blockers? The raw ingredients exist in rustc docs, release notes, and issue trackers, but pulling them together in one place would lower the barrier. The Safety-Critical Rust Consortium could lead this effort, working with compiler team members and platform maintainers to keep the information accurate.
 
 **Document "dependency lifecycle" patterns teams are already using.** The QM story is often: use crates early, track carefully, shrink dependencies for higher-criticality parts. The ASIL B+ story is often: avoid third-party crates entirely, or use abstraction layers and plan to replace later. Turning those patterns into a reusable playbook would help new teams make the same moves with less trial and error. This seems like a natural fit for the Safety-Critical Rust Consortium's liaison work.
 
-**For async, identify the artifact boundaries that matter.** Teams are looking for quality and process artifacts when they adopt an async runtime. A productive next step is writing down, at a technical level, what artifacts teams actually need and what subset of runtime behavior they want to constrain. Work is already happening in this space.[^score] The async working group and libs team could help work with safety-critical community folks to define what a "safety-case friendly" runtime would look like.
+**Define requirements for a safety-case friendly async runtime.** Teams adopting async in safety-critical contexts need runtimes with appropriate quality and process artifacts for standards like ISO 26262. Work is already happening in this space.[^score] The Safety-Critical Rust Consortium could lead the effort to define what "safety-case friendly" means in concrete terms, working with the async working group and libs team on technical feasibility and design.
 
-**Treat interop as part of the safety story.** Many teams are not going to rewrite their world in Rust. They are going to integrate Rust into existing C and C++ systems and carry that boundary for years. Guidance and tooling to keep interfaces correct, auditable, and in sync would help. The compiler team and lang team could consider how FFI boundaries are surfaced and checked.
+**Treat interop as part of the safety story.** Many teams are not going to rewrite their world in Rust. They are going to integrate Rust into existing C and C++ systems and carry that boundary for years. Guidance and tooling to keep interfaces correct, auditable, and in sync would help. The compiler team and lang team could consider how FFI boundaries are surfaced and checked, informed by requirements gathered through the Safety-Critical Rust Consortium.
 
 > "We rely very heavily on FFI compatibility between C, C++, and Rust. In a safety-critical space, that's where the difficulty ends up being, generating bindings, finding out what the problem was." -- Embedded systems engineer (mobile robotics)
 
@@ -153,7 +159,7 @@ To sum up the main points in this post:
 - Stability is operational: teams need to explain what upgrades change, manage dependency drift, and map target tier policies to their platform reality.
 - Async is appealing for middleware and event-driven systems, but the runtime and qualification story is not settled for higher-criticality use.
 
-We make four recommendations: create target-focused readiness checklists, document dependency lifecycle patterns, identify artifact boundaries for async runtimes, and treat C/C++ interop as part of the safety story.
+We make five recommendations: establish ecosystem-wide MSRV conventions, create target-focused readiness checklists, document dependency lifecycle patterns, define requirements for safety-case friendly async runtimes, and treat C/C++ interop as part of the safety story.
 
 ## Get involved
 
@@ -162,6 +168,10 @@ If you're working in safety-critical Rust, or you want to help make it easier, c
 Hearing concrete constraints, examples of assessor feedback, and what "evidence" actually looks like in practice is incredibly helpful. The goal is to make Rust's strengths more accessible in environments where correctness and safety are not optional.
 
 [^costs]: If you're curious about how rigor scales with cost in ISO 26262, [this Feabhas guide](https://www.feabhas.com/sites/default/files/2016-06/A%20quick%20guide%20to%20ISO%2026262%5B1%5D_0_0.pdf) gives a good high-level overview.
+
+[^fls]: The FLS team was [created under the Rust Project](https://github.com/rust-lang/team/pull/2028) in 2025. The team is now [actively maintaining the specification](https://github.com/rust-lang/fls/pull/631), reviewing changes and keeping the FLS in sync with language evolution.
+
+[^mcdc]: See the [MC/DC tracking issue](https://github.com/rust-lang/rust/issues/124144) for context. The initial implementation was [removed](https://github.com/rust-lang/rust/commit/562222b73765a326fa800a075814deaf627874df) due to maintenance concerns.
 
 [^qnx]: See the [QNX target documentation](https://doc.rust-lang.org/beta/rustc/platform-support/nto-qnx.html) for current status.
 
