@@ -36,6 +36,8 @@ A fix for this [was shipped in libc 0.2.146 in June 2023 (2.5 years ago)](https:
 and we believe has sufficiently widely propagated that we're ready to make the change in Rust
 targets.
 
+See our previous [announcement](https://blog.rust-lang.org/2025/12/05/Updating-musl-1.2.5/) for more details.
+
 ### Allow the global allocator to use thread-local storage
 
 Rust 1.93 adjusts the internals of the standard library to permit global allocators written in Rust
