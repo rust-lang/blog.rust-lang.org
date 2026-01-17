@@ -34,7 +34,7 @@ reliable, particularly in the face of large DNS records and recursive nameserver
 However, 1.2.4 also comes with a breaking change: [the removal of several legacy compatibility symbols that the Rust libc crate was using](https://github.com/rust-lang/libc/issues/2934).
 A fix for this [was shipped in libc 0.2.146 in June 2023 (2.5 years ago)](https://github.com/rust-lang/libc/pull/2935),
 and we believe has sufficiently widely propagated that we're ready to make the change in Rust
-targetes.
+targets.
 
 ### Allow the global allocator to use thread-local storage
 
