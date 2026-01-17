@@ -28,7 +28,7 @@ The various `*-linux-musl` targets now all [ship](https://github.com/rust-lang/r
 
 For the Rust ecosystem, the primary motivation for this update is to receive major improvements to
 musl's DNS resolver which shipped in 1.2.4 and received bug fixes in 1.2.5. When using `musl`
-targets for static linking, this should make portable linux binaries that do networking more
+targets for static linking, this should make portable Linux binaries that do networking more
 reliable, particularly in the face of large DNS records and recursive nameservers.
 
 However, 1.2.4 also comes with a breaking change: [the removal of several legacy compatibility symbols that the Rust libc crate was using](https://github.com/rust-lang/libc/issues/2934).
@@ -49,7 +49,7 @@ See [docs](https://doc.rust-lang.org/nightly/std/alloc/trait.GlobalAlloc.html#re
 
 ### `cfg` attributes on `asm!` lines
 
-Previously, if individual parts of a section of inline assembly needed to be  `cfg`'d, the full `asm!`
+Previously, if individual parts of a section of inline assembly needed to be `cfg`'d, the full `asm!`
 block would need to be repeated with and without that section. In 1.93, `cfg` can now be applied to
 individual statements within the `asm!` block.
 
@@ -75,7 +75,7 @@ asm!( // or global_asm! or naked_asm!
 - [`Vec::into_raw_parts`](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html#method.into_raw_parts)
 - [`<uN>::unchecked_add`](https://doc.rust-lang.org/stable/std/primitive.usize.html#method.unchecked_add)
 - [`<uN>::unchecked_sub`](https://doc.rust-lang.org/stable/std/primitive.usize.html#method.unchecked_sub)
-- [`<uN>::unchecled_mul`](https://doc.rust-lang.org/stable/std/primitive.usize.html#method.unchecked_mul)
+- [`<uN>::unchecked_mul`](https://doc.rust-lang.org/stable/std/primitive.usize.html#method.unchecked_mul)
 - [`<iN>::unchecked_add`](https://doc.rust-lang.org/stable/std/primitive.isize.html#method.unchecked_add)
 - [`<iN>::unchecked_sub`](https://doc.rust-lang.org/stable/std/primitive.isize.html#method.unchecked_sub)
 - [`<iN>::unchecked_mul`](https://doc.rust-lang.org/stable/std/primitive.isize.html#method.unchecked_mul)
