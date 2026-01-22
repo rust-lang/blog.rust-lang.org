@@ -81,7 +81,7 @@ asm!( // or global_asm! or naked_asm!
 - [`<[T]>::as_array`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.as_array)
 - [`<[T]>::as_array_mut`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.as_mut_array)
 - [`<*const [T]>::as_array`](https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.as_array)
-- [`<*mut [T]>::as_array_mut`](https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.as_mut_array)
+- [`<*mut [T]>::as_mut_array`](https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.as_mut_array)
 - [`VecDeque::pop_front_if`](https://doc.rust-lang.org/stable/std/collections/struct.VecDeque.html#method.pop_front_if)
 - [`VecDeque::pop_back_if`](https://doc.rust-lang.org/stable/std/collections/struct.VecDeque.html#method.pop_back_if)
 - [`Duration::from_nanos_u128`](https://doc.rust-lang.org/stable/std/time/struct.Duration.html#method.from_nanos_u128)
