@@ -79,7 +79,7 @@ asm!( // or global_asm! or naked_asm!
 - [`<uN>::unchecked_shl`](https://doc.rust-lang.org/stable/std/primitive.usize.html#method.unchecked_shl)
 - [`<uN>::unchecked_shr`](https://doc.rust-lang.org/stable/std/primitive.usize.html#method.unchecked_shr)
 - [`<[T]>::as_array`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.as_array)
-- [`<[T]>::as_array_mut`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.as_mut_array)
+- [`<[T]>::as_mut_array`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.as_mut_array)
 - [`<*const [T]>::as_array`](https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.as_array)
 - [`<*mut [T]>::as_mut_array`](https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.as_mut_array)
 - [`VecDeque::pop_front_if`](https://doc.rust-lang.org/stable/std/collections/struct.VecDeque.html#method.pop_front_if)
