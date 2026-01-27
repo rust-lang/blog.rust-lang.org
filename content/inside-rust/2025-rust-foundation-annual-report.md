@@ -18,7 +18,7 @@ the finances and all the work they've done, see the Foundation's [2025 Year In
 Review](https://rustfoundation.org/2025/), which you may have seen in December.
 
 Looking forward to the next 3 years, the Foundation staff worked with the Leadership Council,
-Project Directors, and surveyed the project as a whole to inform their Strategic Goals for
+Project Directors, and surveyed the Project as a whole to inform their Strategic Goals for
 2026-2028. The 5 areas the Foundation will be concentrating on are:
 
 - Stable, secure infrastructure
