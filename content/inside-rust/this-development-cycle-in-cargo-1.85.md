@@ -159,7 +159,7 @@ error: failed to select a version for the requirement `libgit2-sys = "^0.13.3"`
 candidate versions found which didn't match: 0.13.2+1.4.2, 0.13.1+1.4.2, 0.13.0+1.4.1, ...
 location searched: crates.io index
 required by package `git2 v0.14.3`
-    ... which satisfies dependency `git2 = "^0.14"` (locked to 0.14.3) of package `repor v0.1.0 (/home/epage/src/personal/repro)`
+    ... which satisfies dependency `git2 = "^0.14"` (locked to 0.14.3) of package `repro v0.1.0 (/home/epage/src/personal/repro)`
 ```
 When you go on crates.io, version `0.13.3` exists.
 The problem is `0.13.3` used the new [weak dependency feature syntax](https://doc.rust-lang.org/cargo/reference/features.html#dependency-features) (`dep?/feature`) which older Cargos do not understand.
