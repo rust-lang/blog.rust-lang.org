@@ -12,7 +12,11 @@ New year, new Foundation Board Meeting recaps! Yes, it is February now, but this
 
 - The Foundation staff proposed the final strategic goals for 2026-2028 and the board approved. [Check out the full strategy](https://rustfoundation.org/strategic-plan/)!
 - Requests to crates.io served by CloudFront are using up AWS-donated credits at a higher rate than expected; the Foundation is working on short- and long-term ways to address this.
-- The Foundation's engineers have made progress with GitLab support for Trusted Publishing is in public beta; the Capslock capability analyzer having a functioning prototype; crates.io's vulnerability scanning RFC is in final comment period; and more analytics on crates.io allows identifying anomalies in traffic.
+- The Foundation's engineers recent progress includes:
+  - GitLab support for Trusted Publishing is now in public beta
+  - The Capslock capability analyzer has a functioning prototype
+  - Crates.io's vulnerability scanning RFC is in final comment period
+  - More analytics now being tracked on crates.io enables identifying anomalies in traffic
 - The RustConf [visa letter request page](https://rustconf.com/rustconf-2026/#invite), [sponsorship prospectus](https://rustconf.com/wp-content/uploads/2025/12/RustConf_2026_Prospectus.pdf), and [CFP](https://sessionize.com/rustconf-2026/) are now all live, much earlier in relation to the conference than in earlier years to allow more time for travel planning.
 - The training program initiative proposed first launching a Foundation accreditation program for companies providing Rust training to participate in. While they will continue to explore future options for an individual training course and certification portion of the initiative, accreditation for existing Rust training providers is the priority for the foreseeable future. The board approved.
 - The Board discussed and approved of the Foundation's 2026 budget.
