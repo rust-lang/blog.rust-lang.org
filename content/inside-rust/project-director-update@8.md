@@ -17,8 +17,8 @@ New year, new Foundation Board Meeting recaps! Yes, it is February now, but this
   - The Capslock capability analyzer has a functioning prototype
   - Crates.io's vulnerability scanning RFC is in final comment period
   - More analytics now being tracked on crates.io enables identifying anomalies in traffic
-- The RustConf [visa letter request page](https://rustconf.com/rustconf-2026/#invite), [sponsorship prospectus](https://rustconf.com/wp-content/uploads/2025/12/RustConf_2026_Prospectus.pdf), and [CFP](https://sessionize.com/rustconf-2026/) are now all live, much earlier in relation to the conference than in earlier years to allow more time for travel planning.
-- The training program initiative proposed first launching a Foundation accreditation program for companies providing Rust training to participate in. While they will continue to explore future options for an individual training course and certification portion of the initiative, accreditation for existing Rust training providers is the priority for the foreseeable future. The board approved.
+- The RustConf [visa letter request page](https://rustconf.com/rustconf-2026/#invite), [sponsorship prospectus](https://rustconf.com/wp-content/uploads/2025/12/RustConf_2026_Prospectus.pdf), and [CFP](https://sessionize.com/rustconf-2026/) are now all live. This is much earlier in relation to the conference than previous years, allowing more time for travel planning.
+- The training program initiative proposed launching a Foundation accreditation program for companies providing Rust training, even though the individual training course has not yet launched. While the initiative will continue to explore future options for an individual training course and certification portion, accreditation for existing Rust training providers is the priority for the foreseeable future. The board approved.
 - The Board discussed and approved of the Foundation's 2026 budget.
 
 We'll be back soon with February's real update!
