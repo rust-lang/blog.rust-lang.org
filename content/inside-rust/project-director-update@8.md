@@ -1,5 +1,5 @@
 +++
-path = "inside-rust/2026/02/06/project-director-update"
+path = "inside-rust/2026/02/09/project-director-update"
 title = "January 2026 Project Director Update"
 authors = ["Carol Nichols and David Wood"]
 
