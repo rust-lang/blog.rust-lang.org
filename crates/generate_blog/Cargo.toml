@@ -5,7 +5,7 @@ edition = "2024"
 
 [dependencies]
 front_matter = { version = "0.1.0", path = "../front_matter" }
-inquire = "0.7.5"
+inquire = "0.9.3"
 serde = "1.0.219"
 toml = "0.9.0"
 rust_team_data = { git = "https://github.com/rust-lang/team" }
