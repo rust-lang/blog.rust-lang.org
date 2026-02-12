@@ -8,19 +8,15 @@ aliases = ["releases/1.93.1"]
 release = true
 +++
 
-The Rust team has published a new point release of Rust, 1.93.1. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.
+The Rust team has published a new point release of Rust, 1.93.1. Rust is a programming language that is empowering everyone to build reliable and efficient software.
 
-If you have a previous version of Rust installed via rustup, getting Rust
-1.93.1 is as easy as:
+If you have a previous version of Rust installed via rustup, getting Rust 1.93.1 is as easy as:
 
 ```
 rustup update stable
 ```
 
-If you don't have it already, you can [get `rustup`][rustup] from the
-appropriate page on our website.
+If you don't have it already, you can [get `rustup`][rustup] from the appropriate page on our website.
 
 [rustup]: https://www.rust-lang.org/install.html
 
@@ -36,5 +32,4 @@ Rust 1.93.1 resolves three regressions that were introduced in the 1.93.0 releas
 
 ### Contributors to 1.93.1
 
-Many people came together to create Rust 1.93.1. We couldn't have done it
-without all of you. [Thanks!](https://thanks.rust-lang.org/rust/1.93.1/)
+Many people came together to create Rust 1.93.1. We couldn't have done it without all of you. [Thanks!](https://thanks.rust-lang.org/rust/1.93.1/)
