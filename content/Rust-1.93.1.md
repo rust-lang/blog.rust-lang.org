@@ -32,7 +32,7 @@ Rust 1.93.1 resolves three regressions that were introduced in the 1.93.0 releas
 
 - [Fix a `clippy::panicking_unwrap` false-positive on field access with an implicit dereference](https://github.com/rust-lang/rust-clippy/pull/16196).
 
-- [Revert an update to wasm-related dependencies in CI](https://github.com/rust-lang/rust/pull/152259), fixing file descriptor leaks on the `wasm32-wasip2` target.
+- [Revert an update to wasm-related dependencies](https://github.com/rust-lang/rust/pull/152259), fixing file descriptor leaks on the `wasm32-wasip2` target. This only affects the `rustup` component for this target, so downstream toolchain builds should check their own dependencies too.
 
 ### Contributors to 1.93.1
 
