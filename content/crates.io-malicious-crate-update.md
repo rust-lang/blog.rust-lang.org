@@ -1,5 +1,5 @@
 +++
-path = "2026/02/11/crates.io-malicious-crate-update"
+path = "2026/02/12/crates.io-malicious-crate-update"
 title = "crates.io: an update to the malicious crate notification policy"
 authors = ["Adam Harvey"]
 
