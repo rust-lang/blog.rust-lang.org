@@ -15,7 +15,7 @@ jobs:
       - run: rustup override set ${{ env.RUST_VERSION }}
       - uses: Swatinem/rust-cache@779680da715d629ac1d338a641029a2f4372abb5 # v2.8.2
       - name: Install Zola
-        run: cargo install --locked --git https://github.com/getzola/zola --rev 45d3f8d6285f0b47013c5fa31eb405332118af8b
+        run: cargo install --locked --git https://github.com/getzola/zola --rev 29540e9897dbe8aca388b13f7bdf615985f6ca2c # v0.22.1
 
       - run: git fetch --depth 2
       - run: git checkout origin/main

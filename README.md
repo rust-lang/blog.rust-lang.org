@@ -8,16 +8,16 @@ It uses [Zola](https://www.getzola.org/) and is deployed to GitHub Pages via Git
 
 ## Installing Zola
 
-You need at least zola v0.21.0 to render the blog.
+You need at least zola v0.22.0 to render the blog.
 
 Compile from source:
 
 ```sh
-cargo install --debug --locked --git https://github.com/getzola/zola --rev 45d3f8d6285f0b47013c5fa31eb405332118af8b
+cargo install --debug --locked --git https://github.com/getzola/zola --rev 29540e9897dbe8aca388b13f7bdf615985f6ca2c
 ```
 
 You can also find a list of package managers that provide zola [here](https://www.getzola.org/documentation/getting-started/installation/).
-Prebuilt binaries are available for download [here](https://github.com/getzola/zola/releases/tag/v0.21.0).
+Prebuilt binaries are available for download [here](https://github.com/getzola/zola/releases/tag/v0.22.1).
 If you use [mise](https://mise.jdx.dev), you can run the pinned version of zola directly with `mise run zola`.
 
 ## Building
