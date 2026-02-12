@@ -10,7 +10,7 @@ team_url = "https://www.rust-lang.org/governance/teams/dev-tools#team-crates-io"
 
 The crates.io team will no longer publish a blog post each time a malicious crate is detected or reported. In the vast majority of cases to date, these notifications have involved crates that have no evidence of real world usage, and we feel that publishing these blog posts is generating noise, rather than signal.
 
-We will always publish a [RustSec][rustsec] advisory when a crate is removed for containing malware. Please see the links below for examples of what these advisories look like.
+We will always publish a [RustSec][rustsec] advisory when a crate is removed for containing malware. You can subscribe to the [RustSec advisory RSS feed][rss] to receive updates.
 
 Crates that contain malware _and_ are seeing real usage or exploitation will still get both a blog post and a RustSec advisory. We may also notify via additional communication channels (such as social media) if we feel it is warranted.
 
@@ -25,11 +25,12 @@ In all cases, the crates were deleted, the user accounts that published them wer
 
 ## Thanks
 
-Once again, our thanks go to Matthias and Socket for their reports. We also want to thank Emily Albini from the security response working group and Walter Pearce from the [Rust Foundation][foundation] for aiding in the response.
+Once again, our thanks go to Matthias and Socket for their reports. We also want to thank Dirkjan Ochtman from the secure code working group, Emily Albini from the security response working group, and Walter Pearce from the [Rust Foundation][foundation] for aiding in the response.
 
 [advisory-polymarket]: https://rustsec.org/advisories/RUSTSEC-2026-0010.html
 [foundation]: https://foundation.rust-lang.org/
 [last-post]: https://blog.rust-lang.org/2025/12/05/crates.io-malicious-crates-finch-rust-and-sha-rust/
 [ngi-sweden]: https://ngisweden.scilifelab.se/
+[rss]: https://rustsec.org/feed.xml
 [rustsec]: https://rustsec.org/
 [socket]: https://socket.dev/
