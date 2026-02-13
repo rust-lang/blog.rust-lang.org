@@ -61,7 +61,7 @@ fn items(scores: &[u8]) -> std::slice::Iter<u8> {
 
 Code like this will now produce a warning by default:
 
-```text
+```txt
 warning: hiding a lifetime that's elided elsewhere is confusing
  --> src/lib.rs:1:18
   |
