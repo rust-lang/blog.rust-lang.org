@@ -214,24 +214,24 @@ We're happy to meet again those 11 developers still using Atom (hey 👋!) and w
 
 And finally, here are some data about marginalized groups, out of all participants who completed our survey:
 
-| Group                                                    | Count | Percentage |
-|----------------------------------------------------------|------:|-----------:|
-| Lesbian gay bisexual queer or otherwise non-heterosexual |   752 |     10.59% |
-| Neurodivergent                                           |   706 |      9.94% |
-| Trans                                                    |   548 |      7.72% |
-| Woman or perceived as a woman                            |   457 |      6.43% |
-| Non-binary gender                                        |   292 |      4.11% |
-| Disabled (physically mentally or otherwise)              |   218 |      3.07% |
-| Racial or ethnic minority                                |   217 |      3.06% |
-| Political beliefs                                        |   211 |      2.97% |
-| Educational background                                   |   170 |      2.39% |
-| Cultural beliefs                                         |   139 |      1.96% |
-| Language                                                 |   134 |      1.89% |
-| Religious beliefs                                        |   100 |      1.41% |
-| Other                                                    |    61 |      0.86% |
-| Older or younger than the average developers I know      |    22 |      0.31% |
+| Marginalized group                                           | Count | Percentage |
+|--------------------------------------------------------------|------:|-----------:|
+| Lesbian, gay, bisexual, queer, or otherwise non-heterosexual |   752 |     10.59% |
+| Neurodivergent                                               |   706 |      9.94% |
+| Trans                                                        |   548 |      7.72% |
+| Woman or perceived as a woman                                |   457 |      6.43% |
+| Non-binary gender                                            |   292 |      4.11% |
+| Disabled (physically, mentally, or otherwise)                |   218 |      3.07% |
+| Racial or ethnic minority                                    |   217 |      3.06% |
+| Political beliefs                                            |   211 |      2.97% |
+| Educational background                                       |   170 |      2.39% |
+| Cultural beliefs                                             |   139 |      1.96% |
+| Language                                                     |   134 |      1.89% |
+| Religious beliefs                                            |   100 |      1.41% |
+| Other                                                        |    61 |      0.86% |
+| Older or younger than the average developers I know          |    22 |      0.31% |
 
-Even if these numbers are just slightly better than last year, taken in context they show a picture that a very *very* small percentage of marginalized groups of people make it to our project (we are doing still *better* than other tech communities!) and is a reminder that one of our core values is to strive to be a diverse and welcoming FOSS community **for everyone**. But this only comes if we work hard on *effective* outreach programs.
+This shows a picture that a very *very* small percentage of marginalized groups of people make it to our project and is a reminder that one of our core values is to strive to be a diverse and welcoming FOSS community **for everyone**. But this only comes if we work hard on *effective* outreach programs.
 
 ## Conclusions
 
