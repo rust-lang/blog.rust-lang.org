@@ -10,6 +10,8 @@ team_url = "https://www.rust-lang.org/governance/teams/launching-pad#team-survey
 
 It’s time for the [2025 State of Rust Survey][survey-link]!
 
+> The results of the survey can be found [here](https://blog.rust-lang.org/2026/03/02/2025-State-Of-Rust-Survey-results/).
+
 The Rust Project has been collecting valuable information about the Rust programming language community through our annual [State of Rust Survey][survey-link] since 2016. Which means that this year marks the tenth edition of this survey!
 
 We invite you to take this year’s survey whether you have just begun using Rust, you consider yourself an intermediate to advanced user, or you have not yet used Rust but intend to one day. The results will allow us to more deeply understand the global Rust community and how it evolves over time. 
