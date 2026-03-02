@@ -231,7 +231,7 @@ And finally, here are some data about marginalized groups, out of all participan
 | Other                                                        |    61 |      0.86% |
 | Older or younger than the average developers I know          |    22 |      0.31% |
 
-This shows a picture that a very *very* small percentage of marginalized groups of people make it to our project and is a reminder that one of our core values is to strive to be a diverse and welcoming FOSS community **for everyone**. But this only comes if we work hard on *effective* outreach programs.
+While some of these numbers have slightly improved, this still shows that only a very small percentage of the people who are part of marginalized groups make it to our project. While we still do better than many other tech communities, it is a reminder that we need to keep working hard on being a diverse and welcoming FOSS community *for everyone*, which has always been and always will be one of our core values.
 
 ## Conclusions
 
