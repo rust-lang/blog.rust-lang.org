@@ -77,7 +77,8 @@ serde = { version = "1.0", features = ["derive"] }
 
 ... can now be written like this:
 
-```toml
+<!-- FIXME: this should be toml, but the blog highlighting doesn't support 1.1 yet -->
+```text
 serde = {
     version = "1.0",
     features = ["derive"],
