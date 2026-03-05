@@ -84,7 +84,7 @@ serde = {
 }
 ```
 
-Note that using these features in `Cargo.toml` will raise your development MSRV (minimum supported Rust version) to require this new Cargo parser, and third-party tools that read the manifest may also need to update their parsers. However, published manifests are rewritten to remain compatible with older parsers, so it is still possible to support an earlier MSRV for your crate's users.
+Note that using these features in `Cargo.toml` will raise your development MSRV (minimum supported Rust version) to require this new Cargo parser, and third-party tools that read the manifest may also need to update their parsers. However, Cargo automatically rewrites manifests on publish to remain compatible with older parsers, so it is still possible to support an earlier MSRV for your crate's users.
 
 ### Stabilized APIs
 
