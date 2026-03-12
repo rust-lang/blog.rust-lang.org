@@ -113,7 +113,7 @@ build-dir/
     └── incremental/...                   # managed by rustc
 ```
 
-For more information, see the [`mod layout` documentation](https://doc.rust-lang.org/nightly/nightly-rustc/cargo/core/compiler/layout/index.html).
+For more information on these Cargo internals, see the [`mod layout` documentation](https://doc.rust-lang.org/nightly/nightly-rustc/cargo/core/compiler/layout/index.html).
 
 ## Why is this being done?
 
