@@ -58,8 +58,8 @@ Here is an example of the current layout, assuming you have a package named `lib
 build-dir/
 ├── CACHEDIR.TAG
 └── debug/
-    ├── .cargo-lock  # file lock protecting access to this location
-    ├── .fingerprint/  # build cache tracking
+    ├── .cargo-lock                       # file lock protecting access to this location
+    ├── .fingerprint/                     # build cache tracking
     │   ├── bin-[BUILD_SCRIPT_RUN_HASH]/*
     │   ├── bin-[BUILD_SCRIPT_BIN_HASH]/*
     │   ├── bin-[HASH]/*
@@ -67,18 +67,18 @@ build-dir/
     │   ├── lib-[BUILD_SCRIPT_BIN_HASH]/*
     │   └── lib-[HASH]/*
     ├── build/
-    │    ├── bin-[BIN_HASH]/*  # build script binary
-    │    ├── bin-[RUN_HASH]/out/  # build script run OUT_DIR
-    │    ├── bin-[RUN_HASH]/*  # build script run cache
-    │    ├── lib-[BIN_HASH]/*  # build script binary
-    │    ├── lib-[RUN_HASH]/out/  # build script run OUT_DIR
-    │    └── bin-[RUN_HASH]/*  # build script run cache
+    │    ├── bin-[BIN_HASH]/*             # build script binary
+    │    ├── bin-[RUN_HASH]/out/          # build script run OUT_DIR
+    │    ├── bin-[RUN_HASH]/*             # build script run cache
+    │    ├── lib-[BIN_HASH]/*             # build script binary
+    │    ├── lib-[RUN_HASH]/out/          # build script run OUT_DIR
+    │    └── bin-[RUN_HASH]/*             # build script run cache
     ├── deps/
-    │   ├── bin-[HASH]*  # binary and debug information
-    │   ├── lib-[HASH]*  # library and debug information
-    │   └── liblib-[HASH]*  # library and debug information
-    ├── examples/  # unused in this case
-    └── incremental/... # managed by rustc
+    │   ├── bin-[HASH]*                   # binary and debug information
+    │   ├── lib-[HASH]*                   # library and debug information
+    │   └── liblib-[HASH]*                # library and debug information
+    ├── examples/                         # unused in this case
+    └── incremental/...                   # managed by rustc
 ```
 
 The proposed layout:
@@ -86,31 +86,31 @@ The proposed layout:
 build-dir/
 ├── CACHEDIR.TAG
 └── debug/
-    ├── .cargo-lock  # file lock protecting access to this location
+    ├── .cargo-lock                       # file lock protecting access to this location
     ├── build/
-    │   ├── bin/  # package name
+    │   ├── bin/                          # package name
     │   │   ├── [BUILD_SCRIPT_BIN_HASH]/
-    │   │   │   ├── fingerprint/*  # build cache tracking
-    │   │   │   └── out/*  # build script binary
+    │   │   │   ├── fingerprint/*         # build cache tracking
+    │   │   │   └── out/*                 # build script binary
     │   │   ├── [BUILD_SCRIPT_RUN_HASH]/
-    │   │   │   ├── fingerprint/*  # build cache tracking
-    │   │   │   ├── out/*  # build script run OUT_DIR
-    │   │   │   └── run/*  # build script run cache
+    │   │   │   ├── fingerprint/*         # build cache tracking
+    │   │   │   ├── out/*                 # build script run OUT_DIR
+    │   │   │   └── run/*                 # build script run cache
     │   │   └── [HASH]/
-    │   │       ├── fingerprint/*  # build cache tracking
-    │   │       └── out/*  # binary and debug information
-    │   └── lib/  # package name
+    │   │       ├── fingerprint/*         # build cache tracking
+    │   │       └── out/*                 # binary and debug information
+    │   └── lib/                          # package name
     │       ├── [BUILD_SCRIPT_BIN_HASH]/
-    │       │   ├── fingerprint/*  # build cache tracking
-    │       │   └── out/*  # build script binary
+    │       │   ├── fingerprint/*         # build cache tracking
+    │       │   └── out/*                 # build script binary
     │       ├── [BUILD_SCRIPT_RUN_HASH]/
-    │       │   ├── fingerprint/*  # build cache tracking
-    │       │   ├── out/*  # build script run OUT_DIR
-    │       │   └── run/*  # build script run cache
+    │       │   ├── fingerprint/*         # build cache tracking
+    │       │   ├── out/*                 # build script run OUT_DIR
+    │       │   └── run/*                 # build script run cache
     │       └── [HASH]/
-    │           ├── fingerprint/*  # build cache tracking
-    │           └── out/*  # library and debug information
-    └── incremental/... # managed by rustc
+    │           ├── fingerprint/*         # build cache tracking
+    │           └── out/*                 # library and debug information
+    └── incremental/...                   # managed by rustc
 ```
 
 For more information, see the [`mod layout` documentation](https://doc.rust-lang.org/nightly/nightly-rustc/cargo/core/compiler/layout/index.html).
