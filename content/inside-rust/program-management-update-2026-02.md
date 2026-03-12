@@ -14,27 +14,27 @@ Greetings! This update is brought to you by Tomas Sedovic *and* Nurzhan Saken \o
 
 ## Hello from Nurzhan
 
-I discovered the Rust Project in 2022 and quickly became *obsessed*. The language, the documentation, tracking issues, changelogs, blogs, talks, user/contributor discussions — all of these scratched an itch and comforted me during a difficult period in my life. As a huge introvert, I mostly observed and didn't participate, so the job posting for a program manager felt like a wake-up call. Tomas put it well in his first update: I had to apply despite many doubts about whether I would actually do a good job; the regret of not going for it would have been devastating.
+I discovered the Rust Project in 2022 and quickly became *obsessed*. The language, the documentation, tracking issues, changelogs, blogs, talks, and user/contributor discussions — all of these scratched an itch and comforted me during a difficult period in my life. As a huge introvert, I mostly observed and didn't participate, so the job posting for a program manager felt like a wake-up call. Tomas put it well in his first update: I had to apply despite many doubts about whether I would actually do a good job; the regret of not going for it would have been devastating.
 
 TC and Joel Marcey interviewed me in March–April 2025 and considered hiring me. This was a surprise because I felt like a total mess! Alas, you may know from the previous update that things didn't go as planned, and I didn't end up getting the position. Still, there was no going back, so I started engaging with Rust by stabilizing multiple features I was interested in. Eventually, more funds did get allocated, and I was hired.
 
-The first month felt surreal. Suddenly, the imaginary barrier vanished, and I found myself sharing spaces (and even interacting) with the people whose work I had admired so much. Tomas had been leaving behind some impressive footprints, seemingly impossible to match. It was easy to feel like there'd been some mistake, that I didn't belong. Yet, everyone has been so welcoming. Tomas has been going out of his way to talk to me, support me, and loop me into everything happening in the Project. Thanks to that, I already feel mostly integrated and well-equipped, and really lucky that things have turned out this way.
+The first month felt surreal. Suddenly, the imaginary barrier vanished, and I found myself sharing spaces (and even interacting) with the people whose work I had admired so much. Tomas had been leaving behind some impressive footprints, seemingly impossible to match. It was easy to feel like there'd been some mistake, that I didn't belong. Yet, everyone has been so welcoming. Tomas has been going out of his way to talk to me, support me, and loop me into everything happening in the Project. Thanks to that, I already feel mostly integrated, well-equipped, and really lucky that things have turned out this way.
 
 ## Project goals
 
-February was focused on getting through the proposed goals and having teams look at them. We are currently at 0 open pull requests (with huge help from Nurzhan) and we incorporated the sizing and champion feedback from the teams looking at the goals.
+February was focused on getting through the proposed goals and having teams look at them. We are currently at 0 open pull requests (with huge help from Nurzhan), and we incorporated the sizing and champion feedback from the teams looking at the goals.
 
-Each goal typically has one or more asks on Project teams (e.g. Lang, Compiler, Libs) and it's therefore important that they review all their asks, see whether they're clearly articulated, and whether the proposed changes make sense in the Project.
+Each goal typically has one or more asks on Project teams (e.g., Lang, Compiler, Libs), and it's therefore important that they review all their asks, see whether they're clearly articulated, and determine whether the proposed changes make sense in the Project.
 
-In March, we'll do a final pass over the individual goals, to make sure they have the right champions and sizes. And after that, we'll open an RFC listing all the proposed goals and getting feedback from the teams.
+In March, we'll do a final pass over the individual goals to make sure they have the right champions and sizes. And after that, we'll open an RFC listing all the proposed goals and getting feedback from the teams.
 
-That is an important time, because until now, goals were being considered mostly in isolation. But with the RFC, we'll be looking at the full picture as teams will consider their overall capacity for the full year.
+That is an important time because, until now, goals were being considered mostly in isolation. But with the RFC, we'll be looking at the full picture as teams will consider their overall capacity for the full year.
 
 We aim to have the RFC reviewed in March and officially start the new goal period at the beginning of April.
 
 ***
 
-We also discussed the way we do Project goal updates. The current auto-generated blog posts leave a lot to be desired and we're interested in your feedback!
+We also discussed the way we do Project goal updates. The current auto-generated blog posts leave a lot to be desired, and we're interested in your feedback!
 
 If you've read them previously, and especially if you haven't, we'd love to hear from you! What's helpful? What isn't? What would you like to see vs. what might be distracting?
 
@@ -61,7 +61,7 @@ This can double for any documentation and tooling related to the effort.
 
 And finally, you can now use the `T-program` alias on Zulip to talk to us, tag us on a thread, or make a request.
 
-We're hoping this will make it clearer to reach out to Program management, provide greater transparency (to show what we're actually working on), and of course, help us (the PMs) coordinate better.
+We're hoping this will make it clearer to reach out to Program management, provide greater transparency (to show what we're actually working on), and, of course, help us (the PMs) coordinate better.
 
 As of writing this, the repo and board are both empty. There are a few issues in other repos that we can link there, but mainly, Tomas needs to move the contents of his Rust org-mode file over.
 
@@ -70,20 +70,20 @@ As of writing this, the repo and board are both empty. There are a few issues in
 
 The Foundation hired [teor](https://github.com/teor2345) for a short-term contract to speed up mapping out of the interop problem space, and they hit the ground running.
 
-teor read through all the existing documents that we had, created a [template for each issue / problem statement](https://github.com/rustfoundation/interop-initiative/blob/main/problem-space/0000-template.md) (e.g. exceptions & unwinding or incompatible allocators), immediately started [documenting the known ones](https://github.com/rustfoundation/interop-initiative/tree/main/problem-space), and filing issues for the various [use cases](https://github.com/rustfoundation/interop-initiative/issues) that projects integrating these two languages have.
+teor read through all the existing documents that we had, created a [template for each issue / problem statement](https://github.com/rustfoundation/interop-initiative/blob/main/problem-space/0000-template.md) (e.g., exceptions & unwinding or incompatible allocators), immediately started [documenting the known ones](https://github.com/rustfoundation/interop-initiative/tree/main/problem-space), and filing issues for the various [use cases](https://github.com/rustfoundation/interop-initiative/issues) that projects integrating these two languages have.
 
 They're posting weekly updates on [Zulip](https://rust-lang.zulipchat.com/#narrow/channel/427678-t-lang.2Finterop/topic/Interop.20Problem.20Space.20Mapping.20-.20Weekly.20Updates/with/578041637) and monthly ones in the [Project goal tracking issue](https://github.com/rust-lang/rust-project-goals/issues/388).
 
-These updates and the focus on mapping out the technical aspects are a result of feedback provided to the Foundation by the Project members and the wider community (directly, as well as indirectly, e.g. through Project Directors and Program managers).
+These updates and the focus on mapping out the technical aspects are a result of feedback provided to the Foundation by the Project members and the wider community (directly, as well as indirectly, e.g., through Project Directors and Program managers).
 
 If this is an area you're interested in, please take a look at the [interop-initiative](https://github.com/rustfoundation/interop-initiative) and the [t-lang/interop Zulip channel](https://rust-lang.zulipchat.com/#narrow/channel/427678-t-lang.2Finterop).
 
 
 ## Signing and mirroring
 
-Following up from [January](//inside-rust/2026/02/11/program-management-update-2026-01/#crates-io-mirroring-and-verification), Walter Pearce proposed a draft of the Project goal. It focuses on building an MVP that sets up a mirror for Rustup targets that's happening fully on the backend (and should therefore be completely transparent to any users) to look at bandwidth and logging cost reduction, standing up the security infrastructure, and getting hands-on information to build the ultimate solution.
+Following up from [January](//inside-rust/2026/02/11/program-management-update-2026-01/#crates-io-mirroring-and-verification), Walter Pearce proposed a draft of the Project goal. It focuses on building an MVP that sets up a mirror for Rustup targets. This would happen fully on the backend (and should therefore be completely transparent to any users) to look at bandwidth and logging cost reduction, stand up the security infrastructure, and get hands-on information to build the ultimate solution.
 
-We're added a few more people to the group (e.g. Rustup folks), and the draft is under active discussion. There are still questions to resolve both on the technical as well as communication side, but the proposal seems to be in a solid place and we hope to have a PR open soon.
+We've added a few more people to the group (e.g., Rustup folks), and the draft is under active discussion. There are still questions to resolve both on the technical and communication sides, but the proposal seems to be in a solid place, and we hope to have a PR open soon.
 
 
 ## Style
@@ -92,7 +92,7 @@ For the last several months, a lot of the meetings ended up canceled. At the end
 
 In the first one, we triaged all the nominated issues. Recognizing the capacity issues (the Style team has three members, and lately, one of them has not been able to dedicate a lot of time), TC proposed we focus on getting things unblocked while leaning on the Project members.
 
-So when an issue comes in, the Style team considers it and figures out where it fits within the existing guidelines, and then asks the submitter for a concrete proposal instead of writing it all down themselves.
+So, when an issue comes in, the Style team considers it, figures out where it fits within the existing guidelines, and then asks the submitter for a concrete proposal instead of writing it all down themselves.
 
 This practice is similar to how the Lang team operates, born out of similar capacity issues.
 
@@ -101,16 +101,15 @@ The last two meetings felt much more productive that way, but the capacity issue
 If you're interested in *how* the language is formatted -- providing the input on what rustfmt should do -- we would love to have you! You can join the [t-style channel](https://rust-lang.zulipchat.com/#narrow/channel/346005-t-style) or [attend one of our meetings](https://rust-lang.github.io/calendar/style.ics).
 
 
-
 ## Rust for Linux
 
 We've discussed the [Rust for Linux roadmap](https://rust-lang.github.io/rust-project-goals/2026/roadmap-rust-for-linux.html) and went over all the other things the [project is tracking](https://github.com/Rust-for-Linux/linux/issues/354) which aren't part of a particular goal. These are to be tracked in the roadmap, and we'll be spinning up goals where that makes sense.
 
-There is an important milestone of sorts for Rust for Linux: the upcoming Debian 14 stable release (codename: Forky). It is a time where the project can upgrade to using a new Rust version and take advantage of any features that were shipped in the meantime.
+There is an important milestone of sorts for Rust for Linux: the upcoming Debian 14 stable release (codename: Forky). It is a time when the project can upgrade to using a new Rust version and take advantage of any features that were shipped in the meantime.
 
 Rust for Linux is using the stable version of the compiler, but they do have access to *unstable features*, and they use those where there's reasonable confidence that things won't change much (or disappear!). There's generally a desire to limit churn, so replacing existing code with new features is something that typically happens when a new Debian stable is released.
 
-With that in mind, we looked at things with most significant impact that Rust for Linux wants to start using as soon as possible (i.e. with the next Debian). We'll add these to the roadmap.
+With that in mind, we looked at things with the most significant impact that Rust for Linux wants to start using as soon as possible (i.e., with the next Debian). We'll add these to the roadmap.
 
 Here are some examples:
 
@@ -123,7 +122,7 @@ Some examples of things that would be nice, but there isn't that much pressure t
 * [In-place initialization](https://rust-lang.github.io/rust-project-goals/2026/in-place-init.html)
 * [Immovable types and guaranteed destructors](https://rust-lang.github.io/rust-project-goals/2026/move-trait.html)
 
-In general, something that provides new language capabilities -- especially when tied in with new syntax -- is something that Rust for Linux wants to use soon so they don't have to rewrite a lot of code later on. If the new syntax can be hidden behind a macro, that is acceptable. Anything behind a feature flag is also acceptable so long as there's a reasonable expectation it will be stabilised roughly in that form (e.g. no massive syntax changes) or won't be removed.
+In general, something that provides new language capabilities -- especially when tied in with new syntax -- is something that Rust for Linux wants to use soon so they don't have to rewrite a lot of code later on. If the new syntax can be hidden behind a macro, that is acceptable. Anything behind a feature flag is also acceptable so long as there's a reasonable expectation it will be stabilised roughly in that form (e.g., no massive syntax changes) or won't be removed.
 
 
 ## Rust for CPython
@@ -132,11 +131,11 @@ At the beginning of February, we invited Miguel Ojeda (the Rust for Linux lead) 
 
 Miguel went over the rough timeline of the project: it started with a diverse team of Rust compiler and kernel experts, got early media coverage, published the first RFC, started pushing code to linux-next, and eventually started meeting with the Rust Project regularly.
 
-When the project started, there was skepticism around how to introduce Rust into a mature C code base (C was the only language allowed in the kernel -- Linus Torvalds famously was against introducing C++ into the project). There were concerns over Rust's dependency on LLVM leading to poorer portability compared to Linux, as well as having to learn a whole new language and set of tooling with unclear benefits. A lot of time was spent talking to people about their concerns, staying on top of the media coverage, and helping clarify misconceptions and misunderstandings. In 2025, Miguel presented a keynote showcasing what kernel maintainers, team members, stakeholders and companies had thought about Rust for Linux at [that year's FOSDEM event](https://archive.fosdem.org/2025/schedule/event/fosdem-2025-6507-rust-for-linux/).
+When the project started, there was skepticism around how to introduce Rust into a mature C code base (C was the only language allowed in the kernel -- Linus Torvalds famously was against introducing C++ into the project). There were concerns over Rust's dependency on LLVM leading to poorer portability compared to Linux, as well as having to learn a whole new language and set of tooling with unclear benefits. A lot of time was spent talking to people about their concerns, staying on top of the media coverage, and helping clarify misconceptions and misunderstandings. In 2025, Miguel presented a keynote showcasing what kernel maintainers, team members, stakeholders, and companies had thought about Rust for Linux at [that year's FOSDEM event](https://archive.fosdem.org/2025/schedule/event/fosdem-2025-6507-rust-for-linux/).
 
-In the [RFC Miguel proposed](https://lore.kernel.org/lkml/20210414184604.23473-1-ojeda@kernel.org/), they were honest about the advantages and disadvantages of Rust. A lot of the C experts thought that memory safety was the main appeal, but the RFC highlighted benefits beyond that: a clear separation between safe and unsafe code (with the former having no undefined behavior, memory safety violations or data races), useful language features (rich enums, pattern matching, modules, hygienic macros), and powerful out-of-the box tooling (rustfmt, rustdoc, lints).
+In the [RFC Miguel proposed](https://lore.kernel.org/lkml/20210414184604.23473-1-ojeda@kernel.org/), they were honest about the advantages and disadvantages of Rust. A lot of the C experts thought that memory safety was the main appeal, but the RFC highlighted benefits beyond that: a clear separation between safe and unsafe code (with the former having no undefined behavior, memory safety violations, or data races), useful language features (rich enums, pattern matching, modules, hygienic macros), and powerful out-of-the-box tooling (rustfmt, rustdoc, lints).
 
-One of their priorities was raising the bar on the quality of Rust code: requiring `SAFETY` comments around each `unsafe` use, consistent code formatting via rustfmt, having a clean generated documentation that passes CI. They demonstrated these principles by writing the gpio driver in Rust and providing a line-by-line comparison with the C implementation. The Rust experience ended up benefitting non-Rust parts as well. Over time, even maintainers of C modules started to adopt Rust concepts when writing and discussing code.
+One of their priorities was raising the bar on the quality of Rust code: requiring `SAFETY` comments around each `unsafe` use, consistent code formatting via rustfmt, and having clean generated documentation that passes CI. They demonstrated these principles by writing the gpio driver in Rust and providing a line-by-line comparison with the C implementation. The Rust experience ended up benefitting non-Rust parts as well. Over time, even maintainers of C modules started to adopt Rust concepts when writing and discussing code.
 
 All of this strongly resonated with the CPython developers, who saw very similar reactions to their proposal and are facing similar technical challenges. Emma Smith, who leads this effort along with Kirill Podoprigora, mentioned that the Rust for Linux proposal was a huge inspiration for them to start this effort for CPython.
 
@@ -146,11 +145,11 @@ Other than that, we kept talking about build systems and linking. Compared to wh
 
 ## Project perspectives on AI
 
-The Project started seeing more uses of LLM-generated pull requests across the board -- from people using it to write or translate commit messages all the way to fully-generated PRs where even the reviewer feedback was fed back to the model. The latter in particular often causes heavy reviewer burden for low-effort and low-quality changes.
+The Project started seeing more uses of LLM-generated pull requests across the board -- from people using it to write or translate commit messages all the way to fully generated PRs where even the reviewer feedback was fed back to the model. The latter, in particular, often causes heavy reviewer burden for low-effort and low-quality changes.
 
 The Project members' attitudes also vary greatly. There are some who use these tools, derive a lot of benefit from them, and believe the Project does too, while others want to ban their use wholesale for ethical, IP rights, labor, environmental, review burden, or externalized cost reasons.
 
-Many free and open source projects have a policy around LLM tool use, disclosures, etc., and it has become clear that for reviewers, maintainers and moderators to be able to operate effectively, we need a policy as well. These discussions have happened across multiple Zulip channels with a subset of people.
+Many free and open source projects have a policy around LLM tool use, disclosures, etc., and it has become clear that for reviewers, maintainers, and moderators to be able to operate effectively, we need a policy as well. These discussions have happened across multiple Zulip channels with a subset of people.
 
 In addition, there may be Foundation members who are heavily involved in the AI space or Project goals proposed to, e.g., integrate AI tooling or standards.
 
@@ -175,7 +174,7 @@ To that end, Niko asked the Project members for their personal views on the topi
 
 ## Stats
 
-Total words of meeting minutes written: 396.7k (June 2025 - February 2026)
+Total words of meeting minutes written: 396.7k (June 2025 – February 2026)
 
 Meetings attended: 45
 
