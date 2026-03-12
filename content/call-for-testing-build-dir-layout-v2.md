@@ -25,13 +25,18 @@ $ cargo test -Zbuild-dir-new-layout
 $ CARGO_BUILD_BUILD_DIR=build cargo test
 ```
 
-fixing local problems, reporting problems in upstream tools, or provide feedback on the change itself on [the tracking issue](https://github.com/rust-lang/cargo/issues/15010).
+Outcomes may include:
+- Fixing local problems
+- Reporting problems in upstream tools with a note on the [the tracking issue](https://github.com/rust-lang/cargo/issues/15010) for others
+- Providing feedback on the [the tracking issue](https://github.com/rust-lang/cargo/issues/15010)
 
 While this Call for Testing is for `-Zbuild-dir-new-layout`,
 we ask to test with `CARGO_BUILD_BUILD_DIR=build` to help identify cause and relative impact.
 
 Known failure modes:
-- Inferring a `[[bin]]`s path from a `[[test]]`s path: use [`CARGO_BIN_EXE_*`](https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-cargo-test)
+- Inferring a `[[bin]]`s path from a `[[test]]`s path:
+  - Use [`std::env::var_os("CARGO_BIN_EXE_*")`](https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-cargo-test) for Cargo 1.94+, maybe keeping the inference as a fallback for older Cargo versions
+  - Use [`env!("CARGO_BIN_EXE_*")](https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-crates)
 - Build scripts looking up target-dir from their binary or `OUT_DIR`: see [Issue #13663](https://github.com/rust-lang/cargo/issues/13663)
 - Looking up user-requested artifacts from rustc, see [Issue #13672](https://github.com/rust-lang/cargo/issues/13672)
 
